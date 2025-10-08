@@ -8,6 +8,7 @@ import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './
 
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
+import ContentType from '@/types/QuranReflect/ContentType';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
@@ -17,6 +18,8 @@ import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  LOGOUT: '/logout',
+  AUTH: '/auth',
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',
@@ -438,4 +441,10 @@ export const scrollWindowToTop = (): void => {
   if (typeof window !== 'undefined') {
     window.scrollTo(0, 0);
   }
+};
+
+export const getReflectionNavigationUrl = (verseKey: string, selectedContentType: ContentType) => {
+  return selectedContentType === ContentType.REFLECTIONS
+    ? getVerseReflectionNavigationUrl(verseKey)
+    : getVerseLessonNavigationUrl(verseKey);
 };

@@ -10,6 +10,7 @@ import styles from './Lesson.module.scss';
 import ContentContainer from '@/components/Course/ContentContainer';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import PageContainer from '@/components/PageContainer';
+import HtmlContent from '@/components/RichText/HtmlContent';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ArrowLeft from '@/icons/west.svg';
@@ -37,6 +38,9 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
     logButtonClick('course_material', { lessonSlugOrId, courseSlug });
     setCourseMaterialModalOpen(true);
   };
+
+  // FIXME: remove once markdown in api is converted to html
+  const shouldUseMilkdown = /(^|\n)\s*#/m.test(content ?? '') || /\\$/m.test(content ?? '');
 
   return (
     <ContentContainer>
@@ -87,9 +91,13 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
               </p>
             </div>
             <div className={styles.contentContainer}>
-              <MilkdownProvider>
-                <MarkdownEditor isEditable={false} defaultValue={content} />
-              </MilkdownProvider>
+              {shouldUseMilkdown ? (
+                <MilkdownProvider>
+                  <MarkdownEditor isEditable={false} defaultValue={content} />
+                </MilkdownProvider>
+              ) : (
+                <HtmlContent html={content} />
+              )}
             </div>
             <ActionButtons lesson={lesson} courseSlug={courseSlug} />
           </PageContainer>

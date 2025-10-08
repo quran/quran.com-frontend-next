@@ -12,6 +12,7 @@ interface VerseData {
   words: Word[];
 }
 
+// TODO: add the verse data if needed
 // Split the words array into smaller chunks to keep file length under limit
 const verseWords: Word[] = [
   {

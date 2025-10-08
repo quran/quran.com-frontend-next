@@ -19,20 +19,33 @@ export enum SwitchSize {
   Normal = 'normal',
   Large = 'large',
 }
+
+export enum SwitchVariant {
+  Default = 'default',
+  Alternative = 'alternative',
+}
 type SwitchProps = {
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
   size?: SwitchSize;
+  variant?: SwitchVariant;
 };
 
-const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchProps) => {
+const Switch = ({
+  items,
+  onSelect,
+  selected,
+  size = SwitchSize.Normal,
+  variant = SwitchVariant.Default,
+}: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
     <div
       className={classNames(styles.container, {
         [styles.xSmallContainer]: size === SwitchSize.XSmall,
+        [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
       })}
     >
       {items.map((item) => (

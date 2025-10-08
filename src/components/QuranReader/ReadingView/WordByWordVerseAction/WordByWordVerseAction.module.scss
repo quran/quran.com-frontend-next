@@ -5,3 +5,9 @@
 .separator {
   margin-block: var(--spacing-large);
 }
+
+.fallbackMessage {
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+  color: var(--color-text-default);
+}

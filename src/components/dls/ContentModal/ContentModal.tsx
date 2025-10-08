@@ -1,4 +1,4 @@
-import { useRef, useImperativeHandle, ForwardedRef } from 'react';
+import { ForwardedRef, useImperativeHandle, useRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import CloseIcon from '@/icons/close.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum ContentModalSize {
@@ -33,6 +34,8 @@ type ContentModalProps = {
   size?: ContentModalSize;
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
+  zIndexVariant?: ZIndexVariant;
+  isBottomSheetOnMobile?: boolean;
 };
 
 const SCROLLBAR_WIDTH = 15;
@@ -53,10 +56,11 @@ const ContentModal = ({
   hasHeader = true,
   onClick,
   shouldBeFullScreen = false,
+  zIndexVariant,
+  isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
-
   useImperativeHandle(innerRef, () => ({
     scrollToTop: () => {
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
@@ -95,7 +99,12 @@ const ContentModal = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
+          className={classNames(styles.overlay, {
+            [styles.fullScreen]: shouldBeFullScreen,
+            [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+            [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+            [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
+          })}
           ref={overlayRef}
         >
           <Dialog.Content
@@ -105,6 +114,7 @@ const ContentModal = ({
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
+              [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}

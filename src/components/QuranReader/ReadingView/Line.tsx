@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useContext, RefObject } from 'react';
+import { memo, RefObject, useContext, useEffect } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
@@ -57,6 +57,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
+  const translationsCount = words[0].verse?.translationsCount;
+  const translationsLabel = words[0].verse?.translationsLabel;
 
   return (
     <div
@@ -69,9 +71,12 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     >
       {shouldShowChapterHeader && (
         <ChapterHeader
+          translationsLabel={translationsLabel}
+          translationsCount={translationsCount}
           chapterId={firstWordData[0]}
           pageNumber={words[0].pageNumber}
           hizbNumber={words[0].hizbNumber}
+          isTranslationView={false}
         />
       )}
       <div

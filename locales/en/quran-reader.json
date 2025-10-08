@@ -11,7 +11,7 @@
   "copy-footnote-q": "Also copy Footnote(s)?",
   "copy-success": "Text is copied successfully in your clipboard.",
   "copy-text": "Copy text",
-  "copy-verse": "Copy Text",
+  "copy-verse": "Copy verse",
   "cpy-link": "Copy Link",
   "current-verse": "Current verse",
   "download-copy": "if you want to download text file.",
@@ -70,6 +70,9 @@
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
+  "add-bookmark": "Add bookmark",
+  "page-bookmarked": "Page bookmarked",
+  "page-bookmark-removed": "Page bookmark removed",
   "remove-bookmark": "Remove bookmark",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",
@@ -89,5 +92,16 @@
   "trans-change": "Change",
   "translation-by": "Translation by",
   "verses-range": "Range of verses",
-  "view-on-quran-reflect": "View on QuranReflect"
+  "view-on-quran-reflect": "View on QuranReflect",
+  "change-translation": "Change Translation",
+  "bismillah": "In the Name of Allah—the Most Compassionate, Most Merciful",
+  "learning-plan-banner": {
+    "main-headline": "Discover powerful lessons in Surah Al-Mulk today",
+    "subtitle-description": "(A free Learning Plan)",
+    "call-to-action-button": "Begin Now",
+    "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
+    "button-accessibility-label": "Learn more about The Rescuer learning plan",
+    "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
+    "banner-wrapper-aria-label": "Learning plan promotion banner"
+  }
 }

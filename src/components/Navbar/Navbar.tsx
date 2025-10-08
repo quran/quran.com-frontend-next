@@ -7,12 +7,15 @@ import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import { selectNavbar } from '@/redux/slices/navbar';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const showNavbar = isNavbarVisible || isActive;
+
+  // Use the shared hook to debounce navbar visibility changes
+  const showNavbar = useDebounceNavbarVisibility(isNavbarVisible, isActive);
 
   return (
     <>

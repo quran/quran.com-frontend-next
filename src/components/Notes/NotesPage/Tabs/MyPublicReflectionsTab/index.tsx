@@ -6,10 +6,10 @@ import styles from './MyPublicReflectionsTab.module.scss';
 import UserPublicReflectionsList from '@/components/Notes/NotesPage/Tabs/MyPublicReflectionsTab/UserPublicReflectionsList';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
-import GetUserReflectionsResponse from '@/types/auth/GetUserReflectionsResponse';
+import GetUserReflectionsResponse from '@/types/QuranReflect/GetUserReflectionsResponse';
 import { privateFetcher } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
-import { makeGetUserReflectionsUrl } from '@/utils/auth/qf/apiPaths';
+import { makeGetUserReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 
 const PublicReflections = () => {
   /**
@@ -34,7 +34,7 @@ const PublicReflections = () => {
       });
     }
 
-    const { hasNextPage } = previousPageData.pagination;
+    const hasNextPage = previousPageData.currentPage < previousPageData.pages;
 
     if (!hasNextPage) return null;
 

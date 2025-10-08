@@ -4,36 +4,39 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '@/components/Notes/NoteModal/NoteRangesIndicator/NoteRangesIndicator.module.scss';
 import DataContext from '@/contexts/DataContext';
-import ReflectionReference from '@/types/QuranReflect/ReflectionReference';
+import Reference from '@/types/QuranReflect/Reference';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedVerseKey } from '@/utils/locale';
+import { isSurahReference } from '@/utils/quranReflect/string';
 
 type Props = {
-  reference: ReflectionReference;
+  reference: Reference;
 };
 
 const ReflectionReferenceIndicator: React.FC<Props> = ({ reference }) => {
   const { lang, t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   if (!reference) {
-    return <></>;
+    return null;
   }
 
-  const { surahId, fromAyah, toAyah, isSurah } = reference;
-  const chapterData = getChapterData(chaptersData, surahId.toString());
+  const { id, chapterId, from, to } = reference;
+  const isSurah = isSurahReference(id);
+  const chapterString = chapterId.toString();
+  const chapterData = getChapterData(chaptersData, chapterString);
   let referenceKey = `${t('surah')} ${chapterData.transliteratedName}`;
   // if it's not a full surah
   if (!isSurah) {
     const localizedStartVerseKey = `${referenceKey} ${toLocalizedVerseKey(
-      surahId.toString(),
+      chapterString,
       lang,
-    )}:${toLocalizedVerseKey(fromAyah.toString(), lang)}`;
-    if (fromAyah === toAyah) {
+    )}:${toLocalizedVerseKey(from.toString(), lang)}`;
+    if (from === to) {
       // e.g. 11:1
       referenceKey = localizedStartVerseKey;
     } else {
       // e.g. 11:1-6
-      referenceKey = `${localizedStartVerseKey}-${toLocalizedVerseKey(toAyah.toString(), lang)}`;
+      referenceKey = `${localizedStartVerseKey}-${toLocalizedVerseKey(to.toString(), lang)}`;
     }
   }
   return <div className={styles.container}>{referenceKey}</div>;

@@ -9,10 +9,10 @@ import buildReferredVerseText from './buildReferredVerseText';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
+import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
-import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
   authorUsername: string;
@@ -21,8 +21,8 @@ type Props = {
   isAuthorVerified: boolean;
   shouldShowReferredVerses: boolean;
   date: string;
-  verseReferences: ReflectionVerseReference[];
-  nonChapterVerseReferences: ReflectionVerseReference[];
+  verseReferences: Reference[];
+  nonChapterVerseReferences: Reference[];
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   onReferredVersesHeaderClicked: () => void;
@@ -51,9 +51,10 @@ const AuthorInfo: React.FC<Props> = ({
     logButtonClick('reflection_item_author');
   };
 
-  const referredVerseText = useMemo(() => {
-    return buildReferredVerseText(verseReferences, lang, t);
-  }, [verseReferences, lang, t]);
+  const referredVerseText = useMemo(
+    () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
+    [verseReferences, nonChapterVerseReferences, lang, t],
+  );
 
   return (
     <div className={styles.authorInfo}>

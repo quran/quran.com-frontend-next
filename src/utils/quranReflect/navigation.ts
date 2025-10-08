@@ -1,11 +1,6 @@
 import stringify from '@/utils/qs-stringify';
 
-const STAGING_API_HOST = 'https://quranreflect.org';
-const PRODUCTION_API_HOST = 'https://quranreflect.com';
-
-// env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
-export const API_HOST =
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
+export const API_HOST = process.env.NEXT_PUBLIC_QURAN_REFLECT_URL;
 
 const getQuranReflectFilteredVerseUrl = (chapterId: string, verseNumber: string, params) => {
   return `${API_HOST}?filters=${chapterId}:${verseNumber}&${stringify(params)}`;
@@ -30,3 +25,5 @@ export const getQuranReflectTagUrl = (tag: string) =>
   `${API_HOST}/?tags=${encodeURIComponent(tag)}`;
 
 export const getQRNavigationUrl = () => `${API_HOST}`;
+
+export const getLearningPlanBannerUrl = (slug: string): string => `/learning-plans/${slug}`;

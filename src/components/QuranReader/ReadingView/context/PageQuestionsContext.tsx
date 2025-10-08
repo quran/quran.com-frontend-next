@@ -1,6 +1,10 @@
 import { createContext, useContext } from 'react';
 
-export const PageQuestionsContext = createContext<Record<string, number> | undefined>(undefined);
+import { QuestionsData } from '@/utils/auth/api';
+
+export const PageQuestionsContext = createContext<Record<string, QuestionsData> | undefined>(
+  undefined,
+);
 
 export const usePageQuestions = () => {
   const context = useContext(PageQuestionsContext);

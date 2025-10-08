@@ -7,6 +7,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
+import NavigationItemType from '@/types/NavigationItemType';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 
@@ -51,27 +52,27 @@ const ScrollableSelection = ({
     scroll();
   }, [selectedItem, scroll]);
 
-  const navigateAndHandleAfterNavigation = (href: string) => {
+  const navigateAndHandleAfterNavigation = (href: string, itemValue: string | number) => {
     router.push(href).then(() => {
       if (onAfterNavigationItemRouted) {
-        onAfterNavigationItemRouted();
+        const itemType = isJuz ? NavigationItemType.JUZ : NavigationItemType.PAGE;
+        onAfterNavigationItemRouted(itemValue?.toString(), itemType);
       }
     });
   };
 
-  // handle when user press `Enter` in input box
-  const handleInputSubmit = (e) => {
+  const handleInputSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const firstFilteredItem = filteredItems[0];
-    if (filteredItems) {
+    if (firstFilteredItem) {
       const href = getHref(firstFilteredItem.value);
-      navigateAndHandleAfterNavigation(href);
+      navigateAndHandleAfterNavigation(href, firstFilteredItem.value);
     }
   };
 
-  const handleItemClick = (e: React.MouseEvent, href: string) => {
+  const handleItemClick = (e: React.MouseEvent, href: string, itemValue: string | number) => {
     e.preventDefault();
-    navigateAndHandleAfterNavigation(href);
+    navigateAndHandleAfterNavigation(href, itemValue);
   };
 
   return (
@@ -93,7 +94,7 @@ const ScrollableSelection = ({
                 href={href}
                 key={item.value}
                 shouldPrefetch={false}
-                onClick={(e) => handleItemClick(e, href)}
+                onClick={(e) => handleItemClick(e, href, item.value)}
               >
                 <div
                   ref={item.value === selectedItem ? selectedItemRef : null}
