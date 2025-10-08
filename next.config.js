@@ -45,6 +45,8 @@ const nextConfig = {
       'now.sh',
       'quran.com',
       'images.quran.com',
+      'lh3.googleusercontent.com',
+      's3.amazonaws.com',
     ],
   },
   webpack: (webpackConfig) => {
