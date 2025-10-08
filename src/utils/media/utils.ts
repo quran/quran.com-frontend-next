@@ -235,10 +235,10 @@ export const AUTHOR_DEFAULT_IMAGE = '/images/quran-reflect.png';
  * with Next.js Image component requirements. It converts protocol-relative URLs
  * to absolute URLs and provides a fallback for invalid or missing URLs.
  *
- * @param {string} url - The image URL to normalize. Can be undefined, null, or empty string.
- * @returns {string} A valid absolute URL for the image, or DEFAULT_IMAGE if the input is invalid.
+ * @param {string | undefined} url - The image URL to normalize. Can be undefined, null, or empty string.
+ * @returns {string} A valid absolute URL for the image, or AUTHOR_DEFAULT_IMAGE if the input is invalid.
  */
-export const getImageSrc = (url: string) => {
+export const getImageSrc = (url: string | undefined) => {
   if (!url) return AUTHOR_DEFAULT_IMAGE;
   // Convert protocol-relative URLs to absolute URLs
   if (url.startsWith('//')) {

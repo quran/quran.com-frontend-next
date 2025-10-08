@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -53,9 +53,9 @@ const AuthorInfo: React.FC<Props> = ({
     logButtonClick('reflection_item_author');
   };
 
-  const handleImageError = () => {
+  const handleImageError = useCallback(() => {
     setImageError(true);
-  };
+  }, []);
 
   const referredVerseText = useMemo(
     () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
@@ -68,12 +68,10 @@ const AuthorInfo: React.FC<Props> = ({
         <Image
           alt={authorName}
           className={styles.avatar}
-          src={imageError || !avatarUrl ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
+          src={imageError ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
           width={40}
           height={40}
           onError={handleImageError}
-          placeholder="blur"
-          blurDataURL={AUTHOR_DEFAULT_IMAGE}
         />
       </Link>
       <div>
