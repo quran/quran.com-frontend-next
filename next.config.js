@@ -48,9 +48,6 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       's3.amazonaws.com',
       'platform-lookaside.fbsbx.com',
-      'fbcdn.net',
-      'facebook.com',
-      'fbstatic.com',
     ],
   },
   webpack: (webpackConfig) => {
