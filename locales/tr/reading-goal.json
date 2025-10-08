@@ -41,7 +41,7 @@
     "description": "Hedefiniz her gün mü yoksa her gün mü sıfırlanmalı? Endişelenmeyin, seçtiğiniz sıklıktan bağımsız olarak ilerlemenizi takip edeceğiz.",
     "title": "Hedefiniz için bir sıklık seçin"
   },
-  "goal-completed": "Hedef Tamamlandı! 🎉 ",
+  "goal-completed": "Hedef Tamamlandı! 🎉",
   "goal-done": {
     "description": "Herhangi bir ek okuma yine de kaydedilecektir.",
     "title": "Bugünün hedefini tamamladınız"
@@ -84,9 +84,9 @@
     "time-goal": "Kuran'ı {{time}} oku"
   },
   "reading-goal": "Okuma Hedefi",
-  "reading-goal-description": "Kuran okuma hedeflerinizle tutarlılığı sürdürmeyi zor mu buluyorsunuz? <br/> <br/> Kuran Büyüme Yolculuğu, Kuran ile yolculuğunuzda tutarlı kalmanıza yardımcı olmak için geliştirilen dinamik bir özelliktir. İster günde 10 dakika okumayı, ister bir ayda bir Cüz'ü tamamlamayı veya bir yılda tüm Kuran'ı bitirmeyi hedefleyin, Quran.com artık özel bir hedef belirlemenize ve günlük okuma serilerinizi takip etmenize yardımcı olabilirken, siz ilerledikçe ayarlamalar yapabilir. Kullanımı tamamen ücretsizdir ve hedefinize ulaşmanız için motivasyonunuzu korumanıza yardımcı olmasını umuyoruz!",
+  "reading-goal-description": "Kuran okuma hedeflerinizde tutarlılığı korumakta zorlanıyor musunuz? <br/><br/>Kuran Gelişim Yolculuğu, Kuran ile olan yolculuğunuzda tutarlı kalmanıza yardımcı olmak için geliştirilmiş dinamik bir özelliktir. İster günde 10 dakika okumayı, ister bir ayda bir cüzü tamamlamayı veya bir yılda Kuran'ın tamamını bitirmeyi hedefleyin, Quran.com artık ilerlemenize göre uyum sağlayarak özel bir hedef belirlemenize ve günlük okuma serilerinizi takip etmenize yardımcı olabilir. Kullanımı tamamen ücretsizdir ve hedefinize ulaşmanız için motive kalmanıza yardımcı olacağını umuyoruz!",
   "reading-goal-label": "sen bir",
-  "reading-goal-title": "Kuran Büyüme Yolculuğunun Tanıtımı",
+  "reading-goal-title": "Kur’an gelişim yolculuğunu tanıtıyoruz",
   "recommended": "Tavsiye edilen",
   "remaining": "Bugün için kalan",
   "remaining-base": "Geriye kalan",
@@ -94,7 +94,7 @@
     "one": "{{days}} gün kaldı",
     "other": "{{days}} gün kaldı"
   },
-  "set-a-new-goal": "Yeni Bir Hedef Belirleyin",
+  "set-a-new-goal": "Yeni hedef belirle",
   "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
   "start-journey": "Yolculuğunuza başlayın!",
   "start-reading": "Okumaya başlamak",

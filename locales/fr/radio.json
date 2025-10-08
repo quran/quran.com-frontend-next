@@ -7,7 +7,7 @@
     },
     "popular-recitations": {
       "description": "Sélection quotidienne de récitations",
-      "title": "Récitations populaires"
+      "title": "Récitations Populaires"
     },
     "surah-al-kahf": {
       "description": "Écouter la Sourate Al-Kahf en boucle",
@@ -18,10 +18,10 @@
       "title": "Yaseen, Al-Waqiah, Al-Mulk"
     }
   },
-  "curated-stations": "Stations sélectionnées",
-  "pause-radio": "Mettre la radio en pause",
-  "play-radio": "Écouter la radio",
+  "curated-stations": "Stations Sélectionnées",
+  "pause-radio": "Pause Radio",
+  "play-radio": "Lancer la Radio",
   "radio-desc": "Écouter la belle récitation non-stop du Saint Coran par divers récitateurs.",
-  "reciter-stations": "Stations de récitateurs",
-  "station": "Gare"
+  "reciter-stations": "Stations de Récitateurs",
+  "station": "Station"
 }

@@ -16,6 +16,7 @@ import useIntersectionObserver from '@/hooks/useObserveElement';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
+import { toLocalizedNumber } from '@/utils/locale';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
 import {
   MAX_REFLECTION_LENGTH,
@@ -39,7 +40,7 @@ const ReflectionItem: React.FC<Props> = ({
   const { id, createdAt, author, estimatedReadingTime } = reflection;
   const reflectionText = reflection?.body;
   const [isExpanded, setIsExpanded] = useState(false);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
   const reflectionBodyRef = useRef(null);
@@ -73,9 +74,9 @@ const ReflectionItem: React.FC<Props> = ({
   const getSurahName = useCallback(
     (chapterNumber: number) => {
       const surahName = getChapterData(chaptersData, chapterNumber.toString())?.transliteratedName;
-      return `${t('common:surah')} ${surahName} (${chapterNumber})`;
+      return `${t('common:surah')} ${surahName} (${toLocalizedNumber(chapterNumber, lang)})`;
     },
-    [chaptersData, t],
+    [chaptersData, lang, t],
   );
 
   const reflectionTextLength = useMemo(() => {
