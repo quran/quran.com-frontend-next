@@ -1,6 +1,6 @@
 {
   "all-notifications": "Alle meldingen",
-  "channels-notifications": "Kanalenmeldingen",
+  "channels-notifications": "Kanalen meldingen",
   "channels": {
     "chat": "Chatten",
     "email": "E-mail",
@@ -17,7 +17,7 @@
   "tags": {
     "calendar": "Koran in een jaar",
     "learning-plans": "Leerplannen",
-    "qgj": "Koran groeireis",
+    "qgj": "Koran groei-reis",
     "streaks": "Strepen"
   }
 }

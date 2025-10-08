@@ -1,16 +1,16 @@
 {
   "achieve-quran-goals": "Kuran Hedeflerinize Ulaşın",
-  "begin": "Başlamak",
+  "begin": "Başla",
   "calendar-cta": "Takvim",
   "chapters-and-verses": "Bölümler ve Ayetler",
   "continue-read": "Okumaya devam et",
   "explore-topics": "Konuları Keşfedin",
   "first-time-reading": "Kuran'a yeni misiniz? <link> Buradan başlayın </link>",
-  "grow-beyond-ramadan": "Bizimle büyüyün <modalLink> Ramazanın Ötesinde </modalLink>",
-  "know-someone": "Bu <modalLink> Ramazan </modalLink> 'te bizimle büyüyün",
+  "grow-beyond-ramadan": "<modalLink> Ramazan'dan sonra da </modalLink> bizimle gelişin",
+  "know-someone": "Bu <modalLink> Ramazan </modalLink> bizimle gelişin",
   "learning-plan": "Öğrenme Planları",
-  "listen-to-radio": "Kuran Radyosunu Dinle",
-  "my-quran": "Benim Kuran'ım",
+  "listen-to-radio": "Kuran radyosu’nu dinleyiniz",
+  "my-quran": "Kuran'ım",
   "navigate-quran": "Kuran'da gezinin",
   "no-bookmarks": "Henüz yer işaretiniz yok",
   "no-recently-read": "Henüz okuma oturumunuz yok",
@@ -38,8 +38,8 @@
     "title": "Kuran Büyüme Yolculuğu"
   },
   "qr-community": "Bugünün öne çıkan Ayetlerini ve Düşüncelerini okuyun",
-  "quran-in-year": "Bir Yılda Kuran",
-  "quran-in-year-cta": "Bu Haftanın Okumaları",
+  "quran-in-year": "Bir yılda Kur’an",
+  "quran-in-year-cta": "Bu Haftanın Okuması",
   "ramadan-activities-cta": "<link> Haftalık okumalar, ilham verici podcast'ler ve düşünmeye yönelik bir çağrı için <b> Küresel Kuran Takvimi </b> 'ni takip edin! </link>",
   "ramadan": {
     "header": "Kuran ile Bağlantınızı Derinleştirecek Araçlar",
@@ -48,14 +48,14 @@
   "read-juz": "Cüz oku",
   "recently-read": "Son Okunanlar",
   "revelation-order-disclaimer": "Bu görüş, Kuran'daki surelerin Hz. Muhammed <hover> ﷺ </hover> >'e indirildikleri zamana göre kronolojik sırasını gösterir. Kronoloji ilmî bir görüş konusudur ve bazı sûreler farklı zamanlarda bölümler halinde nazil olmuştur. Buradaki sıralama <link> Tanzil.net </link> çalışmasına dayanmaktadır. [Not: Fâtiha'dan Nâs'a kadar derlenen Mushaf düzeni, icma meselesidir.]",
-  "see-more-learning-plans": "Daha Fazlasını Gör",
-  "set-custom-goal": "Bir Hedef Belirleyin",
+  "see-more-learning-plans": "Daha fazlasını gör",
+  "set-custom-goal": "Hedef Belirle",
   "share-quran": {
     "description": "Kuran'ı yeni öğrenenlere yaymaya yardımcı olun",
     "title": "Kuran'ı paylaş!"
   },
   "start-read": "Okumaya Başla",
-  "stay-consistent": "Serileri Takip Edin, Özel Hedefler Oluşturun, Tutarlı Kalın",
+  "stay-consistent": "Devam serilerini takip edin, özel hedefler oluşturun, istikrarlı kalın",
   "tab": {
     "bookmarks": "Yer imleri",
     "popular": "Popüler"
