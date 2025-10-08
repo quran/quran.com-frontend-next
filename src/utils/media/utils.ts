@@ -224,3 +224,25 @@ export const isValidHexColor = (color: string) => {
   const hexPattern = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/;
   return hexPattern.test(color);
 };
+
+// Default image for the avatar of the authors for the reflections
+export const AUTHOR_DEFAULT_IMAGE = '/images/quran-reflect.png';
+
+/**
+ * Normalizes and validates an image URL for use with Next.js Image component.
+ *
+ * This function handles various URL formats and edge cases to ensure compatibility
+ * with Next.js Image component requirements. It converts protocol-relative URLs
+ * to absolute URLs and provides a fallback for invalid or missing URLs.
+ *
+ * @param {string} url - The image URL to normalize. Can be undefined, null, or empty string.
+ * @returns {string} A valid absolute URL for the image, or DEFAULT_IMAGE if the input is invalid.
+ */
+export const getImageSrc = (url: string) => {
+  if (!url) return AUTHOR_DEFAULT_IMAGE;
+  // Convert protocol-relative URLs to absolute URLs
+  if (url.startsWith('//')) {
+    return `https:${url}`;
+  }
+  return url;
+};

@@ -13,6 +13,7 @@ import VerifiedIcon from '@/icons/verified.svg';
 import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { AUTHOR_DEFAULT_IMAGE, getImageSrc } from '@/utils/media/utils';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
 
 type Props = {
@@ -30,7 +31,6 @@ type Props = {
 };
 
 const SEPARATOR = ' · ';
-const DEFAULT_IMAGE = '/images/quran-reflect.png';
 
 const AuthorInfo: React.FC<Props> = ({
   authorUsername,
@@ -57,15 +57,6 @@ const AuthorInfo: React.FC<Props> = ({
     setImageError(true);
   };
 
-  const getImageSrc = (url: string) => {
-    if (!url) return DEFAULT_IMAGE;
-    // Convert protocol-relative URLs to absolute URLs
-    if (url.startsWith('//')) {
-      return `https:${url}`;
-    }
-    return url;
-  };
-
   const referredVerseText = useMemo(
     () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
     [verseReferences, nonChapterVerseReferences, lang, t],
@@ -77,12 +68,12 @@ const AuthorInfo: React.FC<Props> = ({
         <Image
           alt={authorName}
           className={styles.avatar}
-          src={imageError || !avatarUrl ? DEFAULT_IMAGE : getImageSrc(avatarUrl)}
+          src={imageError || !avatarUrl ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
           width={40}
           height={40}
           onError={handleImageError}
           placeholder="blur"
-          blurDataURL={DEFAULT_IMAGE}
+          blurDataURL={AUTHOR_DEFAULT_IMAGE}
         />
       </Link>
       <div>
