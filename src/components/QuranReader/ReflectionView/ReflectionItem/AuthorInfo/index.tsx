@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AuthorInfo.module.scss';
@@ -12,6 +13,7 @@ import VerifiedIcon from '@/icons/verified.svg';
 import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { AUTHOR_DEFAULT_IMAGE, getImageSrc } from '@/utils/media/utils';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
 
 type Props = {
@@ -29,7 +31,6 @@ type Props = {
 };
 
 const SEPARATOR = ' · ';
-const DEFAULT_IMAGE = '/images/quran-reflect.png';
 
 const AuthorInfo: React.FC<Props> = ({
   authorUsername,
@@ -45,11 +46,16 @@ const AuthorInfo: React.FC<Props> = ({
   reflectionGroupLink,
 }) => {
   const { t, lang } = useTranslation();
+  const [imageError, setImageError] = useState(false);
   const formattedDate = formatDateRelatively(new Date(date), lang);
 
   const onReflectAuthorClicked = () => {
     logButtonClick('reflection_item_author');
   };
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+  }, []);
 
   const referredVerseText = useMemo(
     () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
@@ -59,8 +65,14 @@ const AuthorInfo: React.FC<Props> = ({
   return (
     <div className={styles.authorInfo}>
       <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+        <Image
+          alt={authorName}
+          className={styles.avatar}
+          src={imageError ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
+          width={40}
+          height={40}
+          onError={handleImageError}
+        />
       </Link>
       <div>
         <Link
