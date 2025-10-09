@@ -7,7 +7,7 @@
       "title": "Apa yang terjadi jika saya centang kotak ini?"
     },
     "post-button": "Apa yang terjadi apabila saya menulis di QuranReflect?",
-    "qr-intro": "QuranReflect, bersama dengan Quran.com, adalah bagian dari keluarga Quran.Foundation. Ini adalah platform sosial untuk berbagi refleksi pribadi tentang Al-Qur'an, mendorong pengguna untuk menginternalisasi pesan-pesannya dan berbagi wawasan yang menginspirasi perubahan positif. Berbeda dengan tafsir yang merupakan tafsir ilmiah, renungan merupakan pemikiran dan pengalaman pribadi yang berkaitan dengan ayat tersebut. Postingan pengguna ke QuranReflect ditinjau dan dimoderatori oleh tim yang berkualifikasi, yang akan membantu memastikan kualitas konten, etika ketika berinteraksi dengan Al-Qur'an, dan mereka akan memberdayakan pengguna dengan berbagi umpan balik dan menyoroti wacana berharga sehingga menumbuhkan semangat spiritual, komunitas yang berfokus pada Al-Qur'an . Pelajari lebih lanjut: <link> Quranreflect.com/faq </link>",
+    "qr-intro": "QuranReflect, bersama dengan Quran.com, adalah bagian dari keluarga Quran.Foundation. Ini adalah platform sosial untuk berbagi refleksi pribadi tentang Al-Qur'an, mendorong pengguna untuk menginternalisasi pesan-pesannya dan berbagi wawasan  dan pemahaman yang menginspirasi perubahan positif. Berbeda dengan tafsir yang merupakan tafsir ilmiah, renungan merupakan pemikiran dan pengalaman pribadi yang berkaitan dengan ayat tersebut. Postingan pengguna ke QuranReflect ditinjau dan dimoderatori oleh tim yang berkualifikasi, yang akan membantu memastikan kualitas konten, etika ketika berinteraksi dengan Al-Qur'an, dan mereka akan memberdayakan pengguna dengan berbagi umpan balik dan menyoroti wacana yang bernilai sehingga menumbuhkan komunitas yang memiliki semangat spiritual yang berfokus pada Al-Qur'an . Pelajari lebih lanjut: <link> Quranreflect.com/faq </link>",
     "title": "Apa itu QuranReflect dan apa yang terjadi jika saya mencontreng kotak ini?"
   },
   "click-to-see-more": "klik untuk melihat lebih lanjut",
@@ -24,7 +24,7 @@
     "reflc-prompts": {
       "deeper": {
         "desc": "<li> Apakah ada nama-nama Allah yang disebutkan, dan bagaimana kaitannya dengan ayat tersebut? </li> <li> Kata atau aspek kebahasaan manakah yang menarik perhatian Anda? </li> <li> Dapatkah Anda menghubungkannya dengan konteks ayat tersebut, ayat-ayat Al-Qur'an lainnya, hadis, atau peristiwa? </li>",
-        "title": "Wawasan Lebih Dalam:"
+        "title": "Pemahaman Lebih Dalam:"
       },
       "personal": {
         "desc": "<li> Dalam hal apa ayat ini menggerakkan atau menginspirasi Anda? </li> <li> Apakah ada kualitas atau tindakan yang dapat Anda tingkatkan? </li> <li> Adakah janji atau teguran/larangan yang bisa diterapkan dalam hidup Anda? </li> <li> Apakah Anda punya cerita pribadi terkait ayat ini? </li> <li> Perubahan apa yang ingin Anda lakukan berdasarkan ayat ini, dan bagaimana Anda atau orang lain dapat menerapkannya secara praktis? </li>",

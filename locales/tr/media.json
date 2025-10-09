@@ -10,8 +10,8 @@
   "download-image": "Resmi İndir",
   "download-share": "İndir/Paylaş",
   "download-video": "Videoyu İndir",
-  "generate-link": "Bağlantıyı oluştur",
-  "generate-your-video": "Videonuzu Oluşturun",
+  "generate-link": "Link oluştur",
+  "generate-your-video": "Videonuzu oluşturun",
   "justified": "Haklı çıkarıldı",
   "landscape": "Manzara",
   "limit": " / {{limit}}",
@@ -30,5 +30,5 @@
   "to": "ile",
   "verse-key": "Bölüm ve Ayet Numarası örneğin 2:255",
   "video-picker": "Arkaplan videosu",
-  "your-link": "Bağlantınızı kopyalayın"
+  "your-link": "Linkini kopyala"
 }
