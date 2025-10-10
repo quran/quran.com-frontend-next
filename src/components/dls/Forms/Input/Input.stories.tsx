@@ -12,9 +12,9 @@ export default {
   component: Input,
   args: {
     size: InputSize.Medium,
-    fixedWidth: true,
-    disabled: false,
-    clearable: false,
+    isFixedWidth: true,
+    isDisabled: false,
+    isClearable: false,
     value: '',
   },
   argTypes: {
@@ -30,14 +30,14 @@ export default {
       defaultValue: 'Start Typing...',
       description: 'The placeholder of the input.',
     },
-    fixedWidth: {
+    isFixedWidth: {
       options: [true, false],
       defaultValue: true,
       control: { type: 'boolean' },
       table: { category: 'Optional' },
       description: 'Whether the input should have a fixed width or take the width of its parent.',
     },
-    disabled: {
+    isDisabled: {
       options: [true, false],
       defaultValue: false,
       control: { type: 'boolean' },
@@ -52,7 +52,7 @@ export default {
       table: { category: 'Optional' },
       description: 'The suffix of the input.',
     },
-    clearable: {
+    isClearable: {
       options: [true, false],
       defaultValue: false,
       control: { type: 'boolean' },
@@ -61,7 +61,8 @@ export default {
     },
     onClearClicked: {
       table: { category: 'Optional' },
-      description: 'on clear button clicked. This will only be used when clearable is set to true.',
+      description:
+        'on clear button clicked. This will only be used when isClearable is set to true.',
     },
     value: {
       table: { category: 'Optional' },
@@ -101,7 +102,7 @@ export default {
 const ControlledRemoteTemplate = (args) => {
   const [value, setValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { disabled } = args;
+  const { isDisabled } = args;
 
   // imitate the behavior of fetching from a remote datastore.
   useEffect(() => {
@@ -125,7 +126,7 @@ const ControlledRemoteTemplate = (args) => {
       <Input
         value={value}
         placeholder={isLoading ? 'Loading...' : ''}
-        disabled={isLoading || disabled}
+        isDisabled={isLoading || isDisabled}
         onChange={onChange}
         onClearClicked={onClearClicked}
         {...args}
@@ -167,7 +168,7 @@ DefaultInput.args = {
 export const InputWithAutoWidth = Template.bind({});
 InputWithAutoWidth.args = {
   id: 'auto-width-input',
-  fixedWidth: false,
+  isFixedWidth: false,
 };
 export const WithPrefix = Template.bind({});
 WithPrefix.args = {
@@ -204,17 +205,17 @@ WithIconPrefixAndSuffix.args = {
 export const DisabledInput = Template.bind({});
 DisabledInput.args = {
   id: 'disabled-input',
-  disabled: true,
+  isDisabled: true,
 };
 export const DefaultControlledInput = ControlledLocalTemplate.bind({});
 DefaultControlledInput.args = {
   id: 'locally-controlled-input',
-  clearable: true,
+  isClearable: true,
 };
 export const RemoteControlledInput = ControlledRemoteTemplate.bind({});
 RemoteControlledInput.args = {
   id: 'remotely-controlled-input',
-  clearable: true,
+  isClearable: true,
 };
 export const ErrorInput = Template.bind({});
 ErrorInput.args = {

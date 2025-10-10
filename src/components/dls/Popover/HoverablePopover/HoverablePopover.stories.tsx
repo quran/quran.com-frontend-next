@@ -9,7 +9,7 @@ export default {
   component: HoverablePopover,
   args: {
     defaultValue: ContentSide.TOP,
-    tip: true,
+    hasTip: true,
     tooltipDelay: 0,
   },
   argTypes: {
@@ -39,7 +39,7 @@ export default {
       },
       description: 'This is a callback to handle when the visibility changes.',
     },
-    tip: {
+    hasTip: {
       control: { type: 'boolean' },
       table: {
         category: 'Optional',
@@ -54,7 +54,7 @@ export default {
       description:
         'The duration in milliseconds from when the mouse enters the trigger until the Tooltip opens.',
     },
-    defaultStyling: {
+    hasDefaultStyling: {
       control: { type: 'boolean' },
       table: {
         category: 'Optional',

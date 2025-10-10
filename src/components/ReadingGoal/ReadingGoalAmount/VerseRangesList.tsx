@@ -18,14 +18,14 @@ import { parseVerseRange } from '@/utils/verseKeys';
 interface VerseRangesListProps {
   ranges: string[];
   onVerseClick?: (position: RangeItemDirection, verseKey: string) => void;
-  allowClearingRanges?: boolean;
+  shouldAllowClearingRanges?: boolean;
   setRanges?: (ranges: string[]) => void;
 }
 
 const VerseRangesList = ({
   ranges,
   onVerseClick,
-  allowClearingRanges,
+  shouldAllowClearingRanges,
   setRanges,
 }: VerseRangesListProps) => {
   const { t, lang } = useTranslation('reading-goal');
@@ -81,7 +81,7 @@ const VerseRangesList = ({
             {to}
           </Link>
         </div>
-        {allowClearingRanges && (
+        {shouldAllowClearingRanges && (
           <Button
             size={ButtonSize.Small}
             variant={ButtonVariant.Ghost}

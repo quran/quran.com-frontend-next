@@ -16,7 +16,7 @@ import WrenchIcon from '@/icons/wrench.svg';
  *
  * @returns {JSX.Element}
  */
-const DeveloperUtility = (): JSX.Element => {
+const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // only show the developer utilities if we're in development mode

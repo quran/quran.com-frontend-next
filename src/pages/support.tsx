@@ -14,7 +14,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/support';
-const SupportPage: NextPage = (): JSX.Element => {
+const SupportPage: NextPage = () => {
   const { t, lang } = useTranslation('support');
   return (
     <>

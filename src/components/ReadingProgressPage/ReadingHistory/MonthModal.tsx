@@ -25,7 +25,7 @@ interface MonthModalProps {
 }
 
 const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
   const { t, lang } = useTranslation('reading-progress');
 
   // YYYY-MM-DD

@@ -13,16 +13,8 @@ import {
   VIEWBOX_CENTER_Y,
 } from '@/utils/circularProgress';
 
-export type CircularProgressbarStyles = {
-  root?: React.CSSProperties;
-  trail?: React.CSSProperties;
-  path?: React.CSSProperties;
-  text?: React.CSSProperties;
-  background?: React.CSSProperties;
-};
-
-export type CircularProgressbarDefaultProps = {
-  background: boolean;
+type CircularProgressbarDefaultProps = {
+  hasBackground: boolean;
   backgroundPadding: number;
   circleRatio: number;
   classes: {
@@ -33,19 +25,19 @@ export type CircularProgressbarDefaultProps = {
     background?: string;
   };
   className: string;
-  counterClockwise: boolean;
+  isCounterClockwise: boolean;
   maxValue: number;
   minValue: number;
   strokeWidth: number;
   text: string;
 };
 
-export type CircularProgressbarProps = CircularProgressbarDefaultProps & {
+type CircularProgressbarProps = CircularProgressbarDefaultProps & {
   value: number;
 };
 
 const defaultProps: Partial<CircularProgressbarDefaultProps> = {
-  background: false,
+  hasBackground: false,
   backgroundPadding: 0,
   circleRatio: 1,
   classes: {
@@ -55,7 +47,7 @@ const defaultProps: Partial<CircularProgressbarDefaultProps> = {
     text: styles.text,
     background: styles.background,
   },
-  counterClockwise: false,
+  isCounterClockwise: false,
   maxValue: 100,
   minValue: 0,
   strokeWidth: 8,
@@ -63,19 +55,19 @@ const defaultProps: Partial<CircularProgressbarDefaultProps> = {
 
 const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...initialProps }) => {
   const {
-    background,
+    hasBackground,
     backgroundPadding,
     circleRatio,
     className,
     classes,
-    counterClockwise,
+    isCounterClockwise,
     strokeWidth,
     text,
     ...props
   } = defaultsDeep(initialProps, defaults(initialProps, defaultProps));
 
   const getBackgroundPadding = () => {
-    if (!background) {
+    if (!hasBackground) {
       // Don't add padding if not displaying background
       return 0;
     }
@@ -105,7 +97,7 @@ const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...i
       viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
       data-test-id="CircularProgressbar"
     >
-      {background ? (
+      {hasBackground ? (
         <circle
           className={classNames(classes?.background)}
           cx={VIEWBOX_CENTER_X}
@@ -116,7 +108,7 @@ const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...i
 
       <Path
         className={classNames(classes?.trail)}
-        counterClockwise={counterClockwise}
+        isCounterClockwise={isCounterClockwise}
         dashRatio={circleRatio}
         pathRadius={pathRadius}
         strokeWidth={strokeWidth}
@@ -124,7 +116,7 @@ const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...i
 
       <Path
         className={classNames(classes?.path)}
-        counterClockwise={counterClockwise}
+        isCounterClockwise={isCounterClockwise}
         dashRatio={pathRatio * circleRatio}
         pathRadius={pathRadius}
         strokeWidth={strokeWidth}

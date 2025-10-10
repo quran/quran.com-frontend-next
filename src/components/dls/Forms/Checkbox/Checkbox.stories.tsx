@@ -6,7 +6,7 @@ export default {
   title: 'dls/Checkbox',
   component: Checkbox,
   args: {
-    disabled: false,
+    isDisabled: false,
   },
   argTypes: {
     id: {
@@ -22,7 +22,7 @@ export default {
       description:
         'A function that will be called when the checkbox button changes either from checked=>un-checked or the other way around.',
     },
-    checked: {
+    isChecked: {
       options: [true, false, 'indeterminate'],
       control: { type: 'select' },
       table: {
@@ -36,7 +36,7 @@ export default {
       },
       description: 'The name of the radio input.',
     },
-    disabled: {
+    isDisabled: {
       options: [true, false],
       control: { type: 'boolean' },
       table: {
@@ -44,7 +44,7 @@ export default {
       },
       description: 'Control whether the checkbox input should be disabled or not.',
     },
-    required: {
+    isRequired: {
       options: [true, false],
       control: { type: 'boolean' },
       table: {
@@ -73,7 +73,7 @@ DefaultCheckbox.args = {
   id: 'option1',
   name: 'option1',
   label: 'Checkbox Value',
-  disabled: false,
+  isDisabled: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: () => {},
 };

@@ -12,20 +12,20 @@ const INDETERMINATE = 'indeterminate';
 
 interface Props {
   id: string;
-  onChange: (checked: boolean) => void;
-  checked?: boolean | typeof INDETERMINATE;
-  disabled?: boolean;
-  required?: boolean;
-  label?: string | JSX.Element;
+  onChange: (isChecked: boolean) => void;
+  isChecked?: boolean | typeof INDETERMINATE;
+  isDisabled?: boolean;
+  isRequired?: boolean;
+  label?: React.ReactNode;
   name?: string;
-  defaultChecked?: boolean;
+  isDefaultChecked?: boolean;
 }
 
 const Checkbox: React.FC<Props> = ({
-  disabled = false,
-  required = false,
-  defaultChecked,
-  checked,
+  isDisabled = false,
+  isRequired = false,
+  isDefaultChecked,
+  isChecked,
   id,
   label,
   name,
@@ -34,29 +34,29 @@ const Checkbox: React.FC<Props> = ({
   /**
    * Handle when the value of the checkbox input changes.
    *
-   * @param {boolean} newChecked
+   * @param {boolean} isNewChecked
    * @returns {void}
    */
-  const handleChange = (newChecked: boolean): void => {
-    onChange(newChecked);
+  const handleChange = (isNewChecked: boolean): void => {
+    onChange(isNewChecked);
   };
 
   return (
-    <div className={classNames(styles.container, { [styles.disabled]: disabled })}>
+    <div className={classNames(styles.container, { [styles.disabled]: isDisabled })}>
       <RadixCheckbox.Root
-        disabled={disabled}
+        disabled={isDisabled}
         name={name}
-        required={required}
+        required={isRequired}
         onCheckedChange={handleChange}
         id={id}
         className={styles.checkbox}
-        defaultChecked={defaultChecked}
-        {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
+        defaultChecked={isDefaultChecked}
+        {...(isChecked !== undefined && { checked: isChecked })} // make it controlled only when isChecked is passed.
       >
         <RadixCheckbox.Indicator
-          className={classNames(styles.indicator, { [styles.disabledIndicator]: disabled })}
+          className={classNames(styles.indicator, { [styles.disabledIndicator]: isDisabled })}
         >
-          {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+          {isChecked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
         </RadixCheckbox.Indicator>
       </RadixCheckbox.Root>
       {label && (

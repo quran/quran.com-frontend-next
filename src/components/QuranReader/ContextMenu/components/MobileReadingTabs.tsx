@@ -170,7 +170,7 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
                 {getReadingPreferenceIcon({
                   currentReadingPreference: readingPreference,
                   optionReadingPreference: tab.value as ReadingPreference,
-                  useSuccessVariant: true,
+                  shouldUseSuccessVariant: true,
                 })}
               </span>
               <span>{tab.title}</span>

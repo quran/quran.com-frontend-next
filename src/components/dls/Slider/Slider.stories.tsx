@@ -14,8 +14,8 @@ export default {
     minStepsBetweenThumbs: 0,
     direction: Direction.ltr,
     orientation: Orientation.Horizontal,
-    disabled: false,
-    showThumbs: true,
+    isDisabled: false,
+    shouldShowThumbs: true,
   },
 
   argTypes: {
@@ -85,14 +85,14 @@ export default {
         category: 'Optional',
       },
     },
-    showThumbs: {
+    shouldShowThumbs: {
       description: 'Whether we should show any thumbs or not.',
       control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
-    disabled: {
+    isDisabled: {
       description: 'Whether sliding is disabled or not.',
       control: { type: 'boolean' },
       table: {

@@ -65,22 +65,22 @@ const AudioExperienceMenu = ({ onBack }) => {
       <div className={styles.checkboxContainer}>
         <div>
           <Checkbox
-            checked={enableAutoScrolling}
+            isChecked={enableAutoScrolling}
             id="auto-scrolling"
             name="auto-scrolling"
             label={t('audio.auto-scroll.title')}
             onChange={onEnableAutoScrollingChange}
-            disabled={isLoading}
+            isDisabled={isLoading}
           />
         </div>
         <div>
           <Checkbox
-            checked={showTooltipWhenPlayingAudio}
+            isChecked={showTooltipWhenPlayingAudio}
             id="show-tooltip"
             name="show-tooltip"
             label={t('settings.show-tooltip-when-playing-audio')}
             onChange={onShowTooltipWhenPlayingAudioChange}
-            disabled={isLoading || (showTooltipFor && showTooltipFor.length === 0)}
+            isDisabled={isLoading || (showTooltipFor && showTooltipFor.length === 0)}
           />
           <div className={classNames(styles.experienceTipContainer, styles.helpText)}>
             <HelpText showTooltipFor={showTooltipFor} />
