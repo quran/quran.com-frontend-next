@@ -1,4 +1,4 @@
-import { useRef, useImperativeHandle, ForwardedRef } from 'react';
+import { ForwardedRef, useCallback, useImperativeHandle, useRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
@@ -55,6 +55,7 @@ const ContentModal = ({
   shouldBeFullScreen = false,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement>(null);
   const { locale } = useRouter();
 
   useImperativeHandle(innerRef, () => ({
@@ -91,6 +92,16 @@ const ContentModal = ({
     }
   };
 
+  /**
+   * Prevents Safari from focusing the first focusable element in the modal.
+   * @param {Event} event
+   */
+  const handleOpenAutoFocus = useCallback((event: Event) => {
+    if (event.defaultPrevented) return;
+    event.preventDefault();
+    contentRef.current?.focus({ preventScroll: true });
+  }, []);
+
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
@@ -100,6 +111,7 @@ const ContentModal = ({
         >
           <Dialog.Content
             {...(onClick && { onClick })}
+            ref={contentRef}
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
               [styles.small]: size === ContentModalSize.SMALL,
@@ -108,6 +120,7 @@ const ContentModal = ({
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
+            onOpenAutoFocus={handleOpenAutoFocus}
           >
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>
