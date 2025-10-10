@@ -119,7 +119,7 @@ test(
       page.getByRole('menuitem', { name: 'Español' }).click(),
     ]);
 
-    await page.waitForTimeout(1000); // wait for the page to stabilize
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 
     // Navigate to surah Al-Fatiha
     await Promise.all([

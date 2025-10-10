@@ -115,7 +115,7 @@ test(
     if (isMobile) {
       // Scroll a bit to show the header
       await page.mouse.wheel(0, 300);
-      await page.waitForTimeout(1000);
+      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
     }
 
     await expect(page.getByText('Juz 30')).toBeVisible();

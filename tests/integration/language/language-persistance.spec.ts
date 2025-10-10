@@ -22,7 +22,7 @@ test(
       page.getByRole('menuitem', { name: 'Español' }).click(),
     ]);
 
-    await page.waitForTimeout(1000); // wait for the page to stabilize
+    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 
     // 3. Navigate to surah An Naml and make sure we are still on /es/27
     await Promise.all([

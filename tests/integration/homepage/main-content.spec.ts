@@ -24,7 +24,12 @@ test(
       await page.mouse.wheel(0, 100);
     }
 
-    await page.waitForTimeout(2000); // Wait for 2 seconds to ensure the visit is recorded
+    await expect
+      .poll(async () => {
+        const readingTracker = await homePage.getPersistedValue('readingTracker');
+        return readingTracker?.lastReadVerse?.verseKey;
+      })
+      .toBe('5:10');
 
     // Go to homepage
     await homePage.goTo();
@@ -62,9 +67,9 @@ test('Quran in a Year section appears and has a Quranic verse', async ({ page })
 
   const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
   await expect(quranInAYearSection).toBeVisible();
-  const text = await quranInAYearSection.textContent();
-  await page.waitForTimeout(1500); // Wait for 1.5 seconds to ensure the verse is loaded
-  expect(text).toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
+  await expect
+    .poll(async () => (await quranInAYearSection.textContent()) || '')
+    .toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
 });
 
 test('Learning Plans section appears with at least 3 items', async ({ page }) => {

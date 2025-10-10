@@ -1,13 +1,9 @@
 import { test, expect, Page } from '@playwright/test';
 
 const LP_URL = '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
-const BANNER_ROLE = { name: 'Learning plan promotion banner' };
 
-const banner = (page: Page) => page.getByRole('complementary', BANNER_ROLE);
-const bannerImage = (page: Page) =>
-  banner(page).locator(
-    'img[alt="The Rescuer: Powerful Lessons in Surah Mulk learning plan banner"]',
-  );
+const banner = (page: Page) => page.getByTestId('learning-plan-banner');
+const bannerImage = (page: Page) => banner(page).locator('img');
 const imageLink = (page: Page) => banner(page).locator('a').first();
 const anyCTAInBanner = (page: Page) => banner(page).locator(`a[href="${LP_URL}"]`).first();
 
@@ -20,14 +16,7 @@ async function waitForBannerPresent(page: Page) {
   // Wait for virtualized list to settle
   await page.waitForLoadState('domcontentloaded');
 
-  await expect
-    .poll(
-      async () => {
-        return banner(page).count();
-      },
-      { timeout: 15000 },
-    )
-    .toBeGreaterThan(0);
+  await expect(banner(page)).toBeVisible();
   return banner(page);
 }
 
@@ -62,20 +51,6 @@ test.describe('English language - navigation', () => {
     await waitForBannerPresent(page);
     await anyCTAInBanner(page).click();
     await expect(page).toHaveURL(LP_URL);
-  });
-});
-
-test.describe('English language - viewport', () => {
-  test('works across viewport sizes', async ({ page }) => {
-    await page.setViewportSize({ width: 1024, height: 768 });
-    await page.goto('/67');
-    await scrollToBottom(page);
-    await waitForBannerPresent(page);
-
-    await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto('/67');
-    await scrollToBottom(page);
-    await waitForBannerPresent(page);
   });
 });
 

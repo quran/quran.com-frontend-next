@@ -20,11 +20,7 @@ test(
     const weekButton = page.getByLabel('Week 1 of Shawwal');
     await weekButton.click();
 
-    // Wait for the scroll to complete
-    await page.waitForTimeout(500);
-
-    // Check if the page has scrolled to the top
-    const scrollPosition = await page.evaluate(() => window.scrollY);
-    expect(scrollPosition).toBeLessThan(100);
+    // Wait for the scroll to complete by polling the scroll position
+    await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeLessThan(100);
   },
 );

@@ -27,12 +27,11 @@ test(
     // Scroll a bit
     for (let i = 0; i < 5; i += 1) {
       await page.mouse.wheel(0, 500);
-      // Wait for progress to update after scroll
-      await page.waitForTimeout(200);
     }
 
     // The progress bar should be > initial progress
-    const updatedProgress = await progressBar.getAttribute('data-progress');
-    expect(Number(updatedProgress)).toBeGreaterThan(Number(initialProgress));
+    await expect
+      .poll(async () => Number(await progressBar.getAttribute('data-progress')))
+      .toBeGreaterThan(Number(initialProgress));
   },
 );

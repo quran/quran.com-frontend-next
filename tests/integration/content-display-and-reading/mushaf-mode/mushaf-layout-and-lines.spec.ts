@@ -88,11 +88,11 @@ test(
 
     // Click on the chapter beginning button
     await page.getByTestId('chapter-beginning-button').click();
-    await page.waitForTimeout(1000); // wait for a bit to ensure the scroll is done
+    await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeLessThan(1);
 
     // We should be at the top of the page now
     const currentScrollPosition = await page.evaluate(() => window.scrollY);
-    expect(currentScrollPosition).toBe(0);
+    expect(currentScrollPosition).toBeLessThan(1);
   },
 );
 
@@ -145,7 +145,10 @@ test(
   'Selected mushaf view persists after page reload',
   { tag: ['@slow', '@mushaf', '@persistence'] },
   async ({ page, isMobile }) => {
-    await page.waitForTimeout(1500); // wait for a bit to ensure the navigation is fully done
+    const mushafIndicator = isMobile
+      ? page.getByTestId('reading-tab')
+      : page.getByTestId('reading-button');
+    await expect(mushafIndicator).toHaveAttribute('data-is-selected', 'true');
 
     // refresh the page
     await homePage.reload();

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
@@ -7,6 +7,13 @@ let homePage: Homepage;
 // Simple utility functions to reduce code duplication
 const startAudioPlayback = async (page) => {
   await page.getByTestId('listen-button').click();
+};
+
+const waitForAudioPlayback = async (page: Page) => {
+  const audioElement = page.locator('#audio-player');
+  await expect
+    .poll(async () => audioElement.evaluate((audio: HTMLAudioElement) => audio.currentTime))
+    .toBeGreaterThan(0);
 };
 
 test.beforeEach(async ({ page, context, isMobile }) => {
@@ -29,8 +36,8 @@ test(
     const firstLine = page.getByTestId('verse-arabic-101:1');
     await expect(firstLine).toHaveClass(/highlight/);
 
-    // Wait a few moment to ensure the audio is playing
-    await page.waitForTimeout(500);
+    // Wait until audio playback actually starts before navigating
+    await waitForAudioPlayback(page);
 
     // Move the verse 5
     await page.keyboard.press('ArrowRight');
