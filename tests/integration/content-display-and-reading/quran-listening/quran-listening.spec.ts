@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
+import type { Page, TestInfo } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
@@ -95,10 +95,12 @@ const openOverflowMenu = async (page: Page) => {
   await overflowMenuTrigger.click();
 };
 
-test.beforeEach(async ({ page, context }) => {
+test.beforeEach(async ({ page, context }, testInfo: TestInfo) => {
   homePage = new Homepage(page, context);
 
-  await installAudioPlaybackMock(page);
+  if (!testInfo.title.includes('[no-init]')) {
+    await installAudioPlaybackMock(page);
+  }
   await homePage.goTo('/103');
 });
 
@@ -245,6 +247,49 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await repeatItem.click();
     // Check that the modal is open
     await expect(page.getByTestId('repeat-audio-modal')).toBeVisible({ timeout: 5000 });
+  });
+
+  test('Repeat modal has persistent values [no-init]', async ({ page }) => {
+    // Unskip this modal when PR QF-239 is merged
+    test.skip(true, 'Unskip when QF-239 is merged');
+
+    await startAudioPlayback(page);
+    await openOverflowMenu(page);
+
+    const repeatItem = page
+      .getByRole('menuitem')
+      .filter({ hasText: /repeat/i })
+      .first();
+    await repeatItem.click();
+
+    // Wait for the modal to be visible
+    const modal = page.getByTestId('repeat-audio-modal');
+    await expect(modal).toBeVisible();
+    // Change some values
+    const rangeFrom = modal.locator('input[aria-owns="start"]');
+    const rangeTo = modal.locator('input[aria-owns="end"]');
+
+    await rangeFrom.fill('103:2');
+
+    // a div with text "103:2" should appear in the dropdown options
+    const option = modal.getByText('103:2', { exact: true }).first();
+    await option.click();
+
+    await rangeTo.fill('103:2');
+    const option2 = modal.getByText('103:2', { exact: true }).nth(1);
+    await option2.click();
+
+    // Close the modal
+    await page.keyboard.press('Escape');
+    await page.keyboard.press('Escape');
+
+    // Reopen the modal
+    await openOverflowMenu(page);
+    await repeatItem.click();
+    await expect(modal).toBeVisible();
+    // Check that the values are persisted
+    await expect(modal.locator('input[aria-owns="start"]')).toHaveValue('103:2');
+    await expect(modal.locator('input[aria-owns="end"]')).toHaveValue('103:2');
   });
 
   test('Arrow navigation goes to the correct ayah', async ({ page }) => {
