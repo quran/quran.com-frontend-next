@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
@@ -12,7 +10,7 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo('/1');
 });
 
-test.only(
+test(
   'The reciter list should be scrollable on small heights device',
   { tag: ['@reciter', '@reading', '@audio'] },
   async ({ page, isMobile }) => {
@@ -26,7 +24,7 @@ test.only(
 
     const overflowMenuTrigger = page.locator('#audio-player-overflow-menu-trigger');
     await expect(overflowMenuTrigger).toBeVisible();
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
     await overflowMenuTrigger.click();
 
     const reciterMenuItem = page.locator('#audio-player-overflow-menu-reciter');
