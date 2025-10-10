@@ -14,9 +14,9 @@ test(
   'The reciter list should be scrollable on small heights device',
   { tag: ['@reciter', '@reading', '@audio'] },
   async ({ page, isMobile }) => {
-    test.skip(isMobile, 'This test is only for desktop device with small height');
-
-    await page.setViewportSize({ width: 1280, height: 400 });
+    if (!isMobile) {
+      await page.setViewportSize({ width: 1280, height: 400 });
+    }
 
     const playVerseButton = page.locator('#play-verse-button').first();
     await playVerseButton.waitFor({ state: 'visible' });
