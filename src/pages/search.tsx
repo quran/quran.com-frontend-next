@@ -88,7 +88,21 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
     }),
     [currentPage, searchQuery],
   );
+
   useAddQueryParamsToUrl(navigationUrl, queryParams);
+
+  // Generate canonical path so that it can be used by the built-in mobile share button
+  const canonicalPath = useMemo(() => {
+    const params = new URLSearchParams();
+    if (searchQuery) {
+      params.set(QueryParam.QUERY, searchQuery);
+    }
+    if (currentPage > 1) {
+      params.set(QueryParam.PAGE, String(currentPage));
+    }
+    const queryString = params.toString();
+    return `${navigationUrl}${queryString ? `?${queryString}` : ''}`;
+  }, [currentPage, searchQuery]);
 
   const REQUEST_PARAMS = getAdvancedSearchQuery(
     searchQuery,
@@ -137,8 +151,8 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
             : t('search:search')
         }
         description={t('search:search-desc')}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
-        languageAlternates={getLanguageAlternates(navigationUrl)}
+        canonical={getCanonicalUrl(lang, canonicalPath)}
+        languageAlternates={getLanguageAlternates(canonicalPath)}
       />
       <div className={styles.pageContainer}>
         <div className={styles.searchInputContainer}>
