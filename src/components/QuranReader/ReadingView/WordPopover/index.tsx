@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
+
+import useCssVariables from './useCssVariables';
+import usePopoverPosition from './usePopoverPosition';
+import styles from './WordPopover.module.scss';
 
 import PopoverMenu, { PopoverMenuExpandDirection } from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReadingViewWordActionsMenu from '@/components/QuranReader/ReadingView/WordActionsMenu';
@@ -26,6 +31,12 @@ type Props = {
 const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const wordRef = useRef<HTMLDivElement>(null);
+  const { popoverDirection, hasEnoughHorizontalSpace, marginLeft, marginRight, marginTop } =
+    usePopoverPosition({
+      wordRef,
+      isMenuOpened,
+    });
 
   const dispatch = useDispatch();
 
@@ -68,17 +79,37 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
     onHoverChange(false);
   }, [onHoverChange]);
 
+  useCssVariables({
+    isActive: isMenuOpened,
+    marginLeft,
+    marginRight,
+    marginTop,
+  });
+
   return (
     <>
       <PopoverMenu
         trigger={
-          <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          <div
+            ref={wordRef}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            className={styles.popoverContainer}
+          >
             {children}
           </div>
         }
         isOpen={isMenuOpened}
         onOpenChange={handleOpenChange}
-        expandDirection={PopoverMenuExpandDirection.BOTTOM}
+        expandDirection={popoverDirection}
+        contentClassName={
+          hasEnoughHorizontalSpace
+            ? classNames({
+                [styles.leftSidePopover]: popoverDirection === PopoverMenuExpandDirection.LEFT,
+                [styles.rightSidePopover]: popoverDirection === PopoverMenuExpandDirection.RIGHT,
+              })
+            : undefined
+        }
       >
         <ReadingViewWordActionsMenu
           word={word}
@@ -86,7 +117,9 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
           openShareModal={openShareModal}
         />
       </PopoverMenu>
-      <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
+      {isShareModalOpen && (
+        <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
+      )}
     </>
   );
 };
