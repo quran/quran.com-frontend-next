@@ -12,7 +12,7 @@ type SelectionCard = {
 
 const SelectionCard = ({ label, value, onClick }: SelectionCard) => {
   return (
-    <div className={styles.container} onClick={onClick}>
+    <div className={styles.container} onClick={onClick} data-testid={`${label} Card`}>
       <div className={styles.labelContainer}>
         <div className={styles.label}>{label}</div>
         <div className={styles.value}>{value}</div>
