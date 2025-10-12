@@ -44,6 +44,7 @@
   "posted-reflections": "Reflektime të postuara",
   "private-notes": "Shënime",
   "qr-tooltip": "<span> <link> QuranReflect </link> është një platformë sociale për ndarjen e reflektimeve mbi Kuranin. Lidhu rreth Kuranit, lidhu me atë që ka rëndësi. </span>",
+  "reflection-update-success": "Reflektimi është përditësuar me sukses",
   "reflections-intro": {
     "line-1": "Për të parë dhe ndërvepruar me komentet, për t'u angazhuar me komunitetin dhe për të bërë më shumë, vizitoni <link> QuranReflec.com </link> .",
     "line-2": "Ju mund të identifikoheni në llogarinë tuaj të lidhur në QuranReflec duke u identifikuar ose duke u regjistruar me të njëjtin email të Quran.com të përdorur në hyrjen tuaj.",
@@ -57,6 +58,7 @@
   "share-to-qr": "Shpërndaje në QuranReflec.com",
   "share-to-qr-desc": "Ndaje si <b> {{name}} </b> . Audienca është përdorues i <b> QuranReflect </b>",
   "update-publish-failed": "Shënimi është përditësuar me sukses, por nuk u publikua",
+  "update-reflection": "Përditëso Reflektimin",
   "update-success": "Shënimi është përditësuar me sukses",
   "view-on-qr": "Shiko në Kuran Reflect"
 }

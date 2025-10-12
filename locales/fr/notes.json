@@ -44,6 +44,7 @@
   "posted-reflections": "Réflexions publiées",
   "private-notes": "Notes",
   "qr-tooltip": "<span> <link>QuranReflect</link> est une plateforme sociale de partage de réflexions sur le Coran. Connectez-vous autour du Coran, connectez-vous avec ce qui compte. </span>",
+  "reflection-update-success": "La réflexion a été mise à jour avec succès",
   "reflections-intro": {
     "line-1": "Pour afficher et interagir avec les commentaires, s'engager avec la communauté et bien plus encore, visitez <link> QuranReflect.com </link> .",
     "line-2": "Vous pouvez vous connecter à votre compte QuranReflect en vous connectant ou en vous inscrivant avec la même adresse e-mail utilisée pour se connecter à Quran.com.",
@@ -57,6 +58,7 @@
   "share-to-qr": "Partager sur QuranReflect.com",
   "share-to-qr-desc": "Partager en tant que <b> {{name}} </b> . Le public est constitué des <b> utilisateurs de QuranReflect </b>",
   "update-publish-failed": "La note a été mise à jour avec succès mais n'a pas pu être publiée",
+  "update-reflection": "Mettre à jour la réflexion",
   "update-success": "La note a été mise à jour avec succès",
   "view-on-qr": "Voir sur QuranReflect"
 }

@@ -44,6 +44,7 @@
   "posted-reflections": "Tafakari Zilizochapishwa",
   "private-notes": "Maelezo",
   "qr-tooltip": "<span> <link> QuranReflect </link> ni jukwaa la kijamii la kushiriki tafakari kuhusu Qur'ani. wasiliana na Qur'ani, wasiliana na jambo la muhimu. </span>",
+  "reflection-update-success": "Tafakari imesasishwa kwa mafanikio",
   "reflections-intro": {
     "line-1": "Ili kutazama na kuwasiliana na mawazo ya jamii, jihusishe na jumuiya, unaweza pia kufanya mengi zaidi, tembelea <link> QuranReflect.com </link>.",
     "line-2": "Unaweza kuingia katika akaunti yako ya QuranReflect kwa kuingia au kujisajili kwa kutumia barua pepe ile ile ya Quran.com unayotumia wakati unapoingia.",
@@ -57,6 +58,7 @@
   "share-to-qr": "Shiriki kwenye QuranReflect.com",
   "share-to-qr-desc": "Shiriki kama <b> {{name}} </b>. Hadhira ni <b> watumiaji wa QuranReflect </b>",
   "update-publish-failed": "Maelezo yamesasishwa kwa mafanikio lakini hayajachapishwa",
+  "update-reflection": "Sasisha Tafakari",
   "update-success": "Maelezo yamesasishwa",
   "view-on-qr": "Tazama kwenye QuranReflect"
 }

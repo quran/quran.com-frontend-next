@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Ajouter un signet",
   "add-collection": "Ajouter une collection",
   "advanced-copy": "Copie avancée",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Retour à l'Ayah",
+  "bismillah": "Au nom d'Allah, le Plus Miséricordieux, le Plus Miséricordieux",
+  "change-translation": "Changer la traduction",
   "copy-arabic": "Texte arabe (texte Uthmani)",
   "copy-footnote-q": "Copier également les notes de bas de page ?",
   "copy-success": "Le texte est copié dans votre presse-papiers avec succès.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Début du Hizb",
   "include-translator": "Inclure le nom du traducteur ?",
   "juz-beginning": "Début du Juz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "Le Sauveur : Leçons puissantes de la sourate Al-Mulk",
+    "banner-image-description": "Voir le plan d'apprentissage du Sauveur pour la sourate Al-Mulk",
+    "banner-wrapper-aria-label": "Bannière de promotion du plan d'apprentissage",
+    "button-accessibility-label": "En savoir plus sur le plan d'apprentissage The Rescuer",
+    "call-to-action-button": "Commencez maintenant",
+    "main-headline": "Découvrez aujourd'hui les puissantes leçons de la sourate Al-Mulk",
+    "subtitle-description": "(Un plan d'apprentissage gratuit)"
+  },
   "lessons-desc": "Lisez et partagez les leçons Coraniques de l'Ayah {{ayahNumber}} de la Sourate {{surahName}}",
   "lessons-disclaimer": "Les leçons sont des réflexions éclairées provenant d’érudits et de chercheurs, distinctes des sources primaires telles que le Tafsir (l’interprétation des savants sur le Coran).",
   "lessons-not-available": "Il n'y a pas de leçons révisées pour cette Ayah",
@@ -43,6 +55,8 @@
   "next-page": "Page suivante",
   "next-rub": "Rub el Hizb suivant",
   "next-surah": "Sourate suivante",
+  "page-bookmark-removed": "Signet de page supprimé",
+  "page-bookmarked": "Page marquée d'un signet",
   "posted-in": "Publié dans",
   "prev-ayah": "Ayah Précédente",
   "prev-hizb": "Hizb précédent",
