@@ -14,6 +14,7 @@ async function getExploreContainer(page: Page): Promise<Locator> {
   // Walk up to find the scrollable container
   await link.evaluate((node) => {
     let current = node as HTMLElement | null;
+    let found = false;
     while (current && current !== document.body) {
       const style = window.getComputedStyle(current);
       const isScrollableX =
@@ -21,9 +22,13 @@ async function getExploreContainer(page: Page): Promise<Locator> {
         current.scrollWidth > current.clientWidth;
       if (isScrollableX) {
         current.setAttribute('data-test-scrollable', 'topics');
+        found = true;
         break;
       }
       current = current.parentElement;
+    }
+    if (!found) {
+      throw new Error('No horizontally scrollable container found');
     }
   });
 
@@ -53,7 +58,12 @@ async function getMetrics(container: Locator): Promise<OverflowMetrics> {
   });
 }
 
-async function scrollRightAndWait(container: Locator, initialLeft: number): Promise<void> {
+/**
+ * Scrolls horizontally and waits for scroll position change.
+ * Note: In RTL layouts, positive scrollLeft values may scroll left visually.
+ * This function tries positive delta first, with fallback to negative delta.
+ */
+async function scrollByAndWait(container: Locator, initialLeft: number): Promise<void> {
   await container.evaluate((node) => {
     const element = node as HTMLElement;
     element.scrollBy({ left: 200, top: 0, behavior: 'auto' });
@@ -84,7 +94,7 @@ test.describe('ExploreTopicsSection - horizontal scroll', () => {
 
       // Try both directions to be robust in RTL
       try {
-        await scrollRightAndWait(container, metrics.scrollLeft);
+        await scrollByAndWait(container, metrics.scrollLeft);
       } catch (e) {
         await container.evaluate((node) => {
           const element = node as HTMLElement;
