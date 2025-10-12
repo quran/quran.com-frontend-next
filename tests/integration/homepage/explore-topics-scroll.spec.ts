@@ -60,23 +60,43 @@ async function getMetrics(container: Locator): Promise<OverflowMetrics> {
 
 /**
  * Scrolls horizontally and waits for scroll position change.
- * Note: In RTL layouts, positive scrollLeft values may scroll left visually.
- * This function tries positive delta first, with fallback to negative delta.
+ * Tries forward scroll (+200px) first, then falls back to reverse scroll (-200px)
+ * if no change is detected. This handles both LTR and RTL layouts robustly.
  */
 async function scrollByAndWait(container: Locator, initialLeft: number): Promise<void> {
+  // Try forward scroll first
   await container.evaluate((node) => {
     const element = node as HTMLElement;
     element.scrollBy({ left: 200, top: 0, behavior: 'auto' });
   });
-  await expect
-    .poll(
-      async () => {
-        const after = await container.evaluate((el) => (el as HTMLElement).scrollLeft);
-        return Math.abs(after - initialLeft);
-      },
-      { timeout: 2000 },
-    )
-    .toBeGreaterThan(0);
+
+  try {
+    await expect
+      .poll(
+        async () => {
+          const after = await container.evaluate((el) => (el as HTMLElement).scrollLeft);
+          return Math.abs(after - initialLeft);
+        },
+        { timeout: 2000 },
+      )
+      .toBeGreaterThan(0);
+  } catch (e) {
+    // Fallback to reverse scroll if forward didn't work
+    await container.evaluate((node) => {
+      const element = node as HTMLElement;
+      element.scrollBy({ left: -200, top: 0, behavior: 'auto' });
+    });
+
+    await expect
+      .poll(
+        async () => {
+          const after = await container.evaluate((el) => (el as HTMLElement).scrollLeft);
+          return Math.abs(after - initialLeft);
+        },
+        { timeout: 2000 },
+      )
+      .toBeGreaterThan(0);
+  }
 }
 
 test.describe('ExploreTopicsSection - horizontal scroll', () => {
@@ -92,24 +112,8 @@ test.describe('ExploreTopicsSection - horizontal scroll', () => {
       expect(['scroll', 'auto']).toContain(metrics.overflowX);
       expect(['hidden', 'clip', 'visible']).toContain(metrics.overflowY);
 
-      // Try both directions to be robust in RTL
-      try {
-        await scrollByAndWait(container, metrics.scrollLeft);
-      } catch (e) {
-        await container.evaluate((node) => {
-          const element = node as HTMLElement;
-          element.scrollBy({ left: -200, top: 0, behavior: 'auto' });
-        });
-        await expect
-          .poll(
-            async () => {
-              const after = await container.evaluate((el) => (el as HTMLElement).scrollLeft);
-              return Math.abs(after - metrics.scrollLeft);
-            },
-            { timeout: 2000 },
-          )
-          .toBeGreaterThan(0);
-      }
+      // Test horizontal scrolling (handles both LTR and RTL automatically)
+      await scrollByAndWait(container, metrics.scrollLeft);
     });
   });
 });
