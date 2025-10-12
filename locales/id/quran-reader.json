@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Tambahkan penanda buku",
   "add-collection": "Tambahkan Koleksi",
   "advanced-copy": "Salinan Lanjutan",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayat Kursi",
   "back-to-ayah": "Kembali ke Ayat",
+  "bismillah": "Atas Nama Allah—Yang Maha Pengasih dan Maha Penyayang",
+  "change-translation": "Ubah Terjemahan",
   "copy-arabic": "Teks Arab (teks Utsmani)",
   "copy-footnote-q": "Salin juga Catatan Kaki?",
   "copy-success": "Teks berhasil disalin di papan klip Anda.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Awal Hizb",
   "include-translator": "Sertakan nama penterjemah?",
   "juz-beginning": "Awal Juz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "Sang Penyelamat: Pelajaran Berharga dalam Rencana Pembelajaran Surah Al-Mulk",
+    "banner-image-description": "Lihat rencana pembelajaran Sang Penyelamat untuk Surah Al-Mulk",
+    "banner-wrapper-aria-label": "Spanduk promosi rencana pembelajaran",
+    "button-accessibility-label": "Pelajari lebih lanjut tentang rencana pembelajaran The Rescuer",
+    "call-to-action-button": "Mulai Sekarang",
+    "main-headline": "Temukan pelajaran berharga dalam Surah Al-Mulk hari ini",
+    "subtitle-description": "(Rencana Pembelajaran gratis)"
+  },
   "lessons-desc": "Baca dan bagikan pelajaran-pelajaran Qurani dari Ayah {{ayahNumber}} dari Surah {{surahName}}",
   "lessons-disclaimer": "Pelajaran adalah pemahaman yang didapat dari para ulama dan pencari ilmu, berbeda dengan sumber utama seperti Tafsir (penafsiran ilmiah terhadap Al-Quran).",
   "lessons-not-available": "Tidak ada pelajaran yang diulas untuk ayat ini",
@@ -43,6 +55,8 @@
   "next-page": "Halaman selanjutnya",
   "next-rub": "Rub el Hizb berikutnya",
   "next-surah": "Surah berikutnya",
+  "page-bookmark-removed": "Penanda halaman dihapus",
+  "page-bookmarked": "Halaman ditandai",
   "posted-in": "Diposting di",
   "prev-ayah": "Ayat sebelumnya",
   "prev-hizb": "Hizb sebelumnya",
