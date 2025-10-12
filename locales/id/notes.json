@@ -44,6 +44,7 @@
   "posted-reflections": "Refleksi yang Diposting",
   "private-notes": "Catatan",
   "qr-tooltip": "<span> <link> QuranReflect </link> adalah platform sosial untuk berbagi refleksi tentang Al-Qur'an. Terhubung dengan Al-Qur'an, terhubung dengan hal-hal yang penting. </span>",
+  "reflection-update-success": "Refleksi telah berhasil diperbarui",
   "reflections-intro": {
     "line-1": "Untuk melihat dan berinteraksi dengan komentar, terlibat dengan komunitas, dan melakukan lebih banyak hal, kunjungi <link> QuranReflect.com </link> .",
     "line-2": "Anda dapat masuk ke akun QuranReflect Anda yang tertaut dengan melakukan login atau mendaftar menggunakan email Quran.com yang sama dengan yang digunakan saat masuk.",
@@ -57,6 +58,7 @@
   "share-to-qr": "Bagikan ke QuranReflect.com",
   "share-to-qr-desc": "Bagikan sebagai <b> {{name}} </b> . Pembacanya adalah <b> pengguna QuranReflect </b>",
   "update-publish-failed": "Catatan berhasil diperbarui tetapi gagal dipublikasikan",
+  "update-reflection": "Refleksi Pembaruan",
   "update-success": "Catatan berhasil diperbarui",
   "view-on-qr": "Lihat di QuranReflect"
 }

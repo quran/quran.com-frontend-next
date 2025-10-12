@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Adicionar marcador",
   "add-collection": "Adicionar coleção",
   "advanced-copy": "Cópia Avançada",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Voltar para Ayah",
+  "bismillah": "Em nome de Alá, o Clemente, o Misericordioso",
+  "change-translation": "Alterar tradução",
   "copy-arabic": "Texto árabe (texto Uthmani)",
   "copy-footnote-q": "Copiar também a (s) nota (s) de rodapé?",
   "copy-success": "O texto foi copiado com sucesso para a sua área de transferência.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Começo do Hizb",
   "include-translator": "Incluir nome do tradutor?",
   "juz-beginning": "Começo de Juz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "O Resgatador: Lições Poderosas na Surata Al-Mulk",
+    "banner-image-description": "Veja o plano de aprendizagem do Resgatador para a Surata Al-Mulk",
+    "banner-wrapper-aria-label": "Banner de promoção do plano de aprendizagem",
+    "button-accessibility-label": "Saiba mais sobre o plano de aprendizagem The Rescuer",
+    "call-to-action-button": "Comece agora",
+    "main-headline": "Descubra lições poderosas na Surata Al-Mulk hoje",
+    "subtitle-description": "(Um Plano de Aprendizagem gratuito)"
+  },
   "lessons-desc": "Leia e compartilhe as lições do Quran do versículo {{ayahNumber}} do Surah {{surahName}}",
   "lessons-disclaimer": "As lições são insights informados de acadêmicos e buscadores de conhecimento, diferentes de fontes primárias como o Tafsir (a interpretação acadêmica do Quran).",
   "lessons-not-available": "Não há lições revisadas para este versículo",
@@ -43,6 +55,8 @@
   "next-page": "Próxima página",
   "next-rub": "Próximo Rub el Hizb",
   "next-surah": "Próxima Surah",
+  "page-bookmark-removed": "Marcador de página removido",
+  "page-bookmarked": "Página marcada como favorita",
   "posted-in": "Postado em",
   "prev-ayah": "Ayah anterior",
   "prev-hizb": "Hizb anterior",
