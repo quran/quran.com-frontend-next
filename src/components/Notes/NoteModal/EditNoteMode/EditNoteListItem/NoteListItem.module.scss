@@ -14,7 +14,9 @@
 
 .noteBody {
     margin-block-end: var(--spacing-small);
-    line-break: anywhere;
+    text-wrap: wrap;
+    overflow-wrap: break-word;
+    text-align: justify;
     white-space: pre-wrap;
 }
 
