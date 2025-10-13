@@ -101,7 +101,7 @@ test.beforeEach(async ({ page, context }, testInfo: TestInfo) => {
   if (!testInfo.title.includes('[no-init]')) {
     await installAudioPlaybackMock(page);
   }
-  await homePage.goTo('/103');
+  await homePage.goTo('/1');
 });
 
 test(
@@ -146,13 +146,13 @@ test(
     await startAudioPlayback(page);
 
     // The first ayah should be highlighted
-    const firstAyah = page.getByTestId('verse-103:1');
+    const firstAyah = page.getByTestId('verse-1:1');
     await expect(firstAyah).toHaveClass(/highlighted/);
 
     // After some time, the highlight should move to the next ayah
     await expect(firstAyah).not.toHaveClass(/highlighted/, { timeout: 15000 }); // wait until the first ayah has been read
 
-    const secondAyah = page.getByTestId('verse-103:2');
+    const secondAyah = page.getByTestId('verse-1:2');
     await expect(secondAyah).toHaveClass(/highlighted/, { timeout: 15000 });
   },
 );
@@ -189,9 +189,13 @@ test.describe('Audio Player Advanced Behaviour', () => {
   test('Next ayah button disables at last ayah', async ({ page }) => {
     await startAudioPlayback(page);
     const next = page.getByTestId('audio-next-ayah');
-    // Surat Al-Asr has 3 ayat. Click next twice.
-    await next.click();
-    await next.click();
+    // Surat Al-Fatiha has 7 ayat. Click next 6 times to reach the last ayah.
+    await next.click({ delay: 100 });
+    await next.click({ delay: 100 });
+    await next.click({ delay: 100 });
+    await next.click({ delay: 100 });
+    await next.click({ delay: 100 });
+    await next.click({ delay: 100 });
     await expect(next).toBeDisabled();
   });
 
@@ -269,14 +273,14 @@ test.describe('Audio Player Advanced Behaviour', () => {
     const rangeFrom = modal.locator('input[aria-owns="start"]');
     const rangeTo = modal.locator('input[aria-owns="end"]');
 
-    await rangeFrom.fill('103:2');
+    await rangeFrom.fill('1:2');
 
-    // a div with text "103:2" should appear in the dropdown options
-    const option = modal.getByText('103:2', { exact: true }).first();
+    // a div with text "1:2" should appear in the dropdown options
+    const option = modal.getByText('1:2', { exact: true }).first();
     await option.click();
 
-    await rangeTo.fill('103:2');
-    const option2 = modal.getByText('103:2', { exact: true }).nth(1);
+    await rangeTo.fill('1:2');
+    const option2 = modal.getByText('1:2', { exact: true }).nth(1);
     await option2.click();
 
     // Close the modal
@@ -288,17 +292,19 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await repeatItem.click();
     await expect(modal).toBeVisible();
     // Check that the values are persisted
-    await expect(modal.locator('input[aria-owns="start"]')).toHaveValue('103:2');
-    await expect(modal.locator('input[aria-owns="end"]')).toHaveValue('103:2');
+    await expect(modal.locator('input[aria-owns="start"]')).toHaveValue('1:2');
+    await expect(modal.locator('input[aria-owns="end"]')).toHaveValue('1:2');
   });
 
   test('Arrow navigation goes to the correct ayah', async ({ page }) => {
     await startAudioPlayback(page);
 
-    const secondAyah = page.getByTestId('verse-103:2');
-    const thirdAyah = page.getByTestId('verse-103:3');
+    const secondAyah = page.getByTestId('verse-1:2');
+    const thirdAyah = page.getByTestId('verse-1:3');
+    const fourthAyah = page.getByTestId('verse-1:4');
     await expect(secondAyah).not.toHaveClass(/highlighted/);
     await expect(thirdAyah).not.toHaveClass(/highlighted/);
+    await expect(fourthAyah).not.toHaveClass(/highlighted/);
 
     // Move forward using keyboard interaction
     await page.keyboard.press('ArrowRight');
@@ -306,6 +312,14 @@ test.describe('Audio Player Advanced Behaviour', () => {
 
     // Move forward again to go to next ayah
     await page.keyboard.press('ArrowRight');
+    await expect(thirdAyah).toHaveClass(/highlighted/);
+
+    // Move forward once more to test with longer verses
+    await page.keyboard.press('ArrowRight');
+    await expect(fourthAyah).toHaveClass(/highlighted/);
+
+    // Move backward to go back to third ayah
+    await page.keyboard.press('ArrowLeft');
     await expect(thirdAyah).toHaveClass(/highlighted/);
 
     // Move backward to go back to second ayah
@@ -318,7 +332,7 @@ test.describe('Verse-Specific Play Button', () => {
   test('Clicking play button on second verse starts audio player and highlights that verse', async ({
     page,
   }) => {
-    const secondAyah = page.getByTestId('verse-103:2');
+    const secondAyah = page.getByTestId('verse-1:2');
     await expect(secondAyah).not.toHaveClass(/highlighted/);
 
     const playVerseButton = secondAyah.locator('#play-verse-button');
@@ -330,7 +344,7 @@ test.describe('Verse-Specific Play Button', () => {
   });
 
   test('Clicking play button on third verse starts playback from that verse', async ({ page }) => {
-    const thirdAyah = page.getByTestId('verse-103:3');
+    const thirdAyah = page.getByTestId('verse-1:3');
     await thirdAyah.locator('#play-verse-button').click();
 
     await waitForAudioPlayback(page);
@@ -340,12 +354,12 @@ test.describe('Verse-Specific Play Button', () => {
   });
 
   test('Clicking play on first verse highlights only that verse initially', async ({ page }) => {
-    const firstAyah = page.getByTestId('verse-103:1');
+    const firstAyah = page.getByTestId('verse-1:1');
     await firstAyah.locator('#play-verse-button').click();
 
     await waitForAudioPlayback(page);
     await expect(page.getByTestId('audio-player-body')).toBeVisible();
     await expect(firstAyah).toHaveClass(/highlighted/);
-    await expect(page.getByTestId('verse-103:2')).not.toHaveClass(/highlighted/);
+    await expect(page.getByTestId('verse-1:2')).not.toHaveClass(/highlighted/);
   });
 });
