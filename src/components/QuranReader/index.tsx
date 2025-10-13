@@ -36,7 +36,8 @@ const QuranReader = ({
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
 
-  useSyncChapterPage(initialData);
+  const shouldSyncChapterPage = quranReaderDataType !== QuranReaderDataType.Page;
+  useSyncChapterPage(initialData, shouldSyncChapterPage);
 
   return (
     <>

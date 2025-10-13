@@ -21,8 +21,9 @@ import { useGetFirstPageNumberForChapter } from '@/utils/chapter-pages';
  * When the chapter changes, it updates the page to the first page of that chapter.
  *
  * @param {any} [initialData] - Optional external chapters data to use instead of context
+ * @param {boolean} [shouldSync=true] - Whether the synchronization should run.
  */
-const useSyncChapterPage = (initialData?: any): void => {
+const useSyncChapterPage = (initialData?: any, shouldSync = true): void => {
   const dispatch = useDispatch();
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -40,6 +41,9 @@ const useSyncChapterPage = (initialData?: any): void => {
   const firstPageNumber = useGetFirstPageNumberForChapter(pagesLookupData);
 
   useEffect(() => {
+    if (!shouldSync) {
+      return;
+    }
     if (lastReadVerseKey?.chapterId && firstPageNumber) {
       if (lastReadVerseKey.page !== firstPageNumber) {
         dispatch(
@@ -54,7 +58,7 @@ const useSyncChapterPage = (initialData?: any): void => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- chaptersData is from context and stable; omitting to prevent unnecessary re-renders
-  }, [firstPageNumber, lastReadVerseKey, dispatch]);
+  }, [shouldSync, firstPageNumber, lastReadVerseKey, dispatch]);
 };
 
 export default useSyncChapterPage;

@@ -41,6 +41,12 @@ export const readingTrackerSlice = createSlice({
     ) => {
       const { lastReadVerse, chaptersData } = action.payload;
       let newRecentReadingSessions = { ...state.recentReadingSessions };
+
+      // If we don't have a verse key (e.g., navigating directly to a page),
+      // just persist the basic lastReadVerse info.
+      if (!lastReadVerse?.verseKey) {
+        return generateNewState(state, lastReadVerse, newRecentReadingSessions);
+      }
       // if the verse key already exists, and he re-visited it again, we need to mark it as the latest session.
       if (newRecentReadingSessions[lastReadVerse.verseKey]) {
         // delete the old entry
