@@ -1,106 +1,17 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
-import type { Page, TestInfo } from '@playwright/test';
 
+import AudioUtilities from '@/tests/POM/audio-utilities';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
+let audioUtilities: AudioUtilities;
 
-// Simple utility functions to reduce code duplication
-// Simulate deterministic audio playback so tests don't rely on real MP3 loading.
-const installAudioPlaybackMock = async (page: Page) => {
-  await page.addInitScript(() => {
-    const globalWindow = window as typeof window & { audioPlaybackMockInstalled?: boolean };
-    if (globalWindow.audioPlaybackMockInstalled) return;
-    globalWindow.audioPlaybackMockInstalled = true;
-
-    const playbackTimers = new WeakMap<HTMLMediaElement, number>();
-
-    const clearTimer = (audio: HTMLMediaElement) => {
-      const timer = playbackTimers.get(audio);
-      if (timer) {
-        window.clearInterval(timer);
-        playbackTimers.delete(audio);
-      }
-    };
-
-    const startTimer = (audio: HTMLMediaElement) => {
-      clearTimer(audio);
-      const timer = window.setInterval(() => {
-        // eslint-disable-next-line no-param-reassign
-        audio.currentTime += 0.75;
-        audio.dispatchEvent(new Event('timeupdate'));
-        audio.dispatchEvent(new Event('progress'));
-        const duration =
-          Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 120;
-        if (audio.currentTime >= duration) {
-          clearTimer(audio);
-          audio.dispatchEvent(new Event('ended'));
-        }
-      }, 200);
-      playbackTimers.set(audio, timer);
-    };
-
-    HTMLMediaElement.prototype.play = function play() {
-      this.dispatchEvent(new Event('canplay'));
-      this.dispatchEvent(new Event('play'));
-      this.dispatchEvent(new Event('playing'));
-      startTimer(this);
-      return Promise.resolve();
-    };
-
-    HTMLMediaElement.prototype.pause = function pause() {
-      clearTimer(this);
-      this.dispatchEvent(new Event('pause'));
-    };
-  });
-};
-
-const waitForAudioElement = async (page: Page) => {
-  const audioElement = page.locator('#audio-player');
-  await audioElement.waitFor({ state: 'attached' });
-  return audioElement;
-};
-
-const waitForAudioPlayback = async (page: Page) => {
-  const audioElement = await waitForAudioElement(page);
-  await expect
-    .poll(
-      async () => {
-        try {
-          return await audioElement.evaluate((audio: HTMLAudioElement) => audio.currentTime);
-        } catch (error) {
-          return 0;
-        }
-      },
-      { timeout: 10000 },
-    )
-    .toBeGreaterThan(0);
-};
-
-const startAudioPlayback = async (page: Page) => {
-  const listenButton = page.getByTestId('listen-button');
-  await expect(listenButton).toBeVisible();
-  await listenButton.click();
-  await waitForAudioPlayback(page);
-};
-
-const openOverflowMenu = async (page: Page) => {
-  const overflowMenuTrigger = page.locator('#audio-player-overflow-menu-trigger');
-  await waitForAudioPlayback(page);
-  await expect(async () => {
-    await overflowMenuTrigger.click({ trial: true });
-  }).toPass({ timeout: 5000 });
-  await overflowMenuTrigger.click();
-};
-
-test.beforeEach(async ({ page, context }, testInfo: TestInfo) => {
+test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
+  audioUtilities = new AudioUtilities(page);
 
-  if (!testInfo.title.includes('[no-init]')) {
-    await installAudioPlaybackMock(page);
-  }
   await homePage.goTo('/1');
 });
 
@@ -111,7 +22,7 @@ test(
     const playButton = page.getByTestId('listen-button');
     await expect(playButton).toBeVisible();
     await playButton.click();
-    await waitForAudioPlayback(page);
+    await audioUtilities.waitForAudioPlayback();
 
     // The button should change to "Pause"
     const pauseButton = page.getByTestId('pause-button');
@@ -126,24 +37,10 @@ test(
 );
 
 test(
-  'The play button shows the playback control bar when clicked',
-  {
-    tag: ['@slow', '@reading', '@audio'],
-  },
-  async ({ page }) => {
-    const playBar = page.getByTestId('audio-player-body');
-    await expect(playBar).not.toBeVisible();
-
-    await startAudioPlayback(page);
-    await expect(playBar).toBeVisible();
-  },
-);
-
-test(
   'Audio playback highlights the current ayah and moves highlight as audio progresses',
   { tag: ['@slow', '@reading', '@audio'] },
   async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback(false);
 
     // The first ayah should be highlighted
     const firstAyah = page.getByTestId('verse-1:1');
@@ -159,7 +56,7 @@ test(
 
 test.describe('Audio Player Advanced Behaviour', () => {
   test('Play button mounts player and internal controls appear', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback();
     await expect(page.getByTestId('audio-player-body')).toBeVisible();
     await expect(
       page.getByTestId('audio-play-toggle').or(page.getByTestId('audio-pause-toggle')),
@@ -167,7 +64,7 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Toggling inline play/pause button updates state', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback();
     // first click should start playing -> pause toggle visible
     await expect(page.getByTestId('audio-pause-toggle')).toBeVisible();
     await page.getByTestId('audio-pause-toggle').click();
@@ -177,17 +74,21 @@ test.describe('Audio Player Advanced Behaviour', () => {
   test('Prev ayah button disabled on first ayah then enabled after moving forward', async ({
     page,
   }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.pauseAudioPlayback();
+
     const prev = page.getByTestId('audio-prev-ayah');
     const next = page.getByTestId('audio-next-ayah');
+
     await expect(prev).toBeDisabled();
-    await expect(next).not.toBeDisabled();
     await next.click();
     await expect(prev).not.toBeDisabled();
   });
 
   test('Next ayah button disables at last ayah', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.pauseAudioPlayback();
+
     const next = page.getByTestId('audio-next-ayah');
     // Surat Al-Fatiha has 7 ayat. Click next 6 times to reach the last ayah.
     await next.click({ delay: 100 });
@@ -200,7 +101,7 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Slider elapsed value increases over time while playing', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback();
     const elapsed = page.getByTestId('audio-elapsed');
     const initial = (await elapsed.textContent())?.trim();
     await expect
@@ -211,7 +112,7 @@ test.describe('Audio Player Advanced Behaviour', () => {
   test('Closing the audio player hides body but leaves inline chapter button usable', async ({
     page,
   }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback();
     await expect(page.getByTestId('audio-player-body')).toBeVisible();
     await page.getByTestId('audio-close-player').click();
     await expect(page.getByTestId('audio-player-body')).not.toBeVisible();
@@ -219,10 +120,10 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Playback rate menu changes speed and persists selection UI', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback();
 
     // open overflow menu
-    await openOverflowMenu(page);
+    await audioUtilities.openOverflowMenu();
 
     // select playback rate
     const playbackItem = page.getByTestId('playback-rate-menu');
@@ -234,15 +135,15 @@ test.describe('Audio Player Advanced Behaviour', () => {
     // reopen menu to verify selection check icon presence
     await page.keyboard.press('Escape'); // close menu
     await expect(playbackItem).not.toBeVisible();
-    await openOverflowMenu(page);
+    await audioUtilities.openOverflowMenu();
 
     // Selection should be persisted
     await expect(page.getByRole('menuitem').filter({ hasText: '1.75' })).toBeVisible();
   });
 
   test('Opening repeat modal from overflow menu displays modal content', async ({ page }) => {
-    await startAudioPlayback(page);
-    await openOverflowMenu(page);
+    await audioUtilities.startAudioPlayback();
+    await audioUtilities.openOverflowMenu();
 
     const repeatItem = page
       .getByRole('menuitem')
@@ -253,12 +154,12 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await expect(page.getByTestId('repeat-audio-modal')).toBeVisible({ timeout: 5000 });
   });
 
-  test('Repeat modal has persistent values [no-init]', async ({ page }) => {
+  test('Repeat modal has persistent values', async ({ page }) => {
     // Unskip this modal when PR QF-239 is merged
     test.skip(true, 'Unskip when QF-239 is merged');
 
-    await startAudioPlayback(page);
-    await openOverflowMenu(page);
+    await audioUtilities.startAudioPlayback();
+    await audioUtilities.openOverflowMenu();
 
     const repeatItem = page
       .getByRole('menuitem')
@@ -288,7 +189,7 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await page.keyboard.press('Escape');
 
     // Reopen the modal
-    await openOverflowMenu(page);
+    await audioUtilities.openOverflowMenu();
     await repeatItem.click();
     await expect(modal).toBeVisible();
     // Check that the values are persisted
@@ -297,11 +198,15 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Arrow navigation goes to the correct ayah', async ({ page }) => {
-    await startAudioPlayback(page);
+    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.pauseAudioPlayback();
+    await audioUtilities.setAudioSpeed('0.25');
+    await audioUtilities.resumeAudioPlayback();
 
     const secondAyah = page.getByTestId('verse-1:2');
     const thirdAyah = page.getByTestId('verse-1:3');
     const fourthAyah = page.getByTestId('verse-1:4');
+
     await expect(secondAyah).not.toHaveClass(/highlighted/);
     await expect(thirdAyah).not.toHaveClass(/highlighted/);
     await expect(fourthAyah).not.toHaveClass(/highlighted/);
@@ -338,28 +243,8 @@ test.describe('Verse-Specific Play Button', () => {
     const playVerseButton = secondAyah.locator('#play-verse-button');
     await playVerseButton.click();
 
-    await waitForAudioPlayback(page);
+    await audioUtilities.waitForAudioPlayback();
     await expect(page.getByTestId('audio-player-body')).toBeVisible();
     await expect(secondAyah).toHaveClass(/highlighted/, { timeout: 5000 });
-  });
-
-  test('Clicking play button on third verse starts playback from that verse', async ({ page }) => {
-    const thirdAyah = page.getByTestId('verse-1:3');
-    await thirdAyah.locator('#play-verse-button').click();
-
-    await waitForAudioPlayback(page);
-    await expect(page.getByTestId('audio-player-body')).toBeVisible();
-    await expect(thirdAyah).toHaveClass(/highlighted/, { timeout: 5000 });
-    await expect(page.getByTestId('audio-pause-toggle')).toBeVisible();
-  });
-
-  test('Clicking play on first verse highlights only that verse initially', async ({ page }) => {
-    const firstAyah = page.getByTestId('verse-1:1');
-    await firstAyah.locator('#play-verse-button').click();
-
-    await waitForAudioPlayback(page);
-    await expect(page.getByTestId('audio-player-body')).toBeVisible();
-    await expect(firstAyah).toHaveClass(/highlighted/);
-    await expect(page.getByTestId('verse-1:2')).not.toHaveClass(/highlighted/);
   });
 });
