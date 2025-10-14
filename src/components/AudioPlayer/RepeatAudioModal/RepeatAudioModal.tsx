@@ -48,6 +48,7 @@ const RepeatAudioModal = ({
   const repeatSettings = repeatState?.context;
 
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
+  const [lastOpenedChapter, setLastOpenedChapter] = useState(chapterId);
   const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
   const {
@@ -92,12 +93,15 @@ const RepeatAudioModal = ({
 
   // reset verseRepetition's `to` and `from`, when chapter changed
   useEffect(() => {
-    setVerseRepetition((prevVerseRepetition) => ({
-      ...prevVerseRepetition,
-      from: selectedVerseKey || firstVerseKeyInThisChapter,
-      to: selectedVerseKey || lastVerseKeyInThisChapter,
-    }));
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
+    if (chapterId !== lastOpenedChapter) {
+      setVerseRepetition((prevVerseRepetition) => ({
+        ...prevVerseRepetition,
+        from: firstVerseKeyInThisChapter,
+        to: lastVerseKeyInThisChapter,
+      }));
+      setLastOpenedChapter(chapterId);
+    }
+  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, lastOpenedChapter]);
 
   const play = () => {
     audioService.send({
@@ -129,11 +133,29 @@ const RepeatAudioModal = ({
 
   const onRepetitionModeChange = (mode: RepetitionMode) => {
     logValueChange('repitition_mode', repetitionMode, mode);
-    setVerseRepetition((prevVerseRepetition) => ({
-      ...prevVerseRepetition,
-      from: mode === RepetitionMode.Single ? selectedVerseKey : firstVerseKeyInThisChapter,
-      to: mode === RepetitionMode.Single ? selectedVerseKey : lastVerseKeyInThisChapter,
-    }));
+    setVerseRepetition((prevVerseRepetition) => {
+      // Single: from === to (same verse)
+      if (mode === RepetitionMode.Single) {
+        const verseKey = selectedVerseKey || prevVerseRepetition.from;
+        return {
+          ...prevVerseRepetition,
+          from: verseKey,
+          to: verseKey, // Must be the same for single verse
+        };
+      }
+
+      // Chapter: Reset to full surah range
+      if (mode === RepetitionMode.Chapter) {
+        return {
+          ...prevVerseRepetition,
+          from: firstVerseKeyInThisChapter,
+          to: lastVerseKeyInThisChapter,
+        };
+      }
+
+      // Range: Keep user's sticky values (do nothing)
+      return prevVerseRepetition;
+    });
     setRepetitionMode(mode);
   };
 
