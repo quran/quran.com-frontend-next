@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
-import { useRef } from 'react';
+/* eslint-disable max-lines */
+import { useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -49,6 +50,21 @@ const SidebarNavigation = () => {
     },
     isSidebarVisible && isMobile(),
   );
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (isSidebarVisible) {
+        logEvent('sidebar_navigation_close_navigation');
+        dispatch(setIsSidebarNavigationVisible(false));
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [dispatch, router.events, isSidebarVisible]);
 
   const navigationItems = [
     {
