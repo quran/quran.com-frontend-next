@@ -101,7 +101,7 @@ const SelectReciterMenu = ({ onBack }) => {
   );
 
   const reciters = (
-    <div id="audio-player-reciter-list">
+    <div id="audio-player-reciter-list" className={styles.reciterList}>
       <DataFetcher queryKey={makeAvailableRecitersUrl(lang)} render={renderReciter} />
     </div>
   );
