@@ -31,11 +31,19 @@
 
 .container {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     gap: var(--spacing-small);
+    flex-wrap: nowrap;
     @include breakpoints.smallerThanTablet {
         gap: var(--spacing-xxsmall);
+    }
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
     }
 }
 
