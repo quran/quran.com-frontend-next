@@ -50,12 +50,18 @@ export const repeatSettingsSlice = createSlice({
     }),
     resetRepeatSettings: (
       state: RepeatSettingsState,
-      action: PayloadAction<{ chapterId: string; firstVerseKey: string; lastVerseKey: string }>,
+      action: PayloadAction<{
+        chapterId: string;
+        firstVerseKey: string;
+        lastVerseKey: string;
+        repetitionMode?: RepetitionMode;
+      }>,
     ) => ({
       ...initialState,
       chapterId: action.payload.chapterId,
       from: action.payload.firstVerseKey,
       to: action.payload.lastVerseKey,
+      repetitionMode: action.payload.repetitionMode ?? RepetitionMode.Single,
     }),
   },
 });
