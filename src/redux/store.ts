@@ -25,6 +25,7 @@ import mediaMaker from './slices/mediaMaker';
 import microphone from './slices/microphone';
 import navbar from './slices/navbar';
 import notifications from './slices/notifications';
+import repeatSettings from './slices/repeatSettings';
 import onboarding from './slices/onboarding';
 import persistGateHydration from './slices/persistGateHydration';
 import bookmarks from './slices/QuranReader/bookmarks';
@@ -102,6 +103,7 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
+  repeatSettings,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
