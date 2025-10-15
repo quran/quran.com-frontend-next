@@ -97,6 +97,18 @@ const RepeatAudioModal = ({
   );
 
   useEffect(() => {
+    if (
+      [RepetitionMode.Single, RepetitionMode.Chapter].includes(reduxRepeatSettings.repetitionMode)
+    ) {
+      dispatch(
+        resetRepeatSettings({
+          chapterId,
+          firstVerseKey: selectedVerseKey || firstVerseKeyInThisChapter,
+          lastVerseKey: selectedVerseKey || lastVerseKeyInThisChapter,
+        }),
+      );
+    }
+
     if (reduxRepeatSettings.chapterId !== chapterId) {
       dispatch(
         resetRepeatSettings({
@@ -109,6 +121,8 @@ const RepeatAudioModal = ({
   }, [
     chapterId,
     firstVerseKeyInThisChapter,
+    reduxRepeatSettings.repetitionMode,
+    selectedVerseKey,
     lastVerseKeyInThisChapter,
     reduxRepeatSettings.chapterId,
     dispatch,
