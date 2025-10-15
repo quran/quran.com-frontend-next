@@ -53,8 +53,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   useEffect(() => {
     if (isHighlighted && enableAutoScrolling) {
       // Hide the navbar and lock its state to avoid showing it on scroll
-      dispatch({ type: setIsVisible.type, payload: false });
-      dispatch({ type: setLockVisibilityState.type, payload: true });
+      dispatch(setIsVisible(false));
+      dispatch(setLockVisibilityState(true));
 
       scrollToSelectedItem();
 
@@ -63,9 +63,9 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
       hideNavbarTimeoutRef.current = window.setTimeout(() => {
-        dispatch({ type: setIsVisible.type, payload: false });
-        dispatch({ type: setLockVisibilityState.type, payload: false });
-      }, 1000);
+        dispatch(setIsVisible(false));
+        dispatch(setLockVisibilityState(false));
+      }, 1500);
     }
   }, [dispatch, enableAutoScrolling, isHighlighted, scrollToSelectedItem]);
 
@@ -74,9 +74,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
-      dispatch({ type: setLockVisibilityState.type, payload: false });
     },
-    [dispatch],
+    [],
   );
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';

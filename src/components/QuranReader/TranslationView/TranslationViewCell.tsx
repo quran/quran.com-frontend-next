@@ -67,8 +67,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
       // Hide the navbar and lock its state to avoid showing it on scroll
-      dispatch({ type: setIsVisible.type, payload: false });
-      dispatch({ type: setLockVisibilityState.type, payload: true });
+      dispatch(setIsVisible(false));
+      dispatch(setLockVisibilityState(true));
 
       scrollToSelectedItem();
 
@@ -77,8 +77,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
       hideNavbarTimeoutRef.current = window.setTimeout(() => {
-        dispatch({ type: setIsVisible.type, payload: false });
-        dispatch({ type: setLockVisibilityState.type, payload: false });
+        dispatch(setIsVisible(false));
+        dispatch(setLockVisibilityState(false));
       }, 1000);
     }
   }, [
@@ -95,9 +95,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
-      dispatch({ type: setLockVisibilityState.type, payload: false });
     },
-    [dispatch],
+    [],
   );
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
