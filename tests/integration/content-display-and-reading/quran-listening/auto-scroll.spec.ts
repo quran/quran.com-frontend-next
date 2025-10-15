@@ -40,8 +40,8 @@ test(
   'When playing a verse not in view, it is scrolled into view and the navbar hidden',
   { tag: ['@slow', '@reading', '@audio', '@scroll'] },
   async ({ page }) => {
-    // TODO: unskip this test when the PR about QF-2998 is merged
-    test.skip(true, 'Unskip this when PR about QF-2998 is merged');
+    // TODO: unskip this test when the PR #2531 about QF-1295 is merged
+    test.skip(true, 'Unskip this when PR #2531 about QF-1295 is merged');
     const firstAyah = page.getByTestId('verse-68:1');
     const secondAyah = page.getByTestId('verse-68:2');
 
