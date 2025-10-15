@@ -1,9 +1,9 @@
 /* eslint-disable react/no-multi-comp */
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
@@ -40,6 +40,25 @@ const SidebarNavigation = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
+
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    /* 
+      The bug description on mail:
+      Side navigation drawer (surah list) should be closed by default on mobile & desktop for first time user
+
+      I can't reproduce this issue, for first time users (the user who visited quran.com for the first time no trace from before) the sidebar is closed by default as expected.
+
+      So, i just added this code to make sure that if the user enters through the homepage, the sidebar will be closed by default.
+    */
+
+    if (isHomePage && !hasRun.current) {
+      dispatch(setIsSidebarNavigationVisible(false));
+    }
+
+    hasRun.current = true;
+  }, [isHomePage, dispatch]);
 
   useOutsideClickDetector(
     sidebarRef,
