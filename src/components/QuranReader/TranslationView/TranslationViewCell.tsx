@@ -66,10 +66,13 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
+      // Hide the navbar and lock its state to avoid showing it on scroll
       dispatch({ type: setIsVisible.type, payload: false });
       dispatch({ type: setLockVisibilityState.type, payload: true });
+
       scrollToSelectedItem();
 
+      // Unlock the navbar visibility state after a timeout (time for the navbar to hide)
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
