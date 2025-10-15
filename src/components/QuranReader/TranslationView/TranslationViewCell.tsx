@@ -95,8 +95,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
+      dispatch({ type: setLockVisibilityState.type, payload: false });
     },
-    [],
+    [dispatch],
   );
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;

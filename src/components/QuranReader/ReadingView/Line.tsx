@@ -74,8 +74,9 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
+      dispatch({ type: setLockVisibilityState.type, payload: false });
     },
-    [],
+    [dispatch],
   );
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
