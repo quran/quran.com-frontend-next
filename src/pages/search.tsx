@@ -94,15 +94,14 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
   // Generate canonical path so that it can be used by the built-in mobile share button
   const canonicalPath = useMemo(() => {
     const params = new URLSearchParams();
-    if (searchQuery) {
-      params.set(QueryParam.QUERY, searchQuery);
-    }
-    if (currentPage > 1) {
-      params.set(QueryParam.PAGE, String(currentPage));
-    }
+    Object.entries(queryParams).forEach(([key, value]) => {
+      if (value !== undefined) {
+        params.set(key, String(value));
+      }
+    });
     const queryString = params.toString();
     return `${navigationUrl}${queryString ? `?${queryString}` : ''}`;
-  }, [currentPage, searchQuery]);
+  }, [queryParams]);
 
   const REQUEST_PARAMS = getAdvancedSearchQuery(
     searchQuery,
