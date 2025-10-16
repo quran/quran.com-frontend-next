@@ -10,7 +10,7 @@ export enum RepetitionMode {
   Chapter = 'chapter',
 }
 
-export type RepeatSettingsState = {
+export interface RepeatSettingsState {
   chapterId?: string;
   repetitionMode: RepetitionMode;
   repeatRange: number;
@@ -18,7 +18,7 @@ export type RepeatSettingsState = {
   from: string;
   to: string;
   delayMultiplier: number;
-};
+}
 
 const initialState: RepeatSettingsState = {
   chapterId: undefined,

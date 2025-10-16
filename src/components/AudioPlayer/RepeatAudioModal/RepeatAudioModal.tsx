@@ -124,12 +124,12 @@ const RepeatAudioModal = ({
 
   const verseRepetition = {
     repeatRange:
-      reduxRepeatSettings.repeatRange || repeatSettings?.repeatSettings?.totalRangeCycle || 2,
+      reduxRepeatSettings.repeatRange ?? repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
     repeatEachVerse:
-      reduxRepeatSettings.repeatEachVerse || repeatSettings?.repeatSettings?.totalVerseCycle || 2,
+      reduxRepeatSettings.repeatEachVerse ?? repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
     from: reduxRepeatSettings.from || selectedVerseKey || firstVerseKeyInThisChapter,
     to: reduxRepeatSettings.to || selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: reduxRepeatSettings.delayMultiplier || repeatSettings?.delayMultiplier || 1,
+    delayMultiplier: reduxRepeatSettings.delayMultiplier ?? repeatSettings?.delayMultiplier ?? 1,
   };
 
   const repetitionMode = reduxRepeatSettings.repetitionMode || defaultRepetitionMode;
@@ -174,7 +174,7 @@ const RepeatAudioModal = ({
     onClose();
   };
 
-  const [localRange, setLocalRange] = useState({
+  const [localRange, setLocalRange] = useState<{ from: string | null; to: string | null }>({
     from: null,
     to: null,
   });
