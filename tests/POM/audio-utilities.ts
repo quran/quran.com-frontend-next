@@ -122,5 +122,12 @@ export default class AudioUtilities {
     await targetRate.click();
 
     await this.page.keyboard.press('Escape'); // close the overflow menu
+
+    // Set the audio back to the start
+    const audioPlayer = await this.waitForAudioElement();
+    await audioPlayer.evaluate((audio: HTMLAudioElement) => {
+      // eslint-disable-next-line no-param-reassign
+      audio.currentTime = 0;
+    });
   }
 }

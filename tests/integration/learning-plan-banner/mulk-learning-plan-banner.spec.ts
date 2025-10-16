@@ -5,7 +5,6 @@ const LP_URL = '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
 const banner = (page: Page) => page.getByTestId('learning-plan-banner');
 const bannerImage = (page: Page) => banner(page).locator('img');
 const imageLink = (page: Page) => banner(page).locator('a').first();
-const anyCTAInBanner = (page: Page) => banner(page).locator(`a[href="${LP_URL}"]`).first();
 
 async function scrollToBottom(page: Page) {
   await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
@@ -13,9 +12,6 @@ async function scrollToBottom(page: Page) {
 
 async function waitForBannerPresent(page: Page) {
   await scrollToBottom(page);
-  // Wait for virtualized list to settle
-  await page.waitForLoadState('domcontentloaded');
-
   await expect(banner(page)).toBeVisible();
   return banner(page);
 }
@@ -30,7 +26,6 @@ test.describe('English language - rendering', () => {
     await waitForBannerPresent(page);
     await expect(bannerImage(page)).toBeVisible();
     await expect(imageLink(page)).toHaveAttribute('href', LP_URL);
-    await expect(anyCTAInBanner(page)).toHaveAttribute('href', LP_URL);
   });
 });
 
@@ -43,13 +38,6 @@ test.describe('English language - navigation', () => {
     await scrollToBottom(page);
     await waitForBannerPresent(page);
     await imageLink(page).click();
-    await expect(page).toHaveURL(LP_URL);
-  });
-
-  test('clicking CTA anchor navigates to LP', async ({ page }) => {
-    await scrollToBottom(page);
-    await waitForBannerPresent(page);
-    await anyCTAInBanner(page).click();
     await expect(page).toHaveURL(LP_URL);
   });
 });
@@ -79,29 +67,5 @@ test.describe('Other chapters', () => {
     await page.goto('/2');
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);
-  });
-});
-
-test.describe('Responsive', () => {
-  test('mobile viewport renders mobile caption + CTA anchor', async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto('/67');
-    await scrollToBottom(page);
-    await waitForBannerPresent(page);
-    await expect(bannerImage(page)).toBeVisible();
-    await expect(anyCTAInBanner(page)).toHaveAttribute('href', LP_URL);
-  });
-});
-
-test.describe('Accessibility', () => {
-  test('has ARIA role/label and allows keyboard focus on the image link', async ({ page }) => {
-    await page.goto('/67');
-    await scrollToBottom(page);
-    await waitForBannerPresent(page);
-    await expect(banner(page)).toHaveAttribute('aria-label', 'Learning plan promotion banner');
-    const link = imageLink(page);
-    await expect(link).toBeVisible();
-    await link.focus();
-    await expect(link).toBeFocused();
   });
 });

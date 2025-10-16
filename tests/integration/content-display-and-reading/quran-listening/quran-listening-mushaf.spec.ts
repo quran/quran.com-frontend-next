@@ -62,7 +62,6 @@ test(
     // Start and immediately pause the audio playback to show the lecture settings
     await audioUtilities.startAudioPlayback(false);
     await audioUtilities.pauseAudioPlayback();
-
     await audioUtilities.setAudioSpeed('0.25');
 
     // Resume the playback
