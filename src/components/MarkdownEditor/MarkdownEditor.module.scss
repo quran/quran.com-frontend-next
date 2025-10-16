@@ -1,6 +1,7 @@
 .editor {
     p {
         font-size: var(--font-size-large);
+        line-height: 160%;
     }
     // min-height: calc(var(--spacing-mega) * 10);
     em,
@@ -35,7 +36,7 @@
     hr {
         margin: var(--spacing-medium) 0;
         border: none;
-        border-top: 2px solid var(--color-background-inverse);
+        border-block-start: 2px solid var(--color-background-inverse);
     }
     blockquote {
         background-color: var(--color-success-faint);
@@ -79,12 +80,12 @@
     img {
         display: block;
         margin: auto;
-        max-width: 100%;
+        max-inline-size: 100%;
     }
     iframe {
         display: block; // Makes iframe a block element, ensuring it's on a new line
         margin: var(--spacing-medium) auto; // Centers the iframe and adds vertical spacing
-        max-width: 100%;
+        max-inline-size: 100%;
     }
 }
 .content {
