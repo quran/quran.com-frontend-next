@@ -79,12 +79,16 @@ test(
     await expect(firstWord).toHaveClass(/highlighted/);
 
     await audioUtilities.setAudioTime(segments[0][2] + 0.1); // Move to just after the first word
+    await audioUtilities.resumeAudioPlayback();
+    await audioUtilities.pauseAudioPlayback();
 
     // When the second word is being recited, it should be highlighted and the first should not
     await expect(secondWord).toHaveClass(/highlighted/);
     await expect(firstWord).not.toHaveClass(/highlighted/);
 
     await audioUtilities.setAudioTime(segments[1][2] + 0.1); // Move to just after the second word
+    await audioUtilities.resumeAudioPlayback();
+    await audioUtilities.pauseAudioPlayback();
 
     // When the third word is being recited, it should be highlighted and the second should not
     await expect(thirdWord).toHaveClass(/highlighted/);

@@ -124,10 +124,15 @@ export default class AudioUtilities {
     await this.page.keyboard.press('Escape'); // close the overflow menu
 
     // Set the audio back to the start
+    await this.setAudioTime(0);
+  }
+
+  async setAudioTime(seconds: number) {
     const audioPlayer = await this.waitForAudioElement();
-    await audioPlayer.evaluate((audio: HTMLAudioElement) => {
+    await audioPlayer.evaluate((audio: HTMLAudioElement, secs: number) => {
       // eslint-disable-next-line no-param-reassign
-      audio.currentTime = 0;
-    });
+      audio.currentTime = secs;
+      audio.dispatchEvent(new Event('timeupdate'));
+    }, seconds);
   }
 }
