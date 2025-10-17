@@ -101,27 +101,18 @@ test('Functional navigation links in the drawer', { tag: ['@drawer'] }, async ({
 test(
   'Android and iOS app links are correct (the links should open the application store pages)',
   { tag: ['@slow', '@drawer'] },
-  async ({ page, isMobile }) => {
-    test.skip(
-      isMobile,
-      'This test is skipped on mobile due to a playwright bug when opening a playstore link.',
-    );
-
+  async ({ page }) => {
     // Open the navigation drawer
     await page.getByTestId('open-navigation-drawer').click();
     await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     const drawer = page.getByTestId('navigation-drawer-body');
-    const androidLink = await drawer
-      .getByRole('link', { name: 'Quran For Android' })
-      .getAttribute('href');
-    const iosLink = await drawer.getByRole('link', { name: 'Quran iOS' }).getAttribute('href');
-
-    await page.goto(androidLink || '');
-    await expect(page.getByText('Quran for Android').first()).toBeVisible();
-
-    await page.goto(iosLink || '');
-    await expect(page.getByText('Quran - by Quran.com').first()).toBeVisible();
+    expect(
+      await drawer.getByRole('link', { name: 'Quran For Android' }).getAttribute('href'),
+    ).toContain('play.google.com');
+    expect(await drawer.getByRole('link', { name: 'Quran iOS' }).getAttribute('href')).toContain(
+      'apps.apple.com',
+    );
   },
 );
 

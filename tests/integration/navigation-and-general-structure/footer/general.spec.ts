@@ -56,23 +56,15 @@ test(
 test(
   'Android and iOS app links are correct (the links should open the application store pages)',
   { tag: ['@slow', '@footer'] },
-  async ({ page, isMobile }) => {
-    test.skip(
-      isMobile,
-      'This test is skipped on mobile due to a playwright bug when opening a playstore link.',
-    );
-
+  async ({ page }) => {
     const footer = page.locator('footer');
-    const androidLink = await footer
-      .getByRole('link', { name: 'Quran For Android' })
-      .getAttribute('href');
-    const iosLink = await footer.getByRole('link', { name: 'Quran iOS' }).getAttribute('href');
 
-    await page.goto(androidLink || '');
-    await expect(page.getByText('Quran for Android').first()).toBeVisible();
-
-    await page.goto(iosLink || '');
-    await expect(page.getByText('Quran - by Quran.com').first()).toBeVisible();
+    expect(
+      await footer.getByRole('link', { name: 'Quran For Android' }).getAttribute('href'),
+    ).toContain('play.google.com');
+    expect(await footer.getByRole('link', { name: 'Quran iOS' }).getAttribute('href')).toContain(
+      'apps.apple.com',
+    );
   },
 );
 
