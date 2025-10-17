@@ -30,7 +30,7 @@ test.describe('Homepage Search Bar - Navigation Search', () => {
     { tag: ['@slow', '@search', '@homepage'] },
     async ({ page }) => {
       // 1. Search for 'al baqara' and get the search results
-      const searchResults = await homePage.searchFor('al baqara');
+      const searchResults = await homePage.searchFor('al baqarah');
 
       // 2. In the "search-results" div, we should see the "Al-Baqarah" result
       await expect(searchResults.getByText('Al-Baqarah')).toBeVisible();

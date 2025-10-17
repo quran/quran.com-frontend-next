@@ -21,6 +21,7 @@ test(
     // So we need to fix this issue in the component and then remove this workaround for mobile.
     // I know the problem comes from line 51 of src\components\QuranReader\ContextMenu\index.tsx (where it early returns null if first render)
     if (isMobile) {
+      await page.waitForTimeout(1500);
       await page.mouse.wheel(0, 100);
     }
 

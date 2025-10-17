@@ -11,6 +11,24 @@ const botTokenEnv = process.env.DISCORD_BOT_TOKEN;
 const channelIdEnv = process.env.DISCORD_CHANNEL_ID; // Channel ID to send messages to
 const notificationRoleIdEnv = process.env.DISCORD_NOTIFICATION_ROLE_ID; // Optional role to ping on failures
 
+const REQUEST_THROTTLE_WINDOW_MS = 1000;
+let lastDiscordRequestAt = 0;
+
+function canSendDiscordRequest(force = false) {
+  const now = Date.now();
+  if (force) {
+    lastDiscordRequestAt = now;
+    return true;
+  }
+
+  if (now - lastDiscordRequestAt < REQUEST_THROTTLE_WINDOW_MS) {
+    return false;
+  }
+
+  lastDiscordRequestAt = now;
+  return true;
+}
+
 // Validate Discord bot configuration
 function validateBotConfig() {
   if (!botTokenEnv) {
@@ -31,9 +49,14 @@ function validateBotConfig() {
 }
 
 // Send message using bot
-async function sendBotMessage(channelId, payload) {
+async function sendBotMessage(channelId, payload, options = {}) {
   const config = validateBotConfig();
   if (!config) return null;
+
+  const force = options.force === true;
+  if (!canSendDiscordRequest(force)) {
+    return null;
+  }
 
   try {
     const res = await fetch(`https://discord.com/api/v10/channels/${channelId}/messages`, {
@@ -61,65 +84,50 @@ async function sendBotMessage(channelId, payload) {
 }
 
 // Edit message using bot
-async function editBotMessage(channelId, messageId, payload) {
+async function editBotMessage(channelId, messageId, payload, options = {}) {
   const config = validateBotConfig();
   if (!config) return false;
 
-  // Ensure we have fields to track rate-limiting and serialization
-  if (!editBotMessage.lastEditTimestamp) {
-    editBotMessage.lastEditTimestamp = 0;
-  }
-  if (!editBotMessage.lastEditPromise) {
-    editBotMessage.lastEditPromise = Promise.resolve();
+  const force = options.force === true;
+  if (!canSendDiscordRequest(force)) {
+    return false;
   }
 
-  // The actual edit operation (delays if called too soon after the previous edit)
-  const runEdit = async () => {
-    const now = Date.now();
-    const elapsed = now - editBotMessage.lastEditTimestamp;
-    if (elapsed < 1000) {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000 - elapsed);
-      });
-    }
-    // mark the timestamp as the moment we start this request
-    editBotMessage.lastEditTimestamp = Date.now();
-
-    try {
-      const res = await fetch(
-        `https://discord.com/api/v10/channels/${channelId}/messages/${messageId}`,
-        {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bot ${config.botToken}`,
-          },
-          body: JSON.stringify(payload),
+  try {
+    const res = await fetch(
+      `https://discord.com/api/v10/channels/${channelId}/messages/${messageId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bot ${config.botToken}`,
         },
-      );
+        body: JSON.stringify(payload),
+      },
+    );
 
-      if (!res.ok) {
-        const text = await res.text().catch(() => '');
-        console.error(`Bot edit error: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`);
-        return false;
-      }
-
-      return true;
-    } catch (err) {
-      console.error(`Bot edit error: ${err}`);
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      console.error(`Bot edit error: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`);
       return false;
     }
-  };
 
-  // Chain the operation to the previous one so edits are serialized
-  editBotMessage.lastEditPromise = editBotMessage.lastEditPromise.then(runEdit, runEdit);
-  return editBotMessage.lastEditPromise;
+    return true;
+  } catch (err) {
+    console.error(`Bot edit error: ${err}`);
+    return false;
+  }
 }
 
 // Delete message using bot
-async function deleteBotMessage(channelId, messageId) {
+async function deleteBotMessage(channelId, messageId, options = {}) {
   const config = validateBotConfig();
   if (!config) return false;
+
+  const force = options.force === true;
+  if (!canSendDiscordRequest(force)) {
+    return false;
+  }
 
   try {
     const res = await fetch(
@@ -146,9 +154,14 @@ async function deleteBotMessage(channelId, messageId) {
 }
 
 // Create thread using bot
-async function createBotThread(channelId, messageId, threadName) {
+async function createBotThread(channelId, messageId, threadName, options = {}) {
   const config = validateBotConfig();
   if (!config) return null;
+
+  const force = options.force === true;
+  if (!canSendDiscordRequest(force)) {
+    return null;
+  }
 
   try {
     const res = await fetch(
@@ -183,9 +196,14 @@ async function createBotThread(channelId, messageId, threadName) {
 }
 
 // Send message to thread using bot
-async function sendToThread(threadId, payload) {
+async function sendToThread(threadId, payload, options = {}) {
   const config = validateBotConfig();
   if (!config) return null;
+
+  const force = options.force === true;
+  if (!canSendDiscordRequest(force)) {
+    return null;
+  }
 
   try {
     const res = await fetch(`https://discord.com/api/v10/channels/${threadId}/messages`, {
@@ -480,7 +498,12 @@ class DiscordReporter {
         timestamp: new Date().toISOString(),
       };
 
-      await editBotMessage(this.config.channelId, this.progressMessageId, { embeds: [embed] });
+      await editBotMessage(
+        this.config.channelId,
+        this.progressMessageId,
+        { embeds: [embed] },
+        { force: true },
+      );
     }
   }
 }

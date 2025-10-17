@@ -114,6 +114,7 @@ test(
 
     if (isMobile) {
       // Scroll a bit to show the header
+      await page.waitForTimeout(1500);
       await page.mouse.wheel(0, 300);
       await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
     }

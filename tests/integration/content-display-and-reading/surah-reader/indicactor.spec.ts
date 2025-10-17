@@ -18,7 +18,8 @@ test(
 
     if (isMobile) {
       // The progress bar is not shown on mobile unless we scroll a bit
-      await page.mouse.wheel(0, 100);
+      await page.waitForTimeout(1500);
+      await page.mouse.wheel(0, 150);
       await page.waitForSelector('[data-testid="progress-bar"]', { state: 'visible' });
     }
 
@@ -27,6 +28,7 @@ test(
     // Scroll a bit
     for (let i = 0; i < 5; i += 1) {
       await page.mouse.wheel(0, 500);
+      await page.waitForTimeout(500);
     }
 
     // The progress bar should be > initial progress

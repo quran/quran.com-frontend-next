@@ -36,23 +36,70 @@ test(
   },
 );
 
-test(
-  'Audio playback highlights the current ayah and moves highlight as audio progresses',
-  { tag: ['@slow', '@reading', '@audio'] },
-  async ({ page }) => {
-    await audioUtilities.startAudioPlayback(false);
+test.describe('Highlighting', () => {
+  test(
+    'Audio playback highlights the current ayah and moves highlight as audio progresses',
+    { tag: ['@slow', '@reading', '@audio'] },
+    async ({ page }) => {
+      await audioUtilities.startAudioPlayback(false);
 
-    // The first ayah should be highlighted
-    const firstAyah = page.getByTestId('verse-1:1');
-    await expect(firstAyah).toHaveClass(/highlighted/);
+      // The first ayah should be highlighted
+      const firstAyah = page.getByTestId('verse-1:1');
+      await expect(firstAyah).toHaveClass(/highlighted/);
 
-    // After some time, the highlight should move to the next ayah
-    await expect(firstAyah).not.toHaveClass(/highlighted/, { timeout: 15000 }); // wait until the first ayah has been read
+      // After some time, the highlight should move to the next ayah
+      await expect(firstAyah).not.toHaveClass(/highlighted/, { timeout: 15000 }); // wait until the first ayah has been read
 
-    const secondAyah = page.getByTestId('verse-1:2');
-    await expect(secondAyah).toHaveClass(/highlighted/, { timeout: 15000 });
-  },
-);
+      const secondAyah = page.getByTestId('verse-1:2');
+      await expect(secondAyah).toHaveClass(/highlighted/, { timeout: 15000 });
+    },
+  );
+
+  test(
+    'Word are highlighted when they are being recited',
+    { tag: ['@slow', '@reading', '@audio', '@mushaf'] },
+    async ({ page }) => {
+      await homePage.goTo('/9');
+
+      const segments = [
+        [1, 0, 3.32], // First word is highlighted from 0 to 3.32
+        [2, 3.32, 4.21], // Second word is highlighted from 3.32 to 4.21
+        [3, 4.21, 5.08], // Third word is highlighted from 4.21 to 5.08
+      ];
+
+      const firstWord = page.locator('[data-word-location="9:1:1"]');
+      const secondWord = page.locator('[data-word-location="9:1:2"]');
+      const thirdWord = page.locator('[data-word-location="9:1:3"]');
+
+      await expect(firstWord).not.toHaveClass(/highlighted/);
+
+      // Start and immediately pause the audio playback to show the lecture settings
+      await audioUtilities.startAudioPlayback(false);
+      await audioUtilities.pauseAudioPlayback();
+      await audioUtilities.setAudioTime(0);
+
+      // The first word should be highlighted and not the third
+      await expect(secondWord).not.toHaveClass(/highlighted/);
+      await expect(firstWord).toHaveClass(/highlighted/);
+
+      await audioUtilities.setAudioTime(segments[0][2] + 0.1); // Move to just after the first word
+      await audioUtilities.resumeAudioPlayback();
+      await audioUtilities.pauseAudioPlayback();
+
+      // When the second word is being recited, it should be highlighted and the first should not
+      await expect(secondWord).toHaveClass(/highlighted/);
+      await expect(firstWord).not.toHaveClass(/highlighted/);
+
+      await audioUtilities.setAudioTime(segments[1][2] + 0.1); // Move to just after the second word
+      await audioUtilities.resumeAudioPlayback();
+      await audioUtilities.pauseAudioPlayback();
+
+      // When the third word is being recited, it should be highlighted and the second should not
+      await expect(thirdWord).toHaveClass(/highlighted/);
+      await expect(secondWord).not.toHaveClass(/highlighted/);
+    },
+  );
+});
 
 test.describe('Audio Player Advanced Behaviour', () => {
   test('Play button mounts player and internal controls appear', async ({ page }) => {

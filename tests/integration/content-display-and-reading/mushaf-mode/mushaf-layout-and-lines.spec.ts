@@ -68,10 +68,6 @@ test(
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      // FIXME: Remove this workaround when the underlying issue is fixed
-      await page.mouse.wheel(0, 200);
-      await page.mouse.wheel(0, -100);
-
       await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
     } else {
       await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
@@ -106,10 +102,6 @@ test(
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      // FIXME: Remove this workaround when the underlying issue is fixed
-      await page.mouse.wheel(0, 200);
-      await page.mouse.wheel(0, -100);
-
       await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
     } else {
       await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
@@ -150,15 +142,13 @@ test(
       : page.getByTestId('reading-button');
     await expect(mushafIndicator).toHaveAttribute('data-is-selected', 'true');
 
+    await page.waitForTimeout(1000); // wait for 1 second
+
     // refresh the page
     await homePage.reload();
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      // FIXME: Remove this workaround when the underlying issue is fixed
-      await page.mouse.wheel(0, 200);
-      await page.mouse.wheel(0, -100);
-
       await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
     } else {
       await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
