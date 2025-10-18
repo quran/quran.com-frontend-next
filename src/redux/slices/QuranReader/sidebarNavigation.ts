@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { REHYDRATE } from 'redux-persist';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
@@ -40,6 +41,22 @@ export const sidebarNavigationSlice = createSlice({
       ...state,
       selectedNavigationItem: action.payload,
     }),
+  },
+  extraReducers: (builder) => {
+    // Reset isVisible to false when state is restored from storage
+    builder.addCase(REHYDRATE, (state, action) => {
+      // Type assertion needed as REHYDRATE action has a payload but type doesn't reflect it
+      const rehydrateAction = action as any;
+      if (rehydrateAction.payload && rehydrateAction.payload.sidebarNavigation) {
+        return {
+          // Force isVisible to false during rehydrate
+          // This ensures the sidebar is always closed in new tab/window
+          ...rehydrateAction.payload.sidebarNavigation,
+          isVisible: false,
+        };
+      }
+      return state;
+    });
   },
 });
 
