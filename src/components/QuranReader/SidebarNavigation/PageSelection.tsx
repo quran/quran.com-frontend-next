@@ -25,7 +25,7 @@ const PageSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
       searchPlaceholder={t('sidebar.search-page')}
       renderItem={(page) => `${t('page')} ${page.label}`}
       isJuz={false}
-      selectedItem={Number(lastReadPage)}
+      selectedItem={lastReadPage ? Number(lastReadPage) : undefined}
       onAfterNavigationItemRouted={onAfterNavigationItemRouted}
     />
   );

@@ -22,42 +22,51 @@ import LookupRecord from 'types/LookupRecord';
  * @returns {{ pagesCount: number; hasError: boolean }}
  */
 const useFetchPagesLookup = (
-  resourceId: number | string,
+  resourceId: number | string | null,
   quranReaderDataType: QuranReaderDataType,
-  initialData: VersesResponse,
+  initialData?: VersesResponse,
   quranReaderStyles: QuranReaderStyles,
   isUsingDefaultFont: boolean,
 ): {
-  data: PagesLookUpResponse;
+  data: PagesLookUpResponse | undefined;
   pagesCount: number;
   hasError: boolean;
   pagesVersesRange: Record<number, LookupRecord>;
   lookupRange: LookupRange;
   isLoading: boolean;
 } => {
+  const shouldFetch = resourceId !== null && resourceId !== undefined;
+
   const { data, error, isValidating } = useSWRImmutable<PagesLookUpResponse>(
-    makePagesLookupUrl(
-      getPagesLookupParams(
-        resourceId,
-        quranReaderDataType,
-        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-        initialData,
-      ),
-    ),
-    fetcher,
-    {
-      fallbackData: initialData.pagesLookup,
-      revalidateOnMount: !isUsingDefaultFont,
-    },
+    shouldFetch
+      ? makePagesLookupUrl(
+          getPagesLookupParams(
+            resourceId,
+            quranReaderDataType,
+            getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+            initialData,
+          ),
+        )
+      : null,
+    shouldFetch ? fetcher : null,
+    shouldFetch
+      ? {
+          fallbackData: initialData?.pagesLookup,
+          revalidateOnMount: !isUsingDefaultFont,
+        }
+      : undefined,
   );
 
+  const resolvedData = shouldFetch ? data ?? initialData?.pagesLookup : initialData?.pagesLookup;
+  const lookupRange: LookupRange = resolvedData?.lookupRange ?? { from: '', to: '' };
+
   return {
-    data,
-    pagesCount: data.totalPage,
-    pagesVersesRange: data.pages,
-    lookupRange: data.lookupRange,
-    hasError: !!error,
-    isLoading: isValidating && !data,
+    data: resolvedData,
+    pagesCount: resolvedData?.totalPage ?? 0,
+    pagesVersesRange: (resolvedData?.pages ?? {}) as Record<number, LookupRecord>,
+    lookupRange,
+    hasError: shouldFetch ? !!error : false,
+    isLoading: shouldFetch ? isValidating && !resolvedData : false,
   };
 };
 

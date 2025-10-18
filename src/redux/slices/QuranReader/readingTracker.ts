@@ -7,10 +7,10 @@ import { getDistanceBetweenVerses } from '@/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
 interface LastReadVerse {
-  verseKey: string;
-  chapterId: string;
-  page: string;
-  hizb: string;
+  verseKey: string | null;
+  chapterId: string | null;
+  page: string | null;
+  hizb: string | null;
 }
 
 export type RecentReadingSessions = Record<string, number>;
@@ -35,12 +35,16 @@ export const readingTrackerSlice = createSlice({
     setLastReadVerse: (
       state: ReadingTracker,
       action: PayloadAction<{
-        lastReadVerse: LastReadVerse;
+        lastReadVerse: LastReadVerse | null;
         chaptersData: ChaptersData;
       }>,
     ) => {
       const { lastReadVerse, chaptersData } = action.payload;
       let newRecentReadingSessions = { ...state.recentReadingSessions };
+
+      if (!lastReadVerse) {
+        return generateNewState(state, state.lastReadVerse, newRecentReadingSessions);
+      }
 
       // If we don't have a verse key (e.g., navigating directly to a page),
       // just persist the basic lastReadVerse info.
