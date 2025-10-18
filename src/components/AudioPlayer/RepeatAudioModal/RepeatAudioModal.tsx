@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect, useContext } from 'react';
+import { useMemo, useState, useEffect, useContext, useRef } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -33,6 +33,12 @@ type RepeatAudioModalProps = {
   selectedVerseKey?: string;
 };
 
+type SavedRepeatSettings = {
+  mode: RepetitionMode;
+  from: string;
+  to: string;
+};
+
 const RepeatAudioModal = ({
   chapterId,
   isOpen,
@@ -47,13 +53,15 @@ const RepeatAudioModal = ({
   const repeatState = repeatActor?.getSnapshot();
   const repeatSettings = repeatState?.context;
 
-  const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
+  const savedSettingsRef = useRef<{ [surahId: string]: SavedRepeatSettings }>({});
+
   const [lastOpenedChapter, setLastOpenedChapter] = useState(chapterId);
   const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
   const {
     actions: { onSettingsChangeWithoutDispatch },
   } = usePersistPreferenceGroup();
+
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
@@ -83,27 +91,52 @@ const RepeatAudioModal = ({
     chapterId,
   );
 
-  const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
-    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
-    from: selectedVerseKey ?? firstVerseKeyInThisChapter,
-    to: selectedVerseKey ?? lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
+  const [repetitionMode, setRepetitionMode] = useState(() => {
+    const saved = savedSettingsRef.current[chapterId];
+    return saved?.mode || defaultRepetitionMode;
+  });
+
+  const [verseRepetition, setVerseRepetition] = useState(() => {
+    const saved = savedSettingsRef.current[chapterId];
+
+    return {
+      repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
+      repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
+      from: saved?.from || selectedVerseKey || firstVerseKeyInThisChapter,
+      to: saved?.to || selectedVerseKey || lastVerseKeyInThisChapter,
+      delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
+    };
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
   useEffect(() => {
     if (chapterId !== lastOpenedChapter) {
+      const saved = savedSettingsRef.current[chapterId];
+
       setVerseRepetition((prevVerseRepetition) => ({
         ...prevVerseRepetition,
-        from: firstVerseKeyInThisChapter,
-        to: lastVerseKeyInThisChapter,
+        from: saved?.from || firstVerseKeyInThisChapter,
+        to: saved?.to || lastVerseKeyInThisChapter,
       }));
+
+      setRepetitionMode(saved?.mode || defaultRepetitionMode);
       setLastOpenedChapter(chapterId);
     }
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, lastOpenedChapter]);
+  }, [
+    chapterId,
+    firstVerseKeyInThisChapter,
+    lastVerseKeyInThisChapter,
+    lastOpenedChapter,
+    defaultRepetitionMode,
+  ]);
 
   const play = () => {
+    savedSettingsRef.current[chapterId] = {
+      mode: repetitionMode,
+      from: verseRepetition.from,
+      to: verseRepetition.to,
+    };
+
     audioService.send({
       type: 'SET_REPEAT_SETTING',
       delayMultiplier: Number(verseRepetition.delayMultiplier),
@@ -125,6 +158,7 @@ const RepeatAudioModal = ({
     logButtonClick('repeat_cancel');
     onClose();
   };
+
   const onStopRepeating = () => {
     logButtonClick('stop_repeating');
     audioService.send({ type: 'REPEAT_FINISHED' });
@@ -133,6 +167,7 @@ const RepeatAudioModal = ({
 
   const onRepetitionModeChange = (mode: RepetitionMode) => {
     logValueChange('repitition_mode', repetitionMode, mode);
+
     setVerseRepetition((prevVerseRepetition) => {
       // Single: from === to (same verse)
       if (mode === RepetitionMode.Single) {
@@ -140,7 +175,7 @@ const RepeatAudioModal = ({
         return {
           ...prevVerseRepetition,
           from: verseKey,
-          to: verseKey, // Must be the same for single verse
+          to: verseKey,
         };
       }
 
@@ -153,14 +188,25 @@ const RepeatAudioModal = ({
         };
       }
 
-      // Range: Keep user's sticky values (do nothing)
+      if (mode === RepetitionMode.Range) {
+        const saved = savedSettingsRef.current[chapterId];
+        if (saved) {
+          return {
+            ...prevVerseRepetition,
+            from: saved.from,
+            to: saved.to,
+          };
+        }
+      }
+
       return prevVerseRepetition;
     });
+
     setRepetitionMode(mode);
   };
 
   const onSingleVerseChange = (verseKey) => {
-    logValueChange('repeat_single_verse', verseRepetition.repeatRange, verseKey);
+    logValueChange('repeat_single_verse', verseRepetition.from, verseKey);
     setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey });
   };
 
@@ -170,7 +216,15 @@ const RepeatAudioModal = ({
     const oldValue = isFrom ? verseRepetition.from : verseRepetition.to;
     const newValue = isFrom ? range.from : range.to;
     logValueChange(logKey, oldValue, newValue);
-    setVerseRepetition({ ...verseRepetition, ...range });
+
+    const updatedRepetition = { ...verseRepetition, ...range };
+    setVerseRepetition(updatedRepetition);
+
+    savedSettingsRef.current[chapterId] = {
+      mode: RepetitionMode.Range,
+      from: updatedRepetition.from,
+      to: updatedRepetition.to,
+    };
   };
 
   const onRepeatRangeChange = (val) => {
