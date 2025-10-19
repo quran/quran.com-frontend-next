@@ -70,12 +70,11 @@ const ReadingSection: React.FC<Props> = () => {
     />
   );
 
-  const goalsOrStreakCard =
-    streak || goal ? (
-      <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
-    ) : (
-      <>{!isMobile() && <NoGoalOrStreakCard />}</>
-    );
+  const goalsOrStreakCard = true ? (
+    <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
+  ) : (
+    <>{!isMobile() && <NoGoalOrStreakCard />}</>
+  );
 
   const newCard = <NewCard />;
 

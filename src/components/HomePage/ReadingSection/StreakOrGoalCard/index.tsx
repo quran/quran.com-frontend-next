@@ -68,13 +68,6 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                   }}
                   i18nKey="reading-goal:x-days-streak"
                 />
-                {!goal && (
-                  <IconContainer
-                    size={IconSize.Xsmall}
-                    icon={<ArrowIcon />}
-                    shouldForceSetColors={false}
-                  />
-                )}
               </div>
 
               <div className={styles.container}>
@@ -103,11 +96,11 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                       icon={<ArrowIcon />}
                       shouldForceSetColors={false}
                       className={styles.goalArrowIcon}
+                      aria-hidden="true"
                     />
                   </div>
                 ) : (
                   <Button
-                    href={getReadingGoalNavigationUrl()}
                     size={ButtonSize.Small}
                     className={styles.customGoalButton}
                     variant={ButtonVariant.Simplified}
