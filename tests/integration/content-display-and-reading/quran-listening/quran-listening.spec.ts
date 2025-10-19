@@ -43,7 +43,8 @@ test.describe('Highlighting', () => {
     'Audio playback highlights the current ayah and moves highlight as audio progresses',
     { tag: ['@slow', '@reading', '@audio'] },
     async ({ page }) => {
-      await audioUtilities.startAudioPlayback(false);
+      await audioUtilities.startAudioPlayback(true);
+      await audioUtilities.setAudioTime(0);
 
       // The first ayah should be highlighted
       const firstAyah = page.getByTestId('verse-1:1');
@@ -76,7 +77,7 @@ test.describe('Highlighting', () => {
       await expect(firstWord).not.toHaveClass(/highlighted/);
 
       // Start and immediately pause the audio playback to show the lecture settings
-      await audioUtilities.startAudioPlayback(false);
+      await audioUtilities.startAudioPlayback(true);
       await audioUtilities.pauseAudioPlayback();
       await audioUtilities.setAudioTime(0);
 
@@ -123,7 +124,8 @@ test.describe('Audio Player Advanced Behaviour', () => {
   test('Prev ayah button disabled on first ayah then enabled after moving forward', async ({
     page,
   }) => {
-    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
     await audioUtilities.pauseAudioPlayback();
 
     const prev = page.getByTestId('audio-prev-ayah');
@@ -135,7 +137,8 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Next ayah button disables at last ayah', async ({ page }) => {
-    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
     await audioUtilities.pauseAudioPlayback();
 
     const next = page.getByTestId('audio-next-ayah');
@@ -247,10 +250,9 @@ test.describe('Audio Player Advanced Behaviour', () => {
   });
 
   test('Arrow navigation goes to the correct ayah', async ({ page }) => {
-    await audioUtilities.startAudioPlayback(false);
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
     await audioUtilities.pauseAudioPlayback();
-    await audioUtilities.setAudioSpeed('0.25');
-    await audioUtilities.resumeAudioPlayback();
 
     const secondAyah = page.getByTestId('verse-1:2');
     const thirdAyah = page.getByTestId('verse-1:3');

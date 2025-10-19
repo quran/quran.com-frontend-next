@@ -28,6 +28,7 @@ test(
     await audioUtilities.startAudioPlayback(false);
     await audioUtilities.pauseAudioPlayback();
     await audioUtilities.setAudioSpeed('0.25');
+    await audioUtilities.setAudioTime(0);
     await audioUtilities.resumeAudioPlayback();
 
     // The first line should be highlighted
