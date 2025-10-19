@@ -15,6 +15,7 @@ import styles from './TranslationText.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById } from '@/utils/locale';
+import { getVerseUrl } from '@/utils/verse';
 import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 
@@ -164,7 +165,7 @@ const TranslationText: React.FC<Props> = ({
       {chapterName && reference && (
         <div className={classNames(styles.text, styles[langData.font])}>
           &quot;{text}&quot;{' '}
-          <Link href={`/${reference}`} className={styles.referenceLink}>
+          <Link href={getVerseUrl(reference)} className={styles.referenceLink}>
             {`${chapterName} ${reference}`}
           </Link>
         </div>

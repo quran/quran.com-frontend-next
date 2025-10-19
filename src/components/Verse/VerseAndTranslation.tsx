@@ -11,7 +11,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useChapter from '@/hooks/useChapter';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
-import { getVerseUrl, getVerseWords } from '@/utils/verse';
+import { getVerseWords } from '@/utils/verse';
 
 /**
  * React component that fetches and displays Quranic verses with their translations.
@@ -107,7 +107,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
                   chapterName={chapterData?.chapter?.nameComplex}
-                  reference={getVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)}
+                  reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}
                   text={translation.text}
