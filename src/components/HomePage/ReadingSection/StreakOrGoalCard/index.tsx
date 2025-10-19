@@ -28,7 +28,7 @@ import {
 
 type Props = {
   currentActivityDay: CurrentQuranActivityDay;
-  goal: QuranGoalStatus;
+  goal?: QuranGoalStatus | null;
   streak: number;
 };
 
