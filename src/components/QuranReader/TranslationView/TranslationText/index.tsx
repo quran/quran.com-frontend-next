@@ -7,6 +7,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import classNames from 'classnames';
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import FootnoteText from './FootnoteText';
@@ -163,9 +164,9 @@ const TranslationText: React.FC<Props> = ({
       {chapterName && reference && (
         <div className={classNames(styles.text, styles[langData.font])}>
           {`"${text}"`}{' '}
-          <a href={`/${reference}`} className={styles.referenceLink}>
+          <Link href={`/${reference}`} className={styles.referenceLink}>
             {`${chapterName} ${reference}`}
-          </a>
+          </Link>
         </div>
       )}
       {shouldShowFootnote && (

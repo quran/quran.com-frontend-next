@@ -80,7 +80,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
             {verse.translations?.map((translation) => (
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
-                  chapterName={chapterData.chapter.nameComplex}
+                  chapterName={chapterData?.chapter?.nameComplex}
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}
