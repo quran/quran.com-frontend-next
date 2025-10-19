@@ -13,7 +13,6 @@ import Card from '@/components/HomePage/Card';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
-import Link from '@/dls/Link/Link';
 import PlantIcon from '@/icons/plant.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import CirclesIcon from '@/public/icons/circles.svg';
@@ -28,7 +27,7 @@ import {
 
 type Props = {
   currentActivityDay: CurrentQuranActivityDay;
-  goal?: QuranGoalStatus | null;
+  goal: QuranGoalStatus;
   streak: number;
 };
 
@@ -50,8 +49,8 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
   return (
     <Card
       className={cardStyles.streakCard}
-      link={getReadingGoalProgressNavigationUrl()}
-      onClick={onStreakCardClicked}
+      link={goal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl()}
+      onClick={goal ? onGoalArrowClicked : onStreakCardClicked}
     >
       <div className={cardStyles.cardOuterContainer}>
         <div className={classNames(cardStyles.streakCardLeft, cardStyles.cardWithIcon)}>
@@ -99,14 +98,12 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                       currentActivityDay={currentActivityDay}
                       percent={goal.progress.percent}
                     />
-                    <Link href={getReadingGoalProgressNavigationUrl()} onClick={onGoalArrowClicked}>
-                      <IconContainer
-                        size={IconSize.Xsmall}
-                        icon={<ArrowIcon />}
-                        shouldForceSetColors={false}
-                        className={styles.goalArrowIcon}
-                      />
-                    </Link>
+                    <IconContainer
+                      size={IconSize.Xsmall}
+                      icon={<ArrowIcon />}
+                      shouldForceSetColors={false}
+                      className={styles.goalArrowIcon}
+                    />
                   </div>
                 ) : (
                   <Button
@@ -115,7 +112,10 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                     className={styles.customGoalButton}
                     variant={ButtonVariant.Simplified}
                     prefix={<CirclesIcon />}
-                    onClick={onSetGoalButtonClicked}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onSetGoalButtonClicked();
+                    }}
                   >
                     {t('set-custom-goal')}
                   </Button>
