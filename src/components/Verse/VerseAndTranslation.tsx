@@ -79,8 +79,8 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
 
   const handleRetry = useCallback(() => {
     mutate();
-    mutateChapter(chapter.toString());
-  }, [mutate, mutateChapter, chapter]);
+    mutateChapter();
+  }, [mutate, mutateChapter]);
 
   if (error || chapterError) {
     return <Error error={error || chapterError} onRetryClicked={handleRetry} />;

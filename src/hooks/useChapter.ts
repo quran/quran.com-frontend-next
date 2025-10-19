@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import { mutate as swrMutate } from 'swr';
+import { KeyedMutator } from 'swr';
 import useSWR from 'swr/immutable';
 
 import { makeChapterUrl } from '@/utils/apiPaths';
@@ -13,7 +13,7 @@ interface Props {
 export interface UseChapterResult {
   data?: ChapterResponse;
   error?: unknown;
-  mutate: typeof swrMutate;
+  mutate: KeyedMutator<ChapterResponse | undefined>;
   isLoading: boolean;
 }
 
@@ -29,7 +29,7 @@ export interface UseChapterResult {
  * @returns {UseChapterResult} Object containing chapter data, loading state, error handling, and mutate function
  *   - data: ChapterResponse | undefined - Chapter response from API, undefined while loading or on error
  *   - error: unknown | undefined - Error object if fetch failed, undefined on success
- *   - mutate: typeof swrMutate - SWR mutate function for manual cache revalidation
+ *   - mutate: KeyedMutator<ChapterResponse | undefined> - SWR bound mutate function for manual cache revalidation
  *   - isLoading: boolean - True when fetching data and no cached data exists
  *
  * @example
