@@ -66,6 +66,17 @@ export default class AudioUtilities {
 
   async waitForAudioPlayback() {
     const audioElement = await this.waitForAudioElement();
+    // Check if the response has already been received
+    const hasAudioResponse = await this.page.evaluate(() => {
+      return window.performance
+        .getEntriesByType('resource')
+        .some((entry) => entry.name.includes('quranicaudio.com'));
+    });
+
+    if (!hasAudioResponse) {
+      await this.page.waitForResponse((response) => response.url().includes('quranicaudio.com'));
+    }
+
     await expect
       .poll(
         async () => {
@@ -83,10 +94,9 @@ export default class AudioUtilities {
   async startAudioPlayback(waitForPlayback = true) {
     const listenButton = this.page.getByTestId('listen-button');
     await expect(listenButton).toBeVisible();
-    await listenButton.click();
     if (waitForPlayback) {
-      await this.waitForAudioPlayback();
-    }
+      await Promise.all([listenButton.click(), this.waitForAudioPlayback()]);
+    } else await listenButton.click();
   }
 
   async openOverflowMenu() {
