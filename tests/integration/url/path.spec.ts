@@ -5,6 +5,8 @@ import Homepage from '@/tests/POM/home-page';
 let homePage: Homepage;
 
 test.beforeEach(async ({ page, context }) => {
+  test.slow();
+
   homePage = new Homepage(page, context);
 });
 

@@ -9,6 +9,8 @@ let homePage: Homepage;
 let audioUtilities: AudioUtilities;
 
 test.beforeEach(async ({ page, context }) => {
+  test.slow();
+
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
 
