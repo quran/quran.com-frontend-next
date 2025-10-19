@@ -1,4 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
+import { mutate as swrMutate } from 'swr';
 import useSWR from 'swr/immutable';
 
 import { makeChapterUrl } from '@/utils/apiPaths';
@@ -9,24 +10,50 @@ interface Props {
   chapterIdOrSlug: string;
 }
 
+export interface UseChapterResult {
+  data?: ChapterResponse;
+  error?: unknown;
+  mutate: typeof swrMutate;
+  isLoading: boolean;
+}
+
 /**
- * Fetches chapter data by ID or slug.
+ * Custom hook to fetch chapter data by ID or slug using SWR for caching and revalidation.
+ *
+ * This hook provides a reactive way to fetch chapter information with built-in caching,
+ * automatic revalidation, and error handling. It uses the current language context
+ * to fetch localized chapter data.
  *
  * @param {object} props - Hook parameters
- * @param {string} props.chapterIdOrSlug - Chapter ID or slug to fetch
- * @returns {object} Chapter data and loading state
- *   - data: ChapterResponse - Chapter response from API
- *   - error: Error - Error object if fetch failed
- *   - mutate: Function - SWR mutate function for manual revalidation
- *   - isLoading: boolean - True when fetching data
+ * @param {string} props.chapterIdOrSlug - Chapter ID (number as string) or slug to fetch
+ * @returns {UseChapterResult} Object containing chapter data, loading state, error handling, and mutate function
+ *   - data: ChapterResponse | undefined - Chapter response from API, undefined while loading or on error
+ *   - error: unknown | undefined - Error object if fetch failed, undefined on success
+ *   - mutate: typeof swrMutate - SWR mutate function for manual cache revalidation
+ *   - isLoading: boolean - True when fetching data and no cached data exists
  *
  * @example
+ * ```tsx
  * const { data, error, isLoading } = useChapter({ chapterIdOrSlug: '1' });
+ *
  * if (isLoading) return <Spinner />;
  * if (error) return <Error error={error} />;
+ * if (!data) return null;
+ *
  * return <div>{data.chapter.nameComplex}</div>;
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Manual revalidation
+ * const { mutate } = useChapter({ chapterIdOrSlug: '2' });
+ *
+ * const handleRefresh = () => {
+ *   mutate(); // Revalidate the data
+ * };
+ * ```
  */
-const useChapter = ({ chapterIdOrSlug }: Props) => {
+const useChapter = ({ chapterIdOrSlug }: Props): UseChapterResult => {
   const { lang } = useTranslation();
 
   const shouldFetchData = !!chapterIdOrSlug;
