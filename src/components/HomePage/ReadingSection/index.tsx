@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
@@ -11,7 +10,6 @@ import NoGoalOrStreakCard from './NoGoalOrStreakCard';
 import styles from './ReadingSection.module.scss';
 import StreakOrGoalCard from './StreakOrGoalCard';
 
-import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
@@ -74,13 +72,7 @@ const ReadingSection: React.FC<Props> = () => {
 
   const goalsOrStreakCard =
     streak || goal ? (
-      <Card className={styles.streakCard}>
-        <div className={styles.cardOuterContainer}>
-          <div className={classNames(styles.streakCardLeft, styles.cardWithIcon)}>
-            <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
-          </div>
-        </div>
-      </Card>
+      <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
     ) : (
       <>{!isMobile() && <NoGoalOrStreakCard />}</>
     );
