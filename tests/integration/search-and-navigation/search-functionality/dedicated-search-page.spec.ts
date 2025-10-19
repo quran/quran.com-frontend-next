@@ -15,8 +15,11 @@ test.describe('Dedicated Search Page', () => {
     'Search for Juz from dedicated search page works correctly',
     { tag: ['@slow', '@search', '@page'] },
     async ({ page }) => {
-      // 1. Search for 'juz 30' and get the search results
-      const searchResults = await homePage.searchFor('juz 30');
+      // 1. Search for 'juz 30' and wait for the API response
+      const [searchResults] = await Promise.all([
+        homePage.searchFor('juz 30'),
+        page.waitForResponse((response) => response.url().includes('/search')),
+      ]);
 
       // 2. In the "search-results" div, we should see the "Juz 30" result
       await expect(searchResults.getByText('Juz 30')).toBeVisible();
@@ -45,8 +48,11 @@ test.describe('Dedicated Search Page', () => {
     'No results message is displayed for invalid searches',
     { tag: ['@fast', '@search', '@page'] },
     async ({ page }) => {
-      // Search for a random string that should yield no results
-      await homePage.goTo('/search?page=1&query=abcd');
+      // Search for a random string that should yield no results and wait for API response
+      await Promise.all([
+        homePage.goTo('/search?page=1&query=abcd'),
+        page.waitForResponse((response) => response.url().includes('/search')),
+      ]);
 
       // We should see the "No results found" message
       const searchResults = page.getByTestId('search-body-container');
@@ -58,9 +64,12 @@ test.describe('Dedicated Search Page', () => {
     'Searching for "ayatul kursi" displays 2:255 in results',
     { tag: ['@fast', '@search', '@page'] },
     async ({ page }) => {
-      // 1. Search for 'ayatul kursi' and press enter
+      // 1. Search for 'ayatul kursi', press enter and wait for API response
       await homePage.searchFor('ayatul kursi');
-      await page.locator('#searchQuery').press('Enter');
+      await Promise.all([
+        page.locator('#searchQuery').press('Enter'),
+        page.waitForResponse((response) => response.url().includes('/search')),
+      ]);
 
       // 2. In the "search-body-container" div, we should see the "2:255" result
       const searchResults = page.getByTestId('search-body-container');

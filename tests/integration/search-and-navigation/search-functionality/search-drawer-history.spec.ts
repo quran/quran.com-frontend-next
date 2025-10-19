@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
@@ -49,8 +50,11 @@ test.describe('Search Drawer History', () => {
       const searchDrawer = page.getByTestId('search-drawer-container');
       await searchDrawer.getByPlaceholder('Search').focus();
 
-      // fill the current focused element (the search input)
-      await page.keyboard.type('juz 30');
+      // fill the current focused element (the search input) and wait for API response
+      await Promise.all([
+        page.keyboard.type('juz 30'),
+        page.waitForResponse((response) => response.url().includes('/search')),
+      ]);
 
       // 2. In the "search-results" div, we should see the "Juz 30" result
       const bodyContainer = page.getByTestId('search-body-container');

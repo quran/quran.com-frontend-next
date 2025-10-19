@@ -64,22 +64,27 @@ test.describe('Highlighting', () => {
     async ({ page }) => {
       await homePage.goTo('/9');
 
-      const segments = [
-        [1, 0, 3.32], // First word is highlighted from 0 to 3.32
-        [2, 3.32, 4.21], // Second word is highlighted from 3.32 to 4.21
-        [3, 4.21, 5.08], // Third word is highlighted from 4.21 to 5.08
-      ];
-
       const firstWord = page.locator('[data-word-location="9:1:1"]');
       const secondWord = page.locator('[data-word-location="9:1:2"]');
       const thirdWord = page.locator('[data-word-location="9:1:3"]');
 
       await expect(firstWord).not.toHaveClass(/highlighted/);
 
-      // Start and immediately pause the audio playback to show the lecture settings
-      await audioUtilities.startAudioPlayback(true);
-      await audioUtilities.pauseAudioPlayback();
+      // Start audio playback and wait for the API response simultaneously
+      const [, audioResponse] = await Promise.all([
+        audioUtilities.startAudioPlayback(true),
+        page.waitForResponse((response) => response.url().includes('segments=true')),
+      ]);
+
+      // Extract segments from the API response
+      const audioData = await audioResponse.json();
+      const firstVerseTimings = audioData.audio_files[0].verse_timings[0];
+      const segments = firstVerseTimings.segments
+        .slice(0, 3)
+        .map((segment) => segment.map((time) => time / 1000)); // Take first 3 segments for testing and / 1000 to convert to seconds
+
       await audioUtilities.setAudioTime(0);
+      await audioUtilities.pauseAudioPlayback();
 
       // The first word should be highlighted and not the third
       await expect(secondWord).not.toHaveClass(/highlighted/);
