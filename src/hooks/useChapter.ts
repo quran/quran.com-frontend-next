@@ -14,7 +14,7 @@ const useChapter = ({ chapterIdOrSlug }: Props) => {
 
   const shouldFetchData = !!chapterIdOrSlug;
 
-  const { data, error, mutate } = useSWR<ChapterResponse>(
+  const { data, error, mutate, isValidating } = useSWR<ChapterResponse>(
     shouldFetchData ? makeChapterUrl(chapterIdOrSlug, lang) : null,
     fetcher,
   );
@@ -23,8 +23,7 @@ const useChapter = ({ chapterIdOrSlug }: Props) => {
     data,
     error,
     mutate,
-    chapter: data?.chapter,
-    isLoading: !error && !data,
+    isLoading: isValidating && !data,
   };
 };
 

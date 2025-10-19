@@ -45,14 +45,22 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
   const {
     data: chapterData,
     error: chapterError,
-    chapter: chapterObject,
+    isLoading: chapterIsLoading,
+    mutate: mutateChapter,
   } = useChapter({
     chapterIdOrSlug: chapter.toString(),
   });
 
-  if (error || chapterError) return <Error error={error || chapterError} onRetryClicked={mutate} />;
+  const handleRetry = () => {
+    mutate(); // Retry verse and translation data
+    mutateChapter(); // Retry chapter data
+  };
 
-  if (!data || !chapterData) return <Spinner />;
+  if (!data || chapterIsLoading) return <Spinner />;
+
+  if (error || chapterError) {
+    return <Error error={error || chapterError} onRetryClicked={handleRetry} />;
+  }
 
   return (
     <div className={styles.container}>
@@ -71,7 +79,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
             {verse.translations?.map((translation) => (
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
-                  chapterName={chapterObject.nameComplex}
+                  chapterName={chapterData.chapter.nameComplex}
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}

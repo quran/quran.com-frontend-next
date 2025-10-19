@@ -161,10 +161,7 @@ const TranslationText: React.FC<Props> = ({
   return (
     <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
       {chapterName && reference && (
-        <div
-          onClick={(event) => onTextClicked(event)}
-          className={classNames(styles.text, styles[langData.font])}
-        >
+        <div className={classNames(styles.text, styles[langData.font])}>
           {`"${text}"`}{' '}
           <a href={`/${reference}`} className={styles.referenceLink}>
             {`${chapterName} ${reference}`}
