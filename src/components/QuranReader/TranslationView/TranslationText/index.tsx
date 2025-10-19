@@ -162,13 +162,19 @@ const TranslationText: React.FC<Props> = ({
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
     <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
-      {chapterName && reference && (
+      {chapterName && reference ? (
         <div className={classNames(styles.text, styles[langData.font])}>
           &quot;{text}&quot;{' '}
           <Link href={getVerseUrl(reference)} className={styles.referenceLink}>
             {`${chapterName} ${reference}`}
           </Link>
         </div>
+      ) : (
+        <div
+          onClick={(event) => onTextClicked(event)}
+          className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
       )}
       {shouldShowFootnote && (
         <FootnoteText
