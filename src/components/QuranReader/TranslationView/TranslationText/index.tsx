@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
+/* eslint-disable max-lines */
 
 import React, { MouseEvent, useState } from 'react';
 
@@ -21,6 +22,8 @@ interface Props {
   text: string;
   resourceName?: string;
   languageId: number;
+  reference?: string;
+  chapterName?: string;
 }
 
 const TranslationText: React.FC<Props> = ({
@@ -28,6 +31,8 @@ const TranslationText: React.FC<Props> = ({
   text,
   languageId,
   resourceName,
+  reference,
+  chapterName,
 }) => {
   const { t } = useTranslation('quran-reader');
   const [isLoading, setIsLoading] = useState(false);
@@ -155,11 +160,17 @@ const TranslationText: React.FC<Props> = ({
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
     <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
-      <div
-        onClick={(event) => onTextClicked(event)}
-        className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
+      {chapterName && reference && (
+        <div
+          onClick={(event) => onTextClicked(event)}
+          className={classNames(styles.text, styles[langData.font])}
+        >
+          {`"${text}"`}{' '}
+          <a href={`/${reference}`} className={styles.referenceLink}>
+            {`${chapterName} ${reference}`}
+          </a>
+        </div>
+      )}
       {shouldShowFootnote && (
         <FootnoteText
           footnoteName={activeFootnoteName || undefined}

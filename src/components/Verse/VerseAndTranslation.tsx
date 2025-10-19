@@ -6,6 +6,7 @@ import styles from './VerseAndTranslation.module.scss';
 import Error from '@/components/Error';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import Spinner from '@/dls/Spinner/Spinner';
+import useChapter from '@/hooks/useChapter';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
 import { getVerseWords } from '@/utils/verse';
@@ -32,37 +33,47 @@ interface Props {
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
   // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
-  const { fixedFontScale, ...restProps } = props;
+  const { fixedFontScale, chapter, ...restProps } = props;
   const {
     data,
     error,
     mutate,
     translationFontScale: reduxTranslationFontScale,
     quranTextFontScale: reduxQuranTextFontScale,
-  } = useVerseAndTranslation(restProps);
-  const { arabicVerseClassName, translationClassName, quranFont } = props;
+  } = useVerseAndTranslation({ ...restProps, chapter });
 
-  if (error) return <Error error={error} onRetryClicked={mutate} />;
+  const {
+    data: chapterData,
+    error: chapterError,
+    chapter: chapterObject,
+  } = useChapter({
+    chapterIdOrSlug: chapter.toString(),
+  });
 
-  if (!data) return <Spinner />;
+  if (error || chapterError) return <Error error={error || chapterError} onRetryClicked={mutate} />;
+
+  if (!data || !chapterData) return <Spinner />;
 
   return (
     <div className={styles.container}>
       {data?.verses?.map((verse) => (
         <div key={verse.verseKey} className={styles.verseContainer}>
-          <div className={classNames(styles.arabicVerseContainer, arabicVerseClassName)}>
+          <div className={classNames(styles.arabicVerseContainer, restProps.arabicVerseClassName)}>
             <PlainVerseText
-              quranFont={quranFont}
+              quranFont={restProps.quranFont}
               words={getVerseWords(verse)}
               fontScale={fixedFontScale ?? reduxQuranTextFontScale}
             />
           </div>
-          <div className={classNames(styles.translationsListContainer, translationClassName)}>
+          <div
+            className={classNames(styles.translationsListContainer, restProps.translationClassName)}
+          >
             {verse.translations?.map((translation) => (
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
+                  chapterName={chapterObject.nameComplex}
+                  reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
-                  resourceName={translation.resourceName}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}
                   text={translation.text}
                 />

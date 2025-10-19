@@ -7,6 +7,7 @@ $translation-line-height: 1.5;
 .text {
   @include footnote.footnote-styling;
   letter-spacing: 0;
+  text-align: center;
   line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
 }
@@ -46,4 +47,13 @@ $translation-line-height: 1.5;
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);
   font-size: var(--font-size-xsmall);
+}
+
+.referenceLink {
+  color: var(--color-text-link);
+  text-decoration: none;
+  
+  &:hover {
+    opacity: var(--opacity-50);
+  }
 }

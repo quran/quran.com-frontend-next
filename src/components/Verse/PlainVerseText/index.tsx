@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import SeoTextForVerse from '../SeoTextForVerse';
@@ -40,6 +41,7 @@ const PlainVerseText: React.FC<Props> = ({
   fontScale,
   quranFont: quranFontFromProps,
 }: Props): JSX.Element => {
+  const { t } = useTranslation('home');
   const {
     quranFont: quranFontFromStore,
     quranTextFontScale,
@@ -60,6 +62,7 @@ const PlainVerseText: React.FC<Props> = ({
           styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
+        <p className={styles.verseTitleText}>{t('quran-in-year-verse-title')}</p>
         <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
           {words?.map((word) => {
             if (isQcfFont) {

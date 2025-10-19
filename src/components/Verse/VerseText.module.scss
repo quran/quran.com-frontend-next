@@ -3,6 +3,14 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
+.verseTitleText {
+  font-size: var(--font-size-large);
+  color: var(--color-primary-medium);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-medium);
+  line-height: normal;
+}
+
 .verseText {
   display: flex;
   /**
@@ -10,12 +18,17 @@
     and its content is wrapped across multiple lines.
     {@see https://quran.com/2:74} on mobile with Inline word by word translation enabled.
   **/
-  align-items: flex-start;
+  // align-items: flex-start;
+  align-items: center; 
+  justify-content: center;
   line-height: var(--line-height);
 }
 .verseTextContainer {
-  display: block;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   direction: rtl;
+  gap: var(--spacing-medium);
 }
 
 .chapterHeaderContainer {
