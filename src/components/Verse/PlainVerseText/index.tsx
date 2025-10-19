@@ -23,6 +23,7 @@ type Props = {
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
   fontScale?: number;
+  shouldShowTitle?: boolean;
   quranFont?: QuranFont;
 };
 
@@ -38,6 +39,7 @@ const PlainVerseText: React.FC<Props> = ({
   words,
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
+  shouldShowTitle = false,
   fontScale,
   quranFont: quranFontFromProps,
 }: Props): JSX.Element => {
@@ -62,7 +64,9 @@ const PlainVerseText: React.FC<Props> = ({
           styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
-        <p className={styles.verseTitleText}>{t('quran-in-year-verse-title')}</p>
+        {shouldShowTitle && (
+          <p className={styles.verseTitleText}>{t('quran-in-year-verse-title')}</p>
+        )}
         <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
           {words?.map((word) => {
             if (isQcfFont) {

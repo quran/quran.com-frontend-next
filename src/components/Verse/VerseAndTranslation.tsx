@@ -68,6 +68,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, restProps.arabicVerseClassName)}>
             <PlainVerseText
+              shouldShowTitle
               quranFont={restProps.quranFont}
               words={getVerseWords(verse)}
               fontScale={fixedFontScale ?? reduxQuranTextFontScale}
