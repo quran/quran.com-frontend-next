@@ -58,7 +58,7 @@
   "share-to-qr": "Bagikan ke QuranReflect.com",
   "share-to-qr-desc": "Bagikan sebagai <b> {{name}} </b> . Pembacanya adalah <b> pengguna QuranReflect </b>",
   "update-publish-failed": "Catatan berhasil diperbarui tetapi gagal dipublikasikan",
-  "update-reflection": "Refleksi Pembaruan",
+  "update-reflection": "Perbarui Refleksi",
   "update-success": "Catatan berhasil diperbarui",
   "view-on-qr": "Lihat di QuranReflect"
 }
