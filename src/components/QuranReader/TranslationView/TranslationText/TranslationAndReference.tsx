@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
@@ -31,19 +33,9 @@ const TranslationAndReference: React.FC<Props> = ({
   lang,
 }) => {
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      onClick={(event) => onTextClicked(event)}
-      onKeyDown={(event) => {
-        // Enable basic keyboard accessibility for activation without changing click behavior
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-        }
-      }}
-      className={classNames(styles.text, fontClass, !shouldShowReference && styles[direction])}
-    >
+    <div className={classNames(styles.text, fontClass, !shouldShowReference && styles[direction])}>
       <div
+        onClick={(event) => onTextClicked(event)}
         className={classNames(!shouldShowReference && styles.innerText)}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: shouldShowReference ? `"${text}"` : text }}
