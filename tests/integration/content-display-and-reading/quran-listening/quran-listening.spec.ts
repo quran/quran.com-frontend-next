@@ -23,7 +23,8 @@ test(
   async ({ page }) => {
     const playButton = page.getByTestId('listen-button');
     await expect(playButton).toBeVisible();
-    await audioUtilities.startAudioPlayback(true);
+    await playButton.click();
+    await audioUtilities.waitForAudioPlayback();
 
     // The button should change to "Pause"
     const pauseButton = page.getByTestId('pause-button');
@@ -82,14 +83,7 @@ test.describe('Highlighting', () => {
         .slice(0, 3)
         .map((segment) => segment.map((time) => time / 1000)); // Take first 3 segments for testing and / 1000 to convert to seconds
 
-      // Goes to the start of the second segment
-      await audioUtilities.setAudioTime(segments[0][2] + 0.1);
-
-      await page.waitForTimeout(1000); // Make sure the data is ready
-
-      // Now, go back to the start
       await audioUtilities.setAudioTime(0);
-      await page.waitForTimeout(1000); // Wait a bit for the highlight to apply
       await audioUtilities.pauseAudioPlayback();
 
       // The first word should be highlighted and not the third
