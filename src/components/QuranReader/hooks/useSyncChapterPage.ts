@@ -17,6 +17,8 @@ import { QuranReaderDataType } from '@/types/QuranReader';
 import { useGetFirstPageNumberForChapter } from '@/utils/chapter-pages';
 import { VersesResponse } from 'types/ApiResponses';
 
+const FIRST_VERSE_SUFFIX = ':1';
+
 /**
  * A hook that synchronizes the chapter and page in the lastReadVerse Redux state.
  * When the chapter changes, it updates the page to the first page of that chapter. This must
@@ -50,7 +52,7 @@ const useSyncChapterPage = (initialData?: VersesResponse, shouldSync = true): vo
       return;
     }
 
-    const isFirstVerseOfChapter = lastReadVerseKey?.verseKey?.endsWith(':1');
+    const isFirstVerseOfChapter = lastReadVerseKey?.verseKey?.endsWith(FIRST_VERSE_SUFFIX);
     const isPageMissing = !lastReadVerseKey?.page;
 
     if (!isPageMissing && !isFirstVerseOfChapter) {
@@ -67,7 +69,6 @@ const useSyncChapterPage = (initialData?: VersesResponse, shouldSync = true): vo
         }),
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- chaptersData is from context and stable; omitting to prevent unnecessary re-renders
   }, [shouldSync, firstPageNumber, lastReadVerseKey, chaptersData, dispatch]);
 };
 

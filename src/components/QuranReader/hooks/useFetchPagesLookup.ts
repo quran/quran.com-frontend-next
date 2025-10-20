@@ -53,6 +53,7 @@ const useFetchPagesLookup = (
       ? {
           fallbackData: initialData?.pagesLookup,
           revalidateOnMount: !isUsingDefaultFont,
+          revalidateIfStale: true,
         }
       : undefined,
   );
@@ -60,10 +61,12 @@ const useFetchPagesLookup = (
   const resolvedData = shouldFetch ? data ?? initialData?.pagesLookup : initialData?.pagesLookup;
   const lookupRange: LookupRange = resolvedData?.lookupRange ?? { from: '', to: '' };
 
+  const pagesVersesRange = (resolvedData?.pages ?? {}) as Record<number, LookupRecord>;
+
   return {
     data: resolvedData,
     pagesCount: resolvedData?.totalPage ?? 0,
-    pagesVersesRange: (resolvedData?.pages ?? {}) as Record<number, LookupRecord>,
+    pagesVersesRange,
     lookupRange,
     hasError: shouldFetch ? !!error : false,
     isLoading: shouldFetch ? isValidating && !resolvedData : false,
