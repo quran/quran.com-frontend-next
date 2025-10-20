@@ -2,24 +2,23 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
-/* eslint-disable max-lines */
 
 import React, { MouseEvent, useState } from 'react';
 
 import classNames from 'classnames';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
-import FootnoteText from './FootnoteText';
+import FootnoteComponent from './Footnote';
+import TranslationAndReference from './TranslationAndReference';
 import styles from './TranslationText.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById } from '@/utils/locale';
-import { getVerseUrl } from '@/utils/verse';
 import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 
 interface Props {
+  shouldShowReference?: boolean;
   translationFontScale: number;
   text: string;
   resourceName?: string;
@@ -29,6 +28,7 @@ interface Props {
 }
 
 const TranslationText: React.FC<Props> = ({
+  shouldShowReference = false,
   translationFontScale,
   text,
   languageId,
@@ -36,7 +36,7 @@ const TranslationText: React.FC<Props> = ({
   reference,
   chapterName,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
@@ -159,46 +159,31 @@ const TranslationText: React.FC<Props> = ({
   const hideFootnote = () => setShowFootnote(false);
   const langData = getLanguageDataById(languageId);
 
-  const shouldShowFootnote = showFootnote && (footnote || isLoading);
+  const shouldShowFootnote = showFootnote && (footnote !== null || isLoading);
   return (
     <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
-      {chapterName && reference ? (
-        <div className={classNames(styles.text, styles[langData.font])}>
-          &quot;{text}&quot;{' '}
-          <Link href={getVerseUrl(reference)} className={styles.referenceLink}>
-            {`${chapterName} ${reference}`}
-          </Link>
-        </div>
-      ) : (
-        <div
-          onClick={(event) => onTextClicked(event)}
-          className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-      )}
-      {shouldShowFootnote && (
-        <FootnoteText
-          footnoteName={activeFootnoteName || undefined}
-          footnote={footnote}
-          isLoading={isLoading}
-          onCloseClicked={() => {
-            logButtonClick('translation_footnote_close');
-            if (isLoading) {
-              hideFootnote();
-            } else {
-              resetFootnote();
-            }
-          }}
-          onTextClicked={(event) => onTextClicked(event, true)}
-        />
-      )}
-      {subFootnote && (
-        <FootnoteText
-          footnoteName={activeSubFootnoteName || undefined}
-          footnote={subFootnote}
-          onCloseClicked={resetSubFootnote}
-        />
-      )}
+      <TranslationAndReference
+        text={text}
+        fontClass={styles[langData.font]}
+        direction={langData.direction}
+        onTextClicked={onTextClicked}
+        shouldShowReference={shouldShowReference}
+        chapterName={chapterName}
+        reference={reference}
+        lang={lang}
+      />
+      <FootnoteComponent
+        shouldShowFootnote={shouldShowFootnote}
+        footnote={footnote}
+        subFootnote={subFootnote}
+        isLoading={isLoading}
+        activeFootnoteName={activeFootnoteName}
+        activeSubFootnoteName={activeSubFootnoteName}
+        onTextClicked={onTextClicked}
+        onHideFootnote={hideFootnote}
+        onResetFootnote={resetFootnote}
+        onResetSubFootnote={resetSubFootnote}
+      />
       {resourceName && (
         <p
           className={classNames(

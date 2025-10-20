@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,10 +7,11 @@ import styles from './VerseAndTranslation.module.scss';
 
 import Error from '@/components/Error';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
+import DataContext from '@/contexts/DataContext';
 import Spinner from '@/dls/Spinner/Spinner';
-import useChapter from '@/hooks/useChapter';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
+import { getChapterData } from '@/utils/chapter';
 import { getVerseWords } from '@/utils/verse';
 
 /**
@@ -50,6 +51,7 @@ interface Props {
   chapter: number;
   from: number;
   to: number;
+  shouldShowTitleAndReference?: boolean;
   quranFont?: QuranFont;
   translationsLimit?: number;
   arabicVerseClassName?: string;
@@ -58,6 +60,7 @@ interface Props {
 }
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
+  const chaptersData = useContext(DataContext);
   // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
   const { fixedFontScale, chapter, ...restProps } = props;
   const {
@@ -67,26 +70,16 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
     translationFontScale: reduxTranslationFontScale,
     quranTextFontScale: reduxQuranTextFontScale,
   } = useVerseAndTranslation({ ...restProps, chapter });
+  const chapterData = useMemo(
+    () => getChapterData(chaptersData, chapter?.toString()),
+    [chaptersData, chapter],
+  );
 
-  const {
-    data: chapterData,
-    error: chapterError,
-    isLoading: chapterIsLoading,
-    mutate: mutateChapter,
-  } = useChapter({
-    chapterIdOrSlug: chapter.toString(),
-  });
-
-  const handleRetry = useCallback(() => {
-    mutate();
-    mutateChapter();
-  }, [mutate, mutateChapter]);
-
-  if (error || chapterError) {
-    return <Error error={error || chapterError} onRetryClicked={handleRetry} />;
+  if (error) {
+    return <Error error={error} onRetryClicked={mutate} />;
   }
 
-  if (!data || chapterIsLoading) return <Spinner />;
+  if (!data) return <Spinner />;
 
   return (
     <div className={styles.container}>
@@ -94,7 +87,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, restProps.arabicVerseClassName)}>
             <PlainVerseText
-              shouldShowTitle
+              shouldShowTitle={restProps.shouldShowTitleAndReference ?? false}
               quranFont={restProps.quranFont}
               words={getVerseWords(verse)}
               fontScale={fixedFontScale ?? reduxQuranTextFontScale}
@@ -106,7 +99,8 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
             {verse.translations?.map((translation) => (
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
-                  chapterName={chapterData?.chapter?.nameComplex}
+                  shouldShowReference={restProps.shouldShowTitleAndReference ?? false}
+                  chapterName={chapterData?.transliteratedName}
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}
                   translationFontScale={fixedFontScale ?? reduxTranslationFontScale}

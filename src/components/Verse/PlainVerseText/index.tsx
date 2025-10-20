@@ -67,7 +67,14 @@ const PlainVerseText: React.FC<Props> = ({
         {shouldShowTitle && (
           <p className={styles.verseTitleText}>{t('quran-in-year-verse-title')}</p>
         )}
-        <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
+        <div
+          className={classNames(
+            styles.verseText,
+            styles.verseTextWrap,
+            shouldShowTitle ? styles.verseTextCenter : styles.verseTextStart,
+          )}
+          translate="no"
+        >
           {words?.map((word) => {
             if (isQcfFont) {
               return (

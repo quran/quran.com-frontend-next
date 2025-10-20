@@ -12,6 +12,10 @@ $translation-line-height: 1.5;
   padding-block-end: var(--spacing-micro);
 }
 
+.innerText {
+  display: inline;
+}
+
 @include utility.generate-font-scales("translation");
 
 /*
