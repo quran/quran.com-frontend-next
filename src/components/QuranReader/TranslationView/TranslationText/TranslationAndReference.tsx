@@ -36,7 +36,7 @@ const TranslationAndReference: React.FC<Props> = ({
     <div className={classNames(styles.text, fontClass, !shouldShowReference && styles[direction])}>
       <div
         onClick={(event) => onTextClicked(event)}
-        className={classNames(!shouldShowReference && styles.innerText)}
+        className={classNames(shouldShowReference && styles.innerText)}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: shouldShowReference ? `"${text}"` : text }}
       />
@@ -44,11 +44,13 @@ const TranslationAndReference: React.FC<Props> = ({
         <>
           {' '}
           <Link
+            dir={direction}
             onClick={() => {
-              logButtonClick('translation_reference_open');
+              logButtonClick('translation_reference_open', { reference, chapterName, lang });
             }}
             href={getChapterWithStartingVerseUrl(reference)}
             className={styles.referenceLink}
+            aria-label={`${chapterName} ${toLocalizedVerseKey(reference, lang)}`}
           >
             {`${chapterName} ${toLocalizedVerseKey(reference, lang)}`}
           </Link>
