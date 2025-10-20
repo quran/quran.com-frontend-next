@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect, useContext, useRef } from 'react';
+import { useMemo, useState, useEffect, useContext } from 'react';
 
-import { useSelector } from '@xstate/react';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
@@ -13,6 +14,13 @@ import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { RootState } from '@/redux/RootState';
+import {
+  setCustomRange,
+  setRepeatCounts,
+  selectCustomRangeForSurah,
+  selectRepeatCounts,
+} from '@/redux/slices/repeatSettings';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -33,12 +41,6 @@ type RepeatAudioModalProps = {
   selectedVerseKey?: string;
 };
 
-type SavedRepeatSettings = {
-  mode: RepetitionMode;
-  from: string;
-  to: string;
-};
-
 const RepeatAudioModal = ({
   chapterId,
   isOpen,
@@ -47,16 +49,22 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
+  const dispatch = useDispatch();
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const repeatActor = useXstateSelector(audioService, (state) => state.context.repeatActor);
   const repeatState = repeatActor?.getSnapshot();
   const repeatSettings = repeatState?.context;
 
-  const savedSettingsRef = useRef<{ [surahId: string]: SavedRepeatSettings }>({});
+  // const savedSettingsRef = useRef<{ [surahId: string]: SavedRepeatSettings }>({});
+
+  const savedCustomRange = useSelector((state: RootState) =>
+    selectCustomRangeForSurah(state, chapterId),
+  );
+  const savedRepeatCounts = useSelector(selectRepeatCounts);
 
   const [lastOpenedChapter, setLastOpenedChapter] = useState(chapterId);
-  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
+  const isInRepeatMode = useXstateSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
   const {
     actions: { onSettingsChangeWithoutDispatch },
@@ -92,34 +100,32 @@ const RepeatAudioModal = ({
   );
 
   const [repetitionMode, setRepetitionMode] = useState(() => {
-    const saved = savedSettingsRef.current[chapterId];
-    return saved?.mode || defaultRepetitionMode;
+    return savedCustomRange?.mode || defaultRepetitionMode;
   });
 
   const [verseRepetition, setVerseRepetition] = useState(() => {
-    const saved = savedSettingsRef.current[chapterId];
-
     return {
-      repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
-      repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
-      from: saved?.from || selectedVerseKey || firstVerseKeyInThisChapter,
-      to: saved?.to || selectedVerseKey || lastVerseKeyInThisChapter,
-      delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
+      repeatRange:
+        savedRepeatCounts?.repeatRange ?? repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
+      repeatEachVerse:
+        savedRepeatCounts?.repeatEachVerse ?? repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
+      from: savedCustomRange?.from || selectedVerseKey || firstVerseKeyInThisChapter,
+      to: savedCustomRange?.to || selectedVerseKey || lastVerseKeyInThisChapter,
+      delayMultiplier: savedRepeatCounts?.delayMultiplier ?? repeatSettings?.delayMultiplier ?? 1,
     };
   });
 
-  // reset verseRepetition's `to` and `from`, when chapter changed
   useEffect(() => {
     if (chapterId !== lastOpenedChapter) {
-      const saved = savedSettingsRef.current[chapterId];
+      const newChapterRange = savedCustomRange;
 
       setVerseRepetition((prevVerseRepetition) => ({
         ...prevVerseRepetition,
-        from: saved?.from || firstVerseKeyInThisChapter,
-        to: saved?.to || lastVerseKeyInThisChapter,
+        from: newChapterRange?.from || firstVerseKeyInThisChapter,
+        to: newChapterRange?.to || lastVerseKeyInThisChapter,
       }));
 
-      setRepetitionMode(saved?.mode || defaultRepetitionMode);
+      setRepetitionMode(newChapterRange?.mode || defaultRepetitionMode);
       setLastOpenedChapter(chapterId);
     }
   }, [
@@ -128,14 +134,26 @@ const RepeatAudioModal = ({
     lastVerseKeyInThisChapter,
     lastOpenedChapter,
     defaultRepetitionMode,
+    savedCustomRange,
   ]);
 
   const play = () => {
-    savedSettingsRef.current[chapterId] = {
-      mode: repetitionMode,
-      from: verseRepetition.from,
-      to: verseRepetition.to,
-    };
+    dispatch(
+      setCustomRange({
+        surahId: chapterId,
+        mode: repetitionMode,
+        from: verseRepetition.from,
+        to: verseRepetition.to,
+      }),
+    );
+
+    dispatch(
+      setRepeatCounts({
+        repeatRange: verseRepetition.repeatRange,
+        repeatEachVerse: verseRepetition.repeatEachVerse,
+        delayMultiplier: verseRepetition.delayMultiplier,
+      }),
+    );
 
     audioService.send({
       type: 'SET_REPEAT_SETTING',
@@ -189,12 +207,11 @@ const RepeatAudioModal = ({
       }
 
       if (mode === RepetitionMode.Range) {
-        const saved = savedSettingsRef.current[chapterId];
-        if (saved) {
+        if (savedCustomRange) {
           return {
             ...prevVerseRepetition,
-            from: saved.from,
-            to: saved.to,
+            from: savedCustomRange.from,
+            to: savedCustomRange.to,
           };
         }
       }
@@ -220,11 +237,14 @@ const RepeatAudioModal = ({
     const updatedRepetition = { ...verseRepetition, ...range };
     setVerseRepetition(updatedRepetition);
 
-    savedSettingsRef.current[chapterId] = {
-      mode: RepetitionMode.Range,
-      from: updatedRepetition.from,
-      to: updatedRepetition.to,
-    };
+    dispatch(
+      setCustomRange({
+        surahId: chapterId,
+        mode: repetitionMode,
+        from: updatedRepetition.from,
+        to: updatedRepetition.to,
+      }),
+    );
   };
 
   const onRepeatRangeChange = (val) => {

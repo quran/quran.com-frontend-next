@@ -28,6 +28,7 @@ enum SliceName {
   ONBOARDING = 'onboarding',
   MEDIA_MAKER = 'mediaMaker',
   MICROPHONE = 'microphone',
+  REPEAT_SETTINGS = 'repeatSettings',
 }
 
 export default SliceName;
