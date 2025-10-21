@@ -68,11 +68,17 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButton: t('create-my-goal'),
+    shouldShowPrefixIcon: true,
+  };
+
   return (
     <>
       {isBannerVisible && (
         <div className={styles.bannerContainerTop}>
-          <Banner text={t('stay-on-track')} ctaButton={t('create-my-goal')} shouldShowPrefixIcon />
+          <Banner {...bannerProps} />
         </div>
       )}
       <div className={styles.itemsContainer}>
@@ -95,11 +101,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         </div>
         {isBannerVisible && (
           <div className={styles.bannerContainerCenter}>
-            <Banner
-              text={t('stay-on-track')}
-              ctaButton={t('create-my-goal')}
-              shouldShowPrefixIcon
-            />
+            <Banner {...bannerProps} />
           </div>
         )}
         <div className={styles.centerVertically}>

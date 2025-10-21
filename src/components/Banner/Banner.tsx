@@ -25,7 +25,9 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
   const hasGoal = !!goal;
 
   const link =
-    !isLoggedIn || !hasGoal ? getReadingGoalNavigationUrl() : getReadingGoalProgressNavigationUrl();
+    !isLoggedIn() || !hasGoal
+      ? getReadingGoalNavigationUrl()
+      : getReadingGoalProgressNavigationUrl();
 
   return (
     <div
