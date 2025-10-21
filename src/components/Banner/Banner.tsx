@@ -21,11 +21,11 @@ type BannerProps = {
 
 const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
   const isBannerVisible = useSelector(selectIsBannerVisible);
-  const { goal } = useGetStreakWithMetadata();
+  const { goal, isLoading } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
 
   const link =
-    !isLoggedIn() || !hasGoal
+    !isLoggedIn() || (!hasGoal && !isLoading)
       ? getReadingGoalNavigationUrl()
       : getReadingGoalProgressNavigationUrl();
 
