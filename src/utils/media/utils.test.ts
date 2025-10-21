@@ -137,7 +137,7 @@ describe('getCurrentRangesAudioData', () => {
     const result = getCurrentRangesAudioData(chapterAudioData, 3, 4);
 
     expect(result.verseTimings).toBeDefined();
-    const verseTimings = result.verseTimings as Array<{
+    const verseTimings = result.verseTimings as unknown as Array<{
       timestampFrom: number;
       timestampTo: number;
       normalizedStart: number;
@@ -578,7 +578,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       previewMode: PreviewMode.DISABLED,
       type: MediaType.VIDEO,
       chaptersDataArabic: '',
-    } as GenerateMediaFileRequest;
+    } as unknown as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 
@@ -953,7 +953,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       type: MediaType.IMAGE,
       chaptersDataArabic: '',
       previewMode: PreviewMode.DISABLED,
-    } as GenerateMediaFileRequest;
+    } as unknown as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 
