@@ -8,6 +8,10 @@ import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { isLoggedIn } from '@/utils/auth/login';
+import {
+  getReadingGoalNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
 type BannerProps = {
   text: string;
@@ -20,7 +24,8 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
   const { goal } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
 
-  const link = !isLoggedIn || !hasGoal ? '/reading-goal' : '/reading-goal/progress';
+  const link =
+    !isLoggedIn || !hasGoal ? getReadingGoalNavigationUrl() : getReadingGoalProgressNavigationUrl();
 
   return (
     <div
