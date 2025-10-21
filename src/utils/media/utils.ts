@@ -64,22 +64,6 @@ export const getVideosArray = () => {
 };
 
 /**
- * Get the total duration of the verse timings by
- * subtracting the end time from the start time.
- * We could have used the duration field in the verse timing
- * but BE data is not consistent and sometimes the duration is null.
- *
- * @param {VerseTiming[]} verseTimings
- * @returns {number}
- */
-const getVerseTimingsDuration = (verseTimings: VerseTiming[]): number => {
-  return verseTimings.reduce(
-    (acc, verseTiming) => acc + Math.abs(verseTiming.timestampTo - verseTiming.timestampFrom),
-    0,
-  );
-};
-
-/**
  * Get the audio data for the current range of verses
  * out of the whole chapter audio data.
  *
@@ -95,32 +79,42 @@ export const getCurrentRangesAudioData = (
 ): AudioData => {
   const fromVerseIndex = fromVerseNumber - 1;
   const toVerseIndex = toVerseNumber - 1;
-  // Remove the audio data outside the range of from and to verse
-  const removedAudioBeforeStartVerse = chapterAudioData.verseTimings.slice(0, fromVerseIndex);
-  const removedAudioAfterEndVerse = chapterAudioData.verseTimings.slice(toVerseIndex + 1);
-  const removedDurationBeforeStartVerse = getVerseTimingsDuration(removedAudioBeforeStartVerse);
-  const removedDurationAfterStartVerse = getVerseTimingsDuration(removedAudioAfterEndVerse);
-  const rangesChapterData = {
-    ...chapterAudioData,
-    verseTimings: chapterAudioData.verseTimings
-      .slice(fromVerseIndex, toVerseIndex + 1)
-      .map((timing) => ({
-        ...timing,
-        normalizedStart: timing.timestampFrom,
-        normalizedEnd: timing.timestampTo,
-        timestampFrom: timing.timestampFrom - removedDurationBeforeStartVerse,
-        timestampTo: timing.timestampTo - removedDurationBeforeStartVerse,
-      })),
-  };
-  // new total duration of the audio is the duration of the audio minus the removed duration
-  rangesChapterData.duration =
-    chapterAudioData.duration - (removedDurationBeforeStartVerse + removedDurationAfterStartVerse);
 
-  return rangesChapterData;
+  const firstRangeTiming = chapterAudioData.verseTimings[fromVerseIndex];
+  const lastRangeTiming = chapterAudioData.verseTimings[toVerseIndex];
+
+  if (!firstRangeTiming || !lastRangeTiming) {
+    return chapterAudioData;
+  }
+
+  const rangeStartOffset = firstRangeTiming.timestampFrom;
+  const verseTimingsInRange = chapterAudioData.verseTimings
+    .slice(fromVerseIndex, toVerseIndex + 1)
+    .map((timing) => ({
+      ...timing,
+      normalizedStart: timing.timestampFrom,
+      normalizedEnd: timing.timestampTo,
+      timestampFrom: timing.timestampFrom - rangeStartOffset,
+      timestampTo: timing.timestampTo - rangeStartOffset,
+    }));
+
+  const normalizedLastTiming = verseTimingsInRange[verseTimingsInRange.length - 1];
+  const normalizedDuration = normalizedLastTiming?.timestampTo ?? 0;
+  const duration = normalizedDuration > 0 ? normalizedDuration : chapterAudioData.duration;
+
+  return {
+    ...chapterAudioData,
+    duration,
+    verseTimings: verseTimingsInRange,
+  };
 };
 
 export const getDurationInFrames = (timestamps: Timestamp[]) => {
-  const durationInFrames = timestamps.reduce((acc, current) => acc + current.durationInFrames, 0);
+  const durationInFrames = timestamps.reduce((acc, current, index) => {
+    const start = index === 0 ? 0 : current.start ?? 0;
+    const duration = current.durationInFrames ?? 0;
+    return Math.max(acc, start + duration);
+  }, 0);
   return durationInFrames <= 0 ? 1 : durationInFrames;
 };
 
