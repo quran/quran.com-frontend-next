@@ -14,7 +14,6 @@ import ChaptersData from '@/types/ChaptersData';
 import GenerateMediaFileRequest, { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
-import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
   VIDEO_LANDSCAPE_HEIGHT,
@@ -110,11 +109,13 @@ export const getCurrentRangesAudioData = (
 };
 
 export const getDurationInFrames = (timestamps: Timestamp[]) => {
-  const durationInFrames = timestamps.reduce((acc, current, index) => {
-    const start = index === 0 ? 0 : current.start ?? 0;
+  let durationInFrames = 0;
+  for (let i = 0; i < timestamps.length; i += 1) {
+    const current = timestamps[i];
+    const start = i === 0 ? 0 : current.start ?? 0;
     const duration = current.durationInFrames ?? 0;
-    return Math.max(acc, start + duration);
-  }, 0);
+    durationInFrames = Math.max(durationInFrames, start + duration);
+  }
   return durationInFrames <= 0 ? 1 : durationInFrames;
 };
 
