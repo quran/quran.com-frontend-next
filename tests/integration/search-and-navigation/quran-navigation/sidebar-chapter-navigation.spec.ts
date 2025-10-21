@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
@@ -27,6 +28,38 @@ test.describe('Navigation Sidebar Operations', () => {
 
       // 4. Make sure the Navigate Quran drawer is no longer visible after closing it
       await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
+    },
+  );
+
+  test(
+    'Navigation drawer should only appear on Quran reader pages',
+    { tag: ['@slow', '@drawer'] },
+    async ({ page }) => {
+      // 1. Make sure the navigation drawer is not visible by default
+      await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
+
+      // 2. Go to a a surah page
+      await homePage.goTo('/2');
+
+      // 3. Open the navigation drawer
+      await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
+
+      // 4. Make sure the navigation drawer is visible
+      await expect(page.getByTestId('sidebar-navigation')).toBeVisible();
+
+      // 5. Go to the homepage
+      await homePage.goTo('/');
+      // 6. Make sure the navigation drawer is not visible on the homepage
+      await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
+      // 7. Go to the media page
+      await homePage.goTo('/media');
+      // 8. Make sure the navigation drawer is not visible on the media page
+      await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
+
+      // 9. Go back to a Quran reader page
+      await homePage.goTo('/juz/3');
+      // 10. Make sure the navigation drawer is visible on the Quran reader page
+      await expect(page.getByTestId('sidebar-navigation')).toBeVisible();
     },
   );
 });
