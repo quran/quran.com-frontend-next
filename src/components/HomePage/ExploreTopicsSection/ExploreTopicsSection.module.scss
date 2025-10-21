@@ -23,6 +23,7 @@
     flex-direction: row;
     align-items: center;
     color: var(--color-text-default-new);
+    white-space: nowrap;
 
     @include breakpoints.tablet {
         font-size: var(--font-size-large-px);
@@ -34,13 +35,17 @@
     width: 100%;
     gap: var(--spacing-small);
     flex-wrap: nowrap;
+
     @include breakpoints.smallerThanTablet {
         gap: var(--spacing-xxsmall);
     }
-    overflow-x: scroll;
+
+    overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
         display: none;
