@@ -1,5 +1,10 @@
 @use "src/styles/breakpoints";
 
+.outerStreakCard {
+    display: block;
+    width: 100%;
+}
+
 .streakCard {
     width: 100%;
     display: flex;
