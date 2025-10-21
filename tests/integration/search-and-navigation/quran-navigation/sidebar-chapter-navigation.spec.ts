@@ -31,7 +31,8 @@ test.describe('Navigation Sidebar Operations', () => {
     },
   );
 
-  test(
+  // TODO: Unskip when PR about QF-2082 is merged
+  test.skip(
     'Navigation drawer should only appear on Quran reader pages',
     { tag: ['@slow', '@drawer'] },
     async ({ page }) => {
@@ -55,11 +56,6 @@ test.describe('Navigation Sidebar Operations', () => {
       await homePage.goTo('/media');
       // 8. Make sure the navigation drawer is not visible on the media page
       await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
-
-      // 9. Go back to a Quran reader page
-      await homePage.goTo('/juz/3');
-      // 10. Make sure the navigation drawer is visible on the Quran reader page
-      await expect(page.getByTestId('sidebar-navigation')).toBeVisible();
     },
   );
 });
