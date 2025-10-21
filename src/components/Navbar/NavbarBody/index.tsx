@@ -3,7 +3,7 @@ import { memo, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
@@ -24,7 +24,10 @@ import {
   setIsSettingsDrawerOpen,
   setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
-import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
+import {
+  selectIsSidebarNavigationVisible,
+  setIsSidebarNavigationVisible,
+} from '@/redux/slices/QuranReader/sidebarNavigation';
 import { logEvent } from '@/utils/eventLogger';
 
 const SidebarNavigation = dynamic(
@@ -59,13 +62,17 @@ const NavbarBody: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const isHomePage = router.pathname === '/';
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
 
   useEffect(() => {
-    if (!isQuranReaderRoute) {
-      // Disable the sidebar when not on any Quran reader route
-      dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
-    }
+    if (isQuranReaderRoute) return;
+    // Disable the sidebar when not on any Quran reader route
+    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
   }, [dispatch, isQuranReaderRoute]);
+
+  const shouldRenderSidebarNavigation =
+    isQuranReaderRoute || isHomePage || isSidebarNavigationVisible;
 
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
@@ -132,7 +139,7 @@ const NavbarBody: React.FC = () => {
               <IconSearch />
             </Button>
             <SearchDrawer />
-            {isQuranReaderRoute && <SidebarNavigation />}
+            {shouldRenderSidebarNavigation && <SidebarNavigation />}
           </>
         </div>
       </div>
