@@ -24,6 +24,9 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
   const { goal, isLoading } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
 
+  // Route logged-in users to progress page while loading to prevent jarring UX
+  // if they have an existing goal. Falls back to reading-goal once loading completes
+  // if no goal exists.
   const link =
     !isLoggedIn() || (!hasGoal && !isLoading)
       ? getReadingGoalNavigationUrl()
