@@ -13,6 +13,7 @@
   --day-circle-color: transparent;
 }
 
+// i see no usage of this class in the codebase, is it safe to remove?
 .banner-active {
   --banner-height: 3rem;
   --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));

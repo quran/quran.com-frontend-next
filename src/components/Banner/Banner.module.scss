@@ -10,10 +10,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  gap: var(--spacing-small);
+  
   padding-inline: var(--spacing-large);
   padding-block: var(--spacing-xsmall);
-
+  
   @include breakpoints.tablet {
     position: absolute;
     display: inline-flex;

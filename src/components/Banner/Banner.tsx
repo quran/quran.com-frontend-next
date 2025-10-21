@@ -1,10 +1,13 @@
 import classNames from 'classnames';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
 import styles from './Banner.module.scss';
 
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
+import { isLoggedIn } from '@/utils/auth/login';
 
 type BannerProps = {
   text: string;
@@ -14,6 +17,10 @@ type BannerProps = {
 
 const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
   const isBannerVisible = useSelector(selectIsBannerVisible);
+  const { goal } = useGetStreakWithMetadata();
+  const hasGoal = !!goal;
+
+  const link = !isLoggedIn || !hasGoal ? '/reading-goal' : '/reading-goal/progress';
 
   return (
     <div
@@ -29,7 +36,11 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
         )}
         <div className={styles.text}>{text}</div>
       </div>
-      {ctaButton && <div className={styles.ctaContainer}>{ctaButton}</div>}
+      {ctaButton && (
+        <Link href={link} className={styles.ctaContainer}>
+          {ctaButton}
+        </Link>
+      )}
     </div>
   );
 };
