@@ -9,8 +9,6 @@ let homePage: Homepage;
 let audioUtilities: AudioUtilities;
 
 test.beforeEach(async ({ page, context }) => {
-  test.slow();
-
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
 
@@ -74,6 +72,7 @@ test.describe('Highlighting', () => {
       const [, audioResponse] = await Promise.all([
         audioUtilities.startAudioPlayback(true),
         page.waitForResponse((response) => response.url().includes('segments=true')),
+        page.waitForSelector("[class*='highlighted']"),
       ]);
 
       // Extract segments from the API response
@@ -83,8 +82,9 @@ test.describe('Highlighting', () => {
         .slice(0, 3)
         .map((segment) => segment.map((time) => time / 1000)); // Take first 3 segments for testing and / 1000 to convert to seconds
 
-      await audioUtilities.setAudioTime(0);
       await audioUtilities.pauseAudioPlayback();
+      await audioUtilities.setAudioTime(0);
+      await page.waitForTimeout(500); // Wait for any UI updates
 
       // The first word should be highlighted and not the third
       await expect(secondWord).not.toHaveClass(/highlighted/);
