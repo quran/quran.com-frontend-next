@@ -25,18 +25,18 @@ import {
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-type VerseRepetitionSettings = {
+interface VerseRepetitionSettings {
   repeatRange: number;
   repeatEachVerse: number;
   from: string;
   to: string;
   delayMultiplier: number;
-};
+}
 
-type CachedRepeatState = {
+interface CachedRepeatState {
   verseRepetition: VerseRepetitionSettings;
   repetitionMode: RepetitionMode;
-};
+}
 
 const verseRepetitionStateCache: Record<string, CachedRepeatState> = {};
 
@@ -118,23 +118,35 @@ const RepeatAudioModal = ({
    * If there's no selectedVerseKey, it means the user opened the modal for the first time
    * In this case, we should use the first and last verse of the chapter as the default from/to values
    */
-  const buildDefaultVerseRepetition = useCallback(
-    (): VerseRepetitionSettings => ({
+  const buildDefaultVerseRepetition = useCallback((): VerseRepetitionSettings => {
+    const activeMode = (() => {
+      const { fromVerseNumber, toVerseNumber } = repeatSettings ?? {};
+      if (typeof fromVerseNumber !== 'number' || typeof toVerseNumber !== 'number') {
+        return undefined;
+      }
+      if (fromVerseNumber === toVerseNumber) {
+        return RepetitionMode.Single;
+      }
+      return RepetitionMode.Range;
+    })();
+    const mode = activeMode ?? defaultRepetitionMode;
+    const rangeStart = firstVerseKeyInThisChapter;
+    const rangeEnd = lastVerseKeyInThisChapter;
+    const singleVerse = selectedVerseKey ?? rangeStart;
+    return {
       repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
       repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
-      from: selectedVerseKey ?? firstVerseKeyInThisChapter,
-      to: selectedVerseKey ?? lastVerseKeyInThisChapter,
+      from: mode === RepetitionMode.Range ? rangeStart : singleVerse,
+      to: mode === RepetitionMode.Range ? rangeEnd : singleVerse,
       delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
-    }),
-    [
-      repeatSettings?.repeatSettings?.totalRangeCycle,
-      repeatSettings?.repeatSettings?.totalVerseCycle,
-      repeatSettings?.delayMultiplier,
-      selectedVerseKey,
-      firstVerseKeyInThisChapter,
-      lastVerseKeyInThisChapter,
-    ],
-  );
+    };
+  }, [
+    defaultRepetitionMode,
+    firstVerseKeyInThisChapter,
+    lastVerseKeyInThisChapter,
+    selectedVerseKey,
+    repeatSettings,
+  ]);
   const cachedState = getCachedState(chapterId, selectedVerseKey);
 
   const [repetitionMode, setRepetitionMode] = useState(
@@ -147,13 +159,13 @@ const RepeatAudioModal = ({
   });
 
   useEffect(() => {
-    if (!selectedVerseKey && verseRepetition.from && verseRepetition.to) {
+    if (isOpen && !selectedVerseKey && verseRepetition.from && verseRepetition.to) {
       verseRepetitionStateCache[chapterId] = {
         verseRepetition,
         repetitionMode,
       };
     }
-  }, [chapterId, repetitionMode, selectedVerseKey, verseRepetition]);
+  }, [chapterId, isOpen, repetitionMode, selectedVerseKey, verseRepetition]);
 
   useEffect(() => {
     // init the state from cache if available or default values otherwise
@@ -179,14 +191,9 @@ const RepeatAudioModal = ({
     });
   }, [
     chapterId,
-    defaultRepetitionMode,
-    firstVerseKeyInThisChapter,
-    lastVerseKeyInThisChapter,
     repetitionMode,
-    repeatSettings?.delayMultiplier,
-    repeatSettings?.repeatSettings?.totalRangeCycle,
-    repeatSettings?.repeatSettings?.totalVerseCycle,
     selectedVerseKey,
+    defaultRepetitionMode,
     buildDefaultVerseRepetition,
   ]);
 
@@ -218,19 +225,29 @@ const RepeatAudioModal = ({
     onClose();
   };
 
-  const onRepetitionModeChange = (mode: RepetitionMode) => {
-    logValueChange('repitition_mode', repetitionMode, mode);
+  const onRepetitionModeChange = useCallback(
+    (mode: RepetitionMode) => {
+      logValueChange('repetition_mode', repetitionMode, mode);
 
-    // if the mode is single, and there's a selectedVerseKey, use it
-    // otherwise, use the first verse of the chapter
-    const singleVerseKey = selectedVerseKey ?? firstVerseKeyInThisChapter;
-    setVerseRepetition((prevVerseRepetition) => ({
-      ...prevVerseRepetition,
-      from: mode === RepetitionMode.Single ? singleVerseKey : firstVerseKeyInThisChapter,
-      to: mode === RepetitionMode.Single ? singleVerseKey : lastVerseKeyInThisChapter,
-    }));
-    setRepetitionMode(mode);
-  };
+      // if the mode is single, and there's a selectedVerseKey, use it
+      // otherwise, use the first verse of the chapter
+      const singleVerseKey = selectedVerseKey ?? firstVerseKeyInThisChapter;
+      setVerseRepetition((prevVerseRepetition) => ({
+        ...prevVerseRepetition,
+        from: mode === RepetitionMode.Single ? singleVerseKey : firstVerseKeyInThisChapter,
+        to: mode === RepetitionMode.Single ? singleVerseKey : lastVerseKeyInThisChapter,
+      }));
+      setRepetitionMode(mode);
+    },
+    [
+      firstVerseKeyInThisChapter,
+      lastVerseKeyInThisChapter,
+      repetitionMode,
+      selectedVerseKey,
+      setRepetitionMode,
+      setVerseRepetition,
+    ],
+  );
 
   const onSingleVerseChange = (verseKey) => {
     logValueChange('repeat_single_verse', verseRepetition.repeatRange, verseKey);
