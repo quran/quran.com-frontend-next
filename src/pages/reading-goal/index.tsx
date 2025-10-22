@@ -9,7 +9,6 @@ import layoutStyles from '../index.module.scss';
 
 import styles from './reading-goal.module.scss';
 
-import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -26,6 +25,8 @@ const ReadingGoalPage: NextPage = () => {
   // if the user already has a goal, redirect them to the home page
   const { goal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
   const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
+
+  const { tab } = router.query;
 
   useEffect(() => {
     if (goal) {
@@ -45,7 +46,7 @@ const ReadingGoalPage: NextPage = () => {
 
       <div className={layoutStyles.pageContainer}>
         <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
-          {isLoading ? <Spinner /> : <ReadingGoalOnboarding />}
+          {isLoading ? <Spinner /> : <ReadingGoalOnboarding initialTab={Number(tab ?? 0)} />}
         </div>
       </div>
     </>
@@ -62,4 +63,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(ReadingGoalPage);
+export default ReadingGoalPage;

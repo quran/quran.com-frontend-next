@@ -24,16 +24,22 @@ import layoutStyle from '@/pages/index.module.scss';
 import { CreateGoalRequest, GoalCategory, GoalType, QuranGoalPeriod } from '@/types/auth/Goal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logFormSubmission } from '@/utils/eventLogger';
+import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
-const ReadingGoalOnboarding: React.FC = () => {
+interface Props {
+  initialTab?: number;
+}
+
+const ReadingGoalOnboarding: React.FC<Props> = ({ initialTab = 0 }) => {
   const { t } = useTranslation('reading-goal');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const mushaf = useGetMushaf();
 
   const [loading, setLoading] = useState(false);
-  const [tabIdx, setTabIdx] = useState(0);
+  const [tabIdx, setTabIdx] = useState(initialTab);
   const [state, dispatch] = useReadingGoalReducer();
   const toast = useToast();
   const { cache } = useSWRConfig();
@@ -100,15 +106,23 @@ const ReadingGoalOnboarding: React.FC = () => {
 
   const onNext = () => {
     if (!isPreviewTab) {
+      let nextTabIdx = 0;
       if (tabIdx === 0 && state.exampleKey !== 'custom') {
         // if the user selected an example, skip to the preview tab
-        setTabIdx(tabsArray.length - 1);
+        nextTabIdx = tabsArray.length - 1;
       } else {
         // otherwise, go to the next tab
-        setTabIdx((prevIdx) => prevIdx + 1);
+        nextTabIdx = tabIdx + 1;
       }
 
       logTabNextClick(Tab.key, state);
+
+      if (!isLoggedIn()) {
+        router.push(getLoginNavigationUrl(getReadingGoalNavigationUrl(nextTabIdx)));
+        return;
+      }
+
+      setTabIdx(nextTabIdx);
     } else {
       onSubmit();
     }
