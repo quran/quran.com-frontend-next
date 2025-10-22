@@ -399,7 +399,8 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
   return `/collections/${collectionId}`;
 };
 
-export const getReadingGoalNavigationUrl = () => '/reading-goal';
+export const getReadingGoalNavigationUrl = (tab?: number) =>
+  tab !== undefined ? `/reading-goal?tab=${tab}` : '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
