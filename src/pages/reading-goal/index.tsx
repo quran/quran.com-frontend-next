@@ -27,6 +27,7 @@ const ReadingGoalPage: NextPage = () => {
   const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
 
   const { tab } = router.query;
+  const initialTab = Math.max(0, Math.min(Number(tab ?? 0) || 0, 4));
 
   useEffect(() => {
     if (goal) {
@@ -46,7 +47,7 @@ const ReadingGoalPage: NextPage = () => {
 
       <div className={layoutStyles.pageContainer}>
         <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
-          {isLoading ? <Spinner /> : <ReadingGoalOnboarding initialTab={Number(tab ?? 0)} />}
+          {isLoading ? <Spinner /> : <ReadingGoalOnboarding initialTab={initialTab} />}
         </div>
       </div>
     </>
