@@ -9,6 +9,8 @@ import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dl
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+
 const TOPICS = [
   {
     slug: 'about-the-quran',
@@ -21,11 +23,15 @@ const TOPICS = [
   //   logKey: 'jesus-in-quran',
   //   key: 'jesus-in-quran',
   // },
-  {
-    slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
-    key: 'sunnah',
-    logKey: 'sunnah_collection',
-  },
+  ...(isProduction
+    ? [
+        {
+          slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
+          key: 'sunnah',
+          logKey: 'sunnah_collection',
+        },
+      ]
+    : []),
   {
     slug: 'what-is-ramadan',
     logKey: 'what-is-ramadan',
