@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -24,6 +24,7 @@ import {
   setIsSettingsDrawerOpen,
   setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
+import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
@@ -62,8 +63,9 @@ const NavbarBody: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
-  const isHomePage = router.pathname === '/';
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
+  const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
+  const hasResetSidebarAfterHydration = useRef(false);
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -72,7 +74,15 @@ const NavbarBody: React.FC = () => {
   }, [dispatch, isQuranReaderRoute]);
 
   const shouldRenderSidebarNavigation =
-    isQuranReaderRoute || isHomePage || isSidebarNavigationVisible;
+    isQuranReaderRoute || isSidebarNavigationVisible || hasResetSidebarAfterHydration.current;
+
+  useEffect(() => {
+    if (hasResetSidebarAfterHydration.current) return;
+    if (!isPersistHydrationComplete) return;
+    hasResetSidebarAfterHydration.current = true;
+    if (isQuranReaderRoute) return;
+    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+  }, [dispatch, isPersistHydrationComplete, isQuranReaderRoute]);
 
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
