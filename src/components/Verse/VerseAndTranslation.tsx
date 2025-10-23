@@ -51,7 +51,7 @@ interface Props {
   chapter: number;
   from: number;
   to: number;
-  shouldShowTitleAndReference?: boolean;
+  titleText?: string;
   quranFont?: QuranFont;
   translationsLimit?: number;
   arabicVerseClassName?: string;
@@ -74,6 +74,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
     () => getChapterData(chaptersData, chapter?.toString()),
     [chaptersData, chapter],
   );
+  const shouldShowReference = !!restProps.titleText;
 
   if (error) {
     return <Error error={error} onRetryClicked={mutate} />;
@@ -87,7 +88,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, restProps.arabicVerseClassName)}>
             <PlainVerseText
-              shouldShowTitle={restProps.shouldShowTitleAndReference ?? false}
+              titleText={restProps.titleText}
               quranFont={restProps.quranFont}
               words={getVerseWords(verse)}
               fontScale={fixedFontScale ?? reduxQuranTextFontScale}
@@ -99,7 +100,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
             {verse.translations?.map((translation) => (
               <div key={translation.id} className={styles.translationContainer}>
                 <TranslationText
-                  shouldShowReference={restProps.shouldShowTitleAndReference ?? false}
+                  shouldShowReference={shouldShowReference}
                   chapterName={chapterData?.transliteratedName}
                   reference={`${verse.chapterId}:${verse.verseNumber}`}
                   languageId={translation.languageId}

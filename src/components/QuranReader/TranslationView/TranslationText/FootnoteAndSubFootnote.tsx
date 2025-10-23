@@ -5,7 +5,7 @@ import FootnoteText from './FootnoteText';
 import { logButtonClick } from '@/utils/eventLogger';
 import type Footnote from 'types/Footnote';
 
-interface FootnoteProps {
+interface Props {
   shouldShowFootnote: boolean;
   footnote: Footnote;
   subFootnote: Footnote;
@@ -18,7 +18,7 @@ interface FootnoteProps {
   onResetSubFootnote: () => void;
 }
 
-const FootnoteComponent: React.FC<FootnoteProps> = ({
+const FootnoteAndSubFootnote: React.FC<Props> = ({
   shouldShowFootnote,
   footnote,
   subFootnote,
@@ -59,4 +59,4 @@ const FootnoteComponent: React.FC<FootnoteProps> = ({
   );
 };
 
-export default FootnoteComponent;
+export default FootnoteAndSubFootnote;

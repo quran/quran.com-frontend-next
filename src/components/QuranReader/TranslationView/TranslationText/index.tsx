@@ -8,7 +8,7 @@ import React, { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import FootnoteComponent from './Footnote';
+import FootnoteAndSubFootnote from './FootnoteAndSubFootnote';
 import TranslationAndReference from './TranslationAndReference';
 import styles from './TranslationText.module.scss';
 
@@ -172,7 +172,7 @@ const TranslationText: React.FC<Props> = ({
         reference={reference}
         lang={lang}
       />
-      <FootnoteComponent
+      <FootnoteAndSubFootnote
         shouldShowFootnote={shouldShowFootnote}
         footnote={footnote}
         subFootnote={subFootnote}

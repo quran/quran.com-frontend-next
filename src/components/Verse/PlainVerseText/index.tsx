@@ -1,7 +1,6 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import SeoTextForVerse from '../SeoTextForVerse';
@@ -23,7 +22,7 @@ type Props = {
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
   fontScale?: number;
-  shouldShowTitle?: boolean;
+  titleText?: string;
   quranFont?: QuranFont;
 };
 
@@ -39,11 +38,10 @@ const PlainVerseText: React.FC<Props> = ({
   words,
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
-  shouldShowTitle = false,
   fontScale,
+  titleText,
   quranFont: quranFontFromProps,
 }: Props): JSX.Element => {
-  const { t } = useTranslation('home');
   const {
     quranFont: quranFontFromStore,
     quranTextFontScale,
@@ -53,6 +51,8 @@ const PlainVerseText: React.FC<Props> = ({
   const isQcfFont = isQCFFont(quranFont);
   const { pageNumber } = words[0];
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
+  const shouldShowTitle = !!titleText;
+
   return (
     <>
       <SeoTextForVerse words={words} />
@@ -64,9 +64,7 @@ const PlainVerseText: React.FC<Props> = ({
           styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
-        {shouldShowTitle && (
-          <p className={styles.verseTitleText}>{t('quran-in-year-verse-title')}</p>
-        )}
+        {shouldShowTitle && <p className={styles.verseTitleText}>{titleText}</p>}
         <div
           className={classNames(
             styles.verseText,

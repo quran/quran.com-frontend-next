@@ -7,9 +7,12 @@ $translation-line-height: 1.5;
 .text {
   @include footnote.footnote-styling;
   letter-spacing: 0;
-  text-align: center;
   line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
+}
+
+.textCenter {
+  text-align: center;
 }
 
 .innerText {
