@@ -14,7 +14,7 @@ import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
-import { selectAudioPlayerState } from '@/redux/slices/AudioPlayer/state';
+import { selectAudioPlayerState, setRepeatSettings } from '@/redux/slices/AudioPlayer/state';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -298,7 +298,7 @@ const RepeatAudioModal = ({
   const isInRepeatMode = !!repeatActor;
   const chaptersData = useGetChaptersData(lang);
   const {
-    actions: { onSettingsChangeWithoutDispatch },
+    actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
   const audioPlayerState = useReduxSelector(selectAudioPlayerState);
   const persistedRepeatSettings = audioPlayerState?.repeatSettings;
@@ -413,9 +413,12 @@ const RepeatAudioModal = ({
       ...normalizedRange,
     };
     setVerseRepetition(normalizedSettings);
-    onSettingsChangeWithoutDispatch(
+    const previousRepeatSettings = persistedRepeatSettings;
+    onSettingsChange(
       'repeatSettings',
       normalizedSettings,
+      setRepeatSettings(normalizedSettings),
+      setRepeatSettings(previousRepeatSettings),
       PreferenceGroup.AUDIO,
       () => play(normalizedSettings),
     );

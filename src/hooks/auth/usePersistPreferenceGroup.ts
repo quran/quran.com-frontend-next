@@ -163,6 +163,9 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             });
         } else {
           action();
+          if (successCallback) {
+            successCallback();
+          }
         }
       },
       onSettingsChange: (
@@ -217,6 +220,9 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             });
         } else {
           dispatch(action);
+          if (successCallback) {
+            successCallback();
+          }
         }
       },
     }),
