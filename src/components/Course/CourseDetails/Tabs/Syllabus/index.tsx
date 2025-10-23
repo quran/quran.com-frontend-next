@@ -90,7 +90,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
               ) : (
                 <button
                   type="button"
-                  className={styles.disabledLink}
+                  className={styles.notEnrolledLink}
                   onClick={() => onNonEnrolledDayClick(dayNumber, id)}
                 >
                   {title}

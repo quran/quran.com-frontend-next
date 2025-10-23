@@ -48,27 +48,13 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const mutate = useMutateWithoutRevalidation();
 
   const handleEnrollmentSuccess = async (): Promise<void> => {
-    try {
-      toast(t('enroll-success', { title }), { status: ToastStatus.Success });
-      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
-        ...currentCourse,
-        isUserEnrolled: true,
-      }));
-      if (lessons?.length > 0) {
-        await router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
-      }
-    } catch (error) {
-      logErrorToSentry(error, {
-        metadata: {
-          context: 'course_enrollment_navigation',
-          courseId: id,
-          courseSlug: slug,
-        },
-      });
-      toast(t('common:error.general'), {
-        status: ToastStatus.Error,
-      });
-      throw error;
+    toast(t('enroll-success', { title }), { status: ToastStatus.Success });
+    mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
+      ...currentCourse,
+      isUserEnrolled: true,
+    }));
+    if (lessons?.length > 0) {
+      await router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
     }
   };
 

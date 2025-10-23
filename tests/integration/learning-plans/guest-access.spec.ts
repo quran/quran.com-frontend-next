@@ -70,8 +70,7 @@ test.describe('Post-Enrollment Navigation', () => {
       .getByRole('button', { name: /(start|continue).learning/i })
       .first()
       .click();
-    await page.waitForTimeout(1000);
-    expect(page.url()).toContain('/lessons/');
+    await page.waitForURL(/\/lessons\//);
   });
 });
 
@@ -83,8 +82,7 @@ test.describe('Login Redirects', () => {
     const markComplete = page.getByRole('button', { name: /mark.complete/i });
     if ((await markComplete.count()) > 0) {
       await markComplete.click();
-      await page.waitForTimeout(1000);
-      expect(page.url()).toMatch(/\/(login|signup)/);
+      await page.waitForURL(/\/(login|signup)/);
     }
   });
 
@@ -116,7 +114,6 @@ test.describe('Access Control', () => {
       .first();
     if ((await syllabusButton.count()) > 0) {
       await syllabusButton.click();
-      await page.waitForTimeout(1000);
       await expect(page.locator('text=You are not enrolled')).toBeVisible({ timeout: 5000 });
     }
   });

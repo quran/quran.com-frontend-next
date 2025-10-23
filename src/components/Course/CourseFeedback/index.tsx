@@ -51,9 +51,7 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
 
     // If user is a guest, redirect to login/registration
     if (!loggedIn) {
-      // Sanitize the return URL by removing query params and hash
-      const sanitizedPath = router.asPath.split('?')[0].split('#')[0];
-      router.push(getLoginNavigationUrl(sanitizedPath));
+      router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
 

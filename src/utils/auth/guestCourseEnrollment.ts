@@ -73,7 +73,7 @@ export const enrollGuestInCourse = (courseId: string): void => {
           courseId,
         },
       });
-      // Silently continue - the enrollment is still tracked in memory for the current session
+      // Silently fail - the enrollment will not persist and subsequent checks will return false
     }
   }
 };
