@@ -1,16 +1,16 @@
+export type JsonNumberString = `${number}` | 'Infinity';
+
 export interface RepeatSettingsPreference {
   from?: string;
   to?: string;
-  repeatRange?: number | string | null;
-  repeatEachVerse?: number | string | null;
-  delayMultiplier?: number | string | null;
+  repeatRange?: number | JsonNumberString | null;
+  repeatEachVerse?: number | JsonNumberString | null;
+  delayMultiplier?: number | JsonNumberString | null;
 }
 
-type AudioState = {
+export type AudioState = {
   enableAutoScrolling: boolean;
   isDownloadingAudio: boolean;
   showTooltipWhenPlayingAudio: boolean;
   repeatSettings?: RepeatSettingsPreference;
 };
-
-export default AudioState;

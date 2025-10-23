@@ -5,7 +5,7 @@ import resetSettings from '@/redux/actions/reset-settings';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getAudioPlayerStateInitialState } from '@/redux/defaultSettings/util';
 import { RootState } from '@/redux/RootState';
-import AudioState, { RepeatSettingsPreference } from '@/redux/types/AudioState';
+import { AudioState, RepeatSettingsPreference } from '@/redux/types/AudioState';
 import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
