@@ -8,7 +8,7 @@ import Link from 'next/link';
 import styles from './TranslationText.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
-import { Direction, toLocalizedVerseKey } from '@/utils/locale';
+import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
@@ -33,10 +33,16 @@ const TranslationAndReference: React.FC<Props> = ({
   lang,
 }) => {
   return (
-    <div className={classNames(styles.text, fontClass, shouldShowReference && styles.textCenter)}>
+    <div
+      className={classNames(
+        styles.text,
+        fontClass,
+        styles[direction],
+        shouldShowReference && styles.textCenter,
+      )}
+    >
       <div
         onClick={(event) => onTextClicked(event)}
-        dir={Direction.LTR}
         className={classNames(shouldShowReference && styles.innerText)}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: shouldShowReference ? `"${text}"` : text }}
@@ -45,7 +51,6 @@ const TranslationAndReference: React.FC<Props> = ({
         <>
           {' '}
           <Link
-            dir={direction}
             onClick={() => {
               logButtonClick('translation_reference_open', { reference, chapterName, lang });
             }}
