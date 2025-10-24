@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import Banner from '@/components/Banner/Banner';
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
@@ -43,7 +44,11 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
-const NavbarBody: React.FC = () => {
+interface Props {
+  isBannerVisible: boolean;
+}
+
+const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
@@ -63,59 +68,77 @@ const NavbarBody: React.FC = () => {
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButton: t('create-my-goal'),
+    shouldShowPrefixIcon: true,
+  };
+
   return (
-    <div className={styles.itemsContainer}>
-      <div className={styles.centerVertically}>
-        <div className={styles.leftCTA}>
-          <>
-            <Button
-              tooltip={t('menu')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={openNavigationDrawer}
-              ariaLabel={t('aria.nav-drawer-open')}
-            >
-              <IconMenu />
-            </Button>
-            <NavigationDrawer />
-          </>
-          <NavbarLogoWrapper />
+    <>
+      {isBannerVisible && (
+        <div className={styles.bannerContainerTop}>
+          <Banner {...bannerProps} />
+        </div>
+      )}
+      <div className={styles.itemsContainer}>
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
+            <>
+              <Button
+                tooltip={t('menu')}
+                variant={ButtonVariant.Ghost}
+                shape={ButtonShape.Circle}
+                onClick={openNavigationDrawer}
+                ariaLabel={t('aria.nav-drawer-open')}
+              >
+                <IconMenu />
+              </Button>
+              <NavigationDrawer />
+            </>
+            <NavbarLogoWrapper />
+          </div>
+        </div>
+        {isBannerVisible && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...bannerProps} />
+          </div>
+        )}
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
+            <>
+              <ProfileAvatarButton />
+              <LanguageSelector />
+              <Button
+                tooltip={t('settings.title')}
+                shape={ButtonShape.Circle}
+                variant={ButtonVariant.Ghost}
+                onClick={openSettingsDrawer}
+                ariaLabel={t('aria.change-settings')}
+                id="settings-button"
+              >
+                <IconSettings />
+              </Button>
+              <SettingsDrawer />
+            </>
+            <div>
+              <Button
+                tooltip={t('search.title')}
+                variant={ButtonVariant.Ghost}
+                onClick={openSearchDrawer}
+                shape={ButtonShape.Circle}
+                shouldFlipOnRTL={false}
+                ariaLabel={t('search.title')}
+              >
+                <IconSearch />
+              </Button>
+              <SearchDrawer />
+              <SidebarNavigation />
+            </div>
+          </div>
         </div>
       </div>
-      <div className={styles.centerVertically}>
-        <div className={styles.rightCTA}>
-          <>
-            <ProfileAvatarButton />
-            <LanguageSelector />
-            <Button
-              tooltip={t('settings.title')}
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={openSettingsDrawer}
-              ariaLabel={t('aria.change-settings')}
-              id="settings-button"
-            >
-              <IconSettings />
-            </Button>
-            <SettingsDrawer />
-          </>
-          <>
-            <Button
-              tooltip={t('search.title')}
-              variant={ButtonVariant.Ghost}
-              onClick={openSearchDrawer}
-              shape={ButtonShape.Circle}
-              shouldFlipOnRTL={false}
-              ariaLabel={t('search.title')}
-            >
-              <IconSearch />
-            </Button>
-            <SearchDrawer />
-            <SidebarNavigation />
-          </>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
