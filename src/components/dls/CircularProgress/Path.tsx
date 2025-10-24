@@ -2,7 +2,7 @@ import { VIEWBOX_CENTER_X, VIEWBOX_CENTER_Y } from '@/utils/circularProgress';
 
 interface PathProps {
   className?: string;
-  counterClockwise: boolean;
+  isCounterClockwise: boolean;
   dashRatio: number;
   pathRadius: number;
   strokeWidth: number;
@@ -11,7 +11,7 @@ interface PathProps {
 
 const Path: React.FC<PathProps> = ({
   className,
-  counterClockwise,
+  isCounterClockwise,
   dashRatio,
   pathRadius,
   strokeWidth,
@@ -20,10 +20,13 @@ const Path: React.FC<PathProps> = ({
   return (
     <path
       className={className}
-      style={{ ...style, ...getDashStyle({ pathRadius, dashRatio, counterClockwise }) }}
+      style={{
+        ...style,
+        ...getDashStyle({ pathRadius, dashRatio, isCounterClockwise }),
+      }}
       d={getPathDescription({
         pathRadius,
-        counterClockwise,
+        isCounterClockwise,
       })}
       strokeWidth={strokeWidth}
       fillOpacity={0}
@@ -34,13 +37,13 @@ const Path: React.FC<PathProps> = ({
 // SVG path description specifies how the path should be drawn
 function getPathDescription({
   pathRadius,
-  counterClockwise,
+  isCounterClockwise,
 }: {
   pathRadius: number;
-  counterClockwise: boolean;
+  isCounterClockwise: boolean;
 }) {
   const radius = pathRadius;
-  const rotation = counterClockwise ? 1 : 0;
+  const rotation = isCounterClockwise ? 1 : 0;
 
   // Move to center of canvas
   // Relative move to top canvas
@@ -55,11 +58,11 @@ function getPathDescription({
 }
 
 function getDashStyle({
-  counterClockwise,
+  isCounterClockwise,
   dashRatio,
   pathRadius,
 }: {
-  counterClockwise: boolean;
+  isCounterClockwise: boolean;
   dashRatio: number;
   pathRadius: number;
 }) {
@@ -70,7 +73,7 @@ function getDashStyle({
     // Have dash be full diameter, and gap be full diameter
     strokeDasharray: `${diameter}px ${diameter}px`,
     // Shift dash backward by gapLength, so gap starts appearing at correct distance
-    strokeDashoffset: `${counterClockwise ? -gapLength : gapLength}px`,
+    strokeDashoffset: `${isCounterClockwise ? -gapLength : gapLength}px`,
   };
 }
 

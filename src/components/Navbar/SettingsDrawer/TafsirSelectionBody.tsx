@@ -66,7 +66,7 @@ const TafsirsSelectionBody = () => {
           value={searchQuery}
           onChange={setSearchQuery}
           placeholder={t('settings.search-tafsirs')}
-          fixedWidth={false}
+          isFixedWidth={false}
         />
       </div>
       <DataFetcher

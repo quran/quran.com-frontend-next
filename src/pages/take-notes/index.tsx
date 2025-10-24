@@ -20,7 +20,7 @@ import { getCanonicalUrl, getTakeNotesNavigationUrl } from '@/utils/navigation';
 
 const PATH = getTakeNotesNavigationUrl();
 
-const TakeNotesPage: NextPage = (): JSX.Element => {
+const TakeNotesPage: NextPage = () => {
   const { t, lang } = useTranslation('take-notes');
 
   return (

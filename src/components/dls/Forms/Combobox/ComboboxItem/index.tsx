@@ -9,15 +9,15 @@ export interface DropdownItem {
   value: string;
   name: string;
   label: string;
-  checked?: boolean;
-  disabled?: boolean;
+  isChecked?: boolean;
+  isDisabled?: boolean;
   prefix?: ReactNode;
   suffix?: string;
 }
 
 interface Props {
-  checked: boolean;
-  disabled: boolean;
+  isChecked: boolean;
+  isDisabled: boolean;
   itemId?: string;
   selectedItemRef?: RefObject<HTMLDivElement>;
   item?: DropdownItem;
@@ -27,8 +27,8 @@ interface Props {
 }
 
 const ComboboxItem: React.FC<Props> = ({
-  checked,
-  disabled,
+  isChecked,
+  isDisabled,
   itemId,
   selectedItemRef,
   item,
@@ -44,12 +44,12 @@ const ComboboxItem: React.FC<Props> = ({
   return (
     <label htmlFor={itemId} key={itemId}>
       <div
-        ref={checked ? selectedItemRef : null}
+        ref={isChecked ? selectedItemRef : null}
         className={classNames(
           styles.itemContainer,
-          { [styles.disabledItem]: disabled },
-          { [styles.enabledItem]: !disabled },
-          { [styles.checkedItem]: checked },
+          { [styles.disabledItem]: isDisabled },
+          { [styles.enabledItem]: !isDisabled },
+          { [styles.checkedItem]: isChecked },
         )}
       >
         <input
@@ -57,14 +57,14 @@ const ComboboxItem: React.FC<Props> = ({
           className={styles.input}
           id={itemId}
           name={item.name}
-          disabled={disabled}
-          checked={checked}
+          disabled={isDisabled}
+          checked={isChecked}
           onChange={onItemSelectedChange}
           data-item-label={item.label}
         />
         <label
           htmlFor={itemId}
-          className={classNames(styles.labelContainer, { [styles.itemLabel]: !disabled })}
+          className={classNames(styles.labelContainer, { [styles.itemLabel]: !isDisabled })}
         >
           <div className={styles.prefixContainer}>
             {item.prefix && <div className={styles.prefix}>{item.prefix}</div>} {item.label}

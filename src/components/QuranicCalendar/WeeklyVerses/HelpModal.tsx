@@ -14,7 +14,7 @@ interface Props {
 
 const HelpModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const { t } = useTranslation('quranic-calendar');
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   return (
     <ContentModal

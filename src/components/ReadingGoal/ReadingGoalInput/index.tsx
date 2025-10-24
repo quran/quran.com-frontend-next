@@ -21,7 +21,7 @@ export interface ReadingGoalInputProps {
   rangeEndVerse?: string;
   pages?: number;
   seconds?: number;
-  widthFull?: boolean;
+  isWidthFull?: boolean;
 
   onRangeChange: (range: { startVerse: string | null; endVerse: string | null }) => void;
   onPagesChange: (pages: number) => void;
@@ -39,7 +39,7 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
   onRangeChange,
   onPagesChange,
   onSecondsChange,
-  widthFull = true,
+  isWidthFull = true,
   logChange,
 }) => {
   const { t, lang } = useTranslation('reading-goal');
@@ -64,10 +64,10 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
         </label>
         <Input
           id="pages"
-          containerClassName={classNames(styles.input, widthFull && styles.fullWidth)}
+          containerClassName={classNames(styles.input, isWidthFull && styles.fullWidth)}
           size={InputSize.Large}
           value={pages.toString()}
-          fixedWidth={false}
+          isFixedWidth={false}
           htmlType="number"
           // prevent users from entering decimal value
           onKeyDown={(e) => e.key === '.' && e.preventDefault()}

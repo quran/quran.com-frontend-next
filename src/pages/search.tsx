@@ -44,7 +44,7 @@ type SearchPageProps = {
 const navigationUrl = '/search';
 const source = SearchQuerySource.SearchPage;
 
-const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
+const SearchPage: NextPage<SearchPageProps> = () => {
   const { t, lang } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const router = useRouter();

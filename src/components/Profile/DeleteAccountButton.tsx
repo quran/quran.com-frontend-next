@@ -74,7 +74,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               id="delete-account-confirmation"
               value={confirmationText}
               onChange={setConfirmationText}
-              fixedWidth={false}
+              isFixedWidth={false}
               containerClassName={styles.inputContainer}
             />
           </Modal.Header>

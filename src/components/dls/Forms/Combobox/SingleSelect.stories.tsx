@@ -14,14 +14,14 @@ export default {
   component: Combobox,
   args: {
     size: ComboboxSize.Medium,
-    clearable: true,
-    disabled: false,
+    isClearable: true,
+    isDisabled: false,
     isMultiSelect: false,
     hasError: false,
     minimumRequiredItems: 0,
     emptyMessage: 'No results',
     placeholder: 'Search...',
-    fixedWidth: true,
+    isFixedWidth: true,
   },
   argTypes: {
     id: {
@@ -67,7 +67,7 @@ export default {
         category: 'Optional',
       },
     },
-    clearable: {
+    isClearable: {
       options: [true, false],
       defaultValue: true,
       control: { type: 'boolean' },
@@ -76,7 +76,7 @@ export default {
       },
       description: 'Whether we should show the clear icon or not when an input value is present.',
     },
-    disabled: {
+    isDisabled: {
       options: [true, false],
       defaultValue: false,
       control: { type: 'boolean' },
@@ -139,7 +139,7 @@ export default {
       },
       description: 'The placeholder of the search input.',
     },
-    fixedWidth: {
+    isFixedWidth: {
       options: [true, false],
       defaultValue: true,
       control: { type: 'boolean' },
@@ -251,7 +251,7 @@ export const DisabledCombobox = Template.bind({});
 DisabledCombobox.args = {
   id: 'default',
   items: generateItems(),
-  disabled: true,
+  isDisabled: true,
 };
 
 export const ComboboxWithSuffixedItems = Template.bind({});

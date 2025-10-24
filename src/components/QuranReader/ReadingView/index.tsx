@@ -194,9 +194,9 @@ const ReadingView = ({
     <>
       {shouldShowQueryParamMessage && (
         <QueryParamMessage
-          translationsQueryParamDifferent={false}
-          reciterQueryParamDifferent={reciterQueryParamDifferent}
-          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isTranslationsQueryParamDifferent={false}
+          isReciterQueryParamDifferent={reciterQueryParamDifferent}
+          isWordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
         />
       )}
       <div

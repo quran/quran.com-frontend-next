@@ -26,7 +26,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { t } = useTranslation('media');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
-  const downloadButtonRef = React.useRef<HTMLParagraphElement>();
+  const downloadButtonRef = React.useRef<HTMLParagraphElement>(null);
   const router = useRouter();
   const [isLimitExceeded, setIsLimitExceeded] = useState(false);
 

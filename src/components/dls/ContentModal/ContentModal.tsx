@@ -59,7 +59,7 @@ const ContentModal = ({
   zIndexVariant,
   isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
-  const overlayRef = useRef<HTMLDivElement>();
+  const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const { locale } = useRouter();
   useImperativeHandle(innerRef, () => ({

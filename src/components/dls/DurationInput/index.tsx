@@ -11,7 +11,7 @@ import { convertNumberToDecimal } from '@/utils/number';
 interface DurationInputProps {
   totalSeconds: number;
   onTotalSecondsChange: (totalSeconds: number) => void;
-  disabled?: boolean;
+  isDisabled?: boolean;
   isLoading?: boolean;
   label?: React.ReactNode;
   error?: string;
@@ -25,7 +25,7 @@ const commonInputProps: React.InputHTMLAttributes<HTMLInputElement> = {
 const DurationInput = ({
   totalSeconds,
   onTotalSecondsChange,
-  disabled = false,
+  isDisabled = false,
   isLoading = false,
   label,
   error,
@@ -35,7 +35,7 @@ const DurationInput = ({
   const [seconds, setSeconds] = useState<number>(0);
   const { t } = useTranslation('common');
 
-  const isDisabled = disabled || isLoading;
+  const isInputDisabled = isDisabled || isLoading;
 
   const handleChange = (setter: (value: number) => void) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -59,7 +59,7 @@ const DurationInput = ({
   }, [totalSeconds]);
 
   const commonInputClassName = classNames({
-    [styles.disabledInput]: isDisabled,
+    [styles.disabledInput]: isInputDisabled,
   });
 
   return (
@@ -74,7 +74,7 @@ const DurationInput = ({
       <div
         className={classNames(
           styles.durationInputContainer,
-          isDisabled && styles.disabled,
+          isInputDisabled && styles.disabled,
           error && styles.error,
         )}
       >
@@ -83,7 +83,7 @@ const DurationInput = ({
             value={hours.toString()}
             id="hours"
             onChange={handleChange(setHours)}
-            disabled={isDisabled}
+            disabled={isInputDisabled}
             className={commonInputClassName}
             {...commonInputProps}
           />
@@ -95,7 +95,7 @@ const DurationInput = ({
             value={minutes.toString()}
             id="minutes"
             onChange={handleChange(setMinutes)}
-            disabled={isDisabled}
+            disabled={isInputDisabled}
             className={commonInputClassName}
             {...commonInputProps}
           />
@@ -107,7 +107,7 @@ const DurationInput = ({
             value={seconds.toString()}
             id="seconds"
             onChange={handleChange(setSeconds)}
-            disabled={isDisabled}
+            disabled={isInputDisabled}
             className={commonInputClassName}
             {...commonInputProps}
           />

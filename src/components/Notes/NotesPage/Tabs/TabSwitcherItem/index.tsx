@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './TabSwitcherItem.module.scss';
 
 type Props = {
-  icon: JSX.Element;
+  icon: React.ReactElement;
   value: string;
 };
 

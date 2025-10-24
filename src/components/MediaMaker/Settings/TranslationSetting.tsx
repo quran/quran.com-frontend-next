@@ -28,7 +28,7 @@ interface Props extends MediaSettingsProps {
 const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSettingsUpdate }) => {
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onTranslationsChange = useCallback(
     (selectedTranslationId: number) => {
@@ -59,10 +59,10 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
             <div key={translation.id} className={styles.item}>
               <Checkbox
                 id={translation.id.toString()}
-                checked={selectedTranslations.includes(translation.id)}
+                isChecked={selectedTranslations.includes(translation.id)}
                 label={translation.translatedName.name}
                 onChange={onTranslationsChange(translation.id)}
-                disabled={
+                isDisabled={
                   !selectedTranslations.includes(translation.id) &&
                   selectedTranslations.length === TRANSLATIONS_LIMIT
                 }
@@ -84,7 +84,7 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
           value={searchQuery}
           onChange={setSearchQuery}
           placeholder={t('settings.search-translations')}
-          fixedWidth={false}
+          isFixedWidth={false}
           containerClassName={styles.input}
           inputRef={inputRef}
         />
