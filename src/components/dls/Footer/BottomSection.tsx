@@ -51,10 +51,10 @@ const BottomSection = () => {
         </div>
       </div>
       <div className={styles.actionsSections}>
-        <div className={styles.actionContainer}>
+        <div className={styles.actionContainer} data-testid="theme-switcher">
           <FooterThemeSwitcher />
         </div>
-        <div className={styles.actionContainer}>
+        <div className={styles.actionContainer} data-testid="language-selector">
           <LanguageSelector
             shouldShowSelectedLang
             expandDirection={PopoverMenuExpandDirection.TOP}

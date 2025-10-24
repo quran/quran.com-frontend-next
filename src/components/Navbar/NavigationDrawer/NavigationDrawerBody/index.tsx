@@ -23,7 +23,7 @@ import IconRadio from '@/icons/radio.svg';
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
   return (
-    <div className={styles.listItemsContainer}>
+    <div data-testid="navigation-drawer-body" className={styles.listItemsContainer}>
       <FundraisingBanner />
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
