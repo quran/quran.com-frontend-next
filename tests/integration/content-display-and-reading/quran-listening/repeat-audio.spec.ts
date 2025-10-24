@@ -6,7 +6,9 @@ import Homepage from '@/tests/POM/home-page';
 let homePage: Homepage;
 let audioUtilities: AudioUtilities;
 
-test.beforeEach(async ({ page, context }) => {
+test.beforeEach(async ({ page, context, isMobile }) => {
+  test.skip(isMobile, 'Repeat audio tests does not need to run on mobile devices');
+
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
 
@@ -22,7 +24,7 @@ test(
   },
 );
 
-// Unskip when PR 2548 is merged
+// TODO: Unskip when PR 2548 is merged
 test.skip(
   'Repeat modal has persistent values when closing and opening',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
@@ -46,7 +48,7 @@ test.skip(
   },
 );
 
-// Unskip when PR 2548 is merged
+// TODO: Unskip when PR 2548 is merged
 test.skip(
   'Repeat modal has persistent values between sessions',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
@@ -72,7 +74,7 @@ test.skip(
   },
 );
 
-// Unskip when PR 2548 is merged
+// TODO: Unskip when PR 2548 is merged
 test.skip(
   'Repeat modal lost only the verse values when switching chapters',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
@@ -98,6 +100,7 @@ test.skip(
   },
 );
 
+// TODO: Unskip when PR 2548 is merged
 test.skip(
   'Going back to a surah retains repeat modal values',
   { tag: ['@slow', '@audio', '@repeat-audio'] },

@@ -11,7 +11,8 @@ let audioUtilities: AudioUtilities;
 
 // Setup: Set some values for the repeat modal on surah 75 so that
 // they are saved in the DB for the logged in user
-test(
+// TODO: Unskip when PR 2548 is merged
+test.skip(
   'Setup: Save repeat modal values for logged in user',
   { tag: ['@setup', '@audio', '@repeat-audio'] },
   async ({ page, context, isMobile }) => {
@@ -27,18 +28,30 @@ test(
     // Change some values
     await audioUtilities.setRepeatModalValues(modal, '75:2', '75:2', '3', '3', '3');
 
-    // Close the modal
-    await audioUtilities.closeRepeatModal();
+    await Promise.all([
+      audioUtilities.closeRepeatModal(),
+      page.waitForRequest(
+        (request) => request.url().includes('/preferences') && request.method() === 'POST',
+      ),
+    ]);
   },
 );
 
-test.beforeEach(async ({ page, context }) => {
+test.beforeEach(async ({ page, context, isMobile }) => {
+  test.skip(isMobile, 'Repeat audio tests does not need to run on mobile devices');
+
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
 
-  await homePage.goTo('/75');
+  await Promise.all([
+    homePage.goTo('/75'),
+    page.waitForRequest(
+      (request) => request.url().includes('/preferences') && request.method() === 'GET',
+    ),
+  ]);
 });
 
+// TODO: Unskip when PR 2548 is merged
 test.skip(
   'Values are persisted between sessions for logged in user',
   { tag: ['@slow', '@audio', '@repeat-audio'] },

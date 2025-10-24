@@ -222,15 +222,19 @@ export default class AudioUtilities {
     const repeatEachVerseCounter = counters.nth(1);
     const delayBetweenVerseCounter = counters.nth(2);
 
-    // Set "from" verse
-    await rangeFrom.fill(fromVerse);
-    const optionFrom = modal.getByText(fromVerse, { exact: true }).first();
-    await optionFrom.click();
+    // Set "from" verse IF different
+    if ((await rangeFrom.inputValue()) !== fromVerse) {
+      await rangeFrom.fill(fromVerse);
+      const optionFrom = modal.getByText(fromVerse, { exact: true }).first();
+      await optionFrom.click();
+    }
 
-    // Set "to" verse
-    await rangeTo.fill(toVerse);
-    const optionTo = modal.getByText(toVerse, { exact: true }).nth(1);
-    await optionTo.click();
+    // Set "to" verse IF different
+    if ((await rangeTo.inputValue()) !== toVerse) {
+      await rangeTo.fill(toVerse);
+      const optionTo = modal.getByText(toVerse, { exact: true }).nth(1);
+      await optionTo.click();
+    }
 
     // Set play range by comparing current value with desired value
     await this.adjustCounterValue(playRangeCounter, playRange);
