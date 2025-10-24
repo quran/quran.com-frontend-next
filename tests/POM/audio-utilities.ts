@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable react-func/max-lines-per-function */
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
 export default class AudioUtilities {
   readonly page: Page;
@@ -134,5 +136,117 @@ export default class AudioUtilities {
       audio.currentTime = secs;
       audio.dispatchEvent(new Event('timeupdate'));
     }, seconds);
+  }
+
+  /**
+   * Opens the repeat modal by starting audio playback and clicking repeat from the overflow menu
+   * @returns {Locator} The modal element
+   */
+  async openRepeatModal() {
+    await this.startAudioPlayback();
+    await this.openOverflowMenu();
+
+    const repeatItem = this.page
+      .getByRole('menuitem')
+      .filter({ hasText: /repeat/i })
+      .first();
+    await repeatItem.click();
+
+    const modal = this.page.getByTestId('repeat-audio-modal');
+    await expect(modal).toBeVisible();
+    return modal;
+  }
+
+  /**
+   * Gets a counter input from the repeat modal by counter type
+   * @param {string} counterType - The type of counter ('playback-range', 'repeat-each-verse', 'delay-between-verses')
+   * @returns {Locator} The counter value locator
+   */
+  getRepeatModalInput(counterType: string): Locator {
+    const modal = this.page.getByTestId('repeat-audio-modal');
+    const counters = modal.getByTestId('counter');
+
+    let counterIndex = 0;
+    if (counterType === 'playback-range') {
+      counterIndex = 0;
+    } else if (counterType === 'repeat-each-verse') {
+      counterIndex = 1;
+    } else if (counterType === 'delay-between-verses') {
+      counterIndex = 2;
+    }
+
+    return counters.nth(counterIndex).getByTestId('counter-value');
+  }
+
+  /**
+   * Helper to adjust counter value by clicking increment/decrement buttons until desired value is reached
+   */
+  // eslint-disable-next-line class-methods-use-this
+  private async adjustCounterValue(counterLocator: Locator, desiredValue: string): Promise<void> {
+    let currentValue = await counterLocator.getByTestId('counter-value').innerText();
+
+    while (currentValue !== desiredValue) {
+      const currentNum = parseInt(currentValue, 10);
+      const desiredNum = parseInt(desiredValue, 10);
+
+      if (currentNum < desiredNum) {
+        await counterLocator.getByTestId('increment-button').click();
+      } else {
+        await counterLocator.getByTestId('decrement-button').click();
+      }
+
+      // Update current value for next iteration
+      currentValue = await counterLocator.getByTestId('counter-value').innerText();
+    }
+  }
+
+  /**
+   * Sets verse range values in the repeat modal
+   */
+  // eslint-disable-next-line class-methods-use-this
+  async setRepeatModalValues(
+    modal: Locator,
+    fromVerse: string,
+    toVerse: string,
+    playRange: string,
+    repeatEachVerse: string,
+    delayBetweenVerse: string,
+  ): Promise<void> {
+    const rangeFrom = modal.locator('input[aria-owns="start"]');
+    const rangeTo = modal.locator('input[aria-owns="end"]');
+
+    // There's 3 counter components in the modal, first one is play range,
+    // second is repeat each verse, third is delay between verses
+    const counters = modal.getByTestId('counter');
+    const playRangeCounter = counters.nth(0);
+    const repeatEachVerseCounter = counters.nth(1);
+    const delayBetweenVerseCounter = counters.nth(2);
+
+    // Set "from" verse
+    await rangeFrom.fill(fromVerse);
+    const optionFrom = modal.getByText(fromVerse, { exact: true }).first();
+    await optionFrom.click();
+
+    // Set "to" verse
+    await rangeTo.fill(toVerse);
+    const optionTo = modal.getByText(toVerse, { exact: true }).nth(1);
+    await optionTo.click();
+
+    // Set play range by comparing current value with desired value
+    await this.adjustCounterValue(playRangeCounter, playRange);
+
+    // Set repeat each verse
+    await this.adjustCounterValue(repeatEachVerseCounter, repeatEachVerse);
+
+    // Set delay between verse
+    await this.adjustCounterValue(delayBetweenVerseCounter, delayBetweenVerse);
+  }
+
+  /**
+   * Closes the repeat modal by clicking "Start Playing" and pressing Escape
+   */
+  async closeRepeatModal(save: boolean = true): Promise<void> {
+    await this.page.getByText(save ? 'Start Playing' : 'Cancel').click();
+    await this.page.keyboard.press('Escape');
   }
 }

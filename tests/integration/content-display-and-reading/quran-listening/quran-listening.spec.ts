@@ -198,62 +198,6 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await expect(page.getByRole('menuitem').filter({ hasText: '1.75' })).toBeVisible();
   });
 
-  test('Opening repeat modal from overflow menu displays modal content', async ({ page }) => {
-    await audioUtilities.startAudioPlayback();
-    await audioUtilities.openOverflowMenu();
-
-    const repeatItem = page
-      .getByRole('menuitem')
-      .filter({ hasText: /repeat/i })
-      .first();
-    await repeatItem.click();
-    // Check that the modal is open
-    await expect(page.getByTestId('repeat-audio-modal')).toBeVisible({ timeout: 5000 });
-  });
-
-  test('Repeat modal has persistent values', async ({ page }) => {
-    // Unskip this modal when PR QF-239 is merged
-    test.skip(true, 'Unskip when QF-239 is merged');
-
-    await audioUtilities.startAudioPlayback();
-    await audioUtilities.openOverflowMenu();
-
-    const repeatItem = page
-      .getByRole('menuitem')
-      .filter({ hasText: /repeat/i })
-      .first();
-    await repeatItem.click();
-
-    // Wait for the modal to be visible
-    const modal = page.getByTestId('repeat-audio-modal');
-    await expect(modal).toBeVisible();
-    // Change some values
-    const rangeFrom = modal.locator('input[aria-owns="start"]');
-    const rangeTo = modal.locator('input[aria-owns="end"]');
-
-    await rangeFrom.fill('1:2');
-
-    // a div with text "1:2" should appear in the dropdown options
-    const option = modal.getByText('1:2', { exact: true }).first();
-    await option.click();
-
-    await rangeTo.fill('1:2');
-    const option2 = modal.getByText('1:2', { exact: true }).nth(1);
-    await option2.click();
-
-    // Close the modal
-    await page.keyboard.press('Escape');
-    await page.keyboard.press('Escape');
-
-    // Reopen the modal
-    await audioUtilities.openOverflowMenu();
-    await repeatItem.click();
-    await expect(modal).toBeVisible();
-    // Check that the values are persisted
-    await expect(modal.locator('input[aria-owns="start"]')).toHaveValue('1:2');
-    await expect(modal.locator('input[aria-owns="end"]')).toHaveValue('1:2');
-  });
-
   test('Arrow navigation goes to the correct ayah', async ({ page }) => {
     await audioUtilities.startAudioPlayback(true);
     await audioUtilities.setAudioTime(0);
