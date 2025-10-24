@@ -14,9 +14,10 @@ import Verse from 'types/Verse';
 
 interface Props {
   lastVerse: Verse;
+  currentPageNumber?: number;
 }
 
-const PageControls: React.FC<Props> = ({ lastVerse }) => {
+const PageControls: React.FC<Props> = ({ lastVerse, currentPageNumber }) => {
   const { t } = useTranslation('quran-reader');
   /**
    * We need to access the last word of the the last verse instead
@@ -26,7 +27,7 @@ const PageControls: React.FC<Props> = ({ lastVerse }) => {
    */
   const { pageNumber } = lastVerse.words[lastVerse.words.length - 1];
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
-  const page = Number(pageNumber);
+  const page = Number(currentPageNumber ?? pageNumber);
   return (
     <>
       {!isFirstPage(page) && (
