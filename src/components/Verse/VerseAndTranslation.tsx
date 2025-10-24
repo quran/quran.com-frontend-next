@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,8 +7,8 @@ import styles from './VerseAndTranslation.module.scss';
 
 import Error from '@/components/Error';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import DataContext from '@/contexts/DataContext';
 import Spinner from '@/dls/Spinner/Spinner';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
 import { getChapterData } from '@/utils/chapter';
@@ -60,7 +60,6 @@ interface Props {
 }
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
-  const chaptersData = useContext(DataContext);
   // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
   const { fixedFontScale, chapter, ...restProps } = props;
   const {
@@ -70,17 +69,18 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
     translationFontScale: reduxTranslationFontScale,
     quranTextFontScale: reduxQuranTextFontScale,
   } = useVerseAndTranslation({ ...restProps, chapter });
-  const chapterData = useMemo(
-    () => getChapterData(chaptersData, chapter?.toString()),
-    [chaptersData, chapter],
-  );
+  const chaptersData = useGetChaptersData('en'); // or any other language
+  const chapterData = useMemo(() => {
+    if (!chaptersData) return null;
+    return getChapterData(chaptersData, chapter?.toString());
+  }, [chaptersData, chapter]);
   const shouldShowReference = !!restProps.titleText;
 
   if (error) {
     return <Error error={error} onRetryClicked={mutate} />;
   }
 
-  if (!data) return <Spinner />;
+  if (!data || !chapterData) return <Spinner />;
 
   return (
     <div className={styles.container}>

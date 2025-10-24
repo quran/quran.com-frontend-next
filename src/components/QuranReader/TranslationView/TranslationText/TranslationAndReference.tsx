@@ -8,7 +8,6 @@ import Link from 'next/link';
 import styles from './TranslationText.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
@@ -56,9 +55,9 @@ const TranslationAndReference: React.FC<Props> = ({
             }}
             href={getChapterWithStartingVerseUrl(reference)}
             className={styles.referenceLink}
-            aria-label={`${chapterName} ${toLocalizedVerseKey(reference, lang)}`}
+            aria-label={`${chapterName} ${reference}`}
           >
-            {`${chapterName} ${toLocalizedVerseKey(reference, lang)}`}
+            {`${chapterName} ${reference}`}
           </Link>
         </>
       )}
