@@ -53,7 +53,7 @@ export const makeAyahReflectionsUrl = ({
     page,
     tab: Tab.Popular, // always reviewed content
     languages: localeToQuranReflectLanguageID(locale),
-    feed: true, // TODO: check this
+    'filter[verifiedOnly]': true,
   });
 };
 
