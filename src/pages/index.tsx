@@ -95,6 +95,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     >
                       <ExploreTopicsSection />
                     </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection />
+                    </div>
                     {todayAyah && (
                       <div
                         className={classNames(
@@ -106,11 +111,6 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                         <QuranInYearSection />
                       </div>
                     )}
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <LearningPlansSection />
-                    </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
