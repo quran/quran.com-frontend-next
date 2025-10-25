@@ -29,7 +29,7 @@ export const useIsEnrolled = (courseId: string, isUserEnrolled?: boolean): boole
  * Hook for enrolling guest in a course
  * @returns {(courseId: string) => void} Function to enroll guest in a course
  */
-export const useEnrollGuest = () => {
+export const useEnrollGuest = (): ((courseId: string) => void) => {
   const dispatch = useDispatch();
 
   const enroll = useCallback(

@@ -47,9 +47,21 @@ const getStoredCourses = (page: Page): Promise<string[]> =>
       if (!persistRoot) return [];
 
       const rootState = JSON.parse(persistRoot);
-      const guestEnrollmentState = JSON.parse(rootState.guestEnrollment || '{}');
+      const rawGuestEnrollment = rootState?.guestEnrollment;
+      let guestEnrollmentState: any = {};
 
-      return guestEnrollmentState.enrolledCourses || [];
+      if (typeof rawGuestEnrollment === 'string') {
+        try {
+          guestEnrollmentState = JSON.parse(rawGuestEnrollment);
+        } catch {
+          guestEnrollmentState = {};
+        }
+      } else if (rawGuestEnrollment && typeof rawGuestEnrollment === 'object') {
+        guestEnrollmentState = rawGuestEnrollment;
+      }
+
+      const enrolled = guestEnrollmentState?.enrolledCourses;
+      return Array.isArray(enrolled) ? enrolled.filter((id: any) => typeof id === 'string') : [];
     } catch {
       return [];
     }
@@ -71,7 +83,7 @@ test.describe('Guest Enrollment', () => {
 
   test('should redirect to lesson and save to localStorage', async ({ page }) => {
     await enrollGuest(page);
-    expect(page.url()).toContain('/lessons/');
+    await expect(page).toHaveURL(/.*\/lessons\/.*/);
     expect((await getStoredCourses(page)).length).toBeGreaterThan(0);
   });
 
@@ -133,11 +145,7 @@ test.describe('Access Control', () => {
     await syllabusTab.scrollIntoViewIfNeeded();
     await expect(syllabusTab).toBeVisible({ timeout: 10000 });
     await syllabusTab.click();
-    const firstSyllabusLink = page
-      .locator('p')
-      .filter({ hasText: /^\s*day\s+\d+/i })
-      .locator('a')
-      .first();
+    const firstSyllabusLink = page.getByRole('link', { name: /\bday\s+\d+/i }).first();
     await expect(firstSyllabusLink).toBeVisible({ timeout: 10000 });
     await firstSyllabusLink.click();
     await expect(page.locator('text=You are not enrolled')).toBeVisible({ timeout: 10000 });

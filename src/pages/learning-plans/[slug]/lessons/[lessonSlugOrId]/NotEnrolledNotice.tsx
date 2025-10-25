@@ -22,20 +22,12 @@ const NotEnrolledNotice: React.FC<NotEnrolledNoticeProps> = ({ slug, onNavigatio
   const { t: tLearn } = useTranslation('learn');
   const noticeRouter = useRouter();
   const hasHandledNotEnrolledRef = useRef(false);
-  const routerReplaceRef = useRef(noticeRouter.replace);
-  const toastFnRef = useRef(noticeToast);
-
-  useEffect(() => {
-    routerReplaceRef.current = noticeRouter.replace;
-    toastFnRef.current = noticeToast;
-  }, [noticeRouter, noticeToast]);
-
   useEffect(() => {
     if (hasHandledNotEnrolledRef.current) return;
+    noticeToast(stripHTMLTags(tLearn('not-enrolled')), { status: ToastStatus.Error });
+    noticeRouter.replace(getCourseNavigationUrl(slug));
     hasHandledNotEnrolledRef.current = true;
-    toastFnRef.current(stripHTMLTags(tLearn('not-enrolled')), { status: ToastStatus.Error });
-    routerReplaceRef.current(getCourseNavigationUrl(slug));
-  }, [slug, tLearn]);
+  }, [slug, tLearn, noticeToast, noticeRouter]);
 
   return (
     <div className={styles.container}>
@@ -46,7 +38,6 @@ const NotEnrolledNotice: React.FC<NotEnrolledNoticeProps> = ({ slug, onNavigatio
             link: (
               <Link
                 onClick={onNavigationLinkClick}
-                key={0}
                 href={getCourseNavigationUrl(slug)}
                 variant={LinkVariant.Blend}
               />
