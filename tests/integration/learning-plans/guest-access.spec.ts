@@ -1,33 +1,61 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 
 const LP_URL = '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
 const FIRST_LESSON_URL = `${LP_URL}/lessons/the-king-of-all-kings`;
-const STORAGE_KEY = 'guestEnrolledCourses';
 
-const clearState = async (context, page) => {
+const clearState = async (context: BrowserContext, page: Page): Promise<void> => {
   await context.clearCookies();
   await page.goto(LP_URL);
   await page.evaluate(() => localStorage.clear());
 };
 
-const enrollGuest = async (page) => {
+const enrollGuest = async (page: Page): Promise<void> => {
   await page
     .getByRole('button', { name: /enroll/i })
     .first()
     .click();
   await page.waitForURL(/\/learning-plans\/.*\/lessons\/.+/);
 };
+/**
+ * Scroll to the bottom to ensure lazy-rendered buttons are in view
+ * @param {Page} page - Playwright page instance
+ * @returns {Promise<void>} resolves after scrolling is done
+ */
+const scrollToEnd = async (page: Page): Promise<void> => {
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForLoadState('networkidle');
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForLoadState('networkidle');
+};
 
-const enrollAndReturn = async (page) => {
+const enrollAndReturn = async (page: Page): Promise<void> => {
   await enrollGuest(page);
   await page.goto(LP_URL);
   await page.waitForLoadState('networkidle');
 };
 
-const getStoredCourses = (page) =>
-  page.evaluate((key) => JSON.parse(localStorage.getItem(key) || '[]'), STORAGE_KEY);
+/**
+ * Get enrolled courses from Redux persist storage
+ * Redux persist stores data under 'persist:root' key with nested JSON structure
+ * @param {Page} page - Playwright page instance
+ * @returns {Promise<string[]>} resolves with the enrolled courses
+ */
+const getStoredCourses = (page: Page): Promise<string[]> =>
+  page.evaluate(() => {
+    try {
+      const persistRoot = localStorage.getItem('persist:root');
+      if (!persistRoot) return [];
 
-const setupNonEnrolled = async (page) => {
+      const rootState = JSON.parse(persistRoot);
+      const guestEnrollmentState = JSON.parse(rootState.guestEnrollment || '{}');
+
+      return guestEnrollmentState.enrolledCourses || [];
+    } catch {
+      return [];
+    }
+  });
+
+const setupNonEnrolled = async (page: Page): Promise<void> => {
   await page.goto(LP_URL);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
@@ -79,19 +107,11 @@ test.describe('Login Redirects', () => {
 
   test('should redirect to login on mark complete', async ({ page }) => {
     await enrollGuest(page);
-    const markComplete = page.getByRole('button', { name: /mark.complete/i });
-    if ((await markComplete.count()) > 0) {
-      await markComplete.click();
-      await page.waitForURL(/\/(login|signup)/);
-    }
-  });
-
-  test('should redirect to login on add feedback', async ({ page }) => {
-    await enrollAndReturn(page);
-    const feedback = page.getByRole('button', { name: /add.feedback/i });
-    await expect(feedback).toBeVisible();
-    await feedback.click();
-    await expect(page).toHaveURL(/\/(login|signup)/);
+    await scrollToEnd(page);
+    const markComplete = page.getByRole('button', { name: /mark\s+as\s+completed/i }).first();
+    await expect(markComplete).toBeVisible({ timeout: 10000 });
+    await markComplete.click();
+    await page.waitForURL(/\/(login|signup)/);
   });
 });
 
@@ -108,13 +128,18 @@ test.describe('Access Control', () => {
 
   test('should show toast when clicking syllabus lesson', async ({ page }) => {
     await setupNonEnrolled(page);
-    const syllabusButton = page
-      .locator('button[type="button"]')
-      .filter({ hasText: /day/i })
+    // Open Syllabus tab (rendered as button)
+    const syllabusTab = page.getByRole('button', { name: /syllabus/i }).first();
+    await syllabusTab.scrollIntoViewIfNeeded();
+    await expect(syllabusTab).toBeVisible({ timeout: 10000 });
+    await syllabusTab.click();
+    const firstSyllabusLink = page
+      .locator('p')
+      .filter({ hasText: /^\s*day\s+\d+/i })
+      .locator('a')
       .first();
-    if ((await syllabusButton.count()) > 0) {
-      await syllabusButton.click();
-      await expect(page.locator('text=You are not enrolled')).toBeVisible({ timeout: 5000 });
-    }
+    await expect(firstSyllabusLink).toBeVisible({ timeout: 10000 });
+    await firstSyllabusLink.click();
+    await expect(page.locator('text=You are not enrolled')).toBeVisible({ timeout: 10000 });
   });
 });

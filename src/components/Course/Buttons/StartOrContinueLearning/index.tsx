@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Button from '@/dls/Button/Button';
 import { Course } from '@/types/auth/Course';
-import { getUserType } from '@/utils/auth/guestCourseEnrollment';
+import { getUserType } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLessonNavigationUrl } from '@/utils/navigation';
 

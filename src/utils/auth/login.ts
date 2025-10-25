@@ -10,9 +10,19 @@ import QueryParam from '@/types/QueryParam';
 import { SsoPlatform } from '@/utils/auth/types/Auth';
 import { getBasePath } from '@/utils/url';
 
+export type UserType = 'logged_in' | 'guest';
+
 export const getUserIdCookie = () => Cookies.get(USER_ID_COOKIE_NAME);
 export const removeUserIdCookie = () => Cookies.remove(USER_ID_COOKIE_NAME);
 export const isLoggedIn = () => !!getUserIdCookie();
+
+/**
+ * Get the current user type
+ * @returns {UserType} 'logged_in' if authenticated, 'guest' otherwise
+ */
+export const getUserType = (): UserType => {
+  return isLoggedIn() ? 'logged_in' : 'guest';
+};
 
 export const getNotificationSubscriberHashCookie = () =>
   Cookies.get(NOTIFICATION_SUBSCRIBER_COOKIE_NAME);

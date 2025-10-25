@@ -11,13 +11,13 @@ import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedba
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { useEnrollGuest, useIsEnrolled } from '@/hooks/auth/useGuestEnrollment';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { logErrorToSentry } from '@/lib/sentry';
 import { Course } from '@/types/auth/Course';
 import { enrollUser } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
-import { enrollGuestInCourse, isUserOrGuestEnrolled } from '@/utils/auth/guestCourseEnrollment';
-import { isLoggedIn } from '@/utils/auth/login';
+import { getUserType, isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCourseNavigationUrl,
@@ -46,28 +46,36 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const router = useRouter();
   const { t } = useTranslation('learn');
   const mutate = useMutateWithoutRevalidation();
+  const enrollGuest = useEnrollGuest();
+  const isEnrolled = useIsEnrolled(id, isUserEnrolled);
+  const userLoggedIn = isLoggedIn();
 
-  const handleEnrollmentSuccess = async (): Promise<void> => {
+  const handleEnrollmentSuccess = async (loggedIn: boolean): Promise<void> => {
     toast(t('enroll-success', { title }), { status: ToastStatus.Success });
-    mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
-      ...currentCourse,
-      isUserEnrolled: true,
-    }));
+    if (loggedIn) {
+      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
+        ...currentCourse,
+        isUserEnrolled: true,
+      }));
+    }
+
     if (lessons?.length > 0) {
       await router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
     }
   };
 
-  const onEnrollClicked = async () => {
-    const userLoggedIn = isLoggedIn();
+  const onEnrollClicked = async (): Promise<void> => {
+    const userType = getUserType();
     if (!userLoggedIn && !allowGuestAccess) {
-      router.replace(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+      const redirectUrl = getCourseNavigationUrl(slug);
+      router.replace(getLoginNavigationUrl(redirectUrl));
       return;
     }
 
-    logButtonClick(userLoggedIn ? 'user_enroll_course' : 'guest_enroll_course', {
+    logButtonClick('course_enroll', {
       courseId: id,
       isCTA,
+      userType,
     });
 
     setIsLoading(true);
@@ -75,13 +83,13 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       if (userLoggedIn) {
         await enrollUser(id);
       } else {
-        enrollGuestInCourse(id);
+        enrollGuest(id);
       }
-      await handleEnrollmentSuccess();
+      await handleEnrollmentSuccess(userLoggedIn);
     } catch (error) {
       logErrorToSentry(error, {
         metadata: {
-          context: userLoggedIn ? 'user_course_enrollment' : 'guest_course_enrollment',
+          context: `${userType}_course_enrollment`,
           courseId: id,
           courseSlug: slug,
         },
@@ -93,8 +101,6 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       setIsLoading(false);
     }
   };
-
-  const isEnrolled = isUserOrGuestEnrolled(id, isUserEnrolled);
 
   if (isCTA) {
     if (isEnrolled) {

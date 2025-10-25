@@ -7,7 +7,7 @@ import AddReflectionModal from './AddReflectionModal';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import QuestionMarkIcon from '@/icons/question-mark.svg';
-import { getUserType } from '@/utils/auth/guestCourseEnrollment';
+import { getUserType } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 

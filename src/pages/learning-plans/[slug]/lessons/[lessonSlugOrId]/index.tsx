@@ -1,75 +1,100 @@
-import { useRef } from 'react';
-
+/* eslint-disable react/no-multi-comp */
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+
+import NotEnrolledNotice from './NotEnrolledNotice';
 
 import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner from '@/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { useIsEnrolled } from '@/hooks/auth/useGuestEnrollment';
 import layoutStyles from '@/pages/index.module.scss';
+import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
-import { fetcher, privateFetcher } from '@/utils/auth/api';
+import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
-import { isUserOrGuestEnrolled } from '@/utils/auth/guestCourseEnrollment';
-import { isLoggedIn } from '@/utils/auth/login';
-import {
-  getCanonicalUrl,
-  getCourseNavigationUrl,
-  getLessonNavigationUrl,
-} from '@/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getCanonicalUrl, getLessonNavigationUrl } from '@/utils/navigation';
 
-const LessonPage: NextPage = () => {
-  const { lang, t } = useTranslation('learn');
+interface Props {
+  hasError?: boolean;
+  page?: any[];
+}
+
+const Loading = () => (
+  <div className={layoutStyles.loadingContainer}>
+    <Spinner />
+  </div>
+);
+
+const LessonPage: NextPage<Props> = () => {
+  const { lang } = useTranslation('learn');
   const router = useRouter();
-  const toast = useToast();
   const { slug, lessonSlugOrId } = router.query;
-  const userIsLoggedIn = isLoggedIn();
-  const hasRedirected = useRef(false);
 
-  const courseSlug = slug as string;
-  const lessonSlug = lessonSlugOrId as string;
+  const onUnEnrolledNavigationLinkClicked = () => {
+    logButtonClick('unenrolled_course_link', { courseSlugOrId: slug, lessonSlugOrId });
+  };
 
-  const render = (lesson: Lesson) => {
-    if (!lesson?.course) return null;
+  const renderError = (error: any) => {
+    if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
+      return (
+        <NotEnrolledNotice
+          slug={slug as string}
+          onNavigationLinkClick={onUnEnrolledNavigationLinkClicked}
+        />
+      );
+    }
+    return undefined;
+  };
 
-    const { id, isUserEnrolled, allowGuestAccess } = lesson.course;
-    const isEnrolled = isUserOrGuestEnrolled(id, isUserEnrolled);
+  const LessonContent: React.FC<{ lesson: Lesson }> = ({ lesson }) => {
+    const isEnrolled = useIsEnrolled(lesson.course.id, lesson.course.isUserEnrolled);
 
-    // Check enrollment
-    if (!isEnrolled || (!userIsLoggedIn && !allowGuestAccess)) {
-      if (!hasRedirected.current) {
-        hasRedirected.current = true;
-        toast(t('not-enrolled').replace(/<\/?link>/g, ''), { status: ToastStatus.Warning });
-        router.replace(getCourseNavigationUrl(courseSlug));
-      }
-      return null;
+    if (isEnrolled === false) {
+      return (
+        <NotEnrolledNotice
+          slug={slug as string}
+          onNavigationLinkClick={onUnEnrolledNavigationLinkClicked}
+        />
+      );
     }
 
     return (
       <>
         <NextSeoWrapper
           title={lesson.title}
-          url={getCanonicalUrl(lang, getLessonNavigationUrl(courseSlug, lessonSlug))}
+          url={getCanonicalUrl(
+            lang,
+            getLessonNavigationUrl(slug as string, lessonSlugOrId as string),
+          )}
         />
-        <LessonView lesson={lesson} lessonSlugOrId={lessonSlug} courseSlug={courseSlug} />
+        <LessonView
+          lesson={lesson}
+          lessonSlugOrId={lessonSlugOrId as string}
+          courseSlug={slug as string}
+        />
       </>
     );
   };
 
+  const bodyRenderer = ((lesson: Lesson) => {
+    if (lesson) {
+      return <LessonContent lesson={lesson} />;
+    }
+    return <></>;
+  }) as any;
+
   return (
     <div className={layoutStyles.pageContainer}>
       <DataFetcher
-        loading={() => (
-          <div className={layoutStyles.loadingContainer}>
-            <Spinner />
-          </div>
-        )}
-        queryKey={makeGetLessonUrl(courseSlug, lessonSlug)}
-        fetcher={userIsLoggedIn ? privateFetcher : fetcher}
-        render={render}
+        loading={Loading}
+        queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
+        fetcher={privateFetcher}
+        renderError={renderError}
+        render={bodyRenderer}
       />
     </div>
   );
