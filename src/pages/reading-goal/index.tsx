@@ -11,8 +11,10 @@ import styles from './reading-goal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
+import { readingGoalExamples } from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
@@ -26,8 +28,11 @@ const ReadingGoalPage: NextPage = () => {
   const { goal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
   const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
 
-  const { tab } = router.query;
-  const initialTab = Math.max(0, Math.min(Number(tab ?? 0) || 0, 4));
+  const { example } = router.query;
+  const initialExampleKey =
+    isLoggedIn() && typeof example === 'string' && example in readingGoalExamples
+      ? (example as keyof typeof readingGoalExamples)
+      : null;
 
   useEffect(() => {
     if (goal) {
@@ -47,7 +52,11 @@ const ReadingGoalPage: NextPage = () => {
 
       <div className={layoutStyles.pageContainer}>
         <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
-          {isLoading ? <Spinner /> : <ReadingGoalOnboarding initialTab={initialTab} />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <ReadingGoalOnboarding initialExampleKey={initialExampleKey} />
+          )}
         </div>
       </div>
     </>

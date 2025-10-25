@@ -7,7 +7,10 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import useReadingGoalReducer, {
+  readingGoalExamples,
+  ReadingGoalTabProps,
+} from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
 import { validateReadingGoalData } from './utils/validator';
@@ -29,18 +32,23 @@ import { logFormSubmission } from '@/utils/eventLogger';
 import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 interface Props {
-  initialTab?: number;
+  initialExampleKey: keyof typeof readingGoalExamples | null;
 }
 
-const ReadingGoalOnboarding: React.FC<Props> = ({ initialTab = 0 }) => {
+const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
   const { t } = useTranslation('reading-goal');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const mushaf = useGetMushaf();
 
+  let initialTabIdx = 0;
+  if (initialExampleKey) {
+    initialTabIdx = initialExampleKey === 'custom' ? 1 : 4;
+  }
+
   const [loading, setLoading] = useState(false);
-  const [tabIdx, setTabIdx] = useState(initialTab);
-  const [state, dispatch] = useReadingGoalReducer();
+  const [tabIdx, setTabIdx] = useState(initialTabIdx);
+  const [state, dispatch] = useReadingGoalReducer(initialExampleKey);
   const toast = useToast();
   const { cache } = useSWRConfig();
 
@@ -118,7 +126,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialTab = 0 }) => {
       logTabNextClick(Tab.key, state);
 
       if (!isLoggedIn()) {
-        router.push(getLoginNavigationUrl(getReadingGoalNavigationUrl(nextTabIdx)));
+        router.push(getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey)));
         return;
       }
 
