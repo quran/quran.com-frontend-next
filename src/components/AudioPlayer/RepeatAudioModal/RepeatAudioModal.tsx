@@ -276,12 +276,14 @@ const serializeOptionalRepeatSettings = (
 const prepareRepeatSettingsForApi = (
   settings: RepeatSettingsPreference,
 ): RepeatSettingsPreference => {
-  const toApiValue = (value?: number | JsonNumberString | null): number | null | undefined => {
+  const toApiValue = (
+    value?: number | JsonNumberString | null,
+  ): number | JsonNumberString | null | undefined => {
     if (value === undefined) return undefined;
     if (value === null) return null;
-    // Handle Infinity representation for the API (it does not accept 'Infinity' string)
+    // Handle Infinity representation for the API
     if (value === INFINITY_VALUE || value === Infinity) {
-      return null;
+      return 'Infinity';
     }
     if (typeof value === 'string') {
       const parsed = Number(value);
