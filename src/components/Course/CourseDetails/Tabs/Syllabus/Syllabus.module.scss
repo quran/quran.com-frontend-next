@@ -14,17 +14,11 @@
     background: none;
     border: none;
     padding: 0;
-    color: var(--color-text-primary);
-    text-decoration: underline;
-    cursor: pointer;
+    color: var(--color-text-link);
+    height: auto;
 
     &:hover {
-        color: var(--color-text-primary);
         text-decoration: underline;
-    }
-
-    &:focus {
-        outline: 2px solid var(--color-primary);
-        outline-offset: 2px;
+        color: var(--color-text-link);
     }
 }
