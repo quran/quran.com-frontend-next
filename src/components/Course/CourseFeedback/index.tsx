@@ -6,7 +6,9 @@ import styles from './CourseFeedback.module.scss';
 import CourseFeedbackModal from './CourseFeedbackModal';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { Course } from '@/types/auth/Course';
+import { getUserType } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -23,22 +25,29 @@ export enum FeedbackSource {
 const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = false }) => {
   const { t } = useTranslation('learn');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isLoggedIn, requireAuth } = useRequireAuth();
 
   /**
    * listen to changes from the parent component. This will happen when the user
    * completes last lesson of the course.
    */
   useEffect(() => {
-    if (shouldOpenModal) {
+    if (shouldOpenModal && isLoggedIn) {
       setIsModalOpen(true);
     }
-  }, [shouldOpenModal]);
+  }, [shouldOpenModal, isLoggedIn]);
 
   const onAddFeedbackClicked = () => {
+    const userType = getUserType();
+
     logButtonClick('add_course_feedback', {
       source,
+      userType,
     });
-    setIsModalOpen(true);
+
+    requireAuth(() => {
+      setIsModalOpen(true);
+    });
   };
 
   return (

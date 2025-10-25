@@ -4,6 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
+import { getUserType } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -15,14 +17,21 @@ type Props = {
 const CompleteButton: React.FC<Props> = ({ isLoading, id, markLessonAsCompleted }) => {
   const { t } = useTranslation('learn');
   const toast = useToast();
+  const { requireAuth } = useRequireAuth();
 
   const onMarkAsCompletedClicked = () => {
+    const userType = getUserType();
+
     logButtonClick('mark_lesson_as_completed', {
       lessonId: id,
+      userType,
     });
-    markLessonAsCompleted(id, () => {
-      toast(t('mark-complete-success'), {
-        status: ToastStatus.Success,
+
+    requireAuth(() => {
+      markLessonAsCompleted(id, () => {
+        toast(t('mark-complete-success'), {
+          status: ToastStatus.Success,
+        });
       });
     });
   };

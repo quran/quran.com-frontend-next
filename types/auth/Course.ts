@@ -44,6 +44,7 @@ export type Course = {
   isCompleted?: boolean;
   userHasFeedback?: boolean;
   continueFromLesson?: string;
+  allowGuestAccess?: boolean; // Flag to allow guest users to access course lessons
 };
 
 export interface CoursesResponse extends BaseResponse {
