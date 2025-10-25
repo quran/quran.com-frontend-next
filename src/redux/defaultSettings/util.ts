@@ -6,7 +6,7 @@ import { RootState } from '../RootState';
 import NotificationsState from '../types/NotificationsState';
 
 import { DefaultSettings } from '@/redux/defaultSettings/defaultSettings';
-import AudioState from '@/redux/types/AudioState';
+import { AudioState } from '@/redux/types/AudioState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
