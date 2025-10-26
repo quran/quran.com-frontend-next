@@ -1,0 +1,237 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+// BASE CARD STYLES
+.endOfSurahCard {
+  border-radius: var(--border-radius-rounded);
+  padding: 0;
+  max-height: 321px;
+  overflow: hidden;
+
+  // Override Card component's box-shadow
+  @include theme.light {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  @include theme.dark {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  @include theme.sepia {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.withGoalBackground {
+  background-color: var(--color-streaks-light);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--spacing-medium);
+  height: 70%;
+  overflow: hidden;
+  padding: var(--spacing-medium);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: row;
+    height: 54px;
+    gap: var(--spacing-small);
+    padding: var(--spacing-small);
+  }
+}
+
+// GUEST STATE (No Goal/Streak)
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small-px);
+  margin-block-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: 0;
+    flex: 1;
+  }
+}
+
+.titleIcon {
+  width: 30px;
+  height: 30px;
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large2);
+  }
+}
+
+.subtitle {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.button {
+  margin-block-start: var(--spacing-small);
+  background-color: var(--color-streaks-dark);
+  border-color: var(--color-streaks-dark);
+  font-weight: var(--font-weight-semibold);
+  &:hover {
+    background-color: var(--color-streaks-dark);
+    border-color: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    border-radius: var(--border-radius-medium-px);
+    padding: var(--spacing-small-px) var(--spacing-medium-px);
+    font-size: var(--font-size-normal);
+    margin-block-start: 0;
+    flex-shrink: 0;
+  }
+}
+
+.buttonIcon {
+  margin-inline-end: var(--spacing-xsmall);
+  path {
+    fill: var(--color-text-white);
+  }
+}
+
+// USER WITH GOAL/STREAK STATE
+
+// Streak Section
+.streakSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small);
+  width: 100%;
+}
+
+.streakIcon {
+  width: 60px;
+  height: 60px;
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.streakDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro);
+}
+
+.streakNumber {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-black);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xjumbo-px);
+  }
+}
+
+.streakText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-gray);
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+
+// Goal Progress Section
+.goalProgressSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: var(--spacing-small);
+}
+
+.progressContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+}
+
+.goalStatusContainer {
+  flex: 1;
+  text-align: left;
+}
+
+.noGoalSection {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+// PROGRESS BAR STYLES
+
+.circularProgressbar {
+  height: 50px;
+  width: 50px;
+  flex-shrink: 0;
+
+  @include breakpoints.smallerThanTablet {
+    height: 35px;
+    width: 35px;
+  }
+}
+
+.circularProgressbarPath {
+  stroke: var(--color-streaks-dark);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.circularProgressbarTrail {
+  stroke: var(--color-daily-progress);
+  stroke-linecap: round;
+}
+
+.circularProgressbarText {
+  fill: var(--color-streaks-dark);
+  font-size: 16px;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: var(--font-weight-bold);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: 12px;
+  }
+}
+
+// NAVIGATION ARROWS
+
+.goalArrowIcon {
+  svg {
+    @include breakpoints.smallerThanTablet {
+      width: 12px !important;
+      height: 12px !important;
+    }
+  }
+}
