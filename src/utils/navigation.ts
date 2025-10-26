@@ -400,7 +400,9 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 };
 
 export const getReadingGoalNavigationUrl = (example?: string) =>
-  example ? `/reading-goal?example=${example}` : '/reading-goal';
+  example && example.trim() !== ''
+    ? `/reading-goal?example=${encodeURIComponent(example)}`
+    : '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
