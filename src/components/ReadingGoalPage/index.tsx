@@ -43,7 +43,9 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
 
   let initialTabIdx = 0;
   if (initialExampleKey) {
-    initialTabIdx = initialExampleKey === 'custom' ? 1 : 4;
+    // if user select example then skip preview
+    // otherwise go to next tab index
+    initialTabIdx = initialExampleKey === 'custom' ? 1 : tabsArray.length - 1;
   }
 
   const [loading, setLoading] = useState(false);
