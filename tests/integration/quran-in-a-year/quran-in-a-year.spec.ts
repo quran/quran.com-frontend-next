@@ -10,8 +10,7 @@ test.beforeEach(async ({ page, context }) => {
 });
 
 test.describe('@quran-in-a-year', () => {
-  // TODO: Unskip when PR about QF-2769 is merged
-  test.skip(
+  test(
     'Home page Quran in a year section copies spaced Arabic text',
     { tag: ['@quran-in-a-year'] },
     async ({ page }) => {
