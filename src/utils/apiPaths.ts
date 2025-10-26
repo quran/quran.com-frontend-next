@@ -205,6 +205,16 @@ export const makeChapterInfoUrl = (chapterId: string, language: string): string 
   makeUrl(`/chapters/${chapterId}/info`, { language });
 
 /**
+ * Compose the url for the chapter metadata API.
+ *
+ * @param {number} chapterId the chapter Id.
+ * @param {string} language the user's language ISO code.
+ * @returns {string}
+ */
+export const makeChapterMetadataUrl = (chapterId: number, language: string): string =>
+  makeUrl(`/chapters/${chapterId}/metadata`, { language });
+
+/**
  * Compose the url for the chapter's API.
  *
  * @param {string} chapterIdOrSlug the chapter Id or the slug.

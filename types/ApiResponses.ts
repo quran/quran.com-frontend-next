@@ -125,3 +125,24 @@ export interface TafsirContentResponse extends BaseResponse {
     slug?: string;
   };
 }
+
+export interface ChapterContent {
+  id: number;
+  languageName: string;
+  text: string;
+}
+
+export interface ChapterMetadata {
+  chapterId: number;
+  suggestions: ChapterContent[];
+  nextChapter?: {
+    summaries: ChapterContent[];
+  };
+  previousChapter?: {
+    summaries: ChapterContent[];
+  };
+}
+
+export interface ChapterMetadataResponse extends BaseResponse {
+  chapterMetadata?: ChapterMetadata;
+}
