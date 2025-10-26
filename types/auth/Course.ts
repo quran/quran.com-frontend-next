@@ -46,6 +46,14 @@ export type Course = {
   continueFromLesson?: string;
 };
 
+export type CoursesPagination = {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor?: string;
+  endCursor?: string;
+};
+
 export interface CoursesResponse extends BaseResponse {
   data: Course[];
+  pagination?: CoursesPagination;
 }
