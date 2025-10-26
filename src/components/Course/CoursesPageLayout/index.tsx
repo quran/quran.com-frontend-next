@@ -23,18 +23,9 @@ type Props = {
   initialCourses?: Course[];
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourses }) => {
+const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
   const { t } = useTranslation('learn');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
-
-  const renderCourses = (courses: Course[] | undefined) => {
-    if (!courses) {
-      return <Spinner />;
-    }
-    return <CoursesList courses={courses} isMyCourses={isMyCourses} />;
-  };
-
-  const shouldUseInitialData = !isMyCourses && initialCourses;
 
   return (
     <div className={layoutStyles.pageContainer}>
@@ -54,19 +45,21 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourse
         )}
 
         <div className={classNames(layoutStyles.flow, styles.container)}>
-          {shouldUseInitialData ? (
-            renderCourses(initialCourses)
-          ) : (
-            <DataFetcher
-              loading={Loading}
-              fetcher={privateFetcher}
-              queryKey={makeGetCoursesUrl({
-                myCourses: isMyCourses,
-                languages: languageIsoCodes,
-              })}
-              render={(data: CoursesResponse) => renderCourses(data.data)}
-            />
-          )}
+          <DataFetcher
+            loading={Loading}
+            fetcher={privateFetcher}
+            queryKey={makeGetCoursesUrl({
+              myCourses: isMyCourses,
+              languages: languageIsoCodes,
+            })}
+            render={(data: CoursesResponse) => (
+              <CoursesList
+                initialResponse={data}
+                isMyCourses={isMyCourses}
+                languages={languageIsoCodes}
+              />
+            )}
+          />
         </div>
       </ContentContainer>
     </div>

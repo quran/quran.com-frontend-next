@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-lines */
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
@@ -9,7 +10,9 @@ import styles from './LessonsList.module.scss';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Pill from '@/dls/Pill';
-import { Course } from '@/types/auth/Course';
+import { Course, CoursesResponse } from '@/types/auth/Course';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCoursesNavigationUrl,
@@ -18,13 +21,15 @@ import {
 } from '@/utils/navigation';
 
 type Props = {
-  courses: Course[];
+  initialResponse: CoursesResponse;
   isMyCourses: boolean;
+  languages?: string[];
 };
 
 const MIN_COURSES_COUNT = 6;
+const ROWS_BEFORE_END = 4;
 
-const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
+const CoursesList: React.FC<Props> = ({ initialResponse, isMyCourses, languages }) => {
   const { t } = useTranslation('learn');
   const onMyCourses = () => {
     logButtonClick('user_no_courses_link');
@@ -33,6 +38,116 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
   const onAllCoursesClicked = () => {
     logButtonClick('all_courses_link');
   };
+
+  const [courses, setCourses] = useState<Course[]>(initialResponse.data);
+  const [pagination, setPagination] = useState(initialResponse.pagination);
+  const isFetchingMoreRef = useRef(false);
+  const lastTriggeredLengthRef = useRef(0);
+
+  useEffect(() => {
+    setCourses(initialResponse.data);
+    setPagination(initialResponse.pagination);
+    lastTriggeredLengthRef.current = 0;
+  }, [initialResponse]);
+
+  /**
+   * Load more courses when the user scrolls near the bottom of the page
+   */
+  const loadMoreCourses = useCallback(async () => {
+    if (isFetchingMoreRef.current) return;
+    if (!pagination?.hasNextPage || !pagination?.endCursor) return;
+
+    isFetchingMoreRef.current = true;
+    try {
+      const response = (await privateFetcher(
+        makeGetCoursesUrl({
+          cursor: pagination.endCursor,
+          myCourses: isMyCourses,
+          languages,
+        }),
+      )) as CoursesResponse;
+      const { data: newCourses = [], pagination: newPagination } = response;
+      if (newCourses.length > 0) {
+        setCourses((prevCourses) => [...prevCourses, ...newCourses]);
+      }
+      setPagination((prevPagination) => newPagination ?? prevPagination);
+    } catch (error) {
+      lastTriggeredLengthRef.current = 0;
+    } finally {
+      isFetchingMoreRef.current = false;
+    }
+  }, [isMyCourses, languages, pagination]);
+
+  /**
+   * Calculate the threshold in pixels to trigger loading more courses
+   * @returns {number}
+   */
+  const calculateThreshold = () => {
+    const cardSelector = `.${styles.cardContainer}`;
+    const firstCardElement = document.querySelector<HTMLDivElement>(cardSelector);
+    if (!firstCardElement) return window.innerHeight;
+
+    const computedStyle = window.getComputedStyle(firstCardElement);
+    const marginBottom = Number.parseFloat(computedStyle.marginBottom) || 0;
+    return (firstCardElement.offsetHeight + marginBottom) * ROWS_BEFORE_END;
+  };
+
+  /**
+   * Create a scroll handler to load more courses when nearing the bottom of the page
+   * @param {number} threshold - The threshold in pixels to trigger loading more courses
+   * @returns {() => void} - The scroll handler function
+   */
+  const createScrollHandler = useCallback(
+    (threshold: number) => {
+      return () => {
+        if (isFetchingMoreRef.current) return;
+
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const fullHeight = document.documentElement.scrollHeight;
+
+        if (scrollPosition >= fullHeight - threshold) {
+          if (lastTriggeredLengthRef.current === courses.length) return;
+          lastTriggeredLengthRef.current = courses.length;
+          loadMoreCourses();
+        }
+      };
+    },
+    [loadMoreCourses, courses.length],
+  );
+
+  /**
+   * Set up scroll and resize event listeners to load more courses when nearing the bottom of the page
+   */
+  useEffect(() => {
+    if (isMyCourses && courses.length === 0) return undefined;
+    if (typeof window === 'undefined') return undefined;
+    if (!pagination?.hasNextPage || !pagination.endCursor) return undefined;
+
+    let threshold = calculateThreshold();
+    const handleScroll = createScrollHandler(threshold);
+
+    const handleResize = () => {
+      threshold = calculateThreshold();
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [
+    courses,
+    courses.length,
+    createScrollHandler,
+    isMyCourses,
+    loadMoreCourses,
+    pagination.endCursor,
+    pagination?.hasNextPage,
+  ]);
 
   // if the user has no courses, show a message
   if (isMyCourses && courses.length === 0) {
