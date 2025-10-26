@@ -179,7 +179,11 @@ const useReadingGoalReducer = (initialExampleKey?: keyof typeof readingGoalExamp
     if (initialExampleKey === 'custom') {
       initialValue = { ...initialState, exampleKey: initialExampleKey };
     } else {
-      initialValue = { ...initialState, ...readingGoalExamples[initialExampleKey].values };
+      initialValue = {
+        ...initialState,
+        exampleKey: initialExampleKey,
+        ...readingGoalExamples[initialExampleKey].values,
+      };
     }
   }
 
