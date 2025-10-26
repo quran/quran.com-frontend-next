@@ -126,7 +126,9 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
       logTabNextClick(Tab.key, state);
 
       if (!isLoggedIn()) {
-        router.push(getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey)));
+        router.push(
+          getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey ?? undefined)),
+        );
         return;
       }
 
