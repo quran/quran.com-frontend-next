@@ -145,7 +145,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
       {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
-      {/* Keep drawer mounted here since we removed it from Navbar */}
+
+      {/* Render the settings drawer component */}
       <SettingsDrawer />
     </div>
   );
