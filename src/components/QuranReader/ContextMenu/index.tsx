@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -50,14 +50,14 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
+  const isMobileView = useMemo(() => isMobile(), []);
+  const isMobileScrolledView = !showNavbar && isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || isMobileView;
+
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
-
-  const isMobileScrolledView = !showNavbar && isMobile();
-  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
-  const isMobileView = isMobile();
 
   return (
     <div
@@ -146,7 +146,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
 
-      {/* Render the settings drawer component */}
       <SettingsDrawer />
     </div>
   );

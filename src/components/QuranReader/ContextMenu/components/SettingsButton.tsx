@@ -20,7 +20,7 @@ const SettingsButton: React.FC<Props> = ({ className, ariaId = 'settings-button'
   const dispatch = useDispatch();
   const openSettings = () => {
     logEvent('drawer_settings_open');
-    dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
+    dispatch(setIsSettingsDrawerOpen(true));
   };
 
   return (
