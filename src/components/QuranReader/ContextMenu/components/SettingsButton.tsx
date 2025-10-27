@@ -8,6 +8,7 @@ import styles from './SettingsButton.module.scss';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import IconSettings from '@/icons/settings.svg';
 import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import { logEvent } from '@/utils/eventLogger';
 
 type Props = {
   className?: string;
@@ -18,6 +19,7 @@ const SettingsButton: React.FC<Props> = ({ className, ariaId = 'settings-button'
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const openSettings = () => {
+    logEvent('drawer_settings_open');
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
