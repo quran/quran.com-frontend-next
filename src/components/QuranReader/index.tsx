@@ -40,7 +40,7 @@ const QuranReader = ({
 
   return (
     <>
-      <FontPreLoader isQuranReader locale={lang} />
+      <FontPreLoader isQuranReader locale={lang} quranFont={quranReaderStyles.quranFont} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div

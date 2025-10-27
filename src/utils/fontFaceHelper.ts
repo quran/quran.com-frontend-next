@@ -54,8 +54,12 @@ export const getQCFFontFaceSource = (
     [QuranFont.TajweedV4]: 'QCF4_P',
   };
 
-  const { woff2, woff, ttf } = getFontPath(quranFont, pageNumber, version, theme);
-  return `local(${prefixesMap[quranFont]}${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
+  const { woff2, woff } = getFontPath(quranFont, pageNumber, version, theme);
+  const sources = [`url('${woff2}') format('woff2')`];
+  if (woff) {
+    sources.push(`url('${woff}') format('woff')`);
+  }
+  return `local(${prefixesMap[quranFont]}${pageName}), ${sources.join(', ')}`;
 };
 
 const getFontPath = (
@@ -74,8 +78,7 @@ const getFontPath = (
 
   const woff2 = `/fonts/quran/hafs/${path}/woff2/p${pageNumber}.woff2`;
   const woff = `/fonts/quran/hafs/${path}/woff/p${pageNumber}.woff`;
-  const ttf = `/fonts/quran/hafs/${path}/ttf/p${pageNumber}.ttf`;
-  return { woff2, woff, ttf };
+  return { woff2, woff };
 };
 
 /**
