@@ -15,6 +15,7 @@ import RevelationOrderNavigationNotice, {
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import KeyboardInput from '@/dls/KeyboardInput';
 import Switch from '@/dls/Switch/Switch';
+import useIsMobile from '@/hooks/useIsMobile';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import IconClose from '@/icons/close.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
@@ -27,7 +28,6 @@ import {
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
-import { isMobile } from '@/utils/responsive';
 
 const SidebarNavigation = () => {
   const router = useRouter();
@@ -40,6 +40,7 @@ const SidebarNavigation = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
+  const isMobileView = useIsMobile();
 
   useOutsideClickDetector(
     sidebarRef,
@@ -47,7 +48,7 @@ const SidebarNavigation = () => {
       logEvent('sidebar_navigation_close_outside_click');
       dispatch(setIsSidebarNavigationVisible(false));
     },
-    isSidebarVisible && isMobile(),
+    isSidebarVisible && isMobileView,
   );
 
   const navigationItems = [

@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import OnboardingStep from './OnboardingStep';
 import { checklistIndexToOnboardingSteps } from './steps';
 
+import useIsMobile from '@/hooks/useIsMobile';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import { selectOnboardingActiveStep, setActiveStepIndex } from '@/redux/slices/onboarding';
 import OnboardingGroup from '@/types/OnboardingGroup';
@@ -39,10 +40,11 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
+  const isMobileView = useIsMobile();
 
   const allSteps = useMemo(() => {
-    return checklistIndexToOnboardingSteps(t, OnboardingStep);
-  }, [t]);
+    return checklistIndexToOnboardingSteps(t, OnboardingStep, isMobileView);
+  }, [t, isMobileView]);
 
   const startTour = useCallback(
     (group = OnboardingGroup.HOMEPAGE, startIndex = 0) => {
