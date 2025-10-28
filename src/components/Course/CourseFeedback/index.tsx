@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CourseFeedback.module.scss';
 import CourseFeedbackModal from './CourseFeedbackModal';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { Course } from '@/types/auth/Course';
-import { getUserType } from '@/utils/auth/login';
+import { getUserType, isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getLoginNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -25,17 +26,18 @@ export enum FeedbackSource {
 const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = false }) => {
   const { t } = useTranslation('learn');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isLoggedIn, requireAuth } = useRequireAuth();
+  const router = useRouter();
+  const userIsLoggedIn = isLoggedIn();
 
   /**
    * listen to changes from the parent component. This will happen when the user
    * completes last lesson of the course.
    */
   useEffect(() => {
-    if (shouldOpenModal && isLoggedIn) {
+    if (shouldOpenModal && userIsLoggedIn) {
       setIsModalOpen(true);
     }
-  }, [shouldOpenModal, isLoggedIn]);
+  }, [shouldOpenModal, userIsLoggedIn]);
 
   const onAddFeedbackClicked = () => {
     const userType = getUserType();
@@ -44,10 +46,11 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
       source,
       userType,
     });
-
-    requireAuth(() => {
-      setIsModalOpen(true);
-    });
+    if (!userIsLoggedIn) {
+      router.replace(getLoginNavigationUrl(router.asPath));
+      return;
+    }
+    setIsModalOpen(true);
   };
 
   return (
