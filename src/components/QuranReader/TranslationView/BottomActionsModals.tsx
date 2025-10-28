@@ -96,7 +96,6 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
             innerRef={reflectionModalRef}
             isOpen={openedModal === ModalType.REFLECTION}
             onClose={() => handleModalClose(ModalType.REFLECTION)}
-            header={t('reflections-and-lessons')}
           >
             {surahAndAyahSelection}
             {body}
