@@ -12,7 +12,7 @@ export const getReflectionTabs = (t: (key: string) => string): Tab[] => [
   {
     title: (
       <div className={styles.titleContainer}>
-        <ChatIcon className={styles.icon} />
+        <ChatIcon />
         {t('common:reflections')}
       </div>
     ),
@@ -21,7 +21,7 @@ export const getReflectionTabs = (t: (key: string) => string): Tab[] => [
   {
     title: (
       <div className={styles.titleContainer}>
-        <LearningPlanIcon className={styles.icon} />
+        <LearningPlanIcon />
         {t('common:lessons')}
       </div>
     ),
@@ -30,13 +30,16 @@ export const getReflectionTabs = (t: (key: string) => string): Tab[] => [
 ];
 
 /**
- * Handle when the reflection is viewed:
- *
- * 1. If the user is logged in, we will call QDC's backend API.
- * 2. Otherwise, we will call QR's API directly.
+ * Handle when the reflection is viewed by logging the post view.
+ * The login status only affects the Sentry transaction name for error tracking.
  */
 export const handleReflectionViewed = (reflectionContainer: Element) => {
   const postId = reflectionContainer.getAttribute('data-post-id');
+
+  if (!postId) {
+    return;
+  }
+
   logPostView(postId).catch((e) => {
     logErrorToSentry(e, {
       transactionName: isLoggedIn()
