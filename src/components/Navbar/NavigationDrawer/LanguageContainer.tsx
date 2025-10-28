@@ -22,12 +22,12 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;
 
-interface LanguageContainerProps {
+interface LanguageContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   show: boolean;
   onBack: () => void;
 }
 
-const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack }) => {
+const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...props }) => {
   const { t, lang } = useTranslation('common');
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
@@ -78,9 +78,17 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack }) =
 
   return (
     <div
-      className={classNames(styles.languageContainer, {
-        [styles.show]: show,
-      })}
+      {...props}
+      role="dialog"
+      aria-modal="true"
+      aria-hidden={!show}
+      className={classNames(
+        styles.languageContainer,
+        {
+          [styles.show]: show,
+        },
+        props.className,
+      )}
     >
       <div className={styles.languageHeader}>
         <Button

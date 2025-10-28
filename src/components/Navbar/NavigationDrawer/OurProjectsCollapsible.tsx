@@ -37,14 +37,52 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
     logEvent('navigation_drawer_our_projects_collapsed');
   };
 
-  const onQuranComClick = () => logButtonClick('navigation_drawer_project_quran_com');
-  const onQuranAndroidClick = () => logButtonClick('navigation_drawer_project_quran_android');
-  const onQuranIosClick = () => logButtonClick('navigation_drawer_project_quran_ios');
-  const onQuranReflectClick = () => logButtonClick('navigation_drawer_project_quran_reflect');
-  const onSunnahClick = () => logButtonClick('navigation_drawer_project_sunnah');
-  const onNuqayahClick = () => logButtonClick('navigation_drawer_project_nuqayah');
-  const onLegacyClick = () => logButtonClick('navigation_drawer_project_legacy');
-  const onCorpusClick = () => logButtonClick('navigation_drawer_project_corpus');
+  const projects = [
+    {
+      title: 'Quran.com',
+      href: 'https://quran.com',
+      eventName: 'navigation_drawer_project_quran_com',
+    },
+    {
+      title: 'Quran For Android',
+      href: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1',
+      eventName: 'navigation_drawer_project_quran_android',
+    },
+    {
+      title: 'Quran iOS',
+      href: 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
+      eventName: 'navigation_drawer_project_quran_ios',
+    },
+    {
+      title: 'QuranReflect.com',
+      href: 'https://quranreflect.com/',
+      eventName: 'navigation_drawer_project_quran_reflect',
+    },
+    {
+      title: 'Sunnah.com',
+      href: 'https://sunnah.com/',
+      eventName: 'navigation_drawer_project_sunnah',
+    },
+    {
+      title: 'Nuqayah.com',
+      href: 'https://nuqayah.com/',
+      eventName: 'navigation_drawer_project_nuqayah',
+    },
+    {
+      title: 'Legacy.quran.com',
+      href: 'https://legacy.quran.com',
+      eventName: 'navigation_drawer_project_legacy',
+    },
+    {
+      title: 'Corpus.quran.com',
+      href: 'https://corpus.quran.com',
+      eventName: 'navigation_drawer_project_corpus',
+    },
+  ];
+
+  const handleProjectClick = (eventName: string) => () => {
+    logButtonClick(eventName);
+  };
 
   return (
     <Collapsible
@@ -70,70 +108,17 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
                 }}
               />
             </p>
-            <NavigationDrawerItem
-              title="Quran.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://quran.com"
-              isExternalLink
-              onClick={onQuranComClick}
-            />
-            <NavigationDrawerItem
-              title="Quran For Android"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1"
-              isExternalLink
-              onClick={onQuranAndroidClick}
-            />
-            <NavigationDrawerItem
-              title="Quran iOS"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303"
-              isExternalLink
-              onClick={onQuranIosClick}
-            />
-            <NavigationDrawerItem
-              title="QuranReflect.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://quranreflect.com/"
-              isExternalLink
-              onClick={onQuranReflectClick}
-            />
-            <NavigationDrawerItem
-              title="Sunnah.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://sunnah.com/"
-              isExternalLink
-              onClick={onSunnahClick}
-            />
-            <NavigationDrawerItem
-              title="Nuqayah.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://nuqayah.com/"
-              isExternalLink
-              onClick={onNuqayahClick}
-            />
-            <NavigationDrawerItem
-              title="Legacy.quran.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://legacy.quran.com"
-              isExternalLink
-              onClick={onLegacyClick}
-            />
-            <NavigationDrawerItem
-              title="Corpus.quran.com"
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://corpus.quran.com"
-              isExternalLink
-              onClick={onCorpusClick}
-            />
+            {projects.map((project) => (
+              <NavigationDrawerItem
+                key={project.href}
+                title={project.title}
+                titleClassName={itemTitleClassName}
+                icon={<IconArrowRight />}
+                href={project.href}
+                isExternalLink
+                onClick={handleProjectClick(project.eventName)}
+              />
+            ))}
           </div>
         );
       }}

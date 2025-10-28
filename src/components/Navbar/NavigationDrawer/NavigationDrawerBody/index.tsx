@@ -47,12 +47,17 @@ const NavigationDrawerBody = (): JSX.Element => {
 
   return (
     <div className={styles.listItemsContainer}>
-      <LanguageContainer show={showLanguageContainer} onBack={onBackButtonClick} />
+      <LanguageContainer
+        id="nav-lang-container"
+        show={showLanguageContainer}
+        onBack={onBackButtonClick}
+      />
       <div
         className={classNames(styles.mainListItems, {
           [styles.hide]: showLanguageContainer,
         })}
         aria-hidden={showLanguageContainer}
+        inert={showLanguageContainer || undefined}
       >
         <div className={styles.listItems}>
           <NavigationDrawerList

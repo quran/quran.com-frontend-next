@@ -14,6 +14,7 @@
   grid-template-rows: 1fr auto;
   overflow: hidden !important;
   block-size: 100%;
+  min-block-size: 0;
   transition: opacity 0.3s ease-in-out;
 
   &.hide {
@@ -23,6 +24,7 @@
 }
 
 .listItems {
+  min-block-size: 0;
   overflow-y: auto;
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);

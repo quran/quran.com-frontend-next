@@ -30,9 +30,9 @@ import {
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
 
-type ProfileAvatarButtonProps = {
+interface ProfileAvatarButtonProps {
   isPopoverPortalled?: boolean;
-};
+}
 
 const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPortalled = true }) => {
   const [isOpen, setIsOpen] = useState(false);

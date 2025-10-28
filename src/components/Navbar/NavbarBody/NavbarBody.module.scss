@@ -9,6 +9,7 @@
   background-color: var(--color-background-elevated);
   position: relative;
 
+  // Backdrop overlay that appears when the navigation drawer opens
   &::before {
     content: '';
     position: fixed;
