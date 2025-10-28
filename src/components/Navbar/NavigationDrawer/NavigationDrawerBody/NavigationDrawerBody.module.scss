@@ -5,7 +5,10 @@
   block-size: 100%;
   position: relative;
   overflow: hidden !important;
-  max-block-size: calc(100dvh - var(--navbar-height));
+  /* Fallback for browsers without dynamic viewport units */
+  max-block-size: calc(100vh - var(--navbar-height));
+  /* Prefer dynamic viewport units where supported */
+  max-height: calc(100dvh - var(--navbar-height));
 }
 
 .mainListItems {
@@ -15,7 +18,7 @@
   overflow: hidden !important;
   block-size: 100%;
   min-block-size: 0;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity var(--transition-regular) ease-in-out;
 
   &.hide {
     opacity: 0;
@@ -26,6 +29,8 @@
 .listItems {
   min-block-size: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
 }

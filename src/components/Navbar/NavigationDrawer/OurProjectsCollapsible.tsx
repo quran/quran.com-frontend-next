@@ -110,7 +110,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
             </p>
             {projects.map((project) => (
               <NavigationDrawerItem
-                key={project.href}
+                key={project.eventName}
                 title={project.title}
                 titleClassName={itemTitleClassName}
                 icon={<IconArrowRight />}

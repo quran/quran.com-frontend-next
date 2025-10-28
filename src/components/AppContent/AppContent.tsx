@@ -46,6 +46,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
           [styles.dimmed]: isNavigationDrawerOpen,
         })}
         inert={isNavigationDrawerOpen || undefined}
+        aria-hidden={isNavigationDrawerOpen || undefined}
       >
         <Component {...pageProps} />
       </div>

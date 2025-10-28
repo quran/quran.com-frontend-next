@@ -82,6 +82,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       role="dialog"
       aria-modal="true"
       aria-hidden={!show}
+      aria-labelledby="language-dialog-title"
       className={classNames(
         styles.languageContainer,
         {
@@ -98,7 +99,9 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
           onClick={onBack}
           className={styles.backButton}
         >
-          <span className={styles.languageTitle}>{t('select-language')}</span>
+          <span id="language-dialog-title" className={styles.languageTitle}>
+            {t('select-language')}
+          </span>
         </Button>
       </div>
       <div className={styles.languageList}>
