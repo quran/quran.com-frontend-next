@@ -39,6 +39,7 @@ type ReflectionBodyProps = {
   scrollToTop: () => void;
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
   initialContentType?: ContentType;
+  isModal?: boolean;
 };
 
 const ReflectionBodyContainer = ({
@@ -47,6 +48,7 @@ const ReflectionBodyContainer = ({
   initialVerseNumber,
   scrollToTop,
   initialContentType = ContentType.REFLECTIONS,
+  isModal = false,
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -83,9 +85,10 @@ const ReflectionBodyContainer = ({
         setSelectedVerseNumber={setSelectedVerseNumber}
         scrollToTop={scrollToTop}
         selectedContentType={selectedContentType}
+        isModal={isModal}
       />
     ),
-    [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType],
+    [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType, isModal],
   );
 
   const body = (
