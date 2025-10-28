@@ -66,11 +66,9 @@ const ReflectionBodyContainer = ({
     fakeNavigate(newUrl, lang);
   };
 
-  const onReflectionViewed = useCallback(handleReflectionViewed, []);
-
   useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
-    onReflectionViewed,
+    handleReflectionViewed,
     REFLECTIONS_OBSERVER_ID,
     'postId',
     'countAsViewedAfter',
