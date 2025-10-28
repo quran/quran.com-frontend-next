@@ -3,7 +3,7 @@ import { memo } from 'react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
@@ -16,10 +16,10 @@ import Spinner from '@/dls/Spinner/Spinner';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
-  selectNavbar,
-  setIsSearchDrawerOpen,
-  setIsNavigationDrawerOpen,
+  selectIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
 } from '@/redux/slices/navbar';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
@@ -45,7 +45,8 @@ const logDrawerOpenEvent = (drawerName: string) => {
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const { isNavigationDrawerOpen } = useSelector(selectNavbar, shallowEqual);
+  const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const loggedIn = isLoggedIn();
 
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
@@ -64,6 +65,7 @@ const NavbarBody: React.FC = () => {
       className={classNames(styles.itemsContainer, {
         [styles.dimmed]: isNavigationDrawerOpen,
       })}
+      inert={isNavigationDrawerOpen || undefined}
     >
       <div className={styles.centerVertically}>
         <div className={styles.leftCTA}>
@@ -72,7 +74,7 @@ const NavbarBody: React.FC = () => {
       </div>
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
-          {!isLoggedIn() && (
+          {!loggedIn && (
             <>
               <ProfileAvatarButton />
             </>
@@ -91,7 +93,7 @@ const NavbarBody: React.FC = () => {
             <SearchDrawer />
             <SidebarNavigation />
           </>
-          {isLoggedIn() && (
+          {loggedIn && (
             <>
               <ProfileAvatarButton />
             </>

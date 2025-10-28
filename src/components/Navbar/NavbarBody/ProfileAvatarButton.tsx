@@ -34,7 +34,7 @@ type ProfileAvatarButtonProps = {
   isPopoverPortalled?: boolean;
 };
 
-const ProfileAvatarButton = ({ isPopoverPortalled = true }: ProfileAvatarButtonProps) => {
+const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPortalled = true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -152,7 +152,7 @@ const ProfileAvatarButton = ({ isPopoverPortalled = true }: ProfileAvatarButtonP
       href={getLoginNavigationUrl(router.asPath)}
       onClick={() => {
         dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
-        onTriggerClicked;
+        onTriggerClicked();
       }}
       id="login-button"
       className={styles.loginButton}

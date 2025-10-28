@@ -93,7 +93,7 @@
   }
 
   svg path {
-    transition: color stroke var(--transition-fast) ease-in-out;
+    transition: color var(--transition-fast) ease-in-out, stroke var(--transition-fast) ease-in-out;
     stroke: var(--color-text-default);
   }
 }

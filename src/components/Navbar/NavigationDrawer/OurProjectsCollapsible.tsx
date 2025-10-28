@@ -82,7 +82,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
               title="Quran For Android"
               titleClassName={itemTitleClassName}
               icon={<IconArrowRight />}
-              href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1 "
+              href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1"
               isExternalLink
               onClick={onQuranAndroidClick}
             />
@@ -90,7 +90,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
               title="Quran iOS"
               titleClassName={itemTitleClassName}
               icon={<IconArrowRight />}
-              href="https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303 "
+              href="https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303"
               isExternalLink
               onClick={onQuranIosClick}
             />

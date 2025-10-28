@@ -5,7 +5,7 @@
   height: 100%;
   position: relative;
   overflow: hidden !important;
-  max-height: calc(100vh - var(--navbar-height));
+  max-height: calc(100dvh - var(--navbar-height));
 }
 
 .mainListItems {
