@@ -220,8 +220,7 @@
   padding-inline-end: 0;
 }
 
-.simplified {
-  --themed-bg: #22a5ad;
+.simplified_base {
   background-color: transparent;
   color: var(--themed-bg);
   font-weight: var(--font-weight-bold);
@@ -231,15 +230,28 @@
   padding: var(--spacing-xxsmall);
 }
 
+.simplified {
+  @extend .simplified_base;
+  --themed-bg: #22a5ad;
+}
+
 .simplified_accent {
+  @extend .simplified_base;
   --themed-bg: var(--color-success-medium);
-  background-color: transparent;
-  color: var(--themed-bg);
-  font-weight: var(--font-weight-bold);
-  border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--themed-bg);
-  font-size: var(--font-size-small);
-  padding: var(--spacing-xxsmall);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-success-deep);
+      color: var(--color-text-inverse);
+      opacity: var(--opacity-85);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-success-medium);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+  }
 }
 
 .accent {
@@ -252,7 +264,7 @@
   padding: var(--spacing-xxsmall);
 
   .prefix svg path {
-    fill: var(--color-text-inverse) !important;
+    fill: var(--color-text-inverse);
   }
 
   @media (hover: hover) {

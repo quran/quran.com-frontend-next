@@ -5,7 +5,7 @@
   block-size: 100%;
   position: relative;
   overflow: hidden !important;
-  max-block-size: calc(100vh - var(--navbar-height));
+  max-block-size: calc(100dvh - var(--navbar-height));
 }
 
 .mainListItems {

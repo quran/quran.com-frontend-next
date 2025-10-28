@@ -1,37 +1,49 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import LanguageContainer from '../LanguageContainer';
 import NavigationDrawerList from '../NavigationDrawerList';
-import ThemeSwitcher from '../ThemeSwitcher';
 
 import styles from './NavigationDrawerBody.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import IconDiamond from '@/icons/diamond.svg';
 import IconGlobe from '@/icons/globe.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 
-const NavigationDrawerBody = () => {
+const ThemeSwitcher = dynamic(() => import('../ThemeSwitcher'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
+
+const EVENT_NAMES = {
+  NAV_DRAWER_LANGUAGE_OPEN: 'navigation_drawer_language_selector_open',
+  NAV_DRAWER_LANGUAGE_CLOSE: 'navigation_drawer_language_selector_close',
+  NAV_DRAWER_DONATE: 'navigation_drawer_donate',
+} as const;
+
+const NavigationDrawerBody = (): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const [showLanguageContainer, setShowLanguageContainer] = useState(false);
 
-  const onLanguageButtonClick = () => {
+  const onLanguageButtonClick = useCallback(() => {
     setShowLanguageContainer(true);
-    logEvent('navigation_drawer_language_selector_open');
-  };
+    logEvent(EVENT_NAMES.NAV_DRAWER_LANGUAGE_OPEN);
+  }, []);
 
-  const onBackButtonClick = () => {
+  const onBackButtonClick = useCallback(() => {
     setShowLanguageContainer(false);
-    logEvent('navigation_drawer_language_selector_close');
-  };
+    logEvent(EVENT_NAMES.NAV_DRAWER_LANGUAGE_CLOSE);
+  }, []);
 
-  const onDonateClick = () => {
-    logButtonClick('navigation_drawer_donate');
-  };
+  const onDonateClick = useCallback(() => {
+    logButtonClick(EVENT_NAMES.NAV_DRAWER_DONATE);
+  }, []);
 
   return (
     <div className={styles.listItemsContainer}>
@@ -40,10 +52,10 @@ const NavigationDrawerBody = () => {
         className={classNames(styles.mainListItems, {
           [styles.hide]: showLanguageContainer,
         })}
+        aria-hidden={showLanguageContainer}
       >
         <div className={styles.listItems}>
           <NavigationDrawerList
-            accordionHeaderClassName={styles.accordionHeader}
             accordionHeaderLeftClassName={styles.accordionHeaderLeft}
             accordionContentClassName={styles.accordionContent}
             accordionItemTitleClassName={styles.accordionItemTitle}
@@ -59,8 +71,10 @@ const NavigationDrawerBody = () => {
               size={ButtonSize.Small}
               shape={ButtonShape.Pill}
               onClick={onLanguageButtonClick}
+              aria-expanded={showLanguageContainer}
+              aria-controls="nav-lang-container"
             >
-              {getLocaleName(lang)}
+              {getLocaleName(lang) || lang}
             </Button>
             <ThemeSwitcher />
           </div>

@@ -45,6 +45,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
         className={classNames(styles.contentContainer, {
           [styles.dimmed]: isNavigationDrawerOpen,
         })}
+        inert={isNavigationDrawerOpen || undefined}
       >
         <Component {...pageProps} />
       </div>

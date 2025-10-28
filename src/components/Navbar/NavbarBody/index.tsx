@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
@@ -19,10 +19,10 @@ import Spinner from '@/dls/Spinner/Spinner';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
-  selectNavbar,
-  setIsSearchDrawerOpen,
-  setIsNavigationDrawerOpen,
+  selectIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
 } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
@@ -71,7 +71,8 @@ interface Props {
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const { isNavigationDrawerOpen } = useSelector(selectNavbar, shallowEqual);
+  const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const loggedIn = isLoggedIn();
 
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
@@ -167,6 +168,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         className={classNames(styles.itemsContainer, {
           [styles.dimmed]: isNavigationDrawerOpen,
         })}
+        inert={isNavigationDrawerOpen || undefined}
       >
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
@@ -180,7 +182,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
-            {!isLoggedIn() && <ProfileAvatarButton />}
+            {!loggedIn && <ProfileAvatarButton />}
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
@@ -192,7 +194,10 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
               <IconSearch />
             </Button>
             <SearchDrawer />
+
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            {loggedIn && <ProfileAvatarButton />}
+
             <Button
               tooltip={t('menu')}
               variant={ButtonVariant.Ghost}
