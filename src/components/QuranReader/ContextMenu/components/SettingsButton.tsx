@@ -10,12 +10,15 @@ import IconSettings from '@/icons/settings.svg';
 import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
-type Props = {
+interface SettingsButtonProps {
   className?: string;
   ariaId?: string;
-};
+}
 
-const SettingsButton: React.FC<Props> = ({ className, ariaId = 'settings-button' }) => {
+const SettingsButton: React.FC<SettingsButtonProps> = ({
+  className,
+  ariaId = 'settings-button',
+}) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const openSettings = () => {

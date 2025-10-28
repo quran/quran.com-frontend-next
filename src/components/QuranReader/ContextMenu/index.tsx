@@ -52,7 +52,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
   const isMobileView = useMemo(() => isMobile(), []);
   const isMobileScrolledView = !showNavbar && isMobileView;
-  const isNotMobileOrScrolledView = !showNavbar || isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
