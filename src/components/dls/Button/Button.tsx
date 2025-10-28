@@ -83,14 +83,11 @@ const INCOMPATIBLE_COMBINATIONS: Record<ButtonVariant, ButtonType[]> = {
  * Validates that the type and variant combination is compatible.
  * Logs a warning in development mode if an incompatible combination is detected.
  *
- * @returns {{ isValid: boolean; safeType: ButtonType; safeVariant?: ButtonVariant }} Object containing isValid flag, safeType (falls back to Primary if incompatible), and safeVariant
+ * @returns {ButtonType} safeType - The button type (falls back to Primary if incompatible)
  */
-const validateTypeVariantCombination = (
-  type: ButtonType,
-  variant?: ButtonVariant,
-): { isValid: boolean; safeType: ButtonType; safeVariant?: ButtonVariant } => {
+const validateTypeVariantCombination = (type: ButtonType, variant?: ButtonVariant): ButtonType => {
   if (!variant) {
-    return { isValid: true, safeType: type, safeVariant: variant };
+    return type;
   }
 
   const incompatibleTypes = INCOMPATIBLE_COMBINATIONS[variant] || [];
@@ -108,11 +105,7 @@ const validateTypeVariantCombination = (
     );
   }
 
-  return {
-    isValid: !isIncompatible,
-    safeType: isIncompatible ? ButtonType.Primary : type,
-    safeVariant: variant,
-  };
+  return isIncompatible ? ButtonType.Primary : type;
 };
 
 export type ButtonProps = {
@@ -167,7 +160,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   // Validate type+variant combination and use safe values
-  const { safeType } = validateTypeVariantCombination(type, variant);
+  const safeType = validateTypeVariantCombination(type, variant);
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
     [styles.withText]: typeof children === 'string',

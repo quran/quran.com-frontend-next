@@ -246,12 +246,6 @@
       opacity: var(--opacity-85);
     }
   }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-success-medium);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-  }
 }
 
 .accent {
