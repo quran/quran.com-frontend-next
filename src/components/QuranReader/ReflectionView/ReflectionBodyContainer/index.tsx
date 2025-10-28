@@ -3,16 +3,14 @@ import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
+import { getReflectionTabs, handleReflectionViewed } from './helpers';
 import styles from './ReflectionBodyContainer.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import NewLabel from '@/dls/Badge/NewLabel';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
-import { logErrorToSentry } from '@/lib/sentry';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -20,10 +18,9 @@ import {
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
 import {
-  makeAyahReflectionsUrl,
-  logPostView,
-  REFLECTION_POST_TYPE_ID,
   LESSON_POST_TYPE_ID,
+  REFLECTION_POST_TYPE_ID,
+  makeAyahReflectionsUrl,
 } from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
@@ -56,19 +53,6 @@ const ReflectionBodyContainer = ({
   const [selectedContentType, setSelectedContentType] = useState(initialContentType);
   const { lang, t } = useTranslation();
 
-  const tabs = [
-    { title: t('common:reflections'), value: ContentType.REFLECTIONS },
-    {
-      title: (
-        <div className={styles.titleContainer}>
-          {t('common:lessons')}
-          <NewLabel />
-        </div>
-      ),
-      value: ContentType.LESSONS,
-    },
-  ];
-
   const handleTabChange = (value: ContentType) => {
     logEvent('reflection_view_tab_change', { tab: value });
     setSelectedContentType(value);
@@ -80,25 +64,8 @@ const ReflectionBodyContainer = ({
     fakeNavigate(newUrl, lang);
   };
 
-  /**
-   * Handle when the reflection is viewed:
-   *
-   * 1. If the user is logged in, we will call QDC's backend API.
-   * 2. Otherwise, we will call QR's API directly.
-   */
-  const onReflectionViewed = useCallback((reflectionContainer: Element) => {
-    const postId = reflectionContainer.getAttribute('data-post-id');
-    logPostView(postId).catch((e) => {
-      logErrorToSentry(e, {
-        transactionName: isLoggedIn()
-          ? 'post_reflection_views_logged_in'
-          : 'post_reflection_views_logged_out',
-        metadata: {
-          postId,
-        },
-      });
-    });
-  }, []);
+  const onReflectionViewed = useCallback(handleReflectionViewed, []);
+
   useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
     onReflectionViewed,
@@ -124,7 +91,13 @@ const ReflectionBodyContainer = ({
   const body = (
     <>
       {/* @ts-ignore */}
-      <Tabs tabs={tabs} selected={selectedContentType} onSelect={handleTabChange} />
+      <Tabs
+        tabs={getReflectionTabs(t)}
+        selected={selectedContentType}
+        onSelect={handleTabChange}
+        className={styles.tab}
+        activeClassName={styles.tabActive}
+      />
       <DataFetcher
         loading={TafsirSkeleton}
         queryKey={makeAyahReflectionsUrl({

@@ -1,5 +1,22 @@
 .titleContainer {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-micro-px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro-px);
+}
+
+.tab {
+  width: 100%;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
+  svg {
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+  }
+}
+
+.tabActive {
+  color: var(--color-success-medium);
+  // override the default styles of the Tabs component
+  border-block-end: 2px solid var(--color-success-medium) !important;
 }
