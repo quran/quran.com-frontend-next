@@ -88,6 +88,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
       <ReflectionBodyContainer
         initialChapterId={chapterId}
         initialVerseNumber={verseNumber}
+        isModal
         scrollToTop={() => {
           reflectionModalRef.current?.scrollToTop();
         }}
