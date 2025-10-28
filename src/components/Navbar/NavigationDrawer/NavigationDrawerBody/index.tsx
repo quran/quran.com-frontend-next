@@ -78,6 +78,7 @@ const NavigationDrawerBody = (): JSX.Element => {
               onClick={onLanguageButtonClick}
               aria-expanded={showLanguageContainer}
               aria-controls="nav-lang-container"
+              aria-haspopup="dialog"
             >
               {getLocaleName(lang) || lang}
             </Button>
