@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { isLoggedIn, getUserType } from '@/utils/auth/login';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
@@ -22,14 +22,14 @@ const CompleteButton: React.FC<Props> = ({ isLoading, id, markLessonAsCompleted 
   const userIsLoggedIn = isLoggedIn();
 
   const onMarkAsCompletedClicked = () => {
-    const userType = getUserType();
+    const userType = userIsLoggedIn ? 'logged_in' : 'guest';
     logButtonClick('mark_lesson_as_completed', {
       lessonId: id,
       userType,
     });
 
     if (!userIsLoggedIn) {
-      router.replace(getLoginNavigationUrl(router.asPath));
+      router.replace(getLoginNavigationUrl(encodeURIComponent(router.asPath)));
       return;
     }
     markLessonAsCompleted(id, () => {

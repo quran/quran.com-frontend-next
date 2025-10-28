@@ -8,7 +8,7 @@ import CourseFeedbackModal from './CourseFeedbackModal';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { Course } from '@/types/auth/Course';
-import { getUserType, isLoggedIn } from '@/utils/auth/login';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
@@ -40,14 +40,14 @@ const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = fal
   }, [shouldOpenModal, userIsLoggedIn]);
 
   const onAddFeedbackClicked = () => {
-    const userType = getUserType();
+    const userType = userIsLoggedIn ? 'logged_in' : 'guest';
 
     logButtonClick('add_course_feedback', {
       source,
       userType,
     });
     if (!userIsLoggedIn) {
-      router.replace(getLoginNavigationUrl(router.asPath));
+      router.replace(getLoginNavigationUrl(encodeURIComponent(router.asPath)));
       return;
     }
     setIsModalOpen(true);
