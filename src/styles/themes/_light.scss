@@ -1,4 +1,4 @@
-@use "src/styles/shades";
+@use 'src/styles/shades';
 
 @mixin mode {
   --color-primary-faded: #fff;
@@ -67,6 +67,7 @@
 
   --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-small-new: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-flat: 0px 0px 8px rgba(0, 0, 0, 0.12);
   --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
   --shadow-medium: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
   --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);

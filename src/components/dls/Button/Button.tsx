@@ -38,6 +38,8 @@ export enum ButtonVariant {
   Compact = 'compact',
   Outlined = 'outlined',
   Simplified = 'simplified',
+  SimplifiedAccent = 'simplified_accent',
+  Accent = 'accent',
 }
 
 export type ButtonProps = {
@@ -119,6 +121,8 @@ const Button: React.FC<ButtonProps> = ({
     [styles.compact]: variant === ButtonVariant.Compact,
     [styles.outlined]: variant === ButtonVariant.Outlined,
     [styles.simplified]: variant === ButtonVariant.Simplified,
+    [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
+    [styles.accent]: variant === ButtonVariant.Accent,
     [styles.disabled]: disabled || isLoading,
     [styles.noSidePadding]: !hasSidePadding,
   });

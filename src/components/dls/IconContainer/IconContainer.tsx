@@ -11,6 +11,8 @@ export enum IconColor {
   primary = 'primary',
   secondary = 'secondary',
   tertiary = 'tertiary',
+  quaternary = 'quaternary',
+  accent = 'accent',
 }
 export enum IconSize {
   Xsmall = 'xsmall',
@@ -44,6 +46,8 @@ const IconContainer = ({
           (shouldForceSetColors && color === IconColor.default) || color === IconColor.primary,
         [styles.secondaryColor]: shouldForceSetColors && color === IconColor.secondary,
         [styles.tertiaryColor]: shouldForceSetColors && color === IconColor.tertiary,
+        [styles.quaternaryColor]: shouldForceSetColors && color === IconColor.quaternary,
+        [styles.accentColor]: shouldForceSetColors && color === IconColor.accent,
         [styles.xsmallIcon]: size === IconSize.Xsmall,
         [styles.smallIcon]: size === IconSize.Small,
         [styles.mediumIcon]: size === IconSize.Medium,
