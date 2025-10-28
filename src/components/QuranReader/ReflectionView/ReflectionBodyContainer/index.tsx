@@ -93,7 +93,6 @@ const ReflectionBodyContainer = ({
 
   const body = (
     <>
-      {/* @ts-ignore */}
       <Tabs
         tabs={getReflectionTabs(t)}
         selected={selectedContentType}

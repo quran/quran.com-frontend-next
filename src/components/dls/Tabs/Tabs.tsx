@@ -28,7 +28,7 @@ const Tabs = ({ tabs, onSelect, selected, className, activeClassName }: TabsProp
             className,
             styles.tabItem,
             selected === tab.value && activeClassName,
-            selected === tab.value && styles.tabItemSelected,
+            selected === tab.value && !activeClassName && styles.tabItemSelected,
           )}
           key={tab.value}
           role="tab"
