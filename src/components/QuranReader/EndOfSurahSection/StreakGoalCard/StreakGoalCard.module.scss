@@ -12,9 +12,11 @@
   @include theme.light {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
+
   @include theme.dark {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
+
   @include theme.sepia {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
@@ -61,6 +63,7 @@
 .titleIcon {
   width: 30px;
   height: 30px;
+
   path {
     fill: var(--color-streaks-dark);
   }
@@ -84,6 +87,7 @@
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-semibold);
   text-align: center;
+
   @include breakpoints.smallerThanTablet {
     display: none;
   }
@@ -94,6 +98,7 @@
   background-color: var(--color-streaks-dark);
   border-color: var(--color-streaks-dark);
   font-weight: var(--font-weight-semibold);
+
   &:hover {
     background-color: var(--color-streaks-dark);
     border-color: var(--color-streaks-dark);
@@ -110,6 +115,7 @@
 
 .buttonIcon {
   margin-inline-end: var(--spacing-xsmall);
+
   path {
     fill: var(--color-text-white);
   }
@@ -129,6 +135,7 @@
 .streakIcon {
   width: 60px;
   height: 60px;
+
   path {
     fill: var(--color-streaks-dark);
   }
@@ -149,6 +156,7 @@
   font-size: var(--font-size-jumbo);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-black);
+
   @include breakpoints.tablet {
     font-size: var(--font-size-xjumbo-px);
   }
@@ -158,6 +166,7 @@
   font-size: var(--font-size-normal);
   color: var(--color-text-gray);
   font-weight: var(--font-weight-semibold);
+
   @include breakpoints.tablet {
     font-size: var(--font-size-large-px);
   }
@@ -230,8 +239,8 @@
 .goalArrowIcon {
   svg {
     @include breakpoints.smallerThanTablet {
-      width: 12px !important;
-      height: 12px !important;
+      width: 12px;
+      height: 12px;
     }
   }
 }

@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import { ChapterContent } from 'types/ApiResponses';
 
 import ChapterLink from './ChapterLink';
 import styles from './ReadMoreCard.module.scss';
@@ -16,7 +17,6 @@ import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '
 import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
-import { ChapterContent } from 'types/ApiResponses';
 
 interface ReadMoreCardProps {
   chapterNumber: number;
@@ -35,7 +35,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
   const chaptersData = useContext(DataContext);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
-  const shouldShowArabicName = useMemo(() => shouldUseMinimalLayout(lang), [lang]);
+  const shouldShowArabicName = shouldUseMinimalLayout(lang);
 
   const nextChapterNumber = useMemo(
     () => getNextChapterNumber(chapterNumber, isReadingByRevelationOrder),

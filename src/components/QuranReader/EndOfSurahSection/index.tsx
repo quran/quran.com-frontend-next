@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const scrollToTop = useScrollToTop();
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
-  const verseKey = useMemo(() => `${chapterNumber}:1`, [chapterNumber]);
+  const verseKey = `${chapterNumber}:1`;
 
   const fetcher = useCallback(
     async () => getChapterMetadata(chapterNumber, lang),
@@ -47,7 +47,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
     setOpenedModal(null);
   }, []);
 
-  const chapterMetadata = useMemo(() => metadataResponse?.chapterMetadata, [metadataResponse]);
+  const chapterMetadata = metadataResponse?.chapterMetadata;
 
   return (
     <div className={styles.container} data-testid="end-of-surah-section">

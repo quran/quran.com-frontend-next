@@ -1,14 +1,14 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import { ChapterSummary } from 'types/ApiResponses';
+import Chapter from 'types/Chapter';
 
 import styles from './ReadMoreCard.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getWordCount } from '@/utils/string';
-import { ChapterSummary } from 'types/ApiResponses';
-import Chapter from 'types/Chapter';
 
 const MIN_SUMMARY_WORDS = 3;
 const LONG_SUMMARY_THRESHOLD = 7;
@@ -39,8 +39,9 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
   const chapterSubtitle = shouldShowArabicName ? chapter.nameArabic : chapter.translatedName;
 
   const summaryText = summary?.text;
-  const hasSummary = summaryText && getWordCount(summaryText) > MIN_SUMMARY_WORDS;
-  const isLongSummary = hasSummary && getWordCount(summaryText) > LONG_SUMMARY_THRESHOLD;
+  const wordCount = summaryText ? getWordCount(summaryText) : 0;
+  const hasSummary = wordCount > MIN_SUMMARY_WORDS;
+  const isLongSummary = hasSummary && wordCount > LONG_SUMMARY_THRESHOLD;
 
   const handleClick = () => {
     const eventName = isNext ? 'end_of_surah_next_chapter' : 'end_of_surah_previous_chapter';

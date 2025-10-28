@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import { ChapterContent } from 'types/ApiResponses';
 
 import { ACTION_BUTTONS, ActionButton } from './actions';
 import styles from './ExploreCard.module.scss';
@@ -15,7 +16,6 @@ import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { pickRandom } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getProfileNavigationUrl } from '@/utils/navigation';
-import { ChapterContent } from 'types/ApiResponses';
 
 interface ExploreCardProps {
   chapterNumber: number;
@@ -37,8 +37,6 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   const selectedTafsirs = useSelector(selectSelectedTafsirs);
 
   const randomSuggestion = useMemo(() => pickRandom(suggestions), [suggestions]);
-
-  const actionButtons: ActionButton[] = ACTION_BUTTONS;
 
   const handleMyQuranClick = () => {
     logButtonClick('end_of_surah_my_quran');
@@ -78,7 +76,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 
       <div className={styles.content}>
         <div className={styles.buttonsRow}>
-          {actionButtons.map((button) => {
+          {ACTION_BUTTONS.map((button) => {
             const Icon = button.icon;
             const label = getButtonLabel(button);
 
