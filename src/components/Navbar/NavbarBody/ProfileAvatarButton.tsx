@@ -45,7 +45,6 @@ const ProfileAvatarButton = ({ isPopoverPortalled = true }: ProfileAvatarButtonP
 
   const onTriggerClicked = () => {
     dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
-    dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
     if (!isUserLoggedIn) {
       logButtonClick('profile_avatar_login');
     }
@@ -151,7 +150,10 @@ const ProfileAvatarButton = ({ isPopoverPortalled = true }: ProfileAvatarButtonP
       variant={ButtonVariant.SimplifiedAccent}
       size={ButtonSize.Small}
       href={getLoginNavigationUrl(router.asPath)}
-      onClick={onTriggerClicked}
+      onClick={() => {
+        dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
+        onTriggerClicked;
+      }}
       id="login-button"
       className={styles.loginButton}
     >
