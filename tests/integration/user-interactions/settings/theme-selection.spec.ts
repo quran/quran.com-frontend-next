@@ -24,7 +24,7 @@ test.describe('Theme Selection', () => {
 
   test(
     'Theme selection changes active theme correctly',
-    { tag: ['@fast', '@settings', '@theme'] },
+    { tag: ['@fast', '@settings', '@theme', '@smoke'] },
     async ({ page }) => {
       let bodyTheme = await page.locator('body').getAttribute('data-theme');
       // 1. Make sure the auto theme is the currently selected theme

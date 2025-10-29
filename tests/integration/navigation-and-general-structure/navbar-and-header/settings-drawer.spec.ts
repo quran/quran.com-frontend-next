@@ -12,7 +12,7 @@ test.beforeEach(async ({ page, context }) => {
 test(
   'Settings drawer icon should open the drawer when clicked',
   {
-    tag: ['@navbar', '@settings', '@fast'],
+    tag: ['@navbar', '@settings', '@fast', '@smoke'],
   },
   async ({ page }) => {
     // 1. Make sure the drawer has no children before opening it

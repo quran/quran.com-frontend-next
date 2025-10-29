@@ -35,7 +35,7 @@ test.beforeEach(async ({ page, context }) => {
 test.describe('Translation Selection', () => {
   test(
     'All available translations are displayed in settings',
-    { tag: ['@fast', '@translations', '@settings'] },
+    { tag: ['@fast', '@translations', '@settings', '@smoke'] },
     async ({ page }) => {
       // 1. Click on the button
       await page.getByLabel('Change Translation').click();

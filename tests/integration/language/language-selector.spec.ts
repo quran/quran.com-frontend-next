@@ -13,7 +13,7 @@ test.beforeEach(async ({ page, context }) => {
 test(
   'Language selector in the navbar opens and displays all languages',
   {
-    tag: ['@nav', '@language', '@fast'],
+    tag: ['@nav', '@language', '@fast', '@smoke'],
   },
   async ({ page }) => {
     // 1. make sure the language selector items are not visible

@@ -12,7 +12,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test(
   'Navigation drawer icon should open the drawer when clicked',
-  { tag: ['@fast', '@drawer'] },
+  { tag: ['@fast', '@drawer', '@smoke'] },
   async ({ page }) => {
     // Make sure the navigation drawer is not visible before opening it
     await expect(page.getByTestId('navigation-drawer-body')).not.toBeVisible();

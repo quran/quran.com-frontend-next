@@ -12,7 +12,7 @@ test.beforeEach(async ({ page, context }) => {
 test(
   'Search drawer icon should open the search drawer when clicked',
   {
-    tag: ['@navbar', '@search', '@fast'],
+    tag: ['@navbar', '@search', '@fast', '@smoke'],
   },
   async ({ page }) => {
     // Make sure the search drawer is not visible before opening it

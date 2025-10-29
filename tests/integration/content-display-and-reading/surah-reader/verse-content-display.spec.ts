@@ -22,7 +22,7 @@ test.beforeEach(async ({ page, context }) => {
 test.describe('Verse Content Display', () => {
   test(
     'Verse Arabic text is displayed correctly',
-    { tag: ['@fast', '@content', '@verses'] },
+    { tag: ['@fast', '@content', '@verses', '@smoke'] },
     async ({ page }) => {
       // Verify the first verse contains Arabic text
       const firstVerse = page.getByTestId('verse-1:1');
@@ -32,7 +32,7 @@ test.describe('Verse Content Display', () => {
 
   test(
     'Verse translation text is displayed correctly',
-    { tag: ['@fast', '@content', '@verses'] },
+    { tag: ['@fast', '@content', '@verses', '@smoke'] },
     async ({ page }) => {
       // Verify the first verse translation is visible
       const firstVerse = page.getByTestId('verse-1:1');

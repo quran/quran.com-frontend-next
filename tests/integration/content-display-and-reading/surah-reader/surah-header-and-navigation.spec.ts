@@ -13,7 +13,7 @@ test.beforeEach(async ({ page, context }) => {
 test.describe('Surah Header Display', () => {
   test(
     'Surah header displays calligraphy, transliteration and translation',
-    { tag: ['@fast', '@surah', '@header'] },
+    { tag: ['@fast', '@surah', '@header', '@smoke'] },
     async ({ page }) => {
       // Pre-calcul of the chapter title locator
       const chapterTitle = page.getByTestId('chapter-title');

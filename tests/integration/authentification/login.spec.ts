@@ -12,7 +12,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test(
   'Login to an existing user works and redirects to the home page',
-  { tag: ['@slow', '@auth', '@login-user'] },
+  { tag: ['@slow', '@auth', '@login-user', '@smoke'] },
   async ({ page }) => {
     // Click on the "Continue with Email" button
     const authButtons = page.getByTestId('auth-buttons');

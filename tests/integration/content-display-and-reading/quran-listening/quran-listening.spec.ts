@@ -17,7 +17,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test(
   'Clicking the "Listen" button in the reader header toggles play and pause',
-  { tag: ['@slow', '@reading', '@audio'] },
+  { tag: ['@slow', '@reading', '@audio', '@smoke'] },
   async ({ page }) => {
     const playButton = page.getByTestId('listen-button');
     await expect(playButton).toBeVisible();

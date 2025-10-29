@@ -10,7 +10,7 @@ test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 });
 
-test('Page /S should load Surah S', { tag: ['@url'] }, async ({ page }) => {
+test('Page /S should load Surah S', { tag: ['@url', '@smoke'] }, async ({ page }) => {
   await homePage.goTo('/75');
   await expect(page.getByText('Al-Qiyamah').first()).toBeVisible();
   expect(await page.title()).toContain('Al-Qiyamah');
@@ -18,7 +18,7 @@ test('Page /S should load Surah S', { tag: ['@url'] }, async ({ page }) => {
 
 test(
   'Page /S/V should load Ayah V of Surah S',
-  { tag: ['@url', '@reader', '@verse'] },
+  { tag: ['@url', '@reader', '@verse', '@smoke'] },
   async ({ page }) => {
     await homePage.goTo('/2/255');
     await expect(
@@ -75,7 +75,7 @@ test(
 
 test(
   'Page /{surah name} should load Surah {surah name}',
-  { tag: ['@url', '@surah', '@reader'] },
+  { tag: ['@url', '@surah', '@reader', '@smoke'] },
   async ({ page }) => {
     await homePage.goTo('/al-qalam');
     await expect(page.getByText('Al-Qalam').first()).toBeVisible();
@@ -110,7 +110,7 @@ test(
 
 test(
   'Page /juz/N should load Juz N with correct title',
-  { tag: ['@url', '@juz', '@reader'] },
+  { tag: ['@url', '@juz', '@reader', '@smoke'] },
   async ({ page, isMobile }) => {
     await homePage.goTo('/juz/30');
 
@@ -129,7 +129,7 @@ test(
 
 test(
   'Page /page/N should load Page N with correct title',
-  { tag: ['@url', '@page', '@reader'] },
+  { tag: ['@url', '@page', '@reader', '@smoke'] },
   async ({ page }) => {
     await homePage.goTo('/page/200');
     await expect(page.getByText('9:80')).toBeVisible();

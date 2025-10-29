@@ -13,7 +13,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test(
   'A user can create an account and reach the verification code step',
-  { tag: ['@slow', '@auth', '@create-user'] },
+  { tag: ['@slow', '@auth', '@create-user', '@smoke'] },
   async ({ page }) => {
     // Click on the "Continue with Email" button
     const authButtons = page.getByTestId('auth-buttons');

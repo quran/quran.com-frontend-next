@@ -93,7 +93,7 @@ test.describe('Homepage Search Bar - Verse Content Search', () => {
 
   test(
     'Search for specific verse reference displays verse content',
-    { tag: ['@fast', '@search', '@verses'] },
+    { tag: ['@fast', '@search', '@verses', '@smoke'] },
     async ({ page }) => {
       // 1. Search for '2:255' and wait for API response
       const [searchResults] = await Promise.all([
@@ -113,7 +113,7 @@ test.describe('Homepage Search Bar - Verse Content Search', () => {
 test.describe('Homepage Search Bar - General Search Features', () => {
   test(
     'Number search displays all relevant results',
-    { tag: ['@fast', '@search', '@general'] },
+    { tag: ['@fast', '@search', '@general', '@smoke'] },
     async ({ page }) => {
       // 1. Search for '5' and wait for API response
       const [searchResults] = await Promise.all([

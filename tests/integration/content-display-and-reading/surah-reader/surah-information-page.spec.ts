@@ -13,7 +13,7 @@ test.beforeEach(async ({ page, context }) => {
 test.describe('Surah Information Page', () => {
   test(
     'Surah information displays transliteration, revelation place, and verse count',
-    { tag: ['@fast', '@surah', '@info'] },
+    { tag: ['@fast', '@surah', '@info', '@smoke'] },
     async ({ page }) => {
       // Verify the surah name is displayed
       await expect(page.getByTestId('surah-name')).toBeVisible();

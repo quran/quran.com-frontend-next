@@ -50,40 +50,48 @@ test(
   },
 );
 
-test('Quran in a Year section appears and has a Quranic verse', async ({ page }) => {
-  // Check if today's date has an entry in the ayah_of_the_day.json file
-  const now = new Date();
-  const day = String(now.getUTCDate()).padStart(2, '0');
-  const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-  const year = now.getUTCFullYear();
-  const todayString = `${day}/${month}/${year}`;
+test(
+  'Quran in a Year section appears and has a Quranic verse',
+  { tag: ['@slow', '@homepage', '@quran-in-a-year', '@smoke'] },
+  async ({ page }) => {
+    // Check if today's date has an entry in the ayah_of_the_day.json file
+    const now = new Date();
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = now.getUTCFullYear();
+    const todayString = `${day}/${month}/${year}`;
 
-  const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
-  if (!ayahEntry) {
-    test.skip(true, `No Ayah of the Day entry for today's date: ${todayString}`);
-    return;
-  }
+    const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
+    if (!ayahEntry) {
+      test.skip(true, `No Ayah of the Day entry for today's date: ${todayString}`);
+      return;
+    }
 
-  await homePage.goTo();
+    await homePage.goTo();
 
-  const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
-  await expect(quranInAYearSection).toBeVisible();
-  await expect
-    .poll(async () => (await quranInAYearSection.textContent()) || '')
-    .toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
-});
+    const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
+    await expect(quranInAYearSection).toBeVisible();
+    await expect
+      .poll(async () => (await quranInAYearSection.textContent()) || '')
+      .toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
+  },
+);
 
-test('Learning Plans section appears with at least 3 items', async ({ page }) => {
-  await homePage.goTo();
+test(
+  'Learning Plans section appears with at least 3 items',
+  { tag: ['@homepage', '@learning-plans', '@smoke'] },
+  async ({ page }) => {
+    await homePage.goTo();
 
-  const learningPlansSection = page.getByTestId('learning-plans-section');
-  await expect(learningPlansSection).toBeVisible();
+    const learningPlansSection = page.getByTestId('learning-plans-section');
+    await expect(learningPlansSection).toBeVisible();
 
-  const items = learningPlansSection.getByRole('link');
-  expect(await items.count()).toBeGreaterThanOrEqual(3);
-});
+    const items = learningPlansSection.getByRole('link');
+    expect(await items.count()).toBeGreaterThanOrEqual(3);
+  },
+);
 
-test('Coomunity section appears with at lest 1 item', async ({ page }) => {
+test('Community section appears with at least 1 item', async ({ page }) => {
   await homePage.goTo();
 
   const communitySection = page.getByTestId('community-section');
@@ -93,7 +101,7 @@ test('Coomunity section appears with at lest 1 item', async ({ page }) => {
   expect(await items.count()).toBeGreaterThanOrEqual(1);
 });
 
-test('Surah is selected by default', async ({ page }) => {
+test('Surah is selected by default', { tag: ['@smoke'] }, async ({ page }) => {
   await homePage.goTo();
 
   const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');

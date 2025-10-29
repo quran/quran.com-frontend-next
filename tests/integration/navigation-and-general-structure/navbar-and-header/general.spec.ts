@@ -22,20 +22,24 @@ test(
   },
 );
 
-test('Breadcrumb navigation accuracy', { tag: ['@header', '@fast'] }, async ({ page }) => {
-  // Verify that the breadcrumb below the navbar displays the correct information about the current surah (76)
-  // Verify page, hizb and juz number
-  const pageInfo = page.getByTestId('page-info');
-  const pageInfoText = await pageInfo.textContent();
-  expect(pageInfoText).toContain('Juz 29');
-  expect(pageInfoText).toContain('Hizb 58');
-  expect(pageInfoText).toContain('Page 578');
+test(
+  'Breadcrumb navigation accuracy',
+  { tag: ['@header', '@fast', '@smoke'] },
+  async ({ page }) => {
+    // Verify that the breadcrumb below the navbar displays the correct information about the current surah (76)
+    // Verify page, hizb and juz number
+    const pageInfo = page.getByTestId('page-info');
+    const pageInfoText = await pageInfo.textContent();
+    expect(pageInfoText).toContain('Juz 29');
+    expect(pageInfoText).toContain('Hizb 58');
+    expect(pageInfoText).toContain('Page 578');
 
-  // Verify surah name
-  const currentSurahInfo = page.getByTestId('chapter-navigation');
-  const currentSurahInfoText = await currentSurahInfo.textContent();
-  expect(currentSurahInfoText.includes('76. Al-Insan'));
-});
+    // Verify surah name
+    const currentSurahInfo = page.getByTestId('chapter-navigation');
+    const currentSurahInfoText = await currentSurahInfo.textContent();
+    expect(currentSurahInfoText.includes('76. Al-Insan'));
+  },
+);
 
 test(
   'The navbar and the header should hide on scroll down, and appears on scroll up',
