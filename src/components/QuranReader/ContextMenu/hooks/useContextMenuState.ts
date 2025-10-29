@@ -6,6 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import useIsMobile from '@/hooks/useIsMobile';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
@@ -18,7 +19,6 @@ import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getJuzNumberByHizb } from '@/utils/juz';
 import { toLocalizedNumber } from '@/utils/locale';
-import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 /**
@@ -43,6 +43,7 @@ const useContextMenuState = () => {
   const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
+  const isMobileView = useIsMobile();
 
   // Memoized values
   const chapterData = useMemo(() => {
@@ -80,7 +81,7 @@ const useContextMenuState = () => {
     e.stopPropagation();
 
     if (isSidebarNavigationVisible === 'auto') {
-      const shouldBeVisible = isMobile();
+      const shouldBeVisible = isMobileView;
       dispatch(setIsSidebarNavigationVisible(shouldBeVisible));
     } else {
       dispatch(setIsSidebarNavigationVisible(!isSidebarNavigationVisible));

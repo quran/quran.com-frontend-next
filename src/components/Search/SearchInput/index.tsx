@@ -12,6 +12,7 @@ import ExpandedSearchInputSection from '@/components/Search/CommandBar/ExpandedS
 import VoiceSearch from '@/components/Search/VoiceSearch';
 import Input, { InputSize } from '@/dls/Forms/Input';
 import { useToast } from '@/dls/Toast/Toast';
+import useIsMobile from '@/hooks/useIsMobile';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import useSearchWithVoice from '@/hooks/useSearchWithVoice';
 import SearchIcon from '@/icons/search.svg';
@@ -20,7 +21,6 @@ import { setIsSearchDrawerOpen, setDisableSearchDrawerTransition } from '@/redux
 import checkSpeechRecognitionSupport from '@/utils/browser';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 import { useHandleMicError } from '@/utils/voice-search-errors';
 
 type Props = {
@@ -51,6 +51,7 @@ const SearchInput: React.FC<Props> = ({
   const isExpanded = useSelector(selectIsExpanded);
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobileView = useIsMobile();
 
   // Handle microphone permission errors
   const handleMicError = useHandleMicError(toast, t);
@@ -94,7 +95,7 @@ const SearchInput: React.FC<Props> = ({
     }
   };
 
-  const shouldSearchBeInSearchDrawer = shouldOpenDrawerOnMobile && isMobile();
+  const shouldSearchBeInSearchDrawer = shouldOpenDrawerOnMobile && isMobileView;
 
   const onInputClick = () => {
     if (shouldSearchBeInSearchDrawer) {

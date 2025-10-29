@@ -9,33 +9,25 @@ export enum MobileSizeVariant {
 
 /**
  * A hook that safely detects if the current viewport is mobile-sized.
- * Handles SSR by returning false on server and updating on client after hydration.
- * Also listens for window resize events to update the state.
+ * Starts with a desktop-friendly default to keep SSR/CSR markup aligned
+ * and updates on the client immediately after hydration and on resize.
  *
  * @returns {boolean} True if the viewport is mobile-sized, false otherwise
  */
 const useIsMobile = (variant?: MobileSizeVariant): boolean => {
-  // Use a function for the initial state to correctly evaluate on client side
-  // during hydration, but safely handle SSR
-  const [isMobileView, setIsMobileView] = useState<boolean>(() => {
-    // During SSR, there is no window object
-    if (typeof window === 'undefined') return false;
-    // On client, immediately return the correct value
-    return variant === MobileSizeVariant.SMALL ? isSmallMobile() : isMobile();
-  });
+  const [isMobileView, setIsMobileView] = useState<boolean>(false);
 
   useEffect(() => {
-    // This will run after hydration and update the state if needed
-    setIsMobileView(variant === MobileSizeVariant.SMALL ? isSmallMobile() : isMobile());
-
-    const handleResize = () => {
+    const updateView = () => {
       setIsMobileView(variant === MobileSizeVariant.SMALL ? isSmallMobile() : isMobile());
     };
 
-    window.addEventListener('resize', handleResize);
+    updateView();
+
+    window.addEventListener('resize', updateView);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateView);
     };
   }, [variant]);
 

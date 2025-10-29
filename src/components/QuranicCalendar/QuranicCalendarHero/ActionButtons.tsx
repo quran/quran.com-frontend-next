@@ -7,12 +7,12 @@ import styles from './QuranicCalendarHero.module.scss';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import useIsMobile from '@/hooks/useIsMobile';
 import EmailIcon from '@/icons/email.svg';
 import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { isMobile } from '@/utils/responsive';
 
 interface ActionButtonsProps {
   isSubscribed: boolean;
@@ -38,6 +38,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   onEnrollButtonClicked,
 }) => {
   const { t } = useTranslation('quranic-calendar');
+  const isMobileView = useIsMobile();
 
   const onJoinWhatsapp = () => {
     logButtonClick('quranic_calendar_join_whatsapp');
@@ -46,8 +47,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   const onJoinTelegram = () => {
     logButtonClick('quranic_calendar_join_telegram');
   };
-
-  const isMobileBrowser = isMobile();
 
   const socialButtons = (
     <>
@@ -64,7 +63,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           shouldForceSetColors={false}
           icon={<WhatsappIcon />}
         />
-        {isMobileBrowser ? t('join-whatsapp-mobile') : t('join-whatsapp')}
+        {isMobileView ? t('join-whatsapp-mobile') : t('join-whatsapp')}
       </Button>
       <Button
         onClick={onJoinTelegram}
@@ -79,7 +78,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           shouldForceSetColors={false}
           icon={<TelegramIcon />}
         />
-        {isMobileBrowser ? t('join-telegram-mobile') : t('join-telegram')}
+        {isMobileView ? t('join-telegram-mobile') : t('join-telegram')}
       </Button>
     </>
   );
@@ -91,7 +90,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         type={ButtonType.Success}
         shape={ButtonShape.Pill}
         isDisabled={isEnrolling}
-        className={isMobile() ? styles.subscribeButton : ''}
+        className={isMobileView ? styles.subscribeButton : ''}
       >
         <IconContainer
           className={styles.iconContainer}
@@ -102,7 +101,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         />
         {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
       </Button>
-      {isMobile() ? (
+      {isMobileView ? (
         <div className={styles.socialButtonsContainer}>{socialButtons}</div>
       ) : (
         socialButtons
