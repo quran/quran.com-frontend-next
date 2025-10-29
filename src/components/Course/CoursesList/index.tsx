@@ -71,7 +71,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             ? getLessonNavigationUrl(slug, continueFromLesson)
             : getCourseNavigationUrl(slug);
           return (
-            <Link key={id} href={navigateTo}>
+            <Link key={id} href={navigateTo} shouldPrefetch={false}>
               <Card
                 shouldShowFullTitle
                 imgSrc={thumbnail}
