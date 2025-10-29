@@ -5,10 +5,16 @@
     font-family: "surahnames" !important;
     font-size: calc(2.5 * var(--font-size-jumbo-px));
     margin-inline-start: -20px;
+    [dir="rtl"] & {
+        margin-inline-start: 0;
+    }
     @include breakpoints.smallerThanTablet {
         font-size: calc(1.2 * var(--font-size-jumbo));
         padding-inline-end: var(--spacing-medium-px);
         margin-inline-start: -15px;
+        [dir="rtl"] & {
+            margin-inline-start: 0;
+        }
     }
 }
 
