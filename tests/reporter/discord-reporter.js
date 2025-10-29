@@ -369,7 +369,13 @@ class DiscordReporter {
       timestamp: new Date().toISOString(),
     };
 
-    await editBotMessage(this.config.channelId, this.progressMessageId, { embeds: [embed] });
+    const shouldForceUpdate = this.completedTests >= this.totalTests;
+    await editBotMessage(
+      this.config.channelId,
+      this.progressMessageId,
+      { embeds: [embed] },
+      shouldForceUpdate ? { force: true } : undefined,
+    );
   }
 
   async onTestEnd(test, result) {
@@ -472,7 +478,7 @@ class DiscordReporter {
     if (allPassed) {
       // All tests passed - delete the progress message to keep channel clean
       console.log('All tests passed - deleting progress message to keep channel clean');
-      await deleteBotMessage(this.config.channelId, this.progressMessageId);
+      await deleteBotMessage(this.config.channelId, this.progressMessageId, { force: true });
     } else {
       // Tests failed - update the message with final results (keep it for visibility)
       const embed = {
