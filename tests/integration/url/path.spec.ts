@@ -108,7 +108,7 @@ test(
   },
 );
 
-test.only(
+test(
   'Page /juz/N should load Juz N with correct title',
   { tag: ['@url', '@juz', '@reader', '@smoke'] },
   async ({ page, isMobile }) => {
