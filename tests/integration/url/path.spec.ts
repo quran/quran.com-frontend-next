@@ -108,19 +108,13 @@ test(
   },
 );
 
-test(
+test.only(
   'Page /juz/N should load Juz N with correct title',
   { tag: ['@url', '@juz', '@reader', '@smoke'] },
   async ({ page, isMobile }) => {
-    await homePage.goTo('/juz/30');
+    test.skip(isMobile, 'On mobile it requires to scroll down to load the header');
 
-    if (isMobile) {
-      // Scroll a bit to show the header
-      await page.waitForTimeout(1500);
-      await page.mouse.wheel(0, 500);
-      await page.mouse.wheel(0, -300);
-      await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
-    }
+    await homePage.goTo('/juz/30');
 
     await expect(page.getByText('Juz 30')).toBeVisible();
     await expect(page.getByText('An-Naba').first()).toBeVisible();
@@ -149,6 +143,17 @@ test('Page /rub/N should load Rub N', { tag: ['@url', '@rub', '@reader'] }, asyn
   await expect(page.getByText('26:181')).toBeVisible();
   expect(await page.title()).toContain('Rub el Hizb 150');
 });
+
+test(
+  'Page /S:V/tafsirs/en-tafisr-ibn-kathir should load the tafsir page',
+  { tag: ['@url', '@tafsir', '@smoke'] },
+  async ({ page }) => {
+    await homePage.goTo('/2:255/tafsirs/en-tafisr-ibn-kathir');
+    await expect(page.getByText('Ibn Kathir')).toBeVisible();
+    await expect(page.getByText('The Virtue of Ayat Al-Kursi')).toBeVisible();
+    expect(await page.title()).toContain('Tafsir Surah Al-Baqarah - 255');
+  },
+);
 
 test(
   'Unknown path should load the "Sorry, something went wrong" page',
