@@ -27,7 +27,6 @@ const Syllabus: React.FC<Props> = ({ course }) => {
   const toast = useToast();
 
   const userType = getUserType();
-  const eventName = 'course_syllabus_day';
   const isEnrolled = useIsEnrolled(courseId, isUserEnrolled);
 
   /**
@@ -36,7 +35,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
    * @param {string} lessonId - The ID of the lesson
    */
   const logSyllabusClick = (dayNumber: number, lessonId: string) => {
-    logButtonClick(eventName, {
+    logButtonClick('course_syllabus_day', {
       courseId,
       dayNumber,
       lessonId,

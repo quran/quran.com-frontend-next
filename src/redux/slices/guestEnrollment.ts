@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
-import resetSettings from '@/redux/actions/reset-settings';
 import SliceName from '@/redux/types/SliceName';
 
 export type GuestEnrollmentState = {
@@ -22,10 +21,6 @@ export const guestEnrollmentSlice = createSlice({
         state.enrolledCourses.push(action.payload);
       }
     },
-  },
-  extraReducers: (builder) => {
-    // Clear only guest enrollments when user logs in or resets settings
-    builder.addCase(resetSettings, (state) => ({ ...state, enrolledCourses: [] }));
   },
 });
 

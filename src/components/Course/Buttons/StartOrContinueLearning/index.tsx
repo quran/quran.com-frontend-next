@@ -26,7 +26,7 @@ const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = tru
    */
   const redirectToLessonSlug = continueFromLesson || lessons?.[0]?.slug;
   const router = useRouter();
-  const userCompletedAnyLesson = lessons.some((lesson) => lesson.isCompleted);
+  const userCompletedAnyLesson = lessons.some((lesson) => lesson.isCompleted === true);
   const onContinueLearningClicked = () => {
     logButtonClick('continue_learning', {
       courseId: id,

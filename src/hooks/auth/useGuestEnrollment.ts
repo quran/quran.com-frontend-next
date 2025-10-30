@@ -34,10 +34,6 @@ export const useEnrollGuest = (): ((courseId: string) => void) => {
 
   const enroll = useCallback(
     (courseId: string) => {
-      if (isLoggedIn()) {
-        // Prevent guest enrollment for logged-in users
-        return;
-      }
       dispatch(enrollInCourse(courseId));
     },
     [dispatch],

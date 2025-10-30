@@ -31,16 +31,7 @@ type Props = {
 };
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
-  const {
-    title,
-    id,
-    isUserEnrolled,
-    slug,
-    isCompleted,
-    lessons,
-    allowGuestAccess,
-    userHasFeedback,
-  } = course;
+  const { title, id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
@@ -65,18 +56,19 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   };
 
   const onEnrollClicked = async (): Promise<void> => {
-    const userType = getUserType();
-    if (!userLoggedIn && !allowGuestAccess) {
-      const redirectUrl = getCourseNavigationUrl(slug);
-      router.replace(getLoginNavigationUrl(redirectUrl));
-      return;
-    }
+    const userType = getUserType(userLoggedIn);
 
     logButtonClick('course_enroll', {
       courseId: id,
       isCTA,
       userType,
     });
+
+    if (!userLoggedIn && !allowGuestAccess) {
+      const redirectUrl = getCourseNavigationUrl(slug);
+      router.replace(getLoginNavigationUrl(redirectUrl));
+      return;
+    }
 
     setIsLoading(true);
     try {
@@ -104,7 +96,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
 
   if (isCTA) {
     if (isEnrolled) {
-      return null;
+      return <></>;
     }
     return (
       <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
@@ -116,7 +108,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     return (
       <div className={styles.completedContainer}>
         <Pill>{t('completed')}</Pill>
-        {userHasFeedback === false && (
+        {course?.userHasFeedback === false && (
           <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
         )}
       </div>

@@ -17,11 +17,13 @@ export const removeUserIdCookie = () => Cookies.remove(USER_ID_COOKIE_NAME);
 export const isLoggedIn = () => !!getUserIdCookie();
 
 /**
- * Get the current user type
- * @returns {UserType} 'logged_in' if authenticated, 'guest' otherwise
+ * Returns user type by authentication status.
+ * @param {boolean} [isLoggedInValue] - Optional status override.
+ * @returns {UserType} 'logged_in' or 'guest'.
  */
-export const getUserType = (): UserType => {
-  return isLoggedIn() ? 'logged_in' : 'guest';
+export const getUserType = (isLoggedInValue?: boolean): UserType => {
+  const loggedIn = isLoggedInValue ?? isLoggedIn();
+  return loggedIn ? 'logged_in' : 'guest';
 };
 
 export const getNotificationSubscriberHashCookie = () =>
