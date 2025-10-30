@@ -310,34 +310,11 @@ class DiscordReporter {
 
     this.startTime = Date.now();
     this.totalTests = suite.allTests().length;
-
-    // Initial progress message
-    const embed = {
-      title: '🚀 Starting Playwright Tests',
-      description: `Running ${this.totalTests} tests...`,
-      color: 0x3498db,
-      fields: [
-        {
-          name: 'Progress',
-          value: createProgressBar(0, this.totalTests),
-          inline: false,
-        },
-        { name: '✅ Passed', value: '0', inline: true },
-        { name: '❌ Failed', value: '0', inline: true },
-        { name: '⏭️ Skipped', value: '0', inline: true },
-      ],
-      timestamp: new Date().toISOString(),
-    };
-
-    const response = await sendBotMessage(this.config.channelId, { embeds: [embed] });
-    if (response && response.id) {
-      this.progressMessageId = response.id;
-    }
   }
 
   // Update progress message
-  async updateProgress() {
-    if (!this.config || !this.progressMessageId) return;
+  async updateProgress(options = {}) {
+    if (!this.config) return;
 
     const elapsedTime = Math.round((Date.now() - this.startTime) / 1000);
     const estimatedTotal =
@@ -368,6 +345,19 @@ class DiscordReporter {
       ],
       timestamp: new Date().toISOString(),
     };
+
+    const { allowCreate = false } = options;
+
+    if (!this.progressMessageId) {
+      if (!allowCreate) return;
+
+      const response = await sendBotMessage(this.config.channelId, { embeds: [embed] });
+      if (response && response.id) {
+        this.progressMessageId = response.id;
+      }
+
+      return;
+    }
 
     const shouldForceUpdate = this.completedTests >= this.totalTests;
     await editBotMessage(
@@ -409,6 +399,12 @@ class DiscordReporter {
     // Handle test failures
     if (!DiscordReporter.shouldNotify(test, result)) return;
 
+    if (!this.progressMessageId) {
+      await this.updateProgress({ allowCreate: true });
+    }
+
+    let threadJustCreated = false;
+
     // Create failures thread on first failure and send role notification
     if (!this.failuresThreadId && this.progressMessageId) {
       const now = new Date();
@@ -421,7 +417,10 @@ class DiscordReporter {
         this.config.channelId,
         this.progressMessageId,
         threadName,
+        { force: true },
       );
+
+      threadJustCreated = Boolean(this.failuresThreadId);
 
       if (this.failuresThreadId) {
         // Send initial message to thread with optional role ping
@@ -433,9 +432,13 @@ class DiscordReporter {
           this.roleNotificationSent = true;
         }
 
-        await sendToThread(this.failuresThreadId, {
-          content: threadContent,
-        });
+        await sendToThread(
+          this.failuresThreadId,
+          {
+            content: threadContent,
+          },
+          { force: true },
+        );
       }
     }
 
@@ -463,7 +466,16 @@ class DiscordReporter {
 
     // Send to thread if available, otherwise to main channel
     if (this.failuresThreadId) {
-      await sendToThread(this.failuresThreadId, { embeds: [embed] });
+      const sendOptions = threadJustCreated ? { force: true } : undefined;
+      const threadMessage = await sendToThread(
+        this.failuresThreadId,
+        { embeds: [embed] },
+        sendOptions,
+      );
+
+      if (!threadMessage && !threadJustCreated) {
+        await sendToThread(this.failuresThreadId, { embeds: [embed] }, { force: true });
+      }
     } else {
       await sendBotMessage(this.config.channelId, { embeds: [embed] });
     }
