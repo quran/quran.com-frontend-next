@@ -27,9 +27,9 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, playerRef, isFetching 
   const { t } = useTranslation('media');
   const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
-  const previousFrame = useRef<number>();
+  const previousFrame = useRef<number>(null);
   const router = useRouter();
-  const downloadButtonRef = React.useRef<HTMLParagraphElement>();
+  const downloadButtonRef = React.useRef<HTMLParagraphElement>(null);
   const shouldRerender = useRef<boolean>(false);
 
   const getCurrentFrame = useCallback(() => playerRef?.current?.getCurrentFrame(), [playerRef]);

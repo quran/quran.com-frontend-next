@@ -34,7 +34,7 @@ import {
 } from '@/utils/navigation';
 
 const PATH = getRamadanNavigationUrl();
-const PreparingForRamadanPage: NextPage = (): JSX.Element => {
+const PreparingForRamadanPage: NextPage = () => {
   const { lang } = useTranslation();
 
   const onButtonClicked = (section: string) => {

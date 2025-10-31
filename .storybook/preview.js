@@ -1,15 +1,15 @@
-import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { themes } from "@storybook/theming";
-import I18nProvider from "next-translate/I18nProvider";
+import { TooltipProvider } from '@radix-ui/react-tooltip';
+import { themes } from 'storybook/theming';
+import I18nProvider from 'next-translate/I18nProvider';
 
-import "../src/styles/fonts.scss";
-import "../src/styles/global.scss";
-import "../src/styles/reset.scss";
-import "../src/styles/theme.scss";
-import "./styles.scss";
+import '../src/styles/fonts.scss';
+import '../src/styles/global.scss';
+import '../src/styles/reset.scss';
+import '../src/styles/theme.scss';
+import './styles.scss';
 
-import commonEn from "../locales/en/common.json";
-import homeEn from "../locales/en/home.json";
+import commonEn from '../locales/en/common.json';
+import homeEn from '../locales/en/home.json';
 
 const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
@@ -18,18 +18,15 @@ const themeDecorator = (Story, context) => {
       <div data-theme={theme}>
         <div
           style={{
-            backgroundColor: "var(--color-background-default)",
-            width: "100vw",
-            height: "100vh",
-            padding: "1rem",
-            boxSizing: "border-box",
+            backgroundColor: 'var(--color-background-default)',
+            width: '100vw',
+            height: '100vh',
+            padding: '1rem',
+            boxSizing: 'border-box',
           }}
         >
           <TooltipProvider>
-            <I18nProvider
-              lang="en"
-              namespaces={{ common: commonEn, home: homeEn }}
-            >
+            <I18nProvider lang="en" namespaces={{ common: commonEn, home: homeEn }}>
               <Story />
             </I18nProvider>
           </TooltipProvider>
@@ -42,12 +39,12 @@ const themeDecorator = (Story, context) => {
 export const decorators = [themeDecorator];
 export const globalTypes = {
   theme: {
-    name: "Theme",
-    description: "Global theme for components",
-    defaultValue: "light",
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
     toolbar: {
-      icon: "circlehollow",
-      items: ["light", "dark", "sepia"],
+      icon: 'circlehollow',
+      items: ['light', 'dark', 'sepia'],
       showName: true,
     },
   },
@@ -55,48 +52,49 @@ export const globalTypes = {
 
 const viewports = {
   mobileS: {
-    name: "MobileS",
+    name: 'MobileS',
     styles: {
       width: `320px`,
-      height: "100%",
+      height: '100%',
     },
   },
   mobileM: {
-    name: "MobileM",
+    name: 'MobileM',
     styles: {
       width: `375px`,
-      height: "100%",
+      height: '100%',
     },
   },
   mobileL: {
-    name: "MobileL",
+    name: 'MobileL',
     styles: {
       width: `425px`,
-      height: "100%",
+      height: '100%',
     },
   },
   tablet: {
-    name: "Tablet",
+    name: 'Tablet',
     styles: {
       width: `768px`,
-      height: "100%",
+      height: '100%',
     },
   },
   desktop: {
-    name: "Desktop",
+    name: 'Desktop',
     styles: {
       width: `1024px`,
-      height: "100%",
+      height: '100%',
     },
   },
 };
 
 export const parameters = {
-  layout: "fullscreen",
+  layout: 'fullscreen',
   viewport: {
     viewports,
   },
   docs: {
     theme: themes.dark,
+    codePanel: true,
   },
 };

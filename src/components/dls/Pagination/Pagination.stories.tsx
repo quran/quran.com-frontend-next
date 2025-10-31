@@ -8,7 +8,7 @@ export default {
   args: {
     pageSize: 20,
     siblingsCount: 1,
-    showSummary: true,
+    shouldShowSummary: true,
   },
   argTypes: {
     totalCount: {
@@ -46,7 +46,7 @@ export default {
       },
       control: { type: 'number' },
     },
-    showSummary: {
+    shouldShowSummary: {
       description: `Whether we should show the summary of the pagination like which range are we currently showing and the total.`,
       table: {
         category: 'Optional',

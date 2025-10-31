@@ -38,7 +38,7 @@ const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, na
               dispatch({ type: 'SET_PERIOD', payload: { period: option.key } });
               logClick(option.key);
             }}
-            selected={state.period === option.key}
+            isSelected={state.period === option.key}
             option={t(`${option.key.toLowerCase()}.title`)}
             description={t(`${option.key.toLowerCase()}.description`)}
           />

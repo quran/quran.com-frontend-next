@@ -27,7 +27,7 @@ type CounterProps = {
  * Button is disabled when  the value is `undefined` or `null`
  * @returns {JSX.Element}
  */
-const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps): JSX.Element => {
+const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps) => {
   const { t, lang } = useTranslation('common');
   const percent = Number(count) * 100;
   const localizedCount = useMemo(() => toLocalizedNumber(Number(count), lang), [count, lang]);

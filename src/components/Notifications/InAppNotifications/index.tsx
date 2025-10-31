@@ -42,9 +42,9 @@ const InAppNotifications = () => {
         <NotificationBell unseenNotificationsCount={unseenCount} onBellClicked={onBellClicked} />
       }
       isModal
-      tip
+      hasTip
       contentStyles={styles.notificationsPopover}
-      open={showModal}
+      isOpen={showModal}
       onOpenChange={onOpenChange}
       isPortalled={false}
     >
