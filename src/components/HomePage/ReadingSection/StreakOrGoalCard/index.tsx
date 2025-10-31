@@ -51,6 +51,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
       className={cardStyles.streakCard}
       link={goal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl()}
       onClick={goal ? onGoalArrowClicked : onStreakCardClicked}
+      shouldPrefetch={false}
     >
       <div className={cardStyles.cardOuterContainer}>
         <div className={classNames(cardStyles.streakCardLeft, cardStyles.cardWithIcon)}>
