@@ -214,11 +214,13 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   const collections = !isDataReady
     ? []
-    : (collectionListData.data.map((collection) => ({
-        id: collection.id,
-        name: collection.name,
-        checked: bookmarkCollectionIdsData?.includes(collection.id),
-      })) as Collection[]);
+    : (collectionListData.data
+        .map((collection) => ({
+          id: collection.id,
+          name: collection.name,
+          checked: bookmarkCollectionIdsData?.includes(collection.id),
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name)) as Collection[]);
 
   return (
     <>
