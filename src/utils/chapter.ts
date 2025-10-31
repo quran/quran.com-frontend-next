@@ -150,6 +150,47 @@ export const isLastSurah = (surahNumber: number, isReadingByRevelationOrder?: bo
 
   return REVELATION_ORDER[REVELATION_ORDER.length - 1] === surahNumber;
 };
+
+/**
+ * Get the next chapter number for the given reading order.
+ * Returns null when there is no next chapter.
+ *
+ * @param {number} currentChapter
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number | null}
+ */
+export const getNextChapterNumber = (
+  currentChapter: number,
+  isReadingByRevelationOrder?: boolean,
+): number | null => {
+  if (!isReadingByRevelationOrder) {
+    return currentChapter < 114 ? currentChapter + 1 : null;
+  }
+  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
+  if (currentIndex === -1) return null;
+  return REVELATION_ORDER[currentIndex + 1] || null;
+};
+
+/**
+ * Get the previous chapter number for the given reading order.
+ * Returns null when there is no previous chapter.
+ *
+ * @param {number} currentChapter
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number | null}
+ */
+export const getPreviousChapterNumber = (
+  currentChapter: number,
+  isReadingByRevelationOrder?: boolean,
+): number | null => {
+  if (!isReadingByRevelationOrder) {
+    return currentChapter > 1 ? currentChapter - 1 : null;
+  }
+  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
+  if (currentIndex === -1) return null;
+  return REVELATION_ORDER[currentIndex - 1] || null;
+};
+
 /**
  * Get how much percentage of the chapter has been read.
  *
