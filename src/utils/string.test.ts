@@ -50,6 +50,12 @@ describe('Test formatVerseReferencesToLinks', () => {
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
+  it('should convert verse reference with three digit verse number to link', () => {
+    const input = 'Verse 2:123 is important';
+    const expected = 'Verse <a href="/2:123" target="_blank">2:123</a> is important';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
   it('should convert verse range to link', () => {
     const input = 'Verses 1:1-3 are important';
     const expected = 'Verses <a href="/1:1-3" target="_blank">1:1-3</a> are important';
@@ -93,7 +99,7 @@ describe('Test formatVerseReferencesToLinks', () => {
   it('should handle verse references with multiple digits', () => {
     const input = 'See verses 114:1-3 and 1:1-7';
     const expected =
-      'See verses 1<a href="/14:1-3" target="_blank">14:1-3</a> and <a href="/1:1-7" target="_blank">1:1-7</a>';
+      'See verses <a href="/114:1-3" target="_blank">114:1-3</a> and <a href="/1:1-7" target="_blank">1:1-7</a>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
   });
 
