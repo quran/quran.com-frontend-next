@@ -51,6 +51,7 @@ const QuranInYearSection = () => {
           chapter={todayAyah.chapter}
           from={todayAyah.verse}
           to={todayAyah.verse}
+          titleText={t('quran-in-year-verse-title')}
           quranFont={QuranFont.QPCHafs}
           translationsLimit={1}
           arabicVerseClassName={styles.customArabicVerse}
