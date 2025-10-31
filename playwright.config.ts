@@ -1,7 +1,14 @@
 import { defineConfig, devices, PlaywrightTestConfig } from '@playwright/test';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env' });
+if (!process.env.CI) {
+  dotenv.config({ path: '.env' });
+}
+
+const baseURL =
+  process.env.PLAYWRIGHT_TEST_BASE_URL || `http://localhost:${process.env.PORT || '3000'}`;
+
+const isLocalhost = baseURL.includes('localhost') || baseURL.includes('127.0.0.1');
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -79,11 +86,13 @@ const config: PlaywrightTestConfig = {
     },
   ],
 
-  webServer: {
-    command: process.env.CI ? 'yarn start' : 'yarn dev',
-    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: isLocalhost
+    ? {
+        command: process.env.CI ? 'yarn start' : 'yarn dev',
+        port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+        reuseExistingServer: !process.env.CI,
+      }
+    : undefined,
 };
 
 export default defineConfig(config);
