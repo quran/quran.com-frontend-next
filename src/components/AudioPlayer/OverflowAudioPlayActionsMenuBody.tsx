@@ -104,7 +104,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
             setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed);
           }}
         >
-          <div className={styles.menuWithNestedItems}>
+          <div className={styles.menuWithNestedItems} data-testid="playback-rate-menu">
             {t('audio.speed')}
             <ChevronRightIcon />
           </div>

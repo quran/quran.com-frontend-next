@@ -149,7 +149,9 @@ const ContentModal = ({
               </div>
             )}
 
-            <div className={styles.content}>{children}</div>
+            <div className={styles.content} data-testid="modal-content">
+              {children}
+            </div>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>
