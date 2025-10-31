@@ -55,6 +55,7 @@ const ReadingSection: React.FC<Props> = () => {
           variant={LinkVariant.Blend}
           href={getProfileNavigationUrl()}
           onClick={onMyQuranClicked}
+          shouldPrefetch={false}
         >
           <p className={styles.myQuranText}>{t('my-quran')}</p>
         </Link>

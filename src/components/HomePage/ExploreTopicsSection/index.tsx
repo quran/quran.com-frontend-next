@@ -63,6 +63,7 @@ const ExploreTopicsSection = () => {
               className={classNames(styles.topic, {
                 [styles.highlighted]: topic.isHighlighted,
               })}
+              shouldPrefetch={false}
             >
               <div>
                 {t(topic.key)} <ArrowIcon />
