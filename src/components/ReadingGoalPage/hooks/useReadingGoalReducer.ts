@@ -172,8 +172,18 @@ const initialState: ReadingGoalState = {
   rangeEndVerse: '114:6',
 };
 
-const useReadingGoalReducer = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const initFromExample = (key?: keyof typeof readingGoalExamples): ReadingGoalState => {
+  if (!key) return initialState;
+  if (key === 'custom') return { ...initialState, exampleKey: key };
+  return {
+    ...initialState,
+    exampleKey: key,
+    ...readingGoalExamples[key].values,
+  };
+};
+
+const useReadingGoalReducer = (initialExampleKey?: keyof typeof readingGoalExamples) => {
+  const [state, dispatch] = useReducer(reducer, initialExampleKey, initFromExample);
 
   return [state, dispatch] as const;
 };
