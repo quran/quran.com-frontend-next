@@ -7,15 +7,17 @@ import { useDispatch } from 'react-redux';
 import styles from './ProfileAvatarButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
+import BookmarkIcon from '@/icons/bookmark.svg';
 import ClockIcon from '@/icons/clock.svg';
-import ArrowIcon from '@/icons/east.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import NotesIcon from '@/icons/notes-with-pencil.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
+import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -28,7 +30,11 @@ import {
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
 
-const ProfileAvatarButton = () => {
+interface ProfileAvatarButtonProps {
+  isPopoverPortalled?: boolean;
+}
+
+const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPortalled = true }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -48,6 +54,13 @@ const ProfileAvatarButton = () => {
 
   const onProfileClicked = () => {
     logButtonClick('profile_avatar_profile');
+    router.push(getProfileNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
+  const onMyQuranClicked = () => {
+    logButtonClick('profile_avatar_my_quran');
     router.push(getProfileNavigationUrl()).then(() => {
       setIsOpen(false);
     });
@@ -85,6 +98,7 @@ const ProfileAvatarButton = () => {
     return (
       <PopoverMenu
         isModal={false}
+        isPortalled={isPopoverPortalled}
         trigger={
           <Button
             tooltip={t('profile')}
@@ -101,8 +115,14 @@ const ProfileAvatarButton = () => {
         isOpen={isOpen}
         onOpenChange={setIsOpen}
       >
-        <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
+        <PopoverMenu.Item onClick={onProfileClicked} icon={<IconPerson />}>
           {t('profile')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item
+          onClick={onMyQuranClicked}
+          icon={<IconContainer icon={<BookmarkIcon />} color={IconColor.accent} />}
+        >
+          {t('my-quran')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onNotificationSettingsClicked} icon={<NotificationBellIcon />}>
           {t('notification-settings')}
@@ -127,10 +147,13 @@ const ProfileAvatarButton = () => {
     <Button
       tooltip={t('sign-in')}
       ariaLabel={t('sign-in')}
-      variant={ButtonVariant.Simplified}
+      variant={ButtonVariant.SimplifiedAccent}
       size={ButtonSize.Small}
       href={getLoginNavigationUrl(router.asPath)}
-      onClick={onTriggerClicked}
+      onClick={() => {
+        dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
+        onTriggerClicked();
+      }}
       id="login-button"
       className={styles.loginButton}
     >
