@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import SeoTextForVerse from '../SeoTextForVerse';
@@ -15,6 +16,7 @@ import TextWord from '@/dls/QuranWord/TextWord';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { QuranFont } from '@/types/QuranReader';
 import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
+import { getWordTextFieldNameByFont } from '@/utils/word';
 import Word from 'types/Word';
 
 type Props = {
@@ -49,6 +51,59 @@ const PlainVerseText: React.FC<Props> = ({
   const isQcfFont = isQCFFont(quranFont);
   const { pageNumber } = words[0];
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
+
+  const handleCopy = useCallback(
+    // eslint-disable-next-line react-func/max-lines-per-function
+    (event: React.ClipboardEvent<HTMLDivElement>) => {
+      const selection = document.getSelection();
+      if (!selection || selection.isCollapsed) {
+        return;
+      }
+
+      const verseElement = event.currentTarget;
+      const selectedNodes = Array.from(
+        verseElement.querySelectorAll<HTMLElement>('[data-word-index]'),
+      ).filter((node) => selection.containsNode(node, true));
+
+      if (!selectedNodes.length) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const textFieldName = getWordTextFieldNameByFont(quranFont);
+      const copiedText = selectedNodes
+        .sort(
+          (firstNode, secondNode) =>
+            Number(firstNode.getAttribute('data-word-index')) -
+            Number(secondNode.getAttribute('data-word-index')),
+        )
+        .map((node) => {
+          const index = Number(node.getAttribute('data-word-index'));
+          if (Number.isNaN(index)) {
+            return '';
+          }
+          const word = words[index];
+          if (!word) {
+            return '';
+          }
+
+          const wordText =
+            word[textFieldName] ?? word.text ?? word.textUthmani ?? word.qpcUthmaniHafs ?? '';
+
+          return typeof wordText === 'string' ? wordText.trim() : '';
+        })
+        .filter((wordText) => wordText.length > 0);
+
+      if (!copiedText.length) {
+        return;
+      }
+
+      clipboardCopy(copiedText.join(' '));
+    },
+    [quranFont, words],
+  );
+
   return (
     <>
       <SeoTextForVerse words={words} />
@@ -60,13 +115,18 @@ const PlainVerseText: React.FC<Props> = ({
           styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
-        <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
-          {words?.map((word) => {
+        <div
+          className={classNames(styles.verseText, styles.verseTextWrap)}
+          translate="no"
+          onCopy={handleCopy}
+        >
+          {words?.map((word, wordIndex) => {
             if (isQcfFont) {
               return (
                 <PlainVerseTextWord
                   key={word.location}
                   word={word}
+                  wordIndex={wordIndex}
                   shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                   shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
                 >
@@ -85,6 +145,7 @@ const PlainVerseText: React.FC<Props> = ({
               <PlainVerseTextWord
                 key={word.location}
                 word={word}
+                wordIndex={wordIndex}
                 shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                 shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
               >
