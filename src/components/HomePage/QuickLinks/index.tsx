@@ -83,6 +83,7 @@ const QuickLinks: React.FC = () => {
               logButtonClick(`quick_link_${quickLink.slug}`);
             }}
             className={styles.quickLink}
+            shouldPrefetch={false}
           >
             <div className={styles.quickLinkText}>
               {text} <ArrowIcon />

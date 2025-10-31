@@ -44,7 +44,7 @@ const ChapterCard: React.FC<Props> = ({
   const link = getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
 
   return (
-    <Card className={styles.chapterCard} link={link}>
+    <Card className={styles.chapterCard} link={link} shouldPrefetch={false}>
       <div className={styles.surahContainer}>
         <div className={styles.surahName} translate="no">
           {surahNumberString.padStart(3, '0')}
@@ -60,7 +60,12 @@ const ChapterCard: React.FC<Props> = ({
             </span>
           </div>
           {isContinueReading ? (
-            <Link href={link} variant={LinkVariant.Primary} onClick={onContinueReadingClicked}>
+            <Link
+              href={link}
+              variant={LinkVariant.Primary}
+              onClick={onContinueReadingClicked}
+              shouldPrefetch={false}
+            >
               <div className={styles.continueReading}>
                 <span>{t('common:verse')}</span>
                 <span>{toLocalizedNumber(verseNumber, lang)}</span>
@@ -78,6 +83,7 @@ const ChapterCard: React.FC<Props> = ({
               href={link}
               onClick={onBeginClicked}
               className={styles.beginButton}
+              shouldPrefetch={false}
             >
               {t('begin')}
             </Button>
