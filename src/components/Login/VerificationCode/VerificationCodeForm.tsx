@@ -7,7 +7,6 @@ import VerificationCodeBase from './VerificationCodeBase';
 
 import AuthHeader from '@/components/Login/AuthHeader';
 import styles from '@/components/Login/login.module.scss';
-import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import { signUp } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
@@ -31,7 +30,6 @@ const VerificationCodeForm: FC<Props> = ({
 }) => {
   const router = useRouter();
 
-  const { redirectWithToken } = useAuthRedirect();
   const handleSubmitCode = async (code: string): Promise<void> => {
     logFormSubmission('verification_code_submit');
 
@@ -50,7 +48,8 @@ const VerificationCodeForm: FC<Props> = ({
       onSuccess();
     } else {
       // Default behavior: redirect back or to home
-      redirectWithToken((router.query.redirect as string) || '/', response?.token);
+      const redirectPath = (router.query.redirect as string) || '/';
+      router.push(redirectPath);
     }
   };
 

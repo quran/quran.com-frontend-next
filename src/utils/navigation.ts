@@ -18,8 +18,6 @@ import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
-  LOGOUT: '/logout',
-  AUTH: '/auth',
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',

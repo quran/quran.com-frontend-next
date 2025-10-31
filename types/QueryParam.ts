@@ -28,11 +28,6 @@ enum QueryParam {
   EMAIL = 'email',
   TOKEN = 'token',
   PREVIEW_MODE = 'previewMode',
-  ERROR = 'error',
-  LOGOUT = 'logout',
-  VISITEDPLATFORM = 'visitedPlatform',
-  SILENT = 'silent',
-  REDIRECTBACK = 'redirectBack',
 }
 
 export default QueryParam;
