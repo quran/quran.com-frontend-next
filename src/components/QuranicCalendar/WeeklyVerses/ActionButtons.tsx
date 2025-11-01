@@ -7,13 +7,13 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './WeeklyVerses.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useIsMobile from '@/hooks/useIsMobile';
 import PdfIcon from '@/icons/pdf.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getQuranicCalendarRangesNavigationUrl,
   QuranicCalendarRangesNavigationSettings,
 } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 type ActionButtonsProps = {
   onMarkAsCompletedClick: () => void;
@@ -33,6 +33,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   ranges,
 }) => {
   const { t } = useTranslation('quranic-calendar');
+  const isMobileView = useIsMobile();
 
   const handlePdfClick = () => {
     logButtonClick('quran_calendar_pdf');
@@ -42,7 +43,11 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     logButtonClick('quran_calendar_read_online');
   };
 
-  const isMobileBrowser = isMobile();
+  const markAsCompletedLabel = isMobileView
+    ? '\u2713'
+    : !isCompleted
+    ? t('mark-as-completed')
+    : t('week-completed');
 
   return (
     <div className={styles.actionButtons}>
@@ -57,7 +62,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           [styles.completedButton]: isCompleted,
         })}
       >
-        {isMobileBrowser ? '✔' : !isCompleted ? t('mark-as-completed') : t('week-completed')}
+        {markAsCompletedLabel}
       </Button>
       <div className={styles.rightButtons}>
         <div className={styles.pdfButtonContainer}>

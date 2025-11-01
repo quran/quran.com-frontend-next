@@ -13,11 +13,11 @@ import StreakOrGoalCard from './StreakOrGoalCard';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import useIsMobile from '@/hooks/useIsMobile';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectUserState } from '@/redux/slices/session';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getProfileNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 interface Props {}
 
@@ -32,6 +32,7 @@ const ReadingSection: React.FC<Props> = () => {
   const { goal, streak, currentActivityDay } = useGetStreakWithMetadata({
     showDayName: true,
   });
+  const isMobileView = useIsMobile();
 
   const onMyQuranClicked = () => {
     logButtonClick('homepage_my_quran');
@@ -74,7 +75,7 @@ const ReadingSection: React.FC<Props> = () => {
     streak || goal ? (
       <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
     ) : (
-      <>{!isMobile() && <NoGoalOrStreakCard />}</>
+      <>{!isMobileView && <NoGoalOrStreakCard />}</>
     );
 
   const newCard = <NewCard />;
@@ -112,7 +113,7 @@ const ReadingSection: React.FC<Props> = () => {
   }
 
   if (!isGuest) {
-    if (isMobile()) {
+    if (isMobileView) {
       return (
         <>
           {header}

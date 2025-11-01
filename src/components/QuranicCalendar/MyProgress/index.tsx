@@ -12,12 +12,12 @@ import useMonthsData from './useMonthsData';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
+import useIsMobile from '@/hooks/useIsMobile';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 interface MyProgressProps {
   onWeekSelect: (weekNumber: number) => void;
@@ -34,6 +34,7 @@ const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
   const { subscriptionData, isLoading: isSubscriptionLoading } = useGetUserQuranProgramEnrollment({
     programId: QURANIC_CALENDAR_PROGRAM_ID,
   });
+  const isMobileView = useIsMobile();
 
   // Function to determine the CSS class for a week
   const getWeekClass = useCallback(
@@ -82,7 +83,7 @@ const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
       <p className={styles.subtitle}>{t('progress-subtitle')}</p>
 
       <div className={styles.progressCard}>
-        {isMobile() ? (
+        {isMobileView ? (
           <CarouselView
             monthSlides={monthSlides}
             getWeekClass={getWeekClass}

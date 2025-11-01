@@ -15,8 +15,8 @@ import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
 import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
+import useIsMobile from '@/hooks/useIsMobile';
 import { Mushaf } from '@/types/QuranReader';
-import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 /**
@@ -25,6 +25,7 @@ import { getChapterNumberFromKey } from '@/utils/verse';
  * @returns {JSX.Element|null} React component that renders the context menu UI with navigation, preferences, and page info, or null if data isn't loaded
  */
 const ContextMenu: React.FC = (): JSX.Element | null => {
+  const isMobileView = useIsMobile();
   const {
     // State
     isSidebarNavigationVisible,
@@ -53,8 +54,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     return null;
   }
 
-  const isMobileScrolledView = !showNavbar && isMobile();
-  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
+  const isMobileScrolledView = !showNavbar && isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
 
   return (
     <div

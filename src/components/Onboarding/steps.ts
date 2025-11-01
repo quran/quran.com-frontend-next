@@ -6,7 +6,6 @@ import { Step as BaseStep, Placement } from 'react-joyride';
 
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { getSurahNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 type Step = BaseStep & {
   showNextButton?: boolean;
@@ -31,6 +30,7 @@ const getResponsivePlacement = (
 export const checklistIndexToOnboardingSteps = (
   t: Translate,
   component: React.ElementType,
+  isDeviceMobile = false,
 ): Record<
   OnboardingGroup,
   {
@@ -56,7 +56,6 @@ export const checklistIndexToOnboardingSteps = (
     description: t(`onboarding:steps.${key}.description`),
   });
 
-  const isDeviceMobile = isMobile();
   const shouldDisableOverlay = isDeviceMobile;
 
   return {

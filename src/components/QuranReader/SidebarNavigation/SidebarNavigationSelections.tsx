@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 
+import useIsMobile from '@/hooks/useIsMobile';
 import {
   selectLastReadVerseKey,
   setLastReadVerse,
@@ -15,7 +16,6 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import NavigationItemType from '@/types/NavigationItemType';
-import { isMobile } from '@/utils/responsive';
 import DataContext from 'src/contexts/DataContext';
 
 const PageSelection = dynamic(() => import('./PageSelection'), {
@@ -40,6 +40,7 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const isMobileView = useIsMobile();
   // we skip requesting any selection list if the drawer is not open.
   if (!isVisible) return <></>;
 
@@ -77,7 +78,7 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
   };
 
   const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
-    if (isMobile()) {
+    if (isMobileView) {
       dispatch(setIsSidebarNavigationVisible(false));
     }
 
