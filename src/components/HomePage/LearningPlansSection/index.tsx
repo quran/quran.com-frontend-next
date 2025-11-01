@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-lines */
+import React, { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -33,6 +34,8 @@ const learningPlansSorter = (a: Course, b: Course) => {
 
 const LearningPlansSection = () => {
   const { t } = useTranslation('home');
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [shouldFetch, setShouldFetch] = useState(false);
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -51,6 +54,37 @@ const LearningPlansSection = () => {
     });
   };
 
+  useEffect(() => {
+    if (shouldFetch) return undefined;
+    const element = sectionRef.current;
+    if (!element) return undefined;
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setShouldFetch(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldFetch(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '200px 0px',
+      },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [shouldFetch]);
+
   return (
     <>
       <div className={styles.header}>
@@ -66,94 +100,102 @@ const LearningPlansSection = () => {
           </Link>
         </div>
       </div>
-      <DataFetcher
-        loading={Loading}
-        fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false })}
-        render={(data: CoursesResponse) => {
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
-          const firstNonEnrolledIndex = sortedCourses.findIndex(
-            (c) => typeof c.isCompleted === 'undefined',
-          );
+      <div ref={sectionRef}>
+        {shouldFetch ? (
+          <DataFetcher
+            loading={Loading}
+            fetcher={privateFetcher}
+            queryKey={makeGetCoursesUrl({ myCourses: false })}
+            render={(data: CoursesResponse) => {
+              const sortedCourses = [...data.data].sort(learningPlansSorter);
+              const firstNonEnrolledIndex = sortedCourses.findIndex(
+                (c) => typeof c.isCompleted === 'undefined',
+              );
 
-          return (
-            <div className={styles.cardsContainer}>
-              {sortedCourses.map((course, index) => {
-                const { isCompleted } = course;
-                const courseUrl = getCourseNavigationUrl(course.slug);
-                const userHasEnrolled = typeof isCompleted !== 'undefined';
-                const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
-                const isFirstNonEnrolledCourse =
-                  !userHasEnrolled && index === firstNonEnrolledIndex;
+              return (
+                <div className={styles.cardsContainer}>
+                  {sortedCourses.map((course, index) => {
+                    const { isCompleted } = course;
+                    const courseUrl = getCourseNavigationUrl(course.slug);
+                    const userHasEnrolled = typeof isCompleted !== 'undefined';
+                    const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                    const isFirstNonEnrolledCourse =
+                      !userHasEnrolled && index === firstNonEnrolledIndex;
 
-                return (
-                  <div key={course.id} className={styles.learnPlanCard}>
-                    <Card
-                      className={styles.card}
-                      link={courseUrl}
-                      onClick={() => onLearningPlanCardClicked(course.slug)}
-                    >
-                      <div className={styles.cardWrapper}>
-                        <Image
-                          width={150}
-                          height={100}
-                          src={course.thumbnail}
-                          alt={course.title}
-                          className={styles.thumbnail}
-                        />
-                        <div className={styles.cardContent}>
-                          <div className={styles.learningPlanTitle}>
-                            <span>{course.title}</span>
-                            {isFirstNonEnrolledCourse && <NewLabel />}
-                          </div>
-
-                          <div
-                            className={classNames(styles.learningPlanStatus, {
-                              [styles.enrolledPlanStatus]: userHasEnrolled,
-                            })}
-                          >
-                            {enrolledButNotCompleted && (
-                              <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
-                            )}
-                            {userHasEnrolled && isCompleted && (
-                              <div className={styles.completedPill}>{t('learn:completed')}</div>
-                            )}
-                            <Link
-                              className={styles.startLearningLink}
-                              variant={LinkVariant.Highlight}
-                              href={courseUrl}
-                              onClick={() =>
-                                onStartOrContinueLearningClicked(
-                                  enrolledButNotCompleted,
-                                  course.slug,
-                                )
-                              }
-                            >
-                              <div className={styles.startLearningLinkContent}>
-                                <span>
-                                  {enrolledButNotCompleted
-                                    ? t('learn:continue-learning')
-                                    : t('learn:start-learning')}
-                                </span>
-                                <IconContainer
-                                  size={IconSize.Xsmall}
-                                  icon={<ArrowIcon />}
-                                  shouldForceSetColors={false}
-                                  className={styles.startLearningLinkIcon}
-                                />
+                    return (
+                      <div key={course.id} className={styles.learnPlanCard}>
+                        <Card
+                          className={styles.card}
+                          link={courseUrl}
+                          shouldPrefetch={false}
+                          onClick={() => onLearningPlanCardClicked(course.slug)}
+                        >
+                          <div className={styles.cardWrapper}>
+                            <Image
+                              width={150}
+                              height={100}
+                              src={course.thumbnail}
+                              alt={course.title}
+                              className={styles.thumbnail}
+                            />
+                            <div className={styles.cardContent}>
+                              <div className={styles.learningPlanTitle}>
+                                <span>{course.title}</span>
+                                {isFirstNonEnrolledCourse && <NewLabel />}
                               </div>
-                            </Link>
+
+                              <div
+                                className={classNames(styles.learningPlanStatus, {
+                                  [styles.enrolledPlanStatus]: userHasEnrolled,
+                                })}
+                              >
+                                {enrolledButNotCompleted && (
+                                  <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                                )}
+                                {userHasEnrolled && isCompleted && (
+                                  <div className={styles.completedPill}>{t('learn:completed')}</div>
+                                )}
+                                <Link
+                                  className={styles.startLearningLink}
+                                  shouldPrefetch={false}
+                                  variant={LinkVariant.Highlight}
+                                  href={courseUrl}
+                                  onClick={() =>
+                                    onStartOrContinueLearningClicked(
+                                      enrolledButNotCompleted,
+                                      course.slug,
+                                    )
+                                  }
+                                >
+                                  <div className={styles.startLearningLinkContent}>
+                                    <span>
+                                      {enrolledButNotCompleted
+                                        ? t('learn:continue-learning')
+                                        : t('learn:start-learning')}
+                                    </span>
+                                    <IconContainer
+                                      size={IconSize.Xsmall}
+                                      icon={<ArrowIcon />}
+                                      shouldForceSetColors={false}
+                                      className={styles.startLearningLinkIcon}
+                                    />
+                                  </div>
+                                </Link>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        </Card>
                       </div>
-                    </Card>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        }}
-      />
+                    );
+                  })}
+                </div>
+              );
+            }}
+          />
+        ) : (
+          <Loading />
+        )}
+      </div>
     </>
   );
 };
