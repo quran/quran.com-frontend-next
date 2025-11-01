@@ -6,6 +6,7 @@ import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetServerSideProps } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -113,12 +114,16 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
       />
       <div className={classNames(layoutStyle.flow)}>
         <div className={classNames(layoutStyle.flowItem, styles.container)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className={styles.reciterImage}
-            alt={selectedReciter.translatedName.name}
-            src={makeCDNUrl(selectedReciter.profilePicture)}
-          />
+          <div className={styles.reciterImage}>
+            <Image
+              src={makeCDNUrl(selectedReciter.profilePicture)}
+              alt={selectedReciter.translatedName.name}
+              fill
+              sizes="(max-width: 768px) 80vw, 320px"
+              className={styles.reciterImageContent}
+              priority
+            />
+          </div>
           <div>
             <div className={styles.chapterName}>
               {/* eslint-disable-next-line i18next/no-literal-string */}

@@ -51,6 +51,10 @@ const nextConfig = {
       's3.amazonaws.com',
       // Facebook OAuth user avatars
       'platform-lookaside.fbsbx.com',
+      // Gravatar default avatars
+      'www.gravatar.com',
+      // Sanity CMS hosted assets
+      'cdn.sanity.io',
     ],
   },
   webpack: (webpackConfig, { isServer }) => {

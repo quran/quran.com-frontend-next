@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Image from 'next/image';
 
 import styles from './Blocks.module.scss';
 
@@ -33,13 +34,21 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
       const { _type: childElementType, _key: childElementKey, text } = childElement;
       if (childElementType === 'inlineImage') {
         const { asset, _key: imageKey } = childElement;
+        const width = asset?.metadata?.dimensions?.width ?? 800;
+        const height = asset?.metadata?.dimensions?.height ?? 600;
         elementBlocks.push(
           <div
             key={`${bodyElementKey}-${childElementKey}-${imageKey}`}
             className={styles.imageContainer}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-            <img className={styles.image} src={getImageUrl(asset)} />
+            <Image
+              className={styles.image}
+              src={getImageUrl(asset)}
+              alt=""
+              width={width}
+              height={height}
+              sizes="(max-width: 768px) 100vw, 800px"
+            />
           </div>,
         );
         return;

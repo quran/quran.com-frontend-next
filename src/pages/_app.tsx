@@ -4,6 +4,7 @@ import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import useSWRImmutable from 'swr/immutable';
 
 import AppContent from '@/components/AppContent/AppContent';
@@ -55,6 +56,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { locale } = router;
   const resolvedLocale = locale ?? 'en';
   const languageDirection = getDir(resolvedLocale);
+  const buildInfo = {
+    date: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
+    hash: process.env.NEXT_PUBLIC_COMMIT_HASH || 'development',
+    version: process.env.NEXT_PUBLIC_APP_VERSION || '',
+    env: process.env.NEXT_PUBLIC_APP_ENV,
+  };
 
   // Only fetch user profile if user is authenticated (has auth token in cookies)
   // Pass null as key for guests to prevent any network request
@@ -90,18 +97,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `window.__BUILD_INFO__ = {
-              date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
-              hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
-              version: "${process.env.NEXT_PUBLIC_APP_VERSION || ''}",
-              env: "${process.env.NEXT_PUBLIC_APP_ENV}"
-            }`,
-          }}
-        />
       </Head>
+      <Script id="build-info" strategy="beforeInteractive">
+        {`window.__BUILD_INFO__ = ${JSON.stringify(buildInfo)};`}
+      </Script>
       <FontPreLoader locale={resolvedLocale} />
       <DirectionProvider dir={languageDirection}>
         <TooltipProvider>
