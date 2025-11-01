@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import PageBlocks from '../Blocks';
@@ -57,8 +58,14 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
             {page.summary}
             {page.mainPhoto && (
               <div className={styles.imageContainer}>
-                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-                <img className={styles.image} src={getImageUrl(page.mainPhoto)} />
+                <Image
+                  className={styles.image}
+                  src={getImageUrl(page.mainPhoto)}
+                  alt=""
+                  width={page.mainPhoto?.metadata?.dimensions?.width ?? 800}
+                  height={page.mainPhoto?.metadata?.dimensions?.height ?? 600}
+                  sizes="(max-width: 768px) 100vw, 800px"
+                />
               </div>
             )}
           </>
