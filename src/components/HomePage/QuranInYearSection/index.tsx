@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -8,6 +8,7 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/components/dls/
 import Link, { LinkVariant } from '@/components/dls/Link/Link';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import Spinner from '@/dls/Spinner/Spinner';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import CalendarIcon from '@/public/icons/new-calendar.svg';
 import { QuranFont } from '@/types/QuranReader';
@@ -20,6 +21,7 @@ const FONT_SCALE = 3;
 
 const QuranInYearSection = () => {
   const { t } = useTranslation('home');
+  const [shouldLoadVerse, setShouldLoadVerse] = useState(false);
 
   const onCalendarClicked = () => {
     logButtonClick('quran_in_year_header_calendar');
@@ -27,6 +29,48 @@ const QuranInYearSection = () => {
 
   // Get the Ayah for today's date
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
+
+  // eslint-disable-next-line react-func/max-lines-per-function
+  useEffect(() => {
+    if (!todayAyah || shouldLoadVerse) {
+      return undefined;
+    }
+
+    const triggerLoad = () => {
+      setShouldLoadVerse(true);
+    };
+
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (
+        callback: () => void,
+        options?: {
+          timeout?: number;
+        },
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (typeof idleWindow.requestIdleCallback === 'function') {
+      const idleId = idleWindow.requestIdleCallback(
+        () => {
+          triggerLoad();
+        },
+        { timeout: 2000 },
+      );
+      return () => {
+        idleWindow.cancelIdleCallback?.(idleId);
+      };
+    }
+
+    const timeoutId = window.setTimeout(triggerLoad, 1000);
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [shouldLoadVerse, todayAyah]);
 
   // Don't render anything if we're before April 1st, 2025
   if (!todayAyah) {
@@ -52,16 +96,24 @@ const QuranInYearSection = () => {
         </div>
       </div>
       <div className={styles.container}>
-        <VerseAndTranslation
-          chapter={todayAyah.chapter}
-          from={todayAyah.verse}
-          to={todayAyah.verse}
-          quranFont={QuranFont.QPCHafs}
-          translationsLimit={1}
-          arabicVerseClassName={styles.customArabicVerse}
-          translationClassName={styles.customTranslation}
-          fixedFontScale={FONT_SCALE}
-        />
+        <div className={styles.verseContainer}>
+          {shouldLoadVerse ? (
+            <VerseAndTranslation
+              chapter={todayAyah.chapter}
+              from={todayAyah.verse}
+              to={todayAyah.verse}
+              quranFont={QuranFont.QPCHafs}
+              translationsLimit={1}
+              arabicVerseClassName={styles.customArabicVerse}
+              translationClassName={styles.customTranslation}
+              fixedFontScale={FONT_SCALE}
+            />
+          ) : (
+            <div className={styles.loadingPlaceholder}>
+              <Spinner />
+            </div>
+          )}
+        </div>
         <Button
           type={ButtonType.Primary}
           variant={ButtonVariant.Compact}
