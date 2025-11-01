@@ -54,7 +54,7 @@ const normalizeRepeatValue = (
   fallback: number,
 ): number => {
   if (value === null || value === undefined) return fallback;
-  if (value === Infinity || value === 'Infinity') return Infinity;
+  if (value === Infinity || value === -1) return Infinity;
   if (typeof value === 'string') {
     const parsedValue = Number(value);
     return Number.isNaN(parsedValue) ? fallback : parsedValue;
@@ -233,7 +233,7 @@ const getRepeatCycles = ({
   ),
 });
 
-const INFINITY_VALUE: JsonNumberString = 'Infinity';
+const INFINITY_VALUE = -1;
 
 type RepeatSettingsLike = {
   repeatRange?: number | JsonNumberString | null;
@@ -245,13 +245,18 @@ type RepeatSettingsLike = {
 
 const serializeRepeatNumericValue = (
   value: number | JsonNumberString | null | undefined,
-): number | JsonNumberString | null | undefined => {
-  if (value === null || value === undefined) return value;
+): number | null | undefined => {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
   if (typeof value === 'number') {
     return Number.isFinite(value) ? value : INFINITY_VALUE;
   }
-  if (value === INFINITY_VALUE) return value;
-  return value as JsonNumberString;
+  // If it's already a number string, convert it
+  if (typeof value === 'string') {
+    const parsed = Number(value);
+    return Number.isNaN(parsed) ? null : parsed;
+  }
+  return null;
 };
 
 const serializeRepeatSettings = (settings: RepeatSettingsLike): RepeatSettingsPreference => {
@@ -276,14 +281,12 @@ const serializeOptionalRepeatSettings = (
 const prepareRepeatSettingsForApi = (
   settings: RepeatSettingsPreference,
 ): RepeatSettingsPreference => {
-  const toApiValue = (
-    value?: number | JsonNumberString | null,
-  ): number | JsonNumberString | null | undefined => {
+  const toApiValue = (value?: number | JsonNumberString | null): number | null | undefined => {
     if (value === undefined) return undefined;
     if (value === null) return null;
-    // Handle Infinity representation for the API
+    // Handle Infinity representation for the API (-1 for infinity)
     if (value === INFINITY_VALUE || value === Infinity) {
-      return 'Infinity';
+      return -1;
     }
     if (typeof value === 'string') {
       const parsed = Number(value);

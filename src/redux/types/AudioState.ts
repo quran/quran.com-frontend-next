@@ -1,4 +1,4 @@
-export type JsonNumberString = `${number}` | 'Infinity';
+export type JsonNumberString = `${number}`;
 
 export interface RepeatSettingsPreference {
   from?: string;
