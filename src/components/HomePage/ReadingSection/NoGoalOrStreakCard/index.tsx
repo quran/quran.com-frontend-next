@@ -20,6 +20,7 @@ const NoGoalOrStreakCard = () => {
           ? getReadingGoalNavigationUrl()
           : getLoginNavigationUrl(getReadingGoalNavigationUrl())
       }
+      shouldPrefetch={false}
     >
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>
