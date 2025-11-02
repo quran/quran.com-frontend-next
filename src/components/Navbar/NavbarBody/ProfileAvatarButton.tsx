@@ -94,6 +94,12 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
     });
   };
 
+  const onLoginButtonClicked = () => {
+    // logging performed in onTriggerClicked
+    dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
+    onTriggerClicked();
+  };
+
   if (isUserLoggedIn) {
     return (
       <PopoverMenu
@@ -150,10 +156,7 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
       variant={ButtonVariant.SimplifiedAccent}
       size={ButtonSize.Small}
       href={getLoginNavigationUrl(router.asPath)}
-      onClick={() => {
-        dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
-        onTriggerClicked();
-      }}
+      onClick={onLoginButtonClicked}
       id="login-button"
       className={styles.loginButton}
     >

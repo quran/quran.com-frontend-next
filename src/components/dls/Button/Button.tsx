@@ -23,10 +23,6 @@ export enum ButtonShape {
   Pill = 'pill',
 }
 
-/**
- * Button type defines the semantic purpose and color scheme of the button.
- * Different types have their own themed colors (background, foreground, border).
- */
 export enum ButtonType {
   Primary = 'primary',
   Secondary = 'secondary',
@@ -36,19 +32,6 @@ export enum ButtonType {
   Inverse = 'inverse',
 }
 
-/**
- * Button variant modifies the visual style and behavior of the button type.
- * Some variants override type colors, so not all type+variant combinations are compatible.
- *
- * Compatible combinations:
- * - Shadow: Works with all types (adds elevation)
- * - Ghost: Works with all types (transparent background, uses type colors)
- * - Compact: Works with all types (minimal padding, transparent background)
- * - Outlined: Works with all types (outlined style with type colors)
- * - Simplified: Best with Primary/Secondary/Inverse (uses fixed teal color, conflicts with Success/Warning/Error)
- * - SimplifiedAccent: Best with Primary/Secondary/Inverse (uses success green, conflicts with Success/Warning/Error)
- * - Accent: Best with Primary/Secondary/Inverse (uses success green, conflicts with Success/Warning/Error)
- */
 export enum ButtonVariant {
   Shadow = 'shadow',
   Ghost = 'ghost',
@@ -58,55 +41,6 @@ export enum ButtonVariant {
   SimplifiedAccent = 'simplified_accent',
   Accent = 'accent',
 }
-
-/**
- * Defines incompatible type+variant combinations that should not be used together.
- * These combinations can cause conflicting color classes to be applied simultaneously.
- *
- * Supported combinations:
- * - Accent/SimplifiedAccent variants work best with Primary or no type (uses success colors)
- * - Simplified variant works best with Primary or no type (uses teal color)
- * - Ghost/Outlined/Compact variants work with all types (they modify the type's colors)
- * - Shadow variant works with all types (adds elevation without color conflict)
- */
-const INCOMPATIBLE_COMBINATIONS: Record<ButtonVariant, ButtonType[]> = {
-  [ButtonVariant.Accent]: [ButtonType.Success, ButtonType.Warning, ButtonType.Error],
-  [ButtonVariant.SimplifiedAccent]: [ButtonType.Success, ButtonType.Warning, ButtonType.Error],
-  [ButtonVariant.Simplified]: [ButtonType.Success, ButtonType.Warning, ButtonType.Error],
-  [ButtonVariant.Shadow]: [],
-  [ButtonVariant.Ghost]: [],
-  [ButtonVariant.Compact]: [],
-  [ButtonVariant.Outlined]: [],
-};
-
-/**
- * Validates that the type and variant combination is compatible.
- * Logs a warning in development mode if an incompatible combination is detected.
- *
- * @returns {ButtonType} safeType - The button type (falls back to Primary if incompatible)
- */
-const validateTypeVariantCombination = (type: ButtonType, variant?: ButtonVariant): ButtonType => {
-  if (!variant) {
-    return type;
-  }
-
-  const incompatibleTypes = INCOMPATIBLE_COMBINATIONS[variant] || [];
-  const isIncompatible = incompatibleTypes.includes(type);
-
-  if (isIncompatible && process.env.NODE_ENV === 'development') {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `[Button] Incompatible combination detected: type="${type}" with variant="${variant}". ` +
-        `This combination may cause conflicting color classes. ` +
-        `Falling back to type="primary". ` +
-        `Supported types for ${variant}: ${Object.values(ButtonType)
-          .filter((t) => !incompatibleTypes.includes(t))
-          .join(', ')}`,
-    );
-  }
-
-  return isIncompatible ? ButtonType.Primary : type;
-};
 
 export type ButtonProps = {
   size?: ButtonSize;
@@ -159,19 +93,17 @@ const Button: React.FC<ButtonProps> = ({
   htmlType,
   ...props
 }) => {
-  // Validate type+variant combination and use safe values
-  const safeType = validateTypeVariantCombination(type, variant);
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',
     // type
-    [styles.primary]: safeType === ButtonType.Primary,
-    [styles.secondary]: safeType === ButtonType.Secondary,
-    [styles.success]: safeType === ButtonType.Success,
-    [styles.warning]: safeType === ButtonType.Warning,
-    [styles.error]: safeType === ButtonType.Error,
-    [styles.inverse]: safeType === ButtonType.Inverse,
+    [styles.primary]: type === ButtonType.Primary,
+    [styles.secondary]: type === ButtonType.Secondary,
+    [styles.success]: type === ButtonType.Success,
+    [styles.warning]: type === ButtonType.Warning,
+    [styles.error]: type === ButtonType.Error,
+    [styles.inverse]: type === ButtonType.Inverse,
 
     // size
     [styles.large]: size === ButtonSize.Large,

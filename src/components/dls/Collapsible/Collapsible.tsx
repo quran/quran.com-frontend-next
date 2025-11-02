@@ -51,11 +51,6 @@ const Collapsible = ({
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
 
-  const onSuffixClicked = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
   const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
 
   return (
@@ -80,7 +75,6 @@ const Collapsible = ({
                     className={classNames(styles.suffixContainer, {
                       [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
                     })}
-                    onClick={onSuffixClicked}
                   >
                     {suffix}
                   </div>

@@ -254,8 +254,8 @@
   font-weight: var(--font-weight-bold);
   border-radius: var(--border-radius-rounded);
   border: none;
-  font-size: var(--font-size-small);
-  padding: var(--spacing-xxsmall);
+  font-size: var(--font-size-small-px);
+  padding: var(--spacing-xxsmall-px);
 
   .prefix svg path {
     fill: var(--color-text-inverse);

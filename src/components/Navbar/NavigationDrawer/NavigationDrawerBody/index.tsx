@@ -13,6 +13,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import Spinner from '@/dls/Spinner/Spinner';
 import IconDiamond from '@/icons/diamond.svg';
 import IconGlobe from '@/icons/globe.svg';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 
@@ -85,7 +86,7 @@ const NavigationDrawerBody = (): JSX.Element => {
             <ThemeSwitcher />
           </div>
           <Button
-            href="https://give.quran.foundation/give/474400/#!/donation/checkout"
+            href={makeDonatePageUrl()}
             isNewTab
             prefix={<IconDiamond />}
             className={styles.ctaDonateButton}
@@ -94,7 +95,7 @@ const NavigationDrawerBody = (): JSX.Element => {
             shape={ButtonShape.Pill}
             onClick={onDonateClick}
           >
-            {t('become-monthly-donor')}
+            {t('fundraising.title')}
           </Button>
         </div>
       </div>

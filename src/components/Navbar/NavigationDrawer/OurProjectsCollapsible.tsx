@@ -11,6 +11,16 @@ import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import {
+  getCorpusQuranUrl,
+  getLegacyQuranUrl,
+  getNuqayahUrl,
+  getQuranAndroidUrl,
+  getQuranIosUrl,
+  getQuranReflectUrl,
+  getQuranUrl,
+  getSunnahUrl,
+} from '@/utils/navigation';
 
 interface OurProjectsCollapsibleProps {
   headerClassName?: string;
@@ -19,6 +29,49 @@ interface OurProjectsCollapsibleProps {
   itemTitleClassName?: string;
   descriptionClassName?: string;
 }
+
+const PROJECTS = [
+  {
+    title: 'Quran.com',
+    href: getQuranUrl(),
+    eventName: 'navigation_drawer_project_quran_com',
+  },
+  {
+    title: 'Quran For Android',
+    href: getQuranAndroidUrl(),
+    eventName: 'navigation_drawer_project_quran_android',
+  },
+  {
+    title: 'Quran iOS',
+    href: getQuranIosUrl(),
+    eventName: 'navigation_drawer_project_quran_ios',
+  },
+  {
+    title: 'QuranReflect.com',
+    href: getQuranReflectUrl(),
+    eventName: 'navigation_drawer_project_quran_reflect',
+  },
+  {
+    title: 'Sunnah.com',
+    href: getSunnahUrl(),
+    eventName: 'navigation_drawer_project_sunnah',
+  },
+  {
+    title: 'Nuqayah.com',
+    href: getNuqayahUrl(),
+    eventName: 'navigation_drawer_project_nuqayah',
+  },
+  {
+    title: 'Legacy.quran.com',
+    href: getLegacyQuranUrl(),
+    eventName: 'navigation_drawer_project_legacy',
+  },
+  {
+    title: 'Corpus.quran.com',
+    href: getCorpusQuranUrl(),
+    eventName: 'navigation_drawer_project_corpus',
+  },
+];
 
 const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
   headerClassName,
@@ -36,49 +89,6 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
     }
     logEvent('navigation_drawer_our_projects_collapsed');
   };
-
-  const projects = [
-    {
-      title: 'Quran.com',
-      href: 'https://quran.com',
-      eventName: 'navigation_drawer_project_quran_com',
-    },
-    {
-      title: 'Quran For Android',
-      href: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1',
-      eventName: 'navigation_drawer_project_quran_android',
-    },
-    {
-      title: 'Quran iOS',
-      href: 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
-      eventName: 'navigation_drawer_project_quran_ios',
-    },
-    {
-      title: 'QuranReflect.com',
-      href: 'https://quranreflect.com/',
-      eventName: 'navigation_drawer_project_quran_reflect',
-    },
-    {
-      title: 'Sunnah.com',
-      href: 'https://sunnah.com/',
-      eventName: 'navigation_drawer_project_sunnah',
-    },
-    {
-      title: 'Nuqayah.com',
-      href: 'https://nuqayah.com/',
-      eventName: 'navigation_drawer_project_nuqayah',
-    },
-    {
-      title: 'Legacy.quran.com',
-      href: 'https://legacy.quran.com',
-      eventName: 'navigation_drawer_project_legacy',
-    },
-    {
-      title: 'Corpus.quran.com',
-      href: 'https://corpus.quran.com',
-      eventName: 'navigation_drawer_project_corpus',
-    },
-  ];
 
   const handleProjectClick = (eventName: string) => () => {
     logButtonClick(eventName);
@@ -108,7 +118,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
                 }}
               />
             </p>
-            {projects.map((project) => (
+            {PROJECTS.map((project) => (
               <NavigationDrawerItem
                 key={project.eventName}
                 title={project.title}
