@@ -1,30 +1,43 @@
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
 
 import styles from './Banner.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import Link from '@/dls/Link/Link';
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { makeDonatePageUrl } from '@/utils/apiPaths';
-import { logButtonClick } from '@/utils/eventLogger';
+import { selectIsBannerVisible } from '@/redux/slices/banner';
+import { isLoggedIn } from '@/utils/auth/login';
+import {
+  getReadingGoalNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
 type BannerProps = {
   text: string;
+  ctaButton?: React.ReactNode;
   shouldShowPrefixIcon?: boolean;
 };
 
-const Banner = ({ text, shouldShowPrefixIcon = true }: BannerProps) => {
-  const { t } = useTranslation('common');
+const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
+  const isBannerVisible = useSelector(selectIsBannerVisible);
+  const { goal, isLoading } = useGetStreakWithMetadata();
+  const hasGoal = !!goal;
 
-  const handleDonationClick = () => {
-    logButtonClick('banner_cta', {
-      isDonationCampaign: true,
-    });
-  };
+  // Route logged-in users to progress page while loading to prevent jarring UX
+  // if they have an existing goal. Falls back to reading-goal once loading completes
+  // if no goal exists.
+  const link =
+    !isLoggedIn() || (!hasGoal && !isLoading)
+      ? getReadingGoalNavigationUrl()
+      : getReadingGoalProgressNavigationUrl();
 
   return (
-    <div className={classNames(styles.container, styles.isVisible)}>
+    <div
+      className={classNames(styles.container, {
+        [styles.isVisible]: isBannerVisible,
+      })}
+    >
       <div className={styles.description}>
         {shouldShowPrefixIcon && (
           <div className={styles.illustrationContainer}>
@@ -33,17 +46,11 @@ const Banner = ({ text, shouldShowPrefixIcon = true }: BannerProps) => {
         )}
         <div className={styles.text}>{text}</div>
       </div>
-      <div className={styles.ctaContainer}>
-        <Link href={makeDonatePageUrl(false, true)} isNewTab>
-          <Button
-            size={ButtonSize.Small}
-            variant={ButtonVariant.Outlined}
-            onClick={handleDonationClick}
-          >
-            {t('fundraising.donation-campaign.cta')}
-          </Button>
+      {ctaButton && (
+        <Link href={link} className={styles.ctaContainer}>
+          {ctaButton}
         </Link>
-      </div>
+      )}
     </div>
   );
 };

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import Banner from '@/components/Banner/Banner';
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
@@ -58,7 +59,11 @@ const QURAN_READER_ROUTES = new Set([
   '/rub/[rubId]',
 ]);
 
-const NavbarBody: React.FC = () => {
+interface Props {
+  isBannerVisible: boolean;
+}
+
+const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const router = useRouter();
@@ -139,50 +144,67 @@ const NavbarBody: React.FC = () => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
-  return (
-    <div className={styles.itemsContainer}>
-      <div className={styles.centerVertically}>
-        <div className={styles.leftCTA}>
-          <>
-            <Button
-              tooltip={t('menu')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={openNavigationDrawer}
-              ariaLabel={t('aria.nav-drawer-open')}
-            >
-              <IconMenu />
-            </Button>
-            <NavigationDrawer />
-          </>
-          <NavbarLogoWrapper />
-        </div>
-      </div>
-      <div className={styles.centerVertically}>
-        <div className={styles.rightCTA}>
-          <>
-            <ProfileAvatarButton />
-            <LanguageSelector />
-            <SettingsDrawer />
-          </>
-          <>
-            <Button
-              tooltip={t('search.title')}
-              variant={ButtonVariant.Ghost}
-              onClick={openSearchDrawer}
-              shape={ButtonShape.Circle}
-              shouldFlipOnRTL={false}
-              ariaLabel={t('search.title')}
-            >
-              <IconSearch />
-            </Button>
-            <SearchDrawer />
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButton: t('create-my-goal'),
+    shouldShowPrefixIcon: true,
+  };
 
-            {shouldRenderSidebarNavigation && <SidebarNavigation />}
-          </>
+  return (
+    <>
+      {isBannerVisible && (
+        <div className={styles.bannerContainerTop}>
+          <Banner {...bannerProps} />
+        </div>
+      )}
+      <div className={styles.itemsContainer}>
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
+            <>
+              <Button
+                tooltip={t('menu')}
+                variant={ButtonVariant.Ghost}
+                shape={ButtonShape.Circle}
+                onClick={openNavigationDrawer}
+                ariaLabel={t('aria.nav-drawer-open')}
+              >
+                <IconMenu />
+              </Button>
+              <NavigationDrawer />
+            </>
+            <NavbarLogoWrapper />
+          </div>
+        </div>
+        {isBannerVisible && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...bannerProps} />
+          </div>
+        )}
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
+            <>
+              <ProfileAvatarButton />
+              <LanguageSelector />
+              <SettingsDrawer />
+            </>
+            <div>
+              <Button
+                tooltip={t('search.title')}
+                variant={ButtonVariant.Ghost}
+                onClick={openSearchDrawer}
+                shape={ButtonShape.Circle}
+                shouldFlipOnRTL={false}
+                ariaLabel={t('search.title')}
+              >
+                <IconSearch />
+              </Button>
+              <SearchDrawer />
+              {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
