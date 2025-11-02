@@ -16,12 +16,12 @@ import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type DeleteReadingGoalButtonProps = {
-  isDisabled?: boolean;
+  isOpen: boolean;
+  onModalChange: (visible: boolean) => void;
 };
 
-const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) => {
+const DeleteReadingGoalModal = ({ isOpen, onModalChange }: DeleteReadingGoalButtonProps) => {
   const { t } = useTranslation('reading-progress');
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
   const { mutate } = useSWRConfig();
   const toast = useToast();
@@ -33,7 +33,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
 
   const closeModal = () => {
     setConfirmationText('');
-    setIsModalVisible(false);
+    onModalChange(false);
   };
 
   const onDeleteConfirmed = async () => {
@@ -45,61 +45,46 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
     closeModal();
   };
 
-  const onDeleteReadingGoalClicked = () => {
-    logButtonClick('reading_goal_delete');
-    setIsModalVisible(true);
-  };
-
   const CONFIRMATION_TEXT = t('delete-goal.confirmation.confirmation-text');
   const canDeleteGoal = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
-    <>
-      <Button
-        type={ButtonType.Error}
-        variant={ButtonVariant.Ghost}
-        onClick={onDeleteReadingGoalClicked}
-        isDisabled={isDisabled}
-      >
-        {t('delete-goal.action')}
-      </Button>
-      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
-        <Modal.Body>
-          <Modal.Header>
-            <Modal.Title>{t('delete-goal.confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('delete-goal.confirmation.subtitle')}</Modal.Subtitle>
+    <Modal isOpen={isOpen} onClickOutside={closeModal}>
+      <Modal.Body>
+        <Modal.Header>
+          <Modal.Title>{t('delete-goal.confirmation.title')}</Modal.Title>
+          <Modal.Subtitle>{t('delete-goal.confirmation.subtitle')}</Modal.Subtitle>
 
-            <p className={styles.instructionText}>
-              <Trans
-                i18nKey="reading-progress:delete-goal.confirmation.instruction-text"
-                values={{ text: CONFIRMATION_TEXT }}
-                components={{
-                  strong: <strong className={styles.confirmationText} />,
-                }}
-              />
-            </p>
-            <Input
-              id="delete-goal-confirmation"
-              value={confirmationText}
-              onChange={setConfirmationText}
-              fixedWidth={false}
-              containerClassName={styles.inputContainer}
+          <p className={styles.instructionText}>
+            <Trans
+              i18nKey="reading-progress:delete-goal.confirmation.instruction-text"
+              values={{ text: CONFIRMATION_TEXT }}
+              components={{
+                strong: <strong className={styles.confirmationText} />,
+              }}
             />
-          </Modal.Header>
-          <Modal.Footer>
-            <Button
-              type={ButtonType.Error}
-              variant={ButtonVariant.Outlined}
-              className={styles.deleteButton}
-              onClick={onDeleteConfirmed}
-              isDisabled={!canDeleteGoal}
-            >
-              {t('delete-goal.confirmation.action-text')}
-            </Button>
-          </Modal.Footer>
-        </Modal.Body>
-      </Modal>
-    </>
+          </p>
+          <Input
+            id="delete-goal-confirmation"
+            value={confirmationText}
+            onChange={setConfirmationText}
+            fixedWidth={false}
+            containerClassName={styles.inputContainer}
+          />
+        </Modal.Header>
+        <Modal.Footer>
+          <Button
+            type={ButtonType.Error}
+            variant={ButtonVariant.Outlined}
+            className={styles.deleteButton}
+            onClick={onDeleteConfirmed}
+            isDisabled={!canDeleteGoal}
+          >
+            {t('delete-goal.confirmation.action-text')}
+          </Button>
+        </Modal.Footer>
+      </Modal.Body>
+    </Modal>
   );
 };
 

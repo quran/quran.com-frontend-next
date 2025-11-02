@@ -244,6 +244,19 @@ export const getFullDayName = (day: Date, locale: string): string => {
 };
 
 /**
+ * Gets the short day name (single letter) in a given locale.
+ * Example: `M` for `Monday` in `en`
+ *
+ * @param {Date} day
+ * @param {string} locale
+ * @returns {string}
+ *
+ */
+export const getShortDayName = (day: Date, locale: string): string => {
+  return day.toLocaleDateString(locale, { weekday: 'narrow', timeZone: 'UTC' });
+};
+
+/**
  * Gets the full month name in a given locale.
  * Example: `April` in `en`
  *

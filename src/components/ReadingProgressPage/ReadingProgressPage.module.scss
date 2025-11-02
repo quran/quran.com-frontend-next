@@ -1,15 +1,56 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 $section-spacing: calc(var(--spacing-mega) * 1.5);
 $section-padding: calc(var(--spacing-large));
 
-.contentContainer {
-  padding-block: $section-spacing;
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+  padding-block-end: var(--spacing-medium);
 
-  h1 {
-    font-size: var(--font-size-jumbo);
-    line-height: var(--line-height-jumbo);
-    font-weight: var(--font-weight-bold);
+  .heroBackgroundImage {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-color: var(--color-search-background);
+
+    svg {
+      inline-size: 100%;
+      transform: translateY(-40%);
+    }
+  }
+
+  .heroInnerContainer {
+    @include utility.pageContainer();
+
+    display: flex;
+    block-size: 100%;
+    gap: var(--spacing-small);
+    align-items: center;
+    padding-inline: var(--spacing-small);
+    padding-block: var(--spacing-medium2-px);
+
+    @include breakpoints.tablet {
+      padding-block: var(--spacing-large-px);
+    }
+
+    margin-inline: auto;
+
+    h1 {
+      font-size: var(--font-size-jumbo);
+      line-height: var(--line-height-jumbo);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+}
+
+.contentContainer {
+  margin-block-start: calc(var(--spacing-medium) * -1);
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-rounded);
+  @include breakpoints.tablet {
+    border-radius: 0;
   }
 }
 
@@ -31,6 +72,36 @@ $section-padding: calc(var(--spacing-large));
   gap: var(--spacing-large);
 }
 
+.streakContainer {
+  display: flex;
+  gap: var(--spacing-small);
+  align-items: center;
+  margin-block-end: var(--spacing-mega);
+
+  h2 {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-large);
+    color: var(--color-text-faded);
+    span {
+      color: var(--color-primary-medium);
+      font-size: var(--font-size-jumbo);
+    }
+  }
+
+  svg,
+  path {
+    inline-size: var(--spacing-mega);
+    block-size: var(--spacing-mega);
+    stroke: var(--color-primary-medium);
+    color: var(--color-primary-medium);
+
+    @include breakpoints.tablet {
+      inline-size: var(--spacing-max);
+      block-size: var(--spacing-max);
+    }
+  }
+}
+
 .widgetsContainer {
   display: flex;
   flex-direction: row;
@@ -45,10 +116,9 @@ $section-padding: calc(var(--spacing-large));
 .widget {
   --day-circle-color: var(--color-success-faded) !important;
   flex: 1;
-  background-color: var(--color-success-faded);
   padding: var(--spacing-mega);
   border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--color-success-faint);
+  border: 1px solid var(--color-borders-hairline);
   display: flex;
   justify-content: space-between;
 
@@ -57,22 +127,31 @@ $section-padding: calc(var(--spacing-large));
   }
 }
 
-.streakContainer {
+.progressWidget {
+  background-color: var(--color-streaks-light);
+  flex: 1;
+  padding: var(--spacing-mega);
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--color-borders-hairline);
   display: flex;
-  justify-content: space-between;
+  gap: var(--spacing-large);
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-block-end: var(--spacing-mega);
+}
 
-  h2 {
-    font-size: var(--font-size-jumbo);
-    color: var(--color-primary-medium);
-  }
+.progressWidgetWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-small);
+}
 
-  p {
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-success-medium);
-  }
+.progressWidgetCta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-small);
 }
 
 .emptyWidget {
@@ -81,7 +160,49 @@ $section-padding: calc(var(--spacing-large));
   align-items: center;
 }
 
+.progressWidgetContent {
+  .progressWidgetTitle {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .progressWidgetDaysLeft {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-faded);
+    span {
+      color: var(--color-text-default);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+}
+
 .circularProgressbar {
-  height: 130px;
-  width: 130px;
+  block-size: calc(var(--spacing-max) * 1.5);
+  inline-size: calc(var(--spacing-max) * 1.5);
+}
+
+.circularProgressbarPath {
+  stroke: var(--color-streaks-dark);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.circularProgressbarTrail {
+  stroke: var(--color-daily-progress);
+  /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+  stroke-linecap: round;
+}
+
+.circularProgressbarText {
+  fill: var(--color-text-black);
+  font-size: 20px;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: var(--font-weight-bold);
+}
+
+.continueReadingButton {
+  background-color: var(--color-streaks-dark);
+  border: none;
+  border-radius: calc(var(--border-radius-default) * 3);
 }

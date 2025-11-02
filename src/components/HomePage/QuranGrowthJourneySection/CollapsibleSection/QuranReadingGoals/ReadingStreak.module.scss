@@ -1,11 +1,11 @@
-@use "src/styles/theme";
-@use "src/styles/breakpoints";
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
   gap: var(--spacing-mega);
 
   @include breakpoints.desktop {
@@ -21,8 +21,14 @@
   color: var(--color-text-default-new);
 }
 
+.currentWeekProgress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+}
+
 .weekProgressLabel {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
 }
 
 .week {
@@ -33,7 +39,7 @@
 
   &.fixedWidth {
     @include breakpoints.tablet {
-      min-width: calc(var(--spacing-large) * 24) !important;
+      min-inline-size: calc(var(--spacing-large) * 24) !important;
     }
   }
 }
@@ -41,41 +47,28 @@
 .day {
   color: var(--color-success-medium);
   font-size: var(--font-size-small);
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-large);
 }
 
-.fullName {
-  display: none;
-
-  @include breakpoints.tablet {
-    display: block;
-  }
+.shortName {
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  display: block;
 }
 
-.shortName {
-  display: none;
-
-  @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-normal);
-    font-weight: var(--font-weight-medium);
-    display: block;
-  }
+.textBold {
+  font-weight: var(--font-weight-bold);
 }
 
 .circleContainer {
   flex: 1;
-  width: 100%;
+  inline-size: 100%;
   position: relative;
-}
-
-.dayDivider {
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-success-medium);
 }
 
 .goalContainer {
@@ -93,8 +86,8 @@
 }
 
 .illustrationContainer {
-  width: calc(5 * var(--spacing-mega));
-  height: calc(5 * var(--spacing-mega));
+  inline-size: calc(5 * var(--spacing-mega));
+  block-size: calc(5 * var(--spacing-mega));
   position: absolute;
   inset-block-end: calc(-1 * var(--spacing-medium));
   inset-inline-end: 0;

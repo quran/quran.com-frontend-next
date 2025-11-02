@@ -28,11 +28,15 @@ import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
 import { generateDurationDaysOptions } from '@/utils/generators';
+import { isMobile } from '@/utils/responsive';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 type UpdateReadingGoalButtonProps = {
   isDisabled?: boolean;
   goal: Goal;
+  isOpen: boolean;
+  onModalChange: (visible: boolean) => void;
+  onShowDeleteModal: () => void;
 };
 
 const getPages = (readingGoal: Goal) => {
@@ -63,10 +67,15 @@ const types = [
   { value: GoalType.RANGE, key: 'range' },
 ] as const;
 
-const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonProps) => {
+const UpdateReadingGoalModal = ({
+  isDisabled,
+  goal,
+  isOpen,
+  onModalChange,
+  onShowDeleteModal,
+}: UpdateReadingGoalButtonProps) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const mushaf = useGetMushaf();
   const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
@@ -103,7 +112,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
   }, [goal]);
 
   const closeModal = () => {
-    setIsModalVisible(false);
+    onModalChange(false);
 
     resetState();
   };
@@ -114,7 +123,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
 
   const onUpdateGoalClicked = () => {
     logButtonClick('edit_reading_goal');
-    setIsModalVisible(true);
+    onModalChange(true);
   };
 
   const onUpdateClicked = async () => {
@@ -185,11 +194,16 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
 
   return (
     <>
-      <Button onClick={onUpdateGoalClicked} isDisabled={isDisabled}>
+      <Button
+        onClick={onUpdateGoalClicked}
+        isDisabled={isDisabled}
+        variant={isMobile() && ButtonVariant.Ghost}
+        className={styles.editGoalButton}
+      >
         {t('edit-goal.action')}
       </Button>
 
-      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
+      <Modal isOpen={isOpen} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('edit-goal.title')}</Modal.Title>
@@ -265,15 +279,26 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
             </div>
           </Modal.Header>
           <Modal.Footer>
-            <Button
-              type={ButtonType.Primary}
-              variant={ButtonVariant.Outlined}
-              className={styles.deleteButton}
-              onClick={onUpdateClicked}
-              isDisabled={getIsUpdateDisabled()}
-            >
-              {t('edit-goal.action')}
-            </Button>
+            <div className={styles.footerCtaContainer}>
+              <Button
+                type={ButtonType.Primary}
+                variant={ButtonVariant.Outlined}
+                className={styles.deleteButton}
+                onClick={onUpdateClicked}
+                isDisabled={getIsUpdateDisabled()}
+              >
+                {t('edit-goal.action')}
+              </Button>
+              <Button
+                type={ButtonType.Error}
+                variant={ButtonVariant.Ghost}
+                className={styles.deleteButton}
+                onClick={onShowDeleteModal}
+                isDisabled={getIsUpdateDisabled()}
+              >
+                {t('delete-goal.action')}
+              </Button>
+            </div>
           </Modal.Footer>
         </Modal.Body>
       </Modal>
