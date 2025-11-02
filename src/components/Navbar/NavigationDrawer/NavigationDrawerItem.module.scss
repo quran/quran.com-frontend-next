@@ -2,10 +2,6 @@
 
 .container {
   @include utility.center-vertically;
-
-  min-block-size: calc(var(--spacing-mega) + var(--spacing-small));
-  padding-inline-start: var(--spacing-micro);
-  padding-inline-end: var(--spacing-micro);
 }
 
 .containerStale {

@@ -25,36 +25,32 @@
 .languageHeader {
   display: flex;
   align-items: center;
-  gap: var(--spacing-small);
-  padding: var(--spacing-medium);
-  border-block-end: 1px solid var(--color-borders-hairline);
+  padding-block: var(--spacing-medium-px);
+  padding-inline: var(--spacing-medium2-px);
 }
 
 .backButton {
-  padding: var(--spacing-xsmall);
-  min-inline-size: auto;
+  gap: var(--spacing-xxsmall-px);
 }
 
 .languageTitle {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-small-px);
   font-weight: var(--font-weight-semibold);
 }
 
 .languageList {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-small) var(--spacing-mega);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxsmall);
 }
 
 .languageItem {
   justify-content: flex-start;
-  padding: var(--spacing-small) var(--spacing-medium);
+  padding-inline: var(--spacing-xxlarge-px);
+  padding-block: var(--spacing-small-px);
   inline-size: 100%;
   text-align: start;
-  border-radius: var(--border-radius-default);
 
   &:hover {
     background: var(--color-background-alternative-faded);

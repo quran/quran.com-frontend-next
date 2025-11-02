@@ -7,9 +7,9 @@
 }
 
 .popoverContent {
-  padding: var(--spacing-small);
+  padding: var(--spacing-small-px);
   min-inline-size: unset !important;
-  max-inline-size: calc(var(--spacing-large) * 8);
+  max-inline-size: calc(var(--spacing-large-px) * 8);
   inline-size: 100%;
   box-shadow: var(--shadow-flat);
 
@@ -20,7 +20,7 @@
 }
 
 .popoverItem {
-  padding: var(--spacing-xsmall) var(--spacing-medium);
+  padding: var(--spacing-xsmall-px) var(--spacing-medium-px);
   border-radius: var(--border-radius-pill);
   text-align: center;
   justify-content: center;

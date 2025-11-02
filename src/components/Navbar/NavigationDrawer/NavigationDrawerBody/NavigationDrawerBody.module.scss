@@ -8,7 +8,7 @@
   /* Fallback for browsers without dynamic viewport units */
   max-block-size: calc(100vh - var(--navbar-height));
   /* Prefer dynamic viewport units where supported */
-  max-height: calc(100dvh - var(--navbar-height));
+  max-block-size: calc(100dvh - var(--navbar-height));
 }
 
 .mainListItems {
@@ -30,32 +30,32 @@
   min-block-size: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable both-edges;
-  padding-inline-start: var(--spacing-medium);
-  padding-inline-end: var(--spacing-medium);
-}
-
-.subtitle {
-  @include utility.center-vertically;
-  font-size: var(--font-size-xsmall);
-  text-transform: uppercase;
-  font-weight: var(--font-weight-bold);
-  border-block-end: 1px var(--color-borders-hairline) solid;
-  min-block-size: calc(var(--spacing-mega) + var(--spacing-small));
+  padding-inline: var(--spacing-medium3-px);
+  padding-block: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large2-px);
 }
 
 .projectsDesc {
-  font-size: var(--font-size-small);
-  margin-block-end: var(--spacing-small);
+  font-size: var(--font-size-xxsmall-px);
+  margin-block-end: var(--spacing-small-px);
+  padding-inline-start: var(--spacing-large-px);
 }
 
 .accordionHeaderLeft {
-  gap: var(--spacing-xxsmall);
+  gap: var(--spacing-xxsmall-px);
   align-items: center !important;
 }
 
 .accordionContent {
-  margin-inline-start: var(--spacing-mega);
+  margin-block-start: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+  > a {
+    padding-inline-start: var(--spacing-large-px);
+  }
 }
 
 .accordionItemTitle {
@@ -63,14 +63,14 @@
 }
 
 .ctaContainer {
-  padding: var(--spacing-medium) var(--spacing-max);
+  padding: var(--spacing-medium2-px) var(--spacing-medium3-px);
 }
 
 .ctaTop {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: var(--spacing-small);
-  margin-block-end: var(--spacing-small);
+  gap: var(--spacing-small-px);
+  margin-block-end: var(--spacing-small-px);
 }
 
 .ctaDonateButton {

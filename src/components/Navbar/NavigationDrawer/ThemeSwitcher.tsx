@@ -9,13 +9,20 @@ import styles from './ThemeSwitcher.module.scss';
 import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
+import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 
 const ThemeSwitcher = () => {
   const { t } = useTranslation('common');
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme, shallowEqual);
 
@@ -34,7 +41,7 @@ const ThemeSwitcher = () => {
 
   const onThemeSelected = (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
-    dispatch(setTheme(value));
+    onSettingsChange('type', value, setTheme(value), setTheme(theme.type), PreferenceGroup.THEME);
     if (value !== theme.type) {
       // reset the loaded Fonts when we switch to a different theme
       dispatch(resetLoadedFontFaces());
@@ -51,7 +58,7 @@ const ThemeSwitcher = () => {
       trigger={
         <Button
           className={styles.triggerContainer}
-          prefix={themeIcons[theme.type]}
+          prefix={isLoading ? <Spinner /> : themeIcons[theme.type]}
           variant={ButtonVariant.Ghost}
           size={ButtonSize.Small}
           shape={ButtonShape.Pill}
