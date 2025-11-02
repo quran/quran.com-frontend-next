@@ -62,13 +62,17 @@ $pixel: 1px;
   padding-block: calc(var(--spacing-medium) / 2);
   display: flex;
   align-items: center;
-  padding-inline: calc(1.5 * var(--spacing-medium));
+  padding-inline: var(--spacing-medium3-px);
   z-index: var(--z-index-default);
   position: relative;
   background: var(--color-background-elevated);
 
   @include breakpoints.tablet {
-    padding-inline: calc(1.25 * var(--spacing-mega));
+    padding-inline: var(--spacing-xlarge-px);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-medium3-px);
   }
 }
 
@@ -119,7 +123,9 @@ $pixel: 1px;
   width: 100%;
   justify-content: space-between;
 
-
+  @include breakpoints.tablet {
+    padding-inline: var(--spacing-medium2-px);
+  }
 }
 
 .visibleContainer .chapterNavigationWrapper {
@@ -133,6 +139,10 @@ $pixel: 1px;
 
   @include breakpoints.tablet {
     display: none;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    display: inline-flex;
   }
 }
 
