@@ -43,11 +43,12 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     logButtonClick('quran_calendar_read_online');
   };
 
-  const markAsCompletedLabel = isMobileView
-    ? '\u2713'
-    : !isCompleted
-    ? t('mark-as-completed')
-    : t('week-completed');
+  const getMarkAsCompletedLabel = () => {
+    if (isMobileView) return '\u2713';
+    return isCompleted ? t('week-completed') : t('mark-as-completed');
+  };
+
+  const markAsCompletedLabel = getMarkAsCompletedLabel();
 
   return (
     <div className={styles.actionButtons}>
