@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
@@ -41,9 +40,6 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
 
   return (
     <>
-      <Head>
-        <link rel="preload" as="image" href="/images/background.png" crossOrigin="anonymous" />
-      </Head>
       <NextSeoWrapper
         title={t('home:noble-quran')}
         url={getCanonicalUrl(lang, '')}
