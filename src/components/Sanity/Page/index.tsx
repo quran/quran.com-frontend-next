@@ -27,6 +27,7 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
     year: 'numeric',
   });
   const pageTitle = <p className={classNames(styles.title, styles.bold)}>{page.title}</p>;
+  const imageUrl = page.mainPhoto ? getImageUrl(page.mainPhoto) : '';
   return (
     <div key={page.id} className={styles.pageContainer}>
       <div className={styles.headerSection}>
@@ -56,11 +57,11 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
               {pageTitle}
             </Link>
             {page.summary}
-            {page.mainPhoto && (
+            {page.mainPhoto && imageUrl && (
               <div className={styles.imageContainer}>
                 <Image
                   className={styles.image}
-                  src={getImageUrl(page.mainPhoto)}
+                  src={imageUrl}
                   alt=""
                   width={page.mainPhoto?.metadata?.dimensions?.width ?? 800}
                   height={page.mainPhoto?.metadata?.dimensions?.height ?? 600}
