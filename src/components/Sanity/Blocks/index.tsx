@@ -36,6 +36,10 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
         const { asset, _key: imageKey } = childElement;
         const width = asset?.metadata?.dimensions?.width ?? 800;
         const height = asset?.metadata?.dimensions?.height ?? 600;
+        const imageUrl = getImageUrl(asset);
+        if (!imageUrl) {
+          return;
+        }
         elementBlocks.push(
           <div
             key={`${bodyElementKey}-${childElementKey}-${imageKey}`}
@@ -43,7 +47,7 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
           >
             <Image
               className={styles.image}
-              src={getImageUrl(asset)}
+              src={imageUrl}
               alt=""
               width={width}
               height={height}
