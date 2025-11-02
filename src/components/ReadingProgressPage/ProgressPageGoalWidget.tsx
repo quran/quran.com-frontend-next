@@ -1,35 +1,45 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
+import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
+
 import styles from './ReadingProgressPage.module.scss';
 
-import ReadingGoalAmount, {
-  ReadingGoalAmountContext,
-} from '@/components/ReadingGoal/ReadingGoalAmount';
 import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
-import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
+import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getReadingGoalNavigationUrl } from '@/utils/navigation';
+import { isMobile } from '@/utils/responsive';
 
 interface ProgressPageGoalWidgetProps {
-  currentActivityDay: CurrentQuranActivityDay;
   goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
 }
 
-const ProgressPageGoalWidget = ({
-  currentActivityDay,
-  goal,
-  isLoading,
-}: ProgressPageGoalWidgetProps) => {
+const ProgressPageGoalWidget = ({ goal, isLoading }: ProgressPageGoalWidgetProps) => {
   const { t, lang } = useTranslation('reading-progress');
+  const [modalVisible, setModalVisible] = useState({
+    update: false,
+    delete: false,
+  });
   const percent = goal?.isCompleted ? 100 : Math.min(goal?.progress?.percent || 0, 100);
-  const isGoalDone = percent >= 100;
   const localizedPercent = toLocalizedNumber(percent, lang);
+  const continueReadingUrl = useGetContinueReadingUrl();
+
+  const onUpdateModalChange = (visible: boolean) => {
+    setModalVisible({ ...modalVisible, update: visible });
+  };
+
+  const onDeleteModalChange = (visible: boolean) => {
+    setModalVisible({ ...modalVisible, delete: visible });
+  };
 
   if (isLoading) {
     return (
@@ -55,35 +65,52 @@ const ProgressPageGoalWidget = ({
     );
   }
 
-  const getContent = () => {
-    if (goal.isCompleted) {
-      return <p>{t('reading-goal:progress.goal-complete')}</p>;
-    }
-
-    if (isGoalDone) {
-      return <p>{t('reading-goal:progress.complete')}</p>;
-    }
-
-    return (
-      <ReadingGoalAmount
-        goal={goal}
-        currentActivityDay={currentActivityDay}
-        context={ReadingGoalAmountContext.ProgressPage}
-      />
-    );
-  };
-
   return (
-    <div className={styles.widget}>
-      <div>{getContent()}</div>
-
-      <div className={styles.circularProgressbar}>
-        <CircularProgressbar
-          text={`${localizedPercent}%`}
-          value={percent}
-          maxValue={100}
-          strokeWidth={12}
+    <div className={styles.progressWidget}>
+      <div className={styles.progressWidgetWrapper}>
+        <div className={styles.circularProgressbar}>
+          <CircularProgressbar
+            text={`${localizedPercent}%`}
+            value={percent}
+            maxValue={100}
+            strokeWidth={12}
+            classes={{
+              path: styles.circularProgressbarPath,
+              trail: styles.circularProgressbarTrail,
+              text: styles.circularProgressbarText,
+            }}
+          />
+        </div>
+        <div className={styles.progressWidgetContent}>
+          <p className={styles.progressWidgetTitle}>{t('reading-goal:daily-progress')}</p>
+          <p
+            className={styles.progressWidgetDaysLeft}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: t('reading-goal:remaining-days', {
+                count: goal.progress.daysLeft,
+                days: toLocalizedNumber(goal.progress.daysLeft, lang),
+              }),
+            }}
+          />
+        </div>
+      </div>
+      <div className={styles.progressWidgetCta}>
+        {!isMobile() && (
+          <Button href={continueReadingUrl} className={styles.continueReadingButton}>
+            {t('reading-goal:continue-reading')}
+          </Button>
+        )}
+        <UpdateReadingGoalModal
+          goal={goal}
+          isOpen={modalVisible.update}
+          onModalChange={onUpdateModalChange}
+          onShowDeleteModal={() => {
+            logButtonClick('reading_goal_delete');
+            setModalVisible({ update: false, delete: true });
+          }}
         />
+        <DeleteReadingGoalModal isOpen={modalVisible.delete} onModalChange={onDeleteModalChange} />
       </div>
     </div>
   );

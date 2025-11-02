@@ -7,6 +7,7 @@ import styles from './ReadingProgressPage.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
+import BookIcon from '@/icons/book.svg';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface ProgressPageStreakWidgetProps {
@@ -28,8 +29,13 @@ const ProgressPageStreakWidget = ({
   const widget = (
     <>
       <div className={styles.streakContainer}>
-        <h2>{t('reading-goal:streak')}</h2>
-        <p>{t('reading-goal:x-days', { days: localizedStreak, count: streak })}</p>
+        <BookIcon />
+        <h2
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: t('reading-goal:x-days', { days: localizedStreak, count: streak }),
+          }}
+        />
       </div>
 
       <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />
