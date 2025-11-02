@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   margin-block-start: calc(-1 * var(--banner-height));
@@ -10,6 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--spacing-small);
 
   padding-inline: var(--spacing-large);
   padding-block: var(--spacing-xsmall);
