@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
@@ -19,12 +18,12 @@ import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneyS
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import useIsMobile from '@/hooks/useIsMobile';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
-import { isMobile } from '@/utils/responsive';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -37,12 +36,10 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
+  const isMobileView = useIsMobile();
 
   return (
     <>
-      <Head>
-        <link rel="preload" as="image" href="/images/background.png" crossOrigin="anonymous" />
-      </Head>
       <NextSeoWrapper
         title={t('home:noble-quran')}
         url={getCanonicalUrl(lang, '')}
@@ -55,7 +52,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
             <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
               <ReadingSection />
             </div>
-            {isMobile() ? (
+            {isMobileView ? (
               <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} todayAyah={todayAyah} />
             ) : (
               <>
