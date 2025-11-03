@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   display: grid;
@@ -22,7 +22,7 @@
     max-inline-size: var(--spacing-mega) !important;
   }
   @include breakpoints.smallerThanTablet {
-    min-width: calc(9 * var(--spacing-mega)) !important;
+    min-inline-size: calc(9 * var(--spacing-mega)) !important;
     max-inline-size: calc(10 * var(--spacing-mega));
   }
   // image container
@@ -54,4 +54,10 @@
   & > div:first-child {
     cursor: unset;
   }
+}
+
+.loadingMore {
+  display: flex;
+  justify-content: center;
+  margin-block: var(--spacing-medium);
 }
