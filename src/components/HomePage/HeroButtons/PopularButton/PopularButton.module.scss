@@ -15,8 +15,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: fit-content;
-    text-wrap: nowrap;
+    width: 125px;
+
+    @include breakpoints.smallerThanTablet {
+        width: 85px;
+    }
 }
 
 .dropdownContainer {
