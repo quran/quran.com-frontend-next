@@ -1,0 +1,17 @@
+[Unit]
+Description=Quran.com Continuous Playwright Tests
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/apps/playwright-tests
+ExecStart=mise -C /srv/apps/playwright-tests x -- yarn playwright test tests/integration/url/path.spec.ts --reporter=./tests/reporter/discord-reporter.js,list
+Restart=always
+RestartSec=300
+StandardOutput=journal
+StandardError=journal
+
+TimeoutStopSec=60
+KillMode=control-group
+TimeoutStartSec=180
+KillSignal=SIGTERM
