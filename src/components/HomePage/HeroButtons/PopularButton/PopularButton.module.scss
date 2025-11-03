@@ -15,16 +15,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 125px;
-    @include breakpoints.smallerThanTablet {
-        width: 85px;
-    }
+    width: fit-content;
 }
 
 .dropdownContainer {
     width: 750px;
     margin-inline-start: -230px;
-    margin-top: -42%;
+    margin-top: -52.5px;
     border-radius: var(--border-radius-rounded);
     box-shadow: var(--shadow-medium);
     background: var(--color-background-elevated);
@@ -32,9 +29,15 @@
     animation: slideUpFade 0.1s ease-out forwards;
 
     @include breakpoints.smallerThanTablet {
+        @include breakpoints.tablet {
+            margin-inline-start: -230px;
+            margin-top: -40px;
+        }
+
         width: 360px;
         margin-inline-start: -160px;
         margin-top: -35px;
+
     }
 
     hr {

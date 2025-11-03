@@ -42,10 +42,10 @@
 
 .buttonsContainer {
   display: flex;
-  gap: var(--spacing-medium2-px);
+  gap: var(--spacing-medium-px);
   margin-block-start: var(--spacing-medium);
   @include breakpoints.smallerThanTablet {
-    gap: var(--spacing-medium-px);
+    gap: var(--spacing-small-px);
     margin-block-start: var(--spacing-small-px);
   }
 }
