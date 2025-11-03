@@ -45,6 +45,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
       title={<NavigationDrawerItem title={t('more')} icon={<IconSquareMore />} />}
       suffix={<IconCaretDown />}
       shouldRotateSuffixOnToggle
+      shouldSuffixTrigger
       onOpenChange={onOpenChange}
     >
       {({ isOpen }) => {

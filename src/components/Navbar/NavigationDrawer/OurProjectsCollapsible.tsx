@@ -101,6 +101,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
       title={<NavigationDrawerItem title={t('our-projects')} icon={<IconSquareMore />} />}
       suffix={<IconCaretDown />}
       shouldRotateSuffixOnToggle
+      shouldSuffixTrigger
       onOpenChange={onOpenChange}
     >
       {({ isOpen }) => {
