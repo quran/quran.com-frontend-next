@@ -53,6 +53,10 @@ const Collapsible = ({
 
   const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
 
+  const onSuffixClicked = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
@@ -75,6 +79,7 @@ const Collapsible = ({
                     className={classNames(styles.suffixContainer, {
                       [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
                     })}
+                    onClick={onSuffixClicked}
                   >
                     {suffix}
                   </div>
