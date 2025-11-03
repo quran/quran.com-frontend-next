@@ -15,7 +15,6 @@ import SettingsButton from './components/SettingsButton';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
-import SettingsDrawer from '@/components/Navbar/SettingsDrawer/SettingsDrawer';
 import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
@@ -145,8 +144,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
       {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
-
-      <SettingsDrawer />
     </div>
   );
 };

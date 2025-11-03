@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
+import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
+
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
@@ -93,6 +95,7 @@ const NavbarBody: React.FC = () => {
             </Button>
             <SearchDrawer />
             <SidebarNavigation />
+            <SettingsDrawer />
           </>
         </div>
       </div>
