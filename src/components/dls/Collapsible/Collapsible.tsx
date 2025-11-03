@@ -20,6 +20,7 @@ type Props = {
   shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
   shouldRotateSuffixOnToggle?: boolean;
+  shouldSuffixTrigger?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   direction?: CollapsibleDirection;
   headerClassName?: string;
@@ -39,6 +40,7 @@ const Collapsible = ({
   children,
   shouldRotatePrefixOnToggle,
   shouldRotateSuffixOnToggle,
+  shouldSuffixTrigger = false,
   shouldOpen,
   onOpenChange,
   direction = CollapsibleDirection.Left,
@@ -55,6 +57,9 @@ const Collapsible = ({
 
   const onSuffixClicked = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
+    if (!shouldSuffixTrigger) {
+      e.stopPropagation();
+    }
   };
 
   return (
