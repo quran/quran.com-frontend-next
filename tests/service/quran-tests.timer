@@ -1,9 +1,9 @@
 [Unit]
-Description=Run Quran.com Playwright tests continuously
+Description=Run Quran.com Playwright tests every 5 minutes
 Requires=quran-tests.service
 
 [Timer]
-OnCalendar=*:*:0/5
+OnCalendar=*-*-* *:0/5:00
 Persistent=true
 
 [Install]

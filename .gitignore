@@ -35,6 +35,9 @@ node_modules/
 .env
 .env.local
 
+# mise local configuration
+.mise.local.toml
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
