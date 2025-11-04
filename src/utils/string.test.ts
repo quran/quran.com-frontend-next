@@ -260,6 +260,6 @@ describe('getWordCount', () => {
   });
 
   it('ignores extra whitespace', () => {
-    expect(getWordCount('  multiple   spaces\nnew\tlines ')).toBe(3);
+    expect(getWordCount('  multiple   spaces\nnew\tlines ')).toBe(4);
   });
 });
