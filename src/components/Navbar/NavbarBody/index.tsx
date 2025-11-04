@@ -1,8 +1,9 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
@@ -23,6 +24,11 @@ import {
   setIsSettingsDrawerOpen,
   setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
+import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import {
+  selectIsSidebarNavigationVisible,
+  setIsSidebarNavigationVisible,
+} from '@/redux/slices/QuranReader/sidebarNavigation';
 import { logEvent } from '@/utils/eventLogger';
 
 const SidebarNavigation = dynamic(
@@ -43,9 +49,41 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
+const QURAN_READER_ROUTES = new Set([
+  '/[chapterId]',
+  '/[chapterId]/[verseId]',
+  '/hizb/[hizbId]',
+  '/juz/[juzId]',
+  '/page/[pageId]',
+  '/rub/[rubId]',
+]);
+
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const router = useRouter();
+  const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
+  const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
+  const hasResetSidebarAfterHydration = useRef(false);
+
+  useEffect(() => {
+    if (isQuranReaderRoute) return;
+    // Disable the sidebar when not on any Quran reader route
+    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+  }, [dispatch, isQuranReaderRoute]);
+
+  const shouldRenderSidebarNavigation =
+    isQuranReaderRoute || isSidebarNavigationVisible || hasResetSidebarAfterHydration.current;
+
+  useEffect(() => {
+    if (hasResetSidebarAfterHydration.current) return;
+    if (!isPersistHydrationComplete) return;
+    hasResetSidebarAfterHydration.current = true;
+    if (isQuranReaderRoute) return;
+    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+  }, [dispatch, isPersistHydrationComplete, isQuranReaderRoute]);
+
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
@@ -111,7 +149,7 @@ const NavbarBody: React.FC = () => {
               <IconSearch />
             </Button>
             <SearchDrawer />
-            <SidebarNavigation />
+            {shouldRenderSidebarNavigation && <SidebarNavigation />}
           </>
         </div>
       </div>
