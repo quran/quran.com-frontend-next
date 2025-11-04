@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .outerContainer {
   position: relative;
@@ -10,17 +10,32 @@
   z-index: -1;
   inset: 0;
   background-color: var(--color-search-background);
+  background-image: url('/images/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
-  svg {
-    width: 100%;
-    transform: translateY(-40%);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.97);
+    pointer-events: none;
   }
+}
+
+:global([data-theme='light']) .backgroundImage::after {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+:global([data-theme='sepia']) .backgroundImage::after {
+  background: rgba(238, 216, 187, 0.95);
 }
 
 .innerContainer {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  block-size: 100%;
   align-items: center;
   padding-inline: var(--spacing-small);
   padding-block: var(--spacing-medium2-px);
@@ -33,7 +48,7 @@
 }
 
 .logoContainer {
-  padding-bottom: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium2-px);
   @include breakpoints.smallerThanTablet {
     display: none;
     padding: 0;
