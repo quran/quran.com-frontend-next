@@ -19,6 +19,8 @@ type Props = {
   isDefaultOpen?: boolean;
   shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
+  shouldRotateSuffixOnToggle?: boolean;
+  shouldSuffixTrigger?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   direction?: CollapsibleDirection;
   headerClassName?: string;
@@ -37,6 +39,8 @@ const Collapsible = ({
   suffix,
   children,
   shouldRotatePrefixOnToggle,
+  shouldRotateSuffixOnToggle,
+  shouldSuffixTrigger = false,
   shouldOpen,
   onOpenChange,
   direction = CollapsibleDirection.Left,
@@ -49,12 +53,14 @@ const Collapsible = ({
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
 
-  const onSuffixClicked = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
   const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
+
+  const onSuffixClicked = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    if (!shouldSuffixTrigger) {
+      e.stopPropagation();
+    }
+  };
 
   return (
     <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
@@ -63,17 +69,26 @@ const Collapsible = ({
           {direction === CollapsibleDirection.Left ? (
             <>
               <div className={classNames(styles.headerLeft, headerLeftClassName)}>
-                <div
-                  className={classNames(styles.prefixContainer, {
-                    [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
-                  })}
-                >
-                  {prefix}
-                </div>
+                {prefix && (
+                  <div
+                    className={classNames(styles.prefixContainer, {
+                      [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
+                    })}
+                  >
+                    {prefix}
+                  </div>
+                )}
                 {title}
-              </div>
-              <div className={styles.suffixContainer} onClick={onSuffixClicked}>
-                {suffix}
+                {suffix && (
+                  <div
+                    className={classNames(styles.suffixContainer, {
+                      [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
+                    })}
+                    onClick={onSuffixClicked}
+                  >
+                    {suffix}
+                  </div>
+                )}
               </div>
             </>
           ) : (

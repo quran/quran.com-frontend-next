@@ -39,6 +39,38 @@ export const AUTH_ROUTES = [
   ROUTES.COMPLETE_SIGNUP,
 ];
 
+export const getQuranReflectUrl = () => {
+  return 'https://quranreflect.com/';
+};
+
+export const getQuranUrl = () => {
+  return 'https://quran.com';
+};
+
+export const getQuranAndroidUrl = () => {
+  return 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1';
+};
+
+export const getQuranIosUrl = () => {
+  return 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303';
+};
+
+export const getSunnahUrl = () => {
+  return 'https://sunnah.com/';
+};
+
+export const getNuqayahUrl = () => {
+  return 'https://nuqayah.com/';
+};
+
+export const getLegacyQuranUrl = () => {
+  return 'https://legacy.quran.com';
+};
+
+export const getCorpusQuranUrl = () => {
+  return 'https://corpus.quran.com';
+};
+
 /**
  * Get the href link to a verse.
  *
