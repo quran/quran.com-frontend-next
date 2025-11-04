@@ -3,19 +3,7 @@
 
 // Card wrapper styles
 .endOfSurahCard {
-  border-radius: var(--border-radius-rounded);
   padding: var(--spacing-medium2-px);
-
-  // Override Card component's box-shadow
-  @include theme.light {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  @include theme.dark {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-  @include theme.sepia {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
 }
 
 .header {
@@ -34,14 +22,17 @@
 .replayButton {
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default-new);
+
   &:hover {
     background-color: transparent;
     background-image: unset;
   }
+
   .prefix {
     margin-inline-end: var(--spacing-xxsmall-px);
   }
-  span > svg {
+
+  span>svg {
     width: 11px;
     height: var(--spacing-medium);
   }
@@ -61,15 +52,19 @@
   padding: var(--spacing-xsmall-px) var(--spacing-small-px);
   min-height: 0;
   overflow: hidden;
+
   @include theme.light {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
+
   @include theme.dark {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   }
+
   @include theme.sepia {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
+
   &:hover .surahTitle {
     text-decoration: underline;
   }
@@ -95,6 +90,7 @@
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default-new);
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-normal);
   }
@@ -104,6 +100,7 @@
   font-size: var(--font-size-small);
   color: var(--color-text-faded-new);
   font-weight: var(--font-weight-semibold);
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-xsmall);
   }
@@ -116,6 +113,7 @@
   padding-top: var(--spacing-xsmall-px);
   word-wrap: break-word;
   overflow-wrap: break-word;
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-small);
   }
@@ -124,6 +122,7 @@
 .longText {
   font-size: var(--font-size-xsmall-px);
   line-height: var(--line-height-small);
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-xsmall);
   }
@@ -141,6 +140,7 @@
   font-weight: var(--font-weight-semibold);
   padding: var(--spacing-xxsmall) var(--spacing-small);
   border-radius: var(--border-radius-medium-px);
+
   @include breakpoints.smallerThanTablet {
     padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
   }

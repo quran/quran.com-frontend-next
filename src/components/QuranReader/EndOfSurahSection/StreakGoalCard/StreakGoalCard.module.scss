@@ -3,23 +3,9 @@
 
 // BASE CARD STYLES
 .endOfSurahCard {
-  border-radius: var(--border-radius-rounded);
   padding: 0;
   max-height: 321px;
   overflow: hidden;
-
-  // Override Card component's box-shadow
-  @include theme.light {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  @include theme.dark {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-
-  @include theme.sepia {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
 }
 
 .withGoalBackground {
@@ -33,7 +19,7 @@
   justify-content: center;
   text-align: center;
   gap: var(--spacing-medium);
-  height: 70%;
+  height: 100%;
   overflow: hidden;
   padding: var(--spacing-medium);
 
@@ -61,8 +47,8 @@
 }
 
 .titleIcon {
-  width: 30px;
-  height: 30px;
+  width: var(--spacing-large-px);
+  height: var(--spacing-large-px);
 
   path {
     fill: var(--color-streaks-dark);
@@ -141,8 +127,8 @@
   }
 
   @include breakpoints.smallerThanTablet {
-    width: 20px;
-    height: 20px;
+    width: var(--spacing-medium2-px);
+    height: var(--spacing-medium2-px);
   }
 }
 
@@ -173,74 +159,38 @@
 }
 
 // Goal Progress Section
-.goalProgressSection {
+.goalLink {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.endOfSurahGoalContent {
   width: 100%;
   gap: var(--spacing-small);
-}
 
-.progressContainer {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-medium);
-}
+  // Override shared component styles for end-of-surah variant
+  :global(.circularProgressbar) {
+    height: var(--spacing-xxlarge-px);
+    width: var(--spacing-xxlarge-px);
 
-.goalStatusContainer {
-  flex: 1;
-  text-align: left;
-}
-
-.noGoalSection {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-// PROGRESS BAR STYLES
-
-.circularProgressbar {
-  height: 50px;
-  width: 50px;
-  flex-shrink: 0;
-
-  @include breakpoints.smallerThanTablet {
-    height: 35px;
-    width: 35px;
-  }
-}
-
-.circularProgressbarPath {
-  stroke: var(--color-streaks-dark);
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
-}
-
-.circularProgressbarTrail {
-  stroke: var(--color-daily-progress);
-  stroke-linecap: round;
-}
-
-.circularProgressbarText {
-  fill: var(--color-streaks-dark);
-  font-size: 16px;
-  dominant-baseline: middle;
-  text-anchor: middle;
-  font-weight: var(--font-weight-bold);
-
-  @include breakpoints.smallerThanTablet {
-    font-size: 12px;
-  }
-}
-
-// NAVIGATION ARROWS
-
-.goalArrowIcon {
-  svg {
     @include breakpoints.smallerThanTablet {
-      width: 12px;
-      height: 12px;
+      height: 35px;
+      width: 35px;
     }
+  }
+
+  :global(.circularProgressbarText) {
+    fill: var(--color-streaks-dark);
+    font-size: var(--font-size-small-px);
+
+    @include breakpoints.smallerThanTablet {
+      font-size: 12px;
+    }
+  }
+
+  :global(.goalStatusContainer) {
+    text-align: left;
   }
 }
