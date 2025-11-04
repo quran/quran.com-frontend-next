@@ -43,7 +43,9 @@ const SearchResultsHeader: React.FC<Props> = ({ searchQuery, onSearchResultClick
         onKeyDown={onNavigationLinkClicked}
       >
         <div className={styles.moreResultsContainer}>
-          <p className={styles.showAll}>{t('common:search.more-results')}</p>
+          <p className={styles.showAll} data-testid="more-results">
+            {t('common:search.more-results')}
+          </p>
           <span className={styles.commandPrefix}>
             <IconContainer shouldFlipOnRTL icon={<NavigateIcon />} />
           </span>

@@ -53,17 +53,21 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
         </div>
         <div className={styles.infoTextContainer}>
           <div className={styles.headerContainer}>
-            <div className={styles.surahName}>
+            <div className={styles.surahName} data-testid="surah-name">
               {t('common:surah')} {chapter.transliteratedName}
             </div>
             <div className={styles.detailsContainer}>
               <div>
                 <p className={styles.detailHeader}>{t('common:ayahs')}</p>
-                <p>{toLocalizedNumber(chapter.versesCount, lang)}</p>
+                <p data-testid="surah-number-of-ayahs">
+                  {toLocalizedNumber(chapter.versesCount, lang)}
+                </p>
               </div>
               <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>
-                <p>{t(`surah-info:${chapter.revelationPlace}`)}</p>
+                <p data-testid="surah-revelation-place">
+                  {t(`surah-info:${chapter.revelationPlace}`)}
+                </p>
               </div>
             </div>
           </div>

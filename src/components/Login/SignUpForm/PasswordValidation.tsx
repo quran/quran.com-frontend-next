@@ -62,7 +62,7 @@ const PasswordValidation: FC<Props> = ({ value = '' }) => {
   }
 
   return (
-    <div className={styles.passwordValidation}>
+    <div className={styles.passwordValidation} data-testid="password-validation">
       {rules.map((rule) => {
         const isValid = rule.test(value);
         return (
