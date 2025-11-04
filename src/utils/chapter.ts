@@ -151,6 +151,17 @@ export const isLastSurah = (surahNumber: number, isReadingByRevelationOrder?: bo
   return REVELATION_ORDER[REVELATION_ORDER.length - 1] === surahNumber;
 };
 
+// DRY helper to get adjacent chapter in revelation order.
+// offset: +1 for next, -1 for previous.
+const getAdjacentChapterInRevelationOrder = (
+  currentChapter: number,
+  offset: 1 | -1,
+): number | null => {
+  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
+  if (currentIndex === -1) return null;
+  return REVELATION_ORDER[currentIndex + offset] ?? null;
+};
+
 /**
  * Get the next chapter number for the given reading order.
  * Returns null when there is no next chapter.
@@ -166,9 +177,7 @@ export const getNextChapterNumber = (
   if (!isReadingByRevelationOrder) {
     return currentChapter < 114 ? currentChapter + 1 : null;
   }
-  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
-  if (currentIndex === -1) return null;
-  return REVELATION_ORDER[currentIndex + 1] || null;
+  return getAdjacentChapterInRevelationOrder(currentChapter, 1);
 };
 
 /**
@@ -186,9 +195,7 @@ export const getPreviousChapterNumber = (
   if (!isReadingByRevelationOrder) {
     return currentChapter > 1 ? currentChapter - 1 : null;
   }
-  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
-  if (currentIndex === -1) return null;
-  return REVELATION_ORDER[currentIndex - 1] || null;
+  return getAdjacentChapterInRevelationOrder(currentChapter, -1);
 };
 
 /**

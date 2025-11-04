@@ -1,19 +1,17 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './StreakGoalCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
-import GoalStatus from '@/components/HomePage/ReadingSection/StreakOrGoalCard/GoalStatus';
+import ReadingGoalCardContent from '@/components/HomePage/ReadingSection/StreakOrGoalCard/ReadingGoalCardContent';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
-import CircularProgressbar from '@/dls/CircularProgress';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link from '@/dls/Link/Link';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsMobile from '@/hooks/useIsMobile';
 import PlantIcon from '@/icons/plant.svg';
-import ArrowIcon from '@/public/icons/arrow.svg';
 import CirclesIcon from '@/public/icons/circles.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -22,7 +20,11 @@ import {
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
 
-const StreakGoalCard: React.FC = () => {
+interface StreakGoalCardProps {
+  cardClassName?: string;
+}
+
+const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
   const { t, lang } = useTranslation('quran-reader');
   const { goal, streak, currentActivityDay } = useGetStreakWithMetadata({ showDayName: true });
   const isMobile = useIsMobile();
@@ -40,7 +42,10 @@ const StreakGoalCard: React.FC = () => {
 
   if (!hasGoalOrStreak) {
     return (
-      <Card className={styles.endOfSurahCard} data-testid="streak-goal-card">
+      <Card
+        className={classNames(styles.endOfSurahCard, cardClassName)}
+        data-testid="streak-goal-card"
+      >
         <div className={styles.container}>
           <div className={styles.titleContainer}>
             <CirclesIcon className={styles.titleIcon} />
@@ -71,9 +76,22 @@ const StreakGoalCard: React.FC = () => {
   const streakLabel =
     displayStreak === 1 ? t('end-of-surah.day-streak') : t('end-of-surah.days-streak');
 
+  const goalCta = (
+    <Button
+      type={ButtonType.Success}
+      size={ButtonSize.Medium}
+      href={getReadingGoalNavigationUrl()}
+      className={styles.button}
+      onClick={onSetGoalButtonClicked}
+    >
+      <CirclesIcon className={styles.buttonIcon} />
+      {t('end-of-surah.set-custom-goal')}
+    </Button>
+  );
+
   return (
     <Card
-      className={`${styles.endOfSurahCard} ${styles.withGoalBackground}`}
+      className={classNames(styles.endOfSurahCard, styles.withGoalBackground, cardClassName)}
       data-testid="streak-goal-card"
     >
       <div className={styles.container}>
@@ -89,53 +107,19 @@ const StreakGoalCard: React.FC = () => {
         </div>
 
         {/* Goal Progress Section */}
-        {goal ? (
-          <div className={styles.goalProgressSection}>
-            <div className={styles.progressContainer}>
-              <div className={styles.circularProgressbar} data-testid="goal-progress">
-                <CircularProgressbar
-                  text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
-                  value={goal.progress.percent}
-                  maxValue={100}
-                  strokeWidth={12}
-                  classes={{
-                    path: styles.circularProgressbarPath,
-                    trail: styles.circularProgressbarTrail,
-                    text: styles.circularProgressbarText,
-                  }}
-                />
-              </div>
-              <div className={styles.goalStatusContainer}>
-                <GoalStatus
-                  goal={goal}
-                  currentActivityDay={currentActivityDay}
-                  percent={goal.progress.percent}
-                />
-              </div>
-            </div>
-            <Link href={getReadingGoalProgressNavigationUrl()} onClick={onGoalArrowClicked}>
-              <IconContainer
-                size={IconSize.Xsmall}
-                icon={<ArrowIcon />}
-                shouldForceSetColors={false}
-                className={styles.goalArrowIcon}
-              />
-            </Link>
-          </div>
-        ) : (
-          <div className={styles.noGoalSection}>
-            <Button
-              type={ButtonType.Success}
-              size={ButtonSize.Medium}
-              href={getReadingGoalNavigationUrl()}
-              className={styles.button}
-              onClick={onSetGoalButtonClicked}
-            >
-              <CirclesIcon className={styles.buttonIcon} />
-              {t('end-of-surah.set-custom-goal')}
-            </Button>
-          </div>
-        )}
+        <Link
+          href={goal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl()}
+          onClick={goal ? onGoalArrowClicked : onSetGoalButtonClicked}
+          className={styles.goalLink}
+        >
+          <ReadingGoalCardContent
+            goal={goal}
+            currentActivityDay={currentActivityDay}
+            goalCta={goalCta}
+            onGoalArrowClick={goal ? onGoalArrowClicked : undefined}
+            className={styles.endOfSurahGoalContent}
+          />
+        </Link>
       </div>
     </Card>
   );

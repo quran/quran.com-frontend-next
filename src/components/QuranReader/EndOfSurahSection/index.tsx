@@ -29,14 +29,9 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
 
   const verseKey = `${chapterNumber}:1`;
 
-  const fetcher = useCallback(
-    async () => getChapterMetadata(chapterNumber, lang),
-    [chapterNumber, lang],
-  );
-
   const { data: metadataResponse } = useSWRImmutable(
     makeChapterMetadataUrl(chapterNumber, lang),
-    fetcher,
+    () => getChapterMetadata(chapterNumber, lang),
   );
 
   const handleModalOpen = useCallback((modalType: ModalType) => {
@@ -55,6 +50,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
 
       <div className={styles.cardsGrid}>
         <ReadMoreCard
+          cardClassName={styles.card}
           chapterNumber={chapterNumber}
           nextSummaries={chapterMetadata?.nextChapter?.summaries}
           previousSummaries={chapterMetadata?.previousChapter?.summaries}
@@ -62,13 +58,14 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
         />
 
         <ExploreCard
+          cardClassName={styles.card}
           chapterNumber={chapterNumber}
           verseKey={verseKey}
           suggestions={chapterMetadata?.suggestions}
           onModalOpen={handleModalOpen}
         />
 
-        <StreakGoalCard />
+        <StreakGoalCard cardClassName={styles.card} />
       </div>
 
       <BottomActionsModals

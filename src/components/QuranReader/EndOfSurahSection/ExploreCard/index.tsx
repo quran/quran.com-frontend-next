@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
-import { ChapterContent } from 'types/ApiResponses';
 
 import { ACTION_BUTTONS, ActionButton } from './actions';
 import styles from './ExploreCard.module.scss';
@@ -16,8 +16,10 @@ import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { pickRandom } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getProfileNavigationUrl } from '@/utils/navigation';
+import { ChapterContent } from 'types/ApiResponses';
 
 interface ExploreCardProps {
+  cardClassName?: string;
   chapterNumber: number;
   verseKey: string;
   suggestions?: ChapterContent[];
@@ -27,13 +29,13 @@ interface ExploreCardProps {
 // Action helpers are defined in ./actions
 
 const ExploreCard: React.FC<ExploreCardProps> = ({
+  cardClassName,
   chapterNumber,
   verseKey,
   suggestions,
   onModalOpen,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
-  const { t: tCommon } = useTranslation('common');
+  const { t, lang } = useTranslation();
   const selectedTafsirs = useSelector(selectSelectedTafsirs);
 
   const randomSuggestion = useMemo(() => pickRandom(suggestions), [suggestions]);
@@ -43,7 +45,8 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   };
 
   const getButtonLabel = (button: ActionButton): string => {
-    return button.namespace === 'common' ? tCommon(button.key) : t(button.key);
+    const namespace = button.namespace ?? 'quran-reader';
+    return t(`${namespace}:${button.key}`);
   };
 
   const handleButtonClick = (button: ActionButton) => {
@@ -60,17 +63,17 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   };
 
   return (
-    <Card className={styles.endOfSurahCard} data-testid="explore-card">
+    <Card className={classNames(styles.endOfSurahCard, cardClassName)} data-testid="explore-card">
       <div className={styles.header}>
-        <span className={styles.title}>{t('end-of-surah.explore')}</span>
+        <span className={styles.title}>{t('quran-reader:end-of-surah.explore')}</span>
         <Link
           href={getProfileNavigationUrl()}
           className={styles.myQuranContainer}
           onClick={handleMyQuranClick}
-          aria-label={t('end-of-surah.my-quran')}
+          aria-label={t('quran-reader:end-of-surah.my-quran')}
         >
           <BookmarkRemoveIcon />
-          <span className={styles.myQuranLink}>{t('end-of-surah.my-quran')}</span>
+          <span className={styles.myQuranLink}>{t('quran-reader:end-of-surah.my-quran')}</span>
         </Link>
       </div>
 
@@ -100,7 +103,9 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 
         {randomSuggestion && (
           <div className={styles.suggestionSection} data-testid="suggestions">
-            <div className={styles.suggestionLabel}>{t('end-of-surah.suggestions')}</div>
+            <div className={styles.suggestionLabel}>
+              {t('quran-reader:end-of-surah.suggestions')}
+            </div>
             <div className={styles.suggestionText}>{randomSuggestion.text}</div>
           </div>
         )}

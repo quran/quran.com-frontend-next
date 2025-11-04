@@ -1,8 +1,8 @@
 import React, { useContext, useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
-import { ChapterContent } from 'types/ApiResponses';
 
 import ChapterLink from './ChapterLink';
 import styles from './ReadMoreCard.module.scss';
@@ -17,8 +17,10 @@ import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '
 import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import { ChapterContent } from 'types/ApiResponses';
 
 interface ReadMoreCardProps {
+  cardClassName?: string;
   chapterNumber: number;
   nextSummaries?: ChapterContent[];
   previousSummaries?: ChapterContent[];
@@ -26,6 +28,7 @@ interface ReadMoreCardProps {
 }
 
 const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
+  cardClassName,
   chapterNumber,
   nextSummaries,
   previousSummaries,
@@ -66,7 +69,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
   };
 
   return (
-    <Card className={styles.endOfSurahCard} data-testid="read-more-card">
+    <Card className={classNames(styles.endOfSurahCard, cardClassName)} data-testid="read-more-card">
       <div className={styles.header}>
         <span className={styles.title}>{t('end-of-surah.read-more')}</span>
         <Button
