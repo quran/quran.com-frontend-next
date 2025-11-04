@@ -19,28 +19,21 @@ The service uses `mise` to:
 
 ## Setup (One-time)
 
-### Create Symbolic Links
+### Enable Services
 
 ```bash
-# Create symlinks to this directory
-ln -sf /srv/apps/playwright-tests/tests/service/quran-tests.service ~/.config/systemd/user/quran-tests.service
-ln -sf /srv/apps/playwright-tests/tests/service/quran-tests.timer ~/.config/systemd/user/quran-tests.timer
+# Navigate to service directory
+cd /srv/apps/playwright-tests/tests/service
+
+# Enable both service and timer
+systemctl --user enable $PWD/quran-tests.service
+systemctl --user enable $PWD/quran-tests.timer
 
 # Reload systemd daemon
 systemctl --user daemon-reload
-```
 
-### Enable and Start
-
-```bash
-# Enable timer (starts automatically on boot)
-systemctl --user enable quran-tests.timer
-
-# Start timer (begins 5-minute schedule)
+# Start the timer
 systemctl --user start quran-tests.timer
-
-# Start service manually (optional, timer will trigger it)
-systemctl --user start quran-tests.service
 ```
 
 ## Service Management
