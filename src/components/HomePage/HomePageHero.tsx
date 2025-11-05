@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import NavigationButton from './HeroButtons/NavigationButton';
@@ -13,9 +12,6 @@ const HomePageHero = () => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.outerContainer}>
-      <Head>
-        <link rel="preload" as="image" href="/images/background.png" />
-      </Head>
       <div className={styles.backgroundImage}>
         <Background />
       </div>
