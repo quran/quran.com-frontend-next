@@ -220,7 +220,9 @@ const SaveToCollectionAction: React.FC<Props> = ({
           name: collection.name,
           checked: bookmarkCollectionIdsData?.includes(collection.id),
         }))
-        .sort((a, b) => a.name.localeCompare(b.name)) as Collection[]);
+        .sort((a, b) =>
+          a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }),
+        ) as Collection[]);
 
   return (
     <>
