@@ -6,18 +6,18 @@ import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 
-type UseCoursesListParams = {
+interface UseCoursesListParams {
   initialResponse: CoursesResponse;
   isMyCourses: boolean;
   languages?: string[];
-};
+}
 
-type UseCoursesListReturn = {
+interface UseCoursesListReturn {
   courses: Course[];
   hasNextPage: boolean;
   isLoadingMore: boolean;
   sentinelRef: MutableRefObject<HTMLDivElement | null>;
-};
+}
 
 const useCoursesList = ({
   initialResponse,
@@ -99,6 +99,24 @@ const useCoursesList = ({
     observer.observe(sentinelElement);
     return () => observer.disconnect();
   }, [hasNextPage, isLoadingMore, setSize]);
+
+  useEffect(() => {
+    if (!hasNextPage || isLoadingMore) return undefined;
+    const sentinelElement = sentinelRef.current;
+    if (!sentinelElement) return undefined;
+
+    const { top, bottom } = sentinelElement.getBoundingClientRect();
+    const viewportHeight = window.innerHeight ?? 0;
+    const isVisible = top < viewportHeight && bottom >= 0;
+    if (!isVisible) return undefined;
+
+    setSize((currentSize) => {
+      if (currentSize > pages.length) return currentSize;
+      return currentSize + 1;
+    });
+
+    return undefined;
+  }, [hasNextPage, isLoadingMore, pages.length, setSize]);
 
   return {
     courses,
