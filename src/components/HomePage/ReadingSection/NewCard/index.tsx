@@ -55,6 +55,7 @@ const NewCard: React.FC = () => {
                       className={styles.linkHref}
                       onClick={onTakeNotesClicked}
                       isNewTab
+                      shouldPrefetch={false}
                     />
                   ),
                 }}
