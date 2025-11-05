@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -11,6 +11,7 @@ import ChapterNavigation from './components/ChapterNavigation';
 import MobileReadingTabs from './components/MobileReadingTabs';
 import PageInfo from './components/PageInfo';
 import ProgressBar from './components/ProgressBar';
+import SettingsButton from './components/SettingsButton';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
@@ -48,13 +49,14 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
+  const isMobileView = useMemo(() => isMobile(), []);
+  const isMobileScrolledView = !showNavbar && isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
+
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
-
-  const isMobileScrolledView = !showNavbar && isMobile();
-  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
 
   return (
     <div
@@ -84,13 +86,16 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       <div className={styles.sectionsContainer}>
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
-          <div className={styles.row}>
-            <ChapterNavigation
-              chapterName={chapterData.transliteratedName}
-              isSidebarNavigationVisible={isSidebarNavigationVisible}
-              onToggleSidebar={handleSidebarToggle}
-              chapterNumber={getChapterNumberFromKey(verseKey)}
-            />
+          <div className={classNames(styles.row, styles.chapterNavigationRow)}>
+            <div className={styles.chapterNavigationWrapper}>
+              <ChapterNavigation
+                chapterName={chapterData.transliteratedName}
+                isSidebarNavigationVisible={isSidebarNavigationVisible}
+                onToggleSidebar={handleSidebarToggle}
+                chapterNumber={getChapterNumberFromKey(verseKey)}
+              />
+              {showNavbar && <SettingsButton className={styles.settingsNextToChapter} />}
+            </div>
           </div>
         </div>
 
@@ -116,12 +121,17 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
             [styles.hideReadingPreferenceSectionOnMobile]: showNavbar,
           })}
         >
-          <ReadingPreferenceSwitcher
-            isIconsOnly={isMobileScrolledView}
-            size={SwitchSize.XSmall}
-            type={ReadingPreferenceSwitcherType.ContextMenu}
-            variant={SwitchVariant.Alternative}
-          />
+          <div className={styles.readingPreferenceContainer}>
+            <ReadingPreferenceSwitcher
+              isIconsOnly={isMobileScrolledView}
+              size={SwitchSize.XSmall}
+              type={ReadingPreferenceSwitcherType.ContextMenu}
+              variant={SwitchVariant.Alternative}
+            />
+            {(!isMobileView || !showNavbar) && (
+              <SettingsButton className={styles.settingsNextToSwitcher} />
+            )}
+          </div>
         </div>
       </div>
 
