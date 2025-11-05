@@ -70,7 +70,7 @@ const NavbarBody: React.FC = () => {
   useEffect(() => {
     if (isQuranReaderRoute) return;
     // Disable the sidebar when not on any Quran reader route
-    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+    dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isQuranReaderRoute]);
 
   const shouldRenderSidebarNavigation =
@@ -81,24 +81,24 @@ const NavbarBody: React.FC = () => {
     if (!isPersistHydrationComplete) return;
     hasResetSidebarAfterHydration.current = true;
     if (isQuranReaderRoute) return;
-    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+    dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isPersistHydrationComplete, isQuranReaderRoute]);
 
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
-    dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
+    dispatch(setIsNavigationDrawerOpen(true));
   };
 
   const openSearchDrawer = () => {
     logDrawerOpenEvent('search');
-    dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    dispatch(setIsSearchDrawerOpen(true));
     // reset the disable transition state
-    dispatch({ type: setDisableSearchDrawerTransition.type, payload: false });
+    dispatch(setDisableSearchDrawerTransition(false));
   };
 
   const openSettingsDrawer = () => {
     logDrawerOpenEvent('settings');
-    dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
+    dispatch(setIsSettingsDrawerOpen(true));
   };
 
   return (
