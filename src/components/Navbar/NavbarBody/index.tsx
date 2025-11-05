@@ -63,6 +63,7 @@ const NavbarBody: React.FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
+  const normalizedPathname = router.asPath.split(/[?#]/)[0];
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
   const hasResetSidebarAfterHydration = useRef(false);
@@ -71,7 +72,7 @@ const NavbarBody: React.FC = () => {
     if (isQuranReaderRoute) return;
     // Disable the sidebar when not on any Quran reader route
     dispatch(setIsSidebarNavigationVisible(false));
-  }, [dispatch, isQuranReaderRoute]);
+  }, [dispatch, isQuranReaderRoute, normalizedPathname]);
 
   const shouldRenderSidebarNavigation =
     isQuranReaderRoute || isSidebarNavigationVisible || hasResetSidebarAfterHydration.current;
