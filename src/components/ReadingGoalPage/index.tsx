@@ -8,7 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import useReadingGoalReducer, {
-  readingGoalExamples,
+  ReadingGoalExampleKey,
   ReadingGoalTabProps,
 } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
@@ -32,7 +32,7 @@ import { logFormSubmission } from '@/utils/eventLogger';
 import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 interface Props {
-  initialExampleKey: keyof typeof readingGoalExamples | null;
+  initialExampleKey: ReadingGoalExampleKey | null;
 }
 
 const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
@@ -45,7 +45,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
   if (initialExampleKey) {
     // if user select example then skip preview
     // otherwise go to next tab index
-    initialTabIdx = initialExampleKey === 'custom' ? 1 : tabsArray.length - 1;
+    initialTabIdx = initialExampleKey === ReadingGoalExampleKey.CUSTOM ? 1 : tabsArray.length - 1;
   }
 
   const [loading, setLoading] = useState(false);
@@ -105,7 +105,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
   const percentage = isPreviewTab ? 100 : (tabIdx / tabsArray.length) * 100;
 
   const onPrev = () => {
-    if (tabIdx !== 0 && state.exampleKey !== 'custom') {
+    if (tabIdx !== 0 && state.exampleKey !== ReadingGoalExampleKey.CUSTOM) {
       setTabIdx(0);
       logTabClick(Tab.key, 'previous');
     } else {
@@ -117,7 +117,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
   const onNext = () => {
     if (!isPreviewTab) {
       let nextTabIdx = 0;
-      if (tabIdx === 0 && state.exampleKey !== 'custom') {
+      if (tabIdx === 0 && state.exampleKey !== ReadingGoalExampleKey.CUSTOM) {
         // if the user selected an example, skip to the preview tab
         nextTabIdx = tabsArray.length - 1;
       } else {
@@ -129,7 +129,9 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
 
       if (!isLoggedIn()) {
         router.push(
-          getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey ?? undefined)),
+          getLoginNavigationUrl(
+            getReadingGoalNavigationUrl(state.exampleKey?.toString() ?? undefined),
+          ),
         );
         return;
       }
