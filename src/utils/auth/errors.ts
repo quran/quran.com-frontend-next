@@ -81,6 +81,7 @@ const API_ERROR_FIELD_MAP: Record<AuthEndpoint, ErrorFieldMap> = {
     firstName: 'firstName',
     lastName: 'lastName',
     username: 'username',
+    photoUrl: 'photoUrl',
   },
 };
 

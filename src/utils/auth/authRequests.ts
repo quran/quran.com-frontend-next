@@ -123,6 +123,8 @@ export const updateUserProfile = async (data: {
   firstName?: string;
   lastName?: string;
   username?: string;
+  photoUrl?: string;
+  removeAvatar?: boolean;
 }): Promise<APIResponse<BaseAuthResponse>> => {
   return handleAuthRequest(
     makeUpdateUserProfileUrl(),
@@ -132,6 +134,7 @@ export const updateUserProfile = async (data: {
       firstName: 'firstName',
       lastName: 'lastName',
       username: 'username',
+      photoUrl: 'photoUrl',
     },
     'PATCH',
   );

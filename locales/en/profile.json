@@ -6,5 +6,35 @@
     "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
     "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
     "title": "Are you absolutely sure?"
+  },
+  "my-profile": "My Profile",
+  "personalization": "Personalization",
+  "profile-picture": "Profile Picture",
+  "max-file-size": "Max {{size}}",
+  "allowed-formats": "Only {{formats}}",
+  "upload-picture": "Upload Picture",
+  "save-picture": "Save Picture",
+  "remove-picture": "Remove Picture",
+  "upload-success": "Profile picture uploaded successfully",
+  "remove-success": "Profile picture removed successfully",
+  "edit-details": "Edit Details",
+  "save-changes": "Save Changes",
+  "change-password": "Change Password",
+  "update-password": "Update Password",
+  "email-notification-settings": "Email Notification Settings",
+  "current-password": "Current Password",
+  "new-password": "New Password",
+  "confirm-new-password": "Confirm New Password",
+  "streaks-notification-description": "Streaks: An email will be sent to notify you of a streak that is about to break.",
+  "quran-in-a-year-notification-description": "Quran in a Year: An email will be sent with links to weekly reading assignment, reflection prompts, and more resources to keep you on track.",
+  "delete-account-warning-description": "Warning: Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
+  "success": {
+    "details": "Your details have been updated successfully"
+  },
+  "errors": {
+    "file-too-large": "File size exceeds {{size}}. Please choose a smaller file.",
+    "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",
+    "upload-failed": "Failed to upload profile picture. Please try again.",
+    "remove-failed": "Failed to remove profile picture. Please try again."
   }
 }

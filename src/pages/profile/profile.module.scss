@@ -1,0 +1,43 @@
+@use 'src/styles/breakpoints';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xlarge-px);
+  .button {
+    padding-block: var(--spacing-xxxsmall-px);
+    padding-inline: var(--spacing-small-px);
+    border-radius: var(--border-radius-small-px);
+    font-size: var(--font-size-xsmall-px);
+    font-weight: var(--font-weight-semibold);
+  }
+  .formContainer {
+    display: grid;
+    gap: var(--spacing-medium-px);
+    @include breakpoints.tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .formInputContainer {
+      width: 100%;
+      .formInput {
+        width: unset;
+        padding: var(--spacing-small-px);
+        border-radius: var(--border-radius-xsmall-px);
+        &:has(input:disabled) {
+          background-color: var(--color-background-alternative-faint);
+        }
+      }
+    }
+  }
+  .divider {
+    margin-block: var(--spacing-medium2-px);
+  }
+  .dangerArea {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium2-px);
+    .dangerAreaDescription {
+      font-size: var(--font-size-small-px);
+    }
+  }
+}
