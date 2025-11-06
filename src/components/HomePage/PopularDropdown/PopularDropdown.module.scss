@@ -5,26 +5,16 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.buttonWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 125px;
-    @include breakpoints.smallerThanTablet {
-        width: 85px;
-    }
-}
-
 .dropdownContainer {
     width: 750px;
-    margin-inline-start: -230px;
-    margin-top: -42%;
+    margin-top: var(--spacing-micro-px);
     border-radius: var(--border-radius-rounded);
     box-shadow: var(--shadow-medium);
     background: var(--color-background-elevated);
@@ -33,8 +23,6 @@
 
     @include breakpoints.smallerThanTablet {
         width: 360px;
-        margin-inline-start: -160px;
-        margin-top: -35px;
     }
 
     hr {
@@ -72,6 +60,7 @@
     align-items: center;
     gap: var(--spacing-xsmall);
     color: var(--color-text-faded-new);
+
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
     }
@@ -79,6 +68,7 @@
 
 .chaptersAndVerses {
     font-weight: var(--font-weight-bold);
+
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
     }
