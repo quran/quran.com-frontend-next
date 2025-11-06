@@ -79,6 +79,7 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
             isSubscriptionLoading={isSubscriptionLoading}
             isEnrolling={isEnrolling}
             onEnrollButtonClicked={onEnrollButtonClicked}
+            isLoggedIn={isLoggedIn()}
           />
         </div>
         <div className={styles.weekDisplay}>

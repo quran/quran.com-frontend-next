@@ -108,6 +108,7 @@
   "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
   "verse": "Verse",
   "verses-subtitle": "You are encouraged to focus on understanding the basic meanings, so select the language that works for you.",
+  "ask-question": "Ask a Question",
   "watch-episode": "Watch Episode {{weekNumber}}",
   "week": "Week",
   "week-completed": "Completed",

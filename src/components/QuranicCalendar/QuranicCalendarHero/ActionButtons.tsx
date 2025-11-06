@@ -8,6 +8,7 @@ import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import EmailIcon from '@/icons/email.svg';
+import QuestionMarkIcon from '@/icons/question-mark.svg';
 import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
@@ -19,6 +20,7 @@ interface ActionButtonsProps {
   isSubscriptionLoading: boolean;
   isEnrolling: boolean;
   onEnrollButtonClicked: () => void;
+  isLoggedIn?: boolean;
 }
 
 const subscribeButtonIcon = (isLoading: boolean, isSubscribed: boolean) => {
@@ -36,6 +38,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   isSubscriptionLoading,
   isEnrolling,
   onEnrollButtonClicked,
+  isLoggedIn = false,
 }) => {
   const { t } = useTranslation('quranic-calendar');
 
@@ -45,6 +48,15 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const onJoinTelegram = () => {
     logButtonClick('quranic_calendar_join_telegram');
+  };
+
+  const handleAskQuestionClick = () => {
+    logButtonClick('quran_calendar_ask_question');
+
+    window.open(
+      'https://docs.google.com/forms/d/e/1FAIpQLSdVxKk4WtikWCIYcfvFdXy3TFcRCUB2zDEddSyKjFukDwTvzA/viewform',
+      '_blank',
+    );
   };
 
   const isMobileBrowser = isMobile();
@@ -102,6 +114,22 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
         />
         {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
       </Button>
+      {isLoggedIn && isSubscribed && (
+        <Button
+          onClick={handleAskQuestionClick}
+          type={ButtonType.Success}
+          shape={ButtonShape.Pill}
+          className={styles.button}
+        >
+          <IconContainer
+            className={styles.iconContainer}
+            size={IconSize.Small}
+            shouldForceSetColors={false}
+            icon={<QuestionMarkIcon />}
+          />
+          {t('ask-question')}
+        </Button>
+      )}
       {isMobile() ? (
         <div className={styles.socialButtonsContainer}>{socialButtons}</div>
       ) : (
