@@ -88,7 +88,7 @@ const AddReadingForm = ({
       </div>
 
       <div className={styles.verseRangesListContainer}>
-        <VerseRangesList allowClearingRanges ranges={ranges} setRanges={setRanges} />
+        <VerseRangesList shouldAllowClearingRanges ranges={ranges} setRanges={setRanges} />
       </div>
     </>
   );

@@ -7,7 +7,7 @@ import { useCallback, useEffect, useRef } from 'react';
  * @returns {Function} setSafeTimeout - A function to set a timeout that will be automatically cleaned up
  */
 const useSafeTimeout = () => {
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   /**
    * Sets a timeout that will be automatically cleaned up when the component unmounts

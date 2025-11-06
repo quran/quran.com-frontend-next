@@ -15,7 +15,7 @@ interface ChapterTitleProps {
   chapterId: string;
   transliteratedName: string;
   translatedName: string;
-  showTranslatedName: boolean;
+  shouldShowTranslatedName: boolean;
 }
 
 /**
@@ -27,7 +27,7 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
   chapterId,
   transliteratedName,
   translatedName,
-  showTranslatedName,
+  shouldShowTranslatedName,
 }) => {
   const isMobile = useIsMobile();
 
@@ -35,10 +35,10 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
     <div dir={Direction.RTL} className={styles.titleContainer}>
       <h1
         className={classNames(styles.chapterTitle, {
-          [styles.chapterTitleWithTranslationName]: showTranslatedName,
+          [styles.chapterTitleWithTranslationName]: shouldShowTranslatedName,
         })}
       >
-        {showTranslatedName && (
+        {shouldShowTranslatedName && (
           <div className={styles.titleTextContainer}>
             <div className={styles.titleRow}>
               <SurahInfoButton chapterId={chapterId} />
@@ -49,7 +49,7 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
           </div>
         )}
 
-        {!showTranslatedName && (
+        {!shouldShowTranslatedName && (
           <SurahInfoButton chapterId={chapterId} className={styles.infoIconButtonWithSurahName} />
         )}
 

@@ -49,7 +49,7 @@ const TranslationGroup = ({
       <span className={styles.header}>
         <Checkbox
           id={language}
-          checked={languageCheckboxCheckedStatus}
+          isChecked={languageCheckboxCheckedStatus}
           label={language}
           onChange={onLanguageSelected}
         />
@@ -63,7 +63,7 @@ const TranslationGroup = ({
             <div key={translation.id} className={styles.item}>
               <Checkbox
                 id={translation.id.toString()}
-                checked={selectedTranslations.includes(translation.id.toString())}
+                isChecked={selectedTranslations.includes(translation.id.toString())}
                 label={translation.translatedName.name}
                 onChange={onSelectedTranslationsChange(translation.id)}
               />

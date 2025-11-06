@@ -305,7 +305,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
               <Checkbox
                 key={translationId}
                 onChange={() => onCopyTranslationChange(translationId.toString())}
-                checked={translations[translationId].shouldBeCopied}
+                isChecked={translations[translationId].shouldBeCopied}
                 id={translationId.toString()}
                 label={translations[translationId].name}
               />

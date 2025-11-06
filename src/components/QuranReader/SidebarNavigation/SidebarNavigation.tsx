@@ -39,7 +39,7 @@ const SidebarNavigation = () => {
 
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
-  const sidebarRef = useRef();
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   useOutsideClickDetector(
     sidebarRef,
@@ -117,7 +117,7 @@ const SidebarNavigation = () => {
           </div>
           <p className={styles.tip}>
             <span>{t('sidebar.try-navigating-with')}</span>
-            <KeyboardInput meta keyboardKey="K" />
+            <KeyboardInput hasMeta keyboardKey="K" />
           </p>
 
           <div className={styles.contentContainer}>

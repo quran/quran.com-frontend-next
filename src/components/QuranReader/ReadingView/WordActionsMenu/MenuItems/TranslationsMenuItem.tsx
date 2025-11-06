@@ -36,7 +36,7 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
   const { t } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
   const translationsQueryKey = makeByVerseKeyUrl(`${verse.chapterId}:${verse.verseNumber}`, {
     words: true,
     translationFields: 'resource_name,language_id',

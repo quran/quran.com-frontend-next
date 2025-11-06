@@ -106,7 +106,7 @@ const TranslationSelectionBody = () => {
             <div key={translation.id} className={styles.item}>
               <Checkbox
                 id={translation.id.toString()}
-                checked={selectedTranslations.includes(translation.id)}
+                isChecked={selectedTranslations.includes(translation.id)}
                 label={translation.translatedName.name}
                 onChange={onTranslationsChange(translation.id)}
               />
@@ -128,7 +128,7 @@ const TranslationSelectionBody = () => {
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder={t('settings.search-translations')}
-            fixedWidth={false}
+            isFixedWidth={false}
             containerClassName={styles.input}
           />
         </SpinnerContainer>

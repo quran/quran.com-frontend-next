@@ -31,10 +31,10 @@ interface Props {
   name?: string;
   placeholder?: string;
   fieldSetLegend?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   onChange?: (value: string) => void;
   value?: string;
-  label?: string | JSX.Element;
+  label?: React.ReactNode;
   type?: TextAreaType;
   size?: TextAreaSize;
   shouldFlipOnRTL?: boolean;
@@ -49,7 +49,7 @@ const TextArea: React.FC<Props> = ({
   name,
   label,
   placeholder,
-  disabled = false,
+  isDisabled = false,
   type,
   variant,
   onChange,
@@ -80,7 +80,7 @@ const TextArea: React.FC<Props> = ({
       {label && <p className={styles.label}>{label}</p>}
       <div
         className={classNames(styles.container, containerClassName, {
-          [styles.disabled]: disabled,
+          [styles.disabled]: isDisabled,
           [styles.error]: type === TextAreaType.Error,
           [styles.success]: type === TextAreaType.Success,
           [styles.warning]: type === TextAreaType.Warning,
@@ -99,7 +99,7 @@ const TextArea: React.FC<Props> = ({
           id={id}
           rows={SIZE_TO_COLS[size]}
           ref={inputRef}
-          disabled={disabled}
+          disabled={isDisabled}
           onChange={onValueChange}
           value={inputValue}
           {...(placeholder && { placeholder })}

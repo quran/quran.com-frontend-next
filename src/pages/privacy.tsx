@@ -13,7 +13,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/privacy';
-const PrivacyPage: NextPage = (): JSX.Element => {
+const PrivacyPage: NextPage = () => {
   const { t, lang } = useTranslation('privacy');
 
   return (

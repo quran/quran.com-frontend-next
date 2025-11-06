@@ -15,7 +15,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/terms-and-conditions';
-const TermsAndConditionsPage: NextPage = (): JSX.Element => {
+const TermsAndConditionsPage: NextPage = () => {
   const { t, lang } = useTranslation('common');
 
   return (

@@ -11,7 +11,7 @@ interface AuthInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   htmlType?: 'text' | 'email' | 'password';
   name?: string;
   autoComplete?: string;
@@ -29,7 +29,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
   value,
   onChange,
   placeholder,
-  disabled = false,
+  isDisabled = false,
   htmlType = 'text',
   name,
   autoComplete,
@@ -41,14 +41,14 @@ const AuthInput: React.FC<AuthInputProps> = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      disabled={disabled}
+      isDisabled={isDisabled}
       htmlType={htmlType}
       name={name}
       size={InputSize.Large}
-      fixedWidth={false}
+      isFixedWidth={false}
       shouldFlipOnRTL
       containerClassName={classNames(styles.authContainer, className, {
-        [styles.disabled]: disabled,
+        [styles.disabled]: isDisabled,
       })}
       inputClassName={classNames(styles.authInput, {
         [styles.hasValue]: value,

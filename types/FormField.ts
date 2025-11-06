@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 import FieldRule from './FieldRule';
 
 export enum FormFieldType {

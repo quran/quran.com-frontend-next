@@ -22,14 +22,14 @@ interface Props {
   trigger: ReactNode;
   children: ReactNode | ReactNode[];
   onOpenChange?: (open: boolean) => void;
-  open?: boolean;
+  isOpen?: boolean;
   isModal?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  tip?: boolean;
-  avoidCollisions?: boolean;
-  useTooltipStyles?: boolean;
-  defaultStyling?: boolean;
+  hasTip?: boolean;
+  shouldAvoidCollisions?: boolean;
+  shouldUseTooltipStyles?: boolean;
+  hasDefaultStyling?: boolean;
   isPortalled?: boolean;
   triggerStyles?: string;
   contentStyles?: string;
@@ -41,14 +41,14 @@ const Popover: React.FC<Props> = ({
   children,
   trigger,
   onOpenChange,
-  open,
+  isOpen,
   isModal = false,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
-  avoidCollisions = true,
-  tip = false,
-  useTooltipStyles = false,
-  defaultStyling = true,
+  shouldAvoidCollisions = true,
+  hasTip = false,
+  shouldUseTooltipStyles = false,
+  hasDefaultStyling = true,
   isPortalled = true,
   contentSideOffset = 2,
   triggerStyles,
@@ -60,21 +60,21 @@ const Popover: React.FC<Props> = ({
       sideOffset={contentSideOffset}
       side={contentSide}
       align={contentAlign}
-      avoidCollisions={avoidCollisions}
+      avoidCollisions={shouldAvoidCollisions}
       className={classNames(styles.content, {
-        [styles.tooltipContent]: useTooltipStyles,
+        [styles.tooltipContent]: shouldUseTooltipStyles,
         [contentStyles]: contentStyles,
       })}
     >
       {children}
-      {tip && <RadixPopover.Arrow />}
+      {hasTip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );
 
   const containerChild = (
     <RadixPopover.Root
       modal={isModal}
-      {...(typeof open !== 'undefined' && { open })}
+      {...(typeof isOpen !== 'undefined' && { open: isOpen })}
       {...(onOpenChange && { onOpenChange })}
     >
       <RadixPopover.Trigger aria-label="Open popover" asChild>
@@ -92,11 +92,15 @@ const Popover: React.FC<Props> = ({
 
   if (isContainerSpan) {
     return (
-      <span className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</span>
+      <span className={classNames({ [styles.container]: hasDefaultStyling })}>
+        {containerChild}
+      </span>
     );
   }
 
-  return <div className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</div>;
+  return (
+    <div className={classNames({ [styles.container]: hasDefaultStyling })}>{containerChild}</div>
+  );
 };
 
 export default Popover;

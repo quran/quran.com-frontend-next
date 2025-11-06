@@ -107,13 +107,13 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
         chapterId={chapterId}
         transliteratedName={chapterData.transliteratedName}
         translatedName={chapterData.translatedName}
-        showTranslatedName={!isArabicOrUrdu}
+        shouldShowTranslatedName={!isArabicOrUrdu}
       />
 
       {/* Bismillah section */}
       <BismillahSection
         chapterId={chapterId}
-        showTranslatedName={isArabicOrUrdu}
+        shouldShowTranslatedName={isArabicOrUrdu}
         isTranslationView={isTranslationView}
       />
     </div>

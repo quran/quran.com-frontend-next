@@ -23,7 +23,7 @@ export enum SliderVariant {
 interface Props {
   label: string;
   name?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   orientation?: Orientation;
   direction?: Direction;
   value?: number[];
@@ -33,9 +33,9 @@ interface Props {
   step?: number;
   minStepsBetweenThumbs?: number;
   onValueChange?: (value: number[]) => void;
-  showThumbs?: boolean;
+  shouldShowThumbs?: boolean;
   variant?: SliderVariant;
-  withBackground?: boolean;
+  isWithBackground?: boolean;
 }
 
 const Slider: React.FC<Props> = ({
@@ -48,12 +48,12 @@ const Slider: React.FC<Props> = ({
   minStepsBetweenThumbs = 0,
   direction = Direction.ltr,
   orientation = Orientation.Horizontal,
-  disabled = false,
+  isDisabled = false,
   defaultValue,
   value,
-  showThumbs = true,
+  shouldShowThumbs = true,
   variant = SliderVariant.Primary,
-  withBackground = false,
+  isWithBackground = false,
 }) => {
   const values = value || defaultValue;
 
@@ -66,7 +66,7 @@ const Slider: React.FC<Props> = ({
       minStepsBetweenThumbs={minStepsBetweenThumbs}
       dir={direction}
       orientation={orientation}
-      disabled={disabled}
+      disabled={isDisabled}
       aria-label={label}
       {...(defaultValue && { defaultValue })}
       {...(value && { value })}
@@ -74,7 +74,7 @@ const Slider: React.FC<Props> = ({
       {...(name && { name })}
     >
       <SliderPrimitive.Track
-        className={classNames(styles.track, withBackground && styles.trackBackground)}
+        className={classNames(styles.track, isWithBackground && styles.trackBackground)}
       >
         <SliderPrimitive.Range
           className={classNames(styles.range, {
@@ -83,7 +83,7 @@ const Slider: React.FC<Props> = ({
           })}
         />
       </SliderPrimitive.Track>
-      {showThumbs &&
+      {shouldShowThumbs &&
         values.map((...[, index]) => (
           <SliderPrimitive.Thumb className={styles.thumb} key={index} />
         ))}

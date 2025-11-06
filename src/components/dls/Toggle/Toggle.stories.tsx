@@ -7,8 +7,8 @@ export default {
   title: 'dls/Toggle',
   component: Toggle,
   args: {
-    defaultChecked: true,
-    disabled: false,
+    isDefaultChecked: true,
+    isDisabled: false,
     id: 'toggle',
   },
 
@@ -28,28 +28,28 @@ export default {
       },
       description: 'This is a callback to handle when the value changes.',
     },
-    disabled: {
+    isDisabled: {
       description: 'Whether the toggle is disabled or not.',
       control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
-    required: {
+    isRequired: {
       description: 'Whether the toggle is required.',
       control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
-    defaultChecked: {
+    isDefaultChecked: {
       table: {
         category: 'Optional',
       },
       control: { type: 'boolean' },
       description: 'Whether the default is checked or not.',
     },
-    checked: {
+    isChecked: {
       table: {
         category: 'Optional',
       },
@@ -81,7 +81,7 @@ const ControlledTemplate = (args) => {
   const onChange = useCallback((newValue: boolean) => {
     setChecked(newValue);
   }, []);
-  return <Toggle {...args} checked={checked} onChange={onChange} />;
+  return <Toggle {...args} isChecked={checked} onChange={onChange} />;
 };
 export const ControlledToggle = ControlledTemplate.bind({});
 ControlledToggle.args = {};

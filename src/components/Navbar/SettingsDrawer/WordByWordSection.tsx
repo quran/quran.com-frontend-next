@@ -180,7 +180,7 @@ const WordByWordSection = () => {
         <div className={styles.checkboxContainer}>
           <div id="wbw-translation-section">
             <Checkbox
-              checked={wordByWordContentType.includes(WordByWordType.Translation)}
+              isChecked={wordByWordContentType.includes(WordByWordType.Translation)}
               id="wbw-translation"
               name="wbw-translation"
               label={t('translation')}
@@ -190,7 +190,7 @@ const WordByWordSection = () => {
 
           <div id="wbw-transliteration-section">
             <Checkbox
-              checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
+              isChecked={wordByWordContentType.includes(WordByWordType.Transliteration)}
               id="wbw-transliteration"
               name="wbw-transliteration"
               label={t('transliteration')}
@@ -200,7 +200,7 @@ const WordByWordSection = () => {
 
           <div id="wbw-recitation-section">
             <Checkbox
-              checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
+              isChecked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
               id="wbw-recitation"
               name="wbw-recitation"
               label={t('recitation')}
@@ -236,7 +236,7 @@ const WordByWordSection = () => {
                 name="wordByWord"
                 options={options}
                 value={wordByWordLocale}
-                disabled={shouldDisableLanguageSelect}
+                isDisabled={shouldDisableLanguageSelect}
                 onChange={onWordByWordLocaleChange}
               />
             );
@@ -259,19 +259,19 @@ const WordByWordSection = () => {
         <Section.Row>
           <div className={styles.checkboxContainer}>
             <Checkbox
-              checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
+              isChecked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
               id="inline"
               name="inline"
               label={t('inline')}
-              disabled={shouldDisableWordByWordDisplay}
+              isDisabled={shouldDisableWordByWordDisplay}
               onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
             />
             <Checkbox
-              checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
+              isChecked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
               id="tooltip"
               name="word-tooltip"
               label={t('tooltip')}
-              disabled={shouldDisableWordByWordDisplay}
+              isDisabled={shouldDisableWordByWordDisplay}
               onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
             />
           </div>

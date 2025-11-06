@@ -33,7 +33,7 @@ type IndexProps = {
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);

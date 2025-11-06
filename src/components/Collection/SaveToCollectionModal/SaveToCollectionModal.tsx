@@ -40,7 +40,7 @@ const SaveToCollectionModal = ({
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
   const { t } = useTranslation();
   const toast = useToast();
 
@@ -96,7 +96,7 @@ const SaveToCollectionModal = ({
           <div className={styles.collectionItem} key={collection.id}>
             <Checkbox
               id={collection.name}
-              defaultChecked={collection.checked}
+              isDefaultChecked={collection.checked}
               label={collection.name}
               onChange={handleCheckboxChange(collection)}
             />

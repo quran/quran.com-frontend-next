@@ -37,8 +37,8 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
             id="all-notifications"
             label={t('all-notifications')}
             onChange={onToggle}
-            checked={preference.preference.enabled}
-            disabled={isMutating}
+            isChecked={preference.preference.enabled}
+            isDisabled={isMutating}
           />
           {isMutating && <Spinner />}
         </div>
@@ -50,10 +50,10 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
             <div className={styles.row} key={channelName}>
               <Toggle
                 id={channelName}
-                disabled={isMutating}
+                isDisabled={isMutating}
                 label={t(`channels.${channelName}`)}
                 onChange={(checked) => onToggle(checked, channelName as ChannelTypeEnum)}
-                checked={preference.preference.channels[channelName]}
+                isChecked={preference.preference.channels[channelName]}
               />
               {isMutating && channelName === mutatingChannel && <Spinner />}
             </div>

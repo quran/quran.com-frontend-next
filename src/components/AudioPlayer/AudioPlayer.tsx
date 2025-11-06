@@ -50,7 +50,7 @@ const getAudioPlayerDownloadProgress = (audioPlayer: HTMLAudioElement) => {
 };
 
 const AudioPlayer = () => {
-  const audioPlayerRef = useRef<HTMLAudioElement>();
+  const audioPlayerRef = useRef<HTMLAudioElement>(null);
   const audioService = useContext(AudioPlayerMachineContext);
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
   const { isActive } = useOnboarding();

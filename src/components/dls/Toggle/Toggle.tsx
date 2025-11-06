@@ -7,19 +7,19 @@ import styles from './Toggle.module.scss';
 interface Props {
   id: string;
   onChange?: (checked: boolean) => void;
-  checked?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-  label?: string | JSX.Element;
+  isChecked?: boolean;
+  isDisabled?: boolean;
+  isRequired?: boolean;
+  label?: React.ReactNode;
   name?: string;
-  defaultChecked?: boolean;
+  isDefaultChecked?: boolean;
 }
 
 const Toggle: React.FC<Props> = ({
-  disabled = false,
-  required = false,
-  defaultChecked,
-  checked,
+  isDisabled = false,
+  isRequired = false,
+  isDefaultChecked,
+  isChecked,
   id,
   label,
   name,
@@ -35,12 +35,12 @@ const Toggle: React.FC<Props> = ({
 
       <RadixToggle.Root
         id={id}
-        disabled={disabled}
+        disabled={isDisabled}
         name={name}
-        required={required}
+        required={isRequired}
         className={styles.root}
-        {...(checked !== undefined && { checked })}
-        {...(defaultChecked !== undefined && { defaultChecked })}
+        {...(isChecked !== undefined && { checked: isChecked })}
+        {...(isDefaultChecked !== undefined && { defaultChecked: isDefaultChecked })}
         {...(onChange !== undefined && { onCheckedChange: onChange })}
       >
         <RadixToggle.Thumb className={styles.thumb} />

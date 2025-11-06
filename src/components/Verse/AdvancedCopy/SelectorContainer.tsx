@@ -49,13 +49,13 @@ const SelectorContainer: React.FC<SelectorProps> = ({
       <Combobox
         id={type}
         value={value}
-        clearable={false}
+        isClearable={false}
         items={dropdownItems}
         onChange={onChange}
         placeholder={t('audio.player.search-verse')}
         initialInputValue={value}
-        fixedWidth={false}
-        disabled={isDisabled}
+        isFixedWidth={false}
+        isDisabled={isDisabled}
         label={
           <span className={styles.comboboxLabel}>
             {`${type === RangeSelectorType.START ? t('from') : t('to')} ${t('verse')}:`}

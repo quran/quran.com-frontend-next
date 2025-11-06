@@ -20,11 +20,11 @@ interface Props {
   body: ReactNode;
   children: ReactNode | ReactNode[];
   onOpenChange?: (open: boolean) => void;
-  open?: boolean;
+  isOpen?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  avoidCollisions?: boolean;
-  tip?: boolean;
+  shouldAvoidCollisions?: boolean;
+  hasTip?: boolean;
   openDelay?: number;
   closeDelay?: number;
 }
@@ -33,37 +33,37 @@ const ClickableHoverCard: React.FC<Props> = ({
   body,
   children,
   onOpenChange,
-  open,
+  isOpen,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
-  avoidCollisions = true,
+  shouldAvoidCollisions = true,
   openDelay = 400,
   closeDelay = 300,
-  tip = true,
+  hasTip = true,
 }) => (
   <Popover
-    open={open}
+    isOpen={isOpen}
     contentSide={contentSide}
     {...(onOpenChange && { onOpenChange })}
     contentAlign={contentAlign}
-    avoidCollisions={avoidCollisions}
+    shouldAvoidCollisions={shouldAvoidCollisions}
     trigger={
       <HoverCard
         openDelay={openDelay}
         body={body}
         closeDelay={closeDelay}
-        open={open}
+        isOpen={isOpen}
         contentSide={contentSide}
-        avoidCollisions={avoidCollisions}
+        shouldAvoidCollisions={shouldAvoidCollisions}
         contentAlign={contentAlign}
-        tip
-        {...(typeof open !== 'undefined' && { open })}
+        hasTip
+        {...(typeof isOpen !== 'undefined' && { isOpen })}
         {...(onOpenChange && { onOpenChange })}
       >
         {children}
       </HoverCard>
     }
-    tip={tip}
+    hasTip={hasTip}
   >
     {body}
   </Popover>

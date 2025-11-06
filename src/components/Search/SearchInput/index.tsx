@@ -131,7 +131,7 @@ const SearchInput: React.FC<Props> = ({
             value={searchQuery}
             placeholder={placeholder}
             onClearClicked={handleClearClicked}
-            clearable
+            isClearable
             prefix={<SearchIcon />}
             suffix={
               isSpeechRecognitionSupported ? (
@@ -148,7 +148,7 @@ const SearchInput: React.FC<Props> = ({
             htmlType="search"
             enterKeyHint="search"
             shouldUseDefaultStyles={false}
-            fixedWidth={false}
+            isFixedWidth={false}
             size={InputSize.Large}
           />
         </form>

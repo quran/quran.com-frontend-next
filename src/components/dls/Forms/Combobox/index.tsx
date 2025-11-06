@@ -41,12 +41,12 @@ interface Props {
   placeholder?: string;
   size?: ComboboxSize;
   value?: InitialValue;
-  clearable?: boolean;
+  isClearable?: boolean;
   isMultiSelect?: boolean;
   tagsLimit?: number;
-  disabled?: boolean;
+  isDisabled?: boolean;
   hasError?: boolean;
-  fixedWidth?: boolean;
+  isFixedWidth?: boolean;
   minimumRequiredItems?: number;
 }
 
@@ -56,8 +56,8 @@ const Combobox: React.FC<Props> = ({
   hasError = false,
   value,
   initialInputValue,
-  disabled = false,
-  clearable = true,
+  isDisabled = false,
+  isClearable = true,
   isMultiSelect = false,
   emptyMessage = 'No results',
   tagsLimit,
@@ -66,7 +66,7 @@ const Combobox: React.FC<Props> = ({
   size = ComboboxSize.Medium,
   minimumRequiredItems = 0,
   onChange,
-  fixedWidth = true,
+  isFixedWidth = true,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState<string>(initialInputValue || '');
@@ -81,7 +81,7 @@ const Combobox: React.FC<Props> = ({
   });
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
-  const comboBoxRef = useRef(null);
+  const comboBoxRef = useRef<HTMLDivElement | null>(null);
 
   const getNewValue = useCallback(
     (isNewValueValid: boolean, previousValue, newValue) => {
@@ -348,7 +348,7 @@ const Combobox: React.FC<Props> = ({
 
   const shouldShowCaret =
     (!isMultiSelect && !inputValue) || (isMultiSelect && !inputValue && !tags.length);
-  const shouldShowClear = clearable && !shouldShowCaret;
+  const shouldShowClear = isClearable && !shouldShowCaret;
   // if we should prevent selecting when the tags limit has been reached.
   const preventSelecting = tagsLimit && tags && tags.length >= tagsLimit;
   return (
@@ -357,21 +357,21 @@ const Combobox: React.FC<Props> = ({
       <div
         ref={comboBoxRef}
         className={classNames(styles.comboboxContainer, {
-          [styles.enabled]: !disabled,
-          [styles.fixedWidth]: fixedWidth,
+          [styles.enabled]: !isDisabled,
+          [styles.fixedWidth]: isFixedWidth,
         })}
       >
         <div
           onClick={onSelectorClicked}
           className={classNames(styles.select, {
-            [styles.disabledSearch]: disabled,
+            [styles.disabledSearch]: isDisabled,
           })}
         >
           <SearchInputIcon />
           <div
             className={classNames(styles.selector, {
-              [styles.disabledSelector]: disabled,
-              [styles.activeSelector]: !disabled && !hasError && isOpened,
+              [styles.disabledSelector]: isDisabled,
+              [styles.activeSelector]: !isDisabled && !hasError && isOpened,
               [styles.hasError]: hasError,
             })}
           >
@@ -410,7 +410,7 @@ const Combobox: React.FC<Props> = ({
                     aria-autocomplete="list"
                     onChange={onInputValueChange}
                     value={inputValue}
-                    disabled={disabled}
+                    disabled={isDisabled}
                     readOnly={false}
                     unselectable="on"
                     {...(!isMultiSelect && { placeholder })}
@@ -431,15 +431,15 @@ const Combobox: React.FC<Props> = ({
         <ComboboxItems
           onItemSelectedChange={onItemSelectedChange}
           isOpened={isOpened}
-          disabled={disabled}
+          isDisabled={isDisabled}
           size={size}
           filteredItems={filteredItems}
           isMultiSelect={isMultiSelect}
-          preventSelecting={preventSelecting}
+          shouldPreventSelecting={preventSelecting}
           selectedValue={selectedValue}
           id={id}
           emptyMessage={emptyMessage}
-          fixedWidth={fixedWidth}
+          isFixedWidth={isFixedWidth}
         />
       </div>
     </>

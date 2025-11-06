@@ -39,7 +39,7 @@ const PlainVerseText: React.FC<Props> = ({
   shouldShowWordByWordTransliteration = false,
   fontScale,
   quranFont: quranFontFromProps,
-}: Props): JSX.Element => {
+}: Props) => {
   const {
     quranFont: quranFontFromStore,
     quranTextFontScale,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 
 import styles from './ReadingPreference.module.scss';
 
@@ -15,7 +15,7 @@ export interface ReadingPreferenceIconProps {
   /** The reading preference option this component represents */
   optionReadingPreference: ReadingPreference;
   /** Whether to use success color variant for selected state */
-  useSuccessVariant?: boolean;
+  shouldUseSuccessVariant?: boolean;
 }
 
 /**
@@ -26,7 +26,7 @@ export interface ReadingPreferenceIconProps {
 function ReadingPreferenceIcon({
   currentReadingPreference,
   optionReadingPreference,
-  useSuccessVariant = false,
+  shouldUseSuccessVariant = false,
 }: ReadingPreferenceIconProps): JSX.Element {
   // Determine if this option is currently selected
   const isSelected = currentReadingPreference === optionReadingPreference;
@@ -34,7 +34,7 @@ function ReadingPreferenceIcon({
   // Determine the style class based on selection state and variant
   const getStyleClass = () => {
     if (!isSelected) return styles.unselected;
-    return useSuccessVariant ? styles.successVariant : styles.selected;
+    return shouldUseSuccessVariant ? styles.successVariant : styles.selected;
   };
 
   // Return the appropriate icon component based on the option type

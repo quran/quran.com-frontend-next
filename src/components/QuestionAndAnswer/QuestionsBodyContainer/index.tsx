@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { JSX, useCallback } from 'react';
 
 import QuestionsBody from './QuestionsBody';
 

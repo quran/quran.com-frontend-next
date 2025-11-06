@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { JSX, ReactNode } from 'react';
 
 import Popover, { ContentSide } from '@/dls/Popover';
 import Tooltip from '@/dls/Tooltip';
@@ -7,10 +7,10 @@ interface Props {
   content: ReactNode;
   children: ReactNode | ReactNode[];
   contentSide?: ContentSide;
-  tip?: boolean;
+  hasTip?: boolean;
   tooltipDelay?: number;
   onOpenChange?: (open: boolean) => void;
-  defaultStyling?: boolean;
+  hasDefaultStyling?: boolean;
   isOpen?: boolean;
   triggerStyles?: string;
   isContainerSpan?: boolean;
@@ -30,25 +30,25 @@ const HoverablePopover: React.FC<Props> = ({
   children,
   onOpenChange,
   contentSide = ContentSide.TOP,
-  tip = true,
+  hasTip = true,
   tooltipDelay = 0,
-  defaultStyling = true,
+  hasDefaultStyling = true,
   isOpen,
   triggerStyles,
   isContainerSpan = false,
 }: Props): JSX.Element => (
   <Popover
-    open={isOpen}
+    isOpen={isOpen}
     triggerStyles={triggerStyles}
     contentSide={contentSide}
-    useTooltipStyles
+    shouldUseTooltipStyles
     {...(onOpenChange && { onOpenChange })}
-    defaultStyling={defaultStyling}
+    hasDefaultStyling={hasDefaultStyling}
     isContainerSpan={isContainerSpan}
     trigger={
       <Tooltip
-        open={isOpen}
-        tip={tip}
+        isOpen={isOpen}
+        hasTip={hasTip}
         text={content}
         contentSide={contentSide}
         delay={tooltipDelay}
@@ -57,7 +57,7 @@ const HoverablePopover: React.FC<Props> = ({
         {children}
       </Tooltip>
     }
-    tip={tip}
+    hasTip={hasTip}
   >
     {content}
   </Popover>

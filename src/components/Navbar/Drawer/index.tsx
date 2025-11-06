@@ -38,10 +38,10 @@ interface Props {
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
-  hideCloseButton?: boolean;
+  shouldHideCloseButton?: boolean;
   children: ReactNode;
-  closeOnNavigation?: boolean;
-  canCloseDrawer?: boolean;
+  shouldCloseOnNavigation?: boolean;
+  isDrawerClosable?: boolean;
   bodyId?: string;
 }
 
@@ -90,13 +90,13 @@ const Drawer: React.FC<Props> = ({
   side = DrawerSide.Right,
   header,
   children,
-  hideCloseButton = false,
-  closeOnNavigation = true,
-  canCloseDrawer = true,
+  shouldHideCloseButton = false,
+  shouldCloseOnNavigation = true,
+  isDrawerClosable = true,
   bodyId,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
   const isOpen = getIsOpen(type, navbar);
@@ -106,14 +106,14 @@ const Drawer: React.FC<Props> = ({
 
   const closeDrawer = useCallback(
     (actionSource: ActionSource = ActionSource.Click) => {
-      if (!canCloseDrawer) {
+      if (!isDrawerClosable) {
         return;
       }
 
       dispatch({ type: getActionCreator(type), payload: false });
       logDrawerCloseEvent(type, actionSource);
     },
-    [dispatch, type, canCloseDrawer],
+    [dispatch, type, isDrawerClosable],
   );
   // enableOnFormTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
@@ -132,7 +132,7 @@ const Drawer: React.FC<Props> = ({
 
     // Hide navbar after successful navigation
     const handleRouteChange = () => {
-      if (isOpen && closeOnNavigation) {
+      if (isOpen && shouldCloseOnNavigation) {
         closeDrawer(ActionSource.Navigation);
       }
     };
@@ -143,7 +143,7 @@ const Drawer: React.FC<Props> = ({
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, shouldCloseOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
@@ -168,17 +168,17 @@ const Drawer: React.FC<Props> = ({
     >
       <div
         className={classNames(styles.header, {
-          [styles.hiddenButtonHeader]: hideCloseButton,
+          [styles.hiddenButtonHeader]: shouldHideCloseButton,
         })}
       >
         <div
           className={classNames(styles.headerContentContainer, {
-            [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+            [styles.hiddenButtonHeaderContentContainer]: shouldHideCloseButton,
           })}
         >
           <div className={styles.headerContent}>
             {header}
-            {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+            {!shouldHideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
           </div>
         </div>
       </div>
