@@ -8,11 +8,11 @@ import styles from './VerseAndTranslation.module.scss';
 import Error from '@/components/Error';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import Spinner from '@/dls/Spinner/Spinner';
-import useGetChaptersData from '@/hooks/useGetChaptersData';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
 import { getChapterData } from '@/utils/chapter';
 import { getVerseWords } from '@/utils/verse';
+import ChaptersData from 'types/ChaptersData';
 
 /**
  * React component that fetches and displays Quranic verses with their translations.
@@ -48,6 +48,7 @@ import { getVerseWords } from '@/utils/verse';
  * ```
  */
 interface Props {
+  chaptersData?: ChaptersData;
   chapter: number;
   from: number;
   to: number;
@@ -69,18 +70,17 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
     translationFontScale: reduxTranslationFontScale,
     quranTextFontScale: reduxQuranTextFontScale,
   } = useVerseAndTranslation({ ...restProps, chapter });
-  const chaptersData = useGetChaptersData('en'); // or any other language
   const chapterData = useMemo(() => {
-    if (!chaptersData) return null;
-    return getChapterData(chaptersData, chapter?.toString());
-  }, [chaptersData, chapter]);
+    if (!restProps.chaptersData) return null;
+    return getChapterData(restProps.chaptersData, chapter?.toString());
+  }, [restProps.chaptersData, chapter]);
   const shouldShowReference = !!restProps.titleText;
 
   if (error) {
     return <Error error={error} onRetryClicked={mutate} />;
   }
 
-  if (!data || !chapterData) return <Spinner />;
+  if (!data) return <Spinner />;
 
   return (
     <div className={styles.container}>
