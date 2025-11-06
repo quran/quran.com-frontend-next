@@ -3,6 +3,7 @@
 .button {
     color: var(--color-text-faded-new);
     background: var(--color-background-elevated);
+    text-wrap: nowrap;
     &:hover {
         background: var(--color-background-elevated);
         color: var(--color-text-faded-new);
