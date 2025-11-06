@@ -129,9 +129,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
 
       if (!isLoggedIn()) {
         router.push(
-          getLoginNavigationUrl(
-            getReadingGoalNavigationUrl(state.exampleKey?.toString() ?? undefined),
-          ),
+          getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey ?? undefined)),
         );
         return;
       }
