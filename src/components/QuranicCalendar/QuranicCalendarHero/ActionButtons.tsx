@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QuranicCalendarHero.module.scss';
@@ -7,13 +8,13 @@ import styles from './QuranicCalendarHero.module.scss';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import useIsMobile from '@/hooks/useIsMobile';
 import EmailIcon from '@/icons/email.svg';
 import QuestionMarkIcon from '@/icons/question-mark.svg';
 import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { isMobile } from '@/utils/responsive';
 
 interface ActionButtonsProps {
   isSubscribed: boolean;
@@ -59,7 +60,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     );
   };
 
-  const isMobileBrowser = isMobile();
+  const isMobileBrowser = useIsMobile();
 
   const socialButtons = (
     <>
@@ -96,14 +97,20 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     </>
   );
 
-  return (
-    <div className={styles.buttonContainer}>
+  const showAskQuestionButton = isLoggedIn && isSubscribed;
+  const subscribedText = isMobileBrowser && showAskQuestionButton ? '' : t('common:subscribed');
+
+  const subscribeButton = (
+    <>
       <Button
         onClick={onEnrollButtonClicked}
         type={ButtonType.Success}
         shape={ButtonShape.Pill}
         isDisabled={isEnrolling}
-        className={isMobile() ? styles.subscribeButton : ''}
+        className={classNames({
+          [styles.subscribeButtonSmall]: showAskQuestionButton && isMobileBrowser,
+          [styles.subscribeButton]: !showAskQuestionButton && isMobileBrowser,
+        })}
       >
         <IconContainer
           className={styles.iconContainer}
@@ -112,9 +119,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           shouldForceSetColors={false}
           icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
         />
-        {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
+        {isSubscribed ? subscribedText : t('common:subscribe')}
       </Button>
-      {isLoggedIn && isSubscribed && (
+
+      {showAskQuestionButton && (
         <Button
           onClick={handleAskQuestionClick}
           type={ButtonType.Success}
@@ -124,13 +132,25 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <IconContainer
             className={styles.iconContainer}
             size={IconSize.Small}
+            shouldFlipOnRTL
             shouldForceSetColors={false}
             icon={<QuestionMarkIcon />}
           />
           {t('ask-question')}
         </Button>
       )}
-      {isMobile() ? (
+    </>
+  );
+
+  return (
+    <div className={styles.buttonContainer}>
+      {isMobileBrowser ? (
+        <div className={styles.subscribeButtonContainer}>{subscribeButton}</div>
+      ) : (
+        subscribeButton
+      )}
+
+      {isMobileBrowser ? (
         <div className={styles.socialButtonsContainer}>{socialButtons}</div>
       ) : (
         socialButtons
