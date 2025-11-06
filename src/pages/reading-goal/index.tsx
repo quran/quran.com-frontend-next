@@ -11,7 +11,10 @@ import styles from './reading-goal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
-import { readingGoalExamples } from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
+import {
+  isReadingGoalExampleKey,
+  ReadingGoalExampleKey,
+} from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -30,8 +33,8 @@ const ReadingGoalPage: NextPage = () => {
 
   const { example } = router.query;
   const initialExampleKey =
-    isLoggedIn() && typeof example === 'string' && example in readingGoalExamples
-      ? (example as keyof typeof readingGoalExamples)
+    isLoggedIn() && typeof example === 'string' && isReadingGoalExampleKey(example)
+      ? (example as ReadingGoalExampleKey)
       : null;
 
   useEffect(() => {
