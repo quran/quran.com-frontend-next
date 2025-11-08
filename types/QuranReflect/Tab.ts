@@ -1,6 +1,6 @@
 enum Tab {
-  MostPopular = 'most_popular',
-  Newest = 'newest',
+  Popular = 'popular',
+  Recent = 'recent',
   Feed = 'feed',
   Public = 'public',
 }

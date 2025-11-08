@@ -1,27 +1,58 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { fetcher } from '@/api';
+import { localeToQuranReflectLanguageID } from '@/utils/locale';
 import stringify from '@/utils/qs-stringify';
 import AyahReflectionsRequestParams from 'types/QuranReflect/AyahReflectionsRequestParams';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import Tab from 'types/QuranReflect/Tab';
 
-const STAGING_API_HOST = 'https://quranreflect.org';
-const PRODUCTION_API_HOST = 'https://quranreflect.com';
-const isProd = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
-
 export const REFLECTION_POST_TYPE_ID = '1';
 export const LESSON_POST_TYPE_ID = '2';
 
-// env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
-export const API_HOST = isProd ? PRODUCTION_API_HOST : STAGING_API_HOST;
+const ensureAbsoluteUrl = (url: string): string => {
+  if (!url) return url;
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  const isLocalhost =
+    url.startsWith('localhost') || url.startsWith('127.') || url.startsWith('::1');
+  return `${isLocalhost ? 'http' : 'https'}://${url}`;
+};
+
+/**
+ * Resolves the base URL to use for API requests to Quran Reflect, going through the proxy.
+ * The resolution order is as follows:
+ * 1. If NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL is set, use that.
+ * 2. If APP_BASE_URL, NEXT_PUBLIC_APP_BASE_URL, SITE_URL, or NEXT_PUBLIC_SITE_URL is set, use that.
+ * 3. If VERCEL_URL or NEXT_PUBLIC_VERCEL_URL is set, use that.
+ * 4. Otherwise, default to localhost with the appropriate port.
+ * @returns {string} The resolved base URL.
+ */
+const resolveAppBaseUrl = (): string => {
+  const explicitBase =
+    process.env.NEXT_PUBLIC_APP_BASE_URL ||
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.APP_BASE_URL;
+  if (explicitBase) return ensureAbsoluteUrl(explicitBase).replace(/\/$/, '');
+
+  const vercelBase = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
+  if (vercelBase) return ensureAbsoluteUrl(vercelBase).replace(/\/$/, '');
+
+  const port = process.env.PORT || 3000;
+  return `http://localhost:${port}`.replace(/\/$/, '');
+};
+
+const getProxyBaseUrl = (): string => {
+  const override = process.env.NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL;
+  if (override) return ensureAbsoluteUrl(override).replace(/\/$/, '');
+  return `${resolveAppBaseUrl()}/api/proxy/quran-reflect`;
+};
+
+export const API_HOST = getProxyBaseUrl();
 
 export const makeQuranReflectApiUrl = (path: string, parameters = {}): string => {
-  const params = {
-    client_auth_token: process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN,
-    ...parameters,
-  };
-  return `${API_HOST}/${path}?${stringify(params)}`;
+  const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
+  const params = stringify(parameters);
+  return `${API_HOST}/${normalizedPath}${params ? `?${params}` : ''}`;
 };
 
 /* eslint-disable import/prefer-default-export */
@@ -30,22 +61,18 @@ export const makeAyahReflectionsUrl = ({
   ayahNumber,
   locale,
   page = 1,
-  tab = Tab.MostPopular,
-  reviewed = false,
+  tab = Tab.Popular,
   postTypeIds = [],
 }: AyahReflectionsRequestParams) => {
-  const surahNumber = Number(surahId) + 1;
-  return makeQuranReflectApiUrl('posts.json', {
-    'q[filters_attributes][0][chapter_id]': surahNumber,
-    'q[filters_attributes][0][from]': ayahNumber,
-    'q[filters_attributes][0][to]': ayahNumber,
-    'q[filters_operation]': 'OR',
-    ...(postTypeIds.length > 0 && { 'q[post_type_ids]': postTypeIds.join(',') }),
+  return makeQuranReflectApiUrl('posts/feed', {
+    'filter[references][0][chapterId]': surahId,
+    'filter[references][0][from]': ayahNumber,
+    'filter[references][0][to]': ayahNumber,
+    ...(postTypeIds.length > 0 && { 'filter[postTypeIds]': postTypeIds.join(',') }),
     page,
     tab,
-    lang: locale,
-    feed: true,
-    reviewed,
+    languages: localeToQuranReflectLanguageID(locale),
+    'filter[verifiedOnly]': true,
   });
 };
 
