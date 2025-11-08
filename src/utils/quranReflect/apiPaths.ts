@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import { localeToQuranReflectLanguageID } from './locale';
+
 import { fetcher } from '@/api';
-import { localeToQuranReflectLanguageID } from '@/utils/locale';
 import stringify from '@/utils/qs-stringify';
 import AyahReflectionsRequestParams from 'types/QuranReflect/AyahReflectionsRequestParams';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';

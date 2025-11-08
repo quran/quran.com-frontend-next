@@ -11,27 +11,6 @@ import Language from '@/types/Language';
 
 const RTL_LOCALES = [Language.AR, Language.FA, Language.UR];
 
-const LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID: Record<string, number> = {
-  [Language.AR]: 1, // Arabic
-  [Language.EN]: 2,
-  [Language.ES]: 3,
-  [Language.MS]: 4,
-  [Language.UR]: 5,
-  [Language.ID]: 6,
-  [Language.FR]: 7,
-  [Language.BN]: 69,
-  [Language.FA]: 32,
-  [Language.IT]: 41,
-  [Language.NL]: 39,
-  [Language.PT]: 48,
-  [Language.RU]: 67,
-  [Language.SQ]: 45,
-  [Language.TH]: 62,
-  [Language.TR]: 65,
-  [Language.ZH]: 71,
-  [Language.SW]: 59,
-};
-
 const LOCALE_NAME = {
   [Language.EN]: 'English',
   [Language.AR]: 'العربية',
@@ -478,17 +457,4 @@ export const toLocalizedMonthName = (monthNumber: number, locale: string): strin
   objDate.setMonth(monthNumber - 1);
 
   return objDate.toLocaleString(locale, { month: 'long' });
-};
-
-/**
- * Map locale to Quran Reflect language ID.
- * @param {string} locale
- * @returns {number}
- */
-export const localeToQuranReflectLanguageID = (locale: string): number => {
-  const normalizedLocale = locale?.split('-')[0]?.toLowerCase() || Language.EN;
-  return (
-    LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[normalizedLocale] ||
-    LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[Language.EN]
-  );
 };
