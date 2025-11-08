@@ -3,12 +3,17 @@ import { describe, it, expect } from 'vitest';
 
 import { getCopyReflectionContent } from './string';
 
+import enChaptersData from '@/data/chapters/en.json';
+import ChaptersData from '@/types/ChaptersData';
+
 // Helpers to build test data with minimal typing friction
 type VerseLike = {
   verseNumber: number;
   chapterId: number;
   translations: { id: number; text: string }[];
 };
+
+const chaptersData = enChaptersData as ChaptersData;
 
 describe('getCopyReflectionContent', () => {
   it('formats a group with multiple ayahs using plural "Verses" and range', () => {
@@ -33,7 +38,7 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references as any);
 
     // Expected output format:
     // Chapter {surahNumber}: {surahName}, Verses:  {from} - {to}\r\n
@@ -57,7 +62,7 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references as any);
     expect(result).toBe('Chapter 18: Al-Kahf, Verse:  5\r\nSingle ayah (5) \r\n\r\n');
   });
 
@@ -76,7 +81,7 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references as any);
     expect(result).toBe('Chapter 2: Al-Baqarah, Verse:  7\r\nValid (7) \r\n\r\n');
   });
 });
