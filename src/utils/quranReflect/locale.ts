@@ -30,6 +30,15 @@ const LOCALE_TO_REFLECTION_LANGUAGE_MAP = {
   fr: ReflectionLanguage.FRENCH,
 };
 
+const REFLECTION_LANGUAGE_TO_LOCALE_MAP: Record<ReflectionLanguage, string> = {
+  [ReflectionLanguage.ENGLISH]: 'en',
+  [ReflectionLanguage.SPANISH]: 'es',
+  [ReflectionLanguage.FRENCH]: 'fr',
+  [ReflectionLanguage.MALAY]: 'ms',
+  [ReflectionLanguage.URDU]: 'ur',
+  [ReflectionLanguage.ARABIC]: 'ar',
+};
+
 /**
  * Get reflection languages from Redux store. This function should be used
  * within React components that have access to the Redux store.
@@ -85,4 +94,13 @@ export const getReflectionLanguages = (
 
   // Fallback to locale-based logic
   return localeToReflectionLanguages(locale);
+};
+
+export const reflectionLanguagesToLocaleCodes = (
+  reflectionLanguages: ReflectionLanguage[],
+): string[] => {
+  if (!reflectionLanguages?.length) return [];
+  return reflectionLanguages
+    .map((language) => REFLECTION_LANGUAGE_TO_LOCALE_MAP[language])
+    .filter((localeCode): localeCode is string => Boolean(localeCode));
 };

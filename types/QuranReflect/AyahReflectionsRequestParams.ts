@@ -8,6 +8,7 @@ type AyahReflectionsRequestParams = {
   tab?: Tab;
   reviewed?: boolean;
   postTypeIds?: string[];
+  reflectionLanguages?: string[];
 };
 
 export default AyahReflectionsRequestParams;

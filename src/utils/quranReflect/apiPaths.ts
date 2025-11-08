@@ -63,7 +63,21 @@ export const makeAyahReflectionsUrl = ({
   page = 1,
   tab = Tab.Popular,
   postTypeIds = [],
+  reflectionLanguages = [],
 }: AyahReflectionsRequestParams) => {
+  const normalizedLocale = locale?.split('-')[0]?.toLowerCase() || 'en';
+  const isoCodes =
+    reflectionLanguages.length > 0
+      ? reflectionLanguages.map((code) => code?.split('-')[0]?.toLowerCase())
+      : [normalizedLocale];
+  const languageIds = Array.from(
+    new Set(
+      isoCodes
+        .map((code) => localeToQuranReflectLanguageID(code))
+        .filter((id): id is number => typeof id === 'number'),
+    ),
+  );
+
   return makeQuranReflectApiUrl('posts/feed', {
     'filter[references][0][chapterId]': surahId,
     'filter[references][0][from]': ayahNumber,
@@ -71,7 +85,7 @@ export const makeAyahReflectionsUrl = ({
     ...(postTypeIds.length > 0 && { 'filter[postTypeIds]': postTypeIds.join(',') }),
     page,
     tab,
-    languages: localeToQuranReflectLanguageID(locale),
+    languages: languageIds.join(','),
     'filter[verifiedOnly]': true,
   });
 };

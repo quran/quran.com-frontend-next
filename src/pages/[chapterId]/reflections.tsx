@@ -103,7 +103,7 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
 
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/[chapterId]/reflections',
-  async (context) => {
+  async (context, languageResult) => {
     const { params, locale } = context;
     const { chapterId } = params;
     const verseKey = String(chapterId);
@@ -115,11 +115,17 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
     const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
     try {
+      const reflectionLanguageIsoCodes =
+        languageResult?.countryLanguagePreference?.qrReflectionLanguages?.map(
+          (lang) => lang.isoCode,
+        ) || [];
+
       const verseReflectionUrl = makeAyahReflectionsUrl({
         surahId: chapterNumber,
         ayahNumber: verseNumber,
         locale,
         reviewed: true,
+        reflectionLanguages: reflectionLanguageIsoCodes,
         postTypeIds: [REFLECTION_POST_TYPE_ID],
       });
 

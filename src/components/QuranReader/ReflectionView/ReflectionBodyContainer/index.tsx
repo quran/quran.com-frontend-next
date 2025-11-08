@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './ReflectionBodyContainer.module.scss';
 
@@ -11,6 +12,7 @@ import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import NewLabel from '@/dls/Badge/NewLabel';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { postReflectionViews } from '@/utils/auth/qf/api';
 import { logEvent } from '@/utils/eventLogger';
@@ -25,6 +27,7 @@ import {
   REFLECTION_POST_TYPE_ID,
   LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
+import { reflectionLanguagesToLocaleCodes } from '@/utils/quranReflect/locale';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
 
@@ -55,6 +58,8 @@ const ReflectionBodyContainer = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedContentType, setSelectedContentType] = useState(initialContentType);
   const { lang, t } = useTranslation();
+  const reflectionLanguages = useSelector(selectAyahReflectionsLanguages);
+  const reflectionLanguageIsoCodes = reflectionLanguagesToLocaleCodes(reflectionLanguages);
 
   const tabs = [
     { title: t('common:reflections'), value: ContentType.REFLECTIONS },
@@ -129,6 +134,7 @@ const ReflectionBodyContainer = ({
           ayahNumber: selectedVerseNumber,
           locale: lang,
           reviewed: true,
+          reflectionLanguages: reflectionLanguageIsoCodes,
           postTypeIds: [
             selectedContentType === ContentType.REFLECTIONS
               ? REFLECTION_POST_TYPE_ID

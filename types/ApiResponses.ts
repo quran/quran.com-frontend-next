@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import AudioData from './AudioData';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
@@ -165,6 +166,11 @@ export interface CountryLanguagePreferenceResponse extends BaseResponse {
     isoCode: string;
   }[];
   learningPlanLanguages: {
+    id: number;
+    name: string;
+    isoCode: string;
+  }[];
+  qrReflectionLanguages: {
     id: number;
     name: string;
     isoCode: string;
