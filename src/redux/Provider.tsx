@@ -95,8 +95,8 @@ const ReduxProvider = ({
 
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
         if (remoteLocale) {
-          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
           setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
+          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
         }
         store.dispatch(syncUserPreferences(userPreferences, locale));
         const audioPlayerContext = audioService.getSnapshot().context;

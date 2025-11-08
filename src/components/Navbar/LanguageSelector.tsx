@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -24,6 +25,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
+import { getCountryCodeForPreferences } from '@/utils/serverSideLanguageDetection';
 import i18nConfig from 'i18n.json';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -65,15 +67,16 @@ const LanguageSelector = ({
   const onChange = async (newLocale: string) => {
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (!userHasCustomised) {
-      const countryPreference = await getCountryLanguagePreference(newLocale, detectedCountry);
+      const preferenceCountry = getCountryCodeForPreferences(newLocale, detectedCountry);
+      const countryPreference = await getCountryLanguagePreference(newLocale, preferenceCountry);
       if (countryPreference) {
         dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
       }
     }
     logValueChange('locale', lang, newLocale);
 
-    await setLanguage(newLocale);
     setLocaleCookie(newLocale);
+    await setLanguage(newLocale);
 
     if (isLoggedIn()) {
       addOrUpdateUserPreference(
@@ -88,8 +91,8 @@ const LanguageSelector = ({
               text: t('undo'),
               primary: true,
               onClick: async () => {
-                await setLanguage(newLocale);
                 setLocaleCookie(newLocale);
+                await setLanguage(newLocale);
               },
             },
             {

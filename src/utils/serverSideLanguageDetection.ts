@@ -214,6 +214,37 @@ export const detectUserLanguageAndCountry = (
 };
 
 /**
+ * Determine which country code should be used when requesting default settings.
+ *
+ * Product rules:
+ * - English (or unsupported languages that fall back to English) should use the
+ *   actual detected country so we can serve country-specific defaults.
+ * - Supported non-English languages ignore the user's country and always use
+ *   the generic language defaults (US).
+ *
+ * This helper centralizes that logic so that both server- and client-side flows
+ * stay perfectly aligned.
+ *
+ * @param {string} language the language we want defaults for
+ * @param {string} detectedCountry the country detected
+ * @returns {string} the country code that should be sent to the API
+ */
+export const getCountryCodeForPreferences = (
+  language: string,
+  detectedCountry?: string,
+): string => {
+  const normalizedCountry = (detectedCountry || DEFAULT_VALUES.COUNTRY).toUpperCase();
+  const isEnglish = language === Language.EN;
+  const isSupportedLanguage = locales.includes(language);
+
+  if (isEnglish || !isSupportedLanguage) {
+    return normalizedCountry;
+  }
+
+  return DEFAULT_VALUES.COUNTRY;
+};
+
+/**
  * Helper function to check if user has manually selected a language
  *
  * Checks for the presence of NEXT_LOCALE cookie which Next.js sets when a user
@@ -361,28 +392,29 @@ export const performLanguageDetection = async (
       // 1. Validates the language/country combination for redirects
       // 2. Provides country preference data for the final locale
       const finalLocale = shouldRedirect ? detectedLanguage : locale || DEFAULT_VALUES.LANGUAGE;
+      const countryForPreferences = getCountryCodeForPreferences(finalLocale, detectedCountry);
       let countryLanguagePreference: CountryLanguagePreferenceResponse | undefined;
       let canRedirect = shouldRedirect; // Track if we can actually redirect
 
       try {
         countryLanguagePreference = await getCountryLanguagePreference(
           finalLocale,
-          detectedCountry,
+          countryForPreferences,
         );
         logInfo('Fetched country preference for final locale', {
           finalLocale,
-          detectedCountry,
+          detectedCountry: countryForPreferences,
           shouldRedirect,
           countryLanguagePreference,
         });
       } catch (error) {
-        handleCountryPreferenceError(error, finalLocale, detectedCountry, pagePath);
+        handleCountryPreferenceError(error, finalLocale, countryForPreferences, pagePath);
         // If API fails and we were planning to redirect, we can't redirect anymore
         if (shouldRedirect) {
           canRedirect = false;
           logInfo('Redirect disabled due to API failure', {
             detectedLanguage,
-            detectedCountry,
+            detectedCountry: countryForPreferences,
           });
         }
       }

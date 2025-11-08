@@ -16,7 +16,10 @@ import { QuranFont, MushafLines, Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { addOrUpdateBulkUserPreferences } from '@/utils/auth/api';
 import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
-import { detectUserLanguageAndCountry } from '@/utils/serverSideLanguageDetection';
+import {
+  detectUserLanguageAndCountry,
+  getCountryCodeForPreferences,
+} from '@/utils/serverSideLanguageDetection';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
@@ -158,6 +161,9 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
 
     dispatch(setDetectedCountry(countryPreference.country));
     dispatch(setDetectedLanguage(countryPreference.userDeviceLanguage));
+    // Reapply default-state flags since programmatic updates trigger the customization middleware
+    dispatch(setIsUsingDefaultSettings(true));
+    dispatch(setUserHasCustomised(false));
   },
 );
 
@@ -175,8 +181,12 @@ export const resetDefaultSettings = createAsyncThunk<void, string, { state: Root
       undefined,
     );
 
+    const preferenceCountry = getCountryCodeForPreferences(detectedLanguage, detectedCountry);
     // Fetch the country language preference for the detected locale
-    const countryPreference = await getCountryLanguagePreference(detectedLanguage, detectedCountry);
+    const countryPreference = await getCountryLanguagePreference(
+      detectedLanguage,
+      preferenceCountry,
+    );
 
     // Apply the new default settings
     await dispatch(
