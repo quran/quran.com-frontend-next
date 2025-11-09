@@ -221,8 +221,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl());
+export const getUserProfile = async (): Promise<UserProfile> => {
+  return privateFetcher<UserProfile>(makeUserProfileUrl());
+};
 
 export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
   privateFetcher(makeUserFeatureFlagsUrl());

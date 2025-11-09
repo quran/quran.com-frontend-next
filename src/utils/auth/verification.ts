@@ -25,7 +25,7 @@ export const handleVerificationCodeSubmit = async (email: string, verificationCo
   // Persist the current settings to the user's profile
   // TODO: we should get the locale from Redux state instead of passing it as an argument.
   // @ts-ignore
-  store.dispatch(persistCurrentSettings());
+  await store.dispatch(persistCurrentSettings());
 
   return {
     response,

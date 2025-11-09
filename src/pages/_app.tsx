@@ -20,11 +20,11 @@ import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts'
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
 import ReduxProvider from '@/redux/Provider';
+import UserProfile from '@/types/auth/UserProfile';
 import { API_HOST } from '@/utils/api';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isCompleteProfile } from '@/utils/auth/complete-signup';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
@@ -47,11 +47,15 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { locale } = router;
   const { t } = useTranslation('common');
 
-  const isLoggedInUser = isLoggedIn();
-  const { data: userData } = useSWRImmutable(
-    isLoggedInUser ? makeUserProfileUrl() : null,
-    getUserProfile,
-  );
+  const { data: userData } = useSWRImmutable<UserProfile | null>(makeUserProfileUrl(), async () => {
+    try {
+      const profile = await getUserProfile();
+      return profile;
+    } catch (error) {
+      return null;
+    }
+  });
+  const isLoggedInUser = Boolean(userData);
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {

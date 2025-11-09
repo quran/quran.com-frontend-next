@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import AuthInput from './AuthInput';
 import styles from './login.module.scss';
@@ -16,8 +17,10 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { signIn } from '@/utils/auth/authRequests';
+import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import { logFormSubmission } from '@/utils/eventLogger';
 import { getForgotPasswordNavigationUrl } from '@/utils/navigation';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface FormData {
   email: string;
@@ -31,6 +34,8 @@ interface Props {
 const SignInForm: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
   const router = useRouter();
+  const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
@@ -72,6 +77,16 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         return getFormErrors(t, ErrorType.API, errors);
       }
 
+      try {
+        await syncPreferencesFromServer({
+          locale: router.locale || 'en',
+          dispatch,
+          audioService,
+        });
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to sync user preferences after login', error);
+      }
       router.push(redirect || '/');
       return undefined;
     } catch (error) {
