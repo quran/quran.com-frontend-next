@@ -34,7 +34,7 @@ const NavigationDrawerItem = ({
           <IconContainer
             icon={icon}
             size={IconSize.Xsmall}
-            color={IconColor.quaternary}
+            color={IconColor.accent}
             shouldFlipOnRTL={false}
           />
           <span className={classNames(styles.titleContainer, titleClassName)}>{title}</span>

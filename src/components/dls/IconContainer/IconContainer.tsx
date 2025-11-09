@@ -46,7 +46,6 @@ const IconContainer = ({
           (shouldForceSetColors && color === IconColor.default) || color === IconColor.primary,
         [styles.secondaryColor]: shouldForceSetColors && color === IconColor.secondary,
         [styles.tertiaryColor]: shouldForceSetColors && color === IconColor.tertiary,
-        [styles.quaternaryColor]: shouldForceSetColors && color === IconColor.quaternary,
         [styles.accentColor]: shouldForceSetColors && color === IconColor.accent,
         [styles.xsmallIcon]: size === IconSize.Xsmall,
         [styles.smallIcon]: size === IconSize.Small,
