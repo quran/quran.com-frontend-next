@@ -220,9 +220,34 @@
   @include breakpoints.smallerThanTablet {
     flex-shrink: 1;
     flex: 0;
+  }
 
+  @include breakpoints.smallerThanMobileL {
     .iconContainer {
       margin-inline-end: 0;
     }
+  }
+}
+
+.subscribeText {
+  display: inline;
+  @include breakpoints.smallerThanMobileL {
+    display: none;
+  }
+}
+
+.joinWhatsappText,
+.joinTelegramText {
+  display: inline;
+  @include breakpoints.smallerThanDesktop {
+    display: none;
+  }
+}
+
+.joinWhatsappMobileText,
+.joinTelegramMobileText {
+  display: none;
+  @include breakpoints.smallerThanDesktop {
+    display: inline;
   }
 }

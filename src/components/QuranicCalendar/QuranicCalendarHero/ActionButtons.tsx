@@ -8,7 +8,6 @@ import styles from './QuranicCalendarHero.module.scss';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
-import useIsMobile from '@/hooks/useIsMobile';
 import EmailIcon from '@/icons/email.svg';
 import QuestionMarkIcon from '@/icons/question-mark.svg';
 import TelegramIcon from '@/icons/telegram.svg';
@@ -60,10 +59,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
     );
   };
 
-  const isMobileBrowser = useIsMobile();
-
   const showAskQuestionButton = isLoggedIn && isSubscribed;
-  const subscribedText = isMobileBrowser && showAskQuestionButton ? '' : t('common:subscribed');
 
   return (
     <div className={styles.buttonContainer}>
@@ -84,7 +80,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             shouldForceSetColors={false}
             icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
           />
-          {isSubscribed ? subscribedText : t('common:subscribe')}
+
+          <span className={isSubscribed ? styles.subscribeText : undefined}>
+            {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
+          </span>
         </Button>
 
         {showAskQuestionButton && (
@@ -120,7 +119,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             shouldForceSetColors={false}
             icon={<WhatsappIcon />}
           />
-          {isMobileBrowser ? t('join-whatsapp-mobile') : t('join-whatsapp')}
+          <span className={styles.joinWhatsappText}>{t('join-whatsapp')}</span>
+          <span className={styles.joinWhatsappMobileText}>{t('join-whatsapp-mobile')}</span>
         </Button>
         <Button
           onClick={onJoinTelegram}
@@ -135,7 +135,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             shouldForceSetColors={false}
             icon={<TelegramIcon />}
           />
-          {isMobileBrowser ? t('join-telegram-mobile') : t('join-telegram')}
+          <span className={styles.joinTelegramText}>{t('join-telegram')}</span>
+          <span className={styles.joinTelegramMobileText}>{t('join-telegram-mobile')}</span>
         </Button>
       </div>
     </div>
