@@ -11,16 +11,7 @@ import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import {
-  getCorpusQuranUrl,
-  getLegacyQuranUrl,
-  getNuqayahUrl,
-  getQuranAndroidUrl,
-  getQuranIosUrl,
-  getQuranReflectUrl,
-  getQuranUrl,
-  getSunnahUrl,
-} from '@/utils/navigation';
+import { EXTERNAL_ROUTES, QURAN_URL } from '@/utils/navigation';
 
 interface OurProjectsCollapsibleProps {
   headerClassName?: string;
@@ -33,42 +24,42 @@ interface OurProjectsCollapsibleProps {
 const PROJECTS = [
   {
     title: 'Quran.com',
-    href: getQuranUrl(),
+    href: QURAN_URL,
     eventName: 'navigation_drawer_project_quran_com',
   },
   {
     title: 'Quran For Android',
-    href: getQuranAndroidUrl(),
+    href: EXTERNAL_ROUTES.QURAN_ANDROID,
     eventName: 'navigation_drawer_project_quran_android',
   },
   {
     title: 'Quran iOS',
-    href: getQuranIosUrl(),
+    href: EXTERNAL_ROUTES.QURAN_IOS,
     eventName: 'navigation_drawer_project_quran_ios',
   },
   {
     title: 'QuranReflect.com',
-    href: getQuranReflectUrl(),
+    href: EXTERNAL_ROUTES.QURAN_REFLECT,
     eventName: 'navigation_drawer_project_quran_reflect',
   },
   {
     title: 'Sunnah.com',
-    href: getSunnahUrl(),
+    href: EXTERNAL_ROUTES.SUNNAH,
     eventName: 'navigation_drawer_project_sunnah',
   },
   {
     title: 'Nuqayah.com',
-    href: getNuqayahUrl(),
+    href: EXTERNAL_ROUTES.NUQAYAH,
     eventName: 'navigation_drawer_project_nuqayah',
   },
   {
     title: 'Legacy.quran.com',
-    href: getLegacyQuranUrl(),
+    href: EXTERNAL_ROUTES.LEGACY_QURAN_COM,
     eventName: 'navigation_drawer_project_legacy',
   },
   {
     title: 'Corpus.quran.com',
-    href: getCorpusQuranUrl(),
+    href: EXTERNAL_ROUTES.CORPUS_QURAN_COM,
     eventName: 'navigation_drawer_project_corpus',
   },
 ];
@@ -114,7 +105,11 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
                 i18nKey="common:projects-desc"
                 components={{
                   link: (
-                    <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />
+                    <Link
+                      href={EXTERNAL_ROUTES.QURAN_FOUNDATION}
+                      variant={LinkVariant.Blend}
+                      isNewTab
+                    />
                   ),
                 }}
               />

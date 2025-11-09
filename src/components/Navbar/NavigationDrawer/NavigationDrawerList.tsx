@@ -13,7 +13,13 @@ import IconHeadphones from '@/icons/headphones.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getProfileNavigationUrl } from '@/utils/navigation';
+import {
+  ABOUT_US_URL,
+  getProfileNavigationUrl,
+  LEARNING_PLANS_URL,
+  RADIO_URL,
+  RECITERS_URL,
+} from '@/utils/navigation';
 
 interface NavigationDrawerListProps {
   accordionHeaderClassName?: string;
@@ -33,51 +39,56 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   const { t } = useTranslation('common');
   const continueReadingUrl = useGetContinueReadingUrl();
 
-  const onReadClick = () => logButtonClick('navigation_drawer_read');
-  const onLearnClick = () => logButtonClick('navigation_drawer_learn');
-  const onMyQuranClick = () => logButtonClick('navigation_drawer_my_quran');
-  const onRadioClick = () => logButtonClick('navigation_drawer_quran_radio');
-  const onRecitersClick = () => logButtonClick('navigation_drawer_reciters');
-  const onAboutClick = () => logButtonClick('navigation_drawer_about');
+  const ITEMS = [
+    {
+      title: t('read'),
+      icon: <IconHome />,
+      href: continueReadingUrl,
+      eventName: 'navigation_drawer_read',
+    },
+    {
+      title: t('learn'),
+      icon: <IconSchool />,
+      href: LEARNING_PLANS_URL,
+      eventName: 'navigation_drawer_learn',
+    },
+    {
+      title: t('my-quran'),
+      icon: <IconBookmark />,
+      href: getProfileNavigationUrl(),
+      eventName: 'navigation_drawer_my_quran',
+    },
+    {
+      title: t('quran-radio'),
+      icon: <IconHeadphones />,
+      href: RADIO_URL,
+      eventName: 'navigation_drawer_quran_radio',
+    },
+    {
+      title: t('reciters'),
+      icon: <IconHeadphones />,
+      href: RECITERS_URL,
+      eventName: 'navigation_drawer_reciters',
+    },
+    {
+      title: t('about'),
+      icon: <IconAbout />,
+      href: ABOUT_US_URL,
+      eventName: 'navigation_drawer_about',
+    },
+  ];
 
   return (
     <>
-      <NavigationDrawerItem
-        title={t('read')}
-        icon={<IconHome />}
-        href={continueReadingUrl}
-        onClick={onReadClick}
-      />
-      <NavigationDrawerItem
-        title={t('learn')}
-        icon={<IconSchool />}
-        href="/learning-plans"
-        onClick={onLearnClick}
-      />
-      <NavigationDrawerItem
-        title={t('my-quran')}
-        icon={<IconBookmark />}
-        href={getProfileNavigationUrl()}
-        onClick={onMyQuranClick}
-      />
-      <NavigationDrawerItem
-        title={t('quran-radio')}
-        icon={<IconHeadphones />}
-        href="/radio"
-        onClick={onRadioClick}
-      />
-      <NavigationDrawerItem
-        title={t('reciters')}
-        icon={<IconHeadphones />}
-        href="/reciters"
-        onClick={onRecitersClick}
-      />
-      <NavigationDrawerItem
-        title={t('about')}
-        icon={<IconAbout />}
-        href="/about-us"
-        onClick={onAboutClick}
-      />
+      {ITEMS.map((item) => (
+        <NavigationDrawerItem
+          key={item.eventName}
+          title={item.title}
+          icon={item.icon}
+          href={item.href}
+          onClick={() => logButtonClick(item.eventName)}
+        />
+      ))}
       <MoreMenuCollapsible
         headerClassName={accordionHeaderClassName}
         headerLeftClassName={accordionHeaderLeftClassName}

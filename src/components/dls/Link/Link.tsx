@@ -61,7 +61,7 @@ const Link: React.FC<LinkProps> = ({
       href={href}
       download={download}
       target={isNewTab ? '_blank' : undefined}
-      rel={isNewTab ? 'noopener noreferrer' : undefined}
+      rel={isNewTab ? 'noreferrer' : undefined}
       className={classNames(styles.base, className, {
         [styles.highlight]: variant === LinkVariant.Highlight,
         [styles.primary]: variant === LinkVariant.Primary,

@@ -11,7 +11,6 @@ export enum IconColor {
   primary = 'primary',
   secondary = 'secondary',
   tertiary = 'tertiary',
-  quaternary = 'quaternary',
   accent = 'accent',
 }
 export enum IconSize {
