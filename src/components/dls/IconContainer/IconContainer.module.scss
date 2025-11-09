@@ -29,17 +29,10 @@
   }
 }
 
-.quaternaryColor {
-  > svg path {
-    color: var(--color-daily-progress) !important;
-    fill: var(--color-daily-progress) !important;
-  }
-}
-
 .accentColor {
   > svg path {
-    color: var(--color-success-medium);
-    fill: var(--color-success-medium);
+    color: var(--color-daily-progress);
+    fill: var(--color-daily-progress);
   }
 }
 
