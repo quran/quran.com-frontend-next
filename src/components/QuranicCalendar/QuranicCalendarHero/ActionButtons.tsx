@@ -62,99 +62,82 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const isMobileBrowser = useIsMobile();
 
-  const socialButtons = (
-    <>
-      <Button
-        onClick={onJoinWhatsapp}
-        className={styles.button}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        href="https://whatsapp.com/channel/0029Vb8w7pTIt5rnEhqy1u1u"
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldForceSetColors={false}
-          icon={<WhatsappIcon />}
-        />
-        {isMobileBrowser ? t('join-whatsapp-mobile') : t('join-whatsapp')}
-      </Button>
-      <Button
-        onClick={onJoinTelegram}
-        className={styles.button}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        href="https://t.me/QuranInaYear"
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldForceSetColors={false}
-          icon={<TelegramIcon />}
-        />
-        {isMobileBrowser ? t('join-telegram-mobile') : t('join-telegram')}
-      </Button>
-    </>
-  );
-
   const showAskQuestionButton = isLoggedIn && isSubscribed;
   const subscribedText = isMobileBrowser && showAskQuestionButton ? '' : t('common:subscribed');
 
-  const subscribeButton = (
-    <>
-      <Button
-        onClick={onEnrollButtonClicked}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        isDisabled={isEnrolling}
-        className={classNames({
-          [styles.subscribeButtonSmall]: showAskQuestionButton && isMobileBrowser,
-          [styles.subscribeButton]: !showAskQuestionButton && isMobileBrowser,
-        })}
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldFlipOnRTL
-          shouldForceSetColors={false}
-          icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
-        />
-        {isSubscribed ? subscribedText : t('common:subscribe')}
-      </Button>
-
-      {showAskQuestionButton && (
+  return (
+    <div className={styles.buttonContainer}>
+      <div className={styles.subscribeButtonsGroup}>
         <Button
-          onClick={handleAskQuestionClick}
+          onClick={onEnrollButtonClicked}
           type={ButtonType.Success}
           shape={ButtonShape.Pill}
-          className={styles.button}
+          isDisabled={isEnrolling}
+          className={classNames(styles.subscribeButton, {
+            [styles.subscribeButtonSmall]: showAskQuestionButton,
+          })}
         >
           <IconContainer
             className={styles.iconContainer}
             size={IconSize.Small}
             shouldFlipOnRTL
             shouldForceSetColors={false}
-            icon={<QuestionMarkIcon />}
+            icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
           />
-          {t('ask-question')}
+          {isSubscribed ? subscribedText : t('common:subscribe')}
         </Button>
-      )}
-    </>
-  );
 
-  return (
-    <div className={styles.buttonContainer}>
-      {isMobileBrowser ? (
-        <div className={styles.subscribeButtonContainer}>{subscribeButton}</div>
-      ) : (
-        subscribeButton
-      )}
+        {showAskQuestionButton && (
+          <Button
+            onClick={handleAskQuestionClick}
+            type={ButtonType.Success}
+            shape={ButtonShape.Pill}
+            className={styles.button}
+          >
+            <IconContainer
+              className={styles.iconContainer}
+              size={IconSize.Small}
+              shouldFlipOnRTL
+              shouldForceSetColors={false}
+              icon={<QuestionMarkIcon />}
+            />
+            {t('ask-question')}
+          </Button>
+        )}
+      </div>
 
-      {isMobileBrowser ? (
-        <div className={styles.socialButtonsContainer}>{socialButtons}</div>
-      ) : (
-        socialButtons
-      )}
+      <div className={styles.socialButtonsGroup}>
+        <Button
+          onClick={onJoinWhatsapp}
+          className={styles.button}
+          type={ButtonType.Success}
+          shape={ButtonShape.Pill}
+          href="https://whatsapp.com/channel/0029Vb8w7pTIt5rnEhqy1u1u"
+        >
+          <IconContainer
+            className={styles.iconContainer}
+            size={IconSize.Small}
+            shouldForceSetColors={false}
+            icon={<WhatsappIcon />}
+          />
+          {isMobileBrowser ? t('join-whatsapp-mobile') : t('join-whatsapp')}
+        </Button>
+        <Button
+          onClick={onJoinTelegram}
+          className={styles.button}
+          type={ButtonType.Success}
+          shape={ButtonShape.Pill}
+          href="https://t.me/QuranInaYear"
+        >
+          <IconContainer
+            className={styles.iconContainer}
+            size={IconSize.Small}
+            shouldForceSetColors={false}
+            icon={<TelegramIcon />}
+          />
+          {isMobileBrowser ? t('join-telegram-mobile') : t('join-telegram')}
+        </Button>
+      </div>
     </div>
   );
 };

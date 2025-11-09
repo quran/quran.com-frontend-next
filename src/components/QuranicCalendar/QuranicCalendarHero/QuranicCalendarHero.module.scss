@@ -88,6 +88,43 @@
   }
 }
 
+.subscribeButtonsGroup {
+  display: flex;
+  gap: var(--spacing-medium3-px);
+  align-items: center;
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    gap: var(--spacing-small-px);
+  }
+}
+
+.socialButtonsGroup {
+  display: flex;
+  align-items: center;
+
+  column-gap: var(--spacing-medium3-px);
+  row-gap: var(--spacing-medium-px);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    column-gap: var(--spacing-small-px);
+    row-gap: var(--spacing-small-px);
+
+    & > * {
+      flex: 1;
+      inline-size: 100%;
+    }
+
+    .button {
+      inline-size: 100%;
+    }
+  }
+}
+
 .weekDisplay {
   background-color: var(--color-blue-buttons-and-icons);
   border-radius: var(--border-radius-circle-small);
@@ -172,46 +209,20 @@
   margin-inline-end: var(--spacing-small-px);
 }
 
-.socialButtonsContainer {
-  display: flex;
-  gap: var(--spacing-small-px);
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  inline-size: 100%;
-
-  & > * {
-    flex: 1;
-    inline-size: 100%;
-  }
-
-  .button {
-    inline-size: 100%;
-  }
-}
-
-.subscribeButtonContainer {
-  display: flex;
-  inline-size: 100%;
-
-  gap: var(--spacing-small-px);
-
-  & > * {
-    inline-size: 100%;
-    flex: 1;
-  }
-}
-
 .subscribeButton {
-  inline-size: 100%;
-  flex: 1;
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    flex: 1;
+  }
 }
 
 .subscribeButtonSmall {
-  flex-shrink: 1;
-  flex: 0;
+  @include breakpoints.smallerThanTablet {
+    flex-shrink: 1;
+    flex: 0;
 
-  .iconContainer {
-    margin-inline-end: 0;
+    .iconContainer {
+      margin-inline-end: 0;
+    }
   }
 }
