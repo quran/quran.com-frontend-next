@@ -23,6 +23,34 @@ interface MoreMenuCollapsibleProps {
   itemTitleClassName?: string;
 }
 
+const MENUS = [
+  {
+    title: 'developers',
+    icon: <IconArrowRight />,
+    href: DEVELOPERS_URL,
+    eventName: 'navigation_drawer_developers',
+  },
+  {
+    title: 'product-updates',
+    icon: <IconArrowRight />,
+    href: PRODUCT_UPDATES_URL,
+    eventName: 'navigation_drawer_product_updates',
+  },
+  {
+    title: 'feedback',
+    icon: <IconArrowRight />,
+    href: EXTERNAL_ROUTES.FEEDBACK,
+    eventName: 'navigation_drawer_feedback',
+    isExternalLink: true,
+  },
+  {
+    title: 'help',
+    icon: <IconArrowRight />,
+    href: SUPPORT_URL,
+    eventName: 'navigation_drawer_help',
+  },
+];
+
 const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
   headerClassName,
   headerLeftClassName,
@@ -38,34 +66,6 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
     }
     logEvent('navigation_drawer_more_menu_collapsed');
   };
-
-  const MENUS = [
-    {
-      title: t('developers'),
-      icon: <IconArrowRight />,
-      href: DEVELOPERS_URL,
-      eventName: 'navigation_drawer_developers',
-    },
-    {
-      title: t('product-updates'),
-      icon: <IconArrowRight />,
-      href: PRODUCT_UPDATES_URL,
-      eventName: 'navigation_drawer_product_updates',
-    },
-    {
-      title: t('feedback'),
-      icon: <IconArrowRight />,
-      href: EXTERNAL_ROUTES.FEEDBACK,
-      eventName: 'navigation_drawer_feedback',
-      isExternalLink: true,
-    },
-    {
-      title: t('help'),
-      icon: <IconArrowRight />,
-      href: SUPPORT_URL,
-      eventName: 'navigation_drawer_help',
-    },
-  ];
 
   return (
     <Collapsible
@@ -85,7 +85,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
             {MENUS.map((menu) => (
               <NavigationDrawerItem
                 key={menu.eventName}
-                title={menu.title}
+                title={t(menu.title)}
                 titleClassName={itemTitleClassName}
                 icon={menu.icon}
                 href={menu.href}
