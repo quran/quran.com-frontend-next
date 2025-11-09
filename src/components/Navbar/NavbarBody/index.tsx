@@ -74,42 +74,30 @@ const NavbarBody: React.FC = () => {
       </div>
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
-          {!loggedIn && (
-            <>
-              <ProfileAvatarButton />
-            </>
-          )}
-          <>
-            <Button
-              tooltip={t('search.title')}
-              variant={ButtonVariant.Ghost}
-              onClick={openSearchDrawer}
-              shape={ButtonShape.Circle}
-              shouldFlipOnRTL={false}
-              ariaLabel={t('search.title')}
-            >
-              <IconSearch />
-            </Button>
-            <SearchDrawer />
-            <SidebarNavigation />
-          </>
-          {loggedIn && (
-            <>
-              <ProfileAvatarButton />
-            </>
-          )}
-          <>
-            <Button
-              tooltip={t('menu')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={openNavigationDrawer}
-              ariaLabel={t('aria.nav-drawer-open')}
-            >
-              <IconMenu />
-            </Button>
-            <NavigationDrawer />
-          </>
+          {!loggedIn && <ProfileAvatarButton />}
+          <Button
+            tooltip={t('search.title')}
+            variant={ButtonVariant.Ghost}
+            onClick={openSearchDrawer}
+            shape={ButtonShape.Circle}
+            shouldFlipOnRTL={false}
+            ariaLabel={t('search.title')}
+          >
+            <IconSearch />
+          </Button>
+          <SearchDrawer />
+          <SidebarNavigation />
+          {loggedIn && <ProfileAvatarButton />}
+          <Button
+            tooltip={t('menu')}
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            onClick={openNavigationDrawer}
+            ariaLabel={t('aria.nav-drawer-open')}
+          >
+            <IconMenu />
+          </Button>
+          <NavigationDrawer />
         </div>
       </div>
     </div>

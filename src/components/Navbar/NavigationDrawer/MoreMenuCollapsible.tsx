@@ -9,6 +9,12 @@ import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import {
+  DEVELOPERS_URL,
+  EXTERNAL_ROUTES,
+  PRODUCT_UPDATES_URL,
+  SUPPORT_URL,
+} from '@/utils/navigation';
 
 interface MoreMenuCollapsibleProps {
   headerClassName?: string;
@@ -33,10 +39,33 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
     logEvent('navigation_drawer_more_menu_collapsed');
   };
 
-  const onDevelopersClick = () => logButtonClick('navigation_drawer_developers');
-  const onProductUpdatesClick = () => logButtonClick('navigation_drawer_product_updates');
-  const onFeedbackClick = () => logButtonClick('navigation_drawer_feedback');
-  const onHelpClick = () => logButtonClick('navigation_drawer_help');
+  const MENUS = [
+    {
+      title: t('developers'),
+      icon: <IconArrowRight />,
+      href: DEVELOPERS_URL,
+      eventName: 'navigation_drawer_developers',
+    },
+    {
+      title: t('product-updates'),
+      icon: <IconArrowRight />,
+      href: PRODUCT_UPDATES_URL,
+      eventName: 'navigation_drawer_product_updates',
+    },
+    {
+      title: t('feedback'),
+      icon: <IconArrowRight />,
+      href: EXTERNAL_ROUTES.FEEDBACK,
+      eventName: 'navigation_drawer_feedback',
+      isExternalLink: true,
+    },
+    {
+      title: t('help'),
+      icon: <IconArrowRight />,
+      href: SUPPORT_URL,
+      eventName: 'navigation_drawer_help',
+    },
+  ];
 
   return (
     <Collapsible
@@ -53,35 +82,17 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
 
         return (
           <div className={contentClassName}>
-            <NavigationDrawerItem
-              title={t('developers')}
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="/developers"
-              onClick={onDevelopersClick}
-            />
-            <NavigationDrawerItem
-              title={t('product-updates')}
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="/product-updates"
-              onClick={onProductUpdatesClick}
-            />
-            <NavigationDrawerItem
-              title={t('feedback')}
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="https://feedback.quran.com"
-              isExternalLink
-              onClick={onFeedbackClick}
-            />
-            <NavigationDrawerItem
-              title={t('help')}
-              titleClassName={itemTitleClassName}
-              icon={<IconArrowRight />}
-              href="/support"
-              onClick={onHelpClick}
-            />
+            {MENUS.map((menu) => (
+              <NavigationDrawerItem
+                key={menu.eventName}
+                title={menu.title}
+                titleClassName={itemTitleClassName}
+                icon={menu.icon}
+                href={menu.href}
+                onClick={() => logButtonClick(menu.eventName)}
+                isExternalLink={menu.isExternalLink}
+              />
+            ))}
           </div>
         );
       }}
