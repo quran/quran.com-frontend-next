@@ -91,8 +91,8 @@
   "remaining": "Remaining for today",
   "remaining-base": "Remaining",
   "remaining-days": {
-    "one": "{{days}} day remaining",
-    "other": "{{days}} days remaining"
+    "one": "<span>{{days}}</span> day remaining",
+    "other": "<span>{{days}}</span> days remaining"
   },
   "set-a-new-goal": "Set a new Goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
@@ -111,10 +111,10 @@
   },
   "todays-goal": "Today's Goal",
   "view-progress": "View Progress",
-  "week-progress": "This week's progress",
+  "week-progress": "This Week's Progress",
   "x-days": {
-    "one": "{{days}} day",
-    "other": "{{days}} days"
+    "one": "<span>{{days}}</span> Day streak",
+    "other": "<span>{{days}}</span> Days streak"
   },
   "x-days-streak": "<p>{{days}}</p> <span>day streak</span>",
   "x-hours": {

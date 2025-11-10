@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .inputs {
   width: 100%;
 }
@@ -44,4 +46,24 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall);
+}
+
+.footerCtaContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+}
+
+.editGoalButton {
+  background-color: var(--color-streaks-dark);
+  border: none;
+  border-radius: calc(var(--border-radius-default) * 3);
+
+  @include breakpoints.tablet {
+    background-color: initial;
+    border: initial;
+    border-radius: initial;
+    color: var(--color-streaks-dark);
+  }
 }
