@@ -33,6 +33,9 @@ const subscribeButtonIcon = (isLoading: boolean, isSubscribed: boolean) => {
   return <EmailIcon />;
 };
 
+const ASK_QUESTION_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSdVxKk4WtikWCIYcfvFdXy3TFcRCUB2zDEddSyKjFukDwTvzA/viewform';
+
 const ActionButtons: React.FC<ActionButtonsProps> = ({
   isSubscribed,
   isSubscriptionLoading,
@@ -53,10 +56,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   const handleAskQuestionClick = () => {
     logButtonClick('quran_calendar_ask_question');
 
-    window.open(
-      'https://docs.google.com/forms/d/e/1FAIpQLSdVxKk4WtikWCIYcfvFdXy3TFcRCUB2zDEddSyKjFukDwTvzA/viewform',
-      '_blank',
-    );
+    window.open(ASK_QUESTION_FORM_URL, '_blank');
   };
 
   const showAskQuestionButton = isLoggedIn && isSubscribed;
