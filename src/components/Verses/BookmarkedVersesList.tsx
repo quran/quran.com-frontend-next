@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -42,12 +43,11 @@ const BookmarkedVersesList = () => {
 
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
 
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+
   const { data, isValidating, mutate } = useSWR<Bookmark[]>(
     isLoggedIn() // only fetch the data when user is loggedIn
-      ? makeBookmarksUrl(
-          getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-          BOOKMARKS_API_LIMIT,
-        )
+      ? makeBookmarksUrl(mushafId, BOOKMARKS_API_LIMIT)
       : null,
     privateFetcher,
   );
@@ -94,11 +94,6 @@ const BookmarkedVersesList = () => {
       deleteBookmarkById(selectedBookmark.id)
         .then(() => {
           mutate();
-
-          const mushafId = getMushafId(
-            quranReaderStyles.quranFont,
-            quranReaderStyles.mushafLines,
-          ).mushaf;
 
           cache.delete(
             makeBookmarkUrl(
