@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+/* eslint-disable max-lines, react-func/max-lines-per-function */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
 import BookmarkedVersesListSkeleton from './BookmarkedVesesListSkeleton';
@@ -16,9 +16,14 @@ import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
 import { deleteBookmarkById, privateFetcher } from '@/utils/auth/api';
-import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
+import {
+  makeBookmarkCollectionsUrl,
+  makeBookmarksUrl,
+  makeBookmarkUrl,
+} from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
@@ -31,6 +36,7 @@ const BookmarkedVersesList = () => {
 
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const dispatch = useDispatch();
+  const { cache } = useSWRConfig();
 
   const toast = useToast();
 
@@ -73,6 +79,7 @@ const BookmarkedVersesList = () => {
 
   const onBookmarkDeleted = (verseKey: string) => {
     logButtonClick('bookmarked_verses_list_delete');
+
     if (isLoggedIn()) {
       const selectedBookmark = data.find((bookmark) => {
         const [chapter, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -82,9 +89,34 @@ const BookmarkedVersesList = () => {
         );
       });
 
+      if (!selectedBookmark) return;
+
       deleteBookmarkById(selectedBookmark.id)
         .then(() => {
           mutate();
+
+          const mushafId = getMushafId(
+            quranReaderStyles.quranFont,
+            quranReaderStyles.mushafLines,
+          ).mushaf;
+
+          cache.delete(
+            makeBookmarkUrl(
+              mushafId,
+              selectedBookmark.key,
+              BookmarkType.Ayah,
+              selectedBookmark.verseNumber,
+            ),
+          );
+
+          cache.delete(
+            makeBookmarkCollectionsUrl(
+              mushafId,
+              selectedBookmark.key,
+              BookmarkType.Ayah,
+              selectedBookmark.verseNumber,
+            ),
+          );
         })
         .catch(() => {
           toast(t('common:error.general'), {
