@@ -12,6 +12,11 @@
     background: var(--shade-0);
     border-inline-start: 3px solid var(--color-qdc-blue);
     border-radius: 0px var(--spacing-small-px) var(--spacing-small-px) 0px;
+
+    // Fix verse word alignment for Arabic pages
+    [class*="plainVerseWordContainer"] {
+        margin-block-start: var(--spacing-medium);
+    }
 }
 
 .verseTranslation {
