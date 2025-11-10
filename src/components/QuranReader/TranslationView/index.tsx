@@ -96,11 +96,14 @@ const TranslationView = ({
 
   const itemContentRenderer = (verseIdx: number) => {
     if (verseIdx === versesCount) {
+      const resolvedCurrentPageNumber =
+        quranReaderDataType === QuranReaderDataType.Page ? Number(resourceId) : undefined;
       return (
         <EndOfScrollingControls
           quranReaderDataType={quranReaderDataType}
           lastVerse={verses[verses.length - 1]}
           initialData={initialData}
+          currentPageNumber={resolvedCurrentPageNumber}
         />
       );
     }

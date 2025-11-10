@@ -24,12 +24,14 @@ interface Props {
   quranReaderDataType: QuranReaderDataType;
   lastVerse: Verse;
   initialData: VersesResponse;
+  currentPageNumber?: number;
 }
 
 const EndOfScrollingControls: React.FC<Props> = ({
   quranReaderDataType,
   lastVerse,
   initialData,
+  currentPageNumber,
 }) => {
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
@@ -54,7 +56,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <VerseControls lastVerse={lastVerse} />
           )}
           {quranReaderDataType === QuranReaderDataType.Page && (
-            <PageControls lastVerse={lastVerse} />
+            <PageControls lastVerse={lastVerse} currentPageNumber={currentPageNumber} />
           )}
           {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
           {quranReaderDataType === QuranReaderDataType.Rub && <RubControls lastVerse={lastVerse} />}
