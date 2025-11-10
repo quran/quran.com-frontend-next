@@ -96,6 +96,14 @@
   @include breakpoints.smallerThanTablet {
     inline-size: 100%;
     gap: var(--spacing-small-px);
+
+    a {
+      flex: 1;
+
+      .askQuestionButton {
+        inline-size: 100%;
+      }
+    }
   }
 }
 
@@ -200,7 +208,6 @@
 
   @include breakpoints.smallerThanTablet {
     flex: 1;
-    padding: var(--spacing-medium-px) var(--spacing-medium2-px);
     text-align: center;
   }
 }
@@ -218,7 +225,6 @@
 
 .subscribeButtonSmall {
   @include breakpoints.smallerThanTablet {
-    flex-shrink: 1;
     flex: 0;
   }
 

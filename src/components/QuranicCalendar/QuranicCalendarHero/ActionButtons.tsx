@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QuranicCalendarHero.module.scss';
@@ -14,6 +15,11 @@ import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import {
+  ASK_QUESTION_FORM_URL,
+  TELEGRAM_CHANNEL_URL,
+  WHATSAPP_CHANNEL_URL,
+} from '@/utils/externalLinks';
 
 interface ActionButtonsProps {
   isSubscribed: boolean;
@@ -22,6 +28,40 @@ interface ActionButtonsProps {
   onEnrollButtonClicked: () => void;
   isLoggedIn?: boolean;
 }
+
+interface SocialButton {
+  name: 'whatsapp' | 'telegram';
+  icon: React.ComponentType;
+  url: string;
+  eventKey: string;
+}
+
+const SUCCESS_PILL_BUTTON_PROPS = {
+  type: ButtonType.Success,
+  shape: ButtonShape.Pill,
+};
+
+const ICON_CONTAINER_PROPS = {
+  className: styles.iconContainer,
+  size: IconSize.Small,
+  shouldFlipOnRTL: true,
+  shouldForceSetColors: false,
+};
+
+const SOCIAL_BUTTONS: SocialButton[] = [
+  {
+    name: 'whatsapp',
+    icon: WhatsappIcon,
+    url: WHATSAPP_CHANNEL_URL,
+    eventKey: 'quranic_calendar_join_whatsapp',
+  },
+  {
+    name: 'telegram',
+    icon: TelegramIcon,
+    url: TELEGRAM_CHANNEL_URL,
+    eventKey: 'quranic_calendar_join_telegram',
+  },
+];
 
 const subscribeButtonIcon = (isLoading: boolean, isSubscribed: boolean) => {
   if (isLoading) {
@@ -33,9 +73,6 @@ const subscribeButtonIcon = (isLoading: boolean, isSubscribed: boolean) => {
   return <EmailIcon />;
 };
 
-const ASK_QUESTION_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSdVxKk4WtikWCIYcfvFdXy3TFcRCUB2zDEddSyKjFukDwTvzA/viewform';
-
 const ActionButtons: React.FC<ActionButtonsProps> = ({
   isSubscribed,
   isSubscriptionLoading,
@@ -45,99 +82,60 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 }) => {
   const { t } = useTranslation('quranic-calendar');
 
-  const onJoinWhatsapp = () => {
-    logButtonClick('quranic_calendar_join_whatsapp');
-  };
-
-  const onJoinTelegram = () => {
-    logButtonClick('quranic_calendar_join_telegram');
-  };
-
-  const handleAskQuestionClick = () => {
-    logButtonClick('quran_calendar_ask_question');
-
-    window.open(ASK_QUESTION_FORM_URL, '_blank');
-  };
-
   const showAskQuestionButton = isLoggedIn && isSubscribed;
 
   return (
     <div className={styles.buttonContainer}>
       <div className={styles.subscribeButtonsGroup}>
         <Button
+          {...SUCCESS_PILL_BUTTON_PROPS}
           onClick={onEnrollButtonClicked}
-          type={ButtonType.Success}
-          shape={ButtonShape.Pill}
           isDisabled={isEnrolling}
           className={classNames(styles.subscribeButton, {
             [styles.subscribeButtonSmall]: showAskQuestionButton,
           })}
         >
           <IconContainer
-            className={styles.iconContainer}
-            size={IconSize.Small}
-            shouldFlipOnRTL
-            shouldForceSetColors={false}
+            {...ICON_CONTAINER_PROPS}
             icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
           />
 
-          <span className={isSubscribed ? styles.subscribeText : undefined}>
+          <span className={classNames({ [styles.subscribeText]: isSubscribed })}>
             {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
           </span>
         </Button>
 
         {showAskQuestionButton && (
           <Button
-            onClick={handleAskQuestionClick}
-            type={ButtonType.Success}
-            shape={ButtonShape.Pill}
-            className={styles.button}
+            {...SUCCESS_PILL_BUTTON_PROPS}
+            href={ASK_QUESTION_FORM_URL}
+            isNewTab
+            onClick={() => logButtonClick('quran_calendar_ask_question')}
+            className={classNames(styles.button, styles.askQuestionButton)}
           >
-            <IconContainer
-              className={styles.iconContainer}
-              size={IconSize.Small}
-              shouldFlipOnRTL
-              shouldForceSetColors={false}
-              icon={<QuestionMarkIcon />}
-            />
+            <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
             {t('ask-question')}
           </Button>
         )}
       </div>
 
       <div className={styles.socialButtonsGroup}>
-        <Button
-          onClick={onJoinWhatsapp}
-          className={styles.button}
-          type={ButtonType.Success}
-          shape={ButtonShape.Pill}
-          href="https://whatsapp.com/channel/0029Vb8w7pTIt5rnEhqy1u1u"
-        >
-          <IconContainer
-            className={styles.iconContainer}
-            size={IconSize.Small}
-            shouldForceSetColors={false}
-            icon={<WhatsappIcon />}
-          />
-          <span className={styles.joinWhatsappText}>{t('join-whatsapp')}</span>
-          <span className={styles.joinWhatsappMobileText}>{t('join-whatsapp-mobile')}</span>
-        </Button>
-        <Button
-          onClick={onJoinTelegram}
-          className={styles.button}
-          type={ButtonType.Success}
-          shape={ButtonShape.Pill}
-          href="https://t.me/QuranInaYear"
-        >
-          <IconContainer
-            className={styles.iconContainer}
-            size={IconSize.Small}
-            shouldForceSetColors={false}
-            icon={<TelegramIcon />}
-          />
-          <span className={styles.joinTelegramText}>{t('join-telegram')}</span>
-          <span className={styles.joinTelegramMobileText}>{t('join-telegram-mobile')}</span>
-        </Button>
+        {SOCIAL_BUTTONS.map(({ name, icon: Icon, url, eventKey }) => (
+          <Button
+            {...SUCCESS_PILL_BUTTON_PROPS}
+            key={name}
+            href={url}
+            isNewTab
+            onClick={() => logButtonClick(eventKey)}
+            className={styles.button}
+          >
+            <IconContainer {...ICON_CONTAINER_PROPS} icon={<Icon />} />
+            <span className={styles[`join${capitalize(name)}Text`]}>{t(`join-${name}`)}</span>
+            <span className={styles[`join${capitalize(name)}MobileText`]}>
+              {t(`join-${name}-mobile`)}
+            </span>
+          </Button>
+        ))}
       </div>
     </div>
   );
