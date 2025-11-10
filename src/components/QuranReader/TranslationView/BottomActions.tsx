@@ -48,7 +48,10 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const questionsData = usePageQuestions();
   const hasQuestions = questionsData?.[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
+  // Use toUpperCase() to handle inconsistent casing from the API (e.g., 'cLARIFICATION' vs 'CLARIFICATION')
+  const isClarificationQuestion = !!Object.entries(questionsData?.[verseKey]?.types || {}).some(
+    ([type, count]) => type.toUpperCase() === QuestionType.CLARIFICATION && count > 0,
+  );
   const isMobile = useIsMobile(MobileSizeVariant.SMALL);
   // Modal state using enum
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
