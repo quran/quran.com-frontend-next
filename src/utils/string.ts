@@ -72,3 +72,12 @@ export const formatVerseReferencesToLinks = (text: string): string => {
     (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
   );
 };
+
+/**
+ * Count the number of words in a text string.
+ *
+ * @param {string} text
+ * @returns {number}
+ */
+export const getWordCount = (text: string): number =>
+  text.trim().split(/\s+/).filter(Boolean).length;
