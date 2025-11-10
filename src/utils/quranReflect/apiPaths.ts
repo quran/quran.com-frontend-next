@@ -20,13 +20,10 @@ const ensureAbsoluteUrl = (url: string): string => {
 };
 
 /**
- * Resolves the base URL to use for API requests to Quran Reflect, going through the proxy.
- * The resolution order is as follows:
- * 1. If NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL is set, use that.
- * 2. If APP_BASE_URL, NEXT_PUBLIC_APP_BASE_URL, SITE_URL, or NEXT_PUBLIC_SITE_URL is set, use that.
- * 3. If VERCEL_URL or NEXT_PUBLIC_VERCEL_URL is set, use that.
- * 4. Otherwise, default to localhost with the appropriate port.
- * @returns {string} The resolved base URL.
+ * Resolves the app's base URL from environment variables.
+ * Checks NEXT_PUBLIC_APP_BASE_URL, NEXT_PUBLIC_SITE_URL, APP_BASE_URL,
+ * then Vercel URLs, finally defaulting to localhost with PORT.
+ * @returns {string} The resolved app base URL without trailing slash.
  */
 const resolveAppBaseUrl = (): string => {
   const explicitBase =
@@ -42,6 +39,12 @@ const resolveAppBaseUrl = (): string => {
   return `http://localhost:${port}`.replace(/\/$/, '');
 };
 
+/**
+ * Resolves the base URL for Quran Reflect API requests through the proxy.
+ * Uses NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL if set,
+ * otherwise constructs the proxy URL using the app base URL.
+ * @returns {string} The resolved base URL.
+ */
 const getProxyBaseUrl = (): string => {
   const override = process.env.NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL;
   if (override) return ensureAbsoluteUrl(override).replace(/\/$/, '');
@@ -72,11 +75,7 @@ export const makeAyahReflectionsUrl = ({
       ? reflectionLanguages.map((code) => code?.split('-')[0]?.toLowerCase())
       : [normalizedLocale];
   const languageIds = Array.from(
-    new Set(
-      isoCodes
-        .map((code) => localeToQuranReflectLanguageID(code))
-        .filter((id): id is number => typeof id === 'number'),
-    ),
+    new Set(isoCodes.map((code) => localeToQuranReflectLanguageID(code))),
   );
 
   return makeQuranReflectApiUrl('posts/feed', {

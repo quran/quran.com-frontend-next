@@ -191,9 +191,13 @@ class LocalizationTestHelper {
     userDeviceLanguage: string,
     country: string,
   ): any {
+    // Normalize inputs
+    const normalizedLanguage = (userDeviceLanguage || 'en').toLowerCase();
+    const normalizedCountry = (country || 'US').toUpperCase();
+
     // Apply business logic: For non-English languages, ignore country and use US
-    const isEnglish = userDeviceLanguage === 'en';
-    const effectiveCountry = isEnglish ? country : 'US';
+    const isEnglish = normalizedLanguage === 'en';
+    const effectiveCountry = isEnglish ? normalizedCountry : 'US';
 
     // Mock data based on language and country combinations
     const mockDataMap: Record<string, any> = {};
@@ -203,22 +207,35 @@ class LocalizationTestHelper {
       mockDataMap[newKey] = value;
     }
 
-    const key = `${userDeviceLanguage.toUpperCase()}_${effectiveCountry.toUpperCase()}`;
+    const key = `${normalizedLanguage.toUpperCase()}_${effectiveCountry}`;
     const mockData = mockDataMap[key];
 
     if (mockData) {
       return mockData;
     }
 
-    // Default fallback
-    return {
-      country: effectiveCountry || 'US',
-      userDeviceLanguage: userDeviceLanguage || 'en',
+    // Unsupported languages should fall back to English settings for the detected country
+    const englishCountryKey = `EN_${normalizedCountry}`;
+    if (!isEnglish && mockDataMap[englishCountryKey]) {
+      return mockDataMap[englishCountryKey];
+    }
+
+    // Final fallback: use English (US) defaults while preserving detected country in response
+    const defaultEnglishKey = 'EN_US';
+    const defaultEnglish = mockDataMap[defaultEnglishKey] || {
+      country: 'US',
+      userDeviceLanguage: 'en',
       defaultMushaf: { id: 1 },
       defaultTranslations: [{ id: 131 }],
       defaultTafsir: { id: 'en-tafisr-ibn-kathir' },
       defaultWbwLanguage: { isoCode: 'en' },
-      ayahReflectionsLanguages: [{ isoCode: 'en' }, { isoCode: 'ar' }, { isoCode: 'ur' }],
+      ayahReflectionsLanguages: [{ isoCode: 'en' }],
+    };
+
+    return {
+      ...defaultEnglish,
+      country: normalizedCountry,
+      userDeviceLanguage: 'en',
     };
   }
 

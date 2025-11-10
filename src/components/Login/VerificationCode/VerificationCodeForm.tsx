@@ -49,7 +49,15 @@ const VerificationCodeForm: FC<Props> = ({
       throw new Error(errors?.verificationCode || 'Invalid verification code');
     }
 
-    await dispatch(persistCurrentSettings());
+    try {
+      await dispatch(persistCurrentSettings());
+    } catch (persistError) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to persist current settings after verification', {
+        error: persistError,
+        timestamp: new Date().toISOString(),
+      });
+    }
 
     try {
       await syncPreferencesFromServer({

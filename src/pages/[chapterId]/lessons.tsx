@@ -118,7 +118,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
     try {
       const reflectionLanguageIsoCodes =
-        languageResult?.countryLanguagePreference?.ayahReflectionsLanguages?.map(
+        languageResult?.countryLanguagePreference?.qrReflectionLanguages?.map(
           (lang) => lang.isoCode,
         ) || [];
 
