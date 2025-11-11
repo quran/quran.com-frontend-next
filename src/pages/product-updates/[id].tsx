@@ -9,15 +9,12 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import SanityPage from '@/components/Sanity/Page';
-import { getSingleProductUpdatePage } from '@/components/Sanity/utils';
+import { SINGLE_PRODUCT_UPDATE_QUERY, getSingleProductUpdatePage } from '@/components/Sanity/utils';
 import Spinner from '@/dls/Spinner/Spinner';
-import { logError } from '@/lib/newrelic';
-import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { Course } from 'types/auth/Course';
 
 interface Props {
   page?: any[];
@@ -60,13 +57,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const { id = '' } = params;
 
     try {
-      const page = await executeGroqQuery(
-        '*[_type == "productUpdate" && slug.current == $slug][0]',
-        {
-          slug: id,
-        },
-        true,
-      );
+      const page = await getSingleProductUpdatePage(id as string);
       if (!page) {
         // @ts-ignore
         throw new Error('invalid slug');
@@ -83,6 +74,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         transactionName: 'getServerSideProps-ProductUpdatePage',
         metadata: {
           slug: id,
+          query: SINGLE_PRODUCT_UPDATE_QUERY,
         },
       });
       return {

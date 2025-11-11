@@ -9,13 +9,10 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
-import { getProductUpdatesPage } from '@/components/Sanity/utils';
-import { logError } from '@/lib/newrelic';
-import { executeGroqQuery } from '@/lib/sanity';
+import { PRODUCT_UPDATES_QUERY, getProductUpdatesPage } from '@/components/Sanity/utils';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { Course } from 'types/auth/Course';
 
 interface Props {
   pages?: any[];
@@ -43,32 +40,26 @@ const ProductUpdatesPage: NextPage<Props> = ({ pages }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/product-updates',
-  async (context) => {
-    try {
-      const pages = await executeGroqQuery(
-        '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
-      );
-      return {
-        props: {
-          pages,
-        },
-      };
-    } catch (error) {
-      logErrorToSentry(error, {
-        transactionName: 'getServerSideProps-ProductUpdatesPage',
-        metadata: {
-          query:
-            '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
-        },
-      });
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/product-updates', async () => {
+  try {
+    const pages = await getProductUpdatesPage();
+    return {
+      props: {
+        pages,
+      },
+    };
+  } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getServerSideProps-ProductUpdatesPage',
+      metadata: {
+        query: PRODUCT_UPDATES_QUERY,
+      },
+    });
 
-      return {
-        notFound: true,
-      };
-    }
-  },
-);
+    return {
+      notFound: true,
+    };
+  }
+});
 
 export default ProductUpdatesPage;
