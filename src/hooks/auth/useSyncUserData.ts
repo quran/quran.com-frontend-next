@@ -120,7 +120,14 @@ const useSyncUserData = () => {
       syncUserLocalData(requestPayload as Record<SyncDataType, any>)
         .then((response) => {
           const { lastSyncAt } = response;
-          mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
+          mutate(
+            makeUserProfileUrl(),
+            (data: UserProfile | null | undefined) => {
+              if (!data) return data;
+              return { ...data, lastSyncAt };
+            },
+            { revalidate: false },
+          );
           mutate(makeReadingSessionsUrl());
           setLastSyncAt(new Date(lastSyncAt));
         })

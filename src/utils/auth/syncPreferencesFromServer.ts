@@ -55,13 +55,17 @@ export const syncPreferencesFromServer = async ({
   }
 
   const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE]?.language;
+  const preferencesLocale = remoteLocale || locale;
+
+  dispatch(syncUserPreferences(userPreferences, preferencesLocale));
+  applyAudioPreferences(userPreferences, audioService);
+
   if (remoteLocale) {
     setLocaleCookie(remoteLocale);
-    await setLanguage(remoteLocale);
+    if (remoteLocale !== locale) {
+      await setLanguage(remoteLocale);
+    }
   }
-
-  dispatch(syncUserPreferences(userPreferences, locale));
-  applyAudioPreferences(userPreferences, audioService);
 
   return true;
 };
