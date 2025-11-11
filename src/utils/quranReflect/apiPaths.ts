@@ -1,64 +1,80 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { fetcher } from '@/api';
+import AyahReflectionsRequestParams from '@/types/QuranReflect/AyahReflectionsRequestParams';
+import AyahReflectionsResponse from '@/types/QuranReflect/AyahReflectionsResponse';
+import Tab from '@/types/QuranReflect/Tab';
 import stringify from '@/utils/qs-stringify';
-import AyahReflectionsRequestParams from 'types/QuranReflect/AyahReflectionsRequestParams';
-import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
-import Tab from 'types/QuranReflect/Tab';
-
-const STAGING_API_HOST = 'https://quranreflect.org';
-const PRODUCTION_API_HOST = 'https://quranreflect.com';
-const isProd = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+import { localeToQuranReflectLanguageID } from '@/utils/quranReflect/locale';
+import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 
 export const REFLECTION_POST_TYPE_ID = '1';
 export const LESSON_POST_TYPE_ID = '2';
 
-// env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
-export const API_HOST = isProd ? PRODUCTION_API_HOST : STAGING_API_HOST;
-
-export const makeQuranReflectApiUrl = (path: string, parameters = {}): string => {
-  const params = {
-    client_auth_token: process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN,
-    ...parameters,
-  };
-  return `${API_HOST}/${path}?${stringify(params)}`;
+export const makeQuranReflectApiUrl = (
+  path: string,
+  parameters: Record<string, unknown> = {},
+): string => {
+  const query = Object.keys(parameters).length ? `?${stringify(parameters)}` : '';
+  return getProxiedServiceUrl(QuranFoundationService.QURAN_REFLECT, `/${path}${query}`);
 };
 
-/* eslint-disable import/prefer-default-export */
+export const makeGetUserReflectionsUrl = ({
+  page = 1,
+  limit = 10,
+}: {
+  page: number;
+  limit?: number;
+}) => makeQuranReflectApiUrl(`posts/my-posts`, { page, limit });
+
 export const makeAyahReflectionsUrl = ({
   surahId,
   ayahNumber,
   locale,
   page = 1,
-  tab = Tab.MostPopular,
-  reviewed = false,
   postTypeIds = [],
 }: AyahReflectionsRequestParams) => {
-  const surahNumber = Number(surahId) + 1;
-  return makeQuranReflectApiUrl('posts.json', {
-    'q[filters_attributes][0][chapter_id]': surahNumber,
-    'q[filters_attributes][0][from]': ayahNumber,
-    'q[filters_attributes][0][to]': ayahNumber,
-    'q[filters_operation]': 'OR',
-    ...(postTypeIds.length > 0 && { 'q[post_type_ids]': postTypeIds.join(',') }),
+  return makeQuranReflectApiUrl('posts/feed', {
+    'filter[references][0][chapterId]': surahId,
+    'filter[references][0][from]': ayahNumber,
+    'filter[references][0][to]': ayahNumber,
+    ...(postTypeIds.length > 0 && { 'filter[postTypeIds]': postTypeIds.join(',') }),
     page,
-    tab,
-    lang: locale,
-    feed: true,
-    reviewed,
+    tab: Tab.Popular, // always reviewed content
+    languages: localeToQuranReflectLanguageID(locale),
+    'filter[verifiedOnly]': true,
   });
 };
 
 const makeReflectionViewsUrl = (postId: string) => {
-  return makeQuranReflectApiUrl(`v1/posts/${postId}/views`);
+  return makeQuranReflectApiUrl(`posts/viewed/${postId}`);
 };
 
-export const postReflectionViews = async (postId: string): Promise<AyahReflectionsResponse> =>
-  fetcher(makeReflectionViewsUrl(postId), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  });
+export const logPostView = async (postId: string): Promise<{ success: boolean }> =>
+  fetcher(makeReflectionViewsUrl(postId));
 
 export const getAyahReflections = async (
   ayahReflectionsUrl: string,
 ): Promise<AyahReflectionsResponse> => fetcher(ayahReflectionsUrl);
+
+const makeFollowUserUrl = (username: string) => makeQuranReflectApiUrl(`users/${username}/follow`);
+
+const makeIsUserFollowedUrl = (username: string) =>
+  makeQuranReflectApiUrl(`users/${username}/followed`);
+
+const putRequest = async <T>(url: string, body: Record<string, unknown>): Promise<T> => {
+  return fetcher(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+export const followUser = async (username: string) =>
+  putRequest<{ success: boolean }>(makeFollowUserUrl(username), {});
+
+export const isUserFollowed = async (username: string): Promise<{ followed: boolean }> => {
+  return fetcher(makeIsUserFollowedUrl(username));
+};

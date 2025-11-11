@@ -1,11 +1,35 @@
+import { logErrorToSentry } from '@/lib/sentry';
+import Room, { RoomType } from '@/types/QuranReflect/Room';
 import stringify from '@/utils/qs-stringify';
 
-const STAGING_API_HOST = 'https://quranreflect.org';
-const PRODUCTION_API_HOST = 'https://quranreflect.com';
+export const API_HOST = process.env.NEXT_PUBLIC_QURAN_REFLECT_URL;
 
-// env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
-export const API_HOST =
-  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
+const stripTrailingSlash = (value: string) => value.replace(/\/+$/, '');
+
+const buildSubdomainUrl = (baseUrl: string, subdomain: string) => {
+  const sanitizedBase = stripTrailingSlash(baseUrl || '');
+  const trimmedSubdomain = (subdomain || '').trim();
+
+  if (!sanitizedBase) return '';
+  if (!trimmedSubdomain) return sanitizedBase;
+
+  try {
+    const parsedUrl = new URL(sanitizedBase);
+    const portSegment = parsedUrl.port ? `:${parsedUrl.port}` : '';
+    const hostWithSubdomain = `${trimmedSubdomain}.${parsedUrl.hostname}${portSegment}`;
+    const pathSegment = parsedUrl.pathname === '/' ? '' : parsedUrl.pathname;
+    return `${parsedUrl.protocol}//${hostWithSubdomain}${pathSegment}${parsedUrl.search}${parsedUrl.hash}`;
+  } catch (error) {
+    logErrorToSentry(error as Error, {
+      metadata: { baseUrl, subdomain },
+      transactionName: 'getReflectionGroupLink',
+    });
+    const protocolMatch = sanitizedBase.match(/^(https?:\/\/)/i);
+    const protocol = protocolMatch?.[1] ?? 'https://';
+    const hostWithoutProtocol = sanitizedBase.replace(/^(https?:\/\/)/i, '');
+    return `${protocol}${trimmedSubdomain}.${hostWithoutProtocol}`;
+  }
+};
 
 const getQuranReflectFilteredVerseUrl = (chapterId: string, verseNumber: string, params) => {
   return `${API_HOST}?filters=${chapterId}:${verseNumber}&${stringify(params)}`;
@@ -32,3 +56,22 @@ export const getQuranReflectTagUrl = (tag: string) =>
 export const getQRNavigationUrl = () => `${API_HOST}`;
 
 export const getLearningPlanBannerUrl = (slug: string): string => `/learning-plans/${slug}`;
+
+/**
+ *  Get the link to a reflection group or page.
+ * If it's a page, return the subdomain link.
+ * If it's a group, return the groups link.
+ * @param {Room} groupOrPage - The reflection group or page object.
+ * @returns {string} - The link to the reflection group or page.
+ */
+export const getReflectionGroupLink = (groupOrPage: Room) => {
+  if (!API_HOST) return '';
+
+  if (groupOrPage?.roomType === RoomType.PAGE) {
+    return buildSubdomainUrl(API_HOST, groupOrPage?.subdomain ?? '');
+  }
+
+  const sanitizedBase = stripTrailingSlash(API_HOST);
+  const groupPath = groupOrPage?.url ? `/${groupOrPage.url}` : '';
+  return `${sanitizedBase}/groups${groupPath}`;
+};

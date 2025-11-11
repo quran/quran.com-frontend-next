@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AuthorInfo.module.scss';
@@ -9,10 +10,11 @@ import buildReferredVerseText from './buildReferredVerseText';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
+import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { AUTHOR_DEFAULT_IMAGE, getImageSrc } from '@/utils/media/utils';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
-import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
   authorUsername: string;
@@ -21,15 +23,14 @@ type Props = {
   isAuthorVerified: boolean;
   shouldShowReferredVerses: boolean;
   date: string;
-  verseReferences: ReflectionVerseReference[];
-  nonChapterVerseReferences: ReflectionVerseReference[];
+  verseReferences: Reference[];
+  nonChapterVerseReferences: Reference[];
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   onReferredVersesHeaderClicked: () => void;
 };
 
 const SEPARATOR = ' · ';
-const DEFAULT_IMAGE = '/images/quran-reflect.png';
 
 const AuthorInfo: React.FC<Props> = ({
   authorUsername,
@@ -45,21 +46,33 @@ const AuthorInfo: React.FC<Props> = ({
   reflectionGroupLink,
 }) => {
   const { t, lang } = useTranslation();
+  const [imageError, setImageError] = useState(false);
   const formattedDate = formatDateRelatively(new Date(date), lang);
 
   const onReflectAuthorClicked = () => {
     logButtonClick('reflection_item_author');
   };
 
-  const referredVerseText = useMemo(() => {
-    return buildReferredVerseText(verseReferences, lang, t);
-  }, [verseReferences, lang, t]);
+  const referredVerseText = useMemo(
+    () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
+    [verseReferences, nonChapterVerseReferences, lang, t],
+  );
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+  }, []);
 
   return (
     <div className={styles.authorInfo}>
       <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+        <Image
+          alt={authorName}
+          className={styles.avatar}
+          src={imageError ? AUTHOR_DEFAULT_IMAGE : getImageSrc(avatarUrl)}
+          width={40}
+          height={40}
+          onError={handleImageError}
+        />
       </Link>
       <div>
         <Link

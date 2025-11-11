@@ -50,6 +50,7 @@ import {
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
+  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -70,6 +71,8 @@ import {
   makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
+  makeGetNoteByIdUrl,
+  makeGetNotesByVerseUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
   makeGetUserCoursesCountUrl,
@@ -77,7 +80,6 @@ import {
   makeGoalUrl,
   makeLogoutUrl,
   makeNotesUrl,
-  makePublishNoteUrl,
   makeReadingSessionsUrl,
   makeRefreshTokenUrl,
   makeShortenUrlUrl,
@@ -517,6 +519,21 @@ export const publishNoteToQR = async (
   },
 ): Promise<{ success: boolean; postId: string }> =>
   postRequest(makePublishNoteUrl(noteId), payload);
+
+export const getNoteById = async (id: string): Promise<Note> =>
+  privateFetcher(makeGetNoteByIdUrl(id));
+
+export const getNotesByVerse = async (verseKey: string): Promise<Note[]> => {
+  addSentryBreadcrumb('notes.split', 'fetching notes by verse', { verseKey });
+
+  const notes: Note[] = await privateFetcher(makeGetNotesByVerseUrl(verseKey));
+
+  addSentryBreadcrumb('notes.split', 'fetched notes', {
+    notesCount: notes.length,
+  });
+
+  return notes;
+};
 
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
