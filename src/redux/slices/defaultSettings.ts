@@ -107,7 +107,7 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
   { state: RootState }
 >(
   `${SliceName.DEFAULT_SETTINGS}/setDefaultsFromCountryPreference`,
-  async ({ countryPreference, locale }, { dispatch }) => {
+  async ({ countryPreference, locale }, { dispatch, getState }) => {
     const {
       defaultMushaf,
       defaultTranslations,
@@ -156,7 +156,9 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
       dispatch(setAyahReflectionsLanguages(reflectionLanguages));
     }
 
-    dispatch(setDetectedCountry(countryPreference.country));
+    const state = getState();
+    const previousCountry = state.defaultSettings.detectedCountry;
+    dispatch(setDetectedCountry(countryPreference.country || previousCountry));
     dispatch(setDetectedLanguage(countryPreference.userDeviceLanguage));
   },
 );

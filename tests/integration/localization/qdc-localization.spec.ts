@@ -1557,7 +1557,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       expect(defaultSettings.userHasCustomised).toBe(false); // Should remain false
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
-      expect(translations.selectedTranslations).toContain(20); // Arabic default
+      expect(translations.selectedTranslations).toContain(131); // Arabic default
     });
 
     await test.step('Cleanup', async () => {
