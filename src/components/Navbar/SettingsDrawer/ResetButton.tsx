@@ -8,7 +8,8 @@ import styles from './ResetButton.module.scss';
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logErrorToSentry } from '@/lib/sentry';
-import { resetDefaultSettings } from '@/redux/slices/defaultSettings';
+import { persistCurrentSettings, resetDefaultSettings } from '@/redux/slices/defaultSettings';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
 
@@ -39,6 +40,11 @@ const ResetButton = () => {
     logButtonClick('reset_settings');
     try {
       await dispatch(resetDefaultSettings(lang)).then(unwrapResult);
+
+      // If logged in, persist the new defaults to the server
+      if (isLoggedIn()) {
+        await dispatch(persistCurrentSettings()).then(unwrapResult);
+      }
       cleanupUrlAndShowSuccess();
     } catch (e) {
       logErrorToSentry(e);
