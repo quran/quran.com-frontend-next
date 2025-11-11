@@ -11,6 +11,7 @@ import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { isValidVerseId } from '@/utils/validator';
 import { makeVerseKey } from '@/utils/verse';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import ScrollAlign from 'types/ScrollAlign';
 
 /**
@@ -37,6 +38,8 @@ const useScrollToVirtualizedTranslationView = (
   const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
   const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
+
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
@@ -124,6 +127,21 @@ const useScrollToVirtualizedTranslationView = (
     verseKeysQueue,
     chapterId,
   ]);
+
+  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons
+  useEffect(() => {
+    if (!audioService) return undefined;
+
+    const subscription = audioService.subscribe((state) => {
+      if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
+        scrollToBeginningOfVerseCell(state.context.ayahNumber);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [audioService, scrollToBeginningOfVerseCell]);
 
   // this effect clears the timeout when the component unmounts
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useContext, useCallback } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -8,6 +8,7 @@ import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader
 import { getMushafId } from '@/utils/api';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { getVerseNumberFromKey } from '@/utils/verse';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import { fetcher } from 'src/api';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -91,82 +92,115 @@ const useScrollToVirtualizedReadingView = (
     shouldScroll.current = true;
   }, [quranFont, mushafLines, startingVerse]);
 
-  useEffect(
+  /**
+   * Helper: scroll to a verse number. This consolidates the logic used in
+   * both the initial startingVerse effect and the audio player subscription.
+   *
+   * @param {number} verseNumber
+   * @param {boolean} useShouldScroll - when true, guard scrolling with shouldScroll ref
+   */
+  const scrollToVerse = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
-    () => {
-      // if we have the data of the page lookup
-      if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
-        // if startingVerse is present in the url
-        if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
-          const startingVerseNumber = Number(startingVerse);
-          // if the startingVerse is a valid integer and is above 1
-          if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-            const firstPageOfCurrentChapter = isUsingDefaultFont
-              ? initialData.verses[0].pageNumber
-              : Number(Object.keys(pagesVersesRange)[0]);
-            // search for the verse number in the already fetched verses first
-            const startFromVerseData = verses.find(
-              (verse) => verse.verseNumber === startingVerseNumber,
-            );
-            if (
-              startFromVerseData &&
-              shouldScroll.current === true &&
-              pagesVersesRange[startFromVerseData.pageNumber]
-            ) {
-              const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
-              virtuosoRef.current.scrollToIndex({
-                index: scrollToPageIndex,
-                align: getVersePositionWithinAMushafPage(
-                  `${chapterId}:${startingVerseNumber}`,
-                  startFromVerseData.pageNumber,
-                  pagesVersesRange,
-                ),
-              });
-              shouldScroll.current = false;
-            } else {
-              // get the page number by the verse key and the mushafId (because the page will be different for Indopak Mushafs)
-              fetcher(
-                makeVersesFilterUrl({
-                  filters: `${chapterId}:${startingVerseNumber}`,
-                  fields: `page_number`,
-                  ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-                }),
-              ).then((response: VersesResponse) => {
-                if (response.verses.length && shouldScroll.current === true) {
-                  const scrollToPageIndex =
-                    response.verses[0].pageNumber - firstPageOfCurrentChapter;
-                  if (pagesVersesRange[response.verses[0].pageNumber]) {
-                    virtuosoRef.current.scrollToIndex({
-                      index: scrollToPageIndex,
-                      align: getVersePositionWithinAMushafPage(
-                        `${chapterId}:${startingVerseNumber}`,
-                        response.verses[0].pageNumber,
-                        pagesVersesRange,
-                      ),
-                    });
-                    shouldScroll.current = false;
-                  }
-                }
-              });
-            }
+    async (verseNumber: number, useShouldScroll = false) => {
+      if (useShouldScroll && shouldScroll.current === false) return;
+      if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
+
+      const firstPageOfCurrentChapter = isUsingDefaultFont
+        ? initialData.verses[0].pageNumber
+        : Number(Object.keys(pagesVersesRange)[0]);
+
+      const startFromVerseData = verses.find((verse) => verse.verseNumber === verseNumber);
+
+      if (startFromVerseData && pagesVersesRange[startFromVerseData.pageNumber]) {
+        const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
+        virtuosoRef.current.scrollToIndex({
+          index: scrollToPageIndex,
+          align: getVersePositionWithinAMushafPage(
+            `${chapterId}:${verseNumber}`,
+            startFromVerseData.pageNumber,
+            pagesVersesRange,
+          ),
+        });
+        if (useShouldScroll) shouldScroll.current = false;
+        return;
+      }
+
+      // fallback: fetch page number for the verse and scroll if possible
+      fetcher(
+        makeVersesFilterUrl({
+          filters: `${chapterId}:${verseNumber}`,
+          fields: `page_number`,
+          ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+        }),
+      ).then((response: VersesResponse) => {
+        if (response.verses.length && (useShouldScroll ? shouldScroll.current === true : true)) {
+          const page = response.verses[0].pageNumber;
+          const scrollToPageIndex = page - firstPageOfCurrentChapter;
+          if (pagesVersesRange[page]) {
+            virtuosoRef.current.scrollToIndex({
+              index: scrollToPageIndex,
+              align: getVersePositionWithinAMushafPage(
+                `${chapterId}:${verseNumber}`,
+                page,
+                pagesVersesRange,
+              ),
+            });
+
+            if (useShouldScroll) shouldScroll.current = false;
           }
         }
-      }
+      });
     },
     [
-      chapterId,
-      initialData.verses,
-      isPagesLookupLoading,
-      isUsingDefaultFont,
-      pagesVersesRange,
-      quranReaderDataType,
-      quranReaderStyles.mushafLines,
-      quranReaderStyles.quranFont,
-      startingVerse,
-      verses,
       virtuosoRef,
+      pagesVersesRange,
+      isUsingDefaultFont,
+      initialData,
+      verses,
+      chapterId,
+      quranReaderStyles,
     ],
   );
+
+  useEffect(() => {
+    // if we have the data of the page lookup
+    if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
+      // if startingVerse is present in the url
+      if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
+        const startingVerseNumber = Number(startingVerse);
+        // if the startingVerse is a valid integer and is above 1
+        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
+          scrollToVerse(startingVerseNumber, true);
+        }
+      }
+    }
+  }, [
+    isPagesLookupLoading,
+    quranReaderDataType,
+    startingVerse,
+    virtuosoRef,
+    scrollToVerse,
+    pagesVersesRange,
+  ]);
+
+  const audioService = useContext(AudioPlayerMachineContext);
+
+  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user c licks buttons in audio player
+  useEffect(() => {
+    if (!audioService) return undefined;
+
+    const subscription = audioService.subscribe((state) => {
+      if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
+        const { ayahNumber } = state.context;
+        if (!Number.isInteger(ayahNumber) || ayahNumber <= 0) return;
+        scrollToVerse(ayahNumber, false);
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [audioService, virtuosoRef, scrollToVerse]);
 };
 
 export default useScrollToVirtualizedReadingView;
