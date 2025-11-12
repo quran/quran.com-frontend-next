@@ -1,15 +1,34 @@
 import React, { useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
+
 import QuranFontSection from './QuranFontSection';
 import ResetButton from './ResetButton';
-import ThemeSection from './ThemeSection';
+import styles from './SettingsBody.module.scss';
 import TranslationSection from './TranslationSection';
+import VersePreview from './VersePreview';
 import WordByWordSection from './WordByWordSection';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import Button from '@/dls/Button/Button';
+import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import { logButtonClick } from '@/utils/eventLogger';
 
-const SettingsBody = () => {
+export enum SettingsTab {
+  Arabic = 'arabic',
+  Translation = 'translation',
+  More = 'more',
+}
+
+interface SettingsBodyProps {
+  selectedTab: SettingsTab;
+}
+
+const SettingsBody = ({ selectedTab }: SettingsBodyProps) => {
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
+  const { t } = useTranslation('common');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let timeout: NodeJS.Timeout = null;
@@ -23,13 +42,23 @@ const SettingsBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStepIndex, isActive]);
 
+  const onDoneClicked = () => {
+    logButtonClick('settings_done');
+    dispatch(setIsSettingsDrawerOpen(false));
+  };
+
   return (
     <>
-      <ThemeSection />
-      <QuranFontSection />
-      <WordByWordSection />
-      <TranslationSection />
-      <ResetButton />
+      <div className={styles.versePreviewContainer}>
+        <VersePreview />
+      </div>
+      {selectedTab === SettingsTab.Arabic && <QuranFontSection />}
+      {selectedTab === SettingsTab.Translation && <TranslationSection />}
+      {selectedTab === SettingsTab.More && <WordByWordSection />}
+      <div className={styles.buttonsContainer}>
+        <ResetButton />
+        <Button onClick={onDoneClicked}>{t('done')}</Button>
+      </div>
     </>
   );
 };
