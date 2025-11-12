@@ -140,7 +140,25 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+};
+
+const sanitizeGetCoursesParams = (params?: GetCoursesQueryParams) => {
+  if (!params) return undefined;
+
+  const { myCourses, languages } = params;
+  const sanitizedLanguages = languages?.filter(Boolean);
+
+  return {
+    ...(typeof myCourses !== 'undefined' ? { myCourses } : {}),
+    ...(sanitizedLanguages && sanitizedLanguages.length ? { languages: sanitizedLanguages } : {}),
+  };
+};
+
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
+  makeUrl('courses', sanitizeGetCoursesParams(params));
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 

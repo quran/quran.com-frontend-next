@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
@@ -50,6 +51,7 @@ export const getStoreInitialState = (
       detectedLanguage: detectedLanguage || '',
       userHasCustomised: false,
       ayahReflectionsLanguages: [ReflectionLanguage.ENGLISH], // Default to English only
+      learningPlanLanguageIsoCodes: ['en'],
     },
     [SliceName.NOTIFICATIONS]: getNotificationsInitialState(locale as Language),
   } as unknown as RootState;
@@ -154,6 +156,21 @@ export const getStoreInitialState = (
       ayahReflectionsLanguages: reflectionLanguages,
     } as any;
   }
+
+  const learningPlanLanguageIsoCodes = (
+    countryPreference.learningPlanLanguages?.map((lang) => lang.isoCode) || ['en']
+  )
+    .map((code) => code?.trim().toLowerCase())
+    .filter((code, index, array) => code && array.indexOf(code) === index);
+
+  if (!learningPlanLanguageIsoCodes.length) {
+    learningPlanLanguageIsoCodes.push('en');
+  }
+
+  baseState[SliceName.DEFAULT_SETTINGS] = {
+    ...baseState[SliceName.DEFAULT_SETTINGS],
+    learningPlanLanguageIsoCodes,
+  } as any;
 
   // NOTE: Reciter will be handled in the AudioPlayer xstate service (see ReduxProvider).
 
