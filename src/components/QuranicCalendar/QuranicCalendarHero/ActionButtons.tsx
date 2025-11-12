@@ -48,6 +48,8 @@ const ICON_CONTAINER_PROPS = {
   shouldForceSetColors: false,
 };
 
+// NOTE: The 'name' property must match CSS class names in QuranicCalendarHero.module.scss
+// (e.g., name 'whatsapp' → .joinWhatsappText, .joinWhatsappMobileText)
 const SOCIAL_BUTTONS: SocialButton[] = [
   {
     name: 'whatsapp',
