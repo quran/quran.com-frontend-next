@@ -101,7 +101,7 @@ const useScrollToVirtualizedReadingView = (
    */
   const scrollToVerse = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
-    async (verseNumber: number, useShouldScroll = false) => {
+    (verseNumber: number, useShouldScroll = false) => {
       if (useShouldScroll && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
@@ -187,7 +187,7 @@ const useScrollToVirtualizedReadingView = (
 
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user c licks buttons in audio player
   useEffect(() => {
-    if (!audioService) return undefined;
+    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) return undefined;
 
     const subscription = audioService.subscribe((state) => {
       if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
@@ -200,7 +200,7 @@ const useScrollToVirtualizedReadingView = (
     return () => {
       subscription.unsubscribe();
     };
-  }, [audioService, virtuosoRef, scrollToVerse]);
+  }, [audioService, virtuosoRef, scrollToVerse, quranReaderDataType]);
 };
 
 export default useScrollToVirtualizedReadingView;

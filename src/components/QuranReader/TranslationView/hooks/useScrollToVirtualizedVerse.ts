@@ -130,7 +130,7 @@ const useScrollToVirtualizedTranslationView = (
 
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons
   useEffect(() => {
-    if (!audioService) return undefined;
+    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) return undefined;
 
     const subscription = audioService.subscribe((state) => {
       if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
@@ -141,7 +141,7 @@ const useScrollToVirtualizedTranslationView = (
     return () => {
       subscription.unsubscribe();
     };
-  }, [audioService, scrollToBeginningOfVerseCell]);
+  }, [audioService, scrollToBeginningOfVerseCell, quranReaderDataType]);
 
   // this effect clears the timeout when the component unmounts
   useEffect(() => {
