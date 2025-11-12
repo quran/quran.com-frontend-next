@@ -6,3 +6,16 @@
 .skeletonContainer + .skeletonContainer {
   margin-block-start: var(--spacing-large);
 }
+
+.previewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+}
+
+.translationText {
+  padding-block-start: var(--spacing-small);
+  color: var(--color-text-default);
+  font-size: var(--font-size-normal);
+  line-height: var(--line-height-large);
+}

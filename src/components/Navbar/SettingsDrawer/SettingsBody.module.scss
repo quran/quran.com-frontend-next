@@ -1,0 +1,10 @@
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-small);
+}
+
+.versePreviewContainer {
+  padding: var(--spacing-large);
+  background-color: var(--color-background-alternative-faded);
+}

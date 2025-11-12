@@ -1,19 +1,23 @@
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+}
+
 .checkboxContainer {
-  & > div {
-    margin-inline-start: var(--spacing-xxsmall);
-    margin-block: var(--spacing-xsmall);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
 }
 
 .separator {
   margin-block: var(--spacing-small);
-}
-
-.source {
-  font-weight: var(--font-weight-bold);
-}
-
-.label {
-  margin-block-start: var(--spacing-xsmall);
-  margin-block-end: var(--spacing-xxsmall);
 }

@@ -147,6 +147,7 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -367,6 +368,8 @@
   "seconds": "Seconds",
   "see-new": "See What's New",
   "settings": {
+    "arabic": "Arabic",
+    "more": "More",
     "no-tafsir-selected": "No tafsir selected",
     "no-translation-selected": "No translation selected",
     "reading-experience": "Reading Experience",

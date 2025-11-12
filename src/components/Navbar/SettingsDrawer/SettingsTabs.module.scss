@@ -1,0 +1,23 @@
+.tabItem {
+
+    color: var(--color-text-faded-new);
+    transition: color var(--transition-fast);
+}
+
+.tabItem:hover,
+.tabItem:focus-visible {
+    color: var(--color-text-default);
+}
+
+.tabItemSelected {
+    color: var(--color-success-medium);
+    font-weight: var(--font-weight-medium);
+    border-block-end: 2px solid var(--color-success-medium);
+}
+
+.container {
+    padding-inline: var(--spacing-small);
+    gap: calc(var(--spacing-xlarge-px) + var(--spacing-xxsmall));
+    align-items: flex-end;
+    width: 20vw;
+}

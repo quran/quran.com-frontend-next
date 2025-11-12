@@ -1,0 +1,38 @@
+.wordContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.inlineText {
+  margin-block-start: var(--spacing-xxsmall);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-block-end: var(--spacing-xxsmall);
+  padding: var(--spacing-xsmall);
+  background-color: var(--color-background-inverse);
+  color: var(--color-text-inverse);
+  border-radius: var(--border-radius-default);
+  white-space: nowrap;
+  z-index: var(--z-index-tooltip);
+  box-shadow: var(--shadow-large);
+  font-size: var(--font-size-small);
+}
+
+.tooltipText {
+  &:not(:last-child) {
+    margin-block-end: var(--spacing-micro);
+  }
+}
+
+.transliteration {
+  font-style: italic;
+  opacity: 0.9;
+}
