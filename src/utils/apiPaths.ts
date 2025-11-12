@@ -304,3 +304,10 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
   }
   return makeDonateUrl();
 };
+
+/**
+ * Compose the url for translation feedback API.
+ *
+ * @returns {string}
+ */
+export const makeTranslationFeedbackUrl = (): string => makeUrl('/translation-feedback');

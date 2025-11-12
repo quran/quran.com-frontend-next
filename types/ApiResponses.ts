@@ -125,3 +125,8 @@ export interface TafsirContentResponse extends BaseResponse {
     slug?: string;
   };
 }
+
+export interface TranslationFeedbackResponse extends BaseResponse {
+  success: boolean;
+  feedbackId?: string;
+}

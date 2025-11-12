@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import SaveToCollectionAction from '../SaveToCollectionAction';
-import TranslationFeedbackAction from '../TranslationFeedbackAction';
+import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 

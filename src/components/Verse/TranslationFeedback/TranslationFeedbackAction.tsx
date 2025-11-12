@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './TranslationFeedbackAction.module.scss';
+import TranslationFeedbackModal from './TranslationFeedbackModal';
+
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
@@ -77,12 +80,12 @@ const TranslationFeedbackAction = ({
 
       <ContentModal
         isOpen={isModalOpen}
-        header={<p>{t('translation-feedback.title')}</p>}
+        header={<p className={styles.title}>{t('translation-feedback.title')}</p>}
         hasCloseButton
         onClose={onModalClose}
         onEscapeKeyDown={onModalClose}
       >
-        <></>
+        <TranslationFeedbackModal verse={verse} onClose={onModalClose} />
       </ContentModal>
     </>
   );
