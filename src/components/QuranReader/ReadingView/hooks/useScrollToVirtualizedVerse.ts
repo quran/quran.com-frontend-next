@@ -83,6 +83,9 @@ const useScrollToVirtualizedReadingView = (
   const { startingVerse, chapterId } = router.query;
   const shouldScroll = useRef(true);
 
+  // Ref to hold latest AbortController so we can cancel stale requests
+  const abortControllerRef = useRef<AbortController | null>(null);
+
   /**
    * We need to scroll again when we have just changed the font since the same
    * verse might lie on another page/position. Same for when we change the
@@ -125,6 +128,12 @@ const useScrollToVirtualizedReadingView = (
         return;
       }
 
+      // Abort previous request (if any) to prevent race conditions
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
       // fallback: fetch page number for the verse and scroll if possible
       fetcher(
         makeVersesFilterUrl({
@@ -132,6 +141,7 @@ const useScrollToVirtualizedReadingView = (
           fields: `page_number`,
           ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
         }),
+        { signal: controller.signal },
       ).then((response: VersesResponse) => {
         if (response.verses.length && (useShouldScroll ? shouldScroll.current === true : true)) {
           const page = response.verses[0].pageNumber;
@@ -185,7 +195,7 @@ const useScrollToVirtualizedReadingView = (
 
   const audioService = useContext(AudioPlayerMachineContext);
 
-  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user c licks buttons in audio player
+  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons in audio player
   useEffect(() => {
     if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) return undefined;
 
