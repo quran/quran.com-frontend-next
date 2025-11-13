@@ -145,20 +145,10 @@ type GetCoursesQueryParams = {
   languages?: string[];
 };
 
-const sanitizeGetCoursesParams = (params?: GetCoursesQueryParams) => {
-  if (!params) return undefined;
-
-  const { myCourses, languages } = params;
-  const sanitizedLanguages = languages?.filter(Boolean);
-
-  return {
-    ...(typeof myCourses !== 'undefined' ? { myCourses } : {}),
-    ...(sanitizedLanguages && sanitizedLanguages.length ? { languages: sanitizedLanguages } : {}),
-  };
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
+  const languagesStr = params?.languages?.join(',') || 'en';
+  return makeUrl('courses', { ...params, languages: languagesStr });
 };
-
-export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
-  makeUrl('courses', sanitizeGetCoursesParams(params));
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 

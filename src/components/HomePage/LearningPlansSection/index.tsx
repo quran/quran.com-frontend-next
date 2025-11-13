@@ -14,11 +14,11 @@ import NewLabel from '@/dls/Badge/NewLabel';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 import { getCourseNavigationUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
 const learningPlansSorter = (a: Course, b: Course) => {
@@ -74,6 +74,9 @@ const LearningPlansSection = () => {
         fetcher={privateFetcher}
         queryKey={makeGetCoursesUrl({ myCourses: false, languages: languageIsoCodes })}
         render={(data: CoursesResponse) => {
+          if (!data?.data) {
+            return <Loading />;
+          }
           const sortedCourses = [...data.data].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(
             (c) => typeof c.isCompleted === 'undefined',
