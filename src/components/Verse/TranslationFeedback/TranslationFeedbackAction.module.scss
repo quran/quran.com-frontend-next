@@ -16,8 +16,11 @@
 }
 
 .content {
+  max-width: 56.25rem;
+
   @include breakpoints.smallerThanTablet {
     height: auto;
+    max-height: 100%;
     padding-bottom: var(--spacing-large);
   }
 }

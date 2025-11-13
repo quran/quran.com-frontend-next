@@ -21,7 +21,7 @@ type Props = {
   onClose: () => void;
 };
 
-const MAX_FEEDBACK_CHARS = 10;
+const MAX_FEEDBACK_CHARS = 10000;
 const MIN_FEEDBACK_CHARS = 1;
 
 const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
@@ -69,24 +69,24 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
     const len = feedback.trim().length;
 
     if (!selectedTranslationId) {
-      newErrors.translation = t('translation-feedback.missing-field', {
+      newErrors.translation = t('validation.required-field', {
         field: t('translation-feedback.translation'),
       });
     }
 
     if (len === 0) {
-      newErrors.feedback = t('translation-feedback.missing-field', {
+      newErrors.feedback = t('validation.required-field', {
         field: t('translation-feedback.feedback'),
       });
     } else if (len < MIN_FEEDBACK_CHARS) {
-      newErrors.feedback = t('translation-feedback.min-length', {
+      newErrors.feedback = t('validation.minimum-length', {
         field: t('translation-feedback.feedback'),
-        min: MIN_FEEDBACK_CHARS,
+        value: MIN_FEEDBACK_CHARS,
       });
     } else if (len > MAX_FEEDBACK_CHARS) {
-      newErrors.feedback = t('translation-feedback.max-length', {
+      newErrors.feedback = t('validation.maximum-length', {
         field: t('translation-feedback.feedback'),
-        max: MAX_FEEDBACK_CHARS,
+        value: MAX_FEEDBACK_CHARS,
       });
     }
     setErrors(newErrors);
