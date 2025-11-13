@@ -5,6 +5,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import { fetcher } from '@/api';
 import Loader from '@/components/QuranReader/Loader';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
 import { WordVerse } from '@/types/Word';
@@ -36,16 +37,25 @@ const TranslationPreview: React.FC<Props> = ({ verse, lang, selectedTranslationI
       fetcher,
     );
 
-  const selectedTranslationText = useMemo(() => {
-    if (!verseResponse?.verses?.[0]?.translations?.[0]) return '';
-    return verseResponse.verses[0].translations[0].text;
+  const translation = useMemo(() => {
+    const selectedTranslation = verseResponse?.verses?.[0]?.translations?.[0];
+    if (!selectedTranslation) return { languageId: undefined, text: '' };
+    return { languageId: selectedTranslation.languageId, text: selectedTranslation.text };
   }, [verseResponse]);
 
   if (!shouldFetch) return null;
 
   return (
     <div>
-      {isLoadingTranslation ? <Loader /> : <span>&quot;{selectedTranslationText}&quot;</span>}
+      {isLoadingTranslation ? (
+        <Loader />
+      ) : (
+        <TranslationText
+          text={`"${translation.text}"`}
+          languageId={translation.languageId}
+          translationFontScale={quranReaderStyles.translationFontScale}
+        />
+      )}
     </div>
   );
 };
