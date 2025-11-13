@@ -51,6 +51,7 @@ export const getStoreInitialState = (
       detectedLanguage: detectedLanguage || '',
       userHasCustomised: false,
       ayahReflectionsLanguages: [ReflectionLanguage.ENGLISH], // Default to English only
+      ayahReflectionsLanguageIsoCodes: ['en'], // Default to English ISO code
       learningPlanLanguageIsoCodes: ['en'],
     },
     [SliceName.NOTIFICATIONS]: getNotificationsInitialState(locale as Language),
@@ -154,6 +155,9 @@ export const getStoreInitialState = (
     baseState[SliceName.DEFAULT_SETTINGS] = {
       ...baseState[SliceName.DEFAULT_SETTINGS],
       ayahReflectionsLanguages: reflectionLanguages,
+      ayahReflectionsLanguageIsoCodes: countryPreference.ayahReflectionsLanguages.map((lang) =>
+        lang.isoCode.toLowerCase(),
+      ),
     } as any;
   }
 

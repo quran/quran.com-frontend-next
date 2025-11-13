@@ -45,6 +45,7 @@ export type DefaultSettings = {
   detectedLanguage: string;
   userHasCustomised: boolean;
   ayahReflectionsLanguages: ReflectionLanguage[];
+  ayahReflectionsLanguageIsoCodes: string[];
   learningPlanLanguageIsoCodes: string[];
 };
 
@@ -67,7 +68,8 @@ const initialState: DefaultSettings = {
   detectedLanguage: '',
   userHasCustomised: false,
   ayahReflectionsLanguages: [ReflectionLanguage.ENGLISH], // Default to English only
-  learningPlanLanguageIsoCodes: normalizeLearningPlanLanguageIsoCodes(),
+  ayahReflectionsLanguageIsoCodes: ['en'],
+  learningPlanLanguageIsoCodes: ['en'],
 };
 
 /**
@@ -255,6 +257,13 @@ export const defaultSettingsSlice = createSlice({
       ...state,
       ayahReflectionsLanguages: action.payload,
     }),
+    setAyahReflectionsLanguageIsoCodes: (
+      state: DefaultSettings,
+      action: PayloadAction<string[]>,
+    ) => ({
+      ...state,
+      ayahReflectionsLanguageIsoCodes: action.payload.map((code) => code.toLowerCase()),
+    }),
     setLearningPlanLanguageIsoCodes: (state: DefaultSettings, action: PayloadAction<string[]>) => ({
       ...state,
       learningPlanLanguageIsoCodes: normalizeLearningPlanLanguageIsoCodes(action.payload),
@@ -296,6 +305,7 @@ export const {
   setDetectedLanguage,
   setUserHasCustomised,
   setAyahReflectionsLanguages,
+  setAyahReflectionsLanguageIsoCodes,
   setLearningPlanLanguageIsoCodes,
 } = defaultSettingsSlice.actions;
 
@@ -313,6 +323,9 @@ export const selectUserHasCustomised = (state: RootState) =>
 
 export const selectAyahReflectionsLanguages = (state: RootState) =>
   state.defaultSettings.ayahReflectionsLanguages;
+
+export const selectAyahReflectionsLanguageIsoCodes = (state: RootState) =>
+  state.defaultSettings.ayahReflectionsLanguageIsoCodes;
 
 export const selectLearningPlanLanguageIsoCodes = (state: RootState) =>
   state.defaultSettings.learningPlanLanguageIsoCodes;
