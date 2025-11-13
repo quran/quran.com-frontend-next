@@ -9,6 +9,7 @@ import styles from './TranslationFeedbackModal.module.scss';
 import { getAvailableTranslations, submitTranslationFeedback } from '@/api';
 import Button from '@/dls/Button/Button';
 import Select, { SelectOption } from '@/dls/Forms/Select';
+import TextArea from '@/dls/Forms/TextArea';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { WordVerse } from '@/types/Word';
@@ -147,15 +148,16 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
       )}
 
       <div className={styles.inputGroup}>
-        <textarea
+        <TextArea
+          id="feedback"
+          name="feedback"
           placeholder={t('translation-feedback.placeholder')}
+          containerClassName={styles.textArea}
           value={feedback}
-          onChange={(ev) => {
-            setFeedback(ev.target.value);
+          onChange={(value) => {
+            setFeedback(value);
             setErrors((prev) => ({ ...prev, feedback: undefined }));
           }}
-          rows={10}
-          style={{ width: 'auto', padding: 10, borderRadius: 6 }}
         />
 
         {errors.feedback && <div className={styles.error}>{errors.feedback}</div>}

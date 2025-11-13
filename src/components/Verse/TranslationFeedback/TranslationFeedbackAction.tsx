@@ -83,6 +83,8 @@ const TranslationFeedbackAction = ({
         header={<p className={styles.title}>{t('translation-feedback.title')}</p>}
         hasCloseButton
         onClose={onModalClose}
+        contentClassName={styles.content}
+        overlayClassName={styles.overlay}
         onEscapeKeyDown={onModalClose}
       >
         <TranslationFeedbackModal verse={verse} onClose={onModalClose} />

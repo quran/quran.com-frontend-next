@@ -8,3 +8,16 @@
     font-size: var(--font-size-large2);
   }
 }
+
+.overlay {
+  @include breakpoints.smallerThanTablet {
+    place-items: end;
+  }
+}
+
+.content {
+  @include breakpoints.smallerThanTablet {
+    height: auto;
+    padding-bottom: var(--spacing-large);
+  }
+}

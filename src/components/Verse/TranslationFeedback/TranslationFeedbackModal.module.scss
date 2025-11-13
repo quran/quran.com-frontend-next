@@ -24,6 +24,14 @@
   }
 }
 
+.textArea {
+  padding: 0;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+  }
+}
+
 .error {
   color: var(--color-text-error);
 }
