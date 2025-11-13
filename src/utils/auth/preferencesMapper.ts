@@ -100,5 +100,16 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
       preferenceGroups[preferenceGroup] = getPreferenceGroupValue(sliceName, state[sliceName]);
     }
   });
+
+  // Use user selected language if available, otherwise fall back to detected language
+  if (
+    !preferenceGroups[PreferenceGroup.LANGUAGE] ||
+    !preferenceGroups[PreferenceGroup.LANGUAGE].language
+  ) {
+    preferenceGroups[PreferenceGroup.LANGUAGE] = {
+      language: state.defaultSettings.detectedLanguage,
+    };
+  }
+
   return preferenceGroups;
 };
