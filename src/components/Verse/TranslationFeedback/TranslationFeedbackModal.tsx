@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import useSWRImmutable from 'swr/immutable';
 import styles from './TranslationFeedbackModal.module.scss';
 
 import { getAvailableTranslations, submitTranslationFeedback } from '@/api';
+import TranslationPreview from '@/components/Verse/TranslationFeedback/TranslationPreview';
 import Button from '@/dls/Button/Button';
 import Select, { SelectOption } from '@/dls/Forms/Select';
 import TextArea from '@/dls/Forms/TextArea';
@@ -28,6 +29,12 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
   const toast = useToast();
 
   const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations) as number[];
+
+  const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
+  const [feedback, setFeedback] = useState('');
+  const [errors, setErrors] = useState<{ translation?: string; feedback?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { data: translationsResponse } = useSWRImmutable(makeTranslationsUrl(lang), () =>
     getAvailableTranslations(lang).then((res) => res),
   );
@@ -51,17 +58,11 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
       }));
   }, [availableTranslations, selectedTranslationsFromPrefs]);
 
-  const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
-
-  const [feedback, setFeedback] = useState('');
-  const [errors, setErrors] = useState<{ translation?: string; feedback?: string }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const selectedTranslationName = useMemo(() => {
-    const id = Number(selectedTranslationId);
-    const found = availableTranslations.find((tr) => tr.id === id);
-    return found?.translatedName?.name ?? found?.resourceName ?? '';
-  }, [selectedTranslationId, availableTranslations]);
+  useEffect(() => {
+    if (selectedTranslationsOptions.length === 1 && !selectedTranslationId) {
+      setSelectedTranslationId(selectedTranslationsOptions[0].value.toString());
+    }
+  }, [selectedTranslationsOptions, selectedTranslationId]);
 
   const validate = (): boolean => {
     const newErrors: { translation?: string; feedback?: string } = {};
@@ -141,11 +142,7 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
         {errors.translation && <div className={styles.error}>{errors.translation}</div>}
       </div>
 
-      {selectedTranslationName && (
-        <div className={styles.translation}>
-          &quot;{selectedTranslationName} — {verse.verseKey}&quot;
-        </div>
-      )}
+      <TranslationPreview verse={verse} lang={lang} selectedTranslationId={selectedTranslationId} />
 
       <div className={styles.inputGroup}>
         <TextArea
