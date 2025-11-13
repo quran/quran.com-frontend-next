@@ -8,6 +8,7 @@ import VerseActionsMenuType from './types';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
 import SaveToCollectionAction from '@/components/Verse/SaveToCollectionAction';
+import TranslationFeedbackAction from '@/components/Verse/TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '@/components/Verse/VerseActionRepeatAudio';
 import { WordVerse } from '@/types/Word';
@@ -39,6 +40,12 @@ const MoreActionsMenu: React.FC<Props> = ({ verse, onActionTriggered, onMenuChan
       />
       <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       <VerseActionRepeatAudio isTranslationView={false} verseKey={verse.verseKey} />
+
+      <TranslationFeedbackAction
+        verse={verse}
+        isTranslationView={false}
+        onActionTriggered={onActionTriggered}
+      />
     </>
   );
 };
