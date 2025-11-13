@@ -7,11 +7,25 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  containerClassName?: string;
+  isDisabled?: boolean;
 }
 
-const PasswordField: FC<Props> = ({ value = '', onChange, placeholder }) => (
+const PasswordField: FC<Props> = ({
+  value = '',
+  onChange,
+  placeholder,
+  containerClassName,
+  isDisabled = false,
+}) => (
   <>
-    <PasswordInput value={value} onChange={onChange} placeholder={placeholder} />
+    <PasswordInput
+      containerClassName={containerClassName}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      isDisabled={isDisabled}
+    />
     <PasswordValidation value={value} />
   </>
 );

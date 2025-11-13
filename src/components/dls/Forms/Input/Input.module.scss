@@ -1,6 +1,7 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 
 .container {
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,7 +41,7 @@
 }
 
 .rtlInput {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }
@@ -262,7 +263,7 @@
 
 // RTL support
 .rtlInput {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }

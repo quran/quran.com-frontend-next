@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './DeleteAccountButton.module.scss';
 
@@ -48,8 +48,10 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   return (
     <>
       <Button
+        className={styles.button}
         type={ButtonType.Error}
-        variant={ButtonVariant.Ghost}
+        size={ButtonSize.Small}
+        variant={ButtonVariant.Outlined}
         onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >

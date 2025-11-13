@@ -1,0 +1,44 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+
+  .heroBackgroundImage {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background-color: var(--color-search-background);
+
+    svg {
+      width: 100%;
+      transform: translateY(-40%);
+    }
+  }
+  .heroInnerContainer {
+    @include utility.pageContainer();
+
+    display: flex;
+    gap: var(--spacing-small-px);
+    align-items: center;
+    padding-inline: var(--spacing-medium2-px);
+    padding-block-start: var(--spacing-medium3-px);
+    padding-block-end: var(--spacing-xlarge-px);
+
+    @include breakpoints.tablet {
+      padding-inline: unset;
+      padding-block: var(--spacing-large-px);
+    }
+
+    margin-inline: auto;
+
+    h1 {
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-large-px);
+      @include breakpoints.tablet {
+        font-size: var(--font-size-xxxlarge-px);
+      }
+    }
+  }
+}

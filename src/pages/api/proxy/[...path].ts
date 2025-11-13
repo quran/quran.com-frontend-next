@@ -111,6 +111,14 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   },
 });
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   apiProxy(req, res, (err) => {
     if (err) {
