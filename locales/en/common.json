@@ -484,6 +484,21 @@
   "yes": "Yes",
 
   "translation-feedback": {
-    "title": "Translation Feedback"
+    "title": "Translation Feedback",
+
+    "translation": "Translation",
+    "feedback": "Feedback",
+
+    "select-translation": "Select translation:",
+    "select": "Select...",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+    "report": "Report",
+
+    "missing-field": "{{field}} is missing!",
+    "min-length": "{{field}} must be more than or equal to {{min}} characters",
+    "max-length": "{{field}} must be less than or equal to {{max}} characters",
+
+    "submission-success": "Your feedback is sent successfully"
   }
 }

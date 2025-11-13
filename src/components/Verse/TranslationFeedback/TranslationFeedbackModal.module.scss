@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: var(--spacing-medium);
 
-  margin-top: var(--spacing-medium2);
+  margin-block-start: var(--spacing-medium2);
 }
 
 .inputGroup {
@@ -16,4 +16,14 @@
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-xsmall);
+}
+
+.selectContainer {
+  select {
+    inline-size: 100%;
+  }
+}
+
+.error {
+  color: var(--color-text-error);
 }

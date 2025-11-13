@@ -8,6 +8,7 @@ import styles from './TranslationFeedbackModal.module.scss';
 
 import { getAvailableTranslations, submitTranslationFeedback } from '@/api';
 import Button from '@/dls/Button/Button';
+import Select, { SelectOption } from '@/dls/Forms/Select';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { WordVerse } from '@/types/Word';
@@ -18,7 +19,7 @@ type Props = {
   onClose: () => void;
 };
 
-const MAX_FEEDBACK_CHARS = 10000;
+const MAX_FEEDBACK_CHARS = 10;
 const MIN_FEEDBACK_CHARS = 1;
 
 const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
@@ -40,17 +41,17 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
     [translationsResponse],
   );
 
-  const selectedTranslationsOptions = useMemo(
-    () => availableTranslations.filter((tr) => selectedTranslationsFromPrefs.includes(tr.id)),
-    [availableTranslations, selectedTranslationsFromPrefs],
-  );
+  const selectedTranslationsOptions = useMemo<SelectOption[]>(() => {
+    return availableTranslations
+      .filter((tr) => selectedTranslationsFromPrefs.includes(tr.id))
+      .map((tr) => ({
+        label: tr.translatedName?.name ?? tr.resourceName ?? '',
+        value: tr.id,
+      }));
+  }, [availableTranslations, selectedTranslationsFromPrefs]);
 
-  const defaultSelectedTranslationId =
-    selectedTranslationsFromPrefs.length === 1 ? String(selectedTranslationsFromPrefs[0]) : '';
+  const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
 
-  const [selectedTranslationId, setSelectedTranslationId] = useState<string>(
-    defaultSelectedTranslationId,
-  );
   const [feedback, setFeedback] = useState('');
   const [errors, setErrors] = useState<{ translation?: string; feedback?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,19 +64,28 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
 
   const validate = (): boolean => {
     const newErrors: { translation?: string; feedback?: string } = {};
-
-    if (!selectedTranslationId) {
-      newErrors.translation = t('translation-feedback.translation-missing');
-    }
-
     const len = feedback.trim().length;
 
+    if (!selectedTranslationId) {
+      newErrors.translation = t('translation-feedback.missing-field', {
+        field: t('translation-feedback.translation'),
+      });
+    }
+
     if (len === 0) {
-      newErrors.feedback = t('translation-feedback.feedback-missing');
+      newErrors.feedback = t('translation-feedback.missing-field', {
+        field: t('translation-feedback.feedback'),
+      });
     } else if (len < MIN_FEEDBACK_CHARS) {
-      newErrors.feedback = t('translation-feedback.feedback-min', { min: MIN_FEEDBACK_CHARS });
+      newErrors.feedback = t('translation-feedback.min-length', {
+        field: t('translation-feedback.feedback'),
+        min: MIN_FEEDBACK_CHARS,
+      });
     } else if (len > MAX_FEEDBACK_CHARS) {
-      newErrors.feedback = t('translation-feedback.feedback-max', { max: MAX_FEEDBACK_CHARS });
+      newErrors.feedback = t('translation-feedback.max-length', {
+        field: t('translation-feedback.feedback'),
+        max: MAX_FEEDBACK_CHARS,
+      });
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -103,31 +113,31 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
     }
   };
 
+  const noPreferences = t('translation-feedback.no-translations-in-preferences');
+  const selectOptions =
+    selectedTranslationsOptions.length > 0
+      ? selectedTranslationsOptions
+      : [{ label: noPreferences, value: '', disabled: true }];
+
   return (
     <form onSubmit={onSubmit} noValidate className={styles.form}>
       <div className={styles.inputGroup}>
         <label htmlFor="translation-select">{t('translation-feedback.select-translation')}</label>
-        <select
+
+        <Select
           id="translation-select"
+          name="translation-select"
+          options={selectOptions}
           value={selectedTranslationId}
-          onChange={(ev) => {
-            setSelectedTranslationId(ev.target.value);
+          className={styles.selectContainer}
+          placeholder={t('translation-feedback.select')}
+          onChange={(value) => {
+            setSelectedTranslationId(value as string);
             setErrors((prev) => ({ ...prev, translation: undefined }));
           }}
-          style={{ width: '100%', padding: '8px 10px' }}
-        >
-          <option value="" disabled>
-            {t('translation-feedback.select')}
-          </option>
+        />
 
-          {selectedTranslationsOptions.map((tr) => (
-            <option key={tr.id} value={String(tr.id)}>
-              {tr.translatedName?.name ?? tr.resourceName}
-            </option>
-          ))}
-        </select>
-
-        {errors.translation && <div>{errors.translation}</div>}
+        {errors.translation && <div className={styles.error}>{errors.translation}</div>}
       </div>
 
       {selectedTranslationName && (
@@ -145,11 +155,10 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
             setErrors((prev) => ({ ...prev, feedback: undefined }));
           }}
           rows={10}
-          maxLength={MAX_FEEDBACK_CHARS}
           style={{ width: 'auto', padding: 10, borderRadius: 6 }}
         />
 
-        {errors.feedback && <div>{errors.feedback}</div>}
+        {errors.feedback && <div className={styles.error}>{errors.feedback}</div>}
       </div>
 
       <div className={styles.actions}>
