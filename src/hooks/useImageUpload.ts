@@ -14,7 +14,7 @@ interface UseImageUploadReturn {
 
 interface ValidationErrorMessages {
   invalidFileType?: string;
-  fileTooLarge?: string;
+  fileExceedsLimit?: string;
 }
 
 interface UploadImageOptions {
@@ -47,7 +47,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
 
   const defaultErrorMessages: Required<ValidationErrorMessages> = {
     invalidFileType: 'Please select a valid image file',
-    fileTooLarge: `Image size must be less than ${maxSize} MB`,
+    fileExceedsLimit: `Image size exceeds the limit`,
   };
 
   const messages = { ...defaultErrorMessages, ...errorMessages };
@@ -73,7 +73,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     }
 
     if (maxSize && file.size > maxSize) {
-      return messages.fileTooLarge;
+      return messages.fileExceedsLimit;
     }
 
     if (allowedTypes && !allowedTypes.includes(file.type)) {

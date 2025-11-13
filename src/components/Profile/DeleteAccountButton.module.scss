@@ -12,3 +12,11 @@
 .instructionText {
   padding-block: var(--spacing-medium);
 }
+
+.button {
+  padding-block: var(--spacing-xxxsmall-px);
+  padding-inline: var(--spacing-small-px);
+  border-radius: var(--border-radius-small-px);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+}

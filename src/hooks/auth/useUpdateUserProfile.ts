@@ -7,12 +7,11 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import UserProfile from '@/types/auth/UserProfile';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { updateUserProfile } from '@/utils/auth/authRequests';
-import { formatFileSize, MAX_IMAGE_SIZE_MB } from '@/utils/imageFormats';
 
 type UpdateUserProfileData = {
   firstName?: string;
   lastName?: string;
-  photoUrl?: string;
+  avatar?: string;
   removeAvatar?: boolean;
 };
 
@@ -38,7 +37,7 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
     const updateData: {
       firstName?: string;
       lastName?: string;
-      photoUrl?: string;
+      avatar?: string;
       removeAvatar?: boolean;
     } = {};
 
@@ -48,8 +47,8 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
     if (data.lastName !== undefined) {
       updateData.lastName = data.lastName.trim();
     }
-    if (data.photoUrl !== undefined) {
-      updateData.photoUrl = data.photoUrl;
+    if (data.avatar !== undefined) {
+      updateData.avatar = data.avatar;
     }
     if (data.removeAvatar !== undefined) {
       updateData.removeAvatar = data.removeAvatar;
@@ -69,10 +68,7 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
         if (data.lastName !== undefined) {
           updatedData.lastName = data.lastName.trim();
         }
-        if (data.photoUrl !== undefined) {
-          updatedData.photoUrl = data.photoUrl;
-        }
-        if (data.removeAvatar) {
+        if (data.avatar !== undefined || data.removeAvatar) {
           updatedData.photoUrl = null;
         }
         return {
@@ -97,10 +93,10 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
 
       if (!response.success) {
         // Return errors if they exist, otherwise show generic error toast
-        if (errors.photoUrl) {
+        if (errors.avatar) {
           return {
             errors: {
-              photoUrl: t('errors.file-too-large', { size: formatFileSize(MAX_IMAGE_SIZE_MB) }),
+              avatar: t('errors.file-exceeds-limit'),
             },
           };
         }

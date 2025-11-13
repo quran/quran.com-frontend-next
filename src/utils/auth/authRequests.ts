@@ -5,6 +5,7 @@ import {
   makeResetPasswordUrl,
   makeSignInUrl,
   makeSignUpUrl,
+  makeUpdatePasswordUrl,
   makeUpdateUserProfileUrl,
 } from './apiPaths';
 import { AuthEndpoint, mapAPIErrorToFormFields } from './errors';
@@ -123,7 +124,7 @@ export const updateUserProfile = async (data: {
   firstName?: string;
   lastName?: string;
   username?: string;
-  photoUrl?: string;
+  avatar?: string;
   removeAvatar?: boolean;
 }): Promise<APIResponse<BaseAuthResponse>> => {
   return handleAuthRequest(
@@ -134,8 +135,30 @@ export const updateUserProfile = async (data: {
       firstName: 'firstName',
       lastName: 'lastName',
       username: 'username',
-      photoUrl: 'photoUrl',
+      avatar: 'avatar',
     },
     'PATCH',
+  );
+};
+
+/**
+ * Update password request handler
+ * @returns {Promise<APIResponse<BaseAuthResponse>>} Promise containing the authentication response and any validation errors
+ */
+export const updatePassword = async (data: {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}): Promise<APIResponse<BaseAuthResponse>> => {
+  return handleAuthRequest(
+    makeUpdatePasswordUrl(),
+    data,
+    AuthEndpoint.UpdatePassword,
+    {
+      currentPassword: 'currentPassword',
+      newPassword: 'newPassword',
+      confirmPassword: 'confirmPassword',
+    },
+    'POST',
   );
 };

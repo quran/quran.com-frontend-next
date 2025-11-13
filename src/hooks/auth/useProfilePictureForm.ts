@@ -23,9 +23,7 @@ const useProfilePictureForm = () => {
       invalidFileType: t('errors.invalid-file-format', {
         formats: translationParams.allowedFormats,
       }),
-      fileTooLarge: t('errors.file-too-large', {
-        size: translationParams.maxSize,
-      }),
+      fileTooLarge: t('errors.file-exceeds-limit'),
     }),
     [t, translationParams],
   );
@@ -35,12 +33,12 @@ const useProfilePictureForm = () => {
   const uploadFunction = useCallback(
     async (base64String: string) => {
       try {
-        const result = await updateProfile({ photoUrl: base64String });
+        const result = await updateProfile({ avatar: base64String });
         if (result && 'errors' in result && result.errors) {
           // Handle validation errors
-          if (result.errors.photoUrl) {
+          if (result.errors.avatar) {
             // Try to translate the error, fallback to a generic message if translation fails
-            const errorMessage = t(result.errors.photoUrl, undefined, {
+            const errorMessage = t(result.errors.avatar, undefined, {
               fallback: t('errors.upload-failed'),
             });
             toast(errorMessage, {
@@ -66,9 +64,9 @@ const useProfilePictureForm = () => {
       const result = await updateProfile({ removeAvatar: true });
       if (result && 'errors' in result && result.errors) {
         // Handle validation errors
-        if (result.errors.photoUrl) {
+        if (result.errors.avatar) {
           // Try to translate the error, fallback to a generic message if translation fails
-          const errorMessage = t(result.errors.photoUrl, undefined, {
+          const errorMessage = t(result.errors.avatar, undefined, {
             fallback: t('errors.remove-failed'),
           });
           toast(errorMessage, {

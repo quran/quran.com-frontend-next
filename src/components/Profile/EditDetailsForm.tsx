@@ -13,11 +13,10 @@ import Input from '@/dls/Forms/Input';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useUpdateUserProfile from '@/hooks/auth/useUpdateUserProfile';
+import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 
 type FormData = {
-  email: string;
-  username: string;
   firstName: string;
   lastName: string;
 };
@@ -37,11 +36,11 @@ const EditDetailsForm: React.FC = () => {
         placeholder: t('login:email-placeholder'),
         defaultValue: userData?.email || '',
         containerClassName: styles.formInputContainer,
-        customRender: ({ value }) => (
+        customRender: ({ value, placeholder }) => (
           <Input
             id="email"
             label={t('common:form.email')}
-            placeholder={t('login:email-placeholder')}
+            placeholder={placeholder}
             containerClassName={styles.formInput}
             disabled
             value={value}
@@ -55,11 +54,11 @@ const EditDetailsForm: React.FC = () => {
         placeholder: t('login:username-placeholder'),
         defaultValue: userData?.username || '',
         containerClassName: styles.formInputContainer,
-        customRender: ({ value }) => (
+        customRender: ({ value, placeholder }) => (
           <Input
             id="username"
             label={t('common:form.username')}
-            placeholder={t('login:username-placeholder')}
+            placeholder={placeholder}
             containerClassName={styles.formInput}
             disabled
             value={value}
@@ -73,11 +72,23 @@ const EditDetailsForm: React.FC = () => {
         placeholder: t('login:first-name-placeholder'),
         defaultValue: userData?.firstName || '',
         containerClassName: styles.formInputContainer,
-        customRender: ({ value, onChange }) => (
+        rules: [
+          {
+            type: RuleType.Required,
+            value: true,
+            errorMessage: t('login:errors.required', { fieldName: t('common:form.firstName') }),
+          },
+          {
+            type: RuleType.Regex,
+            value: '^[a-zA-Z]+$',
+            errorMessage: t('login:errors.invalid', { fieldName: t('common:form.firstName') }),
+          },
+        ],
+        customRender: ({ value, onChange, placeholder }) => (
           <Input
             id="firstName"
             label={t('common:form.firstName')}
-            placeholder={t('login:first-name-placeholder')}
+            placeholder={placeholder}
             containerClassName={styles.formInput}
             value={value}
             onChange={onChange}
@@ -91,11 +102,23 @@ const EditDetailsForm: React.FC = () => {
         placeholder: t('login:last-name-placeholder'),
         defaultValue: userData?.lastName || '',
         containerClassName: styles.formInputContainer,
-        customRender: ({ value, onChange }) => (
+        rules: [
+          {
+            type: RuleType.Required,
+            value: true,
+            errorMessage: t('login:errors.required', { fieldName: t('common:form.lastName') }),
+          },
+          {
+            type: RuleType.Regex,
+            value: '^[a-zA-Z]+$',
+            errorMessage: t('login:errors.invalid', { fieldName: t('common:form.lastName') }),
+          },
+        ],
+        customRender: ({ value, onChange, placeholder }) => (
           <Input
             id="lastName"
             label={t('common:form.lastName')}
-            placeholder={t('login:last-name-placeholder')}
+            placeholder={placeholder}
             containerClassName={styles.formInput}
             value={value}
             onChange={onChange}
@@ -113,7 +136,6 @@ const EditDetailsForm: React.FC = () => {
     });
 
     if (result && 'errors' in result && result.errors) {
-      // Show validation errors via toast
       const errorMessages: string[] = [];
 
       if (result.errors.firstName) {

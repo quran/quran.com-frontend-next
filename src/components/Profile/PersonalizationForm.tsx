@@ -10,7 +10,7 @@ import UserIcon from '@/icons/user.svg';
 
 const PersonalizationForm: React.FC = () => {
   const { userData } = useAuthData();
-  const hasProfilePicture = !!userData?.photoUrl;
+  const hasProfilePicture = !!userData?.avatars?.large;
 
   const {
     fileInputRef,
@@ -29,9 +29,9 @@ const PersonalizationForm: React.FC = () => {
         <div className={styles.profilePictureDetailAction}>
           <div className={styles.profilePictureDetail}>
             <div className={styles.profilePictureImage}>
-              {hasProfilePicture && userData?.photoUrl ? (
+              {hasProfilePicture && userData?.avatars?.large ? (
                 <Image
-                  src={userData.photoUrl}
+                  src={userData.avatars?.large}
                   alt={t('profile-picture')}
                   width={60}
                   height={60}
