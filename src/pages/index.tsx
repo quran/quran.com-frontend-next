@@ -155,7 +155,7 @@ const Index: NextPage<IndexProps> = ({
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/',
   async (context, languageResult) => {
-    const { locale, chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
 
     const learningPlanLanguages =
       languageResult?.countryLanguagePreference?.learningPlanLanguages?.map((lang) =>

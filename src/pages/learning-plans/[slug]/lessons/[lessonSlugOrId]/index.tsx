@@ -11,7 +11,6 @@ import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { getCourseBySlug } from '@/components/Sanity/utils';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Spinner from '@/dls/Spinner/Spinner';
 import { logError } from '@/lib/newrelic';

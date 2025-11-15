@@ -3,14 +3,13 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { getPagesLookup, getPageVerses } from '@/api';
+import { getPageVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import useFetchPageVerses from '@/components/QuranReader/hooks/useFetchPageVerses';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetMushaf from '@/hooks/useGetMushaf';
-import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import {
@@ -18,13 +17,13 @@ import {
   selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
-import { Mushaf, QuranReaderDataType } from '@/types/QuranReader';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import Language from '@/types/Language';
+import { QuranReaderDataType } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
 import { PAGES_MUSHAF_MAP } from '@/utils/page';
-import getPageVersesParams from '@/utils/pages/getPageVersesParams';
 import getQuranReaderData from '@/utils/pages/getQuranReaderData';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidPageNumber } from '@/utils/validator';
@@ -92,25 +91,45 @@ const QuranicPage: NextPage<Props> = ({ pageVerses: initialData }) => {
   );
 };
 
+const buildPageProps = async (
+  locale: string,
+  pageId: string,
+  mushaf: number,
+  chaptersData: ChaptersData,
+): Promise<{ props: Props }> => {
+  const [pageVerses, pagesLookup] = await Promise.all([
+    getPageVerses(pageId, locale),
+    getPagesLookup({ mushaf, pageNumber: Number(pageId) }),
+  ]);
+  pageVerses.pagesLookup = pagesLookup;
+  pageVerses.metaData = {
+    ...(pageVerses.metaData || {}),
+    from: pagesLookup.lookupRange.from,
+    to: pagesLookup.lookupRange.to,
+  };
+  return {
+    props: {
+      chaptersData,
+      pageVerses,
+    },
+  };
+};
+
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/page/[pageId]',
   async (context) => {
     const { params, locale } = context;
     const pageId = String(params.pageId);
     const chaptersData = await getAllChaptersData(locale);
-    if (!isValidPageNumber(chaptersData, pageId)) {
+    const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
+    const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
+    if (!isValidPageNumber(pageId, mushaf)) {
       return {
         notFound: true,
       };
     }
     try {
-      const pageVerses = await getPageVerses(locale, pageId);
-      return {
-        props: {
-          chaptersData,
-          pageVerses,
-        },
-      };
+      return await buildPageProps(locale, pageId, mushaf, chaptersData);
     } catch (error) {
       return {
         notFound: true,

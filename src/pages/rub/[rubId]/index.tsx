@@ -7,17 +7,15 @@ import useTranslation from 'next-translate/useTranslation';
 import { getRubVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
-import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getRubNavigationUrl } from '@/utils/navigation';
-import { formatStringNumber } from '@/utils/number';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidRubId } from '@/utils/validator';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -51,6 +49,32 @@ const RubPage: NextPage<RubPageProps> = ({ rubVerses }) => {
   );
 };
 
+const buildRubPageProps = async (
+  locale: string,
+  rubId: string,
+  chaptersData: ChaptersData,
+): Promise<{ props: RubPageProps }> => {
+  const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
+  const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
+  const [rubVerses, pagesLookup] = await Promise.all([
+    getRubVerses(rubId, locale),
+    getPagesLookup({ mushaf, rubElHizbNumber: Number(rubId) }),
+  ]);
+  rubVerses.pagesLookup = pagesLookup;
+  rubVerses.metaData = {
+    ...(rubVerses.metaData || {}),
+    from: pagesLookup.lookupRange.from,
+    to: pagesLookup.lookupRange.to,
+  };
+
+  return {
+    props: {
+      chaptersData,
+      rubVerses,
+    },
+  };
+};
+
 // eslint-disable-next-line react-func/max-lines-per-function
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/rub/[rubId]',
@@ -58,19 +82,13 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const { params, locale } = context;
     const rubId = String(params.rubId);
     const chaptersData = await getAllChaptersData(locale);
-    if (!isValidRubId(chaptersData, rubId)) {
+    if (!isValidRubId(rubId)) {
       return {
         notFound: true,
       };
     }
     try {
-      const rubVerses = await getRubVerses(locale, rubId);
-      return {
-        props: {
-          chaptersData,
-          rubVerses,
-        },
-      };
+      return await buildRubPageProps(locale, rubId, chaptersData);
     } catch (error) {
       return {
         notFound: true,
