@@ -3,21 +3,16 @@ import React from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import styles from './LearningPlansSection.module.scss';
 import Loading from './Loading';
 
-import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import NewLabel from '@/dls/Badge/NewLabel';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
-import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
-import { Course, CoursesResponse } from '@/types/auth/Course';
-import { privateFetcher } from '@/utils/auth/api';
-import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
+import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCourseNavigationUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
@@ -33,9 +28,12 @@ const learningPlansSorter = (a: Course, b: Course) => {
   return 0;
 };
 
-const LearningPlansSection = () => {
+type LearningPlansSectionProps = {
+  courses: Course[];
+};
+
+const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
   const { t } = useTranslation('home');
-  const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -69,15 +67,11 @@ const LearningPlansSection = () => {
           </Link>
         </div>
       </div>
-      <DataFetcher
-        loading={Loading}
-        fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false, languages: languageIsoCodes })}
-        render={(data: CoursesResponse) => {
-          if (!data?.data) {
-            return <Loading />;
-          }
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
+      {!courses?.length ? (
+        <Loading />
+      ) : (
+        (() => {
+          const sortedCourses = [...courses].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(
             (c) => typeof c.isCompleted === 'undefined',
           );
@@ -158,8 +152,8 @@ const LearningPlansSection = () => {
               })}
             </div>
           );
-        }}
-      />
+        })()
+      )}
     </>
   );
 };

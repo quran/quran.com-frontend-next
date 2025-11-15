@@ -8,13 +8,15 @@ import LearningPlansSection from '../LearningPlansSection';
 import QuranInYearSection from '../QuranInYearSection';
 
 import styles from '@/pages/index.module.scss';
+import { Course } from '@/types/auth/Course';
 
 type Props = {
   isUserLoggedIn: boolean;
   todayAyah: { chapter: number; verse: number } | null;
+  learningPlans: Course[];
 };
 
-const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) => {
+const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, learningPlans }) => {
   return isUserLoggedIn ? (
     <>
       {todayAyah && (
@@ -23,7 +25,7 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) 
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <LearningPlansSection />
+        <LearningPlansSection courses={learningPlans} />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <CommunitySection />
@@ -43,7 +45,7 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) 
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <LearningPlansSection />
+        <LearningPlansSection courses={learningPlans} />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <CommunitySection />

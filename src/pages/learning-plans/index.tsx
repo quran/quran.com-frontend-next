@@ -1,15 +1,22 @@
 import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import { fetcher } from '@/api';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
-import { getAllChaptersData } from '@/utils/chapter';
+import { Course, CoursesResponse } from '@/types/auth/Course';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
+import ChaptersData from 'types/ChaptersData';
 
-const LearningPlansPage: NextPage = () => {
+type LearningPlansPageProps = {
+  courses: Course[];
+};
+
+const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
   const { t, lang } = useTranslation('learn');
 
   return (
@@ -25,20 +32,35 @@ const LearningPlansPage: NextPage = () => {
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout />
+      <CoursesPageLayout initialCourses={courses} />
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/learning-plans',
-  async (context) => {
-    const { locale } = context;
-    const allChaptersData = await getAllChaptersData(locale);
+  async (context, languageResult) => {
+    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+
+    const learningPlanLanguages =
+      languageResult?.countryLanguagePreference?.learningPlanLanguages?.map((lang) =>
+        lang.isoCode?.toLowerCase(),
+      ) || ['en'];
+
+    let courses: Course[] = [];
+    try {
+      const response = await fetcher<CoursesResponse>(
+        makeGetCoursesUrl({ myCourses: false, languages: learningPlanLanguages }),
+      );
+      courses = response?.data || [];
+    } catch (error) {
+      courses = [];
+    }
 
     return {
       props: {
-        chaptersData: allChaptersData,
+        chaptersData,
+        courses,
       },
     };
   },

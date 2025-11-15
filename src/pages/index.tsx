@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
+import { fetcher } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -19,8 +20,9 @@ import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneyS
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { Course, CoursesResponse } from '@/types/auth/Course';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
@@ -32,9 +34,13 @@ import ChaptersData from 'types/ChaptersData';
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
+  learningPlans: Course[];
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
+const Index: NextPage<IndexProps> = ({
+  chaptersResponse: { chapters },
+  learningPlans,
+}): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
@@ -57,7 +63,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
               <ReadingSection />
             </div>
             {isMobile() ? (
-              <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} todayAyah={todayAyah} />
+              <MobileHomepageSections
+                isUserLoggedIn={isUserLoggedIn}
+                todayAyah={todayAyah}
+                learningPlans={learningPlans}
+              />
             ) : (
               <>
                 {isUserLoggedIn ? (
@@ -76,7 +86,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection courses={learningPlans} />
                     </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
@@ -110,7 +120,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection courses={learningPlans} />
                     </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
@@ -142,20 +152,39 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/', async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/',
+  async (context, languageResult) => {
+    const { locale, chaptersData } = context as typeof context & { chaptersData: ChaptersData };
 
-  return {
-    props: {
-      chaptersData: allChaptersData,
-      chaptersResponse: {
-        chapters: Object.keys(allChaptersData).map((chapterId) => {
-          const chapterData = allChaptersData[chapterId];
-          return { ...chapterData, id: Number(chapterId) };
-        }),
+    const learningPlanLanguages =
+      languageResult?.countryLanguagePreference?.learningPlanLanguages?.map((lang) =>
+        lang.isoCode?.toLowerCase(),
+      ) || ['en'];
+
+    let learningPlans: Course[] = [];
+    try {
+      const response = await fetcher<CoursesResponse>(
+        makeGetCoursesUrl({ myCourses: false, languages: learningPlanLanguages }),
+      );
+      learningPlans = response?.data || [];
+    } catch (error) {
+      learningPlans = [];
+    }
+
+    return {
+      props: {
+        chaptersData,
+        chaptersResponse: {
+          chapters: Object.keys(chaptersData).map((chapterId) => {
+            const chapterData = chaptersData[chapterId];
+            return { ...chapterData, id: Number(chapterId) };
+          }),
+        },
+        learningPlans,
       },
-    },
-  };
-});
+    };
+  },
+);
 
 export default Index;

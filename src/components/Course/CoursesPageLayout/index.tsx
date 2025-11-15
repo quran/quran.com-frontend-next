@@ -11,20 +11,31 @@ import CoursesList from '@/components/Course/CoursesList';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
-import { CoursesResponse } from '@/types/auth/Course';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
+import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
-import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 
 const Loading = () => <Spinner />;
 
 type Props = {
   isMyCourses?: boolean;
+  initialCourses?: Course[];
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
+const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourses }) => {
   const { t } = useTranslation('learn');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+
+  const renderCourses = (courses: Course[] | undefined) => {
+    if (!courses?.length) {
+      return <Spinner />;
+    }
+    return <CoursesList courses={courses} isMyCourses={isMyCourses} />;
+  };
+
+  const shouldUseInitialData = !isMyCourses && initialCourses;
+
   return (
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>
@@ -43,17 +54,19 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
         )}
 
         <div className={classNames(layoutStyles.flow, styles.container)}>
-          <DataFetcher
-            loading={Loading}
-            fetcher={privateFetcher}
-            queryKey={makeGetCoursesUrl({
-              myCourses: isMyCourses,
-              languages: languageIsoCodes,
-            })}
-            render={(data: CoursesResponse) => (
-              <CoursesList courses={data.data} isMyCourses={isMyCourses} />
-            )}
-          />
+          {shouldUseInitialData ? (
+            renderCourses(initialCourses)
+          ) : (
+            <DataFetcher
+              loading={Loading}
+              fetcher={privateFetcher}
+              queryKey={makeGetCoursesUrl({
+                myCourses: isMyCourses,
+                languages: languageIsoCodes,
+              })}
+              render={(data: CoursesResponse) => renderCourses(data.data)}
+            />
+          )}
         </div>
       </ContentContainer>
     </div>
