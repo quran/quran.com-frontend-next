@@ -169,12 +169,16 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
         .map((lang) => isoCodeMapping[lang.isoCode])
         .filter(Boolean) as ReflectionLanguage[];
 
-      // Always include English as default
-      if (!reflectionLanguages.includes(ReflectionLanguage.ENGLISH)) {
-        reflectionLanguages.unshift(ReflectionLanguage.ENGLISH);
-      }
+      const reflectionLanguagesToStore =
+        reflectionLanguages.length > 0 ? reflectionLanguages : [ReflectionLanguage.ENGLISH];
 
-      dispatch(setAyahReflectionsLanguages(reflectionLanguages));
+      const isoCodes = ayahReflectionsLanguages
+        .map((lang) => lang.isoCode?.toLowerCase())
+        .filter(Boolean);
+      const isoCodesToStore = isoCodes.length > 0 ? isoCodes : ['en'];
+
+      dispatch(setAyahReflectionsLanguages(reflectionLanguagesToStore));
+      dispatch(setAyahReflectionsLanguageIsoCodes(isoCodesToStore));
     }
 
     const learningPlanLanguageIsoCodes = normalizeLearningPlanLanguageIsoCodes(

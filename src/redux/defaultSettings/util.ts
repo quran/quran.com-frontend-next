@@ -147,17 +147,19 @@ export const getStoreInitialState = (
       .map((lang) => mapIsoCodeToReflectionLanguage(lang.isoCode))
       .filter(Boolean) as ReflectionLanguage[];
 
-    // Always include English as default
-    if (!reflectionLanguages.includes(ReflectionLanguage.ENGLISH)) {
-      reflectionLanguages.unshift(ReflectionLanguage.ENGLISH);
-    }
+    const reflectionLanguagesToStore =
+      reflectionLanguages.length > 0 ? reflectionLanguages : [ReflectionLanguage.ENGLISH];
+
+    const reflectionIsoCodes = countryPreference.ayahReflectionsLanguages
+      .map((lang) => lang.isoCode?.toLowerCase())
+      .filter(Boolean);
+
+    const isoCodesToStore = reflectionIsoCodes.length > 0 ? reflectionIsoCodes : ['en'];
 
     baseState[SliceName.DEFAULT_SETTINGS] = {
       ...baseState[SliceName.DEFAULT_SETTINGS],
-      ayahReflectionsLanguages: reflectionLanguages,
-      ayahReflectionsLanguageIsoCodes: countryPreference.ayahReflectionsLanguages.map((lang) =>
-        lang.isoCode.toLowerCase(),
-      ),
+      ayahReflectionsLanguages: reflectionLanguagesToStore,
+      ayahReflectionsLanguageIsoCodes: isoCodesToStore,
     } as any;
   }
 
