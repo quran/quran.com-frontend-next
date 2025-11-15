@@ -99,6 +99,7 @@ const ProfileAvatarButton = () => {
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
             shouldFlipOnRTL={false}
+            data-testid="profile-avatar-button"
           >
             <IconPerson />
           </Button>
@@ -121,7 +122,11 @@ const ProfileAvatarButton = () => {
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
           {t('my-learning-plans')}
         </PopoverMenu.Item>
-        <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
+        <PopoverMenu.Item
+          onClick={onLogoutClicked}
+          icon={<LogoutIcon />}
+          dataTestId="profile-menu-item-logout"
+        >
           {t('logout')}
         </PopoverMenu.Item>
       </PopoverMenu>
