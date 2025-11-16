@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import CurrentWeekProgress from '../HomePage/QuranGrowthJourneySection/CollapsibleSection/QuranReadingGoals/CurrentWeekProgress';
@@ -23,19 +24,23 @@ const ProgressPageStreakWidget = ({
   streak,
   isLoading,
 }: ProgressPageStreakWidgetProps) => {
-  const { t, lang } = useTranslation('reading-goal');
+  const { lang } = useTranslation('reading-goal');
   const localizedStreak = toLocalizedNumber(streak, lang);
 
   const widget = (
     <>
       <div className={styles.streakContainer}>
         <BookIcon />
-        <h2
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: t('x-days-streak', { days: localizedStreak, count: streak }),
-          }}
-        />
+        <h2>
+          <Trans
+            i18nKey="reading-goal:x-days-streak"
+            values={{ days: localizedStreak, count: streak }}
+            components={{
+              p: <p />,
+              span: <span />,
+            }}
+          />
+        </h2>
       </div>
 
       <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />

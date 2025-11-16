@@ -1,6 +1,7 @@
 {
   "add": "Add",
   "add-data-success": "Your reading data has been added successfully.",
+  "back-to-reading-goal": "Back to reading goal",
   "delete-goal": {
     "action": "Delete Goal",
     "confirmation": {

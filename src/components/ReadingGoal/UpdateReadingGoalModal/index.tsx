@@ -197,7 +197,7 @@ const UpdateReadingGoalModal = ({
       <Button
         onClick={onUpdateGoalClicked}
         isDisabled={isDisabled}
-        variant={isMobile() && ButtonVariant.Ghost}
+        variant={isMobile() ? ButtonVariant.Ghost : undefined}
         className={styles.editGoalButton}
       >
         {t('edit-goal.action')}
@@ -294,7 +294,6 @@ const UpdateReadingGoalModal = ({
                 variant={ButtonVariant.Ghost}
                 className={styles.deleteButton}
                 onClick={onShowDeleteModal}
-                isDisabled={getIsUpdateDisabled()}
               >
                 {t('delete-goal.action')}
               </Button>
