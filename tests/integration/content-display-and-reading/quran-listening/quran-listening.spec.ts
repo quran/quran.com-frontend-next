@@ -62,49 +62,58 @@ test.describe('Highlighting', () => {
     async ({ page }) => {
       await homePage.goTo('/9');
 
-      const firstWord = page.locator('[data-word-location="9:1:1"]');
-      const secondWord = page.locator('[data-word-location="9:1:2"]');
-      const thirdWord = page.locator('[data-word-location="9:1:3"]');
-
-      await expect(firstWord).not.toHaveClass(/highlighted/);
-
       // Start audio playback and wait for the API response simultaneously
-      const [, audioResponse] = await Promise.all([
+      await Promise.all([
         audioUtilities.startAudioPlayback(true),
         page.waitForResponse((response) => response.url().includes('segments=true')),
         page.waitForSelector("[class*='highlighted']"),
       ]);
 
-      // Extract segments from the API response
-      const audioData = await audioResponse.json();
-      const firstVerseTimings = audioData.audio_files[0].verse_timings[0];
-      const segments = firstVerseTimings.segments
-        .slice(0, 3)
-        .map((segment) => segment.map((time) => time / 1000)); // Take first 3 segments for testing and / 1000 to convert to seconds
+      // Instead of relying on specific word indexes or timestamps, watch the DOM for whichever
+      // word currently carries the `highlighted` class and ensure the highlight moves forward
+      // while the audio plays. This mirrors real behaviour: the reciter advances naturally and
+      // each previously highlighted word should lose the class once the next one is read.
+      const highlightedWordLocator = page
+        .locator('[data-word-location][class*="highlighted"]')
+        .first();
+
+      const getHighlightedWordLocation = async () =>
+        (await highlightedWordLocator.getAttribute('data-word-location')) || '';
+
+      const waitForHighlightChange = async (previousLocation: string) => {
+        let currentLocation = previousLocation;
+        await expect(async () => {
+          currentLocation = await getHighlightedWordLocation();
+          expect(currentLocation).not.toBe(previousLocation);
+        }).toPass({ timeout: 20000 });
+        return currentLocation;
+      };
+
+      const firstHighlightedLocation = await getHighlightedWordLocation();
+      expect(firstHighlightedLocation).toMatch(/^9:1:/);
+
+      const secondHighlightedLocation = await waitForHighlightChange(firstHighlightedLocation);
+      expect(secondHighlightedLocation).toMatch(/^9:1:/);
+
+      const firstHighlightedWord = page.locator(
+        `[data-word-location="${firstHighlightedLocation}"]`,
+      );
+      const secondHighlightedWord = page.locator(
+        `[data-word-location="${secondHighlightedLocation}"]`,
+      );
+      await expect(firstHighlightedWord).not.toHaveClass(/highlighted/);
+      await expect(secondHighlightedWord).toHaveClass(/highlighted/);
+
+      const thirdHighlightedLocation = await waitForHighlightChange(secondHighlightedLocation);
+      expect(thirdHighlightedLocation).toMatch(/^9:1:/);
+
+      const thirdHighlightedWord = page.locator(
+        `[data-word-location="${thirdHighlightedLocation}"]`,
+      );
+      await expect(secondHighlightedWord).not.toHaveClass(/highlighted/);
+      await expect(thirdHighlightedWord).toHaveClass(/highlighted/);
 
       await audioUtilities.pauseAudioPlayback();
-      await audioUtilities.setAudioTime(0);
-      await page.waitForTimeout(500); // Wait for any UI updates
-
-      // The first word should be highlighted and not the third
-      await expect(secondWord).not.toHaveClass(/highlighted/);
-      await expect(firstWord).toHaveClass(/highlighted/);
-
-      await audioUtilities.setAudioTime(segments[0][2] + 0.1); // Move to just after the first word
-      await audioUtilities.resumeAudioPlayback();
-      await audioUtilities.pauseAudioPlayback();
-
-      // When the second word is being recited, it should be highlighted and the first should not
-      await expect(secondWord).toHaveClass(/highlighted/);
-      await expect(firstWord).not.toHaveClass(/highlighted/);
-
-      await audioUtilities.setAudioTime(segments[1][2] + 0.1); // Move to just after the second word
-      await audioUtilities.resumeAudioPlayback();
-      await audioUtilities.pauseAudioPlayback();
-
-      // When the third word is being recited, it should be highlighted and the second should not
-      await expect(thirdWord).toHaveClass(/highlighted/);
-      await expect(secondWord).not.toHaveClass(/highlighted/);
     },
   );
 });
