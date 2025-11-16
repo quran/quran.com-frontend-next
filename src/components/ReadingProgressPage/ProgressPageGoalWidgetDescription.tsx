@@ -1,3 +1,5 @@
+import Trans from 'next-translate/Trans';
+
 import styles from './ReadingProgressPage.module.scss';
 
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
@@ -25,6 +27,10 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
   currentActivityDay,
   chaptersData,
 }) => {
+  if (!goal) {
+    return null;
+  }
+
   if (goal.isCompleted) {
     return (
       <p className={styles.progressWidgetDaysLeft}>{t('reading-goal:daily-progress-completed')}</p>
@@ -33,16 +39,19 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
 
   if (typeof goal.progress.daysLeft === 'number') {
     return (
-      <p
-        className={styles.progressWidgetDaysLeft}
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: t('reading-goal:remaining-days', {
+      <p>
+        <Trans
+          i18nKey="reading-goal:remaining-days"
+          values={{
             count: goal.progress.daysLeft,
             days: toLocalizedNumber(goal.progress.daysLeft, lang),
-          }),
-        }}
-      />
+          }}
+          components={{
+            p: <p />,
+            span: <span />,
+          }}
+        />
+      </p>
     );
   }
 
@@ -69,7 +78,11 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
   if (goal.type === GoalType.RANGE) {
     const ranges = currentActivityDay?.remainingDailyTargetRanges || [];
     if (ranges.length > 0) {
-      const [{ chapter: fromChapter, verse: fromVerse }] = parseVerseRange(ranges[0]);
+      const parsedRange = parseVerseRange(ranges[0]);
+      if (!parsedRange) {
+        return null;
+      }
+      const [{ chapter: fromChapter, verse: fromVerse }] = parsedRange;
 
       return (
         <p className={styles.progressWidgetDaysLeft}>

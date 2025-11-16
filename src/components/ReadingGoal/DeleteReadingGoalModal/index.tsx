@@ -15,12 +15,15 @@ import { deleteReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 
-type DeleteReadingGoalButtonProps = {
+type PropsDeleteReadingGoalModal = {
   isOpen: boolean;
   onModalChange: (visible: boolean) => void;
 };
 
-const DeleteReadingGoalModal = ({ isOpen, onModalChange }: DeleteReadingGoalButtonProps) => {
+const DeleteReadingGoalModal: React.FC<PropsDeleteReadingGoalModal> = ({
+  isOpen,
+  onModalChange,
+}) => {
   const { t } = useTranslation('reading-progress');
   const [confirmationText, setConfirmationText] = useState('');
   const { mutate } = useSWRConfig();

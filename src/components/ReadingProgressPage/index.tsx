@@ -51,6 +51,7 @@ const ReadingProgressPage = () => {
               size={ButtonSize.Large}
               variant={ButtonVariant.Compact}
               href={getReadingGoalNavigationUrl()}
+              ariaLabel={t('back-to-reading-goal')}
             >
               <ArrowLeft />
             </Button>

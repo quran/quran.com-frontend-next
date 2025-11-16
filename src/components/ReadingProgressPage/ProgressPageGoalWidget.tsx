@@ -17,11 +17,11 @@ import useGetStreakWithMetadata, {
   StreakWithMetadata,
 } from '@/hooks/auth/useGetStreakWithMetadata';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
+import useIsMobile from '@/hooks/useIsMobile';
 import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
-import { isMobile } from '@/utils/responsive';
 
 interface Props {
   goal?: StreakWithMetadata['goal'];
@@ -34,6 +34,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
   const { currentActivityDay } = useGetStreakWithMetadata({
     showDayName: true,
   });
+  const isMobile = useIsMobile();
   const [modalVisible, setModalVisible] = useState({
     update: false,
     delete: false,
@@ -43,15 +44,20 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
   const continueReadingUrl = useGetContinueReadingUrl();
 
   const onUpdateModalChange = (visible: boolean) => {
-    setModalVisible({ ...modalVisible, update: visible });
+    setModalVisible((prev) => ({ ...prev, update: visible }));
   };
 
   const onDeleteModalChange = (visible: boolean) => {
-    setModalVisible({ ...modalVisible, delete: visible });
+    setModalVisible((prev) => ({ ...prev, delete: visible }));
+  };
+
+  const onShowDeleteModal = () => {
+    logButtonClick('reading_goal_delete');
+    setModalVisible((prev) => ({ ...prev, update: false, delete: true }));
   };
 
   const ctaUrl =
-    goal?.type === GoalType.RANGE
+    goal?.type === GoalType.RANGE && goal?.progress?.nextVerseToRead
       ? getChapterWithStartingVerseUrl(goal.progress.nextVerseToRead)
       : continueReadingUrl;
 
@@ -107,7 +113,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
         </div>
       </div>
       <div className={styles.progressWidgetCta}>
-        {!isMobile() && (
+        {!isMobile && (
           <Button href={ctaUrl} className={styles.continueReadingButton}>
             {t('reading-goal:continue-reading')}
           </Button>
@@ -116,10 +122,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
           goal={goal}
           isOpen={modalVisible.update}
           onModalChange={onUpdateModalChange}
-          onShowDeleteModal={() => {
-            logButtonClick('reading_goal_delete');
-            setModalVisible({ update: false, delete: true });
-          }}
+          onShowDeleteModal={onShowDeleteModal}
         />
         <DeleteReadingGoalModal isOpen={modalVisible.delete} onModalChange={onDeleteModalChange} />
       </div>
