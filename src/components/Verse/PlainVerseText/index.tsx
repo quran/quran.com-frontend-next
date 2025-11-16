@@ -88,8 +88,7 @@ const PlainVerseText: React.FC<Props> = ({
             return '';
           }
 
-          const wordText =
-            word[textFieldName] ?? word.text ?? word.textUthmani ?? word.qpcUthmaniHafs ?? '';
+          const wordText = word[textFieldName] ?? '';
 
           return typeof wordText === 'string' ? wordText.trim() : '';
         })
