@@ -82,7 +82,8 @@ $section-padding: calc(var(--spacing-large));
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-large);
     color: var(--color-text-faded);
-    span {
+    p {
+      display: inline;
       color: var(--color-primary-medium);
       font-size: var(--font-size-jumbo);
     }
@@ -162,15 +163,16 @@ $section-padding: calc(var(--spacing-large));
 
 .progressWidgetContent {
   .progressWidgetTitle {
+    color: var(--color-text-black);
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
   }
 
   .progressWidgetDaysLeft {
     font-weight: var(--font-weight-medium);
-    color: var(--color-text-faded);
+    color: var(--color-text-gray);
     span {
-      color: var(--color-text-default);
+      color: var(--color-text-black);
       font-weight: var(--font-weight-bold);
     }
   }
@@ -202,6 +204,7 @@ $section-padding: calc(var(--spacing-large));
 }
 
 .continueReadingButton {
+  color: var(--color-text-white);
   background-color: var(--color-streaks-dark);
   border: none;
   border-radius: calc(var(--border-radius-default) * 3);

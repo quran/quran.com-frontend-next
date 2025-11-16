@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,25 +6,34 @@ import useTranslation from 'next-translate/useTranslation';
 import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
 import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
 
+import ProgressPageGoalWidgetDescription from './ProgressPageGoalWidgetDescription';
 import styles from './ReadingProgressPage.module.scss';
 
+import DataContext from '@/contexts/DataContext';
 import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
+import useGetStreakWithMetadata, {
+  StreakWithMetadata,
+} from '@/hooks/auth/useGetStreakWithMetadata';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
+import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getReadingGoalNavigationUrl } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
-interface ProgressPageGoalWidgetProps {
+interface Props {
   goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
 }
 
-const ProgressPageGoalWidget = ({ goal, isLoading }: ProgressPageGoalWidgetProps) => {
+const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
   const { t, lang } = useTranslation('reading-progress');
+  const chaptersData = useContext(DataContext);
+  const { currentActivityDay } = useGetStreakWithMetadata({
+    showDayName: true,
+  });
   const [modalVisible, setModalVisible] = useState({
     update: false,
     delete: false,
@@ -40,6 +49,11 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: ProgressPageGoalWidgetProps
   const onDeleteModalChange = (visible: boolean) => {
     setModalVisible({ ...modalVisible, delete: visible });
   };
+
+  const ctaUrl =
+    goal?.type === GoalType.RANGE
+      ? getChapterWithStartingVerseUrl(goal.progress.nextVerseToRead)
+      : continueReadingUrl;
 
   if (isLoading) {
     return (
@@ -83,21 +97,18 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: ProgressPageGoalWidgetProps
         </div>
         <div className={styles.progressWidgetContent}>
           <p className={styles.progressWidgetTitle}>{t('reading-goal:daily-progress')}</p>
-          <p
-            className={styles.progressWidgetDaysLeft}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: t('reading-goal:remaining-days', {
-                count: goal.progress.daysLeft,
-                days: toLocalizedNumber(goal.progress.daysLeft, lang),
-              }),
-            }}
+          <ProgressPageGoalWidgetDescription
+            goal={goal}
+            t={t}
+            lang={lang}
+            currentActivityDay={currentActivityDay}
+            chaptersData={chaptersData}
           />
         </div>
       </div>
       <div className={styles.progressWidgetCta}>
         {!isMobile() && (
-          <Button href={continueReadingUrl} className={styles.continueReadingButton}>
+          <Button href={ctaUrl} className={styles.continueReadingButton}>
             {t('reading-goal:continue-reading')}
           </Button>
         )}

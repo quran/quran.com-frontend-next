@@ -23,7 +23,7 @@ const ProgressPageStreakWidget = ({
   streak,
   isLoading,
 }: ProgressPageStreakWidgetProps) => {
-  const { t, lang } = useTranslation('reading-progress');
+  const { t, lang } = useTranslation('reading-goal');
   const localizedStreak = toLocalizedNumber(streak, lang);
 
   const widget = (
@@ -33,7 +33,7 @@ const ProgressPageStreakWidget = ({
         <h2
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
-            __html: t('reading-goal:x-days', { days: localizedStreak, count: streak }),
+            __html: t('x-days-streak', { days: localizedStreak, count: streak }),
           }}
         />
       </div>
