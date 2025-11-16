@@ -113,10 +113,10 @@
   "view-progress": "View Progress",
   "week-progress": "This Week's Progress",
   "x-days": {
-    "one": "<span>{{days}}</span> Day streak",
-    "other": "<span>{{days}}</span> Days streak"
+    "one": "{{days}} day",
+    "other": "{{days}} days"
   },
-  "x-days-streak": "<p>{{days}}</p> <span>day streak</span>",
+  "x-days-streak": "<p>{{days}}</p> <span>Day streak</span>",
   "x-hours": {
     "one": "{{hours}} hour",
     "other": "{{hours}} hours"
