@@ -3,7 +3,7 @@ $word-modal-z-index: var(--z-index-smaller-modal);
 $word-modal-overlay-z-index: var(--z-index-sticky);
 
 .container {
-  inline-size: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -11,17 +11,17 @@ $word-modal-overlay-z-index: var(--z-index-sticky);
 .topActionsContainer {
   display: flex;
   flex-direction: column;
-  inline-size: 100%;
+  width: 100%;
 }
 
 .separator {
-  block-size: 1px;
+  height: 1px;
   background-color: var(--color-borders-hairline);
   margin-block: var(--spacing-medium);
 }
 
 .bottomActionsContainer {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .contentClassName {

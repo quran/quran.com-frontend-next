@@ -26,7 +26,6 @@ const PopularButton = ({ onClick }: PopularButtonProps) => {
       className={heroButtonStyles.button}
       onClick={handleClick}
       size={ButtonSize.Small}
-      data-testid="popular-button"
     >
       <div className={heroButtonStyles.buttonContent}>
         <IconContainer size={IconSize.Xsmall} icon={<PopularIcon />} shouldForceSetColors={false} />

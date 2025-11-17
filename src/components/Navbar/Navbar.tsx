@@ -20,11 +20,7 @@ const Navbar = () => {
   return (
     <>
       <div className={styles.emptySpacePlaceholder} />
-      <nav
-        className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}
-        data-testid="navbar"
-        data-isvisible={showNavbar}
-      >
+      <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <NavbarBody />
       </nav>
     </>

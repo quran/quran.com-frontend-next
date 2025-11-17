@@ -1,4 +1,4 @@
-@use 'src/styles/utility';
+@use "src/styles/utility";
 
 .listItemsContainer {
   padding-inline-start: var(--spacing-medium);
@@ -12,7 +12,7 @@
   text-transform: uppercase;
   font-weight: var(--font-weight-bold);
   border-block-end: 1px var(--color-borders-hairline) solid;
-  min-block-size: calc(var(--spacing-mega) + var(--spacing-small));
+  min-height: calc(var(--spacing-mega) + var(--spacing-small));
 }
 
 .projectsDesc {

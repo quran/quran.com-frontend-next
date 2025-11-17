@@ -131,7 +131,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
         />
       </form>
       <div className={styles.listContainer}>
-        <div className={styles.list} data-testid="verse-list">
+        <div className={styles.list}>
           {filteredVerseKeys.map((verseKey) => (
             <VerseListItem
               verseKey={verseKey}

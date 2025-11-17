@@ -1,8 +1,8 @@
-@use 'src/styles/constants';
-@use 'src/styles/breakpoints';
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
 
 .container {
-  block-size: 100%;
+  height: 100%;
   position: fixed;
   inset-block-start: 0;
   inset-inline-end: 0;
@@ -11,12 +11,12 @@
   padding-block-start: var(--navbar-container-height);
   z-index: var(--z-index-default);
   transition: var(--transition-regular);
-  inline-size: 0;
+  width: 0;
 }
 
 .visibleContainer {
-  inline-size: calc(100% - (2 * var(--spacing-mega)));
+  width: calc(100% - (2 * var(--spacing-mega)));
   @include breakpoints.tablet {
-    inline-size: constants.$notes-side-bar-desktop-width;
+    width: constants.$notes-side-bar-desktop-width;
   }
 }

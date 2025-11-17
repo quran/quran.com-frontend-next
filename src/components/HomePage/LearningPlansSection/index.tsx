@@ -77,7 +77,7 @@ const LearningPlansSection = () => {
           );
 
           return (
-            <div className={styles.cardsContainer} data-testid="learning-plans-section">
+            <div className={styles.cardsContainer}>
               {sortedCourses.map((course, index) => {
                 const { isCompleted } = course;
                 const courseUrl = getCourseNavigationUrl(course.slug);

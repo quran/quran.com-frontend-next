@@ -6,13 +6,13 @@
 .title {
   display: flex;
   flex-direction: row;
-  inline-size: 100%;
+  width: 100%;
   margin: var(--spacing-xxsmall);
 }
 
 .titleSkeleton {
-  inline-size: calc(3 * var(--spacing-mega));
-  block-size: var(--spacing-medium);
+  width: calc(3 * var(--spacing-mega));
+  height: var(--spacing-medium);
 }
 
 .rowSkeleton {
@@ -31,12 +31,12 @@
 .label {
   margin: var(--spacing-xxsmall);
   margin-inline-end: auto;
-  inline-size: 20%;
-  block-size: var(--spacing-large);
+  width: 20%;
+  height: var(--spacing-large);
 }
 
 .input {
   margin: var(--spacing-medium);
-  inline-size: 60%;
-  block-size: calc(2 * var(--spacing-small));
+  width: 60%;
+  height: calc(2 * var(--spacing-small));
 }

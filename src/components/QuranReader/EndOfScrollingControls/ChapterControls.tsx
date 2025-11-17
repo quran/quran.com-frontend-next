@@ -37,7 +37,6 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
     <>
       {!isFirstSurah(chapterNumber, isReadingByRevelationOrder) && (
         <Button
-          data-testid="previous-surah-button"
           type={ButtonType.Secondary}
           prefix={<ChevronLeftIcon />}
           href={getPreviousSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}
@@ -49,7 +48,6 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
         </Button>
       )}
       <Button
-        data-testid="chapter-beginning-button"
         type={ButtonType.Secondary}
         onClick={() => {
           logButtonClick('chapter_control_scroll_to_beginning');
@@ -60,7 +58,6 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
       </Button>
       {!isLastSurah(chapterNumber, isReadingByRevelationOrder) && (
         <Button
-          data-testid="next-surah-button"
           type={ButtonType.Secondary}
           suffix={<ChevronRightIcon />}
           href={getNextSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}

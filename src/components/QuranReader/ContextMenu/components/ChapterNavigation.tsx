@@ -28,7 +28,6 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   const { lang } = useTranslation();
   return (
     <p
-      data-testid="chapter-navigation"
       className={classNames(styles.bold, styles.alignStart, styles.surahName, {
         [styles.disabledOnMobile]: isSidebarNavigationVisible,
       })}

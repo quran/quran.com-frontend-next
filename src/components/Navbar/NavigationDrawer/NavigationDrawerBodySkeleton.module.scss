@@ -4,16 +4,16 @@
 }
 
 .navRow {
-  inline-size: auto;
-  block-size: var(--spacing-mega);
+  width: auto;
+  height: var(--spacing-mega);
   padding: var(--spacing-xxsmall) 0;
   margin: var(--spacing-xxsmall) var(--spacing-xsmall);
   margin-inline-start: var(--spacing-small);
 }
 
 .blockRow {
-  inline-size: auto;
-  block-size: calc(var(--spacing-mega) * 6);
+  width: auto;
+  height: calc(var(--spacing-mega) * 6);
   margin: var(--spacing-xxsmall) var(--spacing-xsmall);
   margin-inline-start: var(--spacing-small);
 }

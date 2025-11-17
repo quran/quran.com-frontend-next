@@ -150,7 +150,6 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
       <div className={styles.tabsContainer} role="tablist">
         {tabs.map((tab) => (
           <div
-            data-is-selected={readingPreference === tab.value}
             className={classNames(
               styles.tab,
               readingPreference === tab.value && styles.selectedTab,
@@ -159,7 +158,6 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
             role="tab"
             tabIndex={0}
             id={tab.id}
-            data-testid={tab.id}
             onClick={() => onViewSwitched(tab.value as ReadingPreference)}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {

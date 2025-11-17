@@ -21,7 +21,6 @@ const CloseButton = () => {
         audioService.send({ type: 'CLOSE' });
       })}
       shouldFlipOnRTL={false}
-      data-testid="audio-close-player"
     >
       <CloseIcon />
     </Button>

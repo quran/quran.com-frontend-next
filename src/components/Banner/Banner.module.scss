@@ -1,10 +1,10 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .container {
   margin-block-start: calc(-1 * var(--banner-height));
   transition: var(--transition-regular);
   box-sizing: border-box;
-  block-size: var(--banner-height);
+  height: var(--banner-height);
   position: relative;
   background-color: var(--color-background-lighten);
   display: flex;
@@ -20,7 +20,7 @@
     background-color: transparent;
     padding-inline: var(--spacing-mega);
     justify-content: center;
-    max-inline-size: calc(20 * var(--spacing-mega));
+    max-width: calc(20 * var(--spacing-mega));
     inset-inline-start: 0;
     inset-inline-end: 0;
     margin-inline-start: auto;
@@ -46,11 +46,11 @@
   display: flex;
   @include breakpoints.tablet {
     display: inline-flex;
-    block-size: var(--spacing-mega);
-    inline-size: var(--spacing-mega);
+    height: var(--spacing-mega);
+    width: var(--spacing-mega);
   }
-  block-size: var(--spacing-large);
-  inline-size: var(--spacing-large);
+  height: var(--spacing-large);
+  width: var(--spacing-large);
   margin-inline-end: var(--spacing-xxsmall);
 }
 
@@ -63,7 +63,7 @@
 .closeButton {
   color: var(--color-success-medium);
 
-  block-size: 100%;
+  height: 100%;
   position: absolute;
   inset-block-start: 0;
 

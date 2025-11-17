@@ -1,14 +1,14 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .container {
-  max-inline-size: 100%;
+  max-width: 100%;
   @include breakpoints.tablet {
-    max-inline-size: 80%;
+    max-width: 80%;
   }
   margin-inline-start: auto;
   margin-inline-end: auto;
 }
 
 .wrapper {
-  min-block-size: 100vh;
+  min-height: 100vh;
 }

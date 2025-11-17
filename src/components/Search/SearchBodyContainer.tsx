@@ -46,7 +46,6 @@ const SearchBodyContainer: React.FC<Props> = ({
     !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);
   return (
     <div
-      data-testid="search-body-container"
       className={classNames({
         [styles.internalContainer]: isPreInputLayout,
       })}

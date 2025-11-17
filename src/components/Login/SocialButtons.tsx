@@ -26,7 +26,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
   };
 
   return (
-    <div className={styles.authButtons} data-testid="auth-buttons">
+    <div className={styles.authButtons}>
       <Button
         href={makeGoogleLoginUrl(redirect)}
         prefix={<GoogleIcon />}

@@ -1,5 +1,5 @@
-@use 'src/styles/constants';
-@use 'src/styles/breakpoints';
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
 
 $sections-container-height: 2.25rem;
 $pixel: 1px;
@@ -13,18 +13,18 @@ $pixel: 1px;
   position: fixed;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
-  inline-size: 100%;
+  width: 100%;
   inset-block-start: calc($pixel * -1);
-  padding-block-end: $pixel;
-  min-block-size: var(--spacing-medium);
+  padding-bottom: $pixel;
+  min-height: var(--spacing-medium);
   will-change: transform;
   &:after {
     display: block;
-    content: '';
-    inline-size: var(--progress);
+    content: "";
+    width: var(--progress);
     transition: var(--transition-fast);
     transition-timing-function: linear;
-    block-size: var(--spacing-micro);
+    height: var(--spacing-micro);
     background: var(--color-success-deep);
     inset-block-end: calc(-1 * var(--spacing-micro));
   }
@@ -32,7 +32,7 @@ $pixel: 1px;
 
 .hide {
   display: none;
-  block-size: 0;
+  height: 0;
   visibility: hidden;
 }
 
@@ -46,13 +46,13 @@ $pixel: 1px;
 }
 
 .expandedContainer {
-  min-block-size: var(--spacing-mega);
+  min-height: var(--spacing-mega);
 }
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;
-    inline-size: calc(100% - #{constants.$notes-side-bar-desktop-width});
+    width: calc(100% - #{constants.$notes-side-bar-desktop-width});
   }
 }
 
@@ -66,8 +66,8 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  block-size: $sections-container-height;
-  inline-size: 100%;
+  height: $sections-container-height;
+  width: 100%;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
   display: flex;
@@ -84,13 +84,13 @@ $pixel: 1px;
 }
 
 .halfSection {
-  inline-size: 50%; // when reading preference toggle is hidden
+  width: 50%; // when reading preference toggle is hidden
 }
 
 .section {
-  inline-size: calc(100% / 3);
+  width: calc(100% / 3);
   @include breakpoints.smallerThanTablet {
-    inline-size: 50%;
+    width: 50%;
   }
 }
 
@@ -106,7 +106,7 @@ $pixel: 1px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  inline-size: 100%;
+  width: 100%;
 }
 
 .primaryInfo {

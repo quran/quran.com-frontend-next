@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .checklistPosition {
   position: fixed;
@@ -14,11 +14,11 @@
   box-shadow: var(--shadow-small);
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-large) var(--spacing-large);
-  max-inline-size: 100%;
-  inline-size: calc(var(--spacing-mega) * 12);
+  max-width: 100%;
+  width: calc(var(--spacing-mega) * 12);
 
   @include breakpoints.smallerThanMobileL {
-    inline-size: 100%;
+    width: 100%;
     inset-inline: 0;
     inset-block-end: 0;
     border-inline: none;
@@ -32,8 +32,8 @@
 }
 
 .helpIcon {
-  inline-size: var(--spacing-mega) !important;
-  block-size: var(--spacing-mega) !important;
+  width: var(--spacing-mega) !important;
+  height: var(--spacing-mega) !important;
 }
 
 .checklistHeader {
@@ -47,13 +47,13 @@
 }
 
 .checklist ul {
-  margin-block-start: var(--spacing-large);
+  margin-top: var(--spacing-large);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-small);
 
   li > button {
-    inline-size: 100%;
+    width: 100%;
     border: none;
     display: flex;
     align-items: center;
@@ -71,8 +71,8 @@
 }
 
 .checkCircle {
-  inline-size: var(--spacing-medium);
-  block-size: var(--spacing-medium);
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
   border-radius: var(--border-radius-circle);
   border: 2px solid var(--color-success-medium);
   background-color: var(--day-circle-color);
@@ -82,8 +82,8 @@
   flex-shrink: 0;
 
   & svg {
-    inline-size: 90%;
-    block-size: 90%;
+    width: 90%;
+    height: 90%;
     color: white;
   }
 }
