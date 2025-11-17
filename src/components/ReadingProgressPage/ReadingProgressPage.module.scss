@@ -89,17 +89,19 @@ $section-padding: calc(var(--spacing-large));
     }
   }
 
-  svg,
-  path {
+  svg {
     inline-size: var(--spacing-mega);
     block-size: var(--spacing-mega);
-    stroke: var(--color-primary-medium);
-    color: var(--color-primary-medium);
 
     @include breakpoints.tablet {
       inline-size: var(--spacing-max);
       block-size: var(--spacing-max);
     }
+  }
+
+  svg path {
+    stroke: var(--color-primary-medium);
+    color: var(--color-primary-medium);
   }
 }
 
