@@ -28,14 +28,9 @@ import {
   makeNewSearchResultsUrl,
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
-  makeTranslationFeedbackUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
-import {
-  AdvancedCopyRequest,
-  PagesLookUpRequest,
-  TranslationFeedbackRequest,
-} from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
   AdvancedCopyRawResultResponse,
@@ -52,7 +47,6 @@ import {
   TafsirContentResponse,
   PagesLookUpResponse,
   WordByWordTranslationsResponse,
-  TranslationFeedbackResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -397,19 +391,4 @@ export const getTafsirContent = (
       mushafLines,
     }),
   );
-};
-
-/**
- * Submit translation feedback.
- *
- * @param {TranslationFeedbackRequest} params
- * @returns {Promise<TranslationFeedbackResponse>}
- */
-export const submitTranslationFeedback = async (
-  params: TranslationFeedbackRequest,
-): Promise<TranslationFeedbackResponse> => {
-  return fetcher<TranslationFeedbackResponse>(makeTranslationFeedbackUrl(), {
-    method: 'POST',
-    body: JSON.stringify(params),
-  });
 };

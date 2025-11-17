@@ -279,3 +279,10 @@ export const makeEnrollUserInQuranProgramUrl = (): string =>
 
 export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
+
+/**
+ * Compose the url for translation feedback API.
+ *
+ * @returns {string}
+ */
+export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');

@@ -6,7 +6,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from './TranslationFeedbackModal.module.scss';
 
-import { getAvailableTranslations, submitTranslationFeedback } from '@/api';
+import { getAvailableTranslations } from '@/api';
 import TranslationPreview from '@/components/Verse/TranslationFeedback/TranslationPreview';
 import Button from '@/dls/Button/Button';
 import Select, { SelectOption } from '@/dls/Forms/Select';
@@ -15,6 +15,8 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { WordVerse } from '@/types/Word';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { submitTranslationFeedback } from '@/utils/auth/api';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 type Props = {
   verse: WordVerse;
@@ -100,15 +102,19 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
     setIsSubmitting(true);
 
     try {
+      const chapterNumber = getChapterNumberFromKey(verse.verseKey);
+      const verseNumber = getVerseNumberFromKey(verse.verseKey);
+
       await submitTranslationFeedback({
         translationId: Number(selectedTranslationId),
-        verseKey: verse.verseKey,
+        surahNumber: chapterNumber,
+        ayahNumber: verseNumber,
         feedback,
       });
 
       toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
       onClose();
-    } catch (err: any) {
+    } catch {
       toast(t('error.general'), { status: ToastStatus.Error });
     } finally {
       setIsSubmitting(false);
