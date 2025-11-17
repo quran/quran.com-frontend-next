@@ -283,7 +283,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
               <Button
                 type={ButtonType.Primary}
                 variant={ButtonVariant.Outlined}
-                className={styles.deleteButton}
+                className={styles.actionButton}
                 onClick={onUpdateClicked}
                 isDisabled={getIsUpdateDisabled()}
               >
@@ -292,7 +292,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
               <Button
                 type={ButtonType.Error}
                 variant={ButtonVariant.Ghost}
-                className={styles.deleteButton}
+                className={styles.actionButton}
                 onClick={onShowDeleteModal}
               >
                 {t('delete-goal.action')}
