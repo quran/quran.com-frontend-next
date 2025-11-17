@@ -78,7 +78,7 @@ $section-padding: calc(var(--spacing-large));
   align-items: center;
   margin-block-end: var(--spacing-mega);
 
-  h2 {
+  .streakText {
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-large);
     color: var(--color-text-faded);

@@ -244,7 +244,8 @@ export const getFullDayName = (day: Date, locale: string): string => {
 };
 
 /**
- * Gets the short day name (single letter) in a given locale.
+ * Gets the shortest day name in a given locale.
+ * Uses the 'narrow' format which is typically a single letter in most locales.
  * Example: `M` for `Monday` in `en`
  *
  * @param {Date} day

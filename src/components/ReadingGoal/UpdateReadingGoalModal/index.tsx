@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -31,7 +31,7 @@ import { generateDurationDaysOptions } from '@/utils/generators';
 import { isMobile } from '@/utils/responsive';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-type UpdateReadingGoalButtonProps = {
+type PropsUpdateReadingGoalModal = {
   isDisabled?: boolean;
   goal: Goal;
   isOpen: boolean;
@@ -67,13 +67,13 @@ const types = [
   { value: GoalType.RANGE, key: 'range' },
 ] as const;
 
-const UpdateReadingGoalModal = ({
+const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
   isDisabled,
   goal,
   isOpen,
   onModalChange,
   onShowDeleteModal,
-}: UpdateReadingGoalButtonProps) => {
+}) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
 

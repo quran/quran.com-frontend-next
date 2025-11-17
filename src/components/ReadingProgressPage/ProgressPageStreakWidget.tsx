@@ -31,7 +31,7 @@ const ProgressPageStreakWidget = ({
     <>
       <div className={styles.streakContainer}>
         <BookIcon />
-        <h2>
+        <div className={styles.streakText}>
           <Trans
             i18nKey="reading-goal:x-days-streak"
             values={{ days: localizedStreak, count: streak }}
@@ -40,7 +40,7 @@ const ProgressPageStreakWidget = ({
               span: <span />,
             }}
           />
-        </h2>
+        </div>
       </div>
 
       <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />

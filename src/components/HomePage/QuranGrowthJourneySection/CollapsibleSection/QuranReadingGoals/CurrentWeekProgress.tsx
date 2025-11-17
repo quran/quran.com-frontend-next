@@ -20,7 +20,15 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
-  const getDayState = (day: (typeof days)[number]): DayState => {
+  const getDayState = (day: (typeof days)[number]): [DayState, boolean] => {
+    // Check if the day is in the future
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayDate = new Date(day.date);
+    dayDate.setHours(0, 0, 0, 0);
+
+    const isToday = dayDate.getTime() === today.getTime();
+
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 
@@ -28,17 +36,11 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
     // otherwise, we want to show a checked circle if the user has read at all for the day
     const isGoalDone = goal ? convertFractionToPercent(readingDay?.progress || 0) >= 100 : hasRead;
 
-    if (isGoalDone) return DayState.Checked;
+    if (isGoalDone) return [DayState.Checked, isToday];
 
-    // Check if the day is in the future
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const dayDate = new Date(day.date);
-    dayDate.setHours(0, 0, 0, 0);
+    if (dayDate > today) return [DayState.Future, isToday];
 
-    if (dayDate > today) return DayState.Future;
-
-    return DayState.None;
+    return [DayState.None, isToday];
   };
 
   return (
@@ -50,13 +52,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
         })}
       >
         {days.map((day) => {
-          const dayState = getDayState(day);
-
-          const today = new Date();
-          today.setHours(0, 0, 0, 0);
-          const dayDate = new Date(day.date);
-          dayDate.setHours(0, 0, 0, 0);
-          const isToday = dayDate.getTime() === today.getTime();
+          const [dayState, isToday] = getDayState(day);
 
           return (
             <div key={day.info.localizedNumber} className={styles.day}>
