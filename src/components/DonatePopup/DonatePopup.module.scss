@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .container {
   padding: var(--spacing-mega);
@@ -29,9 +29,9 @@
 }
 
 .action {
-  inline-size: 100%;
+  width: 100%;
   @include breakpoints.tablet {
-    inline-size: auto;
+    width: auto;
   }
   margin-inline-end: var(--spacing-medium);
   font-weight: var(--font-weight-bold);
@@ -57,7 +57,7 @@
   @include breakpoints.tablet {
     display: inline-flex;
     padding: var(--spacing-medium);
-    inline-size: calc(10 * var(--spacing-mega));
+    width: calc(10 * var(--spacing-mega));
   }
 }
 

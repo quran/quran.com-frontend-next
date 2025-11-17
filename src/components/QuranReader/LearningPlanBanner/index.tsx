@@ -22,7 +22,6 @@ const LearningPlanBanner: React.FC = () => {
 
   return (
     <aside
-      data-testid="learning-plan-banner"
       className={styles.bannerWrapper}
       aria-label={t('learning-plan-banner.banner-wrapper-aria-label')}
       aria-live="polite"

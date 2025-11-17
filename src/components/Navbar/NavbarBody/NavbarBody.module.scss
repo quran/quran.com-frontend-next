@@ -1,11 +1,11 @@
-@use 'src/styles/utility';
-@use 'src/styles/breakpoints';
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .itemsContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  block-size: 100%;
+  height: 100%;
   background-color: var(--color-background-elevated);
 }
 

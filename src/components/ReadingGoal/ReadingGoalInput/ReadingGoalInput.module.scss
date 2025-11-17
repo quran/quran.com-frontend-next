@@ -12,18 +12,18 @@
 
 .inputContainer {
   display: flex;
-  inline-size: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
 }
 
 .fullWidth {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .input {
   > select {
-    inline-size: 100%;
+    width: 100%;
   }
 }
 

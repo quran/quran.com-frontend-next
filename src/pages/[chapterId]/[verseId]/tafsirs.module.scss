@@ -1,14 +1,14 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .tafsirContainer {
-  inline-size: 100vw;
+  width: 100vw;
   padding: calc(1.5 * var(--spacing-small));
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
-    inline-size: 85vw;
+    width: 85vw;
   }
   @include breakpoints.desktop {
-    inline-size: 50vw;
+    width: 50vw;
   }
   box-sizing: border-box;
   margin-block: var(--spacing-mega);

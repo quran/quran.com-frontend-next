@@ -1,11 +1,11 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .container {
   display: flex;
   align-items: center;
 }
 
-.container[dir='rtl'][data-auto-flip-icon='true'] {
+.container[dir="rtl"][data-auto-flip-icon="true"] {
   > svg {
     transform: scaleX(-1);
   }
@@ -31,40 +31,40 @@
 
 .xsmallIcon {
   > svg {
-    inline-size: 16px;
-    block-size: 16px;
+    width: 16px;
+    height: 16px;
   }
 }
 
 .smallIcon {
   > svg {
-    inline-size: 20px;
-    block-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 }
 
 .mediumIcon {
   > svg {
-    inline-size: 32px;
-    block-size: 32px;
+    width: 32px;
+    height: 32px;
   }
 }
 
 .largeIcon {
   > svg {
-    inline-size: 36px;
-    block-size: 36px;
+    width: 36px;
+    height: 36px;
   }
 }
 
 .customIcon {
   > svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
 
     @include breakpoints.smallerThanTablet {
-      inline-size: var(--spacing-medium);
-      block-size: var(--spacing-medium);
+      width: var(--spacing-medium);
+      height: var(--spacing-medium);
     }
   }
 }

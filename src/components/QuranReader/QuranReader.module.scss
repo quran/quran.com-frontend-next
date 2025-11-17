@@ -1,6 +1,6 @@
-@use 'src/styles/constants';
-@use 'src/styles/breakpoints';
-@use 'src/styles/utility';
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 $quran-reader-padding: 3rem;
 $virtual-scrolling-height-bandage: calc(
@@ -18,15 +18,15 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .readingView {
-  min-block-size: 100vh;
+  min-height: 100vh;
   @include breakpoints.smallerThanTablet {
-    inline-size: 85%;
+    width: 85%;
   }
 }
 
 .loading {
   text-align: center;
-  max-inline-size: 80%;
+  max-width: 80%;
   margin-block-start: var(--spacing-medium);
   margin-block-end: var(--spacing-medium);
   margin-inline-start: auto;

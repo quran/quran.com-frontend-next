@@ -51,7 +51,7 @@ const QuickLinks: React.FC = () => {
   const chaptersData = useContext(DataContext);
 
   return (
-    <div className={styles.container} data-testid="quick-links">
+    <div className={styles.container}>
       {QUICK_LINKS.map((quickLink) => {
         let text = '';
         if (quickLink.type === QuickLinkType.Ayah) {

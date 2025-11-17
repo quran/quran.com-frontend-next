@@ -1,15 +1,15 @@
-@use 'src/styles/constants';
-@use 'src/styles/breakpoints';
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
 
 .emptySpacePlaceholder {
-  block-size: var(--navbar-container-height);
+  height: var(--navbar-container-height);
 }
 
 .container {
   inset-block-start: 0;
   position: fixed;
-  block-size: var(--navbar-height);
-  inline-size: 100%;
+  height: var(--navbar-height);
+  width: 100%;
   transition: var(--transition-regular);
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);

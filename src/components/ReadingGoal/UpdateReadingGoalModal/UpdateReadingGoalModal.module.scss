@@ -1,16 +1,16 @@
 .inputs {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .inputContainer {
   display: flex;
-  inline-size: 100%;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   margin-block: var(--spacing-large);
 
   select {
-    inline-size: 100%;
+    width: 100%;
   }
 }
 
@@ -21,7 +21,7 @@
 }
 
 .deleteButton {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .confirmationText {
@@ -37,7 +37,7 @@
   justify-content: space-between;
   align-items: center;
   margin-block: var(--spacing-large) !important;
-  inline-size: 100%;
+  width: 100%;
 }
 
 .radioItem {

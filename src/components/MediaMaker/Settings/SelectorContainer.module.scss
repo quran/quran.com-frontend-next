@@ -10,8 +10,8 @@
 
 .select {
   flex-grow: 1;
-  inline-size: calc(var(--spacing-mega) * 2);
+  width: calc(var(--spacing-mega) * 2);
   select {
-    inline-size: 100%;
+    width: 100%;
   }
 }

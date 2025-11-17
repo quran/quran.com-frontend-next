@@ -1,33 +1,33 @@
 .container {
-  margin-block: var(--spacing-xsmall);
-  border: 1px var(--color-borders-hairline) solid;
-  padding: var(--spacing-small);
-  border-radius: var(--border-radius-rounded);
-  box-shadow: var(--shadow-small);
+    margin-block: var(--spacing-xsmall);
+    border: 1px var(--color-borders-hairline) solid;
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius-rounded);
+    box-shadow: var(--shadow-small);
 }
 
 .headerContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .noteBody {
-  margin-block-end: var(--spacing-small);
-  text-wrap: wrap;
-  overflow-wrap: break-word;
-  text-align: justify;
-  white-space: pre-wrap;
+    margin-block-end: var(--spacing-small);
+    text-wrap: wrap;
+    overflow-wrap: break-word;
+    text-align: justify;
+    white-space: pre-wrap;
 }
 
 .shareButtonContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .buttonsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

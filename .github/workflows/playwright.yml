@@ -1,45 +1,30 @@
 name: Playwright Tests
 on:
-  push:
-    branches: [master, main, develop, testing]
-    paths:
-      - 'src/**'
-      - 'tests/**'
-      - 'playwright.config.ts'
-      - '.github/workflows/playwright.yml'
-  pull_request:
-    branches: [master, main, develop]
+  deployment_status:
+    branches: [master]
 jobs:
   test_integration:
     name: Playwright Tests
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: false # Temporarily disable this workflow
+    # if: ${{ github.event.deployment_status.state == 'success' }}
+    if: ${{ false }} # disable it for now
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'yarn'
-
+          cache: "yarn"
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-
-      - name: Build application
-        run: yarn build
-
-      - name: Install Playwright browsers
+      - name: Install Playwright
         run: npx playwright install --with-deps
-
       - name: Run Playwright tests
-        run: yarn test:integration
+        run: yarn run test:integration
         env:
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
           CI: true
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v2
         if: always()
         with:
           name: playwright-report

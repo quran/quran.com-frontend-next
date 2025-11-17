@@ -1,17 +1,17 @@
-@use 'src/styles/constants';
-@use 'src/styles/utility';
-@use 'src/styles/breakpoints';
+@use "src/styles/constants";
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 $container-max-width: calc(23 * var(--spacing-mega));
 
 .container {
-  max-inline-size: 90%;
+  max-width: 90%;
   margin-block-start: var(--spacing-small);
   margin-block-end: var(--spacing-small);
   margin-inline-start: auto;
   margin-inline-end: auto;
   @include breakpoints.tablet {
-    max-inline-size: $container-max-width;
+    max-width: $container-max-width;
   }
 }
 .tafsirName {
@@ -40,7 +40,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
     line-height: normal;
   }
   br {
-    content: '';
+    content: "";
     margin-block-start: var(--spacing-small);
     margin-inline-end: var(--spacing-small);
     margin-block-end: var(--spacing-small);
@@ -61,14 +61,14 @@ $container-max-width: calc(23 * var(--spacing-mega));
     line-height: normal;
   }
   // target any item which has a class that contains arabic
-  *[class~='arabic'] {
+  *[class~="arabic"] {
     direction: rtl;
     /* stylelint-disable-next-line csstools/use-logical */
     text-align: right;
     margin-block-end: var(--spacing-small);
   }
   // target any item which has a class that contains uthmani
-  *[class~='uthmani'] {
+  *[class~="uthmani"] {
     font-family: UthmanicHafs;
     font-size: larger;
   }
@@ -87,7 +87,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   display: flex;
   margin-block-start: var(--spacing-medium);
   overflow-x: scroll;
-  inline-size: 100%;
+  width: 100%;
   padding-block-end: var(--spacing-medium);
 }
 .tafsirSelectionItem {
@@ -95,7 +95,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-rounded);
   white-space: nowrap;
-  block-size: auto;
+  height: auto;
   padding-block: var(--spacing-xxsmall);
   padding-inline: var(--spacing-small);
   border: none;
@@ -128,30 +128,30 @@ $container-max-width: calc(23 * var(--spacing-mega));
   margin-inline-start: var(--spacing-medium);
 }
 .ayahSelection {
-  max-inline-size: calc(2.5 * var(--spacing-mega));
+  max-width: calc(2.5 * var(--spacing-mega));
 }
 
 .tafsirSkeletonItem {
-  block-size: var(--spacing-mega);
+  height: var(--spacing-mega);
   margin-block-end: var(--spacing-medium);
 }
 .ayahSekletonItem {
   margin-inline-end: auto;
-  block-size: calc(2.5 * var(--spacing-mega));
+  height: calc(2.5 * var(--spacing-mega));
   margin-block-end: var(--spacing-mega);
 
-  inline-size: 100%;
+  width: 100%;
 }
 .tafsirSkeletonItem1 {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .tafsirSkeletonItem2 {
-  inline-size: 80%;
+  width: 80%;
 }
 
 .tafsirSkeletonItem3 {
-  inline-size: 60%;
+  width: 60%;
 }
 
 .tafsirSelectionSkeleton {
@@ -159,8 +159,8 @@ $container-max-width: calc(23 * var(--spacing-mega));
 }
 
 .languageSelection {
-  min-inline-size: calc(6 * var(--spacing-medium));
-  inline-size: calc(6 * var(--spacing-medium));
+  min-width: calc(6 * var(--spacing-medium));
+  width: calc(6 * var(--spacing-medium));
 }
 
-@include utility.generate-font-scales('tafsir');
+@include utility.generate-font-scales("tafsir");

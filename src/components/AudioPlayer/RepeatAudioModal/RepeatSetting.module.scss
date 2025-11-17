@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .inputContainer {
   display: flex;
@@ -14,7 +14,7 @@
 .label {
   font-weight: var(--font-weight-bold);
   @include breakpoints.tablet {
-    min-inline-size: calc(8.5 * var(--spacing-large));
+    min-width: calc(8.5 * var(--spacing-large));
   }
 }
 .input {

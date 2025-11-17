@@ -6,12 +6,12 @@
 }
 
 .tab {
-  inline-size: 100%;
+  width: 100%;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded-new);
   svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
   }
 }
 

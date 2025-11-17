@@ -2,16 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  inline-size: 100%;
+  width: 100%;
 
   svg {
-    margin-inline-start: 8px;
+    margin-left: 8px;
   }
 }
 
-[dir='rtl'] .menuWithChevron {
+[dir="rtl"] .menuWithChevron {
   svg {
-    margin-inline: 0 8px;
+    margin-left: 0;
+    margin-right: 8px;
     transform: rotate(180deg);
   }
 }

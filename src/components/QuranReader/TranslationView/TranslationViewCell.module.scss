@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@use 'src/styles/utility';
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 $arabicVerseTopMargin: 2.75rem;
 
@@ -62,8 +62,8 @@ $arabicVerseTopMargin: 2.75rem;
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  block-size: calc(2.2 * var(--spacing-medium));
-  inline-size: calc(2.2 * var(--spacing-medium));
+  height: calc(2.2 * var(--spacing-medium));
+  width: calc(2.2 * var(--spacing-medium));
 
   &:hover {
     color: var(--color-text-default);
@@ -99,13 +99,13 @@ $arabicVerseTopMargin: 2.75rem;
   align-items: center;
   justify-content: center;
   svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
   }
 
   @include breakpoints.smallerThanTablet {
-    inline-size: var(--spacing-medium);
-    block-size: var(--spacing-medium);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
   }
 }
 
@@ -132,7 +132,7 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .bottomActionsContainer {
-  inline-size: 100%;
+  width: 100%;
 }
 
 .tabsContainer {
@@ -153,7 +153,7 @@ $arabicVerseTopMargin: 2.75rem;
 
 .separatorContainer {
   display: flex;
-  block-size: var(--spacing-medium);
+  height: var(--spacing-medium);
   align-items: center;
 }
 
@@ -177,8 +177,8 @@ $arabicVerseTopMargin: 2.75rem;
   justify-content: center;
 
   svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
     color: currentColor;
 
     &:hover {
@@ -186,8 +186,8 @@ $arabicVerseTopMargin: 2.75rem;
     }
 
     @include breakpoints.smallerThanTablet {
-      inline-size: var(--spacing-medium);
-      block-size: var(--spacing-medium);
+      width: var(--spacing-medium);
+      height: var(--spacing-medium);
     }
   }
 }
@@ -202,6 +202,6 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .verseSeparator {
-  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
+  width: calc(100% - 2 * var(--spacing-small)) !important;
   margin-inline: auto;
 }

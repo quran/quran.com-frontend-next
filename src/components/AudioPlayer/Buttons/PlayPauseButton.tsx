@@ -29,7 +29,6 @@ const PlayPauseButton = () => {
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         isDisabled={isLoading}
-        data-testid="audio-loading-button"
       >
         <Spinner size={SpinnerSize.Large} />
       </Button>
@@ -45,7 +44,6 @@ const PlayPauseButton = () => {
           logButtonClick('audio_player_pause');
           audioService.send('TOGGLE');
         })}
-        data-testid="audio-pause-toggle"
       >
         <PauseIcon />
       </Button>
@@ -61,7 +59,6 @@ const PlayPauseButton = () => {
         audioService.send('TOGGLE');
       })}
       shouldFlipOnRTL={false}
-      data-testid="audio-play-toggle"
     >
       <PlayIcon />
     </Button>

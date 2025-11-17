@@ -4,15 +4,15 @@
   display: flex;
   align-items: center;
   > svg {
-    inline-size: var(--spacing-medium);
-    block-size: var(--spacing-medium);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
   }
 }
 
 .container {
   display: flex;
   align-items: flex-start;
-  inline-size: 100%;
+  width: 100%;
 }
 
 .name {
@@ -28,6 +28,6 @@
 
 .rtlText {
   font-family: UthmanicHafs;
-  text-align: end;
+  text-align: right;
   direction: rtl;
 }

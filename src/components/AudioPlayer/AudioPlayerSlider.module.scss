@@ -1,5 +1,5 @@
-@use 'src/styles/breakpoints';
-@use 'src/styles/constants';
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
 
 .container {
   margin-block: var(--spacing-xxsmall) calc(-1 * var(--spacing-xsmall));
@@ -8,13 +8,13 @@
   justify-content: space-between;
   color: var(--color-text-faded);
   font-size: var(--font-size-xsmall);
-  min-block-size: var(
+  min-height: var(
     --font-size-xsmall
   ); // prevents CLS when the current/total time are not loaded yet
   transition: var(--transition-regular);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
-    min-block-size: var(
+    min-height: var(
       --font-size-normal
     ); // prevents CLS when the current/total time are not loaded yet
     margin-block: var(--spacing-medium) calc(-2 * var(--spacing-small));
@@ -28,8 +28,8 @@
   left: 50%;
   transform: translate(-50%, 0);
   margin: 0;
-  inline-size: 100%;
-  block-size: calc(1.25 * var(--spacing-xxsmall));
+  width: 100%;
+  height: calc(1.25 * var(--spacing-xxsmall));
   transition: var(--transition-regular);
   inset-block-end: constants.$audio-player-default-height;
   @include breakpoints.tablet {
