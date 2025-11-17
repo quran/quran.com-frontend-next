@@ -17,6 +17,7 @@ import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import useIsMobile from '@/hooks/useIsMobile';
 import {
   Goal,
   GoalCategory,
@@ -28,7 +29,6 @@ import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
 import { generateDurationDaysOptions } from '@/utils/generators';
-import { isMobile } from '@/utils/responsive';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 type PropsUpdateReadingGoalModal = {
@@ -76,6 +76,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
 }) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
+  const isMobile = useIsMobile();
 
   const mushaf = useGetMushaf();
   const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
@@ -197,7 +198,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
       <Button
         onClick={onUpdateGoalClicked}
         isDisabled={isDisabled}
-        variant={isMobile() ? ButtonVariant.Ghost : undefined}
+        variant={isMobile ? ButtonVariant.Ghost : undefined}
         className={styles.editGoalButton}
       >
         {t('edit-goal.action')}
