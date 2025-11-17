@@ -14,11 +14,16 @@ import { QuranFont } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
+import ChaptersData from 'types/ChaptersData';
 
 // Set a fixed font scale for both Arabic and translation text
 const FONT_SCALE = 3;
 
-const QuranInYearSection = () => {
+interface Props {
+  chaptersData?: ChaptersData;
+}
+
+const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
   const { t } = useTranslation('home');
 
   const onCalendarClicked = () => {
@@ -48,9 +53,11 @@ const QuranInYearSection = () => {
       </div>
       <div className={styles.container} data-testid="quran-in-a-year-section">
         <VerseAndTranslation
+          chaptersData={chaptersData}
           chapter={todayAyah.chapter}
           from={todayAyah.verse}
           to={todayAyah.verse}
+          titleText={t('quran-in-year-verse-title')}
           quranFont={QuranFont.QPCHafs}
           translationsLimit={1}
           arabicVerseClassName={styles.customArabicVerse}

@@ -44,6 +44,7 @@
   "posted-reflections": "Yayınlanan Düşünceler",
   "private-notes": "Notlar",
   "qr-tooltip": "<span> <link> KuranReflect </link> Kuran hakkındaki düşüncelerin paylaşıldığı sosyal bir platformdur. Kuran etrafında bağlantı kurun, önemli olanla bağlantı kurun. </span>",
+  "reflection-update-success": "Yansıma başarıyla güncellendi",
   "reflections-intro": {
     "line-1": "Yorumları görüntülemek ve onlarla etkileşimde bulunmak, toplulukla etkileşimde bulunmak ve daha fazlasını yapmak için <link> KuranReflect.com </link> adresini ziyaret edin.",
     "line-2": "Oturum açarken kullandığınız Kuran.com e-posta adresiyle oturum açarak veya kaydolarak bağlantılı KuranReflect hesabınızda oturum açabilirsiniz.",
@@ -57,6 +58,7 @@
   "share-to-qr": "KuranReflect.com'da paylaşın",
   "share-to-qr-desc": "<b> {{name}} </b> olarak paylaşın. Hedef kitle: <b> KuranReflect kullanıcıları </b>",
   "update-publish-failed": "Not başarıyla güncellendi ancak yayınlanamadı",
+  "update-reflection": "Güncelleme Yansıması",
   "update-success": "Not başarıyla güncellendi",
   "view-on-qr": "KuranReflect'te görüntüle"
 }

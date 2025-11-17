@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Bladwijzer toevoegen",
   "add-collection": "Collectie toevoegen",
   "advanced-copy": "Geavanceerd kopiëren",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "terug naar Ayah",
+  "bismillah": "In de naam van Allah, de meest Barmhartige, de meest Genadevolle.",
+  "change-translation": "Vertaling wijzigen",
   "copy-arabic": "Arabische tekst (Uthmani-tekst)",
   "copy-footnote-q": "Ook voetnoot(en) kopiëren?",
   "copy-success": "Tekst is succesvol gekopieerd naar uw klembord.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Begin van Hizb",
   "include-translator": "Naam van de vertaler toevoegen?",
   "juz-beginning": "begin van Juzz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "The Rescuer: Krachtige lessen in Surah Al-Mulk leerplan banner.",
+    "banner-image-description": "Bekijk het leerplan van The Rescuer voor Surah Al-Mulk",
+    "banner-wrapper-aria-label": "Leerplan promotie banner",
+    "button-accessibility-label": "Leer meer over het leerplan The Rescuer",
+    "call-to-action-button": "Begin nu",
+    "main-headline": "Ontdek vandaag nog krachtige lessen in Soera Al-Mulk",
+    "subtitle-description": "(Een gratis leerplan)"
+  },
   "lessons-desc": "Lees en deel Koranische lessen van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "lessons-disclaimer": "Lessen zijn onderbouwde inzichten van geleerden en kenniszoekers, die losstaan van primaire bronnen zoals Tafsir (de wetenschappelijke interpretatie van de Koran).",
   "lessons-not-available": "Er zijn geen beoordeelde lessen voor deze ayah",
@@ -43,6 +55,8 @@
   "next-page": "Volgende bladzijde",
   "next-rub": "Volgende Rub el Hizb",
   "next-surah": "volgende surah",
+  "page-bookmark-removed": "Pagina als bladwijzer verwijderd",
+  "page-bookmarked": "Pagina als bladwijzer toegevoegd",
   "posted-in": "Geplaatst in",
   "prev-ayah": "Vorige Ayah",
   "prev-hizb": "Vorige Hizb",
