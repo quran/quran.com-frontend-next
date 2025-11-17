@@ -1,7 +1,7 @@
 .starButton {
   all: unset;
-  width: var(--spacing-mega);
-  height: var(--spacing-mega);
+  inline-size: var(--spacing-mega);
+  block-size: var(--spacing-mega);
   display: inline-grid;
   place-items: center;
   color: hsl(50, 100%, 50%);

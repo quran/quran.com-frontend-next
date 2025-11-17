@@ -1,11 +1,11 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  inline-size: 100%;
   transition: all 0.3s ease;
   cursor: pointer;
 
@@ -25,7 +25,7 @@
 
 .iconContainer {
   & > svg {
-    width: 15px;
+    inline-size: 15px;
     display: block;
     margin: auto;
   }

@@ -1,114 +1,114 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-inline-size: 400px;
+  margin: 0 auto;
 }
 
 .title {
-    font-size: var(--font-size-xlarge);
-    font-weight: var(--font-weight-bold);
-    margin-block-start: calc(var(--spacing-xlarge-px) * 1.5);
-    margin-block-end: var(--spacing-xlarge-px);
-    text-align: center;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+  margin-block-start: calc(var(--spacing-xlarge-px) * 1.5);
+  margin-block-end: var(--spacing-xlarge-px);
+  text-align: center;
 }
 
 .emailContainer {
-    text-align: center;
-    margin-block-end: var(--spacing-large);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .description {
-    font-size: var(--font-size-normal);
-    color: var(--color-text-default);
-    margin-bottom: var(--spacing-xsmall);
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .email {
-    font-size: var(--font-size-normal);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-default);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
 }
 
 .instruction {
-    font-size: var(--font-size-normal);
-    color: var(--color-text-default);
-    text-align: center;
-    margin-bottom: var(--spacing-medium-px);
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  text-align: center;
+  margin-block-end: var(--spacing-medium-px);
 }
 
 .inputContainer {
-    margin-bottom: var(--spacing-medium-px);
+  margin-block-end: var(--spacing-medium-px);
 }
 
 .verificationContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--spacing-small-px);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-small-px);
 }
 
 .character {
-    width: var(--spacing-xxlarge-px);
-    height: var(--spacing-xxlarge-px);
-    border: 1px solid var(--color-border-gray-lighter);
-    border-radius: var(--border-radius-medium-px);
-    font-size: var(--font-size-xlarge);
-    color: var(--color-text-default);
-    background-color: var(--color-background-default);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: text;
+  inline-size: var(--spacing-xxlarge-px);
+  block-size: var(--spacing-xxlarge-px);
+  border: 1px solid var(--color-border-gray-lighter);
+  border-radius: var(--border-radius-medium-px);
+  font-size: var(--font-size-xlarge);
+  color: var(--color-text-default);
+  background-color: var(--color-background-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: text;
 
-    &:focus {
-        outline: none;
-        border-color: var(--color-success-medium);
-    }
+  &:focus {
+    outline: none;
+    border-color: var(--color-success-medium);
+  }
 }
 
 .characterInactive {
-    background-color: var(--color-background-elevated);
+  background-color: var(--color-background-elevated);
 }
 
 .characterSelected {
-    border-color: var(--color-success-medium);
-    outline: none;
+  border-color: var(--color-success-medium);
+  outline: none;
 }
 
 .error {
-    color: var(--color-error-medium);
-    font-size: var(--font-size-small);
-    margin-top: var(--spacing-xxsmall);
-    text-align: center;
+  color: var(--color-error-medium);
+  font-size: var(--font-size-small);
+  margin-block-start: var(--spacing-xxsmall);
+  text-align: center;
 }
 
 .spamNote {
-    font-size: var(--font-size-medium);
-    color: var(--color-text-default);
-    text-align: center;
-    margin-bottom: var(--spacing-large);
+  font-size: var(--font-size-medium);
+  color: var(--color-text-default);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
 }
 
 .resendButton {
-    color: var(--color-border-gray-dark);
-    border-color: var(--color-border-gray-dark);
-    font-size: var(--font-size-medium);
-    border-radius: var(--border-radius-medium-px);
+  color: var(--color-border-gray-dark);
+  border-color: var(--color-border-gray-dark);
+  font-size: var(--font-size-medium);
+  border-radius: var(--border-radius-medium-px);
 
-    &:disabled {
-        opacity: 1;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+  }
 }
 
 .confirmationText {
-    font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
 }

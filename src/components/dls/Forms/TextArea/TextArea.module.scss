@@ -1,4 +1,4 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 
 .container {
   display: flex;
@@ -50,8 +50,8 @@
   margin-block-end: var(--spacing-micro);
   margin-inline-start: var(--spacing-micro);
   border: 0;
-  height: 80%;
-  width: 100%;
+  block-size: 80%;
+  inline-size: 100%;
   font-size: var(--font-size-normal);
   color: var(--color-text-default);
   background: transparent;

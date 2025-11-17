@@ -1,14 +1,14 @@
 .large {
-  height: calc(1.5 * var(--spacing-medium));
-  width: calc(1.5 * var(--spacing-medium));
+  block-size: calc(1.5 * var(--spacing-medium));
+  inline-size: calc(1.5 * var(--spacing-medium));
 }
 .normal {
-  height: calc(1.25 * var(--spacing-medium));
-  width: calc(1.25 * var(--spacing-medium));
+  block-size: calc(1.25 * var(--spacing-medium));
+  inline-size: calc(1.25 * var(--spacing-medium));
 }
 .small {
-  height: calc(1 * var(--spacing-medium));
-  width: calc(1 * var(--spacing-medium));
+  block-size: calc(1 * var(--spacing-medium));
+  inline-size: calc(1 * var(--spacing-medium));
 }
 
 .spinner {
@@ -29,8 +29,8 @@
 }
 
 .container {
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   position: relative;
   inset-inline-start: 50%;
   inset-block-start: 50%;
@@ -49,8 +49,8 @@
   background-color: var(--color-text-default);
   position: absolute;
   inset-block-start: -3.9%;
-  width: 24%;
-  height: 8%;
+  inline-size: 24%;
+  block-size: 8%;
   inset-inline-start: -10%;
   border-radius: var(--border-radius-default);
   animation: spinner 1.2s linear 0s infinite normal none running;

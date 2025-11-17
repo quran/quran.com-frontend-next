@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .sideDrawerViewContainer {
   margin-block-end: var(--spacing-medium);
@@ -11,9 +11,9 @@
   text-align: center;
 
   // Matches the Quran Reader's container width
-  max-width: 100%;
+  max-inline-size: 100%;
   @include breakpoints.tablet {
-    max-width: 80%;
+    max-inline-size: 80%;
   }
 
   margin: var(--spacing-medium) auto;

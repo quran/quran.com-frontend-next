@@ -13,9 +13,9 @@
 
 .comboboxContainer {
   position: relative;
-  max-width: 100%;
+  max-inline-size: 100%;
   &.fixedWidth {
-    width: calc(8 * var(--spacing-mega));
+    inline-size: calc(8 * var(--spacing-mega));
   }
 }
 
@@ -35,7 +35,7 @@
   padding-inline-end: 0;
   position: relative;
   display: inline-block;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .selector {
@@ -83,7 +83,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   pointer-events: none;
-  max-width: 80%;
+  max-inline-size: 80%;
 }
 
 .overflow {
@@ -91,7 +91,7 @@
   display: flex;
   flex: auto;
   flex-wrap: wrap;
-  max-width: 100%;
+  max-inline-size: 100%;
   align-items: center;
 }
 
@@ -109,35 +109,35 @@
   border: none;
   outline: none;
   appearance: none;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .smallSearchInput {
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
 }
 .mediumSearchInput {
-  height: calc(2 * var(--spacing-large));
+  block-size: calc(2 * var(--spacing-large));
 }
 .largeSearchInput {
-  height: calc(3 * var(--spacing-medium));
+  block-size: calc(3 * var(--spacing-medium));
 }
 
 .overflowItem {
   flex: none;
   align-self: center;
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 .tagContainer {
-  max-width: calc(100% - var(--spacing-xxsmall));
+  max-inline-size: calc(100% - var(--spacing-xxsmall));
 }
 
 .search {
   position: relative;
-  max-width: 100%;
-  width: var(--spacing-xxsmall);
+  max-inline-size: 100%;
+  inline-size: var(--spacing-xxsmall);
 }
 
 .fullWidth {
-  width: 100%;
+  inline-size: 100%;
 }

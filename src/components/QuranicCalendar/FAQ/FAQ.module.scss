@@ -1,78 +1,78 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 .container {
-    padding-block-start: var(--spacing-large-px);
-    @include breakpoints.smallerThanTablet {
-        padding-block: var(--spacing-medium2-px);
-    }
+  padding-block-start: var(--spacing-large-px);
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-medium2-px);
+  }
 }
 
 .title {
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-large-px);
-    color: var(--color-text-faded-new);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xlarge-px);
-    }
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-large-px);
+  color: var(--color-text-faded-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xlarge-px);
+  }
 }
 
 .faqList {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-medium-px);
-    padding: var(--spacing-xlarge-px);
-    @include breakpoints.smallerThanTablet {
-        padding: var(--spacing-medium2-px);
-    }
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-medium-px);
+  padding: var(--spacing-xlarge-px);
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-medium2-px);
+  }
 }
 
 .faqItem:not(:last-child) {
-    border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .faqQuestion {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: 25px;
-    cursor: pointer;
-    font-weight: var(--font-weight-normal);
-    color: var(--color-text-default-new);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 25px;
+  cursor: pointer;
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default-new);
 
-    font-size: var(--font-size-large-px);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-        padding-block: var(--spacing-medium-px);
-    }
+  font-size: var(--font-size-large-px);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+    padding-block: var(--spacing-medium-px);
+  }
 }
 
 .questionContent {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-small-px);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
 }
 
 .questionIcon {
-    width: var(--spacing-medium2-px);
-    height: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
 }
 
 .chevronIcon {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .faqItem.open .chevronIcon {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .faqAnswer {
-    padding: var(--spacing-medium);
-    background-color: var(--color-background-alternative-faint);
-    border-top: 1px solid var(--color-borders-hairline);
-    font-size: var(--font-size-large-px);
-    border-radius: var(--border-radius-medium-px);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faint);
+  border-block-start: 1px solid var(--color-borders-hairline);
+  font-size: var(--font-size-large-px);
+  border-radius: var(--border-radius-medium-px);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }

@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
@@ -8,8 +8,8 @@
 }
 
 .reciterImage {
-  width: 80%;
-  max-width: calc(20 * var(--spacing-medium));
+  inline-size: 80%;
+  max-inline-size: calc(20 * var(--spacing-medium));
   border-radius: var(--border-radius-circle);
   margin-block-end: var(--spacing-medium);
   margin-inline: auto;
@@ -20,8 +20,8 @@
 .actionsContainer {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  max-width: calc(30 * var(--spacing-medium));
+  inline-size: 80%;
+  max-inline-size: calc(30 * var(--spacing-medium));
 }
 
 .playButton {
