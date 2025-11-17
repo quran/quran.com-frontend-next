@@ -1,6 +1,10 @@
+/* eslint-disable max-lines */
+
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
+import { useSWRConfig } from 'swr';
 import useSWRInfinite from 'swr/infinite';
 
 import layoutStyles from '../../../pages/index.module.scss';
@@ -12,6 +16,10 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
 import Error from '@/pages/_error';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import BookmarkType from '@/types/BookmarkType';
+import { getMushafId } from '@/utils/api';
+import { makeBookmarkCollectionsUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -50,6 +58,10 @@ const CollectionDetailContainer = ({
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
 
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  const { cache } = useSWRConfig();
+
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
 
@@ -65,8 +77,21 @@ const CollectionDetailContainer = ({
     );
   }
 
-  const onUpdated = () => {
+  const onUpdated = (bookmarkId: string) => {
     mutate();
+
+    const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+    const bookmark = bookmarks.find((b) => b.id === bookmarkId);
+
+    if (bookmark) {
+      cache.delete(
+        makeBookmarkUrl(mushafId, bookmark.key, BookmarkType.Ayah, bookmark.verseNumber),
+      );
+
+      cache.delete(
+        makeBookmarkCollectionsUrl(mushafId, bookmark.key, BookmarkType.Ayah, bookmark.verseNumber),
+      );
+    }
   };
 
   const lastPageData = data[data.length - 1];
@@ -90,7 +115,7 @@ const CollectionDetailContainer = ({
     if (shouldDeleteBookmark) {
       deleteBookmarkById(bookmarkId)
         .then(() => {
-          onUpdated();
+          onUpdated(bookmarkId);
         })
         .catch(() => {
           toast(t('common:error.general'), {
@@ -100,7 +125,7 @@ const CollectionDetailContainer = ({
     } else {
       deleteCollectionBookmarkById(collectionId, bookmarkId)
         .then(() => {
-          onUpdated();
+          onUpdated(bookmarkId);
         })
         .catch(() => {
           toast(t('common:error.general'), {
