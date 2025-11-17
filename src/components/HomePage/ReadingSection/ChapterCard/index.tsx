@@ -44,7 +44,7 @@ const ChapterCard: React.FC<Props> = ({
 
   return (
     <Card className={styles.chapterCard} link={link}>
-      <div className={styles.surahContainer}>
+      <div className={styles.surahContainer} data-testid="chapter-card">
         <div className={styles.surahName} translate="no">
           {surahNumberString.padStart(3, '0')}
         </div>

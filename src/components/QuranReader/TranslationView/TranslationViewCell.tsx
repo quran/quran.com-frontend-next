@@ -100,6 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
         })}
+        data-testid={`verse-${verse.verseKey}`}
       >
         <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
