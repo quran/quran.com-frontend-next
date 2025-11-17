@@ -13,7 +13,11 @@ test.beforeEach(async ({ page, context }) => {
 test(
   'CTRL+K opens the search drawer',
   { tag: ['@fast', '@search', '@drawer', '@nav', '@shortcut'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    test.skip(isMobile, 'Skipping shortcut test on mobile devices');
+
+    await page.waitForTimeout(1500);
+
     // 1. Press CTRL+K to open the search drawer
     await page.keyboard.press('Control+KeyK');
 

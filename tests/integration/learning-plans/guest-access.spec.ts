@@ -30,8 +30,7 @@ const scrollToEnd = async (page: Page): Promise<void> => {
 
 const enrollAndReturn = async (page: Page): Promise<void> => {
   await enrollGuest(page);
-  await page.goto(LP_URL);
-  await page.waitForLoadState('networkidle');
+  await page.goto(LP_URL, { waitUntil: 'networkidle' });
 };
 
 const expectNotEnrolledToast = async (page: Page): Promise<void> => {
@@ -75,8 +74,7 @@ const getStoredCourses = (page: Page): Promise<string[]> =>
 const setupNonEnrolled = async (page: Page): Promise<void> => {
   await page.goto(LP_URL);
   await page.evaluate(() => localStorage.clear());
-  await page.reload();
-  await page.waitForLoadState('networkidle');
+  await page.reload({ waitUntil: 'networkidle' });
 };
 
 test.describe('Guest Enrollment', () => {
