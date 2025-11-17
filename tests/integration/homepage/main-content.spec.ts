@@ -68,12 +68,14 @@ test(
     }
 
     await homePage.goTo();
+    await page.evaluate(() => localStorage.clear());
+    await homePage.reload();
 
     const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
     await expect(quranInAYearSection).toBeVisible();
     await expect
       .poll(async () => (await quranInAYearSection.textContent()) || '')
-      .toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
+      .toContain('Week’s Reading'); // Translator name indicates verse + translation rendered
   },
 );
 

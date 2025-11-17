@@ -23,27 +23,32 @@ test(
     // Find and click the reciter selection button
     const playVerseButton = page.locator('#play-verse-button').first();
     await playVerseButton.waitFor({ state: 'visible' });
+    await playVerseButton.scrollIntoViewIfNeeded();
     await playVerseButton.click();
+
+    // Wait for the audio player to be visible before interacting with its controls
+    await expect(page.getByTestId('audio-player-body')).toBeVisible();
 
     const overflowMenuTrigger = page.locator('#audio-player-overflow-menu-trigger');
     await expect(overflowMenuTrigger).toBeVisible();
-
-    // Wait for the button to be clickable
-    await expect(async () => {
-      await overflowMenuTrigger.click({ trial: true });
-    }).toPass({ timeout: 5000 });
-
-    await overflowMenuTrigger.click();
+    await overflowMenuTrigger.scrollIntoViewIfNeeded();
 
     const reciterMenuItem = page.locator('#audio-player-overflow-menu-reciter');
-    await expect(reciterMenuItem).toBeVisible();
+
+    await expect(async () => {
+      await page.waitForTimeout(2000);
+      await overflowMenuTrigger.click();
+      await reciterMenuItem.waitFor({ state: 'visible', timeout: 4000 });
+    }).toPass({ timeout: 15000 });
+
+    await reciterMenuItem.scrollIntoViewIfNeeded();
     await reciterMenuItem.click();
 
     const reciterList = page.locator('#audio-player-reciter-list');
     await expect(reciterList).toBeVisible();
 
     const reciterItems = reciterList.locator('[role="menuitem"]');
-    await expect(reciterItems.first()).toBeVisible();
+    await expect(reciterItems.first()).toBeVisible({ timeout: 10000 });
 
     // Ensure the reciter list is scrollable
     const scrollMetrics = await reciterList.evaluate((element) => ({

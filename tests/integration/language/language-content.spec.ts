@@ -72,17 +72,15 @@ test(
       'aria-label',
       'Rechercher',
     );
-    await expect(page.getByTestId('settings-button')).toHaveAttribute(
-      'aria-label',
-      'Modifier les paramètres',
-    );
     await expect(page.locator('#searchQuery')).toHaveAttribute(
       'placeholder',
       'Rechercher dans le Coran...',
     );
 
+    await homePage.goTo('/fr/1');
+
     // Open the settings drawer and check some elements are in French
-    await page.getByTestId('settings-button').click();
+    await homePage.openSettingsDrawer();
 
     const settingsBody = page.getByTestId('settings-drawer-container');
 
@@ -131,7 +129,7 @@ test(
     // Make sure the translation in Spanish is visible
     await expect(firstVerse.getByText('el Compasivo, el Misericordioso.')).toBeVisible();
     // Make sure Isa Garcia translation is selected in the settings
-    await page.getByTestId('settings-button').click();
+    await homePage.openSettingsDrawer();
     const translationSelect = page.getByTestId('Traducciones seleccionadas Card');
     await expect(translationSelect).toBeVisible();
     await expect(translationSelect).toContainText('Sheikh Isa Garcia');

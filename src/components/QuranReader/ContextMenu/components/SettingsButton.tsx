@@ -13,11 +13,13 @@ import { logEvent } from '@/utils/eventLogger';
 interface SettingsButtonProps {
   className?: string;
   ariaId?: string;
+  dataTestId?: string;
 }
 
 const SettingsButton: React.FC<SettingsButtonProps> = ({
   className,
   ariaId = 'settings-button',
+  dataTestId = 'settings-button',
 }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ const SettingsButton: React.FC<SettingsButtonProps> = ({
       ariaLabel={t('aria.change-settings')}
       id={ariaId}
       onClick={openSettings}
+      data-testid={dataTestId}
     >
       <IconSettings className={styles.settingsButtonIcon} />
     </Button>

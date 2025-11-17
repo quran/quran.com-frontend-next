@@ -1,6 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react-func/max-lines-per-function */
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
@@ -17,9 +17,10 @@ async function hoverFirstWordInVerse2(page: any): Promise<string | null> {
 
 async function modifySettingsAndClose(
   page: any,
-  settingsFn: (page: any) => Promise<void>,
+  settingsFn: (page: Page) => Promise<void>,
 ): Promise<void> {
   await homePage.openSettingsDrawer();
+  await page.waitForTimeout(1000); // Wait for the drawer animation
   await settingsFn(page);
   await page.keyboard.press('Escape');
 }

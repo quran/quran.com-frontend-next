@@ -6,7 +6,7 @@ let homePage: Homepage;
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
-  await homePage.goTo();
+  await homePage.goTo('/1');
 });
 
 test.describe('Theme Selection', () => {

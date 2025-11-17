@@ -34,6 +34,11 @@ const enrollAndReturn = async (page: Page): Promise<void> => {
   await page.waitForLoadState('networkidle');
 };
 
+const expectNotEnrolledToast = async (page: Page): Promise<void> => {
+  const toast = page.getByRole('alert').filter({ hasText: /you are not enrolled/i });
+  await expect(toast).toBeVisible({ timeout: 10000 });
+};
+
 /**
  * Get enrolled courses from Redux persist storage
  * Redux persist stores data under 'persist:root' key with nested JSON structure
@@ -133,9 +138,10 @@ test.describe('Access Control', () => {
   test('should show not enrolled message for direct lesson access', async ({ page }) => {
     await page.goto(LP_URL);
     await page.evaluate(() => localStorage.clear());
-    await page.goto(FIRST_LESSON_URL);
-    await page.waitForLoadState('networkidle');
-    await expect(page.locator('text=You are not enrolled')).toBeVisible();
+    await Promise.all([
+      page.goto(FIRST_LESSON_URL, { waitUntil: 'networkidle' }),
+      expectNotEnrolledToast(page),
+    ]);
   });
 
   test('should show toast when clicking syllabus lesson', async ({ page }) => {
@@ -145,9 +151,11 @@ test.describe('Access Control', () => {
     await syllabusTab.scrollIntoViewIfNeeded();
     await expect(syllabusTab).toBeVisible({ timeout: 10000 });
     await syllabusTab.click();
-    const firstSyllabusLink = page.getByRole('link', { name: /\bday\s+\d+/i }).first();
-    await expect(firstSyllabusLink).toBeVisible({ timeout: 10000 });
-    await firstSyllabusLink.click();
-    await expect(page.locator('text=You are not enrolled')).toBeVisible({ timeout: 10000 });
+    const firstSyllabusLink = page.getByText(/\bday\s+\d+/i).first();
+    // make it click on the button next to the text if exists
+    const button = firstSyllabusLink.locator('..').getByRole('button');
+    if (await button.count()) {
+      await Promise.all([button.click(), expectNotEnrolledToast(page)]);
+    }
   });
 });

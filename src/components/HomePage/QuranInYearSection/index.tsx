@@ -52,18 +52,20 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
         </div>
       </div>
       <div className={styles.container} data-testid="quran-in-a-year-section">
-        <VerseAndTranslation
-          chaptersData={chaptersData}
-          chapter={todayAyah.chapter}
-          from={todayAyah.verse}
-          to={todayAyah.verse}
-          titleText={t('quran-in-year-verse-title')}
-          quranFont={QuranFont.QPCHafs}
-          translationsLimit={1}
-          arabicVerseClassName={styles.customArabicVerse}
-          translationClassName={styles.customTranslation}
-          fixedFontScale={FONT_SCALE}
-        />
+        <div data-testid="quran-in-a-year-verse">
+          <VerseAndTranslation
+            chaptersData={chaptersData}
+            chapter={todayAyah.chapter}
+            from={todayAyah.verse}
+            to={todayAyah.verse}
+            titleText={t('quran-in-year-verse-title')}
+            quranFont={QuranFont.QPCHafs}
+            translationsLimit={1}
+            arabicVerseClassName={styles.customArabicVerse}
+            translationClassName={styles.customTranslation}
+            fixedFontScale={FONT_SCALE}
+          />
+        </div>
         <Button
           type={ButtonType.Primary}
           variant={ButtonVariant.Compact}
