@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -8,11 +8,9 @@ import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
 
-import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
-import useIntersectionObserver from '@/hooks/useObserveElement';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
@@ -24,8 +22,6 @@ interface ChapterHeaderProps {
   chapterId: string;
   translationsLabel?: string;
   translationsCount?: number;
-  pageNumber: number;
-  hizbNumber: number;
   isTranslationView: boolean;
 }
 
@@ -40,23 +36,14 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
   translationsLabel,
   translationsCount,
-  pageNumber,
-  hizbNumber,
   isTranslationView,
 }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('quran-reader');
-  const headerRef = useRef<HTMLDivElement>(null);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
-
-  /**
-   * The intersection observer is needed so that we know that the first verse
-   * is visible. When the first verse is visible, we need to hide the chapter header.
-   */
-  useIntersectionObserver(headerRef, QURAN_READER_OBSERVER_ID);
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
@@ -65,15 +52,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   };
 
   return (
-    <div
-      className={styles.container}
-      ref={headerRef}
-      data-verse-key={`${chapterId}:1`}
-      data-page={pageNumber}
-      data-chapter-id={chapterId}
-      data-hizb={hizbNumber}
-      data-is-translation-view={isTranslationView}
-    >
+    <div className={styles.container}>
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
