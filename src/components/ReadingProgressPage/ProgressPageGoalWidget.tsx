@@ -1,35 +1,65 @@
+import { useContext, useState } from 'react';
+
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
+import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
+
+import ProgressPageGoalWidgetDescription from './ProgressPageGoalWidgetDescription';
 import styles from './ReadingProgressPage.module.scss';
 
-import ReadingGoalAmount, {
-  ReadingGoalAmountContext,
-} from '@/components/ReadingGoal/ReadingGoalAmount';
+import DataContext from '@/contexts/DataContext';
 import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
-import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
+import useGetStreakWithMetadata, {
+  StreakWithMetadata,
+} from '@/hooks/auth/useGetStreakWithMetadata';
+import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
+import useIsMobile from '@/hooks/useIsMobile';
+import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getReadingGoalNavigationUrl } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
-interface ProgressPageGoalWidgetProps {
-  currentActivityDay: CurrentQuranActivityDay;
+interface Props {
   goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
 }
 
-const ProgressPageGoalWidget = ({
-  currentActivityDay,
-  goal,
-  isLoading,
-}: ProgressPageGoalWidgetProps) => {
+const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
   const { t, lang } = useTranslation('reading-progress');
+  const chaptersData = useContext(DataContext);
+  const { currentActivityDay } = useGetStreakWithMetadata({
+    showDayName: true,
+  });
+  const isMobile = useIsMobile();
+  const [modalVisible, setModalVisible] = useState({
+    update: false,
+    delete: false,
+  });
   const percent = goal?.isCompleted ? 100 : Math.min(goal?.progress?.percent || 0, 100);
-  const isGoalDone = percent >= 100;
   const localizedPercent = toLocalizedNumber(percent, lang);
+  const continueReadingUrl = useGetContinueReadingUrl();
+
+  const onUpdateModalChange = (visible: boolean) => {
+    setModalVisible((prev) => ({ ...prev, update: visible }));
+  };
+
+  const onDeleteModalChange = (visible: boolean) => {
+    setModalVisible((prev) => ({ ...prev, delete: visible }));
+  };
+
+  const onShowDeleteModal = () => {
+    logButtonClick('reading_goal_delete');
+    setModalVisible((prev) => ({ ...prev, update: false, delete: true }));
+  };
+
+  const ctaUrl =
+    goal?.type === GoalType.RANGE && goal?.progress?.nextVerseToRead
+      ? getChapterWithStartingVerseUrl(goal.progress.nextVerseToRead)
+      : continueReadingUrl;
 
   if (isLoading) {
     return (
@@ -55,35 +85,46 @@ const ProgressPageGoalWidget = ({
     );
   }
 
-  const getContent = () => {
-    if (goal.isCompleted) {
-      return <p>{t('reading-goal:progress.goal-complete')}</p>;
-    }
-
-    if (isGoalDone) {
-      return <p>{t('reading-goal:progress.complete')}</p>;
-    }
-
-    return (
-      <ReadingGoalAmount
-        goal={goal}
-        currentActivityDay={currentActivityDay}
-        context={ReadingGoalAmountContext.ProgressPage}
-      />
-    );
-  };
-
   return (
-    <div className={styles.widget}>
-      <div>{getContent()}</div>
-
-      <div className={styles.circularProgressbar}>
-        <CircularProgressbar
-          text={`${localizedPercent}%`}
-          value={percent}
-          maxValue={100}
-          strokeWidth={12}
+    <div className={styles.progressWidget}>
+      <div className={styles.progressWidgetWrapper}>
+        <div className={styles.circularProgressbar}>
+          <CircularProgressbar
+            text={`${localizedPercent}%`}
+            value={percent}
+            maxValue={100}
+            strokeWidth={12}
+            classes={{
+              path: styles.circularProgressbarPath,
+              trail: styles.circularProgressbarTrail,
+              text: styles.circularProgressbarText,
+            }}
+          />
+        </div>
+        <div className={styles.progressWidgetContent}>
+          <p className={styles.progressWidgetTitle}>{t('reading-goal:daily-progress')}</p>
+          <ProgressPageGoalWidgetDescription
+            goal={goal}
+            t={t}
+            lang={lang}
+            currentActivityDay={currentActivityDay}
+            chaptersData={chaptersData}
+          />
+        </div>
+      </div>
+      <div className={styles.progressWidgetCta}>
+        {!isMobile && (
+          <Button href={ctaUrl} className={styles.continueReadingButton}>
+            {t('reading-goal:continue-reading')}
+          </Button>
+        )}
+        <UpdateReadingGoalModal
+          goal={goal}
+          isOpen={modalVisible.update}
+          onModalChange={onUpdateModalChange}
+          onShowDeleteModal={onShowDeleteModal}
         />
+        <DeleteReadingGoalModal isOpen={modalVisible.delete} onModalChange={onDeleteModalChange} />
       </div>
     </div>
   );

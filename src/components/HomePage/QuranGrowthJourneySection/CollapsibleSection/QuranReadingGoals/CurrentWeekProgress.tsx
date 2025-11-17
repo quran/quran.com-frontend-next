@@ -20,46 +20,59 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
-  const getDayState = (day: (typeof days)[number]): DayState => {
+  const getDayState = (day: (typeof days)[number]): [DayState, boolean] => {
+    // Check if the day is in the future
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayDate = new Date(day.date);
+    dayDate.setHours(0, 0, 0, 0);
+
+    const isToday = dayDate.getTime() === today.getTime();
+
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 
     // if the user has a goal, we want to show a checked circle if the user has completed his goal for the day
-    // otherwise, we want to show a filled circle if the user has read at all for the day
+    // otherwise, we want to show a checked circle if the user has read at all for the day
     const isGoalDone = goal ? convertFractionToPercent(readingDay?.progress || 0) >= 100 : hasRead;
 
-    if (isGoalDone) return DayState.Checked;
-    if (hasRead) return DayState.Filled;
+    if (isGoalDone) return [DayState.Checked, isToday];
 
-    return day.current ? DayState.Stroked : DayState.None;
+    if (dayDate > today) return [DayState.Future, isToday];
+
+    return [DayState.None, isToday];
   };
 
   return (
-    <div>
-      <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}</p>
+    <div className={styles.currentWeekProgress}>
+      <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}:</p>
       <div
         className={classNames(styles.week, {
           [styles.fixedWidth]: fixedWidth,
         })}
       >
         {days.map((day) => {
-          const dayState = getDayState(day);
+          const [dayState, isToday] = getDayState(day);
 
           return (
             <div key={day.info.localizedNumber} className={styles.day}>
-              <HoverablePopover
-                content={dateToReadableFormat(day.date, lang)}
-                contentSide={ContentSide.TOP}
-              >
-                <span className={styles.fullName}>{day.info.title}</span>
-                <span className={styles.shortName}>{day.info.localizedNumber}</span>
-              </HoverablePopover>
-
               <div className={styles.circleContainer}>
                 <DayCircle state={dayState} />
-
-                <div className={styles.dayDivider} />
               </div>
+              <HoverablePopover
+                content={dateToReadableFormat(day.date, lang)}
+                contentSide={ContentSide.BOTTOM}
+              >
+                <span
+                  className={classNames(styles.shortName, {
+                    [styles.textBold]: isToday,
+                  })}
+                >
+                  {dayState === DayState.Future || isToday
+                    ? day.info.localizedNumber
+                    : day.info.shortName}
+                </span>
+              </HoverablePopover>
             </div>
           );
         })}

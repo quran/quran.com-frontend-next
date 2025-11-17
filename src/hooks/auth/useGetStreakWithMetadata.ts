@@ -13,7 +13,7 @@ import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { dateToDateString, getFullDayName } from '@/utils/datetime';
+import { dateToDateString, getFullDayName, getShortDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type Day = { current: boolean; dateString: string; date: Date };
@@ -48,7 +48,7 @@ const useGetWeekDayNames = (week: Day[], streak: number, showWeekdayName = false
   const { t, lang } = useTranslation('reading-goal');
 
   return useMemo(() => {
-    const names: { localizedNumber: string; title: string }[] = [];
+    const names: { localizedNumber: string; title: string; shortName: string }[] = [];
 
     let showIncrement = streak > 1;
     let currentDayIndex = 0;
@@ -73,11 +73,12 @@ const useGetWeekDayNames = (week: Day[], streak: number, showWeekdayName = false
     }
 
     for (let i = 0; i < 7; i += 1) {
-      let dayName: { localizedNumber: string; title: string };
+      let dayName: { localizedNumber: string; title: string; shortName: string };
       if (showWeekdayName) {
         dayName = {
           localizedNumber: toLocalizedNumber(i + 1, lang),
           title: getFullDayName(week[i].date, lang),
+          shortName: getShortDayName(week[i].date, lang),
         };
       } else {
         /**
@@ -103,6 +104,7 @@ const useGetWeekDayNames = (week: Day[], streak: number, showWeekdayName = false
           title: t('day-x', {
             day: localizedNumber,
           }),
+          shortName: getShortDayName(week[i].date, lang),
         };
       }
 
