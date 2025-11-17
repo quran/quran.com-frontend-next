@@ -1,34 +1,34 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
-    text-align: left !important;
+  text-align: start !important;
 }
 
 .postRamadanVerseContainer {
-    padding-block: var(--spacing-large-px);
+  padding-block: var(--spacing-large-px);
 }
 
 .verseContainer {
-    text-align: justify;
-    margin: auto;
-    @include breakpoints.desktop {
-        width: 65%;
-    }
-    @include breakpoints.smallerThanDesktop {
-        width: 90%;
-    }
-    @include breakpoints.smallerThanTablet {
-        min-height: calc(9 * var(--spacing-mega));
-    }
-    min-height: calc(5 * var(--spacing-mega));
+  text-align: justify;
+  margin: auto;
+  @include breakpoints.desktop {
+    inline-size: 65%;
+  }
+  @include breakpoints.smallerThanDesktop {
+    inline-size: 90%;
+  }
+  @include breakpoints.smallerThanTablet {
+    min-block-size: calc(9 * var(--spacing-mega));
+  }
+  min-block-size: calc(5 * var(--spacing-mega));
 }
 
 .mainVerse {
-    @include breakpoints.tablet {
-        max-width: 50%;
-    }
+  @include breakpoints.tablet {
+    max-inline-size: 50%;
+  }
 }
 .ayahLevelSettings {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

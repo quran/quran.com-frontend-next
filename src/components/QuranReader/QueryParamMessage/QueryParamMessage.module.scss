@@ -7,7 +7,7 @@
   border: 1px solid var(--color-success-faint);
 
   text-align: start;
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }

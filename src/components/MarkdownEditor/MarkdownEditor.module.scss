@@ -52,7 +52,7 @@
     color: var(--color-text-default);
 
     &::before {
-      content: "\201C"; /*Unicode for Left Double Quote*/
+      content: '\201C'; /*Unicode for Left Double Quote*/
 
       /*Font*/
       font-family: Georgia, serif;
@@ -68,7 +68,7 @@
 
     &::after {
       /*Reset to make sure*/
-      content: "";
+      content: '';
     }
 
     p {

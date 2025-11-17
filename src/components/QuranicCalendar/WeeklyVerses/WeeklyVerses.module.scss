@@ -1,245 +1,245 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .content {
-    display: flex;
-    padding: var(--spacing-large-px);
-    flex-direction: column;
-    justify-content: center;
-    align-self: stretch;
-    border-radius: var(--border-radius-medium-px);
-    background: var(--color-background-elevated-new);
-    @include theme.light {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
-    @include theme.dark {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
-    }
-    @include theme.sepia {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
-    color: var(--color-text-default-new);
+  display: flex;
+  padding: var(--spacing-large-px);
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  border-radius: var(--border-radius-medium-px);
+  background: var(--color-background-elevated-new);
+  @include theme.light {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+  @include theme.dark {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+  }
+  @include theme.sepia {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+  color: var(--color-text-default-new);
 
-    @include breakpoints.smallerThanTablet {
-        padding: var(--spacing-medium2-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-medium2-px);
+  }
 }
 
 .title {
-    color: var(--color-text-default-new);
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-small-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small-px);
 
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xlarge-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xlarge-px);
+  }
 }
 
 .subtitle {
-    color: var(--color-text-default);
-    margin-block-end: var(--spacing-large-px);
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-large-px);
 
-    @include breakpoints.smallerThanTablet {
-        margin-block-end: var(--spacing-medium2-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .verseHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .verseRange {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
 }
 
 .verseRangeText {
-    font-size: var(--font-size-large-px);
-    font-weight: var(--font-weight-semibold);
-    width: 100%;
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  inline-size: 100%;
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .verseRangeContainer {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-large-px);
-    width: 100%;
-    @include breakpoints.smallerThanTablet {
-        gap: 0;
-    }
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-large-px);
+  inline-size: 100%;
+  @include breakpoints.smallerThanTablet {
+    gap: 0;
+  }
 }
 
 .rangeSeparator {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-    margin: 0 var(--spacing-xsmall);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin: 0 var(--spacing-xsmall);
 }
 
 .surahName {
-    line-height: normal;
-    font-weight: var(--font-weight-normal);
-    font-family: "surahnames" !important;
-    font-size: var(--font-size-jumbo-px);
-    margin-inline-end: var(--spacing-medium2-px);
-    @include breakpoints.smallerThanTablet {
-        display: none;
-    }
+  line-height: normal;
+  font-weight: var(--font-weight-normal);
+  font-family: 'surahnames' !important;
+  font-size: var(--font-size-jumbo-px);
+  margin-inline-end: var(--spacing-medium2-px);
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }
 
 .surahInfo {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-medium2-px);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium2-px);
 }
 
 .transliteratedName {
-    font-size: var(--font-size-large-px);
-    font-weight: var(--font-weight-medium);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .promptsHeader {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xsmall);
-    margin-bottom: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-small);
 }
 
 .promptsTitle {
-    padding-block-start: var(--spacing-medium2-px);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-normal-px);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  padding-block-start: var(--spacing-medium2-px);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-normal-px);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }
 
 .promptsTitleSpan {
-    color: var(--color-text-faded-new);
+  color: var(--color-text-faded-new);
 }
 
 .downloadText {
-    font-size: var(--font-size-small);
-    color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
 }
 
 .actionButtons {
-    display: flex;
-    gap: var(--spacing-small);
-    align-items: center;
-    margin-top: var(--spacing-medium);
-    justify-content: space-between;
-    @include breakpoints.smallerThanTablet {
-        gap: 0;
-    }
+  display: flex;
+  gap: var(--spacing-small);
+  align-items: center;
+  margin-block-start: var(--spacing-medium);
+  justify-content: space-between;
+  @include breakpoints.smallerThanTablet {
+    gap: 0;
+  }
 }
 
 .rightButtons {
-    display: flex;
-    gap: var(--spacing-medium2-px);
-    align-items: center;
+  display: flex;
+  gap: var(--spacing-medium2-px);
+  align-items: center;
 }
 
 .pdfButtonContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .button {
-    border-radius: var(--border-radius-medium-px);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  border-radius: var(--border-radius-medium-px);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }
 
 .markAsCompletedButton {
-    border-color: var(--color-check) !important;
-    color: var(--color-check) !important;
+  border-color: var(--color-check) !important;
+  color: var(--color-check) !important;
 }
 
 .completedButton {
-    border-color: var(--color-check) !important;
-    color: var(--color-text-white) !important;
-    background-color: var(--color-check) !important;
+  border-color: var(--color-check) !important;
+  color: var(--color-text-white) !important;
+  background-color: var(--color-check) !important;
 }
 
 .pdfButtonContent {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xxsmall-px);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
 }
 
 .pdfButton {
-    background-color: var(--color-background-alternative-faint) !important;
-    border: none !important;
+  background-color: var(--color-background-alternative-faint) !important;
+  border: none !important;
+  color: var(--color-text-default);
+  &:hover {
     color: var(--color-text-default);
-    &:hover {
-        color: var(--color-text-default);
-    }
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }
 
 .helpIconInButton {
-    position: absolute;
-    inset-inline-end: -12px;
-    inset-block-start: calc(-1 * var(--spacing-xsmall-px));
-    background: var(--color-background-default);
-    border: 1px solid var(--color-blue-buttons-and-icons);
-    color: var(--color-blue-buttons-and-icons);
-    border-radius: 50%;
-    width: var(--spacing-medium2-px);
-    height: var(--spacing-medium2-px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    cursor: pointer;
-    font-size: var(--font-size-small-px);
+  position: absolute;
+  inset-inline-end: -12px;
+  inset-block-start: calc(-1 * var(--spacing-xsmall-px));
+  background: var(--color-background-default);
+  border: 1px solid var(--color-blue-buttons-and-icons);
+  color: var(--color-blue-buttons-and-icons);
+  border-radius: 50%;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: var(--font-size-small-px);
 
-    &:hover {
-        color: var(--color-primary-medium);
-        border-color: var(--color-primary-medium);
-    }
+  &:hover {
+    color: var(--color-primary-medium);
+    border-color: var(--color-primary-medium);
+  }
 }
 
 .contentModal {
-    padding: var(--spacing-medium2-px);
+  padding: var(--spacing-medium2-px);
 }
 
 .modalContent {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
 }
 
 .learnMoreLink {
-    margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
 }
 
 .header {
-    font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
 }
 
 .closeIcon {
-    color: var(--color-text-default);
+  color: var(--color-text-default);
 }
 
 .loadingContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-block-size: 200px;
 }

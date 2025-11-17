@@ -1,39 +1,39 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .backText {
-    padding-inline-start: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
 }
 
 .headerContainer {
-    padding-block-end: var(--spacing-small);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  padding-block-end: var(--spacing-small);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  inline-size: 100%;
 }
 
 .title {
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-jumbo);
-    padding-inline-end: var(--spacing-small);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-jumbo);
+  padding-inline-end: var(--spacing-small);
 }
 
 .author {
-    font-size: var(--font-size-small);
+  font-size: var(--font-size-small);
 }
 
 .imgContainer {
-    img {
-        max-width: 100%;
-        height: auto;
-    }
-    margin: auto;
-    margin-block-end: var(--spacing-small);
+  img {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+  margin: auto;
+  margin-block-end: var(--spacing-small);
 }
 
 .startLearningButton {
-    margin-block-start: var(--spacing-small);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  margin-block-start: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

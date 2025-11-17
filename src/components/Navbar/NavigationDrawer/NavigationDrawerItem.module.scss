@@ -1,9 +1,9 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
 
 .container {
   @include utility.center-vertically;
 
-  min-height: calc(var(--spacing-mega) + var(--spacing-small));
+  min-block-size: calc(var(--spacing-mega) + var(--spacing-small));
   padding-inline-start: var(--spacing-micro);
   padding-inline-end: var(--spacing-micro);
   border-block-end: 1px var(--color-borders-hairline) solid;

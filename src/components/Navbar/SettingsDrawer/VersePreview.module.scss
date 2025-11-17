@@ -1,6 +1,6 @@
 .skeletonPlaceholder {
-  height: calc(1.5 * var(--spacing-mega));
-  width: 100%;
+  block-size: calc(1.5 * var(--spacing-mega));
+  inline-size: 100%;
 }
 
 .skeletonContainer + .skeletonContainer {
