@@ -7,6 +7,7 @@ import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import useIsMobile, { MobileSizeVariant } from '@/hooks/useIsMobile';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -48,7 +49,7 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
   const questionsData = usePageQuestions();
   const hasQuestions = questionsData?.[verseKey]?.total > 0;
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-
+  const isMobile = useIsMobile(MobileSizeVariant.SMALL);
   // Modal state using enum
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
@@ -93,7 +94,7 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
     },
     {
       id: TabId.REFLECTIONS,
-      label: t('reflections-and-lessons'),
+      label: isMobile ? t('reflections') : t('reflections-and-lessons'),
       icon: <ChatIcon />,
       onClick: createTabHandler(TabId.REFLECTIONS, () => getVerseReflectionNavigationUrl(verseKey)),
       condition: true,

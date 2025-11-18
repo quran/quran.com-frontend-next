@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Jawapan",
   "aria": {
     "change-settings": "Tukar Tetapan",
     "drawer-close": "Tutup Laci",
@@ -92,6 +93,7 @@
   },
   "ayah": "Ayat",
   "ayahs": "Ayat-ayat",
+  "back": "belakang",
   "beta": "Beta (Ujian)",
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Penanda buku",
@@ -115,6 +117,12 @@
     "title": "Komuniti"
   },
   "complete-sign-up": "Lengkapkan pendaftaran anda",
+  "complete-signup": {
+    "description": "Kami memerlukan maklumat yang hilang berikut untuk melengkapkan pendaftaran anda.",
+    "title": "Lengkapkan pendaftaran anda",
+    "verification-code": "Kod Pengesahan",
+    "verification-code-sent-to": "Kod pengesahan dihantar ke {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Tingkatkan kemajuan anda melalui pemberitahuan <boldSpan> diperibadikan </boldSpan> tentang kemajuan matlamat anda, mengekalkan coretan dan meningkatkan penggunaan ciri semasa kami oleh anda. <br></br> <br></br> Mahukah jika kami  memantau anda melalui e-mel dan saluran lain? Anda boleh mengawal dan melaraskan pilihan ini pada bila-bila masa dalam akaun anda. <br></br> <br></br> Hanya pilih 'Benarkan' untuk <boldSpan> peringatan yang memberi inspirasi </boldSpan> atau 'Bukan Sekarang' untuk menolak.",
@@ -164,6 +172,7 @@
     "account-banned": "Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
     "badRequest": "*Permintaan tidak sah",
     "banned": "*Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
+    "complete-signup-failed": "Gagal melengkapkan pendaftaran. Sila cuba lagi.",
     "confirm": "*Sahkan kata laluan tidak sepadan dengan kata laluan",
     "email": "*Format E-mel Tidak Sah!",
     "exactLength": "*Nilai mestilah panjang tepat",
@@ -210,7 +219,7 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
-    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link>Quran.Foundation</link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah",
+    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link> Quran.Foundation </link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdulillah.",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
     "title": "Baca, Dengar, Cari, dan Renungkan Al-Quran"
@@ -254,6 +263,7 @@
   "learning-plans": "Rancangan Pembelajaran",
   "less": "Kurang",
   "lessons": "Pelajaran",
+  "listen": "Dengar",
   "loading": "Sedang dimuat ",
   "login": "Log masuk",
   "logout": "Log keluar",
@@ -273,9 +283,11 @@
   "next-ayah": "Ayah Seterusnya",
   "no": "Tidak",
   "no-notifications": "Tiada pemberitahuan lagi",
+  "no-verses-available": "Tiada ayat yang tersedia",
   "none": "Tiada",
   "not-now": "Bukan sekarang",
   "notes": {
+    "label": "Nota",
     "title": "Nota & Renungan Saya"
   },
   "notification-settings": "Tetapan Pemberitahuan",
@@ -311,7 +323,7 @@
   "privacy": "Privasi",
   "product-updates": "Kemas kini produk",
   "profile": "Profil",
-  "projects-desc": "Projek bukan untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
+  "projects-desc": "Projek tanpa untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
@@ -353,7 +365,7 @@
     "title": "Cari"
   },
   "seconds": "Saat",
-  "see-new": "Lihat apa yang baharu",
+  "see-new": "Lihat terbaru",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila anda mengerakkan 'cursor mouse' atau apabila anda tekan (mouse) klik pada perkataan"
   },
   "share": "Kongsi",
+  "share-quran-description-line-1": "Nabi ﷺ bersabda:",
+  "share-quran-description-line-2": "'Sampaikanlah dariku, walau hanya satu ayat.'",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Kongsi Al-Quran!",
   "shared": "Pautan telah disalin ke papan keratan!",
   "show-more": "Tunjukkan maklumat lanjut",
   "sidebar": {

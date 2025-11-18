@@ -7,7 +7,6 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -58,9 +57,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const verseTranslations = words[0].verse?.translations;
-  const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length || 0;
+  const translationsCount = words[0].verse?.translationsCount;
+  const translationsLabel = words[0].verse?.translationsLabel;
 
   return (
     <div
@@ -73,11 +71,12 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     >
       {shouldShowChapterHeader && (
         <ChapterHeader
-          translationName={translationName}
+          translationsLabel={translationsLabel}
           translationsCount={translationsCount}
           chapterId={firstWordData[0]}
           pageNumber={words[0].pageNumber}
           hizbNumber={words[0].hizbNumber}
+          isTranslationView={false}
         />
       )}
       <div

@@ -6,23 +6,23 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Próximo",
-        "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
+        "description": "Quer esteja a utilizar o Quran.com no seu telemóvel ou no seu computador portátil, os seus favoritos, os últimos versos lidos e as suas preferências estarão disponíveis",
         "title": "Seus dados serão sincronizados <br></br> entre dispositivos"
       },
       "feedback": {
         "action": "Ok, entendi",
         "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com </link>",
-        "title": "Queremos ouvir seus pensamentos"
+        "title": "Queremos ouvir a sua opinião"
       },
       "quran-foundation-link": {
         "action": "Próximo",
-        "description": "Use seu login do Quran.com para acessar o QuranReflect.com — uma próspera comunidade global engajada na reflexão do Alcorão.",
+        "description": "Use seu login do Quran.com para acessar o QuranReflect.com — uma próspera comunidade global engajada na reflexão do Quran.",
         "title": "Use sua conta nos aplicativos Quran.Foundation!"
       },
       "quran-growth-journey": {
         "action": "Próximo",
-        "description": "Mantenha sua série de leitura do Alcorão e progrida em seus objetivos enquanto constrói novos hábitos",
-        "title": "Comece sua jornada de crescimento do Alcorão!"
+        "description": "Mantenha sua série de leitura do Quran e progrida em seus objetivos enquanto constrói novos hábitos",
+        "title": "Comece sua jornada de crescimento do Quran!"
       },
       "welcome": {
         "action": "Veja o que é novo",
@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Respostas",
   "aria": {
     "change-settings": "Mudar configurações",
     "drawer-close": "Fechar gaveta",
@@ -92,8 +93,9 @@
   },
   "ayah": "Ayah",
   "ayahs": "Ayahs",
+  "back": "Voltar",
   "beta": "Beta",
-  "beyond-ramadan": "Cresça além do Ramadã!",
+  "beyond-ramadan": "Cresça além do Ramadan!",
   "bookmark": "marca páginas",
   "bookmarked": "Favorito",
   "both": "Ambos",
@@ -103,22 +105,28 @@
   "command-bar": {
     "navigations": "Navegações",
     "no-nav-results": "Sem resultados de navegação",
-    "placeholder": "Pesquise no Alcorão...",
+    "placeholder": "Pesquise no Quran...",
     "recent-navigations": "Navegações recentes",
     "search-by-voice": "Pesquisa por voz",
     "try-navigating": "Tente navegar para"
   },
   "community": {
     "cta": "Entre em contato",
-    "header": "Quer contribuir com suas habilidades técnicas para promover a missão do Alcorão?",
+    "header": "Quer usar suas habilidades técnicas para promover a missão do Alcorão?",
     "sub-header": "Compartilhe seu interesse preenchendo este formulário e entraremos em contato quando uma oportunidade adequada estiver disponível, insha'Allah.",
     "title": "Comunidade"
   },
   "complete-sign-up": "Complete seu cadastro",
+  "complete-signup": {
+    "description": "Precisamos das seguintes informações que faltam para concluir seu registro.",
+    "title": "Conclua seu registro",
+    "verification-code": "Código de verificação",
+    "verification-code-sent-to": "Código de verificação enviado para {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Acelere seu progresso com notificações <boldSpan> personalizadas </boldSpan> sobre o progresso de sua meta, mantendo sequências e melhorando o uso de nossos recursos atuais. <br></br> <br></br> Podemos mantê-lo informado por e-mail e outros canais? Você está no controle – sinta-se à vontade para ajustar essas preferências a qualquer momento nas configurações da sua conta. <br></br> <br></br> Basta selecionar 'Permitir' para <boldSpan> lembretes inspiradores </boldSpan> ou 'Agora não' para recusar.",
-      "header": "Adoraríamos ajudá-lo a permanecer <boldSpan> comprometido e consistente </boldSpan> em sua jornada de crescimento do Alcorão! 📖🌟"
+      "header": "Adoraríamos ajudá-lo a permanecer <boldSpan> comprometido e consistente </boldSpan> em sua jornada de crescimento do Quran! 📖🌟"
     }
   },
   "continue": "Prosseguir",
@@ -131,7 +139,7 @@
     "decrease": "Diminuir",
     "increase": "Aumentar"
   },
-  "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
+  "default-description": "O Quran traduzido para vários idiomas em uma interface simples e fácil",
   "delete": "Excluir",
   "developers": "Desenvolvedores",
   "display": "Mostrar",
@@ -164,6 +172,7 @@
     "account-banned": "Desculpe, sua conta foi banida. Contate Quran.Foundation",
     "badRequest": "*Pedido inválido",
     "banned": "*Desculpe, sua conta foi banida. Contate Quran.Foundation",
+    "complete-signup-failed": "Falha ao concluir o cadastro. Tente novamente.",
     "confirm": "*A senha de confirmação não corresponde à senha",
     "email": "*Formato de e-mail inválido!",
     "exactLength": "*O valor deve ter o comprimento exato",
@@ -200,8 +209,8 @@
     "qcf-desc": "As fontes Complexo King Fahad (V1 and V2) fornecem qualidade superior, mas demoram mais para carregar.",
     "qcf-v4-desc": "As fontes Tajweed foram criadas usando Easy Quran - Dar Al Marifa Tajweed Mushaf e King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts após receber permissão de ambos.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-    "quran-font": "Fonte do Alcorão",
-    "quran-font-size": "Tamanho da fonte do Alcorão",
+    "quran-font": "Fonte do Quran",
+    "quran-font-size": "Tamanho da fonte do Quran",
     "tajweed": "Tajweed",
     "tajweed-desc": "A fonte Tajweed mostra um Mushaf colorido Tajweed. Você pode ler mais sobre as regras de cores do Tajweed <0> aqui </0>",
     "tajweed_v4": "Complexo Rei Fahad V4",
@@ -210,10 +219,10 @@
     "translation-font-size": "Tamanho da fonte da tradução"
   },
   "footer": {
-    "description": "Quran.com é uma plataforma confiável usada por milhões de pessoas no mundo todo para ler, pesquisar, ouvir e refletir sobre o Alcorão em vários idiomas. Ela fornece traduções, tafsir, recitações, tradução palavra por palavra e ferramentas para estudo mais profundo, tornando o Alcorão acessível a todos. <br/> <br/> Como uma Sadaqah Jariyah, Quran.com se dedica a ajudar as pessoas a se conectarem profundamente com o Alcorão. Apoiado pela <link>Quran.Foundation</link>, uma organização sem fins lucrativos 501(c)(3), Quran.com continua a crescer como um recurso gratuito e valioso para todos, Alhamdullilah",
+    "description": "Quran.com é uma plataforma confiável usada por milhões de pessoas em todo o mundo para ler, pesquisar, ouvir e refletir sobre o Alcorão em vários idiomas. Ela oferece traduções, tafsir, recitações, tradução palavra por palavra e ferramentas para um estudo mais aprofundado, tornando o Alcorão acessível a todos. <br/> <br/> Como uma Sadaqah Jariyah, o Quran.com se dedica a ajudar as pessoas a se conectarem profundamente com o Alcorão. Apoiado pela <link> Quran.Foundation </link>, uma organização sem fins lucrativos 501(c)(3), o Quran.com continua a crescer como um recurso gratuito e valioso para todos, Alhamdulillah.",
     "hiring": "Estamos contratando! Junte-se à equipe da QuranFoundation e contribua para a nossa missão. <link> Inscreva-se agora! </link>",
     "rights": "Todos os direitos reservados",
-    "title": "Leia, ouça, pesquise e reflita sobre o Alcorão"
+    "title": "Leia, ouça, pesquise e reflita sobre o Quran"
   },
   "form": {
     "body": "Corpo",
@@ -238,7 +247,7 @@
     "title": "Seja um doador mensal"
   },
   "get-started": "Começar",
-  "hear-it-pronounced": "Clique em palavras do Alcorão, ouça a pronúncia",
+  "hear-it-pronounced": "Clique em palavras do Quran, ouça a pronúncia",
   "help": "Ajuda",
   "hizb": "Hizb",
   "home": "Casa",
@@ -254,12 +263,13 @@
   "learning-plans": "Planos de aprendizagem",
   "less": "Menos",
   "lessons": "Lições",
+  "listen": "Ouvir",
   "loading": "Carregando",
   "login": "Conecte-se",
   "logout": "Sair",
   "meccan": "Meca",
   "medinan": "Medina",
-  "menu": "Cardápio",
+  "menu": "Menu",
   "minutes": "Minutos",
   "mobile-apps": "Aplicativos móveis",
   "mode": "Modo",
@@ -273,9 +283,11 @@
   "next-ayah": "Próxima Aia",
   "no": "Não",
   "no-notifications": "Nenhuma notificação ainda",
+  "no-verses-available": "Nenhum verso disponível",
   "none": "Nenhum",
   "not-now": "Agora não",
   "notes": {
+    "label": "Notas",
     "title": "Minhas notas e reflexões"
   },
   "notification-settings": "Configurações de notificação",
@@ -294,17 +306,17 @@
   "pbuh": "Bênçãos de Allah estejam com ele",
   "popular-links": "Links populares",
   "popup": {
-    "companion-title": "Caro companheiro do Alcorão,",
+    "companion-title": "Caro companheiro do Quran,",
     "footnote": "As doações mensais permitem que nos concentremos menos na angariação de fundos",
     "subtitle": "“Não há dias em que a ação virtuosa seja tão agradável a Allah como nestes dias” [Al-Bukhari 969]",
-    "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
+    "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Quran, sempre de graça.",
     "text-2": "A oportunidade perfeita para caridade contínua (Sadaqa Jariyah). Invista na sua Vida Futura como doador mensal (ou único).",
     "title": "Doe nos melhores dias!"
   },
   "powered-by": "Distribuído por",
   "prepare-hearts": {
     "cta": "Saber mais",
-    "title": "Continue depois do Ramadã!"
+    "title": "Continue depois do Ramadan!"
   },
   "prev": "Anterior",
   "previous-ayah": "Anterior Ayah",
@@ -314,13 +326,13 @@
   "projects-desc": "Projetos sem fins lucrativos de propriedade, administrados ou patrocinados pela <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
-  "quran-radio": "Rádio Alcorão",
+  "quran-radio": "Rádio Quran",
   "reading-history": "Lendo o histórico",
   "reading-preference": {
     "reading": "Lendo",
     "translation": "Tradução"
   },
-  "ready-for-ramadan": "Pronto para o Ramadã?",
+  "ready-for-ramadan": "Pronto para o Ramadan?",
   "recitation": "Recitação",
   "reciter": "Recitador",
   "reciter-summary": "(Com a gentil permissão do Tafsir Center)",
@@ -353,7 +365,7 @@
     "title": "Procurar"
   },
   "seconds": "Segundos",
-  "see-new": "Veja o que há de novo",
+  "see-new": "Veja as novidades",
   "settings": {
     "no-tafsir-selected": "Nenhum tafsir selecionado",
     "no-translation-selected": "Nenhuma tradução selecionada",
@@ -376,13 +388,17 @@
     "word-tooltip-helper": "Exibir a tradução ou transliteração ao passar o mouse ou clicar na palavra"
   },
   "share": "Compartilhado",
+  "share-quran-description-line-1": "O Profeta ﷺ disse:",
+  "share-quran-description-line-2": "\"Transmita de mim, mesmo que seja um verso.\"",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Compartilhe o Alcorão!",
   "shared": "O link foi copiado para a área de transferência!",
   "show-more": "Mostre mais",
   "sidebar": {
     "search-hizb": "Pesquisar hizb",
     "search-juz": "Pesquisar Juz",
     "search-page": "Página de Pesquisa",
-    "search-surah": "Surata de pesquisa",
+    "search-surah": "Procurar Surah",
     "search-verse": "Pesquisar Verso",
     "try-navigating-with": "Dica: tente navegar com"
   },
@@ -442,7 +458,7 @@
   "view": "Visualizar",
   "voice": {
     "ask-permission": "Ative a permissão do microfone para começar a usar a Pesquisa por voz",
-    "error": "Ocorreu um erro. Tente novamente mais tarde.",
+    "error": "Ocorreu um erro. Tente novamente ({{errorCode}}).",
     "language-unavailable": "O árabe não é suportado pelo seu navegador.",
     "network": "Erro de rede. Verifique sua conexão de internet e tente novamente.",
     "no-microphone": "Nenhum microfone detectado. Conecte um microfone e tente novamente.",

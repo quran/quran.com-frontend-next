@@ -13,6 +13,7 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher } from '@/api';
+import { addSentryBreadcrumb, logErrorToSentry } from '@/lib/sentry';
 import {
   ActivityDay,
   ActivityDayType,
@@ -50,6 +51,7 @@ import {
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
+  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -70,6 +72,8 @@ import {
   makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
+  makeGetNoteByIdUrl,
+  makeGetNotesByVerseUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
   makeGetUserCoursesCountUrl,
@@ -77,7 +81,6 @@ import {
   makeGoalUrl,
   makeLogoutUrl,
   makeNotesUrl,
-  makePublishNoteUrl,
   makeReadingSessionsUrl,
   makeRefreshTokenUrl,
   makeShortenUrlUrl,
@@ -229,6 +232,30 @@ export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
+
+// Track token refresh progress to allow UI / logic to defer actions while refreshing
+let tokenRefreshInProgress = false;
+export const isTokenRefreshInProgress = () => tokenRefreshInProgress;
+
+const refreshTokenWithFlag = async (): Promise<RefreshToken> => {
+  if (!tokenRefreshInProgress) {
+    tokenRefreshInProgress = true;
+    addSentryBreadcrumb('auth.refresh', 'token refresh start');
+  }
+  try {
+    const result = await refreshToken();
+    addSentryBreadcrumb('auth.refresh', 'token refresh success');
+    return result;
+  } catch (e) {
+    addSentryBreadcrumb('auth.refresh', 'token refresh failure');
+    logErrorToSentry(e, {
+      transactionName: 'auth.refresh',
+    });
+    throw e;
+  } finally {
+    tokenRefreshInProgress = false;
+  }
+};
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
@@ -500,6 +527,21 @@ export const publishNoteToQR = async (
 ): Promise<{ success: boolean; postId: string }> =>
   postRequest(makePublishNoteUrl(noteId), payload);
 
+export const getNoteById = async (id: string): Promise<Note> =>
+  privateFetcher(makeGetNoteByIdUrl(id));
+
+export const getNotesByVerse = async (verseKey: string): Promise<Note[]> => {
+  addSentryBreadcrumb('notes.split', 'fetching notes by verse', { verseKey });
+
+  const notes: Note[] = await privateFetcher(makeGetNotesByVerseUrl(verseKey));
+
+  addSentryBreadcrumb('notes.split', 'fetched notes', {
+    notesCount: notes.length,
+  });
+
+  return notes;
+};
+
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
     body,
@@ -615,6 +657,6 @@ export const withCredentialsFetcher = async <T>(
 export const privateFetcher = configureRefreshFetch({
   shouldRefreshToken,
   // @ts-ignore
-  refreshToken,
+  refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });

@@ -7,7 +7,6 @@
   "explore-topics": "Explore Topics",
   "first-time-reading": "New to the Quran? <link>Start here</link>",
   "grow-beyond-ramadan": "Grow with us <modalLink>Beyond Ramadan</modalLink>",
-  "take-notes": "Have you been missing out on <modalLink>Notes?</modalLink>",
   "know-someone": "Grow with us this <modalLink>Ramadan</modalLink>",
   "learning-plan": "Learning Plans",
   "listen-to-radio": "Listen to Quran Radio",
@@ -41,6 +40,7 @@
   "qr-community": "Read today's featured Verses and Reflections",
   "quran-in-year": "Quran in a Year",
   "quran-in-year-cta": "This Week’s Reading",
+  "quran-in-year-verse-title": "A verse from this week's reading",
   "ramadan-activities-cta": "<link>Follow the <b>Global Quranic Calendar</b> for weekly readings, inspiring podcasts, and a call to reflect!</link>",
   "ramadan": {
     "header": "Tools to Deepen Your Connection with the Quran",

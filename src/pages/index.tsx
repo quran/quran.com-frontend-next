@@ -34,7 +34,10 @@ type IndexProps = {
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
+const Index: NextPage<IndexProps> = ({
+  chaptersResponse: { chapters },
+  chaptersData,
+}): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
@@ -57,7 +60,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
               <ReadingSection />
             </div>
             {isMobile() ? (
-              <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} todayAyah={todayAyah} />
+              <MobileHomepageSections
+                isUserLoggedIn={isUserLoggedIn}
+                todayAyah={todayAyah}
+                chaptersData={chaptersData}
+              />
             ) : (
               <>
                 {isUserLoggedIn ? (
@@ -70,7 +77,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection />
+                        <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
                     <div
@@ -96,6 +103,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     >
                       <ExploreTopicsSection />
                     </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection />
+                    </div>
                     {todayAyah && (
                       <div
                         className={classNames(
@@ -104,14 +116,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection />
+                        <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <LearningPlansSection />
-                    </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >

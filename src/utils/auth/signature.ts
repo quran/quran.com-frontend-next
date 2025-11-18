@@ -49,7 +49,7 @@ const generateSignature = (
   try {
     const methodsWithBody = ['POST', 'PUT', 'PATCH', 'DELETE'];
     if (methodsWithBody.includes(req.method)) {
-      params = req.body;
+      params = req.body || {};
     }
   } catch (err) {
     // eslint-disable-next-line no-console

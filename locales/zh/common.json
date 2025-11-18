@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "答案",
   "aria": {
     "change-settings": "更改设置",
     "drawer-close": "关闭抽屉",
@@ -92,6 +93,7 @@
   },
   "ayah": "节",
   "ayahs": "节",
+  "back": "后退",
   "beta": "测试版",
   "beyond-ramadan": "超越斋月！",
   "bookmark": "书签",
@@ -110,11 +112,17 @@
   },
   "community": {
     "cta": "联系我们",
-    "header": "想要贡献您的技术技能来进一步推进《古兰经》的使命吗？",
+    "header": "您是否愿意自愿贡献您的技术技能来进一步推进《古兰经》的使命？",
     "sub-header": "请填写此表格来分享您的兴趣，当有合适的机会时，我们会与您联系，如果上帝愿意的话。",
     "title": "社区"
   },
   "complete-sign-up": "完成您的注册",
+  "complete-signup": {
+    "description": "我们需要以下缺失的信息来完成您的注册。",
+    "title": "完成注册",
+    "verification-code": "验证码",
+    "verification-code-sent-to": "验证码已发送至{{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 通过<boldSpan>个性化</boldSpan>有关您的目标进度、保持连续记录并增强您对我们当前功能的使用的通知来加快您的进度。 <br></br> <br></br>我们可以通过电子邮件和其他渠道让您了解最新情况吗？您一切尽在掌控 - 您可以随时在帐户设置中调整这些偏好设置。 <br></br> <br></br>只需选择“允许” <boldSpan>鼓舞人心的提醒</boldSpan>或“现在不”即可拒绝。",
@@ -164,6 +172,7 @@
     "account-banned": "抱歉，您的帐户已被禁止。联系 Quran.Foundation",
     "badRequest": "*请求无效",
     "banned": "*抱歉，您的帐户已被禁止。联系 Quran.Foundation",
+    "complete-signup-failed": "无法完成注册。请重试。",
     "confirm": "*确认密码与密码不匹配",
     "email": "*电子邮件格式无效！",
     "exactLength": "*值的长度必须准确",
@@ -210,7 +219,7 @@
     "translation-font-size": "翻译字体大小"
   },
   "footer": {
-    "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、朗诵、逐字翻译和深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为 Sadaqah Jariyah，Quran.com 致力于帮助人们与《古兰经》建立深厚的联系。在 501(c)(3) 非营利组织 <link>Quran.Foundation</link> 的支持下，Quran.com 继续发展成为所有人的免费和宝贵资源，Alhamdullilah",
+    "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、诵读、逐字翻译以及深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为一家名为“施舍之家”（Sadaqah Jariyah）的机构，Quran.com 致力于帮助人们与《古兰经》建立更深层次的联系。在 501(c)(3) 非营利组织<link> Quran.Foundation </link>的支持下，Quran.com 不断发展壮大，成为所有人的免费宝贵资源。Alhamdulillah（真主安拉）",
     "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
     "rights": "版权所有",
     "title": "阅读、聆听、探索并思考《古兰经》"
@@ -254,6 +263,7 @@
   "learning-plans": "学习计划",
   "less": "较少的",
   "lessons": "课程",
+  "listen": "听",
   "loading": "加载中",
   "login": "登录",
   "logout": "登出",
@@ -273,9 +283,11 @@
   "next-ayah": "下一节文",
   "no": "不",
   "no-notifications": "还没有通知",
+  "no-verses-available": "没有可用的诗句",
   "none": "无",
   "not-now": "现在不要",
   "notes": {
+    "label": "笔记",
     "title": "我的笔记和思考"
   },
   "notification-settings": "通知设置",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"
   },
   "share": "分享",
+  "share-quran-description-line-1": "先知ﷺ说道：",
+  "share-quran-description-line-2": "“请代我传达，哪怕只有一节诗。”",
+  "share-quran-description-line-3": "（布哈里 3461）",
+  "share-quran-title": "分享古兰经！",
   "shared": "链接已复制到剪贴板！",
   "show-more": "展示更多",
   "sidebar": {

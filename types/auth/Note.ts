@@ -15,6 +15,7 @@ export type Note = {
   id: string;
   title: string;
   body: string;
+  verseKey?: string; // will be undefined when the note is not attached to any verse
   ranges?: string[]; // will be undefined when the note is not attached to any verse
   createdAt: Date;
   updatedAt: Date;

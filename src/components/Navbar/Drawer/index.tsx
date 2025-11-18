@@ -156,6 +156,7 @@ const Drawer: React.FC<Props> = ({
   const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
+      data-testid={isOpen ? `${type}-drawer-container` : undefined}
       className={classNames(styles.container, {
         [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,

@@ -1,4 +1,5 @@
 @use "src/styles/breakpoints";
+@use "src/styles/mixins/z-index" as z-index-mixins;
 
 $translateYDistance: 200px;
 
@@ -69,9 +70,7 @@ $translateYDistance: 200px;
   transition: opacity var(--transition-fast) ease;
 }
 
-.overlayMax {
-  z-index: var(--z-index-max);
-}
+@include z-index-mixins.z-index-variants;
 
 .fullScreen {
   @include breakpoints.smallerThanTablet {

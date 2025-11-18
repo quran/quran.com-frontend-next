@@ -1,7 +1,7 @@
 {
   "default-translations": "الترجمات الافتراضية",
-  "filter": "فلتر",
-  "language-filter-label": "ابحث في جميع ترجمات لغة",
+  "filter": "تصفية البحث",
+  "language-filter-label": "ابحث في جميع الترجمات الخاصة بلغة معينة",
   "language-select": "اختر لغة",
   "reset": "إعادة تعيين",
   "search": "بحث",

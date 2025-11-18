@@ -22,10 +22,11 @@ import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
   chapterId: string;
-  translationName?: string;
+  translationsLabel?: string;
   translationsCount?: number;
   pageNumber: number;
   hizbNumber: number;
+  isTranslationView: boolean;
 }
 
 /**
@@ -37,10 +38,11 @@ interface ChapterHeaderProps {
  */
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
-  translationName,
+  translationsLabel,
   translationsCount,
   pageNumber,
   hizbNumber,
+  isTranslationView,
 }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('quran-reader');
@@ -70,6 +72,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       data-page={pageNumber}
       data-chapter-id={chapterId}
       data-hizb={hizbNumber}
+      data-is-translation-view={isTranslationView}
     >
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
@@ -94,7 +97,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
               )
             }
           >
-            <span>{translationName}</span>
+            <span>{translationsLabel}</span>
           </Button>
         </div>
       </div>
@@ -108,7 +111,11 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       />
 
       {/* Bismillah section */}
-      <BismillahSection chapterId={chapterId} showTranslatedName={isArabicOrUrdu} />
+      <BismillahSection
+        chapterId={chapterId}
+        showTranslatedName={isArabicOrUrdu}
+        isTranslationView={isTranslationView}
+      />
     </div>
   );
 };

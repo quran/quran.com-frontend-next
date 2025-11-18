@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
-import { NextPage, GetServerSideProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -22,6 +22,7 @@ import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -31,7 +32,6 @@ import {
   getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getRamadanNavigationUrl();
 const PreparingForRamadanPage: NextPage = (): JSX.Element => {
@@ -382,6 +382,14 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/ramadan');
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
 
 export default PreparingForRamadanPage;

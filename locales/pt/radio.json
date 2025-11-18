@@ -2,7 +2,7 @@
   "change": "Mudar",
   "curated-station": {
     "juz-amma": {
-      "description": "Ouça o Juz final do Alcorão",
+      "description": "Ouça o Juz final do Quran",
       "title": "Juz Amma"
     },
     "popular-recitations": {
@@ -21,7 +21,7 @@
   "curated-stations": "Estações com curadoria",
   "pause-radio": "Pausar rádio",
   "play-radio": "Tocar rádio",
-  "radio-desc": "Ouça a bela recitação ininterrupta do Alcorão Sagrado por vários recitadores.",
+  "radio-desc": "Ouça a bela recitação ininterrupta do Sagrado Quran por vários recitadores.",
   "reciter-stations": "Estações de recitadores",
   "station": "Estação"
 }

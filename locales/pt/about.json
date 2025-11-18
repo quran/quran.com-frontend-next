@@ -1,41 +1,41 @@
 {
   "credits": {
-    "desc": "Agradecemos a todos aqueles que apoiaram e contribuíram para este projeto, ajudando a tornar o Alcorão acessível a milhões de pessoas no mundo todo.",
+    "desc": "Agradecemos a todos aqueles que apoiaram e contribuíram para este projeto, ajudando a tornar o Quran acessível a milhões de pessoas no mundo todo.",
     "lokalize": "<0>Lokalize</0>: Um sistema de tradução auxiliado por computador que se concentra na produtividade e na garantia de qualidade e fornece um fluxo de trabalho de localização perfeito.",
     "quran-align": "<0>Collin Fair</0>: Uma ferramenta para produzir segmentação precisa de palavras de recitações corânicas gravadas.",
-    "quran-complex": "<0>QuranComplex</0>: O Complexo de Impressão do Glorioso Alcorão Rei Fahd é líder em servir o Glorioso Alcorão e suas Ciências, traduzindo seus Significados e protegendo o Texto Corânico de distorções, por meio do uso ideal de tecnologias avançadas no campo da impressão, gravações de áudio, publicação eletrônica e aplicações digitais.",
-    "quran-enc": "<0>QuranEnc</0>: Um portal que apresenta traduções gratuitas e confiáveis dos significados e exegeses do nobre Alcorão em muitas línguas do mundo.",
-    "tanzil": "<0>Tanzil</0>: Um projeto corânico internacional que visa fornecer um texto do Alcorão preciso e altamente verificado.",
-    "tarteel": "<0>Tarteel</0>: Um aplicativo de memorização do Alcorão com tecnologia de IA. Ele foi projetado para ajudar você a memorizar de forma mais inteligente, seja procurando um versículo, monitorando seu progresso ou acompanhando sua recitação.",
+    "quran-complex": "<0>QuranComplex</0>: O Complexo de Impressão do Glorioso Quran Rei Fahd é líder em servir o Glorioso Quran e suas Ciências, traduzindo seus Significados e protegendo o Texto Qurânico de distorções, por meio do uso ideal de tecnologias avançadas no campo da impressão, gravações de áudio, publicação eletrônica e aplicações digitais.",
+    "quran-enc": "<0>QuranEnc</0>: Um portal que apresenta traduções gratuitas e confiáveis dos significados e exegeses do nobre Quran em muitas línguas do mundo.",
+    "tanzil": "<0>Tanzil</0>: Um projeto qurânico internacional que visa fornecer um texto do Quran preciso e altamente verificado.",
+    "tarteel": "<0>Tarteel</0>: Um aplicativo de memorização do Quran com tecnologia de IA. Ele foi projetado para ajudar você a memorizar de forma mais inteligente, seja procurando um versículo, monitorando seu progresso ou acompanhando sua recitação.",
     "title": "Créditos",
-    "zekr": "<0>Zekr</0>: Uma ferramenta de estudo do Alcorão de plataforma aberta para navegar e pesquisar sobre o Alcorão"
+    "zekr": "<0>Zekr</0>: Uma ferramenta de estudo do Quran de plataforma aberta para navegar e pesquisar sobre o Quran"
   },
   "global-effort": {
-    "desc": "Milhões de pessoas de todo o mundo confiam no Quran.com como seu principal recurso digital do Alcorão. Quer venham para recitar, refletir, memorizar ou estudar, eles compartilham um propósito comum: um desejo sincero de se conectar com as palavras de Alá. \\n À medida que continuamos a crescer, continuamos comprometidos em garantir que o Quran.com continue sendo um espaço confiável, acessível e lindamente projetado para qualquer pessoa que busque se envolver com o Alcorão.",
+    "desc": "Milhões de pessoas de todo o mundo confiam no Quran.com como seu principal recurso digital do Quran. Quer venham para recitar, refletir, memorizar ou estudar, eles compartilham um propósito comum: um desejo sincero de se conectar com as palavras de Alá. \\n À medida que continuamos a crescer, continuamos comprometidos em garantir que o Quran.com continue sendo um espaço confiável, acessível e lindamente projetado para qualquer pessoa que busque se envolver com o Quran.",
     "title": "Um esforço global"
   },
   "key-features": {
-    "desc": "Quran.com foi criado para dar suporte a cada estágio do envolvimento com o Alcorão — da leitura e memorização ao estudo e reflexão. Nossos recursos incluem:",
+    "desc": "Quran.com foi criado para dar suporte a cada estágio do envolvimento com o Quran — da leitura e memorização ao estudo e reflexão. Nossos recursos incluem:",
     "features": [
-      "Interface do Alcorão fácil de usar – Uma experiência de leitura limpa e intuitiva em qualquer dispositivo.",
+      "Interface do Quran fácil de usar – Uma experiência de leitura limpa e intuitiva em qualquer dispositivo.",
       "Várias traduções e Tafsir – Acesso a traduções em vários idiomas, juntamente com tafsir.",
       "Recitações em áudio – Ouça recitações de alta qualidade de Qaris de renome mundial, com a capacidade de acompanhar palavra por palavra.",
-      "Pesquisa e navegação avançadas – Encontre versículos instantaneamente por tópico ou palavras-chave em todo o Alcorão.",
+      "Pesquisa e navegação avançadas – Encontre versículos instantaneamente por tópico ou palavras-chave em todo o Quran.",
       "Marcação de versículos e notas – Salve versículos e escreva reflexões pessoais para referência posterior.",
       "Integração do QuranReflect – Interaja com uma comunidade global por meio de reflexões e percepções compartilhadas por acadêmicos e indivíduos.",
       "Acompanhamento do progresso da leitura e metas – Acompanhe suas metas diárias e histórico de leitura",
       "APIs para desenvolvedores – acesso gratuito a conteúdo e recursos para impulsionar aplicativos islâmicos e P&D.",
-      "E muito mais, Alhamdullilah."
+      "E muito mais, Alhamdulillah."
     ],
     "title": "Principais recursos e ofertas"
   },
-  "main-description": "Desde sua fundação em 1995, o Quran.com tem se comprometido a tornar o Alcorão disponível para todos de uma forma clara, autêntica e fácil de se envolver. Todos os dias, milhões de pessoas no mundo todo recorrem ao Quran.com para ler, ouvir, estudar e refletir sobre o Alcorão — sejam estudantes ao longo da vida, acadêmicos ou apenas começando sua jornada.",
+  "main-description": "Desde sua fundação em 1995, o Quran.com tem se comprometido a tornar o Quran disponível para todos de uma forma clara, autêntica e fácil de se envolver. Todos os dias, milhões de pessoas no mundo todo recorrem ao Quran.com para ler, ouvir, estudar e refletir sobre o Quran — sejam estudantes ao longo da vida, acadêmicos ou apenas começando sua jornada.",
   "our-mission": {
-    "desc": "O Alcorão foi feito para ser lido, compreendido e refletido. Nossa missão é remover barreiras de acesso e empoderar indivíduos e comunidades, fornecendo uma experiência corânica confiável, bem projetada e profundamente enriquecedora. Nosso objetivo é servir como uma fonte confiável para qualquer um que esteja buscando se envolver com o Alcorão, guiado pelos princípios de precisão, clareza e sinceridade.",
+    "desc": "O Quran foi feito para ser lido, compreendido e refletido. Nossa missão é remover barreiras de acesso e empoderar indivíduos e comunidades, fornecendo uma experiência corânica confiável, bem projetada e profundamente enriquecedora. Nosso objetivo é servir como uma fonte confiável para qualquer um que esteja buscando se envolver com o Quran, guiado pelos princípios de precisão, clareza e sinceridade.",
     "title": "Nossa Missão"
   },
   "who-we-are": {
-    "desc": "Quran.com é um waqf (fundo patrimonial), estabelecido como um fundo público para garantir que o Alcorão permaneça acessível a todos, gratuitamente e sem interesses comerciais. É administrado pela <link>Quran.Foundation</link>, uma organização sem fins lucrativos 501(c)(3), que sustenta e desenvolve o Quran.com como parte de sua missão de fornecer recursos corânicos autênticos e de alta qualidade para o mundo. Nosso compromisso é servir o Alcorão e seus leitores com excelência, sinceridade e responsabilidade.",
+    "desc": "Quran.com é um waqf (fundo patrimonial), estabelecido como um fundo público para garantir que o Quran permaneça acessível a todos, gratuitamente e sem interesses comerciais. É administrado pela <link>Quran.Foundation</link>, uma organização sem fins lucrativos 501(c)(3), que sustenta e desenvolve o Quran.com como parte de sua missão de fornecer recursos qurânicos autênticos e de alta qualidade para o mundo. Nosso compromisso é servir o Quran e seus leitores com excelência, sinceridade e responsabilidade.",
     "title": "Quem somos"
   }
 }

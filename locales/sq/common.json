@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Përgjigjet",
   "aria": {
     "change-settings": "Ndrysho Cilësimet",
     "drawer-close": "Mbylle sirtarin",
@@ -92,6 +93,7 @@
   },
   "ayah": "Ajeti",
   "ayahs": "Ajetet",
+  "back": "Mbrapa",
   "beta": "Beta",
   "beyond-ramadan": "Rrituni përtej Ramazanit!",
   "bookmark": "Shënoni faqeshënues",
@@ -110,11 +112,17 @@
   },
   "community": {
     "cta": "Kontaktoni",
-    "header": "Dëshironi të kontribuoni me aftësitë tuaja teknike për të çuar përpara misionin e Kuranit?",
+    "header": "Dëshironi të ofroni vullnetarisht aftësitë tuaja teknike për të çuar më tej misionin e Kuranit?",
     "sub-header": "Ndani interesin tuaj duke plotësuar këtë formular dhe ne do të kontaktojmë kur të jetë në dispozicion një mundësi e përshtatshme, insha'Allah.",
     "title": "Komuniteti"
   },
   "complete-sign-up": "Plotësoni regjistrimin tuaj",
+  "complete-signup": {
+    "description": "Na duhen informacionet e mëposhtme që mungojnë për të përfunduar regjistrimin tuaj.",
+    "title": "Përfundoni regjistrimin tuaj",
+    "verification-code": "Kodi i Verifikimit",
+    "verification-code-sent-to": "Kodi i verifikimit u dërgua te {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> </boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br></br> <br></br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br></br> <br></br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> </boldSpan> ose \"Jo tani\" për t'i refuzuar.",
@@ -164,6 +172,7 @@
     "account-banned": "Na vjen keq, llogaria juaj është e ndaluar. Kontakto Kuran.Fondacioni",
     "badRequest": "*Kërkesë e pavlefshme",
     "banned": "*Na falni, llogaria juaj është e ndaluar. Kontakto Kuran.Fondacioni",
+    "complete-signup-failed": "Regjistrimi dështoi të përfundonte. Ju lutemi provoni përsëri.",
     "confirm": "*Konfirmo që fjalëkalimi nuk përputhet me fjalëkalimin",
     "email": "*Format i pavlefshëm i postës elektronike!",
     "exactLength": "*Vlera duhet të jetë gjatësia e saktë",
@@ -210,7 +219,7 @@
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
-    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga <link>Quran.Foundation</link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah.",
+    "description": "Quran.com është një platformë e besueshme e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në gjuhë të shumta. Ajo ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Sadaka Xhariyah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. I mbështetur nga <link> Quran.Foundation </link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Elhamdulillah.",
     "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
     "title": "Lexoni, dëgjoni, kërkoni dhe reflektoni mbi Kuranin"
@@ -254,6 +263,7 @@
   "learning-plans": "Planet mësimore",
   "less": "Më pak",
   "lessons": "Mësimet",
+  "listen": "Dëgjo",
   "loading": "Po ngarkohet",
   "login": "Identifikohu",
   "logout": "Shkyç",
@@ -273,9 +283,11 @@
   "next-ayah": "Ajeti tjetër",
   "no": "Jo",
   "no-notifications": "Nuk ka ende njoftime",
+  "no-verses-available": "Nuk ka vargje të disponueshme",
   "none": "Asnjëra",
   "not-now": "Jo tani",
   "notes": {
+    "label": "Shënime",
     "title": "Shënimet dhe Reflektimet e Mia"
   },
   "notification-settings": "Cilësimet e njoftimit",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
   },
   "share": "Shpërndaje",
+  "share-quran-description-line-1": "Profeti ﷺ tha:",
+  "share-quran-description-line-2": "'Transmetoje nga unë, qoftë edhe një ajet i vetëm.'",
+  "share-quran-description-line-3": "(Buhariu 3461)",
+  "share-quran-title": "Shpërndaje Kuranin!",
   "shared": "Lidhja është kopjuar në kujtesë!",
   "show-more": "Trego më shumë",
   "sidebar": {

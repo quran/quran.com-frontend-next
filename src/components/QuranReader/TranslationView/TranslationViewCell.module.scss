@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
 
+$arabicVerseTopMargin: 2.75rem;
+
 .cellContainer {
   display: flex;
   justify-content: space-between;
@@ -26,15 +28,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-xxsmall-px);
+  }
 }
 .arabicVerseContainer {
   direction: rtl;
   padding-block-start: var(--spacing-xxsmall);
-  margin-block-start: var(--gap-size);
+  margin-block-start: $arabicVerseTopMargin;
   margin-block-end: var(--gap-size);
 }
 .verseTranslationsContainer {
-  margin-block-end: calc(1.3 * var(--gap-size));
+  margin-block-end: calc(var(--spacing-medium2) * 3);
 }
 
 .verseTranslationContainer {
@@ -45,6 +51,7 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
+  gap: var(--spacing-xxsmall-px);
 }
 .actionContainerLeft {
   justify-content: flex-start;
@@ -66,16 +73,17 @@
 
   @media (hover: hover) {
     &:hover {
-      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
+
+      .icon span {
+        svg {
+          color: var(--color-success-medium) !important;
+        }
+      }
     }
   }
-}
-
-.overlayMax {
-  z-index: var(--z-index-max);
 }
 
 .overlayModal {
@@ -86,17 +94,26 @@
   margin-inline-end: calc(var(--spacing-medium) * 1.125);
 }
 
-.fadedVerseAction {
-  opacity: var(--opacity-50);
-}
-
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   svg {
-    width: calc(1.1 * var(--spacing-medium));
-    height: calc(1.1 * var(--spacing-medium));
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+  }
+}
+
+.actionItem {
+  &:hover {
+    svg {
+      color: var(--color-success-medium);
+    }
   }
 }
 
@@ -123,6 +140,7 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
@@ -145,7 +163,7 @@
   align-items: center;
   gap: calc(var(--spacing-xsmall) / 2);
   cursor: pointer;
-  color: var(--color-text-faded);
+  color: var(--color-grey-icons-new);
   transition: color 0.2s ease;
 
   &:hover {
@@ -159,23 +177,31 @@
   justify-content: center;
 
   svg {
-    color: currentColor;
     width: var(--spacing-medium2);
     height: var(--spacing-medium2);
+    color: currentColor;
+
+    &:hover {
+      color: currentColor;
+    }
 
     @include breakpoints.smallerThanTablet {
-      width: calc(var(--spacing-medium) * 1.125);
-      height: calc(var(--spacing-medium) * 1.125);
+      width: var(--spacing-medium);
+      height: var(--spacing-medium);
     }
   }
 }
 
 .tabLabel {
-  font-size: var(--font-size-normal);
-  color: inherit;
+  font-size: var(--font-size-medium);
   white-space: nowrap;
 
   @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-xsmall);
+    font-size: var(--font-size-small);
   }
+}
+
+.verseSeparator {
+  width: calc(100% - 2 * var(--spacing-small)) !important;
+  margin-inline: auto;
 }

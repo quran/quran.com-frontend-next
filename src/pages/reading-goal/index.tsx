@@ -9,11 +9,15 @@ import layoutStyles from '../index.module.scss';
 
 import styles from './reading-goal.module.scss';
 
-import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
+import {
+  isReadingGoalExampleKey,
+  ReadingGoalExampleKey,
+} from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
@@ -27,6 +31,12 @@ const ReadingGoalPage: NextPage = () => {
   // if the user already has a goal, redirect them to the home page
   const { goal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
   const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
+
+  const { example } = router.query;
+  const initialExampleKey =
+    isLoggedIn() && typeof example === 'string' && isReadingGoalExampleKey(example)
+      ? (example as ReadingGoalExampleKey)
+      : null;
 
   useEffect(() => {
     if (goal) {
@@ -46,7 +56,11 @@ const ReadingGoalPage: NextPage = () => {
 
       <div className={layoutStyles.pageContainer}>
         <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
-          {isLoading ? <Spinner /> : <ReadingGoalOnboarding />}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <ReadingGoalOnboarding initialExampleKey={initialExampleKey} />
+          )}
         </div>
       </div>
     </>
@@ -65,4 +79,4 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
   },
 );
 
-export default withAuth(ReadingGoalPage);
+export default ReadingGoalPage;

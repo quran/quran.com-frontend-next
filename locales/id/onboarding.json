@@ -20,7 +20,7 @@
       "title": "Baca refleksi pada tingkat ayat"
     },
     "ayah-tafsir": {
-      "description": "Jelajahi Tafsir di tingkat ayat, menawarkan wawasan terperinci untuk meningkatkan pemahaman Anda saat Anda membaca. (Tafsir dapat dikelompokkan untuk beberapa ayat bila diperlukan)",
+      "description": "Jelajahi Tafsir ayat per ayat, menawarkan wawasan terperinci untuk meningkatkan pemahaman Anda saat Anda membaca. (Tafsir dapat dikelompokkan untuk beberapa ayat bila diperlukan)",
       "title": "Baca Tafsir tingkat Ayat"
     },
     "font-size": {
@@ -77,7 +77,7 @@
     },
     "surah-info": {
       "description": "Dapatkan wawasan tentang setiap Surah - dapat ditemukan dengan mudah di awal setiap Surah",
-      "title": "Baca tentang Surah "
+      "title": "Baca Mengenai Surah ini"
     },
     "theme": {
       "description": "Pilih tampilan favorit Anda—mode Terang, Sepia, atau Gelap—untuk pengalaman membaca Qur'an yang nyaman dan personal.",

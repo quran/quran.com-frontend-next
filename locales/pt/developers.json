@@ -1,17 +1,31 @@
 {
+  "api-docs": {
+    "cta": "Ver documentação da API",
+    "header": "Documentação da API",
+    "sub-header": "Integre os dados do Quran.com em seus aplicativos com nossa API abrangente",
+    "title": "Documentação da API"
+  },
+  "careers": {
+    "career": "Oportunidades de Carreira",
+    "cta": "Ver Posições",
+    "header": "Explore nossas vagas de emprego atuais"
+  },
   "footer": "- equipe Quran.com",
   "header": "Ajuda de desenvolvimento",
   "issues-cta": "Se você tiver alguma dúvida ou quiser entrar em contato com os mantenedores, escreva um problema! Entraremos em contato com você assim que pudermos, inshAllah.",
   "issues-guide": "Normalmente usamos <0> projetos Github </0> como a fonte para o que trabalhar a seguir, o que está por vir e quais bugs existem que precisam ser resolvidos. Por exemplo, <1> este url </1> contém uma lista de bugs, coisas para as quais precisamos de ajuda e recursos futuros.",
+  "labs": "Laboratórios",
+  "labs-cta": "Explorar laboratórios",
+  "labs-description": "Descubra recursos experimentais e inovações futuras. Compartilhe suas ideias.",
   "main-desc": "Asalamu Alykom, Em primeiro lugar, muito obrigado pelo seu interesse em nos ajudar a desenvolver o Quran.com e seus projetos. Estamos muito animados para trabalhar com você!",
   "projects": {
     "all": "Temos vários projetos hospedados no Github. Você pode encontrá-los todos <0> aqui </0> . Mas para resumi-los:",
-    "q-android": "<0> Alcorão Android </0>",
+    "q-android": "<0> Quran Android </0>",
     "q-api": "<0> API Quran.com </0> - escrita em Ruby on Rails.",
     "q-api-docs": "<0> Quran.com API Docs </0> - Nosso portal de documentos da API.",
-    "q-audio": "<0> Áudio do Alcorão </0> e <1> aplicativos para dispositivos móveis do Áudio do Alcorão </1>",
-    "q-audio-segments": "<0> Segmentos de áudio do Alcorão </0>",
-    "q-ios": "<0> Alcorão iOS </0>",
+    "q-audio": "<0> Áudio do Quran </0> e <1> aplicativos para dispositivos móveis do Áudio do Quran </1>",
+    "q-audio-segments": "<0> Segmentos de áudio do Quran </0>",
+    "q-ios": "<0> Quran iOS </0>",
     "q-next": "<0> Interface do Quran.com </0> - escrito em Next.js.",
     "q-v2": "<0> Quran.com </0> - escrito em Ruby on Rails."
   },

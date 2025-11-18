@@ -9,8 +9,8 @@ import UserPublicReflectionsListItem from './UserPublicReflectionsListItem';
 
 import ReflectionModal from '@/components/QuranReflect/ReflectionModal';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import GetUserReflectionsResponse from '@/types/auth/GetUserReflectionsResponse';
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
+import GetUserReflectionsResponse from '@/types/QuranReflect/GetUserReflectionsResponse';
 
 interface UserPublicReflectionsListProps {
   data: GetUserReflectionsResponse[];
@@ -28,8 +28,9 @@ const UserPublicReflectionsList = ({
   const { t } = useTranslation('notes');
   const [selectedReflection, setSelectedReflection] = useState<AyahReflection | null>(null); // for the note modal
 
-  const lastPageData = data[data.length - 1];
-  const { hasNextPage } = lastPageData.pagination;
+  const lastPageData = data?.[data.length - 1];
+  const hasNextPage =
+    !!lastPageData && Number(lastPageData.currentPage) < Number(lastPageData.pages);
 
   const reflections = useMemo(() => {
     return data ? data.map((response) => response.data).flat() : [];

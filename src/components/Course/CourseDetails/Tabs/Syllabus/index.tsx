@@ -6,28 +6,52 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './Syllabus.module.scss';
 
 import CompletedTick from '@/components/Course/CompletedTick';
+import Button from '@/components/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { useIsEnrolled } from '@/hooks/auth/useGuestEnrollment';
 import { Course } from '@/types/auth/Course';
-import { isLoggedIn } from '@/utils/auth/login';
+import { getUserType } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import { getLessonNavigationUrl } from '@/utils/navigation';
+import { stripHTMLTags } from '@/utils/string';
 
 type Props = {
   course: Course;
 };
 
 const Syllabus: React.FC<Props> = ({ course }) => {
-  const { lessons = [], slug: courseSlug } = course;
+  const { lessons = [], slug: courseSlug, id: courseId, isUserEnrolled } = course;
   const { t, lang } = useTranslation('learn');
+  const toast = useToast();
 
-  const isUserLoggedIn = isLoggedIn();
+  const userType = getUserType();
+  const isEnrolled = useIsEnrolled(courseId, isUserEnrolled);
 
-  const onDayClick = (dayNumber: number, lessonId: string) => {
-    logButtonClick(isUserLoggedIn ? 'course_syllabus_day' : 'guest_course_syllabus_day', {
-      courseId: course.id,
+  /**
+   * Log syllabus lesson click for analytics
+   * @param {number} dayNumber - The day number of the lesson
+   * @param {string} lessonId - The ID of the lesson
+   */
+  const logSyllabusClick = (dayNumber: number, lessonId: string) => {
+    logButtonClick('course_syllabus_day', {
+      courseId,
       dayNumber,
       lessonId,
+      userType,
+    });
+  };
+
+  /**
+   * Handle lesson click for non-enrolled users, shows toast message
+   * @param {number} dayNumber - The day number of the lesson
+   * @param {string} lessonId - The ID of the lesson
+   */
+  const onNonEnrolledDayClick = (dayNumber: number, lessonId: string) => {
+    logSyllabusClick(dayNumber, lessonId);
+    toast(stripHTMLTags(t('not-enrolled')), {
+      status: ToastStatus.Warning,
     });
   };
 
@@ -46,14 +70,25 @@ const Syllabus: React.FC<Props> = ({ course }) => {
             )}`}</span>
             <span>
               {`: `}
-              <Link
-                onClick={() => onDayClick(dayNumber, id)}
-                href={isUserLoggedIn ? url : getLoginNavigationUrl(url)}
-                variant={LinkVariant.Highlight}
-              >
-                {title}
-              </Link>
-              {isCompleted ? <CompletedTick /> : ''}
+              {isEnrolled ? (
+                <Link
+                  onClick={() => logSyllabusClick(dayNumber, id)}
+                  href={url}
+                  variant={LinkVariant.Highlight}
+                >
+                  {title}
+                </Link>
+              ) : (
+                <Button
+                  htmlType="button"
+                  className={styles.notEnrolledLink}
+                  onClick={() => onNonEnrolledDayClick(dayNumber, id)}
+                  ariaLabel={title}
+                >
+                  {title}
+                </Button>
+              )}
+              {isCompleted ? <CompletedTick /> : null}
             </span>
           </p>
         );

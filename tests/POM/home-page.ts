@@ -1,4 +1,5 @@
-import { BrowserContext, expect, Page } from '@playwright/test';
+/* eslint-disable no-await-in-loop */
+import { BrowserContext, Locator, Page, expect } from '@playwright/test';
 
 class Homepage {
   readonly page: Page;
@@ -16,8 +17,35 @@ class Homepage {
     this.context = context;
   }
 
-  async goTo() {
-    await this.page.goto('/');
+  /**
+   * Navigate to a specific path.
+   * @param {string} path The path to navigate to, defaults to the homepage ('/')
+   */
+  async goTo(path: string = '/') {
+    await this.page.goto(path, { waitUntil: 'networkidle' });
+    await this.hideNextJSOverlay();
+  }
+
+  /**
+   * Reload the current page.
+   */
+  async reload() {
+    await this.page.reload({ waitUntil: 'networkidle' });
+    await this.hideNextJSOverlay();
+  }
+
+  /**
+   * Hide the Next.js error overlay that may appear on the page.
+   * Needed to click on elements behind it.
+   */
+  async hideNextJSOverlay() {
+    await this.page.addStyleTag({
+      content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+    });
   }
 
   /**
@@ -38,14 +66,29 @@ class Homepage {
    * @returns {any|null}
    */
   async getPersistedValue(name: string, storageKey = 'persist:root'): Promise<any | null> {
-    await this.page.waitForTimeout(1000);
+    // Wait for the page to be fully loaded and React to initialize localStorage
+    await this.page.waitForLoadState('networkidle');
+
+    // Wait for React hydration and localStorage to be populated
+    await this.page.waitForFunction(
+      () => {
+        return window.localStorage.getItem('persist:root') !== null;
+      },
+      { timeout: 10000 },
+    );
+
     const storage = await this.context.storageState();
-    expect(storage?.origins?.[0]?.localStorage).not.toBe(undefined);
-    const localStorageArray = storage?.origins?.[0]?.localStorage;
+
+    if (!storage.origins || storage.origins.length === 0) {
+      return null;
+    }
+    const localStorageArray = storage.origins[0].localStorage;
+
     const persistedRoot = localStorageArray.filter(
       (localStorageObject) => localStorageObject.name === storageKey,
     );
-    if (!persistedRoot) {
+
+    if (!persistedRoot || persistedRoot.length === 0) {
       return null;
     }
     const parentObject = JSON.parse(persistedRoot[0].value);
@@ -81,10 +124,40 @@ class Homepage {
   }
 
   async openSettingsDrawer() {
-    // Close any Next.js error dialog that might be blocking the settings button
-    await this.closeNextjsErrorDialog();
+    await this.page.waitForTimeout(1000);
+    const buttons = this.page.getByTestId('settings-button');
+    await expect(buttons).not.toHaveCount(0, { timeout: 10000 });
+    const count = await buttons.count();
+    for (let index = 0; index < count; index += 1) {
+      const button = buttons.nth(index);
+      try {
+        await expect(button).toBeVisible({ timeout: 6000 });
+        await button.click();
+        return;
+      } catch (error) {
+        // Continue trying other buttons in case this one disappears
+      }
+    }
+    throw new Error('Unable to find a visible settings button.');
+  }
 
-    await this.page.locator('[data-testid="settings-button"]').click();
+  async enableMushafMode(isMobile: boolean) {
+    if (isMobile) {
+      await this.page.getByTestId('reading-tab').click();
+    } else {
+      await this.page.getByTestId('reading-button').click();
+    }
+  }
+
+  /**
+   * Search for a query using the search bar and return the search results locator.
+   * @param {string} query The search query to fill in the search bar
+   * @returns {Promise<Locator>} The search results locator
+   */
+  async searchFor(query: string): Promise<Locator> {
+    const searchBar = this.page.locator('#searchQuery');
+    await searchBar.fill(query);
+    return this.page.getByTestId('search-results');
   }
 }
 

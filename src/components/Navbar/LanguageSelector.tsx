@@ -152,6 +152,7 @@ const LanguageSelector = ({
             variant={ButtonVariant.Ghost}
             data-testid="language-selector-button-navbar"
             ariaLabel={t('aria.select-lng')}
+            data-testid="language-selector-button"
           >
             <span className={styles.globeIconWrapper}>
               <GlobeIcon />
