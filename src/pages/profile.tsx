@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from './index.module.scss';
@@ -74,8 +75,14 @@ const ProfilePage: NextPage<Props> = () => {
     <div className={classNames(layoutStyle.flowItem)}>
       <div className={styles.profileContainer}>
         <div className={styles.profilePicture}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.profilePicture} alt="avatar" src={photoUrl} />
+          <Image
+            src={photoUrl}
+            alt="avatar"
+            fill
+            sizes="(max-width: 768px) 120px, 160px"
+            className={styles.profilePictureImage}
+            priority
+          />
         </div>
         {isLoading ? (
           profileSkeletonInfoSkeleton
