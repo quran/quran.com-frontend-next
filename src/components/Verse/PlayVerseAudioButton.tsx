@@ -10,6 +10,7 @@ import Spinner from '@/components/dls/Spinner/Spinner';
 import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
 import OnboardingGroup from '@/types/OnboardingGroup';
@@ -118,13 +119,11 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
       id="play-verse-button" // this ID is for onboarding
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
-        <PlayIcon />
+        <IconContainer icon={<PlayIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );

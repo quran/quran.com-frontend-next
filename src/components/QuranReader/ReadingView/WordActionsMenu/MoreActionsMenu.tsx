@@ -10,11 +10,11 @@ import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWo
 import SaveToCollectionAction from '@/components/Verse/SaveToCollectionAction';
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '@/components/Verse/VerseActionRepeatAudio';
+import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
-import Verse from 'types/Verse';
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   onActionTriggered?: () => void;
   onMenuChange: (menu: VerseActionsMenuType) => void;
 }

@@ -7,7 +7,7 @@ import Translation from '@/types/Translation';
  * @param {Function} t - Translation function from useTranslation
  * @returns {string} Formatted translation name string
  */
-const getTranslationNameString = (translations?: Translation[], t?: any): string => {
+const getTranslationsLabelString = (translations?: Translation[], t?: any): string => {
   let translationName = t ? t('settings.no-translation-selected') : 'No translation selected';
 
   if (translations?.length === 1) {
@@ -27,4 +27,4 @@ const getTranslationNameString = (translations?: Translation[], t?: any): string
   return translationName;
 };
 
-export default getTranslationNameString;
+export default getTranslationsLabelString;

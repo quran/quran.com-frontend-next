@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from './index.module.scss';
@@ -13,20 +12,13 @@ import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndColl
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import useAuthData from '@/hooks/auth/useAuthData';
+import useLogout from '@/hooks/auth/useLogout';
 import Error from '@/pages/_error';
-import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
-import { isLoggedIn } from '@/utils/auth/login';
-import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { getAllChaptersData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getLoginNavigationUrl,
-  getProfileNavigationUrl,
-} from '@/utils/navigation';
+import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
@@ -37,26 +29,20 @@ const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = () => {
   const { t, lang } = useTranslation();
-  const router = useRouter();
-  const { user, isLoading, error, isUserLoggedIn } = useCurrentUser();
+  const { userData: user, isLoading, userDataError: error, isAuthenticated } = useAuthData();
+  const runLogout = useLogout();
 
-  const onLogoutClicked = async () => {
-    if (!isLoggedIn()) {
-      return;
-    }
-    logButtonClick('profile_logout');
-
-    await logoutUser();
-    removeLastSyncAt();
-    router.push(getLoginNavigationUrl());
-    router.reload();
-  };
+  const onLogoutClicked = async () =>
+    runLogout({ eventName: 'profile_logout', redirectToLogin: true });
 
   if (error) {
     return <Error statusCode={500} />;
   }
 
-  const { email, firstName, lastName, photoUrl } = user;
+  const email = user?.email || emailSample;
+  const firstName = user?.firstName || '';
+  const lastName = user?.lastName || '';
+  const photoUrl = user?.photoUrl || DEFAULT_PHOTO_URL;
 
   const profileSkeletonInfoSkeleton = (
     <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
@@ -89,13 +75,13 @@ const ProfilePage: NextPage<Props> = () => {
       <div className={styles.profileContainer}>
         <div className={styles.profilePicture}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.profilePicture} alt="avatar" src={photoUrl || DEFAULT_PHOTO_URL} />
+          <img className={styles.profilePicture} alt="avatar" src={photoUrl} />
         </div>
         {isLoading ? (
           profileSkeletonInfoSkeleton
         ) : (
           <div className={styles.profileInfoContainer}>
-            <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
+            <h2 className={styles.name}>{`${firstName} ${lastName}`.trim() || nameSample}</h2>
             <div className={styles.email}>{email}</div>
           </div>
         )}
@@ -115,7 +101,7 @@ const ProfilePage: NextPage<Props> = () => {
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
           <div className={styles.container}>
-            {isUserLoggedIn && profileInfo}
+            {isAuthenticated && profileInfo}
             <div
               className={classNames(
                 layoutStyle.flowItem,
@@ -134,7 +120,7 @@ const ProfilePage: NextPage<Props> = () => {
             >
               <BookmarksAndCollectionsSection isHomepage={false} />
             </div>
-            {isUserLoggedIn && accountActions}
+            {isAuthenticated && accountActions}
           </div>
         </div>
       </div>

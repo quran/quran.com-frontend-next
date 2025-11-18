@@ -38,21 +38,19 @@ type Props = {
 
 const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavigationItem }) => {
   const dispatch = useDispatch();
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const chaptersData = useContext(DataContext);
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   // we skip requesting any selection list if the drawer is not open.
   if (!isVisible) return <></>;
 
-  // Handle mobile sidebar closing after navigation
-  // Mobile sidebar is closed directly in onAfterNavigationItemRouted
-
-  // Update Redux state when a page is selected
   const updateReduxStateWithPage = (pageNumber: string) => {
     dispatch(
       setLastReadVerse({
         lastReadVerse: {
           ...lastReadVerseKey,
           page: pageNumber,
+          // Clear chapter and verse context when navigating by page
+          // to ensure consistent Redux state
           verseKey: null,
           chapterId: null,
         },
@@ -61,7 +59,7 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
     );
   };
 
-  const updateReduxStateWithChapter = (chapterId: string) => {
+  const updateReduxWithChapterOnly = (chapterId: string) => {
     dispatch(
       setLastReadVerse({
         lastReadVerse: {
@@ -74,12 +72,15 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
     );
   };
 
+  const updateReduxStateWithChapter = (chapterId: string) => {
+    updateReduxWithChapterOnly(chapterId);
+  };
+
   const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
     if (isMobile()) {
       dispatch(setIsSidebarNavigationVisible(false));
     }
 
-    // If we have an item value and type, update Redux state
     if (itemValue) {
       if (itemType === NavigationItemType.PAGE) {
         updateReduxStateWithPage(itemValue);

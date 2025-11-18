@@ -8,6 +8,7 @@ import styles from '@/components/QuranReader/TranslationView/TranslationViewCell
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -96,12 +97,10 @@ const CopyButton: React.FC<Props> = ({
       tooltip={isCopied ? t('copied') : t('quran-reader:copy-verse')}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
     >
       <span className={styles.icon}>
-        <CopyIcon />
+        <IconContainer icon={<CopyIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );

@@ -1,6 +1,6 @@
 {
   "all-saved-verses": "Alle opgeslagen verzen",
-  "alphabetical": "AZ",
+  "alphabetical": "A-Z",
   "back-to-collection-list": "Terug naar collectielijst",
   "collapse-all": "Vouw alle verzen samen",
   "collection-list-empty": "Verzamellijst is leeg. Je hebt nog geen collectie gemaakt",
@@ -14,7 +14,7 @@
     "title": "Verzameling verwijderen"
   },
   "empty": "Collectie is leeg",
-  "expand-all": "Vouw alle verzen uit",
+  "expand-all": "vouw alle verzen uit",
   "go-to-ayah": "Ga naar ayah",
   "load-more": "Meer laden",
   "recently-added": "Recent toegevoegd",

@@ -1,7 +1,10 @@
+@use "src/styles/breakpoints";
+
 .container {
   display: flex;
   align-items: center;
 }
+
 .container[dir="rtl"][data-auto-flip-icon="true"] {
   > svg {
     transform: scaleX(-1);
@@ -13,9 +16,16 @@
     fill: var(--color-primary-medium);
   }
 }
+
 .secondaryColor {
   > svg path {
     fill: var(--color-secondary-medium);
+  }
+}
+
+.tertiaryColor {
+  > svg {
+    color: var(--color-grey-icons-new) !important;
   }
 }
 
@@ -44,5 +54,17 @@
   > svg {
     width: 36px;
     height: 36px;
+  }
+}
+
+.customIcon {
+  > svg {
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+
+    @include breakpoints.smallerThanTablet {
+      width: var(--spacing-medium);
+      height: var(--spacing-medium);
+    }
   }
 }

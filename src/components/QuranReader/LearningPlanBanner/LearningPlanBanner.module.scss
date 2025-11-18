@@ -1,0 +1,123 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.bannerWrapper {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-mega);
+  width: 100%;
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-large);
+  }
+}
+
+.bannerContainer {
+  max-width: 1230px; 
+  display: grid;
+  gap: var(--spacing-medium2-px);
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'image image'
+    'captionRow captionRow';
+
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-medium-px);
+    justify-items: center;
+    width: 100%;
+    max-width: none;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'caption'
+      'image'
+      'button';
+  }
+}
+
+
+.imageLink {
+  grid-area: image;
+  @include breakpoints.smallerThanTablet {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    aspect-ratio: 9 / 3;
+
+  }
+}
+
+.imageWrap {
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 1230px;
+  }
+  
+  @include breakpoints.smallerThanTablet {
+    width: 100%;
+    height: 100%;
+    img {
+      object-fit: cover;
+    }
+  }
+
+}
+
+.captionRow {
+  grid-area: captionRow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xlarge-px); 
+  @include breakpoints.smallerThanTablet {
+    display: contents;
+  }
+}
+.caption {
+  grid-area: caption;
+  color: var(--color-text-default-new);
+  line-height: 1.2;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-normal);
+  @include breakpoints.smallerThanTablet {
+    padding-inline-start: 0;
+    text-align: center;
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+.captionBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.ctaButton {
+  grid-area: button;
+  height:100%;
+  display: flex;
+  padding: var(--spacing-small-px) var(--spacing-medium-px);
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-medium-px);
+  background: var(--color-success-medium);
+  white-space: nowrap;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+
+  &:hover {
+    background: var(--color-success-medium);
+    color: inherit;
+  }
+
+  @include theme.light { color: var(--color-text-inverse); }
+  @include theme.dark { color: var(--color-text-default-new); }
+  @include theme.sepia { color: var(--color-text-inverse); }
+
+  @include breakpoints.smallerThanTablet {
+ height: calc(2 * var(--spacing-medium));
+    font-weight: var(--font-weight-normal);
+    font-size: var(--font-size-small-px);
+  }
+}

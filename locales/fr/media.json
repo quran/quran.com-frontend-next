@@ -22,13 +22,13 @@
   "orientation": "Orientation",
   "portrait": "Portrait",
   "render-image": "Prendre une capture d'écran",
-  "render-video": "Rendre",
+  "render-video": "Rendu",
   "reset-defaults": "Réinitialiser les paramètres par défaut ?",
   "style": "Style de police du Coran",
   "text-color": "Couleur du texte",
   "title": "Générer et partager des vidéos du Coran",
   "to": "à",
-  "verse-key": "Chapitre et numéro d'Ayah, par exemple 2:255",
-  "video-picker": "Vidéo d'arrière-plan",
-  "your-link": "Copiez votre lien"
+  "verse-key": "Sourate et Numéro d'Ayah, par exemple 2:255",
+  "video-picker": "Vidéo en arrière-plan",
+  "your-link": "Copier votre lien"
 }

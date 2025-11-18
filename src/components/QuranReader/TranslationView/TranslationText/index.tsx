@@ -8,7 +8,8 @@ import React, { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import FootnoteText from './FootnoteText';
+import FootnoteAndSubFootnote from './FootnoteAndSubFootnote';
+import TranslationAndReference from './TranslationAndReference';
 import styles from './TranslationText.module.scss';
 
 import { logButtonClick } from '@/utils/eventLogger';
@@ -17,19 +18,25 @@ import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 
 interface Props {
+  shouldShowReference?: boolean;
   translationFontScale: number;
   text: string;
   resourceName?: string;
   languageId: number;
+  reference?: string;
+  chapterName?: string;
 }
 
 const TranslationText: React.FC<Props> = ({
+  shouldShowReference = false,
   translationFontScale,
   text,
   languageId,
   resourceName,
+  reference,
+  chapterName,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
@@ -152,37 +159,31 @@ const TranslationText: React.FC<Props> = ({
   const hideFootnote = () => setShowFootnote(false);
   const langData = getLanguageDataById(languageId);
 
-  const shouldShowFootnote = showFootnote && (footnote || isLoading);
+  const shouldShowFootnote = showFootnote && (footnote !== null || isLoading);
   return (
-    <div className={styles[`translation-font-size-${translationFontScale}`]}>
-      <div
-        onClick={(event) => onTextClicked(event)}
-        className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
-        dangerouslySetInnerHTML={{ __html: text }}
+    <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
+      <TranslationAndReference
+        text={text}
+        fontClass={styles[langData.font]}
+        direction={langData.direction}
+        onTextClicked={onTextClicked}
+        shouldShowReference={shouldShowReference}
+        chapterName={chapterName}
+        reference={reference}
+        lang={lang}
       />
-      {shouldShowFootnote && (
-        <FootnoteText
-          footnoteName={activeFootnoteName || undefined}
-          footnote={footnote}
-          isLoading={isLoading}
-          onCloseClicked={() => {
-            logButtonClick('translation_footnote_close');
-            if (isLoading) {
-              hideFootnote();
-            } else {
-              resetFootnote();
-            }
-          }}
-          onTextClicked={(event) => onTextClicked(event, true)}
-        />
-      )}
-      {subFootnote && (
-        <FootnoteText
-          footnoteName={activeSubFootnoteName || undefined}
-          footnote={subFootnote}
-          onCloseClicked={resetSubFootnote}
-        />
-      )}
+      <FootnoteAndSubFootnote
+        shouldShowFootnote={shouldShowFootnote}
+        footnote={footnote}
+        subFootnote={subFootnote}
+        isLoading={isLoading}
+        activeFootnoteName={activeFootnoteName}
+        activeSubFootnoteName={activeSubFootnoteName}
+        onTextClicked={onTextClicked}
+        onHideFootnote={hideFootnote}
+        onResetFootnote={resetFootnote}
+        onResetSubFootnote={resetSubFootnote}
+      />
       {resourceName && (
         <p
           className={classNames(

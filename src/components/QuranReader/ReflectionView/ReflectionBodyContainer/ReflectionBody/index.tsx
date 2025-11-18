@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,12 +12,7 @@ import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
-import {
-  fakeNavigate,
-  getVerseLessonNavigationUrl,
-  getVerseReflectionNavigationUrl,
-} from '@/utils/navigation';
-import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
+import { fakeNavigate, getReflectionNavigationUrl } from '@/utils/navigation';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
@@ -31,6 +26,7 @@ interface Props {
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
   selectedContentType: ContentType;
+  isModal?: boolean;
 }
 
 const ReflectionBody: React.FC<Props> = ({
@@ -40,6 +36,7 @@ const ReflectionBody: React.FC<Props> = ({
   scrollToTop,
   setSelectedVerseNumber,
   selectedContentType,
+  isModal = false,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
@@ -55,11 +52,7 @@ const ReflectionBody: React.FC<Props> = ({
     scrollToTop();
     const newVerseNumber = String(Number(selectedVerseNumber) + 1);
     const verseKey = makeVerseKey(Number(selectedChapterId), Number(newVerseNumber));
-    const navigationUrl =
-      selectedContentType === ContentType.REFLECTIONS
-        ? getVerseReflectionNavigationUrl(verseKey)
-        : getVerseLessonNavigationUrl(verseKey);
-    fakeNavigate(navigationUrl, lang);
+    fakeNavigate(getReflectionNavigationUrl(verseKey, selectedContentType), lang);
     setSelectedVerseNumber(newVerseNumber);
   }, [
     lang,
@@ -76,11 +69,7 @@ const ReflectionBody: React.FC<Props> = ({
     scrollToTop();
     setSelectedVerseNumber(newVerseNumber);
     const verseKey = makeVerseKey(Number(selectedChapterId), Number(newVerseNumber));
-    const navigationUrl =
-      selectedContentType === ContentType.REFLECTIONS
-        ? getVerseReflectionNavigationUrl(verseKey)
-        : getVerseLessonNavigationUrl(verseKey);
-    fakeNavigate(navigationUrl, lang);
+    fakeNavigate(getReflectionNavigationUrl(verseKey, selectedContentType), lang);
   }, [
     lang,
     scrollToTop,
@@ -90,32 +79,32 @@ const ReflectionBody: React.FC<Props> = ({
     selectedContentType,
   ]);
 
-  const filteredPosts = useMemo(() => {
-    return data?.posts?.filter((reflection) =>
-      localeToReflectionLanguages(lang).includes(reflection.language),
-    );
-  }, [data?.posts, lang]);
-
   const onReadMoreClicked = () => {
     logButtonClick('read_more_reflections');
   };
 
   return (
     <div className={styles.container}>
-      <VerseAndTranslation
-        from={Number(selectedVerseNumber)}
-        to={Number(selectedVerseNumber)}
-        chapter={Number(selectedChapterId)}
-      />
-      <div className={styles.separatorContainer}>
-        <Separator />
-      </div>
-      {filteredPosts?.length === 0 ? (
+      {isModal ? (
+        <div className={styles.separatorContainer} />
+      ) : (
+        <>
+          <VerseAndTranslation
+            from={Number(selectedVerseNumber)}
+            to={Number(selectedVerseNumber)}
+            chapter={Number(selectedChapterId)}
+          />
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+        </>
+      )}
+      {data?.data?.length === 0 ? (
         <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
         <ReflectionDisclaimerMessage contentType={selectedContentType} />
       )}
-      {filteredPosts?.map((reflection) => (
+      {data?.data?.map((reflection) => (
         <ReflectionItem
           key={reflection.id}
           reflection={reflection}

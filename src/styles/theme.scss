@@ -22,6 +22,7 @@
   --spacing-small-px: 10px;
   --spacing-medium-px: 15px;
   --spacing-medium2-px: 20px;
+  --spacing-medium3-px: 24px;
   --spacing-large-px: 30px;
   --spacing-xlarge-px: 40px;
   --spacing-xxlarge-px: 50px;
@@ -90,7 +91,8 @@
   --z-index-onboarding-content: 802;
   --z-index-onboarding-step: 803;
   --z-index-onboarding-spotlight: 804;
-  --z-index-max: 999;
+  --z-index-high: 999;
+  --z-index-ultra: 1200;
 
   --transition-fast: 0.16s;
   --transition-regular: 0.4s;

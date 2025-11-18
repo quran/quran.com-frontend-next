@@ -12,21 +12,23 @@ import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsV
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
+import { WordVerse } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
-import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   onActionTriggered?: () => void;
   isTranslationView: boolean;
 }
@@ -86,7 +88,11 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
         className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
-          <TranslationsIcon />
+          <IconContainer
+            icon={<TranslationsIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
         </span>
       </Button>
       <ContentModal
@@ -96,7 +102,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
         hasCloseButton
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
-        isOverlayMax
+        zIndexVariant={ZIndexVariant.MODAL}
         isBottomSheetOnMobile
       >
         <DataFetcher

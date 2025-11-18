@@ -1,15 +1,18 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../styles/ContextMenu.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import { toLocalizedNumber } from '@/utils/locale';
 
 interface ChapterNavigationProps {
   chapterName: string;
   isSidebarNavigationVisible: boolean | 'auto';
   onToggleSidebar: (e: React.MouseEvent | React.KeyboardEvent) => void;
+  chapterNumber: number;
 }
 
 /**
@@ -20,9 +23,12 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   chapterName,
   isSidebarNavigationVisible,
   onToggleSidebar,
+  chapterNumber,
 }) => {
+  const { lang } = useTranslation();
   return (
     <p
+      data-testid="chapter-navigation"
       className={classNames(styles.bold, styles.alignStart, styles.surahName, {
         [styles.disabledOnMobile]: isSidebarNavigationVisible,
       })}
@@ -39,7 +45,10 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
           }
         }}
       >
-        {chapterName}
+        <span className={styles.chapterNumber}>{`${toLocalizedNumber(
+          chapterNumber,
+          lang,
+        )}. ${chapterName}`}</span>
         <span
           className={classNames(styles.chevronIconContainer, {
             [styles.rotate180]: isSidebarNavigationVisible === true,

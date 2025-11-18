@@ -13,10 +13,10 @@ import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import ShareButton from '@/components/Verse/ShareButton';
 import VerseLink from '@/components/Verse/VerseLink';
 import Wrapper from '@/components/Wrapper/Wrapper';
-import Verse from 'types/Verse';
+import { WordVerse } from '@/types/Word';
 
 type ActionButtonsProps = {
-  verse: Verse;
+  verse: WordVerse;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   isTranslationView?: boolean;
@@ -71,13 +71,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       >
         <>
           <ActionItem>
-            <VerseNotes
-              verseKey={verse.verseKey}
-              isTranslationView={isTranslationView}
-              hasNotes={hasNotes}
-            />
-          </ActionItem>
-          <ActionItem>
             <CopyButton verseKey={verse.verseKey} isTranslationView={isTranslationView} />
           </ActionItem>
           <ActionItem>
@@ -88,6 +81,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               onClick={openShareModal}
             />
           </ActionItem>
+          <ActionItem>
+            <VerseNotes
+              verseKey={verse.verseKey}
+              isTranslationView={isTranslationView}
+              hasNotes={hasNotes}
+            />
+          </ActionItem>
+
           <ActionItem>
             <OverflowVerseActionsMenu
               bookmarksRangeUrl={bookmarksRangeUrl}

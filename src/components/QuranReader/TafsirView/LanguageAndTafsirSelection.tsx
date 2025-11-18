@@ -63,6 +63,8 @@ const LanguageAndTafsirSelection = ({
                 onClick={() => onTafsirSelected(tafsir.id, tafsir.slug)}
                 size={ButtonSize.Small}
                 key={tafsir.id}
+                data-testid={`tafsir-selection-${tafsir.slug}`}
+                data-selected={selected}
                 className={classNames(styles.tafsirSelectionItem, {
                   [styles.tafsirItemSelected]: selected,
                 })}

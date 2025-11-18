@@ -14,16 +14,13 @@ import ReflectionIntro from '@/components/Notes/NoteModal/ReflectionIntro';
 import ShareToQrCheckboxLabel from '@/components/Notes/NoteModal/ShareToQrCheckboxLabel';
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import useMutation from '@/hooks/useMutation';
-import ConsentType from '@/types/auth/ConsentType';
 import { Note } from '@/types/auth/Note';
-import UserProfile from '@/types/auth/UserProfile';
 import ErrorMessageId from '@/types/ErrorMessageId';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { addNote as baseAddNote } from '@/utils/auth/api';
-import { makeGetNotesByVerseUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
 
@@ -52,7 +49,6 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
   const [isCheckboxTicked, setIsCheckboxTicked] = useState(false);
-  const mutateWithoutRevalidation = useMutateWithoutRevalidation();
 
   const { mutate: addNote, isMutating: isAddingNote } = useMutation<Note, NoteFormData>(
     async ({ body, saveToQR }) => {
@@ -81,17 +77,6 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
           mutateCache([data]);
         }
         clearCountCache();
-
-        /*
-         * TODO: since we are not using consents at the moment, we are updating the consents field directly instead of appending to existing consents.
-         * also, if the user deletes the note, we are not removing it.
-         */
-        mutateWithoutRevalidation(makeUserProfileUrl(), (currentProfileData: UserProfile) => {
-          return {
-            ...currentProfileData,
-            consents: { ...currentProfileData.consents, [ConsentType.HAS_NOTES]: true },
-          };
-        });
 
         if (onSuccess) {
           onSuccess();

@@ -9,7 +9,7 @@
   "grow-beyond-ramadan": "Kua nasi <modalLink>Baada ya Ramadhani </modalLink>",
   "know-someone": "Kua nasi <modalLink> Ramadhani </modalLink> hii",
   "learning-plan": "Mipango ya Kujifunza",
-  "listen-to-radio": "Sikiliza Quran Radio",
+  "listen-to-radio": "Sikiliza Radio ya Qur'ani",
   "my-quran": "Qur'ani yangu",
   "navigate-quran": "Pitia Qur'ani",
   "no-bookmarks": "Huna alamisho zozote bado",
@@ -60,7 +60,7 @@
     "bookmarks": "Alamisho",
     "popular": "Maarufu"
   },
-  "take-notes": "Je, umekuwa ukikosa <modalLink> Notes? </modalLink>",
+  "take-notes": "Je, umekosa kutumia <modalLink> Maelezo? </modalLink>",
   "view-all-bookmarks": "Tazama alamisho zote",
   "voice": {
     "trigger": "Ufikiaji wa haraka wa chochote"

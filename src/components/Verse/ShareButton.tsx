@@ -9,12 +9,13 @@ import ShareVerseActionsMenu from './OverflowVerseActionsMenuBody/ShareVerseActi
 
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ShareIcon from '@/icons/share.svg';
+import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';
-import Verse from 'types/Verse';
 
 type ShareButtonProps = {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView?: boolean;
   isMenu?: boolean;
   onClick?: () => void;
@@ -50,14 +51,12 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       tooltip={t('share')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
       onClick={handleClick}
       ariaLabel={t('share')}
     >
       <span className={styles.icon}>
-        <ShareIcon />
+        <IconContainer icon={<ShareIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );

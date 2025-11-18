@@ -53,7 +53,7 @@ const ReflectionSocialInteractions: React.FC<Props> = ({ reflection }) => {
           onClick={onLikesCountClicked}
           shouldFlipOnRTL={false}
         >
-          {toLocalizedNumber(reflection.likes, lang)}
+          {toLocalizedNumber(reflection.likesCount, lang)}
         </Button>
         <Button
           className={styles.actionItemContainer}

@@ -26,15 +26,15 @@
     },
     "khatm": {
       "description": "Um gol clássico de Khatm. Leia 1 Juz por dia",
-      "title": "Leia o Alcorão em 30 dias"
+      "title": "Leia o Quran em 30 dias"
     },
     "time": {
       "description": "Um objetivo simples para iniciantes",
       "title": "Leia 10 minutos por dia"
     },
     "year": {
-      "description": "Leia o Alcorão no seu próprio ritmo durante o próximo ano",
-      "title": "Leia o Alcorão em um ano"
+      "description": "Leia o Quran no seu próprio ritmo durante o próximo ano",
+      "title": "Leia o Quran em um ano"
     }
   },
   "frequency-tab": {
@@ -51,7 +51,7 @@
     "title": "Defina uma meta para o seu objetivo"
   },
   "goal-type": {
-    "description": "Seu objetivo deve ser baseado em tempo, páginas ou um intervalo personalizado (ou seja, 3 Juzs do Alcorão)?",
+    "description": "Seu objetivo deve ser baseado em tempo, páginas ou um intervalo personalizado (ou seja, 3 Juzs do Quran)?",
     "title": "Escolha um critério para sua meta"
   },
   "goal-types": {
@@ -60,7 +60,7 @@
       "title": "Páginas"
     },
     "range": {
-      "description": "Seu objetivo será baseado em uma gama personalizada de versículos (pode ser uma Surata, um Juz ou até mesmo todo o Alcorão)",
+      "description": "Seu objetivo será baseado em uma gama personalizada de versículos (pode ser um Surah, um Juz ou até mesmo todo o Quran)",
       "title": "Intervalo personalizado"
     },
     "time": {
@@ -79,14 +79,14 @@
   "progress": {
     "complete": "A meta de hoje está completa 🎉",
     "goal-complete": "Todo o seu objetivo está completo 🎉",
-    "pages-goal": "leia {{pages}} páginas do Alcorão",
+    "pages-goal": "leia {{pages}} páginas do Quran",
     "range-goal": "leia {{from}} para {{to}}",
-    "time-goal": "leia {{time}} do Alcorão"
+    "time-goal": "leia {{time}} do Quran"
   },
   "reading-goal": "meta de leitura",
-  "reading-goal-description": "Você acha desafiador manter a consistência com suas metas de leitura do Alcorão? <br/> <br/> Quran Growth Journey é um recurso dinâmico desenvolvido para ajudar você a permanecer consistente em sua jornada com o Alcorão. Quer você tenha como objetivo ler 10 minutos por dia, completar um Juz em um mês ou terminar o Alcorão inteiro em um ano, etc., o Quran.com agora pode ajudar você a definir uma meta personalizada e acompanhar suas sequências diárias de leitura, enquanto ajusta conforme você progride. É totalmente gratuito e esperamos que ajude você a se manter motivado para atingir sua meta!",
+  "reading-goal-description": "Você acha desafiador manter a consistência com suas metas de leitura do Quran? <br/> <br/> Quran Growth Journey é um recurso dinâmico desenvolvido para ajudar você a permanecer consistente em sua jornada com o Quran. Quer você tenha como objetivo ler 10 minutos por dia, completar um Juz em um mês ou terminar o Quran inteiro em um ano, etc., o Quran.com agora pode ajudar você a definir uma meta personalizada e acompanhar suas sequências diárias de leitura, enquanto ajusta conforme você progride. É totalmente gratuito e esperamos que ajude você a se manter motivado para atingir sua meta!",
   "reading-goal-label": "você está em um",
-  "reading-goal-title": "Apresentando a Jornada de Crescimento do Alcorão",
+  "reading-goal-title": "Apresentando a Jornada de Crescimento do Quran",
   "recommended": "Recomendado",
   "remaining": "Restante para hoje",
   "remaining-base": "Restante",
@@ -101,7 +101,7 @@
   "starting-chapter": "Surata Inicial",
   "starting-verse": "Começando Ayah",
   "streak": "Onda",
-  "streak-definition": "Uma sequência é o número de dias consecutivos em que você leu o Alcorão.",
+  "streak-definition": "Uma sequência é o número de dias consecutivos em que você leu o Quran.",
   "timeline-meaning": "O que significa sua linha do tempo?",
   "timeline-states": {
     "checked": "Você completou seu objetivo",

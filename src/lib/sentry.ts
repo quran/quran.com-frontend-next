@@ -175,7 +175,38 @@ export const logMessageToSentry = (
       if (options.transactionName) {
         scope.setTransactionName(options.transactionName);
       }
+      if (getUserIdCookie()) {
+        scope.setUser({
+          id: getUserIdCookie(),
+        });
+      }
       return scope;
     });
   }
+};
+
+/**
+ * Add a breadcrumb (lightweight log) to Sentry for state/flow tracing without creating a full event.
+ * Falls back to console when Sentry disabled.
+ *
+ * @param {string} category Logical category e.g. 'auth.redirect'
+ * @param {string} message Short description
+ * @param {Record<string, unknown>} data Additional context data
+ */
+export const addSentryBreadcrumb = (
+  category: string,
+  message: string,
+  data?: Record<string, unknown>,
+) => {
+  if (!SENTRY_ENABLED) {
+    // eslint-disable-next-line no-console
+    console.debug(`[breadcrumb] ${category}: ${message}`, data);
+    return;
+  }
+  Sentry.addBreadcrumb({
+    category,
+    message,
+    data,
+    level: 'info',
+  });
 };

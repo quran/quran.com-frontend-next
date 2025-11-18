@@ -8,17 +8,16 @@ import styles from './ProfileAvatarButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import useLogout from '@/hooks/auth/useLogout';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
-import NotesIcon from '@/icons/notes-filled.svg';
+import NotesIcon from '@/icons/notes-with-pencil.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
-import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
-import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getLoginNavigationUrl,
@@ -35,6 +34,8 @@ const ProfileAvatarButton = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const isUserLoggedIn = isLoggedIn();
+  // useLogout centralizes analytics (via eventName), auth teardown, and redirect logic.
+  const logout = useLogout();
 
   const onTriggerClicked = () => {
     dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
@@ -43,13 +44,7 @@ const ProfileAvatarButton = () => {
     }
   };
 
-  const onLogoutClicked = async () => {
-    logButtonClick('profile_avatar_logout');
-
-    await logoutUser();
-    removeLastSyncAt();
-    router.reload();
-  };
+  const onLogoutClicked = async () => logout({ eventName: 'profile_avatar_logout' });
 
   const onProfileClicked = () => {
     logButtonClick('profile_avatar_profile');
@@ -99,6 +94,7 @@ const ProfileAvatarButton = () => {
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
             shouldFlipOnRTL={false}
+            data-testid="profile-avatar-button"
           >
             <IconPerson />
           </Button>

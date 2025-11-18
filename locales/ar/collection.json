@@ -1,23 +1,23 @@
 {
   "all-saved-verses": "جميع الآيات المحفوظة",
-  "alphabetical": "AZ",
-  "back-to-collection-list": "العودة إلى قائمة المجموعة",
+  "alphabetical": "ترتيب أبجدي",
+  "back-to-collection-list": "العودة إلى قائمة المجموعات",
   "collapse-all": "إخفاء جميع الآيات",
-  "collection-list-empty": "قائمة المجموعة فارغة. لم تقم بإنشاء أي مجموعة حتى الآن",
+  "collection-list-empty": "قائمة المجموعات فارغة. لم تنشئ أي مجموعة بعد.",
   "collections": "المجموعات",
   "delete-bookmark": {
-    "subtitle": "هل تريد بالتأكيد حذف {{bookmarkName}} من {{collectionName}} ؟",
-    "title": "حذف الإشارة المرجعية"
+    "subtitle": "هل أنت متأكد أنك تريد حذف {{bookmarkName}} من مجموعة {{collectionName}} ؟",
+    "title": "حذف ما تم حفظه"
   },
   "delete-collection": {
-    "subtitle": "هل تريد بالتأكيد حذف {{collectionName}} ؟",
+    "subtitle": "هل تريد حذف مجموعة {{collectionName}} ؟",
     "title": "حذف المجموعة"
   },
   "empty": "المجموعة فارغة",
   "expand-all": "عرض جميع الآيات",
   "go-to-ayah": "اذهب إلى الآية",
   "load-more": "تحميل المزيد",
-  "recently-added": "أضيف مؤخرا",
+  "recently-added": "أضيفت حديثًا.",
   "recently-updated": "تم تحديثه مؤخرا",
   "verse-key": "رقم السورة والآية"
 }

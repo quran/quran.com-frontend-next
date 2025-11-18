@@ -7,13 +7,12 @@ import styles from './ShareToQrCheckboxLabel.module.scss';
 
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import useAuthData from '@/hooks/auth/useAuthData';
 
 const ShareToQrCheckboxLabel = () => {
-  const {
-    user: { firstName },
-  } = useCurrentUser();
+  const { user } = useAuthData();
   const { t } = useTranslation('notes');
+  const firstName = user?.firstName || '';
   return (
     <div>
       <div className={styles.container}>

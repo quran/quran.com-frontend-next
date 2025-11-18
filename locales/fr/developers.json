@@ -1,8 +1,22 @@
 {
+  "api-docs": {
+    "cta": "Afficher la documentation de l'API",
+    "header": "Documentation de l'API",
+    "sub-header": "Intégrez les données de Quran.com dans vos applications grâce à notre API complète",
+    "title": "Documentation de l'API"
+  },
+  "careers": {
+    "career": "Opportunités de carrière",
+    "cta": "Voir les postes",
+    "header": "Découvrez nos offres d'emploi actuelles"
+  },
   "footer": "- L'équipe Quran.com",
   "header": "Aide au développement",
   "issues-cta": "Si vous avez des questions ou si vous souhaitez contacter les responsables, écrivez simplement un problème ! Nous vous répondrons dans les plus brefs délais, inch Allah.",
   "issues-guide": "Typiquement, nous nous inspirons de <0>projets Github</0> pour bâtir de nouvelles fonctionnalités, et corriger les bugs. Par exemple, <1>cette URL</1> contient une liste de bugs, des choses pour lesquelles nous avons besoin d'aide et des fonctionnalités à venir.",
+  "labs": "Laboratoires",
+  "labs-cta": "Explorer les laboratoires",
+  "labs-description": "Découvrez des fonctionnalités expérimentales et des innovations à venir. Partagez vos idées.",
   "main-desc": "Merci pour votre contribution au développement de Quran.com et ses projets. Nous sommes ravis de travailler avec vous !",
   "projects": {
     "all": "Nous avons des projets hébergés sur Github, consultables <0>ici</0>. Mais pour les décrire succintement :",

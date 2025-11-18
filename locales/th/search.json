@@ -1,12 +1,12 @@
 {
-    "default-translations": "คำแปลตั้งต้น",
-    "filter": "กรอง",
-    "language-filter-label": "ค้นหาคำแปลทั้งหมดของภาษา",
-    "language-select": "เลือกภาษา",
-    "reset": "รีเซ็ต",
-    "search": "ค้นหา",
-    "search-desc": "ค้นหาคลังข้อมูลของอัลกุรอานและคำแปลโดยใช้เครื่องมือค้นหาหลายภาษาที่ทรงพลังและแม่นยำสูง",
-    "search-title": "ค้นหา ' {{searchQuery}} '",
-    "searching-translations": "กำลังค้นหาคำแปล",
-    "translation-select": "เลือกคำแปล"
+  "default-translations": "คำแปลตั้งต้น",
+  "filter": "กรอง",
+  "language-filter-label": "ค้นหาคำแปลทั้งหมดของภาษา",
+  "language-select": "เลือกภาษา",
+  "reset": "รีเซ็ต",
+  "search": "ค้นหา",
+  "search-desc": "ค้นหาคลังข้อมูลของอัลกุรอานและคำแปลโดยใช้เครื่องมือค้นหาหลายภาษาที่ทรงพลังและแม่นยำสูง",
+  "search-title": "ค้นหา ' {{searchQuery}} '",
+  "searching-translations": "กำลังค้นหาคำแปล",
+  "translation-select": "เลือกคำแปล"
 }
