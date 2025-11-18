@@ -104,8 +104,8 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
-  const hasQuestions = questionsCount && questionsCount[verse.verseKey] > 0;
-  const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
+  const hasQuestions = questionsCount?.[verse.verseKey]?.total > 0;
+  const hasNotes = notesCount?.[verse.verseKey] > 0;
 
   return (
     <div

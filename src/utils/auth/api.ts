@@ -478,11 +478,16 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
+export type QuestionData = {
+  types: Record<string, number>;
+  total: number;
+};
+
 export const countQuestionsWithinRange = async (
   from: string,
   to: string,
   language: Language,
-): Promise<Record<string, number>> => {
+): Promise<Record<string, QuestionData>> => {
   return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
 };
 
