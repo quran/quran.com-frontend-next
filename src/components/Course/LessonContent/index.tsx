@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import LessonView from '@/components/Course/LessonView';
-import NotEnrolledNotice from '@/components/Course/NotEnrolledNotice';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import { useIsEnrolled } from '@/hooks/auth/useGuestEnrollment';
+import useEnrollUser from '@/hooks/auth/useEnrollUser';
 import { Lesson } from '@/types/auth/Course';
+import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { getCanonicalUrl, getLessonNavigationUrl } from '@/utils/navigation';
 
 interface Props {
@@ -17,11 +17,16 @@ interface Props {
 
 const LessonContent: React.FC<Props> = ({ lesson, lessonSlugOrId, courseSlug }) => {
   const { lang } = useTranslation('learn');
-  const isEnrolled = useIsEnrolled(lesson.course.id, lesson.course.isUserEnrolled);
+  const enrollUserInCourse = useEnrollUser();
+  const enrollmentAttemptedRef = useRef(false);
 
-  if (isEnrolled === false) {
-    return <NotEnrolledNotice courseSlug={courseSlug} lessonSlugOrId={lessonSlugOrId} />;
-  }
+  // Auto-enroll logged-in users when they view a lesson
+  useEffect(() => {
+    if (!lesson.course.isUserEnrolled && !enrollmentAttemptedRef.current) {
+      enrollmentAttemptedRef.current = true;
+      enrollUserInCourse(lesson.course.id, EnrollmentMethod.Automatic);
+    }
+  }, [lesson.course.id, lesson.course.isUserEnrolled, enrollUserInCourse]);
 
   return (
     <>
