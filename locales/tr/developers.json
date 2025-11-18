@@ -1,8 +1,22 @@
 {
+  "api-docs": {
+    "cta": "API Belgelerini Görüntüle",
+    "header": "API Belgeleri",
+    "sub-header": "Kapsamlı API'mizle Quran.com verilerini uygulamalarınıza entegre edin",
+    "title": "API Belgeleri"
+  },
+  "careers": {
+    "career": "Kariyer fırsatları",
+    "cta": "Pozisyonları görüntüle",
+    "header": "Mevcut iş ilanlarımızı keşfedin"
+  },
   "footer": "- Quran.com ekibi",
   "header": "Geliştirme Yardımı",
   "issues-cta": "Herhangi bir sorunuz varsa ve bizimle iletişime geçmek isterseniz, bize yazın! Mümkün olan en kısa sürede size geri döneceğiz, inşaAllah.",
   "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne olacağı ve çözülmesi gereken hangi hataların mevcut olduğu konusunda kaynak olarak <0>Github projelerini</0> Örneğin <1>bu url</1> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
+  "labs": "Laboratuvarlar",
+  "labs-cta": "Laboratuvarları Keşfedin",
+  "labs-description": "Deneysel özellikleri ve gelecek yenilikleri keşfedin. Fikirlerinizi paylaşın.",
   "main-desc": "Esselamü aleyküm, Öncelikle Kuran.com'u ve projelerini geliştirmemize yardımcı olmak için gösterdiğiniz ilgi için çok teşekkür ederiz. Sizinle çalışmaktan heyecan duyuyoruz!",
   "projects": {
     "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0>burada</0> . Özetlemek gerekirse:",

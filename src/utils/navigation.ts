@@ -8,6 +8,7 @@ import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './
 
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
+import ContentType from '@/types/QuranReflect/ContentType';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
@@ -17,6 +18,8 @@ import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  LOGOUT: '/logout',
+  AUTH: '/auth',
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',
@@ -389,7 +392,10 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
   return `/collections/${collectionId}`;
 };
 
-export const getReadingGoalNavigationUrl = () => '/reading-goal';
+export const getReadingGoalNavigationUrl = (example?: string) =>
+  example && example.trim() !== ''
+    ? `/reading-goal?example=${encodeURIComponent(example)}`
+    : '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
@@ -397,7 +403,7 @@ export const getBeyondRamadanNavigationUrl = () => '/beyond-ramadan';
 export const getWhatIsRamadanNavigationUrl = () => '/what-is-ramadan';
 export const getTakeNotesNavigationUrl = () => '/take-notes';
 export const getLoginNavigationUrl = (redirectTo?: string) =>
-  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
+  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${encodeURIComponent(redirectTo)}` : ''}`;
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
@@ -438,4 +444,10 @@ export const scrollWindowToTop = (): void => {
   if (typeof window !== 'undefined') {
     window.scrollTo(0, 0);
   }
+};
+
+export const getReflectionNavigationUrl = (verseKey: string, selectedContentType: ContentType) => {
+  return selectedContentType === ContentType.REFLECTIONS
+    ? getVerseReflectionNavigationUrl(verseKey)
+    : getVerseLessonNavigationUrl(verseKey);
 };

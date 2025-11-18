@@ -1,8 +1,22 @@
 {
+  "api-docs": {
+    "cta": "Lihat Dokumen API",
+    "header": "Dokumentasi API",
+    "sub-header": "Integrasikan data Quran.com ke dalam aplikasi anda dengan API komprehensif kami",
+    "title": "Dokumentasi API"
+  },
+  "careers": {
+    "career": "Peluang Kerjaya",
+    "cta": "Lihat Kedudukan",
+    "header": "Terokai peluang pekerjaan semasa kami"
+  },
   "footer": "- Pasukan Quran.com",
   "header": "Bantuan pembangunan",
   "issues-cta": "Sekiranya anda mempunyai sebarang soalan atau ingin menghubungi penyelenggara, tulis sahaja isu anda! Kami akan menghubungi anda secepat mungkin, insyaAllah.",
   "issues-guide": "Kebiasaannya kami menggunakan <0> projek Github </0> sebagai sumber untuk perkara yang perlu diusahakan seterusnya, perkara yang akan datang dan pepijat yang wujud yang perlu diselesaikan. Contohnya <1> URL ini </1> mempunyai senarai pepijat, perkara yang kami perlukan bantuan dan ciri yang akan datang.",
+  "labs": "Makmal",
+  "labs-cta": "Terokai Makmal",
+  "labs-description": "Temui ciri percubaan dan inovasi akan datang. Kongsi idea anda",
   "main-desc": "Assalamualaikum. Terima kasih atas minat anda untuk membantu kami membangunkan Quran.com dan projek-projeknya. Kami teruja untuk bekerjasama dengan anda!",
   "projects": {
     "all": "Kami mempunyai beberapa projek yang dihoskan di Github. Anda boleh menemui kesemuanya <0> di sini </0> . Ianya adalah seperti berikut:",

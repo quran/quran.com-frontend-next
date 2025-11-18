@@ -11,14 +11,14 @@ import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
-import { getProxiedServiceUrl } from '@/utils/url';
+import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
-    return getProxiedServiceUrl('auth/', url);
+    return getProxiedServiceUrl(QuranFoundationService.AUTH, `/${url}`);
   }
-  return getProxiedServiceUrl('auth/', `${url}${`?${stringify(parameters)}`}`);
+  return getProxiedServiceUrl(QuranFoundationService.AUTH, `/${url}${`?${stringify(parameters)}`}`);
 };
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');

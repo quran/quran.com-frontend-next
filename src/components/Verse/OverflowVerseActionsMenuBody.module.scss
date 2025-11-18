@@ -8,3 +8,7 @@
     z-index: var(--z-index-default);
   }
 }
+
+.moreMenuTrigger {
+  margin-inline-end: calc(var(--spacing-small-px) * -1);
+}

@@ -74,6 +74,7 @@ const Select: React.FC<Props> = ({
           [styles.disabledSelect]: disabled,
         })}
         name={name}
+        data-testid={id}
         id={id}
         onChange={onSelectChange}
         disabled={disabled}

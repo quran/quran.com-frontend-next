@@ -5,8 +5,10 @@ type AyahReflectionsRequestParams = {
   ayahNumber: string;
   locale: string;
   page?: number;
+
   tab?: Tab;
   reviewed?: boolean;
+
   postTypeIds?: string[];
   reflectionLanguages?: string[];
 };

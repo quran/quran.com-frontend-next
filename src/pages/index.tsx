@@ -39,6 +39,7 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({
   chaptersResponse: { chapters },
+  chaptersData,
   learningPlans,
 }): JSX.Element => {
   const { t, lang } = useTranslation('home');
@@ -66,6 +67,7 @@ const Index: NextPage<IndexProps> = ({
               <MobileHomepageSections
                 isUserLoggedIn={isUserLoggedIn}
                 todayAyah={todayAyah}
+                chaptersData={chaptersData}
                 learningPlans={learningPlans}
               />
             ) : (
@@ -80,7 +82,7 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection />
+                        <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
                     <div
@@ -106,6 +108,11 @@ const Index: NextPage<IndexProps> = ({
                     >
                       <ExploreTopicsSection />
                     </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection courses={learningPlans} />
+                    </div>
                     {todayAyah && (
                       <div
                         className={classNames(
@@ -114,7 +121,7 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection />
+                        <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
                     <div

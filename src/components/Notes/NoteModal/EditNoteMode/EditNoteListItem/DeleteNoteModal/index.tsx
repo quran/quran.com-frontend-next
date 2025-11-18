@@ -4,6 +4,7 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Butt
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { Note } from '@/types/auth/Note';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type DeleteNoteButtonProps = {
@@ -44,14 +45,14 @@ const DeleteNoteModal = ({ isDisabled, note: { id }, onConfirm }: DeleteNoteButt
       <Button
         variant={ButtonVariant.Ghost}
         onClick={onDeleteClicked}
-        tooltip={t('delete')}
+        tooltip={t('common:delete')}
         size={ButtonSize.Small}
         type={ButtonType.Warning}
         {...buttonProps}
       >
         X
       </Button>
-      <ConfirmationModal />
+      <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />
     </>
   );
 };

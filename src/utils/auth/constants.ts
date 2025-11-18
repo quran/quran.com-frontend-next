@@ -1,4 +1,5 @@
 import AppEnv from '@/types/AppEnv';
+import { SsoPlatformConfig } from '@/utils/auth/types/Auth';
 
 /**
  * This function adds a suffix to the cookie name based on the environment.
@@ -32,3 +33,18 @@ export const AUTH_ONBOARDING_ANNOUNCEMENT_TYPE = 'auth-onboarding';
 export const BANNED_USER_ERROR_ID = 'external.banned';
 
 export const QURANIC_CALENDAR_PROGRAM_ID = '1';
+
+export const SSO_ENABLED = process.env.NEXT_PUBLIC_SSO_ENABLED === 'true';
+
+/**
+ * Configuration for all supported SSO platforms
+ * Add new platforms here to make them available for SSO
+ */
+export const SSO_PLATFORM_CONFIGS: readonly SsoPlatformConfig[] = [
+  {
+    id: 'QR',
+    envKey: 'NEXT_PUBLIC_QURAN_REFLECT_URL',
+    enabled: true,
+  },
+  // Add more platforms here as needed
+];

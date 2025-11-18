@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Trans from 'next-translate/Trans';

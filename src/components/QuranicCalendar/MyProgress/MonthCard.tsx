@@ -45,6 +45,8 @@ const MonthCard: React.FC<MonthCardProps> = ({
     try {
       // Call the parent's onWeekSelect to update the selected week
       onWeekSelect(weekNumber);
+      // Scroll to top to see the updated verses
+      window.scrollTo({ top: 0 });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
     } finally {

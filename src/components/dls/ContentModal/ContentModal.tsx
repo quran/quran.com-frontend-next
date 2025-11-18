@@ -1,4 +1,4 @@
-import { ForwardedRef, useImperativeHandle, useRef } from 'react';
+import { ForwardedRef, useCallback, useImperativeHandle, useRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import CloseIcon from '@/icons/close.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum ContentModalSize {
@@ -33,7 +34,7 @@ type ContentModalProps = {
   size?: ContentModalSize;
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
-  isOverlayMax?: boolean;
+  zIndexVariant?: ZIndexVariant;
   isBottomSheetOnMobile?: boolean;
 };
 
@@ -55,10 +56,11 @@ const ContentModal = ({
   hasHeader = true,
   onClick,
   shouldBeFullScreen = false,
-  isOverlayMax = false,
+  zIndexVariant,
   isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
+  const contentRef = useRef<HTMLDivElement>(null);
   const { locale } = useRouter();
   useImperativeHandle(innerRef, () => ({
     scrollToTop: () => {
@@ -94,18 +96,31 @@ const ContentModal = ({
     }
   };
 
+  /**
+   * Prevents Safari from focusing the first focusable element in the modal.
+   * @param {Event} event
+   */
+  const handleOpenAutoFocus = useCallback((event: Event) => {
+    if (event.defaultPrevented) return;
+    event.preventDefault();
+    contentRef.current?.focus({ preventScroll: true });
+  }, []);
+
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
           className={classNames(styles.overlay, {
             [styles.fullScreen]: shouldBeFullScreen,
-            [styles.overlayMax]: isOverlayMax,
+            [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+            [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+            [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
           })}
           ref={overlayRef}
         >
           <Dialog.Content
             {...(onClick && { onClick })}
+            ref={contentRef}
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
               [styles.small]: size === ContentModalSize.SMALL,
@@ -115,6 +130,7 @@ const ContentModal = ({
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
+            onOpenAutoFocus={handleOpenAutoFocus}
           >
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>
@@ -133,7 +149,9 @@ const ContentModal = ({
               </div>
             )}
 
-            <div className={styles.content}>{children}</div>
+            <div className={styles.content} data-testid="modal-content">
+              {children}
+            </div>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>

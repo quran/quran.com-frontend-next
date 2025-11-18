@@ -4,17 +4,15 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import { getReflectionTabs, handleReflectionViewed } from './helpers';
 import styles from './ReflectionBodyContainer.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import NewLabel from '@/dls/Badge/NewLabel';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
-import { isLoggedIn } from '@/utils/auth/login';
-import { postReflectionViews } from '@/utils/auth/qf/api';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -22,10 +20,9 @@ import {
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
 import {
-  makeAyahReflectionsUrl,
-  postReflectionViews as postReflectionViewsToQuranReflect,
-  REFLECTION_POST_TYPE_ID,
   LESSON_POST_TYPE_ID,
+  REFLECTION_POST_TYPE_ID,
+  makeAyahReflectionsUrl,
 } from '@/utils/quranReflect/apiPaths';
 import { reflectionLanguagesToLocaleCodes } from '@/utils/quranReflect/locale';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
@@ -45,6 +42,7 @@ type ReflectionBodyProps = {
   scrollToTop: () => void;
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
   initialContentType?: ContentType;
+  isModal?: boolean;
 };
 
 const ReflectionBodyContainer = ({
@@ -53,6 +51,7 @@ const ReflectionBodyContainer = ({
   initialVerseNumber,
   scrollToTop,
   initialContentType = ContentType.REFLECTIONS,
+  isModal = false,
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -60,19 +59,6 @@ const ReflectionBodyContainer = ({
   const { lang, t } = useTranslation();
   const reflectionLanguages = useSelector(selectAyahReflectionsLanguages);
   const reflectionLanguageIsoCodes = reflectionLanguagesToLocaleCodes(reflectionLanguages);
-
-  const tabs = [
-    { title: t('common:reflections'), value: ContentType.REFLECTIONS },
-    {
-      title: (
-        <div className={styles.titleContainer}>
-          {t('common:lessons')}
-          <NewLabel />
-        </div>
-      ),
-      value: ContentType.LESSONS,
-    },
-  ];
 
   const handleTabChange = (value: ContentType) => {
     logEvent('reflection_view_tab_change', { tab: value });
@@ -85,25 +71,9 @@ const ReflectionBodyContainer = ({
     fakeNavigate(newUrl, lang);
   };
 
-  /**
-   * Handle when the reflection is viewed:
-   *
-   * 1. If the user is logged in, we will call QDC's backend API.
-   * 2. Otherwise, we will call QR's API directly.
-   */
-  const onReflectionViewed = useCallback((reflectionContainer: Element) => {
-    const postId = reflectionContainer.getAttribute('data-post-id');
-    if (isLoggedIn()) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      postReflectionViews(postId).catch(() => {});
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      postReflectionViewsToQuranReflect(postId).catch(() => {});
-    }
-  }, []);
   useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
-    onReflectionViewed,
+    handleReflectionViewed,
     REFLECTIONS_OBSERVER_ID,
     'postId',
     'countAsViewedAfter',
@@ -118,23 +88,31 @@ const ReflectionBodyContainer = ({
         setSelectedVerseNumber={setSelectedVerseNumber}
         scrollToTop={scrollToTop}
         selectedContentType={selectedContentType}
+        isModal={isModal}
       />
     ),
-    [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType],
+    [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType, isModal],
   );
 
   const body = (
     <>
-      {/* @ts-ignore */}
-      <Tabs tabs={tabs} selected={selectedContentType} onSelect={handleTabChange} />
+      <Tabs
+        tabs={getReflectionTabs(t)}
+        selected={selectedContentType}
+        onSelect={handleTabChange}
+        className={styles.tab}
+        activeClassName={styles.tabActive}
+      />
       <DataFetcher
         loading={TafsirSkeleton}
         queryKey={makeAyahReflectionsUrl({
           surahId: selectedChapterId,
           ayahNumber: selectedVerseNumber,
           locale: lang,
+
           reviewed: true,
           reflectionLanguages: reflectionLanguageIsoCodes,
+
           postTypeIds: [
             selectedContentType === ContentType.REFLECTIONS
               ? REFLECTION_POST_TYPE_ID

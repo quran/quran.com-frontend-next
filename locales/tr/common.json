@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Cevaplar",
   "aria": {
     "change-settings": "Ayarları değiştir",
     "drawer-close": "Çekmeceyi Kapat",
@@ -92,8 +93,9 @@
   },
   "ayah": "Ayet",
   "ayahs": "Ayet",
+  "back": "Geri",
   "beta": "Beta",
-  "beyond-ramadan": "Ramazan'dan Sonra da Büyümeye Devam Edin!",
+  "beyond-ramadan": "Ramazan'dan sonra da gelişin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
   "both": "Her ikisi de",
@@ -103,18 +105,24 @@
   "command-bar": {
     "navigations": "Navigasyonlar",
     "no-nav-results": "Navigasyon sonucu yok",
-    "placeholder": "Kuran'ı ara...",
+    "placeholder": "Kuran'da ara...",
     "recent-navigations": "Son gezinmeler",
     "search-by-voice": "Sesle ara",
     "try-navigating": "Gezinmeyi deneyin"
   },
   "community": {
     "cta": "Bizimle iletişime geçin",
-    "header": "Teknik becerilerinizi Kur'an'ın misyonuna katkıda bulunmak için kullanmak ister misiniz?",
+    "header": "Kuran'ın misyonunu ilerletmek için teknik becerilerinizle gönüllü olmak ister misiniz?",
     "sub-header": "Bu formu doldurarak ilginizi bizimle paylaşın, uygun bir fırsat olduğunda inşaAllah size ulaşacağız.",
     "title": "Toplum"
   },
   "complete-sign-up": "Kaydınızı tamamlayın",
+  "complete-signup": {
+    "description": "Kaydınızı tamamlamak için aşağıdaki eksik bilgilere ihtiyaç duymaktayız.",
+    "title": "Kaydınızı tamamlayın",
+    "verification-code": "Doğrulama kodu",
+    "verification-code-sent-to": "Doğrulama kodu şuraya gönderildi:{{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş </boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br></br> <br></br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br></br> <br></br> <boldSpan> ilham veren hatırlatıcılar </boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
@@ -126,7 +134,7 @@
   "copied": "kopyalandı",
   "copied-to-clipboard": "Panoya kopyalandı",
   "copy": "Kopyala",
-  "copylink": "Bağlantıyı kopyala",
+  "copylink": "Linki Kopyala",
   "counter": {
     "decrease": "Azalt",
     "increase": "Arttır"
@@ -161,9 +169,10 @@
     "ranges-wrong-order": "Başlangıç mısrası bitiş mısrasından önce olmalıdır."
   },
   "errors": {
-    "account-banned": "Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
+    "account-banned": "Maalesef, hesabınız engellendi. Quran.Foundation ile irtibata geçin",
     "badRequest": "*Geçersiz istek",
     "banned": "*Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
+    "complete-signup-failed": "Kayıt işlemi tamamlanamadı. Lütfen tekrar deneyin.",
     "confirm": "*Şifreyi onayla şifreyle uyuşmuyor",
     "email": "*Geçersiz E-posta Biçimi!",
     "exactLength": "*Değer tam uzunlukta olmalıdır",
@@ -177,7 +186,7 @@
     "name": "* {{fieldName}} yalnızca harf ve sayılardan oluşmalıdır",
     "notFound": "*Bulunamadı",
     "required": "* {{fieldName}} eksik!",
-    "reset-password-failed": "Şifreyi sıfırlama başarısız. Lütfen tekrar deneyin.",
+    "reset-password-failed": "Şifre sıfırlama başarısız. Lütfen tekrar deneyin.",
     "signin-failed": "Giriş başarısız. Lütfen tekrar deneyin.",
     "signup-failed": "Kayıt başarısız. Lütfen tekrar deneyin.",
     "taken": "* {{fieldName}} zaten var!",
@@ -210,7 +219,7 @@
     "translation-font-size": "Çeviri yazı tipi boyutu"
   },
   "footer": {
-    "description": "Quran.com, dünya çapında milyonlarca kişinin Kuran'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, okumalar, kelime kelime çeviriler ve daha derin çalışma araçları sunarak Kuran'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka Jariyah olarak, Quran.com insanların Kuran ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından desteklenen Quran.com, herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor, Elhamdülillah",
+    "description": "Quran.com, dünya çapında milyonlarca kişinin Kur'an'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, kıraatler, kelime kelime çeviriler ve derinlemesine inceleme araçları sunarak Kur'an'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka-i Cariye olarak Quran.com, insanların Kur'an ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link> Kur'an Vakfı </link> tarafından desteklenen Quran.com, Elhamdülillah herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor.",
     "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! </link>",
     "rights": "Her hakkı saklıdır",
     "title": "Kuran'ı Oku, Dinle, Araştır ve Üzerinde Düşün"
@@ -228,7 +237,7 @@
     "verification-code": "Doğrulama Kodu"
   },
   "from": "İtibaren",
-  "fundraising-share-title": "Quran.com Bağış Toplamasını Paylaşın",
+  "fundraising-share-title": "Quran.com bağış kampanyası'nı paylaşın",
   "fundraising-sticky-banner": {
     "cta": "Bağış yapmak",
     "title": "En iyi günlerde ver!"
@@ -237,7 +246,7 @@
     "description": "Aylık bağışlar, Quran.com'u geliştirmemize ve operasyonlarımızı sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az, etki yaratmaya daha çok odaklanabiliyoruz.",
     "title": "Aylık Bağışçımız Olun"
   },
-  "get-started": "Başlayın",
+  "get-started": "Başla",
   "hear-it-pronounced": "Kuran kelimelerini tıklayın, telaffuzunu dinleyin",
   "help": "Yardım",
   "hizb": "Hizb",
@@ -254,6 +263,7 @@
   "learning-plans": "Öğrenme Planları",
   "less": "Daha az",
   "lessons": "Dersler",
+  "listen": "Dinle",
   "loading": "Yükleniyor",
   "login": "Oturum aç",
   "logout": "Çıkış Yap",
@@ -273,9 +283,11 @@
   "next-ayah": "Sonraki Ayah",
   "no": "Numara",
   "no-notifications": "Henüz bildirim yok",
+  "no-verses-available": "Mevcut ayet yok",
   "none": "Hiçbiri",
   "not-now": "Şimdi değil",
   "notes": {
+    "label": "Notlar",
     "title": "Notlarım ve Düşüncelerim"
   },
   "notification-settings": "Bildirim ayarları",
@@ -294,9 +306,9 @@
   "pbuh": "Allah'ın selamı onun üzerine olsun",
   "popular-links": "Popüler Bağlantılar",
   "popup": {
-    "companion-title": "Sevgili Kur'an Arkadaşı,",
+    "companion-title": "Değerli Kuran yol arkadaşı,",
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
-    "subtitle": "\"Allah katında salih amelin en çok hoş karşılandığı günler bu günlerdir.\" [Buhari 969]",
+    "subtitle": "“Salih amel için Allah katında bu günler kadar sevindirici başka günler yoktur.” [Sahih-i Buhârî 969]",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
     "text-2": "Sürekli sadaka (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya tek seferlik) bağışçı olarak ahiretinize yatırım yapın.",
     "title": "En İyi Gününüzde Verin!"
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
   },
   "share": "Paylaş",
+  "share-quran-description-line-1": "Peygamber Efendimiz ﷺ buyurdu ki:",
+  "share-quran-description-line-2": "“Benden bir ayet dahi olsa tebliğ edin.”",
+  "share-quran-description-line-3": "(Sahih-i Buhari 3461)",
+  "share-quran-title": "Kuran'ı paylaşın!",
   "shared": "Bağlantı panoya kopyalandı!",
   "show-more": "Daha fazla göster",
   "sidebar": {
@@ -442,17 +458,17 @@
   "view": "Görüş",
   "voice": {
     "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
-    "error": "Bir hata oluştu, lütfen daha sonra tekrar deneyin.",
-    "language-unavailable": "Tarayıcınız Arapçayı desteklemiyor.",
-    "network": "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
-    "no-microphone": "Mikrofon algılanmadı. Lütfen bir mikrofon bağlayın ve tekrar deneyin.",
-    "no-permission": "Mikrofon izinlerinizin etkinleştirilmemiş gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin.",
+    "error": "Bir hata oluştu, lütfen tekrar deneyin ({{errorCode}}).",
+    "language-unavailable": "Arapça, tarayıcınız tarafından desteklenmiyor.",
+    "network": "Bağlantı hatası. İnternetinizi kontrol edip yeniden deneyin.",
+    "no-microphone": "Mikrofon bulunamadı. Lütfen mikrofonu bağlayıp tekrar deneyin.",
+    "no-permission": "Mikrofon izinleri etkinleştirilmemiş. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin.",
     "no-speech": "Konuşma algılanmadı. Lütfen tekrar konuşmayı deneyin.",
-    "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin.",
+    "not-supported": "Tarayıcınız mikrofonu desteklemiyor. Lütfen farklı bir tarayıcı deneyin.",
     "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir.",
     "suggest-subtitle": "Arapça herhangi bir ayeti okuyun ve ayet görünecektir",
     "suggest-title": "Şimdi oku",
-    "voice-search-powered-by": "Sesli Arama Powered by"
+    "voice-search-powered-by": "Sesli arama sağlayıcısı"
   },
   "wbw": "Kelime kelime",
   "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} </link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",

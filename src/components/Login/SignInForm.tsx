@@ -14,6 +14,7 @@ import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { signIn } from '@/utils/auth/authRequests';
@@ -33,9 +34,13 @@ interface Props {
 
 const SignInForm: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
+
   const router = useRouter();
   const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
+
+  const { redirectWithToken } = useAuthRedirect();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
@@ -87,7 +92,9 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         // eslint-disable-next-line no-console
         console.error('Failed to sync user preferences after login', error);
       }
-      router.push(redirect || '/');
+
+      redirectWithToken(redirect || '/', response?.token);
+
       return undefined;
     } catch (error) {
       setIsSubmitting(false);

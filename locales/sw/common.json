@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Majibu",
   "aria": {
     "change-settings": "Badilisha Mipangilio",
     "drawer-close": "Funga Menyu",
@@ -92,6 +93,7 @@
   },
   "ayah": "Aya",
   "ayahs": "Aya",
+  "back": "Nyuma",
   "beta": "Beta",
   "beyond-ramadan": "Jiendeleze Baada ya Ramadhani!",
   "bookmark": "Alamisha",
@@ -103,18 +105,24 @@
   "command-bar": {
     "navigations": "Uchunguzi",
     "no-nav-results": "Hakuna matokeo",
-    "placeholder": "Pekua Quran...",
+    "placeholder": "Pekua Qur'ani...",
     "recent-navigations": "Uchunguzi wa hivi majuzi",
     "search-by-voice": "Tafuta kutumia sauti",
     "try-navigating": "Nenda hadi"
   },
   "community": {
     "cta": "Wasiliana",
-    "header": "Je, ungependa kuchangia ujuzi wako wa kiufundi ili kuendeleza dhamira ya Qur'ani?",
+    "header": "Je, ungependa kujitolea ujuzi wako ili kuendeleza dhamira ya Qur'ani?",
     "sub-header": "Shiriki nia yako kwa kujaza fomu hii, na tutawasiliana wakati fursa inayofaa inapatikana, insha'Allah.",
     "title": "Jumuiya"
   },
   "complete-sign-up": "Kamilisha usajili wako",
+  "complete-signup": {
+    "description": "Tunahitaji maelezo haya yaliyokosekana ili kukamilisha usajili wako.",
+    "title": "Kamilisha usajili wako",
+    "verification-code": "Nambari ya Uthibitishaji",
+    "verification-code-sent-to": "Nambari ya kuthibitisha imetumwa kwa {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Boresha maendeleo yako kupitia arifa <boldSpan> zilizobinafsishwa </boldSpan> kuhusu maendeleo ya lengo lako, kudumisha streaks, na kuboresha matumizi yako ya vipengele vyetu vya sasa. <br> </br> <br> </br> Je, tunaweza kukufahamisha kupitia barua pepe na vituo vingine? Wewe ndiye unayedhibiti - jisikie huru kurekebisha mapendeleo haya wakati wowote katika mipangilio ya akaunti yako. <br> </br> <br> </br> Chagua tu 'Ruhusu' kupata <boldSpan> vikumbusho vinavyotia moyo </boldSpan> au 'Si Sasa' ili kukataa.",
@@ -164,6 +172,7 @@
     "account-banned": "Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
     "badRequest": "*Ombi batili",
     "banned": "*Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
+    "complete-signup-failed": "Imeshindikana kukamilisha usajili. Tafadhali jaribu tena.",
     "confirm": "*Thibitisha nenosiri hailingani na nenosiri",
     "email": "*Muundo wa Barua pepe si Sahihi!",
     "exactLength": "*Tarakimu lazima iwe urefu kamili",
@@ -186,7 +195,7 @@
     "verification-code-invalid": "Nambari hii ya uthibitishaji si sahihi",
     "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
     "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
-    "verification-resend-failed": "Imeshindwa kutuma tena nambari ya kuthibitisha"
+    "verification-resend-failed": "Imeshindikana kutuma tena nambari ya kuthibitisha"
   },
   "exciting-updates": "Sasisho za Kusisimua",
   "feedback": "Maoni",
@@ -210,10 +219,10 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Qur'ani katika lugha nyingi. Inatoa tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kueneza uhusiano wa kina na Qur'ani. Ikiungwa mkono na <link>Quran.Foundation</link>, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah",
+    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali isiyolipishwa na yenye thamani kwa wote, Alhamdulillah.",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
-    "title": "Soma, Sikiliza, Tafuta, na Tafakari juu ya Quran"
+    "title": "Soma, Sikiliza, Tafuta, na Tafakari Qur'ani"
   },
   "form": {
     "body": "Mwili",
@@ -254,6 +263,7 @@
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
   "lessons": "Mafunzo",
+  "listen": "Sikiliza",
   "loading": "Inapakia",
   "login": "Ingia",
   "logout": "Ondoka",
@@ -273,9 +283,11 @@
   "next-ayah": "Aya Inayofuata",
   "no": "Hapana",
   "no-notifications": "Hakuna arifa Bado",
+  "no-verses-available": "Hakuna Aya zinazopatikana",
   "none": "Hakuna",
   "not-now": "Sio Sasa",
   "notes": {
+    "label": "Maelezo",
     "title": "Maelezo na Tafakari Zangu"
   },
   "notification-settings": "Mipangilio ya Arifa",
@@ -296,10 +308,10 @@
   "popup": {
     "companion-title": "Mpendwa Mwenzi wa Qur'ani,",
     "footnote": "Michango ya kila mwezi huturuhusu kupunguza uchangishaji",
-    "subtitle": "\"Hakuna siku ambazo vitendo vyema vinampendeza Mwenyezi Mungu kuliko siku hizi\" [Al-Bukhaariy: 969]",
+    "subtitle": "\"Hakuna siku ambazo vitendo vyema ndani yake vinampendeza Mwenyezi Mungu kuliko siku hizi\" [Al-Bukhaariy: 969]",
     "text-1": "Tumejitolea kutumikia ulimwengu kupitia elimu ya Qur'ani pamoja na teknolojia, bila malipo.",
-    "text-2": "Fursa nzuri ya kutoa sadaka endelevu (Sadaqa Jariyah). Wekeza katika Akhera yako kama mfadhili wa kila mwezi (au mara moja).",
-    "title": "Toa Wakati wa Siku Bora!"
+    "text-2": "Fursa nzuri ya kutoa sadaka endelevu (Sadaqa Jariyah). Wekeza katika Akhera yako kama mfadhili wa kila mwezi (au usipoweza, changia mara moja).",
+    "title": "Changia Wakati wa Siku Bora!"
   },
   "powered-by": "Inaendeshwa na",
   "prepare-hearts": {
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Onyesha tarjuma au unukuzi unapoelea juu ya neno au kubofya neno"
   },
   "share": "Shiriki",
+  "share-quran-description-line-1": "Amesema Mtume ﷺ:",
+  "share-quran-description-line-2": "'Fikisha kutoka kwangu, hata kama ni Aya moja.'",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Shiriki Qura'ni!",
   "shared": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
   "show-more": "Onyesha zaidi",
   "sidebar": {

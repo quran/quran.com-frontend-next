@@ -4,15 +4,17 @@ import styles from './CommunitySection.module.scss';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
-import DiscordIcon from '@/icons/discord-icon.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const CommunitySection = () => {
   const { t } = useTranslation('common');
+
+  const onJoinCommunityClicked = () => {
+    logButtonClick('navigation_drawer_join_community');
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.platformLogoBackground}>
-        <DiscordIcon />
-      </div>
       <div className={styles.flow}>
         <div className={styles.title}>{t('community.header')}</div>
         <div>{t('community.sub-header')}</div>
@@ -21,7 +23,7 @@ const CommunitySection = () => {
           isNewTab
           className={styles.joinCommunityLink}
         >
-          <Button href="" type={ButtonType.Success}>
+          <Button href="" type={ButtonType.Success} onClick={onJoinCommunityClicked}>
             {t('community.cta')}
           </Button>
         </Link>

@@ -212,7 +212,7 @@ test.describe('Localization scenarios - Switch Language', () => {
 
     await helper.homepage.openSettingsDrawer();
     await expect(page.locator('#theme-section')).toBeVisible();
-    await page.locator('[data-testid="switch-item-sepia"]').click();
+    await page.locator('[data-testid="sepia-button"]').click();
     await page.waitForTimeout(1000);
     await page.keyboard.press('Escape');
 

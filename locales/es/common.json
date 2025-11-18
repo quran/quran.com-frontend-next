@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Respuestas",
   "aria": {
     "change-settings": "Cambiar configuración",
     "drawer-close": "Cerrar ventana desplegable.",
@@ -92,6 +93,7 @@
   },
   "ayah": "Aleya",
   "ayahs": "Aleyas",
+  "back": "Atrás",
   "beta": "Beta",
   "beyond-ramadan": "¡Crece más allá del Ramadán!",
   "bookmark": "Marcar",
@@ -110,11 +112,17 @@
   },
   "community": {
     "cta": "Ponte en contacto con nosotros",
-    "header": "¿Quieres aportar tus habilidades técnicas para promover la misión del Corán?",
+    "header": "¿Quieres ofrecer voluntariamente tus habilidades técnicas para promover la misión del Corán?",
     "sub-header": "Comparta su interés completando este formulario y nos comunicaremos con usted cuando haya una oportunidad adecuada disponible, insha'Allah.",
     "title": "Comunidad"
   },
   "complete-sign-up": "Completa tu registro",
+  "complete-signup": {
+    "description": "Requerimos la siguiente información faltante para completar su registro.",
+    "title": "Completa tu registro",
+    "verification-code": "Código de verificación",
+    "verification-code-sent-to": "Código de verificación enviado a {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Potencia tu progreso a través de notificaciones <boldSpan> personalizadas </boldSpan> sobre el progreso de tus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br> </br> <br> </br> ¿Podemos mantenerte informado a través del correo electrónico y otros canales? Tú tienes el control: puedes ajustar estas preferencias en cualquier momento en la configuración de tu cuenta. <br> </br> <br> </br> Simplemente selecciona \"Permitir\" para recibir <boldSpan> recordatorios inspiradores </boldSpan> o \"Ahora no\" para rechazarlos.",
@@ -164,6 +172,7 @@
     "account-banned": "Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
     "badRequest": "*Solicitud no válida",
     "banned": "*Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
+    "complete-signup-failed": "No se pudo completar el registro. Inténtalo de nuevo.",
     "confirm": "*Confirmar contraseña no coincide con la contraseña",
     "email": "*¡Formato de correo electrónico no válido!",
     "exactLength": "*El valor debe ser la longitud exacta",
@@ -210,7 +219,7 @@
     "translation-font-size": "Tamaño de fuente de la traducción"
   },
   "footer": {
-    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, lo que hace que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectarse profundamente con el Corán. Con el apoyo de <link>Quran.Foundation</link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdullilah",
+    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, haciendo que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectar profundamente con el Corán. Con el apoyo de <link> Quran.Foundation </link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdulillah.",
     "hiring": "¡Estamos contratando! Únete al equipo de QuranFoundation y contribuye a nuestra misión. <link> Postúlate ahora </link>",
     "rights": "Reservados todos los derechos",
     "title": "Lea, escuche, busque y reflexione sobre el Corán"
@@ -254,6 +263,7 @@
   "learning-plans": "Planes de aprendizaje",
   "less": "Menos",
   "lessons": "Lecciones",
+  "listen": "Escuchar",
   "loading": "Cargando",
   "login": "Acceso",
   "logout": "Cerrar sesión",
@@ -273,9 +283,11 @@
   "next-ayah": "Aleya siguiente",
   "no": "No",
   "no-notifications": "No hay notificaciones todavía.",
+  "no-verses-available": "No hay versos disponibles",
   "none": "Ninguna",
   "not-now": "Ahora no.",
   "notes": {
+    "label": "Notas",
     "title": "Mis notas y reflexiones"
   },
   "notification-settings": "Configuración de notificaciones.",
@@ -311,7 +323,7 @@
   "privacy": "Privacidad",
   "product-updates": "Actualizaciones de productos",
   "profile": "Perfil",
-  "projects-desc": "Proyectos sin fines de lucro propiedad de, administrados o patrocinados por <link>Quran.Foundation</link>",
+  "projects-desc": "Proyectos sin fines de lucro adquiridos, administrados o patrocinados por <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Mostrar la traducción o transliteración al pasar el cursor o hacer clic en la palabra"
   },
   "share": "Compartir",
+  "share-quran-description-line-1": "El Profeta ﷺ dijo:",
+  "share-quran-description-line-2": "'Transmítelo de mí, aunque sea un solo verso.'",
+  "share-quran-description-line-3": "(Bujari 3461)",
+  "share-quran-title": "¡Comparte el Corán!",
   "shared": "¡El enlace ha sido copiado al portapapeles!",
   "show-more": "Mostrar más",
   "sidebar": {
@@ -442,12 +458,12 @@
   "view": "Ver",
   "voice": {
     "ask-permission": "Habilita el permiso del micrófono para comenzar a utilizar la búsqueda por voz.",
-    "error": "Se ha producido un error, inténtelo de nuevo más tarde.",
-    "language-unavailable": "Su navegador no admite el árabe.",
+    "error": "Se ha producido un error, inténtalo de nuevo más tarde.",
+    "language-unavailable": "Tu navegador no admite el árabe.",
     "network": "Error de red. Comprueba tu conexión a internet y vuelve a intentarlo.",
-    "no-microphone": "No se detectó el micrófono. Conecte un micrófono y vuelva a intentarlo.",
+    "no-microphone": "No se detectó el micrófono. Conecta un micrófono y vuelve a intentarlo.",
     "no-permission": "Parece que no tienes habilitados los permisos del micrófono. Habilita los permisos del micrófono e inténtalo de nuevo.",
-    "no-speech": "No se detectó ninguna voz. Intente hablar de nuevo.",
+    "no-speech": "No se detectó ninguna voz. Intenta hablar de nuevo.",
     "not-supported": "Parece que tu navegador no admite el micrófono. Prueba con otro navegador.",
     "suggest": "Por favor comienza a recitar y tu verso aparecerá.",
     "suggest-subtitle": "Recita cualquier verso en árabe y el verso aparecerá.",

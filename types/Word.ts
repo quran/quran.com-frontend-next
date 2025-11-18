@@ -1,6 +1,6 @@
 import Translation from './Translation';
 import Transliteration from './Transliteration';
-import type Verse from './Verse';
+import type VerseTiming from './VerseTiming';
 
 export enum CharType {
   Word = 'word',
@@ -8,6 +8,14 @@ export enum CharType {
   Pause = 'pause',
   Sajdah = 'sajdah',
   RubElHizb = 'rub-el-hizb',
+}
+export interface WordVerse {
+  verseNumber: number;
+  verseKey: string;
+  chapterId: number | string;
+  timestamps?: VerseTiming;
+  translationsLabel: string;
+  translationsCount: number;
 }
 
 interface Word {
@@ -29,7 +37,7 @@ interface Word {
   highlight?: string | boolean;
   text?: string;
   audioUrl: $TsFixMe;
-  verse?: Verse;
+  verse?: WordVerse;
   [key: string]: $TsFixMe;
 }
 

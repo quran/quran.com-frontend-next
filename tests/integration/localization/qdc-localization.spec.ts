@@ -1269,7 +1269,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
       // Navigate to signup page
       await page.goto('/login', NAVIGATION_OPTIONS);
       await page.locator('[data-testid="email-login-button"]').click();
-      await page.locator('[data-testid="switch-item-signup"]').first().click();
+      await page.locator('[data-testid="signup-button"]').first().click();
       await page.locator('[data-testid="signup-first-name-input"]').fill('Test');
       await page.locator('[data-testid="signup-last-name-input"]').fill('User');
       await page.locator('[data-testid="signup-email-input"]').fill('test@example.com');
@@ -1345,7 +1345,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
     await test.step('Proceed with signup', async () => {
       await page.goto('/login', NAVIGATION_OPTIONS);
       await page.locator('[data-testid="email-login-button"]').click();
-      await page.locator('[data-testid="switch-item-signup"]').first().click();
+      await page.locator('[data-testid="signup-button"]').first().click();
       await page.locator('[data-testid="signup-first-name-input"]').fill('Custom');
       await page.locator('[data-testid="signup-last-name-input"]').fill('User');
       await page.locator('[data-testid="signup-email-input"]').fill('customuser@example.com');

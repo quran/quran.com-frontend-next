@@ -8,6 +8,7 @@ import VerificationCodeBase from './VerificationCodeBase';
 
 import AuthHeader from '@/components/Login/AuthHeader';
 import styles from '@/components/Login/login.module.scss';
+import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
 import { persistCurrentSettings } from '@/redux/slices/defaultSettings';
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import { signUp } from '@/utils/auth/authRequests';
@@ -36,6 +37,7 @@ const VerificationCodeForm: FC<Props> = ({
   const dispatch = useDispatch<any>();
   const audioService = useContext(AudioPlayerMachineContext);
 
+  const { redirectWithToken } = useAuthRedirect();
   const handleSubmitCode = async (code: string): Promise<void> => {
     logFormSubmission('verification_code_submit');
 
@@ -75,8 +77,7 @@ const VerificationCodeForm: FC<Props> = ({
       onSuccess();
     } else {
       // Default behavior: redirect back or to home
-      const redirectPath = (router.query.redirect as string) || '/';
-      router.push(redirectPath);
+      redirectWithToken((router.query.redirect as string) || '/', response?.token);
     }
   };
 

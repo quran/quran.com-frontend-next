@@ -3,10 +3,10 @@
 import { localeToQuranReflectLanguageID } from './locale';
 
 import { fetcher } from '@/api';
+import AyahReflectionsRequestParams from '@/types/QuranReflect/AyahReflectionsRequestParams';
+import AyahReflectionsResponse from '@/types/QuranReflect/AyahReflectionsResponse';
+import Tab from '@/types/QuranReflect/Tab';
 import stringify from '@/utils/qs-stringify';
-import AyahReflectionsRequestParams from 'types/QuranReflect/AyahReflectionsRequestParams';
-import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
-import Tab from 'types/QuranReflect/Tab';
 
 export const REFLECTION_POST_TYPE_ID = '1';
 export const LESSON_POST_TYPE_ID = '2';
@@ -59,13 +59,22 @@ export const makeQuranReflectApiUrl = (path: string, parameters = {}): string =>
   return `${API_HOST}/${normalizedPath}${params ? `?${params}` : ''}`;
 };
 
-/* eslint-disable import/prefer-default-export */
+export const makeGetUserReflectionsUrl = ({
+  page = 1,
+  limit = 10,
+}: {
+  page: number;
+  limit?: number;
+}) => makeQuranReflectApiUrl(`posts/my-posts`, { page, limit });
+
 export const makeAyahReflectionsUrl = ({
   surahId,
   ayahNumber,
   locale,
   page = 1,
+
   tab = Tab.Popular,
+
   postTypeIds = [],
   reflectionLanguages = [],
 }: AyahReflectionsRequestParams) => {
@@ -91,15 +100,34 @@ export const makeAyahReflectionsUrl = ({
 };
 
 const makeReflectionViewsUrl = (postId: string) => {
-  return makeQuranReflectApiUrl(`v1/posts/${postId}/views`);
+  return makeQuranReflectApiUrl(`posts/viewed/${postId}`);
 };
 
-export const postReflectionViews = async (postId: string): Promise<AyahReflectionsResponse> =>
-  fetcher(makeReflectionViewsUrl(postId), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  });
+export const logPostView = async (postId: string): Promise<{ success: boolean }> =>
+  fetcher(makeReflectionViewsUrl(postId));
 
 export const getAyahReflections = async (
   ayahReflectionsUrl: string,
 ): Promise<AyahReflectionsResponse> => fetcher(ayahReflectionsUrl);
+
+const makeFollowUserUrl = (username: string) => makeQuranReflectApiUrl(`users/${username}/follow`);
+
+const makeIsUserFollowedUrl = (username: string) =>
+  makeQuranReflectApiUrl(`users/${username}/followed`);
+
+const putRequest = async <T>(url: string, body: Record<string, unknown>): Promise<T> => {
+  return fetcher(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+};
+
+export const followUser = async (username: string) =>
+  putRequest<{ success: boolean }>(makeFollowUserUrl(username), {});
+
+export const isUserFollowed = async (username: string): Promise<{ followed: boolean }> => {
+  return fetcher(makeIsUserFollowedUrl(username));
+};

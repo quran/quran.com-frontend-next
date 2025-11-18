@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Answers",
   "aria": {
     "change-settings": "Change Settings",
     "drawer-close": "Close Drawer",
@@ -92,6 +93,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "Ayahs",
+  "back": "Back",
   "beta": "Beta",
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Bookmark",
@@ -110,13 +112,14 @@
   },
   "community": {
     "cta": "Get in touch",
-    "header": "Want to contribute your technical skills to further the mission of the Quran?",
+    "header": "Want to volunteer your technical skills to further the mission of the Quran?",
     "sub-header": "Share your interest by filling out this form, and we’ll reach out when a suitable opportunity is available, insha’Allah.",
     "title": "Community"
   },
+  "complete-sign-up": "Complete your registration",
   "complete-signup": {
-    "title": "Complete your registration",
     "description": "We require the following missing information to complete your registration.",
+    "title": "Complete your registration",
     "verification-code": "Verification Code",
     "verification-code-sent-to": "Verification code sent to {{email}}"
   },
@@ -169,6 +172,7 @@
     "account-banned": "Sorry, Your account is banned. Contact Quran.Foundation",
     "badRequest": "*Invalid request",
     "banned": "*Sorry, Your account is banned. Contact Quran.Foundation",
+    "complete-signup-failed": "Failed to complete signup. Please try again.",
     "confirm": "*Confirm password doesn't match the password",
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
@@ -191,8 +195,7 @@
     "verification-code-invalid": "This verification code is invalid",
     "verification-code-length": "Verification code must be {{length}} digits",
     "verification-failed": "Verification failed. Please try again.",
-    "verification-resend-failed": "Failed to resend verification code",
-    "complete-signup-failed": "Failed to complete signup. Please try again."
+    "verification-resend-failed": "Failed to resend verification code"
   },
   "exciting-updates": "Exciting Updates",
   "feedback": "Feedback",
@@ -216,7 +219,7 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
-    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by <link>Quran.Foundation</link>, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah”",
+    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by <link>Quran.Foundation</link>, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdulillah.",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
     "title": "Read, Listen, Search, and Reflect on the Quran"
@@ -260,6 +263,7 @@
   "learning-plans": "Learning Plans",
   "less": "Less",
   "lessons": "Lessons",
+  "listen": "Listen",
   "loading": "Loading",
   "login": "Login",
   "logout": "Logout",
@@ -279,9 +283,11 @@
   "next-ayah": "Next Ayah",
   "no": "No",
   "no-notifications": "No notifications yet",
+  "no-verses-available": "No verses available",
   "none": "None",
   "not-now": "Not Now",
   "notes": {
+    "label": "Notes",
     "title": "My Notes & Reflections"
   },
   "notification-settings": "Notification Settings",
@@ -334,7 +340,6 @@
   "reflect": "Reflect",
   "reflections": "Reflections",
   "reflections-and-lessons": "Reflections & Lessons",
-  "answers": "Answers",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",
@@ -383,6 +388,10 @@
     "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
   },
   "share": "Share",
+  "share-quran-description-line-1": "The Prophet ﷺ said:",
+  "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Share the Quran!",
   "shared": "Link has been copied to the clipboard!",
   "show-more": "Show more",
   "sidebar": {
@@ -472,11 +481,5 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes",
-  "listen": "Listen",
-  "back": "Back",
-  "share-quran-title": "Share the Quran!",
-  "share-quran-description-line-1": "The Prophet ﷺ said:",
-  "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
-  "share-quran-description-line-3": "(Bukhari 3461)"
+  "yes": "Yes"
 }

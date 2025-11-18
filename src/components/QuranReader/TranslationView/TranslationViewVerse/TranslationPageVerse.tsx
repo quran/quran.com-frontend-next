@@ -4,7 +4,7 @@ import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
-import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
+import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Verse from '@/types/Verse';
@@ -69,11 +69,12 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     >
       {verse.verseNumber === 1 && (
         <ChapterHeader
-          translationName={getTranslationNameString(verse.translations)}
+          translationsLabel={getTranslationsLabelString(verse.translations)}
           translationsCount={verse.translations?.length}
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}
+          isTranslationView
         />
       )}
 

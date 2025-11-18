@@ -1,25 +1,37 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import WordByWordHeading from './WordByWordHeading';
+import WordByWordSkeleton from './WordByWordSkeleton';
 import styles from './WordByWordVerseAction.module.scss';
 
+import { fetcher } from '@/api';
+import DataFetcher from '@/components/DataFetcher';
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import SearchIcon from '@/icons/search-book.svg';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { VersesResponse } from '@/types/ApiResponses';
+import { WordVerse } from '@/types/Word';
+import { getMushafId, getDefaultWordFields } from '@/utils/api';
+import { makeVersesUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import Verse from 'types/Verse';
+import { getVerseWords } from '@/utils/verse';
 
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 type Props = {
-  verse: Verse;
+  verse: WordVerse;
   onActionTriggered?: () => void;
   isTranslationView?: boolean;
 };
@@ -32,8 +44,12 @@ const WordByWordVerseAction: React.FC<Props> = ({
   isTranslationView,
 }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { quranFont, mushafLines } = quranReaderStyles;
+  const { mushaf } = getMushafId(quranFont, mushafLines);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
 
   const onModalClosed = () => {
     logEvent(
@@ -57,9 +73,32 @@ const WordByWordVerseAction: React.FC<Props> = ({
     setIsContentModalOpen(true);
   };
 
+  // Extract chapter ID and verse number from the verse prop
+  const chapterId =
+    typeof verse.chapterId === 'string' ? verse.chapterId : verse.chapterId.toString();
+  const { verseNumber } = verse;
+
+  // Loading component for DataFetcher
+  const loading = useCallback(() => <WordByWordSkeleton />, []);
+
+  // API parameters for fetching verse data
+  const apiParams = {
+    words: true,
+    perPage: 1,
+    translations: selectedTranslations.join(','),
+    page: verseNumber,
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    mushaf,
+  };
+
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer icon={<SearchIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
+        onClick={onIconClicked}
+      >
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal
@@ -70,11 +109,30 @@ const WordByWordVerseAction: React.FC<Props> = ({
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
       >
-        <WordByWordHeading isTranslation />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
-        <Separator className={styles.separator} />
-        <WordByWordHeading isTranslation={false} />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
+        {isContentModalOpen && (
+          <DataFetcher
+            queryKey={`wbw-verse-${chapterId}:${verseNumber}`}
+            loading={loading}
+            fetcher={() => fetcher(makeVersesUrl(chapterId, lang, apiParams))}
+            render={(data: VersesResponse) => {
+              if (!data || !data.verses || data.verses.length === 0) {
+                return <p className={styles.fallbackMessage}>{t('no-verses-available')}</p>;
+              }
+
+              const words = data.verses.map((verseItem) => getVerseWords(verseItem)).flat();
+
+              return (
+                <>
+                  <WordByWordHeading isTranslation />
+                  <PlainVerseText words={words} shouldShowWordByWordTranslation />
+                  <Separator className={styles.separator} />
+                  <WordByWordHeading isTranslation={false} />
+                  <PlainVerseText words={words} shouldShowWordByWordTransliteration />
+                </>
+              );
+            }}
+          />
+        )}
       </ContentModal>
     </>
   );

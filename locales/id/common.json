@@ -6,7 +6,7 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Lanjut",
-        "description": "Baik Anda menggunakan Quran.com di ponsel ataupun laptop, Penanda Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
+        "description": "Baik Anda menggunakan Quran.com di ponsel ataupun laptop, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
         "title": "Data Anda akan disinkronkan <br></br> di seluruh perangkat"
       },
       "feedback": {
@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "Jawaban",
   "aria": {
     "change-settings": "Ubah pengaturan",
     "drawer-close": "Tutup Laci",
@@ -92,8 +93,9 @@
   },
   "ayah": "Ayat",
   "ayahs": "Ayat",
+  "back": "Kembali",
   "beta": "Beta",
-  "beyond-ramadan": "Tumbuh Melampaui Ramadan!",
+  "beyond-ramadan": "Terus bertumbuh Selepas Ramadan!",
   "bookmark": "Penanda",
   "bookmarked": "Ditandai",
   "both": "Keduanya",
@@ -103,7 +105,7 @@
   "command-bar": {
     "navigations": "Navigasi",
     "no-nav-results": "Tidak ada hasil navigasi",
-    "placeholder": "Carilah di Al-Quran...",
+    "placeholder": "Cari di Al Quran...",
     "recent-navigations": "Navigasi terbaru",
     "search-by-voice": "Cari dengan suara",
     "try-navigating": "Coba navigasikan ke"
@@ -111,10 +113,16 @@
   "community": {
     "cta": "Hubungi kami",
     "header": "Ingin menyumbangkan keterampilan teknis Anda untuk memajukan misi Al-Quran?",
-    "sub-header": "Bagikan minat Anda dengan mengisi formulir ini, dan kami akan menghubungi Anda saat ada peluang yang cocok tersedia, insyaAllah.",
+    "sub-header": "Tunjukkan minat Anda dengan mengisi formulir ini, dan kami akan menghubungi Anda saat ada peluang yang cocok tersedia, insyaAllah.",
     "title": "Komunitas"
   },
   "complete-sign-up": "Lengkapi pendaftaran Anda",
+  "complete-signup": {
+    "description": "Kami memerlukan informasi yang hilang berikut ini untuk melengkapi pendaftaran Anda.",
+    "title": "Selesaikan pendaftaran Anda",
+    "verification-code": "Kode Verifikasi",
+    "verification-code-sent-to": "Kode verifikasi dikirim ke {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
@@ -157,19 +165,20 @@
     "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi.",
     "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud.",
     "ranges-no-value": "Rentang awal dan akhir harus memiliki nilai",
-    "ranges-too-many-verses": "*Jumlah ayat maksimum {{maxNumberOfVerses}} ayat",
-    "ranges-wrong-order": "Bait pembuka harus sebelum bait penutup."
+    "ranges-too-many-verses": "*Jumlah ayat maksimum {{maxNumberOfVerses}}",
+    "ranges-wrong-order": "Ayat pembuka harus sebelum ayat penutup."
   },
   "errors": {
-    "account-banned": "Maaf, akun Anda diblokir. Hubungi Yayasan Quran",
+    "account-banned": "Maaf, akun Anda diblokir. Hubungi Quran Foundation",
     "badRequest": "*Permintaan tidak valid",
-    "banned": "*Maaf, akun Anda diblokir. Hubungi Yayasan Quran",
-    "confirm": "*Konfirmasi kata sandi tidak cocok dengan kata sandi",
+    "banned": "*Maaf, akun Anda diblokir. Hubungi Quran Foundation",
+    "complete-signup-failed": "Gagal menyelesaikan pendaftaran. Silakan coba lagi.",
+    "confirm": "*Kata sandi tidak cocok",
     "email": "*Format Email Salah!",
-    "exactLength": "*Nilai harus memiliki panjang yang tepat",
+    "exactLength": "*Panjang Isian harus tepat",
     "expiredToken": "*Token ini sudah kadaluarsa",
     "forgot-password-failed": "Gagal mengirim email pengaturan ulang kata sandi. Silakan coba lagi.",
-    "immutable": "*Nilai ini tidak dapat diubah",
+    "immutable": "*Isian tidak dapat diubah",
     "invalid": "* {{fieldName}} ini tidak valid",
     "invalidEmailOrPassword": "*Email atau kata sandi tidak valid",
     "max": "* {{fieldName}} harus kurang dari atau sama dengan {{max}} digit",
@@ -183,12 +192,12 @@
     "taken": "* {{fieldName}} sudah ada!",
     "usedToken": "*Token ini sudah digunakan",
     "username": "* {{fieldName}} hanya menerima garis bawah dan huruf",
-    "verification-code-invalid": "Kode verifikasi ini tidak valid",
+    "verification-code-invalid": "Kode verifikasi tidak valid",
     "verification-code-length": "Kode verifikasi harus {{length}} digit",
     "verification-failed": "Verifikasi gagal. Silakan coba lagi.",
     "verification-resend-failed": "Gagal mengirim ulang kode verifikasi"
   },
-  "exciting-updates": "Pembaruan Menarik",
+  "exciting-updates": "Pengkinian menarik",
   "feedback": "Beri Masukan",
   "fonts": {
     "15_lines": "15 Baris",
@@ -198,22 +207,22 @@
     "font-size": "Ukuran huruf",
     "lines": "Garis",
     "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas lebih tinggi tetapi perlu waktu lebih lama untuk memuat.",
-    "qcf-v4-desc": "Font Tajweed dibuat menggunakan Easy Quran - Dar Al Marifa Tajweed Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts setelah mendapat izin dari keduanya.",
+    "qcf-v4-desc": "Jenis huruf Tajwid dibuat menggunakan jenis huruf Easy Quran - Dar Al Marifa Tajweed Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) Uthmanic Hafs V4 - setelah mendapat izin dari keduanya.",
     "qpc_uthmani_hafs": "QPC Utsmani Hafs",
     "quran-font": "Huruf Qur'an",
-    "quran-font-size": "Ukuran huruf Al-Quran",
+    "quran-font-size": "Ukuran huruf Al Quran",
     "tajweed": "Tajwid",
     "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini </0>",
     "tajweed_v4": "Kompleks Raja Fahad V4",
     "text_indopak": "IndoPak",
     "text_uthmani": "Usmani",
-    "translation-font-size": "Ukuran font terjemahan"
+    "translation-font-size": "Ukuran huruf terjemahan"
   },
   "footer": {
-    "description": "Quran.com adalah platform tepercaya yang digunakan oleh jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merenungkan Al-Quran dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, bacaan, terjemahan kata demi kata, dan berbagai alat untuk mempelajari Al-Quran lebih dalam, sehingga Al-Quran dapat diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com didedikasikan untuk membantu orang-orang terhubung secara mendalam dengan Al-Quran. Didukung oleh <link>Quran.Foundation</link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai sumber informasi gratis dan berharga bagi semua orang, Alhamdulillah",
+    "description": "Quran.com adalah platform tepercaya yang digunakan jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merenungkan Al-Qur'an dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, tilawah, terjemahan kata demi kata, dan berbagai alat untuk pembelajaran yang lebih mendalam, sehingga Al-Qur'an dapat diakses oleh semua orang. <br/> <br/> Sebagai sebuah Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang-orang terhubung secara mendalam dengan Al-Qur'an. Didukung oleh <link> Quran.Foundation </link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai sumber daya gratis dan berharga bagi semua orang, Alhamdulillah.",
     "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
-    "title": "Baca, Dengarkan, Cari, dan Renungkan Al-Quran"
+    "title": "Baca, Dengarkan, Cari, dan Renungkan Al Quran"
   },
   "form": {
     "body": "Tubuh",
@@ -224,21 +233,21 @@
     "lastName": "Nama keluarga",
     "password": "Kata sandi",
     "title": "Judul",
-    "username": "Nama belakang",
+    "username": "Nama pengguna",
     "verification-code": "Kode Verifikasi"
   },
   "from": "Dari",
-  "fundraising-share-title": "Bagikan Penggalangan Dana Quran.com",
+  "fundraising-share-title": "Sebarkan Penggalangan Dana Quran.com",
   "fundraising-sticky-banner": {
     "cta": "Menyumbang",
     "title": "Menyumbang di hari-hari terbaik!"
   },
   "fundraising": {
-    "description": "Donasi bulanan membantu kami mengembangkan Quran.com dan mempertahankan operasi sehingga kami tidak lagi berfokus pada penggalangan dana tetapi lebih pada penciptaan dampak.",
+    "description": "Donasi bulanan membantu kami mengembangkan dan mempertahankan operasional Quran.com sehingga kami dapat lebih fokus menciptakan dampak daripada menggalang dana.",
     "title": "Menjadi Donatur Bulanan"
   },
   "get-started": "Memulai",
-  "hear-it-pronounced": "Klik kata-kata Al-Quran, dengarkan pengucapannya",
+  "hear-it-pronounced": "Klik kata-kata Qurani, dengarkan pengucapannya",
   "help": "Bantuan",
   "hizb": "Hizb",
   "home": "Halaman Utama",
@@ -252,8 +261,9 @@
   "languages": "Bahasa",
   "learn-more": "Pelajari lebih lanjut",
   "learning-plans": "Rencana Pembelajaran",
-  "less": "Kurang",
+  "less": "Tampilkan Lebih Sedikit",
   "lessons": "Pelajaran",
+  "listen": "Mendengarkan",
   "loading": "Memuat",
   "login": "Login",
   "logout": "Logout",
@@ -273,9 +283,11 @@
   "next-ayah": "Ayat Berikutnya",
   "no": "Tidak",
   "no-notifications": "Belum ada notifikasi",
+  "no-verses-available": "Tidak ada ayat yang tersedia",
   "none": "Tidak ada",
   "not-now": "Nanti Saja",
   "notes": {
+    "label": "Catatan",
     "title": "Catatan & Refleksi Saya"
   },
   "notification-settings": "Pengaturan Notifikasi",
@@ -294,12 +306,12 @@
   "pbuh": "Berkah Allah atasnya",
   "popular-links": "Link populer",
   "popup": {
-    "companion-title": "Wahai Sahabat Al-Quran yang terkasih,",
+    "companion-title": "Sahabat Al Quran tercinta,",
     "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
-    "subtitle": "“Tidak ada hari-hari di mana amal saleh lebih diridhai Allah daripada hari-hari ini.” [Al-Bukhari 969]",
+    "subtitle": "“Tidak ada hari yang di dalamnya amal saleh lebih diridhai Allah daripada hari-hari ini.” [Al-Bukhari 969]",
     "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Qur'ani, selalu gratis.",
-    "text-2": "Kesempatan yang sempurna untuk beramal terus-menerus (sadaqa jariyah). Berinvestasilah untuk akhirat Anda sebagai donatur bulanan (atau satu kali).",
-    "title": "Berikan Selama Hari Terbaik!"
+    "text-2": "Kesempatan emas untuk beramal terus-menerus (sadaqa jariyah). Berinvestasilah untuk akhirat Anda sebagai donatur bulanan (atau satu kali).",
+    "title": "Menyumbang di Hari-hari Terbaik!"
   },
   "powered-by": "Dipersembahkan oleh",
   "prepare-hearts": {
@@ -323,12 +335,12 @@
   "ready-for-ramadan": "Siap untuk Ramadan?",
   "recitation": "Pembacaan",
   "reciter": "Qari",
-  "reciter-summary": "(Dengan izin dari Pusat Tafsir)",
+  "reciter-summary": "(Dengan izin dari Tafsir Center)",
   "reciters": "Qari",
-  "reflect": "Mencerminkan",
+  "reflect": "Refleksi",
   "reflections": "Refleksi",
   "reflections-and-lessons": "Refleksi dan Pelajaran",
-  "remove": "Keluarkan",
+  "remove": "Hapus",
   "rename": "Ganti nama",
   "retry": "Coba Lagi",
   "revelation_order": "Urutan Wahyu",
@@ -342,7 +354,7 @@
     "filters": "Filter",
     "hint": "Coba cari",
     "jump-to": "Langsung Ke",
-    "more-results": "Hasil lebih lanjut",
+    "more-results": "Hasil lainnya",
     "no-results": "Tidak ada hasil yang ditemukan",
     "no-results-suggestion": "Kami tidak dapat menemukan hasil pencarian yang cocok untuk \" {{searchQuery}} \". coba menggunakan kata kunci yang berbeda.",
     "popular": "Pencarian Populer",
@@ -353,7 +365,7 @@
     "title": "Mencari"
   },
   "seconds": "Detik",
-  "see-new": "Lihat apa yang baru",
+  "see-new": "Lihat Apa yang Baru",
   "settings": {
     "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
     "no-translation-selected": "Tidak ada terjemahan yang dipilih",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan kursor atau mengklik perkataan"
   },
   "share": "Membagikan",
+  "share-quran-description-line-1": "Nabi ﷺ bersabda:",
+  "share-quran-description-line-2": "'Sampaikanlah dariku, meskipun hanya satu ayat.'",
+  "share-quran-description-line-3": "(HR. Al-Bukhari 3461)",
+  "share-quran-title": "Bagikan Al-Quran!",
   "shared": "Tautan telah disalin ke papan klip!",
   "show-more": "Menampilkan lebih banyak",
   "sidebar": {
@@ -407,7 +423,7 @@
     "tafsirs-desc": "Baca berbagai Tafsir Ayat {{ayahNumber}} Surah {{SurahName}} oleh ulama Tafsir terpercaya",
     "title": "tafsir"
   },
-  "terms-and-conditions": "syarat dan Ketentuan",
+  "terms-and-conditions": "Syarat dan Ketentuan",
   "theme": "Tema",
   "themes": {
     "auto": "Otomatis",
@@ -442,17 +458,17 @@
   "view": "Melihat",
   "voice": {
     "ask-permission": "Mohon izin mikrofon untuk mulai menggunakan Pencarian Suara",
-    "error": "Telah terjadi kesalahan, coba lagi nanti.",
-    "language-unavailable": "Bahasa Arab tidak didukung oleh browser Anda.",
-    "network": "Terjadi kesalahan jaringan. Harap periksa koneksi internet Anda dan coba lagi.",
-    "no-microphone": "Mikrofon tidak terdeteksi. Harap sambungkan mikrofon dan coba lagi.",
-    "no-permission": "Sepertinya Anda tidak mengaktifkan izin mikrofon. Harap aktifkan izin mikrofon dan coba lagi.",
-    "no-speech": "Tidak ada ucapan yang terdeteksi. Silakan coba bicara lagi.",
+    "error": "Terjadi kesalahan, coba lagi nanti ({{errorCode}}).",
+    "language-unavailable": "Browser Anda tidak mendukung Bahasa Arab.",
+    "network": "Terjadi kesalahan jaringan. Periksa koneksi internet Anda dan coba lagi.",
+    "no-microphone": "Mikrofon tidak terdeteksi. Sambungkan mikrofon dan coba lagi.",
+    "no-permission": "Sepertinya izin mikrofon belum diaktifkan. Harap aktifkan dan coba lagi.",
+    "no-speech": "Suara tidak terdeteksi. Silakan coba bicara lagi.",
     "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Coba browser lain.",
     "suggest": "Baca ayatnya, maka ayat akan mulai muncul",
     "suggest-subtitle": "Baca ayat apa saja dalam bahasa Arab, dan ayat itu akan muncul",
     "suggest-title": "Baca sekarang",
-    "voice-search-powered-by": "Pencarian Suara Didukung oleh"
+    "voice-search-powered-by": "Pencarian Suara oleh"
   },
   "wbw": "Kata per kata",
   "wbw-lang-summary": "Sumber terjemahan kata per kata: <link> {{source}} </link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",

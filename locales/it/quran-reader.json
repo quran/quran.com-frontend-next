@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Aggiungi segnalibro",
   "add-collection": "Aggiungi raccolta",
   "advanced-copy": "Copia avanzata",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Torna ad Ayah",
+  "bismillah": "Nel nome di Allah, il Compassionevole, il Misericordioso",
+  "change-translation": "Cambia traduzione",
   "copy-arabic": "Testo arabo (testo Uthmani)",
   "copy-footnote-q": "Copia anche le note a piè di pagina?",
   "copy-success": "Il testo è stato copiato correttamente negli appunti.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Inizio dell'Hizb",
   "include-translator": "Includere il nome del traduttore?",
   "juz-beginning": "Inizio di Juz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "Il soccorritore: potenti lezioni nel banner del piano di apprendimento della Sura Al-Mulk",
+    "banner-image-description": "Visualizza il piano di apprendimento di The Rescuer per la Sura Al-Mulk",
+    "banner-wrapper-aria-label": "Banner promozionale del piano di apprendimento",
+    "button-accessibility-label": "Scopri di più sul piano di apprendimento The Rescuer",
+    "call-to-action-button": "Inizia ora",
+    "main-headline": "Scopri oggi stesso le potenti lezioni della Sura Al-Mulk",
+    "subtitle-description": "(Un piano di apprendimento gratuito)"
+  },
   "lessons-desc": "Leggi e condividi le lezioni coraniche del Versetto {{ayahNumber}} della Sura {{surahName}}",
   "lessons-disclaimer": "Le lezioni sono intuizioni informate di studiosi e ricercatori della conoscenza, distinte dalle fonti primarie come il Tafsir (l'interpretazione accademica del Corano).",
   "lessons-not-available": "Non ci sono lezioni riviste per questo ayah",
@@ -43,6 +55,8 @@
   "next-page": "Pagina successiva",
   "next-rub": "Il prossimo Rub el Hizb",
   "next-surah": "Sura successiva",
+  "page-bookmark-removed": "Segnalibro di pagina rimosso",
+  "page-bookmarked": "Pagina aggiunta ai segnalibri",
   "posted-in": "pubblicato in",
   "prev-ayah": "Precedente Ayah",
   "prev-hizb": "Hizb precedente",

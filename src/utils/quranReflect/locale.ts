@@ -1,26 +1,26 @@
-/* eslint-disable import/prefer-default-export */
-
 import { useSelector } from 'react-redux';
 
 import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import Language from '@/types/Language';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
-/**
- * Check whether the reflection is RTL or LTR.
- *
- * @param {string} language
- * @returns {boolean}
- */
-export const isRTLReflection = (language: ReflectionLanguage): boolean => {
-  switch (language) {
-    case ReflectionLanguage.ARABIC:
-    case ReflectionLanguage.URDU:
-      return true;
+const ARABIC_LANGUAGE_ID = 1;
+const URDU_LANGUAGE_ID = 5;
 
-    default:
-      return false;
-  }
+const RTL_LANGUAGE_IDS = [ARABIC_LANGUAGE_ID, URDU_LANGUAGE_ID];
+
+const LOCALE_TO_TRANSLATION_ID = {
+  [Language.AR]: null, // Arabic text doesn't need translation
+  [Language.EN]: 131, // The Clear Quran (Khattab)
+  [Language.ES]: 83, // Garcia
+  [Language.MS]: 39, // Basmeih
+  [Language.UR]: 97, // Tafheem e Qur'an - Syed Abu Ali Maududi
+  [Language.ID]: 33, // Indonesian Islamic Affairs Ministry
+  [Language.FR]: 31, // Muhammad Hamiduallah
+};
+
+export const localeToTranslationID = (locale: string): number | null => {
+  return LOCALE_TO_TRANSLATION_ID[locale] ?? LOCALE_TO_TRANSLATION_ID[Language.EN];
 };
 
 const LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID: Record<string, number> = {
@@ -95,6 +95,9 @@ export const localeToReflectionLanguages = (locale: string): ReflectionLanguage[
     allowedReflectionLanguages.push(currentLocaleReflectionLanguage);
   }
   return allowedReflectionLanguages;
+};
+export const isRTLReflection = (languageId: number): boolean => {
+  return RTL_LANGUAGE_IDS.includes(languageId);
 };
 
 /**

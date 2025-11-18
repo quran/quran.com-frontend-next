@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import DetailSection from './DetailSection';
 
 import MarkdownEditor from '@/components/MarkdownEditor';
+import HtmlContent from '@/components/RichText/HtmlContent';
 import { Course } from '@/types/auth/Course';
 
 type Props = {
@@ -22,21 +23,28 @@ const MainDetails: React.FC<Props> = ({ course }) => {
   //   return `${acc}, ${currentValue}`;
   // }, '');
 
+  // FIXME: remove once markdown in api is converted to html
+  const shouldUseMilkdown = /(^|\n)\s*#/m.test(description ?? '') || /\\$/m.test(description ?? '');
+
   return (
     <>
       <DetailSection
         title={t('learn-duration')}
-        description={t('duration-daily', {
+        description={`${t('duration-daily', {
           dailyMins: dailyMinutes,
           days: lessons.length,
-        })}
+        })}.`}
       />
-      <MilkdownProvider>
-        <DetailSection
-          title={t('description')}
-          description={<MarkdownEditor isEditable={false} defaultValue={description} />}
-        />
-      </MilkdownProvider>
+      {shouldUseMilkdown ? (
+        <MilkdownProvider>
+          <DetailSection
+            title={t('description')}
+            description={<MarkdownEditor isEditable={false} defaultValue={description} />}
+          />
+        </MilkdownProvider>
+      ) : (
+        <DetailSection title={t('description')} description={<HtmlContent html={description} />} />
+      )}
     </>
   );
 };

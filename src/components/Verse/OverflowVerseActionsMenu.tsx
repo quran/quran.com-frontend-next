@@ -10,11 +10,12 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
-import Verse from 'types/Verse';
 
 const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseActionsMenuBody'), {
   ssr: false,
@@ -22,7 +23,7 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 });
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;
@@ -57,15 +58,17 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(
               cellStyles.iconContainer,
               cellStyles.verseAction,
-              {
-                [cellStyles.fadedVerseAction]: isTranslationView,
-              },
+              { [styles.moreMenuTrigger]: isTranslationView },
               'overflow-verse-actions-menu-trigger', // for onboarding
             )}
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
-              <OverflowMenuIcon />
+              <IconContainer
+                icon={<OverflowMenuIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+              />
             </span>
           </Button>
         }

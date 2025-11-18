@@ -52,6 +52,8 @@ const Switch = ({
         <button
           disabled={item.disabled}
           type="button"
+          data-testid={`${item.value}-button`}
+          data-is-selected={selected === item.value}
           className={classNames(styles.item, selected === item.value && styles.itemSelected, {
             [styles.itemLarge]: size === SwitchSize.Large,
             [styles.itemNormal]: size === SwitchSize.Normal,
@@ -60,7 +62,6 @@ const Switch = ({
           })}
           key={item.value}
           onClick={() => onSelect(item.value)}
-          data-testid={`switch-item-${item.value}`}
         >
           {item.name}
         </button>

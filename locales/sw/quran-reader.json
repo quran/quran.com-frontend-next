@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Ongeza alamisho",
   "add-collection": "Ongeza Mkusanyiko",
   "advanced-copy": "Nakala ya Juu",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Rudi kwa Aya",
+  "bismillah": "Kwa Jina la Mwenyezi Mungu, Mwingi wa Rehema, Mwenye kurehemu",
+  "change-translation": "Badilisha Tafsiri",
   "copy-arabic": "Maandishi ya Kiarabu (Nakala ya Uthmani)",
   "copy-footnote-q": "Nakili pia Tanbihi?",
   "copy-success": "Maandishi yamenakiliwa katika ubao wako wa kunakili.",
@@ -30,8 +33,17 @@
   "hizb-beginning": "Mwanzo wa Hizb",
   "include-translator": "Jumuisha jina la mtafsiri?",
   "juz-beginning": "Mwanzo wa Juz",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "Mwokozi: Masomo Yenye Nguvu katika bango la mpango wa kusoma wa Surah Al-Mulk",
+    "banner-image-description": "Tazama mpango wa kujifunza wa Mwokozi wa Surah Al-Mulk",
+    "banner-wrapper-aria-label": "Bango la kukuza mpango wa kujifunza",
+    "button-accessibility-label": "Pata maelezo zaidi kuhusu mpango wa kujifunza wa The Rescuer",
+    "call-to-action-button": "Anza Sasa",
+    "main-headline": "Gundua masomo yenye nguvu katika Surah Al-Mulk leo",
+    "subtitle-description": "(Mpango wa Mafunzo bila malipo)"
+  },
   "lessons-desc": "Soma na ushiriki mafunzo ya Qur'ani ya Aya {{ayahNumber}} ya Surah {{surahName}}",
-  "lessons-disclaimer": "Masomo ni maarifa kutoka kwa wasomi na watafutaji elimu, tofauti na vyanzo vya msingi kama vile Tafsir (tafsiri ya kielimu ya Quran).",
+  "lessons-disclaimer": "Mafunzo ni maarifa kutoka kwa wasomi na wanazuoni, ikiwa tofauti na vyanzo vya msingi kama vile Tafsir (tafsiri ya kielimu ya Qur'ani).",
   "lessons-not-available": "Hakuna mafunzo yaliyokaguliwa kwa aya hii",
   "mad-2": "Madd Tabi`ee",
   "mad-2-4-6": "Madd Al-Munfasil (2/4/6)",
@@ -43,6 +55,8 @@
   "next-page": "Ukurasa unaofuata",
   "next-rub": "Rub el Hizb Inayofuata",
   "next-surah": "Sura inayofuata",
+  "page-bookmark-removed": "Alamisho ya ukurasa imeondolewa",
+  "page-bookmarked": "Ukurasa umewekwa alama",
   "posted-in": "Imechapishwa kwa",
   "prev-ayah": "Aya Iliyotangulia",
   "prev-hizb": "Hizb Iliyotangulia",

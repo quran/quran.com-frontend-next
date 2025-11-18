@@ -1,11 +1,12 @@
 /* eslint-disable max-lines */
-import React, { RefObject, memo, useContext, useEffect } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import getTranslationsLabelString from '../ReadingView/utils/translation';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -20,10 +21,11 @@ import styles from './TranslationViewCell.module.scss';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
-import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
+import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { getVerseWords, makeVerseKey } from '@/utils/verse';
+import { WordVerse } from '@/types/Word';
+import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -56,8 +58,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   // disable auto scrolling when the user is onboarding
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
 
-  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SMOOTH_SCROLL_TO_TOP);
+  // Use our custom hook that handles scrolling with context menu offset
+  const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();
 
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
@@ -65,14 +67,19 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
+  const translationsLabel = getTranslationsLabelString(verse.translations);
+  const translationsCount = verse.translations?.length || 0;
+  const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
+
   return (
     <div ref={selectedItemRef}>
       <div
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
         })}
+        data-testid={`verse-${verse.verseKey}`}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+        <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -93,7 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         </div>
         <BottomActions verseKey={verse.verseKey} />
       </div>
-      <Separator />
+      <Separator className={styles.verseSeparator} />
     </div>
   );
 };

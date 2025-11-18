@@ -3,6 +3,7 @@ import React, { useCallback, useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PlayIcon from '@/icons/play-outline.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
@@ -44,7 +45,11 @@ const PlayAudioMenuItem: React.FC<PlayAudioMenuItemProps> = ({ verse, onActionTr
   }, [audioService, chapterId, onActionTriggered, verseNumber]);
 
   return (
-    <PopoverMenu.Item icon={<PlayIcon />} onClick={onPlayClicked} isDisabled={isVerseLoading}>
+    <PopoverMenu.Item
+      icon={<IconContainer icon={<PlayIcon />} color={IconColor.tertiary} size={IconSize.Custom} />}
+      onClick={onPlayClicked}
+      isDisabled={isVerseLoading}
+    >
       {t('audio.player.play')}
     </PopoverMenu.Item>
   );
