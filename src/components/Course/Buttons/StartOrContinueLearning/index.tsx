@@ -18,15 +18,11 @@ const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = tru
   const { t } = useTranslation('learn');
   const { lessons, continueFromLesson, id, slug } = course;
   const userType = getUserType();
-  /**
-   * there is a corner case when the user enrolls,
-   * goes back to main page then clicks start learning again,
-   * continueFromLesson is undefined since it has been cached from
-   * before the user enrolled.
-   */
-  const redirectToLessonSlug = continueFromLesson || lessons?.[0]?.slug;
   const router = useRouter();
-  const userCompletedAnyLesson = lessons.some((lesson) => lesson.isCompleted === true);
+
+  // Navigate to the lesson user should continue from, or first lesson if not set
+  const redirectToLessonSlug = continueFromLesson || lessons?.[0]?.slug;
+
   const onContinueLearningClicked = () => {
     logButtonClick('continue_learning', {
       courseId: id,
@@ -36,19 +32,7 @@ const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = tru
     router.push(getLessonNavigationUrl(slug, redirectToLessonSlug));
   };
 
-  const onStartLearningClicked = () => {
-    logButtonClick('start_learning', {
-      courseId: id,
-      isHeaderButton,
-      userType,
-    });
-    router.push(getLessonNavigationUrl(slug, redirectToLessonSlug));
-  };
-
-  if (userCompletedAnyLesson) {
-    return <Button onClick={onContinueLearningClicked}>{t('continue-learning')}</Button>;
-  }
-  return <Button onClick={onStartLearningClicked}>{t('start-learning')}</Button>;
+  return <Button onClick={onContinueLearningClicked}>{t('continue-learning')}</Button>;
 };
 
 export default StartOrContinueLearning;

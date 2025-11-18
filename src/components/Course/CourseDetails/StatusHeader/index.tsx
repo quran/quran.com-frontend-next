@@ -11,11 +11,11 @@ import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedba
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { useEnrollGuest, useIsEnrolled } from '@/hooks/auth/useGuestEnrollment';
+import useEnrollUser from '@/hooks/auth/useEnrollUser';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { logErrorToSentry } from '@/lib/sentry';
 import { Course } from '@/types/auth/Course';
-import { enrollUser } from '@/utils/auth/api';
+import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -37,25 +37,10 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const router = useRouter();
   const { t } = useTranslation('learn');
   const mutate = useMutateWithoutRevalidation();
-  const enrollGuest = useEnrollGuest();
-  const isEnrolled = useIsEnrolled(id, isUserEnrolled);
   const userLoggedIn = isLoggedIn();
+  const enrollUserInCourse = useEnrollUser();
 
-  const handleEnrollmentSuccess = async (loggedIn: boolean): Promise<void> => {
-    toast(t('enroll-success', { title }), { status: ToastStatus.Success });
-    if (loggedIn) {
-      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
-        ...currentCourse,
-        isUserEnrolled: true,
-      }));
-    }
-
-    if (lessons?.length > 0) {
-      await router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
-    }
-  };
-
-  const onEnrollClicked = async (): Promise<void> => {
+  const onStartHereClicked = async (): Promise<void> => {
     const userType = getUserType(userLoggedIn);
 
     logButtonClick('course_enroll', {
@@ -64,20 +49,29 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       userType,
     });
 
-    if (!userLoggedIn && !allowGuestAccess) {
-      const redirectUrl = getCourseNavigationUrl(slug);
-      router.replace(getLoginNavigationUrl(redirectUrl));
+    // Guest user handling
+    if (!userLoggedIn) {
+      if (allowGuestAccess && lessons?.length > 0) {
+        router.push(getLessonNavigationUrl(slug, lessons[0].slug));
+      } else {
+        router.push(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+      }
       return;
     }
 
+    // Logged-in user - enroll with MANUAL method
     setIsLoading(true);
     try {
-      if (userLoggedIn) {
-        await enrollUser(id);
-      } else {
-        enrollGuest(id);
+      await enrollUserInCourse(id, EnrollmentMethod.Manual);
+
+      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
+        ...currentCourse,
+        isUserEnrolled: true,
+      }));
+
+      if (lessons?.length > 0) {
+        await router.push(getLessonNavigationUrl(slug, lessons[0].slug));
       }
-      await handleEnrollmentSuccess(userLoggedIn);
     } catch (error) {
       logErrorToSentry(error, {
         metadata: {
@@ -94,16 +88,19 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     }
   };
 
+  // CTA mode - only show button if not enrolled
   if (isCTA) {
-    if (isEnrolled) {
+    if (isUserEnrolled) {
       return <></>;
     }
     return (
-      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
-        {t('enroll')}
+      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
+        {t('start-here')}
       </Button>
     );
   }
+
+  // Course is completed
   if (isCompleted) {
     return (
       <div className={styles.completedContainer}>
@@ -114,13 +111,16 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       </div>
     );
   }
-  if (isEnrolled) {
+
+  // User is enrolled - show StartOrContinueLearning component
+  if (isUserEnrolled) {
     return <StartOrContinueLearning course={course} />;
   }
 
+  // Not enrolled - show "Start here" button
   return (
-    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
-      {t('enroll')}
+    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
+      {t('start-here')}
     </Button>
   );
 };
