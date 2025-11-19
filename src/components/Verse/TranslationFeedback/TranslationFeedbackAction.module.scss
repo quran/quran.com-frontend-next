@@ -3,6 +3,7 @@
 .title {
   font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
 
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-large2);

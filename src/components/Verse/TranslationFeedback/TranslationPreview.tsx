@@ -51,6 +51,7 @@ const TranslationPreview: React.FC<Props> = ({ verse, lang, selectedTranslationI
         <Loader />
       ) : (
         <TranslationText
+          key={selectedTranslationId}
           text={`"${translation.text}"`}
           languageId={translation.languageId}
           translationFontScale={quranReaderStyles.translationFontScale}

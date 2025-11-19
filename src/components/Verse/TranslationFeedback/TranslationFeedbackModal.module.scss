@@ -29,6 +29,10 @@
 
   textarea {
     padding: var(--spacing-xsmall);
+
+    &:focus::placeholder {
+      color: transparent;
+    }
   }
 }
 

@@ -304,4 +304,3 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
   }
   return makeDonateUrl();
 };
-

@@ -8,7 +8,7 @@ import styles from './TranslationFeedbackModal.module.scss';
 
 import { getAvailableTranslations } from '@/api';
 import TranslationPreview from '@/components/Verse/TranslationFeedback/TranslationPreview';
-import Button from '@/dls/Button/Button';
+import Button, { ButtonSize } from '@/dls/Button/Button';
 import Select, { SelectOption } from '@/dls/Forms/Select';
 import TextArea from '@/dls/Forms/TextArea';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -167,7 +167,7 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
       </div>
 
       <div className={styles.actions}>
-        <Button htmlType="submit" isLoading={isSubmitting}>
+        <Button htmlType="submit" isLoading={isSubmitting} size={ButtonSize.Small}>
           {t('translation-feedback.report')}
         </Button>
       </div>
