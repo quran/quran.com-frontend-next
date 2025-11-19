@@ -9,6 +9,11 @@ interface UserProfile {
   email: string;
   username?: string;
   createdAt: string;
+  avatars?: {
+    large: string;
+    medium: string;
+    small: string;
+  };
   photoUrl?: string;
   requiredFields: FormField[];
   announcement: Announcement;
