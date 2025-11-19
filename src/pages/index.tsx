@@ -124,11 +124,7 @@ const Index: NextPage<IndexProps> = ({
                         <QuranInYearSection chaptersData={chaptersData} />
                       </div>
                     )}
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <LearningPlansSection courses={learningPlans} />
-                    </div>
+
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >

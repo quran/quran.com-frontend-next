@@ -1657,7 +1657,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       await page.locator('[data-testid="language-selector-button-navbar"]').click();
       await expect(page.locator('[data-testid="language-selector-item-ar"]')).toBeVisible();
       await page.locator('[data-testid="language-selector-item-ar"]').click();
-      await page.waitForURL('/ar');
+      await page.waitForURL('/ar/1');
 
       await testHelper.waitForReduxHydration();
 
@@ -2098,7 +2098,7 @@ test.describe('Category 7: Session Persistence', () => {
     await test.step('Set initial settings and customize', async () => {
       await testHelper.mockCountryAndApiForContext('US', 'en');
 
-      await page.goto('/', NAVIGATION_OPTIONS);
+      await page.goto('/1', NAVIGATION_OPTIONS);
       await testHelper.waitForReduxHydration();
 
       await testHelper.homepage.openSettingsDrawer();

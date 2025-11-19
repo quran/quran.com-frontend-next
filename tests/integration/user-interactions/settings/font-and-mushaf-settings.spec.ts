@@ -21,7 +21,7 @@ test.describe('Font and Mushaf Settings', () => {
       let persistedQuranReaderStyles = (await homepage.getPersistedValue(
         'quranReaderStyles',
       )) as QuranReaderStyles;
-      expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.MadaniV1);
+      expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.QPCHafs);
       expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.SixteenLines);
       // 2. Open the settings drawer
       await homepage.openSettingsDrawer();

@@ -5,6 +5,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { test, expect, BrowserContext, Page } from '@playwright/test';
+import dotenv from 'dotenv';
 
 import { mockCountryLanguagePreferences } from '../../mocks/data';
 import { setTestData } from '../../mocks/msw/handlers.js';
@@ -12,8 +13,11 @@ import Homepage from '../../POM/home-page';
 
 const NAVIGATION_OPTIONS = { waitUntil: 'domcontentloaded', timeout: 300000 } as const;
 const INDOPAK_FONT = 'text_indopak';
-const TEST_USER_EMAIL = process.env.TEST_USER_EMAIL || 'jhgqxuswcf@cmhvzylmfc.com';
-const TEST_USER_PASSWORD = process.env.TEST_USER_PASSWORD || 'TestPassword123!';
+
+dotenv.config();
+
+const { TEST_USER_EMAIL } = process.env;
+const { TEST_USER_PASSWORD } = process.env;
 
 const createTestUserPreferences = () => ({
   language: { language: 'fr' },
@@ -207,8 +211,8 @@ test.describe('Localization scenarios - Switch Language', () => {
   }) => {
     const { helper, page, context } = await createScenarioHelper(browser);
 
-    await helper.visitPage();
-    await expect(page).toHaveURL(/\/ur(\?|$)/);
+    await helper.visitPage('/1');
+    await expect(page).toHaveURL(/\/ur\/1(\?|$)/);
 
     await helper.homepage.openSettingsDrawer();
     await expect(page.locator('#theme-section')).toBeVisible();
@@ -220,7 +224,7 @@ test.describe('Localization scenarios - Switch Language', () => {
     expect(themeBeforeSwitch.type).toBe('sepia');
 
     await helper.switchLanguage('fr');
-    await expect(page).toHaveURL(/\/fr(\?|$)/);
+    await expect(page).toHaveURL(/\/fr\/1(\?|$)/);
 
     const quranReaderStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
     expect(quranReaderStyles.quranFont).toBe(INDOPAK_FONT);
@@ -331,7 +335,7 @@ test.describe('Localization scenarios - Account', () => {
   };
 
   test('Login to an account changes language', async ({ browser }) => {
-    const { helper, page, context } = await createScenarioHelper(browser, 'ur-PK');
+    const { helper, page } = await createScenarioHelper(browser, 'ur-PK');
 
     try {
       await helper.setLanguageAndCountry(['ur-PK', 'ur'], 'PK');
@@ -342,21 +346,25 @@ test.describe('Localization scenarios - Account', () => {
       await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
       await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
-      await page.locator('[data-testid="signin-continue-button"]').click();
 
-      await page.waitForURL(/\/fr(\?|$)/, { timeout: 15000 });
+      await page.waitForTimeout(1000);
+
+      await Promise.all([
+        page.locator('[data-testid="signin-continue-button"]').click(),
+        page.waitForURL(/\/fr(\?|$)/),
+      ]);
+
       await helper.waitForReduxHydration();
 
       const theme = await helper.homepage.getPersistedValue('theme');
       expect(theme.type).toBe('sepia');
     } finally {
       setTestData('preferences', null);
-      await context.close();
     }
   });
 
   test('Logging out keeps localized language and theme', async ({ browser }) => {
-    const { helper, page, context } = await createScenarioHelper(browser, 'ur-PK');
+    const { helper, page } = await createScenarioHelper(browser, 'ur-PK');
 
     try {
       await helper.setLanguageAndCountry(['ur-PK', 'ur'], 'PK');
@@ -367,22 +375,26 @@ test.describe('Localization scenarios - Account', () => {
       await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
       await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
-      await page.locator('[data-testid="signin-continue-button"]').click();
 
-      await page.waitForURL(/\/fr(\?|$)/, { timeout: 15000 });
+      await page.waitForTimeout(1000);
+
+      await Promise.all([
+        page.locator('[data-testid="signin-continue-button"]').click(),
+        page.waitForURL(/\/fr(\?|$)/),
+      ]);
+
       await helper.waitForReduxHydration();
 
       await page.locator('[data-testid="profile-avatar-button"]').click();
       await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
-      await page.waitForURL(/\/fr(\?|$)/, { timeout: 15000 });
+      await page.waitForURL(/\/fr(\?|$)/);
       await helper.waitForReduxHydration();
 
       const theme = await helper.homepage.getPersistedValue('theme');
       expect(theme.type).toBe('sepia');
     } finally {
       setTestData('preferences', null);
-      await context.close();
     }
   });
 });
