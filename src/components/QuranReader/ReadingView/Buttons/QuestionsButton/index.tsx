@@ -24,7 +24,7 @@ const QuestionsButton: React.FC<Props> = ({ verseKey, onActionTriggered }) => {
   const { t, lang } = useTranslation('quran-reader');
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const hasQuestions = pageQuestionsCount && pageQuestionsCount[verseKey] > 0;
+  const hasQuestions = pageQuestionsCount && pageQuestionsCount[verseKey]?.total > 0;
   const onButtonClicked = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     e.preventDefault();
