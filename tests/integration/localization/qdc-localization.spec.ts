@@ -1629,7 +1629,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       // Set up mocking for English language and US country
       await testHelper.mockCountryAndApiForContext('US', 'en');
 
-      await page.goto('/', NAVIGATION_OPTIONS);
+      await page.goto('/1', NAVIGATION_OPTIONS);
       await testHelper.waitForReduxHydration();
     });
 
@@ -1690,7 +1690,7 @@ test.describe('Category 4: Reset Settings Functionality', () => {
 
     await test.step('Set initial settings and navigate to page', async () => {
       await testHelper.mockCountryAndApiForContext('US', 'en');
-      await page.goto('/', NAVIGATION_OPTIONS);
+      await page.goto('/1', NAVIGATION_OPTIONS);
       await testHelper.waitForReduxHydration();
     });
 

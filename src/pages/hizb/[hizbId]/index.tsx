@@ -4,22 +4,22 @@ import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getHizbVerses } from '@/api';
+import { getHizbVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
-import { getAllChaptersData } from '@/utils/chapter';
+import { getMushafId } from '@/utils/api';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getHizbNavigationUrl } from '@/utils/navigation';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidHizbId } from '@/utils/validator';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 interface HizbPageProps {
   hizbVerses?: VersesResponse;
-  chaptersData: ChaptersData;
 }
 
 const HizbPage: NextPage<HizbPageProps> = ({ hizbVerses }) => {
@@ -51,17 +51,26 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
   async (context) => {
     const { params, locale } = context;
     const hizbId = String(params.hizbId);
-    const chaptersData = await getAllChaptersData(locale);
-    if (!isValidHizbId(chaptersData, hizbId)) {
+    if (!isValidHizbId(hizbId)) {
       return {
         notFound: true,
       };
     }
     try {
-      const hizbVerses = await getHizbVerses(locale, hizbId);
+      const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
+      const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
+      const [hizbVerses, pagesLookup] = await Promise.all([
+        getHizbVerses(hizbId, locale),
+        getPagesLookup({ mushaf, hizbNumber: Number(hizbId) }),
+      ]);
+      hizbVerses.pagesLookup = pagesLookup;
+      hizbVerses.metaData = {
+        ...(hizbVerses.metaData || {}),
+        from: pagesLookup.lookupRange.from,
+        to: pagesLookup.lookupRange.to,
+      };
       return {
         props: {
-          chaptersData,
           hizbVerses,
         },
       };

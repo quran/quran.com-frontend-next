@@ -85,8 +85,11 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       if (sluggedChapterId) {
         chapterIdOrSlug = sluggedChapterId;
       }
-      // chaptersData is injected by withSsrRedux
-      const { chaptersData } = (context as any).props || {};
+      // chaptersData is injected by withSsrRedux at the context level
+      const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+      if (!chaptersData) {
+        return { notFound: true };
+      }
       // 2. make sure that verse id/range are valid before calling BE to get the verses.
       if (
         !isValidVerseId(chaptersData, chapterIdOrSlug, verseIdOrRange) &&
