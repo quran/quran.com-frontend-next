@@ -1,10 +1,10 @@
 /* eslint-disable max-lines */
-import React, { memo, useContext, useEffect } from 'react';
+import React, { memo, useContext, useEffect, useRef } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import getTranslationsLabelString from '../ReadingView/utils/translation';
 import {
@@ -23,6 +23,7 @@ import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
+import { setIsVisible, setLockVisibilityState } from '@/redux/slices/navbar';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { WordVerse } from '@/types/Word';
 import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
@@ -54,6 +55,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
   });
 
+  const dispatch = useDispatch();
+  const hideNavbarTimeoutRef = useRef<number>();
   const { isActive } = useOnboarding();
   // disable auto scrolling when the user is onboarding
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
@@ -63,10 +66,38 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
-      scrollToSelectedItem();
-    }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
+      // Hide the navbar and lock its state to avoid showing it on scroll
+      dispatch(setIsVisible(false));
+      dispatch(setLockVisibilityState(true));
 
+      scrollToSelectedItem();
+
+      // Unlock the navbar visibility state after a timeout (time for the navbar to hide)
+      if (hideNavbarTimeoutRef.current) {
+        window.clearTimeout(hideNavbarTimeoutRef.current);
+      }
+      hideNavbarTimeoutRef.current = window.setTimeout(() => {
+        dispatch(setIsVisible(false));
+        dispatch(setLockVisibilityState(false));
+      }, 1000);
+    }
+  }, [
+    dispatch,
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+    startingVerse,
+    verseIndex,
+  ]);
+
+  useEffect(
+    () => () => {
+      if (hideNavbarTimeoutRef.current) {
+        window.clearTimeout(hideNavbarTimeoutRef.current);
+      }
+    },
+    [],
+  );
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
   const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
