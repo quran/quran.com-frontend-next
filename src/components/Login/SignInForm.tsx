@@ -82,18 +82,22 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         return getFormErrors(t, ErrorType.API, errors);
       }
 
+      let targetLocale = router.locale || 'en';
       try {
-        await syncPreferencesFromServer({
-          locale: router.locale || 'en',
+        const { appliedLocale } = await syncPreferencesFromServer({
+          locale: targetLocale,
           dispatch,
           audioService,
         });
+        if (appliedLocale) {
+          targetLocale = appliedLocale;
+        }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Failed to sync user preferences after login', error);
       }
 
-      redirectWithToken(redirect || '/', response?.token);
+      redirectWithToken(redirect || '/', response?.token, targetLocale);
 
       return undefined;
     } catch (error) {

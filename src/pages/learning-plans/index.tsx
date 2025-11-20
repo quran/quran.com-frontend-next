@@ -1,12 +1,11 @@
 import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { fetcher } from '@/api';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
-import { Course, CoursesResponse } from '@/types/auth/Course';
-import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
+import { Course } from '@/types/auth/Course';
+import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -42,20 +41,15 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
   async (context, languageResult) => {
     const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
 
-    const learningPlanLanguages =
-      languageResult?.countryLanguagePreference?.learningPlanLanguages?.map((lang) =>
-        lang.isoCode?.toLowerCase(),
-      ) || ['en'];
+    // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
+    // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
+    const learningPlanLanguages = languageResult?.countryLanguagePreference?.learningPlanLanguages
+      ?.map((lang) => lang.isoCode)
+      .filter((code): code is string => code != null)
+      .map((code) => code.toLowerCase()) || ['en'];
 
-    let courses: Course[] = [];
-    try {
-      const response = await fetcher<CoursesResponse>(
-        makeGetCoursesUrl({ myCourses: false, languages: learningPlanLanguages }),
-      );
-      courses = response?.data || [];
-    } catch (error) {
-      courses = [];
-    }
+    // Fetch courses with fallback retry for backward compatibility
+    const courses = await fetchCoursesWithLanguages(learningPlanLanguages);
 
     return {
       props: {

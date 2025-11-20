@@ -102,13 +102,14 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         viewing the verse's page otherwise it's a range page.
       */
       const isVerse = isValidVerseNumber(verseIdOrRange);
+      const initialStyles = getQuranReaderStylesInitialState(locale as Language);
       const defaultMushafId = getMushafId(
-        getQuranReaderStylesInitialState(locale as Language).quranFont,
-        getQuranReaderStylesInitialState(locale as Language).mushafLines,
+        initialStyles.quranFont,
+        initialStyles.mushafLines,
       ).mushaf;
       // common API params between a single verse and range of verses.
       let apiParams = {
-        ...getDefaultWordFields(getQuranReaderStylesInitialState(locale as Language).quranFont),
+        ...getDefaultWordFields(initialStyles.quranFont),
         mushaf: defaultMushafId,
       };
       const metaData = { numberOfVerses: 1 } as MetaData;

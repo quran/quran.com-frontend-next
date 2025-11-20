@@ -62,7 +62,7 @@ test.describe('Non-English language', () => {
     const context = await browser.newContext({ locale: 'ar-SA' });
     const page = await context.newPage();
 
-    // Set headers to simulate Saudi Arabia location
+    // Set headers to simulate Saudi Arabia location and Arabic language preference
     await page.setExtraHTTPHeaders({
       [ACCEPT_LANGUAGE]: 'ar-SA,ar',
       [CF_IP_COUNTRY]: 'SA',
@@ -80,7 +80,7 @@ test.describe('Non-English language', () => {
     const context = await browser.newContext({ locale: 'fr-FR' });
     const page = await context.newPage();
 
-    // Set headers to simulate France location
+    // Set headers to simulate France location and French language preference
     await page.setExtraHTTPHeaders({
       [ACCEPT_LANGUAGE]: 'fr-FR,fr',
       [CF_IP_COUNTRY]: 'FR',

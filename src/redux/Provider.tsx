@@ -82,7 +82,7 @@ const ReduxProvider = ({
   const onBeforeLift = async () => {
     if (isClient && isLoggedIn()) {
       try {
-        const hasRemotePreferences = await syncPreferencesFromServer({
+        const { hasRemotePreferences } = await syncPreferencesFromServer({
           locale,
           dispatch: store.dispatch,
           audioService,

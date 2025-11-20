@@ -146,8 +146,9 @@ type GetCoursesQueryParams = {
 };
 
 export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
-  const languagesStr = params?.languages?.join(',') || 'en';
-  return makeUrl('courses', { ...params, languages: languagesStr });
+  const { languages, ...restParams } = params || {};
+  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
+  return makeUrl('courses', queryParams);
 };
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);

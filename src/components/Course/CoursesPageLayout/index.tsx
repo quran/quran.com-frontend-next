@@ -28,7 +28,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourse
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
 
   const renderCourses = (courses: Course[] | undefined) => {
-    if (!courses?.length) {
+    if (!courses) {
       return <Spinner />;
     }
     return <CoursesList courses={courses} isMyCourses={isMyCourses} />;

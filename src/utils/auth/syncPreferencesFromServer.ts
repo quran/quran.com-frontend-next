@@ -24,6 +24,11 @@ type SyncPreferencesParams = {
   audioService?: InterpreterFrom<typeof audioPlayerMachine>;
 };
 
+export type SyncPreferencesResult = {
+  hasRemotePreferences: boolean;
+  appliedLocale?: string;
+};
+
 const hasUserPreferences = (preferences?: UserPreferencesResponse) => {
   if (!preferences) return false;
   return Object.keys(preferences).length > 0;
@@ -53,14 +58,15 @@ const applyAudioPreferences = (
  *
  * @returns {Promise<boolean>} whether preferences existed and got applied.
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 export const syncPreferencesFromServer = async ({
   locale,
   dispatch,
   audioService,
-}: SyncPreferencesParams): Promise<boolean> => {
+}: SyncPreferencesParams): Promise<SyncPreferencesResult> => {
   const userPreferences = await getUserPreferences();
   if (!hasUserPreferences(userPreferences)) {
-    return false;
+    return { hasRemotePreferences: false };
   }
 
   const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE]?.language;
@@ -101,9 +107,11 @@ export const syncPreferencesFromServer = async ({
     if (remoteLocale !== locale) {
       await setLanguage(remoteLocale);
     }
+
+    return { hasRemotePreferences: true, appliedLocale: remoteLocale };
   }
 
-  return true;
+  return { hasRemotePreferences: true, appliedLocale: preferencesLocale };
 };
 
 export default syncPreferencesFromServer;

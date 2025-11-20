@@ -14,6 +14,11 @@ test(
   'Login to an existing user works and redirects to the home page',
   { tag: ['@slow', '@auth', '@login-user', '@smoke'] },
   async ({ page }) => {
+    test.skip(
+      !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
+      'No credentials provided',
+    );
+
     // Click on the "Continue with Email" button
     const authButtons = page.getByTestId('auth-buttons');
     const continueWithEmailButton = authButtons.getByText('Email');
@@ -26,8 +31,8 @@ test(
     await page.getByRole('button', { name: 'Continue' }).click();
 
     // We should be redirected to the home page
-    await page.waitForURL(/\/$/);
-    await expect(page).toHaveURL(/\/$/);
+    await page.waitForURL(/\/fr$/);
+    await expect(page).toHaveURL(/\/fr$/);
 
     // We should be logged in
     await expect(page.getByTestId('profile-avatar-button')).toBeVisible();
@@ -73,11 +78,6 @@ test(
 );
 
 const fillInLoginForm = async (page: Page) => {
-  test.skip(
-    !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
-    'No credentials provided',
-  );
-
   await page.getByPlaceholder('Email').fill(process.env.TEST_USER_EMAIL || '');
   await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
 };

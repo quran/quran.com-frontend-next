@@ -76,7 +76,7 @@ const buildRubPageProps = async (
 };
 
 // eslint-disable-next-line react-func/max-lines-per-function
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
+export const getServerSideProps: GetServerSideProps<RubPageProps> = withSsrRedux(
   '/rub/[rubId]',
   async (context) => {
     const { params, locale } = context;

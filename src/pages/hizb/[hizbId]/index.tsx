@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { GetServerSideProps, NextPage } from 'next';
@@ -57,7 +58,11 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       };
     }
     try {
-      const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
+      // Validate locale against Language enum; use Language.EN if invalid
+      const validLocale = Object.values(Language).includes(locale as Language)
+        ? (locale as Language)
+        : Language.EN;
+      const quranReaderStyles = getQuranReaderStylesInitialState(validLocale);
       const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
       const [hizbVerses, pagesLookup] = await Promise.all([
         getHizbVerses(hizbId, locale),
@@ -75,6 +80,8 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         },
       };
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to fetch Hizb data:', { hizbId, locale, error });
       return {
         notFound: true,
       };

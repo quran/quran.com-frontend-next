@@ -61,12 +61,16 @@ const VerificationCodeForm: FC<Props> = ({
       });
     }
 
+    let targetLocale = router.locale || 'en';
     try {
-      await syncPreferencesFromServer({
-        locale: router.locale || 'en',
+      const { appliedLocale } = await syncPreferencesFromServer({
+        locale: targetLocale,
         dispatch,
         audioService,
       });
+      if (appliedLocale) {
+        targetLocale = appliedLocale;
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Failed to sync user preferences after verification', error);
@@ -77,7 +81,7 @@ const VerificationCodeForm: FC<Props> = ({
       onSuccess();
     } else {
       // Default behavior: redirect back or to home
-      redirectWithToken((router.query.redirect as string) || '/', response?.token);
+      redirectWithToken((router.query.redirect as string) || '/', response?.token, targetLocale);
     }
   };
 
