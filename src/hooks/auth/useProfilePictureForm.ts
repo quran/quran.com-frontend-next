@@ -37,9 +37,15 @@ const useProfilePictureForm = () => {
           // Handle validation errors
           if (result.errors.avatar) {
             // Try to translate the error, fallback to a generic message if translation fails
-            const errorMessage = t(result.errors.avatar, undefined, {
-              fallback: t('errors.upload-avatar-failed'),
-            });
+            const errorMessage = t(
+              result.errors.avatar,
+              {
+                fieldName: 'avatar',
+              },
+              {
+                fallback: t('errors.upload-avatar-failed'),
+              },
+            );
             toast(errorMessage, {
               status: ToastStatus.Error,
             });
@@ -64,9 +70,15 @@ const useProfilePictureForm = () => {
         // Handle validation errors
         if (result.errors.avatar) {
           // Try to translate the error, fallback to a generic message if translation fails
-          const errorMessage = t(result.errors.avatar, undefined, {
-            fallback: t('errors.remove-avatar-failed'),
-          });
+          const errorMessage = t(
+            result.errors.avatar,
+            {
+              fieldName: 'avatar',
+            },
+            {
+              fallback: t('errors.remove-avatar-failed'),
+            },
+          );
           toast(errorMessage, {
             status: ToastStatus.Error,
           });
