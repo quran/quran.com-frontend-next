@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -14,7 +14,6 @@ import {
 const useProfilePictureForm = () => {
   const { t } = useTranslation('common');
   const toast = useToast();
-  const [isRemoving, setIsRemoving] = useState(false);
 
   const translationParams = useMemo(() => getImageUploadTranslationParams(), []);
 
@@ -23,7 +22,7 @@ const useProfilePictureForm = () => {
       invalidFileType: t('errors.invalid-file-format', {
         formats: translationParams.allowedFormats,
       }),
-      fileTooLarge: t('errors.file-exceeds-limit'),
+      fileExceedsLimit: t('errors.file-exceeds-limit'),
     }),
     [t, translationParams],
   );
@@ -59,7 +58,6 @@ const useProfilePictureForm = () => {
   );
 
   const removeFunction = useCallback(async () => {
-    setIsRemoving(true);
     try {
       const result = await updateProfile({ removeAvatar: true });
       if (result && 'errors' in result && result.errors) {
@@ -81,8 +79,6 @@ const useProfilePictureForm = () => {
       }
     } catch {
       // Error is already handled by the useUpdateUserProfile hook
-    } finally {
-      setIsRemoving(false);
     }
   }, [updateProfile, toast, t]);
 
@@ -94,27 +90,24 @@ const useProfilePictureForm = () => {
     [toast],
   );
 
-  const {
-    isUploading: isImageUploading,
-    fileInputRef,
-    handleUploadPicture,
-    handleFileSelect,
-  } = useImageUpload({
-    maxSize: MAX_IMAGE_SIZE_MB * 1024 * 1024,
-    allowedTypes: [...ALLOWED_IMAGE_TYPES],
-    errorMessages: uploadErrorMessages,
-    uploadFunction,
-    sentryTransactionName: 'uploadProfilePicture',
-    onError: onImageUploadError,
-  });
+  const { isLoading, fileInputRef, handleUploadPicture, handleFileSelect, handleRemovePicture } =
+    useImageUpload({
+      maxSize: MAX_IMAGE_SIZE_MB * 1024 * 1024,
+      allowedTypes: [...ALLOWED_IMAGE_TYPES],
+      errorMessages: uploadErrorMessages,
+      uploadFunction,
+      sentryTransactionName: 'uploadProfilePicture',
+      onError: onImageUploadError,
+      removeFunction,
+    });
 
-  const isProcessing = isImageUploading || isUpdating || isRemoving;
+  const isProcessing = isLoading || isUpdating;
 
   return {
     fileInputRef,
     handleUploadPicture,
     handleFileSelect,
-    removeFunction,
+    handleRemovePicture,
     isProcessing,
     translationParams,
     t,

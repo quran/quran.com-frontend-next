@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import { logErrorToSentry } from '@/lib/sentry';
 
 interface UseImageUploadReturn {
-  isUploading: boolean;
+  isLoading: boolean;
   fileInputRef: React.RefObject<HTMLInputElement>;
   handleUploadPicture: () => void;
   handleRemovePicture: () => Promise<void>;
@@ -28,7 +28,7 @@ interface UploadImageOptions {
 }
 
 const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn => {
-  const [isUploading, setIsUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
@@ -105,7 +105,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
       return;
     }
 
-    setIsUploading(true);
+    setIsLoading(true);
 
     try {
       await uploadImage(file);
@@ -120,7 +120,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
       });
       onError?.(error);
     } finally {
-      setIsUploading(false);
+      setIsLoading(false);
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
@@ -137,7 +137,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
       return;
     }
 
-    setIsUploading(true);
+    setIsLoading(true);
 
     try {
       await removeFunction();
@@ -149,12 +149,12 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
 
       onError?.(error);
     } finally {
-      setIsUploading(false);
+      setIsLoading(false);
     }
   };
 
   return {
-    isUploading,
+    isLoading,
     fileInputRef,
     handleUploadPicture,
     handleRemovePicture,
