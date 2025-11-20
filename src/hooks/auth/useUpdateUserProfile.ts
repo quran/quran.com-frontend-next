@@ -93,14 +93,11 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
       const { data: response, errors } = await updateUserProfile(updateData);
 
       if (!response.success) {
-        // Return errors if they exist, otherwise show generic error toast
-        if (errors.avatar) {
-          return {
-            errors: {
-              avatar: t('errors.file-exceeds-limit'),
-            },
-          };
+        // Return full errors map if any field-level errors exist
+        if (errors && Object.keys(errors).length > 0) {
+          return { errors };
         }
+        // Only show generic toast when errors map is empty or undefined
         toast(t('error.general'), {
           status: ToastStatus.Error,
         });

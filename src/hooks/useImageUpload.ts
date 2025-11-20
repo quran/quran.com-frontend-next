@@ -22,7 +22,7 @@ interface UploadImageOptions {
   maxSize?: number; // in bytes
   allowedTypes?: string[];
   errorMessages?: ValidationErrorMessages;
-  uploadFunction?: (base64String: string, file: File) => Promise<void>;
+  uploadFunction?: (base64String: string) => Promise<void>;
   removeFunction?: () => Promise<void>;
   sentryTransactionName?: string;
 }
@@ -86,7 +86,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     }
 
     const fileData = await convertFileToBase64(file);
-    await uploadFunction(fileData, file);
+    await uploadFunction(fileData);
     onSuccess?.();
   };
 
