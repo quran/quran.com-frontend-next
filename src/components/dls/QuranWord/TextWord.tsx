@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { decamelizeKeys } from 'humps';
@@ -36,9 +36,10 @@ const UTHMANI_HAFS_FONTS = decamelizeKeys({
 const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => {
   const mappedFont = UTHMANI_HAFS_FONTS[font];
   const isIndoPakFont = mappedFont === INDO_PAK;
-  const hasIndoPakStopSign =
-    isIndoPakFont && Array.from(text).some((char) => INDO_PAK_STOP_SIGN_CHARS.has(char));
-
+  const hasIndoPakStopSign = useMemo(
+    () => isIndoPakFont && Array.from(text).some((char) => INDO_PAK_STOP_SIGN_CHARS.has(char)),
+    [isIndoPakFont, text],
+  );
   return (
     <span
       className={classNames(styles.word, {
