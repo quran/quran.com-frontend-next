@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import type React from 'react';
 
 import { logErrorToSentry } from '@/lib/sentry';
 
@@ -24,7 +25,6 @@ interface UploadImageOptions {
   uploadFunction?: (base64String: string, file: File) => Promise<void>;
   removeFunction?: () => Promise<void>;
   sentryTransactionName?: string;
-  convertToBase64?: boolean; // default: true
 }
 
 const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn => {
@@ -38,7 +38,6 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     uploadFunction,
     removeFunction,
     sentryTransactionName = 'imageUpload',
-    convertToBase64 = true,
     onSuccess,
     onError,
   } = options;
@@ -86,12 +85,8 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
       throw new Error('Upload function is required');
     }
 
-    let fileData: string | File = file;
-    if (convertToBase64) {
-      fileData = await convertFileToBase64(file);
-    }
-
-    await uploadFunction(fileData as string, file);
+    const fileData = await convertFileToBase64(file);
+    await uploadFunction(fileData, file);
     onSuccess?.();
   };
 

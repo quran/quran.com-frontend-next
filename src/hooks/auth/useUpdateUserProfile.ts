@@ -34,12 +34,7 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const buildUpdateData = (data: UpdateUserProfileData) => {
-    const updateData: {
-      firstName?: string;
-      lastName?: string;
-      avatar?: string;
-      removeAvatar?: boolean;
-    } = {};
+    const updateData: Partial<UpdateUserProfileData> = {};
 
     if (data.firstName !== undefined) {
       updateData.firstName = data.firstName.trim();
@@ -58,9 +53,11 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
   };
 
   const updateUserProfileCache = (data: UpdateUserProfileData) => {
+    const isAvatarChange = data.avatar !== undefined || data.removeAvatar;
     mutate(
       makeUserProfileUrl(),
-      (currentProfileData: UserProfile) => {
+      (currentProfileData: UserProfile | undefined) => {
+        const current = currentProfileData || {};
         const updatedData: Partial<UserProfile> = {};
         if (data.firstName !== undefined) {
           updatedData.firstName = data.firstName.trim();
@@ -68,16 +65,20 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
         if (data.lastName !== undefined) {
           updatedData.lastName = data.lastName.trim();
         }
-        if (data.avatar !== undefined || data.removeAvatar) {
-          updatedData.photoUrl = null;
+        if (isAvatarChange) {
+          if (data.removeAvatar) {
+            updatedData.photoUrl = null;
+          } else if (data.avatar !== undefined) {
+            updatedData.photoUrl = data.avatar;
+          }
         }
         return {
-          ...currentProfileData,
+          ...current,
           ...updatedData,
         };
       },
       {
-        revalidate: false,
+        revalidate: isAvatarChange,
       },
     );
   };

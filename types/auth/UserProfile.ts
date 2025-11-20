@@ -14,7 +14,7 @@ interface UserProfile {
     medium: string;
     small: string;
   };
-  photoUrl?: string;
+  photoUrl: string | null;
   requiredFields: FormField[];
   announcement: Announcement;
   consents: Record<string, boolean>;
