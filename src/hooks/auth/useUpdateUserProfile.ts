@@ -8,12 +8,12 @@ import UserProfile from '@/types/auth/UserProfile';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { updateUserProfile } from '@/utils/auth/authRequests';
 
-type UpdateUserProfileData = {
+interface UpdateUserProfileData {
   firstName?: string;
   lastName?: string;
   avatar?: string;
   removeAvatar?: boolean;
-};
+}
 
 interface UseUpdateUserProfileReturn {
   updateProfile: (
