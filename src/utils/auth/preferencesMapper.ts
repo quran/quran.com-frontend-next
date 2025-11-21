@@ -102,14 +102,18 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
   });
 
   // Use user selected language if available, otherwise fall back to detected language
-  if (
-    !preferenceGroups[PreferenceGroup.LANGUAGE] ||
-    !preferenceGroups[PreferenceGroup.LANGUAGE].language
-  ) {
-    preferenceGroups[PreferenceGroup.LANGUAGE] = {
-      language: state.defaultSettings.detectedLanguage,
-    };
-  }
+  const existingLanguagePreferences = preferenceGroups[PreferenceGroup.LANGUAGE] || {};
+  const fallbackLanguage =
+    existingLanguagePreferences.language ?? state?.defaultSettings?.detectedLanguage;
+
+  preferenceGroups[PreferenceGroup.LANGUAGE] = {
+    ...existingLanguagePreferences,
+    language: fallbackLanguage,
+  };
+
+  preferenceGroups[PreferenceGroup.USER_CUSTOMIZATION] = {
+    userHasCustomised: state?.defaultSettings?.userHasCustomised ?? false,
+  };
 
   return preferenceGroups;
 };

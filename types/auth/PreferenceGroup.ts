@@ -6,5 +6,6 @@ enum PreferenceGroup {
   QURAN_READER_STYLES = 'quranReaderStyles',
   READING = 'reading',
   LANGUAGE = 'language',
+  USER_CUSTOMIZATION = 'userHasCustomized',
 }
 export default PreferenceGroup;

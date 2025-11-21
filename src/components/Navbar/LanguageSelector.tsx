@@ -19,6 +19,7 @@ import {
   selectUserHasCustomised,
   selectDetectedCountry,
   setDefaultsFromCountryPreference,
+  persistCurrentSettings,
 } from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -65,12 +66,24 @@ const LanguageSelector = ({
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
+    const loggedIn = isLoggedIn();
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (!userHasCustomised) {
       const preferenceCountry = getCountryCodeForPreferences(newLocale, detectedCountry);
       const countryPreference = await getCountryLanguagePreference(newLocale, preferenceCountry);
       if (countryPreference) {
-        dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
+        await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
+        if (loggedIn) {
+          try {
+            await dispatch(persistCurrentSettings());
+          } catch (persistError) {
+            // eslint-disable-next-line no-console
+            console.error(
+              'Failed to persist settings after applying defaults on language change',
+              persistError,
+            );
+          }
+        }
       }
     }
     logValueChange('locale', lang, newLocale);
@@ -78,7 +91,7 @@ const LanguageSelector = ({
     setLocaleCookie(newLocale);
     await setLanguage(newLocale);
 
-    if (isLoggedIn()) {
+    if (loggedIn) {
       addOrUpdateUserPreference(
         PreferenceGroup.LANGUAGE,
         newLocale,

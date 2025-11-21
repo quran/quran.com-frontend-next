@@ -7,6 +7,7 @@ import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import {
   setAyahReflectionsLanguageIsoCodes,
   setLearningPlanLanguageIsoCodes,
+  setUserHasCustomised,
 } from '@/redux/slices/defaultSettings';
 import { getUserPreferences } from '@/utils/auth/api';
 import { setLocaleCookie } from '@/utils/cookies';
@@ -66,8 +67,16 @@ export const syncPreferencesFromServer = async ({
 }: SyncPreferencesParams): Promise<SyncPreferencesResult> => {
   const userPreferences = await getUserPreferences();
   if (!hasUserPreferences(userPreferences)) {
+    dispatch(setUserHasCustomised(false));
     return { hasRemotePreferences: false };
   }
+
+  const userCustomizationPreferences = userPreferences[PreferenceGroup.USER_CUSTOMIZATION];
+  const remoteUserHasCustomised =
+    typeof userCustomizationPreferences?.userHasCustomised === 'boolean'
+      ? userCustomizationPreferences.userHasCustomised
+      : false;
+  dispatch(setUserHasCustomised(remoteUserHasCustomised));
 
   const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE]?.language;
   const preferencesLocale = remoteLocale || locale;

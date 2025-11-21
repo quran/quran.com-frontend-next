@@ -6,6 +6,9 @@ import { setIsUsingDefaultSettings, setUserHasCustomised } from '../slices/defau
 import SliceName from '../types/SliceName';
 
 import { RESET_SETTINGS_EVENT } from '@/redux/actions/reset-settings';
+import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const OBSERVED_ACTIONS = [
   `${SliceName.THEME}/setTheme`,
@@ -38,6 +41,16 @@ const OBSERVED_ACTIONS = [
  * @param {MiddlewareAPI<Dispatch<AnyAction>} storeAPI
  * @returns {Dispatch<any>(action: any) => any}
  */
+const persistUserCustomization = (value: boolean) => {
+  if (!isLoggedIn()) return;
+  addOrUpdateUserPreference('userHasCustomised', value, PreferenceGroup.USER_CUSTOMIZATION).catch(
+    (error) => {
+      // eslint-disable-next-line no-console
+      console.error('Failed to persist userHasCustomised flag', error);
+    },
+  );
+};
+
 const DefaultSettingsMiddleware: Middleware<
   // eslint-disable-next-line @typescript-eslint/ban-types
   {}, // Most middleware do not modify the dispatch return value
@@ -49,11 +62,16 @@ const DefaultSettingsMiddleware: Middleware<
     const { type } = action;
     // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
     if (OBSERVED_ACTIONS.includes(type)) {
+      const alreadyCustomised = storeAPI.getState().defaultSettings.userHasCustomised;
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
       storeAPI.dispatch({ type: setUserHasCustomised.type, payload: true });
+      if (!alreadyCustomised) {
+        persistUserCustomization(true);
+      }
     } else if (type === RESET_SETTINGS_EVENT) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });
       storeAPI.dispatch({ type: setUserHasCustomised.type, payload: false });
+      persistUserCustomization(false);
     }
     return next(action);
   };
