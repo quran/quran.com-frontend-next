@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from './index.module.scss';
@@ -19,6 +19,7 @@ import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
@@ -128,14 +129,20 @@ const ProfilePage: NextPage<Props> = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/profile',
+  async ({ locale }, languageResult) => {
+    const allChaptersData = await getAllChaptersData(locale);
 
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+    return {
+      props: {
+        chaptersData: allChaptersData,
+        ...(languageResult.countryLanguagePreference && {
+          countryLanguagePreference: languageResult.countryLanguagePreference,
+        }),
+      },
+    };
+  },
+);
 
 export default ProfilePage;

@@ -10,6 +10,7 @@ import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 import styles from './MediaMakerContent.module.scss';
 
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import Language from '@/types/Language';
 import Alignment from '@/types/Media/Alignment';
 import { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
@@ -61,7 +62,7 @@ const MediaMakerContent: React.FC<Props> = ({
   chapterEnglishName,
   isPlayer = false,
 }) => {
-  const chaptersDataArabic = useGetChaptersData('ar');
+  const chaptersDataArabic = useGetChaptersData(Language.AR);
   const firstVerseTiming = audio?.verseTimings[0];
 
   const startFrom = useMemo(() => {

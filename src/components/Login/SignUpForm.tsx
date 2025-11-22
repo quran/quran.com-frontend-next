@@ -46,6 +46,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
       className={styles.submitButton}
+      data-testid="signup-submit-button"
     >
       {t('sign-up')}
     </Button>

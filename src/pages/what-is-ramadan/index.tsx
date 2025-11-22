@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import classNames from 'classnames';
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import WhatIsRamadanArabic from './WhatIsRamadanArabic';
@@ -13,9 +13,9 @@ import InlineLink from '@/components/RamadanActivity/InlineLink';
 import { getWhatIsRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getWhatIsRamadanNavigationUrl();
 const WhatIsRamadanPage: NextPage = (): JSX.Element => {
@@ -40,6 +40,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
             <h1>Ramadan: A Journey of Reflection, Renewal, and Revelation.</h1>
             <div className={styles.subSection}>
               <h2>What is Ramadan?</h2>
+
               <div>
                 At the heart of Ramadan lies the Quran, the holy book of Islam. Revealed over 1,400
                 years ago during this blessed month, the Quran is more than just a scripture; it is
@@ -183,14 +184,6 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/what-is-ramadan');
 
 export default WhatIsRamadanPage;

@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -18,7 +18,6 @@ import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -29,6 +28,7 @@ import {
   getQuranicCalendarNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = getBeyondRamadanNavigationUrl();
@@ -308,14 +308,6 @@ const BeyondRamadanPage: NextPage = (): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/beyond-ramadan');
 
 export default BeyondRamadanPage;

@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import { getReflectionTabs, handleReflectionViewed } from './helpers';
 import styles from './ReflectionBodyContainer.module.scss';
@@ -11,6 +12,7 @@ import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -22,6 +24,7 @@ import {
   REFLECTION_POST_TYPE_ID,
   makeAyahReflectionsUrl,
 } from '@/utils/quranReflect/apiPaths';
+import { reflectionLanguagesToLocaleCodes } from '@/utils/quranReflect/locale';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
 
@@ -54,6 +57,8 @@ const ReflectionBodyContainer = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedContentType, setSelectedContentType] = useState(initialContentType);
   const { lang, t } = useTranslation();
+  const reflectionLanguages = useSelector(selectAyahReflectionsLanguages);
+  const reflectionLanguageIsoCodes = reflectionLanguagesToLocaleCodes(reflectionLanguages);
 
   const handleTabChange = (value: ContentType) => {
     logEvent('reflection_view_tab_change', { tab: value });
@@ -104,6 +109,10 @@ const ReflectionBodyContainer = ({
           surahId: selectedChapterId,
           ayahNumber: selectedVerseNumber,
           locale: lang,
+
+          reviewed: true,
+          reflectionLanguages: reflectionLanguageIsoCodes,
+
           postTypeIds: [
             selectedContentType === ContentType.REFLECTIONS
               ? REFLECTION_POST_TYPE_ID

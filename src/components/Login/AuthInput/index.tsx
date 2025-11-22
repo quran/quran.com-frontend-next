@@ -16,6 +16,7 @@ interface AuthInputProps {
   name?: string;
   autoComplete?: string;
   className?: string;
+  dataTestId?: string;
 }
 
 /**
@@ -34,6 +35,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
   name,
   autoComplete,
   className,
+  dataTestId,
 }) => {
   return (
     <Input
@@ -53,6 +55,7 @@ const AuthInput: React.FC<AuthInputProps> = ({
       inputClassName={classNames(styles.authInput, {
         [styles.hasValue]: value,
       })}
+      dataTestId={dataTestId}
       {...(autoComplete && { autoComplete })}
     />
   );

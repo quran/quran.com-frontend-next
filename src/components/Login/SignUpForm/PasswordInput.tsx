@@ -11,9 +11,10 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  dataTestId?: string;
 }
 
-const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder }) => {
+const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder, dataTestId }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -27,6 +28,7 @@ const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder }) => {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        data-testid={dataTestId}
       />
       <button
         type="button"

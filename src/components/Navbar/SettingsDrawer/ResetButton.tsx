@@ -1,6 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
-import { useContext } from 'react';
-
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,23 +7,19 @@ import styles from './ResetButton.module.scss';
 
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import resetSettings from '@/redux/actions/reset-settings';
-import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
-import { persistDefaultSettings } from '@/redux/slices/defaultSettings';
+import { logErrorToSentry } from '@/lib/sentry';
+import { persistCurrentSettings, resetDefaultSettings } from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
-// reset button will dispatch a `reset` action
-// reducers will listen to this action
-// for example, check slices/theme.ts. it has extra reducer that listens to `reset` action
+// Reset button will dispatch the new resetDefaultSettings thunk
+// which re-detects locale and fetches country preferences
 const ResetButton = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { t, lang } = useTranslation('common');
   const toast = useToast();
-  const audioService = useContext(AudioPlayerMachineContext);
 
   const cleanupUrlAndShowSuccess = () => {
     const queryParams = [
@@ -43,34 +36,28 @@ const ResetButton = () => {
     toast(t('settings.reset-notif'), { status: ToastStatus.Success });
   };
 
-  const resetAndSetInitialState = () => {
-    dispatch(resetSettings(lang));
-    audioService.send({
-      type: 'SET_INITIAL_CONTEXT',
-      ...DEFAULT_XSTATE_INITIAL_STATE,
-    });
-  };
-
   const onResetSettingsClicked = async () => {
     logButtonClick('reset_settings');
-    if (isLoggedIn()) {
-      try {
-        await dispatch(persistDefaultSettings(lang)).then(unwrapResult);
-        resetAndSetInitialState();
-        cleanupUrlAndShowSuccess();
-      } catch {
-        toast(t('error.general'), { status: ToastStatus.Error });
+    try {
+      await dispatch(resetDefaultSettings(lang)).then(unwrapResult);
+
+      // If logged in, persist the new defaults to the server
+      if (isLoggedIn()) {
+        await dispatch(persistCurrentSettings()).then(unwrapResult);
       }
-    } else {
-      resetAndSetInitialState();
       cleanupUrlAndShowSuccess();
+    } catch (e) {
+      logErrorToSentry(e);
+      toast(t('error.general'), { status: ToastStatus.Error });
     }
   };
 
   return (
     <>
       <div className={styles.resetButtonContainer}>
-        <Button onClick={onResetSettingsClicked}>{t('settings.reset-cta')}</Button>
+        <Button onClick={onResetSettingsClicked} data-testid="reset-settings-button">
+          {t('settings.reset-cta')}
+        </Button>
       </div>
     </>
   );

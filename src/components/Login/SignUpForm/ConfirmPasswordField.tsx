@@ -6,10 +6,16 @@ interface Props {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  dataTestId?: string;
 }
 
-const ConfirmPasswordField: FC<Props> = ({ value, onChange, placeholder }) => (
-  <PasswordInput value={value} onChange={onChange} placeholder={placeholder} />
+const ConfirmPasswordField: FC<Props> = ({ value, onChange, placeholder, dataTestId }) => (
+  <PasswordInput
+    value={value}
+    onChange={onChange}
+    placeholder={placeholder}
+    dataTestId={dataTestId}
+  />
 );
 
 export default ConfirmPasswordField;

@@ -2,7 +2,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -19,11 +19,8 @@ import { getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
 import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
+import withSsrRedux from '@/utils/withSsrRedux';
 import ChaptersData from 'types/ChaptersData';
 
 type QuestionPageProps = {
@@ -71,60 +68,49 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, v
 };
 
 /**
- * Get static props for the question page
+ * Get server side props for the question page
  * @param {object} context - The context object
  * @param {object} context.params - The route parameters
  * @param {string} context.locale - The current locale
  * @returns {Promise<object>} The props for the question page
  */
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId, questionId } = params;
-  const chaptersData = await getAllChaptersData(locale);
-  const questionIdString = String(questionId);
-  const verseKeyString = String(chapterId);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/answers/[questionId]',
+  async (context) => {
+    const { params, locale } = context;
+    const { chapterId, questionId } = params;
+    const chaptersData = await getAllChaptersData(locale);
+    const questionIdString = String(questionId);
+    const verseKeyString = String(chapterId);
 
-  // Validate the verse key
-  if (!isValidVerseKey(chaptersData, verseKeyString)) {
-    return {
-      notFound: true,
-    };
-  }
+    // Validate the verse key
+    if (!isValidVerseKey(chaptersData, verseKeyString)) {
+      return { notFound: true };
+    }
 
-  try {
-    const questionData = await getQuestionById(questionIdString);
+    try {
+      const questionData = await getQuestionById(questionIdString);
 
-    return {
-      props: {
-        questionId: questionIdString,
-        chaptersData,
-        questionData,
-        verseKey: verseKeyString,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-QuestionPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        questionId: String(params.questionId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-/**
- * Get static paths for the question page
- * @returns {object} Empty paths array with blocking fallback
- */
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered pages at build time
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist
-});
+      return {
+        props: {
+          questionId: questionIdString,
+          chaptersData,
+          questionData,
+          verseKey: verseKeyString,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-QuestionPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          questionId: String(params.questionId),
+          locale,
+        },
+      });
+      return { notFound: true };
+    }
+  },
+);
 
 export default QuestionPage;

@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
@@ -11,6 +11,7 @@ import layoutStyles from '@/pages/index.module.scss';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotificationSettingsNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const NotificationSettingsPage = () => {
   const { t, lang } = useTranslation('common');
@@ -44,14 +45,17 @@ const NotificationSettingsPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/notification-settings',
+  async ({ locale }) => {
+    const allChaptersData = await getAllChaptersData(locale);
 
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+    return {
+      props: {
+        chaptersData: allChaptersData,
+      },
+    };
+  },
+);
 
 export default withAuth(NotificationSettingsPage);

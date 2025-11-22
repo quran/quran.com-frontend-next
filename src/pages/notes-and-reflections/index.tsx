@@ -1,15 +1,15 @@
 /* eslint-disable max-lines */
 
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import NotesTabs from '@/components/Notes/NotesPage/Tabs';
 import layoutStyles from '@/pages/index.module.scss';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const NotesAndReflectionsPage = () => {
   const { t, lang } = useTranslation();
@@ -35,14 +35,6 @@ const NotesAndReflectionsPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/notes-and-reflections');
 
 export default withAuth(NotesAndReflectionsPage);

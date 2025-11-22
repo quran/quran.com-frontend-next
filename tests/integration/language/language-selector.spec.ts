@@ -19,7 +19,7 @@ test(
     // 1. make sure the language selector items are not visible
     await expect(page.getByRole('menuitem', { name: 'English' })).not.toBeVisible();
     // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
+    await page.getByTestId('language-selector-button-navbar').click();
     // 3. Make sure all language selector items are visible
     await Promise.all(
       languages.map(async (language) => {
@@ -59,7 +59,7 @@ test(
     // 1. Make sure we are on the English version
     await expect(page).toHaveURL('/');
     // 2. Open the language selector menu
-    await page.getByTestId('language-selector-button').click();
+    await page.getByTestId('language-selector-button-navbar').click();
     // 3. select the Bengali language and make sure we are navigated to /bn
     await Promise.all([
       page.getByRole('menuitem', { name: 'বাংলা' }).click(),
@@ -76,7 +76,7 @@ test(
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
     // 2. Open the language selector menu
-    await page.getByTestId('language-selector-button').click();
+    await page.getByTestId('language-selector-button-navbar').click();
 
     // 3. select French and wait for navigation to /fr
     await Promise.all([

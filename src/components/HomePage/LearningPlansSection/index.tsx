@@ -7,15 +7,12 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './LearningPlansSection.module.scss';
 import Loading from './Loading';
 
-import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import NewLabel from '@/dls/Badge/NewLabel';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
-import { Course, CoursesResponse } from '@/types/auth/Course';
-import { privateFetcher } from '@/utils/auth/api';
-import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
+import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCourseNavigationUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
@@ -31,7 +28,11 @@ const learningPlansSorter = (a: Course, b: Course) => {
   return 0;
 };
 
-const LearningPlansSection = () => {
+type LearningPlansSectionProps = {
+  courses: Course[];
+};
+
+const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
   const { t } = useTranslation('home');
 
   const onSeeMoreClicked = () => {
@@ -66,12 +67,11 @@ const LearningPlansSection = () => {
           </Link>
         </div>
       </div>
-      <DataFetcher
-        loading={Loading}
-        fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false })}
-        render={(data: CoursesResponse) => {
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
+      {!courses?.length ? (
+        <Loading />
+      ) : (
+        (() => {
+          const sortedCourses = [...courses].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(
             (c) => typeof c.isCompleted === 'undefined',
           );
@@ -152,8 +152,8 @@ const LearningPlansSection = () => {
               })}
             </div>
           );
-        }}
-      />
+        })()
+      )}
     </>
   );
 };
