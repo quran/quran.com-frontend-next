@@ -41,24 +41,12 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
     getAvailableTranslations(lang).then((res) => res),
   );
 
-  const availableTranslations = useMemo(
-    () =>
-      (translationsResponse?.translations ?? []) as {
-        id: number;
-        translatedName?: { name: string };
-        resourceName?: string;
-      }[],
-    [translationsResponse],
-  );
-
   const selectedTranslationsOptions = useMemo<SelectOption[]>(() => {
+    const availableTranslations = translationsResponse?.translations ?? [];
     return availableTranslations
       .filter((tr) => selectedTranslationsFromPrefs.includes(tr.id))
-      .map((tr) => ({
-        label: tr.translatedName?.name ?? tr.resourceName ?? '',
-        value: tr.id,
-      }));
-  }, [availableTranslations, selectedTranslationsFromPrefs]);
+      .map((tr) => ({ label: tr.translatedName?.name ?? '', value: tr.id }));
+  }, [translationsResponse, selectedTranslationsFromPrefs]);
 
   useEffect(() => {
     if (selectedTranslationsOptions.length === 1 && !selectedTranslationId) {
@@ -105,15 +93,19 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
       const chapterNumber = getChapterNumberFromKey(verse.verseKey);
       const verseNumber = getVerseNumberFromKey(verse.verseKey);
 
-      await submitTranslationFeedback({
+      const response = await submitTranslationFeedback({
         translationId: Number(selectedTranslationId),
         surahNumber: chapterNumber,
         ayahNumber: verseNumber,
         feedback,
       });
 
-      toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
-      onClose();
+      if (response && response.success) {
+        toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
+        onClose();
+      } else {
+        toast(t('error.general'), { status: ToastStatus.Error });
+      }
     } catch {
       toast(t('error.general'), { status: ToastStatus.Error });
     } finally {
