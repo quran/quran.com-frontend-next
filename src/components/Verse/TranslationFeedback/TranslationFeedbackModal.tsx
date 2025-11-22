@@ -140,7 +140,7 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
         {errors.translation && <div className={styles.error}>{errors.translation}</div>}
       </div>
 
-      <TranslationPreview verse={verse} lang={lang} selectedTranslationId={selectedTranslationId} />
+      <TranslationPreview verse={verse} selectedTranslationId={selectedTranslationId} />
 
       <div className={styles.inputGroup}>
         <TextArea

@@ -1,64 +1,73 @@
 import React, { useMemo } from 'react';
 
-import { shallowEqual, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useTranslation from 'next-translate/useTranslation';
 
-import { fetcher } from '@/api';
+import styles from './TranslationPreview.module.scss';
+
 import Loader from '@/components/QuranReader/Loader';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { VersesResponse } from '@/types/ApiResponses';
+import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
+import Translation from '@/types/Translation';
 import { WordVerse } from '@/types/Word';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVersesUrl } from '@/utils/apiPaths';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 type Props = {
   verse: WordVerse;
-  lang: string;
   selectedTranslationId: string;
 };
 
-const TranslationPreview: React.FC<Props> = ({ verse, lang, selectedTranslationId }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) => {
   const shouldFetch = Boolean(selectedTranslationId);
+  const { t } = useTranslation('common');
 
-  const { data: verseResponse, isValidating: isLoadingTranslation } =
-    useSWRImmutable<VersesResponse>(
-      shouldFetch
-        ? makeVersesUrl(verse.chapterId, lang, {
-            ...getDefaultWordFields(quranReaderStyles.quranFont),
-            translationFields: 'resource_name,language_id',
-            translations: selectedTranslationId,
-            mushaf: getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-            from: verse.verseKey,
-            to: verse.verseKey,
-          })
-        : null,
-      fetcher,
+  const chapterNumber = getChapterNumberFromKey(verse.verseKey);
+  const verseNumber = getVerseNumberFromKey(verse.verseKey);
+
+  const { data, translationFontScale } = useVerseAndTranslation({
+    chapter: chapterNumber,
+    from: verseNumber,
+    to: verseNumber,
+    translationsLimit: undefined,
+  });
+
+  const isLoadingTranslation = !data && shouldFetch;
+
+  const translation = useMemo((): Translation | null => {
+    const translations = data?.verses?.[0]?.translations;
+    if (!translations) return null;
+
+    const selectedTranslation = translations.find(
+      (tran) => tran.resourceId === parseInt(selectedTranslationId, 10),
     );
 
-  const translation = useMemo(() => {
-    const selectedTranslation = verseResponse?.verses?.[0]?.translations?.[0];
-    if (!selectedTranslation) return { languageId: undefined, text: '' };
-    return { languageId: selectedTranslation.languageId, text: selectedTranslation.text };
-  }, [verseResponse]);
+    return selectedTranslation ?? null;
+  }, [data, selectedTranslationId]);
 
   if (!shouldFetch) return null;
 
-  return (
-    <div>
-      {isLoadingTranslation ? (
+  if (isLoadingTranslation) {
+    return (
+      <div>
         <Loader />
-      ) : (
+      </div>
+    );
+  }
+
+  if (translation) {
+    return (
+      <div>
         <TranslationText
           key={selectedTranslationId}
           text={`"${translation.text}"`}
-          languageId={translation.languageId}
-          translationFontScale={quranReaderStyles.translationFontScale}
+          languageId={translation.languageId!}
+          translationFontScale={translationFontScale}
         />
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  // In Practical this should never happen
+  return <div className={styles.error}>{t('error.general')}</div>;
 };
 
 export default TranslationPreview;

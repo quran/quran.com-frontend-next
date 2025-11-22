@@ -21,9 +21,3 @@ export type PagesLookUpRequest = {
   from?: number | string;
   to?: number | string;
 };
-
-export type TranslationFeedbackRequest = {
-  translationId: number;
-  verseKey: string;
-  feedback: string;
-};
