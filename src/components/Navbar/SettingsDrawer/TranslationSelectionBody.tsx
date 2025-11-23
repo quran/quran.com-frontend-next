@@ -7,10 +7,6 @@ import omit from 'lodash/omit';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
-import { TranslationsResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
-import AvailableTranslation from 'types/AvailableTranslation';
-import QueryParam from 'types/QueryParam';
 
 import styles from './SearchSelectionBody.module.scss';
 
@@ -34,6 +30,10 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
 import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
+import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+import AvailableTranslation from 'types/AvailableTranslation';
+import QueryParam from 'types/QueryParam';
 
 const TranslationSelectionBody = () => {
   const {
