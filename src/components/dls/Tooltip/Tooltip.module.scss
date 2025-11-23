@@ -53,3 +53,11 @@
     fill: var(--color-error-medium);
   }
 }
+.info {
+  background-color: var(--color-background-elevated);
+  color: var(--color-text-default);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  & > span {
+    fill: var(--color-background-elevated);
+  }
+}
