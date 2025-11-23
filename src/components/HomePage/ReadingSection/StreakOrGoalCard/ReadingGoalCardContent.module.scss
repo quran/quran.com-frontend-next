@@ -9,8 +9,8 @@
 }
 
 .circularProgressbar {
-    height: 60px;
-    width: 60px;
+    height: calc(2 * var(--spacing-large-px));
+    width: calc(2 * var(--spacing-large-px));
     flex-shrink: 0;
 }
 
@@ -47,8 +47,8 @@
 .goalArrowIcon {
     >svg {
         @include breakpoints.smallerThanTablet {
-            width: 12px;
-            height: 12px;
+            width: var(--spacing-small2-px);
+            height: var(--spacing-small2-px);
         }
     }
 }
