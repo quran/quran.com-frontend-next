@@ -110,6 +110,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
             key={locale}
             onClick={() => onLanguageChange(locale)}
             variant={ButtonVariant.Ghost}
+            aria-current={locale === lang ? 'true' : undefined}
             className={classNames(styles.languageItem, {
               [styles.selected]: locale === lang,
             })}
