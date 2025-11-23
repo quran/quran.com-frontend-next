@@ -37,7 +37,7 @@ interface Props {
   contentStyles?: string;
   contentSideOffset?: number;
   isContainerSpan?: boolean;
-  type?: TooltipType;
+  tooltipType?: TooltipType;
 }
 
 const Popover: React.FC<Props> = ({
@@ -57,7 +57,7 @@ const Popover: React.FC<Props> = ({
   triggerStyles,
   contentStyles,
   isContainerSpan = false,
-  type,
+  tooltipType,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -67,7 +67,7 @@ const Popover: React.FC<Props> = ({
       avoidCollisions={avoidCollisions}
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
-        [styles.info]: type === TooltipType.INFO,
+        [styles.info]: tooltipType === TooltipType.INFO,
         [contentStyles]: contentStyles,
       })}
     >
@@ -95,29 +95,16 @@ const Popover: React.FC<Props> = ({
     </RadixPopover.Root>
   );
 
+  const containerClass = classNames({
+    [styles.container]: defaultStyling,
+    [styles.containerInfo]: tooltipType === TooltipType.INFO,
+  });
+
   if (isContainerSpan) {
-    return (
-      <span
-        className={classNames({
-          [styles.container]: defaultStyling,
-          [styles.containerInfo]: type === TooltipType.INFO,
-        })}
-      >
-        {containerChild}
-      </span>
-    );
+    return <span className={containerClass}>{containerChild}</span>;
   }
 
-  return (
-    <div
-      className={classNames({
-        [styles.container]: defaultStyling,
-        [styles.containerInfo]: type === TooltipType.INFO,
-      })}
-    >
-      {containerChild}
-    </div>
-  );
+  return <div className={containerClass}>{containerChild}</div>;
 };
 
 export default Popover;

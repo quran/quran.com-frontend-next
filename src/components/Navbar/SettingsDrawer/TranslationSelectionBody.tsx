@@ -117,10 +117,12 @@ const TranslationSelectionBody = () => {
               {translation.shortDescription?.description && (
                 <HoverablePopover
                   content={translation.shortDescription.description}
-                  type={TooltipType.INFO}
+                  tooltipType={TooltipType.INFO}
                   contentSide={ContentSide.TOP}
                 >
-                  <IconInfo className={styles.infoIcon} />
+                  <span aria-label={t('aria.translation-info')}>
+                    <IconInfo className={styles.infoIcon} />
+                  </span>
                 </HoverablePopover>
               )}
             </div>
@@ -128,7 +130,7 @@ const TranslationSelectionBody = () => {
         </div>
       );
     },
-    [onTranslationsChange, selectedTranslations],
+    [onTranslationsChange, selectedTranslations, t],
   );
 
   return (
