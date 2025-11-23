@@ -49,11 +49,16 @@ const Collapsible = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
+  const handleOpenChange = (newOpen: boolean) => {
+    setIsOpen(newOpen);
+    if (onOpenChange) {
+      onOpenChange(newOpen);
+    }
+  };
+
   useEffect(() => {
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
-
-  const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
 
   const onSuffixClicked = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -63,9 +68,9 @@ const Collapsible = ({
   };
 
   return (
-    <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
+    <CollapsiblePrimitive.Root onOpenChange={handleOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
-        <div className={classNames(styles.header, headerClassName)} onClick={onHeaderClicked}>
+        <div className={classNames(styles.header, headerClassName)}>
           {direction === CollapsibleDirection.Left ? (
             <>
               <div className={classNames(styles.headerLeft, headerLeftClassName)}>
