@@ -13,6 +13,12 @@ import IconSquareMore from '@/icons/square-more.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { EXTERNAL_ROUTES, QURAN_URL } from '@/utils/navigation';
 
+interface ProjectItem {
+  title: string;
+  href: string;
+  eventName: string;
+}
+
 interface OurProjectsCollapsibleProps {
   headerClassName?: string;
   headerLeftClassName?: string;
@@ -21,7 +27,7 @@ interface OurProjectsCollapsibleProps {
   descriptionClassName?: string;
 }
 
-const PROJECTS = [
+const PROJECTS: ProjectItem[] = [
   {
     title: 'Quran.com',
     href: QURAN_URL,

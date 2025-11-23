@@ -16,6 +16,14 @@ import {
   SUPPORT_URL,
 } from '@/utils/navigation';
 
+interface MenuItem {
+  title: string;
+  icon: React.ReactNode;
+  href: string;
+  eventName: string;
+  isExternalLink?: boolean;
+}
+
 interface MoreMenuCollapsibleProps {
   headerClassName?: string;
   headerLeftClassName?: string;
@@ -23,7 +31,7 @@ interface MoreMenuCollapsibleProps {
   itemTitleClassName?: string;
 }
 
-const MENUS = [
+const MENUS: MenuItem[] = [
   {
     title: 'developers',
     icon: <IconArrowRight />,
