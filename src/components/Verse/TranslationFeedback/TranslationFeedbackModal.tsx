@@ -18,10 +18,10 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { submitTranslationFeedback } from '@/utils/auth/api';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
-type Props = {
+interface Props {
   verse: WordVerse;
   onClose: () => void;
-};
+}
 
 const MAX_FEEDBACK_CHARS = 10000;
 const MIN_FEEDBACK_CHARS = 1;
@@ -30,7 +30,7 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
   const { t, lang } = useTranslation('common');
   const toast = useToast();
 
-  const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations) as number[];
+  const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations);
 
   const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
   const [feedback, setFeedback] = useState('');
@@ -38,7 +38,7 @@ const TranslationFeedbackModal: React.FC<Props> = ({ verse, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: translationsResponse } = useSWRImmutable(makeTranslationsUrl(lang), () =>
-    getAvailableTranslations(lang).then((res) => res),
+    getAvailableTranslations(lang),
   );
 
   const selectedTranslationsOptions = useMemo<SelectOption[]>(() => {

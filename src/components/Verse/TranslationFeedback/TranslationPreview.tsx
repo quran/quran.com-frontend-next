@@ -11,10 +11,10 @@ import Translation from '@/types/Translation';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
-type Props = {
+interface Props {
   verse: WordVerse;
   selectedTranslationId: string;
-};
+}
 
 const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) => {
   const shouldFetch = Boolean(selectedTranslationId);
@@ -23,14 +23,14 @@ const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) =
   const chapterNumber = getChapterNumberFromKey(verse.verseKey);
   const verseNumber = getVerseNumberFromKey(verse.verseKey);
 
-  const { data, translationFontScale } = useVerseAndTranslation({
+  const { data, error, translationFontScale } = useVerseAndTranslation({
     chapter: chapterNumber,
     from: verseNumber,
     to: verseNumber,
     translationsLimit: undefined,
   });
 
-  const isLoadingTranslation = !data && shouldFetch;
+  const isLoadingTranslation = !data && shouldFetch && !error;
 
   const translation = useMemo((): Translation | null => {
     const translations = data?.verses?.[0]?.translations;
@@ -66,7 +66,7 @@ const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) =
     );
   }
 
-  // In Practical this should never happen
+  // In practice this should never happen
   return <div className={styles.error}>{t('error.general')}</div>;
 };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -15,19 +15,19 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
-type TranslationFeedbackActionProps = {
+interface TranslationFeedbackActionProps {
   verse: WordVerse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-};
+}
 
 const CLOSE_POPOVER_AFTER_MS = 150;
 
-const TranslationFeedbackAction = ({
+const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   verse,
   isTranslationView,
   onActionTriggered,
-}: TranslationFeedbackActionProps) => {
+}) => {
   const router = useRouter();
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
