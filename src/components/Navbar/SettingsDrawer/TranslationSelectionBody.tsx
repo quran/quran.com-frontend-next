@@ -7,6 +7,10 @@ import omit from 'lodash/omit';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+import AvailableTranslation from 'types/AvailableTranslation';
+import QueryParam from 'types/QueryParam';
 
 import styles from './SearchSelectionBody.module.scss';
 
@@ -19,7 +23,7 @@ import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import { TooltipType } from '@/dls/Tooltip';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
-import IconInfo from '@/icons/info.svg';
+import IconInfo from '@/icons/information-circle-outline.svg';
 import IconSearch from '@/icons/search.svg';
 import {
   selectTranslations,
@@ -30,10 +34,6 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
 import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
-import { TranslationsResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
-import AvailableTranslation from 'types/AvailableTranslation';
-import QueryParam from 'types/QueryParam';
 
 const TranslationSelectionBody = () => {
   const {
