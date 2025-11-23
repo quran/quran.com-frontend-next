@@ -19,6 +19,19 @@
   }
 }
 
+@mixin popoverItemHoverState {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+
+  svg {
+    color: var(--color-text-inverse);
+  }
+
+  svg path {
+    stroke: var(--color-text-inverse);
+  }
+}
+
 .popoverItem {
   padding: var(--spacing-xsmall-px) var(--spacing-medium-px);
   border-radius: var(--border-radius-pill);
@@ -47,49 +60,16 @@
     }
   }
 
-  &:hover {
-    background-color: var(--color-success-medium);
-    color: var(--color-text-inverse);
-
-    svg {
-      color: var(--color-text-inverse);
-    }
-
-    svg path {
-      stroke: var(--color-text-inverse);
-    }
-  }
-
-  &[data-state='checked']:hover,
-  &.popoverItemSelected:hover {
-    background-color: var(--color-success-medium);
-    color: var(--color-text-inverse);
-
-    svg {
-      color: var(--color-text-inverse);
-    }
-
-    svg path {
-      stroke: var(--color-text-inverse);
-    }
-  }
-
   &:focus {
     background-color: transparent;
     color: inherit;
   }
 
+  &:hover,
+  &[data-state='checked']:hover,
+  &.popoverItemSelected:hover,
   &:focus:hover {
-    background-color: var(--color-success-medium);
-    color: var(--color-text-inverse);
-
-    svg {
-      color: var(--color-text-inverse);
-    }
-
-    svg path {
-      stroke: var(--color-text-inverse);
-    }
+    @include popoverItemHoverState;
   }
 
   svg path {
