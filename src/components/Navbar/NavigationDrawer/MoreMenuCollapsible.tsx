@@ -68,11 +68,11 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
   const { t } = useTranslation('common');
 
   const onOpenChange = (isOpen: boolean) => {
-    if (isOpen) {
-      logEvent('navigation_drawer_more_menu_expanded');
+    if (!isOpen) {
+      logEvent('navigation_drawer_more_menu_collapsed');
       return;
     }
-    logEvent('navigation_drawer_more_menu_collapsed');
+    logEvent('navigation_drawer_more_menu_expanded');
   };
 
   return (
