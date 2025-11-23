@@ -80,11 +80,11 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
   const { t } = useTranslation('common');
 
   const onOpenChange = (isOpen: boolean) => {
-    if (isOpen) {
-      logEvent('navigation_drawer_our_projects_expanded');
+    if (!isOpen) {
+      logEvent('navigation_drawer_our_projects_collapsed');
       return;
     }
-    logEvent('navigation_drawer_our_projects_collapsed');
+    logEvent('navigation_drawer_our_projects_expanded');
   };
 
   const handleProjectClick = (eventName: string) => () => {
