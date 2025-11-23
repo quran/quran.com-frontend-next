@@ -28,8 +28,9 @@
     }
   }
 
-  svg g {
-    clip-path: none !important;
+  svg,
+  g {
+    clip-path: none;
   }
 }
 
