@@ -8,7 +8,7 @@
 
 .popoverContent {
   padding: var(--spacing-small-px);
-  min-inline-size: unset !important;
+  min-inline-size: unset;
   max-inline-size: calc(var(--spacing-large-px) * 8);
   inline-size: 100%;
   box-shadow: var(--shadow-flat);
