@@ -68,7 +68,7 @@ export const cleanTranscript = (text: string): string => {
 export const formatVerseReferencesToLinks = (text: string): string => {
   if (!text) return '';
   return text.replace(
-    /(\d{1,2}[:-]\d{1,2}(?:-\d{1,2}(?:[:]\d{1,2})?)?)(?![^<]*<\/a>)/g,
+    /(\d{1,3}[:-]\d{1,3}(?:-\d{1,3}(?::\d{1,3})?)?)(?![^<]*<\/a>)/g,
     (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
   );
 };

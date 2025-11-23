@@ -3,7 +3,7 @@ enum AppEnv {
   TEST = 'test',
   STAGING = 'staging',
   STAGING2 = 'staging2',
-  PRE_LIVE = 'pre-live',
+  PRELIVE = 'prelive',
 }
 
 export default AppEnv;

@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
+
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
@@ -17,6 +19,8 @@ import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
   selectIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
+  setIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
