@@ -57,6 +57,7 @@ const Collapsible = ({
   };
 
   useEffect(() => {
+    if (typeof shouldOpen !== 'boolean') return;
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
 
