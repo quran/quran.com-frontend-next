@@ -69,7 +69,13 @@ const Popover: React.FC<Props> = ({
       })}
       {...(stopPropagation && {
         onClick: (e) => e.stopPropagation(),
-        onKeyDown: (e) => e.stopPropagation(),
+        // Only stop propagation for non-navigation keys (example: Enter, Space)
+        onKeyDown: (e) => {
+          // Allow Tab and Escape to propagate for accessibility
+          if (e.key !== 'Tab' && e.key !== 'Escape') {
+            e.stopPropagation();
+          }
+        },
       })}
     >
       {children}
