@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -31,6 +31,7 @@ const EVENT_NAMES = {
 const NavigationDrawerBody = (): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const [showLanguageContainer, setShowLanguageContainer] = useState(false);
+  const languageButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const onLanguageButtonClick = useCallback(() => {
     setShowLanguageContainer(true);
@@ -45,6 +46,12 @@ const NavigationDrawerBody = (): JSX.Element => {
   const onDonateClick = useCallback(() => {
     logButtonClick(EVENT_NAMES.NAV_DRAWER_DONATE);
   }, []);
+
+  useEffect(() => {
+    if (!showLanguageContainer && languageButtonRef.current) {
+      languageButtonRef.current.focus(); // restore
+    }
+  }, [showLanguageContainer]);
 
   return (
     <div className={styles.listItemsContainer}>
@@ -71,6 +78,7 @@ const NavigationDrawerBody = (): JSX.Element => {
         <div className={styles.ctaContainer}>
           <div className={styles.ctaTop}>
             <Button
+              ref={languageButtonRef}
               className={styles.languageTrigger}
               prefix={<IconGlobe />}
               variant={ButtonVariant.Ghost}

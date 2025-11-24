@@ -67,6 +67,21 @@ const Collapsible = ({
     }
   };
 
+  const onSuffixKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    // Only handle keyboard events if suffix should trigger
+    if (shouldSuffixTrigger && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      // Trigger the same behavior as click
+      const mouseEvent = {
+        preventDefault: () => {},
+        stopPropagation: () => {},
+      } as React.MouseEvent<HTMLDivElement>;
+      onSuffixClicked(mouseEvent);
+    } else if (!shouldSuffixTrigger) {
+      e.stopPropagation();
+    }
+  };
+
   return (
     <CollapsiblePrimitive.Root onOpenChange={handleOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
@@ -90,6 +105,11 @@ const Collapsible = ({
                       [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
                     })}
                     onClick={onSuffixClicked}
+                    {...(shouldSuffixTrigger && {
+                      onKeyDown: onSuffixKeyDown,
+                      role: 'button',
+                      tabIndex: 0,
+                    })}
                   >
                     {suffix}
                   </div>
