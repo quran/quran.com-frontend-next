@@ -13,7 +13,6 @@ import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useEnrollUser from '@/hooks/auth/useEnrollUser';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
-import { logErrorToSentry } from '@/lib/sentry';
 import { Course } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
@@ -31,7 +30,7 @@ type Props = {
 };
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
-  const { title, id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
+  const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
@@ -61,9 +60,9 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
 
     // Logged-in user - enroll with MANUAL method
     setIsLoading(true);
-    try {
-      await enrollUserInCourse(id, EnrollmentMethod.Manual);
+    const { success } = await enrollUserInCourse(id, EnrollmentMethod.Manual);
 
+    if (success) {
       mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
         ...currentCourse,
         isUserEnrolled: true,
@@ -72,20 +71,13 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       if (lessons?.length > 0) {
         await router.push(getLessonNavigationUrl(slug, lessons[0].slug));
       }
-    } catch (error) {
-      logErrorToSentry(error, {
-        metadata: {
-          context: `${userType}_course_enrollment`,
-          courseId: id,
-          courseSlug: slug,
-        },
-      });
+    } else {
       toast(t('common:error.general'), {
         status: ToastStatus.Error,
       });
-    } finally {
-      setIsLoading(false);
     }
+
+    setIsLoading(false);
   };
 
   // CTA mode - only show button if not enrolled
