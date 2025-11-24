@@ -35,6 +35,7 @@ interface Props {
   contentStyles?: string;
   contentSideOffset?: number;
   isContainerSpan?: boolean;
+  stopPropagation?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -54,6 +55,7 @@ const Popover: React.FC<Props> = ({
   triggerStyles,
   contentStyles,
   isContainerSpan = false,
+  stopPropagation = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -64,6 +66,10 @@ const Popover: React.FC<Props> = ({
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
         [contentStyles]: contentStyles,
+      })}
+      {...(stopPropagation && {
+        onClick: (e) => e.stopPropagation(),
+        onKeyDown: (e) => e.stopPropagation(),
       })}
     >
       {children}

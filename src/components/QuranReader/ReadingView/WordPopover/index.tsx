@@ -67,6 +67,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       triggerStyles={styles.trigger}
       contentStyles={styles.content}
       defaultStyling={false}
+      stopPropagation
     >
       <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
     </Popover>
