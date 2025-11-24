@@ -27,11 +27,11 @@ const useEnrollUser = () => {
       }
 
       try {
-        await enrollUser({
+        const { success } = await enrollUser({
           courseId,
           enrollmentMethod,
         });
-        return { success: true };
+        return { success };
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: 'useEnrollUser',
