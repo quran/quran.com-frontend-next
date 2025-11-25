@@ -1,5 +1,5 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 $sections-container-height: 2rem;
 $pixel: 1px;
@@ -11,16 +11,16 @@ $pixel: 1px;
   position: fixed;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
-  width: 100%;
+  inline-size: 100%;
   inset-block-start: calc($pixel * -1);
-  min-height: var(--context-menu-container-height);
+  min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;
 }
 
 .hide {
   display: none;
-  height: 0;
+  block-size: 0;
   visibility: hidden;
 }
 
@@ -38,13 +38,13 @@ $pixel: 1px;
 }
 
 .expandedContainer {
-  min-height: var(--context-menu-container-height);
+  min-block-size: var(--context-menu-container-height);
 }
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;
-    width: calc(100% - #{constants.$notes-side-bar-desktop-width});
+    inline-size: calc(100% - #{constants.$notes-side-bar-desktop-width});
   }
 }
 
@@ -58,16 +58,21 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  height: $sections-container-height;
+  block-size: $sections-container-height;
   padding-block: calc(var(--spacing-medium) / 2);
   display: flex;
   align-items: center;
-  padding-inline: calc(1.3 * var(--spacing-large));
+  padding-inline: var(--spacing-medium3-px);
   z-index: var(--z-index-default);
   position: relative;
   background: var(--color-background-elevated);
+
   @include breakpoints.tablet {
-    padding-inline: calc(1.2 * var(--spacing-mega));
+    padding-inline: var(--spacing-xlarge-px);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-medium3-px);
   }
 }
 
@@ -79,7 +84,7 @@ $pixel: 1px;
   @include breakpoints.smallerThanTablet {
     visibility: hidden;
     display: none;
-    height: 0;
+    block-size: 0;
     visibility: hidden;
   }
 }
@@ -89,8 +94,7 @@ $pixel: 1px;
   align-items: center;
   justify-content: space-between !important;
   padding-inline: calc(1.3 * var(--spacing-large));
-  padding-top: calc(var(--spacing-medium) * 0.75);
-  padding-bottom: calc(var(--spacing-medium) * 0.75);
+  padding-block: calc(var(--spacing-medium) * 0.75);
 }
 
 .readingPreferenceSection {
@@ -100,11 +104,56 @@ $pixel: 1px;
   }
 }
 
+.readingPreferenceContainer {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-medium);
+}
+
+.chapterNavigationRow {
+  align-items: center;
+  flex-direction: row;
+}
+
+.chapterNavigationWrapper {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-medium);
+  inline-size: 100%;
+  justify-content: space-between;
+
+  @include breakpoints.tablet {
+    padding-inline: var(--spacing-medium2-px);
+  }
+}
+
+.visibleContainer .chapterNavigationWrapper {
+  @include breakpoints.smallerThanTablet {
+    inline-size: 90vw;
+  }
+}
+
+.settingsNextToChapter {
+  display: inline-flex;
+
+  @include breakpoints.tablet {
+    display: none;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    display: inline-flex;
+  }
+}
+
+.settingsNextToSwitcher {
+  display: inline-flex;
+}
+
 .hideReadingPreferenceSectionOnMobile {
   @include breakpoints.smallerThanTablet {
     visibility: hidden;
     display: none;
-    height: 0;
+    block-size: 0;
     visibility: hidden;
   }
 }
@@ -117,7 +166,7 @@ $pixel: 1px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .pageInfoContainer {
@@ -141,8 +190,8 @@ $pixel: 1px;
   justify-content: center;
 
   svg {
-    width: 16px;
-    height: 16px;
+    inline-size: 16px;
+    block-size: 16px;
   }
 }
 
@@ -153,6 +202,7 @@ $pixel: 1px;
     color: var(--color-text-default);
   }
 }
+
 .bookmarkedIcon {
   color: var(--color-text-default);
 }
@@ -173,6 +223,7 @@ $pixel: 1px;
   align-items: center;
   cursor: pointer;
 }
+
 .chevronIconContainer {
   display: inline-flex;
   align-items: center;
@@ -189,6 +240,7 @@ $pixel: 1px;
 .rotateAuto {
   transition: var(--transition-fast);
   transform: rotate(0);
+
   @include breakpoints.tablet {
     transition: var(--transition-fast);
     transform: rotate(180deg);
@@ -197,6 +249,7 @@ $pixel: 1px;
 
 .disabledOnMobile {
   pointer-events: none;
+
   @include breakpoints.tablet {
     pointer-events: inherit;
   }

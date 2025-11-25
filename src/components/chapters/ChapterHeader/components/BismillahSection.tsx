@@ -37,6 +37,7 @@ const BismillahSection: React.FC<BismillahSectionProps> = ({
         [styles.withReadingView]: !isTranslationView,
         [styles.withTranslationView]: isTranslationView,
       })}
+      data-testid="bismillah-section"
     >
       <Bismillah />
       {!showTranslatedName && <span className={styles.bismillahTranslation}>{t('bismillah')}</span>}
