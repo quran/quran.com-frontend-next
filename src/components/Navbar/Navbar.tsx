@@ -21,7 +21,11 @@ const Navbar = () => {
   return (
     <div className={classNames(isBannerVisible && styles.bannerActive)}>
       <div className={styles.emptySpacePlaceholder} />
-      <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
+      <nav
+        className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}
+        data-testid="navbar"
+        data-isvisible={showNavbar}
+      >
         <NavbarBody isBannerVisible={isBannerVisible} />
       </nav>
     </div>
