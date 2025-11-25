@@ -1,7 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
-import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QuranicCalendarHero.module.scss';
@@ -48,8 +46,6 @@ const ICON_CONTAINER_PROPS = {
   shouldForceSetColors: false,
 };
 
-// NOTE: The 'name' property must match CSS class names in QuranicCalendarHero.module.scss
-// (e.g., name 'whatsapp' → .joinWhatsappText, .joinWhatsappMobileText)
 const SOCIAL_BUTTONS: SocialButton[] = [
   {
     name: 'whatsapp',
@@ -93,16 +89,16 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           {...SUCCESS_PILL_BUTTON_PROPS}
           onClick={onEnrollButtonClicked}
           isDisabled={isEnrolling}
-          className={classNames(styles.subscribeButton, {
-            [styles.subscribeButtonSmall]: showAskQuestionButton,
-          })}
+          className={`${styles.subscribeButton} ${
+            showAskQuestionButton ? styles.subscribeButtonSmall : ''
+          }`}
         >
           <IconContainer
             {...ICON_CONTAINER_PROPS}
             icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
           />
 
-          <span className={classNames({ [styles.subscribeText]: isSubscribed })}>
+          <span className={isSubscribed ? styles.subscribeText : undefined}>
             {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
           </span>
         </Button>
@@ -113,7 +109,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             href={ASK_QUESTION_FORM_URL}
             isNewTab
             onClick={() => logButtonClick('quran_calendar_ask_question')}
-            className={classNames(styles.button, styles.askQuestionButton)}
+            className={`${styles.button} ${styles.askQuestionButton}`}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
             {t('ask-question')}
@@ -132,10 +128,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             className={styles.button}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<Icon />} />
-            <span className={styles[`join${capitalize(name)}Text`]}>{t(`join-${name}`)}</span>
-            <span className={styles[`join${capitalize(name)}MobileText`]}>
-              {t(`join-${name}-mobile`)}
-            </span>
+            <span className={styles.joinSocialText}>{t(`join-${name}`)}</span>
+            <span className={styles.joinSocialMobileText}>{t(`join-${name}-mobile`)}</span>
           </Button>
         ))}
       </div>

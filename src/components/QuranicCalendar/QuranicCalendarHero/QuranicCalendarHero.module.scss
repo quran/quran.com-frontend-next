@@ -242,16 +242,14 @@
   }
 }
 
-.joinWhatsappText,
-.joinTelegramText {
+.joinSocialText {
   display: inline;
   @include breakpoints.smallerThanDesktop {
     display: none;
   }
 }
 
-.joinWhatsappMobileText,
-.joinTelegramMobileText {
+.joinSocialMobileText {
   display: none;
   @include breakpoints.smallerThanDesktop {
     display: inline;
