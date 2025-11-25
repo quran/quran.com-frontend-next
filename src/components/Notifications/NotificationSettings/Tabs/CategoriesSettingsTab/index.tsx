@@ -18,6 +18,7 @@ import Error from '@/pages/_error';
 
 const MARKETING_TAG = 'marketing';
 const QDC_TAG = 'QDC';
+const QR_TAG = 'QR';
 
 const CategoriesSettingsTab = () => {
   const { t } = useTranslation('notification-settings');
@@ -40,6 +41,8 @@ const CategoriesSettingsTab = () => {
    * 2. preferences that don't have tags since they cannot be categorized.
    * 3. marketing emails.
    * 4. workflows that don't have the QDC tag (filters out QR workflows).
+   *
+   * Workflows with only marker tags (QDC/QR) are grouped under 'uncategorized'.
    */
   const groupByTags = useMemo(
     () =>
@@ -52,7 +55,13 @@ const CategoriesSettingsTab = () => {
             preference.template.tags.includes(QDC_TAG),
         ),
         // Group by category tags, excluding QDC/QR marker tags
-        (preference) => preference.template.tags.filter((tag) => tag !== QDC_TAG && tag !== 'QR'),
+        (preference) => {
+          const categoryTags = preference.template.tags.filter(
+            (tag) => tag !== QDC_TAG && tag !== QR_TAG,
+          );
+          // Take the first category tag; workflows should have exactly one category tag
+          return categoryTags[0] || 'uncategorized';
+        },
       ),
     [preferences],
   );
