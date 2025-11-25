@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 import { useEffect, useRef, useState } from 'react';
 
@@ -40,9 +41,9 @@ const SidebarNavigation = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
-  const mountedWithVisibleSidebar = isSidebarVisible === true || isSidebarVisible === 'auto';
-  const [shouldDelayVisibleState, setShouldDelayVisibleState] = useState(mountedWithVisibleSidebar);
-
+  const [shouldDelayVisibleState, setShouldDelayVisibleState] = useState(
+    () => isSidebarVisible === true || isSidebarVisible === 'auto',
+  );
   useEffect(() => {
     if (!shouldDelayVisibleState) return undefined;
     const animationFrameId = requestAnimationFrame(() => {
