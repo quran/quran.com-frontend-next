@@ -14,7 +14,7 @@ test(
   { tag: ['@slow', '@navbar'] },
   async ({ page }) => {
     // Click on the quran.com logo of the navbar (the second one, the first is in the drawer)
-    const logoElement = page.getByTitle('Quran.com').nth(1);
+    const logoElement = page.getByTitle('Quran.com').nth(0);
     await logoElement.click();
 
     // Make sure we are redirected to the homepage

@@ -41,7 +41,7 @@ test.describe('Translation Selection', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. Check that the settings drawer is opened and the translations card is clicked
-      const settingsBody = page.getByTestId('settings-drawer-container');
+      const settingsBody = page.getByTestId('settings-drawer-body');
 
       // check that the translations list is visible
       await expect(settingsBody.getByText(TRANSLATION_KHATTAB.resourceName)).toBeVisible();
@@ -58,7 +58,7 @@ test.describe('Translation Selection', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-container');
+      const settingsBody = page.getByTestId('settings-drawer-body');
 
       // 3. Type "French" in the search input
       const searchInput = settingsBody.getByPlaceholder('Search Translations');
@@ -90,7 +90,7 @@ test.describe('Translation Display and Persistence', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-container');
+      const settingsBody = page.getByTestId('settings-drawer-body');
 
       // 3. Select two translations
       await settingsBody.getByText(TRANSLATION_KHATTAB.resourceName).click(); // uncheck
@@ -126,7 +126,7 @@ test.describe('Translation Display and Persistence', () => {
       await page.getByLabel('Change Translation').click();
 
       // 3. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-container');
+      const settingsBody = page.getByTestId('settings-drawer-body');
 
       // 4. Select two translations (Dr. Mustafa Khattab is selected by default)
       await settingsBody.getByText(TRANSLATION_HAMIDULLAH.resourceName).click(); // check

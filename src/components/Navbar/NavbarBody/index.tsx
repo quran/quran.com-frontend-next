@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
+
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
@@ -82,6 +84,7 @@ const NavbarBody: React.FC = () => {
             shape={ButtonShape.Circle}
             shouldFlipOnRTL={false}
             ariaLabel={t('search.title')}
+            data-testid="open-search-drawer"
           >
             <IconSearch />
           </Button>
@@ -94,9 +97,11 @@ const NavbarBody: React.FC = () => {
             shape={ButtonShape.Circle}
             onClick={openNavigationDrawer}
             ariaLabel={t('aria.nav-drawer-open')}
+            data-testid="open-navigation-drawer"
           >
             <IconMenu />
           </Button>
+          <SettingsDrawer />
           <NavigationDrawer />
         </div>
       </div>

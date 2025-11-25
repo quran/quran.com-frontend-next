@@ -12,6 +12,7 @@ type ChildrenRenderProps = {
 };
 
 type Props = {
+  id?: string;
   title?: React.ReactNode;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
@@ -33,6 +34,7 @@ export enum CollapsibleDirection {
 }
 
 const Collapsible = ({
+  id,
   isDefaultOpen = false,
   prefix,
   title,
@@ -69,15 +71,10 @@ const Collapsible = ({
   };
 
   const onSuffixKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    // Only handle keyboard events if suffix should trigger
     if (shouldSuffixTrigger && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
-      // Trigger the same behavior as click
-      const mouseEvent = {
-        preventDefault: () => {},
-        stopPropagation: () => {},
-      } as React.MouseEvent<HTMLDivElement>;
-      onSuffixClicked(mouseEvent);
+      // Simulate a click that will bubble to the Trigger
+      e.currentTarget.click();
     } else if (!shouldSuffixTrigger) {
       e.stopPropagation();
     }
@@ -85,7 +82,7 @@ const Collapsible = ({
 
   return (
     <CollapsiblePrimitive.Root onOpenChange={handleOpenChange} open={isOpen}>
-      <CollapsiblePrimitive.Trigger asChild>
+      <CollapsiblePrimitive.Trigger asChild data-testid={id} id={id}>
         <div className={classNames(styles.header, headerClassName)}>
           {direction === CollapsibleDirection.Left ? (
             <>

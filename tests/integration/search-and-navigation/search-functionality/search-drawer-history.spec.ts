@@ -37,7 +37,7 @@ test.describe('Search Drawer History', () => {
       await searchBar.click();
 
       // 2. Make sure the search input is focused
-      const searchDrawer = page.getByTestId('search-drawer-container');
+      const searchDrawer = page.getByTestId('search-drawer-header');
       await expect(searchDrawer.getByPlaceholder('Search')).toBeFocused();
     },
   );
@@ -51,7 +51,7 @@ test.describe('Search Drawer History', () => {
       await searchBar.click();
 
       // focus on the search input
-      const searchDrawer = page.getByTestId('search-drawer-container');
+      const searchDrawer = page.getByTestId('search-drawer-header');
       await searchDrawer.getByPlaceholder('Search').focus();
 
       // fill the current focused element (the search input) and wait for API response
@@ -61,7 +61,7 @@ test.describe('Search Drawer History', () => {
       ]);
 
       // 2. In the "search-results" div, we should see the "Juz 30" result
-      const bodyContainer = page.getByTestId('search-body-container');
+      const bodyContainer = page.getByTestId('search-drawer-container');
 
       await expect(bodyContainer.getByText('Juz 30')).toBeVisible();
 
@@ -74,7 +74,7 @@ test.describe('Search Drawer History', () => {
 
       // 5. Click on the search bar again and make sure that we see "Juz 30" in the recent navigations
       await searchBar.click();
-      await expect(page.getByTestId('search-body-container').getByText('Juz 30')).toBeVisible();
+      await expect(page.getByTestId('search-drawer-container').getByText('Juz 30')).toBeVisible();
     },
   );
 });
