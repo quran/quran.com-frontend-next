@@ -57,23 +57,25 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
   };
 
   const onLanguageChange = async (newLocale: string) => {
-    if (isUsingDefaultSettings) {
-      dispatch(resetSettings(newLocale));
+    try {
+      if (isUsingDefaultSettings) {
+        dispatch(resetSettings(newLocale));
+      }
+      logValueChange('locale', lang, newLocale);
+
+      await setLanguage(newLocale);
+      setLocaleCookie(newLocale);
+
+      if (isLoggedIn()) {
+        addOrUpdateUserPreference(
+          PreferenceGroup.LANGUAGE,
+          newLocale,
+          PreferenceGroup.LANGUAGE,
+        ).catch(handleLanguagePersistError);
+      }
+    } finally {
+      onBack();
     }
-    logValueChange('locale', lang, newLocale);
-
-    await setLanguage(newLocale);
-    setLocaleCookie(newLocale);
-
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        PreferenceGroup.LANGUAGE,
-        newLocale,
-        PreferenceGroup.LANGUAGE,
-      ).catch(handleLanguagePersistError);
-    }
-
-    onBack();
   };
 
   return (

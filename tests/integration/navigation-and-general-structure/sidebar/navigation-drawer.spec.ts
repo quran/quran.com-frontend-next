@@ -129,10 +129,11 @@ test(
     await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     // 2. Click on the donate monthly button
+    const newPagePromise = page.context().waitForEvent('page');
     await page.getByText('Become A Monthly Donor').click();
 
     // 3. Make sure a new tab is opened with the correct url
-    const newPage = await page.context().waitForEvent('page');
+    const newPage = await newPagePromise;
     await newPage.waitForLoadState();
     await expect(newPage).toHaveURL(/donate\.quran\.foundation/);
   },

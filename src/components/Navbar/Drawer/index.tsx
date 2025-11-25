@@ -172,7 +172,7 @@ const Drawer: React.FC<Props> = ({
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
       })}
       ref={drawerRef}
-      id={id || type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
+      id={id || (type === DrawerType.Settings ? 'settings-drawer-container' : undefined)}
     >
       <div
         className={classNames(styles.header, {
