@@ -103,8 +103,8 @@ const Collapsible = ({
                       [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
                     })}
                     onClick={onSuffixClicked}
+                    onKeyDown={onSuffixKeyDown}
                     {...(shouldSuffixTrigger && {
-                      onKeyDown: onSuffixKeyDown,
                       role: 'button',
                       tabIndex: 0,
                     })}

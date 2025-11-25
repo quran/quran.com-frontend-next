@@ -65,6 +65,7 @@ const SettingsDrawer = () => {
       header={header}
       closeOnNavigation={false}
       canCloseDrawer={!isActive}
+      bodyId="settings-drawer-body"
     >
       {isSettingsDrawerOpen && (
         <div data-testid="settings-drawer-body">
