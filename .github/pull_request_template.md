@@ -1,33 +1,91 @@
-# Summary
+## Summary
 
-Fixes #JIRA-TICKET
+<!-- Brief description of what this PR does -->
 
-A brief description for the PR.
+Closes: [QF-XXXX](https://quranfoundation.atlassian.net/browse/QF-XXXX)
 
-## Type of change
+## Type of Change
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+- [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
+- [ ] ✨ New feature (non-breaking change which adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 📝 Documentation update
+- [ ] ♻️ Refactoring (no functional changes)
 
-## Test plan
+## Environment Variables
 
-This should state how this PR have been tested.
+<!-- List any new environment variables introduced. Remove this section if not applicable. -->
 
-## Checklist
+| Variable | Description | Required |
+| -------- | ----------- | -------- |
+| `EXAMPLE_VAR` | Description here | Yes/No |
 
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my code
-- [ ] My changes generate no new warnings
-- [ ] Any dependent changes have been merged and published in downstream modules
-- [ ] I have commented on my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
+## Test Plan
 
-## Screenshots or videos
+<!-- Describe how this PR has been tested -->
+
+- [ ] Unit tests added/updated
+- [ ] Integration tests added/updated
+- [ ] Manual testing performed
+
+**Testing steps:**
+
+1. Step one
+2. Step two
+
+## Pre-Review Checklist
+
+<!-- Complete ALL items before requesting review. Ready for review = Ready to release! -->
+
+### Code Quality
+
+- [ ] I have performed a **self-review** of my code (file by file)
+- [ ] My code follows the [project style guidelines](/.github/copilot-instructions.md)
+- [ ] No `any` types used (or justified if unavoidable)
+- [ ] No unused code, imports, or dead code included
+- [ ] Complex logic has inline comments explaining "why"
+- [ ] Functions are under 30 lines and follow single responsibility
+
+### Testing & Validation
+
+- [ ] All tests pass locally (`yarn test`)
+- [ ] Linting passes (`yarn lint`)
+- [ ] Build succeeds (`yarn build`)
+- [ ] Edge cases and error scenarios are handled
+
+### Documentation
+
+- [ ] Code is self-documenting with clear naming
+- [ ] README updated (if adding features or setup changes)
+- [ ] Inline comments added for complex logic
+
+### Localization (if UI changes)
+
+- [ ] All user-facing text uses `next-translate`
+- [ ] Only English locale files modified (Lokalise handles others)
+- [ ] RTL layout verified
+
+### Accessibility (if UI changes)
+
+- [ ] Semantic HTML elements used
+- [ ] ARIA attributes added where needed
+- [ ] Keyboard navigation works
+
+## Screenshots/Videos
+
+<!-- Add screenshots or videos for UI changes. Remove if not applicable. -->
 
 | Before | After |
-| ------ | ------ |
-| IMAGE HERE | IMAGE HERE |
+| ------ | ----- |
+|        |       |
+
+## Related PRs
+
+<!-- Link any related PRs here. Remove if not applicable. -->
+
+## AI Assistance Disclosure
+
+<!-- If AI tools were used, confirm you have reviewed and understand all generated code -->
+
+- [ ] AI tools were NOT used for this PR
+- [ ] AI tools were used, and I have **thoroughly reviewed and validated** all generated code
