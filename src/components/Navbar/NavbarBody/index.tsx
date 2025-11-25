@@ -1,4 +1,5 @@
-import { memo, useEffect, useRef } from 'react';
+/* eslint-disable max-lines */
+import { memo, useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -58,6 +59,8 @@ const QURAN_READER_ROUTES = new Set([
   '/rub/[rubId]',
 ]);
 
+const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
+
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -67,6 +70,11 @@ const NavbarBody: React.FC = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const isPersistHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
   const hasResetSidebarAfterHydration = useRef(false);
+  const [isSidebarClosing, setIsSidebarClosing] = useState(false);
+  const sidebarVisibilityTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const previousSidebarVisibilityRef = useRef(isSidebarNavigationVisible);
+  const wasSidebarVisible = previousSidebarVisibilityRef.current;
+  const isTransitioningToClose = wasSidebarVisible && !isSidebarNavigationVisible;
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -75,7 +83,32 @@ const NavbarBody: React.FC = () => {
   }, [dispatch, isQuranReaderRoute, normalizedPathname]);
 
   const shouldRenderSidebarNavigation =
-    isQuranReaderRoute || isSidebarNavigationVisible || hasResetSidebarAfterHydration.current;
+    isQuranReaderRoute || isSidebarNavigationVisible || isSidebarClosing || isTransitioningToClose;
+
+  useEffect(() => {
+    if (isSidebarNavigationVisible) {
+      setIsSidebarClosing(false);
+      if (sidebarVisibilityTimeoutRef.current) {
+        clearTimeout(sidebarVisibilityTimeoutRef.current);
+        sidebarVisibilityTimeoutRef.current = null;
+      }
+    } else if (previousSidebarVisibilityRef.current) {
+      setIsSidebarClosing(true);
+      sidebarVisibilityTimeoutRef.current = setTimeout(() => {
+        setIsSidebarClosing(false);
+        sidebarVisibilityTimeoutRef.current = null;
+      }, SIDEBAR_TRANSITION_DURATION_MS);
+    }
+
+    previousSidebarVisibilityRef.current = isSidebarNavigationVisible;
+
+    return () => {
+      if (sidebarVisibilityTimeoutRef.current) {
+        clearTimeout(sidebarVisibilityTimeoutRef.current);
+        sidebarVisibilityTimeoutRef.current = null;
+      }
+    };
+  }, [isSidebarNavigationVisible]);
 
   useEffect(() => {
     if (hasResetSidebarAfterHydration.current) return;

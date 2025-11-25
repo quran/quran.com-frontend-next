@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -40,6 +40,16 @@ const SidebarNavigation = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
+  const mountedWithVisibleSidebar = isSidebarVisible === true || isSidebarVisible === 'auto';
+  const [shouldDelayVisibleState, setShouldDelayVisibleState] = useState(mountedWithVisibleSidebar);
+
+  useEffect(() => {
+    if (!shouldDelayVisibleState) return undefined;
+    const animationFrameId = requestAnimationFrame(() => {
+      setShouldDelayVisibleState(false);
+    });
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [shouldDelayVisibleState]);
 
   useOutsideClickDetector(
     sidebarRef,
@@ -69,8 +79,9 @@ const SidebarNavigation = () => {
     },
   ];
 
-  const isSidebarAuto = isSidebarVisible === 'auto';
-  const showSidebar = isSidebarVisible === true;
+  const isSidebarAuto = isSidebarVisible === 'auto' && !shouldDelayVisibleState;
+  const showSidebar = isSidebarVisible === true && !shouldDelayVisibleState;
+  const isSidebarActive = Boolean(isSidebarVisible) && !shouldDelayVisibleState;
 
   return (
     <div
@@ -83,8 +94,8 @@ const SidebarNavigation = () => {
         [styles.containerAutoCollapsed]: isSidebarAuto && !isNavbarVisible,
         [styles.inVisibleContainer]: isNavbarVisible,
         [styles.inVisibleContainerCollapsed]: !isNavbarVisible,
-        [styles.spaceOnTop]: isSidebarVisible && isNavbarVisible,
-        [styles.spaceOnTopCollapsed]: isSidebarVisible && !isNavbarVisible,
+        [styles.spaceOnTop]: isSidebarActive && isNavbarVisible,
+        [styles.spaceOnTopCollapsed]: isSidebarActive && !isNavbarVisible,
       })}
     >
       {!isReadingByRevelationOrder ? (
