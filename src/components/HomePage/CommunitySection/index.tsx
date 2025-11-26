@@ -24,7 +24,7 @@ const CommunitySection = () => {
       <div className={styles.header}>
         <h1>{t('common:community.title')}</h1>
       </div>
-      <div className={styles.cardsContainer}>
+      <div className={styles.cardsContainer} data-testid="community-section">
         <Card
           className={styles.card}
           link={getQRNavigationUrl()}

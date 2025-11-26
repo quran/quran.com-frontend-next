@@ -84,6 +84,7 @@ const VerseText = ({
         data-page={pageNumber}
         data-chapter-id={chapterId}
         data-hizb={hizbNumber}
+        data-testid={`verse-arabic-${verseKey}`}
         className={classNames(styles.verseTextContainer, styles[fontClassName], {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,

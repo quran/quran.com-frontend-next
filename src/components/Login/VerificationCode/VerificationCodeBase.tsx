@@ -90,7 +90,7 @@ const VerificationCodeBase: FC<Props> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="verification-code">
       <h1 className={styles.title}>{t(titleTranslationKey)}</h1>
       <div className={styles.emailContainer}>
         <p className={styles.description}>
