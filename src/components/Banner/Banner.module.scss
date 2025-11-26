@@ -35,3 +35,10 @@
   vertical-align: middle;
   text-decoration: none;
 }
+
+.icon {
+  > svg path {
+    color: var(--color-text-link-new);
+    fill: var(--color-text-link-new);
+  }
+}
