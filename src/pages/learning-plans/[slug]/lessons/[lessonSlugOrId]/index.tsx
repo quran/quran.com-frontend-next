@@ -23,7 +23,7 @@ const LessonPage: NextPage<Props> = () => {
   const { slug, lessonSlugOrId } = router.query;
   const enrollUserInCourse = useEnrollUser();
 
-  const handleFetchSuccess: (data: any) => void = useCallback(
+  const handleFetchSuccess = useCallback(
     (lesson: Lesson) => {
       if (lesson?.course && !lesson.course.isUserEnrolled) {
         enrollUserInCourse(lesson.course.id, EnrollmentMethod.Automatic);
