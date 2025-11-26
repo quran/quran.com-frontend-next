@@ -50,6 +50,10 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
+interface Props {
+  isBannerVisible: boolean;
+}
+
 const QURAN_READER_ROUTES = new Set([
   '/[chapterId]',
   '/[chapterId]/[verseId]',
