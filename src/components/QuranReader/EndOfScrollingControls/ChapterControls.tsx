@@ -72,7 +72,8 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
         </Button>
       )}
 
-      {lang === Language.EN && chapterNumber === LEARNING_PLAN_CHAPTER && <LearningPlanBanner />}
+      {(lang === Language.EN || lang === Language.UR) &&
+        chapterNumber === LEARNING_PLAN_CHAPTER && <LearningPlanBanner language={lang} />}
     </>
   );
 };
