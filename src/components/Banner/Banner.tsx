@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import styles from './Banner.module.scss';
 
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import DiamondIcon from '@/icons/diamond.svg';
@@ -11,10 +10,10 @@ import {
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
 
-type BannerProps = {
+interface BannerProps {
   text: string;
   ctaButton?: React.ReactNode;
-};
+}
 
 const Banner = ({ text, ctaButton }: BannerProps) => {
   const isLoggedIn = useIsLoggedIn();
@@ -24,7 +23,7 @@ const Banner = ({ text, ctaButton }: BannerProps) => {
   // Route logged-in users to progress page while loading to prevent jarring UX
   // if they have an existing goal. Falls back to reading-goal once loading completes
   // if no goal exists.
-  const link =
+  const ctaLink =
     !isLoggedIn || (!hasGoal && !isLoading)
       ? getReadingGoalNavigationUrl()
       : getReadingGoalProgressNavigationUrl();
@@ -33,7 +32,12 @@ const Banner = ({ text, ctaButton }: BannerProps) => {
     <div className={styles.container}>
       <p className={styles.text}>{text}</p>
       {ctaButton && (
-        <Link href={link} className={styles.cta}>
+        <Link
+          href={ctaLink}
+          variant={LinkVariant.Blend}
+          className={styles.cta}
+          ariaLabel={`${ctaButton}`}
+        >
           <IconContainer icon={<DiamondIcon />} size={IconSize.Xsmall} className={styles.icon} />
           {ctaButton}
         </Link>

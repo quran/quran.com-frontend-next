@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -68,10 +68,13 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
-  const bannerProps = {
-    text: t('stay-on-track'),
-    ctaButton: t('create-my-goal'),
-  };
+  const bannerProps = useMemo(
+    () => ({
+      text: t('stay-on-track'),
+      ctaButton: t('create-my-goal'),
+    }),
+    [t],
+  );
 
   return (
     <>
