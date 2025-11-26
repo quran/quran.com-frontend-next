@@ -152,18 +152,16 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       <div className={styles.itemsContainer}>
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
-            <>
-              <Button
-                tooltip={t('menu')}
-                variant={ButtonVariant.Ghost}
-                shape={ButtonShape.Circle}
-                onClick={openNavigationDrawer}
-                ariaLabel={t('aria.nav-drawer-open')}
-              >
-                <IconMenu />
-              </Button>
-              <NavigationDrawer />
-            </>
+            <Button
+              tooltip={t('menu')}
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
+            >
+              <IconMenu />
+            </Button>
+            <NavigationDrawer />
             <NavbarLogoWrapper />
           </div>
         </div>
@@ -174,10 +172,8 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
-            <>
-              <ProfileAvatarButton />
-              <LanguageSelector />
-            </>
+            <ProfileAvatarButton />
+            <LanguageSelector />
             <div>
               <Button
                 tooltip={t('search.title')}
