@@ -39,6 +39,10 @@ const LearningPlanBanner: React.FC<Props> = ({ language }) => {
 
   const config = LEARNING_PLAN_CONFIGS[language];
 
+  if (!config) {
+    return null;
+  }
+
   const learningPlanUrl = getCourseNavigationUrl(config.slug);
 
   return (
