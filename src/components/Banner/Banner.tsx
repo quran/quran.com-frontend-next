@@ -29,7 +29,7 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
       : getReadingGoalProgressNavigationUrl();
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="banner">
       <p className={styles.text}>{text}</p>
       {ctaButtonText && (
         <Link
