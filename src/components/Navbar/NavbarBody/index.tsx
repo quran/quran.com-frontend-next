@@ -54,7 +54,6 @@ interface Props {
   isBannerVisible: boolean;
 }
 
-const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
 const QURAN_READER_ROUTES = new Set([
   '/[chapterId]',
   '/[chapterId]/[verseId]',
