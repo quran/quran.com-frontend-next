@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import styles from './Banner.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import DiamondIcon from '@/icons/diamond.svg';
@@ -34,7 +34,7 @@ const Banner = ({ text, ctaButton }: BannerProps) => {
       <p className={styles.text}>{text}</p>
       {ctaButton && (
         <Link href={link} className={styles.cta}>
-          <IconContainer icon={<DiamondIcon />} color={IconColor.primary} size={IconSize.Xsmall} />
+          <IconContainer icon={<DiamondIcon />} size={IconSize.Xsmall} className={styles.icon} />
           {ctaButton}
         </Link>
       )}
