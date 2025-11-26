@@ -147,7 +147,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const bannerProps = useMemo(
     () => ({
       text: t('stay-on-track'),
-      ctaButton: t('create-my-goal'),
+      ctaButtonText: t('create-my-goal'),
     }),
     [t],
   );

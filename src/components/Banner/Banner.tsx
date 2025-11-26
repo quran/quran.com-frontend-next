@@ -12,10 +12,10 @@ import {
 
 interface BannerProps {
   text: string;
-  ctaButton?: React.ReactNode;
+  ctaButtonText?: string;
 }
 
-const Banner = ({ text, ctaButton }: BannerProps) => {
+const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const isLoggedIn = useIsLoggedIn();
   const { goal, isLoading } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
@@ -31,15 +31,15 @@ const Banner = ({ text, ctaButton }: BannerProps) => {
   return (
     <div className={styles.container}>
       <p className={styles.text}>{text}</p>
-      {ctaButton && (
+      {ctaButtonText && (
         <Link
           href={ctaLink}
           variant={LinkVariant.Blend}
           className={styles.cta}
-          ariaLabel={`${ctaButton}`}
+          ariaLabel={`${ctaButtonText}`}
         >
           <IconContainer icon={<DiamondIcon />} size={IconSize.Xsmall} className={styles.icon} />
-          {ctaButton}
+          {ctaButtonText}
         </Link>
       )}
     </div>
