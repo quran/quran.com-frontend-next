@@ -39,6 +39,6 @@
 .icon {
   > svg path {
     color: var(--color-text-link-new);
-    fill: var(--color-text-link-new);
+    fill: var(--color-text-link-new) !important;
   }
 }

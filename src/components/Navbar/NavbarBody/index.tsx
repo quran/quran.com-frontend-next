@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -144,10 +144,13 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
-  const bannerProps = {
-    text: t('stay-on-track'),
-    ctaButton: t('create-my-goal'),
-  };
+  const bannerProps = useMemo(
+    () => ({
+      text: t('stay-on-track'),
+      ctaButton: t('create-my-goal'),
+    }),
+    [t],
+  );
 
   return (
     <>
