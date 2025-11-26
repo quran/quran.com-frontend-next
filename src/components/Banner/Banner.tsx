@@ -38,7 +38,11 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
           className={styles.cta}
           ariaLabel={`${ctaButtonText}`}
         >
-          <IconContainer icon={<DiamondIcon />} size={IconSize.Xsmall} className={styles.icon} />
+          <IconContainer
+            icon={<DiamondIcon aria-hidden="true" />}
+            size={IconSize.Xsmall}
+            className={styles.icon}
+          />
           {ctaButtonText}
         </Link>
       )}
