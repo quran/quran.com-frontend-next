@@ -147,7 +147,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const bannerProps = {
     text: t('stay-on-track'),
     ctaButton: t('create-my-goal'),
-    shouldShowPrefixIcon: true,
   };
 
   return (
