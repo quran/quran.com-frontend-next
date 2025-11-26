@@ -1,13 +1,11 @@
-import classNames from 'classnames';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
 
 import styles from './Banner.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
-import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { selectIsBannerVisible } from '@/redux/slices/banner';
+import DiamondIcon from '@/icons/diamond.svg';
 import {
   getReadingGoalNavigationUrl,
   getReadingGoalProgressNavigationUrl,
@@ -16,11 +14,9 @@ import {
 type BannerProps = {
   text: string;
   ctaButton?: React.ReactNode;
-  shouldShowPrefixIcon?: boolean;
 };
 
-const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
-  const isBannerVisible = useSelector(selectIsBannerVisible);
+const Banner = ({ text, ctaButton }: BannerProps) => {
   const isLoggedIn = useIsLoggedIn();
   const { goal, isLoading } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
@@ -34,21 +30,11 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
       : getReadingGoalProgressNavigationUrl();
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.isVisible]: isBannerVisible,
-      })}
-    >
-      <div className={styles.description}>
-        {shouldShowPrefixIcon && (
-          <div className={styles.illustrationContainer}>
-            <MoonIllustrationSVG />
-          </div>
-        )}
-        <div className={styles.text}>{text}</div>
-      </div>
+    <div className={styles.container}>
+      <p className={styles.text}>{text}</p>
       {ctaButton && (
-        <Link href={link} className={styles.ctaContainer}>
+        <Link href={link} className={styles.cta}>
+          <IconContainer icon={<DiamondIcon />} color={IconColor.primary} size={IconSize.Xsmall} />
           {ctaButton}
         </Link>
       )}
