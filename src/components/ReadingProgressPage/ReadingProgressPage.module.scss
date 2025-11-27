@@ -112,7 +112,7 @@ $section-padding: calc(var(--spacing-large-px));
     }
 
     .widget {
-      --day-circle-color: var(--color-success-faded) !important;
+      --day-circle-color: var(--color-success-faded);
       flex: 1;
       padding-block: var(--spacing-medium-px);
       padding-inline: var(--spacing-medium2-px);
