@@ -24,7 +24,7 @@ export default defineConfig({
       '@/components': path.resolve(__dirname, './src/components'),
       '@': path.resolve(__dirname, './src'),
       types: path.resolve(__dirname, './types'),
-      '@/api': path.resolve(__dirname, './src/api'),
+      '@/api': path.resolve(__dirname, './src/api.ts'),
     },
   },
 });

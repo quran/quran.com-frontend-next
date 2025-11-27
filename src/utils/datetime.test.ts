@@ -97,37 +97,6 @@ describe('getShortDayName', () => {
       expect(result.length).toBeLessThanOrEqual(2);
     });
   });
-
-  it('returns one character for most supported app locales', () => {
-    const monday = new Date('2024-01-01T00:00:00.000Z');
-    const singleCharLocales = [
-      'en',
-      'ar',
-      'bn',
-      'fa',
-      'fr',
-      'id',
-      'it',
-      'nl',
-      'pt',
-      'ru',
-      'sq',
-      'th',
-      'tr',
-      'ur',
-      'zh',
-      'ms',
-      'es',
-      'sw',
-    ];
-
-    singleCharLocales.forEach((locale) => {
-      const result = getShortDayName(monday, locale);
-      // Most locales should return 1 character, but we allow up to 2 for edge cases
-      expect(result.length).toBeGreaterThanOrEqual(1);
-      expect(result.length).toBeLessThanOrEqual(2);
-    });
-  });
 });
 
 describe('compareDateWithToday', () => {

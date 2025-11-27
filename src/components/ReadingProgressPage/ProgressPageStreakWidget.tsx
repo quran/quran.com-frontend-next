@@ -36,7 +36,7 @@ const ProgressPageStreakWidget = ({
         </div>
       </div>
 
-      <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />
+      <CurrentWeekProgress weekData={weekData} goal={goal} />
     </>
   );
 
