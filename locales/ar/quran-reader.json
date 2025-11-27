@@ -64,6 +64,8 @@
   "prev-page": "الصفحة السابقة",
   "prev-rub": "ربع الحزب السابق",
   "prev-surah": "السورة السابقة",
+  "prev": "السابق",
+  "next": "التالي",
   "q-and-a": {
     "answer": "إجابة",
     "clarification": "توضيح",
@@ -103,5 +105,23 @@
   "trans-change": "تغيير",
   "translation-by": "ترجمة",
   "verses-range": "نطاق الآيات",
-  "view-on-quran-reflect": "عرض على QuranReflect"
+  "view-on-quran-reflect": "عرض على QuranReflect",
+  "end-of-surah": {
+    "header": "نهاية السورة",
+    "read-more": "اقرأ المزيد",
+    "beginning-of-surah": "اقرأ مرة أخرى",
+    "explore": "استكشف",
+    "my-quran": "قرآني",
+    "suggestions": "اقتراحات:",
+    "achieve-quran-goals-desktop": "تتبع مسيرتك، أنشئ أهدافًا مخصصة، ابقَ ثابتًا",
+    "achieve-quran-goals-responsive": "حقق أهدافك القرآنية",
+    "track-your-journey": "تتبع رحلتك!",
+    "day-streak": "يوم متتالي",
+    "days-streak": "أيام متتالية",
+    "set-custom-goal": "حدد هدفًا مخصصًا",
+    "set-goal": "حدد هدفًا",
+    "set-goal-mobile": "حدد هدفًا",
+    "next-surah-aria-label": "اقرأ السورة التالية: {{surahName}} ({{surahNumber}})",
+    "previous-surah-aria-label": "اقرأ السورة السابقة: {{surahName}} ({{surahNumber}})"
+  }
 }
