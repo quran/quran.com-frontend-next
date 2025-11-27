@@ -374,7 +374,13 @@ export const getMonthsInYear = (year: number, locale: string): Month[] => {
  * // normalizedDate: Date object for 2024-01-15 at 00:00:00.000
  * // isToday: true if today is January 15, 2024, false otherwise
  */
-export const compareDateWithToday = (date: string | Date) => {
+export const compareDateWithToday = (
+  date: string | Date,
+): {
+  today: Date;
+  normalizedDate: Date;
+  isToday: boolean;
+} => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const normalizedDate = new Date(date);

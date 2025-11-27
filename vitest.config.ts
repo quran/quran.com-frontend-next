@@ -19,7 +19,7 @@ export default defineConfig({
       '@/types': path.resolve(__dirname, './types'),
       '@/hooks': path.resolve(__dirname, './src/hooks'),
       '@/redux': path.resolve(__dirname, './src/redux'),
-      '@/api': path.resolve(__dirname, './src/api'),
+      '@/api': path.resolve(__dirname, './src/api.ts'),
       '@/lib': path.resolve(__dirname, './src/lib'),
     },
   },
