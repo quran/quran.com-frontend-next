@@ -7,7 +7,7 @@ import styles from './ReadingStreak.module.scss';
 import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import { dateToReadableFormat } from '@/utils/datetime';
+import { compareDateWithToday, dateToReadableFormat } from '@/utils/datetime';
 import { convertFractionToPercent } from '@/utils/number';
 
 interface Props {
@@ -21,13 +21,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
   const { days, readingDaysMap } = weekData;
 
   const getDayState = (day: (typeof days)[number]): [DayState, boolean] => {
-    // Check if the day is in the future
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const dayDate = new Date(day.date);
-    dayDate.setHours(0, 0, 0, 0);
-
-    const isToday = dayDate.getTime() === today.getTime();
+    const { today, normalizedDate, isToday } = compareDateWithToday(day.date);
 
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
@@ -38,7 +32,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
 
     if (isGoalDone) return [DayState.Checked, isToday];
 
-    if (dayDate > today) return [DayState.Future, isToday];
+    if (normalizedDate > today) return [DayState.Future, isToday];
 
     return [DayState.None, isToday];
   };

@@ -6,6 +6,8 @@
   },
   "create-plan": "Create plan",
   "create-reading-goal": "Create Goal",
+  "day-streak": "Day streak",
+  "days-remaining": "days remaining",
   "daily-progress": "Daily Progress",
   "daily-progress-completed": "Completed! 🎉",
   "daily": {
@@ -91,8 +93,8 @@
   "remaining": "Remaining for today",
   "remaining-base": "Remaining",
   "remaining-days": {
-    "one": "<span>{{days}}</span> day remaining",
-    "other": "<span>{{days}}</span> days remaining"
+    "one": "{{days}} day remaining",
+    "other": "{{days}} days remaining"
   },
   "set-a-new-goal": "Set a new Goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
@@ -111,12 +113,12 @@
   },
   "todays-goal": "Today's Goal",
   "view-progress": "View Progress",
-  "week-progress": "This Week's Progress",
+  "week-progress": "This week's progress",
   "x-days": {
     "one": "{{days}} day",
     "other": "{{days}} days"
   },
-  "x-days-streak": "<p>{{days}}</p> <span>Day streak</span>",
+  "x-days-streak": "<p>{{days}}</p> <span>day streak</span>",
   "x-hours": {
     "one": "{{hours}} hour",
     "other": "{{hours}} hours"

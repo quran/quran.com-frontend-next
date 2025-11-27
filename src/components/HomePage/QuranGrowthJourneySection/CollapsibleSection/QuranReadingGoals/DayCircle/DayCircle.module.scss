@@ -1,6 +1,6 @@
 .dayCircle {
-  inline-size: var(--spacing-large);
-  block-size: var(--spacing-large);
+  inline-size: var(--spacing-medium3-px);
+  block-size: var(--spacing-medium3-px);
   border-radius: var(--border-radius-circle);
   border: 2px solid var(--color-blue-buttons-and-icons);
   background-color: var(--color-background-default);
@@ -28,6 +28,6 @@
 }
 
 .future {
-  border-color: var(--color-daily-progress);
-  background-color: var(--color-daily-progress);
+  border-color: var(--color-grey-icons);
+  background-color: var(--color-grey-icons);
 }

@@ -269,3 +269,16 @@
     }
   }
 }
+
+.rounded {
+  color: var(--color-text-white);
+  background-color: var(--color-streaks-dark);
+  border: none;
+  border-radius: calc(var(--border-radius-default) * 3);
+
+  &:hover {
+    color: var(--color-text-white);
+    background-color: var(--color-streaks-dark);
+    opacity: 0.9;
+  }
+}

@@ -198,7 +198,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
       <Button
         onClick={onUpdateGoalClicked}
         isDisabled={isDisabled}
-        variant={isMobile ? ButtonVariant.Ghost : undefined}
+        variant={isMobile ? ButtonVariant.Rounded : ButtonVariant.Compact}
         className={styles.editGoalButton}
       >
         {t('edit-goal.action')}

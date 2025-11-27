@@ -1,13 +1,23 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$section-spacing: calc(var(--spacing-mega) * 1.5);
-$section-padding: calc(var(--spacing-large));
+$section-spacing: calc(var(--spacing-large-px) * 1.5);
+$section-padding: calc(var(--spacing-large-px));
 
 .heroContainer {
   position: relative;
   overflow: hidden;
-  padding-block-end: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium3-px);
+  padding-block-end: var(--spacing-xlarge-px);
+  padding-inline: var(--spacing-medium2-px);
+  margin-block-end: calc(-1 * (var(--spacing-xlarge-px) - var(--spacing-medium2-px)));
+
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-large-px);
+    padding-block-end: var(--spacing-large-px);
+    padding-inline: var(--spacing-medium2-px);
+    margin-block-end: 0;
+  }
 
   .heroBackgroundImage {
     position: absolute;
@@ -26,188 +36,181 @@ $section-padding: calc(var(--spacing-large));
 
     display: flex;
     block-size: 100%;
-    gap: var(--spacing-small);
+    gap: var(--spacing-small-px);
     align-items: center;
-    padding-inline: var(--spacing-small);
-    padding-block: var(--spacing-medium2-px);
-
-    @include breakpoints.tablet {
-      padding-block: var(--spacing-large-px);
-    }
 
     margin-inline: auto;
 
     h1 {
-      font-size: var(--font-size-jumbo);
+      font-size: var(--font-size-large-px);
       line-height: var(--line-height-jumbo);
       font-weight: var(--font-weight-bold);
+      @include breakpoints.tablet {
+        font-size: var(--font-size-xxxlarge-px);
+      }
     }
   }
 }
 
 .contentContainer {
-  margin-block-start: calc(var(--spacing-medium) * -1);
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
+
   @include breakpoints.tablet {
     border-radius: 0;
   }
-}
 
-.historySection {
-  margin-block-start: $section-spacing;
-}
-
-.historyContainer {
-  margin-block-start: $section-padding;
-}
-
-.manageGoalSection {
-  margin-block-start: $section-spacing;
-}
-
-.manageGoalContainer {
-  margin-block-start: $section-padding;
-  display: flex;
-  gap: var(--spacing-large);
-}
-
-.streakContainer {
-  display: flex;
-  gap: var(--spacing-small);
-  align-items: center;
-  margin-block-end: var(--spacing-mega);
-
-  .streakText {
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-large);
-    color: var(--color-text-faded);
-    p {
-      display: inline;
-      color: var(--color-primary-medium);
-      font-size: var(--font-size-jumbo);
-    }
-  }
-
-  svg {
-    inline-size: var(--spacing-mega);
-    block-size: var(--spacing-mega);
+  .widgetsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-medium2-px);
 
     @include breakpoints.tablet {
-      inline-size: var(--spacing-max);
-      block-size: var(--spacing-max);
+      margin-block-start: $section-padding;
+    }
+
+    @include breakpoints.smallerThanDesktop {
+      flex-direction: column;
+    }
+
+    .streakContainer {
+      display: flex;
+      gap: var(--spacing-small-px);
+      align-items: center;
+      margin-block-end: var(--spacing-large-px);
+
+      .mushaf {
+        inline-size: var(--spacing-xlarge-px);
+        block-size: var(--spacing-xlarge-px);
+        @include breakpoints.tablet {
+          inline-size: var(--spacing-xxlarge-px);
+          block-size: var(--spacing-xxlarge-px);
+        }
+        path {
+          stroke: var(--color-blue-buttons-and-icons);
+        }
+      }
+
+      .streakText {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-normal-px);
+        color: var(--color-text-faded);
+        @include breakpoints.tablet {
+          font-size: var(--font-size-large-px);
+        }
+        p {
+          display: inline;
+          color: var(--color-primary-medium);
+          font-size: var(--font-size-jumbo-px);
+          @include breakpoints.tablet {
+            font-size: var(--font-size-jumbo2-px);
+          }
+        }
+      }
+    }
+
+    .widget {
+      --day-circle-color: var(--color-success-faded) !important;
+      flex: 1;
+      padding-block: var(--spacing-medium-px);
+      padding-inline: var(--spacing-medium2-px);
+      border-radius: var(--border-radius-rounded);
+      border: 1px solid var(--color-separators-ayah-level);
+      display: flex;
+      justify-content: space-between;
+
+      @include breakpoints.tablet {
+        padding-block: var(--spacing-large-px);
+        padding-inline: var(--spacing-large-px);
+      }
+
+      &.streakWidget {
+        background-color: var(--color-background-alternative-faint-new);
+        flex-direction: column;
+      }
+    }
+
+    .emptyWidget {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .progressWidget {
+      background-color: var(--color-streaks-light);
+      flex: 1;
+      padding: var(--spacing-medium2-px);
+      border-radius: var(--border-radius-rounded);
+      border: 1px solid var(--color-separators-ayah-level);
+      display: flex;
+      gap: var(--spacing-large-px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .progressWidgetWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-medium-px);
+
+        .circularProgressbar {
+          block-size: var(--spacing-xxxlarge-px);
+          inline-size: var(--spacing-xxxlarge-px);
+
+          .circularProgressbarPath {
+            stroke: var(--color-streaks-dark);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease 0s;
+          }
+
+          .circularProgressbarTrail {
+            stroke: var(--color-daily-progress);
+            /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+            stroke-linecap: round;
+          }
+
+          .circularProgressbarText {
+            fill: var(--color-text-black);
+            font-size: var(--font-size-normal-px);
+            dominant-baseline: middle;
+            text-anchor: middle;
+            font-weight: var(--font-weight-bold);
+          }
+        }
+
+        .progressWidgetContent {
+          .progressWidgetTitle {
+            color: var(--color-text-black);
+            font-size: var(--font-size-large-px);
+            font-weight: var(--font-weight-bold);
+          }
+
+          .progressWidgetDaysLeft {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-gray);
+            span {
+              color: var(--color-text-black);
+              font-weight: var(--font-weight-bold);
+            }
+          }
+        }
+      }
+
+      .progressWidgetCta {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--spacing-medium2-px);
+      }
     }
   }
 
-  svg path {
-    stroke: var(--color-primary-medium);
-    color: var(--color-primary-medium);
-  }
-}
+  .historySection {
+    margin-block-start: $section-spacing;
 
-.widgetsContainer {
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-large);
-  margin-block-start: $section-padding;
-
-  @include breakpoints.smallerThanDesktop {
-    flex-direction: column;
-  }
-}
-
-.widget {
-  --day-circle-color: var(--color-success-faded) !important;
-  flex: 1;
-  padding: var(--spacing-mega);
-  border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--color-borders-hairline);
-  display: flex;
-  justify-content: space-between;
-
-  &.streakWidget {
-    flex-direction: column;
-  }
-}
-
-.progressWidget {
-  background-color: var(--color-streaks-light);
-  flex: 1;
-  padding: var(--spacing-mega);
-  border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--color-borders-hairline);
-  display: flex;
-  gap: var(--spacing-large);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.progressWidgetWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-small);
-}
-
-.progressWidgetCta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-small);
-}
-
-.emptyWidget {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.progressWidgetContent {
-  .progressWidgetTitle {
-    color: var(--color-text-black);
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .progressWidgetDaysLeft {
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-gray);
-    span {
-      color: var(--color-text-black);
-      font-weight: var(--font-weight-bold);
+    .historyContainer {
+      margin-block-start: $section-padding;
     }
   }
-}
-
-.circularProgressbar {
-  block-size: calc(var(--spacing-max) * 1.5);
-  inline-size: calc(var(--spacing-max) * 1.5);
-}
-
-.circularProgressbarPath {
-  stroke: var(--color-streaks-dark);
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
-}
-
-.circularProgressbarTrail {
-  stroke: var(--color-daily-progress);
-  /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
-  stroke-linecap: round;
-}
-
-.circularProgressbarText {
-  fill: var(--color-text-black);
-  font-size: var(--font-size-normal-px);
-  dominant-baseline: middle;
-  text-anchor: middle;
-  font-weight: var(--font-weight-bold);
-}
-
-.continueReadingButton {
-  color: var(--color-text-white);
-  background-color: var(--color-streaks-dark);
-  border: none;
-  border-radius: calc(var(--border-radius-default) * 3);
 }

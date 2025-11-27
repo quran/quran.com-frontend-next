@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import CurrentWeekProgress from '../HomePage/QuranGrowthJourneySection/CollapsibleSection/QuranReadingGoals/CurrentWeekProgress';
@@ -8,7 +7,7 @@ import styles from './ReadingProgressPage.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
-import BookIcon from '@/icons/book.svg';
+import MushafIcon from '@/icons/mushaf.svg';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface ProgressPageStreakWidgetProps {
@@ -24,22 +23,16 @@ const ProgressPageStreakWidget = ({
   streak,
   isLoading,
 }: ProgressPageStreakWidgetProps) => {
-  const { lang } = useTranslation('reading-goal');
+  const { t, lang } = useTranslation('reading-goal');
   const localizedStreak = toLocalizedNumber(streak, lang);
 
   const widget = (
     <>
       <div className={styles.streakContainer}>
-        <BookIcon />
+        <MushafIcon className={styles.mushaf} />
         <div className={styles.streakText}>
-          <Trans
-            i18nKey="reading-goal:x-days-streak"
-            values={{ days: localizedStreak, count: streak }}
-            components={{
-              p: <p />,
-              span: <span />,
-            }}
-          />
+          <p>{localizedStreak} </p>
+          <span>{t('day-streak')}</span>
         </div>
       </div>
 

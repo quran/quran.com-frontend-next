@@ -56,14 +56,8 @@
 }
 
 .editGoalButton {
-  background-color: var(--color-streaks-dark);
-  border: none;
-  border-radius: calc(var(--border-radius-default) * 3);
-
+  font-weight: var(--font-weight-semibold);
   @include breakpoints.tablet {
-    background-color: initial;
-    border: initial;
-    border-radius: initial;
     color: var(--color-streaks-dark);
   }
 }

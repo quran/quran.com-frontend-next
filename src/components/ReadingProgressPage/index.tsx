@@ -10,6 +10,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import useIsMobile from '@/hooks/useIsMobile';
 import ArrowLeft from '@/icons/arrow-left.svg';
 import Background from '@/icons/background.svg';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -21,6 +22,7 @@ import {
 
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
+  const isMobile = useIsMobile();
   const { error, goal, weekData, streak, isLoading } = useGetStreakWithMetadata({
     showDayName: true,
   });
@@ -48,7 +50,7 @@ const ReadingProgressPage = () => {
           <div className={styles.heroInnerContainer}>
             <Button
               type={ButtonType.Secondary}
-              size={ButtonSize.Large}
+              size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
               variant={ButtonVariant.Compact}
               href={getReadingGoalNavigationUrl()}
               ariaLabel={t('back-to-reading-goal')}
