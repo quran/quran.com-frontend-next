@@ -245,12 +245,13 @@ export const getFullDayName = (day: Date, locale: string): string => {
 
 /**
  * Gets the shortest day name in a given locale.
- * Uses the 'narrow' format which is typically a single letter in most locales.
- * Example: `M` for `Monday` in `en`
+ * Uses the 'narrow' format which is the shortest available format for the locale.
+ * Most locales return a single character, but some locales (e.g., Hindi) may return 2 characters.
+ * Example: `M` for `Monday` in `en`, `सो` for Monday in `hi`
  *
  * @param {Date} day
  * @param {string} locale
- * @returns {string}
+ * @returns {string} The narrow day name (typically 1-2 characters)
  *
  */
 export const getShortDayName = (day: Date, locale: string): string => {
@@ -356,4 +357,29 @@ export const getMonthsInYear = (year: number, locale: string): Month[] => {
   }
 
   return all;
+};
+
+/**
+ * Normalizes a date to midnight and compares it with today's date.
+ *
+ * @param {string | Date} date - The date to compare (can be a string or Date object)
+ * @returns {{ today: Date, normalizedDate: Date, isToday: boolean }} An object containing:
+ *   - today: Today's date normalized to midnight (00:00:00.000)
+ *   - normalizedDate: The provided date normalized to midnight (00:00:00.000)
+ *   - isToday: Boolean indicating if the provided date is today
+ *
+ * @example
+ * const { today, normalizedDate, isToday } = compareDateWithToday('2024-01-15');
+ * // today: Date object for current date at 00:00:00.000
+ * // normalizedDate: Date object for 2024-01-15 at 00:00:00.000
+ * // isToday: true if today is January 15, 2024, false otherwise
+ */
+export const compareDateWithToday = (date: string | Date) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const normalizedDate = new Date(date);
+  normalizedDate.setHours(0, 0, 0, 0);
+  const isToday = normalizedDate.getTime() === today.getTime();
+
+  return { today, normalizedDate, isToday };
 };

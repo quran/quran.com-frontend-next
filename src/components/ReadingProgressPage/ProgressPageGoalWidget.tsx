@@ -10,7 +10,7 @@ import ProgressPageGoalWidgetDescription from './ProgressPageGoalWidgetDescripti
 import styles from './ReadingProgressPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
-import Button from '@/dls/Button/Button';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetStreakWithMetadata, {
@@ -114,7 +114,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
       </div>
       <div className={styles.progressWidgetCta}>
         {!isMobile && (
-          <Button href={ctaUrl} className={styles.continueReadingButton}>
+          <Button href={ctaUrl} variant={ButtonVariant.Rounded}>
             {t('reading-goal:continue-reading')}
           </Button>
         )}

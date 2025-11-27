@@ -1,5 +1,3 @@
-import Trans from 'next-translate/Trans';
-
 import styles from './ReadingProgressPage.module.scss';
 
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
@@ -39,18 +37,9 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
 
   if (typeof goal.progress.daysLeft === 'number') {
     return (
-      <p>
-        <Trans
-          i18nKey="reading-goal:remaining-days"
-          values={{
-            count: goal.progress.daysLeft,
-            days: toLocalizedNumber(goal.progress.daysLeft, lang),
-          }}
-          components={{
-            p: <p />,
-            span: <span />,
-          }}
-        />
+      <p className={styles.progressWidgetDaysLeft}>
+        <span>{toLocalizedNumber(goal.progress.daysLeft, lang)} </span>
+        {t('reading-goal:days-remaining')}
       </p>
     );
   }
