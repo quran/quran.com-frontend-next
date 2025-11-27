@@ -95,11 +95,13 @@ $section-padding: calc(var(--spacing-large-px));
         font-weight: var(--font-weight-bold);
         font-size: var(--font-size-normal-px);
         color: var(--color-text-faded);
+        display: flex;
+        align-items: baseline;
+        gap: var(--spacing-small-px);
         @include breakpoints.tablet {
           font-size: var(--font-size-large-px);
         }
-        p {
-          display: inline;
+        .streakNumber {
           color: var(--color-primary-medium);
           font-size: var(--font-size-jumbo-px);
           @include breakpoints.tablet {

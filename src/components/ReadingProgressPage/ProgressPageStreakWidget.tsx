@@ -31,7 +31,7 @@ const ProgressPageStreakWidget = ({
       <div className={styles.streakContainer}>
         <MushafIcon className={styles.mushaf} />
         <div className={styles.streakText}>
-          <p>{localizedStreak} </p>
+          <span className={styles.streakNumber}>{localizedStreak}</span>
           <span>{t('day-streak')}</span>
         </div>
       </div>
