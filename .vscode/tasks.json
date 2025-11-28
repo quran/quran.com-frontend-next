@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Pre-PR Review",
+      "type": "shell",
+      "command": "echo '🔍 Pre-PR Code Review\\n\\nReview the following staged changes against Quran.com project guidelines:\\n' && git diff --staged && echo '\\n---\\nGuidelines: .github/copilot-instructions.md\\nCheck for: TypeScript types, React patterns, error handling, localization, accessibility, security, tests.'",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "group": "none"
+    },
+    {
+      "label": "Pre-PR Review (All Changes)",
+      "type": "shell",
+      "command": "echo '🔍 Pre-PR Code Review\\n\\nReview the following changes against Quran.com project guidelines:\\n' && git diff && echo '\\n---\\nGuidelines: .github/copilot-instructions.md\\nCheck for: TypeScript types, React patterns, error handling, localization, accessibility, security, tests.'",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true
+      },
+      "group": "none"
+    }
+  ]
+}
