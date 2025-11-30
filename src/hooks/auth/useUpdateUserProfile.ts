@@ -23,10 +23,25 @@ interface UseUpdateUserProfileReturn {
   isUpdating: boolean;
 }
 
+const enum ProfileUpdateTelemetry {
+  TransactionName = 'updateUserProfile',
+  BreadcrumbCategory = 'profile.update',
+}
+
 /**
  * Custom hook for updating user profile
  * Handles the submission logic, cache updates, and toast notifications
- * @returns {UseUpdateUserProfileReturn} Object containing updateProfile function and isUpdating state
+ * @returns {UseUpdateUserProfileReturn} Object containing:
+ *   - updateProfile: Function to update user profile data.
+ *     Accepts UpdateUserProfileData parameter with optional fields:
+ *     - firstName?: string - User's first name
+ *     - lastName?: string - User's last name
+ *     - avatar?: string - Avatar image URL
+ *     - removeAvatar?: boolean - Flag to remove the current avatar
+ *     Returns Promise<{ errors?: Record<string, string> } | void>:
+ *     - Resolves to { errors?: Record<string, string> } if validation fails
+ *     - Resolves to undefined if update succeeds or generic error occurs
+ *   - isUpdating: boolean - Indicates whether a profile update is currently in progress
  */
 const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
   const { t } = useTranslation('common');
@@ -34,108 +49,106 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
   const toast = useToast();
   const [isUpdating, setIsUpdating] = useState(false);
 
-  const buildUpdateData = (data: UpdateUserProfileData) => {
+  const buildUpdateData = (data: UpdateUserProfileData): Partial<UpdateUserProfileData> => {
     const updateData: Partial<UpdateUserProfileData> = {};
-
-    if (data.firstName !== undefined) {
-      updateData.firstName = data.firstName.trim();
-    }
-    if (data.lastName !== undefined) {
-      updateData.lastName = data.lastName.trim();
-    }
-    if (data.avatar !== undefined) {
-      updateData.avatar = data.avatar;
-    }
-    if (data.removeAvatar !== undefined) {
-      updateData.removeAvatar = data.removeAvatar;
-    }
-
+    if (data.firstName !== undefined) updateData.firstName = data.firstName.trim();
+    if (data.lastName !== undefined) updateData.lastName = data.lastName.trim();
+    if (data.avatar !== undefined) updateData.avatar = data.avatar;
+    if (data.removeAvatar !== undefined) updateData.removeAvatar = data.removeAvatar;
     return updateData;
   };
 
   const updateUserProfileCache = (data: UpdateUserProfileData) => {
-    const isAvatarChange = data.avatar !== undefined || data.removeAvatar;
+    const isAvatarUpdate = data.avatar !== undefined || data.removeAvatar !== undefined;
     mutate(
       makeUserProfileUrl(),
       (currentProfileData: UserProfile | undefined) => {
         const current = currentProfileData || {};
         const updatedData: Partial<UserProfile> = {};
-        if (data.firstName !== undefined) {
-          updatedData.firstName = data.firstName.trim();
+        if (data.firstName !== undefined) updatedData.firstName = data.firstName.trim();
+        if (data.lastName !== undefined) updatedData.lastName = data.lastName.trim();
+        if (isAvatarUpdate) {
+          updatedData.photoUrl = data.removeAvatar ? null : data.avatar;
+          updatedData.avatars = undefined;
         }
-        if (data.lastName !== undefined) {
-          updatedData.lastName = data.lastName.trim();
-        }
-        if (isAvatarChange) {
-          if (data.removeAvatar) {
-            updatedData.photoUrl = null;
-          } else if (data.avatar !== undefined) {
-            updatedData.photoUrl = data.avatar;
-          }
-        }
-        return {
-          ...current,
-          ...updatedData,
-        };
+        return { ...current, ...updatedData };
       },
-      {
-        revalidate: isAvatarChange,
-      },
+      { revalidate: isAvatarUpdate },
     );
   };
 
-  const getUpdateFields = (data: UpdateUserProfileData): string[] => {
-    return Object.keys(data).filter(
-      (key) => data[key as keyof UpdateUserProfileData] !== undefined,
-    );
-  };
+  const getUpdateFields = (data: UpdateUserProfileData): string[] =>
+    Object.keys(data).filter((key) => data[key as keyof UpdateUserProfileData] !== undefined);
 
   const handleUpdateError = (
     errors: Record<string, string> | undefined,
     updateFields: string[],
   ): { errors?: Record<string, string> } | void => {
-    if (errors && Object.keys(errors).length > 0) {
-      logErrorToSentry(new Error('Update profile failed with validation errors'), {
-        transactionName: 'updateUserProfile',
-        metadata: { errorType: 'validation', errors, updateFields },
-      });
-      addSentryBreadcrumb('profile.update', 'Update user profile failed', {
-        errorType: 'validation',
-        errorFields: Object.keys(errors),
-      });
-      return { errors };
-    }
-
+    const hasErrors = errors && Object.keys(errors).length > 0;
+    const errorType = hasErrors ? 'validation' : 'generic';
+    const errorMessage = hasErrors
+      ? 'Update profile failed with validation errors'
+      : 'Update profile failed with generic error';
+    logErrorToSentry(new Error(errorMessage), {
+      transactionName: ProfileUpdateTelemetry.TransactionName,
+      metadata: { errorType, errors, updateFields },
+    });
+    addSentryBreadcrumb(ProfileUpdateTelemetry.BreadcrumbCategory, 'Update user profile failed', {
+      errorType,
+      ...(hasErrors && { errorFields: Object.keys(errors) }),
+    });
+    if (hasErrors) return { errors };
     toast(t('error.general'), { status: ToastStatus.Error });
-    logErrorToSentry(new Error('Update profile failed with generic error'), {
-      transactionName: 'updateUserProfile',
-      metadata: { errorType: 'generic', updateFields },
-    });
-    addSentryBreadcrumb('profile.update', 'Update user profile failed', {
-      errorType: 'generic',
-    });
     return undefined;
   };
 
   const handleUpdateException = (error: unknown, updateFields: string[]) => {
     toast(t('error.general'), { status: ToastStatus.Error });
     logErrorToSentry(error, {
-      transactionName: 'updateUserProfile',
+      transactionName: ProfileUpdateTelemetry.TransactionName,
       metadata: { errorType: 'exception', updateFields },
     });
-    addSentryBreadcrumb('profile.update', 'Update user profile exception', {
-      error: String(error),
-      updateFields,
-    });
+    addSentryBreadcrumb(
+      ProfileUpdateTelemetry.BreadcrumbCategory,
+      'Update user profile exception',
+      {
+        error: String(error),
+        updateFields,
+      },
+    );
+  };
+
+  const handleUpdateSuccess = (data: UpdateUserProfileData, updateFields: string[]) => {
+    updateUserProfileCache(data);
+    toast(t('profile:success.details'), { status: ToastStatus.Success });
+    addSentryBreadcrumb(
+      ProfileUpdateTelemetry.BreadcrumbCategory,
+      'Update user profile succeeded',
+      {
+        updatedFields: updateFields,
+      },
+    );
+  };
+
+  const processUpdateResponse = (
+    response: { success: boolean; message?: string },
+    errors: Record<string, string> | undefined,
+    updateFields: string[],
+  ): { errors?: Record<string, string> } | void => {
+    if (!response.success) {
+      return errors?.avatar
+        ? { errors: { avatar: response.message || t('errors.upload-avatar-failed') } }
+        : handleUpdateError(errors, updateFields);
+    }
+    return undefined;
   };
 
   const updateProfile = async (
     data: UpdateUserProfileData,
   ): Promise<{ errors?: Record<string, string> } | void> => {
     setIsUpdating(true);
-
     const updateFields = getUpdateFields(data);
-    addSentryBreadcrumb('profile.update', 'Update user profile started', {
+    addSentryBreadcrumb(ProfileUpdateTelemetry.BreadcrumbCategory, 'Update user profile started', {
       fields: updateFields,
       hasAvatar: data.avatar !== undefined,
       removeAvatar: data.removeAvatar,
@@ -144,19 +157,12 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
     try {
       const updateData = buildUpdateData(data);
       const { data: response, errors } = await updateUserProfile(updateData);
-
-      if (!response.success) {
-        if (errors?.avatar) {
-          return { errors: { avatar: response.message } };
-        }
-        return handleUpdateError(errors, updateFields);
+      const errorResult = processUpdateResponse(response, errors, updateFields);
+      if (errorResult) {
+        return errorResult;
       }
 
-      updateUserProfileCache(data);
-      toast(t('profile:success.details'), { status: ToastStatus.Success });
-      addSentryBreadcrumb('profile.update', 'Update user profile succeeded', {
-        updatedFields: updateFields,
-      });
+      handleUpdateSuccess(data, updateFields);
       return undefined;
     } catch (error) {
       handleUpdateException(error, updateFields);

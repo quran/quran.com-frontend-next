@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo, useCallback } from 'react';
 import type React from 'react';
 
 import { logErrorToSentry } from '@/lib/sentry';
@@ -27,6 +27,21 @@ interface UploadImageOptions {
   sentryTransactionName?: string;
 }
 
+const convertFileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        resolve(reader.result);
+      } else {
+        reject(new Error('Failed to read file as base64'));
+      }
+    };
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+};
+
 const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -42,91 +57,86 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     onError,
   } = options;
 
-  const defaultErrorMessages: Required<ValidationErrorMessages> = {
-    invalidFileType: 'Please select a valid image file',
-    fileExceedsLimit: `Image size exceeds the limit`,
-  };
+  const messages = useMemo(() => {
+    const defaultErrorMessages: Required<ValidationErrorMessages> = {
+      invalidFileType: 'Please select a valid image file',
+      fileExceedsLimit: `Image size exceeds the limit`,
+    };
+    return { ...defaultErrorMessages, ...errorMessages };
+  }, [errorMessages]);
 
-  const messages = { ...defaultErrorMessages, ...errorMessages };
-
-  const convertFileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (typeof reader.result === 'string') {
-          resolve(reader.result);
-        } else {
-          reject(new Error('Failed to read file as base64'));
-        }
-      };
-      reader.onerror = () => reject(new Error('Failed to read file'));
-      reader.readAsDataURL(file);
-    });
-  };
-
-  const validateImageFile = (file: File): string | null => {
-    if (!file.type.startsWith('image/')) {
-      return messages.invalidFileType;
-    }
-
-    if (maxSize && file.size > maxSize) {
-      return messages.fileExceedsLimit;
-    }
-
-    if (allowedTypes && !allowedTypes.includes(file.type)) {
-      return messages.invalidFileType;
-    }
-
-    return null;
-  };
-
-  const uploadImage = async (file: File) => {
-    if (!uploadFunction) {
-      throw new Error('Upload function is required');
-    }
-
-    const fileData = await convertFileToBase64(file);
-    await uploadFunction(fileData);
-    onSuccess?.();
-  };
-
-  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const validationError = validateImageFile(file);
-    if (validationError) {
-      onError?.(validationError);
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      await uploadImage(file);
-    } catch (error) {
-      logErrorToSentry(error, {
-        transactionName: sentryTransactionName,
-        metadata: {
-          fileName: file.name,
-          fileSize: file.size,
-          fileType: file.type,
-        },
-      });
-      onError?.(error);
-    } finally {
-      setIsLoading(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+  const validateImageFile = useCallback(
+    (file: File): string | null => {
+      if (!file.type.startsWith('image/')) {
+        return messages.invalidFileType;
       }
-    }
-  };
 
-  const handleUploadPicture = () => {
+      if (maxSize && file.size > maxSize) {
+        return messages.fileExceedsLimit;
+      }
+
+      if (allowedTypes && !allowedTypes.includes(file.type)) {
+        return messages.invalidFileType;
+      }
+
+      return null;
+    },
+    [messages, maxSize, allowedTypes],
+  );
+
+  const uploadImage = useCallback(
+    async (file: File) => {
+      if (!uploadFunction) {
+        throw new Error('Upload function is required');
+      }
+
+      const fileData = await convertFileToBase64(file);
+      await uploadFunction(fileData);
+      onSuccess?.();
+    },
+    [uploadFunction, onSuccess],
+  );
+
+  const handleFileSelect = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const validationError = validateImageFile(file);
+      if (validationError) {
+        onError?.(validationError);
+        return;
+      }
+
+      setIsLoading(true);
+
+      try {
+        await uploadImage(file);
+      } catch (error) {
+        logErrorToSentry(error, {
+          transactionName: sentryTransactionName,
+          metadata: {
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+          },
+        });
+        onError?.(error);
+      } finally {
+        setIsLoading(false);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
+      }
+    },
+    [uploadImage, validateImageFile, onError, sentryTransactionName],
+  );
+
+  const handleUploadPicture = useCallback(() => {
     fileInputRef.current?.click();
-  };
+  }, []);
 
-  const handleRemovePicture = async () => {
+  const handleRemovePicture = useCallback(async () => {
     if (!removeFunction) {
       onError?.(new Error('Remove function is required'));
       return;
@@ -146,7 +156,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [removeFunction, onSuccess, onError, sentryTransactionName]);
 
   return {
     isLoading,

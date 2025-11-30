@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { RefObject, useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -11,7 +11,14 @@ import {
   MAX_IMAGE_SIZE_MB,
 } from '@/utils/image-format';
 
-const useProfilePictureForm = () => {
+const useProfilePictureForm = (): {
+  fileInputRef: RefObject<HTMLInputElement>;
+  handleUploadPicture: () => void;
+  handleFileSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleRemovePicture: () => void;
+  isProcessing: boolean;
+  isRemoving: boolean;
+} => {
   const { t } = useTranslation('common');
   const toast = useToast();
   const [isRemoving, setIsRemoving] = useState(false);
@@ -32,25 +39,21 @@ const useProfilePictureForm = () => {
 
   const uploadFunction = useCallback(
     async (base64String: string) => {
-      try {
-        const result = await updateProfile({ avatar: base64String });
-        if (result && 'errors' in result && result.errors) {
-          // Handle validation errors
-          if (result.errors.avatar) {
-            // Fallback to a generic message if translation fails
-            const errorMessage = result.errors.avatar || t('errors.upload-avatar-failed');
-            toast(errorMessage, {
-              status: ToastStatus.Error,
-            });
-          } else {
-            // Generic error if no specific field error
-            toast(t('errors.upload-avatar-failed'), {
-              status: ToastStatus.Error,
-            });
-          }
+      const result = await updateProfile({ avatar: base64String });
+      if (result && 'errors' in result && result.errors) {
+        // Handle validation errors
+        if (result.errors.avatar) {
+          // Fallback to a generic message if translation fails
+          const errorMessage = result.errors.avatar || t('errors.upload-avatar-failed');
+          toast(errorMessage, {
+            status: ToastStatus.Error,
+          });
+        } else {
+          // Generic error if no specific field error
+          toast(t('errors.upload-avatar-failed'), {
+            status: ToastStatus.Error,
+          });
         }
-      } catch {
-        // Error is already handled by the useUpdateUserProfile hook
       }
     },
     [updateProfile, toast, t],
@@ -58,36 +61,23 @@ const useProfilePictureForm = () => {
 
   const removeFunction = useCallback(async () => {
     setIsRemoving(true);
-    try {
-      const result = await updateProfile({ removeAvatar: true });
-      if (result && 'errors' in result && result.errors) {
-        // Handle validation errors
-        if (result.errors.avatar) {
-          // Try to translate the error, fallback to a generic message if translation fails
-          const errorMessage = t(
-            result.errors.avatar,
-            {
-              fieldName: 'avatar',
-            },
-            {
-              fallback: t('errors.remove-avatar-failed'),
-            },
-          );
-          toast(errorMessage, {
-            status: ToastStatus.Error,
-          });
-        } else {
-          // Generic error if no specific field error
-          toast(t('errors.remove-avatar-failed'), {
-            status: ToastStatus.Error,
-          });
-        }
+    const result = await updateProfile({ removeAvatar: true });
+    if (result && 'errors' in result && result.errors) {
+      // Handle validation errors
+      if (result.errors.removeAvatar) {
+        // Fallback to a generic message if translation fails
+        const errorMessage = result.errors.removeAvatar || t('errors.remove-avatar-failed');
+        toast(errorMessage, {
+          status: ToastStatus.Error,
+        });
+      } else {
+        // Generic error if no specific field error
+        toast(t('errors.remove-avatar-failed'), {
+          status: ToastStatus.Error,
+        });
       }
-    } catch {
-      // Error is already handled by the useUpdateUserProfile hook
-    } finally {
-      setIsRemoving(false);
     }
+    setIsRemoving(false);
   }, [updateProfile, toast, t]);
 
   const onImageUploadError = useCallback(
@@ -118,7 +108,6 @@ const useProfilePictureForm = () => {
     handleRemovePicture,
     isProcessing,
     isRemoving,
-    translationParams,
   };
 };
 
