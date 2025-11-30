@@ -18,6 +18,7 @@ const useProfilePictureForm = (): {
   handleRemovePicture: () => void;
   isProcessing: boolean;
   isRemoving: boolean;
+  translationParams: { maxSize: string; allowedFormats: string };
 } => {
   const { t } = useTranslation('common');
   const toast = useToast();
@@ -108,6 +109,7 @@ const useProfilePictureForm = (): {
     handleRemovePicture,
     isProcessing,
     isRemoving,
+    translationParams,
   };
 };
 
