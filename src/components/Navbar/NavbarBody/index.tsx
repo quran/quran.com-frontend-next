@@ -158,6 +158,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
               ariaLabel={t('aria.nav-drawer-open')}
+              data-testid="open-navigation-drawer"
             >
               <IconMenu />
             </Button>
@@ -174,23 +175,22 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
           <div className={styles.rightCTA}>
             <ProfileAvatarButton />
             <LanguageSelector />
-            <div>
-              <Button
-                tooltip={t('search.title')}
-                variant={ButtonVariant.Ghost}
-                onClick={openSearchDrawer}
-                shape={ButtonShape.Circle}
-                shouldFlipOnRTL={false}
-                ariaLabel={t('search.title')}
-              >
-                <IconSearch />
-              </Button>
-              <SearchDrawer />
+            <Button
+              tooltip={t('search.title')}
+              variant={ButtonVariant.Ghost}
+              onClick={openSearchDrawer}
+              shape={ButtonShape.Circle}
+              shouldFlipOnRTL={false}
+              ariaLabel={t('search.title')}
+              data-testid="open-search-drawer"
+            >
+              <IconSearch />
+            </Button>
+            <SearchDrawer />
 
-              {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            {shouldRenderSidebarNavigation && <SidebarNavigation />}
 
-              <SettingsDrawer />
-            </div>
+            <SettingsDrawer />
           </div>
         </div>
       </div>
