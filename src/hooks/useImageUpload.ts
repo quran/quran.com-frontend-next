@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import type React from 'react';
 
 import { logErrorToSentry } from '@/lib/sentry';
@@ -42,12 +42,13 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     onError,
   } = options;
 
-  const defaultErrorMessages: Required<ValidationErrorMessages> = {
-    invalidFileType: 'Please select a valid image file',
-    fileExceedsLimit: `Image size exceeds the limit`,
-  };
-
-  const messages = { ...defaultErrorMessages, ...errorMessages };
+  const messages = useMemo(() => {
+    const defaultErrorMessages: Required<ValidationErrorMessages> = {
+      invalidFileType: 'Please select a valid image file',
+      fileExceedsLimit: `Image size exceeds the limit`,
+    };
+    return { ...defaultErrorMessages, ...errorMessages };
+  }, [errorMessages]);
 
   const convertFileToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {

@@ -1,11 +1,12 @@
 export const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png'] as const;
 export const MAX_IMAGE_SIZE_MB = 5;
 
+const KB = 1024;
+const MB = KB * 1024;
+const GB = MB * 1024;
+
 export const formatFileSize = (sizeInMB: number): string => {
   const sizeInBytes = sizeInMB * 1024 * 1024;
-  const KB = 1024;
-  const MB = KB * 1024;
-  const GB = MB * 1024;
 
   if (sizeInBytes < KB) {
     return `${sizeInBytes} B`;
@@ -16,7 +17,7 @@ export const formatFileSize = (sizeInMB: number): string => {
   if (sizeInBytes < GB) {
     return `${sizeInMB} MB`;
   }
-  return `${(sizeInMB / 1024).toFixed(2)} GB`;
+  return `${(sizeInBytes / GB).toFixed(2)} GB`;
 };
 
 export const getAllowedImageFormats = (types: readonly string[]): string => {
