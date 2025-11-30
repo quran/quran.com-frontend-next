@@ -1,6 +1,6 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
-@use "src/styles/constants";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+@use 'src/styles/constants';
 
 .container {
   @include utility.pageContainer();
@@ -35,6 +35,16 @@
   &.lessonView {
     @include breakpoints.tablet {
       width: 80%;
+    }
+  }
+
+  &.sheets {
+    background-color: var(--color-background-default);
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium2-px);
+
+    @include breakpoints.tablet {
+      border-radius: 0;
     }
   }
 }
