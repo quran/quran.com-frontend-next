@@ -22,9 +22,16 @@ type PageProps = {
   pageNumber: number;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
+  bookmarksRangeUrl: string | null;
 };
 
-const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) => {
+const Page = ({
+  verses,
+  pageNumber,
+  quranReaderStyles,
+  pageIndex,
+  bookmarksRangeUrl,
+}: PageProps) => {
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
     verses?.length > 0
       ? {
@@ -63,6 +70,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
             key={key}
             isBigTextLayout={isBigTextLayout}
             quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
           />
         ))}
         <PageFooter page={pageNumber} />

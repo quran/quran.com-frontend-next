@@ -13,7 +13,10 @@ import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -152,6 +155,19 @@ const PageContainer: React.FC<Props> = ({
     }
   }, [pageNumber, setMushafPageToVersesMap, effectiveVerses]);
 
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+
+  // Calculate bookmarks range URL for bulk fetching
+  const bookmarksRangeUrl =
+    effectiveVerses && effectiveVerses.length && isLoggedIn()
+      ? makeBookmarksRangeUrl(
+          mushafId,
+          Number(effectiveVerses[0].chapterId),
+          Number(effectiveVerses[0].verseNumber),
+          effectiveVerses.length,
+        )
+      : null;
+
   if (!effectiveVerses || isValidating) {
     return <ReadingViewSkeleton />;
   }
@@ -163,6 +179,7 @@ const PageContainer: React.FC<Props> = ({
       pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
+      bookmarksRangeUrl={bookmarksRangeUrl}
     />
   );
 };

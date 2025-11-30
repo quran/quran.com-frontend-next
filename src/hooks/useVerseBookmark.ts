@@ -9,14 +9,14 @@ import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { WordVerse } from '@/types/Word';
-import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
-import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { addBookmark, deleteBookmarkById, privateFetcher } from '@/utils/auth/api';
+import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
 import Bookmark from 'types/Bookmark';
+import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 
 const NOT_BOOKMARKED = null;
 type BookmarkCacheValue = Bookmark | null;
-type BookmarksRangeData = Record<string, Bookmark> | undefined;
 
 interface UseVerseBookmarkProps {
   verse: WordVerse;
@@ -32,6 +32,7 @@ interface UseVerseBookmarkReturn {
 
 /**
  * Custom hook for verse bookmark operations
+ * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency
  * @returns {UseVerseBookmarkReturn} Bookmark state and toggle handler
  */
 const useVerseBookmark = ({
@@ -55,50 +56,46 @@ const useVerseBookmark = ({
     globalMutate(makeBookmarksUrl(mushafId));
   }, [globalMutate, mushafId]);
 
-  const bookmarkUrl = isLoggedIn
-    ? makeBookmarkUrl(
-        mushafId,
-        Number(verse.chapterId),
-        BookmarkType.Ayah,
-        Number(verse.verseNumber),
-      )
-    : null;
+  // Only use bulk fetch when logged in and URL is provided
+  const shouldFetchBookmarks = isLoggedIn && !!bookmarksRangeUrl;
 
-  const { data: bookmark, isValidating: isLoading } = useSWRImmutable(bookmarkUrl, async () => {
-    const response = await getBookmark(
-      mushafId,
-      Number(verse.chapterId),
-      BookmarkType.Ayah,
-      Number(verse.verseNumber),
-    );
-    return response || NOT_BOOKMARKED;
-  });
+  // Fetch page bookmarks (bulk) - SWR deduplicates across all instances
+  const { data: pageBookmarks, isValidating: isLoading } = useSWRImmutable<BookmarksMap>(
+    shouldFetchBookmarks ? bookmarksRangeUrl : null,
+    () => privateFetcher(bookmarksRangeUrl),
+  );
+
+  // Extract bookmark for this specific verse
+  const bookmark = useMemo(() => {
+    return pageBookmarks?.[verse.verseKey] || NOT_BOOKMARKED;
+  }, [pageBookmarks, verse.verseKey]);
 
   const isVerseBookmarked = useMemo(() => {
     if (isLoggedIn) return bookmark && bookmark !== NOT_BOOKMARKED;
     return !!bookmarkedVerses[verse.verseKey];
   }, [isLoggedIn, bookmarkedVerses, bookmark, verse.verseKey]);
 
+  // Helper: Update bookmark cache
   const updateBookmarkCaches = useCallback(
     (value: BookmarkCacheValue) => {
-      globalMutate(bookmarkUrl, value, { revalidate: false });
-      if (bookmarksRangeUrl) {
-        globalMutate(
-          bookmarksRangeUrl,
-          (currentData: BookmarksRangeData) => {
-            if (!currentData) return currentData;
-            if (value === null) {
-              const newData = { ...currentData };
-              delete newData[verse.verseKey];
-              return newData;
-            }
-            return { ...currentData, [verse.verseKey]: value };
-          },
-          { revalidate: false },
-        );
-      }
+      if (!bookmarksRangeUrl) return;
+
+      // Update bulk fetch cache
+      globalMutate(
+        bookmarksRangeUrl,
+        (currentData: BookmarksMap) => {
+          if (!currentData) return currentData;
+          if (value === null) {
+            const newData = { ...currentData };
+            delete newData[verse.verseKey];
+            return newData;
+          }
+          return { ...currentData, [verse.verseKey]: value };
+        },
+        { revalidate: false },
+      );
     },
-    [globalMutate, bookmarkUrl, bookmarksRangeUrl, verse.verseKey],
+    [globalMutate, bookmarksRangeUrl, verse.verseKey],
   );
 
   const handleAddBookmark = useCallback(async () => {

@@ -29,9 +29,17 @@ export type LineProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
+  bookmarksRangeUrl: string | null;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
+const Line = ({
+  lineKey,
+  words,
+  isBigTextLayout,
+  pageIndex,
+  lineIndex,
+  bookmarksRangeUrl,
+}: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
     const { surah, ayahNumber } = state.context;
@@ -115,6 +123,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           isReadingMode
           isHighlighted={isHighlighted}
           shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
+          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </div>
     </div>
