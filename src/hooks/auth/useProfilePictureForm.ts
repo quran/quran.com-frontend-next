@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -14,6 +14,7 @@ import {
 const useProfilePictureForm = () => {
   const { t } = useTranslation('common');
   const toast = useToast();
+  const [isRemoving, setIsRemoving] = useState(false);
 
   const translationParams = useMemo(() => getImageUploadTranslationParams(), []);
 
@@ -64,6 +65,7 @@ const useProfilePictureForm = () => {
   );
 
   const removeFunction = useCallback(async () => {
+    setIsRemoving(true);
     try {
       const result = await updateProfile({ removeAvatar: true });
       if (result && 'errors' in result && result.errors) {
@@ -91,6 +93,8 @@ const useProfilePictureForm = () => {
       }
     } catch {
       // Error is already handled by the useUpdateUserProfile hook
+    } finally {
+      setIsRemoving(false);
     }
   }, [updateProfile, toast, t]);
 
@@ -121,8 +125,8 @@ const useProfilePictureForm = () => {
     handleFileSelect,
     handleRemovePicture,
     isProcessing,
+    isRemoving,
     translationParams,
-    t,
   };
 };
 
