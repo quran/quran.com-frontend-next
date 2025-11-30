@@ -146,6 +146,9 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
       const { data: response, errors } = await updateUserProfile(updateData);
 
       if (!response.success) {
+        if (errors?.avatar) {
+          return { errors: { avatar: response.message } };
+        }
         return handleUpdateError(errors, updateFields);
       }
 

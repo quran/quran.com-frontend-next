@@ -37,16 +37,8 @@ const useProfilePictureForm = () => {
         if (result && 'errors' in result && result.errors) {
           // Handle validation errors
           if (result.errors.avatar) {
-            // Try to translate the error, fallback to a generic message if translation fails
-            const errorMessage = t(
-              result.errors.avatar,
-              {
-                fieldName: 'avatar',
-              },
-              {
-                fallback: t('errors.upload-avatar-failed'),
-              },
-            );
+            // Fallback to a generic message if translation fails
+            const errorMessage = result.errors.avatar || t('errors.upload-avatar-failed');
             toast(errorMessage, {
               status: ToastStatus.Error,
             });
