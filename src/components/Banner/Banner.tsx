@@ -5,6 +5,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import DiamondIcon from '@/icons/diamond.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import {
   getReadingGoalNavigationUrl,
   getReadingGoalProgressNavigationUrl,
@@ -26,6 +27,13 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const ctaLink =
     isLoggedIn && hasGoal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl();
 
+  const handleButtonClick = () => {
+    logButtonClick('banner_cta', {
+      hasGoal,
+      isLoggedIn,
+    });
+  };
+
   return (
     <div className={styles.container} data-testid="banner">
       <p className={styles.text}>{text}</p>
@@ -35,6 +43,7 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
           variant={LinkVariant.Blend}
           className={styles.cta}
           ariaLabel={ctaButtonText}
+          onClick={handleButtonClick}
         >
           <IconContainer
             icon={<DiamondIcon aria-hidden="true" />}
