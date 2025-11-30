@@ -62,7 +62,7 @@ const useVerseBookmark = ({
   // Fetch page bookmarks (bulk) - SWR deduplicates across all instances
   const { data: pageBookmarks, isValidating: isLoading } = useSWRImmutable<BookmarksMap>(
     shouldFetchBookmarks ? bookmarksRangeUrl : null,
-    () => privateFetcher(bookmarksRangeUrl),
+    (url: string) => privateFetcher(url),
   );
 
   // Extract bookmark for this specific verse

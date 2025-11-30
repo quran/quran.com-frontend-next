@@ -151,6 +151,7 @@ const Line = ({
 const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
   prevProps.lineKey === nextProps.lineKey &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
+  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,

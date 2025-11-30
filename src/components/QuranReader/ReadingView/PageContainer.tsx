@@ -9,6 +9,7 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -16,7 +17,6 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -99,6 +99,7 @@ const PageContainer: React.FC<Props> = ({
    * and consistent throughout the component lifecycle, preventing cache key mismatches.
    */
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
+  const { isLoggedIn } = useIsLoggedIn();
 
   const pageNumber = useMemo(
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
@@ -159,7 +160,7 @@ const PageContainer: React.FC<Props> = ({
 
   // Calculate bookmarks range URL for bulk fetching
   const bookmarksRangeUrl =
-    effectiveVerses && effectiveVerses.length && isLoggedIn()
+    effectiveVerses && effectiveVerses.length && isLoggedIn
       ? makeBookmarksRangeUrl(
           mushafId,
           Number(effectiveVerses[0].chapterId),
