@@ -31,7 +31,17 @@ const enum ProfileUpdateTelemetry {
 /**
  * Custom hook for updating user profile
  * Handles the submission logic, cache updates, and toast notifications
- * @returns {UseUpdateUserProfileReturn} Object containing updateProfile function and isUpdating state
+ * @returns {UseUpdateUserProfileReturn} Object containing:
+ *   - updateProfile: Function to update user profile data.
+ *     Accepts UpdateUserProfileData parameter with optional fields:
+ *     - firstName?: string - User's first name
+ *     - lastName?: string - User's last name
+ *     - avatar?: string - Avatar image URL
+ *     - removeAvatar?: boolean - Flag to remove the current avatar
+ *     Returns Promise<{ errors?: Record<string, string> } | void>:
+ *     - Resolves to { errors?: Record<string, string> } if validation fails
+ *     - Resolves to undefined if update succeeds or generic error occurs
+ *   - isUpdating: boolean - Indicates whether a profile update is currently in progress
  */
 const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
   const { t } = useTranslation('common');
