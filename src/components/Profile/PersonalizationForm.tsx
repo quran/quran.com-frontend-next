@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+
 import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,7 +13,7 @@ import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
 import UserIcon from '@/icons/user.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
-const PersonalizationForm: React.FC = () => {
+const PersonalizationForm: FC = () => {
   const { t } = useTranslation('profile');
   const { userData } = useAuthData();
   const hasProfilePicture = !!userData?.avatars?.large;
@@ -43,9 +45,9 @@ const PersonalizationForm: React.FC = () => {
         <div className={styles.profilePictureDetailAction}>
           <div className={styles.profilePictureDetail}>
             <div className={styles.profilePictureImage}>
-              {hasProfilePicture && userData?.avatars?.large ? (
+              {hasProfilePicture ? (
                 <Image
-                  src={userData.avatars?.large}
+                  src={userData.avatars.large}
                   alt={t('profile-picture')}
                   width={60}
                   height={60}
@@ -67,7 +69,6 @@ const PersonalizationForm: React.FC = () => {
               accept="image/jpeg,image/jpg,image/png"
               onChange={handleFileSelect}
               style={{ display: 'none' }}
-              aria-hidden="true"
             />
             <Button
               variant={ButtonVariant.Ghost}
@@ -75,7 +76,7 @@ const PersonalizationForm: React.FC = () => {
               className={classNames(styles.profilePictureActionButton, styles.uploadPictureButton)}
               onClick={onUploadPicture}
               isLoading={isProcessing}
-              isDisabled={isProcessing}
+              isDisabled={isProcessing || isRemoving}
             >
               {t('upload-picture')}
             </Button>
@@ -86,7 +87,7 @@ const PersonalizationForm: React.FC = () => {
                 className={styles.profilePictureActionButton}
                 onClick={onRemovePicture}
                 isLoading={isRemoving}
-                isDisabled={isProcessing}
+                isDisabled={isProcessing || isRemoving}
               >
                 {t('remove-picture')}
               </Button>

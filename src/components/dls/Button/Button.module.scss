@@ -232,7 +232,7 @@
 
 .simplified {
   @extend .simplified_base;
-  --themed-bg: #22a5ad;
+  --themed-bg: var(--color-qdc-blue);
 }
 
 .simplified_accent {

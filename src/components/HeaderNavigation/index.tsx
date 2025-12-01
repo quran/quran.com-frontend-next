@@ -8,12 +8,12 @@ import useIsMobile from '@/hooks/useIsMobile';
 import ArrowLeft from '@/icons/arrow-left.svg';
 import Background from '@/icons/background.svg';
 
-interface Props {
+interface HeaderNavigationProps {
   backUrl: string;
   title: string;
 }
 
-const HeaderNavigation: React.FC<Props> = ({ backUrl, title }) => {
+const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ backUrl, title }) => {
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
 

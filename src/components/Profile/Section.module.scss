@@ -7,7 +7,5 @@
   .title {
     font-size: var(--font-size-medium-px);
     font-weight: var(--font-weight-bold);
-    @include breakpoints.tablet {
-    }
   }
 }

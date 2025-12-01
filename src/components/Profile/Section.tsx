@@ -2,12 +2,12 @@ import React from 'react';
 
 import styles from './Section.module.scss';
 
-interface Props {
+interface SectionProps {
   title: string;
   children: React.ReactNode;
 }
 
-const Section: React.FC<Props> = ({ title, children }) => {
+const Section: React.FC<SectionProps> = ({ title, children }) => {
   return (
     <div className={styles.section}>
       <h2 className={styles.title}>{title}</h2>

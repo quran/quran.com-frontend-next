@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './profile.module.scss';
@@ -12,19 +14,21 @@ import Separator from '@/dls/Separator/Separator';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
 
-const ProfilePage: React.FC = () => {
+const ProfilePage: FC = () => {
   const { t, lang } = useTranslation('profile');
+
+  const profilePath = getProfileNavigationUrl();
 
   return (
     <>
       <NextSeoWrapper
         title={t('common:profile')}
-        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
+        url={getCanonicalUrl(lang, profilePath)}
         languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
         nofollow
         noindex
       />
-      <HeaderNavigation backUrl={getProfileNavigationUrl()} title={t('my-profile')} />
+      <HeaderNavigation backUrl={profilePath} title={t('my-profile')} />
       <PageContainer isSheetsLike className={styles.wrapper}>
         <div className={styles.topDivider}>
           <Separator />
