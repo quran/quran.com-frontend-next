@@ -10,7 +10,7 @@ import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
-import { isAuthPage } from '@/utils/routes';
+import { isAuthPage, isEmbedPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
 
 interface AppContentProps {
@@ -24,6 +24,12 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { t } = useTranslation('common');
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
+  const isEmbed = isEmbedPage(router);
+
+  // Embed pages render in a minimal layout without chrome
+  if (isEmbed) {
+    return <Component {...pageProps} />;
+  }
 
   return (
     <>
