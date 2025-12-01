@@ -29,7 +29,7 @@ import {
   logEmptySearchResults,
 } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl } from '@/utils/navigation';
+import { buildUrlWithParams, getCanonicalUrl } from '@/utils/navigation';
 import { getAdvancedSearchQuery } from '@/utils/search';
 import AvailableLanguage from 'types/AvailableLanguage';
 import ChaptersData from 'types/ChaptersData';
@@ -92,16 +92,10 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
   useAddQueryParamsToUrl(navigationUrl, queryParams);
 
   // Generate canonical path so that it can be used by the built-in mobile share button
-  const canonicalPath = useMemo(() => {
-    const params = new URLSearchParams();
-    Object.entries(queryParams).forEach(([key, value]) => {
-      if (value !== undefined) {
-        params.set(key, String(value));
-      }
-    });
-    const queryString = params.toString();
-    return `${navigationUrl}${queryString ? `?${queryString}` : ''}`;
-  }, [queryParams]);
+  const canonicalPath = useMemo(
+    () => buildUrlWithParams(navigationUrl, queryParams),
+    [queryParams],
+  );
 
   const REQUEST_PARAMS = getAdvancedSearchQuery(
     searchQuery,
