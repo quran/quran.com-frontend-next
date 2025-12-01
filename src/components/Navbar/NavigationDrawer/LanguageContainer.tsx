@@ -57,6 +57,10 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
   };
 
   const onLanguageChange = async (newLocale: string) => {
+    if (newLocale === lang) {
+      onBack();
+      return;
+    }
     try {
       if (isUsingDefaultSettings) {
         dispatch(resetSettings(newLocale));
@@ -73,8 +77,11 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
           PreferenceGroup.LANGUAGE,
         ).catch(handleLanguagePersistError);
       }
-    } finally {
       onBack();
+    } catch (error) {
+      toast(t('error.language-change-failed'), {
+        status: ToastStatus.Error,
+      });
     }
   };
 

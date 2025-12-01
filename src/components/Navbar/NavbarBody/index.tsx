@@ -18,6 +18,7 @@ import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDra
 import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
@@ -31,7 +32,6 @@ import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
-import { isLoggedIn } from '@/utils/auth/login';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -74,8 +74,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
-  const loggedIn = isLoggedIn();
-
+  const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
@@ -184,7 +183,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
-            {!loggedIn && <ProfileAvatarButton />}
+            {!isLoggedIn && <ProfileAvatarButton />}
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
@@ -199,7 +198,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             <SearchDrawer />
 
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
-            {loggedIn && <ProfileAvatarButton />}
+            {isLoggedIn && <ProfileAvatarButton />}
 
             <Button
               tooltip={t('menu')}

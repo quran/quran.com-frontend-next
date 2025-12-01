@@ -161,6 +161,7 @@
   },
   "end-year-donate": "End 2024 with Sadaqah ❤️",
   "error": {
+    "language-change-failed": "Failed to change language. Please try again.",
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "bookmark-sync": "Bookmark is out of sync.",
     "email-login-fail": "Failed to login with email. Please try again",
