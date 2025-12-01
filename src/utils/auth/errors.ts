@@ -431,6 +431,19 @@ export const createNullError = (error: unknown, context?: Record<string, any>): 
  * @param {Record<string, any>} context - Additional context
  * @returns {AuthError} Classified AuthError
  */
+/**
+ * Check if an error is a bookmark sync error (status 400)
+ * Used when the server rejects bookmark operations due to sync conflicts
+ *
+ * @param {unknown} err - The error to check
+ * @returns {boolean} True if the error is a bookmark sync error
+ */
+export const isBookmarkSyncError = (err: unknown): boolean => {
+  if (!err || typeof err !== 'object') return false;
+  if ('status' in err && err.status === 400) return true;
+  return false;
+};
+
 export const classifyError = (error: unknown, context?: Record<string, any>): AuthError => {
   if (!error) return createNullError(error, context);
 

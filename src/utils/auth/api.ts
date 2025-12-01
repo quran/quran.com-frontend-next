@@ -407,11 +407,22 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+export const addCollectionBookmark = async ({
+  collectionId,
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
+}) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
-    collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -424,14 +435,19 @@ export const deleteCollectionBookmarkById = async (collectionId: string, bookmar
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
   key,
-  mushaf,
+  mushafId,
   type,
   verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
-    collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });

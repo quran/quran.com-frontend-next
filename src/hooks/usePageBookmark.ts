@@ -1,15 +1,13 @@
 import { useCallback, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
-import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import { ToastStatus } from '@/components/dls/Toast/Toast';
+import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranReader/bookmarks';
-import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
-import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { getBookmark } from '@/utils/auth/api';
+import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
 import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 
@@ -27,6 +25,7 @@ interface UsePageBookmarkReturn {
 /**
  * Custom hook for page bookmark operations
  * Handles all logic related to bookmarking pages
+ *
  * @param {UsePageBookmarkProps} props - Hook configuration
  * @param {number} props.pageNumber - The page number to bookmark
  * @param {number} props.mushafId - The Mushaf ID
@@ -35,23 +34,19 @@ interface UsePageBookmarkReturn {
 const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePageBookmarkReturn => {
   const dispatch = useDispatch();
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
-  const { mutate: globalMutate } = useSWRConfig();
-  const toast = useToast();
-  const { t } = useTranslation('common');
-  const { isLoggedIn } = useIsLoggedIn();
 
-  // Helper: Show toast message
-  const showToast = useCallback(
-    (messageKey: string, status: ToastStatus) => {
-      toast(t(messageKey), { status });
-    },
-    [toast, t],
-  );
-
-  // Helper: Invalidate bookmarks list cache (for /collections/all page)
-  const invalidateBookmarksList = useCallback(() => {
-    globalMutate(makeBookmarksUrl(mushafId));
-  }, [globalMutate, mushafId]);
+  const {
+    showToast,
+    invalidateBookmarksList,
+    handleAddBookmark: baseAddBookmark,
+    handleRemoveBookmark: baseRemoveBookmark,
+    isLoggedIn,
+  } = useBookmarkBase({
+    mushafId,
+    type: BookmarkType.Page,
+    key: pageNumber,
+    toastNamespace: 'quran-reader',
+  });
 
   // Use SWR to fetch bookmark data
   const {
@@ -59,9 +54,9 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     isValidating: isLoading,
     mutate,
   } = useSWRImmutable<Bookmark>(
-    isLoggedIn ? makeBookmarkUrl(mushafId, Number(pageNumber), BookmarkType.Page) : null,
+    isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
     async () => {
-      const response = await getBookmark(mushafId, Number(pageNumber), BookmarkType.Page);
+      const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
       return response;
     },
   );
@@ -76,51 +71,32 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
 
   // Helper: Handle bookmark add for logged-in user
   const handleBookmarkAdd = useCallback(async () => {
-    try {
-      const response = await addBookmark({
-        key: Number(pageNumber),
-        mushafId,
-        type: BookmarkType.Page,
-      });
-      mutate(() => response as Bookmark, { revalidate: false });
-      showToast('quran-reader:page-bookmarked', ToastStatus.Success);
-    } catch (err: unknown) {
-      mutate(); // Revalidate to get the correct state
-      const isBookmarkSyncError =
-        err && typeof err === 'object' && 'status' in err && err.status === 400;
-      showToast(
-        isBookmarkSyncError ? 'common:error.bookmark-sync' : 'common:error.general',
-        ToastStatus.Error,
-      );
+    const newBookmark = await baseAddBookmark();
+    if (newBookmark) {
+      mutate(() => newBookmark, { revalidate: false });
+      showToast('page-bookmarked', ToastStatus.Success);
+    } else {
+      mutate(); // Revalidate to get the correct state on error
     }
-  }, [pageNumber, mushafId, mutate, showToast]);
+  }, [baseAddBookmark, mutate, showToast]);
 
   // Helper: Handle bookmark removal for logged-in user
   const handleBookmarkRemove = useCallback(async () => {
     if (!bookmark) return;
-    try {
-      mutate(null, { revalidate: false }); // Optimistic update
-      await deleteBookmarkById(bookmark.id);
-      showToast('quran-reader:page-bookmark-removed', ToastStatus.Success);
-    } catch (err: unknown) {
-      mutate(); // Revalidate to get the correct state
-      const isBookmarkSyncError =
-        err && typeof err === 'object' && 'status' in err && err.status === 400;
-      showToast(
-        isBookmarkSyncError ? 'common:error.bookmark-sync' : 'common:error.general',
-        ToastStatus.Error,
-      );
+    mutate(null, { revalidate: false }); // Optimistic update
+    const success = await baseRemoveBookmark(bookmark.id);
+    if (success) {
+      showToast('page-bookmark-removed', ToastStatus.Success);
+    } else {
+      mutate(); // Revalidate to get the correct state on error
     }
-  }, [bookmark, mutate, showToast]);
+  }, [bookmark, baseRemoveBookmark, mutate, showToast]);
 
   // Helper: Handle bookmark toggle for logged-out user
   const handleLoggedOutBookmarkToggle = useCallback(() => {
-    dispatch(togglePageBookmark(pageNumber.toString()));
     const wasBookmarked = !!bookmarkedPages?.[pageNumber.toString()];
-    const messageKey = wasBookmarked
-      ? 'quran-reader:page-bookmark-removed'
-      : 'quran-reader:page-bookmarked';
-    showToast(messageKey, ToastStatus.Success);
+    dispatch(togglePageBookmark(pageNumber.toString()));
+    showToast(wasBookmarked ? 'page-bookmark-removed' : 'page-bookmarked', ToastStatus.Success);
   }, [dispatch, pageNumber, bookmarkedPages, showToast]);
 
   // Main toggle handler

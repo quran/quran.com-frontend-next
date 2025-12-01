@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import { selectBookmarkedPages, selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
@@ -53,27 +54,18 @@ const formatLocalBookmarkRecord = (
   };
 };
 
-/**
- * Format a local page bookmark record for syncing with the server
- * @param {string} pageNumber - The page number as a string
- * @param {number} bookmarkTimestamp - The timestamp when the bookmark was created
- * @param {number} mushafId - The mushaf ID
- * @returns {object} Formatted page bookmark record for API
- */
 const formatLocalPageBookmarkRecord = (
   pageNumber: string,
   bookmarkTimestamp: number,
   mushafId: number,
-): BookmarkPayload => {
-  return {
-    createdAt: new Date(bookmarkTimestamp).toISOString(),
-    type: BookmarkType.Page,
-    key: Number(pageNumber),
-    mushaf: mushafId,
-  };
-};
+): BookmarkPayload => ({
+  createdAt: new Date(bookmarkTimestamp).toISOString(),
+  type: BookmarkType.Page,
+  key: Number(pageNumber),
+  mushaf: mushafId,
+});
 
-const formatLocalReadingSession = (ayahKey: string, updatedAt: number) => {
+const formatLocalReadingSession = (ayahKey: string, updatedAt: number): ReadingSessionPayload => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
     updatedAt: new Date(updatedAt).toISOString(),
@@ -83,14 +75,40 @@ const formatLocalReadingSession = (ayahKey: string, updatedAt: number) => {
 };
 
 /**
+ * Build the sync payload from local bookmarks and reading sessions
+ *
+ * @param {Record<string, number>} bookmarkedVerses - The bookmarked verses
+ * @param {Record<string, number>} bookmarkedPages - The bookmarked pages
+ * @param {RecentReadingSessions} recentReadingSessions - The recent reading sessions
+ * @param {number} mushafId - The mushaf ID
+ * @returns {SyncPayload} The sync payload
+ */
+const buildSyncPayload = (
+  bookmarkedVerses: Record<string, number>,
+  bookmarkedPages: Record<string, number>,
+  recentReadingSessions: RecentReadingSessions,
+  mushafId: number,
+): SyncPayload => ({
+  [SyncDataType.BOOKMARKS]: [
+    ...Object.keys(bookmarkedVerses).map((ayahKey) =>
+      formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
+    ),
+    ...Object.keys(bookmarkedPages).map((pageNumber) =>
+      formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
+    ),
+  ],
+  [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
+    ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
+  ),
+});
+
+/**
  * A hook that will sync local user data e.g. his bookmarks
  * once the user signs up so that he doesn't lose them once
  * he logs in again.
- *
  */
 const useSyncUserData = () => {
-  const dispatch = useDispatch();
-  const { cache, mutate } = useSWRConfig();
+  const { mutate } = useSWRConfig();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions: RecentReadingSessions = useSelector(
@@ -100,33 +118,39 @@ const useSyncUserData = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
+
+  const performSync = useCallback(() => {
+    const bookmarksCount =
+      Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
+    const readingSessionsCount = Object.keys(recentReadingSessions).length;
+    const requestPayload = buildSyncPayload(
+      bookmarkedVerses,
+      bookmarkedPages,
+      recentReadingSessions,
+      mushafId,
+    );
+
+    syncUserLocalData(requestPayload as Record<SyncDataType, any>)
+      .then((response) => {
+        const { lastSyncAt } = response;
+        mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
+        mutate(makeReadingSessionsUrl());
+        setLastSyncAt(new Date(lastSyncAt));
+      })
+      .catch((error) => {
+        logErrorToSentry(error, {
+          transactionName: 'useSyncUserData',
+          metadata: { bookmarksCount, readingSessionsCount, mushafId },
+        });
+      });
+  }, [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate]);
+
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
     if (isLoggedIn() && !getLastSyncAt()) {
-      const requestPayload: SyncPayload = {
-        [SyncDataType.BOOKMARKS]: [
-          ...Object.keys(bookmarkedVerses).map((ayahKey) =>
-            formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
-          ),
-          ...Object.keys(bookmarkedPages).map((pageNumber) =>
-            formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
-          ),
-        ],
-        [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
-          ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
-        ),
-      };
-
-      syncUserLocalData(requestPayload as Record<SyncDataType, any>)
-        .then((response) => {
-          const { lastSyncAt } = response;
-          mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
-          mutate(makeReadingSessionsUrl());
-          setLastSyncAt(new Date(lastSyncAt));
-        })
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        .catch(() => {});
+      performSync();
     }
-  }, [bookmarkedVerses, bookmarkedPages, cache, dispatch, mushafId, mutate, recentReadingSessions]);
+  }, [performSync]);
 };
+
 export default useSyncUserData;
