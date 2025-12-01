@@ -37,8 +37,10 @@ interface UseVerseBookmarkReturn {
 }
 
 /**
- * Custom hook for verse bookmark operations
- * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency
+ * Custom hook for verse bookmark operations.
+ * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency.
+ * When bookmarksRangeUrl is not provided for logged-in users, bookmark status won't be fetched from the server.
+ * For logged-out users, always uses localStorage bookmarks regardless of bookmarksRangeUrl.
  * @returns {UseVerseBookmarkReturn} Bookmark state and toggle handler
  */
 const useVerseBookmark = ({
@@ -90,7 +92,7 @@ const useVerseBookmark = ({
       // Update bulk fetch cache
       globalMutate(
         bookmarksRangeUrl,
-        (currentData: BookmarksMap) => {
+        (currentData: BookmarksMap | undefined) => {
           if (!currentData) return currentData;
           if (value === null) {
             const newData = { ...currentData };

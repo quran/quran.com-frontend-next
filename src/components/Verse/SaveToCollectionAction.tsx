@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -114,14 +114,17 @@ const SaveToCollectionAction: React.FC<Props> = ({
     ],
   );
 
-  const isDataReady =
-    (bookmarkCollectionIds !== undefined && collections.length > 0) || collections.length === 0;
+  const isDataReady = bookmarkCollectionIds !== undefined;
 
-  const modalCollections = collections.map((collection) => ({
-    id: collection.id,
-    name: collection.name,
-    checked: bookmarkCollectionIds.includes(collection.id),
-  })) as CollectionOption[];
+  const modalCollections = useMemo(
+    () =>
+      collections.map((collection) => ({
+        id: collection.id,
+        name: collection.name,
+        checked: bookmarkCollectionIds?.includes(collection.id) ?? false,
+      })) as CollectionOption[],
+    [collections, bookmarkCollectionIds],
+  );
 
   return (
     <>

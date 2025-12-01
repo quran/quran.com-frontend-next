@@ -137,8 +137,8 @@ const Line = ({
  * we need to use custom comparing logic:
  *
  *  1. Check if the line keys are the same.
- *  2. Check if the number of words are the same.
- *  3. Check if isBigTextLayout values are the same.
+ *  2. Check if isBigTextLayout values are the same.
+ *  3. Check if bookmarksRangeUrl values are the same.
  *  4. Check if the font changed.
  *
  * If the above conditions are met, it's safe to assume that the result
