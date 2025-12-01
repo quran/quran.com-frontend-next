@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,7 +32,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onModalClose = () => {
+  const onModalClose = useCallback(() => {
     logEvent(
       `${isTranslationView ? 'translation_view' : 'reading_view'}_translation_feedback_modal_close`,
     );
@@ -44,24 +44,24 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
     }
-  };
+  }, [isTranslationView, onActionTriggered]);
 
-  const onModalOpen = () => {
+  const onModalOpen = useCallback(() => {
     logEvent(
       `${isTranslationView ? 'translation_view' : 'reading_view'}_translation_feedback_modal_open`,
     );
 
     setIsModalOpen(true);
-  };
+  }, [isTranslationView]);
 
-  const handleGuestUserClick = () => {
+  const handleGuestUserClick = useCallback(() => {
     if (!isLoggedIn()) {
       router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
       return;
     }
 
     onModalOpen();
-  };
+  }, [router, verse.verseKey, onModalOpen]);
 
   return (
     <>

@@ -112,8 +112,7 @@ const ContentModal = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={classNames(styles.overlay, {
-            [overlayClassName]: overlayClassName,
+          className={classNames(styles.overlay, overlayClassName, {
             [styles.fullScreen]: shouldBeFullScreen,
             [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
             [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,

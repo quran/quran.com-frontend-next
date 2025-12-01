@@ -7,16 +7,30 @@ import styles from './TranslationPreview.module.scss';
 import Loader from '@/components/QuranReader/Loader';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
-import Translation from '@/types/Translation';
+import { VersesResponse } from '@/types/ApiResponses';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
-interface Props {
+const findSelectedTranslation = (data: VersesResponse, selectedTranslationId: string) => {
+  const translations = data?.verses?.[0]?.translations;
+  if (!translations) return null;
+
+  const selectedTranslation = translations.find(
+    (translation) => translation.resourceId === parseInt(selectedTranslationId, 10),
+  );
+
+  return selectedTranslation ?? null;
+};
+
+interface TranslationPreviewProps {
   verse: WordVerse;
   selectedTranslationId: string;
 }
 
-const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) => {
+const TranslationPreview: React.FC<TranslationPreviewProps> = ({
+  verse,
+  selectedTranslationId,
+}) => {
   const shouldFetch = Boolean(selectedTranslationId);
   const { t } = useTranslation('common');
 
@@ -32,16 +46,10 @@ const TranslationPreview: React.FC<Props> = ({ verse, selectedTranslationId }) =
 
   const isLoadingTranslation = !data && shouldFetch && !error;
 
-  const translation = useMemo((): Translation | null => {
-    const translations = data?.verses?.[0]?.translations;
-    if (!translations) return null;
-
-    const selectedTranslation = translations.find(
-      (tran) => tran.resourceId === parseInt(selectedTranslationId, 10),
-    );
-
-    return selectedTranslation ?? null;
-  }, [data, selectedTranslationId]);
+  const translation = useMemo(
+    () => findSelectedTranslation(data, selectedTranslationId),
+    [data, selectedTranslationId],
+  );
 
   if (!shouldFetch) return null;
 
