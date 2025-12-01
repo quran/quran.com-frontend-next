@@ -14,8 +14,8 @@ test.describe('Banner Test - Logged In User', () => {
     await page.waitForLoadState('networkidle');
 
     await clickCreateMyGoalButton(page);
-    await page.waitForURL(new RegExp(READING_GOAL_URL));
-    expect(page.url()).toContain(READING_GOAL_URL);
+    await page.waitForURL(new RegExp(`${READING_GOAL_URL}$`));
+    expect(new URL(page.url()).pathname).toBe(READING_GOAL_URL);
   });
 
   test('should redirect to /reading-goal/progress when user is logged in with goal', async ({
@@ -26,7 +26,7 @@ test.describe('Banner Test - Logged In User', () => {
     await page.waitForLoadState('networkidle');
 
     await clickCreateMyGoalButton(page);
-    await page.waitForURL(new RegExp(READING_GOAL_PROGRESS_URL));
-    expect(page.url()).toContain(READING_GOAL_PROGRESS_URL);
+    await page.waitForURL(new RegExp(`${READING_GOAL_PROGRESS_URL}$`));
+    expect(new URL(page.url()).pathname).toBe(READING_GOAL_PROGRESS_URL);
   });
 });

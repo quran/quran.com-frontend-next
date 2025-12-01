@@ -11,7 +11,7 @@ test.describe('Banner Test', () => {
     await page.waitForLoadState('networkidle');
 
     await clickCreateMyGoalButton(page);
-    await page.waitForURL(new RegExp(READING_GOAL_URL));
-    expect(page.url()).toContain(READING_GOAL_URL);
+    await page.waitForURL(new RegExp(`${READING_GOAL_URL}$`));
+    expect(new URL(page.url()).pathname).toBe(READING_GOAL_URL);
   });
 });
