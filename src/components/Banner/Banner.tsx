@@ -36,13 +36,7 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
   }, [hasGoal, isLoggedIn]);
 
   return (
-    <div
-      className={styles.container}
-      data-testid="banner"
-      role="status"
-      aria-live="polite"
-      aria-label="Banner announcement"
-    >
+    <div className={styles.container} data-testid="banner">
       <div className={styles.text}>{text}</div>
       {ctaButtonText && (
         <Link
