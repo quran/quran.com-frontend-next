@@ -50,6 +50,7 @@ export type QuranWordProps = {
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
+  bookmarksRangeUrl?: string | null;
 };
 
 const QuranWord = ({
@@ -60,6 +61,7 @@ const QuranWord = ({
   isHighlighted,
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
+  bookmarksRangeUrl,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -263,6 +265,7 @@ const QuranWord = ({
                   isOpen={isMobileModalOpen}
                   onClose={() => setIsMobileModalOpen(false)}
                   word={word}
+                  bookmarksRangeUrl={bookmarksRangeUrl}
                 />
               </>
             );
@@ -270,7 +273,11 @@ const QuranWord = ({
 
           if (isReadingModeDesktop) {
             return (
-              <ReadingViewWordPopover word={word} onOpenChange={onReadingModeOpenChange}>
+              <ReadingViewWordPopover
+                word={word}
+                onOpenChange={onReadingModeOpenChange}
+                bookmarksRangeUrl={bookmarksRangeUrl}
+              >
                 {children}
               </ReadingViewWordPopover>
             );

@@ -407,11 +407,23 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+export const addCollectionBookmark = async ({
+  collectionId,
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
+}) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -424,14 +436,19 @@ export const deleteCollectionBookmarkById = async (collectionId: string, bookmar
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
   key,
-  mushaf,
+  mushafId,
   type,
   verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
-    collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -475,8 +492,8 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
-  return postRequest(makeAddCollectionUrl(), { name: collectionName });
+export const addCollection = async (collectionName: string): Promise<Collection> => {
+  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
 };
 
 type QuestionTypes = {

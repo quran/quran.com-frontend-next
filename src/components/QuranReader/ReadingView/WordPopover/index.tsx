@@ -21,9 +21,15 @@ type Props = {
   word: Word;
   children: React.ReactNode;
   onOpenChange: (isOpen: boolean) => void;
+  bookmarksRangeUrl?: string | null;
 };
 
-const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange }) => {
+const ReadingViewWordPopover: React.FC<Props> = ({
+  word,
+  children,
+  onOpenChange,
+  bookmarksRangeUrl,
+}) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -84,6 +90,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
           word={word}
           onActionTriggered={onActionTriggered}
           openShareModal={openShareModal}
+          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
       <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />

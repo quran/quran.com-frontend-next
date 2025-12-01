@@ -9,11 +9,14 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -96,6 +99,7 @@ const PageContainer: React.FC<Props> = ({
    * and consistent throughout the component lifecycle, preventing cache key mismatches.
    */
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
+  const { isLoggedIn } = useIsLoggedIn();
 
   const pageNumber = useMemo(
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
@@ -152,6 +156,18 @@ const PageContainer: React.FC<Props> = ({
     }
   }, [pageNumber, setMushafPageToVersesMap, effectiveVerses]);
 
+  // Calculate bookmarks range URL for bulk fetching (memoized to prevent unnecessary recalculations)
+  const bookmarksRangeUrl = useMemo(() => {
+    if (!effectiveVerses?.length || !isLoggedIn) return null;
+    const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+    return makeBookmarksRangeUrl(
+      mushafId,
+      Number(effectiveVerses[0].chapterId),
+      Number(effectiveVerses[0].verseNumber),
+      effectiveVerses.length,
+    );
+  }, [effectiveVerses, isLoggedIn, quranReaderStyles.quranFont, quranReaderStyles.mushafLines]);
+
   if (!effectiveVerses || isValidating) {
     return <ReadingViewSkeleton />;
   }
@@ -163,6 +179,7 @@ const PageContainer: React.FC<Props> = ({
       pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
+      bookmarksRangeUrl={bookmarksRangeUrl}
     />
   );
 };
