@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './HeaderNavigation.module.scss';
@@ -19,9 +18,6 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ backUrl, title }) =
 
   return (
     <div className={styles.heroContainer}>
-      <Head>
-        <link rel="preload" as="image" href="/images/background.png" />
-      </Head>
       <div className={styles.heroBackgroundImage}>
         <Background aria-hidden="true" focusable="false" />
       </div>
