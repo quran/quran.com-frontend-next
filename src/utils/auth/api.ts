@@ -421,6 +421,7 @@ export const addCollectionBookmark = async ({
   verseNumber?: number;
 }) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
+    collectionId,
     key,
     mushaf: mushafId,
     type,
