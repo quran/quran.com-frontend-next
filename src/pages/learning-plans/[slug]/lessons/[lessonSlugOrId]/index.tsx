@@ -26,7 +26,7 @@ const LessonPage: NextPage<Props> = () => {
   const handleFetchSuccess = useCallback(
     (lesson: Lesson) => {
       if (lesson?.course && !lesson.course.isUserEnrolled) {
-        enrollUserInCourse(lesson.course.id, EnrollmentMethod.Automatic);
+        enrollUserInCourse(lesson.course.id, EnrollmentMethod.AUTOMATIC);
       }
     },
     [enrollUserInCourse],

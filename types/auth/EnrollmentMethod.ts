@@ -1,6 +1,6 @@
 enum EnrollmentMethod {
-  Manual = 'MANUAL',
-  Automatic = 'AUTOMATIC',
+  MANUAL = 'MANUAL',
+  AUTOMATIC = 'AUTOMATIC',
 }
 
 export default EnrollmentMethod;

@@ -1,7 +1,6 @@
 import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 
 const LP_URL = '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
-const FIRST_LESSON_URL = `${LP_URL}/lessons/the-king-of-all-kings`;
 
 const clearState = async (context: BrowserContext, page: Page): Promise<void> => {
   await context.clearCookies();
@@ -9,151 +8,118 @@ const clearState = async (context: BrowserContext, page: Page): Promise<void> =>
   await page.evaluate(() => localStorage.clear());
 };
 
-const enrollGuest = async (page: Page): Promise<void> => {
-  await page
-    .getByRole('button', { name: /enroll/i })
-    .first()
-    .click();
+/**
+ * Click the "Start here" button and wait for navigation to lesson page
+ */
+const clickStartHereButton = async (page: Page): Promise<void> => {
+  const startHereButton = page.getByRole('button', { name: /start\s+here/i }).first();
+  await startHereButton.click();
   await page.waitForURL(/\/learning-plans\/.*\/lessons\/.+/);
 };
-/**
- * Scroll to the bottom to ensure lazy-rendered buttons are in view
- * @param {Page} page - Playwright page instance
- * @returns {Promise<void>} resolves after scrolling is done
- */
-const scrollToEnd = async (page: Page): Promise<void> => {
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.waitForLoadState('networkidle');
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.waitForLoadState('networkidle');
-};
 
-const enrollAndReturn = async (page: Page): Promise<void> => {
-  await enrollGuest(page);
+/**
+ * Click "Start here" and return to the course page
+ */
+const clickStartHereAndReturnToCoursePage = async (page: Page): Promise<void> => {
+  await clickStartHereButton(page);
   await page.goto(LP_URL, { waitUntil: 'networkidle' });
 };
 
-const expectNotEnrolledToast = async (page: Page): Promise<void> => {
-  const toast = page.getByRole('alert').filter({ hasText: /you are not enrolled/i });
-  await expect(toast).toBeVisible({ timeout: 10000 });
+/**
+ * Scroll to bottom of page to ensure lazy-rendered content is visible
+ */
+const scrollToPageBottom = async (page: Page): Promise<void> => {
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForLoadState('networkidle');
+  // Scroll twice to ensure all lazy content is loaded
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForLoadState('networkidle');
 };
 
 /**
- * Get enrolled courses from Redux persist storage
- * Redux persist stores data under 'persist:root' key with nested JSON structure
- * @param {Page} page - Playwright page instance
- * @returns {Promise<string[]>} resolves with the enrolled courses
+ * Open the syllabus tab
  */
-const getStoredCourses = (page: Page): Promise<string[]> =>
-  page.evaluate(() => {
-    try {
-      const persistRoot = localStorage.getItem('persist:root');
-      if (!persistRoot) return [];
-
-      const rootState = JSON.parse(persistRoot);
-      const rawGuestEnrollment = rootState?.guestEnrollment;
-      let guestEnrollmentState: any = {};
-
-      if (typeof rawGuestEnrollment === 'string') {
-        try {
-          guestEnrollmentState = JSON.parse(rawGuestEnrollment);
-        } catch {
-          guestEnrollmentState = {};
-        }
-      } else if (rawGuestEnrollment && typeof rawGuestEnrollment === 'object') {
-        guestEnrollmentState = rawGuestEnrollment;
-      }
-
-      const enrolled = guestEnrollmentState?.enrolledCourses;
-      return Array.isArray(enrolled) ? enrolled.filter((id: any) => typeof id === 'string') : [];
-    } catch {
-      return [];
-    }
-  });
-
-const setupNonEnrolled = async (page: Page): Promise<void> => {
-  await page.goto(LP_URL);
-  await page.evaluate(() => localStorage.clear());
-  await page.reload({ waitUntil: 'networkidle' });
+const openSyllabusTab = async (page: Page): Promise<void> => {
+  const syllabusTab = page.getByRole('button', { name: /syllabus/i }).first();
+  await syllabusTab.scrollIntoViewIfNeeded();
+  await expect(syllabusTab).toBeVisible({ timeout: 10000 });
+  await syllabusTab.click();
 };
 
-test.describe('Guest Enrollment', () => {
-  test.beforeEach(async ({ page, context }) => clearState(context, page));
+/**
+ * Test Suites
+ */
 
-  test('should show enroll button', async ({ page }) => {
-    await expect(page.getByRole('button', { name: /enroll/i }).first()).toBeVisible();
+test.describe('Guest Access - Start Here Button', () => {
+  test.beforeEach(async ({ page, context }) => {
+    await clearState(context, page);
   });
 
-  test('should redirect to lesson and save to localStorage', async ({ page }) => {
-    await enrollGuest(page);
-    await expect(page).toHaveURL(/.*\/lessons\/.*/);
-    expect((await getStoredCourses(page)).length).toBeGreaterThan(0);
+  test('should display "Start here" button for guest users', async ({ page }) => {
+    const startHereButton = page.getByRole('button', { name: /start\s+here/i }).first();
+    await expect(startHereButton).toBeVisible();
   });
 
-  test('should persist after reload', async ({ page }) => {
-    await enrollGuest(page);
-    await page.reload();
-    expect((await getStoredCourses(page)).length).toBeGreaterThan(0);
-  });
-});
+  test('should redirect guest to first lesson when clicking "Start here"', async ({ page }) => {
+    await clickStartHereButton(page);
 
-test.describe('Post-Enrollment Navigation', () => {
-  test.beforeEach(async ({ page, context }) => clearState(context, page));
-
-  test('should show start learning button', async ({ page }) => {
-    await enrollAndReturn(page);
-    await expect(
-      page.getByRole('button', { name: /(start|continue).learning/i }).first(),
-    ).toBeVisible();
-  });
-
-  test('should navigate from start learning button', async ({ page }) => {
-    await enrollAndReturn(page);
-    await page
-      .getByRole('button', { name: /(start|continue).learning/i })
-      .first()
-      .click();
-    await page.waitForURL(/\/lessons\//);
+    // Verify navigation to lesson page
+    await expect(page).toHaveURL(/\/lessons\//);
   });
 });
 
-test.describe('Login Redirects', () => {
-  test.beforeEach(async ({ page, context }) => clearState(context, page));
+test.describe('Guest User Behavior', () => {
+  test.beforeEach(async ({ page, context }) => {
+    await clearState(context, page);
+  });
 
-  test('should redirect to login on mark complete', async ({ page }) => {
-    await enrollGuest(page);
-    await scrollToEnd(page);
-    const markComplete = page.getByRole('button', { name: /mark\s+as\s+completed/i }).first();
-    await expect(markComplete).toBeVisible({ timeout: 10000 });
-    await markComplete.click();
+  test('should show "Start here" button after accessing a lesson', async ({ page }) => {
+    // Navigate to lesson and return to course page
+    await clickStartHereAndReturnToCoursePage(page);
+
+    // Guests are not enrolled, so they should still see "Start here"
+    const startHereButton = page.getByRole('button', { name: /start\s+here/i }).first();
+    await expect(startHereButton).toBeVisible();
+  });
+});
+
+test.describe('Guest User Limitations', () => {
+  test.beforeEach(async ({ page, context }) => {
+    await clearState(context, page);
+  });
+
+  test('should redirect to login when guest tries to mark lesson as complete', async ({ page }) => {
+    // Navigate to lesson
+    await clickStartHereButton(page);
+
+    // Scroll to bottom to ensure mark complete button is visible
+    await scrollToPageBottom(page);
+
+    // Try to mark lesson as complete
+    const markCompleteButton = page.getByRole('button', { name: /mark\s+as\s+completed/i }).first();
+    await expect(markCompleteButton).toBeVisible({ timeout: 10000 });
+    await markCompleteButton.click();
+
+    // Should redirect to login or signup page
     await page.waitForURL(/\/(login|signup)/);
   });
 });
 
-test.describe('Access Control', () => {
-  test.beforeEach(async ({ context }) => context.clearCookies());
-
-  test('should show not enrolled message for direct lesson access', async ({ page }) => {
-    await page.goto(LP_URL);
-    await page.evaluate(() => localStorage.clear());
-    await Promise.all([
-      page.goto(FIRST_LESSON_URL, { waitUntil: 'networkidle' }),
-      expectNotEnrolledToast(page),
-    ]);
+test.describe('Syllabus Navigation', () => {
+  test.beforeEach(async ({ page, context }) => {
+    await clearState(context, page);
   });
 
-  test('should show toast when clicking syllabus lesson', async ({ page }) => {
-    await setupNonEnrolled(page);
-    // Open Syllabus tab (rendered as button)
-    const syllabusTab = page.getByRole('button', { name: /syllabus/i }).first();
-    await syllabusTab.scrollIntoViewIfNeeded();
-    await expect(syllabusTab).toBeVisible({ timeout: 10000 });
-    await syllabusTab.click();
-    const firstSyllabusLink = page.getByText(/\bday\s+\d+/i).first();
-    // make it click on the button next to the text if exists
-    const button = firstSyllabusLink.locator('..').getByRole('button');
-    if (await button.count()) {
-      await Promise.all([button.click(), expectNotEnrolledToast(page)]);
-    }
+  test('should navigate to lesson when clicking on syllabus lesson', async ({ page }) => {
+    // Open syllabus tab
+    await openSyllabusTab(page);
+
+    // Click on first lesson in syllabus
+    const firstLesson = page.getByText(/The King of All Kings/i).first();
+    await expect(firstLesson).toBeVisible();
+    await firstLesson.click();
+
+    // Verify navigation to lesson page
+    await expect(page).toHaveURL(/\/lessons\//);
   });
 });

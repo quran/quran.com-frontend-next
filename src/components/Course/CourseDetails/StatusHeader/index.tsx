@@ -60,7 +60,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
 
     // Logged-in user - enroll with MANUAL method
     setIsLoading(true);
-    const { success } = await enrollUserInCourse(id, EnrollmentMethod.Manual);
+    const { success } = await enrollUserInCourse(id, EnrollmentMethod.MANUAL);
 
     if (success) {
       mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
