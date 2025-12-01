@@ -143,7 +143,7 @@ const useBookmarkCollections = ({
     addToCollection,
     removeFromCollection,
     mutateBookmarkCollections: (newIds?: string[]) => {
-      if (newIds) {
+      if (newIds !== undefined) {
         mutateBookmarkCollections(newIds, { revalidate: false });
       } else {
         mutateBookmarkCollections();

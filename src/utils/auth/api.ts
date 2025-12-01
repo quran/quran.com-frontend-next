@@ -491,8 +491,8 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
-  return postRequest(makeAddCollectionUrl(), { name: collectionName });
+export const addCollection = async (collectionName: string): Promise<Collection> => {
+  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
 };
 
 type QuestionTypes = {

@@ -37,8 +37,10 @@ interface UseVerseBookmarkReturn {
 }
 
 /**
- * Custom hook for verse bookmark operations
- * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency
+ * Custom hook for verse bookmark operations.
+ * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency.
+ * When bookmarksRangeUrl is not provided for logged-in users, bookmark status won't be fetched from the server.
+ * For logged-out users, always uses localStorage bookmarks regardless of bookmarksRangeUrl.
  * @returns {UseVerseBookmarkReturn} Bookmark state and toggle handler
  */
 const useVerseBookmark = ({
@@ -90,7 +92,7 @@ const useVerseBookmark = ({
       // Update bulk fetch cache
       globalMutate(
         bookmarksRangeUrl,
-        (currentData: BookmarksMap) => {
+        (currentData: BookmarksMap | undefined) => {
           if (!currentData) return currentData;
           if (value === null) {
             const newData = { ...currentData };
@@ -109,18 +111,20 @@ const useVerseBookmark = ({
     const newBookmark = await baseAddBookmark();
     if (newBookmark) {
       updateBookmarkCaches(newBookmark);
+      invalidateBookmarksList();
       showToast('verse-bookmarked', ToastStatus.Success);
     }
-  }, [baseAddBookmark, updateBookmarkCaches, showToast]);
+  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
 
   const handleRemoveBookmark = useCallback(async () => {
     if (!bookmark || bookmark === NOT_BOOKMARKED) return;
     const success = await baseRemoveBookmark(bookmark.id);
     if (success) {
       updateBookmarkCaches(NOT_BOOKMARKED);
+      invalidateBookmarksList();
       showToast('verse-bookmark-removed', ToastStatus.Success);
     }
-  }, [bookmark, baseRemoveBookmark, updateBookmarkCaches, showToast]);
+  }, [bookmark, baseRemoveBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
 
   const handleLoggedOutToggle = useCallback(() => {
     const wasBookmarked = !!bookmarkedVerses[verse.verseKey];
@@ -130,7 +134,6 @@ const useVerseBookmark = ({
 
   const handleToggleBookmark = useCallback(() => {
     if (isLoggedIn) {
-      invalidateBookmarksList();
       if (isVerseBookmarked) handleRemoveBookmark();
       else handleAddBookmark();
     } else {
@@ -138,7 +141,6 @@ const useVerseBookmark = ({
     }
   }, [
     isLoggedIn,
-    invalidateBookmarksList,
     isVerseBookmarked,
     handleRemoveBookmark,
     handleAddBookmark,

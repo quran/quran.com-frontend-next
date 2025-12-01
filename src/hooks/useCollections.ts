@@ -63,7 +63,7 @@ const useCollections = ({
   const addCollection = useCallback(
     async (name: string): Promise<Collection | null> => {
       try {
-        const newCollection = (await apiAddCollection(name)) as Collection;
+        const newCollection = await apiAddCollection(name);
         mutateCollections();
         return newCollection;
       } catch (err: unknown) {
@@ -108,7 +108,7 @@ const useCollections = ({
     addCollection,
     updateCollection,
     deleteCollection,
-    mutateCollections: () => mutateCollections(),
+    mutateCollections,
   };
 };
 
