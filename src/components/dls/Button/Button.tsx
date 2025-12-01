@@ -42,6 +42,13 @@ export enum ButtonVariant {
   Accent = 'accent',
 }
 
+/**
+ * Props for the Button component.
+ *
+ * **Important**: When `href` is provided, the component renders a `<Link>` with a `<div>` inside instead of a `<button>`.
+ * In this case, the `ref` parameter will not be forwarded and will be `null` when accessed by consumers.
+ * If you need to access the underlying element via ref, avoid using the `href` prop.
+ */
 export type ButtonProps = {
   size?: ButtonSize;
   shape?: ButtonShape;
@@ -68,6 +75,14 @@ export type ButtonProps = {
   id?: string;
 };
 
+/**
+ * Button component that can render as either a button or a link.
+ *
+ * @param ref - Forwarded ref to the underlying button element.
+ *   **Important**: When `href` is provided, the component renders a `<Link>` with a `<div>` inside,
+ *   and the ref will not be forwarded. In this scenario, accessing the ref will return `null`.
+ *   If you need ref access, avoid using the `href` prop.
+ */
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -169,7 +184,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <button
           ref={ref}
           // eslint-disable-next-line react/button-has-type
-          type={htmlType}
+          type={htmlType || 'button'}
           dir={direction}
           className={classes}
           disabled={disabled}
