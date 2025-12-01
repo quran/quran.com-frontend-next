@@ -89,6 +89,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           {...SUCCESS_PILL_BUTTON_PROPS}
           onClick={onEnrollButtonClicked}
           isDisabled={isEnrolling}
+          aria-label={isSubscribed ? t('common:subscribed') : t('common:subscribe')}
           className={`${styles.subscribeButton} ${
             showAskQuestionButton ? styles.subscribeButtonSmall : ''
           }`}
@@ -108,7 +109,8 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             {...SUCCESS_PILL_BUTTON_PROPS}
             href={ASK_QUESTION_FORM_URL}
             isNewTab
-            onClick={() => logButtonClick('quran_calendar_ask_question')}
+            onClick={() => logButtonClick('quranic_calendar_ask_question')}
+            aria-label={t('ask-question')}
             className={`${styles.button} ${styles.askQuestionButton}`}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
@@ -125,6 +127,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             href={url}
             isNewTab
             onClick={() => logButtonClick(eventKey)}
+            aria-label={t(`join-${name}`)}
             className={styles.button}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<Icon />} />
