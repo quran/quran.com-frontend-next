@@ -142,24 +142,28 @@ const useScrollToVirtualizedReadingView = (
           ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
         }),
         { signal: controller.signal },
-      ).then((response: VersesResponse) => {
-        if (response.verses.length && (useShouldScroll ? shouldScroll.current === true : true)) {
-          const page = response.verses[0].pageNumber;
-          const scrollToPageIndex = page - firstPageOfCurrentChapter;
-          if (pagesVersesRange[page]) {
-            virtuosoRef.current.scrollToIndex({
-              index: scrollToPageIndex,
-              align: getVersePositionWithinAMushafPage(
-                `${chapterId}:${verseNumber}`,
-                page,
-                pagesVersesRange,
-              ),
-            });
+      )
+        .then((response: VersesResponse) => {
+          if (response.verses.length && (useShouldScroll ? shouldScroll.current === true : true)) {
+            const page = response.verses[0].pageNumber;
+            const scrollToPageIndex = page - firstPageOfCurrentChapter;
+            if (pagesVersesRange[page]) {
+              virtuosoRef.current.scrollToIndex({
+                index: scrollToPageIndex,
+                align: getVersePositionWithinAMushafPage(
+                  `${chapterId}:${verseNumber}`,
+                  page,
+                  pagesVersesRange,
+                ),
+              });
 
-            if (useShouldScroll) shouldScroll.current = false;
+              if (useShouldScroll) shouldScroll.current = false;
+            }
           }
-        }
-      });
+        })
+        .catch(() => {
+          // Ignore errors
+        });
     },
     [
       virtuosoRef,
@@ -210,7 +214,7 @@ const useScrollToVirtualizedReadingView = (
     return () => {
       subscription.unsubscribe();
     };
-  }, [audioService, virtuosoRef, scrollToVerse, quranReaderDataType]);
+  }, [audioService, scrollToVerse, quranReaderDataType]);
 };
 
 export default useScrollToVirtualizedReadingView;
