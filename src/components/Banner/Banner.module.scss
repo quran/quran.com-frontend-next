@@ -22,7 +22,7 @@
 
 .cta {
   padding-inline: var(--spacing-xsmall-px);
-  padding-block: var(--spacing-xxxsmall-px);
+  padding-block: var(--spacing-micro2-px);
   background-color: var(--color-success-faded);
   color: var(--color-text-link-new);
   font-size: var(--font-size-small-px);
@@ -38,7 +38,6 @@
 
 .icon {
   > svg path {
-    color: var(--color-text-link-new);
     fill: var(--color-text-link-new);
   }
 }

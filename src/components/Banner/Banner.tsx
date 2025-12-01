@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import styles from './Banner.module.scss';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
@@ -21,22 +23,27 @@ const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const { goal } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
 
-  // Route logged-in users to progress page while loading to prevent jarring UX
-  // if they have an existing goal. Falls back to reading-goal once loading completes
-  // if no goal exists.
+  // Route logged-in users with an existing goal to the progress page,
+  // otherwise route to the reading-goal page.
   const ctaLink =
     isLoggedIn && hasGoal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = useCallback(() => {
     logButtonClick('banner_cta', {
       hasGoal,
       isLoggedIn,
     });
-  };
+  }, [hasGoal, isLoggedIn]);
 
   return (
-    <div className={styles.container} data-testid="banner">
-      <p className={styles.text}>{text}</p>
+    <div
+      className={styles.container}
+      data-testid="banner"
+      role="status"
+      aria-live="polite"
+      aria-label="Banner announcement"
+    >
+      <div className={styles.text}>{text}</div>
       {ctaButtonText && (
         <Link
           href={ctaLink}

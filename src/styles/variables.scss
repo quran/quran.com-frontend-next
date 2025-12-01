@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 // dynamic global variables
 
@@ -11,14 +11,4 @@
   --navbar-container-height: var(--navbar-height);
   --banner-height: 3rem;
   --day-circle-color: transparent;
-}
-
-.banner-active {
-  --banner-height: 3rem;
-  --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
-
-  @include breakpoints.tablet {
-    --banner-height: var(--navbar-height);
-    --navbar-container-height: var(--navbar-height);
-  }
 }
