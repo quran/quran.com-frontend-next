@@ -23,7 +23,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ backUrl, title }) =
         <link rel="preload" as="image" href="/images/background.png" />
       </Head>
       <div className={styles.heroBackgroundImage}>
-        <Background />
+        <Background aria-hidden="true" focusable="false" />
       </div>
       <div>
         <div className={styles.heroInnerContainer}>

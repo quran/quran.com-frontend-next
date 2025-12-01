@@ -1,9 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-type FieldErrorConfig = {
+interface FieldErrorConfig {
   fieldNameKey: string;
   extraParams?: Record<string, unknown>;
-};
+}
 
 type FormErrorTransformerConfig<T> = {
   [K in keyof T]?: FieldErrorConfig;
