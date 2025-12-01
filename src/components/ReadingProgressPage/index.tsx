@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import ProgressPageGoalWidget from './ProgressPageGoalWidget';
@@ -23,9 +22,11 @@ import {
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
   const isMobile = useIsMobile();
-  const { error, goal, weekData, streak, isLoading } = useGetStreakWithMetadata({
-    showDayName: true,
-  });
+  const { error, goal, weekData, streak, isLoading, currentActivityDay } = useGetStreakWithMetadata(
+    {
+      showDayName: true,
+    },
+  );
 
   if (error) return null;
 
@@ -40,11 +41,8 @@ const ReadingProgressPage = () => {
       />
 
       <div className={styles.heroContainer}>
-        <Head>
-          <link rel="preload" as="image" href="/images/background.png" />
-        </Head>
         <div className={styles.heroBackgroundImage}>
-          <Background />
+          <Background aria-hidden="true" focusable="false" />
         </div>
         <div>
           <div className={styles.heroInnerContainer}>
@@ -72,7 +70,11 @@ const ReadingProgressPage = () => {
               isLoading={isLoading}
             />
 
-            <ProgressPageGoalWidget goal={goal} isLoading={isLoading} />
+            <ProgressPageGoalWidget
+              goal={goal}
+              isLoading={isLoading}
+              currentActivityDay={currentActivityDay}
+            />
           </div>
 
           <ReadingHistory />

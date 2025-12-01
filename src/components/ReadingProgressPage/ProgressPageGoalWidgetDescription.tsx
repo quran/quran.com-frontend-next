@@ -30,16 +30,14 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
   }
 
   if (goal.isCompleted) {
-    return (
-      <p className={styles.progressWidgetDaysLeft}>{t('reading-goal:daily-progress-completed')}</p>
-    );
+    return <p className={styles.progressWidgetDaysLeft}>{t('progress.complete')}</p>;
   }
 
   if (typeof goal.progress.daysLeft === 'number') {
     return (
       <p className={styles.progressWidgetDaysLeft}>
         <span>{toLocalizedNumber(goal.progress.daysLeft, lang)} </span>
-        {t('reading-goal:days-remaining')}
+        {t('days-remaining')}
       </p>
     );
   }
@@ -47,19 +45,18 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
   if (goal.type === GoalType.TIME) {
     return (
       <p className={styles.progressWidgetDaysLeft}>
-        <span>{`${t('reading-goal:remaining-base')}: `}</span>
+        <span>{`${t('remaining-base')}: `}</span>
         {secondsToShortReadableFormat(goal.progress.amountLeft, lang)}
       </p>
     );
   }
 
   if (goal.type === GoalType.PAGES) {
+    const pages = toLocalizedNumber(convertNumberToDecimal(goal.progress.amountLeft, 2), lang);
     return (
       <p className={styles.progressWidgetDaysLeft}>
-        <span>{`${t('reading-goal:remaining-base')}: `}</span>
-        {`(${toLocalizedNumber(convertNumberToDecimal(goal.progress.amountLeft, 2), lang)} ${t(
-          'pages',
-        )})`}
+        <span>{`${t('remaining-base')}: `}</span>
+        {t('x-pages', { count: goal.progress.amountLeft, pages })}
       </p>
     );
   }
@@ -75,7 +72,7 @@ const ProgressPageGoalWidgetDescription: React.FC<Props> = ({
 
       return (
         <p className={styles.progressWidgetDaysLeft}>
-          <span>{`${t('reading-goal:remaining-base')}: `}</span>
+          <span>{`${t('remaining-base')}: `}</span>
           {`(${getChapterData(chaptersData, fromChapter).transliteratedName} ${toLocalizedNumber(
             Number(fromVerse),
             lang,

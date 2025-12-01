@@ -29,7 +29,7 @@ const ProgressPageStreakWidget = ({
   const widget = (
     <>
       <div className={styles.streakContainer}>
-        <MushafIcon className={styles.mushaf} />
+        <MushafIcon className={styles.mushaf} aria-hidden="true" focusable="false" />
         <div className={styles.streakText}>
           <span className={styles.streakNumber}>{localizedStreak}</span>
           <span>{t('day-streak')}</span>

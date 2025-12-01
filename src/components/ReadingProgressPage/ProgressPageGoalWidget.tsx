@@ -13,11 +13,10 @@ import DataContext from '@/contexts/DataContext';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import useGetStreakWithMetadata, {
-  StreakWithMetadata,
-} from '@/hooks/auth/useGetStreakWithMetadata';
+import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import useIsMobile from '@/hooks/useIsMobile';
+import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -26,14 +25,12 @@ import { getChapterWithStartingVerseUrl, getReadingGoalNavigationUrl } from '@/u
 interface Props {
   goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
+  currentActivityDay: CurrentQuranActivityDay;
 }
 
-const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
-  const { t, lang } = useTranslation('reading-progress');
+const ProgressPageGoalWidget = ({ goal, isLoading, currentActivityDay }: Props) => {
+  const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
-  const { currentActivityDay } = useGetStreakWithMetadata({
-    showDayName: true,
-  });
   const isMobile = useIsMobile();
   const [modalVisible, setModalVisible] = useState({
     update: false,
@@ -64,9 +61,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
   if (isLoading) {
     return (
       <Skeleton className={classNames(styles.widget, styles.emptyWidget)}>
-        <Button href={getReadingGoalNavigationUrl()}>
-          {t('reading-goal:create-reading-goal')}
-        </Button>
+        <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
       </Skeleton>
     );
   }
@@ -79,7 +74,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
     return (
       <div className={classNames(styles.widget, styles.emptyWidget)}>
         <Button href={getReadingGoalNavigationUrl()} onClick={onCreateReadingGoalClick}>
-          {t('reading-goal:create-reading-goal')}
+          {t('create-reading-goal')}
         </Button>
       </div>
     );
@@ -102,7 +97,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
           />
         </div>
         <div className={styles.progressWidgetContent}>
-          <p className={styles.progressWidgetTitle}>{t('reading-goal:daily-progress')}</p>
+          <p className={styles.progressWidgetTitle}>{t('daily-progress')}</p>
           <ProgressPageGoalWidgetDescription
             goal={goal}
             t={t}
@@ -115,7 +110,7 @@ const ProgressPageGoalWidget = ({ goal, isLoading }: Props) => {
       <div className={styles.progressWidgetCta}>
         {!isMobile && (
           <Button href={ctaUrl} variant={ButtonVariant.Rounded}>
-            {t('reading-goal:continue-reading')}
+            {t('continue-reading')}
           </Button>
         )}
         <UpdateReadingGoalModal
