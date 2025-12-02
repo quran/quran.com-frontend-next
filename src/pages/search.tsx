@@ -29,7 +29,7 @@ import {
   logEmptySearchResults,
 } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl } from '@/utils/navigation';
+import { buildUrlWithParams, getCanonicalUrl } from '@/utils/navigation';
 import { getAdvancedSearchQuery } from '@/utils/search';
 import AvailableLanguage from 'types/AvailableLanguage';
 import ChaptersData from 'types/ChaptersData';
@@ -88,7 +88,14 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
     }),
     [currentPage, searchQuery],
   );
+
   useAddQueryParamsToUrl(navigationUrl, queryParams);
+
+  // Build canonical path (including query params) for SEO: canonical URL and language alternates
+  const canonicalPath = useMemo(
+    () => buildUrlWithParams(navigationUrl, queryParams),
+    [queryParams],
+  );
 
   const REQUEST_PARAMS = getAdvancedSearchQuery(
     searchQuery,
@@ -137,8 +144,8 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
             : t('search:search')
         }
         description={t('search:search-desc')}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
-        languageAlternates={getLanguageAlternates(navigationUrl)}
+        canonical={getCanonicalUrl(lang, canonicalPath)}
+        languageAlternates={getLanguageAlternates(canonicalPath)}
       />
       <div className={styles.pageContainer}>
         <div className={styles.searchInputContainer}>
