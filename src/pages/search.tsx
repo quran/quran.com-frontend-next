@@ -91,7 +91,7 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
 
   useAddQueryParamsToUrl(navigationUrl, queryParams);
 
-  // Generate canonical path so that it can be used by the built-in mobile share button
+  // Build canonical path (including query params) for SEO: canonical URL and language alternates
   const canonicalPath = useMemo(
     () => buildUrlWithParams(navigationUrl, queryParams),
     [queryParams],
