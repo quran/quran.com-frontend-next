@@ -8,18 +8,20 @@ import LearningPlansSection from '../LearningPlansSection';
 import QuranInYearSection from '../QuranInYearSection';
 
 import styles from '@/pages/index.module.scss';
+import ChaptersData from 'types/ChaptersData';
 
 type Props = {
   isUserLoggedIn: boolean;
   todayAyah: { chapter: number; verse: number } | null;
+  chaptersData?: ChaptersData;
 };
 
-const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) => {
+const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, chaptersData }) => {
   return isUserLoggedIn ? (
     <>
       {todayAyah && (
         <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-          <QuranInYearSection />
+          <QuranInYearSection chaptersData={chaptersData} />
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
@@ -39,7 +41,7 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) 
       </div>
       {todayAyah && (
         <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-          <QuranInYearSection />
+          <QuranInYearSection chaptersData={chaptersData} />
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
