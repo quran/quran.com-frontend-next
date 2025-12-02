@@ -1,8 +1,8 @@
-import { memo, RefObject, useContext, useEffect, useRef } from 'react';
+import { memo, RefObject, useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { verseFontChanged } from '../utils/memoization';
 
@@ -11,9 +11,9 @@ import styles from './Line.module.scss';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
+import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
-import { setIsVisible, setLockVisibilityState } from '@/redux/slices/navbar';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
@@ -38,8 +38,6 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     return verseKeys.includes(`${surah}:${ayahNumber}`);
   });
 
-  const dispatch = useDispatch();
-  const hideNavbarTimeoutRef = useRef<number | undefined>(undefined);
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const { isActive } = useOnboarding();
@@ -50,33 +48,12 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     shallowEqual,
   );
 
-  useEffect(() => {
-    if (isHighlighted && enableAutoScrolling) {
-      // Hide the navbar and lock its state to avoid showing it on scroll
-      dispatch(setIsVisible(false));
-      dispatch(setLockVisibilityState(true));
-
-      scrollToSelectedItem();
-
-      // Unlock the navbar visibility state after a timeout (time for the navbar to hide)
-      if (hideNavbarTimeoutRef.current) {
-        window.clearTimeout(hideNavbarTimeoutRef.current);
-      }
-      hideNavbarTimeoutRef.current = window.setTimeout(() => {
-        dispatch(setIsVisible(false));
-        dispatch(setLockVisibilityState(false));
-      }, 1500);
-    }
-  }, [dispatch, enableAutoScrolling, isHighlighted, scrollToSelectedItem]);
-
-  useEffect(
-    () => () => {
-      if (hideNavbarTimeoutRef.current) {
-        window.clearTimeout(hideNavbarTimeoutRef.current);
-      }
-    },
-    [],
-  );
+  // Use the custom hook for navbar auto-hide functionality with 1500ms timeout
+  useNavbarAutoHide(isHighlighted && enableAutoScrolling, scrollToSelectedItem, 1500, [
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+  ]);
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
