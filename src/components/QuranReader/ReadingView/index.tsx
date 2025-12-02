@@ -108,33 +108,30 @@ const ReadingView = ({
     isLoading,
   );
 
-  const scrollToPreviousPage = useCallback(() => {
+  const getCurrentIndex = useCallback(() => {
     const virtuosoState = virtuosoRef.current?.state;
-    const currentIndex =
-      typeof virtuosoState?.firstItemIndex === 'number'
-        ? virtuosoState.firstItemIndex
-        : currentPageIndex;
+    return typeof virtuosoState?.firstItemIndex === 'number'
+      ? virtuosoState.firstItemIndex
+      : currentPageIndex;
+  }, [currentPageIndex]);
 
+  const scrollToPreviousPage = useCallback(() => {
+    const currentIndex = getCurrentIndex();
     virtuosoRef.current?.scrollToIndex({
       index: Math.max(currentIndex - 1, 0),
       align: 'start',
       offset: -35,
     });
-  }, [currentPageIndex]);
+  }, [getCurrentIndex]);
 
   const scrollToNextPage = useCallback(() => {
-    const virtuosoState = virtuosoRef.current?.state;
-    const currentIndex =
-      typeof virtuosoState?.firstItemIndex === 'number'
-        ? virtuosoState.firstItemIndex
-        : currentPageIndex;
-
+    const currentIndex = getCurrentIndex();
     virtuosoRef.current?.scrollToIndex({
       index: currentIndex + 1,
       align: 'start',
       offset: 25,
     });
-  }, [currentPageIndex]);
+  }, [getCurrentIndex]);
 
   const onPrevPageClicked = useCallback(() => {
     logButtonClick('reading_view_prev_page_button');

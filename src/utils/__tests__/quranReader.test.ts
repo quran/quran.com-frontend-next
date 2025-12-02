@@ -1,6 +1,6 @@
 ﻿import { describe, expect, it } from 'vitest';
 
-import { shouldSyncChapterPageForDataType } from '../quranReader';
+import shouldSyncChapterPageForDataType from '../quranReader';
 
 import { QuranReaderDataType } from '@/types/QuranReader';
 

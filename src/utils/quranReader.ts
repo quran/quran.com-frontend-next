@@ -8,7 +8,7 @@ import { QuranReaderDataType } from '@/types/QuranReader';
  * @param {QuranReaderDataType} dataType
  * @returns {boolean}
  */
-export const shouldSyncChapterPageForDataType = (dataType: QuranReaderDataType): boolean =>
+const shouldSyncChapterPageForDataType = (dataType: QuranReaderDataType): boolean =>
   dataType !== QuranReaderDataType.Page;
 
 export default shouldSyncChapterPageForDataType;
