@@ -24,6 +24,7 @@ type Props = {
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
   fontScale?: number;
+  titleText?: string;
   quranFont?: QuranFont;
 };
 
@@ -40,6 +41,7 @@ const PlainVerseText: React.FC<Props> = ({
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
   fontScale,
+  titleText,
   quranFont: quranFontFromProps,
 }: Props): JSX.Element => {
   const {
@@ -102,20 +104,27 @@ const PlainVerseText: React.FC<Props> = ({
     },
     [quranFont, words],
   );
+  const shouldShowTitle = !!titleText;
 
   return (
     <>
       <SeoTextForVerse words={words} />
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <div
+        data-testid={`wbw-${shouldShowWordByWordTranslation ? 'translation' : 'transliteration'}`}
         className={classNames(
           styles.verseTextContainer,
           styles.tafsirOrTranslationMode,
           styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
+        {shouldShowTitle && <p className={styles.verseTitleText}>{titleText}</p>}
         <div
-          className={classNames(styles.verseText, styles.verseTextWrap)}
+          className={classNames(
+            styles.verseText,
+            styles.verseTextWrap,
+            shouldShowTitle ? styles.verseTextCenter : styles.verseTextStart,
+          )}
           translate="no"
           onCopy={handleCopy}
         >

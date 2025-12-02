@@ -157,7 +157,14 @@
         "import/no-extraneous-dependencies": [
           "error",
           {
-            "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "tests/**/*"]
+            "devDependencies": [
+              "**/*.test.ts",
+              "**/*.test.tsx",
+              "tests/**/*",
+              "**/playwright.config.{ts,js,mjs,cjs}",
+              "playwright.config.{ts,js,mjs,cjs}",
+              "playwright/**"
+            ]
           }
         ],
         "@typescript-eslint/ban-ts-comment": 0,
