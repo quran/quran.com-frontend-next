@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -29,6 +30,52 @@ type Props = {
 };
 
 /**
+ * Gets the selected HTML elements within a verse that have word index data attributes.
+ *
+ * @returns {HTMLElement[]} Array of HTML elements that are selected
+ */
+const getSelectedNodes = (
+  verseElement: HTMLDivElement,
+  selection: Selection | null,
+): HTMLElement[] => {
+  if (!selection || selection.isCollapsed) {
+    return [];
+  }
+  return Array.from(verseElement.querySelectorAll<HTMLElement>('[data-word-index]')).filter(
+    (node) => selection.containsNode(node, true),
+  );
+};
+
+/**
+ * Builds the text content to be copied to clipboard from selected word nodes.
+ *
+ * @returns {string[]} Array of text strings from the selected words
+ */
+const buildCopiedText = (selectedNodes: HTMLElement[], words: Word[], textFieldName: string) =>
+  selectedNodes
+    .filter((node) => !Number.isNaN(Number(node.getAttribute('data-word-index'))))
+    .sort(
+      (firstNode, secondNode) =>
+        Number(firstNode.getAttribute('data-word-index')) -
+        Number(secondNode.getAttribute('data-word-index')),
+    )
+    .map((node) => {
+      const index = Number(node.getAttribute('data-word-index'));
+      if (Number.isNaN(index)) {
+        return '';
+      }
+      const word = words[index];
+      if (!word) {
+        return '';
+      }
+
+      const wordText = word[textFieldName as keyof Word] ?? '';
+
+      return typeof wordText === 'string' ? wordText.trim() : '';
+    })
+    .filter((wordText) => wordText.length > 0);
+
+/**
  * A component to only show the verse text without extra functionalities such as ayah
  * highlighting when audio is playing or showing a tooltip when
  * hovering over a verse or showing the word by word translation/transliteration.
@@ -55,46 +102,19 @@ const PlainVerseText: React.FC<Props> = ({
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
 
   const handleCopy = useCallback(
-    // eslint-disable-next-line react-func/max-lines-per-function
     (event: React.ClipboardEvent<HTMLDivElement>) => {
-      const selection = document.getSelection();
-      if (!selection || selection.isCollapsed) {
-        return;
-      }
-
-      const verseElement = event.currentTarget;
-      const selectedNodes = Array.from(
-        verseElement.querySelectorAll<HTMLElement>('[data-word-index]'),
-      ).filter((node) => selection.containsNode(node, true));
-
+      const selectedNodes = getSelectedNodes(event.currentTarget, document.getSelection());
       if (!selectedNodes.length) {
         return;
       }
 
       event.preventDefault();
 
-      const textFieldName = getWordTextFieldNameByFont(quranFont);
-      const copiedText = selectedNodes
-        .sort(
-          (firstNode, secondNode) =>
-            Number(firstNode.getAttribute('data-word-index')) -
-            Number(secondNode.getAttribute('data-word-index')),
-        )
-        .map((node) => {
-          const index = Number(node.getAttribute('data-word-index'));
-          if (Number.isNaN(index)) {
-            return '';
-          }
-          const word = words[index];
-          if (!word) {
-            return '';
-          }
-
-          const wordText = word[textFieldName] ?? '';
-
-          return typeof wordText === 'string' ? wordText.trim() : '';
-        })
-        .filter((wordText) => wordText.length > 0);
+      const copiedText = buildCopiedText(
+        selectedNodes,
+        words,
+        getWordTextFieldNameByFont(quranFont),
+      );
 
       if (!copiedText.length) {
         return;
