@@ -17,15 +17,15 @@ const DEFAULT_FONT_FAMILY = 'UthmanicHafs';
 const INDO_PAK = 'IndoPak';
 // Includes the Arabic small high marks and waqf symbols that appear in IndoPak script
 const INDO_PAK_STOP_SIGN_CHARS = new Set([
-  '\u06D6',
-  '\u06D7',
-  '\u06D8',
-  '\u06D9',
-  '\u06DA',
-  '\u06DB',
-  '\u06DC',
-  '\u06E2',
-  '\u0615',
+  '\u06D6', // Arabic small high meem (ۖ)
+  '\u06D7', // Arabic small high qaf (ۗ)
+  '\u06D8', // Arabic small high noon (ۘ)
+  '\u06D9', // Arabic small high meem (ۙ)
+  '\u06DA', // Arabic small high lam alef (ۚ)
+  '\u06DB', // Arabic small high jeem (ۛ)
+  '\u06DC', // Arabic small high seen (ۜ)
+  '\u06E2', // Arabic small high madda (ۢ)
+  '\u0615', // Arabic small high tah (ؕ)
 ]);
 
 const UTHMANI_HAFS_FONTS = decamelizeKeys({
