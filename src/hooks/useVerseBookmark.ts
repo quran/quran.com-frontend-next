@@ -1,8 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
@@ -69,7 +68,9 @@ const useVerseBookmark = ({
   const shouldFetchBookmarks = isLoggedIn && !!bookmarksRangeUrl;
 
   // Fetch page bookmarks (bulk) - SWR deduplicates across all instances
-  const { data: pageBookmarks, isValidating: isLoading } = useSWRImmutable<BookmarksMap>(
+  // Using useSWR (not useSWRImmutable) because bookmarks can be modified from other pages.
+  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
+  const { data: pageBookmarks, isValidating: isLoading } = useSWR<BookmarksMap>(
     shouldFetchBookmarks ? bookmarksRangeUrl : null,
     (url: string) => privateFetcher(url),
   );

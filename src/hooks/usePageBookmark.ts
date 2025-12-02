@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
@@ -49,11 +49,13 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
   });
 
   // Use SWR to fetch bookmark data
+  // Using useSWR (not useSWRImmutable) because bookmarks can be modified from other pages.
+  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
   const {
     data: bookmark,
     isValidating: isLoading,
     mutate,
-  } = useSWRImmutable<Bookmark>(
+  } = useSWR<Bookmark>(
     isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
     async () => {
       const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);

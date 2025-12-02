@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
@@ -55,11 +54,13 @@ const useBookmarkCollections = ({
   const toast = useToast();
   const { t } = useTranslation('common');
 
+  // Using useSWR (not useSWRImmutable) because bookmark collections can be modified from other pages.
+  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
   const {
     data: collectionIds,
     isValidating: isLoading,
     mutate: mutateBookmarkCollections,
-  } = useSWRImmutable<string[]>(
+  } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
     async () => {
       const response = await getBookmarkCollections(mushafId, key, type, verseNumber);
