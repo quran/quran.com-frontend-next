@@ -8,6 +8,11 @@ import { useEffect, useRef } from 'react';
  * @param {Record<string, unknown>} params a map of each parameter and its value that we will listen to and in the event of changing any of them, we will re-generate the url.
  */
 const useAddQueryParamsToUrl = (relativeUrl: string, params: Record<string, unknown>) => {
+  /**
+   * Tracks whether the hook has run at least once.
+   * Used to determine whether to replace (first run) or push (subsequent runs) history state.
+   * This prevents polluting the browser history with the initial URL when the component mounts.
+   */
   const hasInitialized = useRef(false);
 
   useEffect(() => {
