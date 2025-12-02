@@ -39,27 +39,9 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const userLoggedIn = isLoggedIn();
   const enrollUserInCourse = useEnrollUser();
 
-  const onStartHereClicked = async (): Promise<void> => {
-    const userType = getUserType(userLoggedIn);
-
-    logButtonClick('course_enroll', {
-      courseId: id,
-      isCTA,
-      userType,
-    });
-
-    // Guest user handling
-    if (!userLoggedIn) {
-      if (allowGuestAccess && lessons?.length > 0) {
-        router.push(getLessonNavigationUrl(slug, lessons[0].slug));
-      } else {
-        router.push(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
-      }
-      return;
-    }
-
-    // Logged-in user - enroll with MANUAL method
+  const enrollAndNavigate = async (): Promise<void> => {
     setIsLoading(true);
+
     const { success } = await enrollUserInCourse(id, EnrollmentMethod.MANUAL);
 
     if (success) {
@@ -72,27 +54,41 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
         await router.push(getLessonNavigationUrl(slug, lessons[0].slug));
       }
     } else {
-      toast(t('common:error.general'), {
-        status: ToastStatus.Error,
-      });
+      toast(t('common:error.general'), { status: ToastStatus.Error });
     }
 
     setIsLoading(false);
   };
 
-  // CTA mode - only show button if not enrolled
-  if (isCTA) {
-    if (isUserEnrolled) {
-      return <></>;
+  const onStartHereClicked = async (): Promise<void> => {
+    logButtonClick('course_enroll', {
+      courseId: id,
+      isCTA,
+      userType: getUserType(userLoggedIn),
+    });
+
+    if (!userLoggedIn) {
+      if (allowGuestAccess && lessons?.length > 0) {
+        router.push(getLessonNavigationUrl(slug, lessons[0].slug));
+      } else {
+        router.push(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+      }
+      return;
     }
-    return (
-      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
-        {t('start-here')}
-      </Button>
-    );
+
+    await enrollAndNavigate();
+  };
+
+  const startButton = (
+    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
+      {t('start-here')}
+    </Button>
+  );
+
+  if (isCTA) {
+    return isUserEnrolled ? null : startButton;
   }
 
-  // Course is completed
   if (isCompleted) {
     return (
       <div className={styles.completedContainer}>
@@ -104,17 +100,11 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     );
   }
 
-  // User is enrolled - show StartOrContinueLearning component
   if (isUserEnrolled) {
     return <StartOrContinueLearning course={course} />;
   }
 
-  // Not enrolled - show "Start here" button
-  return (
-    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
-      {t('start-here')}
-    </Button>
-  );
+  return startButton;
 };
 
 export default StatusHeader;
