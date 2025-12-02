@@ -1,6 +1,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { describe, it, expect } from 'vitest';
 
+import { getAllChaptersData } from '../chapter';
+
 import { getCopyReflectionContent } from './string';
 
 // Helpers to build test data with minimal typing friction
@@ -11,7 +13,7 @@ type VerseLike = {
 };
 
 describe('getCopyReflectionContent', () => {
-  it('formats a group with multiple ayahs using plural "Verses" and range', () => {
+  it('formats a group with multiple ayahs using plural "Verses" and range', async () => {
     const versesByIndex: Record<string, VerseLike[]> = {
       '0': [
         { verseNumber: 1, chapterId: 1, translations: [{ id: 20, text: 'Ayah 1 text' }] },
@@ -33,7 +35,8 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const chaptersData = await getAllChaptersData('en');
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references);
 
     // Expected output format:
     // Chapter {surahNumber}: {surahName}, Verses:  {from} - {to}\r\n
@@ -43,7 +46,7 @@ describe('getCopyReflectionContent', () => {
     );
   });
 
-  it('formats a group with a single ayah using singular "Verse"', () => {
+  it('formats a group with a single ayah using singular "Verse"', async () => {
     const versesByIndex: Record<string, VerseLike[]> = {
       '0': [{ verseNumber: 5, chapterId: 18, translations: [{ id: 77, text: 'Single ayah' }] }],
     };
@@ -57,11 +60,12 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const chaptersData = await getAllChaptersData('en');
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references);
     expect(result).toBe('Chapter 18: Al-Kahf, Verse:  5\r\nSingle ayah (5) \r\n\r\n');
   });
 
-  it('skips groups without a first inner array', () => {
+  it('skips groups without a first inner array', async () => {
     const versesByIndex: Record<string, VerseLike[]> = {
       '0': [], // no verses, should be skipped
       '1': [{ verseNumber: 7, chapterId: 2, translations: [{ id: 33, text: 'Valid' }] }],
@@ -76,7 +80,8 @@ describe('getCopyReflectionContent', () => {
       },
     ];
 
-    const result = getCopyReflectionContent(versesByIndex as any, references as any);
+    const chaptersData = await getAllChaptersData('en');
+    const result = getCopyReflectionContent(versesByIndex as any, chaptersData, references);
     expect(result).toBe('Chapter 2: Al-Baqarah, Verse:  7\r\nValid (7) \r\n\r\n');
   });
 });

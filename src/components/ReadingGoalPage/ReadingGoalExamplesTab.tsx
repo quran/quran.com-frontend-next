@@ -1,6 +1,10 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import { readingGoalExamples, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import {
+  readingGoalExamples,
+  ReadingGoalExampleKey,
+  ReadingGoalTabProps,
+} from './hooks/useReadingGoalReducer';
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 
@@ -19,7 +23,7 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
         <p className={styles.subtitle}>{t('examples-subtitle')}</p>
       </div>
       <div className={styles.optionsContainer}>
-        {Object.keys(readingGoalExamples).map((exampleKey: keyof typeof readingGoalExamples) => {
+        {Object.values(ReadingGoalExampleKey).map((exampleKey) => {
           const example = readingGoalExamples[exampleKey];
 
           return (

@@ -1,3 +1,4 @@
+import Room, { RoomType } from '@/types/QuranReflect/Room';
 import stringify from '@/utils/qs-stringify';
 
 export const API_HOST = process.env.NEXT_PUBLIC_QURAN_REFLECT_URL;
@@ -26,4 +27,18 @@ export const getQuranReflectTagUrl = (tag: string) =>
 
 export const getQRNavigationUrl = () => `${API_HOST}`;
 
-export const getLearningPlanBannerUrl = (slug: string): string => `/learning-plans/${slug}`;
+/**
+ *  Get the link to a reflection group or page.
+ * If it's a page, return the subdomain link.
+ * If it's a group, return the groups link.
+ * @param {Room} groupOrPage - The reflection group or page object.
+ * @returns {string} - The link to the reflection group or page.
+ */
+export const getReflectionGroupLink = (groupOrPage: Room) => {
+  // if it's a page, return the subdomain link
+  if (groupOrPage?.roomType === RoomType.PAGE) {
+    return `${API_HOST}/${groupOrPage?.subdomain || ''}`;
+  }
+  // if it's a group, return the groups link
+  return `${API_HOST}/groups/${groupOrPage?.url || ''}`;
+};

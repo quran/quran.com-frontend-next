@@ -136,6 +136,7 @@ const AudioPlayer = () => {
           [styles.containerHidden]: !isVisible,
           [styles.containerOnboarding]: isActive,
         })}
+        data-testid="audio-player-body"
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio

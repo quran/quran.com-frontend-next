@@ -2,7 +2,7 @@
   "continue-reading": "Lees verder",
   "continuous": {
     "description": "Je doel berekent je voortgang over een periode van dagen",
-    "title": "Over een duur"
+    "title": "Over een bepaalde tijdsduur"
   },
   "create-plan": "Plan maken",
   "create-reading-goal": "Doel maken",
@@ -25,11 +25,11 @@
       "title": "Aangepast"
     },
     "khatm": {
-      "description": "Een klassiek Khatm-doelpunt. Lees 1 Juz per dag",
+      "description": "Een klassiek Khatm-doel. Lees 1 Juz per dag",
       "title": "Lees de koran in 30 dagen"
     },
     "time": {
-      "description": "Een eenvoudig beginnersvriendelijk doel",
+      "description": "Een eenvoudig beginners vriendelijk doel",
       "title": "Lees 10 minuten per dag"
     },
     "year": {
@@ -48,7 +48,7 @@
   },
   "goal-target": {
     "description": "Hoeveel tijd, pagina's of verzen moet je lezen om je doel te bereiken?",
-    "title": "Stel een doel voor je doel"
+    "title": "Stel een doel voor jezelf om naar toe te werken."
   },
   "goal-type": {
     "description": "Moet uw doel gebaseerd zijn op tijd, pagina's of een aangepast bereik (dwz 3 juzs van de koran)?",
@@ -79,14 +79,14 @@
   "progress": {
     "complete": "Het doel van vandaag is behaald 🎉",
     "goal-complete": "Je hele doel is voltooid 🎉",
-    "pages-goal": "lees {{pages}} pagina's van de koran",
+    "pages-goal": "lees {{pages}} pagina's van de Koran",
     "range-goal": "lees {{from}} tot {{to}}",
     "time-goal": "lees {{time}} van de koran"
   },
   "reading-goal": "Doel lezen",
-  "reading-goal-description": "Vindt u het een uitdaging om consistent te blijven met uw leesdoelen voor de Koran? <br/> <br/> Quran Growth Journey is een dynamische functie die is ontwikkeld om u te helpen consistent te blijven op uw reis met de Koran. Of u nu 10 minuten per dag wilt lezen, een Juz in een maand wilt voltooien of de hele Koran in een jaar wilt voltooien, enz., Quran.com kan u nu helpen een aangepast doel te stellen en uw dagelijkse leesstrepen bij te houden, terwijl u aanpassingen maakt naarmate u vordert. Het is volledig gratis te gebruiken en we hopen dat het u zal helpen gemotiveerd te blijven om uw doel te bereiken!",
+  "reading-goal-description": "Vindt je het een uitdaging om consistent te blijven met jou leesdoelen voor de Koran? <br/> <br/> Quran Growth Journey is een dynamische functie die is ontwikkeld om jou te helpen consistent te blijven op jou reis met de Koran. Of je nu 10 minuten per dag wilt lezen, een Juz in een maand wilt voltooien of de hele Koran in een jaar wilt voltooien, enz., Quran.com kan jou nu helpen een aangepast doel te stellen en jou dagelijkse leesstrepen bij te houden, terwijl je aanpassingen maakt naarmate je vordert. Het is volledig gratis te gebruiken en we hopen dat het je zal helpen gemotiveerd te blijven om jou doel te bereiken!",
   "reading-goal-label": "Je bent op een",
-  "reading-goal-title": "Introductie van de Koran Groeireis",
+  "reading-goal-title": "Introductie van de Koran Groei-reis",
   "recommended": "Aanbevolen",
   "remaining": "Blijft over voor vandaag",
   "remaining-base": "Overig",

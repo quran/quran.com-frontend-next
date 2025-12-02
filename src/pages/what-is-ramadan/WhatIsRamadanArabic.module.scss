@@ -1,0 +1,15 @@
+.arabicContainer {
+  text-align: end;
+
+  ol {
+    list-style: decimal;
+  }
+
+  div + div {
+    margin-block-start: var(--spacing-medium);
+  }
+}
+
+.fullWidthVerse {
+  inline-size: 100%;
+}

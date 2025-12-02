@@ -1,37 +1,37 @@
 {
   "credits": {
     "desc": "Wij willen graag onze dank betuigen aan iedereen die dit project heeft gesteund en eraan heeft bijgedragen. Zo is de Koran voor miljoenen mensen over de hele wereld toegankelijk geworden.",
-    "lokalize": "<0>Lokalize</0>: Een computerondersteund vertaalsysteem dat zich richt op productiviteit en kwaliteitsborging en een naadloze lokalisatieworkflow biedt.",
-    "quran-align": "<0>Collin Fair</0>: Een hulpmiddel voor het produceren van woordnauwkeurige segmentatie van opgenomen Koranrecitaties.",
-    "quran-complex": "<0>QuranComplex</0>: King Fahd Glorious Qur'an Printing Complex is een leider in het dienen van de Glorieuze Koran en de bijbehorende wetenschappen, het vertalen van de betekenissen ervan en het beschermen van de Korantekst tegen vervorming, door het optimaal gebruik van geavanceerde technologieën op het gebied van drukken, audio-opnamen, elektronische publicatie en digitale toepassingen.",
-    "quran-enc": "<0>QuranEnc</0>: Een portaal met gratis en betrouwbare vertalingen van de betekenissen en uitleg van de edele Koran in vele wereldtalen.",
-    "tanzil": "<0>Tanzil</0>: Een internationaal Koranproject gericht op het leveren van een uiterst geverifieerde, nauwkeurige Korantekst.",
-    "tarteel": "<0>Tarteel</0>: Een door AI aangestuurde Koran-memorisatie-app. Deze is ontworpen om je te helpen slimmer te memoriseren, of je nu naar een vers zoekt, je voortgang bijhoudt of je recitatie volgt.",
+    "lokalize": "Een computerondersteund vertaalsysteem dat zich richt op productiviteit en kwaliteitsborging en een naadloze lokalisatie workflow biedt.",
+    "quran-align": "<0>Collin Fair</0>: Een hulpmiddel voor het produceren van woordnauwkeurige segmentatie van opgenomen Koran recitaties.",
+    "quran-complex": "<0>QuranComplex</0>: King Fahd Glorious Qur'an Printing Complex is een leider in het dienen van de Glorieuze Koran en de bijbehorende wetenschappen, het vertalen van de betekenissen ervan en het beschermen van de Koran tekst tegen vervorming, door het optimaal gebruik van geavanceerde technologieën op het gebied van drukken, audio-opnamen, elektronische publicatie en digitale toepassingen.",
+    "quran-enc": "<0>QuranEnc</0>: Een portaal met gratis en betrouwbare vertalingen van de betekenissen en uitleg van de edele Koran in vele wereld talen.",
+    "tanzil": "<0>Tanzil</0>: Een internationaal Koran project gericht op het leveren van een uiterst geverifieerde, nauwkeurige Korantekst.",
+    "tarteel": "Een door AI aangestuurde Koran-memorisatie-app. Deze is ontworpen om je te helpen slimmer te memoriseren, of je nu naar een vers zoekt, je voortgang bijhoudt of je recitatie volgt.",
     "title": "Credits",
-    "zekr": "<0>Zekr</0>: Een open platform Koran-studietool voor het doorbladeren en onderzoeken van de Koran"
+    "zekr": "Een open platform Koran-studietool voor het doorbladeren en onderzoeken van de Koran"
   },
   "global-effort": {
-    "desc": "Miljoenen mensen van over de hele wereld vertrouwen op Quran.com als hun primaire digitale Koranbron. Of ze nu komen om te reciteren, reflecteren, memoriseren of studeren, ze delen een gemeenschappelijk doel: een oprecht verlangen om verbinding te maken met de woorden van Allah. \\n Terwijl we blijven groeien, blijven we toegewijd om ervoor te zorgen dat Quran.com een vertrouwde, toegankelijke en prachtig ontworpen ruimte blijft voor iedereen die zich wil bezighouden met de Koran.",
+    "desc": "Miljoenen mensen van over de hele wereld vertrouwen op Quran.com als hun primaire digitale Koran bron. Of ze nu komen om te reciteren, reflecteren, memoriseren of studeren, ze delen een gemeenschappelijk doel: een oprecht verlangen om verbinding te maken met de woorden van Allah. \\n Terwijl we blijven groeien, blijven we toegewijd om ervoor te zorgen dat Quran.com een vertrouwde, toegankelijke en prachtig ontworpen ruimte blijft voor iedereen die zich wil bezighouden met de Koran.",
     "title": "Een wereldwijde inspanning"
   },
   "key-features": {
     "desc": "Quran.com is ontworpen om elke fase van betrokkenheid bij de Koran te ondersteunen, van lezen en memoriseren tot studeren en reflecteren. Onze functies omvatten:",
     "features": [
-      "Gebruiksvriendelijke Koraninterface – Een heldere en intuïtieve leeservaring op elk apparaat.",
-      "Meerdere vertalingen en tafsir – Toegang tot vertalingen in meerdere talen, samen met tafsir.",
-      "Audiorecitaties – Luister naar hoogwaardige recitaties van de wereldberoemde Qaris, met de mogelijkheid om woord voor woord mee te volgen.",
+      "Gebruiksvriendelijke Koran interface – Een heldere en intuïtieve leeservaring op elk apparaat.",
+      "Meerdere vertalingen en tafseer – Toegang tot vertalingen in meerdere talen, samen met tafseer.",
+      "Audio recitaties – Luister naar hoogwaardige recitaties van de wereldberoemde Qaris, met de mogelijkheid om woord voor woord mee te volgen.",
       "Geavanceerd zoeken en navigeren – Vind direct verzen op onderwerp of trefwoorden in de hele Koran.",
       "Ayah-bladwijzers en notities – Sla verzen op en schrijf persoonlijke reflecties voor later gebruik.",
       "QuranReflect-integratie – Betrek een wereldwijde gemeenschap bij de reflecties en inzichten die door geleerden en individuen worden gedeeld.",
       "Lezen voortgang bijhouden en doelen – Houd uw dagelijkse doelen en leesgeschiedenis bij",
       "API's voor ontwikkelaars – Gratis toegang tot content en functies voor islamitische apps en R&D.",
-      "En nog veel meer, Alhamdullilah."
+      "En nog veel meer, Alhamdulillah."
     ],
     "title": "Belangrijkste kenmerken en aanbiedingen"
   },
   "main-description": "Sinds de oprichting in 1995 heeft Quran.com zich ingezet om de Koran voor iedereen beschikbaar te maken op een manier die duidelijk, authentiek en gemakkelijk te gebruiken is. Elke dag wenden miljoenen mensen wereldwijd zich tot Quran.com om de Koran te lezen, te luisteren, te bestuderen en erover na te denken, of ze nu levenslange studenten, geleerden of net aan hun reis beginnen.",
   "our-mission": {
-    "desc": "De Koran is bedoeld om te worden gelezen, begrepen en over nagedacht. Onze missie is om barrières voor toegang weg te nemen en individuen en gemeenschappen te versterken door een betrouwbare, goed ontworpen en diep verrijkende Koranische ervaring te bieden. We streven ernaar om een vertrouwde bron te zijn voor iedereen die zich met de Koran wil bezighouden, geleid door de principes van nauwkeurigheid, helderheid en oprechtheid.",
+    "desc": "De Koran is bedoeld om te worden gelezen, begrepen en over te reflecteren. Onze missie is om barrières voor toegang weg te nemen en individuen en gemeenschappen te versterken door een betrouwbare, goed ontworpen en diep verrijkende Koranische ervaring te bieden. We streven ernaar om een vertrouwde bron te zijn voor iedereen die zich met de Koran wil bezighouden, geleid door de principes van nauwkeurigheid, helderheid en oprechtheid.",
     "title": "Onze Missie"
   },
   "who-we-are": {

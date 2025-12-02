@@ -20,7 +20,7 @@ import superagent from 'superagent';
 
 const LOCALES_PATH = './locales';
 const DESTINATION_FILE = `${LOCALES_PATH}/locales.zip`;
-const configs = config({ path: '.env.local' });
+const configs = config({ path: '.env' });
 const API_KEY = configs.parsed.LOKALISE_API_KEY;
 const PROJECT_ID = configs.parsed.LOKALISE_PROJECT_ID;
 const SYNC_REMOTE_TO_LOCAL = 'Sync remote files to local';

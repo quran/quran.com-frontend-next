@@ -79,12 +79,12 @@
   "progress": {
     "complete": "El objetivo de hoy está cumplido 🎉",
     "goal-complete": "Todo tu objetivo está cumplido 🎉",
-    "pages-goal": "leer {{pages}} página(s) del Corán",
+    "pages-goal": "lee {{pages}} página(s) del Corán",
     "range-goal": "leer {{from}} hasta {{to}}",
     "time-goal": "leer {{time}} del Corán"
   },
   "reading-goal": "Objetivo de lectura",
-  "reading-goal-description": "¿Le resulta difícil mantener la constancia en sus objetivos de lectura del Corán? <br/> <br/> Quran Growth Journey es una función dinámica desarrollada para ayudarlo a mantenerse constante en su camino con el Corán. Ya sea que su objetivo sea leer 10 minutos al día, completar un Juz en un mes o terminar todo el Corán en un año, etc., Quran.com ahora puede ayudarlo a establecer un objetivo personalizado y realizar un seguimiento de sus lecturas diarias, mientras realiza ajustes a medida que avanza. ¡Es completamente gratuito y esperamos que lo ayude a mantenerse motivado para alcanzar su objetivo!",
+  "reading-goal-description": "¿Te resulta difícil mantener la constancia en tus objetivos de lectura del Corán? <br/> <br/> Quran Growth Journey es una función dinámica desarrollada para ayudarte a mantenerte constante en tu camino con el Corán. Ya sea que tu objetivo sea leer 10 minutos al día, completar un Juz en un mes o terminar todo el Corán en un año, etc., Quran.com ahora puede ayudarte a establecer un objetivo personalizado y realizar un seguimiento de tus lecturas diarias, mientras realiza ajustes a medida que avanza. ¡Es completamente gratuito y esperamos que te ayude a mantenerte motivado para alcanzar tu objetivo!",
   "reading-goal-label": "Estás en un",
   "reading-goal-title": "Presentando el viaje de crecimiento del Corán",
   "recommended": "Recomendado",
@@ -94,7 +94,7 @@
     "one": "{{days}} día que queda",
     "other": " {{days}} días que quedan"
   },
-  "set-a-new-goal": "Establezca una nueva meta",
+  "set-a-new-goal": "Establece una nueva meta",
   "set-reading-goal-success": "Tu objetivo de lectura se ha establecido con éxito.",
   "start-journey": "¡Comienza tu viaje!",
   "start-reading": "Empezar a leer",

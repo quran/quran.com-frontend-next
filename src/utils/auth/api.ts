@@ -5,16 +5,6 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
-import {
-  countPostsWithinRange,
-  createReflection,
-  getReflectionsByVerseKey,
-} from '../quranReflect/apiPaths';
-import {
-  rangesToReflectionReferences,
-  verseKeyToReflectionReference,
-  mapReflectionToNote,
-} from '../quranReflect/mapping';
 
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
@@ -61,6 +51,7 @@ import {
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
+  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -506,57 +497,8 @@ export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
 };
 
-const normalizeCountMap = (res: any): Record<string, number> => {
-  if (!res) return {};
-  const obj = (res && typeof res === 'object' && (res.data || res)) as Record<string, number>;
-  return obj || {};
-};
-
-const logCountFailures = (
-  notesRes: PromiseSettledResult<any>,
-  postsRes: PromiseSettledResult<any>,
-  from: string,
-  to: string,
-) => {
-  if (notesRes.status === 'rejected') {
-    logErrorToSentry(notesRes.reason, {
-      transactionName: 'notes.count.private',
-      metadata: { from, to },
-    });
-  }
-  if (postsRes.status === 'rejected') {
-    logErrorToSentry(postsRes.reason, {
-      transactionName: 'notes.count.reflections',
-      metadata: { from, to },
-    });
-  }
-};
-
 export const countNotesWithinRange = async (from: string, to: string) => {
-  addSentryBreadcrumb('notes.split', 'counting notes and reflections within range', { from, to });
-
-  const [notesRes, postsRes] = await Promise.allSettled([
-    privateFetcher(makeCountNotesWithinRangeUrl(from, to)),
-    countPostsWithinRange(from, to),
-  ]);
-
-  const notesMap = notesRes.status === 'fulfilled' ? normalizeCountMap(notesRes.value) : {};
-  const postsMap = postsRes.status === 'fulfilled' ? normalizeCountMap(postsRes.value) : {};
-
-  logCountFailures(notesRes, postsRes, from, to);
-
-  const merged: Record<string, number> = { ...notesMap };
-  Object.keys(postsMap).forEach((k) => {
-    merged[k] = (merged[k] || 0) + (postsMap[k] || 0);
-  });
-
-  addSentryBreadcrumb('notes.split', 'merged notes and reflections count', {
-    notesCount: Object.keys(notesMap).length,
-    reflectionsCount: Object.keys(postsMap).length,
-    totalRanges: Object.keys(merged).length,
-  });
-
-  return merged;
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
 export const getAyahQuestions = async (ayahKey: string, language: Language) => {
@@ -572,80 +514,32 @@ export const getQuestionById = async (questionId: string): Promise<QuestionRespo
   return privateFetcher(makeGetQuestionByIdUrl(questionId));
 };
 
-export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR' | 'verseKey'>) => {
-  const { saveToQR, verseKey, ranges, ...rest } = payload;
-
-  if (saveToQR) {
-    // Route to Reflections service only
-    addSentryBreadcrumb('notes.split', 'creating reflection', { verseKey, hasRanges: !!ranges });
-
-    const references = verseKey
-      ? [verseKeyToReflectionReference(verseKey)]
-      : rangesToReflectionReferences(ranges || []);
-
-    const reflectionResponse = await createReflection({
-      body: rest.body,
-      references,
-    });
-
-    return mapReflectionToNote(reflectionResponse.data);
-  }
-
-  // Route to Notes service only
-  addSentryBreadcrumb('notes.split', 'creating private note', { verseKey, hasRanges: !!ranges });
-  return postRequest(makeNotesUrl(), { ...rest, ranges, saveToQR: false });
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
 };
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
 
 export const getNoteById = async (id: string): Promise<Note> =>
   privateFetcher(makeGetNoteByIdUrl(id));
 
-const logListFailures = (
-  notesRes: PromiseSettledResult<any>,
-  reflectionsRes: PromiseSettledResult<any>,
-  verseKey: string,
-) => {
-  if (notesRes.status === 'rejected') {
-    logErrorToSentry(notesRes.reason, {
-      transactionName: 'notes.list.private',
-      metadata: { verseKey },
-    });
-  }
-  if (reflectionsRes.status === 'rejected') {
-    logErrorToSentry(reflectionsRes.reason, {
-      transactionName: 'notes.list.reflections',
-      metadata: { verseKey },
-    });
-  }
-};
-
 export const getNotesByVerse = async (verseKey: string): Promise<Note[]> => {
-  addSentryBreadcrumb('notes.split', 'fetching notes and reflections by verse', { verseKey });
+  addSentryBreadcrumb('notes.split', 'fetching notes by verse', { verseKey });
 
-  const [notesRes, reflectionsRes] = await Promise.allSettled([
-    privateFetcher(makeGetNotesByVerseUrl(verseKey)),
-    getReflectionsByVerseKey(verseKey),
-  ]);
+  const notes: Note[] = await privateFetcher(makeGetNotesByVerseUrl(verseKey));
 
-  const notes: Note[] =
-    notesRes.status === 'fulfilled' && Array.isArray(notesRes.value) ? notesRes.value : [];
-  const reflections: Note[] =
-    reflectionsRes.status === 'fulfilled' && reflectionsRes.value?.data
-      ? reflectionsRes.value.data.map(mapReflectionToNote)
-      : [];
-
-  logListFailures(notesRes, reflectionsRes, verseKey);
-
-  const merged = [...notes, ...reflections].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
-
-  addSentryBreadcrumb('notes.split', 'merged notes and reflections list', {
+  addSentryBreadcrumb('notes.split', 'fetched notes', {
     notesCount: notes.length,
-    reflectionsCount: reflections.length,
-    totalCount: merged.length,
   });
 
-  return merged;
+  return notes;
 };
 
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>

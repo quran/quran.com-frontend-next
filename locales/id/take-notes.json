@@ -5,36 +5,36 @@
         "Catatan Anda disimpan dengan aman di akun Quran.com Anda.",
         "Sinkronkan antar perangkat—lanjutkan studi Anda di ponsel, tablet, atau desktop."
       ],
-      "description": "Catatan Anda disinkronkan di seluruh perangkat saat Anda masuk, memungkinkan Anda untuk mengakses refleksi Anda baik di ponsel, tablet, atau komputer.",
-      "login-prompt": "Cukup buat log-in gratis untuk memulai.",
-      "title": "Akses Dimana Saja, Kapan Saja"
+      "description": "Catatan Anda disinkronkan di seluruh perangkat saat Anda masuk, sehingga Anda dapat mengakses refleksi Anda baik di ponsel, tablet, atau komputer.",
+      "login-prompt": "Cukup log-in gratis untuk memulai.",
+      "title": "Akses di mana Saja, Kapan Saja "
     },
     "enhanced-memorization": {
       "bullet-points": [
-        "Tuliskan penjelasan atau pengingat di samping ayat-ayat untuk membantu menghafal.",
-        "Catat kata-kata atau konsep yang sulit untuk ditinjau kemudian.",
+        "Tuliskan penjelasan atau pengingat di samping ayat untuk membantu menghafal.",
+        "Catat kata-kata atau konsep yang sulit untuk diulang nanti.",
         "Gunakan catatan untuk menandai kemajuan dalam jadwal menghafal."
       ],
-      "description": "Menulis catatan tentang ayat-ayat yang Anda hafal dapat meningkatkan daya ingat secara signifikan. Ciptakan alat bantu mengingat, pola catatan, atau tulis hubungan pribadi yang membantu ayat-ayat tersebut melekat dalam ingatan Anda.",
+      "description": "Membuat catatan tentang ayat-ayat yang sedang Anda hafal sangat membantu melekatnya hafalan. Ciptakan alat bantu mengingat, pola catatan, atau tulis hubungan pribadi yang membantu ayat-ayat tersebut melekat dalam ingatan Anda.",
       "image": {
-        "alt": "Catatan untuk menghafal dan revisi"
+        "alt": "Catatan hafalan dan perbaikan"
       },
-      "paragraph": "Baik Anda menghafal secara aktif atau meninjau apa yang Anda pelajari, catatan dapat menjadi bantuan yang ampuh dalam menghafal.",
-      "title": "Peningkatan Hafalan & Revisi"
+      "paragraph": "Baik Anda menghafal secara aktif atau megulang apa yang Anda pelajari, catatan akan sangat membantu Anda dalam menghafal.",
+      "title": "Peningkatan Hafalan & Perbaikan"
     },
     "organize-preserve": {
-      "description": "Atur wawasan Anda berdasarkan ayat, sehingga memudahkan Anda membuat tafsir pribadi dari waktu ke waktu. Catatan Anda tersimpan di akun Anda, jadi Anda tidak akan pernah kehilangan momen inspirasi atau pemahaman tersebut.",
+      "description": "Jaga agar pemahaman Anda terorganisasi ayat per ayat, sehingga memudahkan Anda membuat tafsir pribadi dari waktu ke waktu. Catatan Anda tersimpan di akun Anda, jadi Anda tidak akan pernah kehilangan momen inspirasi atau pemahaman tersebut.",
       "images": {
-        "organized": "Catatan terorganisir pada tingkat ayat",
-        "preserved": "Catatan studi yang diawetkan"
+        "organized": "Catatan terorganisasi per ayat",
+        "preserved": "Catatan Hasil Belajar yang Terjaga"
       },
-      "paragraph": "Pernahkah Anda meninggalkan kelas atau kuliah dan lupa semua catatan yang Anda buat di buku catatan, aplikasi catatan, atau dokumen? Bayangkan memiliki akses ke setiap catatan yang Anda buat pada sebuah ayat yang dapat diakses dengan mudah pada tingkat ayat kapan pun Anda membaca ayat itu lagi.",
-      "title": "Atur dan Pertahankan Studi Anda"
+      "paragraph": "Pernahkah Anda meninggalkan kelas atau kuliah dan lupa semua catatan yang Anda buat di buku catatan, aplikasi catatan, atau dokumen? Bayangkan enaknya jika dapat mengakses dengan mudah setiap catatan yang pernah Anda buat pada sebuah ayat kapan pun Anda membaca ayat itu lagi.",
+      "title": "Atur dan Jaga Hasil Belajar Anda"
     },
     "personal-reflection": {
       "bullet-points": [
-        "Catatlah pikiran, refleksi, dan realisasi Anda saat Anda membaca Al-Quran - sesederhana atau sedalam apa pun itu.",
-        "Perkuat hubungan Anda dengan Al-Quran dengan terlibat aktif dalam ayat-ayatnya daripada membacanya cepat-cepat tanpa jeda."
+        "Catatlah pikiran Anda, refleksi, dan penerapannya saat Anda membaca Al-Quran - sesederhana atau sedalam apa pun itu.",
+        "Perkuat hubungan Anda dengan Al-Quran dengan cara berinteraksi secara aktif  di setiap ayatnya dan bukan dengan membacanya cepat-cepat tanpa jeda."
       ],
       "description": "Dengan mencatat, Anda dapat mendokumentasikan perjalanan pribadi Anda bersama Al-Quran. Catatlah pikiran, pertanyaan, dan momen-momen pencerahan Anda saat belajar. Seiring berjalannya waktu, catatan-catatan ini akan menjadi catatan berharga tentang pertumbuhan rohani dan pemahaman Anda yang semakin mendalam.",
       "examples-heading": "Contoh catatan:",
@@ -45,21 +45,21 @@
       "title": "Refleksi Pribadi & Pertumbuhan Spiritual"
     },
     "share-reflections": {
-      "community-paragraph": "Bila dibagikan, refleksi Anda dapat menyentuh hati orang lain dan menumbuhkan komunitas yang bertumbuh berdasarkan Al-Quran. Pelajari lebih lanjut di <0>QuranReflect.com/faq</0> dan jelajahi <1>Lima Lensa</1> untuk memperkaya refleksi Anda.",
+      "community-paragraph": "Bila dibagikan, refleksi Anda dapat menyentuh hati orang lain dan menumbuhkan komunitas yang berkembang dengan Al-Quran sebagai akarnya. Pelajari lebih lanjut di <0>QuranReflect.com/faq</0> dan jelajahi <1>Lima Lensa</1> untuk memperkaya refleksi Anda.",
       "conclusion": {
-        "dua": "Semoga Allah menjadikan Al Quran sebagai cahaya dadamu, penyejuk hatimu, penghilang kesedihanmu, dan pereda kesedihanmu. Amin.",
-        "paragraph1": "Al-Quran adalah teman seumur hidup, dan menggunakan fitur Catatan dapat membantu Anda membangun hubungan yang bermakna dan interaktif dengannya. Gunakan untuk merekam refleksi, menandai tantangan, menyimpan wawasan, dan banyak lagi. Seiring berjalannya waktu, catatan ini akan menjadi catatan pribadi tentang usaha, ketulusan, dan pertumbuhan Anda bersama Kitab Allah, insyaAllah.",
-        "paragraph2": "Kami mengundang Anda untuk menantang diri Anda agar terhubung dengan Al-Quran setiap hari - meskipun hanya sebuah ayat - dan luangkan waktu untuk merenung dan menulis catatan. <0>Biarkan tindakan kecil dan konsisten ini menjadi sarana untuk memperdalam hubungan Anda dengan Kitab Allah, satu ayat setiap kalinya.</0>",
+        "dua": "Semoga Allah menjadikan Al-Qur'an sebagai cahaya dadamu, penyejuk hatimu, penghilang kesedihanmu, dan penghapus kegalauanmu. Amin.",
+        "paragraph1": "Al-Quran adalah teman seumur hidup, dan menggunakan fitur Catatan dapat membantu Anda membangun hubungan yang bermakna dan interaktif dengannya. Gunakan Catatan untuk merekam refleksi, menandai tantangan, menyimpan kesandan pemahaman, dan banyak lagi. Seiring berjalannya waktu, catatan ini akan menjadi catatan pribadi tentang usaha, ketulusan, dan pertumbuhan Anda bersama Kitabullah, insyaAllah.",
+        "paragraph2": "Kami mengundang Anda untuk menantang diri Anda agar terhubung dengan Al-Qur'an setiap hari - meskipun hanya satu ayat - dan meluangkan waktu untuk merenung dan menulis catatan. <0>Jadikan tindakan kecil dan konsisten ini menjadi sarana untuk memperdalam hubungan Anda dengan Kitabullah, satu ayat setiap kalinya.</0>",
         "title": "Mulailah Perjalanan Anda Hari Ini"
       },
-      "deeper-insights-title": "Wawasan yang Lebih Dalam:",
+      "deeper-insights-title": "Pemahaman Lebih Dalam:",
       "deeper-insights": [
         "Apakah ada nama-nama Allah yang disebutkan, dan bagaimana kaitannya dengan ayat tersebut?",
         "Kata-kata atau aspek linguistik mana yang menarik perhatian Anda?",
-        "Bisakah Anda menghubungkannya dengan konteks ayat tersebut, ayat Al-Quran lainnya, hadis, atau peristiwa?"
+        "Bisakah Anda menghubungkannya dengan konteks ayat tersebut, ayat Al-Quran lainnya, hadis, atau peristiwa apa pun?"
       ],
-      "description": "Segera hadir: kemampuan untuk berbagi catatan terpilih dengan teman, keluarga, atau kelompok belajar. Berkolaborasilah untuk memahami dan menyebarkan pengetahuan yang bermanfaat.",
-      "paragraph1": "Meskipun catatan di Quran.com disimpan secara pribadi, Anda juga memiliki opsi untuk membagikan refleksi terpilih secara publik di <0>QuranReflect.com</0>. Ini adalah platform komunitas nirlaba yang dirancang untuk mendorong keterlibatan yang bijaksana dengan Al-Quran - bukan melalui tafsir ilmiah (yang diperuntukkan bagi para sarjana yang berkualifikasi), tetapi melalui refleksi pribadi yang tulus yang ditinjau dan dipandu oleh tim moderasi yang berkualifikasi.",
+      "description": "Segera hadir: Anda bisa berbagi catatan terpilih dengan teman, keluarga, atau kelompok belajar. Berkolaborasilah untuk memahami dan menyebarkan pengetahuan yang bermanfaat.",
+      "paragraph1": "Meskipun catatan di Quran.com disimpan secara pribadi, Anda juga memiliki opsi untuk membagikan dan menyebarluaskan refleksi yang Anda pilih di <0>QuranReflect.com</0>. Ini adalah platform komunitas nirlaba yang dirancang untuk mendorong pemikiran yang mendalam  tentang Al-Quran - bukan melalui tafsir ilmiah (yang hanya diperuntukkan bagi para ulama yang memenuhi syarat), tetapi melalui refleksi pribadi yang tulus di bawah panduan dan tinjauan tim moderator yang berkualifikasi.",
       "paragraph2": "Allah mengajak semua orang yang beriman, bukan hanya para ulama, untuk melakukan tadabbur:",
       "quote": "\"Ini adalah Kitab yang diberkahi, yang Kami turunkan kepadamu, hai Nabi, agar mereka memperhatikan ayat-ayatnya dan agar orang-orang yang berakal mengambil pelajaran.\" (QS. Shaad 38:29)",
       "reflection-prompt": "Contoh Pertanyaan Refleksi Pribadi yang dapat Anda gunakan untuk berefleksi:",
@@ -68,7 +68,7 @@
         "Apakah ada kualitas atau tindakan yang disebutkan yang dapat Anda tingkatkan?",
         "Apakah ada janji atau peringatan/larangan yang dapat Anda terapkan dalam hidup Anda?",
         "Apakah Anda memiliki cerita pribadi terkait ayat ini?",
-        "Perubahan apa yang ingin Anda buat berdasarkan ayat ini, dan bagaimana Anda atau orang lain dapat menerapkannya secara praktis?"
+        "Perubahan apa yang ingin Anda buat berdasarkan ayat ini, dan bagaimana Anda atau orang lain dapat mempraktekannya?"
       ],
       "title": "Bagikan refleksi Anda agar orang lain dapat memperoleh manfaatnya"
     },
@@ -77,7 +77,7 @@
   "description": "Temukan 6 alasan kuat untuk membuat catatan di Quran.com dan bagaimana catatan dapat memainkan peran penting dalam Perjalanan Anda dengan Al-Quran.",
   "heading": "6 Alasan Kuat untuk Membuat Catatan - Dan Bagaimana Catatan Dapat Mengubah Perjalanan Anda Bersama Al-Quran",
   "how-to-use": {
-    "saved-note-explanation": "Setelah Anda menyimpan catatan untuk suatu ayat, ikon catatan akan berubah menjadi biru, sehingga memudahkan untuk mengidentifikasi ayat-ayat yang sebelumnya telah Anda beri anotasi selama pembacaan berikutnya.",
+    "saved-note-explanation": "Setelah Anda menyimpan catatan untuk suatu ayat, ikon catatan akan berubah menjadi biru, sehingga mudah untuk mengidentifikasi ayat-ayat yang sebelumnya telah Anda beri anotasi waktu pembacaan berikutnya.",
     "step1": "<0>Pilih Ayat:</0> Klik ayat mana saja dan pilih opsi Catatan.",
     "step2": "<0>Tambahkan Pemikiran Anda:</0> Ketik refleksi, pengingat, atau pertanyaan Anda.",
     "step3": "<0>Simpan:</0> Catatan Anda akan disimpan di akun Anda.",
@@ -89,24 +89,24 @@
       "alt": "Menambahkan catatan pada sebuah ayat"
     },
     "blue-icon": {
-      "alt": "Ikon catatan biru yang menunjukkan catatan yang disimpan"
+      "alt": "Ikon catatan berwarna biru yang menunjukkan catatan yang disimpan"
     },
     "feature-available": {
       "alt": "Fitur catatan tersedia di samping setiap ayat",
       "caption": "Fitur catatan tersedia di samping setiap ayat"
     }
   },
-  "introduction": "Fitur Catatan di Quran.com merupakan cara yang bermanfaat untuk memperdalam keterlibatan Anda dengan Al-Quran. Baik saat Anda belajar, merenung, atau sekadar mencoba memahami pesannya dengan lebih baik, membuat catatan dapat membantu Anda terhubung lebih dalam dengan ayat-ayat dan mengingat wawasan yang mungkin terlupakan.",
+  "introduction": "Fitur Catatan di Quran.com merupakan cara yang bermanfaat untuk mempererat keterikatan Anda dengan Al-Quran. Baik saat Anda belajar, merenung, atau sekadar mencoba memahami pesannya dengan lebih baik, membuat catatan dapat membantu Anda terhubung lebih dalam dengan ayat-ayat dan mengingat kembali pemahaman yang mungkin terlupakan.",
   "meta": {
     "description": "Pelajari cara menggunakan fitur catatan di Quran.com untuk meningkatkan pengalaman belajar Al-Quran Anda.",
-    "title": "Catatlah - Quran.com"
+    "title": "Membuat Catatan - Quran.com"
   },
   "table-of-contents": {
     "items": [
       "Refleksi Pribadi & Pertumbuhan Spiritual",
-      "Atur dan Pertahankan Studi Anda",
-      "Akses Dimana Saja, Kapan Saja",
-      "Peningkatan Hafalan & Revisi",
+      "Atur dan Jaga Hasil Belajar Anda",
+      "Akses dari mana Saja, Kapan Saja",
+      "Peningkatan Hafalan & Perbaikan",
       "Bagikan refleksi Anda agar orang lain dapat memperoleh manfaatnya"
     ],
     "title": "Manfaat Menggunakan Fitur Catatan"

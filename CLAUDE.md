@@ -98,7 +98,6 @@ repository.
 
 ### Build & Deployment
 
-- **Vercel** deployment with environment-based configurations
 - **Sentry** for error tracking and performance monitoring
 - **PWA** support with service workers
 - Bundle analysis and optimization

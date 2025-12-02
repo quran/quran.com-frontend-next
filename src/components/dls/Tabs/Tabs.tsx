@@ -1,9 +1,11 @@
+import { JSX } from 'react';
+
 import classNames from 'classnames';
 
 import styles from './Tabs.module.scss';
 
 export type Tab = {
-  title: string;
+  title: string | JSX.Element;
   value: string;
   id?: string;
 };
@@ -13,10 +15,11 @@ type TabsProps = {
   selected: string;
   onSelect?: (value: string) => void;
   className?: string;
+  activeClassName?: string;
 };
 
 // TODO: move this to Radix UI Tabs component
-const Tabs = ({ tabs, onSelect, selected, className }: TabsProps) => {
+const Tabs = ({ tabs, onSelect, selected, className, activeClassName }: TabsProps) => {
   return (
     <div className={styles.container} role="tablist">
       {tabs.map((tab) => (
@@ -24,7 +27,8 @@ const Tabs = ({ tabs, onSelect, selected, className }: TabsProps) => {
           className={classNames(
             className,
             styles.tabItem,
-            selected === tab.value && styles.tabItemSelected,
+            selected === tab.value && activeClassName,
+            selected === tab.value && !activeClassName && styles.tabItemSelected,
           )}
           key={tab.value}
           role="tab"

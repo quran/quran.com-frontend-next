@@ -3,112 +3,112 @@
     "access-anywhere": {
       "bullet-points": [
         "Notlarınız Quran.com hesabınızda güvenli bir şekilde saklanır.",
-        "Cihazlar arasında senkronizasyon sağlayın; mobil, tablet veya masaüstünde çalışmalarınıza devam edin."
+        "Cihazlar arasında senkronize edin — çalışmanıza telefon, tablet veya bilgisayardan devam edin."
       ],
-      "description": "Oturum açtığınızda notlarınız cihazlarınız arasında senkronize edilir; böylece telefonunuzdan, tabletinizden veya bilgisayarınızdan düşüncelerinizi okuyabilirsiniz.",
-      "login-prompt": "Başlamak için ücretsiz bir giriş oluşturmanız yeterli.",
-      "title": "Her Yerden, Her Zaman Erişim"
+      "description": "Notlarınız, giriş yaptığınızda cihazlar arasında senkronize olur ve ister telefonunuzda, ister tabletinizde, ister bilgisayarınızda olun, tefekkürlerinize erişmenizi sağlar.",
+      "login-prompt": "Ücretsiz kayıt olun ve başlayın.",
+      "title": "Her yerden, her zaman erişim"
     },
     "enhanced-memorization": {
       "bullet-points": [
-        "Ezberlemeyi kolaylaştırmak için ayetlerin yanına açıklama veya hatırlatıcılar yazın.",
-        "Daha sonra tekrar etmek üzere zor kelimeleri veya kavramları not alın.",
-        "Ezberleme çizelgelerindeki ilerlemeyi işaretlemek için notları kullanın."
+        "Ezberlemeye yardımcı olmak için ayetlerin yanına açıklamalar veya hatırlatıcılar yazın.",
+        "Zor kelimeleri veya kavramları daha sonra gözden geçirmek için not alın.",
+        "Notları, ezber planınızdaki ilerlemenizi takip etmek için kullanın."
       ],
-      "description": "Ezberlediğiniz ayetler hakkında notlar yazmak, hafızayı önemli ölçüde iyileştirebilir. Ayetlerin hafızanızda kalmasına yardımcı olacak anımsatıcı araçlar, not kalıpları oluşturun veya kişisel bağlantılar yazın.",
+      "description": "Ezberlemekte olduğunuz ayetler hakkında notlar almak, bilgiyi hafızada tutmanızı önemli ölçüde artırabilir. Ayetlerin hafızanızda kalmasına yardımcı olacak hatırlama yöntemleri oluşturun, örüntüler veya kişisel bağlantılar not edin.",
       "image": {
-        "alt": "Ezberleme ve tekrar için notlar"
+        "alt": "Ezber ve tekrar notları"
       },
-      "paragraph": "İster aktif olarak ezberleyin, ister öğrendiklerinizi tekrar edin, notlar ezberlemede güçlü bir yardımcı olabilir.",
+      "paragraph": "İster aktif olarak ezberliyor olun, ister öğrendiklerinizi tekrar edin, notlar ezberde güçlü bir yardımcı olabilir.",
       "title": "Gelişmiş Ezberleme ve Tekrar"
     },
     "organize-preserve": {
-      "description": "İçgörülerinizi ayetlere göre düzenleyin, böylece zamanla kişisel bir tefsir (yorum) oluşturmanız kolaylaşır. Notlarınız hesabınızda saklanır, böylece o ilham veya anlayış anını asla kaybetmezsiniz.",
+      "description": "İçgörülerinizi ayet bazında düzenli tutun; böylece zamanla kendi kişisel tefsir (yorumlarınızı) oluşturmanız kolaylaşır. Notlarınız hesabınızda saklanır, böylece ilham veya anlayış anlarınızı asla kaybetmezsiniz.",
       "images": {
-        "organized": "Ayet düzeyinde düzenlenmiş notlar",
-        "preserved": "Korunan çalışma notları"
+        "organized": "Ayetlere göre düzenlenmiş notlar",
+        "preserved": "Saklanan çalışma notları"
       },
-      "paragraph": "Hiç bir dersten veya dersten ayrılıp bir deftere, not uygulamasına veya belgeye karaladığınız notları unuttunuz mu? Bir ayeti tekrar okuduğunuzda ayet düzeyinde kolayca erişebileceğiniz bir ayette aldığınız her nota erişebildiğinizi hayal edin.",
-      "title": "Çalışmanızı Düzenleyin ve Koruyun"
+      "paragraph": "Hiç bir ders ya da konferanstan çıktıktan sonra, not defterinize, not uygulamasına veya belgelerinize yazdığınız notları unuttuğunuz oldu mu? Artık her ayet için aldığınız tüm notlara, o ayeti tekrar okuduğunuzda kolayca erişebilirsiniz.",
+      "title": "Çalışmanızı düzenleyin ve saklayın"
     },
     "personal-reflection": {
       "bullet-points": [
-        "Kuran'ı okurken düşüncelerinizi, fikirlerinizi ve fark ettiklerinizi -ister basit, ister derin olsun- not alın.",
-        "Kuran'ı hızlı bir şekilde, durmadan okumak yerine, ayetleriyle aktif olarak meşgul olarak onunla ilişkinizi güçlendirin."
+        "Kur’ân’ı okurken aklınıza gelen düşünceleri, tefekkürleri ve fark ettiklerinizi not edin; ister basit ister derin olsun",
+        "Kur’ân ile ilişkinizi güçlendirmek için, ayetleri hızlıca geçip okumak yerine, onlarla aktif bir şekilde ilgilenin."
       ],
-      "description": "Not almak, Kuran ile kişisel yolculuğunuzu belgelemenizi sağlar. Çalışırken düşüncelerinizi, sorularınızı ve netlik anlarınızı kaydedin. Zamanla, bu notlar ruhsal gelişiminizin ve derinleşen anlayışınızın değerli bir kaydı haline gelir.",
+      "description": "Not almak, Kur’ân ile olan kişisel yolculuğunuzu kaydetmenizi sağlar. Çalışırken düşüncelerinizi, sorularınızı ve berraklık anlarınızı not edin. Zamanla bu notlar, manevî gelişiminizin ve derinleşen anlayışınızın kıymetli bir kaydı hâline gelir.",
       "examples-heading": "Not örnekleri:",
       "images": {
-        "growth": "Ruhsal gelişim notlarına örnek",
-        "reflection": "Kişisel düşünce notlarına örnek"
+        "growth": "Manevi gelişim notları örneği",
+        "reflection": "Kişisel tefekkür notları örneği"
       },
-      "title": "Kişisel Yansıma ve Manevi Büyüme"
+      "title": "Kişisel Tefekkür ve Manevî Gelişim"
     },
     "share-reflections": {
-      "community-paragraph": "Paylaşıldığında, yansımalarınız başkalarıyla derin bir şekilde yankılanabilir ve Kur'an merkezli bir büyüme topluluğunu besleyebilir. <0>QuranReflect.com/faq</0> adresinden daha fazla bilgi edinin ve yansımalarınızı zenginleştirmek için <1>Beş Merceği</1> keşfedin.",
+      "community-paragraph": "Paylaşıldığında, düşünceleriniz başkalarının gönlünde derin yankılar uyandırabilir ve Kuran merkezli bir topluluğun gelişmesine katkıda bulunabilir. Daha fazlasını öğrenmek için <0>QuranReflect.com/faq</0>’u ziyaret edin ve düşüncelerinizi zenginleştirmek üzere <1>Beş Merceği</1> keşfedin.",
       "conclusion": {
         "dua": "Allah, Kur'an'ı göğsünüzün nuru, kalbinizin baharı, üzüntülerinizin gidericisi ve sıkıntılarınızın ferahlatıcısı kılsın. Amin.",
-        "paragraph1": "Kuran, ömür boyu bir arkadaştır ve Notlar özelliğini kullanmak onunla anlamlı, etkileşimli bir ilişki kurmanıza yardımcı olabilir. Düşünceleri yakalamak, zorlukları işaretlemek, içgörüleri korumak ve daha fazlası için kullanın. Zamanla, inşaAllah, Allah'ın Kitabı ile çabanızın, samimiyetinizin ve gelişiminizin kişisel bir kaydı haline gelecektir.",
-        "paragraph2": "Sizi, her gün Kuran'la bağlantı kurmaya -sadece bir ayet bile olsa- kendinizi zorlamaya ve bir an durup düşünmeye ve bir not yazmaya davet ediyoruz. <0>Bu küçük, tutarlı eylemin, Allah'ın Kitabı ile ilişkinizi, her seferinde bir ayet olmak üzere, derinleştirmenin bir aracı olmasına izin verin.</0>",
-        "title": "Yolculuğunuza Bugün Başlayın"
+        "paragraph1": "Kuran, ömür boyu bir yol arkadaşıdır ve Notlar özelliğini kullanmak onunla anlamlı, etkileşimli bir ilişki kurmanıza yardımcı olabilir. Düşüncelerinizi kaydetmek, karşılaştığınız zorlukları işaretlemek ve içgörüleri not etmek için kullanabilirsiniz. Zamanla bu notlar inşallah, Allah’ın Kitabı ile olan gayretinizin, samimiyetinizin ve gelişiminizin kişisel bir kaydı hâline gelecektir.",
+        "paragraph2": "Sizi, her gün Kuran'la bağlantı kurmaya -sadece bir ayet bile olsa- kendinizi aşmaya ve bir an durup düşünmeye ve bir not almaya davet ediyoruz. <0>Bu küçük ama tutarlı eylem, Allah'ın Kitabı ile olan ilişkinizi her ayette daha da derinleştirmeye vesile olsun.</0>",
+        "title": "Yolculuğunuza bugün başlayın"
       },
-      "deeper-insights-title": "Daha Derin İçgörüler:",
+      "deeper-insights-title": "Daha derin içgörüler:",
       "deeper-insights": [
-        "Allah'ın isimleri geçiyor mu ve bunların ayetle nasıl bir bağlantısı var?",
-        "Hangi kelimeler veya dilsel özellikler dikkatinizi çekti?",
-        "Ayetin bağlamı, diğer Kur'an ayetleri, hadisler veya olaylarla bağlantı kurabilir misiniz?"
+        "Ayet'te Allah'ın isimleri geçiyor mu ve bunların ayetle nasıl bir bağlantısı var?",
+        "Hangi kelimeler veya dilbilimsel unsurlar dikkatinizi çekti?",
+        "Ayetin bağlamıyla, diğer Kuran ayetleriyle, hadislerle veya olaylarla bağlantı kurabilir misiniz?"
       ],
-      "description": "Yakında: seçili notları arkadaşlarınızla, ailenizle veya çalışma gruplarıyla paylaşma yeteneği. Anlama konusunda iş birliği yapın ve faydalı bilgileri yayın.",
-      "paragraph1": "Quran.com'daki notlar özel olarak kaydedilirken, seçili düşünceleri <0>QuranReflect.com</0>'da herkese açık olarak paylaşma seçeneğiniz de var. Bu, Kuran ile düşünceli bir etkileşimi teşvik etmek için tasarlanmış kar amacı gütmeyen bir topluluk platformudur - akademik tefsir yoluyla değil (ki bu nitelikli akademisyenlere ayrılmıştır), ancak nitelikli bir moderasyon ekibi tarafından incelenen ve yönlendirilen samimi, kişisel düşünceler yoluyla.",
-      "paragraph2": "Allah, sadece âlimleri değil, bütün müminleri tedbîre davet ediyor:",
-      "quote": "Ey Peygamber! Bu, ayetlerini düşünsünler ve akıl sahipleri öğüt alsınlar diye sana indirdiğimiz mübarek bir kitaptır. (Sad Suresi, 38:29)",
-      "reflection-prompt": "Yansıtma yapmak için kullanabileceğiniz Kişisel Yansıtma Sorularına Örnekler:",
+      "description": "Çok yakında: Seçtiğiniz notları arkadaşlarınızla, ailenizle veya çalışma gruplarınızla paylaşabileceksiniz. Anlayışınız üzerinde birlikte çalışın ve faydalı bilgiyi yayın.",
+      "paragraph1": "Quran.com’daki notlarınız özel olarak kaydedilir, ancak seçtiğiniz tefekkürleri <0>QuranReflect.com</0> üzerinde herkesle paylaşma seçeneğiniz de var. Bu, Kuran ile derin bir etkileşimi - akademik tefsir yoluyla değil (ki bu yetkin âlimlere mahsus olan), ancak ehil bir moderasyon ekibi tarafından incelenen ve yönlendirilen samimi, kişisel düşünceler yoluyla - teşvik etmek için kurulmuş kar amacı gütmeyen bir topluluk platformudur",
+      "paragraph2": "Allah, sadece âlimleri değil, bütün müminleri tedebbüre davet ediyor:",
+      "quote": "Bu bir mübarek kitaptır ki onu sana [ey Muhammed], insanlar âyetleri üzerinde iyice düşünsünler, akıl iz‘an sahipleri ondan dersler, öğütler alsınlar diye indirdik. (Sad Suresi, 38:29)",
+      "reflection-prompt": "Kendi tefekkürünüz için kullanabileceğiniz örnek sorular:",
       "reflection-questions": [
-        "Bu ayet sizi hangi açılardan etkiledi veya size ilham verdi?",
-        "Geliştirebileceğiniz herhangi bir özellik veya eylemden bahsediliyor mu?",
+        "Bu ayet sizi hangi açıdan etkiledi veya ilham verdi?",
+        "Geliştirebileceğiniz niteliklerden veya eylemlerden bahsediliyor mu?",
         "Hayatınıza uygulayabileceğiniz bir vaat veya uyarı/yasak var mı?",
         "Bu ayetle ilgili kişisel bir hikayeniz var mı?",
-        "Bu ayete dayanarak ne gibi değişiklikler yapmak istiyorsunuz ve bunları siz veya bir başkası pratikte nasıl uygulayabilirsiniz?"
+        "Bu ayete dayanarak hangi değişiklikleri yapmak istiyorsunuz ve siz veya başkası bunları pratik olarak nasıl uygulayabilir?"
       ],
-      "title": "Düşüncelerinizi paylaşın ki başkaları da faydalanabilsin"
+      "title": "Tefekkürlerinizi paylaşın ki başkaları da faydalanabilsin"
     },
-    "title": "Notlar Özelliğini Kullanmanın Faydaları"
+    "title": "Notlar özelliğinin faydaları"
   },
-  "description": "Quran.com'da not almak için 6 güçlü nedeni keşfedin ve notların Kuran yolculuğunuzda nasıl önemli bir rol oynayabileceğini öğrenin.",
-  "heading": "Not Almak İçin 6 Güçlü Neden - Ve Bunlar Kur'an Yolculuğunuzu Nasıl Değiştirebilir",
+  "description": "Quran.com’da not almanız için 6 güçlü nedeni keşfedin ve notların Kur’ân ile yolculuğunuzda nasıl hayati bir rol oynayabileceğini öğrenin.",
+  "heading": "Not almanın 6 güçlü nedeni – ve Kur’ân yolculuğunuzu nasıl dönüştürebileceği",
   "how-to-use": {
-    "saved-note-explanation": "Bir ayet için not kaydettiğinizde not simgesi mavi renge dönüşecek ve bu sayede daha sonraki okumalarınızda daha önce not eklediğiniz ayetleri kolayca tespit edebileceksiniz.",
-    "step1": "<0>Bir Ayet Seçin:</0> Herhangi bir ayete tıklayın ve Notlar seçeneğini seçin.",
-    "step2": "<0>Düşüncelerinizi Ekleyin:</0> Düşüncelerinizi, hatırlatmalarınızı veya sorularınızı yazın.",
-    "step3": "<0>Kaydet:</0> Notlarınız hesabınızın altına kaydedilecektir.",
-    "step4": "<0>Her Zaman Erişim:</0> Profiliniz üzerinden veya doğrudan ayet üzerinden notlarınıza geri dönün.",
-    "title": "Notlar Özelliği Nasıl Kullanılır"
+    "saved-note-explanation": "Bir ayete not eklediğinizde, not simgesi maviye dönüşür. Bu sayede sonraki okumalarınızda daha önce not yazdığınız ayetleri kolayca görebilirsiniz.",
+    "step1": "<0>Bir Ayet Seçin:</0> Herhangi bir ayete tıklayın ve notlar seçeneğini seçin.",
+    "step2": "<0>Düşüncelerinizi ekleyin:</0> Tefekkürlerinizi, hatırlatmalarınızı veya sorularınızı yazın.",
+    "step3": "<0>Kaydet:</0> Notlarınız hesabınıza kaydedilecektir.",
+    "step4": "<0>Her An Erişim:</0> Notlarınıza ister profilinizden, ister doğrudan ayet üzerinden ulaşabilirsiniz.",
+    "title": "Notlar özelliği nasıl kullanılır"
   },
   "images": {
     "adding-notes": {
-      "alt": "Bir beyite not ekleme"
+      "alt": "Bir ayete not ekleme"
     },
     "blue-icon": {
-      "alt": "Kaydedilen notları gösteren mavi not simgesi"
+      "alt": "Mavi not simgesi, kaydedilmiş notları gösterir"
     },
     "feature-available": {
-      "alt": "Her ayetin yanında nota özelliği mevcuttur",
-      "caption": "Notlar özelliği her ayetin yanında mevcuttur"
+      "alt": "Her ayetin yanındaki notlar özelliği",
+      "caption": "Her ayetin yanında Notlar özelliğini bulabilirsiniz"
     }
   },
-  "introduction": "Quran.com'daki Notlar özelliği, Kuran'la olan etkileşiminizi derinleştirmenin anlamlı bir yoludur. İster çalışıyor, ister düşünüyor veya sadece mesajı daha iyi anlamaya çalışıyor olun, not almak ayetlerle daha derin bir bağ kurmanıza ve aksi takdirde unutulabilecek içgörüleri korumanıza yardımcı olabilir.",
+  "introduction": "Quran.com’daki notlar özelliği, Kur’ân ile bağınızı derinleştirmenin anlamlı bir yoludur. İster çalışıyor, ister tefekkür ediyor, ister sadece mesajı daha iyi anlamaya çalışıyor olun; not almak, ayetlerle daha güçlü bir bağ kurmanıza ve aksi halde unutulabilecek içgörüleri hatırınızda tutmanıza yardımcı olur.",
   "meta": {
-    "description": "Kuran-ı Kerim çalışma deneyiminizi geliştirmek için Quran.com'daki not özelliğini nasıl kullanacağınızı öğrenin.",
-    "title": "Not Alın - Quran.com"
+    "description": "Quran.com’daki notlar özelliğini kullanmayı öğrenin ve Kur’ân çalışmalarınızı daha verimli hâle getirin.",
+    "title": "Not alın - Quran.com"
   },
   "table-of-contents": {
     "items": [
-      "Kişisel Yansıma ve Manevi Büyüme",
-      "Çalışmanızı Düzenleyin ve Koruyun",
-      "Her Yerden, Her Zaman Erişim",
-      "Gelişmiş Ezberleme ve Tekrar",
-      "Düşüncelerinizi paylaşın ki başkaları da faydalanabilsin"
+      "Kişisel tefekkür ve manevî gelişim",
+      "Çalışmanızı düzenleyin ve saklayın",
+      "Her yerden, her zaman erişim",
+      "Gelişmiş ezber ve tekrar",
+      "Tefekkürlerinizi paylaşın ki başkaları da faydalansın"
     ],
-    "title": "Notlar Özelliğini Kullanmanın Faydaları"
+    "title": "Notlar özelliğinin faydaları"
   }
 }

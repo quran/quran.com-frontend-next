@@ -6,22 +6,22 @@
       "title": "Juz Amma"
     },
     "popular-recitations": {
-      "description": "Dagelijks samengestelde feed van recitaties",
+      "description": "Dagelijks samengestelde recitaties",
       "title": "Populaire recitaties"
     },
     "surah-al-kahf": {
-      "description": "Luister naar Surah Alkahf bij herhaling",
-      "title": "Surah Al-Kahfi"
+      "description": "Luister naar Surah Al kahf met herhaling",
+      "title": "Surah Al-Kahf"
     },
     "yaseen-alwaqiah-al-mulk": {
-      "description": "De soera's van een verzameling voordragers",
+      "description": "Verzen van een verzameling reciteurs",
       "title": "Yaseen, Al-Waqiah, Al-Mulk"
     }
   },
-  "curated-stations": "Beheerde stations",
+  "curated-stations": "Samengestelde stations",
   "pause-radio": "Radio pauzeren",
   "play-radio": "Radio afspelen",
   "radio-desc": "Luister naar non-stop prachtige recitatie van de Heilige Koran door verschillende voordragers.",
-  "reciter-stations": "Voordragerstations",
+  "reciter-stations": "Reciteurs",
   "station": "Station"
 }

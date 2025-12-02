@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "添加书签",
   "add-collection": "添加收藏",
   "advanced-copy": "高级复制",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "阿叶提库尔西",
   "back-to-ayah": "回到阿亚",
+  "bismillah": "奉至仁至慈的真主之名",
+  "change-translation": "更改翻译",
   "copy-arabic": "阿拉伯文（纳斯赫体）",
   "copy-footnote-q": "还要复制脚注？",
   "copy-success": "文本已成功复制到剪贴板中。",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Hizb的开始",
   "include-translator": "包括译者姓名？",
   "juz-beginning": "回到本卷开头",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "拯救者：《古兰经》穆尔克章中的有力教训学习计划横幅",
+    "banner-image-description": "查看 Surah Al-Mulk 的救援者学习计划",
+    "banner-wrapper-aria-label": "学习计划宣传横幅",
+    "button-accessibility-label": "详细了解救援者学习计划",
+    "call-to-action-button": "立即开始",
+    "main-headline": "今天探索《古兰经》中的有力教训",
+    "subtitle-description": "（免费学习计划）"
+  },
   "lessons-desc": "阅读并分享《古兰经》第{{surahName}} {{ayahNumber}} } 节的课程",
   "lessons-disclaimer": "课程是来自学者和知识探索者的明智见解，不同于《古兰经的学术解释》等主要来源。",
   "lessons-not-available": "此节经文没有复习过的课文",
@@ -43,6 +55,8 @@
   "next-page": "下一页",
   "next-rub": "下一个 Rub el Hizb",
   "next-surah": "下一章",
+  "page-bookmark-removed": "页面书签已删除",
+  "page-bookmarked": "页面已添加书签",
   "posted-in": "张贴在",
   "prev-ayah": "上一节",
   "prev-hizb": "以前的 Hizb",

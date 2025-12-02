@@ -7,21 +7,47 @@ import styles from './LearningPlanBanner.module.scss';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
+import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLearningPlanBannerUrl } from '@/utils/quranReflect/navigation';
+import { getCourseNavigationUrl } from '@/utils/navigation';
 
-const LEARNING_PLAN_SLUG = 'the-rescuer-powerful-lessons-in-surah-al-mulk';
-const LEARNING_PLAN_URL = getLearningPlanBannerUrl(LEARNING_PLAN_SLUG);
-const BANNER_IMAGE_PATH =
-  'https://images.quran.com/the-rescuer-powerful-lessons-in-surah-al-mulk/Banner.png';
 const BANNER_WIDTH = 1230;
 const BANNER_HEIGHT = 307;
 
-const LearningPlanBanner: React.FC = () => {
+interface LearningPlanConfig {
+  slug: string;
+  imagePath: string;
+}
+
+const LEARNING_PLAN_CONFIGS: Partial<Record<Language, LearningPlanConfig>> = {
+  [Language.EN]: {
+    slug: 'the-rescuer-powerful-lessons-in-surah-al-mulk',
+    imagePath: 'https://images.quran.com/the-rescuer-powerful-lessons-in-surah-al-mulk/Banner.png',
+  },
+  [Language.UR]: {
+    slug: 'surah-al-mulk-7-day-journey-ur',
+    imagePath: 'https://images.quran.com/surah-al-mulk-7-day-journey-ur-2/Banner.png',
+  },
+};
+
+interface Props {
+  language: Language;
+}
+
+const LearningPlanBanner: React.FC<Props> = ({ language }) => {
   const { t } = useTranslation('quran-reader');
+
+  const config = LEARNING_PLAN_CONFIGS[language];
+
+  if (!config) {
+    return null;
+  }
+
+  const learningPlanUrl = getCourseNavigationUrl(config.slug);
 
   return (
     <aside
+      data-testid="learning-plan-banner"
       className={styles.bannerWrapper}
       aria-label={t('learning-plan-banner.banner-wrapper-aria-label')}
       aria-live="polite"
@@ -36,7 +62,7 @@ const LearningPlanBanner: React.FC = () => {
           </p>
           <Button
             size={ButtonSize.Small}
-            href={LEARNING_PLAN_URL}
+            href={learningPlanUrl}
             className={styles.ctaButton}
             ariaLabel={t('learning-plan-banner.button-accessibility-label')}
             onClick={() => logButtonClick('learning_plan_banner_cta')}
@@ -46,14 +72,14 @@ const LearningPlanBanner: React.FC = () => {
         </div>
 
         <Link
-          href={LEARNING_PLAN_URL}
+          href={learningPlanUrl}
           ariaLabel={t('learning-plan-banner.banner-image-description')}
           onClick={() => logButtonClick('learning_plan_banner_image')}
           className={styles.imageLink}
         >
           <div className={styles.imageWrap}>
             <Image
-              src={BANNER_IMAGE_PATH}
+              src={config.imagePath}
               alt={t('learning-plan-banner.banner-image-alt-text')}
               width={BANNER_WIDTH}
               height={BANNER_HEIGHT}

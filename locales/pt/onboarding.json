@@ -16,7 +16,7 @@
       "title": "menu de 3 pontos"
     },
     "ayah-reflection": {
-      "description": "Leia reflexões (tadabbur) de estudiosos, estudantes de conhecimento e pessoas comuns para ajudá-lo a desenvolver uma conexão mais pessoal com o Alcorão",
+      "description": "Leia reflexões (tadabbur) de estudiosos, estudantes de conhecimento e pessoas comuns para ajudá-lo a desenvolver uma conexão mais pessoal com o Quran",
       "title": "Leia as reflexões no nível do versículo"
     },
     "ayah-tafsir": {
@@ -24,7 +24,7 @@
       "title": "Leia Tafsir no nível Ayah"
     },
     "font-size": {
-      "description": "Personalize sua leitura do Alcorão com tamanhos de fonte fáceis de ajustar para uma experiência de leitura confortável",
+      "description": "Personalize sua leitura do Quran com tamanhos de fonte fáceis de ajustar para uma experiência de leitura confortável",
       "title": "Tamanho da fonte"
     },
     "font-style": {
@@ -32,12 +32,12 @@
       "title": "Escolha seu roteiro de leitura preferido"
     },
     "inline-wbw": {
-      "description": "Veja a tradução de cada palavra em linha (abaixo da palavra) ou em um balão acima da palavra enquanto ouve o Alcorão",
+      "description": "Veja a tradução de cada palavra em linha (abaixo da palavra) ou em um balão acima da palavra enquanto ouve o Quran",
       "title": "Exibir tradução palavra por palavra em linha (abaixo da palavra) ou exibir dica de ferramenta"
     },
     "juz": {
-      "description": "Ver Alcorão de Juz",
-      "title": "Ver Alcorão de Juz"
+      "description": "Ver Quran de Juz",
+      "title": "Ver Quran de Juz"
     },
     "listen": {
       "description": "Inicie o reprodutor de áudio para ouvir a recitação",
@@ -48,15 +48,15 @@
       "title": "Conecte-se"
     },
     "quran-radio": {
-      "description": "Ouça QuranRadio - transmita o Alcorão sem anúncios",
-      "title": "Rádio Alcorão"
+      "description": "Ouça QuranRadio - transmita o Quran sem anúncios",
+      "title": "Rádio Quran"
     },
     "reading-sessions": {
-      "description": "Revise facilmente sua jornada no Alcorão com uma olhada em seu histórico de leitura personalizado, acompanhando os versículos que você explorou em Quran.com.",
+      "description": "Revise facilmente sua jornada no Quran com uma olhada em seu histórico de leitura personalizado, acompanhando os versículos que você explorou em Quran.com.",
       "title": "Ver histórico de leitura"
     },
     "reading-view": {
-      "description": "Veja o Alcorão no modo de leitura mushaf",
+      "description": "Veja o Quran no modo de leitura mushaf",
       "title": "Modo de leitura"
     },
     "search-bar": {
@@ -72,7 +72,7 @@
       "title": "Configurações"
     },
     "streak": {
-      "description": "Defina metas de leitura personalizadas, acompanhe seu progresso e crie um hábito consistente de leitura do Alcorão com nosso recurso Sequências e Planos de Leitura.",
+      "description": "Defina metas de leitura personalizadas, acompanhe seu progresso e crie um hábito consistente de leitura do Quran com nosso recurso Sequências e Planos de Leitura.",
       "title": "Acompanhe sequências de leitura e planos de leitura"
     },
     "surah-info": {
@@ -80,8 +80,8 @@
       "title": "Leia sobre a Surata"
     },
     "theme": {
-      "description": "Escolha seu visual favorito - modo Claro, Sépia ou Escuro - para uma experiência de leitura do Alcorão confortável e personalizada.",
-      "title": "Leia o Alcorão no modo claro, sépia ou escuro"
+      "description": "Escolha seu visual favorito - modo Claro, Sépia ou Escuro - para uma experiência de leitura do Quran confortável e personalizada.",
+      "title": "Leia o Quran no modo claro, sépia ou escuro"
     },
     "translations": {
       "description": "Escolha entre uma variedade de traduções em vários idiomas. Dica: compare traduções selecionando diversas opções",
@@ -92,11 +92,11 @@
       "title": "Ouça a transliteração palavra por palavra clicando na palavra"
     },
     "wbw-translation": {
-      "description": "Veja o significado de palavras individuais enquanto lê ou ouve o Alcorão para ajudá-lo a aprimorar seu vocabulário do Alcorão",
+      "description": "Veja o significado de palavras individuais enquanto lê ou ouve o Quran para ajudá-lo a aprimorar seu vocabulário do Quran",
       "title": "Leia a tradução palavra por palavra"
     },
     "wbw-transliteration": {
-      "description": "Veja a transliteração de cada palavra para ajudá-lo em sua jornada de leitura do Alcorão",
+      "description": "Veja a transliteração de cada palavra para ajudá-lo em sua jornada de leitura do Quran",
       "title": "Leia a transliteração palavra por palavra"
     }
   }

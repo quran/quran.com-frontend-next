@@ -7,7 +7,7 @@
   },
   "finish": "Terminer",
   "onboarding-checklist": "Liste de contrôle d'intégration",
-  "onboarding-title": "Maximisez votre expérience avec Quran.com ! <br></br> Commencez votre visite maintenant :",
+  "onboarding-title": "Maximisez votre expérience avec Quran.com ! <br></br> Commencez votre visite maintenant :",
   "previous": "Précédent",
   "skip": "Ignorer",
   "steps": {
@@ -16,7 +16,7 @@
       "title": "Menu à 3 points"
     },
     "ayah-reflection": {
-      "description": "Lisez les réflexions (tadabbur) de savants, d'étudiants en sciences et de gens ordinaires pour vous aider à développer une connexion plus personnelle avec le Coran.",
+      "description": "Lire les réflexions (tadabbur) de savants, d'étudiants en sciences et de gens ordinaires pour vous aider à développer une connexion plus personnelle avec le Coran.",
       "title": "Lire les réflexions au niveau de l'Ayah"
     },
     "ayah-tafsir": {
@@ -52,7 +52,7 @@
       "title": "Radio du Coran"
     },
     "reading-sessions": {
-      "description": "Révisez facilement votre voyage Coranique en parcourant votre historique de lecture personnalisé, en gardant une trace des Ayahs que vous avez explorés sur Quran.com.",
+      "description": "Révisez facilement votre voyage Coranique en parcourant votre historique de lecture personnalisé, en gardant une trace des Ayahs que vous avez explorées sur Quran.com.",
       "title": "Afficher l'historique de lecture"
     },
     "reading-view": {
@@ -61,7 +61,7 @@
     },
     "search-bar": {
       "description": "Trouvez les Ayahs, Sourates, mots-clés, Juz et sujets via la barre de recherche",
-      "title": "Barre de recherche"
+      "title": "Barre de Recherche"
     },
     "select-reciter": {
       "description": "Personnalisez votre expérience d'écoute en sélectionnant un récitateur que vous aimez écouter !",
@@ -72,16 +72,16 @@
       "title": "Paramètres"
     },
     "streak": {
-      "description": "Fixez des objectifs de lecture personnalisés, suivez vos progrès et développez une habitude de lecture Coranique cohérente grâce à notre fonctionnalité Séries et Plans de lecture.",
-      "title": "Garder une trace des séquences de lecture et des plans de lecture"
+      "description": "Fixez des objectifs de lecture personnalisés, suivez vos progrès et développez une habitude de lecture Coranique consistante grâce à notre fonctionnalité Séries et Plans de Lecture.",
+      "title": "Garder une trace des séries de lecture & plans de lecture"
     },
     "surah-info": {
       "description": "Obtenez des informations sur chaque Sourate - convenablement situé au début de chaque Sourate",
-      "title": "Lire à propos de la Sourate"
+      "title": "Lire à Propos de la Sourate"
     },
     "theme": {
       "description": "Choisissez votre style préféré (mode clair, sépia ou sombre) pour une expérience de lecture du Coran confortable et personnalisée.",
-      "title": "Lisez le Coran en mode clair, sépia ou sombre"
+      "title": "Lire le Coran en mode clair, sépia ou sombre"
     },
     "translations": {
       "description": "Choisissez parmi une variété de traductions dans plusieurs langues. Astuce : Comparez les traductions en sélectionnant plusieurs options",

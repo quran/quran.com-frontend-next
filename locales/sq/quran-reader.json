@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "Shto faqeshënues",
   "add-collection": "Shto Koleksion",
   "advanced-copy": "Kopje e avancuar",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "Ajeti Kursi",
   "back-to-ayah": "Kthehu tek Ajeti",
+  "bismillah": "Në emër të Allahut - Mëshirëplotit, Mëshirëplotit",
+  "change-translation": "Ndrysho Përkthimin",
   "copy-arabic": "Teksti arab (teksti osmanisht)",
   "copy-footnote-q": "Të kopjohet edhe fusnota(t)?",
   "copy-success": "Teksti është kopjuar me sukses në kujtesën tuaj.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "Fillimi i Hizbit",
   "include-translator": "Të përfshihet emri i përkthyesit?",
   "juz-beginning": "Fillimi i Xhuzit",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "Shpëtimtari: Mësime të Fuqishme në Suren El-Mulk, plan mësimor",
+    "banner-image-description": "Shikoni planin e të mësuarit të Shpëtimtarit për Suren El-Mulk",
+    "banner-wrapper-aria-label": "Baner promovues i planit të të nxënit",
+    "button-accessibility-label": "Mësoni më shumë rreth planit të të nxënit të Shpëtimtarit",
+    "call-to-action-button": "Filloni Tani",
+    "main-headline": "Zbuloni mësime të fuqishme në Suren El-Mulk sot",
+    "subtitle-description": "(Një Plan Mësimi falas)"
+  },
   "lessons-desc": "Lexoni dhe shpërndani mësimet kur'anore të Ajetit {{ayahNumber}} të sures {{surahName}}",
   "lessons-disclaimer": "Mësimet janë njohuri të informuara nga dijetarët dhe kërkuesit e dijes, të dallueshme nga burimet parësore siç është Tefsiri (interpretimi shkencor i Kuranit).",
   "lessons-not-available": "Nuk ka mësime të rishikuara për këtë ajet",
@@ -43,6 +55,8 @@
   "next-page": "Faqja tjetër",
   "next-rub": "Next Rub el Hizb",
   "next-surah": "Surja tjetër",
+  "page-bookmark-removed": "Faqeshënuesi i faqes u hoq",
+  "page-bookmarked": "Faqja u shënua",
   "posted-in": "Postuar ne",
   "prev-ayah": "Ajeti i mëparshëm",
   "prev-hizb": "Hizb i mëparshëm",

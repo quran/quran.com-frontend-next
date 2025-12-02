@@ -1,4 +1,5 @@
 {
+  "add-bookmark": "اضافه کردن نشانک",
   "add-collection": "افزودن مجموعه",
   "advanced-copy": "کپی پیشرفته",
   "aria": {
@@ -7,6 +8,8 @@
   },
   "ayatul-kursi": "آیت الکرسی",
   "back-to-ayah": "بازگشت به آیه",
+  "bismillah": "به نام خداوند بخشنده و مهربان",
+  "change-translation": "تغییر ترجمه",
   "copy-arabic": "متن عربی (متن عثمانی)",
   "copy-footnote-q": "همچنین پاورقی(های) را کپی کنید؟",
   "copy-success": "متن با موفقیت در کلیپ بورد شما کپی شد.",
@@ -30,6 +33,15 @@
   "hizb-beginning": "آغاز حزب",
   "include-translator": "نام مترجم درج شود؟",
   "juz-beginning": "آغاز جزء",
+  "learning-plan-banner": {
+    "banner-image-alt-text": "بنر طرح یادگیری سوره ملک: درس‌های قدرتمند در نجات‌دهنده",
+    "banner-image-description": "طرح یادگیری سوره ملک توسط امدادگر را مشاهده کنید",
+    "banner-wrapper-aria-label": "بنر تبلیغاتی طرح یادگیری",
+    "button-accessibility-label": "درباره طرح یادگیری نجات‌دهنده بیشتر بدانید",
+    "call-to-action-button": "همین حالا شروع کنید",
+    "main-headline": "امروز درس‌های قدرتمندی را در سوره ملک کشف کنید",
+    "subtitle-description": "(یک برنامه آموزشی رایگان)"
+  },
   "lessons-desc": "درس های قرآنی آیه {{ayahNumber}} سوره {{surahName}} بخوانید و به اشتراک بگذارید.",
   "lessons-disclaimer": "درس‌ها، بینش‌های آگاهانه از سوی دانشمندان و جویندگان دانش هستند که با منابع اولیه‌ای مانند تفسیر (تفسیر علمی قرآن) متفاوتند.",
   "lessons-not-available": "هیچ درس بررسی شده ای برای این آیه وجود ندارد",
@@ -43,6 +55,8 @@
   "next-page": "صفحه بعد",
   "next-rub": "بعدی راب الحزب",
   "next-surah": "سوره بعدی",
+  "page-bookmark-removed": "نشانک صفحه حذف شد",
+  "page-bookmarked": "صفحه نشانه‌گذاری شده",
   "posted-in": "ارسال شده در",
   "prev-ayah": "آیه قبلی",
   "prev-hizb": "حزب قبلی",
