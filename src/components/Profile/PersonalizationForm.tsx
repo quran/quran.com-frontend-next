@@ -39,7 +39,7 @@ const PersonalizationForm: FC = () => {
   };
 
   return (
-    <Section title={t('personalization')}>
+    <Section title={t('personalization')} dataTestId="personalization-section">
       <div className={styles.profilePictureContainer}>
         <p className={styles.profilePictureTitle}>{t('profile-picture')}</p>
         <div className={styles.profilePictureDetailAction}>
@@ -47,7 +47,7 @@ const PersonalizationForm: FC = () => {
             <div className={styles.profilePictureImage}>
               {hasProfilePicture ? (
                 <Image
-                  src={userData.avatars.large}
+                  src={userData.avatars.large} // set to empty string to test error state
                   alt={t('profile-picture')}
                   width={60}
                   height={60}
@@ -69,6 +69,7 @@ const PersonalizationForm: FC = () => {
               accept="image/jpeg,image/jpg,image/png"
               onChange={handleFileSelect}
               style={{ display: 'none' }}
+              data-testid="profile-picture-input"
             />
             <Button
               variant={ButtonVariant.Ghost}

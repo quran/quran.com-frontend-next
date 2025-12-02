@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Translate } from 'next-translate';
 
+import { NAME_MAX_LENGTH, NAME_MIN_LENGTH } from '../Login/SignUpFormFields/consts';
+
 import styles from './SharedProfileStyles.module.scss';
 
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
@@ -68,6 +70,22 @@ const getEditDetailsFormFields = (t: Translate, userData?: UserProfile): FormBui
         errorMessage: t('common:errors.required', { fieldName: t('common:form.firstName') }),
       },
       {
+        type: RuleType.MinimumLength,
+        value: NAME_MIN_LENGTH,
+        errorMessage: t('common:errors.min', {
+          fieldName: t('common:form.firstName'),
+          min: NAME_MIN_LENGTH,
+        }),
+      },
+      {
+        type: RuleType.MaximumLength,
+        value: NAME_MAX_LENGTH,
+        errorMessage: t('errors.max', {
+          fieldName: t('common:form.firstName'),
+          max: NAME_MAX_LENGTH,
+        }),
+      },
+      {
         type: RuleType.Regex,
         value: REGEX_NAME,
         errorMessage: t('common:errors.invalid', { fieldName: t('common:form.firstName') }),
@@ -96,6 +114,22 @@ const getEditDetailsFormFields = (t: Translate, userData?: UserProfile): FormBui
         type: RuleType.Required,
         value: true,
         errorMessage: t('common:errors.required', { fieldName: t('common:form.lastName') }),
+      },
+      {
+        type: RuleType.MinimumLength,
+        value: NAME_MIN_LENGTH,
+        errorMessage: t('common:errors.min', {
+          fieldName: t('common:form.lastName'),
+          min: NAME_MIN_LENGTH,
+        }),
+      },
+      {
+        type: RuleType.MaximumLength,
+        value: NAME_MAX_LENGTH,
+        errorMessage: t('errors.max', {
+          fieldName: t('common:form.lastName'),
+          max: NAME_MAX_LENGTH,
+        }),
       },
       {
         type: RuleType.Regex,

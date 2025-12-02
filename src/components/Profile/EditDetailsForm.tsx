@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { NAME_MAX_LENGTH, NAME_MIN_LENGTH } from '../Login/SignUpFormFields/consts';
+
 import getEditDetailsFormFields from './editDetailsFormFields';
 import Section from './Section';
 import styles from './SharedProfileStyles.module.scss';
@@ -31,9 +33,17 @@ const EditDetailsForm: FC = () => {
   const { transformErrors } = useTransformFormErrors<FormData>({
     firstName: {
       fieldNameKey: 'common:form.firstName',
+      extraParams: {
+        max: NAME_MAX_LENGTH,
+        min: NAME_MIN_LENGTH,
+      },
     },
     lastName: {
       fieldNameKey: 'common:form.lastName',
+      extraParams: {
+        max: NAME_MAX_LENGTH,
+        min: NAME_MIN_LENGTH,
+      },
     },
   });
 
@@ -63,7 +73,7 @@ const EditDetailsForm: FC = () => {
   );
 
   return (
-    <Section title={t('edit-details')}>
+    <Section title={t('edit-details')} dataTestId="edit-details-section">
       <FormBuilder
         key={userData ? `${userData.email}-${userData.firstName}-${userData.lastName}` : 'loading'}
         className={styles.formContainer}
