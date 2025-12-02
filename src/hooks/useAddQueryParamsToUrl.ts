@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { buildUrlWithParams } from '@/utils/navigation';
+
 /**
  * A hook that appends query parameters to the url. We could've used shallow routing for Next.js
  * but it causes re-rendering to the whole app @see https://github.com/vercel/next.js/discussions/18072
