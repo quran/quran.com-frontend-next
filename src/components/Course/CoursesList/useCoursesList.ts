@@ -100,24 +100,6 @@ const useCoursesList = ({
     return () => observer.disconnect();
   }, [hasNextPage, isLoadingMore, setSize]);
 
-  useEffect(() => {
-    if (!hasNextPage || isLoadingMore) return undefined;
-    const sentinelElement = sentinelRef.current;
-    if (!sentinelElement) return undefined;
-
-    const { top, bottom } = sentinelElement.getBoundingClientRect();
-    const viewportHeight = window.innerHeight ?? 0;
-    const isVisible = top < viewportHeight && bottom >= 0;
-    if (!isVisible) return undefined;
-
-    setSize((currentSize) => {
-      if (currentSize > pages.length) return currentSize;
-      return currentSize + 1;
-    });
-
-    return undefined;
-  }, [hasNextPage, isLoadingMore, pages.length, setSize]);
-
   return {
     courses,
     hasNextPage,

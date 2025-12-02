@@ -48,10 +48,7 @@ const CoursesList: React.FC<Props> = ({ initialResponse, isMyCourses, languages 
       return [];
     }
     const missingCoursesCount = MIN_COURSES_COUNT - courses.length;
-    const placeholderIndexes: number[] = [];
-    for (let index = 0; index < missingCoursesCount; index += 1) {
-      placeholderIndexes.push(index);
-    }
+    const placeholderIndexes = Array.from({ length: missingCoursesCount }, (index, i) => i);
     return placeholderIndexes;
   }, [courses.length, isMyCourses]);
 
