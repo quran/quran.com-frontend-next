@@ -10,7 +10,6 @@ const ApiDocsSection = () => {
   return (
     <div className={styles.container}>
       <div className={styles.flow}>
-        <div className={styles.title}>{t('api-docs.header')}</div>
         <div>{t('api-docs.sub-header')}</div>
         <Link
           href="https://api-docs.quran.foundation"

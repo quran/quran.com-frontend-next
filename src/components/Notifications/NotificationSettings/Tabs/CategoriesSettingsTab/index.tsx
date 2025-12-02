@@ -17,6 +17,8 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 
 const MARKETING_TAG = 'marketing';
+const QDC_TAG = 'QDC';
+const QR_TAG = 'QR';
 
 const CategoriesSettingsTab = () => {
   const { t } = useTranslation('notification-settings');
@@ -35,9 +37,12 @@ const CategoriesSettingsTab = () => {
   /**
    * Group the preferences by tags. We filter out:
    *
-   * 1. critical workflows since they are cannot be skipped.
+   * 1. critical workflows since they cannot be skipped.
    * 2. preferences that don't have tags since they cannot be categorized.
-   * 3. non-marketing emails
+   * 3. marketing emails.
+   * 4. workflows that don't have the QDC tag (filters out QR workflows).
+   *
+   * Workflows with only marker tags (QDC/QR) are grouped under 'uncategorized'.
    */
   const groupByTags = useMemo(
     () =>
@@ -46,9 +51,17 @@ const CategoriesSettingsTab = () => {
           (preference) =>
             preference.template.critical === false &&
             !!preference.template.tags.length &&
-            !preference.template.tags.includes(MARKETING_TAG),
+            !preference.template.tags.includes(MARKETING_TAG) &&
+            preference.template.tags.includes(QDC_TAG),
         ),
-        (preference) => preference.template.tags,
+        // Group by category tags, excluding QDC/QR marker tags
+        (preference) => {
+          const categoryTags = preference.template.tags.filter(
+            (tag) => tag !== QDC_TAG && tag !== QR_TAG,
+          );
+          // Take the first category tag; workflows should have exactly one category tag
+          return categoryTags[0] || 'uncategorized';
+        },
       ),
     [preferences],
   );

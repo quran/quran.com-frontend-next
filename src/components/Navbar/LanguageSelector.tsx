@@ -142,6 +142,7 @@ const LanguageSelector = ({
             shape={ButtonShape.Circle}
             variant={ButtonVariant.Ghost}
             ariaLabel={t('aria.select-lng')}
+            data-testid="language-selector-button"
           >
             <span className={styles.globeIconWrapper}>
               <GlobeIcon />

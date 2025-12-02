@@ -44,6 +44,7 @@
   "posted-reflections": "Geplaatste reflecties",
   "private-notes": "Notities",
   "qr-tooltip": "<span> <link> QuranReflect </link> is een sociaal platform voor het delen van reflecties over de Koran. Verbind je rond de Koran, verbind je met wat er toe doet. </span>",
+  "reflection-update-success": "Reflectie is succesvol bijgewerkt",
   "reflections-intro": {
     "line-1": "Ga naar <link> QuranReflect.com </link> om reacties te bekijken en ermee te communiceren, om met de community in contact te komen en meer te doen.",
     "line-2": "U kunt inloggen op uw gekoppelde QuranReflect account door in te loggen of u aan te melden met hetzelfde Quran.com-e-mailadres dat u hebt gebruikt bij het inloggen.",
@@ -57,6 +58,7 @@
   "share-to-qr": "Deel het op QuranReflect.com",
   "share-to-qr-desc": "Deel als <b> {{name}} </b> . Het publiek bestaat uit <b> QuranReflect-gebruikers </b>",
   "update-publish-failed": "De notitie is succesvol bijgewerkt, maar kan niet worden gepubliceerd",
+  "update-reflection": "Update Reflectie",
   "update-success": "Opmerking is succesvol bijgewerkt",
   "view-on-qr": "Bekijk op QuranReflect"
 }

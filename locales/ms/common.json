@@ -219,7 +219,7 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
-    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link> Quran.Foundation </link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdulillah”",
+    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link> Quran.Foundation </link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdulillah.",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
     "title": "Baca, Dengar, Cari, dan Renungkan Al-Quran"
@@ -323,7 +323,7 @@
   "privacy": "Privasi",
   "product-updates": "Kemas kini produk",
   "profile": "Profil",
-  "projects-desc": "Projek bukan untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
+  "projects-desc": "Projek tanpa untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
@@ -365,7 +365,7 @@
     "title": "Cari"
   },
   "seconds": "Saat",
-  "see-new": "Lihat apa yang baharu",
+  "see-new": "Lihat terbaru",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",

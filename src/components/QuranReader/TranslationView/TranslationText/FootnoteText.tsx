@@ -42,7 +42,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   }, [footnote?.text]);
 
   return (
-    <div className={styles.footnoteContainer}>
+    <div className={styles.footnoteContainer} data-testid="footnote-content">
       <div className={styles.header}>
         <p>
           {t('footnote')} {footnoteName ? `- ${footnoteName}` : null}
