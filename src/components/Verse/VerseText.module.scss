@@ -3,19 +3,45 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
+
 .verseText {
   display: flex;
-  /**
-    flex-start for when the inline word by word translation/transliteration is enabled
-    and its content is wrapped across multiple lines.
-    {@see https://quran.com/2:74} on mobile with Inline word by word translation enabled.
-  **/
-  align-items: flex-start;
   line-height: var(--line-height);
 }
+
+.verseTextStart {
+  /**
+  flex-start alignment for when the inline word by word translation/transliteration is enabled
+  and its content is wrapped across multiple lines.
+  {@see https://quran.com/2:74} on mobile with Inline word by word translation enabled.
+  **/
+  align-items: flex-start;
+}
+
+.verseTextCenter {
+  /**
+  center alignment for when the inline word by word translation/transliteration is enabled
+  and its content is wrapped across multiple lines.
+  {@see https://quran.com/2:74} on mobile with Inline word by word translation enabled.
+  **/
+  align-items: center;
+  justify-content: center;
+}
+
 .verseTextContainer {
-  display: block;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
   direction: rtl;
+  gap: var(--spacing-medium);
 }
 
 .chapterHeaderContainer {
