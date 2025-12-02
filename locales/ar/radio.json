@@ -1,5 +1,5 @@
 {
-  "change": "غَيِّر",
+  "change": "تغيير",
   "curated-station": {
     "juz-amma": {
       "description": "استمع إلى الجزء الأخير من القرآن الكريم",
@@ -7,7 +7,7 @@
     },
     "popular-recitations": {
       "description": "تلاوات يومية منتقاة",
-      "title": "التلاوات الشائعة"
+      "title": "التلاوات الأكثر شيوعًا"
     },
     "surah-al-kahf": {
       "description": "استمع إلى سورة الكهف بشكل متكرر",
@@ -15,7 +15,7 @@
     },
     "yaseen-alwaqiah-al-mulk": {
       "description": "السور لقرّاء مختارين",
-      "title": "سورة يس والواقعة والملك"
+      "title": "يس والواقعة والملك"
     }
   },
   "curated-stations": "المحطات المُختارة",

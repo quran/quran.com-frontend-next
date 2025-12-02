@@ -2,3 +2,9 @@
   padding-inline-start: var(--spacing-micro);
   color: var(--color-text-faded);
 }
+
+.reciterList {
+  max-block-size: min(60vh, 62rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}

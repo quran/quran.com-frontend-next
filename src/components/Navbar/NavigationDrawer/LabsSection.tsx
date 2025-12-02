@@ -16,7 +16,6 @@ const LabsSection = () => {
   return (
     <div className={styles.container}>
       <div className={styles.flow}>
-        <div className={styles.title}>{t('labs')}</div>
         <div>{t('labs-description')}</div>
         <Link href="https://labs.quran.com" isNewTab className={styles.joinCommunityLink}>
           <Button href="" type={ButtonType.Success} onClick={onLabsClicked}>

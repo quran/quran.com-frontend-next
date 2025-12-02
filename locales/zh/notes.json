@@ -44,6 +44,7 @@
   "posted-reflections": "发表感言",
   "private-notes": "笔记",
   "qr-tooltip": "<span> <link> QuranReflect </link>是一个分享对《古兰经》反思的社交平台。围绕《古兰经》进行联系，与重要的事情联系起来。 </span>",
+  "reflection-update-success": "反射已成功更新",
   "reflections-intro": {
     "line-1": "要查看评论并与之互动、与社区互动以及执行更多操作，请访问<link> QuranReflect.com </link> 。",
     "line-2": "您可以通过登录或注册时使用的同一 Quran.com 电子邮件地址来登录链接的 QuranReflect 帐户。",
@@ -57,6 +58,7 @@
   "share-to-qr": "分享到 QuranReflect.com",
   "share-to-qr-desc": "分享为<b> {{name}} </b> 。受众是<b> QuranReflect 用户</b>",
   "update-publish-failed": "备注已更新成功但发布失败",
+  "update-reflection": "更新反射",
   "update-success": "备注已更新成功",
   "view-on-qr": "查看《古兰经反思》"
 }

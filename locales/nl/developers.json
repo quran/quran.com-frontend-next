@@ -1,6 +1,6 @@
 {
   "api-docs": {
-    "cta": "API-documentatie bekijken",
+    "cta": "API-documenten bekijken",
     "header": "API-documentatie",
     "sub-header": "Integreer Quran.com-gegevens in uw applicaties met onze uitgebreide API",
     "title": "API-documentatie"
@@ -14,9 +14,9 @@
   "header": "Ontwikkelings- hulp",
   "issues-cta": "Als je vragen hebt of contact wilt opnemen met de beheerders, geef aan waar je tegenaan loopt! We zullen proberen zo snel mogelijk te reageren, in sha Allah.",
   "issues-guide": "Meestal gebruiken we <0> Github-projecten </0> als bron voor waar we als volgende aan moeten werken, wat er aan komt en welke bugs er zijn die opgelost moeten worden.  <1> deze url </1>bevat bijvoorbeeld een lijst met bugs, waarbij we hulp nodig hebben en aankomende functies.",
-  "labs": "Laboratoria",
-  "labs-cta": "Ontdek Labs",
-  "labs-description": "Ontdek experimentele functies en aankomende innovaties. Deel uw ideeën.",
+  "labs": "Lab",
+  "labs-cta": "Ontdek Lab",
+  "labs-description": "Ontdek experimentele functies en aankomende vernieuwingen. Deel uw ideeën.",
   "main-desc": "Assalamu Alaykom, allereerst hartelijk dank voor je interesse om ons te helpen Quran.com en zijn projecten te ontwikkelen. We werken graag met je samen!",
   "projects": {
     "all": "We hebben een aantal projecten die allemaal op Github worden gehost. Je vindt ze allemaal <0> hier </0> . Maar om ze te schetsen:",
