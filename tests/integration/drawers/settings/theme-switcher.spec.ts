@@ -11,7 +11,7 @@ test.describe('Theme Switcher', () => {
     const homepage = new Homepage(page, context);
     // 1. Open the settings drawer
     await homepage.openSettingsDrawer();
-    // 2. get the current active theme
+    // 2. Get the current active theme
     const activeTheme = await page.locator('.ThemeSection_iconActive__Q_xs9 + span').textContent();
     expect(activeTheme).toBe('Auto');
   });
@@ -26,7 +26,7 @@ test.describe('Theme Switcher', () => {
     // 2. Open the settings drawer
     await homepage.openSettingsDrawer();
     // 3. Click on the light theme
-    await page.locator('button:has-text("Light")').click();
+    await page.locator('button', { hasText: 'Light' }).click();
     // 4. Make sure the light theme is the currently selected theme
     bodyTheme = await page.locator('body').getAttribute('data-theme');
     expect(bodyTheme).toBe('light');
