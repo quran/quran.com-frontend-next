@@ -90,9 +90,6 @@
   font-size: var(--font-size-xsmall-px);
   font-weight: var(--font-weight-semibold);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  [dir='rtl'] & {
-    inset-inline: auto var(--spacing-small-px);
-  }
 }
 
 .thumbnail {
