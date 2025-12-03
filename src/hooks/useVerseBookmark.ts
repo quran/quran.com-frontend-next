@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { privateFetcher } from '@/utils/auth/api';
+import mutatingFetcherConfig from '@/utils/swr';
 import Bookmark from 'types/Bookmark';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
@@ -68,11 +68,17 @@ const useVerseBookmark = ({
   // Only use bulk fetch when logged in and URL is provided
   const shouldFetchBookmarks = isLoggedIn && !!bookmarksRangeUrl;
 
-  // Fetch page bookmarks (bulk) - SWR deduplicates across all instances
-  const { data: pageBookmarks, isValidating: isLoading } = useSWRImmutable<BookmarksMap>(
+  const {
+    data: pageBookmarks,
+    isValidating,
+    mutate,
+  } = useSWR<BookmarksMap>(
     shouldFetchBookmarks ? bookmarksRangeUrl : null,
     (url: string) => privateFetcher(url),
+    mutatingFetcherConfig,
   );
+
+  const isLoading = isValidating && !pageBookmarks;
 
   // Extract bookmark for this specific verse
   const bookmark = useMemo(() => {
@@ -113,8 +119,10 @@ const useVerseBookmark = ({
       updateBookmarkCaches(newBookmark);
       invalidateBookmarksList();
       showToast('verse-bookmarked', ToastStatus.Success);
+    } else {
+      mutate();
     }
-  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
+  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast, mutate]);
 
   const handleRemoveBookmark = useCallback(async () => {
     if (!bookmark || bookmark === NOT_BOOKMARKED) return;
@@ -123,8 +131,17 @@ const useVerseBookmark = ({
       updateBookmarkCaches(NOT_BOOKMARKED);
       invalidateBookmarksList();
       showToast('verse-bookmark-removed', ToastStatus.Success);
+    } else {
+      mutate();
     }
-  }, [bookmark, baseRemoveBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
+  }, [
+    bookmark,
+    baseRemoveBookmark,
+    updateBookmarkCaches,
+    invalidateBookmarksList,
+    showToast,
+    mutate,
+  ]);
 
   const handleLoggedOutToggle = useCallback(() => {
     const wasBookmarked = !!bookmarkedVerses[verse.verseKey];

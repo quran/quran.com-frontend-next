@@ -15,6 +15,7 @@ import BookmarkPill from './BookmarkPill';
 import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
@@ -34,6 +35,7 @@ const BookmarkedVersesList = () => {
   const dispatch = useDispatch();
 
   const toast = useToast();
+  const { invalidateReaderCaches } = useBookmarkCacheInvalidator();
 
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
 
@@ -85,6 +87,7 @@ const BookmarkedVersesList = () => {
           deleteBookmarkById(selectedBookmark.id)
             .then(() => {
               mutate();
+              invalidateReaderCaches();
             })
             .catch(() => {
               toast(t('common:error.general'), {
@@ -96,7 +99,7 @@ const BookmarkedVersesList = () => {
         dispatch(toggleVerseBookmark(verseKey));
       }
     },
-    [isLoggedIn, data, mutate, toast, t, dispatch],
+    [isLoggedIn, data, mutate, invalidateReaderCaches, toast, t, dispatch],
   );
 
   const onViewAllBookmarksClicked = () => {

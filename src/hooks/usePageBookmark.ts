@@ -1,13 +1,14 @@
 import { useCallback, useMemo } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { getBookmark } from '@/utils/auth/api';
 import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import mutatingFetcherConfig from '@/utils/swr';
 import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 
@@ -48,18 +49,20 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     toastNamespace: 'quran-reader',
   });
 
-  // Use SWR to fetch bookmark data
   const {
     data: bookmark,
-    isValidating: isLoading,
+    isValidating,
     mutate,
-  } = useSWRImmutable<Bookmark>(
+  } = useSWR<Bookmark>(
     isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
     async () => {
       const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
       return response;
     },
+    mutatingFetcherConfig,
   );
+
+  const isLoading = isValidating && !bookmark;
 
   // Determine if the page is bookmarked based on user login status and data source
   const isPageBookmarked = useMemo(() => {

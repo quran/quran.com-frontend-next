@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import { logButtonClick } from '@/utils/eventLogger';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { deleteCollection } from 'src/utils/auth/api';
@@ -10,6 +11,7 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
   const { t } = useTranslation();
   const toast = useToast();
   const confirm = useConfirm();
+  const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
 
   const onMenuItemClicked = async () => {
     logButtonClick('delete_collection_action_open', {
@@ -28,6 +30,7 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
       });
       deleteCollection(collectionId)
         .then(() => {
+          invalidateAllBookmarkCaches();
           onDone();
         })
         .catch(() => {

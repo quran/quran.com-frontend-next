@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import useSWR, { useSWRConfig } from 'swr';
 
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
@@ -18,6 +17,7 @@ import {
   makeCollectionsUrl,
 } from '@/utils/auth/apiPaths';
 import { isBookmarkSyncError } from '@/utils/auth/errors';
+import mutatingFetcherConfig from '@/utils/swr';
 import BookmarkType from 'types/BookmarkType';
 
 interface UseBookmarkCollectionsProps {
@@ -57,15 +57,18 @@ const useBookmarkCollections = ({
 
   const {
     data: collectionIds,
-    isValidating: isLoading,
+    isValidating,
     mutate: mutateBookmarkCollections,
-  } = useSWRImmutable<string[]>(
+  } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
     async () => {
       const response = await getBookmarkCollections(mushafId, key, type, verseNumber);
       return response;
     },
+    mutatingFetcherConfig,
   );
+
+  const isLoading = isValidating && !collectionIds;
 
   const showErrorToast = useCallback(
     (err: unknown) => {

@@ -447,6 +447,7 @@ export const deleteCollectionBookmarkByKey = async ({
   verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
+    collectionId,
     key,
     mushaf: mushafId,
     type,
