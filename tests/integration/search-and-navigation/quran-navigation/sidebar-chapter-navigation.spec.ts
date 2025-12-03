@@ -275,6 +275,64 @@ test.describe('Navigation Functionality', () => {
   );
 
   test(
+    'Selecting a Surah in verse view navigates to verse 1',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await page.getByTestId('navigate-quran-button').click();
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+      await Promise.all([
+        page.waitForURL(/\/2\?startingVerse=1$/),
+        sidebar.getByText('Al-Baqarah', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/2\?startingVerse=1$/);
+
+      const verseOne = page.getByTestId('verse-list').getByText('1', { exact: true });
+      await verseOne.waitFor({ state: 'visible' });
+      await expect(verseOne).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
+    'Switching Surahs after selecting another verse resets to verse 1',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await page.getByTestId('navigate-quran-button').click();
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+      const verseList = page.getByTestId('verse-list');
+      const getVerseItem = (value: string) => verseList.getByText(value, { exact: true });
+
+      await Promise.all([
+        page.waitForURL(/\/24\?startingVerse=1$/),
+        sidebar.getByText('An-Nur', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/24\?startingVerse=1$/);
+      await getVerseItem('1').waitFor({ state: 'visible' });
+      await expect(getVerseItem('1')).toHaveClass(/selectedItem/);
+
+      await Promise.all([page.waitForURL(/\/24\?startingVerse=5$/), getVerseItem('5').click()]);
+      await expect(page).toHaveURL(/\/24\?startingVerse=5$/);
+      await expect(getVerseItem('5')).toHaveClass(/selectedItem/);
+
+      await Promise.all([
+        page.waitForURL(/\/8\?startingVerse=1$/),
+        sidebar.getByText('Al-Anfal', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/8\?startingVerse=1$/);
+      await getVerseItem('1').waitFor({ state: 'visible' });
+      await expect(getVerseItem('1')).toHaveClass(/selectedItem/);
+      await expect(getVerseItem('5')).not.toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
     'Juz navigation navigates to correct URL',
     { tag: ['@slow', '@navigation', '@links', '@juz'] },
     async ({ page }) => {
