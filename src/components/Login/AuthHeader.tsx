@@ -17,8 +17,7 @@ const AuthHeader: FC<AuthHeaderProps> = ({ showSubtitle = false }) => {
   return (
     <div className={styles.authHeader}>
       <h1 className={styles.welcomeTitle}>
-        {t('welcome-title')}
-
+        {t('welcome-title')}{' '}
         <Trans
           i18nKey="login:unified-registration-1"
           components={{
