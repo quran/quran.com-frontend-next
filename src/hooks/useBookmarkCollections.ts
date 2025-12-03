@@ -17,6 +17,7 @@ import {
   makeCollectionsUrl,
 } from '@/utils/auth/apiPaths';
 import { isBookmarkSyncError } from '@/utils/auth/errors';
+import mutatingFetcherConfig from '@/utils/swr';
 import BookmarkType from 'types/BookmarkType';
 
 interface UseBookmarkCollectionsProps {
@@ -64,6 +65,7 @@ const useBookmarkCollections = ({
       const response = await getBookmarkCollections(mushafId, key, type, verseNumber);
       return response;
     },
+    mutatingFetcherConfig,
   );
 
   const isLoading = isValidating && !collectionIds;

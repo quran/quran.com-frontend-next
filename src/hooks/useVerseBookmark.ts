@@ -7,6 +7,7 @@ import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { privateFetcher } from '@/utils/auth/api';
+import mutatingFetcherConfig from '@/utils/swr';
 import Bookmark from 'types/Bookmark';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
@@ -71,8 +72,10 @@ const useVerseBookmark = ({
     data: pageBookmarks,
     isValidating,
     mutate,
-  } = useSWR<BookmarksMap>(shouldFetchBookmarks ? bookmarksRangeUrl : null, (url: string) =>
-    privateFetcher(url),
+  } = useSWR<BookmarksMap>(
+    shouldFetchBookmarks ? bookmarksRangeUrl : null,
+    (url: string) => privateFetcher(url),
+    mutatingFetcherConfig,
   );
 
   const isLoading = isValidating && !pageBookmarks;
