@@ -2,7 +2,6 @@
 @use 'src/styles/breakpoints';
 
 .bannerActive {
-  --banner-height: 3rem;
   --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
 
   @include breakpoints.tablet {
