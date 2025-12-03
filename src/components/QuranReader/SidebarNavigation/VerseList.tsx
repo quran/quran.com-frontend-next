@@ -113,6 +113,11 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
 
   const handleVerseClick = (e: React.MouseEvent, verseKey: string) => {
     e.preventDefault();
+    // If the verse is already selected, do nothing
+    if (lastReadVerseKey.verseKey === verseKey) {
+      return;
+    }
+
     // Save the selected verse in the redux store as the last read verse
     dispatch(
       setLastReadVerse({

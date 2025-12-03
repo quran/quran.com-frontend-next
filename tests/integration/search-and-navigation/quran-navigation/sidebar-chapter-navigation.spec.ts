@@ -356,6 +356,33 @@ test.describe('Navigation Functionality', () => {
   );
 
   test(
+    'Clicking the same verse twice keeps the same URL and selection',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await page.getByTestId('navigate-quran-button').click();
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+      const verseList = page.getByTestId('verse-list');
+      const verseThree = verseList.getByText('3', { exact: true });
+
+      await Promise.all([
+        page.waitForURL(/\/1\?startingVerse=3$/),
+        sidebar.getByText('Al-Fatihah', { exact: true }).click(),
+        verseThree.click(),
+      ]);
+      await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
+      await expect(verseThree).toHaveClass(/selectedItem/);
+
+      await Promise.all([page.waitForURL(/\/1\?startingVerse=3$/), verseThree.click()]);
+      await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
+      await expect(verseThree).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
     'Reopening the drawer on mobile preserves verse selection after navigation',
     { tag: ['@slow', '@navigation', '@verse', '@mobile'] },
     async ({ page, isMobile }) => {
