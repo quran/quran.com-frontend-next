@@ -61,13 +61,19 @@ const LearningPlansSection = () => {
         queryKey={makeGetCoursesUrl({ myCourses: false })}
         render={(data: CoursesResponse) => {
           const sortedCourses = [...data.data].sort(learningPlansSorter);
+          const firstNonEnrolledIndex = sortedCourses.findIndex(
+            (course) => typeof course.isCompleted === 'undefined',
+          );
 
           return (
             <div className={styles.cardsContainer} data-testid="learning-plans-section">
-              {sortedCourses.map((course) => {
+              {sortedCourses.map((course, index) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
-                const enrolledButNotCompleted =
-                  typeof course.isCompleted !== 'undefined' && !course.isCompleted;
+                const { isCompleted } = course;
+                const userHasEnrolled = typeof isCompleted !== 'undefined';
+                const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                const isFirstNonEnrolledCourse =
+                  !userHasEnrolled && index === firstNonEnrolledIndex;
 
                 return (
                   <div key={course.id} className={styles.learnPlanCard}>
@@ -86,6 +92,9 @@ const LearningPlansSection = () => {
                         />
                         {enrolledButNotCompleted && (
                           <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                        )}
+                        {isFirstNonEnrolledCourse && (
+                          <div className={styles.newPill}>{t('common:new')}</div>
                         )}
                       </div>
                     </Card>
