@@ -65,7 +65,7 @@ const ServiceCard: FC<Props> = ({
         <BenefitsSection benefits={benefits.reflect} />
       </div>
       <p className={styles.loginCta}>{t('login-cta')}</p>
-      <SocialButtons redirect={redirect} onEmailLoginClick={onOtherOptionsClicked} />
+      <SocialButtons redirect={redirect} />
 
       {onBackClick && <BackButton onClick={onBackClick} />}
 

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
 
-import Button, { ButtonShape } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
 import AppleIcon from '@/icons/apple.svg';
 import FacebookIcon from '@/icons/facebook.svg';
 import GoogleIcon from '@/icons/google.svg';
@@ -15,10 +15,9 @@ import AuthType from 'types/auth/AuthType';
 
 interface Props {
   redirect?: string;
-  onEmailLoginClick?: () => void;
 }
 
-const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
+const SocialButtons: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
 
   const onSocialButtonClick = (type: AuthType) => {
@@ -34,9 +33,9 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Google)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-google')}
-      </Button>
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-google')}
+      />
       <Button
         href={makeFacebookLoginUrl(redirect)}
         prefix={<FacebookIcon color="#4267b2" />}
@@ -44,9 +43,9 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Facebook)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-facebook')}
-      </Button>
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-facebook')}
+      />
       <Button
         href={makeAppleLoginUrl(redirect)}
         prefix={<AppleIcon />}
@@ -54,9 +53,10 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Apple)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-apple')}
-      </Button>
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-apple')}
+        hasSidePadding={false}
+      />
     </div>
   );
 };

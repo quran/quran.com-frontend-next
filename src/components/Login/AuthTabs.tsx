@@ -59,7 +59,7 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
           <span className={styles.orText}>{t('or')}</span>
           <hr className={styles.orLine} />
         </div>
-        <SocialButtons redirect={redirect} onEmailLoginClick={() => {}} />
+        <SocialButtons redirect={redirect} />
       </div>
     </div>
   );
