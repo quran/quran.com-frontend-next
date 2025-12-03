@@ -333,6 +333,95 @@ test.describe('Navigation Functionality', () => {
   );
 
   test(
+    'Selecting the same Surah twice keeps verse 1 selected',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await page.getByTestId('navigate-quran-button').click();
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+      const alBaqarah = sidebar.getByText('Al-Baqarah', { exact: true });
+
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=1$/), alBaqarah.click()]);
+      const firstUrl = page.url();
+
+      await Promise.all([page.waitForURL(firstUrl), alBaqarah.click()]);
+      await expect(page).toHaveURL(firstUrl);
+
+      const verseOne = page.getByTestId('verse-list').getByText('1', { exact: true });
+      await expect(verseOne).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
+    'Reopening the drawer on mobile preserves verse selection after navigation',
+    { tag: ['@slow', '@navigation', '@verse', '@mobile'] },
+    async ({ page, isMobile }) => {
+      test.skip(!isMobile, 'Only applicable on mobile layouts');
+
+      await page.getByTestId('navigate-quran-button').click();
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+
+      await Promise.all([
+        page.waitForURL(/\/2\?startingVerse=1$/),
+        sidebar.getByText('Al-Baqarah', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/2\?startingVerse=1$/);
+
+      // Second click to close the drawer because it's already open
+      await sidebar.getByText('Al-Baqarah', { exact: true }).click();
+
+      await expect(page.getByTestId('sidebar-navigation')).not.toBeAttached();
+
+      await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
+      const reopenedSidebar = page.getByTestId('sidebar-navigation');
+      await expect(reopenedSidebar).toBeVisible();
+
+      await page.getByTestId('verse-button').click();
+      const verseOne = page.getByTestId('verse-list').getByText('1', { exact: true });
+      await verseOne.waitFor({ state: 'visible' });
+      await expect(verseOne).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
+    'Selecting a new Surah from a verse-specific URL resets to verse 1 when returning',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await homePage.goTo('/24?startingVerse=10');
+      await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
+      await page.getByTestId('verse-button').click();
+
+      const sidebar = page.getByTestId('sidebar-navigation');
+      const verseList = page.getByTestId('verse-list');
+      const getVerseItem = (value: string) => verseList.getByText(value, { exact: true });
+
+      await expect(getVerseItem('10')).toBeVisible();
+
+      await Promise.all([
+        page.waitForURL(/\/8\?startingVerse=1$/),
+        sidebar.getByText('Al-Anfal', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/8\?startingVerse=1$/);
+
+      await Promise.all([
+        page.waitForURL(/\/24\?startingVerse=1$/),
+        sidebar.getByText('An-Nur', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/24\?startingVerse=1$/);
+
+      await getVerseItem('1').waitFor({ state: 'visible' });
+      await expect(getVerseItem('1')).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
     'Juz navigation navigates to correct URL',
     { tag: ['@slow', '@navigation', '@links', '@juz'] },
     async ({ page }) => {
