@@ -366,16 +366,20 @@ test.describe('Navigation Functionality', () => {
 
       const sidebar = page.getByTestId('sidebar-navigation');
       const verseList = page.getByTestId('verse-list');
-      const verseThree = verseList.getByText('3', { exact: true });
 
-      await Promise.all([
-        page.waitForURL(/\/1\?startingVerse=3$/),
-        sidebar.getByText('Al-Fatihah', { exact: true }).click(),
-        verseThree.click(),
-      ]);
+      // First, click on Al-Fatihah to load its verses
+      await sidebar.getByText('Al-Fatihah', { exact: true }).click();
+
+      // Then wait for verse 3 to be visible before clicking it
+      const verseThree = verseList.getByText('3', { exact: true });
+      await verseThree.waitFor({ state: 'visible' });
+
+      // Now click verse 3 and wait for the URL change
+      await Promise.all([page.waitForURL(/\/1\?startingVerse=3$/), verseThree.click()]);
       await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
       await expect(verseThree).toHaveClass(/selectedItem/);
 
+      // Click the same verse again and verify nothing changes
       await Promise.all([page.waitForURL(/\/1\?startingVerse=3$/), verseThree.click()]);
       await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
       await expect(verseThree).toHaveClass(/selectedItem/);
