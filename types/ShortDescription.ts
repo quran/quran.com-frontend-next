@@ -1,6 +1,6 @@
 interface ShortDescription {
-  description: string | null;
-  languageName: string | null;
+  description: string;
+  languageName: string;
 }
 
 export default ShortDescription;
