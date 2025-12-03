@@ -1,3 +1,4 @@
+@use '../_tooltip-info.mixin' as *;
 .trigger {
   all: unset;
   display: inline-block;
@@ -54,14 +55,5 @@
   }
 }
 .info {
-  background-color: var(--color-background-elevated);
-  max-width: calc(2 * var(--spacing-mega-px));
-  font-size: var(--font-size-xsmall-px);
-  padding: var(--spacing-xxsmall-px);
-  line-height: var(--line-height-normal);
-  color: var(--color-text-default);
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  & > span {
-    fill: var(--color-background-elevated);
-  }
+  @include infoTooltipStyles;
 }

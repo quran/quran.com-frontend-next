@@ -1,3 +1,4 @@
+@use '../_tooltip-info.mixin' as *;
 .container {
   margin-block-start: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
@@ -36,23 +37,13 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   box-shadow: none;
-  &>span {
+  & > span {
     fill: var(--color-background-inverse);
   }
 }
 
 .info {
-  background-color: var(--color-background-elevated);
-  color: var(--color-text-default);
+  @include infoTooltipStyles;
   border-radius: var(--border-radius-medium-px);
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   z-index: var(--z-index-high);
-  padding: var(--spacing-xxsmall-px);
-  font-size: var(--font-size-xsmall-px);
-  line-height: var(--line-height-normal);
-  max-width: calc(2 * var(--spacing-mega-px));
-
-  &>span {
-    fill: var(--color-background-elevated);
-  }
 }
