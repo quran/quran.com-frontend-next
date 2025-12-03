@@ -1,111 +1,114 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-block-end: var(--spacing-medium);
-    @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
 
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxlarge-px);
     }
+  }
 }
 
 .cardsContainer {
-    max-width: 98.5%;
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-medium);
-    overflow-x: scroll; // Already present, keep it
-    padding-inline: var(--spacing-large);
-    margin-inline: calc(-1 * var(--spacing-large));
-    padding-block: var(--spacing-large);
-    margin-block: calc(-1 * var(--spacing-large));
+  max-inline-size: 98.5%;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-medium);
+  overflow-x: scroll; // Already present, keep it
+  padding-inline: var(--spacing-large);
+  margin-inline: calc(-1 * var(--spacing-large));
+  padding-block: var(--spacing-large);
+  margin-block: calc(-1 * var(--spacing-large));
 
-    // Replace scrollbar hiding with transparent scrollbars
-    scrollbar-width: thin; // For Firefox
-    scrollbar-color: transparent transparent; // For Firefox: transparent thumb and track
+  // Replace scrollbar hiding with transparent scrollbars
+  scrollbar-width: thin; // For Firefox
+  scrollbar-color: transparent transparent; // For Firefox: transparent thumb and track
 
-    &::-webkit-scrollbar {
-        height: 1px; // Small height for horizontal scrollbar
-    }
+  &::-webkit-scrollbar {
+    block-size: 1px; // Small height for horizontal scrollbar
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; // Hide the thumb
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent; // Hide the track
+  }
+
+  // Optional: Show scrollbar on hover for better UX
+  &:hover {
+    scrollbar-color: var(--scrollbar-thumb) transparent;
     &::-webkit-scrollbar-thumb {
-        background-color: transparent; // Hide the thumb
+      background-color: var(--scrollbar-thumb);
     }
-    &::-webkit-scrollbar-track {
-        background-color: transparent; // Hide the track
-    }
-
-    // Optional: Show scrollbar on hover for better UX
-    &:hover {
-        scrollbar-color: var(--scrollbar-thumb) transparent;
-        &::-webkit-scrollbar-thumb {
-            background-color: var(--scrollbar-thumb);
-        }
-    }
+  }
 }
 
 .learnPlanCard {
-    flex: 0 0 auto;
-    width: clamp(216px, 54vw, 312px);
-    @include breakpoints.smallerThanTablet {
-        width: clamp(160px, 65vw, 220px);
-    }
+  flex: 0 0 auto;
+  inline-size: clamp(216px, 54vw, 312px);
+  @include breakpoints.smallerThanTablet {
+    inline-size: clamp(160px, 65vw, 220px);
+  }
 }
 
 .card {
-    height: auto;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+  block-size: auto;
+  inline-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
 .thumbnailWrapper {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 640 / 537;
-    border-radius: var(--border-radius-rounded);
-    overflow: hidden;
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 640 / 537;
+  border-radius: var(--border-radius-rounded);
+  overflow: hidden;
 }
 
 .enrolledPill {
-    position: absolute;
-    left: var(--spacing-small-px);
-    bottom: var(--spacing-small-px);
-    background-color: var(--color-qdc-faint-blue);
-    padding-inline: var(--spacing-xsmall);
-    padding-block: var(--spacing-xxsmall);
-    border-radius: var(--border-radius-rounded);
-    color: var(--color-text-black);
-    font-size: var(--font-size-xsmall-px);
-    font-weight: var(--font-weight-semibold);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  inset-inline-start: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  background-color: var(--color-qdc-faint-blue);
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-black);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  [dir='rtl'] & {
+    inset-inline: auto var(--spacing-small-px);
+  }
 }
 
 .thumbnail {
-    object-fit: cover;
-    object-position: center;
+  object-fit: cover;
+  object-position: center;
 }
 
 .thumbnailSkeleton {
-    width: 100%;
-    height: 100%;
-    border-radius: var(--border-radius-rounded);
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: var(--border-radius-rounded);
 }
 
 .seeMore {
-    color: var(--color-text-faded-new);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-normal-px);
-    }
+  color: var(--color-text-faded-new);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
