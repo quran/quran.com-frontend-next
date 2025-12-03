@@ -12,7 +12,7 @@ import styles from './login.module.scss';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import authStyles from '@/styles/auth/auth.module.scss';
 import UserProfile from '@/types/auth/UserProfile';
@@ -161,6 +161,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
     <Button
       {...props}
       block
+      size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
       className={styles.submitButton}
