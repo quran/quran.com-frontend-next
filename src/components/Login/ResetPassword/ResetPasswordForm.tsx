@@ -9,7 +9,7 @@ import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import getPasswordFields from '../SignUpForm/PasswordFields';
 
-import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -69,6 +69,7 @@ const ResetPasswordForm: React.FC = () => {
     <Button
       {...props}
       block
+      size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
       className={styles.submitButton}

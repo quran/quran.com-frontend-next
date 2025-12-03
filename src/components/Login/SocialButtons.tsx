@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape } from '@/dls/Button/Button';
 import AppleIcon from '@/icons/apple.svg';
 import FacebookIcon from '@/icons/facebook.svg';
 import GoogleIcon from '@/icons/google.svg';
@@ -15,7 +15,7 @@ import AuthType from 'types/auth/AuthType';
 
 interface Props {
   redirect?: string;
-  onEmailLoginClick: () => void;
+  onEmailLoginClick?: () => void;
 }
 
 const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
@@ -56,17 +56,6 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         shouldFlipOnRTL={false}
       >
         {t('continue-apple')}
-      </Button>
-      <Button
-        onClick={() => {
-          onEmailLoginClick();
-          onSocialButtonClick(AuthType.Email);
-        }}
-        className={classNames(styles.loginButton, styles.emailButton)}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Pill}
-      >
-        {t('continue-email')}
       </Button>
     </div>
   );

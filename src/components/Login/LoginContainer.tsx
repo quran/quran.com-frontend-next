@@ -1,12 +1,10 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 
 import AuthTabs, { AuthTab } from './AuthTabs';
 import BackButton from './BackButton';
 import PrivacyPolicyText from './PrivacyPolicyText';
-import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
 import authStyles from '@/styles/auth/auth.module.scss';
@@ -16,14 +14,12 @@ import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 enum LoginView {
-  SOCIAL = 'social',
   EMAIL = 'email',
   VERIFICATION = 'verification',
 }
 
 const LoginContainer = () => {
-  const { t } = useTranslation('login');
-  const [loginView, setLoginView] = useState<LoginView>(LoginView.SOCIAL);
+  const [loginView, setLoginView] = useState<LoginView>(LoginView.EMAIL);
   const [activeTab, setActiveTab] = useState(AuthTab.SignIn);
   const [signUpData, setSignUpData] = useState<Partial<SignUpRequest> | null>(null);
   const router = useRouter();
@@ -36,16 +32,9 @@ const LoginContainer = () => {
     logButtonClick('login_back');
     if (loginView === LoginView.VERIFICATION) {
       setLoginView(LoginView.EMAIL);
-    } else if (loginView === LoginView.EMAIL) {
-      setLoginView(LoginView.SOCIAL);
     } else {
       router.back();
     }
-  };
-
-  const onEmailLoginClick = () => {
-    logEvent('login_email_click');
-    setLoginView(LoginView.EMAIL);
   };
 
   const onTabChange = (tab: AuthTab) => {
@@ -86,47 +75,17 @@ const LoginContainer = () => {
       );
     }
 
-    if (loginView === LoginView.EMAIL) {
-      return (
-        <>
-          <AuthTabs
-            activeTab={activeTab}
-            onTabChange={onTabChange}
-            redirect={redirect}
-            onSignUpSuccess={handleEmailLoginSubmit}
-          />
-          <BackButton onClick={onBack} />
-
-          <PrivacyPolicyText />
-        </>
-      );
-    }
-
-    const benefits = {
-      quran: [
-        { id: 'feature-6', label: t('feature-6') },
-        { id: 'feature-1', label: t('feature-1') },
-        { id: 'feature-2', label: t('feature-2') },
-        { id: 'feature-3', label: t('feature-3') },
-        { id: 'feature-4', label: t('feature-4') },
-        { id: 'feature-5', label: t('feature-5') },
-      ],
-      reflect: [
-        { id: 'reflect-1', label: t('reflect-feature-1') },
-        { id: 'reflect-2', label: t('reflect-feature-2') },
-        { id: 'reflect-3', label: t('reflect-feature-3') },
-        { id: 'reflect-4', label: t('reflect-feature-4') },
-      ],
-    };
-
     return (
-      <ServiceCard
-        benefits={benefits}
-        isEmailLogin={false}
-        onOtherOptionsClicked={onEmailLoginClick}
-        redirect={redirect}
-        onBackClick={onBack}
-      />
+      <>
+        <AuthTabs
+          activeTab={activeTab}
+          onTabChange={onTabChange}
+          redirect={redirect}
+          onSignUpSuccess={handleEmailLoginSubmit}
+        />
+        <BackButton onClick={onBack} />
+        <PrivacyPolicyText />
+      </>
     );
   };
 

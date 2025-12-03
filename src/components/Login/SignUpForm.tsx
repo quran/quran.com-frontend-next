@@ -6,7 +6,7 @@ import addCustomRenderToFormFields from './SignUpFormWithCustomRender';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import getSignUpFormFields from '@/components/Login/SignUpFormFields';
-import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { signUp } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
@@ -43,6 +43,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
     <Button
       {...props}
       block
+      size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
       className={styles.submitButton}
