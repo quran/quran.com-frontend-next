@@ -67,13 +67,15 @@ const useVerseBookmark = ({
   // Only use bulk fetch when logged in and URL is provided
   const shouldFetchBookmarks = isLoggedIn && !!bookmarksRangeUrl;
 
-  // Fetch page bookmarks (bulk) - SWR deduplicates across all instances
-  // Using useSWR (not useSWRImmutable) because bookmarks can be modified from other pages.
-  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
-  const { data: pageBookmarks, isValidating: isLoading } = useSWR<BookmarksMap>(
-    shouldFetchBookmarks ? bookmarksRangeUrl : null,
-    (url: string) => privateFetcher(url),
+  const {
+    data: pageBookmarks,
+    isValidating,
+    mutate,
+  } = useSWR<BookmarksMap>(shouldFetchBookmarks ? bookmarksRangeUrl : null, (url: string) =>
+    privateFetcher(url),
   );
+
+  const isLoading = isValidating && !pageBookmarks;
 
   // Extract bookmark for this specific verse
   const bookmark = useMemo(() => {
@@ -114,8 +116,10 @@ const useVerseBookmark = ({
       updateBookmarkCaches(newBookmark);
       invalidateBookmarksList();
       showToast('verse-bookmarked', ToastStatus.Success);
+    } else {
+      mutate();
     }
-  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
+  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast, mutate]);
 
   const handleRemoveBookmark = useCallback(async () => {
     if (!bookmark || bookmark === NOT_BOOKMARKED) return;
@@ -124,8 +128,17 @@ const useVerseBookmark = ({
       updateBookmarkCaches(NOT_BOOKMARKED);
       invalidateBookmarksList();
       showToast('verse-bookmark-removed', ToastStatus.Success);
+    } else {
+      mutate();
     }
-  }, [bookmark, baseRemoveBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast]);
+  }, [
+    bookmark,
+    baseRemoveBookmark,
+    updateBookmarkCaches,
+    invalidateBookmarksList,
+    showToast,
+    mutate,
+  ]);
 
   const handleLoggedOutToggle = useCallback(() => {
     const wasBookmarked = !!bookmarkedVerses[verse.verseKey];

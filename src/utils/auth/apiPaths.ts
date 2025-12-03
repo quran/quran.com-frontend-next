@@ -20,15 +20,15 @@ import BookmarkType from 'types/BookmarkType';
  */
 export const BOOKMARK_CACHE_PATHS = {
   /** Bulk bookmark fetch for reader pages (e.g., bookmarks/ayahs-range?...) */
-  AYAHS_RANGE: 'bookmarks/ayahs-range',
+  AYAHS_RANGE: 'bookmarks/ayahs-range?',
   /** Single bookmark check (e.g., bookmarks/bookmark?...) */
-  BOOKMARK: 'bookmarks/bookmark',
+  BOOKMARK: 'bookmarks/bookmark?',
   /** Bookmarks list (e.g., /bookmarks?...) */
-  BOOKMARKS_LIST: '/bookmarks',
+  BOOKMARKS_LIST: '/bookmarks?',
   /** Collections list (e.g., /collections?...) */
-  COLLECTIONS: '/collections',
+  COLLECTIONS: '/collections?',
   /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
-  BOOKMARK_COLLECTIONS: 'bookmarks/collections',
+  BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
 } as const;
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {

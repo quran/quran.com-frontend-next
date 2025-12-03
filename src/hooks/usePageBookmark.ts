@@ -48,12 +48,9 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     toastNamespace: 'quran-reader',
   });
 
-  // Use SWR to fetch bookmark data
-  // Using useSWR (not useSWRImmutable) because bookmarks can be modified from other pages.
-  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
   const {
     data: bookmark,
-    isValidating: isLoading,
+    isValidating,
     mutate,
   } = useSWR<Bookmark>(
     isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
@@ -62,6 +59,8 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
       return response;
     },
   );
+
+  const isLoading = isValidating && !bookmark;
 
   // Determine if the page is bookmarked based on user login status and data source
   const isPageBookmarked = useMemo(() => {

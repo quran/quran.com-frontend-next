@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import { useSWRConfig } from 'swr';
 
@@ -88,14 +88,11 @@ const useBookmarkCacheInvalidator = (): BookmarkCacheInvalidator => {
     invalidateBookmarksListCaches();
   }, [invalidateReaderCaches, invalidateBookmarksListCaches]);
 
-  return useMemo(
-    () => ({
-      invalidateReaderCaches,
-      invalidateBookmarksListCaches,
-      invalidateAllBookmarkCaches,
-    }),
-    [invalidateReaderCaches, invalidateBookmarksListCaches, invalidateAllBookmarkCaches],
-  );
+  return {
+    invalidateReaderCaches,
+    invalidateBookmarksListCaches,
+    invalidateAllBookmarkCaches,
+  };
 };
 
 export default useBookmarkCacheInvalidator;

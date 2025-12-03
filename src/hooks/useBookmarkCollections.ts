@@ -54,11 +54,9 @@ const useBookmarkCollections = ({
   const toast = useToast();
   const { t } = useTranslation('common');
 
-  // Using useSWR (not useSWRImmutable) because bookmark collections can be modified from other pages.
-  // revalidateOnFocus enables cross-tab sync, revalidateOnReconnect ensures fresh data after offline.
   const {
     data: collectionIds,
-    isValidating: isLoading,
+    isValidating,
     mutate: mutateBookmarkCollections,
   } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
@@ -67,6 +65,8 @@ const useBookmarkCollections = ({
       return response;
     },
   );
+
+  const isLoading = isValidating && !collectionIds;
 
   const showErrorToast = useCallback(
     (err: unknown) => {
