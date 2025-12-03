@@ -66,9 +66,8 @@ const LearningPlansSection = () => {
             <div className={styles.cardsContainer} data-testid="learning-plans-section">
               {sortedCourses.map((course) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
-                const { isCompleted } = course;
-                const userHasEnrolled = typeof isCompleted !== 'undefined';
-                const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                const enrolledButNotCompleted =
+                  typeof course.isCompleted !== 'undefined' && !course.isCompleted;
 
                 return (
                   <div key={course.id} className={styles.learnPlanCard}>
@@ -83,7 +82,7 @@ const LearningPlansSection = () => {
                           alt={course.title}
                           fill
                           className={styles.thumbnail}
-                          sizes="(max-width: 768px) 75vw, (max-width: 1200px) 45vw, 25vw"
+                          sizes="(max-width: 768px) 65vw, 54vw"
                         />
                         {enrolledButNotCompleted && (
                           <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
