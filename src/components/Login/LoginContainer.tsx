@@ -83,8 +83,8 @@ const LoginContainer = () => {
           redirect={redirect}
           onSignUpSuccess={handleEmailLoginSubmit}
         />
-        <BackButton onClick={onBack} />
         <PrivacyPolicyText />
+        <BackButton onClick={onBack} />
       </>
     );
   };
