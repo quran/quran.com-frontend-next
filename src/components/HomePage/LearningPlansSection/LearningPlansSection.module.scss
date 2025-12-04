@@ -92,6 +92,20 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.completedPill {
+  position: absolute;
+  inset-inline-start: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  background-color: var(--color-topics-gold);
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .newPill {
   position: absolute;
   inset-inline-end: var(--spacing-small-px);

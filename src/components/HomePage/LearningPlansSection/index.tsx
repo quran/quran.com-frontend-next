@@ -72,6 +72,7 @@ const LearningPlansSection = () => {
                 const { isCompleted } = course;
                 const userHasEnrolled = typeof isCompleted !== 'undefined';
                 const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                const hasCompletedCourse = isCompleted === true;
                 const isFirstNonEnrolledCourse =
                   !userHasEnrolled && index === firstNonEnrolledIndex;
 
@@ -90,8 +91,12 @@ const LearningPlansSection = () => {
                           className={styles.thumbnail}
                           sizes="(max-width: 768px) 65vw, 54vw"
                         />
-                        {enrolledButNotCompleted && (
-                          <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                        {hasCompletedCourse ? (
+                          <div className={styles.completedPill}>{t('learn:completed')}</div>
+                        ) : (
+                          enrolledButNotCompleted && (
+                            <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                          )
                         )}
                         {isFirstNonEnrolledCourse && (
                           <div className={styles.newPill}>{t('common:new')}</div>
