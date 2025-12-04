@@ -89,7 +89,7 @@ const LearningPlansSection = () => {
                           alt={course.title}
                           fill
                           className={styles.thumbnail}
-                          sizes="(max-width: 768px) 65vw, 54vw"
+                          sizes="(max-width: 768px) 42vw, 54vw"
                         />
                         {hasCompletedCourse ? (
                           <div className={styles.completedPill}>{t('learn:completed')}</div>
