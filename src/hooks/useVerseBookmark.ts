@@ -68,9 +68,9 @@ const useVerseBookmark = ({
         (current: BookmarksMap | undefined) => {
           if (!current) return current;
           if (value === null) {
-            const d = { ...current };
-            delete d[verse.verseKey];
-            return d;
+            const updated = { ...current };
+            delete updated[verse.verseKey];
+            return updated;
           }
           return { ...current, [verse.verseKey]: value };
         },
@@ -80,34 +80,32 @@ const useVerseBookmark = ({
     [globalMutate, bookmarksRangeUrl, verse.verseKey],
   );
 
-  const revalidateOnError = useCallback(() => {
-    if (bookmarksRangeUrl) globalMutate(bookmarksRangeUrl);
-  }, [bookmarksRangeUrl, globalMutate]);
+  const revalidateOnError = useCallback(
+    () => bookmarksRangeUrl && globalMutate(bookmarksRangeUrl),
+    [bookmarksRangeUrl, globalMutate],
+  );
 
   const handleAddBookmark = useCallback(async () => {
     if (isPendingRef.current) return;
     isPendingRef.current = true;
-    const optimisticBookmark: Bookmark = {
+    updateBookmarkCaches({
       id: `temp-${Date.now()}`,
       key: Number(verse.chapterId),
       type: BookmarkType.Ayah,
       verseNumber: verse.verseNumber,
-    };
-    updateBookmarkCaches(optimisticBookmark);
+    });
     try {
       updateBookmarkCaches(await baseAddBookmark());
       invalidateBookmarksList();
       showToast('verse-bookmarked', ToastStatus.Success);
     } catch (err) {
-      updateBookmarkCaches(NOT_BOOKMARKED);
       revalidateOnError();
       showErrorToast(err);
     } finally {
       isPendingRef.current = false;
     }
   }, [
-    verse.chapterId,
-    verse.verseNumber,
+    verse,
     baseAddBookmark,
     updateBookmarkCaches,
     invalidateBookmarksList,
@@ -119,14 +117,14 @@ const useVerseBookmark = ({
   const handleRemoveBookmark = useCallback(async () => {
     if (isPendingRef.current || !bookmark || bookmark === NOT_BOOKMARKED) return;
     isPendingRef.current = true;
-    const previousBookmark = bookmark;
+    const prev = bookmark;
     updateBookmarkCaches(NOT_BOOKMARKED);
     try {
-      await baseRemoveBookmark(previousBookmark.id);
+      await baseRemoveBookmark(prev.id);
       invalidateBookmarksList();
       showToast('verse-bookmark-removed', ToastStatus.Success);
     } catch (err) {
-      updateBookmarkCaches(previousBookmark);
+      updateBookmarkCaches(prev);
       revalidateOnError();
       showErrorToast(err);
     } finally {
@@ -144,9 +142,9 @@ const useVerseBookmark = ({
 
   const handleToggleBookmark = useCallback(() => {
     if (!isLoggedIn) {
+      const wasBookmarked = !!bookmarkedVerses[verse.verseKey];
       dispatch(toggleVerseBookmark(verse.verseKey));
-      const msg = bookmarkedVerses[verse.verseKey] ? 'verse-bookmark-removed' : 'verse-bookmarked';
-      showToast(msg, ToastStatus.Success);
+      showToast(wasBookmarked ? 'verse-bookmark-removed' : 'verse-bookmarked', ToastStatus.Success);
     } else if (isVerseBookmarked) handleRemoveBookmark();
     else handleAddBookmark();
   }, [
@@ -155,7 +153,7 @@ const useVerseBookmark = ({
     handleRemoveBookmark,
     handleAddBookmark,
     bookmarkedVerses,
-    verse.verseKey,
+    verse,
     dispatch,
     showToast,
   ]);
