@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import PageBlocks from '../Blocks';
@@ -26,6 +27,7 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
     year: 'numeric',
   });
   const pageTitle = <p className={classNames(styles.title, styles.bold)}>{page.title}</p>;
+  const imageUrl = page.mainPhoto ? getImageUrl(page.mainPhoto) : '';
   return (
     <div key={page.id} className={styles.pageContainer}>
       <div className={styles.headerSection}>
@@ -55,10 +57,17 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
               {pageTitle}
             </Link>
             {page.summary}
-            {page.mainPhoto && (
-              <div className={styles.imageContainer}>
-                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
-                <img className={styles.image} src={getImageUrl(page.mainPhoto)} />
+            {page.mainPhoto && imageUrl && (
+              <div
+                className={styles.imageContainer}
+                style={{ position: 'relative', aspectRatio: '4/3' }}
+              >
+                <Image
+                  className={styles.image}
+                  src={imageUrl}
+                  alt={page.mainPhoto?.alt || page.title}
+                  sizes="(max-width: 768px) 100vw, 800px"
+                />
               </div>
             )}
           </>
