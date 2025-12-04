@@ -23,7 +23,7 @@
   padding-inline-end: var(--spacing-xsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
-  &>span {
+  & > span {
     fill: var(--color-background-default);
   }
 }
