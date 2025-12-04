@@ -4,7 +4,7 @@ import type React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { logErrorToSentry } from '@/lib/sentry';
-import { getAllowedImageFormats } from '@/utils/image-format';
+import { getImageUploadTranslationParams } from '@/utils/image-format';
 
 interface UseImageUploadReturn {
   isLoading: boolean;
@@ -12,6 +12,7 @@ interface UseImageUploadReturn {
   handleUploadPicture: () => void;
   handleRemovePicture: () => Promise<void>;
   handleFileSelect: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
+  translationParams: { maxSize: string; allowedFormats: string };
 }
 interface ValidationErrorMessages {
   invalidFileType?: string;
@@ -22,7 +23,7 @@ interface UploadImageOptions {
   onError?: (error: unknown) => void;
   maxSize?: number; // in bytes
   allowedTypes?: string[];
-  errorMessages?: ValidationErrorMessages;
+  validationErrorMessages?: ValidationErrorMessages;
   uploadFunction?: (base64String: string) => Promise<void>;
   removeFunction?: () => Promise<void>;
   sentryTransactionName?: string;
@@ -51,7 +52,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
   const {
     maxSize,
     allowedTypes,
-    errorMessages = {},
+    validationErrorMessages = {},
     uploadFunction,
     removeFunction,
     sentryTransactionName = 'imageUpload',
@@ -59,14 +60,18 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     onError,
   } = options;
 
-  const messages = useMemo(() => {
-    const formats = allowedTypes ? getAllowedImageFormats(allowedTypes) : 'image';
-    return {
-      invalidFileType: t('errors.invalid-file-format', { formats }),
+  const translationParams = useMemo(() => getImageUploadTranslationParams(), []);
+
+  const messages = useMemo(
+    () => ({
+      invalidFileType: t('errors.invalid-file-format', {
+        formats: translationParams.allowedFormats,
+      }),
       fileExceedsLimit: t('errors.file-exceeds-limit'),
-      ...errorMessages,
-    };
-  }, [errorMessages, t, allowedTypes]);
+      ...validationErrorMessages,
+    }),
+    [t, translationParams, validationErrorMessages],
+  );
 
   const validateImageFile = useCallback(
     (file: File): string | null => {
@@ -143,6 +148,7 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
     handleUploadPicture,
     handleRemovePicture,
     handleFileSelect,
+    translationParams,
   };
 };
 
