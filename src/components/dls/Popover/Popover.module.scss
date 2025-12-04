@@ -1,8 +1,13 @@
+@use '../_tooltip-info.mixin' as *;
 .container {
   margin-block-start: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+.containerInfo {
+  margin-block-end: unset;
 }
 
 .trigger {
@@ -35,4 +40,10 @@
   & > span {
     fill: var(--color-background-inverse);
   }
+}
+
+.info {
+  @include infoTooltipStyles;
+  border-radius: var(--border-radius-medium-px);
+  z-index: var(--z-index-high);
 }

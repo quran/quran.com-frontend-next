@@ -10,6 +10,7 @@ export enum TooltipType {
   ERROR = 'error',
   WARNING = 'warning',
   SECONDARY = 'secondary',
+  INFO = 'info',
 }
 
 export enum ContentSide {
@@ -74,6 +75,7 @@ const Tooltip: React.FC<Props> = ({
         [styles.warning]: type === TooltipType.WARNING,
         [styles.error]: type === TooltipType.ERROR,
         [styles.secondary]: type === TooltipType.SECONDARY,
+        [styles.info]: type === TooltipType.INFO,
       })}
     >
       {text}

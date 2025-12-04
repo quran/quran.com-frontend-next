@@ -1,3 +1,4 @@
+import ShortDescription from './ShortDescription';
 import TranslatedName from './TranslatedName';
 
 interface AvailableTranslation {
@@ -7,5 +8,6 @@ interface AvailableTranslation {
   slug?: string;
   languageName?: string;
   translatedName?: TranslatedName;
+  shortDescription?: ShortDescription;
 }
 export default AvailableTranslation;

@@ -44,7 +44,8 @@
     "nav-drawer-open": "افتح القائمة الجانبية",
     "play-surah": "تشغيل السورة {{surahName}}",
     "select-lng": "اختر اللغة",
-    "sidebar-nav-close": "اغلق القائمة الجانبية"
+    "sidebar-nav-close": "اغلق القائمة الجانبية",
+    "translation-info": "عرض معلومات الترجمة"
   },
   "audio": {
     "auto-scroll": {
