@@ -55,10 +55,11 @@ export const bookmarksSlice = createSlice({
         bookmarkedPages: { [pageNumber]: +new Date(), ...bookmarkedPages },
       };
     },
+    clearBookmarks: () => initialState,
   },
 });
 
-export const { toggleVerseBookmark, togglePageBookmark } = bookmarksSlice.actions;
+export const { toggleVerseBookmark, togglePageBookmark, clearBookmarks } = bookmarksSlice.actions;
 
 export const selectBookmarks = (state: RootState) => state.bookmarks.bookmarkedVerses;
 export const selectBookmarkedPages = (state: RootState) => state.bookmarks.bookmarkedPages;

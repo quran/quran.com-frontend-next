@@ -1,6 +1,7 @@
 # Bookmarks and Collections System
 
-This document provides comprehensive documentation for the bookmarks and collections feature in quran.com-frontend-next.
+This document provides comprehensive documentation for the bookmarks and collections feature in
+quran.com-frontend-next.
 
 ## Table of Contents
 
@@ -19,7 +20,8 @@ This document provides comprehensive documentation for the bookmarks and collect
 
 ## Overview
 
-The bookmarks system allows users to save and organize Quran verses and pages for later reference. Key features include:
+The bookmarks system allows users to save and organize Quran verses and pages for later reference.
+Key features include:
 
 - **Verse Bookmarks**: Save individual ayahs (verses)
 - **Page Bookmarks**: Save entire pages
@@ -91,9 +93,9 @@ User Action (Add/Remove Bookmark)
 
 ```typescript
 interface Bookmark {
-  id: string;           // Unique identifier (server-generated)
-  key: number;          // Chapter number (for verses) or page number
-  type: string;         // BookmarkType enum value
+  id: string; // Unique identifier (server-generated)
+  key: number; // Chapter number (for verses) or page number
+  type: string; // BookmarkType enum value
   verseNumber?: number; // Verse number (only for Ayah bookmarks)
 }
 ```
@@ -121,10 +123,10 @@ type BookmarksMap = Record<string, Bookmark>;
 
 ```typescript
 type Collection = {
-  id: string;         // Unique identifier
-  updatedAt: string;  // ISO timestamp
-  name: string;       // Display name
-  url: string;        // Slugified ID for URL routing
+  id: string; // Unique identifier
+  updatedAt: string; // ISO timestamp
+  name: string; // Display name
+  url: string; // Slugified ID for URL routing
 };
 ```
 
@@ -134,7 +136,7 @@ type Collection = {
 // For sorting bookmarks within a collection
 enum CollectionDetailSortOption {
   RecentlyAdded = 'recentlyAdded',
-  VerseKey = 'verseKey',        // Mushaf order
+  VerseKey = 'verseKey', // Mushaf order
 }
 
 // For sorting collections list
@@ -158,7 +160,7 @@ Handles verse (Ayah) bookmark operations with support for both logged-in and ano
 interface UseVerseBookmarkProps {
   verse: WordVerse;
   mushafId: number;
-  bookmarksRangeUrl?: string;  // Optional URL for bulk-fetched bookmarks
+  bookmarksRangeUrl?: string; // Optional URL for bulk-fetched bookmarks
 }
 
 interface UseVerseBookmarkReturn {
@@ -169,6 +171,7 @@ interface UseVerseBookmarkReturn {
 ```
 
 **Features:**
+
 - Optimistic updates for instant UI feedback
 - SWR cache invalidation after changes
 - Toast notifications for user feedback
@@ -180,7 +183,7 @@ interface UseVerseBookmarkReturn {
 const { isVerseBookmarked, isLoading, handleToggleBookmark } = useVerseBookmark({
   verse,
   mushafId,
-  bookmarksRangeUrl,  // Pass this when using bulk fetching
+  bookmarksRangeUrl, // Pass this when using bulk fetching
 });
 ```
 
@@ -204,6 +207,7 @@ interface UsePageBookmarkReturn {
 ```
 
 **Features:**
+
 - Single page bookmark fetch via SWR
 - Optimistic updates with error recovery
 - Handles both logged-in and anonymous users
@@ -224,6 +228,7 @@ const { isPageBookmarked, isLoading, handleToggleBookmark } = usePageBookmark({
 One-time sync of local bookmarks to server when user signs up.
 
 **Sync Flow:**
+
 1. Check `getLastSyncAt()` - if null, sync needed
 2. Convert Redux bookmarks to API format
 3. POST to `/users/syncLocalData`
@@ -231,6 +236,7 @@ One-time sync of local bookmarks to server when user signs up.
 5. Invalidate SWR caches
 
 **Data Conversion:**
+
 ```typescript
 // Local verse bookmark: { "1:5": 1699999999999 }
 // Converted to:
@@ -253,8 +259,8 @@ One-time sync of local bookmarks to server when user signs up.
 
 ```typescript
 type Bookmarks = {
-  bookmarkedVerses: Record<string, number>;  // verseKey -> timestamp
-  bookmarkedPages: Record<string, number>;   // pageNumber -> timestamp
+  bookmarkedVerses: Record<string, number>; // verseKey -> timestamp
+  bookmarkedPages: Record<string, number>; // pageNumber -> timestamp
 };
 ```
 
@@ -392,10 +398,7 @@ makeDeleteCollectionBookmarkByKeyUrl(collectionId)  // DELETE /collections/{id}/
 Displays bookmark icon in translation view. Shows only when verse is bookmarked.
 
 ```tsx
-<BookmarkIcon
-  verse={verse}
-  bookmarksRangeUrl={bookmarksRangeUrl}
-/>
+<BookmarkIcon verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
 ```
 
 #### PageBookmarkAction
@@ -415,10 +418,7 @@ Context menu action for bookmarking/unbookmarking pages.
 Menu item to save a verse to collections. Opens modal for collection management.
 
 ```tsx
-<SaveToCollectionAction
-  verse={verse}
-  bookmarksRangeUrl={bookmarksRangeUrl}
-/>
+<SaveToCollectionAction verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
 ```
 
 ### Collection Components
@@ -463,6 +463,7 @@ Shows recent bookmarks (limit: 10) for quick access.
 **File:** `src/components/Verses/BookmarksAndCollectionsSection.tsx`
 
 Tab-based section combining:
+
 - Recently Read Sessions
 - Bookmarks
 - Collections (logged-in only)
@@ -662,7 +663,7 @@ const handleRemoveBookmark = async () => {
   if (!bookmark) return;
 
   // Optimistic update - remove from cache immediately
-  updateBookmarkCaches(null);  // Set to null/empty
+  updateBookmarkCaches(null); // Set to null/empty
 
   try {
     await deleteBookmarkById(bookmark.id);
@@ -682,53 +683,53 @@ const handleRemoveBookmark = async () => {
 
 ### Types
 
-| File | Purpose |
-|------|---------|
-| `types/Bookmark.ts` | Bookmark interface |
-| `types/BookmarksMap.ts` | Bulk bookmarks type |
-| `types/BookmarkType.ts` | Bookmark type enum |
-| `types/Collection.ts` | Collection type |
-| `types/CollectionSortOptions.ts` | Sort enums |
-| `types/auth/SyncDataType.ts` | Sync data type enum |
-| `types/auth/GetBookmarksByCollectionId.ts` | API response type |
+| File                                       | Purpose             |
+| ------------------------------------------ | ------------------- |
+| `types/Bookmark.ts`                        | Bookmark interface  |
+| `types/BookmarksMap.ts`                    | Bulk bookmarks type |
+| `types/BookmarkType.ts`                    | Bookmark type enum  |
+| `types/Collection.ts`                      | Collection type     |
+| `types/CollectionSortOptions.ts`           | Sort enums          |
+| `types/auth/SyncDataType.ts`               | Sync data type enum |
+| `types/auth/GetBookmarksByCollectionId.ts` | API response type   |
 
 ### Hooks
 
-| File | Purpose |
-|------|---------|
-| `src/hooks/useVerseBookmark.ts` | Verse bookmark operations |
-| `src/hooks/usePageBookmark.ts` | Page bookmark operations |
-| `src/hooks/auth/useSyncUserData.ts` | One-time sync on signup |
+| File                                | Purpose                   |
+| ----------------------------------- | ------------------------- |
+| `src/hooks/useVerseBookmark.ts`     | Verse bookmark operations |
+| `src/hooks/usePageBookmark.ts`      | Page bookmark operations  |
+| `src/hooks/auth/useSyncUserData.ts` | One-time sync on signup   |
 
 ### Redux
 
-| File | Purpose |
-|------|---------|
+| File                                        | Purpose               |
+| ------------------------------------------- | --------------------- |
 | `src/redux/slices/QuranReader/bookmarks.ts` | Local bookmarks state |
 
 ### API
 
-| File | Purpose |
-|------|---------|
-| `src/utils/auth/api.ts` | API functions |
-| `src/utils/auth/apiPaths.ts` | URL builders |
+| File                         | Purpose       |
+| ---------------------------- | ------------- |
+| `src/utils/auth/api.ts`      | API functions |
+| `src/utils/auth/apiPaths.ts` | URL builders  |
 
 ### Components
 
-| File | Purpose |
-|------|---------|
-| `src/components/QuranReader/TranslationView/BookmarkIcon.tsx` | Bookmark icon in translation view |
-| `src/components/QuranReader/ContextMenu/components/PageBookmarkAction.tsx` | Page bookmark context menu |
-| `src/components/Verse/SaveToCollectionAction.tsx` | Save to collection menu item |
-| `src/components/Collection/SaveToCollectionModal/SaveToCollectionModal.tsx` | Collection selection modal |
-| `src/components/Collection/CollectionList/CollectionList.tsx` | Collections list view |
-| `src/components/Collection/CollectionDetailContainer/CollectionDetailContainer.tsx` | Collection detail view |
-| `src/components/Verses/BookmarkedVersesList.tsx` | Recent bookmarks list |
-| `src/components/Verses/BookmarksAndCollectionsSection.tsx` | Tabbed bookmarks/collections |
+| File                                                                                | Purpose                           |
+| ----------------------------------------------------------------------------------- | --------------------------------- |
+| `src/components/QuranReader/TranslationView/BookmarkIcon.tsx`                       | Bookmark icon in translation view |
+| `src/components/QuranReader/ContextMenu/components/PageBookmarkAction.tsx`          | Page bookmark context menu        |
+| `src/components/Verse/SaveToCollectionAction.tsx`                                   | Save to collection menu item      |
+| `src/components/Collection/SaveToCollectionModal/SaveToCollectionModal.tsx`         | Collection selection modal        |
+| `src/components/Collection/CollectionList/CollectionList.tsx`                       | Collections list view             |
+| `src/components/Collection/CollectionDetailContainer/CollectionDetailContainer.tsx` | Collection detail view            |
+| `src/components/Verses/BookmarkedVersesList.tsx`                                    | Recent bookmarks list             |
+| `src/components/Verses/BookmarksAndCollectionsSection.tsx`                          | Tabbed bookmarks/collections      |
 
 ### Pages
 
-| File | Purpose |
-|------|---------|
-| `src/pages/collections/all/index.tsx` | All bookmarks aggregated view |
-| `src/pages/collections/[collectionId]/index.tsx` | Collection detail page |
+| File                                             | Purpose                       |
+| ------------------------------------------------ | ----------------------------- |
+| `src/pages/collections/all/index.tsx`            | All bookmarks aggregated view |
+| `src/pages/collections/[collectionId]/index.tsx` | Collection detail page        |
