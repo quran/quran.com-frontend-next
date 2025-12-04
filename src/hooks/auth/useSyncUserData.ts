@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
@@ -12,13 +12,20 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { syncUserLocalData } from '@/utils/auth/api';
-import { makeReadingSessionsUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import {
+  BOOKMARK_CACHE_PATHS,
+  makeReadingSessionsUrl,
+  makeUserProfileUrl,
+} from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLastSyncAt, setLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
+
+const MAX_SYNC_RETRIES = 3;
+const INITIAL_RETRY_DELAY_MS = 1000;
 
 interface BookmarkPayload {
   key: number;
@@ -102,13 +109,17 @@ const buildSyncPayload = (
   ),
 });
 
+const isBookmarkCacheKey = (key: unknown): boolean =>
+  typeof key === 'string' && Object.values(BOOKMARK_CACHE_PATHS).some((p) => key.includes(p));
+
 /**
  * A hook that will sync local user data e.g. his bookmarks
  * once the user signs up so that he doesn't lose them once
- * he logs in again.
+ * he logs in again. Includes retry logic with exponential backoff.
  */
 const useSyncUserData = () => {
   const { mutate } = useSWRConfig();
+  const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions: RecentReadingSessions = useSelector(
@@ -119,37 +130,49 @@ const useSyncUserData = () => {
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  const performSync = useCallback(() => {
-    const bookmarksCount =
-      Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
-    const readingSessionsCount = Object.keys(recentReadingSessions).length;
-    const requestPayload = buildSyncPayload(
-      bookmarkedVerses,
-      bookmarkedPages,
-      recentReadingSessions,
-      mushafId,
-    );
+  const performSync = useCallback(
+    async (attempt = 0): Promise<void> => {
+      const bookmarksCount =
+        Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
+      const readingSessionsCount = Object.keys(recentReadingSessions).length;
+      const requestPayload = buildSyncPayload(
+        bookmarkedVerses,
+        bookmarkedPages,
+        recentReadingSessions,
+        mushafId,
+      );
 
-    syncUserLocalData(requestPayload as Record<SyncDataType, any>)
-      .then((response) => {
+      try {
+        const response = await syncUserLocalData(requestPayload as Record<SyncDataType, any>);
         const { lastSyncAt } = response;
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
         mutate(makeReadingSessionsUrl());
+        mutate(isBookmarkCacheKey, undefined, { revalidate: true });
         setLastSyncAt(new Date(lastSyncAt));
-      })
-      .catch((error) => {
+      } catch (error) {
         logErrorToSentry(error, {
           transactionName: 'useSyncUserData',
-          metadata: { bookmarksCount, readingSessionsCount, mushafId },
+          metadata: { bookmarksCount, readingSessionsCount, mushafId, attempt },
         });
-      });
-  }, [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate]);
+
+        // Retry with exponential backoff
+        if (attempt < MAX_SYNC_RETRIES) {
+          const delay = INITIAL_RETRY_DELAY_MS * 2 ** attempt;
+          retryTimeoutRef.current = setTimeout(() => performSync(attempt + 1), delay);
+        }
+      }
+    },
+    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate],
+  );
 
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
     if (isLoggedIn() && !getLastSyncAt()) {
       performSync();
     }
+    return () => {
+      if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
+    };
   }, [performSync]);
 };
 
