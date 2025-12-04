@@ -4,7 +4,6 @@ import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 
 import AppContent from '@/components/AppContent/AppContent';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
@@ -33,12 +32,6 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   const { locale } = router;
   const resolvedLocale = locale ?? 'en';
   const languageDirection = getDir(resolvedLocale);
-  const buildInfo = {
-    date: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
-    hash: process.env.NEXT_PUBLIC_COMMIT_HASH || 'development',
-    version: process.env.NEXT_PUBLIC_APP_VERSION || '',
-    env: process.env.NEXT_PUBLIC_APP_ENV,
-  };
 
   useEffect(() => {
     document.documentElement.dir = languageDirection;
@@ -57,10 +50,18 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
         <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `window.__BUILD_INFO__ = {
+              date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
+              hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
+              version: "${process.env.NEXT_PUBLIC_APP_VERSION || ''}",
+              env: "${process.env.NEXT_PUBLIC_APP_ENV}"
+            }`,
+          }}
+        />
       </Head>
-      <Script id="build-info" strategy="beforeInteractive">
-        {`window.__BUILD_INFO__ = ${JSON.stringify(buildInfo)};`}
-      </Script>
       <FontPreLoader locale={resolvedLocale} />
       <DirectionProvider dir={languageDirection}>
         <TooltipProvider>
