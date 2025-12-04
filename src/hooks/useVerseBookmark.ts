@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR, { useSWRConfig } from 'swr';
@@ -13,50 +13,32 @@ import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 
 const NOT_BOOKMARKED = null;
-type BookmarkCacheValue = Bookmark | null;
 
-/**
- * Minimal verse interface required for bookmark operations
- */
 export interface BookmarkableVerse {
   verseKey: string;
   verseNumber: number;
   chapterId: number | string;
 }
 
-interface UseVerseBookmarkProps {
-  verse: BookmarkableVerse;
-  mushafId: number;
-  bookmarksRangeUrl?: string;
-}
-
-interface UseVerseBookmarkReturn {
-  isVerseBookmarked: boolean;
-  isLoading: boolean;
-  handleToggleBookmark: () => void;
-}
-
-/**
- * Custom hook for verse bookmark operations.
- * Uses bulk fetching when bookmarksRangeUrl is provided for efficiency.
- * When bookmarksRangeUrl is not provided for logged-in users, bookmark status won't be fetched from the server.
- * For logged-out users, always uses localStorage bookmarks regardless of bookmarksRangeUrl.
- * @returns {UseVerseBookmarkReturn} Bookmark state and toggle handler
- */
 const useVerseBookmark = ({
   verse,
   mushafId,
   bookmarksRangeUrl,
-}: UseVerseBookmarkProps): UseVerseBookmarkReturn => {
+}: {
+  verse: BookmarkableVerse;
+  mushafId: number;
+  bookmarksRangeUrl?: string;
+}) => {
   const dispatch = useDispatch();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const { mutate: globalMutate } = useSWRConfig();
 
   const {
     showToast,
+    showErrorToast,
     invalidateBookmarksList,
-    handleAddBookmark: baseAddBookmark,
-    handleRemoveBookmark: baseRemoveBookmark,
+    addBookmark: baseAddBookmark,
+    removeBookmark: baseRemoveBookmark,
     isLoggedIn,
   } = useBookmarkBase({
     mushafId,
@@ -65,47 +47,32 @@ const useVerseBookmark = ({
     verseNumber: verse.verseNumber,
   });
 
-  // Only use bulk fetch when logged in and URL is provided
-  const shouldFetchBookmarks = isLoggedIn && !!bookmarksRangeUrl;
+  const isPendingRef = useRef(false);
 
-  const {
-    data: pageBookmarks,
-    isValidating,
-    mutate,
-  } = useSWR<BookmarksMap>(
-    shouldFetchBookmarks ? bookmarksRangeUrl : null,
+  const { data: pageBookmarks } = useSWR<BookmarksMap>(
+    isLoggedIn && bookmarksRangeUrl ? bookmarksRangeUrl : null,
     (url: string) => privateFetcher(url),
     mutatingFetcherConfig,
   );
 
-  const isLoading = isValidating && !pageBookmarks;
+  const bookmark = pageBookmarks?.[verse.verseKey] || NOT_BOOKMARKED;
+  const isVerseBookmarked = isLoggedIn
+    ? bookmark !== NOT_BOOKMARKED
+    : !!bookmarkedVerses[verse.verseKey];
 
-  // Extract bookmark for this specific verse
-  const bookmark = useMemo(() => {
-    return pageBookmarks?.[verse.verseKey] || NOT_BOOKMARKED;
-  }, [pageBookmarks, verse.verseKey]);
-
-  const isVerseBookmarked = useMemo(() => {
-    if (isLoggedIn) return bookmark !== NOT_BOOKMARKED;
-    return !!bookmarkedVerses[verse.verseKey];
-  }, [isLoggedIn, bookmarkedVerses, bookmark, verse.verseKey]);
-
-  // Helper: Update bookmark cache
   const updateBookmarkCaches = useCallback(
-    (value: BookmarkCacheValue) => {
+    (value: Bookmark | null) => {
       if (!bookmarksRangeUrl) return;
-
-      // Update bulk fetch cache
       globalMutate(
         bookmarksRangeUrl,
-        (currentData: BookmarksMap | undefined) => {
-          if (!currentData) return currentData;
+        (current: BookmarksMap | undefined) => {
+          if (!current) return current;
           if (value === null) {
-            const newData = { ...currentData };
-            delete newData[verse.verseKey];
-            return newData;
+            const d = { ...current };
+            delete d[verse.verseKey];
+            return d;
           }
-          return { ...currentData, [verse.verseKey]: value };
+          return { ...current, [verse.verseKey]: value };
         },
         { revalidate: false },
       );
@@ -113,26 +80,57 @@ const useVerseBookmark = ({
     [globalMutate, bookmarksRangeUrl, verse.verseKey],
   );
 
+  const revalidateOnError = useCallback(() => {
+    if (bookmarksRangeUrl) globalMutate(bookmarksRangeUrl);
+  }, [bookmarksRangeUrl, globalMutate]);
+
   const handleAddBookmark = useCallback(async () => {
-    const newBookmark = await baseAddBookmark();
-    if (newBookmark) {
-      updateBookmarkCaches(newBookmark);
+    if (isPendingRef.current) return;
+    isPendingRef.current = true;
+    const optimisticBookmark: Bookmark = {
+      id: `temp-${Date.now()}`,
+      key: Number(verse.chapterId),
+      type: BookmarkType.Ayah,
+      verseNumber: verse.verseNumber,
+    };
+    updateBookmarkCaches(optimisticBookmark);
+    try {
+      updateBookmarkCaches(await baseAddBookmark());
       invalidateBookmarksList();
       showToast('verse-bookmarked', ToastStatus.Success);
-    } else {
-      mutate();
+    } catch (err) {
+      updateBookmarkCaches(NOT_BOOKMARKED);
+      revalidateOnError();
+      showErrorToast(err);
+    } finally {
+      isPendingRef.current = false;
     }
-  }, [baseAddBookmark, updateBookmarkCaches, invalidateBookmarksList, showToast, mutate]);
+  }, [
+    verse.chapterId,
+    verse.verseNumber,
+    baseAddBookmark,
+    updateBookmarkCaches,
+    invalidateBookmarksList,
+    showToast,
+    showErrorToast,
+    revalidateOnError,
+  ]);
 
   const handleRemoveBookmark = useCallback(async () => {
-    if (!bookmark || bookmark === NOT_BOOKMARKED) return;
-    const success = await baseRemoveBookmark(bookmark.id);
-    if (success) {
-      updateBookmarkCaches(NOT_BOOKMARKED);
+    if (isPendingRef.current || !bookmark || bookmark === NOT_BOOKMARKED) return;
+    isPendingRef.current = true;
+    const previousBookmark = bookmark;
+    updateBookmarkCaches(NOT_BOOKMARKED);
+    try {
+      await baseRemoveBookmark(previousBookmark.id);
       invalidateBookmarksList();
       showToast('verse-bookmark-removed', ToastStatus.Success);
-    } else {
-      mutate();
+    } catch (err) {
+      updateBookmarkCaches(previousBookmark);
+      revalidateOnError();
+      showErrorToast(err);
+    } finally {
+      isPendingRef.current = false;
     }
   }, [
     bookmark,
@@ -140,35 +138,29 @@ const useVerseBookmark = ({
     updateBookmarkCaches,
     invalidateBookmarksList,
     showToast,
-    mutate,
+    showErrorToast,
+    revalidateOnError,
   ]);
 
-  const handleLoggedOutToggle = useCallback(() => {
-    const wasBookmarked = !!bookmarkedVerses[verse.verseKey];
-    dispatch(toggleVerseBookmark(verse.verseKey));
-    showToast(wasBookmarked ? 'verse-bookmark-removed' : 'verse-bookmarked', ToastStatus.Success);
-  }, [dispatch, verse.verseKey, bookmarkedVerses, showToast]);
-
   const handleToggleBookmark = useCallback(() => {
-    if (isLoggedIn) {
-      if (isVerseBookmarked) handleRemoveBookmark();
-      else handleAddBookmark();
-    } else {
-      handleLoggedOutToggle();
-    }
+    if (!isLoggedIn) {
+      dispatch(toggleVerseBookmark(verse.verseKey));
+      const msg = bookmarkedVerses[verse.verseKey] ? 'verse-bookmark-removed' : 'verse-bookmarked';
+      showToast(msg, ToastStatus.Success);
+    } else if (isVerseBookmarked) handleRemoveBookmark();
+    else handleAddBookmark();
   }, [
     isLoggedIn,
     isVerseBookmarked,
     handleRemoveBookmark,
     handleAddBookmark,
-    handleLoggedOutToggle,
+    bookmarkedVerses,
+    verse.verseKey,
+    dispatch,
+    showToast,
   ]);
 
-  return {
-    isVerseBookmarked,
-    isLoading,
-    handleToggleBookmark,
-  };
+  return { isVerseBookmarked, handleToggleBookmark };
 };
 
 export default useVerseBookmark;
