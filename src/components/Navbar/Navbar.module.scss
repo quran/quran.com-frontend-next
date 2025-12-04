@@ -3,7 +3,6 @@
 
 .bannerActive {
   --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
-
   @include breakpoints.tablet {
     --banner-height: var(--navbar-height);
     --navbar-container-height: var(--navbar-height);
@@ -17,11 +16,11 @@
 .container {
   inset-block-start: 0;
   position: fixed;
-  height: var(--navbar-height);
   width: 100%;
-  transition: var(--transition-regular);
+  height: var(--navbar-height);
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);
+  transition: var(--transition-regular);
   will-change: transform;
 }
 
@@ -32,24 +31,5 @@
     // TODO: we should add the banner height here if it's shown
     // transform: translate3d(0, calc(-1 * (var(--navbar-container-height) + var(--banner-height))), 0);
     transform: translate3d(0, calc(-1 * (var(--navbar-container-height))), 0);
-  }
-}
-
-.donateButton {
-  color: var(--color-text-link-new);
-  --themed-bg: var(--color-success-faded);
-  --themed-border: var(--color-success-faded);
-  font-weight: var(--font-weight-semibold);
-
-  &:hover {
-    --themed-bg: var(--color-success-faded);
-    --themed-border: var(--color-success-faded);
-    color: var(--color-text-link-new);
-  }
-
-  svg {
-    path {
-      fill: var(--color-blue-buttons-and-icons);
-    }
   }
 }

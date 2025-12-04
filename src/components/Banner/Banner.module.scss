@@ -1,3 +1,4 @@
+@use 'src/styles/utility';
 @use 'src/styles/breakpoints';
 
 .container {
@@ -5,13 +6,10 @@
   box-sizing: border-box;
   height: var(--banner-height);
   background-color: var(--color-background-elevated-new);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--spacing-small-px);
-
   padding-inline: var(--spacing-small-px);
   padding-block: var(--spacing-xsmall-px);
+  @include utility.row-between;
+  gap: var(--spacing-small-px);
 }
 
 .text {
@@ -27,17 +25,12 @@
   color: var(--color-text-link-new);
   font-size: var(--font-size-small-px);
   font-weight: var(--font-weight-medium);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--spacing-xxsmall-px);
   border-radius: var(--border-radius-medium-px);
-  vertical-align: middle;
   text-decoration: none;
+  @include utility.row-center;
+  gap: var(--spacing-xxsmall-px);
 }
 
-.icon {
-  > svg path {
-    fill: var(--color-text-link-new);
-  }
+.icon > svg path {
+  fill: var(--color-text-link-new);
 }
