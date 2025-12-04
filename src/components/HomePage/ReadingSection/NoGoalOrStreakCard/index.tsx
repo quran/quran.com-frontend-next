@@ -13,7 +13,7 @@ const NoGoalOrStreakCard = () => {
   const { t } = useTranslation('home');
 
   return (
-    <Card link={getReadingGoalNavigationUrl()}>
+    <Card link={getReadingGoalNavigationUrl()} shouldPrefetch={false}>
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>
           <div className={styles.iconContainer}>

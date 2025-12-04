@@ -13,6 +13,7 @@ interface CardProps {
   className?: string;
   linkClassName?: string;
   onClick?: () => void;
+  shouldPrefetch?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -22,10 +23,17 @@ const Card: React.FC<CardProps> = ({
   className,
   linkClassName,
   onClick,
+  shouldPrefetch = true,
 }) => {
   if (link) {
     return (
-      <Link href={link} isNewTab={isNewTab} className={linkClassName} onClick={onClick}>
+      <Link
+        href={link}
+        isNewTab={isNewTab}
+        className={linkClassName}
+        onClick={onClick}
+        shouldPrefetch={shouldPrefetch}
+      >
         <div className={classNames(className, styles.card, styles.cardWithLink)}>{children}</div>
       </Link>
     );

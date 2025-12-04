@@ -46,7 +46,12 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           <div className={styles.calendarContainer}>
             <CalendarIcon />
           </div>
-          <Link variant={LinkVariant.Blend} href="/calendar" onClick={onCalendarClicked}>
+          <Link
+            variant={LinkVariant.Blend}
+            href="/calendar"
+            onClick={onCalendarClicked}
+            shouldPrefetch={false}
+          >
             <p className={styles.calendarText}>{t('calendar-cta')}</p>
           </Link>
         </div>
@@ -75,6 +80,7 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           onClick={() => {
             logButtonClick('quran_in_year_calendar');
           }}
+          shouldPrefetch={false}
         >
           {t('quran-in-year-cta')}
           <IconContainer
