@@ -17,7 +17,7 @@
   color: var(--themed-fg, var(--color-text-default));
   background-color: var(--themed-bg, var(--color-background-default));
   font-weight: var(--font-weight-medium);
-  border: 1px solid var(--themed-border);
+  border: var(--spacing-hairline-px) solid var(--themed-border);
   block-size: var(--button-size);
   justify-content: center;
   border-radius: var(--border-radius-default);
@@ -194,7 +194,7 @@
 .base.disabled {
   cursor: not-allowed;
   background-color: var(--color-background-alternative-medium);
-  border: 1px solid var(--color-secondary-medium);
+  border: var(--spacing-hairline-px) solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
   @media (hover: hover) {
@@ -225,7 +225,7 @@
   color: var(--themed-bg);
   font-weight: var(--font-weight-bold);
   border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--themed-bg);
+  border: var(--spacing-hairline-px) solid var(--themed-bg);
   font-size: var(--font-size-small);
   padding: var(--spacing-xxsmall);
 }
