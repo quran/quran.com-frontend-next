@@ -7,26 +7,7 @@
   justify-content: space-between;
   height: 100%;
   background-color: var(--color-background-elevated);
-  position: relative;
-
-  // Backdrop overlay that appears when the navigation drawer opens
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-color: var(--color-background-backdrop);
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition-fast);
-    z-index: var(--z-index-smaller-modal);
-  }
-
-  &.dimmed {
-    &::before {
-      opacity: var(--opacity-50);
-      pointer-events: auto;
-    }
-  }
+  @include utility.dimmedOverlay;
 
   svg,
   g {
