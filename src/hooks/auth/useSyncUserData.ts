@@ -158,6 +158,8 @@ const useSyncUserData = () => {
         // Retry with exponential backoff (attempt 0, 1, 2 = 3 total attempts)
         if (attempt < MAX_SYNC_ATTEMPTS - 1) {
           const delay = INITIAL_RETRY_DELAY_MS * 2 ** attempt;
+          // Clear any pending retry before scheduling a new one to prevent overlapping syncs
+          if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
           retryTimeoutRef.current = setTimeout(() => performSync(attempt + 1), delay);
         }
       }
