@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
   className,
   linkClassName,
   onClick,
-  shouldPrefetch = false,
+  shouldPrefetch = true,
 }) => {
   if (link) {
     return (
