@@ -48,7 +48,7 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
             <Image
               className={styles.image}
               src={imageUrl}
-              alt=""
+              alt={page.mainPhoto.alt || page.title || 'Page hero image'}
               width={width}
               height={height}
               sizes="(max-width: 768px) 100vw, 800px"

@@ -58,13 +58,14 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
             </Link>
             {page.summary}
             {page.mainPhoto && imageUrl && (
-              <div className={styles.imageContainer}>
+              <div
+                className={styles.imageContainer}
+                style={{ position: 'relative', aspectRatio: '4/3' }}
+              >
                 <Image
                   className={styles.image}
                   src={imageUrl}
-                  alt=""
-                  width={page.mainPhoto?.metadata?.dimensions?.width ?? 800}
-                  height={page.mainPhoto?.metadata?.dimensions?.height ?? 600}
+                  alt={page.mainPhoto?.alt || page.title}
                   sizes="(max-width: 768px) 100vw, 800px"
                 />
               </div>
