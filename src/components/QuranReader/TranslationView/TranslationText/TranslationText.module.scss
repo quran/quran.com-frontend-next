@@ -1,6 +1,6 @@
-@use "src/styles/utility";
-@use "src/components/QuranReader/TranslationView/TranslationText/footnote";
-@use "src/styles/theme";
+@use 'src/styles/utility';
+@use 'src/components/QuranReader/TranslationView/TranslationText/footnote';
+@use 'src/styles/theme';
 
 $translation-line-height: 1.5;
 
@@ -11,7 +11,15 @@ $translation-line-height: 1.5;
   padding-block-end: var(--spacing-micro);
 }
 
-@include utility.generate-font-scales("translation");
+.textCenter {
+  text-align: center !important;
+}
+
+.innerText {
+  display: inline;
+}
+
+@include utility.generate-font-scales('translation');
 
 /*
 #TODO: should move language specific fonts and direction to
@@ -30,20 +38,28 @@ $translation-line-height: 1.5;
 }
 
 .urdu {
-  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica,
-    Arial, serif !important; // important is needed to over-ride the language specific font-family
+  font-family: 'MehrNastaliq', 'Mehr Nastaliq Web', 'Helvetica Neue', Helvetica, Arial, serif !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
-  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "MehrNastaliq" !important; // important is needed to over-ride the language specific font-family
+  font-family: 'DroidArabicNaskh', 'Noto Nastaliq Arabic', 'MehrNastaliq' !important; // important is needed to over-ride the language specific font-family
 }
 
 .divehi {
-  font-family: "divehi" !important; // important is needed to over-ride the language specific font-family
+  font-family: 'divehi' !important; // important is needed to over-ride the language specific font-family
 }
 
 .translationName {
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);
   font-size: var(--font-size-xsmall);
+}
+
+.referenceLink {
+  color: var(--color-text-link);
+  text-decoration: none;
+
+  &:hover {
+    opacity: var(--opacity-50);
+  }
 }
