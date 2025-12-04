@@ -1,42 +1,33 @@
-import { useContext } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './BookmarkPill.module.scss';
 
-import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
-import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
-import { getChapterNumberFromKey } from '@/utils/verse';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getPageNavigationUrl } from '@/utils/navigation';
 
 interface Props {
-  verseKey: string;
-  onDeleted: (verseKey: string) => void;
+  pageNumber: number;
+  onDeleted: (pageNumber: number) => void;
   isDeleting?: boolean;
 }
 
-const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted, isDeleting = false }) => {
+const PageBookmarkPill: React.FC<Props> = ({ pageNumber, onDeleted, isDeleting = false }) => {
   const { t, lang } = useTranslation('home');
-  const chaptersData = useContext(DataContext);
 
-  const chapterNumber = getChapterNumberFromKey(verseKey);
-  const chapterData = getChapterData(chaptersData, chapterNumber.toString());
-
-  const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
+  const bookmarkText = `${t('common:page')} ${toLocalizedNumber(pageNumber, lang)}`;
 
   const onLinkClicked = () => {
-    logButtonClick('bookmarked_verses_list_link');
+    logButtonClick('bookmarked_pages_list_link');
   };
 
   return (
     <div className={styles.bookmarkItem}>
       <Button
         onClick={onLinkClicked}
-        href={getVerseNavigationUrlByVerseKey(verseKey)}
+        href={getPageNavigationUrl(pageNumber)}
         type={ButtonType.Primary}
         variant={ButtonVariant.Compact}
         className={styles.linkButtonContainer}
@@ -45,7 +36,7 @@ const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted, isDeleting = false
         {bookmarkText}
       </Button>
       <button
-        onClick={() => onDeleted(verseKey)}
+        onClick={() => onDeleted(pageNumber)}
         type="button"
         className={styles.closeIconContainer}
         aria-label={t('common:remove')}
@@ -59,4 +50,4 @@ const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted, isDeleting = false
   );
 };
 
-export default BookmarkPill;
+export default PageBookmarkPill;
