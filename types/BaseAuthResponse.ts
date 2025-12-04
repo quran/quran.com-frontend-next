@@ -5,6 +5,7 @@ interface BaseAuthResponse {
     message: string;
     details: Record<string, string>;
   };
+  message?: string;
   token?: string;
 }
 

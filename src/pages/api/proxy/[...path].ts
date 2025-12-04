@@ -111,6 +111,17 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   },
 });
 
+// Maximum request body size for API routes, aligned with backend limit for profile picture uploads
+const API_BODY_SIZE_LIMIT = process.env.API_BODY_SIZE_LIMIT || '8mb';
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: API_BODY_SIZE_LIMIT,
+    },
+  },
+};
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   apiProxy(req, res, (err) => {
     if (err) {
