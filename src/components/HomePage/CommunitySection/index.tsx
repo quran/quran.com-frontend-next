@@ -31,6 +31,7 @@ const CommunitySection = () => {
           isNewTab
           linkClassName={styles.link}
           onClick={onQRCardClicked}
+          shouldPrefetch={false}
         >
           <div className={styles.cardContent}>
             <div className={styles.ramadanTitle}>

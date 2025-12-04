@@ -92,6 +92,7 @@ const LearningPlansSection = () => {
                       className={styles.card}
                       link={courseUrl}
                       onClick={() => onLearningPlanCardClicked(course.slug)}
+                      shouldPrefetch={false}
                     >
                       <div className={styles.cardWrapper}>
                         <Image
@@ -122,6 +123,7 @@ const LearningPlansSection = () => {
                               className={styles.startLearningLink}
                               variant={LinkVariant.Highlight}
                               href={courseUrl}
+                              shouldPrefetch={false}
                               onClick={() =>
                                 onStartOrContinueLearningClicked(
                                   enrolledButNotCompleted,

@@ -37,6 +37,7 @@ const NewCard: React.FC = () => {
         className={styles.firstTimeReadingCard}
         link={getTakeNotesNavigationUrl()}
         isNewTab
+        shouldPrefetch={false}
       >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
