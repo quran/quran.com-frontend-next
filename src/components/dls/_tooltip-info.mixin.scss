@@ -1,7 +1,7 @@
 @mixin infoTooltipStyles {
     background-color: var(--color-background-elevated);
     color: var(--color-text-default);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-tooltip);
     padding: var(--spacing-xxsmall-px);
     font-size: var(--font-size-xsmall-px);
     line-height: var(--line-height-normal);
