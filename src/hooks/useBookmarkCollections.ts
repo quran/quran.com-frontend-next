@@ -74,15 +74,14 @@ const useBookmarkCollections = ({
     async (collectionId: string): Promise<boolean> => {
       if (isPendingRef.current) return false;
       isPendingRef.current = true;
-      const currentIds = collectionIds || [];
       try {
         await mutateBookmarkCollections(
-          async () => {
+          async (current) => {
             await addCollectionBookmark({ collectionId, key, mushafId, type, verseNumber });
-            return [...currentIds, collectionId];
+            return [...(current || []), collectionId];
           },
           {
-            optimisticData: [...currentIds, collectionId],
+            optimisticData: [...(collectionIds || []), collectionId],
             rollbackOnError: true,
             revalidate: false,
           },
@@ -112,14 +111,17 @@ const useBookmarkCollections = ({
     async (collectionId: string): Promise<boolean> => {
       if (isPendingRef.current) return false;
       isPendingRef.current = true;
-      const filteredIds = (collectionIds || []).filter((id) => id !== collectionId);
       try {
         await mutateBookmarkCollections(
-          async () => {
+          async (current) => {
             await deleteCollectionBookmarkByKey({ collectionId, key, mushafId, type, verseNumber });
-            return filteredIds;
+            return (current || []).filter((id) => id !== collectionId);
           },
-          { optimisticData: filteredIds, rollbackOnError: true, revalidate: false },
+          {
+            optimisticData: (collectionIds || []).filter((id) => id !== collectionId),
+            rollbackOnError: true,
+            revalidate: false,
+          },
         );
         invalidateCaches();
         return true;
