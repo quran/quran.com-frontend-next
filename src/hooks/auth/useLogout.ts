@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { logErrorToSentry } from '@/lib/sentry';
 import { clearBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { clearReadingTracker } from '@/redux/slices/QuranReader/readingTracker';
 import QueryParam from '@/types/QueryParam';
 import { removeUserIdCookie } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
@@ -25,7 +26,7 @@ type LogoutFunction = (options?: LogoutOptions) => Promise<void>;
  * - Calls backend logout API
  * - Clears auth context state
  * - Removes sync timestamp
- * - Clears local bookmarks (prevents data leakage on shared devices)
+ * - Clears local bookmarks and reading sessions (prevents data leakage on shared devices)
  * - Optionally redirects to login
  * @returns {LogoutFunction} A function that performs the logout flow with options
  */
@@ -44,6 +45,7 @@ const useLogout = (): LogoutFunction => {
         authContextLogout();
         removeLastSyncAt();
         dispatch(clearBookmarks());
+        dispatch(clearReadingTracker());
 
         if (!redirectToLogin) {
           const redirect = router.asPath;

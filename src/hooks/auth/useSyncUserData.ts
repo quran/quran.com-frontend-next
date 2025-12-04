@@ -24,7 +24,7 @@ import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
-const MAX_SYNC_RETRIES = 3;
+const MAX_SYNC_ATTEMPTS = 3; // 1 initial + 2 retries
 const INITIAL_RETRY_DELAY_MS = 1000;
 
 interface BookmarkPayload {
@@ -155,8 +155,8 @@ const useSyncUserData = () => {
           metadata: { bookmarksCount, readingSessionsCount, mushafId, attempt },
         });
 
-        // Retry with exponential backoff
-        if (attempt < MAX_SYNC_RETRIES) {
+        // Retry with exponential backoff (attempt 0, 1, 2 = 3 total attempts)
+        if (attempt < MAX_SYNC_ATTEMPTS - 1) {
           const delay = INITIAL_RETRY_DELAY_MS * 2 ** attempt;
           retryTimeoutRef.current = setTimeout(() => performSync(attempt + 1), delay);
         }
