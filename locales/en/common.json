@@ -179,6 +179,8 @@
     "expiredToken": "*This token is expired",
     "file-exceeds-limit": "File size exceeds the limit. Please choose a smaller file.",
     "forgot-password-failed": "Failed to send password reset email. Please try again.",
+    "image-remove-failed": "Failed to remove image. Please try again.",
+    "image-upload-failed": "Failed to upload image. Please try again.",
     "immutable": "*This value cannot be changed",
     "invalid": "*This {{fieldName}} is invalid",
     "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",

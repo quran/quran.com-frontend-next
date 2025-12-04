@@ -1,7 +1,10 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
 import type React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import { logErrorToSentry } from '@/lib/sentry';
+import { getAllowedImageFormats } from '@/utils/image-format';
 
 interface UseImageUploadReturn {
   isLoading: boolean;
@@ -10,12 +13,10 @@ interface UseImageUploadReturn {
   handleRemovePicture: () => Promise<void>;
   handleFileSelect: (event: React.ChangeEvent<HTMLInputElement>) => Promise<void>;
 }
-
 interface ValidationErrorMessages {
   invalidFileType?: string;
   fileExceedsLimit?: string;
 }
-
 interface UploadImageOptions {
   onSuccess?: () => void;
   onError?: (error: unknown) => void;
@@ -27,22 +28,23 @@ interface UploadImageOptions {
   sentryTransactionName?: string;
 }
 
-const convertFileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
+const convertFileToBase64 = (
+  file: File,
+  readFileError: string,
+  readFileAsBase64Error: string,
+): Promise<string> =>
+  new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        resolve(reader.result);
-      } else {
-        reject(new Error('Failed to read file as base64'));
-      }
+      if (typeof reader.result === 'string') resolve(reader.result);
+      else reject(new Error(readFileAsBase64Error));
     };
-    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.onerror = () => reject(new Error(readFileError));
     reader.readAsDataURL(file);
   });
-};
 
 const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn => {
+  const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -58,27 +60,22 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
   } = options;
 
   const messages = useMemo(() => {
-    const defaultErrorMessages: Required<ValidationErrorMessages> = {
-      invalidFileType: 'Please select a valid image file',
-      fileExceedsLimit: `Image size exceeds the limit`,
+    const formats = allowedTypes ? getAllowedImageFormats(allowedTypes) : 'image';
+    return {
+      invalidFileType: t('errors.invalid-file-format', { formats }),
+      fileExceedsLimit: t('errors.file-exceeds-limit'),
+      ...errorMessages,
     };
-    return { ...defaultErrorMessages, ...errorMessages };
-  }, [errorMessages]);
+  }, [errorMessages, t, allowedTypes]);
 
   const validateImageFile = useCallback(
     (file: File): string | null => {
-      if (!file.type.startsWith('image/')) {
+      if (!file.type.startsWith('image/') || (allowedTypes && !allowedTypes.includes(file.type))) {
         return messages.invalidFileType;
       }
-
       if (maxSize && file.size > maxSize) {
         return messages.fileExceedsLimit;
       }
-
-      if (allowedTypes && !allowedTypes.includes(file.type)) {
-        return messages.invalidFileType;
-      }
-
       return null;
     },
     [messages, maxSize, allowedTypes],
@@ -86,77 +83,59 @@ const useImageUpload = (options: UploadImageOptions = {}): UseImageUploadReturn 
 
   const uploadImage = useCallback(
     async (file: File) => {
-      if (!uploadFunction) {
-        throw new Error('Upload function is required');
-      }
-
-      const fileData = await convertFileToBase64(file);
+      if (!uploadFunction) throw new Error(t('errors.image-upload-failed'));
+      const errorMessage = t('errors.image-upload-failed');
+      const fileData = await convertFileToBase64(file, errorMessage, errorMessage);
       await uploadFunction(fileData);
       onSuccess?.();
     },
-    [uploadFunction, onSuccess],
+    [uploadFunction, onSuccess, t],
   );
 
   const handleFileSelect = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
       if (!file) return;
-
       const validationError = validateImageFile(file);
       if (validationError) {
         onError?.(validationError);
         return;
       }
-
       setIsLoading(true);
-
       try {
         await uploadImage(file);
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: sentryTransactionName,
-          metadata: {
-            fileName: file.name,
-            fileSize: file.size,
-            fileType: file.type,
-          },
+          metadata: { fileName: file.name, fileSize: file.size, fileType: file.type },
         });
         onError?.(error);
       } finally {
         setIsLoading(false);
-        if (fileInputRef.current) {
-          fileInputRef.current.value = '';
-        }
+        if (fileInputRef.current) fileInputRef.current.value = '';
       }
     },
     [uploadImage, validateImageFile, onError, sentryTransactionName],
   );
 
-  const handleUploadPicture = useCallback(() => {
-    fileInputRef.current?.click();
-  }, []);
+  const handleUploadPicture = useCallback(() => fileInputRef.current?.click(), []);
 
   const handleRemovePicture = useCallback(async () => {
     if (!removeFunction) {
-      onError?.(new Error('Remove function is required'));
+      onError?.(new Error(t('errors.image-remove-failed')));
       return;
     }
-
     setIsLoading(true);
-
     try {
       await removeFunction();
       onSuccess?.();
     } catch (error) {
-      logErrorToSentry(error, {
-        transactionName: `${sentryTransactionName}Remove`,
-      });
-
+      logErrorToSentry(error, { transactionName: `${sentryTransactionName}Remove` });
       onError?.(error);
     } finally {
       setIsLoading(false);
     }
-  }, [removeFunction, onSuccess, onError, sentryTransactionName]);
+  }, [removeFunction, onSuccess, onError, sentryTransactionName, t]);
 
   return {
     isLoading,
