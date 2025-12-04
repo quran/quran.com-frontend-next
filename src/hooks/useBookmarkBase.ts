@@ -21,9 +21,10 @@ export interface BookmarkBaseConfig {
 
 export interface BookmarkBaseReturn {
   showToast: (messageKey: string, status: ToastStatus) => void;
+  showErrorToast: (err: unknown) => void;
   invalidateBookmarksList: () => void;
-  handleAddBookmark: () => Promise<Bookmark | null>;
-  handleRemoveBookmark: (bookmarkId: string) => Promise<boolean>;
+  addBookmark: () => Promise<Bookmark>;
+  removeBookmark: (bookmarkId: string) => Promise<void>;
   isLoggedIn: boolean;
 }
 
@@ -53,49 +54,33 @@ const useBookmarkBase = ({
     [toast, t],
   );
 
+  const showErrorToast = useCallback(
+    (err: unknown) => {
+      const messageKey = isBookmarkSyncError(err) ? 'error.bookmark-sync' : 'error.general';
+      toast(t(`common:${messageKey}`), { status: ToastStatus.Error });
+    },
+    [toast, t],
+  );
+
   const invalidateBookmarksList = useCallback(() => {
     globalMutate(makeBookmarksUrl(mushafId));
   }, [globalMutate, mushafId]);
 
-  const handleAddBookmark = useCallback(async (): Promise<Bookmark | null> => {
-    try {
-      const newBookmark = (await addBookmark({
-        key,
-        mushafId,
-        type,
-        verseNumber,
-      })) as Bookmark;
-      return newBookmark;
-    } catch (err: unknown) {
-      showToast(
-        isBookmarkSyncError(err) ? 'common:error.bookmark-sync' : 'common:error.general',
-        ToastStatus.Error,
-      );
-      return null;
-    }
-  }, [key, mushafId, type, verseNumber, showToast]);
+  const baseAddBookmark = useCallback(async (): Promise<Bookmark> => {
+    const newBookmark = (await addBookmark({ key, mushafId, type, verseNumber })) as Bookmark;
+    return newBookmark;
+  }, [key, mushafId, type, verseNumber]);
 
-  const handleRemoveBookmark = useCallback(
-    async (bookmarkId: string): Promise<boolean> => {
-      try {
-        await deleteBookmarkById(bookmarkId);
-        return true;
-      } catch (err: unknown) {
-        showToast(
-          isBookmarkSyncError(err) ? 'common:error.bookmark-sync' : 'common:error.general',
-          ToastStatus.Error,
-        );
-        return false;
-      }
-    },
-    [showToast],
-  );
+  const baseRemoveBookmark = useCallback(async (bookmarkId: string): Promise<void> => {
+    await deleteBookmarkById(bookmarkId);
+  }, []);
 
   return {
     showToast,
+    showErrorToast,
     invalidateBookmarksList,
-    handleAddBookmark,
-    handleRemoveBookmark,
+    addBookmark: baseAddBookmark,
+    removeBookmark: baseRemoveBookmark,
     isLoggedIn,
   };
 };

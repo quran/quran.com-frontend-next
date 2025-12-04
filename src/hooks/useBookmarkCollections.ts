@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR, { useSWRConfig } from 'swr';
@@ -30,19 +30,11 @@ interface UseBookmarkCollectionsProps {
 
 interface UseBookmarkCollectionsReturn {
   collectionIds: string[];
-  isLoading: boolean;
   addToCollection: (collectionId: string) => Promise<boolean>;
   removeFromCollection: (collectionId: string) => Promise<boolean>;
   mutateBookmarkCollections: (newIds?: string[]) => void;
 }
 
-/**
- * Custom hook for managing which collections a bookmark belongs to
- * Handles adding/removing bookmarks from collections with proper cache invalidation
- *
- * @param {UseBookmarkCollectionsProps} props - Hook configuration
- * @returns {UseBookmarkCollectionsReturn} Bookmark collection state and management functions
- */
 const useBookmarkCollections = ({
   mushafId,
   key,
@@ -54,21 +46,13 @@ const useBookmarkCollections = ({
   const { mutate: globalMutate } = useSWRConfig();
   const toast = useToast();
   const { t } = useTranslation('common');
+  const isPendingRef = useRef(false);
 
-  const {
-    data: collectionIds,
-    isValidating,
-    mutate: mutateBookmarkCollections,
-  } = useSWR<string[]>(
+  const { data: collectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
-    async () => {
-      const response = await getBookmarkCollections(mushafId, key, type, verseNumber);
-      return response;
-    },
+    async () => getBookmarkCollections(mushafId, key, type, verseNumber),
     mutatingFetcherConfig,
   );
-
-  const isLoading = isValidating && !collectionIds;
 
   const showErrorToast = useCallback(
     (err: unknown) => {
@@ -79,79 +63,95 @@ const useBookmarkCollections = ({
     [toast, t],
   );
 
-  /**
-   * Invalidate all relevant caches after collection operations
-   */
   const invalidateCaches = useCallback(() => {
-    // Invalidate single bookmark cache
     globalMutate(makeBookmarkUrl(mushafId, key, type, verseNumber));
-
-    // Invalidate bulk bookmark cache if available
-    if (bookmarksRangeUrl) {
-      globalMutate(bookmarksRangeUrl);
-    }
-
-    // Invalidate bookmarks list
+    if (bookmarksRangeUrl) globalMutate(bookmarksRangeUrl);
     globalMutate(makeBookmarksUrl(mushafId));
-
-    // Invalidate collections list
     globalMutate(makeCollectionsUrl({ type }));
   }, [globalMutate, mushafId, key, type, verseNumber, bookmarksRangeUrl]);
 
   const addToCollection = useCallback(
     async (collectionId: string): Promise<boolean> => {
+      if (isPendingRef.current) return false;
+      isPendingRef.current = true;
       try {
-        await addCollectionBookmark({
-          collectionId,
-          key,
-          mushafId,
-          type,
-          verseNumber,
-        });
-        mutateBookmarkCollections();
+        await mutateBookmarkCollections(
+          async (current) => {
+            await addCollectionBookmark({ collectionId, key, mushafId, type, verseNumber });
+            return [...(current || []), collectionId];
+          },
+          {
+            optimisticData: [...(collectionIds || []), collectionId],
+            rollbackOnError: true,
+            revalidate: false,
+          },
+        );
         invalidateCaches();
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
         return false;
+      } finally {
+        isPendingRef.current = false;
       }
     },
-    [key, mushafId, type, verseNumber, mutateBookmarkCollections, invalidateCaches, showErrorToast],
+    [
+      collectionIds,
+      key,
+      mushafId,
+      type,
+      verseNumber,
+      mutateBookmarkCollections,
+      invalidateCaches,
+      showErrorToast,
+    ],
   );
 
   const removeFromCollection = useCallback(
     async (collectionId: string): Promise<boolean> => {
+      if (isPendingRef.current) return false;
+      isPendingRef.current = true;
       try {
-        await deleteCollectionBookmarkByKey({
-          collectionId,
-          key,
-          mushafId,
-          type,
-          verseNumber,
-        });
-        mutateBookmarkCollections();
+        await mutateBookmarkCollections(
+          async (current) => {
+            await deleteCollectionBookmarkByKey({ collectionId, key, mushafId, type, verseNumber });
+            return (current || []).filter((id) => id !== collectionId);
+          },
+          {
+            optimisticData: (collectionIds || []).filter((id) => id !== collectionId),
+            rollbackOnError: true,
+            revalidate: false,
+          },
+        );
         invalidateCaches();
         return true;
       } catch (err: unknown) {
         showErrorToast(err);
         return false;
+      } finally {
+        isPendingRef.current = false;
       }
     },
-    [key, mushafId, type, verseNumber, mutateBookmarkCollections, invalidateCaches, showErrorToast],
+    [
+      collectionIds,
+      key,
+      mushafId,
+      type,
+      verseNumber,
+      mutateBookmarkCollections,
+      invalidateCaches,
+      showErrorToast,
+    ],
   );
 
   return {
     collectionIds: collectionIds || [],
-    isLoading,
     addToCollection,
     removeFromCollection,
-    mutateBookmarkCollections: (newIds?: string[]) => {
-      if (newIds !== undefined) {
-        mutateBookmarkCollections(newIds, { revalidate: false });
-      } else {
-        mutateBookmarkCollections();
-      }
-    },
+    mutateBookmarkCollections: (newIds?: string[]) =>
+      newIds !== undefined
+        ? mutateBookmarkCollections(newIds, { revalidate: false })
+        : mutateBookmarkCollections(),
   };
 };
 
