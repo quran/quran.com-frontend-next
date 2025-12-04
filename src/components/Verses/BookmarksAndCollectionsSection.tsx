@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import CollectionList from '../Collection/CollectionList/CollectionList';
 
+import BookmarkedPagesList from './BookmarkedPagesList';
 import BookmarkedVersesList from './BookmarkedVersesList';
 import styles from './BookmarksAndQuickLinks.module.scss';
 import RecentReadingSessionsList from './RecentReadingSessionsList';
@@ -16,6 +17,7 @@ import { logValueChange } from '@/utils/eventLogger';
 enum View {
   ReadingSessions = 'reading_sessions',
   Bookmarks = 'bookmarks',
+  PageBookmarks = 'page_bookmarks',
   Collections = 'collections',
 }
 
@@ -37,6 +39,7 @@ const BookmarksAndCollectionsSection: React.FC<Props> = ({ isHomepage = false })
       tabsList.push({ title: t('recently-read'), value: View.ReadingSessions });
     }
     tabsList.push({ title: t('tab.bookmarks'), value: View.Bookmarks });
+    tabsList.push({ title: t('tab.page-bookmarks'), value: View.PageBookmarks });
 
     if (isLoggedIn) {
       tabsList.push({ title: t('collection:collections'), value: View.Collections });
@@ -58,6 +61,7 @@ const BookmarksAndCollectionsSection: React.FC<Props> = ({ isHomepage = false })
       <div className={classNames(styles.contentContainer, styles.tabsContainer)}>
         {selectedTab === View.ReadingSessions && <RecentReadingSessionsList />}
         {selectedTab === View.Bookmarks && <BookmarkedVersesList />}
+        {selectedTab === View.PageBookmarks && <BookmarkedPagesList />}
         {selectedTab === View.Collections && <CollectionList />}
       </div>
     </div>

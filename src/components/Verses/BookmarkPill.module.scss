@@ -22,6 +22,11 @@
   background-color: transparent;
   color: var(--color-text-faded);
   align-items: center;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
   & > span {
     display: flex;
     align-items: center;
@@ -31,4 +36,8 @@
     width: var(--spacing-medium);
     height: var(--spacing-medium);
   }
+}
+
+.deleting {
+  opacity: 0.5;
 }
