@@ -64,7 +64,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
 
   return (
     <div>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="courses-list">
         {courses.map((course) => {
           const { slug, id, continueFromLesson, title, isCompleted, thumbnail } = course;
           const navigateTo = continueFromLesson
