@@ -57,7 +57,8 @@
   flex: 0 0 auto;
   inline-size: clamp(216px, 54vw, 312px);
   @include breakpoints.smallerThanTablet {
-    inline-size: clamp(100px, 42vw, 140px);
+    // Show just a small peek of the 3rd card on mobile
+    inline-size: calc((100% - (var(--spacing-medium) * 2)) / 2.1);
   }
 }
 
