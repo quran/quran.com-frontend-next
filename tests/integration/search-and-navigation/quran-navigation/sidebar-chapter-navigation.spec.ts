@@ -397,25 +397,51 @@ test.describe('Navigation Functionality', () => {
 
       const sidebar = page.getByTestId('sidebar-navigation');
 
+      // Navigate to Al-Baqarah and wait for URL and chapter to fully load
       await Promise.all([
         page.waitForURL(/\/2\?startingVerse=1$/),
         sidebar.getByText('Al-Baqarah', { exact: true }).click(),
       ]);
       await expect(page).toHaveURL(/\/2\?startingVerse=1$/);
 
-      // Second click to close the drawer because it's already open
-      await sidebar.getByText('Al-Baqarah', { exact: true }).click();
+      // Wait for the verse list to be fully loaded and rendered
+      const verseList = page.getByTestId('verse-list');
+      await verseList.waitFor({ state: 'visible' });
 
+      // Select verse 2
+      const verseTwo = verseList.getByText('2', { exact: true });
+      await verseTwo.waitFor({ state: 'visible' });
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=2$/), verseTwo.click()]);
+
+      // Give the UI time to settle and close the drawer
+      await page.waitForTimeout(500);
+
+      // Verify the sidebar is detached (drawer closed automatically on mobile after selection)
       await expect(page.getByTestId('sidebar-navigation')).not.toBeAttached();
+      await page.waitForTimeout(300);
 
+      // Reopen the sidebar
       await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
       const reopenedSidebar = page.getByTestId('sidebar-navigation');
-      await expect(reopenedSidebar).toBeVisible();
+      await reopenedSidebar.waitFor({ state: 'visible' });
 
+      // Give the drawer animation time to complete
+      await page.waitForTimeout(300);
+
+      // Click on the verse button to switch to verse view
       await page.getByTestId('verse-button').click();
-      const verseOne = page.getByTestId('verse-list').getByText('1', { exact: true });
-      await verseOne.waitFor({ state: 'visible' });
-      await expect(verseOne).toHaveClass(/selectedItem/);
+
+      // Wait for the verse list to be fully rendered after button click
+      const reopenedVerseList = page.getByTestId('verse-list');
+      await reopenedVerseList.waitFor({ state: 'visible' });
+
+      // Wait for verse items to be in the DOM
+      await reopenedVerseList.getByText('1', { exact: true }).waitFor({ state: 'visible' });
+
+      // Now verify verse 2 is selected
+      const verseTwoAfterReopen = reopenedVerseList.getByText('2', { exact: true });
+      await verseTwoAfterReopen.waitFor({ state: 'visible' });
+      await expect(verseTwoAfterReopen).toHaveClass(/selectedItem/);
     },
   );
 

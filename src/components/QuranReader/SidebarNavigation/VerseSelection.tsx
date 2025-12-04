@@ -14,7 +14,6 @@ import {
   selectLastReadVerseKey,
   setLastReadVerse,
 } from '@/redux/slices/QuranReader/readingTracker';
-import NavigationItemType from '@/types/NavigationItemType';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 type Props = {
@@ -44,7 +43,6 @@ const VerseSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
 
   // Custom handler for chapter selection that doesn't navigate immediately
   const handleChapterSelect = (chapterId: string) => {
-    const isSameChapter = chapterId === selectedChapterId;
     setSelectedChapterId(chapterId);
 
     // Update the last read verse to the first verse of the selected chapter
@@ -60,25 +58,12 @@ const VerseSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
       }),
     );
 
-    // Close the drawer if on mobile and we selected twice the same chapter
-    const notifyAfterNavigation = () => {
-      if (isSameChapter) {
-        onAfterNavigationItemRouted?.(chapterId, NavigationItemType.CHAPTER);
-      }
-    };
-
-    // Navigate to the selected chapter's first verse
+    // Navigate to the relevant verse (defaults to 1 when needed)
     const href = getChapterWithStartingVerseUrl(verseKey);
 
-    router
-      .push(href, undefined, { shallow: false })
-      .then(() => {
-        notifyAfterNavigation();
-      })
-      .catch(() => {
-        notifyAfterNavigation();
-        window.location.href = href;
-      });
+    router.push(href, undefined, { shallow: false }).catch(() => {
+      window.location.href = href;
+    });
   };
 
   return (
