@@ -1,5 +1,4 @@
-@use 'src/styles/utility';
-@use 'src/styles/breakpoints';
+@use 'src/styles/mixins/_flexbox.module';
 
 .container {
   margin-block-start: 0;
@@ -8,7 +7,7 @@
   background-color: var(--color-background-elevated-new);
   padding-inline: var(--spacing-small-px);
   padding-block: var(--spacing-xsmall-px);
-  @include utility.row-between;
+  @include flexbox.row-between;
   gap: var(--spacing-small-px);
 }
 
@@ -27,7 +26,7 @@
   font-weight: var(--font-weight-medium);
   border-radius: var(--border-radius-medium-px);
   text-decoration: none;
-  @include utility.row-center;
+  @include flexbox.row-center;
   gap: var(--spacing-xxsmall-px);
 }
 

@@ -1,14 +1,15 @@
 @use 'src/styles/utility';
+@use 'src/styles/mixins/_flexbox.module';
 @use 'src/styles/breakpoints';
 
 .itemsContainer {
-  @include utility.row-between;
+  @include flexbox.row-between;
   height: 100%;
   background-color: var(--color-background-elevated);
 }
 
 .bannerContainerTop {
-  @include utility.row-center;
+  @include flexbox.row-center;
   @include breakpoints.tablet {
     display: none;
   }
@@ -17,7 +18,7 @@
 .bannerContainerCenter {
   display: none;
   @include breakpoints.tablet {
-    @include utility.row-center;
+    @include flexbox.row-center;
   }
 }
 
@@ -26,7 +27,7 @@
 }
 
 .leftCTA {
-  @include utility.row-start;
+  @include flexbox.row-start;
   margin-inline-start: var(--spacing-medium);
   @include breakpoints.tablet {
     margin-inline-start: var(--spacing-mega);
@@ -34,7 +35,7 @@
 }
 
 .rightCTA {
-  @include utility.row-start;
+  @include flexbox.row-start;
   margin-inline-end: var(--spacing-medium);
   > button {
     margin-inline-start: var(--spacing-micro);
