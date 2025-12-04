@@ -94,6 +94,7 @@ const ProfileAvatarButton = () => {
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
             shouldFlipOnRTL={false}
+            data-testid="profile-avatar-button"
           >
             <IconPerson />
           </Button>
