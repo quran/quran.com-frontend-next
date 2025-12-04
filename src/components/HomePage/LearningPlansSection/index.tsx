@@ -1,6 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,10 +8,7 @@ import Loading from './Loading';
 
 import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
-import NewLabel from '@/dls/Badge/NewLabel';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import ArrowIcon from '@/public/icons/arrow.svg';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
@@ -44,13 +40,6 @@ const LearningPlansSection = () => {
     });
   };
 
-  const onStartOrContinueLearningClicked = (isCompleted: boolean, slug: string) => {
-    logButtonClick('homepage_learning_plans_start_or_continue', {
-      slug,
-      enrolledButNotCompleted: isCompleted,
-    });
-  };
-
   return (
     <>
       <div className={styles.header}>
@@ -73,16 +62,17 @@ const LearningPlansSection = () => {
         render={(data: CoursesResponse) => {
           const sortedCourses = [...data.data].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(
-            (c) => typeof c.isCompleted === 'undefined',
+            (course) => typeof course.isCompleted === 'undefined',
           );
 
           return (
             <div className={styles.cardsContainer}>
               {sortedCourses.map((course, index) => {
-                const { isCompleted } = course;
                 const courseUrl = getCourseNavigationUrl(course.slug);
+                const { isCompleted } = course;
                 const userHasEnrolled = typeof isCompleted !== 'undefined';
                 const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                const hasCompletedCourse = isCompleted === true;
                 const isFirstNonEnrolledCourse =
                   !userHasEnrolled && index === firstNonEnrolledIndex;
 
@@ -93,58 +83,24 @@ const LearningPlansSection = () => {
                       link={courseUrl}
                       onClick={() => onLearningPlanCardClicked(course.slug)}
                     >
-                      <div className={styles.cardWrapper}>
+                      <div className={styles.thumbnailWrapper}>
                         <Image
-                          width={150}
-                          height={100}
                           src={course.thumbnail}
                           alt={course.title}
+                          fill
                           className={styles.thumbnail}
+                          sizes="(max-width: 768px) 65vw, 54vw"
                         />
-                        <div className={styles.cardContent}>
-                          <div className={styles.learningPlanTitle}>
-                            <span>{course.title}</span>
-                            {isFirstNonEnrolledCourse && <NewLabel />}
-                          </div>
-
-                          <div
-                            className={classNames(styles.learningPlanStatus, {
-                              [styles.enrolledPlanStatus]: userHasEnrolled,
-                            })}
-                          >
-                            {enrolledButNotCompleted && (
-                              <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
-                            )}
-                            {userHasEnrolled && isCompleted && (
-                              <div className={styles.completedPill}>{t('learn:completed')}</div>
-                            )}
-                            <Link
-                              className={styles.startLearningLink}
-                              variant={LinkVariant.Highlight}
-                              href={courseUrl}
-                              onClick={() =>
-                                onStartOrContinueLearningClicked(
-                                  enrolledButNotCompleted,
-                                  course.slug,
-                                )
-                              }
-                            >
-                              <div className={styles.startLearningLinkContent}>
-                                <span>
-                                  {enrolledButNotCompleted
-                                    ? t('learn:continue-learning')
-                                    : t('learn:start-learning')}
-                                </span>
-                                <IconContainer
-                                  size={IconSize.Xsmall}
-                                  icon={<ArrowIcon />}
-                                  shouldForceSetColors={false}
-                                  className={styles.startLearningLinkIcon}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                        </div>
+                        {hasCompletedCourse ? (
+                          <div className={styles.completedPill}>{t('learn:completed')}</div>
+                        ) : (
+                          enrolledButNotCompleted && (
+                            <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                          )
+                        )}
+                        {isFirstNonEnrolledCourse && (
+                          <div className={styles.newPill}>{t('common:new')}</div>
+                        )}
                       </div>
                     </Card>
                   </div>

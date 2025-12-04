@@ -11,20 +11,8 @@ const Loading = () => (
     {Array.from({ length: 3 }, (_, index) => (
       <div key={index} className={styles.learnPlanCard}>
         <Card className={styles.card}>
-          <div className={styles.cardWrapper}>
-            <Skeleton className={`${styles.thumbnail} ${styles.thumbnailSkeleton}`} isSquared />
-
-            <div className={styles.cardContent}>
-              <div className={styles.learningPlanTitle}>
-                <Skeleton className={styles.titleSkeleton} isSquared />
-              </div>
-
-              <div className={`${styles.learningPlanStatus} ${styles.enrolledPlanStatus}`}>
-                {/* Add a small pill skeleton to match enrolled/completed state */}
-                <Skeleton className={styles.pillSkeleton} isSquared />
-                <Skeleton className={styles.buttonSkeleton} isSquared />
-              </div>
-            </div>
+          <div className={styles.thumbnailWrapper}>
+            <Skeleton className={styles.thumbnailSkeleton} isSquared />
           </div>
         </Card>
       </div>
