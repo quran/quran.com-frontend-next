@@ -26,7 +26,7 @@ type CardProps = {
   shouldShowFullTitle?: boolean;
   ariaLabel?: string;
   tooltip?: string;
-  shouldFastLoadImg?: boolean;
+  shouldSkipImageOptimization?: boolean;
 };
 
 const Card = ({
@@ -43,7 +43,7 @@ const Card = ({
   shouldShowFullTitle = false,
   ariaLabel,
   tooltip,
-  shouldFastLoadImg = false,
+  shouldSkipImageOptimization = false,
 }: CardProps) => {
   return (
     <div
@@ -65,7 +65,7 @@ const Card = ({
             className={styles.img}
             src={imgSrc}
             layout="fill"
-            unoptimized={shouldFastLoadImg}
+            unoptimized={shouldSkipImageOptimization}
           />
         )}
 
