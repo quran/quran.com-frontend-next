@@ -12,10 +12,15 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { selectAudioPlayerState, setRepeatSettings } from '@/redux/slices/AudioPlayer/state';
-import { JsonNumberString, RepeatSettingsPreference } from '@/redux/types/AudioState';
+import {
+  JsonNumberString,
+  RepeatSettingsPreference,
+  isJsonNumberString,
+} from '@/redux/types/AudioState';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -56,8 +61,8 @@ const normalizeRepeatValue = (
   if (value === null || value === undefined) return fallback;
   if (value === Infinity || value === -1) return Infinity;
   if (typeof value === 'string') {
-    const parsedValue = Number(value);
-    return Number.isNaN(parsedValue) ? fallback : parsedValue;
+    if (!isJsonNumberString(value)) return fallback;
+    return Number(value);
   }
   return value;
 };
@@ -218,21 +223,24 @@ const getRepeatCycles = ({
   persistedRepeatRange,
   persistedRepeatEachVerse,
   persistedDelayMultiplier,
-}: RepeatCycleInput) => ({
-  repeatRange: normalizeRepeatValue(
-    repeatRangeFromActor,
-    normalizeRepeatValue(persistedRepeatRange, 2),
-  ),
-  repeatEachVerse: normalizeRepeatValue(
-    repeatEachVerseFromActor,
-    normalizeRepeatValue(persistedRepeatEachVerse, 2),
-  ),
-  delayMultiplier: normalizeRepeatValue(
-    delayMultiplierFromActor,
-    normalizeRepeatValue(persistedDelayMultiplier, 1),
-  ),
-});
+}: RepeatCycleInput) => {
+  // Priority order: actor value -> persisted value -> hardcoded fallback.
+  const fallbackRepeatRange = normalizeRepeatValue(persistedRepeatRange, 2);
+  const fallbackRepeatEachVerse = normalizeRepeatValue(persistedRepeatEachVerse, 2);
+  const fallbackDelayMultiplier = normalizeRepeatValue(persistedDelayMultiplier, 1);
 
+  return {
+    repeatRange: normalizeRepeatValue(repeatRangeFromActor, fallbackRepeatRange),
+    repeatEachVerse: normalizeRepeatValue(repeatEachVerseFromActor, fallbackRepeatEachVerse),
+    delayMultiplier: normalizeRepeatValue(delayMultiplierFromActor, fallbackDelayMultiplier),
+  };
+};
+
+/**
+ * Magic number used to represent "infinity" for repeat settings in the backend API.
+ * The backend expects -1 to mean "repeat indefinitely" (e.g., repeatRange, repeatEachVerse).
+ * Keep this in sync with backend expectations.
+ */
 const INFINITY_VALUE = -1;
 
 type RepeatSettingsLike = {
@@ -243,26 +251,31 @@ type RepeatSettingsLike = {
   to?: string;
 };
 
-const serializeRepeatNumericValue = (
+const toRepeatNumericValue = (
   value: number | JsonNumberString | null | undefined,
 ): number | null | undefined => {
+  // Converts repeat numeric values into a form safe for persistence/API calls.
+  // Infinity/-1 are encoded as INFINITY_VALUE (-1) to match existing storage/API expectations.
   if (value === undefined) return undefined;
   if (value === null) return null;
+  if (value === INFINITY_VALUE || value === Infinity) return INFINITY_VALUE;
   if (typeof value === 'number') {
     return Number.isFinite(value) ? value : INFINITY_VALUE;
   }
   // If it's already a number string, convert it
   if (typeof value === 'string') {
+    if (!isJsonNumberString(value)) return null;
     const parsed = Number(value);
-    return Number.isNaN(parsed) ? null : parsed;
+    if (Number.isNaN(parsed)) return null;
+    return Number.isFinite(parsed) ? parsed : INFINITY_VALUE;
   }
   return null;
 };
 
 const serializeRepeatSettings = (settings: RepeatSettingsLike): RepeatSettingsPreference => {
-  const repeatRange = serializeRepeatNumericValue(settings.repeatRange);
-  const repeatEachVerse = serializeRepeatNumericValue(settings.repeatEachVerse);
-  const delayMultiplier = serializeRepeatNumericValue(settings.delayMultiplier);
+  const repeatRange = toRepeatNumericValue(settings.repeatRange);
+  const repeatEachVerse = toRepeatNumericValue(settings.repeatEachVerse);
+  const delayMultiplier = toRepeatNumericValue(settings.delayMultiplier);
 
   return {
     from: settings.from,
@@ -281,24 +294,9 @@ const serializeOptionalRepeatSettings = (
 const prepareRepeatSettingsForApi = (
   settings: RepeatSettingsPreference,
 ): RepeatSettingsPreference => {
-  const toApiValue = (value?: number | JsonNumberString | null): number | null | undefined => {
-    if (value === undefined) return undefined;
-    if (value === null) return null;
-    // Handle Infinity representation for the API (-1 for infinity)
-    if (value === INFINITY_VALUE || value === Infinity) {
-      return -1;
-    }
-    if (typeof value === 'string') {
-      const parsed = Number(value);
-      return Number.isNaN(parsed) ? null : parsed;
-    }
-    if (!Number.isFinite(value)) return null;
-    return value;
-  };
-
-  const repeatRange = toApiValue(settings.repeatRange);
-  const repeatEachVerse = toApiValue(settings.repeatEachVerse);
-  const delayMultiplier = toApiValue(settings.delayMultiplier);
+  const repeatRange = toRepeatNumericValue(settings.repeatRange);
+  const repeatEachVerse = toRepeatNumericValue(settings.repeatEachVerse);
+  const delayMultiplier = toRepeatNumericValue(settings.delayMultiplier);
 
   return {
     from: settings.from,
@@ -368,6 +366,7 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
+  const toast = useToast();
 
   const audioService = useContext(AudioPlayerMachineContext);
   const repeatActor = useXstateSelector(audioService, (state) => state.context.repeatActor);
@@ -391,6 +390,38 @@ const RepeatAudioModal = ({
   const persistedDelayMultiplier = persistedRepeatSettings?.delayMultiplier;
   const persistedFromVerseKey = persistedRepeatSettings?.from;
   const persistedToVerseKey = persistedRepeatSettings?.to;
+  const actorRepeatSources = useMemo(
+    () => ({
+      repeatRangeFromActor,
+      repeatEachVerseFromActor,
+      delayMultiplierFromActor,
+      fromVerseNumberFromActor,
+      toVerseNumberFromActor,
+    }),
+    [
+      repeatRangeFromActor,
+      repeatEachVerseFromActor,
+      delayMultiplierFromActor,
+      fromVerseNumberFromActor,
+      toVerseNumberFromActor,
+    ],
+  );
+  const persistedRepeatSources = useMemo(
+    () => ({
+      persistedRepeatRange,
+      persistedRepeatEachVerse,
+      persistedDelayMultiplier,
+      persistedFromVerseKey,
+      persistedToVerseKey,
+    }),
+    [
+      persistedRepeatRange,
+      persistedRepeatEachVerse,
+      persistedDelayMultiplier,
+      persistedFromVerseKey,
+      persistedToVerseKey,
+    ],
+  );
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
@@ -431,33 +462,17 @@ const RepeatAudioModal = ({
         lastVerseKeyInChapter: lastVerseKeyInThisChapter,
         selectedVerseKey,
         audioSurah,
-        fromVerseNumberFromActor,
-        toVerseNumberFromActor,
-        persistedFromVerseKey,
-        persistedToVerseKey,
-        repeatRangeFromActor,
-        repeatEachVerseFromActor,
-        delayMultiplierFromActor,
-        persistedRepeatRange,
-        persistedRepeatEachVerse,
-        persistedDelayMultiplier,
+        ...actorRepeatSources,
+        ...persistedRepeatSources,
       }),
     [
       audioSurah,
       chapterNumber,
       firstVerseKeyInThisChapter,
-      fromVerseNumberFromActor,
-      delayMultiplierFromActor,
       lastVerseKeyInThisChapter,
-      persistedDelayMultiplier,
-      persistedFromVerseKey,
-      persistedRepeatEachVerse,
-      persistedRepeatRange,
-      persistedToVerseKey,
-      repeatEachVerseFromActor,
-      repeatRangeFromActor,
+      actorRepeatSources,
+      persistedRepeatSources,
       selectedVerseKey,
-      toVerseNumberFromActor,
     ],
   );
 
@@ -474,6 +489,7 @@ const RepeatAudioModal = ({
     const normalizedSettings = { ...settings, ...normalizedRange };
     const { from, to } = normalizedSettings;
     if (!from || !to) {
+      toast(t('error.ranges-no-value'), { status: ToastStatus.Warning });
       return;
     }
 
@@ -482,6 +498,7 @@ const RepeatAudioModal = ({
     const surahNumber = getChapterNumberFromKey(from);
 
     if (Number.isNaN(fromVerseNumber) || Number.isNaN(toVerseNumber) || Number.isNaN(surahNumber)) {
+      toast(t('error.general'), { status: ToastStatus.Warning });
       return;
     }
 
@@ -504,7 +521,6 @@ const RepeatAudioModal = ({
       ...verseRepetition,
       ...normalizedRange,
     };
-    setVerseRepetition(normalizedSettings);
     const serializableSettings = serializeRepeatSettings(normalizedSettings);
     const previousRepeatSettings = serializeOptionalRepeatSettings(persistedRepeatSettings);
     onSettingsChange(
@@ -537,9 +553,10 @@ const RepeatAudioModal = ({
     setRepetitionMode(mode);
   };
 
-  const onSingleVerseChange = (verseKey) => {
+  const onSingleVerseChange = (verseKey: string) => {
     logValueChange('repeat_single_verse', verseRepetition.repeatRange, verseKey);
-    setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey });
+    const normalizedRange = normalizeVerseRange(verseKey, verseKey);
+    setVerseRepetition({ ...verseRepetition, ...normalizedRange });
   };
 
   const onRangeChange = (range) => {
@@ -553,7 +570,6 @@ const RepeatAudioModal = ({
     const normalizedRange = normalizeVerseRange(candidateFrom, candidateTo);
     setVerseRepetition({
       ...verseRepetition,
-      ...range,
       ...normalizedRange,
     });
   };

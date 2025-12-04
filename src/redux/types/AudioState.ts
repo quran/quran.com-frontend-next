@@ -1,6 +1,20 @@
 export type JsonNumberString = `${number}`;
 
 /**
+ * Type guard to ensure a value is a finite numeric string that can round-trip through Number().
+ * Helps prevent persisting invalid numeric strings (e.g. "123abc" or "1.2.3").
+ *
+ * @returns {value is JsonNumberString}
+ */
+export const isJsonNumberString = (value: unknown): value is JsonNumberString => {
+  if (typeof value !== 'string') return false;
+  const trimmedValue = value.trim();
+  if (trimmedValue.length === 0) return false;
+  const parsed = Number(trimmedValue);
+  return Number.isFinite(parsed);
+};
+
+/**
  * Represents the user's audio repeat settings preferences.
  *
  * This interface is used to store repeat settings in Redux state and is subject to serialization/deserialization
@@ -55,5 +69,6 @@ export type AudioState = {
   enableAutoScrolling: boolean;
   isDownloadingAudio: boolean;
   showTooltipWhenPlayingAudio: boolean;
+  // Optional: may be omitted from initial state objects unless a default is required.
   repeatSettings?: RepeatSettingsPreference;
 };
