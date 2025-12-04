@@ -85,6 +85,18 @@ If you are interested to help out, please look at issues on the GitHub repo. Thi
 
 Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
 
+### Pre-PR AI Code Review
+
+Before opening a PR, run an AI code review to catch issues early.
+
+| IDE | Command |
+|-----|---------|
+| **VS Code** | Open Chat → Type `/review` |
+| **Cursor** | Open Chat (Cmd+L) → Type `/review` or use Command Palette → "Run Task" → "Pre-PR Review" |
+| **Windsurf** | Open Cascade → Type `/review` or use Command Palette → "Run Task" → "Pre-PR Review" |
+
+All IDEs also support: **Command Palette** (`Cmd+Shift+P`) → **Tasks: Run Task** → **Pre-PR Review**
+
 ### Community
 
 <a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com Discord community »</strong></a>

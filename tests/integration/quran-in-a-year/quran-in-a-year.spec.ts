@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
@@ -6,25 +7,95 @@ let homepage: Homepage;
 
 test.beforeEach(async ({ page, context }) => {
   homepage = new Homepage(page, context);
-  await homepage.goTo('/calendar');
 });
 
-test(
-  'Selecting a week should scroll to the top of the page',
-  { tag: ['@quran-in-a-year'] },
-  async ({ page }) => {
-    // Scroll to the bottom of the page
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+test.describe('@quran-in-a-year', () => {
+  // TODO: Unskip when PR about QF-2769 is merged
+  test.skip(
+    'Home page Quran in a year section copies spaced Arabic text',
+    { tag: ['@quran-in-a-year'] },
+    async ({ page }) => {
+      await homepage.goTo('/');
 
-    // Click on a week button
-    const weekButton = page.getByLabel('Week 1 of Shawwal');
-    await weekButton.click();
+      const section = page.getByTestId('quran-in-a-year-section');
+      await expect(section).toBeVisible();
 
-    // Wait for the scroll to complete
-    await page.waitForTimeout(500);
+      const copiedText = await page.evaluate(async () => {
+        const sectionElement = document.querySelector('[data-testid="quran-in-a-year-section"]');
+        if (!sectionElement) {
+          return null;
+        }
+        const firstWordElement = sectionElement.querySelector('[data-word-index]');
+        if (!firstWordElement || !firstWordElement.parentElement) {
+          return null;
+        }
 
-    // Check if the page has scrolled to the top
-    const scrollPosition = await page.evaluate(() => window.scrollY);
-    expect(scrollPosition).toBeLessThan(100);
-  },
-);
+        const verseContainer = firstWordElement.parentElement;
+        const selection = window.getSelection();
+        if (!selection) {
+          return null;
+        }
+
+        selection.removeAllRanges();
+        const range = document.createRange();
+        range.selectNodeContents(verseContainer);
+        selection.addRange(range);
+
+        if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') {
+          return null;
+        }
+
+        const originalWriteText = navigator.clipboard.writeText.bind(navigator.clipboard);
+        let capturedText: string | null = null;
+
+        navigator.clipboard.writeText = (text: string) => {
+          capturedText = text;
+          return Promise.resolve();
+        };
+
+        document.execCommand('copy');
+
+        return new Promise<string | null>((resolve) => {
+          setTimeout(() => {
+            navigator.clipboard.writeText = originalWriteText;
+            resolve(capturedText);
+          }, 50);
+        });
+      });
+
+      expect(copiedText).not.toBeNull();
+      // Should contain at least one space between words
+      expect(copiedText?.includes(' ')).toBe(true);
+    },
+  );
+
+  test(
+    'Selecting a week should scroll to the top of the page',
+    { tag: ['@quran-in-a-year'] },
+    async ({ page }) => {
+      await homepage.goTo('/calendar');
+
+      // Ensure week button exists and is visible
+      const weekButton = page.getByLabel('Week 1 of Shawwal');
+      await expect(weekButton).toBeVisible();
+
+      // Scroll to the bottom of the page
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+      // Verify we're actually at the bottom
+      const scrolledToBottom = await page.evaluate(() => {
+        return window.scrollY + window.innerHeight >= document.body.scrollHeight - 100;
+      });
+      expect(scrolledToBottom).toBe(true);
+
+      // Click on a week button
+      await weekButton.click();
+
+      await expect
+        .poll(async () => page.evaluate(() => window.scrollY), {
+          timeout: 5000,
+        })
+        .toBeLessThan(100);
+    },
+  );
+});

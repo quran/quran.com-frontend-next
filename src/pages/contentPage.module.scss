@@ -1,12 +1,12 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .contentPage {
   margin: auto;
   @include breakpoints.desktop {
-    width: 65%;
+    inline-size: 65%;
   }
   @include breakpoints.smallerThanDesktop {
-    width: 90%;
+    inline-size: 90%;
   }
   * {
     line-height: calc(1.3 * var(--line-height-xlarge));
@@ -69,7 +69,8 @@
       font-size: var(--font-size-large);
     }
   }
-  b {
+  b,
+  strong {
     font-weight: var(--font-weight-bold);
   }
 }
@@ -135,14 +136,14 @@
 }
 
 .imageCaption {
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
   font-size: var(--font-size-small);
   text-align: center;
 }
 
 .contentImage {
-  max-width: 100%;
-  height: auto;
+  max-inline-size: 100%;
+  block-size: auto;
 }
 
 .decimalList {
@@ -155,8 +156,8 @@
 
 .spacer {
   display: block;
-  height: var(--spacing-medium);
-  width: 100%;
+  block-size: var(--spacing-medium);
+  inline-size: 100%;
 }
 
 .centeredText {

@@ -3,7 +3,7 @@
   "alphabetical": "ترتيب أبجدي",
   "back-to-collection-list": "العودة إلى قائمة المجموعات",
   "collapse-all": "إخفاء جميع الآيات",
-  "collection-list-empty": "قائمة المجموعات فارغة. لم تُنشئ أي مجموعة بعد.",
+  "collection-list-empty": "قائمة المجموعات فارغة. لم تنشئ أي مجموعة بعد.",
   "collections": "المجموعات",
   "delete-bookmark": {
     "subtitle": "هل أنت متأكد أنك تريد حذف {{bookmarkName}} من مجموعة {{collectionName}} ؟",
@@ -17,7 +17,7 @@
   "expand-all": "عرض جميع الآيات",
   "go-to-ayah": "اذهب إلى الآية",
   "load-more": "تحميل المزيد",
-  "recently-added": "أُضيفت حديثًا.",
+  "recently-added": "أضيفت حديثًا.",
   "recently-updated": "تم تحديثه مؤخرا",
   "verse-key": "رقم السورة والآية"
 }

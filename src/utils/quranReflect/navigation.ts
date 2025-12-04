@@ -27,8 +27,6 @@ export const getQuranReflectTagUrl = (tag: string) =>
 
 export const getQRNavigationUrl = () => `${API_HOST}`;
 
-export const getLearningPlanBannerUrl = (slug: string): string => `/learning-plans/${slug}`;
-
 /**
  *  Get the link to a reflection group or page.
  * If it's a page, return the subdomain link.

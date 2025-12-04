@@ -1,5 +1,5 @@
 {
-  "change": "غَيِّر",
+  "change": "تغيير",
   "curated-station": {
     "juz-amma": {
       "description": "استمع إلى الجزء الأخير من القرآن الكريم",
@@ -15,7 +15,7 @@
     },
     "yaseen-alwaqiah-al-mulk": {
       "description": "السور لقرّاء مختارين",
-      "title": "سورة يس والواقعة والملك"
+      "title": "يس والواقعة والملك"
     }
   },
   "curated-stations": "المحطات المُختارة",

@@ -173,7 +173,7 @@ const RepeatAudioModal = ({
           <Modal.Title>{t('audio.player.repeat-settings')}</Modal.Title>
           <Modal.Subtitle>{`${t('surah')} ${chapterName}`}</Modal.Subtitle>
         </Modal.Header>
-        <div>
+        <div data-testid="repeat-audio-modal">
           <SelectRepetitionMode
             repetitionMode={repetitionMode}
             rangeEndVerse={verseRepetition.to}

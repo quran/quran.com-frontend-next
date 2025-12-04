@@ -154,7 +154,7 @@ const SearchInput: React.FC<Props> = ({
         </form>
       </div>
       {isExpanded && (
-        <div className={styles.dropdownContainer}>
+        <div className={styles.dropdownContainer} data-testid="search-results">
           <ExpandedSearchInputSection searchQuery={searchQuery} />
         </div>
       )}

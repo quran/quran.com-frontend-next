@@ -42,7 +42,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
-          <div key={juzId} className={styles.juzContainer}>
+          <div key={juzId} className={styles.juzContainer} data-testid={`juz-${juzId}-container`}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
               <div className={styles.juzTitle}>
                 <span>
