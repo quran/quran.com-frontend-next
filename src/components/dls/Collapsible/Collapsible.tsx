@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import classNames from 'classnames';
@@ -51,85 +51,112 @@ const Collapsible = ({
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
-  const handleOpenChange = (newOpen: boolean) => {
-    setIsOpen(newOpen);
-    if (onOpenChange) {
-      onOpenChange(newOpen);
-    }
-  };
+  const handleOpenChange = useCallback(
+    (newOpen: boolean) => {
+      setIsOpen(newOpen);
+      if (onOpenChange) {
+        onOpenChange(newOpen);
+      }
+    },
+    [onOpenChange],
+  );
 
   useEffect(() => {
     if (typeof shouldOpen !== 'boolean') return;
     setIsOpen(shouldOpen);
   }, [shouldOpen]);
 
-  const onSuffixClicked = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (!shouldSuffixTrigger) {
-      e.stopPropagation();
-    }
+  const onSuffixClicked = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!shouldSuffixTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    [shouldSuffixTrigger],
+  );
+
+  const onSuffixKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (shouldSuffixTrigger && (e.key === 'Enter' || e.key === ' ')) {
+        // Simulate a click that will bubble to the Trigger
+        e.currentTarget.click();
+      } else if (!shouldSuffixTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    [shouldSuffixTrigger],
+  );
+
+  const suffixProps = useMemo(
+    () =>
+      shouldSuffixTrigger
+        ? {
+            onClick: onSuffixClicked,
+            onKeyDown: onSuffixKeyDown,
+            role: 'button' as const,
+            tabIndex: 0,
+          }
+        : {},
+    [shouldSuffixTrigger, onSuffixClicked, onSuffixKeyDown],
+  );
+
+  const renderPrefix = () => {
+    if (!prefix) return null;
+
+    return (
+      <div
+        className={classNames(styles.prefixContainer, {
+          [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
+        })}
+      >
+        {prefix}
+      </div>
+    );
   };
 
-  const onSuffixKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (shouldSuffixTrigger && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      // Simulate a click that will bubble to the Trigger
-      e.currentTarget.click();
-    } else if (!shouldSuffixTrigger) {
-      e.stopPropagation();
+  const renderSuffix = () => {
+    if (!suffix) return null;
+
+    return (
+      <div
+        className={classNames(styles.suffixContainer, {
+          [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
+        })}
+        {...suffixProps}
+      >
+        {suffix}
+      </div>
+    );
+  };
+
+  const renderHeaderContent = () => {
+    if (direction === CollapsibleDirection.Left) {
+      return (
+        <div className={classNames(styles.headerLeft, headerLeftClassName)}>
+          {renderPrefix()}
+          {title}
+          {renderSuffix()}
+        </div>
+      );
     }
+
+    return (
+      <>
+        <div className={styles.headerLeft}>{title}</div>
+        {renderPrefix()}
+      </>
+    );
   };
 
   return (
     <CollapsiblePrimitive.Root onOpenChange={handleOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild data-testid={id} id={id}>
-        <div className={classNames(styles.header, headerClassName)}>
-          {direction === CollapsibleDirection.Left ? (
-            <>
-              <div className={classNames(styles.headerLeft, headerLeftClassName)}>
-                {prefix && (
-                  <div
-                    className={classNames(styles.prefixContainer, {
-                      [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
-                    })}
-                  >
-                    {prefix}
-                  </div>
-                )}
-                {title}
-                {suffix && (
-                  <div
-                    className={classNames(styles.suffixContainer, {
-                      [styles.suffixRotated]: shouldRotateSuffixOnToggle && isOpen,
-                    })}
-                    {...(shouldSuffixTrigger && {
-                      onClick: onSuffixClicked,
-                      onKeyDown: onSuffixKeyDown,
-                      role: 'button',
-                      tabIndex: 0,
-                    })}
-                  >
-                    {suffix}
-                  </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={styles.headerLeft}>{title}</div>
-              <div
-                className={classNames(styles.prefixContainer, {
-                  [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
-                })}
-              >
-                {prefix}
-              </div>
-            </>
-          )}
-        </div>
+        <div className={classNames(styles.header, headerClassName)}>{renderHeaderContent()}</div>
       </CollapsiblePrimitive.Trigger>
       <CollapsiblePrimitive.CollapsibleContent>
-        {isOpen && children({ isOpen })}
+        {children({ isOpen })}
       </CollapsiblePrimitive.CollapsibleContent>
     </CollapsiblePrimitive.Root>
   );

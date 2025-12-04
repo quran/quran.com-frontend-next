@@ -1,22 +1,5 @@
+@use 'src/styles/utility';
+
 .contentContainer {
-  position: relative;
-  transition: var(--transition-fast);
-
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-color: var(--color-background-backdrop);
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition-fast);
-    z-index: var(--z-index-smaller-modal);
-  }
-
-  &.dimmed {
-    &::before {
-      opacity: var(--opacity-50);
-      pointer-events: auto;
-    }
-  }
+  @include utility.dimmedOverlay;
 }
