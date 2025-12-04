@@ -81,6 +81,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                     {isCompleted ? <Pill>{t('completed')}</Pill> : ''}
                   </div>
                 }
+                shouldSkipImageOptimization
                 imgAlt={title}
                 size={CardSize.Large}
                 className={classNames(styles.cardContainer, styles.comingSoonContainer)}
