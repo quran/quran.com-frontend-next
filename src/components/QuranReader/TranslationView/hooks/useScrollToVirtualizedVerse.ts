@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useContext, useRef } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -35,7 +35,6 @@ const useScrollToVirtualizedTranslationView = (
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
-  const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
   const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
 
   const { startingVerse } = router.query;
@@ -89,22 +88,23 @@ const useScrollToVirtualizedTranslationView = (
         pageNumber > 1 && isFirstVerseInPage ? !!apiPageToVersesMap[pageNumber - 1] : true;
       const isDoneLoading = !!apiPageToVersesMap[pageNumber] && isBeforeDoneLoading;
 
-      // if the verse finished loading, or the one right before, we `setTimeout` and scroll to the beginning of the verse cell (this is a hacky solution so that the verse renders before we scroll to it)
+      // if the verse finished loading, or the one right before, we use requestAnimationFrame
+      // to ensure the DOM has been updated before scrolling
       // and set `shouldReadjustScroll` to false so that this effect doesn't run again
       //
       // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
       if (isDoneLoading) {
-        if (timeoutId.current !== null) {
-          clearTimeout(timeoutId.current);
-        }
+        // Use requestAnimationFrame to wait for the next paint cycle
+        // This ensures DOM has been updated before we scroll
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollToBeginningOfVerseCell(startingVerseNumber);
+            shouldTrackObservedVerses.current = true;
 
-        timeoutId.current = setTimeout(() => {
-          scrollToBeginningOfVerseCell(startingVerseNumber);
-          shouldTrackObservedVerses.current = true;
-
-          // we need to add the verse we scrolled to to the queue
-          verseKeysQueue.current.add(makeVerseKey(chapterId, startingVerseNumber));
-        }, 1000);
+            // we need to add the verse we scrolled to to the queue
+            verseKeysQueue.current.add(makeVerseKey(chapterId, startingVerseNumber));
+          });
+        });
 
         setShouldReadjustScroll(false);
       } else {
@@ -124,15 +124,6 @@ const useScrollToVirtualizedTranslationView = (
     verseKeysQueue,
     chapterId,
   ]);
-
-  // this effect clears the timeout when the component unmounts
-  useEffect(() => {
-    return () => {
-      if (timeoutId.current !== null) {
-        clearTimeout(timeoutId.current);
-      }
-    };
-  }, []);
 };
 
 export default useScrollToVirtualizedTranslationView;

@@ -7,7 +7,6 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
-import { getVerseNumberFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -15,36 +14,66 @@ import ScrollAlign from 'types/ScrollAlign';
 import Verse from 'types/Verse';
 
 /**
- * Get where a verse lies in a mushaf page. This is achieved by:
+ * Calculates the total height of fixed elements at the top of the page
+ * (navbar + context menu) to use as scroll offset
  *
- * 1. Checking where the index of the current verse is within the page.
- * 2. Calculating how far the index is from the beginning of the array of verses of that page.
- * 3. If it lies in the first third portion, then its position is 'start', the second
- *    third of the page, its position is 'center', the last third of the page its position
- *    is 'end'.
- *
- * @param {string} startingVerseKey
- * @param {number} mushafPageNumber
- * @param {Record<number, LookupRecord>} pagesVersesRange
- * @returns {ScrollAlign}
+ * @returns {number} The combined height of fixed top elements in pixels
  */
-const getVersePositionWithinAMushafPage = (
-  startingVerseKey: string,
-  mushafPageNumber: number,
-  pagesVersesRange: Record<number, LookupRecord>,
-): ScrollAlign => {
-  const pageStartVerseNumber = getVerseNumberFromKey(pagesVersesRange[mushafPageNumber].from);
-  const pageEndVerseNumber = getVerseNumberFromKey(pagesVersesRange[mushafPageNumber].to);
-  const verseOrderWithinPage = getVerseNumberFromKey(startingVerseKey) - pageStartVerseNumber + 1;
-  const totalPageNumberOfVerses = pageEndVerseNumber - pageStartVerseNumber + 1;
-  const verseKeyPosition = (verseOrderWithinPage * 100) / totalPageNumberOfVerses;
-  if (verseKeyPosition <= 33.3) {
-    return ScrollAlign.Start;
+const getFixedHeaderHeight = (): number => {
+  const isMobile = window.innerWidth < 768;
+
+  // On mobile, use a smaller offset
+  // On desktop, calculate dynamically for precision
+  if (isMobile) {
+    // Try to get only the context menu on mobile (navbar often hidden/minimal)
+    const contextMenu = document.querySelector('[data-testid="header"]');
+    const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 48;
+
+    return contextMenuHeight;
   }
-  if (verseKeyPosition <= 66.6) {
-    return ScrollAlign.Center;
+
+  // Desktop: calculate both navbar and context menu
+  const navbar =
+    document.querySelector('[data-testid="navbar"]') ||
+    document.querySelector('nav') ||
+    document.querySelector('header');
+  const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+
+  const contextMenu = document.querySelector('[data-testid="header"]');
+  const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 0;
+
+  const totalHeight = navbarHeight + contextMenuHeight;
+
+  return totalHeight > 0 ? totalHeight : 96;
+};
+
+/**
+ * Scrolls to a specific verse element with dynamic offset for fixed headers
+ *
+ * @param {string} verseKey - The verse key to scroll to
+ * @param {number} retryCount - Current retry count
+ * @param {number} maxRetries - Maximum number of retries
+ */
+const scrollToVerseElement = (verseKey: string, retryCount: number, maxRetries: number): void => {
+  const verseElement = document.querySelector(`[data-word-location="${verseKey}:1"]`);
+  if (verseElement) {
+    // Calculate header height BEFORE requestAnimationFrame to get stable measurements
+    const headerHeight = getFixedHeaderHeight();
+
+    // Use a more robust method that works on both desktop and mobile
+    // We need to use getBoundingClientRect() after ensuring the layout is stable
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const rect = verseElement.getBoundingClientRect();
+        const absoluteTop = rect.top + window.pageYOffset;
+        // Use the pre-calculated header height
+        const targetPosition = absoluteTop - headerHeight;
+        window.scrollTo({ top: Math.max(0, targetPosition), behavior: 'smooth' });
+      });
+    });
+  } else if (retryCount < maxRetries) {
+    setTimeout(() => scrollToVerseElement(verseKey, retryCount + 1, maxRetries), 150);
   }
-  return ScrollAlign.End;
 };
 
 /**
@@ -114,14 +143,19 @@ const useScrollToVirtualizedReadingView = (
               pagesVersesRange[startFromVerseData.pageNumber]
             ) {
               const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
+              const verseKey = `${chapterId}:${startingVerseNumber}`;
+
               virtuosoRef.current.scrollToIndex({
                 index: scrollToPageIndex,
-                align: getVersePositionWithinAMushafPage(
-                  `${chapterId}:${startingVerseNumber}`,
-                  startFromVerseData.pageNumber,
-                  pagesVersesRange,
-                ),
+                // Always use 'start' alignment when navigating via startingVerse parameter
+                // to ensure consistent positioning when switching between views
+                align: ScrollAlign.Start,
               });
+
+              // After scrolling to the page, wait for the verse element to be rendered
+              // then scroll to it. We use a polling mechanism with a max retry limit.
+              // Use longer delay on mobile to ensure proper rendering
+              setTimeout(() => scrollToVerseElement(verseKey, 0, 20), 300);
               shouldScroll.current = false;
             } else {
               // get the page number by the verse key and the mushafId (because the page will be different for Indopak Mushafs)
@@ -136,14 +170,20 @@ const useScrollToVirtualizedReadingView = (
                   const scrollToPageIndex =
                     response.verses[0].pageNumber - firstPageOfCurrentChapter;
                   if (pagesVersesRange[response.verses[0].pageNumber]) {
+                    const verseKey = `${chapterId}:${startingVerseNumber}`;
+
                     virtuosoRef.current.scrollToIndex({
                       index: scrollToPageIndex,
-                      align: getVersePositionWithinAMushafPage(
-                        `${chapterId}:${startingVerseNumber}`,
-                        response.verses[0].pageNumber,
-                        pagesVersesRange,
-                      ),
+                      // Always use 'start' alignment when navigating via startingVerse parameter
+                      // to ensure consistent positioning when switching between views
+                      align: ScrollAlign.Start,
                     });
+
+                    // After scrolling to the page, wait for the verse element to be rendered
+                    // then scroll to it. We use a polling mechanism with a max retry limit.
+                    // Use longer delay on mobile to ensure proper rendering
+                    setTimeout(() => scrollToVerseElement(verseKey, 0, 20), 300);
+
                     shouldScroll.current = false;
                   }
                 }
