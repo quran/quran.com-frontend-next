@@ -62,7 +62,6 @@ const Index: NextPage<IndexProps> = ({
                 isUserLoggedIn={isUserLoggedIn}
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
-                chapters={chapters}
               />
             ) : (
               <>
@@ -128,11 +127,9 @@ const Index: NextPage<IndexProps> = ({
               </>
             )}
 
-            {!isMobile() && (
-              <div className={styles.flowItem}>
-                <ChapterAndJuzListWrapper chapters={chapters} />
-              </div>
-            )}
+            <div className={styles.flowItem}>
+              <ChapterAndJuzListWrapper chapters={chapters} />
+            </div>
           </div>
         </div>
       </div>
