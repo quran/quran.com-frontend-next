@@ -15,7 +15,6 @@ import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
 import HomePageHero from '@/components/HomePage/HomePageHero';
 import LearningPlansSection from '@/components/HomePage/LearningPlansSection';
 import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections';
-import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneySection';
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -63,6 +62,7 @@ const Index: NextPage<IndexProps> = ({
                 isUserLoggedIn={isUserLoggedIn}
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
+                chapters={chapters}
               />
             ) : (
               <>
@@ -128,19 +128,11 @@ const Index: NextPage<IndexProps> = ({
               </>
             )}
 
-            <div
-              className={classNames(
-                styles.flowItem,
-                styles.fullWidth,
-                styles.homepageCard,
-                styles.mobileOnly,
-              )}
-            >
-              <QuranGrowthJourneySection />
-            </div>
-            <div className={styles.flowItem}>
-              <ChapterAndJuzListWrapper chapters={chapters} />
-            </div>
+            {!isMobile() && (
+              <div className={styles.flowItem}>
+                <ChapterAndJuzListWrapper chapters={chapters} />
+              </div>
+            )}
           </div>
         </div>
       </div>
