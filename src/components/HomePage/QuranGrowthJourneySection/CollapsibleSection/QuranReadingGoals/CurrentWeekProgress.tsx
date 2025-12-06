@@ -7,59 +7,61 @@ import styles from './ReadingStreak.module.scss';
 import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import { dateToReadableFormat } from '@/utils/datetime';
+import { compareDateWithToday, dateToReadableFormat } from '@/utils/datetime';
 import { convertFractionToPercent } from '@/utils/number';
 
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
   goal?: ReturnType<typeof useGetStreakWithMetadata>['goal'];
-  fixedWidth?: boolean;
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = true }) => {
+const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal }) => {
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
-  const getDayState = (day: (typeof days)[number]): DayState => {
+  const getDayState = (day: (typeof days)[number]): [DayState, boolean] => {
+    const { today, normalizedDate, isToday } = compareDateWithToday(day.date);
+
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 
     // if the user has a goal, we want to show a checked circle if the user has completed his goal for the day
-    // otherwise, we want to show a filled circle if the user has read at all for the day
+    // otherwise, we want to show a checked circle if the user has read at all for the day
     const isGoalDone = goal ? convertFractionToPercent(readingDay?.progress || 0) >= 100 : hasRead;
 
-    if (isGoalDone) return DayState.Checked;
-    if (hasRead) return DayState.Filled;
+    if (isGoalDone) return [DayState.Checked, isToday];
 
-    return day.current ? DayState.Stroked : DayState.None;
+    if (normalizedDate > today) return [DayState.Future, isToday];
+
+    return [DayState.None, isToday];
   };
 
   return (
-    <div>
-      <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}</p>
-      <div
-        className={classNames(styles.week, {
-          [styles.fixedWidth]: fixedWidth,
-        })}
-      >
+    <div className={styles.currentWeekProgress}>
+      <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}:</p>
+      <div className={styles.week}>
         {days.map((day) => {
-          const dayState = getDayState(day);
+          const [dayState, isToday] = getDayState(day);
 
           return (
             <div key={day.info.localizedNumber} className={styles.day}>
-              <HoverablePopover
-                content={dateToReadableFormat(day.date, lang)}
-                contentSide={ContentSide.TOP}
-              >
-                <span className={styles.fullName}>{day.info.title}</span>
-                <span className={styles.shortName}>{day.info.localizedNumber}</span>
-              </HoverablePopover>
-
               <div className={styles.circleContainer}>
                 <DayCircle state={dayState} />
-
-                <div className={styles.dayDivider} />
               </div>
+              <HoverablePopover
+                content={dateToReadableFormat(day.date, lang)}
+                contentSide={ContentSide.BOTTOM}
+              >
+                <span
+                  className={classNames(styles.shortName, {
+                    [styles.textBold]: isToday,
+                  })}
+                >
+                  {dayState === DayState.Future || isToday
+                    ? day.info.localizedNumber
+                    : day.info.shortName}
+                </span>
+              </HoverablePopover>
             </div>
           );
         })}

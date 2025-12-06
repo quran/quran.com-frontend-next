@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .inputs {
   width: 100%;
 }
@@ -20,7 +22,7 @@
   margin-block-end: var(--spacing-small);
 }
 
-.deleteButton {
+.actionButton {
   width: 100%;
 }
 
@@ -44,4 +46,18 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall);
+}
+
+.footerCtaContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+}
+
+.editGoalButton {
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.tablet {
+    color: var(--color-streaks-dark);
+  }
 }

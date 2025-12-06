@@ -6,9 +6,8 @@ import CheckIcon from '@/icons/check.svg';
 
 export enum DayState {
   None = 'none',
-  Stroked = 'stroked',
-  Filled = 'filled',
   Checked = 'checked',
+  Future = 'future',
 }
 
 interface DayCircleProps {
@@ -19,8 +18,8 @@ const DayCircle: React.FC<DayCircleProps> = ({ state }) => {
   return (
     <div
       className={classNames(styles.dayCircle, {
-        [styles.filled]: state === DayState.Filled || state === DayState.Checked,
-        [styles.stroked]: state === DayState.Stroked,
+        [styles.checked]: state === DayState.Checked,
+        [styles.future]: state === DayState.Future,
       })}
     >
       {state === DayState.Checked ? <CheckIcon /> : null}
