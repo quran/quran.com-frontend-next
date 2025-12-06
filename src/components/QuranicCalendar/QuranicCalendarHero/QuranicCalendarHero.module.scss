@@ -1,174 +1,257 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .container {
-    position: relative;
-    width: 100%;
+  position: relative;
+  inline-size: 100%;
 }
 
 .backgroundImage {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-color: var(--color-search-background);
-    overflow: hidden;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-search-background);
+  overflow: hidden;
 
-    svg {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        object-position: center top;
-        transform: translateY(-40%);
-    }
+  svg {
+    inline-size: 100%;
+    block-size: auto;
+    object-fit: cover;
+    object-position: center top;
+    transform: translateY(-40%);
+  }
 }
 
 .content {
-    max-width: 1230px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-block: var(--spacing-medium-px);
+  --max-width: 1230px;
+  --padding: var(--spacing-large-px);
 
-    @include breakpoints.smallerThanTablet {
-        flex-direction: column;
-        gap: var(--spacing-medium);
-        padding-inline: var(--spacing-large-px);
-    }
+  margin: 0 auto;
+  inline-size: 100%;
+  max-inline-size: min(var(--max-width), calc(100% - (var(--padding) * 2)));
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--spacing-medium-px);
+  gap: var(--spacing-mega);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+    gap: var(--spacing-medium);
+
+    --padding: var(--spacing-large-px);
+  }
 }
 
 .textContent {
-    flex: 1;
-    max-width: 875px;
-    width: 100%;
+  flex: 1;
+  max-inline-size: 875px;
+  inline-size: 100%;
 }
 
 .title {
-    font-family: "PlayfairDisplay";
-    font-size: calc(3 * var(--font-size-xxlarge-px));
-    @include breakpoints.smallerThanTablet {
-        padding-block-start: var(--spacing-large-px);
-        font-size: var(--font-size-xjumbo-px);
-    }
-    font-weight: var(--font-weight-extra-bold);
-    color: var(--color-text-default-new);
-    margin-bottom: var(--spacing-small);
+  font-family: 'PlayfairDisplay';
+  font-size: calc(3 * var(--font-size-xxlarge-px));
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--spacing-large-px);
+    font-size: var(--font-size-xjumbo-px);
+  }
+  font-weight: var(--font-weight-extra-bold);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-small);
 }
 
 .description {
-    font-size: var(--font-size-large-px);
-    color: var(--color-text-default-new);
-    margin-bottom: var(--spacing-medium);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
+  font-size: var(--font-size-large-px);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .buttonContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 
-    @include breakpoints.smallerThanTablet {
-        flex-direction: column;
-        width: 100%;
+  column-gap: var(--spacing-medium3-px);
+  row-gap: var(--spacing-medium-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+    inline-size: 100%;
+
+    column-gap: var(--spacing-small-px);
+    row-gap: var(--spacing-small-px);
+  }
+}
+
+.subscribeButtonsGroup {
+  display: flex;
+  gap: var(--spacing-medium3-px);
+  align-items: center;
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    gap: var(--spacing-small-px);
+
+    a {
+      flex: 1;
+
+      .askQuestionButton {
+        inline-size: 100%;
+      }
     }
+  }
+}
+
+.socialButtonsGroup {
+  display: flex;
+  align-items: center;
+
+  column-gap: var(--spacing-medium3-px);
+  row-gap: var(--spacing-medium-px);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    column-gap: var(--spacing-small-px);
+    row-gap: var(--spacing-small-px);
+
+    & > * {
+      flex: 1;
+      inline-size: 100%;
+    }
+
+    .button {
+      inline-size: 100%;
+    }
+  }
 }
 
 .weekDisplay {
-    background-color: var(--color-blue-buttons-and-icons);
-    border-radius: var(--border-radius-circle-small);
-    padding-block-start: var(--spacing-medium2-px);
-    color: var(--color-text-white);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.2);
+  background-color: var(--color-blue-buttons-and-icons);
+  border-radius: var(--border-radius-circle-small);
+  padding-block-start: var(--spacing-medium2-px);
+  color: var(--color-text-white);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dateInfo {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    padding-inline: var(--spacing-medium2-px);
-    padding-block-end: var(--spacing-medium2-px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium2-px);
 }
 
 .hijriDate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-small-px);
-    text-align: center;
-    font-size: var(--font-size-large-px);
-    font-weight: var(--font-weight-medium);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  text-align: center;
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .weekContainer {
-    display: flex;
-    padding: var(--spacing-medium2-px) var(--spacing-xxlarge-px) var(--spacing-xxlarge-px) var(--spacing-xxlarge-px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-medium-px);
-    align-self: stretch;
-    border-radius: var(--spacing-large-px);
-    background: var(--color-background-elevated-new);
-    @include breakpoints.smallerThanTablet {
-        padding: var(--spacing-medium-px) var(--spacing-xxlarge-px);
-    }
+  display: flex;
+  padding: var(--spacing-medium2-px) var(--spacing-xxlarge-px) var(--spacing-xxlarge-px)
+    var(--spacing-xxlarge-px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  align-self: stretch;
+  border-radius: var(--spacing-large-px);
+  background: var(--color-background-elevated-new);
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-medium-px) var(--spacing-xxlarge-px);
+  }
 }
 
 .weekLabel {
-    color: var(--color-text-faded-new);
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-semibold);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-large-px);
-    }
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .weekNumber {
-    font-size: calc(3 * var(--font-size-jumbo-px));
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-default-new);
-    display: flex;
-    justify-content: center;
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xjumbo-px);
-    }
+  font-size: calc(3 * var(--font-size-jumbo-px));
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
+  display: flex;
+  justify-content: center;
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xjumbo-px);
+  }
 }
 
 .button {
-    background: var(--color-success-faded);
-    color: var(--color-text-link-new);
-    border: none;
-    padding: var(--spacing-medium-px) var(--spacing-xxlarge-px);
+  background: var(--color-success-faded);
+  color: var(--color-text-link-new);
+  border: none;
+  padding: var(--spacing-medium-px) var(--spacing-medium2-px);
 
-    @include breakpoints.smallerThanTablet {
-        flex: 1;
-        padding: var(--spacing-medium-px) var(--spacing-medium2-px);
-        text-align: center;
-    }
+  @include breakpoints.smallerThanTablet {
+    flex: 1;
+    text-align: center;
+  }
 }
 
 .iconContainer {
-    margin-inline-end: var(--spacing-small-px);
-}
-
-.socialButtonsContainer {
-    display: flex;
-    gap: var(--spacing-medium);
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: var(--spacing-medium);
+  margin-inline-end: var(--spacing-small-px);
 }
 
 .subscribeButton {
-    width: 100%;
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    flex: 1;
+  }
+}
+
+.subscribeButtonSmall {
+  @include breakpoints.smallerThanTablet {
+    flex: 0;
+  }
+
+  @include breakpoints.smallerThanMobileL {
+    .iconContainer {
+      margin-inline-end: 0;
+    }
+  }
+}
+
+.subscribeText {
+  display: inline;
+  @include breakpoints.smallerThanMobileL {
+    display: none;
+  }
+}
+
+.joinSocialText {
+  display: inline;
+  @include breakpoints.smallerThanDesktop {
+    display: none;
+  }
+}
+
+.joinSocialMobileText {
+  display: none;
+  @include breakpoints.smallerThanDesktop {
+    display: inline;
+  }
 }

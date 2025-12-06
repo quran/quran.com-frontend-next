@@ -8,18 +8,58 @@ import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import EmailIcon from '@/icons/email.svg';
+import QuestionMarkIcon from '@/icons/question-mark.svg';
 import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { isMobile } from '@/utils/responsive';
+import {
+  ASK_QUESTION_FORM_URL,
+  TELEGRAM_CHANNEL_URL,
+  WHATSAPP_CHANNEL_URL,
+} from '@/utils/externalLinks';
 
 interface ActionButtonsProps {
   isSubscribed: boolean;
   isSubscriptionLoading: boolean;
   isEnrolling: boolean;
   onEnrollButtonClicked: () => void;
+  isLoggedIn?: boolean;
 }
+
+interface SocialButton {
+  name: 'whatsapp' | 'telegram';
+  icon: React.ComponentType;
+  url: string;
+  eventKey: string;
+}
+
+const SUCCESS_PILL_BUTTON_PROPS = {
+  type: ButtonType.Success,
+  shape: ButtonShape.Pill,
+};
+
+const ICON_CONTAINER_PROPS = {
+  className: styles.iconContainer,
+  size: IconSize.Small,
+  shouldFlipOnRTL: true,
+  shouldForceSetColors: false,
+};
+
+const SOCIAL_BUTTONS: SocialButton[] = [
+  {
+    name: 'whatsapp',
+    icon: WhatsappIcon,
+    url: WHATSAPP_CHANNEL_URL,
+    eventKey: 'quranic_calendar_join_whatsapp',
+  },
+  {
+    name: 'telegram',
+    icon: TelegramIcon,
+    url: TELEGRAM_CHANNEL_URL,
+    eventKey: 'quranic_calendar_join_telegram',
+  },
+];
 
 const subscribeButtonIcon = (isLoading: boolean, isSubscribed: boolean) => {
   if (isLoading) {
@@ -36,77 +76,66 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   isSubscriptionLoading,
   isEnrolling,
   onEnrollButtonClicked,
+  isLoggedIn = false,
 }) => {
   const { t } = useTranslation('quranic-calendar');
 
-  const onJoinWhatsapp = () => {
-    logButtonClick('quranic_calendar_join_whatsapp');
-  };
-
-  const onJoinTelegram = () => {
-    logButtonClick('quranic_calendar_join_telegram');
-  };
-
-  const isMobileBrowser = isMobile();
-
-  const socialButtons = (
-    <>
-      <Button
-        onClick={onJoinWhatsapp}
-        className={styles.button}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        href="https://whatsapp.com/channel/0029Vb8w7pTIt5rnEhqy1u1u"
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldForceSetColors={false}
-          icon={<WhatsappIcon />}
-        />
-        {isMobileBrowser ? t('join-whatsapp-mobile') : t('join-whatsapp')}
-      </Button>
-      <Button
-        onClick={onJoinTelegram}
-        className={styles.button}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        href="https://t.me/QuranInaYear"
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldForceSetColors={false}
-          icon={<TelegramIcon />}
-        />
-        {isMobileBrowser ? t('join-telegram-mobile') : t('join-telegram')}
-      </Button>
-    </>
-  );
+  const showAskQuestionButton = isLoggedIn && isSubscribed;
 
   return (
     <div className={styles.buttonContainer}>
-      <Button
-        onClick={onEnrollButtonClicked}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        isDisabled={isEnrolling}
-        className={isMobile() ? styles.subscribeButton : ''}
-      >
-        <IconContainer
-          className={styles.iconContainer}
-          size={IconSize.Small}
-          shouldFlipOnRTL
-          shouldForceSetColors={false}
-          icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
-        />
-        {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
-      </Button>
-      {isMobile() ? (
-        <div className={styles.socialButtonsContainer}>{socialButtons}</div>
-      ) : (
-        socialButtons
-      )}
+      <div className={styles.subscribeButtonsGroup}>
+        <Button
+          {...SUCCESS_PILL_BUTTON_PROPS}
+          onClick={onEnrollButtonClicked}
+          isDisabled={isEnrolling}
+          aria-label={isSubscribed ? t('common:subscribed') : t('common:subscribe')}
+          className={`${styles.subscribeButton} ${
+            showAskQuestionButton ? styles.subscribeButtonSmall : ''
+          }`}
+        >
+          <IconContainer
+            {...ICON_CONTAINER_PROPS}
+            icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
+          />
+
+          <span className={isSubscribed ? styles.subscribeText : undefined}>
+            {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
+          </span>
+        </Button>
+
+        {showAskQuestionButton && (
+          <Button
+            {...SUCCESS_PILL_BUTTON_PROPS}
+            href={ASK_QUESTION_FORM_URL}
+            isNewTab
+            onClick={() => logButtonClick('quranic_calendar_ask_question')}
+            aria-label={t('ask-question')}
+            className={`${styles.button} ${styles.askQuestionButton}`}
+          >
+            <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
+            {t('ask-question')}
+          </Button>
+        )}
+      </div>
+
+      <div className={styles.socialButtonsGroup}>
+        {SOCIAL_BUTTONS.map(({ name, icon: Icon, url, eventKey }) => (
+          <Button
+            {...SUCCESS_PILL_BUTTON_PROPS}
+            key={name}
+            href={url}
+            isNewTab
+            onClick={() => logButtonClick(eventKey)}
+            aria-label={t(`join-${name}`)}
+            className={styles.button}
+          >
+            <IconContainer {...ICON_CONTAINER_PROPS} icon={<Icon />} />
+            <span className={styles.joinSocialText}>{t(`join-${name}`)}</span>
+            <span className={styles.joinSocialMobileText}>{t(`join-${name}-mobile`)}</span>
+          </Button>
+        ))}
+      </div>
     </div>
   );
 };
