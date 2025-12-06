@@ -1,200 +1,139 @@
-@use "src/styles/breakpoints";
-
-$mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
+@use 'src/styles/breakpoints';
 
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-block-end: var(--spacing-medium);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
+
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
     @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
+      font-size: var(--font-size-xxlarge-px);
     }
-
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
-    }
-}
-
-.thumbnail {
-    border-radius: var(--border-radius-rounded);
-    @include breakpoints.smallerThanTablet {
-        display: none;
-    }
+  }
 }
 
 .cardsContainer {
-    max-width: 98.5%;
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-medium);
-    overflow-x: scroll; // Already present, keep it
-    padding-inline: var(--spacing-large);
-    margin-inline: calc(-1 * var(--spacing-large));
-    padding-block: var(--spacing-large);
-    margin-block: calc(-1 * var(--spacing-large));
+  max-inline-size: 98.5%;
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-medium);
+  overflow-x: scroll; // Already present, keep it
+  padding-inline: var(--spacing-large);
+  margin-inline: calc(-1 * var(--spacing-large));
+  padding-block: var(--spacing-large);
+  margin-block: calc(-1 * var(--spacing-large));
 
-    // Replace scrollbar hiding with transparent scrollbars
-    scrollbar-width: thin; // For Firefox
-    scrollbar-color: transparent transparent; // For Firefox: transparent thumb and track
+  // Replace scrollbar hiding with transparent scrollbars
+  scrollbar-width: thin; // For Firefox
+  scrollbar-color: transparent transparent; // For Firefox: transparent thumb and track
 
-    &::-webkit-scrollbar {
-        height: 1px; // Small height for horizontal scrollbar
-    }
+  &::-webkit-scrollbar {
+    block-size: 1px; // Small height for horizontal scrollbar
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; // Hide the thumb
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent; // Hide the track
+  }
+
+  // Optional: Show scrollbar on hover for better UX
+  &:hover {
+    scrollbar-color: var(--scrollbar-thumb) transparent;
     &::-webkit-scrollbar-thumb {
-        background-color: transparent; // Hide the thumb
+      background-color: var(--scrollbar-thumb);
     }
-    &::-webkit-scrollbar-track {
-        background-color: transparent; // Hide the track
-    }
-
-    // Optional: Show scrollbar on hover for better UX
-    &:hover {
-        scrollbar-color: var(--scrollbar-thumb) transparent;
-        &::-webkit-scrollbar-thumb {
-            background-color: var(--scrollbar-thumb);
-        }
-    }
+  }
 }
 
 .learnPlanCard {
-    flex: 0 0 45%;
-    min-width: 45%;
-    @include breakpoints.smallerThanTablet {
-        flex: 0 0 75%;
-        min-width: 75%;
-    }
+  flex: 0 0 auto;
+  inline-size: clamp(216px, 54vw, 312px);
+  @include breakpoints.smallerThanTablet {
+    inline-size: clamp(100px, 42vw, 140px);
+  }
 }
 
 .card {
-    height: 100%;
-    display: flex;
-    gap: var(--spacing-medium-px);
-    padding: 0;
+  block-size: auto;
+  inline-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 
-.cardWrapper {
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-medium);
-    padding: var(--spacing-medium);
-    flex: 1;
-}
-
-.cardContent {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.startLearningLink {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: var(--spacing-xsmall);
-    color: var(--color-text-faded-new);
-}
-
-.startLearningLinkContent {
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-micro);
-    color: var(--color-text-faded-new);
-    align-items: center;
-    @include breakpoints.tablet {
-        font-size: var(--font-size-medium-px);
-    }
-}
-
-.startLearningLinkIcon {
-    @include breakpoints.smallerThanTablet {
-        svg {
-            width: $mobile-size;
-            height: $mobile-size;
-        }
-    }
-}
-
-.learningPlanTitle {
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-large);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small-px);
-    }
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
-}
-
-.learningPlanStatus {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: var(--spacing-xsmall);
-    margin-top: auto;
-    @include breakpoints.smallerThanTablet {
-        font-size: $mobile-size;
-    }
-}
-
-.enrolledPlanStatus {
-    justify-content: space-between;
+.thumbnailWrapper {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 640 / 537;
+  border-radius: var(--border-radius-rounded);
+  overflow: hidden;
 }
 
 .enrolledPill {
-    background-color: var(--color-qdc-faint-blue);
-    padding-inline: var(--spacing-xsmall);
-    border-radius: var(--border-radius-rounded);
-    color: var(--color-text-black);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  position: absolute;
+  inset-inline-start: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  background-color: var(--color-qdc-faint-blue);
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-black);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .completedPill {
-    background-color: var(--color-topics-gold);
-    padding-inline: var(--spacing-xsmall);
-    border-radius: var(--border-radius-rounded);
-    color: var(--color-text-default-new);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  position: absolute;
+  inset-inline-start: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  background-color: var(--color-topics-gold);
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.newPill {
+  position: absolute;
+  inset-inline-end: var(--spacing-small-px);
+  inset-block-end: var(--spacing-small-px);
+  background-color: var(--color-success-faint);
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-success-medium);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.thumbnail {
+  object-fit: cover;
+  object-position: center;
 }
 
 .thumbnailSkeleton {
-    width: 150px;
-    height: 100px;
-    border-radius: var(--border-radius-rounded);
-}
-
-.titleSkeleton {
-    width: 100%;
-    max-width: 250px;
-    height: 24px;
-    margin-bottom: var(--spacing-medium);
-    border-radius: var(--border-radius-default);
-}
-
-.pillSkeleton {
-    width: 80px;
-    height: 24px;
-    border-radius: var(--border-radius-rounded);
-}
-
-.buttonSkeleton {
-    width: 120px;
-    height: 36px;
-    border-radius: var(--border-radius-default);
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: var(--border-radius-rounded);
 }
 
 .seeMore {
-    color: var(--color-text-faded-new);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-normal-px);
-    }
+  color: var(--color-text-faded-new);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
