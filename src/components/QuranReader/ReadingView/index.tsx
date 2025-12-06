@@ -108,21 +108,30 @@ const ReadingView = ({
     isLoading,
   );
 
+  const getCurrentIndex = useCallback(() => {
+    const virtuosoState = virtuosoRef.current?.state;
+    return typeof virtuosoState?.firstItemIndex === 'number'
+      ? virtuosoState.firstItemIndex
+      : currentPageIndex;
+  }, [currentPageIndex]);
+
   const scrollToPreviousPage = useCallback(() => {
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex - 1,
+    const currentIndex = getCurrentIndex();
+    virtuosoRef.current?.scrollToIndex({
+      index: Math.max(currentIndex - 1, 0),
       align: 'start',
       offset: -35,
     });
-  }, [currentPageIndex]);
+  }, [getCurrentIndex]);
 
   const scrollToNextPage = useCallback(() => {
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex + 1,
+    const currentIndex = getCurrentIndex();
+    virtuosoRef.current?.scrollToIndex({
+      index: currentIndex + 1,
       align: 'start',
       offset: 25,
     });
-  }, [currentPageIndex]);
+  }, [getCurrentIndex]);
 
   const onPrevPageClicked = useCallback(() => {
     logButtonClick('reading_view_prev_page_button');
@@ -156,7 +165,13 @@ const ReadingView = ({
 
   const itemContentRenderer = (pageIndex: number) => {
     if (pageIndex === pagesCount) {
-      const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
+      const resolvedCurrentPageNumber =
+        quranReaderDataType === QuranReaderDataType.Page
+          ? Number(resourceId)
+          : Number(lastReadPageNumber);
+      const pageVerses =
+        mushafPageToVersesMap[resolvedCurrentPageNumber] ??
+        mushafPageToVersesMap[lastReadPageNumber];
       const lastVerse = pageVerses?.[pageVerses.length - 1];
       if (!lastVerse) return null;
 
@@ -165,6 +180,7 @@ const ReadingView = ({
           quranReaderDataType={quranReaderDataType}
           lastVerse={lastVerse}
           initialData={initialData}
+          currentPageNumber={resolvedCurrentPageNumber}
         />
       );
     }
