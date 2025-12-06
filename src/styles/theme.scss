@@ -1,7 +1,7 @@
-@use "./themes/light";
-@use "./themes/dark";
-@use "./themes/sepia";
-@use "./shades";
+@use './themes/light';
+@use './themes/dark';
+@use './themes/sepia';
+@use './shades';
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
@@ -17,6 +17,7 @@
   --spacing-max: 3rem;
 
   --spacing-micro-px: 2px;
+  --spacing-micro2-px: 3px;
   --spacing-xxsmall-px: 5px;
   --spacing-xsmall-px: 8px;
   --spacing-small-px: 10px;
@@ -59,7 +60,7 @@
   --font-weight-bold: 700;
   --font-weight-extra-bold: 800;
 
-  --font-family-figtree: "Figtree", sans-serif;
+  --font-family-figtree: 'Figtree', sans-serif;
 
   --border-radius-sharp: 0;
   --border-radius-pill: 20rem;
@@ -108,16 +109,16 @@
 }
 
 /** Light Theme */
-[data-theme="light"] {
+[data-theme='light'] {
   @include light.mode;
 }
 
 /** Dark Theme */
-[data-theme="dark"] {
+[data-theme='dark'] {
   @include dark.mode;
 }
 
 /** Sepia Theme */
-[data-theme="sepia"] {
+[data-theme='sepia'] {
   @include sepia.mode;
 }

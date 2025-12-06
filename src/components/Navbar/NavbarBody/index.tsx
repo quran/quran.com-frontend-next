@@ -11,6 +11,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import Banner from '@/components/Banner/Banner';
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
@@ -49,6 +50,10 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
+interface Props {
+  isBannerVisible: boolean;
+}
+
 const QURAN_READER_ROUTES = new Set([
   '/[chapterId]',
   '/[chapterId]/[verseId]',
@@ -60,7 +65,7 @@ const QURAN_READER_ROUTES = new Set([
 
 const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
 
-const NavbarBody: React.FC = () => {
+const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const router = useRouter();
@@ -129,11 +134,21 @@ const NavbarBody: React.FC = () => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButtonText: t('create-my-goal'),
+  };
+
   return (
-    <div className={styles.itemsContainer}>
-      <div className={styles.centerVertically}>
-        <div className={styles.leftCTA}>
-          <>
+    <>
+      {isBannerVisible && (
+        <div className={styles.bannerContainerTop}>
+          <Banner {...bannerProps} />
+        </div>
+      )}
+      <div className={styles.itemsContainer}>
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
             <Button
               tooltip={t('menu')}
               variant={ButtonVariant.Ghost}
@@ -145,17 +160,18 @@ const NavbarBody: React.FC = () => {
               <IconMenu />
             </Button>
             <NavigationDrawer />
-          </>
-          <NavbarLogoWrapper />
+            <NavbarLogoWrapper />
+          </div>
         </div>
-      </div>
-      <div className={styles.centerVertically}>
-        <div className={styles.rightCTA}>
-          <>
+        {isBannerVisible && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...bannerProps} />
+          </div>
+        )}
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
             <ProfileAvatarButton />
             <LanguageSelector />
-          </>
-          <>
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
@@ -172,10 +188,10 @@ const NavbarBody: React.FC = () => {
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
 
             <SettingsDrawer />
-          </>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
