@@ -64,7 +64,7 @@
 .htmlContent {
     p + p,
     ul + p {
-        margin-top: 1.75rem;
+        margin-top: var(--spacing-large);
     }
 }
 
