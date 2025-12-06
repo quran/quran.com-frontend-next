@@ -164,6 +164,7 @@ const SearchDrawer: React.FC = () => {
 
   return (
     <Drawer
+      id="search-drawer"
       type={DrawerType.Search}
       header={
         <SearchDrawerHeader
@@ -177,16 +178,14 @@ const SearchDrawer: React.FC = () => {
         />
       }
     >
-      <div>
-        {isOpen && (
-          <DataFetcher
-            queryKey={debouncedSearchQuery ? makeNewSearchResultsUrl(quickSearchQuery) : null}
-            render={renderSearchResults}
-            fetcher={searchFetcher}
-            loading={renderLoading}
-          />
-        )}
-      </div>
+      {isOpen && (
+        <DataFetcher
+          queryKey={debouncedSearchQuery ? makeNewSearchResultsUrl(quickSearchQuery) : null}
+          render={renderSearchResults}
+          fetcher={searchFetcher}
+          loading={renderLoading}
+        />
+      )}
     </Drawer>
   );
 };

@@ -56,7 +56,7 @@ test.describe('Dedicated Search Page', () => {
       ]);
 
       // We should see the "No results found" message
-      const searchResults = page.getByTestId('search-body-container');
+      const searchResults = page.getByTestId('search-drawer-container');
       await expect(searchResults.getByText('No results found')).toBeVisible();
     },
   );
@@ -72,8 +72,8 @@ test.describe('Dedicated Search Page', () => {
         page.waitForResponse((response) => response.url().includes('/search')),
       ]);
 
-      // 2. In the "search-body-container" div, we should see the "2:255" result
-      const searchResults = page.getByTestId('search-body-container');
+      // 2. In the "search-drawer-container" div, we should see the "2:255" result
+      const searchResults = page.getByTestId('search-drawer-container');
       await expect(searchResults.getByText('2:255')).toBeVisible();
     },
   );

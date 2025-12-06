@@ -60,18 +60,21 @@ const SettingsDrawer = () => {
 
   return (
     <Drawer
+      id="settings-drawer"
       type={DrawerType.Settings}
       header={header}
       closeOnNavigation={false}
       canCloseDrawer={!isActive}
       bodyId="settings-drawer-body"
     >
-      {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}
-      {isSettingsDrawerOpen && settingsView === SettingsView.Translation && (
-        <TranslationSelectionBody />
+      {isSettingsDrawerOpen && (
+        <div data-testid="settings-drawer-body">
+          {settingsView === SettingsView.Body && <SettingsBody />}
+          {settingsView === SettingsView.Translation && <TranslationSelectionBody />}
+          {settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
+          {settingsView === SettingsView.Tafsir && <TafsirSelectionBody />}
+        </div>
       )}
-      {isSettingsDrawerOpen && settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
-      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafsirSelectionBody />}
     </Drawer>
   );
 };

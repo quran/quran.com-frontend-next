@@ -13,8 +13,8 @@ test(
   'Clickable quran.com logo with homepage redirect',
   { tag: ['@slow', '@navbar'] },
   async ({ page }) => {
-    // Click on the quran.com logo of the navbar (the second one, the first is in the drawer)
-    const logoElement = page.getByTitle('Quran.com').nth(1);
+    // Click on the quran.com logo of the navbar (the first one, the second is in the drawer)
+    const logoElement = page.getByTitle('Quran.com').nth(0);
     await logoElement.click();
 
     // Make sure we are redirected to the homepage
