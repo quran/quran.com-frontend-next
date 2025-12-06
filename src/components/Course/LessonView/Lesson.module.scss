@@ -61,6 +61,13 @@
     min-height: calc(var(--spacing-mega) * 10);
 }
 
+.htmlContent {
+    p + p,
+    ul + p {
+        margin-top: 1.75rem;
+    }
+}
+
 .headerButtonsContainer {
     display: flex;
     align-items: center;
