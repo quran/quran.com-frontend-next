@@ -384,10 +384,10 @@ export const performLanguageDetection = async (
       const hasManualSelection = hasManualLanguageSelection(req.headers[HEADERS.COOKIE] as string);
       logInfo('Manual language selection check', { hasManualSelection });
 
-      // STEP 3: Fetch country preference using device language (or current locale if manually selected)
-      const languageForPreferences = hasManualSelection ? currentLocale : deviceLanguage;
+      // STEP 3: Fetch country preference, extract API-suggested locale, and determine effective locale
+      const localeForPreferences = hasManualSelection ? currentLocale : deviceLanguage;
       const countryForPreferences = getCountryCodeForPreferences(
-        languageForPreferences,
+        localeForPreferences,
         detectedCountry,
       );
       let countryLanguagePreference: CountryLanguagePreferenceResponse | undefined;
@@ -396,49 +396,46 @@ export const performLanguageDetection = async (
 
       try {
         countryLanguagePreference = await getCountryLanguagePreference(
-          languageForPreferences,
+          localeForPreferences,
           countryForPreferences,
         );
         logInfo('Fetched country preference for final locale', {
-          finalLocale: languageForPreferences,
+          finalLocale: localeForPreferences,
           detectedCountry: countryForPreferences,
-          shouldRedirect: false,
           countryLanguagePreference,
         });
 
+        // Only use API-suggested locale for auto-detection; respect user's manual selection
         if (!hasManualSelection) {
           apiSuggestedLocale =
             countryLanguagePreference?.defaultLocale &&
+            typeof countryLanguagePreference.defaultLocale === 'string' &&
+            countryLanguagePreference.defaultLocale.trim() !== '' &&
             locales.includes(countryLanguagePreference.defaultLocale)
               ? countryLanguagePreference.defaultLocale
               : undefined;
         }
       } catch (error) {
-        handleCountryPreferenceError(
-          error,
-          languageForPreferences,
-          countryForPreferences,
-          pagePath,
-        );
+        handleCountryPreferenceError(error, localeForPreferences, countryForPreferences, pagePath);
         apiFailed = true;
       }
 
-      // Determine the effective language for the site using API defaultLocale when available
-      const effectiveLanguage = hasManualSelection
+      // Determine the effective locale for the site using API defaultLocale when available
+      const effectiveLocale = hasManualSelection
         ? currentLocale
         : apiSuggestedLocale || deviceLanguage;
 
-      // STEP 4: Determine if we should redirect to a different locale
+      // STEP 4: Evaluate redirect conditions (includes API failure handling)
       const shouldRedirect = shouldRedirectToLocale(
         currentLocale,
-        effectiveLanguage,
+        effectiveLocale,
         hasManualSelection,
       );
       const canRedirect = shouldRedirect && !apiFailed;
 
       if (!canRedirect && shouldRedirect) {
         logInfo('Redirect disabled due to API failure', {
-          effectiveLanguage,
+          effectiveLocale,
           detectedCountry: countryForPreferences,
         });
       }
@@ -447,16 +444,16 @@ export const performLanguageDetection = async (
       if (canRedirect) {
         // Use the actual resolved URL instead of pagePath to handle dynamic routes
         const actualPath = context.resolvedUrl || context.req.url || pagePath;
-        const redirectPath = `/${effectiveLanguage}${actualPath}`;
+        const redirectPath = `/${effectiveLocale}${actualPath}`;
         logInfo('Language redirect with country preference', {
-          detectedLanguage: effectiveLanguage,
+          detectedLanguage: effectiveLocale,
           detectedCountry,
           redirectPath,
           actualPath,
         });
 
         return {
-          detectedLanguage: effectiveLanguage,
+          detectedLanguage: effectiveLocale,
           detectedCountry,
           countryLanguagePreference,
           shouldRedirect: true,
@@ -466,7 +463,7 @@ export const performLanguageDetection = async (
 
       // STEP 6: No redirect needed - continue with current locale
       return {
-        detectedLanguage: effectiveLanguage,
+        detectedLanguage: effectiveLocale,
         detectedCountry,
         countryLanguagePreference,
         shouldRedirect: false,
