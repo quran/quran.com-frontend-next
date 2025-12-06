@@ -22,8 +22,6 @@ import Verse from 'types/Verse';
 const getFixedHeaderHeight = (): number => {
   const isMobile = window.innerWidth < 768;
 
-  // On mobile, use a smaller offset
-  // On desktop, calculate dynamically for precision
   if (isMobile) {
     // Try to get only the context menu on mobile (navbar often hidden/minimal)
     const contextMenu = document.querySelector('[data-quran-context-menu]');
@@ -33,10 +31,7 @@ const getFixedHeaderHeight = (): number => {
   }
 
   // Desktop: calculate both navbar and context menu
-  const navbar =
-    document.querySelector('[data-quran-navbar]') ||
-    document.querySelector('nav') ||
-    document.querySelector('header');
+  const navbar = document.querySelector('[data-quran-navbar]');
   const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
 
   const contextMenu = document.querySelector('[data-quran-context-menu]');
@@ -57,11 +52,10 @@ const getFixedHeaderHeight = (): number => {
 const scrollToVerseElement = (verseKey: string, retryCount: number, maxRetries: number): void => {
   const verseElement = document.querySelector(`[data-word-location="${verseKey}:1"]`);
   if (verseElement) {
-    // Calculate header height BEFORE requestAnimationFrame to get stable measurements
+    // Calculate header height
     const headerHeight = getFixedHeaderHeight();
 
-    // Use a more robust method that works on both desktop and mobile
-    // We need to use getBoundingClientRect() after ensuring the layout is stable
+    // Use getBoundingClientRect() after ensuring the layout is stable
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         const rect = verseElement.getBoundingClientRect();
@@ -153,7 +147,7 @@ const useScrollToVirtualizedReadingView = (
               });
 
               // After scrolling to the page, wait for the verse element to be rendered
-              // then scroll to it. We use a polling mechanism with a max retry limit.
+              // then scroll to it.
               // Use longer delay on mobile to ensure proper rendering
               setTimeout(() => scrollToVerseElement(verseKey, 0, 20), 300);
               shouldScroll.current = false;

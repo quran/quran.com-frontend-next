@@ -94,8 +94,6 @@ const useScrollToVirtualizedTranslationView = (
       //
       // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
       if (isDoneLoading) {
-        // Use requestAnimationFrame to wait for the next paint cycle
-        // This ensures DOM has been updated before we scroll
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             scrollToBeginningOfVerseCell(startingVerseNumber);
