@@ -38,7 +38,7 @@ const OBSERVED_ACTIONS = [
  * to apply the new locale's default settings or keep the current
  * setting as they are.
  *
- * @param {MiddlewareAPI<Dispatch<AnyAction>} storeAPI
+ * @param {MiddlewareAPI<Dispatch<AnyAction>} value
  * @returns {Dispatch<any>(action: any) => any}
  */
 const persistUserCustomization = (value: boolean) => {
