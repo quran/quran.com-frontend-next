@@ -31,7 +31,7 @@ setup('authenticate', async ({ page }) => {
   await page.getByRole('button', { name: 'Continue' }).click();
 
   // Wait for redirect to home and visible profile avatar
-  await page.waitForURL(/\/$/);
+  await page.waitForURL(/\/[a-z]{2}?$/);
   await expect(page.getByTestId('profile-avatar-button')).toBeVisible();
 
   // Save signed-in state to 'authFile'.

@@ -90,8 +90,8 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         },
       };
     } catch (error) {
-      logError('Error occurred while getting course from Sanity', {
-        error,
+      const err = error instanceof Error ? error : new Error(String(error));
+      logError('Error occurred while getting course from Sanity', err, {
         slug,
       });
       return {

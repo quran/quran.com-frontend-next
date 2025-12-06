@@ -34,6 +34,7 @@ import {
   getReciterChapterNavigationUrl,
   getSurahNavigationUrl,
 } from '@/utils/navigation';
+import { getCurrentPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
