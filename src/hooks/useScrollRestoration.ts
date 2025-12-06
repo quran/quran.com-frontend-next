@@ -45,20 +45,29 @@ const useScrollRestoration = (): {
    */
   const restoreScrollPosition = useCallback(
     (scrollPosition: number, isTranslationTab: boolean, onComplete?: () => void) => {
-      // Restore scroll position immediately
-      window.scrollTo(0, scrollPosition);
+      // Check if startingVerse is in the URL - if so, skip scroll restoration
+      // and let the virtualized scroll hooks handle positioning
+      const urlParams = new URLSearchParams(window.location.search);
+      const hasStartingVerse = urlParams.has('startingVerse');
 
-      // For translation tab, apply special handling with MutationObserver
-      if (isTranslationTab) {
-        handleTranslationTabScroll(scrollPosition);
+      if (!hasStartingVerse) {
+        // Only restore scroll position if startingVerse is not present
+        window.scrollTo(0, scrollPosition);
+
+        // For translation tab, apply special handling with MutationObserver
+        if (isTranslationTab) {
+          handleTranslationTabScroll(scrollPosition);
+        }
       }
 
-      // Run any additional completion logic after a delay
+      // Run any additional completion logic
       if (onComplete) {
         setTimeout(() => {
           onComplete();
-          // Make sure scroll position is maintained
-          window.scrollTo(0, scrollPosition);
+          // Only maintain scroll if startingVerse is not present
+          if (!hasStartingVerse) {
+            window.scrollTo(0, scrollPosition);
+          }
         }, 500);
       }
     },

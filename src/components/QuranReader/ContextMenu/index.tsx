@@ -61,6 +61,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
   return (
     <div
       data-testid="header"
+      data-quran-context-menu="true"
       data-isvisible={!isMobileScrolledView}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
