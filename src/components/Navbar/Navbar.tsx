@@ -23,6 +23,7 @@ const Navbar = () => {
       <nav
         className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}
         data-testid="navbar"
+        data-quran-navbar="true"
         data-isvisible={showNavbar}
       >
         <NavbarBody />

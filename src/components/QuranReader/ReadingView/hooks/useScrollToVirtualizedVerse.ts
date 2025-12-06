@@ -26,7 +26,7 @@ const getFixedHeaderHeight = (): number => {
   // On desktop, calculate dynamically for precision
   if (isMobile) {
     // Try to get only the context menu on mobile (navbar often hidden/minimal)
-    const contextMenu = document.querySelector('[data-testid="header"]');
+    const contextMenu = document.querySelector('[data-quran-context-menu]');
     const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 48;
 
     return contextMenuHeight;
@@ -34,12 +34,12 @@ const getFixedHeaderHeight = (): number => {
 
   // Desktop: calculate both navbar and context menu
   const navbar =
-    document.querySelector('[data-testid="navbar"]') ||
+    document.querySelector('[data-quran-navbar]') ||
     document.querySelector('nav') ||
     document.querySelector('header');
   const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
 
-  const contextMenu = document.querySelector('[data-testid="header"]');
+  const contextMenu = document.querySelector('[data-quran-context-menu]');
   const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 0;
 
   const totalHeight = navbarHeight + contextMenuHeight;
