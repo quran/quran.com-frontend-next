@@ -1,0 +1,6 @@
+.htmlDescription {
+    p + p,
+    ul + p {
+        margin-top: var(--spacing-large);
+    }
+}
