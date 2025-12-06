@@ -1,9 +1,18 @@
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect, useContext } from 'react';
 
-import { useSelector } from '@xstate/react';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector as useReduxSelector } from 'react-redux';
 
+import {
+  VerseRepetitionState,
+  buildDefaultVerseRepetition,
+  normalizeVerseRange,
+  prepareRepeatSettingsForApi,
+  serializeOptionalRepeatSettings,
+  serializeRepeatSettings,
+} from './RepeatAudioModal.helpers';
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
@@ -11,8 +20,10 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { selectAudioPlayerState, setRepeatSettings } from '@/redux/slices/AudioPlayer/state';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -25,14 +36,13 @@ import {
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-type RepeatAudioModalProps = {
+interface RepeatAudioModalProps {
   chapterId: string;
   isOpen: boolean;
   onClose: () => void;
   defaultRepetitionMode: RepetitionMode;
   selectedVerseKey?: string;
-};
-
+}
 const RepeatAudioModal = ({
   chapterId,
   isOpen,
@@ -41,18 +51,62 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
+  const toast = useToast();
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
-  const repeatState = repeatActor?.getSnapshot();
-  const repeatSettings = repeatState?.context;
-
+  const repeatActor = useXstateSelector(audioService, (state) => state.context.repeatActor);
+  const audioSurah = useXstateSelector(audioService, (state) => state.context.surah);
+  const repeatActorContext = repeatActor?.getSnapshot()?.context;
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
+  const isInRepeatMode = !!repeatActor;
   const chaptersData = useGetChaptersData(lang);
   const {
-    actions: { onSettingsChangeWithoutDispatch },
+    actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
+  const audioPlayerState = useReduxSelector(selectAudioPlayerState);
+  const persistedRepeatSettings = audioPlayerState?.repeatSettings;
+  const repeatRangeFromActor = repeatActorContext?.repeatSettings?.totalRangeCycle;
+  const repeatEachVerseFromActor = repeatActorContext?.repeatSettings?.totalVerseCycle;
+  const delayMultiplierFromActor = repeatActorContext?.delayMultiplier;
+  const fromVerseNumberFromActor = repeatActorContext?.fromVerseNumber;
+  const toVerseNumberFromActor = repeatActorContext?.toVerseNumber;
+  const persistedRepeatRange = persistedRepeatSettings?.repeatRange;
+  const persistedRepeatEachVerse = persistedRepeatSettings?.repeatEachVerse;
+  const persistedDelayMultiplier = persistedRepeatSettings?.delayMultiplier;
+  const persistedFromVerseKey = persistedRepeatSettings?.from;
+  const persistedToVerseKey = persistedRepeatSettings?.to;
+  const actorRepeatSources = useMemo(
+    () => ({
+      repeatRangeFromActor,
+      repeatEachVerseFromActor,
+      delayMultiplierFromActor,
+      fromVerseNumberFromActor,
+      toVerseNumberFromActor,
+    }),
+    [
+      repeatRangeFromActor,
+      repeatEachVerseFromActor,
+      delayMultiplierFromActor,
+      fromVerseNumberFromActor,
+      toVerseNumberFromActor,
+    ],
+  );
+  const persistedRepeatSources = useMemo(
+    () => ({
+      persistedRepeatRange,
+      persistedRepeatEachVerse,
+      persistedDelayMultiplier,
+      persistedFromVerseKey,
+      persistedToVerseKey,
+    }),
+    [
+      persistedRepeatRange,
+      persistedRepeatEachVerse,
+      persistedDelayMultiplier,
+      persistedFromVerseKey,
+      persistedToVerseKey,
+    ],
+  );
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
@@ -82,39 +136,86 @@ const RepeatAudioModal = ({
     chapterId,
   );
 
-  const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
-    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
-    from: selectedVerseKey ?? firstVerseKeyInThisChapter,
-    to: selectedVerseKey ?? lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
-  });
+  const parsedChapterNumber = Number.parseInt(chapterId, 10);
+  const chapterNumber = Number.isNaN(parsedChapterNumber) ? 1 : parsedChapterNumber;
 
-  // reset verseRepetition's `to` and `from`, when chapter changed
+  const defaultVerseRepetition = useMemo<VerseRepetitionState>(
+    () =>
+      buildDefaultVerseRepetition({
+        chapterNumber,
+        firstVerseKeyInChapter: firstVerseKeyInThisChapter,
+        lastVerseKeyInChapter: lastVerseKeyInThisChapter,
+        selectedVerseKey,
+        audioSurah,
+        ...actorRepeatSources,
+        ...persistedRepeatSources,
+      }),
+    [
+      audioSurah,
+      chapterNumber,
+      firstVerseKeyInThisChapter,
+      lastVerseKeyInThisChapter,
+      actorRepeatSources,
+      persistedRepeatSources,
+      selectedVerseKey,
+    ],
+  );
+
+  const [verseRepetition, setVerseRepetition] =
+    useState<VerseRepetitionState>(defaultVerseRepetition);
+
   useEffect(() => {
-    setVerseRepetition((prevVerseRepetition) => ({
-      ...prevVerseRepetition,
-      from: selectedVerseKey || firstVerseKeyInThisChapter,
-      to: selectedVerseKey || lastVerseKeyInThisChapter,
-    }));
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
+    if (!isOpen) return;
+    setVerseRepetition(defaultVerseRepetition);
+  }, [defaultVerseRepetition, isOpen]);
 
-  const play = () => {
+  const play = (settings: VerseRepetitionState) => {
+    const normalizedRange = normalizeVerseRange(settings.from, settings.to);
+    const normalizedSettings = { ...settings, ...normalizedRange };
+    const { from, to } = normalizedSettings;
+    if (!from || !to) {
+      toast(t('error.ranges-no-value'), { status: ToastStatus.Warning });
+      return;
+    }
+
+    const fromVerseNumber = getVerseNumberFromKey(from);
+    const toVerseNumber = getVerseNumberFromKey(to);
+    const surahNumber = getChapterNumberFromKey(from);
+
+    if (Number.isNaN(fromVerseNumber) || Number.isNaN(toVerseNumber) || Number.isNaN(surahNumber)) {
+      toast(t('error.general'), { status: ToastStatus.Warning });
+      return;
+    }
+
     audioService.send({
       type: 'SET_REPEAT_SETTING',
-      delayMultiplier: Number(verseRepetition.delayMultiplier),
-      repeatEachVerse: Number(verseRepetition.repeatEachVerse),
-      from: Number(getVerseNumberFromKey(verseRepetition.from)),
-      to: Number(getVerseNumberFromKey(verseRepetition.to)),
-      repeatRange: Number(verseRepetition.repeatRange),
-      surah: Number(getChapterNumberFromKey(verseRepetition.from)),
+      delayMultiplier: normalizedSettings.delayMultiplier,
+      repeatEachVerse: normalizedSettings.repeatEachVerse,
+      from: fromVerseNumber,
+      to: toVerseNumber,
+      repeatRange: normalizedSettings.repeatRange,
+      surah: surahNumber,
     });
     onClose();
   };
 
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
-    onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, play);
+    const normalizedRange = normalizeVerseRange(verseRepetition.from, verseRepetition.to);
+    const normalizedSettings = {
+      ...verseRepetition,
+      ...normalizedRange,
+    };
+    const serializableSettings = serializeRepeatSettings(normalizedSettings);
+    const previousRepeatSettings = serializeOptionalRepeatSettings(persistedRepeatSettings);
+    onSettingsChange(
+      'repeatSettings',
+      prepareRepeatSettingsForApi(serializableSettings),
+      setRepeatSettings(serializableSettings),
+      setRepeatSettings(previousRepeatSettings),
+      PreferenceGroup.AUDIO,
+      () => play(normalizedSettings),
+    );
   };
 
   const onCancelClick = () => {
@@ -137,18 +238,25 @@ const RepeatAudioModal = ({
     setRepetitionMode(mode);
   };
 
-  const onSingleVerseChange = (verseKey) => {
+  const onSingleVerseChange = (verseKey: string) => {
     logValueChange('repeat_single_verse', verseRepetition.repeatRange, verseKey);
-    setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey });
+    const normalizedRange = normalizeVerseRange(verseKey, verseKey);
+    setVerseRepetition({ ...verseRepetition, ...normalizedRange });
   };
 
-  const onRangeChange = (range) => {
+  const onRangeChange = (range: Partial<{ from: string; to: string }>) => {
     const isFrom = !!range.from;
     const logKey = isFrom ? 'repeat_verse_range_from' : 'repeat_verse_range_to';
     const oldValue = isFrom ? verseRepetition.from : verseRepetition.to;
     const newValue = isFrom ? range.from : range.to;
     logValueChange(logKey, oldValue, newValue);
-    setVerseRepetition({ ...verseRepetition, ...range });
+    const candidateFrom = range.from ?? verseRepetition.from;
+    const candidateTo = range.to ?? verseRepetition.to;
+    const normalizedRange = normalizeVerseRange(candidateFrom, candidateTo);
+    setVerseRepetition({
+      ...verseRepetition,
+      ...normalizedRange,
+    });
   };
 
   const onRepeatRangeChange = (val) => {

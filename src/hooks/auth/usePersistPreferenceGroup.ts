@@ -162,7 +162,16 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
               setIsLoading(false);
             });
         } else {
-          action();
+          try {
+            action();
+            if (successCallback) {
+              successCallback();
+            }
+          } catch (error) {
+            toast(t('error.pref-persist-fail'), {
+              status: ToastStatus.Warning,
+            });
+          }
         }
       },
       onSettingsChange: (
@@ -216,7 +225,16 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
               setIsLoading(false);
             });
         } else {
-          dispatch(action);
+          try {
+            dispatch(action);
+            if (successCallback) {
+              successCallback();
+            }
+          } catch (error) {
+            toast(t('error.pref-persist-fail'), {
+              status: ToastStatus.Warning,
+            });
+          }
         }
       },
     }),

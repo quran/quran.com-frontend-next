@@ -11,8 +11,7 @@ let audioUtilities: AudioUtilities;
 
 // Setup: Set some values for the repeat modal on surah 75 so that
 // they are saved in the DB for the logged in user
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Setup: Save repeat modal values for logged in user',
   { tag: ['@setup', '@audio', '@repeat-audio'] },
   async ({ page, context, isMobile }) => {
@@ -51,8 +50,7 @@ test.beforeEach(async ({ page, context, isMobile }) => {
   ]);
 });
 
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Values are persisted between sessions for logged in user',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {

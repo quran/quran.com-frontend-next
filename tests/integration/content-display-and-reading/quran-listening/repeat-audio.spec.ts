@@ -24,8 +24,7 @@ test(
   },
 );
 
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Repeat modal has persistent values when closing and opening',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {
@@ -48,8 +47,7 @@ test.skip(
   },
 );
 
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Repeat modal has persistent values between sessions',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {
@@ -74,8 +72,7 @@ test.skip(
   },
 );
 
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Repeat modal lost only the verse values when switching chapters',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {
@@ -100,8 +97,7 @@ test.skip(
   },
 );
 
-// TODO: Unskip when PR 2548 is merged
-test.skip(
+test(
   'Going back to a surah retains repeat modal values',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {
