@@ -12,16 +12,9 @@ const DEFAULT_ROOT_MARGIN = '-131.6px 0px -68% 0px';
 const OBSERVER_THRESHOLD = 0.1;
 export const QURAN_READER_OBSERVER_ID = 'quranReaderObserver';
 export const REFLECTIONS_OBSERVER_ID = 'reflectionsObserver';
-/**
- * the top -115.6px was calculated based on:
- *
- * 1. the height of emptySpacePlaceholder of navbar (3.6rem).
- * 2. the top padding of the QuranReader container (2rem).
- * 3. the top and bottom margin of the ReadingPreferenceSwitcher container (1.625rem).
- *
- * and the total is 7.225rem around 115.6 pixels.
- */
-const READING_MODE_ROOT_MARGIN = '-115.6px 0px -70% 0px';
+// Mushaf view: narrower top allowance (header only) and tighter bottom margin so the top-most verse
+// stays selected and the next verse doesn’t take over as soon as it peeks in.
+const READING_MODE_ROOT_MARGIN = '-40px 0px -85% 0px';
 
 /**
  * Get the observer options based on the reading preference.
