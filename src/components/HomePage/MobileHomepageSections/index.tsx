@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import CommunitySection from '../CommunitySection';
 import ExploreTopicsSection from '../ExploreTopicsSection';
 import LearningPlansSection from '../LearningPlansSection';
+import QuranGrowthJourneySection from '../QuranGrowthJourneySection';
 import QuranInYearSection from '../QuranInYearSection';
 
 import styles from '@/pages/index.module.scss';
@@ -36,6 +37,9 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, ch
     </>
   ) : (
     <>
+      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+        <QuranGrowthJourneySection />
+      </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <ExploreTopicsSection />
       </div>
