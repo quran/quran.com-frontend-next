@@ -14,7 +14,7 @@ test(
   { tag: ['@persistence', '@language', '@slow'] },
   async ({ page, context }) => {
     // 1. Open the language selector menu
-    await page.getByTestId('language-selector-button').click();
+    await page.getByTestId('language-selector-button-navbar').click();
 
     // 2. select Spanish and wait for navigation to /es
     await Promise.all([
