@@ -67,7 +67,7 @@ const VersePreview = () => {
   }
 
   return (
-    <div dir="rtl">
+    <div dir="rtl" className={styles.container}>
       <TajweedFontPalettes
         pageNumber={sampleVerse.pageNumber}
         quranFont={quranReaderStyles.quranFont}
@@ -77,6 +77,7 @@ const VersePreview = () => {
         translationFontScale={quranReaderStyles.translationFontScale}
         text={sampleVerse.translations?.[0]?.text}
         languageId={sampleVerse.translations?.[0]?.languageId}
+        className={styles.translationText}
       />
     </div>
   );
