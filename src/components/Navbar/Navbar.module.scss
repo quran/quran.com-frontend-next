@@ -34,22 +34,3 @@
     transform: translate3d(0, calc(-1 * (var(--navbar-container-height))), 0);
   }
 }
-
-.donateButton {
-  color: var(--color-text-link-new);
-  --themed-bg: var(--color-success-faded);
-  --themed-border: var(--color-success-faded);
-  font-weight: var(--font-weight-semibold);
-
-  &:hover {
-    --themed-bg: var(--color-success-faded);
-    --themed-border: var(--color-success-faded);
-    color: var(--color-text-link-new);
-  }
-
-  svg {
-    path {
-      fill: var(--color-blue-buttons-and-icons);
-    }
-  }
-}
