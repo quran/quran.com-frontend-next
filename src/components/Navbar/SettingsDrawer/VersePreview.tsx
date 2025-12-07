@@ -7,7 +7,6 @@ import useSWR from 'swr';
 import styles from './VersePreview.module.scss';
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import TajweedFontPalettes from '@/components/Verse/TajweedFontPalettes';
 import VerseText from '@/components/Verse/VerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { TooltipType } from '@/dls/Tooltip';
@@ -74,10 +73,6 @@ const VersePreview = () => {
     <>
       <div className={styles.previewTitle}>{t('verse-preview-title')}</div>
       <div dir="rtl" className={styles.container}>
-        <TajweedFontPalettes
-          pageNumber={sampleVerse.pageNumber}
-          quranFont={quranReaderStyles.quranFont}
-        />
         <VerseText
           words={sampleVerse.words as Word[]}
           tooltipType={TooltipType.SUCCESS}
