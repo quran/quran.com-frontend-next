@@ -125,27 +125,29 @@ test(
     // 3. Grab the language container
     const languageContainer = page.getByTestId('language-container');
 
-    // Select Spanish and wait for navigation to /es
+    // Select French and wait for navigation to /fr
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Español' }).click(),
-      page.waitForURL('**/es', { waitUntil: 'networkidle' }),
+      languageContainer.getByRole('button', { name: 'Français' }).click(),
+      page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
     ]);
 
-    await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
 
     // Navigate to surah Al-Fatiha
     await Promise.all([
-      page.waitForURL('**/es/1'),
+      page.waitForURL('**/fr/1'),
       page.getByTestId('chapter-1-container').click(),
     ]);
 
     const firstVerse = page.getByTestId('verse-1:3');
-    // Make sure the translation in Spanish is visible
-    await expect(firstVerse.getByText('el Compasivo, el Misericordioso.')).toBeVisible();
+    // Make sure the translation in French is visible
+    await expect(
+      firstVerse.getByText('le Tout Miséricordieux, le Très Miséricordieux'),
+    ).toBeVisible();
     // Make sure Isa Garcia translation is selected in the settings
     await homePage.openSettingsDrawer();
-    const translationSelect = page.getByTestId('Traducciones seleccionadas Card');
+    const translationSelect = page.getByTestId('Traductions sélectionnées Card');
     await expect(translationSelect).toBeVisible();
-    await expect(translationSelect).toContainText('Sheikh Isa Garcia');
+    await expect(translationSelect).toContainText('Muhammad Hamidullah');
   },
 );

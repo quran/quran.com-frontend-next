@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { GetStaticProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,12 +13,12 @@ import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySect
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const path = '/developers';
-const DevelopersPage = () => {
+const DevelopersPage: NextPage = () => {
   const { t, lang } = useTranslation('developers');
   return (
     <>
@@ -147,14 +147,6 @@ const DevelopersPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/developers');
 
 export default DevelopersPage;
