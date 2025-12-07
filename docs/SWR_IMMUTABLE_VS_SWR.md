@@ -103,7 +103,6 @@ const { data } = useSWR(key, fetcher, mutatingFetcherConfig);
   revalidateOnFocus: true,       // Keep for cross-tab sync
   revalidateOnReconnect: false,  // Skip - unnecessary for user data
   dedupingInterval: 10000,       // 10s deduping window
-  focusThrottleInterval: 30000,  // Max one focus revalidation per 30s
 }
 
 // useSWRImmutable equivalent
