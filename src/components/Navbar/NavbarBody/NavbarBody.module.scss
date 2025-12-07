@@ -1,5 +1,5 @@
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .itemsContainer {
   display: flex;
@@ -7,6 +7,24 @@
   justify-content: space-between;
   height: 100%;
   background-color: var(--color-background-elevated);
+}
+
+.bannerContainerTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.bannerContainerCenter {
+  display: none;
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .centerVertically {
