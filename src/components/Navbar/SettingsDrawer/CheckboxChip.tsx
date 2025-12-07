@@ -13,7 +13,14 @@ interface CheckboxChipProps {
   disabled?: boolean;
 }
 
-const CheckboxChip = ({ checked, label, id, name, onChange, disabled }: CheckboxChipProps) => {
+const CheckboxChip = ({
+  checked,
+  label,
+  id,
+  name,
+  onChange,
+  disabled,
+}: CheckboxChipProps): JSX.Element => {
   return (
     <label
       htmlFor={id}

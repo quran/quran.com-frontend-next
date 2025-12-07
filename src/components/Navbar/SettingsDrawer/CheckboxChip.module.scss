@@ -4,6 +4,9 @@
   height: var(--spacing-hairline-px);
   padding: 0;
   overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .chip {
@@ -25,13 +28,12 @@
   color: var(--color-text-inverse);
 }
 
-
 .checkIcon {
   display: inline-flex;
 
   svg {
-    width: var(--spacing-microlarge-px);
-    height: var(--spacing-microlarge-px);
+    width: var(--spacing-medium1-5-px);
+    height: var(--spacing-medium1-5-px);
   }
 }
 
