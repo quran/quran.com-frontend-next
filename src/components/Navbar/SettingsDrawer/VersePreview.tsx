@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import useTranslation from 'next-translate';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 import Word from 'types/Word';
@@ -22,6 +23,7 @@ import getSampleVerse from '@/utils/sampleVerse';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
+  const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const settingsTheme: { type: ThemeType } = useSelector(selectTheme, shallowEqual);
   const { themeVariant } = useThemeDetector();
@@ -68,8 +70,7 @@ const VersePreview = () => {
 
   return (
     <>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
-      <div className={styles.previewTitle}>Preview:</div>
+      <div className={styles.previewTitle}>{t('verse-preview-title')}</div>
       <div dir="rtl" className={styles.container}>
         <TajweedFontPalettes
           pageNumber={sampleVerse.pageNumber}
