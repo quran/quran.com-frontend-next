@@ -1,5 +1,3 @@
-@use 'src/styles/breakpoints';
-
 .container {
   margin-block-start: 0;
   box-sizing: border-box;
@@ -32,12 +30,9 @@
   align-items: center;
   gap: var(--spacing-xxsmall-px);
   border-radius: var(--border-radius-medium-px);
-  vertical-align: middle;
   text-decoration: none;
 }
 
-.icon {
-  > svg path {
-    fill: var(--color-text-link-new);
-  }
+.icon > svg path {
+  fill: var(--color-text-link-new);
 }

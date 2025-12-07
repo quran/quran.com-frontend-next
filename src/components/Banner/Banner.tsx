@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import styles from './Banner.module.scss';
 
@@ -20,13 +20,17 @@ interface BannerProps {
 
 const Banner = ({ text, ctaButtonText }: BannerProps) => {
   const isLoggedIn = useIsLoggedIn();
-  const { goal } = useGetStreakWithMetadata();
+  const { goal, isLoading } = useGetStreakWithMetadata();
   const hasGoal = !!goal;
 
   // Route logged-in users with an existing goal to the progress page,
   // otherwise route to the reading-goal page.
-  const ctaLink =
-    isLoggedIn && hasGoal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl();
+  // When isLoading is false, the API call has completed and hasGoal accurately reflects goal status.
+  const ctaLink = useMemo(() => {
+    return isLoggedIn && !isLoading && hasGoal
+      ? getReadingGoalProgressNavigationUrl()
+      : getReadingGoalNavigationUrl();
+  }, [isLoggedIn, isLoading, hasGoal]);
 
   const handleButtonClick = useCallback(() => {
     logButtonClick('banner_cta', {
