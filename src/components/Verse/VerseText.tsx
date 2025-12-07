@@ -34,6 +34,7 @@ type VerseTextProps = {
   shouldShowH1ForSEO?: boolean;
   bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
+  isRecitationDisabled?: boolean;
 };
 
 const VerseText = ({
@@ -43,6 +44,7 @@ const VerseText = ({
   shouldShowH1ForSEO = false,
   bookmarksRangeUrl,
   tooltipType,
+  isRecitationDisabled = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -115,6 +117,7 @@ const VerseText = ({
               shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
               bookmarksRangeUrl={bookmarksRangeUrl}
               tooltipType={tooltipType}
+              isRecitationDisabled={isRecitationDisabled}
             />
           ))}
         </div>
