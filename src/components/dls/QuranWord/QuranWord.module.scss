@@ -3,6 +3,11 @@
   cursor: pointer;
   white-space: nowrap;
 }
+
+.interactionDisabled {
+  cursor: auto;
+}
+
 .additionalWordGap {
   margin-inline-end: var(--spacing-xxsmall);
 }

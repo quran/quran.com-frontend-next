@@ -23,6 +23,6 @@
   width: 100%;
 }
 
-.skeletonContainer+.skeletonContainer {
+.skeletonContainer + .skeletonContainer {
   margin-block-start: var(--spacing-large);
 }

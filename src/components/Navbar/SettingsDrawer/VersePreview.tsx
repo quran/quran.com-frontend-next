@@ -22,6 +22,8 @@ import getSampleVerse from '@/utils/sampleVerse';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
+const HIGHLIGHTED_WORD_POSITION = 3;
+
 const VersePreview = () => {
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -76,7 +78,12 @@ const VersePreview = () => {
           pageNumber={sampleVerse.pageNumber}
           quranFont={quranReaderStyles.quranFont}
         />
-        <VerseText words={sampleVerse.words as Word[]} tooltipType={TooltipType.SUCCESS} />
+        <VerseText
+          words={sampleVerse.words as Word[]}
+          tooltipType={TooltipType.SUCCESS}
+          highlightedWordPosition={HIGHLIGHTED_WORD_POSITION}
+          isWordInteractionDisabled
+        />
         <TranslationText
           translationFontScale={quranReaderStyles.translationFontScale}
           text={sampleVerse.translations?.[0]?.text}

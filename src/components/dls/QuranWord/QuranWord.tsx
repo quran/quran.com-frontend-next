@@ -53,6 +53,8 @@ export type QuranWordProps = {
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
+  isWordInteractionDisabled?: boolean;
+  shouldForceShowTooltip?: boolean;
 };
 
 const QuranWord = ({
@@ -65,6 +67,8 @@ const QuranWord = ({
   isFontLoaded = true,
   bookmarksRangeUrl,
   tooltipType,
+  isWordInteractionDisabled = false,
+  shouldForceShowTooltip = false,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -208,19 +212,18 @@ const QuranWord = ({
     handleWordAction();
   }, [handleWordAction]);
 
-  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
+  const shouldHandleWordClicking = !isWordInteractionDisabled && word.charTypeName !== CharType.End;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
-      {...(shouldHandleWordClicking && { onClick, onKeyPress })}
-      role="button"
-      tabIndex={0}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress, role: 'button', tabIndex: 0 })}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
-        [styles.highlightOnHover]: isRecitationEnabled,
+        [styles.interactionDisabled]: isWordInteractionDisabled,
+        [styles.highlightOnHover]: !isWordInteractionDisabled && isRecitationEnabled,
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -238,10 +241,17 @@ const QuranWord = ({
       <Wrapper
         shouldWrap
         wrapper={(children) => {
-          if (isTranslationMode && showTooltip) {
+          const shouldShowTranslationTooltip =
+            isTranslationMode &&
+            showTooltip &&
+            (shouldForceShowTooltip || !isWordInteractionDisabled);
+
+          if (shouldShowTranslationTooltip) {
+            const isTooltipOpen =
+              shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
             return (
               <MobilePopover
-                isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
+                isOpen={isTooltipOpen ? true : undefined}
                 defaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
@@ -252,7 +262,7 @@ const QuranWord = ({
             );
           }
 
-          if (isReadingModeMobile) {
+          if (isReadingModeMobile && !isWordInteractionDisabled) {
             return (
               <>
                 <div
@@ -275,7 +285,7 @@ const QuranWord = ({
             );
           }
 
-          if (isReadingModeDesktop) {
+          if (isReadingModeDesktop && !isWordInteractionDisabled) {
             return (
               <ReadingViewWordPopover
                 word={word}
