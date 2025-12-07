@@ -370,69 +370,90 @@ export const performLanguageDetection = async (
       const acceptLanguage =
         (req.headers[HEADERS.ACCEPT_LANGUAGE] as string) || DEFAULT_VALUES.ACCEPT_LANGUAGE;
       const cloudflareCountry = req.headers[HEADERS.CLOUDFLARE_COUNTRY] as string | undefined;
-      const { detectedLanguage, detectedCountry } = detectUserLanguageAndCountry(
+      const { detectedLanguage: deviceLanguage, detectedCountry } = detectUserLanguageAndCountry(
         acceptLanguage,
         cloudflareCountry,
       );
-      logInfo('Detected language and country', { detectedLanguage, detectedCountry });
+      logInfo('Detected language and country', {
+        detectedLanguage: deviceLanguage,
+        detectedCountry,
+      });
+      const currentLocale = locale || DEFAULT_VALUES.LANGUAGE;
 
       // STEP 2: Check if user has manually overridden language selection
       const hasManualSelection = hasManualLanguageSelection(req.headers[HEADERS.COOKIE] as string);
       logInfo('Manual language selection check', { hasManualSelection });
 
-      // STEP 3: Determine if we should redirect to a different locale
-      const shouldRedirect = shouldRedirectToLocale(
-        locale || DEFAULT_VALUES.LANGUAGE,
-        detectedLanguage,
-        hasManualSelection,
+      // STEP 3: Fetch country preference, extract API-suggested locale, and determine effective locale
+      const localeForPreferences = hasManualSelection ? currentLocale : deviceLanguage;
+      const countryForPreferences = getCountryCodeForPreferences(
+        localeForPreferences,
+        detectedCountry,
       );
-
-      // STEP 4: Determine the final locale and fetch country preference
-      // This single API call serves dual purposes:
-      // 1. Validates the language/country combination for redirects
-      // 2. Provides country preference data for the final locale
-      const finalLocale = shouldRedirect ? detectedLanguage : locale || DEFAULT_VALUES.LANGUAGE;
-      const countryForPreferences = getCountryCodeForPreferences(finalLocale, detectedCountry);
       let countryLanguagePreference: CountryLanguagePreferenceResponse | undefined;
-      let canRedirect = shouldRedirect; // Track if we can actually redirect
+      let apiSuggestedLocale: string | undefined;
+      let apiFailed = false;
 
       try {
         countryLanguagePreference = await getCountryLanguagePreference(
-          finalLocale,
+          localeForPreferences,
           countryForPreferences,
         );
         logInfo('Fetched country preference for final locale', {
-          finalLocale,
+          finalLocale: localeForPreferences,
           detectedCountry: countryForPreferences,
-          shouldRedirect,
           countryLanguagePreference,
         });
-      } catch (error) {
-        handleCountryPreferenceError(error, finalLocale, countryForPreferences, pagePath);
-        // If API fails and we were planning to redirect, we can't redirect anymore
-        if (shouldRedirect) {
-          canRedirect = false;
-          logInfo('Redirect disabled due to API failure', {
-            detectedLanguage,
-            detectedCountry: countryForPreferences,
-          });
+
+        // Only use API-suggested locale for auto-detection; respect user's manual selection
+        if (!hasManualSelection) {
+          apiSuggestedLocale =
+            countryLanguagePreference?.defaultLocale &&
+            typeof countryLanguagePreference.defaultLocale === 'string' &&
+            countryLanguagePreference.defaultLocale.trim() !== '' &&
+            locales.includes(countryLanguagePreference.defaultLocale)
+              ? countryLanguagePreference.defaultLocale
+              : undefined;
         }
+      } catch (error) {
+        handleCountryPreferenceError(error, localeForPreferences, countryForPreferences, pagePath);
+        apiFailed = true;
+      }
+
+      // Determine the effective locale for the site using API defaultLocale when available
+      const effectiveLocale = hasManualSelection
+        ? currentLocale
+        : apiSuggestedLocale || deviceLanguage;
+
+      // STEP 4: Evaluate redirect conditions (includes API failure handling)
+      const shouldRedirect = shouldRedirectToLocale(
+        currentLocale,
+        effectiveLocale,
+        hasManualSelection,
+      );
+      const canRedirect = shouldRedirect && !apiFailed;
+
+      if (!canRedirect && shouldRedirect) {
+        logInfo('Redirect disabled due to API failure', {
+          effectiveLocale,
+          detectedCountry: countryForPreferences,
+        });
       }
 
       // STEP 5: Handle redirect if needed and API call succeeded
       if (canRedirect) {
         // Use the actual resolved URL instead of pagePath to handle dynamic routes
         const actualPath = context.resolvedUrl || context.req.url || pagePath;
-        const redirectPath = `/${detectedLanguage}${actualPath}`;
+        const redirectPath = `/${effectiveLocale}${actualPath}`;
         logInfo('Language redirect with country preference', {
-          detectedLanguage,
+          detectedLanguage: effectiveLocale,
           detectedCountry,
           redirectPath,
           actualPath,
         });
 
         return {
-          detectedLanguage,
+          detectedLanguage: effectiveLocale,
           detectedCountry,
           countryLanguagePreference,
           shouldRedirect: true,
@@ -442,7 +463,7 @@ export const performLanguageDetection = async (
 
       // STEP 6: No redirect needed - continue with current locale
       return {
-        detectedLanguage,
+        detectedLanguage: effectiveLocale,
         detectedCountry,
         countryLanguagePreference,
         shouldRedirect: false,
