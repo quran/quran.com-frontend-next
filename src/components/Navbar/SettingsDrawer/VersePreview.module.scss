@@ -2,7 +2,7 @@
   color: var(--color-text-faded-new);
   font-size: var(--font-size-xxsmall-px);
   padding-block-end: var(--spacing-xsmall-px);
-  border-block-end: 1px solid var(--color-separators-ayah-level);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
   margin-block-end: calc(2 * var(--spacing-large-px));
   font-weight: var(--font-weight-medium);
 }
