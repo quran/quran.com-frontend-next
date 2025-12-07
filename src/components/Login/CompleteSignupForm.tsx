@@ -2,6 +2,7 @@
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
@@ -164,7 +165,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
       size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={styles.submitButton}
+      className={classNames(styles.submitButton, styles.smallMarginTop)}
     >
       {t('continue')}
     </Button>
