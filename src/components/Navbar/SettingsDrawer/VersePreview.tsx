@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 
-import useTranslation from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
-import Word from 'types/Word';
 
 import styles from './VersePreview.module.scss';
 
@@ -20,6 +19,7 @@ import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
+import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
