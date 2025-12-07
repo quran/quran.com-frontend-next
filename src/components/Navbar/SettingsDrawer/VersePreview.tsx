@@ -2,12 +2,15 @@ import { useEffect } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
+import Word from 'types/Word';
 
 import styles from './VersePreview.module.scss';
 
-import PlainVerseText from '@/components/Verse/PlainVerseText';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import TajweedFontPalettes from '@/components/Verse/TajweedFontPalettes';
+import VerseText from '@/components/Verse/VerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import { TooltipType } from '@/dls/Tooltip';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -16,7 +19,6 @@ import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
-import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
@@ -70,7 +72,12 @@ const VersePreview = () => {
         pageNumber={sampleVerse.pageNumber}
         quranFont={quranReaderStyles.quranFont}
       />
-      <PlainVerseText words={sampleVerse.words as Word[]} />
+      <VerseText words={sampleVerse.words as Word[]} tooltipType={TooltipType.SUCCESS} />
+      <TranslationText
+        translationFontScale={quranReaderStyles.translationFontScale}
+        text={sampleVerse.translations?.[0]?.text}
+        languageId={sampleVerse.translations?.[0]?.languageId}
+      />
     </div>
   );
 };

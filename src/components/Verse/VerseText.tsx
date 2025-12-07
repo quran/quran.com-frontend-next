@@ -13,6 +13,7 @@ import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import QuranWord from '@/dls/QuranWord/QuranWord';
+import { TooltipType } from '@/dls/Tooltip';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -32,6 +33,7 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
   bookmarksRangeUrl?: string | null;
+  tooltipType?: TooltipType;
 };
 
 const VerseText = ({
@@ -40,6 +42,7 @@ const VerseText = ({
   isHighlighted,
   shouldShowH1ForSEO = false,
   bookmarksRangeUrl,
+  tooltipType,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -111,6 +114,7 @@ const VerseText = ({
               isHighlighted={word.verseKey === selectedVerseKey}
               shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
               bookmarksRangeUrl={bookmarksRangeUrl}
+              tooltipType={tooltipType}
             />
           ))}
         </div>

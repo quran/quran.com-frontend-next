@@ -17,6 +17,7 @@ import WordMobileModal from '@/components/QuranReader/ReadingView/WordMobileModa
 import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
+import { TooltipType } from '@/dls/Tooltip';
 import useIsMobile from '@/hooks/useIsMobile';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
@@ -51,6 +52,7 @@ export type QuranWordProps = {
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
+  tooltipType?: TooltipType;
 };
 
 const QuranWord = ({
@@ -62,6 +64,7 @@ const QuranWord = ({
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
   bookmarksRangeUrl,
+  tooltipType,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -242,6 +245,7 @@ const QuranWord = ({
                 defaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
+                tooltipType={tooltipType}
               >
                 {children}
               </MobilePopover>
