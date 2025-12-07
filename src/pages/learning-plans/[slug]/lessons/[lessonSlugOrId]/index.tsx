@@ -6,66 +6,78 @@ import { useRouter } from 'next/router';
 import LessonContent from '@/components/Course/LessonContent';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
-import useEnrollUser from '@/hooks/auth/useEnrollUser';
-import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
+import useCourseEnrollment from '@/hooks/auth/useCourseEnrollment';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
-import { Course, Lesson } from '@/types/auth/Course';
+import { Lesson } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
-import { makeGetCourseUrl, makeGetLessonUrl } from '@/utils/auth/apiPaths';
+import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
 import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import { BaseResponse } from 'types/ApiResponses';
 
-interface Props {
-  hasError?: boolean;
-  page?: any[];
-}
-
-const LessonPage: NextPage<Props> = () => {
+const LessonPage: NextPage = () => {
   const router = useRouter();
   const { slug, lessonSlugOrId } = router.query;
-  const enrollUserInCourse = useEnrollUser();
-  const mutate = useMutateWithoutRevalidation();
 
-  const renderError = (error: any) => {
-    if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
-      router.push(
-        getLoginNavigationUrl(getLessonNavigationUrl(slug as string, lessonSlugOrId as string)),
-      );
-    }
-    return undefined;
-  };
+  // Type guards for router query params
+  const courseSlug = typeof slug === 'string' ? slug : '';
+  const lessonSlug = typeof lessonSlugOrId === 'string' ? lessonSlugOrId : '';
+
+  const { enroll } = useCourseEnrollment();
+
+  const renderError = useCallback(
+    (error: { message?: string }) => {
+      if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
+        router.push(getLoginNavigationUrl(getLessonNavigationUrl(courseSlug, lessonSlug)));
+      }
+      return undefined;
+    },
+    [router, courseSlug, lessonSlug],
+  );
 
   const handleFetchSuccess = useCallback(
-    async (lesson: Lesson) => {
+    (data: BaseResponse) => {
+      const lesson = data as Lesson;
+      // Skip if no course data or user is already enrolled
       if (!lesson?.course || lesson.course.isUserEnrolled) {
         return;
       }
 
-      const { success } = await enrollUserInCourse(lesson.course.id, EnrollmentMethod.AUTOMATIC);
-
-      if (success) {
-        mutate(makeGetCourseUrl(slug as string), (currentCourse: Course) => ({
-          ...currentCourse,
-          isUserEnrolled: true,
-        }));
-      }
+      // Auto-enroll silently - errors are handled internally by the hook
+      // Fire-and-forget pattern for auto-enrollment
+      enroll(lesson.course.id, EnrollmentMethod.AUTOMATIC, {
+        silent: true,
+        courseSlug: lesson.course.slug,
+      }).catch(() => {
+        // Errors already logged in hook, nothing to do here
+      });
     },
-    [enrollUserInCourse, mutate, slug],
+    [enroll],
   );
 
-  const bodyRenderer = ((lesson: Lesson) => {
-    if (lesson) {
-      return (
-        <LessonContent
-          lesson={lesson}
-          lessonSlugOrId={lessonSlugOrId as string}
-          courseSlug={slug as string}
-        />
-      );
-    }
-    return <></>;
-  }) as any;
+  const renderLesson = useCallback(
+    (data: BaseResponse) => {
+      const lesson = data as Lesson;
+      if (!lesson) {
+        return null;
+      }
+
+      return <LessonContent lesson={lesson} lessonSlugOrId={lessonSlug} courseSlug={courseSlug} />;
+    },
+    [lessonSlug, courseSlug],
+  );
+
+  // Don't render DataFetcher until we have the route params
+  if (!courseSlug || !lessonSlug) {
+    return (
+      <div className={layoutStyles.pageContainer}>
+        <div className={layoutStyles.loadingContainer}>
+          <Spinner />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={layoutStyles.pageContainer}>
@@ -75,10 +87,10 @@ const LessonPage: NextPage<Props> = () => {
             <Spinner />
           </div>
         )}
-        queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
+        queryKey={makeGetLessonUrl(courseSlug, lessonSlug)}
         fetcher={privateFetcher}
         renderError={renderError}
-        render={bodyRenderer}
+        render={renderLesson}
         onFetchSuccess={handleFetchSuccess}
       />
     </div>

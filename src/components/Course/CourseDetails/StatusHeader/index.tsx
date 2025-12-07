@@ -1,5 +1,4 @@
-/* eslint-disable react-func/max-lines-per-function */
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,11 +10,9 @@ import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedba
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useEnrollUser from '@/hooks/auth/useEnrollUser';
-import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
+import useCourseEnrollment from '@/hooks/auth/useCourseEnrollment';
 import { Course } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
-import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -31,36 +28,39 @@ type Props = {
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
-  const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
   const { t } = useTranslation('learn');
-  const mutate = useMutateWithoutRevalidation();
-  const userLoggedIn = isLoggedIn();
-  const enrollUserInCourse = useEnrollUser();
+  const { enroll, isEnrolling } = useCourseEnrollment(slug);
 
-  const enrollAndNavigate = async (): Promise<void> => {
-    setIsLoading(true);
-
-    const { success } = await enrollUserInCourse(id, EnrollmentMethod.MANUAL);
-
-    if (success) {
-      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
-        ...currentCourse,
-        isUserEnrolled: true,
-      }));
-
-      if (lessons?.length > 0) {
-        await router.push(getLessonNavigationUrl(slug, lessons[0].slug));
-      }
-    } else {
-      toast(t('common:error.general'), { status: ToastStatus.Error });
+  const navigateToFirstLesson = (): void => {
+    if (lessons?.length > 0) {
+      router.push(getLessonNavigationUrl(slug, lessons[0].slug));
     }
+  };
 
-    setIsLoading(false);
+  const handleEnrollAndNavigate = async (): Promise<void> => {
+    const result = await enroll(id, EnrollmentMethod.MANUAL);
+
+    switch (result.status) {
+      case 'success':
+        navigateToFirstLesson();
+        break;
+      case 'not_logged_in':
+        // This shouldn't happen as we check before calling, but handle defensively
+        router.push(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+        break;
+      case 'error':
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+        break;
+      default:
+        break;
+    }
   };
 
   const onStartHereClicked = async (): Promise<void> => {
+    const userLoggedIn = isLoggedIn();
+
     logButtonClick('course_enroll', {
       courseId: id,
       isCTA,
@@ -76,11 +76,11 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       return;
     }
 
-    await enrollAndNavigate();
+    await handleEnrollAndNavigate();
   };
 
   const startButton = (
-    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
+    <Button isDisabled={isEnrolling} isLoading={isEnrolling} onClick={onStartHereClicked}>
       {t('start-here')}
     </Button>
   );
