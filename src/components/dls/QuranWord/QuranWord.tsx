@@ -53,7 +53,6 @@ export type QuranWordProps = {
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
-  isRecitationDisabled?: boolean;
 };
 
 const QuranWord = ({
@@ -66,7 +65,6 @@ const QuranWord = ({
   isFontLoaded = true,
   bookmarksRangeUrl,
   tooltipType,
-  isRecitationDisabled = false,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -84,10 +82,7 @@ const QuranWord = ({
 
   const isMobile = useIsMobile();
   const isTranslationMode = readingPreference === ReadingPreference.Translation;
-  // If recitation is explicitly disabled via prop, always disable it regardless of user settings
-  const isRecitationEnabled = isRecitationDisabled
-    ? false
-    : wordClickFunctionality === WordClickFunctionality.PlayAudio;
+  const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`

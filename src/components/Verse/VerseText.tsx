@@ -117,7 +117,6 @@ const VerseText = ({
               shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
               bookmarksRangeUrl={bookmarksRangeUrl}
               tooltipType={tooltipType}
-              isRecitationDisabled={isRecitationDisabled}
             />
           ))}
         </div>

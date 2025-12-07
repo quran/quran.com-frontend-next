@@ -76,11 +76,7 @@ const VersePreview = () => {
           pageNumber={sampleVerse.pageNumber}
           quranFont={quranReaderStyles.quranFont}
         />
-        <VerseText
-          words={sampleVerse.words as Word[]}
-          tooltipType={TooltipType.SUCCESS}
-          isRecitationDisabled={true}
-        />
+        <VerseText words={sampleVerse.words as Word[]} tooltipType={TooltipType.SUCCESS} />
         <TranslationText
           translationFontScale={quranReaderStyles.translationFontScale}
           text={sampleVerse.translations?.[0]?.text}
