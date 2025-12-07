@@ -2,7 +2,7 @@
   inline-size: var(--spacing-medium3-px);
   block-size: var(--spacing-medium3-px);
   border-radius: var(--border-radius-circle);
-  border: 2px solid var(--color-blue-buttons-and-icons);
+  border: var(--spacing-micro-px) solid var(--color-blue-buttons-and-icons);
   background-color: var(--color-background-default);
   display: flex;
   justify-content: center;
