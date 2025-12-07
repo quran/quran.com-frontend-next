@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
@@ -54,7 +55,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
       size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={styles.submitButton}
+      className={classNames(styles.submitButton, styles.smallMarginTop)}
     >
       {t('sign-up')}
     </Button>

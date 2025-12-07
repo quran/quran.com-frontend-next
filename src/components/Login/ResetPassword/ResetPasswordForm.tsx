@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -72,7 +73,7 @@ const ResetPasswordForm: React.FC = () => {
       size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={styles.submitButton}
+      className={classNames(styles.submitButton, styles.smallMarginTop)}
     >
       {t('confirm')}
     </Button>

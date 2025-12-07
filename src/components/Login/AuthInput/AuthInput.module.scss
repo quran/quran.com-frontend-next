@@ -1,9 +1,9 @@
 /* Auth-specific container overrides */
 .authContainer {
-  block-size: var(--spacing-xxlarge-px) !important;
+  height: var(--spacing-xxlarge-px) !important;
   border-radius: var(--border-radius-medium-px) !important;
   border: 1px solid var(--color-border-gray-lighter) !important;
-  inline-size: 100%;
+  width: 100%;
   background-color: var(--color-background-default);
   transition: border-color 0.2s ease;
   box-sizing: border-box;
@@ -27,7 +27,7 @@
 
 /* Auth-specific input overrides */
 .authInput {
-  block-size: var(--spacing-xxlarge-px);
+  height: var(--spacing-xxlarge-px);
   box-sizing: border-box;
   border: none;
   margin: 0;

@@ -298,6 +298,10 @@ $container-width: 370px;
   }
 }
 
+.smallMarginTop {
+  margin-top: var(--spacing-small-px);
+}
+
 .inputContainer {
   display: flex;
   flex-direction: column;

@@ -83,7 +83,7 @@ const LoginContainer = () => {
           redirect={redirect}
           onSignUpSuccess={handleEmailLoginSubmit}
         />
-        <PrivacyPolicyText />
+        {activeTab === AuthTab.SignUp && <PrivacyPolicyText />}
         <BackButton onClick={onBack} />
       </>
     );
