@@ -51,11 +51,21 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
 
   const isPendingRef = useRef(false);
 
-  const { data: bookmark, mutate } = useSWR<Bookmark>(
+  const { data: bookmark, mutate } = useSWR<Bookmark | null>(
     isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
     async () => {
-      const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
-      return response;
+      try {
+        const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
+        return response;
+      } catch (error) {
+        // Return null when bookmark doesn't exist (404) so SWR updates cache properly
+        // The API throws the Response object on error
+        if (error instanceof Response && error.status === 404) {
+          return null;
+        }
+        // Re-throw other errors so SWR can handle them
+        throw error;
+      }
     },
     mutatingFetcherConfig,
   );
