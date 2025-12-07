@@ -67,19 +67,23 @@ const VersePreview = () => {
   }
 
   return (
-    <div dir="rtl" className={styles.container}>
-      <TajweedFontPalettes
-        pageNumber={sampleVerse.pageNumber}
-        quranFont={quranReaderStyles.quranFont}
-      />
-      <VerseText words={sampleVerse.words as Word[]} tooltipType={TooltipType.SUCCESS} />
-      <TranslationText
-        translationFontScale={quranReaderStyles.translationFontScale}
-        text={sampleVerse.translations?.[0]?.text}
-        languageId={sampleVerse.translations?.[0]?.languageId}
-        className={styles.translationText}
-      />
-    </div>
+    <>
+      {/* eslint-disable-next-line i18next/no-literal-string */}
+      <div className={styles.previewTitle}>Preview:</div>
+      <div dir="rtl" className={styles.container}>
+        <TajweedFontPalettes
+          pageNumber={sampleVerse.pageNumber}
+          quranFont={quranReaderStyles.quranFont}
+        />
+        <VerseText words={sampleVerse.words as Word[]} tooltipType={TooltipType.SUCCESS} />
+        <TranslationText
+          translationFontScale={quranReaderStyles.translationFontScale}
+          text={sampleVerse.translations?.[0]?.text}
+          languageId={sampleVerse.translations?.[0]?.languageId}
+          className={styles.translationText}
+        />
+      </div>
+    </>
   );
 };
 

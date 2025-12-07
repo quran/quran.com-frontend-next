@@ -1,3 +1,12 @@
+.previewTitle {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-xxsmall-px);
+  padding-block-end: var(--spacing-xsmall-px);
+  border-block-end: 1px solid var(--color-separators-ayah-level);
+  margin-block-end: calc(2 * var(--spacing-large-px));
+  font-weight: var(--font-weight-medium);
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -14,6 +23,6 @@
   width: 100%;
 }
 
-.skeletonContainer + .skeletonContainer {
+.skeletonContainer+.skeletonContainer {
   margin-block-start: var(--spacing-large);
 }
