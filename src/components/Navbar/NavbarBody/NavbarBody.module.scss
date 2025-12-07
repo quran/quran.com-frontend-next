@@ -10,7 +10,9 @@
 }
 
 .bannerContainerTop {
-  @include utility.flex-center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @include breakpoints.tablet {
     display: none;
   }
@@ -19,7 +21,9 @@
 .bannerContainerCenter {
   display: none;
   @include breakpoints.tablet {
-    @include utility.flex-center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
