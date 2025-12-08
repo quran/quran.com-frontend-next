@@ -92,7 +92,7 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
       invalidateBookmarksList();
       showToast('page-bookmarked', ToastStatus.Success);
     } catch (err) {
-      mutate(undefined, { revalidate: true });
+      mutate(null, { revalidate: true });
       showErrorToast(err);
     } finally {
       isPendingRef.current = false;
