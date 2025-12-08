@@ -10,7 +10,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import IconContainer, { IconColor } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
-import BookmarkIcon from '@/icons/bookmark.svg';
+import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
@@ -41,7 +41,7 @@ const MENU_ITEMS = [
     eventName: 'profile_avatar_my_quran',
     navigationUrl: getProfileNavigationUrl(),
     translationKey: 'my-quran',
-    icon: <IconContainer icon={<BookmarkIcon />} color={IconColor.accent} />,
+    icon: <IconContainer icon={<BookmarkFilledIcon />} color={IconColor.accent} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',
