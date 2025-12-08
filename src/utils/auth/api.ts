@@ -100,7 +100,7 @@ import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest'
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
-import SyncDataType from 'types/auth/SyncDataType';
+import { SyncLocalDataPayload } from 'types/auth/SyncDataType';
 import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
@@ -280,7 +280,12 @@ type AddBookmarkParams = {
   verseNumber?: number;
 };
 
-export const addBookmark = async ({ key, mushafId, type, verseNumber }: AddBookmarkParams) =>
+export const addBookmark = async ({
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: AddBookmarkParams): Promise<Bookmark> =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
     mushaf: mushafId,
@@ -371,7 +376,7 @@ export const getStreakWithUserMetadata = async (
 ): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
 
 export const syncUserLocalData = async (
-  payload: Record<SyncDataType, any>,
+  payload: SyncLocalDataPayload,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
@@ -407,11 +412,23 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+export const addCollectionBookmark = async ({
+  collectionId,
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
+}) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -424,14 +441,20 @@ export const deleteCollectionBookmarkById = async (collectionId: string, bookmar
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
   key,
-  mushaf,
+  mushafId,
   type,
   verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -475,8 +498,8 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
-  return postRequest(makeAddCollectionUrl(), { name: collectionName });
+export const addCollection = async (collectionName: string): Promise<Collection> => {
+  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
 };
 
 type QuestionTypes = {

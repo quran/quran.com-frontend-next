@@ -7,7 +7,6 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from '@/components/dls/Spinner/Spinner';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
@@ -38,11 +37,7 @@ const BookmarkAction: React.FC<Props> = ({
   const isMobile = useIsMobile();
 
   // Use custom hook for all bookmark logic
-  const {
-    isVerseBookmarked,
-    isLoading: isVerseBookmarkedLoading,
-    handleToggleBookmark,
-  } = useVerseBookmark({
+  const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
     verse,
     mushafId,
     bookmarksRangeUrl,
@@ -72,11 +67,7 @@ const BookmarkAction: React.FC<Props> = ({
     [getEventName, handleToggleBookmark, onActionTriggered],
   );
 
-  // Render appropriate bookmark icon based on loading and bookmark state
   const bookmarkIcon = useMemo(() => {
-    if (isVerseBookmarkedLoading) {
-      return <Spinner />;
-    }
     if (isVerseBookmarked) {
       return <BookmarkedIcon color="var(--color-text-default)" />;
     }
@@ -87,7 +78,7 @@ const BookmarkAction: React.FC<Props> = ({
         size={IconSize.Custom}
       />
     );
-  }, [isVerseBookmarkedLoading, isVerseBookmarked]);
+  }, [isVerseBookmarked]);
 
   // For use in the TopActions component (standalone button)
   if (isTranslationView || (!isTranslationView && isMobile)) {
@@ -105,7 +96,6 @@ const BookmarkAction: React.FC<Props> = ({
         onClick={(e) => {
           onToggleBookmarkClicked(e);
         }}
-        isDisabled={isVerseBookmarkedLoading}
         ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
       >
         <span className={styles.icon}>{bookmarkIcon}</span>
@@ -116,11 +106,7 @@ const BookmarkAction: React.FC<Props> = ({
   // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
     <>
-      <PopoverMenu.Item
-        onClick={onToggleBookmarkClicked}
-        icon={bookmarkIcon}
-        isDisabled={isVerseBookmarkedLoading}
-      >
+      <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
         {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
       </PopoverMenu.Item>
     </>
