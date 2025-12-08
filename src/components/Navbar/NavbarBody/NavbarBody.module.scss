@@ -7,6 +7,12 @@
   justify-content: space-between;
   height: 100%;
   background-color: var(--color-background-elevated);
+  @include utility.dimmedOverlay;
+
+  svg,
+  g {
+    clip-path: none;
+  }
 }
 
 .bannerContainerTop {
