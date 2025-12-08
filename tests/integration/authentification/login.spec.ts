@@ -14,16 +14,12 @@ test(
   'Login to an existing user works and redirects to the home page',
   { tag: ['@slow', '@auth', '@login-user', '@smoke'] },
   async ({ page }) => {
-    // Click on the "Continue with Email" button
-    const authButtons = page.getByTestId('auth-buttons');
-    const continueWithEmailButton = authButtons.getByText('Email');
-    await continueWithEmailButton.click();
-
+    // Email form should be visible immediately (no need to click "Continue with Email")
     // Fill in the form fields with the credentials of an existing user
     await fillInLoginForm(page);
 
-    // Submit the form
-    await page.getByRole('button', { name: 'Continue' }).click();
+    // Submit the form - use form locator to target the submit button, not the tab button
+    await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
     // We should be redirected to the home page
     await page.waitForURL(/\/$/);
@@ -38,16 +34,12 @@ test(
   'Login shows error message when using wrong credentials',
   { tag: ['@auth', '@login-user'] },
   async ({ page }) => {
-    // Click on the "Continue with Email" button
-    const authButtons = page.getByTestId('auth-buttons');
-    const continueWithEmailButton = authButtons.getByText('Email');
-    await continueWithEmailButton.click();
-
+    // Email form should be visible immediately
     // Fill in the form fields with wrong credentials
-    await page.getByPlaceholder('Email').fill('wrong@example.com');
+    await page.getByPlaceholder('Email address').fill('wrong@example.com');
     await page.getByPlaceholder('Password').fill('wrongpassword');
-    // Submit the form
-    await page.getByRole('button', { name: 'Continue' }).click();
+    // Submit the form - use form locator to target the submit button, not the tab button
+    await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
     // We should see an error message
     const errorMessage = page.getByText('Invalid email or password');
     await expect(errorMessage).toBeVisible();
@@ -58,12 +50,9 @@ test(
   'Login form shows validation errors when fields are empty',
   { tag: ['@auth', '@login-user'] },
   async ({ page }) => {
-    // Click on the "Continue with Email" button
-    const authButtons = page.getByTestId('auth-buttons');
-    const continueWithEmailButton = authButtons.getByText('Email');
-    await continueWithEmailButton.click();
-    // Submit the form without filling in the fields
-    await page.getByRole('button', { name: 'Continue' }).click();
+    // Email form should be visible immediately
+    // Submit the form without filling in the fields - use form locator to target the submit button
+    await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
     // We should see validation error messages
     const emailError = page.getByText('Email is missing');
     const passwordError = page.getByText('Password is missing');
@@ -78,6 +67,6 @@ const fillInLoginForm = async (page: Page) => {
     'No credentials provided',
   );
 
-  await page.getByPlaceholder('Email').fill(process.env.TEST_USER_EMAIL || '');
+  await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
   await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
 };
