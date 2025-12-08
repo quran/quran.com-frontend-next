@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
@@ -33,13 +33,13 @@ export const sessionSlice = createSlice({
 export const { incrementSessionCount, setIsDonationPopupVisible } = sessionSlice.actions;
 
 export const selectSessionCount = (state: RootState) => state.session.count;
-export const selectUserState = (state: RootState) => {
+export const selectUserState = createSelector([selectSessionCount], (sessionCount: number) => {
   const isGuest = !isLoggedIn();
   return {
     isGuest,
-    isFirstTimeGuest: isGuest && state.session.count === 2,
+    isFirstTimeGuest: isGuest && sessionCount === 2,
   };
-};
+});
 
 export const selectIsDonationPopupVisible = (state: RootState) =>
   state.session.isDonationPopupVisible;
