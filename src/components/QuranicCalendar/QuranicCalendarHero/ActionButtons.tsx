@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QuranicCalendarHero.module.scss';
@@ -27,8 +28,13 @@ interface ActionButtonsProps {
   isLoggedIn?: boolean;
 }
 
+enum SocialButtonName {
+  Whatsapp = 'whatsapp',
+  Telegram = 'telegram',
+}
+
 interface SocialButton {
-  name: 'whatsapp' | 'telegram';
+  name: SocialButtonName;
   icon: React.ComponentType;
   url: string;
   eventKey: string;
@@ -48,13 +54,13 @@ const ICON_CONTAINER_PROPS = {
 
 const SOCIAL_BUTTONS: SocialButton[] = [
   {
-    name: 'whatsapp',
+    name: SocialButtonName.Whatsapp,
     icon: WhatsappIcon,
     url: WHATSAPP_CHANNEL_URL,
     eventKey: 'quranic_calendar_join_whatsapp',
   },
   {
-    name: 'telegram',
+    name: SocialButtonName.Telegram,
     icon: TelegramIcon,
     url: TELEGRAM_CHANNEL_URL,
     eventKey: 'quranic_calendar_join_telegram',
@@ -89,17 +95,20 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           {...SUCCESS_PILL_BUTTON_PROPS}
           onClick={onEnrollButtonClicked}
           isDisabled={isEnrolling}
-          aria-label={isSubscribed ? t('common:subscribed') : t('common:subscribe')}
-          className={`${styles.subscribeButton} ${
-            showAskQuestionButton ? styles.subscribeButtonSmall : ''
-          }`}
+          className={classNames(styles.subscribeButton, {
+            [styles.subscribeButtonSmall]: showAskQuestionButton,
+          })}
         >
           <IconContainer
             {...ICON_CONTAINER_PROPS}
             icon={subscribeButtonIcon(isSubscriptionLoading || isEnrolling, isSubscribed)}
           />
 
-          <span className={isSubscribed ? styles.subscribeText : undefined}>
+          <span
+            className={classNames({
+              [styles.subscribeText]: isSubscribed,
+            })}
+          >
             {isSubscribed ? t('common:subscribed') : t('common:subscribe')}
           </span>
         </Button>
@@ -110,8 +119,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             href={ASK_QUESTION_FORM_URL}
             isNewTab
             onClick={() => logButtonClick('quranic_calendar_ask_question')}
-            aria-label={t('ask-question')}
-            className={`${styles.button} ${styles.askQuestionButton}`}
+            className={classNames(styles.button, styles.askQuestionButton)}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
             {t('ask-question')}
@@ -127,7 +135,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             href={url}
             isNewTab
             onClick={() => logButtonClick(eventKey)}
-            aria-label={t(`join-${name}`)}
             className={styles.button}
           >
             <IconContainer {...ICON_CONTAINER_PROPS} icon={<Icon />} />
