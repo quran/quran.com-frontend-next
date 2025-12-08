@@ -1,37 +1,21 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR, { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
 
 import SaveToCollectionModal, {
-  Collection,
+  CollectionOption,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import useBookmarkCollections from '@/hooks/useBookmarkCollections';
+import useCollections from '@/hooks/useCollections';
 import PlusIcon from '@/icons/plus.svg';
 import { WordVerse } from '@/types/Word';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
-import {
-  addCollection,
-  addCollectionBookmark,
-  deleteCollectionBookmarkByKey,
-  getBookmarkCollections,
-  getCollectionsList,
-} from 'src/utils/auth/api';
-import {
-  makeBookmarkCollectionsUrl,
-  makeBookmarksUrl,
-  makeBookmarkUrl,
-  makeCollectionsUrl,
-} from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
@@ -41,6 +25,12 @@ interface Props {
   bookmarksRangeUrl?: string;
 }
 
+/**
+ * Action component for saving verses to collections
+ * Uses extracted hooks for cleaner separation of concerns
+ *
+ * @returns {JSX.Element} The save to collection action component
+ */
 const SaveToCollectionAction: React.FC<Props> = ({
   verse,
   isTranslationView,
@@ -50,175 +40,85 @@ const SaveToCollectionAction: React.FC<Props> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
-  const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
-    isLoggedIn() ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null,
-    () =>
-      getCollectionsList({
-        type: BookmarkType.Ayah,
-      }),
-  );
-
-  const { mutate: globalSWRMutate } = useSWRConfig();
-
-  const { data: bookmarkCollectionIdsData, mutate: mutateBookmarkCollectionIdsData } =
-    useSWRImmutable(
-      isLoggedIn()
-        ? makeBookmarkCollectionsUrl(
-            mushafId,
-            Number(verse.chapterId),
-            BookmarkType.Ayah,
-            Number(verse.verseNumber),
-          )
-        : null,
-      async () => {
-        const response = await getBookmarkCollections(
-          mushafId,
-          Number(verse.chapterId),
-          BookmarkType.Ayah,
-          Number(verse.verseNumber),
-        );
-        return response;
-      },
-    );
-
   const toast = useToast();
 
-  const onMenuClicked = () => {
+  // Use extracted hooks for data fetching and mutations
+  const { collections, addCollection } = useCollections({
+    type: BookmarkType.Ayah,
+  });
+
+  const {
+    collectionIds: bookmarkCollectionIds,
+    addToCollection,
+    removeFromCollection,
+    mutateBookmarkCollections,
+  } = useBookmarkCollections({
+    mushafId,
+    key: Number(verse.chapterId),
+    type: BookmarkType.Ayah,
+    verseNumber: verse.verseNumber,
+    bookmarksRangeUrl,
+  });
+
+  const onMenuClicked = useCallback(() => {
     setIsSaveCollectionModalOpen(true);
     if (isTranslationView) {
       logButtonClick('save_to_collection_menu_trans_view');
     } else {
       logButtonClick('save_to_collection_menu_reading_view');
     }
-  };
+  }, [isTranslationView]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsSaveCollectionModalOpen(false);
-  };
+  }, []);
 
-  const mutateIsResourceBookmarked = () => {
-    if (!isLoggedIn()) {
-      return;
-    }
-    globalSWRMutate(
-      makeBookmarkUrl(
-        mushafId,
-        Number(verse.chapterId),
-        BookmarkType.Ayah,
-        Number(verse.verseNumber),
-      ),
-    );
-
-    if (bookmarksRangeUrl) {
-      globalSWRMutate(bookmarksRangeUrl);
-    }
-  };
-
-  const mutateBookmarksUrl = () =>
-    globalSWRMutate(
-      makeBookmarksUrl(
-        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-      ),
-    );
-
-  const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
-    if (newValue === true) {
-      addCollectionBookmark({
-        key: Number(verse.chapterId),
-        mushaf: mushafId,
-        type: BookmarkType.Ayah,
-        verseNumber: verse.verseNumber,
-        collectionId: changedCollection.id,
-      })
-        .then(() => {
+  const onCollectionToggled = useCallback(
+    async (changedCollection: CollectionOption, newValue: boolean) => {
+      if (newValue) {
+        const success = await addToCollection(changedCollection.id);
+        if (success) {
           toast(t('quran-reader:saved-to', { collectionName: changedCollection.name }), {
             status: ToastStatus.Success,
           });
-          mutateIsResourceBookmarked();
-          mutateCollectionListData();
-          mutateBookmarkCollectionIdsData();
-          mutateBookmarksUrl();
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            toast(t('common:error.bookmark-sync'), {
-              status: ToastStatus.Error,
-            });
-            return;
-          }
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        });
-    } else {
-      deleteCollectionBookmarkByKey({
-        key: Number(verse.chapterId),
-        mushaf: mushafId,
-        type: BookmarkType.Ayah,
-        verseNumber: verse.verseNumber,
-        collectionId: changedCollection.id,
-      })
-        .then(() => {
+        }
+      } else {
+        const success = await removeFromCollection(changedCollection.id);
+        if (success) {
           toast(t('quran-reader:removed-from', { collectionName: changedCollection.name }), {
             status: ToastStatus.Success,
           });
-          mutateIsResourceBookmarked();
-          mutateCollectionListData();
-          mutateBookmarkCollectionIdsData();
-          mutateBookmarksUrl();
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            toast(t('common:error.bookmark-sync'), {
-              status: ToastStatus.Error,
-            });
-            return;
-          }
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        });
-    }
-  };
+        }
+      }
+    },
+    [addToCollection, removeFromCollection, toast, t],
+  );
 
-  const onNewCollectionCreated = (newCollectionName: string) => {
-    return addCollection(newCollectionName).then((newCollection: any) => {
-      addCollectionBookmark({
-        collectionId: newCollection.id,
-        key: Number(verse.chapterId),
-        mushaf: mushafId,
-        type: BookmarkType.Ayah,
-        verseNumber: verse.verseNumber,
-      })
-        .then(() => {
-          mutateIsResourceBookmarked();
-          mutateCollectionListData();
-          mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
-          mutateBookmarksUrl();
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            toast(t('common:error.bookmark-sync'), {
-              status: ToastStatus.Error,
-            });
-            return;
-          }
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        });
-    });
-  };
+  const onNewCollectionCreated = useCallback(
+    async (newCollectionName: string) => {
+      const newCollection = await addCollection(newCollectionName);
+      if (newCollection) {
+        const success = await addToCollection(newCollection.id);
+        if (success) {
+          // Optimistic update - addToCollection already invalidates caches
+          mutateBookmarkCollections([...(bookmarkCollectionIds || []), newCollection.id]);
+        }
+      }
+    },
+    [addCollection, addToCollection, bookmarkCollectionIds, mutateBookmarkCollections],
+  );
 
-  const isDataReady = bookmarkCollectionIdsData && collectionListData;
+  const isDataReady = bookmarkCollectionIds !== undefined;
 
-  const collections = !isDataReady
-    ? []
-    : (collectionListData.data.map((collection) => ({
+  const modalCollections: CollectionOption[] = useMemo(
+    () =>
+      collections.map((collection) => ({
         id: collection.id,
         name: collection.name,
-        checked: bookmarkCollectionIdsData?.includes(collection.id),
-      })) as Collection[]);
+        checked: bookmarkCollectionIds?.includes(collection.id) ?? false,
+      })),
+    [collections, bookmarkCollectionIds],
+  );
 
   return (
     <>
@@ -236,7 +136,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
           onCollectionToggled={onCollectionToggled}
           onNewCollectionCreated={onNewCollectionCreated}
           onClose={closeModal}
-          collections={collections}
+          collections={modalCollections}
           verseKey={`${verse.chapterId}:${verse.verseNumber}`}
         />
       )}
