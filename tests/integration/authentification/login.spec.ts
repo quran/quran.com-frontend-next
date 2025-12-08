@@ -35,7 +35,10 @@ test(
     await expect(page).toHaveURL(/\/fr$/);
 
     // We should be logged in
-    await expect(page.getByTestId('profile-avatar-button')).toBeVisible();
+    const profileAvatarButton = page.getByTestId('profile-avatar-button');
+    await expect(profileAvatarButton).toHaveCount(2);
+    await expect(profileAvatarButton.nth(0)).toBeVisible();
+    await expect(profileAvatarButton.nth(1)).toBeVisible();
   },
 );
 
