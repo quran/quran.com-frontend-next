@@ -6,13 +6,17 @@ import { VirtuosoHandle } from 'react-virtuoso';
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 
 import DataContext from '@/contexts/DataContext';
+import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { isValidVerseId } from '@/utils/validator';
 import { makeVerseKey } from '@/utils/verse';
-import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import ScrollAlign from 'types/ScrollAlign';
+
+// Constants for scroll behavior
+const SCROLL_DELAY_MS = 1000;
+const CONTEXT_MENU_OFFSET = -70;
 
 /**
  * This hook listens to startingVerse query param and navigate to
@@ -39,8 +43,6 @@ const useScrollToVirtualizedTranslationView = (
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
   const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
 
-  const audioService = useContext(AudioPlayerMachineContext);
-
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
   const isValidStartingVerse =
@@ -48,12 +50,13 @@ const useScrollToVirtualizedTranslationView = (
 
   const scrollToBeginningOfVerseCell = useCallback(
     (verseNumber: number) => {
+      if (!virtuosoRef.current) return;
       const verseIndex = verseNumber - 1;
       virtuosoRef.current.scrollToIndex({
         index: verseIndex,
         align: ScrollAlign.Start,
         // this offset is to push the scroll a little bit down so that the context menu doesn't cover the verse
-        offset: -70,
+        offset: CONTEXT_MENU_OFFSET,
       });
     },
     [virtuosoRef],
@@ -107,7 +110,7 @@ const useScrollToVirtualizedTranslationView = (
 
           // we need to add the verse we scrolled to to the queue
           verseKeysQueue.current.add(makeVerseKey(chapterId, startingVerseNumber));
-        }, 1000);
+        }, SCROLL_DELAY_MS);
 
         setShouldReadjustScroll(false);
       } else {
@@ -129,19 +132,7 @@ const useScrollToVirtualizedTranslationView = (
   ]);
 
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons
-  useEffect(() => {
-    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) return undefined;
-
-    const subscription = audioService.subscribe((state) => {
-      if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
-        scrollToBeginningOfVerseCell(state.context.ayahNumber);
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [audioService, scrollToBeginningOfVerseCell, quranReaderDataType]);
+  useAudioNavigationScroll(quranReaderDataType, scrollToBeginningOfVerseCell);
 
   // this effect clears the timeout when the component unmounts
   useEffect(() => {
