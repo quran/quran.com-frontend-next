@@ -43,15 +43,15 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
   // Register with intersection observer for page tracking
-  const observerRef = useRef(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
   useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
 
   // Merge refs for both auto-scroll and observer
   const mergedRef = useCallback(
-    (node: HTMLDivElement) => {
+    (node: HTMLDivElement | null) => {
       // Update both refs
       if (selectedItemRef) {
-        (selectedItemRef as React.MutableRefObject<HTMLDivElement>).current = node;
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
       }
       observerRef.current = node;
     },

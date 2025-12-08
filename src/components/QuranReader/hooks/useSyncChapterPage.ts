@@ -39,19 +39,19 @@ const useSyncChapterPage = (initialData?: any): void => {
 
   const firstPageNumber = useGetFirstPageNumberForChapter(pagesLookupData);
 
-  // Also track the initial data to detect route changes (chapter, juz, page navigation)
-  const initialDataRef = useRef(initialData);
+  // Track the previous chapterId to detect navigation between chapters
+  const prevChapterIdRef = useRef<string | undefined>(lastReadVerseKey?.chapterId);
 
   useEffect(() => {
-    // Detect if initialData changed (indicates navigation to different chapter/juz/page)
-    const hasNavigated = initialDataRef.current !== initialData;
-    if (hasNavigated) {
-      initialDataRef.current = initialData;
+    // Detect if we navigated to a different chapter
+    const hasNavigatedToNewChapter = prevChapterIdRef.current !== lastReadVerseKey?.chapterId;
+    if (hasNavigatedToNewChapter) {
+      prevChapterIdRef.current = lastReadVerseKey?.chapterId;
     }
 
     if (lastReadVerseKey?.chapterId && firstPageNumber) {
-      // Update page if it doesn't match OR if we just navigated
-      if (lastReadVerseKey.page !== firstPageNumber || hasNavigated) {
+      // Update page if it doesn't match OR if we just navigated to a new chapter
+      if (lastReadVerseKey.page !== firstPageNumber || hasNavigatedToNewChapter) {
         dispatch(
           setLastReadVerse({
             lastReadVerse: {
@@ -63,8 +63,8 @@ const useSyncChapterPage = (initialData?: any): void => {
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Trigger on firstPageNumber, chapterId, or initialData changes
-  }, [firstPageNumber, lastReadVerseKey?.chapterId, initialData, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- Trigger on firstPageNumber or chapterId changes
+  }, [firstPageNumber, lastReadVerseKey?.chapterId, dispatch]);
 };
 
 export default useSyncChapterPage;

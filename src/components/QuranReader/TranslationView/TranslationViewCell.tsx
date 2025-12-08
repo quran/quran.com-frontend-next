@@ -74,15 +74,15 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
 
   // Register this cell with the global intersection observer for page tracking
-  const observerRef = useRef(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
   useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
 
   // Callback ref to merge both selectedItemRef and observerRef
   const mergedRef = useCallback(
-    (node: HTMLDivElement) => {
+    (node: HTMLDivElement | null) => {
       // Update both refs
       if (selectedItemRef) {
-        (selectedItemRef as React.MutableRefObject<HTMLDivElement>).current = node;
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
       }
       observerRef.current = node;
     },
@@ -90,7 +90,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   );
 
   return (
-    <div>
+    <>
       <div
         ref={mergedRef}
         data-verse-key={verse.verseKey}
@@ -124,7 +124,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         <BottomActions verseKey={verse.verseKey} />
       </div>
       <Separator className={styles.verseSeparator} />
-    </div>
+    </>
   );
 };
 
