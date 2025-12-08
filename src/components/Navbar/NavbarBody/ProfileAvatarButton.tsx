@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import styles from './ProfileAvatarButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconColor } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
 import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
@@ -41,7 +40,7 @@ const MENU_ITEMS = [
     eventName: 'profile_avatar_my_quran',
     navigationUrl: getProfileNavigationUrl(),
     translationKey: 'my-quran',
-    icon: <IconContainer icon={<BookmarkFilledIcon />} color={IconColor.accent} />,
+    icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',
