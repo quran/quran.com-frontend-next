@@ -151,16 +151,16 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         </div>
       )}
       <div
-      className={classNames(styles.itemsContainer, {
-        [styles.dimmed]: isNavigationDrawerOpen,
-      })}
-      inert={isNavigationDrawerOpen || undefined}
-    >
-         <div className={styles.centerVertically}>
-        <div className={styles.leftCTA}>
-          <NavbarLogoWrapper />
+        className={classNames(styles.itemsContainer, {
+          [styles.dimmed]: isNavigationDrawerOpen,
+        })}
+        inert={isNavigationDrawerOpen || undefined}
+      >
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
+            <NavbarLogoWrapper />
+          </div>
         </div>
-      </div>
         {isBannerVisible && (
           <div className={styles.bannerContainerCenter}>
             <Banner {...bannerProps} />
@@ -186,17 +186,17 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             {isLoggedIn && <ProfileAvatarButton />}
 
             <Button
-            tooltip={t('menu')}
-            variant={ButtonVariant.Ghost}
-            shape={ButtonShape.Circle}
-            onClick={openNavigationDrawer}
-            ariaLabel={t('aria.nav-drawer-open')}
-            data-testid="open-navigation-drawer"
-          >
-            <IconMenu />
-          </Button>
-          <SettingsDrawer />
-          <NavigationDrawer />
+              tooltip={t('menu')}
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
+              data-testid="open-navigation-drawer"
+            >
+              <IconMenu />
+            </Button>
+            <SettingsDrawer />
+            <NavigationDrawer />
           </div>
         </div>
       </div>
