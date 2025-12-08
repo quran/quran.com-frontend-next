@@ -12,6 +12,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import Banner from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
@@ -51,6 +52,10 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
+interface Props {
+  isBannerVisible: boolean;
+}
+
 const QURAN_READER_ROUTES = new Set([
   '/[chapterId]',
   '/[chapterId]/[verseId]',
@@ -62,7 +67,7 @@ const QURAN_READER_ROUTES = new Set([
 
 const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
 
-const NavbarBody: React.FC = () => {
+const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
@@ -133,36 +138,54 @@ const NavbarBody: React.FC = () => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButtonText: t('create-my-goal'),
+  };
+
   return (
-    <div
+    <>
+      {isBannerVisible && (
+        <div className={styles.bannerContainerTop}>
+          <Banner {...bannerProps} />
+        </div>
+      )}
+      <div
       className={classNames(styles.itemsContainer, {
         [styles.dimmed]: isNavigationDrawerOpen,
       })}
       inert={isNavigationDrawerOpen || undefined}
     >
-      <div className={styles.centerVertically}>
+         <div className={styles.centerVertically}>
         <div className={styles.leftCTA}>
           <NavbarLogoWrapper />
         </div>
       </div>
-      <div className={styles.centerVertically}>
-        <div className={styles.rightCTA}>
-          {!isLoggedIn && <ProfileAvatarButton />}
-          <Button
-            tooltip={t('search.title')}
-            variant={ButtonVariant.Ghost}
-            onClick={openSearchDrawer}
-            shape={ButtonShape.Circle}
-            shouldFlipOnRTL={false}
-            ariaLabel={t('search.title')}
-            data-testid="open-search-drawer"
-          >
-            <IconSearch />
-          </Button>
-          <SearchDrawer />
-          {shouldRenderSidebarNavigation && <SidebarNavigation />}
-          {isLoggedIn && <ProfileAvatarButton />}
-          <Button
+        {isBannerVisible && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...bannerProps} />
+          </div>
+        )}
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
+            {!isLoggedIn && <ProfileAvatarButton />}
+            <Button
+              tooltip={t('search.title')}
+              variant={ButtonVariant.Ghost}
+              onClick={openSearchDrawer}
+              shape={ButtonShape.Circle}
+              shouldFlipOnRTL={false}
+              ariaLabel={t('search.title')}
+              data-testid="open-search-drawer"
+            >
+              <IconSearch />
+            </Button>
+            <SearchDrawer />
+
+            {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            {isLoggedIn && <ProfileAvatarButton />}
+
+            <Button
             tooltip={t('menu')}
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
@@ -174,9 +197,10 @@ const NavbarBody: React.FC = () => {
           </Button>
           <SettingsDrawer />
           <NavigationDrawer />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
