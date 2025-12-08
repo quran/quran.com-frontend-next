@@ -281,8 +281,9 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
 
 /**
- * Compose the url for translation feedback API.
+ * Compose the URL for the translation feedback API endpoint.
+ * This endpoint is used for submitting user feedback about translations.
  *
- * @returns {string}
+ * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');

@@ -4,35 +4,30 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import sendFeedbackErrorToSentry from './logging';
+import { TranslationFeedbackFormErrors, UseTranslationFeedbackFormProps } from './types';
+import { getTranslationFeedbackErrors, isTranslationFeedbackValid } from './validation';
+
 import { getAvailableTranslations } from '@/api';
 import { SelectOption } from '@/dls/Forms/Select';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { logErrorToSentry } from '@/lib/sentry';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { WordVerse } from '@/types/Word';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { submitTranslationFeedback } from '@/utils/auth/api';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
-const MAX_FEEDBACK_CHARS = 10000;
-const MIN_FEEDBACK_CHARS = 1;
-
-interface TranslationFeedbackFormErrors {
-  translation?: string;
-  feedback?: string;
-}
-
-interface UseTranslationFeedbackFormProps {
-  verse: WordVerse;
-  onClose: () => void;
-}
-
+/**
+ * Manage translation feedback form state, validation, and submission side effects.
+ *
+ * @param {UseTranslationFeedbackFormProps} params - Hook params.
+ * @param {UseTranslationFeedbackFormProps['verse']} params.verse - Verse information containing the verse key used for submission payloads.
+ * @param {UseTranslationFeedbackFormProps['onClose']} params.onClose - Callback invoked after a successful submission to close the form/modal.
+ * @returns {object} Hook state, derived options, and handlers for the translation feedback form.
+ */
 const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFormProps) => {
   const { t, lang } = useTranslation('common');
   const toast = useToast();
-
   const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations);
-
   const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
   const [feedback, setFeedback] = useState('');
   const [errors, setErrors] = useState<TranslationFeedbackFormErrors>({});
@@ -56,40 +51,10 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
   }, [selectedTranslationsOptions, selectedTranslationId]);
 
   const validate = useCallback(() => {
-    const newErrors: TranslationFeedbackFormErrors = {};
-    const len = feedback.trim().length;
-
-    if (!selectedTranslationId) {
-      newErrors.translation = t('validation.required-field', {
-        field: t('translation-feedback.translation'),
-      });
-    }
-
-    if (len === 0) {
-      newErrors.feedback = t('validation.required-field', {
-        field: t('translation-feedback.feedback'),
-      });
-    } else if (len < MIN_FEEDBACK_CHARS) {
-      newErrors.feedback = t('validation.minimum-length', {
-        field: t('translation-feedback.feedback'),
-        value: MIN_FEEDBACK_CHARS,
-      });
-    } else if (len > MAX_FEEDBACK_CHARS) {
-      newErrors.feedback = t('validation.maximum-length', {
-        field: t('translation-feedback.feedback'),
-        value: MAX_FEEDBACK_CHARS,
-      });
-    }
+    const newErrors = getTranslationFeedbackErrors(selectedTranslationId, feedback, t);
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return isTranslationFeedbackValid(newErrors);
   }, [selectedTranslationId, feedback, t]);
-
-  const sendToSentry = useCallback((error: unknown, verseKey: string, translationId: string) => {
-    logErrorToSentry(error, {
-      transactionName: 'submitTranslationFeedback',
-      metadata: { verseKey, translationId },
-    });
-  }, []);
 
   const onSubmit = useCallback(
     async (e?: React.FormEvent) => {
@@ -100,7 +65,6 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
       try {
         const chapterNumber = getChapterNumberFromKey(verse.verseKey);
         const verseNumber = getVerseNumberFromKey(verse.verseKey);
-
         const response = await submitTranslationFeedback({
           translationId: Number(selectedTranslationId),
           surahNumber: chapterNumber,
@@ -114,16 +78,16 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
         } else {
           // It's not likely to happen, but if it does, we'll log the error to Sentry.
           toast(t('error.general'), { status: ToastStatus.Error });
-          sendToSentry(response, verse.verseKey, selectedTranslationId);
+          sendFeedbackErrorToSentry(response, verse.verseKey, selectedTranslationId);
         }
       } catch (error) {
         toast(t('error.general'), { status: ToastStatus.Error });
-        sendToSentry(error, verse.verseKey, selectedTranslationId);
+        sendFeedbackErrorToSentry(error, verse.verseKey, selectedTranslationId);
       } finally {
         setIsSubmitting(false);
       }
     },
-    [validate, verse.verseKey, selectedTranslationId, feedback, t, toast, onClose, sendToSentry],
+    [validate, verse.verseKey, selectedTranslationId, feedback, t, toast, onClose],
   );
 
   const handleTranslationChange = useCallback((value: string) => {

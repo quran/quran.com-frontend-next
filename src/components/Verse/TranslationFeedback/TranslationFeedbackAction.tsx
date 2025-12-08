@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -31,29 +31,41 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   const router = useRouter();
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const getEventName = useCallback(
+    (action: string) =>
+      `${
+        isTranslationView ? 'translation_view' : 'reading_view'
+      }_translation_feedback_modal_${action}`,
+    [isTranslationView],
+  );
 
   const onModalClose = useCallback(() => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_translation_feedback_modal_close`,
-    );
+    logEvent(getEventName('close'));
 
     setIsModalOpen(false);
 
     if (onActionTriggered) {
-      setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+
+      closeTimeoutRef.current = setTimeout(() => {
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
     }
-  }, [isTranslationView, onActionTriggered]);
+  }, [getEventName, onActionTriggered]);
 
   const onModalOpen = useCallback(() => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_translation_feedback_modal_open`,
-    );
-
+    logEvent(getEventName('open'));
     setIsModalOpen(true);
-  }, [isTranslationView]);
+  }, [getEventName]);
 
+  /**
+   * Handles click events for guest users, redirecting to login if not authenticated,
+   * otherwise opens the translation feedback modal.
+   */
   const handleGuestUserClick = useCallback(() => {
     if (!isLoggedIn()) {
       router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
@@ -62,6 +74,14 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
 
     onModalOpen();
   }, [router, verse.verseKey, onModalOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>

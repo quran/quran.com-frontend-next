@@ -11,6 +11,13 @@ import { VersesResponse } from '@/types/ApiResponses';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
+/**
+ * Finds the selected translation from the verses response data.
+ *
+ * @param {VersesResponse} data - The verses response containing translation data
+ * @param {string} selectedTranslationId - The ID of the translation to find
+ * @returns {object|null} The selected translation object or null if not found
+ */
 const findSelectedTranslation = (data: VersesResponse, selectedTranslationId: string) => {
   const translations = data?.verses?.[0]?.translations;
   if (!translations) return null;
@@ -39,7 +46,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
 
   const { data, error, translationFontScale } = useVerseAndTranslation({
     chapter: chapterNumber,
-    from: verseNumber,
+    from: shouldFetch ? verseNumber : undefined,
     to: verseNumber,
     translationsLimit: undefined,
   });
@@ -67,7 +74,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
         <TranslationText
           key={selectedTranslationId}
           text={`"${translation.text}"`}
-          languageId={translation.languageId!}
+          languageId={translation.languageId}
           translationFontScale={translationFontScale}
         />
       </div>
