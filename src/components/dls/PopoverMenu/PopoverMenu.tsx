@@ -75,7 +75,7 @@ const PopoverMenu = ({
       onOpenChange={handleOpenChange}
     >
       {trigger && (
-        <PrimitiveDropdownMenu.Trigger asChild onClick={() => setOpen(true)}>
+        <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}
