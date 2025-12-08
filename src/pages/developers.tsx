@@ -8,6 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './contentPage.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
+import AppsMajlisSection from '@/components/AppsMajlisSection';
 import CareersSection from '@/components/CareersSection/CareersSection';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
@@ -35,6 +36,8 @@ const DevelopersPage: NextPage = () => {
           <CommunitySection />
           <h1>{t('labs')}</h1>
           <LabsSection />
+          <h1>{t('apps-majlis.heading')}</h1>
+          <AppsMajlisSection />
           <h1>{t('api-docs.title')}</h1>
           <ApiDocsSection />
           <p>{t('main-desc')}</p>
