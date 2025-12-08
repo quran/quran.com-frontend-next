@@ -1,14 +1,15 @@
-import { useEffect, useRef, useContext, useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
+import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { logErrorToSentry } from '@/lib/sentry';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { getVerseNumberFromKey } from '@/utils/verse';
-import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import { fetcher } from 'src/api';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -86,6 +87,13 @@ const useScrollToVirtualizedReadingView = (
   // Ref to hold latest AbortController so we can cancel stale requests
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  // cleanup the abort controller when the component unmounts to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+    };
+  }, []);
+
   /**
    * We need to scroll again when we have just changed the font since the same
    * verse might lie on another page/position. Same for when we change the
@@ -100,12 +108,12 @@ const useScrollToVirtualizedReadingView = (
    * both the initial startingVerse effect and the audio player subscription.
    *
    * @param {number} verseNumber
-   * @param {boolean} useShouldScroll - when true, guard scrolling with shouldScroll ref
+   * @param {boolean} respectScrollGuard - when true, guard scrolling with shouldScroll ref
    */
   const scrollToVerse = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
-    (verseNumber: number, useShouldScroll = false) => {
-      if (useShouldScroll && shouldScroll.current === false) return;
+    (verseNumber: number, respectScrollGuard = false) => {
+      if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
       const firstPageOfCurrentChapter = isUsingDefaultFont
@@ -124,13 +132,12 @@ const useScrollToVirtualizedReadingView = (
             pagesVersesRange,
           ),
         });
-        if (useShouldScroll) shouldScroll.current = false;
+        if (respectScrollGuard) shouldScroll.current = false;
         return;
       }
 
       // Abort previous request (if any) to prevent race conditions
       if (abortControllerRef.current) abortControllerRef.current.abort();
-
       const controller = new AbortController();
       abortControllerRef.current = controller;
 
@@ -144,7 +151,11 @@ const useScrollToVirtualizedReadingView = (
         { signal: controller.signal },
       )
         .then((response: VersesResponse) => {
-          if (response.verses.length && (useShouldScroll ? shouldScroll.current === true : true)) {
+          if (!virtuosoRef.current) return;
+          if (
+            response.verses.length &&
+            (respectScrollGuard ? shouldScroll.current === true : true)
+          ) {
             const page = response.verses[0].pageNumber;
             const scrollToPageIndex = page - firstPageOfCurrentChapter;
             if (pagesVersesRange[page]) {
@@ -157,22 +168,27 @@ const useScrollToVirtualizedReadingView = (
                 ),
               });
 
-              if (useShouldScroll) shouldScroll.current = false;
+              if (respectScrollGuard) shouldScroll.current = false;
             }
           }
         })
-        .catch(() => {
-          // Ignore errors
+        .catch((error: unknown) => {
+          if (error instanceof Error && error.name === 'AbortError') return;
+          logErrorToSentry(error, {
+            transactionName: 'scrollToVerse-fetchPageNumber',
+            metadata: { chapterId, verseNumber },
+          });
         });
     },
     [
       virtuosoRef,
       pagesVersesRange,
       isUsingDefaultFont,
-      initialData,
+      initialData.verses,
       verses,
       chapterId,
-      quranReaderStyles,
+      quranReaderStyles.quranFont,
+      quranReaderStyles.mushafLines,
     ],
   );
 
@@ -197,24 +213,8 @@ const useScrollToVirtualizedReadingView = (
     pagesVersesRange,
   ]);
 
-  const audioService = useContext(AudioPlayerMachineContext);
-
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons in audio player
-  useEffect(() => {
-    if (!audioService || quranReaderDataType !== QuranReaderDataType.Chapter) return undefined;
-
-    const subscription = audioService.subscribe((state) => {
-      if (state.event.type === 'NEXT_AYAH' || state.event.type === 'PREV_AYAH') {
-        const { ayahNumber } = state.context;
-        if (!Number.isInteger(ayahNumber) || ayahNumber <= 0) return;
-        scrollToVerse(ayahNumber, false);
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [audioService, scrollToVerse, quranReaderDataType]);
+  useAudioNavigationScroll(quranReaderDataType, scrollToVerse);
 };
 
 export default useScrollToVirtualizedReadingView;
