@@ -79,7 +79,13 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
     <Collapsible
       headerClassName={headerClassName}
       headerLeftClassName={headerLeftClassName}
-      title={<NavigationDrawerItem title={t('more')} icon={<IconSquareMore />} />}
+      title={
+        <NavigationDrawerItem
+          shouldKeepStyleWithoutHrefOnHover
+          title={t('more')}
+          icon={<IconSquareMore />}
+        />
+      }
       suffix={<IconCaretDown />}
       shouldRotateSuffixOnToggle
       shouldSuffixTrigger

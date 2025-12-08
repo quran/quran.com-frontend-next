@@ -9,6 +9,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import IconNorthEast from '@/icons/north_east.svg';
 
 type NavigationDrawerItemProps = {
+  shouldKeepStyleWithoutHrefOnHover?: boolean;
   title?: string;
   icon?: React.ReactNode;
   isExternalLink?: boolean;
@@ -19,6 +20,7 @@ type NavigationDrawerItemProps = {
 };
 
 const NavigationDrawerItem = ({
+  shouldKeepStyleWithoutHrefOnHover = false,
   title,
   icon,
   isExternalLink,
@@ -27,7 +29,12 @@ const NavigationDrawerItem = ({
   isStale = false,
   onClick,
 }: NavigationDrawerItemProps) => (
-  <LinkContainer href={href} isExternalLink={isExternalLink} onClick={onClick}>
+  <LinkContainer
+    shouldKeepStyleWithoutHrefOnHover={shouldKeepStyleWithoutHrefOnHover}
+    href={href}
+    isExternalLink={isExternalLink}
+    onClick={onClick}
+  >
     <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>

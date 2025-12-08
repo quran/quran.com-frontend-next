@@ -96,7 +96,13 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
       id="navigation-links-our-projects"
       headerClassName={headerClassName}
       headerLeftClassName={headerLeftClassName}
-      title={<NavigationDrawerItem title={t('our-projects')} icon={<IconSquareMore />} />}
+      title={
+        <NavigationDrawerItem
+          shouldKeepStyleWithoutHrefOnHover
+          title={t('our-projects')}
+          icon={<IconSquareMore />}
+        />
+      }
       suffix={<IconCaretDown />}
       shouldRotateSuffixOnToggle
       shouldSuffixTrigger

@@ -16,11 +16,12 @@
 }
 .itemContainer {
   display: flex;
+  align-items: center;
 }
 
 .titleContainer {
   margin-inline-start: var(--spacing-medium);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-semibold);
-  line-height: normal;
+  line-height: 0;
 }
