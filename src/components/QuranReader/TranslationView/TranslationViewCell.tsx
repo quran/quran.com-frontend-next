@@ -1,11 +1,12 @@
 /* eslint-disable max-lines */
-import React, { memo, useContext } from 'react';
+import React, { memo, useCallback, useContext, useRef } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import { QURAN_READER_OBSERVER_ID } from '../observer';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -21,6 +22,7 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -70,9 +72,30 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     verseIndex,
   ]);
 
+  // Register this cell with the global intersection observer for page tracking
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
+
+  // Callback ref to merge both selectedItemRef and observerRef
+  const mergedRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      // Update both refs
+      if (selectedItemRef) {
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+      observerRef.current = node;
+    },
+    [selectedItemRef],
+  );
+
   return (
-    <div ref={selectedItemRef}>
+    <>
       <div
+        ref={mergedRef}
+        data-verse-key={verse.verseKey}
+        data-page={verse.pageNumber}
+        data-chapter-id={verse.chapterId}
+        data-hizb={verse.hizbNumber}
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
         })}
@@ -99,7 +122,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         <BottomActions verseKey={verse.verseKey} />
       </div>
       <Separator className={styles.verseSeparator} />
-    </div>
+    </>
   );
 };
 
