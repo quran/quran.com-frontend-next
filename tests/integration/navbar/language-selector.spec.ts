@@ -1,16 +1,21 @@
 import { test, expect } from '@playwright/test';
 
+import Homepage from '../../POM/home-page';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
 test('Clicking on Nav bar language selector icon should open the language selector menu', async ({
   page,
+  context,
 }) => {
+  const homepage = new Homepage(page, context);
   // 1. make sure the language selector items are not visible
   await expect(page.locator('div[role="menuitem"]:has-text("English")')).not.toBeVisible();
   // 2. Click on the language selector nav bar trigger
-  await page.locator('[aria-label="Select Language"]').click();
+  await homepage.closeNextjsErrorDialog();
+  await page.locator('[data-testid="language-selector-button-navbar"]').click();
   // 3. Make sure the language selector items are visible
   await expect(page.locator('div[role="menuitem"]:has-text("English")')).toBeVisible();
   await expect(page.locator('div[role="menuitem"]:has-text("العربية")')).toBeVisible();
@@ -31,18 +36,23 @@ test('Clicking on Nav bar language selector icon should open the language select
 
 test('Choosing a language should navigate the user to the localized page of that language', async ({
   page,
+  context,
 }) => {
+  const homepage = new Homepage(page, context);
   // 1. Make sure we are on the English version
   await expect(page).toHaveURL('/');
   // 2. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
+  await homepage.closeNextjsErrorDialog();
+  await page.locator('[data-testid="language-selector-button-navbar"]').click();
   // 3. select the Bengali language and make sure we are navigated to /bn
   await Promise.all([page.waitForNavigation({ url: '/bn' }), page.locator('text=বাংলা').click()]);
 });
 
-test('Choosing a language should persist', async ({ page, baseURL }) => {
+test('Choosing a language should persist', async ({ page, context, baseURL }) => {
+  const homepage = new Homepage(page, context);
   // 1. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
+  await homepage.closeNextjsErrorDialog();
+  await page.locator('[data-testid="language-selector-button-navbar"]').click();
   // 2. select the Arabic language and make sure we are navigated to /ar
   await Promise.all([page.waitForNavigation({ url: '/ar' }), page.locator('text=العربية').click()]);
   // 3. Navigate again to /

@@ -11,6 +11,14 @@ $translation-line-height: 1.5;
   padding-block-end: var(--spacing-micro);
 }
 
+.textCenter {
+  text-align: center !important;
+}
+
+.innerText {
+  display: inline;
+}
+
 @include utility.generate-font-scales("translation");
 
 /*
@@ -30,12 +38,13 @@ $translation-line-height: 1.5;
 }
 
 .urdu {
-  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica,
-    Arial, serif !important; // important is needed to over-ride the language specific font-family
+  font-family:
+    "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica, Arial, serif !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
-  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "MehrNastaliq" !important; // important is needed to over-ride the language specific font-family
+  font-family:
+    "DroidArabicNaskh", "Noto Nastaliq Arabic", "MehrNastaliq" !important; // important is needed to over-ride the language specific font-family
 }
 
 .divehi {
@@ -46,4 +55,13 @@ $translation-line-height: 1.5;
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);
   font-size: var(--font-size-xsmall);
+}
+
+.referenceLink {
+  color: var(--color-text-link);
+  text-decoration: none;
+
+  &:hover {
+    opacity: var(--opacity-50);
+  }
 }
