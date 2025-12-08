@@ -140,6 +140,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.ghost]: variant === ButtonVariant.Ghost,
       [styles.compact]: variant === ButtonVariant.Compact,
       [styles.outlined]: variant === ButtonVariant.Outlined,
+      [styles.rounded]: variant === ButtonVariant.Rounded,
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,
