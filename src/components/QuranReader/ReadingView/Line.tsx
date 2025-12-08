@@ -1,9 +1,10 @@
-import { memo, RefObject, useContext, useEffect } from 'react';
+import { memo, RefObject, useCallback, useContext, useEffect, useRef } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { QURAN_READER_OBSERVER_ID } from '../observer';
 import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
@@ -11,6 +12,7 @@ import styles from './Line.module.scss';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
@@ -40,6 +42,22 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
+  // Register with intersection observer for page tracking
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
+
+  // Merge refs for both auto-scroll and observer
+  const mergedRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      // Update both refs
+      if (selectedItemRef) {
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+      observerRef.current = node;
+    },
+    [selectedItemRef],
+  );
+
   const { isActive } = useOnboarding();
   // disable auto scrolling when the user is onboarding
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
@@ -60,10 +78,19 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const translationsCount = words[0].verse?.translationsCount;
   const translationsLabel = words[0].verse?.translationsLabel;
 
+  // Get data from first word for page tracking
+  const firstWord = words[0];
+  const { verseKey, pageNumber, hizbNumber } = firstWord;
+  const chapterId = firstWordData[0];
+
   return (
     <div
-      ref={selectedItemRef}
+      ref={mergedRef}
       id={lineKey}
+      data-verse-key={verseKey}
+      data-page={pageNumber}
+      data-chapter-id={chapterId}
+      data-hizb={hizbNumber}
       className={classNames(styles.container, {
         [styles.highlighted]: isHighlighted,
         [styles.mobileInline]: isBigTextLayout,
@@ -74,8 +101,6 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           translationsLabel={translationsLabel}
           translationsCount={translationsCount}
           chapterId={firstWordData[0]}
-          pageNumber={words[0].pageNumber}
-          hizbNumber={words[0].hizbNumber}
           isTranslationView={false}
         />
       )}
