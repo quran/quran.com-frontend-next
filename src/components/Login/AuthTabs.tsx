@@ -39,7 +39,7 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
 
   return (
     <div className={styles.authContainer}>
-      <AuthHeader showSubtitle />
+      <AuthHeader as="h1" showSubtitle />
       <div className={styles.authTabs}>
         <div className={styles.authSwitchContainer}>
           <Switch
