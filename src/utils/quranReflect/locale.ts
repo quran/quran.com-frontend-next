@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import Language from '@/types/Language';
-import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
+import ReflectionLanguage from '@/types/QuranReflect/ReflectionLanguage';
 
 const ARABIC_LANGUAGE_ID = 1;
 const URDU_LANGUAGE_ID = 5;
