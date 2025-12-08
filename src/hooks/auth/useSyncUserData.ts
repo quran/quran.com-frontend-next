@@ -20,37 +20,22 @@ import {
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLastSyncAt, setLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import SyncDataType from 'types/auth/SyncDataType';
+import SyncDataType, {
+  SyncBookmarkPayload,
+  SyncLocalDataPayload,
+  SyncReadingSessionPayload,
+} from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
 const MAX_SYNC_ATTEMPTS = 3; // 1 initial + 2 retries
 const INITIAL_RETRY_DELAY_MS = 1000;
 
-interface BookmarkPayload {
-  key: number;
-  type: string;
-  verseNumber?: number;
-  createdAt: string;
-  mushaf: number;
-}
-
-type ReadingSessionPayload = {
-  updatedAt: string;
-  chapterNumber: number;
-  verseNumber: number;
-};
-
-type SyncPayload = {
-  [SyncDataType.BOOKMARKS]: BookmarkPayload[];
-  [SyncDataType.READING_SESSIONS]: ReadingSessionPayload[];
-};
-
 const formatLocalBookmarkRecord = (
   ayahKey: string,
   bookmarkTimestamp: number,
   mushafId: number,
-): BookmarkPayload => {
+): SyncBookmarkPayload => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
     createdAt: new Date(bookmarkTimestamp).toISOString(),
@@ -65,14 +50,17 @@ const formatLocalPageBookmarkRecord = (
   pageNumber: string,
   bookmarkTimestamp: number,
   mushafId: number,
-): BookmarkPayload => ({
+): SyncBookmarkPayload => ({
   createdAt: new Date(bookmarkTimestamp).toISOString(),
   type: BookmarkType.Page,
   key: Number(pageNumber),
   mushaf: mushafId,
 });
 
-const formatLocalReadingSession = (ayahKey: string, updatedAt: number): ReadingSessionPayload => {
+const formatLocalReadingSession = (
+  ayahKey: string,
+  updatedAt: number,
+): SyncReadingSessionPayload => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
     updatedAt: new Date(updatedAt).toISOString(),
@@ -88,14 +76,14 @@ const formatLocalReadingSession = (ayahKey: string, updatedAt: number): ReadingS
  * @param {Record<string, number>} bookmarkedPages - The bookmarked pages
  * @param {RecentReadingSessions} recentReadingSessions - The recent reading sessions
  * @param {number} mushafId - The mushaf ID
- * @returns {SyncPayload} The sync payload
+ * @returns {SyncLocalDataPayload} The sync payload
  */
 const buildSyncPayload = (
   bookmarkedVerses: Record<string, number>,
   bookmarkedPages: Record<string, number>,
   recentReadingSessions: RecentReadingSessions,
   mushafId: number,
-): SyncPayload => ({
+): SyncLocalDataPayload => ({
   [SyncDataType.BOOKMARKS]: [
     ...Object.keys(bookmarkedVerses).map((ayahKey) =>
       formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
@@ -143,7 +131,7 @@ const useSyncUserData = () => {
       );
 
       try {
-        const response = await syncUserLocalData(requestPayload as Record<SyncDataType, any>);
+        const response = await syncUserLocalData(requestPayload);
         const { lastSyncAt } = response;
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
         mutate(makeReadingSessionsUrl());

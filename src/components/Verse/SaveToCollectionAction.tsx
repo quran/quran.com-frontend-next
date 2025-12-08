@@ -110,13 +110,13 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   const isDataReady = bookmarkCollectionIds !== undefined;
 
-  const modalCollections = useMemo(
+  const modalCollections: CollectionOption[] = useMemo(
     () =>
       collections.map((collection) => ({
         id: collection.id,
         name: collection.name,
         checked: bookmarkCollectionIds?.includes(collection.id) ?? false,
-      })) as CollectionOption[],
+      })),
     [collections, bookmarkCollectionIds],
   );
 

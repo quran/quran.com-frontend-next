@@ -47,7 +47,9 @@ const useCollections = ({
     data: collectionsData,
     isValidating: isLoading,
     mutate: mutateCollections,
-  } = useSWR(isLoggedIn ? makeCollectionsUrl({ type }) : null, () => getCollectionsList({ type }));
+  } = useSWR<{ data: Collection[] }>(isLoggedIn ? makeCollectionsUrl({ type }) : null, () =>
+    getCollectionsList({ type }),
+  );
 
   const collections = collectionsData?.data || [];
 

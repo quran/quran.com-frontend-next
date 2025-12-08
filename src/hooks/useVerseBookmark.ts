@@ -16,6 +16,7 @@ const NOT_BOOKMARKED = null;
 export interface BookmarkableVerse {
   verseKey: string;
   verseNumber: number;
+  /** Chapter ID - accepts both number and string since route params come as strings */
   chapterId: number | string;
 }
 const useVerseBookmark = ({

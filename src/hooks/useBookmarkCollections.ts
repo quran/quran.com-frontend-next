@@ -50,7 +50,7 @@ const useBookmarkCollections = ({
 
   const { data: collectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
-    async () => getBookmarkCollections(mushafId, key, type, verseNumber),
+    () => getBookmarkCollections(mushafId, key, type, verseNumber),
     mutatingFetcherConfig,
   );
 

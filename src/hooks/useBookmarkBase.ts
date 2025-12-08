@@ -66,10 +66,10 @@ const useBookmarkBase = ({
     globalMutate(makeBookmarksUrl(mushafId));
   }, [globalMutate, mushafId]);
 
-  const baseAddBookmark = useCallback(async (): Promise<Bookmark> => {
-    const newBookmark = (await addBookmark({ key, mushafId, type, verseNumber })) as Bookmark;
-    return newBookmark;
-  }, [key, mushafId, type, verseNumber]);
+  const baseAddBookmark = useCallback(
+    async (): Promise<Bookmark> => addBookmark({ key, mushafId, type, verseNumber }),
+    [key, mushafId, type, verseNumber],
+  );
 
   const baseRemoveBookmark = useCallback(async (bookmarkId: string): Promise<void> => {
     await deleteBookmarkById(bookmarkId);
