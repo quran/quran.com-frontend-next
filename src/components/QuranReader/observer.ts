@@ -14,7 +14,9 @@ export const QURAN_READER_OBSERVER_ID = 'quranReaderObserver';
 export const REFLECTIONS_OBSERVER_ID = 'reflectionsObserver';
 // Mushaf view: narrower top allowance (header only) and tighter bottom margin so the top-most verse
 // stays selected and the next verse doesn’t take over as soon as it peeks in.
-const READING_MODE_ROOT_MARGIN = '-40px 0px -85% 0px';
+// 48px is the height of the context menu
+// -85% bottom margin ensures the first verse stays selected until the next verse is well into view.
+const READING_MODE_ROOT_MARGIN = '-48px 0px -85% 0px';
 
 /**
  * Get the observer options based on the reading preference.

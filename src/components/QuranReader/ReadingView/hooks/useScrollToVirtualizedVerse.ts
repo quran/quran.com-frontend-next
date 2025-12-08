@@ -20,26 +20,22 @@ import Verse from 'types/Verse';
  * @returns {number} The combined height of fixed top elements in pixels
  */
 const getFixedHeaderHeight = (): number => {
-  const isMobile = window.innerWidth < 768;
+  const getHeight = (selector: string, fallback = 0) => {
+    const el = document.querySelector(selector);
+    return el ? el.getBoundingClientRect().height : fallback;
+  };
 
-  if (isMobile) {
-    // Try to get only the context menu on mobile (navbar often hidden/minimal)
-    const contextMenu = document.querySelector('[data-quran-context-menu]');
-    const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 48;
-
-    return contextMenuHeight;
-  }
-
-  // Desktop: calculate both navbar and context menu
-  const navbar = document.querySelector('[data-quran-navbar]');
-  const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
-
-  const contextMenu = document.querySelector('[data-quran-context-menu]');
-  const contextMenuHeight = contextMenu ? contextMenu.getBoundingClientRect().height : 0;
-
+  const navbarHeight = getHeight('[data-quran-navbar]', 0);
+  const contextMenuHeight = getHeight('[data-quran-context-menu]', 0);
   const totalHeight = navbarHeight + contextMenuHeight;
 
-  return totalHeight > 0 ? totalHeight : 96;
+  // Defaults if nothing is found
+  if (totalHeight === 0) {
+    // 48px is the default height of context menu
+    return 48;
+  }
+
+  return totalHeight;
 };
 
 /**
@@ -104,6 +100,8 @@ const useScrollToVirtualizedReadingView = (
   const router = useRouter();
   const { startingVerse, chapterId } = router.query;
   const shouldScroll = useRef(true);
+  const SCROLL_TO_VERSE_DELAY_MS = 300;
+  const MAX_SCROLL_RETRIES = 20;
 
   /**
    * We need to scroll again when we have just changed the font since the same
@@ -149,7 +147,10 @@ const useScrollToVirtualizedReadingView = (
               // After scrolling to the page, wait for the verse element to be rendered
               // then scroll to it.
               // Use longer delay on mobile to ensure proper rendering
-              setTimeout(() => scrollToVerseElement(verseKey, 0, 20), 300);
+              setTimeout(
+                () => scrollToVerseElement(verseKey, 0, MAX_SCROLL_RETRIES),
+                SCROLL_TO_VERSE_DELAY_MS,
+              );
               shouldScroll.current = false;
             } else {
               // get the page number by the verse key and the mushafId (because the page will be different for Indopak Mushafs)
@@ -176,7 +177,10 @@ const useScrollToVirtualizedReadingView = (
                     // After scrolling to the page, wait for the verse element to be rendered
                     // then scroll to it. We use a polling mechanism with a max retry limit.
                     // Use longer delay on mobile to ensure proper rendering
-                    setTimeout(() => scrollToVerseElement(verseKey, 0, 20), 300);
+                    setTimeout(
+                      () => scrollToVerseElement(verseKey, 0, MAX_SCROLL_RETRIES),
+                      SCROLL_TO_VERSE_DELAY_MS,
+                    );
 
                     shouldScroll.current = false;
                   }

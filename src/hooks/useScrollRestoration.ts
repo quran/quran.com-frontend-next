@@ -14,6 +14,8 @@ const useScrollRestoration = (): {
     onComplete?: () => void,
   ) => void;
 } => {
+  const SCROLL_RESTORATION_DELAY_MS = 500;
+
   /**
    * Handles the translation tab's scrolling issues by using a MutationObserver
    * This ensures the scroll position is maintained even when DOM changes occur
@@ -33,7 +35,7 @@ const useScrollRestoration = (): {
     setTimeout(() => {
       observer.disconnect();
       window.scrollTo(0, scrollPosition);
-    }, 500);
+    }, SCROLL_RESTORATION_DELAY_MS);
   }, []);
 
   /**
@@ -68,7 +70,7 @@ const useScrollRestoration = (): {
           if (!hasStartingVerse) {
             window.scrollTo(0, scrollPosition);
           }
-        }, 500);
+        }, SCROLL_RESTORATION_DELAY_MS);
       }
     },
     [handleTranslationTabScroll],
