@@ -14,7 +14,9 @@ test(
   'Profile icon should show up in the navbar',
   { tag: ['@slow', '@auth', '@login-user'] },
   async ({ page }) => {
-    const profileIcon = page.getByTestId('profile-avatar-button');
-    await expect(profileIcon).toBeVisible();
+    const profileAvatarButton = page.getByTestId('profile-avatar-button');
+    await expect(profileAvatarButton).toHaveCount(2);
+    await expect(profileAvatarButton.nth(0)).toBeVisible();
+    await expect(profileAvatarButton.nth(1)).toBeVisible();
   },
 );

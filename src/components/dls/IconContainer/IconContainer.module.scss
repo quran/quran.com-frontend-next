@@ -1,11 +1,11 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
   align-items: center;
 }
 
-.container[dir="rtl"][data-auto-flip-icon="true"] {
+.container[dir='rtl'][data-auto-flip-icon='true'] {
   > svg {
     transform: scaleX(-1);
   }
@@ -26,6 +26,12 @@
 .tertiaryColor {
   > svg {
     color: var(--color-grey-icons-new) !important;
+  }
+}
+
+.accentColor {
+  > svg path {
+    fill: var(--color-daily-progress);
   }
 }
 

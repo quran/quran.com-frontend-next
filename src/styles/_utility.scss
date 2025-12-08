@@ -860,8 +860,25 @@ $page-container-max-width: 80rem;
   }
 }
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@mixin dimmedOverlay {
+  position: relative;
+  transition: var(--transition-slow);
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-background-backdrop);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-slow);
+    z-index: var(--z-index-smaller-modal);
+  }
+
+  &.dimmed {
+    &::before {
+      opacity: var(--opacity-50);
+      pointer-events: auto;
+    }
+  }
 }
