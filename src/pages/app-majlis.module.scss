@@ -118,6 +118,11 @@
   align-items: stretch;
 }
 
+.emptyState {
+  margin: 0;
+  color: var(--color-text-faded);
+}
+
 .featuredCard {
   background: var(--color-background-default);
   border: 1px solid var(--color-border-gray-faded);

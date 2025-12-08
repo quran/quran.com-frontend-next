@@ -1,6 +1,6 @@
 /* eslint-disable max-lines, react/no-multi-comp */
 
-import { FC } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
@@ -26,11 +26,6 @@ interface FeaturedApp {
   href: string;
 }
 
-interface FilterChip {
-  label: string;
-  isActive?: boolean;
-}
-
 interface AppTile {
   id: string;
   title: string;
@@ -39,6 +34,22 @@ interface AppTile {
   iconSrc: string;
   iconAlt: string;
   href: string;
+  categories: AppCategory[];
+}
+
+type AppCategory =
+  | 'study-tools'
+  | 'reflections'
+  | 'popular'
+  | 'quran-reader'
+  | 'community'
+  | 'hadith-sunnah';
+
+type FilterValue = 'all' | AppCategory;
+
+interface FilterChip {
+  label: string;
+  value: FilterValue;
 }
 
 const featuredApps: FeaturedApp[] = [
@@ -78,13 +89,13 @@ const featuredApps: FeaturedApp[] = [
 ];
 
 const filters: FilterChip[] = [
-  { label: 'All apps', isActive: true },
-  { label: 'Study tools' },
-  { label: 'Reflections' },
-  { label: 'Popular' },
-  { label: 'Quran Reader' },
-  { label: 'Community' },
-  { label: 'Hadith and Sunnah' },
+  { label: 'All apps', value: 'all' },
+  { label: 'Study tools', value: 'study-tools' },
+  { label: 'Reflections', value: 'reflections' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Quran Reader', value: 'quran-reader' },
+  { label: 'Community', value: 'community' },
+  { label: 'Hadith and Sunnah', value: 'hadith-sunnah' },
 ];
 
 const appTiles: AppTile[] = [
@@ -97,6 +108,7 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/calligraphy_web_optimized.png',
     iconAlt: 'Nuqayah',
     href: '#',
+    categories: ['study-tools', 'popular'],
   },
   {
     id: 'quranreflect-one',
@@ -107,6 +119,7 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: '#',
+    categories: ['reflections', 'community'],
   },
   {
     id: 'sunnah-one',
@@ -117,6 +130,7 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     href: '#',
+    categories: ['hadith-sunnah', 'popular'],
   },
   {
     id: 'nuqayah-two',
@@ -127,6 +141,7 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/calligraphy_web_optimized.png',
     iconAlt: 'Nuqayah',
     href: '#',
+    categories: ['quran-reader', 'study-tools'],
   },
   {
     id: 'quranreflect-two',
@@ -137,6 +152,7 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: '#',
+    categories: ['community', 'reflections', 'popular'],
   },
   {
     id: 'sunnah-two',
@@ -147,8 +163,27 @@ const appTiles: AppTile[] = [
     iconSrc: '/images/app-majlis/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     href: '#',
+    categories: ['hadith-sunnah', 'popular'],
   },
 ];
+
+interface FiltersBarProps {
+  activeFilter: FilterValue;
+  onFilterChange: (filter: FilterValue) => void;
+  onSearchChange: (query: string) => void;
+  searchLabel: string;
+  searchQuery: string;
+}
+
+interface AppGridProps {
+  apps: AppTile[];
+  emptyText: string;
+}
+
+interface BrowseAppsProps {
+  noResultsText: string;
+  searchLabel: string;
+}
 
 const path = '/app-majlis';
 const heroDescription =
@@ -238,21 +273,35 @@ const AppTileCard: FC<{ app: AppTile }> = ({ app }) => (
   </article>
 );
 
-const FiltersBar: FC = () => (
+const FiltersBar: FC<FiltersBarProps> = ({
+  activeFilter,
+  onFilterChange,
+  onSearchChange,
+  searchLabel,
+  searchQuery,
+}) => (
   <div className={styles.filters}>
     <div className={styles.search}>
       <span className={styles.searchIcon} aria-hidden="true">
         <Image alt="" src="/images/app-majlis/search-icon.svg" width={20} height={20} />
       </span>
-      <input aria-label="Search apps" placeholder="Search the Quran..." type="text" />
+      <input
+        aria-label={searchLabel}
+        onChange={(event) => onSearchChange(event.target.value)}
+        placeholder={searchLabel}
+        type="text"
+        value={searchQuery}
+      />
     </div>
     <div className={styles.pills}>
       {filters.map((filter) => (
         <button
-          key={filter.label}
+          key={filter.value}
           className={classNames(styles.pill, {
-            [styles.pillActive]: filter.isActive,
+            [styles.pillActive]: filter.value === activeFilter,
           })}
+          aria-pressed={filter.value === activeFilter}
+          onClick={() => onFilterChange(filter.value)}
           type="button"
         >
           {filter.label}
@@ -262,29 +311,68 @@ const FiltersBar: FC = () => (
   </div>
 );
 
-const AppGrid: FC = () => (
-  <div className={styles.appGrid}>
-    {appTiles.map((app) => (
-      <AppTileCard key={app.id} app={app} />
-    ))}
-  </div>
-);
+const AppGrid: FC<AppGridProps> = ({ apps, emptyText }) => {
+  if (!apps.length) {
+    return <p className={styles.emptyState}>{emptyText}</p>;
+  }
 
-const BrowseApps: FC = () => (
-  <section className={styles.sectionAlt}>
-    <div className={styles.sectionAltInner}>
-      <div className={styles.sectionHeaderAlt}>
-        {/* eslint-disable-next-line i18next/no-literal-string */}
-        <h2 className={styles.sectionTitle}>Browse All Apps</h2>
-      </div>
-      <FiltersBar />
-      <AppGrid />
+  return (
+    <div className={styles.appGrid}>
+      {apps.map((app) => (
+        <AppTileCard key={app.id} app={app} />
+      ))}
     </div>
-  </section>
-);
+  );
+};
+
+const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
+  const [activeFilter, setActiveFilter] = useState<FilterValue>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredApps = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    return appTiles.filter((app) => {
+      const matchesFilter = activeFilter === 'all' ? true : app.categories.includes(activeFilter);
+      const matchesSearch =
+        normalizedQuery.length === 0 ||
+        app.title.toLowerCase().includes(normalizedQuery) ||
+        app.caption.toLowerCase().includes(normalizedQuery);
+
+      return matchesFilter && matchesSearch;
+    });
+  }, [activeFilter, searchQuery]);
+
+  const handleFilterChange = useCallback((filter: FilterValue) => {
+    setActiveFilter(filter);
+  }, []);
+
+  const handleSearchChange = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
+  return (
+    <section className={styles.sectionAlt}>
+      <div className={styles.sectionAltInner}>
+        <div className={styles.sectionHeaderAlt}>
+          {/* eslint-disable-next-line i18next/no-literal-string */}
+          <h2 className={styles.sectionTitle}>Browse All Apps</h2>
+        </div>
+        <FiltersBar
+          activeFilter={activeFilter}
+          onFilterChange={handleFilterChange}
+          onSearchChange={handleSearchChange}
+          searchLabel={searchLabel}
+          searchQuery={searchQuery}
+        />
+        <AppGrid apps={filteredApps} emptyText={noResultsText} />
+      </div>
+    </section>
+  );
+};
 
 const AppMajlisPage: NextPage = () => {
-  const { lang } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   return (
     <>
@@ -298,7 +386,7 @@ const AppMajlisPage: NextPage = () => {
         <main className={styles.page}>
           <Hero />
           <FeaturedApps />
-          <BrowseApps />
+          <BrowseApps noResultsText={t('search.no-results')} searchLabel={t('search.title')} />
         </main>
       </PageContainer>
     </>
