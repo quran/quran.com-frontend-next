@@ -43,7 +43,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
   const toast = useToast();
 
   // Use extracted hooks for data fetching and mutations
-  const { collections, mutateCollections, addCollection } = useCollections({
+  const { collections, addCollection } = useCollections({
     type: BookmarkType.Ayah,
   });
 
@@ -100,18 +100,12 @@ const SaveToCollectionAction: React.FC<Props> = ({
       if (newCollection) {
         const success = await addToCollection(newCollection.id);
         if (success) {
+          // Optimistic update - addToCollection already invalidates caches
           mutateBookmarkCollections([...(bookmarkCollectionIds || []), newCollection.id]);
-          mutateCollections();
         }
       }
     },
-    [
-      addCollection,
-      addToCollection,
-      bookmarkCollectionIds,
-      mutateBookmarkCollections,
-      mutateCollections,
-    ],
+    [addCollection, addToCollection, bookmarkCollectionIds, mutateBookmarkCollections],
   );
 
   const isDataReady = bookmarkCollectionIds !== undefined;

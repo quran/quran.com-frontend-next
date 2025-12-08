@@ -1,13 +1,14 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { getBookmark } from '@/utils/auth/api';
 import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import mutatingFetcherConfig from '@/utils/swr';
 import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 
@@ -18,7 +19,6 @@ interface UsePageBookmarkProps {
 
 interface UsePageBookmarkReturn {
   isPageBookmarked: boolean;
-  isLoading: boolean;
   handleToggleBookmark: () => void;
 }
 
@@ -37,9 +37,10 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
 
   const {
     showToast,
+    showErrorToast,
     invalidateBookmarksList,
-    handleAddBookmark: baseAddBookmark,
-    handleRemoveBookmark: baseRemoveBookmark,
+    addBookmark: baseAddBookmark,
+    removeBookmark: baseRemoveBookmark,
     isLoggedIn,
   } = useBookmarkBase({
     mushafId,
@@ -48,17 +49,25 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     toastNamespace: 'quran-reader',
   });
 
-  // Use SWR to fetch bookmark data
-  const {
-    data: bookmark,
-    isValidating: isLoading,
-    mutate,
-  } = useSWRImmutable<Bookmark>(
+  const isPendingRef = useRef(false);
+
+  const { data: bookmark, mutate } = useSWR<Bookmark | null>(
     isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
     async () => {
-      const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
-      return response;
+      try {
+        const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
+        return response;
+      } catch (error) {
+        // Return null when bookmark doesn't exist (404) so SWR updates cache properly
+        // The API throws the Response object on error
+        if (error instanceof Response && error.status === 404) {
+          return null;
+        }
+        // Re-throw other errors so SWR can handle them
+        throw error;
+      }
     },
+    mutatingFetcherConfig,
   );
 
   // Determine if the page is bookmarked based on user login status and data source
@@ -69,28 +78,43 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     return !!bookmarkedPages?.[pageNumber.toString()];
   }, [isLoggedIn, bookmarkedPages, bookmark, pageNumber]);
 
-  // Helper: Handle bookmark add for logged-in user
   const handleBookmarkAdd = useCallback(async () => {
-    const newBookmark = await baseAddBookmark();
-    if (newBookmark) {
-      mutate(() => newBookmark, { revalidate: false });
+    if (isPendingRef.current) return;
+    isPendingRef.current = true;
+    const optimisticBookmark: Bookmark = {
+      id: `temp-${Date.now()}`,
+      key: pageNumber,
+      type: BookmarkType.Page,
+    };
+    mutate(optimisticBookmark, { revalidate: false });
+    try {
+      mutate(await baseAddBookmark(), { revalidate: false });
+      invalidateBookmarksList();
       showToast('page-bookmarked', ToastStatus.Success);
-    } else {
-      mutate(); // Revalidate to get the correct state on error
+    } catch (err) {
+      mutate(null, { revalidate: true });
+      showErrorToast(err);
+    } finally {
+      isPendingRef.current = false;
     }
-  }, [baseAddBookmark, mutate, showToast]);
+  }, [pageNumber, baseAddBookmark, mutate, invalidateBookmarksList, showToast, showErrorToast]);
 
-  // Helper: Handle bookmark removal for logged-in user
   const handleBookmarkRemove = useCallback(async () => {
-    if (!bookmark) return;
-    mutate(null, { revalidate: false }); // Optimistic update
-    const success = await baseRemoveBookmark(bookmark.id);
-    if (success) {
+    if (isPendingRef.current || !bookmark) return;
+    isPendingRef.current = true;
+    const previousBookmark = bookmark;
+    mutate(null, { revalidate: false });
+    try {
+      await baseRemoveBookmark(previousBookmark.id);
+      invalidateBookmarksList();
       showToast('page-bookmark-removed', ToastStatus.Success);
-    } else {
-      mutate(); // Revalidate to get the correct state on error
+    } catch (err) {
+      mutate(previousBookmark, { revalidate: true });
+      showErrorToast(err);
+    } finally {
+      isPendingRef.current = false;
     }
-  }, [bookmark, baseRemoveBookmark, mutate, showToast]);
+  }, [bookmark, baseRemoveBookmark, mutate, invalidateBookmarksList, showToast, showErrorToast]);
 
   // Helper: Handle bookmark toggle for logged-out user
   const handleLoggedOutBookmarkToggle = useCallback(() => {
@@ -99,32 +123,22 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     showToast(wasBookmarked ? 'page-bookmark-removed' : 'page-bookmarked', ToastStatus.Success);
   }, [dispatch, pageNumber, bookmarkedPages, showToast]);
 
-  // Main toggle handler
   const handleToggleBookmark = useCallback(() => {
     if (isLoggedIn) {
-      invalidateBookmarksList();
-      if (isPageBookmarked) {
-        handleBookmarkRemove();
-      } else {
-        handleBookmarkAdd();
-      }
+      if (isPageBookmarked) handleBookmarkRemove();
+      else handleBookmarkAdd();
     } else {
       handleLoggedOutBookmarkToggle();
     }
   }, [
     isLoggedIn,
-    invalidateBookmarksList,
     isPageBookmarked,
     handleBookmarkRemove,
     handleBookmarkAdd,
     handleLoggedOutBookmarkToggle,
   ]);
 
-  return {
-    isPageBookmarked,
-    isLoading,
-    handleToggleBookmark,
-  };
+  return { isPageBookmarked, handleToggleBookmark };
 };
 
 export default usePageBookmark;
