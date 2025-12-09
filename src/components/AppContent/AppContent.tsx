@@ -14,6 +14,7 @@ import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
+import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { selectIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
@@ -30,9 +31,10 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
-    <>
+    <div className={classNames({ bannerActive: isBannerVisible })}>
       <AuthRedirects />
       <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
       <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
@@ -50,7 +52,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
       </div>
       <AudioPlayer />
       {!isAuth && <Footer />}
-    </>
+    </div>
   );
 }
 
