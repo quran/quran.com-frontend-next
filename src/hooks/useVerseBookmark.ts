@@ -107,7 +107,7 @@ const useVerseBookmark = ({
     globalMutate,
   ]);
   const handleRemoveBookmark = useCallback(async () => {
-    if (isPendingRef.current || !effectiveBookmark || effectiveBookmark === NOT_BOOKMARKED) return;
+    if (isPendingRef.current || !effectiveBookmark) return;
     isPendingRef.current = true;
     const prev = effectiveBookmark;
     updateBookmarkCaches(NOT_BOOKMARKED);

@@ -108,6 +108,7 @@ const isBookmarkCacheKey = (key: unknown): boolean =>
 const useSyncUserData = () => {
   const { mutate } = useSWRConfig();
   const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isSyncingRef = useRef(false);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions: RecentReadingSessions = useSelector(
@@ -122,14 +123,12 @@ const useSyncUserData = () => {
     async (attempt = 0): Promise<void> => {
       const bookmarksCount =
         Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
-      const readingSessionsCount = Object.keys(recentReadingSessions).length;
       const requestPayload = buildSyncPayload(
         bookmarkedVerses,
         bookmarkedPages,
         recentReadingSessions,
         mushafId,
       );
-
       try {
         const response = await syncUserLocalData(requestPayload);
         const { lastSyncAt } = response;
@@ -138,15 +137,14 @@ const useSyncUserData = () => {
         mutate(isBookmarkCacheKey, undefined, { revalidate: true });
         setLastSyncAt(new Date(lastSyncAt));
       } catch (error) {
+        const readingSessionsCount = Object.keys(recentReadingSessions).length;
         logErrorToSentry(error, {
           transactionName: 'useSyncUserData',
           metadata: { bookmarksCount, readingSessionsCount, mushafId, attempt },
         });
-
         // Retry with exponential backoff (attempt 0, 1, 2 = 3 total attempts)
         if (attempt < MAX_SYNC_ATTEMPTS - 1) {
           const delay = INITIAL_RETRY_DELAY_MS * 2 ** attempt;
-          // Clear any pending retry before scheduling a new one to prevent overlapping syncs
           if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
           retryTimeoutRef.current = setTimeout(() => performSync(attempt + 1), delay);
         }
@@ -157,8 +155,12 @@ const useSyncUserData = () => {
 
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
-    if (isLoggedIn() && !getLastSyncAt()) {
-      performSync();
+    // isSyncingRef prevents duplicate syncs when performSync is recreated due to dependency changes
+    if (isLoggedIn() && !getLastSyncAt() && !isSyncingRef.current) {
+      isSyncingRef.current = true;
+      performSync().finally(() => {
+        isSyncingRef.current = false;
+      });
     }
     return () => {
       if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
