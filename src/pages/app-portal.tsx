@@ -7,7 +7,7 @@ import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './app-majlis.module.scss';
+import styles from './app-portal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -185,7 +185,7 @@ interface BrowseAppsProps {
   searchLabel: string;
 }
 
-const path = '/app-majlis';
+const path = '/app-portal';
 const heroDescription =
   'Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey.';
 
@@ -371,13 +371,13 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
   );
 };
 
-const AppMajlisPage: NextPage = () => {
+const AppPortalPage: NextPage = () => {
   const { t, lang } = useTranslation('common');
 
   return (
     <>
       <NextSeoWrapper
-        title="Apps Majlis"
+        title="Quran App Portal"
         description={heroDescription}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
@@ -403,4 +403,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default AppMajlisPage;
+export default AppPortalPage;

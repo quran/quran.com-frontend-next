@@ -18,12 +18,12 @@
   "labs-cta": "Explore Labs",
   "labs-description": "Discover experimental features and upcoming innovations. Share your ideas",
   "main-desc": "Thank you for your interest in helping us develop Quran.com and its projects. We are excited to work with you!",
-  "apps-majlis": {
-    "heading": "Apps Majlis",
+  "app-portal": {
+    "heading": "Quran App Portal",
     "tagline": "Showcase your Quran apps",
     "description": "Explore the latest community-built experiences and see what is possible with our platform.",
-    "oauth-pitch": "Ship with Quran Foundation OAuth2 for seamless sign-in and submit your app to be featured on Apps Majlis.",
-    "cta-explore": "Visit Apps Majlis",
+    "oauth-pitch": "Ship with Quran Foundation OAuth2 for seamless sign-in and submit your app to be featured on Quran App Portal.",
+    "cta-explore": "Visit Quran App Portal",
     "cta-oauth": "See OAuth2 guide"
   },
   "projects": {
