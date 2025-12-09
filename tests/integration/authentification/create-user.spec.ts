@@ -89,7 +89,7 @@ test('Sign up with an existing email shows an error', async ({ page }) => {
   test.skip(!process.env.TEST_USER_EMAIL, 'No credentials provided');
 
   // Click on the "Sign Up" tab
-  const signUpTab = page.getByRole('button', { name: 'Sign Up' });
+  const signUpTab = page.getByTestId('signup-button');
   await signUpTab.click();
 
   await fillInSignUpForm(page);

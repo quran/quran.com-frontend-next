@@ -60,7 +60,6 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         data-testid="apple-login-button"
         size={ButtonSize.Medium}
         ariaLabel={t('continue-apple')}
-        hasSidePadding={false}
       />
     </div>
   );
