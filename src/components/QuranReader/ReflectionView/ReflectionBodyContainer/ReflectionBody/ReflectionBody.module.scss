@@ -1,8 +1,14 @@
+@use 'src/styles/breakpoints';
+
 .separatorContainer {
   margin-block: var(--spacing-large);
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+  }
 }
 .container {
-  min-height: calc(10 * var(--spacing-mega));
+  min-block-size: calc(10 * var(--spacing-mega));
 }
 .verseContainer {
   padding-block-start: var(--spacing-xxsmall);

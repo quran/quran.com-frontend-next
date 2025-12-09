@@ -3,6 +3,8 @@ import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './QuranReflectMenuItem.module.scss';
+
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
@@ -64,6 +66,8 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
+            contentClassName={styles.contentModal}
+            innerContentClassName={styles.innerContentModal}
             innerRef={contentModalRef}
             isOpen={isContentModalOpen}
             hasCloseButton
