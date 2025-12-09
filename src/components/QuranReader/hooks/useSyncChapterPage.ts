@@ -1,70 +1,50 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import useFetchPagesLookup from './useFetchPagesLookup';
+import { useDispatch } from 'react-redux';
 
 import DataContext from '@/contexts/DataContext';
-import {
-  selectLastReadVerseKey,
-  setLastReadVerse,
-} from '@/redux/slices/QuranReader/readingTracker';
-import {
-  selectIsUsingDefaultFont,
-  selectQuranReaderStyles,
-} from '@/redux/slices/QuranReader/styles';
-import { QuranReaderDataType } from '@/types/QuranReader';
-import { useGetFirstPageNumberForChapter } from '@/utils/chapter-pages';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
+import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
+import { VersesResponse } from 'types/ApiResponses';
 
 /**
- * A hook that synchronizes the chapter and page in the lastReadVerse Redux state.
- * When navigation changes (chapter, juz, page), it updates the page to match the first page.
+ * A hook that sets the initial page state when navigating to any content type
+ * (Surah, Verse, Juz, Page, Hizb, Rub, Range).
  *
- * @param {any} [initialData] - Optional external chapters data to use instead of context
+ * Uses initialData.verses[0] directly which contains all needed data:
+ * - verseKey, chapterId, pageNumber, hizbNumber
+ *
+ * This works for ALL navigation scenarios (49 combinations × 2 modes = 98 total)
+ * and updates IMMEDIATELY on navigation (no scrolling required).
+ *
+ * Uses useBrowserLayoutEffect to ensure state is set synchronously before paint,
+ * so the correct page number is displayed immediately.
+ *
+ * @param {VersesResponse} initialData - The initial verses data from the page
  */
-const useSyncChapterPage = (initialData?: any): void => {
+const useSyncChapterPage = (initialData: VersesResponse): void => {
   const dispatch = useDispatch();
-  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const chaptersData = useContext(DataContext);
 
-  const { data: pagesLookupData } = useFetchPagesLookup(
-    String(lastReadVerseKey?.chapterId),
-    QuranReaderDataType.Chapter,
-    initialData,
-    quranReaderStyles,
-    isUsingDefaultFont,
-  );
+  const firstVerse = initialData?.verses?.[0];
+  // Use verseKey as the dependency to detect navigation changes
+  const firstVerseKey = firstVerse?.verseKey;
 
-  const firstPageNumber = useGetFirstPageNumberForChapter(pagesLookupData);
+  useBrowserLayoutEffect(() => {
+    if (!firstVerse) return;
 
-  // Track the previous chapterId to detect navigation between chapters
-  const prevChapterIdRef = useRef<string | undefined>(lastReadVerseKey?.chapterId);
-
-  useEffect(() => {
-    // Detect if we navigated to a different chapter
-    const hasNavigatedToNewChapter = prevChapterIdRef.current !== lastReadVerseKey?.chapterId;
-    if (hasNavigatedToNewChapter) {
-      prevChapterIdRef.current = lastReadVerseKey?.chapterId;
-    }
-
-    if (lastReadVerseKey?.chapterId && firstPageNumber) {
-      // Update page if it doesn't match OR if we just navigated to a new chapter
-      if (lastReadVerseKey.page !== firstPageNumber || hasNavigatedToNewChapter) {
-        dispatch(
-          setLastReadVerse({
-            lastReadVerse: {
-              ...lastReadVerseKey,
-              page: firstPageNumber,
-            },
-            chaptersData,
-          }),
-        );
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- Trigger on firstPageNumber or chapterId changes
-  }, [firstPageNumber, lastReadVerseKey?.chapterId, dispatch]);
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          verseKey: firstVerse.verseKey,
+          chapterId: String(firstVerse.chapterId),
+          page: String(firstVerse.pageNumber),
+          hizb: String(firstVerse.hizbNumber),
+        },
+        chaptersData,
+      }),
+    );
+  }, [firstVerseKey, chaptersData, dispatch, firstVerse]);
 };
 
 export default useSyncChapterPage;
