@@ -1,4 +1,6 @@
 /* eslint-disable react/no-multi-comp */
+import { useCallback } from 'react';
+
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 
@@ -9,11 +11,14 @@ import { logError } from '@/lib/newrelic';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
+import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
+import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCourseNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
+import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {
   hasError?: boolean;
@@ -23,6 +28,18 @@ interface Props {
 const LessonPage: NextPage<Props> = () => {
   const router = useRouter();
   const { slug, lessonSlugOrId } = router.query;
+  const { enroll } = useCourseEnrollment(slug as string);
+
+  const handleFetchSuccess = useCallback(
+    (data: BaseResponse) => {
+      const lesson = data as Lesson;
+      if (!lesson?.course || lesson.course.isUserEnrolled) {
+        return;
+      }
+      enroll(lesson.course.id, EnrollmentMethod.AUTOMATIC);
+    },
+    [enroll],
+  );
 
   const renderError = (error: any) => {
     if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
@@ -56,6 +73,7 @@ const LessonPage: NextPage<Props> = () => {
         fetcher={privateFetcher}
         renderError={renderError}
         render={bodyRenderer}
+        onFetchSuccess={handleFetchSuccess}
       />
     </div>
   );

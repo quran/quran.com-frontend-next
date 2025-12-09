@@ -1,5 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,13 +10,10 @@ import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinue
 import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
-import { logErrorToSentry } from '@/lib/sentry';
 import { Course } from '@/types/auth/Course';
-import { enrollUser } from '@/utils/auth/api';
-import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
+import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
+import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCourseNavigationUrl,
@@ -31,27 +28,24 @@ type Props = {
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
-  const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
   const router = useRouter();
   const { t } = useTranslation('learn');
-  const mutate = useMutateWithoutRevalidation();
   const userLoggedIn = isLoggedIn();
+  const { enroll, isEnrolling } = useCourseEnrollment(slug);
 
-  const redirectToLesson = () => {
+  const redirectToFirstLesson = () => {
     if (lessons?.length > 0) {
       router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
     }
   };
 
-  const handleEnrollmentSuccess = async (loggedIn: boolean): Promise<void> => {
-    if (loggedIn) {
-      mutate(makeGetCourseUrl(slug), (currentCourse: Course) => ({
-        ...currentCourse,
-        isUserEnrolled: true,
-      }));
-      redirectToLesson();
+  const handleUnauthenticatedUser = () => {
+    if (allowGuestAccess) {
+      redirectToFirstLesson();
+      return;
     }
+    const redirectUrl = getCourseNavigationUrl(slug);
+    router.replace(getLoginNavigationUrl(redirectUrl));
   };
 
   const onStartHereClicked = async (): Promise<void> => {
@@ -64,38 +58,17 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     });
 
     if (!userLoggedIn) {
-      if (allowGuestAccess) {
-        redirectToLesson();
-        return;
-      }
-      const redirectUrl = getCourseNavigationUrl(slug);
-      router.replace(getLoginNavigationUrl(redirectUrl));
+      handleUnauthenticatedUser();
       return;
     }
 
-    setIsLoading(true);
-    try {
-      await enrollUser(id);
-      await handleEnrollmentSuccess(userLoggedIn);
-    } catch (error) {
-      logErrorToSentry(error, {
-        metadata: {
-          context: `${userType}_course_enrollment`,
-          courseId: id,
-          courseSlug: slug,
-        },
-      });
-      toast(t('common:error.general'), {
-        status: ToastStatus.Error,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    await enroll(id, EnrollmentMethod.MANUAL);
+    redirectToFirstLesson();
   };
 
   const renderStartHereButton = () => {
     return (
-      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onStartHereClicked}>
+      <Button isDisabled={isEnrolling} isLoading={isEnrolling} onClick={onStartHereClicked}>
         {t('start-here')}
       </Button>
     );
