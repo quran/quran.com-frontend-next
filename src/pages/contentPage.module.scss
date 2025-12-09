@@ -172,3 +172,108 @@
 .noMarginEnd {
   margin-block-end: 0 !important;
 }
+
+.pageHero {
+  padding: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
+  background: linear-gradient(135deg, rgba(20, 128, 92, 0.08), rgba(5, 99, 196, 0.05));
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 20px 35px rgb(0 0 0 / 0.06);
+}
+
+.heroTitle {
+  margin-block: var(--spacing-xxsmall) var(--spacing-small);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-large);
+  color: var(--color-text-secondary);
+}
+
+.heroFooter {
+  margin-block-start: var(--spacing-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.kicker {
+  display: inline-block;
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  background: var(--color-primary-10);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-small);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-mega);
+}
+
+.featureCard {
+  padding: var(--spacing-medium);
+  background: var(--color-background-elevated);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--color-borders-hairline);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.05);
+}
+
+.cardHeading {
+  margin-block-end: var(--spacing-small);
+}
+
+.cardLead {
+  margin: var(--spacing-xxsmall) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--spacing-small);
+  padding-block: var(--spacing-xxsmall);
+  background: var(--color-primary-10);
+  color: var(--color-primary);
+  border-radius: var(--border-radius-pill);
+  font-weight: var(--font-weight-semibold);
+}
+
+.supportSection {
+  margin-block-end: var(--spacing-mega);
+}
+
+.sectionTitle {
+  margin-block-end: var(--spacing-small);
+}
+
+.sectionSubtitle {
+  color: var(--color-text-secondary);
+}
+
+.projectsSection {
+  margin-block-end: var(--spacing-mega);
+}
+
+.projectGrid {
+  display: grid;
+  gap: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-small);
+}
+
+.callout {
+  padding: var(--spacing-large);
+  background: var(--color-primary-10);
+  border-radius: var(--border-radius-large);
+  border: 1px solid var(--color-primary-20);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 0.05);
+}
+
+.footerNote {
+  margin-block-start: var(--spacing-small);
+  font-weight: var(--font-weight-semibold);
+}
