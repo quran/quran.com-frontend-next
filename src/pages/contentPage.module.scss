@@ -180,6 +180,9 @@
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large);
   box-shadow: 0 20px 35px rgb(0 0 0 / 0.06);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .heroTitle {
@@ -261,8 +264,49 @@
 
 .projectGrid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
+}
+
+.projectCard {
+  padding: var(--spacing-medium);
+  background: var(--color-background-elevated);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
+.projectHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xsmall);
-  margin-block-start: var(--spacing-small);
+}
+
+.projectName {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  text-decoration: none;
+  font-size: var(--font-size-large);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.projectDescription {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.projectStack {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
 }
 
 .callout {

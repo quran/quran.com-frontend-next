@@ -1,4 +1,9 @@
 {
+  "hero": {
+    "title": "Build with Quran.com",
+    "subtitle": "Resources, tools, and guidance for developers building Quran experiences.",
+    "note": "Thank you for partnering with us to build purposeful Quran products."
+  },
   "api-docs": {
     "cta": "View API Docs",
     "header": "API Documentation",
@@ -17,7 +22,7 @@
   "labs": "Labs",
   "labs-cta": "Explore Labs",
   "labs-description": "Discover experimental features and upcoming innovations. Share your ideas",
-  "main-desc": "Thank you for your interest in helping us develop Quran.com and its projects. We are excited to work with you!",
+  "main-desc": "Explore the programs, tools, and documentation designed to help you extend the Quran.com ecosystem.",
   "app-portal": {
     "heading": "Quran App Portal",
     "tagline": "Showcase your Quran apps",
@@ -28,6 +33,34 @@
   },
   "projects": {
     "all": "We have a number of projects all hosted on Github. You can find them all <0>here</0>. But to outline them:",
+    "lead": "Open-source projects maintained by the Quran.com team and community.",
+    "items": {
+      "q-next": {
+        "name": "Quran.com Frontend",
+        "description": "Next.js web experience for reading, searching, and listening to Quran.",
+        "stack": "Built with TypeScript and Next.js"
+      },
+      "q-api": {
+        "name": "Quran.com API",
+        "description": "Ruby on Rails backend that powers Quran data, search, and translations.",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-android": {
+        "name": "Quran Android",
+        "description": "Native Android mushaf and audio player experience for phones and tablets.",
+        "stack": "Kotlin and Java"
+      },
+      "q-ios": {
+        "name": "Quran iOS",
+        "description": "Swift-based Quran reader with bookmarks, recitations, and offline support.",
+        "stack": "Swift"
+      },
+      "q-audio": {
+        "name": "Quranic Audio",
+        "description": "Audio streaming platform and companion mobile apps for recitations.",
+        "stack": "Web and mobile apps"
+      }
+    },
     "q-android": "<0>Quran Android</0> - written in Kotlin and Java.",
     "q-api": "<0>Quran.com API</0> - written in Ruby on Rails.",
     "q-api-docs": "<0>Quran.com API Docs</0> - Our API docs portal.",
@@ -37,5 +70,5 @@
     "q-next": "<0>Quran.com Frontend</0> - written in Next.js.",
     "q-v2": "<0>Quran.com</0> - written in Ruby on Rails."
   },
-  "thanks": "We look forward your contribution!"
+  "thanks": "We look forward to your contribution!"
 }
