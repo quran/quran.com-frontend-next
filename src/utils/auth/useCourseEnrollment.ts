@@ -29,8 +29,10 @@ const useCourseEnrollment = (courseSlug: string) => {
 
       setIsEnrolling(true);
       try {
-        await enrollUser({ courseId, enrollmentMethod });
-        updateCourseEnrollmentCache(mutate, courseSlug, true);
+        const result = await enrollUser({ courseId, enrollmentMethod });
+        if (result.success) {
+          updateCourseEnrollmentCache(mutate, courseSlug, true);
+        }
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: 'useCourseEnrollment',
