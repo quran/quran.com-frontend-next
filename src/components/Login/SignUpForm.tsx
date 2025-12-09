@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,6 +20,7 @@ interface Props {
 
 const SignUpForm = ({ onSuccess }: Props) => {
   const { t } = useTranslation('login');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (data: SignUpRequest) => {
     logFormSubmission('sign_up');
@@ -26,16 +29,21 @@ const SignUpForm = ({ onSuccess }: Props) => {
       return getFormErrors(t, ErrorType.MISMATCH);
     }
 
+    setIsSubmitting(true);
+
     try {
       const { data: response, errors } = await signUp(data);
 
       if (!response.success) {
+        setIsSubmitting(false);
         return getFormErrors(t, ErrorType.API, errors);
       }
 
+      setIsSubmitting(false);
       onSuccess(data);
       return undefined;
     } catch (error) {
+      setIsSubmitting(false);
       return getFormErrors(t, ErrorType.SIGNUP);
     }
   };
@@ -48,6 +56,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
       className={classNames(styles.submitButton, styles.smallMarginTop)}
+      data-testid="signup-submit-button"
     >
       {t('sign-up')}
     </Button>
@@ -62,6 +71,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
         formFields={formFields}
         onSubmit={handleSubmit}
         renderAction={renderAction}
+        isSubmitting={isSubmitting}
         shouldSkipValidation
       />
     </div>

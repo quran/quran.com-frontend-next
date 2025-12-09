@@ -35,7 +35,9 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         shouldFlipOnRTL={false}
         size={ButtonSize.Medium}
         ariaLabel={t('continue-google')}
+        data-testid="google-login-button"
       />
+
       <Button
         href={makeFacebookLoginUrl(redirect)}
         prefix={<FacebookIcon color="#4267b2" />}
@@ -45,7 +47,9 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         shouldFlipOnRTL={false}
         size={ButtonSize.Medium}
         ariaLabel={t('continue-facebook')}
+        data-testid="facebook-login-button"
       />
+
       <Button
         href={makeAppleLoginUrl(redirect)}
         prefix={<AppleIcon />}
@@ -55,7 +59,7 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         shouldFlipOnRTL={false}
         size={ButtonSize.Medium}
         ariaLabel={t('continue-apple')}
-        hasSidePadding={false}
+        data-testid="apple-login-button"
       />
     </div>
   );
