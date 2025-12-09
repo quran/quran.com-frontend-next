@@ -68,7 +68,7 @@
   inset-block: 0;
   inset-inline: 50%;
   margin-inline: -50vw;
-  background: var(--Background-color-background-alternative-faded, #f8f9fa);
+  background: var(--color-background-alternative-faded);
 }
 
 /* INNER: same content width + padding style as .section */
@@ -125,7 +125,7 @@
 
 .featuredCard {
   background: var(--color-background-default);
-  border: 1px solid var(--color-border-gray-faded);
+  border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   border-radius: var(--border-radius-large-px);
   box-shadow: var(--shadow-small-new);
   overflow: hidden;
@@ -216,7 +216,7 @@
   align-items: center;
   gap: var(--spacing-small);
   background: var(--color-background-default);
-  border: 1px solid var(--color-border-gray-faded);
+  border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   border-radius: var(--border-radius-pill);
   padding: var(--spacing-small) var(--spacing-medium);
   min-block-size: 2.75rem;
@@ -229,6 +229,11 @@
   outline: none;
   font-size: var(--font-size-normal);
   inline-size: 100%;
+  color: var(--color-text-default);
+}
+
+.search input::placeholder {
+  color: var(--color-text-faded);
 }
 
 .searchIcon {
@@ -247,8 +252,9 @@
 }
 
 .pill {
-  border: 1px solid var(--color-border-gray-faded);
+  border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   background: var(--color-background-default);
+  color: var(--color-text-default);
   padding: var(--spacing-small) var(--spacing-medium);
   border-radius: var(--border-radius-pill);
   font-weight: var(--font-weight-semibold);
