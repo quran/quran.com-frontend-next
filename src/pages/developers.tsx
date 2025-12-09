@@ -82,6 +82,9 @@ const DevelopersPage: NextPage = () => {
             <div className={styles.projectGrid}>
               {projects.map((project) => {
                 const { key, href } = project;
+                const nameKey = `projects.items.${key}.name` as const;
+                const descriptionKey = `projects.items.${key}.description` as const;
+                const stackKey = `projects.items.${key}.stack` as const;
                 return (
                   <div key={key} className={styles.projectCard}>
                     <div className={styles.projectHeader}>
@@ -91,11 +94,11 @@ const DevelopersPage: NextPage = () => {
                         target="_blank"
                         rel="noreferrer"
                       >
-                        {t(`projects.items.${key}.name` as const)}
+                        {t(nameKey)}
                       </a>
                     </div>
-                    <p className={styles.projectDescription}>{t(`projects.items.${key}.description` as const)}</p>
-                    <p className={styles.projectStack}>{t(`projects.items.${key}.stack` as const)}</p>
+                    <p className={styles.projectDescription}>{t(descriptionKey)}</p>
+                    <p className={styles.projectStack}>{t(stackKey)}</p>
                   </div>
                 );
               })}
