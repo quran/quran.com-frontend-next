@@ -15,6 +15,7 @@ test(
   { tag: ['@slow', '@auth', '@login-user', '@smoke'] },
   async ({ page }) => {
     // Email form should be visible immediately (no need to click "Continue with Email")
+
     // Fill in the form fields with the credentials of an existing user
     await fillInLoginForm(page);
 
@@ -22,11 +23,14 @@ test(
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
     // We should be redirected to the home page
-    await page.waitForURL(/\/$/);
-    await expect(page).toHaveURL(/\/$/);
+    await page.waitForURL(/\/fr$/);
+    await expect(page).toHaveURL(/\/fr$/);
 
     // We should be logged in
-    await expect(page.getByTestId('profile-avatar-button')).toBeVisible();
+    const profileAvatarButton = page.getByTestId('profile-avatar-button');
+    await expect(profileAvatarButton).toHaveCount(2);
+    await expect(profileAvatarButton.nth(0)).toBeVisible();
+    await expect(profileAvatarButton.nth(1)).toBeVisible();
   },
 );
 

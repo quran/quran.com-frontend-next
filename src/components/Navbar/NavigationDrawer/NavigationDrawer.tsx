@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
+import ProfileAvatarButton from '../NavbarBody/ProfileAvatarButton';
 
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerBodySkeleton from './NavigationDrawerBodySkeleton';
@@ -22,12 +23,14 @@ const NavigationDrawer = () => {
 
   return (
     <Drawer
+      id="navigation-drawer"
       type={DrawerType.Navigation}
-      side={DrawerSide.Left}
+      side={DrawerSide.Right}
       header={
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
             <NavbarLogoWrapper />
+            <ProfileAvatarButton isPopoverPortalled={false} />
           </div>
         </div>
       }
