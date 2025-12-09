@@ -2,6 +2,7 @@
 @use 'src/styles/breakpoints';
 
 .itemsContainer {
+  @include utility.dimmedOverlay(absolute);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -10,6 +11,7 @@
 }
 
 .bannerContainerTop {
+  @include utility.dimmedOverlay(absolute);
   display: flex;
   justify-content: center;
   align-items: center;
