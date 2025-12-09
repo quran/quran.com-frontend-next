@@ -1,15 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-.bannerActive {
-  --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
-
-  @include breakpoints.tablet {
-    --banner-height: var(--navbar-height);
-    --navbar-container-height: var(--navbar-height);
-  }
-}
-
 .emptySpacePlaceholder {
   block-size: var(--navbar-container-height);
 }
