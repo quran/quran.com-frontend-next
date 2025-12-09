@@ -8,6 +8,8 @@ import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
 import { parseVerseRange } from './verseKeys';
 
+import LookupRecord from '@/types/LookupRecord';
+import ScrollAlign from '@/types/ScrollAlign';
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
 import Word, { WordVerse } from 'types/Word';
@@ -484,4 +486,43 @@ export const isVerseKeyWithinRanges = (verseKey: string, ranges: string[] | stri
   // if we're here, it means that the verse is not within any of the ranges
   // so we can return false
   return false;
+};
+
+/**
+ * The thresholds for the scroll position in a mushaf page.
+ */
+const SCROLL_POSITION_THRESHOLDS = {
+  START: 33.3,
+  CENTER: 66.6,
+} as const;
+
+/**
+ * Get where a verse lies in a mushaf page. This is achieved by:
+ *
+ * 1. Extracting verse numbers from the starting verse key and page verse range.
+ * 2. Calculating the verse's order/position within the page (1-based).
+ * 3. Calculating the percentage position of the verse within the page (0-100%).
+ * 4. If the position is <= 33.3%, return 'start'; if <= 66.6%, return 'center';
+ *    otherwise return 'end'.
+ *
+ * @param {string} startingVerseKey
+ * @param {LookupRecord} pagesVerseRange
+ * @returns {ScrollAlign}
+ */
+export const getVersePositionWithinAMushafPage = (
+  startingVerseKey: string,
+  pagesVerseRange: LookupRecord,
+): ScrollAlign => {
+  const pageStartVerseNumber = getVerseNumberFromKey(pagesVerseRange.from);
+  const pageEndVerseNumber = getVerseNumberFromKey(pagesVerseRange.to);
+  const verseOrderWithinPage = getVerseNumberFromKey(startingVerseKey) - pageStartVerseNumber + 1;
+  const totalPageNumberOfVerses = pageEndVerseNumber - pageStartVerseNumber + 1;
+  const verseKeyPosition = (verseOrderWithinPage * 100) / totalPageNumberOfVerses;
+  if (verseKeyPosition <= SCROLL_POSITION_THRESHOLDS.START) {
+    return ScrollAlign.Start;
+  }
+  if (verseKeyPosition <= SCROLL_POSITION_THRESHOLDS.CENTER) {
+    return ScrollAlign.Center;
+  }
+  return ScrollAlign.End;
 };
