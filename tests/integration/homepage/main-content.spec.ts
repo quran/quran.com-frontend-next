@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import ayahOfTheDayData from '@/data/ayah_of_the_day.json';
@@ -75,7 +76,35 @@ test(
     await expect(quranInAYearSection).toBeVisible();
     await expect
       .poll(async () => (await quranInAYearSection.textContent()) || '')
-      .toContain('Week’s Reading'); // Translator name indicates verse + translation rendered
+      .toContain('Week’s Reading');
+  },
+);
+
+test(
+  'Quran in a Year section renders when JavaScript is disabled',
+  { tag: ['@quran-in-a-year', '@ssr'] },
+  async ({ browser }) => {
+    const now = new Date(); // Compute today's date so we can skip when no verse is scheduled
+    const day = String(now.getUTCDate()).padStart(2, '0');
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+    const year = now.getUTCFullYear();
+    const todayString = `${day}/${month}/${year}`;
+
+    const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
+    test.skip(!ayahEntry, `No Ayah of the Day entry for today's date: ${todayString}`);
+
+    const ssrContext = await browser.newContext({ javaScriptEnabled: false }); // Disable JS to simulate no-hydration scenario
+    const ssrPage = await ssrContext.newPage();
+
+    await ssrPage.goto('/', { waitUntil: 'networkidle' });
+
+    const quranInAYearSection = ssrPage.getByTestId('quran-in-a-year-section');
+    await expect(quranInAYearSection).toBeVisible();
+    await expect
+      .poll(async () => (await quranInAYearSection.textContent()) || '')
+      .toContain('Week’s Reading');
+
+    await ssrContext.close(); // Clean up the no-JS context
   },
 );
 
@@ -213,3 +242,21 @@ test('Popular button shows the popular surahs/verses', { tag: ['@homepage'] }, a
   const items = dropdownContainer.getByRole('link');
   expect(await items.count()).toBeGreaterThanOrEqual(3);
 });
+
+test(
+  'All 114 surahs render on the homepage when JavaScript is disabled',
+  { tag: ['@homepage', '@ssr'] },
+  async ({ browser }) => {
+    const ssrContext = await browser.newContext({ javaScriptEnabled: false }); // Disable JS to verify SSR output
+    const ssrPage = await ssrContext.newPage();
+
+    await ssrPage.goto('/', { waitUntil: 'networkidle' });
+
+    const chapterAndJuzList = ssrPage.getByTestId('chapter-and-juz-list');
+    await expect(chapterAndJuzList).toBeVisible();
+    await expect(chapterAndJuzList.getByTestId('chapter-1-container')).toBeVisible();
+    await expect(chapterAndJuzList.getByTestId('chapter-114-container')).toBeVisible();
+
+    await ssrContext.close(); // Clean up the no-JS context
+  },
+);
