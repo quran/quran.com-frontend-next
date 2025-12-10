@@ -11,20 +11,28 @@ import updateCourseEnrollmentCache from '@/utils/auth/updateCourseEnrollmentCach
  * Hook for enrolling a user in a course with automatic cache updates.
  *
  * @param {string} courseSlug - The course slug for cache invalidation
- * @returns {object} Enroll function and loading state
+ * @returns {object} Enroll function, loading state
  *
  * @example
  * const { enroll, isEnrolling } = useCourseEnrollment(courseSlug);
- * await enroll(courseId, EnrollmentMethod.MANUAL);
+ * const result = await enroll(courseId, EnrollmentMethod.MANUAL);
+ * if (result?.success) {
+ *   // Handle success
+ * } else {
+ *   // Handle failure
+ * }
  */
 const useCourseEnrollment = (courseSlug: string) => {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const mutate = useMutateWithoutRevalidation();
 
   const enroll = useCallback(
-    async (courseId: string, enrollmentMethod: EnrollmentMethod): Promise<void> => {
+    async (
+      courseId: string,
+      enrollmentMethod: EnrollmentMethod,
+    ): Promise<{ success: boolean } | undefined> => {
       if (!isLoggedIn()) {
-        return;
+        return undefined;
       }
 
       setIsEnrolling(true);
@@ -33,11 +41,13 @@ const useCourseEnrollment = (courseSlug: string) => {
         if (result.success) {
           updateCourseEnrollmentCache(mutate, courseSlug, true);
         }
+        return result;
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: 'useCourseEnrollment',
           metadata: { courseId, enrollmentMethod },
         });
+        return { success: false };
       } finally {
         setIsEnrolling(false);
       }

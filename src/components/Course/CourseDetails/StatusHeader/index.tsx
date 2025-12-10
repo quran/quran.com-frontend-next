@@ -10,6 +10,7 @@ import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinue
 import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
+import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import { Course } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { getUserType, isLoggedIn } from '@/utils/auth/login';
@@ -30,6 +31,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
   const router = useRouter();
   const { t } = useTranslation('learn');
+  const toast = useToast();
   const userLoggedIn = isLoggedIn();
   const { enroll, isEnrolling } = useCourseEnrollment(slug);
 
@@ -62,8 +64,14 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
       return;
     }
 
-    await enroll(id, EnrollmentMethod.MANUAL);
-    redirectToFirstLesson();
+    const enrollmentResult = await enroll(id, EnrollmentMethod.MANUAL);
+    if (enrollmentResult.success) {
+      redirectToFirstLesson();
+    } else {
+      toast(t('common:error.general'), {
+        status: ToastStatus.Error,
+      });
+    }
   };
 
   const renderStartHereButton = () => {
