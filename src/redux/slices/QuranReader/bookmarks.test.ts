@@ -7,6 +7,7 @@ import bookmarksReducer, {
   Bookmarks,
 } from './bookmarks';
 
+// eslint-disable-next-line react-func/max-lines-per-function
 describe('bookmarks slice', () => {
   const initialState: Bookmarks = {
     bookmarkedVerses: {},

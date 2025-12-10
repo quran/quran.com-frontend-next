@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import readingTrackerReducer, { clearReadingTracker, ReadingTracker } from './readingTracker';
 
+// eslint-disable-next-line react-func/max-lines-per-function
 describe('readingTracker slice', () => {
   const initialState: ReadingTracker = {
     lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },

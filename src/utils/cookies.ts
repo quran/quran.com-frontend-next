@@ -26,10 +26,5 @@ export const setProxyCookies = (response: Response, context: GetServerSidePropsC
   if (proxyCookies) {
     const cookiesArray = proxyCookies.split(/,(?=\s*\w+=)/).map((cookie) => cookie.trim());
     context.res.setHeader('Set-Cookie', cookiesArray);
-    // Temporary debug logging to trace cookie setting issues
-    // @ts-ignore // eslint-disable-next-line no-console
-    console.debug('Set cookies from proxy response:', cookiesArray);
-    // @ts-ignore // eslint-disable-next-line no-console
-    console.debug('Full set-cookie header:', context.res.getHeader('Set-Cookie'));
   }
 };
