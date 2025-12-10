@@ -40,6 +40,10 @@
 }
 
 .descriptionContainer {
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-max);
+  }
+
   p {
     margin-block-end: var(--spacing-small);
   }
