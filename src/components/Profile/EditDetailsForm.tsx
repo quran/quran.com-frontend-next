@@ -15,6 +15,7 @@ import useAuthData from '@/hooks/auth/useAuthData';
 import useUpdateUserProfile from '@/hooks/auth/useUpdateUserProfile';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
 import { logButtonClick } from '@/utils/eventLogger';
+import TEST_IDS from '@/utils/test-ids';
 
 type FormData = {
   firstName: string;
@@ -26,6 +27,11 @@ interface RenderActionProps {
   onClick?: () => void;
 }
 
+const EXTRA_PARAMS = {
+  max: NAME_MAX_LENGTH,
+  min: NAME_MIN_LENGTH,
+};
+
 const EditDetailsForm: FC = () => {
   const { t } = useTranslation('profile');
   const { userData } = useAuthData();
@@ -33,17 +39,11 @@ const EditDetailsForm: FC = () => {
   const { transformErrors } = useTransformFormErrors<FormData>({
     firstName: {
       fieldNameKey: 'common:form.firstName',
-      extraParams: {
-        max: NAME_MAX_LENGTH,
-        min: NAME_MIN_LENGTH,
-      },
+      extraParams: EXTRA_PARAMS,
     },
     lastName: {
       fieldNameKey: 'common:form.lastName',
-      extraParams: {
-        max: NAME_MAX_LENGTH,
-        min: NAME_MIN_LENGTH,
-      },
+      extraParams: EXTRA_PARAMS,
     },
   });
 
@@ -73,7 +73,10 @@ const EditDetailsForm: FC = () => {
   );
 
   return (
-    <Section title={t('edit-details')} dataTestId="edit-details-section">
+    <Section
+      title={t('edit-details')}
+      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EDIT_DETAILS_SECTION}
+    >
       <FormBuilder
         key={userData ? `${userData.email}-${userData.firstName}-${userData.lastName}` : 'loading'}
         className={styles.formContainer}
