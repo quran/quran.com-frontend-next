@@ -58,8 +58,7 @@ const featuredApps: FeaturedApp[] = [
     name: 'Qariah',
     tagline: 'Women Quran reciters',
     headline: 'Finally, a Quran app for our daughters',
-    background:
-      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/app-portal/featured/qaariah-pic.png')",
+    background: "url('/images/app-portal/featured/qaariah-pic.jpg')",
     iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
     iconAlt: 'Qariah – women Quran reciters app',
     href: 'https://www.qariah.app/',
@@ -69,8 +68,7 @@ const featuredApps: FeaturedApp[] = [
     name: 'Quran Kareem',
     tagline: 'Read, listen & reflect',
     headline: 'Your new gateway to connect with the Book of Allah',
-    background:
-      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/app-portal/featured/quran_kareem-pic.webp')",
+    background: "url('/images/app-portal/featured/quran_kareem-pic.webp')",
     iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
     iconAlt: 'Quran Kareem app',
     href: 'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
@@ -80,8 +78,7 @@ const featuredApps: FeaturedApp[] = [
     name: 'Quran Link',
     tagline: 'Tafsir & study companion',
     headline: 'Explore 25+ tafsirs and 100+ translations in one place',
-    background:
-      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/app-portal/featured/QuranLink-pic.jpg')",
+    background: "url('/images/app-portal/featured/QuranLink-pic.png')",
     iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
     iconAlt: 'Quran Link app',
     href: 'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
@@ -103,8 +100,7 @@ const appTiles: AppTile[] = [
     id: 'quranreflect',
     title: 'QuranReflect',
     caption: 'Share reflections',
-    visual:
-      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-portal/qr_web_optimized.jpg')",
+    visual: "url('/images/app-portal/qr_web_optimized.jpg')",
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: 'https://quranreflect.com',
@@ -114,8 +110,7 @@ const appTiles: AppTile[] = [
     id: 'sunnah',
     title: 'Sunnah.com',
     caption: 'Hadith collection',
-    visual:
-      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-portal/hadith_banner_web_optimized.jpg')",
+    visual: "url('/images/app-portal/hadith_banner_web_optimized.jpg')",
     iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     href: 'https://sunnah.com',
@@ -129,8 +124,7 @@ const appTiles: AppTile[] = [
     id: 'quranmeet',
     title: 'QuranMeet',
     caption: 'Live Quran study sessions',
-    visual:
-      "linear-gradient(180deg, rgba(0, 64, 34, 0.38), rgba(0, 64, 34, 0.55)), url('/images/app-portal/quran_meet-app_pic.png')",
+    visual: "url('/images/app-portal/quran_meet-app_pic.png')",
     iconSrc: '/images/app-portal/quran_meet_app.png',
     iconAlt: 'QuranMeet',
     href: 'https://quranmeet.slk.is/',
@@ -144,8 +138,7 @@ const appTiles: AppTile[] = [
     id: 'readtafsir',
     title: 'ReadTafsir',
     caption: 'Search and compare classical tafsirs',
-    visual:
-      "linear-gradient(180deg, rgba(80, 30, 0, 0.32), rgba(80, 30, 0, 0.55)), url('/images/app-portal/readtafsir_app_pic.png')",
+    visual: "url('/images/app-portal/readtafsir_app_pic.png')",
     iconSrc: '/images/app-portal/readtafsir_app_icon.png',
     iconAlt: 'ReadTafsir',
     href: 'https://read.tafsir.one/',
@@ -159,8 +152,7 @@ const appTiles: AppTile[] = [
     id: 'tafsirapp',
     title: 'Tafsir App',
     caption: 'Interactive tafsir with multiple sources',
-    visual:
-      "linear-gradient(180deg, rgba(40, 40, 80, 0.32), rgba(40, 40, 80, 0.55)), url('/images/app-portal/tafsir.app-pic.png')",
+    visual: "url('/images/app-portal/tafsir.app-pic.png')",
     iconSrc: '/images/app-portal/tafsir_app_icon.png',
     iconAlt: 'Tafsir App',
     href: 'https://tafsir.app/',
@@ -174,8 +166,7 @@ const appTiles: AppTile[] = [
     id: 'muhaffidh',
     title: 'Muhaffidh',
     caption: 'Memorize and review Quran efficiently',
-    visual:
-      "linear-gradient(180deg, rgba(0, 80, 90, 0.32), rgba(0, 80, 90, 0.55)), url('/images/app-portal/muhaffidh_app_pic.png')",
+    visual: "url('/images/app-portal/muhaffidh_app_pic.png')",
     iconSrc: '/images/app-portal/muhaffidh_app_icon.png',
     iconAlt: 'Muhaffidh App',
     href: 'https://muhaffidh.app/',
