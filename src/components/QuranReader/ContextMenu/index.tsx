@@ -60,6 +60,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
   return (
     <div
+      data-testid="header"
+      data-isvisible={!isMobileScrolledView}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
