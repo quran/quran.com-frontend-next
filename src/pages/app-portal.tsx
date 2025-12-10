@@ -54,37 +54,37 @@ interface FilterChip {
 
 const featuredApps: FeaturedApp[] = [
   {
-    id: 'quranreflect',
-    name: 'QuranReflect',
-    tagline: 'Share reflections',
-    headline: 'Join the QuranReflect community this August as we reflect upon Quranic Duas',
+    id: 'qariah',
+    name: 'Qariah',
+    tagline: 'Women Quran reciters',
+    headline: 'Finally, a Quran app for our daughters',
     background:
-      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-majlis/qr_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    href: '#',
+      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/featured/app-portal/qariah_banner_web_optimized.jpg')",
+    iconSrc: '/images/featured/app-portal/qariah_icon_web_optimized.png',
+    iconAlt: 'Qariah – women Quran reciters app',
+    href: 'https://www.qariah.app/',
   },
   {
-    id: 'sunnah',
-    name: 'Sunnah.com',
-    tagline: 'Hadith collection',
-    headline: 'The Hadith of the Prophet Muhammad at your fingertips',
+    id: 'quran-kareem',
+    name: 'Quran Kareem',
+    tagline: 'Read, listen & reflect',
+    headline: 'Your new gateway to connect with the Book of Allah',
     background:
-      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-majlis/hadith_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/sunnah_icon_web_optimized.png',
-    iconAlt: 'Sunnah.com',
-    href: '#',
+      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/featured/app-portal/quran_kareem_banner_web_optimized.jpg')",
+    iconSrc: '/images/featured/app-portal/quran_kareem_icon_web_optimized.png',
+    iconAlt: 'Quran Kareem app',
+    href: 'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
   },
   {
-    id: 'nuqayah',
-    name: 'Nuqayah',
-    tagline: 'Deep dive',
-    headline: 'Nuqayah',
+    id: 'quran-link',
+    name: 'Quran Link',
+    tagline: 'Tafsir & study companion',
+    headline: 'Explore 25+ tafsirs and 100+ translations in one place',
     background:
-      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-majlis/mandala_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/calligraphy_web_optimized.png',
-    iconAlt: 'Nuqayah',
-    href: '#',
+      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/featured/app-portal/quran_link_banner_web_optimized.jpg')",
+    iconSrc: '/images/featured/app-portal/quran_link_icon_web_optimized.png',
+    iconAlt: 'Quran Link app',
+    href: 'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
   },
 ];
 
@@ -104,8 +104,8 @@ const appTiles: AppTile[] = [
     title: 'Nuqayah',
     caption: 'Deep dive',
     visual:
-      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-majlis/mandala_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/calligraphy_web_optimized.png',
+      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-portal/mandala_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/calligraphy_web_optimized.png',
     iconAlt: 'Nuqayah',
     href: '#',
     categories: ['study-tools', 'popular'],
@@ -115,8 +115,8 @@ const appTiles: AppTile[] = [
     title: 'QuranReflect',
     caption: 'Share reflections',
     visual:
-      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-majlis/qr_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-portal/qr_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: '#',
     categories: ['reflections', 'community'],
@@ -126,8 +126,8 @@ const appTiles: AppTile[] = [
     title: 'Sunnah.com',
     caption: 'Hadith collection',
     visual:
-      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-majlis/hadith_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/sunnah_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-portal/hadith_banner_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     href: '#',
     categories: ['hadith-sunnah', 'popular'],
@@ -137,8 +137,8 @@ const appTiles: AppTile[] = [
     title: 'Nuqayah',
     caption: 'Deep dive',
     visual:
-      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-majlis/mandala_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/calligraphy_web_optimized.png',
+      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-portal/mandala_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/calligraphy_web_optimized.png',
     iconAlt: 'Nuqayah',
     href: '#',
     categories: ['quran-reader', 'study-tools'],
@@ -148,8 +148,8 @@ const appTiles: AppTile[] = [
     title: 'QuranReflect',
     caption: 'Share reflections',
     visual:
-      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-majlis/qr_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-portal/qr_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: '#',
     categories: ['community', 'reflections', 'popular'],
@@ -159,8 +159,8 @@ const appTiles: AppTile[] = [
     title: 'Sunnah.com',
     caption: 'Hadith collection',
     visual:
-      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-majlis/hadith_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-majlis/sunnah_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-portal/hadith_banner_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     href: '#',
     categories: ['hadith-sunnah', 'popular'],
@@ -283,7 +283,7 @@ const FiltersBar: FC<FiltersBarProps> = ({
   <div className={styles.filters}>
     <div className={styles.search}>
       <span className={styles.searchIcon} aria-hidden="true">
-        <Image alt="" src="/images/app-majlis/search-icon.svg" width={20} height={20} />
+        <Image alt="" src="/images/app-portal/search-icon.svg" width={20} height={20} />
       </span>
       <input
         aria-label={searchLabel}
