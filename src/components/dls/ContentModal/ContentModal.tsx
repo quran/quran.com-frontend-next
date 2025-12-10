@@ -152,7 +152,7 @@ const ContentModal = ({
             )}
 
             <div
-              className={classNames(styles.content, innerContentClassName, {
+              className={classNames(styles.content, {
                 [innerContentClassName]: innerContentClassName,
               })}
               data-testid="modal-content"
