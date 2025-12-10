@@ -14,6 +14,7 @@ import { QuranFont } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
+import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
 // Set a fixed font scale for both Arabic and translation text
@@ -21,9 +22,10 @@ const FONT_SCALE = 3;
 
 interface Props {
   chaptersData?: ChaptersData;
+  initialVersesData?: VersesResponse; // SSR data so the verse shows when JS is disabled
 }
 
-const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
+const QuranInYearSection: React.FC<Props> = ({ chaptersData, initialVersesData }) => {
   const { t } = useTranslation('home');
 
   const onCalendarClicked = () => {
@@ -64,6 +66,7 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
             arabicVerseClassName={styles.customArabicVerse}
             translationClassName={styles.customTranslation}
             fixedFontScale={FONT_SCALE}
+            initialData={initialVersesData}
           />
         </div>
         <Button

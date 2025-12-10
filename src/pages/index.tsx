@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
+import { fetcher } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -19,6 +20,10 @@ import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { Course } from '@/types/auth/Course';
+import Language from '@/types/Language';
+import { QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeVersesUrl } from '@/utils/apiPaths';
 import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -26,19 +31,74 @@ import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { ChaptersResponse } from 'types/ApiResponses';
+import { GetSsrPropsWithReduxContext } from '@/utils/withSsrRedux.types';
+import { ChaptersResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+
+// Helper function to fetch Quran in Year verse for today
+async function fetchQuranInYearVerse(
+  store: GetSsrPropsWithReduxContext['store'],
+  currentLocale: string,
+  todayAyah: ReturnType<typeof getCurrentDayAyah>,
+): Promise<VersesResponse | undefined> {
+  try {
+    const state = store.getState();
+    const translationIds = state.translations.selectedTranslations.slice(0, 1);
+    const { mushafLines } = state.quranReaderStyles;
+
+    const quranInYearParams = {
+      ...getDefaultWordFields(QuranFont.QPCHafs),
+      translationFields: 'resource_name,language_id',
+      translations: translationIds.join(','),
+      mushaf: getMushafId(QuranFont.QPCHafs, mushafLines).mushaf,
+      from: `${todayAyah.chapter}:${todayAyah.verse}`,
+      to: `${todayAyah.chapter}:${todayAyah.verse}`,
+    };
+
+    // Fetch the verse data for the current day's Ayah
+    return fetcher<VersesResponse>(
+      makeVersesUrl(todayAyah.chapter, currentLocale, quranInYearParams),
+    );
+  } catch (error) {
+    return undefined;
+  }
+}
+
+// Helper function to derive learning plan languages and fetch courses
+async function fetchLearningPlansData(countryLanguagePreference: any): Promise<Course[]> {
+  // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
+  // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
+  const learningPlanLanguages = countryLanguagePreference?.learningPlanLanguages
+    ?.map((lang: any) => lang.isoCode)
+    .filter((code: any): code is string => code != null)
+    .map((code: string) => code.toLowerCase()) || ['en'];
+
+  // Fetch learning plans with fallback retry for backward compatibility
+  return fetchCoursesWithLanguages(learningPlanLanguages);
+}
+
+// Helper function to build chapters response from chapters data
+function buildChaptersResponse(chaptersData: ChaptersData): ChaptersResponse {
+  return {
+    chapters: Object.keys(chaptersData).map((chapterId) => {
+      const chapterData = chaptersData[chapterId];
+      return { ...chapterData, id: Number(chapterId) };
+    }),
+  };
+}
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
   learningPlans: Course[];
+  quranInYearVerses?: VersesResponse; // SSR-fetched verse data so we can render without JS
 };
 
 const Index: NextPage<IndexProps> = ({
   chaptersResponse: { chapters },
   chaptersData,
   learningPlans,
+  quranInYearVerses,
 }): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
@@ -67,6 +127,7 @@ const Index: NextPage<IndexProps> = ({
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
                 learningPlans={learningPlans}
+                quranInYearVerses={quranInYearVerses} // Pass SSR verse data to mobile sections
               />
             ) : (
               <>
@@ -80,7 +141,10 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses} // Pass SSR verse data so it renders without JS
+                        />
                       </div>
                     )}
                     <div
@@ -119,7 +183,10 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses} // Pass SSR verse data so it renders without JS
+                        />
                       </div>
                     )}
 
@@ -146,28 +213,25 @@ const Index: NextPage<IndexProps> = ({
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/',
   async (context, languageResult) => {
-    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+    const typedContext = context as GetSsrPropsWithReduxContext & { chaptersData: ChaptersData };
+    const { chaptersData, store } = typedContext;
 
-    // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
-    // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
-    const learningPlanLanguages = languageResult?.countryLanguagePreference?.learningPlanLanguages
-      ?.map((lang) => lang.isoCode)
-      .filter((code): code is string => code != null)
-      .map((code) => code.toLowerCase()) || ['en'];
+    const todayAyah = getCurrentDayAyah();
+    const currentLocale = languageResult.detectedLanguage || context.locale || Language.EN;
 
-    // Fetch learning plans with fallback retry for backward compatibility
-    const learningPlans = await fetchCoursesWithLanguages(learningPlanLanguages);
+    const [quranInYearVerses, learningPlans] = await Promise.all([
+      todayAyah
+        ? fetchQuranInYearVerse(store, currentLocale, todayAyah)
+        : Promise.resolve(undefined),
+      fetchLearningPlansData(languageResult?.countryLanguagePreference),
+    ]);
 
     return {
       props: {
         chaptersData,
-        chaptersResponse: {
-          chapters: Object.keys(chaptersData).map((chapterId) => {
-            const chapterData = chaptersData[chapterId];
-            return { ...chapterData, id: Number(chapterId) };
-          }),
-        },
+        chaptersResponse: buildChaptersResponse(chaptersData),
         learningPlans,
+        quranInYearVerses,
       },
     };
   },
