@@ -91,7 +91,7 @@ type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
   learningPlans: Course[];
-  quranInYearVerses?: VersesResponse; // SSR-fetched verse data so we can render without JS
+  quranInYearVerses?: VersesResponse; // SSR-fetched verse data
 };
 
 const Index: NextPage<IndexProps> = ({
@@ -127,7 +127,7 @@ const Index: NextPage<IndexProps> = ({
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
                 learningPlans={learningPlans}
-                quranInYearVerses={quranInYearVerses} // Pass SSR verse data to mobile sections
+                quranInYearVerses={quranInYearVerses}
               />
             ) : (
               <>
@@ -143,7 +143,7 @@ const Index: NextPage<IndexProps> = ({
                       >
                         <QuranInYearSection
                           chaptersData={chaptersData}
-                          initialVersesData={quranInYearVerses} // Pass SSR verse data so it renders without JS
+                          initialVersesData={quranInYearVerses}
                         />
                       </div>
                     )}
@@ -185,7 +185,7 @@ const Index: NextPage<IndexProps> = ({
                       >
                         <QuranInYearSection
                           chaptersData={chaptersData}
-                          initialVersesData={quranInYearVerses} // Pass SSR verse data so it renders without JS
+                          initialVersesData={quranInYearVerses}
                         />
                       </div>
                     )}

@@ -74,9 +74,8 @@ test(
 
     const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
     await expect(quranInAYearSection).toBeVisible();
-    await expect
-      .poll(async () => (await quranInAYearSection.textContent()) || '')
-      .toContain('Week’s Reading');
+    const verseContainer = quranInAYearSection.getByTestId('quran-in-a-year-verse');
+    await expect(verseContainer.locator('[class*="Spinner"]')).toHaveCount(0); // Ensure the verse rendered (no spinner)
   },
 );
 
@@ -100,9 +99,8 @@ test(
 
     const quranInAYearSection = ssrPage.getByTestId('quran-in-a-year-section');
     await expect(quranInAYearSection).toBeVisible();
-    await expect
-      .poll(async () => (await quranInAYearSection.textContent()) || '')
-      .toContain('Week’s Reading');
+    const verseContainer = quranInAYearSection.getByTestId('quran-in-a-year-verse');
+    await expect(verseContainer.locator('[class*="Spinner"]')).toHaveCount(0); // Ensure SSR rendered verse (no spinner)
 
     await ssrContext.close(); // Clean up the no-JS context
   },
