@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/Co
 import InfoIcon from '@/icons/info.svg';
 import QueryParam from '@/types/QueryParam';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
   chapterId?: string;
@@ -25,7 +26,15 @@ interface SurahInfoButtonProps {
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
-  const isOpen = router.query[QueryParam.SURAH_INFO] !== undefined;
+
+  /**
+   * useState is technically not required here, but relying solely on updating the query param
+   * can introduce a slight delay before the UI reflects the change, which can feel laggy.
+   * Local state ensures an immediate visual response.
+   */
+  const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
+  const initialStateIsOpen = isInfoPage ? true : router.query[QueryParam.SURAH_INFO] !== undefined;
+  const [isModalOpen, setIsModalOpen] = useState(initialStateIsOpen);
 
   const updateModalQueryParam = useCallback(
     (shouldOpen: boolean) => {
@@ -37,22 +46,25 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
         delete nextQuery[QueryParam.SURAH_INFO];
       }
 
-      router.replace({ pathname: router.pathname, query: nextQuery }, undefined, {
-        shallow: true,
-        scroll: false,
-      });
+      router.push(
+        { pathname: router.pathname, query: nextQuery },
+        shouldOpen ? getSurahInfoNavigationUrl(chapterId) : undefined,
+        { shallow: true, scroll: false },
+      );
     },
     [chapterId, router],
   );
 
   const handleClose = useCallback(() => {
     updateModalQueryParam(false);
+    setIsModalOpen(false);
   }, [updateModalQueryParam]);
 
   const handleClick = () => {
     if (chapterId) {
       logButtonClick('surah_info_button_click');
       updateModalQueryParam(true);
+      setIsModalOpen(true);
     }
   };
 
@@ -68,7 +80,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
       </button>
       {chapterId && (
         <ContentModal
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onClose={handleClose}
           onEscapeKeyDown={handleClose}
           hasCloseButton
