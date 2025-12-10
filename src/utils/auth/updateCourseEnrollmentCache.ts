@@ -17,10 +17,15 @@ const updateCourseEnrollmentCache = (
   courseSlug: string,
   isEnrolled: boolean,
 ): void => {
-  mutate(makeGetCourseUrl(courseSlug), (currentCourse: Course) => ({
-    ...currentCourse,
-    isUserEnrolled: isEnrolled,
-  }));
+  mutate(makeGetCourseUrl(courseSlug), (currentCourse: Course) => {
+    if (!currentCourse) {
+      return currentCourse;
+    }
+    return {
+      ...currentCourse,
+      isUserEnrolled: isEnrolled,
+    };
+  });
 };
 
 export default updateCourseEnrollmentCache;

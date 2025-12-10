@@ -10,6 +10,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import { logError } from '@/lib/newrelic';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
+import { BaseResponse } from '@/types/ApiResponses';
 import { Lesson } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
@@ -18,7 +19,6 @@ import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCourseNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {
   hasError?: boolean;
