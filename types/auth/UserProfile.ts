@@ -19,6 +19,7 @@ interface UserProfile {
   announcement: Announcement;
   consents: Record<string, boolean>;
   lastSyncAt?: Date;
+  isPasswordSet: boolean;
 }
 
 export default UserProfile;
