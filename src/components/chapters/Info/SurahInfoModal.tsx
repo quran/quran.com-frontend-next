@@ -73,7 +73,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
             </div>
 
             {!isArabicOrUrdu && (
-              <h2 className={styles.surahName}>
+              <h2 className={styles.surahName} data-testid="surah-name">
                 {t('common:surah')} {chapter?.transliteratedName}
               </h2>
             )}

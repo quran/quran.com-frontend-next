@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
@@ -8,6 +9,7 @@ import styles from '../ChapterHeader.module.scss';
 import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
+import QueryParam from '@/types/QueryParam';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface SurahInfoButtonProps {
@@ -22,16 +24,35 @@ interface SurahInfoButtonProps {
  */
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const isOpen = router.query[QueryParam.SURAH_INFO] !== undefined;
+
+  const updateModalQueryParam = useCallback(
+    (shouldOpen: boolean) => {
+      if (!chapterId) return;
+      const nextQuery = { ...router.query };
+      if (shouldOpen) {
+        nextQuery[QueryParam.SURAH_INFO] = 'true';
+      } else {
+        delete nextQuery[QueryParam.SURAH_INFO];
+      }
+
+      router.replace({ pathname: router.pathname, query: nextQuery }, undefined, {
+        shallow: true,
+        scroll: false,
+      });
+    },
+    [chapterId, router],
+  );
 
   const handleClose = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    updateModalQueryParam(false);
+  }, [updateModalQueryParam]);
 
   const handleClick = () => {
     if (chapterId) {
       logButtonClick('surah_info_button_click');
-      setIsOpen(true);
+      updateModalQueryParam(true);
     }
   };
 

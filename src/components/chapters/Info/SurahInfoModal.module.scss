@@ -57,10 +57,8 @@
   ol {
     display: block;
     list-style-type: decimal;
-    margin-block-start: var(--spacing-medium);
     margin-block-end: var(--spacing-medium);
     padding-inline-start: calc(2 * var(--spacing-large));
-    margin-block-end: var(--spacing-small);
   }
 
   li {

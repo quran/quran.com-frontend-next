@@ -6,6 +6,7 @@ enum QueryParam {
   HIDE_ARABIC = 'hideArabic',
   FLOW = 'flow',
   STARTING_VERSE = 'startingVerse',
+  SURAH_INFO = 'surahInfo',
   QUERY = 'query',
   QUERY_OLD = 'q',
   REDIRECT_TO = 'r',
