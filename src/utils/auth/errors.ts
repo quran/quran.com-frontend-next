@@ -250,7 +250,7 @@ const getErrorCode = (error: unknown): string | undefined => {
  * @param {string} message - User-friendly error message
  * @param {unknown} error - Original error object
  * @param {boolean} recoverable - Whether the error is recoverable
- * @param {Record<string, any>} context - Additional context information
+ * @param {Record<string, unknown>} context - Additional context information
  * @returns {AuthError} AuthError instance
  * @throws Error if required parameters are missing
  */
@@ -259,7 +259,7 @@ export const createAuthError = (
   message: string,
   error: unknown,
   recoverable: boolean,
-  context?: Record<string, any>,
+  context?: Record<string, unknown>,
 ): AuthError => {
   // Validate required parameters
   if (!type) {

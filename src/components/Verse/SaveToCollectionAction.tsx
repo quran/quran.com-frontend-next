@@ -51,7 +51,6 @@ const SaveToCollectionAction: React.FC<Props> = ({
     collectionIds: bookmarkCollectionIds,
     addToCollection,
     removeFromCollection,
-    mutateBookmarkCollections,
   } = useBookmarkCollections({
     mushafId,
     key: Number(verse.chapterId),
@@ -98,14 +97,11 @@ const SaveToCollectionAction: React.FC<Props> = ({
     async (newCollectionName: string) => {
       const newCollection = await addCollection(newCollectionName);
       if (newCollection) {
-        const success = await addToCollection(newCollection.id);
-        if (success) {
-          // Optimistic update - addToCollection already invalidates caches
-          mutateBookmarkCollections([...(bookmarkCollectionIds || []), newCollection.id]);
-        }
+        // addToCollection handles both the API call and cache mutation internally
+        await addToCollection(newCollection.id);
       }
     },
-    [addCollection, addToCollection, bookmarkCollectionIds, mutateBookmarkCollections],
+    [addCollection, addToCollection],
   );
 
   const isDataReady = bookmarkCollectionIds !== undefined;

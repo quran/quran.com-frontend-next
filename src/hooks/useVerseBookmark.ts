@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useRef, useState } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -13,12 +14,19 @@ import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 
 const NOT_BOOKMARKED = null;
+
 export interface BookmarkableVerse {
   verseKey: string;
   verseNumber: number;
   /** Chapter ID - accepts both number and string since route params come as strings */
   chapterId: number | string;
 }
+
+export interface UseVerseBookmarkReturn {
+  isVerseBookmarked: boolean;
+  handleToggleBookmark: () => void;
+}
+
 const useVerseBookmark = ({
   verse,
   mushafId,
@@ -27,7 +35,7 @@ const useVerseBookmark = ({
   verse: BookmarkableVerse;
   mushafId: number;
   bookmarksRangeUrl?: string;
-}) => {
+}): UseVerseBookmarkReturn => {
   const dispatch = useDispatch();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const { mutate: globalMutate } = useSWRConfig();

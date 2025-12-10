@@ -105,11 +105,9 @@ const BookmarkAction: React.FC<Props> = ({
 
   // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
-    <>
-      <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
-        {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
-      </PopoverMenu.Item>
-    </>
+    <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
+      {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
+    </PopoverMenu.Item>
   );
 };
 
