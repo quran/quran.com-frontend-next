@@ -59,8 +59,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Women Quran reciters',
     headline: 'Finally, a Quran app for our daughters',
     background:
-      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/app-portal/featured/qariah_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/featured/qariah_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/app-portal/featured/qaariah-pic.png')",
+    iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
     iconAlt: 'Qariah – women Quran reciters app',
     href: 'https://www.qariah.app/',
   },
@@ -70,8 +70,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Read, listen & reflect',
     headline: 'Your new gateway to connect with the Book of Allah',
     background:
-      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/app-portal/featured/quran_kareem_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/featured/quran_kareem_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/app-portal/featured/quran_kareem-pic.webp')",
+    iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
     iconAlt: 'Quran Kareem app',
     href: 'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
   },
@@ -81,8 +81,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Tafsir & study companion',
     headline: 'Explore 25+ tafsirs and 100+ translations in one place',
     background:
-      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/app-portal/featured/quran_link_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/featured/quran_link_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/app-portal/featured/QuranLink-pic.jpg')",
+    iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
     iconAlt: 'Quran Link app',
     href: 'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
   },
