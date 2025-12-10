@@ -33,7 +33,7 @@ const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps): 
   const localizedCount = useMemo(() => toLocalizedNumber(Number(count), lang), [count, lang]);
   const localizedPercent = useMemo(() => toLocalizedNumber(Number(percent), lang), [percent, lang]);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="counter">
       <Button
         tooltip={t('counter.decrease')}
         shape={ButtonShape.Circle}
@@ -41,13 +41,16 @@ const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps): 
         isDisabled={!onDecrement}
         onClick={onDecrement}
         ariaLabel={t('counter.decrease')}
+        data-testid="decrement-button"
       >
         <MinusIcon />
       </Button>
       {isPercent ? (
         <span className={styles.count}>{`${localizedPercent} %`}</span>
       ) : (
-        <span className={styles.count}>{localizedCount}</span>
+        <span className={styles.count} data-testid="counter-value">
+          {localizedCount}
+        </span>
       )}
       <Button
         tooltip={t('counter.increase')}
@@ -56,6 +59,7 @@ const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps): 
         isDisabled={!onIncrement}
         onClick={onIncrement}
         ariaLabel={t('counter.increase')}
+        data-testid="increment-button"
       >
         <PlusIcon />
       </Button>

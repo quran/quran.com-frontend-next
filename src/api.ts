@@ -30,6 +30,7 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
   makeVersesFilterUrl,
+  makeCountryLanguagePreferenceUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -49,6 +50,7 @@ import {
   TafsirContentResponse,
   PagesLookUpResponse,
   WordByWordTranslationsResponse,
+  CountryLanguagePreferenceResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -249,6 +251,19 @@ export const getNewSearchResults = async <T extends SearchMode>(
  */
 export const getTafsirs = async (language: string): Promise<TafsirsResponse> =>
   fetcher(makeTafsirsUrl(language));
+
+/**
+ * Get country language preference data.
+ *
+ * @param {string} userDeviceLanguage the user's device language code
+ * @param {string} country the two-letter country code
+ * @returns {Promise<CountryLanguagePreferenceResponse>}
+ */
+export const getCountryLanguagePreference = async (
+  userDeviceLanguage: string,
+  country: string,
+): Promise<CountryLanguagePreferenceResponse> =>
+  fetcher(makeCountryLanguagePreferenceUrl(userDeviceLanguage, country));
 
 /**
  * Get a chapter's info

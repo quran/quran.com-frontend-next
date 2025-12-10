@@ -49,6 +49,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
             <React.Fragment key={tab.id}>
               <div
                 className={styles.tabItem}
+                data-testid={`bottom-action-tab-${tab.id}`}
                 onClick={(e) => handleTabClick(e, tab.onClick)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
                 role="button"
