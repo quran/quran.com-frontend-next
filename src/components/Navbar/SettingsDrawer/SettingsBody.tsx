@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 
+import DoneButton from './DoneButton';
 import ResetButton from './ResetButton';
+import styles from './SettingsBody.module.scss';
 import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -21,10 +23,13 @@ const SettingsBody = () => {
   }, [activeStepIndex, isActive]);
 
   return (
-    <>
+    <div className={styles.container}>
       <SettingTabs />
-      <ResetButton />
-    </>
+      <div className={styles.buttonsContainer}>
+        <ResetButton />
+        <DoneButton />
+      </div>
+    </div>
   );
 };
 

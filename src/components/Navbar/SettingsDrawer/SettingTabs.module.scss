@@ -49,6 +49,8 @@
 .versePreviewContainer {
   margin-block-start: var(--spacing-medium-px);
   margin-block-end: var(--spacing-medium-px);
+  margin-inline-start: var(--spacing-small-px);
+  margin-inline-end: var(--spacing-small-px);
   padding: var(--spacing-small-px);
   border-radius: var(--border-radius-medium-px);
   background-color: var(--color-background-alternative-faded);

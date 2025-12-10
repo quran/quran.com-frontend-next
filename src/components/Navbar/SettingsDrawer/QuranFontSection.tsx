@@ -4,8 +4,8 @@ import React, { useMemo } from 'react';
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
 import ReciterSection from './ReciterSection';
 import Section from './Section';
@@ -27,7 +27,6 @@ import {
 } from '@/redux/slices/QuranReader/styles';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
@@ -194,8 +193,7 @@ const QuranFontSection = () => {
   };
 
   return (
-    <Section id="quran-font-section">
-      <Section.Title isLoading={isLoading}>{t('fonts.quran-font')}</Section.Title>
+    <Section id="quran-font-section" hideSeparator>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>

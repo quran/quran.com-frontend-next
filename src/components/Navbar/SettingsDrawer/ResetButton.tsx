@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import styles from './ResetButton.module.scss';
-
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -53,13 +51,9 @@ const ResetButton = () => {
   };
 
   return (
-    <>
-      <div className={styles.resetButtonContainer}>
-        <Button onClick={onResetSettingsClicked} data-testid="reset-settings-button">
-          {t('settings.reset-cta')}
-        </Button>
-      </div>
-    </>
+    <Button onClick={onResetSettingsClicked} data-testid="reset-settings-button">
+      {t('settings.reset-cta')}
+    </Button>
   );
 };
 

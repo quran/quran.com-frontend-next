@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  flex: 1;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: var(--spacing-small);
+  justify-content: space-between;
+  margin-inline-start: var(--spacing-medium2-px);
+  margin-inline-end: var(--spacing-medium2-px);
+  margin-block-start: auto;
+  padding-block-start: var(--spacing-medium-px);
+  padding-block-end: var(--spacing-medium2-px);
+  border-top: 1px solid var(--color-borders-hairline);
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-background-elevated);
+}

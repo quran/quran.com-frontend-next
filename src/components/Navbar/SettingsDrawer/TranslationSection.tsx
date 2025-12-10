@@ -143,8 +143,7 @@ const TranslationSection = () => {
 
   return (
     <div className={styles.container}>
-      <Section id="translation-section">
-        <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
+      <Section id="translation-section" hideSeparator>
         <Section.Row>
           <DataFetcher
             loading={translationLoading}

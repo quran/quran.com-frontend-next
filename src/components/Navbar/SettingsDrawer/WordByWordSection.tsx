@@ -174,7 +174,7 @@ const WordByWordSection = () => {
     !wordByWordContentType || !wordByWordContentType.includes(WordByWordType.Translation);
 
   return (
-    <Section>
+    <Section hideSeparator>
       <Section.Title isLoading={isLoading}>{t('wbw')}</Section.Title>
       <Section.Row>
         <div className={styles.checkboxContainer}>
