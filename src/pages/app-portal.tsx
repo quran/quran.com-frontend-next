@@ -59,8 +59,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Women Quran reciters',
     headline: 'Finally, a Quran app for our daughters',
     background:
-      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/featured/app-portal/qariah_banner_web_optimized.jpg')",
-    iconSrc: '/images/featured/app-portal/qariah_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(9, 47, 56, 0.45), rgba(9, 47, 56, 0.65)), url('/images/app-portal/featured/qariah_banner_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/featured/qariah_icon_web_optimized.png',
     iconAlt: 'Qariah – women Quran reciters app',
     href: 'https://www.qariah.app/',
   },
@@ -70,8 +70,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Read, listen & reflect',
     headline: 'Your new gateway to connect with the Book of Allah',
     background:
-      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/featured/app-portal/quran_kareem_banner_web_optimized.jpg')",
-    iconSrc: '/images/featured/app-portal/quran_kareem_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(5, 18, 52, 0.5), rgba(5, 18, 52, 0.7)), url('/images/app-portal/featured/quran_kareem_banner_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/featured/quran_kareem_icon_web_optimized.png',
     iconAlt: 'Quran Kareem app',
     href: 'https://apps.apple.com/us/app/quran-kareem-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1338804415',
   },
@@ -81,8 +81,8 @@ const featuredApps: FeaturedApp[] = [
     tagline: 'Tafsir & study companion',
     headline: 'Explore 25+ tafsirs and 100+ translations in one place',
     background:
-      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/featured/app-portal/quran_link_banner_web_optimized.jpg')",
-    iconSrc: '/images/featured/app-portal/quran_link_icon_web_optimized.png',
+      "linear-gradient(180deg, rgba(0, 92, 140, 0.45), rgba(0, 92, 140, 0.7)), url('/images/app-portal/featured/quran_link_banner_web_optimized.jpg')",
+    iconSrc: '/images/app-portal/featured/quran_link_icon_web_optimized.png',
     iconAlt: 'Quran Link app',
     href: 'https://apps.apple.com/us/app/quran-link-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86-%D8%A7%D9%84%D9%83%D8%B1%D9%8A%D9%85/id1425763263',
   },
@@ -100,70 +100,86 @@ const filters: FilterChip[] = [
 
 const appTiles: AppTile[] = [
   {
-    id: 'nuqayah-one',
-    title: 'Nuqayah',
-    caption: 'Deep dive',
-    visual:
-      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-portal/mandala_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/calligraphy_web_optimized.png',
-    iconAlt: 'Nuqayah',
-    href: '#',
-    categories: ['study-tools', 'popular'],
-  },
-  {
-    id: 'quranreflect-one',
+    id: 'quranreflect',
     title: 'QuranReflect',
     caption: 'Share reflections',
     visual:
       "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-portal/qr_web_optimized.jpg')",
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
-    href: '#',
+    href: 'https://quranreflect.com',
     categories: ['reflections', 'community'],
   },
   {
-    id: 'sunnah-one',
+    id: 'sunnah',
     title: 'Sunnah.com',
     caption: 'Hadith collection',
     visual:
       "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-portal/hadith_banner_web_optimized.jpg')",
     iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
-    href: '#',
+    href: 'https://sunnah.com',
     categories: ['hadith-sunnah', 'popular'],
   },
+
+  // -------------------------------------------
+  // 1. QuranMeet
+  // -------------------------------------------
   {
-    id: 'nuqayah-two',
-    title: 'Nuqayah',
-    caption: 'Deep dive',
+    id: 'quranmeet',
+    title: 'QuranMeet',
+    caption: 'Live Quran study sessions',
     visual:
-      "linear-gradient(180deg, rgba(122, 85, 52, 0.25), rgba(122, 85, 52, 0.25)), url('/images/app-portal/mandala_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/calligraphy_web_optimized.png',
-    iconAlt: 'Nuqayah',
-    href: '#',
-    categories: ['quran-reader', 'study-tools'],
+      "linear-gradient(180deg, rgba(0, 64, 34, 0.38), rgba(0, 64, 34, 0.55)), url('/images/app-portal/quran_meet-pic_web_optimized.png')",
+    iconSrc: '/images/app-portal/quran_meet_icon_optimized.png',
+    iconAlt: 'QuranMeet',
+    href: 'https://quranmeet.slk.is/',
+    categories: ['community', 'study-tools'],
   },
+
+  // -------------------------------------------
+  // 2. ReadTafsir (Tafsir.one)
+  // -------------------------------------------
   {
-    id: 'quranreflect-two',
-    title: 'QuranReflect',
-    caption: 'Share reflections',
+    id: 'readtafsir',
+    title: 'ReadTafsir',
+    caption: 'Search and compare classical tafsirs',
     visual:
-      "linear-gradient(180deg, rgba(12, 17, 26, 0.35), rgba(12, 17, 26, 0.35)), url('/images/app-portal/qr_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/icon_web_optimized.png',
-    iconAlt: 'QuranReflect',
-    href: '#',
-    categories: ['community', 'reflections', 'popular'],
+      "linear-gradient(180deg, rgba(80, 30, 0, 0.32), rgba(80, 30, 0, 0.55)), url('/images/app-portal/tafsir_tafaulli_web_optimized-pic.jpg')",
+    iconSrc: '/images/app-portal/tafsir_tafaulli-icon.webp',
+    iconAlt: 'ReadTafsir',
+    href: 'https://read.tafsir.one/',
+    categories: ['study-tools', 'quran-reader', 'popular'],
   },
+
+  // -------------------------------------------
+  // 3. Tafsir App
+  // -------------------------------------------
   {
-    id: 'sunnah-two',
-    title: 'Sunnah.com',
-    caption: 'Hadith collection',
+    id: 'tafsirapp',
+    title: 'Tafsir App',
+    caption: 'Interactive tafsir with multiple sources',
     visual:
-      "linear-gradient(180deg, rgba(7, 61, 55, 0.32), rgba(7, 61, 55, 0.32)), url('/images/app-portal/hadith_banner_web_optimized.jpg')",
-    iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
-    iconAlt: 'Sunnah.com',
-    href: '#',
-    categories: ['hadith-sunnah', 'popular'],
+      "linear-gradient(180deg, rgba(40, 40, 80, 0.32), rgba(40, 40, 80, 0.55)), url('/images/app-portal/tafsir.app-pic_web_optimized.png')",
+    iconSrc: '/images/app-portal/tafsir.app-icon.webp',
+    iconAlt: 'Tafsir App',
+    href: 'https://tafsir.app/',
+    categories: ['study-tools', 'quran-reader'],
+  },
+
+  // -------------------------------------------
+  // 4. Muhaffidh
+  // -------------------------------------------
+  {
+    id: 'muhaffidh',
+    title: 'Muhaffidh',
+    caption: 'Memorize and review Quran efficiently',
+    visual:
+      "linear-gradient(180deg, rgba(0, 80, 90, 0.32), rgba(0, 80, 90, 0.55)), url('/images/app-portal/mushaf_muhaffaz-pic_web_optimized.png')",
+    iconSrc: '/images/app-portal/mushaf_muhaffaz-ico.webp',
+    iconAlt: 'Muhaffidh App',
+    href: 'https://muhaffidh.app/',
+    categories: ['study-tools', 'quran-reader', 'popular'],
   },
 ];
 
