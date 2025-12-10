@@ -1,0 +1,84 @@
+@use 'src/styles/breakpoints';
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+  padding-block: var(--spacing-mega);
+  margin-block-end: var(--spacing-mega);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.calligraphyContainer {
+  max-width: max-content;
+  // a hack to align the calligraphy on the left side
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-left: -0.875rem;
+}
+
+.surahName {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-bold);
+}
+
+.detailsContainer {
+  display: flex;
+  font-size: var(--font-size-normal);
+  gap: var(--spacing-medium);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--spacing-xxsmall);
+}
+
+.detailHeader {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+
+.descriptionContainer {
+  p {
+    margin-block-end: var(--spacing-small);
+  }
+
+  h2,
+  h3 {
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: var(--spacing-medium);
+    margin-block-end: var(--spacing-medium);
+    padding-inline-start: calc(2 * var(--spacing-large));
+    margin-block-end: var(--spacing-small);
+  }
+
+  li {
+    display: list-item;
+    line-height: normal;
+    margin-block-end: var(--spacing-xxsmall);
+  }
+}
+
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding-block: var(--spacing-large);
+}
+
+.errorContainer {
+  color: var(--color-text-error);
+}
