@@ -28,9 +28,11 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
   const router = useRouter();
 
   /**
-   * useState is technically not required here, but relying solely on updating the query param
-   * can introduce a slight delay before the UI reflects the change, which can feel laggy.
-   * Local state ensures an immediate visual response.
+   * We keep a local `isModalOpen` state to ensure the UI updates instantly.
+   * Relying only on query params would cause a visible delay while the URL updates.
+   *
+   * The query param is used **only to set the initial state** (e.g., when landing directly on the info page).
+   * After mount, we do not react to query changes — avoiding unnecessary sync logic or race conditions.
    */
   const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
   const initialStateIsOpen = isInfoPage ? true : router.query[QueryParam.SURAH_INFO] !== undefined;
@@ -75,6 +77,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
         onClick={handleClick}
         aria-label={t('surah-info')}
         type="button"
+        data-testid="surah-info-button"
       >
         <InfoIcon width="18" height="18" />
       </button>

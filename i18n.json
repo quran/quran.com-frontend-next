@@ -37,7 +37,7 @@
     "/page/[pageId]": ["quran-reader", "reading-goal", "notes"],
     "/juz/[juzId]": ["quran-reader", "reading-goal", "notes"],
     "/hizb/[hizbId]": ["quran-reader", "reading-goal", "notes"],
-    "/surah/[chapterId]/info": ["surah-info"],
+    "/surah/[chapterId]/info": ["surah-info", "quran-reader"],
     "/chapter_info/[chapterId]": ["surah-info"],
     "/surah-info/[chapterId]": ["surah-info"],
     "/collections/all": ["collection"],
