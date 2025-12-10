@@ -235,7 +235,7 @@ const FeaturedCard: FC<{ app: FeaturedApp }> = ({ app }) => (
         </div>
       </div>
       {/* eslint-disable-next-line i18next/no-literal-string */}
-      <a className={styles.link} href={app.href}>
+      <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
         Learn more
       </a>
     </div>
@@ -282,7 +282,7 @@ const AppTileCard: FC<{ app: AppTile }> = ({ app }) => (
         </div>
       </div>
       {/* eslint-disable-next-line i18next/no-literal-string */}
-      <a className={styles.link} href={app.href}>
+      <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
         Learn more
       </a>
     </div>
