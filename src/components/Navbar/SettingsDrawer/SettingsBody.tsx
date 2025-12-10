@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 
-import QuranFontSection from './QuranFontSection';
 import ResetButton from './ResetButton';
-import ThemeSection from './ThemeSection';
-import TranslationSection from './TranslationSection';
-import WordByWordSection from './WordByWordSection';
+import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 
@@ -25,10 +22,7 @@ const SettingsBody = () => {
 
   return (
     <>
-      <ThemeSection />
-      <QuranFontSection />
-      <WordByWordSection />
-      <TranslationSection />
+      <SettingTabs />
       <ResetButton />
     </>
   );

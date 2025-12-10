@@ -44,7 +44,7 @@ const SettingsDrawer = () => {
   };
 
   let header;
-  if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
+  if (settingsView === SettingsView.Body) header = <> </>;
   if (settingsView !== SettingsView.Body) {
     header = (
       <div className={styles.headerContainer}>
@@ -65,6 +65,9 @@ const SettingsDrawer = () => {
       closeOnNavigation={false}
       canCloseDrawer={!isActive}
       bodyId="settings-drawer-body"
+      removeHeaderWrapper={settingsView === SettingsView.Body}
+      hideCloseButton={settingsView === SettingsView.Body}
+      removeBodySpacing={settingsView === SettingsView.Body}
     >
       {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}
       {isSettingsDrawerOpen && settingsView === SettingsView.Translation && (

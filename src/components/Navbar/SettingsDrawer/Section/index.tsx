@@ -9,14 +9,17 @@ import Separator, { SeparatorWeight } from '@/dls/Separator/Separator';
 interface SectionProps {
   id?: string;
   children?: React.ReactNode;
+  hideSeparator?: boolean;
 }
 
-const Section = ({ children, ...props }: SectionProps) => (
+const Section = ({ children, hideSeparator, ...props }: SectionProps) => (
   <div className={styles.section} {...props}>
     {children}
-    <div className={styles.separator}>
-      <Separator weight={SeparatorWeight.Bold} />
-    </div>
+    {!hideSeparator && (
+      <div className={styles.separator}>
+        <Separator weight={SeparatorWeight.Bold} />
+      </div>
+    )}
   </div>
 );
 

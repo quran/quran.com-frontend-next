@@ -7,8 +7,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
+import ReciterSection from './ReciterSection';
 import Section from './Section';
-import VersePreview from './VersePreview';
 
 import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
@@ -234,11 +234,7 @@ const QuranFontSection = () => {
       <Section.Row>
         <QuranFontSectionFooter quranFont={quranFont} />
       </Section.Row>
-      <Section.Row>
-        <div className={styles.versePreviewContainer}>
-          <VersePreview />
-        </div>
-      </Section.Row>
+      <ReciterSection />
     </Section>
   );
 };
