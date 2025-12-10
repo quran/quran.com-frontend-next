@@ -8,6 +8,7 @@ import withAuth from '@/components/Auth/withAuth';
 import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import ChangePasswordForm from '@/components/Profile/ChangePasswordForm';
 import EditDetailsForm from '@/components/Profile/EditDetailsForm';
 import PersonalizationForm from '@/components/Profile/PersonalizationForm';
 import Separator from '@/dls/Separator/Separator';
@@ -35,6 +36,7 @@ const ProfilePage: FC = () => {
         </div>
         <PersonalizationForm />
         <EditDetailsForm />
+        <ChangePasswordForm />
       </PageContainer>
     </>
   );

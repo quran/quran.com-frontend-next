@@ -66,6 +66,7 @@
     "TokenExpiredError": "You have been logged out, please login again."
   },
   "login-title": "Login to Quran.com",
+  "current-password-placeholder": "Current password",
   "new-password-placeholder": "New password",
   "other-options": "Other Login Options",
   "password-placeholder": "Password",

@@ -28,3 +28,29 @@
     }
   }
 }
+
+.passwordFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  @include breakpoints.tablet {
+    max-width: calc(50% - calc(var(--spacing-medium-px) / 2));
+  }
+  .passwordFormInput {
+    width: unset;
+    height: calc(2 * var(--spacing-large));
+    padding-inline: var(--spacing-small-px);
+    padding-block: var(--spacing-medium2-px);
+    border-radius: var(--border-radius-xsmall-px);
+    border: 1px solid var(--color-borders-hairline);
+    input {
+      color: var(--color-text-default);
+      background-color: unset;
+      border: none;
+      flex-grow: 1;
+    }
+    &:has(input:disabled) {
+      background-color: var(--color-background-alternative-faint);
+    }
+  }
+}

@@ -8,35 +8,51 @@ import HideIcon from '@/icons/hide.svg';
 import ShowIcon from '@/icons/show.svg';
 
 interface Props {
+  label?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  containerClassName?: string;
+  isDisabled?: boolean;
 }
 
-const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder }) => {
+const PasswordInput: FC<Props> = ({
+  label,
+  value = '',
+  onChange,
+  placeholder,
+  containerClassName,
+  isDisabled = false,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div
-      className={classNames(styles.passwordInputContainer, {
-        [styles.hasValue]: value,
-      })}
-    >
-      <input
-        type={showPassword ? 'text' : 'password'}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-      />
-      <button
-        type="button"
-        onClick={() => setShowPassword(!showPassword)}
-        className={styles.toggleButton}
-        aria-label={showPassword ? 'Hide password' : 'Show password'}
+    <>
+      {label && <p className={styles.label}>{label}</p>}
+      <div
+        className={classNames(styles.passwordInputContainer, containerClassName, {
+          [styles.hasValue]: value,
+          [styles.disabled]: isDisabled,
+        })}
       >
-        {showPassword ? <HideIcon /> : <ShowIcon />}
-      </button>
-    </div>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          disabled={isDisabled}
+        />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          className={styles.toggleButton}
+          aria-label={showPassword ? 'Hide password' : 'Show password'}
+          disabled={isDisabled}
+        >
+          {showPassword ? <HideIcon /> : <ShowIcon />}
+        </button>
+      </div>
+    </>
   );
 };
 
