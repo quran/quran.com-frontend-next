@@ -130,8 +130,8 @@ const appTiles: AppTile[] = [
     title: 'QuranMeet',
     caption: 'Live Quran study sessions',
     visual:
-      "linear-gradient(180deg, rgba(0, 64, 34, 0.38), rgba(0, 64, 34, 0.55)), url('/images/app-portal/quran_meet-pic_web_optimized.png')",
-    iconSrc: '/images/app-portal/quran_meet_icon_optimized.png',
+      "linear-gradient(180deg, rgba(0, 64, 34, 0.38), rgba(0, 64, 34, 0.55)), url('/images/app-portal/quran_meet-app_pic.png')",
+    iconSrc: '/images/app-portal/quran_meet_app.png',
     iconAlt: 'QuranMeet',
     href: 'https://quranmeet.slk.is/',
     categories: ['community', 'study-tools'],
@@ -145,8 +145,8 @@ const appTiles: AppTile[] = [
     title: 'ReadTafsir',
     caption: 'Search and compare classical tafsirs',
     visual:
-      "linear-gradient(180deg, rgba(80, 30, 0, 0.32), rgba(80, 30, 0, 0.55)), url('/images/app-portal/tafsir_tafaulli_web_optimized-pic.jpg')",
-    iconSrc: '/images/app-portal/tafsir_tafaulli-icon.webp',
+      "linear-gradient(180deg, rgba(80, 30, 0, 0.32), rgba(80, 30, 0, 0.55)), url('/images/app-portal/readtafsir_app_pic.png')",
+    iconSrc: '/images/app-portal/readtafsir_app_icon.png',
     iconAlt: 'ReadTafsir',
     href: 'https://read.tafsir.one/',
     categories: ['study-tools', 'quran-reader', 'popular'],
@@ -160,8 +160,8 @@ const appTiles: AppTile[] = [
     title: 'Tafsir App',
     caption: 'Interactive tafsir with multiple sources',
     visual:
-      "linear-gradient(180deg, rgba(40, 40, 80, 0.32), rgba(40, 40, 80, 0.55)), url('/images/app-portal/tafsir.app-pic_web_optimized.png')",
-    iconSrc: '/images/app-portal/tafsir.app-icon.webp',
+      "linear-gradient(180deg, rgba(40, 40, 80, 0.32), rgba(40, 40, 80, 0.55)), url('/images/app-portal/tafsir.app-pic.png')",
+    iconSrc: '/images/app-portal/tafsir_app_icon.png',
     iconAlt: 'Tafsir App',
     href: 'https://tafsir.app/',
     categories: ['study-tools', 'quran-reader'],
@@ -175,8 +175,8 @@ const appTiles: AppTile[] = [
     title: 'Muhaffidh',
     caption: 'Memorize and review Quran efficiently',
     visual:
-      "linear-gradient(180deg, rgba(0, 80, 90, 0.32), rgba(0, 80, 90, 0.55)), url('/images/app-portal/mushaf_muhaffaz-pic_web_optimized.png')",
-    iconSrc: '/images/app-portal/mushaf_muhaffaz-ico.webp',
+      "linear-gradient(180deg, rgba(0, 80, 90, 0.32), rgba(0, 80, 90, 0.55)), url('/images/app-portal/muhaffidh_app_pic.png')",
+    iconSrc: '/images/app-portal/muhaffidh_app_icon.png',
     iconAlt: 'Muhaffidh App',
     href: 'https://muhaffidh.app/',
     categories: ['study-tools', 'quran-reader', 'popular'],
