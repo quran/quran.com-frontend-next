@@ -22,16 +22,16 @@
       gap: var(--spacing-xxsmall-px);
       .profilePictureImage {
         svg {
-          width: 60px;
-          height: 60px;
+          width: calc(var(--spacing-large-px) * 2);
+          height: calc(var(--spacing-large-px) * 2);
           fill: var(--color-grey-icons);
           path {
             fill: var(--color-grey-icons);
           }
         }
         .profilePictureImageElement {
-          width: 60px;
-          height: 60px;
+          width: calc(var(--spacing-large-px) * 2);
+          height: calc(var(--spacing-large-px) * 2);
           border-radius: 50%;
           object-fit: cover;
         }
@@ -47,6 +47,9 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-small-px);
+      .profilePictureInput {
+        display: none;
+      }
       .profilePictureActionButton {
         border-radius: var(--border-radius-small-px);
         font-weight: var(--font-weight-normal);
