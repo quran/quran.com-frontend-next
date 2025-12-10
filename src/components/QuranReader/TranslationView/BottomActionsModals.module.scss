@@ -1,0 +1,25 @@
+.reflectionContentModal {
+  padding: unset !important;
+  overflow-y: auto !important;
+}
+
+.reflectionInnerContentModal {
+  padding-inline: unset !important;
+}
+
+.reflectionHeader {
+  padding-inline: var(--spacing-medium-px) !important;
+  padding-block: var(--spacing-small-px) !important;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding: none !important;
+}
+
+.reflectionHeaderCloseIcon {
+  position: relative !important;
+  inset-block: unset !important;
+  inset-inline: unset !important;
+  transform: unset !important;
+}

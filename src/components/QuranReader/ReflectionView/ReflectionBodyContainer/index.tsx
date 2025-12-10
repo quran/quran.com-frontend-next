@@ -101,26 +101,29 @@ const ReflectionBodyContainer = ({
         selected={selectedContentType}
         onSelect={handleTabChange}
         className={styles.tab}
+        containerClassName={styles.tabsContainer}
         activeClassName={styles.tabActive}
       />
-      <DataFetcher
-        loading={TafsirSkeleton}
-        queryKey={makeAyahReflectionsUrl({
-          surahId: selectedChapterId,
-          ayahNumber: selectedVerseNumber,
-          locale: lang,
+      <div className={styles.reflectionDataContainer}>
+        <DataFetcher
+          loading={TafsirSkeleton}
+          queryKey={makeAyahReflectionsUrl({
+            surahId: selectedChapterId,
+            ayahNumber: selectedVerseNumber,
+            locale: lang,
 
-          reviewed: true,
-          reflectionLanguages: reflectionLanguageIsoCodes,
+            reviewed: true,
+            reflectionLanguages: reflectionLanguageIsoCodes,
 
-          postTypeIds: [
-            selectedContentType === ContentType.REFLECTIONS
-              ? REFLECTION_POST_TYPE_ID
-              : LESSON_POST_TYPE_ID,
-          ],
-        })}
-        render={renderBody}
-      />
+            postTypeIds: [
+              selectedContentType === ContentType.REFLECTIONS
+                ? REFLECTION_POST_TYPE_ID
+                : LESSON_POST_TYPE_ID,
+            ],
+          })}
+          render={renderBody}
+        />
+      </div>
     </>
   );
 

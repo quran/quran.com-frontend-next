@@ -1,7 +1,12 @@
 @use 'src/styles/breakpoints';
 
+.reflectionDataContainer {
+  padding-block: var(--spacing-small-px);
+  padding-inline: var(--spacing-medium-px);
+}
+
 .tabsContainer {
-  border-block-end: none !important;
+  border-block-end: unset !important;
 }
 
 .titleContainer {
