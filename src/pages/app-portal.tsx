@@ -100,7 +100,7 @@ const appTiles: AppTile[] = [
     id: 'quranreflect',
     title: 'QuranReflect',
     caption: 'Share reflections',
-    visual: "url('/images/app-portal/qr_web_optimized.jpg')",
+    visual: "url('/images/app-portal/qr_web_optimized.png')",
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     href: 'https://quranreflect.com',
