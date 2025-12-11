@@ -14,6 +14,7 @@ interface Props {
   placeholder?: string;
   containerClassName?: string;
   isDisabled?: boolean;
+  dataTestId?: string;
 }
 
 const PasswordInput: FC<Props> = ({
@@ -23,6 +24,7 @@ const PasswordInput: FC<Props> = ({
   placeholder,
   containerClassName,
   isDisabled = false,
+  dataTestId,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,6 +43,7 @@ const PasswordInput: FC<Props> = ({
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
           disabled={isDisabled}
+          data-testid={dataTestId}
         />
         <button
           type="button"

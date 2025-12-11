@@ -11,17 +11,14 @@ import styles from './SharedProfileStyles.module.scss';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
+import TEST_IDS from '@/utils/test-ids';
 
 /**
  * Get form fields for the change password form
  * @param {Translate} t - Translation function
- * @param {boolean} canUpdatePassword - Whether the user can update their password
  * @returns {FormBuilderFormField[]} Array of form fields
  */
-const getChangePasswordFormFields = (
-  t: Translate,
-  canUpdatePassword: boolean,
-): FormBuilderFormField[] => [
+const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => [
   {
     field: 'currentPassword',
     type: FormFieldType.Password,
@@ -37,12 +34,12 @@ const getChangePasswordFormFields = (
     ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordInput
+        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CURRENT_PASSWORD_INPUT}
         label={t('common:form.current-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        isDisabled={!canUpdatePassword}
       />
     ),
   },
@@ -77,12 +74,12 @@ const getChangePasswordFormFields = (
     ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordField
+        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.NEW_PASSWORD_INPUT}
         label={t('common:form.new-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        isDisabled={!canUpdatePassword}
       />
     ),
   },
@@ -101,12 +98,12 @@ const getChangePasswordFormFields = (
     ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordInput
+        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CONFIRM_NEW_PASSWORD_INPUT}
         label={t('common:form.confirm-new-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        isDisabled={!canUpdatePassword}
       />
     ),
   },

@@ -8,6 +8,7 @@ import {
   getFormInputs,
   getPasswordValidation,
   getTestUserPassword,
+  mockPasswordUpdateApi,
 } from './change-password-form-helpers';
 import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
 
@@ -498,11 +499,15 @@ test.describe('Form Submission', () => {
     'should successfully update password with valid values',
     { tag: TEST_TAGS },
     async ({ page }) => {
+      // Mock API to prevent actual password changes and ensure test isolation
+      await mockPasswordUpdateApi(page, { success: true });
+
       const section = getChangePasswordSection(page);
       const inputs = getFormInputs(section);
 
-      const password = getTestUserPassword();
-      await fillPasswordFields(inputs, password, password, password);
+      const currentPassword = getTestUserPassword();
+      const newPassword = 'NewValidPass123!';
+      await fillPasswordFields(inputs, currentPassword, newPassword, newPassword);
       await page.waitForTimeout(UI_UPDATE_WAIT);
 
       await inputs.updateButton.click();
@@ -516,6 +521,12 @@ test.describe('Form Submission', () => {
     'should show error when current password is incorrect',
     { tag: TEST_TAGS },
     async ({ page }) => {
+      // Mock API to return error for incorrect current password
+      await mockPasswordUpdateApi(page, {
+        success: false,
+        errorMessage: 'Current password is invalid',
+      });
+
       const section = getChangePasswordSection(page);
       const inputs = getFormInputs(section);
 
@@ -540,7 +551,7 @@ test.describe('Form Submission', () => {
       await page.waitForTimeout(UI_UPDATE_WAIT);
 
       const isDisabled = await updateButton.isDisabled();
-      expect(isDisabled).toBe(false);
+      expect(isDisabled).toBe(true);
     },
   );
 
@@ -548,11 +559,15 @@ test.describe('Form Submission', () => {
     'should stay on the same page after successful update',
     { tag: TEST_TAGS },
     async ({ page }) => {
+      // Mock API to prevent actual password changes and ensure test isolation
+      await mockPasswordUpdateApi(page, { success: true });
+
       const section = getChangePasswordSection(page);
       const inputs = getFormInputs(section);
 
-      const password = getTestUserPassword();
-      await fillPasswordFields(inputs, password, password, password);
+      const currentPassword = getTestUserPassword();
+      const newPassword = 'NewValidPass123!';
+      await fillPasswordFields(inputs, currentPassword, newPassword, newPassword);
       await page.waitForTimeout(UI_UPDATE_WAIT);
 
       const currentUrl = page.url();

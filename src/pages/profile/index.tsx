@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { useMemo, type FC } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,11 +12,16 @@ import ChangePasswordForm from '@/components/Profile/ChangePasswordForm';
 import EditDetailsForm from '@/components/Profile/EditDetailsForm';
 import PersonalizationForm from '@/components/Profile/PersonalizationForm';
 import Separator from '@/dls/Separator/Separator';
+import useAuthData from '@/hooks/auth/useAuthData';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
 
 const ProfilePage: FC = () => {
   const { t, lang } = useTranslation('profile');
+  const { userData } = useAuthData();
+  const canUpdatePassword = useMemo(() => {
+    return userData?.isPasswordSet;
+  }, [userData?.isPasswordSet]);
 
   const profilePath = getProfileNavigationUrl();
 
@@ -36,7 +41,7 @@ const ProfilePage: FC = () => {
         </div>
         <PersonalizationForm />
         <EditDetailsForm />
-        <ChangePasswordForm />
+        {canUpdatePassword && <ChangePasswordForm />}
       </PageContainer>
     </>
   );

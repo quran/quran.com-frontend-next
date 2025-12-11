@@ -11,7 +11,6 @@ import styles from './SharedProfileStyles.module.scss';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import useAuthData from '@/hooks/auth/useAuthData';
 import useUpdatePassword from '@/hooks/auth/useUpdatePassword';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -30,7 +29,6 @@ interface RenderActionProps {
 
 const ChangePasswordForm: FC = () => {
   const { t } = useTranslation('profile');
-  const { userData } = useAuthData();
   const { updatePassword, isUpdating } = useUpdatePassword();
   const { transformErrors } = useTransformFormErrors<FormData>({
     currentPassword: {
@@ -48,17 +46,9 @@ const ChangePasswordForm: FC = () => {
     },
   });
 
-  const canUpdatePassword = useMemo(() => {
-    return userData?.isPasswordSet;
-  }, [userData?.isPasswordSet]);
-
-  const formFields = useMemo(
-    () => getChangePasswordFormFields(t, canUpdatePassword),
-    [t, canUpdatePassword],
-  );
+  const formFields = useMemo(() => getChangePasswordFormFields(t), [t]);
 
   const onFormSubmit = async (data: FormData) => {
-    if (!canUpdatePassword) return undefined;
     logButtonClick('profile_update_password');
     const result = await updatePassword({
       currentPassword: data.currentPassword,
@@ -76,7 +66,6 @@ const ChangePasswordForm: FC = () => {
         className={styles.button}
         size={ButtonSize.Small}
         variant={ButtonVariant.Accent}
-        isDisabled={!canUpdatePassword}
       >
         {t('update-password')}
       </Button>

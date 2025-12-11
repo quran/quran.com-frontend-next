@@ -19,6 +19,9 @@ const TEST_IDS = {
       PERSONALIZATION_SECTION: 'auth-update-profile-personalization-section',
       CHANGE_PASSWORD_SECTION: 'auth-update-profile-change-password-section',
       PROFILE_INPUT: 'auth-update-profile-input',
+      CURRENT_PASSWORD_INPUT: 'auth-update-profile-current-password-input',
+      NEW_PASSWORD_INPUT: 'auth-update-profile-new-password-input',
+      CONFIRM_NEW_PASSWORD_INPUT: 'auth-update-profile-confirm-new-password-input',
     },
   },
 };
