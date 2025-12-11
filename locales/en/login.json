@@ -58,6 +58,7 @@
   "forgot-password-description": "Enter your email address and we'll send you instructions to reset your password.",
   "forgot-password-success": "Password reset email sent! Please check your inbox.",
   "forgot-password-title": "Forgot password?",
+  "hide-password": "Hide password",
   "last-name-placeholder": "Last Name",
   "login-cta": "Sign in or Sign up now:",
   "login-error": {
@@ -89,6 +90,7 @@
   "reset-password": "Reset Password",
   "reset-password-success": "Password reset successfully!",
   "set-new-password": "Set a new password",
+  "show-password": "Show password",
   "sign-in": "Sign in",
   "sign-in-or-sign-up": "Sign in or Sign up",
   "sign-up": "Sign up",

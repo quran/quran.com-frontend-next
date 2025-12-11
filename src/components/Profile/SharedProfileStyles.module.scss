@@ -1,5 +1,18 @@
 @use 'src/styles/breakpoints';
 
+@mixin input-base-styles {
+  padding: var(--spacing-small-px);
+  border-radius: var(--border-radius-xsmall-px);
+
+  &:has(input:disabled) {
+    background-color: var(--color-background-alternative-faint);
+  }
+
+  input {
+    height: auto;
+  }
+}
+
 .button {
   padding-block: var(--spacing-xxxsmall-px);
   padding-inline: var(--spacing-small-px);
@@ -16,15 +29,8 @@
   .formInputContainer {
     width: 100%;
     .formInput {
+      @include input-base-styles;
       width: unset;
-      padding: var(--spacing-small-px);
-      border-radius: var(--border-radius-xsmall-px);
-      &:has(input:disabled) {
-        background-color: var(--color-background-alternative-faint);
-      }
-      input {
-        height: auto;
-      }
     }
   }
 }
@@ -37,20 +43,7 @@
     max-width: calc(50% - calc(var(--spacing-medium-px) / 2));
   }
   .passwordFormInput {
-    width: unset;
-    height: calc(2 * var(--spacing-large));
-    padding-inline: var(--spacing-small-px);
-    padding-block: var(--spacing-medium2-px);
-    border-radius: var(--border-radius-xsmall-px);
-    border: 1px solid var(--color-borders-hairline);
-    input {
-      color: var(--color-text-default);
-      background-color: unset;
-      border: none;
-      flex-grow: 1;
-    }
-    &:has(input:disabled) {
-      background-color: var(--color-background-alternative-faint);
-    }
+    @include input-base-styles;
+    height: calc(2 * var(--spacing-medium2-px));
   }
 }
