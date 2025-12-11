@@ -21,6 +21,7 @@ const LabsSection = ({ variant = 'drawer' }: LabsSectionProps) => {
 
   const content = (
     <div className={styles.flow}>
+      <div>{t('labs-pitch')}</div>
       {variant === 'drawer' && <div>{t('labs-description')}</div>}
       <div className={styles.actions}>
         <Link href="https://labs.quran.com" isNewTab className={styles.joinCommunityLink}>
