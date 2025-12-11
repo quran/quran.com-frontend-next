@@ -1,13 +1,10 @@
 import { useContext } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import DataContext from '@/contexts/DataContext';
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
-import {
-  selectLastReadVerseKey,
-  setLastReadVerse,
-} from '@/redux/slices/QuranReader/readingTracker';
+import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**
