@@ -146,20 +146,6 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
   },
 
   // -------------------------------------------
-  // 1. QuranMeet
-  // -------------------------------------------
-  {
-    id: 'quranmeet',
-    title: t('browse.apps.quranmeet.title'),
-    caption: t('browse.apps.quranmeet.caption'),
-    visual: "url('/images/app-portal/quran_meet-app_pic.png')",
-    iconSrc: '/images/app-portal/quran_meet_app.png',
-    iconAlt: 'QuranMeet',
-    href: 'https://quranmeet.slk.is/',
-    categories: ['community', 'study-tools'],
-  },
-
-  // -------------------------------------------
   // 2. ReadTafsir (Tafsir.one)
   // -------------------------------------------
   {
