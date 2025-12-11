@@ -52,8 +52,7 @@ const runMushafPageTest = async (page, isMobile, fontTestId?: string) => {
   await expect(pageInfo).toContainText('123');
 };
 
-// TODO: unskip when PR about QF-1129 is merged
-test.describe.skip('temporarily disabled', () => {
+test.describe('IndoPak/Tajweed mushaf', () => {
   test(
     'Mushaf mode displays page number correctly (Uthmani - default)',
     { tag: ['@slow', '@mushaf', '@page', '@font'] },
@@ -155,8 +154,11 @@ test.describe.skip('temporarily disabled', () => {
       // Switch back to Uthmani font
       await homePage.openSettingsDrawer();
       await page.getByTestId('text_uthmani-button').click();
+      await page.waitForTimeout(500);
       // Close settings drawer
       await page.keyboard.press('Escape');
+
+      await page.waitForTimeout(500);
 
       // Page info should still show "Hizb 13"
       await expect(pageInfo).toContainText('Hizb 13');

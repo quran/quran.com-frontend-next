@@ -19,11 +19,12 @@ import {
 import { VersesResponse } from '@/types/ApiResponses';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
-import { getMushafId } from '@/utils/api';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
 import { PAGES_MUSHAF_MAP } from '@/utils/page';
+import getPageVersesParams from '@/utils/pages/getPageVersesParams';
 import getQuranReaderData from '@/utils/pages/getQuranReaderData';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidPageNumber } from '@/utils/validator';
@@ -97,8 +98,11 @@ const buildPageProps = async (
   mushaf: number,
   chaptersData: ChaptersData,
 ): Promise<{ props: Props }> => {
+  const defaultQuranStyles = getQuranReaderStylesInitialState(locale as Language);
+  const defaultWordFields = getDefaultWordFields(defaultQuranStyles.quranFont);
+  const pageVersesParams = getPageVersesParams(mushaf, defaultWordFields);
   const [pageVerses, pagesLookup] = await Promise.all([
-    getPageVerses(pageId, locale),
+    getPageVerses(pageId, locale, pageVersesParams),
     getPagesLookup({ mushaf, pageNumber: Number(pageId) }),
   ]);
   pageVerses.pagesLookup = pagesLookup;

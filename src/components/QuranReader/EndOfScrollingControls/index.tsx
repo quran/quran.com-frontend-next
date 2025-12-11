@@ -45,7 +45,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
           view={RevelationOrderNavigationNoticeView.EndOfScrollingControls}
         />
       )}
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="end-of-scrolling-controls">
         <div className={styles.buttonsContainer}>
           {quranReaderDataType === QuranReaderDataType.Chapter && (
             <ChapterControls initialData={initialData} />
