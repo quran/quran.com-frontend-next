@@ -53,7 +53,8 @@
       "Bash(else)",
       "Bash(fi)",
       "Bash(__NEW_LINE__ echo \"\")",
-      "Bash(git cherry-pick:*)"
+      "Bash(git cherry-pick:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
