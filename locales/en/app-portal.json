@@ -1,6 +1,14 @@
 {
   "browse": {
     "apps": {
+      "quran_android": {
+        "title": "Quran for Android",
+        "caption": "Read, bookmark, and listen to the Quran on Android devices"
+      },
+      "quran_ios": {
+        "title": "Quran for iOS (by quran.com)",
+        "caption": "Beautiful, ad-free Quran reading and listening app for iPhone & iPad"
+      },
       "muhaffidh": {
         "caption": "Memorize and review Quran efficiently",
         "title": "Muhaffidh"
