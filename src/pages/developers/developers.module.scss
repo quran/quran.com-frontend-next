@@ -1,3 +1,5 @@
+@import 'src/styles/breakpoints';
+
 .pageHero {
   padding: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
@@ -10,7 +12,7 @@
   isolation: isolate;
   text-align: center;
 
-  @media (max-width: 768px) {
+  @include smallerThanTablet {
     padding: var(--spacing-large);
   }
 }
@@ -20,7 +22,7 @@
   font-size: var(--font-size-jumbo);
   line-height: 1.2;
 
-  @media (max-width: 768px) {
+  @include smallerThanTablet {
     font-size: var(--font-size-xlarge);
   }
 }
@@ -62,7 +64,7 @@
   gap: var(--spacing-large);
   margin-block-end: var(--spacing-mega);
 
-  @media (max-width: 768px) {
+  @include smallerThanTablet {
     grid-template-columns: 1fr;
     gap: var(--spacing-medium);
   }
@@ -133,7 +135,7 @@
   gap: var(--spacing-large);
   margin-block-start: var(--spacing-medium);
 
-  @media (max-width: 768px) {
+  @include smallerThanTablet {
     grid-template-columns: 1fr;
     gap: var(--spacing-medium);
   }
@@ -236,7 +238,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @include smallerThanTablet {
     padding: var(--spacing-large);
   }
 }
