@@ -5,6 +5,14 @@
     "sub-header": "Integrasikan data Quran.com ke dalam aplikasi Anda dengan API komprehensif kami",
     "title": "Dokumentasi API"
   },
+  "app-portal": {
+    "cta-explore": "Kunjungi Portal Aplikasi Al-Quran",
+    "cta-oauth": "Lihat panduan OAuth2",
+    "description": "Jelajahi pengalaman terbaru yang dibangun oleh komunitas dan lihat apa yang mungkin dilakukan dengan platform kami.",
+    "heading": "Portal Aplikasi Al-Quran",
+    "oauth-pitch": "Kirimkan aplikasi Anda melalui Quran Foundation OAuth2 untuk proses masuk yang mudah dan tampilkan aplikasi Anda di Portal Aplikasi Quran.",
+    "tagline": "Pamerkan aplikasi Quran Anda"
+  },
   "careers": {
     "career": "Peluang Karir",
     "cta": "Lihat Lowongan",
@@ -12,6 +20,10 @@
   },
   "footer": "- Tim Quran.com",
   "header": "Bantuan pengembangan",
+  "hero": {
+    "subtitle": "Sumber daya, alat, dan panduan untuk pengembang yang membangun pengalaman Al-Quran.",
+    "title": "Dibangun dengan Quran.com"
+  },
   "issues-cta": "Jika Anda memiliki pertanyaan atau ingin menghubungi pengelola, tulis saja masalah! Kami akan menghubungi Anda sesegera mungkin, insyaAllah.",
   "issues-guide": "Biasanya kami menggunakan <0> proyek Github </0> sebagai sumber untuk apa yang harus dikerjakan selanjutnya, apa yang akan datang dan bug apa yang ada yang perlu dipecahkan. Misalnya <1> URL ini </1> memiliki daftar bug, hal-hal yang perlu kami bantu, dan fitur yang akan datang.",
   "labs": "Laboratorium",
@@ -20,6 +32,34 @@
   "main-desc": "Assalamu A'laikum, Pertama, terima kasih banyak atas minat Anda untuk membantu kami mengembangkan Quran.com dan projek-projeknya. Kami amat senang kerana dapat bekerja sama dengan Anda!",
   "projects": {
     "all": "Kami memiliki sejumlah projek yang semuanya dihosting di Github. Anda dapat menemukan semuanya <0> sini </0> . Tetapi untuk menguraikannya:",
+    "items": {
+      "q-android": {
+        "description": "Aplikasi pemutar audio dan mushaf bawaan Android untuk ponsel dan tablet.",
+        "name": "Quran Android",
+        "stack": "Kotlin dan Java"
+      },
+      "q-api": {
+        "description": "Backend Ruby on Rails yang mendukung data, pencarian, dan terjemahan Al-Quran.",
+        "name": "API Quran.com",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Platform streaming audio dan aplikasi seluler pendamping untuk pembacaan puisi.",
+        "name": "Audio Al-Quran",
+        "stack": "Aplikasi web dan seluler"
+      },
+      "q-ios": {
+        "description": "Aplikasi pembaca Al-Quran berbasis Swift dengan fitur bookmark, bacaan, dan dukungan offline.",
+        "name": "Al-Quran iOS",
+        "stack": "Cepat"
+      },
+      "q-next": {
+        "description": "Pengalaman web Next.js untuk membaca, mencari, dan mendengarkan Al-Quran.",
+        "name": "Antarmuka Pengguna Quran.com",
+        "stack": "Dibangun dengan TypeScript dan Next.js"
+      }
+    },
+    "lead": "Proyek sumber terbuka yang dikelola oleh tim dan komunitas Quran.com.",
     "q-android": "<0> Quran Android </0>",
     "q-api": "<0> Quran.com API </0> - ditulis di Ruby pada Rails.",
     "q-api-docs": "<0> Dokumen API Quran.com </0> - Portal dokumen API kami.",
