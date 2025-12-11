@@ -124,7 +124,6 @@ const ContentModal = ({
             {...(onClick && { onClick })}
             ref={contentRef}
             className={classNames(styles.contentWrapper, contentClassName, {
-              [contentClassName]: contentClassName,
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
@@ -152,9 +151,7 @@ const ContentModal = ({
             )}
 
             <div
-              className={classNames(styles.content, {
-                [innerContentClassName]: innerContentClassName,
-              })}
+              className={classNames(styles.content, innerContentClassName)}
               data-testid="modal-content"
             >
               {children}

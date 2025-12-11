@@ -29,14 +29,10 @@ const Tabs = ({
   containerClassName,
 }: TabsProps) => {
   return (
-    <div
-      className={classNames(styles.container, { [containerClassName]: containerClassName })}
-      role="tablist"
-    >
+    <div className={classNames(styles.container, containerClassName)} role="tablist">
       {tabs.map((tab) => (
         <div
-          className={classNames(styles.tabItem, {
-            [className]: className,
+          className={classNames(styles.tabItem, className, {
             [activeClassName]: selected === tab.value,
             [styles.tabItemSelected]: selected === tab.value && !activeClassName,
           })}
