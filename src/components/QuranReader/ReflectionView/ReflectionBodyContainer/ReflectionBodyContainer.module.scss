@@ -3,6 +3,10 @@
 .reflectionDataContainer {
   padding-block: var(--spacing-small-px);
   padding-inline: var(--spacing-medium-px);
+  @include breakpoints.tablet {
+    padding-block: var(--spacing-medium-px);
+    padding-inline: var(--spacing-large-px);
+  }
 }
 
 .tabsContainer {
