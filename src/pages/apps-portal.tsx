@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines, react/no-multi-comp */
 
 import { FC, useCallback, useMemo, useState } from 'react';
@@ -24,6 +25,7 @@ interface FeaturedApp {
   iconSrc: string;
   iconAlt: string;
   href: string;
+  learnMoreText?: string;
 }
 
 interface AppTile {
@@ -35,6 +37,7 @@ interface AppTile {
   iconAlt: string;
   href: string;
   categories: AppCategory[];
+  learnMoreText?: string;
 }
 
 type AppCategory =
@@ -52,12 +55,12 @@ interface FilterChip {
   value: FilterValue;
 }
 
-const featuredApps: FeaturedApp[] = [
+const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
   {
     id: 'qariah',
-    name: 'Qariah',
-    tagline: 'Women Quran reciters',
-    headline: 'Finally, a Quran app for our daughters',
+    name: t('featured.apps.qariah.name'),
+    tagline: t('featured.apps.qariah.tagline'),
+    headline: t('featured.apps.qariah.headline'),
     background: "url('/images/app-portal/featured/qaariah-pic.jpg')",
     iconSrc: '/images/app-portal/featured/qaariah-icon.webp',
     iconAlt: 'Qariah – women Quran reciters app',
@@ -65,9 +68,9 @@ const featuredApps: FeaturedApp[] = [
   },
   {
     id: 'quran-kareem',
-    name: 'Quran Kareem',
-    tagline: 'Read, listen & reflect',
-    headline: 'Your new gateway to connect with the Book of Allah',
+    name: t('featured.apps.quran-kareem.name'),
+    tagline: t('featured.apps.quran-kareem.tagline'),
+    headline: t('featured.apps.quran-kareem.headline'),
     background: "url('/images/app-portal/featured/quran_kareem-pic.webp')",
     iconSrc: '/images/app-portal/featured/quran_kareem-icon.png',
     iconAlt: 'Quran Kareem app',
@@ -75,9 +78,9 @@ const featuredApps: FeaturedApp[] = [
   },
   {
     id: 'quran-link',
-    name: 'Quran Link',
-    tagline: 'Tafsir & study companion',
-    headline: 'Explore 25+ tafsirs and 100+ translations in one place',
+    name: t('featured.apps.quran-link.name'),
+    tagline: t('featured.apps.quran-link.tagline'),
+    headline: t('featured.apps.quran-link.headline'),
     background: "url('/images/app-portal/featured/QuranLink-pic.png')",
     iconSrc: '/images/app-portal/featured/QuranLink-icon.png',
     iconAlt: 'Quran Link app',
@@ -85,21 +88,21 @@ const featuredApps: FeaturedApp[] = [
   },
 ];
 
-const filters: FilterChip[] = [
-  { label: 'All apps', value: 'all' },
-  { label: 'Study tools', value: 'study-tools' },
-  { label: 'Reflections', value: 'reflections' },
-  { label: 'Popular', value: 'popular' },
-  { label: 'Quran Reader', value: 'quran-reader' },
-  { label: 'Community', value: 'community' },
-  { label: 'Hadith and Sunnah', value: 'hadith-sunnah' },
+const getFilters = (t: (key: string) => string): FilterChip[] => [
+  { label: t('browse.filters.all'), value: 'all' },
+  { label: t('browse.filters.study-tools'), value: 'study-tools' },
+  { label: t('browse.filters.reflections'), value: 'reflections' },
+  { label: t('browse.filters.popular'), value: 'popular' },
+  { label: t('browse.filters.quran-reader'), value: 'quran-reader' },
+  { label: t('browse.filters.community'), value: 'community' },
+  { label: t('browse.filters.hadith-sunnah'), value: 'hadith-sunnah' },
 ];
 
-const appTiles: AppTile[] = [
+const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
     id: 'quranreflect',
-    title: 'QuranReflect',
-    caption: 'Share reflections',
+    title: t('browse.apps.quranreflect.title'),
+    caption: t('browse.apps.quranreflect.caption'),
     visual: "url('/images/app-portal/qr_web_optimized.png')",
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
@@ -108,8 +111,8 @@ const appTiles: AppTile[] = [
   },
   {
     id: 'sunnah',
-    title: 'Sunnah.com',
-    caption: 'Hadith collection',
+    title: t('browse.apps.sunnah.title'),
+    caption: t('browse.apps.sunnah.caption'),
     visual: "url('/images/app-portal/hadith_banner_web_optimized.jpg')",
     iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
@@ -122,8 +125,8 @@ const appTiles: AppTile[] = [
   // -------------------------------------------
   {
     id: 'quranmeet',
-    title: 'QuranMeet',
-    caption: 'Live Quran study sessions',
+    title: t('browse.apps.quranmeet.title'),
+    caption: t('browse.apps.quranmeet.caption'),
     visual: "url('/images/app-portal/quran_meet-app_pic.png')",
     iconSrc: '/images/app-portal/quran_meet_app.png',
     iconAlt: 'QuranMeet',
@@ -136,8 +139,8 @@ const appTiles: AppTile[] = [
   // -------------------------------------------
   {
     id: 'readtafsir',
-    title: 'ReadTafsir',
-    caption: 'Search and compare classical tafsirs',
+    title: t('browse.apps.readtafsir.title'),
+    caption: t('browse.apps.readtafsir.caption'),
     visual: "url('/images/app-portal/readtafsir_app_pic.png')",
     iconSrc: '/images/app-portal/readtafsir_app_icon.png',
     iconAlt: 'ReadTafsir',
@@ -150,8 +153,8 @@ const appTiles: AppTile[] = [
   // -------------------------------------------
   {
     id: 'tafsirapp',
-    title: 'Tafsir App',
-    caption: 'Interactive tafsir with multiple sources',
+    title: t('browse.apps.tafsirapp.title'),
+    caption: t('browse.apps.tafsirapp.caption'),
     visual: "url('/images/app-portal/tafsir.app-pic.png')",
     iconSrc: '/images/app-portal/tafsir_app_icon.png',
     iconAlt: 'Tafsir App',
@@ -164,8 +167,8 @@ const appTiles: AppTile[] = [
   // -------------------------------------------
   {
     id: 'muhaffidh',
-    title: 'Muhaffidh',
-    caption: 'Memorize and review Quran efficiently',
+    title: t('browse.apps.muhaffidh.title'),
+    caption: t('browse.apps.muhaffidh.caption'),
     visual: "url('/images/app-portal/muhaffidh_app_pic.png')",
     iconSrc: '/images/app-portal/muhaffidh_app_icon.png',
     iconAlt: 'Muhaffidh App',
@@ -180,6 +183,7 @@ interface FiltersBarProps {
   onSearchChange: (query: string) => void;
   searchLabel: string;
   searchQuery: string;
+  filters: FilterChip[];
 }
 
 interface AppGridProps {
@@ -190,18 +194,23 @@ interface AppGridProps {
 interface BrowseAppsProps {
   noResultsText: string;
   searchLabel: string;
+  filters: FilterChip[];
+  apps: AppTile[];
+  title: string;
 }
 
 const path = '/app-portal';
-const heroDescription =
-  'Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey.';
 
-const Hero: FC = () => (
+interface HeroProps {
+  title: string;
+  description: string;
+}
+
+const Hero: FC<HeroProps> = ({ title, description }) => (
   <header className={styles.hero}>
     {/* <div className={styles.heroBadge}>Quran Foundation</div> */}
-    {/* eslint-disable-next-line i18next/no-literal-string */}
-    <h1 className={styles.heroTitle}>Discover our Ecosystem of Apps</h1>
-    <p className={styles.heroSubtitle}>{heroDescription}</p>
+    <h1 className={styles.heroTitle}>{title}</h1>
+    <p className={styles.heroSubtitle}>{description}</p>
   </header>
 );
 
@@ -225,26 +234,30 @@ const FeaturedCard: FC<{ app: FeaturedApp }> = ({ app }) => (
           <div className={styles.appTagline}>{app.tagline}</div>
         </div>
       </div>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
       <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
-        Learn more
+        {app.learnMoreText}
       </a>
     </div>
   </article>
 );
 
-const FeaturedApps: FC = () => (
+interface FeaturedAppsProps {
+  title: string;
+  viewAllText: string;
+  apps: FeaturedApp[];
+}
+
+const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps }) => (
   <section className={styles.section}>
     <div className={styles.sectionHeader}>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
-      <h2 className={styles.sectionTitle}>Featured Apps</h2>
-      {/* eslint-disable-next-line i18next/no-literal-string, jsx-a11y/anchor-is-valid */}
+      <h2 className={styles.sectionTitle}>{title}</h2>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a className={styles.sectionLink} href="#">
-        View all
+        {viewAllText}
       </a>
     </div>
     <div className={styles.featuredGrid}>
-      {featuredApps.map((app) => (
+      {apps.map((app) => (
         <FeaturedCard key={app.id} app={app} />
       ))}
     </div>
@@ -272,9 +285,8 @@ const AppTileCard: FC<{ app: AppTile }> = ({ app }) => (
           <div className={styles.appTagline}>{app.caption}</div>
         </div>
       </div>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
       <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
-        Learn more
+        {app.learnMoreText}
       </a>
     </div>
   </article>
@@ -286,6 +298,7 @@ const FiltersBar: FC<FiltersBarProps> = ({
   onSearchChange,
   searchLabel,
   searchQuery,
+  filters,
 }) => (
   <div className={styles.filters}>
     <div className={styles.search}>
@@ -332,14 +345,14 @@ const AppGrid: FC<AppGridProps> = ({ apps, emptyText }) => {
   );
 };
 
-const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
+const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel, filters, apps, title }) => {
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredApps = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    return appTiles.filter((app) => {
+    return apps.filter((app) => {
       const matchesFilter = activeFilter === 'all' ? true : app.categories.includes(activeFilter);
       const matchesSearch =
         normalizedQuery.length === 0 ||
@@ -348,7 +361,7 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
 
       return matchesFilter && matchesSearch;
     });
-  }, [activeFilter, searchQuery]);
+  }, [activeFilter, searchQuery, apps]);
 
   const handleFilterChange = useCallback((filter: FilterValue) => {
     setActiveFilter(filter);
@@ -362,8 +375,7 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
     <section className={styles.sectionAlt}>
       <div className={styles.sectionAltInner}>
         <div className={styles.sectionHeaderAlt}>
-          {/* eslint-disable-next-line i18next/no-literal-string */}
-          <h2 className={styles.sectionTitle}>Browse All Apps</h2>
+          <h2 className={styles.sectionTitle}>{title}</h2>
         </div>
         <FiltersBar
           activeFilter={activeFilter}
@@ -371,6 +383,7 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
           onSearchChange={handleSearchChange}
           searchLabel={searchLabel}
           searchQuery={searchQuery}
+          filters={filters}
         />
         <AppGrid apps={filteredApps} emptyText={noResultsText} />
       </div>
@@ -379,21 +392,46 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel }) => {
 };
 
 const AppPortalPage: NextPage = () => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('app-portal');
+  const { t: tCommon } = useTranslation('common');
+
+  const featuredApps = useMemo(() => {
+    const apps = getFeaturedApps(t);
+    const learnMoreText = t('featured.learn-more');
+    return apps.map((app) => ({ ...app, learnMoreText }));
+  }, [t]);
+
+  const appTiles = useMemo(() => {
+    const apps = getAppTiles(t);
+    const learnMoreText = t('featured.learn-more');
+    return apps.map((app) => ({ ...app, learnMoreText }));
+  }, [t]);
+
+  const filters = useMemo(() => getFilters(t), [t]);
 
   return (
     <>
       <NextSeoWrapper
         title="Quran App Portal"
-        description={heroDescription}
+        description={t('hero.description')}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <PageContainer>
         <main className={styles.page}>
-          <Hero />
-          <FeaturedApps />
-          <BrowseApps noResultsText={t('search.no-results')} searchLabel={t('search.title')} />
+          <Hero title={t('hero.title')} description={t('hero.description')} />
+          <FeaturedApps
+            title={t('featured.title')}
+            viewAllText={t('featured.view-all')}
+            apps={featuredApps}
+          />
+          <BrowseApps
+            noResultsText={tCommon('search.no-results')}
+            searchLabel={tCommon('search.title')}
+            filters={filters}
+            apps={appTiles}
+            title={t('browse.title')}
+          />
         </main>
       </PageContainer>
     </>

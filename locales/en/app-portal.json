@@ -1,0 +1,66 @@
+{
+  "hero": {
+    "title": "Discover our Ecosystem of Apps",
+    "description": "Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey."
+  },
+  "featured": {
+    "title": "Featured Apps",
+    "view-all": "View all",
+    "learn-more": "Learn more",
+    "apps": {
+      "qariah": {
+        "name": "Qariah",
+        "tagline": "Women Quran reciters",
+        "headline": "Finally, a Quran app for our daughters"
+      },
+      "quran-kareem": {
+        "name": "Quran Kareem",
+        "tagline": "Read, listen & reflect",
+        "headline": "Your new gateway to connect with the Book of Allah"
+      },
+      "quran-link": {
+        "name": "Quran Link",
+        "tagline": "Tafsir & study companion",
+        "headline": "Explore 25+ tafsirs and 100+ translations in one place"
+      }
+    }
+  },
+  "browse": {
+    "title": "Browse All Apps",
+    "filters": {
+      "all": "All apps",
+      "study-tools": "Study tools",
+      "reflections": "Reflections",
+      "popular": "Popular",
+      "quran-reader": "Quran Reader",
+      "community": "Community",
+      "hadith-sunnah": "Hadith and Sunnah"
+    },
+    "apps": {
+      "quranreflect": {
+        "title": "QuranReflect",
+        "caption": "Share reflections"
+      },
+      "sunnah": {
+        "title": "Sunnah.com",
+        "caption": "Hadith collection"
+      },
+      "quranmeet": {
+        "title": "QuranMeet",
+        "caption": "Live Quran study sessions"
+      },
+      "readtafsir": {
+        "title": "ReadTafsir",
+        "caption": "Search and compare classical tafsirs"
+      },
+      "tafsirapp": {
+        "title": "Tafsir App",
+        "caption": "Interactive tafsir with multiple sources"
+      },
+      "muhaffidh": {
+        "title": "Muhaffidh",
+        "caption": "Memorize and review Quran efficiently"
+      }
+    }
+  }
+}
