@@ -59,15 +59,7 @@
         "description": "Audio streaming platform and companion mobile apps for recitations.",
         "stack": "Web and mobile apps"
       }
-    },
-    "q-android": "<0>Quran Android</0> - written in Kotlin and Java.",
-    "q-api": "<0>Quran.com API</0> - written in Ruby on Rails.",
-    "q-api-docs": "<0>Quran.com API Docs</0> - Our API docs portal.",
-    "q-audio": "<0>Quranic Audio</0> and <1>Quranic Audio mobile apps</1>",
-    "q-audio-segments": "<0>Quran Audio Segments</0>",
-    "q-ios": "<0>Quran iOS</0> - written in Swift.",
-    "q-next": "<0>Quran.com Frontend</0> - written in Next.js.",
-    "q-v2": "<0>Quran.com</0> - written in Ruby on Rails."
+    }
   },
   "thanks": "We look forward to your contribution!"
 }
