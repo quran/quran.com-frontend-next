@@ -5,6 +5,14 @@
         "caption": "Memorize e revise o Alcorão de forma eficiente.",
         "title": "Muhaffidh"
       },
+      "quran_android": {
+        "caption": "Leia, marque e ouça o Alcorão em dispositivos Android.",
+        "title": "Alcorão para Android"
+      },
+      "quran_ios": {
+        "caption": "Aplicativo de leitura e audição do Alcorão bonito e sem anúncios para iPhone e iPad.",
+        "title": "Alcorão para iOS (por quran.com)"
+      },
       "quranmeet": {
         "caption": "Sessões de estudo do Alcorão ao vivo",
         "title": "Encontro com o Alcorão"
