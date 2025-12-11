@@ -5,6 +5,14 @@
         "caption": "Memorize and review Quran efficiently",
         "title": "Muhaffidh"
       },
+      "quran_android": {
+        "caption": "Read, bookmark, and listen to the Quran on Android devices",
+        "title": "Quran for Android"
+      },
+      "quran_ios": {
+        "caption": "Beautiful, ad-free Quran reading and listening app for iPhone & iPad",
+        "title": "Quran for iOS (by quran.com)"
+      },
       "quranmeet": {
         "caption": "Live Quran study sessions",
         "title": "QuranMeet"

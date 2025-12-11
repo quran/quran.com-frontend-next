@@ -5,6 +5,14 @@
         "caption": "Leer de Koran efficiënt uit je hoofd en bestudeer hem regelmatig.",
         "title": "Muhaffidh"
       },
+      "quran_android": {
+        "caption": "Lees, voeg toe aan bladwijzers en luister naar de Koran op Android-apparaten.",
+        "title": "Koran voor Android"
+      },
+      "quran_ios": {
+        "caption": "Prachtige, reclamevrije app voor het lezen en beluisteren van de Koran voor iPhone en iPad.",
+        "title": "De Koran voor iOS (van quran.com)"
+      },
       "quranmeet": {
         "caption": "Live koranstudiesessies",
         "title": "Koranontmoeting"

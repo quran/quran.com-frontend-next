@@ -5,6 +5,14 @@
         "caption": "Mémoriser et réviser le Coran efficacement",
         "title": "Muhafidh"
       },
+      "quran_android": {
+        "caption": "Lisez, ajoutez à vos favoris et écoutez le Coran sur vos appareils Android.",
+        "title": "Coran pour Android"
+      },
+      "quran_ios": {
+        "caption": "Une application magnifique et sans publicité pour lire et écouter le Coran sur iPhone et iPad.",
+        "title": "Le Coran pour iOS (par quran.com)"
+      },
       "quranmeet": {
         "caption": "séances d'étude du Coran en direct",
         "title": "QuranMeet"
