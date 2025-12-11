@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines, react/no-multi-comp */
 
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
@@ -12,7 +12,10 @@ import styles from './apps-portal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import useDebounce from '@/hooks/useDebounce';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
+import { logButtonClick, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
@@ -54,6 +57,8 @@ interface FilterChip {
   label: string;
   value: FilterValue;
 }
+
+const DEBOUNCE_DELAY = 1000;
 
 const getFeaturedApps = (t: (key: string) => string): FeaturedApp[] => [
   {
@@ -234,7 +239,18 @@ const FeaturedCard: FC<{ app: FeaturedApp }> = ({ app }) => (
           <div className={styles.appTagline}>{app.tagline}</div>
         </div>
       </div>
-      <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
+      <a
+        className={styles.link}
+        href={app.href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => {
+          logButtonClick('app_portal_featured_app_cta', {
+            appId: app.id,
+            appName: app.name,
+          });
+        }}
+      >
         {app.learnMoreText}
       </a>
     </div>
@@ -285,7 +301,19 @@ const AppTileCard: FC<{ app: AppTile }> = ({ app }) => (
           <div className={styles.appTagline}>{app.caption}</div>
         </div>
       </div>
-      <a className={styles.link} href={app.href} target="_blank" rel="noreferrer">
+      <a
+        className={styles.link}
+        href={app.href}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => {
+          logButtonClick('app_portal_app_tile_cta', {
+            appId: app.id,
+            appName: app.title,
+            categories: app.categories,
+          });
+        }}
+      >
         {app.learnMoreText}
       </a>
     </div>
@@ -348,6 +376,11 @@ const AppGrid: FC<AppGridProps> = ({ apps, emptyText }) => {
 const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel, filters, apps, title }) => {
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearchQuery = useDebounce(searchQuery, DEBOUNCE_DELAY);
+
+  useEffect(() => {
+    logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.AppPortal);
+  }, [debouncedSearchQuery]);
 
   const filteredApps = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase();
@@ -363,9 +396,13 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel, filters, 
     });
   }, [activeFilter, searchQuery, apps]);
 
-  const handleFilterChange = useCallback((filter: FilterValue) => {
-    setActiveFilter(filter);
-  }, []);
+  const handleFilterChange = useCallback(
+    (filter: FilterValue) => {
+      logValueChange('app_portal_filter', activeFilter, filter);
+      setActiveFilter(filter);
+    },
+    [activeFilter],
+  );
 
   const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);
