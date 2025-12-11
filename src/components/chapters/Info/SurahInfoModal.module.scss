@@ -11,9 +11,11 @@
 
 .calligraphyContainer {
   max-width: max-content;
-  // a hack to align the calligraphy on the left side
-  /* stylelint-disable-next-line csstools/use-logical */
-  margin-left: -0.875rem;
+
+  // Calligraphy has lot of whitespace on the left side, so we need to move it to the left. we can't add it to rtl because then it will have negative effect on the layout.
+  :global([dir='ltr']) & {
+    transform: translateX(-0.875rem);
+  }
 }
 
 .surahName {

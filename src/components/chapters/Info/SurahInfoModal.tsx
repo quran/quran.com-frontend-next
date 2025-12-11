@@ -6,15 +6,15 @@ import useSWR from 'swr';
 import styles from './SurahInfoModal.module.scss';
 
 import { getChapterInfo } from '@/api';
-import ChapterIcon from '@/components/chapters/ChapterHeader/components/ChapterIcon';
-import { ChapterIconsSize } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import ChapterIconContainer, {
+  ChapterIconsSize,
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import DataContext from '@/contexts/DataContext';
 import Language from '@/types/Language';
 import { makeChapterInfoUrl } from '@/utils/apiPaths';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber } from '@/utils/locale';
-import ChapterInfo from 'types/ChapterInfo';
 
 interface SurahInfoModalProps {
   chapterId: string;
@@ -49,7 +49,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
 
   if (!chapter) return null;
 
-  const chapterInfo: ChapterInfo | undefined = chapterInfoResponse?.chapterInfo;
+  const chapterInfo = chapterInfoResponse?.chapterInfo;
 
   return (
     <div>
@@ -69,12 +69,16 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
         <>
           <div className={styles.headerContainer}>
             <div className={styles.calligraphyContainer}>
-              <ChapterIcon chapterId={chapterId} size={ChapterIconsSize.XMega} />
+              <ChapterIconContainer
+                chapterId={chapterId}
+                size={ChapterIconsSize.XMega}
+                hasSurahPrefix={false}
+              />
             </div>
 
             {!isArabicOrUrdu && (
               <h2 className={styles.surahName} data-testid="surah-name">
-                {t('common:surah')} {chapter?.transliteratedName}
+                {t('common:surah')} {chapter.transliteratedName}
               </h2>
             )}
 
