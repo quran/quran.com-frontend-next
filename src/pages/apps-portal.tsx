@@ -7,7 +7,7 @@ import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './app-portal.module.scss';
+import styles from './apps-portal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
