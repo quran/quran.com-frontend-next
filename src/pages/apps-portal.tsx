@@ -268,7 +268,7 @@ const FeaturedApps: FC<FeaturedAppsProps> = ({ title, viewAllText, apps }) => (
     <div className={styles.sectionHeader}>
       <h2 className={styles.sectionTitle}>{title}</h2>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a className={styles.sectionLink} href="#">
+      <a className={styles.sectionLink} href="#browse-apps">
         {viewAllText}
       </a>
     </div>
@@ -409,7 +409,7 @@ const BrowseApps: FC<BrowseAppsProps> = ({ noResultsText, searchLabel, filters, 
   }, []);
 
   return (
-    <section className={styles.sectionAlt}>
+    <section className={styles.sectionAlt} id="browse-apps">
       <div className={styles.sectionAltInner}>
         <div className={styles.sectionHeaderAlt}>
           <h2 className={styles.sectionTitle}>{title}</h2>

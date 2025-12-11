@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './contentPage.module.scss';
+import styles from '../contentPage.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
 import AppPortalSection from '@/components/AppPortalSection';
