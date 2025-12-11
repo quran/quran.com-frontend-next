@@ -5,6 +5,14 @@
         "caption": "Kukariri na kuhakiki Quran kwa ufanisi",
         "title": "Muhafidh"
       },
+      "quran_android": {
+        "caption": "Soma, alamisho na usikilize Kurani kwenye vifaa vya Android",
+        "title": "Quran kwa Android"
+      },
+      "quran_ios": {
+        "caption": "Programu nzuri ya kusoma na kusikiliza Kurani bila matangazo kwa iPhone na iPad",
+        "title": "Quran kwa iOS (na quran.com)"
+      },
       "quranmeet": {
         "caption": "Vipindi vya moja kwa moja vya masomo ya Kurani",
         "title": "QuranKutana"

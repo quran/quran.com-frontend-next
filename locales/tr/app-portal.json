@@ -5,6 +5,14 @@
         "caption": "Kur'an'ı etkili bir şekilde ezberleyin ve tekrar edin.",
         "title": "Muhaffid"
       },
+      "quran_android": {
+        "caption": "Android cihazlarda Kur'an'ı okuyun, yer imlerine ekleyin ve dinleyin.",
+        "title": "Android için Kuran"
+      },
+      "quran_ios": {
+        "caption": "iPhone ve iPad için güzel, reklamsız Kur'an okuma ve dinleme uygulaması.",
+        "title": "iOS için Kuran (quran.com tarafından)"
+      },
       "quranmeet": {
         "caption": "Canlı Kur'an öğrenimi oturumları",
         "title": "Kuran Buluşması"
