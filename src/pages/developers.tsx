@@ -9,7 +9,6 @@ import styles from './contentPage.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
 import AppPortalSection from '@/components/AppPortalSection';
-import CareersSection from '@/components/CareersSection/CareersSection';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -21,6 +20,13 @@ import withSsrRedux from '@/utils/withSsrRedux';
 const path = '/developers';
 const DevelopersPage: NextPage = () => {
   const { t, lang } = useTranslation('developers');
+  const projects = [
+    { key: 'q-next', href: 'https://github.com/quran/quran.com-frontend-next' },
+    { key: 'q-api', href: 'https://github.com/quran/quran.com-api' },
+    { key: 'q-android', href: 'https://github.com/quran/quran_android' },
+    { key: 'q-ios', href: 'https://github.com/quran/quran-ios' },
+    { key: 'q-audio', href: 'https://github.com/quran/audio.quran.com' },
+  ] as const;
   return (
     <>
       <NextSeoWrapper
@@ -30,120 +36,98 @@ const DevelopersPage: NextPage = () => {
       />
       <PageContainer>
         <div className={styles.contentPage}>
-          <h1>{t('careers.career')}</h1>
-          <CareersSection />
-          <h1>{t('header')}</h1>
-          <CommunitySection />
-          <h1>{t('labs')}</h1>
-          <LabsSection />
-          <h1>{t('app-portal.heading')}</h1>
-          <AppPortalSection />
-          <h1>{t('api-docs.title')}</h1>
-          <ApiDocsSection />
-          <p>{t('main-desc')}</p>
-          <p>
-            <Trans
-              i18nKey="developers:projects.all"
-              components={[
-                <a key={0} href="https://github.com/quran" target="_blank" rel="noreferrer" />,
-              ]}
-            />
-          </p>
-          <div>
+          <div className={styles.pageHero}>
+            <p className={styles.kicker}>{t('common:developers')}</p>
+            <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
+            <p className={styles.heroSubtitle}>{t('hero.subtitle')}</p>
+            <div className={styles.heroFooter}>{t('hero.note')}</div>
+          </div>
+
+          <div className={styles.sectionGrid}>
+            <section className={styles.featureCard}>
+              <div className={styles.cardHeading}>
+                <span className={styles.pill}>{t('labs')}</span>
+                <p className={styles.cardLead}>{t('labs-description')}</p>
+              </div>
+              <LabsSection variant="inline" />
+            </section>
+
+            <section className={styles.featureCard}>
+              <div className={styles.cardHeading}>
+                <span className={styles.pill}>{t('app-portal.heading')}</span>
+                <p className={styles.cardLead}>{t('app-portal.description')}</p>
+              </div>
+              <AppPortalSection variant="inline" />
+            </section>
+
+            <section className={styles.featureCard}>
+              <div className={styles.cardHeading}>
+                <span className={styles.pill}>{t('api-docs.title')}</span>
+                <p className={styles.cardLead}>{t('api-docs.sub-header')}</p>
+              </div>
+              <ApiDocsSection variant="inline" />
+            </section>
+          </div>
+
+          <section className={styles.supportSection}>
+            <h2 className={styles.sectionTitle}>{t('header')}</h2>
+            <div className={styles.featureCard}>
+              <CommunitySection variant="inline" />
+            </div>
+          </section>
+
+          <section className={styles.projectsSection}>
+            <h2 className={styles.sectionTitle}>{t('common:our-projects')}</h2>
+            <p className={styles.sectionSubtitle}>{t('projects.lead')}</p>
+            <div className={styles.projectGrid}>
+              {projects.map((project) => {
+                const { key, href } = project;
+                const nameKey = `projects.items.${key}.name` as const;
+                const descriptionKey = `projects.items.${key}.description` as const;
+                const stackKey = `projects.items.${key}.stack` as const;
+                return (
+                  <div key={key} className={styles.projectCard}>
+                    <div className={styles.projectHeader}>
+                      <a
+                        href={href}
+                        className={styles.projectName}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t(nameKey)}
+                      </a>
+                    </div>
+                    <p className={styles.projectDescription}>{t(descriptionKey)}</p>
+                    <p className={styles.projectStack}>{t(stackKey)}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className={styles.callout}>
             <p>
               <Trans
-                i18nKey="developers:projects.q-next"
+                i18nKey="developers:issues-guide"
                 components={[
                   <a
                     key={0}
-                    href="https://github.com/quran/quran.com-frontend-next"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-api"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran.com-api"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-android"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran_android"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-ios"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran-ios"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-audio"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/audio.quran.com"
+                    href="https://github.com/quran/quran.com-frontend-next/pulls"
                     target="_blank"
                     rel="noreferrer"
                   />,
                   <a
                     key={1}
-                    href="https://github.com/quran/quranicaudio-app"
+                    href="https://github.com/quran/quran.com-frontend-next/pulls"
                     target="_blank"
                     rel="noreferrer"
                   />,
                 ]}
               />
             </p>
-          </div>
-          <p>
-            <Trans
-              i18nKey="developers:issues-guide"
-              components={[
-                <a
-                  key={0}
-                  href="https://github.com/quran/quran.com-frontend-next/pulls"
-                  target="_blank"
-                  rel="noreferrer"
-                />,
-                <a
-                  key={1}
-                  href="https://github.com/quran/quran.com-frontend-next/pulls"
-                  target="_blank"
-                  rel="noreferrer"
-                />,
-              ]}
-            />
-          </p>
-          <p>{t('issues-cta')}</p>
-          <p>{t('thanks')}</p>
-          <p>{t('footer')}</p>
+            <p className={styles.sectionSubtitle}>{t('issues-cta')}</p>
+            <p className={styles.footerNote}>{t('footer')}</p>
+          </section>
         </div>
       </PageContainer>
     </>
