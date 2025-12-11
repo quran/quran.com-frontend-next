@@ -16,7 +16,6 @@ import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPrefe
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
-import shouldSyncChapterPageForDataType from '@/utils/quranReader';
 import { VersesResponse } from 'types/ApiResponses';
 
 type QuranReaderProps = {
@@ -37,8 +36,7 @@ const QuranReader = ({
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
 
-  const shouldSyncChapterPage = shouldSyncChapterPageForDataType(quranReaderDataType);
-  useSyncChapterPage(initialData, shouldSyncChapterPage);
+  useSyncChapterPage(initialData);
 
   return (
     <>

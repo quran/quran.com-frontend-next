@@ -15,7 +15,10 @@ test(
   async ({ page }) => {
     // Click on the Sign In Button and verify it goes to the /login page
     const signInButton = page.getByLabel('Sign in');
-    await signInButton.click();
+    await expect(signInButton).toHaveCount(2);
+    await expect(signInButton.nth(0)).toBeVisible();
+    await expect(signInButton.nth(1)).toBeVisible();
+    await signInButton.nth(0).click();
 
     // Make sure we are redirected to the /login page
     await expect(page).toHaveURL(/\/login/);

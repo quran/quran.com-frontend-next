@@ -1,3 +1,4 @@
+@use '../_tooltip-info.mixin' as *;
 .trigger {
   all: unset;
   display: inline-block;
@@ -52,4 +53,7 @@
   & > span {
     fill: var(--color-error-medium);
   }
+}
+.info {
+  @include infoTooltipStyles;
 }

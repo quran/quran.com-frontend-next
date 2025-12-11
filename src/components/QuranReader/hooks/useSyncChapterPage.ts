@@ -1,75 +1,55 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import useFetchPagesLookup from './useFetchPagesLookup';
-
 import DataContext from '@/contexts/DataContext';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import {
   selectLastReadVerseKey,
   setLastReadVerse,
 } from '@/redux/slices/QuranReader/readingTracker';
-import {
-  selectIsUsingDefaultFont,
-  selectQuranReaderStyles,
-} from '@/redux/slices/QuranReader/styles';
-import { QuranReaderDataType } from '@/types/QuranReader';
-import { useGetFirstPageNumberForChapter } from '@/utils/chapter-pages';
 import { VersesResponse } from 'types/ApiResponses';
 
-const FIRST_VERSE_SUFFIX = ':1';
-
 /**
- * A hook that synchronizes the chapter and page in the lastReadVerse Redux state.
- * When the chapter changes, it updates the page to the first page of that chapter. This must
- * remain disabled for Page view so we do not override the user's explicit page navigation.
+ * A hook that sets the initial page state when navigating to any content type
+ * (Surah, Verse, Juz, Page, Hizb, Rub, Range).
  *
- * @param {VersesResponse} [initialData] - Optional external chapters data to use instead of context
- * @param {boolean} [shouldSync=true] - Whether the synchronization should run.
+ * Uses initialData.verses[0] directly which contains all needed data:
+ * - verseKey, chapterId, pageNumber, hizbNumber
+ *
+ * This works for ALL navigation scenarios (49 combinations × 2 modes = 98 total)
+ * and updates IMMEDIATELY on navigation (no scrolling required).
+ *
+ * Uses useBrowserLayoutEffect to ensure state is set synchronously before paint,
+ * so the correct page number is displayed immediately.
+ *
+ * @param {VersesResponse} initialData - The initial verses data from the page
  */
-const useSyncChapterPage = (initialData?: VersesResponse, shouldSync = true): void => {
+const useSyncChapterPage = (initialData: VersesResponse): void => {
   const dispatch = useDispatch();
-  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const chaptersData = useContext(DataContext);
+  // const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  // const canLookupPages = shouldSync && !!lastReadVerseKey?.chapterId;
 
-  const canLookupPages = shouldSync && !!lastReadVerseKey?.chapterId;
-  const { data: pagesLookupData } = useFetchPagesLookup(
-    canLookupPages ? String(lastReadVerseKey.chapterId) : null,
-    QuranReaderDataType.Chapter,
-    initialData,
-    quranReaderStyles,
-    isUsingDefaultFont,
-  );
+  const firstVerse = initialData?.verses?.[0];
+  // Use verseKey as the dependency to detect navigation changes
+  const firstVerseKey = firstVerse?.verseKey;
 
-  const firstPageNumber = useGetFirstPageNumberForChapter(
-    canLookupPages ? pagesLookupData : undefined,
-  );
+  useBrowserLayoutEffect(() => {
+    if (!firstVerse) return;
 
-  useEffect(() => {
-    if (!shouldSync || !firstPageNumber || !lastReadVerseKey?.chapterId) {
-      return;
-    }
-
-    const isFirstVerseOfChapter = lastReadVerseKey?.verseKey?.endsWith(FIRST_VERSE_SUFFIX);
-    const isPageMissing = !lastReadVerseKey?.page;
-
-    if (!isPageMissing && !isFirstVerseOfChapter) {
-      return;
-    }
-    if (lastReadVerseKey.page !== firstPageNumber) {
-      dispatch(
-        setLastReadVerse({
-          lastReadVerse: {
-            ...lastReadVerseKey,
-            page: firstPageNumber,
-          },
-          chaptersData,
-        }),
-      );
-    }
-  }, [shouldSync, firstPageNumber, lastReadVerseKey, chaptersData, dispatch]);
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          verseKey: firstVerse.verseKey,
+          chapterId: String(firstVerse.chapterId),
+          page: String(firstVerse.pageNumber),
+          hizb: String(firstVerse.hizbNumber),
+        },
+        chaptersData,
+      }),
+    );
+  }, [firstVerseKey, chaptersData, dispatch, firstVerse]);
 };
 
 export default useSyncChapterPage;

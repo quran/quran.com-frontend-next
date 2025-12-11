@@ -1,0 +1,67 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Kukariri na kuhakiki Quran kwa ufanisi",
+        "title": "Muhafidh"
+      },
+      "quranmeet": {
+        "caption": "Vipindi vya moja kwa moja vya masomo ya Kurani",
+        "title": "QuranKutana"
+      },
+      "quranreflect": {
+        "caption": "Shiriki tafakari",
+        "title": "QuranTafakari"
+      },
+      "readtafsir": {
+        "caption": "Tafuta na ulinganishe tafsir za kitambo",
+        "title": "SomaTafsir"
+      },
+      "sunnah": {
+        "caption": "Mkusanyiko wa Hadith",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir inayoingiliana na vyanzo vingi",
+        "title": "Programu ya Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Programu zote",
+      "community": "Jumuiya",
+      "hadith-sunnah": "Hadiyth na Sunnah",
+      "popular": "Maarufu",
+      "quran-reader": "Msomaji wa Quran",
+      "reflections": "Tafakari",
+      "study-tools": "Zana za kujifunzia"
+    },
+    "title": "Vinjari Programu Zote"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Hatimaye, programu ya Kurani kwa binti zetu",
+        "name": "Qariah",
+        "tagline": "Wanawake wasomaji wa Quran"
+      },
+      "quran-kareem": {
+        "headline": "Lango lako jipya la kuunganishwa na Kitabu cha Mwenyezi Mungu",
+        "name": "Quran Kareem",
+        "tagline": "Soma, sikiliza na tafakari"
+      },
+      "quran-link": {
+        "headline": "Gundua tafsir 25+ na tafsiri 100+ katika sehemu moja",
+        "name": "Kiungo cha Quran",
+        "tagline": "Tafsir & mwenzi wa masomo"
+      }
+    },
+    "learn-more": "Jifunze zaidi",
+    "title": "Programu Zilizoangaziwa",
+    "view-all": "Tazama yote"
+  },
+  "hero": {
+    "description": "Gundua mkusanyiko uliochaguliwa wa programu za Kiislamu zilizojengwa kwa msingi wa Quran. Kuanzia zana za kujifunzia hadi huduma za maombi, pata programu zinazoboresha safari yako ya kiroho.",
+    "title": "Gundua Mfumo wetu wa Ikolojia wa Programu"
+  },
+  "quran-apps-portal": "Quran Apps Portal"
+}
