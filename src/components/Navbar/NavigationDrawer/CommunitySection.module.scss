@@ -16,7 +16,12 @@
 }
 
 .flow > div {
-  margin-block-end: var(--spacing-medium);
+  margin-block-end: var(--spacing-small);
+  line-height: 1.6;
+
+  &:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .platformLogoBackground {
@@ -24,7 +29,7 @@
   z-index: -1;
   inset-inline-end: 0;
 
-  [data-theme="dark"] & {
+  [data-theme='dark'] & {
     opacity: var(--opacity-10);
   }
 
@@ -36,4 +41,11 @@
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  margin-block-start: var(--spacing-medium);
 }
