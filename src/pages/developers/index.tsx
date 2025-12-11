@@ -9,6 +9,7 @@ import styles from './developers.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
 import AppPortalSection from '@/components/AppPortalSection';
+import MTFBanner from '@/components/MuslimTechFestBanner';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -37,6 +38,7 @@ const DevelopersPage: NextPage = () => {
       />
       <PageContainer>
         <div className={commonStyles.contentPage}>
+          <MTFBanner />
           <div className={styles.pageHero}>
             <p className={styles.kicker}>{t('common:developers')}</p>
             <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
