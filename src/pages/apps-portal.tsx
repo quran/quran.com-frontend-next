@@ -105,6 +105,26 @@ const getFilters = (t: (key: string) => string): FilterChip[] => [
 
 const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
+    id: 'quran_android',
+    title: t('browse.apps.quran_android.title'),
+    caption: t('browse.apps.quran_android.caption'),
+    visual: "url('/images/app-portal/qdc-android.png')",
+    iconSrc: '/images/app-portal/qdc-android-logo.webp',
+    iconAlt: 'Quran for Android',
+    href: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran',
+    categories: ['quran-reader', 'community', 'popular', 'study-tools'],
+  },
+  {
+    id: 'quran_ios',
+    title: t('browse.apps.quran_ios.title'),
+    caption: t('browse.apps.quran_ios.caption'),
+    visual: "url('/images/app-portal/qdc-ios.png')",
+    iconSrc: '/images/app-portal/qdc-ios-logo.webp',
+    iconAlt: 'Quran for iOS',
+    href: 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
+    categories: ['quran-reader', 'community', 'popular', 'study-tools'],
+  },
+  {
     id: 'quranreflect',
     title: t('browse.apps.quranreflect.title'),
     caption: t('browse.apps.quranreflect.caption'),
