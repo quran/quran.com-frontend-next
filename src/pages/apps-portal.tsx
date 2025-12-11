@@ -449,7 +449,7 @@ const AppPortalPage: NextPage = () => {
   return (
     <>
       <NextSeoWrapper
-        title="Quran App Portal"
+        title={t('quran-apps-portal')}
         description={t('hero.description')}
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}

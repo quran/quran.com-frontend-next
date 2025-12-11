@@ -41,24 +41,23 @@ const DevelopersPage: NextPage = () => {
             <p className={styles.kicker}>{t('common:developers')}</p>
             <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
             <p className={styles.heroSubtitle}>{t('hero.subtitle')}</p>
-            <div className={styles.heroFooter}>{t('hero.note')}</div>
           </div>
 
           <div className={styles.sectionGrid}>
-            <section className={styles.featureCard}>
-              <div className={styles.cardHeading}>
-                <span className={styles.pill}>{t('labs')}</span>
-                <p className={styles.cardLead}>{t('labs-description')}</p>
-              </div>
-              <LabsSection variant="inline" />
-            </section>
-
             <section className={styles.featureCard}>
               <div className={styles.cardHeading}>
                 <span className={styles.pill}>{t('app-portal.heading')}</span>
                 <p className={styles.cardLead}>{t('app-portal.description')}</p>
               </div>
               <AppPortalSection variant="inline" />
+            </section>
+
+            <section className={styles.featureCard}>
+              <div className={styles.cardHeading}>
+                <span className={styles.pill}>{t('labs')}</span>
+                <p className={styles.cardLead}>{t('labs-description')}</p>
+              </div>
+              <LabsSection variant="inline" />
             </section>
 
             <section className={styles.featureCard}>

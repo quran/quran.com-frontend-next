@@ -1,8 +1,7 @@
 {
   "hero": {
     "title": "Build with Quran.com",
-    "subtitle": "Resources, tools, and guidance for developers building Quran experiences.",
-    "note": "Thank you for partnering with us to build purposeful Quran products."
+    "subtitle": "Resources, tools, and guidance for developers building Quran experiences."
   },
   "api-docs": {
     "cta": "View API Docs",
@@ -24,11 +23,11 @@
   "labs-description": "Discover experimental features and upcoming innovations. Share your ideas",
   "main-desc": "Explore the programs, tools, and documentation designed to help you extend the Quran.com ecosystem.",
   "app-portal": {
-    "heading": "Quran App Portal",
+    "heading": "Quran Apps Portal",
     "tagline": "Showcase your Quran apps",
     "description": "Explore the latest community-built experiences and see what is possible with our platform.",
-    "oauth-pitch": "Ship with Quran Foundation OAuth2 for seamless sign-in and submit your app to be featured on Quran App Portal.",
-    "cta-explore": "Visit Quran App Portal",
+    "oauth-pitch": "Ship with Quran Foundation OAuth2 for seamless sign-in and submit your app to be featured on Quran Apps Portal.",
+    "cta-explore": "Visit Quran Apps Portal",
     "cta-oauth": "See OAuth2 guide"
   },
   "projects": {
