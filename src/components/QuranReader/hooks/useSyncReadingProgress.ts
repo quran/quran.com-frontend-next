@@ -94,6 +94,11 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     (element: Element) => {
       const lastReadVerse = getObservedVersePayload(element);
 
+      // Guard against elements without proper data attributes
+      if (!lastReadVerse.verseKey) {
+        return;
+      }
+
       dispatch(
         setLastReadVerse({
           lastReadVerse,
