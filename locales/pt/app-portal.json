@@ -1,0 +1,67 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Memorize e revise o Alcorão de forma eficiente.",
+        "title": "Muhaffidh"
+      },
+      "quranmeet": {
+        "caption": "Sessões de estudo do Alcorão ao vivo",
+        "title": "Encontro com o Alcorão"
+      },
+      "quranreflect": {
+        "caption": "Compartilhe suas reflexões",
+        "title": "Refletir sobre o Alcorão"
+      },
+      "readtafsir": {
+        "caption": "Pesquise e compare tafsirs clássicos",
+        "title": "Leia Tafsir"
+      },
+      "sunnah": {
+        "caption": "Coleção de Hadiths",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir interativo com múltiplas fontes",
+        "title": "Aplicativo Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Todos os aplicativos",
+      "community": "Comunidade",
+      "hadith-sunnah": "Hadith e Sunnah",
+      "popular": "Popular",
+      "quran-reader": "Leitor do Alcorão",
+      "reflections": "Reflexões",
+      "study-tools": "Ferramentas de estudo"
+    },
+    "title": "Veja todos os aplicativos"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Finalmente, um aplicativo do Alcorão para nossas filhas!",
+        "name": "Qariah",
+        "tagline": "Mulheres recitadoras do Alcorão"
+      },
+      "quran-kareem": {
+        "headline": "Sua nova porta de entrada para se conectar com o Livro de Allah.",
+        "name": "Alcorão Sagrado",
+        "tagline": "Leia, ouça e reflita."
+      },
+      "quran-link": {
+        "headline": "Explore mais de 25 tafsirs e mais de 100 traduções em um só lugar.",
+        "name": "Link do Alcorão",
+        "tagline": "Tafsir e guia de estudo"
+      }
+    },
+    "learn-more": "Saber mais",
+    "title": "Aplicativos em destaque",
+    "view-all": "Ver tudo"
+  },
+  "hero": {
+    "description": "Explore uma coleção selecionada de aplicativos islâmicos desenvolvidos com a plataforma Quran.foundation. De ferramentas de estudo a recursos para oração, encontre aplicativos que aprimorem sua jornada espiritual.",
+    "title": "Descubra nosso ecossistema de aplicativos"
+  },
+  "quran-apps-portal": "Portal de Aplicativos do Alcorão"
+}
