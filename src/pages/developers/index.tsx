@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from '../contentPage.module.scss';
+import styles from './developers.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
 import AppPortalSection from '@/components/AppPortalSection';
@@ -13,6 +13,7 @@ import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySect
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import commonStyles from '@/pages/contentPage.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -35,7 +36,7 @@ const DevelopersPage: NextPage = () => {
         languageAlternates={getLanguageAlternates(path)}
       />
       <PageContainer>
-        <div className={styles.contentPage}>
+        <div className={commonStyles.contentPage}>
           <div className={styles.pageHero}>
             <p className={styles.kicker}>{t('common:developers')}</p>
             <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
