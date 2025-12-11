@@ -5,6 +5,14 @@
     "sub-header": "Unganisha data ya Quran.com kwenye programu zako na API yetu ya kina",
     "title": "Nyaraka za API"
   },
+  "app-portal": {
+    "cta-explore": "Tembelea Tovuti ya Programu za Kurani",
+    "cta-oauth": "Tazama mwongozo wa OAuth2",
+    "description": "Gundua matukio ya hivi punde yaliyoundwa na jumuiya na uone kinachowezekana na jukwaa letu.",
+    "heading": "Quran Apps Portal",
+    "oauth-pitch": "Safisha ukitumia Quran Foundation OAuth2 ili uweze kuingia bila matatizo na uwasilishe programu yako ili iangaziwa kwenye Quran Apps Portal.",
+    "tagline": "Onyesha programu zako za Kurani"
+  },
   "careers": {
     "career": "Fursa za Kazi",
     "cta": "Tazama vyeo vya kazi",
@@ -12,6 +20,10 @@
   },
   "footer": "- Timu ya Quran.com",
   "header": "Msaada wa Usanidi",
+  "hero": {
+    "subtitle": "Nyenzo, zana, na mwongozo kwa wasanidi wanaojenga tajriba ya Kurani.",
+    "title": "Jenga kwa Quran.com"
+  },
   "issues-cta": "Iwapo una maswali yoyote au unataka kuwasiliana na wasimamizi, andika tu hoja lako. Tutakujibu haraka tuwezavyo inshaAllah.",
   "issues-guide": "Kwa kawaida sisi hutumia <0>Miradi ya Github</0> kama chanzo cha kazi inayofuata, nini kinakuja na ni hitilafu zipi zipo zinazohitaji kutatuliwa. Kwa mfano <1>url hii</1> ina orodha ya hitilafu, mambo tunayohitaji usaidizi, na vipengele vijavyo.",
   "labs": "Maabara",
@@ -20,6 +32,34 @@
   "main-desc": "Asante kwa nia yako ya kutusaidia kukuza Quran.com na miradi yake. Tunafurahi kufanya kazi na wewe!",
   "projects": {
     "all": "Tuna idadi ya miradi iliyopangishwa kwenye Github. Unaweza kupata zote <0>hapa</0>. Lakini kutaja tu kwa muhtasari:",
+    "items": {
+      "q-android": {
+        "description": "Uzoefu asilia wa Android mushaf na kicheza sauti kwa simu na kompyuta kibao.",
+        "name": "Quran Android",
+        "stack": "Kotlin na Java"
+      },
+      "q-api": {
+        "description": "Ruby on Rails inaunga mkono kwamba inawezesha data ya Kurani, utafutaji na tafsiri.",
+        "name": "Quran.com API",
+        "stack": "Reli, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Mfumo wa utiririshaji wa sauti na programu za simu za mkononi za kukariri.",
+        "name": "Sauti ya Kurani",
+        "stack": "Programu za wavuti na simu"
+      },
+      "q-ios": {
+        "description": "Msomaji wa Quran mwenye msingi wa Swift mwenye alamisho, visomo, na usaidizi wa nje ya mtandao.",
+        "name": "Quran iOS",
+        "stack": "Mwepesi"
+      },
+      "q-next": {
+        "description": "Uzoefu wa wavuti wa Next.js wa kusoma, kutafuta, na kusikiliza Quran.",
+        "name": "Quran.com Frontend",
+        "stack": "Imejengwa kwa TypeScript na Next.js"
+      }
+    },
+    "lead": "Miradi ya programu huria inayodumishwa na timu na jumuiya ya Quran.com.",
     "q-android": "<0>Quran Android</0> - imeandikwa kupitia Kotlin na Java.",
     "q-api": "<0>Quran.com API</0> - imeandikwa kupitia Ruby on Rails.",
     "q-api-docs": "<0>Quran.com API Docs</0> - Our API docs portal",

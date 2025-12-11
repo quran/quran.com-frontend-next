@@ -1,0 +1,67 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Kur'an'ı etkili bir şekilde ezberleyin ve tekrar edin.",
+        "title": "Muhaffid"
+      },
+      "quranmeet": {
+        "caption": "Canlı Kur'an öğrenimi oturumları",
+        "title": "Kuran Buluşması"
+      },
+      "quranreflect": {
+        "caption": "Düşüncelerinizi paylaşın",
+        "title": "Kur'anDüşün"
+      },
+      "readtafsir": {
+        "caption": "Klasik tefsirleri araştırın ve karşılaştırın.",
+        "title": "ReadTafsir"
+      },
+      "sunnah": {
+        "caption": "Hadis derlemesi",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Çoklu kaynaklarla etkileşimli tefsir",
+        "title": "Tefsir Uygulaması"
+      }
+    },
+    "filters": {
+      "all": "Tüm uygulamalar",
+      "community": "Toplum",
+      "hadith-sunnah": "Hadis ve Sünnet",
+      "popular": "Popüler",
+      "quran-reader": "Kur'an Okuyucusu",
+      "reflections": "Yansımalar",
+      "study-tools": "Çalışma araçları"
+    },
+    "title": "Tüm Uygulamalara Gözat"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Sonunda kızlarımız için bir Kur'an uygulaması!",
+        "name": "Kariah",
+        "tagline": "Kur'an okuyan kadınlar"
+      },
+      "quran-kareem": {
+        "headline": "Allah'ın Kitabı ile bağlantı kurmanın yeni kapısı.",
+        "name": "Kuran-ı Kerim",
+        "tagline": "Okuyun, dinleyin ve düşünün."
+      },
+      "quran-link": {
+        "headline": "25'ten fazla tefsir ve 100'den fazla tercümeyi tek bir yerde keşfedin.",
+        "name": "Kuran Bağlantısı",
+        "tagline": "Tefsir ve çalışma arkadaşı"
+      }
+    },
+    "learn-more": "Daha fazla bilgi edin",
+    "title": "Öne Çıkan Uygulamalar",
+    "view-all": "Tümünü görüntüle"
+  },
+  "hero": {
+    "description": "Quran.foundation ile geliştirilmiş, özenle seçilmiş İslami uygulamalar koleksiyonunu keşfedin. Çalışma araçlarından dua yardımcılarına kadar, manevi yolculuğunuzu zenginleştirecek uygulamaları bulun.",
+    "title": "Uygulama Ekosistemimizi Keşfedin"
+  },
+  "quran-apps-portal": "Kuran Uygulamaları Portalı"
+}
