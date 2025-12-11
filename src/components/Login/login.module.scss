@@ -224,7 +224,7 @@ $container-width: 370px;
 }
 
 .smallMarginTop {
-  margin-top: var(--spacing-small-px);
+  margin-block-start: var(--spacing-small-px);
 }
 
 .inputContainer {
@@ -332,8 +332,8 @@ $container-width: 370px;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-xsmall);
-  margin-top: var(--spacing-xxlarge-px);
-  margin-bottom: var(--spacing-large-px);
+  margin-block-start: var(--spacing-xxlarge-px);
+  margin-block-end: var(--spacing-large-px);
   width: 100%;
 }
 
