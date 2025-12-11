@@ -5,6 +5,14 @@
     "sub-header": "Integre os dados do Quran.com em seus aplicativos com nossa API abrangente",
     "title": "Documentação da API"
   },
+  "app-portal": {
+    "cta-explore": "Visite o Portal de Aplicativos do Alcorão",
+    "cta-oauth": "Consulte o guia do OAuth2.",
+    "description": "Explore as experiências mais recentes criadas pela comunidade e veja o que é possível fazer com a nossa plataforma.",
+    "heading": "Portal de Aplicativos do Alcorão",
+    "oauth-pitch": "Integre o sistema com o OAuth2 da Fundação Alcorão para um login simplificado e envie seu aplicativo para ser apresentado no Portal de Aplicativos do Alcorão.",
+    "tagline": "Mostre seus aplicativos do Alcorão"
+  },
   "careers": {
     "career": "Oportunidades de Carreira",
     "cta": "Ver Posições",
@@ -12,6 +20,10 @@
   },
   "footer": "- equipe Quran.com",
   "header": "Ajuda de desenvolvimento",
+  "hero": {
+    "subtitle": "Recursos, ferramentas e orientações para desenvolvedores que criam experiências com o Alcorão.",
+    "title": "Construa com Quran.com"
+  },
   "issues-cta": "Se você tiver alguma dúvida ou quiser entrar em contato com os mantenedores, escreva um problema! Entraremos em contato com você assim que pudermos, inshAllah.",
   "issues-guide": "Normalmente usamos <0> projetos Github </0> como a fonte para o que trabalhar a seguir, o que está por vir e quais bugs existem que precisam ser resolvidos. Por exemplo, <1> este url </1> contém uma lista de bugs, coisas para as quais precisamos de ajuda e recursos futuros.",
   "labs": "Laboratórios",
@@ -20,6 +32,34 @@
   "main-desc": "Asalamu Alykom, Em primeiro lugar, muito obrigado pelo seu interesse em nos ajudar a desenvolver o Quran.com e seus projetos. Estamos muito animados para trabalhar com você!",
   "projects": {
     "all": "Temos vários projetos hospedados no Github. Você pode encontrá-los todos <0> aqui </0> . Mas para resumi-los:",
+    "items": {
+      "q-android": {
+        "description": "Experiência nativa de reprodutor de áudio e mushaf para Android em celulares e tablets.",
+        "name": "Alcorão para Android",
+        "stack": "Kotlin e Java"
+      },
+      "q-api": {
+        "description": "Backend em Ruby on Rails que alimenta os dados, a busca e as traduções do Alcorão.",
+        "name": "API do Quran.com",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Plataforma de streaming de áudio e aplicativos móveis complementares para recitações.",
+        "name": "Áudio do Alcorão",
+        "stack": "Aplicativos web e móveis"
+      },
+      "q-ios": {
+        "description": "Leitor do Alcorão baseado em Swift com marcadores, recitações e suporte offline.",
+        "name": "Alcorão iOS",
+        "stack": "Rápido"
+      },
+      "q-next": {
+        "description": "Experiência web Next.js para leitura, pesquisa e audição do Alcorão.",
+        "name": "Front-end do Quran.com",
+        "stack": "Construído com TypeScript e Next.js"
+      }
+    },
+    "lead": "Projetos de código aberto mantidos pela equipe e comunidade do Quran.com.",
     "q-android": "<0> Quran Android </0>",
     "q-api": "<0> API Quran.com </0> - escrita em Ruby on Rails.",
     "q-api-docs": "<0> Quran.com API Docs </0> - Nosso portal de documentos da API.",
