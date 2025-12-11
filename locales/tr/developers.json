@@ -5,6 +5,14 @@
     "sub-header": "Kapsamlı API'mizle Quran.com verilerini uygulamalarınıza entegre edin",
     "title": "API Belgeleri"
   },
+  "app-portal": {
+    "cta-explore": "Kuran Uygulamaları Portalı'nı ziyaret edin.",
+    "cta-oauth": "OAuth2 kılavuzuna bakın.",
+    "description": "Topluluk tarafından geliştirilen en yeni deneyimleri keşfedin ve platformumuzla nelerin mümkün olduğunu görün.",
+    "heading": "Kuran Uygulamaları Portalı",
+    "oauth-pitch": "Sorunsuz giriş için Kuran Vakfı OAuth2 ile uygulamanızı gönderin ve Kuran Uygulamaları Portalı'nda öne çıkarılması için başvurunuzu yapın.",
+    "tagline": "Kuran uygulamalarınızı sergileyin."
+  },
   "careers": {
     "career": "Kariyer fırsatları",
     "cta": "Pozisyonları görüntüle",
@@ -12,6 +20,10 @@
   },
   "footer": "- Quran.com ekibi",
   "header": "Geliştirme Yardımı",
+  "hero": {
+    "subtitle": "Kur'an deneyimleri geliştiren yazılımcılar için kaynaklar, araçlar ve kılavuzlar.",
+    "title": "Quran.com ile oluşturuldu"
+  },
   "issues-cta": "Herhangi bir sorunuz varsa ve bizimle iletişime geçmek isterseniz, bize yazın! Mümkün olan en kısa sürede size geri döneceğiz, inşaAllah.",
   "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne olacağı ve çözülmesi gereken hangi hataların mevcut olduğu konusunda kaynak olarak <0>Github projelerini</0> Örneğin <1>bu url</1> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
   "labs": "Laboratuvarlar",
@@ -20,9 +32,37 @@
   "main-desc": "Esselamü aleyküm, Öncelikle Kuran.com'u ve projelerini geliştirmemize yardımcı olmak için gösterdiğiniz ilgi için çok teşekkür ederiz. Sizinle çalışmaktan heyecan duyuyoruz!",
   "projects": {
     "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0>burada</0> . Özetlemek gerekirse:",
+    "items": {
+      "q-android": {
+        "description": "Telefonlar ve tabletler için yerel Android mushaf ve ses oynatıcı deneyimi.",
+        "name": "Kuran Android",
+        "stack": "Kotlin ve Java"
+      },
+      "q-api": {
+        "description": "Kuran verilerini, aramayı ve çevirileri destekleyen Ruby on Rails tabanlı arka uç sistemi.",
+        "name": "Quran.com API",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Okuma-yazma etkinlikleri için ses akışı platformu ve ona eşlik eden mobil uygulamalar.",
+        "name": "Kuran Sesi",
+        "stack": "Web ve mobil uygulamalar"
+      },
+      "q-ios": {
+        "description": "Swift tabanlı, yer imleri, okuma kayıtları ve çevrimdışı desteği bulunan Kur'an okuyucu.",
+        "name": "Kuran iOS",
+        "stack": "Süratli"
+      },
+      "q-next": {
+        "description": "Kur'an okuma, arama ve dinleme için Next.js tabanlı web deneyimi.",
+        "name": "Quran.com Ön Yüzü",
+        "stack": "TypeScript ve Next.js ile geliştirilmiştir."
+      }
+    },
+    "lead": "Quran.com ekibi ve topluluğu tarafından sürdürülen açık kaynaklı projeler.",
     "q-android": "<0>Kuran Android</0>",
     "q-api": "<0>Quran.com API'si</0> - Ruby on Rails ile yazılmıştır.",
-    "q-api-docs": "<0> Kuran.com API Belgeleri </0> - API belgeleri portalımız.",
+    "q-api-docs": "<0> Quran.com API Belgeleri </0> - API belgeleri portalımız.",
     "q-audio": "<0>Kuran Sesleri</0> ve <1>Kuran Sesleri mobil uygulamaları</1>",
     "q-audio-segments": "<0>Kuran Ses Bölümleri</0>",
     "q-ios": "<0>Kuran iOS</0>",
