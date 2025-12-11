@@ -5,6 +5,14 @@
         "caption": "Mëso përmendësh dhe përsërit Kuranin në mënyrë efikase",
         "title": "Muhaffidh"
       },
+      "quran_android": {
+        "caption": "Lexoni, shtoni në faqeshënues dhe dëgjoni Kuranin në pajisjet Android",
+        "title": "Kurani për Android"
+      },
+      "quran_ios": {
+        "caption": "Aplikacion i bukur dhe pa reklama për leximin dhe dëgjimin e Kuranit për iPhone dhe iPad",
+        "title": "Kurani për iOS (nga quran.com)"
+      },
       "quranmeet": {
         "caption": "Seanca të drejtpërdrejta të studimit të Kuranit",
         "title": "Takim me Kuranin"
