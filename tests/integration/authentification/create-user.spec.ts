@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 
 import { test, expect, Page } from '@playwright/test';
@@ -157,16 +158,42 @@ async function expectPasswordValidation({
   const { minRule, maxRule, uppercaseRule, lowercaseRule, numberRule, specialRule } =
     await getRules(homePage.page);
 
-  await expect(minRule.locator(`img[alt="${min ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(maxRule.locator(`img[alt="${max ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(
-    uppercaseRule.locator(`img[alt="${uppercase ? 'Valid' : 'Invalid'}"]`),
-  ).toBeVisible();
-  await expect(
-    lowercaseRule.locator(`img[alt="${lowercase ? 'Valid' : 'Invalid'}"]`),
-  ).toBeVisible();
-  await expect(numberRule.locator(`img[alt="${number ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(specialRule.locator(`img[alt="${special ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
+  // Check for valid/invalid classes based on the component's CSS module classes
+  if (min) {
+    await expect(minRule).toHaveClass(/valid/);
+  } else {
+    await expect(minRule).toHaveClass(/invalid/);
+  }
+
+  if (max) {
+    await expect(maxRule).toHaveClass(/valid/);
+  } else {
+    await expect(maxRule).toHaveClass(/invalid/);
+  }
+
+  if (uppercase) {
+    await expect(uppercaseRule).toHaveClass(/valid/);
+  } else {
+    await expect(uppercaseRule).toHaveClass(/invalid/);
+  }
+
+  if (lowercase) {
+    await expect(lowercaseRule).toHaveClass(/valid/);
+  } else {
+    await expect(lowercaseRule).toHaveClass(/invalid/);
+  }
+
+  if (number) {
+    await expect(numberRule).toHaveClass(/valid/);
+  } else {
+    await expect(numberRule).toHaveClass(/invalid/);
+  }
+
+  if (special) {
+    await expect(specialRule).toHaveClass(/valid/);
+  } else {
+    await expect(specialRule).toHaveClass(/invalid/);
+  }
 }
 
 async function fillInSignUpForm(page: Page) {
