@@ -1,0 +1,67 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Menghafaz dan mengulang kaji Al-Quran dengan cekap",
+        "title": "Muhaffidh"
+      },
+      "quranmeet": {
+        "caption": "Sesi pengajian Al-Quran secara langsung",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Kongsikan refleksi",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Cari dan bandingkan tafsir klasik",
+        "title": "BacaTafsir"
+      },
+      "sunnah": {
+        "caption": "Himpunan hadis",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir interaktif dengan pelbagai sumber",
+        "title": "Aplikasi Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Semua apl",
+      "community": "Komuniti",
+      "hadith-sunnah": "Hadis dan Sunnah",
+      "popular": "Popular",
+      "quran-reader": "Pembaca Al-Quran",
+      "reflections": "Renungan",
+      "study-tools": "Alat belajar"
+    },
+    "title": "Semak imbas Semua Apl"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Akhirnya, aplikasi Al-Quran untuk anak perempuan kami",
+        "name": "Qariah",
+        "tagline": "Wanita qari Al-Quran"
+      },
+      "quran-kareem": {
+        "headline": "Gerbang baharu anda untuk berhubung dengan Kitab Allah",
+        "name": "Quran Kareem",
+        "tagline": "Baca, dengar & renung"
+      },
+      "quran-link": {
+        "headline": "Terokai 25+ tafsir dan 100+ terjemahan di satu tempat",
+        "name": "Pautan Al-Quran",
+        "tagline": "Tafsir & teman belajar"
+      }
+    },
+    "learn-more": "Ketahui lebih lanjut",
+    "title": "Aplikasi Pilihan",
+    "view-all": "Lihat semua"
+  },
+  "hero": {
+    "description": "Terokai koleksi susun atur aplikasi Islam yang dibina dengan Quran.foundation. Daripada alat belajar kepada utiliti solat, cari apl yang meningkatkan perjalanan rohani anda.",
+    "title": "Temui Ekosistem Apl kami"
+  },
+  "quran-apps-portal": "Portal Aplikasi Al-Quran"
+}

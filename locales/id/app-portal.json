@@ -1,0 +1,67 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Hafalkan dan pelajari Al-Quran secara efisien.",
+        "title": "Muhaffidh"
+      },
+      "quranmeet": {
+        "caption": "Sesi belajar Al-Quran secara langsung",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Bagikan refleksi Anda",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Cari dan bandingkan tafsir-tafsir klasik.",
+        "title": "Baca Tafsir"
+      },
+      "sunnah": {
+        "caption": "Kumpulan Hadits",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir interaktif dengan berbagai sumber.",
+        "title": "Aplikasi Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Semua aplikasi",
+      "community": "Masyarakat",
+      "hadith-sunnah": "Hadits dan Sunnah",
+      "popular": "Populer",
+      "quran-reader": "Pembaca Al-Quran",
+      "reflections": "Refleksi",
+      "study-tools": "Alat belajar"
+    },
+    "title": "Jelajahi Semua Aplikasi"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Akhirnya, sebuah aplikasi Al-Quran untuk putri-putri kita!",
+        "name": "Qariah",
+        "tagline": "Pembaca Al-Quran wanita"
+      },
+      "quran-kareem": {
+        "headline": "Gerbang baru Anda untuk terhubung dengan Kitab Allah",
+        "name": "Quran Kareem",
+        "tagline": "Baca, dengarkan, dan renungkan."
+      },
+      "quran-link": {
+        "headline": "Jelajahi 25+ tafsir dan 100+ terjemahan di satu tempat.",
+        "name": "Tautan Al-Quran",
+        "tagline": "Tafsir & pendamping belajar"
+      }
+    },
+    "learn-more": "Pelajari selengkapnya",
+    "title": "Aplikasi Unggulan",
+    "view-all": "Lihat semua"
+  },
+  "hero": {
+    "description": "Jelajahi koleksi aplikasi Islami pilihan yang dibangun dengan Quran.foundation. Dari alat bantu belajar hingga perlengkapan sholat, temukan aplikasi yang meningkatkan perjalanan spiritual Anda.",
+    "title": "Temukan Ekosistem Aplikasi Kami"
+  },
+  "quran-apps-portal": "Portal Aplikasi Al-Quran"
+}
