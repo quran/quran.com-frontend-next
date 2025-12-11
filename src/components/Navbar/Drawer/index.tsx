@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
+import React, { useRef, useEffect, useCallback, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -20,6 +20,7 @@ import {
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
   setIsVisible,
+  setSettingsOpenedFromScrolledState,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -95,7 +96,6 @@ const Drawer: React.FC<Props> = ({
   canCloseDrawer = true,
   bodyId,
 }) => {
-  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
@@ -111,9 +111,13 @@ const Drawer: React.FC<Props> = ({
       }
 
       dispatch({ type: getActionCreator(type), payload: false });
+      if (type === DrawerType.Settings && navbar.settingsOpenedFromScrolledState) {
+        dispatch(setSettingsOpenedFromScrolledState(false));
+        dispatch(setIsVisible(false));
+      }
       logDrawerCloseEvent(type, actionSource);
     },
-    [dispatch, type, canCloseDrawer],
+    [dispatch, type, canCloseDrawer, navbar.settingsOpenedFromScrolledState],
   );
   // enableOnFormTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
@@ -143,7 +147,7 @@ const Drawer: React.FC<Props> = ({
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+  }, [closeDrawer, dispatch, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
@@ -157,7 +161,7 @@ const Drawer: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.container, {
-        [styles.navbarInvisible]: !isNavbarVisible,
+        [styles.navbarInvisible]: !navbar.isVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,

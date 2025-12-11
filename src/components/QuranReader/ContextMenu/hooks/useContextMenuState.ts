@@ -36,10 +36,15 @@ const useContextMenuState = () => {
     useSelector(selectContextMenu, shallowEqual);
 
   const { isActive } = useOnboarding();
-  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const { isVisible: isNavbarVisible, settingsOpenedFromScrolledState } = useSelector(
+    selectNavbar,
+    shallowEqual,
+  );
+
+  const effectiveNavbarVisibility = settingsOpenedFromScrolledState ? false : isNavbarVisible;
 
   // Use the shared hook to debounce navbar visibility changes
-  const showNavbar = useDebounceNavbarVisibility(isNavbarVisible, isActive);
+  const showNavbar = useDebounceNavbarVisibility(effectiveNavbarVisibility, isActive);
   const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);

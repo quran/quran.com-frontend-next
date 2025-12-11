@@ -1,13 +1,17 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SettingsButton.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import IconSettings from '@/icons/settings.svg';
-import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import {
+  selectNavbar,
+  setIsSettingsDrawerOpen,
+  setSettingsOpenedFromScrolledState,
+} from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
 interface SettingsButtonProps {
@@ -21,8 +25,13 @@ const SettingsButton: React.FC<SettingsButtonProps> = ({
 }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar);
+
   const openSettings = () => {
     logEvent('drawer_settings_open');
+    if (!isNavbarVisible) {
+      dispatch(setSettingsOpenedFromScrolledState(true));
+    }
     dispatch(setIsSettingsDrawerOpen(true));
   };
 
