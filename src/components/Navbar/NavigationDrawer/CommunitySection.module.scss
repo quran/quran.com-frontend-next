@@ -24,7 +24,7 @@
   z-index: -1;
   inset-inline-end: 0;
 
-  [data-theme="dark"] & {
+  [data-theme='dark'] & {
     opacity: var(--opacity-10);
   }
 
@@ -36,4 +36,11 @@
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
 }

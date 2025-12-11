@@ -49,7 +49,7 @@ const DevelopersPage: NextPage = () => {
                 <span className={styles.pill}>{t('labs')}</span>
                 <p className={styles.cardLead}>{t('labs-description')}</p>
               </div>
-              <LabsSection />
+              <LabsSection variant="inline" />
             </section>
 
             <section className={styles.featureCard}>
@@ -57,7 +57,7 @@ const DevelopersPage: NextPage = () => {
                 <span className={styles.pill}>{t('app-portal.heading')}</span>
                 <p className={styles.cardLead}>{t('app-portal.description')}</p>
               </div>
-              <AppPortalSection />
+              <AppPortalSection variant="inline" />
             </section>
 
             <section className={styles.featureCard}>
@@ -65,14 +65,14 @@ const DevelopersPage: NextPage = () => {
                 <span className={styles.pill}>{t('api-docs.title')}</span>
                 <p className={styles.cardLead}>{t('api-docs.sub-header')}</p>
               </div>
-              <ApiDocsSection />
+              <ApiDocsSection variant="inline" />
             </section>
           </div>
 
           <section className={styles.supportSection}>
             <h2 className={styles.sectionTitle}>{t('header')}</h2>
             <div className={styles.featureCard}>
-              <CommunitySection />
+              <CommunitySection variant="inline" />
             </div>
           </section>
 
