@@ -1,25 +1,26 @@
 .reflectionContentModal {
-  padding: unset !important;
-  overflow-y: auto !important;
+  padding: unset;
+  overflow-y: auto;
 }
 
+// Remove default padding to allow full-width tabs in reflection modal
 .reflectionInnerContentModal {
-  padding-inline: unset !important;
+  padding-inline: unset;
 }
 
 .reflectionHeader {
-  padding-inline: var(--spacing-medium-px) !important;
-  padding-block: var(--spacing-small-px) !important;
+  padding-inline: var(--spacing-medium-px);
+  padding-block: var(--spacing-small-px);
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  padding: none !important;
+  padding: none;
 }
 
 .reflectionHeaderCloseIcon {
-  position: relative !important;
-  inset-block: unset !important;
-  inset-inline: unset !important;
-  transform: unset !important;
+  position: relative;
+  inset-block: unset;
+  inset-inline: unset;
+  transform: unset;
 }
