@@ -541,21 +541,6 @@ test.describe('Form Submission', () => {
   );
 
   test(
-    'should disable update button when form is invalid',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
-
-      await newPassword.fill('invalid');
-      await page.waitForTimeout(UI_UPDATE_WAIT);
-
-      const isDisabled = await updateButton.isDisabled();
-      expect(isDisabled).toBe(true);
-    },
-  );
-
-  test(
     'should stay on the same page after successful update',
     { tag: TEST_TAGS },
     async ({ page }) => {

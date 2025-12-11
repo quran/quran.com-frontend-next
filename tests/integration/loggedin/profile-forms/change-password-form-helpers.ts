@@ -96,8 +96,8 @@ export const mockPasswordUpdateApi = async (
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
+          success: true,
           message: 'Password updated successfully',
-          status: 200,
         }),
       });
     } else {
@@ -105,10 +105,14 @@ export const mockPasswordUpdateApi = async (
         status: 400,
         contentType: 'application/json',
         body: JSON.stringify({
+          success: false,
           message: options.errorMessage || 'Incorrect current password',
-          status: 400,
-          errors: {
-            currentPassword: options.errorMessage || 'Current password is invalid',
+          error: {
+            code: 'INVALID',
+            message: options.errorMessage || 'Current password is invalid',
+            details: {
+              currentPassword: 'INVALID',
+            },
           },
         }),
       });
