@@ -1,26 +1,30 @@
-.reflectionContentModal {
-  padding: unset;
+@use 'src/styles/breakpoints';
+
+.reflectionContentModal.reflectionContentModal {
   overflow-y: auto;
-}
+  padding: 0;
+  .reflectionHeader.reflectionHeader {
+    padding-inline: var(--spacing-medium-px);
+    padding-block: var(--spacing-small-px);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
 
-// Remove default padding to allow full-width tabs in reflection modal
-.reflectionInnerContentModal {
-  padding-inline: unset;
-}
+    @include breakpoints.tablet {
+      padding-inline: var(--spacing-large-px);
+      padding-block: var(--spacing-medium-px);
+    }
 
-.reflectionHeader {
-  padding-inline: var(--spacing-medium-px);
-  padding-block: var(--spacing-small-px);
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-  padding: none;
-}
-
-.reflectionHeaderCloseIcon {
-  position: relative;
-  inset-block: unset;
-  inset-inline: unset;
-  transform: unset;
+    .reflectionHeaderCloseIcon {
+      position: relative;
+      inset-block: unset;
+      inset-inline: unset;
+      transform: unset;
+    }
+  }
+  // Remove default padding to allow full-width tabs in reflection modal
+  .reflectionInnerContentModal {
+    padding-inline: 0;
+  }
 }
