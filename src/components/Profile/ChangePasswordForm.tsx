@@ -15,6 +15,7 @@ import useAuthData from '@/hooks/auth/useAuthData';
 import useUpdatePassword from '@/hooks/auth/useUpdatePassword';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
 import { logButtonClick } from '@/utils/eventLogger';
+import TEST_IDS from '@/utils/test-ids';
 
 type FormData = {
   currentPassword: string;
@@ -83,7 +84,10 @@ const ChangePasswordForm: FC = () => {
   );
 
   return (
-    <Section title={t('change-password')}>
+    <Section
+      title={t('change-password')}
+      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CHANGE_PASSWORD_SECTION}
+    >
       <FormBuilder
         className={styles.passwordFormContainer}
         formFields={formFields}

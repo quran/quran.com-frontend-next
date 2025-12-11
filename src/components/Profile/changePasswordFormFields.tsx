@@ -28,6 +28,13 @@ const getChangePasswordFormFields = (
     label: t('common:form.current-password'),
     placeholder: t('login:current-password-placeholder'),
     containerClassName: styles.formInputContainer,
+    rules: [
+      {
+        type: RuleType.Required,
+        value: true,
+        errorMessage: t('common:errors.required', { fieldName: t('common:form.current-password') }),
+      },
+    ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordInput
         label={t('common:form.current-password')}
