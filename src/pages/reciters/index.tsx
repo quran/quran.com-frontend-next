@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from '../index.module.scss';
@@ -13,10 +13,9 @@ import { filterReciters } from '@/components/Navbar/SettingsDrawer/ReciterSelect
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReciterListHero from '@/components/Reciter/QuranReciterListHero';
 import RecitersList from '@/components/Reciter/RecitersList';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const NAVIGATION_URL = '/reciters';
 
@@ -47,27 +46,21 @@ const RecitersListPage = ({ reciters }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/reciters', async (context) => {
+  const { locale } = context;
+  let reciters = [];
   try {
-    const { reciters } = await getAvailableReciters(locale, [
-      'profile_picture',
-      'cover_image',
-      'bio',
-    ]);
-    const chaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData,
-        reciters: reciters || [],
-      },
-    };
-  } catch (e) {
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
+    const { reciters: availableReciters } = await getAvailableReciters(locale, []);
+    reciters = availableReciters;
+  } catch (error) {
+    // ignore the error and fall back to showing the page with default reciters
   }
-};
+
+  return {
+    props: {
+      reciters,
+    },
+  };
+});
 
 export default RecitersListPage;

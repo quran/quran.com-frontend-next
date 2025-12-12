@@ -1,4 +1,5 @@
-import { BrowserContext, Locator, Page } from '@playwright/test';
+/* eslint-disable no-await-in-loop */
+import { BrowserContext, Locator, Page, expect } from '@playwright/test';
 
 class Homepage {
   readonly page: Page;
@@ -97,17 +98,51 @@ class Homepage {
     return JSON.parse(parentObject[name]);
   }
 
+  /**
+   * Close any Next.js error dialog that might be blocking UI interactions
+   * This should be called before any UI interaction that might be blocked
+   */
+  async closeNextjsErrorDialog() {
+    const errorDialog = this.page.locator('[data-nextjs-dialog-overlay="true"]');
+    if (await errorDialog.isVisible()) {
+      // Try to close by clicking the X button first
+      const closeButton = this.page.locator(
+        '[data-nextjs-errors-dialog-left-right-close-button="true"]',
+      );
+      if (await closeButton.isVisible()) {
+        await closeButton.click();
+      } else {
+        // Fallback: click on the backdrop to close
+        const backdrop = this.page.locator('[data-nextjs-dialog-backdrop="true"]');
+        if (await backdrop.isVisible()) {
+          await backdrop.click();
+        }
+      }
+      // Wait for the dialog to disappear
+      await errorDialog.waitFor({ state: 'hidden' });
+    }
+  }
+
   async openSettingsDrawer() {
-    await this.page.getByTestId('settings-button').click();
+    await this.page.waitForTimeout(1000);
+    const buttons = this.page.getByTestId('settings-button');
+    await expect(buttons).not.toHaveCount(0, { timeout: 10000 });
+    const count = await buttons.count();
+    for (let index = 0; index < count; index += 1) {
+      const button = buttons.nth(index);
+      try {
+        await expect(button).toBeVisible({ timeout: 6000 });
+        await button.click();
+        return;
+      } catch (error) {
+        // Continue trying other buttons in case this one disappears
+      }
+    }
+    throw new Error('Unable to find a visible settings button.');
   }
 
   async enableMushafMode(isMobile: boolean) {
     if (isMobile) {
-      // scroll down a little to make the tab visible (bypassing a render issue)
-      // FIXME: Remove this workaround when the underlying issue is fixed
-      await this.page.mouse.wheel(0, 200);
-      await this.page.mouse.wheel(0, -100);
-
       await this.page.getByTestId('reading-tab').click();
     } else {
       await this.page.getByTestId('reading-button').click();

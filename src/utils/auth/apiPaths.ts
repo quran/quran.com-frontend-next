@@ -138,7 +138,18 @@ export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEnt
 
 export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
+
+type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+};
+
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
+  const { languages, ...restParams } = params || {};
+  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
+  return makeUrl('courses', queryParams);
+};
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 

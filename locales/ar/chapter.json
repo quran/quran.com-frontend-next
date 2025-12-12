@@ -1,4 +1,4 @@
 {
-  "meta-description": "اقرأ واستمع إلى سورة{{transliteratedName}}. نَزَلَتِ في {{revelationPlace}} وهي السورة رقم {{chapterOrder}}في القرآن. معنى اسم السورة هو {{translatedName}} في {{localeName}} وتتكون من {{versesCount}} آيات.",
+  "meta-description": "اقرأ واستمع إلى سورة{{transliteratedName}}. نزلت في {{revelationPlace}} وهي السورة رقم {{chapterOrder}}في القرآن. معنى اسم السورة هو {{translatedName}} في {{localeName}} وتتكون من {{versesCount}} آيات.",
   "ranges-meta-desc": "اقرأ واستمع من آية {{rangeFrom}} إلى آية {{rangeTo}}."
 }
