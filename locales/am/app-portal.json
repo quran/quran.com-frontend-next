@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "ቁርኣንን በብቃት መሀፈዝ እና መገምገም",
+        "title": "ሙሃፊድ"
+      },
+      "quran_android": {
+        "caption": "በአንድሮይድ መሳሪያዎች ላይ ቁርአንን አንብብ፣ ዕልባት አድርግ እና አዳምጥ",
+        "title": "ቁርኣን ለአንድሮይድ"
+      },
+      "quran_ios": {
+        "caption": "ለiPhone እና iPad ቆንጆ፣ ከማስታወቂያ ነጻ የሆነ የቁርዓን ንባብ እና ማዳመጥ መተግበሪያ",
+        "title": "ቁርአን ለ iOS (በ quran.com)"
+      },
+      "quranmeet": {
+        "caption": "የቀጥታ የቁርዓን ጥናት ክፍለ ጊዜዎች",
+        "title": "ቁርዓን መገናኘት"
+      },
+      "quranreflect": {
+        "caption": "አስተያየቶችን አጋራ",
+        "title": "ቁርኣን አንጸባርቅ"
+      },
+      "readtafsir": {
+        "caption": "ክላሲካል ታፍሲሮችን ይፈልጉ እና ያወዳድሩ",
+        "title": "ታፍሲርን ያንብቡ"
+      },
+      "sunnah": {
+        "caption": "የሀዲስ ስብስብ",
+        "title": "ሱና.ኮም"
+      },
+      "tafsirapp": {
+        "caption": "ከብዙ ምንጮች ጋር በይነተገናኝ ታፍሲር",
+        "title": "የተፍሲር መተግበሪያ"
+      }
+    },
+    "filters": {
+      "all": "ሁሉም መተግበሪያዎች",
+      "community": "ማህበረሰብ",
+      "hadith-sunnah": "ሀዲስ እና ሱና",
+      "popular": "ታዋቂ",
+      "quran-reader": "ቁርኣን አንባቢ",
+      "reflections": "ነጸብራቅ",
+      "study-tools": "የጥናት መሳሪያዎች"
+    },
+    "title": "ሁሉንም መተግበሪያዎች ያስሱ"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "በመጨረሻም የቁርዓን አፕ ለሴት ልጆቻችን",
+        "name": "ቃርያህ",
+        "tagline": "ሴቶች ቁርኣን አንባቢዎች"
+      },
+      "quran-kareem": {
+        "headline": "ከአላህ መጽሐፍ ጋር ለመገናኘት አዲሱ መግቢያህ",
+        "name": "ቁርኣን ከሪም",
+        "tagline": "ያንብቡ፣ ያዳምጡ እና ያንጸባርቁ"
+      },
+      "quran-link": {
+        "headline": "25+ ተፍሲሮችን እና 100+ ትርጉሞችን በአንድ ቦታ ያስሱ",
+        "name": "የቁርዓን አገናኝ",
+        "tagline": "ተፍሲር እና የጥናት ጓደኛ"
+      }
+    },
+    "learn-more": "የበለጠ ተማር",
+    "title": "ተለይተው የቀረቡ መተግበሪያዎች",
+    "view-all": "ሁሉንም ይመልከቱ"
+  },
+  "hero": {
+    "description": "በ Quran.foundation የተገነቡ ኢስላማዊ መተግበሪያዎች ስብስብ ያስሱ። ከመማሪያ መሳሪያዎች እስከ የጸሎት መገልገያዎች፣ መንፈሳዊ ጉዞዎን የሚያሻሽሉ መተግበሪያዎችን ያግኙ።",
+    "title": "የእኛን የመተግበሪያዎች ስነ-ምህዳር ያግኙ"
+  },
+  "quran-apps-portal": "የቁርዓን መተግበሪያዎች ፖርታል"
+}
