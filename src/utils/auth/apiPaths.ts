@@ -145,7 +145,7 @@ export type GetCoursesQueryParams = {
   cursor?: string;
   limit?: number;
   sortBy?: string;
-  languages: string[];
+  languages?: string[];
 };
 
 export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
