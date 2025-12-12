@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
-import { Course } from '@/types/auth/Course';
+import { CoursesResponse } from '@/types/auth/Course';
 import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
@@ -12,10 +12,14 @@ import withSsrRedux from '@/utils/withSsrRedux';
 import ChaptersData from 'types/ChaptersData';
 
 type LearningPlansPageProps = {
-  courses: Course[];
+  coursesResponse: CoursesResponse;
+  initialLanguages: string[];
 };
 
-const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
+const LearningPlansPage: NextPage<LearningPlansPageProps> = ({
+  coursesResponse,
+  initialLanguages,
+}) => {
   const { t, lang } = useTranslation('learn');
 
   return (
@@ -31,7 +35,10 @@ const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout initialCourses={courses} />
+      <CoursesPageLayout
+        initialCoursesResponse={coursesResponse}
+        initialLanguages={initialLanguages}
+      />
     </>
   );
 };
@@ -49,12 +56,13 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       .map((code) => code.toLowerCase()) || ['en'];
 
     // Fetch courses with fallback retry for backward compatibility
-    const courses = await fetchCoursesWithLanguages(learningPlanLanguages);
+    const coursesResponse = await fetchCoursesWithLanguages(learningPlanLanguages);
 
     return {
       props: {
         chaptersData,
-        courses,
+        coursesResponse,
+        initialLanguages: learningPlanLanguages,
       },
     };
   },

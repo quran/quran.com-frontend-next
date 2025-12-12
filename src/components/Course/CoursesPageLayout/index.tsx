@@ -8,33 +8,33 @@ import styles from './CoursesPageLayout.module.scss';
 
 import ContentContainer from '@/components/Course/ContentContainer';
 import CoursesList from '@/components/Course/CoursesList';
-import DataFetcher from '@/components/DataFetcher';
+import useCoursesList from '@/components/Course/CoursesList/useCoursesList';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
-import { Course, CoursesResponse } from '@/types/auth/Course';
-import { privateFetcher } from '@/utils/auth/api';
-import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
-
-const Loading = () => <Spinner />;
+import { CoursesResponse } from '@/types/auth/Course';
 
 type Props = {
   isMyCourses?: boolean;
-  initialCourses?: Course[];
+  initialCoursesResponse?: CoursesResponse;
+  initialLanguages?: string[];
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourses }) => {
+const CoursesPageLayout: React.FC<Props> = ({
+  isMyCourses = false,
+  initialCoursesResponse,
+  initialLanguages,
+}) => {
   const { t } = useTranslation('learn');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+  const languagesForRequest = initialLanguages ?? languageIsoCodes;
 
-  const renderCourses = (courses: Course[] | undefined) => {
-    if (!courses) {
-      return <Spinner />;
-    }
-    return <CoursesList courses={courses} isMyCourses={isMyCourses} />;
-  };
-
-  const shouldUseInitialData = !isMyCourses && initialCourses;
+  const shouldUseInitialData = !isMyCourses && initialCoursesResponse;
+  const { courses, hasNextPage, isLoadingMore, isInitialLoading, sentinelRef } = useCoursesList({
+    initialResponse: shouldUseInitialData ? initialCoursesResponse : undefined,
+    isMyCourses,
+    languages: languagesForRequest,
+  });
 
   return (
     <div className={layoutStyles.pageContainer}>
@@ -54,17 +54,15 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourse
         )}
 
         <div className={classNames(layoutStyles.flow, styles.container)}>
-          {shouldUseInitialData ? (
-            renderCourses(initialCourses)
+          {isInitialLoading && courses.length === 0 ? (
+            <Spinner />
           ) : (
-            <DataFetcher
-              loading={Loading}
-              fetcher={privateFetcher}
-              queryKey={makeGetCoursesUrl({
-                myCourses: isMyCourses,
-                languages: languageIsoCodes,
-              })}
-              render={(data: CoursesResponse) => renderCourses(data.data)}
+            <CoursesList
+              courses={courses}
+              isMyCourses={isMyCourses}
+              hasNextPage={hasNextPage}
+              isLoadingMore={isLoadingMore}
+              sentinelRef={sentinelRef}
             />
           )}
         </div>

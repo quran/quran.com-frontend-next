@@ -156,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       .map((code) => code.toLowerCase()) || ['en'];
 
     // Fetch learning plans with fallback retry for backward compatibility
-    const learningPlans = await fetchCoursesWithLanguages(learningPlanLanguages);
+    const learningPlansResponse = await fetchCoursesWithLanguages(learningPlanLanguages);
 
     return {
       props: {
@@ -167,7 +167,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
             return { ...chapterData, id: Number(chapterId) };
           }),
         },
-        learningPlans,
+        learningPlans: learningPlansResponse.data,
       },
     };
   },

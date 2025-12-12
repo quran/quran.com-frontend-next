@@ -67,6 +67,7 @@ import {
   makeFullUrlById,
   makeGenerateMediaFileUrl,
   makeGetBookmarkByCollectionId,
+  GetCoursesQueryParams,
   makeGetCoursesUrl,
   makeGetCourseUrl,
   makeEnrollUserInQuranProgramUrl,
@@ -127,6 +128,28 @@ const IGNORE_ERRORS = [
   AuthErrorCodes.Immutable,
   AuthErrorCodes.ValidationError,
 ];
+
+const normalizeCoursesResponse = (response: CoursesResponse | Course[]): CoursesResponse => {
+  if (Array.isArray(response)) {
+    return { data: response };
+  }
+
+  const normalized: CoursesResponse = {
+    data: response?.data ?? [],
+  };
+
+  if (response?.pagination) {
+    normalized.pagination = response.pagination;
+  }
+  if (response?.status != null) {
+    normalized.status = response.status;
+  }
+  if (response?.error != null) {
+    normalized.error = response.error;
+  }
+
+  return normalized;
+};
 
 /**
  * Checks if an API response contains error information and throws an error if it does.
@@ -468,29 +491,32 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (params?: {
-  myCourses?: boolean;
-  languages?: string[];
-}): Promise<Course[]> => privateFetcher(makeGetCoursesUrl(params));
+export const getCourses = async (params: GetCoursesQueryParams): Promise<CoursesResponse> => {
+  const response = await privateFetcher(makeGetCoursesUrl(params));
+  return normalizeCoursesResponse(response as CoursesResponse | Course[]);
+};
 
 /**
  * Fetch courses with language filter, retrying without languages param for backward compatibility.
  * If the API doesn't support the languages query param, it falls back to fetching without it.
  *
  * @param {string[]} languages - Array of ISO language codes
- * @returns {Promise<Course[]>} - Array of courses or empty array on error
+ * @returns {Promise<CoursesResponse>} - Courses response with pagination when available
  */
-export const fetchCoursesWithLanguages = async (languages: string[]): Promise<Course[]> => {
+export const fetchCoursesWithLanguages = async (languages: string[]): Promise<CoursesResponse> => {
+  const fetchCourses = async (params: GetCoursesQueryParams) => {
+    const response = await fetcher<CoursesResponse | Course[]>(makeGetCoursesUrl(params));
+    return normalizeCoursesResponse(response);
+  };
+
   try {
-    const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false, languages }));
-    return res?.data || [];
+    return await fetchCourses({ myCourses: false, languages });
   } catch {
     // Retry without languages param (old BE does not support extra params)
     try {
-      const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false }));
-      return res?.data || [];
+      return await fetchCourses({ myCourses: false, languages: [] });
     } catch {
-      return [];
+      return { data: [] };
     }
   }
 };

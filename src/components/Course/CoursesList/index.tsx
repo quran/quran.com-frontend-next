@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
@@ -9,6 +9,7 @@ import styles from './LessonsList.module.scss';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Pill from '@/dls/Pill';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -20,11 +21,20 @@ import {
 type Props = {
   courses: Course[];
   isMyCourses: boolean;
+  hasNextPage?: boolean;
+  isLoadingMore?: boolean;
+  sentinelRef?: MutableRefObject<HTMLDivElement | null>;
 };
 
 const MIN_COURSES_COUNT = 6;
 
-const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
+const CoursesList: React.FC<Props> = ({
+  courses,
+  isMyCourses,
+  hasNextPage,
+  isLoadingMore,
+  sentinelRef,
+}) => {
   const { t } = useTranslation('learn');
   const onMyCourses = () => {
     logButtonClick('user_no_courses_link');
@@ -102,6 +112,11 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
           );
         })}
       </div>
+      {hasNextPage && sentinelRef && (
+        <div ref={sentinelRef} className={styles.loadingMore}>
+          {isLoadingMore && <Spinner size={SpinnerSize.Small} />}
+        </div>
+      )}
       {isMyCourses && (
         <div className={styles.allCourses}>
           <Link
