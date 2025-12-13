@@ -69,6 +69,7 @@
     "/take-notes": ["take-notes"],
     "/[chapterId]/answers": ["quran-reader", "question"],
     "/[chapterId]/answers/[questionId]": ["quran-reader", "question"],
-    "/embed/v1": ["embed"]
+    "/embed/v1": ["embed"],
+    "/apps-portal": ["app-portal"]
   }
 }

@@ -1,5 +1,6 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/order */
 /* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { it, expect, describe } from 'vitest';
 
 import {
@@ -12,7 +13,7 @@ import {
   generateEmbedUrl,
 } from './embed';
 
-import { EmbedTextAlignment, EmbedTheme } from 'types/Embed';
+import { EmbedTextAlignment, EmbedTheme } from '../../types/Embed';
 
 describe('parseVerseRange', () => {
   it('should parse single verse format', () => {

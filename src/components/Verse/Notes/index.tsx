@@ -10,6 +10,7 @@ import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dl
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesIcon from '@/icons/notes-with-pencil.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -46,7 +47,8 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
 
       try {
         router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
-      } catch {
+      } catch (e) {
+        logErrorToSentry(e);
         // If there's an error parsing the verseKey, navigate to chapter 1
         router.push(getLoginNavigationUrl('/1'));
       }

@@ -75,7 +75,7 @@ const PopoverMenu = ({
       onOpenChange={handleOpenChange}
     >
       {trigger && (
-        <PrimitiveDropdownMenu.Trigger asChild onClick={() => setOpen(true)}>
+        <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}
@@ -99,6 +99,7 @@ type PopoverMenuItemProps = {
   id?: string;
   isSelected?: boolean;
   shouldStopPropagation?: boolean;
+  dataTestId?: string;
 };
 PopoverMenu.Item = ({
   children,
@@ -111,6 +112,7 @@ PopoverMenu.Item = ({
   id,
   isSelected,
   shouldStopPropagation,
+  dataTestId,
 }: PopoverMenuItemProps) => {
   return (
     <PrimitiveDropdownMenu.Item
@@ -126,6 +128,7 @@ PopoverMenu.Item = ({
       }}
       disabled={isDisabled}
       id={id}
+      data-testid={dataTestId}
     >
       {icon && (
         <span
