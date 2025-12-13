@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "title": "Ayah Widget Builder | Quran.com",
+    "description": "Configure and preview Quran.com embed widgets, then copy the ready-to-use script snippet."
+  },
+  "header": {
+    "title": "Ayah Embed Builder",
+    "subtitle": "Configure your widget, preview it live, and copy the ready-to-use script snippet."
+  },
+  "sections": {
+    "configuration": "Configuration",
+    "preview": "Live preview",
+    "snippet": "Embed snippet"
+  },
+  "fields": {
+    "containerId": "Container Id",
+    "surah": "Surah",
+    "ayah": "Ayah",
+    "theme": "Theme",
+    "mushaf": "Mushaf",
+    "translations": "Translations",
+    "reciter": "Reciter",
+    "width": "Width",
+    "height": "Height"
+  },
+  "placeholders": {
+    "searchTranslations": "Search translations..."
+  },
+  "states": {
+    "loadingChapters": "Loading chapters...",
+    "loadingVerses": "Loading verses...",
+    "loadingReciters": "Loading reciters...",
+    "noTranslations": "No translations found"
+  },
+  "translations": {
+    "otherLanguage": "Other",
+    "chipRemoveLabel": "Remove translation",
+    "chipRemoveSymbol": "×"
+  },
+  "reciters": {
+    "select": "Select reciter",
+    "fallback": "Mishary Rashid Alafasy"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "sepia": "Sepia"
+  },
+  "mushaf": {
+    "qpc": "QPC Uthmani Hafs",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "indopak": "Indopak",
+    "tajweed": "Tajweed"
+  },
+  "checkboxes": {
+    "audio": "Enable audio playback",
+    "wordByWord": "Enable word-by-word translation",
+    "translator": "Show translator name",
+    "quranLink": "Show Quran.com attribution link",
+    "customSize": "Use custom width/height"
+  },
+  "actions": {
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "errors": {
+    "loadChapters": "Unable to load chapters",
+    "loadTranslations": "Unable to load translations",
+    "loadReciters": "Unable to load reciters",
+    "clipboardFallback": "Clipboard write failed, using fallback",
+    "clipboardUnavailable": "Clipboard API unavailable"
+  }
+}
