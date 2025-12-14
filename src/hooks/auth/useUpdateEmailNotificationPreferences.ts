@@ -8,7 +8,30 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logErrorToSentry } from '@/lib/sentry';
 import { logValueChange } from '@/utils/eventLogger';
 
-const useUpdateEmailNotificationPreferences = () => {
+interface UseUpdateEmailNotificationPreferencesReturn {
+  updatePreference: (
+    preference: IUserPreferenceSettings,
+    isChecked: boolean,
+    onSuccess?: (templateId: string, isChecked: boolean) => void,
+  ) => void;
+  mutatingTemplateId: string | null;
+}
+
+/**
+ * Custom hook for updating user email notification preferences via Novu
+ * Handles the preference update logic, loading states, event logging, and toast notifications
+ * @returns {UseUpdateEmailNotificationPreferencesReturn} Object containing:
+ *   - updatePreference: Function to update a specific email notification preference.
+ *     Accepts three parameters:
+ *     - preference: IUserPreferenceSettings - Novu user preference settings object containing template information
+ *     - isChecked: boolean - Whether the notification should be enabled (true) or disabled (false)
+ *     - onSuccess?: (templateId: string, isChecked: boolean) => void - Optional callback executed after successful update
+ *     The function logs the preference change, updates via Novu headless service, shows toast notifications,
+ *     and handles errors by logging to Sentry
+ *   - mutatingTemplateId: string | null - ID of the notification template currently being updated, or null if no update is in progress.
+ *     Used to show loading states in the UI for the specific preference being modified
+ */
+const useUpdateEmailNotificationPreferences = (): UseUpdateEmailNotificationPreferencesReturn => {
   const { headlessService } = useHeadlessService();
   const toast = useToast();
   const { t } = useTranslation('common');
