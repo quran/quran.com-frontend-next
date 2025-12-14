@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
@@ -24,31 +24,18 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const chapter = getChapterData(chaptersData, chapterId);
-  const [infoLocale, setInfoLocale] = useState<string>(lang);
 
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
 
   const { data: chapterInfoResponse, error } = useSWR(
-    makeChapterInfoUrl(chapterId, infoLocale),
-    () => getChapterInfo(chapterId, infoLocale),
-    {
-      revalidateOnFocus: false,
-      onError: () => {
-        if (infoLocale !== Language.EN) {
-          setInfoLocale(Language.EN);
-        }
-      },
-    },
+    makeChapterInfoUrl(chapterId, lang),
+    () => getChapterInfo(chapterId, lang),
+    { revalidateOnFocus: false },
   );
-
-  const isLoading = !chapterInfoResponse && !error;
-
-  useEffect(() => {
-    setInfoLocale(lang);
-  }, [lang]);
 
   if (!chapter) return null;
 
+  const isLoading = !chapterInfoResponse && !error;
   const chapterInfo = chapterInfoResponse?.chapterInfo;
 
   return (

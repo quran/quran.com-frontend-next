@@ -51,8 +51,12 @@ export const SurahInfoModalProvider = ({ children }: SurahInfoModalProviderProps
   const [isOpen, setIsOpen] = useState<boolean>(isSurahInfoPage);
 
   useEffect(() => {
-    if (chapterId && isSurahInfoPage) {
-      setIsOpen(true);
+    if (chapterId) {
+      if (isSurahInfoPage) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
     }
   }, [chapterId, isSurahInfoPage]);
 
