@@ -4,6 +4,7 @@ import useSWRImmutable from 'swr/immutable';
 import Language from '@/types/Language';
 import { countQuestionsWithinRange, QuestionsData } from '@/utils/auth/api';
 import { makeCountQuestionsWithinRangeUrl } from '@/utils/auth/apiPaths';
+import { normalizeQuestionsData } from '@/utils/questions';
 
 type Range = {
   from: string;
@@ -14,33 +15,6 @@ type CountRangeQuestionsResponse = {
   data: Record<string, QuestionsData>;
   isLoading: boolean;
   error: Error | null;
-};
-
-/**
- * Normalize type keys to uppercase to handle API response inconsistencies.
- * The API may return keys like "cLARIFICATION" instead of "CLARIFICATION".
- * @param {Record<string, QuestionsData>} data - The questions data to normalize.
- * @returns {Record<string, QuestionsData>} The normalized questions data.
- */
-export const normalizeQuestionsData = (
-  data: Record<string, QuestionsData>,
-): Record<string, QuestionsData> => {
-  const normalized: Record<string, QuestionsData> = {};
-
-  Object.entries(data).forEach(([verseKey, questionsData]) => {
-    const normalizedTypes: Record<string, number> = {};
-
-    Object.entries(questionsData.types || {}).forEach(([typeKey, count]) => {
-      normalizedTypes[typeKey.toUpperCase()] = count;
-    });
-
-    normalized[verseKey] = {
-      ...questionsData,
-      types: normalizedTypes,
-    };
-  });
-
-  return normalized;
 };
 
 const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsResponse => {

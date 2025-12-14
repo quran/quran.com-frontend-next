@@ -1,10 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { describe, it, expect } from 'vitest';
 
-import { normalizeQuestionsData } from './useCountRangeQuestions';
-
-// Local type definition to avoid importing from api.ts which has complex dependencies
-type QuestionsData = { types: Record<string, number>; total: number };
+import { normalizeQuestionsData, QuestionsData } from './questions';
 
 describe('normalizeQuestionsData', () => {
   it('should normalize lowercase first letter type keys to uppercase', () => {
