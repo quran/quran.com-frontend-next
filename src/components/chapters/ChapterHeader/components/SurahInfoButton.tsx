@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,12 +6,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
+import { useSurahInfoModalContext } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
 import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
-import QueryParam from '@/types/QueryParam';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getSurahInfoNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
   chapterId?: string;
@@ -26,49 +26,28 @@ interface SurahInfoButtonProps {
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
+  const { isOpen, setIsOpen } = useSurahInfoModalContext();
 
-  /**
-   * We keep a local `isModalOpen` state to ensure the UI updates instantly.
-   * Relying only on query params would cause a visible delay while the URL updates.
-   *
-   * The query param is used **only to set the initial state** (e.g., when landing directly on the info page).
-   * After mount, we do not react to query changes — avoiding unnecessary sync logic or race conditions.
-   */
   const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
-  const initialStateIsOpen = isInfoPage ? true : router.query[QueryParam.SURAH_INFO] !== undefined;
-  const [isModalOpen, setIsModalOpen] = useState(initialStateIsOpen);
-
-  const updateModalQueryParam = useCallback(
-    (shouldOpen: boolean) => {
-      if (!chapterId) return;
-      const nextQuery = { ...router.query };
-      if (shouldOpen) {
-        nextQuery[QueryParam.SURAH_INFO] = 'true';
-      } else {
-        delete nextQuery[QueryParam.SURAH_INFO];
-      }
-
-      router.push(
-        { pathname: router.pathname, query: nextQuery },
-        shouldOpen ? getSurahInfoNavigationUrl(chapterId) : undefined,
-        { shallow: true, scroll: false },
-      );
-    },
-    [chapterId, router],
-  );
 
   const handleClose = useCallback(() => {
-    updateModalQueryParam(false);
-    setIsModalOpen(false);
-  }, [updateModalQueryParam]);
+    setIsOpen(false);
 
-  const handleClick = () => {
+    if (!isInfoPage) {
+      fakeNavigate(router.asPath, router.locale);
+    }
+  }, [router.asPath, router.locale, isInfoPage, setIsOpen]);
+
+  const handleClick = useCallback(() => {
     if (chapterId) {
       logButtonClick('surah_info_button_click');
-      updateModalQueryParam(true);
-      setIsModalOpen(true);
+      setIsOpen(true);
+
+      if (!isInfoPage) {
+        fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
+      }
     }
-  };
+  }, [chapterId, isInfoPage, router.locale, setIsOpen]);
 
   return (
     <>
@@ -83,7 +62,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
       </button>
       {chapterId && (
         <ContentModal
-          isOpen={isModalOpen}
+          isOpen={isOpen}
           onClose={handleClose}
           onEscapeKeyDown={handleClose}
           hasCloseButton
