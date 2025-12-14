@@ -185,6 +185,7 @@ const BookmarkAction: React.FC<Props> = ({
         icon={<UnBookmarkedIcon />}
         color={IconColor.tertiary}
         size={IconSize.Custom}
+        shouldFlipOnRTL={false}
       />
     );
   }
@@ -206,6 +207,7 @@ const BookmarkAction: React.FC<Props> = ({
           onToggleBookmarkClicked(e);
         }}
         isDisabled={isVerseBookmarkedLoading}
+        shouldFlipOnRTL={false}
         ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
       >
         <span className={styles.icon}>{bookmarkIcon}</span>

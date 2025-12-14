@@ -46,7 +46,14 @@ const PlayAudioMenuItem: React.FC<PlayAudioMenuItemProps> = ({ verse, onActionTr
 
   return (
     <PopoverMenu.Item
-      icon={<IconContainer icon={<PlayIcon />} color={IconColor.tertiary} size={IconSize.Custom} />}
+      icon={
+        <IconContainer
+          icon={<PlayIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
+      }
       onClick={onPlayClicked}
       isDisabled={isVerseLoading}
     >
