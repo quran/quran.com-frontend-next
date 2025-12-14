@@ -16,6 +16,33 @@ type CountRangeQuestionsResponse = {
   error: Error | null;
 };
 
+/**
+ * Normalize type keys to uppercase to handle API response inconsistencies.
+ * The API may return keys like "cLARIFICATION" instead of "CLARIFICATION".
+ * @param {Record<string, QuestionsData>} data - The questions data to normalize.
+ * @returns {Record<string, QuestionsData>} The normalized questions data.
+ */
+export const normalizeQuestionsData = (
+  data: Record<string, QuestionsData>,
+): Record<string, QuestionsData> => {
+  const normalized: Record<string, QuestionsData> = {};
+
+  Object.entries(data).forEach(([verseKey, questionsData]) => {
+    const normalizedTypes: Record<string, number> = {};
+
+    Object.entries(questionsData.types || {}).forEach(([typeKey, count]) => {
+      normalizedTypes[typeKey.toUpperCase()] = count;
+    });
+
+    normalized[verseKey] = {
+      ...questionsData,
+      types: normalizedTypes,
+    };
+  });
+
+  return normalized;
+};
+
 const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsResponse => {
   const { lang } = useTranslation();
   const { data, isValidating, error } = useSWRImmutable<Record<string, QuestionsData>>(
@@ -23,7 +50,12 @@ const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsRespo
       ? makeCountQuestionsWithinRangeUrl(questionsRange.from, questionsRange.to, lang as Language)
       : null,
     async (): Promise<Record<string, QuestionsData>> => {
-      return countQuestionsWithinRange(questionsRange.from, questionsRange.to, lang as Language);
+      const result = await countQuestionsWithinRange(
+        questionsRange.from,
+        questionsRange.to,
+        lang as Language,
+      );
+      return normalizeQuestionsData(result);
     },
   );
 
