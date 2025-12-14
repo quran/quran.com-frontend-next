@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from './SurahInfoModal.module.scss';
 
@@ -26,10 +26,9 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
 
   const shouldHideTransliteration = shouldUseMinimalLayout(lang);
 
-  const { data: chapterInfoResponse, error } = useSWR(
+  const { data: chapterInfoResponse, error } = useSWRImmutable(
     makeChapterInfoUrl(chapterId, lang),
     () => getChapterInfo(chapterId, lang),
-    { revalidateOnFocus: false },
   );
 
   if (!chapter) return null;
@@ -47,7 +46,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
 
       {error && !chapterInfo && (
         <div className={styles.errorContainer}>
-          <p>{t('common:error')}</p>
+          <p>{t('common:error.general')}</p>
         </div>
       )}
 
