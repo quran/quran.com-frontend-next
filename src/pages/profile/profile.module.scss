@@ -12,4 +12,18 @@
       margin-block-end: var(--spacing-small-px);
     }
   }
+  .divider {
+    margin-block: var(--spacing-medium2-px);
+  }
+  .dangerArea {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium2-px);
+    .dangerAreaDescription {
+      font-size: var(--font-size-small-px);
+    }
+    .dangerAreaDescriptionTitle {
+      font-weight: var(--font-weight-bold);
+    }
+  }
 }
