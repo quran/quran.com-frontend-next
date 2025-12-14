@@ -4,9 +4,7 @@ import React, { useMemo } from 'react';
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-import QuranFontSectionFooter from './QuranFontSectionFooter';
 import ReciterSection from './ReciterSection';
 import Section from './Section';
 
@@ -27,6 +25,7 @@ import {
 } from '@/redux/slices/QuranReader/styles';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
@@ -228,9 +227,6 @@ const QuranFontSection = () => {
             quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
           }
         />
-      </Section.Row>
-      <Section.Row>
-        <QuranFontSectionFooter quranFont={quranFont} />
       </Section.Row>
       <ReciterSection />
     </Section>
