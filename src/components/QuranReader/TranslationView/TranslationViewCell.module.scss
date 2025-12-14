@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 $arabicVerseTopMargin: 2.75rem;
 
@@ -62,8 +62,8 @@ $arabicVerseTopMargin: 2.75rem;
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  height: calc(2.2 * var(--spacing-medium));
-  width: calc(2.2 * var(--spacing-medium));
+  block-size: calc(2.2 * var(--spacing-medium));
+  inline-size: calc(2.2 * var(--spacing-medium));
 
   &:hover {
     color: var(--color-text-default);
@@ -99,13 +99,13 @@ $arabicVerseTopMargin: 2.75rem;
   align-items: center;
   justify-content: center;
   svg {
-    width: var(--spacing-medium2);
-    height: var(--spacing-medium2);
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
   }
 
   @include breakpoints.smallerThanTablet {
-    width: var(--spacing-medium);
-    height: var(--spacing-medium);
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
   }
 }
 
@@ -132,7 +132,7 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .bottomActionsContainer {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .tabsContainer {
@@ -153,7 +153,7 @@ $arabicVerseTopMargin: 2.75rem;
 
 .separatorContainer {
   display: flex;
-  height: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   align-items: center;
 }
 
@@ -171,14 +171,18 @@ $arabicVerseTopMargin: 2.75rem;
   }
 }
 
+.tabItemRTL {
+  flex-direction: row-reverse;
+}
+
 .tabIcon {
   display: flex;
   align-items: center;
   justify-content: center;
 
   svg {
-    width: var(--spacing-medium2);
-    height: var(--spacing-medium2);
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
     color: currentColor;
 
     &:hover {
@@ -186,8 +190,8 @@ $arabicVerseTopMargin: 2.75rem;
     }
 
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-medium);
-      height: var(--spacing-medium);
+      inline-size: var(--spacing-medium);
+      block-size: var(--spacing-medium);
     }
   }
 }
@@ -202,6 +206,6 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .verseSeparator {
-  width: calc(100% - 2 * var(--spacing-small)) !important;
+  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
   margin-inline: auto;
 }
