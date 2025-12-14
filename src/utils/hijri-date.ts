@@ -15,7 +15,9 @@ type Month = {
 
 // Constants for better readability
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const WEEK_SHIFT_DAYS = 3; // Shift to make weeks start on Friday
+// Weeks in quranic-calendar.json are already anchored to start on Friday per the Google Sheet,
+// so we don't need to shift them in code. Set to 0 to keep anchors as-is.
+const WEEK_SHIFT_DAYS = 0;
 
 // Pre-compute all UTC timestamps for better performance
 const weekUTCCache = new Map<string, { startTimestamp: number; endTimestamp: number }>();
