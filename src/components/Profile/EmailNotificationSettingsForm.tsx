@@ -17,6 +17,7 @@ import sharedStyles from './SharedProfileStyles.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Error from '@/pages/_error';
+import TEST_IDS from '@/utils/test-ids';
 
 const MARKETING_TAG_NAME = 'marketing';
 
@@ -131,7 +132,10 @@ const EmailNotificationSettingsForm: FC = () => {
   const flattenedPreferences = Object.values(groupByTags).flat();
 
   return (
-    <Section title={t('email-notification-settings')}>
+    <Section
+      title={t('email-notification-settings')}
+      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_SECTION}
+    >
       {flattenedPreferences.map((preference) => (
         <NotificationCheckbox
           key={preference.template._id}

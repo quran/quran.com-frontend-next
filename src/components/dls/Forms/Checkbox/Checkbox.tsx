@@ -11,6 +11,7 @@ import TickIcon from '@/icons/tick.svg';
 const INDETERMINATE = 'indeterminate';
 
 interface Props {
+  dataTestId?: string;
   containerClassName?: string;
   checkboxClassName?: string;
   indicatorClassName?: string;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const Checkbox: React.FC<Props> = ({
+  dataTestId,
   containerClassName,
   checkboxClassName,
   indicatorClassName,
@@ -42,6 +44,7 @@ const Checkbox: React.FC<Props> = ({
       className={classNames(styles.container, containerClassName, { [styles.disabled]: disabled })}
     >
       <RadixCheckbox.Root
+        data-testid={dataTestId}
         disabled={disabled}
         name={name}
         required={required}
