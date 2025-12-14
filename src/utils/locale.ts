@@ -404,6 +404,21 @@ export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
   localizeNumericalStringWithSplitter(verseKey, lang);
 
 /**
+ * Get the localized value of the verse key for RTL display.
+ * Returns verse:chapter order so it reads correctly in RTL context.
+ *
+ * @param {string} verseKey
+ * @param {string} lang
+ * @returns {string}
+ */
+export const toLocalizedVerseKeyRTL = (verseKey: string, lang: string): string =>
+  verseKey
+    .split(':')
+    .reverse()
+    .map((value: string) => toLocalizedNumber(Number(value), lang))
+    .join(':');
+
+/**
  * Get the localized value of a range e.g. "1-20"
  *
  * @param {string} range
