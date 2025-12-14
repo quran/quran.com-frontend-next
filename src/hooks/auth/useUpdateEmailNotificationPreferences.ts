@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { useHeadlessService } from '@/components/Notifications/hooks/useHeadlessService';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { logErrorToSentry } from '@/lib/sentry';
+import { addSentryBreadcrumb, logErrorToSentry } from '@/lib/sentry';
 import { logValueChange } from '@/utils/eventLogger';
 
 interface UseUpdateEmailNotificationPreferencesReturn {
@@ -15,6 +15,11 @@ interface UseUpdateEmailNotificationPreferencesReturn {
     onSuccess?: (templateId: string, isChecked: boolean) => void,
   ) => void;
   mutatingTemplateId: string | null;
+}
+
+const enum NotificationPreferencesTelemetry {
+  TransactionName = 'updateEmailNotificationPreferences',
+  BreadcrumbCategory = 'email-notification-preferences.update',
 }
 
 /**
@@ -37,26 +42,52 @@ const useUpdateEmailNotificationPreferences = (): UseUpdateEmailNotificationPref
   const { t } = useTranslation('common');
   const [mutatingTemplateId, setMutatingTemplateId] = useState<string | null>(null);
 
-  const handleError = (err: unknown, templateId: string, isChecked: boolean) => {
+  const handleError = (
+    err: unknown,
+    templateId: string,
+    isChecked: boolean,
+    templateName: string,
+  ) => {
     toast(t('error.general'), { status: ToastStatus.Error });
     logErrorToSentry(err, {
-      transactionName: 'updateEmailNotificationPreferences',
+      transactionName: NotificationPreferencesTelemetry.TransactionName,
       metadata: {
         templateId,
+        templateName,
         checked: isChecked,
         channelType: ChannelTypeEnum.EMAIL,
       },
     });
+    addSentryBreadcrumb(
+      NotificationPreferencesTelemetry.BreadcrumbCategory,
+      'Update email notification preference failed',
+      {
+        templateId,
+        templateName,
+        checked: isChecked,
+        error: String(err),
+      },
+    );
   };
 
   const handleSuccess = (
     templateId: string,
     isChecked: boolean,
+    templateName: string,
     onSuccess?: (templateId: string, isChecked: boolean) => void,
   ) => {
     toast(t('profile:success.notifications'), {
       status: ToastStatus.Success,
     });
+    addSentryBreadcrumb(
+      NotificationPreferencesTelemetry.BreadcrumbCategory,
+      'Update email notification preference succeeded',
+      {
+        templateId,
+        templateName,
+        checked: isChecked,
+      },
+    );
     if (onSuccess) {
       onSuccess(templateId, isChecked);
     }
@@ -70,10 +101,22 @@ const useUpdateEmailNotificationPreferences = (): UseUpdateEmailNotificationPref
     const { template } = preference;
     // eslint-disable-next-line no-underscore-dangle
     const templateId = template._id;
+    const templateName = template.name;
+
+    addSentryBreadcrumb(
+      NotificationPreferencesTelemetry.BreadcrumbCategory,
+      'Update email notification preference started',
+      {
+        templateId,
+        templateName,
+        checked: isChecked,
+      },
+    );
+
     setMutatingTemplateId(templateId);
 
     logValueChange('email_notification_settings', !isChecked, isChecked, {
-      templateName: template.name,
+      templateName,
     });
 
     headlessService.updateUserPreferences({
@@ -85,8 +128,8 @@ const useUpdateEmailNotificationPreferences = (): UseUpdateEmailNotificationPref
           setMutatingTemplateId(null);
         }
       },
-      onSuccess: () => handleSuccess(templateId, isChecked, onSuccess),
-      onError: (err) => handleError(err, templateId, isChecked),
+      onSuccess: () => handleSuccess(templateId, isChecked, templateName, onSuccess),
+      onError: (err) => handleError(err, templateId, isChecked, templateName),
     });
   };
 
