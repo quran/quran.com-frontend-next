@@ -47,7 +47,12 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
 
   return (
     <div className={styles.bottomActionsContainer}>
-      <div className={classNames(styles.tabsContainer, { [styles.center]: !isTranslationView })}>
+      <div
+        className={classNames(styles.tabsContainer, {
+          [styles.center]: !isTranslationView,
+          [styles.tabsContainerRTL]: isRTL,
+        })}
+      >
         {tabs
           .filter((tab) => tab.condition !== false) // Only show tabs that meet their condition
           .map((tab, index, filteredTabs) => (
