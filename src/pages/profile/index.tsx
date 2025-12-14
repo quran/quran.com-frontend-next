@@ -51,17 +51,23 @@ const ProfilePage: FC = () => {
         <div className={styles.divider}>
           <Separator />
         </div>
-        <div className={styles.dangerArea}>
-          <p className={styles.dangerAreaDescription}>
-            <span className={styles.dangerAreaDescriptionTitle}>
-              {t('delete-account-warning-title')}:{' '}
-            </span>
+        <section
+          className={styles.deleteAccountSection}
+          aria-labelledby="delete-account-section-title"
+        >
+          <h2
+            id="delete-account-section-title"
+            className={styles.deleteAccountSectionDescriptionTitle}
+          >
+            {t('delete-account-warning-title')}
+          </h2>
+          <p className={styles.deleteAccountSectionDescription}>
             {t('delete-account-warning-description')}
           </p>
           <div>
             <DeleteAccountButton />
           </div>
-        </div>
+        </section>
       </PageContainer>
     </>
   );

@@ -15,14 +15,14 @@
   .divider {
     margin-block: var(--spacing-medium2-px);
   }
-  .dangerArea {
+  .deleteAccountSection {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-medium2-px);
-    .dangerAreaDescription {
+    .deleteAccountSectionDescription {
       font-size: var(--font-size-small-px);
     }
-    .dangerAreaDescriptionTitle {
+    .deleteAccountSectionDescriptionTitle {
       font-weight: var(--font-weight-bold);
     }
   }
