@@ -11,10 +11,9 @@ import ChapterIconContainer, {
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import DataContext from '@/contexts/DataContext';
-import Language from '@/types/Language';
 import { makeChapterInfoUrl } from '@/utils/apiPaths';
 import { getChapterData } from '@/utils/chapter';
-import { toLocalizedNumber } from '@/utils/locale';
+import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 
 interface SurahInfoModalProps {
   chapterId: string;
@@ -25,7 +24,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
   const chaptersData = useContext(DataContext);
   const chapter = getChapterData(chaptersData, chapterId);
 
-  const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
+  const shouldHideTransliteration = shouldUseMinimalLayout(lang);
 
   const { data: chapterInfoResponse, error } = useSWR(
     makeChapterInfoUrl(chapterId, lang),
@@ -63,7 +62,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
               />
             </div>
 
-            {!isArabicOrUrdu && (
+            {!shouldHideTransliteration && (
               <h2 className={styles.surahName} data-testid="surah-name">
                 {t('common:surah')} {chapter.transliteratedName}
               </h2>

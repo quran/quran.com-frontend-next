@@ -22,7 +22,7 @@ export interface SurahInfoModalProviderProps {
  */
 export function useSurahInfoModalContext(): SurahInfoModalContextType {
   const context = useContext(SurahInfoModalContext);
-  if (context) return context;
+  if (context !== undefined) return context;
   throw new Error('useSurahInfoModalContext must be used within a SurahInfoModalProvider');
 }
 

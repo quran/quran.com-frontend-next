@@ -12,7 +12,9 @@
 .calligraphyContainer {
   max-width: max-content;
 
-  // Calligraphy has lot of whitespace on the left side, so we need to move it to the left. we can't add it to rtl because then it will have negative effect on the layout.
+  // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
+  // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
+  // and misaligning the calligraphy away from the main content. Therefore, only apply this transform for LTR layouts.
   :global([dir='ltr']) & {
     transform: translateX(-0.875rem);
   }

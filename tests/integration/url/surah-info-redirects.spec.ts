@@ -1,9 +1,31 @@
-/* eslint-disable max-lines */
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
+
+/**
+ * Helper function to verify that the modal contains the expected surah information
+ */
+const verifyModalContainsSurahInfo = async (
+  page: Page,
+  expectedSurahName: string,
+  expectedRevelationPlace: string,
+  expectedAyahs: string,
+) => {
+  // Verify modal is open and contains surah info content
+  await expect(page.getByTestId('modal-content')).toBeVisible();
+  await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
+
+  // Verify surah info content is inside the modal
+  const modalContent = page.getByTestId('modal-content');
+  await expect(modalContent.getByTestId('surah-name')).toBeVisible();
+  await expect(modalContent.getByTestId('surah-name')).toContainText(expectedSurahName);
+  await expect(modalContent.getByTestId('surah-revelation-place')).toContainText(
+    expectedRevelationPlace,
+  );
+  await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText(expectedAyahs);
+};
 
 test.beforeEach(async ({ page, context }) => {
   test.slow();
@@ -23,16 +45,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/1/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify surah info content is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Fatihah', 'Mecca', '7');
     },
   );
 
@@ -46,16 +60,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/al-fatihah/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify surah info content is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Fatihah', 'Mecca', '7');
     },
   );
 
@@ -69,16 +75,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/1/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify surah info content is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Fatihah', 'Mecca', '7');
     },
   );
 
@@ -92,16 +90,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/al-fatihah/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify surah info content is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Fatihah', 'Mecca', '7');
     },
   );
 
@@ -115,16 +105,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/2/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify Al-Baqarah info is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Baqarah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Medina');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('286');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Baqarah', 'Medina', '286');
     },
   );
 
@@ -138,16 +120,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/al-baqarah/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify Al-Baqarah info is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Baqarah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Medina');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('286');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Baqarah', 'Medina', '286');
     },
   );
 
@@ -161,16 +135,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/2/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify Al-Baqarah info is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Baqarah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Medina');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('286');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Baqarah', 'Medina', '286');
     },
   );
 
@@ -184,16 +150,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/al-baqarah/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
-      // Verify Al-Baqarah info is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Baqarah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Medina');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('286');
+      // Verify modal contains surah info
+      await verifyModalContainsSurahInfo(page, 'Surah Al-Baqarah', 'Medina', '286');
     },
   );
 
@@ -223,16 +181,8 @@ test.describe('Surah Info URL Redirects', () => {
       // Should be redirected to the new URL
       await expect(page).toHaveURL('/surah/al-alaq/info');
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
-
       // Verify the info loads for Al-Alaq (Surah 96) inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText("Surah Al-'Alaq");
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('19');
+      await verifyModalContainsSurahInfo(page, "Surah Al-'Alaq", 'Mecca', '19');
     },
   );
 });
