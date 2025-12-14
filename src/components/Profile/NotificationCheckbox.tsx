@@ -29,6 +29,7 @@ const NotificationCheckbox: FC<NotificationCheckboxProps> = ({
 
   return (
     <Checkbox
+      keepIndicatorOnUnchecked
       dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_CHECKBOX}
       containerClassName={styles.checkboxContainer}
       indicatorClassName={styles.indicator}
@@ -36,7 +37,7 @@ const NotificationCheckbox: FC<NotificationCheckboxProps> = ({
       id={template._id}
       label={
         <>
-          <span className={styles.title}>{title}</span>: {description}
+          <strong className={styles.title}>{title}:</strong> <span>{description}</span>
         </>
       }
       checked={isEmailEnabled}

@@ -20,6 +20,11 @@ test.beforeEach(async ({ page, context }) => {
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@email-notification-settings'];
 
+// Wait time constants
+const CHECKBOX_TOGGLE_WAIT = 300;
+const PAGE_RELOAD_WAIT = 1000;
+const LOADING_STATE_WAIT = 2000;
+
 test.describe('Form Display', () => {
   test(
     'should display email notification settings section',
@@ -73,7 +78,7 @@ test.describe('Save Button State', () => {
 
       if (checkboxes.length > 0) {
         await checkboxes[0].click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
 
         await expect(saveButton).toBeEnabled();
       }
@@ -92,11 +97,11 @@ test.describe('Save Button State', () => {
 
       if (checkboxes.length > 0) {
         await checkboxes[0].click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
         await expect(saveButton).toBeEnabled();
 
         await checkboxes[0].click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
         await expect(saveButton).toBeDisabled();
       }
     },
@@ -113,7 +118,7 @@ test.describe('Checkbox Interaction', () => {
       const initialState = await firstCheckbox.isChecked();
 
       await firstCheckbox.click();
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
 
       const newState = await firstCheckbox.isChecked();
       expect(newState).toBe(!initialState);
@@ -132,7 +137,7 @@ test.describe('Checkbox Interaction', () => {
       const secondInitialState = await secondCheckbox.isChecked();
 
       await firstCheckbox.click();
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
 
       const firstNewState = await firstCheckbox.isChecked();
       const secondUnchangedState = await secondCheckbox.isChecked();
@@ -154,7 +159,7 @@ test.describe('Checkbox Interaction', () => {
         const firstCheckbox = checkboxes[0];
 
         await firstCheckbox.click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
         await expect(saveButton).toBeEnabled();
 
         const savePromise = saveButton.click();
@@ -186,7 +191,7 @@ test.describe('Form Submission', () => {
         const initialState = await firstCheckbox.isChecked();
 
         await firstCheckbox.click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
 
         await expect(saveButton).toBeEnabled();
         await saveButton.click();
@@ -207,13 +212,13 @@ test.describe('Form Submission', () => {
 
     if (checkboxes.length > 0) {
       await checkboxes[0].click();
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
       await saveButton.click();
 
       await expect(saveButton).toBeDisabled({ timeout: 10000 });
 
       await page.reload();
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(PAGE_RELOAD_WAIT);
 
       const sectionAfterReload = getEmailNotificationSettingsSection(page);
       const newStates = await getCheckboxStates(sectionAfterReload);
@@ -236,9 +241,9 @@ test.describe('Form Submission', () => {
         const secondInitialState = await checkboxes[1].isChecked();
 
         await checkboxes[0].click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
         await checkboxes[1].click();
-        await page.waitForTimeout(300);
+        await page.waitForTimeout(CHECKBOX_TOGGLE_WAIT);
 
         await expect(saveButton).toBeEnabled();
         await saveButton.click();
@@ -259,7 +264,7 @@ test.describe('Error Handling', () => {
   test('should handle loading state gracefully', { tag: TEST_TAGS }, async ({ page }) => {
     await page.goto('/profile', { waitUntil: 'domcontentloaded' });
 
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(LOADING_STATE_WAIT);
 
     const section = getEmailNotificationSettingsSection(page);
     await expect(section).toBeVisible({ timeout: 10000 });

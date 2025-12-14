@@ -56,8 +56,11 @@ const EmailNotificationSettingsForm: FC = () => {
   useEffect(() => {
     setPreferences(userPreferences as IUserPreferenceSettings[]);
     setLocalPreferences(userPreferences as IUserPreferenceSettings[]);
+  }, [userPreferences]);
+
+  useEffect(() => {
     mutate(false);
-  }, [userPreferences, mutate]);
+  }, [mutate]);
 
   const handleToggle = (preference: IUserPreferenceSettings, isChecked: boolean): void => {
     const templateId = preference.template._id;
@@ -92,9 +95,10 @@ const EmailNotificationSettingsForm: FC = () => {
     if (!hasChanges) return;
 
     setIsSaving(true);
-    const changedPreferences = localPreferences.filter((localPref, index) => {
-      const originalPref = preferences[index];
-      const originalEmail = originalPref?.preference.channels[ChannelTypeEnum.EMAIL] ?? false;
+    const changedPreferences = localPreferences.filter((localPref) => {
+      const originalPref = preferences.find((pref) => pref.template._id === localPref.template._id);
+      if (!originalPref) return false;
+      const originalEmail = originalPref.preference.channels[ChannelTypeEnum.EMAIL] ?? false;
       const localEmail = localPref.preference.channels[ChannelTypeEnum.EMAIL] ?? false;
       return originalEmail !== localEmail;
     });
