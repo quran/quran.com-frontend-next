@@ -24,7 +24,7 @@
   }
 }
 
-.tab {
+.tab.tab {
   padding-inline: var(--spacing-xxlarge-px);
   padding-block: var(--spacing-medium-px);
   inline-size: 100%;
@@ -46,7 +46,7 @@
   }
 }
 
-.tabActive {
+.tabActive.tabActive {
   color: var(--color-success-medium);
   border-block-end-color: var(--color-success-medium);
 }
