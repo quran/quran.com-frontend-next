@@ -7,9 +7,11 @@ import styles from './profile.module.scss';
 import withAuth from '@/components/Auth/withAuth';
 import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { HeadlessServiceProvider } from '@/components/Notifications/hooks/useHeadlessService';
 import PageContainer from '@/components/PageContainer';
 import ChangePasswordForm from '@/components/Profile/ChangePasswordForm';
 import EditDetailsForm from '@/components/Profile/EditDetailsForm';
+import EmailNotificationSettingsForm from '@/components/Profile/EmailNotificationSettingsForm';
 import PersonalizationForm from '@/components/Profile/PersonalizationForm';
 import Separator from '@/dls/Separator/Separator';
 import useAuthData from '@/hooks/auth/useAuthData';
@@ -42,6 +44,9 @@ const ProfilePage: FC = () => {
         <PersonalizationForm />
         <EditDetailsForm />
         {canUpdatePassword && <ChangePasswordForm />}
+        <HeadlessServiceProvider>
+          <EmailNotificationSettingsForm />
+        </HeadlessServiceProvider>
       </PageContainer>
     </>
   );

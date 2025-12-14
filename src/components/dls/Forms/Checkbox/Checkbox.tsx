@@ -11,6 +11,9 @@ import TickIcon from '@/icons/tick.svg';
 const INDETERMINATE = 'indeterminate';
 
 interface Props {
+  containerClassName?: string;
+  checkboxClassName?: string;
+  indicatorClassName?: string;
   id: string;
   onChange: (checked: boolean) => void;
   checked?: boolean | typeof INDETERMINATE;
@@ -22,6 +25,9 @@ interface Props {
 }
 
 const Checkbox: React.FC<Props> = ({
+  containerClassName,
+  checkboxClassName,
+  indicatorClassName,
   disabled = false,
   required = false,
   defaultChecked,
@@ -31,33 +37,29 @@ const Checkbox: React.FC<Props> = ({
   name,
   onChange,
 }) => {
-  /**
-   * Handle when the value of the checkbox input changes.
-   *
-   * @param {boolean} newChecked
-   * @returns {void}
-   */
-  const handleChange = (newChecked: boolean): void => {
-    onChange(newChecked);
-  };
-
   return (
-    <div className={classNames(styles.container, { [styles.disabled]: disabled })}>
+    <div
+      className={classNames(styles.container, containerClassName, { [styles.disabled]: disabled })}
+    >
       <RadixCheckbox.Root
         disabled={disabled}
         name={name}
         required={required}
-        onCheckedChange={handleChange}
+        onCheckedChange={onChange}
         id={id}
-        className={styles.checkbox}
+        className={classNames(styles.checkbox, checkboxClassName)}
         defaultChecked={defaultChecked}
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
       >
-        <RadixCheckbox.Indicator
-          className={classNames(styles.indicator, { [styles.disabledIndicator]: disabled })}
+        <span
+          className={classNames(styles.indicator, indicatorClassName, {
+            [styles.disabledIndicator]: disabled,
+          })}
         >
-          {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
-        </RadixCheckbox.Indicator>
+          <RadixCheckbox.Indicator>
+            {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+          </RadixCheckbox.Indicator>
+        </span>
       </RadixCheckbox.Root>
       {label && (
         <label className={styles.label} htmlFor={id}>

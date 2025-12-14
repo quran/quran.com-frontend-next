@@ -47,3 +47,10 @@
     height: calc(2 * var(--spacing-medium2-px));
   }
 }
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-mega-px);
+}
