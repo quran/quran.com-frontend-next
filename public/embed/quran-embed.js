@@ -137,7 +137,7 @@
         return;
       }
       const translator = node.dataset.translatorName;
-      pieces.push(translator ? `${text}\n-- ${translator}` : text);
+      pieces.push(translator ? `${text}\n— ${translator}` : text);
     });
 
     if (verseKey) {

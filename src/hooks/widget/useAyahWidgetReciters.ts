@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react-func/max-lines-per-function */
+import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -22,22 +23,33 @@ const useAyahWidgetReciters = (
 ): Reciter[] => {
   const { t } = useTranslation('ayah-widget');
   const [reciters, setReciters] = useState<Reciter[]>([]);
+  const hasLoadedRef = useRef(false);
+  const lastLoadedLocaleRef = useRef<string | null>(null);
+  const isLoadingRef = useRef(false);
 
   useAbortableEffect(
     (signal) => {
+      if (lastLoadedLocaleRef.current !== locale) {
+        hasLoadedRef.current = false;
+      }
+      if (isLoadingRef.current) {
+        return;
+      }
+      if (hasLoadedRef.current && lastLoadedLocaleRef.current === locale) {
+        return;
+      }
+      lastLoadedLocaleRef.current = locale;
       const loadReciters = async () => {
         try {
-          const response = await getAvailableReciters(locale, undefined);
-          if (signal.aborted) {
-            return;
-          }
+          isLoadingRef.current = true;
+          const response = await getAvailableReciters(locale, []);
           setReciters(response.reciters ?? []);
         } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error(t('errors.loadReciters'), error);
           if (signal.aborted) {
             return;
           }
+          // eslint-disable-next-line no-console
+          console.error(t('errors.loadReciters'), error);
           setReciters([
             {
               id: fallbackReciterId,
@@ -47,6 +59,11 @@ const useAyahWidgetReciters = (
               relativePath: '',
             },
           ]);
+        } finally {
+          if (!signal.aborted) {
+            hasLoadedRef.current = true;
+          }
+          isLoadingRef.current = false;
         }
       };
 

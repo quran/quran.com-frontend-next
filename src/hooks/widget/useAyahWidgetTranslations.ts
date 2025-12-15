@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react-func/max-lines-per-function */
+import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -17,15 +18,27 @@ const DEFAULT_LOCALE = 'en';
 const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTranslation[] => {
   const { t } = useTranslation('ayah-widget');
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
+  const hasLoadedRef = useRef(false);
+  const lastLoadedLocaleRef = useRef<string | null>(null);
+  const isLoadingRef = useRef(false);
 
   useAbortableEffect(
     (signal) => {
+      if (lastLoadedLocaleRef.current !== locale) {
+        hasLoadedRef.current = false;
+      }
+      if (isLoadingRef.current) {
+        return;
+      }
+      if (hasLoadedRef.current && lastLoadedLocaleRef.current === locale) {
+        return;
+      }
+      lastLoadedLocaleRef.current = locale;
+
       const loadTranslations = async () => {
         try {
+          isLoadingRef.current = true;
           const response = await getAvailableTranslations(locale);
-          if (signal.aborted) {
-            return;
-          }
           const list =
             response.translations?.filter(
               (translation): translation is AvailableTranslation =>
@@ -35,6 +48,11 @@ const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTr
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(t('errors.loadTranslations'), error);
+        } finally {
+          if (!signal.aborted) {
+            hasLoadedRef.current = true;
+          }
+          isLoadingRef.current = false;
         }
       };
 
