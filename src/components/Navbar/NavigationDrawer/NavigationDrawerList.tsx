@@ -9,7 +9,7 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconAbout from '@/icons/about.svg';
 import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
-import IconHeadphones from '@/icons/headphones.svg';
+import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -60,13 +60,13 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
     {
       title: t('quran-radio'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RADIO_URL,
       eventName: 'navigation_drawer_quran_radio',
     },
     {
       title: t('reciters'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RECITERS_URL,
       eventName: 'navigation_drawer_reciters',
     },
