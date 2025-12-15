@@ -164,11 +164,9 @@ const enrichTranslations = (
  * @returns {Record<string, unknown>} The built parameters.
  */
 const buildVerseParams = (translationIds: number[], reciter: string, mushaf: MushafType) => {
-  // Get the Quran font and Mushaf ID for the specified Mushaf type.
   const quranFont = getQuranFontForMushaf(mushaf);
   const mushafId = getMushafId(quranFont).mushaf;
 
-  // Build the parameters object.
   const params: Record<string, unknown> = {
     ...DEFAULT_VERSES_PARAMS,
     perPage: 1,
@@ -181,20 +179,16 @@ const buildVerseParams = (translationIds: number[], reciter: string, mushaf: Mus
     mushaf: mushafId,
   };
 
-  // Add additional word fields based on the Mushaf type to
-  // have the right text returned.
-  if (mushaf === 'indopak') {
-    params.wordFields += ',text_indopak';
-  }
-  if (mushaf === 'tajweed') {
-    params.wordFields += ',code_v1,text_uthmani_tajweed';
+  // Add mushaf-specific word fields
+  if (mushaf === 'indopak') params.wordFields += ',text_indopak';
+  if (mushaf === 'tajweed') params.wordFields += ',text_uthmani_tajweed';
+  if (mushaf === 'kfgqpc_v1' && !String(params.wordFields).includes('code_v1')) {
+    params.wordFields += ',code_v1';
   }
 
   // Remove undefined parameters
   Object.keys(params).forEach((key) => {
-    if (params[key] === undefined) {
-      delete params[key];
-    }
+    if (params[key] === undefined) delete params[key];
   });
 
   return params;

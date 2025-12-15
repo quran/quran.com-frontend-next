@@ -1,11 +1,10 @@
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import type { MushafType } from '@/types/ayah-widget';
 import { QuranFont } from '@/types/QuranReader';
-import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
+import { getFontFaceNameForPage, isQCFFont } from '@/utils/fontFaceHelper';
 
-const getAssetBase = (): string => {
-  return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || '';
-};
+// Use the public CDN for external widget usage
+const QURAN_FONT_CDN = 'https://verses.quran.foundation/fonts/quran';
 
 /**
  * Gets the font family for a specific mushaf.
@@ -18,9 +17,11 @@ export const getMushafFontFamily = (mushaf: MushafType): string => {
       return "IndoPak, 'Mehr Nastaliq Web', 'Noto Nastaliq', serif";
     case 'kfgqpc_v1':
     case 'kfgqpc_v2':
-      return "MushafElMadinah, UthmanicHafs, 'Traditional Arabic', serif";
+      // King Fahad fonts use QCF per-page fonts, fallback to Uthmani
+      return "UthmanicHafs, 'Traditional Arabic', serif";
     case 'tajweed':
-      return "TajweedV4, UthmanicHafs, 'Traditional Arabic', serif";
+      // Tajweed uses QCF per-page fonts, fallback to Uthmani
+      return "UthmanicHafs, 'Traditional Arabic', serif";
     case 'qpc':
     default:
       return "UthmanicHafs, 'Traditional Arabic', 'Arabic Typesetting', 'Scheherazade', serif";
@@ -50,25 +51,47 @@ export const getQuranFontForMushaf = (mushaf: MushafType): QuranFont => {
 
 /**
  * Builds the font-face source for a specific Quran mushaf.
+ * Uses the public CDN (verses.quran.foundation) for external widget embedding.
  * @param {MushafType} mushaf The mushaf type.
  * @param {number} pageNumber The page number.
  * @param {ThemeTypeVariant} theme The theme variant.
- * @param {string} assetBase The base URL for assets.
  * @returns {string | null} The font-face source string or null if not applicable.
  */
 export const buildQcffFontFaceSource = (
   mushaf: MushafType,
   pageNumber: number,
   theme: ThemeTypeVariant,
-  assetBase: string = getAssetBase(),
 ): string | null => {
   const quranFont = getQuranFontForMushaf(mushaf);
   if (!isQCFFont(quranFont)) return null;
 
-  return getQCFFontFaceSource(quranFont, pageNumber, theme).replace(
-    /url\(["']\//g,
-    `url('${assetBase}/`,
-  );
+  // Build the font path based on the Quran font type
+  const pageName = String(pageNumber).padStart(3, '0');
+  let fontPath = '';
+  let localPrefix = '';
+
+  if (quranFont === QuranFont.MadaniV1) {
+    fontPath = 'hafs/v1';
+    localPrefix = 'QCF_P';
+  } else if (quranFont === QuranFont.MadaniV2) {
+    fontPath = 'hafs/v2';
+    localPrefix = 'QCF2';
+  } else if (quranFont === QuranFont.TajweedV4) {
+    // For Tajweed V4, use colrv1 by default (works in most browsers)
+    // In Firefox dark mode, the component will need to use ot-svg/dark
+    const isFirefoxDarkMode = theme === 'dark'; // Simplified check for widget
+    fontPath = isFirefoxDarkMode ? 'hafs/v4/ot-svg/dark' : 'hafs/v4/colrv1';
+    localPrefix = 'QCF4_P';
+  } else {
+    return null;
+  }
+
+  const baseUrl = QURAN_FONT_CDN;
+  const woff2 = `${baseUrl}/${fontPath}/woff2/p${pageNumber}.woff2`;
+  const woff = `${baseUrl}/${fontPath}/woff/p${pageNumber}.woff`;
+  const ttf = `${baseUrl}/${fontPath}/ttf/p${pageNumber}.ttf`;
+
+  return `local(${localPrefix}${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
 };
 
 /**
@@ -76,16 +99,14 @@ export const buildQcffFontFaceSource = (
  * @param {MushafType} mushaf The mushaf type.
  * @param {number} pageNumber The page number.
  * @param {ThemeTypeVariant} theme The theme variant.
- * @param {string} assetBase The base URL for assets.
  * @returns {string} The complete @font-face CSS rule.
  */
 export const buildQcffFontFaceCss = (
   mushaf: MushafType,
   pageNumber: number,
   theme: ThemeTypeVariant,
-  assetBase: string = getAssetBase(),
 ): string => {
-  const src = buildQcffFontFaceSource(mushaf, pageNumber, theme, assetBase);
+  const src = buildQcffFontFaceSource(mushaf, pageNumber, theme);
   if (!src) return '';
 
   const quranFont = getQuranFontForMushaf(mushaf);
@@ -100,16 +121,18 @@ export const buildQcffFontFaceCss = (
 };
 
 /**
- * Builds the @font-face CSS for a specific mushaf.
- * @param {string} assetBase The base URL for assets.
- * @returns {string} The complete @font-face CSS rule.
+ * Builds the @font-face CSS for all mushaf fonts (Uthmani, IndoPak, etc.).
+ * Uses the public CDN (verses.quran.foundation) for external widget embedding.
+ * @returns {string} The complete @font-face CSS rules.
  */
-export const buildMushafFontFaceCss = (assetBase: string = getAssetBase()): string => `
+export const buildMushafFontFaceCss = (): string => {
+  const baseUrl = QURAN_FONT_CDN;
+  return `
 @font-face {
   font-family: 'UthmanicHafs';
   src:
     local('KFGQPC HAFS Uthmanic Script'),
-    url('${assetBase}/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
+    url('${baseUrl}/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -117,23 +140,8 @@ export const buildMushafFontFaceCss = (assetBase: string = getAssetBase()): stri
   font-family: 'IndoPak';
   src:
     local('AlQuran IndoPak by QuranWBW'),
-    url('${assetBase}/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MushafElMadinah';
-  src:
-    local('Mushaf El Madinah'),
-    url('${assetBase}/fonts/quran/hafs/me_quran/me_quran-2.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'TajweedV4';
-  src:
-    local('QCF Tajweed V4'),
-    url('${assetBase}/fonts/quran/hafs/v4/colrv1/woff2/p001.woff2') format('woff2');
+    url('${baseUrl}/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2') format('woff2');
   font-display: swap;
 }
 `;
+};

@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { buildMushafFontFaceCss, buildQcffFontFaceCss } from './mushaf-fonts';
@@ -16,6 +15,7 @@ type Props = {
   options: WidgetOptions;
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 const getColors = (theme: WidgetOptions['theme']): WidgetColors => {
   switch (theme) {
     case ThemeType.Dark:
@@ -63,7 +63,6 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
   const colors = getColors(options.theme);
   const audioUrl = options.audioUrl || null;
   const mushafBaseFontFaces = buildMushafFontFaceCss();
-
   const qcfFontFaces = buildQcffFontFaceCss(options.mushaf, verse.pageNumber, options.theme);
 
   const customWidthStyle = options.customWidth
@@ -75,7 +74,8 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
 
   return (
     <div>
-      <style>{`${mushafBaseFontFaces}\n${qcfFontFaces}`}</style>
+      {/* eslint-disable-next-line react/no-danger */}
+      <style dangerouslySetInnerHTML={{ __html: `${mushafBaseFontFaces}\n${qcfFontFaces}` }} />
       <div
         className="quran-widget"
         style={{

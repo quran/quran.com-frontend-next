@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import {
-  buildQcffFontFaceSource,
-  getMushafFontFamily,
-  getQuranFontForMushaf,
-} from './mushaf-fonts';
+import { getMushafFontFamily, getQuranFontForMushaf } from './mushaf-fonts';
 
 import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
 import { QuranFont } from '@/types/QuranReader';
@@ -52,17 +48,8 @@ const ArabicVerse = ({ verse, options, colors }: Props): JSX.Element => {
   const isQcfFont = isQCFFont(quranFont);
   const mushafFont = getMushafFontFamily(options.mushaf);
   const qcfFontFamily = isQcfFont ? getFontFaceNameForPage(quranFont, verse.pageNumber) : '';
+  // For QCF fonts, use the page-specific font name first, then fallback
   const resolvedFontFamily = isQcfFont ? `${qcfFontFamily}, ${mushafFont}` : mushafFont;
-
-  useEffect(() => {
-    if (!isQcfFont || !qcfFontFamily) return;
-    const src = buildQcffFontFaceSource(options.mushaf, verse.pageNumber, options.theme);
-    if (!src || typeof FontFace === 'undefined') return;
-    const fontFace = new FontFace(qcfFontFamily, src);
-    fontFace.load().then(() => {
-      document.fonts.add(fontFace);
-    });
-  }, [isQcfFont, options.mushaf, options.theme, qcfFontFamily, verse.pageNumber]);
 
   const getGlyphText = (word: Verse['words'][number]): string => {
     const codeCandidate =
