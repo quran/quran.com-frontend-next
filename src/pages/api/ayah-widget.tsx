@@ -11,6 +11,7 @@ import { logDebug } from '@/lib/newrelic';
 import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import type { WidgetOptions, MushafType } from '@/types/ayah-widget';
+import { isMushafType } from '@/types/ayah-widget';
 import { getMushafId, getDefaultWordFields } from '@/utils/api';
 import {
   DEFAULT_VERSES_PARAMS,
@@ -49,7 +50,7 @@ type WidgetResponse =
  * @returns {string} The normalized text.
  */
 const normalizeText = (value?: string | null) =>
-  value ? value.replace(INCORRECT_SUKUN_REGEX, '\u0652') : value ?? '';
+  value ? value.replace(INCORRECT_SUKUN_REGEX, '\u0652') : '';
 
 /**
  * Sanitize the verse by normalizing the text and removing footnotes.
@@ -219,12 +220,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const theme: WidgetOptions['theme'] =
     themeParam === ThemeType.Dark || themeParam === ThemeType.Sepia ? themeParam : ThemeType.Light;
   const mushafParam = parseString(req.query.mushaf);
-  const allowedMushaf: MushafType[] = ['qpc', 'kfgqpc_v1', 'kfgqpc_v2', 'indopak', 'tajweed'];
-  const mushaf = allowedMushaf.includes(mushafParam as MushafType)
-    ? (mushafParam as MushafType)
-    : 'qpc';
+  const mushaf: MushafType = isMushafType(mushafParam) ? mushafParam : 'qpc';
   const showTranslatorNames = parseBool(req.query.showTranslatorNames);
-  const showQuranLink = req.query.showQuranLink !== 'false';
+  const showQuranLink = parseBool(req.query.showQuranLink, true);
   const customWidth = parseString(req.query.width) || undefined;
   const customHeight = parseString(req.query.height) || undefined;
   const reciterId = Number(reciter) || Number(DEFAULT_RECITER);
@@ -261,7 +259,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         });
         verse.translations = enrichTranslations(verse.translations, metaById);
       } catch (error) {
-        // Silently continue if translation metadata fails to load
+        // Log error if translation metadata fails to load
+        logDebug('Ayah widget: Failed to load translation metadata', {
+          error,
+          translationResourceIds,
+          ayah,
+        });
       }
     }
 
@@ -282,7 +285,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         const chapterData = chapterResponse.chapter;
         surahName = chapterData?.nameSimple;
       } catch (error) {
-        // Silently continue if chapter info fails to load
+        // Log error if chapter info fails to load
+        logDebug('Failed to fetch chapter info for Surah name', { numericChapterId, error });
       }
 
       // Fetch audio data if audio is enabled
@@ -302,7 +306,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
             audioEndSeconds = timing.timestampTo / 1000;
           }
         } catch (error) {
-          // Silently continue if audio data fails to load
+          logDebug('Ayah widget audio data load error', {
+            error,
+            reciterId,
+            chapterId: numericChapterId,
+          });
         }
       }
     }
@@ -334,7 +342,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     const html = renderToStaticMarkup(<QuranWidget verse={verse} options={widgetOptions} />);
 
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Cache-Control', 'max-age=60');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
 
     // Return the rendered HTML
     return res.status(200).json({ success: true, html });

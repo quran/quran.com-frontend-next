@@ -20,14 +20,17 @@ export default function middleware(req: NextRequest): NextResponse {
     const response = NextResponse.next();
     // Remove X-Frame-Options to allow embedding
     response.headers.delete('X-Frame-Options');
-    // Set permissive CSP for embed pages to allow:
+    // Set CSP for embed pages:
     // - frame-ancestors *: Allow embedding in any iframe
-    // - 'unsafe-inline': Required for inline styles (font-family) and scripts
-    // - *.qurancdn.com: Allow loading fonts and assets from CDN
+    // - 'unsafe-inline' for styles: Required for inline @font-face definitions in dangerouslySetInnerHTML
+    // - verses.quran.foundation: CDN for QCF fonts (King Fahad, Tajweed)
+    // - *.qurancdn.com: Legacy CDN for other assets
     // - data: blob:: Required for font loading via FontFace API
+    // Note: 'unsafe-inline' for scripts is required because the widget HTML is injected via innerHTML
+    // on external sites. A nonce-based approach isn't feasible for this use case.
     response.headers.set(
       'Content-Security-Policy',
-      "frame-ancestors *; default-src 'self' *.qurancdn.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' *.qurancdn.com data: blob:; img-src * data:; connect-src *",
+      "frame-ancestors *; default-src 'self' *.qurancdn.com verses.quran.foundation; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' *.qurancdn.com verses.quran.foundation data: blob:; img-src * data:; connect-src *",
     );
     return response;
   }

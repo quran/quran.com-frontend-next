@@ -169,7 +169,7 @@ const BuilderConfigForm = ({
               <button
                 type="button"
                 onClick={() => toggleTranslation(translation)}
-                aria-label={t('translations.chipRemoveLabel')}
+                aria-label={t('translations.chipRemoveLabel', { name: translation.name })}
               >
                 {t('translations.chipRemoveSymbol')}
               </button>

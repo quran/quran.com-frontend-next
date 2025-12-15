@@ -3,10 +3,22 @@ import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 export type MushafType = 'qpc' | 'kfgqpc_v1' | 'kfgqpc_v2' | 'indopak' | 'tajweed';
 
 /**
+ * Type guard to check if a value is a valid MushafType.
+ * @param {unknown} value The value to check.
+ * @returns {boolean} True if the value is a valid MushafType.
+ */
+export const isMushafType = (value: unknown): value is MushafType => {
+  return (
+    typeof value === 'string' &&
+    ['qpc', 'kfgqpc_v1', 'kfgqpc_v2', 'indopak', 'tajweed'].includes(value)
+  );
+};
+
+/**
  * Options for configuring the Ayah Widget.
  */
 export type WidgetOptions = {
-  // Should the widget has a play button
+  // Should the widget have a play button
   enableAudio: boolean;
 
   // Should the widget display inline word-by-word translations

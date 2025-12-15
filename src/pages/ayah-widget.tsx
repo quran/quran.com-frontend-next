@@ -20,6 +20,8 @@ const DEFAULT_CONTAINER_ID = 'quran-embed-1';
 const DEFAULT_SURAH = 33;
 const DEFAULT_AYAH = 56;
 const DEFAULT_RECITER = 7;
+const DEFAULT_TRANSLATION = 131; // Mustafa Khattab
+const COPY_SUCCESS_DURATION_MS = 2000; // The duration to show copy success state
 const DEFAULT_SNIPPET_SCRIPT =
   process.env.NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL || 'https://quran.com/embed/quran-embed.js';
 const PREVIEW_SCRIPT_SRC = '/embed/quran-embed.js';
@@ -65,7 +67,7 @@ const AyahWidgetBuilderPage = () => {
     if (typeof window !== 'undefined') {
       setPreviewOrigin(window.location.origin);
     }
-  }, [t]);
+  }, []);
 
   // Memoized comma-separated translation IDs for the selected translations
   const translationIds = useMemo(
@@ -176,7 +178,9 @@ const AyahWidgetBuilderPage = () => {
       if (prev.translations.length) {
         return prev;
       }
-      const defaultTranslation = translations.find((translation) => translation.id === 131);
+      const defaultTranslation = translations.find(
+        (translation) => translation.id === DEFAULT_TRANSLATION,
+      );
       if (!defaultTranslation) {
         return prev;
       }
@@ -410,7 +414,7 @@ const AyahWidgetBuilderPage = () => {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(embedSnippet);
         setCopySuccess(true);
-        setTimeout(() => setCopySuccess(false), 2000);
+        setTimeout(() => setCopySuccess(false), COPY_SUCCESS_DURATION_MS);
       } else {
         throw new Error(t('errors.clipboardUnavailable'));
       }
