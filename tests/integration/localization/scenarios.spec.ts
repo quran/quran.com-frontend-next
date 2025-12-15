@@ -451,10 +451,12 @@ test.describe('Localization scenarios - Account', () => {
 
         await helper.waitForReduxHydration();
 
-        await page.locator('[data-testid="profile-avatar-button"]').click();
+        // Click on the first profile avatar button instead one from the drawer
+        await page.locator('[data-testid="profile-avatar-button"]').first().click();
         await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
-        await page.waitForURL(/\/fr(\?|$)/);
+        // After logout, user is redirected to login page while preserving locale
+        await page.waitForURL(/\/login/);
         await helper.waitForReduxHydration();
 
         const theme = await helper.homepage.getPersistedValue('theme');
