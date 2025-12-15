@@ -97,6 +97,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           type="button"
           style={ICON_BUTTON_STYLE(colors)}
           aria-label="More options"
+          aria-expanded="false"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
             <circle cx="8" cy="3" r="1.5" />
@@ -104,7 +105,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
             <circle cx="8" cy="13" r="1.5" />
           </svg>
         </button>
-        <div data-menu style={DROPDOWN_STYLE(colors)}>
+        <div data-menu style={DROPDOWN_STYLE(colors)} role="menu">
           <button
             type="button"
             data-copy-verse

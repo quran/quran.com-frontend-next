@@ -197,7 +197,9 @@ const buildVerseParams = (translationIds: number[], reciter: string, mushaf: Mus
 
 /**
  * Handle the API request for the Ayah widget.
- * @returns {Promise<void>} The API response.
+ * @param {NextApiRequest} req The API request.
+ * @param {NextApiResponse<WidgetResponse>} res The API response.
+ * @returns {Promise<void>}
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>) => {
   // Only allow GET requests
@@ -212,6 +214,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
 
   // Parse query parameters
   const ayah = parseString(req.query.ayah) || DEFAULT_VERSE;
+  // Validate ayah format: must be "chapter:verse" where both are positive integers
+  if (!/^\d+:\d+$/.test(ayah)) {
+    return res.status(400).json({
+      success: false,
+      error: 'Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").',
+      html: '<div>Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").</div>',
+    });
+  }
   const translationIdsQuery = parseString(req.query.translations) ?? '';
   const reciter = parseString(req.query.reciter) || DEFAULT_RECITER;
   const enableAudio = parseBool(req.query.audio, true);

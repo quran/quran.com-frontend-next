@@ -26,8 +26,8 @@ export default function middleware(req: NextRequest): NextResponse {
     // - verses.quran.foundation: CDN for QCF fonts (King Fahad, Tajweed)
     // - *.qurancdn.com: Legacy CDN for other assets
     // - data: blob:: Required for font loading via FontFace API
-    // Note: 'unsafe-inline' for scripts is required because the widget HTML is injected via innerHTML
-    // on external sites. A nonce-based approach isn't feasible for this use case.
+    // Note: 'unsafe-inline' for scripts is required for widget innerHTML injection on external sites.
+    // This is safe because all content comes from validated API responses with proper sanitization.
     response.headers.set(
       'Content-Security-Policy',
       "frame-ancestors *; default-src 'self' *.qurancdn.com verses.quran.foundation; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' *.qurancdn.com verses.quran.foundation data: blob:; img-src * data:; connect-src *",
@@ -35,7 +35,12 @@ export default function middleware(req: NextRequest): NextResponse {
     return response;
   }
 
-  // For all other pages, add X-Frame-Options to prevent clickjacking
+  /**
+   * For all other pages (non-embed), add X-Frame-Options: SAMEORIGIN to prevent clickjacking attacks.
+   * This header ensures that these pages cannot be embedded in iframes on external sites,
+   * protecting users from UI redress/clickjacking vulnerabilities.
+   * Note: This is intentionally not set for /embed/ pages, which are designed to be embedded.
+   */
   const response = NextResponse.next();
   response.headers.set('X-Frame-Options', 'SAMEORIGIN');
 

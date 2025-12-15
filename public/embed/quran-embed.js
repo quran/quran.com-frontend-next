@@ -14,6 +14,7 @@
 
   const config = {
     target: currentScript.getAttribute('data-quran-target'),
+    allowRerender: currentScript.getAttribute('data-quran-allow-rerender') === 'true',
     ayah: currentScript.getAttribute('data-quran-ayah') || '33:56',
     translationIds: currentScript.getAttribute('data-quran-translation-ids') || '',
     reciterId: currentScript.getAttribute('data-quran-reciter-id') || '7',
@@ -30,6 +31,19 @@
   if (!config.target) {
     console.error('[Quran Embed] Missing data-quran-target attribute.');
     return;
+  }
+
+  if (!window.QURAN_EMBED_RENDERED_TARGETS) {
+    window.QURAN_EMBED_RENDERED_TARGETS = new Set();
+  }
+
+  if (!config.allowRerender && window.QURAN_EMBED_RENDERED_TARGETS.has(config.target)) {
+    return;
+  }
+
+  // Mark the target as rendered unless caller allows multiple renders (builder preview).
+  if (!config.allowRerender) {
+    window.QURAN_EMBED_RENDERED_TARGETS.add(config.target);
   }
 
   const container = document.getElementById(config.target);
@@ -169,6 +183,7 @@
       const updateUi = () => {
         const playing = !audioElement.paused && !audioElement.ended;
         audioButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        audioButton.setAttribute('aria-label', playing ? 'Pause audio' : 'Play audio');
         if (playIcon && pauseIcon) {
           playIcon.style.display = playing ? 'none' : 'inline-flex';
           pauseIcon.style.display = playing ? 'inline-flex' : 'none';
@@ -220,7 +235,9 @@
         const isOpen = menu.getAttribute('data-open') === 'true';
         menu.style.display = isOpen ? 'none' : 'block';
         menu.setAttribute('data-open', isOpen ? 'false' : 'true');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
       });
+      menuToggle.setAttribute('aria-expanded', 'false');
     }
 
     if (copyButton) {
@@ -231,6 +248,37 @@
           menu.setAttribute('data-open', 'false');
         }
       });
+    }
+  };
+
+  const sanitizeHtml = (html) => {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const dangerousTags = new Set(['script', 'iframe', 'object', 'embed', 'link', 'meta']);
+      const walker = document.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT, null);
+      const toRemove = [];
+      while (walker.nextNode()) {
+        const el = walker.currentNode;
+        if (dangerousTags.has(el.tagName.toLowerCase())) {
+          toRemove.push(el);
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+        Array.from(el.attributes).forEach((attr) => {
+          const name = attr.name.toLowerCase();
+          const value = attr.value.toLowerCase();
+          // eslint-disable-next-line no-script-url
+          if (name.startsWith('on') || value.includes('javascript:')) {
+            el.removeAttribute(attr.name);
+          }
+        });
+      }
+      toRemove.forEach((el) => el.remove());
+      return doc.body.innerHTML;
+    } catch (error) {
+      console.error('[Quran Embed] Failed to sanitize HTML.', error);
+      return html;
     }
   };
 
@@ -246,7 +294,7 @@
         throw new Error(payload?.error || 'Unexpected response from widget API.');
       }
 
-      container.innerHTML = payload.html;
+      container.innerHTML = sanitizeHtml(payload.html);
       wireWidgetInteractions(container);
     })
     .catch((error) => {

@@ -1,30 +1,29 @@
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getAvailableReciters, getAvailableTranslations } from '@/api';
 import type { Preferences } from '@/components/AyahWidget/builder/types';
 import BuilderConfigForm from '@/components/AyahWidget/BuilderConfigForm';
 import BuilderPreview from '@/components/AyahWidget/BuilderPreview';
+import useAyahWidgetPreview from '@/hooks/widget/useAyahWidgetPreview';
+import useAyahWidgetReciters from '@/hooks/widget/useAyahWidgetReciters';
+import useAyahWidgetSurahs from '@/hooks/widget/useAyahWidgetSurahs';
+import useAyahWidgetTranslations from '@/hooks/widget/useAyahWidgetTranslations';
 import ThemeType from '@/redux/types/ThemeType';
 import styles from '@/styles/ayah-widget.module.scss';
-import Chapter from '@/types/Chapter';
-import { getAllChaptersData } from '@/utils/chapter';
 import type AvailableTranslation from 'types/AvailableTranslation';
-import type Reciter from 'types/Reciter';
 
 // All default values for the Ayah Widget Builder
 const DEFAULT_CONTAINER_ID = 'quran-embed-1';
-const DEFAULT_SURAH = 33;
-const DEFAULT_AYAH = 56;
-const DEFAULT_RECITER = 7;
+const DEFAULT_SURAH = 33; // Surah Al-Ahzab
+const DEFAULT_AYAH = 56; // Ayah 56
+const DEFAULT_RECITER = 7; // Default Reciter: Mishary Rashid Alafasy (ID 7)
 const DEFAULT_TRANSLATION = 131; // Mustafa Khattab
 const COPY_SUCCESS_DURATION_MS = 2000; // The duration to show copy success state
 const DEFAULT_SNIPPET_SCRIPT =
   process.env.NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL || 'https://quran.com/embed/quran-embed.js';
-const PREVIEW_SCRIPT_SRC = '/embed/quran-embed.js';
 const SNIPPET_WIDGET_ORIGIN = process.env.NEXT_PUBLIC_AYAH_WIDGET_ORIGIN || '';
 
 // The builder's default settings
@@ -51,23 +50,11 @@ const INITIAL_PREFERENCES: Preferences = {
 const AyahWidgetBuilderPage = () => {
   const { t } = useTranslation('ayah-widget');
   const [preferences, setPreferences] = useState<Preferences>(INITIAL_PREFERENCES);
-  const [surahs, setSurahs] = useState<Chapter[]>([]);
-  const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
-  const [reciters, setReciters] = useState<Reciter[]>([]);
+  const surahs = useAyahWidgetSurahs();
+  const translations = useAyahWidgetTranslations();
+  const reciters = useAyahWidgetReciters(undefined, DEFAULT_RECITER);
   const [translationSearch, setTranslationSearch] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
-  const [previewOrigin, setPreviewOrigin] = useState('');
-  const previewRef = useRef<HTMLDivElement>(null);
-
-  /**
-   * Set the preview origin from the window location.
-   * Required for cross-origin preview iframe communication in the widget builder.
-   */
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setPreviewOrigin(window.location.origin);
-    }
-  }, []);
 
   // Memoized comma-separated translation IDs for the selected translations
   const translationIds = useMemo(
@@ -79,93 +66,7 @@ const AyahWidgetBuilderPage = () => {
     [preferences.translations],
   );
 
-  /**
-   * Load the list of Surahs on component mount.
-   */
-  useEffect(() => {
-    let cancelled = false;
-    const loadSurahs = async () => {
-      try {
-        const chaptersData = await getAllChaptersData('en');
-        if (!cancelled) {
-          const mapped = Object.entries(chaptersData)
-            .map(([chapterId, chapter]) => ({
-              ...chapter,
-              id: Number(chapterId),
-            }))
-            .filter((chapter) => Number.isFinite(Number(chapter.id)))
-            .sort((a, b) => Number(a.id ?? 0) - Number(b.id ?? 0)) as Chapter[];
-          setSurahs(mapped);
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(t('errors.loadChapters'), error);
-      }
-    };
-
-    loadSurahs();
-    return () => {
-      cancelled = true;
-    };
-  }, [t]);
-
-  /**
-   * Load the list of available translations on component mount.
-   */
-  useEffect(() => {
-    let cancelled = false;
-    const loadTranslations = async () => {
-      try {
-        const response = await getAvailableTranslations('en');
-        if (!cancelled) {
-          const list =
-            response.translations?.filter(
-              (translation): translation is AvailableTranslation =>
-                Boolean(translation?.id) && Boolean(translation?.name),
-            ) ?? [];
-          setTranslations(list);
-        }
-      } catch (error) {
-        console.error(t('errors.loadTranslations'), error);
-      }
-    };
-    loadTranslations();
-    return () => {
-      cancelled = true;
-    };
-  }, [t]);
-
-  /**
-   * Load the list of available reciters on component mount.
-   */
-  useEffect(() => {
-    let cancelled = false;
-    const loadReciters = async () => {
-      try {
-        const response = await getAvailableReciters('en');
-        if (!cancelled) {
-          setReciters(response.reciters ?? []);
-        }
-      } catch (error) {
-        console.error(t('errors.loadReciters'), error);
-        if (!cancelled) {
-          setReciters([
-            {
-              id: DEFAULT_RECITER,
-              reciterId: DEFAULT_RECITER,
-              name: t('reciters.fallback'),
-              recitationStyle: '',
-              relativePath: '',
-            } as Reciter,
-          ]);
-        }
-      }
-    };
-    loadReciters();
-    return () => {
-      cancelled = true;
-    };
-  }, [t]);
+  const previewRef = useAyahWidgetPreview({ preferences, translationIds });
 
   /**
    * Set default translation (Mustafa Khattab) when translations are loaded.
@@ -265,82 +166,6 @@ const AyahWidgetBuilderPage = () => {
     }
     return Array.from({ length: selected.versesCount }, (unused, index) => index + 1);
   }, [preferences.selectedSurah, surahs]);
-
-  /**
-   * Update the preview iframe whenever preferences change.
-   */
-  useEffect(() => {
-    // Clear previous preview
-    if (typeof window === 'undefined' || !previewRef.current) {
-      return undefined;
-    }
-
-    // Create the container div
-    const container = previewRef.current;
-    container.innerHTML = `<div id="${preferences.containerId}"></div>`;
-
-    // Set container size styles
-    const target = container.querySelector<HTMLDivElement>(`#${preferences.containerId}`);
-    if (target) {
-      target.style.width = preferences.hasCustomSize ? preferences.customSize.width : '100%';
-      if (preferences.hasCustomSize) {
-        target.style.height = preferences.customSize.height;
-      }
-      target.style.maxWidth = '100%';
-      target.style.display = 'block';
-    }
-
-    // Create and append the script element
-    const script = document.createElement('script');
-    script.src = PREVIEW_SCRIPT_SRC;
-    script.async = true;
-    if (previewOrigin) {
-      script.setAttribute('data-quran-origin', previewOrigin);
-    }
-    script.setAttribute('data-quran-target', preferences.containerId);
-    script.setAttribute(
-      'data-quran-ayah',
-      `${preferences.selectedSurah}:${preferences.selectedAyah}`,
-    );
-    script.setAttribute('data-quran-translation-ids', translationIds);
-    script.setAttribute(
-      'data-quran-reciter-id',
-      preferences.reciter ? String(preferences.reciter) : '',
-    );
-    script.setAttribute('data-quran-audio', String(preferences.enableAudio));
-    script.setAttribute('data-quran-word-by-word', String(preferences.enableWbwTranslation));
-    script.setAttribute('data-quran-theme', preferences.theme);
-    script.setAttribute('data-quran-show-translator-names', String(preferences.showTranslatorName));
-    script.setAttribute('data-quran-show-quran-link', String(preferences.showQuranLink));
-    script.setAttribute('data-quran-mushaf', preferences.mushaf);
-    if (preferences.hasCustomSize) {
-      script.setAttribute('data-width', preferences.customSize.width);
-      script.setAttribute('data-height', preferences.customSize.height);
-    }
-
-    // Append the script to the document body
-    document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  }, [
-    previewOrigin,
-    preferences.containerId,
-    preferences.customSize.height,
-    preferences.customSize.width,
-    preferences.enableAudio,
-    preferences.enableWbwTranslation,
-    preferences.hasCustomSize,
-    preferences.reciter,
-    preferences.selectedAyah,
-    preferences.selectedSurah,
-    preferences.showQuranLink,
-    preferences.showTranslatorName,
-    preferences.theme,
-    preferences.mushaf,
-    translationIds,
-  ]);
 
   /**
    * Generate the embed snippet based on current preferences.
