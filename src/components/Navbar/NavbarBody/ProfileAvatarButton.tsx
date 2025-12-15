@@ -88,7 +88,8 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
     }
   };
 
-  const onLogoutClicked = async () => logout({ eventName: 'profile_avatar_logout' });
+  const onLogoutClicked = async () =>
+    logout({ eventName: 'profile_avatar_logout', redirectToLogin: true });
 
   const createNavigationHandler =
     (eventName: string, navigationUrl: string): (() => void) =>

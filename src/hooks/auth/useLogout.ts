@@ -40,10 +40,8 @@ const useLogout = (): LogoutFunction => {
         authContextLogout();
         removeLastSyncAt();
 
-        if (!redirectToLogin) {
-          const redirect = router.asPath;
-          await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
-        }
+        const redirect = redirectToLogin ? ROUTES.LOGIN : router.asPath;
+        await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
       } catch (error) {
         // TODO: Notify user of remote logout failure (e.g., toast/snackbar)
         logErrorToSentry(error, {
