@@ -1,5 +1,8 @@
 @use 'src/styles/breakpoints';
 
+$calligraphy-offset: -0.875rem;
+$container-min-height: 200px;
+
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -16,7 +19,7 @@
   // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
   // and misaligning the calligraphy away from the main content. Therefore, only apply this transform for LTR layouts.
   :global([dir='ltr']) & {
-    transform: translateX(-0.875rem);
+    transform: translateX($calligraphy-offset);
   }
 }
 
@@ -81,7 +84,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 200px;
+  min-height: $container-min-height;
   padding-block: var(--spacing-large);
 }
 
