@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import MoreMenuCollapsible from './MoreMenuCollapsible';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -12,6 +13,7 @@ import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
 import IconHeadphones from '@/icons/headphones.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
+import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   ABOUT_US_URL,
@@ -37,6 +39,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   projectsDescClassName,
 }) => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   const continueReadingUrl = useGetContinueReadingUrl();
 
   const ITEMS = [
@@ -78,6 +81,11 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
   ];
 
+  const handleItemClick = (eventName: string) => {
+    dispatch(setIsNavigationDrawerOpen(false));
+    logButtonClick(eventName);
+  };
+
   return (
     <>
       {ITEMS.map((item) => (
@@ -86,7 +94,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
           title={item.title}
           icon={item.icon}
           href={item.href}
-          onClick={() => logButtonClick(item.eventName)}
+          onClick={() => handleItemClick(item.eventName)}
         />
       ))}
       <MoreMenuCollapsible
