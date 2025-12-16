@@ -6,17 +6,24 @@ import Button, { ButtonType } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import { logButtonClick } from '@/utils/eventLogger';
 
-const LabsSection = () => {
+type LabsSectionVariant = 'drawer' | 'inline';
+
+type LabsSectionProps = {
+  variant?: LabsSectionVariant;
+};
+
+const LabsSection = ({ variant = 'drawer' }: LabsSectionProps) => {
   const { t } = useTranslation('developers');
 
   const onLabsClicked = () => {
     logButtonClick('navigation_drawer_labs');
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.flow}>
-        <div>{t('labs-description')}</div>
+  const content = (
+    <div className={styles.flow}>
+      <div>{t('labs-pitch')}</div>
+      {variant === 'drawer' && <div>{t('labs-description')}</div>}
+      <div className={styles.actions}>
         <Link href="https://labs.quran.com" isNewTab className={styles.joinCommunityLink}>
           <Button href="" type={ButtonType.Success} onClick={onLabsClicked}>
             {t('labs-cta')}
@@ -25,6 +32,10 @@ const LabsSection = () => {
       </div>
     </div>
   );
+
+  if (variant === 'inline') return content;
+
+  return <div className={styles.container}>{content}</div>;
 };
 
 export default LabsSection;
