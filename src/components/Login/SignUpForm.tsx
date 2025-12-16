@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
@@ -6,7 +9,7 @@ import addCustomRenderToFormFields from './SignUpFormWithCustomRender';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import getSignUpFormFields from '@/components/Login/SignUpFormFields';
-import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { signUp } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
@@ -17,6 +20,7 @@ interface Props {
 
 const SignUpForm = ({ onSuccess }: Props) => {
   const { t } = useTranslation('login');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (data: SignUpRequest) => {
     logFormSubmission('sign_up');
@@ -25,16 +29,21 @@ const SignUpForm = ({ onSuccess }: Props) => {
       return getFormErrors(t, ErrorType.MISMATCH);
     }
 
+    setIsSubmitting(true);
+
     try {
       const { data: response, errors } = await signUp(data);
 
       if (!response.success) {
+        setIsSubmitting(false);
         return getFormErrors(t, ErrorType.API, errors);
       }
 
+      setIsSubmitting(false);
       onSuccess(data);
       return undefined;
     } catch (error) {
+      setIsSubmitting(false);
       return getFormErrors(t, ErrorType.SIGNUP);
     }
   };
@@ -43,9 +52,10 @@ const SignUpForm = ({ onSuccess }: Props) => {
     <Button
       {...props}
       block
+      size={ButtonSize.Small}
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={styles.submitButton}
+      className={classNames(styles.submitButton, styles.smallMarginTop)}
       data-testid="signup-submit-button"
     >
       {t('sign-up')}
@@ -61,6 +71,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
         formFields={formFields}
         onSubmit={handleSubmit}
         renderAction={renderAction}
+        isSubmitting={isSubmitting}
         shouldSkipValidation
       />
     </div>
