@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import { CollectionListSortOption } from '../../../../types/CollectionSortOptions';
-import QuranReaderStyles from '../../../redux/types/QuranReaderStyles';
+import { CollectionListSortOption } from '@/types/CollectionSortOptions';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';

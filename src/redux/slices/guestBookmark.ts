@@ -24,18 +24,33 @@ const guestBookmarkSlice = createSlice({
   reducers: {
     /**
      * Set the reading bookmark for guest user.
-     * Validation of the bookmark format should happen at the call site.
      *
      * Expected formats:
      * - Verse bookmark: "ayah:chapterId:verseNumber" (e.g. "ayah:1:5")
      * - Page bookmark: "page:pageNumber" (e.g. "page:42")
+     * - null to clear bookmark
      *
      * @param {GuestBookmarkState} state Current state
      * @param {PayloadAction<ReadingBookmark>} action Payload contains bookmark value in the above formats or null to clear
      */
     setGuestReadingBookmark: (state, action: PayloadAction<ReadingBookmark>) => {
-      // Validation happens at call site before dispatch
-      state.readingBookmark = action.payload;
+      const bookmark = action.payload;
+
+      // Validate bookmark format if not null
+      if (bookmark !== null) {
+        const isValidAyah = /^ayah:\d+:\d+$/.test(bookmark);
+        const isValidPage = /^page:\d+$/.test(bookmark);
+
+        if (!isValidAyah && !isValidPage) {
+          // eslint-disable-next-line no-console
+          console.error(
+            `Invalid bookmark format: "${bookmark}". Expected "ayah:chapterId:verseNumber" or "page:pageNumber"`,
+          );
+          return; // Don't update state with invalid bookmark
+        }
+      }
+
+      state.readingBookmark = bookmark;
     },
 
     /**

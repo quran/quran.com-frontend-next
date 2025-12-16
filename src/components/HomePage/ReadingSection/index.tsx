@@ -92,8 +92,8 @@ const ReadingSection: React.FC<Props> = () => {
             verseNumber: Number(firstVerse.verseNumber),
           };
         }
-        // Fallback to null if page verses are not yet loaded
-        return { surahNumber: null, verseNumber: null };
+        // Fallback to undefined if page verses are not yet loaded
+        return { surahNumber: undefined, verseNumber: undefined };
       }
     }
 

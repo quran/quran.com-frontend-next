@@ -483,8 +483,8 @@
 }
 
 .guestCheckmark {
-  inline-size: 16px;
-  block-size: 16px;
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
 
   color: var(--color-success-medium);
   flex-shrink: 0;

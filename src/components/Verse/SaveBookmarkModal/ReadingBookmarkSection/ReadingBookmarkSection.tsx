@@ -258,7 +258,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
 
     try {
       // If previousBookmarkValue is null, we're clearing the bookmark (reverting to no bookmark)
-      const valueToRevert = previousBookmarkValue || '';
+      const valueToRevert = previousBookmarkValue || null;
 
       if (isLoggedIn && onUpdateUserPreference && mushafId) {
         // For logged-in users: persist to server
@@ -351,7 +351,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
     setPendingBookmarkValue(null);
 
     try {
-      const emptyBookmarkValue = '';
+      const emptyBookmarkValue = null;
       if (isLoggedIn && onUpdateUserPreference && mushafId) {
         // For logged-in users: persist to server
         await onUpdateUserPreference(
