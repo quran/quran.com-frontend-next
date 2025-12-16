@@ -1,0 +1,194 @@
+.readingBookmarkSection {
+  display: flex;
+  user-select: none;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-large-px);
+  cursor: pointer;
+  transition: background-color var(--transition-normal) ease;
+  text-decoration: none;
+  &:hover:not(.selected) {
+    background-color: var(--color-background-alternative);
+  }
+
+  &.selected {
+    background-color: var(--color-background-alternative-faded);
+
+    .readingBookmarkIcon {
+      color: var(--color-success-medium);
+    }
+  }
+}
+
+.readingBookmarkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.removeReadingBookmarkSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-large-px);
+  cursor: pointer;
+  transition: background-color var(--transition-normal) ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative);
+  }
+
+  .removeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-success-medium);
+    transition: color var(--transition-normal) ease;
+
+    svg {
+      inline-size: var(--spacing-large);
+      block-size: var(--spacing-large);
+    }
+  }
+
+  .removeContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxsmall);
+    flex: 1;
+  }
+
+  .removeTitle {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-default);
+  }
+
+  .removeInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxsmall);
+    font-size: var(--font-size-small);
+    color: var(--color-text-faded);
+    flex-wrap: wrap;
+  }
+}
+
+.readingBookmarkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-faded);
+  transition: color var(--transition-normal) ease;
+
+  svg {
+    inline-size: var(--spacing-large);
+    block-size: var(--spacing-large);
+  }
+}
+
+.readingBookmarkContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+  flex: 1;
+}
+
+.readingBookmarkTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+}
+
+.readingBookmarkInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  flex-wrap: wrap;
+}
+
+.readingBookmarkInfo .label {
+  color: var(--color-text-faded);
+  font-weight: var(--font-weight-medium);
+}
+
+.readingBookmarkInfo .value {
+  color: var(--color-text-default);
+  font-weight: var(--font-weight-medium);
+}
+
+.undoButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-primary-medium);
+  font-size: var(--font-size-small);
+  transition: color var(--transition-normal) ease;
+
+  &:hover {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 2px;
+  }
+}
+
+.checkbox {
+  inline-size: var(--spacing-large);
+  block-size: var(--spacing-large);
+  border: 2px solid var(--color-borders-hairline);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-normal) ease;
+  background-color: var(--color-background-default);
+}
+
+.checkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--spacing-large);
+  block-size: var(--spacing-large);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background-color var(--transition-normal) ease, color var(--transition-normal) ease;
+  background-color: var(--color-background-default);
+
+  &.checked {
+    background-color: var(--color-success-medium);
+    color: var(--color-background-default);
+  }
+
+  svg {
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
+    stroke-width: var(--stroke-width-medium);
+  }
+}
+
+.errorMessage {
+  position: absolute;
+  inset-block-end: var(--spacing-xlarge);
+  inset-inline-start: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-error-medium);
+  max-inline-size: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
