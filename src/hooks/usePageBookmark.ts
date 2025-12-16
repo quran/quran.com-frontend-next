@@ -56,6 +56,19 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     async () => {
       try {
         const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
+        // Check if response is an error object (404 returns error body instead of throwing)
+        // A valid bookmark must have an id and matching key/type
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const responseAny = response as any;
+        if (
+          !response ||
+          !response.id ||
+          responseAny.error ||
+          response.type !== BookmarkType.Page ||
+          response.key !== pageNumber
+        ) {
+          return null;
+        }
         return response;
       } catch (error) {
         // Return null when bookmark doesn't exist (404) so SWR updates cache properly
@@ -73,7 +86,10 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
   // Determine if the page is bookmarked based on user login status and data source
   const isPageBookmarked = useMemo(() => {
     if (isLoggedIn) {
-      return !!bookmark;
+      // Check for valid bookmark that matches the current page
+      // - Must have an id (not an error object)
+      // - Must match the current page number (not stale data from another page)
+      return !!bookmark?.id && bookmark?.key === pageNumber;
     }
     return !!bookmarkedPages?.[pageNumber.toString()];
   }, [isLoggedIn, bookmarkedPages, bookmark, pageNumber]);
@@ -100,7 +116,9 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
   }, [pageNumber, baseAddBookmark, mutate, invalidateBookmarksList, showToast, showErrorToast]);
 
   const handleBookmarkRemove = useCallback(async () => {
-    if (isPendingRef.current || !bookmark) return;
+    // Check for valid bookmark with id that matches the current page
+    // (not just truthy, as error objects are also truthy, and stale data might be from another page)
+    if (isPendingRef.current || !bookmark?.id || bookmark?.key !== pageNumber) return;
     isPendingRef.current = true;
     const previousBookmark = bookmark;
     mutate(null, { revalidate: false });
@@ -114,7 +132,15 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
     } finally {
       isPendingRef.current = false;
     }
-  }, [bookmark, baseRemoveBookmark, mutate, invalidateBookmarksList, showToast, showErrorToast]);
+  }, [
+    bookmark,
+    baseRemoveBookmark,
+    mutate,
+    invalidateBookmarksList,
+    showToast,
+    showErrorToast,
+    pageNumber,
+  ]);
 
   // Helper: Handle bookmark toggle for logged-out user
   const handleLoggedOutBookmarkToggle = useCallback(() => {
