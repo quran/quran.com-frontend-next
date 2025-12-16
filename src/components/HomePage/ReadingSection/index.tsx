@@ -153,8 +153,11 @@ const ReadingSection: React.FC<Props> = () => {
     </div>
   );
 
+  const safeSurahNumber = surahNumber ?? 1;
+  const safeVerseNumber = typeof verseNumber === 'number' ? verseNumber : undefined;
+
   const continueReadingCard = (
-    <ChapterCard surahNumber={surahNumber} verseNumber={verseNumber} isContinueReading />
+    <ChapterCard surahNumber={safeSurahNumber} verseNumber={safeVerseNumber} isContinueReading />
   );
 
   const goalsOrStreakCard =
