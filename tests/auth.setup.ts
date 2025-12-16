@@ -31,7 +31,7 @@ setup('authenticate', async ({ page }) => {
   await page.getByRole('button', { name: 'Continue' }).click();
 
   // Wait for redirect to home and visible profile avatar
-  await page.waitForURL(/\/[a-z]{2}?$/);
+  await page.waitForURL(/\/([a-z]{2})?$/);
   const profileAvatarButton = page.getByTestId('profile-avatar-button');
   await expect(profileAvatarButton).toHaveCount(2);
   await expect(profileAvatarButton.nth(0)).toBeVisible();
