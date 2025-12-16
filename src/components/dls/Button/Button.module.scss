@@ -1,6 +1,10 @@
 // we are using this mixin ase using the one from utility.scss will break the remotion build
 @mixin lighten-background-color {
-  background-image: linear-gradient(to right, var(--color-background-lighten), var(--color-background-lighten));
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-lighten),
+    var(--color-background-lighten)
+  );
 }
 
 .base {
@@ -183,7 +187,7 @@
   height: calc(0.5 * var(--button-size));
   width: calc(0.5 * var(--button-size));
 }
-.base[dir="rtl"][data-auto-flip-icon="true"] svg {
+.base[dir='rtl'][data-auto-flip-icon='true'] svg {
   transform: scaleX(-1);
 }
 
@@ -216,8 +220,7 @@
   padding-inline-end: 0;
 }
 
-.simplified {
-  --themed-bg: #22a5ad;
+.simplified_base {
   background-color: transparent;
   color: var(--themed-bg);
   font-weight: var(--font-weight-bold);
@@ -225,4 +228,44 @@
   border: 1px solid var(--themed-bg);
   font-size: var(--font-size-small);
   padding: var(--spacing-xxsmall);
+}
+
+.simplified {
+  @extend .simplified_base;
+  --themed-bg: var(--color-qdc-blue);
+}
+
+.simplified_accent {
+  @extend .simplified_base;
+  --themed-bg: var(--color-success-medium);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-success-deep);
+      color: var(--color-text-inverse);
+      opacity: var(--opacity-85);
+    }
+  }
+}
+
+.accent {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-rounded);
+  border: none;
+  font-size: var(--font-size-small-px);
+  padding: var(--spacing-xxsmall-px);
+
+  .prefix svg path {
+    fill: var(--color-text-inverse);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-success-deep);
+      color: var(--color-text-inverse);
+      opacity: var(--opacity-85);
+    }
+  }
 }
