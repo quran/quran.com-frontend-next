@@ -55,14 +55,11 @@ const ProfilePage: FC = () => {
           className={styles.deleteAccountSection}
           aria-labelledby="delete-account-section-title"
         >
-          <h2
-            id="delete-account-section-title"
-            className={styles.deleteAccountSectionDescriptionTitle}
-          >
-            {t('delete-account-warning-title')}
-          </h2>
-          <p className={styles.deleteAccountSectionDescription}>
-            {t('delete-account-warning-description')}
+          <p id="delete-account-section-title" className={styles.deleteAccountSectionDescription}>
+            <span className={styles.deleteAccountSectionDescriptionTitle}>
+              {t('delete-account-warning-title')}:{' '}
+            </span>
+            {t('delete-confirmation.subtitle')}
           </p>
           <div>
             <DeleteAccountButton />

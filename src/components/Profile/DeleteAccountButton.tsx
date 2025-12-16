@@ -62,7 +62,12 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Subtitle>
+              <span className={styles.deleteAccountWarningTitle}>
+                {t('delete-account-warning-title')}:{' '}
+              </span>
+              {t('delete-confirmation.subtitle')}
+            </Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans

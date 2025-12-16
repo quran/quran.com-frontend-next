@@ -4,7 +4,7 @@
     "action-text": "I understand the consequence, delete my account",
     "confirmation-text": "delete my account",
     "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
-    "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
+    "subtitle": "Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
     "title": "Are you absolutely sure?"
   },
   "my-profile": "My Profile",
@@ -23,7 +23,6 @@
   "change-password": "Change Password",
   "update-password": "Update Password",
   "delete-account-warning-title": "Warning",
-  "delete-account-warning-description": "Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
   "success": {
     "details": "Your details have been updated successfully",
     "password": "Your password has been updated successfully",
