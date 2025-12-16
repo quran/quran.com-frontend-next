@@ -10,7 +10,7 @@ import { getEmailField } from './SignUpFormFields/credentialFields';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
-import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
 import { RuleType } from '@/types/FieldRule';
@@ -93,12 +93,13 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       <Button
         {...props}
         block
+        size={ButtonSize.Small}
         shape={ButtonShape.Pill}
         type={ButtonType.Success}
         className={styles.submitButton}
         data-testid="signin-continue-button"
       >
-        {t('continue')}
+        {t('sign-in')}
       </Button>
     </>
   );
