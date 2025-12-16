@@ -4,6 +4,7 @@ import useSWRImmutable from 'swr/immutable';
 import Language from '@/types/Language';
 import { countQuestionsWithinRange, QuestionsData } from '@/utils/auth/api';
 import { makeCountQuestionsWithinRangeUrl } from '@/utils/auth/apiPaths';
+import { normalizeQuestionsData } from '@/utils/questions';
 
 type Range = {
   from: string;
@@ -23,7 +24,12 @@ const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsRespo
       ? makeCountQuestionsWithinRangeUrl(questionsRange.from, questionsRange.to, lang as Language)
       : null,
     async (): Promise<Record<string, QuestionsData>> => {
-      return countQuestionsWithinRange(questionsRange.from, questionsRange.to, lang as Language);
+      const result = await countQuestionsWithinRange(
+        questionsRange.from,
+        questionsRange.to,
+        lang as Language,
+      );
+      return normalizeQuestionsData(result);
     },
   );
 
