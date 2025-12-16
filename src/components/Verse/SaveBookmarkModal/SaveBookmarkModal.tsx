@@ -157,11 +157,20 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
         await favoritesToggle.handleNewVerseBookmark();
       }
       bookmarkData.mutateAllData();
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error && error.message.includes('400')
-          ? commonT('error.bookmark-sync')
-          : commonT('error.general');
+    } catch (err) {
+      const error = err as { status?: number; message?: string };
+      let errorMessage = commonT('error.general');
+
+      if (error.status === 400) {
+        errorMessage = commonT('error.bookmark-sync');
+      } else if (error.status === 401 || error.status === 403) {
+        errorMessage = commonT('error.auth');
+      } else if (error.status === 404) {
+        errorMessage = commonT('error.not-found');
+      } else if (error.status && error.status >= 500) {
+        errorMessage = commonT('error.server');
+      }
+
       toast(errorMessage, { status: ToastStatus.Error });
     } finally {
       setIsTogglingFavorites(false);

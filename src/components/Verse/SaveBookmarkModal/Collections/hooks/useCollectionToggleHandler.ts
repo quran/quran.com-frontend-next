@@ -55,9 +55,19 @@ export const useCollectionToggleHandler = ({
         toast(t('saved-to', { collectionName }), { status: ToastStatus.Success });
         onMutate();
       } catch (err: unknown) {
-        const error = err as { status?: number };
-        const message =
-          error.status === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
+        const error = err as { status?: number; message?: string };
+        let message = commonT('error.general');
+
+        if (error.status === 400) {
+          message = commonT('error.bookmark-sync');
+        } else if (error.status === 401 || error.status === 403) {
+          message = commonT('error.auth');
+        } else if (error.status === 404) {
+          message = commonT('error.not-found');
+        } else if (error.status && error.status >= 500) {
+          message = commonT('error.server');
+        }
+
         toast(message, { status: ToastStatus.Error });
       }
     },
@@ -89,9 +99,19 @@ export const useCollectionToggleHandler = ({
         toast(t('removed-from', { collectionName }), { status: ToastStatus.Success });
         onMutate();
       } catch (err: unknown) {
-        const error = err as { status?: number };
-        const message =
-          error.status === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
+        const error = err as { status?: number; message?: string };
+        let message = commonT('error.general');
+
+        if (error.status === 400) {
+          message = commonT('error.bookmark-sync');
+        } else if (error.status === 401 || error.status === 403) {
+          message = commonT('error.auth');
+        } else if (error.status === 404) {
+          message = commonT('error.not-found');
+        } else if (error.status && error.status >= 500) {
+          message = commonT('error.server');
+        }
+
         toast(message, { status: ToastStatus.Error });
       }
     },
