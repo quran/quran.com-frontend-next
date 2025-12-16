@@ -42,7 +42,7 @@ const fetchVerseBookmark = async (
       chapterId,
       verseNumber,
     });
-    throw error;
+    return undefined;
   }
 };
 

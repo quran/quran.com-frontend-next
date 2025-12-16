@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 
 interface UseNewCollectionFormParams {
   verse: WordVerse | undefined;
@@ -45,6 +45,7 @@ export const useNewCollectionForm = ({
   const [isSubmittingCollection, setIsSubmittingCollection] = useState(false);
 
   const handleNewCollectionClick = useCallback((): void => {
+    logButtonClick('save_bookmark_modal_new_collection');
     setIsCreatingCollection(true);
     setNewCollectionName('');
   }, []);
