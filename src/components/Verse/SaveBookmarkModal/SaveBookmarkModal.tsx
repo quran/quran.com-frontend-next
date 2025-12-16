@@ -8,6 +8,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { logError } from '../../../lib/newrelic';
 
 import CollectionsList from './Collections/CollectionsList';
+import { CollectionItem } from './Collections/CollectionsListItem';
 import { useCollectionsState } from './Collections/hooks/useCollectionsState';
 import { useCollectionToggleHandler } from './Collections/hooks/useCollectionToggleHandler';
 import { useFavoritesToggle } from './Collections/hooks/useFavoritesToggle';
@@ -167,7 +168,10 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
     }
   };
 
-  const handleCollectionToggle = async (collection: any, checked: boolean): Promise<void> => {
+  const handleCollectionToggle = async (
+    collection: CollectionItem,
+    checked: boolean,
+  ): Promise<void> => {
     if (collection.isDefault) {
       await handleFavoritesToggle();
       return;

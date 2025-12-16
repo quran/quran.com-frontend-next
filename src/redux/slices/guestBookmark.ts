@@ -1,8 +1,12 @@
 /* eslint-disable no-param-reassign */ // Required for Redux Toolkit's Immer-based state mutations
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+// Reading bookmark format: "ayah:chapterId:verseNumber" or "page:pageNumber"
+// Examples: "ayah:1:5" (chapter 1, verse 5), "page:42" (page 42)
+export type ReadingBookmark = string | null;
+
 interface GuestBookmarkState {
-  readingBookmark: string | null;
+  readingBookmark: ReadingBookmark;
 }
 
 const initialState: GuestBookmarkState = {
@@ -19,11 +23,17 @@ const guestBookmarkSlice = createSlice({
   initialState,
   reducers: {
     /**
-     * Set the reading bookmark for guest user
+     * Set the reading bookmark for guest user.
+     * Validation of the bookmark format should happen at the call site.
+     *
+     * Expected formats:
+     * - Verse bookmark: "ayah:chapterId:verseNumber" (e.g. "ayah:1:5")
+     * - Page bookmark: "page:pageNumber" (e.g. "page:42")
+     *
      * @param {GuestBookmarkState} state Current state
-     * @param {PayloadAction<string | null>} action Payload contains bookmark value (format: "ayah:chapterId:verseNumber" or "page:pageNumber")
+     * @param {PayloadAction<ReadingBookmark>} action Payload contains bookmark value in the above formats or null to clear
      */
-    setGuestReadingBookmark: (state, action: PayloadAction<string | null>) => {
+    setGuestReadingBookmark: (state, action: PayloadAction<ReadingBookmark>) => {
       // Validation happens at call site before dispatch
       state.readingBookmark = action.payload;
     },
@@ -41,7 +51,7 @@ const guestBookmarkSlice = createSlice({
 // Selectors
 export const selectGuestReadingBookmark = (state: {
   guestBookmark: GuestBookmarkState;
-}): string | null => state.guestBookmark?.readingBookmark ?? null;
+}): ReadingBookmark => state.guestBookmark?.readingBookmark ?? null;
 
 export const { setGuestReadingBookmark, clearGuestBookmarks } = guestBookmarkSlice.actions;
 

@@ -4,6 +4,7 @@ import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
 import { CollectionListSortOption } from '../../../../types/CollectionSortOptions';
+import QuranReaderStyles from '../../../redux/types/QuranReaderStyles';
 
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
@@ -29,7 +30,7 @@ interface UseSaveBookmarkDataParams {
   verse: WordVerse | undefined;
   pageNumber: number | undefined;
   mushafId: number;
-  quranReaderStyles: any;
+  quranReaderStyles: QuranReaderStyles;
 }
 
 /**

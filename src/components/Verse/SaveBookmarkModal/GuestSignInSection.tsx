@@ -37,8 +37,6 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
           <GuestFeatureItem text={t('guest-prompt.attach-notes')} />
         </div>
 
-        <div className={styles.guestDivider} />
-
         <button type="button" className={styles.guestSignInButton} onClick={handleSignInClick}>
           {t('guest-prompt.sign-in')}
         </button>

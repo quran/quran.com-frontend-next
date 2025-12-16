@@ -21,7 +21,7 @@ import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 
 // Flickering issue resolving by smooth state changes
 // Debounce removal flag to prevent flicker when state updates
-const DEBOUNCE_FLICKER_EFFECT_MS = 300;
+const STATE_TRANSITION_DELAY_MS = 300;
 
 export enum ReadingBookmarkType {
   Verse = 'verse',
@@ -201,9 +201,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
     // Store the previous bookmark only if there IS one (changing FROM something)
     // If there's no previous bookmark, don't set previousBookmarkValue
     setPreviousBookmarkValue(effectiveCurrentBookmark || null);
-    if (effectiveCurrentBookmark) {
-      setPendingBookmarkValue(bookmarkValue);
-    }
+    setPendingBookmarkValue(bookmarkValue);
     try {
       if (isLoggedIn && onUpdateUserPreference && mushafId) {
         // For logged-in users: persist to server
@@ -290,7 +288,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
       // effectiveCurrentBookmark before clearing isUndoInProgress flag
       undoTimeoutRef.current = setTimeout(() => {
         setIsUndoInProgress(false);
-      }, DEBOUNCE_FLICKER_EFFECT_MS);
+      }, STATE_TRANSITION_DELAY_MS);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to undo reading bookmark');
       setIsUndoInProgress(false);
@@ -353,19 +351,19 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
     setPendingBookmarkValue(null);
 
     try {
-      const nullValue = '';
+      const emptyBookmarkValue = '';
       if (isLoggedIn && onUpdateUserPreference && mushafId) {
         // For logged-in users: persist to server
         await onUpdateUserPreference(
           ReadingBookmarkPreferenceGroupKey.BOOKMARK,
-          nullValue,
+          emptyBookmarkValue,
           PreferenceGroup.READING_BOOKMARK,
           mushafId,
         );
       } else {
         // For guest users: clear from Redux store
         try {
-          dispatch(setGuestReadingBookmark(nullValue));
+          dispatch(setGuestReadingBookmark(emptyBookmarkValue));
         } catch (reduxError) {
           throw new Error('Unable to remove reading bookmark. Please try again.');
         }
@@ -380,7 +378,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
       // effectiveCurrentBookmark before clearing isRemovalInProgress flag
       removalTimeoutRef.current = setTimeout(() => {
         setIsRemovalInProgress(false);
-      }, DEBOUNCE_FLICKER_EFFECT_MS);
+      }, STATE_TRANSITION_DELAY_MS);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove reading bookmark');
       setPreviousBookmarkValue(null);
