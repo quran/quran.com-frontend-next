@@ -72,7 +72,7 @@ const Header: React.FC<Props> = ({
   return (
     <>
       <DrawerSearchIcon />
-      <div className={classNames(styles.searchInputContainer)}>
+      <div className={classNames(styles.searchInputContainer)} data-testid="search-drawer-header">
         <form onSubmit={onSubmit} className={styles.from}>
           <input
             className={styles.searchInput}

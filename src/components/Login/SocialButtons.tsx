@@ -34,6 +34,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Google)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
+        data-testid="google-login-button"
       >
         {t('continue-google')}
       </Button>
@@ -44,6 +45,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Facebook)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
+        data-testid="facebook-login-button"
       >
         {t('continue-facebook')}
       </Button>
@@ -54,6 +56,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Apple)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
+        data-testid="apple-login-button"
       >
         {t('continue-apple')}
       </Button>
@@ -65,6 +68,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         className={classNames(styles.loginButton, styles.emailButton)}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Pill}
+        data-testid="email-login-button"
       >
         {t('continue-email')}
       </Button>

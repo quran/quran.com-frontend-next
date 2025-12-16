@@ -1,83 +1,38 @@
-@use "src/styles/breakpoints";
-
 .container {
-  margin-block-start: calc(-1 * var(--banner-height));
-  transition: var(--transition-regular);
+  margin-block-start: 0;
   box-sizing: border-box;
   height: var(--banner-height);
-  position: relative;
-  background-color: var(--color-background-lighten);
+  background-color: var(--color-background-elevated-new);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--spacing-small-px);
 
-  padding-inline: var(--spacing-large);
-  padding-block: var(--spacing-xsmall);
-
-  @include breakpoints.tablet {
-    position: absolute;
-    display: inline-flex;
-    background-color: transparent;
-    padding-inline: var(--spacing-mega);
-    justify-content: center;
-    max-width: calc(20 * var(--spacing-mega));
-    inset-inline-start: 0;
-    inset-inline-end: 0;
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-  }
-}
-.isVisible {
-  margin-block-start: 0;
-}
-
-.description {
-  display: flex;
-  align-items: center;
-  font-size: 14px; // hard coded value, because it's not available in our design system
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-normal);
-    margin-inline-end: var(--spacing-large);
-  }
-}
-.illustrationContainer {
-  display: flex;
-  @include breakpoints.tablet {
-    display: inline-flex;
-    height: var(--spacing-mega);
-    width: var(--spacing-mega);
-  }
-  height: var(--spacing-large);
-  width: var(--spacing-large);
-  margin-inline-end: var(--spacing-xxsmall);
-}
-
-.ctaContainer {
-  @include breakpoints.tablet {
-    padding-inline-end: calc(1.5 * var(--spacing-medium));
-  }
-}
-
-.closeButton {
-  color: var(--color-success-medium);
-
-  height: 100%;
-  position: absolute;
-  inset-block-start: 0;
-
-  display: flex;
-  align-items: center;
-
-  inset-inline-end: var(--spacing-small);
-  @include breakpoints.tablet {
-    position: relative;
-    margin-inline-start: var(--spacing-xxsmall);
-  }
+  padding-inline: var(--spacing-small-px);
+  padding-block: var(--spacing-xsmall-px);
 }
 
 .text {
-  line-height: normal;
   color: var(--color-text-default-new);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small-px);
+}
+
+.cta {
+  padding-inline: var(--spacing-xsmall-px);
+  padding-block: var(--spacing-micro2-px);
+  background-color: var(--color-success-faded);
+  color: var(--color-text-link-new);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  border-radius: var(--border-radius-medium-px);
+  text-decoration: none;
+}
+
+.icon > svg path {
+  fill: var(--color-text-link-new);
 }

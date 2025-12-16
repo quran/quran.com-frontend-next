@@ -1,5 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,12 +9,12 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import SanityPage from '@/components/Sanity/Page';
+import { SINGLE_PRODUCT_UPDATE_QUERY, getSingleProductUpdatePage } from '@/components/Sanity/utils';
 import Spinner from '@/dls/Spinner/Spinner';
-import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 interface Props {
   page?: any[];
@@ -50,49 +50,38 @@ const ProductUpdatePage: NextPage<Props> = ({ page }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { id = '' } = context.params;
-  const { locale } = context;
-  try {
-    const page = await executeGroqQuery(
-      '*[_type == "productUpdate" && slug.current == $slug][0]',
-      {
-        slug: id,
-      },
-      true,
-    );
-    if (!page) {
-      // @ts-ignore
-      throw new Error('invalid slug');
-    }
-    const chaptersData = await getAllChaptersData(locale);
-    return {
-      props: {
-        page,
-        chaptersData,
-      },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ProductUpdatePage',
-      metadata: {
-        slug: id,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/product-updates/[id]',
+  async (context) => {
+    const { params, locale } = context;
+    const { id = '' } = params;
 
-export const getStaticPaths = async () => {
-  const pages = await executeGroqQuery('*[_type == "productUpdate"]{ slug}');
-  return {
-    paths: pages.map((page) => ({ params: { id: page.slug.current } })),
-    fallback: true,
-  };
-};
+    try {
+      const page = await getSingleProductUpdatePage(id as string);
+      if (!page) {
+        // @ts-ignore
+        throw new Error('invalid slug');
+      }
+      const chaptersData = await getAllChaptersData(locale);
+      return {
+        props: {
+          page,
+          chaptersData,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-ProductUpdatePage',
+        metadata: {
+          slug: id,
+          query: SINGLE_PRODUCT_UPDATE_QUERY,
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default ProductUpdatePage;

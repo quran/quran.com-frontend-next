@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { MouseEventHandler, ButtonHTMLAttributes } from 'react';
+import React, { MouseEventHandler, ButtonHTMLAttributes, forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -68,84 +68,125 @@ export type ButtonProps = {
   id?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({
-  href,
-  onClick,
-  children,
-  isDisabled: disabled = false,
-  isLoading,
-  type = ButtonType.Primary,
-  size = ButtonSize.Medium,
-  shape,
-  prefix,
-  suffix,
-  variant,
-  tooltip,
-  tooltipContentSide = ContentSide.BOTTOM,
-  className,
-  contentClassName,
-  hasSidePadding = true,
-  shouldFlipOnRTL = true,
-  shouldShallowRoute: shallowRouting = false,
-  shouldPrefetch: prefetch = true,
-  isNewTab: newTab,
-  ariaLabel,
-  htmlType,
-  ...props
-}) => {
-  const direction = useDirection();
-  const classes = classNames(styles.base, className, {
-    [styles.withText]: typeof children === 'string',
-    [styles.withIcon]: typeof children !== 'string',
-    // type
-    [styles.primary]: type === ButtonType.Primary,
-    [styles.secondary]: type === ButtonType.Secondary,
-    [styles.success]: type === ButtonType.Success,
-    [styles.warning]: type === ButtonType.Warning,
-    [styles.error]: type === ButtonType.Error,
-    [styles.inverse]: type === ButtonType.Inverse,
+/**
+ * Button component that can render as either a button or a link.
+ *
+ * @param ref - Forwarded ref to the underlying button element.
+ *   **Important**: When `href` is provided, the component renders a `<Link>` with a `<div>` inside,
+ *   and the ref will not be forwarded. In this scenario, accessing the ref will return `null`.
+ *   If you need ref access, avoid using the `href` prop.
+ */
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      href,
+      onClick,
+      children,
+      isDisabled: disabled = false,
+      isLoading,
+      type = ButtonType.Primary,
+      size = ButtonSize.Medium,
+      shape,
+      prefix,
+      suffix,
+      variant,
+      tooltip,
+      tooltipContentSide = ContentSide.BOTTOM,
+      className,
+      contentClassName,
+      hasSidePadding = true,
+      shouldFlipOnRTL = true,
+      shouldShallowRoute: shallowRouting = false,
+      shouldPrefetch: prefetch = true,
+      isNewTab: newTab,
+      ariaLabel,
+      htmlType,
+      ...props
+    },
+    ref,
+  ) => {
+    const direction = useDirection();
+    const classes = classNames(styles.base, className, {
+      [styles.withText]: typeof children === 'string',
+      [styles.withIcon]: typeof children !== 'string',
+      // type
+      [styles.primary]: type === ButtonType.Primary,
+      [styles.secondary]: type === ButtonType.Secondary,
+      [styles.success]: type === ButtonType.Success,
+      [styles.warning]: type === ButtonType.Warning,
+      [styles.error]: type === ButtonType.Error,
+      [styles.inverse]: type === ButtonType.Inverse,
 
-    // size
-    [styles.large]: size === ButtonSize.Large,
-    [styles.normal]: size === ButtonSize.Medium,
-    [styles.small]: size === ButtonSize.Small,
+      // size
+      [styles.large]: size === ButtonSize.Large,
+      [styles.normal]: size === ButtonSize.Medium,
+      [styles.small]: size === ButtonSize.Small,
 
-    // shape
-    [styles.square]: shape === ButtonShape.Square,
-    [styles.circle]: shape === ButtonShape.Circle,
-    [styles.pill]: shape === ButtonShape.Pill,
+      // shape
+      [styles.square]: shape === ButtonShape.Square,
+      [styles.circle]: shape === ButtonShape.Circle,
+      [styles.pill]: shape === ButtonShape.Pill,
 
-    // variant
-    [styles.shadow]: variant === ButtonVariant.Shadow,
-    [styles.ghost]: variant === ButtonVariant.Ghost,
-    [styles.compact]: variant === ButtonVariant.Compact,
-    [styles.outlined]: variant === ButtonVariant.Outlined,
-    [styles.simplified]: variant === ButtonVariant.Simplified,
-    [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
-    [styles.accent]: variant === ButtonVariant.Accent,
-    [styles.disabled]: disabled || isLoading,
-    [styles.noSidePadding]: !hasSidePadding,
-  });
+      // variant
+      [styles.shadow]: variant === ButtonVariant.Shadow,
+      [styles.ghost]: variant === ButtonVariant.Ghost,
+      [styles.compact]: variant === ButtonVariant.Compact,
+      [styles.outlined]: variant === ButtonVariant.Outlined,
+      [styles.simplified]: variant === ButtonVariant.Simplified,
+      [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
+      [styles.accent]: variant === ButtonVariant.Accent,
+      [styles.disabled]: disabled || isLoading,
+      [styles.noSidePadding]: !hasSidePadding,
+    });
 
-  // when loading, replace the prefix icon with loading icon
-  let prefixFinal;
-  if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
-  else prefixFinal = prefix;
+    // when loading, replace the prefix icon with loading icon
+    let prefixFinal;
+    if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
+    else prefixFinal = prefix;
 
-  let content;
+    let content;
 
-  if (href && !disabled) {
-    content = (
-      <Link
-        href={href}
-        isNewTab={newTab}
-        shouldPrefetch={prefetch}
-        isShallow={shallowRouting}
-        {...(onClick && { onClick })}
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        {...(ariaLabel && { ariaLabel })}
-      >
-        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
+    if (href && !disabled) {
+      content = (
+        <Link
+          href={href}
+          isNewTab={newTab}
+          shouldPrefetch={prefetch}
+          isShallow={shallowRouting}
+          {...(onClick && { onClick })}
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          {...(ariaLabel && { ariaLabel })}
+        >
+          <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
+            {prefixFinal && (
+              <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
+                {prefixFinal}
+              </span>
+            )}
+            <span className={classNames(styles.content, contentClassName)}>{children}</span>
+            {suffix && (
+              <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
+                {suffix}
+              </span>
+            )}
+          </div>
+        </Link>
+      );
+    } else {
+      content = (
+        <button
+          ref={ref}
+          // eslint-disable-next-line react/button-has-type
+          type={htmlType || 'button'}
+          dir={direction}
+          className={classes}
+          disabled={disabled}
+          onClick={onClick}
+          data-auto-flip-icon={shouldFlipOnRTL}
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          {...(ariaLabel && { 'aria-label': ariaLabel })}
+          {...props}
+        >
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -157,50 +198,25 @@ const Button: React.FC<ButtonProps> = ({
               {suffix}
             </span>
           )}
-        </div>
-      </Link>
-    );
-  } else {
-    content = (
-      <button
-        // eslint-disable-next-line react/button-has-type
-        type={htmlType}
-        dir={direction}
-        className={classes}
-        disabled={disabled}
-        onClick={onClick}
-        data-auto-flip-icon={shouldFlipOnRTL}
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        {...(ariaLabel && { 'aria-label': ariaLabel })}
-        {...props}
-      >
-        {prefixFinal && (
-          <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
-            {prefixFinal}
-          </span>
-        )}
-        <span className={classNames(styles.content, contentClassName)}>{children}</span>
-        {suffix && (
-          <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
-            {suffix}
-          </span>
-        )}
-      </button>
-    );
-  }
+        </button>
+      );
+    }
 
-  return (
-    <Wrapper
-      shouldWrap={!!tooltip}
-      wrapper={(tooltipChildren) => (
-        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
-          {tooltipChildren}
-        </Tooltip>
-      )}
-    >
-      {content}
-    </Wrapper>
-  );
-};
+    return (
+      <Wrapper
+        shouldWrap={!!tooltip}
+        wrapper={(tooltipChildren) => (
+          <Tooltip text={tooltip} contentSide={tooltipContentSide}>
+            {tooltipChildren}
+          </Tooltip>
+        )}
+      >
+        {content}
+      </Wrapper>
+    );
+  },
+);
+
+Button.displayName = 'Button';
 
 export default Button;

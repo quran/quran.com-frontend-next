@@ -2,3 +2,7 @@
   min-width: max-content;
   margin-right: var(--spacing-medium2-px);
 }
+
+.bookmarkIcon > path {
+  fill: var(--color-blue-buttons-and-icons);
+}

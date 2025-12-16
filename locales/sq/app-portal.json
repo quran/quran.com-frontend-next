@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Mëso përmendësh dhe përsërit Kuranin në mënyrë efikase",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Lexoni, shtoni në faqeshënues dhe dëgjoni Kuranin në pajisjet Android",
+        "title": "Kurani për Android"
+      },
+      "quran_ios": {
+        "caption": "Aplikacion i bukur dhe pa reklama për leximin dhe dëgjimin e Kuranit për iPhone dhe iPad",
+        "title": "Kurani për iOS (nga quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Seanca të drejtpërdrejta të studimit të Kuranit",
+        "title": "Takim me Kuranin"
+      },
+      "quranreflect": {
+        "caption": "Ndani reflektimet",
+        "title": "Reflektimi i Kuranit"
+      },
+      "readtafsir": {
+        "caption": "Kërko dhe krahaso tefsiret klasike",
+        "title": "Lexo Tefsirin"
+      },
+      "sunnah": {
+        "caption": "Koleksion Hadithi",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tefsir interaktiv me burime të shumta",
+        "title": "Aplikacioni Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Të gjitha aplikacionet",
+      "community": "Komuniteti",
+      "hadith-sunnah": "Hadithi dhe Suneti",
+      "popular": "Popullore",
+      "quran-reader": "Lexues Kurani",
+      "reflections": "Reflektime",
+      "study-tools": "Mjete studimi"
+    },
+    "title": "Shfleto të gjitha aplikacionet"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Më në fund, një aplikacion Kurani për vajzat tona",
+        "name": "Qariah",
+        "tagline": "Gratë që recitojnë Kuranin"
+      },
+      "quran-kareem": {
+        "headline": "Porta juaj e re për t'u lidhur me Librin e Allahut",
+        "name": "Kurani Kareem",
+        "tagline": "Lexoni, dëgjoni dhe reflektoni"
+      },
+      "quran-link": {
+        "headline": "Eksploroni mbi 25 tefsirë dhe mbi 100 përkthime në një vend",
+        "name": "Lidhja e Kuranit",
+        "tagline": "Tefsir dhe shoqërues studimi"
+      }
+    },
+    "learn-more": "Mëso më shumë",
+    "title": "Aplikacione të veçuara",
+    "view-all": "Shiko të gjitha"
+  },
+  "hero": {
+    "description": "Eksploroni një koleksion të kuruar aplikacionesh islamike të ndërtuara me Quran.foundation. Nga mjetet e studimit deri te shërbimet e lutjes, gjeni aplikacione që përmirësojnë udhëtimin tuaj shpirtëror.",
+    "title": "Zbuloni Ekosistemin tonë të Aplikacioneve"
+  },
+  "quran-apps-portal": "Portali i Aplikacioneve të Kuranit"
+}
