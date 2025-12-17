@@ -6,11 +6,12 @@ $close-icon-h: 24px;
 $close-icon-w: 22px;
 $modal-padding: 40px;
 $modal-width: 500px;
+$border-width-default: 1px;
 
 .divider {
   inline-size: 100%;
   border: none;
-  border-block-start: 1px solid var(--color-borders-hairline);
+  border-block-start: $border-width-default solid var(--color-borders-hairline);
   margin: auto;
 }
 

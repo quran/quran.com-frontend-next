@@ -1,7 +1,6 @@
 @import './shared.module.scss';
 
 .modal {
-  min-inline-size: $modal-width;
   > div {
     padding: $modal-padding !important;
   }
@@ -78,6 +77,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
+  margin-block-start: var(--spacing-small-px);
   gap: var(--spacing-small);
 
   inline-size: 100%;
@@ -101,16 +101,18 @@
   inline-size: 100%;
 
   background: var(--color-background-default);
-  border: var(--border-width-default) solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-medium-px);
+  border: $border-width-default solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
 }
 
 .guestSignInMessage {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-default);
   margin: 0;
-  line-height: var(--line-height-normal);
+  line-height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .guestFeaturesList {
@@ -118,7 +120,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0;
-  gap: var(--spacing-small);
+  gap: var(--spacing-medium-px);
 
   inline-size: 100%;
 }

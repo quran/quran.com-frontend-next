@@ -36,7 +36,7 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
         </div>
 
         <button type="button" className={styles.guestSignInButton} onClick={handleSignInClick}>
-          {t('guest-prompt.sign-in')}
+          {t('login:sign-in')}
         </button>
       </div>
     </div>
