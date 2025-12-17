@@ -11,9 +11,12 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 
-const NoteModal = () => {
+interface NoteModalProps {
+  notesCount?: number;
+}
+
+const NoteModal: React.FC<NoteModalProps> = ({ notesCount = 0 }) => {
   const { t } = useTranslation('notes');
-  const count = 5;
 
   const [noteInput, setNoteInput] = useState('');
   const errors: Record<string, string> = {};
@@ -35,7 +38,7 @@ const NoteModal = () => {
         {errors.note && <div className={styles.error}>{errors.note}</div>}
       </div>
 
-      {count > 0 && (
+      {notesCount > 0 && (
         <button type="button" className={styles.notesButton}>
           <IconContainer
             icon={<NotesWithPencilIcon />}
@@ -43,7 +46,9 @@ const NoteModal = () => {
             size={IconSize.Custom}
             className={styles.notesButtonPencil}
           />
-          <span className={styles.notesButtonText}>{t('save-post-to-qr')}</span>
+          <span className={styles.notesButtonText}>
+            {t('notes-on-this-verse', { count: notesCount })}
+          </span>
           <IconContainer
             icon={<ChevronRightIcon />}
             color={IconColor.default}

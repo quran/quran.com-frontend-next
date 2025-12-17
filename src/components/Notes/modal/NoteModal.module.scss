@@ -13,7 +13,8 @@ $note_text_area_height: 360px;
   gap: var(--spacing-xxsmall);
 }
 
-.textArea {
+// Div is used to increase specificity to override the default styles.
+div.textArea {
   padding: 0;
 
   textarea {

@@ -56,6 +56,7 @@
     "line-3": "Content that is not suitable for public viewing will be hidden or deleted. Users posting inappropriate content will be blocked.",
     "title": "Learn more about Posted Reflections"
   },
+  "notes-on-this-verse": "{{count}} notes on this verse",
   "save-post-to-qr": "Save & Post to QuranReflect",
   "save-privately": "Save Privately",
   "save-publish-failed": "Note has been saved successfully but failed to publish",
