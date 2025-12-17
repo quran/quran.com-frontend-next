@@ -157,10 +157,17 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
       }
       bookmarkData.mutateAllData();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error && error.message.includes('400')
-          ? commonT('error.bookmark-sync')
-          : commonT('error.general');
+      // Prefer status code check over fragile string matching
+      let isSyncError = false;
+      if (error && typeof error === 'object') {
+        // Check for common status code properties
+        const status =
+          (error as any).status ?? (error as any).statusCode ?? (error as any).response?.status;
+        if (status === 400) {
+          isSyncError = true;
+        }
+      }
+      const errorMessage = isSyncError ? commonT('error.bookmark-sync') : commonT('error.general');
       toast(errorMessage, { status: ToastStatus.Error });
     } finally {
       setIsTogglingFavorites(false);
