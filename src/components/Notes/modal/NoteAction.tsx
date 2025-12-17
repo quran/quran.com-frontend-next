@@ -11,6 +11,7 @@ import translationViewStyles from '@/components/QuranReader/TranslationView/Tran
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import { WordVerse } from '@/types/Word';
@@ -37,6 +38,7 @@ const NoteAction: React.FC<NoteActionProps> = ({
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
 
   const getEventName = useCallback(
     (action: string) =>
@@ -119,7 +121,7 @@ const NoteAction: React.FC<NoteActionProps> = ({
         overlayClassName={styles.overlay}
         onEscapeKeyDown={onModalClose}
       >
-        <NoteModal />
+        <NoteModal notesCount={notesCount?.[verse.verseKey] ?? 0} />
       </ContentModal>
     </>
   );
