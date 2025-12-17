@@ -270,6 +270,7 @@ const useReadingBookmark = ({
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to remove reading bookmark');
       setPreviousBookmarkValue(null);
+      setPendingBookmarkValue(effectiveCurrentBookmark);
       setIsRemovalInProgress(false);
     } finally {
       setIsLoading(false);

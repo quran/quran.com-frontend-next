@@ -64,7 +64,7 @@ const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
       <div className={styles.removeContent}>
         <div className={styles.removeTitle}>
           {t('remove-my-reading-bookmark')}
-          <span className={styles.questionIcon} title={t('reading-bookmark-info-tooltip')}>
+          <span className={styles.questionIcon} title={t('remove-my-reading-bookmark')}>
             <QuestionIcon />
           </span>
         </div>

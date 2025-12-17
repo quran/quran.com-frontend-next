@@ -158,10 +158,11 @@ const useSaveBookmarkModal = ({
         await addOrUpdateUserPreference(key, value, group as PreferenceGroup, id);
       } catch (error) {
         logError('Failed to update reading bookmark preference:', error);
+        toast(commonT('error.general'), { status: ToastStatus.Error });
         throw error;
       }
     },
-    [],
+    [commonT, toast],
   );
 
   const handleReadingBookmarkChanged = useCallback(async (): Promise<void> => {
