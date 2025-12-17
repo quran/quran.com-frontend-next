@@ -71,7 +71,7 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
 
     return (
       <SaveBookmarkModal
-        key={`bookmark-modal-${verse.verseKey}`}
+        key={verse.verseKey}
         isOpen={isModalOpen}
         onClose={onModalClose}
         verse={verse}
