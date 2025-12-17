@@ -13,9 +13,9 @@ test.describe('SaveBookmarkModal (guest)', () => {
   test('opens and sets reading bookmark', async ({ page }) => {
     const firstVerse = page.getByTestId('verse-1:1');
     await firstVerse.getByLabel('Bookmark').click();
-    await expect(page.getByText('Save verse 1:1')).toBeVisible();
-    await page.getByText('Set as my Reading Bookmark').click();
-    await expect(page.getByText('New')).toBeVisible();
+    await expect(page.getByTestId('save-bookmark-modal-title')).toBeVisible();
+    await page.getByLabel('Set as my Reading Bookmark').click();
+    await expect(page.getByTestId('reading-bookmark-new-label')).toBeVisible();
     await page.getByRole('button', { name: 'Done' }).click();
     await expect(firstVerse.getByLabel('Bookmarked')).toBeVisible();
   });

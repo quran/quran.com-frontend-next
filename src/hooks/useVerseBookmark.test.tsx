@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { renderHook } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 
 import { useVerseBookmark } from './useVerseBookmark';
 
@@ -38,11 +38,18 @@ describe('useVerseBookmark', () => {
       reducer: (state = {}) => state as any,
     });
 
+  const getWrapper =
+    (store: any) =>
+    ({ children }: { children: React.ReactNode }) =>
+      <Provider store={store}>{children}</Provider>;
+
+  afterEach(() => {
+    vi.mocked(isLoggedIn).mockReturnValue(true);
+  });
+
   it('returns bookmarked state when API succeeds', async () => {
     const store = makeStore();
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <Provider store={store}>{children}</Provider>
-    );
+    const wrapper = getWrapper(store);
     const verse = { chapterId: 1, verseNumber: 1 } as any;
     const { result } = renderHook(() => useVerseBookmark(verse), { wrapper });
     expect(result.current.isLoading).toBe(true);
@@ -55,9 +62,7 @@ describe('useVerseBookmark', () => {
   it('returns not bookmarked when logged out', async () => {
     vi.mocked(isLoggedIn).mockReturnValue(false);
     const store = makeStore();
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <Provider store={store}>{children}</Provider>
-    );
+    const wrapper = getWrapper(store);
     const verse = { chapterId: 1, verseNumber: 1 } as any;
     const { result } = renderHook(() => useVerseBookmark(verse), { wrapper });
     expect(result.current.isLoading).toBe(false);
@@ -67,9 +72,7 @@ describe('useVerseBookmark', () => {
 
   it('handles API error and logs error, returns undefined bookmark', async () => {
     const store = makeStore();
-    const wrapper = ({ children }: { children: React.ReactNode }) => (
-      <Provider store={store}>{children}</Provider>
-    );
+    const wrapper = getWrapper(store);
     const verse = { chapterId: 1, verseNumber: 2 } as any;
 
     const { getBookmark } = await import('@/utils/auth/api');

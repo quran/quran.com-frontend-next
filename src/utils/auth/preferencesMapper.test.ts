@@ -42,7 +42,7 @@ describe('preferencesMapper (prunes default flags)', () => {
         isUsingDefaultTranslations: true,
       },
       tafsirs: {
-        selectedTafsirs: ['en-tafisr-ibn-kathir'],
+        selectedTafsirs: ['en-tafsir-ibn-kathir'],
         isUsingDefaultTafsirs: true,
       },
     } as any;

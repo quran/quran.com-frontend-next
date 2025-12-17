@@ -7,12 +7,12 @@ import guestBookmarkReducer, {
   setGuestReadingBookmark,
 } from './guestBookmark';
 
-describe('guestBookmark slice (init and validation)', () => {
-  const makeStore = () =>
-    configureStore({
-      reducer: { guestBookmark: guestBookmarkReducer },
-    });
+const makeStore = () =>
+  configureStore({
+    reducer: { guestBookmark: guestBookmarkReducer },
+  });
 
+describe('guestBookmark slice (init and validation)', () => {
   it('initializes with null readingBookmark', () => {
     const store = makeStore();
     const state = store.getState();
@@ -28,11 +28,6 @@ describe('guestBookmark slice (init and validation)', () => {
 });
 
 describe('guestBookmark slice (set and clear)', () => {
-  const makeStore = () =>
-    configureStore({
-      reducer: { guestBookmark: guestBookmarkReducer },
-    });
-
   it('sets valid ayah bookmark', () => {
     const store = makeStore();
     store.dispatch(setGuestReadingBookmark('ayah:1:5'));
@@ -57,11 +52,6 @@ describe('guestBookmark slice (set and clear)', () => {
 });
 
 describe('guestBookmark slice (replacement behavior)', () => {
-  const makeStore = () =>
-    configureStore({
-      reducer: { guestBookmark: guestBookmarkReducer },
-    });
-
   it('replaces existing bookmark with new valid value', () => {
     const store = makeStore();
     store.dispatch(setGuestReadingBookmark('ayah:1:5'));

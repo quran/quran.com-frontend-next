@@ -17,14 +17,14 @@ test.describe('Reading Bookmark', () => {
       const firstVerse = page.getByTestId('verse-1:1');
       await expect(firstVerse.getByLabel('Bookmark')).toBeVisible();
       await firstVerse.getByLabel('Bookmark').click();
-      await expect(page.getByText('Save verse 1:1')).toBeVisible();
-      await page.getByText('Set as my Reading Bookmark').click();
-      await expect(page.getByText('New')).toBeVisible();
+      await expect(page.getByTestId('save-bookmark-modal-title')).toBeVisible();
+      await page.getByLabel('Set as my Reading Bookmark').click();
+      await expect(page.getByTestId('reading-bookmark-new-label')).toBeVisible();
 
       await homePage.reload();
 
       await firstVerse.getByLabel('Bookmark').click();
-      await expect(page.getByText('Remove my Reading Bookmark')).toBeVisible();
+      await expect(page.getByLabel('Remove my Reading Bookmark')).toBeVisible();
     },
   );
 });

@@ -15,7 +15,7 @@ describe('isValidReadingBookmarkFormat', () => {
     expect(isValidReadingBookmarkFormat('page:42')).toBe(true);
   });
 
-  it('extracts page number from page bookmarks', () => {
+  it('returns false for invalid formats and true for zero-padded page', () => {
     expect(isValidReadingBookmarkFormat('ayah:abc:1')).toBe(false);
     expect(isValidReadingBookmarkFormat('page:x')).toBe(false);
     expect(isValidReadingBookmarkFormat('verse:1:1')).toBe(false);

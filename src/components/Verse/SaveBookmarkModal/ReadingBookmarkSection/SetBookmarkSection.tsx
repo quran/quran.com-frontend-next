@@ -93,6 +93,7 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
       role="button"
       tabIndex={isSelected ? -1 : 0}
       onKeyDown={handleKeyDown}
+      aria-label={t('set-as-reading-bookmark')}
     >
       <div className={styles.readingBookmarkIcon}>
         {isSelected ? <BookmarkStarIcon /> : <BookmarkBlankIcon />}
@@ -107,7 +108,9 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
         <div className={styles.readingBookmarkInfo}>
           {showNewBookmark ? (
             <>
-              <span className={styles.label}>{t('new')}:</span>
+              <span className={styles.label} data-testid="reading-bookmark-new-label">
+                {t('new')}:
+              </span>
               <span className={styles.value}>{resourceDisplayName}</span>
               {showUndoButton && (
                 <button
