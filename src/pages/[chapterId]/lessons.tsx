@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -16,6 +16,7 @@ import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
+import Language from '@/types/Language';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
@@ -30,12 +31,9 @@ import {
   makeAyahReflectionsUrl,
   LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import ContentType from 'types/QuranReflect/ContentType';
@@ -105,74 +103,76 @@ const AyahLessonPage: NextPage<AyahLessonProp> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId } = params;
-  const verseKey = String(chapterId);
-  const chaptersData = await getAllChaptersData(locale);
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
-  const translations = getTranslationsInitialState(locale).selectedTranslations;
-  try {
-    const verseLessonsUrl = makeAyahReflectionsUrl({
-      surahId: chapterNumber,
-      ayahNumber: verseNumber,
-      locale,
-      postTypeIds: [LESSON_POST_TYPE_ID],
-    });
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/lessons',
+  async (context, languageResult) => {
+    const { params, locale } = context;
+    const { chapterId } = params;
+    const verseKey = String(chapterId);
+    const chaptersData = await getAllChaptersData(locale);
+    if (!isValidVerseKey(chaptersData, verseKey)) {
+      return { notFound: true };
+    }
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
+    try {
+      const reflectionLanguageIsoCodes =
+        languageResult?.countryLanguagePreference?.qrReflectionLanguages?.map(
+          (lang) => lang.isoCode,
+        ) || [];
 
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const apiParams = {
-      ...getDefaultWordFields(quranFont),
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      mushaf: mushafId,
-      from: `${chapterNumber}:${verseNumber}`,
-      to: `${chapterNumber}:${verseNumber}`,
-    };
-
-    const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
-
-    const [verseLessonsData, versesData] = await Promise.all([
-      getAyahReflections(verseLessonsUrl),
-      fetcher(versesUrl),
-    ]);
-
-    const fallback = {
-      [verseLessonsUrl]: verseLessonsData,
-      [versesUrl]: versesData,
-    };
-
-    return {
-      props: {
-        chaptersData,
-        chapterId: chapterNumber,
-        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
-        verseNumber,
-        fallback,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-LessonsPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
+      const verseLessonsUrl = makeAyahReflectionsUrl({
+        surahId: chapterNumber,
+        ayahNumber: verseNumber,
         locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
+        reviewed: true,
+        reflectionLanguages: reflectionLanguageIsoCodes,
+        postTypeIds: [LESSON_POST_TYPE_ID],
+      });
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const apiParams = {
+        ...getDefaultWordFields(quranFont),
+        translationFields: 'resource_name,language_id',
+        translations: translations.join(','),
+        mushaf: mushafId,
+        from: `${chapterNumber}:${verseNumber}`,
+        to: `${chapterNumber}:${verseNumber}`,
+      };
+
+      const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
+
+      const [verseLessonsData, versesData] = await Promise.all([
+        getAyahReflections(verseLessonsUrl),
+        fetcher(versesUrl),
+      ]);
+
+      const fallback = {
+        [verseLessonsUrl]: verseLessonsData,
+        [versesUrl]: versesData,
+      };
+
+      return {
+        props: {
+          chaptersData,
+          chapterId: chapterNumber,
+          chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
+          verseNumber,
+          fallback,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-LessonsPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          locale,
+        },
+      });
+      return { notFound: true };
+    }
+  },
+);
 
 export default AyahLessonPage;

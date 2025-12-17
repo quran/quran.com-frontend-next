@@ -5,6 +5,14 @@
     "sub-header": "Integroni të dhënat e Quran.com në aplikacionet tuaja me API-në tonë gjithëpërfshirëse",
     "title": "Dokumentacioni i API-t"
   },
+  "app-portal": {
+    "cta-explore": "Vizitoni Portalin e Aplikacioneve të Kuranit",
+    "cta-oauth": "Shihni udhëzuesin OAuth2",
+    "description": "Eksploroni përvojat më të fundit të ndërtuara nga komuniteti dhe shikoni se çfarë është e mundur me platformën tonë.",
+    "heading": "Portali i Aplikacioneve të Kuranit",
+    "oauth-pitch": "Dërgojeni me Fondacionin e Kuranit OAuth2 për hyrje pa probleme dhe dorëzoni aplikacionin tuaj që të shfaqet në Portalin e Aplikacioneve të Kuranit.",
+    "tagline": "Shfaqni aplikacionet tuaja të Kuranit"
+  },
   "careers": {
     "career": "Mundësi Karriere",
     "cta": "Shikoni Pozicionet",
@@ -12,14 +20,47 @@
   },
   "footer": "- Ekipi i Quran.com",
   "header": "Ndihmë për zhvillimin",
+  "hero": {
+    "subtitle": "Burime, mjete dhe udhëzime për zhvilluesit që ndërtojnë përvoja me Kuranin.",
+    "title": "Ndërto me Quran.com"
+  },
   "issues-cta": "Nëse keni ndonjë pyetje ose dëshironi të kontaktoni mirëmbajtësit, thjesht shkruani një mesazh! Ne do të kthehemi tek ju sa më shpejt që të mundemi, inshAllah.",
   "issues-guide": "Në mënyrë tipike ne përdorim <0>projektet Github</0> si burim për çfarë të punojmë më pas, çfarë do të ndodhë dhe çfarë gabimesh ekzistojnë që duhen zgjidhur. Për shembull <1>kjo url</1> ka një listë të gabimeve, gjëra për të cilat kemi nevojë për ndihmë dhe veçori të ardhshme.",
   "labs": "Laboratorët",
   "labs-cta": "Eksploro Laboratorët",
   "labs-description": "Zbuloni veçoritë eksperimentale dhe inovacionet e ardhshme. Ndani idetë tuaja",
+  "labs-pitch": "Ndani idetë tuaja dhe merrni pjesë në të ardhmen e angazhimit dhe përvojave kuranore.",
   "main-desc": "Esselamu Alejkum, Së pari, ju falënderojmë shumë për interesimin tuaj për të na ndihmuar të zhvillojmë Quran.com dhe projektet e tij. Ne jemi të ngazëllyer për të punuar me ju!",
   "projects": {
     "all": "Ne kemi një numër projektesh të gjitha të organizuara në Github. Mund t'i gjeni të gjitha <0>këtu</0>. Por për t'i përshkruar ato:",
+    "items": {
+      "q-android": {
+        "description": "Përvojë origjinale e mushafit dhe luajtësit audio për Android për telefona dhe tableta.",
+        "name": "Kurani për Android",
+        "stack": "Kotlin dhe Java"
+      },
+      "q-api": {
+        "description": "Sfondi i Ruby on Rails që fuqizon të dhënat, kërkimin dhe përkthimet e Kuranit.",
+        "name": "API-ja e Quran.com",
+        "stack": "Shina, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Platformë transmetimi audio dhe aplikacione celulare shoqëruese për recitime.",
+        "name": "Audio Kuranore",
+        "stack": "Aplikacionet e internetit dhe celularëve"
+      },
+      "q-ios": {
+        "description": "Lexues Kurani i bazuar në Swift me faqeshënues, recitime dhe mbështetje offline.",
+        "name": "Kurani për iOS",
+        "stack": "I shpejtë"
+      },
+      "q-next": {
+        "description": "Përvoja në internet e Next.js për leximin, kërkimin dhe dëgjimin e Kuranit.",
+        "name": "Frontend i Quran.com",
+        "stack": "Ndërtuar me TypeScript dhe Next.js"
+      }
+    },
+    "lead": "Projekte me burim të hapur të mirëmbajtura nga ekipi dhe komuniteti i Quran.com.",
     "q-android": "<0>Kurani Android</0>",
     "q-api": "<0>Quran.com API</0> - shkruar në Ruby on Rails.",
     "q-api-docs": "<0> Dokumentet API të Quran.com </0> - Portali ynë i dokumenteve API.",

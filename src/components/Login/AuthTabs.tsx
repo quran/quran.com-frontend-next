@@ -6,6 +6,7 @@ import AuthHeader from './AuthHeader';
 import styles from './login.module.scss';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import SocialButtons from './SocialButtons';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import SignUpRequest from 'types/auth/SignUpRequest';
@@ -38,9 +39,8 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
 
   return (
     <div className={styles.authContainer}>
-      <AuthHeader />
+      <AuthHeader as="h1" showSubtitle />
       <div className={styles.authTabs}>
-        <h1 className={styles.authTitle}>{t('sign-in-or-sign-up')}</h1>
         <div className={styles.authSwitchContainer}>
           <Switch
             items={items}
@@ -54,6 +54,12 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
         ) : (
           <SignUpForm onSuccess={onSignUpSuccess} />
         )}
+        <div className={styles.orSeparator}>
+          <hr className={styles.orLine} />
+          <span className={styles.orText}>{t('or')}</span>
+          <hr className={styles.orLine} />
+        </div>
+        <SocialButtons redirect={redirect} />
       </div>
     </div>
   );

@@ -90,7 +90,13 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                 {`: ${title}`}
               </p>
             </div>
-            <div className={styles.contentContainer}>
+            <div
+              className={
+                shouldUseMilkdown
+                  ? styles.contentContainer
+                  : `${styles.contentContainer} ${styles.htmlContent}`
+              }
+            >
               {shouldUseMilkdown ? (
                 <MilkdownProvider>
                   <MarkdownEditor isEditable={false} defaultValue={content} />
