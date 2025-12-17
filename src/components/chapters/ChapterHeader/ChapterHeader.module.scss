@@ -251,6 +251,11 @@ $bismillahSvgInlineSizeMobile: 148px;
   font-weight: var(--font-weight-bold);
 }
 
+.surahInfoHeader {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-bold);
+}
+
 .chapterIconContainer {
   // a hack to center the surah name, because the font width is not correct
   // leave a lot of empty space on the left

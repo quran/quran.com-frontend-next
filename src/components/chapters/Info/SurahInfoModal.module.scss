@@ -1,0 +1,93 @@
+@use 'src/styles/breakpoints';
+
+$calligraphy-offset: -0.875rem;
+$container-min-height: 200px;
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+  padding-block: var(--spacing-mega);
+  margin-block-end: var(--spacing-mega);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.calligraphyContainer {
+  max-inline-size: max-content;
+
+  // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
+  // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
+  // and misaligning the calligraphy away from the main content. Therefore, only apply this transform for LTR layouts.
+  :global([dir='ltr']) & {
+    transform: translateX($calligraphy-offset);
+  }
+}
+
+.surahName {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-bold);
+}
+
+.detailsContainer {
+  display: flex;
+  font-size: var(--font-size-normal);
+  gap: var(--spacing-medium);
+}
+
+.detailItem {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--spacing-xxsmall);
+}
+
+.detailHeader {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+}
+
+.descriptionContainer {
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-max);
+  }
+
+  p {
+    margin-block-end: var(--spacing-small);
+  }
+
+  h2,
+  h3 {
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-end: var(--spacing-medium);
+    padding-inline-start: calc(2 * var(--spacing-large));
+  }
+
+  li {
+    display: list-item;
+    line-height: normal;
+    margin-block-end: var(--spacing-xxsmall);
+  }
+}
+
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-block-size: $container-min-height;
+  padding-block: var(--spacing-large);
+}
+
+.errorContainer {
+  color: var(--color-text-error);
+}
