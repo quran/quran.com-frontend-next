@@ -1,4 +1,4 @@
 import ReadingBookmarkSection from './ReadingBookmarkSection';
 
-export { ReadingBookmarkType } from './types';
+export { ReadingBookmarkType } from '../types';
 export default ReadingBookmarkSection;

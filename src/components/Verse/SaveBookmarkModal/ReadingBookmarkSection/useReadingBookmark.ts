@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'r
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReadingBookmarkType } from './types';
+import { ReadingBookmarkType } from '../types';
 
 import DataContext from '@/contexts/DataContext';
 import { selectGuestReadingBookmark, setGuestReadingBookmark } from '@/redux/slices/guestBookmark';
