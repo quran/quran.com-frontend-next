@@ -7,7 +7,7 @@ import { ToastStatus } from '@/components/dls/Toast/Toast';
 import useBookmarkBase from '@/hooks/useBookmarkBase';
 import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { getBookmark } from '@/utils/auth/api';
-import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import isClient from '@/utils/isClient';
 import mutatingFetcherConfig from '@/utils/swr';
 import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
@@ -35,6 +35,11 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
   const dispatch = useDispatch();
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
 
+  // Capture the initial mushafId from SSR to avoid hydration mismatch issues.
+  // SSR has the correct user preference from session, while client localStorage may be stale.
+  // The ref preserves the first value and won't change on subsequent renders.
+  const initialMushafIdRef = useRef<number>(mushafId);
+
   const {
     showToast,
     showErrorToast,
@@ -51,35 +56,43 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
 
   const isPendingRef = useRef(false);
 
-  const { data: bookmark, mutate } = useSWR<Bookmark | null>(
-    isLoggedIn ? makeBookmarkUrl(mushafId, pageNumber, BookmarkType.Page) : null,
-    async () => {
-      try {
-        const response = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
-        // Check if response is an error object (404 returns error body instead of throwing)
-        // A valid bookmark must have an id and matching key/type
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const responseAny = response as any;
-        if (
-          !response ||
-          !response.id ||
-          responseAny.error ||
-          response.type !== BookmarkType.Page ||
-          response.key !== pageNumber
-        ) {
-          return null;
-        }
-        return response;
-      } catch (error) {
-        // Return null when bookmark doesn't exist (404) so SWR updates cache properly
-        // The API throws the Response object on error
-        if (error instanceof Response && error.status === 404) {
-          return null;
-        }
-        // Re-throw other errors so SWR can handle them
-        throw error;
+  /**
+   * Fetches a page bookmark and validates the response.
+   * The key format is "pageBookmark:{mushafId}:{pageNumber}" to ensure fresh values on revalidation.
+   */
+  const fetchPageBookmark = useCallback(async (key: string): Promise<Bookmark | null> => {
+    // Parse the key to get mushafId and pageNumber
+    const parts = key.split(':');
+    const fetchMushafId = Number(parts[1]);
+    const fetchPageNumber = Number(parts[2]);
+    try {
+      const response = await getBookmark(fetchMushafId, fetchPageNumber, BookmarkType.Page);
+      // Validate response: must have id, correct type, and matching page number
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const responseAny = response as any;
+      if (
+        !response ||
+        !response.id ||
+        responseAny.error ||
+        response.type !== BookmarkType.Page ||
+        Number(response.key) !== Number(fetchPageNumber)
+      ) {
+        return null;
       }
-    },
+      return response;
+    } catch {
+      // Return null for any error (including 404) so SWR updates cache properly
+      return null;
+    }
+  }, []);
+
+  // Use serialized key with the initial SSR mushafId to avoid hydration mismatch issues.
+  // Only fetch on client side when user is logged in.
+  const swrKey =
+    isLoggedIn && isClient ? `pageBookmark:${initialMushafIdRef.current}:${pageNumber}` : null;
+  const { data: bookmark, mutate } = useSWR<Bookmark | null>(
+    swrKey,
+    fetchPageBookmark,
     mutatingFetcherConfig,
   );
 
@@ -89,7 +102,7 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
       // Check for valid bookmark that matches the current page
       // - Must have an id (not an error object)
       // - Must match the current page number (not stale data from another page)
-      return !!bookmark?.id && bookmark?.key === pageNumber;
+      return !!bookmark?.id && Number(bookmark?.key) === Number(pageNumber);
     }
     return !!bookmarkedPages?.[pageNumber.toString()];
   }, [isLoggedIn, bookmarkedPages, bookmark, pageNumber]);
@@ -118,7 +131,10 @@ const usePageBookmark = ({ pageNumber, mushafId }: UsePageBookmarkProps): UsePag
   const handleBookmarkRemove = useCallback(async () => {
     // Check for valid bookmark with id that matches the current page
     // (not just truthy, as error objects are also truthy, and stale data might be from another page)
-    if (isPendingRef.current || !bookmark?.id || bookmark?.key !== pageNumber) return;
+    // Use Number() to ensure type consistency
+    if (isPendingRef.current || !bookmark?.id || Number(bookmark?.key) !== Number(pageNumber)) {
+      return;
+    }
     isPendingRef.current = true;
     const previousBookmark = bookmark;
     mutate(null, { revalidate: false });
