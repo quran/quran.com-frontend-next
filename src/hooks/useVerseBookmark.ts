@@ -1,163 +1,78 @@
-/* eslint-disable max-lines */
-import { useCallback, useRef, useState } from 'react';
+import { useMemo } from 'react';
 
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWR, { useSWRConfig } from 'swr';
+import { useSelector, shallowEqual } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
-import { ToastStatus } from '@/components/dls/Toast/Toast';
-import useBookmarkBase from '@/hooks/useBookmarkBase';
-import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
-import { privateFetcher } from '@/utils/auth/api';
-import mutatingFetcherConfig from '@/utils/swr';
-import Bookmark from 'types/Bookmark';
-import BookmarksMap from 'types/BookmarksMap';
-import BookmarkType from 'types/BookmarkType';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import Bookmark from '@/types/Bookmark';
+import BookmarkType from '@/types/BookmarkType';
+import Verse from '@/types/Verse';
+import { getMushafId } from '@/utils/api';
+import { getBookmark } from '@/utils/auth/api';
+import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 
-const NOT_BOOKMARKED = null;
-
-export interface BookmarkableVerse {
-  verseKey: string;
-  verseNumber: number;
-  /** Chapter ID - accepts both number and string since route params come as strings */
-  chapterId: number | string;
-}
-
-export interface UseVerseBookmarkReturn {
+interface UseVerseBookmarkReturn {
+  /** The bookmark data for the verse, or undefined if not bookmarked */
+  bookmark: Bookmark | undefined;
+  /** Whether the verse is currently bookmarked by the logged-in user */
   isVerseBookmarked: boolean;
-  handleToggleBookmark: () => void;
+  /** Whether the bookmark data is currently being fetched */
+  isLoading: boolean;
 }
 
-const useVerseBookmark = ({
-  verse,
-  mushafId,
-  bookmarksRangeUrl,
-}: {
-  verse: BookmarkableVerse;
-  mushafId: number;
-  bookmarksRangeUrl?: string;
-}): UseVerseBookmarkReturn => {
-  const dispatch = useDispatch();
-  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
-  const { mutate: globalMutate } = useSWRConfig();
-  const {
-    showToast,
-    showErrorToast,
-    invalidateBookmarksList,
-    addBookmark: baseAddBookmark,
-    removeBookmark: baseRemoveBookmark,
-    isLoggedIn,
-  } = useBookmarkBase({
-    mushafId,
-    type: BookmarkType.Ayah,
-    key: Number(verse.chapterId),
-    verseNumber: verse.verseNumber,
-  });
-  const isPendingRef = useRef(false);
-  const [optimisticBookmark, setOptimisticBookmark] = useState<Bookmark | null>();
-  const { data: pageBookmarks } = useSWR<BookmarksMap>(
-    isLoggedIn && bookmarksRangeUrl ? bookmarksRangeUrl : null,
-    (url: string) => privateFetcher(url),
-    mutatingFetcherConfig,
+/**
+ * Fetches bookmark for a verse with error handling
+ * Returns the bookmark on success, or undefined on error
+ * @param {number} mushafId Mushaf ID
+ * @param {number} chapterId Chapter ID
+ * @param {number} verseNumber Verse number
+ * @returns {Promise<Bookmark | undefined>} Bookmark data or undefined if fetch fails
+ */
+const fetchVerseBookmark = async (
+  mushafId: number,
+  chapterId: number,
+  verseNumber: number,
+): Promise<Bookmark | undefined> => {
+  try {
+    return await getBookmark(mushafId, chapterId, BookmarkType.Ayah, verseNumber);
+  } catch (error) {
+    return undefined;
+  }
+};
+
+/**
+ * Custom hook to manage verse bookmark fetching and state
+ * Encapsulates all bookmark-related data fetching and computed state
+ * @param {WordVerse} verse The verse to fetch bookmark data for
+ * @returns {UseVerseBookmarkReturn} Bookmark data and loading state
+ */
+export const useVerseBookmark = (verse: Verse): UseVerseBookmarkReturn => {
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+
+  const { data: bookmark, isValidating: isLoading } = useSWRImmutable<Bookmark | undefined>(
+    isLoggedIn()
+      ? makeBookmarkUrl(
+          mushafId,
+          Number(verse.chapterId),
+          BookmarkType.Ayah,
+          Number(verse.verseNumber),
+        )
+      : null,
+    () => fetchVerseBookmark(mushafId, Number(verse.chapterId), Number(verse.verseNumber)),
   );
-  const effectiveBookmark = optimisticBookmark ?? pageBookmarks?.[verse.verseKey] ?? null;
-  const isVerseBookmarked = isLoggedIn
-    ? effectiveBookmark !== null
-    : !!bookmarkedVerses[verse.verseKey];
-  const updateBookmarkCaches = useCallback(
-    (value: Bookmark | null) => {
-      if (!bookmarksRangeUrl) {
-        setOptimisticBookmark(value);
-        return;
-      }
-      globalMutate(
-        bookmarksRangeUrl,
-        (current: BookmarksMap | undefined) => {
-          if (!current) return value === null ? {} : { [verse.verseKey]: value };
-          if (value === null) {
-            const { [verse.verseKey]: removed, ...rest } = current; // eslint-disable-line @typescript-eslint/no-unused-vars
-            return rest;
-          }
-          return { ...current, [verse.verseKey]: value };
-        },
-        { revalidate: false },
-      );
-    },
-    [globalMutate, bookmarksRangeUrl, verse.verseKey],
-  );
-  const handleAddBookmark = useCallback(async () => {
-    if (isPendingRef.current) return;
-    isPendingRef.current = true;
-    updateBookmarkCaches({
-      id: `temp-${Date.now()}`,
-      key: Number(verse.chapterId),
-      type: BookmarkType.Ayah,
-      verseNumber: verse.verseNumber,
-    });
-    try {
-      updateBookmarkCaches(await baseAddBookmark());
-      invalidateBookmarksList();
-      showToast('verse-bookmarked', ToastStatus.Success);
-    } catch (err) {
-      updateBookmarkCaches(NOT_BOOKMARKED);
-      if (bookmarksRangeUrl) globalMutate(bookmarksRangeUrl);
-      showErrorToast(err);
-    } finally {
-      isPendingRef.current = false;
-    }
-  }, [
-    verse,
-    baseAddBookmark,
-    updateBookmarkCaches,
-    invalidateBookmarksList,
-    showToast,
-    showErrorToast,
-    bookmarksRangeUrl,
-    globalMutate,
-  ]);
-  const handleRemoveBookmark = useCallback(async () => {
-    if (isPendingRef.current || !effectiveBookmark) return;
-    isPendingRef.current = true;
-    const prev = effectiveBookmark;
-    updateBookmarkCaches(NOT_BOOKMARKED);
-    try {
-      await baseRemoveBookmark(prev.id);
-      invalidateBookmarksList();
-      showToast('verse-bookmark-removed', ToastStatus.Success);
-    } catch (err) {
-      updateBookmarkCaches(prev);
-      if (bookmarksRangeUrl) globalMutate(bookmarksRangeUrl);
-      showErrorToast(err);
-    } finally {
-      isPendingRef.current = false;
-    }
-  }, [
-    effectiveBookmark,
-    baseRemoveBookmark,
-    updateBookmarkCaches,
-    invalidateBookmarksList,
-    showToast,
-    showErrorToast,
-    bookmarksRangeUrl,
-    globalMutate,
-  ]);
-  const handleToggleBookmark = useCallback(() => {
-    if (!isLoggedIn) {
-      const wasBookmarked = !!bookmarkedVerses[verse.verseKey];
-      dispatch(toggleVerseBookmark(verse.verseKey));
-      showToast(wasBookmarked ? 'verse-bookmark-removed' : 'verse-bookmarked', ToastStatus.Success);
-    } else if (isVerseBookmarked) handleRemoveBookmark();
-    else handleAddBookmark();
-  }, [
-    isLoggedIn,
+
+  // Determine if the verse is bookmarked based on user login status
+  const isVerseBookmarked = useMemo(() => {
+    return isLoggedIn() && !!bookmark;
+  }, [bookmark]);
+
+  return {
+    bookmark,
     isVerseBookmarked,
-    handleRemoveBookmark,
-    handleAddBookmark,
-    bookmarkedVerses,
-    verse,
-    dispatch,
-    showToast,
-  ]);
-  return { isVerseBookmarked, handleToggleBookmark };
+    isLoading,
+  };
 };
 
 export default useVerseBookmark;

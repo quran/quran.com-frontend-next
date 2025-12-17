@@ -1,22 +1,22 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import BookmarkIcon from './BookmarkIcon';
+import useBookmarkState from './hooks/useBookmarkState';
+
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
-import useVerseBookmark, { BookmarkableVerse } from '@/hooks/useVerseBookmark';
-import BookmarkedIcon from '@/icons/bookmark.svg';
-import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Verse from '@/types/Verse';
-import { getMushafId } from '@/utils/api';
 import { logButtonClick } from '@/utils/eventLogger';
+
+const SaveBookmarkModal = dynamic(() => import('./SaveBookmarkModal'), { ssr: false });
 
 interface Props {
   verse: Verse;
@@ -25,92 +25,97 @@ interface Props {
   bookmarksRangeUrl?: string;
 }
 
-const BookmarkAction: React.FC<Props> = ({
-  verse,
-  isTranslationView,
-  onActionTriggered,
-  bookmarksRangeUrl,
-}) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+/**
+ * BookmarkAction component that displays a bookmark button/menu item for a verse.
+ * Opens SaveBookmarkModal for logged-in users or GuestUserPrompt for guests.
+ *
+ * @param {Props} props - Component props
+ * @returns {JSX.Element} The BookmarkAction component
+ */
+const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Element => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isVerseBookmarked, isVerseBookmarkedLoading } = useBookmarkState(verse);
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
 
-  // Use custom hook for all bookmark logic
-  const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
-    verse: verse as BookmarkableVerse,
-    mushafId,
-    bookmarksRangeUrl,
-  });
-
-  // Helper: Get event name for analytics
-  const getEventName = useCallback(() => {
-    const view = isTranslationView ? 'translation_view' : 'reading_view';
-    const action = isVerseBookmarked ? 'un_bookmark' : 'bookmark';
-    return `${view}_verse_actions_menu_${action}`;
-  }, [isTranslationView, isVerseBookmarked]);
-
-  const onToggleBookmarkClicked = useCallback(
+  const onBookmarkClicked = useCallback(
     (e?: React.MouseEvent) => {
-      // Prevent default to avoid page scroll
       if (e) {
         e.preventDefault();
         e.stopPropagation();
       }
 
-      // eslint-disable-next-line i18next/no-literal-string
-      logButtonClick(getEventName());
+      logButtonClick(
+        `${
+          isTranslationView ? 'translation_view' : 'reading_view'
+        }_verse_actions_menu_bookmark_open`,
+      );
 
-      handleToggleBookmark();
-      onActionTriggered?.();
+      setIsModalOpen(true);
     },
-    [getEventName, handleToggleBookmark, onActionTriggered],
+    [isTranslationView],
   );
 
-  const bookmarkIcon = useMemo(() => {
-    if (isVerseBookmarked) {
-      return <BookmarkedIcon color="var(--color-text-default)" />;
-    }
+  const onModalClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const bookmarkIcon = (
+    <BookmarkIcon isLoading={isVerseBookmarkedLoading} isBookmarked={isVerseBookmarked} />
+  );
+
+  const bookmarkLabel = isVerseBookmarked ? t('bookmarked') : t('bookmark');
+
+  const renderModal = () => {
+    if (!isModalOpen) return null;
+
     return (
-      <IconContainer
-        icon={<UnBookmarkedIcon />}
-        color={IconColor.tertiary}
-        size={IconSize.Custom}
-        shouldFlipOnRTL={false}
+      <SaveBookmarkModal
+        isOpen={isModalOpen}
+        onClose={onModalClose}
+        verse={verse}
+        type={SaveBookmarkType.AYAH}
       />
     );
-  }, [isVerseBookmarked]);
+  };
 
   // For use in the TopActions component (standalone button)
   if (isTranslationView || (!isTranslationView && isMobile)) {
-    const tooltipText = isVerseBookmarked ? t('bookmarked') : t('bookmark');
     return (
-      <Button
-        size={ButtonSize.Small}
-        tooltip={isMobile ? undefined : tooltipText}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        className={classNames(
-          styles.iconContainer,
-          styles.verseAction,
-          'bookmark-verse-action-button',
-        )}
-        onClick={(e) => {
-          onToggleBookmarkClicked(e);
-        }}
-        shouldFlipOnRTL={false}
-        ariaLabel={tooltipText}
-      >
-        <span className={styles.icon}>{bookmarkIcon}</span>
-      </Button>
+      <>
+        <Button
+          size={ButtonSize.Small}
+          tooltip={bookmarkLabel}
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          className={classNames(
+            styles.iconContainer,
+            styles.verseAction,
+            'bookmark-verse-action-button',
+          )}
+          onClick={onBookmarkClicked}
+          isDisabled={isVerseBookmarkedLoading}
+          ariaLabel={bookmarkLabel}
+        >
+          <span className={styles.icon}>{bookmarkIcon}</span>
+        </Button>
+        {renderModal()}
+      </>
     );
   }
 
   // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
-    <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
-      {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
-    </PopoverMenu.Item>
+    <>
+      <PopoverMenu.Item
+        onClick={onBookmarkClicked}
+        icon={bookmarkIcon}
+        isDisabled={isVerseBookmarkedLoading}
+      >
+        {bookmarkLabel}
+      </PopoverMenu.Item>
+      {renderModal()}
+    </>
   );
 };
 

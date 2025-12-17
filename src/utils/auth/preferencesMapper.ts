@@ -7,7 +7,7 @@ import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
 import TafsirsSettings from '@/redux/types/TafsirsSettings';
 import TranslationsSettings from '@/redux/types/TranslationsSettings';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
+import PreferenceGroup, { ReadingBookmarkPreferenceGroupKey } from '@/types/auth/PreferenceGroup';
 
 const SLICE_NAME_TO_PREFERENCE_GROUP = {
   [SliceName.AUDIO_PLAYER_STATE]: PreferenceGroup.AUDIO,
@@ -17,6 +17,7 @@ const SLICE_NAME_TO_PREFERENCE_GROUP = {
   [SliceName.TAFSIRS]: PreferenceGroup.TAFSIRS,
   [SliceName.THEME]: PreferenceGroup.THEME,
   [SliceName.TRANSLATIONS]: PreferenceGroup.TRANSLATIONS,
+  [SliceName.GUEST_BOOKMARK]: PreferenceGroup.READING_BOOKMARK,
 };
 
 /**
@@ -87,6 +88,14 @@ const getPreferenceGroupValue = (
     return newPreferences;
   }
 
+  if (sliceName === SliceName.GUEST_BOOKMARK) {
+    // Guest bookmark is stored as a single string value in guestBookmark.readingBookmark
+    // Return it wrapped in bookmark property to match preference group structure
+    return {
+      bookmark: currentSliceValue?.readingBookmark || null,
+    };
+  }
+
   return {
     ...currentSliceValue,
   };
@@ -109,5 +118,22 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
       preferenceGroups[preferenceGroup] = getPreferenceGroupValue(sliceName, state[sliceName]);
     }
   });
+
+  // Use user selected language if available, otherwise fall back to detected language
+  const existingLanguagePreferences = preferenceGroups[PreferenceGroup.LANGUAGE] || {};
+  const fallbackLanguage =
+    existingLanguagePreferences.language ?? state?.defaultSettings?.detectedLanguage;
+
+  preferenceGroups[PreferenceGroup.LANGUAGE] = {
+    ...existingLanguagePreferences,
+    language: fallbackLanguage,
+  };
+
+  if (state?.guestBookmark?.readingBookmark) {
+    preferenceGroups[PreferenceGroup.READING_BOOKMARK] = {
+      [ReadingBookmarkPreferenceGroupKey.BOOKMARK]: state?.guestBookmark?.readingBookmark,
+    };
+  }
+
   return preferenceGroups;
 };

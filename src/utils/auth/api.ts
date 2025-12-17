@@ -96,6 +96,7 @@ import {
   makeGetQuranicWeekUrl,
   makeTranslationFeedbackUrl,
   GetCoursesQueryParams,
+  makeUpdateBookmarkUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -465,6 +466,13 @@ export const deleteCollectionBookmarkByKey = async ({
 
 export const deleteBookmarkById = async (bookmarkId: string) => {
   return deleteRequest(makeDeleteBookmarkUrl(bookmarkId));
+};
+
+export const updateBookmarkById = async (
+  bookmarkId: string,
+  payload: { isInDefaultCollection?: boolean },
+) => {
+  return patchRequest<Bookmark>(makeUpdateBookmarkUrl(bookmarkId), payload);
 };
 
 export const getBookmarksByCollectionId = async (
