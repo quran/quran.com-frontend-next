@@ -31,10 +31,10 @@ describe('getCurrentQuranicCalendarWeek', () => {
       expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(38);
     });
 
-    it('should return week 11 for dates in late June', () => {
-      // umalqura(1446, 12, 24) -> 2025-06-19 (UTC)
+    it('should return week 12 for dates in late June', () => {
+      // umalqura(1446, 12, 24) -> 2025-06-20 (UTC)
       const hijriDate = umalqura(1446, 12, 24);
-      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(11);
+      expect(getCurrentQuranicCalendarWeek(hijriDate)).toEqual(12);
     });
 
     it('should return week 25 for dates in late September', () => {
@@ -159,7 +159,7 @@ describe('getCurrentQuranicCalendarWeek', () => {
         { hijri: umalqura(1446, 10, 8), expectedWeek: 1 }, // Well into week 1
         { hijri: umalqura(1446, 10, 15), expectedWeek: 2 }, // Mid April
         { hijri: umalqura(1446, 11, 13), expectedWeek: 6 }, // Mid May (adjusted)
-        { hijri: umalqura(1446, 12, 24), expectedWeek: 11 }, // Late June (using known good value)
+        { hijri: umalqura(1446, 12, 24), expectedWeek: 12 }, // Late June (using known good value)
         { hijri: umalqura(1447, 6, 30), expectedWeek: 38 }, // Late December (using known good value)
       ];
 

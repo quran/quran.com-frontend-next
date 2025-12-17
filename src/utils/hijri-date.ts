@@ -48,10 +48,11 @@ for (const weeks of Object.values(monthsMap)) {
  * @returns {number}
  */
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
-  // Today's date - use UTC to avoid timezone issues
+  // Force a stable timezone by using the calendar day in local time,
+  // then convert that day to a UTC timestamp. This prevents the date
+  // from drifting a day earlier/later on machines with non-UTC offsets.
   const today = currentHijriDate.date;
-  // IMPORTANT: Use UTC date components to avoid timezone mismatches
-  const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+  const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
 
   // Look up from cache - use for...of with Array.from to allow early return
   for (const [weekNumber, cache] of Array.from(weekUTCCache.entries())) {
