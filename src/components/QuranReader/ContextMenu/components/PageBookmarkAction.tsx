@@ -98,7 +98,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
       <SaveBookmarkModal
         isOpen={isModalOpen}
         onClose={onModalClose}
-        type={SaveBookmarkType.Page}
+        type={SaveBookmarkType.PAGE}
         pageNumber={pageNumber}
       />
     </>

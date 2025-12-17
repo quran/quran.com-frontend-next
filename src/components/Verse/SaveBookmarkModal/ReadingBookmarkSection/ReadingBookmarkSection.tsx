@@ -1,9 +1,9 @@
-import { ReadingBookmarkType } from '../types';
-
 import styles from './ReadingBookmarkSection.module.scss';
 import RemoveBookmarkSection from './RemoveBookmarkSection';
 import SetBookmarkSection from './SetBookmarkSection';
 import useReadingBookmark from './useReadingBookmark';
+
+import { ReadingBookmarkType } from '@/types/Bookmark';
 
 export { ReadingBookmarkType };
 

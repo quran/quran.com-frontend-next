@@ -22,6 +22,7 @@ import { selectUserState } from '@/redux/slices/session';
 import { getMushafId } from '@/utils/api';
 import { getUserPreferences } from '@/utils/auth/api';
 import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
+import { getPageNumberFromBookmark, parseReadingBookmark } from '@/utils/bookmark';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getProfileNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
@@ -48,13 +49,7 @@ const ReadingSection: React.FC<Props> = () => {
   // Supports both logged-in user bookmarks and guest bookmarks
   const pageNumberFromBookmark = useMemo(() => {
     const bookmark = isGuest ? guestReadingBookmark : userPreferences?.readingBookmark?.bookmark;
-    if (!bookmark) return null;
-
-    const parts = bookmark.split(':');
-    if (parts[0] === 'page' && parts.length === 2) {
-      return Number(parts[1]);
-    }
-    return null;
+    return getPageNumberFromBookmark(bookmark);
   }, [guestReadingBookmark, userPreferences, isGuest]);
 
   // Fetch verses for the page if bookmark is a page bookmark
@@ -74,40 +69,7 @@ const ReadingSection: React.FC<Props> = () => {
       ? guestReadingBookmark
       : userPreferences?.readingBookmark?.bookmark;
 
-    // Primary: Use reading bookmark if available
-    if (readingBookmark) {
-      const parts = readingBookmark.split(':');
-      if (parts[0] === 'ayah' && parts.length === 3) {
-        return {
-          surahNumber: Number(parts[1]),
-          verseNumber: Number(parts[2]),
-        };
-      }
-      if (parts[0] === 'page' && parts.length === 2) {
-        // For page bookmarks, get the first verse from the fetched page verses
-        if (pageVersesData?.verses && pageVersesData.verses.length > 0) {
-          const firstVerse = pageVersesData.verses[0];
-          return {
-            surahNumber: Number(firstVerse.chapterId),
-            verseNumber: Number(firstVerse.verseNumber),
-          };
-        }
-        // Fallback to null if page verses are not yet loaded
-        return { surahNumber: null, verseNumber: null };
-      }
-    }
-
-    // Fallback: Use recently read verses if reading bookmark is not available
-    if (recentlyReadVerseKeys && recentlyReadVerseKeys.length > 0) {
-      const lastReadVerse = recentlyReadVerseKeys[0];
-      return {
-        surahNumber: lastReadVerse?.surah ? Number(lastReadVerse.surah) : 1,
-        verseNumber: lastReadVerse?.ayah ? Number(lastReadVerse.ayah) : undefined,
-      };
-    }
-
-    // Default fallback
-    return { surahNumber: 1, verseNumber: undefined };
+    return parseReadingBookmark(readingBookmark, pageVersesData, recentlyReadVerseKeys);
   }, [guestReadingBookmark, userPreferences, pageVersesData, recentlyReadVerseKeys, isGuest]);
 
   // Determine if user has reading sessions (either reading bookmark or recently read verses)

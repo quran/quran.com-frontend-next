@@ -4,11 +4,10 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'r
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReadingBookmarkType } from '../types';
-
 import DataContext from '@/contexts/DataContext';
 import { selectGuestReadingBookmark, setGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import PreferenceGroup, { ReadingBookmarkPreferenceGroupKey } from '@/types/auth/PreferenceGroup';
+import { ReadingBookmarkType } from '@/types/Bookmark';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 
@@ -85,7 +84,7 @@ const useReadingBookmark = ({
   const undoTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const removalTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isVerse = type === ReadingBookmarkType.Verse;
+  const isVerse = type === ReadingBookmarkType.AYAH;
 
   // Determine the effective current reading bookmark based on login status
   const effectiveCurrentBookmark = useMemo(() => {

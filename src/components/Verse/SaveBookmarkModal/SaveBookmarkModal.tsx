@@ -3,11 +3,11 @@ import useTranslation from 'next-translate/useTranslation';
 import NewCollectionForm from './Collections/NewCollectionForm';
 import styles from './SaveBookmarkModal.module.scss';
 import SaveBookmarkModalContent from './SaveBookmarkModalContent';
-import { ReadingBookmarkType } from './types';
 import useSaveBookmarkModal from './useSaveBookmarkModal';
 
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
+import { ReadingBookmarkType } from '@/types/Bookmark';
 import { WordVerse } from '@/types/Word';
 
 export { ReadingBookmarkType as SaveBookmarkType };

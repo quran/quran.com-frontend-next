@@ -9,13 +9,13 @@ import { CollectionItem } from './Collections/CollectionsListItem';
 import { useCollectionsState } from './Collections/hooks/useCollectionsState';
 import { useCollectionToggleHandler } from './Collections/hooks/useCollectionToggleHandler';
 import { useFavoritesToggle } from './Collections/hooks/useFavoritesToggle';
-import { ReadingBookmarkType } from './types';
 import { useSaveBookmarkData } from './useSaveBookmarkData';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logError } from '@/lib/newrelic';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
+import { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
@@ -87,8 +87,8 @@ const useSaveBookmarkModal = ({
   const toast = useToast();
   const router = useRouter();
 
-  const isVerse = type === ReadingBookmarkType.Verse;
-  const isPage = type === ReadingBookmarkType.Page;
+  const isVerse = type === ReadingBookmarkType.AYAH;
+  const isPage = type === ReadingBookmarkType.PAGE;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 

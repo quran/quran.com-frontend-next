@@ -125,7 +125,7 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
         isOpen={isModalOpen}
         onClose={onModalClose}
         verse={verse}
-        type={SaveBookmarkType.Verse}
+        type={SaveBookmarkType.AYAH}
       />
     );
   };

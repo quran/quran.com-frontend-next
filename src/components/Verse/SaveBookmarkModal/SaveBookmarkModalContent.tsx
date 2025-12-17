@@ -1,10 +1,12 @@
 import CollectionsList from './Collections/CollectionsList';
 import { CollectionItem } from './Collections/CollectionsListItem';
 import GuestSignInSection from './GuestSignInSection';
-import ReadingBookmarkSection, { ReadingBookmarkType } from './ReadingBookmarkSection';
+import ReadingBookmarkSection from './ReadingBookmarkSection';
 import styles from './SaveBookmarkModal.module.scss';
 import SaveBookmarkModalFooter from './SaveBookmarkModalFooter';
 import SaveBookmarkModalHeader from './SaveBookmarkModalHeader';
+
+import { ReadingBookmarkType } from '@/types/Bookmark';
 
 interface SaveBookmarkModalContentProps {
   // Header props
@@ -69,7 +71,7 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
       <SaveBookmarkModalHeader title={modalTitle} onClose={onClose} />
 
       <ReadingBookmarkSection
-        type={isVerse ? ReadingBookmarkType.Verse : ReadingBookmarkType.Page}
+        type={isVerse ? ReadingBookmarkType.AYAH : ReadingBookmarkType.PAGE}
         verseKey={isVerse ? verseKey : undefined}
         pageNumber={isPage ? pageNumber : undefined}
         currentReadingBookmark={currentReadingBookmark}

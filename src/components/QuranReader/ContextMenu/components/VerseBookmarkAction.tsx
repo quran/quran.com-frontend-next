@@ -67,7 +67,7 @@ const VerseBookmarkAction: React.FC<VerseBookmarkActionProps> = React.memo(({ ve
       <SaveBookmarkModal
         isOpen={isModalOpen}
         onClose={onModalClose}
-        type={SaveBookmarkType.Verse}
+        type={SaveBookmarkType.AYAH}
         verse={verse}
       />
     </>

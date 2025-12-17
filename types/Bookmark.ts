@@ -11,3 +11,8 @@ interface Bookmark {
 }
 
 export default Bookmark;
+
+export enum ReadingBookmarkType {
+  AYAH = 'ayah',
+  PAGE = 'page',
+}
