@@ -19,7 +19,7 @@ import { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
-import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { addCollection, addCollectionBookmark, addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
@@ -224,7 +224,6 @@ const useSaveBookmarkModal = ({
     if (!newCollectionName.trim() || !verse) return;
     setIsSubmittingCollection(true);
     try {
-      const { addCollection, addCollectionBookmark } = await import('@/utils/auth/api');
       const newCollection = await addCollection(newCollectionName.trim());
       await addCollectionBookmark({
         key: Number(verse.chapterId),

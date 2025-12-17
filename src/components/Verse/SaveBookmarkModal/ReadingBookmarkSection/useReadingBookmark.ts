@@ -98,13 +98,13 @@ const useReadingBookmark = ({
   const bookmarkValue = useMemo(() => {
     if (isVerse && verseKey) {
       const [chapterId, verseNumber] = verseKey.split(':');
-      return `ayah:${chapterId}:${verseNumber}`;
+      return `${type}:${chapterId}:${verseNumber}`;
     }
     if (!isVerse && pageNumber) {
-      return `page:${pageNumber}`;
+      return `${type}:${pageNumber}`;
     }
     return null;
-  }, [isVerse, verseKey, pageNumber]);
+  }, [isVerse, verseKey, pageNumber, type]);
 
   // Display name for the resource
   const resourceDisplayName = useMemo(() => {
