@@ -5,8 +5,6 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { logError } from '../../../lib/newrelic';
-
 import CollectionsList from './Collections/CollectionsList';
 import { CollectionItem } from './Collections/CollectionsListItem';
 import { useCollectionsState } from './Collections/hooks/useCollectionsState';
@@ -26,6 +24,7 @@ import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CloseIcon from '@/icons/close.svg';
 import NoteIcon from '@/icons/notes-with-pencil.svg';
+import { logError } from '@/lib/newrelic';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import BookmarkType from '@/types/BookmarkType';
@@ -256,6 +255,7 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
       onEscapeKeyDown={onClose}
       isBottomSheetOnMobile
       size={ModalSize.MEDIUM}
+      contentClassName={styles.modal}
     >
       <Modal.Body>
         {isCreatingCollection ? (
@@ -283,6 +283,7 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
                 <CloseIcon />
               </button>
             </div>
+            <hr className={styles.divider} />
 
             <ReadingBookmarkSection
               type={isVerse ? ReadingBookmarkType.Verse : ReadingBookmarkType.Page}

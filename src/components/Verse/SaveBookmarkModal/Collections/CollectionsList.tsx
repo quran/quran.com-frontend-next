@@ -2,13 +2,12 @@ import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from '../SaveBookmarkModal.module.scss';
-
+import styles from './collections.module.scss';
 import CollectionsListItem, { CollectionItem } from './CollectionsListItem';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
-import PlusIcon from '@/icons/plus.svg';
+import PlusIcon from '@/icons/plus-cubed.svg';
 
 interface CollectionsListProps {
   collections: CollectionItem[];
@@ -53,7 +52,7 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
           onClick={onNewCollectionClick}
           className={styles.newCollectionButton}
         >
-          <PlusIcon />
+          <PlusIcon className={styles.plusIcon} />
           {t('new-collection')}
         </Button>
       </div>

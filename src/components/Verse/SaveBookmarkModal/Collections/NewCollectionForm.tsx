@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from '../SaveBookmarkModal.module.scss';
+import styles from './collections.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';

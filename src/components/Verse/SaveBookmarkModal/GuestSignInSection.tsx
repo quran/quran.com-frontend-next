@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './SaveBookmarkModal.module.scss';
 
 import CheckMarkIcon from '@/icons/checkmark-icon.svg';
-import { logButtonClick } from '@/utils/eventLogger';
 
 interface GuestSignInSectionProps {
   onSignIn: () => void;
@@ -21,7 +20,6 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
   const { t } = useTranslation('quran-reader');
 
   const handleSignInClick = useCallback((): void => {
-    logButtonClick('save_bookmark_modal_guest_sign_in');
     onSignIn();
   }, [onSignIn]);
 

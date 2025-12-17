@@ -3,10 +3,9 @@ import { useMemo } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import { CollectionListSortOption } from '../../../../types/CollectionSortOptions';
-import QuranReaderStyles from '../../../redux/types/QuranReaderStyles';
-
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import BookmarkType from '@/types/BookmarkType';
+import { CollectionListSortOption } from '@/types/CollectionSortOptions';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
 import {

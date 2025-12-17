@@ -2,10 +2,11 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import styles from '../SaveBookmarkModal.module.scss';
+import styles from './collections.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import BookmarkIcon from '@/icons/bookmark.svg';
+import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
+import BookmarkIcon from '@/icons/bookmark_new.svg';
 import CheckIcon from '@/icons/check.svg';
 
 export interface CollectionItem {
@@ -68,7 +69,7 @@ const CollectionsListItem: React.FC<CollectionsListItemProps> = ({
       tabIndex={0}
     >
       <div className={styles.collectionIcon}>
-        <BookmarkIcon />
+        {!collection.checked ? <BookmarkBlankIcon /> : <BookmarkIcon />}
       </div>
       <span className={styles.collectionName}>{collection.name}</span>
       {renderTrailingIndicator()}

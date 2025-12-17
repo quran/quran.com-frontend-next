@@ -12,7 +12,7 @@ import styles from './ReadingBookmarkSection.module.scss';
 import DataContext from '@/contexts/DataContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
-import BookmarkIcon from '@/icons/bookmark.svg';
+import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
 import CheckIcon from '@/icons/check.svg';
 import { selectGuestReadingBookmark, setGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import PreferenceGroup, { ReadingBookmarkPreferenceGroupKey } from '@/types/auth/PreferenceGroup';
@@ -480,7 +480,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
           onKeyDown={handleKeyDown}
         >
           <div className={styles.readingBookmarkIcon}>
-            {isSelected ? <BookmarkStarIcon /> : <BookmarkIcon />}
+            {isSelected ? <BookmarkStarIcon /> : <BookmarkBlankIcon />}
           </div>
           <div className={styles.readingBookmarkContent}>
             <div className={styles.readingBookmarkTitle}>{t('set-as-reading-bookmark')}</div>

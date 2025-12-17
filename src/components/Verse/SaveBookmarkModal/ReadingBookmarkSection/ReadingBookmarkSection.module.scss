@@ -1,9 +1,14 @@
+@import '../shared.module.scss';
+
+$box-height: 46px;
+
 .readingBookmarkSection {
   display: flex;
   user-select: none;
   align-items: center;
-  gap: var(--spacing-small);
-  padding: var(--spacing-medium);
+  gap: var(--spacing-small-px);
+  block-size: $box-height;
+  padding: var(--spacing-medium-px);
   background-color: var(--color-background-alternative-faded);
   border-radius: var(--border-radius-large-px);
   cursor: pointer;
@@ -64,8 +69,8 @@
   }
 
   .removeTitle {
-    font-size: var(--font-size-normal);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-small-px);
+    font-weight: var(--font-weight-medium);
     color: var(--color-text-default);
   }
 
@@ -73,8 +78,8 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xxsmall);
-    font-size: var(--font-size-small);
-    color: var(--color-text-faded);
+    font-size: var(--font-size-xsmall-px);
+    color: var(--color-text-faded-new);
     flex-wrap: wrap;
   }
 }
@@ -101,8 +106,8 @@
 }
 
 .readingBookmarkTitle {
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
   color: var(--color-text-default);
 }
 
@@ -110,27 +115,29 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xxsmall);
-  font-size: var(--font-size-small);
-  color: var(--color-text-faded);
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-faded-new);
   flex-wrap: wrap;
 }
 
-.readingBookmarkInfo .label {
+.label {
   color: var(--color-text-faded);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
 }
 
-.readingBookmarkInfo .value {
-  color: var(--color-text-default);
-  font-weight: var(--font-weight-medium);
+.value {
+  color: var(--color-text-faded-new);
+  font-weight: bold;
 }
 
 .undoButton {
   background: none;
   border: none;
   cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
   padding: 0;
-  color: var(--color-primary-medium);
+  color: var(--color-grey-icons-new);
   font-size: var(--font-size-small);
   transition: color var(--transition-normal) ease;
 
@@ -143,52 +150,4 @@
     outline: var(--spacing-micro-px) solid var(--color-primary-medium);
     outline-offset: var(--spacing-micro-px);
   }
-}
-
-.checkbox {
-  inline-size: var(--spacing-large);
-  block-size: var(--spacing-large);
-  border: var(--spacing-micro-px) solid var(--color-borders-hairline);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all var(--transition-normal) ease;
-  background-color: var(--color-background-default);
-}
-
-.checkIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--spacing-large);
-  block-size: var(--spacing-large);
-  border-radius: 50%;
-  flex-shrink: 0;
-  transition: background-color var(--transition-normal) ease, color var(--transition-normal) ease;
-  background-color: var(--color-background-default);
-
-  &.checked {
-    background-color: var(--color-success-medium);
-    color: var(--color-background-default);
-  }
-
-  svg {
-    inline-size: var(--spacing-medium);
-    block-size: var(--spacing-medium);
-    stroke-width: var(--stroke-width-medium);
-  }
-}
-
-.errorMessage {
-  position: absolute;
-  inset-block-end: var(--spacing-xlarge);
-  inset-inline-start: 0;
-  font-size: var(--font-size-small);
-  color: var(--color-error-medium);
-  max-inline-size: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
