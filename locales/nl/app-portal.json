@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Leer de Koran efficiënt uit je hoofd en bestudeer hem regelmatig.",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Lees, voeg toe aan bladwijzers en luister naar de Koran op Android-apparaten.",
+        "title": "Koran voor Android"
+      },
+      "quran_ios": {
+        "caption": "Prachtige, reclamevrije app voor het lezen en beluisteren van de Koran voor iPhone en iPad.",
+        "title": "De Koran voor iOS (van quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Live koranstudiesessies",
+        "title": "Koranontmoeting"
+      },
+      "quranreflect": {
+        "caption": "Deel je gedachten",
+        "title": "KoranReflectie"
+      },
+      "readtafsir": {
+        "caption": "Zoek en vergelijk klassieke tafsirs.",
+        "title": "Lees de Tafsir"
+      },
+      "sunnah": {
+        "caption": "Hadith-collectie",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Interactieve tafsir met meerdere bronnen.",
+        "title": "Tafsir-app"
+      }
+    },
+    "filters": {
+      "all": "Alle apps",
+      "community": "Gemeenschap",
+      "hadith-sunnah": "Hadith en Sunnah",
+      "popular": "Populair",
+      "quran-reader": "Koranlezer",
+      "reflections": "Reflecties",
+      "study-tools": "Studiehulpmiddelen"
+    },
+    "title": "Bekijk alle apps"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Eindelijk een Koran-app voor onze dochters!",
+        "name": "Qariah",
+        "tagline": "Vrouwelijke koranreciteerders"
+      },
+      "quran-kareem": {
+        "headline": "Uw nieuwe toegangspoort tot het Boek van Allah.",
+        "name": "Koran Kareem",
+        "tagline": "Lees, luister en reflecteer."
+      },
+      "quran-link": {
+        "headline": "Ontdek meer dan 25 tafsirs en meer dan 100 vertalingen op één plek.",
+        "name": "Koranlink",
+        "tagline": "Tafsir en studiegids"
+      }
+    },
+    "learn-more": "Leer meer",
+    "title": "Aanbevolen apps",
+    "view-all": "Alles bekijken"
+  },
+  "hero": {
+    "description": "Ontdek een zorgvuldig samengestelde collectie islamitische apps, ontwikkeld met Quran.foundation. Van studietools tot gebedshulpmiddelen: vind apps die je spirituele reis verrijken.",
+    "title": "Ontdek ons ecosysteem van apps"
+  },
+  "quran-apps-portal": "Koran Apps Portaal"
+}

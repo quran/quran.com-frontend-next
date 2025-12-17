@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
 import BookmarkType from '@/types/BookmarkType';
 import { logValueChange } from '@/utils/eventLogger';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
-import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = () => {
@@ -54,19 +54,6 @@ const CollectionDetailPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/collections/[collectionId]');
 
 export default CollectionDetailPage;
