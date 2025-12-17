@@ -91,9 +91,20 @@ export const parseReadingBookmark = (
   // Fallback: Use recently read verses if reading bookmark is not available
   if (recentlyReadVerseKeys && recentlyReadVerseKeys.length > 0) {
     const lastReadVerse = recentlyReadVerseKeys[0];
+    const surahNumber = lastReadVerse?.surah ? Number(lastReadVerse.surah) : 1;
+    const verseNumber = lastReadVerse?.ayah ? Number(lastReadVerse.ayah) : null;
+    
+    // Validate that the parsed numbers are valid (not NaN) and positive
+    if (Number.isNaN(surahNumber) || surahNumber <= 0) {
+      return { surahNumber: 1, verseNumber: null };
+    }
+    if (verseNumber !== null && (Number.isNaN(verseNumber) || verseNumber <= 0)) {
+      return { surahNumber, verseNumber: null };
+    }
+    
     return {
-      surahNumber: lastReadVerse?.surah ? Number(lastReadVerse.surah) : 1,
-      verseNumber: lastReadVerse?.ayah ? Number(lastReadVerse.ayah) : null,
+      surahNumber,
+      verseNumber,
     };
   }
 

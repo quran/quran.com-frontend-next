@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -103,13 +103,6 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
   const onModalClose = () => {
     setIsModalOpen(false);
   };
-
-  // Cleanup effect to ensure modal state is cleaned up when component unmounts
-  useEffect(() => {
-    return () => {
-      setIsModalOpen(false);
-    };
-  }, []);
 
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
