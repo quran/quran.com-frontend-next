@@ -107,11 +107,9 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
   // Cleanup effect to ensure modal state is cleaned up when component unmounts
   useEffect(() => {
     return () => {
-      if (isModalOpen) {
-        setIsModalOpen(false);
-      }
+      setIsModalOpen(false);
     };
-  }, [isModalOpen]);
+  }, []);
 
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
