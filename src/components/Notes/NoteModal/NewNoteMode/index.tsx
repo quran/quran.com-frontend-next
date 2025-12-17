@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import styles from '../NoteModal.module.scss';
-import PublicReflectionDescription from '../PublicReflectionCheckboxDescription';
+import PostReflection from '../ReflectionIntro/PostReflection';
 
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
@@ -185,7 +185,7 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
             label: <ShareToQrCheckboxLabel />,
             defaultValue: false,
             type: FormFieldType.Checkbox,
-            extraSection: <PublicReflectionDescription />,
+            extraSection: <PostReflection />,
             onChange: (val: boolean) => {
               setIsCheckboxTicked(val);
             },
