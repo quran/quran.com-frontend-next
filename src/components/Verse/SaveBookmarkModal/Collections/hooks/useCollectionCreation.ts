@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import BookmarkType from '@/types/BookmarkType';
+import { Collection } from '@/types/Collection';
 import { WordVerse } from '@/types/Word';
 import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -66,13 +67,13 @@ export const useCollectionCreation = ({
 
     onStateChange({ isSubmittingCollection: true });
     try {
-      const newCollection = await addCollection(newCollectionName.trim());
+      const newCollection = (await addCollection(newCollectionName.trim())) as Collection;
       await addCollectionBookmark({
         key: Number(verse.chapterId),
         mushaf: mushafId,
         type: BookmarkType.Ayah,
         verseNumber: verse.verseNumber,
-        collectionId: (newCollection as { id: string }).id,
+        collectionId: newCollection?.id,
       });
       toast(t('saved-to', { collectionName: newCollectionName.trim() }), {
         status: ToastStatus.Success,
