@@ -1,0 +1,74 @@
+{
+  "api-docs": {
+    "cta": "",
+    "header": "",
+    "sub-header": "",
+    "title": ""
+  },
+  "app-portal": {
+    "cta-explore": "የቁርዓን መተግበሪያዎች ፖርታልን ይጎብኙ",
+    "cta-oauth": "የOAuth2 መመሪያን ይመልከቱ",
+    "description": "የቅርብ ጊዜውን በማህበረሰብ የተገነቡ ልምዶችን ይመርምሩ እና በእኛ መድረክ ምን እንደሚቻል ይመልከቱ።",
+    "heading": "የቁርዓን መተግበሪያዎች መግቢያ በር",
+    "oauth-pitch": "እንከን የለሽ ለመግባት ከቁርአን ፋውንዴሽን OAuth2 ጋር ይላኩ እና መተግበሪያዎን በ Quran Apps ፖርታል ላይ እንዲታይ ያቅርቡ።",
+    "tagline": "የቁርዓን መተግበሪያዎችህን አሳይ"
+  },
+  "careers": {
+    "career": "",
+    "cta": "",
+    "header": ""
+  },
+  "footer": "",
+  "header": "",
+  "hero": {
+    "subtitle": "የቁርአን ተሞክሮዎችን ለሚገነቡ ገንቢዎች ግብዓቶች፣ መሳሪያዎች እና መመሪያዎች።",
+    "title": "በ Quran.com ይገንቡ"
+  },
+  "issues-cta": "",
+  "issues-guide": "",
+  "labs": "ቤተ ሙከራዎች",
+  "labs-cta": "ቤተ ሙከራዎችን ያስሱ",
+  "labs-description": "በማህበረሰብ የሚነዱ የሙከራ ባህሪያትን እና መጪ ፈጠራዎችን ያግኙ።",
+  "labs-pitch": "ሃሳብዎን ያካፍሉ እና ወደፊት በቁርኣናዊ ተሳትፎ እና ልምዶች ላይ ይሳተፉ።",
+  "main-desc": "",
+  "projects": {
+    "all": "",
+    "items": {
+      "q-android": {
+        "description": "ለስልኮች እና ታብሌቶች ቤተኛ የአንድሮይድ ሙሻፍ እና የድምጽ ማጫወቻ ልምድ።",
+        "name": "ቁርኣን አንድሮይድ",
+        "stack": "ኮትሊን እና ጃቫ"
+      },
+      "q-api": {
+        "description": "Ruby on Rails የቁርአን መረጃን፣ ፍለጋን እና ትርጉሞችን የሚያበረታታ ድጋፍ ይሰጣል።",
+        "name": "Quran.com ኤፒአይ",
+        "stack": "ሐዲዶች፣ PostgreSQL"
+      },
+      "q-audio": {
+        "description": "የድምጽ ዥረት መድረክ እና አጃቢ የሞባይል መተግበሪያዎች ለንባብ።",
+        "name": "የቁርዓን ድምጽ",
+        "stack": "የድር እና የሞባይል መተግበሪያዎች"
+      },
+      "q-ios": {
+        "description": "በስዊፍት ላይ የተመሰረተ ቁርኣን አንባቢ ከዕልባቶች፣ ንባቦች እና ከመስመር ውጭ ድጋፍ።",
+        "name": "ቁርአን iOS",
+        "stack": "ስዊፍት"
+      },
+      "q-next": {
+        "description": "Next.js ቁርኣንን ለማንበብ፣ ለመፈለግ እና ለማዳመጥ የድር ልምድ።",
+        "name": "Quran.com Frontend",
+        "stack": "በTyScript እና Next.js የተሰራ"
+      }
+    },
+    "lead": "በ Quran.com ቡድን እና ማህበረሰብ የሚጠበቁ ክፍት ምንጭ ፕሮጀክቶች።",
+    "q-android": "",
+    "q-api": "",
+    "q-api-docs": "",
+    "q-audio": "",
+    "q-audio-segments": "",
+    "q-ios": "",
+    "q-next": "",
+    "q-v2": ""
+  },
+  "thanks": ""
+}
