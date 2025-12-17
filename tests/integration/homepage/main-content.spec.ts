@@ -6,6 +6,14 @@ import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
 
+const getTodayStringUTC = () => {
+  const now = new Date();
+  const day = String(now.getUTCDate()).padStart(2, '0');
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const year = now.getUTCFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 });
@@ -56,11 +64,7 @@ test(
   { tag: ['@slow', '@homepage', '@quran-in-a-year', '@smoke'] },
   async ({ page }) => {
     // Check if today's date has an entry in the ayah_of_the_day.json file
-    const now = new Date();
-    const day = String(now.getUTCDate()).padStart(2, '0');
-    const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    const year = now.getUTCFullYear();
-    const todayString = `${day}/${month}/${year}`;
+    const todayString = getTodayStringUTC();
 
     const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
     if (!ayahEntry) {
@@ -83,11 +87,7 @@ test(
   'Quran in a Year section renders when JavaScript is disabled',
   { tag: ['@quran-in-a-year', '@ssr'] },
   async ({ browser }) => {
-    const now = new Date(); // Compute today's date so we can skip when no verse is scheduled
-    const day = String(now.getUTCDate()).padStart(2, '0');
-    const month = String(now.getUTCMonth() + 1).padStart(2, '0');
-    const year = now.getUTCFullYear();
-    const todayString = `${day}/${month}/${year}`;
+    const todayString = getTodayStringUTC();
 
     const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
     test.skip(!ayahEntry, `No Ayah of the Day entry for today's date: ${todayString}`);
