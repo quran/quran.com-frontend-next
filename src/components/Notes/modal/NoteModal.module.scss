@@ -1,0 +1,35 @@
+$note_text_area_height: 360px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+  margin-block-start: var(--spacing-mega);
+}
+
+.textArea {
+  padding: 0;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+    height: $note_text_area_height;
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-medium2);
+}
+
+.rounded {
+  border-radius: var(--border-radius-default);
+}
+
+.error {
+  color: var(--color-text-error);
+}

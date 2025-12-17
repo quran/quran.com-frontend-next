@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import PostReflection from '../../modal/ReflectionIntro/PostReflection';
 import styles from '../NoteModal.module.scss';
-import PostReflection from '../ReflectionIntro/PostReflection';
 
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
-import ReflectionIntro from '@/components/Notes/NoteModal/ReflectionIntro';
+import ReflectionIntro from '@/components/Notes/modal/ReflectionIntro';
 import ShareToQrCheckboxLabel from '@/components/Notes/NoteModal/ShareToQrCheckboxLabel';
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
