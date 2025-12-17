@@ -2,9 +2,11 @@
 import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
+import { logError } from '@/lib/newrelic';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -31,7 +33,11 @@ import {
   makeCountryLanguagePreferenceUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
-import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
+import {
+  AdvancedCopyRequest,
+  PagesLookUpRequest,
+  QuranInYearVerseRequest,
+} from 'types/ApiRequests';
 import {
   TranslationsResponse,
   AdvancedCopyRawResultResponse,
@@ -88,6 +94,45 @@ export const fetcher = async function fetcher<T>(
   }
   const json = await res.json();
   return camelizeKeys(json);
+};
+
+/**
+ * Fetch the verse for the current "Quran in a Year" day with proper word fields and mushaf config.
+ *
+ * @param {QuranInYearVerseRequest} params - Request parameters
+ * @param {string} params.locale - Target locale for the request
+ * @param {number} params.chapter - Chapter number of the target ayah
+ * @param {number} params.verse - Verse number of the target ayah
+ * @param {number[]} params.translationIds - Preferred translation IDs, first one is used
+ * @param {MushafLines} params.mushafLines - Mushaf line configuration to build the mushaf id
+ * @returns {Promise<VersesResponse | undefined>} Verse payload or undefined on failure
+ */
+export const getQuranInYearVerse = async ({
+  locale,
+  chapter,
+  verse,
+  translationIds,
+  mushafLines,
+}: QuranInYearVerseRequest): Promise<VersesResponse | undefined> => {
+  try {
+    const quranInYearParams = {
+      ...getDefaultWordFields(QuranFont.QPCHafs),
+      translationFields: 'resource_name,language_id',
+      translations: translationIds.slice(0, 1).join(','),
+      mushaf: getMushafId(QuranFont.QPCHafs, mushafLines).mushaf,
+      from: `${chapter}:${verse}`,
+      to: `${chapter}:${verse}`,
+    };
+
+    return fetcher<VersesResponse>(makeVersesUrl(chapter, locale, quranInYearParams));
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    logError('Failed to fetch Quran in a Year verse', err, {
+      locale,
+      from: `${chapter}:${verse}`,
+    });
+    return undefined;
+  }
 };
 
 /**

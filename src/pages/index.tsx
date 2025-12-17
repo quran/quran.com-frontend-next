@@ -9,7 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
-import { fetcher } from '@/api';
+import { getQuranInYearVerse } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -21,9 +21,6 @@ import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { Course } from '@/types/auth/Course';
 import Language from '@/types/Language';
-import { QuranFont } from '@/types/QuranReader';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVersesUrl } from '@/utils/apiPaths';
 import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -32,46 +29,23 @@ import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { GetSsrPropsWithReduxContext } from '@/utils/withSsrRedux.types';
-import { ChaptersResponse, VersesResponse } from 'types/ApiResponses';
+import {
+  ChaptersResponse,
+  CountryLanguagePreferenceResponse,
+  VersesResponse,
+} from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
-// Helper function to fetch Quran in Year verse for today
-async function fetchQuranInYearVerse(
-  store: GetSsrPropsWithReduxContext['store'],
-  currentLocale: string,
-  todayAyah: ReturnType<typeof getCurrentDayAyah>,
-): Promise<VersesResponse | undefined> {
-  try {
-    const state = store.getState();
-    const translationIds = state.translations.selectedTranslations.slice(0, 1);
-    const { mushafLines } = state.quranReaderStyles;
-
-    const quranInYearParams = {
-      ...getDefaultWordFields(QuranFont.QPCHafs),
-      translationFields: 'resource_name,language_id',
-      translations: translationIds.join(','),
-      mushaf: getMushafId(QuranFont.QPCHafs, mushafLines).mushaf,
-      from: `${todayAyah.chapter}:${todayAyah.verse}`,
-      to: `${todayAyah.chapter}:${todayAyah.verse}`,
-    };
-
-    // Fetch the verse data for the current day's Ayah
-    return fetcher<VersesResponse>(
-      makeVersesUrl(todayAyah.chapter, currentLocale, quranInYearParams),
-    );
-  } catch (error) {
-    return undefined;
-  }
-}
-
 // Helper function to derive learning plan languages and fetch courses
-async function fetchLearningPlansData(countryLanguagePreference: any): Promise<Course[]> {
+async function fetchLearningPlansData(
+  countryLanguagePreference?: CountryLanguagePreferenceResponse,
+): Promise<Course[]> {
   // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
   // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
   const learningPlanLanguages = countryLanguagePreference?.learningPlanLanguages
-    ?.map((lang: any) => lang.isoCode)
-    .filter((code: any): code is string => code != null)
-    .map((code: string) => code.toLowerCase()) || ['en'];
+    ?.map((lang) => lang.isoCode)
+    .filter((code): code is string => Boolean(code))
+    .map((code) => code.toLowerCase()) || [Language.EN];
 
   // Fetch learning plans with fallback retry for backward compatibility
   return fetchCoursesWithLanguages(learningPlanLanguages);
@@ -218,10 +192,19 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
 
     const todayAyah = getCurrentDayAyah();
     const currentLocale = languageResult.detectedLanguage || context.locale || Language.EN;
+    const state = store.getState();
+    const translationIds = state.translations.selectedTranslations.slice(0, 1);
+    const { mushafLines } = state.quranReaderStyles;
 
     const [quranInYearVerses, learningPlans] = await Promise.all([
       todayAyah
-        ? fetchQuranInYearVerse(store, currentLocale, todayAyah)
+        ? getQuranInYearVerse({
+            locale: currentLocale,
+            chapter: todayAyah.chapter,
+            verse: todayAyah.verse,
+            translationIds,
+            mushafLines,
+          })
         : Promise.resolve(undefined),
       fetchLearningPlansData(languageResult?.countryLanguagePreference),
     ]);
