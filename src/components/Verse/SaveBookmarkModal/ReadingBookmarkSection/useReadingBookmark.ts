@@ -87,7 +87,7 @@ const useReadingBookmark = ({
   const isVerse = type === ReadingBookmarkType.AYAH;
 
   // Determine the effective current reading bookmark based on login status
-  const effectiveCurrentBookmark = useMemo(() => {
+  const effectiveCurrentBookmark = useCallback(() => {
     if (isLoggedIn) {
       return currentReadingBookmark;
     }
@@ -143,13 +143,13 @@ const useReadingBookmark = ({
 
   // Determine section state
   const showNewBookmark = pendingBookmarkValue === bookmarkValue;
-  const isCurrentBookmark = effectiveCurrentBookmark === bookmarkValue;
+  const isCurrentBookmark = effectiveCurrentBookmark() === bookmarkValue;
   const isSelected = showNewBookmark || isCurrentBookmark;
 
   const displayReadingBookmark =
     showNewBookmark || isCurrentBookmark
       ? resourceDisplayName
-      : parseBookmarkForDisplay(effectiveCurrentBookmark);
+      : parseBookmarkForDisplay(effectiveCurrentBookmark());
 
   const showRemoveSection =
     isCurrentBookmark &&
@@ -286,7 +286,7 @@ const useReadingBookmark = ({
     showRemoveSection,
     resourceDisplayName,
     displayReadingBookmark,
-    effectiveCurrentBookmark,
+    effectiveCurrentBookmark: effectiveCurrentBookmark(),
     previousBookmarkValue,
     handleSetReadingBookmark,
     handleUndoReadingBookmark,
