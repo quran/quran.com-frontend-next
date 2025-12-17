@@ -94,6 +94,7 @@ class LocalizationScenarioHelper {
 
   async switchLanguage(language: string) {
     await this.homepage.closeNextjsErrorDialog();
+    await this.homepage.closeNextjsErrorDialog();
     await this.page.locator('[data-testid="open-navigation-drawer"]').click();
     const selectorButton = this.page.locator('[data-testid="language-selector-button"]');
     await expect(selectorButton).toBeVisible();

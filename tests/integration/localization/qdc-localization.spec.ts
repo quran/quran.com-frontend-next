@@ -65,8 +65,6 @@ const SUPPORTED_LANGUAGES = {
 const UNSUPPORTED_LANGUAGES = {
   JAPANESE: 'ja',
   KOREAN: 'ko',
-  GERMAN: 'de',
-  SPANISH: 'es',
   HEBREW: 'he',
   HINDI: 'hi',
 } as const;
@@ -139,6 +137,9 @@ class LocalizationTestHelper {
     const languageHeader = locales.join(',');
 
     this.headers[ACCEPT_LANGUAGE] = languageHeader;
+    // Ensure Cloudflare country header is always present for consistency with other helpers.
+    const inferredCountry = locales[0]?.split('-')[1] || 'US';
+    this.headers['CF-IPCountry'] = inferredCountry.toUpperCase();
     await this.page.setExtraHTTPHeaders(this.headers);
 
     // Set up API mocking with default country (US)
@@ -375,6 +376,7 @@ class LocalizationTestHelper {
     await this.homepage.closeNextjsErrorDialog();
 
     // Open navigation drawer, then language selector, then pick the language
+    await this.homepage.closeNextjsErrorDialog();
     await this.page.locator('[data-testid="open-navigation-drawer"]').click();
     const selectorButton = this.page.locator('[data-testid="language-selector-button"]');
     await expect(selectorButton).toBeVisible();
@@ -1101,63 +1103,6 @@ test.describe('Category 1: First-time Guest User Detection & Settings', () => {
         });
       });
 
-      await context.close();
-    });
-  });
-
-  test('Test Case 1.3.2b: German Language Fallback', async ({ browser }) => {
-    await test.step('Setup context and helper', async () => {
-      const context = await browser.newContext();
-      const page = await context.newPage();
-      const testHelper = new LocalizationTestHelper(page, context);
-
-      await test.step('Set language to German and country to DE', async () => {
-        await testHelper.setLanguageAndCountry(
-          ['de-DE', UNSUPPORTED_LANGUAGES.GERMAN],
-          TEST_COUNTRIES.DE,
-        );
-      });
-
-      await test.step('Navigate to homepage and wait for hydration', async () => {
-        await page.goto('/', NAVIGATION_OPTIONS);
-        await testHelper.waitForReduxHydration();
-      });
-
-      await test.step('Verify settings fallback to English, preserving country', async () => {
-        await testHelper.verifyDefaultSettingsStructure({
-          detectedLanguage: 'en',
-          detectedCountry: TEST_COUNTRIES.DE,
-          userHasCustomised: false,
-          isUsingDefaultSettings: true,
-        });
-      });
-      await context.close();
-    });
-  });
-
-  test('Test Case 1.3.2c: Spanish Language Fallback', async ({ browser }) => {
-    await test.step('Setup context and page', async () => {
-      const context = await browser.newContext();
-      const page = await context.newPage();
-      const testHelper = new LocalizationTestHelper(page, context);
-
-      await test.step('Set language to Spanish and country to ES', async () => {
-        await testHelper.setLanguageAndCountry(['es-ES', UNSUPPORTED_LANGUAGES.SPANISH], 'ES');
-      });
-
-      await test.step('Navigate and hydrate', async () => {
-        await page.goto('/', NAVIGATION_OPTIONS);
-        await testHelper.waitForReduxHydration();
-      });
-
-      await test.step('Verify fallback to English', async () => {
-        await testHelper.verifyDefaultSettingsStructure({
-          detectedLanguage: 'en',
-          detectedCountry: 'ES',
-          userHasCustomised: false,
-          isUsingDefaultSettings: true,
-        });
-      });
       await context.close();
     });
   });

@@ -16,6 +16,7 @@ test('Clicking on Nav bar language selector icon should open the language select
   // 2. Click on the language selector nav bar trigger
   await homepage.closeNextjsErrorDialog();
   await page.locator('[data-testid="open-navigation-drawer"]').click();
+
   await page.locator('[data-testid="language-selector-button"]').click();
   // 3. Make sure the language selector items are visible
   await expect(page.locator('div[role="menuitem"]:has-text("English")')).toBeVisible();

@@ -14,6 +14,7 @@ test(
   { tag: ['@persistence', '@language', '@slow'] },
   async ({ page, context }) => {
     // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
     await page.getByTestId('open-navigation-drawer').click();
     // 2. Click on the language selector nav bar trigger
     await page.getByTestId('language-selector-button').click();
