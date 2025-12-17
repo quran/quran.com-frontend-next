@@ -259,9 +259,9 @@ const useSaveBookmarkModal = ({
   const handleGuestSignIn = useCallback((): void => {
     logButtonClick('save_bookmark_modal_guest_sign_in');
     const redirectUrl = isVerse
-      ? `/chapter/${verse?.chapterId}/${verse?.verseNumber}`
+      ? `/${verse?.chapterId}?startingVerse=${verse?.verseNumber}`
       : `/page/${pageNumber}`;
-    router.push(`/login?redirect=${encodeURIComponent(redirectUrl)}`);
+    router.push(`/login?r=${encodeURIComponent(redirectUrl)}`);
     onClose();
   }, [isVerse, verse, pageNumber, onClose, router]);
 
