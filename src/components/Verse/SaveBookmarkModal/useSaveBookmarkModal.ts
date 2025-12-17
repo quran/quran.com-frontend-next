@@ -261,7 +261,7 @@ const useSaveBookmarkModal = ({
     const redirectUrl = isVerse
       ? `/chapter/${verse?.chapterId}/${verse?.verseNumber}`
       : `/page/${pageNumber}`;
-    router.push(`/auth/signin?redirect=${encodeURIComponent(redirectUrl)}`);
+    router.push(`/login?redirect=${encodeURIComponent(redirectUrl)}`);
     onClose();
   }, [isVerse, verse, pageNumber, onClose, router]);
 
