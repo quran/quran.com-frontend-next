@@ -1,31 +1,19 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import BookmarkIcon from './BookmarkIcon';
+import useBookmarkState from './hooks/useBookmarkState';
+
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from '@/components/dls/Spinner/Spinner';
 import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
-import BookmarkedIcon from '@/icons/bookmark.svg';
-import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
-import { getMushafId } from '@/utils/api';
-import { getBookmark } from '@/utils/auth/api';
-import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const SaveBookmarkModal = dynamic(() => import('./SaveBookmarkModal'), { ssr: false });
@@ -38,49 +26,17 @@ interface Props {
 }
 
 /**
- * BookmarkAction component that displays a bookmark button/menu item for a verse
- * Opens SaveBookmarkModal for logged-in users or GuestUserPrompt for guests
+ * BookmarkAction component that displays a bookmark button/menu item for a verse.
+ * Opens SaveBookmarkModal for logged-in users or GuestUserPrompt for guests.
  *
+ * @param {Props} props - Component props
  * @returns {JSX.Element} The BookmarkAction component
  */
 const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+  const { isVerseBookmarked, isVerseBookmarkedLoading } = useBookmarkState(verse);
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
-
-  const { data: bookmark, isValidating: isVerseBookmarkedLoading } = useSWRImmutable(
-    isLoggedIn()
-      ? makeBookmarkUrl(
-          mushafId,
-          Number(verse.chapterId),
-          BookmarkType.Ayah,
-          Number(verse.verseNumber),
-        )
-      : null,
-    async () => {
-      const response = await getBookmark(
-        mushafId,
-        Number(verse.chapterId),
-        BookmarkType.Ayah,
-        Number(verse.verseNumber),
-      );
-      return response;
-    },
-  );
-
-  const isVerseBookmarked = useMemo(() => {
-    const isUserLoggedIn = isLoggedIn();
-    if (isUserLoggedIn && bookmark) {
-      return bookmark;
-    }
-    if (!isUserLoggedIn) {
-      return !!bookmarkedVerses[verse.verseKey];
-    }
-    return false;
-  }, [bookmarkedVerses, bookmark, verse.verseKey]);
 
   const onBookmarkClicked = useCallback(
     (e?: React.MouseEvent) => {
@@ -100,22 +56,15 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
     [isTranslationView],
   );
 
-  const onModalClose = () => {
+  const onModalClose = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
-  let bookmarkIcon = <Spinner />;
-  if (!isVerseBookmarkedLoading) {
-    bookmarkIcon = isVerseBookmarked ? (
-      <BookmarkedIcon color="var(--color-text-default)" />
-    ) : (
-      <IconContainer
-        icon={<UnBookmarkedIcon />}
-        color={IconColor.tertiary}
-        size={IconSize.Custom}
-      />
-    );
-  }
+  const bookmarkIcon = (
+    <BookmarkIcon isLoading={isVerseBookmarkedLoading} isBookmarked={isVerseBookmarked} />
+  );
+
+  const bookmarkLabel = isVerseBookmarked ? t('bookmarked') : t('bookmark');
 
   const renderModal = () => {
     if (!isModalOpen) return null;
@@ -136,7 +85,7 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
       <>
         <Button
           size={ButtonSize.Small}
-          tooltip={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+          tooltip={bookmarkLabel}
           variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
           className={classNames(
@@ -146,7 +95,7 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
           )}
           onClick={onBookmarkClicked}
           isDisabled={isVerseBookmarkedLoading}
-          ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+          ariaLabel={bookmarkLabel}
         >
           <span className={styles.icon}>{bookmarkIcon}</span>
         </Button>
@@ -163,7 +112,7 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
         icon={bookmarkIcon}
         isDisabled={isVerseBookmarkedLoading}
       >
-        {isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        {bookmarkLabel}
       </PopoverMenu.Item>
       {renderModal()}
     </>

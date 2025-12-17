@@ -20,6 +20,7 @@ import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
 import { addCollection, addCollectionBookmark, addOrUpdateUserPreference } from '@/utils/auth/api';
+import { getErrorStatus } from '@/utils/auth/errors';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
@@ -299,21 +300,6 @@ const useSaveBookmarkModal = ({
     handleTakeNote,
     handleGuestSignIn,
   };
-};
-
-/**
- * Extracts HTTP status code from an error object.
- * @returns {number | undefined} HTTP status code
- * @param {unknown} error - The error object
- */
-const getErrorStatus = (error: unknown): number | undefined => {
-  if (error && typeof error === 'object') {
-    const err = error as Record<string, unknown>;
-    return (err.status ?? err.statusCode ?? (err.response as Record<string, unknown>)?.status) as
-      | number
-      | undefined;
-  }
-  return undefined;
 };
 
 export default useSaveBookmarkModal;
