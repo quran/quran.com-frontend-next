@@ -9,10 +9,10 @@ import styles from './QuranicCalendarHero.module.scss';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import Background from '@/icons/background.svg';
 import { enrollUserInQuranProgram } from '@/utils/auth/api';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import {
@@ -36,12 +36,13 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
   } = useGetUserQuranProgramEnrollment({
     programId: QURANIC_CALENDAR_PROGRAM_ID,
   });
+  const { isLoggedIn } = useIsLoggedIn();
   const [isEnrolling, setIsEnrolling] = useState(false);
   const router = useRouter();
 
   const onEnrollButtonClicked = async () => {
     logButtonClick('quranic_calendar_enroll_in_program');
-    if (isLoggedIn()) {
+    if (isLoggedIn) {
       if (isSubscribed) {
         router.replace(getNotificationSettingsNavigationUrl());
       } else if (!isSubscriptionLoading && !isSubscribed && !isEnrolling) {
@@ -79,6 +80,7 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
             isSubscriptionLoading={isSubscriptionLoading}
             isEnrolling={isEnrolling}
             onEnrollButtonClicked={onEnrollButtonClicked}
+            isLoggedIn={isLoggedIn}
           />
         </div>
         <div className={styles.weekDisplay}>

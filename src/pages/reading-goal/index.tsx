@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,9 +18,9 @@ import {
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const ReadingGoalPage: NextPage = () => {
   // we don't want to show the reading goal page if the user is not logged in
@@ -66,14 +66,6 @@ const ReadingGoalPage: NextPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/reading-goal');
 
 export default ReadingGoalPage;
