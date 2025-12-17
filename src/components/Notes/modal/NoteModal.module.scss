@@ -7,6 +7,12 @@ $note_text_area_height: 360px;
   margin-block-start: var(--spacing-mega);
 }
 
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
 .textArea {
   padding: 0;
 
@@ -18,6 +24,53 @@ $note_text_area_height: 360px;
       color: transparent;
     }
   }
+}
+
+.notesButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xsmall);
+
+  background-color: var(--color-background-alternative-faint-new);
+  height: var(--spacing-large2-px);
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-medium2);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  &:focus-visible {
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+.notesButtonChevron,
+.notesButtonPencil {
+  width: var(--spacing-small);
+  height: var(--spacing-small);
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+}
+
+.notesButtonChevron {
+  margin-inline-start: calc(var(--spacing-xsmall) * -1);
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+}
+
+.notesButtonText {
+  line-height: 0;
 }
 
 .actions {
