@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable react-func/max-lines-per-function, no-await-in-loop */
 import { test, expect } from '@playwright/test';
 
+import { switchToReadingMode, switchToTranslationMode } from '@/tests/helpers/mode-switching';
 import AudioUtilities from '@/tests/POM/audio-utilities';
 import Homepage from '@/tests/POM/home-page';
 
@@ -239,6 +240,108 @@ test.describe('Audio Player Advanced Behaviour', () => {
     // Move backward to go back to second ayah
     await page.keyboard.press('ArrowLeft');
     await expect(secondAyah).toHaveClass(/highlighted/);
+  });
+
+  test('Next/prev buttons scroll to ayah after manual scrolling in translation view', async ({
+    page,
+  }) => {
+    await switchToTranslationMode(page);
+
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
+    await audioUtilities.pauseAudioPlayback();
+
+    const firstAyah = page.getByTestId('verse-1:1');
+    const secondAyah = page.getByTestId('verse-1:2');
+    const lastAyah = page.getByTestId('verse-1:7'); // Al-Fatiha has 7 ayat
+
+    // Initially first ayah should be highlighted
+    await expect(firstAyah).toHaveClass(/highlighted/);
+    await expect(firstAyah).toBeInViewport();
+
+    // Test next button: scroll to end of page and click next
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(500); // wait for scroll to complete
+
+    // Click next ayah button
+    const nextButton = page.getByTestId('audio-next-ayah');
+    await nextButton.click();
+
+    // Second ayah should be highlighted and in viewport
+    await expect(secondAyah).toHaveClass(/highlighted/);
+    await expect(secondAyah).toBeInViewport();
+
+    // Navigate to last ayah and test prev button
+    // Click next multiple times to reach last ayah
+    for (let i = 3; i < 7; i += 1) {
+      await nextButton.click();
+      await page.waitForTimeout(500);
+    }
+
+    // Now at ayah 6, click next one more time to reach ayah 7
+    await nextButton.click();
+    await expect(lastAyah).toHaveClass(/highlighted/);
+    await expect(lastAyah).toBeInViewport();
+
+    // Scroll to very top of page
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(500);
+
+    // Click previous button
+    const prevButton = page.getByTestId('audio-prev-ayah');
+    await prevButton.click();
+
+    // Should scroll back to previous ayah (6th ayah)
+    const sixthAyah = page.getByTestId('verse-1:6');
+    await expect(sixthAyah).toHaveClass(/highlighted/);
+    await expect(sixthAyah).toBeInViewport();
+  });
+
+  test('Next/prev buttons scroll to ayah after manual scrolling in reading view', async ({
+    page,
+  }) => {
+    await switchToReadingMode(page);
+
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
+    await audioUtilities.pauseAudioPlayback();
+
+    const firstAyah = page.getByTestId('verse-arabic-1:1');
+    const secondAyah = page.getByTestId('verse-arabic-1:2');
+
+    /**
+     * Reading mode can show the same ayah across multiple lines, so we grab the first occurrence
+     * using .first() to make sure we're testing the right element.
+     */
+
+    // Initially first ayah should be highlighted
+    await expect(firstAyah.first()).toHaveClass(/highlighted/);
+    await expect(firstAyah.first()).toBeInViewport();
+
+    // Test next button: scroll to end of page and click next
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(500); // wait for scroll to complete
+
+    // Click next ayah button
+    const nextButton = page.getByTestId('audio-next-ayah');
+    await nextButton.click();
+
+    // Second ayah should be highlighted and in viewport
+    await expect(secondAyah.first()).toHaveClass(/highlighted/);
+    await expect(secondAyah.first()).toBeInViewport();
+
+    // Test prev button: when on second ayah, scroll to bottom and click prev
+    // Scroll to bottom of page
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await page.waitForTimeout(500); // wait for scroll to complete
+
+    // Click previous button
+    const prevButton = page.getByTestId('audio-prev-ayah');
+    await prevButton.click();
+
+    // Should scroll back to first ayah
+    await expect(firstAyah.first()).toHaveClass(/highlighted/);
+    await expect(firstAyah.first()).toBeInViewport();
   });
 });
 
