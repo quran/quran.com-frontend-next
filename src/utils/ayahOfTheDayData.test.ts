@@ -26,7 +26,36 @@ const parseDateToTimestamp = (date: string): number => {
   return Date.UTC(year, month - 1, day);
 };
 
+const isValidDateFormat = (date: string): boolean => /^\d{2}\/\d{2}\/\d{4}$/.test(date);
+
+const isValidVerseKey = (verseKey: string): boolean => /^\d+:\d+$/.test(verseKey);
+
 describe('ayah_of_the_day data', () => {
+  it('has valid data structure for all entries', () => {
+    expect(ayahOfTheDayData.length).toBeGreaterThan(0);
+
+    ayahOfTheDayData.forEach((entry) => {
+      // Validate required properties exist
+      expect(entry).toHaveProperty('date');
+      expect(entry).toHaveProperty('verseKey');
+
+      // Validate types
+      expect(typeof entry.date).toBe('string');
+      expect(typeof entry.verseKey).toBe('string');
+
+      // Validate no extra properties
+      expect(Object.keys(entry)).toHaveLength(2);
+
+      // Validate formats
+      expect(isValidDateFormat(entry.date)).toBe(true);
+      expect(isValidVerseKey(entry.verseKey)).toBe(true);
+
+      // Validate non-empty
+      expect(entry.date.trim()).not.toBe('');
+      expect(entry.verseKey.trim()).not.toBe('');
+    });
+  });
+
   it('matches sampled rows from the sheet (date -> verseKey)', () => {
     const jsonMap = new Map(ayahOfTheDayData.map((entry) => [entry.date, entry.verseKey]));
 
