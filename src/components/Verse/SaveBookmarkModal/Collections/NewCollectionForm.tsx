@@ -68,7 +68,7 @@ const NewCollectionForm: React.FC<NewCollectionFormProps> = ({
 
       <div className={styles.newCollectionForm}>
         <label htmlFor="collection-name" className={styles.inputLabel}>
-          {commonT('form.title')}
+          {commonT('form.title')}:
         </label>
         <input
           id="collection-name"

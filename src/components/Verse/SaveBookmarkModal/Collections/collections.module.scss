@@ -130,8 +130,9 @@ $icon-size: 20px;
 
 .newCollectionTitle {
   flex: 1;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded-new);
 }
 
 .newCollectionForm {
@@ -141,8 +142,8 @@ $icon-size: 20px;
 }
 
 .inputLabel {
-  font-size: var(--font-size-normal);
-  color: var(--color-text-faded);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
 }
 
 .collectionInput {
@@ -169,10 +170,15 @@ $icon-size: 20px;
 
 .cancelButton {
   flex: 1;
+  border-radius: var(--border-radius-medium-px);
+  border-color: var(--color-separators-ayah-level);
+  font-size: var(--font-size-normal-px);
 }
 
 .createButton {
   flex: 1;
+  border-radius: var(--border-radius-medium-px);
+  font-size: var(--font-size-normal-px);
 }
 
 // New Collection View
