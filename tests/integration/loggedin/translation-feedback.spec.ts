@@ -48,9 +48,9 @@ const openTranslationFeedbackModal = async (
 /**
  * Selects a translation option in the translation feedback modal.
  *
- * By default, this function selects the translation with ID `131`.
+ * By default, this function selects the translation (Dr. Mustafa Khattab) with ID `131`.
  * This ID is expected to exist in the user's preferences and is used
- * to ensure that translation data is properly loaded before continuing.
+ * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
   const translationSelect = page.getByTestId('translation-select');
