@@ -29,27 +29,30 @@ const SaveBookmarkModalFooter: React.FC<SaveBookmarkModalFooterProps> = ({
   const { t: commonT } = useTranslation('common');
 
   return (
-    <div className={styles.footer}>
-      {showNoteButton && (
+    <>
+      <hr className={styles.divider} />
+      <div className={styles.footer}>
+        {showNoteButton && (
+          <Button
+            variant={ButtonVariant.Outlined}
+            size={ButtonSize.Medium}
+            onClick={onTakeNote}
+            className={styles.noteButton}
+          >
+            <NoteIcon />
+            {t('take-a-note')}
+          </Button>
+        )}
         <Button
-          variant={ButtonVariant.Outlined}
+          type={ButtonType.Primary}
           size={ButtonSize.Medium}
-          onClick={onTakeNote}
-          className={styles.noteButton}
+          onClick={onDone}
+          className={styles.doneButton}
         >
-          <NoteIcon />
-          {t('take-a-note')}
+          {commonT('done')}
         </Button>
-      )}
-      <Button
-        type={ButtonType.Primary}
-        size={ButtonSize.Medium}
-        onClick={onDone}
-        className={styles.doneButton}
-      >
-        {commonT('done')}
-      </Button>
-    </div>
+      </div>
+    </>
   );
 };
 
