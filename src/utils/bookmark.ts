@@ -21,7 +21,7 @@ export type ReadingBookmark = string | null;
  * @returns {boolean} True if valid format, false otherwise
  */
 export const isValidReadingBookmarkFormat = (bookmark: ReadingBookmark): boolean => {
-  if (bookmark === null) {
+  if (!bookmark) {
     return true;
   }
 
