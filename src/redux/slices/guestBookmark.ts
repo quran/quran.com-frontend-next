@@ -1,9 +1,7 @@
 /* eslint-disable no-param-reassign */ // Required for Redux Toolkit's Immer-based state mutations
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Reading bookmark format: "ayah:chapterId:verseNumber" or "page:pageNumber"
-// Examples: "ayah:1:5" (chapter 1, verse 5), "page:42" (page 42)
-export type ReadingBookmark = string | null;
+import { isValidReadingBookmarkFormat, ReadingBookmark } from '@/utils/bookmark';
 
 interface GuestBookmarkState {
   readingBookmark: ReadingBookmark;
@@ -11,31 +9,6 @@ interface GuestBookmarkState {
 
 const initialState: GuestBookmarkState = {
   readingBookmark: null,
-};
-
-/**
- * Validates the bookmark format.
- * @param {ReadingBookmark} bookmark The bookmark to validate
- * @returns {boolean} True if valid format, false otherwise
- */
-const isValidBookmarkFormat = (bookmark: ReadingBookmark): boolean => {
-  if (bookmark === null) {
-    return true;
-  }
-
-  // Validate "ayah:chapterId:verseNumber" format
-  const ayahPattern = /^ayah:\d+:\d+$/;
-  if (ayahPattern.test(bookmark)) {
-    return true;
-  }
-
-  // Validate "page:pageNumber" format
-  const pagePattern = /^page:\d+$/;
-  if (pagePattern.test(bookmark)) {
-    return true;
-  }
-
-  return false;
 };
 
 /**
@@ -59,7 +32,7 @@ const guestBookmarkSlice = createSlice({
      * @param {PayloadAction<ReadingBookmark>} action Payload contains bookmark value in the above formats or null to clear
      */
     setGuestReadingBookmark: (state, action: PayloadAction<ReadingBookmark>) => {
-      if (!isValidBookmarkFormat(action.payload)) {
+      if (!isValidReadingBookmarkFormat(action.payload)) {
         // Invalid format - do not update state
         return;
       }

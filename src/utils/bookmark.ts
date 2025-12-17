@@ -11,6 +11,35 @@ interface RecentlyReadVerse {
   ayah?: string | number;
 }
 
+// Reading bookmark format: "ayah:chapterId:verseNumber" or "page:pageNumber"
+// Examples: "ayah:1:5" (chapter 1, verse 5), "page:42" (page 42)
+export type ReadingBookmark = string | null;
+
+/**
+ * Validates the bookmark format.
+ * @param {ReadingBookmark} bookmark The bookmark to validate
+ * @returns {boolean} True if valid format, false otherwise
+ */
+export const isValidReadingBookmarkFormat = (bookmark: ReadingBookmark): boolean => {
+  if (bookmark === null) {
+    return true;
+  }
+
+  // Validate "ayah:chapterId:verseNumber" format
+  const ayahPattern = /^ayah:\d+:\d+$/;
+  if (ayahPattern.test(bookmark)) {
+    return true;
+  }
+
+  // Validate "page:pageNumber" format
+  const pagePattern = /^page:\d+$/;
+  if (pagePattern.test(bookmark)) {
+    return true;
+  }
+
+  return false;
+};
+
 /**
  * Extracts the page number from a bookmark string if it's a page bookmark.
  *
@@ -18,7 +47,7 @@ interface RecentlyReadVerse {
  * @returns {number | null} The page number if bookmark is a page bookmark, null otherwise
  */
 export const getPageNumberFromBookmark = (bookmark: string | null | undefined): number | null => {
-  if (!bookmark) return null;
+  if (!bookmark || !isValidReadingBookmarkFormat(bookmark)) return null;
 
   const parts = bookmark.split(':');
   if (parts[0] === ReadingBookmarkType.PAGE && parts.length === 2) {
@@ -42,6 +71,9 @@ export const parseReadingBookmark = (
   pageVersesData: VersesResponse | null | undefined,
   recentlyReadVerseKeys: RecentlyReadVerse[] | null | undefined,
 ): ParsedBookmarkResult => {
+  if (!isValidReadingBookmarkFormat(bookmark)) {
+    return { surahNumber: 1, verseNumber: null };
+  }
   // Primary: Use reading bookmark if available
   if (bookmark) {
     const parts = bookmark.split(':');
