@@ -8,9 +8,7 @@ import DeleteNoteModal from './DeleteNoteModal';
 import EditForm from './EditForm';
 import styles from './NoteListItem.module.scss';
 
-import PublicReflectionDescription, {
-  NoteType,
-} from '@/components/Notes/NoteModal/PublicReflectionCheckboxDescription';
+import PostReflection from '@/components/Notes/NoteModal/ReflectionIntro/PostReflection';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
@@ -232,7 +230,7 @@ const EditNoteListItem: React.FC<Props> = ({
                   {t('notes:post-on-qr')}
                 </Button>
               </div>
-              <PublicReflectionDescription type={NoteType.EDIT} />
+              <PostReflection />
             </>
           )}
         </>

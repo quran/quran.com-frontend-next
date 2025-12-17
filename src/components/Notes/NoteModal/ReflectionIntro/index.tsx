@@ -72,7 +72,7 @@ const ReflectionIntro = () => {
                 link4: (
                   <Link
                     key={4}
-                    href="https://quranReflect.com/faq"
+                    href="https://quranreflect.com/faq"
                     variant={LinkVariant.Blend}
                     className={styles.link}
                     isNewTab
