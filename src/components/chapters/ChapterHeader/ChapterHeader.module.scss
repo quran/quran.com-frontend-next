@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
@@ -244,6 +244,11 @@ $bismillahSvgInlineSizeMobile: 148px;
   align-items: center;
   // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
   min-height: calc(3.75 * var(--spacing-medium));
+}
+
+.surahInfoHeader {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-bold);
 }
 
 .chapterIconContainer {
