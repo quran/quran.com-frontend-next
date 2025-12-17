@@ -374,14 +374,14 @@ class LocalizationTestHelper {
   async switchLanguage(language: string, expectedUrl: string) {
     await this.homepage.closeNextjsErrorDialog();
 
-    // Open language selector
-    await this.page.locator('[data-testid="language-selector-button-navbar"]').click();
+    // Open navigation drawer, then language selector, then pick the language
+    await this.page.locator('[data-testid="open-navigation-drawer"]').click();
+    const selectorButton = this.page.locator('[data-testid="language-selector-button"]');
+    await expect(selectorButton).toBeVisible();
+    await selectorButton.click();
 
-    // Wait for language option to be visible
-    const languageOption = this.page.locator(`[data-testid="language-selector-item-${language}"]`);
+    const languageOption = this.page.locator(`[data-testid="language-item-${language}"]`);
     await expect(languageOption).toBeVisible();
-
-    // Click the language option
     await languageOption.click();
 
     // Wait for navigation to complete with proper conditions
@@ -1268,7 +1268,6 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
       // Simulate user signup/registration flow
       // Navigate to signup page
       await page.goto('/login', NAVIGATION_OPTIONS);
-      await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signup-button"]').first().click();
       await page.locator('[data-testid="signup-first-name-input"]').fill('Test');
       await page.locator('[data-testid="signup-last-name-input"]').fill('User');
@@ -1344,7 +1343,6 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
 
     await test.step('Proceed with signup', async () => {
       await page.goto('/login', NAVIGATION_OPTIONS);
-      await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signup-button"]').first().click();
       await page.locator('[data-testid="signup-first-name-input"]').fill('Custom');
       await page.locator('[data-testid="signup-last-name-input"]').fill('User');
@@ -1429,7 +1427,6 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
 
     await test.step('Login user', async () => {
       await page.goto('/login', NAVIGATION_OPTIONS);
-      await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signin-email-input"]').fill('existing@example.com');
       await page.locator('[data-testid="signin-password-input"]').fill('existingpass123');
       await page.locator('[data-testid="signin-continue-button"]').click();
@@ -1489,7 +1486,6 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
       await helper.mockCountryDetection('CA');
 
       await page.goto('/login', NAVIGATION_OPTIONS);
-      await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signin-email-input"]').fill('newuser@example.com');
       await page.locator('[data-testid="signin-password-input"]').fill('newpass123');
       await page.locator('[data-testid="signin-continue-button"]').click();
@@ -1654,9 +1650,13 @@ test.describe('Category 3: Language Selector Behavior', () => {
 
     await test.step('Switch to Arabic and verify customization preservation', async () => {
       await testHelper.homepage.closeNextjsErrorDialog();
-      await page.locator('[data-testid="language-selector-button-navbar"]').click();
-      await expect(page.locator('[data-testid="language-selector-item-ar"]')).toBeVisible();
-      await page.locator('[data-testid="language-selector-item-ar"]').click();
+      await page.locator('[data-testid="open-navigation-drawer"]').click();
+      const selectorButton = page.locator('[data-testid="language-selector-button"]');
+      await expect(selectorButton).toBeVisible();
+      await selectorButton.click();
+      const languageOption = page.locator('[data-testid="language-item-ar"]');
+      await expect(languageOption).toBeVisible();
+      await languageOption.click();
       await page.waitForURL('/ar/1');
 
       await testHelper.waitForReduxHydration();
@@ -1787,7 +1787,6 @@ test.describe('Category 4: Reset Settings Functionality', () => {
 
     await test.step('Login user and verify custom settings', async () => {
       await page.goto('/login', NAVIGATION_OPTIONS);
-      await page.locator('[data-testid="email-login-button"]').click();
       await page.locator('[data-testid="signin-email-input"]').fill('logged@example.com');
       await page.locator('[data-testid="signin-password-input"]').fill('loggedpass123');
       await page.locator('[data-testid="signin-continue-button"]').click();

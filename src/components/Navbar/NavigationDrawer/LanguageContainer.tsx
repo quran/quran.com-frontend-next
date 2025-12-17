@@ -124,6 +124,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
             className={classNames(styles.languageItem, {
               [styles.selected]: locale === lang,
             })}
+            data-testid={`language-item-${locale}`}
           >
             {getLocaleName(locale)}
           </Button>

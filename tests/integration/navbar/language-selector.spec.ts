@@ -15,7 +15,8 @@ test('Clicking on Nav bar language selector icon should open the language select
   await expect(page.locator('div[role="menuitem"]:has-text("English")')).not.toBeVisible();
   // 2. Click on the language selector nav bar trigger
   await homepage.closeNextjsErrorDialog();
-  await page.locator('[data-testid="language-selector-button-navbar"]').click();
+  await page.locator('[data-testid="open-navigation-drawer"]').click();
+  await page.locator('[data-testid="language-selector-button"]').click();
   // 3. Make sure the language selector items are visible
   await expect(page.locator('div[role="menuitem"]:has-text("English")')).toBeVisible();
   await expect(page.locator('div[role="menuitem"]:has-text("العربية")')).toBeVisible();
@@ -43,7 +44,8 @@ test('Choosing a language should navigate the user to the localized page of that
   await expect(page).toHaveURL('/');
   // 2. Open the language selector menu
   await homepage.closeNextjsErrorDialog();
-  await page.locator('[data-testid="language-selector-button-navbar"]').click();
+  await page.locator('[data-testid="open-navigation-drawer"]').click();
+  await page.locator('[data-testid="language-selector-button"]').click();
   // 3. select the Bengali language and make sure we are navigated to /bn
   await Promise.all([page.waitForNavigation({ url: '/bn' }), page.locator('text=বাংলা').click()]);
 });
@@ -52,7 +54,8 @@ test('Choosing a language should persist', async ({ page, context, baseURL }) =>
   const homepage = new Homepage(page, context);
   // 1. Open the language selector menu
   await homepage.closeNextjsErrorDialog();
-  await page.locator('[data-testid="language-selector-button-navbar"]').click();
+  await page.locator('[data-testid="open-navigation-drawer"]').click();
+  await page.locator('[data-testid="language-selector-button"]').click();
   // 2. select the Arabic language and make sure we are navigated to /ar
   await Promise.all([page.waitForNavigation({ url: '/ar' }), page.locator('text=العربية').click()]);
   // 3. Navigate again to /
