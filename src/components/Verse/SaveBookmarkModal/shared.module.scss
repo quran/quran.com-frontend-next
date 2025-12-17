@@ -2,6 +2,8 @@
 
 $max-block-size: 150px;
 $icon-size: 16px;
+$close-icon-h: 24px;
+$close-icon-w: 22px;
 $modal-padding: 40px;
 $modal-width: 500px;
 
@@ -97,7 +99,7 @@ $modal-width: 500px;
   }
 
   svg {
-    inline-size: $icon-size;
-    block-size: $icon-size;
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
   }
 }
