@@ -155,8 +155,8 @@ const useReadingBookmark = ({
     isCurrentBookmark &&
     !isRemovalInProgress &&
     !isUndoInProgress &&
-    pendingBookmarkValue == null &&
-    previousBookmarkValue == null;
+    pendingBookmarkValue === null &&
+    previousBookmarkValue === null;
 
   // Cleanup effect for setTimeout calls
   useEffect(() => {
@@ -182,7 +182,11 @@ const useReadingBookmark = ({
         try {
           dispatch(setGuestReadingBookmark(value));
         } catch (reduxError) {
-          throw new Error('Unable to save reading bookmark. Please try again.');
+          const errorMessage =
+            reduxError instanceof Error
+              ? `Failed to save guest reading bookmark via Redux: ${reduxError.message}`
+              : 'Failed to save guest reading bookmark via Redux.';
+          throw new Error(errorMessage);
         }
       }
     },

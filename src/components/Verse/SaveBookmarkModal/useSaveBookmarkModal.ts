@@ -303,8 +303,9 @@ const useSaveBookmarkModal = ({
 
 /**
  * Extracts HTTP status code from an error object.
- * @returns {number | undefined} HTTP status code
+ * Attempts to extract from multiple possible locations: status, statusCode, or response.status
  * @param {unknown} error - The error object
+ * @returns {number | undefined} HTTP status code if found, undefined otherwise
  */
 const getErrorStatus = (error: unknown): number | undefined => {
   if (error && typeof error === 'object') {

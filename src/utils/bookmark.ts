@@ -22,7 +22,12 @@ export const getPageNumberFromBookmark = (bookmark: string | null | undefined): 
 
   const parts = bookmark.split(':');
   if (parts[0] === ReadingBookmarkType.PAGE && parts.length === 2) {
-    return Number(parts[1]);
+    const pageNumber = Number(parts[1]);
+    // Validate that the parsed number is valid (not NaN) and positive
+    if (Number.isNaN(pageNumber) || pageNumber <= 0) {
+      return null;
+    }
+    return pageNumber;
   }
   return null;
 };
@@ -47,9 +52,17 @@ export const parseReadingBookmark = (
     const parts = bookmark.split(':');
 
     if (parts[0] === ReadingBookmarkType.AYAH && parts.length === 3) {
+      const surahNumber = Number(parts[1]);
+      const verseNumber = Number(parts[2]);
+      
+      // Validate that the parsed numbers are valid (not NaN) and positive
+      if (Number.isNaN(surahNumber) || Number.isNaN(verseNumber) || surahNumber <= 0 || verseNumber <= 0) {
+        return { surahNumber: null, verseNumber: null };
+      }
+      
       return {
-        surahNumber: Number(parts[1]),
-        verseNumber: Number(parts[2]),
+        surahNumber,
+        verseNumber,
       };
     }
 
@@ -57,9 +70,17 @@ export const parseReadingBookmark = (
       // For page bookmarks, get the first verse from the fetched page verses
       if (pageVersesData?.verses && pageVersesData.verses.length > 0) {
         const firstVerse = pageVersesData.verses[0];
+        const surahNumber = Number(firstVerse.chapterId);
+        const verseNumber = Number(firstVerse.verseNumber);
+        
+        // Validate that the parsed numbers are valid (not NaN) and positive
+        if (Number.isNaN(surahNumber) || Number.isNaN(verseNumber) || surahNumber <= 0 || verseNumber <= 0) {
+          return { surahNumber: null, verseNumber: null };
+        }
+        
         return {
-          surahNumber: Number(firstVerse.chapterId),
-          verseNumber: Number(firstVerse.verseNumber),
+          surahNumber,
+          verseNumber,
         };
       }
       // Return null if page verses are not yet loaded
