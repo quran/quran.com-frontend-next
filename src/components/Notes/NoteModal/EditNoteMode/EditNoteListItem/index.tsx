@@ -8,7 +8,7 @@ import DeleteNoteModal from './DeleteNoteModal';
 import EditForm from './EditForm';
 import styles from './NoteListItem.module.scss';
 
-import PostReflection from '@/components/Notes/NoteModal/ReflectionIntro/PostReflection';
+import PostReflection from '@/components/Notes/modal/ReflectionIntro/PostReflection';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';

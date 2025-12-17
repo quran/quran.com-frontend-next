@@ -5,6 +5,7 @@ import TranslationsButton from '../ReadingView/TranslationsButton';
 import ActionItem from './ActionItem';
 import styles from './TranslationViewCell.module.scss';
 
+import AddNoteAction from '@/components/Notes/modal/NoteAction';
 import CopyButton from '@/components/QuranReader/ReadingView/CopyButton';
 import BookmarkAction from '@/components/Verse/BookmarkAction';
 import VerseNotes from '@/components/Verse/Notes';
@@ -84,6 +85,13 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           <ActionItem>
             <VerseNotes
               verseKey={verse.verseKey}
+              isTranslationView={isTranslationView}
+              hasNotes={hasNotes}
+            />
+          </ActionItem>
+          <ActionItem>
+            <AddNoteAction
+              verse={verse}
               isTranslationView={isTranslationView}
               hasNotes={hasNotes}
             />

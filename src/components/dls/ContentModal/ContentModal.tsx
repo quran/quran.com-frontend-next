@@ -31,6 +31,7 @@ type ContentModalProps = {
   contentClassName?: string;
   closeIconClassName?: string;
   headerClassName?: string;
+  overlayClassName?: string;
   size?: ContentModalSize;
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
@@ -50,6 +51,7 @@ const ContentModal = ({
   innerRef,
   contentClassName,
   closeIconClassName,
+  overlayClassName,
   headerClassName,
   size = ContentModalSize.MEDIUM,
   isFixedHeight,
@@ -110,7 +112,7 @@ const ContentModal = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={classNames(styles.overlay, {
+          className={classNames(styles.overlay, overlayClassName, {
             [styles.fullScreen]: shouldBeFullScreen,
             [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
             [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
