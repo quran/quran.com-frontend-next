@@ -25,7 +25,9 @@ const SaveBookmarkModalHeader: React.FC<SaveBookmarkModalHeaderProps> = ({ title
     <>
       <div className={styles.header}>
         <Modal.Title>
-          <span className={styles.title}>{title}</span>
+          <span className={styles.title} data-testid="save-bookmark-modal-title">
+            {title}
+          </span>
         </Modal.Title>
         <button
           type="button"
