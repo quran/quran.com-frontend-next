@@ -14,6 +14,31 @@ const initialState: GuestBookmarkState = {
 };
 
 /**
+ * Validates the bookmark format.
+ * @param {ReadingBookmark} bookmark The bookmark to validate
+ * @returns {boolean} True if valid format, false otherwise
+ */
+const isValidBookmarkFormat = (bookmark: ReadingBookmark): boolean => {
+  if (bookmark === null) {
+    return true;
+  }
+
+  // Validate "ayah:chapterId:verseNumber" format
+  const ayahPattern = /^ayah:\d+:\d+$/;
+  if (ayahPattern.test(bookmark)) {
+    return true;
+  }
+
+  // Validate "page:pageNumber" format
+  const pagePattern = /^page:\d+$/;
+  if (pagePattern.test(bookmark)) {
+    return true;
+  }
+
+  return false;
+};
+
+/**
  * Redux slice for managing guest user bookmarks
  * Stores reading bookmark for guest users before sign-in
  * Persisted to localStorage via redux-persist
@@ -34,7 +59,10 @@ const guestBookmarkSlice = createSlice({
      * @param {PayloadAction<ReadingBookmark>} action Payload contains bookmark value in the above formats or null to clear
      */
     setGuestReadingBookmark: (state, action: PayloadAction<ReadingBookmark>) => {
-      // Validation happens at call site before dispatch
+      if (!isValidBookmarkFormat(action.payload)) {
+        // Invalid format - do not update state
+        return;
+      }
       state.readingBookmark = action.payload;
     },
 
