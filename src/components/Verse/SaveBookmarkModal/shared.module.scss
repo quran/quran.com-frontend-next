@@ -103,3 +103,8 @@ $modal-width: 500px;
     inline-size: $close-icon-w;
   }
 }
+
+.questionIcon {
+  color: var(--color-grey-icons-new);
+  margin-inline-start: var(--spacing-small-px);
+}

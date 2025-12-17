@@ -10,6 +10,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
 import CheckIcon from '@/icons/check.svg';
+import QuestionIcon from '@/icons/question-mark-rounded.svg';
 
 interface SetBookmarkSectionProps {
   /** Whether this bookmark option is selected */
@@ -97,7 +98,12 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
         {isSelected ? <BookmarkStarIcon /> : <BookmarkBlankIcon />}
       </div>
       <div className={styles.readingBookmarkContent}>
-        <div className={styles.readingBookmarkTitle}>{t('set-as-reading-bookmark')}</div>
+        <div className={styles.readingBookmarkTitle}>
+          {t('set-as-reading-bookmark')}
+          <span className={styles.questionIcon} title={t('reading-bookmark-info-tooltip')}>
+            <QuestionIcon />
+          </span>
+        </div>
         <div className={styles.readingBookmarkInfo}>
           {showNewBookmark ? (
             <>

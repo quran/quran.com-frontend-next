@@ -8,6 +8,7 @@ import styles from './ReadingBookmarkSection.module.scss';
 import Spinner from '@/dls/Spinner/Spinner';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import CheckIcon from '@/icons/check.svg';
+import QuestionIcon from '@/icons/question-mark-rounded.svg';
 
 interface RemoveBookmarkSectionProps {
   /** Display name for the current bookmark location */
@@ -61,7 +62,12 @@ const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
         <BookmarkStarIcon />
       </div>
       <div className={styles.removeContent}>
-        <div className={styles.removeTitle}>{t('remove-my-reading-bookmark')}</div>
+        <div className={styles.removeTitle}>
+          {t('remove-my-reading-bookmark')}
+          <span className={styles.questionIcon} title={t('reading-bookmark-info-tooltip')}>
+            <QuestionIcon />
+          </span>
+        </div>
         <div className={styles.removeInfo}>
           <span className={styles.label}>{t('current')}:</span>
           <span className={styles.value}>{resourceDisplayName}</span>
