@@ -282,7 +282,12 @@ type AddBookmarkParams = {
   verseNumber?: number;
 };
 
-export const addBookmark = async ({ key, mushafId, type, verseNumber }: AddBookmarkParams) =>
+export const addBookmark = async ({
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: AddBookmarkParams): Promise<Bookmark> =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
     mushaf: mushafId,
@@ -509,7 +514,7 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
+export const addCollection = async (collectionName: string): Promise<Collection> => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 

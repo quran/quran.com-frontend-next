@@ -230,7 +230,7 @@ const useSaveBookmarkModal = ({
         mushaf: mushafId,
         type: BookmarkType.Ayah,
         verseNumber: verse.verseNumber,
-        collectionId: (newCollection as { id: string }).id,
+        collectionId: newCollection?.id,
       });
       toast(t('saved-to', { collectionName: newCollectionName.trim() }), {
         status: ToastStatus.Success,

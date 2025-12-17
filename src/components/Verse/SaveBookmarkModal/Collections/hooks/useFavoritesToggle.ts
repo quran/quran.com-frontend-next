@@ -99,7 +99,7 @@ export const useFavoritesToggle = ({
       type: BookmarkType.Ayah,
       verseNumber: verse.verseNumber,
     });
-    mutateResourceBookmark(newBookmark as Bookmark);
+    mutateResourceBookmark(newBookmark);
     onToast(commonT('verse-bookmarked'), ToastStatus.Success);
     logEvent('verse_added_to_favorites', { verseKey });
     mutateBookmarkCollectionIdsData();
@@ -125,7 +125,7 @@ export const useFavoritesToggle = ({
         mushafId,
         type: BookmarkType.Page,
       });
-      mutateResourceBookmark(newBookmark as Bookmark);
+      mutateResourceBookmark(newBookmark);
       onToast(t('page-bookmarked'), ToastStatus.Success);
       logEvent('page_added_to_favorites', { pageNumber });
     }
