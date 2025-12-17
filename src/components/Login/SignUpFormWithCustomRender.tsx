@@ -23,6 +23,7 @@ const addCustomRenderToFormFields = (
             {...props}
             id={field.field}
             htmlType={field.field === 'email' ? 'email' : 'text'}
+            dataTestId={props.dataTestId}
           />
         ),
         errorClassName: styles.errorText,

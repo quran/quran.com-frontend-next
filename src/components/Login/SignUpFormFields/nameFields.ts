@@ -13,6 +13,7 @@ export const getNameFields = (t: any): FormBuilderFormField[] => [
     field: 'firstName',
     type: FormFieldType.Text,
     placeholder: t('first-name-placeholder'),
+    dataTestId: 'signup-first-name-input',
     rules: [
       {
         type: RuleType.Required,
@@ -46,6 +47,7 @@ export const getNameFields = (t: any): FormBuilderFormField[] => [
     field: 'lastName',
     type: FormFieldType.Text,
     placeholder: t('last-name-placeholder'),
+    dataTestId: 'signup-last-name-input',
     rules: [
       {
         type: RuleType.Required,
