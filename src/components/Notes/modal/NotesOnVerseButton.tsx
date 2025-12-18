@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './NoteModal.module.scss';
+import styles from './AddNoteModal.module.scss';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
