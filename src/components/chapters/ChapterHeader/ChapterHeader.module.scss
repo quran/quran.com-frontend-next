@@ -24,7 +24,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-self: center;
+  margin-inline: auto;
   inline-size: 100%;
   max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: var(--spacing-medium2);
@@ -152,8 +152,8 @@ $bismillahSvgInlineSizeMobile: 148px;
 
   @include breakpoints.smallerThanTablet {
     svg {
-      width: var(--spacing-small);
-      height: var(--spacing-small);
+      inline-size: var(--spacing-small);
+      block-size: var(--spacing-small);
     }
   }
 }
@@ -243,7 +243,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   justify-content: center;
   align-items: center;
   // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
-  min-height: calc(3.75 * var(--spacing-medium));
+  min-block-size: calc(3.75 * var(--spacing-medium));
 }
 
 .chapterIconContainer {
