@@ -404,12 +404,12 @@ export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
   localizeNumericalStringWithSplitter(verseKey, lang);
 
 /**
- * Get the localized value of the verse key for RTL display.
- * Returns verse:chapter order so it reads correctly in RTL context.
+ * Reverses the verse key order from chapter:verse to verse:chapter for RTL display,
+ * then localizes the numbers.
  *
- * @param {string} verseKey
- * @param {string} lang
- * @returns {string}
+ * @param {string} verseKey - The verse key in "chapter:verse" format (e.g., "3:1").
+ * @param {string} lang - The target language for number localization.
+ * @returns {string} The localized verse key in "verse:chapter" order (e.g., "١:٣" for Arabic).
  */
 export const toLocalizedVerseKeyRTL = (verseKey: string, lang: string): string =>
   verseKey
