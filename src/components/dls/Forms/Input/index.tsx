@@ -60,7 +60,6 @@ export enum HtmlInputType {
 
 interface Props {
   id: string;
-  dataTestId?: string;
   name?: string;
   size?: InputSize;
   placeholder?: string;
@@ -92,7 +91,6 @@ interface Props {
 
 const Input: React.FC<Props> = ({
   id,
-  dataTestId,
   name,
   label,
   placeholder,
@@ -207,7 +205,6 @@ const Input: React.FC<Props> = ({
           enterKeyHint={enterKeyHint}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
-          data-testid={dataTestId}
         />
         {clearable ? (
           <>
