@@ -48,13 +48,37 @@ test.describe('Surah Navigation', () => {
     'Surah info button navigates to surah information page',
     { tag: ['@slow', '@surah', '@navigation'] },
     async ({ page }) => {
-      // Pre-calcul of the surah info button locator
-      const infoButton = page.getByLabel('Surah Info');
-      // Click on the info icon
+      // Locate the surah info button
+      const infoButton = page.getByTestId('surah-info-button');
+
+      // Click on the info button
       await infoButton.click();
 
-      // Make sure we are navigated to the surah info page
+      // Make sure URL is updated to /surah/1/info
       await expect(page).toHaveURL('/surah/1/info');
+    },
+  );
+
+  test(
+    'Clicking surah info button opens modal with surah information',
+    { tag: ['@slow', '@surah', '@modal', '@info'] },
+    async ({ page }) => {
+      // Pre-calculate the surah info button locator
+      const infoButton = page.getByTestId('surah-info-button');
+
+      // Click on the info button
+      await infoButton.click();
+
+      // Verify modal is open and contains surah info content
+      await expect(page.getByTestId('modal-content')).toBeVisible();
+      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
+
+      // Verify surah info content is inside the modal
+      const modalContent = page.getByTestId('modal-content');
+      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
+      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
+      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
+      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
     },
   );
 });

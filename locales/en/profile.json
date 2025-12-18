@@ -19,8 +19,11 @@
   "remove-success": "Profile picture removed successfully",
   "edit-details": "Edit Details",
   "save-changes": "Save Changes",
+  "change-password": "Change Password",
+  "update-password": "Update Password",
   "success": {
-    "details": "Your details have been updated successfully"
+    "details": "Your details have been updated successfully",
+    "password": "Your password has been updated successfully"
   },
   "errors": {
     "upload-failed": "Failed to upload profile picture. Please try again.",
