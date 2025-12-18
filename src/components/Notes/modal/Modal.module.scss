@@ -1,0 +1,17 @@
+@use '@/styles/breakpoints';
+
+.overlay {
+  @include breakpoints.smallerThanTablet {
+    place-items: end;
+  }
+}
+
+.content {
+  max-inline-size: 48rem;
+
+  @include breakpoints.smallerThanTablet {
+    height: auto;
+    max-height: 100%;
+    padding-bottom: var(--spacing-large);
+  }
+}

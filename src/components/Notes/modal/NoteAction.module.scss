@@ -10,19 +10,3 @@
     font-size: var(--font-size-large2);
   }
 }
-
-.overlay {
-  @include breakpoints.smallerThanTablet {
-    place-items: end;
-  }
-}
-
-.content {
-  max-width: 55rem;
-
-  @include breakpoints.smallerThanTablet {
-    height: auto;
-    max-height: 100%;
-    padding-bottom: var(--spacing-large);
-  }
-}

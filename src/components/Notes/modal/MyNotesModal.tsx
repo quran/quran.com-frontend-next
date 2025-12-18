@@ -1,0 +1,109 @@
+import React from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+
+import modalStyles from './Modal.module.scss';
+import styles from './MyNotesModal.module.scss';
+
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModal from '@/dls/ContentModal/ContentModal';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import DeleteIcon from '@/icons/delete.svg';
+import EditIcon from '@/icons/edit.svg';
+import PlusIcon from '@/icons/plus.svg';
+import QRColoredIcon from '@/icons/qr-colored.svg';
+
+interface MyNotesModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  notesCount?: number;
+}
+
+interface Note {
+  id: string;
+  verseKey: string;
+  date: string;
+  content: string;
+}
+
+const MyNotesModal: React.FC<MyNotesModalProps> = ({ isOpen, onClose, notesCount = 1 }) => {
+  const { t } = useTranslation('notes');
+
+  // Mock data for design purposes
+  const notes: Note[] = Array.from({ length: 10 }, (n, index) => ({
+    id: `note-${index + 1}`,
+    verseKey: `Al-Kawthar 108:${index + 1}`,
+    date: new Date().toDateString(),
+    content: `This is one of my favourite verses of the Quran! (example note ${index + 1})`,
+  }));
+
+  return (
+    <ContentModal
+      isOpen={isOpen}
+      onClose={onClose}
+      onEscapeKeyDown={onClose}
+      hasCloseButton
+      header={<h2 className={styles.title}>{t('my-notes', { count: notesCount })}</h2>}
+      contentClassName={modalStyles.content}
+      overlayClassName={modalStyles.overlay}
+    >
+      <div className={styles.container}>
+        <div className={styles.notesList}>
+          {notes.map((note) => (
+            <div key={note.id} className={styles.noteCard}>
+              <div className={styles.noteHeader}>
+                <div>
+                  <h3 className={styles.noteTitle}>{note.verseKey}</h3>
+                  <p className={styles.noteDate}>{note.date}</p>
+                </div>
+                <div className={styles.noteActions}>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    size={ButtonSize.Small}
+                    shape={ButtonShape.Square}
+                  >
+                    <QRColoredIcon />
+                  </Button>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    size={ButtonSize.Small}
+                    shape={ButtonShape.Square}
+                  >
+                    <IconContainer
+                      icon={<EditIcon />}
+                      color={IconColor.default}
+                      size={IconSize.Xsmall}
+                      className={styles.actionIcon}
+                    />
+                  </Button>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    size={ButtonSize.Small}
+                    shape={ButtonShape.Square}
+                  >
+                    <IconContainer
+                      icon={<DeleteIcon />}
+                      color={IconColor.default}
+                      size={IconSize.Xsmall}
+                      className={styles.actionIcon}
+                    />
+                  </Button>
+                </div>
+              </div>
+
+              <p className={styles.noteText}>{note.content}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.actions}>
+          <Button size={ButtonSize.Small} prefix={<PlusIcon />}>
+            {t('add-another-note')}
+          </Button>
+        </div>
+      </div>
+    </ContentModal>
+  );
+};
+
+export default MyNotesModal;
