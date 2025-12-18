@@ -1,4 +1,5 @@
 @use '@/styles/breakpoints';
+@use '@/styles/utility';
 
 .title {
   font-weight: var(--font-weight-bold);
@@ -82,6 +83,7 @@
   font-size: var(--font-size-normal);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-bold);
+  @include utility.textClamp(1);
 }
 
 .actions {
