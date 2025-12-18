@@ -10,6 +10,18 @@ const SENTRY_ENABLED = process.env.NEXT_PUBLIC_CLIENT_SENTRY_ENABLED === 'true';
 const isDev = process.env.NODE_ENV === 'development';
 const version = `quran.com-frontend-next@${process.env.NEXT_PUBLIC_APP_VERSION}`;
 
+const IGNORED_ERRORS: Array<string | RegExp> = [
+  /hydration failed/i,
+  /an error occurred during hydration/i,
+  /there was an error while hydrating/i,
+  /text content does not match server-rendered html/i,
+  /expected server html to contain a matching/i,
+  /did not match\. server:/i,
+  /hydration error/i,
+  /minified react error #418/i,
+  /invariant=418/i,
+];
+
 Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
@@ -19,6 +31,7 @@ Sentry.init({
   // Session replays sample rate - only capture dev sessions
   replaysSessionSampleRate: isDev ? 1.0 : 0,
   release: version,
+  ignoreErrors: IGNORED_ERRORS,
   integrations: [
     // Add the replay integration for session replays
     Sentry.replayIntegration({
