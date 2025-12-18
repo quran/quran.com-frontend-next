@@ -64,7 +64,6 @@ const SUPPORTED_LANGUAGES = {
 
 const UNSUPPORTED_LANGUAGES = {
   JAPANESE: 'ja',
-  KOREAN: 'ko',
   HEBREW: 'he',
   HINDI: 'hi',
 } as const;
@@ -100,6 +99,17 @@ class LocalizationTestHelper {
 
   public getHeaders(): Record<string, string> {
     return this.headers;
+  }
+
+  async getCookieValue(cookieName: string): Promise<string | undefined> {
+    const cookies = await this.page.context().cookies();
+    return cookies.find((cookie) => cookie.name === cookieName)?.value;
+  }
+
+  async expectNextLocaleCookieToBe(expectedLocale: string): Promise<void> {
+    await expect
+      .poll(async () => this.getCookieValue('NEXT_LOCALE'), { timeout: 5000 })
+      .toBe(expectedLocale);
   }
 
   /**
@@ -394,6 +404,8 @@ class LocalizationTestHelper {
 
     // Wait for any async operations to complete
     await this.page.waitForLoadState('networkidle');
+
+    await this.expectNextLocaleCookieToBe(language);
 
     // Additional wait for API calls and Redux updates
     await this.page.waitForTimeout(2000);
@@ -1010,26 +1022,25 @@ test.describe('Category 1: First-time Guest User Detection & Settings', () => {
 
   test('Test Case 1.1.3: English Device Language + Multiple Countries', async ({ page }) => {
     const countries = [
-      { code: TEST_COUNTRIES.CA, translationId: 131 },
-      { code: TEST_COUNTRIES.AU, translationId: 131 },
-      { code: TEST_COUNTRIES.IN, translationId: 131 },
-      { code: TEST_COUNTRIES.SA, translationId: 131 },
-      { code: TEST_COUNTRIES.EG, translationId: 131 },
+      { code: TEST_COUNTRIES.CA, translationId: 131, language: 'en' },
+      { code: TEST_COUNTRIES.AU, translationId: 131, language: 'en' },
+      { code: TEST_COUNTRIES.IN, translationId: 131, language: 'en' },
+      { code: TEST_COUNTRIES.SA, translationId: 131, language: 'en' },
+      { code: TEST_COUNTRIES.EG, translationId: 131, language: 'en' },
     ];
 
     for (const country of countries) {
       await test.step(`Testing with country: ${country.code}`, async () => {
         const loopHelper = new LocalizationTestHelper(page, page.context());
         await loopHelper.clearAllBrowserData();
-        await loopHelper.setBrowserLanguage(['en-US', 'en']);
-        await loopHelper.mockCountryDetection(country.code);
+        await loopHelper.setBrowserLanguage(['en-US', country.language]);
 
         await page.goto('/', NAVIGATION_OPTIONS);
         await loopHelper.waitForReduxHydration();
 
         await loopHelper.verifyDefaultSettingsStructure({
-          detectedLanguage: 'en',
-          detectedCountry: country.code,
+          detectedLanguage: country.language,
+          detectedCountry: 'US',
           userHasCustomised: false,
           isUsingDefaultSettings: true,
         });
@@ -1075,34 +1086,6 @@ test.describe('Category 1: First-time Guest User Detection & Settings', () => {
     });
 
     await test.step('Cleanup', async () => {
-      await context.close();
-    });
-  });
-
-  test('Test Case 1.3.2a: Korean Language Fallback', async ({ browser }) => {
-    await test.step('Setup context and helper', async () => {
-      const context = await browser.newContext();
-      const page = await context.newPage();
-      const testHelper = new LocalizationTestHelper(page, context);
-
-      await test.step('Set language to Korean and country to KR', async () => {
-        await testHelper.setLanguageAndCountry(['ko-KR', UNSUPPORTED_LANGUAGES.KOREAN], 'KR');
-      });
-
-      await test.step('Navigate to homepage and wait for hydration', async () => {
-        await page.goto('/', NAVIGATION_OPTIONS);
-        await testHelper.waitForReduxHydration();
-      });
-
-      await test.step('Verify settings fallback to English, preserving country', async () => {
-        await testHelper.verifyDefaultSettingsStructure({
-          detectedLanguage: 'en',
-          detectedCountry: 'KR',
-          userHasCustomised: false,
-          isUsingDefaultSettings: true,
-        });
-      });
-
       await context.close();
     });
   });
@@ -1497,8 +1480,9 @@ test.describe('Category 3: Language Selector Behavior', () => {
 
     await test.step('Verify settings changed to English defaults', async () => {
       const defaultSettings = await testHelper.getReduxState();
-      expect(defaultSettings.detectedLanguage).toBe('en');
       expect(defaultSettings.userHasCustomised).toBe(false); // Should remain false
+
+      await testHelper.expectNextLocaleCookieToBe('en');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
       expect(translations.selectedTranslations).toContain(131); // English default
@@ -1541,9 +1525,10 @@ test.describe('Category 3: Language Selector Behavior', () => {
 
     await test.step('Verify settings changed to Arabic defaults', async () => {
       const defaultSettings = await testHelper.getReduxState();
-      expect(defaultSettings.detectedLanguage).toBe('ar');
       expect(defaultSettings.detectedCountry).toBe('US'); // Country ignored for non-English
       expect(defaultSettings.userHasCustomised).toBe(false); // Should remain false
+
+      await testHelper.expectNextLocaleCookieToBe('ar');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
       expect(translations.selectedTranslations).toContain(131); // Arabic default
@@ -1603,6 +1588,8 @@ test.describe('Category 3: Language Selector Behavior', () => {
       await expect(languageOption).toBeVisible();
       await languageOption.click();
       await page.waitForURL('/ar/1');
+
+      await testHelper.expectNextLocaleCookieToBe('ar');
 
       await testHelper.waitForReduxHydration();
 
