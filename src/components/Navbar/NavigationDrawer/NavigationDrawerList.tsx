@@ -8,7 +8,7 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconAbout from '@/icons/about.svg';
-import IconBookmark from '@/icons/bookmark.svg';
+import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
 import IconHeadphones from '@/icons/headphones.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
@@ -54,7 +54,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
     {
       title: t('my-quran'),
-      icon: <IconBookmark />,
+      icon: <IconBookmarkFilled />,
       href: getProfileNavigationUrl(),
       eventName: 'navigation_drawer_my_quran',
     },

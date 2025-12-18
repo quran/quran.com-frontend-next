@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Memorizar y repasar el Corán de manera eficiente",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Lea, marque y escuche el Corán en dispositivos Android",
+        "title": "Corán para Android"
+      },
+      "quran_ios": {
+        "caption": "Hermosa aplicación para leer y escuchar el Corán sin publicidad para iPhone y iPad",
+        "title": "Corán para iOS (por quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Sesiones de estudio del Corán en vivo",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Compartir reflexiones",
+        "title": "Reflexión sobre el Corán"
+      },
+      "readtafsir": {
+        "caption": "Buscar y comparar tafsirs clásicos",
+        "title": "LeerTafsir"
+      },
+      "sunnah": {
+        "caption": "Colección de hadices",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir interactivo con múltiples fuentes",
+        "title": "Aplicación Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Todas las aplicaciones",
+      "community": "Comunidad",
+      "hadith-sunnah": "Hadith y Sunnah",
+      "popular": "Popular",
+      "quran-reader": "Lector del Corán",
+      "reflections": "Reflexiones",
+      "study-tools": "Herramientas de estudio"
+    },
+    "title": "Explorar todas las aplicaciones"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Por fin, una aplicación del Corán para nuestras hijas",
+        "name": "Qariah",
+        "tagline": "Mujeres recitadoras del Corán"
+      },
+      "quran-kareem": {
+        "headline": "Tu nueva puerta de entrada para conectarte con el Libro de Allah",
+        "name": "Corán Kareem",
+        "tagline": "Leer, escuchar y reflexionar"
+      },
+      "quran-link": {
+        "headline": "Explora más de 25 tafsirs y más de 100 traducciones en un solo lugar.",
+        "name": "Enlace del Corán",
+        "tagline": "Tafsir y compañero de estudio"
+      }
+    },
+    "learn-more": "Más información",
+    "title": "Aplicaciones destacadas",
+    "view-all": "Ver todo"
+  },
+  "hero": {
+    "description": "Explora una colección seleccionada de aplicaciones islámicas creadas con Quran.foundation. Desde herramientas de estudio hasta herramientas para la oración, encuentra aplicaciones que enriquecen tu camino espiritual.",
+    "title": "Descubre nuestro ecosistema de aplicaciones"
+  },
+  "quran-apps-portal": "Portal de aplicaciones del Corán"
+}

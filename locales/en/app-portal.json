@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Memorize and review Quran efficiently",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Read, bookmark, and listen to the Quran on Android devices",
+        "title": "Quran for Android"
+      },
+      "quran_ios": {
+        "caption": "Beautiful, ad-free Quran reading and listening app for iPhone & iPad",
+        "title": "Quran for iOS (by quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Live Quran study sessions",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Share reflections",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Search and compare classical tafsirs",
+        "title": "ReadTafsir"
+      },
+      "sunnah": {
+        "caption": "Hadith collection",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Interactive tafsir with multiple sources",
+        "title": "Tafsir App"
+      }
+    },
+    "filters": {
+      "all": "All apps",
+      "community": "Community",
+      "hadith-sunnah": "Hadith and Sunnah",
+      "popular": "Popular",
+      "quran-reader": "Quran Reader",
+      "reflections": "Reflections",
+      "study-tools": "Study tools"
+    },
+    "title": "Browse All Apps"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Finally, a Quran app for our daughters",
+        "name": "Qariah",
+        "tagline": "Women Quran reciters"
+      },
+      "quran-kareem": {
+        "headline": "Your new gateway to connect with the Book of Allah",
+        "name": "Quran Kareem",
+        "tagline": "Read, listen & reflect"
+      },
+      "quran-link": {
+        "headline": "Explore 25+ tafsirs and 100+ translations in one place",
+        "name": "Quran Link",
+        "tagline": "Tafsir & study companion"
+      }
+    },
+    "learn-more": "Learn more",
+    "title": "Featured Apps",
+    "view-all": "View all"
+  },
+  "hero": {
+    "description": "Explore a curated collection of Islamic applications built with Quran.foundation. From study tools to prayer utilities, find apps that enhance your spiritual journey.",
+    "title": "Discover our Ecosystem of Apps"
+  },
+  "quran-apps-portal": "Quran Apps Portal"
+}
