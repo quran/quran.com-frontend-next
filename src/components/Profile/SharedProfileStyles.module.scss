@@ -1,0 +1,49 @@
+@use 'src/styles/breakpoints';
+
+@mixin input-base-styles {
+  padding: var(--spacing-small-px);
+  border-radius: var(--border-radius-xsmall-px);
+
+  &:has(input:disabled) {
+    background-color: var(--color-background-alternative-faint);
+  }
+
+  input {
+    height: auto;
+  }
+}
+
+.button {
+  padding-block: var(--spacing-xxxsmall-px);
+  padding-inline: var(--spacing-small-px);
+  border-radius: var(--border-radius-small-px);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+}
+.formContainer {
+  display: grid !important; // to override the default display: flex
+  gap: var(--spacing-medium-px);
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .formInputContainer {
+    width: 100%;
+    .formInput {
+      @include input-base-styles;
+      width: unset;
+    }
+  }
+}
+
+.passwordFormContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  @include breakpoints.tablet {
+    max-width: calc(50% - calc(var(--spacing-medium-px) / 2));
+  }
+  .passwordFormInput {
+    @include input-base-styles;
+    height: calc(2 * var(--spacing-medium2-px));
+  }
+}
