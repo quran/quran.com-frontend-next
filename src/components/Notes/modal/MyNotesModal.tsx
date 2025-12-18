@@ -7,7 +7,7 @@ import styles from './MyNotesModal.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import DeleteIcon from '@/icons/delete.svg';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
@@ -16,6 +16,7 @@ import QRColoredIcon from '@/icons/qr-colored.svg';
 interface MyNotesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onAddNote: () => void;
   notesCount?: number;
 }
 
@@ -26,7 +27,12 @@ interface Note {
   content: string;
 }
 
-const MyNotesModal: React.FC<MyNotesModalProps> = ({ isOpen, onClose, notesCount = 1 }) => {
+const MyNotesModal: React.FC<MyNotesModalProps> = ({
+  isOpen,
+  onClose,
+  onAddNote,
+  notesCount = 1,
+}) => {
   const { t } = useTranslation('notes');
 
   // Mock data for design purposes
@@ -71,7 +77,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({ isOpen, onClose, notesCount
                   >
                     <IconContainer
                       icon={<EditIcon />}
-                      color={IconColor.default}
+                      shouldForceSetColors={false}
                       size={IconSize.Xsmall}
                       className={styles.actionIcon}
                     />
@@ -83,7 +89,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({ isOpen, onClose, notesCount
                   >
                     <IconContainer
                       icon={<DeleteIcon />}
-                      color={IconColor.default}
+                      shouldForceSetColors={false}
                       size={IconSize.Xsmall}
                       className={styles.actionIcon}
                     />
@@ -97,7 +103,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({ isOpen, onClose, notesCount
         </div>
 
         <div className={styles.actions}>
-          <Button size={ButtonSize.Small} prefix={<PlusIcon />}>
+          <Button size={ButtonSize.Small} prefix={<PlusIcon />} onClick={onAddNote}>
             {t('add-another-note')}
           </Button>
         </div>

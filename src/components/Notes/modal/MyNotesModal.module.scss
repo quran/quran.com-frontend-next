@@ -74,6 +74,10 @@
   flex-shrink: 0;
 }
 
+.actionIcon {
+  color: var(--color-text-default-new);
+}
+
 .noteText {
   font-size: var(--font-size-normal);
   color: var(--color-text-default-new);

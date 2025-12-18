@@ -1,77 +1,52 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import modalStyles from './Modal.module.scss';
-import styles from './NoteAction.module.scss';
-
+import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import MyNotesModal from '@/components/Notes/modal/MyNotesModal';
-import NoteModal from '@/components/Notes/modal/NoteModal';
 import translationViewStyles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
-import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
-import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+
+enum ModalType {
+  ADD_NOTE = 'add-note',
+  MY_NOTES = 'my-notes',
+}
 
 interface NoteActionProps {
   verse: WordVerse;
+  // eslint-disable-next-line react/no-unused-prop-types
+  onActionTriggered?: () => void;
+  // eslint-disable-next-line react/no-unused-prop-types
   isTranslationView: boolean;
   hasNotes: boolean;
-  onActionTriggered?: () => void;
 }
 
-const CLOSE_POPOVER_AFTER_MS = 150;
-
-const NoteAction: React.FC<NoteActionProps> = ({
-  verse,
-  isTranslationView,
-  hasNotes,
-  onActionTriggered,
-}) => {
+const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
   const router = useRouter();
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const [activeModal, setActiveModal] = useState<ModalType | null>(null);
   const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
 
-  const getEventName = useCallback(
-    (action: string) =>
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_add_note_modal_${action}`,
-    [isTranslationView],
-  );
+  const closeModal = useCallback(() => {
+    setActiveModal(null);
+  }, []);
 
-  const onModalClose = useCallback(() => {
-    logEvent(getEventName('close'));
-
-    setIsModalOpen(false);
-
-    if (onActionTriggered) {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-      }
-
-      closeTimeoutRef.current = setTimeout(() => {
-        onActionTriggered();
-      }, CLOSE_POPOVER_AFTER_MS);
-    }
-  }, [getEventName, onActionTriggered]);
-
-  const onModalOpen = useCallback(() => {
-    logEvent(getEventName('open'));
-    setIsModalOpen(true);
-  }, [getEventName]);
+  const openAddNoteModal = useCallback(() => {
+    setActiveModal(ModalType.ADD_NOTE);
+  }, []);
 
   /**
    * Handles click events for guest users, redirecting to login if not authenticated,
-   * otherwise opens the translation feedback modal.
+   * otherwise opens the add notes modal.
    */
   const handleGuestUserClick = useCallback(() => {
     if (!isLoggedIn()) {
@@ -79,27 +54,12 @@ const NoteAction: React.FC<NoteActionProps> = ({
       return;
     }
 
-    onModalOpen();
-  }, [router, verse.verseKey, onModalOpen]);
+    openAddNoteModal();
+  }, [router, verse.verseKey, openAddNoteModal]);
 
-  useEffect(() => {
-    return () => {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-      }
-    };
+  const openMyNotesModal = useCallback(() => {
+    setActiveModal(ModalType.MY_NOTES);
   }, []);
-
-  const [isNotesOnVerseModalOpen, setIsNotesOnVerseModalOpen] = useState(false);
-
-  const onNotesOnVerseModalClose = useCallback(() => {
-    setIsNotesOnVerseModalOpen(false);
-  }, []);
-
-  const onNotesOnVerseModalOpen = useCallback(() => {
-    setIsNotesOnVerseModalOpen(true);
-    onModalClose();
-  }, [onModalClose]);
 
   return (
     <>
@@ -125,25 +85,19 @@ const NoteAction: React.FC<NoteActionProps> = ({
         </span>
       </Button>
 
-      <ContentModal
-        isOpen={isModalOpen}
-        header={<p className={styles.title}>{t('notes:take-a-note-or-reflection')}</p>}
-        hasCloseButton
-        onClose={onModalClose}
-        onEscapeKeyDown={onModalClose}
-        contentClassName={modalStyles.content}
-        overlayClassName={modalStyles.overlay}
-      >
-        <NoteModal
-          notesCount={notesCount?.[verse.verseKey] ?? 0}
-          onNotesOnVerseModalOpen={onNotesOnVerseModalOpen}
-        />
-      </ContentModal>
+      <AddNoteModal
+        isModalOpen={activeModal === ModalType.ADD_NOTE}
+        onModalOpen={openAddNoteModal}
+        onModalClose={closeModal}
+        onMyNotes={openMyNotesModal}
+        notesCount={notesCount?.[verse.verseKey] ?? 0}
+      />
 
       <MyNotesModal
-        isOpen={isNotesOnVerseModalOpen}
-        onClose={onNotesOnVerseModalClose}
+        isOpen={activeModal === ModalType.MY_NOTES}
+        onClose={closeModal}
         notesCount={notesCount?.[verse.verseKey] ?? 0}
+        onAddNote={openAddNoteModal}
       />
     </>
   );
