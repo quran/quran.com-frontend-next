@@ -12,6 +12,7 @@ import useAuthData from '@/hooks/auth/useAuthData';
 import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
 import UserIcon from '@/icons/user.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import TEST_IDS from '@/utils/test-ids';
 
 const PersonalizationForm: FC = () => {
   const { t } = useTranslation('profile');
@@ -39,7 +40,10 @@ const PersonalizationForm: FC = () => {
   };
 
   return (
-    <Section title={t('personalization')} dataTestId="personalization-section">
+    <Section
+      title={t('personalization')}
+      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.PERSONALIZATION_SECTION}
+    >
       <div className={styles.profilePictureContainer}>
         <p className={styles.profilePictureTitle}>{t('profile-picture')}</p>
         <div className={styles.profilePictureDetailAction}>
@@ -68,8 +72,8 @@ const PersonalizationForm: FC = () => {
               type="file"
               accept="image/jpeg,image/jpg,image/png"
               onChange={handleFileSelect}
-              style={{ display: 'none' }}
-              data-testid="profile-picture-input"
+              className={styles.profilePictureInput}
+              data-testid={TEST_IDS.AUTH.UPDATE_PROFILE.PROFILE_INPUT}
             />
             <Button
               variant={ButtonVariant.Ghost}

@@ -3,13 +3,14 @@ import { join } from 'path';
 
 import type { Locator, Page } from '@playwright/test';
 
+import TEST_IDS from '@/utils/test-ids';
 /**
  * Gets the personalization section locator from the page
  * @param {Page} page - The Playwright page object
  * @returns {Locator} The personalization section locator
  */
 export const getPersonalizationSection = (page: Page): Locator => {
-  return page.getByTestId('personalization-section');
+  return page.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.PERSONALIZATION_SECTION);
 };
 
 /**
@@ -18,7 +19,7 @@ export const getPersonalizationSection = (page: Page): Locator => {
  * @returns {Locator} The file input locator
  */
 export const getFileInput = (page: Page): Locator => {
-  return page.getByTestId('profile-picture-input');
+  return page.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.PROFILE_INPUT);
 };
 
 /**

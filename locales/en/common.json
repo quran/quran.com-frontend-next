@@ -236,10 +236,13 @@
     "body": "Body",
     "code": "Verification Code",
     "confirm-password": "Confirm Password",
+    "current-password": "Current Password",
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
     "password": "Password",
+    "new-password": "New Password",
+    "confirm-new-password": "Confirm New Password",
     "title": "Title",
     "username": "Username",
     "verification-code": "Verification Code"

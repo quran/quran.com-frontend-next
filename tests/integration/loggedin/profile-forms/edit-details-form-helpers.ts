@@ -1,12 +1,14 @@
 import type { Locator, Page } from '@playwright/test';
 
+import TEST_IDS from '@/utils/test-ids';
+
 /**
  * Gets the edit details section locator from the page
  * @param {Page} page - The Playwright page object
  * @returns {Locator} The edit details section locator
  */
 export const getEditDetailsSection = (page: Page): Locator => {
-  return page.getByTestId('edit-details-section');
+  return page.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.EDIT_DETAILS_SECTION);
 };
 
 /**

@@ -36,6 +36,28 @@ export enum InputVariant {
   Default = 'default',
   Main = 'main',
 }
+
+export enum HtmlInputType {
+  Text = 'text',
+  Password = 'password',
+  Email = 'email',
+  Number = 'number',
+  Tel = 'tel',
+  Url = 'url',
+  Search = 'search',
+  Date = 'date',
+  Time = 'time',
+  DateTime = 'datetime-local',
+  Month = 'month',
+  Week = 'week',
+  Color = 'color',
+  File = 'file',
+  Hidden = 'hidden',
+  Range = 'range',
+  Checkbox = 'checkbox',
+  Radio = 'radio',
+}
+
 interface Props {
   id: string;
   name?: string;
@@ -171,6 +193,7 @@ const Input: React.FC<Props> = ({
           required={isRequired}
           dir="auto"
           id={id}
+          data-testid={dataTestId}
           ref={inputRef}
           disabled={disabled}
           onChange={onValueChange}
