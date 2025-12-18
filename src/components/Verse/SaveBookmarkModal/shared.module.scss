@@ -72,18 +72,6 @@ $border-width-default: 1px;
   }
 }
 
-.errorMessage {
-  position: absolute;
-  inset-block-end: var(--spacing-xlarge);
-  inset-inline-start: 0;
-  font-size: var(--font-size-small);
-  color: var(--color-error-medium);
-  max-inline-size: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .closeButton {
   display: flex;
   align-items: center;

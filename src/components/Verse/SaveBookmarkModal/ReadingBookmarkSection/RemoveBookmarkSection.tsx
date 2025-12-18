@@ -30,7 +30,6 @@ interface RemoveBookmarkSectionProps {
 const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
   resourceDisplayName,
   isLoading,
-  error,
   onRemove,
 }) => {
   const { t } = useTranslation('quran-reader');
@@ -81,8 +80,6 @@ const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
           <CheckIcon />
         </div>
       )}
-
-      {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   );
 };

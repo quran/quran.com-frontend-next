@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
+
 import styles from './ReadingBookmarkSection.module.scss';
 import RemoveBookmarkSection from './RemoveBookmarkSection';
 import SetBookmarkSection from './SetBookmarkSection';
 import useReadingBookmark from './useReadingBookmark';
 
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { ReadingBookmarkType } from '@/types/Bookmark';
 
 export { ReadingBookmarkType };
@@ -54,6 +57,7 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
   mushafId,
   onUpdateUserPreference,
 }) => {
+  const toast = useToast();
   const {
     isLoading,
     error,
@@ -78,6 +82,12 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
     mushafId,
     onUpdateUserPreference,
   });
+
+  useEffect(() => {
+    if (error) {
+      toast(error, { status: ToastStatus.Error });
+    }
+  }, [error, toast]);
 
   return (
     <div className={styles.readingBookmarkContainer}>

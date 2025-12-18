@@ -86,13 +86,10 @@ const useReadingBookmark = ({
 
   const isVerse = type === ReadingBookmarkType.AYAH;
 
-  // Determine the effective current reading bookmark based on login status
-  const effectiveCurrentBookmark = useCallback(() => {
-    if (isLoggedIn) {
-      return currentReadingBookmark;
-    }
-    return guestReadingBookmark;
-  }, [isLoggedIn, currentReadingBookmark, guestReadingBookmark]);
+  // Derived value that always reflects latest state on each render
+  const effectiveCurrentBookmark: string | null | undefined = isLoggedIn
+    ? currentReadingBookmark
+    : guestReadingBookmark;
 
   // Build the bookmark value based on type
   const bookmarkValue = useMemo(() => {
@@ -143,13 +140,13 @@ const useReadingBookmark = ({
 
   // Determine section state
   const showNewBookmark = pendingBookmarkValue === bookmarkValue;
-  const isCurrentBookmark = effectiveCurrentBookmark() === bookmarkValue;
+  const isCurrentBookmark = effectiveCurrentBookmark === bookmarkValue;
   const isSelected = showNewBookmark || isCurrentBookmark;
 
   const displayReadingBookmark =
     showNewBookmark || isCurrentBookmark
       ? resourceDisplayName
-      : parseBookmarkForDisplay(effectiveCurrentBookmark());
+      : parseBookmarkForDisplay(effectiveCurrentBookmark);
 
   const showRemoveSection =
     isCurrentBookmark &&
@@ -182,11 +179,15 @@ const useReadingBookmark = ({
         try {
           dispatch(setGuestReadingBookmark(value));
         } catch (reduxError) {
-          throw new Error('Unable to save reading bookmark. Please try again.');
+          throw new Error(
+            t('error.reading-bookmark-set', {
+              defaultValue: 'Failed to set reading bookmark',
+            }),
+          );
         }
       }
     },
-    [isLoggedIn, onUpdateUserPreference, mushafId, dispatch],
+    [isLoggedIn, onUpdateUserPreference, mushafId, dispatch, t],
   );
 
   /**
@@ -197,14 +198,20 @@ const useReadingBookmark = ({
 
     setIsLoading(true);
     setError(null);
-    setPreviousBookmarkValue(effectiveCurrentBookmark || null);
+    setPreviousBookmarkValue(effectiveCurrentBookmark ?? null);
     setPendingBookmarkValue(bookmarkValue);
 
     try {
       await persistBookmark(bookmarkValue);
       await onBookmarkChanged?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to set reading bookmark');
+      setError(
+        err instanceof Error
+          ? err.message
+          : t('error.reading-bookmark-set', {
+              defaultValue: 'Failed to set reading bookmark',
+            }),
+      );
       setPendingBookmarkValue(null);
       setPreviousBookmarkValue(null);
     } finally {
@@ -217,6 +224,7 @@ const useReadingBookmark = ({
     effectiveCurrentBookmark,
     persistBookmark,
     onBookmarkChanged,
+    t,
   ]);
 
   /**
@@ -229,10 +237,10 @@ const useReadingBookmark = ({
     setError(null);
     setIsUndoInProgress(true);
 
-    try {
-      const valueToRevert = previousBookmarkValue || '';
-      await persistBookmark(valueToRevert);
+    const valueToRevert = previousBookmarkValue || '';
 
+    try {
+      await persistBookmark(valueToRevert);
       setPendingBookmarkValue(null);
       setPreviousBookmarkValue(undefined);
       await onBookmarkChanged?.();
@@ -241,12 +249,18 @@ const useReadingBookmark = ({
         setIsUndoInProgress(false);
       }, STATE_TRANSITION_DELAY_MS);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to undo reading bookmark');
+      setError(
+        err instanceof Error
+          ? err.message
+          : t('error.reading-bookmark-undo', {
+              defaultValue: 'Failed to undo reading bookmark',
+            }),
+      );
       setIsUndoInProgress(false);
     } finally {
       setIsLoading(false);
     }
-  }, [previousBookmarkValue, persistBookmark, onBookmarkChanged]);
+  }, [previousBookmarkValue, persistBookmark, onBookmarkChanged, t]);
 
   /**
    * Handler to remove current reading bookmark
@@ -268,14 +282,20 @@ const useReadingBookmark = ({
         setIsRemovalInProgress(false);
       }, STATE_TRANSITION_DELAY_MS);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to remove reading bookmark');
+      setError(
+        err instanceof Error
+          ? err.message
+          : t('error.reading-bookmark-remove', {
+              defaultValue: 'Failed to remove reading bookmark',
+            }),
+      );
       setPreviousBookmarkValue(null);
-      setPendingBookmarkValue(effectiveCurrentBookmark);
+      setPendingBookmarkValue(null);
       setIsRemovalInProgress(false);
     } finally {
       setIsLoading(false);
     }
-  }, [effectiveCurrentBookmark, persistBookmark, onBookmarkChanged]);
+  }, [effectiveCurrentBookmark, persistBookmark, onBookmarkChanged, t]);
 
   return {
     isLoading,
@@ -286,7 +306,7 @@ const useReadingBookmark = ({
     showRemoveSection,
     resourceDisplayName,
     displayReadingBookmark,
-    effectiveCurrentBookmark: effectiveCurrentBookmark(),
+    effectiveCurrentBookmark,
     previousBookmarkValue,
     handleSetReadingBookmark,
     handleUndoReadingBookmark,

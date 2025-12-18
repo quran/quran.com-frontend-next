@@ -22,7 +22,7 @@ const guestBookmarkSlice = createSlice({
   reducers: {
     /**
      * Set the reading bookmark for guest user.
-     * Validation of the bookmark format should happen at the call site.
+     * Validates the bookmark format before updating state.
      *
      * Expected formats:
      * - Verse bookmark: "ayah:chapterId:verseNumber" (e.g. "ayah:1:5")
@@ -34,7 +34,7 @@ const guestBookmarkSlice = createSlice({
     setGuestReadingBookmark: (state, action: PayloadAction<ReadingBookmark>) => {
       if (!isValidReadingBookmarkFormat(action.payload)) {
         // Invalid format - do not update state
-        return;
+        throw new Error('Invalid reading bookmark format');
       }
       state.readingBookmark = action.payload;
     },

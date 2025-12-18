@@ -50,7 +50,6 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
   effectiveCurrentBookmark,
   previousBookmarkValue,
   isLoading,
-  error,
   className,
   onSet,
   onUndo,
@@ -141,8 +140,6 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
       ) : (
         <div className={styles.checkbox} />
       )}
-
-      {error && <div className={styles.errorMessage}>{error}</div>}
     </div>
   );
 };
