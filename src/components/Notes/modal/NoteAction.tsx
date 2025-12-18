@@ -4,8 +4,10 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import modalStyles from './Modal.module.scss';
 import styles from './NoteAction.module.scss';
 
+import MyNotesModal from '@/components/Notes/modal/MyNotesModal';
 import NoteModal from '@/components/Notes/modal/NoteModal';
 import translationViewStyles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
@@ -88,6 +90,17 @@ const NoteAction: React.FC<NoteActionProps> = ({
     };
   }, []);
 
+  const [isNotesOnVerseModalOpen, setIsNotesOnVerseModalOpen] = useState(false);
+
+  const onNotesOnVerseModalClose = useCallback(() => {
+    setIsNotesOnVerseModalOpen(false);
+  }, []);
+
+  const onNotesOnVerseModalOpen = useCallback(() => {
+    setIsNotesOnVerseModalOpen(true);
+    onModalClose();
+  }, [onModalClose]);
+
   return (
     <>
       <Button
@@ -117,12 +130,21 @@ const NoteAction: React.FC<NoteActionProps> = ({
         header={<p className={styles.title}>{t('notes:take-a-note-or-reflection')}</p>}
         hasCloseButton
         onClose={onModalClose}
-        contentClassName={styles.content}
-        overlayClassName={styles.overlay}
         onEscapeKeyDown={onModalClose}
+        contentClassName={modalStyles.content}
+        overlayClassName={modalStyles.overlay}
       >
-        <NoteModal notesCount={notesCount?.[verse.verseKey] ?? 0} />
+        <NoteModal
+          notesCount={notesCount?.[verse.verseKey] ?? 0}
+          onNotesOnVerseModalOpen={onNotesOnVerseModalOpen}
+        />
       </ContentModal>
+
+      <MyNotesModal
+        isOpen={isNotesOnVerseModalOpen}
+        onClose={onNotesOnVerseModalClose}
+        notesCount={notesCount?.[verse.verseKey] ?? 0}
+      />
     </>
   );
 };

@@ -1,3 +1,5 @@
+@use '@/styles/constants';
+
 $note_text_area_height: 360px;
 
 .container {
@@ -13,7 +15,7 @@ $note_text_area_height: 360px;
   gap: var(--spacing-xxsmall);
 }
 
-// Div is used to increase specificity to override the default styles.
+// tag is used to increase specificity to override the default styles.
 div.textArea {
   padding: 0;
 
@@ -52,8 +54,8 @@ div.textArea {
     background-color: var(--color-background-alternative-medium);
   }
 
-  &:active {
-    transform: scale(0.92);
+  &:active:not(.disabled) {
+    transform: scale(constants.$button-active-scale);
   }
 }
 

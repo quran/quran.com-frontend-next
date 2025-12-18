@@ -1,0 +1,85 @@
+@use '@/styles/breakpoints';
+
+.title {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-large2);
+}
+
+.overlay {
+  @include breakpoints.smallerThanTablet {
+    place-items: end;
+  }
+}
+
+.content {
+  max-inline-size: 48rem;
+
+  @include breakpoints.smallerThanTablet {
+    height: auto;
+    max-height: 100%;
+    padding-bottom: var(--spacing-large);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large-px);
+
+  margin-block-start: var(--spacing-mega);
+}
+
+.notesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  overflow-y: auto;
+  max-height: 45vh;
+}
+
+.noteCard {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-alternative-faint-new);
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-medium-px);
+  gap: var(--spacing-medium-px);
+}
+
+.noteHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-small);
+}
+
+.noteTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+  line-height: var(--line-height-normal);
+  margin-block-end: var(--spacing-xsmall-px);
+}
+
+.noteDate {
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded-new);
+}
+
+.noteActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  flex-shrink: 0;
+}
+
+.noteText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-bold);
+}
+
+.actions {
+  margin-inline-start: auto;
+}

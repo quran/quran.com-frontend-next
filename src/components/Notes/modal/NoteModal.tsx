@@ -4,18 +4,17 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NoteModal.module.scss';
 
+import NotesOnVerseButton from '@/components/Notes/modal/NotesOnVerseButton';
 import ReflectionIntro from '@/components/Notes/modal/ReflectionIntro';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import TextArea from '@/dls/Forms/TextArea';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
-import ChevronRightIcon from '@/icons/chevron-right.svg';
-import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 
 interface NoteModalProps {
   notesCount?: number;
+  onNotesOnVerseModalOpen: () => void;
 }
 
-const NoteModal: React.FC<NoteModalProps> = ({ notesCount = 0 }) => {
+const NoteModal: React.FC<NoteModalProps> = ({ notesCount = 0, onNotesOnVerseModalOpen }) => {
   const { t } = useTranslation('notes');
 
   const [noteInput, setNoteInput] = useState('');
@@ -39,23 +38,7 @@ const NoteModal: React.FC<NoteModalProps> = ({ notesCount = 0 }) => {
       </div>
 
       {notesCount > 0 && (
-        <button type="button" className={styles.notesButton}>
-          <IconContainer
-            icon={<NotesWithPencilIcon />}
-            color={IconColor.default}
-            size={IconSize.Custom}
-            className={styles.notesButtonPencil}
-          />
-          <span className={styles.notesButtonText}>
-            {t('notes-on-this-verse', { count: notesCount })}
-          </span>
-          <IconContainer
-            icon={<ChevronRightIcon />}
-            color={IconColor.default}
-            size={IconSize.Custom}
-            className={styles.notesButtonChevron}
-          />
-        </button>
+        <NotesOnVerseButton notesCount={notesCount} onClick={onNotesOnVerseModalOpen} />
       )}
 
       <div className={styles.actions}>

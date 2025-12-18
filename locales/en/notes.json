@@ -57,6 +57,7 @@
     "title": "Learn more about Posted Reflections"
   },
   "notes-on-this-verse": "{{count}} notes on this verse",
+  "my-notes": "My Notes ({{count}})",
   "save-post-to-qr": "Save & Post to QuranReflect",
   "save-privately": "Save Privately",
   "save-publish-failed": "Note has been saved successfully but failed to publish",
