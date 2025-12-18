@@ -15,7 +15,11 @@ import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
-export type Collection = {
+/**
+ * UI-specific collection type for the save modal with checked state
+ * This is different from types/Collection which is the API response type
+ */
+export type CollectionOption = {
   id: string;
   name: string;
   checked?: boolean;
@@ -23,8 +27,8 @@ export type Collection = {
 
 type SaveToCollectionModalProps = {
   isOpen: boolean;
-  collections: Collection[];
-  onCollectionToggled: (collection: Collection, newValue: boolean) => void;
+  collections: CollectionOption[];
+  onCollectionToggled: (collection: CollectionOption, newValue: boolean) => void;
   onNewCollectionCreated: (name: string) => Promise<void>;
   onClose?: () => void;
   verseKey: string;
@@ -68,7 +72,7 @@ const SaveToCollectionModal = ({
     logButtonClick('save_to_collection_add_new_collection');
   };
 
-  const handleCheckboxChange = (collection: Collection) => (checked: boolean) => {
+  const handleCheckboxChange = (collection: CollectionOption) => (checked: boolean) => {
     const eventData = {
       verseKey,
       collectionId: collection.id,
@@ -96,7 +100,7 @@ const SaveToCollectionModal = ({
           <div className={styles.collectionItem} key={collection.id}>
             <Checkbox
               id={collection.name}
-              defaultChecked={collection.checked}
+              checked={collection.checked}
               label={collection.name}
               onChange={handleCheckboxChange(collection)}
             />
