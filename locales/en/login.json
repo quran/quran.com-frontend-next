@@ -53,6 +53,7 @@
   "forgot-password-description": "Enter your email address and we'll send you instructions to reset your password.",
   "forgot-password-success": "Password reset email sent! Please check your inbox.",
   "forgot-password-title": "Forgot password?",
+  "hide-password": "Hide password",
   "last-name-placeholder": "Last Name",
   "login-error": {
     "AuthenticationError": "Authentication failed. Please try again later",
@@ -60,6 +61,7 @@
     "TokenExpiredError": "You have been logged out, please login again."
   },
   "login-title": "Login to Quran.com",
+  "current-password-placeholder": "Current password",
   "new-password-placeholder": "New password",
   "other-options": "Other Login Options",
   "password-placeholder": "Password",
@@ -79,6 +81,7 @@
   "reset-password": "Reset Password",
   "reset-password-success": "Password reset successfully!",
   "set-new-password": "Set a new password",
+  "show-password": "Show password",
   "sign-in": "Sign in",
   "sign-in-or-sign-up": "Sign In or Sign Up below to continue to",
   "sign-up": "Sign up",
