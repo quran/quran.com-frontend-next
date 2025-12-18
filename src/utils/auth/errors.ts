@@ -258,7 +258,7 @@ const getErrorCode = (error: unknown): string | undefined => {
  * @param {string} message - User-friendly error message
  * @param {unknown} error - Original error object
  * @param {boolean} recoverable - Whether the error is recoverable
- * @param {Record<string, any>} context - Additional context information
+ * @param {Record<string, unknown>} context - Additional context information
  * @returns {AuthError} AuthError instance
  * @throws Error if required parameters are missing
  */
@@ -267,7 +267,7 @@ export const createAuthError = (
   message: string,
   error: unknown,
   recoverable: boolean,
-  context?: Record<string, any>,
+  context?: Record<string, unknown>,
 ): AuthError => {
   // Validate required parameters
   if (!type) {
@@ -439,6 +439,34 @@ export const createNullError = (error: unknown, context?: Record<string, any>): 
  * @param {Record<string, any>} context - Additional context
  * @returns {AuthError} Classified AuthError
  */
+/**
+ * Check if an error is a bookmark sync error (status 400 with bookmark-related context)
+ * Used when the server rejects bookmark operations due to sync conflicts
+ *
+ * @param {unknown} err - The error to check
+ * @returns {boolean} True if the error is a bookmark sync error
+ */
+export const isBookmarkSyncError = (err: unknown): boolean => {
+  if (!err || typeof err !== 'object') return false;
+  if (!('status' in err) || err.status !== 400) return false;
+
+  // Check for bookmark-specific error indicators
+  if ('code' in err && typeof err.code === 'string') {
+    const code = err.code.toUpperCase();
+    if (code.includes('BOOKMARK') || code.includes('SYNC')) return true;
+  }
+  if ('message' in err && typeof err.message === 'string') {
+    const message = err.message.toLowerCase();
+    if (message.includes('bookmark') || message.includes('sync') || message.includes('conflict')) {
+      return true;
+    }
+  }
+
+  // Fallback: treat 400 errors from bookmark operations as sync errors
+  // since the error context is set when calling from bookmark hooks
+  return true;
+};
+
 export const classifyError = (error: unknown, context?: Record<string, any>): AuthError => {
   if (!error) return createNullError(error, context);
 

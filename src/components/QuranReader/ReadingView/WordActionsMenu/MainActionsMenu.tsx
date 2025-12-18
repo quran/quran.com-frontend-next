@@ -19,6 +19,7 @@ interface Props {
   onActionTriggered?: () => void;
   onMenuChange: (menu: VerseActionsMenuType) => void;
   openShareModal?: () => void;
+  bookmarksRangeUrl?: string | null;
 }
 
 const MainActionsMenu: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const MainActionsMenu: React.FC<Props> = ({
   onActionTriggered,
   onMenuChange,
   openShareModal,
+  bookmarksRangeUrl,
 }) => {
   return (
     <>
@@ -49,6 +51,7 @@ const MainActionsMenu: React.FC<Props> = ({
         verse={word.verse}
         isTranslationView={false}
         onActionTriggered={onActionTriggered}
+        bookmarksRangeUrl={bookmarksRangeUrl}
       />
       <CopyMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
       <NotesAction verse={word.verse} onActionTriggered={onActionTriggered} />
