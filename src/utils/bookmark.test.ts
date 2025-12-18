@@ -15,11 +15,14 @@ describe('isValidReadingBookmarkFormat', () => {
     expect(isValidReadingBookmarkFormat('page:42')).toBe(true);
   });
 
-  it('returns false for invalid formats and true for zero-padded page', () => {
+  it('returns false for invalid formats', () => {
     expect(isValidReadingBookmarkFormat('ayah:abc:1')).toBe(false);
     expect(isValidReadingBookmarkFormat('page:x')).toBe(false);
     expect(isValidReadingBookmarkFormat('verse:1:1')).toBe(false);
     expect(isValidReadingBookmarkFormat('AYAH:1:1')).toBe(false);
+  });
+
+  it('returns true for zero-padded page', () => {
     expect(isValidReadingBookmarkFormat('page:0001')).toBe(true);
   });
 });
