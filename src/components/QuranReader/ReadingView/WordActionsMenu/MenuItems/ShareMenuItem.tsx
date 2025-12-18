@@ -24,7 +24,12 @@ const ShareMenuItem: React.FC<Props> = ({ onActionTriggered, openShareModal }) =
   return (
     <PopoverMenu.Item
       icon={
-        <IconContainer icon={<ShareIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        <IconContainer
+          icon={<ShareIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
       }
       onClick={onShareClicked}
     >
