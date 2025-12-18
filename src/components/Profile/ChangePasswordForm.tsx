@@ -3,23 +3,23 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { NAME_MAX_LENGTH, NAME_MIN_LENGTH } from '../Login/SignUpFormFields/consts';
+import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../Login/SignUpFormFields/consts';
 
-import getEditDetailsFormFields from './editDetailsFormFields';
+import getChangePasswordFormFields from './changePasswordFormFields';
 import Section from './Section';
 import styles from './SharedProfileStyles.module.scss';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import useAuthData from '@/hooks/auth/useAuthData';
-import useUpdateUserProfile from '@/hooks/auth/useUpdateUserProfile';
+import useUpdatePassword from '@/hooks/auth/useUpdatePassword';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
 import { logButtonClick } from '@/utils/eventLogger';
 import TEST_IDS from '@/utils/test-ids';
 
 type FormData = {
-  firstName: string;
-  lastName: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 };
 
 interface RenderActionProps {
@@ -27,33 +27,33 @@ interface RenderActionProps {
   onClick?: () => void;
 }
 
-const EXTRA_PARAMS = {
-  max: NAME_MAX_LENGTH,
-  min: NAME_MIN_LENGTH,
-};
-
-const EditDetailsForm: FC = () => {
+const ChangePasswordForm: FC = () => {
   const { t } = useTranslation('profile');
-  const { userData } = useAuthData();
-  const { updateProfile, isUpdating } = useUpdateUserProfile();
+  const { updatePassword, isUpdating } = useUpdatePassword();
   const { transformErrors } = useTransformFormErrors<FormData>({
-    firstName: {
-      fieldNameKey: 'common:form.firstName',
-      extraParams: EXTRA_PARAMS,
+    currentPassword: {
+      fieldNameKey: 'common:form.current-password',
     },
-    lastName: {
-      fieldNameKey: 'common:form.lastName',
-      extraParams: EXTRA_PARAMS,
+    newPassword: {
+      fieldNameKey: 'common:form.new-password',
+      extraParams: {
+        max: PASSWORD_MAX_LENGTH,
+        min: PASSWORD_MIN_LENGTH,
+      },
+    },
+    confirmPassword: {
+      fieldNameKey: 'common:form.confirm-new-password',
     },
   });
 
-  const formFields = useMemo(() => getEditDetailsFormFields(t, userData), [t, userData]);
+  const formFields = useMemo(() => getChangePasswordFormFields(t), [t]);
 
   const onFormSubmit = async (data: FormData) => {
-    logButtonClick('profile_save_changes');
-    const result = await updateProfile({
-      firstName: data.firstName,
-      lastName: data.lastName,
+    logButtonClick('profile_update_password');
+    const result = await updatePassword({
+      currentPassword: data.currentPassword,
+      newPassword: data.newPassword,
+      confirmPassword: data.confirmPassword,
     });
 
     return transformErrors(result);
@@ -67,22 +67,21 @@ const EditDetailsForm: FC = () => {
         size={ButtonSize.Small}
         variant={ButtonVariant.Accent}
       >
-        {t('save-changes')}
+        {t('update-password')}
       </Button>
     </div>
   );
 
   return (
     <Section
-      title={t('edit-details')}
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EDIT_DETAILS_SECTION}
+      title={t('change-password')}
+      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CHANGE_PASSWORD_SECTION}
     >
       <FormBuilder
-        key={userData ? `${userData.email}-${userData.firstName}-${userData.lastName}` : 'loading'}
-        className={styles.formContainer}
+        className={styles.passwordFormContainer}
         formFields={formFields}
         onSubmit={onFormSubmit}
-        actionText={t('save-changes')}
+        actionText={t('update-password')}
         isSubmitting={isUpdating}
         renderAction={renderAction}
       />
@@ -90,4 +89,4 @@ const EditDetailsForm: FC = () => {
   );
 };
 
-export default EditDetailsForm;
+export default ChangePasswordForm;
