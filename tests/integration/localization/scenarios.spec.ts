@@ -95,14 +95,14 @@ class LocalizationScenarioHelper {
   async switchLanguage(language: string) {
     await this.homepage.closeNextjsErrorDialog();
     await this.homepage.closeNextjsErrorDialog();
-    await this.page.locator('[data-testid="open-navigation-drawer"]').click();
-    const selectorButton = this.page.locator('[data-testid="language-selector-button"]');
+    await this.page.getByTestId('open-navigation-drawer').click();
+    await this.homepage.closeNextjsErrorDialog();
+    const selectorButton = this.page.getByTestId('language-selector-button');
     await expect(selectorButton).toBeVisible();
     await selectorButton.click();
-    await this.page.waitForTimeout(1500); // Wait for animation
-    const option = this.page.locator(`[data-testid="language-item-${language}"]`);
+    const option = this.page.getByTestId(`language-item-${language}`);
     await expect(option).toBeVisible();
-    await option.click();
+    await option.click({ force: true });
     await this.page.waitForLoadState('networkidle');
     await this.waitForReduxHydration();
   }

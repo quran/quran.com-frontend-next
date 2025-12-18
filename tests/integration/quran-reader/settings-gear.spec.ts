@@ -22,6 +22,7 @@ test(
   },
 );
 
+// Unskip until the flaky issues with mobile view are resolved
 test.skip(
   'mobile: gear works before and after scroll (navbar hidden)',
   { tag: ['@reader', '@settings', '@mobile'] },

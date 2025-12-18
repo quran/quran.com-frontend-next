@@ -14,10 +14,15 @@ export const setServerLocaleCookie = (newLocale: string, res: GetServerSideProps
   // Aligns server-set cookie with client behaviour so SSR redirects also persist locale.
   const expires = new Date();
   expires.setTime(LOCALE_COOKIE_PERSISTENCE_PERIOD_MS);
-  res.setHeader(
-    'Set-Cookie',
-    `NEXT_LOCALE=${newLocale}; Path=/; Expires=${expires.toUTCString()}; SameSite=Lax`,
-  );
+  const newCookie = `NEXT_LOCALE=${newLocale}; Path=/; Expires=${expires.toUTCString()}; SameSite=Lax`;
+  const existingSetCookieHeader = res.getHeader('Set-Cookie');
+  if (!existingSetCookieHeader) {
+    res.setHeader('Set-Cookie', newCookie);
+  } else if (Array.isArray(existingSetCookieHeader)) {
+    res.setHeader('Set-Cookie', [...existingSetCookieHeader, newCookie]);
+  } else {
+    res.setHeader('Set-Cookie', [existingSetCookieHeader.toString(), newCookie]);
+  }
 };
 
 /**

@@ -108,7 +108,10 @@ class LocalizationTestHelper {
 
   async expectNextLocaleCookieToBe(expectedLocale: string): Promise<void> {
     await expect
-      .poll(async () => this.getCookieValue('NEXT_LOCALE'), { timeout: 5000 })
+      .poll(async () => this.getCookieValue('NEXT_LOCALE'), {
+        timeout: 5000,
+        intervals: [100, 250, 500],
+      })
       .toBe(expectedLocale);
   }
 
@@ -1527,7 +1530,6 @@ test.describe('Category 3: Language Selector Behavior', () => {
       const defaultSettings = await testHelper.getReduxState();
       expect(defaultSettings.detectedCountry).toBe('US'); // Country ignored for non-English
       expect(defaultSettings.userHasCustomised).toBe(false); // Should remain false
-
       await testHelper.expectNextLocaleCookieToBe('ar');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');

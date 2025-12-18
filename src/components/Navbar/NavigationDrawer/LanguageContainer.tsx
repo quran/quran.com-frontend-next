@@ -11,6 +11,7 @@ import { getCountryLanguagePreference } from '@/api';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import IconArrowLeft from '@/icons/arrow-left.svg';
+import { logError } from '@/lib/newrelic';
 import {
   persistCurrentSettings,
   selectDetectedCountry,
@@ -73,7 +74,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       const preferenceCountry = getCountryCodeForPreferences(newLocale, detectedCountry);
       const countryPreference = await getCountryLanguagePreference(newLocale, preferenceCountry);
 
-      // Apply dynamic defaults from QDC API )
+      // Apply dynamic defaults from QDC API
       await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
 
       // Persist the newly applied defaults if user is logged in
@@ -82,8 +83,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       }
     } catch (error) {
       // Don't block locale change if defaults fail - UI language should still switch
-      // eslint-disable-next-line no-console
-      console.error('Failed to apply QDC defaults on language change', error);
+      logError('Failed to apply QDC defaults on language change', error);
     }
   };
 
@@ -127,6 +127,8 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       onBack();
     } catch (error) {
       toast(t('error.language-change-failed'), { status: ToastStatus.Error });
+      // Log the error to aid debugging of language change failures
+      logError('Language change failed', error);
     }
   };
 
