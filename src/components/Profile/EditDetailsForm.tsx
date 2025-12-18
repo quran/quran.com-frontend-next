@@ -27,7 +27,7 @@ interface RenderActionProps {
   onClick?: () => void;
 }
 
-const EXTRA_PARAMS = {
+const extraParams = {
   max: NAME_MAX_LENGTH,
   min: NAME_MIN_LENGTH,
 };
@@ -39,11 +39,11 @@ const EditDetailsForm: FC = () => {
   const { transformErrors } = useTransformFormErrors<FormData>({
     firstName: {
       fieldNameKey: 'common:form.firstName',
-      extraParams: EXTRA_PARAMS,
+      extraParams,
     },
     lastName: {
       fieldNameKey: 'common:form.lastName',
-      extraParams: EXTRA_PARAMS,
+      extraParams,
     },
   });
 

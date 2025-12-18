@@ -34,7 +34,7 @@ const ProfilePage: FC = () => {
         nofollow
         noindex
       />
-      <HeaderNavigation backUrl={profilePath} title={t('my-profile')} />
+      <HeaderNavigation title={t('my-profile')} />
       <PageContainer isSheetsLike className={styles.wrapper}>
         <div className={styles.topDivider}>
           <Separator />
