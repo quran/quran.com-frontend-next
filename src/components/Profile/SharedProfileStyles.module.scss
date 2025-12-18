@@ -1,0 +1,30 @@
+@use 'src/styles/breakpoints';
+
+.button {
+  padding-block: var(--spacing-xxxsmall-px);
+  padding-inline: var(--spacing-small-px);
+  border-radius: var(--border-radius-small-px);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+}
+.formContainer {
+  display: grid !important; // to override the default display: flex
+  gap: var(--spacing-medium-px);
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .formInputContainer {
+    width: 100%;
+    .formInput {
+      width: unset;
+      padding: var(--spacing-small-px);
+      border-radius: var(--border-radius-xsmall-px);
+      &:has(input:disabled) {
+        background-color: var(--color-background-alternative-faint);
+      }
+      input {
+        height: auto;
+      }
+    }
+  }
+}
