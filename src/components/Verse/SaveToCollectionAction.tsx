@@ -121,7 +121,12 @@ const SaveToCollectionAction: React.FC<Props> = ({
       <PopoverMenu.Item
         onClick={onMenuClicked}
         icon={
-          <IconContainer icon={<PlusIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          <IconContainer
+            icon={<PlusIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
         }
       >
         {t('common:save-to-collection')}

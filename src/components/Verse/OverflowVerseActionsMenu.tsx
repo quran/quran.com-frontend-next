@@ -61,6 +61,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
               { [styles.moreMenuTrigger]: isTranslationView },
               'overflow-verse-actions-menu-trigger', // for onboarding
             )}
+            shouldFlipOnRTL={false}
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
@@ -68,6 +69,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
                 icon={<OverflowMenuIcon />}
                 color={IconColor.tertiary}
                 size={IconSize.Custom}
+                shouldFlipOnRTL={false}
               />
             </span>
           </Button>

@@ -147,6 +147,10 @@ $arabicVerseTopMargin: 2.75rem;
   }
 }
 
+.tabsContainerRTL {
+  justify-content: flex-end;
+}
+
 .center {
   justify-content: center;
 }
@@ -169,6 +173,10 @@ $arabicVerseTopMargin: 2.75rem;
   &:hover {
     color: var(--color-success-medium);
   }
+}
+
+.tabItemRTL {
+  flex-direction: row-reverse;
 }
 
 .tabIcon {
