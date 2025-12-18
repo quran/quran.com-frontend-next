@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './HeaderNavigation.module.scss';
@@ -8,13 +9,13 @@ import ArrowLeft from '@/icons/arrow-left.svg';
 import Background from '@/icons/background.svg';
 
 interface HeaderNavigationProps {
-  backUrl: string;
   title: string;
 }
 
-const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ backUrl, title }) => {
+const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ title }) => {
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
+  const router = useRouter();
 
   return (
     <div className={styles.heroContainer}>
@@ -27,8 +28,8 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ backUrl, title }) =
             type={ButtonType.Secondary}
             size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
             variant={ButtonVariant.Compact}
-            href={backUrl}
             ariaLabel={t('back')}
+            onClick={() => router.back()}
           >
             <ArrowLeft />
           </Button>
