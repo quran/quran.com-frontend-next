@@ -180,3 +180,34 @@
     opacity: 0.6;
   }
 }
+
+$newCollectionSectionHeight: 64px;
+
+.newCollectionButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium-px);
+  text-align: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: $newCollectionSectionHeight;
+
+  border: $border-width-default solid #ebeef0;
+  border-radius: var(--border-radius-large-px);
+
+  background-color: transparent;
+}
+
+.plusIcon {
+  padding: 0;
+  margin-inline-end: var(--spacing-xxsmall-px);
+  display: flex;
+  justify-content: center;
+  justify-self: start;
+  svg {
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
+  }
+}
