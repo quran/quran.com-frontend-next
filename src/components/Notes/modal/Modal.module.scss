@@ -2,6 +2,12 @@
 
 $note_modal_max_width: 48rem;
 
+.title {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-large2);
+}
+
 .overlay {
   scrollbar-gutter: stable both-edges;
   @include breakpoints.smallerThanTablet {

@@ -1,15 +1,30 @@
-@use '@/styles/breakpoints';
 @use '@/styles/constants';
 
 $note_text_area_height: 360px;
 
-.title {
-  font-size: var(--font-size-xlarge);
+.headerButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro);
+  cursor: pointer;
+}
+
+.title,
+.headerButton {
+  font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
+}
 
-  @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-large2);
+.editIcon {
+  rotate: 180deg;
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+
+  svg {
+    height: var(--spacing-small);
+    width: var(--spacing-small);
   }
 }
 

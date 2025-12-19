@@ -17,7 +17,6 @@ interface NoteFormModalProps {
   header: React.ReactNode;
   onMyNotes: () => void;
   isModalOpen: boolean;
-  onModalOpen: () => void;
   onModalClose: () => void;
   onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>;
 }

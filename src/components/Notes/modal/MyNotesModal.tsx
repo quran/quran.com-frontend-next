@@ -12,35 +12,35 @@ import DeleteIcon from '@/icons/delete.svg';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
+import { Note } from '@/types/auth/Note';
+import { getLangFullLocale } from '@/utils/locale';
 
 interface MyNotesModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAddNote: () => void;
+  onEditNote: (note: Note) => void;
   notesCount?: number;
-}
-
-interface Note {
-  id: string;
-  verseKey: string;
-  date: string;
-  content: string;
 }
 
 const MyNotesModal: React.FC<MyNotesModalProps> = ({
   isOpen,
   onClose,
   onAddNote,
+  onEditNote,
   notesCount = 1,
 }) => {
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
 
   // Mock data for design purposes
   const notes: Note[] = Array.from({ length: 10 }, (n, index) => ({
     id: `note-${index + 1}`,
-    verseKey: `Al-Kawthar 108:${index + 1}`,
-    date: new Date().toDateString(),
-    content: `This is one of my favourite verses of the Quran! (example note ${index + 1})`,
+    title: `Note ${index + 1}`,
+    body: `This is one of my favourite verses of the Quran! (example note ${index + 1})`,
+    verseKey: `108:${index + 1}`,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    saveToQR: false,
   }));
 
   return (
@@ -49,7 +49,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       onClose={onClose}
       onEscapeKeyDown={onClose}
       hasCloseButton
-      header={<h2 className={styles.title}>{t('my-notes', { count: notesCount })}</h2>}
+      header={<h2 className={modalStyles.title}>{t('my-notes', { count: notesCount })}</h2>}
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
     >
@@ -60,7 +60,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
               <div className={styles.noteHeader}>
                 <div>
                   <h3 className={styles.noteTitle}>{note.verseKey}</h3>
-                  <p className={styles.noteDate}>{note.date}</p>
+                  <p className={styles.noteDate}>{formatNoteDate(note.createdAt, lang)}</p>
                 </div>
                 <div className={styles.noteActions}>
                   <Button
@@ -74,6 +74,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
                     variant={ButtonVariant.Ghost}
                     size={ButtonSize.Small}
                     shape={ButtonShape.Square}
+                    onClick={() => onEditNote(note)}
                   >
                     <IconContainer
                       icon={<EditIcon />}
@@ -97,7 +98,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
                 </div>
               </div>
 
-              <p className={styles.noteText}>{note.content}</p>
+              <p className={styles.noteText}>{note.body}</p>
             </div>
           ))}
         </div>
@@ -110,6 +111,14 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       </div>
     </ContentModal>
   );
+};
+
+const formatNoteDate = (date: Date, locale: string) => {
+  return date.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
 };
 
 export default MyNotesModal;
