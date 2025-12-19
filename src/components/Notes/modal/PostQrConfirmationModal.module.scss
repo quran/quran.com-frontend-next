@@ -1,0 +1,31 @@
+@use '@/styles/constants';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-medium2));
+  margin-block-start: calc(3 * var(--spacing-medium2));
+}
+
+.question {
+  font-size: var(--font-size-large2);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-medium2);
+}
+
+.editButton {
+  border-radius: var(--border-radius-default);
+  padding-inline: calc(2 * var(--spacing-medium2));
+}
+
+.confirmButton {
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-small);
+}

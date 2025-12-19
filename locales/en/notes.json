@@ -62,6 +62,9 @@
   "my-notes": "My Notes ({{count}})",
   "save-post-to-qr": "Save & Post to QuranReflect",
   "save-privately": "Save Privately",
+  "post-confirmation": {
+    "question": "Are you sure you would like to post this Reflection to QuranReflect?"
+  },
   "save-publish-failed": "Note has been saved successfully but failed to publish",
   "save-success": "Note has been saved successfully",
   "share-to-qr": "Share to QuranReflect.com",
