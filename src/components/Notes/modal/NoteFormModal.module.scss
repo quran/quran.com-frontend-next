@@ -65,8 +65,13 @@ div.textArea {
     background-color: var(--color-background-alternative-medium);
   }
 
-  &:active:not(.disabled) {
+  &:active:not(:disabled) {
     transform: scale(constants.$button-active-scale);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
