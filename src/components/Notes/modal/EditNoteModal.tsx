@@ -26,6 +26,12 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
 
   return (
     <NoteFormModal
+      key={note?.id}
+      initialNote={note?.body || ''}
+      isModalOpen={isModalOpen}
+      onModalClose={onModalClose}
+      onMyNotes={onMyNotes}
+      showNotesOnVerseButton={false}
       header={
         <button
           type="button"
@@ -42,11 +48,6 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
           {t('edit-note')}
         </button>
       }
-      initialNote={note?.body || ''}
-      isModalOpen={isModalOpen}
-      onModalClose={onModalClose}
-      onMyNotes={onMyNotes}
-      showNotesOnVerseButton={false}
     />
   );
 };
