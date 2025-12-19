@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SaveBookmarkModal.module.scss';
 
 import CheckMarkIcon from '@/icons/checkmark-icon.svg';
+import PlusIcon from '@/icons/plus.svg';
 
 interface GuestSignInSectionProps {
   onSignIn: () => void;
@@ -18,27 +19,50 @@ interface GuestSignInSectionProps {
 const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => {
   const commonT = useTranslation('common').t;
   const { t } = useTranslation('quran-reader');
+  const [showSignInPrompt, setShowSignInPrompt] = useState(false);
+
+  const handleNewCollectionClick = useCallback((): void => {
+    setShowSignInPrompt(true);
+  }, []);
 
   const handleSignInClick = useCallback((): void => {
     onSignIn();
   }, [onSignIn]);
 
+  if (showSignInPrompt) {
+    return (
+      <div className={styles.guestSignInSection}>
+        <h3 className={styles.guestSectionTitle}>{commonT('collections')}</h3>
+
+        <div className={styles.guestMessageBox}>
+          <p className={styles.guestSignInMessage}>{t('guest-prompt.sign-in-message')}</p>
+
+          <div className={styles.guestFeaturesList}>
+            <GuestFeatureItem text={t('guest-prompt.create-collections')} />
+            <GuestFeatureItem text={t('guest-prompt.attach-notes')} />
+          </div>
+
+          <button type="button" className={styles.guestSignInButton} onClick={handleSignInClick}>
+            {t('login:sign-in')}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.guestSignInSection}>
       <h3 className={styles.guestSectionTitle}>{commonT('collections')}</h3>
-
-      <div className={styles.guestMessageBox}>
-        <p className={styles.guestSignInMessage}>{t('guest-prompt.sign-in-message')}</p>
-
-        <div className={styles.guestFeaturesList}>
-          <GuestFeatureItem text={t('guest-prompt.create-collections')} />
-          <GuestFeatureItem text={t('guest-prompt.attach-notes')} />
-        </div>
-
-        <button type="button" className={styles.guestSignInButton} onClick={handleSignInClick}>
-          {t('login:sign-in')}
-        </button>
-      </div>
+      <button
+        type="button"
+        className={styles.newCollectionButton}
+        onClick={handleNewCollectionClick}
+      >
+        <span className={styles.plusIcon}>
+          <PlusIcon />
+        </span>
+        {t('new-collection')}
+      </button>
     </div>
   );
 };
