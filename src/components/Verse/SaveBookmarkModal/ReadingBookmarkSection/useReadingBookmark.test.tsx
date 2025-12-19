@@ -113,7 +113,7 @@ describe('useReadingBookmark (guest)', () => {
     });
   });
 
-  it('ignores invalid removal for guest bookmark (no error)', async () => {
+  it('clears guest bookmark when handleRemoveCurrentBookmark is called', async () => {
     const store = makeStore();
     store.dispatch(setGuestReadingBookmark('ayah:1:1'));
     const { result } = renderHook(
