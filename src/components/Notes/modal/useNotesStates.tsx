@@ -77,11 +77,11 @@ export const useNotesStates = (
   );
 
   const onPrivateSave = useCallback(async () => {
-    onSubmit(false);
+    await onSubmit(false);
   }, [onSubmit]);
 
-  const onPublicSave = useCallback(async () => {
-    onSubmit(true);
+  const onPublicSaveRequest = useCallback(async () => {
+    await onSubmit(true);
   }, [onSubmit]);
 
   const onNoteInputChange = (value: string) => {
@@ -96,6 +96,6 @@ export const useNotesStates = (
     validateNoteInput,
     onNoteInputChange,
     onPrivateSave,
-    onPublicSave,
+    onPublicSaveRequest,
   };
 };
