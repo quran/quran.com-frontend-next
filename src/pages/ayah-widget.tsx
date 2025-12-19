@@ -39,10 +39,9 @@ const INITIAL_PREFERENCES: Preferences = {
   showTranslatorName: false,
   showQuranLink: true,
   reciter: DEFAULT_RECITER,
-  hasCustomSize: false,
   customSize: {
     width: '100%',
-    height: '400px',
+    height: '',
   },
 };
 
@@ -171,10 +170,11 @@ const AyahWidgetBuilderPage = () => {
    * Generate the embed snippet based on current preferences.
    */
   const embedSnippet = useMemo(() => {
-    const containerStyles: string[] = ['width: 100%'];
-    if (preferences.hasCustomSize) {
-      containerStyles[0] = `width: ${preferences.customSize.width}`;
-      containerStyles.push(`height: ${preferences.customSize.height}`);
+    const widthValue = preferences.customSize.width?.trim() || '100%';
+    const heightValue = preferences.customSize.height?.trim();
+    const containerStyles: string[] = [`width: ${widthValue}`];
+    if (heightValue) {
+      containerStyles.push(`height: ${heightValue}`);
     }
 
     const attributes = [
@@ -197,10 +197,9 @@ const AyahWidgetBuilderPage = () => {
       attributes.splice(1, 0, `data-quran-origin="${SNIPPET_WIDGET_ORIGIN}"`);
     }
 
-    // Add custom size attributes if enabled
-    if (preferences.hasCustomSize) {
-      attributes.push(`data-width="${preferences.customSize.width}"`);
-      attributes.push(`data-height="${preferences.customSize.height}"`);
+    attributes.push(`data-width="${widthValue}"`);
+    if (heightValue) {
+      attributes.push(`data-height="${heightValue}"`);
     }
 
     const containerStyleAttr = containerStyles.length
@@ -220,7 +219,6 @@ const AyahWidgetBuilderPage = () => {
     preferences.customSize.width,
     preferences.enableAudio,
     preferences.enableWbwTranslation,
-    preferences.hasCustomSize,
     preferences.reciter,
     preferences.selectedAyah,
     preferences.selectedSurah,

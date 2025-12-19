@@ -40,10 +40,14 @@ const useAyahWidgetPreview = ({
       container.removeChild(container.firstChild);
     }
     const target = document.createElement('div');
+    const widthValue = preferences.customSize.width?.trim() || '100%';
+    const heightValue = preferences.customSize.height?.trim();
     target.id = preferences.containerId;
-    target.style.width = preferences.hasCustomSize ? preferences.customSize.width : '100%';
-    if (preferences.hasCustomSize) {
-      target.style.height = preferences.customSize.height;
+    target.style.width = widthValue;
+    if (heightValue) {
+      target.style.height = heightValue;
+    } else {
+      target.style.removeProperty('height');
     }
     target.style.maxWidth = '100%';
     target.style.display = 'block';
@@ -73,9 +77,11 @@ const useAyahWidgetPreview = ({
     script.setAttribute('data-quran-show-translator-names', String(preferences.showTranslatorName));
     script.setAttribute('data-quran-show-quran-link', String(preferences.showQuranLink));
     script.setAttribute('data-quran-mushaf', preferences.mushaf);
-    if (preferences.hasCustomSize) {
-      script.setAttribute('data-width', preferences.customSize.width);
-      script.setAttribute('data-height', preferences.customSize.height);
+    script.setAttribute('data-width', widthValue);
+    if (heightValue) {
+      script.setAttribute('data-height', heightValue);
+    } else {
+      script.removeAttribute('data-height');
     }
 
     document.body.appendChild(script);
@@ -92,7 +98,6 @@ const useAyahWidgetPreview = ({
     preferences.customSize.width,
     preferences.enableAudio,
     preferences.enableWbwTranslation,
-    preferences.hasCustomSize,
     preferences.mushaf,
     preferences.reciter,
     preferences.selectedAyah,

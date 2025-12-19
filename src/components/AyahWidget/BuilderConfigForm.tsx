@@ -57,32 +57,31 @@ const BuilderConfigForm = ({
         />
       </div>
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="surah-select">
-          {t('fields.surah')}
-        </label>
-        <select
-          id="surah-select"
-          className={styles.select}
-          value={preferences.selectedSurah}
-          onChange={(event) =>
-            setPreferences((prev) => ({
-              ...prev,
-              selectedSurah: Number(event.target.value),
-              selectedAyah: 1,
-            }))
-          }
-        >
-          {surahs.length === 0 && <option>{t('states.loadingChapters')}</option>}
-          {surahs.map((surah) => (
-            <option key={surah.id ?? ''} value={Number(surah.id)}>
-              {Number(surah.id)}. {surah.transliteratedName}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={`${styles.field} ${styles.inline}`}>
+      <div className={styles.twoColumnGrid}>
+        <div className={styles.field}>
+          <label className={styles.label} htmlFor="surah-select">
+            {t('fields.surah')}
+          </label>
+          <select
+            id="surah-select"
+            className={styles.select}
+            value={preferences.selectedSurah}
+            onChange={(event) =>
+              setPreferences((prev) => ({
+                ...prev,
+                selectedSurah: Number(event.target.value),
+                selectedAyah: 1,
+              }))
+            }
+          >
+            {surahs.length === 0 && <option>{t('states.loadingChapters')}</option>}
+            {surahs.map((surah) => (
+              <option key={surah.id ?? ''} value={Number(surah.id)}>
+                {Number(surah.id)}. {surah.transliteratedName}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className={styles.field}>
           <label className={styles.label} htmlFor="ayah-select">
             {t('fields.ayah')}
@@ -106,26 +105,27 @@ const BuilderConfigForm = ({
             ))}
           </select>
         </div>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="theme-select">
-            {t('fields.theme')}
-          </label>
-          <select
-            id="theme-select"
-            className={styles.select}
-            value={preferences.theme}
-            onChange={(event) =>
-              setPreferences((prev) => ({
-                ...prev,
-                theme: event.target.value as Preferences['theme'],
-              }))
-            }
-          >
-            <option value="light">{t('theme.light')}</option>
-            <option value="dark">{t('theme.dark')}</option>
-            <option value="sepia">{t('theme.sepia')}</option>
-          </select>
-        </div>
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="theme-select">
+          {t('fields.theme')}
+        </label>
+        <select
+          id="theme-select"
+          className={styles.select}
+          value={preferences.theme}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              theme: event.target.value as Preferences['theme'],
+            }))
+          }
+        >
+          <option value="light">{t('theme.light')}</option>
+          <option value="dark">{t('theme.dark')}</option>
+          <option value="sepia">{t('theme.sepia')}</option>
+        </select>
       </div>
 
       <div className={styles.field}>
@@ -301,24 +301,7 @@ const BuilderConfigForm = ({
         </label>
       </div>
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="size-toggle"
-          type="checkbox"
-          checked={preferences.hasCustomSize}
-          onChange={(event) =>
-            setPreferences((prev) => ({
-              ...prev,
-              hasCustomSize: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="size-toggle">
-          {t('checkboxes.customSize')}
-        </label>
-      </div>
-
-      <div className={`${styles.inline} ${!preferences.hasCustomSize ? styles.disabled : ''}`}>
+      <div className={styles.twoColumnGrid}>
         <div className={styles.field}>
           <label className={styles.label} htmlFor="custom-width">
             {t('fields.width')}
@@ -333,7 +316,6 @@ const BuilderConfigForm = ({
                 customSize: { ...prev.customSize, width: event.target.value },
               }))
             }
-            disabled={!preferences.hasCustomSize}
           />
         </div>
         <div className={styles.field}>
@@ -350,7 +332,6 @@ const BuilderConfigForm = ({
                 customSize: { ...prev.customSize, height: event.target.value },
               }))
             }
-            disabled={!preferences.hasCustomSize}
           />
         </div>
       </div>

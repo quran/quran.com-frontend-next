@@ -67,7 +67,7 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
 
   const customWidthStyle = options.customWidth
     ? { width: options.customWidth, maxWidth: options.customWidth }
-    : { maxWidth: 800 };
+    : { width: '100%' };
   const customHeightStyle = options.customHeight
     ? { maxHeight: options.customHeight, overflow: 'auto' as const }
     : { overflow: 'hidden' as const };
