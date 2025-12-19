@@ -14,6 +14,23 @@ import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
+/**
+ * Cache key path patterns for bookmark-related API endpoints.
+ * Used for pattern-based cache invalidation with SWR's globalMutate.
+ */
+export const BOOKMARK_CACHE_PATHS = {
+  /** Bulk bookmark fetch for reader pages (e.g., bookmarks/ayahs-range?...) */
+  AYAHS_RANGE: 'bookmarks/ayahs-range?',
+  /** Single bookmark check (e.g., bookmarks/bookmark?...) */
+  BOOKMARK: 'bookmarks/bookmark?',
+  /** Bookmarks list (e.g., /bookmarks?...) */
+  BOOKMARKS_LIST: '/bookmarks?',
+  /** Collections list (e.g., /collections?...) */
+  COLLECTIONS: '/collections?',
+  /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
+  BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
+} as const;
+
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return getProxiedServiceUrl(QuranFoundationService.AUTH, `/${url}`);
@@ -39,6 +56,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -59,8 +78,8 @@ export const makeSignInUrl = (): string => makeUrl('users/login');
 
 export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
-export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
-  makeUrl('bookmarks', { mushafId, limit });
+export const makeBookmarksUrl = (mushafId: number, limit?: number, type?: BookmarkType): string =>
+  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }) });
 
 export type CollectionsQueryParams = {
   cursor?: string;
