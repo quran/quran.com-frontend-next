@@ -56,6 +56,7 @@
   "checkboxes": {
     "audio": "Enable audio playback",
     "wordByWord": "Enable word-by-word translation",
+    "showArabic": "Show Arabic verse",
     "translator": "Show translator name",
     "quranLink": "Show Quran.com attribution link",
     "customSize": "Use custom width/height"

@@ -77,6 +77,7 @@ const useAyahWidgetPreview = ({
     script.setAttribute('data-quran-show-translator-names', String(preferences.showTranslatorName));
     script.setAttribute('data-quran-show-quran-link', String(preferences.showQuranLink));
     script.setAttribute('data-quran-mushaf', preferences.mushaf);
+    script.setAttribute('data-quran-show-arabic', String(preferences.showArabic));
     script.setAttribute('data-width', widthValue);
     if (heightValue) {
       script.setAttribute('data-height', heightValue);
@@ -102,6 +103,7 @@ const useAyahWidgetPreview = ({
     preferences.reciter,
     preferences.selectedAyah,
     preferences.selectedSurah,
+    preferences.showArabic,
     preferences.showQuranLink,
     preferences.showTranslatorName,
     preferences.theme,

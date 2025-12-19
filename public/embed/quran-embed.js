@@ -26,6 +26,7 @@
     mushaf: currentScript.getAttribute('data-quran-mushaf') || 'qpc',
     width: currentScript.getAttribute('data-width') || '',
     height: currentScript.getAttribute('data-height') || '',
+    showArabic: currentScript.getAttribute('data-quran-show-arabic') || 'true',
   };
 
   if (!config.target) {
@@ -74,6 +75,7 @@
   setParam('width', config.width);
   setParam('height', config.height);
   setParam('mushaf', config.mushaf);
+  setParam('showArabic', config.showArabic);
 
   const fallbackCopy = (text) => {
     const textarea = document.createElement('textarea');

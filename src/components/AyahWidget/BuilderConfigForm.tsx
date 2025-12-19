@@ -128,7 +128,24 @@ const BuilderConfigForm = ({
         </select>
       </div>
 
-      <div className={styles.field}>
+      <div className={styles.checkboxRow}>
+        <input
+          id="show-arabic-toggle"
+          type="checkbox"
+          checked={preferences.showArabic}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              showArabic: event.target.checked,
+            }))
+          }
+        />
+        <label className={styles.checkboxLabel} htmlFor="show-arabic-toggle">
+          {t('checkboxes.showArabic')}
+        </label>
+      </div>
+
+      <div className={`${styles.field} ${!preferences.showArabic ? styles.disabled : ''}`}>
         <label className={styles.label} htmlFor="mushaf-select">
           {t('fields.mushaf')}
         </label>
@@ -136,6 +153,7 @@ const BuilderConfigForm = ({
           id="mushaf-select"
           className={styles.select}
           value={preferences.mushaf}
+          disabled={!preferences.showArabic}
           onChange={(event) =>
             setPreferences((prev) => ({
               ...prev,
@@ -261,6 +279,7 @@ const BuilderConfigForm = ({
               enableWbwTranslation: event.target.checked,
             }))
           }
+          disabled={!preferences.showArabic}
         />
         <label className={styles.checkboxLabel} htmlFor="wbw-toggle">
           {t('checkboxes.wordByWord')}

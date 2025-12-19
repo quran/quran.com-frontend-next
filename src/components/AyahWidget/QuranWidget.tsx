@@ -56,15 +56,42 @@ const getColors = (theme: WidgetOptions['theme']): WidgetColors => {
 };
 
 /**
+ * Get the content padding for the widget.
+ * @param {boolean} showArabic Whether to show the Arabic text.
+ * @param {boolean} hasTranslations Whether the verse has translations.
+ * @returns {string} The content padding CSS value.
+ */
+const getContentPadding = (showArabic: boolean, hasTranslations: boolean): string => {
+  if (!showArabic) {
+    return '0px 24px 0 24px';
+  }
+  return hasTranslations ? '20px 24px 0 24px' : '20px 24px 20px 24px';
+};
+
+/**
  * Quran Widget Component
  * @returns {JSX.Element} QuranWidget JSX Element
  */
 const QuranWidget = ({ verse, options }: Props): JSX.Element => {
+  // Get widget colors based on the selected theme
   const colors = getColors(options.theme);
-  const audioUrl = options.audioUrl || null;
-  const mushafBaseFontFaces = buildMushafFontFaceCss();
-  const qcfFontFaces = buildQcffFontFaceCss(options.mushaf, verse.pageNumber, options.theme);
 
+  // Get audio URL if audio is enabled
+  const audioUrl = options.audioUrl || null;
+
+  // Build font-face CSS for mushaf and QCF fonts
+  const mushafBaseFontFaces = options.showArabic ? buildMushafFontFaceCss() : '';
+  const qcfFontFaces = options.showArabic
+    ? buildQcffFontFaceCss(options.mushaf, verse.pageNumber, options.theme)
+    : '';
+
+  // Get translations and content padding
+  const translations = verse.translations ?? [];
+
+  // Determine content padding based on whether Arabic text and translations are shown
+  const contentPadding = getContentPadding(options.showArabic, translations.length > 0);
+
+  // Apply custom width and height styles if provided
   const customWidthStyle = options.customWidth
     ? { width: options.customWidth, maxWidth: options.customWidth }
     : { width: '100%' };
@@ -92,8 +119,13 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
         }}
       >
         <WidgetHeader verse={verse} options={options} colors={colors} />
-        <div style={{ padding: '20px 24px 0 24px' }}>
-          <ArabicVerse verse={verse} options={options} colors={colors} />
+        <div
+          style={{
+            padding: contentPadding,
+          }}
+          data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
+        >
+          {options.showArabic && <ArabicVerse verse={verse} options={options} colors={colors} />}
           <Translations verse={verse} options={options} colors={colors} />
         </div>
         <QdcLink verse={verse} options={options} colors={colors} />

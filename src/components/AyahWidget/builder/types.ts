@@ -17,6 +17,7 @@ export type Preferences = {
   showTranslatorName: boolean;
   showQuranLink: boolean;
   reciter: number | null;
+  showArabic: boolean;
   customSize: {
     width: string;
     height: string;

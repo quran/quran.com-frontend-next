@@ -33,6 +33,9 @@ export type WidgetOptions = {
   // Should the widget display translator names
   showTranslatorNames: boolean;
 
+  // Should the arabic verse be rendered
+  showArabic: boolean;
+
   // Should the widget display the Quran.com link
   showQuranLink: boolean;
 

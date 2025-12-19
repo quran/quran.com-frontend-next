@@ -109,6 +109,7 @@ const buildWidgetOptions = (
     showQuranLink: boolean;
     customWidth?: string;
     customHeight?: string;
+    showArabic: boolean;
   },
   meta?: {
     hasAnyTranslations: boolean;
@@ -124,6 +125,7 @@ const buildWidgetOptions = (
   mushaf: params.mushaf,
   showTranslatorNames: params.showTranslatorNames,
   showQuranLink: params.showQuranLink,
+  showArabic: params.showArabic,
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
   surahName: meta?.surahName,
@@ -233,6 +235,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const mushaf: MushafType = isMushafType(mushafParam) ? mushafParam : 'qpc';
   const showTranslatorNames = parseBool(req.query.showTranslatorNames);
   const showQuranLink = parseBool(req.query.showQuranLink, true);
+  const showArabic = parseBool(req.query.showArabic, true);
   const customWidth = parseString(req.query.width) || undefined;
   const customHeight = parseString(req.query.height) || undefined;
   const reciterId = Number(reciter) || Number(DEFAULT_RECITER);
@@ -335,6 +338,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         mushaf,
         showTranslatorNames,
         showQuranLink,
+        showArabic,
         customWidth,
         customHeight,
       },

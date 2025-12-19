@@ -9,9 +9,9 @@ type Props = {
   colors: WidgetColors;
 };
 
-const containerStyle: React.CSSProperties = {
-  marginTop: 12,
-};
+const getContainerStyle = (showArabic: boolean): React.CSSProperties => ({
+  marginTop: showArabic ? 12 : 0,
+});
 
 const translationTextStyle = (
   colors: WidgetColors,
@@ -36,11 +36,14 @@ const Translations = ({ verse, options, colors }: Props): JSX.Element | null => 
   }
 
   return (
-    <div style={containerStyle} data-translations>
+    <div style={getContainerStyle(options.showArabic)} data-translations>
       {translations.map((translation) => (
         <div
           key={translation.id ?? translation.resourceId}
-          style={{ padding: '16px 0', borderTop: `1px solid ${colors.borderColor}` }}
+          style={{
+            padding: '16px 0',
+            borderTop: options.showArabic ? `1px solid ${colors.borderColor}` : 'none',
+          }}
         >
           <div
             data-translation-text

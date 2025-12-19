@@ -39,6 +39,7 @@ const INITIAL_PREFERENCES: Preferences = {
   showTranslatorName: false,
   showQuranLink: true,
   reciter: DEFAULT_RECITER,
+  showArabic: true,
   customSize: {
     width: '100%',
     height: '',
@@ -177,6 +178,7 @@ const AyahWidgetBuilderPage = () => {
       containerStyles.push(`height: ${heightValue}`);
     }
 
+    const showArabicValue = preferences.showArabic ? 'true' : 'false';
     const attributes = [
       `src="${DEFAULT_SNIPPET_SCRIPT}"`,
       `data-quran-target="${preferences.containerId}"`,
@@ -198,6 +200,7 @@ const AyahWidgetBuilderPage = () => {
     }
 
     attributes.push(`data-width="${widthValue}"`);
+    attributes.push(`data-quran-show-arabic="${showArabicValue}"`);
     if (heightValue) {
       attributes.push(`data-height="${heightValue}"`);
     }
@@ -222,6 +225,7 @@ const AyahWidgetBuilderPage = () => {
     preferences.reciter,
     preferences.selectedAyah,
     preferences.selectedSurah,
+    preferences.showArabic,
     preferences.showQuranLink,
     preferences.showTranslatorName,
     preferences.theme,
