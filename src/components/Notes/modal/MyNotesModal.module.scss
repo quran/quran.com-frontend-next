@@ -1,28 +1,6 @@
 @use '@/styles/breakpoints';
 @use '@/styles/utility';
 
-.title {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded);
-  font-size: var(--font-size-large2);
-}
-
-.overlay {
-  @include breakpoints.smallerThanTablet {
-    place-items: end;
-  }
-}
-
-.content {
-  max-inline-size: 48rem;
-
-  @include breakpoints.smallerThanTablet {
-    height: auto;
-    max-height: 100%;
-    padding-bottom: var(--spacing-large);
-  }
-}
-
 .container {
   display: flex;
   flex-direction: column;

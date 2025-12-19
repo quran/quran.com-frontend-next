@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
+import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import MyNotesModal from '@/components/Notes/modal/MyNotesModal';
 import translationViewStyles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
@@ -12,6 +13,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
+import { Note } from '@/types/auth/Note';
 import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -19,6 +21,7 @@ import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/n
 enum ModalType {
   ADD_NOTE = 'add-note',
   MY_NOTES = 'my-notes',
+  EDIT_NOTE = 'edit-note',
 }
 
 interface NoteActionProps {
@@ -34,6 +37,7 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
   const router = useRouter();
   const { t } = useTranslation();
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+  const [editingNote, setEditingNote] = useState<Note | null>(null);
   const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
 
   const closeModal = useCallback(() => {
@@ -59,6 +63,11 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
 
   const openMyNotesModal = useCallback(() => {
     setActiveModal(ModalType.MY_NOTES);
+  }, []);
+
+  const openEditNoteModal = useCallback((note: Note) => {
+    setEditingNote(note);
+    setActiveModal(ModalType.EDIT_NOTE);
   }, []);
 
   return (
@@ -87,7 +96,6 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
 
       <AddNoteModal
         isModalOpen={activeModal === ModalType.ADD_NOTE}
-        onModalOpen={openAddNoteModal}
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
         notesCount={notesCount?.[verse.verseKey] ?? 0}
@@ -98,6 +106,14 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
         onClose={closeModal}
         notesCount={notesCount?.[verse.verseKey] ?? 0}
         onAddNote={openAddNoteModal}
+        onEditNote={openEditNoteModal}
+      />
+
+      <EditNoteModal
+        note={editingNote}
+        isModalOpen={activeModal === ModalType.EDIT_NOTE}
+        onModalClose={closeModal}
+        onMyNotes={openMyNotesModal}
       />
     </>
   );
