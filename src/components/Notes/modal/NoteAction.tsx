@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
-import MyNotesModal from '@/components/Notes/modal/MyNotesModal';
+import MyNotesModal from '@/components/Notes/modal/MyNotes/index';
 import translationViewStyles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
