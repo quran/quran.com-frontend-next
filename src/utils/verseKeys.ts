@@ -100,37 +100,38 @@ export const parseVerseRange = <AsNumbers extends boolean>(
 
 /**
  * Format verse ranges to show surah name and verse range in user's locale
- * @param {string[]} ranges The ranges array
+ * @param {string[]} rangeKeys The range keys array
  * @param {ChaptersData} chaptersData
  * @param {string} lang
  * @returns {string} Readable verse ranges string
  */
-export const readableVerseRanges = (
-  ranges: string[],
+export const readableVerseRangeKeys = (
+  rangeKeys: string[],
   chaptersData: ChaptersData,
   lang: string,
-): string => {
-  const isMoreThenOneRange = ranges.length > 1;
+): string[] => {
+  return rangeKeys
+    .map((rangeKey) => {
+      const parsedRange = parseVerseRange(rangeKey, true);
+      if ((parsedRange?.length ?? 0) !== 2) return null;
 
-  const firstRange = ranges[0];
-  const parsedRange = parseVerseRange(firstRange, true);
-  if ((parsedRange?.length ?? 0) !== 2) return '';
-  const isSingleVerse = parsedRange?.[0]?.verse === parsedRange?.[1]?.verse;
-  const from = parsedRange[0];
+      const from = parsedRange[0];
+      const to = parsedRange[1];
 
-  const showMinimalUi = shouldUseMinimalLayout(lang);
+      const showMinimalUi = shouldUseMinimalLayout(lang);
 
-  const chapterData = getChapterData(chaptersData, from.chapter.toString());
-  const chapterName = showMinimalUi ? chapterData.translatedName : chapterData.transliteratedName;
+      const chapterData = getChapterData(chaptersData, from.chapter.toString());
+      const chapterName = showMinimalUi
+        ? chapterData.translatedName
+        : chapterData.transliteratedName;
 
-  const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
+      const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
 
-  if (isSingleVerse) {
-    return isMoreThenOneRange ? `${titleForm} +` : titleForm;
-  }
+      if (from.verse === to.verse) {
+        return titleForm;
+      }
 
-  const to = parsedRange[1];
-
-  const titleFull = `${titleForm} - ${toLocalizedVerseKey(to.verseKey, lang)}`;
-  return isMoreThenOneRange ? `${titleFull} +` : titleFull;
+      return `${titleForm}-${toLocalizedVerseKey(to.verseKey, lang)}`;
+    })
+    .filter(Boolean);
 };

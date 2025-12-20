@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,14 +9,17 @@ import NotesOnVerseButton from '@/components/Notes/modal/NotesOnVerseButton';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ReflectionIntro from '@/components/Notes/modal/ReflectionIntro';
 import { LoadingState, useNotesStates } from '@/components/Notes/modal/useNotesStates';
+import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import TextArea from '@/dls/Forms/TextArea';
+import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
 interface NoteFormModalProps {
   notesCount?: number;
   showNotesOnVerseButton?: boolean;
   initialNote?: string;
+  ranges?: string[];
   header: React.ReactNode;
   onMyNotes: () => void;
   isModalOpen: boolean;
@@ -28,13 +31,15 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
   notesCount = 0,
   showNotesOnVerseButton = true,
   initialNote = '',
+  ranges,
   header,
   onMyNotes,
   isModalOpen,
   onModalClose,
   onSaveNote = async () => {},
 }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
+  const chaptersData = useContext(DataContext);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const {
@@ -45,7 +50,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
     onPrivateSave,
     onPublicSaveRequest,
     validateNoteInput,
-  } = useNotesStates(initialNote, onSaveNote, onMyNotes);
+  } = useNotesStates(initialNote, onSaveNote, onMyNotes, isModalOpen);
 
   const handlePublicSaveClick = () => {
     if (validateNoteInput()) {
@@ -66,6 +71,11 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
     setShowConfirmationModal(false);
   };
 
+  const verseRanges = useMemo(() => {
+    if (!ranges || ranges.length === 0) return [];
+    return readableVerseRangeKeys(ranges, chaptersData, lang);
+  }, [ranges, chaptersData, lang]);
+
   return (
     <>
       <ContentModal
@@ -79,6 +89,16 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
       >
         <div className={styles.container}>
           <ReflectionIntro />
+
+          {verseRanges.length > 0 && (
+            <div className={styles.verseRangesContainer}>
+              {verseRanges.map((range) => (
+                <span key={range} className={styles.verseRangePill}>
+                  {range}
+                </span>
+              ))}
+            </div>
+          )}
 
           <div className={styles.inputGroup}>
             <TextArea

@@ -28,6 +28,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
     <NoteFormModal
       key={note?.id}
       initialNote={note?.body || ''}
+      ranges={note?.ranges}
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
       onMyNotes={onMyNotes}

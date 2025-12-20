@@ -15,8 +15,8 @@ import PlusIcon from '@/icons/plus.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
 import { Note } from '@/types/auth/Note';
 import { getNotesByVerse } from '@/utils/auth/api';
-import { getLangFullLocale } from '@/utils/locale';
-import { readableVerseRanges } from '@/utils/verseKeys';
+import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
+import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
 interface MyNotesProps {
   onAddNote: () => void;
@@ -37,7 +37,10 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
   const formatNoteTitle = useCallback(
     (note: Note) => {
       if (!note.ranges || note.ranges.length === 0) return '';
-      return readableVerseRanges(note.ranges, chaptersData, lang);
+      const readableRangeKeys = readableVerseRangeKeys(note.ranges, chaptersData, lang);
+      if (readableRangeKeys.length === 0) return '';
+      if (readableRangeKeys.length === 1) return readableRangeKeys[0];
+      return `${readableRangeKeys[0]} + ${toLocalizedNumber(readableRangeKeys.length - 1, lang)}`;
     },
     [chaptersData, lang],
   );

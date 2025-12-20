@@ -120,3 +120,19 @@ div.textArea {
 .error {
   color: var(--color-text-error);
 }
+
+.verseRangesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.verseRangePill {
+  display: inline-block;
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-default-new);
+  padding-inline: var(--spacing-medium-px);
+  padding-block: var(--spacing-xsmall-px);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-small);
+}
