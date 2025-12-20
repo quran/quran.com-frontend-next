@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -16,6 +16,7 @@ export const useNotesStates = (
   initialNote: string,
   onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>,
   onMyNotes?: () => void,
+  isModalOpen?: boolean,
 ) => {
   const { t } = useTranslation();
 
@@ -88,6 +89,10 @@ export const useNotesStates = (
     setNoteInput(value);
     setErrors({});
   };
+
+  useEffect(() => {
+    setErrors({});
+  }, [isModalOpen]);
 
   return {
     noteInput,
