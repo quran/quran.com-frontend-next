@@ -38,7 +38,10 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
   const { t } = useTranslation();
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
   const [editingNote, setEditingNote] = useState<Note | null>(null);
-  const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
+
+  const { data: notesCount } = useCountRangeNotes(
+    activeModal && { from: verse.verseKey, to: verse.verseKey },
+  );
 
   const closeModal = useCallback(() => {
     setActiveModal(null);
@@ -107,6 +110,7 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
         notesCount={notesCount?.[verse.verseKey] ?? 0}
         onAddNote={openAddNoteModal}
         onEditNote={openEditNoteModal}
+        verseKey={verse.verseKey}
       />
 
       <EditNoteModal
