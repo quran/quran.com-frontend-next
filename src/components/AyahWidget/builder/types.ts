@@ -18,6 +18,8 @@ export type Preferences = {
   showQuranLink: boolean;
   reciter: number | null;
   showArabic: boolean;
+  rangeEnabled: boolean;
+  rangeEnd: number;
   customSize: {
     width: string;
     height: string;

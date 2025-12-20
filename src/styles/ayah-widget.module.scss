@@ -110,6 +110,17 @@
   margin-block-end: 0;
 }
 
+.rangeRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rangeSeparator {
+  color: var(--color-text-default);
+  font-weight: 600;
+}
+
 .checkboxRow {
   display: flex;
   align-items: center;

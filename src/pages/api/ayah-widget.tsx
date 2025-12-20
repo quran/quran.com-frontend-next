@@ -103,6 +103,7 @@ const buildWidgetOptions = (
   params: {
     enableAudio: boolean;
     enableWbw: boolean;
+    rangeEnd?: number;
     theme: ThemeTypeVariant;
     mushaf: MushafType;
     showTranslatorNames: boolean;
@@ -126,6 +127,7 @@ const buildWidgetOptions = (
   showTranslatorNames: params.showTranslatorNames,
   showQuranLink: params.showQuranLink,
   showArabic: params.showArabic,
+  rangeEnd: params.rangeEnd,
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
   surahName: meta?.surahName,
@@ -166,13 +168,18 @@ const enrichTranslations = (
  * @param {MushafType} mushaf The type of Mushaf to use.
  * @returns {Record<string, unknown>} The built parameters.
  */
-const buildVerseParams = (translationIds: number[], reciter: string, mushaf: MushafType) => {
+const buildVerseParams = (
+  translationIds: number[],
+  reciter: string,
+  mushaf: MushafType,
+  range?: { from: number; to: number; perPage: number },
+) => {
   const quranFont = getQuranFontForMushaf(mushaf);
   const mushafId = getMushafId(quranFont).mushaf;
 
   const params: Record<string, unknown> = {
     ...DEFAULT_VERSES_PARAMS,
-    perPage: 1,
+    perPage: range?.perPage ?? 1,
     translations: translationIds.length ? translationIds.join(',') : undefined,
     reciter,
     audio: reciter,
@@ -187,6 +194,11 @@ const buildVerseParams = (translationIds: number[], reciter: string, mushaf: Mus
   if (mushaf === 'tajweed') params.wordFields += ',text_uthmani_tajweed';
   if (mushaf === 'kfgqpc_v1' && !String(params.wordFields).includes('code_v1')) {
     params.wordFields += ',code_v1';
+  }
+
+  if (range) {
+    params.from = range.from;
+    params.to = range.to;
   }
 
   // Remove undefined parameters
@@ -224,6 +236,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
       html: '<div>Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").</div>',
     });
   }
+
+  // Parse translation IDs, reciter, and other options
   const translationIdsQuery = parseString(req.query.translations) ?? '';
   const reciter = parseString(req.query.reciter) || DEFAULT_RECITER;
   const enableAudio = parseBool(req.query.audio, true);
@@ -236,6 +250,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const showTranslatorNames = parseBool(req.query.showTranslatorNames);
   const showQuranLink = parseBool(req.query.showQuranLink, true);
   const showArabic = parseBool(req.query.showArabic, true);
+
+  // Parse range end if provided
+  const rangeEndParam = parseString(req.query.rangeEnd);
+  const [chapterSegment, verseSegment] = ayah.split(':');
+  const chapterNumber = Number(chapterSegment);
+  const verseNumber = Number(verseSegment);
+  const parsedRangeEnd = rangeEndParam ? Number(rangeEndParam) : undefined;
+  const normalizedRangeEnd =
+    parsedRangeEnd &&
+    Number.isFinite(parsedRangeEnd) &&
+    parsedRangeEnd > verseNumber &&
+    parsedRangeEnd <= verseNumber + 10 // Limit range to max 10 verses
+      ? parsedRangeEnd
+      : undefined;
+
+  // Parse custom dimensions
   const customWidth = parseString(req.query.width) || undefined;
   const customHeight = parseString(req.query.height) || undefined;
   const reciterId = Number(reciter) || Number(DEFAULT_RECITER);
@@ -247,22 +277,41 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     .filter((id) => !Number.isNaN(id));
 
   try {
-    // Fetch the verse data
-    const verseResponse = await fetcher<VerseResponse>(
-      makeByVerseKeyUrl(ayah, buildVerseParams(translationIdList, reciter, mushaf)),
+    // Build each verse key that needs to be requested; range produces multiple keys, otherwise a single verse.
+    const verseKeys = normalizedRangeEnd
+      ? Array.from(
+          { length: normalizedRangeEnd - verseNumber + 1 },
+          (unused, idx) => `${chapterNumber}:${verseNumber + idx}`,
+        )
+      : [ayah];
+    const verseResponses = await Promise.all(
+      verseKeys.map((verseKey) =>
+        fetcher<VerseResponse>(
+          makeByVerseKeyUrl(verseKey, buildVerseParams(translationIdList, reciter, mushaf)),
+        ),
+      ),
     );
-    // Sanitize the verse data
-    const verse = sanitizeVerse(verseResponse.verse);
 
-    // Enrich translations with metadata to get the author and translation names
-    const translationResourceIds = (verse.translations ?? [])
-      .map((translation) => translation.resourceId)
-      .filter((resourceId): resourceId is number => typeof resourceId === 'number');
+    const verses = verseResponses.map((response) => response.verse).filter(Boolean) as Verse[];
+    if (!verses.length) {
+      throw new Error('No verses returned for the requested range.');
+    }
 
-    if (translationResourceIds.length && verse.translations?.length) {
+    // Sanitize verses
+    const sanitizedVerses = verses.map(sanitizeVerse);
+    const translationResourceIds = new Set<number>();
+    sanitizedVerses.forEach((verseItem) => {
+      verseItem.translations?.forEach((translation) => {
+        if (translation.resourceId) {
+          translationResourceIds.add(translation.resourceId);
+        }
+      });
+    });
+
+    if (translationResourceIds.size) {
       try {
         const translationsMeta = await fetcher<TranslationsResponse>(
-          makeTranslationsInfoUrl('en', translationResourceIds),
+          makeTranslationsInfoUrl('en', Array.from(translationResourceIds)),
         );
         const metaById = new Map<number, AvailableTranslation>();
         translationsMeta.translations?.forEach((translation) => {
@@ -270,26 +319,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
             metaById.set(translation.id, translation);
           }
         });
-        verse.translations = enrichTranslations(verse.translations, metaById);
+        sanitizedVerses.forEach((verseItem, index) => {
+          const enrichedTranslations = enrichTranslations(verseItem.translations, metaById);
+          sanitizedVerses[index] = {
+            ...verseItem,
+            translations: enrichedTranslations,
+          };
+        });
       } catch (error) {
-        // Log error if translation metadata fails to load
         logDebug('Ayah widget: Failed to load translation metadata', {
           error,
-          translationResourceIds,
+          translationResourceIds: Array.from(translationResourceIds),
           ayah,
         });
       }
     }
 
-    // Fetch chapter info for Surah name and audio timings if needed
-    const surahCandidate = verse.chapterId || Number.parseInt(ayah.split(':')[0] || '0', 10);
+    // Fetch Surah name and audio data if needed
+    const chapterCandidate = sanitizedVerses[0].chapterId || chapterNumber;
     let surahName: string | undefined;
     let audioUrl: string | undefined;
     let audioStartSeconds: number | undefined;
     let audioEndSeconds: number | undefined;
 
-    // Turn the chapter number to the Surah name
-    const numericChapterId = Number(surahCandidate);
+    // Turn the chapter number into its transliterated name
+    const numericChapterId = Number(chapterCandidate);
     if (Number.isFinite(numericChapterId) && numericChapterId > 0) {
       try {
         const chapterResponse = await fetcher<ChapterResponse>(
@@ -298,7 +352,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         const chapterData = chapterResponse.chapter;
         surahName = chapterData?.nameSimple;
       } catch (error) {
-        // Log error if chapter info fails to load
         logDebug('Failed to fetch chapter info for Surah name', { numericChapterId, error });
       }
 
@@ -311,13 +364,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
             true,
           );
           audioUrl = fetchedAudioUrl;
-          const timing = verseTimings?.find(
-            (verseTiming) => verseTiming.verseKey === verse.verseKey,
+          // Find start and end timings for the requested verse(s)
+          const firstVerse = sanitizedVerses[0];
+          const lastVerse = sanitizedVerses[sanitizedVerses.length - 1];
+          const startTiming = verseTimings?.find(
+            (verseTiming) => verseTiming.verseKey === firstVerse.verseKey,
           );
-          if (timing) {
-            audioStartSeconds = timing.timestampFrom / 1000;
-            audioEndSeconds = timing.timestampTo / 1000;
-          }
+          const endTiming = verseTimings?.find(
+            (verseTiming) => verseTiming.verseKey === lastVerse.verseKey,
+          );
+          if (startTiming) audioStartSeconds = startTiming.timestampFrom / 1000;
+          if (endTiming) audioEndSeconds = endTiming.timestampTo / 1000;
         } catch (error) {
           logDebug('Ayah widget audio data load error', {
             error,
@@ -328,7 +385,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
       }
     }
 
-    // Build widget options to render the widget
+    // Determine if any translations exist for the current ayah
+    const hasTranslations = sanitizedVerses.some(
+      (verseItem) => (verseItem.translations?.length ?? 0) > 0,
+    );
+
     const widgetOptions = buildWidgetOptions(
       ayah,
       {
@@ -339,12 +400,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         showTranslatorNames,
         showQuranLink,
         showArabic,
+        rangeEnd: normalizedRangeEnd,
         customWidth,
         customHeight,
       },
       {
-        hasAnyTranslations:
-          translationResourceIds.length > 0 || (verse.translations?.length ?? 0) > 0,
+        hasAnyTranslations: hasTranslations,
         surahName,
         audioUrl,
         audioStart: audioStartSeconds,
@@ -353,7 +414,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     );
 
     // Create the widget component and then render it to static HTML
-    const html = renderToStaticMarkup(<QuranWidget verse={verse} options={widgetOptions} />);
+    const html = renderToStaticMarkup(
+      <QuranWidget verses={sanitizedVerses} options={widgetOptions} />,
+    );
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Cache-Control', 'public, max-age=3600');

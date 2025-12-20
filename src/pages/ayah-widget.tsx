@@ -44,6 +44,8 @@ const INITIAL_PREFERENCES: Preferences = {
   showQuranLink: true,
   reciter: DEFAULTS.reciterId,
   showArabic: true,
+  rangeEnabled: false,
+  rangeEnd: DEFAULTS.ayah + 1,
   customSize: {
     width: '100%',
     height: '',
@@ -190,6 +192,10 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
   );
   pushAttrIfNotDefault('data-quran-show-quran-link', String(preferences.showQuranLink), 'false');
   pushAttrIfNotDefault('data-quran-show-arabic', String(preferences.showArabic), 'true');
+  pushAttrIfNotDefault(
+    'data-quran-range-end',
+    preferences.rangeEnabled ? String(preferences.rangeEnd) : undefined,
+  );
 
   // Some embed scripts also read width/height from data attributes.
   // Keep them for compatibility with existing embed implementations.

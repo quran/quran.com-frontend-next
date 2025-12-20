@@ -78,6 +78,11 @@ const useAyahWidgetPreview = ({
     script.setAttribute('data-quran-show-quran-link', String(preferences.showQuranLink));
     script.setAttribute('data-quran-mushaf', preferences.mushaf);
     script.setAttribute('data-quran-show-arabic', String(preferences.showArabic));
+    if (preferences.rangeEnabled) {
+      script.setAttribute('data-quran-range-end', String(preferences.rangeEnd));
+    } else {
+      script.removeAttribute('data-quran-range-end');
+    }
     script.setAttribute('data-width', widthValue);
     if (heightValue) {
       script.setAttribute('data-height', heightValue);
@@ -104,6 +109,8 @@ const useAyahWidgetPreview = ({
     preferences.selectedAyah,
     preferences.selectedSurah,
     preferences.showArabic,
+    preferences.rangeEnabled,
+    preferences.rangeEnd,
     preferences.showQuranLink,
     preferences.showTranslatorName,
     preferences.theme,

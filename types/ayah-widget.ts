@@ -36,6 +36,9 @@ export type WidgetOptions = {
   // Should the arabic verse be rendered
   showArabic: boolean;
 
+  // Inclusive ending verse number when rendering a range
+  rangeEnd?: number;
+
   // Should the widget display the Quran.com link
   showQuranLink: boolean;
 

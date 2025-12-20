@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import { buildMushafFontFaceCss, buildQcffFontFaceCss } from './mushaf-fonts';
@@ -11,7 +12,7 @@ import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
 import type Verse from 'types/Verse';
 
 type Props = {
-  verse: Verse;
+  verses: Verse[];
   options: WidgetOptions;
 };
 
@@ -69,10 +70,34 @@ const getContentPadding = (showArabic: boolean, hasTranslations: boolean): strin
 };
 
 /**
+ * Get the margin-top value for a verse item based on its position.
+ * @param {number} index The index of the verse in the list.
+ * @param {boolean} showArabic Whether the Arabic text is shown.
+ * @returns {number} The margin-top value in pixels.
+ */
+const getVerseMarginTop = (index: number, showArabic: boolean): number => {
+  if (index === 0) {
+    return 0;
+  }
+  if (showArabic) {
+    return 20;
+  }
+  return 0;
+};
+
+/**
  * Quran Widget Component
  * @returns {JSX.Element} QuranWidget JSX Element
  */
-const QuranWidget = ({ verse, options }: Props): JSX.Element => {
+const QuranWidget = ({ verses, options }: Props): JSX.Element => {
+  if (!verses.length) {
+    return <div />;
+  }
+  const chapterNumber =
+    verses[0]?.chapterId ?? (Number(options.ayah.split(':')[0] || 0) || undefined);
+  const startVerse = verses[0]?.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
+  const verseLabel = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
+  const rangeCaption = chapterNumber ? `${chapterNumber}:${verseLabel}` : options.ayah;
   // Get widget colors based on the selected theme
   const colors = getColors(options.theme);
 
@@ -80,16 +105,25 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
   const audioUrl = options.audioUrl || null;
 
   // Build font-face CSS for mushaf and QCF fonts
+  const firstVerse = verses[0];
   const mushafBaseFontFaces = options.showArabic ? buildMushafFontFaceCss() : '';
+  const uniquePages = Array.from(
+    new Set(
+      verses
+        .map((verseItem) => verseItem.pageNumber)
+        .filter((pageNumber): pageNumber is number => typeof pageNumber === 'number'),
+    ),
+  );
   const qcfFontFaces = options.showArabic
-    ? buildQcffFontFaceCss(options.mushaf, verse.pageNumber, options.theme)
+    ? uniquePages
+        .map((pageNumber) => buildQcffFontFaceCss(options.mushaf, pageNumber, options.theme))
+        .join('\n')
     : '';
 
-  // Get translations and content padding
-  const translations = verse.translations ?? [];
+  const hasTranslations = verses.some((verseItem) => (verseItem.translations?.length ?? 0) > 0);
 
   // Determine content padding based on whether Arabic text and translations are shown
-  const contentPadding = getContentPadding(options.showArabic, translations.length > 0);
+  const contentPadding = getContentPadding(options.showArabic, hasTranslations);
 
   // Apply custom width and height styles if provided
   const customWidthStyle = options.customWidth
@@ -118,17 +152,37 @@ const QuranWidget = ({ verse, options }: Props): JSX.Element => {
           ...customHeightStyle,
         }}
       >
-        <WidgetHeader verse={verse} options={options} colors={colors} />
+        <WidgetHeader verse={firstVerse} options={options} colors={colors} />
         <div
           style={{
             padding: contentPadding,
           }}
           data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
+          data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
         >
-          {options.showArabic && <ArabicVerse verse={verse} options={options} colors={colors} />}
-          <Translations verse={verse} options={options} colors={colors} />
+          {/* Render each verse block in the range sequentially. */}
+          {verses.map((verseItem, index) => {
+            const marginTop = getVerseMarginTop(index, options.showArabic);
+            return (
+              <div
+                key={
+                  verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`
+                }
+                data-verse-block
+                data-verse-key={verseItem.verseKey ?? ''}
+                data-verse-number={verseItem.verseNumber}
+                data-surah-name={options.surahName}
+                style={{ marginTop }}
+              >
+                {options.showArabic && (
+                  <ArabicVerse verse={verseItem} options={options} colors={colors} />
+                )}
+                <Translations verse={verseItem} options={options} colors={colors} />
+              </div>
+            );
+          })}
         </div>
-        <QdcLink verse={verse} options={options} colors={colors} />
+        <QdcLink verse={firstVerse} options={options} colors={colors} />
         {options.enableAudio && audioUrl && (
           <audio
             data-audio-element

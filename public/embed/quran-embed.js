@@ -26,6 +26,7 @@
     mushaf: currentScript.getAttribute('data-quran-mushaf') || 'qpc',
     width: currentScript.getAttribute('data-width') || '',
     height: currentScript.getAttribute('data-height') || '',
+    rangeEnd: currentScript.getAttribute('data-quran-range-end') || '',
     showArabic: currentScript.getAttribute('data-quran-show-arabic') || 'true',
   };
 
@@ -76,6 +77,7 @@
   setParam('height', config.height);
   setParam('mushaf', config.mushaf);
   setParam('showArabic', config.showArabic);
+  setParam('rangeEnd', config.rangeEnd);
 
   const fallbackCopy = (text) => {
     const textarea = document.createElement('textarea');
@@ -94,11 +96,23 @@
   };
 
   const copyVerse = (root) => {
-    const verseNode = root.querySelector('[data-verse-text]');
-    const translationNodes = root.querySelectorAll('[data-translation-text]');
-    if (!verseNode) {
+    const wrapper = root.querySelector('[data-translations-wrapper]');
+    if (!wrapper) {
       return;
     }
+    const verseBlocks = wrapper.querySelectorAll('[data-verse-block]');
+    if (!verseBlocks.length) {
+      return;
+    }
+
+    const { rangeCaption } = wrapper.dataset;
+    const chapterFromCaption = rangeCaption?.split(':')[0] || '';
+    const urlSuffix = rangeCaption?.split(':')[1] || '';
+    const url =
+      chapterFromCaption && urlSuffix
+        ? `https://quran.com/${chapterFromCaption}/${urlSuffix.replace(':', '-')}`
+        : '';
+    const { surahName } = verseBlocks[0].dataset;
 
     const arabicDigits = [
       '\u0660',
@@ -112,40 +126,43 @@
       '\u0668',
       '\u0669',
     ];
-    const pieces = [];
-    const { verseKey } = verseNode.dataset;
-    const { surahName } = verseNode.dataset;
-    const { arabicVerse } = verseNode.dataset;
+    const toArabicNumber = (value = '') =>
+      value.replace(/\d/g, (digit) => arabicDigits[Number(digit)] ?? digit);
+    const arabicPieces = [];
+    const translationPieces = [];
 
-    if (surahName && verseKey) {
-      pieces.push(`${surahName} (${verseKey})`);
-    }
-
-    if (arabicVerse && verseKey) {
-      const verseNumber = verseKey.split(':')[1] || '';
-      const arabicVerseNumber = verseNumber
-        .split('')
-        .map((digit) => {
-          const index = Number(digit);
-          return Number.isNaN(index) ? digit : arabicDigits[index] || digit;
-        })
-        .join('');
-      pieces.push(`${arabicVerse} ${arabicVerseNumber}`.trim());
-    }
-
-    translationNodes.forEach((node) => {
-      const text = node.textContent ? node.textContent.trim() : '';
-      if (!text) {
-        return;
+    verseBlocks.forEach((block) => {
+      const verseKey = block.dataset.verseKey || '';
+      const verseNumber = block.dataset.verseNumber || verseKey.split(':')[1] || '';
+      const verseNumberArabic = toArabicNumber(verseNumber);
+      const arabicNode = block.querySelector('[data-verse-text]');
+      if (arabicNode?.dataset?.arabicVerse) {
+        arabicPieces.push(`${arabicNode.dataset.arabicVerse.trim()} ${verseNumberArabic}`);
       }
-      const translator = node.dataset.translatorName;
-      pieces.push(translator ? `${text}\n— ${translator}` : text);
+
+      const translationNodes = block.querySelectorAll('[data-translation-text]');
+      translationNodes.forEach((node) => {
+        const text = node.textContent ? node.textContent.trim() : '';
+        if (!text) {
+          return;
+        }
+        const translator = node.dataset.translatorName;
+        const prefix = verseBlocks.length > 1 ? `${verseNumber}. ` : '';
+        const suffix = ` ${verseNumberArabic}`;
+        translationPieces.push(
+          translator ? `${prefix}${text}${suffix}\n- ${translator}` : `${prefix}${text}${suffix}`,
+        );
+      });
     });
 
-    if (verseKey) {
-      pieces.push(`https://quran.com/${verseKey.replace(':', '/')}`);
-    }
-
+    const heading =
+      surahName && rangeCaption ? `${surahName} (${rangeCaption})` : rangeCaption || '';
+    const pieces = [
+      heading,
+      arabicPieces.length ? arabicPieces.join('\n') : '',
+      translationPieces.length ? translationPieces.join('\n\n') : '',
+      url,
+    ].filter(Boolean);
     const combined = pieces.join('\n\n');
     if (!combined) {
       return;

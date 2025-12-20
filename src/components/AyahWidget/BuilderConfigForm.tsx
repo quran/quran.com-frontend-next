@@ -24,6 +24,13 @@ type Props = {
   reciters: Reciter[];
 };
 
+/**
+ * Builder form for the Ayah widget configuration.
+ * It exposes controls for range selection, translations, and widget options.
+ *
+ * @param {Props} props The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
 const BuilderConfigForm = ({
   preferences,
   setPreferences,
@@ -37,6 +44,47 @@ const BuilderConfigForm = ({
   reciters,
 }: Props) => {
   const { t } = useTranslation('ayah-widget');
+
+  // Prepare range selection options based on the selected ayah.
+  const rangeStart = preferences.selectedAyah;
+  const verseMax = verseOptions.length ? verseOptions[verseOptions.length - 1] : rangeStart;
+  const rangeEndCap = Math.min(rangeStart + 10, verseMax);
+  const rangeOptions = React.useMemo(() => {
+    if (rangeEndCap <= rangeStart) {
+      return [];
+    }
+    return Array.from({ length: rangeEndCap - rangeStart }, (unused, idx) => rangeStart + idx + 1);
+  }, [rangeEndCap, rangeStart]);
+  const rangeSelectable = rangeOptions.length > 0;
+
+  // Keep the range metadata normalized whenever the selection changes.
+  React.useEffect(() => {
+    setPreferences((prev) => {
+      let next = prev;
+      if (!rangeSelectable && prev.rangeEnabled) {
+        next = { ...next, rangeEnabled: false };
+      }
+      if (prev.rangeEnabled && rangeSelectable) {
+        const lowerBound = rangeOptions[0];
+        const upperBound = rangeOptions[rangeOptions.length - 1];
+        const validEnd =
+          prev.rangeEnd && prev.rangeEnd > prev.selectedAyah
+            ? Math.min(Math.max(prev.rangeEnd, lowerBound), upperBound)
+            : lowerBound;
+        if (validEnd !== prev.rangeEnd) {
+          next = { ...next, rangeEnd: validEnd };
+        }
+      }
+      return next === prev ? prev : next;
+    });
+  }, [
+    rangeSelectable,
+    rangeOptions,
+    preferences.rangeEnabled,
+    preferences.selectedAyah,
+    setPreferences,
+  ]);
+
   return (
     <section className={styles.panel}>
       <h2 className={styles.panelTitle}>{t('sections.configuration')}</h2>
@@ -86,24 +134,67 @@ const BuilderConfigForm = ({
           <label className={styles.label} htmlFor="ayah-select">
             {t('fields.ayah')}
           </label>
-          <select
-            id="ayah-select"
-            className={styles.select}
-            value={preferences.selectedAyah}
+          <div className={styles.rangeRow}>
+            <select
+              id="ayah-select"
+              className={styles.select}
+              value={preferences.selectedAyah}
+              onChange={(event) =>
+                setPreferences((prev) => ({
+                  ...prev,
+                  selectedAyah: Number(event.target.value),
+                }))
+              }
+            >
+              {verseOptions.length === 0 && <option>{t('states.loadingVerses')}</option>}
+              {verseOptions.map((ayah) => (
+                <option key={ayah} value={ayah}>
+                  {ayah}
+                </option>
+              ))}
+            </select>
+            {preferences.rangeEnabled && rangeSelectable && (
+              <>
+                <span className={styles.rangeSeparator}>-</span>
+                <select
+                  id="range-end-select"
+                  className={styles.select}
+                  value={preferences.rangeEnd}
+                  onChange={(event) =>
+                    setPreferences((prev) => ({
+                      ...prev,
+                      rangeEnd: Number(event.target.value),
+                    }))
+                  }
+                >
+                  {rangeOptions.map((ayah) => (
+                    <option key={ayah} value={ayah}>
+                      {ayah}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.checkboxRow}>
+          <input
+            id="range-toggle"
+            type="checkbox"
+            checked={preferences.rangeEnabled}
+            disabled={!rangeSelectable}
             onChange={(event) =>
               setPreferences((prev) => ({
                 ...prev,
-                selectedAyah: Number(event.target.value),
+                rangeEnabled: event.target.checked,
+                rangeEnd: prev.rangeEnd || rangeOptions[0] || prev.selectedAyah + 1,
               }))
             }
-          >
-            {verseOptions.length === 0 && <option>{t('states.loadingVerses')}</option>}
-            {verseOptions.map((ayah) => (
-              <option key={ayah} value={ayah}>
-                {ayah}
-              </option>
-            ))}
-          </select>
+          />
+          <label className={styles.checkboxLabel} htmlFor="range-toggle">
+            {t('checkboxes.verseRange')}
+          </label>
         </div>
       </div>
 

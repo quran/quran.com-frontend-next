@@ -42,6 +42,13 @@ const DROPDOWN_STYLE = (colors: WidgetColors): React.CSSProperties => ({
 const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const audioUrl = options.audioUrl || null;
 
+  // Display the selected verse or verse range in the header.
+  const verseLabel = options.rangeEnd
+    ? `${verse.verseNumber}-${options.rangeEnd}` // range
+    : `${verse.verseNumber}`; // single verse
+  const chapterLabel = verse.chapterId;
+  const verseCaption = options.rangeEnd ? `${chapterLabel}:${verseLabel}` : options.ayah;
+
   return (
     <div
       style={{
@@ -65,10 +72,10 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
         <div>
           <div style={{ fontWeight: 600, fontSize: 14, color: colors.textColor }}>
             {options.surahName
-              ? `Surah ${options.surahName}, Verse ${verse.verseNumber}`
-              : `Verse ${options.ayah}`}
+              ? `Surah ${options.surahName}, Verse ${verseLabel}`
+              : `Verse ${verseCaption}`}
           </div>
-          <div style={{ fontSize: 12, color: colors.secondaryText }}>{verse.verseKey}</div>
+          <div style={{ fontSize: 12, color: colors.secondaryText }}>{verseCaption}</div>
         </div>
       </div>
       <div style={{ display: 'flex', gap: 8, position: 'relative' }}>
