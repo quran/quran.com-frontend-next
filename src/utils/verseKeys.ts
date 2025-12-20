@@ -1,10 +1,9 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable import/prefer-default-export */
 import range from 'lodash/range';
 
 import { getChapterData } from './chapter';
 
-import ChaptersData from 'types/ChaptersData';
+import ChaptersData from '@/types/ChaptersData';
+import { shouldUseMinimalLayout, toLocalizedVerseKey } from '@/utils/locale';
 
 /**
  * Generate the verse keys between two verse keys.
@@ -97,4 +96,41 @@ export const parseVerseRange = <AsNumbers extends boolean>(
       verseKey: `${endChapter}:${endVerse}`,
     },
   ];
+};
+
+/**
+ * Format verse ranges to show surah name and verse range in user's locale
+ * @param {string[]} ranges The ranges array
+ * @param {ChaptersData} chaptersData
+ * @param {string} lang
+ * @returns {string} Readable verse ranges string
+ */
+export const readableVerseRanges = (
+  ranges: string[],
+  chaptersData: ChaptersData,
+  lang: string,
+): string => {
+  const isMoreThenOneRange = ranges.length > 1;
+
+  const firstRange = ranges[0];
+  const parsedRange = parseVerseRange(firstRange, true);
+  if ((parsedRange?.length ?? 0) !== 2) return '';
+  const isSingleVerse = parsedRange?.[0]?.verse === parsedRange?.[1]?.verse;
+  const from = parsedRange[0];
+
+  const showMinimalUi = shouldUseMinimalLayout(lang);
+
+  const chapterData = getChapterData(chaptersData, from.chapter.toString());
+  const chapterName = showMinimalUi ? chapterData.translatedName : chapterData.transliteratedName;
+
+  const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
+
+  if (isSingleVerse) {
+    return isMoreThenOneRange ? `${titleForm} +` : titleForm;
+  }
+
+  const to = parsedRange[1];
+
+  const titleFull = `${titleForm} - ${toLocalizedVerseKey(to.verseKey, lang)}`;
+  return isMoreThenOneRange ? `${titleFull} +` : titleFull;
 };
