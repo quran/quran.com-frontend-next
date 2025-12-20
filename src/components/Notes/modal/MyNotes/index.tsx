@@ -12,6 +12,7 @@ interface MyNotesModalProps {
   onAddNote: () => void;
   onEditNote: (note: Note) => void;
   notesCount?: number;
+  verseKey: string;
 }
 
 const MyNotesModal: React.FC<MyNotesModalProps> = ({
@@ -20,6 +21,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
   onAddNote,
   onEditNote,
   notesCount = 1,
+  verseKey,
 }) => {
   const { t } = useTranslation('notes');
 
@@ -33,7 +35,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
     >
-      <MyNotes onAddNote={onAddNote} onEditNote={onEditNote} />
+      <MyNotes onAddNote={onAddNote} onEditNote={onEditNote} verseKey={verseKey} />
     </ContentModal>
   );
 };
