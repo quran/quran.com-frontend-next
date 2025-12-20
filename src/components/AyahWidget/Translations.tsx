@@ -35,6 +35,8 @@ const Translations = ({ verse, options, colors }: Props): JSX.Element | null => 
     return null;
   }
 
+  const isRangeMode = Boolean(options.rangeEnd);
+
   return (
     <div style={getContainerStyle(options.showArabic)} data-translations>
       {translations.map((translation) => (
@@ -42,16 +44,21 @@ const Translations = ({ verse, options, colors }: Props): JSX.Element | null => 
           key={translation.id ?? translation.resourceId}
           style={{
             padding: '16px 0',
-            borderTop: options.showArabic ? `1px solid ${colors.borderColor}` : 'none',
+            borderTop:
+              options.showArabic && !isRangeMode ? `1px solid ${colors.borderColor}` : 'none',
           }}
         >
           <div
             data-translation-text
             data-translator-name={translation.resourceName ?? translation.authorName}
             style={translationTextStyle(colors, options.showTranslatorNames)}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: translation.text }}
-          />
+          >
+            {isRangeMode ? `${verse.verseNumber}. ` : null}
+            <span
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: translation.text }}
+            />
+          </div>
           {options.showTranslatorNames && (translation.resourceName || translation.authorName) && (
             <div style={translatorNameStyle(colors)}>
               — {translation.resourceName ?? translation.authorName}
