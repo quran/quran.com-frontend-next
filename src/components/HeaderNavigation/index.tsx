@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,10 +10,11 @@ import ArrowLeft from '@/icons/arrow-left.svg';
 import Background from '@/icons/background.svg';
 
 interface HeaderNavigationProps {
+  innerClassName?: string;
   title: string;
 }
 
-const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ title }) => {
+const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ title, innerClassName }) => {
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
   const router = useRouter();
@@ -23,7 +25,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ title }) => {
         <Background aria-hidden="true" focusable="false" />
       </div>
       <div>
-        <div className={styles.heroInnerContainer}>
+        <div className={classNames(styles.heroInnerContainer, innerClassName)}>
           <Button
             type={ButtonType.Secondary}
             size={isMobile ? ButtonSize.Small : ButtonSize.Medium}

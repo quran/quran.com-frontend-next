@@ -40,7 +40,7 @@
 
   &.sheets {
     background-color: var(--color-background-default);
-    border-radius: var(--border-radius-rounded);
+    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
     padding: var(--spacing-medium2-px);
 
     @include breakpoints.tablet {

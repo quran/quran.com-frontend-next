@@ -25,6 +25,7 @@ export enum SwitchVariant {
   Alternative = 'alternative',
 }
 type SwitchProps = {
+  hasSeparator?: boolean;
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
@@ -33,6 +34,7 @@ type SwitchProps = {
 };
 
 const Switch = ({
+  hasSeparator = true,
   items,
   onSelect,
   selected,
@@ -67,8 +69,8 @@ const Switch = ({
         </button>
       ))}
 
-      {/* seprator  */}
-      {items.length > 2 &&
+      {hasSeparator &&
+        items.length > 2 &&
         range(1, items.length).map((i) => {
           return (
             <div
