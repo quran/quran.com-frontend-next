@@ -10,6 +10,7 @@ import QueryParam from '@/types/QueryParam';
 import { isCompleteProfile } from '@/utils/auth/complete-signup'; // NEW: to recompute completeness defensively
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
+import { resolveSafeRedirect } from '@/utils/url';
 
 const AuthRedirects = (): null => {
   const router = useRouter();
@@ -134,9 +135,10 @@ const AuthRedirects = (): null => {
         return;
       }
 
-      // Check for redirectTo query parameter
+      // Check for redirectTo query parameter and sanitize to prevent open redirect vulnerabilities
       const redirectTo = router.query[QueryParam.REDIRECT_TO] as string | undefined;
-      const destination = redirectTo ? decodeURIComponent(redirectTo) : ROUTES.HOME;
+      const rawDestination = redirectTo ? decodeURIComponent(redirectTo) : ROUTES.HOME;
+      const destination = resolveSafeRedirect(rawDestination);
 
       if (path !== destination && asPath !== destination) {
         logMessageToSentry('AuthRedirects redirect from auth page', {
