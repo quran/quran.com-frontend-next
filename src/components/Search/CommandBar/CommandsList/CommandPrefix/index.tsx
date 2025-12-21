@@ -107,7 +107,7 @@ const CommandPrefix: React.FC<Props> = ({
           />
         </div>
         {showArabicColumn && (
-          <div className={classNames(styles.arabicColumn, { [styles.arabicText]: !!arabicLine })}>
+          <div className={classNames({ [styles.arabicText]: !!arabicLine })}>
             {arabicLine && (
               <p
                 dir={Direction.RTL}

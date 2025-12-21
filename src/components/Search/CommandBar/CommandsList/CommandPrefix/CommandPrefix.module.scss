@@ -19,6 +19,7 @@
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  direction: ltr;
   gap: var(--spacing-small);
   align-items: flex-start;
 }
@@ -30,12 +31,7 @@
   text-align: start;
 }
 
-.arabicColumn {
-  text-align: end;
-}
-
 .arabicText {
-  font-family: UthmanicHafs, 'Scheherazade New', 'Noto Naskh Arabic', serif;
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
   max-inline-size: 100%;
@@ -60,6 +56,5 @@
 
 .rtlText {
   font-family: UthmanicHafs;
-  text-align: end;
   direction: rtl;
 }

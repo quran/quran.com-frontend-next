@@ -186,7 +186,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
                     dangerouslySetInnerHTML={{ __html: translationText }}
                   />
                 </div>
-                <div className={styles.arabicColumn}>
+                <div>
                   <div
                     className={classNames(styles.resultText, styles.arabic, styles.languageText)}
                     dir={Direction.RTL}

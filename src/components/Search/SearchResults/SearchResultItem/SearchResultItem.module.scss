@@ -20,7 +20,6 @@
 
 .arabic {
   font-family: UthmanicHafs;
-  text-align: end;
   direction: rtl;
   inline-size: 100%;
   display: block;
@@ -56,16 +55,13 @@
 .columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  direction: ltr;
   gap: var(--spacing-small);
   align-items: flex-start;
 }
 
 .translationColumn {
   text-align: start;
-}
-
-.arabicColumn {
-  text-align: end;
 }
 
 .metaRow {
