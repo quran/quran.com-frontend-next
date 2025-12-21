@@ -6,7 +6,9 @@ import SearchResultItem from './SearchResultItem';
 import SearchResultsHeader from './SearchResultsHeader';
 
 import Pagination from '@/dls/Pagination/Pagination';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import Language from '@/types/Language';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { toLocalizedNumber } from '@/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
@@ -28,6 +30,7 @@ const SearchResults: React.FC<Props> = ({
   onPageChange,
   pageSize,
 }) => {
+  const arabicChaptersData = useGetChaptersData(Language.AR);
   const results = searchResult.result.navigation.concat(searchResult.result.verses);
   const isSearchDrawer = source === SearchQuerySource.SearchDrawer;
   const { t, lang } = useTranslation('common');
@@ -60,6 +63,7 @@ const SearchResults: React.FC<Props> = ({
             result={result}
             source={source}
             service={searchResult.service}
+            arabicChaptersData={arabicChaptersData}
           />
         ))}
       </>

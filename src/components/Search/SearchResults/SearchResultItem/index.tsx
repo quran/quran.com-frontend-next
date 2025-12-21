@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-danger */
 import React, { useContext } from 'react';
 
@@ -19,16 +20,19 @@ import {
 } from '@/types/Search/SearchNavigationResult';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
+import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { Direction } from '@/utils/locale';
+import { Direction, toLocalizedVerseKey } from '@/utils/locale';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { getResultType, getSearchNavigationResult } from '@/utils/search';
+import { getResultType, getResultSuffix, getSearchNavigationResult } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   source: SearchQuerySource;
   service: SearchService;
   result: SearchNavigationResult;
+  arabicChaptersData?: ChaptersData;
 }
 
 /**
@@ -77,7 +81,7 @@ const forceScrollToVerse = (router: NextRouter, verseNumber: string): void => {
     });
 };
 
-const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
+const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChaptersData }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const router = useRouter();
@@ -88,6 +92,57 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
     key: resultKey,
     isArabic,
   } = getSearchNavigationResult(chaptersData, result, t, lang);
+  // Extract surah number from result key
+  const resultKeyString = String(resultKey);
+  const [surahNumber] = getVerseAndChapterNumbersFromKey(resultKeyString);
+  const chapterData = surahNumber ? getChapterData(chaptersData, surahNumber) : undefined;
+  // Get the arabic name of the surah
+  const arabicChapterData =
+    arabicChaptersData && surahNumber ? getChapterData(arabicChaptersData, surahNumber) : undefined;
+  const arabicSurahName = arabicChapterData?.nameArabic || arabicChapterData?.translatedName;
+
+  // Prepare meta parts for bilingual display
+  const arabicMetaParts =
+    result.resultType === SearchNavigationType.SURAH
+      ? []
+      : ([arabicSurahName, toLocalizedVerseKey(resultKeyString, Language.AR)].filter(
+          Boolean,
+        ) as string[]);
+
+  const translationMetaParts =
+    result.resultType === SearchNavigationType.SURAH
+      ? []
+      : [chapterData?.transliteratedName, toLocalizedVerseKey(resultKeyString, lang)];
+
+  // Only show bilingual if we have an ayah or surah result with arabic text
+  const isArabicSearchResult = result.isArabic ?? false;
+  const isBilingualResult =
+    (result.resultType === SearchNavigationType.AYAH ||
+      result.resultType === SearchNavigationType.SURAH) &&
+    !!result?.arabic &&
+    !isArabic &&
+    !isArabicSearchResult;
+
+  // The translation text is in the name field, but it includes a suffix for verse results
+  // For ayah results: suffix format is "(Al-Baqarah 2:255)" - we need to remove this
+  const translationSuffix =
+    result.resultType === SearchNavigationType.AYAH
+      ? getResultSuffix(type, resultKeyString, lang, chaptersData)
+      : '';
+
+  // Remove the suffix to get clean translation text (only for ayah-type results)
+  const suffixToRemove = translationSuffix ? ` ${translationSuffix}` : '';
+  const translationText =
+    suffixToRemove && name.endsWith(suffixToRemove) ? name.slice(0, -suffixToRemove.length) : name;
+
+  // For surah results, show arabic surah name + chapter number
+  // For ayah results, show arabic text + verse key
+  const arabicText =
+    result.resultType === SearchNavigationType.SURAH && surahNumber
+      ? `${result.arabic} · ${toLocalizedVerseKey(resultKeyString, Language.AR)}`
+      : result.arabic || name;
+
+  const joinMetaParts = (parts: string[]) => parts.join(' · ');
 
   const url = resolveUrlBySearchNavigationType(type, resultKey, true);
 
@@ -119,16 +174,53 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
         <div className={styles.iconContainer}>
           <SearchResultItemIcon type={type} />
         </div>
-        <div
-          className={classNames(styles.resultText, {
-            [styles.arabic]: isArabic,
-          })}
-          dir={isArabic ? Direction.RTL : undefined}
-          lang={isArabic ? Language.AR : undefined}
-          dangerouslySetInnerHTML={{
-            __html: `${name}`,
-          }}
-        />
+        <div className={styles.textWrapper}>
+          {isBilingualResult ? (
+            <>
+              <div className={styles.columns}>
+                <div className={styles.translationColumn}>
+                  <div
+                    className={classNames(styles.resultText, styles.translationText)}
+                    dir={Direction.LTR}
+                    lang={lang}
+                    dangerouslySetInnerHTML={{ __html: translationText }}
+                  />
+                </div>
+                <div className={styles.arabicColumn}>
+                  <div
+                    className={classNames(styles.resultText, styles.arabic, styles.languageText)}
+                    dir={Direction.RTL}
+                    lang={Language.AR}
+                    dangerouslySetInnerHTML={{ __html: arabicText }}
+                  />
+                </div>
+              </div>
+              {(translationMetaParts.length > 0 || arabicMetaParts.length > 0) && (
+                <div className={styles.metaRow}>
+                  {translationMetaParts.length > 0 && (
+                    <span className={styles.metaItem}>{joinMetaParts(translationMetaParts)}</span>
+                  )}
+                  {arabicMetaParts.length > 0 && (
+                    <span className={classNames(styles.metaItem, styles.metaItemArabic)}>
+                      {joinMetaParts(arabicMetaParts)}
+                    </span>
+                  )}
+                </div>
+              )}
+            </>
+          ) : (
+            <div
+              className={classNames(styles.resultText, {
+                [styles.arabic]: isArabic,
+              })}
+              dir={isArabic ? Direction.RTL : undefined}
+              lang={isArabic ? Language.AR : undefined}
+              dangerouslySetInnerHTML={{
+                __html: `${name}`,
+              }}
+            />
+          )}
+        </div>
       </Link>
     </div>
   );

@@ -15,6 +15,7 @@ import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
 import SearchResultsHeader from '@/components/Search/SearchResults/SearchResultsHeader';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
@@ -22,6 +23,7 @@ import {
   setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
 import { stopMicrophone } from '@/redux/slices/microphone';
+import Language from '@/types/Language';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
@@ -47,6 +49,7 @@ const CommandsList: React.FC<Props> = ({
   searchQuery,
 }) => {
   const { t } = useTranslation('common');
+  const arabicChaptersData = useGetChaptersData(Language.AR);
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const [selectedCommandIndex, setSelectedCommandIndex] = useState(numberOfCommands ? 0 : null);
@@ -159,6 +162,7 @@ const CommandsList: React.FC<Props> = ({
   if (numberOfCommands === 0) {
     return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
+
   return (
     <ul role="listbox">
       <div
@@ -195,7 +199,15 @@ const CommandsList: React.FC<Props> = ({
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix name={name} type={getResultType(command)} />
+                      <CommandPrefix
+                        name={name}
+                        type={getResultType(command)}
+                        arabic={command.arabic}
+                        isArabic={command.isArabic}
+                        arabicChaptersData={arabicChaptersData}
+                        rawResultType={command.resultType}
+                        commandKey={key}
+                      />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}

@@ -202,7 +202,12 @@ export const getSearchNavigationResult = (
     };
   }
 
-  return { ...returnedResult, name: `${returnedResult.name} ${resultSuffix}` };
+  return {
+    ...returnedResult,
+    arabic: result.arabic,
+    resultType: returnedResult.resultType,
+    name: `${returnedResult.name} ${resultSuffix}`,
+  };
 };
 
 /**
