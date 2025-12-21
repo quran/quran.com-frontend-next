@@ -1,5 +1,7 @@
 @import './shared.module.scss';
 
+$outline-size: 2px;
+
 .modal {
   > div {
     padding: $modal-padding !important;
@@ -198,6 +200,41 @@ $newCollectionSectionHeight: 64px;
   border-radius: var(--border-radius-large-px);
 
   background-color: transparent;
+
+  // Ensure proper contrast in dark theme
+  color: var(--color-text-default);
+  background-color: var(--color-background-alternative);
+  border: $border-width-default solid var(--color-borders-hairline);
+
+  &:hover {
+    background-color: var(--color-background-elevated);
+  }
+
+  &:focus-visible {
+    outline: $outline-size solid var(--color-primary);
+    outline-offset: $outline-size;
+  }
+}
+
+.newCollectionButtonIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.newCollectionButtonIconSvg {
+  // SVGs should follow currentColor so they remain visible in dark mode.
+  // If the SVG uses fills/strokes, enforce them.
+  &,
+  * {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+}
+
+.newCollectionButtonLabel {
+  color: inherit;
 }
 
 .plusIcon {

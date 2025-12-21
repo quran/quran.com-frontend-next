@@ -3,22 +3,22 @@ import React, { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
-import Bookmark from '../../../../../types/Bookmark';
 import BookmarkType from '../../../../../types/BookmarkType';
 import styles from '../styles/ContextMenu.module.scss';
 
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
-import BookmarkedIcon from '@/icons/bookmark.svg';
+import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import { selectBookmarkedPages } from '@/redux/slices/QuranReader/bookmarks';
+import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import { getBookmark } from '@/utils/auth/api';
-import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { getUserPreferences } from '@/utils/auth/api';
+import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getPageNumberFromBookmark } from '@/utils/bookmark';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const SaveBookmarkModal = dynamic(
@@ -38,31 +38,35 @@ interface PageBookmarkActionProps {
  */
 const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ pageNumber }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
+  const isGuest = !isLoggedIn();
+
+  // TODO: use these to make the page mapping and normalization
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
 
-  // Use SWR to fetch bookmark data
-  const { data: bookmark, isValidating: isLoading } = useSWRImmutable<Bookmark>(
-    isLoggedIn() ? makeBookmarkUrl(mushafId, Number(pageNumber), BookmarkType.Page) : null,
-    async () => {
-      const response = await getBookmark(mushafId, Number(pageNumber), BookmarkType.Page);
-      return response;
-    },
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Fetch user preferences for reading bookmark (logged-in users)
+  const { data: userPreferences, isValidating: isLoading } = useSWR(
+    !isGuest ? makeUserPreferencesUrl() : null,
+    getUserPreferences,
   );
 
+  const pageBookmark = isGuest
+    ? guestReadingBookmark
+    : (userPreferences?.readingBookmark?.bookmark as string);
+
   // Determine if the page is bookmarked based on user login status and data source
-  const isPageBookmarked = useMemo(() => {
-    const isUserLoggedIn = isLoggedIn();
-    if (isUserLoggedIn && bookmark) {
-      return bookmark;
+  const isPageBookmarked = useMemo((): boolean => {
+    if (pageBookmark?.startsWith?.(BookmarkType.Page)) {
+      const page = getPageNumberFromBookmark(pageBookmark);
+      return page === pageNumber;
     }
-    if (!isUserLoggedIn) {
-      return !!bookmarkedPages?.[pageNumber.toString()];
-    }
+
     return false;
-  }, [bookmark, bookmarkedPages, pageNumber]);
+  }, [pageBookmark, pageNumber]);
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
@@ -76,7 +80,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
   let bookmarkIcon = <Spinner />;
   if (!isLoading) {
     bookmarkIcon = isPageBookmarked ? (
-      <BookmarkedIcon className={styles.bookmarkedIcon} />
+      <BookmarkStarIcon className={styles.bookmarkedIcon} />
     ) : (
       <UnBookmarkedIcon className={styles.unbookmarkedIcon} />
     );
