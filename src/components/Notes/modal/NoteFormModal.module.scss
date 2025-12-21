@@ -65,7 +65,7 @@ div.textArea {
 
   background-color: var(--color-background-alternative-faint-new);
   height: var(--spacing-large2-px);
-  border-radius: var(--border-radius-default);
+  border-radius: var(--border-radius-medium-px);
   padding-inline: var(--spacing-medium2);
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-medium);
@@ -114,7 +114,7 @@ div.textArea {
 }
 
 .rounded {
-  border-radius: var(--border-radius-default);
+  border-radius: var(--border-radius-medium-px);
 }
 
 .error {

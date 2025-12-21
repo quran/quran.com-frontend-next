@@ -102,6 +102,7 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
         notesCount={notesCount?.[verse.verseKey] ?? 0}
+        verseKey={verse.verseKey}
       />
 
       <MyNotesModal

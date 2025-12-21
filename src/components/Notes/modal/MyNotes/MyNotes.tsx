@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
@@ -13,9 +13,12 @@ import DeleteIcon from '@/icons/delete.svg';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
-import { Note } from '@/types/auth/Note';
+import { AttachedEntityType, Note } from '@/types/auth/Note';
 import { getNotesByVerse } from '@/utils/auth/api';
+import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
+import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
 interface MyNotesProps {
@@ -28,11 +31,15 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
   const { t, lang } = useTranslation('notes');
   const chaptersData = useContext(DataContext);
 
-  const { data, error, isValidating } = useSWR(verseKey, getNotesByVerse, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    revalidateIfStale: false,
-  });
+  const { data, error } = useSWR(
+    makeGetNotesByVerseUrl(verseKey),
+    () => getNotesByVerse(verseKey),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+    },
+  );
 
   const formatNoteTitle = useCallback(
     (note: Note) => {
@@ -45,8 +52,20 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
     [chaptersData, lang],
   );
 
-  const notes: Note[] = Array.isArray(data) ? data : [];
-  const isLoading = isValidating && !data && !error;
+  const isLoading = !data && !error;
+
+  const notes = useMemo(() => {
+    const notesArray = Array.isArray(data) ? data : [];
+
+    return notesArray.map((note) => {
+      const attachedEntities = note.attachedEntities || [];
+      const attachedEntity = attachedEntities.find(
+        (entity) => entity.type === AttachedEntityType.REFLECTION,
+      );
+      const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
+      return { ...note, postUrl };
+    });
+  }, [data]);
 
   const showEmptyState = !isLoading && !error && notes.length === 0;
   const showStatus = isLoading || error || showEmptyState;
@@ -71,13 +90,21 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                   </time>
                 </div>
                 <div className={styles.noteActions}>
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    size={ButtonSize.Small}
-                    shape={ButtonShape.Square}
-                  >
-                    <QRColoredIcon />
-                  </Button>
+                  {note.postUrl && (
+                    <Button
+                      variant={ButtonVariant.Ghost}
+                      size={ButtonSize.Small}
+                      shape={ButtonShape.Square}
+                      isNewTab
+                      href={note.postUrl}
+                      tooltip={t('view-on-qr')}
+                      ariaLabel={t('view-on-qr')}
+                      onClick={() => logButtonClick('qr_view_note_post')}
+                    >
+                      <QRColoredIcon />
+                    </Button>
+                  )}
+
                   <Button
                     variant={ButtonVariant.Ghost}
                     size={ButtonSize.Small}
@@ -113,7 +140,12 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
       )}
 
       <div className={styles.actions}>
-        <Button size={ButtonSize.Small} prefix={<PlusIcon />} onClick={onAddNote}>
+        <Button
+          className={styles.addNoteButton}
+          size={ButtonSize.Small}
+          prefix={<PlusIcon />}
+          onClick={onAddNote}
+        >
           {t('add-another-note')}
         </Button>
       </div>
