@@ -139,7 +139,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
   // For ayah results, show arabic text + verse key
   const arabicText =
     result.resultType === SearchNavigationType.SURAH && surahNumber
-      ? `${result.arabic} · ${toLocalizedVerseKey(resultKeyString, Language.AR)}`
+      ? `${result.arabic} - ${toLocalizedVerseKey(resultKeyString, Language.AR)}`
       : result.arabic || name;
 
   const joinMetaParts = (parts: string[]) => parts.join(' · ');
@@ -186,7 +186,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
                     dangerouslySetInnerHTML={{ __html: translationText }}
                   />
                 </div>
-                <div>
+                <div className={styles.arabicColumn} dir={Direction.RTL} lang={Language.AR}>
                   <div
                     className={classNames(styles.resultText, styles.arabic, styles.languageText)}
                     dir={Direction.RTL}
