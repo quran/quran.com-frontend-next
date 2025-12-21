@@ -1,0 +1,61 @@
+import React from 'react';
+
+import { render, screen, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+
+import PageBookmarkAction from './PageBookmarkAction';
+
+vi.mock('next/dynamic', () => ({ default: () => () => <div data-testid="modal" /> }));
+vi.mock('next-translate/useTranslation', () => ({ default: () => ({ t: (k: string) => k }) }));
+vi.mock('swr', () => ({ default: () => ({ data: undefined, isValidating: false }) }));
+vi.mock('@/components/Verse/SaveBookmarkModal/SaveBookmarkModal', () => ({
+  default: () => <div data-testid="modal" />,
+  SaveBookmarkType: { PAGE: 'PAGE', AYAH: 'AYAH' },
+}));
+vi.mock('@/icons/bookmark-star.svg', () => ({ default: () => <div data-testid="star" /> }));
+vi.mock('@/icons/unbookmarked.svg', () => ({ default: () => <div data-testid="unbookmarked" /> }));
+vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
+vi.mock('@/redux/slices/QuranReader/styles', () => ({
+  selectQuranReaderStyles: (s: any) => s.quranReaderStyles,
+}));
+vi.mock('react-redux', () => {
+  const defaultState = {
+    quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+    guestBookmark: { readingBookmark: null },
+  } as any;
+  return {
+    useSelector: (selector: (s: any) => any) =>
+      selector((globalThis as any).mockPageState?.current || defaultState),
+    shallowEqual: () => null,
+  };
+});
+
+describe('PageBookmarkAction', () => {
+  it('shows remove aria-label and star icon when current page is bookmarked', () => {
+    (globalThis as any).mockPageState = {
+      current: {
+        quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+        guestBookmark: { readingBookmark: 'page:1' },
+      },
+    };
+    render(<PageBookmarkAction pageNumber={1} />);
+    const button = screen.getByRole('button');
+    expect(button.getAttribute('aria-label')).toBe('quran-reader:remove-bookmark');
+    expect(screen.getByTestId('star')).toBeDefined();
+  });
+
+  it('shows add aria-label and unbookmarked icon when page not bookmarked', () => {
+    cleanup();
+    (globalThis as any).mockPageState = {
+      current: {
+        quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+        guestBookmark: { readingBookmark: 'page:2' },
+      },
+    };
+    render(<PageBookmarkAction pageNumber={1} />);
+    const buttons = screen.getAllByRole('button');
+    const button = buttons[buttons.length - 1];
+    expect(button.getAttribute('aria-label')).toBe('quran-reader:add-bookmark');
+    expect(screen.getByTestId('unbookmarked')).toBeDefined();
+  });
+});

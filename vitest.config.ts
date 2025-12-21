@@ -25,6 +25,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       types: path.resolve(__dirname, './types'),
       '@/api': path.resolve(__dirname, './src/api.ts'),
+      '@/icons': path.resolve(__dirname, './public/icons'),
+      '@/dls': path.resolve(__dirname, './src/components/dls'),
+      src: path.resolve(__dirname, './src'),
     },
   },
 });
