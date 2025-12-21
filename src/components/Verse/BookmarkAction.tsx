@@ -34,7 +34,12 @@ interface Props {
  */
 const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { isVerseBookmarked, isVerseBookmarkedLoading } = useBookmarkState(verse);
+  const {
+    isVerseBookmarked,
+    isVerseBookmarkedLoading,
+    isVerseReadingBookmark,
+    isVerseCollectionBookmarked,
+  } = useBookmarkState(verse);
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
 
@@ -61,10 +66,16 @@ const BookmarkAction: React.FC<Props> = ({ verse, isTranslationView }): JSX.Elem
   }, []);
 
   const bookmarkIcon = (
-    <BookmarkIcon isLoading={isVerseBookmarkedLoading} isBookmarked={isVerseBookmarked} />
+    <BookmarkIcon
+      isLoading={isVerseBookmarkedLoading}
+      isBookmarked={isVerseBookmarked}
+      isCollectionBookmarked={isVerseCollectionBookmarked}
+      isReadingBookmark={isVerseReadingBookmark}
+    />
   );
 
-  const bookmarkLabel = isVerseBookmarked ? t('bookmarked') : t('bookmark');
+  const isBookmarked = isVerseBookmarked || isVerseCollectionBookmarked || isVerseReadingBookmark;
+  const bookmarkLabel = isBookmarked ? t('bookmarked') : t('bookmark');
 
   const renderModal = () => {
     if (!isModalOpen) return null;

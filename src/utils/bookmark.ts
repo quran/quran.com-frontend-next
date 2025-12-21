@@ -68,8 +68,8 @@ export const getPageNumberFromBookmark = (bookmark: string | null | undefined): 
  */
 export const parseReadingBookmark = (
   bookmark: string | null | undefined,
-  pageVersesData: VersesResponse | null | undefined,
-  recentlyReadVerseKeys: RecentlyReadVerse[] | null | undefined,
+  pageVersesData: VersesResponse | null | undefined = null,
+  recentlyReadVerseKeys: RecentlyReadVerse[] | null | undefined = null,
 ): ParsedBookmarkResult => {
   if (!isValidReadingBookmarkFormat(bookmark)) {
     return { surahNumber: 1, verseNumber: null };

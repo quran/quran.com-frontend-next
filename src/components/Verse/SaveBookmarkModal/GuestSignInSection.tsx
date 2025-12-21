@@ -58,10 +58,10 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
         className={styles.newCollectionButton}
         onClick={handleNewCollectionClick}
       >
-        <span className={styles.plusIcon}>
-          <PlusIcon />
+        <span className={styles.newCollectionButtonIcon} aria-hidden>
+          <PlusIcon className={styles.newCollectionButtonIconSvg} />
         </span>
-        {t('new-collection')}
+        <span className={styles.newCollectionButtonLabel}>{t('new-collection')}</span>
       </button>
     </div>
   );

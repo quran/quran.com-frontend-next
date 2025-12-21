@@ -1,20 +1,29 @@
 import { useMemo } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
+import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
-import { getBookmark } from '@/utils/auth/api';
-import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { getBookmark, getBookmarkCollections, getUserPreferences } from '@/utils/auth/api';
+import {
+  makeBookmarkCollectionsUrl,
+  makeBookmarkUrl,
+  makeUserPreferencesUrl,
+} from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { parseReadingBookmark } from '@/utils/bookmark';
 
 interface UseBookmarkStateResult {
   isVerseBookmarked: boolean;
   isVerseBookmarkedLoading: boolean;
+  isVerseReadingBookmark: boolean;
+  isVerseCollectionBookmarked: boolean;
   mushafId: number;
 }
 
@@ -29,6 +38,27 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+  const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
+  const isGuest = !isLoggedIn();
+
+  // Fetch user preferences for reading bookmark (logged-in users)
+  const { data: userPreferences, isValidating: isReadingBookmarkLoading } = useSWR(
+    !isGuest ? makeUserPreferencesUrl() : null,
+    getUserPreferences,
+  );
+
+  const readingBookmark = isGuest
+    ? guestReadingBookmark
+    : (userPreferences?.readingBookmark?.bookmark as string);
+
+  const isVerseReadingBookmark = useMemo((): boolean => {
+    if (readingBookmark?.startsWith?.(BookmarkType.Ayah)) {
+      const { surahNumber, verseNumber } = parseReadingBookmark(readingBookmark);
+      return surahNumber === Number(verse.chapterId) && verseNumber === Number(verse.verseNumber);
+    }
+
+    return false;
+  }, [readingBookmark, verse]);
 
   const { data: bookmark, isValidating: isVerseBookmarkedLoading } = useSWRImmutable(
     isLoggedIn()
@@ -50,6 +80,29 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
     },
   );
 
+  const { data: bookmarkCollectionIdsData, isValidating: isVerseCollectionBookmarkedLoading } =
+    useSWRImmutable(
+      isLoggedIn() && verse
+        ? makeBookmarkCollectionsUrl(
+            mushafId,
+            Number(verse.chapterId),
+            BookmarkType.Ayah,
+            Number(verse.verseNumber),
+          )
+        : null,
+      () => {
+        if (verse) {
+          return getBookmarkCollections(
+            mushafId,
+            Number(verse.chapterId),
+            BookmarkType.Ayah,
+            Number(verse.verseNumber),
+          );
+        }
+        return Promise.resolve([]);
+      },
+    );
+
   const isVerseBookmarked = useMemo(() => {
     const isUserLoggedIn = isLoggedIn();
     if (isUserLoggedIn && bookmark) {
@@ -62,8 +115,11 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
   }, [bookmarkedVerses, bookmark, verse.verseKey]);
 
   return {
-    isVerseBookmarked,
-    isVerseBookmarkedLoading,
+    isVerseBookmarked, // Virtual Favorite collection
+    isVerseReadingBookmark, // Reading bookmark
+    isVerseCollectionBookmarked: bookmarkCollectionIdsData?.length > 0, // Other collections
+    isVerseBookmarkedLoading:
+      isReadingBookmarkLoading || isVerseBookmarkedLoading || isVerseCollectionBookmarkedLoading,
     mushafId,
   };
 };
