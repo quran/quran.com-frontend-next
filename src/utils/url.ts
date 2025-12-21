@@ -72,6 +72,7 @@ export const getProxiedServiceUrl = (service: QuranFoundationService, path: stri
  * @returns {string} A safe redirect URL or '/' if the input is unsafe
  */
 export const resolveSafeRedirect = (rawUrl: string): string => {
+  // TODO: check for malicious external URLs
   if (!rawUrl) return '/';
 
   try {
