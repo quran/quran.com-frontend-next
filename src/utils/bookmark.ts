@@ -4,6 +4,7 @@ import { ReadingBookmarkType } from '@/types/Bookmark';
 interface ParsedBookmarkResult {
   surahNumber: number | null;
   verseNumber: number | null;
+  pageNumber?: number | null;
 }
 
 interface RecentlyReadVerse {
@@ -66,6 +67,7 @@ export const getPageNumberFromBookmark = (bookmark: string | null | undefined): 
  * @param {RecentlyReadVerse[] | null | undefined} recentlyReadVerseKeys - Fallback recently read verses
  * @returns {ParsedBookmarkResult} Object containing surahNumber and verseNumber
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 export const parseReadingBookmark = (
   bookmark: string | null | undefined,
   pageVersesData: VersesResponse | null | undefined = null,
@@ -92,6 +94,7 @@ export const parseReadingBookmark = (
         return {
           surahNumber: Number(firstVerse.chapterId),
           verseNumber: Number(firstVerse.verseNumber),
+          pageNumber: Number(parts[1]),
         };
       }
       // Return null if page verses are not yet loaded

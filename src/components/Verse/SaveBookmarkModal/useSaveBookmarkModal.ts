@@ -24,6 +24,7 @@ import { getErrorStatus } from '@/utils/auth/errors';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/navigation';
 
 interface UseSaveBookmarkModalOptions {
   type: ReadingBookmarkType;
@@ -258,10 +259,12 @@ const useSaveBookmarkModal = ({
 
   const handleGuestSignIn = useCallback((): void => {
     logButtonClick('save_bookmark_modal_guest_sign_in');
+
     const redirectUrl = isVerse
-      ? `/${verse?.chapterId}?startingVerse=${verse?.verseNumber}`
-      : `/page/${pageNumber}`;
+      ? getChapterWithStartingVerseUrl(`${verse.chapterId}:${verse.verseNumber}`)
+      : getPageNavigationUrl(pageNumber);
     router.push(`/login?r=${encodeURIComponent(redirectUrl)}`);
+
     onClose();
   }, [isVerse, verse, pageNumber, onClose, router]);
 
