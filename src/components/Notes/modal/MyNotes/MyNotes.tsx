@@ -3,17 +3,19 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
+import DeleteNoteButton from './DeleteNoteButton';
 import styles from './MyNotes.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import DeleteIcon from '@/icons/delete.svg';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -74,7 +76,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
     <div className={styles.container}>
       {showStatus ? (
         <div className={styles.statusContainer} data-error={!!error}>
-          {isLoading && <Spinner shouldDelayVisibility size={SpinnerSize.Large} />}
+          {isLoading && <Spinner size={SpinnerSize.Large} />}
           {error && t('common:error.general')}
           {showEmptyState && t('empty-notes')}
         </div>
@@ -110,6 +112,8 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                     size={ButtonSize.Small}
                     shape={ButtonShape.Square}
                     onClick={() => onEditNote(note)}
+                    tooltip={t('common:edit')}
+                    ariaLabel={t('common:edit')}
                   >
                     <IconContainer
                       icon={<EditIcon />}
@@ -118,18 +122,8 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                       className={styles.actionIcon}
                     />
                   </Button>
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    size={ButtonSize.Small}
-                    shape={ButtonShape.Square}
-                  >
-                    <IconContainer
-                      icon={<DeleteIcon />}
-                      shouldForceSetColors={false}
-                      size={IconSize.Xsmall}
-                      className={styles.actionIcon}
-                    />
-                  </Button>
+
+                  <DeleteNoteButton note={note} />
                 </div>
               </div>
 
@@ -138,6 +132,8 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
           ))}
         </div>
       )}
+
+      <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />
 
       <div className={styles.actions}>
         <Button
