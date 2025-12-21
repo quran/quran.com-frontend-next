@@ -23,10 +23,11 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   onModalClose,
 }) => {
   const { t } = useTranslation('notes');
+  const key = `note-${note?.id}-${note?.body}`;
 
   return (
     <NoteFormModal
-      key={note?.id}
+      key={key}
       initialNote={note?.body || ''}
       ranges={note?.ranges}
       isModalOpen={isModalOpen}
