@@ -18,9 +18,12 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-micro-px);
+}
+
+.modalTitleContainer {
   font-size: var(--font-size-xsmall-px);
   @include breakpoints.tablet {
-    font-size: var(--font-size-small-px);
+    font-size: var(--font-size-normal-px);
   }
 }
 

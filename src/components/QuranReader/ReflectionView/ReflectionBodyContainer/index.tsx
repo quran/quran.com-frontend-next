@@ -118,7 +118,7 @@ const ReflectionBodyContainer = ({
   const body = (
     <>
       <Tabs
-        tabs={getReflectionTabs(t)}
+        tabs={getReflectionTabs(t, isModal)}
         selected={selectedContentType}
         onSelect={handleTabChange}
         className={styles.tab}
