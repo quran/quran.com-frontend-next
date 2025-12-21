@@ -18,8 +18,26 @@ test.describe('Verse Bookmarking', () => {
       const firstVerse = page.getByTestId('verse-1:1');
       await expect(firstVerse.getByLabel('Bookmarked')).not.toBeVisible();
 
-      // Click the bookmark button to add a bookmark
+      // Open the bookmark modal
       await firstVerse.getByLabel('Bookmark').click();
+
+      // If reading bookmark is already set, remove it first to ensure consistent state
+      const removeReadingBookmark = page.getByRole('button', {
+        name: /Remove my Reading Bookmark/i,
+      });
+      if ((await removeReadingBookmark.count()) > 0) {
+        await removeReadingBookmark.click();
+      }
+
+      // Set as reading bookmark (works for guests and logged-in users)
+      await page.getByText(/Set as.*Reading Bookmark/i).click();
+
+      // Close the modal (Done)
+      const doneButton = page.getByRole('button', { name: /Done/i });
+      await expect(doneButton).toBeVisible();
+      await doneButton.click();
+
+      // After setting, the verse should be marked as bookmarked
       await expect(firstVerse.getByLabel('Bookmarked')).toBeVisible();
 
       // Reload the page
