@@ -92,7 +92,7 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
         />
       )}
 
-      {!userIsLoggedIn && <GuestSignInSection onSignIn={onGuestSignIn} />}
+      {!userIsLoggedIn && isVerse && <GuestSignInSection onSignIn={onGuestSignIn} />}
 
       <SaveBookmarkModalFooter
         showNoteButton={isVerse && userIsLoggedIn}

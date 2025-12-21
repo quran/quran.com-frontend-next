@@ -66,7 +66,7 @@ const ReadingSection: React.FC<Props> = () => {
   // Parse reading bookmark to extract surah and verse numbers
   // Falls back to recently read verses if reading bookmark is not available
   // Supports both logged-in user bookmarks and guest bookmarks
-  const { surahNumber, verseNumber } = useMemo(() => {
+  const { surahNumber, verseNumber, pageNumber } = useMemo(() => {
     const readingBookmark = isGuest
       ? guestReadingBookmark
       : userPreferences?.readingBookmark?.bookmark;
@@ -117,7 +117,12 @@ const ReadingSection: React.FC<Props> = () => {
   const safeVerseNumber = typeof verseNumber === 'number' ? verseNumber : undefined;
 
   const continueReadingCard = (
-    <ChapterCard surahNumber={safeSurahNumber} verseNumber={safeVerseNumber} isContinueReading />
+    <ChapterCard
+      surahNumber={safeSurahNumber}
+      verseNumber={safeVerseNumber}
+      isContinueReading
+      pageNumber={pageNumber}
+    />
   );
 
   const goalsOrStreakCard =
