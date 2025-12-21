@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import useAuthData from '@/hooks/auth/useAuthData';
 import { logMessageToSentry, addSentryBreadcrumb } from '@/lib/sentry';
+import QueryParam from '@/types/QueryParam';
 import { isCompleteProfile } from '@/utils/auth/complete-signup'; // NEW: to recompute completeness defensively
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
@@ -132,13 +133,18 @@ const AuthRedirects = (): null => {
         );
         return;
       }
-      if (path !== ROUTES.HOME) {
-        logMessageToSentry('AuthRedirects redirect -> home (auth page)', {
+
+      // Check for redirectTo query parameter
+      const redirectTo = router.query[QueryParam.REDIRECT_TO] as string | undefined;
+      const destination = redirectTo ? decodeURIComponent(redirectTo) : ROUTES.HOME;
+
+      if (path !== destination && asPath !== destination) {
+        logMessageToSentry('AuthRedirects redirect from auth page', {
           transactionName: 'AuthRedirects',
-          metadata: { from: path, to: ROUTES.HOME, userId: userData?.id || null },
+          metadata: { from: path, to: destination, userId: userData?.id || null },
         });
-        addSentryBreadcrumb('auth.redirect', 'to home from auth page', { from: path });
-        router.replace(ROUTES.HOME);
+        addSentryBreadcrumb('auth.redirect', 'from auth page', { from: path, to: destination });
+        router.replace(destination);
       }
     }
   }, [
