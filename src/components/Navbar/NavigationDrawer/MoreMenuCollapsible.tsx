@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import NavigationDrawerItem from './NavigationDrawerItem';
 
@@ -8,6 +9,7 @@ import Collapsible from '@/dls/Collapsible/Collapsible';
 import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
+import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
@@ -66,6 +68,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
   itemTitleClassName,
 }) => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
 
   const onOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
@@ -74,6 +77,14 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
     }
     logEvent('navigation_drawer_more_menu_expanded');
   };
+
+  const handleItemClick = useCallback(
+    (eventName: string) => {
+      dispatch(setIsNavigationDrawerOpen(false));
+      logButtonClick(eventName);
+    },
+    [dispatch],
+  );
 
   return (
     <Collapsible
@@ -103,7 +114,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
                 titleClassName={itemTitleClassName}
                 icon={menu.icon}
                 href={menu.href}
-                onClick={() => logButtonClick(menu.eventName)}
+                onClick={() => handleItemClick(menu.eventName)}
                 isExternalLink={menu.isExternalLink}
               />
             ))}

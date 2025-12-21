@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -81,10 +81,13 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
   ];
 
-  const handleItemClick = (eventName: string) => {
-    dispatch(setIsNavigationDrawerOpen(false));
-    logButtonClick(eventName);
-  };
+  const handleItemClick = useCallback(
+    (eventName: string) => {
+      dispatch(setIsNavigationDrawerOpen(false));
+      logButtonClick(eventName);
+    },
+    [dispatch],
+  );
 
   return (
     <>
