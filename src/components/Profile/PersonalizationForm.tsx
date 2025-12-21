@@ -10,7 +10,7 @@ import Section from './Section';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
-import UserIcon from '@/icons/user.svg';
+import DefaultUserIcon from '@/icons/default-user.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import TEST_IDS from '@/utils/test-ids';
 
@@ -58,7 +58,7 @@ const PersonalizationForm: FC = () => {
                   className={styles.profilePictureImageElement}
                 />
               ) : (
-                <UserIcon />
+                <DefaultUserIcon />
               )}
             </div>
             <div className={styles.profilePictureDescription}>

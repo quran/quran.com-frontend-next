@@ -49,5 +49,11 @@
         font-size: var(--font-size-xxxlarge-px);
       }
     }
+
+    .backButtonContent {
+      > svg g path {
+        fill: var(--color-text-faded-new);
+      }
+    }
   }
 }
