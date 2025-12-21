@@ -99,6 +99,35 @@ export const parseVerseRange = <AsNumbers extends boolean>(
 };
 
 /**
+ * Convert verse ranges to verse keys.
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {string[]} verseRanges Verse ranges
+ * @returns {string[]} Unique verse keys
+ */
+export const verseRangesToVerseKeys = (
+  chaptersData: ChaptersData,
+  verseRanges: string[],
+): string[] => {
+  return Array.from(
+    new Set(
+      verseRanges
+        .map((verseRange) => {
+          const parsedRange = parseVerseRange(verseRange, true);
+          if (!parsedRange) return [];
+
+          return generateVerseKeysBetweenTwoVerseKeys(
+            chaptersData,
+            parsedRange[0].verseKey,
+            parsedRange[1].verseKey,
+          );
+        })
+        .flat(),
+    ),
+  );
+};
+
+/**
  * Format verse ranges to show surah name and verse range in user's locale
  * @param {string[]} rangeKeys The range keys array
  * @param {ChaptersData} chaptersData
