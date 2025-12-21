@@ -59,7 +59,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
 
     return notesArray.map((note) => {
       const attachedEntities = note.attachedEntities || [];
-      const attachedEntity = attachedEntities.find(
+      const attachedEntity = attachedEntities.findLast(
         (entity) => entity.type === AttachedEntityType.REFLECTION,
       );
       const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
