@@ -46,8 +46,9 @@ const ReadingSection: React.FC<Props> = () => {
   // Fetch recently read verses as fallback (for all users)
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys(false);
 
-  const readingBookmark =
-    guestReadingBookmark ?? userPreferences?.readingBookmark?.bookmark ?? null;
+  const readingBookmark = isGuest
+    ? guestReadingBookmark
+    : userPreferences?.readingBookmark?.bookmark;
 
   const parsed = useMemo(() => {
     return parseReadingBookmark(readingBookmark, recentlyReadVerseKeys);
