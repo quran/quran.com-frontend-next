@@ -89,9 +89,9 @@ const ReadingSection: React.FC<Props> = () => {
     },
   );
 
-  // Parse reading bookmark to extract surah and verse numbers
-  // Falls back to recently read verses if reading bookmark is not available
-  // Supports both logged-in user bookmarks and guest bookmarks
+  // Derive effective surah/verse from bookmark or first verse of stored page
+  // Resolve the page for the current mushaf using the effective surah/verse
+  // Applies to both guest and logged-in users
   const surahNumber = effectiveSurahNumber;
   const verseNumber = effectiveVerseNumber ?? null;
   const pageNumber = resolvedPageNumber ?? undefined;
