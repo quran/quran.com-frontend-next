@@ -101,17 +101,19 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
         />
       ))}
       <MoreMenuCollapsible
+        onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}
         headerLeftClassName={accordionHeaderLeftClassName}
         contentClassName={accordionContentClassName}
         itemTitleClassName={accordionItemTitleClassName}
       />
       <OurProjectsCollapsible
+        onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}
         headerLeftClassName={accordionHeaderLeftClassName}
+        descriptionClassName={projectsDescClassName}
         contentClassName={accordionContentClassName}
         itemTitleClassName={accordionItemTitleClassName}
-        descriptionClassName={projectsDescClassName}
       />
     </>
   );

@@ -1,8 +1,7 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import NavigationDrawerItem from './NavigationDrawerItem';
 
@@ -11,8 +10,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
-import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import { EXTERNAL_ROUTES, QURAN_URL } from '@/utils/navigation';
 
 interface ProjectItem {
@@ -22,6 +20,7 @@ interface ProjectItem {
 }
 
 interface OurProjectsCollapsibleProps {
+  onItemClick: (eventName: string) => void;
   headerClassName?: string;
   headerLeftClassName?: string;
   contentClassName?: string;
@@ -73,6 +72,7 @@ const PROJECTS: ProjectItem[] = [
 ];
 
 const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
+  onItemClick,
   headerClassName,
   headerLeftClassName,
   contentClassName,
@@ -80,7 +80,6 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
   descriptionClassName,
 }) => {
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
 
   const onOpenChange = (isOpen: boolean) => {
     if (!isOpen) {
@@ -89,14 +88,6 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
     }
     logEvent('navigation_drawer_our_projects_expanded');
   };
-
-  const handleProjectClick = useCallback(
-    (eventName: string) => () => {
-      dispatch(setIsNavigationDrawerOpen(false));
-      logButtonClick(eventName);
-    },
-    [dispatch],
-  );
 
   return (
     <Collapsible
@@ -142,7 +133,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
                 icon={<IconArrowRight />}
                 href={project.href}
                 isExternalLink
-                onClick={handleProjectClick(project.eventName)}
+                onClick={() => onItemClick(project.eventName)}
               />
             ))}
           </div>
