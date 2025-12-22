@@ -1,7 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
-
 import styles from './TabSwitcher.module.scss';
 
 import Switch, { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
@@ -42,26 +40,31 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
     }));
 
     return (
-      <Tabs
-        tabs={tabs}
-        selected={selected}
-        onSelect={onSelect}
-        containerClassName={classNames(styles.tabsContainer)}
-        className={classNames(styles.tabs)}
-        activeClassName={classNames(styles.activeTab)}
-      />
+      <div className={styles.tabSwitcherContainer}>
+        <Tabs
+          tabs={tabs}
+          selected={selected}
+          onSelect={onSelect}
+          containerClassName={styles.tabsContainer}
+          className={styles.tabs}
+          activeClassName={styles.activeTab}
+        />
+      </div>
     );
   }
 
   return (
-    <Switch
-      items={items}
-      selected={selected}
-      onSelect={onSelect}
-      hasSeparator={hasSeparator}
-      size={size}
-      variant={variant}
-    />
+    <div className={styles.tabSwitcherContainer}>
+      <Switch
+        items={items}
+        selected={selected}
+        onSelect={onSelect}
+        hasSeparator={hasSeparator}
+        size={size}
+        variant={variant}
+        buttonClassName={styles.switchButton}
+      />
+    </div>
   );
 };
 

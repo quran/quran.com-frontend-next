@@ -26,6 +26,7 @@ export enum SwitchVariant {
 }
 type SwitchProps = {
   hasSeparator?: boolean;
+  buttonClassName?: string;
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
@@ -35,6 +36,7 @@ type SwitchProps = {
 
 const Switch = ({
   hasSeparator = true,
+  buttonClassName,
   items,
   onSelect,
   selected,
@@ -56,12 +58,17 @@ const Switch = ({
           type="button"
           data-testid={`${item.value}-button`}
           data-is-selected={selected === item.value}
-          className={classNames(styles.item, selected === item.value && styles.itemSelected, {
-            [styles.itemLarge]: size === SwitchSize.Large,
-            [styles.itemNormal]: size === SwitchSize.Normal,
-            [styles.itemSmall]: size === SwitchSize.Small,
-            [styles.itemXSmall]: size === SwitchSize.XSmall,
-          })}
+          className={classNames(
+            styles.item,
+            buttonClassName,
+            selected === item.value && styles.itemSelected,
+            {
+              [styles.itemLarge]: size === SwitchSize.Large,
+              [styles.itemNormal]: size === SwitchSize.Normal,
+              [styles.itemSmall]: size === SwitchSize.Small,
+              [styles.itemXSmall]: size === SwitchSize.XSmall,
+            },
+          )}
           key={item.value}
           onClick={() => onSelect(item.value)}
         >
