@@ -22,6 +22,21 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall);
+  position: relative;
+}
+
+.textWrapperBilingual {
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 50%;
+    inline-size: 1px;
+    transform: translateX(-0.5px);
+    background-color: var(--color-borders-hairline);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 .languageText {
@@ -37,6 +52,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   direction: ltr;
   align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
 .translationColumn {
@@ -48,7 +65,6 @@
 
 .arabicColumn {
   text-align: justify;
-  border-inline-end: 1px solid var(--color-background-alternative-faint);
   block-size: 100%;
   box-sizing: border-box;
   padding-inline-end: var(--spacing-small);
@@ -61,6 +77,8 @@
   font-size: var(--font-size-xsmall);
   color: var(--color-text-subtle);
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 .metaItem {

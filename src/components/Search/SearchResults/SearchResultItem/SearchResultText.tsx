@@ -20,6 +20,7 @@ import ChaptersData from 'types/ChaptersData';
 
 export type SearchResultTextClasses = {
   textWrapper: string;
+  textWrapperBilingual?: string;
   columns: string;
   translationColumn: string;
   arabicColumn: string;
@@ -218,7 +219,12 @@ const SearchResultText: React.FC<Props> = ({
   }, [isArabic, isSearchPage]);
 
   return (
-    <div className={textClasses.textWrapper}>
+    <div
+      className={classNames(
+        textClasses.textWrapper,
+        isBilingualResult && textClasses.textWrapperBilingual,
+      )}
+    >
       {isBilingualResult ? (
         <>
           <div className={textClasses.columns}>
