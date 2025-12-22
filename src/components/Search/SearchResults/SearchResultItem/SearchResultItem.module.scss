@@ -56,12 +56,22 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   direction: ltr;
-  gap: var(--spacing-small);
   align-items: flex-start;
 }
 
 .translationColumn {
-  text-align: start;
+  text-align: justify;
+  text-align-last: start;
+  box-sizing: border-box;
+  padding-inline-end: var(--spacing-small);
+}
+
+.arabicColumn {
+  text-align: justify;
+  border-inline-start: 1px solid var(--color-background-alternative-faint);
+  block-size: 100%;
+  box-sizing: border-box;
+  padding-inline-end: var(--spacing-small);
 }
 
 .metaRow {
