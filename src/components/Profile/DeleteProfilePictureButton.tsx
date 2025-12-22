@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -17,7 +17,7 @@ type DeleteProfilePictureButtonProps = {
   onRemovePicture: () => void;
 };
 
-const DeleteProfilePictureButton = ({
+const DeleteProfilePictureButton: FC<DeleteProfilePictureButtonProps> = ({
   isRemoving,
   isProcessing,
   onRemovePicture,
@@ -26,21 +26,21 @@ const DeleteProfilePictureButton = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setConfirmationText('');
     setIsModalVisible(false);
-  };
+  }, []);
 
-  const onDeleteConfirmed = async () => {
+  const onDeleteConfirmed = useCallback(async () => {
     logButtonClick('profile_confirm_delete_profile_picture');
     onRemovePicture();
     closeModal();
-  };
+  }, [onRemovePicture, closeModal]);
 
-  const onDeleteProfilePictureClicked = () => {
+  const onDeleteProfilePictureClicked = useCallback(() => {
     logButtonClick('profile_delete_profile_picture');
     setIsModalVisible(true);
-  };
+  }, []);
 
   const CONFIRMATION_TEXT = t('delete-profile-picture.confirmation-text');
   const canDeleteProfilePicture =
