@@ -4,7 +4,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import searchResultItemStyles from './SearchResultItem.module.scss';
+import searchResultTextStyles from './SearchResultText.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import Language from '@/types/Language';
@@ -65,7 +65,7 @@ const SearchResultText: React.FC<Props> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const chaptersData = useContext(DataContext);
-  const textClasses = (classes || searchResultItemStyles) as SearchResultTextClasses;
+  const textClasses = (classes || searchResultTextStyles) as SearchResultTextClasses;
 
   const TextTag = textTag;
 
