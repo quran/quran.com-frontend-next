@@ -20,7 +20,6 @@ import ChaptersData from 'types/ChaptersData';
 
 export type SearchResultTextClasses = {
   textWrapper: string;
-  textWrapperBilingual?: string;
   columns: string;
   translationColumn: string;
   arabicColumn: string;
@@ -28,9 +27,6 @@ export type SearchResultTextClasses = {
   translationText?: string;
   arabic?: string;
   languageText?: string;
-  metaRow?: string;
-  metaItem?: string;
-  metaItemArabic?: string;
 };
 
 type Props = {
@@ -228,7 +224,11 @@ const SearchResultText: React.FC<Props> = ({
   }, [baseName, isSearchPage, isSurahResult, name, surahDisplayText, t, translationLine]);
 
   // Helper to determine text direction and language
-  const translationDir = useMemo(() => (isRTLLocale(lang) ? Direction.RTL : Direction.LTR), [lang]);
+  const translationDir = useMemo(() => {
+    // Keep translation column LTR on Arabic UI unless the result itself is Arabic or this is a surah label.
+    if (lang === Language.AR && !isArabicResult && !isSurahResult) return Direction.LTR;
+    return isRTLLocale(lang) ? Direction.RTL : Direction.LTR;
+  }, [isArabicResult, isSurahResult, lang]);
   const singleLineDirection = useMemo(() => {
     if (isArabic) return Direction.RTL;
     return translationDir;
@@ -241,12 +241,7 @@ const SearchResultText: React.FC<Props> = ({
   }, [isArabic, isSearchPage, lang]);
 
   return (
-    <div
-      className={classNames(
-        textClasses.textWrapper,
-        isBilingualResult && textClasses.textWrapperBilingual,
-      )}
-    >
+    <div className={classNames(textClasses.textWrapper)}>
       {isBilingualResult ? (
         <div className={textClasses.columns}>
           <div className={textClasses.arabicColumn} dir={Direction.RTL} lang={Language.AR}>

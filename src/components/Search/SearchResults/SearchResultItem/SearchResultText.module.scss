@@ -25,13 +25,6 @@
   position: relative;
 }
 
-.textWrapperBilingual {
-  // Kept for backward-compatibility, but the stacked layout doesn't need the divider anymore.
-  &::after {
-    display: none;
-  }
-}
-
 .languageText {
   font-size: var(--font-size-base);
 }
@@ -64,29 +57,4 @@
   box-sizing: border-box;
   padding-inline-end: 0;
   inline-size: 100%;
-}
-
-.metaRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xxsmall);
-  font-size: var(--font-size-xsmall);
-  color: var(--color-text-subtle);
-  justify-content: space-between;
-  position: relative;
-  z-index: 1;
-}
-
-.metaItem {
-  display: inline-flex;
-  flex: 1;
-  justify-content: space-between;
-  &:last-child {
-    justify-content: flex-end;
-  }
-}
-
-.metaItemArabic {
-  justify-content: flex-end;
-  text-align: end;
 }
