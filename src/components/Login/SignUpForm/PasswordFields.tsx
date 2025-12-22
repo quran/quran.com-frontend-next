@@ -74,8 +74,8 @@ const getPasswordFields = (
         },
       ],
       customRender: renderPasswordField(false),
-      errorClassName: styles.errorText,
-      containerClassName: styles.inputContainer,
+      errorClassName: styles.authErrorText,
+      containerClassName: styles.authFieldWrapper,
     },
     {
       field: 'confirmPassword',
@@ -90,8 +90,8 @@ const getPasswordFields = (
         },
       ],
       customRender: renderPasswordField(true),
-      errorClassName: styles.errorText,
-      containerClassName: styles.inputContainer,
+      errorClassName: styles.authErrorText,
+      containerClassName: styles.authFieldWrapper,
     },
   ];
 };

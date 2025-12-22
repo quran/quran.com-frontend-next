@@ -54,8 +54,8 @@ const addCustomRenderToCompleteSignupFormFields = (
             />
           );
         },
-        errorClassName: styles.errorText,
-        containerClassName: styles.inputContainer,
+        errorClassName: styles.authErrorText,
+        containerClassName: styles.authFieldWrapper,
       };
     }
 
