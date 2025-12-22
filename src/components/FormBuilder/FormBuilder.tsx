@@ -86,6 +86,8 @@ const FormBuilder = <T,>({
       : formField.extraSection;
   };
 
+  const isDisabled = shouldSkipValidation ? isSubmitting : !isValid || isSubmitting;
+
   return (
     <form
       className={classNames(styles.container, className)}
@@ -157,7 +159,7 @@ const FormBuilder = <T,>({
         renderAction({
           htmlType: 'submit',
           isLoading: isSubmitting,
-          isDisabled: shouldSkipValidation ? isSubmitting : !isValid || isSubmitting,
+          isDisabled,
           onClick: (e) => {
             e.stopPropagation();
           },
@@ -167,7 +169,7 @@ const FormBuilder = <T,>({
           {...actionProps}
           htmlType="submit"
           isLoading={isSubmitting}
-          isDisabled={shouldSkipValidation ? isSubmitting : !isValid || isSubmitting}
+          isDisabled={isDisabled}
           onClick={(e) => {
             e.stopPropagation();
           }}
