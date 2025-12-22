@@ -10,8 +10,8 @@ import TafsirMenuItem from './MenuItems/TafsirMenuItem';
 import TranslationsMenuItem from './MenuItems/TranslationsMenuItem';
 import VerseActionsMenuType from './types';
 
+import ReadingViewNoteAction from '@/components/Notes/modal/ReadingViewNoteAction';
 import BookmarkAction from '@/components/Verse/BookmarkAction';
-import NotesAction from '@/components/Verse/Notes/NotesAction';
 import Word from 'types/Word';
 
 interface Props {
@@ -54,7 +54,8 @@ const MainActionsMenu: React.FC<Props> = ({
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
       <CopyMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
-      <NotesAction verse={word.verse} onActionTriggered={onActionTriggered} />
+
+      <ReadingViewNoteAction verseKey={word.verseKey} onActionTriggered={onActionTriggered} />
 
       {/* Submenu navigation items */}
       <ShareMenuItem onActionTriggered={onActionTriggered} openShareModal={openShareModal} />
