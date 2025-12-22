@@ -73,4 +73,15 @@ test.describe('Search result regressions', () => {
     await pageResult.click();
     await expect(page).toHaveURL(/\/page\/255$/);
   });
+
+  test('searching for an arabic word displays correct result', async ({ page }) => {
+    const searchResponse = page.waitForResponse((response) => response.url().includes('/search'));
+    await homePage.goTo('/search?query=لَقَدْ');
+    await searchResponse;
+
+    const searchResults = page.getByTestId('search-drawer-container');
+    await expect(searchResults).toBeVisible();
+    const pageResult = searchResults.getByText('لَتَعْلَمُ مَا نُرِيدُ (Hud 11:79)');
+    await expect(pageResult).toBeVisible();
+  });
 });

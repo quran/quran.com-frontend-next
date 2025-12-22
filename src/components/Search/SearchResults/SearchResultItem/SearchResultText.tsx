@@ -101,6 +101,7 @@ const SearchResultText: React.FC<Props> = ({
   }, [chaptersData, result, shouldTransform, t, lang]);
 
   const { name, key: resultKey, isArabic, arabic } = normalizedResult;
+  const isArabicResult = isArabic ?? false;
   const resultKeyString = String(resultKey ?? '');
 
   // Get surah number for additional context
@@ -215,7 +216,9 @@ const SearchResultText: React.FC<Props> = ({
     return `${baseName}${suffixText}`;
   }, [baseName, isAyahResult, isSurahResult, surahDisplayText, translationSuffixParts]);
 
-  const isBilingualResult = isAyahResult && !!arabicLine;
+  // Arabic-only results already contain Arabic in the "translation" line; show a single column so
+  // we keep the transliterated surah suffix and avoid duplicate Arabic content.
+  const isBilingualResult = isAyahResult && !!arabicLine && !isArabicResult;
 
   // Display text + fallback
   const singleLineText = useMemo(() => {
