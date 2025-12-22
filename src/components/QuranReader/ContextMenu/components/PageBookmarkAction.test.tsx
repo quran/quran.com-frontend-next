@@ -14,6 +14,11 @@ vi.mock('@/components/Verse/SaveBookmarkModal/SaveBookmarkModal', () => ({
 }));
 vi.mock('@/icons/bookmark-star.svg', () => ({ default: () => <div data-testid="star" /> }));
 vi.mock('@/icons/unbookmarked.svg', () => ({ default: () => <div data-testid="unbookmarked" /> }));
+vi.mock('@/utils/verse', () => ({
+  getVersePageNumber: vi.fn(async () => {
+    throw new Error('no');
+  }),
+}));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
   selectQuranReaderStyles: (s: any) => s.quranReaderStyles,
@@ -31,17 +36,17 @@ vi.mock('react-redux', () => {
 });
 
 describe('PageBookmarkAction', () => {
-  it('shows remove aria-label and star icon when current page is bookmarked', () => {
+  it('shows remove aria-label and star icon when current page is bookmarked', async () => {
     (globalThis as any).mockPageState = {
       current: {
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'page:1' },
+        guestBookmark: { readingBookmark: 'page:1:1:1' },
       },
     };
     render(<PageBookmarkAction pageNumber={1} />);
-    const button = screen.getByRole('button');
+    const button = await screen.findByRole('button', { name: 'quran-reader:remove-bookmark' });
     expect(button.getAttribute('aria-label')).toBe('quran-reader:remove-bookmark');
-    expect(screen.getByTestId('star')).toBeDefined();
+    expect(await screen.findByTestId('star')).toBeDefined();
   });
 
   it('shows add aria-label and unbookmarked icon when page not bookmarked', () => {
@@ -49,7 +54,7 @@ describe('PageBookmarkAction', () => {
     (globalThis as any).mockPageState = {
       current: {
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'page:2' },
+        guestBookmark: { readingBookmark: 'page:2:1:1' },
       },
     };
     render(<PageBookmarkAction pageNumber={1} />);

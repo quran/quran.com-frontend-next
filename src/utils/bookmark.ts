@@ -1,5 +1,5 @@
-import { VersesResponse } from '@/types/ApiResponses';
 import { ReadingBookmarkType } from '@/types/Bookmark';
+import BookmarkType from '@/types/BookmarkType';
 
 interface ParsedBookmarkResult {
   surahNumber: number | null;
@@ -32,45 +32,34 @@ export const isValidReadingBookmarkFormat = (bookmark: ReadingBookmark): boolean
     return true;
   }
 
-  // Validate "page:pageNumber" format
-  const pagePattern = /^page:\d+$/;
-  if (pagePattern.test(bookmark)) {
+  // Validate "page:pageNumber" or "page:pageNumber:surah:verse" formats
+  const pagePatternSimple = /^page:\d+$/;
+  const pagePatternExtended = /^page:\d+:\d+:\d+$/;
+  if (pagePatternSimple.test(bookmark) || pagePatternExtended.test(bookmark)) {
     return true;
   }
 
   return false;
 };
 
-/**
- * Extracts the page number from a bookmark string if it's a page bookmark.
- *
- * @param {string | null | undefined} bookmark - The bookmark string in format "page:123" or "ayah:1:2"
- * @returns {number | null} The page number if bookmark is a page bookmark, null otherwise
- */
-export const getPageNumberFromBookmark = (bookmark: string | null | undefined): number | null => {
-  if (!bookmark || !isValidReadingBookmarkFormat(bookmark)) return null;
+// page:pageNumber:surahNumber:verseNumber
+const READING_BOOKMARK_PAGE_PARTS_LENGTH = 4;
 
-  const parts = bookmark.split(':');
-  if (parts[0] === ReadingBookmarkType.PAGE && parts.length === 2) {
-    return Number(parts[1]);
-  }
-  return null;
-};
+// ayah:surahNumber:verseNumber
+const READING_BOOKMARK_AYAH_PARTS_LENGTH = 3;
 
 /**
  * Parses a reading bookmark string to extract surah and verse numbers.
  * Falls back to recently read verses if reading bookmark is not available.
- * Supports both ayah bookmarks (ayah:surah:verse) and page bookmarks (page:number).
+ * Supports both ayah bookmarks (ayah:surah:verse) and page bookmarks (page:pageNumber:surah:verse).
  *
  * @param {string | null | undefined} bookmark - The bookmark string to parse
- * @param {PageVersesData | null | undefined} pageVersesData - Page verses data for page bookmarks
  * @param {RecentlyReadVerse[] | null | undefined} recentlyReadVerseKeys - Fallback recently read verses
  * @returns {ParsedBookmarkResult} Object containing surahNumber and verseNumber
  */
 // eslint-disable-next-line react-func/max-lines-per-function
 export const parseReadingBookmark = (
   bookmark: string | null | undefined,
-  pageVersesData: VersesResponse | null | undefined = null,
   recentlyReadVerseKeys: RecentlyReadVerse[] | null | undefined = null,
 ): ParsedBookmarkResult => {
   if (!isValidReadingBookmarkFormat(bookmark)) {
@@ -80,26 +69,27 @@ export const parseReadingBookmark = (
   if (bookmark) {
     const parts = bookmark.split(':');
 
-    if (parts[0] === ReadingBookmarkType.AYAH && parts.length === 3) {
+    if (
+      parts[0] === ReadingBookmarkType.AYAH &&
+      parts.length === READING_BOOKMARK_AYAH_PARTS_LENGTH
+    ) {
       return {
         surahNumber: Number(parts[1]),
         verseNumber: Number(parts[2]),
       };
     }
 
-    if (parts[0] === ReadingBookmarkType.PAGE && parts.length === 2) {
-      // For page bookmarks, get the first verse from the fetched page verses
-      if (pageVersesData?.verses && pageVersesData.verses.length > 0) {
-        const firstVerse = pageVersesData.verses[0];
-        return {
-          surahNumber: Number(firstVerse.chapterId),
-          verseNumber: Number(firstVerse.verseNumber),
-          pageNumber: Number(parts[1]),
-        };
-      }
-      // Return null if page verses are not yet loaded
-      return { surahNumber: null, verseNumber: null };
+    if (
+      parts[0] === ReadingBookmarkType.PAGE &&
+      parts.length === READING_BOOKMARK_PAGE_PARTS_LENGTH
+    ) {
+      return {
+        surahNumber: Number(parts[2]),
+        verseNumber: Number(parts[3]),
+        pageNumber: Number(parts[1]),
+      };
     }
+    return { surahNumber: null, verseNumber: null };
   }
 
   // Fallback: Use recently read verses if reading bookmark is not available
@@ -113,4 +103,23 @@ export const parseReadingBookmark = (
 
   // Default fallback
   return { surahNumber: 1, verseNumber: null };
+};
+
+export const parsePageReadingBookmark = (bookmark: string) => {
+  if (!bookmark || typeof bookmark !== 'string') return null;
+  const parts = bookmark.split(':');
+
+  if (parts.length !== READING_BOOKMARK_PAGE_PARTS_LENGTH) {
+    return null;
+  }
+
+  if (parts[0] !== BookmarkType.Page) {
+    return null;
+  }
+
+  return {
+    pageNumber: Number(parts[1]),
+    surahNumber: Number(parts[2]),
+    verseNumber: Number(parts[3]),
+  };
 };
