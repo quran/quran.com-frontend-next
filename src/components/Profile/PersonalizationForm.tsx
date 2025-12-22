@@ -50,7 +50,7 @@ const PersonalizationForm: FC = () => {
         <div className={styles.profilePictureDetailAction}>
           <div className={styles.profilePictureDetail}>
             <div className={styles.profilePictureImage}>
-              {!hasProfilePicture ? (
+              {hasProfilePicture ? (
                 <Image
                   src={userData.avatars?.large || ''}
                   alt={t('profile-picture')}
