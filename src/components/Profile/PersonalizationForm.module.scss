@@ -22,16 +22,16 @@
       gap: var(--spacing-xxsmall-px);
       .profilePictureImage {
         svg {
-          inline-size: calc(var(--spacing-large-px) * 2);
-          block-size: calc(var(--spacing-large-px) * 2);
+          width: calc(var(--spacing-large-px) * 2);
+          height: calc(var(--spacing-large-px) * 2);
           fill: var(--color-grey-icons);
           path {
             fill: var(--color-grey-icons);
           }
         }
         .profilePictureImageElement {
-          inline-size: calc(var(--spacing-large-px) * 2);
-          block-size: calc(var(--spacing-large-px) * 2);
+          width: calc(var(--spacing-large-px) * 2);
+          height: calc(var(--spacing-large-px) * 2);
           border-radius: 50%;
           object-fit: cover;
         }
