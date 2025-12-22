@@ -241,10 +241,13 @@ const SearchResultText: React.FC<Props> = ({
   const arabicMetaParts = useMemo(() => {
     if (isSurahResult) return [];
 
+    // When the UI is Arabic, avoid duplicating the same meta under both columns.
+    if (isArabicLocale) return [''];
+
     return [arabicSurahName, toLocalizedVerseKey(resultKeyString, Language.AR)].filter(
       Boolean,
     ) as string[];
-  }, [isSurahResult, arabicSurahName, resultKeyString]);
+  }, [isSurahResult, isArabicLocale, arabicSurahName, resultKeyString]);
 
   const shouldRenderMetaRow = translationMetaParts.length > 0 || arabicMetaParts.length > 0;
 

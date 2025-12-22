@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .arabic {
   font-family: UthmanicHafs;
   direction: rtl;
@@ -37,6 +39,12 @@
     pointer-events: none;
     z-index: 0;
   }
+
+  @include breakpoints.smallerThanTablet {
+    &::after {
+      display: none;
+    }
+  }
 }
 
 .languageText {
@@ -54,6 +62,11 @@
   align-items: flex-start;
   position: relative;
   z-index: 1;
+
+  @include breakpoints.smallerThanTablet {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--spacing-xxsmall);
+  }
 }
 
 .translationColumn {
@@ -61,6 +74,11 @@
   text-align-last: start;
   box-sizing: border-box;
   padding-inline-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    order: 2;
+    padding-inline-end: 0;
+  }
 }
 
 .arabicColumn {
@@ -68,6 +86,11 @@
   block-size: 100%;
   box-sizing: border-box;
   padding-inline-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    order: 1;
+    padding-inline-end: 0;
+  }
 }
 
 .metaRow {
