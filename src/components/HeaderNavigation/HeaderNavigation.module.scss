@@ -26,7 +26,7 @@
     @include utility.pageContainer();
 
     display: flex;
-    block-size: 100%;
+    height: 100%;
     gap: var(--spacing-small-px);
     align-items: center;
 
