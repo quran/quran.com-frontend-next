@@ -95,7 +95,12 @@ const WordByWordVerseAction: React.FC<Props> = ({
     <>
       <PopoverMenu.Item
         icon={
-          <IconContainer icon={<SearchIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          <IconContainer
+            icon={<SearchIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
         }
         onClick={onIconClicked}
       >

@@ -1,7 +1,9 @@
+import BookmarkType from './BookmarkType';
+
 interface Bookmark {
   id: string;
   key: number;
-  type: string;
+  type: BookmarkType;
   verseNumber?: number;
   /**
    * Indicates whether this bookmark belongs to the default collection.
