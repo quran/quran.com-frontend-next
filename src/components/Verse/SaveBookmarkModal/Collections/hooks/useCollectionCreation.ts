@@ -70,7 +70,7 @@ export const useCollectionCreation = ({
       const newCollection = (await addCollection(newCollectionName.trim())) as Collection;
       await addCollectionBookmark({
         key: Number(verse.chapterId),
-        mushaf: mushafId,
+        mushafId,
         type: BookmarkType.Ayah,
         verseNumber: verse.verseNumber,
         collectionId: newCollection?.id,
