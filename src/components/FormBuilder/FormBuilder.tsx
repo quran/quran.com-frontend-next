@@ -57,7 +57,7 @@ const FormBuilder = <T,>({
   renderAction,
   shouldSkipValidation,
 }: FormBuilderProps<T>) => {
-  const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
+  const { handleSubmit, control, setError } = useForm({ mode: 'onChange' });
 
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
