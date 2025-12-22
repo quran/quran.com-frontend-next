@@ -1,6 +1,7 @@
 @use 'src/styles/breakpoints';
 
 @mixin input-base-styles {
+  background-color: transparent;
   transition: border-color var(--transition-moderate) ease;
   padding: var(--spacing-small-px);
   border-radius: var(--border-radius-xsmall-px);
