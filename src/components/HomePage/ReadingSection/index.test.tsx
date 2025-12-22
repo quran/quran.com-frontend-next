@@ -15,6 +15,9 @@ vi.mock('swr', () => ({
     if (typeof key === 'string' && key.startsWith('verse-to-page-')) {
       return { data: (globalThis as any).mockSWRPage };
     }
+    if (typeof key === 'string' && key.includes('preferences')) {
+      return { data: (globalThis as any).mockUserPreferences };
+    }
     return { data: undefined };
   },
 }));
@@ -82,6 +85,27 @@ describe('ReadingSection', () => {
         session: { isGuest: true, isFirstTimeGuest: false },
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
         guestBookmark: { readingBookmark: 'ayah:60:3' },
+      },
+    };
+    render(<ReadingSection />);
+    await waitFor(() => {
+      const el = screen.getByTestId('chapter-card');
+      expect(el.getAttribute('data-page-number')).toBe('');
+      expect(el.getAttribute('data-surah')).toBe('60');
+      expect(el.getAttribute('data-verse')).toBe('3');
+    });
+  });
+
+  it('uses logged-in user preferences over guest bookmark', async () => {
+    (globalThis as any).mockSWRPage = 9;
+    (globalThis as any).mockUserPreferences = {
+      readingBookmark: { bookmark: 'ayah:60:3' },
+    };
+    (globalThis as any).mockState = {
+      current: {
+        session: { isGuest: false, isFirstTimeGuest: false },
+        quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+        guestBookmark: { readingBookmark: 'page:2:1:1' },
       },
     };
     render(<ReadingSection />);
