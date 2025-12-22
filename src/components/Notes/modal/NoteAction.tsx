@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -14,8 +14,8 @@ import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import { Note } from '@/types/auth/Note';
-import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 enum ModalType {
@@ -24,28 +24,60 @@ enum ModalType {
   EDIT_NOTE = 'edit-note',
 }
 
+const CLOSE_POPOVER_AFTER_MS = 150;
+
 interface NoteActionProps {
-  verse: WordVerse;
-  // eslint-disable-next-line react/no-unused-prop-types
+  verseKey: string;
   onActionTriggered?: () => void;
-  // eslint-disable-next-line react/no-unused-prop-types
-  isTranslationView: boolean;
-  hasNotes: boolean;
+  isTranslationView?: boolean;
+
+  /**
+   * Indicates whether the current verse has notes.
+   *
+   * - `true`  → Notes are known to exist.
+   * - `false` → Notes are known not to exist.
+   * - `undefined` → The notes state is unknown (caller does not have access to note evaluation),
+   *   so the component will internally fetch the notes count to determine it.
+   */
+  hasNotes?: boolean;
 }
 
-const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
+const NoteAction: React.FC<NoteActionProps> = ({
+  verseKey,
+  hasNotes: hasNotesProp,
+  onActionTriggered,
+  isTranslationView,
+}) => {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t } = useTranslation('notes');
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
   const [editingNote, setEditingNote] = useState<Note | null>(null);
-
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const { data: notesCount } = useCountRangeNotes(
-    activeModal && { from: verse.verseKey, to: verse.verseKey },
+    activeModal || hasNotesProp === undefined ? { from: verseKey, to: verseKey } : null,
+  );
+
+  const logNoteEvent = useCallback(
+    (event: string) => {
+      logEvent(isTranslationView ? `translation_view_${event}` : `reading_view_${event}`);
+    },
+    [isTranslationView],
   );
 
   const closeModal = useCallback(() => {
     setActiveModal(null);
-  }, []);
+    logNoteEvent('close_notes_modal');
+
+    if (onActionTriggered) {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+
+      closeTimeoutRef.current = setTimeout(() => {
+        onActionTriggered();
+      }, CLOSE_POPOVER_AFTER_MS);
+    }
+  }, [onActionTriggered, logNoteEvent]);
 
   const openAddNoteModal = useCallback(() => {
     setActiveModal(ModalType.ADD_NOTE);
@@ -57,21 +89,38 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
    */
   const handleGuestUserClick = useCallback(() => {
     if (!isLoggedIn()) {
-      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
+      logNoteEvent('note_redirect_to_login');
       return;
     }
 
     openAddNoteModal();
-  }, [router, verse.verseKey, openAddNoteModal]);
+    logNoteEvent('open_add_note_modal');
+  }, [router, verseKey, openAddNoteModal, logNoteEvent]);
 
   const openMyNotesModal = useCallback(() => {
     setActiveModal(ModalType.MY_NOTES);
+    logNoteEvent('open_my_notes_modal');
+  }, [logNoteEvent]);
+
+  const openEditNoteModal = useCallback(
+    (note: Note) => {
+      setEditingNote(note);
+      setActiveModal(ModalType.EDIT_NOTE);
+      logNoteEvent('open_edit_note_modal');
+    },
+    [logNoteEvent],
+  );
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
 
-  const openEditNoteModal = useCallback((note: Note) => {
-    setEditingNote(note);
-    setActiveModal(ModalType.EDIT_NOTE);
-  }, []);
+  const hasNote = hasNotesProp || notesCount?.[verseKey] > 0;
 
   return (
     <>
@@ -81,16 +130,16 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
           translationViewStyles.verseAction,
         )}
         onClick={handleGuestUserClick}
-        tooltip={t('notes:take-a-note-or-reflection')}
+        tooltip={t('take-a-note-or-reflection')}
         type={ButtonType.Primary}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
-        ariaLabel={t('notes:take-a-note-or-reflection')}
+        ariaLabel={t('take-a-note-or-reflection')}
       >
         <span className={translationViewStyles.icon}>
           <IconContainer
-            icon={hasNotes ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}
+            icon={hasNote ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}
             color={IconColor.tertiary}
             size={IconSize.Custom}
           />
@@ -101,17 +150,17 @@ const NoteAction: React.FC<NoteActionProps> = ({ verse, hasNotes }) => {
         isModalOpen={activeModal === ModalType.ADD_NOTE}
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
-        notesCount={notesCount?.[verse.verseKey] ?? 0}
-        verseKey={verse.verseKey}
+        notesCount={notesCount?.[verseKey] ?? 0}
+        verseKey={verseKey}
       />
 
       <MyNotesModal
         isOpen={activeModal === ModalType.MY_NOTES}
         onClose={closeModal}
-        notesCount={notesCount?.[verse.verseKey] ?? 0}
+        notesCount={notesCount?.[verseKey] ?? 0}
         onAddNote={openAddNoteModal}
         onEditNote={openEditNoteModal}
-        verseKey={verse.verseKey}
+        verseKey={verseKey}
       />
 
       <EditNoteModal

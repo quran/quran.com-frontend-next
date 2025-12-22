@@ -91,9 +91,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           </ActionItem>
           <ActionItem>
             <AddNoteAction
-              verse={verse}
+              verseKey={verse.verseKey}
               isTranslationView={isTranslationView}
-              hasNotes={hasNotes}
+              // Safe guard to ensure hasNotes is a boolean value
+              hasNotes={!!hasNotes}
             />
           </ActionItem>
 
