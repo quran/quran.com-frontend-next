@@ -13,7 +13,10 @@ import StarRating from '@/dls/Forms/StarRating';
 import TextArea from '@/dls/Forms/TextArea';
 import { FormFieldType } from '@/types/FormField';
 
-export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
+export type SubmissionResult<T> = Promise<void | {
+  errors?: { [key in keyof T]: string };
+  success?: boolean;
+}>;
 type FormBuilderProps<T> = {
   className?: string;
   formFields: FormBuilderFormField[];
@@ -23,6 +26,9 @@ type FormBuilderProps<T> = {
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
   shouldSkipValidation?: boolean;
+  /**
+   * When true, automatically clears all form fields after successful submission (when the promise resolves without errors).
+   */
   shouldClearOnSuccess?: boolean;
 };
 
@@ -64,13 +70,15 @@ const FormBuilder = <T,>({
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
     if (onSubmitPromise) {
-      onSubmitPromise.then((errorData) => {
-        if (errorData && errorData?.errors) {
-          Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
-            setError(field, { type: 'manual', message: errorMessage as string });
-          });
-        } else if (shouldClearOnSuccess) {
-          reset();
+      onSubmitPromise.then((result) => {
+        if (result) {
+          if (result.errors) {
+            Object.entries(result.errors).forEach(([field, errorMessage]) => {
+              setError(field, { type: 'manual', message: errorMessage as string });
+            });
+          } else if (result.success && shouldClearOnSuccess) {
+            reset();
+          }
         }
       });
     }

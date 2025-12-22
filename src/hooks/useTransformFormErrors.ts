@@ -11,8 +11,8 @@ type FormErrorTransformerConfig<T> = {
 
 interface TransformFormErrorsResult<T> {
   transformErrors: (
-    apiResult: { errors?: Record<string, string> } | void | undefined,
-  ) => { errors: { [key in keyof T]: string } } | undefined;
+    apiResult: { errors?: Record<string, string>; success?: boolean } | void | undefined,
+  ) => { errors?: { [key in keyof T]: string }; success?: boolean } | undefined;
 }
 
 /**
@@ -26,9 +26,13 @@ const useTransformFormErrors = <T extends Record<string, unknown>>(
   const { t } = useTranslation('common');
 
   const transformErrors = (
-    apiResult: { errors?: Record<string, string> } | void | undefined,
-  ): { errors: { [key in keyof T]: string } } | undefined => {
+    apiResult: { errors?: Record<string, string>; success?: boolean } | void | undefined,
+  ): { errors?: { [key in keyof T]: string }; success?: boolean } | undefined => {
+    // Return success result if no errors present
     if (!apiResult || !('errors' in apiResult) || !apiResult.errors) {
+      if (apiResult && apiResult.success) {
+        return { success: true };
+      }
       return undefined;
     }
 
