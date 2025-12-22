@@ -132,7 +132,7 @@ export const verseRangesToVerseKeys = (
  * @param {string[]} rangeKeys The range keys array
  * @param {ChaptersData} chaptersData
  * @param {string} lang
- * @returns {string} Readable verse ranges string
+ * @returns {string[]} Array of readable verse range strings
  */
 export const readableVerseRangeKeys = (
   rangeKeys: string[],
@@ -156,7 +156,7 @@ export const readableVerseRangeKeys = (
 
       const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
 
-      if (from.verse === to.verse) {
+      if (from.chapter === to.chapter && from.verse === to.verse) {
         return titleForm;
       }
 

@@ -87,7 +87,10 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
               <div className={styles.noteHeader}>
                 <div>
                   <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
-                  <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
+                  <time
+                    className={styles.noteDate}
+                    dateTime={new Date(note.createdAt).toISOString()}
+                  >
                     {formatNoteDate(note.createdAt, lang)}
                   </time>
                 </div>
@@ -149,7 +152,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
   );
 };
 
-const formatNoteDate = (date: Date, locale: string) => {
+const formatNoteDate = (date: Date | string | number, locale: string) => {
   const dateInstance = new Date(date);
   return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
     day: 'numeric',

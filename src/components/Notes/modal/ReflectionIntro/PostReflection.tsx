@@ -29,20 +29,24 @@ const PublicReflectionDescription: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         {t('post-refl-intro.post-button')}
-        <button type="button" onClick={toggleOpen} className={styles.learnMoreButton}>
+        <button
+          type="button"
+          onClick={toggleOpen}
+          className={styles.learnMoreButton}
+          aria-expanded={isOpen}
+          aria-controls="public-reflection-description-content"
+        >
           {isOpen ? t('new-note-reflc-intro.see-less') : t('new-note-reflc-intro.learn-more')}
         </button>
       </div>
       {isOpen && (
-        <div className={styles.contentContainer}>
+        <div className={styles.contentContainer} id="public-reflection-description-content">
           <div className={styles.sectionContainer}>
             <div className={styles.sectionHeader}>{t('post-refl-intro.qr-title')}</div>
             <Trans
               components={{
-                li: <li key={0} />,
                 link: (
                   <Link
-                    key={0}
                     href="https://quranreflect.com/faq"
                     variant={LinkVariant.Blend}
                     className={styles.link}
@@ -59,10 +63,9 @@ const PublicReflectionDescription: React.FC = () => {
               <Trans
                 i18nKey="notes:post-refl-intro.post.desc"
                 components={{
-                  li: <li key={0} />,
+                  li: <li />,
                   link: (
                     <Link
-                      key={0}
                       href="https://quranreflect.com"
                       variant={LinkVariant.Blend}
                       className={styles.link}
@@ -77,6 +80,8 @@ const PublicReflectionDescription: React.FC = () => {
             type="button"
             onClick={toggleOpen}
             className={classNames(styles.learnMoreButton, styles.seeLessButton)}
+            aria-expanded={isOpen}
+            aria-controls="public-reflection-description-content"
           >
             {t('new-note-reflc-intro.see-less')}
           </button>

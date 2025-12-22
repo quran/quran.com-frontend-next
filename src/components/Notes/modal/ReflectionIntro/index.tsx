@@ -101,7 +101,7 @@ const ReflectionIntro = () => {
             <ul className={styles.bulletList}>
               <Trans
                 i18nKey="notes:new-note-reflc-intro.reflc-prompts.personal.desc"
-                components={{ li: <li key={0} /> }}
+                components={{ li: <li /> }}
               />
             </ul>
             <div className={classNames(styles.subSectionHeader)}>
@@ -110,7 +110,7 @@ const ReflectionIntro = () => {
             <ul className={styles.bulletList}>
               <Trans
                 i18nKey="notes:new-note-reflc-intro.reflc-prompts.deeper.desc"
-                components={{ li: <li key={0} /> }}
+                components={{ li: <li /> }}
               />
             </ul>
           </div>

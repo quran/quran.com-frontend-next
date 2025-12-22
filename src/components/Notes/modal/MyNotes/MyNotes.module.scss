@@ -14,7 +14,7 @@
   flex-direction: column;
   gap: var(--spacing-medium);
   overflow-y: auto;
-  max-height: 45vh;
+  max-block-size: 45vh;
 }
 
 .noteCard {
@@ -69,9 +69,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(2 * var(--spacing-max));
-  display: flex;
-  justify-content: center;
+  min-block-size: calc(2 * var(--spacing-max));
 
   &[data-error='true'] {
     color: var(--color-text-error);

@@ -27,7 +27,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
   return (
     <ContentModal
       isOpen={isModalOpen}
-      header={<p className={modalStyles.title}>{t('take-a-note-or-reflection')}</p>}
+      header={<h2 className={modalStyles.title}>{t('take-a-note-or-reflection')}</h2>}
       hasCloseButton
       onClose={onModalClose}
       onEscapeKeyDown={onModalClose}

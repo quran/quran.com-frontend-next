@@ -20,7 +20,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
   onClose,
   onAddNote,
   onEditNote,
-  notesCount = 1,
+  notesCount = 0,
   verseKey,
 }) => {
   const { t } = useTranslation('notes');

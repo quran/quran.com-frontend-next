@@ -9,6 +9,10 @@ export const isNotePublishFailed = (data: unknown) => {
 };
 
 export const getNoteFromResponse = (data: unknown): Note | undefined => {
+  if (typeof data !== 'object' || data === null) {
+    return undefined;
+  }
+
   const note = data as Note & { note?: Note };
   if (isNotePublishFailed(note)) return note.note;
   return note;
