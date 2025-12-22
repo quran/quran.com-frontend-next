@@ -1,16 +1,43 @@
 @use 'src/styles/breakpoints';
 
 .reflectionDataContainer {
-  padding-block: var(--spacing-small-px);
+  padding-block-start: var(--spacing-small-px);
   padding-inline: var(--spacing-medium-px);
   @include breakpoints.tablet {
-    padding-block: var(--spacing-medium-px);
+    padding-block-start: var(--spacing-medium-px);
     padding-inline: var(--spacing-large-px);
   }
 }
 
-.tabsContainer.tabsContainer {
+.tabsContainerWrapper .tabsContainer {
   border-block-end: unset;
+
+  .tab {
+    padding-inline: var(--spacing-xxlarge-px);
+    padding-block: var(--spacing-medium-px);
+    inline-size: 100%;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-faded-new);
+    border-block-end: var(--spacing-micro-px) solid var(--color-borders-hairline);
+
+    svg {
+      inline-size: var(--spacing-medium-plus-px);
+      block-size: var(--spacing-medium-plus-px);
+      @include breakpoints.tablet {
+        inline-size: var(--spacing-medium2-px);
+        block-size: var(--spacing-medium2-px);
+      }
+    }
+  }
+
+  .tab + .tab {
+    margin-inline-start: unset;
+  }
+
+  .tabActive {
+    color: var(--color-success-medium);
+    border-block-end-color: var(--color-success-medium);
+  }
 }
 
 .titleContainer {
@@ -25,31 +52,4 @@
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
   }
-}
-
-.tab.tab {
-  padding-inline: var(--spacing-xxlarge-px);
-  padding-block: var(--spacing-medium-px);
-  inline-size: 100%;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-faded-new);
-  border-block-end: var(--spacing-micro-px) solid var(--color-borders-hairline);
-
-  svg {
-    inline-size: var(--spacing-medium-plus-px);
-    block-size: var(--spacing-medium-plus-px);
-    @include breakpoints.tablet {
-      inline-size: var(--spacing-medium2-px);
-      block-size: var(--spacing-medium2-px);
-    }
-  }
-
-  & + & {
-    margin-inline-start: unset;
-  }
-}
-
-.tabActive.tabActive {
-  color: var(--color-success-medium);
-  border-block-end-color: var(--color-success-medium);
 }

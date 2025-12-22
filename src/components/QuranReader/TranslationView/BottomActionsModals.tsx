@@ -96,6 +96,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
+            overlayClassName={styles.reflectionOverlay}
             contentClassName={styles.reflectionContentModal}
             innerContentClassName={styles.reflectionInnerContentModal}
             innerRef={reflectionModalRef}

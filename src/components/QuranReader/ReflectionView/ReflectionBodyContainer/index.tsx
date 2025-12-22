@@ -107,7 +107,7 @@ const ReflectionBodyContainer = ({
   );
 
   const body = (
-    <>
+    <div className={styles.tabsContainerWrapper}>
       <Tabs
         tabs={getReflectionTabs(t, isModal)}
         selected={selectedContentType}
@@ -117,7 +117,7 @@ const ReflectionBodyContainer = ({
         activeClassName={styles.tabActive}
       />
       {isModal ? <div className={styles.reflectionDataContainer}>{dataFetcher}</div> : dataFetcher}
-    </>
+    </div>
   );
 
   return render({

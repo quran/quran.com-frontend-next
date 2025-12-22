@@ -2,10 +2,6 @@
 
 .separatorContainer {
   margin-block: var(--spacing-large);
-  display: none;
-  @include breakpoints.tablet {
-    display: block;
-  }
 }
 .container {
   min-block-size: calc(10 * var(--spacing-mega));

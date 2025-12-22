@@ -1,8 +1,8 @@
 @use 'src/styles/breakpoints';
 
-.reflectionContentModal.reflectionContentModal {
+.reflectionOverlay .reflectionContentModal {
   padding: 0;
-  .reflectionHeader.reflectionHeader {
+  .reflectionHeader {
     border-radius: var(--border-radius-rounded);
     padding-inline: var(--spacing-medium-px);
     padding-block: var(--spacing-small-px);
