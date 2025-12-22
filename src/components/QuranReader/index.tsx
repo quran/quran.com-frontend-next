@@ -9,6 +9,7 @@ import useSyncChapterPage from './hooks/useSyncChapterPage';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
+import BottomActionsModals from './TranslationView/BottomActionsModals';
 
 import { SurahInfoModalProvider } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
@@ -44,6 +45,7 @@ const QuranReader = ({
       <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
+      <BottomActionsModals />
       <div
         className={classNames(styles.container, {
           [styles.withVisibleSideBar]: isSideBarVisible,

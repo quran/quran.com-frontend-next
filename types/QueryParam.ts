@@ -33,6 +33,9 @@ enum QueryParam {
   VISITEDPLATFORM = 'visitedPlatform',
   SILENT = 'silent',
   REDIRECTBACK = 'redirectBack',
+  OVERLAY = 'overlay',
+  TAFSIR_ID = 'tafsirId',
+  QUESTION_ID = 'questionId',
 }
 
 export default QueryParam;

@@ -185,6 +185,28 @@ const nextConfig = {
       permanent: true,
     },
   ],
+  rewrites: async () => [
+    {
+      source: '/:chapterId(\\d+)\\::verseId(\\d+)/reflections',
+      destination: '/:chapterId?startingVerse=:verseId&overlay=reflections',
+    },
+    {
+      source: '/:chapterId(\\d+)\\::verseId(\\d+)/lessons',
+      destination: '/:chapterId?startingVerse=:verseId&overlay=lessons',
+    },
+    {
+      source: '/:chapterId(\\d+)\\::verseId(\\d+)/tafsirs/:tafsirId',
+      destination: '/:chapterId?startingVerse=:verseId&overlay=tafsirs&tafsirId=:tafsirId',
+    },
+    {
+      source: '/:chapterId(\\d+)\\::verseId(\\d+)/answers',
+      destination: '/:chapterId?startingVerse=:verseId&overlay=answers',
+    },
+    {
+      source: '/:chapterId(\\d+)\\::verseId(\\d+)/answers/:questionId',
+      destination: '/:chapterId?startingVerse=:verseId&overlay=answers&questionId=:questionId',
+    },
+  ],
   compiler: {
     removeConsole: !isDev,
   },
