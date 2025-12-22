@@ -23,6 +23,7 @@ type FormBuilderProps<T> = {
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
   shouldSkipValidation?: boolean;
+  shouldClearOnSuccess?: boolean;
 };
 
 /**
@@ -56,8 +57,9 @@ const FormBuilder = <T,>({
   isSubmitting,
   renderAction,
   shouldSkipValidation,
+  shouldClearOnSuccess = false,
 }: FormBuilderProps<T>) => {
-  const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
+  const { handleSubmit, control, setError, reset } = useForm({ mode: 'onBlur' });
 
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
@@ -67,6 +69,8 @@ const FormBuilder = <T,>({
           Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
             setError(field, { type: 'manual', message: errorMessage as string });
           });
+        } else if (shouldClearOnSuccess) {
+          reset();
         }
       });
     }

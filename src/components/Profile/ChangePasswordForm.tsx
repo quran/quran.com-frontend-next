@@ -84,6 +84,7 @@ const ChangePasswordForm: FC = () => {
         actionText={t('update-password')}
         isSubmitting={isUpdating}
         renderAction={renderAction}
+        shouldClearOnSuccess
       />
     </Section>
   );
