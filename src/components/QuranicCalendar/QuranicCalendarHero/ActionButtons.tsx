@@ -8,8 +8,8 @@ import styles from './QuranicCalendarHero.module.scss';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import AskQuestionIcon from '@/icons/ask-question.svg';
 import EmailIcon from '@/icons/email.svg';
-import QuestionMarkIcon from '@/icons/question-mark.svg';
 import TelegramIcon from '@/icons/telegram.svg';
 import TickIcon from '@/icons/tick.svg';
 import WhatsappIcon from '@/icons/whatsapp.svg';
@@ -121,7 +121,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             onClick={() => logButtonClick('quranic_calendar_ask_question')}
             className={classNames(styles.button, styles.askQuestionButton)}
           >
-            <IconContainer {...ICON_CONTAINER_PROPS} icon={<QuestionMarkIcon />} />
+            <IconContainer {...ICON_CONTAINER_PROPS} icon={<AskQuestionIcon />} />
             {t('ask-question')}
           </Button>
         )}
