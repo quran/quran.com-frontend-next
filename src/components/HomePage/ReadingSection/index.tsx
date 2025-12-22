@@ -18,6 +18,7 @@ import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectUserState } from '@/redux/slices/session';
+import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
 import { getUserPreferences } from '@/utils/auth/api';
 import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
@@ -45,9 +46,8 @@ const ReadingSection: React.FC<Props> = () => {
   // Fetch recently read verses as fallback (for all users)
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys(false);
 
-  const readingBookmark = isGuest
-    ? guestReadingBookmark
-    : userPreferences?.readingBookmark?.bookmark;
+  const readingBookmark =
+    guestReadingBookmark ?? userPreferences?.readingBookmark?.bookmark ?? null;
 
   const parsed = useMemo(() => {
     return parseReadingBookmark(readingBookmark, recentlyReadVerseKeys);
@@ -92,7 +92,12 @@ const ReadingSection: React.FC<Props> = () => {
   // Applies to both guest and logged-in users
   const surahNumber = effectiveSurahNumber;
   const verseNumber = effectiveVerseNumber ?? null;
-  const pageNumber = resolvedPageNumber ?? undefined;
+  const isPageBookmark =
+    typeof readingBookmark === 'string' && readingBookmark.startsWith(BookmarkType.Page);
+
+  const pageNumber = isPageBookmark
+    ? resolvedPageNumber ?? storedPageNumberFromBookmark ?? undefined
+    : undefined;
 
   // Determine if user has reading sessions (either reading bookmark or recently read verses)
   const hasReadingBookmark = isGuest
