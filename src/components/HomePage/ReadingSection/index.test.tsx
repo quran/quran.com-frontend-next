@@ -74,4 +74,22 @@ describe('ReadingSection', () => {
       expect(screen.getByTestId('chapter-card').getAttribute('data-page-number')).toBe('3'),
     );
   });
+
+  it('renders ChapterCard linking to verse for ayah bookmark', async () => {
+    (globalThis as any).mockSWRPage = 8;
+    (globalThis as any).mockState = {
+      current: {
+        session: { isGuest: true, isFirstTimeGuest: false },
+        quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+        guestBookmark: { readingBookmark: 'ayah:60:3' },
+      },
+    };
+    render(<ReadingSection />);
+    await waitFor(() => {
+      const el = screen.getByTestId('chapter-card');
+      expect(el.getAttribute('data-page-number')).toBe('');
+      expect(el.getAttribute('data-surah')).toBe('60');
+      expect(el.getAttribute('data-verse')).toBe('3');
+    });
+  });
 });
