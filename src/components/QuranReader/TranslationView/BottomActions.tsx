@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
@@ -7,7 +8,6 @@ import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import useIsMobile, { MobileSizeVariant } from '@/hooks/useIsMobile';
-import { useOverlayModal, OverlayType } from '@/hooks/useOverlayModal';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -43,6 +43,7 @@ interface BottomActionsProps {
  */
 const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const questionsData = usePageQuestions();
@@ -50,59 +51,62 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
   const isMobile = useIsMobile(MobileSizeVariant.SMALL);
 
-  // Use centralized overlay hooks for each modal type
-  const tafsirModal = useOverlayModal({ verseKey, overlayType: OverlayType.TAFSIRS });
-  const reflectionModal = useOverlayModal({ verseKey, overlayType: OverlayType.REFLECTIONS });
-  const questionsModal = useOverlayModal({ verseKey, overlayType: OverlayType.ANSWERS });
+  const createTabHandler = useCallback(
+    (tabType: TabId, navigationFn: () => string) => {
+      return () => {
+        logButtonClick(
+          `${
+            isTranslationView ? 'translation_view' : 'reading_view'
+          }_verse_bottom_actions_${tabType}`,
+        );
 
-  const createTabHandler = (tabType: TabId, navigationFn: () => string, openFn: (url: string) => void) => {
-    return () => {
-      logButtonClick(
-        `${
-          isTranslationView ? 'translation_view' : 'reading_view'
-        }_verse_bottom_actions_${tabType}`,
-      );
-
-      openFn(navigationFn());
-    };
-  };
+        router.push(navigationFn(), undefined, { shallow: true });
+      };
+    },
+    [router, isTranslationView],
+  );
 
   // Define tab configurations
-  const tabs = [
-    {
-      id: TabId.TAFSIR,
-      label: t('quran-reader:tafsirs'),
-      icon: <BookIcon />,
-      onClick: createTabHandler(
-        TabId.TAFSIR,
-        () => getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
-        tafsirModal.open,
-      ),
-      condition: true,
-    },
-    {
-      id: TabId.REFLECTIONS,
-      label: isMobile ? t('reflections') : t('reflections-and-lessons'),
-      icon: <ChatIcon />,
-      onClick: createTabHandler(
-        TabId.REFLECTIONS,
-        () => getVerseReflectionNavigationUrl(verseKey),
-        reflectionModal.open,
-      ),
-      condition: true,
-    },
-    {
-      id: TabId.ANSWERS,
-      label: t('answers'),
-      icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
-      onClick: createTabHandler(
-        TabId.ANSWERS,
-        () => getVerseAnswersNavigationUrl(verseKey),
-        questionsModal.open,
-      ),
-      condition: hasQuestions,
-    },
-  ];
+  const tabs = useMemo(
+    () => [
+      {
+        id: TabId.TAFSIR,
+        label: t('quran-reader:tafsirs'),
+        icon: <BookIcon />,
+        onClick: createTabHandler(TabId.TAFSIR, () =>
+          getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
+        ),
+        condition: true,
+      },
+      {
+        id: TabId.REFLECTIONS,
+        label: isMobile ? t('reflections') : t('reflections-and-lessons'),
+        icon: <ChatIcon />,
+        onClick: createTabHandler(TabId.REFLECTIONS, () =>
+          getVerseReflectionNavigationUrl(verseKey),
+        ),
+        condition: true,
+      },
+      {
+        id: TabId.ANSWERS,
+        label: t('answers'),
+        icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
+        onClick: createTabHandler(TabId.ANSWERS, () => getVerseAnswersNavigationUrl(verseKey)),
+        condition: hasQuestions,
+      },
+    ],
+    [
+      t,
+      isMobile,
+      createTabHandler,
+      chapterId,
+      verseNumber,
+      tafsirs,
+      verseKey,
+      isClarificationQuestion,
+      hasQuestions,
+    ],
+  );
 
   return <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />;
 };

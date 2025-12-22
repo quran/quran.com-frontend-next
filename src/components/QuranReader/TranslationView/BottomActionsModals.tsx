@@ -47,6 +47,12 @@ const BottomActionsModals: React.FC = () => {
     return null;
   }
 
+  // Validate chapter ID is within valid range (1-114)
+  const chapterIdNum = Number(chapterId);
+  if (Number.isNaN(chapterIdNum) || chapterIdNum < 1 || chapterIdNum > 114) {
+    return null;
+  }
+
   // Determine mode for logging (backward compatibility)
   const isTranslationView = readingPreference !== ReadingPreference.Reading;
   const viewMode = isTranslationView ? 'translation_view' : 'reading_view';
@@ -79,7 +85,11 @@ const BottomActionsModals: React.FC = () => {
           shouldRender
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber}
-          initialTafsirIdOrSlug={tafsirs[0] || String(router.query[QueryParam.TAFSIR_ID] || '')}
+          initialTafsirIdOrSlug={
+            router.query[QueryParam.TAFSIR_ID]
+              ? String(router.query[QueryParam.TAFSIR_ID])
+              : tafsirs[0]
+          }
           scrollToTop={() => {
             tafsirModalRef.current?.scrollToTop();
           }}
