@@ -26,9 +26,11 @@ type RecentlyReadVerseData = {
  */
 function useGetRecentlyReadVerseKeys<T extends boolean = true>(
   shouldReturnVerseKeysArray: T = true as T,
+  shouldAlsoReturnTimestamps: boolean = false,
 ): {
   recentlyReadVerseKeys: T extends true ? string[] : RecentlyReadVerseData[];
   isLoading: boolean;
+  timestamps?: (Date | undefined)[];
 } {
   // Get sessions from Redux store (for non-logged in users)
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
@@ -69,11 +71,42 @@ function useGetRecentlyReadVerseKeys<T extends boolean = true>(
     });
   }, [data, recentReadingSessions, shouldReturnVerseKeysArray, isUserLoggedIn]);
 
+  // Memoize computation of timestamps
+  const timestamps = useMemo<(Date | undefined)[] | undefined>(() => {
+    if (!shouldAlsoReturnTimestamps) return undefined;
+
+    // Handle logged-in users (data from server)
+    if (isUserLoggedIn) {
+      if (!data) return [];
+      return data.map((item) => {
+        try {
+          const date = new Date(item.updatedAt);
+          // Check if date is valid
+          return Number.isNaN(date.getTime()) ? undefined : date;
+        } catch {
+          return undefined;
+        }
+      });
+    }
+
+    // Handle non-logged in users (data from Redux)
+    return Object.values(recentReadingSessions).map((timestamp: number) => {
+      try {
+        const date = new Date(timestamp);
+        // Check if date is valid
+        return Number.isNaN(date.getTime()) ? undefined : date;
+      } catch {
+        return undefined;
+      }
+    });
+  }, [data, recentReadingSessions, shouldAlsoReturnTimestamps, isUserLoggedIn]);
+
   return {
     recentlyReadVerseKeys: recentlyReadVerseKeys as T extends true
       ? string[]
       : RecentlyReadVerseData[],
     isLoading: isValidating && !data,
+    ...(shouldAlsoReturnTimestamps && { timestamps }),
   };
 }
 
