@@ -8,11 +8,10 @@
     "title": "Are you absolutely sure?"
   },
   "delete-profile-picture": {
-    "action-text": "I understand the consequence, delete my profile picture",
-    "confirmation-text": "delete my profile picture",
-    "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
-    "subtitle": "This action cannot be undone. This will permanently delete your profile picture.",
-    "title": "Are you absolutely sure?"
+    "action-text": "Yes",
+    "cancel-text": "No",
+    "subtitle": "You will delete the profile pic and reset it to the default, Are you sure?",
+    "title": "Delete Profile Picture"
   },
   "my-profile": "My Profile",
   "personalization": "Personalization",
