@@ -132,6 +132,8 @@ const SearchResultText: React.FC<Props> = ({
   const type = useMemo(() => getResultType(result), [result]);
   const isSearchPage = result.resultType === SearchNavigationType.SEARCH_PAGE;
   const isSurahResult = result.resultType === SearchNavigationType.SURAH;
+  // When the UI is Arabic, surah results should not render duplicate Arabic columns.
+  const isArabicLocale = lang === Language.AR;
 
   const isAyahResult = useMemo(() => {
     return [
@@ -151,10 +153,13 @@ const SearchResultText: React.FC<Props> = ({
    */
   const isArabicSearchResult = result.isArabic ?? false;
   const isBilingualResult = useMemo(() => {
+    // Avoid rendering two Arabic columns for surah results in Arabic UI.
+    if (isSurahResult && isArabicLocale) return false;
+
     return (
       (isAyahResult || isSurahResult) && !!result?.arabic && !isArabic && !isArabicSearchResult
     );
-  }, [isAyahResult, isSurahResult, result?.arabic, isArabic, isArabicSearchResult]);
+  }, [isAyahResult, isSurahResult, isArabicLocale, result?.arabic, isArabic, isArabicSearchResult]);
 
   // Display text + meta
   const displayName = useMemo(() => {
