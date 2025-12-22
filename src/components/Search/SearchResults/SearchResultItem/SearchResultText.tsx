@@ -48,6 +48,23 @@ type Props = {
   textTag?: keyof JSX.IntrinsicElements;
 };
 
+const normalizeNameForComparison = (value?: string) => value?.trim().toLowerCase();
+
+/**
+ * Determines whether to include the translated name based on if its there are differences
+ * @param {string} transliteratedName The name in its transliterated form.
+ * @param {string} translatedName The name in its translated form.
+ * @returns {boolean} Whether the translated name should be included.
+ */
+const shouldIncludeTranslatedName = (
+  transliteratedName?: string,
+  translatedName?: string,
+): boolean => {
+  const normalizedTransliteration = normalizeNameForComparison(transliteratedName);
+  const normalizedTranslation = normalizeNameForComparison(translatedName);
+  return !!translatedName && normalizedTranslation !== normalizedTransliteration;
+};
+
 /**
  * SearchResultText
  *
@@ -101,6 +118,13 @@ const SearchResultText: React.FC<Props> = ({
       ? getChapterData(arabicChaptersData, surahNumber)
       : undefined;
   }, [arabicChaptersData, surahNumber]);
+
+  const transliteratedName = chapterData?.transliteratedName;
+  const translatedName = chapterData?.translatedName;
+  const shouldShowTranslatedName = useMemo(
+    () => shouldIncludeTranslatedName(transliteratedName, translatedName),
+    [transliteratedName, translatedName],
+  );
 
   const arabicSurahName = arabicChapterData?.nameArabic || arabicChapterData?.translatedName;
 
@@ -160,12 +184,26 @@ const SearchResultText: React.FC<Props> = ({
         ? name.slice(0, -suffixToRemove.length)
         : name;
 
-    if (isSurahResult && chapterData?.translatedName) {
-      return `${base} (${chapterData.translatedName}) ${suffix}`.trim();
+    if (isSurahResult) {
+      // Avoid repeating the translation when it matches the transliteration.
+      if (shouldShowTranslatedName) {
+        return `${base} (${translatedName}) ${suffix}`.trim();
+      }
+
+      return `${base} ${suffix}`.trim();
     }
 
     return base;
-  }, [type, resultKeyString, lang, chaptersData, name, isSurahResult, chapterData?.translatedName]);
+  }, [
+    type,
+    resultKeyString,
+    lang,
+    chaptersData,
+    name,
+    isSurahResult,
+    shouldShowTranslatedName,
+    translatedName,
+  ]);
 
   // Get Arabic text, adding verse key for surah results
   const arabicText = useMemo(() => {
@@ -179,15 +217,17 @@ const SearchResultText: React.FC<Props> = ({
   const translationMetaParts = useMemo(() => {
     if (isSurahResult) return [];
 
+    // Avoid duplicate labels when translation matches the transliteration (case/spacing normalized).
     return [
-      chapterData?.transliteratedName,
-      chapterData?.translatedName,
+      transliteratedName,
+      shouldShowTranslatedName ? translatedName : undefined,
       toLocalizedVerseKey(resultKeyString, lang),
     ].filter(Boolean) as string[];
   }, [
     isSurahResult,
-    chapterData?.transliteratedName,
-    chapterData?.translatedName,
+    transliteratedName,
+    translatedName,
+    shouldShowTranslatedName,
     resultKeyString,
     lang,
   ]);
