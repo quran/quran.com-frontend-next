@@ -27,7 +27,7 @@ const DeleteProfilePictureButton: FC<DeleteProfilePictureButtonProps> = ({
     setIsModalVisible(false);
   }, []);
 
-  const onDeleteConfirmed = useCallback(async () => {
+  const onDeleteConfirmed = useCallback(() => {
     logButtonClick('profile_confirm_delete_profile_picture');
     onRemovePicture();
     closeModal();
