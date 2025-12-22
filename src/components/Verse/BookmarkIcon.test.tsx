@@ -89,7 +89,7 @@ describe('BookmarkIcon', () => {
     expect(screen.getByTestId('icon-container')).toBeDefined();
   });
 
-  it('renders icon container when only collection is bookmarked', async () => {
+  it('renders icon new when only collection is bookmarked', async () => {
     cleanup();
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
     render(
@@ -100,7 +100,7 @@ describe('BookmarkIcon', () => {
         isCollectionBookmarked
       />,
     );
-    expect(screen.getByTestId('icon-container')).toBeDefined();
+    expect(screen.getByTestId('icon-new')).toBeDefined();
   });
 
   it('unbookmarked icon container has correct props', async () => {

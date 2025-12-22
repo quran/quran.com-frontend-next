@@ -43,7 +43,7 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
     return <BookmarkStar className={styles.bookmarkIcon} />;
   }
 
-  if (isBookmarked) {
+  if (isBookmarked || isCollectionBookmarked) {
     return <BookmarkFilled className={styles.bookmarkIcon} />;
   }
 

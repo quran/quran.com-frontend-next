@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -49,20 +50,39 @@ export const useFavoritesToggle = ({
   const commonT = useTranslation('common').t;
   const { t } = useTranslation('quran-reader');
 
-  const handleVerseBookmarkToggle = useCallback(async (): Promise<void> => {
+  const removeFavoriteOnly = useCallback(async () => {
     if (!resourceBookmark) return;
+    await deleteBookmarkById(resourceBookmark.id);
+    mutateResourceBookmark(undefined);
+    onToast(commonT('verse-bookmark-removed'), ToastStatus.Success);
+    logEvent('verse_removed_from_favorites', { verseKey });
+  }, [resourceBookmark, mutateResourceBookmark, onToast, commonT, verseKey]);
 
-    const isOnlyInFavorites =
-      resourceBookmark.isInDefaultCollection &&
-      (!bookmarkCollectionIdsData || bookmarkCollectionIdsData.length === 0);
+  const handleNewVerseBookmark = useCallback(async (): Promise<void> => {
+    if (!verse) return;
+    const newBookmark = await addBookmark({
+      key: Number(verse.chapterId),
+      mushafId,
+      type: BookmarkType.Ayah,
+      verseNumber: verse.verseNumber,
+    });
+    mutateResourceBookmark(newBookmark);
+    onToast(commonT('verse-bookmarked'), ToastStatus.Success);
+    logEvent('verse_added_to_favorites', { verseKey });
+    mutateBookmarkCollectionIdsData();
+  }, [
+    verse,
+    mushafId,
+    mutateResourceBookmark,
+    onToast,
+    commonT,
+    verseKey,
+    mutateBookmarkCollectionIdsData,
+  ]);
 
-    if (isOnlyInFavorites) {
-      await deleteBookmarkById(resourceBookmark.id);
-      mutateResourceBookmark(undefined);
-      onToast(commonT('verse-bookmark-removed'), ToastStatus.Success);
-      logEvent('verse_removed_from_favorites', { verseKey });
-    } else {
-      const newIsInDefaultCollection = !resourceBookmark.isInDefaultCollection;
+  const updateFavoriteToggle = useCallback(
+    async (newIsInDefaultCollection: boolean) => {
+      if (!resourceBookmark) return;
       await updateBookmarkById(resourceBookmark.id, {
         isInDefaultCollection: newIsInDefaultCollection,
       });
@@ -78,39 +98,38 @@ export const useFavoritesToggle = ({
         newIsInDefaultCollection ? 'verse_added_to_favorites' : 'verse_removed_from_favorites',
         { verseKey },
       );
+    },
+    [resourceBookmark, mutateResourceBookmark, onToast, commonT, verseKey],
+  );
+
+  const handleVerseBookmarkToggle = useCallback(async (): Promise<void> => {
+    if (!resourceBookmark) return;
+    const isOnlyInFavorites =
+      resourceBookmark.isInDefaultCollection &&
+      (!bookmarkCollectionIdsData || bookmarkCollectionIdsData.length === 0);
+
+    if (isOnlyInFavorites) {
+      await removeFavoriteOnly();
+    } else {
+      const isNotFavoritedAndHasNoCollections =
+        !resourceBookmark.isInDefaultCollection &&
+        (!bookmarkCollectionIdsData || bookmarkCollectionIdsData.length === 0);
+
+      if (isNotFavoritedAndHasNoCollections) {
+        await handleNewVerseBookmark();
+      } else {
+        const newIsInDefaultCollection = !resourceBookmark.isInDefaultCollection;
+        await updateFavoriteToggle(newIsInDefaultCollection);
+      }
     }
     mutateBookmarkCollectionIdsData();
   }, [
     resourceBookmark,
     bookmarkCollectionIdsData,
-    verseKey,
-    mutateResourceBookmark,
     mutateBookmarkCollectionIdsData,
-    onToast,
-    commonT,
-  ]);
-
-  const handleNewVerseBookmark = useCallback(async (): Promise<void> => {
-    if (!verse) return;
-
-    const newBookmark = await addBookmark({
-      key: Number(verse.chapterId),
-      mushafId,
-      type: BookmarkType.Ayah,
-      verseNumber: verse.verseNumber,
-    });
-    mutateResourceBookmark(newBookmark);
-    onToast(commonT('verse-bookmarked'), ToastStatus.Success);
-    logEvent('verse_added_to_favorites', { verseKey });
-    mutateBookmarkCollectionIdsData();
-  }, [
-    verse,
-    mushafId,
-    verseKey,
-    mutateResourceBookmark,
-    mutateBookmarkCollectionIdsData,
-    onToast,
-    commonT,
+    removeFavoriteOnly,
+    handleNewVerseBookmark,
+    updateFavoriteToggle,
   ]);
 
   const handlePageBookmarkToggle = useCallback(async (): Promise<void> => {
