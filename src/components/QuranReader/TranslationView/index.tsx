@@ -101,6 +101,13 @@ const TranslationView = ({
   const [accumulatedQuestionsData, setAccumulatedQuestionsData] = useState<
     Record<string, QuestionsData>
   >({});
+
+  // Reset accumulated questions data when the resource context changes
+  // to avoid leaking stale data across chapters/pages and unbounded growth.
+  useEffect(() => {
+    setAccumulatedQuestionsData({});
+  }, [resourceId]);
+
   useEffect(() => {
     if (pageVersesQuestionsData) {
       setAccumulatedQuestionsData((prev) => ({
