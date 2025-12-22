@@ -10,7 +10,7 @@ test.describe('Search result regressions', () => {
 
   test.beforeEach(async ({ page, context }) => {
     homePage = new Homepage(page, context);
-    homePage.goTo('/');
+    await homePage.goTo('/');
   });
 
   test('homepage search results show bilingual Quran entries for har', async ({ page }) => {
@@ -19,8 +19,7 @@ test.describe('Search result regressions', () => {
     await searchResponse;
 
     await expect(dropdown).toBeVisible();
-    await expect(dropdown.getByText('Surah Al-Kawthar - 108')).toBeVisible();
-    await expect(dropdown.getByText('سورة الكوثر - ١٠٨')).toBeVisible();
+    await expect(dropdown.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
     await expect(dropdown.getByText('And invoke not besides Allâh')).toBeVisible();
     await expect(dropdown.getByText('وَلَا تَدْعُ مِن دُونِ ٱللَّهِ')).toBeVisible();
     await expect(dropdown.getByText('(Yunus 10:106)')).toBeVisible();
@@ -37,12 +36,11 @@ test.describe('Search result regressions', () => {
 
     const drawerResults = page.getByTestId('search-drawer');
     await expect(drawerResults).toBeVisible();
-    await expect(drawerResults.getByText('Surah Al-Kawthar - 108')).toBeVisible();
-    await expect(drawerResults.getByText('سورة الكوثر -  ١٠٨')).toBeVisible();
+    await expect(drawerResults.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
     await expect(drawerResults.getByText('And invoke not besides Allâh')).toBeVisible();
     await expect(drawerResults.getByText('وَلَا تَدْعُ مِن دُونِ ٱللَّهِ')).toBeVisible();
-    await expect(drawerResults.getByText('Yunus · 10:106')).toBeVisible();
-    await expect(drawerResults.getByText('يونس · ١٠:١٠٦')).toBeVisible();
+    await expect(drawerResults.getByText('(Yunus 10:106)')).toBeVisible();
+    await expect(drawerResults.getByText('(يونس ١٠:١٠٦)')).toBeVisible();
   });
 
   test('dedicated search page renders bilingual results for har', async ({ page }) => {
@@ -52,15 +50,27 @@ test.describe('Search result regressions', () => {
 
     const searchResults = page.getByTestId('search-drawer-container');
     await expect(searchResults).toBeVisible();
-    await expect(searchResults.getByText('Surah Al-Kawthar - 108')).toBeVisible();
-    await expect(searchResults.getByText('سورة الكوثر - ١٠٨')).toBeVisible();
+    await expect(searchResults.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
     await expect(
       searchResults.getByText('And Allah has made your homes a place to rest'),
     ).toBeVisible();
     await expect(
       searchResults.getByText('وَٱللَّهُ جَعَلَ لَكُم مِّنۢ بُيُوتِكُمْ سَكَنًا'),
     ).toBeVisible();
-    await expect(searchResults.getByText('An-Nahl · 16:80')).toBeVisible();
-    await expect(searchResults.getByText('النحل · ١٦:٨٠')).toBeVisible();
+    await expect(searchResults.getByText('(An-Nahl 16:80)')).toBeVisible();
+    await expect(searchResults.getByText('(النحل ١٦:٨٠)')).toBeVisible();
+  });
+
+  test('searching for a page displays correct result', async ({ page }) => {
+    const searchResponse = page.waitForResponse((response) => response.url().includes('/search'));
+    await homePage.goTo('/search?query=page 255');
+    await searchResponse;
+
+    const searchResults = page.getByTestId('search-drawer-container');
+    await expect(searchResults).toBeVisible();
+    const pageResult = searchResults.getByText('Page 255');
+    await expect(pageResult).toBeVisible();
+    await pageResult.click();
+    await expect(page).toHaveURL(/\/page\/255$/);
   });
 });
