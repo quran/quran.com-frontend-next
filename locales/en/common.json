@@ -505,5 +505,19 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+  "translation-feedback": {
+    "title": "Translation Feedback",
+
+    "translation": "Translation",
+    "feedback": "Feedback",
+    "report": "Report",
+
+    "select-translation": "Select translation:",
+    "select": "Select...",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+
+    "submission-success": "Your feedback is sent successfully"
+  }
 }
