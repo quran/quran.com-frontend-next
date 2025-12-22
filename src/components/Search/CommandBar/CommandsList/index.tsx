@@ -27,7 +27,6 @@ import Language from '@/types/Language';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { getResultType } from '@/utils/search';
 import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
@@ -197,7 +196,7 @@ const CommandsList: React.FC<Props> = ({
               )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, key, index } = command;
+                  const { key, index } = command;
                   const isSelected = selectedCommandIndex === index;
                   return (
                     <li
@@ -209,15 +208,7 @@ const CommandsList: React.FC<Props> = ({
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix
-                        name={name}
-                        type={getResultType(command)}
-                        arabic={command.arabic}
-                        isArabic={command.isArabic}
-                        arabicChaptersData={arabicChaptersData}
-                        rawResultType={command.resultType}
-                        commandKey={key}
-                      />
+                      <CommandPrefix result={command} arabicChaptersData={arabicChaptersData} />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}
