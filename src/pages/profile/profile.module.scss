@@ -1,12 +1,9 @@
 @use 'src/styles/breakpoints';
 
-.main {
-  background-color: var(--color-background-elevated-new);
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xlarge-px);
-  }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xlarge-px);
 }
 
 .topDivider {
