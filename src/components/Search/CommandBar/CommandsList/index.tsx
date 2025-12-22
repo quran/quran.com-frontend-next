@@ -94,7 +94,17 @@ const CommandsList: React.FC<Props> = ({
       dispatch(stopMicrophone());
 
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        dispatch({
+          type: addRecentNavigation.type,
+          payload: {
+            name,
+            resultType,
+            key,
+            arabic: command.arabic,
+            isArabic: command.isArabic,
+            isTransliteration: command.isTransliteration,
+          },
+        });
         dispatch({ type: setIsExpanded.type, payload: false });
       });
     },
