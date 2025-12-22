@@ -21,6 +21,7 @@ export default defineConfig({
       '@/icons': path.resolve(__dirname, './public/icons'),
       '@/dls': path.resolve(__dirname, './src/components/dls'),
       '@/redux': path.resolve(__dirname, './src/redux'),
+      '@/contexts': path.resolve(__dirname, './src/contexts'),
       types: path.resolve(__dirname, './types'),
       src: path.resolve(__dirname, './src'),
       '@/api': path.resolve(__dirname, './src/api'),

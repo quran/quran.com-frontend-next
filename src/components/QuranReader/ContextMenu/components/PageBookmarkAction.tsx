@@ -9,6 +9,7 @@ import styles from '../styles/ContextMenu.module.scss';
 
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
+import useResolvedBookmarkPage from '@/hooks/bookmarks/useResolvedBookmarkPage';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
@@ -17,7 +18,6 @@ import { getMushafId } from '@/utils/api';
 import { getUserPreferences } from '@/utils/auth/api';
 import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getPageNumberFromBookmark } from '@/utils/bookmark';
 import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
@@ -58,15 +58,15 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
     ? guestReadingBookmark
     : (userPreferences?.readingBookmark?.bookmark as string);
 
-  // Determine if the page is bookmarked based on user login status and data source
-  const isPageBookmarked = useMemo((): boolean => {
-    if (pageBookmark?.startsWith?.(BookmarkType.Page)) {
-      const page = getPageNumberFromBookmark(pageBookmark);
-      return page === pageNumber;
-    }
+  const { resolvedPage } = useResolvedBookmarkPage(pageBookmark, mushafId);
 
+  const isPageBookmarked = useMemo((): boolean => {
+    if (resolvedPage == null) return false;
+    if (pageBookmark?.startsWith?.(BookmarkType.Page)) {
+      return resolvedPage === pageNumber;
+    }
     return false;
-  }, [pageBookmark, pageNumber]);
+  }, [pageBookmark, resolvedPage, pageNumber]);
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
