@@ -23,7 +23,6 @@ import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import fundraisingBanner from './slices/fundraisingBanner';
 import guestBookmark from './slices/guestBookmark';
-import guestEnrollment from './slices/guestEnrollment';
 import mediaMaker from './slices/mediaMaker';
 import microphone from './slices/microphone';
 import navbar from './slices/navbar';
@@ -109,7 +108,6 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
-  guestEnrollment,
   guestBookmark,
 });
 

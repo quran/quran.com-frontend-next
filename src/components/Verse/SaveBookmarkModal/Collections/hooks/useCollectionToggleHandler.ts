@@ -47,7 +47,7 @@ export const useCollectionToggleHandler = ({
       try {
         await addCollectionBookmark({
           key: Number(verse.chapterId),
-          mushaf: mushafId,
+          mushafId,
           type: BookmarkType.Ayah,
           verseNumber: verse.verseNumber,
           collectionId,
@@ -80,7 +80,7 @@ export const useCollectionToggleHandler = ({
         } else {
           await deleteCollectionBookmarkByKey({
             key: Number(verse.chapterId),
-            mushaf: mushafId,
+            mushafId,
             type: BookmarkType.Ayah,
             verseNumber: verse.verseNumber,
             collectionId,
