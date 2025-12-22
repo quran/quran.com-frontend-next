@@ -47,7 +47,8 @@ type Props = {
 const normalizeNameForComparison = (value?: string) => value?.trim().toLowerCase();
 
 /**
- * Determines whether to include the translated name based on if its there are differences
+ * Determines whether to include the translated name based on whether there are differences
+ * between the transliterated and translated names.
  * @param {string} transliteratedName The name in its transliterated form.
  * @param {string} translatedName The name in its translated form.
  * @returns {boolean} Whether the translated name should be included.
