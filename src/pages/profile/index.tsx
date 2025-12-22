@@ -35,16 +35,18 @@ const ProfilePage: FC = () => {
         noindex
       />
       <HeaderNavigation title={t('my-profile')} />
-      <PageContainer isSheetsLike>
-        <div className={styles.topDivider}>
-          <Separator />
-        </div>
-        <div className={styles.wrapper}>
-          <PersonalizationForm />
-          <EditDetailsForm />
-          {canUpdatePassword && <ChangePasswordForm />}
-        </div>
-      </PageContainer>
+      <main className={styles.main}>
+        <PageContainer isSheetsLike>
+          <div className={styles.topDivider}>
+            <Separator />
+          </div>
+          <div className={styles.wrapper}>
+            <PersonalizationForm />
+            <EditDetailsForm />
+            {canUpdatePassword && <ChangePasswordForm />}
+          </div>
+        </PageContainer>
+      </main>
     </>
   );
 };

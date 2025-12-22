@@ -1,10 +1,14 @@
 @use 'src/styles/breakpoints';
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xlarge-px);
+.main {
+  background-color: var(--color-background-elevated-new);
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xlarge-px);
+  }
 }
+
 .topDivider {
   display: none;
   @include breakpoints.tablet {
