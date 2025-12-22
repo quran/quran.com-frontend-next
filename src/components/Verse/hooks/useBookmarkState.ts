@@ -61,7 +61,7 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
   }, [readingBookmark, verse]);
 
   const { data: bookmark, isValidating: isVerseBookmarkedLoading } = useSWRImmutable(
-    isLoggedIn()
+    !isGuest
       ? makeBookmarkUrl(
           mushafId,
           Number(verse.chapterId),
@@ -104,15 +104,15 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
     );
 
   const isVerseBookmarked = useMemo(() => {
-    const isUserLoggedIn = isLoggedIn();
+    const isUserLoggedIn = !isGuest;
     if (isUserLoggedIn && bookmark) {
-      return !!bookmark;
+      return bookmark?.isInDefaultCollection;
     }
     if (!isUserLoggedIn) {
       return !!bookmarkedVerses[verse.verseKey];
     }
     return false;
-  }, [bookmarkedVerses, bookmark, verse.verseKey]);
+  }, [bookmarkedVerses, bookmark, isGuest, verse.verseKey]);
 
   return {
     isVerseBookmarked, // Virtual Favorite collection
