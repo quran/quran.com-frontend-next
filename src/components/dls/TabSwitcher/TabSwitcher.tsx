@@ -56,6 +56,7 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
   return (
     <div className={styles.tabSwitcherContainer}>
       <Switch
+        containerClassName={styles.switchContainer}
         items={items}
         selected={selected}
         onSelect={onSelect}

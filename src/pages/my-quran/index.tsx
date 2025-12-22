@@ -66,16 +66,22 @@ const MyQuranPage = (): JSX.Element => {
         nofollow
         noindex
       />
-      <HeaderNavigation title={title} innerClassName={styles.headerNavigation} />
-      <PageContainer isSheetsLike className={styles.pageContainer}>
-        <TabSwitcher
-          hasSeparator={false}
-          selected={selectedTab}
-          items={tabs}
-          onSelect={onTabChange}
-        />
-        <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
-      </PageContainer>
+      <main className={styles.main}>
+        <HeaderNavigation title={title} innerClassName={styles.headerNavigationInnerClassName} />
+        <PageContainer
+          isSheetsLike
+          wrapperClassName={styles.mainContent}
+          className={styles.pageContainer}
+        >
+          <TabSwitcher
+            hasSeparator={false}
+            selected={selectedTab}
+            items={tabs}
+            onSelect={onTabChange}
+          />
+          <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
+        </PageContainer>
+      </main>
     </>
   );
 };

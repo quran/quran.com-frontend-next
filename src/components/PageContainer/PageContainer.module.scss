@@ -2,6 +2,18 @@
 @use 'src/styles/utility';
 @use 'src/styles/constants';
 
+@mixin roundedTopBorders {
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  @include breakpoints.tablet {
+    border-radius: 0;
+  }
+}
+
+.wrapperSheets {
+  background-color: var(--color-background-elevated-new);
+  @include roundedTopBorders;
+}
+
 .container {
   @include utility.pageContainer();
   padding-block-start: var(--spacing-medium);
@@ -39,12 +51,7 @@
   }
 
   &.sheets {
-    background-color: var(--color-background-default);
-    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+    @include roundedTopBorders;
     padding: var(--spacing-medium2-px);
-
-    @include breakpoints.tablet {
-      border-radius: 0;
-    }
   }
 }

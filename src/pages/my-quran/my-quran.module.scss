@@ -1,23 +1,27 @@
 @use 'src/styles/breakpoints';
 $max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (700 - padding) = 670
 
-.headerNavigation.headerNavigation.headerNavigation {
-  max-width: $max-width;
-}
-
-.pageContainer.pageContainer.pageContainer {
-  overflow: hidden;
-  max-width: $max-width;
-  padding: unset;
-  @include breakpoints.tablet {
-    padding-block: var(--spacing-xlarge-px);
+.main {
+  .headerNavigationInnerClassName {
+    max-width: $max-width;
   }
-}
 
-.tabContent {
-  padding-block: var(--spacing-xlarge-px);
-  @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-medium2-px);
-    padding-block: var(--spacing-large-px);
+  .mainContent {
+    .pageContainer {
+      overflow: hidden;
+      max-width: $max-width;
+      padding: unset;
+      @include breakpoints.tablet {
+        padding-block: var(--spacing-xlarge-px);
+      }
+
+      .tabContent {
+        padding-block: var(--spacing-xlarge-px);
+        @include breakpoints.smallerThanTablet {
+          padding-inline: var(--spacing-medium2-px);
+          padding-block: var(--spacing-large-px);
+        }
+      }
+    }
   }
 }

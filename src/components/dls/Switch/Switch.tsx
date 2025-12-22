@@ -27,6 +27,7 @@ export enum SwitchVariant {
 type SwitchProps = {
   hasSeparator?: boolean;
   buttonClassName?: string;
+  containerClassName?: string;
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
@@ -37,6 +38,7 @@ type SwitchProps = {
 const Switch = ({
   hasSeparator = true,
   buttonClassName,
+  containerClassName,
   items,
   onSelect,
   selected,
@@ -47,7 +49,7 @@ const Switch = ({
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, {
+      className={classNames(styles.container, containerClassName, {
         [styles.xSmallContainer]: size === SwitchSize.XSmall,
         [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
       })}

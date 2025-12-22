@@ -1,7 +1,10 @@
 .tabSwitcherContainer {
-  .switchButton {
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-default-new);
+  .switchContainer {
+    background-color: var(--color-background-alternative-faint);
+    .switchButton {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-default-new);
+    }
   }
 
   .tabsContainer {
@@ -12,6 +15,7 @@
     border-block-end: unset;
 
     .tabs {
+      background-color: var(--color-background-elevated-new);
       text-align: center;
       font-size: var(--font-size-xsmall-px);
       color: var(--color-text-faded-new);
