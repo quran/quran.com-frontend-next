@@ -60,6 +60,13 @@
   }
 }
 
+.translationMeta {
+  display: block;
+  margin-block-start: var(--spacing-xxsmall);
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-subtle);
+}
+
 .rtlText {
   font-family: UthmanicHafs;
   direction: rtl;

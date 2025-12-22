@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,10 +7,12 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './CommandPrefix.module.scss';
 
 import SearchResultItemIcon from '@/components/Search/SearchResults/SearchResultItemIcon';
+import DataContext from '@/contexts/DataContext';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
 import { Direction, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { formatStringNumber } from '@/utils/number';
+import { getResultSuffix } from '@/utils/search';
 import ChaptersData from 'types/ChaptersData';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
@@ -33,24 +35,11 @@ const CommandPrefix: React.FC<Props> = ({
   commandKey,
   isArabic = false,
 }) => {
-  const { t } = useTranslation('common');
-
-  const getContent = () => {
-    if (type === SearchNavigationType.SEARCH_PAGE) {
-      return t('search-for', {
-        searchQuery: name,
-      });
-    }
-
-    return name;
-  };
+  const { t, lang } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
 
   const commandKeyString = String(commandKey);
-
-  // Extract the surah number from the verse key
   const [surahNumber] = commandKeyString.split(':');
-
-  // Convert the surah number to Arabic numerals for display
   const surahNumberArabic = surahNumber
     ? toLocalizedNumber(Number(surahNumber), Language.AR)
     : undefined;
@@ -61,10 +50,43 @@ const CommandPrefix: React.FC<Props> = ({
     arabicChaptersData && formattedSurahNumber
       ? getChapterData(arabicChaptersData, formattedSurahNumber)
       : undefined;
+  const chapterData =
+    chaptersData && formattedSurahNumber
+      ? getChapterData(chaptersData, formattedSurahNumber)
+      : undefined;
   const arabicSurahName = arabicChapterData?.nameArabic ?? arabicChapterData?.translatedName;
+
+  const isSurahResult = rawResultType === SearchNavigationType.SURAH;
+  const shouldIncludeSuffixInName = [
+    SearchNavigationType.AYAH,
+    SearchNavigationType.SURAH,
+    SearchNavigationType.TRANSLITERATION,
+    SearchNavigationType.TRANSLATION,
+  ].includes(type);
+  const resultSuffix =
+    shouldIncludeSuffixInName && chaptersData
+      ? getResultSuffix(type, commandKeyString, lang, chaptersData)
+      : '';
+  const suffixToRemove = resultSuffix ? ` ${resultSuffix}` : '';
+  const translationText =
+    suffixToRemove && name.endsWith(suffixToRemove) ? name.slice(0, -suffixToRemove.length) : name;
+  const translationDisplayText =
+    isSurahResult && chapterData?.translatedName
+      ? `${translationText} (${chapterData.translatedName}) ${resultSuffix}`
+      : translationText;
 
   // Convert the verse key to localized Arabic format
   const surahVerseKey = toLocalizedVerseKey(commandKeyString, Language.AR);
+
+  const getContent = () => {
+    if (type === SearchNavigationType.SEARCH_PAGE) {
+      return t('search-for', {
+        searchQuery: name,
+      });
+    }
+
+    return translationDisplayText;
+  };
 
   const surahArabicLabel = arabic || arabicSurahName || '';
 
@@ -87,6 +109,20 @@ const CommandPrefix: React.FC<Props> = ({
   const isArabicResult = !!isArabic;
   const showArabicColumn = !isArabicResult && !!arabicLine;
   const translationIsRTL = isAyah || isArabicResult;
+  const translationMetaParts: string[] = [];
+  if (chapterData && !isSurahResult && rawResultType !== SearchNavigationType.SEARCH_PAGE) {
+    if (chapterData.transliteratedName) {
+      translationMetaParts.push(chapterData.transliteratedName);
+    }
+    if (chapterData.translatedName) {
+      translationMetaParts.push(chapterData.translatedName);
+    }
+    if (type !== SearchNavigationType.SURAH) {
+      translationMetaParts.push(toLocalizedVerseKey(commandKeyString, lang));
+    }
+  }
+  const translationMeta =
+    translationMetaParts.length > 0 ? translationMetaParts.join(' · ') : undefined;
 
   return (
     <div className={styles.container}>
@@ -105,6 +141,14 @@ const CommandPrefix: React.FC<Props> = ({
               __html: getContent(),
             }}
           />
+          {translationMeta && (
+            <span
+              className={styles.translationMeta}
+              dir={translationIsRTL ? Direction.RTL : Direction.LTR}
+            >
+              {translationMeta}
+            </span>
+          )}
         </div>
         {showArabicColumn && (
           <div className={classNames(styles.arabicColumn, { [styles.arabicText]: !!arabicLine })}>

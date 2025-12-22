@@ -112,7 +112,11 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
   const translationMetaParts =
     result.resultType === SearchNavigationType.SURAH
       ? []
-      : [chapterData?.transliteratedName, toLocalizedVerseKey(resultKeyString, lang)];
+      : ([
+          chapterData?.transliteratedName,
+          chapterData?.translatedName,
+          toLocalizedVerseKey(resultKeyString, lang),
+        ].filter(Boolean) as string[]);
 
   // Only show bilingual if we have an ayah or surah result with arabic text
   const isArabicSearchResult = result.isArabic ?? false;
@@ -124,16 +128,24 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
     !isArabicSearchResult;
 
   // The translation text is in the name field, but it includes a suffix for verse results
-  // For ayah results: suffix format is "(Al-Baqarah 2:255)" - we need to remove this
-  const translationSuffix =
-    result.resultType === SearchNavigationType.AYAH
-      ? getResultSuffix(type, resultKeyString, lang, chaptersData)
-      : '';
-
-  // Remove the suffix to get clean translation text (only for ayah-type results)
+  const shouldIncludeSuffixInName = [
+    SearchNavigationType.AYAH,
+    SearchNavigationType.TRANSLITERATION,
+    SearchNavigationType.TRANSLATION,
+    SearchNavigationType.SURAH,
+  ].includes(result.resultType);
+  const translationSuffix = shouldIncludeSuffixInName
+    ? getResultSuffix(type, resultKeyString, lang, chaptersData)
+    : '';
   const suffixToRemove = translationSuffix ? ` ${translationSuffix}` : '';
-  const translationText =
+  const translationBase =
     suffixToRemove && name.endsWith(suffixToRemove) ? name.slice(0, -suffixToRemove.length) : name;
+
+  // Build the final translation text with suffix if applicable
+  const translationText =
+    result.resultType === SearchNavigationType.SURAH && chapterData?.translatedName
+      ? `${translationBase} (${chapterData.translatedName}) ${translationSuffix}`.trim()
+      : translationBase;
 
   // For surah results, show arabic surah name + chapter number
   // For ayah results, show arabic text + verse key
