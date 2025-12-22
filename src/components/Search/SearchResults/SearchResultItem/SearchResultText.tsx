@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,7 +13,7 @@ import {
   SearchNavigationType,
 } from '@/types/Search/SearchNavigationResult';
 import { getChapterData } from '@/utils/chapter';
-import { Direction, toLocalizedVerseKey } from '@/utils/locale';
+import { Direction, isRTLLocale, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { getResultSuffix, getResultType, getSearchNavigationResult } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import ChaptersData from 'types/ChaptersData';
@@ -69,8 +69,9 @@ const shouldIncludeTranslatedName = (
  * SearchResultText
  *
  * Displays the main text for a search result row:
- * - Either as bilingual (translation + Arabic side-by-side) for ayah/surah results
- * - Or as a single-line display (e.g., Search Page row)
+ * - Surah results: `number. transliteration (translation if different)`
+ * - Ayah results: Arabic verse (with Arabic surah + key) stacked above the translation line
+ * - Fallback: single-line name (e.g., Search Page row)
  *
  * @returns {JSX.Element} The rendered component
  */
@@ -99,8 +100,8 @@ const SearchResultText: React.FC<Props> = ({
       : result;
   }, [chaptersData, result, shouldTransform, t, lang]);
 
-  const { name, key: resultKey, isArabic } = normalizedResult;
-  const resultKeyString = String(resultKey);
+  const { name, key: resultKey, isArabic, arabic } = normalizedResult;
+  const resultKeyString = String(resultKey ?? '');
 
   // Get surah number for additional context
   const [surahNumber] = useMemo(
@@ -131,140 +132,110 @@ const SearchResultText: React.FC<Props> = ({
   // Get result type
   const type = useMemo(() => getResultType(result), [result]);
   const isSearchPage = result.resultType === SearchNavigationType.SEARCH_PAGE;
-  const isSurahResult = result.resultType === SearchNavigationType.SURAH;
-  // When the UI is Arabic, surah results should not render duplicate Arabic columns.
-  const isArabicLocale = lang === Language.AR;
-
+  const isSurahResult = type === SearchNavigationType.SURAH;
   const isAyahResult = useMemo(() => {
     return [
       SearchNavigationType.AYAH,
       SearchNavigationType.TRANSLITERATION,
       SearchNavigationType.TRANSLATION,
-    ].includes(result.resultType);
-  }, [result.resultType]);
-
-  /**
-   * Some results return Arabic text in result.arabic, but the normalized result might already be Arabic-only.
-   * We consider it bilingual when:
-   * - it's an ayah/surah result
-   * - there is Arabic text provided
-   * - the normalized display isn't Arabic-only
-   * - and the search itself isn't Arabic-only (result.isArabic)
-   */
-  const isArabicSearchResult = result.isArabic ?? false;
-  const isBilingualResult = useMemo(() => {
-    // Avoid rendering two Arabic columns for surah results in Arabic UI.
-    if (isSurahResult && isArabicLocale) return false;
-
-    return (
-      (isAyahResult || isSurahResult) && !!result?.arabic && !isArabic && !isArabicSearchResult
-    );
-  }, [isAyahResult, isSurahResult, isArabicLocale, result?.arabic, isArabic, isArabicSearchResult]);
-
-  // Display text + meta
-  const displayName = useMemo(() => {
-    if (!isSearchPage) return name;
-    return t('search-for', { searchQuery: name });
-  }, [isSearchPage, name, t]);
-
-  /**
-   * When the result type has a suffix (e.g. verse key info), normalize the translation text
-   * so we can avoid duplicate suffixes or weird formatting.
-   */
-  const translationText = useMemo(() => {
-    const shouldIncludeSuffixInName = [
-      SearchNavigationType.AYAH,
-      SearchNavigationType.TRANSLITERATION,
-      SearchNavigationType.TRANSLATION,
-      SearchNavigationType.SURAH,
     ].includes(type);
+  }, [type]);
 
-    const suffix = shouldIncludeSuffixInName
-      ? getResultSuffix(type, resultKeyString, lang, chaptersData)
-      : '';
-    const suffixToRemove = suffix ? ` ${suffix}` : '';
+  // Strip the default suffix the search utils add
+  const resultSuffix = useMemo(() => {
+    const shouldIncludeSuffix = isSurahResult || isAyahResult;
+    return shouldIncludeSuffix ? getResultSuffix(type, resultKeyString, lang, chaptersData) : '';
+  }, [chaptersData, isAyahResult, isSurahResult, lang, resultKeyString, type]);
 
-    const base =
-      suffixToRemove && name.endsWith(suffixToRemove)
-        ? name.slice(0, -suffixToRemove.length)
-        : name;
+  const baseName = useMemo(() => {
+    if (!resultSuffix) return name;
+    const suffixToRemove = ` ${resultSuffix}`;
+    return name.endsWith(suffixToRemove) ? name.slice(0, -suffixToRemove.length) : name;
+  }, [name, resultSuffix]);
 
-    if (isSurahResult) {
-      // Avoid repeating the translation when it matches the transliteration.
-      if (shouldShowTranslatedName) {
-        return `${base} (${translatedName}) ${suffix}`.trim();
-      }
+  /**
+   * Surah label follows this format:
+   * `number. transliteration (translation if different)`
+   */
+  const surahDisplayText = useMemo(() => {
+    if (!isSurahResult) return undefined;
+    const localizedSurahNumber = surahNumber
+      ? toLocalizedNumber(Number(surahNumber), lang)
+      : undefined;
+    const translatedLabel = shouldShowTranslatedName ? translatedName : undefined;
+    const translatedSuffix = translatedLabel ? ` (${translatedLabel})` : '';
+    const surahLabel = transliteratedName || baseName;
+    const surahPrefix = localizedSurahNumber ? `${localizedSurahNumber}. ` : '';
 
-      return `${base} ${suffix}`.trim();
-    }
-
-    return base;
+    return `${surahPrefix}${surahLabel}${translatedSuffix}`.trim();
   }, [
-    type,
-    resultKeyString,
+    baseName,
+    isSurahResult,
     lang,
-    chaptersData,
-    name,
-    isSurahResult,
     shouldShowTranslatedName,
+    surahNumber,
     translatedName,
-  ]);
-
-  // Get Arabic text, adding verse key for surah results
-  const arabicText = useMemo(() => {
-    if (isSurahResult && surahNumber) {
-      return `${result.arabic} - ${toLocalizedVerseKey(resultKeyString, Language.AR)}`;
-    }
-    return result.arabic || name;
-  }, [isSurahResult, surahNumber, result.arabic, resultKeyString, name]);
-
-  // Meta info parts for translation
-  const translationMetaParts = useMemo(() => {
-    if (isSurahResult) return [];
-
-    // Avoid duplicate labels when translation matches the transliteration (case/spacing normalized).
-    return [
-      transliteratedName,
-      shouldShowTranslatedName ? translatedName : undefined,
-      toLocalizedVerseKey(resultKeyString, lang),
-    ].filter(Boolean) as string[];
-  }, [
-    isSurahResult,
     transliteratedName,
-    translatedName,
-    shouldShowTranslatedName,
-    resultKeyString,
-    lang,
   ]);
 
-  // Meta info parts for Arabic
-  const arabicMetaParts = useMemo(() => {
-    if (isSurahResult) return [];
+  // Arabic + localized verse keys
+  const arabicVerseKey = useMemo(
+    () => (resultKeyString ? toLocalizedVerseKey(resultKeyString, Language.AR) : ''),
+    [resultKeyString],
+  );
+  const localizedVerseKey = useMemo(
+    () => (resultKeyString ? toLocalizedVerseKey(resultKeyString, lang) : ''),
+    [resultKeyString, lang],
+  );
 
-    // When the UI is Arabic, avoid duplicating the same meta under both columns.
-    if (isArabicLocale) return [''];
+  // Build the suffixes that get appended to the verse lines
+  const arabicSuffixParts = useMemo(() => {
+    if (!isAyahResult) return [];
+    return [arabicSurahName, arabicVerseKey].filter(Boolean) as string[];
+  }, [arabicSurahName, arabicVerseKey, isAyahResult]);
 
-    return [arabicSurahName, toLocalizedVerseKey(resultKeyString, Language.AR)].filter(
-      Boolean,
-    ) as string[];
-  }, [isSurahResult, isArabicLocale, arabicSurahName, resultKeyString]);
+  const translationSuffixParts = useMemo(() => {
+    if (!isAyahResult) return [];
+    return [transliteratedName, localizedVerseKey].filter(Boolean) as string[];
+  }, [isAyahResult, localizedVerseKey, transliteratedName]);
 
-  const shouldRenderMetaRow = translationMetaParts.length > 0 || arabicMetaParts.length > 0;
+  // Lines to render (kept separate to make the stacked layout easier to follow)
+  const arabicLine = useMemo(() => {
+    if (!isAyahResult || !arabic) return undefined;
+    if (!arabicSuffixParts.length) return arabic;
+    return `${arabic} (${arabicSuffixParts.join(' ')})`;
+  }, [arabic, arabicSuffixParts, isAyahResult]);
 
-  const joinMetaParts = useCallback((parts: string[]) => parts.join(' · '), []);
+  const translationLine = useMemo(() => {
+    if (isSurahResult) return surahDisplayText || baseName;
+    if (!isAyahResult) return baseName;
+    const suffixText = translationSuffixParts.length
+      ? ` (${translationSuffixParts.join(' ')})`
+      : '';
+    return `${baseName}${suffixText}`;
+  }, [baseName, isAyahResult, isSurahResult, surahDisplayText, translationSuffixParts]);
+
+  const isBilingualResult = isAyahResult && !!arabicLine;
+
+  // Display text + fallback
+  const singleLineText = useMemo(() => {
+    if (isSearchPage) return t('search-for', { searchQuery: name });
+    if (isSurahResult) return surahDisplayText || baseName;
+    return translationLine;
+  }, [baseName, isSearchPage, isSurahResult, name, surahDisplayText, t, translationLine]);
 
   // Helper to determine text direction and language
-  const direction = useMemo<Direction | undefined>(() => {
+  const translationDir = useMemo(() => (isRTLLocale(lang) ? Direction.RTL : Direction.LTR), [lang]);
+  const singleLineDirection = useMemo(() => {
     if (isArabic) return Direction.RTL;
-    if (isSearchPage) return Direction.LTR;
-    return undefined;
-  }, [isArabic, isSearchPage]);
+    return translationDir;
+  }, [isArabic, translationDir]);
 
-  const language = useMemo<Language | undefined>(() => {
+  const singleLineLanguage = useMemo(() => {
     if (isArabic) return Language.AR;
     if (isSearchPage) return Language.EN;
-    return undefined;
-  }, [isArabic, isSearchPage]);
+    return lang as Language;
+  }, [isArabic, isSearchPage, lang]);
 
   return (
     <div
@@ -274,50 +245,34 @@ const SearchResultText: React.FC<Props> = ({
       )}
     >
       {isBilingualResult ? (
-        <>
-          <div className={textClasses.columns}>
-            <div className={textClasses.translationColumn}>
-              <TextTag
-                className={classNames(textClasses.resultText, textClasses.translationText)}
-                dir={Direction.LTR}
-                lang={lang}
-                dangerouslySetInnerHTML={{ __html: translationText }}
-              />
-            </div>
-
-            <div className={textClasses.arabicColumn} dir={Direction.RTL} lang={Language.AR}>
-              <TextTag
-                className={classNames(
-                  textClasses.resultText,
-                  textClasses.arabic,
-                  textClasses.languageText,
-                )}
-                dir={Direction.RTL}
-                lang={Language.AR}
-                dangerouslySetInnerHTML={{ __html: arabicText }}
-              />
-            </div>
+        <div className={textClasses.columns}>
+          <div className={textClasses.arabicColumn} dir={Direction.RTL} lang={Language.AR}>
+            <TextTag
+              className={classNames(
+                textClasses.resultText,
+                textClasses.arabic,
+                textClasses.languageText,
+              )}
+              dir={Direction.RTL}
+              lang={Language.AR}
+              dangerouslySetInnerHTML={{ __html: arabicLine ?? '' }}
+            />
           </div>
-
-          {shouldRenderMetaRow && (
-            <div className={textClasses.metaRow}>
-              {translationMetaParts.length > 0 && (
-                <span className={textClasses.metaItem}>{joinMetaParts(translationMetaParts)}</span>
-              )}
-              {arabicMetaParts.length > 0 && (
-                <span className={classNames(textClasses.metaItem, textClasses.metaItemArabic)}>
-                  {joinMetaParts(arabicMetaParts)}
-                </span>
-              )}
-            </div>
-          )}
-        </>
+          <div className={textClasses.translationColumn}>
+            <TextTag
+              className={classNames(textClasses.resultText, textClasses.translationText)}
+              dir={translationDir}
+              lang={lang}
+              dangerouslySetInnerHTML={{ __html: translationLine ?? '' }}
+            />
+          </div>
+        </div>
       ) : (
         <TextTag
           className={classNames(textClasses.resultText, isArabic && textClasses.arabic)}
-          dir={direction}
-          lang={language}
-          dangerouslySetInnerHTML={{ __html: displayName }}
+          dir={singleLineDirection}
+          lang={singleLineLanguage}
+          dangerouslySetInnerHTML={{ __html: singleLineText ?? '' }}
         />
       )}
     </div>
