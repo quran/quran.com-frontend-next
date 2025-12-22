@@ -71,6 +71,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   wordByWordContentType: [WordByWordType.Translation],
   wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
+  selectedReadingTranslation: null, // Will default to first translation when Reading Translation mode is selected
 };
 
 const THEME_INITIAL_STATE: Theme = {

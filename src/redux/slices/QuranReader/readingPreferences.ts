@@ -44,6 +44,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       wordByWordDisplay: action.payload,
     }),
+    setSelectedReadingTranslation: (state, action: PayloadAction<number | null>) => ({
+      ...state,
+      selectedReadingTranslation: action.payload,
+    }),
   },
   // reset the state to initial state
   // when `reset` action is dispatched
@@ -77,6 +81,7 @@ export const {
   setWordClickFunctionality,
   setWordByWordContentType,
   setWordByWordDisplay,
+  setSelectedReadingTranslation,
 } = readingPreferencesSlice.actions;
 
 /**
@@ -159,5 +164,7 @@ export const selectWordByWordLocale = (state: RootState) =>
   state.readingPreferences.selectedWordByWordLocale;
 export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
   state.readingPreferences.isUsingDefaultWordByWordLocale;
+export const selectSelectedReadingTranslation = (state: RootState) =>
+  state.readingPreferences.selectedReadingTranslation;
 
 export default readingPreferencesSlice.reducer;
