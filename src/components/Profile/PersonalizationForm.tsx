@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
+import DeleteProfilePictureButton from './DeleteProfilePictureButton';
 import styles from './PersonalizationForm.module.scss';
 import Section from './Section';
 
@@ -86,16 +87,11 @@ const PersonalizationForm: FC = () => {
               {t('upload-picture')}
             </Button>
             {hasProfilePicture && (
-              <Button
-                variant={ButtonVariant.Compact}
-                size={ButtonSize.Small}
-                className={styles.profilePictureActionButton}
-                onClick={onRemovePicture}
-                isLoading={isRemoving}
-                isDisabled={isProcessing || isRemoving}
-              >
-                {t('remove-picture')}
-              </Button>
+              <DeleteProfilePictureButton
+                isRemoving={isRemoving}
+                isProcessing={isProcessing}
+                onRemovePicture={onRemovePicture}
+              />
             )}
           </div>
         </div>
