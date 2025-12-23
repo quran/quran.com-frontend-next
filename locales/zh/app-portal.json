@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "高效地背诵和复习《古兰经》",
+        "title": "穆哈菲德"
+      },
+      "quran_android": {
+        "caption": "在安卓设备上阅读、收藏和收听《古兰经》",
+        "title": "安卓版古兰经"
+      },
+      "quran_ios": {
+        "caption": "适用于 iPhone 和 iPad 的精美无广告古兰经阅读和聆听应用程序",
+        "title": "iOS 版古兰经（由 quran.com 提供）"
+      },
+      "quranmeet": {
+        "caption": "在线古兰经学习课程",
+        "title": "古兰经聚会"
+      },
+      "quranreflect": {
+        "caption": "分享感想",
+        "title": "古兰经反思"
+      },
+      "readtafsir": {
+        "caption": "搜索并比较古典经注",
+        "title": "阅读经注"
+      },
+      "sunnah": {
+        "caption": "圣训集",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "包含多个来源的互动式经注",
+        "title": "Tafsir App"
+      }
+    },
+    "filters": {
+      "all": "所有应用",
+      "community": "社区",
+      "hadith-sunnah": "圣训和圣行",
+      "popular": "受欢迎的",
+      "quran-reader": "古兰经读者",
+      "reflections": "反思",
+      "study-tools": "学习工具"
+    },
+    "title": "浏览所有应用"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "终于，我们为女儿们准备了一款古兰经应用程序。",
+        "name": "卡里亚",
+        "tagline": "女性古兰经诵读者"
+      },
+      "quran-kareem": {
+        "headline": "你与真主之书连接的新途径",
+        "name": "《古兰经》",
+        "tagline": "阅读、聆听和反思"
+      },
+      "quran-link": {
+        "headline": "在一个地方浏览 25 部以上的经注和 100 多篇译文",
+        "name": "古兰经链接",
+        "tagline": "经注与学习伴侣"
+      }
+    },
+    "learn-more": "了解更多",
+    "title": "精选应用",
+    "view-all": "查看全部"
+  },
+  "hero": {
+    "description": "探索一系列由 Quran.foundation 开发的精选伊斯兰应用程序。从学习工具到祈祷辅助工具，找到能够提升您灵性之旅的应用程序。",
+    "title": "探索我们的应用生态系统"
+  },
+  "quran-apps-portal": "古兰经应用程序门户"
+}

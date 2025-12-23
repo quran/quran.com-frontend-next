@@ -31,6 +31,7 @@ const MoreMenuItem: React.FC<Props> = ({ onMenuChange }) => {
           icon={<OverflowMenuIcon />}
           color={IconColor.tertiary}
           size={IconSize.Custom}
+          shouldFlipOnRTL={false}
         />
       }
       onClick={onMoreClicked}

@@ -8,12 +8,12 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import CheckboxChip from './CheckboxChip';
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
-import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Separator from '@/dls/Separator/Separator';
@@ -179,7 +179,7 @@ const WordByWordSection = () => {
       <Section.Row>
         <div className={styles.checkboxContainer}>
           <div id="wbw-translation-section">
-            <Checkbox
+            <CheckboxChip
               checked={wordByWordContentType.includes(WordByWordType.Translation)}
               id="wbw-translation"
               name="wbw-translation"
@@ -189,7 +189,7 @@ const WordByWordSection = () => {
           </div>
 
           <div id="wbw-transliteration-section">
-            <Checkbox
+            <CheckboxChip
               checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
               id="wbw-transliteration"
               name="wbw-transliteration"
@@ -199,7 +199,7 @@ const WordByWordSection = () => {
           </div>
 
           <div id="wbw-recitation-section">
-            <Checkbox
+            <CheckboxChip
               checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
               id="wbw-recitation"
               name="wbw-recitation"
@@ -258,7 +258,7 @@ const WordByWordSection = () => {
         </Section.Label>
         <Section.Row>
           <div className={styles.checkboxContainer}>
-            <Checkbox
+            <CheckboxChip
               checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
               id="inline"
               name="inline"
@@ -266,7 +266,7 @@ const WordByWordSection = () => {
               disabled={shouldDisableWordByWordDisplay}
               onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
             />
-            <Checkbox
+            <CheckboxChip
               checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
               id="tooltip"
               name="word-tooltip"

@@ -58,6 +58,7 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
                 icon={<LightbulbIcon />}
                 color={IconColor.tertiary}
                 size={IconSize.Custom}
+                shouldFlipOnRTL={false}
               />
             )
           }

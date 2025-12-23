@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import SaveToCollectionAction from '../SaveToCollectionAction';
+import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 
@@ -42,6 +43,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       />
       <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <TranslationFeedbackAction
+        verse={verse}
+        isTranslationView={isTranslationView}
+        onActionTriggered={onActionTriggered}
+      />
     </div>
   ) : (
     <ShareVerseActionsMenu
