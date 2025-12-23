@@ -9,9 +9,10 @@ $max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (
   .mainContent {
     .pageContainer {
       overflow: hidden;
-      max-width: $max-width;
+      max-width: unset;
       padding: unset;
       @include breakpoints.tablet {
+        max-width: $max-width;
         padding-block: var(--spacing-xlarge-px);
       }
 

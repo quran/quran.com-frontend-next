@@ -4,7 +4,6 @@ import styles from './TabSwitcher.module.scss';
 
 import Switch, { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import Tabs, { Tab } from '@/dls/Tabs/Tabs';
-import useIsMobile from '@/hooks/useIsMobile';
 
 type TabSwitcherItem = {
   name: React.ReactNode;
@@ -29,31 +28,22 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
 }) => {
-  const isMobile = useIsMobile();
-
   const tabs: Tab[] = items.map((item) => ({
     title: item.name,
     value: item.value,
     id: item.id,
   }));
 
-  if (isMobile) {
-    return (
-      <div className={styles.tabSwitcherContainer}>
-        <Tabs
-          tabs={tabs}
-          selected={selected}
-          onSelect={onSelect}
-          containerClassName={styles.tabsContainer}
-          className={styles.tabs}
-          activeClassName={styles.activeTab}
-        />
-      </div>
-    );
-  }
-
   return (
     <div className={styles.tabSwitcherContainer}>
+      <Tabs
+        tabs={tabs}
+        selected={selected}
+        onSelect={onSelect}
+        containerClassName={styles.tabsContainer}
+        className={styles.tabs}
+        activeClassName={styles.activeTab}
+      />
       <Switch
         containerClassName={styles.switchContainer}
         items={items}
