@@ -27,19 +27,11 @@
         max-width: 100%;
         height: auto;
     }
-
     margin: auto;
     margin-block-end: var(--spacing-small);
 }
 
 .startLearningButton {
-    margin-block-start: var(--spacing-small);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.completedContainer {
     margin-block-start: var(--spacing-small);
     display: flex;
     align-items: center;

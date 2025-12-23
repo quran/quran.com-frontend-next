@@ -3,12 +3,11 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
-import CourseFeedback, { FeedbackSource } from '../CourseFeedback';
-
 import styles from './CourseDetails.module.scss';
 import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
+import CompletedStatus from '@/components/Course/CompletedStatus';
 import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
@@ -17,7 +16,6 @@ import AuthorsDetails from '@/components/Course/CourseDetails/Tabs/MainDetails/D
 import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
 import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import Pill from '@/dls/Pill';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
 import SyllabusIcon from '@/icons/developers.svg';
@@ -116,14 +114,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
               <StartOrContinueLearning course={course} isHeaderButton={false} />
             </div>
           )}
-          {isCompleted && (
-            <div className={styles.completedContainer}>
-              <Pill>{t('completed')}</Pill>
-              {course?.userHasFeedback === false && (
-                <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
-              )}
-            </div>
-          )}
+          {isCompleted && <CompletedStatus course={course} />}
         </>
       )}
     </ContentContainer>
