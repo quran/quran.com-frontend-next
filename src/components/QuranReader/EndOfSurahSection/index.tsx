@@ -5,9 +5,11 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './EndOfSurahSection.module.scss';
+import ExploreCard from './ExploreCard';
 import ReadMoreCard from './ReadMoreCard';
 
 import { getChapterMetadata } from '@/api';
+import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import BottomActionsModals, {
   ModalType,
 } from '@/components/QuranReader/TranslationView/BottomActionsModals';
@@ -23,14 +25,20 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const { t, lang } = useTranslation('quran-reader');
   const selectedTafsirs = useSelector(selectSelectedTafsirs);
   const scrollToTop = useScrollToTop();
+  const questionsData = usePageQuestions();
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
   const verseKey = `${chapterNumber}:1`;
+  const hasQuestions = questionsData?.[verseKey]?.total > 0;
 
   const { data: metadataResponse } = useSWRImmutable(
     makeChapterMetadataUrl(chapterNumber, lang),
     () => getChapterMetadata(chapterNumber, lang),
   );
+
+  const handleModalOpen = useCallback((modalType: ModalType) => {
+    setOpenedModal(modalType);
+  }, []);
 
   const handleCloseModal = useCallback(() => {
     setOpenedModal(null);
@@ -50,6 +58,15 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           previousSummaries={chapterMetadata?.previousChapter?.summaries}
           onScrollToTop={scrollToTop}
         />
+
+        <ExploreCard
+          cardClassName={styles.card}
+          chapterNumber={chapterNumber}
+          verseKey={verseKey}
+          suggestions={chapterMetadata?.suggestions}
+          hasQuestions={hasQuestions}
+          onModalOpen={handleModalOpen}
+        />
       </div>
 
       <BottomActionsModals
@@ -58,7 +75,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
         verseKey={verseKey}
         tafsirs={selectedTafsirs}
         openedModal={openedModal}
-        hasQuestions
+        hasQuestions={hasQuestions}
         isTranslationView
         onCloseModal={handleCloseModal}
       />
