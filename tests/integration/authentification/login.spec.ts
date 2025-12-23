@@ -23,8 +23,8 @@ test(
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
     // We should be redirected to the home page
-    await page.waitForURL(/\/fr$/);
-    await expect(page).toHaveURL(/\/fr$/);
+    await page.waitForURL(/\/$/);
+    await expect(page).toHaveURL(/\/$/);
 
     // We should be logged in
     const profileAvatarButton = page.getByTestId('profile-avatar-button');
