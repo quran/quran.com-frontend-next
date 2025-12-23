@@ -10,6 +10,7 @@ import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import NotesIcon from '@/icons/notes-filled.svg';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -40,7 +41,8 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
 
       try {
         router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
-      } catch {
+      } catch (e) {
+        logErrorToSentry(e);
         // If there's an error parsing the verseKey, navigate to chapter 1
         router.push(getLoginNavigationUrl('/1'));
       }
@@ -71,7 +73,12 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
           hasNotes ? (
             <NotesFilledIcon />
           ) : (
-            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+            <IconContainer
+              icon={<NotesIcon />}
+              color={IconColor.tertiary}
+              size={IconSize.Custom}
+              shouldFlipOnRTL={false}
+            />
           )
         }
       >
