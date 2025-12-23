@@ -61,7 +61,7 @@ const FormBuilder = <T,>({
     handleSubmit,
     control,
     setError,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm({ mode: 'onChange' });
 
   const internalOnSubmit = (data: T) => {
@@ -86,7 +86,7 @@ const FormBuilder = <T,>({
       : formField.extraSection;
   };
 
-  const isDisabled = shouldSkipValidation ? isSubmitting : !isValid || isSubmitting;
+  const isDisabled = shouldSkipValidation ? isSubmitting : !isDirty || !isValid || isSubmitting;
 
   return (
     <form
