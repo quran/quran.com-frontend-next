@@ -54,6 +54,7 @@ const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
             icon={<BookOpenIcon />}
             color={IconColor.tertiary}
             size={IconSize.Custom}
+            shouldFlipOnRTL={false}
           />
         }
         onClick={onMenuItemClicked}

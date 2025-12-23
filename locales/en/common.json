@@ -181,19 +181,25 @@
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
+    "file-exceeds-limit": "File size exceeds the limit. Please choose a smaller file.",
     "forgot-password-failed": "Failed to send password reset email. Please try again.",
+    "image-remove-failed": "Failed to remove image. Please try again.",
+    "image-upload-failed": "Failed to upload image. Please try again.",
     "immutable": "*This value cannot be changed",
     "invalid": "*This {{fieldName}} is invalid",
+    "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",
     "invalidEmailOrPassword": "*Invalid email or password",
     "max": "*{{fieldName}} must be less than or equal to {{max}} digits",
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",
     "notFound": "*Not found",
     "required": "*{{fieldName}} is missing!",
+    "remove-avatar-failed": "Failed to remove avatar. Please try again.",
     "reset-password-failed": "Failed to reset password. Please try again.",
     "signin-failed": "Signin failed. Please try again.",
     "signup-failed": "Signup failed. Please try again.",
     "taken": "*{{fieldName}} already exists!",
+    "upload-avatar-failed": "Failed to upload avatar. Please try again.",
     "usedToken": "*This token already used",
     "username": "*{{fieldName}} accept underscore and letters only",
     "verification-code-invalid": "This verification code is invalid",
@@ -232,10 +238,13 @@
     "body": "Body",
     "code": "Verification Code",
     "confirm-password": "Confirm Password",
+    "current-password": "Current Password",
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
     "password": "Password",
+    "new-password": "New Password",
+    "confirm-new-password": "Confirm New Password",
     "title": "Title",
     "username": "Username",
     "verification-code": "Verification Code"
@@ -490,5 +499,20 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+
+  "translation-feedback": {
+    "title": "Translation Feedback",
+
+    "translation": "Translation",
+    "feedback": "Feedback",
+    "report": "Report",
+
+    "select-translation": "Select translation:",
+    "select": "Select...",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+
+    "submission-success": "Your feedback is sent successfully"
+  }
 }

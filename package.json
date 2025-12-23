@@ -200,8 +200,8 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts}": "yarn lint:fix",
-    "*.scss": "yarn lint:scss",
-    "*": "prettier --write"
+    "*.{tsx,ts}": "eslint --fix",
+    "*.scss": "stylelint --fix",
+    "*": "prettier --write --ignore-unknown"
   }
 }

@@ -7,7 +7,7 @@ import styles from './VerseLink.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
+import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
@@ -31,7 +31,9 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
         logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_verse_link`);
       }}
     >
-      {toLocalizedVerseKey(verseKey, lang)}
+      {isRTLLocale(lang)
+        ? toLocalizedVerseKeyRTL(verseKey, lang)
+        : toLocalizedVerseKey(verseKey, lang)}
     </Button>
   );
 };
