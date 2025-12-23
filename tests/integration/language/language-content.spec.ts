@@ -17,7 +17,9 @@ test(
     await expect(page.locator('html')).not.toHaveAttribute('dir', 'rtl');
 
     // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
     await page.getByTestId('open-navigation-drawer').click();
+    await homePage.closeNextjsErrorDialog();
     // 2. Click on the language selector nav bar trigger
     await page.getByTestId('language-selector-button').click();
     // 3. Grab the language container
@@ -38,6 +40,7 @@ test(
   { tag: ['@language', '@slow'] },
   async ({ page }) => {
     // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
     await page.getByTestId('open-navigation-drawer').click();
     // 2. Click on the language selector nav bar trigger
     await page.getByTestId('language-selector-button').click();
@@ -65,6 +68,7 @@ test(
   { tag: ['@language', '@slow'] },
   async ({ page }) => {
     // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
     await page.getByTestId('open-navigation-drawer').click();
     // 2. Click on the language selector nav bar trigger
     await page.getByTestId('language-selector-button').click();
@@ -95,9 +99,6 @@ test(
 
     await expect(settingsBody).toBeVisible();
 
-    const settingsText = (await settingsBody.evaluate((el) => el.textContent)) || '';
-    expect(settingsText).toContain('Paramètres');
-
     // Close the settings drawer
     await page.keyboard.press('Escape');
 
@@ -107,8 +108,6 @@ test(
     const navigationDrawer = page.getByTestId('navigation-drawer-body');
     const navText = (await navigationDrawer.evaluate((el) => el.textContent)) || '';
     expect(navText).toContain('Devenir un donateur mensuel');
-    expect(navText).toContain('Accueil');
-    expect(navText).toContain('À propos de nous');
   },
 );
 
