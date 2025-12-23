@@ -12,7 +12,7 @@ interface BookmarkIconProps {
   isLoading: boolean;
   isBookmarked: boolean;
   isReadingBookmark?: boolean;
-  isCollectionBookmarked?: boolean;
+  isVerseMultipleBookmarked?: boolean;
 }
 
 /**
@@ -25,25 +25,25 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
   isLoading,
   isBookmarked,
   isReadingBookmark,
-  isCollectionBookmarked,
+  isVerseMultipleBookmarked,
 }): JSX.Element => {
   if (isLoading) {
     return <Spinner />;
   }
 
-  if (isReadingBookmark && (isCollectionBookmarked || isBookmarked)) {
+  if (isReadingBookmark && isBookmarked) {
     return <ReadingBookmarkAndOther className={styles.bookmarkIcon} />;
-  }
-
-  if (isBookmarked && isCollectionBookmarked) {
-    return <BookmarkMultiple className={styles.bookmarkIcon} />;
   }
 
   if (isReadingBookmark) {
     return <BookmarkStar className={styles.bookmarkIcon} />;
   }
 
-  if (isBookmarked || isCollectionBookmarked) {
+  if (isVerseMultipleBookmarked) {
+    return <BookmarkMultiple className={styles.bookmarkIcon} />;
+  }
+
+  if (isBookmarked) {
     return <BookmarkFilled className={styles.bookmarkIcon} />;
   }
 
