@@ -53,7 +53,8 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   const handleButtonClick = useCallback(
     (button: ActionButton) => {
       onModalOpen(button.modalType);
-      logButtonClick(`end_of_surah_${button.key}`, { chapterNumber });
+      const normalizedKey = button.key.replace(/\./g, '_');
+      logButtonClick(`end_of_surah_${normalizedKey}`, { chapterNumber });
       fakeNavigate(
         button.getNavigationUrl({
           chapterNumber,
