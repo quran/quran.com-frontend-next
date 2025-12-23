@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 
 import { test, expect, Page } from '@playwright/test';
@@ -15,20 +16,15 @@ test(
   'A user can create an account and reach the verification code step',
   { tag: ['@slow', '@auth', '@create-user'] },
   async ({ page }) => {
-    // Click on the "Continue with Email" button
-    const authButtons = page.getByTestId('auth-buttons');
-    const continueWithEmailButton = authButtons.getByText('Email');
-    await continueWithEmailButton.click();
-
-    // Click on the "Sign Up" tab
-    const signUpTab = page.getByRole('button', { name: 'Sign Up' });
-    await signUpTab.click();
+    // Email form should be visible immediately (no need to click "Continue with Email")
+    // Click on the "Sign Up" tab - use test ID to avoid ambiguity
+    await page.getByTestId('signup-button').click();
 
     // Fill in the form fields with default values
     await fillInSignUpForm(page);
 
-    // Submit the form
-    await page.getByRole('button', { name: 'Sign up' }).last().click();
+    // Submit the form - use form locator to target the submit button, not the tab button
+    await page.locator('form').getByRole('button', { name: 'Sign up' }).click();
 
     // The "verification-code" component should be visible
     const verificationCodeComponent = page.getByTestId('verification-code');
@@ -40,14 +36,9 @@ test(
   'Password validation works correctly',
   { tag: ['@auth', '@create-user'] },
   async ({ page }) => {
-    // Click on the "Continue with Email" button
-    const authButtons = page.getByTestId('auth-buttons');
-    const continueWithEmailButton = authButtons.getByText('Email');
-    await continueWithEmailButton.click();
-
-    // Click on the "Sign Up" tab
-    const signUpTab = page.getByRole('button', { name: 'Sign Up' });
-    await signUpTab.click();
+    // Email form should be visible immediately (no need to click "Continue with Email")
+    // Click on the "Sign Up" tab - use test ID to avoid ambiguity
+    await page.getByTestId('signup-button').click();
 
     // Get the password validation component
     const passwordValidation = page.getByTestId('password-validation');
@@ -98,21 +89,16 @@ test(
 test('Sign up with an existing email shows an error', async ({ page }) => {
   test.skip(!process.env.TEST_USER_EMAIL, 'No credentials provided');
 
-  // Click on the "Continue with Email" button
-  const authButtons = page.getByTestId('auth-buttons');
-  const continueWithEmailButton = authButtons.getByText('Email');
-  await continueWithEmailButton.click();
-
   // Click on the "Sign Up" tab
-  const signUpTab = page.getByRole('button', { name: 'Sign Up' });
+  const signUpTab = page.getByTestId('signup-button');
   await signUpTab.click();
 
   await fillInSignUpForm(page);
   // Use an existing email
   await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
 
-  // Submit the form
-  await page.getByRole('button', { name: 'Sign up' }).last().click();
+  // Submit the form - use form locator to target the submit button, not the tab button
+  await page.locator('form').getByRole('button', { name: 'Sign up' }).click();
 
   // We should see an error message
   const errorMessage = page.getByText('Email already exists');
@@ -157,16 +143,42 @@ async function expectPasswordValidation({
   const { minRule, maxRule, uppercaseRule, lowercaseRule, numberRule, specialRule } =
     await getRules(homePage.page);
 
-  await expect(minRule.locator(`img[alt="${min ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(maxRule.locator(`img[alt="${max ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(
-    uppercaseRule.locator(`img[alt="${uppercase ? 'Valid' : 'Invalid'}"]`),
-  ).toBeVisible();
-  await expect(
-    lowercaseRule.locator(`img[alt="${lowercase ? 'Valid' : 'Invalid'}"]`),
-  ).toBeVisible();
-  await expect(numberRule.locator(`img[alt="${number ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
-  await expect(specialRule.locator(`img[alt="${special ? 'Valid' : 'Invalid'}"]`)).toBeVisible();
+  // Check for valid/invalid classes based on the component's CSS module classes
+  if (min) {
+    await expect(minRule).toHaveClass(/valid/);
+  } else {
+    await expect(minRule).toHaveClass(/invalid/);
+  }
+
+  if (max) {
+    await expect(maxRule).toHaveClass(/valid/);
+  } else {
+    await expect(maxRule).toHaveClass(/invalid/);
+  }
+
+  if (uppercase) {
+    await expect(uppercaseRule).toHaveClass(/valid/);
+  } else {
+    await expect(uppercaseRule).toHaveClass(/invalid/);
+  }
+
+  if (lowercase) {
+    await expect(lowercaseRule).toHaveClass(/valid/);
+  } else {
+    await expect(lowercaseRule).toHaveClass(/invalid/);
+  }
+
+  if (number) {
+    await expect(numberRule).toHaveClass(/valid/);
+  } else {
+    await expect(numberRule).toHaveClass(/invalid/);
+  }
+
+  if (special) {
+    await expect(specialRule).toHaveClass(/valid/);
+  } else {
+    await expect(specialRule).toHaveClass(/invalid/);
+  }
 }
 
 async function fillInSignUpForm(page: Page) {

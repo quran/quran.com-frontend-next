@@ -5,6 +5,14 @@
         "caption": "Hafalkan dan pelajari Al-Quran secara efisien.",
         "title": "Muhaffidh"
       },
+      "quran_android": {
+        "caption": "Baca, tandai, dan dengarkan Al-Quran di perangkat Android.",
+        "title": "Quran untuk Android"
+      },
+      "quran_ios": {
+        "caption": "Aplikasi membaca dan mendengarkan Al-Quran yang indah dan bebas iklan untuk iPhone & iPad",
+        "title": "Quran untuk iOS (oleh quran.com)"
+      },
       "quranmeet": {
         "caption": "Sesi belajar Al-Quran secara langsung",
         "title": "QuranMeet"

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -17,10 +16,11 @@ import { getChapterNumberFromKey } from '@/utils/verse';
 interface Props {
   verseKey: string;
   onDeleted: (verseKey: string) => void;
+  isDeleting?: boolean;
 }
 
-const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted }) => {
-  const { lang } = useTranslation();
+const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted, isDeleting = false }) => {
+  const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
 
   const chapterNumber = getChapterNumberFromKey(verseKey);
@@ -48,8 +48,10 @@ const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted }) => {
         onClick={() => onDeleted(verseKey)}
         type="button"
         className={styles.closeIconContainer}
+        aria-label={t('common:remove')}
+        disabled={isDeleting}
       >
-        <span>
+        <span className={isDeleting ? styles.deleting : undefined}>
           <CloseIcon />
         </span>
       </button>

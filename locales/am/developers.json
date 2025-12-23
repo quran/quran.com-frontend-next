@@ -26,9 +26,10 @@
   },
   "issues-cta": "",
   "issues-guide": "",
-  "labs": "",
-  "labs-cta": "",
-  "labs-description": "",
+  "labs": "ቤተ ሙከራዎች",
+  "labs-cta": "ቤተ ሙከራዎችን ያስሱ",
+  "labs-description": "በማህበረሰብ የሚነዱ የሙከራ ባህሪያትን እና መጪ ፈጠራዎችን ያግኙ።",
+  "labs-pitch": "ሃሳብዎን ያካፍሉ እና ወደፊት በቁርኣናዊ ተሳትፎ እና ልምዶች ላይ ይሳተፉ።",
   "main-desc": "",
   "projects": {
     "all": "",
