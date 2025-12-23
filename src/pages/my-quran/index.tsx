@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './my-quran.module.scss';
 import RecentContent from './RecentContent';
 
-import withAuth from '@/components/Auth/withAuth';
 import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -96,4 +95,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(MyQuranPage);
+export default MyQuranPage;
