@@ -1,0 +1,248 @@
+// use it like
+// @use 'src/styles/mixins/_flexbox' as flexbox-mixins;
+// @include flexbox-mixins.flex-col;
+
+/* Define mixins */
+@mixin flex {
+  display: flex;
+}
+
+@mixin col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin col-end {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+@mixin col-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@mixin inline-flex {
+  display: inline-flex;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin justify-center {
+  justify-content: center;
+}
+
+@mixin justify-start {
+  justify-content: flex-start;
+}
+
+@mixin justify-end {
+  justify-content: flex-end;
+}
+
+@mixin justify-between {
+  justify-content: space-between;
+}
+
+@mixin justify-around {
+  justify-content: space-around;
+}
+
+@mixin align-center {
+  align-items: center;
+}
+
+@mixin align-start {
+  align-items: flex-start;
+}
+
+@mixin align-end {
+  align-items: flex-end;
+}
+
+@mixin align-baseline {
+  align-items: baseline;
+}
+
+@mixin align-stretch {
+  align-items: stretch;
+}
+
+@mixin flex-wrap {
+  flex-wrap: wrap;
+}
+
+@mixin flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+@mixin flex-grow {
+  flex-grow: 1;
+}
+
+@mixin flex-shrink {
+  flex-shrink: 1;
+}
+
+@mixin flex-no-grow {
+  flex-grow: 0;
+}
+
+@mixin flex-no-shrink {
+  flex-shrink: 0;
+}
+
+@mixin row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin row-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin row-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@mixin row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin row-wrap {
+  @include flex;
+
+  flex-wrap: wrap;
+}
+
+.rowBetween {
+  @include row-between;
+}
+
+.rowWrap {
+  @include row-wrap;
+}
+
+.gapMini {
+  gap: var(--spacing-mini);
+}
+
+/* Define classes that use the mixins */
+.flex {
+  @include flex;
+}
+
+.colEnd {
+  @include col-end;
+}
+
+.colCenter {
+  @include col-center;
+}
+
+.inlineFlex {
+  @include inline-flex;
+}
+
+.flexCol {
+  @include flex-col;
+}
+
+.flexRow {
+  @include flex-row;
+}
+
+.justifyCenter {
+  @include justify-center;
+}
+
+.justifyStart {
+  @include justify-start;
+}
+
+.justifyEnd {
+  @include justify-end;
+}
+
+.justifyBetween {
+  @include justify-between;
+}
+
+.justifyAround {
+  @include justify-around;
+}
+
+.alignCenter {
+  @include align-center;
+}
+
+.alignStart {
+  @include align-start;
+}
+
+.alignEnd {
+  @include align-end;
+}
+
+.alignBaseline {
+  @include align-baseline;
+}
+
+.alignStretch {
+  @include align-stretch;
+}
+
+.flexWrap {
+  @include flex-wrap;
+}
+
+.flexNowrap {
+  @include flex-nowrap;
+}
+
+.flexGrow {
+  @include flex-grow;
+}
+
+.flexShrink {
+  @include flex-shrink;
+}
+
+.flexNoGrow {
+  @include flex-no-grow;
+}
+
+.flexNoShrink {
+  @include flex-no-shrink;
+}
+
+.rowCenter {
+  @include row-center;
+}
+
+.rowStart {
+  @include row-start;
+}
+
+.rowEnd {
+  @include row-end;
+}
