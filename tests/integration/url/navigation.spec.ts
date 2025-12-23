@@ -16,9 +16,6 @@ test(
   'Navigating using back button works',
   { tag: ['@url', '@slow', '@navigation'] },
   async ({ page }) => {
-    // TODO: unskip this when https://github.com/quran/quran.com-frontend-next/pull/2515 is merged
-    test.skip(true, 'Unskip when #2515 is merged');
-
     await homePage.goTo('/');
     await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
@@ -51,9 +48,6 @@ test(
   'Navigating using forward button works',
   { tag: ['@url', '@slow', '@navigation'] },
   async ({ page }) => {
-    // TODO: unskip this when https://github.com/quran/quran.com-frontend-next/pull/2515 is merged
-    test.skip(true, 'Unskip when #2515 is merged');
-
     await homePage.goTo('/');
     await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
