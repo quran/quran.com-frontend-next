@@ -28,6 +28,7 @@ type FormBuilderProps<T> = {
   shouldSkipValidation?: boolean;
   /**
    * When true, automatically clears all form fields after successful submission (when the promise resolves without errors).
+   * Note: The onSubmit handler must return a promise that resolves with { success: true } for the form to be cleared.
    */
   shouldClearOnSuccess?: boolean;
 };
