@@ -26,7 +26,7 @@ const PublicReflectionDescription: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="post-reflection-intro">
       <div className={styles.titleContainer}>
         {t('post-refl-intro.post-button')}
         <button
@@ -35,12 +35,17 @@ const PublicReflectionDescription: React.FC = () => {
           className={styles.learnMoreButton}
           aria-expanded={isOpen}
           aria-controls="public-reflection-description-content"
+          data-testid="pr-toggle"
         >
           {isOpen ? t('new-note-reflc-intro.see-less') : t('new-note-reflc-intro.learn-more')}
         </button>
       </div>
       {isOpen && (
-        <div className={styles.contentContainer} id="public-reflection-description-content">
+        <div
+          className={styles.contentContainer}
+          id="public-reflection-description-content"
+          data-testid="pr-content"
+        >
           <div className={styles.sectionContainer}>
             <div className={styles.sectionHeader}>{t('post-refl-intro.qr-title')}</div>
             <Trans

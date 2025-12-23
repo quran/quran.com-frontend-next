@@ -41,6 +41,7 @@ const TranslationViewNoteAction: React.FC<TranslationViewNoteActionProps> = ({
           variant={ButtonVariant.Ghost}
           size={ButtonSize.Small}
           ariaLabel={t('take-a-note-or-reflection')}
+          data-testid="notes-action-button"
         >
           <span className={translationViewStyles.icon}>
             <IconContainer

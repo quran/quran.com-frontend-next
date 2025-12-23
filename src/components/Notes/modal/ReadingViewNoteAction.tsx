@@ -29,6 +29,7 @@ const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
       {({ onClick, hasNote }) => (
         <PopoverMenu.Item
           onClick={onClick}
+          dataTestId="notes-menu-item"
           icon={
             <IconContainer
               icon={hasNote ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}

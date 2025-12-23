@@ -73,7 +73,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
   const showStatus = isLoading || error || showEmptyState;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="my-notes-modal-content">
       {showStatus ? (
         <div className={styles.statusContainer} data-error={!!error}>
           {isLoading && <Spinner size={SpinnerSize.Large} />}
@@ -83,7 +83,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
       ) : (
         <div className={styles.notesList}>
           {notes.map((note) => (
-            <div key={note.id} className={styles.noteCard}>
+            <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
               <div className={styles.noteHeader}>
                 <div>
                   <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
@@ -105,6 +105,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                       tooltip={t('view-on-qr')}
                       ariaLabel={t('view-on-qr')}
                       onClick={() => logButtonClick('qr_view_note_post')}
+                      data-testid="qr-view-button"
                     >
                       <QRColoredIcon />
                     </Button>
@@ -117,6 +118,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                     onClick={() => onEditNote(note)}
                     tooltip={t('common:edit')}
                     ariaLabel={t('common:edit')}
+                    data-testid="edit-note-button"
                   >
                     <IconContainer
                       icon={<EditIcon />}
@@ -130,7 +132,9 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                 </div>
               </div>
 
-              <p className={styles.noteText}>{note.body}</p>
+              <p className={styles.noteText} data-testid="note-text">
+                {note.body}
+              </p>
             </div>
           ))}
         </div>
@@ -144,6 +148,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
           size={ButtonSize.Small}
           prefix={<PlusIcon />}
           onClick={onAddNote}
+          data-testid="add-another-note-button"
         >
           {t('add-another-note')}
         </Button>

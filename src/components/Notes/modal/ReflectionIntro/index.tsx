@@ -26,15 +26,20 @@ const ReflectionIntro = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="reflection-intro">
       <div className={styles.titleContainer}>
         {t('new-note-reflc-intro.title')}
-        <button type="button" onClick={toggleOpen} className={styles.learnMoreButton}>
+        <button
+          type="button"
+          onClick={toggleOpen}
+          className={styles.learnMoreButton}
+          data-testid="ri-toggle"
+        >
           {isOpen ? t('new-note-reflc-intro.see-less') : t('new-note-reflc-intro.learn-more')}
         </button>
       </div>
       {isOpen && (
-        <div className={styles.contentContainer}>
+        <div className={styles.contentContainer} data-testid="ri-content">
           <div className={styles.sectionContainer}>
             <div className={styles.sectionHeader}>
               {t('new-note-reflc-intro.what-is-reflc.title')}

@@ -78,12 +78,14 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
       onMyNotes={onMyNotes}
       onSaveNote={handleSaveNote}
       showNotesOnVerseButton={false}
+      dataTestId="edit-note-modal-content"
       header={
         <button
           type="button"
           className={classNames(styles.headerButton, modalStyles.title)}
           onClick={onMyNotes}
           aria-label={t('common:back')}
+          data-testid="edit-modal-back-button"
         >
           <IconContainer
             icon={<ArrowIcon />}

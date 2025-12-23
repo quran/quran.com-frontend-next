@@ -25,6 +25,7 @@ interface NoteFormModalProps {
   isModalOpen: boolean;
   onModalClose: () => void;
   onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>;
+  dataTestId?: string;
 }
 
 const NoteFormModal: React.FC<NoteFormModalProps> = ({
@@ -37,6 +38,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
   isModalOpen,
   onModalClose,
   onSaveNote = async () => {},
+  dataTestId,
 }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
@@ -87,7 +89,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
         contentClassName={modalStyles.content}
         overlayClassName={modalStyles.overlay}
       >
-        <div className={styles.container}>
+        <div className={styles.container} data-testid={dataTestId || 'notes-modal-content'}>
           <ReflectionIntro />
 
           {verseRanges.length > 0 && (
@@ -108,9 +110,14 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
               containerClassName={styles.textArea}
               value={noteInput}
               onChange={onNoteInputChange}
+              dataTestId="notes-textarea"
             />
 
-            {errors.note && <div className={styles.error}>{errors.note}</div>}
+            {errors.note && (
+              <div className={styles.error} data-testid={`note-input-error-${errors.note.id}`}>
+                {errors.note.message}
+              </div>
+            )}
           </div>
 
           {showNotesOnVerseButton && notesCount > 0 && (
@@ -129,6 +136,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
               isLoading={loading === LoadingState.Public}
               isDisabled={loading !== null}
               onClick={handlePublicSaveClick}
+              data-testid="save-to-qr-button"
             >
               {t('notes:save-post-to-qr')}
             </Button>
@@ -138,6 +146,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
               isLoading={loading === LoadingState.Private}
               isDisabled={loading !== null}
               onClick={onPrivateSave}
+              data-testid="save-private-button"
             >
               {t('notes:save-privately')}
             </Button>

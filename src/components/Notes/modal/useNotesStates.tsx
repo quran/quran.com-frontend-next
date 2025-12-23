@@ -12,6 +12,11 @@ export enum LoadingState {
   Private = 'private',
 }
 
+interface ValidationError {
+  id: string;
+  message: string;
+}
+
 export const useNotesStates = (
   initialNote: string,
   onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>,
@@ -21,38 +26,37 @@ export const useNotesStates = (
   const { t } = useTranslation();
 
   const [noteInput, setNoteInput] = useState(initialNote);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, ValidationError>>({});
   const [loading, setLoading] = useState<LoadingState | null>(null);
+
+  const setNoteError = useCallback((id: string, message: string) => {
+    setErrors((prevErrors) => ({ ...prevErrors, note: { id, message } }));
+  }, []);
 
   const validateNoteInput = useCallback((): true | void => {
     if (!noteInput) {
-      return setErrors({
-        note: t('common:validation.required-field', {
-          field: t('notes:note'),
-        }),
-      });
+      return setNoteError(
+        'required-field',
+        t('common:validation.required-field', { field: t('notes:note') }),
+      );
     }
 
     if (noteInput.length < MIN_NOTE_LENGTH) {
-      return setErrors({
-        note: t('common:validation.minimum-length', {
-          field: t('notes:note'),
-          value: MIN_NOTE_LENGTH,
-        }),
-      });
+      return setNoteError(
+        'minimum-length',
+        t('common:validation.minimum-length', { field: t('notes:note'), value: MIN_NOTE_LENGTH }),
+      );
     }
 
     if (noteInput.length > MAX_NOTE_LENGTH) {
-      return setErrors({
-        note: t('common:validation.maximum-length', {
-          field: t('notes:note'),
-          value: MAX_NOTE_LENGTH,
-        }),
-      });
+      return setNoteError(
+        'maximum-length',
+        t('common:validation.maximum-length', { field: t('notes:note'), value: MAX_NOTE_LENGTH }),
+      );
     }
 
     return true;
-  }, [noteInput, t]);
+  }, [noteInput, t, setNoteError]);
 
   const onSubmit = useCallback(
     async (isPublic: boolean) => {

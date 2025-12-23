@@ -27,14 +27,18 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
   return (
     <ContentModal
       isOpen={isModalOpen}
-      header={<h2 className={modalStyles.title}>{t('take-a-note-or-reflection')}</h2>}
+      header={
+        <h2 className={modalStyles.title} data-testid="qr-confirmation-modal-title">
+          {t('take-a-note-or-reflection')}
+        </h2>
+      }
       hasCloseButton
       onClose={onModalClose}
       onEscapeKeyDown={onModalClose}
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
     >
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="qr-confirmation-modal-content">
         <p className={styles.question}>{t('post-confirmation.question')}</p>
 
         <PostReflectionDescription />
@@ -46,6 +50,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
             variant={ButtonVariant.Simplified}
             onClick={onEdit}
             isDisabled={isLoading}
+            data-testid="edit-confirmation-button"
           >
             {t('common:edit')}
           </Button>
@@ -56,6 +61,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
             onClick={onConfirm}
             isLoading={isLoading}
             isDisabled={isLoading}
+            data-testid="confirm-save-to-qr"
           >
             {t('save-post-to-qr')}
           </Button>

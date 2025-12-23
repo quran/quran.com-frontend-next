@@ -60,12 +60,17 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
 
   return (
     <NoteFormModal
-      header={<h2 className={modalStyles.title}>{t('take-a-note-or-reflection')}</h2>}
+      header={
+        <h2 className={modalStyles.title} data-testid="add-note-modal-title">
+          {t('take-a-note-or-reflection')}
+        </h2>
+      }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
       onMyNotes={onMyNotes}
       notesCount={notesCount}
       onSaveNote={handleSaveNote}
+      dataTestId="add-note-modal-content"
     />
   );
 };

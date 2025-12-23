@@ -20,7 +20,13 @@ const NotesOnVerseButton: React.FC<NotesOnVerseButtonProps> = ({
   const { t } = useTranslation('notes');
 
   return (
-    <button type="button" className={styles.notesButton} onClick={onClick} disabled={disabled}>
+    <button
+      type="button"
+      className={styles.notesButton}
+      onClick={onClick}
+      disabled={disabled}
+      data-testid="notes-on-verse-button"
+    >
       <IconContainer
         icon={<NotesWithPencilIcon />}
         color={IconColor.default}
