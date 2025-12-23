@@ -35,9 +35,10 @@ test(
 
     // 2. Make sure the navigation drawer is visible after opening it
     await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
+    const navigationDrawer = page.getByTestId('navigation-drawer');
 
     // 3. Click on the close drawer button
-    await page.getByLabel('Close Drawer').first().click();
+    await navigationDrawer.getByLabel('Close Drawer').click();
 
     // 4. Make sure the navigation drawer is no longer visible after closing it
     await expect(page.getByTestId('navigation-drawer-body')).not.toBeVisible();
@@ -107,6 +108,7 @@ test(
     await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     const drawer = page.getByTestId('navigation-drawer-body');
+    await page.getByTestId('navigation-links-our-projects').click();
     expect(
       await drawer.getByRole('link', { name: 'Quran For Android' }).getAttribute('href'),
     ).toContain('play.google.com');
@@ -127,31 +129,32 @@ test(
     await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     // 2. Click on the donate monthly button
-    await page.getByText('Donate monthly').click();
+    const newPagePromise = page.context().waitForEvent('page');
+    await page.getByText('Become A Monthly Donor').click();
 
     // 3. Make sure a new tab is opened with the correct url
-    const newPage = await page.context().waitForEvent('page');
+    const newPage = await newPagePromise;
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(/give\.quran\.foundation\/give/);
+    await expect(newPage).toHaveURL(/donate\.quran\.foundation/);
   },
 );
 
 const drawerLinks = [
   // Main Navigation Links
-  { text: 'Home', href: '/', target: '' },
+  { text: 'Read', href: '', target: '' },
+  { text: 'Learn', href: '/learning-plans', target: '' },
+  { text: 'My Quran', href: '/profile', target: '' },
   { text: 'Quran Radio', href: '/radio', target: '' },
   { text: 'Reciters', href: '/reciters', target: '' },
   { text: 'About Us', href: '/about-us', target: '' },
+
+  // More
   { text: 'Developers', href: '/developers', target: '' },
   { text: 'Product Updates', href: '/product-updates', target: '' },
   { text: 'Feedback', href: 'https://feedback.quran.com/', target: '_blank' },
   { text: 'Help', href: '/support', target: '' },
 
-  // Fundraising Banner Links
-  { text: 'Learn more', href: 'https://donate.quran.foundation', target: '_blank' },
-
-  // Our Projects Links
-  { text: 'Quran.Foundation', href: 'https://quran.foundation', target: '_blank' },
+  // Our Projects
   { text: 'Quran.com', href: 'https://quran.com', target: '_blank' },
   {
     text: 'Quran For Android',
@@ -168,4 +171,7 @@ const drawerLinks = [
   { text: 'Nuqayah.com', href: 'https://nuqayah.com/', target: '_blank' },
   { text: 'Legacy.quran.com', href: 'https://legacy.quran.com', target: '_blank' },
   { text: 'Corpus.quran.com', href: 'https://corpus.quran.com', target: '_blank' },
+
+  // Fundraising Banner Links
+  { text: 'Become A Monthly Donor', href: 'https://donate.quran.foundation', target: '_blank' },
 ];

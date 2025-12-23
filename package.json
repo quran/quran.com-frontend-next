@@ -92,6 +92,7 @@
     "husky": "^9.1.5",
     "js-cookie": "^3.0.1",
     "lodash": "^4.17.21",
+    "newrelic": "11.23.2",
     "next": "^14.2.6",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.0.3",
@@ -175,6 +176,7 @@
     "inquirer-file-tree-selection-prompt": "^1",
     "jsdom": "^20.0.0",
     "lint-staged": "^15.2.9",
+    "msw": "^2.10.3",
     "pinst": "^3.0.0",
     "postcss": "8.4.41",
     "postcss-scss": "^4.0.5",
@@ -198,8 +200,8 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts}": "yarn lint:fix",
-    "*.scss": "yarn lint:scss",
-    "*": "prettier --write"
+    "*.{tsx,ts}": "eslint --fix",
+    "*.scss": "stylelint --fix",
+    "*": "prettier --write --ignore-unknown"
   }
 }
