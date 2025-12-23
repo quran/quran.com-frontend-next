@@ -584,3 +584,161 @@ test.describe('Form Behavior with Disabled State', () => {
     },
   );
 });
+
+test.describe('Form Clearing Functionality (shouldClearOnSuccess)', () => {
+  test(
+    'should clear all form fields after successful password update',
+    { tag: TEST_TAGS },
+    async ({ page }) => {
+      // Mock API to return success
+      await mockPasswordUpdateApi(page, { success: true });
+
+      const section = getChangePasswordSection(page);
+      const inputs = getFormInputs(section);
+
+      const currentPassword = getTestUserPassword();
+      const newPassword = 'NewValidPass123!';
+
+      // Fill all password fields
+      await fillPasswordFields(inputs, currentPassword, newPassword, newPassword);
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify fields are filled
+      await expect(inputs.currentPassword).toHaveValue(currentPassword);
+      await expect(inputs.newPassword).toHaveValue(newPassword);
+      await expect(inputs.confirmPassword).toHaveValue(newPassword);
+
+      // Submit the form
+      await inputs.updateButton.click();
+
+      // Wait for success message
+      const successMessage = page.getByText(/password.*updated.*successfully|success/i);
+      await expect(successMessage).toBeVisible({ timeout: 10000 });
+
+      // Wait for form to process the clearing
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify all fields are cleared
+      await expect(inputs.currentPassword).toHaveValue('');
+      await expect(inputs.newPassword).toHaveValue('');
+      await expect(inputs.confirmPassword).toHaveValue('');
+    },
+  );
+
+  test(
+    'should NOT clear form fields when submission fails with validation errors',
+    { tag: TEST_TAGS },
+    async ({ page }) => {
+      // Mock API to return validation error
+      await mockPasswordUpdateApi(page, {
+        success: false,
+        errorMessage: 'Current password is invalid',
+      });
+
+      const section = getChangePasswordSection(page);
+      const inputs = getFormInputs(section);
+
+      const wrongCurrentPassword = 'WrongPassword123!';
+      const newPassword = 'NewValidPass123!';
+
+      // Fill all password fields with invalid current password
+      await fillPasswordFields(inputs, wrongCurrentPassword, newPassword, newPassword);
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify fields are filled before submission
+      await expect(inputs.currentPassword).toHaveValue(wrongCurrentPassword);
+      await expect(inputs.newPassword).toHaveValue(newPassword);
+      await expect(inputs.confirmPassword).toHaveValue(newPassword);
+
+      // Submit the form
+      await inputs.updateButton.click();
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify error is displayed
+      await expectError(section, /incorrect.*current.*password|current.*password.*is.*invalid/i);
+
+      // Verify fields are NOT cleared and retain their values
+      await expect(inputs.currentPassword).toHaveValue(wrongCurrentPassword);
+      await expect(inputs.newPassword).toHaveValue(newPassword);
+      await expect(inputs.confirmPassword).toHaveValue(newPassword);
+    },
+  );
+
+  test(
+    'should NOT clear form fields when API returns error response',
+    { tag: TEST_TAGS },
+    async ({ page }) => {
+      // Mock API to return server error
+      await page.route('**/api/proxy/auth/users/updatePassword', async (route) => {
+        await route.fulfill({
+          status: 500,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            success: false,
+            message: 'Internal server error',
+          }),
+        });
+      });
+
+      const section = getChangePasswordSection(page);
+      const inputs = getFormInputs(section);
+
+      const currentPassword = getTestUserPassword();
+      const newPassword = 'NewValidPass123!';
+
+      // Fill all password fields
+      await fillPasswordFields(inputs, currentPassword, newPassword, newPassword);
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify fields are filled
+      await expect(inputs.currentPassword).toHaveValue(currentPassword);
+      await expect(inputs.newPassword).toHaveValue(newPassword);
+      await expect(inputs.confirmPassword).toHaveValue(newPassword);
+
+      // Submit the form
+      await inputs.updateButton.click();
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify fields are NOT cleared after error
+      await expect(inputs.currentPassword).toHaveValue(currentPassword);
+      await expect(inputs.newPassword).toHaveValue(newPassword);
+      await expect(inputs.confirmPassword).toHaveValue(newPassword);
+    },
+  );
+
+  test(
+    'should clear password validation display when form is cleared',
+    { tag: TEST_TAGS },
+    async ({ page }) => {
+      // Mock API to return success
+      await mockPasswordUpdateApi(page, { success: true });
+
+      const section = getChangePasswordSection(page);
+      const inputs = getFormInputs(section);
+
+      const currentPassword = getTestUserPassword();
+      const newPassword = 'NewValidPass123!';
+
+      // Fill password fields
+      await fillPasswordFields(inputs, currentPassword, newPassword, newPassword);
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify password validation is visible
+      const validation = getPasswordValidation(section);
+      await expect(validation).toBeVisible();
+
+      // Submit the form
+      await inputs.updateButton.click();
+
+      // Wait for success message
+      const successMessage = page.getByText(/password.*updated.*successfully|success/i);
+      await expect(successMessage).toBeVisible({ timeout: 10000 });
+
+      // Wait for form clearing
+      await page.waitForTimeout(UI_UPDATE_WAIT);
+
+      // Verify password validation is hidden after form is cleared
+      await expect(validation).not.toBeVisible();
+    },
+  );
+});
