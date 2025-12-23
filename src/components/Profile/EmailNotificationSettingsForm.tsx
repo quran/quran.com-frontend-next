@@ -31,10 +31,10 @@ const EmailNotificationSettingsForm: FC = () => {
     status,
   } = useFetchUserPreferences();
   const [preferences, setPreferences] = useState<IUserPreferenceSettings[]>(
-    userPreferences as IUserPreferenceSettings[],
+    userPreferences as IUserPreferenceSettings[] | [],
   );
   const [localPreferences, setLocalPreferences] = useState<IUserPreferenceSettings[]>(
-    userPreferences as IUserPreferenceSettings[],
+    userPreferences as IUserPreferenceSettings[] | [],
   );
   const [isSaving, setIsSaving] = useState(false);
   const { updatePreference } = useUpdateEmailNotificationPreferences();

@@ -24,8 +24,12 @@ const NotificationCheckbox: FC<NotificationCheckboxProps> = ({
 }) => {
   const { template } = preference;
   const isEmailEnabled = preference.preference.channels[ChannelTypeEnum.EMAIL] ?? false;
-  const title = t(`notifications.${template.name}.title`);
-  const description = t(`notifications.${template.name}.description`);
+  const titleKey = `notifications.${template.name}.title`;
+  const descriptionKey = `notifications.${template.name}.description`;
+  const translatedTitle = t(titleKey);
+  const translatedDescription = t(descriptionKey);
+  const title = translatedTitle === titleKey ? template.name : translatedTitle;
+  const description = translatedDescription === descriptionKey ? '' : translatedDescription;
 
   return (
     <Checkbox

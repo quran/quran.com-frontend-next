@@ -1,13 +1,17 @@
 import { FC } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './EmailNotificationSettingsSkeleton.module.scss';
 import Section from './Section';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 
 const EmailNotificationSettingsSkeleton: FC = () => {
+  const { t } = useTranslation('profile');
+
   return (
-    <Section title="">
+    <Section title={t('email-notification-settings')}>
       <div className={styles.skeletonContainer}>
         {[1, 2].map((index) => (
           <div key={index} className={styles.notificationRow}>
