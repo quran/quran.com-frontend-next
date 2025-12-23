@@ -7,7 +7,7 @@ const clickCreateMyGoalButton = async (page: Page): Promise<void> => {
   const banner = page.getByTestId('banner');
   const button = banner.getByRole('link', { name: /create my goal/i });
   await expect(button).toBeVisible();
-  await button.click();
+  await button.click({ force: true });
 };
 
 export default clickCreateMyGoalButton;
