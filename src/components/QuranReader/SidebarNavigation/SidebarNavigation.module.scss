@@ -1,11 +1,12 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
-@use "sass:math";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+@use 'sass:math';
 
 $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
 $navbar-height: var(--navbar-container-height);
+$banner-height: var(--banner-height);
 
 // Homepage heights (without sections menu and without progress bar)
 $top-menu-height-home: $navbar-height;
@@ -15,6 +16,13 @@ $context-menu-height-home: 0;
 $top-menu-height: calc($sections-menu-height + $navbar-height + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
 
+// Mobile heights (include banner height since banner is not absolute on mobile)
+$top-menu-height-home-mobile: calc($navbar-height + $banner-height);
+$top-menu-height-mobile: calc(
+  $sections-menu-height + $navbar-height + $progress-bar-height + $banner-height
+);
+$context-menu-height-mobile: calc($sections-menu-height + $progress-bar-height + $banner-height);
+
 $isNavbarVisible: var(--isNavbarVisible);
 
 @mixin sidebarVisible {
@@ -23,33 +31,59 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 @mixin sidebarInvisibleExpanded {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateX(-100%) translateY($top-menu-height-home);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateX(-100%) translateY($top-menu-height-home-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height-home);
+      @include breakpoints.smallerThanTablet {
+        transform: translateX(100%) translateY($top-menu-height-home-mobile);
+      }
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateX(-100%) translateY($top-menu-height);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateX(-100%) translateY($top-menu-height-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateX(100%) translateY($top-menu-height-mobile);
+      }
     }
   }
 }
 
 @mixin sidebarInvisibleCollapsed {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateX(-100%) translateY($context-menu-height-home);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateX(-100%) translateY($top-menu-height-home-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($context-menu-height-home);
+      @include breakpoints.smallerThanTablet {
+        transform: translateX(100%) translateY($top-menu-height-home-mobile);
+      }
     }
   }
 
-  &[data-is-homepage="false"] {
-    transform: translateX(-100%) translateY($context-menu-height);
-    [dir="rtl"] & {
-      transform: translateX(100%) translateY($context-menu-height);
+  &[data-is-homepage='false'] {
+    // Use $top-menu-height to match visible state transform and prevent
+    // vertical movement during the sidebar open/close animation.
+    transform: translateX(-100%) translateY($top-menu-height);
+    @include breakpoints.smallerThanTablet {
+      transform: translateX(-100%) translateY($top-menu-height-mobile);
+    }
+    [dir='rtl'] & {
+      transform: translateX(100%) translateY($top-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateX(100%) translateY($top-menu-height-mobile);
+      }
     }
   }
 }
@@ -59,22 +93,23 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     --sidebar-size: calc(10 * var(--spacing-mega));
   }
-  height: 100vh;
-  max-height: 100vh;
+  block-size: 100vh;
+  max-block-size: 100vh;
   position: fixed;
   inset-block-start: 0;
   inset-inline-start: 0;
   padding-block-start: calc(1.5 * var(--spacing-mega));
+  @include breakpoints.tablet {
+    --sidebar-size: calc(10 * var(--spacing-mega));
+  }
   background-color: var(--color-background-elevated);
   overflow-x: hidden;
   z-index: var(--z-index-sticky);
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
-  width: var(--sidebar-size);
+  inline-size: var(--sidebar-size);
   padding-inline: var(--spacing-large);
-  transition:
-    transform var(--transition-regular),
-    height var(--transition-regular);
+  transition: transform var(--transition-regular), height var(--transition-regular);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -91,17 +126,29 @@ $isNavbarVisible: var(--isNavbarVisible);
 .visibleContainer {
   @include sidebarVisible();
 
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-home-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateY($top-menu-height-home);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-home-mobile);
+      }
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateY($top-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-mobile);
+      }
     }
   }
 }
@@ -109,17 +156,29 @@ $isNavbarVisible: var(--isNavbarVisible);
 .visibleContainerCollapsed {
   @include sidebarVisible();
 
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($context-menu-height-home);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-home-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateY($context-menu-height-home);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-home-mobile);
+      }
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($context-menu-height);
-    [dir="rtl"] & {
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($context-menu-height-mobile);
+    }
+    [dir='rtl'] & {
       transform: translateY($context-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($context-menu-height-mobile);
+      }
     }
   }
 }
@@ -128,16 +187,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     @include sidebarVisible();
 
-    &[data-is-homepage="true"] {
+    &[data-is-homepage='true'] {
       transform: translateY($top-menu-height-home);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($top-menu-height-home);
       }
     }
 
-    &[data-is-homepage="false"] {
+    &[data-is-homepage='false'] {
       transform: translateY($top-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($top-menu-height);
       }
     }
@@ -148,16 +207,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     @include sidebarVisible();
 
-    &[data-is-homepage="true"] {
+    &[data-is-homepage='true'] {
       transform: translateY($context-menu-height-home);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($context-menu-height-home);
       }
     }
 
-    &[data-is-homepage="false"] {
+    &[data-is-homepage='false'] {
       transform: translateY($context-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($context-menu-height);
       }
     }
@@ -206,7 +265,7 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 .listItem {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
   padding: var(--spacing-xsmall);
@@ -237,7 +296,7 @@ $isNavbarVisible: var(--isNavbarVisible);
   padding: var(--spacing-xsmall) var(--spacing-xsmall);
   border-radius: var(--border-radius-rounded);
   margin-block-end: var(--spacing-medium);
-  width: 100%;
+  inline-size: 100%;
   background-color: var(--color-background-alternative-faded);
   color: var(--color-text-default);
   &::placeholder {
@@ -247,32 +306,89 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 .spaceOnTop {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    height: calc(100vh - $top-menu-height-home);
+    block-size: calc(100vh - $top-menu-height-home);
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-home-mobile);
+      // Use 100vh to ensure sidebar always reaches bottom on mobile
+      block-size: 100vh;
+    }
+    // RTL needs same rules with matching specificity to override .visibleContainer RTL rules
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+      block-size: calc(100vh - $top-menu-height-home);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-home-mobile);
+        block-size: 100vh;
+      }
+    }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    height: calc(100vh - $top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-mobile);
+      // Use height without banner subtraction - banner scrolls away on mobile
+      block-size: calc(100vh - $top-menu-height);
+    }
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height);
+      block-size: calc(100vh - $top-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-mobile);
+        block-size: calc(100vh - $top-menu-height);
+      }
+    }
   }
 }
 
 .spaceOnTopCollapsed {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    height: 100vh;
+    block-size: 100vh;
+    @include breakpoints.smallerThanTablet {
+      // On mobile, compensate for navbar shift like we do for non-homepage
+      transform: translateY($top-menu-height-home-mobile);
+      // Use 100vh to ensure sidebar always reaches bottom
+      block-size: 100vh;
+    }
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+      block-size: 100vh;
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-home-mobile);
+        block-size: 100vh;
+      }
+    }
   }
 
-  &[data-is-homepage="false"] {
-    transform: translateY($context-menu-height);
-    height: calc(100vh - $context-menu-height);
+  &[data-is-homepage='false'] {
+    // When navbar is collapsed, it shifts up by navbar-height.
+    // Since sidebar is a child of navbar, we need to compensate by using $top-menu-height
+    // instead of just $context-menu-height to push the sidebar down correctly.
+    transform: translateY($top-menu-height);
+    block-size: calc(100vh - $context-menu-height);
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-mobile);
+      // Use height without banner subtraction - sidebar extends past viewport when needed
+      block-size: calc(100vh - $context-menu-height);
+    }
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height);
+      block-size: calc(100vh - $context-menu-height);
+      @include breakpoints.smallerThanTablet {
+        transform: translateY($top-menu-height-mobile);
+        block-size: calc(100vh - $context-menu-height);
+      }
+    }
   }
 }
 
 .chapterNumber {
   display: inline-block;
-  width: calc(2 * var(--spacing-medium));
+  inline-size: calc(2 * var(--spacing-medium));
 }
 
 .tip {
