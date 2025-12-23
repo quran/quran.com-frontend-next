@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { buildUrlWithParams } from '@/utils/navigation';
 
@@ -10,29 +10,28 @@ import { buildUrlWithParams } from '@/utils/navigation';
  * @param {Record<string, unknown>} params a map of each parameter and its value that we will listen to and in the event of changing any of them, we will re-generate the url.
  */
 const useAddQueryParamsToUrl = (relativeUrl: string, params: Record<string, unknown>) => {
-  const hasInitialized = useRef(false);
-
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Use the utility function to build URL with params
-    const url = buildUrlWithParams(relativeUrl, params);
+    // Preserve the language prefix from the current URL
+    const currentPath = window.location.pathname;
+    const languageMatch = currentPath.match(/^\/([a-z]{2})\//);
+    const languagePrefix = languageMatch ? `/${languageMatch[1]}` : '';
+
+    // Build the full URL with language prefix
+    const baseUrl = `${languagePrefix}${relativeUrl}`;
+    const url = buildUrlWithParams(baseUrl, params);
     const currentUrl = `${window.location.pathname}${window.location.search}`;
 
-    // Skip if the url is the same (no need to push/replace state)
+    // Skip if the url is the same (no need to push state)
     if (currentUrl === url) {
-      hasInitialized.current = true;
       return;
     }
 
     const historyState = { ...window.history.state, as: url, url };
-    // Only replace the state on the first run, afterwards we push new states
-    const historyMethod = hasInitialized.current ? 'pushState' : 'replaceState';
-    window.history[historyMethod](historyState, '', url);
-
-    // Mark the initialization as complete
-    // so that next time we push a new state instead of replacing it
-    hasInitialized.current = true;
+    // Use pushState to preserve browser history navigation
+    // This ensures the back button works correctly through all navigation steps
+    window.history.pushState(historyState, '', url);
   }, [relativeUrl, params]);
 };
 
