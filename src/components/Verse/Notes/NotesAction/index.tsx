@@ -73,7 +73,12 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
           hasNotes ? (
             <NotesFilledIcon />
           ) : (
-            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+            <IconContainer
+              icon={<NotesIcon />}
+              color={IconColor.tertiary}
+              size={IconSize.Custom}
+              shouldFlipOnRTL={false}
+            />
           )
         }
       >

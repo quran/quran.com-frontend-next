@@ -5,6 +5,14 @@
         "caption": "高效地背诵和复习《古兰经》",
         "title": "穆哈菲德"
       },
+      "quran_android": {
+        "caption": "在安卓设备上阅读、收藏和收听《古兰经》",
+        "title": "安卓版古兰经"
+      },
+      "quran_ios": {
+        "caption": "适用于 iPhone 和 iPad 的精美无广告古兰经阅读和聆听应用程序",
+        "title": "iOS 版古兰经（由 quran.com 提供）"
+      },
       "quranmeet": {
         "caption": "在线古兰经学习课程",
         "title": "古兰经聚会"
