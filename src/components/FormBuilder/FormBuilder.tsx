@@ -15,6 +15,7 @@ import { FormFieldType } from '@/types/FormField';
 
 export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
+  className?: string;
   formFields: FormBuilderFormField[];
   onSubmit: (data: T) => void | SubmissionResult<T>;
   isSubmitting?: boolean;
@@ -47,6 +48,7 @@ const isFieldTextInput = (type: FormFieldType) => {
 };
 
 const FormBuilder = <T,>({
+  className,
   formFields,
   onSubmit,
   actionText,
@@ -81,7 +83,7 @@ const FormBuilder = <T,>({
 
   return (
     <form
-      className={styles.container}
+      className={classNames(styles.container, className)}
       onSubmit={handleSubmit(internalOnSubmit)}
       noValidate={shouldSkipValidation}
     >
@@ -101,6 +103,7 @@ const FormBuilder = <T,>({
                       value: field.value,
                       onChange: field.onChange,
                       placeholder: formField.placeholder,
+                      dataTestId: formField.dataTestId,
                     })}
                     {renderError(error, formField.errorClassName)}
                     {renderExtraSection(formField, field.value)}
@@ -117,6 +120,7 @@ const FormBuilder = <T,>({
                 fieldSetLegend: formField.fieldSetLegend,
                 label: formField.label as string,
                 placeholder: formField.placeholder,
+                dataTestId: formField.dataTestId,
                 onChange: (val) => {
                   field.onChange(val);
                   if (formField?.onChange) {
