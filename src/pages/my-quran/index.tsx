@@ -48,14 +48,11 @@ const MyQuranPage = (): JSX.Element => {
     setSelectedTab(value as Tab);
   };
 
-  const tabComponents = useMemo(
-    () => ({
-      [Tab.SAVED]: null,
-      [Tab.RECENT]: null,
-      [Tab.NOTES_AND_REFLECTIONS]: null,
-    }),
-    [],
-  );
+  const tabComponents = {
+    [Tab.SAVED]: null,
+    [Tab.RECENT]: null,
+    [Tab.NOTES_AND_REFLECTIONS]: null,
+  };
 
   return (
     <>

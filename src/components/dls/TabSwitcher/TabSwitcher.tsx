@@ -9,7 +9,6 @@ import useIsMobile from '@/hooks/useIsMobile';
 type TabSwitcherItem = {
   name: React.ReactNode;
   value: string;
-  disabled?: boolean;
   id?: string;
 };
 
@@ -32,13 +31,13 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
 }) => {
   const isMobile = useIsMobile();
 
-  if (isMobile) {
-    const tabs: Tab[] = items.map((item) => ({
-      title: item.name,
-      value: item.value,
-      id: item.id,
-    }));
+  const tabs: Tab[] = items.map((item) => ({
+    title: item.name,
+    value: item.value,
+    id: item.id,
+  }));
 
+  if (isMobile) {
     return (
       <div className={styles.tabSwitcherContainer}>
         <Tabs
