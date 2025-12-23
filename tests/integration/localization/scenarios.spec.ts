@@ -419,7 +419,7 @@ test.describe('Localization scenarios - Account', () => {
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
         await Promise.all([
-          page.waitForURL(/\/(\?|$)/),
+          page.waitForURL(/\/fr(\?|$)/),
           page.locator('[data-testid="signin-continue-button"]').click(),
         ]);
 
@@ -453,7 +453,7 @@ test.describe('Localization scenarios - Account', () => {
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
         await Promise.all([
-          page.waitForURL(/\/(\?|$)/),
+          page.waitForURL(/\/fr(\?|$)/),
           page.locator('[data-testid="signin-continue-button"]').click(),
         ]);
 
@@ -462,8 +462,7 @@ test.describe('Localization scenarios - Account', () => {
         await page.locator('[data-testid="profile-avatar-button"]').first().click();
         await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
-        await page.waitForURL(/\/(\?|$)/);
-
+        await page.waitForURL(/\/fr(\?|$)/);
         await helper.waitForReduxHydration();
 
         const theme = await helper.homepage.getPersistedValue('theme');
