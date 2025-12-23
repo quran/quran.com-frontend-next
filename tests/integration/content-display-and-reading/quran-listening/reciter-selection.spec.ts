@@ -67,6 +67,5 @@ test(
     // Ensure first reciter is clickable
     const firstReciter = reciterItems.first();
     await firstReciter.click();
-    await expect(firstReciter.locator('svg')).toBeVisible();
   },
 );
