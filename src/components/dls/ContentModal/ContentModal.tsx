@@ -29,6 +29,7 @@ type ContentModalProps = {
   innerRef?: ForwardedRef<ContentModalHandles>;
   onClick?: (e: React.MouseEvent) => void;
   contentClassName?: string;
+  overlayClassName?: string;
   closeIconClassName?: string;
   headerClassName?: string;
   overlayClassName?: string;
@@ -50,6 +51,7 @@ const ContentModal = ({
   header,
   innerRef,
   contentClassName,
+  overlayClassName,
   closeIconClassName,
   overlayClassName,
   headerClassName,
