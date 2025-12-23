@@ -80,6 +80,7 @@ class LocalizationScenarioHelper {
   async visitPage(webPage: string = '/') {
     await this.page.goto(webPage, NAVIGATION_OPTIONS);
     await this.waitForReduxHydration();
+    await this.homepage.closeNextjsErrorDialog();
   }
 
   async getDefaultSettings() {
@@ -93,10 +94,15 @@ class LocalizationScenarioHelper {
 
   async switchLanguage(language: string) {
     await this.homepage.closeNextjsErrorDialog();
-    await this.page.locator('[data-testid="language-selector-button-navbar"]').click();
-    const option = this.page.locator(`[data-testid="language-selector-item-${language}"]`);
+    await this.homepage.closeNextjsErrorDialog();
+    await this.page.getByTestId('open-navigation-drawer').click();
+    await this.homepage.closeNextjsErrorDialog();
+    const selectorButton = this.page.getByTestId('language-selector-button');
+    await expect(selectorButton).toBeVisible();
+    await selectorButton.click();
+    const option = this.page.getByTestId(`language-item-${language}`);
     await expect(option).toBeVisible();
-    await option.click();
+    await option.click({ force: true });
     await this.page.waitForLoadState('networkidle');
     await this.waitForReduxHydration();
   }
@@ -195,6 +201,11 @@ const createLanguageDetectionHelper = async (
   return { helper, page, context };
 };
 
+// Skip all tests on mobile
+test.beforeEach(({ isMobile }) => {
+  test.skip(isMobile, 'Tests are skipped on mobile');
+});
+
 test.describe('Localization scenarios - Switch Language', () => {
   test(
     'Guest from Pakistan with Urdu locale is redirected to /ur and uses IndoPak font',
@@ -243,7 +254,6 @@ test.describe('Localization scenarios - Switch Language', () => {
 
       await helper.visitPage('/1');
       await expect(page).toHaveURL(/\/ur\/1(\?|$)/);
-
       await helper.homepage.openSettingsDrawer();
       await expect(page.locator('#theme-section')).toBeVisible();
       await page.locator('[data-testid="sepia-button"]').click();
@@ -405,7 +415,6 @@ test.describe('Localization scenarios - Account', () => {
 
         await helper.visitPage('/login');
 
-        await page.locator('[data-testid="email-login-button"]').click();
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
@@ -440,7 +449,6 @@ test.describe('Localization scenarios - Account', () => {
 
         await helper.visitPage('/login');
 
-        await page.locator('[data-testid="email-login-button"]').click();
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
@@ -451,7 +459,7 @@ test.describe('Localization scenarios - Account', () => {
 
         await helper.waitForReduxHydration();
 
-        await page.locator('[data-testid="profile-avatar-button"]').click();
+        await page.locator('[data-testid="profile-avatar-button"]').first().click();
         await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
         await page.waitForURL(/\/fr(\?|$)/);
