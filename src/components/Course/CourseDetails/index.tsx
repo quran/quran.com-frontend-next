@@ -3,6 +3,8 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
+import CourseFeedback, { FeedbackSource } from '../CourseFeedback';
+
 import styles from './CourseDetails.module.scss';
 import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
@@ -15,6 +17,7 @@ import AuthorsDetails from '@/components/Course/CourseDetails/Tabs/MainDetails/D
 import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
 import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Pill from '@/dls/Pill';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
 import SyllabusIcon from '@/icons/developers.svg';
@@ -33,7 +36,7 @@ enum Tab {
 }
 
 const CourseDetails: React.FC<Props> = ({ course }) => {
-  const { title, image, id } = course;
+  const { title, image, id, isCompleted } = course;
   const { t } = useTranslation('learn');
   const [selectedTab, setSelectedTab] = useState(Tab.MAIN);
 
@@ -108,9 +111,17 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
               description={<EditorsDetails editors={course.editors} />}
             />
           )}
-          {course.isUserEnrolled && (
+          {course.isUserEnrolled && !isCompleted && (
             <div className={styles.startLearningButton}>
               <StartOrContinueLearning course={course} isHeaderButton={false} />
+            </div>
+          )}
+          {isCompleted && (
+            <div className={styles.completedContainer}>
+              <Pill>{t('completed')}</Pill>
+              {course?.userHasFeedback === false && (
+                <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
+              )}
             </div>
           )}
         </>
