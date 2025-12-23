@@ -1,0 +1,151 @@
+@use 'src/styles/breakpoints' as breakpoints;
+@use 'src/styles/theme';
+
+// Card wrapper styles
+.endOfSurahCard {
+  padding: var(--spacing-medium2-px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.title {
+  font-size: var(--font-size-xlarge-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
+}
+
+.replayButton {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+
+  &:hover {
+    background-color: transparent;
+    background-image: unset;
+  }
+
+  .prefix {
+    margin-inline-end: var(--spacing-xxsmall-px);
+  }
+
+  span>svg {
+    width: 11px;
+    height: var(--spacing-medium);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+}
+
+.surahRow {
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-end-surah-card);
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-xsmall-px) var(--spacing-small-px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.surahHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding-bottom: var(--spacing-xsmall-px);
+}
+
+.surahInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+  flex: 1;
+  min-width: 0;
+}
+
+.surahTitle {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+  width: fit-content;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal);
+  }
+}
+
+.surahSubtitle {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded-new);
+  font-weight: var(--font-weight-semibold);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall);
+  }
+}
+
+.summary {
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+  border-top: var(--spacing-hairline-px) solid var(--color-separators-new);
+  padding-top: var(--spacing-xsmall-px);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small);
+  }
+}
+
+.longText {
+  font-size: var(--font-size-xsmall-px);
+  line-height: var(--line-height-small);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall);
+  }
+}
+
+.badgeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badge {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  border-radius: var(--border-radius-medium-px);
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  }
+}
+
+.nextBadge {
+  color: var(--color-text-inverse);
+  background-color: var(--color-background-inverse);
+}
+
+.prevBadge {
+  color: var(--color-text-default-new);
+  background-color: var(--color-background-alternative-faint-new);
+}
