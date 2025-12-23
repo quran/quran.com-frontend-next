@@ -2,7 +2,7 @@
 $max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (700 - padding) = 670
 
 .main {
-  .headerNavigationInnerClassName {
+  div .headerNavigationInnerClassName {
     max-width: $max-width;
   }
 
