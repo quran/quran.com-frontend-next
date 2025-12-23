@@ -23,7 +23,7 @@ interface UseBookmarkStateResult {
   isVerseBookmarked: boolean;
   isVerseBookmarkedLoading: boolean;
   isVerseReadingBookmark: boolean;
-  isVerseCollectionBookmarked: boolean;
+  isVerseMultipleBookmarked: boolean;
   mushafId: number;
 }
 
@@ -114,10 +114,17 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
     return false;
   }, [bookmarkedVerses, bookmark, isGuest, verse.verseKey]);
 
+  const isVerseMultipleBookmarked = useMemo(() => {
+    return (
+      bookmarkCollectionIdsData?.length > 1 ||
+      (isVerseBookmarked && bookmarkCollectionIdsData?.length > 0)
+    );
+  }, [bookmarkCollectionIdsData, isVerseBookmarked]);
+
   return {
-    isVerseBookmarked, // Virtual Favorite collection
+    isVerseBookmarked: isVerseBookmarked || bookmarkCollectionIdsData?.length > 0, // Is any bookmark collections or virtual is set
     isVerseReadingBookmark, // Reading bookmark
-    isVerseCollectionBookmarked: bookmarkCollectionIdsData?.length > 0, // Other collections
+    isVerseMultipleBookmarked, // Multiple collections bookmarked
     isVerseBookmarkedLoading:
       isReadingBookmarkLoading || isVerseBookmarkedLoading || isVerseCollectionBookmarkedLoading,
     mushafId,
