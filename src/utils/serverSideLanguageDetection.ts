@@ -2,6 +2,8 @@
 /* eslint-disable max-lines */
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { setServerLocaleCookie } from './cookies';
+
 import { getCountryLanguagePreference } from '@/api';
 import { logInfo, logError, logDebug, logTransaction } from '@/lib/newrelic';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -386,6 +388,9 @@ export const performLanguageDetection = async (
           });
         }
       }
+
+      // Persist effective locale for subsequent client navigation.
+      setServerLocaleCookie(effectiveLocale, context.res);
 
       // STEP 5: Handle redirect if needed and API call succeeded
       if (canRedirect) {
