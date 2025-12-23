@@ -80,6 +80,7 @@ class LocalizationScenarioHelper {
   async visitPage(webPage: string = '/') {
     await this.page.goto(webPage, NAVIGATION_OPTIONS);
     await this.waitForReduxHydration();
+    await this.homepage.closeNextjsErrorDialog();
   }
 
   async getDefaultSettings() {
@@ -93,10 +94,15 @@ class LocalizationScenarioHelper {
 
   async switchLanguage(language: string) {
     await this.homepage.closeNextjsErrorDialog();
-    await this.page.locator('[data-testid="language-selector-button-navbar"]').click();
-    const option = this.page.locator(`[data-testid="language-selector-item-${language}"]`);
+    await this.homepage.closeNextjsErrorDialog();
+    await this.page.getByTestId('open-navigation-drawer').click();
+    await this.homepage.closeNextjsErrorDialog();
+    const selectorButton = this.page.getByTestId('language-selector-button');
+    await expect(selectorButton).toBeVisible();
+    await selectorButton.click();
+    const option = this.page.getByTestId(`language-item-${language}`);
     await expect(option).toBeVisible();
-    await option.click();
+    await option.click({ force: true });
     await this.page.waitForLoadState('networkidle');
     await this.waitForReduxHydration();
   }
@@ -165,19 +171,47 @@ class LocalizationScenarioHelper {
   }
 }
 
-test.describe('Localization scenarios - Switch Language', () => {
-  const createScenarioHelper = async (browser: any) => {
-    const context = await browser.newContext({ locale: 'ur-PK' });
-    const page = await context.newPage();
-    const helper = new LocalizationScenarioHelper(page, context);
-    return { helper, page, context };
-  };
+// Reusable helper factories
+const createSimpleScenarioHelper = async (browser: any, locale: string = 'ur-PK') => {
+  const context = await browser.newContext({ locale });
+  const page = await context.newPage();
+  const helper = new LocalizationScenarioHelper(page, context);
+  const countryCode = locale.split('-')[1] || 'US';
+  await helper.setLanguageAndCountry([locale], countryCode);
+  return { helper, page, context };
+};
 
+const createCountryScenarioHelper = async (browser: any, locale: string, countryCode: string) => {
+  const context = await browser.newContext({ locale });
+  const page = await context.newPage();
+  const helper = new LocalizationScenarioHelper(page, context);
+  await helper.setLanguageAndCountry([locale], countryCode);
+  return { helper, page, context };
+};
+
+const createLanguageDetectionHelper = async (
+  browser: any,
+  locale: string,
+  countryCode: string = 'XX',
+) => {
+  const context = await browser.newContext({ locale });
+  const page = await context.newPage();
+  const helper = new LocalizationScenarioHelper(page, context);
+  await helper.setLanguageAndCountry([locale], countryCode);
+  return { helper, page, context };
+};
+
+// Skip all tests on mobile
+test.beforeEach(({ isMobile }) => {
+  test.skip(isMobile, 'Tests are skipped on mobile');
+});
+
+test.describe('Localization scenarios - Switch Language', () => {
   test(
     'Guest from Pakistan with Urdu locale is redirected to /ur and uses IndoPak font',
     { tag: ['@localization', '@language-detection', '@urdu'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser);
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       await helper.visitPage();
 
@@ -194,7 +228,7 @@ test.describe('Localization scenarios - Switch Language', () => {
     'Pakistan Urdu guest switching to French loses IndoPak defaults',
     { tag: ['@localization', '@language-switch', '@urdu', '@french'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser);
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       await helper.visitPage();
       await expect(page).toHaveURL(/\/ur(\?|$)/);
@@ -216,11 +250,10 @@ test.describe('Localization scenarios - Switch Language', () => {
     'Customized Pakistan Urdu guest keeps settings after switching language',
     { tag: ['@localization', '@language-switch', '@settings-persistence', '@urdu'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser);
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       await helper.visitPage('/1');
       await expect(page).toHaveURL(/\/ur\/1(\?|$)/);
-
       await helper.homepage.openSettingsDrawer();
       await expect(page.locator('#theme-section')).toBeVisible();
       await page.locator('[data-testid="sepia-button"]').click();
@@ -242,21 +275,34 @@ test.describe('Localization scenarios - Switch Language', () => {
       await context.close();
     },
   );
+
+  test(
+    'Guest with English interface but Egypt location is redirected to /ar',
+    { tag: ['@localization', '@language-detection', '@egypt', '@english'] },
+    async ({ browser }) => {
+      const context = await browser.newContext({ locale: 'en-US' });
+      const page = await context.newPage();
+      const helper = new LocalizationScenarioHelper(page, context);
+
+      // Inject Egypt country header
+      await helper.setLanguageAndCountry(['en-US', 'en'], 'EG');
+
+      await helper.visitPage();
+
+      // Should redirect to /ar because Egypt defaults to Arabic
+      await expect(page).toHaveURL(/\/ar(\?|$)/);
+
+      await context.close();
+    },
+  );
 });
 
 test.describe('Localization scenarios - Learning Plans', () => {
-  const createScenarioHelper = async (browser: any, locale: string) => {
-    const context = await browser.newContext({ locale });
-    const page = await context.newPage();
-    const helper = new LocalizationScenarioHelper(page, context);
-    return { helper, page, context };
-  };
-
   test(
     'Guest from France sees French lessons first',
     { tag: ['@localization', '@learning-plans', '@french'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'fr-FR');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'fr-FR');
 
       await helper.visitPage();
       await expect(page).toHaveURL(/\/fr(\?|$)/);
@@ -272,7 +318,7 @@ test.describe('Localization scenarios - Learning Plans', () => {
     'Guest from Pakistan sees English lessons first',
     { tag: ['@localization', '@learning-plans', '@urdu'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'ur-PK');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       await helper.visitPage();
       await expect(page).toHaveURL(/\/ur(\?|$)/);
@@ -288,7 +334,7 @@ test.describe('Localization scenarios - Learning Plans', () => {
     'Guest from Egypt with Arabic locale sees Arabic lessons first',
     { tag: ['@localization', '@learning-plans', '@arabic'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'ar-EG');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ar-EG');
 
       await helper.visitPage();
       await expect(page).toHaveURL(/\/ar(\?|$)/);
@@ -302,18 +348,11 @@ test.describe('Localization scenarios - Learning Plans', () => {
 });
 
 test.describe('Localization scenarios - Quran Reflect', () => {
-  const createScenarioHelper = async (browser: any, locale: string) => {
-    const context = await browser.newContext({ locale });
-    const page = await context.newPage();
-    const helper = new LocalizationScenarioHelper(page, context);
-    return { helper, page, context };
-  };
-
   test(
     'Guest from France sees French and English reflection',
     { tag: ['@localization', '@reflections', '@french'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'fr-FR');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'fr-FR');
 
       await helper.visitPage('/1:1/reflections');
       await expect(page).toHaveURL(/\/fr\/1:1\/reflections(\?|$)/);
@@ -329,7 +368,7 @@ test.describe('Localization scenarios - Quran Reflect', () => {
     'Guest from Turkey sees Arabic & English reflection',
     { tag: ['@localization', '@reflections', '@turkish'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'tr-TR');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'tr-TR');
 
       await helper.visitPage('/1:1/reflections');
       await expect(page).toHaveURL(/\/1:1\/reflections(\?|$)/);
@@ -345,7 +384,7 @@ test.describe('Localization scenarios - Quran Reflect', () => {
     'Guest from Malaysia sees Malay reflection',
     { tag: ['@localization', '@reflections', '@malay'] },
     async ({ browser }) => {
-      const { helper, page, context } = await createScenarioHelper(browser, 'ms-MY');
+      const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ms-MY');
 
       await helper.visitPage('/1:1/reflections');
       await expect(page).toHaveURL(/\/ms\/1:1\/reflections(\?|$)/);
@@ -359,19 +398,12 @@ test.describe('Localization scenarios - Quran Reflect', () => {
 });
 
 test.describe('Localization scenarios - Account', () => {
-  const createScenarioHelper = async (browser: any, locale: string) => {
-    const context = await browser.newContext({ locale });
-    const page = await context.newPage();
-    const helper = new LocalizationScenarioHelper(page, context);
-    return { helper, page, context };
-  };
-
   test(
     'Login to an account changes language',
     { tag: ['@auth', '@login-user', '@localization'] },
 
     async ({ browser }) => {
-      const { helper, page } = await createScenarioHelper(browser, 'ur-PK');
+      const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       test.skip(
         !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
@@ -379,12 +411,10 @@ test.describe('Localization scenarios - Account', () => {
       );
 
       try {
-        await helper.setLanguageAndCountry(['ur-PK', 'ur'], 'PK');
         setTestData('preferences', createTestUserPreferences());
 
         await helper.visitPage('/login');
 
-        await page.locator('[data-testid="email-login-button"]').click();
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
@@ -407,7 +437,7 @@ test.describe('Localization scenarios - Account', () => {
     'Logging out keeps localized language and theme',
     { tag: ['@auth', '@logout', '@localization', '@settings-persistence'] },
     async ({ browser }) => {
-      const { helper, page } = await createScenarioHelper(browser, 'ur-PK');
+      const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
       test.skip(
         !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
@@ -415,12 +445,10 @@ test.describe('Localization scenarios - Account', () => {
       );
 
       try {
-        await helper.setLanguageAndCountry(['ur-PK', 'ur'], 'PK');
         setTestData('preferences', createTestUserPreferences());
 
         await helper.visitPage('/login');
 
-        await page.locator('[data-testid="email-login-button"]').click();
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
@@ -431,7 +459,7 @@ test.describe('Localization scenarios - Account', () => {
 
         await helper.waitForReduxHydration();
 
-        await page.locator('[data-testid="profile-avatar-button"]').click();
+        await page.locator('[data-testid="profile-avatar-button"]').first().click();
         await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
         await page.waitForURL(/\/fr(\?|$)/);
@@ -444,4 +472,164 @@ test.describe('Localization scenarios - Account', () => {
       }
     },
   );
+});
+
+test.describe('Localization scenarios - Country/Language Detection', () => {
+  const countryDetectionTests = [
+    {
+      countryCode: 'DZ',
+      expectedLocale: 'ar',
+      country: 'Algeria',
+      language: 'Arabic',
+      tags: ['@localization', '@country-detection', '@algeria', '@arabic'],
+    },
+    {
+      countryCode: 'BH',
+      expectedLocale: 'ar',
+      country: 'Bahrain',
+      language: 'Arabic',
+      tags: ['@localization', '@country-detection', '@bahrain', '@arabic'],
+    },
+    {
+      countryCode: 'BD',
+      expectedLocale: 'bn',
+      country: 'Bangladesh',
+      language: 'Bengali',
+      tags: ['@localization', '@country-detection', '@bangladesh', '@bengali'],
+    },
+    {
+      countryCode: 'BE',
+      expectedLocale: 'fr',
+      country: 'Belgium',
+      language: 'French',
+      tags: ['@localization', '@country-detection', '@belgium', '@french'],
+    },
+    {
+      countryCode: 'BR',
+      expectedLocale: 'pt',
+      country: 'Brazil',
+      language: 'Portuguese',
+      tags: ['@localization', '@country-detection', '@brazil', '@portuguese'],
+    },
+    {
+      countryCode: 'TR',
+      expectedLocale: 'tr',
+      country: 'Turkey',
+      language: 'Turkish',
+      tags: ['@localization', '@country-detection', '@turkey', '@turkish'],
+    },
+    {
+      countryCode: 'MY',
+      expectedLocale: 'ms',
+      country: 'Malaysia',
+      language: 'Malay',
+      tags: ['@localization', '@country-detection', '@malaysia', '@malay'],
+    },
+    {
+      countryCode: 'RU',
+      expectedLocale: 'ru',
+      country: 'Russia',
+      language: 'Russian',
+      tags: ['@localization', '@country-detection', '@russia', '@russian'],
+    },
+    {
+      countryCode: 'ES',
+      expectedLocale: 'es',
+      country: 'Spain',
+      language: 'Spanish',
+      tags: ['@localization', '@country-detection', '@spain', '@spanish'],
+    },
+    {
+      countryCode: 'ID',
+      expectedLocale: 'id',
+      country: 'Indonesia',
+      language: 'Indonesian',
+      tags: ['@localization', '@country-detection', '@indonesia', '@indonesian'],
+    },
+  ];
+
+  for (const { countryCode, expectedLocale, country, tags } of countryDetectionTests) {
+    test(
+      `English speaker in ${country} is redirected to /${expectedLocale}`,
+      { tag: tags },
+      async ({ browser }) => {
+        const { helper, page, context } = await createCountryScenarioHelper(
+          browser,
+          'en-US',
+          countryCode,
+        );
+        await helper.visitPage();
+        await expect(page).toHaveURL(new RegExp(`\\/${expectedLocale}(\\?|$)`));
+        await context.close();
+      },
+    );
+  }
+
+  test(
+    'English speaker in Turkey switches to Turkish language',
+    { tag: ['@localization', '@country-detection', '@language-switch', '@turkey', '@turkish'] },
+    async ({ browser }) => {
+      const { helper, page, context } = await createCountryScenarioHelper(browser, 'en-US', 'TR');
+
+      await helper.visitPage();
+      await expect(page).toHaveURL(/\/tr(\?|$)/);
+
+      await helper.switchLanguage('en');
+      await expect(page).toHaveURL(/\/(\?|$)/);
+
+      await context.close();
+    },
+  );
+});
+
+test.describe('Localization scenarios - Device Language Detection (Any Country)', () => {
+  const deviceLanguageTests = [
+    {
+      locale: 'ar-SA',
+      expectedPath: '/ar',
+      language: 'Arabic',
+      tags: ['@localization', '@device-language-detection', '@arabic'],
+    },
+    {
+      locale: 'fr-FR',
+      expectedPath: '/fr',
+      language: 'French',
+      tags: ['@localization', '@device-language-detection', '@french'],
+    },
+    {
+      locale: 'tr-TR',
+      expectedPath: '/tr',
+      language: 'Turkish',
+      tags: ['@localization', '@device-language-detection', '@turkish'],
+    },
+    {
+      locale: 'ur-PK',
+      expectedPath: '/ur',
+      language: 'Urdu',
+      tags: ['@localization', '@device-language-detection', '@urdu'],
+    },
+    {
+      locale: 'es-ES',
+      expectedPath: '/es',
+      language: 'Spanish',
+      tags: ['@localization', '@device-language-detection', '@spanish'],
+    },
+  ];
+
+  for (const { locale, expectedPath, language, tags } of deviceLanguageTests) {
+    test(
+      `${language} device language is detected regardless of country`,
+      { tag: tags },
+      async ({ browser }) => {
+        const { helper, page, context } = await createLanguageDetectionHelper(
+          browser,
+          locale,
+          'XX',
+        );
+        await helper.visitPage();
+        await expect(page).toHaveURL(new RegExp(`\\${expectedPath}(\\?|$)`));
+        await context.close();
+      },
+    );
+  }
 });

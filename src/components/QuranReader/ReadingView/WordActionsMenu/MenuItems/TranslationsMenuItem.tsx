@@ -83,6 +83,7 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
             icon={<TranslationsIcon />}
             color={IconColor.tertiary}
             size={IconSize.Custom}
+            shouldFlipOnRTL={false}
           />
         }
         onClick={onMenuItemClicked}

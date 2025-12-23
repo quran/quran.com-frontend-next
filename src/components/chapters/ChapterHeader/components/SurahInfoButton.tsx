@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,8 +6,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
+import { useSurahInfoModalContext } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
+import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
+import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
-import { getSurahInfoNavigationUrl } from '@/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
+import { fakeNavigate, getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
   chapterId?: string;
@@ -15,24 +19,60 @@ interface SurahInfoButtonProps {
 }
 
 /**
- * SurahInfoButton component displays a button to navigate to surah info
+ * SurahInfoButton component displays a button to open surah info modal
  * @param {SurahInfoButtonProps} props - Component props
  * @returns {JSX.Element} The SurahInfoButton component
  */
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
+  const { isOpen, setIsOpen } = useSurahInfoModalContext();
+
+  const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
+
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+
+    if (!isInfoPage) {
+      fakeNavigate(router.asPath, router.locale);
+    }
+  }, [router.asPath, router.locale, isInfoPage, setIsOpen]);
+
+  const handleClick = useCallback(() => {
+    if (chapterId) {
+      logButtonClick('surah_info_button_click');
+      setIsOpen(true);
+
+      if (!isInfoPage) {
+        fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
+      }
+    }
+  }, [chapterId, isInfoPage, router.locale, setIsOpen]);
+
   return (
-    <button
-      className={classNames(styles.infoIconButton, className)}
-      onClick={() => {
-        router.push(getSurahInfoNavigationUrl(chapterId));
-      }}
-      aria-label={t('surah-info')}
-      type="button"
-    >
-      <InfoIcon width="18" height="18" />
-    </button>
+    <>
+      <button
+        className={classNames(styles.infoIconButton, className)}
+        onClick={handleClick}
+        aria-label={t('surah-info')}
+        type="button"
+        data-testid="surah-info-button"
+      >
+        <InfoIcon width="18" height="18" />
+      </button>
+      {chapterId && (
+        <ContentModal
+          isOpen={isOpen}
+          onClose={handleClose}
+          onEscapeKeyDown={handleClose}
+          hasCloseButton
+          header={<div className={styles.surahInfoHeader}>{t('surah-info')}</div>}
+          size={ContentModalSize.MEDIUM}
+        >
+          <SurahInfoModal chapterId={chapterId} />
+        </ContentModal>
+      )}
+    </>
   );
 };
 

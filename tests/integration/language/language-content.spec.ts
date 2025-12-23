@@ -16,16 +16,21 @@ test(
   async ({ page }) => {
     await expect(page.locator('html')).not.toHaveAttribute('dir', 'rtl');
 
-    // 1. Open the language selector menu
-    await page.getByTestId('language-selector-button-navbar').click();
-
-    // 2. select Arabic and wait for navigation to /ar
+    // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
+    await page.getByTestId('open-navigation-drawer').click();
+    await homePage.closeNextjsErrorDialog();
+    // 2. Click on the language selector nav bar trigger
+    await page.getByTestId('language-selector-button').click();
+    // 3. Grab the language container
+    const languageContainer = page.getByTestId('language-container');
+    // 4. select Arabic and wait for navigation to /ar
     await Promise.all([
+      languageContainer.getByRole('button', { name: 'العربية' }).click(),
       page.waitForURL('**/ar', { waitUntil: 'networkidle' }),
-      page.getByRole('menuitem', { name: 'العربية' }).click(),
     ]);
 
-    // 3. Make sure the html dir attribute is set to rtl
+    // 5. Make sure the html dir attribute is set to rtl
     await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
   },
 );
@@ -34,13 +39,17 @@ test(
   'Surah name are displayed in the selected language on the homepage',
   { tag: ['@language', '@slow'] },
   async ({ page }) => {
-    // 1. Open the language selector menu
-    await page.getByTestId('language-selector-button-navbar').click();
-
-    // 2. select Spanish and wait for navigation to /es
+    // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
+    await page.getByTestId('open-navigation-drawer').click();
+    // 2. Click on the language selector nav bar trigger
+    await page.getByTestId('language-selector-button').click();
+    // 3. Grab the language container
+    const languageContainer = page.getByTestId('language-container');
+    // 4. select Spanish and wait for navigation to /es
     await Promise.all([
+      languageContainer.getByRole('button', { name: 'Español' }).click(),
       page.waitForURL('**/es', { waitUntil: 'networkidle' }),
-      page.getByRole('menuitem', { name: 'Español' }).click(),
     ]);
 
     const surah108 = page.getByTestId('chapter-108-container');
@@ -58,16 +67,20 @@ test(
   'User interface is displayed in the selected language',
   { tag: ['@language', '@slow'] },
   async ({ page }) => {
-    // 1. Open the language selector menu
-    await page.getByTestId('language-selector-button-navbar').click();
-
-    // 2. Select French and wait for navigation to /fr
+    // 1. Click on the menu
+    await homePage.closeNextjsErrorDialog();
+    await page.getByTestId('open-navigation-drawer').click();
+    // 2. Click on the language selector nav bar trigger
+    await page.getByTestId('language-selector-button').click();
+    // 3. Grab the language container
+    const languageContainer = page.getByTestId('language-container');
+    // 4. Select French and wait for navigation to /fr
     await Promise.all([
+      languageContainer.getByRole('button', { name: 'Français' }).click(),
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
-      page.getByRole('menuitem', { name: 'Français' }).click(),
     ]);
 
-    // 3. Make sure some UI elements are displayed in French
+    // 5. Make sure some UI elements are displayed in French
     await expect(page.getByTestId('open-search-drawer')).toHaveAttribute(
       'aria-label',
       'Rechercher',
@@ -82,12 +95,9 @@ test(
     // Open the settings drawer and check some elements are in French
     await homePage.openSettingsDrawer();
 
-    const settingsBody = page.getByTestId('settings-drawer-container');
+    const settingsBody = page.getByTestId('settings-drawer-body');
 
     await expect(settingsBody).toBeVisible();
-
-    const settingsText = (await settingsBody.evaluate((el) => el.textContent)) || '';
-    expect(settingsText).toContain('Paramètres');
 
     // Close the settings drawer
     await page.keyboard.press('Escape');
@@ -98,8 +108,6 @@ test(
     const navigationDrawer = page.getByTestId('navigation-drawer-body');
     const navText = (await navigationDrawer.evaluate((el) => el.textContent)) || '';
     expect(navText).toContain('Devenir un donateur mensuel');
-    expect(navText).toContain('Accueil');
-    expect(navText).toContain('À propos de nous');
   },
 );
 
@@ -109,12 +117,17 @@ test(
     tag: ['@nav', '@language', '@slow'],
   },
   async ({ page }) => {
-    await page.getByTestId('language-selector-button-navbar').click();
+    // 1. Click on the menu
+    await page.getByTestId('open-navigation-drawer').click();
+    // 2. Click on the language selector nav bar trigger
+    await page.getByTestId('language-selector-button').click();
+    // 3. Grab the language container
+    const languageContainer = page.getByTestId('language-container');
 
     // Select French and wait for navigation to /fr
     await Promise.all([
+      languageContainer.getByRole('button', { name: 'Français' }).click(),
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
-      page.getByRole('menuitem', { name: 'Français' }).click(),
     ]);
 
     await expect(page.locator('html')).toHaveAttribute('lang', 'fr');

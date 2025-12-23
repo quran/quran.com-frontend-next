@@ -31,6 +31,7 @@ type VerseTextProps = {
   isReadingMode?: boolean;
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
+  bookmarksRangeUrl?: string | null;
 };
 
 const VerseText = ({
@@ -38,6 +39,7 @@ const VerseText = ({
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
+  bookmarksRangeUrl,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -108,6 +110,7 @@ const VerseText = ({
               isFontLoaded={isFontLoaded}
               isHighlighted={word.verseKey === selectedVerseKey}
               shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+              bookmarksRangeUrl={bookmarksRangeUrl}
             />
           ))}
         </div>
