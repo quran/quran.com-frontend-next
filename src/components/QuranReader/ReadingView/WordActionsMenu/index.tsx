@@ -12,12 +12,14 @@ type Props = {
   word: Word;
   onActionTriggered?: () => void;
   openShareModal?: () => void;
+  bookmarksRangeUrl?: string | null;
 };
 
 const ReadingViewWordActionsMenu: React.FC<Props> = ({
   word,
   onActionTriggered,
   openShareModal,
+  bookmarksRangeUrl,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
 
@@ -36,6 +38,7 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({
             onActionTriggered={onActionTriggered}
             openShareModal={openShareModal}
             onMenuChange={onMenuChange}
+            bookmarksRangeUrl={bookmarksRangeUrl}
           />
         );
       case VerseActionsMenuType.More:

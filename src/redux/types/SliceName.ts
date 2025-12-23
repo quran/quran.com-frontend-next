@@ -28,7 +28,6 @@ enum SliceName {
   ONBOARDING = 'onboarding',
   MEDIA_MAKER = 'mediaMaker',
   MICROPHONE = 'microphone',
-  GUEST_ENROLLMENT = 'guestEnrollment',
 }
 
 export default SliceName;

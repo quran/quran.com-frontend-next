@@ -1,12 +1,15 @@
 import { FC } from 'react';
 
 import classNames from 'classnames';
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../SignUpFormFields/consts';
 
 import styles from './PasswordValidation.module.scss';
+
+import IconContainer from '@/dls/IconContainer/IconContainer';
+import CheckIcon from '@/icons/checkmark-icon.svg';
+import CloseIcon from '@/icons/close-icon.svg';
 
 interface PasswordRule {
   test: (value: string) => boolean;
@@ -73,15 +76,9 @@ const PasswordValidation: FC<Props> = ({ value = '' }) => {
               [styles.invalid]: !isValid,
             })}
           >
-            <Image
-              className={classNames(styles.ruleIcon, {
-                [styles.valid]: isValid,
-                [styles.invalid]: !isValid,
-              })}
-              src={isValid ? '/icons/checkmark-icon.svg' : '/icons/close-icon.svg'}
-              alt={isValid ? 'Valid' : 'Invalid'}
-              width={isValid ? 14 : 12}
-              height={isValid ? 14 : 12}
+            <IconContainer
+              className={styles.ruleIcon}
+              icon={isValid ? <CheckIcon /> : <CloseIcon />}
             />
             <span className={styles.ruleText}>{t(rule.messageKey)}</span>
           </div>
