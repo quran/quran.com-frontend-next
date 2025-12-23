@@ -1,6 +1,6 @@
 {
   "about": "Hakkımızda",
-  "allow": "İzin vermek",
+  "allow": "İzin ver",
   "and": "ve",
   "announcements": {
     "auth-onboarding": {
@@ -16,17 +16,17 @@
       },
       "quran-foundation-link": {
         "action": "Sonraki",
-        "description": "Kuran'ın yansımasıyla ilgilenen gelişen küresel bir topluluk olan Qur'anReflect.com'a erişim için Kuran.com oturum açma bilgilerinizi kullanın.",
-        "title": "Hesabınızı Kuran.Vakıf uygulamalarında kullanın!"
+        "description": "Kuran'ın yansımasıyla ilgilenen gelişen küresel bir topluluk olan Qur'anReflect.com'a erişim için Quran.com oturum açma bilgilerinizi kullanın.",
+        "title": "Hesabınızı Quran.Foundation uygulamalarında kullanın!"
       },
       "quran-growth-journey": {
         "action": "Sonraki",
         "description": "Kuran okuma çizginizi koruyun ve yeni alışkanlıklar edinirken hedeflerinizde ilerleyin",
-        "title": "Kuran Büyüme Yolculuğunuza başlayın!"
+        "title": "Kuran gelişim Yolculuğunuza başlayın!"
       },
       "welcome": {
         "action": "Yeniliklere bakın",
-        "title": "Kuran.com'a Hoş Geldiniz <br></br> Kullanıcı Hesabı"
+        "title": "Quran.com'a Hoş Geldiniz <br></br> Kullanıcı Hesabı"
       }
     },
     "collections-announcement": {
@@ -126,7 +126,7 @@
   "consents": {
     "communication": {
       "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş </boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br></br> <br></br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br></br> <br></br> <boldSpan> ilham veren hatırlatıcılar </boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
-      "header": "Kuran Büyüme Yolculuğunuzda <boldSpan> kararlı ve tutarlı </boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
+      "header": "Kuran ilerleme Yolculuğunuzda <boldSpan> kararlı ve tutarlı </boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
     }
   },
   "continue": "Devam et",
@@ -140,7 +140,7 @@
     "increase": "Arttır"
   },
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
-  "delete": "Silmek",
+  "delete": "Sil",
   "developers": "Geliştiriciler",
   "display": "Görüntülemek",
   "donate": "Bağış Yapın",
@@ -166,17 +166,17 @@
     "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
     "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
-    "ranges-wrong-order": "Başlangıç mısrası bitiş mısrasından önce olmalıdır."
+    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır."
   },
   "errors": {
     "account-banned": "Maalesef, hesabınız engellendi. Quran.Foundation ile irtibata geçin",
-    "badRequest": "*Geçersiz istek",
+    "badRequest": "*Geçersiz talep",
     "banned": "*Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
     "complete-signup-failed": "Kayıt işlemi tamamlanamadı. Lütfen tekrar deneyin.",
-    "confirm": "*Şifreyi onayla şifreyle uyuşmuyor",
+    "confirm": "*Şifreyi onayla şifre uyuşmuyor",
     "email": "*Geçersiz E-posta Biçimi!",
     "exactLength": "*Değer tam uzunlukta olmalıdır",
-    "expiredToken": "*Bu token'ın süresi doldu",
+    "expiredToken": "*Bu simgenin süresi doldu",
     "forgot-password-failed": "Şifre sıfırlama e-postası gönderilemedi. Lütfen tekrar deneyin.",
     "immutable": "*Bu değer değiştirilemez",
     "invalid": "*Bu {{fieldName}} geçersizdir",
@@ -190,9 +190,9 @@
     "signin-failed": "Giriş başarısız. Lütfen tekrar deneyin.",
     "signup-failed": "Kayıt başarısız. Lütfen tekrar deneyin.",
     "taken": "* {{fieldName}} zaten var!",
-    "usedToken": "*Bu token zaten kullanıldı",
-    "username": "* {{fieldName}} yalnızca alt çizgi ve harfleri kabul eder",
-    "verification-code-invalid": "Bu doğrulama kodu geçersiz",
+    "usedToken": "*Bu simge zaten kullanıldı",
+    "username": "* {{fieldName}} yalnızca alt çizgi ve harfleri kabul edilmektedir",
+    "verification-code-invalid": "Bu doğrulama kodu geçersizdir",
     "verification-code-length": "Doğrulama kodu {{length}} basamaklı olmalıdır",
     "verification-failed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
     "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu"
@@ -240,10 +240,14 @@
   "fundraising-share-title": "Quran.com bağış kampanyası'nı paylaşın",
   "fundraising-sticky-banner": {
     "cta": "Bağış yapmak",
-    "title": "En iyi günlerde ver!"
+    "title": "En makbul günlerde ver!"
   },
   "fundraising": {
     "description": "Aylık bağışlar, Quran.com'u geliştirmemize ve operasyonlarımızı sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az, etki yaratmaya daha çok odaklanabiliyoruz.",
+    "donation-campaign": {
+      "cta": "Bugün bağış yapın",
+      "text": "Destekçi olun"
+    },
     "title": "Aylık Bağışçımız Olun"
   },
   "get-started": "Başla",
@@ -310,8 +314,8 @@
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
     "subtitle": "“Salih amel için Allah katında bu günler kadar sevindirici başka günler yoktur.” [Sahih-i Buhârî 969]",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
-    "text-2": "Sürekli sadaka (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya tek seferlik) bağışçı olarak ahiretinize yatırım yapın.",
-    "title": "En İyi Gününüzde Verin!"
+    "text-2": "Devam eden sadaka (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya tek seferlik) bağışçı olarak ahiretinize yatırım yapın.",
+    "title": "En makbul gunlerde Verin!"
   },
   "powered-by": "Tarafından desteklenmektedir",
   "prepare-hearts": {
@@ -411,7 +415,7 @@
   },
   "style": "Stil",
   "submit": "Gönder",
-  "subscribe": "Abone",
+  "subscribe": "Abone ol",
   "subscribed": "Abone olundu",
   "surah": "Sure",
   "tafsir": {

@@ -1,5 +1,5 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 $sections-container-height: 2.25rem;
 $pixel: 1px;
@@ -20,7 +20,7 @@ $pixel: 1px;
   will-change: transform;
   &:after {
     display: block;
-    content: "";
+    content: '';
     width: var(--progress);
     transition: var(--transition-fast);
     transition-timing-function: linear;
@@ -39,6 +39,9 @@ $pixel: 1px;
 .visibleContainer {
   transform: translate3d(0, var(--navbar-container-height), 0);
   // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+  @include breakpoints.smallerThanTablet {
+    transform: translate3d(0, calc(var(--navbar-container-height) + var(--banner-height)), 0);
+  }
 }
 
 .withVisibleBanner {
@@ -79,6 +82,7 @@ $pixel: 1px;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   @include breakpoints.tablet {
+    padding-block-start: var(--spacing-micro);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
 }
