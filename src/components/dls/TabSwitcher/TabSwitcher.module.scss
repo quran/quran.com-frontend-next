@@ -1,5 +1,10 @@
+@use 'src/styles/breakpoints';
+
 .tabSwitcherContainer {
   .switchContainer {
+    @include breakpoints.smallerThanTablet {
+      display: none;
+    }
     background-color: var(--color-background-alternative-faint);
     .switchButton {
       font-weight: var(--font-weight-medium);
@@ -9,6 +14,9 @@
 
   .tabsContainer {
     display: grid;
+    @include breakpoints.tablet {
+      display: none;
+    }
     grid-auto-flow: column;
     grid-auto-columns: minmax(fit-content, 1fr);
     width: 100%;
