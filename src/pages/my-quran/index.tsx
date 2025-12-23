@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
 
-import withAuth from '@/components/Auth/withAuth';
 import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -83,4 +82,4 @@ const MyQuranPage = (): JSX.Element => {
   );
 };
 
-export default withAuth(MyQuranPage);
+export default MyQuranPage;
