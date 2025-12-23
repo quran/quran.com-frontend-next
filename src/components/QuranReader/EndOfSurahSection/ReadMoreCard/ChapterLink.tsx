@@ -1,14 +1,14 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { ChapterSummary } from 'types/ApiResponses';
-import Chapter from 'types/Chapter';
 
 import styles from './ReadMoreCard.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getWordCount } from '@/utils/string';
+import { ChapterContent } from 'types/ApiResponses';
+import Chapter from 'types/Chapter';
 
 const MIN_SUMMARY_WORDS = 3;
 const LONG_SUMMARY_THRESHOLD = 7;
@@ -17,7 +17,7 @@ interface ChapterLinkProps {
   chapter: Chapter;
   chapterNumber: number;
   navigationUrl: string;
-  summary: ChapterSummary | null;
+  summary: ChapterContent | null;
   isNext: boolean;
   shouldShowArabicName: boolean;
   badgeLabel: string;
@@ -67,7 +67,7 @@ const ChapterLink: React.FC<ChapterLinkProps> = ({
             href={navigationUrl}
             className={classNames(styles.badge, badgeStyle)}
             onClick={handleClick}
-            aria-label={ariaLabel}
+            aria-hidden="true"
           >
             {badgeLabel}
           </Link>

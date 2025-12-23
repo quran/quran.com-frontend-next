@@ -24,9 +24,8 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
 
   return (
     <>
-      {lang === Language.EN && chapterNumber === LEARNING_PLAN_CHAPTER && (
-        <LearningPlanBanner language={lang} />
-      )}
+      {(lang === Language.EN || lang === Language.UR) &&
+        chapterNumber === LEARNING_PLAN_CHAPTER && <LearningPlanBanner language={lang} />}
 
       <EndOfSurahSection chapterNumber={chapterNumber} />
     </>
