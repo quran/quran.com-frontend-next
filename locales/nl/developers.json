@@ -1,24 +1,74 @@
 {
+  "api-docs": {
+    "cta": "API-documenten bekijken",
+    "header": "API-documentatie",
+    "sub-header": "Integreer Quran.com-gegevens in uw applicaties met onze uitgebreide API",
+    "title": "API-documentatie"
+  },
+  "app-portal": {
+    "cta-explore": "Bezoek het Quran Apps-portaal",
+    "cta-oauth": "Zie de OAuth2-handleiding.",
+    "description": "Ontdek de nieuwste door de community ontwikkelde ervaringen en zie wat er allemaal mogelijk is met ons platform.",
+    "heading": "Koran Apps Portaal",
+    "oauth-pitch": "Ontwikkel Quran Foundation OAuth2 voor een probleemloze aanmelding en dien uw app in om te worden uitgelicht op het Quran Apps Portal.",
+    "tagline": "Presenteer je Koran-apps"
+  },
   "careers": {
     "career": "Carrièremogelijkheden",
     "cta": "Bekijk posities",
     "header": "Ontdek onze huidige vacatures"
   },
   "footer": "- Quran.com-team",
-  "header": "Ontwikkelingshulp",
-  "issues-cta": "Als je vragen hebt of contact wilt opnemen met de beheerders, schrijf dan gewoon een probleem! We komen zo snel mogelijk bij je terug, inshAllah.",
-  "issues-guide": "Meestal gebruiken we <0> Github-projecten </0> als bron voor waar we nu aan moeten werken, wat er gaat gebeuren en welke bugs er zijn die moeten worden opgelost. Bijvoorbeeld <1> deze url </1> heeft een lijst met bugs, dingen waar we hulp bij nodig hebben en aankomende functies.",
-  "main-desc": "Asalamu Alykom, Allereerst hartelijk dank voor uw interesse om ons te helpen Quran.com en zijn projecten te ontwikkelen. We werken graag met je samen!",
+  "header": "Ontwikkelings- hulp",
+  "hero": {
+    "subtitle": "Bronnen, tools en richtlijnen voor ontwikkelaars die Koran-ervaringen bouwen.",
+    "title": "Bouw met Quran.com"
+  },
+  "issues-cta": "Als je vragen hebt of contact wilt opnemen met de beheerders, geef aan waar je tegenaan loopt! We zullen proberen zo snel mogelijk te reageren, in sha Allah.",
+  "issues-guide": "Meestal gebruiken we <0> Github-projecten </0> als bron voor waar we als volgende aan moeten werken, wat er aan komt en welke bugs er zijn die opgelost moeten worden.  <1> deze url </1>bevat bijvoorbeeld een lijst met bugs, waarbij we hulp nodig hebben en aankomende functies.",
+  "labs": "Lab",
+  "labs-cta": "Ontdek Lab",
+  "labs-description": "Ontdek experimentele functies en aankomende vernieuwingen. Deel uw ideeën.",
+  "labs-pitch": "Deel je ideeën en draag bij aan de toekomst van de betrokkenheid bij en ervaringen met de Koran.",
+  "main-desc": "Assalamu Alaykom, allereerst hartelijk dank voor je interesse om ons te helpen Quran.com en zijn projecten te ontwikkelen. We werken graag met je samen!",
   "projects": {
     "all": "We hebben een aantal projecten die allemaal op Github worden gehost. Je vindt ze allemaal <0> hier </0> . Maar om ze te schetsen:",
-    "q-android": "<0>Koran Android</0>",
+    "items": {
+      "q-android": {
+        "description": "Een native Android Mushaf- en audiospelerervaring voor telefoons en tablets.",
+        "name": "Koran Android",
+        "stack": "Kotlin en Java"
+      },
+      "q-api": {
+        "description": "Ruby on Rails-backend die de gegevens, zoekfunctie en vertalingen van de Koran mogelijk maakt.",
+        "name": "Quran.com API",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Audiostreamingplatform en bijbehorende mobiele apps voor voordrachten.",
+        "name": "Koranische audio",
+        "stack": "Web- en mobiele apps"
+      },
+      "q-ios": {
+        "description": "Een op Swift gebaseerde koranlezer met bladwijzers, recitaties en offline ondersteuning.",
+        "name": "Koran iOS",
+        "stack": "Snel"
+      },
+      "q-next": {
+        "description": "Next.js-webapplicatie voor het lezen, zoeken en beluisteren van de Koran.",
+        "name": "Quran.com Frontend",
+        "stack": "Ontwikkeld met TypeScript en Next.js"
+      }
+    },
+    "lead": "Open-source projecten die worden onderhouden door het Quran.com-team en de community.",
+    "q-android": "<0>Koran Android</0> geschreven in Kotlin en Java.",
     "q-api": "<0> Quran.com API </0> - geschreven in Ruby on Rails.",
     "q-api-docs": "<0> Quran.com API Docs </0> - Ons API docs portaal.",
     "q-audio": "<0> Quranic Audio </0> en <1> Quranic Audio mobiele apps </1>",
     "q-audio-segments": "<0> Koran Audio Segmenten </0>",
-    "q-ios": "<0>Koran iOS</0>",
+    "q-ios": "<0>Koran iOS</0> geschreven in Swift.",
     "q-next": "<0> Quran.com Frontend </0> - geschreven in Next.js.",
     "q-v2": "<0> Quran.com </0> - geschreven in Ruby on Rails."
   },
-  "thanks": "Bedankt voor het lezen! Ik kijk ernaar uit om je wat code te zien plegen!"
+  "thanks": "We kijken uit naar jouw bijdrage!"
 }

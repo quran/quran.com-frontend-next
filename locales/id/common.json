@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "Jawaban",
   "aria": {
     "change-settings": "Ubah pengaturan",
     "drawer-close": "Tutup Laci",
@@ -93,7 +93,7 @@
   },
   "ayah": "Ayat",
   "ayahs": "Ayat",
-  "back": "",
+  "back": "Kembali",
   "beta": "Beta",
   "beyond-ramadan": "Terus bertumbuh Selepas Ramadan!",
   "bookmark": "Penanda",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "Lengkapi pendaftaran Anda",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "Kami memerlukan informasi yang hilang berikut ini untuk melengkapi pendaftaran Anda.",
+    "title": "Selesaikan pendaftaran Anda",
+    "verification-code": "Kode Verifikasi",
+    "verification-code-sent-to": "Kode verifikasi dikirim ke {{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "Maaf, akun Anda diblokir. Hubungi Quran Foundation",
     "badRequest": "*Permintaan tidak valid",
     "banned": "*Maaf, akun Anda diblokir. Hubungi Quran Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "Gagal menyelesaikan pendaftaran. Silakan coba lagi.",
     "confirm": "*Kata sandi tidak cocok",
     "email": "*Format Email Salah!",
     "exactLength": "*Panjang Isian harus tepat",
@@ -219,7 +219,7 @@
     "translation-font-size": "Ukuran huruf terjemahan"
   },
   "footer": {
-    "description": "Quran.com adalah platform tepercaya yang digunakan oleh jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merenungkan Al-Quran dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, bacaan, terjemahan kata demi kata, dan berbagai alat untuk mempelajari Al-Quran lebih dalam, sehingga Al-Quran dapat diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com didedikasikan untuk membantu siapapun agar terhubung secara mendalam dengan Al-Quran. Didukung oleh <link>Quran.Foundation</link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai sumber informasi gratis dan berharga bagi semua orang, Alhamdulillah",
+    "description": "Quran.com adalah platform tepercaya yang digunakan jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merefleksikan Al-Qur'an dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, tilawah, terjemahan kata demi kata, dan berbagai alat untuk pembelajaran yang lebih mendalam, sehingga Al-Qur'an dapat diakses oleh semua orang. <br/> <br/> Sebagai sebuah Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang-orang terhubung secara mendalam dengan Al-Qur'an. Didukung oleh <link> Quran.Foundation </link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai referensi yang sangat bernilai dan gratis untuk semua orang, Alhamdulillah.",
     "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
     "title": "Baca, Dengarkan, Cari, dan Renungkan Al Quran"
@@ -263,7 +263,7 @@
   "learning-plans": "Rencana Pembelajaran",
   "less": "Tampilkan Lebih Sedikit",
   "lessons": "Pelajaran",
-  "listen": "",
+  "listen": "Mendengarkan",
   "loading": "Memuat",
   "login": "Login",
   "logout": "Logout",
@@ -283,11 +283,11 @@
   "next-ayah": "Ayat Berikutnya",
   "no": "Tidak",
   "no-notifications": "Belum ada notifikasi",
-  "no-verses-available": "",
+  "no-verses-available": "Tidak ada ayat yang tersedia",
   "none": "Tidak ada",
   "not-now": "Nanti Saja",
   "notes": {
-    "label": "",
+    "label": "Catatan",
     "title": "Catatan & Refleksi Saya"
   },
   "notification-settings": "Pengaturan Notifikasi",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan kursor atau mengklik perkataan"
   },
   "share": "Membagikan",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "Nabi ﷺ bersabda:",
+  "share-quran-description-line-2": "'Sampaikanlah dariku, meskipun hanya satu ayat.'",
+  "share-quran-description-line-3": "(HR. Al-Bukhari 3461)",
+  "share-quran-title": "Bagikan Al-Quran!",
   "shared": "Tautan telah disalin ke papan klip!",
   "show-more": "Menampilkan lebih banyak",
   "sidebar": {

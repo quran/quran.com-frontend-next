@@ -88,6 +88,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
       <ReflectionBodyContainer
         initialChapterId={chapterId}
         initialVerseNumber={verseNumber}
+        isModal
         scrollToTop={() => {
           reflectionModalRef.current?.scrollToTop();
         }}
@@ -96,7 +97,6 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
             innerRef={reflectionModalRef}
             isOpen={openedModal === ModalType.REFLECTION}
             onClose={() => handleModalClose(ModalType.REFLECTION)}
-            header={t('reflections-and-lessons')}
           >
             {surahAndAyahSelection}
             {body}

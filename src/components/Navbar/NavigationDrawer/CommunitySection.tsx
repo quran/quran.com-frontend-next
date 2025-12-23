@@ -4,26 +4,42 @@ import styles from './CommunitySection.module.scss';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
+import { logButtonClick } from '@/utils/eventLogger';
 
-const CommunitySection = () => {
+type CommunitySectionVariant = 'drawer' | 'inline';
+
+type CommunitySectionProps = {
+  variant?: CommunitySectionVariant;
+};
+
+const CommunitySection = ({ variant = 'drawer' }: CommunitySectionProps) => {
   const { t } = useTranslation('common');
-  return (
-    <div className={styles.container}>
-      <div className={styles.flow}>
-        <div className={styles.title}>{t('community.header')}</div>
-        <div>{t('community.sub-header')}</div>
+
+  const onJoinCommunityClicked = () => {
+    logButtonClick('navigation_drawer_join_community');
+  };
+
+  const content = (
+    <div className={styles.flow}>
+      <div className={styles.title}>{t('community.header')}</div>
+      <div>{t('community.sub-header')}</div>
+      <div className={styles.actions}>
         <Link
           href="https://forms.gle/Lb4TFoxkSzjx5XHx6"
           isNewTab
           className={styles.joinCommunityLink}
         >
-          <Button href="" type={ButtonType.Success}>
+          <Button href="" type={ButtonType.Success} onClick={onJoinCommunityClicked}>
             {t('community.cta')}
           </Button>
         </Link>
       </div>
     </div>
   );
+
+  if (variant === 'inline') return content;
+
+  return <div className={styles.container}>{content}</div>;
 };
 
 export default CommunitySection;

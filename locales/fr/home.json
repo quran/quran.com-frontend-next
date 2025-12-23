@@ -1,15 +1,15 @@
 {
-  "achieve-quran-goals": "Atteignez vos objectifs coraniques",
+  "achieve-quran-goals": "Atteignez Vos Objectifs Coraniques",
   "begin": "Commencer",
   "calendar-cta": "Calendrier",
-  "chapters-and-verses": "Chapitres et versets",
+  "chapters-and-verses": "Sourates et Ayahs",
   "continue-read": "Continuer la lecture",
-  "explore-topics": "Explorer les sujets",
-  "first-time-reading": "Vous débutez avec le Coran ? <link> Commencez ici </link>",
-  "grow-beyond-ramadan": "Surpassez-vous avec nous <modalLink>Au-delà du Ramadan</modalLink>",
-  "know-someone": "Grandissez avec nous ce <modalLink> Ramadan </modalLink>",
-  "learning-plan": "Plans d'apprentissage",
-  "listen-to-radio": "Écouter la radio du Coran",
+  "explore-topics": "Explorer les Sujets",
+  "first-time-reading": "Vous débutez avec le Coran ? <link>Commencez ici</link>",
+  "grow-beyond-ramadan": "Progressez avec nous <modalLink>Au-delà du Ramadan</modalLink>",
+  "know-someone": "Progressez avec nous ce <modalLink>Ramadan</modalLink>",
+  "learning-plan": "Plans d'Apprentissage",
+  "listen-to-radio": "Écouter Quran Radio",
   "my-quran": "Mon Coran",
   "navigate-quran": "Naviguer dans le Coran",
   "no-bookmarks": "Vous n'avez pas encore de favoris",
@@ -23,44 +23,45 @@
         "my-plans": "Mes plans"
       },
       "desc": {
-        "logged-in": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
-        "logged-in-no-plans": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
-        "logged-out": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui"
+        "logged-in": "Ça vous est déjà arrivé de commencer un plan d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-in-no-plans": "Ça vous est déjà arrivé de commencer un plan d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-out": "Ça vous est déjà arrivé de commencer un plan d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui"
       },
-      "title": "Plans d'apprentissage"
+      "title": "Plans d'Apprentissage"
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Voulez-vous lire 10 minutes par jour, terminer un Juz en un mois, ou terminer le Coran en un an ? Il est facile de de définir un objectif personnalisé et de suivre vos progrès"
+        "logged-out": "Voulez-vous lire 10 minutes par jour, terminer un Juz en un mois, ou terminer le Coran en un an ? Il est facile de définir un objectif personnalisé et de suivre vos progrès"
       },
       "title": "Objectifs personnalisés pour la lecture du Coran"
     },
     "title": "Voyage de Développement Spirituel avec le Coran"
   },
-  "qr-community": "Lisez les versets et les réflexions du jour",
+  "qr-community": "Lisez les Ayahs et les réflexions du jour",
   "quran-in-year": "Le Coran en un an",
   "quran-in-year-cta": "Lecture de la semaine",
+  "quran-in-year-verse-title": "Un verset de la lecture de cette semaine",
   "ramadan-activities-cta": "<link> Suivez le <b> Calendrier Coranique mondial </b> pour des lectures hebdomadaires, des podcasts inspirants et un appel à la réflexion ! </link>",
   "ramadan": {
-    "header": "Des outils pour approfondir votre connexion avec le Coran",
+    "header": "Des outils pour Approfondir Votre Connexion avec le Coran",
     "title": "Prêt pour le Ramadan ?"
   },
   "read-juz": "Lire Juz",
   "recently-read": "Lu récemment",
   "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des Sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover>ﷺ</hover> . La chronologie est un sujet d'opinion scientifique et certaines Sourates ont été révélées en parties à des moments différents. L'ordre est basé sur le travail de <link>Tanzil.net</link>. [Remarque : l'ordre du Mushaf (entre les Sourates Al-Fatiha et Al-Nas) est une question de consensus.]",
-  "see-more-learning-plans": "Voir plus",
-  "set-custom-goal": "Fixer un objectif",
+  "see-more-learning-plans": "Voir davantage",
+  "set-custom-goal": "Fixer un Objectif",
   "share-quran": {
-    "description": "Aidez à diffuser le Coran aux nouveaux apprenants",
+    "description": "Aidez à diffuser le Coran aux nouveaux étudiants",
     "title": "Partagez le Coran !"
   },
-  "start-read": "Commencer à lire",
-  "stay-consistent": "Suivez vos séquences, créez des objectifs personnalisés et restez cohérent",
+  "start-read": "Commencer la lecture",
+  "stay-consistent": "Suivez vos Séries, Créez des Objectifs Personnalisés, Restez Consistant(e)",
   "tab": {
     "bookmarks": "Favoris",
     "popular": "Populaire"
   },
-  "take-notes": "Avez-vous manqué des <modalLink> Notes ? </modalLink>",
+  "take-notes": "Avez-vous manqué des <modalLink> Notes ? </modalLink>",
   "view-all-bookmarks": "Afficher tous les marque-pages",
   "voice": {
     "trigger": "Accès rapide à tout"

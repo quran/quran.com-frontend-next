@@ -9,7 +9,7 @@
   "grow-beyond-ramadan": "Kua nasi <modalLink>Baada ya Ramadhani </modalLink>",
   "know-someone": "Kua nasi <modalLink> Ramadhani </modalLink> hii",
   "learning-plan": "Mipango ya Kujifunza",
-  "listen-to-radio": "Sikiliza Quran Radio",
+  "listen-to-radio": "Sikiliza Radio ya Qur'ani",
   "my-quran": "Qur'ani yangu",
   "navigate-quran": "Pitia Qur'ani",
   "no-bookmarks": "Huna alamisho zozote bado",
@@ -40,6 +40,7 @@
   "qr-community": "Soma Aya na Tafakari za leo",
   "quran-in-year": "Quran in a Year",
   "quran-in-year-cta": "Usomaji wa Wiki Hii",
+  "quran-in-year-verse-title": "Mstari kutoka katika usomaji wa juma hili",
   "ramadan-activities-cta": "<link> Fuata <b> Global Quranic Calendar </b> kwa usomaji wa kila wiki, podikasti za kusisimua, na wito wa kutafakari! </link>",
   "ramadan": {
     "header": "Zana za Kukuza Uhusiano Wako na Qur'ani",
@@ -60,7 +61,7 @@
     "bookmarks": "Alamisho",
     "popular": "Maarufu"
   },
-  "take-notes": "Je, umekuwa ukikosa <modalLink> Notes? </modalLink>",
+  "take-notes": "Je, umekosa kutumia <modalLink> Maelezo? </modalLink>",
   "view-all-bookmarks": "Tazama alamisho zote",
   "voice": {
     "trigger": "Ufikiaji wa haraka wa chochote"

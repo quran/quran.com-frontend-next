@@ -1,4 +1,18 @@
 {
+  "api-docs": {
+    "cta": "View API Docs",
+    "header": "API Documentation",
+    "sub-header": "Integrate Quran.com data into your applications with our comprehensive API",
+    "title": "API Documentation"
+  },
+  "app-portal": {
+    "cta-explore": "Visit Quran Apps Portal",
+    "cta-oauth": "See OAuth2 guide",
+    "description": "Explore transformative Apps addressing unique needs and various segments of society.",
+    "heading": "Quran Apps Portal",
+    "oauth-pitch": "Utilize Quran.Foundation's OAuth2.0 to allow user to find their data and continue where they left off on Quran.com and integrated Apps.",
+    "tagline": "Showcase your Quran apps"
+  },
   "careers": {
     "career": "Career Opportunities",
     "cta": "View Positions",
@@ -6,11 +20,47 @@
   },
   "footer": "- Quran.com team",
   "header": "Development Help",
+  "hero": {
+    "subtitle": "Resources, tools, and guidance for developers building Quran experiences.",
+    "title": "Build with Quran.com"
+  },
   "issues-cta": "Should you have any questions or want to contact maintainers, just write an issue. We will get back to you as soon as we can, insha'Allah.",
   "issues-guide": "Typically we use <0>Github projects</0> as the source for what to work on next, what's coming up and what bugs exist that need to be solved. For example <1>this url</1> has list of bugs, things we need help with, and upcoming features.",
-  "main-desc": "Thank you for your interest in helping us develop Quran.com and its projects. We are excited to work with you!",
+  "labs": "Quran Labs",
+  "labs-cta": "Explore Labs",
+  "labs-description": "Discover community driven experimental features and upcoming innovations.",
+  "labs-pitch": "Share your ideas and participate in the future of Quranic engagement and experiences.",
+  "main-desc": "Explore the programs, tools, and documentation designed to help you extend the Quran.com ecosystem.",
   "projects": {
     "all": "We have a number of projects all hosted on Github. You can find them all <0>here</0>. But to outline them:",
+    "items": {
+      "q-android": {
+        "description": "Native Android mushaf and audio player experience for phones and tablets.",
+        "name": "Quran Android",
+        "stack": "Kotlin and Java"
+      },
+      "q-api": {
+        "description": "Ruby on Rails backend that powers Quran data, search, and translations.",
+        "name": "Quran.com API",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Audio streaming platform and companion mobile apps for recitations.",
+        "name": "Quranic Audio",
+        "stack": "Web and mobile apps"
+      },
+      "q-ios": {
+        "description": "Swift-based Quran reader with bookmarks, recitations, and offline support.",
+        "name": "Quran iOS",
+        "stack": "Swift"
+      },
+      "q-next": {
+        "description": "Next.js web experience for reading, searching, and listening to Quran.",
+        "name": "Quran.com Frontend",
+        "stack": "Built with TypeScript and Next.js"
+      }
+    },
+    "lead": "Open-source projects maintained by the Quran.com team and community.",
     "q-android": "<0>Quran Android</0> - written in Kotlin and Java.",
     "q-api": "<0>Quran.com API</0> - written in Ruby on Rails.",
     "q-api-docs": "<0>Quran.com API Docs</0> - Our API docs portal.",
@@ -20,5 +70,5 @@
     "q-next": "<0>Quran.com Frontend</0> - written in Next.js.",
     "q-v2": "<0>Quran.com</0> - written in Ruby on Rails."
   },
-  "thanks": "We look forward your contribution!"
+  "thanks": "We look forward to your contribution!"
 }

@@ -44,7 +44,7 @@ const CollectionDetail = ({
   onItemDeleted,
   isOwner,
 }: CollectionDetailProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const { t, lang } = useTranslation();
   const confirm = useConfirm();
 

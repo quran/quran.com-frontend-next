@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 
+import { buildUrlWithParams } from '@/utils/navigation';
+
 /**
  * A hook that appends query parameters to the url. We could've used shallow routing for Next.js
  * but it causes re-rendering to the whole app @see https://github.com/vercel/next.js/discussions/18072
@@ -13,18 +15,8 @@ const useAddQueryParamsToUrl = (relativeUrl: string, params: Record<string, unkn
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // turns the parameters into a query string
-    const searchParams = new URLSearchParams();
-
-    Object.keys(params).forEach((parameter) => {
-      const parameterValue = params[parameter];
-      if (parameterValue) {
-        searchParams.set(parameter, String(parameterValue));
-      }
-    });
-
-    // Create the full URL by appending query parameters
-    const url = searchParams.toString() ? `${relativeUrl}?${searchParams.toString()}` : relativeUrl;
+    // Use the utility function to build URL with params
+    const url = buildUrlWithParams(relativeUrl, params);
     const currentUrl = `${window.location.pathname}${window.location.search}`;
 
     // Skip if the url is the same (no need to push/replace state)

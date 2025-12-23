@@ -22,7 +22,7 @@ import { FormFieldType } from '@/types/FormField';
 import { addNote as baseAddNote } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import adjustNoteCounts from '@/utils/notes/adjustNoteCounts';
+import { isVerseKeyWithinRanges } from '@/utils/verse';
 
 const BODY_MIN_LENGTH = 6;
 const BODY_MAX_LENGTH = 10000;
@@ -55,7 +55,6 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
       return baseAddNote({
         body,
         saveToQR,
-        verseKey,
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
         }),
@@ -63,12 +62,21 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
     },
     {
       onSuccess: (data) => {
-        toast(t('notes:save-success'), {
-          status: ToastStatus.Success,
-        });
-        mutateCache(data);
-        // Adjust cached per-range counts client-side
-        adjustNoteCounts(cache, mutate, verseKey, +1);
+        // if publishing the note publicly call failed after saving the note succeeded
+        // @ts-ignore
+        if (data?.error === true) {
+          toast(t('notes:save-publish-failed'), {
+            status: ToastStatus.Error,
+          });
+          // @ts-ignore
+          mutateCache([data.note]);
+        } else {
+          toast(t('notes:save-success'), {
+            status: ToastStatus.Success,
+          });
+          mutateCache([data]);
+        }
+        clearCountCache();
 
         if (onSuccess) {
           onSuccess();
@@ -82,20 +90,38 @@ const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
     },
   );
 
-  const mutateCache = (newNote: Note) => {
+  const mutateCache = (data: unknown) => {
     if (verseKey) {
-      const key = makeGetNotesByVerseUrl(verseKey);
-      // Prepend the new note to the existing cached list without revalidating
-      mutate(
-        key,
-        (prev: any) => {
-          const list: Note[] = Array.isArray(prev) ? (prev as Note[]) : [];
-          return [newNote, ...list];
-        },
-        false,
-      );
+      mutate(makeGetNotesByVerseUrl(verseKey), data);
     }
   };
+
+  const clearCountCache = () => {
+    // we need to invalidate one of keys that look like: ['countNotes', notesRange]
+    // so that the count is updated
+    const keys = [...(cache as any).keys()].filter((key) => {
+      if (!key.startsWith('countNotes/')) {
+        return false;
+      }
+
+      if (verseKey) {
+        // check if the note is within the range
+        const rangeString = key.replace('countNotes/', '');
+        return isVerseKeyWithinRanges(verseKey, rangeString);
+      }
+
+      // if we're not on the quran reader page, we can just invalidate all the keys
+      return true;
+    }) as string[];
+
+    if (keys.length) {
+      keys.forEach((key) => {
+        cache.delete(key);
+        mutate(key);
+      });
+    }
+  };
+
   const onSubmit = async ({ body, saveToQR }: NoteFormData) => {
     logButtonClick('add_note');
     addNote({

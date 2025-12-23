@@ -1,5 +1,5 @@
 {
-  "achieve-quran-goals": "Bereik uw Korandoelen",
+  "achieve-quran-goals": "Bereik uw Koran doelen",
   "begin": "Beginnen",
   "calendar-cta": "Kalender",
   "chapters-and-verses": "Hoofdstukken en verzen",
@@ -19,30 +19,31 @@
   "qgj": {
     "learning-plans": {
       "cta": {
-        "all-plans": "Bekijk alle abonnementen",
+        "all-plans": "Bekijk alle plannen",
         "my-plans": "Mijn plannen"
       },
       "desc": {
-        "logged-in": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke stukken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursusaanbod",
-        "logged-in-no-plans": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke brokken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursusaanbod",
-        "logged-out": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke stukken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursusaanbod"
+        "logged-in": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke stukken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursus aanbod",
+        "logged-in-no-plans": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke brokken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursus aanbod",
+        "logged-out": "Ooit aan een leerprogramma begonnen en halverwege het traject verlaten? Leerplannen zijn opgedeeld in overzichtelijke stukken en we volgen je voortgang tot je de eindstreep bereikt. Ontdek vandaag nog ons huidige cursus aanbod"
       },
-      "title": "Leerplannen"
+      "title": "Leer plannen"
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Wil je 10 minuten per dag lezen, een Juz in een maand voltooien, of de hele Koran in een jaar uitlezen? Het is gemakkelijk om een aangepast doel te maken en uw voortgang bij te houden"
+        "logged-out": "Wil je 10 minuten per dag lezen, een Djoez in een maand voltooien, of de hele Koran in een jaar uitlezen? Het is gemakkelijk om een aangepast doel te maken en jouw voortgang bij te houden."
       },
-      "title": "Aangepaste koranleesdoelen"
+      "title": "Aangepaste koran lees doelen"
     },
-    "title": "Koran groeireis"
+    "title": "Koran groei-reis"
   },
-  "qr-community": "Lees de aanbevolen verzen en reflecties van vandaag",
+  "qr-community": "Lees de aanbevolen verzen en reflecties van vandaag.",
   "quran-in-year": "Koran in een jaar",
-  "quran-in-year-cta": "Lezen deze week",
+  "quran-in-year-cta": "De lezing van deze week",
+  "quran-in-year-verse-title": "Een vers uit de lezing van deze week",
   "ramadan-activities-cta": "<link> Volg de <b> Global Quranic Calendar </b> voor wekelijkse lezingen, inspirerende podcasts en een oproep tot reflectie! </link>",
   "ramadan": {
-    "header": "Hulpmiddelen om uw verbinding met de Koran te verdiepen",
+    "header": "Hulpmiddelen om je verbinding met de Koran te verdiepen",
     "title": "Klaar voor de Ramadan?"
   },
   "read-juz": "Lees Juz",
@@ -55,12 +56,12 @@
     "title": "Deel de Koran!"
   },
   "start-read": "Begin met lezen",
-  "stay-consistent": "Volg Streaks, Creëer Aangepaste Doelen, Blijf Consistent",
+  "stay-consistent": "Volg Stappen, Creëer Aangepaste Doelen, Blijf Consistent",
   "tab": {
     "bookmarks": "Bladwijzers",
     "popular": "Populair"
   },
-  "take-notes": "Heb je <modalLink> Notities gemist? </modalLink>",
+  "take-notes": "Heb je iets gemist <modalLink> Notities ? </modalLink>",
   "view-all-bookmarks": "Bekijk alle bladwijzers",
   "voice": {
     "trigger": "Snelle toegang tot alles"

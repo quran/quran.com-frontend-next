@@ -6,7 +6,7 @@
   "continue-read": "Continuar leyendo",
   "explore-topics": "Explorar temas",
   "first-time-reading": "¿Es nuevo en el Corán? <link> Comience aquí </link>",
-  "grow-beyond-ramadan": "Crece con nosotros <modalLink> Más allá del Ramadán </modalLink>",
+  "grow-beyond-ramadan": "Crece con nosotros <modalLink> más allá del Ramadán </modalLink>",
   "know-someone": "Crece con nosotros este <modalLink> Ramadán </modalLink>",
   "learning-plan": "Planes de aprendizaje",
   "listen-to-radio": "Escuchar la radio del Corán",
@@ -37,9 +37,10 @@
     },
     "title": "Viaje de crecimiento del Corán"
   },
-  "qr-community": "Lea los versículos y reflexiones destacados de hoy",
+  "qr-community": "Lee los versículos y reflexiones destacados de hoy",
   "quran-in-year": "El Corán en un año",
   "quran-in-year-cta": "Lectura de esta semana",
+  "quran-in-year-verse-title": "Un versículo de la lectura de esta semana",
   "ramadan-activities-cta": "<link> ¡Sigue el <b> Calendario Coránico Global </b> para obtener lecturas semanales, podcasts inspiradores y un llamado a la reflexión! </link>",
   "ramadan": {
     "header": "Herramientas para profundizar su conexión con el Corán",
@@ -60,7 +61,7 @@
     "bookmarks": "Favoritos",
     "popular": "Populares"
   },
-  "take-notes": "¿Te has estado perdiendo algunas <modalLink> Notas? </modalLink>",
+  "take-notes": "¿Te perdiste de algunas <modalLink> notas? </modalLink>",
   "view-all-bookmarks": "Ver todos los marcadores",
   "voice": {
     "trigger": "Acceso rápido"

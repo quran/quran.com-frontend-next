@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
 import AppleIcon from '@/icons/apple.svg';
 import FacebookIcon from '@/icons/facebook.svg';
 import GoogleIcon from '@/icons/google.svg';
@@ -15,10 +15,9 @@ import AuthType from 'types/auth/AuthType';
 
 interface Props {
   redirect?: string;
-  onEmailLoginClick: () => void;
 }
 
-const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
+const SocialButtons: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
 
   const onSocialButtonClick = (type: AuthType) => {
@@ -26,7 +25,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
   };
 
   return (
-    <div className={styles.authButtons}>
+    <div className={styles.authButtons} data-testid="auth-buttons">
       <Button
         href={makeGoogleLoginUrl(redirect)}
         prefix={<GoogleIcon />}
@@ -34,9 +33,11 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Google)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-google')}
-      </Button>
+        data-testid="google-login-button"
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-google')}
+      />
+
       <Button
         href={makeFacebookLoginUrl(redirect)}
         prefix={<FacebookIcon color="#4267b2" />}
@@ -44,9 +45,11 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Facebook)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-facebook')}
-      </Button>
+        data-testid="facebook-login-button"
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-facebook')}
+      />
+
       <Button
         href={makeAppleLoginUrl(redirect)}
         prefix={<AppleIcon />}
@@ -54,20 +57,10 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
         onClick={() => onSocialButtonClick(AuthType.Apple)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-      >
-        {t('continue-apple')}
-      </Button>
-      <Button
-        onClick={() => {
-          onEmailLoginClick();
-          onSocialButtonClick(AuthType.Email);
-        }}
-        className={classNames(styles.loginButton, styles.emailButton)}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Pill}
-      >
-        {t('continue-email')}
-      </Button>
+        data-testid="apple-login-button"
+        size={ButtonSize.Medium}
+        ariaLabel={t('continue-apple')}
+      />
     </div>
   );
 };

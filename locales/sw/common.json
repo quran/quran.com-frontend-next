@@ -7,7 +7,7 @@
       "data-sync": {
         "action": "Inayofuata",
         "description": "Iwe unatumia Quran.com kwenye simu yako au kompyuta yako ndogo, utaweza kupata alamisho zako, aya za mwisho ulizozisoma na mapendeleo yako.",
-        "title": "Data yako itasawazishwa <br> </br> kwenye vifaa vyote"
+        "title": "Data yako itasawazishwa <br></br> kwenye vifaa vyote"
       },
       "feedback": {
         "action": "Sawa, nimeipata",
@@ -26,7 +26,7 @@
       },
       "welcome": {
         "action": "Tazama kilicho kipya",
-        "title": "Karibu kwenye Quran.com <br> </br> Akaunti ya Mtumiaji"
+        "title": "Karibu kwenye Quran.com <br></br> Akaunti ya Mtumiaji"
       }
     },
     "collections-announcement": {
@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "Majibu",
   "aria": {
     "change-settings": "Badilisha Mipangilio",
     "drawer-close": "Funga Menyu",
@@ -53,8 +53,8 @@
       "title": "Sogeza kiotomatiki"
     },
     "displaying": "Inaonyesha",
-    "exp-tip": "<span> Badilisha maudhui yanayoonyeshwa chini ya </span> <br> </br> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan>",
-    "exp-tip-no-select": "<span> Weka alama kwenye chaguo la kuonyesha tooltip na uchague <br> </br> Chaguo la Tarjuma na/au Unukuzi </span> <br> </br> <span> chini ya </span> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan> <span>, ili </span> <br> </br> <span> kuwezesha kipengele hiki. </span>",
+    "exp-tip": "<span> Badilisha maudhui yanayoonyeshwa chini ya </span> <br></br> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan>",
+    "exp-tip-no-select": "<span> Weka alama kwenye chaguo la kuonyesha tooltip na uchague <br></br> Chaguo la Tarjuma na/au Unukuzi </span> <br></br> <span> chini ya </span> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan> <span>, ili </span> <br></br> <span> kuwezesha kipengele hiki. </span>",
     "experience": "Uzoefu",
     "play": "Cheza Sauti",
     "playback-normal": "Kawaida",
@@ -93,7 +93,7 @@
   },
   "ayah": "Aya",
   "ayahs": "Aya",
-  "back": "",
+  "back": "Nyuma",
   "beta": "Beta",
   "beyond-ramadan": "Jiendeleze Baada ya Ramadhani!",
   "bookmark": "Alamisha",
@@ -112,20 +112,20 @@
   },
   "community": {
     "cta": "Wasiliana",
-    "header": "Je, ungependa kujitolea ujuzi wako wa kiufundi ili kuendeleza dhamira ya Kurani?",
+    "header": "Je, ungependa kujitolea ujuzi wako ili kuendeleza dhamira ya Qur'ani?",
     "sub-header": "Shiriki nia yako kwa kujaza fomu hii, na tutawasiliana wakati fursa inayofaa inapatikana, insha'Allah.",
     "title": "Jumuiya"
   },
   "complete-sign-up": "Kamilisha usajili wako",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "Tunahitaji maelezo haya yaliyokosekana ili kukamilisha usajili wako.",
+    "title": "Kamilisha usajili wako",
+    "verification-code": "Nambari ya Uthibitishaji",
+    "verification-code-sent-to": "Nambari ya kuthibitisha imetumwa kwa {{email}}"
   },
   "consents": {
     "communication": {
-      "body": "🚀 Boresha maendeleo yako kupitia arifa <boldSpan> zilizobinafsishwa </boldSpan> kuhusu maendeleo ya lengo lako, kudumisha streaks, na kuboresha matumizi yako ya vipengele vyetu vya sasa. <br> </br> <br> </br> Je, tunaweza kukufahamisha kupitia barua pepe na vituo vingine? Wewe ndiye unayedhibiti - jisikie huru kurekebisha mapendeleo haya wakati wowote katika mipangilio ya akaunti yako. <br> </br> <br> </br> Chagua tu 'Ruhusu' kupata <boldSpan> vikumbusho vinavyotia moyo </boldSpan> au 'Si Sasa' ili kukataa.",
+      "body": "🚀 Boresha maendeleo yako kupitia arifa <boldSpan> zilizobinafsishwa </boldSpan> kuhusu maendeleo ya lengo lako, kudumisha streaks, na kuboresha matumizi yako ya vipengele vyetu vya sasa. <br></br> <br></br> Je, tunaweza kukufahamisha kupitia barua pepe na vituo vingine? Wewe ndiye unayedhibiti - jisikie huru kurekebisha mapendeleo haya wakati wowote katika mipangilio ya akaunti yako. <br></br> <br></br> Chagua tu 'Ruhusu' kupata <boldSpan> vikumbusho vinavyotia moyo </boldSpan> au 'Si Sasa' ili kukataa.",
       "header": "Tungependa kukusaidia ubaki <boldSpan> uwe na msimamo na uthabiti </boldSpan> katika kukuza safari yako na Qur'ani! 📖🌟"
     }
   },
@@ -172,7 +172,7 @@
     "account-banned": "Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
     "badRequest": "*Ombi batili",
     "banned": "*Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "Imeshindikana kukamilisha usajili. Tafadhali jaribu tena.",
     "confirm": "*Thibitisha nenosiri hailingani na nenosiri",
     "email": "*Muundo wa Barua pepe si Sahihi!",
     "exactLength": "*Tarakimu lazima iwe urefu kamili",
@@ -195,7 +195,7 @@
     "verification-code-invalid": "Nambari hii ya uthibitishaji si sahihi",
     "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
     "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
-    "verification-resend-failed": "Imeshindwa kutuma tena nambari ya kuthibitisha"
+    "verification-resend-failed": "Imeshindikana kutuma tena nambari ya kuthibitisha"
   },
   "exciting-updates": "Sasisho za Kusisimua",
   "feedback": "Maoni",
@@ -219,7 +219,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Qur'ani katika lugha nyingi. Inatoa tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kueneza uhusiano wa kina na Qur'ani. Ikiungwa mkono na <link>Quran.Foundation</link>, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah",
+    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali isiyolipishwa na yenye thamani kwa wote, Alhamdulillah.",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
     "title": "Soma, Sikiliza, Tafuta, na Tafakari Qur'ani"
@@ -263,7 +263,7 @@
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
   "lessons": "Mafunzo",
-  "listen": "",
+  "listen": "Sikiliza",
   "loading": "Inapakia",
   "login": "Ingia",
   "logout": "Ondoka",
@@ -283,11 +283,11 @@
   "next-ayah": "Aya Inayofuata",
   "no": "Hapana",
   "no-notifications": "Hakuna arifa Bado",
-  "no-verses-available": "",
+  "no-verses-available": "Hakuna Aya zinazopatikana",
   "none": "Hakuna",
   "not-now": "Sio Sasa",
   "notes": {
-    "label": "",
+    "label": "Maelezo",
     "title": "Maelezo na Tafakari Zangu"
   },
   "notification-settings": "Mipangilio ya Arifa",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "Onyesha tarjuma au unukuzi unapoelea juu ya neno au kubofya neno"
   },
   "share": "Shiriki",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "Amesema Mtume ﷺ:",
+  "share-quran-description-line-2": "'Fikisha kutoka kwangu, hata kama ni Aya moja.'",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Shiriki Qura'ni!",
   "shared": "Kiungo kimenakiliwa kwenye ubao wa kunakili!",
   "show-more": "Onyesha zaidi",
   "sidebar": {

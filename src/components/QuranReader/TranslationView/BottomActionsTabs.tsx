@@ -1,10 +1,12 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationViewCell.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import { isRTLLocale } from '@/utils/locale';
 
 export enum TabId {
   TAFSIR = 'tafsir',
@@ -26,6 +28,9 @@ interface BottomActionsTabsProps {
 }
 
 const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslationView }) => {
+  const { lang } = useTranslation();
+  const isRTL = isRTLLocale(lang);
+
   const handleTabClick = (
     e: React.MouseEvent,
     onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
@@ -42,13 +47,19 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
 
   return (
     <div className={styles.bottomActionsContainer}>
-      <div className={classNames(styles.tabsContainer, { [styles.center]: !isTranslationView })}>
+      <div
+        className={classNames(styles.tabsContainer, {
+          [styles.center]: !isTranslationView,
+          [styles.tabsContainerRTL]: isRTL,
+        })}
+      >
         {tabs
           .filter((tab) => tab.condition !== false) // Only show tabs that meet their condition
           .map((tab, index, filteredTabs) => (
             <React.Fragment key={tab.id}>
               <div
-                className={styles.tabItem}
+                className={classNames(styles.tabItem, { [styles.tabItemRTL]: isRTL })}
+                data-testid={`bottom-action-tab-${tab.id}`}
                 onClick={(e) => handleTabClick(e, tab.onClick)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
                 role="button"

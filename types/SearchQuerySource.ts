@@ -9,6 +9,7 @@ enum SearchQuerySource {
   SidebarNavigationVersesList = 'sidebar_navigation_verse_list',
   SidebarNavigationJuzsList = 'sidebar_navigation_juz_list',
   SidebarNavigationPagesList = 'sidebar_navigation_page_list',
+  AppPortal = 'app_portal',
 }
 
 export default SearchQuerySource;

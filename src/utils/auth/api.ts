@@ -5,16 +5,6 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
-import {
-  countPostsWithinRange,
-  createReflection,
-  getReflectionsByVerseKey,
-} from '../quranReflect/apiPaths';
-import {
-  rangesToReflectionReferences,
-  verseKeyToReflectionReference,
-  mapReflectionToNote,
-} from '../quranReflect/mapping';
 
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
@@ -36,7 +26,7 @@ import {
   UpdateQuranReadingProgramActivityDayBody,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
-import { Course } from '@/types/auth/Course';
+import { Course, CoursesResponse } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
@@ -61,6 +51,7 @@ import {
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
+  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -103,13 +94,15 @@ import {
   makeUserProfileUrl,
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
+  makeTranslationFeedbackUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
+import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
-import SyncDataType from 'types/auth/SyncDataType';
+import { SyncLocalDataPayload } from 'types/auth/SyncDataType';
 import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
@@ -233,8 +226,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl());
+export const getUserProfile = async (): Promise<UserProfile> => {
+  return privateFetcher<UserProfile>(makeUserProfileUrl());
+};
 
 export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
   privateFetcher(makeUserFeatureFlagsUrl());
@@ -289,7 +283,12 @@ type AddBookmarkParams = {
   verseNumber?: number;
 };
 
-export const addBookmark = async ({ key, mushafId, type, verseNumber }: AddBookmarkParams) =>
+export const addBookmark = async ({
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: AddBookmarkParams): Promise<Bookmark> =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
     mushaf: mushafId,
@@ -380,7 +379,7 @@ export const getStreakWithUserMetadata = async (
 ): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
 
 export const syncUserLocalData = async (
-  payload: Record<SyncDataType, any>,
+  payload: SyncLocalDataPayload,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
@@ -416,11 +415,23 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+export const addCollectionBookmark = async ({
+  collectionId,
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
+}) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -433,14 +444,20 @@ export const deleteCollectionBookmarkById = async (collectionId: string, bookmar
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
   key,
-  mushaf,
+  mushafId,
   type,
   verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -457,9 +474,18 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
-export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+type EnrollUserParams = {
+  courseId: string;
+  enrollmentMethod: EnrollmentMethod;
+};
+
+export const enrollUser = async ({
+  courseId,
+  enrollmentMethod,
+}: EnrollUserParams): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
+    enrollmentMethod,
   });
 
 export const postCourseFeedback = async ({
@@ -476,7 +502,32 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+export const getCourses = async (params?: {
+  myCourses?: boolean;
+  languages?: string[];
+}): Promise<Course[]> => privateFetcher(makeGetCoursesUrl(params));
+
+/**
+ * Fetch courses with language filter, retrying without languages param for backward compatibility.
+ * If the API doesn't support the languages query param, it falls back to fetching without it.
+ *
+ * @param {string[]} languages - Array of ISO language codes
+ * @returns {Promise<Course[]>} - Array of courses or empty array on error
+ */
+export const fetchCoursesWithLanguages = async (languages: string[]): Promise<Course[]> => {
+  try {
+    const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false, languages }));
+    return res?.data || [];
+  } catch {
+    // Retry without languages param (old BE does not support extra params)
+    try {
+      const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false }));
+      return res?.data || [];
+    } catch {
+      return [];
+    }
+  }
+};
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
@@ -484,8 +535,8 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
-  return postRequest(makeAddCollectionUrl(), { name: collectionName });
+export const addCollection = async (collectionName: string): Promise<Collection> => {
+  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
 };
 
 type QuestionTypes = {
@@ -506,57 +557,8 @@ export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
 };
 
-const normalizeCountMap = (res: any): Record<string, number> => {
-  if (!res) return {};
-  const obj = (res && typeof res === 'object' && (res.data || res)) as Record<string, number>;
-  return obj || {};
-};
-
-const logCountFailures = (
-  notesRes: PromiseSettledResult<any>,
-  postsRes: PromiseSettledResult<any>,
-  from: string,
-  to: string,
-) => {
-  if (notesRes.status === 'rejected') {
-    logErrorToSentry(notesRes.reason, {
-      transactionName: 'notes.count.private',
-      metadata: { from, to },
-    });
-  }
-  if (postsRes.status === 'rejected') {
-    logErrorToSentry(postsRes.reason, {
-      transactionName: 'notes.count.reflections',
-      metadata: { from, to },
-    });
-  }
-};
-
 export const countNotesWithinRange = async (from: string, to: string) => {
-  addSentryBreadcrumb('notes.split', 'counting notes and reflections within range', { from, to });
-
-  const [notesRes, postsRes] = await Promise.allSettled([
-    privateFetcher(makeCountNotesWithinRangeUrl(from, to)),
-    countPostsWithinRange(from, to),
-  ]);
-
-  const notesMap = notesRes.status === 'fulfilled' ? normalizeCountMap(notesRes.value) : {};
-  const postsMap = postsRes.status === 'fulfilled' ? normalizeCountMap(postsRes.value) : {};
-
-  logCountFailures(notesRes, postsRes, from, to);
-
-  const merged: Record<string, number> = { ...notesMap };
-  Object.keys(postsMap).forEach((k) => {
-    merged[k] = (merged[k] || 0) + (postsMap[k] || 0);
-  });
-
-  addSentryBreadcrumb('notes.split', 'merged notes and reflections count', {
-    notesCount: Object.keys(notesMap).length,
-    reflectionsCount: Object.keys(postsMap).length,
-    totalRanges: Object.keys(merged).length,
-  });
-
-  return merged;
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
 export const getAyahQuestions = async (ayahKey: string, language: Language) => {
@@ -572,80 +574,32 @@ export const getQuestionById = async (questionId: string): Promise<QuestionRespo
   return privateFetcher(makeGetQuestionByIdUrl(questionId));
 };
 
-export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR' | 'verseKey'>) => {
-  const { saveToQR, verseKey, ranges, ...rest } = payload;
-
-  if (saveToQR) {
-    // Route to Reflections service only
-    addSentryBreadcrumb('notes.split', 'creating reflection', { verseKey, hasRanges: !!ranges });
-
-    const references = verseKey
-      ? [verseKeyToReflectionReference(verseKey)]
-      : rangesToReflectionReferences(ranges || []);
-
-    const reflectionResponse = await createReflection({
-      body: rest.body,
-      references,
-    });
-
-    return mapReflectionToNote(reflectionResponse.data);
-  }
-
-  // Route to Notes service only
-  addSentryBreadcrumb('notes.split', 'creating private note', { verseKey, hasRanges: !!ranges });
-  return postRequest(makeNotesUrl(), { ...rest, ranges, saveToQR: false });
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
 };
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
 
 export const getNoteById = async (id: string): Promise<Note> =>
   privateFetcher(makeGetNoteByIdUrl(id));
 
-const logListFailures = (
-  notesRes: PromiseSettledResult<any>,
-  reflectionsRes: PromiseSettledResult<any>,
-  verseKey: string,
-) => {
-  if (notesRes.status === 'rejected') {
-    logErrorToSentry(notesRes.reason, {
-      transactionName: 'notes.list.private',
-      metadata: { verseKey },
-    });
-  }
-  if (reflectionsRes.status === 'rejected') {
-    logErrorToSentry(reflectionsRes.reason, {
-      transactionName: 'notes.list.reflections',
-      metadata: { verseKey },
-    });
-  }
-};
-
 export const getNotesByVerse = async (verseKey: string): Promise<Note[]> => {
-  addSentryBreadcrumb('notes.split', 'fetching notes and reflections by verse', { verseKey });
+  addSentryBreadcrumb('notes.split', 'fetching notes by verse', { verseKey });
 
-  const [notesRes, reflectionsRes] = await Promise.allSettled([
-    privateFetcher(makeGetNotesByVerseUrl(verseKey)),
-    getReflectionsByVerseKey(verseKey),
-  ]);
+  const notes: Note[] = await privateFetcher(makeGetNotesByVerseUrl(verseKey));
 
-  const notes: Note[] =
-    notesRes.status === 'fulfilled' && Array.isArray(notesRes.value) ? notesRes.value : [];
-  const reflections: Note[] =
-    reflectionsRes.status === 'fulfilled' && reflectionsRes.value?.data
-      ? reflectionsRes.value.data.map(mapReflectionToNote)
-      : [];
-
-  logListFailures(notesRes, reflectionsRes, verseKey);
-
-  const merged = [...notes, ...reflections].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-  );
-
-  addSentryBreadcrumb('notes.split', 'merged notes and reflections list', {
+  addSentryBreadcrumb('notes.split', 'fetched notes', {
     notesCount: notes.length,
-    reflectionsCount: reflections.length,
-    totalCount: merged.length,
   });
 
-  return merged;
+  return notes;
 };
 
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
@@ -725,6 +679,15 @@ export const getQuranProgramWeek = async (
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
+};
+
+export const submitTranslationFeedback = async (params: {
+  translationId: number;
+  surahNumber: number;
+  ayahNumber: number;
+  feedback: string;
+}): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
+  return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
 const shouldRefreshToken = (error) => {

@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "Réponses",
   "aria": {
     "change-settings": "Modifier les paramètres",
     "drawer-close": "Fermer le tiroir",
@@ -93,7 +93,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "Ayahs",
-  "back": "",
+  "back": "Dos",
   "beta": "Bêta",
   "beyond-ramadan": "Progressez Au-Delà du Ramadan !",
   "bookmark": "Favori",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "Complétez votre inscription",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "Nous avons besoin des informations manquantes suivantes pour compléter votre inscription.",
+    "title": "Complétez votre inscription",
+    "verification-code": "Le code de vérification",
+    "verification-code-sent-to": "Code de vérification envoyé à {{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "Désolé, votre compte est banni. Veuillez contacter Quran.Foundation",
     "badRequest": "*Demande invalide",
     "banned": "*Désolé, votre compte est banni. Veuillez contacter Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "Échec de l'inscription. Veuillez réessayer.",
     "confirm": "*Les mots de passe saisis sont différents",
     "email": "*Format d'e-mail invalide !",
     "exactLength": "*La valeur doit contenir exactement le nombre de caractères requis",
@@ -219,7 +219,7 @@
     "translation-font-size": "Taille de police de la traduction"
   },
   "footer": {
-    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah",
+    "description": "Quran.com est une plateforme fiable utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et méditer sur le Coran en plusieurs langues. Elle propose des traductions, des tafsirs, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link> Quran.Foundation </link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdulillah.",
     "hiring": "Nous recrutons ! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
     "rights": "Tous droits réservés",
     "title": "Lire, Écouter, Rechercher et Méditer sur le Coran"
@@ -263,7 +263,7 @@
   "learning-plans": "Plans d'Apprentissage",
   "less": "Moins",
   "lessons": "Leçons",
-  "listen": "",
+  "listen": "Écouter",
   "loading": "Chargement",
   "login": "Se connecter",
   "logout": "Se déconnecter",
@@ -283,11 +283,11 @@
   "next-ayah": "Ayah Suivante",
   "no": "Non",
   "no-notifications": "Aucune notification pour l'instant",
-  "no-verses-available": "",
+  "no-verses-available": "Aucun verset disponible",
   "none": "Aucun",
   "not-now": "Pas maintenant",
   "notes": {
-    "label": "",
+    "label": "Notes",
     "title": "Mes notes et réflexions"
   },
   "notification-settings": "Paramètres de Notification",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
   },
   "share": "Partager",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "Le Prophète ﷺ a dit :",
+  "share-quran-description-line-2": "« Transmettez-moi, même si ce n'est qu'un seul verset. »",
+  "share-quran-description-line-3": "(Boukhari 3461)",
+  "share-quran-title": "Partagez le Coran !",
   "shared": "Le lien a été copié dans le presse-papiers !",
   "show-more": "Afficher plus",
   "sidebar": {

@@ -1,4 +1,4 @@
 {
-  "meta-description": "Leia e ouça a Surah {{transliteratedName}} . A Surah foi revelada em {{revelationPlace}} , ordenada {{chapterOrder}} no Alcorão. O título da surata significa \"{{translatedName}}\" em {{localeName}} e consiste em {{versesCount}} versos.",
+  "meta-description": "Leia e ouça a Surah {{transliteratedName}} . A Surah foi revelada em {{revelationPlace}} , ordenada {{chapterOrder}} no Quran. O título da Surah significa \"{{translatedName}}\" em {{localeName}} e consiste em {{versesCount}} versos.",
   "ranges-meta-desc": "Leia e ouça de Ayah {{rangeFrom}} a Ayah {{rangeTo}} ."
 }

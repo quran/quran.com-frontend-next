@@ -1,4 +1,18 @@
 {
+  "api-docs": {
+    "cta": "查看 API 文档",
+    "header": "API 文档",
+    "sub-header": "使用我们全面的 API 将 Quran.com 数据集成到您的应用程序中",
+    "title": "API 文档"
+  },
+  "app-portal": {
+    "cta-explore": "访问古兰经应用程序门户",
+    "cta-oauth": "请参阅 OAuth2 指南",
+    "description": "探索社区打造的最新体验，看看我们的平台能带来哪些可能性。",
+    "heading": "古兰经应用程序门户",
+    "oauth-pitch": "使用 Quran Foundation OAuth2 进行无缝登录，并将您的应用提交到 Quran Apps Portal 进行展示。",
+    "tagline": "展示您的古兰经应用程序"
+  },
   "careers": {
     "career": "工作机会",
     "cta": "查看职位",
@@ -6,11 +20,47 @@
   },
   "footer": "- Quran.com 团队",
   "header": "开发帮助",
+  "hero": {
+    "subtitle": "为构建古兰经体验的开发者提供资源、工具和指导。",
+    "title": "使用 Quran.com 进行建设"
+  },
   "issues-cta": "如果您有任何问题或想联系维护人员，只需写一个问题！我们会尽快回复您，inshAllah。",
   "issues-guide": "通常，我们使用<0>Github 项目</0>作为下一步工作的来源，即将发生的事情以及存在哪些需要解决的错误。例如<1>这个 url</1>包含错误列表、我们需要帮助的事情以及即将推出的功能。",
+  "labs": "实验室",
+  "labs-cta": "探索实验室",
+  "labs-description": "探索实验性功能和即将推出的创新。分享你的想法",
+  "labs-pitch": "分享您的想法，参与到古兰经学习和体验的未来发展中来。",
   "main-desc": "Asalamu Alykom，首先，非常感谢您有兴趣帮助我们开发 Quran.com 及其项目。我们很高兴与您合作！",
   "projects": {
     "all": "我们有许多项目都托管在 Github 上。您可以在<0>此处找到它们。 </0>但要概述它们：",
+    "items": {
+      "q-android": {
+        "description": "适用于手机和平板电脑的原生 Android 音乐播放器和音频播放器体验。",
+        "name": "古兰经安卓版",
+        "stack": "Kotlin 和 Java"
+      },
+      "q-api": {
+        "description": "为古兰经数据、搜索和翻译提供支持的 Ruby on Rails 后端。",
+        "name": "Quran.com API",
+        "stack": "Rails，PostgreSQL"
+      },
+      "q-audio": {
+        "description": "用于朗诵的音频流媒体平台和配套移动应用程序。",
+        "name": "古兰经音频",
+        "stack": "网页和移动应用"
+      },
+      "q-ios": {
+        "description": "基于 Swift 的古兰经阅读器，具有书签、朗诵和离线支持功能。",
+        "name": "古兰经 iOS",
+        "stack": "迅速"
+      },
+      "q-next": {
+        "description": "基于 Next.js 的网页体验，可用于阅读、搜索和收听《古兰经》。",
+        "name": "Quran.com 前端",
+        "stack": "使用 TypeScript 和 Next.js 构建"
+      }
+    },
+    "lead": "由 Quran.com 团队和社区维护的开源项目。",
     "q-android": "<0>古兰经安卓</0>",
     "q-api": "<0>Quran.com API</0> - 用 Ruby on Rails 编写。",
     "q-api-docs": "<0>Quran.com API 文档</0> - 我们的 API 文档门户。",

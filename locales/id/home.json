@@ -1,17 +1,17 @@
 {
-  "achieve-quran-goals": "Capailah Tujuan Anda dalam Membaca Al Quran",
+  "achieve-quran-goals": "Capai Tujuan berQuran Anda",
   "begin": "Mulai",
   "calendar-cta": "Kalender",
-  "chapters-and-verses": "Bab dan Ayat",
+  "chapters-and-verses": "Surah dan Ayat",
   "continue-read": "Lanjutkan Membaca",
   "explore-topics": "Jelajahi Topik",
   "first-time-reading": "Baru mengenal Al-Quran? <link> Mulai di sini </link>",
   "grow-beyond-ramadan": "Mari terus bertumbuh <modalLink> Selepas Ramadhan </modalLink>",
   "know-someone": "Berkembang bersama kami <modalLink> Ramadhan </modalLink> ini",
   "learning-plan": "Rencana Pembelajaran",
-  "listen-to-radio": "Dengarkan Radio Al-Quran",
+  "listen-to-radio": "Dengarkan Radio Al Quran",
   "my-quran": "Al Quran saya",
-  "navigate-quran": "Navigasi Al-Quran",
+  "navigate-quran": "Navigasi Al Quran",
   "no-bookmarks": "Anda belum memiliki penanda apa pun",
   "no-recently-read": "Anda belum memiliki sesi membaca apa pun",
   "noble-quran": "Al-Qur'an yang mulia",
@@ -19,7 +19,7 @@
   "qgj": {
     "learning-plans": {
       "cta": {
-        "all-plans": "Lihat Semua ",
+        "all-plans": "Lihat Semua",
         "my-plans": "Rencana Saya"
       },
       "desc": {
@@ -31,7 +31,7 @@
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Apakah Anda ingin membaca 10 menit sehari, menyelesaikan satu Juz dalam sebulan, atau menyelesaikan seluruh Al-Qur'an dalam setahun? Sangat mudah untuk membuat sasaran sendiri dan melacak kemajuan Anda"
+        "logged-out": "Ingin membaca 10 menit sehari, menyelesaikan satu Juz dalam sebulan, atau khatam Al Quran dalam setahun? Sangat mudah untuk membuat sasaran sendiri dan melacak kemajuan Anda"
       },
       "title": "Target Membaca Saya"
     },
@@ -39,10 +39,11 @@
   },
   "qr-community": "Baca Ayat dan Renungan Pilihan Hari Ini",
   "quran-in-year": "Al Quran dalam Setahun",
-  "quran-in-year-cta": "Bacaan Minggu Ini",
-  "ramadan-activities-cta": "<link> Ikuti <b> Kalender Al-Quran Global </b> untuk bacaan mingguan, podcast yang menginspirasi, dan ajakan untuk berefleksi! </link>",
+  "quran-in-year-cta": "Bacaan Pekan Ini",
+  "quran-in-year-verse-title": "Sebuah ayat dari bacaan minggu ini",
+  "ramadan-activities-cta": "<link> Ikuti <b> Kalender Al-Quran Global </b> untuk bacaan pekanan, podcast yang menginspirasi, dan ajakan untuk berefleksi! </link>",
   "ramadan": {
-    "header": "Alat untuk Memperdalam Hubungan Anda dengan Al-Quran",
+    "header": "Alat untuk Memperdalam Hubungan Anda dengan Al Quran",
     "title": "Siap untuk Ramadan?"
   },
   "read-juz": "Baca Juz",
@@ -52,7 +53,7 @@
   "set-custom-goal": "Tetapkan Tujuan",
   "share-quran": {
     "description": "Bantu sebarkan Al Quran ke pelajar baru",
-    "title": "Bagikan Al-Quran!"
+    "title": "Sebarkan Al Quran!"
   },
   "start-read": "Mulai Membaca",
   "stay-consistent": "Lacak Rekor, Buat Sasaran Khusus, Tetap Konsisten",
@@ -60,7 +61,7 @@
     "bookmarks": "Penanda",
     "popular": "Populer"
   },
-  "take-notes": "Apakah Anda kehilangan <modalLink> Catatan? </modalLink>",
+  "take-notes": "Sudahkan Anda membuat  <modalLink> Catatan? </modalLink>",
   "view-all-bookmarks": "Lihat semua Penanda",
   "voice": {
     "trigger": "Akses cepat ke semuanya"

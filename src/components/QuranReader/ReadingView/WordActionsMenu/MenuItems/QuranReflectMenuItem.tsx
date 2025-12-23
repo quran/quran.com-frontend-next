@@ -44,7 +44,12 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
     <>
       <PopoverMenu.Item
         icon={
-          <IconContainer icon={<ChatIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          <IconContainer
+            icon={<ChatIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
         }
         onClick={onMenuItemClicked}
       >
@@ -53,6 +58,7 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
       <ReflectionBodyContainer
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
+        isModal
         scrollToTop={() => {
           contentModalRef.current?.scrollToTop();
         }}

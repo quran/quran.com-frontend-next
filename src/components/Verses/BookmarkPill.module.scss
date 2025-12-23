@@ -14,7 +14,7 @@
 .closeIconContainer {
   display: flex;
   border: none;
-  width: var(--spacing-xsmall);
+  inline-size: var(--spacing-xsmall);
   box-sizing: border-box;
   justify-content: center;
   padding-inline-start: var(--spacing-small);
@@ -22,13 +22,22 @@
   background-color: transparent;
   color: var(--color-text-faded);
   align-items: center;
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+    opacity: var(--opacity-50);
+  }
   & > span {
     display: flex;
     align-items: center;
     justify-content: center;
   }
   & svg {
-    width: var(--spacing-medium);
-    height: var(--spacing-medium);
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
   }
+}
+
+.deleting {
+  opacity: var(--opacity-50);
 }
