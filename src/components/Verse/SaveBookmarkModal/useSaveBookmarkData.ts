@@ -100,7 +100,6 @@ export const useSaveBookmarkData = ({
     isLoggedIn() && isVerse ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null,
     () =>
       getCollectionsList({
-        type: BookmarkType.Ayah,
         sortBy: CollectionListSortOption.Alphabetical,
       }),
   );
