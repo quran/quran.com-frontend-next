@@ -14,6 +14,23 @@ import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
+/**
+ * Cache key path patterns for bookmark-related API endpoints.
+ * Used for pattern-based cache invalidation with SWR's globalMutate.
+ */
+export const BOOKMARK_CACHE_PATHS = {
+  /** Bulk bookmark fetch for reader pages (e.g., bookmarks/ayahs-range?...) */
+  AYAHS_RANGE: 'bookmarks/ayahs-range?',
+  /** Single bookmark check (e.g., bookmarks/bookmark?...) */
+  BOOKMARK: 'bookmarks/bookmark?',
+  /** Bookmarks list (e.g., /bookmarks?...) */
+  BOOKMARKS_LIST: '/bookmarks?',
+  /** Collections list (e.g., /collections?...) */
+  COLLECTIONS: '/collections?',
+  /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
+  BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
+} as const;
+
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return getProxiedServiceUrl(QuranFoundationService.AUTH, `/${url}`);
@@ -39,6 +56,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -59,8 +78,8 @@ export const makeSignInUrl = (): string => makeUrl('users/login');
 
 export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
-export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
-  makeUrl('bookmarks', { mushafId, limit });
+export const makeBookmarksUrl = (mushafId: number, limit?: number, type?: BookmarkType): string =>
+  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }) });
 
 export type CollectionsQueryParams = {
   cursor?: string;
@@ -140,7 +159,16 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+};
+
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
+  const { languages, ...restParams } = params || {};
+  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
+  return makeUrl('courses', queryParams);
+};
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
@@ -279,3 +307,11 @@ export const makeEnrollUserInQuranProgramUrl = (): string =>
 
 export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
+
+/**
+ * Compose the URL for the translation feedback API endpoint.
+ * This endpoint is used for submitting user feedback about translations.
+ *
+ * @returns {string} The complete URL for the translation feedback API
+ */
+export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');

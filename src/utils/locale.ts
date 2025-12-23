@@ -10,6 +10,7 @@ import { getBasePath } from './url';
 import Language from '@/types/Language';
 
 const RTL_LOCALES = [Language.AR, Language.FA, Language.UR];
+
 const LOCALE_NAME = {
   [Language.EN]: 'English',
   [Language.AR]: 'العربية',
@@ -401,6 +402,21 @@ export const localizeNumericalStringWithSplitter = (
  */
 export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
   localizeNumericalStringWithSplitter(verseKey, lang);
+
+/**
+ * Reverses the verse key order from chapter:verse to verse:chapter for RTL display,
+ * then localizes the numbers.
+ *
+ * @param {string} verseKey - The verse key in "chapter:verse" format (e.g., "3:1").
+ * @param {string} lang - The target language for number localization.
+ * @returns {string} The localized verse key in "verse:chapter" order (e.g., "١:٣" for Arabic).
+ */
+export const toLocalizedVerseKeyRTL = (verseKey: string, lang: string): string =>
+  verseKey
+    .split(':')
+    .reverse()
+    .map((value: string) => toLocalizedNumber(Number(value), lang))
+    .join(':');
 
 /**
  * Get the localized value of a range e.g. "1-20"

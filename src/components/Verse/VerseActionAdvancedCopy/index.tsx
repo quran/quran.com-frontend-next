@@ -62,6 +62,7 @@ const VerseActionAdvancedCopy = ({
             icon={<AdvancedCopyIcon />}
             color={IconColor.tertiary}
             size={IconSize.Custom}
+            shouldFlipOnRTL={false}
           />
         }
         onClick={onModalOpen}

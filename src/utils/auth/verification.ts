@@ -1,6 +1,9 @@
 import { completeSignup, requestVerificationCode } from './api';
 import { makeUserProfileUrl } from './apiPaths';
 
+import { persistCurrentSettings } from '@/redux/slices/defaultSettings';
+import store from '@/redux/store';
+
 /**
  * Handles the verification code submission process
  *
@@ -18,6 +21,11 @@ export const handleVerificationCodeSubmit = async (email: string, verificationCo
   if (!response) {
     throw new Error('Invalid verification code');
   }
+
+  // Persist the current settings to the user's profile
+  // TODO: we should get the locale from Redux state instead of passing it as an argument.
+  // @ts-ignore
+  await store.dispatch(persistCurrentSettings());
 
   return {
     response,

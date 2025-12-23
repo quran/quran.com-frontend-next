@@ -8,8 +8,8 @@ test('desktop: settings gear opens the settings drawer', async ({ page }) => {
   await expect(settingsButtons.last()).toBeVisible();
   await settingsButtons.last().click();
 
-  await expect(page.locator('#settings-drawer-container')).toBeVisible();
-  await expect(page.locator('#settings-drawer-body')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
 });
 
 test('mobile: gear works before and after scroll (navbar hidden)', async ({ page }) => {
@@ -19,11 +19,11 @@ test('mobile: gear works before and after scroll (navbar hidden)', async ({ page
   const settingsButtons = page.locator('#settings-button');
   await expect(settingsButtons.first()).toBeVisible();
   await settingsButtons.first().click();
-  await expect(page.locator('#settings-drawer-container')).toBeVisible();
-  await expect(page.locator('#settings-drawer-body')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
 
   await page
-    .locator('#settings-drawer-container')
+    .getByTestId('settings-drawer')
     .getByRole('button', { name: /close drawer/i })
     .first()
     .click();
@@ -32,6 +32,6 @@ test('mobile: gear works before and after scroll (navbar hidden)', async ({ page
 
   await expect(settingsButtons.last()).toBeVisible();
   await settingsButtons.last().click();
-  await expect(page.locator('#settings-drawer-container')).toBeVisible();
-  await expect(page.locator('#settings-drawer-body')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer')).toBeVisible();
+  await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
 });

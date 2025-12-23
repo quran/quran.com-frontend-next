@@ -6,5 +6,27 @@
     "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
     "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
     "title": "Are you absolutely sure?"
+  },
+  "my-profile": "My Profile",
+  "personalization": "Personalization",
+  "profile-picture": "Profile Picture",
+  "max-file-size": "Max {{size}}",
+  "allowed-formats": "Only {{formats}}",
+  "upload-picture": "Upload Picture",
+  "save-picture": "Save Picture",
+  "remove-picture": "Remove Picture",
+  "upload-success": "Profile picture uploaded successfully",
+  "remove-success": "Profile picture removed successfully",
+  "edit-details": "Edit Details",
+  "save-changes": "Save Changes",
+  "change-password": "Change Password",
+  "update-password": "Update Password",
+  "success": {
+    "details": "Your details have been updated successfully",
+    "password": "Your password has been updated successfully"
+  },
+  "errors": {
+    "upload-failed": "Failed to upload profile picture. Please try again.",
+    "remove-failed": "Failed to remove profile picture. Please try again."
   }
 }

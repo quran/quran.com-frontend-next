@@ -1,21 +1,87 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
 
 .listItemsContainer {
-  padding-inline-start: var(--spacing-medium);
-  padding-inline-end: var(--spacing-medium);
-  padding-block-end: calc(5 * var(--spacing-mega));
+  height: 100%;
+  position: relative;
+  overflow: hidden !important;
+  /* Fallback for browsers without dynamic viewport units */
+  max-height: calc(100vh - var(--navbar-height));
+  /* Prefer dynamic viewport units where supported */
+  max-height: calc(100dvh - var(--navbar-height));
 }
 
-.subtitle {
-  @include utility.center-vertically;
-  font-size: var(--font-size-xsmall);
-  text-transform: uppercase;
-  font-weight: var(--font-weight-bold);
-  border-block-end: 1px var(--color-borders-hairline) solid;
-  min-height: calc(var(--spacing-mega) + var(--spacing-small));
+.mainListItems {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  overflow: hidden !important;
+  height: 100%;
+  min-height: 0;
+
+  &.hide {
+    pointer-events: none;
+  }
+}
+
+.listItems {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--spacing-medium3-px);
+  padding-block: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large2-px);
+  user-select: none;
 }
 
 .projectsDesc {
-  font-size: var(--font-size-small);
-  margin-block-start: var(--spacing-small);
+  font-size: var(--font-size-xxsmall-px);
+  margin-block-end: var(--spacing-small-px);
+  padding-inline-start: var(--spacing-large-px);
+}
+
+.accordionHeaderLeft {
+  gap: var(--spacing-xxsmall-px);
+  align-items: center;
+}
+
+.accordionContent {
+  margin-block-start: var(--spacing-medium2-px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+  > a {
+    padding-inline-start: var(--spacing-large-px);
+  }
+}
+
+.accordionItemTitle {
+  font-weight: var(--font-weight-normal);
+}
+
+.ctaContainer {
+  padding: var(--spacing-medium2-px) var(--spacing-medium3-px);
+}
+
+.ctaTop {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-small-px);
+  margin-block-end: var(--spacing-small-px);
+}
+
+.ctaDonateButton {
+  width: 100%;
+}
+
+.languageTrigger {
+  width: 100%;
+  justify-content: center;
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  cursor: pointer;
+
+  svg path {
+    stroke: var(--color-text-default);
+  }
 }
