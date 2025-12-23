@@ -32,33 +32,24 @@ vi.mock('@/dls/IconContainer/IconContainer', () => ({
 describe('BookmarkIcon', () => {
   it('renders spinner when loading', async () => {
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
-    render(
-      <BookmarkIcon
-        isLoading
-        isBookmarked={false}
-        isReadingBookmark={false}
-        isCollectionBookmarked={false}
-      />,
-    );
+    render(<BookmarkIcon isLoading isBookmarked={false} isReadingBookmark={false} />);
     expect(screen.getByTestId('spinner')).toBeDefined();
   });
 
   it('renders combined icon when reading bookmark and other bookmark present', async () => {
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
-    render(
-      <BookmarkIcon isLoading={false} isBookmarked isReadingBookmark isCollectionBookmarked />,
-    );
+    render(<BookmarkIcon isLoading={false} isBookmarked isReadingBookmark />);
     expect(screen.getByTestId('icon-reading-and-other')).toBeDefined();
   });
 
-  it('renders multiple icon when bookmarked and in collection', async () => {
+  it('renders multiple icon when verse is bookmarked in multiple collections', async () => {
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
     render(
       <BookmarkIcon
         isLoading={false}
-        isBookmarked
+        isBookmarked={false}
         isReadingBookmark={false}
-        isCollectionBookmarked
+        isVerseMultipleBookmarked
       />,
     );
     expect(screen.getByTestId('icon-multiple')).toBeDefined();
@@ -78,18 +69,11 @@ describe('BookmarkIcon', () => {
 
   it('renders unbookmarked icon when no states active', async () => {
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
-    render(
-      <BookmarkIcon
-        isLoading={false}
-        isBookmarked={false}
-        isReadingBookmark={false}
-        isCollectionBookmarked={false}
-      />,
-    );
+    render(<BookmarkIcon isLoading={false} isBookmarked={false} isReadingBookmark={false} />);
     expect(screen.getByTestId('icon-container')).toBeDefined();
   });
 
-  it('renders icon new when only collection is bookmarked', async () => {
+  it('renders multiple icon when only verse is bookmarked in multiple collections', async () => {
     cleanup();
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
     render(
@@ -97,23 +81,16 @@ describe('BookmarkIcon', () => {
         isLoading={false}
         isBookmarked={false}
         isReadingBookmark={false}
-        isCollectionBookmarked
+        isVerseMultipleBookmarked
       />,
     );
-    expect(screen.getByTestId('icon-new')).toBeDefined();
+    expect(screen.getByTestId('icon-multiple')).toBeDefined();
   });
 
   it('unbookmarked icon container has correct props', async () => {
     cleanup();
     const { default: BookmarkIcon } = await import('./BookmarkIcon');
-    render(
-      <BookmarkIcon
-        isLoading={false}
-        isBookmarked={false}
-        isReadingBookmark={false}
-        isCollectionBookmarked={false}
-      />,
-    );
+    render(<BookmarkIcon isLoading={false} isBookmarked={false} isReadingBookmark={false} />);
     const container = screen.getByTestId('icon-container');
     expect(container.getAttribute('color')).toBe('tertiary');
   });
