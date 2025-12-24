@@ -12,6 +12,7 @@
 }
 
 .overlay {
+  scrollbar-gutter: stable both-edges;
   @include breakpoints.smallerThanTablet {
     place-items: end;
   }
@@ -19,6 +20,7 @@
 
 .content {
   max-width: constants.$translation-feedback-modal-max-width;
+  overflow-y: auto;
 
   @include breakpoints.smallerThanTablet {
     height: auto;

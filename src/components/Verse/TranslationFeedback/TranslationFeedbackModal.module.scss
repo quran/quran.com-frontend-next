@@ -1,9 +1,16 @@
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-medium2);
 
   margin-block-start: var(--spacing-medium2);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall);
+  }
 }
 
 .inputGroup {
@@ -29,6 +36,7 @@
 
   textarea {
     padding: var(--spacing-xsmall);
+    block-size: constants.$translation-feedback-textarea-height;
 
     &:focus::placeholder {
       color: transparent;
