@@ -35,6 +35,9 @@ const LOCALE_NAME = {
   [Language.UZ]: "o'zbek",
   [Language.ES]: 'Español',
   [Language.SW]: 'Kiswahili',
+  [Language.DV]: 'ދިވެހި',
+  [Language.ML]: 'മലയാളം',
+  [Language.SD]: 'سنڌي',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -73,6 +76,7 @@ export enum Direction {
   RTL = 'rtl',
 }
 
+// Map of language id (on tools) to language data
 export const Languages = {
   9: {
     // Arabic,
