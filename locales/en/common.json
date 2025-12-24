@@ -189,6 +189,7 @@
     "invalid": "*This {{fieldName}} is invalid",
     "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",
     "invalidEmailOrPassword": "*Invalid email or password",
+    "verse-metadata-failed": "Failed to load verse metadata",
     "max": "*{{fieldName}} must be less than or equal to {{max}} digits",
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",

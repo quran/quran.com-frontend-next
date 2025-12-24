@@ -20,6 +20,7 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedDate } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import TEST_IDS from '@/utils/test-ids';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const RecentContent = () => {
@@ -32,7 +33,7 @@ const RecentContent = () => {
 
   const recentItems = recentlyReadVerseKeys
     .map((verseKey, index) => ({ verseKey, timestamp: timestamps?.[index] }))
-    .filter(({ timestamp }) => timestamp instanceof Date)
+    .filter(({ timestamp }) => timestamp && timestamp instanceof Date)
     .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
     .slice(0, 10);
 
@@ -61,7 +62,8 @@ const RecentContent = () => {
             href={verseUrl}
             onClick={() => handleRecentContentClick(verseKey)}
             className={styles.recentContentItem}
-            data-testid="recent-content-item"
+            data-testid={TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM}
+            aria-label={t('recent-read-verse', { verseKey })}
           >
             <ChapterIconContainer
               chapterId={chapterId.toString()}

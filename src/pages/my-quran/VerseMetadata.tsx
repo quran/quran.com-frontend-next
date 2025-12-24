@@ -16,10 +16,14 @@ interface VerseMetadataProps {
 const VerseMetadata = ({ verseKey, mushafId }: VerseMetadataProps) => {
   const { t } = useTranslation('common');
 
-  const { data } = useSWR<VerseResponse>(
+  const { data, error } = useSWR<VerseResponse>(
     makeByVerseKeyUrl(verseKey, { mushaf: mushafId }),
     fetcher,
   );
+
+  if (error) {
+    return <p>{t('error.verse-metadata-failed')}</p>;
+  }
 
   if (!data || !data.verse) {
     return <Skeleton className={styles.skeleton} />;

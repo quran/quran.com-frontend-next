@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { clickRecentTab, navigateToVerse } from '@/tests/helpers/my-quran/recent-content';
+import TEST_IDS from '@/utils/test-ids';
 
 test.describe('My Quran - Recent Content (Logged In)', () => {
   test(
@@ -11,7 +12,9 @@ test.describe('My Quran - Recent Content (Logged In)', () => {
       await page.goto('/my-quran', { waitUntil: 'networkidle' });
       await clickRecentTab(page);
 
-      const recentItem = page.getByTestId('recent-content-item').first();
+      const recentItem = page
+        .getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM)
+        .first();
       await expect(recentItem).toBeVisible();
       await expect(recentItem.getByText('Al-Baqarah')).toBeVisible();
 

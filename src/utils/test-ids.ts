@@ -24,6 +24,11 @@ const TEST_IDS = {
       CONFIRM_NEW_PASSWORD_INPUT: 'auth-update-profile-confirm-new-password-input',
     },
   },
+  MY_QURAN: {
+    RECENT_CONTENT: {
+      RECENT_CONTENT_ITEM: 'my-quran-recent-content-item',
+    },
+  },
 };
 
 export default TEST_IDS;

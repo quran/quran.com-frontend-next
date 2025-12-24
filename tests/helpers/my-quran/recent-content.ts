@@ -20,10 +20,10 @@ export const clickRecentTab = async (page: Page): Promise<void> => {
 export const navigateToVerse = async (page: Page, verseKey: string): Promise<void> => {
   await page.goto(`/${verseKey}`, { waitUntil: 'networkidle' });
 
-  await page.waitForTimeout(2000);
-  await page.mouse.wheel(0, 100);
+  const verseElement = page.getByTestId(`verse-${verseKey}`);
+  await expect(verseElement).toBeVisible();
 
-  await page.waitForTimeout(2000);
+  await verseElement.scrollIntoViewIfNeeded();
 };
 
 /**
@@ -39,12 +39,15 @@ export const navigateToVerses = async (
   for (const verseKey of verseKeys) {
     // eslint-disable-next-line no-await-in-loop
     await homePage.goTo(`/${verseKey}`);
+
+    const verseElement = homePage.page.getByTestId(`verse-${verseKey}`);
+    // eslint-disable-next-line no-await-in-loop
+    await expect(verseElement).toBeVisible();
+
     if (isMobile) {
       // eslint-disable-next-line no-await-in-loop
       await homePage.page.mouse.wheel(0, 100);
     }
-    // eslint-disable-next-line no-await-in-loop
-    await homePage.page.waitForTimeout(100);
   }
 };
 
@@ -59,9 +62,11 @@ export const navigateToVerseAndWaitForTracking = async (
 ): Promise<void> => {
   await homePage.goTo(`/${verseKey}`);
 
+  const verseElement = homePage.page.getByTestId(`verse-${verseKey}`);
+  await expect(verseElement).toBeVisible();
+
   if (isMobile) {
-    await homePage.page.waitForTimeout(1500);
-    await homePage.page.mouse.wheel(0, 100);
+    await verseElement.scrollIntoViewIfNeeded();
   }
 
   await expect
