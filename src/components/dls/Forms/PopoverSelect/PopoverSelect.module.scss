@@ -13,7 +13,7 @@ $max-list-height: 15rem;
   white-space: nowrap;
   border: none;
   cursor: pointer;
-  background: var(--color-background-alternative-faded);
+  background: var(--color-background-alternative-faint);
   color: var(--color-text-default);
   font-size: var(--font-size-normal);
   text-align: start;
@@ -24,8 +24,8 @@ $max-list-height: 15rem;
   box-sizing: border-box;
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 2px;
+    background: var(--color-background-alternative-medium);
+    outline: none;
   }
 }
 
