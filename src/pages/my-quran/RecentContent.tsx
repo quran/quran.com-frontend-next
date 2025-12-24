@@ -44,7 +44,9 @@ const RecentContent = () => {
   if (recentItems.length === 0) {
     return (
       <div className={styles.recentContentContainer}>
-        <p className={styles.emptyState}>{t('recent-empty')}</p>
+        <p className={styles.emptyState} data-testid={TEST_IDS.MY_QURAN.RECENT_CONTENT.EMPTY_STATE}>
+          {t('recent-empty')}
+        </p>
       </div>
     );
   }

@@ -22,7 +22,7 @@ test.describe('My Quran - Recent Content (Guest)', () => {
     async ({ page }) => {
       await homePage.goTo('/my-quran');
       await clickRecentTab(page);
-      await expect(page.getByText('Start reading to see your recently read')).toBeVisible();
+      await expect(page.getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.EMPTY_STATE)).toBeVisible();
     },
   );
 

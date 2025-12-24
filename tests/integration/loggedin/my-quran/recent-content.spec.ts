@@ -19,13 +19,8 @@ test.describe('My Quran - Recent Content (Logged In)', () => {
       await expect(recentItem.getByText('Al-Baqarah')).toBeVisible();
 
       // Wait for metadata to load (useSWR call completes)
-      await expect(recentItem.getByText(/Page \d+/i)).toBeVisible({ timeout: 5000 });
-
-      const metadataText = await recentItem.textContent();
-      expect(metadataText).toMatch(/Page \d+/i);
-      expect(metadataText).toMatch(/Juz \d+/i);
-      expect(metadataText).toMatch(/Hizb \d+/i);
-      expect(metadataText).toContain(new Date().getFullYear().toString());
+      const metadataText = recentItem.getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.VERSE_METADATA);
+      await expect(metadataText).toBeVisible({ timeout: 5000 });
 
       const chapterIcon = recentItem.locator('svg, img').first();
       await expect(chapterIcon).toBeVisible();

@@ -27,6 +27,8 @@ const TEST_IDS = {
   MY_QURAN: {
     RECENT_CONTENT: {
       RECENT_CONTENT_ITEM: 'my-quran-recent-content-item',
+      EMPTY_STATE: 'my-quran-recent-content-empty-state',
+      VERSE_METADATA: 'my-quran-recent-content-verse-metadata',
     },
   },
 };
