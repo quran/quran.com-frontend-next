@@ -2,13 +2,9 @@
 @use 'src/styles/constants';
 
 .title {
-  font-size: var(--font-size-xlarge);
+  font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-
-  @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-large2);
-  }
 }
 
 .overlay {
@@ -19,12 +15,12 @@
 }
 
 .content {
-  max-width: constants.$translation-feedback-modal-max-width;
-  overflow-y: auto;
+  max-inline-size: constants.$translation-feedback-modal-max-width;
 
   @include breakpoints.smallerThanTablet {
-    height: auto;
-    max-height: 100%;
-    padding-bottom: var(--spacing-large);
+    block-size: auto;
+    overflow-y: auto;
+    max-block-size: 100%;
+    padding-block-end: var(--spacing-large);
   }
 }

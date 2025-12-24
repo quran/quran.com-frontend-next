@@ -7,7 +7,7 @@ import TranslationPreview from './TranslationPreview';
 import useTranslationFeedbackForm from './useTranslationFeedbackForm';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
-import Select from '@/dls/Forms/Select';
+import PopoverSelect from '@/dls/Forms/PopoverSelect';
 import TextArea from '@/dls/Forms/TextArea';
 import { WordVerse } from '@/types/Word';
 
@@ -35,14 +35,14 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
       <div className={styles.inputGroup}>
         <label htmlFor="translation-select">{t('translation-feedback.select-translation')}</label>
 
-        <Select
+        <PopoverSelect
           id="translation-select"
           name="translation-select"
           options={selectOptions}
           value={selectedTranslationId}
-          className={styles.selectContainer}
           placeholder={t('translation-feedback.select')}
           onChange={handleTranslationChange}
+          fullWidth
         />
 
         {errors.translation && <div className={styles.error}>{errors.translation}</div>}
