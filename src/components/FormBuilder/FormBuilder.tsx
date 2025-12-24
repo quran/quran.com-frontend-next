@@ -57,7 +57,12 @@ const FormBuilder = <T,>({
   renderAction,
   shouldSkipValidation,
 }: FormBuilderProps<T>) => {
-  const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { isValid, isDirty },
+  } = useForm({ mode: 'onChange' });
 
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
@@ -80,6 +85,8 @@ const FormBuilder = <T,>({
       ? formField.extraSection(value)
       : formField.extraSection;
   };
+
+  const isDisabled = shouldSkipValidation ? isSubmitting : !isDirty || !isValid || isSubmitting;
 
   return (
     <form
@@ -150,6 +157,7 @@ const FormBuilder = <T,>({
         renderAction({
           htmlType: 'submit',
           isLoading: isSubmitting,
+          isDisabled,
           onClick: (e) => {
             e.stopPropagation();
           },
@@ -159,6 +167,7 @@ const FormBuilder = <T,>({
           {...actionProps}
           htmlType="submit"
           isLoading={isSubmitting}
+          isDisabled={isDisabled}
           onClick={(e) => {
             e.stopPropagation();
           }}
