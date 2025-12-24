@@ -1,19 +1,28 @@
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import type { Preferences } from '@/components/AyahWidget/builder/types';
 import BuilderConfigForm from '@/components/AyahWidget/BuilderConfigForm';
 import BuilderPreview from '@/components/AyahWidget/BuilderPreview';
+import useThemeDetector from '@/hooks/useThemeDetector';
 import useAyahWidgetPreview from '@/hooks/widget/useAyahWidgetPreview';
 import useAyahWidgetReciters from '@/hooks/widget/useAyahWidgetReciters';
 import useAyahWidgetSurahs from '@/hooks/widget/useAyahWidgetSurahs';
 import useAyahWidgetTranslations from '@/hooks/widget/useAyahWidgetTranslations';
+import { selectReadingPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ThemeType from '@/redux/types/ThemeType';
 import styles from '@/styles/ayah-widget.module.scss';
+import { QuranFont, WordByWordType } from '@/types/QuranReader';
+import { areArraysEqual } from '@/utils/array';
 import type AvailableTranslation from 'types/AvailableTranslation';
+import type { MushafType } from 'types/ayah-widget';
 
 // Default values for the Ayah Widget Builder
 const DEFAULTS = {
@@ -53,6 +62,27 @@ const INITIAL_PREFERENCES: Preferences = {
     width: '100%',
     height: '',
   },
+};
+
+/**
+ * Map the selected Quran font (reader setting) to the widget mushaf option.
+ * @param {QuranFont} quranFont The selected Quran font.
+ * @returns {MushafType} The corresponding mushaf type for the widget.
+ */
+const getMushafFromQuranFont = (quranFont: QuranFont): MushafType => {
+  switch (quranFont) {
+    case QuranFont.MadaniV1:
+      return 'kfgqpc_v1';
+    case QuranFont.MadaniV2:
+      return 'kfgqpc_v2';
+    case QuranFont.IndoPak:
+      return 'indopak';
+    case QuranFont.TajweedV4:
+    case QuranFont.Tajweed:
+      return 'tajweed';
+    default:
+      return 'qpc';
+  }
 };
 
 /**
@@ -125,6 +155,31 @@ function groupTranslationsByLanguage(
 function makeVerseOptions(versesCount?: number): number[] {
   if (!versesCount || versesCount < 1) return [];
   return Array.from({ length: versesCount }, (unused, i) => i + 1);
+}
+
+type SetState<T> = Dispatch<SetStateAction<T>>;
+
+/**
+ * Sync a preference field from an external source unless the user already changed it.
+ */
+function useSyncPreferenceField<
+  TPreferences extends Record<string, unknown>,
+  K extends keyof TPreferences,
+>(externalValue: TPreferences[K], setPreferences: SetState<TPreferences>, field: K): void {
+  const lastExternalRef = useRef(externalValue);
+
+  useEffect(() => {
+    const prevExternal = lastExternalRef.current;
+    if (Object.is(externalValue, prevExternal)) return;
+
+    lastExternalRef.current = externalValue;
+
+    setPreferences((prev) => {
+      const userDidNotOverride = Object.is(prev[field], prevExternal);
+      if (!userDidNotOverride) return prev;
+      return { ...prev, [field]: externalValue };
+    });
+  }, [externalValue, field, setPreferences]);
 }
 
 /**
@@ -219,18 +274,48 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
 }
 
 const AyahWidgetBuilderPage = () => {
-  const { t } = useTranslation('ayah-widget');
+  const { t, lang } = useTranslation('ayah-widget');
 
-  const [preferences, setPreferences] = useState<Preferences>(INITIAL_PREFERENCES);
+  // Redux selectors and memoized values
+  const { themeVariant, settingsTheme } = useThemeDetector();
+  const selectedTranslationIdsFromRedux = useSelector(selectSelectedTranslations);
+  const quranFont = useSelector(selectQuranFont);
+  const readingPreferences = useSelector(selectReadingPreferences);
+
+  // Find the default resolved theme for the widget
+  const resolvedTheme = useMemo(
+    () => (settingsTheme.type === ThemeType.Auto ? themeVariant : settingsTheme.type),
+    [settingsTheme.type, themeVariant],
+  );
+  // Map the selected Quran font to the widget mushaf option
+  const mushafFromFont = useMemo(() => getMushafFromQuranFont(quranFont), [quranFont]);
+  // Determine if word-by-word translation should be enabled based on reading preferences
+  const shouldEnableWbwTranslation = readingPreferences.wordByWordContentType.includes(
+    WordByWordType.Translation,
+  );
+
+  // Builder preferences state
+  const [preferences, setPreferences] = useState<Preferences>(() => ({
+    ...INITIAL_PREFERENCES,
+    theme: resolvedTheme,
+    locale: lang,
+    mushaf: mushafFromFont,
+    enableWbwTranslation: shouldEnableWbwTranslation,
+  }));
+  useSyncPreferenceField(resolvedTheme, setPreferences, 'theme');
+  useSyncPreferenceField(lang, setPreferences, 'locale');
+  useSyncPreferenceField(mushafFromFont, setPreferences, 'mushaf');
+  useSyncPreferenceField(shouldEnableWbwTranslation, setPreferences, 'enableWbwTranslation');
 
   // Remote data sources used by the builder
-  const surahs = useAyahWidgetSurahs();
-  const translations = useAyahWidgetTranslations();
+  const surahs = useAyahWidgetSurahs(preferences.locale);
+  const translations = useAyahWidgetTranslations(preferences.locale);
   const reciters = useAyahWidgetReciters(undefined, DEFAULTS.reciterId);
 
   // UI state
   const [translationSearch, setTranslationSearch] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
+  const hasUserUpdatedTranslationsRef = useRef(false);
 
   // CSV of selected translation IDs: "131,20,17"
   const translationIdsCsv = useMemo(
@@ -242,20 +327,42 @@ const AyahWidgetBuilderPage = () => {
   const previewRef = useAyahWidgetPreview({ preferences, translationIds: translationIdsCsv });
 
   /**
-   * When translations are loaded, auto-select the default translation if none selected yet.
+   * When translations are loaded, initialize selection from the user's current settings.
    */
   useEffect(() => {
     if (!translations.length) return;
+    if (hasUserUpdatedTranslationsRef.current) return;
+
+    const selectedIds = selectedTranslationIdsFromRedux.filter(
+      (id): id is number => typeof id === 'number',
+    );
+    const selectedSet = new Set(selectedIds);
+    let nextTranslations = selectedSet.size
+      ? translations.filter((tr) => selectedSet.has(tr.id))
+      : [];
+
+    if (selectedSet.size && !nextTranslations.length) {
+      const fallback = translations.find((tr) => tr.id === DEFAULTS.translationId);
+      if (fallback) {
+        nextTranslations = [fallback];
+      }
+    }
 
     setPreferences((prev) => {
-      if (prev.translations.length) return prev;
+      const prevIds = prev.translations
+        .map((translation) => translation.id)
+        .filter((id): id is number => typeof id === 'number');
+      const nextIds = nextTranslations
+        .map((translation) => translation.id)
+        .filter((id): id is number => typeof id === 'number');
 
-      const defaultTranslation = translations.find((tr) => tr.id === DEFAULTS.translationId);
-      if (!defaultTranslation) return prev;
+      if (areArraysEqual(prevIds, nextIds)) {
+        return prev;
+      }
 
-      return { ...prev, translations: [defaultTranslation] };
+      return { ...prev, translations: nextTranslations };
     });
-  }, [translations]);
+  }, [translations, selectedTranslationIdsFromRedux]);
 
   /**
    * If the user changes Surah, ensure the selected Ayah remains valid.
@@ -326,6 +433,7 @@ const AyahWidgetBuilderPage = () => {
    * Toggle a translation selection on/off.
    */
   const toggleTranslation = useCallback((translation: AvailableTranslation) => {
+    hasUserUpdatedTranslationsRef.current = true;
     setPreferences((prev) => {
       const exists = prev.translations.some((selected) => selected.id === translation.id);
 

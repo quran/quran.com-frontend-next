@@ -35,8 +35,7 @@
   },
   "translations": {
     "otherLanguage": "Other",
-    "chipRemoveLabel": "Remove translation",
-    "chipRemoveSymbol": "×"
+    "chipRemoveLabel": "Remove translation"
   },
   "reciters": {
     "select": "Select reciter",
