@@ -53,8 +53,14 @@ const openTranslationFeedbackModal = async (
  * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
-  const translationSelect = page.getByTestId('translation-select');
-  await translationSelect.selectOption(translationId);
+  // Click the popover select trigger to open the dropdown
+  const translationSelectTrigger = page.getByTestId('popover-select-trigger');
+  await translationSelectTrigger.click();
+
+  // Click the desired option
+  const option = page.getByTestId(`popover-select-option-${translationId}`);
+  await expect(option).toBeVisible();
+  await option.click();
 };
 
 test.beforeEach(async ({ page, context }) => {
@@ -117,12 +123,16 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Check translation dropdown
-      const translationSelect = page.getByTestId('translation-select');
+      const translationSelect = page.getByTestId('popover-select-trigger');
       await expect(translationSelect).toBeVisible();
+
+      // Open the popover to see options
+      await translationSelect.click();
 
       // Should have at least one translation option (from user preferences)
       // Note: Exact options depend on user's selected translations
-      const options = translationSelect.locator('option');
+      const options = page.getByTestId(/popover-select-option-/);
+      await expect(options.first()).toBeVisible();
       const optionCount = await options.count();
       expect(optionCount).toBeGreaterThan(0);
     },
@@ -178,8 +188,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
 
-      const translationSelect = page.getByTestId('translation-select');
-      await translationSelect.selectOption('131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
 
       const feedbackTextarea = page.getByPlaceholder(
         'Use this space to report an issue relating to the selected translation of this Ayah.',
