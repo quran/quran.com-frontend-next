@@ -21,8 +21,14 @@ import {
   makeByVerseKeyUrl,
   makeChapterUrl,
   makeTranslationsInfoUrl,
+  makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
-import type { ChapterResponse, TranslationsResponse, VerseResponse } from 'types/ApiResponses';
+import type {
+  ChapterResponse,
+  TranslationsResponse,
+  VerseResponse,
+  WordByWordTranslationsResponse,
+} from 'types/ApiResponses';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
@@ -183,6 +189,7 @@ const buildVerseParams = (
   translationIds: number[],
   reciter: string,
   mushaf: MushafType,
+  wordByWordLocale: string,
   range?: { from: number; to: number; perPage: number },
 ) => {
   const quranFont = getQuranFontForMushaf(mushaf);
@@ -195,7 +202,7 @@ const buildVerseParams = (
     reciter,
     audio: reciter,
     wordFields: getDefaultWordFields(quranFont).wordFields,
-    wordTranslationLanguage: 'en',
+    wordTranslationLanguage: wordByWordLocale,
     translationFields: 'resource_name,language_name,author_name',
     mushaf: mushafId,
   };
@@ -306,6 +313,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
       answers: tCommon('answers'),
     };
 
+    // Determine word-by-word translation locale
+    let wordByWordLocale = 'en';
+    if (enableWbw && locale !== 'en') {
+      try {
+        const wbwResponse = await fetcher<WordByWordTranslationsResponse>(
+          makeWordByWordTranslationsUrl(locale),
+        );
+        const isoCodes = new Set(
+          (wbwResponse.wordByWordTranslations ?? [])
+            .map((translation) => translation.isoCode)
+            .filter(Boolean),
+        );
+        // If the requested locale is available for word-by-word, use it. Otherwise, default to 'en'.
+        if (isoCodes.has(locale)) {
+          wordByWordLocale = locale;
+        }
+      } catch (error) {
+        logDebug('Ayah widget: Failed to load word-by-word translations', { error, locale });
+      }
+    }
+
     // Build each verse key that needs to be requested; range produces multiple keys, otherwise a single verse.
     const verseKeys = normalizedRangeEnd
       ? Array.from(
@@ -316,7 +344,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     const verseResponses = await Promise.all(
       verseKeys.map((verseKey) =>
         fetcher<VerseResponse>(
-          makeByVerseKeyUrl(verseKey, buildVerseParams(translationIdList, reciter, mushaf)),
+          makeByVerseKeyUrl(
+            verseKey,
+            buildVerseParams(translationIdList, reciter, mushaf, wordByWordLocale),
+          ),
         ),
       ),
     );
