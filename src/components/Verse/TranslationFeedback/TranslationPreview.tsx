@@ -11,6 +11,8 @@ import { VersesResponse } from '@/types/ApiResponses';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
+const FONT_SCALE_FOR_TRANSLATION_PREVIEW = 2; // 2 is 16px based on design
+
 /**
  * Finds the selected translation from the verses response data.
  *
@@ -44,7 +46,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
   const chapterNumber = getChapterNumberFromKey(verse.verseKey);
   const verseNumber = getVerseNumberFromKey(verse.verseKey);
 
-  const { data, error, translationFontScale } = useVerseAndTranslation({
+  const { data, error } = useVerseAndTranslation({
     chapter: chapterNumber,
     from: shouldFetch ? verseNumber : undefined,
     to: verseNumber,
@@ -75,7 +77,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
           key={selectedTranslationId}
           text={`"${translation.text}"`}
           languageId={translation.languageId}
-          translationFontScale={translationFontScale}
+          translationFontScale={FONT_SCALE_FOR_TRANSLATION_PREVIEW}
         />
       </div>
     );
