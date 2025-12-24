@@ -1,3 +1,5 @@
+$max-list-height: 15rem;
+
 .trigger {
   appearance: none;
   display: inline-flex;
@@ -90,7 +92,7 @@
 }
 
 .list {
-  max-block-size: 240px;
+  max-block-size: $max-list-height;
   overflow-y: auto;
   padding-block: var(--spacing-xxsmall);
 }

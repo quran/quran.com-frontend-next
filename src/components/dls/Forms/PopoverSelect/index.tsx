@@ -93,6 +93,7 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
+          aria-label={displayLabel}
           disabled={disabled}
           data-testid="popover-select-trigger"
         >
@@ -108,7 +109,7 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
           className={styles.content}
           align="start"
           sideOffset={4}
-          style={{ width: triggerRef.current?.offsetWidth }}
+          style={{ inlineSize: triggerRef.current?.offsetWidth }}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
           <div
