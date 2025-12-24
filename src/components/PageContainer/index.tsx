@@ -8,6 +8,7 @@ export interface PageContainerProps {
   children: ReactNode | ReactNode[];
   isLessonView?: boolean;
   isSheetsLike?: boolean;
+  wrapperClassName?: string;
   className?: string;
 }
 
@@ -15,20 +16,27 @@ const PageContainer: FC<PageContainerProps> = ({
   children,
   isLessonView = false,
   isSheetsLike = false,
+  wrapperClassName,
   className,
 }) => {
   return (
     <div
-      className={classNames(
-        styles.container,
-        {
-          [styles.lessonView]: isLessonView,
-          [styles.sheets]: isSheetsLike,
-        },
-        className,
-      )}
+      className={classNames(wrapperClassName, {
+        [styles.wrapperSheets]: isSheetsLike,
+      })}
     >
-      {children}
+      <div
+        className={classNames(
+          styles.container,
+          {
+            [styles.lessonView]: isLessonView,
+            [styles.sheets]: isSheetsLike,
+          },
+          className,
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };
