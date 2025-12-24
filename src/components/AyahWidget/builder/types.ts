@@ -18,6 +18,7 @@ export type Preferences = {
   showTafsirs: boolean;
   showReflections: boolean;
   showAnswers: boolean;
+  locale: string;
   reciter: number | null;
   showArabic: boolean;
   rangeEnabled: boolean;

@@ -49,6 +49,12 @@ export type WidgetOptions = {
   // Should the widget display answers button
   showAnswers: boolean;
 
+  // Locale code for widget labels (e.g. "en", "fr")
+  locale: string;
+
+  // Localized labels for the widget
+  labels: WidgetLabels;
+
   // Ayah identifier in S:V format (e.g. "33:56")
   ayah: string;
 
@@ -83,4 +89,12 @@ export type WidgetColors = {
   iconColor: string;
   bgColor: string;
   textColor: string;
+};
+
+export type WidgetLabels = {
+  surah: string;
+  verse: string;
+  tafsirs: string;
+  reflectionsAndLessons: string;
+  answers: string;
 };

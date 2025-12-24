@@ -2,7 +2,10 @@
 import React from 'react';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
+import getT from 'next-translate/getT';
 import { renderToStaticMarkup } from 'react-dom/server';
+
+import i18nConfig from '../../../i18n.json';
 
 import { fetcher, getChapterAudioData } from '@/api';
 import { getQuranFontForMushaf } from '@/components/AyahWidget/mushaf-fonts';
@@ -10,7 +13,7 @@ import QuranWidget from '@/components/AyahWidget/QuranWidget';
 import { logDebug } from '@/lib/newrelic';
 import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
-import type { WidgetOptions, MushafType } from '@/types/ayah-widget';
+import type { WidgetOptions, MushafType, WidgetLabels } from '@/types/ayah-widget';
 import { isMushafType } from '@/types/ayah-widget';
 import { getMushafId, getDefaultWordFields } from '@/utils/api';
 import {
@@ -110,6 +113,8 @@ const buildWidgetOptions = (
     showTafsirs: boolean;
     showReflections: boolean;
     showAnswers: boolean;
+    locale: string;
+    labels: WidgetLabels;
     customWidth?: string;
     customHeight?: string;
     showArabic: boolean;
@@ -131,6 +136,8 @@ const buildWidgetOptions = (
   showTafsirs: params.showTafsirs,
   showReflections: params.showReflections,
   showAnswers: params.showAnswers,
+  locale: params.locale,
+  labels: params.labels,
   rangeEnd: params.rangeEnd,
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
@@ -256,6 +263,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const showTafsirs = parseBool(req.query.showTafsirs, true);
   const showReflections = parseBool(req.query.showReflections, true);
   const showAnswers = parseBool(req.query.showAnswers, true);
+  const localeParam = parseString(req.query.locale);
+  const locale =
+    localeParam && i18nConfig.locales.includes(localeParam)
+      ? localeParam
+      : i18nConfig.defaultLocale;
 
   // Parse range end if provided
   const rangeEndParam = parseString(req.query.rangeEnd);
@@ -283,6 +295,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     .filter((id) => !Number.isNaN(id));
 
   try {
+    // Load localized labels
+    const tCommon = await getT(locale, 'common');
+    const tQuranReader = await getT(locale, 'quran-reader');
+    const labels: WidgetLabels = {
+      surah: tCommon('surah'),
+      verse: tCommon('verse'),
+      tafsirs: tQuranReader('tafsirs'),
+      reflectionsAndLessons: tCommon('reflections-and-lessons'),
+      answers: tCommon('answers'),
+    };
+
     // Build each verse key that needs to be requested; range produces multiple keys, otherwise a single verse.
     const verseKeys = normalizedRangeEnd
       ? Array.from(
@@ -353,10 +376,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     if (Number.isFinite(numericChapterId) && numericChapterId > 0) {
       try {
         const chapterResponse = await fetcher<ChapterResponse>(
-          makeChapterUrl(String(numericChapterId), 'en'),
+          makeChapterUrl(String(numericChapterId), locale),
         );
         const chapterData = chapterResponse.chapter;
-        surahName = chapterData?.nameSimple;
+        surahName = locale === 'ar' ? chapterData?.nameArabic : chapterData?.nameSimple;
       } catch (error) {
         logDebug('Failed to fetch chapter info for Surah name', { numericChapterId, error });
       }
@@ -408,6 +431,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         showTafsirs,
         showReflections,
         showAnswers,
+        locale,
+        labels,
         rangeEnd: normalizedRangeEnd,
         customWidth,
         customHeight,

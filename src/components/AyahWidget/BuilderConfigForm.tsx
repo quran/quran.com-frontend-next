@@ -3,11 +3,14 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import i18nConfig from '../../../i18n.json';
+
 import type { Preferences } from './builder/types';
 
 import styles from '@/styles/ayah-widget.module.scss';
 import type { MushafType } from '@/types/ayah-widget';
 import Chapter from '@/types/Chapter';
+import { getLocaleName } from '@/utils/locale';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Reciter from 'types/Reciter';
 
@@ -44,6 +47,14 @@ const BuilderConfigForm = ({
   reciters,
 }: Props) => {
   const { t } = useTranslation('ayah-widget');
+  // Prepare locale selection options based on supported locales.
+  const localeOptions = React.useMemo(
+    () =>
+      i18nConfig.locales
+        .map((code) => ({ code, name: getLocaleName(code) || code }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    [],
+  );
 
   // Prepare range selection options based on the selected ayah.
   const rangeStart = preferences.selectedAyah;
@@ -216,6 +227,29 @@ const BuilderConfigForm = ({
           <option value="light">{t('theme.light')}</option>
           <option value="dark">{t('theme.dark')}</option>
           <option value="sepia">{t('theme.sepia')}</option>
+        </select>
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="locale-select">
+          {t('fields.language')}
+        </label>
+        <select
+          id="locale-select"
+          className={styles.select}
+          value={preferences.locale}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              locale: event.target.value,
+            }))
+          }
+        >
+          {localeOptions.map((option) => (
+            <option key={option.code} value={option.code}>
+              {option.name}
+            </option>
+          ))}
         </select>
       </div>
 

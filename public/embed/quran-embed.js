@@ -59,6 +59,7 @@
     showTafsirs: currentScript.getAttribute('data-quran-show-tafsirs') || 'true',
     showReflections: currentScript.getAttribute('data-quran-show-reflections') || 'true',
     showAnswers: currentScript.getAttribute('data-quran-show-answers') || 'true',
+    locale: currentScript.getAttribute('data-quran-locale') || 'en',
 
     // Layout
     width: currentScript.getAttribute('data-width') || '',
@@ -139,6 +140,7 @@
   setParam('showTafsirs', config.showTafsirs);
   setParam('showReflections', config.showReflections);
   setParam('showAnswers', config.showAnswers);
+  setParam('locale', config.locale);
 
   setParam('width', config.width);
   setParam('height', config.height);

@@ -4,6 +4,7 @@ import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
+import { isRTLLocale } from '@/utils/locale';
 import type Verse from 'types/Verse';
 
 type Props = {
@@ -38,21 +39,26 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
   const chapterNumber = verse.chapterId ?? options.ayah.split(':')[0];
   const startVerse = verse.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
   const verseSegment = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
-  const baseUrl = `https://quran.com/fr/${chapterNumber}:${verseSegment}`;
+
+  // Construct the base URL for the verse actions based on locale and verse reference.
+  const locale = options.locale || 'en';
+  const localePrefix = locale === 'en' ? '' : `/${locale}`;
+  const baseUrl = `https://quran.com${localePrefix}/${chapterNumber}:${verseSegment}`;
+  const isRtl = isRTLLocale(locale);
 
   const actions = [
     options.showTafsirs && {
-      label: 'Tafsirs',
+      label: options.labels?.tafsirs || 'Tafsirs',
       href: `${baseUrl}/tafsirs/169`,
       icon: <BookIcon style={ICON_STYLE} />,
     },
     options.showReflections && {
-      label: 'Reflections & Lessons',
+      label: options.labels?.reflectionsAndLessons || 'Reflections & Lessons',
       href: `${baseUrl}/reflections`,
       icon: <ChatIcon style={ICON_STYLE} />,
     },
     options.showAnswers && {
-      label: 'Answers',
+      label: options.labels?.answers || 'Answers',
       href: `${baseUrl}/answers`,
       icon: <LightbulbIcon style={ICON_STYLE} />,
     },
@@ -70,7 +76,15 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
         backgroundColor: colors.secondaryBg,
       }}
     >
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 10,
+          direction: isRtl ? 'rtl' : 'ltr',
+          justifyContent: 'flex-start',
+        }}
+      >
         {actions.map((action) => (
           <a
             key={action.label}
@@ -78,6 +92,7 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
             target="_blank"
             rel="noopener noreferrer"
             style={BUTTON_BASE_STYLE(colors)}
+            dir={isRtl ? 'rtl' : 'ltr'}
           >
             {action.icon}
             <span>{action.label}</span>

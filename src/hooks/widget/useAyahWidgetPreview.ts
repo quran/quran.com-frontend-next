@@ -78,6 +78,7 @@ const useAyahWidgetPreview = ({
     script.setAttribute('data-quran-show-tafsirs', String(preferences.showTafsirs));
     script.setAttribute('data-quran-show-reflections', String(preferences.showReflections));
     script.setAttribute('data-quran-show-answers', String(preferences.showAnswers));
+    script.setAttribute('data-quran-locale', preferences.locale);
     script.setAttribute('data-quran-mushaf', preferences.mushaf);
     script.setAttribute('data-quran-show-arabic', String(preferences.showArabic));
     if (preferences.rangeEnabled) {
@@ -114,6 +115,7 @@ const useAyahWidgetPreview = ({
     preferences.showAnswers,
     preferences.showReflections,
     preferences.showTafsirs,
+    preferences.locale,
     preferences.rangeEnabled,
     preferences.rangeEnd,
     preferences.showTranslatorName,

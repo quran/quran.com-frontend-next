@@ -44,6 +44,7 @@ const INITIAL_PREFERENCES: Preferences = {
   showTafsirs: true,
   showReflections: true,
   showAnswers: true,
+  locale: 'en',
   reciter: DEFAULTS.reciterId,
   showArabic: true,
   rangeEnabled: false,
@@ -196,6 +197,7 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
   pushAttrIfNotDefault('data-quran-show-tafsirs', String(preferences.showTafsirs), 'true');
   pushAttrIfNotDefault('data-quran-show-reflections', String(preferences.showReflections), 'true');
   pushAttrIfNotDefault('data-quran-show-answers', String(preferences.showAnswers), 'true');
+  pushAttrIfNotDefault('data-quran-locale', preferences.locale, 'en');
   pushAttrIfNotDefault(
     'data-quran-range-end',
     preferences.rangeEnabled ? String(preferences.rangeEnd) : undefined,

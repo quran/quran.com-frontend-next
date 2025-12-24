@@ -16,6 +16,7 @@
     "containerId": "Container Id",
     "surah": "Surah",
     "ayah": "Ayah",
+    "language": "Language",
     "theme": "Theme",
     "mushaf": "Mushaf",
     "translations": "Translations",
