@@ -411,6 +411,57 @@ const BuilderConfigForm = ({
         </label>
       </div>
 
+      <div className={styles.checkboxRow}>
+        <input
+          id="tafsirs-toggle"
+          type="checkbox"
+          checked={preferences.showTafsirs}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              showTafsirs: event.target.checked,
+            }))
+          }
+        />
+        <label className={styles.checkboxLabel} htmlFor="tafsirs-toggle">
+          {t('checkboxes.tafsirs')}
+        </label>
+      </div>
+
+      <div className={styles.checkboxRow}>
+        <input
+          id="reflections-toggle"
+          type="checkbox"
+          checked={preferences.showReflections}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              showReflections: event.target.checked,
+            }))
+          }
+        />
+        <label className={styles.checkboxLabel} htmlFor="reflections-toggle">
+          {t('checkboxes.reflections')}
+        </label>
+      </div>
+
+      <div className={styles.checkboxRow}>
+        <input
+          id="answers-toggle"
+          type="checkbox"
+          checked={preferences.showAnswers}
+          onChange={(event) =>
+            setPreferences((prev) => ({
+              ...prev,
+              showAnswers: event.target.checked,
+            }))
+          }
+        />
+        <label className={styles.checkboxLabel} htmlFor="answers-toggle">
+          {t('checkboxes.answers')}
+        </label>
+      </div>
+
       <div className={styles.twoColumnGrid}>
         <div className={styles.field}>
           <label className={styles.label} htmlFor="custom-width">

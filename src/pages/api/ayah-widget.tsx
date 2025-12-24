@@ -108,6 +108,9 @@ const buildWidgetOptions = (
     mushaf: MushafType;
     showTranslatorNames: boolean;
     showQuranLink: boolean;
+    showTafsirs: boolean;
+    showReflections: boolean;
+    showAnswers: boolean;
     customWidth?: string;
     customHeight?: string;
     showArabic: boolean;
@@ -127,6 +130,9 @@ const buildWidgetOptions = (
   showTranslatorNames: params.showTranslatorNames,
   showQuranLink: params.showQuranLink,
   showArabic: params.showArabic,
+  showTafsirs: params.showTafsirs,
+  showReflections: params.showReflections,
+  showAnswers: params.showAnswers,
   rangeEnd: params.rangeEnd,
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
@@ -250,6 +256,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const showTranslatorNames = parseBool(req.query.showTranslatorNames);
   const showQuranLink = parseBool(req.query.showQuranLink, true);
   const showArabic = parseBool(req.query.showArabic, true);
+  const showTafsirs = parseBool(req.query.showTafsirs, true);
+  const showReflections = parseBool(req.query.showReflections, true);
+  const showAnswers = parseBool(req.query.showAnswers, true);
 
   // Parse range end if provided
   const rangeEndParam = parseString(req.query.rangeEnd);
@@ -400,6 +409,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         showTranslatorNames,
         showQuranLink,
         showArabic,
+        showTafsirs,
+        showReflections,
+        showAnswers,
         rangeEnd: normalizedRangeEnd,
         customWidth,
         customHeight,

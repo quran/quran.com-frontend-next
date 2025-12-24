@@ -16,6 +16,9 @@ export type Preferences = {
   enableWbwTranslation: boolean;
   showTranslatorName: boolean;
   showQuranLink: boolean;
+  showTafsirs: boolean;
+  showReflections: boolean;
+  showAnswers: boolean;
   reciter: number | null;
   showArabic: boolean;
   rangeEnabled: boolean;

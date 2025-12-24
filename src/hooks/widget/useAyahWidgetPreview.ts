@@ -76,6 +76,9 @@ const useAyahWidgetPreview = ({
     script.setAttribute('data-quran-theme', preferences.theme);
     script.setAttribute('data-quran-show-translator-names', String(preferences.showTranslatorName));
     script.setAttribute('data-quran-show-quran-link', String(preferences.showQuranLink));
+    script.setAttribute('data-quran-show-tafsirs', String(preferences.showTafsirs));
+    script.setAttribute('data-quran-show-reflections', String(preferences.showReflections));
+    script.setAttribute('data-quran-show-answers', String(preferences.showAnswers));
     script.setAttribute('data-quran-mushaf', preferences.mushaf);
     script.setAttribute('data-quran-show-arabic', String(preferences.showArabic));
     if (preferences.rangeEnabled) {
@@ -109,6 +112,9 @@ const useAyahWidgetPreview = ({
     preferences.selectedAyah,
     preferences.selectedSurah,
     preferences.showArabic,
+    preferences.showAnswers,
+    preferences.showReflections,
+    preferences.showTafsirs,
     preferences.rangeEnabled,
     preferences.rangeEnd,
     preferences.showQuranLink,

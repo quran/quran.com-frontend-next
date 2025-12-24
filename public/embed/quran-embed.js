@@ -57,6 +57,9 @@
     wordByWord: currentScript.getAttribute('data-quran-word-by-word') || 'false',
     showTranslatorNames: currentScript.getAttribute('data-quran-show-translator-names') || 'false',
     showQuranLink: currentScript.getAttribute('data-quran-show-quran-link') || 'false',
+    showTafsirs: currentScript.getAttribute('data-quran-show-tafsirs') || 'true',
+    showReflections: currentScript.getAttribute('data-quran-show-reflections') || 'true',
+    showAnswers: currentScript.getAttribute('data-quran-show-answers') || 'true',
 
     // Layout
     width: currentScript.getAttribute('data-width') || '',
@@ -135,6 +138,9 @@
 
   setParam('showTranslatorNames', config.showTranslatorNames);
   setParam('showQuranLink', config.showQuranLink);
+  setParam('showTafsirs', config.showTafsirs);
+  setParam('showReflections', config.showReflections);
+  setParam('showAnswers', config.showAnswers);
 
   setParam('width', config.width);
   setParam('height', config.height);
@@ -270,9 +276,8 @@
     const playIcon = root.querySelector('[data-play-icon]');
     const pauseIcon = root.querySelector('[data-pause-icon]');
 
-    const menuToggle = root.querySelector('[data-menu-toggle]');
-    const menu = root.querySelector('[data-menu]');
     const copyButton = root.querySelector('[data-copy-verse]');
+    const shareButton = root.querySelector('[data-share-verse]');
 
     // === Audio play/pause logic ===
     if (audioButton && audioElement) {
@@ -337,28 +342,37 @@
       updateUi();
     }
 
-    // === Menu toggle logic ===
-    if (menuToggle && menu) {
-      menuToggle.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        const isOpen = menu.getAttribute('data-open') === 'true';
-        menu.style.display = isOpen ? 'none' : 'block';
-        menu.setAttribute('data-open', isOpen ? 'false' : 'true');
-        menuToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-      });
-
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-
     // === Copy button logic ===
     if (copyButton) {
       copyButton.addEventListener('click', () => {
         copyVerse(root);
+      });
+    }
 
-        if (menu) {
-          menu.style.display = 'none';
-          menu.setAttribute('data-open', 'false');
+    // === Share button logic ===
+    if (shareButton) {
+      const buildShareUrl = () => {
+        const wrapper = root.querySelector('[data-translations-wrapper]');
+        const rangeCaption = wrapper?.dataset?.rangeCaption;
+        if (rangeCaption) {
+          return `https://quran.com/${rangeCaption}`;
+        }
+        const firstVerse = root.querySelector('[data-verse-block]');
+        const verseKey = firstVerse?.dataset?.verseKey;
+        if (verseKey) {
+          return `https://quran.com/${verseKey}`;
+        }
+        return '';
+      };
+
+      shareButton.addEventListener('click', () => {
+        const url = buildShareUrl();
+        if (!url) return;
+
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText(url).catch(() => fallbackCopyToClipboard(url));
+        } else {
+          fallbackCopyToClipboard(url);
         }
       });
     }

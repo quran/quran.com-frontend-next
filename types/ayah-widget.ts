@@ -42,6 +42,15 @@ export type WidgetOptions = {
   // Should the widget display the Quran.com link
   showQuranLink: boolean;
 
+  // Should the widget display tafsirs button
+  showTafsirs: boolean;
+
+  // Should the widget display reflections button
+  showReflections: boolean;
+
+  // Should the widget display answers button
+  showAnswers: boolean;
+
   // Ayah identifier in S:V format (e.g. "33:56")
   ayah: string;
 
