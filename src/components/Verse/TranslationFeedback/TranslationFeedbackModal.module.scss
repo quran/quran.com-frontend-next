@@ -39,3 +39,10 @@
 .error {
   color: var(--color-text-error);
 }
+
+.reportButton {
+  font-size: var(--font-size-small);
+
+  padding-inline: var(--spacing-large2-px);
+  border-radius: var(--border-radius-medium-px);
+}
