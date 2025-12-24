@@ -76,7 +76,7 @@ test.describe('File Validation', () => {
 
     await expectToastError(
       page,
-      /file.*size.*exceeds.*limit|file.*too.*large/i,
+      /profile.*pic.*size.*should.*be.*5.*mb.*maximum/i,
       TIMEOUTS.VISIBILITY,
     );
   });
