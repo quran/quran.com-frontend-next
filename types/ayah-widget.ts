@@ -40,8 +40,6 @@ export type WidgetOptions = {
   rangeEnd?: number;
 
   // Should the widget display the Quran.com link
-  showQuranLink: boolean;
-
   // Should the widget display tafsirs button
   showTafsirs: boolean;
 

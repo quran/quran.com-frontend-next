@@ -56,7 +56,6 @@
     audio: currentScript.getAttribute('data-quran-audio') || 'true',
     wordByWord: currentScript.getAttribute('data-quran-word-by-word') || 'false',
     showTranslatorNames: currentScript.getAttribute('data-quran-show-translator-names') || 'false',
-    showQuranLink: currentScript.getAttribute('data-quran-show-quran-link') || 'false',
     showTafsirs: currentScript.getAttribute('data-quran-show-tafsirs') || 'true',
     showReflections: currentScript.getAttribute('data-quran-show-reflections') || 'true',
     showAnswers: currentScript.getAttribute('data-quran-show-answers') || 'true',
@@ -137,7 +136,6 @@
   setParam('showArabic', config.showArabic);
 
   setParam('showTranslatorNames', config.showTranslatorNames);
-  setParam('showQuranLink', config.showQuranLink);
   setParam('showTafsirs', config.showTafsirs);
   setParam('showReflections', config.showReflections);
   setParam('showAnswers', config.showAnswers);

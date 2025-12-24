@@ -107,7 +107,6 @@ const buildWidgetOptions = (
     theme: ThemeTypeVariant;
     mushaf: MushafType;
     showTranslatorNames: boolean;
-    showQuranLink: boolean;
     showTafsirs: boolean;
     showReflections: boolean;
     showAnswers: boolean;
@@ -128,7 +127,6 @@ const buildWidgetOptions = (
   theme: params.theme,
   mushaf: params.mushaf,
   showTranslatorNames: params.showTranslatorNames,
-  showQuranLink: params.showQuranLink,
   showArabic: params.showArabic,
   showTafsirs: params.showTafsirs,
   showReflections: params.showReflections,
@@ -254,7 +252,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const mushafParam = parseString(req.query.mushaf);
   const mushaf: MushafType = isMushafType(mushafParam) ? mushafParam : 'qpc';
   const showTranslatorNames = parseBool(req.query.showTranslatorNames);
-  const showQuranLink = parseBool(req.query.showQuranLink, true);
   const showArabic = parseBool(req.query.showArabic, true);
   const showTafsirs = parseBool(req.query.showTafsirs, true);
   const showReflections = parseBool(req.query.showReflections, true);
@@ -407,7 +404,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
         theme,
         mushaf,
         showTranslatorNames,
-        showQuranLink,
         showArabic,
         showTafsirs,
         showReflections,

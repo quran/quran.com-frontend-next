@@ -4,7 +4,6 @@ import React from 'react';
 import { buildMushafFontFaceCss, buildQcffFontFaceCss } from './mushaf-fonts';
 
 import ArabicVerse from '@/components/AyahWidget/ArabicVerse';
-import QdcLink from '@/components/AyahWidget/QdcLink';
 import Translations from '@/components/AyahWidget/Translations';
 import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
@@ -184,7 +183,6 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
           })}
         </div>
         <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />
-        <QdcLink verse={firstVerse} options={options} colors={colors} />
         {options.enableAudio && audioUrl && (
           <audio
             data-audio-element

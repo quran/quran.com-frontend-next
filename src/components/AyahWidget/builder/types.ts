@@ -15,7 +15,6 @@ export type Preferences = {
   enableAudio: boolean;
   enableWbwTranslation: boolean;
   showTranslatorName: boolean;
-  showQuranLink: boolean;
   showTafsirs: boolean;
   showReflections: boolean;
   showAnswers: boolean;

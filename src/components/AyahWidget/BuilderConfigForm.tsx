@@ -396,23 +396,6 @@ const BuilderConfigForm = ({
 
       <div className={styles.checkboxRow}>
         <input
-          id="link-toggle"
-          type="checkbox"
-          checked={preferences.showQuranLink}
-          onChange={(event) =>
-            setPreferences((prev) => ({
-              ...prev,
-              showQuranLink: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="link-toggle">
-          {t('checkboxes.quranLink')}
-        </label>
-      </div>
-
-      <div className={styles.checkboxRow}>
-        <input
           id="tafsirs-toggle"
           type="checkbox"
           checked={preferences.showTafsirs}

@@ -41,7 +41,6 @@ const INITIAL_PREFERENCES: Preferences = {
   enableAudio: true,
   enableWbwTranslation: false,
   showTranslatorName: false,
-  showQuranLink: true,
   showTafsirs: true,
   showReflections: true,
   showAnswers: true,
@@ -193,7 +192,6 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
     String(preferences.showTranslatorName),
     'false',
   );
-  pushAttrIfNotDefault('data-quran-show-quran-link', String(preferences.showQuranLink), 'false');
   pushAttrIfNotDefault('data-quran-show-arabic', String(preferences.showArabic), 'true');
   pushAttrIfNotDefault('data-quran-show-tafsirs', String(preferences.showTafsirs), 'true');
   pushAttrIfNotDefault('data-quran-show-reflections', String(preferences.showReflections), 'true');
