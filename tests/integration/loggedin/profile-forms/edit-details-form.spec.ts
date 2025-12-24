@@ -281,7 +281,7 @@ test.describe('Form Submission', () => {
       await fillAndBlur(lastName, 'Doe');
       await saveButton.click();
 
-      const successMessage = page.getByText(/success|updated.*successfully/i);
+      const successMessage = page.getByText(/profile.*is.*updated.*successfully/i);
       await expect(successMessage).toBeVisible({ timeout: 10000 });
 
       await page.reload();
