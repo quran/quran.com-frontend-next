@@ -1,11 +1,18 @@
 @use 'src/styles/breakpoints';
 
 @mixin input-base-styles {
+  background-color: transparent;
+  transition: border-color var(--transition-moderate) ease;
   padding: var(--spacing-small-px);
   border-radius: var(--border-radius-xsmall-px);
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
 
   &:has(input:disabled) {
     background-color: var(--color-background-alternative-faint);
+  }
+
+  &:hover:not(:has(input:disabled)) {
+    border-color: var(--color-success-medium);
   }
 
   input {
