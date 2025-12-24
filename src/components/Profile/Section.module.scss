@@ -1,0 +1,11 @@
+@use 'src/styles/breakpoints';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2-px);
+  .title {
+    font-size: var(--font-size-medium-px);
+    font-weight: var(--font-weight-bold);
+  }
+}

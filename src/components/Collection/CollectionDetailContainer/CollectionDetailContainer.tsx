@@ -10,6 +10,7 @@ import styles from './CollectionDetailContainer.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import ArrowLeft from '@/icons/west.svg';
 import Error from '@/pages/_error';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -49,6 +50,7 @@ const CollectionDetailContainer = ({
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
+  const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
 
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
@@ -67,6 +69,7 @@ const CollectionDetailContainer = ({
 
   const onUpdated = () => {
     mutate();
+    invalidateAllBookmarkCaches();
   };
 
   const lastPageData = data[data.length - 1];

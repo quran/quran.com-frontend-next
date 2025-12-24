@@ -9,16 +9,3 @@
 .day {
   font-weight: var(--font-weight-bold);
 }
-
-.notEnrolledLink {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--color-text-link);
-  block-size: auto;
-
-  &:hover {
-    text-decoration: underline;
-    color: var(--color-text-link);
-  }
-}

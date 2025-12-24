@@ -15,6 +15,14 @@
   margin-block-end: var(--spacing-xsmall);
   display: flex;
   align-items: center;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.infoIcon {
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .group {
@@ -36,5 +44,5 @@
 }
 
 .input {
-  width: 95%;
+  inline-size: 95%;
 }

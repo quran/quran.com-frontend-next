@@ -43,7 +43,6 @@ const config: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
@@ -91,6 +90,12 @@ const config: PlaywrightTestConfig = {
         command: process.env.CI ? 'yarn start' : 'yarn dev',
         port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
         reuseExistingServer: !process.env.CI,
+        env: {
+          NODE_ENV: 'development',
+          PORT: process.env.PORT || '3000',
+          MSW_ENABLED: 'true', // Enable MSW for tests
+          NEXT_PUBLIC_APP_ENV: 'test', // Set environment to staging to match cookie names
+        },
       }
     : undefined,
 };

@@ -1,11 +1,11 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
   align-items: center;
 }
 
-.container[dir="rtl"][data-auto-flip-icon="true"] {
+.container[dir='rtl'][data-auto-flip-icon='true'] {
   > svg {
     transform: scaleX(-1);
   }
@@ -29,42 +29,48 @@
   }
 }
 
+.accentColor {
+  > svg path {
+    fill: var(--color-daily-progress);
+  }
+}
+
 .xsmallIcon {
   > svg {
-    width: 16px;
-    height: 16px;
+    inline-size: 16px;
+    block-size: 16px;
   }
 }
 
 .smallIcon {
   > svg {
-    width: 20px;
-    height: 20px;
+    inline-size: 20px;
+    block-size: 20px;
   }
 }
 
 .mediumIcon {
   > svg {
-    width: 32px;
-    height: 32px;
+    inline-size: 32px;
+    block-size: 32px;
   }
 }
 
 .largeIcon {
   > svg {
-    width: 36px;
-    height: 36px;
+    inline-size: 36px;
+    block-size: 36px;
   }
 }
 
 .customIcon {
   > svg {
-    width: var(--spacing-medium2);
-    height: var(--spacing-medium2);
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
 
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-medium);
-      height: var(--spacing-medium);
+      inline-size: var(--spacing-medium);
+      block-size: var(--spacing-medium);
     }
   }
 }
