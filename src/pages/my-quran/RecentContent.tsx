@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './RecentContent.module.scss';
+import VerseMetadata from './VerseMetadata';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
@@ -11,29 +14,55 @@ import DataContext from '@/contexts/DataContext';
 import IconContainer from '@/dls/IconContainer/IconContainer';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
 import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedDate } from '@/utils/locale';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const RecentContent = () => {
   const { lang } = useTranslation();
+  const { t } = useTranslation('my-quran');
   const chaptersData = useContext(DataContext);
   const { recentlyReadVerseKeys, timestamps } = useGetRecentlyReadVerseKeys(true, true);
+  const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  // Combine verse keys with timestamps, filter valid dates, reverse for newest first, and limit to 10
   const recentItems = recentlyReadVerseKeys
     .map((verseKey, index) => ({ verseKey, timestamp: timestamps?.[index] }))
     .filter(({ timestamp }) => timestamp instanceof Date)
-    .reverse()
+    .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
     .slice(0, 10);
+
+  const handleRecentContentClick = (verseKey: string) => {
+    logButtonClick('my_quran_recent_content_item', { verseKey });
+  };
+
+  if (recentItems.length === 0) {
+    return (
+      <div className={styles.recentContentContainer}>
+        <p className={styles.emptyState}>{t('recent-empty')}</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.recentContentContainer}>
       {recentItems.map(({ verseKey, timestamp }) => {
         const [chapterId] = getVerseAndChapterNumbersFromKey(verseKey);
         const surah = getChapterData(chaptersData, chapterId);
+        const verseUrl = getChapterWithStartingVerseUrl(verseKey);
+
         return (
-          <div key={verseKey} className={styles.recentContentItem}>
+          <Link
+            key={verseKey}
+            href={verseUrl}
+            onClick={() => handleRecentContentClick(verseKey)}
+            className={styles.recentContentItem}
+            data-testid="recent-content-item"
+          >
             <ChapterIconContainer
               chapterId={chapterId.toString()}
               hasSurahPrefix={false}
@@ -52,8 +81,9 @@ const RecentContent = () => {
                     year: 'numeric',
                   })}
               </p>
+              <VerseMetadata verseKey={verseKey} mushafId={mushafId} />
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

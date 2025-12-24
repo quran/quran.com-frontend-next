@@ -5,6 +5,7 @@
 }
 
 .recentContentItem {
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall-px);
@@ -36,4 +37,12 @@
   font-size: var(--font-size-xsmall-px);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded-new);
+  gap: var(--spacing-small-px);
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--color-text-faded-new);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small-px);
 }
