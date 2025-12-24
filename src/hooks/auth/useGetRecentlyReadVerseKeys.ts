@@ -10,6 +10,22 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { makeVerseKey, getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import ReadingSession from 'types/ReadingSession';
 
+/**
+ * Safely converts a date value (string or number) to a Date object.
+ * Returns undefined if the conversion fails or the date is invalid.
+ *
+ * @param {string | number} dateValue - The date value to parse
+ * @returns {Date | undefined} The parsed Date object or undefined if invalid
+ */
+const parseDate = (dateValue: string | number): Date | undefined => {
+  try {
+    const date = new Date(dateValue);
+    return Number.isNaN(date.getTime()) ? undefined : date;
+  } catch {
+    return undefined;
+  }
+};
+
 type RecentlyReadVerseData = {
   surah: string;
   ayah: string;
@@ -78,27 +94,11 @@ function useGetRecentlyReadVerseKeys<T extends boolean = true>(
     // Handle logged-in users (data from server)
     if (isUserLoggedIn) {
       if (!data) return [];
-      return data.map((item) => {
-        try {
-          const date = new Date(item.updatedAt);
-          // Check if date is valid
-          return Number.isNaN(date.getTime()) ? undefined : date;
-        } catch {
-          return undefined;
-        }
-      });
+      return data.map((item) => parseDate(item.updatedAt));
     }
 
     // Handle non-logged in users (data from Redux)
-    return Object.values(recentReadingSessions).map((timestamp: number) => {
-      try {
-        const date = new Date(timestamp);
-        // Check if date is valid
-        return Number.isNaN(date.getTime()) ? undefined : date;
-      } catch {
-        return undefined;
-      }
-    });
+    return Object.values(recentReadingSessions).map((timestamp: number) => parseDate(timestamp));
   }, [data, recentReadingSessions, shouldAlsoReturnTimestamps, isUserLoggedIn]);
 
   return {
