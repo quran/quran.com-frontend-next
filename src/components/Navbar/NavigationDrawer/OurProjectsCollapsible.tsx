@@ -10,7 +10,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import { EXTERNAL_ROUTES, QURAN_URL } from '@/utils/navigation';
 
 interface ProjectItem {
@@ -20,6 +20,7 @@ interface ProjectItem {
 }
 
 interface OurProjectsCollapsibleProps {
+  onItemClick: (eventName: string) => void;
   headerClassName?: string;
   headerLeftClassName?: string;
   contentClassName?: string;
@@ -71,6 +72,7 @@ const PROJECTS: ProjectItem[] = [
 ];
 
 const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
+  onItemClick,
   headerClassName,
   headerLeftClassName,
   contentClassName,
@@ -85,10 +87,6 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
       return;
     }
     logEvent('navigation_drawer_our_projects_expanded');
-  };
-
-  const handleProjectClick = (eventName: string) => () => {
-    logButtonClick(eventName);
   };
 
   return (
@@ -135,7 +133,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
                 icon={<IconArrowRight />}
                 href={project.href}
                 isExternalLink
-                onClick={handleProjectClick(project.eventName)}
+                onClick={() => onItemClick(project.eventName)}
               />
             ))}
           </div>
