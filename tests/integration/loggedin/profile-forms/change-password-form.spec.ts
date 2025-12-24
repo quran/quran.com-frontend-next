@@ -10,8 +10,9 @@ import {
   getTestUserPassword,
   mockPasswordUpdateApi,
 } from './change-password-form-helpers';
-import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
+import { expectError, expectNoError, fillAndBlur } from './form-helpers';
 
+import switchLanguage from '@/tests/helpers/switch-language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -19,6 +20,8 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await page.waitForLoadState('networkidle');
+  await switchLanguage(page, 'en');
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@change-password'];
@@ -157,9 +160,8 @@ test.describe('Password Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
+      const { newPassword } = getFormInputs(section);
 
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'Pass1!');
       await page.waitForTimeout(VALIDATION_WAIT);
 
@@ -369,7 +371,6 @@ test.describe('Password Matching Validation', () => {
         getFormInputs(section);
 
       await fillAndBlur(currentPassword, getTestUserPassword());
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'ValidPass123!');
       await fillAndBlur(confirmPassword, 'DifferentPass123!');
       await updateButton.click();

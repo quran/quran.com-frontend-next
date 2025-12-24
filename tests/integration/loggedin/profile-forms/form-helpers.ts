@@ -13,17 +13,6 @@ export const fillAndBlur = async (input: Locator, value: string): Promise<void> 
 };
 
 /**
- * Enables form validation by clicking the save button
- * @param {Page} page - The Playwright page object
- * @param {Locator} saveButton - The save button locator
- * @returns {Promise<void>}
- */
-export const enableValidation = async (page: Page, saveButton: Locator): Promise<void> => {
-  await saveButton.click();
-  await page.waitForTimeout(500);
-};
-
-/**
  * Asserts that no error message is visible in the form section
  * @param {Locator} section - The form section locator
  * @param {number} [timeout=1000] - Maximum time to wait in milliseconds

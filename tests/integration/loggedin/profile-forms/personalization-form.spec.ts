@@ -8,6 +8,7 @@ import {
   uploadProfilePicture,
 } from './personalization-form-helpers';
 
+import switchLanguage from '@/tests/helpers/switch-language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -15,6 +16,8 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await page.waitForLoadState('networkidle');
+  await switchLanguage(page, 'en');
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@personalization'];
