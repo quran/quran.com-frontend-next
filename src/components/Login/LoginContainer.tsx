@@ -13,6 +13,7 @@ import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { resolveSafeRedirect } from '@/utils/url';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 enum LoginView {
@@ -36,8 +37,9 @@ const LoginContainer = () => {
     logButtonClick('login_back');
     if (loginView === LoginView.VERIFICATION) {
       setLoginView(LoginView.EMAIL);
-    } else if (loginView === LoginView.EMAIL) {
-      setLoginView(LoginView.SOCIAL);
+    } else if (redirect) {
+      const destination = resolveSafeRedirect(redirect);
+      router.push(destination);
     } else {
       router.back();
     }
