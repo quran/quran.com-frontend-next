@@ -64,7 +64,12 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
       </div>
 
       <div className={styles.actions}>
-        <Button htmlType="submit" isLoading={isSubmitting} size={ButtonSize.Small}>
+        <Button
+          htmlType="submit"
+          isLoading={isSubmitting}
+          size={ButtonSize.Small}
+          className={styles.reportButton}
+        >
           {t('translation-feedback.report')}
         </Button>
       </div>
