@@ -11,7 +11,7 @@ import { VersesResponse } from '@/types/ApiResponses';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
-const FONT_SCALE_FOR_TRANSLATION_PREVIEW = 2; // 2 is 16px based on design
+const TRANSLATION_PREVIEW_FONT_SCALE = 2; // Scale 2 corresponds to 16px font size according to design specifications
 
 /**
  * Finds the selected translation from the verses response data.
@@ -77,7 +77,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
           key={selectedTranslationId}
           text={`"${translation.text}"`}
           languageId={translation.languageId}
-          translationFontScale={FONT_SCALE_FOR_TRANSLATION_PREVIEW}
+          translationFontScale={TRANSLATION_PREVIEW_FONT_SCALE}
         />
       </div>
     );

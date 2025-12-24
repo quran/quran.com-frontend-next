@@ -90,8 +90,8 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
     [validate, verse.verseKey, selectedTranslationId, feedback, t, toast, onClose],
   );
 
-  const handleTranslationChange = useCallback((value: string) => {
-    setSelectedTranslationId(value);
+  const handleTranslationChange = useCallback((value: string | number) => {
+    setSelectedTranslationId(String(value));
     setErrors((prev) => ({ ...prev, translation: undefined }));
   }, []);
 
