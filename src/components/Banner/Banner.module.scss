@@ -1,7 +1,7 @@
 .container {
   margin-block-start: 0;
   box-sizing: border-box;
-  height: var(--banner-height);
+  block-size: var(--banner-height);
   background-color: var(--color-background-elevated-new);
   display: flex;
   justify-content: space-between;

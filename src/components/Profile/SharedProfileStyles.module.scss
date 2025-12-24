@@ -9,7 +9,7 @@
   }
 
   input {
-    height: auto;
+    block-size: auto;
   }
 }
 
@@ -27,10 +27,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .formInputContainer {
-    width: 100%;
+    inline-size: 100%;
     .formInput {
       @include input-base-styles;
-      width: unset;
+      inline-size: unset;
     }
   }
 }
@@ -40,10 +40,10 @@
   flex-direction: column;
   gap: var(--spacing-medium-px);
   @include breakpoints.tablet {
-    max-width: calc(50% - calc(var(--spacing-medium-px) / 2));
+    max-inline-size: calc(50% - calc(var(--spacing-medium-px) / 2));
   }
   .passwordFormInput {
     @include input-base-styles;
-    height: calc(2 * var(--spacing-medium2-px));
+    block-size: calc(2 * var(--spacing-medium2-px));
   }
 }

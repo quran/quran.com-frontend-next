@@ -17,7 +17,7 @@
     background-color: var(--color-search-background);
 
     svg {
-      width: 100%;
+      inline-size: 100%;
       transform: translateY(-40%);
     }
   }
@@ -26,7 +26,7 @@
     @include utility.pageContainer();
 
     display: flex;
-    height: 100%;
+    block-size: 100%;
     gap: var(--spacing-small-px);
     align-items: center;
 

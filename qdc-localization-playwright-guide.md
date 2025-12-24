@@ -1,15 +1,19 @@
 # QDC Localization Testing with Playwright
 
-This guide demonstrates how to execute the comprehensive QDC localization test suite using Playwright, based on the test plan documented in `qdc-localization-test-plan.md`.
+This guide demonstrates how to execute the comprehensive QDC localization test suite using
+Playwright, based on the test plan documented in `qdc-localization-test-plan.md`.
 
 ## Overview
 
-The QDC project already has a fully implemented Playwright test suite for localization testing located at:
+The QDC project already has a fully implemented Playwright test suite for localization testing
+located at:
+
 ```
 tests/integration/localization/qdc-localization.spec.ts
 ```
 
 This test suite covers:
+
 - ✅ **Category 1**: First-time Guest User Detection & Settings
 - ✅ **Category 3**: Language Selector Behavior
 - ✅ **Category 4**: Reset Settings Functionality
@@ -19,11 +23,13 @@ This test suite covers:
 ## Prerequisites
 
 1. **Node.js and Dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Playwright Installation**:
+
    ```bash
    npx playwright install
    ```
@@ -35,11 +41,13 @@ This test suite covers:
 ## Running the Tests
 
 ### Execute All Localization Tests
+
 ```bash
 npm run test:integration -- tests/integration/localization/
 ```
 
 ### Execute Specific Test Categories
+
 ```bash
 # Category 1: First-time Guest User Detection
 npx playwright test --grep "Category 1"
@@ -58,6 +66,7 @@ npx playwright test --grep "Category 7"
 ```
 
 ### Execute Specific Test Cases
+
 ```bash
 # Test Case 1.1.1: English + US Country
 npx playwright test --grep "Test Case 1.1.1"
@@ -70,6 +79,7 @@ npx playwright test --grep "Test Case 3.1.1"
 ```
 
 ### Run Tests in Different Browsers
+
 ```bash
 # Run in Chromium (default)
 npx playwright test tests/integration/localization/
@@ -85,6 +95,7 @@ npx playwright test tests/integration/localization/ --project=chromium --project
 ```
 
 ### Debug Mode
+
 ```bash
 # Run with debug mode (opens browser UI)
 npx playwright test tests/integration/localization/ --debug
@@ -94,6 +105,7 @@ npx playwright test tests/integration/localization/ --headed
 ```
 
 ### Generate Test Reports
+
 ```bash
 # Run tests and generate HTML report
 npx playwright test tests/integration/localization/
@@ -143,7 +155,7 @@ test('Test Case 1.1.1: English Device Language + US Country', async ({ page, con
     defaultTranslations: [{ id: 131 }],
     defaultTafsir: { id: 'en-tafisr-ibn-kathir' },
     defaultWbwLanguage: { isoCode: 'en' },
-    ayahReflectionsLanguages: [{ isoCode: 'en' }]
+    ayahReflectionsLanguages: [{ isoCode: 'en' }],
   };
 
   await helper.mockCountryLanguagePreferenceAPI('en', 'US', mockUSPreferences);
@@ -159,7 +171,7 @@ test('Test Case 1.1.1: English Device Language + US Country', async ({ page, con
     detectedLanguage: 'en',
     detectedCountry: 'US',
     userHasCustomised: false,
-    isUsingDefaultSettings: true
+    isUsingDefaultSettings: true,
   });
 
   await helper.verifyCoreSettingsAreApplied();
@@ -184,7 +196,7 @@ test('Test Case 1.1.3: English Device Language + Multiple Countries', async ({ p
       defaultTranslations: [{ id: getCountrySpecificTranslation(country) }],
       defaultTafsir: { id: 'en-tafisr-ibn-kathir' },
       defaultWbwLanguage: { isoCode: 'en' },
-      ayahReflectionsLanguages: [{ isoCode: 'en' }]
+      ayahReflectionsLanguages: [{ isoCode: 'en' }],
     };
 
     await helper.mockCountryLanguagePreferenceAPI('en', country, mockPreferences);
@@ -196,24 +208,24 @@ test('Test Case 1.1.3: English Device Language + Multiple Countries', async ({ p
 
     // Verify API call was made with correct parameters
     const apiCalls = page.context().route.calls;
-    expect(apiCalls.some(call =>
-      call.url.includes(`userDeviceLanguage=en&country=${country}`)
-    )).toBe(true);
+    expect(
+      apiCalls.some((call) => call.url.includes(`userDeviceLanguage=en&country=${country}`)),
+    ).toBe(true);
 
     await helper.verifyDefaultSettingsStructure({
       detectedLanguage: 'en',
       detectedCountry: country,
       userHasCustomised: false,
-      isUsingDefaultSettings: true
+      isUsingDefaultSettings: true,
     });
   }
 });
 
 function getCountrySpecificTranslation(country: string): number {
   const countryTranslations = {
-    'CA': 20,  // Canadian preference
-    'AU': 131, // Australian preference
-    'IN': 158  // Indian preference
+    CA: 20, // Canadian preference
+    AU: 131, // Australian preference
+    IN: 158, // Indian preference
   };
   return countryTranslations[country] || 131;
 }
@@ -231,7 +243,7 @@ test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ page, co
     defaultTranslations: [{ id: 20 }],
     defaultTafsir: { id: 'ar-tafseer-al-tabari' },
     defaultWbwLanguage: { isoCode: 'ar' },
-    ayahReflectionsLanguages: [{ isoCode: 'ar' }]
+    ayahReflectionsLanguages: [{ isoCode: 'ar' }],
   };
 
   await helper.mockCountryLanguagePreferenceAPI('ar', 'US', mockPreferences);
@@ -246,7 +258,7 @@ test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ page, co
     translations: await helper.homepage.getPersistedValue('translations'),
     tafsirs: await helper.homepage.getPersistedValue('tafsirs'),
     readingPreferences: await helper.homepage.getPersistedValue('readingPreferences'),
-    defaultSettings: await helper.getReduxState()
+    defaultSettings: await helper.getReduxState(),
   };
 
   // 3. Mock signup process
@@ -262,7 +274,7 @@ test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ page, co
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ success: true, userId: '12345' })
+      body: JSON.stringify({ success: true, userId: '12345' }),
     });
   });
 
@@ -274,14 +286,16 @@ test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ page, co
     translations: await helper.homepage.getPersistedValue('translations'),
     tafsirs: await helper.homepage.getPersistedValue('tafsirs'),
     readingPreferences: await helper.homepage.getPersistedValue('readingPreferences'),
-    defaultSettings: await helper.getReduxState()
+    defaultSettings: await helper.getReduxState(),
   };
 
   // Assert settings are preserved
-  expect(postSignupSettings.translations.selectedTranslations)
-    .toEqual(guestSettings.translations.selectedTranslations);
-  expect(postSignupSettings.defaultSettings.userHasCustomised)
-    .toBe(guestSettings.defaultSettings.userHasCustomised);
+  expect(postSignupSettings.translations.selectedTranslations).toEqual(
+    guestSettings.translations.selectedTranslations,
+  );
+  expect(postSignupSettings.defaultSettings.userHasCustomised).toBe(
+    guestSettings.defaultSettings.userHasCustomised,
+  );
 });
 ```
 
@@ -297,11 +311,7 @@ test('Test Case 5.1: Reflections List Language Matching', async ({ page, context
     defaultTranslations: [{ id: 131 }],
     defaultTafsir: { id: 'en-tafisr-ibn-kathir' },
     defaultWbwLanguage: { isoCode: 'en' },
-    ayahReflectionsLanguages: [
-      { isoCode: 'en' },
-      { isoCode: 'ar' },
-      { isoCode: 'ur' }
-    ]
+    ayahReflectionsLanguages: [{ isoCode: 'en' }, { isoCode: 'ar' }, { isoCode: 'ur' }],
   };
 
   await helper.mockCountryLanguagePreferenceAPI('en', 'US', mockPreferences);
@@ -318,7 +328,9 @@ test('Test Case 5.1: Reflections List Language Matching', async ({ page, context
   // Verify reflections list shows only preset languages
   await expect(page.locator('[data-testid="reflections-list"]')).toBeVisible();
 
-  const reflectionLanguages = await page.locator('[data-testid="reflection-language-option"]').allTextContents();
+  const reflectionLanguages = await page
+    .locator('[data-testid="reflection-language-option"]')
+    .allTextContents();
 
   // Should include English, Arabic, and Urdu only
   expect(reflectionLanguages).toContain('English');
@@ -351,7 +363,7 @@ test('Test Case 8.1: Concurrent User Detection Performance', async ({ browser })
     await helper.mockCountryLanguagePreferenceAPI(
       testCombination.language,
       testCombination.country,
-      testCombination.mockResponse
+      testCombination.mockResponse,
     );
 
     pages.push({ page, helper, testCombination });
@@ -362,7 +374,7 @@ test('Test Case 8.1: Concurrent User Detection Performance', async ({ browser })
 
   // Navigate all pages simultaneously
   const navigationPromises = pages.map(({ page, helper }) =>
-    page.goto('/').then(() => helper.waitForReduxHydration())
+    page.goto('/').then(() => helper.waitForReduxHydration()),
   );
 
   await Promise.all(navigationPromises);
@@ -379,7 +391,7 @@ test('Test Case 8.1: Concurrent User Detection Performance', async ({ browser })
       detectedLanguage: testCombination.expectedLanguage,
       detectedCountry: testCombination.expectedCountry,
       userHasCustomised: false,
-      isUsingDefaultSettings: true
+      isUsingDefaultSettings: true,
     });
   }
 
@@ -395,12 +407,12 @@ function getTestCombination(index: number) {
     { language: 'ar', country: 'SA', expectedLanguage: 'ar', expectedCountry: 'US' },
     { language: 'fr', country: 'FR', expectedLanguage: 'fr', expectedCountry: 'US' },
     { language: 'ja', country: 'JP', expectedLanguage: 'en', expectedCountry: 'JP' }, // Fallback
-    { language: 'en', country: 'GB', expectedLanguage: 'en', expectedCountry: 'GB' }
+    { language: 'en', country: 'GB', expectedLanguage: 'en', expectedCountry: 'GB' },
   ];
 
   return {
     ...combinations[index % combinations.length],
-    mockResponse: generateMockResponse(combinations[index % combinations.length])
+    mockResponse: generateMockResponse(combinations[index % combinations.length]),
   };
 }
 ```
@@ -414,43 +426,43 @@ name: QDC Localization Tests
 
 on:
   push:
-    branches: [ main, SSR ]
+    branches: [main, SSR]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   localization-tests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Install Playwright
-      run: npx playwright install --with-deps
+      - name: Install Playwright
+        run: npx playwright install --with-deps
 
-    - name: Start application
-      run: |
-        npm run build
-        npm start &
-        sleep 30
+      - name: Start application
+        run: |
+          npm run build
+          npm start &
+          sleep 30
 
-    - name: Run localization tests
-      run: npx playwright test tests/integration/localization/
+      - name: Run localization tests
+        run: npx playwright test tests/integration/localization/
 
-    - name: Upload test results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
 ```
 
 ## Best Practices
@@ -468,12 +480,14 @@ jobs:
 ### Common Issues
 
 1. **Redux Hydration Timeout**:
+
    ```typescript
    // Increase timeout if needed
    await helper.waitForReduxHydration({ timeout: 15000 });
    ```
 
 2. **API Route Mocking**:
+
    ```typescript
    // Ensure routes are set before page navigation
    await helper.mockCountryLanguagePreferenceAPI(/* ... */);
@@ -487,4 +501,5 @@ jobs:
    });
    ```
 
-This comprehensive guide provides everything needed to execute and extend the QDC localization test suite using Playwright!
+This comprehensive guide provides everything needed to execute and extend the QDC localization test
+suite using Playwright!

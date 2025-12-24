@@ -1,10 +1,12 @@
 # Configuring QDC Localization Tests for Custom Port (3005)
 
-Since your development server is running on `localhost:3005`, here are the ways to configure the Playwright tests to use your custom port:
+Since your development server is running on `localhost:3005`, here are the ways to configure the
+Playwright tests to use your custom port:
 
 ## Option 1: Environment Variable (Recommended)
 
 ### For Single Test Run
+
 ```bash
 # Set environment variable for one-time test execution
 PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test tests/integration/localization/
@@ -17,6 +19,7 @@ PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test tests/integra
 ```
 
 ### For Fish Shell (your shell)
+
 ```fish
 # Set environment variable in Fish shell
 set -x PLAYWRIGHT_TEST_BASE_URL http://localhost:3005
@@ -29,6 +32,7 @@ node scripts/run-localization-tests.js
 ```
 
 ### For Bash/Zsh
+
 ```bash
 # Set environment variable
 export PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005
@@ -85,21 +89,25 @@ lsof -i :3005
 ## Complete Test Execution Examples
 
 ### Run All Localization Tests on Port 3005
+
 ```bash
 PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test tests/integration/localization/
 ```
 
 ### Run Specific Category with Custom Port
+
 ```bash
 PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test --grep "Category 1"
 ```
 
 ### Debug Mode with Custom Port
+
 ```bash
 PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test tests/integration/localization/ --debug
 ```
 
 ### Cross-Browser Testing with Custom Port
+
 ```bash
 # Chromium
 PLAYWRIGHT_TEST_BASE_URL=http://localhost:3005 npx playwright test tests/integration/localization/ --project=chromium
@@ -129,4 +137,5 @@ qdc-test --grep "Category 1"
 
 ## Updating the Test Runner Script
 
-I can also update the test runner script to support a `--port` option if you'd like that convenience.
+I can also update the test runner script to support a `--port` option if you'd like that
+convenience.

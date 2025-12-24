@@ -34,7 +34,7 @@
 
   &.lessonView {
     @include breakpoints.tablet {
-      width: 80%;
+      inline-size: 80%;
     }
   }
 

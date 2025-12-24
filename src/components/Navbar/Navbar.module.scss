@@ -11,14 +11,14 @@
 }
 
 .emptySpacePlaceholder {
-  height: var(--navbar-container-height);
+  block-size: var(--navbar-container-height);
 }
 
 .container {
   inset-block-start: 0;
   position: fixed;
-  height: var(--navbar-height);
-  width: 100%;
+  block-size: var(--navbar-height);
+  inline-size: 100%;
   transition: var(--transition-regular);
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);

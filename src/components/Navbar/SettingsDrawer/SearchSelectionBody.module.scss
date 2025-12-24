@@ -19,8 +19,8 @@
 }
 
 .infoIcon {
-  width: var(--spacing-medium-px);
-  height: var(--spacing-medium-px);
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -44,5 +44,5 @@
 }
 
 .input {
-  width: 95%;
+  inline-size: 95%;
 }
