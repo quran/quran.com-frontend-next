@@ -6,12 +6,18 @@ import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
 
+// Global ayah configuration
+const ayah = {
+  surah: 1,
+  ayah: 1,
+};
+
 // It can have locale prefix and query params
 const loginPageRegex = /(?:\/[a-z]{2})?\/login(?:\?.*)?$/;
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
-  await homePage.goTo('/1/1');
+  await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
 });
 
 test.describe('Notes - Guest Users', () => {
@@ -20,16 +26,16 @@ test.describe('Notes - Guest Users', () => {
       'should redirect to login page when clicking notes button',
       { tag: ['@notes', '@auth', '@guest', '@translation-view'] },
       async ({ page }) => {
-        // Given: User is in translation mode
+        // User is in translation mode
         await switchToTranslationMode(page);
 
-        // When: User clicks the notes button on a verse
-        const verse = page.getByTestId('verse-1:1');
+        // Click the notes button on a verse
+        const verse = page.getByTestId(`verse-${ayah.surah}:${ayah.ayah}`);
         const notesButton = verse.getByTestId('notes-action-button');
         await expect(notesButton).toBeVisible();
         await notesButton.click();
 
-        // Then: User should be redirected to login page
+        // Verify user is redirected to login page
         await page.waitForURL(loginPageRegex);
         await expect(page).toHaveURL(loginPageRegex);
       },
@@ -41,11 +47,11 @@ test.describe('Notes - Guest Users', () => {
       'should redirect to login page when clicking notes menu item',
       { tag: ['@notes', '@auth', '@guest', '@reading-view'] },
       async ({ page }) => {
-        // Given: User is in reading mode
+        // User is in reading mode
         await switchToReadingMode(page);
 
-        // When: User clicks on verse to show actions menu and selects notes
-        const verse = page.getByTestId('verse-arabic-1:1');
+        // Click on verse to show actions menu and select notes
+        const verse = page.getByTestId(`verse-arabic-${ayah.surah}:${ayah.ayah}`);
         await verse.click();
 
         const notesMenuItem = page
@@ -55,7 +61,7 @@ test.describe('Notes - Guest Users', () => {
         await expect(notesMenuItem).toBeVisible();
         await notesMenuItem.click();
 
-        // Then: User should be redirected to login page
+        // Verify user is redirected to login page
         await page.waitForURL(loginPageRegex);
         await expect(page).toHaveURL(loginPageRegex);
       },

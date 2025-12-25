@@ -1,4 +1,5 @@
-/* eslint-disable react-func/max-lines-per-function, max-lines */
+/* eslint-disable no-await-in-loop, no-restricted-syntax, react-func/max-lines-per-function, max-lines */
+
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
@@ -7,8 +8,13 @@ import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
 
-const TEST_VERSE_KEY = '1:1';
-const TEST_NOTE_TEXT = 'This is a test private note';
+// Global ayah configuration
+const ayah = {
+  surah: 1,
+  ayah: 1,
+};
+
+const TEST_VERSE_KEY = `${ayah.surah}:${ayah.ayah}`;
 const UPDATED_NOTE_TEXT = 'This is an updated test private note';
 
 /**
@@ -26,28 +32,201 @@ const openNotesModalFromTranslationView = async (page: Page, verseKey: string = 
   await expect(modal).toBeVisible();
 };
 
+const mockNotes = async (page: Page, count?: number) => {
+  notes = generateNotes(TEST_VERSE_KEY).slice(0, count ?? notes.length);
+
+  await page.route('**/notes/count-within-range*', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ [TEST_VERSE_KEY]: notes.length }),
+    });
+  });
+
+  await page.route(`**/notes/by-verse/${TEST_VERSE_KEY}`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(notes),
+    });
+  });
+};
+
+const generateAttachedEntity = (id: string) => {
+  return {
+    id,
+    type: 'reflection',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+};
+
+const generateNote = (id: string, body: string, verseKey: string, attachedEntities?: string[]) => {
+  const randomDate = () => new Date(new Date().getTime() + Math.random() * 10000);
+
+  return {
+    id,
+    title: `${id} Note`,
+    body,
+    verseKey,
+    ranges: [`${verseKey}-${verseKey}`],
+    createdAt: randomDate().toISOString(),
+    updatedAt: randomDate().toISOString(),
+    saveToQR: attachedEntities?.length > 0,
+    attachedEntities: attachedEntities?.map(generateAttachedEntity),
+  };
+};
+
+const generateNotes = (verseKey: string) => {
+  return [
+    generateNote('note-1', `note-1 Note body`, verseKey),
+    generateNote('note-2', `note-2 Note body`, verseKey),
+    generateNote('note-3-with-qr', `note-3-with-qr Note body`, verseKey, [
+      'reflection-1',
+      'reflection-2',
+    ]),
+  ];
+};
+
+const mockDeleteNote = async (page: Page, noteId: string) => {
+  const note = notes.find((n) => n.id === noteId);
+  if (!note) throw new Error(`Note with id ${noteId} not found`);
+
+  return page.route(`**/notes/${noteId}`, async (route) => {
+    notes = notes.filter((n) => n.id !== noteId);
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(note),
+    });
+  });
+};
+
+const mockEditNote = async (page: Page, noteId: string, noteText: string) => {
+  const note = notes.find((n) => n.id === noteId);
+  if (!note) throw new Error(`Note with id ${noteId} not found`);
+
+  return page.route(`**/notes/${noteId}`, async (route) => {
+    notes = notes.map((n) => (n.id === noteId ? { ...n, body: noteText } : n));
+
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(note),
+    });
+  });
+};
+
+const mockPublishNote = async (page: Page, noteId: string, attachId: string) => {
+  const note = notes.find((n) => n.id === noteId);
+  if (!note) throw new Error(`Note with id ${noteId} not found`);
+
+  return page.route(`**/notes/${noteId}`, async (route) => {
+    notes = notes.map((n) => {
+      if (n.id === noteId) {
+        return {
+          ...n,
+          attachedEntities: [...(n.attachedEntities || []), generateAttachedEntity(attachId)],
+        };
+      }
+
+      return n;
+    });
+
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(note),
+    });
+  });
+};
+
+const mockAddNote = async (
+  page: Page,
+  {
+    noteId,
+    noteText,
+  }: {
+    noteId: string;
+    noteText: string;
+  },
+) => {
+  const note = generateNote(noteId, noteText, TEST_VERSE_KEY);
+
+  return page.route(`**/notes`, async (route) => {
+    notes = [note, ...notes];
+
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(note),
+    });
+  });
+};
+
+let notes = generateNotes(TEST_VERSE_KEY);
+
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
-  await homePage.goTo('/1/1');
+
+  // Reset notes to default state - this will be overridden by mockNotes calls in tests
+  notes = generateNotes(TEST_VERSE_KEY);
 });
 
 test.describe('Notes - Authenticated Users', () => {
-  test.describe('Modal Opening', () => {
+  test.describe('Add Note Modal Content', () => {
     test(
-      'should open notes modal and show reflection intro',
-      { tag: ['@notes', '@auth', '@logged-in', '@smoke', '@modal-opening'] },
+      'should show add note modal content',
+      { tag: ['@notes', '@auth', '@logged-in', '@smoke', '@add-note'] },
       async ({ page }) => {
-        // Given: User is in translation mode
+        await mockNotes(page, 0);
+
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
+        // User is in translation mode
         await switchToTranslationMode(page);
 
-        // When: User clicks the notes button on a verse
+        // Click the notes button on a verse
         await openNotesModalFromTranslationView(page);
 
-        // Then: Notes modal should open with proper content
+        // Verify notes modal opens with proper content
         await expect(page.getByTestId('add-note-modal-title')).toBeVisible();
         await expect(page.getByTestId('notes-textarea')).toBeVisible();
         await expect(page.getByTestId('save-private-button')).toBeVisible();
         await expect(page.getByTestId('save-to-qr-button')).toBeVisible();
+
+        // Verify notes on verse button is hidden when no notes exist
+        const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
+        await expect(notesOnVerseButton).toBeHidden();
+      },
+    );
+
+    test(
+      'should show notes on verse button with correct note count',
+      { tag: ['@notes', '@auth', '@logged-in', '@smoke', '@add-note'] },
+      async ({ page }) => {
+        await mockNotes(page, 2);
+
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
+        await switchToTranslationMode(page);
+        await openNotesModalFromTranslationView(page);
+
+        // Verify notes on verse button shows correct count
+        const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
+        await expect(notesOnVerseButton).toBeVisible();
+        await expect(notesOnVerseButton).toHaveAttribute('data-note-count', '2');
+
+        await notesOnVerseButton.click();
+
+        // My notes modal should open with proper title and notes
+        const myNotesModal = page.getByTestId('my-notes-modal-content');
+        await expect(myNotesModal).toBeVisible();
+
+        // Should show notes count in title
+        const myNotesModalTitle = page.getByTestId('my-notes-modal-title');
+        await expect(myNotesModalTitle).toBeVisible();
+        await expect(myNotesModalTitle).toHaveAttribute('data-note-count', '2');
       },
     );
   });
@@ -57,6 +236,9 @@ test.describe('Notes - Authenticated Users', () => {
       'should handle learn more toggle in text content expansions',
       { tag: ['@notes', '@publish-note', '@qr', '@confirmation'] },
       async ({ page }) => {
+        await mockNotes(page, 2);
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         // User opens confirmation modal
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
@@ -83,7 +265,7 @@ test.describe('Notes - Authenticated Users', () => {
 
         // Filling the textarea so validations pass
         const textarea = page.getByTestId('notes-textarea');
-        await textarea.fill(TEST_NOTE_TEXT);
+        await textarea.fill('TEST_NOTE_TEXT');
 
         const saveToQRButton = page.getByTestId('save-to-qr-button');
         await saveToQRButton.click();
@@ -120,61 +302,34 @@ test.describe('Notes - Authenticated Users', () => {
       'should show validation errors',
       { tag: ['@notes', '@form-validation', '@validation'] },
       async ({ page }) => {
+        await mockNotes(page, 0);
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
 
-        // When: User tries to save empty note publicly
+        // Try to save empty note publicly
         const savePublicButton = page.getByTestId('save-to-qr-button');
         await savePublicButton.click();
 
-        // Then: Validation error should be shown
+        // Verify validation error is shown
         await expect(page.getByTestId('note-input-error-required-field')).toBeVisible();
 
-        // When: User enters very short text and tries to save
+        // Enter very short text and try to save
         const textarea = page.getByTestId('notes-textarea');
         await textarea.fill('Hi');
         await savePublicButton.click();
 
-        // Then: Validation error should be shown
+        // Verify validation error is shown
         await expect(page.getByTestId('note-input-error-minimum-length')).toBeVisible();
 
-        // When: User enters a note longer than 10000 characters and tries to save
+        // Enter note longer than 10000 characters and try to save
         const longText = 'a'.repeat(10001);
         await textarea.fill(longText);
         await savePublicButton.click();
 
-        // Then: Validation error should be shown
+        // Verify validation error is shown
         await expect(page.getByTestId('note-input-error-maximum-length')).toBeVisible();
-      },
-    );
-  });
-
-  test.describe('Private Note Creation', () => {
-    test(
-      'should create private note and show in my notes',
-      { tag: ['@notes', '@create-note', '@private'] },
-      async ({ page }) => {
-        await switchToTranslationMode(page);
-        await openNotesModalFromTranslationView(page);
-
-        // When: User enters note text and saves privately
-        const textarea = page.getByTestId('notes-textarea');
-        await textarea.fill(TEST_NOTE_TEXT);
-        const savePrivateButton = page.getByTestId('save-private-button');
-        await savePrivateButton.click();
-
-        // Then: Note should be saved and my notes modal should open
-        const myNotesModal = page.getByTestId('my-notes-modal-content');
-        await expect(myNotesModal).toBeVisible();
-
-        // And: Latest note should be visible in the list
-        const notesCard = myNotesModal.getByTestId(/^note-card-/).first();
-        await expect(notesCard).toBeVisible();
-        await expect(notesCard.getByTestId('note-text')).toContainText(TEST_NOTE_TEXT);
-
-        // And: Private note should not show QR view button
-        const qrViewButton = notesCard.getByTestId('qr-view-button');
-        await expect(qrViewButton).not.toBeVisible();
       },
     );
   });
@@ -184,10 +339,17 @@ test.describe('Notes - Authenticated Users', () => {
       'should display notes count and list',
       { tag: ['@notes', '@my-notes', '@notes-list'] },
       async ({ page }) => {
+        const NOTE_COUNT = 3;
+
+        await mockNotes(page, NOTE_COUNT);
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
 
         const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
+        await expect(notesOnVerseButton).toBeVisible();
+        await expect(notesOnVerseButton).toHaveAttribute('data-note-count', NOTE_COUNT.toString());
         await notesOnVerseButton.click();
 
         // My notes modal should open with proper title and notes
@@ -195,14 +357,37 @@ test.describe('Notes - Authenticated Users', () => {
         await expect(myNotesModal).toBeVisible();
 
         // Should show notes count in title
-        await expect(page.getByText(/My Notes \(\d+\)/)).toBeVisible();
+        const myNotesModalTitle = page.getByTestId('my-notes-modal-title');
+        await expect(myNotesModalTitle).toBeVisible();
+        await expect(myNotesModalTitle).toHaveAttribute('data-note-count', NOTE_COUNT.toString());
 
         // Should have note cards
-        const notesCards = await myNotesModal.getByTestId(/^note-card-/).count();
-        expect(notesCards).toBeGreaterThan(0);
+        const notesCards = myNotesModal.getByTestId(/^note-card-/);
+        await expect(notesCards).toHaveCount(NOTE_COUNT);
+
+        for (const note of await notesCards.all()) {
+          await expect(note.getByTestId('edit-note-button')).toBeVisible();
+          await expect(note.getByTestId('delete-note-button')).toBeVisible();
+        }
+
+        const noteWithQR = myNotesModal.getByTestId('note-card-note-3-with-qr');
+        await expect(noteWithQR).toHaveCount(1);
+        await expect(noteWithQR).toBeVisible();
+        const noteQrViewButton = noteWithQR.getByTestId('qr-view-button');
+        const parentLink = noteQrViewButton.locator('..');
+        await expect(noteQrViewButton).toBeVisible();
+        // Parent link should be linked to the last reflection
+        await expect(parentLink).toHaveAttribute('href', expect.stringMatching(/reflection-2$/));
+
+        const noteWithoutQR = myNotesModal.getByTestId(/^note-card-note-(1|2)$/);
+        await expect(noteWithoutQR).toHaveCount(NOTE_COUNT - 1);
+
+        for (const note of await noteWithoutQR.all()) {
+          await expect(note.getByTestId('qr-view-button')).not.toBeVisible();
+        }
 
         const addAnotherButton = page.getByTestId('add-another-note-button');
-        expect(addAnotherButton).toBeVisible();
+        await expect(addAnotherButton).toBeVisible();
 
         await addAnotherButton.click();
 
@@ -212,15 +397,55 @@ test.describe('Notes - Authenticated Users', () => {
     );
   });
 
+  test.describe('Private Note Creation', () => {
+    test(
+      'should create private note and open my notes modal',
+      { tag: ['@notes', '@create-note', '@private'] },
+      async ({ page }) => {
+        await mockNotes(page);
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
+        await switchToTranslationMode(page);
+        await openNotesModalFromTranslationView(page);
+
+        const newNoteId = 'note-new-1';
+        const newNoteText = `${newNoteId} Note body`;
+        await mockAddNote(page, { noteId: newNoteId, noteText: newNoteText });
+
+        // Enter note text and save privately
+        const textarea = page.getByTestId('notes-textarea');
+        await textarea.fill(newNoteText);
+        const savePrivateButton = page.getByTestId('save-private-button');
+        await savePrivateButton.click();
+
+        // Verify note is saved and my notes modal opens
+        const myNotesModal = page.getByTestId('my-notes-modal-content');
+        await expect(myNotesModal).toBeVisible();
+
+        const noteCard = myNotesModal.getByTestId(`note-card-${newNoteId}`);
+        await expect(noteCard).toBeVisible();
+        await expect(noteCard.getByTestId('note-text')).toHaveText(newNoteText);
+      },
+    );
+  });
+
   test.describe('Note Editing', () => {
     test(
       'should edit note and persist changes',
       { tag: ['@notes', '@edit-note', '@update'] },
       async ({ page }) => {
+        await mockNotes(page);
+
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
 
         const updatedNoteTextWithTimestamp = `${UPDATED_NOTE_TEXT} ${new Date().toISOString()}`;
+
+        const note = notes.at(-1);
+        if (!note) throw new Error('No note found');
+        await mockEditNote(page, note.id, updatedNoteTextWithTimestamp);
 
         const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
         await notesOnVerseButton.click();
@@ -228,13 +453,8 @@ test.describe('Notes - Authenticated Users', () => {
         const myNotesModal = page.getByTestId('my-notes-modal-content');
         await expect(myNotesModal).toBeVisible();
 
-        const noteCard = myNotesModal.getByTestId(/^note-card-/).first();
-
-        const selectedNoteTestId = await noteCard.getAttribute('data-testid');
-        expect(selectedNoteTestId).toBeDefined();
-
-        const selectedNoteText = await noteCard.getByTestId('note-text').textContent();
-        expect(selectedNoteText).toBeDefined();
+        const noteCard = myNotesModal.getByTestId(`note-card-${note.id}`);
+        await expect(noteCard).toBeVisible();
 
         const editButton = noteCard.getByTestId('edit-note-button');
         await editButton.click();
@@ -244,7 +464,7 @@ test.describe('Notes - Authenticated Users', () => {
         await expect(editModal).toBeVisible();
 
         const textarea = page.getByTestId('notes-textarea');
-        expect(textarea).toHaveValue(selectedNoteText);
+        await expect(textarea).toHaveValue(note.body);
 
         // User updates the note and saves
         await textarea.fill(updatedNoteTextWithTimestamp);
@@ -255,10 +475,7 @@ test.describe('Notes - Authenticated Users', () => {
         await expect(editModal).toBeHidden();
         await expect(myNotesModal).toBeVisible();
 
-        const updatedNoteCard = myNotesModal.getByTestId(selectedNoteTestId);
-        await expect(updatedNoteCard.getByTestId('note-text')).toContainText(
-          updatedNoteTextWithTimestamp,
-        );
+        await expect(noteCard.getByTestId('note-text')).toHaveText(updatedNoteTextWithTimestamp);
       },
     );
   });
@@ -268,8 +485,19 @@ test.describe('Notes - Authenticated Users', () => {
       'should publish note to QuranReflect with confirmation',
       { tag: ['@notes', '@publish-note', '@qr', '@public'] },
       async ({ page }) => {
+        await mockNotes(page);
+
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
+
+        const note = notes.find((n) => (n.attachedEntities?.length ?? 0) === 0);
+        if (!note) throw new Error('No note found');
+        const reflectionPostId = `reflection---${note.id}`;
+        await mockPublishNote(page, note.id, reflectionPostId);
+
+        const updatedNoteTextWithTimestamp = `${UPDATED_NOTE_TEXT} ${new Date().toISOString()}`;
 
         const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
         await notesOnVerseButton.click();
@@ -277,25 +505,21 @@ test.describe('Notes - Authenticated Users', () => {
         const myNotesModal = page.getByTestId('my-notes-modal-content');
         await expect(myNotesModal).toBeVisible();
 
-        const noteCardWithoutQR = myNotesModal
-          .getByTestId(/^note-card-/)
-          .filter({ hasNot: myNotesModal.getByTestId('qr-view-button') })
-          .first();
+        const noteCard = myNotesModal.getByTestId(`note-card-${note.id}`);
+        const noteQrViewButton = noteCard.getByTestId('qr-view-button');
+        await expect(noteCard).toBeVisible();
+        await expect(noteQrViewButton).toBeHidden();
 
-        const selectedNoteTestId = await noteCardWithoutQR.getAttribute('data-testid');
-        expect(selectedNoteTestId).toBeDefined();
-
-        const selectedNoteText = await noteCardWithoutQR.getByTestId('note-text').textContent();
-        expect(selectedNoteText).toBeDefined();
-
-        const editButton = noteCardWithoutQR.getByTestId('edit-note-button');
+        const editButton = noteCard.getByTestId('edit-note-button');
         await editButton.click();
 
         const editModal = page.getByTestId('edit-note-modal-content');
         await expect(editModal).toBeVisible();
 
         const textarea = page.getByTestId('notes-textarea');
-        expect(textarea).toHaveValue(selectedNoteText);
+        await expect(textarea).toHaveValue(note.body);
+
+        await textarea.fill(updatedNoteTextWithTimestamp);
 
         // User clicks save to QR button
         const saveToQRButton = page.getByTestId('save-to-qr-button');
@@ -305,24 +529,30 @@ test.describe('Notes - Authenticated Users', () => {
         const confirmationModal = page.getByTestId('qr-confirmation-modal-content');
         await expect(confirmationModal).toBeVisible();
 
+        const ECMEditButton = confirmationModal.getByTestId('edit-confirmation-button');
+        await expect(ECMEditButton).toBeVisible();
+        await ECMEditButton.click();
+
+        await expect(editModal).toBeVisible();
+        await expect(textarea).toHaveValue(updatedNoteTextWithTimestamp);
+
+        await saveToQRButton.click();
+
         // User confirms publishing
         const confirmButton = page.getByTestId('confirm-save-to-qr');
         await confirmButton.click();
 
         // My notes modal should reopen with QR view button visible
         await expect(myNotesModal).toBeVisible();
+        await expect(noteQrViewButton).toBeVisible();
+        const parentLink = noteQrViewButton.locator('..');
 
-        const updatedNoteCard = myNotesModal.getByTestId(selectedNoteTestId);
-        await expect(updatedNoteCard).toBeVisible();
-        await expect(updatedNoteCard.getByTestId('qr-view-button')).toBeVisible();
+        await page.waitForTimeout(10000);
 
-        // User clicks QR view button
-        const qrViewButton = updatedNoteCard.getByTestId('qr-view-button');
-        await qrViewButton.click();
-
-        // QR post should open in new tab
-        const [newPage] = await Promise.all([page.waitForEvent('popup'), qrViewButton.click()]);
-        await newPage.close();
+        await expect(parentLink).toHaveAttribute(
+          'href',
+          expect.stringMatching(new RegExp(`${reflectionPostId}$`)),
+        );
       },
     );
   });
@@ -332,8 +562,17 @@ test.describe('Notes - Authenticated Users', () => {
       'should delete note with confirmation',
       { tag: ['@notes', '@delete-note', '@removal'] },
       async ({ page }) => {
+        const initialNoteCount = notes.length;
+        await mockNotes(page, initialNoteCount);
+
+        await homePage.goTo(`/${ayah.surah}/${ayah.ayah}`);
+
         await switchToTranslationMode(page);
         await openNotesModalFromTranslationView(page);
+
+        const note = notes.at(-1);
+        if (!note) throw new Error('No note found');
+        await mockDeleteNote(page, note.id);
 
         const notesOnVerseButton = page.getByTestId('notes-on-verse-button');
         await notesOnVerseButton.click();
@@ -342,10 +581,10 @@ test.describe('Notes - Authenticated Users', () => {
         await expect(myNotesModal).toBeVisible();
 
         const noteCards = myNotesModal.getByTestId(/^note-card-/);
-        const totalNoteCards = await noteCards.count();
-        const noteCard = noteCards.first();
-        const selectedNoteTestId = await noteCard.getAttribute('data-testid');
-        expect(selectedNoteTestId).toBeDefined();
+        await expect(noteCards).toHaveCount(initialNoteCount);
+
+        const noteCard = myNotesModal.getByTestId(`note-card-${note.id}`);
+        await expect(noteCard).toBeVisible();
 
         const deleteButton = noteCard.getByTestId('delete-note-button');
         await deleteButton.click();
@@ -354,13 +593,9 @@ test.describe('Notes - Authenticated Users', () => {
         await confirmationButton.click();
         await expect(confirmationButton).toBeHidden();
 
-        // Wait for the note to be deleted and the modal to update
-        await page.waitForTimeout(5000);
-
         await expect(myNotesModal).toBeVisible();
-        await expect(myNotesModal.getByTestId(selectedNoteTestId)).toBeHidden();
-        const updatedNoteCards = await noteCards.count();
-        expect(updatedNoteCards).toBe(totalNoteCards - 1);
+        await expect(noteCards).toHaveCount(initialNoteCount - 1);
+        await expect(noteCard).toBeHidden();
       },
     );
   });

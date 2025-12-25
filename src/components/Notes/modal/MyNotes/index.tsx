@@ -31,7 +31,15 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       onClose={onClose}
       onEscapeKeyDown={onClose}
       hasCloseButton
-      header={<h2 className={modalStyles.title}>{t('my-notes', { count: notesCount })}</h2>}
+      header={
+        <h2
+          className={modalStyles.title}
+          data-testid="my-notes-modal-title"
+          data-note-count={notesCount}
+        >
+          {t('my-notes', { count: notesCount })}
+        </h2>
+      }
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
     >

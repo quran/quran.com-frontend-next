@@ -26,6 +26,7 @@ const NotesOnVerseButton: React.FC<NotesOnVerseButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       data-testid="notes-on-verse-button"
+      data-note-count={notesCount}
     >
       <IconContainer
         icon={<NotesWithPencilIcon />}
