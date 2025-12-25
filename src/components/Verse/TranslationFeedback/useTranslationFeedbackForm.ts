@@ -5,7 +5,11 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import sendFeedbackErrorToSentry from './logging';
-import { TranslationFeedbackFormErrors, UseTranslationFeedbackFormProps } from './types';
+import {
+  TranslationFeedbackFormErrors,
+  UseTranslationFeedbackFormProps,
+  FeedbackValidationErrorResponse,
+} from './types';
 import {
   getTranslationFeedbackErrors,
   isTranslationFeedbackValid,
@@ -22,9 +26,7 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 const isFeedbackLengthValidationError = (response: unknown): boolean => {
   if (typeof response !== 'object' || response === null) return false;
-  const error = response as {
-    details?: { error?: { code?: string; details?: { feedback?: string } } };
-  };
+  const error = response as FeedbackValidationErrorResponse;
 
   return (
     error.details?.error?.code === 'ValidationError' &&
@@ -124,7 +126,7 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
         return { success: false, response: error };
       }
     },
-    [t, toast],
+    [t, toast, setErrors],
   );
 
   const onSubmit = useCallback(
