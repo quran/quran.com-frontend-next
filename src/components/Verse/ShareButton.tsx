@@ -53,10 +53,16 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       shape={ButtonShape.Circle}
       className={classNames(styles.iconContainer, styles.verseAction)}
       onClick={handleClick}
+      shouldFlipOnRTL={false}
       ariaLabel={t('share')}
     >
       <span className={styles.icon}>
-        <IconContainer icon={<ShareIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        <IconContainer
+          icon={<ShareIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
       </span>
     </Button>
   );

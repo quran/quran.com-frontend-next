@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+
+  margin-block-start: var(--spacing-medium2);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xsmall);
+}
+
+.selectContainer {
+  select {
+    inline-size: 100%;
+  }
+}
+
+.textArea {
+  padding: 0;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+.error {
+  color: var(--color-text-error);
+}

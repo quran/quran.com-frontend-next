@@ -94,9 +94,11 @@ import {
   makeUserProfileUrl,
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
+  makeTranslationFeedbackUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
+import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
@@ -472,9 +474,18 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
-export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+type EnrollUserParams = {
+  courseId: string;
+  enrollmentMethod: EnrollmentMethod;
+};
+
+export const enrollUser = async ({
+  courseId,
+  enrollmentMethod,
+}: EnrollUserParams): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
+    enrollmentMethod,
   });
 
 export const postCourseFeedback = async ({
@@ -668,6 +679,15 @@ export const getQuranProgramWeek = async (
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
+};
+
+export const submitTranslationFeedback = async (params: {
+  translationId: number;
+  surahNumber: number;
+  ayahNumber: number;
+  feedback: string;
+}): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
+  return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
 const shouldRefreshToken = (error) => {

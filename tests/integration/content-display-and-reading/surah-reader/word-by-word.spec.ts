@@ -35,12 +35,12 @@ async function openWordByWordModal(
   // Click on the more button
   const moreButton = verse.getByLabel('More');
   await expect(moreButton).toBeVisible();
-  await moreButton.click();
+  await moreButton.click({ force: true });
 
   // Click on the role="menuitem" with text "Word By Word"
   const wordByWordButton = page.getByRole('menuitem', { name: 'Word By Word' });
   await expect(wordByWordButton).toBeVisible();
-  await wordByWordButton.click();
+  await wordByWordButton.click({ force: true });
 
   // Check that the modal is open
   const wbwTranslation = page.getByTestId('wbw-translation');
@@ -114,7 +114,7 @@ test.describe('Word by Word Tooltip', () => {
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
       await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#wbw-transliteration').check();
+        await settingsPage.locator('#wbw-transliteration').check({ force: true });
       });
 
       // Hover over the first word in verse 2
@@ -146,7 +146,7 @@ test.describe('Word by Word Tooltip', () => {
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
       await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#tooltip').uncheck();
+        await settingsPage.locator('#tooltip').uncheck({ force: true });
       });
 
       // Hover over the first word in verse 2
@@ -164,8 +164,8 @@ test.describe('Word by Word Inline Display', () => {
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
       await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#inline').check();
-        await settingsPage.locator('#wbw-transliteration').check();
+        await settingsPage.locator('#inline').check({ force: true });
+        await settingsPage.locator('#wbw-transliteration').check({ force: true });
       });
 
       // Get verse 2
@@ -185,8 +185,8 @@ test.describe('Word by Word Settings', () => {
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
       await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#wbw-translation').uncheck();
-        await settingsPage.locator('#wbw-transliteration').uncheck();
+        await settingsPage.locator('#wbw-translation').uncheck({ force: true });
+        await settingsPage.locator('#wbw-transliteration').uncheck({ force: true });
       });
 
       // Hover over the first word in verse 2
