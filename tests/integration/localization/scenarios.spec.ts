@@ -4,7 +4,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { test, expect, BrowserContext, Page } from '@playwright/test';
+import { test, expect, Browser, BrowserContext, Page } from '@playwright/test';
 import dotenv from 'dotenv';
 
 import { mockCountryLanguagePreferences } from '../../mocks/data';
@@ -38,6 +38,37 @@ const createTestUserPreferences = () => ({
     translationFontSize: 3,
   },
 });
+
+/**
+ * Login and set the account language to French.
+ * @param {Browser} browser The Playwright browser instance.
+ */
+const loginAndSetAccountLanguageToFrench = async (browser: Browser) => {
+  test.skip(
+    !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
+    'No credentials provided',
+  );
+
+  const context = await browser.newContext({ locale: 'en-US' });
+  const page = await context.newPage();
+  const helper = new LocalizationScenarioHelper(page, context);
+
+  await helper.visitPage('/login');
+  await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
+  await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
+  await page.locator('[data-testid="signin-continue-button"]').click();
+  await page.waitForLoadState('networkidle');
+  await helper.waitForReduxHydration();
+
+  await page.waitForTimeout(2000);
+
+  await helper.switchLanguage('fr');
+  await page.waitForURL(/\/fr(\?|$)/);
+
+  await page.waitForTimeout(2000);
+
+  await context.close();
+};
 
 class LocalizationScenarioHelper {
   private page: Page;
@@ -398,40 +429,45 @@ test.describe('Localization scenarios - Quran Reflect', () => {
 });
 
 test.describe('Localization scenarios - Account', () => {
-  test(
-    'Login to an account changes language',
-    { tag: ['@auth', '@login-user', '@localization'] },
+  test.describe('Login to an account changes language', () => {
+    test.beforeAll(async ({ browser }) => {
+      await loginAndSetAccountLanguageToFrench(browser);
+    });
 
-    async ({ browser }) => {
-      const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
+    test(
+      'Login to an account changes language',
+      { tag: ['@auth', '@login-user', '@localization'] },
+      async ({ browser }) => {
+        const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      test.skip(
-        !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
-        'No credentials provided',
-      );
+        test.skip(
+          !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
+          'No credentials provided',
+        );
 
-      try {
-        setTestData('preferences', createTestUserPreferences());
+        try {
+          setTestData('preferences', createTestUserPreferences());
 
-        await helper.visitPage('/login');
+          await helper.visitPage('/login');
 
-        await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
-        await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
+          await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
+          await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
-        await Promise.all([
-          page.waitForURL(/\/fr(\?|$)/),
-          page.locator('[data-testid="signin-continue-button"]').click(),
-        ]);
+          await Promise.all([
+            page.waitForURL(/\/fr(\?|$)/),
+            page.locator('[data-testid="signin-continue-button"]').click(),
+          ]);
 
-        await helper.waitForReduxHydration();
+          await helper.waitForReduxHydration();
 
-        const theme = await helper.homepage.getPersistedValue('theme');
-        expect(theme.type).toBe('sepia');
-      } finally {
-        setTestData('preferences', null);
-      }
-    },
-  );
+          const theme = await helper.homepage.getPersistedValue('theme');
+          expect(theme.type).toBe('sepia');
+        } finally {
+          setTestData('preferences', null);
+        }
+      },
+    );
+  });
 
   test(
     'Logging out keeps localized language and theme',

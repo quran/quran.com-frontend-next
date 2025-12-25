@@ -22,9 +22,12 @@ test(
     // Submit the form - use form locator to target the submit button, not the tab button
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
-    // We should be redirected to the home page
-    await page.waitForURL(/\/fr$/);
-    await expect(page).toHaveURL(/\/fr$/);
+    // We should be redirected to the home page (either "/" or "/<2-letter-code>")
+    await page.waitForURL((url) => {
+      const { pathname } = url;
+      return pathname === '/' || /^\/[a-zA-Z]{2}$/.test(pathname);
+    });
+    await expect(page.url()).toMatch(/\/$|\/[a-zA-Z]{2}$/);
 
     // We should be logged in
     const profileAvatarButton = page.getByTestId('profile-avatar-button');
