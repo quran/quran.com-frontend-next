@@ -20,10 +20,9 @@ interface PopoverSelectProps {
   options: PopoverSelectOption[];
   disabled?: boolean;
   value?: string | number;
-  placeholder?: string;
+  placeholder: string;
   onChange?: (value: string | number) => void;
   className?: string;
-  fullWidth?: boolean;
 }
 
 const PopoverSelect: React.FC<PopoverSelectProps> = ({
@@ -33,18 +32,18 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
   options,
   value,
   disabled = false,
-  placeholder = 'Select an option',
+  placeholder,
   className,
-  fullWidth = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const selectedOption = options.find((opt) => String(opt.value) === String(value));
+  const selectedOption = options.find(
+    (opt) => ['string', 'number'].includes(typeof value) && String(opt.value) === String(value),
+  );
   const displayLabel = selectedOption?.label || placeholder;
-  const hasValue = !!selectedOption;
 
   const handleSelect = useCallback(
     (optionValue: string | number) => {
@@ -85,10 +84,8 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
           id={id}
           name={name}
           className={classNames(styles.trigger, className, {
-            [styles.fullWidth]: fullWidth,
             [styles.disabled]: disabled,
             [styles.open]: isOpen,
-            [styles.placeholder]: !hasValue,
           })}
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
@@ -115,8 +112,12 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
           <div
             ref={listRef}
             role="listbox"
+            tabIndex={0}
             className={styles.list}
             aria-labelledby={id}
+            aria-activedescendant={
+              highlightedIndex != null ? `option-${highlightedIndex}` : undefined
+            }
             data-testid="popover-select-list"
           >
             {options.map((option, index) => {
@@ -127,6 +128,7 @@ const PopoverSelect: React.FC<PopoverSelectProps> = ({
                   key={option.value}
                   type="button"
                   role="option"
+                  id={`option-${index}`}
                   aria-selected={isSelected}
                   disabled={option.disabled}
                   className={classNames(styles.option, {
