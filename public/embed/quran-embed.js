@@ -240,8 +240,13 @@
         const prefix = verseBlocks.length > 1 ? `${verseNumber}. ` : '';
         const suffix = ` ${verseNumberArabic}`;
 
+        // Remove a leading verse number if the translation text already starts with it.
+        const cleanedText = text.replace(/^\s*\d+\.\s*/, '');
+
         translationPieces.push(
-          translator ? `${prefix}${text}${suffix}\n- ${translator}` : `${prefix}${text}${suffix}`,
+          translator
+            ? `${prefix}${cleanedText}${suffix}\n- ${translator}`
+            : `${prefix}${cleanedText}${suffix}`,
         );
       });
     });
