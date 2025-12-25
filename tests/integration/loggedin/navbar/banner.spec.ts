@@ -16,8 +16,6 @@ test.describe('Banner Test - Logged In User', () => {
   });
   test('should redirect to /reading-goal when user is logged in without goal', async ({ page }) => {
     mockStreakWithoutGoal(page);
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
 
     await clickCreateMyGoalButton(page);
     await page.waitForURL(new RegExp(`${READING_GOAL_URL}$`));
@@ -28,8 +26,6 @@ test.describe('Banner Test - Logged In User', () => {
     page,
   }) => {
     mockStreakWithGoal(page);
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
 
     await clickCreateMyGoalButton(page);
     await page.waitForURL(new RegExp(`${READING_GOAL_PROGRESS_URL}$`));

@@ -13,7 +13,6 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
-  await page.waitForLoadState('networkidle');
   await switchLanguage(page, 'en');
 });
 

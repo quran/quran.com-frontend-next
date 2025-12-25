@@ -67,6 +67,7 @@ const switchLanguage = async (page: Page, locale: string): Promise<void> => {
     ]);
   }
 
+  await page.waitForLoadState('networkidle');
   await expect(navigationDrawer).not.toBeVisible({ timeout: 5000 });
 };
 
