@@ -19,7 +19,7 @@ const AppPortalSection = ({ variant = 'drawer' }: AppPortalSectionProps) => {
       {variant === 'drawer' && <div>{t('app-portal.description')}</div>}
       <div>{t('app-portal.oauth-pitch')}</div>
       <div className={styles.actions}>
-        <Button href="/apps-portal" type={ButtonType.Success}>
+        <Button isNewTab href="/apps-portal" type={ButtonType.Success}>
           {t('app-portal.cta-explore')}
         </Button>
         <Button

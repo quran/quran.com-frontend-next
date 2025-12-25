@@ -100,7 +100,12 @@ const CopyButton: React.FC<Props> = ({
       className={classNames(styles.iconContainer, styles.verseAction)}
     >
       <span className={styles.icon}>
-        <IconContainer icon={<CopyIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        <IconContainer
+          icon={<CopyIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
       </span>
     </Button>
   );
