@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import { getMushafFontFamily, getQuranFontForMushaf } from './mushaf-fonts';
@@ -5,6 +6,7 @@ import { getMushafFontFamily, getQuranFontForMushaf } from './mushaf-fonts';
 import type { WidgetColors, WidgetOptions } from '@/types/ayah-widget';
 import { QuranFont } from '@/types/QuranReader';
 import { getFontFaceNameForPage, isQCFFont } from '@/utils/fontFaceHelper';
+import { isRTLLocale } from '@/utils/locale';
 import type Verse from 'types/Verse';
 
 type Props = {
@@ -163,6 +165,12 @@ const ArabicVerse = ({ verse, options, colors }: Props): JSX.Element => {
   const isQcfFont = useMemo(() => isQCFFont(quranFont), [quranFont]);
   const mushafFont = useMemo(() => getMushafFontFamily(options.mushaf), [options.mushaf]);
 
+  // Determine text direction for WBW translations
+  const translationDirection = useMemo(
+    () => (isRTLLocale(options.locale) ? 'rtl' : 'ltr'),
+    [options.locale],
+  );
+
   // QCF fonts use page-specific font-face names (one font per page).
   const qcfFontFamily = useMemo(() => {
     if (!isQcfFont) return '';
@@ -208,7 +216,14 @@ const ArabicVerse = ({ verse, options, colors }: Props): JSX.Element => {
                 dangerouslySetInnerHTML={{ __html: glyphText }}
               />
               {!isEndToken && options.enableWbw && word.translation?.text && (
-                <div style={{ ...STYLES.translation, color: colors.secondaryText }}>
+                <div
+                  style={{
+                    ...STYLES.translation,
+                    color: colors.secondaryText,
+                    direction: translationDirection,
+                    unicodeBidi: 'isolate',
+                  }}
+                >
                   {word.translation.text}
                 </div>
               )}
@@ -224,7 +239,14 @@ const ArabicVerse = ({ verse, options, colors }: Props): JSX.Element => {
           <div key={key} style={STYLES.wordWrapper}>
             <div style={{ ...STYLES.word, fontFamily: mushafFont }}>{textToRender}</div>
             {!isEndToken && options.enableWbw && word.translation?.text && (
-              <div style={{ ...STYLES.translation, color: colors.secondaryText }}>
+              <div
+                style={{
+                  ...STYLES.translation,
+                  color: colors.secondaryText,
+                  direction: translationDirection,
+                  unicodeBidi: 'isolate',
+                }}
+              >
                 {word.translation.text}
               </div>
             )}
