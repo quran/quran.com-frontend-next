@@ -22,7 +22,6 @@ export const getMushafFontFamily = (mushaf: MushafType): string => {
     case 'tajweed':
       // Tajweed uses QCF per-page fonts, fallback to Uthmani
       return "UthmanicHafs, 'Traditional Arabic', serif";
-    case 'qpc':
     default:
       return "UthmanicHafs, 'Traditional Arabic', 'Arabic Typesetting', 'Scheherazade', serif";
   }
@@ -43,7 +42,6 @@ export const getQuranFontForMushaf = (mushaf: MushafType): QuranFont => {
       return QuranFont.MadaniV2;
     case 'tajweed':
       return QuranFont.TajweedV4;
-    case 'qpc':
     default:
       return QuranFont.QPCHafs;
   }

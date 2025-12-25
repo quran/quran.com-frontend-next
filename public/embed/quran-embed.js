@@ -103,9 +103,12 @@
       '<div style="padding:16px;text-align:center;color:#4b5563;font-family:system-ui;">Loading Quran verse...</div>';
   };
 
-  const setErrorState = () => {
-    container.innerHTML =
-      '<div style="padding:16px;border:1px solid #fecaca;background:#fef2f2;border-radius:8px;color:#991b1b;font-family:system-ui;">Error loading verse. Please try again later.</div>';
+  const setErrorState = (message) => {
+    const safeMessage =
+      message && typeof message === 'string'
+        ? message.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        : 'Error loading verse. Please try again later.';
+    container.innerHTML = `<div style="padding:16px;border:1px solid #fecaca;background:#fef2f2;border-radius:8px;color:#991b1b;font-family:system-ui;">${safeMessage}</div>`;
   };
 
   /**
@@ -394,15 +397,14 @@
       const dangerousTags = new Set(['script', 'iframe', 'object', 'embed', 'link', 'meta']);
       const walker = document.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT);
 
+      // Collect nodes to remove first to avoid skipping siblings during mutation
       const toRemove = [];
       while (walker.nextNode()) {
         const el = walker.currentNode;
-
         if (dangerousTags.has(el.tagName.toLowerCase())) {
           toRemove.push(el);
-          // continue
           // eslint-disable-next-line no-continue
-          continue;
+          continue; // collected for removal; do not touch attributes
         }
 
         // Remove inline handlers and javascript: URLs
@@ -416,6 +418,7 @@
         });
       }
 
+      // Remove dangerous nodes after traversal to avoid skipping siblings
       toRemove.forEach((el) => el.remove());
       return doc.body.innerHTML;
     } catch (error) {
@@ -431,11 +434,22 @@
 
   // 2. Fetch widget HTML from API
   fetch(apiUrl.toString())
-    .then((response) => {
-      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-      return response.json();
-    })
-    .then((payload) => {
+    .then(async (response) => {
+      let payload;
+      try {
+        payload = await response.json();
+      } catch (jsonError) {
+        // If parsing fails, surface HTTP status if available
+        if (!response.ok) {
+          throw new Error(`HTTP error ${response.status}`);
+        }
+        throw jsonError;
+      }
+
+      if (!response.ok) {
+        throw new Error(payload?.error || `HTTP error ${response.status}`);
+      }
+
       if (!payload || !payload.success || !payload.html) {
         throw new Error(payload?.error || 'Unexpected response from widget API.');
       }
@@ -447,6 +461,10 @@
     .catch((error) => {
       // eslint-disable-next-line no-console
       console.error('[Quran Embed] Failed to load widget.', error);
-      setErrorState();
+      const msg =
+        error?.message === 'Failed to fetch'
+          ? `Failed to fetch widget HTML (possible CORS/mixed-content or network issue).`
+          : error?.message;
+      setErrorState(msg);
     });
 })();

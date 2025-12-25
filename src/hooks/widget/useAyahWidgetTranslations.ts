@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { getAvailableTranslations } from '@/api';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useAbortableEffect from '@/hooks/useAbortableEffect';
 import type AvailableTranslation from 'types/AvailableTranslation';
 
@@ -17,6 +18,7 @@ const DEFAULT_LOCALE = 'en';
  */
 const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTranslation[] => {
   const { t } = useTranslation('ayah-widget');
+  const toast = useToast();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const hasLoadedRef = useRef(false);
   const lastLoadedLocaleRef = useRef<string | null>(null);
@@ -48,6 +50,7 @@ const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTr
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error(t('errors.loadTranslations'), error);
+          toast(t('errors.loadTranslations'), { status: ToastStatus.Error });
         } finally {
           if (!signal.aborted) {
             hasLoadedRef.current = true;
@@ -58,7 +61,7 @@ const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTr
 
       loadTranslations();
     },
-    [locale, t],
+    [locale, t, toast],
   );
 
   return translations;

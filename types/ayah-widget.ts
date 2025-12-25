@@ -39,7 +39,6 @@ export type WidgetOptions = {
   // Inclusive ending verse number when rendering a range
   rangeEnd?: number;
 
-  // Should the widget display the Quran.com link
   // Should the widget display tafsirs button
   showTafsirs: boolean;
 

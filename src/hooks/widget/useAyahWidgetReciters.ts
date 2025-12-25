@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { getAvailableReciters } from '@/api';
+import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import useAbortableEffect from '@/hooks/useAbortableEffect';
 import type Reciter from 'types/Reciter';
 
@@ -23,6 +24,7 @@ const useAyahWidgetReciters = (
 ): Reciter[] => {
   const { t } = useTranslation('ayah-widget');
   const [reciters, setReciters] = useState<Reciter[]>([]);
+  const toast = useToast();
   const hasLoadedRef = useRef(false);
   const lastLoadedLocaleRef = useRef<string | null>(null);
   const isLoadingRef = useRef(false);
@@ -45,16 +47,16 @@ const useAyahWidgetReciters = (
           const response = await getAvailableReciters(locale, []);
           setReciters(response.reciters ?? []);
         } catch (error) {
-          if (signal.aborted) {
-            return;
-          }
           // eslint-disable-next-line no-console
           console.error(t('errors.loadReciters'), error);
+          toast(t('errors.loadReciters'), { status: ToastStatus.Error });
+
+          // Fallback to a default reciter if the API call fails (Mishary Rashid Alafasy).
           setReciters([
             {
               id: fallbackReciterId,
               reciterId: fallbackReciterId,
-              name: t('reciters.fallback'),
+              name: 'Mishary Rashid Alafasy',
               recitationStyle: '',
               relativePath: '',
             },

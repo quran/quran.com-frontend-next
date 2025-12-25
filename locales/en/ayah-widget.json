@@ -38,8 +38,7 @@
     "chipRemoveLabel": "Remove translation"
   },
   "reciters": {
-    "select": "Select reciter",
-    "fallback": "Mishary Rashid Alafasy"
+    "select": "Select reciter"
   },
   "theme": {
     "light": "Light",

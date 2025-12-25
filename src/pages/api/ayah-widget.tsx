@@ -38,6 +38,7 @@ const DEFAULT_VERSE = '33:56';
 const DEFAULT_RECITER = '7'; // Mishary Alafasy
 const INCORRECT_SUKUN_REGEX = /[\u06DF\u06E1\u06E2\u06E3\u06E4]/g; // Needed because of a font issue
 const FOOTNOTE_REGEX = /<sup[^>]*>.*?<\/sup>/g; // Needed to remove footnotes from translation text
+const MAX_RANGE_SPAN = 10;
 
 /**
  * The response type for the Ayah Widget API.
@@ -234,25 +235,48 @@ const buildVerseParams = (
  * @returns {Promise<void>}
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>) => {
+  // Set CORS headers for all responses (success or error)
+  const setCorsHeaders = () => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+  };
+
+  const sendError = (status: number, message: string) => {
+    setCorsHeaders();
+    return res.status(status).json({
+      success: false,
+      error: message,
+      html: `<div>${message}</div>`,
+    });
+  };
+
   // Only allow GET requests
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
-    return res.status(405).json({
-      success: false,
-      error: 'Method not allowed',
-      html: '<div>Method not allowed</div>',
-    });
+    return sendError(405, 'Method not allowed');
   }
 
   // Parse query parameters
   const ayah = parseString(req.query.ayah) || DEFAULT_VERSE;
   // Validate ayah format: must be "chapter:verse" where both are positive integers
   if (!/^\d+:\d+$/.test(ayah)) {
-    return res.status(400).json({
-      success: false,
-      error: 'Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").',
-      html: '<div>Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").</div>',
-    });
+    return sendError(400, 'Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").');
+  }
+
+  const [chapterSegment, verseSegment] = ayah.split(':');
+  const chapterNumber = Number(chapterSegment);
+  const verseNumber = Number(verseSegment);
+
+  // Quick bounds check for chapter/verse
+  if (
+    !Number.isInteger(chapterNumber) ||
+    chapterNumber < 1 ||
+    chapterNumber > 114 ||
+    !Number.isInteger(verseNumber) ||
+    verseNumber < 1 ||
+    verseNumber > 286
+  ) {
+    return sendError(400, 'Invalid ayah bounds.');
   }
 
   // Parse translation IDs, reciter, and other options
@@ -271,22 +295,49 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const showReflections = parseBool(req.query.showReflections, true);
   const showAnswers = parseBool(req.query.showAnswers, true);
   const localeParam = parseString(req.query.locale);
-  const locale =
-    localeParam && i18nConfig.locales.includes(localeParam)
-      ? localeParam
-      : i18nConfig.defaultLocale;
+  const localeIsSupported = localeParam && i18nConfig.locales.includes(localeParam);
+  if (localeParam && !localeIsSupported) {
+    return sendError(
+      400,
+      `Unsupported locale "${localeParam}". Supported locales: ${i18nConfig.locales.join(', ')}`,
+    );
+  }
 
-  // Parse range end if provided
+  const locale = localeIsSupported ? localeParam : i18nConfig.defaultLocale;
+
+  // Fetch chapter metadata once to validate verse bounds
+  let chapterData: ChapterResponse['chapter'] | undefined;
+  try {
+    const chapterResponse = await fetcher<ChapterResponse>(
+      makeChapterUrl(String(chapterNumber), locale),
+    );
+    chapterData = chapterResponse.chapter;
+  } catch (error) {
+    return sendError(400, 'Invalid chapter requested.');
+  }
+
+  const versesCount = chapterData?.versesCount;
+  if (!versesCount || verseNumber > versesCount) {
+    return sendError(400, 'Verse number is out of range for the selected chapter.');
+  }
+
+  // Parse range end if provided and clamp to valid verse count (and 10-verse limit)
   const rangeEndParam = parseString(req.query.rangeEnd);
-  const [chapterSegment, verseSegment] = ayah.split(':');
-  const chapterNumber = Number(chapterSegment);
-  const verseNumber = Number(verseSegment);
   const parsedRangeEnd = rangeEndParam ? Number(rangeEndParam) : undefined;
+  const maxAllowedRangeEnd = Math.min(verseNumber + MAX_RANGE_SPAN, versesCount);
+
+  // If user explicitly asks beyond the limit, return a clear error instead of silently capping.
+  if (parsedRangeEnd && Number.isFinite(parsedRangeEnd) && parsedRangeEnd > maxAllowedRangeEnd) {
+    return sendError(
+      400,
+      `Requested range exceeds the maximum allowed span (up to ${maxAllowedRangeEnd}).`,
+    );
+  }
   const normalizedRangeEnd =
     parsedRangeEnd &&
     Number.isFinite(parsedRangeEnd) &&
     parsedRangeEnd > verseNumber &&
-    parsedRangeEnd <= verseNumber + 10 // Limit range to max 10 verses
+    parsedRangeEnd <= maxAllowedRangeEnd
       ? parsedRangeEnd
       : undefined;
 
@@ -406,11 +457,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     const numericChapterId = Number(chapterCandidate);
     if (Number.isFinite(numericChapterId) && numericChapterId > 0) {
       try {
-        const chapterResponse = await fetcher<ChapterResponse>(
-          makeChapterUrl(String(numericChapterId), locale),
-        );
-        const chapterData = chapterResponse.chapter;
-        surahName = locale === 'ar' ? chapterData?.nameArabic : chapterData?.nameSimple;
+        // Reuse already-fetched chapter data when available
+        if (chapterData) {
+          surahName = locale === 'ar' ? chapterData?.nameArabic : chapterData?.nameSimple;
+        } else {
+          const chapterResponse = await fetcher<ChapterResponse>(
+            makeChapterUrl(String(numericChapterId), locale),
+          );
+          const chapterMeta = chapterResponse.chapter;
+          surahName = locale === 'ar' ? chapterMeta?.nameArabic : chapterMeta?.nameSimple;
+        }
       } catch (error) {
         logDebug('Failed to fetch chapter info for Surah name', { numericChapterId, error });
       }
@@ -482,7 +538,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
       <QuranWidget verses={sanitizedVerses} options={widgetOptions} />,
     );
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    setCorsHeaders();
     res.setHeader('Cache-Control', 'public, max-age=3600');
 
     // Return the rendered HTML
@@ -490,7 +546,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   } catch (error) {
     logDebug('Ayah widget error', { error });
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    setCorsHeaders();
     return res.status(500).json({
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',

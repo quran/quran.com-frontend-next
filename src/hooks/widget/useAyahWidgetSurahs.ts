@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useAbortableEffect from '@/hooks/useAbortableEffect';
 import Chapter from '@/types/Chapter';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -18,6 +19,7 @@ const DEFAULT_LOCALE = 'en';
 const useAyahWidgetSurahs = (locale: string = DEFAULT_LOCALE): Chapter[] => {
   const { t } = useTranslation('ayah-widget');
   const [surahs, setSurahs] = useState<Chapter[]>([]);
+  const toast = useToast();
   const hasLoadedRef = useRef(false);
   const lastLoadedLocaleRef = useRef<string | null>(null);
   const isLoadingRef = useRef(false);
@@ -50,11 +52,9 @@ const useAyahWidgetSurahs = (locale: string = DEFAULT_LOCALE): Chapter[] => {
             .sort((a, b) => Number(a.id ?? 0) - Number(b.id ?? 0)) as Chapter[];
           setSurahs(mapped);
         } catch (error) {
-          if (signal.aborted) {
-            return;
-          }
           // eslint-disable-next-line no-console
           console.error(t('errors.loadChapters'), error);
+          toast(t('errors.loadChapters'), { status: ToastStatus.Error });
         } finally {
           if (!signal.aborted) {
             hasLoadedRef.current = true;
