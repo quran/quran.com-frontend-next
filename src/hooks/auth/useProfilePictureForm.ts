@@ -87,6 +87,9 @@ const useProfilePictureForm = (): {
     sentryTransactionName: 'uploadProfilePicture',
     onError: onImageUploadError,
     removeFunction,
+    validationErrorMessages: {
+      fileExceedsLimit: t('errors.profile-pic-size-limit', { size: MAX_IMAGE_SIZE_MB }),
+    },
   });
 
   const isProcessing = isLoading || isUpdating;

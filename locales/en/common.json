@@ -193,6 +193,7 @@
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",
     "notFound": "*Not found",
+    "profile-pic-size-limit": "Profile pic size should be {{size}}MB maximum",
     "required": "*{{fieldName}} is missing!",
     "remove-avatar-failed": "Failed to remove avatar. Please try again.",
     "reset-password-failed": "Failed to reset password. Please try again.",
