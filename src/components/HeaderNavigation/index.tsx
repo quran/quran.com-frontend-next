@@ -32,6 +32,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = ({ title, innerClassNa
             variant={ButtonVariant.Compact}
             ariaLabel={t('back')}
             onClick={() => router.back()}
+            contentClassName={styles.backButtonContent}
           >
             <ArrowLeft />
           </Button>

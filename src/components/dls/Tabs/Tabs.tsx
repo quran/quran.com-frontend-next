@@ -24,20 +24,18 @@ const Tabs = ({
   tabs,
   onSelect,
   selected,
-  containerClassName,
   className,
   activeClassName,
+  containerClassName,
 }: TabsProps) => {
   return (
     <div className={classNames(styles.container, containerClassName)} role="tablist">
       {tabs.map((tab) => (
         <div
-          className={classNames(
-            className,
-            styles.tabItem,
-            selected === tab.value && activeClassName,
-            selected === tab.value && !activeClassName && styles.tabItemSelected,
-          )}
+          className={classNames(styles.tabItem, className, {
+            [activeClassName]: selected === tab.value,
+            [styles.tabItemSelected]: selected === tab.value && !activeClassName,
+          })}
           key={tab.value}
           role="tab"
           tabIndex={0}
