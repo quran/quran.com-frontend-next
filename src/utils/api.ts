@@ -49,11 +49,28 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
  */
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
-): { wordFields: string } => ({
-  wordFields: `verse_key,verse_id,page_number,location,text_uthmani,text_imlaei_simple,${
-    quranFont === QuranFont.TajweedV4 ? QuranFont.MadaniV2 : quranFont
-  }${quranFont === QuranFont.QPCHafs ? '' : `,${QuranFont.QPCHafs}`}`,
-});
+): { wordFields: string } => {
+  const fields = new Set<string>([
+    'verse_key',
+    'verse_id',
+    'page_number',
+    'location',
+    'text_uthmani',
+    'text_imlaei_simple',
+  ]);
+
+  // Always include both QCF code fields for glyph fonts and QPC as a universal fallback,
+  // regardless of the currently selected mushaf. This prevents missing glyphs when the
+  // client hydrates with a different font than the one used during SSR.
+  fields.add(QuranFont.MadaniV1);
+  fields.add(QuranFont.MadaniV2);
+  fields.add(QuranFont.QPCHafs);
+
+  // Include the current font (or v2 for tajweed) explicitly so we always fetch the primary glyph set.
+  fields.add(quranFont === QuranFont.TajweedV4 ? QuranFont.MadaniV2 : quranFont);
+
+  return { wordFields: Array.from(fields).join(',') };
+};
 
 /**
  * Get the mushaf id based on the value inside redux (if it's not SSR).
