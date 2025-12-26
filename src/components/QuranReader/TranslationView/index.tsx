@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import onCopyQuranWords from '../onCopyQuranWords';
+import QueryParamMessage from '../QueryParamMessage';
 import getTranslationsLabelString from '../ReadingView/utils/translation';
 
 import useGetVersesCount from './hooks/useGetVersesCount';
@@ -55,11 +56,22 @@ const TranslationView = ({
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
-  const { value: reciterId }: { value: number } = useGetQueryParamOrXstateValue(QueryParam.RECITER);
-  const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
+    QueryParam.RECITER,
+  );
+  const {
+    value: selectedTranslations,
+    isQueryParamDifferent: translationsQueryParamDifferent,
+  }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATIONS,
   );
-  const { value: wordByWordLocale }: { value: string } = useGetQueryParamOrReduxValue(
+  const {
+    value: wordByWordLocale,
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
 
@@ -201,22 +213,37 @@ const TranslationView = ({
     );
   }
 
+  const shouldShowQueryParamMessage =
+    translationsQueryParamDifferent ||
+    reciterQueryParamDifferent ||
+    wordByWordLocaleQueryParamDifferent;
+
   return (
-    <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
-      <div
-        className={styles.wrapper}
-        onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-      >
-        <Virtuoso
-          ref={virtuosoRef}
-          useWindowScroll
-          totalCount={versesCount + 1}
-          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-          initialItemCount={1} // needed for SSR.
-          itemContent={itemContentRenderer}
+    <>
+      {shouldShowQueryParamMessage && (
+        <QueryParamMessage
+          translationsQueryParamDifferent={translationsQueryParamDifferent}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
         />
-      </div>
-    </PageQuestionsContext.Provider>
+      )}
+
+      <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
+        <div
+          className={styles.wrapper}
+          onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+        >
+          <Virtuoso
+            ref={virtuosoRef}
+            useWindowScroll
+            totalCount={versesCount + 1}
+            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+            initialItemCount={1} // needed for SSR.
+            itemContent={itemContentRenderer}
+          />
+        </div>
+      </PageQuestionsContext.Provider>
+    </>
   );
 };
 
