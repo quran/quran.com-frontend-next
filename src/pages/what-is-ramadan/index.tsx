@@ -40,7 +40,6 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
             <h1>Ramadan: A Journey of Reflection, Renewal, and Revelation.</h1>
             <div className={styles.subSection}>
               <h2>What is Ramadan?</h2>
-
               <div>
                 At the heart of Ramadan lies the Quran, the holy book of Islam. Revealed over 1,400
                 years ago during this blessed month, the Quran is more than just a scripture; it is

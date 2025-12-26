@@ -1,6 +1,6 @@
 .htmlDescription {
-    p + p,
-    ul + p {
-        margin-top: var(--spacing-large);
-    }
+  p + p,
+  ul + p {
+    margin-block-start: var(--spacing-large);
+  }
 }
