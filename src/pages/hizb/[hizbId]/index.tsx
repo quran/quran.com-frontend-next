@@ -12,18 +12,15 @@ import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getHizbNavigationUrl } from '@/utils/navigation';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidHizbId } from '@/utils/validator';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 interface HizbPageProps {
   hizbVerses?: VersesResponse;
-  chaptersData: ChaptersData;
 }
 
 const HizbPage: NextPage<HizbPageProps> = ({ hizbVerses }) => {
@@ -60,8 +57,6 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         notFound: true,
       };
     }
-
-    const chaptersData = await getAllChaptersData(locale);
     try {
       // Validate locale against Language enum; use Language.EN if invalid
       const validLocale = Object.values(Language).includes(locale as Language)
@@ -69,18 +64,22 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         : Language.EN;
       const quranReaderStyles = getQuranReaderStylesInitialState(validLocale);
       const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
-
-      const pagesLookup = await getPagesLookup({ mushaf, hizbNumber: Number(hizbId) });
-
-      const hizbVerses = await getHizbVerses(hizbId, locale, {
-        ...getDefaultWordFields(quranReaderStyles.quranFont),
-        mushaf,
-      });
+      const [hizbVerses, pagesLookup] = await Promise.all([
+        getHizbVerses(hizbId, locale, {
+          ...getDefaultWordFields(quranReaderStyles.quranFont),
+          mushaf,
+        }),
+        getPagesLookup({ mushaf, hizbNumber: Number(hizbId) }),
+      ]);
       hizbVerses.pagesLookup = pagesLookup;
+      hizbVerses.metaData = {
+        ...(hizbVerses.metaData || {}),
+        from: pagesLookup.lookupRange.from,
+        to: pagesLookup.lookupRange.to,
+      };
       return {
         props: {
           hizbVerses,
-          chaptersData,
         },
       };
     } catch (error) {

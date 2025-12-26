@@ -17,7 +17,7 @@ import { WordVerse } from '@/types/Word';
 
 type ActionButtonsProps = {
   verse: WordVerse;
-  bookmarksRangeUrl?: string | null; // optional when bookmarks data isn't available
+  bookmarksRangeUrl?: string | null;
   hasNotes?: boolean;
   isTranslationView?: boolean;
   openShareModal: () => void;

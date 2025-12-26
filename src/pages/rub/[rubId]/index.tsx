@@ -56,14 +56,13 @@ const buildRubPageProps = async (
 ): Promise<{ props: RubPageProps }> => {
   const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
   const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
-  const pagesLookup = await getPagesLookup({ mushaf, rubElHizbNumber: Number(rubId) });
-
-  const rubVerses = await getRubVerses(rubId, locale, {
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    mushaf,
-    from: pagesLookup.lookupRange.from,
-    to: pagesLookup.lookupRange.to,
-  });
+  const [rubVerses, pagesLookup] = await Promise.all([
+    getRubVerses(rubId, locale, {
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      mushaf,
+    }),
+    getPagesLookup({ mushaf, rubElHizbNumber: Number(rubId) }),
+  ]);
   rubVerses.pagesLookup = pagesLookup;
   rubVerses.metaData = {
     ...(rubVerses.metaData || {}),

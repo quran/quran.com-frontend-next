@@ -19,13 +19,11 @@ import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import PlainVerseText from '@/components/Verse/PlainVerseText';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { QuranFont } from '@/types/QuranReader';
 import { WordVerse } from '@/types/Word';
 import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -36,9 +34,8 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  bookmarksRangeUrl?: string | null; // optional to allow SSR fallback without auth
+  bookmarksRangeUrl?: string | null;
   hasNotes?: boolean;
-  shouldUseUthmaniText?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -47,7 +44,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   bookmarksRangeUrl,
   hasNotes,
-  shouldUseUthmaniText = false,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
@@ -88,11 +84,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
-            {shouldUseUthmaniText ? (
-              <PlainVerseText words={verseWords} quranFont={QuranFont.Uthmani} />
-            ) : (
-              <VerseText words={verseWords} shouldShowH1ForSEO={verseIndex === 0} />
-            )}
+            <VerseText words={verseWords} shouldShowH1ForSEO={verseIndex === 0} />
           </div>
           <div className={styles.verseTranslationsContainer}>
             {verse.translations?.map((translation: Translation) => (

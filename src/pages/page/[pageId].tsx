@@ -25,10 +25,10 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
 import { PAGES_MUSHAF_MAP } from '@/utils/page';
+import getPageVersesParams from '@/utils/pages/getPageVersesParams';
 import getQuranReaderData from '@/utils/pages/getQuranReaderData';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidPageNumber } from '@/utils/validator';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import ChaptersData from 'types/ChaptersData';
 
@@ -97,29 +97,17 @@ const buildPageProps = async (
   locale: string,
   pageId: string,
   mushaf: number,
-  quranReaderStyles: QuranReaderStyles,
+  quranFont: QuranReaderStyles['quranFont'],
   chaptersData: ChaptersData,
 ): Promise<{ props: Props }> => {
-  // Get pages lookup to determine the range of verses on the page
-  const pagesLookup = await getPagesLookup({ mushaf, pageNumber: Number(pageId) });
-  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-    chaptersData,
-    pagesLookup.lookupRange.from,
-    pagesLookup.lookupRange.to,
-  ).length;
-
-  // Fetch all the verses on the page for SSR
-  const pageVerses = await getPageVerses(pageId, locale, {
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    mushaf,
-    perPage: numberOfVerses,
-    from: pagesLookup.lookupRange.from,
-    to: pagesLookup.lookupRange.to,
-  });
+  const pageVersesParams = getPageVersesParams(mushaf, getDefaultWordFields(quranFont));
+  const [pageVerses, pagesLookup] = await Promise.all([
+    getPageVerses(pageId, locale, pageVersesParams),
+    getPagesLookup({ mushaf, pageNumber: Number(pageId) }),
+  ]);
   pageVerses.pagesLookup = pagesLookup;
   pageVerses.metaData = {
     ...(pageVerses.metaData || {}),
-    numberOfVerses,
     from: pagesLookup.lookupRange.from,
     to: pagesLookup.lookupRange.to,
   };
@@ -145,7 +133,13 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       };
     }
     try {
-      return await buildPageProps(locale, pageId, mushaf, quranReaderStyles, chaptersData);
+      return await buildPageProps(
+        locale,
+        pageId,
+        mushaf,
+        quranReaderStyles.quranFont,
+        chaptersData,
+      );
     } catch (error) {
       return {
         notFound: true,

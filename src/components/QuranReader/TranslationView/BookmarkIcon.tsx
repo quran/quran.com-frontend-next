@@ -14,7 +14,7 @@ import Verse from 'types/Verse';
 
 type Props = {
   verse: Verse;
-  bookmarksRangeUrl?: string | null; // optional so SSR fallback can render without auth
+  bookmarksRangeUrl?: string | null;
 };
 
 /**

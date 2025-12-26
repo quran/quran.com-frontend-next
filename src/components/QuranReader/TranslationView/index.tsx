@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import onCopyQuranWords from '../onCopyQuranWords';
-import QueryParamMessage from '../QueryParamMessage';
 import getTranslationsLabelString from '../ReadingView/utils/translation';
 
 import useGetVersesCount from './hooks/useGetVersesCount';
@@ -15,7 +14,7 @@ import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 import TranslationViewVerse from './TranslationViewVerse';
 
-import ChapterHeader from '@/components/chapters/ChapterHeader'; // SSR fallback needs the header too
+import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
@@ -56,22 +55,11 @@ const TranslationView = ({
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
-  const {
-    value: reciterId,
-    isQueryParamDifferent: reciterQueryParamDifferent,
-  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.RECITER,
-  );
-  const {
-    value: selectedTranslations,
-    isQueryParamDifferent: translationsQueryParamDifferent,
-  }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+  const { value: reciterId }: { value: number } = useGetQueryParamOrXstateValue(QueryParam.RECITER);
+  const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATIONS,
   );
-  const {
-    value: wordByWordLocale,
-    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
-  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+  const { value: wordByWordLocale }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
 
@@ -94,9 +82,11 @@ const TranslationView = ({
     String(resourceId),
     initialData.pagination.perPage,
   );
+
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
-  // mushaf is needed to build bookmark ranges during SSR fallback
+
+  // mushaf id is used to build bookmark range URLs for the no-JS fallback
   const mushafId = useMemo(
     () => getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
     [quranReaderStyles.mushafLines, quranReaderStyles.quranFont],
@@ -160,19 +150,6 @@ const TranslationView = ({
     );
   };
 
-  const shouldShowQueryParamMessage =
-    translationsQueryParamDifferent ||
-    reciterQueryParamDifferent ||
-    wordByWordLocaleQueryParamDifferent;
-
-  const queryParamMessage = shouldShowQueryParamMessage ? (
-    <QueryParamMessage
-      translationsQueryParamDifferent={translationsQueryParamDifferent}
-      reciterQueryParamDifferent={reciterQueryParamDifferent}
-      wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-    />
-  ) : null;
-
   if (!verses.length) {
     return null;
   }
@@ -180,74 +157,66 @@ const TranslationView = ({
   // Render SSR fallback before hydration for SEO and no-JS
   if (!hasMounted) {
     return (
-      <>
-        {queryParamMessage}
-        <noscript suppressHydrationWarning>
-          <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
-            <div
-              className={styles.wrapper}
-              onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-            >
-              {verses.map((verse, verseIdx) => {
-                const bookmarksRangeUrl = isLoggedIn()
-                  ? makeBookmarksRangeUrl(
-                      mushafId,
-                      Number(verse.chapterId),
-                      Number(verse.verseNumber),
-                      initialData.pagination.perPage,
-                    )
-                  : undefined;
-                const translationsLabel = getTranslationsLabelString(verse.translations); // reuse translation label for header
-                return (
-                  <div key={verse.verseKey} className={styles.container}>
-                    {verse.verseNumber === 1 && (
-                      <ChapterHeader
-                        translationsLabel={translationsLabel}
-                        translationsCount={verse.translations?.length}
-                        chapterId={String(verse.chapterId)}
-                        pageNumber={verse.pageNumber}
-                        hizbNumber={verse.hizbNumber}
-                        isTranslationView
-                      />
-                    )}
-                    <TranslationViewCell
-                      verseIndex={verseIdx}
-                      verse={verse}
-                      quranReaderStyles={quranReaderStyles}
-                      bookmarksRangeUrl={bookmarksRangeUrl}
-                      hasNotes={false}
-                      shouldUseUthmaniText
+      <noscript suppressHydrationWarning>
+        <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
+          <div
+            className={styles.wrapper}
+            onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+          >
+            {verses.map((verse, verseIdx) => {
+              const bookmarksRangeUrl = isLoggedIn()
+                ? makeBookmarksRangeUrl(
+                    mushafId,
+                    Number(verse.chapterId),
+                    Number(verse.verseNumber),
+                    initialData.pagination.perPage,
+                  )
+                : undefined;
+              const translationsLabel = getTranslationsLabelString(verse.translations); // reuse translation label for header
+              return (
+                <div key={verse.verseKey} className={styles.container}>
+                  {verse.verseNumber === 1 && (
+                    <ChapterHeader
+                      translationsLabel={translationsLabel}
+                      translationsCount={verse.translations?.length}
+                      chapterId={String(verse.chapterId)}
+                      pageNumber={verse.pageNumber}
+                      hizbNumber={verse.hizbNumber}
+                      isTranslationView
                     />
-                  </div>
-                );
-              })}
-            </div>
-          </PageQuestionsContext.Provider>
-        </noscript>
-      </>
+                  )}
+                  <TranslationViewCell
+                    verseIndex={verseIdx}
+                    verse={verse}
+                    quranReaderStyles={quranReaderStyles}
+                    bookmarksRangeUrl={bookmarksRangeUrl}
+                    hasNotes={false}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </PageQuestionsContext.Provider>
+      </noscript>
     );
   }
 
   return (
-    <>
-      {queryParamMessage}
-
-      <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
-        <div
-          className={styles.wrapper}
-          onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-        >
-          <Virtuoso
-            ref={virtuosoRef}
-            useWindowScroll
-            totalCount={versesCount + 1}
-            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-            initialItemCount={1} // needed for SSR.
-            itemContent={itemContentRenderer}
-          />
-        </div>
-      </PageQuestionsContext.Provider>
-    </>
+    <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
+      <div
+        className={styles.wrapper}
+        onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+      >
+        <Virtuoso
+          ref={virtuosoRef}
+          useWindowScroll
+          totalCount={versesCount + 1}
+          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+          initialItemCount={1} // needed for SSR.
+          itemContent={itemContentRenderer}
+        />
+      </div>
+    </PageQuestionsContext.Provider>
   );
 };
 
