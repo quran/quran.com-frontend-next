@@ -229,14 +229,14 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
-      const firstPageOfRange = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfRange];
+
+      // fetch the entire requested range on SSR so verses render without JS
       const versesResponse = await getRangeVerses(locale, {
         ...apiParams,
         ...{
-          perPage: 'all',
-          from: firstPageOfChapterLookup.from,
-          to: firstPageOfChapterLookup.to,
+          perPage: numberOfVerses,
+          from: pagesLookupResponse.lookupRange.from,
+          to: pagesLookupResponse.lookupRange.to,
         },
       });
       const metaData = { numberOfVerses };
@@ -276,15 +276,10 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
-
-      const firstPageOfChapter = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfChapter];
       apiParams = {
         ...apiParams,
         ...{
-          perPage: 'all',
-          from: firstPageOfChapterLookup.from,
-          to: firstPageOfChapterLookup.to,
+          perPage: numberOfVerses, // fetch all verses of the chapter on SSR instead of just the first page
         },
       };
     }

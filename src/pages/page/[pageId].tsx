@@ -16,10 +16,11 @@ import {
   selectIsUsingDefaultFont,
   selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
-import { getMushafId } from '@/utils/api';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
@@ -27,6 +28,7 @@ import { PAGES_MUSHAF_MAP } from '@/utils/page';
 import getQuranReaderData from '@/utils/pages/getQuranReaderData';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidPageNumber } from '@/utils/validator';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import ChaptersData from 'types/ChaptersData';
 
@@ -95,15 +97,29 @@ const buildPageProps = async (
   locale: string,
   pageId: string,
   mushaf: number,
+  quranReaderStyles: QuranReaderStyles,
   chaptersData: ChaptersData,
 ): Promise<{ props: Props }> => {
-  const [pageVerses, pagesLookup] = await Promise.all([
-    getPageVerses(pageId, locale),
-    getPagesLookup({ mushaf, pageNumber: Number(pageId) }),
-  ]);
+  // Get pages lookup to determine the range of verses on the page
+  const pagesLookup = await getPagesLookup({ mushaf, pageNumber: Number(pageId) });
+  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+    chaptersData,
+    pagesLookup.lookupRange.from,
+    pagesLookup.lookupRange.to,
+  ).length;
+
+  // Fetch all the verses on the page for SSR
+  const pageVerses = await getPageVerses(pageId, locale, {
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    mushaf,
+    perPage: numberOfVerses,
+    from: pagesLookup.lookupRange.from,
+    to: pagesLookup.lookupRange.to,
+  });
   pageVerses.pagesLookup = pagesLookup;
   pageVerses.metaData = {
     ...(pageVerses.metaData || {}),
+    numberOfVerses,
     from: pagesLookup.lookupRange.from,
     to: pagesLookup.lookupRange.to,
   };
@@ -129,7 +145,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       };
     }
     try {
-      return await buildPageProps(locale, pageId, mushaf, chaptersData);
+      return await buildPageProps(locale, pageId, mushaf, quranReaderStyles, chaptersData);
     } catch (error) {
       return {
         notFound: true,
