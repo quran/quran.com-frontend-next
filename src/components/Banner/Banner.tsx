@@ -1,26 +1,30 @@
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Banner.module.scss';
 
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Link from '@/dls/Link/Link';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { selectIsBannerVisible } from '@/redux/slices/banner';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 
 type BannerProps = {
   text: string;
-  ctaButton?: React.ReactNode;
   shouldShowPrefixIcon?: boolean;
 };
 
-const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
-  const isBannerVisible = useSelector(selectIsBannerVisible);
+const Banner = ({ text, shouldShowPrefixIcon = true }: BannerProps) => {
+  const { t } = useTranslation('common');
+
+  const handleDonationClick = () => {
+    logButtonClick('banner_cta', {
+      isDonationCampaign: true,
+    });
+  };
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.isVisible]: isBannerVisible,
-      })}
-    >
+    <div className={classNames(styles.container, styles.isVisible)}>
       <div className={styles.description}>
         {shouldShowPrefixIcon && (
           <div className={styles.illustrationContainer}>
@@ -29,7 +33,17 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
         )}
         <div className={styles.text}>{text}</div>
       </div>
-      {ctaButton && <div className={styles.ctaContainer}>{ctaButton}</div>}
+      <div className={styles.ctaContainer}>
+        <Link href={makeDonatePageUrl(false, true)} isNewTab>
+          <Button
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Outlined}
+            onClick={handleDonationClick}
+          >
+            {t('fundraising.donation-campaign.cta')}
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
