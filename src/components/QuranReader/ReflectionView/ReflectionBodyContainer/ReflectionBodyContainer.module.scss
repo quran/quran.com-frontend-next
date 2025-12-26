@@ -3,6 +3,7 @@
 .reflectionDataContainer {
   padding-block-start: var(--spacing-small-px);
   padding-inline: var(--spacing-medium-px);
+
   @include breakpoints.tablet {
     padding-block-start: var(--spacing-medium-px);
     padding-inline: var(--spacing-large-px);
@@ -23,6 +24,7 @@
     svg {
       inline-size: var(--spacing-medium-plus-px);
       block-size: var(--spacing-medium-plus-px);
+
       @include breakpoints.tablet {
         inline-size: var(--spacing-medium2-px);
         block-size: var(--spacing-medium2-px);
@@ -30,7 +32,7 @@
     }
   }
 
-  .tab + .tab {
+  .tab+.tab {
     margin-inline-start: unset;
   }
 
@@ -49,7 +51,24 @@
 
 .modalTitleContainer {
   font-size: var(--font-size-xsmall-px);
+
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
   }
+}
+
+.tab {
+  width: 100%;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
+
+  svg {
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+  }
+}
+
+.tabActive {
+  color: var(--color-success-medium);
+  border-block-end: 2px solid var(--color-success-medium);
 }

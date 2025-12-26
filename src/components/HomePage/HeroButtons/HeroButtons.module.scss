@@ -4,13 +4,16 @@
   color: var(--color-text-faded-new);
   background: var(--color-background-elevated);
   text-wrap: nowrap;
+
   &:hover {
     background: var(--color-background-elevated);
     color: var(--color-text-faded-new);
   }
+
   border: none;
   padding: var(--spacing-medium2-px);
   box-shadow: var(--shadow-small);
+
   @include breakpoints.smallerThanTablet {
     padding: var(--spacing-small-px);
   }

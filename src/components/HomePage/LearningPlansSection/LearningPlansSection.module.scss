@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding-block-end: var(--spacing-medium);
+
   @include breakpoints.tablet {
     padding-block-end: var(--spacing-large-px);
   }
@@ -13,6 +14,7 @@
   h1 {
     font-size: var(--font-size-xlarge-px);
     font-weight: var(--font-weight-bold);
+
     @include breakpoints.tablet {
       font-size: var(--font-size-xxlarge-px);
     }
@@ -37,9 +39,11 @@
   &::-webkit-scrollbar {
     block-size: 1px; // Small height for horizontal scrollbar
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: transparent; // Hide the thumb
   }
+
   &::-webkit-scrollbar-track {
     background-color: transparent; // Hide the track
   }
@@ -47,6 +51,7 @@
   // Optional: Show scrollbar on hover for better UX
   &:hover {
     scrollbar-color: var(--scrollbar-thumb) transparent;
+
     &::-webkit-scrollbar-thumb {
       background-color: var(--scrollbar-thumb);
     }
@@ -56,6 +61,7 @@
 .learnPlanCard {
   flex: 0 0 auto;
   inline-size: clamp(216px, 54vw, 312px);
+
   @include breakpoints.smallerThanTablet {
     // Show just a small peek of the 3rd card on mobile
     inline-size: calc((100% - (var(--spacing-medium) * 2)) / 2.1);
@@ -134,6 +140,7 @@
 
 .seeMore {
   color: var(--color-text-faded-new);
+
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
   }

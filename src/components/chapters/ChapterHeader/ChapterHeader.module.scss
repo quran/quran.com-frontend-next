@@ -52,6 +52,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   inline-size: $changeTranslationButtonInlineSize;
   margin-inline-start: var(--spacing-xsmall);
   white-space: nowrap;
+
   @include breakpoints.smallerThanTablet {
     inline-size: $changeTranslationButtonInlineSizeMobile;
   }
@@ -145,6 +146,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 
   &:hover {
     cursor: pointer;
+
     svg {
       color: var(--color-success-deep);
     }
@@ -188,6 +190,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 
 .withTranslationView {
   margin-block-end: var(--spacing-medium3-px);
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-medium2-px);
   }
@@ -216,9 +219,11 @@ $bismillahSvgInlineSizeMobile: 148px;
 
 .translation {
   max-inline-size: calc(5 * var(--spacing-mega));
+
   @include breakpoints.mobileM {
     max-inline-size: calc(7 * var(--spacing-mega));
   }
+
   @include breakpoints.tablet {
     max-inline-size: calc(11 * var(--spacing-mega));
   }
@@ -232,6 +237,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 .changeTranslation {
   color: var(--color-success-medium);
   cursor: pointer;
+
   &:hover {
     text-decoration: underline;
   }

@@ -20,22 +20,17 @@ type TabsProps = {
 };
 
 // TODO: move this to Radix UI Tabs component
-const Tabs = ({
-  tabs,
-  onSelect,
-  selected,
-  className,
-  activeClassName,
-  containerClassName,
-}: TabsProps) => {
+const Tabs = ({ tabs, onSelect, selected, className, activeClassName, containerClassName }: TabsProps) => {
   return (
     <div className={classNames(styles.container, containerClassName)} role="tablist">
       {tabs.map((tab) => (
         <div
-          className={classNames(styles.tabItem, className, {
-            [activeClassName]: selected === tab.value,
-            [styles.tabItemSelected]: selected === tab.value && !activeClassName,
-          })}
+          className={classNames(
+            className,
+            styles.tabItem,
+            selected === tab.value && activeClassName,
+            selected === tab.value && !activeClassName && styles.tabItemSelected,
+          )}
           key={tab.value}
           role="tab"
           tabIndex={0}

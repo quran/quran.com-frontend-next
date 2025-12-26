@@ -14,7 +14,7 @@
   border-radius: 0px var(--spacing-small-px) var(--spacing-small-px) 0px;
 
   // Fix verse word alignment for Arabic pages
-  [class*='plainVerseWordContainer'] {
+  [class*="plainVerseWordContainer"] {
     margin-block-start: var(--spacing-medium);
   }
 }

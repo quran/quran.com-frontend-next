@@ -244,6 +244,10 @@
   },
   "fundraising": {
     "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
+    "donation-campaign": {
+      "cta": "Dona hoy",
+      "text": "Hazte simpatizante"
+    },
     "title": "Conviértete en donante mensual"
   },
   "get-started": "Empezar",

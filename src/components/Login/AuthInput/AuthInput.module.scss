@@ -39,7 +39,8 @@
   &:hover,
   &:focus,
   &.hasValue {
-    border: none; /* Let container handle the border */
+    border: none;
+    /* Let container handle the border */
   }
 
   &:disabled {

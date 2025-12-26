@@ -96,10 +96,6 @@ const ReflectionBodyContainer = ({
         surahId: selectedChapterId,
         ayahNumber: selectedVerseNumber,
         locale: lang,
-
-        reviewed: true,
-        reflectionLanguages: reflectionLanguageIsoCodes,
-
         postTypeIds: [
           selectedContentType === ContentType.REFLECTIONS
             ? REFLECTION_POST_TYPE_ID
@@ -120,7 +116,6 @@ const ReflectionBodyContainer = ({
         containerClassName={styles.tabsContainer}
         activeClassName={styles.tabActive}
       />
-<<<<<<< HEAD
       <DataFetcher
         loading={TafsirSkeleton}
         queryKey={makeAyahReflectionsUrl({
@@ -135,11 +130,8 @@ const ReflectionBodyContainer = ({
         })}
         render={renderBody}
       />
-    </>
-=======
       {isModal ? <div className={styles.reflectionDataContainer}>{dataFetcher}</div> : dataFetcher}
     </div>
->>>>>>> afc6fbcb5 ([QF-4113] fix reflection modal/dialog issue (#2646))
   );
 
   return render({

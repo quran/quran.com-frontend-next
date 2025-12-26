@@ -121,10 +121,7 @@ test.describe('Navigation Sidebar Route Regressions', () => {
       await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
       await expect(sidebar).toBeVisible();
 
-      await Promise.all([
-        page.waitForURL(/\/$/),
-        page.getByTitle('Quran.com').first().click({ force: true }),
-      ]);
+      await Promise.all([page.waitForURL(/\/$/), page.getByTitle('Quran.com').nth(1).click()]);
 
       await expect(page).toHaveURL(/\/$/);
       await expect(sidebar).not.toBeAttached();

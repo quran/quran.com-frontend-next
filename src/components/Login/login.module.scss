@@ -25,6 +25,7 @@ $container-width: 370px;
   color: var(--color-text-default);
   text-align: center;
   margin-block-end: var(--spacing-xsmall-px);
+
   @include breakpoints.desktop {
     font-size: var(--font-size-xlarge-px);
     margin-block-end: var(--spacing-large);
@@ -41,7 +42,7 @@ $container-width: 370px;
   gap: var(--spacing-medium);
   inline-size: 100%;
 
-  & > * {
+  &>* {
     flex: 1;
   }
 }
@@ -75,6 +76,7 @@ $container-width: 370px;
 .googleButton {
   --themed-bg: var(--color-primary-faded);
   --themed-fg: var(--shade-9);
+
   @include theme.sepia {
     --themed-border: transparent;
   }
@@ -93,6 +95,7 @@ $container-width: 370px;
   --themed-bg: var(--facebook-brand-color);
   --themed-fg: var(--shade-0);
   --themed-border: var(--facebook-brand-color);
+
   @media (hover: hover) {
     &:hover {
       --themed-bg: var(--color-text-default);

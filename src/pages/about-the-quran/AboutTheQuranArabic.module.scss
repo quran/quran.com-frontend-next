@@ -1,11 +1,11 @@
 .arabicContainer {
-  text-align: end;
+  text-align: right;
 
   ol {
     list-style: decimal;
   }
 
-  div + div {
+  div+div {
     margin-block-start: var(--spacing-medium);
   }
 }
