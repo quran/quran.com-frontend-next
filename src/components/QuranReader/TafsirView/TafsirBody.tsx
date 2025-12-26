@@ -54,6 +54,7 @@ type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
   initialTafsirIdOrSlug?: number | string;
+  initialTafsirData?: TafsirContentResponse;
   scrollToTop: () => void;
   shouldRender?: boolean;
   render: (renderProps: {
@@ -67,6 +68,7 @@ const TafsirBody = ({
   initialChapterId,
   initialVerseNumber,
   initialTafsirIdOrSlug,
+  initialTafsirData,
   render,
   scrollToTop,
   shouldRender,
@@ -315,6 +317,7 @@ const TafsirBody = ({
           quranFont: quranReaderStyles.quranFont,
           mushafLines: quranReaderStyles.mushafLines,
         })}
+        initialData={initialTafsirData}
         render={renderTafsir}
       />
     </div>

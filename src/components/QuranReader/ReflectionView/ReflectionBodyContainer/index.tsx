@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
@@ -9,6 +8,8 @@ import styles from './ReflectionBodyContainer.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
+import ReflectionBody from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer/ReflectionBody';
+import ReflectionSurahAndAyahSelection from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer/ReflectionSurahAndAyahSelection';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
@@ -27,14 +28,6 @@ import {
 import { reflectionLanguagesToLocaleCodes } from '@/utils/quranReflect/locale';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
-
-const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
-  ssr: false,
-});
-const ReflectionBody = dynamic(() => import('./ReflectionBody'), {
-  ssr: false,
-  loading: TafsirSkeleton,
-});
 
 type ReflectionBodyProps = {
   initialChapterId: string;

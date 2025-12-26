@@ -14,12 +14,14 @@ import DataContext from '@/contexts/DataContext';
 import { makeChapterInfoUrl } from '@/utils/apiPaths';
 import { getChapterData } from '@/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
+import ChapterInfo from 'types/ChapterInfo';
 
 interface SurahInfoModalProps {
   chapterId: string;
+  initialChapterInfo?: ChapterInfo | null;
 }
 
-const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
+const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId, initialChapterInfo }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const chapter = getChapterData(chaptersData, chapterId);
@@ -29,6 +31,9 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
   const { data: chapterInfoResponse, error } = useSWRImmutable(
     makeChapterInfoUrl(chapterId, lang),
     () => getChapterInfo(chapterId, lang),
+    {
+      fallbackData: initialChapterInfo ? { chapterInfo: initialChapterInfo } : undefined,
+    },
   );
 
   if (!chapter) return null;
