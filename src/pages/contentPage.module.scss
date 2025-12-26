@@ -2,18 +2,23 @@
 
 .contentPage {
   margin: auto;
+
   @include breakpoints.desktop {
     inline-size: 65%;
   }
+
   @include breakpoints.smallerThanDesktop {
+    padding-block-start: var(--banner-height);
     inline-size: 90%;
   }
+
   * {
     line-height: calc(1.3 * var(--line-height-xlarge));
   }
 }
 
 .contentPage {
+
   h1,
   & .heading {
     font-size: var(--font-size-xlarge);
@@ -47,28 +52,36 @@
     line-height: var(--line-height-large);
     margin-block-end: var(--spacing-medium);
   }
+
   a {
     text-decoration: underline;
     font-weight: var(--font-weight-semibold);
+
     &:hover {
       opacity: var(--opacity-50);
     }
   }
+
   ol {
     list-style: lower-latin;
   }
+
   li {
     margin-inline-start: var(--spacing-mega);
   }
+
   ul li {
     list-style: disc;
   }
+
   i {
     font-style: italic;
+
     &.italicLarge {
       font-size: var(--font-size-large);
     }
   }
+
   b,
   strong {
     font-weight: var(--font-weight-bold);
@@ -113,9 +126,11 @@
 .section {
   padding-block-start: var(--spacing-mega);
 }
+
 .subSection {
   padding-block-start: var(--spacing-medium);
 }
+
 .innerSection {
   padding-block: var(--spacing-medium);
 }

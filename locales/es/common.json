@@ -125,7 +125,11 @@
   },
   "consents": {
     "communication": {
+<<<<<<< HEAD
       "body": "🚀 Potencia tu progreso a través de notificaciones <boldSpan> personalizadas </boldSpan> sobre el progreso de tus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br></br> <br></br> ¿Podemos mantenerte informado a través del correo electrónico y otros canales? Tú tienes el control: puedes ajustar estas preferencias en cualquier momento en la configuración de tu cuenta. <br></br> <br></br> Simplemente selecciona \"Permitir\" para recibir <boldSpan> recordatorios inspiradores </boldSpan> o \"Ahora no\" para rechazarlos.",
+=======
+      "body": "🚀 Potencia tu progreso a través de notificaciones <boldSpan> personalizadas </boldSpan> sobre el progreso de tus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br></br> <br></br> ¿Podemos mantenerte informado a través del correo electrónico y otros canales? Tú tienes el control: puedes ajustar estas preferencias en cualquier momento en la configuración de tu cuenta. <br></br> <br></br> Simplemente selecciona \\\"Permitir\\\" para recibir <boldSpan> recordatorios inspiradores </boldSpan> o \\\"Ahora no\\\" para rechazarlos.",
+>>>>>>> refs/rewritten/master-17
       "header": "¡Nos encantaría ayudar a mantenerte <boldSpan> comprometido y constante </boldSpan> en tu viaje de crecimiento del Corán! 📖🌟"
     }
   },
@@ -244,6 +248,10 @@
   },
   "fundraising": {
     "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
+    "donation-campaign": {
+      "cta": "Dona hoy",
+      "text": "Hazte simpatizante"
+    },
     "title": "Conviértete en donante mensual"
   },
   "get-started": "Empezar",

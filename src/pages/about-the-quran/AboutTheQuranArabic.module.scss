@@ -5,7 +5,7 @@
     list-style: decimal;
   }
 
-  div + div {
+  div+div {
     margin-block-start: var(--spacing-medium);
   }
 }

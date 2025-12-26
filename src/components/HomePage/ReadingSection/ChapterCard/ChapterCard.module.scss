@@ -5,13 +5,16 @@
   font-family: 'surahnames' !important;
   font-size: calc(2.5 * var(--font-size-jumbo-px));
   margin-inline-start: -20px;
+
   [dir='rtl'] & {
     margin-inline-start: 0;
   }
+
   @include breakpoints.smallerThanTablet {
     font-size: calc(1.2 * var(--font-size-jumbo));
     padding-inline-end: var(--spacing-medium-px);
     margin-inline-start: -15px;
+
     [dir='rtl'] & {
       margin-inline-start: 0;
     }
@@ -24,10 +27,12 @@
   gap: var(--spacing-medium);
   align-items: center;
   justify-content: space-between;
+
   @include breakpoints.smallerThanTablet {
     align-items: center;
     inline-size: 100%;
   }
+
   @include breakpoints.tablet {
     font-size: var(--font-size-large-px);
   }
@@ -35,9 +40,9 @@
 
 .chapterCard {
   @include breakpoints.smallerThanTablet {
-    padding: calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-small-px)
-      calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-medium-px);
+    padding: calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-small-px) calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-medium-px);
   }
+
   block-size: 100%;
   box-sizing: border-box;
 }
@@ -47,6 +52,7 @@
   flex-direction: column;
   block-size: 100%;
   justify-content: space-between;
+
   @include breakpoints.smallerThanTablet {
     justify-content: start;
     align-items: center;
@@ -56,6 +62,7 @@
 
 .translatedName {
   color: var(--color-text-faded-new);
+
   @include breakpoints.smallerThanTablet {
     display: block;
     font-size: var(--font-size-xsmall-px);
@@ -68,9 +75,11 @@
   align-items: center;
   gap: var(--spacing-micro);
   color: var(--color-text-faded-new);
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--spacing-medium-px);
   }
+
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
   }
@@ -78,6 +87,7 @@
 
 .transliteratedName {
   font-weight: var(--font-weight-semibold);
+
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-small-px);
   }
@@ -85,6 +95,7 @@
 
 .beginButton {
   border-radius: var(--border-radius-rounded);
+
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
     padding: var(--spacing-small-px) var(--spacing-medium-px);
