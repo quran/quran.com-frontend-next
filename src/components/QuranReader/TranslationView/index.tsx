@@ -177,7 +177,7 @@ const TranslationView = ({
     return null;
   }
 
-  // Render SSR fallback before hydration to improve performance and SEO with the full list of verses.
+  // Render SSR fallback before hydration for SEO and no-JS
   if (!hasMounted) {
     return (
       <>
@@ -216,6 +216,7 @@ const TranslationView = ({
                       quranReaderStyles={quranReaderStyles}
                       bookmarksRangeUrl={bookmarksRangeUrl}
                       hasNotes={false}
+                      shouldUseUthmaniText
                     />
                   </div>
                 );

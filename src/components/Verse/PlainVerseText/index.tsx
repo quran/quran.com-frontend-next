@@ -26,6 +26,16 @@ type Props = {
   quranFont?: QuranFont;
 };
 
+const getWordTextForFont = (word: Word, quranFont: QuranFont): string => {
+  if (quranFont === QuranFont.Uthmani) {
+    return word.textUthmani || word.text || '';
+  }
+  if (quranFont === QuranFont.IndoPak) {
+    return word.textIndopak || word.text || '';
+  }
+  return word.text || '';
+};
+
 /**
  * A component to only show the verse text without extra functionalities such as ayah
  * highlighting when audio is playing or showing a tooltip when
@@ -52,6 +62,7 @@ const PlainVerseText: React.FC<Props> = ({
   const { pageNumber } = words[0];
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
   const shouldShowTitle = !!titleText;
+  const fontScaleFont = quranFont === QuranFont.Uthmani ? QuranFont.QPCHafs : quranFont;
 
   return (
     <>
@@ -62,7 +73,7 @@ const PlainVerseText: React.FC<Props> = ({
         className={classNames(
           styles.verseTextContainer,
           styles.tafsirOrTranslationMode,
-          styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
+          styles[getFontClassName(fontScaleFont, fontScale || quranTextFontScale, mushafLines)],
         )}
       >
         {shouldShowTitle && <p className={styles.verseTitleText}>{titleText}</p>}
@@ -101,7 +112,11 @@ const PlainVerseText: React.FC<Props> = ({
                 shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                 shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
               >
-                <TextWord font={quranFont} text={word.text} charType={word.charTypeName} />
+                <TextWord
+                  font={quranFont}
+                  text={getWordTextForFont(word, quranFont)}
+                  charType={word.charTypeName}
+                />
               </PlainVerseTextWord>
             );
           })}
