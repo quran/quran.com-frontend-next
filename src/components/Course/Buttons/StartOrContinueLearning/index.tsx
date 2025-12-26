@@ -32,7 +32,11 @@ const StartOrContinueLearning: React.FC<Props> = ({ course, isHeaderButton = tru
     router.push(getLessonNavigationUrl(slug, redirectToLessonSlug));
   };
 
-  return <Button onClick={onContinueLearningClicked}>{t('continue-learning')}</Button>;
+  return (
+    <Button onClick={onContinueLearningClicked} data-testid="learning-plan-start-continue-button">
+      {t('continue-learning')}
+    </Button>
+  );
 };
 
 export default StartOrContinueLearning;

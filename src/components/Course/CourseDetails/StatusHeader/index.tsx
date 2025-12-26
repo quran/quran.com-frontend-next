@@ -76,7 +76,12 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
 
   const renderStartHereButton = () => {
     return (
-      <Button isDisabled={isEnrolling} isLoading={isEnrolling} onClick={onStartHereClicked}>
+      <Button
+        isDisabled={isEnrolling}
+        isLoading={isEnrolling}
+        onClick={onStartHereClicked}
+        data-testid="learning-plan-enroll-button"
+      >
         {t('start-here')}
       </Button>
     );

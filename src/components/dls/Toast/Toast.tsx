@@ -32,7 +32,7 @@ type Options = {
 const TOAST_DURATION = 3000; // 3 second
 const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
-    <div className={styles.contentContainer}>
+    <div className={styles.contentContainer} data-testid="toast-content">
       {content}
       {options.actions && (
         <div className={styles.actionsContainer}>

@@ -45,7 +45,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
         const url = getLessonNavigationUrl(courseSlug, slug);
 
         return (
-          <p className={styles.container} key={index}>
+          <p className={styles.container} key={index} data-testid={`syllabus-lesson-${dayNumber}`}>
             <span className={styles.day}>{`${t('day')} ${toLocalizedNumber(
               dayNumber,
               lang,
