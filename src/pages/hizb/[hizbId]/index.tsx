@@ -17,7 +17,6 @@ import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getHizbNavigationUrl } from '@/utils/navigation';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidHizbId } from '@/utils/validator';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -71,30 +70,13 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       const quranReaderStyles = getQuranReaderStylesInitialState(validLocale);
       const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
 
-      // Get pages lookup to determine the range of verses in the hizb
       const pagesLookup = await getPagesLookup({ mushaf, hizbNumber: Number(hizbId) });
 
-      const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-        chaptersData,
-        pagesLookup.lookupRange.from,
-        pagesLookup.lookupRange.to,
-      ).length;
-
-      // Fetch all the verses in the hizb for SSR
       const hizbVerses = await getHizbVerses(hizbId, locale, {
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         mushaf,
-        perPage: numberOfVerses,
-        from: pagesLookup.lookupRange.from,
-        to: pagesLookup.lookupRange.to,
       });
       hizbVerses.pagesLookup = pagesLookup;
-      hizbVerses.metaData = {
-        ...(hizbVerses.metaData || {}),
-        numberOfVerses,
-        from: pagesLookup.lookupRange.from,
-        to: pagesLookup.lookupRange.to,
-      };
       return {
         props: {
           hizbVerses,

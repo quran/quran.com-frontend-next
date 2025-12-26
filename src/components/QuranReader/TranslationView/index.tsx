@@ -182,45 +182,47 @@ const TranslationView = ({
     return (
       <>
         {queryParamMessage}
-        <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
-          <div
-            className={styles.wrapper}
-            onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-          >
-            {verses.map((verse, verseIdx) => {
-              const bookmarksRangeUrl = isLoggedIn()
-                ? makeBookmarksRangeUrl(
-                    mushafId,
-                    Number(verse.chapterId),
-                    Number(verse.verseNumber),
-                    initialData.pagination.perPage,
-                  )
-                : undefined;
-              const translationsLabel = getTranslationsLabelString(verse.translations); // reuse translation label for header
-              return (
-                <div key={verse.verseKey} className={styles.container}>
-                  {verse.verseNumber === 1 && (
-                    <ChapterHeader
-                      translationsLabel={translationsLabel}
-                      translationsCount={verse.translations?.length}
-                      chapterId={String(verse.chapterId)}
-                      pageNumber={verse.pageNumber}
-                      hizbNumber={verse.hizbNumber}
-                      isTranslationView
+        <noscript suppressHydrationWarning>
+          <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
+            <div
+              className={styles.wrapper}
+              onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+            >
+              {verses.map((verse, verseIdx) => {
+                const bookmarksRangeUrl = isLoggedIn()
+                  ? makeBookmarksRangeUrl(
+                      mushafId,
+                      Number(verse.chapterId),
+                      Number(verse.verseNumber),
+                      initialData.pagination.perPage,
+                    )
+                  : undefined;
+                const translationsLabel = getTranslationsLabelString(verse.translations); // reuse translation label for header
+                return (
+                  <div key={verse.verseKey} className={styles.container}>
+                    {verse.verseNumber === 1 && (
+                      <ChapterHeader
+                        translationsLabel={translationsLabel}
+                        translationsCount={verse.translations?.length}
+                        chapterId={String(verse.chapterId)}
+                        pageNumber={verse.pageNumber}
+                        hizbNumber={verse.hizbNumber}
+                        isTranslationView
+                      />
+                    )}
+                    <TranslationViewCell
+                      verseIndex={verseIdx}
+                      verse={verse}
+                      quranReaderStyles={quranReaderStyles}
+                      bookmarksRangeUrl={bookmarksRangeUrl}
+                      hasNotes={false}
                     />
-                  )}
-                  <TranslationViewCell
-                    verseIndex={verseIdx}
-                    verse={verse}
-                    quranReaderStyles={quranReaderStyles}
-                    bookmarksRangeUrl={bookmarksRangeUrl}
-                    hasNotes={false}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </PageQuestionsContext.Provider>
+                  </div>
+                );
+              })}
+            </div>
+          </PageQuestionsContext.Provider>
+        </noscript>
       </>
     );
   }

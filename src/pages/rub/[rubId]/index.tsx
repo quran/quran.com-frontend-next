@@ -16,7 +16,6 @@ import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getRubNavigationUrl } from '@/utils/navigation';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidRubId } from '@/utils/validator';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -57,26 +56,17 @@ const buildRubPageProps = async (
 ): Promise<{ props: RubPageProps }> => {
   const quranReaderStyles = getQuranReaderStylesInitialState(locale as Language);
   const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
-  // Get pages lookup to determine the range of verses in the rub
   const pagesLookup = await getPagesLookup({ mushaf, rubElHizbNumber: Number(rubId) });
-  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-    chaptersData,
-    pagesLookup.lookupRange.from,
-    pagesLookup.lookupRange.to,
-  ).length;
 
-  // Fetch all the verses in the rub for SSR
   const rubVerses = await getRubVerses(rubId, locale, {
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     mushaf,
-    perPage: numberOfVerses,
     from: pagesLookup.lookupRange.from,
     to: pagesLookup.lookupRange.to,
   });
   rubVerses.pagesLookup = pagesLookup;
   rubVerses.metaData = {
     ...(rubVerses.metaData || {}),
-    numberOfVerses,
     from: pagesLookup.lookupRange.from,
     to: pagesLookup.lookupRange.to,
   };

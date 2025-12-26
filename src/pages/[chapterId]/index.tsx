@@ -30,7 +30,7 @@ import {
 import { formatStringNumber } from '@/utils/number';
 import { isRangesStringValid, isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { parseVerseRange, generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import { parseVerseRange } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse, VersesResponse, PagesLookUpResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -212,7 +212,6 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
     ...getDefaultWordFields(getQuranReaderStylesInitialState(locale as Language).quranFont),
     mushaf: defaultMushafId,
   };
-  let numberOfVerses = 1;
   let pagesLookupResponse: PagesLookUpResponse | null = null;
   try {
     // if it's a range of verses e.g. 2:255-2:256
@@ -224,24 +223,14 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         from: fromVerseKey,
         to: toVerseKey,
       });
-      numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-        chaptersData,
-        pagesLookupResponse.lookupRange.from,
-        pagesLookupResponse.lookupRange.to,
-      ).length;
 
-      // fetch the entire requested range on SSR so verses render without JS
       const versesResponse = await getRangeVerses(locale, {
         ...apiParams,
         ...{
-          perPage: numberOfVerses,
           from: pagesLookupResponse.lookupRange.from,
           to: pagesLookupResponse.lookupRange.to,
         },
       });
-      const metaData = { numberOfVerses };
-
-      versesResponse.metaData = metaData;
       versesResponse.pagesLookup = pagesLookupResponse;
 
       return {
@@ -271,22 +260,8 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         chapterNumber: Number(chapterId),
         mushaf: defaultMushafId,
       });
-      numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-        chaptersData,
-        pagesLookupResponse.lookupRange.from,
-        pagesLookupResponse.lookupRange.to,
-      ).length;
-      apiParams = {
-        ...apiParams,
-        ...{
-          perPage: numberOfVerses, // fetch all verses of the chapter on SSR instead of just the first page
-        },
-      };
     }
     const versesResponse = await getChapterVerses(formatStringNumber(chapterId), locale, apiParams);
-    const metaData = { numberOfVerses };
-
-    versesResponse.metaData = metaData;
     versesResponse.pagesLookup = pagesLookupResponse;
 
     const chapterData = getChapterData(chaptersData, chapterId);
