@@ -59,9 +59,8 @@ export const getDefaultWordFields = (
     'text_imlaei_simple',
   ]);
 
-  // Always include both QCF code fields for glyph fonts and QPC as a universal fallback,
-  // regardless of the currently selected mushaf. This prevents missing glyphs when the
-  // client hydrates with a different font than the one used during SSR.
+  // Always include both QCF code fields and QPC text as a universal fallback so we can
+  // switch fonts client-side (or recover from missing glyphs) without extra API calls.
   fields.add(QuranFont.MadaniV1);
   fields.add(QuranFont.MadaniV2);
   fields.add(QuranFont.QPCHafs);

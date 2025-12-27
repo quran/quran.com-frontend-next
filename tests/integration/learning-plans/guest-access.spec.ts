@@ -102,7 +102,7 @@ test.describe('Access Control', () => {
     ]);
   });
 
-  test('should show toast when clicking syllabus lesson', async ({ page }) => {
+  test('should navigate to lesson when clicking syllabus lesson', async ({ page }) => {
     await setupNonEnrolled(page);
     // Open Syllabus tab (rendered as button)
     const syllabusTab = page.getByTestId('syllabus-button');
