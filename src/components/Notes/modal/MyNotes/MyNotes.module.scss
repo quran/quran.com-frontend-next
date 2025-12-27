@@ -1,5 +1,6 @@
 @use '@/styles/breakpoints';
 @use '@/styles/utility';
+@use '@/styles/constants';
 
 .container {
   display: flex;
@@ -86,4 +87,35 @@
 
 .addNoteButton {
   border-radius: var(--border-radius-medium-px);
+}
+
+.postToButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  padding-block: var(--spacing-micro-px);
+  padding-inline: var(--spacing-xsmall-px);
+  gap: calc(2 * var(--spacing-xmicro));
+  font-size: var(--font-size-xsmall);
+
+  border-radius: var(--border-radius-xsmall-px);
+
+  background-color: var(--color-text-default-new);
+  color: var(--color-text-inverse);
+  transition: transform var(--transition-fast);
+  cursor: pointer;
+
+  svg {
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
+  }
+
+  &:hover {
+    opacity: var(--opacity-85);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
+  }
 }

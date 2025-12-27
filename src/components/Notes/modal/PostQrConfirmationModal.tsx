@@ -11,7 +11,7 @@ interface PostQRConfirmationModalProps {
   isModalOpen: boolean;
   isLoading: boolean;
   onModalClose: () => void;
-  onEdit: () => void;
+  onEdit?: () => void;
   onConfirm: () => void;
 }
 
@@ -45,16 +45,18 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
         <PostReflectionDescription />
 
         <div className={styles.actions}>
-          <Button
-            className={styles.editButton}
-            size={ButtonSize.Small}
-            variant={ButtonVariant.Simplified}
-            onClick={onEdit}
-            isDisabled={isLoading}
-            data-testid="edit-confirmation-button"
-          >
-            {t('common:edit')}
-          </Button>
+          {onEdit && (
+            <Button
+              className={styles.editButton}
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Simplified}
+              onClick={onEdit}
+              isDisabled={isLoading}
+              data-testid="edit-confirmation-button"
+            >
+              {t('common:edit')}
+            </Button>
+          )}
           <Button
             className={styles.confirmButton}
             variant={ButtonVariant.Accent}

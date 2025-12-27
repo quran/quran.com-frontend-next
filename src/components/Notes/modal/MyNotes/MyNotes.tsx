@@ -6,6 +6,7 @@ import useSWR from 'swr';
 import DeleteNoteButton from './DeleteNoteButton';
 import styles from './MyNotes.module.scss';
 
+import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
@@ -13,12 +14,10 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
-import QRColoredIcon from '@/icons/qr-colored.svg';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
-import { logButtonClick } from '@/utils/eventLogger';
 import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
@@ -27,9 +26,10 @@ interface MyNotesProps {
   onAddNote: () => void;
   onEditNote: (note: Note) => void;
   verseKey: string;
+  onPostToQrClick: (note: Note) => void;
 }
 
-const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) => {
+const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPostToQrClick }) => {
   const { t, lang } = useTranslation('notes');
   const chaptersData = useContext(DataContext);
 
@@ -95,21 +95,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey }) =>
                   </time>
                 </div>
                 <div className={styles.noteActions}>
-                  {note.postUrl && (
-                    <Button
-                      variant={ButtonVariant.Ghost}
-                      size={ButtonSize.Small}
-                      shape={ButtonShape.Square}
-                      isNewTab
-                      href={note.postUrl}
-                      tooltip={t('view-on-qr')}
-                      ariaLabel={t('view-on-qr')}
-                      onClick={() => logButtonClick('qr_view_note_post')}
-                      data-testid="qr-view-button"
-                    >
-                      <QRColoredIcon />
-                    </Button>
-                  )}
+                  <QRButton note={note} postUrl={note.postUrl} onPostToQrClick={onPostToQrClick} />
 
                   <Button
                     variant={ButtonVariant.Ghost}
