@@ -1,4 +1,5 @@
 @use '@/styles/constants';
+@use '@/styles/breakpoints';
 
 $note_text_area_height: 360px;
 
@@ -23,8 +24,8 @@ $note_text_area_height: 360px;
   margin-block-start: calc(var(--spacing-xmicro) * -1);
 
   svg {
-    height: var(--spacing-small);
-    width: var(--spacing-small);
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
   }
 }
 
@@ -33,6 +34,10 @@ $note_text_area_height: 360px;
   flex-direction: column;
   gap: var(--spacing-medium2);
   margin-block-start: var(--spacing-mega);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall);
+  }
 }
 
 .inputGroup {
@@ -47,7 +52,7 @@ div.textArea {
 
   textarea {
     padding: var(--spacing-xsmall);
-    height: $note_text_area_height;
+    block-size: $note_text_area_height;
 
     &:focus::placeholder {
       color: transparent;
@@ -64,7 +69,7 @@ div.textArea {
   gap: var(--spacing-xsmall);
 
   background-color: var(--color-background-alternative-faint-new);
-  height: var(--spacing-large2-px);
+  block-size: var(--spacing-large2-px);
   border-radius: var(--border-radius-medium-px);
   padding-inline: var(--spacing-medium2);
   font-size: var(--font-size-small);
@@ -92,15 +97,15 @@ div.textArea {
 
 .notesButtonChevron,
 .notesButtonPencil {
-  width: var(--spacing-small);
-  height: var(--spacing-small);
+  inline-size: var(--spacing-small);
+  block-size: var(--spacing-small);
   margin-block-start: calc(var(--spacing-xmicro) * -1);
 }
 
 .notesButtonChevron {
   margin-inline-start: calc(var(--spacing-xsmall) * -1);
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
 }
 
 .notesButtonText {
@@ -110,7 +115,7 @@ div.textArea {
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-medium2);
+  gap: var(--spacing-xsmall);
 }
 
 .rounded {

@@ -42,6 +42,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       }
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
+      headerClassName={modalStyles.headerClassName}
     >
       <MyNotes onAddNote={onAddNote} onEditNote={onEditNote} verseKey={verseKey} />
     </ContentModal>

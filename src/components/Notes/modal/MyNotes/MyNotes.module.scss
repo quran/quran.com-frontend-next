@@ -7,6 +7,10 @@
   gap: var(--spacing-large-px);
 
   margin-block-start: var(--spacing-mega);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall);
+  }
 }
 
 .notesList {

@@ -129,10 +129,10 @@ export const verseRangesToVerseKeys = (
 
 /**
  * Format verse ranges to show surah name and verse range in user's locale
- * @param {string[]} rangeKeys The range keys array
- * @param {ChaptersData} chaptersData
- * @param {string} lang
- * @returns {string[]} Array of readable verse range strings
+ * @param {string[]} rangeKeys Range keys array
+ * @param {ChaptersData} chaptersData Chapters data
+ * @param {string} lang Language code
+ * @returns {string[]} Readable verse range strings array
  */
 export const readableVerseRangeKeys = (
   rangeKeys: string[],
@@ -151,8 +151,8 @@ export const readableVerseRangeKeys = (
 
       const chapterData = getChapterData(chaptersData, from.chapter.toString());
       const chapterName = showMinimalUi
-        ? chapterData.translatedName
-        : chapterData.transliteratedName;
+        ? chapterData?.translatedName
+        : chapterData?.transliteratedName;
 
       const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
 

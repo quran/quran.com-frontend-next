@@ -88,6 +88,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
         onEscapeKeyDown={onModalClose}
         contentClassName={modalStyles.content}
         overlayClassName={modalStyles.overlay}
+        headerClassName={modalStyles.headerClassName}
       >
         <div className={styles.container} data-testid={dataTestId || 'notes-modal-content'}>
           <ReflectionIntro />

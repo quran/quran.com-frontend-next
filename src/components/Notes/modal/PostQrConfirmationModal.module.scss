@@ -1,10 +1,17 @@
 @use '@/styles/constants';
+@use '@/styles/breakpoints';
 
 .container {
   display: flex;
   flex-direction: column;
   gap: calc(2 * var(--spacing-medium2));
+
   margin-block-start: calc(3 * var(--spacing-medium2));
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-medium2);
+    gap: var(--spacing-medium2);
+  }
 }
 
 .question {
@@ -17,7 +24,7 @@
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-medium2);
+  gap: var(--spacing-xsmall);
 }
 
 .editButton {
