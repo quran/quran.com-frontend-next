@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import actionStyles from '@/components/Notes/modal/action.module.scss';
 import NoteActionController from '@/components/Notes/modal/NoteAction';
 import translationViewStyles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 
@@ -33,8 +34,11 @@ const TranslationViewNoteAction: React.FC<TranslationViewNoteActionProps> = ({
           className={classNames(
             translationViewStyles.iconContainer,
             translationViewStyles.verseAction,
+            actionStyles.button,
+            { [actionStyles.hasNote]: hasNote },
           )}
           onClick={onClick}
+          data-has-notes={hasNote}
           tooltip={t('take-a-note-or-reflection')}
           type={ButtonType.Primary}
           shape={ButtonShape.Circle}
@@ -46,7 +50,7 @@ const TranslationViewNoteAction: React.FC<TranslationViewNoteActionProps> = ({
           <span className={translationViewStyles.icon}>
             <IconContainer
               icon={hasNote ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}
-              color={IconColor.tertiary}
+              shouldForceSetColors={false}
               size={IconSize.Custom}
             />
           </span>

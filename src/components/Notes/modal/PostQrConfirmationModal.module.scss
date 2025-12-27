@@ -30,9 +30,27 @@
 .editButton {
   border-radius: var(--border-radius-medium-px);
   padding-inline: calc(2 * var(--spacing-medium2));
+
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
 }
 
 .confirmButton {
   border-radius: var(--border-radius-medium-px);
   padding-inline: var(--spacing-small);
+
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  background-color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    opacity: var(--opacity-85);
+  }
 }

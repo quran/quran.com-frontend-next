@@ -8,24 +8,28 @@ $note_text_area_height: 360px;
 
   display: flex;
   align-items: center;
-  gap: var(--spacing-micro);
+  gap: var(--spacing-xsmall);
   cursor: pointer;
 }
 
-.title,
 .headerButton {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
 }
 
-.editIcon {
+.arrowIcon {
   rotate: 180deg;
   margin-block-start: calc(var(--spacing-xmicro) * -1);
 
   svg {
     block-size: var(--spacing-small);
     inline-size: var(--spacing-small);
+
+    // arrow.svg has hard coded fill color, so we need to override it
+    path {
+      fill: var(--color-text-faded-new);
+    }
   }
 }
 
@@ -116,6 +120,18 @@ div.textArea {
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-xsmall);
+}
+
+.saveToQrButton {
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  background-color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    opacity: var(--opacity-85);
+  }
 }
 
 .rounded {

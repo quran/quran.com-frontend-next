@@ -91,8 +91,9 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
             icon={<ArrowIcon />}
             shouldForceSetColors={false}
             size={IconSize.Custom}
-            className={styles.editIcon}
+            className={styles.arrowIcon}
           />
+
           {t('edit-note')}
         </button>
       }

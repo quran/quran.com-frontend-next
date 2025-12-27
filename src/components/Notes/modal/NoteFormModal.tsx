@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -54,24 +54,20 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
     validateNoteInput,
   } = useNotesStates(initialNote, onSaveNote, onMyNotes, isModalOpen);
 
-  const handlePublicSaveClick = () => {
+  const handlePublicSaveClick = useCallback(() => {
     if (validateNoteInput()) {
       setShowConfirmationModal(true);
     }
-  };
+  }, [validateNoteInput]);
 
-  const handleConfirmationEdit = () => {
+  const handleConfirmationBack = useCallback(() => {
     setShowConfirmationModal(false);
-  };
+  }, []);
 
-  const handleConfirmationConfirm = async () => {
+  const handleConfirmationConfirm = useCallback(async () => {
     await onPublicSaveRequest();
     setShowConfirmationModal(false);
-  };
-
-  const handleConfirmationClose = () => {
-    setShowConfirmationModal(false);
-  };
+  }, [onPublicSaveRequest]);
 
   const verseRanges = useMemo(() => {
     if (!ranges || ranges.length === 0) return [];
@@ -131,7 +127,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
 
           <div className={styles.actions}>
             <Button
-              className={styles.rounded}
+              className={`${styles.rounded} ${styles.saveToQrButton}`}
               size={ButtonSize.Small}
               variant={ButtonVariant.Simplified}
               isLoading={loading === LoadingState.Public}
@@ -158,8 +154,8 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
       <PostQRConfirmationModal
         isModalOpen={showConfirmationModal && isModalOpen}
         isLoading={loading === LoadingState.Public}
-        onModalClose={handleConfirmationClose}
-        onEdit={handleConfirmationEdit}
+        onModalClose={handleConfirmationBack}
+        onEdit={handleConfirmationBack}
         onConfirm={handleConfirmationConfirm}
       />
     </>

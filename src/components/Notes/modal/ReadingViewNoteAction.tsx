@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import actionStyles from '@/components/Notes/modal/action.module.scss';
 import NoteActionController from '@/components/Notes/modal/NoteAction';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import NotesWithPencilFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
@@ -32,9 +34,10 @@ const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
           dataTestId="notes-menu-item"
           icon={
             <IconContainer
-              icon={hasNote ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}
-              color={IconColor.tertiary}
+              shouldForceSetColors={false}
               size={IconSize.Custom}
+              className={classNames(actionStyles.button, { [actionStyles.hasNote]: hasNote })}
+              icon={hasNote ? <NotesWithPencilFilledIcon /> : <NotesWithPencilIcon />}
             />
           }
         >

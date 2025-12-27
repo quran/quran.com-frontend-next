@@ -89,10 +89,10 @@ export const useNotesStates = (
     await onSubmit(true);
   }, [onSubmit]);
 
-  const onNoteInputChange = (value: string) => {
+  const onNoteInputChange = useCallback((value: string) => {
     setNoteInput(value);
     setErrors({});
-  };
+  }, []);
 
   useEffect(() => {
     setErrors({});
