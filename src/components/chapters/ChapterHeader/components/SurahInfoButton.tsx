@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
-import { useSurahInfoModalContext } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
 import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
@@ -26,28 +25,20 @@ interface SurahInfoButtonProps {
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
-  const { isOpen, setIsOpen } = useSurahInfoModalContext();
-
-  const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-
-    if (!isInfoPage) {
-      fakeNavigate(router.asPath, router.locale);
-    }
-  }, [router.asPath, router.locale, isInfoPage, setIsOpen]);
+    fakeNavigate(router.asPath, router.locale);
+  }, [router.asPath, router.locale, setIsOpen]);
 
   const handleClick = useCallback(() => {
     if (chapterId) {
       logButtonClick('surah_info_button_click');
       setIsOpen(true);
-
-      if (!isInfoPage) {
-        fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
-      }
+      fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
     }
-  }, [chapterId, isInfoPage, router.locale, setIsOpen]);
+  }, [chapterId, router.locale, setIsOpen]);
 
   return (
     <>
