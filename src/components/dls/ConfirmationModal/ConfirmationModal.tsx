@@ -19,6 +19,7 @@ const ConfirmationModal = ({ zIndexVariant }: ConfirmationModalProps = {}) => {
       returnedActions.push({
         label: state.confirmText,
         onClick: onConfirm,
+        dataTestId: 'confirmation-modal-confirm-button',
       });
     }
     if (state.cancelText && onCancel) {
@@ -26,6 +27,7 @@ const ConfirmationModal = ({ zIndexVariant }: ConfirmationModalProps = {}) => {
         label: state.cancelText,
         onClick: onCancel,
         isCloseAction: true,
+        dataTestId: 'confirmation-modal-cancel-button',
       });
     }
     return returnedActions;
@@ -53,16 +55,16 @@ const ConfirmationModal = ({ zIndexVariant }: ConfirmationModalProps = {}) => {
       </Modal.Body>
       <Modal.Footer>
         {actions.map((action, index) => {
-          const { onClick, label } = action;
+          const { onClick, label, dataTestId } = action;
           if (action.isCloseAction) {
             return (
-              <Modal.CloseAction key={index} onClick={onClick}>
+              <Modal.CloseAction key={index} onClick={onClick} dataTestId={dataTestId}>
                 {label}
               </Modal.CloseAction>
             );
           }
           return (
-            <Modal.Action key={index} onClick={onClick}>
+            <Modal.Action key={index} onClick={onClick} dataTestId={dataTestId}>
               {label}
             </Modal.Action>
           );
