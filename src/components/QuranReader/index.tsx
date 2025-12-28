@@ -10,7 +10,6 @@ import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 
-import { SurahInfoModalProvider } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
@@ -40,7 +39,7 @@ const QuranReader = ({
   useSyncChapterPage(initialData);
 
   return (
-    <SurahInfoModalProvider>
+    <>
       <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
@@ -68,7 +67,7 @@ const QuranReader = ({
         </div>
       </div>
       <Notes />
-    </SurahInfoModalProvider>
+    </>
   );
 };
 
