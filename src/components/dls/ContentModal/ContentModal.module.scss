@@ -143,15 +143,15 @@ $translateYDistance: 200px;
 
 .closeIcon {
   position: absolute;
-  inset-block-start: 50%;
+  inset-block-start: 0;
   inset-inline-end: 0;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
+  padding-block-start: var(--spacing-xsmall);
   background-color: transparent;
   border: none;
   @include breakpoints.tablet {
-    inset-inline-end: var(--spacing-mega);
+    padding-block-start: var(--spacing-small);
+    margin-block-start: var(--spacing-mega);
+    margin-inline-end: var(--spacing-mega);
   }
 }
 .header {
@@ -164,12 +164,13 @@ $translateYDistance: 200px;
   padding-inline-end: var(--spacing-xlarge-px);
 
   @include breakpoints.tablet {
-    position: relative;
+    position: initial;
     padding-inline: 0;
     padding-inline-end: var(--spacing-xlarge-px);
     border: none;
-    padding-block: 0;
+    padding: 0;
   }
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .content {
