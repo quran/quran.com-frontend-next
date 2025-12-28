@@ -119,7 +119,14 @@ div.textArea {
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-xsmall);
+  gap: var(--spacing-medium2);
+
+  @include breakpoints.smallerThanMobileL {
+    // Make the save private button (last button) take available space
+    > button:last-child {
+      flex: 1;
+    }
+  }
 }
 
 .saveToQrButton {

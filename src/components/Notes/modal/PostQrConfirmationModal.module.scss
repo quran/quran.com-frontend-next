@@ -24,7 +24,7 @@
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: var(--spacing-xsmall);
+  gap: var(--spacing-medium2);
 }
 
 .editButton {
@@ -33,6 +33,11 @@
 
   border-color: var(--color-blue-buttons-and-icons);
   color: var(--color-blue-buttons-and-icons);
+
+  @include breakpoints.smallerThanMobileL {
+    flex: 1;
+    padding-inline: var(--spacing-xsmall);
+  }
 
   &:hover {
     background-color: var(--color-blue-buttons-and-icons);
