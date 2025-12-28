@@ -1,0 +1,63 @@
+.container {
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-background-alternative-faint-new);
+  padding: var(--spacing-medium-px);
+}
+
+.titleContainer {
+  color: var(--color-text-default-new);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+  gap: var(--spacing-xsmall);
+  font-weight: var(--font-weight-bold);
+}
+
+.seeLessButton,
+.learnMoreButton {
+  all: unset;
+  color: var(--color-text-link-new);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-small);
+  cursor: pointer;
+}
+
+.contentContainer {
+  margin-block-start: var(--spacing-medium2-px);
+}
+
+.sectionHeader {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-small);
+}
+
+.subSectionHeader {
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-xxsmall);
+}
+
+.sectionContainer {
+  margin-block: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+
+  &:last-of-type {
+    padding-block-end: 0;
+  }
+}
+
+.link {
+  font-size: var(--font-size-small);
+}
+
+.bulletList {
+  list-style: initial;
+  padding-inline-start: var(--spacing-medium);
+}
+
+.seeLessButton {
+  display: block;
+  margin-inline: auto;
+}
