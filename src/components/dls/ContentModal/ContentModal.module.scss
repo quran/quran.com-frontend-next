@@ -166,10 +166,14 @@ $translateYDistance: 200px;
   @include breakpoints.tablet {
     position: initial;
     padding-inline: 0;
-    padding-inline-end: var(--spacing-xlarge-px);
     border: none;
     padding: 0;
+    padding-inline-end: var(--spacing-xlarge-px);
   }
+  @include breakpoints.desktop {
+    padding-inline-end: var(--spacing-xlarge-px);
+  }
+
   border-block-end: 1px solid var(--color-borders-hairline);
 }
 
