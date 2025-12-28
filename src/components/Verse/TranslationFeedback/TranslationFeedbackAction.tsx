@@ -105,6 +105,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
         onClose={onModalClose}
         contentClassName={styles.content}
         overlayClassName={styles.overlay}
+        headerClassName={styles.headerClassName}
         onEscapeKeyDown={onModalClose}
       >
         <TranslationFeedbackModal verse={verse} onClose={onModalClose} />
