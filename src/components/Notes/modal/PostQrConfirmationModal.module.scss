@@ -1,0 +1,61 @@
+@use '@/styles/constants';
+@use '@/styles/breakpoints';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2 * var(--spacing-medium2));
+
+  margin-block-start: calc(3 * var(--spacing-medium2));
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-medium2);
+    gap: var(--spacing-medium2);
+  }
+}
+
+.question {
+  font-size: var(--font-size-large2);
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-medium2);
+}
+
+.editButton {
+  border-radius: var(--border-radius-medium-px);
+  padding-inline: calc(2 * var(--spacing-medium2));
+
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-blue-buttons-and-icons);
+
+  @include breakpoints.smallerThanMobileL {
+    flex: 1;
+    padding-inline: var(--spacing-xsmall);
+  }
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
+}
+
+.confirmButton {
+  border-radius: var(--border-radius-medium-px);
+  padding-inline: var(--spacing-small);
+
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  background-color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    opacity: var(--opacity-85);
+  }
+}
