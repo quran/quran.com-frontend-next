@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import modalStyles from './Modal.module.scss';
@@ -6,6 +7,8 @@ import styles from './PostQrConfirmationModal.module.scss';
 import PostReflectionDescription from '@/components/Notes/modal/ReflectionIntro/PostReflection';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import ArrowIcon from '@/icons/arrow.svg';
 
 interface PostQRConfirmationModalProps {
   isModalOpen: boolean;
@@ -28,9 +31,21 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
     <ContentModal
       isOpen={isModalOpen}
       header={
-        <h2 className={modalStyles.title} data-testid="qr-confirmation-modal-title">
+        <button
+          type="button"
+          className={classNames(modalStyles.headerButton, modalStyles.title)}
+          onClick={onModalClose}
+          data-testid="qr-confirmation-modal-title"
+        >
+          <IconContainer
+            icon={<ArrowIcon />}
+            shouldForceSetColors={false}
+            size={IconSize.Custom}
+            className={modalStyles.arrowIcon}
+          />
+
           {t('take-a-note-or-reflection')}
-        </h2>
+        </button>
       }
       hasCloseButton
       onClose={onModalClose}

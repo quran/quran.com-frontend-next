@@ -1,5 +1,6 @@
 import { useCallback, useContext, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
@@ -10,8 +11,10 @@ import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmation
 import { invalidateCache } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
+import ArrowIcon from '@/icons/arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import { Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
@@ -97,13 +100,22 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         onEscapeKeyDown={onClose}
         hasCloseButton
         header={
-          <h2
-            className={modalStyles.title}
+          <button
+            type="button"
+            className={classNames(modalStyles.headerButton, modalStyles.title)}
+            onClick={onAddNote}
             data-testid="my-notes-modal-title"
             data-note-count={notesCount}
           >
+            <IconContainer
+              icon={<ArrowIcon />}
+              shouldForceSetColors={false}
+              size={IconSize.Custom}
+              className={modalStyles.arrowIcon}
+            />
+
             {t('my-notes', { count: notesCount })}
-          </h2>
+          </button>
         }
         contentClassName={modalStyles.content}
         overlayClassName={modalStyles.overlay}

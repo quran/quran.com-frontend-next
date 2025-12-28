@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import modalStyles from './Modal.module.scss';
-import styles from './NoteFormModal.module.scss';
 
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
@@ -82,16 +81,15 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
       header={
         <button
           type="button"
-          className={classNames(styles.headerButton, modalStyles.title)}
+          className={classNames(modalStyles.headerButton, modalStyles.title)}
           onClick={onMyNotes}
-          aria-label={t('common:back')}
           data-testid="edit-modal-back-button"
         >
           <IconContainer
             icon={<ArrowIcon />}
             shouldForceSetColors={false}
             size={IconSize.Custom}
-            className={styles.arrowIcon}
+            className={modalStyles.arrowIcon}
           />
 
           {t('edit-note')}

@@ -96,7 +96,8 @@ export const useNotesStates = (
 
   useEffect(() => {
     setErrors({});
-  }, [isModalOpen]);
+    setNoteInput(initialNote);
+  }, [isModalOpen, initialNote]);
 
   return {
     noteInput,

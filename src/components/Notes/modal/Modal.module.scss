@@ -2,10 +2,34 @@
 
 $note_modal_max_width: 48rem;
 
+.headerButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall-px);
+  cursor: pointer;
+}
+
 .title {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded-new);
   font-size: var(--font-size-large2);
+}
+
+.arrowIcon {
+  rotate: 180deg;
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+
+  svg {
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
+
+    // arrow.svg has hard coded fill color, so we need to override it
+    path {
+      fill: var(--color-text-faded-new);
+    }
+  }
 }
 
 .overlay {
