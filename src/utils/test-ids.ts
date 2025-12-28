@@ -13,6 +13,9 @@
  * ```
  */
 const TEST_IDS = {
+  FORM_BUILDER: {
+    VALIDATION_ERRORS: 'form-builder-validation-errors',
+  },
   AUTH: {
     UPDATE_PROFILE: {
       EDIT_DETAILS_SECTION: 'auth-update-profile-edit-details-section',

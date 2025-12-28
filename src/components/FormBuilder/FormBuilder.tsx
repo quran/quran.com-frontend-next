@@ -139,14 +139,14 @@ const FormBuilder = <T,>({
                       placeholder: formField.placeholder,
                       dataTestId: formField.dataTestId,
                     })}
-                    {formField.shouldShowValidationErrors && isFieldDirty ? (
-                      <ValidationErrors
-                        error={error?.types ?? EMPTY_ERROR_TYPES}
-                        rules={formField.rules ?? []}
-                      />
-                    ) : (
-                      renderError(error, formField.errorClassName)
-                    )}
+                    {formField.shouldShowValidationErrors
+                      ? isFieldDirty && (
+                          <ValidationErrors
+                            error={error?.types ?? EMPTY_ERROR_TYPES}
+                            rules={formField.rules ?? []}
+                          />
+                        )
+                      : renderError(error, formField.errorClassName)}
                     {renderExtraSection(formField, field.value)}
                   </div>
                 );

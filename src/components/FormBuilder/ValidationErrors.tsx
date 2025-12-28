@@ -10,6 +10,7 @@ import { FormBuilderFieldRule } from '@/components/FormBuilder/FormBuilderTypes'
 import IconContainer from '@/dls/IconContainer/IconContainer';
 import CheckIcon from '@/icons/checkmark-icon.svg';
 import CloseIcon from '@/icons/close-icon.svg';
+import TEST_IDS from '@/utils/test-ids';
 
 interface Props {
   error: MultipleFieldErrors;
@@ -22,19 +23,24 @@ const ValidationErrors: FC<Props> = ({ error, rules }) => {
   const validationRules = useMemo(
     () =>
       rules.map((rule, index) => {
-        const notValid = (rule.name || rule.type) in error;
+        const validationKey = rule.name ?? rule.type;
+        const notValid = validationKey in error;
         return {
           rule,
           index,
           isValid: !notValid,
-          key: `${rule.type}-${index.toString()}`,
+          key: `${validationKey}-${index.toString()}`,
         };
       }),
     [rules, error],
   );
 
   return (
-    <div className={styles.validationErrors} data-testid="validation-errors">
+    <div
+      className={styles.validationErrors}
+      data-testid={TEST_IDS.FORM_BUILDER.VALIDATION_ERRORS}
+      aria-live="polite"
+    >
       {validationRules.map(({ rule, isValid, key }) => (
         <div
           key={key}

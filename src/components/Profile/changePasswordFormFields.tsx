@@ -8,6 +8,7 @@ import styles from './SharedProfileStyles.module.scss';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
+import RuleValue from '@/utils/form-values';
 import TEST_IDS from '@/utils/test-ids';
 
 /**
@@ -28,27 +29,23 @@ const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => {
       errorMessage: t('login:password-rules.max-length'),
     },
     {
-      type: RuleType.Regex,
-      name: 'uppercase',
-      value: '[A-Z]',
+      type: RuleType.Uppercase,
+      value: RuleValue.UPPERCASE,
       errorMessage: t('login:password-rules.uppercase'),
     },
     {
-      type: RuleType.Regex,
-      name: 'lowercase',
-      value: '[a-z]',
+      type: RuleType.Lowercase,
+      value: RuleValue.LOWERCASE,
       errorMessage: t('login:password-rules.lowercase'),
     },
     {
-      type: RuleType.Regex,
-      name: 'number',
-      value: '[0-9]',
+      type: RuleType.Number,
+      value: RuleValue.NUMBER,
       errorMessage: t('login:password-rules.number'),
     },
     {
-      type: RuleType.Regex,
-      name: 'special',
-      value: '[!@#$%^&*_-]',
+      type: RuleType.SpecialCharacter,
+      value: RuleValue.SPECIAL_CHARACTER,
       errorMessage: t('login:password-rules.special'),
     },
   ];

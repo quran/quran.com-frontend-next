@@ -56,7 +56,7 @@ export const getFormInputs = (section: Locator) => {
  * @returns {Locator} The password validation section locator
  */
 export const getPasswordValidation = (section: Locator): Locator => {
-  return section.getByTestId('password-validation');
+  return section.getByTestId(TEST_IDS.FORM_BUILDER.VALIDATION_ERRORS);
 };
 
 /**

@@ -36,14 +36,20 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
 
   const maximumLengthRule = formField.rules?.find((rule) => rule.type === RuleType.MaximumLength);
   const minimumLengthRule = formField.rules?.find((rule) => rule.type === RuleType.MinimumLength);
-  const regexValidations = formField.rules?.filter((rule) => rule.type === RuleType.Regex);
+  const uppercaseRule = formField.rules?.find((rule) => rule.type === RuleType.Uppercase);
+  const lowercaseRule = formField.rules?.find((rule) => rule.type === RuleType.Lowercase);
+  const numberRule = formField.rules?.find((rule) => rule.type === RuleType.Number);
+  const specialCharacterRule = formField.rules?.find(
+    (rule) => rule.type === RuleType.SpecialCharacter,
+  );
   const equalRule = formField.rules?.find((rule) => rule.type === RuleType.Equal);
+  const regexValidations = formField.rules?.filter((rule) => rule.type === RuleType.Regex);
 
   // Use custom validation functions for length rules to ensure they validate even when value is empty
   // Validation functions receive the value and entire form values object
   const validateObject: Record<
     string,
-    (value: string, formValues?: Record<string, any>) => string | true
+    (value: string, formValues?: Record<string, string>) => string | true
   > = {};
 
   if (maximumLengthRule) {
@@ -73,6 +79,42 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
     };
   }
 
+  if (uppercaseRule) {
+    validateObject.uppercase = (value: string) => {
+      if (!String(value ?? '').match(uppercaseRule.value as string)) {
+        return uppercaseRule.errorMessage || '';
+      }
+      return true;
+    };
+  }
+
+  if (lowercaseRule) {
+    validateObject.lowercase = (value: string) => {
+      if (!String(value ?? '').match(lowercaseRule.value as string)) {
+        return lowercaseRule.errorMessage || '';
+      }
+      return true;
+    };
+  }
+
+  if (numberRule) {
+    validateObject.number = (value: string) => {
+      if (!String(value ?? '').match(numberRule.value as string)) {
+        return numberRule.errorMessage || '';
+      }
+      return true;
+    };
+  }
+
+  if (specialCharacterRule) {
+    validateObject.specialCharacter = (value: string) => {
+      if (!String(value ?? '').match(specialCharacterRule.value as string)) {
+        return specialCharacterRule.errorMessage || '';
+      }
+      return true;
+    };
+  }
+
   // if contains a rule with type `regex`
   if (regexValidations && regexValidations.length > 0) {
     // Create separate validation functions for each regex rule
@@ -80,6 +122,7 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
     // when criteriaMode is set to 'all', enabling all validation errors to be displayed
     regexValidations.forEach((rule, index) => {
       // Use the rule's name if provided, otherwise generate a unique name
+      // the rule.name is used to identify the validation error in the ValidationErrors component
       const validationName = rule.name || `regex_${index}`;
       validateObject[validationName] = (value: string) => {
         const regex = new RegExp(rule.value as string);
@@ -95,7 +138,7 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
   // if contains a rule with type `equal`
   if (equalRule) {
     const targetFieldName = equalRule.value as string;
-    validateObject.equal = (value: string, formValues: Record<string, any>) =>
+    validateObject.equal = (value: string, formValues: Record<string, string>) =>
       value === formValues[targetFieldName] ? true : equalRule.errorMessage || '';
     rules.deps = [targetFieldName];
   }

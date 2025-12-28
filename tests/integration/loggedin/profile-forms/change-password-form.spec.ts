@@ -10,7 +10,7 @@ import {
   getTestUserPassword,
   mockPasswordUpdateApi,
 } from './change-password-form-helpers';
-import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
+import { expectError, expectNoError, fillAndBlur } from './form-helpers';
 
 import Homepage from '@/tests/POM/home-page';
 
@@ -157,9 +157,8 @@ test.describe('Password Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
+      const { newPassword } = getFormInputs(section);
 
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'Pass1!');
       await page.waitForTimeout(VALIDATION_WAIT);
 
@@ -365,14 +364,11 @@ test.describe('Password Matching Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { currentPassword, newPassword, confirmPassword, updateButton } =
-        getFormInputs(section);
+      const { currentPassword, newPassword, confirmPassword } = getFormInputs(section);
 
       await fillAndBlur(currentPassword, getTestUserPassword());
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'ValidPass123!');
       await fillAndBlur(confirmPassword, 'DifferentPass123!');
-      await updateButton.click();
       await page.waitForTimeout(UI_UPDATE_WAIT);
 
       await expectError(section, /confirm.*password.*doesn.*t.*match/i);
