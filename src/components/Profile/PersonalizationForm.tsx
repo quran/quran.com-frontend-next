@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
+import DeleteProfilePictureButton from './DeleteProfilePictureButton';
 import styles from './PersonalizationForm.module.scss';
 import Section from './Section';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
-import UserIcon from '@/icons/user.svg';
+import DefaultUserIcon from '@/icons/default-user.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import TEST_IDS from '@/utils/test-ids';
 
@@ -51,14 +52,14 @@ const PersonalizationForm: FC = () => {
             <div className={styles.profilePictureImage}>
               {hasProfilePicture ? (
                 <Image
-                  src={userData.avatars.large} // set to empty string to test error state
+                  src={userData.avatars?.large || ''}
                   alt={t('profile-picture')}
                   width={60}
                   height={60}
                   className={styles.profilePictureImageElement}
                 />
               ) : (
-                <UserIcon />
+                <DefaultUserIcon />
               )}
             </div>
             <div className={styles.profilePictureDescription}>
@@ -86,16 +87,11 @@ const PersonalizationForm: FC = () => {
               {t('upload-picture')}
             </Button>
             {hasProfilePicture && (
-              <Button
-                variant={ButtonVariant.Compact}
-                size={ButtonSize.Small}
-                className={styles.profilePictureActionButton}
-                onClick={onRemovePicture}
-                isLoading={isRemoving}
-                isDisabled={isProcessing || isRemoving}
-              >
-                {t('remove-picture')}
-              </Button>
+              <DeleteProfilePictureButton
+                isRemoving={isRemoving}
+                isProcessing={isProcessing}
+                onRemovePicture={onRemovePicture}
+              />
             )}
           </div>
         </div>

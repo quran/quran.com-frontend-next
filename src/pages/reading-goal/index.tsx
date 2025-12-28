@@ -19,7 +19,11 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
+import {
+  getCanonicalUrl,
+  getReadingGoalNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
 
 const ReadingGoalPage: NextPage = () => {
@@ -39,7 +43,7 @@ const ReadingGoalPage: NextPage = () => {
 
   useEffect(() => {
     if (goal) {
-      router.push('/');
+      router.replace(getReadingGoalProgressNavigationUrl());
     }
   }, [router, goal]);
 

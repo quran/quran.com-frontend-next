@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -46,6 +46,7 @@ const WordByWordVerseAction: React.FC<Props> = ({
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t, lang } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
@@ -57,7 +58,10 @@ const WordByWordVerseAction: React.FC<Props> = ({
     );
     setIsContentModalOpen(false);
     if (onActionTriggered) {
-      setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+      closeTimeoutRef.current = setTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
@@ -90,6 +94,14 @@ const WordByWordVerseAction: React.FC<Props> = ({
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     mushaf,
   };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
