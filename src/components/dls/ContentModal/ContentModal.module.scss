@@ -143,28 +143,29 @@ $translateYDistance: 200px;
 
 .closeIcon {
   position: absolute;
-  inset-block-start: 0;
+  inset-block-start: 50%;
   inset-inline-end: 0;
-  padding-block-start: var(--spacing-xsmall);
+  transform: translateY(-50%);
   background-color: transparent;
   border: none;
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-small);
-    margin-block-start: var(--spacing-mega);
-    margin-inline-end: var(--spacing-mega);
-  }
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .header {
   position: sticky;
   inset-block-start: 0;
   background-color: var(--color-background-default);
   padding-block: var(--spacing-small);
+  display: flex;
+  align-items: center;
   z-index: 1;
   padding-inline: var(--spacing-small);
   padding-inline-end: var(--spacing-xlarge-px);
 
   @include breakpoints.tablet {
-    position: initial;
+    position: relative;
     padding-inline: 0;
     border: none;
     padding: 0;
