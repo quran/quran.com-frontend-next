@@ -58,7 +58,7 @@
 
 .bodyContainer {
   flex: 1;
-  margin-block-start: var(--navbar-container-height);
+  margin-block-start: var(--navbar-height);
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
@@ -79,7 +79,7 @@
   font-size: var(--font-size-large);
   width: 100%;
   position: fixed;
-  height: var(--navbar-container-height);
+  height: var(--navbar-height);
   border-block-end: 1px var(--color-borders-hairline) solid;
   display: flex;
   flex-direction: row;
@@ -117,5 +117,5 @@
 }
 
 .navbarInvisible {
-  transform: translate3d(0, 0 + var(--navbar-container-height), 0);
+  padding-block-start: var(--navbar-container-height);
 }

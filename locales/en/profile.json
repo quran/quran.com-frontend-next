@@ -7,6 +7,12 @@
     "subtitle": "Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
     "title": "Are you absolutely sure?"
   },
+  "delete-profile-picture": {
+    "action-text": "Yes",
+    "cancel-text": "No",
+    "subtitle": "You will delete the profile pic and reset it to the default, Are you sure?",
+    "title": "Delete Profile Picture"
+  },
   "my-profile": "My Profile",
   "personalization": "Personalization",
   "profile-picture": "Profile Picture",
@@ -24,7 +30,7 @@
   "update-password": "Update Password",
   "delete-account-warning-title": "Warning",
   "success": {
-    "details": "Your details have been updated successfully",
+    "details": "Your profile is updated successfully",
     "password": "Your password has been updated successfully",
     "notifications": "Your notifications settings have been updated successfully"
   },

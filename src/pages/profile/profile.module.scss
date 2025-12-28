@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xlarge-px);
-  .topDivider {
-    display: none;
-    @include breakpoints.tablet {
-      display: block;
-      margin-block-start: var(--spacing-xlarge-px);
-      margin-block-end: var(--spacing-small-px);
-    }
+}
+
+.topDivider {
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+    margin-block-end: var(--spacing-medium2-px);
   }
   .divider {
     margin-block: var(--spacing-medium2-px);

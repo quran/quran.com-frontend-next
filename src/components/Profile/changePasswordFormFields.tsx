@@ -4,7 +4,6 @@ import { Translate } from 'next-translate';
 
 import PasswordField from '../Login/SignUpForm/PasswordField';
 import PasswordInput from '../Login/SignUpForm/PasswordInput';
-import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../Login/SignUpFormFields/consts';
 
 import styles from './SharedProfileStyles.module.scss';
 
@@ -49,29 +48,6 @@ const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => [
     label: t('common:form.new-password'),
     placeholder: t('login:new-password-placeholder'),
     containerClassName: styles.formInputContainer,
-    rules: [
-      {
-        type: RuleType.Required,
-        value: true,
-        errorMessage: t('common:errors.required', { fieldName: t('common:form.password') }),
-      },
-      {
-        type: RuleType.MinimumLength,
-        value: PASSWORD_MIN_LENGTH,
-        errorMessage: t('common:errors.min', {
-          fieldName: t('common:form.password'),
-          min: PASSWORD_MIN_LENGTH,
-        }),
-      },
-      {
-        type: RuleType.MaximumLength,
-        value: PASSWORD_MAX_LENGTH,
-        errorMessage: t('common:errors.max', {
-          fieldName: t('common:form.password'),
-          max: PASSWORD_MAX_LENGTH,
-        }),
-      },
-    ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordField
         dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.NEW_PASSWORD_INPUT}

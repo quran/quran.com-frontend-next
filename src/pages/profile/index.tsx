@@ -38,33 +38,35 @@ const ProfilePage: FC = () => {
         noindex
       />
       <HeaderNavigation title={t('my-profile')} />
-      <PageContainer isSheetsLike className={styles.wrapper}>
+      <PageContainer isSheetsLike>
         <div className={styles.topDivider}>
           <Separator />
         </div>
-        <PersonalizationForm />
-        <EditDetailsForm />
-        {canUpdatePassword && <ChangePasswordForm />}
-        <HeadlessServiceProvider>
-          <EmailNotificationSettingsForm />
-        </HeadlessServiceProvider>
-        <div className={styles.divider}>
-          <Separator />
-        </div>
-        <section
-          className={styles.deleteAccountSection}
-          aria-labelledby="delete-account-section-title"
-        >
-          <p id="delete-account-section-title" className={styles.deleteAccountSectionDescription}>
-            <span className={styles.deleteAccountSectionDescriptionTitle}>
-              {t('delete-account-warning-title')}:{' '}
-            </span>
-            {t('delete-confirmation.subtitle')}
-          </p>
-          <div>
-            <DeleteAccountButton />
+        <div className={styles.wrapper}>
+          <PersonalizationForm />
+          <EditDetailsForm />
+          {canUpdatePassword && <ChangePasswordForm />}
+          <HeadlessServiceProvider>
+            <EmailNotificationSettingsForm />
+          </HeadlessServiceProvider>
+          <div className={styles.divider}>
+            <Separator />
           </div>
-        </section>
+          <section
+            className={styles.deleteAccountSection}
+            aria-labelledby="delete-account-section-title"
+          >
+            <p id="delete-account-section-title" className={styles.deleteAccountSectionDescription}>
+              <span className={styles.deleteAccountSectionDescriptionTitle}>
+                {t('delete-account-warning-title')}:{' '}
+              </span>
+              {t('delete-confirmation.subtitle')}
+            </p>
+            <div>
+              <DeleteAccountButton />
+            </div>
+          </section>
+        </div>
       </PageContainer>
     </>
   );
