@@ -94,6 +94,7 @@ import {
   makeUserProfileUrl,
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
+  makeTranslationFeedbackUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -678,6 +679,15 @@ export const getQuranProgramWeek = async (
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
+};
+
+export const submitTranslationFeedback = async (params: {
+  translationId: number;
+  surahNumber: number;
+  ayahNumber: number;
+  feedback: string;
+}): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
+  return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
 const shouldRefreshToken = (error) => {

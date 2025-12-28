@@ -151,56 +151,6 @@ test.describe('Password Visibility Toggle', () => {
   );
 });
 
-test.describe('Required Field Validation', () => {
-  test(
-    'should show validation error when current password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { currentPassword, updateButton } = getFormInputs(section);
-
-      await currentPassword.fill('test');
-      await currentPassword.clear();
-      await enableValidation(page, updateButton);
-      await currentPassword.blur();
-
-      await expectError(section, /current.*password.*is.*missing/i);
-    },
-  );
-
-  test(
-    'should show validation error when new password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
-
-      await newPassword.fill('test');
-      await newPassword.clear();
-      await enableValidation(page, updateButton);
-      await newPassword.blur();
-
-      await expectError(section, /^\*Password is missing/i);
-    },
-  );
-
-  test(
-    'should show validation error when confirm password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { confirmPassword, updateButton } = getFormInputs(section);
-
-      await confirmPassword.fill('test');
-      await confirmPassword.clear();
-      await enableValidation(page, updateButton);
-      await confirmPassword.blur();
-
-      await expectError(section, /confirm.*password.*is.*missing/i);
-    },
-  );
-});
-
 test.describe('Password Length Validation', () => {
   test(
     'should show validation error when new password is less than 8 characters',

@@ -2,8 +2,6 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './ReflectionSurahAndAyahSelection.module.scss';
-
 import SurahAndAyahSelection from '@/components/QuranReader/TafsirView/SurahAndAyahSelection';
 import { logItemSelectionChange } from '@/utils/eventLogger';
 import { fakeNavigate, getReflectionNavigationUrl } from '@/utils/navigation';
@@ -44,14 +42,12 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
   };
 
   return (
-    <div className={styles.surahSelectionContainer}>
-      <SurahAndAyahSelection
-        selectedChapterId={selectedChapterId}
-        selectedVerseNumber={selectedVerseNumber}
-        onChapterIdChange={onChapterIdChange}
-        onVerseNumberChange={onVerseNumberChange}
-      />
-    </div>
+    <SurahAndAyahSelection
+      selectedChapterId={selectedChapterId}
+      selectedVerseNumber={selectedVerseNumber}
+      onChapterIdChange={onChapterIdChange}
+      onVerseNumberChange={onVerseNumberChange}
+    />
   );
 };
 

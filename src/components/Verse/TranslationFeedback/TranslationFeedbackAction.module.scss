@@ -1,0 +1,28 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/constants';
+
+.title {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large2);
+  }
+}
+
+.overlay {
+  @include breakpoints.smallerThanTablet {
+    place-items: end;
+  }
+}
+
+.content {
+  max-width: constants.$translation-feedback-modal-max-width;
+
+  @include breakpoints.smallerThanTablet {
+    height: auto;
+    max-height: 100%;
+    padding-bottom: var(--spacing-large);
+  }
+}

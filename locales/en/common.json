@@ -193,6 +193,7 @@
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",
     "notFound": "*Not found",
+    "profile-pic-size-limit": "Profile pic size should be {{size}}MB maximum",
     "required": "*{{fieldName}} is missing!",
     "remove-avatar-failed": "Failed to remove avatar. Please try again.",
     "reset-password-failed": "Failed to reset password. Please try again.",
@@ -499,5 +500,20 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+
+  "translation-feedback": {
+    "title": "Translation Feedback",
+
+    "translation": "Translation",
+    "feedback": "Feedback",
+    "report": "Report",
+
+    "select-translation": "Select translation:",
+    "select": "Select...",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+
+    "submission-success": "Your feedback is sent successfully"
+  }
 }

@@ -7,6 +7,12 @@
     "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
     "title": "Are you absolutely sure?"
   },
+  "delete-profile-picture": {
+    "action-text": "Yes",
+    "cancel-text": "No",
+    "subtitle": "You will delete the profile pic and reset it to the default, Are you sure?",
+    "title": "Delete Profile Picture"
+  },
   "my-profile": "My Profile",
   "personalization": "Personalization",
   "profile-picture": "Profile Picture",
@@ -22,7 +28,7 @@
   "change-password": "Change Password",
   "update-password": "Update Password",
   "success": {
-    "details": "Your details have been updated successfully",
+    "details": "Your profile is updated successfully",
     "password": "Your password has been updated successfully"
   },
   "errors": {
