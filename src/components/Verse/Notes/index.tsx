@@ -71,13 +71,19 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
+        shouldFlipOnRTL={false}
         ariaLabel={t('notes.label')}
       >
         <span className={styles.icon}>
           {hasNotes ? (
             <NotesFilledIcon />
           ) : (
-            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+            <IconContainer
+              icon={<NotesIcon />}
+              color={IconColor.tertiary}
+              size={IconSize.Custom}
+              shouldFlipOnRTL={false}
+            />
           )}
         </span>
       </Button>
