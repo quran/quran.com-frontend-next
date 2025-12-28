@@ -1,10 +1,13 @@
 /* eslint-disable max-lines */
+import { memo, useCallback, useMemo } from 'react';
+
 import classNames from 'classnames';
 import { Controller, useForm } from 'react-hook-form';
 
 import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
+import ValidationErrors from './ValidationErrors';
 
 import Button, { ButtonProps } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
@@ -12,6 +15,9 @@ import Input from '@/dls/Forms/Input';
 import StarRating from '@/dls/Forms/StarRating';
 import TextArea from '@/dls/Forms/TextArea';
 import { FormFieldType } from '@/types/FormField';
+
+// Stable empty object reference to prevent unnecessary re-renders
+const EMPTY_ERROR_TYPES = {};
 
 export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
@@ -23,6 +29,7 @@ type FormBuilderProps<T> = {
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
   shouldSkipValidation?: boolean;
+  shouldDisplayAllValidation?: boolean;
 };
 
 /**
@@ -56,37 +63,57 @@ const FormBuilder = <T,>({
   isSubmitting,
   renderAction,
   shouldSkipValidation,
+  shouldDisplayAllValidation = false,
 }: FormBuilderProps<T>) => {
   const {
     handleSubmit,
     control,
     setError,
     formState: { isValid, isDirty },
-  } = useForm({ mode: 'onChange' });
+  } = useForm({
+    mode: 'onChange',
+    criteriaMode: shouldDisplayAllValidation ? 'all' : 'firstError',
+  });
 
-  const internalOnSubmit = (data: T) => {
-    const onSubmitPromise = onSubmit(data);
-    if (onSubmitPromise) {
-      onSubmitPromise.then((errorData) => {
-        if (errorData && errorData?.errors) {
-          Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
-            setError(field, { type: 'manual', message: errorMessage as string });
-          });
-        }
-      });
-    }
-  };
+  const internalOnSubmit = useCallback(
+    (data: T) => {
+      const onSubmitPromise = onSubmit(data);
+      if (onSubmitPromise) {
+        onSubmitPromise.then((errorData) => {
+          if (errorData && errorData?.errors) {
+            Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
+              setError(field, { type: 'manual', message: errorMessage as string });
+            });
+          }
+        });
+      }
+    },
+    [onSubmit, setError],
+  );
 
-  const renderError = (error: any, errorClassName?: string) =>
-    error && <span className={classNames(styles.errorText, errorClassName)}>{error.message}</span>;
-  const renderExtraSection = (formField: FormBuilderFormField, value: string) => {
+  const renderError = useCallback(
+    (error: any, errorClassName?: string) =>
+      error && (
+        <span className={classNames(styles.errorText, errorClassName)}>{error.message}</span>
+      ),
+    [],
+  );
+
+  const renderExtraSection = useCallback((formField: FormBuilderFormField, value: string) => {
     if (!formField.extraSection) return null;
     return typeof formField.extraSection === 'function'
       ? formField.extraSection(value)
       : formField.extraSection;
-  };
+  }, []);
 
-  const isDisabled = shouldSkipValidation ? isSubmitting : !isDirty || !isValid || isSubmitting;
+  const isDisabled = useMemo(
+    () => (shouldSkipValidation ? isSubmitting : !isDirty || !isValid || isSubmitting),
+    [shouldSkipValidation, isSubmitting, isDirty, isValid],
+  );
+
+  const handleButtonClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
 
   return (
     <form
@@ -102,7 +129,7 @@ const FormBuilder = <T,>({
             defaultValue={formField.defaultValue}
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
-            render={({ field, fieldState: { error } }) => {
+            render={({ field, fieldState: { error, isDirty: isFieldDirty } }) => {
               if (formField.customRender) {
                 return (
                   <div className={classNames(styles.inputContainer, formField.containerClassName)}>
@@ -112,7 +139,14 @@ const FormBuilder = <T,>({
                       placeholder: formField.placeholder,
                       dataTestId: formField.dataTestId,
                     })}
-                    {renderError(error, formField.errorClassName)}
+                    {formField.shouldShowValidationErrors && isFieldDirty ? (
+                      <ValidationErrors
+                        error={error?.types ?? EMPTY_ERROR_TYPES}
+                        rules={formField.rules ?? []}
+                      />
+                    ) : (
+                      renderError(error, formField.errorClassName)
+                    )}
                     {renderExtraSection(formField, field.value)}
                   </div>
                 );
@@ -160,9 +194,7 @@ const FormBuilder = <T,>({
           htmlType: 'submit',
           isLoading: isSubmitting,
           isDisabled,
-          onClick: (e) => {
-            e.stopPropagation();
-          },
+          onClick: handleButtonClick,
         })
       ) : (
         <Button
@@ -170,9 +202,7 @@ const FormBuilder = <T,>({
           htmlType="submit"
           isLoading={isSubmitting}
           isDisabled={isDisabled}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
+          onClick={handleButtonClick}
           className={classNames(styles.submitButton, actionProps.className)}
         >
           {actionText}
@@ -182,4 +212,4 @@ const FormBuilder = <T,>({
   );
 };
 
-export default FormBuilder;
+export default memo(FormBuilder) as typeof FormBuilder;

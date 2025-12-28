@@ -178,6 +178,7 @@
     "banned": "*Sorry, Your account is banned. Contact Quran.Foundation",
     "complete-signup-failed": "Failed to complete signup. Please try again.",
     "confirm": "*Confirm password doesn't match the password",
+    "equal": "*{{fieldName}} doesn't match",
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
