@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
@@ -10,7 +9,6 @@ import styles from './ContentModal.module.scss';
 import { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import CloseIcon from '@/icons/close.svg';
-import { isRTLLocale } from '@/utils/locale';
 
 type FakeContentModalProps = {
   children: React.ReactNode;
@@ -27,9 +25,9 @@ type FakeContentModalProps = {
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
   isBottomSheetOnMobile?: boolean;
-};
 
-const SCROLLBAR_WIDTH = 15;
+  closeAriaLabel?: string;
+};
 
 const FakeContentModal = ({
   onClose,
@@ -46,51 +44,20 @@ const FakeContentModal = ({
   hasHeader = true,
   shouldBeFullScreen = false,
   isBottomSheetOnMobile = true,
+  closeAriaLabel,
 }: FakeContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const { locale } = useRouter();
 
   // Prevent body scrolling when modal is open
   usePreventBodyScrolling(true);
 
-  /**
-   * We need to manually check what the user is targeting. If it lies at the
-   * area where the scroll bar is (assuming the scrollbar width is equivalent
-   * to SCROLLBAR_WIDTH), then we don't close the Modal, otherwise we do.
-   * We also need to check if the current locale is RTL or LTR because the side
-   * where the scrollbar is will be different and therefor the value of
-   * {e.offsetX} will be different.
-   *
-   * inspired by {@see https://github.com/radix-ui/primitives/issues/1280#issuecomment-1198248523}
-   *
-   * @param {React.PointerEvent} event
-   */
-  const onPointerDownOutside = (event: React.PointerEvent) => {
-    const currentTarget = event.currentTarget as HTMLElement;
-    const nativeEvent = event.nativeEvent as PointerEvent;
-
-    const shouldPreventOnClose = isRTLLocale(locale)
-      ? nativeEvent.offsetX < SCROLLBAR_WIDTH // left side of the screen clicked
-      : nativeEvent.offsetX > currentTarget.clientWidth - SCROLLBAR_WIDTH; // right side of the screen clicked
-
-    if (shouldPreventOnClose) {
-      event.preventDefault();
-      return;
-    }
-
-    if (onClose) onClose();
+  const onPointerDownOutside = (event: React.PointerEvent<HTMLDivElement>) => {
+    const target = event.target as Node;
+    if (event.button !== 0) return;
+    if (contentRef.current?.contains(target)) return;
+    onClose?.();
   };
-
-  /**
-   * Prevents Safari from focusing the first focusable element in the modal.
-   * @param {React.FocusEvent} event
-   */
-  const handleOpenAutoFocus = useCallback((event: React.FocusEvent) => {
-    if (event.defaultPrevented) return;
-    event.preventDefault();
-    contentRef.current?.focus({ preventScroll: true });
-  }, []);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -111,8 +78,6 @@ const FakeContentModal = ({
     >
       <div
         ref={contentRef}
-        onFocus={handleOpenAutoFocus}
-        tabIndex={-1}
         className={classNames(styles.contentWrapper, contentClassName, {
           [styles.small]: size === ContentModalSize.SMALL,
           [styles.medium]: size === ContentModalSize.MEDIUM,
@@ -123,16 +88,17 @@ const FakeContentModal = ({
         {hasHeader && (
           <div className={classNames(styles.header, headerClassName)}>
             {hasCloseButton && (
-              <Button
-                variant={ButtonVariant.Ghost}
-                shape={ButtonShape.Circle}
-                className={classNames(styles.closeIcon, closeIconClassName)}
-                onClick={onClose}
-                ariaLabel="Close modal"
-                data-testid="fake-modal-close-button"
-              >
-                <CloseIcon />
-              </Button>
+              <div className={classNames(styles.closeIcon, closeIconClassName)}>
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  shape={ButtonShape.Circle}
+                  data-testid="fake-modal-close-button"
+                  ariaLabel={closeAriaLabel}
+                  onClick={onClose}
+                >
+                  <CloseIcon />
+                </Button>
+              </div>
             )}
             {header}
           </div>
