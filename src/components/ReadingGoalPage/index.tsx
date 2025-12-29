@@ -7,10 +7,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, {
-  ReadingGoalExampleKey,
-  ReadingGoalTabProps,
-} from './hooks/useReadingGoalReducer';
+import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
 import { validateReadingGoalData } from './utils/validator';
@@ -27,30 +24,17 @@ import layoutStyle from '@/pages/index.module.scss';
 import { CreateGoalRequest, GoalCategory, GoalType, QuranGoalPeriod } from '@/types/auth/Goal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logFormSubmission } from '@/utils/eventLogger';
-import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
-interface Props {
-  initialExampleKey: ReadingGoalExampleKey | null;
-}
-
-const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
+const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation('reading-goal');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const mushaf = useGetMushaf();
 
-  let initialTabIdx = 0;
-  if (initialExampleKey) {
-    // if user select example then skip preview
-    // otherwise go to next tab index
-    initialTabIdx = initialExampleKey === ReadingGoalExampleKey.CUSTOM ? 1 : tabsArray.length - 1;
-  }
-
   const [loading, setLoading] = useState(false);
-  const [tabIdx, setTabIdx] = useState(initialTabIdx);
-  const [state, dispatch] = useReadingGoalReducer(initialExampleKey);
+  const [tabIdx, setTabIdx] = useState(0);
+  const [state, dispatch] = useReadingGoalReducer();
   const toast = useToast();
   const { cache } = useSWRConfig();
 
@@ -105,7 +89,7 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
   const percentage = isPreviewTab ? 100 : (tabIdx / tabsArray.length) * 100;
 
   const onPrev = () => {
-    if (tabIdx !== 0 && state.exampleKey !== ReadingGoalExampleKey.CUSTOM) {
+    if (tabIdx !== 0 && state.exampleKey !== 'custom') {
       setTabIdx(0);
       logTabClick(Tab.key, 'previous');
     } else {
@@ -116,25 +100,15 @@ const ReadingGoalOnboarding: React.FC<Props> = ({ initialExampleKey }) => {
 
   const onNext = () => {
     if (!isPreviewTab) {
-      let nextTabIdx = 0;
-      if (tabIdx === 0 && state.exampleKey !== ReadingGoalExampleKey.CUSTOM) {
+      if (tabIdx === 0 && state.exampleKey !== 'custom') {
         // if the user selected an example, skip to the preview tab
-        nextTabIdx = tabsArray.length - 1;
+        setTabIdx(tabsArray.length - 1);
       } else {
         // otherwise, go to the next tab
-        nextTabIdx = tabIdx + 1;
+        setTabIdx((prevIdx) => prevIdx + 1);
       }
 
       logTabNextClick(Tab.key, state);
-
-      if (!isLoggedIn()) {
-        router.push(
-          getLoginNavigationUrl(getReadingGoalNavigationUrl(state.exampleKey ?? undefined)),
-        );
-        return;
-      }
-
-      setTabIdx(nextTabIdx);
     } else {
       onSubmit();
     }

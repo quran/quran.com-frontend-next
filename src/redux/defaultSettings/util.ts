@@ -57,41 +57,29 @@ const getLocaleInitialStateByKey = (locale: string, key: string) => importLocale
 
 export const getLocaleInitialState = (locale: string) => importLocaleFile(locale);
 
-export const getThemeInitialState = (locale: Language | string = DEFAULT_LOCALE): Theme => {
+export const getThemeInitialState = (locale = DEFAULT_LOCALE): Theme => {
   return getLocaleInitialStateByKey(locale, SliceName.THEME);
 };
 
-export const getReadingPreferencesInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): ReadingPreferences => {
+export const getReadingPreferencesInitialState = (locale = DEFAULT_LOCALE): ReadingPreferences => {
   return getLocaleInitialStateByKey(locale, SliceName.READING_PREFERENCES);
 };
 
-export const getQuranReaderStylesInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): QuranReaderStyles => {
+export const getQuranReaderStylesInitialState = (locale = DEFAULT_LOCALE): QuranReaderStyles => {
   return getLocaleInitialStateByKey(locale, SliceName.QURAN_READER_STYLES);
 };
 
-export const getTranslationsInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): TranslationsSettings => {
+export const getTranslationsInitialState = (locale = DEFAULT_LOCALE): TranslationsSettings => {
   return getLocaleInitialStateByKey(locale, SliceName.TRANSLATIONS);
 };
 
-export const getTafsirsInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): TafsirsSettings => {
+export const getTafsirsInitialState = (locale = DEFAULT_LOCALE): TafsirsSettings => {
   return getLocaleInitialStateByKey(locale, SliceName.TAFSIRS);
 };
-export const getAudioPlayerStateInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): AudioState => {
+export const getAudioPlayerStateInitialState = (locale = DEFAULT_LOCALE): AudioState => {
   return getLocaleInitialStateByKey(locale, SliceName.AUDIO_PLAYER_STATE);
 };
 
-export const getNotificationsInitialState = (
-  locale: Language | string = DEFAULT_LOCALE,
-): NotificationsState => {
+export const getNotificationsInitialState = (locale = DEFAULT_LOCALE): NotificationsState => {
   return getLocaleInitialStateByKey(locale, SliceName.NOTIFICATIONS);
 };

@@ -3,17 +3,16 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-
-import { NextPage, GetServerSideProps } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = '/terms-and-conditions';
 const TermsAndConditionsPage: NextPage = (): JSX.Element => {
@@ -61,7 +60,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
           </p>
           <p>
             0.3 By posting your notes and reflections on QuranReflect you are agreeing to
-            QuranReflect's Terms and Conditions: https://quranreflect.com/terms_and_conditions
+            QuranReflect’s Terms and Conditions: https://quranreflect.com/terms_and_conditions
           </p>
           <h2>1. SERVICE (GENERAL).</h2>
           <p>
@@ -461,9 +460,9 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
           <p>
             Please note that with regard to any content made available on or through the Service
             which contains or displays a third party logo (i.e. YouTube, Vimeo, etc.) or which is
-            provided via a third party's player and is hosted on a third party's servers; Quran.com
+            provided via a third party’s player and is hosted on a third party’s servers; Quran.com
             does not have the ability to permanently remove all or any such content from the third
-            party's servers. Therefore, if you have a complaint concerning any video content made
+            party’s servers. Therefore, if you have a complaint concerning any video content made
             available on the Service that is provided by a third party, you should contact the third
             party directly in accordance with copyright policies of the third party. If you believe
             that your work is available on the Service via a third party player in a way that
@@ -487,7 +486,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             10.3 Quran.com will always recommend products and services based in part on a good faith
             belief that the supply of such products or services will help you. We have a good faith
             belief, because Quran.com has either tried the products or services prior to making any
-            recommendations, or we have researched the products or services based on the supplier's
+            recommendations, or we have researched the products or services based on the supplier’s
             history. The recommendations made by Quran.com about the products or services are honest
             opinions based on facts known to us at the time a product or service is mentioned on the
             Service.
@@ -804,11 +803,14 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/terms-and-conditions',
-  async () => ({
-    props: {},
-  }),
-);
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
 
 export default TermsAndConditionsPage;

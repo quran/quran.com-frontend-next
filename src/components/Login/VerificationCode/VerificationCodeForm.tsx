@@ -1,20 +1,16 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 
 import VerificationCodeBase from './VerificationCodeBase';
 
 import AuthHeader from '@/components/Login/AuthHeader';
 import styles from '@/components/Login/login.module.scss';
 import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
-import { persistCurrentSettings } from '@/redux/slices/defaultSettings';
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import { signUp } from '@/utils/auth/authRequests';
-import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import { logFormSubmission } from '@/utils/eventLogger';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface Props {
   email: string;
@@ -34,8 +30,6 @@ const VerificationCodeForm: FC<Props> = ({
   handleSubmit,
 }) => {
   const router = useRouter();
-  const dispatch = useDispatch<any>();
-  const audioService = useContext(AudioPlayerMachineContext);
 
   const { redirectWithToken } = useAuthRedirect();
   const handleSubmitCode = async (code: string): Promise<void> => {
@@ -49,19 +43,6 @@ const VerificationCodeForm: FC<Props> = ({
     if (!response.success) {
       // Throw error to be caught by the VerificationCodeBase component
       throw new Error(errors?.verificationCode || 'Invalid verification code');
-    }
-
-    await dispatch(persistCurrentSettings());
-
-    try {
-      await syncPreferencesFromServer({
-        locale: router.locale || 'en',
-        dispatch,
-        audioService,
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to sync user preferences after verification', error);
     }
 
     // If successful, call onSuccess callback or redirect

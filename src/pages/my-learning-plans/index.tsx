@@ -1,7 +1,6 @@
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import withAuth from '@/components/Auth/withAuth';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -34,4 +33,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(MyLearningPlanPage);
+export default MyLearningPlanPage;

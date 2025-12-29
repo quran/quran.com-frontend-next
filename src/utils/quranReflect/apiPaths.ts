@@ -1,59 +1,22 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-import { localeToQuranReflectLanguageID } from './locale';
-
 import { fetcher } from '@/api';
 import AyahReflectionsRequestParams from '@/types/QuranReflect/AyahReflectionsRequestParams';
 import AyahReflectionsResponse from '@/types/QuranReflect/AyahReflectionsResponse';
 import Tab from '@/types/QuranReflect/Tab';
 import stringify from '@/utils/qs-stringify';
+import { localeToQuranReflectLanguageID } from '@/utils/quranReflect/locale';
+import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 
 export const REFLECTION_POST_TYPE_ID = '1';
 export const LESSON_POST_TYPE_ID = '2';
 
-const ensureAbsoluteUrl = (url: string): string => {
-  if (!url) return url;
-  if (url.startsWith('http://') || url.startsWith('https://')) return url;
-  const isLocalhost =
-    url.startsWith('localhost') || url.startsWith('127.') || url.startsWith('::1');
-  return `${isLocalhost ? 'http' : 'https'}://${url}`;
-};
-
-/**
- * Resolves the base URL to use for API requests to Quran Reflect, going through the proxy.
- * The resolution order is as follows:
- * 1. If NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL is set, use that.
- * 2. If APP_BASE_URL, NEXT_PUBLIC_APP_BASE_URL, SITE_URL, or NEXT_PUBLIC_SITE_URL is set, use that.
- * 3. If VERCEL_URL or NEXT_PUBLIC_VERCEL_URL is set, use that.
- * 4. Otherwise, default to localhost with the appropriate port.
- * @returns {string} The resolved base URL.
- */
-const resolveAppBaseUrl = (): string => {
-  const explicitBase =
-    process.env.NEXT_PUBLIC_APP_BASE_URL ||
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.APP_BASE_URL;
-  if (explicitBase) return ensureAbsoluteUrl(explicitBase).replace(/\/$/, '');
-
-  const vercelBase = process.env.NEXT_PUBLIC_VERCEL_URL || process.env.VERCEL_URL;
-  if (vercelBase) return ensureAbsoluteUrl(vercelBase).replace(/\/$/, '');
-
-  const port = process.env.PORT || 3000;
-  return `http://localhost:${port}`.replace(/\/$/, '');
-};
-
-const getProxyBaseUrl = (): string => {
-  const override = process.env.NEXT_PUBLIC_QURAN_REFLECT_API_BASE_URL;
-  if (override) return ensureAbsoluteUrl(override).replace(/\/$/, '');
-  return `${resolveAppBaseUrl()}/api/proxy/quran-reflect`;
-};
-
-export const API_HOST = getProxyBaseUrl();
-
-export const makeQuranReflectApiUrl = (path: string, parameters = {}): string => {
-  const normalizedPath = path.startsWith('/') ? path.slice(1) : path;
-  const params = stringify(parameters);
-  return `${API_HOST}/${normalizedPath}${params ? `?${params}` : ''}`;
+export const makeQuranReflectApiUrl = (
+  path: string,
+  parameters: Record<string, unknown> = {},
+): string => {
+  const query = Object.keys(parameters).length ? `?${stringify(parameters)}` : '';
+  return getProxiedServiceUrl(QuranFoundationService.QURAN_REFLECT, `/${path}${query}`);
 };
 
 export const makeGetUserReflectionsUrl = ({
@@ -69,9 +32,6 @@ export const makeAyahReflectionsUrl = ({
   ayahNumber,
   locale,
   page = 1,
-
-  tab = Tab.Popular,
-
   postTypeIds = [],
 }: AyahReflectionsRequestParams) => {
   return makeQuranReflectApiUrl('posts/feed', {
@@ -80,7 +40,7 @@ export const makeAyahReflectionsUrl = ({
     'filter[references][0][to]': ayahNumber,
     ...(postTypeIds.length > 0 && { 'filter[postTypeIds]': postTypeIds.join(',') }),
     page,
-    tab,
+    tab: Tab.Popular, // always reviewed content
     languages: localeToQuranReflectLanguageID(locale),
     'filter[verifiedOnly]': true,
   });

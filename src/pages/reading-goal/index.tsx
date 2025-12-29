@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,22 +9,14 @@ import layoutStyles from '../index.module.scss';
 
 import styles from './reading-goal.module.scss';
 
+import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
-import {
-  isReadingGoalExampleKey,
-  ReadingGoalExampleKey,
-} from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import { isLoggedIn } from '@/utils/auth/login';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getReadingGoalNavigationUrl,
-  getReadingGoalProgressNavigationUrl,
-} from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
+import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const ReadingGoalPage: NextPage = () => {
   // we don't want to show the reading goal page if the user is not logged in
@@ -35,15 +27,9 @@ const ReadingGoalPage: NextPage = () => {
   const { goal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
   const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
 
-  const { example } = router.query;
-  const initialExampleKey =
-    isLoggedIn() && typeof example === 'string' && isReadingGoalExampleKey(example)
-      ? (example as ReadingGoalExampleKey)
-      : null;
-
   useEffect(() => {
     if (goal) {
-      router.replace(getReadingGoalProgressNavigationUrl());
+      router.push('/');
     }
   }, [router, goal]);
 
@@ -59,17 +45,21 @@ const ReadingGoalPage: NextPage = () => {
 
       <div className={layoutStyles.pageContainer}>
         <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <ReadingGoalOnboarding initialExampleKey={initialExampleKey} />
-          )}
+          {isLoading ? <Spinner /> : <ReadingGoalOnboarding />}
         </div>
       </div>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/reading-goal');
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
 
-export default ReadingGoalPage;
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
+
+export default withAuth(ReadingGoalPage);

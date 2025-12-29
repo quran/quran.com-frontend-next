@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 
-import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
+import withAuth from '@/components/Auth/withAuth';
 import CompleteSignupForm from '@/components/Login/CompleteSignupForm';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useAuthData from '@/hooks/auth/useAuthData';
 import styles from '@/pages/index.module.scss';
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
-const CompleteSignupPage: NextPage = () => {
+const CompleteSignupPage = () => {
   const router = useRouter();
   const { userData, isLoading, userDataError } = useAuthData();
 
@@ -45,6 +44,4 @@ const CompleteSignupPage: NextPage = () => {
   return <CompleteSignupForm userData={userData} onSuccess={handleSuccess} />;
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/complete-signup');
-
-export default CompleteSignupPage;
+export default withAuth(CompleteSignupPage);

@@ -7,23 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './LanguageContainer.module.scss';
 
-import { getCountryLanguagePreference } from '@/api';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import IconArrowLeft from '@/icons/arrow-left.svg';
-import { logError } from '@/lib/newrelic';
-import {
-  persistCurrentSettings,
-  selectDetectedCountry,
-  selectUserHasCustomised,
-  setDefaultsFromCountryPreference,
-} from '@/redux/slices/defaultSettings';
+import resetSettings from '@/redux/actions/reset-settings';
+import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
-import { getCountryCodeForPreferences } from '@/utils/serverSideLanguageDetection';
 import i18nConfig from 'i18n.json';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -36,8 +29,7 @@ interface LanguageContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...props }) => {
   const { t, lang } = useTranslation('common');
-  const userHasCustomised = useSelector(selectUserHasCustomised);
-  const detectedCountry = useSelector(selectDetectedCountry);
+  const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -64,71 +56,32 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
     });
   };
 
-  /**
-   * Apply QDC defaults for new language (translations, tafsir, mushaf, wbw, etc.).
-   * Uses dynamic API defaults.
-   * Fails gracefully - UI language will still switch if defaults fail.
-   */
-  const applyDefaultsForNewLanguage = async (newLocale: string, loggedIn: boolean) => {
-    try {
-      const preferenceCountry = getCountryCodeForPreferences(newLocale, detectedCountry);
-      const countryPreference = await getCountryLanguagePreference(newLocale, preferenceCountry);
-
-      // Apply dynamic defaults from QDC API
-      await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
-
-      // Persist the newly applied defaults if user is logged in
-      if (loggedIn) {
-        await dispatch(persistCurrentSettings());
-      }
-    } catch (error) {
-      // Don't block locale change if defaults fail - UI language should still switch
-      logError('Failed to apply QDC defaults on language change', error);
-    }
-  };
-
-  /**
-   * Persist the language preference to server for logged-in users.
-   */
-  const persistLanguagePreference = (newLocale: string, loggedIn: boolean) => {
-    if (loggedIn) {
-      addOrUpdateUserPreference(
-        PreferenceGroup.LANGUAGE,
-        newLocale,
-        PreferenceGroup.LANGUAGE,
-      ).catch(handleLanguagePersistError);
-    }
-  };
-
-  /**
-   * Handle language change with conditional defaults application.
-   *
-   * If user has NOT customised: apply QDC defaults for new locale
-   * If user HAS customised: only switch UI locale, keep preferences intact
-   */
   const onLanguageChange = async (newLocale: string) => {
     if (newLocale === lang) {
       onBack();
       return;
     }
-
     try {
-      const loggedIn = isLoggedIn();
-
-      // Apply defaults only if user hasn't customised their preferences
-      if (!userHasCustomised) {
-        await applyDefaultsForNewLanguage(newLocale, loggedIn);
+      if (isUsingDefaultSettings) {
+        dispatch(resetSettings(newLocale));
       }
-
       logValueChange('locale', lang, newLocale);
+
       await setLanguage(newLocale);
       setLocaleCookie(newLocale);
-      persistLanguagePreference(newLocale, loggedIn);
+
+      if (isLoggedIn()) {
+        addOrUpdateUserPreference(
+          PreferenceGroup.LANGUAGE,
+          newLocale,
+          PreferenceGroup.LANGUAGE,
+        ).catch(handleLanguagePersistError);
+      }
       onBack();
     } catch (error) {
-      toast(t('error.language-change-failed'), { status: ToastStatus.Error });
-      // Log the error to aid debugging of language change failures
-      logError('Language change failed', error);
+      toast(t('error.language-change-failed'), {
+        status: ToastStatus.Error,
+      });
     }
   };
 
@@ -171,7 +124,6 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
             className={classNames(styles.languageItem, {
               [styles.selected]: locale === lang,
             })}
-            data-testid={`language-item-${locale}`}
           >
             {getLocaleName(locale)}
           </Button>
