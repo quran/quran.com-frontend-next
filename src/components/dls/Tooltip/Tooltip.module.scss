@@ -19,6 +19,8 @@
   }
   background-color: var(--color-background-inverse);
   max-width: calc(10 * var(--spacing-mega));
+  // Changed from text-align to flexbox to support icon alignment
+  // Flexbox allows the icon to be positioned at the end while keeping content centered
   display: flex;
   align-items: center;
   justify-content: center;

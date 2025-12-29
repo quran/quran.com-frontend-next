@@ -3,6 +3,7 @@ import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import InlineWordByWord from '../InlineWordByWord';
@@ -68,6 +69,7 @@ const QuranWord = ({
   bookmarksRangeUrl,
 }: QuranWordProps) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
 
@@ -193,7 +195,8 @@ const QuranWord = ({
 
       handleWordAction();
     },
-    [handleWordAction, word.charTypeName, isTranslationMode, isRecitationEnabled, dispatch],
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
+    [handleWordAction, word.charTypeName, isTranslationMode, isRecitationEnabled],
   );
 
   const onKeyPress = useCallback(
@@ -230,17 +233,18 @@ const QuranWord = ({
     if (word.charTypeName === CharType.End && isTranslationMode) {
       dispatch(setReadingViewHoveredVerseKey(word.verseKey));
     }
-  }, [dispatch, word.charTypeName, word.verseKey, isTranslationMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
+  }, [word.charTypeName, word.verseKey, isTranslationMode]);
 
   const onMouseLeave = useCallback(() => {
     if (word.charTypeName === CharType.End && isTranslationMode) {
       dispatch(setReadingViewHoveredVerseKey(null));
     }
-  }, [dispatch, word.charTypeName, isTranslationMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
+  }, [word.charTypeName, isTranslationMode]);
 
   // Allow clicking on ayah number in translation mode for study mode modal
-  const shouldHandleWordClicking =
-    word.charTypeName !== CharType.End || (word.charTypeName === CharType.End && isTranslationMode);
+  const shouldHandleWordClicking = word.charTypeName !== CharType.End || isTranslationMode;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
@@ -285,6 +289,7 @@ const QuranWord = ({
                   dispatch(setReadingViewHoveredVerseKey(null)); // Clear hover state
                   setIsStudyModeModalOpen(true);
                 }}
+                iconAriaLabel={t('aria.open-study-mode')}
               >
                 {children}
               </MobilePopover>

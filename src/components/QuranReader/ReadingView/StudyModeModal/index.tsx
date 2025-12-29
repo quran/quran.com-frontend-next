@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './StudyModeModal.module.scss';
 
-import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import ContentModal from '@/dls/ContentModal/ContentModal';
 import Word from 'types/Word';
 
 interface Props {

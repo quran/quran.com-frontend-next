@@ -41,6 +41,7 @@ interface Props {
   type?: TooltipType;
   icon?: ReactNode;
   onIconClick?: () => void;
+  iconAriaLabel?: string;
 }
 
 const Tooltip: React.FC<Props> = ({
@@ -58,6 +59,7 @@ const Tooltip: React.FC<Props> = ({
   centerText = true,
   icon,
   onIconClick,
+  iconAriaLabel,
 }) => (
   <RadixTooltip.Root
     delayDuration={delay}
@@ -91,6 +93,7 @@ const Tooltip: React.FC<Props> = ({
           }}
           role="button"
           tabIndex={0}
+          aria-label={iconAriaLabel}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();

@@ -40,6 +40,7 @@ interface Props {
   tooltipType?: TooltipType;
   icon?: ReactNode;
   onIconClick?: () => void;
+  iconAriaLabel?: string;
 }
 
 const Popover: React.FC<Props> = ({
@@ -62,6 +63,7 @@ const Popover: React.FC<Props> = ({
   tooltipType,
   icon,
   onIconClick,
+  iconAriaLabel,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -86,6 +88,7 @@ const Popover: React.FC<Props> = ({
           }}
           role="button"
           tabIndex={0}
+          aria-label={iconAriaLabel}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
