@@ -93,6 +93,7 @@ const BuilderConfigForm = ({
     rangeOptions,
     preferences.rangeEnabled,
     preferences.selectedAyah,
+    preferences.rangeEnd,
     setPreferences,
   ]);
 
@@ -312,7 +313,7 @@ const BuilderConfigForm = ({
               <button
                 type="button"
                 onClick={() => toggleTranslation(translation)}
-                aria-label={t('translations.chipRemoveLabel', { name: translation.name })}
+                aria-label={t('translations.chipRemoveLabel')}
               >
                 ×
               </button>

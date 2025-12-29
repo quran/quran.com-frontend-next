@@ -429,7 +429,8 @@
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('[Quran Embed] Failed to sanitize HTML.', error);
-      return html;
+      // Return empty string to avoid rendering potentially unsafe content
+      return '';
     }
   };
 

@@ -65,7 +65,7 @@ const useAyahWidgetSurahs = (locale: string = DEFAULT_LOCALE): Chapter[] => {
 
       loadSurahs();
     },
-    [locale, t],
+    [locale, t, toast],
   );
 
   return surahs;

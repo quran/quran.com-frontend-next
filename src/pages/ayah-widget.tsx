@@ -232,7 +232,7 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
   pushAttrIfNotDefault('data-quran-translation-ids', translationIdsCsv, '');
   pushAttrIfNotDefault(
     'data-quran-reciter-id',
-    preferences.reciter ? String(preferences.reciter) : '',
+    preferences.reciter ? String(preferences.reciter) : String(DEFAULTS.reciterId),
     String(DEFAULTS.reciterId),
   );
   pushAttrIfNotDefault('data-quran-audio', String(preferences.enableAudio), 'true');

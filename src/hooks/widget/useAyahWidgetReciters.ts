@@ -71,7 +71,7 @@ const useAyahWidgetReciters = (
 
       loadReciters();
     },
-    [fallbackReciterId, locale, t],
+    [fallbackReciterId, locale, t, toast],
   );
 
   return reciters;
