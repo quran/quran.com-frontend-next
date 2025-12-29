@@ -244,6 +244,10 @@
   },
   "fundraising": {
     "description": "Donasi bulanan membantu kami mengembangkan dan mempertahankan operasional Quran.com sehingga kami dapat lebih fokus menciptakan dampak daripada menggalang dana.",
+    "donation-campaign": {
+      "cta": "Donasi hari ini",
+      "text": "Jadilah pendukung"
+    },
     "title": "Menjadi Donatur Bulanan"
   },
   "get-started": "Memulai",
