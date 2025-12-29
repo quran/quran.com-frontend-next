@@ -30,7 +30,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
   const handleClose = useCallback(() => {
     setIsOpen(false);
     fakeNavigate(router.asPath, router.locale);
-  }, [router.asPath, router.locale, setIsOpen]);
+  }, [router.asPath, router.locale]);
 
   const handleClick = useCallback(() => {
     if (chapterId) {
@@ -38,7 +38,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
       setIsOpen(true);
       fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
     }
-  }, [chapterId, router.locale, setIsOpen]);
+  }, [chapterId, router.locale]);
 
   return (
     <>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -20,14 +18,12 @@ import { isValidChapterId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse, VersesResponse, ChapterInfoResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;
   versesResponse?: VersesResponse;
   chapterInfoResponse?: ChapterInfoResponse;
   quranReaderDataType: QuranReaderDataType;
-  chaptersData: ChaptersData;
 };
 
 const Chapter: NextPage<ChapterProps> = ({
@@ -125,7 +121,7 @@ const getChapterVersesData = async (chapterId: string, locale: string) => {
     },
   };
 
-  return { versesResponse: minimalVersesResponse, chaptersData, pagesLookupResponse };
+  return { versesResponse: minimalVersesResponse, chaptersData };
 };
 
 export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async (context) => {
@@ -143,7 +139,6 @@ export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async 
 
     return {
       props: {
-        chaptersData,
         chapterResponse: { chapter: { ...chapterData, id: chapterId } },
         versesResponse,
         chapterInfoResponse,

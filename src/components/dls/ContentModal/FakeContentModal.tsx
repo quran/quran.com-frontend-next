@@ -26,9 +26,29 @@ type FakeContentModalProps = {
   shouldBeFullScreen?: boolean;
   isBottomSheetOnMobile?: boolean;
 
+  closeToHref?: string;
   closeAriaLabel?: string;
+  ariaLabel?: string;
 };
 
+/**
+ * FakeContentModal is a lightweight, SEO-oriented version of `ContentModal`.
+ *
+ * It intentionally reuses the same styles and a similar DOM structure as `ContentModal`,
+ * but avoids depending on the full modal implementation (e.g. portals, focus traps, or
+ * other heavy runtime behavior) so that content can be rendered in a more static,
+ * crawler‑friendly way when needed for SEO.
+ *
+ * Use this component only in places where we need modal-like styling/markup for content
+ * that is primarily rendered for search engines or non-interactive views. For regular,
+ * interactive modals in the app, always prefer `ContentModal` instead.
+ *
+ * If the public structure or styling contract of `ContentModal` changes in ways that
+ * are important for SEO, make sure to review and update this "fake" counterpart to keep
+ * the rendered HTML consistent where required.
+ *
+ * @returns {JSX.Element} The rendered FakeContentModal component
+ */
 const FakeContentModal = ({
   onClose,
   hasCloseButton = true,
@@ -44,6 +64,8 @@ const FakeContentModal = ({
   hasHeader = true,
   shouldBeFullScreen = false,
   isBottomSheetOnMobile = true,
+
+  closeToHref,
   closeAriaLabel,
 }: FakeContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -72,6 +94,8 @@ const FakeContentModal = ({
     <div
       ref={overlayRef}
       onPointerDown={onPointerDownOutside}
+      role="dialog"
+      aria-modal="true"
       className={classNames(styles.overlay, overlayClassName, {
         [styles.fullScreen]: shouldBeFullScreen,
       })}
@@ -94,7 +118,7 @@ const FakeContentModal = ({
                   shape={ButtonShape.Circle}
                   data-testid="fake-modal-close-button"
                   ariaLabel={closeAriaLabel}
-                  onClick={onClose}
+                  {...(closeToHref ? { href: closeToHref } : { onClick: onClose })}
                 >
                   <CloseIcon />
                 </Button>
