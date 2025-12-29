@@ -10,7 +10,7 @@ import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getSurahInfoNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
   chapterId?: string;
@@ -29,8 +29,21 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-    fakeNavigate(router.asPath, router.locale);
-  }, [router.asPath, router.locale]);
+
+    /*
+     * When closing the surah info modal, we fake different URLs in the browser:
+     * - If we're on a regular surah page (e.g., /1 or /1:1), fake router.asPath to keep the same URL
+     * - If we're on the dedicated surah info page (/surah/[chapterId]/info), fake the main surah page URL
+     *
+     * This ensures the browser URL stays accurate - users on /1:1 keep /1:1 in the address bar,
+     * rather than faking it to just /1 which would be incorrect.
+     */
+    if (!router.pathname.includes('/surah/[chapterId]/info')) {
+      fakeNavigate(router.asPath, router.locale);
+    } else {
+      fakeNavigate(getSurahNavigationUrl(chapterId), router.locale);
+    }
+  }, [router, chapterId]);
 
   const handleClick = useCallback(() => {
     if (chapterId) {
