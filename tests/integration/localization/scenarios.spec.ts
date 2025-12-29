@@ -213,16 +213,15 @@ test.describe('Localization scenarios - Switch Language', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      await helper.visitPage();
+    await helper.visitPage();
 
-      await expect(page).toHaveURL(/\/ur(\?|$)/);
+    await expect(page).toHaveURL(/\/ur(\?|$)/);
 
-      const quranReaderStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
-      expect(quranReaderStyles.quranFont).toBe(INDOPAK_FONT);
+    const quranReaderStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
+    expect(quranReaderStyles.quranFont).toBe(INDOPAK_FONT);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Pakistan Urdu guest switching to French loses IndoPak defaults',
@@ -230,21 +229,20 @@ test.describe('Localization scenarios - Switch Language', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      await helper.visitPage();
-      await expect(page).toHaveURL(/\/ur(\?|$)/);
+    await helper.visitPage();
+    await expect(page).toHaveURL(/\/ur(\?|$)/);
 
-      const initialStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
-      expect(initialStyles.quranFont).toBe(INDOPAK_FONT);
+    const initialStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
+    expect(initialStyles.quranFont).toBe(INDOPAK_FONT);
 
-      await helper.switchLanguage('fr');
-      await expect(page).toHaveURL(/\/fr(\?|$)/);
+    await helper.switchLanguage('fr');
+    await expect(page).toHaveURL(/\/fr(\?|$)/);
 
-      const stylesAfterSwitch = await helper.homepage.getPersistedValue('quranReaderStyles');
-      expect(stylesAfterSwitch.quranFont).not.toBe(INDOPAK_FONT);
+    const stylesAfterSwitch = await helper.homepage.getPersistedValue('quranReaderStyles');
+    expect(stylesAfterSwitch.quranFont).not.toBe(INDOPAK_FONT);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Customized Pakistan Urdu guest keeps settings after switching language',
@@ -260,17 +258,17 @@ test.describe('Localization scenarios - Switch Language', () => {
       await page.waitForTimeout(1000);
       await page.keyboard.press('Escape');
 
-      const themeBeforeSwitch = await helper.homepage.getPersistedValue('theme');
-      expect(themeBeforeSwitch.type).toBe('sepia');
+    const themeBeforeSwitch = await helper.homepage.getPersistedValue('theme');
+    expect(themeBeforeSwitch.type).toBe('sepia');
 
-      await helper.switchLanguage('fr');
-      await expect(page).toHaveURL(/\/fr\/1(\?|$)/);
+    await helper.switchLanguage('fr');
+    await expect(page).toHaveURL(/\/fr\/1(\?|$)/);
 
-      const quranReaderStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
-      expect(quranReaderStyles.quranFont).toBe(INDOPAK_FONT);
+    const quranReaderStyles = await helper.homepage.getPersistedValue('quranReaderStyles');
+    expect(quranReaderStyles.quranFont).toBe(INDOPAK_FONT);
 
-      const themeAfterSwitch = await helper.homepage.getPersistedValue('theme');
-      expect(themeAfterSwitch.type).toBe('sepia');
+    const themeAfterSwitch = await helper.homepage.getPersistedValue('theme');
+    expect(themeAfterSwitch.type).toBe('sepia');
 
       await context.close();
     },
@@ -304,15 +302,14 @@ test.describe('Localization scenarios - Learning Plans', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'fr-FR');
 
-      await helper.visitPage();
-      await expect(page).toHaveURL(/\/fr(\?|$)/);
+    await helper.visitPage();
+    await expect(page).toHaveURL(/\/fr(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['fr']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['fr']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Guest from Pakistan sees English lessons first',
@@ -320,15 +317,14 @@ test.describe('Localization scenarios - Learning Plans', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      await helper.visitPage();
-      await expect(page).toHaveURL(/\/ur(\?|$)/);
+    await helper.visitPage();
+    await expect(page).toHaveURL(/\/ur(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['en']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['en']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Guest from Egypt with Arabic locale sees Arabic lessons first',
@@ -336,15 +332,14 @@ test.describe('Localization scenarios - Learning Plans', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ar-EG');
 
-      await helper.visitPage();
-      await expect(page).toHaveURL(/\/ar(\?|$)/);
+    await helper.visitPage();
+    await expect(page).toHaveURL(/\/ar(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['ar']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.learningPlanLanguageIsoCodes).toEqual(['ar']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 });
 
 test.describe('Localization scenarios - Quran Reflect', () => {
@@ -354,15 +349,14 @@ test.describe('Localization scenarios - Quran Reflect', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'fr-FR');
 
-      await helper.visitPage('/1:1/reflections');
-      await expect(page).toHaveURL(/\/fr\/1:1\/reflections(\?|$)/);
+    await helper.visitPage('/1:1/reflections');
+    await expect(page).toHaveURL(/\/fr\/1:1\/reflections(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['fr']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['fr']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Guest from Turkey sees Arabic & English reflection',
@@ -370,15 +364,14 @@ test.describe('Localization scenarios - Quran Reflect', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'tr-TR');
 
-      await helper.visitPage('/1:1/reflections');
-      await expect(page).toHaveURL(/\/1:1\/reflections(\?|$)/);
+    await helper.visitPage('/1:1/reflections');
+    await expect(page).toHaveURL(/\/1:1\/reflections(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['ar', 'en']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['ar', 'en']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 
   test(
     'Guest from Malaysia sees Malay reflection',
@@ -386,15 +379,14 @@ test.describe('Localization scenarios - Quran Reflect', () => {
     async ({ browser }) => {
       const { helper, page, context } = await createSimpleScenarioHelper(browser, 'ms-MY');
 
-      await helper.visitPage('/1:1/reflections');
-      await expect(page).toHaveURL(/\/ms\/1:1\/reflections(\?|$)/);
+    await helper.visitPage('/1:1/reflections');
+    await expect(page).toHaveURL(/\/ms\/1:1\/reflections(\?|$)/);
 
-      const defaultSettings = await helper.getDefaultSettings();
-      expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['ms']);
+    const defaultSettings = await helper.getDefaultSettings();
+    expect(defaultSettings.ayahReflectionsLanguageIsoCodes).toEqual(['ms']);
 
-      await context.close();
-    },
-  );
+    await context.close();
+  });
 });
 
 test.describe('Localization scenarios - Account', () => {
@@ -405,33 +397,26 @@ test.describe('Localization scenarios - Account', () => {
     async ({ browser }) => {
       const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      test.skip(
-        !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
-        'No credentials provided',
-      );
+      await helper.visitPage('/login');
 
       try {
         setTestData('preferences', createTestUserPreferences());
 
-        await helper.visitPage('/login');
+      await page.waitForTimeout(1000);
 
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
-        await Promise.all([
-          page.waitForURL(/\/fr(\?|$)/),
-          page.locator('[data-testid="signin-continue-button"]').click(),
-        ]);
+      await helper.waitForReduxHydration();
 
-        await helper.waitForReduxHydration();
+      const theme = await helper.homepage.getPersistedValue('theme');
+      expect(theme.type).toBe('sepia');
+    } finally {
+      setTestData('preferences', null);
+    }
+  });
 
-        const theme = await helper.homepage.getPersistedValue('theme');
-        expect(theme.type).toBe('sepia');
-      } finally {
-        setTestData('preferences', null);
-      }
-    },
-  );
+  test('Logging out keeps localized language and theme', async ({ browser }) => {
 
   test(
     'Logging out keeps localized language and theme',
@@ -439,39 +424,30 @@ test.describe('Localization scenarios - Account', () => {
     async ({ browser }) => {
       const { helper, page } = await createSimpleScenarioHelper(browser, 'ur-PK');
 
-      test.skip(
-        !process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD,
-        'No credentials provided',
-      );
+      await helper.visitPage('/login');
 
       try {
         setTestData('preferences', createTestUserPreferences());
 
-        await helper.visitPage('/login');
+      await page.waitForTimeout(1000);
 
         await page.locator('[data-testid="signin-email-input"]').fill(TEST_USER_EMAIL);
         await page.locator('[data-testid="signin-password-input"]').fill(TEST_USER_PASSWORD);
 
-        await Promise.all([
-          page.waitForURL(/\/fr(\?|$)/),
-          page.locator('[data-testid="signin-continue-button"]').click(),
-        ]);
+      await helper.waitForReduxHydration();
 
-        await helper.waitForReduxHydration();
+      await page.locator('[data-testid="profile-avatar-button"]').click();
+      await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
         await page.locator('[data-testid="profile-avatar-button"]').first().click();
         await page.locator('[data-testid="profile-menu-item-logout"]').click();
 
-        await page.waitForURL(/\/fr(\?|$)/);
-        await helper.waitForReduxHydration();
-
-        const theme = await helper.homepage.getPersistedValue('theme');
-        expect(theme.type).toBe('sepia');
-      } finally {
-        setTestData('preferences', null);
-      }
-    },
-  );
+      const theme = await helper.homepage.getPersistedValue('theme');
+      expect(theme.type).toBe('sepia');
+    } finally {
+      setTestData('preferences', null);
+    }
+  });
 });
 
 test.describe('Localization scenarios - Country/Language Detection', () => {
@@ -629,7 +605,8 @@ test.describe('Localization scenarios - Device Language Detection (Any Country)'
         await helper.visitPage();
         await expect(page).toHaveURL(new RegExp(`\\${expectedPath}(\\?|$)`));
         await context.close();
-      },
-    );
-  }
+        },
+      );
+    }
+  })
 });

@@ -42,7 +42,6 @@ const addCustomRenderToCompleteSignupFormFields = (
           onChange: (value: string) => void;
           placeholder?: string;
           disabled?: boolean;
-          dataTestId?: string;
         }) => {
           return (
             <AuthInput
@@ -50,7 +49,6 @@ const addCustomRenderToCompleteSignupFormFields = (
               id={field.field}
               htmlType={isEmail ? 'email' : 'text'}
               disabled={isDisabled || props.disabled}
-              dataTestId={props.dataTestId}
             />
           );
         },

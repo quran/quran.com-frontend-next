@@ -13,7 +13,7 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getAvailableReciters, getChapterAudioData } from '@/api';
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from '@/api';
 import { download } from '@/components/AudioPlayer/Buttons/DownloadAudioButton';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Button, { ButtonType } from '@/dls/Button/Button';
@@ -24,9 +24,11 @@ import DownloadIcon from '@/icons/download.svg';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import { makeCDNUrl } from '@/utils/cdn';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
   getReciterChapterNavigationUrl,
@@ -38,6 +40,7 @@ import withSsrRedux from '@/utils/withSsrRedux';
 import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
+import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
 type ShareRecitationPageProps = {

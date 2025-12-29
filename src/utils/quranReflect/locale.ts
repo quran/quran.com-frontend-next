@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 
 import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
-import Language from '@/types/Language';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
 const ARABIC_LANGUAGE_ID = 1;
@@ -23,42 +22,12 @@ export const localeToTranslationID = (locale: string): number | null => {
   return LOCALE_TO_TRANSLATION_ID[locale] ?? LOCALE_TO_TRANSLATION_ID[Language.EN];
 };
 
-const LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID: Record<string, number> = {
-  [Language.AR]: 1, // Arabic
-  [Language.EN]: 2,
-  [Language.ES]: 3,
-  [Language.MS]: 4,
-  [Language.UR]: 5,
-  [Language.ID]: 6,
-  [Language.FR]: 7,
-  [Language.BN]: 69,
-  [Language.FA]: 32,
-  [Language.IT]: 41,
-  [Language.NL]: 39,
-  [Language.PT]: 48,
-  [Language.RU]: 67,
-  [Language.SQ]: 45,
-  [Language.TH]: 62,
-  [Language.TR]: 65,
-  [Language.ZH]: 71,
-  [Language.SW]: 59,
-};
-
 const LOCALE_TO_REFLECTION_LANGUAGE_MAP = {
   ms: ReflectionLanguage.MALAY,
   id: ReflectionLanguage.MALAY,
   ur: ReflectionLanguage.URDU,
   ar: ReflectionLanguage.ARABIC,
   fr: ReflectionLanguage.FRENCH,
-};
-
-const REFLECTION_LANGUAGE_TO_LOCALE_MAP: Record<ReflectionLanguage, string> = {
-  [ReflectionLanguage.ENGLISH]: 'en',
-  [ReflectionLanguage.SPANISH]: 'es',
-  [ReflectionLanguage.FRENCH]: 'fr',
-  [ReflectionLanguage.MALAY]: 'ms',
-  [ReflectionLanguage.URDU]: 'ur',
-  [ReflectionLanguage.ARABIC]: 'ar',
 };
 
 /**
@@ -119,26 +88,4 @@ export const getReflectionLanguages = (
 
   // Fallback to locale-based logic
   return localeToReflectionLanguages(locale);
-};
-
-export const reflectionLanguagesToLocaleCodes = (
-  reflectionLanguages: ReflectionLanguage[],
-): string[] => {
-  if (!reflectionLanguages?.length) return [];
-  return reflectionLanguages
-    .map((language) => REFLECTION_LANGUAGE_TO_LOCALE_MAP[language])
-    .filter((localeCode): localeCode is string => Boolean(localeCode));
-};
-
-/**
- * Map locale to Quran Reflect language ID.
- * @param {string} locale
- * @returns {number}
- */
-export const localeToQuranReflectLanguageID = (locale: string): number => {
-  const normalizedLocale = locale?.split('-')[0]?.toLowerCase() || Language.EN;
-  return (
-    LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[normalizedLocale] ||
-    LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID[Language.EN]
-  );
 };

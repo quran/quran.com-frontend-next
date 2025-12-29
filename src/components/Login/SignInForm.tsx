@@ -46,10 +46,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   const formFields: FormBuilderFormField[] = [
     {
       ...getEmailField(t),
-      dataTestId: 'signin-email-input',
-      customRender: (props) => (
-        <AuthInput {...props} id="email" htmlType="email" dataTestId={props.dataTestId} />
-      ),
+      customRender: (props) => <AuthInput {...props} id="email" htmlType="email" />,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
@@ -57,7 +54,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       field: 'password',
       type: FormFieldType.Password,
       placeholder: t('password-placeholder'),
-      dataTestId: 'signin-password-input',
       rules: [
         {
           type: RuleType.Required,
@@ -82,22 +78,18 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         return getFormErrors(t, ErrorType.API, errors);
       }
 
-      let targetLocale = router.locale || 'en';
       try {
-        const { appliedLocale } = await syncPreferencesFromServer({
-          locale: targetLocale,
+        await syncPreferencesFromServer({
+          locale: router.locale || 'en',
           dispatch,
           audioService,
         });
-        if (appliedLocale) {
-          targetLocale = appliedLocale;
-        }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Failed to sync user preferences after login', error);
       }
 
-      redirectWithToken(redirect || '/', response?.token, targetLocale);
+      redirectWithToken(redirect || '/', response?.token);
 
       return undefined;
     } catch (error) {
@@ -123,7 +115,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         shape={ButtonShape.Pill}
         type={ButtonType.Success}
         className={styles.submitButton}
-        data-testid="signin-continue-button"
       >
         {t('sign-in')}
       </Button>

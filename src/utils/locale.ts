@@ -10,7 +10,6 @@ import { getBasePath } from './url';
 import Language from '@/types/Language';
 
 const RTL_LOCALES = [Language.AR, Language.FA, Language.UR];
-
 const LOCALE_NAME = {
   [Language.EN]: 'English',
   [Language.AR]: 'العربية',

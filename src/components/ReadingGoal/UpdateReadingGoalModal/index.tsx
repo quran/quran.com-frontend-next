@@ -17,7 +17,6 @@ import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMushaf from '@/hooks/useGetMushaf';
-import { logErrorToSentry } from '@/lib/sentry';
 import {
   Goal,
   GoalCategory,
@@ -139,8 +138,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
       await updateReadingGoalAndClearCache(data);
       toast(t('edit-goal.success'), { status: ToastStatus.Success });
       closeModal();
-    } catch (e) {
-      logErrorToSentry(e);
+    } catch {
       toast(t('common:error.general'), { status: ToastStatus.Error });
     }
   };

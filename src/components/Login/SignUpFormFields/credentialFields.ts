@@ -14,7 +14,6 @@ export const getEmailField = (t: any): FormBuilderFormField => ({
   field: 'email',
   type: FormFieldType.Text,
   placeholder: t('email-placeholder'),
-  dataTestId: 'signup-email-input',
   rules: [
     {
       type: RuleType.Required,
@@ -33,7 +32,6 @@ export const getUsernameField = (t: any): FormBuilderFormField => ({
   field: 'username',
   type: FormFieldType.Text,
   placeholder: t('username-placeholder'),
-  dataTestId: 'signup-username-input',
   rules: [
     {
       type: RuleType.Required,

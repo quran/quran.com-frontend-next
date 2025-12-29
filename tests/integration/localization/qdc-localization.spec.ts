@@ -120,17 +120,8 @@ class LocalizationTestHelper {
    * This is designed to be used with a context that already has the locale set.
    */
   async mockCountryAndApiForContext(countryCode: string, language: string) {
-    const normalizedCountry = countryCode.toUpperCase();
-    this.headers['CF-IPCountry'] = normalizedCountry;
-
-    if (!this.headers['Accept-Language']) {
-      const normalizedLanguage = language?.split('-')[0] || 'en';
-      this.headers[
-        'Accept-Language'
-      ] = `${normalizedLanguage}-${normalizedCountry},${normalizedLanguage};q=0.9,en;q=0.8`;
-    }
-
-    await this.page.setExtraHTTPHeaders(this.headers);
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    await this.page.setExtraHTTPHeaders({ 'CF-IPCountry': countryCode.toUpperCase() });
     LocalizationTestHelper.setupApiMocking(language, countryCode);
   }
 
@@ -214,13 +205,9 @@ class LocalizationTestHelper {
     userDeviceLanguage: string,
     country: string,
   ): any {
-    // Normalize inputs
-    const normalizedLanguage = (userDeviceLanguage || 'en').toLowerCase();
-    const normalizedCountry = (country || 'US').toUpperCase();
-
     // Apply business logic: For non-English languages, ignore country and use US
-    const isEnglish = normalizedLanguage === 'en';
-    const effectiveCountry = isEnglish ? normalizedCountry : 'US';
+    const isEnglish = userDeviceLanguage === 'en';
+    const effectiveCountry = isEnglish ? country : 'US';
 
     // Mock data based on language and country combinations
     const mockDataMap: Record<string, any> = {};
@@ -230,35 +217,22 @@ class LocalizationTestHelper {
       mockDataMap[newKey] = value;
     }
 
-    const key = `${normalizedLanguage.toUpperCase()}_${effectiveCountry}`;
+    const key = `${userDeviceLanguage.toUpperCase()}_${effectiveCountry.toUpperCase()}`;
     const mockData = mockDataMap[key];
 
     if (mockData) {
       return mockData;
     }
 
-    // Unsupported languages should fall back to English settings for the detected country
-    const englishCountryKey = `EN_${normalizedCountry}`;
-    if (!isEnglish && mockDataMap[englishCountryKey]) {
-      return mockDataMap[englishCountryKey];
-    }
-
-    // Final fallback: use English (US) defaults while preserving detected country in response
-    const defaultEnglishKey = 'EN_US';
-    const defaultEnglish = mockDataMap[defaultEnglishKey] || {
-      country: 'US',
-      userDeviceLanguage: 'en',
+    // Default fallback
+    return {
+      country: effectiveCountry || 'US',
+      userDeviceLanguage: userDeviceLanguage || 'en',
       defaultMushaf: { id: 1 },
       defaultTranslations: [{ id: 131 }],
       defaultTafsir: { id: 'en-tafisr-ibn-kathir' },
       defaultWbwLanguage: { isoCode: 'en' },
-      ayahReflectionsLanguages: [{ isoCode: 'en' }],
-    };
-
-    return {
-      ...defaultEnglish,
-      country: normalizedCountry,
-      userDeviceLanguage: 'en',
+      ayahReflectionsLanguages: [{ isoCode: 'en' }, { isoCode: 'ar' }, { isoCode: 'ur' }],
     };
   }
 
@@ -1160,13 +1134,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
     await helper.clearAllBrowserData();
   });
 
-  /**
-   * There's no way to sign up a user via playwright because we should
-   * need the verification code etc. But this has been manually tested
-   * and verified that the guest settings are preserved upon signup.
-   * Skipping this test for now.
-   */
-  test.skip('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ browser }) => {
+  test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ browser }) => {
     let context: BrowserContext;
     let page: Page;
     let testHelper: LocalizationTestHelper;
@@ -1304,12 +1272,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
     });
   });
 
-  /**
-   * Not everyone use the same BE database for testing, so skipping this test
-   * as the user with saved settings may not exist in all environments.
-   * This has been manually tested and verified.
-   */
-  test.skip('Test Case 2.2.1: User with Saved Settings Login', async ({ page }) => {
+  test('Test Case 2.2.1: User with Saved Settings Login', async ({ page }) => {
     await test.step('Mock user with existing saved settings', async () => {
       // Mock login API response (without settings - that's handled by preferences API)
       LocalizationTestHelper.setCustomLoginResponse({
@@ -1379,12 +1342,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
     });
   });
 
-  /**
-   * Not everyone use the same BE database for testing, so skipping this test
-   * as the user may not exist in all environments.
-   * This has been manually tested and verified.
-   */
-  test.skip('Test Case 2.2.2: User with No Saved Settings Login', async ({ page }) => {
+  test('Test Case 2.2.2: User with No Saved Settings Login', async ({ page }) => {
     await test.step('Mock user with no saved settings', async () => {
       // Mock login API response (without settings - that's handled by preferences API)
       LocalizationTestHelper.setCustomLoginResponse({
@@ -1533,7 +1491,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       await testHelper.expectNextLocaleCookieToBe('ar');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
-      expect(translations.selectedTranslations).toContain(131); // Arabic default
+      expect(translations.selectedTranslations).toContain(20); // Arabic default
     });
 
     await test.step('Cleanup', async () => {
@@ -1557,7 +1515,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       // Set up mocking for English language and US country
       await testHelper.mockCountryAndApiForContext('US', 'en');
 
-      await page.goto('/1', NAVIGATION_OPTIONS);
+      await page.goto('/', NAVIGATION_OPTIONS);
       await testHelper.waitForReduxHydration();
     });
 
@@ -1624,7 +1582,7 @@ test.describe('Category 4: Reset Settings Functionality', () => {
 
     await test.step('Set initial settings and navigate to page', async () => {
       await testHelper.mockCountryAndApiForContext('US', 'en');
-      await page.goto('/1', NAVIGATION_OPTIONS);
+      await page.goto('/', NAVIGATION_OPTIONS);
       await testHelper.waitForReduxHydration();
     });
 
@@ -1767,14 +1725,7 @@ test.describe('Category 5: Reflections Language Integration', () => {
     await helper.clearAllBrowserData();
   });
 
-  /**
-   * Skipping this test because the reflections language filter UI component
-   * ([data-testid="reflections-language-filter"]) is not yet implemented in the codebase.
-   *
-   * This test was written based on anticipated functionality, but the actual implementation
-   * does not include a user-facing language selector/filter in the reflections drawer.
-   */
-  test.skip('Test Case 5.1: Reflections List Language Matching', async ({ browser }) => {
+  test('Test Case 5.1: Reflections List Language Matching', async ({ browser }) => {
     const context = await browser.newContext({ locale: 'en-US' });
     const page = await context.newPage();
     const testHelper = new LocalizationTestHelper(page, context);
@@ -1849,7 +1800,7 @@ test.describe('Category 5: Reflections Language Integration', () => {
   /**
    * Skipping this test because it uses testid that does not exist in the current codebase.
    */
-  test.skip('Test Case 5.1.2: Reflections Language Updates with Settings Change', async ({
+  test('Test Case 5.1.2: Reflections Language Updates with Settings Change', async ({
     browser,
   }) => {
     const context = await browser.newContext({ locale: 'en-US' });
@@ -1919,7 +1870,7 @@ test.describe('Category 6: Error Handling & Edge Cases', () => {
     await helper.clearAllBrowserData();
   });
 
-  test.skip('Test Case 6.1.1: Network Failure During Detection (Graceful Degradation)', async ({
+  test('Test Case 6.1.1: Network Failure During Detection (Graceful Degradation)', async ({
     page,
   }) => {
     await test.step('Mock network failure for country preference API', async () => {
@@ -1944,7 +1895,7 @@ test.describe('Category 6: Error Handling & Edge Cases', () => {
     });
   });
 
-  test.skip('Test Case 6.1.2: Invalid Country/Language Combinations', async ({ browser }) => {
+  test('Test Case 6.1.2: Invalid Country/Language Combinations', async ({ browser }) => {
     const context = await browser.newContext({ locale: 'xx-YY' });
     const page = await context.newPage();
     const testHelper = new LocalizationTestHelper(page, context);

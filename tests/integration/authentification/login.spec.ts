@@ -14,7 +14,10 @@ test(
   'Login to an existing user works and redirects to the home page',
   { tag: ['@slow', '@auth', '@login-user', '@smoke'] },
   async ({ page }) => {
-    // Email form should be visible immediately (no need to click "Continue with Email")
+    // Click on the "Continue with Email" button
+    const authButtons = page.getByTestId('auth-buttons');
+    const continueWithEmailButton = authButtons.getByText('Email');
+    await continueWithEmailButton.click();
 
     // Fill in the form fields with the credentials of an existing user
     await fillInLoginForm(page);
@@ -23,8 +26,8 @@ test(
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
     // We should be redirected to the home page
-    await page.waitForURL(/\/fr$/);
-    await expect(page).toHaveURL(/\/fr$/);
+    await page.waitForURL(/\/$/);
+    await expect(page).toHaveURL(/\/$/);
 
     // We should be logged in
     const profileAvatarButton = page.getByTestId('profile-avatar-button');
@@ -71,6 +74,6 @@ const fillInLoginForm = async (page: Page) => {
     'No credentials provided',
   );
 
-  await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
+  await page.getByPlaceholder('Email').fill(process.env.TEST_USER_EMAIL || '');
   await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
 };

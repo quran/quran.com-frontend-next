@@ -51,26 +51,14 @@ const VerificationCodeForm: FC<Props> = ({
       throw new Error(errors?.verificationCode || 'Invalid verification code');
     }
 
-    try {
-      await dispatch(persistCurrentSettings());
-    } catch (persistError) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to persist current settings after verification', {
-        error: persistError,
-        timestamp: new Date().toISOString(),
-      });
-    }
+    await dispatch(persistCurrentSettings());
 
-    let targetLocale = router.locale || 'en';
     try {
-      const { appliedLocale } = await syncPreferencesFromServer({
-        locale: targetLocale,
+      await syncPreferencesFromServer({
+        locale: router.locale || 'en',
         dispatch,
         audioService,
       });
-      if (appliedLocale) {
-        targetLocale = appliedLocale;
-      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Failed to sync user preferences after verification', error);
@@ -81,7 +69,7 @@ const VerificationCodeForm: FC<Props> = ({
       onSuccess();
     } else {
       // Default behavior: redirect back or to home
-      redirectWithToken((router.query.redirect as string) || '/', response?.token, targetLocale);
+      redirectWithToken((router.query.redirect as string) || '/', response?.token);
     }
   };
 

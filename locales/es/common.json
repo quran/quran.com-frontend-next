@@ -7,7 +7,7 @@
       "data-sync": {
         "action": "Próximo",
         "description": "Ya sea que uses Quran.com en tu teléfono o en tu computadora portátil, tus marcadores, los últimos versículos leídos y tus preferencias estarán disponibles.",
-        "title": "Sus datos se sincronizarán <br></br> en todos los dispositivos"
+        "title": "Sus datos se sincronizarán <br> </br> en todos los dispositivos"
       },
       "feedback": {
         "action": "Está bien, lo entiendo.",
@@ -26,7 +26,7 @@
       },
       "welcome": {
         "action": "Ver novedades",
-        "title": "Bienvenido a Quran.com <br></br> Cuenta de usuario"
+        "title": "Bienvenido a Quran.com <br> </br> Cuenta de usuario"
       }
     },
     "collections-announcement": {
@@ -53,8 +53,8 @@
       "title": "Desplazamiento automático"
     },
     "displaying": "Mostrando",
-    "exp-tip": "<span> Cambiar el contenido que se muestra en </span> <br></br> <boldSpan> Configuración </boldSpan> > <boldSpan> Palabra por palabra </boldSpan>",
-    "exp-tip-no-select": "<span> Marca la opción de visualización de información sobre herramientas y selecciona la opción <br></br> Traducción y/o Transliteración </span> <br></br> <span> en </span> <boldSpan> Configuración </boldSpan> > <boldSpan> Palabra por palabra </boldSpan> <span> para </span> <br></br> <span> habilitar esta función. </span>",
+    "exp-tip": "<span> Cambiar el contenido que se muestra en </span> <br> </br> <boldSpan> Configuración </boldSpan> > <boldSpan> Palabra por palabra </boldSpan>",
+    "exp-tip-no-select": "<span> Marca la opción de visualización de información sobre herramientas y selecciona la opción <br> </br> Traducción y/o Transliteración </span> <br> </br> <span> en </span> <boldSpan> Configuración </boldSpan> > <boldSpan> Palabra por palabra </boldSpan> <span> para </span> <br> </br> <span> habilitar esta función. </span>",
     "experience": "Experiencia",
     "play": "Reproducir audio",
     "playback-normal": "Normal",

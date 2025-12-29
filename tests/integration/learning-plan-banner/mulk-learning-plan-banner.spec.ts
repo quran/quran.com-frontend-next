@@ -6,9 +6,6 @@ import Homepage from '@/tests/POM/home-page';
 const banner = (page: Page) => page.getByTestId('learning-plan-banner');
 const bannerImage = (page: Page) => banner(page).locator('img');
 
-const ACCEPT_LANGUAGE = 'Accept-Language';
-const CF_IP_COUNTRY = 'CF-IPCountry';
-
 async function scrollToBottom(page: Page) {
   let previousHeight = 0;
   let currentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -58,40 +55,18 @@ test.describe('English language - navigation', () => {
 });
 
 test.describe('Non-English language', () => {
-  test('Arabic version does not render the banner', async ({ browser }) => {
-    const context = await browser.newContext({ locale: 'ar-SA' });
-    const page = await context.newPage();
-
-    // Set headers to simulate Saudi Arabia location and Arabic language preference
-    await page.setExtraHTTPHeaders({
-      [ACCEPT_LANGUAGE]: 'ar-SA,ar',
-      [CF_IP_COUNTRY]: 'SA',
-    });
-
+  test('Arabic version does not render the banner', async ({ page, context }) => {
     homePage = new Homepage(page, context);
-    await homePage.goTo('/67');
+    await homePage.goTo('/ar/67');
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);
-
-    await context.close();
   });
 
-  test('French version does not render the banner', async ({ browser }) => {
-    const context = await browser.newContext({ locale: 'fr-FR' });
-    const page = await context.newPage();
-
-    // Set headers to simulate France location and French language preference
-    await page.setExtraHTTPHeaders({
-      [ACCEPT_LANGUAGE]: 'fr-FR,fr',
-      [CF_IP_COUNTRY]: 'FR',
-    });
-
+  test('French version does not render the banner', async ({ page, context }) => {
     homePage = new Homepage(page, context);
-    await homePage.goTo('/67');
+    await homePage.goTo('/fr/67');
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);
-
-    await context.close();
   });
 });
 

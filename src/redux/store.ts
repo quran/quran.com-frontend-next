@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { getStoreInitialState } from './defaultSettings/util';
 import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
-import { RootState } from './RootState';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
 import banner from './slices/banner';
@@ -45,8 +44,6 @@ import session from './slices/session';
 import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
-
-import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 
 const persistConfig = {
   key: 'root',
@@ -109,13 +106,7 @@ export const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const getStore = (
-  locale: string,
-  countryPreference?: CountryLanguagePreferenceResponse,
-  preloadedState?: RootState,
-  detectedLanguage?: string,
-  detectedCountry?: string,
-) =>
+const getStore = (locale: string) =>
   configureStore({
     reducer: persistedReducer,
     // @ts-ignore
@@ -129,11 +120,7 @@ const getStore = (
       }).concat(DefaultSettingsMiddleware),
     devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
-    preloadedState:
-      preloadedState ||
-      getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry),
+    preloadedState: getStoreInitialState(locale),
   });
-
-export type AppStore = ReturnType<typeof getStore>;
 
 export default getStore;

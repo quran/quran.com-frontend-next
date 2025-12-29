@@ -10,7 +10,6 @@ type AyahReflectionsRequestParams = {
   reviewed?: boolean;
 
   postTypeIds?: string[];
-  reflectionLanguages?: string[];
 };
 
 export default AyahReflectionsRequestParams;

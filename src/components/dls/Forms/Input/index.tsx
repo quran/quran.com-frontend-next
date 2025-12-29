@@ -86,7 +86,6 @@ interface Props {
   inputRef?: RefObject<HTMLInputElement>;
   prefixSuffixContainerClassName?: string;
   shouldUseDefaultStyles?: boolean;
-  dataTestId?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -117,7 +116,6 @@ const Input: React.FC<Props> = ({
   isRequired,
   inputRef,
   shouldUseDefaultStyles = true,
-  dataTestId,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.

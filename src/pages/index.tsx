@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
+import { fetcher } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -18,8 +19,8 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import { Course } from '@/types/auth/Course';
-import { fetchCoursesWithLanguages } from '@/utils/auth/api';
+import { Course, CoursesResponse } from '@/types/auth/Course';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -145,17 +146,22 @@ const Index: NextPage<IndexProps> = ({
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/',
   async (context, languageResult) => {
-    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+    const { locale, chaptersData } = context as typeof context & { chaptersData: ChaptersData };
 
-    // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
-    // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
-    const learningPlanLanguages = languageResult?.countryLanguagePreference?.learningPlanLanguages
-      ?.map((lang) => lang.isoCode)
-      .filter((code): code is string => code != null)
-      .map((code) => code.toLowerCase()) || ['en'];
+    const learningPlanLanguages =
+      languageResult?.countryLanguagePreference?.learningPlanLanguages?.map((lang) =>
+        lang.isoCode?.toLowerCase(),
+      ) || ['en'];
 
-    // Fetch learning plans with fallback retry for backward compatibility
-    const learningPlans = await fetchCoursesWithLanguages(learningPlanLanguages);
+    let learningPlans: Course[] = [];
+    try {
+      const response = await fetcher<CoursesResponse>(
+        makeGetCoursesUrl({ myCourses: false, languages: learningPlanLanguages }),
+      );
+      learningPlans = response?.data || [];
+    } catch (error) {
+      learningPlans = [];
+    }
 
     return {
       props: {

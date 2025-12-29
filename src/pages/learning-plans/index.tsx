@@ -1,21 +1,14 @@
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
-import { Course } from '@/types/auth/Course';
-import { fetchCoursesWithLanguages } from '@/utils/auth/api';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
-import ChaptersData from 'types/ChaptersData';
 
-type LearningPlansPageProps = {
-  courses: Course[];
-};
-
-const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
+const LearningPlansPage: NextPage = () => {
   const { t, lang } = useTranslation('learn');
 
   return (
@@ -31,33 +24,19 @@ const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout initialCourses={courses} />
+      <CoursesPageLayout />
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/learning-plans',
-  async (context, languageResult) => {
-    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
 
-    // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
-    // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
-    const learningPlanLanguages = languageResult?.countryLanguagePreference?.learningPlanLanguages
-      ?.map((lang) => lang.isoCode)
-      .filter((code): code is string => code != null)
-      .map((code) => code.toLowerCase()) || ['en'];
-
-    // Fetch courses with fallback retry for backward compatibility
-    const courses = await fetchCoursesWithLanguages(learningPlanLanguages);
-
-    return {
-      props: {
-        chaptersData,
-        courses,
-      },
-    };
-  },
-);
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
 
 export default LearningPlansPage;

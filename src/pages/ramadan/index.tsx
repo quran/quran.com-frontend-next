@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -31,7 +31,6 @@ import {
   getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getRamadanNavigationUrl();
 const PreparingForRamadanPage: NextPage = (): JSX.Element => {
@@ -58,7 +57,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
             <h1>Deepen Your Connection with the Quran this Ramadan</h1>
             <div>
               Ramadan is a time of immense blessings and reflection, a month where hearts are
-              softened and connections with the Quran are deepened. It's the perfect opportunity to
+              softened and connections with the Quran are deepened. It’s the perfect opportunity to
               embrace meaningful growth and embark on a transformative journey. With thoughtfully
               designed tools and programs, we aim to inspire engagement with the Quran that lasts
               well beyond this blessed month.
@@ -213,10 +212,10 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               It's never too late to prepare for the days of Ramadan! Enhance your spiritual and
               mental readiness with our Learning Plan, Preparing Our Hearts for Ramadan. Start today
               and make the most of the blessed days ahead. This revised program is based on last
-              year's highly-rated course, enriched with additional insights and reflections to help
+              year’s highly-rated course, enriched with additional insights and reflections to help
               you approach Ramadan with a rejuvenated focus.
             </div>
-            <div>What You'll Gain:</div>
+            <div>What You’ll Gain:</div>
             <ul>
               <li>Self-development tips.</li>
               <li>Quranic reflections to inspire mindfulness and intention-setting.</li>
@@ -244,43 +243,43 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               knowledge in the month of ramadhan. Ameen insyaallah. Thank you Quran.com!!
             </div>
             <div>
-              ⭐⭐⭐⭐⭐ "The plan was very transformative. I pray Allah SW will bless me with the
+              ⭐⭐⭐⭐⭐ “The plan was very transformative. I pray Allah SW will bless me with the
               ability to implement most, if not all of the recommendations in order to adequately
               prepare for Ramadan, spiritually, intellectually, and morally grow during this period,
-              and continue to improve in these areas even after Ramadan In Shaa Allah."
+              and continue to improve in these areas even after Ramadan In Shaa Allah.”
             </div>
             <div>
-              ⭐⭐⭐⭐⭐ "This made me to read Qur'an with meaning and reflect upon it. And the
+              ⭐⭐⭐⭐⭐ “This made me to read Qur'an with meaning and reflect upon it. And the
               author talked about increasing iman, giving up the sins and also he talked about how
-              to be in the month of ramadhan and how to prepare for it from the month of shaban."
+              to be in the month of ramadhan and how to prepare for it from the month of shaban.”
             </div>
-            <div>⭐⭐⭐⭐⭐ "I LOVED this is was very insightful and i learnt a lot"</div>
+            <div>⭐⭐⭐⭐⭐ “I LOVED this is was very insightful and i learnt a lot”</div>
             <div>
-              ⭐⭐⭐⭐⭐ "SubhanAllah, I have learned many topics and truly built a greater
+              ⭐⭐⭐⭐⭐ “SubhanAllah, I have learned many topics and truly built a greater
               understanding of the Quran and faith. Wallahi, there is an activity mentioned here and
-              I will perform it."
+              I will perform it.”
             </div>
             <ReadMoreCollapsible section={Section.MORE_REVIEWS} titleType={TitleType.MORE_REVIEWS}>
-              <div>⭐⭐⭐⭐⭐ "Mashallah, this is excellent content."</div>
-              <div>⭐⭐⭐⭐⭐ "Course was very inspiring and intuitive."</div>
+              <div>⭐⭐⭐⭐⭐ “Mashallah, this is excellent content.”</div>
+              <div>⭐⭐⭐⭐⭐ “Course was very inspiring and intuitive.”</div>
               <div>
-                ⭐⭐⭐⭐⭐ "I kinda joined late but it surely did increase my knowledge and made me
+                ⭐⭐⭐⭐⭐ “I kinda joined late but it surely did increase my knowledge and made me
                 reflect upon my actions. It is a great step and I wish more people to join it so
-                that they can also take benefit from it and try to improve their quality of life."
+                that they can also take benefit from it and try to improve their quality of life.”
               </div>
               <div>
-                ⭐⭐⭐⭐⭐ "It was extremely useful. It reminds us to act to act upon the manual
+                ⭐⭐⭐⭐⭐ “It was extremely useful. It reminds us to act to act upon the manual
                 given to us by He Who is Exalted, High, and Mighty: Allah. Please do develop such
-                plans for other months like Rajab. Thanks!"
+                plans for other months like Rajab. Thanks!”
               </div>
               <div>
-                ⭐⭐⭐⭐⭐ "Not a single word in all the lessons didn't speak the truth. It was so
+                ⭐⭐⭐⭐⭐ “Not a single word in all the lessons didn't speak the truth. It was so
                 helpful, alhamdulilah. Quran.com is a wonderful website, and every person, muslim
                 and non-muslim, should use it. And, Inshallah, they will. Thank you for the help you
-                provided me."
+                provided me.”
               </div>
               <div>
-                ⭐⭐⭐⭐⭐ "Important and vital read to prepare the heart for Ramadan and beyond."
+                ⭐⭐⭐⭐⭐ “Important and vital read to prepare the heart for Ramadan and beyond.”
               </div>
             </ReadMoreCollapsible>
             <div>Start this learning plan now:</div>
@@ -302,8 +301,8 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="share-the-month-of-the-quran">
             <h1>Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
             <div>
-              For those unfamiliar with Ramadan, we've created a page to explore the question "What
-              is Ramadan?" in a simple and inspiring way. This page highlights the significance of
+              For those unfamiliar with Ramadan, we’ve created a page to explore the question “What
+              is Ramadan?” in a simple and inspiring way. This page highlights the significance of
               Ramadan and its profound connection to the Quran. Share it with your friends and loved
               ones to invite them to experience the beauty and blessings of this sacred month.
             </div>
@@ -337,7 +336,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
             <div>
               With more features like bookmarking, audio recitations, and a powerful search tool, we
               hope Quran.com can help you deeply connect with the Quran in Ramadan and beyond,
-              insha'Allah!
+              insha’Allah!
             </div>
           </div>
           <div className={styles.subSection}>
@@ -381,7 +380,5 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/ramadan');
 
 export default PreparingForRamadanPage;

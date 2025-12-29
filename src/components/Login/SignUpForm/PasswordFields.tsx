@@ -15,41 +15,19 @@ const getPasswordFields = (
   passwordPlaceholderKey = 'password-placeholder',
   confirmPasswordPlaceholderKey = 'confirm-password-placeholder',
 ): FormBuilderFormField[] => {
-  const renderPasswordField = (isConfirmPassword: boolean) => {
-    const PasswordComponent: FC<{
-      value: string;
-      onChange: (value: string) => void;
-      placeholder?: string;
-      dataTestId?: string;
-    }> = ({ value, onChange, placeholder, dataTestId }) => {
-      if (isConfirmPassword) {
-        return (
-          <ConfirmPasswordField
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            dataTestId={dataTestId}
-          />
-        );
-      }
-      return (
-        <PasswordField
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          dataTestId={dataTestId}
-        />
-      );
-    };
-    return PasswordComponent;
-  };
+  const PasswordInput: FC<{
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+  }> = ({ value, onChange, placeholder }) => (
+    <PasswordField value={value} onChange={onChange} placeholder={placeholder} />
+  );
 
   return [
     {
       field: 'password',
       type: FormFieldType.Password,
       placeholder: t(passwordPlaceholderKey),
-      dataTestId: 'signup-password-input',
       rules: [
         {
           type: RuleType.Required,
@@ -73,7 +51,7 @@ const getPasswordFields = (
           }),
         },
       ],
-      customRender: renderPasswordField(false),
+      customRender: PasswordInput,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
@@ -81,7 +59,6 @@ const getPasswordFields = (
       field: 'confirmPassword',
       type: FormFieldType.Password,
       placeholder: t(confirmPasswordPlaceholderKey),
-      dataTestId: 'signup-confirm-password-input',
       rules: [
         {
           type: RuleType.Required,
@@ -89,7 +66,7 @@ const getPasswordFields = (
           errorMessage: t('errors.required', { fieldName: t('common:form.confirm-password') }),
         },
       ],
-      customRender: renderPasswordField(true),
+      customRender: ConfirmPasswordField,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
