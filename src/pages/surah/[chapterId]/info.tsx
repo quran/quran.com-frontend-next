@@ -19,24 +19,24 @@ import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse, VersesResponse, ChapterInfoResponse } from 'types/ApiResponses';
 
-type ChapterProps = {
-  chapterResponse?: ChapterResponse;
-  versesResponse?: VersesResponse;
-  chapterInfoResponse?: ChapterInfoResponse;
+type ChapterInfoProps = {
+  chapterResponse: ChapterResponse;
+  versesResponse: VersesResponse;
+  chapterInfoResponse: ChapterInfoResponse;
   quranReaderDataType: QuranReaderDataType;
 };
 
-const Chapter: NextPage<ChapterProps> = ({
+const ChapterInfo: NextPage<ChapterInfoProps> = ({
   chapterResponse,
   versesResponse,
   chapterInfoResponse,
   quranReaderDataType,
 }) => {
   const { t, lang } = useTranslation('common');
-  const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
 
   // Early return if required data is missing
-  if (!versesResponse || !chapterResponse || !chapterInfoResponse) return null;
+  if (!versesResponse || !chapterResponse || !chapterInfoResponse?.chapterInfo) return null;
+  const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
 
   return (
     <>
@@ -57,7 +57,7 @@ const Chapter: NextPage<ChapterProps> = ({
       />
 
       <SurahInfoPage
-        chapterInfo={chapterInfoResponse?.chapterInfo}
+        chapterInfo={chapterInfoResponse.chapterInfo}
         chapter={chapterResponse.chapter}
       />
 
@@ -70,7 +70,7 @@ const Chapter: NextPage<ChapterProps> = ({
   );
 };
 
-const getChapterVersesData = async (chapterId: string, locale: string) => {
+const getChapterInfoData = async (chapterId: string, locale: string) => {
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale as Language).quranFont,
     getQuranReaderStylesInitialState(locale as Language).mushafLines,
@@ -115,9 +115,11 @@ export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async 
   }
 
   try {
-    const { versesResponse, chaptersData } = await getChapterVersesData(chapterId, locale);
+    const { versesResponse, chaptersData } = await getChapterInfoData(chapterId, locale);
     const chapterData = getChapterData(chaptersData, chapterId);
     const chapterInfoResponse = await getChapterInfo(chapterId, locale);
+
+    if (!chapterInfoResponse?.chapterInfo) return { notFound: true };
 
     return {
       props: {
@@ -137,4 +139,4 @@ export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async 
   }
 });
 
-export default Chapter;
+export default ChapterInfo;
