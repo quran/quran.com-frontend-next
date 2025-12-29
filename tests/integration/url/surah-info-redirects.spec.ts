@@ -14,11 +14,11 @@ const verifyModalContainsSurahInfo = async (
   expectedAyahs: string,
 ) => {
   // Verify modal is open and contains surah info content
-  await expect(page.getByTestId('modal-content')).toBeVisible();
+  await expect(page.getByTestId('fake-modal-content')).toBeVisible();
   await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
 
   // Verify surah info content is inside the modal
-  const modalContent = page.getByTestId('modal-content');
+  const modalContent = page.getByTestId('fake-modal-content');
   await expect(modalContent.getByTestId('surah-name')).toBeVisible();
   await expect(modalContent.getByTestId('surah-name')).toContainText(expectedSurahName);
   await expect(modalContent.getByTestId('surah-revelation-place')).toContainText(
