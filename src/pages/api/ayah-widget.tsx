@@ -15,6 +15,7 @@ import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import type { WidgetOptions, MushafType, WidgetLabels } from '@/types/ayah-widget';
 import { isMushafType } from '@/types/ayah-widget';
+import { MushafLines } from '@/types/QuranReader';
 import { getMushafId, getDefaultWordFields } from '@/utils/api';
 import {
   DEFAULT_VERSES_PARAMS,
@@ -194,7 +195,11 @@ const buildVerseParams = (
   range?: { from: number; to: number; perPage: number },
 ) => {
   const quranFont = getQuranFontForMushaf(mushaf);
-  const mushafId = getMushafId(quranFont).mushaf;
+  // Use the 16-line IndoPak mushaf so verse-end glyphs (ayah markers) include the proper IndoPak styling.
+  const mushafId =
+    mushaf === 'indopak'
+      ? getMushafId(quranFont, MushafLines.SixteenLines).mushaf
+      : getMushafId(quranFont).mushaf;
 
   const params: Record<string, unknown> = {
     ...DEFAULT_VERSES_PARAMS,

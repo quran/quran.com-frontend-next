@@ -235,9 +235,12 @@ const ArabicVerse = ({ verse, options, colors }: Props): JSX.Element => {
         const textToRender = getNonQcfWordText(word, verse, options.mushaf);
         if (!textToRender) return null;
 
+        // Verse-end markers should prefer the mushaf font (for IndoPak ayah glyphs) and fall back to the default.
+        const wordFontFamily = isEndToken ? `${mushafFont}, ${STYLES.word.fontFamily}` : mushafFont;
+
         return (
           <div key={key} style={STYLES.wordWrapper}>
-            <div style={{ ...STYLES.word, fontFamily: mushafFont }}>{textToRender}</div>
+            <div style={{ ...STYLES.word, fontFamily: wordFontFamily }}>{textToRender}</div>
             {!isEndToken && options.enableWbw && word.translation?.text && (
               <div
                 style={{
