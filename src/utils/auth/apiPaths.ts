@@ -306,3 +306,19 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
  * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
+
+/**
+ * Compose the url for the country language preference API.
+ *
+ * @param {string} userDeviceLanguage the user's device language code
+ * @param {string} country the two-letter country code
+ * @returns {string}
+ */
+export const makeCountryLanguagePreferenceUrl = (
+  userDeviceLanguage: string,
+  country: string,
+): string =>
+  makeUrl('/resources/country_language_preference', {
+    userDeviceLanguage,
+    country: country.toUpperCase(),
+  });

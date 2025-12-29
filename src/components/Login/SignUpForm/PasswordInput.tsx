@@ -17,7 +17,6 @@ interface Props {
   placeholder?: string;
   containerClassName?: string;
   isDisabled?: boolean;
-  dataTestId?: string;
 }
 
 const PasswordInput: FC<Props> = ({

@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
@@ -12,7 +14,6 @@ import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
 import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
-import { useCallback } from 'react';
 import { getCourseNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 interface Props {

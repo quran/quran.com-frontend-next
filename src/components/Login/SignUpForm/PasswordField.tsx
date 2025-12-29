@@ -10,7 +10,6 @@ interface Props {
   placeholder?: string;
   containerClassName?: string;
   isDisabled?: boolean;
-  dataTestId?: string;
 }
 
 const PasswordField: FC<Props> = ({
@@ -20,11 +19,9 @@ const PasswordField: FC<Props> = ({
   placeholder,
   containerClassName,
   isDisabled = false,
-  dataTestId,
 }) => (
   <>
     <PasswordInput
-      dataTestId={dataTestId}
       label={label}
       containerClassName={containerClassName}
       value={value}

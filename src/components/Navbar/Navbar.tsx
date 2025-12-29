@@ -3,7 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { useSelector, shallowEqual } from 'react-redux';
 
-
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
