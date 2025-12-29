@@ -193,7 +193,6 @@ const Input: React.FC<Props> = ({
           required={isRequired}
           dir="auto"
           id={id}
-          data-testid={dataTestId}
           ref={inputRef}
           disabled={disabled}
           onChange={onValueChange}

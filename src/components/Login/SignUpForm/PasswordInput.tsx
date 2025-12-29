@@ -28,7 +28,6 @@ const PasswordInput: FC<Props> = ({
   placeholder,
   containerClassName,
   isDisabled = false,
-  dataTestId,
 }) => {
   const { t } = useTranslation('login');
   const [showPassword, setShowPassword] = useState(false);
