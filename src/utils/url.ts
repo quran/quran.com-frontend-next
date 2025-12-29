@@ -1,3 +1,4 @@
+import { SSO_PLATFORM_CONFIGS } from '@/utils/auth/constants';
 import { isStaticBuild } from '@/utils/build';
 
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
@@ -65,21 +66,63 @@ export const getProxiedServiceUrl = (service: QuranFoundationService, path: stri
 };
 
 /**
+ * Gets the origins of enabled SSO platforms to check against redirect URLs.
+ * This avoids circular dependency with @/utils/auth/login which imports from this file.
+ *
+ * @returns {string[]} Array of SSO platform origins
+ */
+const getSsoPlatformOrigins = (): string[] => {
+  return SSO_PLATFORM_CONFIGS.filter((config) => config.enabled)
+    .map((config) => {
+      const rawUrl = process.env[config.envKey as keyof NodeJS.ProcessEnv]?.trim();
+      if (!rawUrl) return null;
+
+      try {
+        const url = new URL(rawUrl);
+        return url.origin;
+      } catch {
+        return null;
+      }
+    })
+    .filter((origin): origin is string => origin !== null);
+};
+
+/**
  * Sanitizes a redirect URL to prevent open redirect vulnerabilities.
- * Allows same-origin relative paths and URLs from enabled SSO platforms.
+ * Allows same-origin relative paths, URLs from our domain, and URLs from enabled SSO platforms.
  *
  * @param {string} rawUrl - The raw URL string to sanitize
  * @returns {string} A safe redirect URL or '/' if the input is unsafe
  */
 export const resolveSafeRedirect = (rawUrl: string): string => {
-  // TODO: check for malicious external URLs
   if (!rawUrl) return '/';
 
   try {
     const base = getBasePath();
-    const url = rawUrl.startsWith('http') ? new URL(rawUrl) : new URL(rawUrl, base);
+    const isAbsoluteUrl = rawUrl.startsWith('http');
+    const url = isAbsoluteUrl ? new URL(rawUrl) : new URL(rawUrl, base);
 
-    // For SSO platform URLs, return the full URL
+    // If it's an absolute URL, check if it's from our domain or an enabled SSO platform
+    if (isAbsoluteUrl) {
+      // Get our domain origin - prefer window.location.origin if available (client-side)
+      const ourOrigin =
+        typeof window !== 'undefined' ? window.location.origin : new URL(base).origin;
+
+      // Check if URL is from our domain
+      if (url.origin === ourOrigin) {
+        return url.href;
+      }
+
+      // Check if URL is from an enabled SSO platform
+      const ssoPlatformOrigins = getSsoPlatformOrigins();
+      if (ssoPlatformOrigins.includes(url.origin)) {
+        return url.href;
+      }
+
+      // Block external URLs that are not from our domain or SSO platforms
+      return '/';
+    }
+
     return url.href;
   } catch (error) {
     // If URL parsing fails, assume it's a relative path
