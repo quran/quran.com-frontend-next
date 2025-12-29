@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getPagesLookup, getChapterInfo } from '@/api';
+import { getPagesLookup, getChapterInfo, getChapterIdBySlug } from '@/api';
 import SurahInfoPage from '@/components/chapters/Info/SurahInfoPage';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
@@ -12,8 +12,8 @@ import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
-import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getSurahNavigationUrl } from '@/utils/navigation';
+import { toLocalizedNumber, getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
 import { isValidChapterId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -33,47 +33,27 @@ const Chapter: NextPage<ChapterProps> = ({
   quranReaderDataType,
 }) => {
   const { t, lang } = useTranslation('common');
+  const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
 
   // Early return if required data is missing
-  if (!versesResponse || !chapterResponse) return null;
-
-  const getTitle = () =>
-    `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
-      chapterResponse!.chapter.versesCount,
-      lang,
-    )}`;
-
-  const getPath = () => getSurahNavigationUrl(chapterResponse!.chapter.slug);
-
-  const getSEOTitle = () =>
-    `${t('surah')} ${chapterResponse!.chapter.transliteratedName} - ${getTitle()}`;
-
-  const getOGImage = () =>
-    getChapterOgImageUrl({
-      chapterId: chapterResponse!.chapter.id,
-      locale: lang,
-    });
-
-  const getDescription = () =>
-    t('chapter:meta-description', {
-      transliteratedName: chapterResponse!.chapter.transliteratedName,
-      translatedName: chapterResponse!.chapter.translatedName as string,
-      revelationPlace: t(`surah-info:${chapterResponse!.chapter.revelationPlace}`),
-      chapterOrder: toLocalizedNumber(Number(chapterResponse!.chapter.id), lang),
-      localeName: getLocaleName(lang),
-      versesCount: toLocalizedNumber(chapterResponse!.chapter.versesCount, lang),
-    });
+  if (!versesResponse || !chapterResponse || !chapterInfoResponse) return null;
 
   return (
     <>
       <NextSeoWrapper
-        title={getSEOTitle()}
-        canonical={getCanonicalUrl(lang, getPath())}
-        image={getOGImage()}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          1,
+          lang,
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
+        image={getChapterOgImageUrl({
+          chapterId: chapterInfoResponse.chapterInfo.id,
+          locale: lang,
+        })}
         imageWidth={1200}
         imageHeight={630}
-        description={getDescription()}
-        languageAlternates={getLanguageAlternates(getPath())}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+        description={chapterInfoResponse.chapterInfo.shortText}
       />
 
       <SurahInfoPage
@@ -126,10 +106,12 @@ const getChapterVersesData = async (chapterId: string, locale: string) => {
 
 export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async (context) => {
   const { params, locale } = context;
-  const chapterId = String(params.chapterId);
+  let chapterId = String(params.chapterId);
 
   if (!isValidChapterId(chapterId)) {
-    return { notFound: true };
+    const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+    if (!sluggedChapterId) return { notFound: true };
+    chapterId = sluggedChapterId;
   }
 
   try {
