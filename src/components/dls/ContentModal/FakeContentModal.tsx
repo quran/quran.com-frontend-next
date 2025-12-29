@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+// This dependency already exists via @radix-ui/react-dialog so we have not added any new package.
+import { FocusScope } from '@radix-ui/react-focus-scope';
 import classNames from 'classnames';
 
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
@@ -8,6 +10,7 @@ import styles from './ContentModal.module.scss';
 
 import { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
+import useSafeTimeout from '@/hooks/useSafeTimeout';
 import CloseIcon from '@/icons/close.svg';
 
 type FakeContentModalProps = {
@@ -25,19 +28,19 @@ type FakeContentModalProps = {
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
   isBottomSheetOnMobile?: boolean;
-
-  closeToHref?: string;
-  closeAriaLabel?: string;
-  ariaLabel?: string;
 };
+
+// Sneakily less than the CSS transition duration to avoid any visual glitches.
+const ANIMATION_DURATION = 380;
 
 /**
  * FakeContentModal is a lightweight, SEO-oriented version of `ContentModal`.
  *
  * It intentionally reuses the same styles and a similar DOM structure as `ContentModal`,
- * but avoids depending on the full modal implementation (e.g. portals, focus traps, or
- * other heavy runtime behavior) so that content can be rendered in a more static,
- * crawler‑friendly way when needed for SEO.
+ * but avoids depending on the full modal implementation (e.g. portals) while still
+ * providing essential accessibility features like focus trapping for a better user
+ * experience. This keeps the content in the DOM for SEO crawlers while ensuring
+ * keyboard navigation works properly when needed.
  *
  * Use this component only in places where we need modal-like styling/markup for content
  * that is primarily rendered for search engines or non-interactive views. For regular,
@@ -64,78 +67,96 @@ const FakeContentModal = ({
   hasHeader = true,
   shouldBeFullScreen = false,
   isBottomSheetOnMobile = true,
-
-  closeToHref,
-  closeAriaLabel,
 }: FakeContentModalProps) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const setSafeTimeout = useSafeTimeout();
+
+  const isVisible = isOpen || isAnimatingOut;
+
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Prevent body scrolling when modal is open
-  usePreventBodyScrolling(true);
+  const handleClose = useCallback(() => {
+    setIsAnimatingOut(true);
+    setIsOpen(false);
+    if (onClose) onClose();
+
+    setSafeTimeout(() => {
+      setIsAnimatingOut(false);
+    }, ANIMATION_DURATION);
+  }, [onClose, setSafeTimeout]);
+
+  usePreventBodyScrolling(isVisible);
 
   const onPointerDownOutside = (event: React.PointerEvent<HTMLDivElement>) => {
     const target = event.target as Node;
     if (event.button !== 0) return;
     if (contentRef.current?.contains(target)) return;
-    onClose?.();
+    handleClose();
   };
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && onClose) onClose();
+      if (event.key === 'Escape') handleClose();
     };
 
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
+  }, [handleClose]);
+
+  if (!isVisible) return null;
+  const dataState = isOpen ? 'fake-open' : 'closed';
 
   return (
-    <div
-      ref={overlayRef}
-      onPointerDown={onPointerDownOutside}
-      role="dialog"
-      aria-modal="true"
-      className={classNames(styles.overlay, overlayClassName, {
-        [styles.fullScreen]: shouldBeFullScreen,
-      })}
-    >
+    <FocusScope loop trapped>
       <div
-        ref={contentRef}
-        className={classNames(styles.contentWrapper, contentClassName, {
-          [styles.small]: size === ContentModalSize.SMALL,
-          [styles.medium]: size === ContentModalSize.MEDIUM,
-          [styles.autoHeight]: !isFixedHeight,
-          [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
+        ref={overlayRef}
+        onPointerDown={onPointerDownOutside}
+        role="dialog"
+        aria-modal={isVisible}
+        data-state={dataState}
+        className={classNames(styles.overlay, overlayClassName, {
+          [styles.fullScreen]: shouldBeFullScreen,
         })}
       >
-        {hasHeader && (
-          <div className={classNames(styles.header, headerClassName)}>
-            {hasCloseButton && (
-              <div className={classNames(styles.closeIcon, closeIconClassName)}>
-                <Button
-                  variant={ButtonVariant.Ghost}
-                  shape={ButtonShape.Circle}
-                  data-testid="fake-modal-close-button"
-                  ariaLabel={closeAriaLabel}
-                  {...(closeToHref ? { href: closeToHref } : { onClick: onClose })}
-                >
-                  <CloseIcon />
-                </Button>
-              </div>
-            )}
-            {header}
-          </div>
-        )}
-
         <div
-          className={classNames(styles.content, innerContentClassName)}
-          data-testid="fake-modal-content"
+          ref={contentRef}
+          data-state={dataState}
+          className={classNames(styles.contentWrapper, contentClassName, {
+            [styles.small]: size === ContentModalSize.SMALL,
+            [styles.medium]: size === ContentModalSize.MEDIUM,
+            [styles.autoHeight]: !isFixedHeight,
+            [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
+          })}
         >
-          {children}
+          {hasHeader && (
+            <div className={classNames(styles.header, headerClassName)}>
+              {hasCloseButton && (
+                <div className={classNames(styles.closeIcon, closeIconClassName)}>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    shape={ButtonShape.Circle}
+                    data-testid="fake-modal-close-button"
+                    onClick={handleClose}
+                  >
+                    <CloseIcon />
+                  </Button>
+                </div>
+              )}
+              {header}
+            </div>
+          )}
+
+          <div
+            className={classNames(styles.content, innerContentClassName)}
+            data-testid="fake-modal-content"
+          >
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </FocusScope>
   );
 };
 
