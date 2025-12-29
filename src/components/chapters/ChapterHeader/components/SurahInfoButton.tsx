@@ -70,7 +70,9 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
           onClose={handleClose}
           onEscapeKeyDown={handleClose}
           hasCloseButton
-          header={<div className={styles.surahInfoHeader}>{t('surah-info')}</div>}
+          header={<div className={styles.surahInfoTitle}>{t('surah-info')}</div>}
+          headerClassName={styles.surahInfoHeader}
+          contentClassName={styles.surahInfoContent}
           size={ContentModalSize.MEDIUM}
         >
           <SurahInfoModal chapterId={chapterId} />

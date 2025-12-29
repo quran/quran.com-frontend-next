@@ -10,10 +10,15 @@ $container-min-height: 200px;
   padding-block: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
   border-block-end: 1px solid var(--color-borders-hairline);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(2 * var(--spacing-small));
+    margin-block-end: calc(2 * var(--spacing-small));
+  }
 }
 
 .calligraphyContainer {
-  max-width: max-content;
+  max-inline-size: max-content;
 
   // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
   // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
@@ -26,10 +31,12 @@ $container-min-height: 200px;
 .surahName {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
 }
 
 .detailsContainer {
   display: flex;
+  color: var(--color-text-default-new);
   font-size: var(--font-size-normal);
   gap: var(--spacing-medium);
 }
@@ -43,22 +50,33 @@ $container-min-height: 200px;
 
 .detailHeader {
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
 }
 
 .descriptionContainer {
+  --_space-bottom: var(--spacing-medium3-px);
+  color: var(--color-text-default-new);
+
+  p,
+  h2,
+  h3,
+  li,
+  em {
+    // directly from figma, we don't have 1.6 variable it's a percentage value
+    line-height: 1.6;
+  }
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-max);
   }
 
   p {
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--_space-bottom);
   }
 
   h2,
   h3 {
     font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--_space-bottom);
   }
 
   em {
@@ -74,7 +92,6 @@ $container-min-height: 200px;
 
   li {
     display: list-item;
-    line-height: normal;
     margin-block-end: var(--spacing-xxsmall);
   }
 }
@@ -84,7 +101,7 @@ $container-min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: $container-min-height;
+  min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
 }
 
