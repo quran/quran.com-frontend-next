@@ -45,6 +45,7 @@ import session from './slices/session';
 import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
+import getPersistedTheme from './utils/getPersistedTheme';
 
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 
@@ -115,8 +116,21 @@ const getStore = (
   preloadedState?: RootState,
   detectedLanguage?: string,
   detectedCountry?: string,
-) =>
-  configureStore({
+) => {
+  const initialState =
+    preloadedState ||
+    getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry);
+
+  // Preserve persisted theme synchronously to prevent flash during language switching.
+  // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
+  if (typeof window !== 'undefined') {
+    const persistedTheme = getPersistedTheme();
+    if (persistedTheme) {
+      initialState[SliceName.THEME] = persistedTheme;
+    }
+  }
+
+  return configureStore({
     reducer: persistedReducer,
     // @ts-ignore
     middleware: (getDefaultMiddleware) =>
@@ -129,10 +143,9 @@ const getStore = (
       }).concat(DefaultSettingsMiddleware),
     devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
-    preloadedState:
-      preloadedState ||
-      getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry),
+    preloadedState: initialState,
   });
+};
 
 export type AppStore = ReturnType<typeof getStore>;
 
