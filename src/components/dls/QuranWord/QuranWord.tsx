@@ -3,9 +3,10 @@ import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import InlineWordByWord from '../InlineWordByWord';
+import { TooltipType } from '../Tooltip';
 
 import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
@@ -13,11 +14,13 @@ import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
+import StudyModeModal from '@/components/QuranReader/ReadingView/StudyModeModal';
 import WordMobileModal from '@/components/QuranReader/ReadingView/WordMobileModal';
 import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
 import useIsMobile from '@/hooks/useIsMobile';
+import ArrowIcon from '@/public/icons/arrow.svg';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectInlineDisplayWordByWordPreferences,
@@ -25,6 +28,7 @@ import {
   selectTooltipContentType,
   selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { setReadingViewHoveredVerseKey } from '@/redux/slices/QuranReader/readingViewVerse';
 import {
   QuranFont,
   ReadingPreference,
@@ -63,6 +67,7 @@ const QuranWord = ({
   isFontLoaded = true,
   bookmarksRangeUrl,
 }: QuranWordProps) => {
+  const dispatch = useDispatch();
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
 
@@ -70,6 +75,7 @@ const QuranWord = ({
 
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
+  const [isStudyModeModalOpen, setIsStudyModeModalOpen] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
     shallowEqual,
@@ -171,9 +177,23 @@ const QuranWord = ({
         }
       }
 
+      // If clicking on ayah number in translation mode, open study mode modal
+      if (word.charTypeName === CharType.End && isTranslationMode) {
+        dispatch(setReadingViewHoveredVerseKey(null)); // Clear hover state
+        setIsStudyModeModalOpen(true);
+        return;
+      }
+
+      // If recitation is disabled and in translation mode, open study mode modal for regular words
+      if (!isRecitationEnabled && isTranslationMode && word.charTypeName === CharType.Word) {
+        dispatch(setReadingViewHoveredVerseKey(null)); // Clear hover state
+        setIsStudyModeModalOpen(true);
+        return;
+      }
+
       handleWordAction();
     },
-    [handleWordAction],
+    [handleWordAction, word.charTypeName, isTranslationMode, isRecitationEnabled, dispatch],
   );
 
   const onKeyPress = useCallback(
@@ -205,12 +225,29 @@ const QuranWord = ({
     handleWordAction();
   }, [handleWordAction]);
 
-  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
+  // Handle hover on ayah number in translation mode to highlight full verse
+  const onMouseEnter = useCallback(() => {
+    if (word.charTypeName === CharType.End && isTranslationMode) {
+      dispatch(setReadingViewHoveredVerseKey(word.verseKey));
+    }
+  }, [dispatch, word.charTypeName, word.verseKey, isTranslationMode]);
+
+  const onMouseLeave = useCallback(() => {
+    if (word.charTypeName === CharType.End && isTranslationMode) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+    }
+  }, [dispatch, word.charTypeName, isTranslationMode]);
+
+  // Allow clicking on ayah number in translation mode for study mode modal
+  const shouldHandleWordClicking =
+    word.charTypeName !== CharType.End || (word.charTypeName === CharType.End && isTranslationMode);
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress })}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       role="button"
       tabIndex={0}
       {...{
@@ -238,10 +275,16 @@ const QuranWord = ({
           if (isTranslationMode && showTooltip) {
             return (
               <MobilePopover
+                icon={<ArrowIcon />}
                 isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
                 defaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
+                tooltipType={TooltipType.SUCCESS}
+                onIconClick={() => {
+                  dispatch(setReadingViewHoveredVerseKey(null)); // Clear hover state
+                  setIsStudyModeModalOpen(true);
+                }}
               >
                 {children}
               </MobilePopover>
@@ -294,6 +337,13 @@ const QuranWord = ({
           {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
         </>
       )}
+
+      {/* Study Mode Modal - opens when clicking ayah number in translation mode */}
+      <StudyModeModal
+        isOpen={isStudyModeModalOpen}
+        onClose={() => setIsStudyModeModalOpen(false)}
+        word={word}
+      />
     </div>
   );
 };

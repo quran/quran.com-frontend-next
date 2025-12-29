@@ -1,4 +1,5 @@
 @use '../_tooltip-info.mixin' as *;
+@use "src/styles/theme";
 .container {
   margin-block-start: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
@@ -37,6 +38,10 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro2-px);
   & > span {
     fill: var(--color-background-inverse);
   }
@@ -46,4 +51,28 @@
   @include infoTooltipStyles;
   border-radius: var(--border-radius-medium-px);
   z-index: var(--z-index-high);
+}
+
+.success {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  @include theme.dark {
+    color: var(--color-text-white);
+  }
+  & > span {
+    fill: var(--color-success-medium);
+  }
+}
+
+.success .icon {
+  color: var(--color-text-white);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  cursor: pointer;
 }

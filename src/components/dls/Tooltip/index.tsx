@@ -39,6 +39,8 @@ interface Props {
   invertColors?: boolean;
   centerText?: boolean;
   type?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
 }
 
 const Tooltip: React.FC<Props> = ({
@@ -54,6 +56,8 @@ const Tooltip: React.FC<Props> = ({
   tip = true,
   invertColors = true,
   centerText = true,
+  icon,
+  onIconClick,
 }) => (
   <RadixTooltip.Root
     delayDuration={delay}
@@ -78,7 +82,28 @@ const Tooltip: React.FC<Props> = ({
         [styles.info]: type === TooltipType.INFO,
       })}
     >
+      {icon && (
+        <span
+          className={styles.icon}
+          onClick={(e) => {
+            e.stopPropagation();
+            onIconClick?.();
+          }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              onIconClick?.();
+            }
+          }}
+        >
+          {icon}
+        </span>
+      )}
       {text}
+
       {tip && <RadixTooltip.Arrow />}
     </RadixTooltip.Content>
   </RadixTooltip.Root>

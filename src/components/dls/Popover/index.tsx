@@ -38,6 +38,8 @@ interface Props {
   contentSideOffset?: number;
   isContainerSpan?: boolean;
   tooltipType?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
 }
 
 const Popover: React.FC<Props> = ({
@@ -58,6 +60,8 @@ const Popover: React.FC<Props> = ({
   contentStyles,
   isContainerSpan = false,
   tooltipType,
+  icon,
+  onIconClick,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -68,10 +72,31 @@ const Popover: React.FC<Props> = ({
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
         [styles.info]: tooltipType === TooltipType.INFO,
+        [styles.success]: tooltipType === TooltipType.SUCCESS,
         [contentStyles]: contentStyles,
       })}
     >
       {children}
+      {icon && (
+        <span
+          className={styles.icon}
+          onClick={(e) => {
+            e.stopPropagation();
+            onIconClick?.();
+          }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              onIconClick?.();
+            }
+          }}
+        >
+          {icon}
+        </span>
+      )}
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );

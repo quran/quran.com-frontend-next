@@ -108,8 +108,11 @@ const VerseText = ({
               word={word}
               font={quranFont}
               isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+              isHighlighted={
+                word.verseKey === selectedVerseKey ||
+                (!isReadingMode && word.verseKey === hoveredVerseKey)
+              }
+              shouldShowSecondaryHighlight={isReadingMode && word.verseKey === hoveredVerseKey}
               bookmarksRangeUrl={bookmarksRangeUrl}
             />
           ))}
