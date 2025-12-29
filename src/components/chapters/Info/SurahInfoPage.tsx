@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,37 +7,30 @@ import styles from '@/components/chapters/ChapterHeader/ChapterHeader.module.scs
 import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
 import FakeContentModal from '@/components/dls/ContentModal/FakeContentModal';
 import { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import Chapter from '@/types/Chapter';
 import { getSurahNavigationUrl } from '@/utils/navigation';
 import { ChapterInfoResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 interface SurahInfoPageProps {
   chapterInfo?: ChapterInfoResponse['chapterInfo'];
-  chapter: ChaptersData[string];
+  chapter: Chapter;
 }
 
 const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
 
-  useEffect(() => {
-    router.prefetch(getSurahNavigationUrl(chapter.id), undefined, {
-      locale: router.locale,
-      priority: true,
-    });
-  }, [chapter.id, router.locale, router]);
+  const surahUrl = getSurahNavigationUrl(chapter.id);
 
   const handleClose = useCallback(() => {
-    router.push(getSurahNavigationUrl(chapter.id), undefined, {
-      shallow: false,
-      scroll: false,
-    });
-  }, [chapter.id, router]);
+    router.push(surahUrl);
+  }, [surahUrl, router]);
 
   return (
     <FakeContentModal
       onClose={handleClose}
       closeAriaLabel={t('surah-info:go-to-surah')}
+      closeToHref={surahUrl}
       hasCloseButton
       header={<div className={styles.surahInfoHeader}>{t('surah-info')}</div>}
       size={ContentModalSize.MEDIUM}

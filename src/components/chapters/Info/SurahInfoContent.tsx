@@ -1,3 +1,5 @@
+import React from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SurahInfoModal.module.scss';
@@ -9,15 +11,13 @@ import Chapter from '@/types/Chapter';
 import ChapterInfo from '@/types/ChapterInfo';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 
-const SurahInfoContent = ({
-  chapterId,
-  chapterInfo,
-  chapter,
-}: {
+interface SurahInfoContentProps {
   chapterId: string;
   chapterInfo: ChapterInfo;
   chapter: Chapter;
-}) => {
+}
+
+const SurahInfoContent: React.FC<SurahInfoContentProps> = ({ chapterId, chapterInfo, chapter }) => {
   const { t, lang } = useTranslation();
   const shouldHideTransliteration = shouldUseMinimalLayout(lang);
 
