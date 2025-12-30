@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+
+import surahInfoStyles from './SurahInfoModal.module.scss';
 
 import styles from '@/components/chapters/ChapterHeader/ChapterHeader.module.scss';
 import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
@@ -30,8 +33,13 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) =
       hasCloseButton
       header={<div className={styles.surahInfoTitle}>{t('surah-info')}</div>}
       headerClassName={styles.surahInfoHeader}
-      contentClassName={styles.surahInfoContent}
+      contentClassName={classNames(
+        styles.surahInfoContent,
+        surahInfoStyles.bottomSheetOnDesktopContent,
+      )}
       size={ContentModalSize.MEDIUM}
+      overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
+      innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
     >
       <SurahInfoContent
         chapterId={String(chapter.id)}

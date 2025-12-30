@@ -32,7 +32,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
   const chapterInfo = chapterInfoResponse?.chapterInfo;
 
   return (
-    <div>
+    <>
       {isLoading && (
         <div className={styles.loadingContainer}>
           <Spinner />
@@ -48,7 +48,7 @@ const SurahInfoModal: React.FC<SurahInfoModalProps> = ({ chapterId }) => {
       {chapterInfo && (
         <SurahInfoContent chapterId={chapterId} chapter={chapter} chapterInfo={chapterInfo} />
       )}
-    </div>
+    </>
   );
 };
 
