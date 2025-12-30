@@ -2,6 +2,7 @@
 
 $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
+$line-height-relaxed: 1.6;
 
 .headerContainer {
   display: flex;
@@ -61,8 +62,7 @@ $container-min-height: 200px;
   h3,
   li,
   em {
-    // directly from figma, we don't have 1.6 variable it's a percentage value
-    line-height: 1.6;
+    line-height: $line-height-relaxed;
   }
 
   @include breakpoints.smallerThanTablet {
