@@ -69,7 +69,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
 
   return (
     <NoteFormModal
-      key={JSON.stringify(note ?? {})}
+      key={`${note?.id}:${note?.updatedAt}`}
       initialNote={note?.body || ''}
       ranges={note?.ranges}
       isModalOpen={isModalOpen}
