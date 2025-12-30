@@ -39,6 +39,7 @@ export const getReflectionGroupLink = (groupOrPage: Room) => {
   if (groupOrPage?.roomType === RoomType.PAGE) {
     return `${API_HOST}/${groupOrPage?.subdomain || ''}`;
   }
+
   // if it's a group, return the groups link
   return `${API_HOST}/groups/${groupOrPage?.url || ''}`;
 };

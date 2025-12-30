@@ -1,9 +1,36 @@
 import Reference from '@/types/QuranReflect/Reference';
 import { isRTLLocale, toLocalizedNumber } from '@/utils/locale';
+import quranStructure from '@/utils/quranStructure';
 import { makeVerseKey } from '@/utils/verse';
 
 const AR_COMMA = '، ';
-const isChapterOnly = (r: Reference) => r.from === 0 && r.to === 0;
+
+const buildChapterVerseCounts = () => {
+  const counts: Record<number, number> = {};
+  quranStructure.forEach(({ chapter, verses }) => {
+    counts[chapter] = verses;
+  });
+  return counts;
+};
+
+const CHAPTER_VERSES_COUNT = buildChapterVerseCounts();
+
+const getChapterVersesCount = (chapterId?: number | string) => {
+  if (typeof chapterId === 'number') return CHAPTER_VERSES_COUNT[chapterId];
+  if (typeof chapterId === 'string') return CHAPTER_VERSES_COUNT[Number(chapterId)];
+  return undefined;
+};
+
+const isChapterOnly = (reference: Reference) => {
+  if (reference.from !== 0) return false;
+
+  if (reference.to === 0) return true;
+
+  if (typeof reference.to !== 'number') return false;
+
+  const versesCount = getChapterVersesCount(reference.chapterId);
+  return typeof versesCount === 'number' && reference.to === versesCount;
+};
 const hasRange = (r: Reference): r is Reference & { to: number } =>
   typeof r.to === 'number' && r.to > 0 && r.to !== r.from;
 
