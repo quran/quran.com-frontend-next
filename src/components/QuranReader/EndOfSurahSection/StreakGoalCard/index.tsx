@@ -107,19 +107,28 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
         </div>
 
         {/* Goal Progress Section */}
-        <Link
-          href={goal ? getReadingGoalProgressNavigationUrl() : getReadingGoalNavigationUrl()}
-          onClick={goal ? onGoalArrowClicked : onSetGoalButtonClicked}
-          className={styles.goalLink}
-        >
+        {goal ? (
+          <Link
+            href={getReadingGoalProgressNavigationUrl()}
+            onClick={onGoalArrowClicked}
+            className={styles.goalLink}
+          >
+            <ReadingGoalCardContent
+              goal={goal}
+              currentActivityDay={currentActivityDay}
+              goalCta={goalCta}
+              onGoalArrowClick={onGoalArrowClicked}
+              className={styles.endOfSurahGoalContent}
+            />
+          </Link>
+        ) : (
           <ReadingGoalCardContent
             goal={goal}
             currentActivityDay={currentActivityDay}
             goalCta={goalCta}
-            onGoalArrowClick={goal ? onGoalArrowClicked : undefined}
             className={styles.endOfSurahGoalContent}
           />
-        </Link>
+        )}
       </div>
     </Card>
   );

@@ -15,7 +15,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 
 export type ReadingGoalCardContentProps = {
   goal?: QuranGoalStatus | null;
-  currentActivityDay: CurrentQuranActivityDay;
+  currentActivityDay?: CurrentQuranActivityDay;
   goalCta?: React.ReactNode;
   onGoalArrowClick?: () => void;
   className?: string;

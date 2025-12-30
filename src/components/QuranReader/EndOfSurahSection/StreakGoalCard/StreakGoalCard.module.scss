@@ -1,6 +1,10 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/theme';
 
+.endOfSurahCard {
+  padding: var(--spacing-medium2-px);
+}
+
 .withGoalBackground {
   background-color: var(--color-streaks-light);
 }
@@ -174,8 +178,8 @@
     width: var(--spacing-xxlarge-px);
 
     @include breakpoints.smallerThanTablet {
-      height: calc(--spacing-large-px + var(--spacing-xxsmall-px));
-      width: calc(--spacing-large-px + var(--spacing-xxsmall-px));
+      height: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
+      width: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
     }
   }
 
@@ -189,6 +193,6 @@
   }
 
   :global(.goalStatusContainer) {
-    text-align: left;
+    text-align: start;
   }
 }
