@@ -131,42 +131,27 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
   block-size: 100%;
 }
 
-.cardVisual {
-  margin: var(--spacing-small);
-  border-radius: 20px;
-  aspect-ratio: 16 / 10;
-  background-size: cover;
-  background-position: center;
+.cardBody {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--spacing-small);
   padding: var(--spacing-medium);
-  color: var(--color-text-inverse);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-}
-
-.cardHeadline {
-  margin: 0;
-  font-size: var(--font-size-large2);
-  line-height: 1.35;
-  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-.cardFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-medium);
-  padding: 0 var(--spacing-medium) var(--spacing-medium);
+  flex: 1;
 }
 
 .appMeta {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-small);
+}
+
+.appMetaText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .appIcon {
@@ -187,6 +172,7 @@
 
 .appName {
   font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-large);
 }
 
 .appTagline {
@@ -194,14 +180,51 @@
   font-size: var(--font-size-small);
 }
 
-.link {
-  font-weight: var(--font-weight-semibold);
+.appDescription {
+  margin: 0;
   color: var(--color-text-faded);
-  text-decoration: underline;
+  line-height: 1.6;
 }
 
-.link:hover {
-  color: var(--color-text-default);
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-small);
+  margin-block-start: auto;
+}
+
+.storeBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-xsmall2-px);
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: var(--shadow-small);
+}
+
+.storeBadgeImage {
+  display: block;
+}
+
+.visitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.5rem;
+  padding: 0 var(--spacing-medium);
+  border-radius: var(--border-radius-small-px);
+  background: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  box-shadow: var(--shadow-small);
+  transition: background var(--transition-fast);
+}
+
+.visitButton:hover {
+  background: var(--color-success-deep);
 }
 
 .filters {
@@ -273,23 +296,6 @@
   @extend .featuredCard;
 }
 
-.appVisual {
-  @extend .cardVisual;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.appVisualText {
-  margin: 0;
-  font-size: var(--font-size-large2);
-  line-height: 1.35;
-  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-.appFooterRow {
-  @extend .cardFooter;
-}
-
 @include breakpoints.tablet {
   .page {
     padding-block: var(--spacing-mega);
@@ -300,10 +306,8 @@
     // flex-direction: column;
   }
 
-  .cardFooter,
-  .appFooterRow {
+  .cardActions {
     align-items: flex-start;
-    // flex-direction: column;
   }
 }
 
