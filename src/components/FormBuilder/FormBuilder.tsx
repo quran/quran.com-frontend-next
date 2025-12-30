@@ -110,7 +110,6 @@ const FormBuilder = <T,>({
                       value: field.value,
                       onChange: field.onChange,
                       placeholder: formField.placeholder,
-                      dataTestId: formField.dataTestId,
                     })}
                     {renderError(error, formField.errorClassName)}
                     {renderExtraSection(formField, field.value)}
@@ -127,7 +126,6 @@ const FormBuilder = <T,>({
                 fieldSetLegend: formField.fieldSetLegend,
                 label: formField.label as string,
                 placeholder: formField.placeholder,
-                dataTestId: formField.dataTestId,
                 onChange: (val) => {
                   field.onChange(val);
                   if (formField?.onChange) {

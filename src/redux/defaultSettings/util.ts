@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -14,20 +15,15 @@ import SliceName from '@/redux/types/SliceName';
 import TafsirsSettings from '@/redux/types/TafsirsSettings';
 import Theme from '@/redux/types/Theme';
 import TranslationsSettings from '@/redux/types/TranslationsSettings';
+import { CountryLanguagePreferenceResponse } from '@/types/ApiResponses';
 import Language from '@/types/Language';
-import { QuranFont, Mushaf, MushafLines } from '@/types/QuranReader';
-import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
-import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
-
-/* eslint-disable react-func/max-lines-per-function */
+import { QuranFont, MushafLines, Mushaf } from '@/types/QuranReader';
+import ReflectionLanguage from '@/types/QuranReflect/ReflectionLanguage';
 
 /**
  * Get the initial state of the store.
  *
  * @param {string} locale
- * @param {CountryLanguagePreferenceResponse} [countryPreference] optional country/language preference coming from the server. When provided, we will override the locale defaults according to the product requirements.
- * @param {string} [detectedLanguage] the detected language from server-side detection
- * @param {string} [detectedCountry] the detected country from server-side detection
  * @returns {RootState}
  */
 export const getStoreInitialState = (
@@ -183,7 +179,7 @@ export const getStoreInitialState = (
   return baseState;
 };
 
-const DEFAULT_LOCALE = Language.EN;
+const DEFAULT_LOCALE = 'en';
 
 /**
  * Dynamically load the default settings of the locale passed.

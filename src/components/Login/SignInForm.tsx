@@ -46,10 +46,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   const formFields: FormBuilderFormField[] = [
     {
       ...getEmailField(t),
-      dataTestId: 'signin-email-input',
-      customRender: (props) => (
-        <AuthInput {...props} id="email" htmlType="email" dataTestId={props.dataTestId} />
-      ),
+      customRender: (props) => <AuthInput {...props} id="email" htmlType="email" />,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
@@ -57,7 +54,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       field: 'password',
       type: FormFieldType.Password,
       placeholder: t('password-placeholder'),
-      dataTestId: 'signin-password-input',
       rules: [
         {
           type: RuleType.Required,
@@ -123,7 +119,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         shape={ButtonShape.Pill}
         type={ButtonType.Success}
         className={styles.submitButton}
-        data-testid="signin-continue-button"
       >
         {t('sign-in')}
       </Button>

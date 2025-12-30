@@ -1,6 +1,3 @@
-import { useSelector } from 'react-redux';
-
-import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import Language from '@/types/Language';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
@@ -62,26 +59,9 @@ const REFLECTION_LANGUAGE_TO_LOCALE_MAP: Record<ReflectionLanguage, string> = {
 };
 
 /**
- * Get reflection languages from Redux store. This function should be used
- * within React components that have access to the Redux store.
- *
- * @returns {ReflectionLanguage[]} Array of reflection languages from Redux state
- */
-export const getReflections = (): ReflectionLanguage[] => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const reflectionLanguages = useSelector(selectAyahReflectionsLanguages);
-
-  // Fallback to English if no languages are set
-  return reflectionLanguages.length > 0 ? reflectionLanguages : [ReflectionLanguage.ENGLISH];
-};
-
-/**
  * Convert Next.js's locale to an array of languages that posts
  * should only be in. E.g. if locale is 'ar', allowed posts' languages
  * should be ARABIC and ENGLISH only.
- *
- * This function serves as a fallback when Redux state is not available.
- * For components with Redux access, use getReflections() instead.
  *
  * @param {string} locale e.g. 'ar'
  * @returns {ReflectionLanguage[]} e.g. ['ENGLISH', 'ARABIC']

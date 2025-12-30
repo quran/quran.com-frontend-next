@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import classNames from 'classnames';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import WhatIsRamadanArabic from './WhatIsRamadanArabic';
@@ -15,7 +15,6 @@ import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getWhatIsRamadanNavigationUrl();
 const WhatIsRamadanPage: NextPage = (): JSX.Element => {
@@ -182,7 +181,5 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/what-is-ramadan');
 
 export default WhatIsRamadanPage;

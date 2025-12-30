@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import { fetcher } from '@/api';
@@ -23,9 +23,12 @@ import { makeGetQuestionsByVerseKeyUrl } from '@/utils/auth/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getVerseAnswersNavigationUrl } from '@/utils/navigation';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -85,66 +88,71 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/[chapterId]/answers',
-  async (context) => {
-    const { params, locale } = context;
-    const { chapterId } = params;
-    const verseKey = String(chapterId);
-    const chaptersData = await getAllChaptersData(locale);
-    if (!isValidVerseKey(chaptersData, verseKey)) {
-      return { notFound: true };
-    }
-    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
-    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
-    try {
-      const verseQuestionsUrl = makeGetQuestionsByVerseKeyUrl({
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  const { chapterId } = params;
+  const verseKey = String(chapterId);
+  const chaptersData = await getAllChaptersData(locale);
+  if (!isValidVerseKey(chaptersData, verseKey)) {
+    return { notFound: true };
+  }
+  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
+  const translations = getTranslationsInitialState(locale).selectedTranslations;
+  try {
+    const verseQuestionsUrl = makeGetQuestionsByVerseKeyUrl({
+      verseKey,
+      language: locale as Language,
+    });
+    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+    const apiParams = {
+      ...getDefaultWordFields(quranFont),
+      translationFields: 'resource_name,language_id',
+      translations: translations.join(','),
+      mushaf: mushafId,
+      from: `${chapterNumber}:${verseNumber}`,
+      to: `${chapterNumber}:${verseNumber}`,
+    };
+
+    const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
+    const [verseQuestionsData, versesData] = await Promise.all([
+      getAyahQuestions(verseKey, locale as Language),
+      fetcher(versesUrl),
+    ]);
+
+    const fallback = {
+      [verseQuestionsUrl]: verseQuestionsData,
+      [versesUrl]: versesData,
+    };
+
+    return {
+      props: {
+        chaptersData,
+        chapterId: chapterNumber,
+        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
+        verseNumber,
+        fallback,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+    };
+  } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-VerseQuestionsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
         verseKey,
-        language: locale as Language,
-      });
-      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-      const apiParams = {
-        ...getDefaultWordFields(quranFont),
-        translationFields: 'resource_name,language_id',
-        translations: translations.join(','),
-        mushaf: mushafId,
-        from: `${chapterNumber}:${verseNumber}`,
-        to: `${chapterNumber}:${verseNumber}`,
-      };
+      },
+    });
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+    };
+  }
+};
 
-      const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
-      const [verseQuestionsData, versesData] = await Promise.all([
-        getAyahQuestions(verseKey, locale as Language),
-        fetcher(versesUrl),
-      ]);
-
-      const fallback = {
-        [verseQuestionsUrl]: verseQuestionsData,
-        [versesUrl]: versesData,
-      };
-
-      return {
-        props: {
-          chaptersData,
-          chapterId: chapterNumber,
-          chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
-          verseNumber,
-          fallback,
-        },
-      };
-    } catch (error) {
-      logErrorToSentry(error, {
-        transactionName: 'getServerSideProps-VerseQuestionsPage',
-        metadata: {
-          chapterIdOrSlug: String(params.chapterId),
-          locale,
-          verseKey,
-        },
-      });
-      return { notFound: true };
-    }
-  },
-);
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
 
 export default SelectedAyahQuestionsPage;

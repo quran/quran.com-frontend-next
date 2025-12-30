@@ -98,31 +98,6 @@ class Homepage {
     return JSON.parse(parentObject[name]);
   }
 
-  /**
-   * Close any Next.js error dialog that might be blocking UI interactions
-   * This should be called before any UI interaction that might be blocked
-   */
-  async closeNextjsErrorDialog() {
-    const errorDialog = this.page.locator('[data-nextjs-dialog-overlay="true"]');
-    if (await errorDialog.isVisible()) {
-      // Try to close by clicking the X button first
-      const closeButton = this.page.locator(
-        '[data-nextjs-errors-dialog-left-right-close-button="true"]',
-      );
-      if (await closeButton.isVisible()) {
-        await closeButton.click();
-      } else {
-        // Fallback: click on the backdrop to close
-        const backdrop = this.page.locator('[data-nextjs-dialog-backdrop="true"]');
-        if (await backdrop.isVisible()) {
-          await backdrop.click();
-        }
-      }
-      // Wait for the dialog to disappear
-      await errorDialog.waitFor({ state: 'hidden' });
-    }
-  }
-
   async openSettingsDrawer() {
     await this.page.waitForTimeout(1000);
     const buttons = this.page.getByTestId('settings-button');
