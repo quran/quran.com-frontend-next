@@ -22,6 +22,8 @@ import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
+type NoteWithPostUrl = Note & { postUrl?: string };
+
 interface MyNotesProps {
   onAddNote: () => void;
   onEditNote: (note: Note) => void;
@@ -56,14 +58,24 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
 
   const isLoading = !data && !error;
 
-  const notes = useMemo(() => {
+  const notes = useMemo((): NoteWithPostUrl[] => {
     const notesArray = Array.isArray(data) ? data : [];
 
     return notesArray.map((note) => {
       const attachedEntities = note.attachedEntities || [];
-      const attachedEntity = attachedEntities.findLast(
-        (entity) => entity.type === AttachedEntityType.REFLECTION,
-      );
+
+      let attachedEntity;
+      /** Find the last reflection entity.
+       * Using manual loop instead of findLast() for ES5 compatibility.
+       * findLast() is ES2023 and may not be supported in older browsers.
+       */
+      for (let i = attachedEntities.length - 1; i >= 0; i -= 1) {
+        if (attachedEntities[i].type === AttachedEntityType.REFLECTION) {
+          attachedEntity = attachedEntities[i];
+          break;
+        }
+      }
+
       const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
       return { ...note, postUrl };
     });
@@ -143,8 +155,10 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
   );
 };
 
-const formatNoteDate = (date: Date | string | number, locale: string) => {
+const formatNoteDate = (date: Date | string | number, locale: string): string => {
   const dateInstance = new Date(date);
+  if (Number.isNaN(dateInstance.getTime())) return '';
+
   return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
     day: 'numeric',
     month: 'long',

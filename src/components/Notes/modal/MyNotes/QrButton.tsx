@@ -11,7 +11,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 interface QRButtonProps {
   note: Note;
-  postUrl: string;
+  postUrl?: string;
   onPostToQrClick: (note: Note) => void;
 }
 
@@ -43,6 +43,7 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
       data-testid="post-to-qr-button"
       onClick={handlePostToQrClick}
       className={styles.postToButton}
+      aria-label={t('post-to')}
     >
       {t('post-to')} <QRColoredIcon />
     </button>

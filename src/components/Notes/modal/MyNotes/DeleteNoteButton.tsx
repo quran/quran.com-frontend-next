@@ -78,6 +78,7 @@ const DeleteNoteButton: React.FC<DeleteNoteButtonProps> = ({ note }) => {
       onClick={handleDeleteNote}
       isDisabled={isDeletingNote}
       tooltip={t('common:delete')}
+      ariaLabel={t('common:delete')}
       data-testid="delete-note-button"
     >
       <IconContainer
