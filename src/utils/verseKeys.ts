@@ -162,5 +162,5 @@ export const readableVerseRangeKeys = (
 
       return `${titleForm}-${toLocalizedVerseKey(to.verseKey, lang)}`;
     })
-    .filter(Boolean);
+    .filter((title): title is string => title !== null);
 };

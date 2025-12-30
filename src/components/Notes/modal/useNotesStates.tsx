@@ -19,7 +19,7 @@ interface ValidationError {
 
 export const useNotesStates = (
   initialNote: string,
-  onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>,
+  onSaveNote: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>,
   onMyNotes?: () => void,
   isModalOpen?: boolean,
 ) => {
@@ -33,26 +33,32 @@ export const useNotesStates = (
     setErrors((prevErrors) => ({ ...prevErrors, note: { id, message } }));
   }, []);
 
-  const validateNoteInput = useCallback((): true | void => {
+  const validateNoteInput = useCallback((): boolean => {
     if (!noteInput) {
-      return setNoteError(
+      setNoteError(
         'required-field',
         t('common:validation.required-field', { field: t('notes:note') }),
       );
+
+      return false;
     }
 
     if (noteInput.length < MIN_NOTE_LENGTH) {
-      return setNoteError(
+      setNoteError(
         'minimum-length',
         t('common:validation.minimum-length', { field: t('notes:note'), value: MIN_NOTE_LENGTH }),
       );
+
+      return false;
     }
 
     if (noteInput.length > MAX_NOTE_LENGTH) {
-      return setNoteError(
+      setNoteError(
         'maximum-length',
         t('common:validation.maximum-length', { field: t('notes:note'), value: MAX_NOTE_LENGTH }),
       );
+
+      return false;
     }
 
     return true;
@@ -62,20 +68,18 @@ export const useNotesStates = (
     async (isPublic: boolean) => {
       if (!validateNoteInput()) return;
 
-      if (onSaveNote) {
-        try {
-          setLoading(isPublic ? LoadingState.Public : LoadingState.Private);
-          await onSaveNote({ note: noteInput, isPublic });
-          setNoteInput('');
-          onMyNotes?.();
-        } catch (error) {
-          logErrorToSentry(error, {
-            transactionName: isPublic ? 'notes.post-to-qr' : 'notes.save-privately',
-            metadata: { noteLength: noteInput.length },
-          });
-        } finally {
-          setLoading(null);
-        }
+      try {
+        setLoading(isPublic ? LoadingState.Public : LoadingState.Private);
+        await onSaveNote({ note: noteInput, isPublic });
+        setNoteInput('');
+        onMyNotes?.();
+      } catch (error) {
+        logErrorToSentry(error, {
+          transactionName: isPublic ? 'notes.post-to-qr' : 'notes.save-privately',
+          metadata: { noteLength: noteInput.length },
+        });
+      } finally {
+        setLoading(null);
       }
     },
     [noteInput, validateNoteInput, onSaveNote, onMyNotes],

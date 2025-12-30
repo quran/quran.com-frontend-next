@@ -24,7 +24,7 @@ interface NoteFormModalProps {
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
-  onSaveNote?: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>;
+  onSaveNote: ({ note, isPublic }: { note: string; isPublic: boolean }) => Promise<void>;
   dataTestId?: string;
 }
 
@@ -37,7 +37,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
   onMyNotes,
   isModalOpen,
   onModalClose,
-  onSaveNote = async () => {},
+  onSaveNote,
   dataTestId,
 }) => {
   const { t, lang } = useTranslation();
