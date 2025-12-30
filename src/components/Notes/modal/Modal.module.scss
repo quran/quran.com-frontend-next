@@ -18,7 +18,7 @@ $note_modal_max_width: 48rem;
 }
 
 .arrowIcon {
-  rotate: 180deg;
+  transform: rotate(180deg);
   margin-block-start: calc(var(--spacing-xmicro) * -1);
 
   svg {

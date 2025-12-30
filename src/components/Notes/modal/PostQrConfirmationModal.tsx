@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import modalStyles from './Modal.module.scss';
 import styles from './PostQrConfirmationModal.module.scss';
 
-import PostReflectionDescription from '@/components/Notes/modal/ReflectionIntro/PostReflection';
+import PostReflectionIntro from '@/components/Notes/modal/ReflectionIntro/PostReflection';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
@@ -36,6 +36,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
           className={classNames(modalStyles.headerButton, modalStyles.title)}
           onClick={onModalClose}
           data-testid="qr-confirmation-modal-title"
+          aria-label={t('common:back')}
         >
           <IconContainer
             icon={<ArrowIcon />}
@@ -57,7 +58,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
       <div className={styles.container} data-testid="qr-confirmation-modal-content">
         <p className={styles.question}>{t('post-confirmation.question')}</p>
 
-        <PostReflectionDescription />
+        <PostReflectionIntro />
 
         <div className={styles.actions}>
           {onEdit && (

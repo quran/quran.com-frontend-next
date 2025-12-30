@@ -27,17 +27,9 @@
   gap: var(--spacing-medium2);
 }
 
-.editButton {
+.baseButton {
   border-radius: var(--border-radius-medium-px);
-  padding-inline: calc(2 * var(--spacing-medium2));
-
   border-color: var(--color-blue-buttons-and-icons);
-  color: var(--color-blue-buttons-and-icons);
-
-  @include breakpoints.smallerThanMobileL {
-    flex: 1;
-    padding-inline: var(--spacing-xsmall);
-  }
 
   &:hover {
     background-color: var(--color-blue-buttons-and-icons);
@@ -45,17 +37,26 @@
   }
 }
 
-.confirmButton {
-  border-radius: var(--border-radius-medium-px);
-  padding-inline: var(--spacing-small);
+.editButton {
+  @extend .baseButton;
 
-  border-color: var(--color-blue-buttons-and-icons);
+  padding-inline: calc(2 * var(--spacing-medium2));
+  color: var(--color-blue-buttons-and-icons);
+
+  @include breakpoints.smallerThanMobileL {
+    flex: 1;
+    padding-inline: var(--spacing-xsmall);
+  }
+}
+
+.confirmButton {
+  @extend .baseButton;
+
+  padding-inline: var(--spacing-small);
   color: var(--color-text-white);
   background-color: var(--color-blue-buttons-and-icons);
 
   &:hover {
-    background-color: var(--color-blue-buttons-and-icons);
-    color: var(--color-text-white);
     opacity: var(--opacity-85);
   }
 }

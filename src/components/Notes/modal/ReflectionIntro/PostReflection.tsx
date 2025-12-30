@@ -9,7 +9,7 @@ import styles from './ReflectionIntro.module.scss';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { logEvent } from '@/utils/eventLogger';
 
-const PublicReflectionDescription: React.FC = () => {
+const PostReflectionIntro: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('notes');
 
@@ -96,4 +96,4 @@ const PublicReflectionDescription: React.FC = () => {
   );
 };
 
-export default PublicReflectionDescription;
+export default PostReflectionIntro;
