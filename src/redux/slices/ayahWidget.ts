@@ -1,35 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '@/redux/RootState';
+import type { AyahWidgetOverrides } from '@/components/AyahWidget/widget-config';
+import type { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
-import type { MushafType } from '@/types/ayah-widget';
 
-export type AyahWidgetOverrides = {
-  containerId?: string;
-  selectedSurah?: number;
-  selectedAyah?: number;
-  translationIds?: number[];
-  theme?: ThemeTypeVariant;
-  mushaf?: MushafType;
-  enableAudio?: boolean;
-  enableWbwTranslation?: boolean;
-  showTranslatorName?: boolean;
-  showTafsirs?: boolean;
-  showReflections?: boolean;
-  showAnswers?: boolean;
-  locale?: string;
-  reciter?: number | null;
-  showArabic?: boolean;
-  rangeEnabled?: boolean;
-  rangeEnd?: number;
-  customSize?: {
-    width?: string;
-    height?: string;
-  };
-};
-
-type AyahWidgetState = {
+/**
+ * Redux state for the Ayah Widget feature.
+ */
+export type AyahWidgetState = {
+  /**
+   * Per-user overrides applied on top of the widget defaults.
+   * These are merged so partial updates persist across navigation/sessions.
+   */
   overrides: AyahWidgetOverrides;
 };
 
@@ -37,21 +19,53 @@ const initialState: AyahWidgetState = {
   overrides: {},
 };
 
+/**
+ * Ayah Widget slice.
+ *
+ * Stores user overrides for the widget builder/runtime.
+ * The updates are merged to allow partial updates without losing previous values.
+ */
 export const ayahWidgetSlice = createSlice({
   name: SliceName.AYAH_WIDGET,
   initialState,
   reducers: {
-    updateAyahWidgetOverrides: (state, action: PayloadAction<AyahWidgetOverrides>) => ({
-      ...state,
-      // Merge user overrides so they persist across sessions.
-      overrides: { ...state.overrides, ...action.payload },
-    }),
-    resetAyahWidgetOverrides: () => initialState,
+    /**
+     * Merge user overrides into the existing overrides object.
+     *
+     * @param {AyahWidgetState} state - Current slice state.
+     * @param {PayloadAction<AyahWidgetOverrides>} action - Redux action carrying a partial/full overrides object.
+     * @returns {AyahWidgetState} The next slice state with merged overrides.
+     */
+    updateAyahWidgetOverrides: (
+      state: AyahWidgetState,
+      action: PayloadAction<AyahWidgetOverrides>,
+    ): AyahWidgetState => {
+      const nextOverrides: AyahWidgetOverrides = { ...state.overrides, ...action.payload };
+
+      return {
+        ...state,
+        overrides: nextOverrides,
+      };
+    },
+
+    /**
+     * Reset the slice back to the initial state.
+     *
+     * @returns {AyahWidgetState} The initial slice state.
+     */
+    resetAyahWidgetOverrides: (): AyahWidgetState => initialState,
   },
 });
 
 export const { updateAyahWidgetOverrides, resetAyahWidgetOverrides } = ayahWidgetSlice.actions;
 
-export const selectAyahWidgetOverrides = (state: RootState) => state.ayahWidget.overrides;
+/**
+ * Selector: returns the Ayah Widget overrides from the store.
+ *
+ * @param {RootState} state - Root Redux state.
+ * @returns {AyahWidgetOverrides} Current widget overrides.
+ */
+export const selectAyahWidgetOverrides = (state: RootState): AyahWidgetOverrides =>
+  state.ayahWidget.overrides;
 
 export default ayahWidgetSlice.reducer;

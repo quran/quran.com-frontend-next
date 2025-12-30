@@ -1,16 +1,22 @@
 /* eslint-disable max-lines */
-import React from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import i18nConfig from '../../../i18n.json';
-
 import type { Preferences } from './builder/types';
+import {
+  WIDGET_FORM_BLOCKS,
+  getRangeMeta,
+  getWidgetLocaleOptions,
+  normalizeRangePreferences,
+  type WidgetFieldConfig,
+  type WidgetFormBlock,
+  type WidgetFormContext,
+  type WidgetSelectOptions,
+} from './widget-config';
 
 import styles from '@/styles/ayah-widget.module.scss';
-import type { MushafType } from '@/types/ayah-widget';
-import Chapter from '@/types/Chapter';
-import { getLocaleName } from '@/utils/locale';
+import type Chapter from '@/types/Chapter';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Reciter from 'types/Reciter';
 
@@ -29,11 +35,18 @@ type Props = {
 };
 
 /**
- * Builder form for the Ayah widget configuration.
- * It exposes controls for range selection, translations, and widget options.
+ * BuilderConfigForm
  *
- * @param {Props} props The component props.
- * @returns {JSX.Element} The rendered component.
+ * Renders the configuration panel for the Ayah Widget Builder.
+ * The layout is driven by `WIDGET_FORM_BLOCKS`, which makes it easy to add/remove fields.
+ *
+ * Responsibilities:
+ * - Create a stable `WidgetFormContext` used by field configs.
+ * - Normalize range preferences when the available range changes.
+ * - Render fields (text/select/checkbox), translations, and the Surah/Ayah range row.
+ *
+ * @param {Props} props - Component props.
+ * @returns {JSX.Element} The configuration panel.
  */
 const BuilderConfigForm = ({
   preferences,
@@ -47,260 +60,317 @@ const BuilderConfigForm = ({
   selectedTranslationIds,
   toggleTranslation,
   reciters,
-}: Props) => {
+}: Props): JSX.Element => {
   const { t } = useTranslation('ayah-widget');
-  // Prepare locale selection options based on supported locales.
-  const localeOptions = React.useMemo(
-    () =>
-      i18nConfig.locales
-        .map((code) => ({ code, name: getLocaleName(code) || code }))
-        .sort((a, b) => a.name.localeCompare(b.name)),
+
+  /**
+   * Locale options are static for the session (read from i18n config).
+   */
+  const localeOptions = useMemo(
+    (): { code: string; name: string }[] => getWidgetLocaleOptions(),
     [],
   );
 
-  // Prepare range selection options based on the selected ayah.
-  const rangeStart = preferences.selectedAyah;
-  const verseMax = verseOptions.length ? verseOptions[verseOptions.length - 1] : rangeStart;
-  const rangeEndCap = Math.min(rangeStart + 10, verseMax);
-  const rangeOptions = React.useMemo(() => {
-    if (rangeEndCap <= rangeStart) {
-      return [];
-    }
-    return Array.from({ length: rangeEndCap - rangeStart }, (unused, idx) => rangeStart + idx + 1);
-  }, [rangeEndCap, rangeStart]);
-  const rangeSelectable = rangeOptions.length > 0;
+  /**
+   * Range metadata depends on selected ayah + available verse options.
+   */
+  const rangeMeta = useMemo(
+    () => getRangeMeta(preferences.selectedAyah, verseOptions),
+    [preferences.selectedAyah, verseOptions],
+  );
 
-  // Keep the range metadata normalized whenever the selection changes.
-  React.useEffect(() => {
-    setPreferences((prev) => {
-      let next = prev;
-      if (!rangeSelectable && prev.rangeEnabled) {
-        next = { ...next, rangeEnabled: false };
-      }
-      if (prev.rangeEnabled && rangeSelectable) {
-        const lowerBound = rangeOptions[0];
-        const upperBound = rangeOptions[rangeOptions.length - 1];
-        const validEnd =
-          prev.rangeEnd && prev.rangeEnd > prev.selectedAyah
-            ? Math.min(Math.max(prev.rangeEnd, lowerBound), upperBound)
-            : lowerBound;
-        if (validEnd !== prev.rangeEnd) {
-          next = { ...next, rangeEnd: validEnd };
-        }
-      }
-      return next === prev ? prev : next;
-    });
-  }, [
-    rangeSelectable,
-    rangeOptions,
-    preferences.rangeEnabled,
-    preferences.selectedAyah,
-    preferences.rangeEnd,
-    setPreferences,
-  ]);
+  /**
+   * Keep range state normalized when range options change.
+   * Example: if user had range enabled but the new surah cannot support it, we disable it.
+   */
+  useEffect(() => {
+    setPreferences((prev: Preferences) => normalizeRangePreferences(prev, rangeMeta));
+  }, [rangeMeta, setPreferences]);
 
-  return (
-    <section className={styles.panel}>
-      <h2 className={styles.panelTitle}>{t('sections.configuration')}</h2>
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="container-id">
-          {t('fields.containerId')}
-        </label>
-        <input
-          id="container-id"
-          className={styles.input}
-          value={preferences.containerId}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              containerId: event.target.value || prev.containerId,
-            }))
-          }
-        />
-      </div>
+  /**
+   * Context passed to field config resolvers (options/getValue/setValue, visibility, etc.).
+   */
+  const formContext: WidgetFormContext = useMemo(
+    () => ({
+      t,
+      preferences,
+      setUserPreferences,
+      surahs,
+      verseOptions,
+      rangeMeta,
+      groupedTranslations,
+      translationSearch,
+      setTranslationSearch,
+      selectedTranslationIds,
+      toggleTranslation,
+      reciters,
+      localeOptions,
+    }),
+    [
+      t,
+      preferences,
+      setUserPreferences,
+      surahs,
+      verseOptions,
+      rangeMeta,
+      groupedTranslations,
+      translationSearch,
+      setTranslationSearch,
+      selectedTranslationIds,
+      toggleTranslation,
+      reciters,
+      localeOptions,
+    ],
+  );
 
-      <div className={styles.twoColumnGrid}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="surah-select">
-            {t('fields.surah')}
+  /**
+   * Resolve the current field value:
+   * - prefer `field.getValue` if provided
+   * - else read from `preferences[field.preferenceKey]`
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {string | number | boolean | null} Current field value.
+   */
+  const resolveFieldValue = useCallback(
+    (field: WidgetFieldConfig): string | number | boolean | null => {
+      if (field.getValue) return field.getValue(preferences, formContext);
+      if (!field.preferenceKey) return '';
+      return preferences[field.preferenceKey];
+    },
+    [preferences, formContext],
+  );
+
+  /**
+   * Update a field:
+   * - if `field.setValue` exists, use it (allows custom logic)
+   * - else set `preferences[field.preferenceKey] = value`
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @param {string | number | boolean | null} value - Next value.
+   * @returns {void}
+   */
+  const updateFieldValue = useCallback(
+    (field: WidgetFieldConfig, value: string | number | boolean | null): void => {
+      formContext.setUserPreferences((prev: Preferences) => {
+        if (field.setValue) return field.setValue(value, prev, formContext);
+        if (!field.preferenceKey) return prev;
+        return { ...prev, [field.preferenceKey]: value } as Preferences;
+      });
+    },
+    [formContext],
+  );
+
+  /**
+   * Get select options for a field.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {WidgetSelectOptions} Select options.
+   */
+  const getSelectOptions = useCallback(
+    (field: WidgetFieldConfig): WidgetSelectOptions =>
+      field.options ? field.options(formContext) : { items: [] },
+    [formContext],
+  );
+
+  /**
+   * Whether a field should be rendered.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {boolean} True if visible.
+   */
+  const isFieldVisible = useCallback(
+    (field: WidgetFieldConfig): boolean => {
+      if (!field.isVisible) return true;
+      return field.isVisible(preferences, formContext);
+    },
+    [preferences, formContext],
+  );
+
+  /**
+   * Whether a field should be disabled.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {boolean} True if disabled.
+   */
+  const isFieldDisabled = useCallback(
+    (field: WidgetFieldConfig): boolean => field.isDisabled?.(preferences, formContext) ?? false,
+    [preferences, formContext],
+  );
+
+  /**
+   * Render a text input field.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {JSX.Element | null} Field UI.
+   */
+  const renderTextField = useCallback(
+    (field: WidgetFieldConfig): JSX.Element | null => {
+      if (!isFieldVisible(field)) return null;
+
+      const disabled: boolean = isFieldDisabled(field);
+      const baseClass: string = styles.field;
+      const className: string =
+        field.dimWhenDisabled && disabled ? `${baseClass} ${styles.disabled}` : baseClass;
+
+      const inputClassName: string =
+        field.inputVariant === 'size' ? styles.sizeInput : styles.input;
+
+      return (
+        <div className={className}>
+          <label className={styles.label} htmlFor={field.controlId}>
+            {t(field.labelKey)}
           </label>
-          <select
-            id="surah-select"
-            className={styles.select}
-            value={preferences.selectedSurah}
-            onChange={(event) =>
-              setUserPreferences((prev) => ({
-                ...prev,
-                selectedSurah: Number(event.target.value),
-                selectedAyah: 1,
-              }))
-            }
-          >
-            {surahs.length === 0 && <option>{t('states.loadingChapters')}</option>}
-            {surahs.map((surah) => (
-              <option key={surah.id ?? ''} value={Number(surah.id)}>
-                {Number(surah.id)}. {surah.transliteratedName}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="ayah-select">
-            {t('fields.ayah')}
-          </label>
-          <div className={styles.rangeRow}>
-            <select
-              id="ayah-select"
-              className={styles.select}
-              value={preferences.selectedAyah}
-              onChange={(event) =>
-                setUserPreferences((prev) => ({
-                  ...prev,
-                  selectedAyah: Number(event.target.value),
-                }))
-              }
-            >
-              {verseOptions.length === 0 && <option>{t('states.loadingVerses')}</option>}
-              {verseOptions.map((ayah) => (
-                <option key={ayah} value={ayah}>
-                  {ayah}
-                </option>
-              ))}
-            </select>
-            {preferences.rangeEnabled && rangeSelectable && (
-              <>
-                <span className={styles.rangeSeparator}>-</span>
-                <select
-                  id="range-end-select"
-                  className={styles.select}
-                  value={preferences.rangeEnd}
-                  onChange={(event) =>
-                    setUserPreferences((prev) => ({
-                      ...prev,
-                      rangeEnd: Number(event.target.value),
-                    }))
-                  }
-                >
-                  {rangeOptions.map((ayah) => (
-                    <option key={ayah} value={ayah}>
-                      {ayah}
-                    </option>
-                  ))}
-                </select>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className={styles.checkboxRow}>
           <input
-            id="range-toggle"
-            type="checkbox"
-            checked={preferences.rangeEnabled}
-            disabled={!rangeSelectable}
-            onChange={(event) =>
-              setUserPreferences((prev) => ({
-                ...prev,
-                rangeEnabled: event.target.checked,
-                rangeEnd: prev.rangeEnd || rangeOptions[0] || prev.selectedAyah + 1,
-              }))
-            }
+            id={field.controlId}
+            className={inputClassName}
+            value={String(resolveFieldValue(field) ?? '')}
+            disabled={disabled}
+            onChange={(event) => updateFieldValue(field, event.target.value)}
           />
-          <label className={styles.checkboxLabel} htmlFor="range-toggle">
-            {t('checkboxes.verseRange')}
-          </label>
         </div>
-      </div>
+      );
+    },
+    [isFieldVisible, isFieldDisabled, t, resolveFieldValue, updateFieldValue],
+  );
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="theme-select">
-          {t('fields.theme')}
-        </label>
-        <select
-          id="theme-select"
-          className={styles.select}
-          value={preferences.theme}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              theme: event.target.value as Preferences['theme'],
-            }))
-          }
-        >
-          <option value="light">{t('theme.light')}</option>
-          <option value="dark">{t('theme.dark')}</option>
-          <option value="sepia">{t('theme.sepia')}</option>
-        </select>
-      </div>
+  /**
+   * Render a select control (without its wrapper/label).
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {JSX.Element} Select element.
+   */
+  const renderSelectControl = useCallback(
+    (field: WidgetFieldConfig): JSX.Element => {
+      const { items, valueOverride } = getSelectOptions(field);
+      const disabled: boolean = isFieldDisabled(field);
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="locale-select">
-          {t('fields.language')}
-        </label>
+      const rawValue: string | number | boolean | null = (valueOverride ??
+        resolveFieldValue(field)) as any;
+
+      const resolvedValue: string | number =
+        typeof rawValue === 'boolean' ? String(rawValue) : rawValue ?? '';
+
+      return (
         <select
-          id="locale-select"
+          id={field.controlId}
           className={styles.select}
-          value={preferences.locale}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              locale: event.target.value,
-            }))
-          }
+          value={resolvedValue}
+          disabled={disabled}
+          onChange={(event) => {
+            const parsed: string | number | boolean | null = field.parseValue
+              ? field.parseValue(event.target.value, formContext)
+              : event.target.value;
+            updateFieldValue(field, parsed);
+          }}
         >
-          {localeOptions.map((option) => (
-            <option key={option.code} value={option.code}>
-              {option.name}
+          {items.map((option) => (
+            <option
+              key={`${field.id}-${String(option.value)}`}
+              value={option.value}
+              disabled={option.disabled}
+            >
+              {option.labelKey ? t(option.labelKey) : option.label}
             </option>
           ))}
         </select>
-      </div>
+      );
+    },
+    [getSelectOptions, isFieldDisabled, resolveFieldValue, updateFieldValue, formContext, t],
+  );
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="show-arabic-toggle"
-          type="checkbox"
-          checked={preferences.showArabic}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              showArabic: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="show-arabic-toggle">
-          {t('checkboxes.showArabic')}
-        </label>
-      </div>
+  /**
+   * Render a select field (with wrapper/label).
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {JSX.Element | null} Field UI.
+   */
+  const renderSelectField = useCallback(
+    (field: WidgetFieldConfig): JSX.Element | null => {
+      if (!isFieldVisible(field)) return null;
 
-      <div className={`${styles.field} ${!preferences.showArabic ? styles.disabled : ''}`}>
-        <label className={styles.label} htmlFor="mushaf-select">
-          {t('fields.mushaf')}
-        </label>
-        <select
-          id="mushaf-select"
-          className={styles.select}
-          value={preferences.mushaf}
-          disabled={!preferences.showArabic}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              mushaf: event.target.value as MushafType,
-            }))
-          }
-        >
-          <option value="qpc">{t('mushaf.qpc')}</option>
-          <option value="kfgqpc_v1">{t('mushaf.kfgqpc_v1')}</option>
-          <option value="kfgqpc_v2">{t('mushaf.kfgqpc_v2')}</option>
-          <option value="indopak">{t('mushaf.indopak')}</option>
-          <option value="tajweed">{t('mushaf.tajweed')}</option>
-        </select>
-      </div>
+      const disabled: boolean = isFieldDisabled(field);
+      const baseClass: string = styles.field;
+      const className: string =
+        field.dimWhenDisabled && disabled ? `${baseClass} ${styles.disabled}` : baseClass;
 
+      return (
+        <div className={className}>
+          <label className={styles.label} htmlFor={field.controlId}>
+            {t(field.labelKey)}
+          </label>
+          {renderSelectControl(field)}
+        </div>
+      );
+    },
+    [isFieldVisible, isFieldDisabled, t, renderSelectControl],
+  );
+
+  /**
+   * Render a checkbox field.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {JSX.Element | null} Field UI.
+   */
+  const renderCheckboxField = useCallback(
+    (field: WidgetFieldConfig): JSX.Element | null => {
+      if (!isFieldVisible(field)) return null;
+
+      const disabled: boolean = isFieldDisabled(field);
+      const className: string =
+        field.dimWhenDisabled && disabled
+          ? `${styles.checkboxRow} ${styles.disabled}`
+          : styles.checkboxRow;
+
+      return (
+        <div className={className}>
+          <input
+            id={field.controlId}
+            type="checkbox"
+            checked={Boolean(resolveFieldValue(field))}
+            disabled={disabled}
+            onChange={(event) => updateFieldValue(field, event.target.checked)}
+          />
+          <label className={styles.checkboxLabel} htmlFor={field.controlId}>
+            {t(field.labelKey)}
+          </label>
+        </div>
+      );
+    },
+    [isFieldVisible, isFieldDisabled, resolveFieldValue, updateFieldValue, t],
+  );
+
+  /**
+   * Render a field based on its type.
+   *
+   * @param {WidgetFieldConfig} field - Field config.
+   * @returns {JSX.Element | null} Field UI.
+   */
+  const renderField = useCallback(
+    (field: WidgetFieldConfig): JSX.Element | null => {
+      switch (field.type) {
+        case 'checkbox':
+          return renderCheckboxField(field);
+        case 'select':
+          return renderSelectField(field);
+        default:
+          return renderTextField(field);
+      }
+    },
+    [renderCheckboxField, renderSelectField, renderTextField],
+  );
+
+  /**
+   * Render the translations block (search, chips, grouped checkboxes).
+   *
+   * @returns {JSX.Element} Translations UI.
+   */
+  const renderTranslationsBlock = useCallback((): JSX.Element => {
+    return (
       <div className={styles.field}>
         <label className={styles.label} htmlFor="translation-search">
           {t('fields.translations')}
         </label>
+
         <input
           id="translation-search"
           className={styles.searchInput}
@@ -308,6 +378,7 @@ const BuilderConfigForm = ({
           value={translationSearch}
           onChange={(event) => setTranslationSearch(event.target.value)}
         />
+
         <div className={styles.chips}>
           {preferences.translations.map((translation) => (
             <span className={styles.chip} key={translation.id}>
@@ -316,16 +387,19 @@ const BuilderConfigForm = ({
                 type="button"
                 onClick={() => toggleTranslation(translation)}
                 aria-label={t('translations.chipRemoveLabel')}
+                // eslint-disable-next-line i18next/no-literal-string
               >
-                ×
+                x
               </button>
             </span>
           ))}
         </div>
+
         <div className={styles.translationList}>
           {groupedTranslations.map(([language, translationsList]) => (
             <div className={styles.translationGroup} key={language}>
               <div className={styles.translationGroupTitle}>{language}</div>
+
               {translationsList.map((translation) => (
                 <label
                   className={styles.translationOption}
@@ -346,176 +420,106 @@ const BuilderConfigForm = ({
               ))}
             </div>
           ))}
+
           {!groupedTranslations.length && (
             <div className={styles.translationGroupTitle}>{t('states.noTranslations')}</div>
           )}
         </div>
       </div>
+    );
+  }, [
+    t,
+    translationSearch,
+    setTranslationSearch,
+    preferences.translations,
+    toggleTranslation,
+    groupedTranslations,
+    selectedTranslationIds,
+  ]);
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="reciter-select">
-          {t('fields.reciter')}
-        </label>
-        <select
-          id="reciter-select"
-          className={styles.select}
-          value={preferences.reciter ?? ''}
-          disabled={!reciters.length}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              reciter: event.target.value ? Number(event.target.value) : null,
-            }))
-          }
-        >
-          {!reciters.length && <option>{t('states.loadingReciters')}</option>}
-          {reciters.length > 0 && <option value="">{t('reciters.select')}</option>}
-          {reciters.map((reciter) => (
-            <option key={reciter.id} value={reciter.id}>
-              {reciter.name}
-              {reciter.style?.name ? ` (${reciter.style.name})` : ''}
-            </option>
-          ))}
-        </select>
-      </div>
+  /**
+   * Render the Surah/Ayah/Range block (special layout).
+   *
+   * @param {Extract<WidgetFormBlock, { kind: 'surahAyahRange' }>} block - Block config.
+   * @returns {JSX.Element} Block UI.
+   */
+  const renderSurahAyahRangeBlock = useCallback(
+    (block: Extract<WidgetFormBlock, { kind: 'surahAyahRange' }>): JSX.Element => {
+      const shouldShowRangeEnd: boolean =
+        !block.rangeField.isVisible || block.rangeField.isVisible(preferences, formContext);
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="audio-toggle"
-          type="checkbox"
-          checked={preferences.enableAudio}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              enableAudio: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="audio-toggle">
-          {t('checkboxes.audio')}
-        </label>
-      </div>
+      return (
+        <div className={styles.twoColumnGrid}>
+          {renderField(block.surahField)}
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="wbw-toggle"
-          type="checkbox"
-          checked={preferences.enableWbwTranslation}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              enableWbwTranslation: event.target.checked,
-            }))
-          }
-          disabled={!preferences.showArabic}
-        />
-        <label className={styles.checkboxLabel} htmlFor="wbw-toggle">
-          {t('checkboxes.wordByWord')}
-        </label>
-      </div>
+          <div className={styles.field}>
+            <label className={styles.label} htmlFor={block.ayahField.controlId}>
+              {t(block.ayahField.labelKey)}
+            </label>
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="translator-toggle"
-          type="checkbox"
-          checked={preferences.showTranslatorName}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              showTranslatorName: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="translator-toggle">
-          {t('checkboxes.translator')}
-        </label>
-      </div>
+            <div className={styles.rangeRow}>
+              {renderSelectControl(block.ayahField)}
+              {shouldShowRangeEnd && (
+                <>
+                  <span className={styles.rangeSeparator}>-</span>
+                  {renderSelectControl(block.rangeField)}
+                </>
+              )}
+            </div>
+          </div>
 
-      <div className={styles.checkboxRow}>
-        <input
-          id="tafsirs-toggle"
-          type="checkbox"
-          checked={preferences.showTafsirs}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              showTafsirs: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="tafsirs-toggle">
-          {t('checkboxes.tafsirs')}
-        </label>
-      </div>
-
-      <div className={styles.checkboxRow}>
-        <input
-          id="reflections-toggle"
-          type="checkbox"
-          checked={preferences.showReflections}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              showReflections: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="reflections-toggle">
-          {t('checkboxes.reflections')}
-        </label>
-      </div>
-
-      <div className={styles.checkboxRow}>
-        <input
-          id="answers-toggle"
-          type="checkbox"
-          checked={preferences.showAnswers}
-          onChange={(event) =>
-            setUserPreferences((prev) => ({
-              ...prev,
-              showAnswers: event.target.checked,
-            }))
-          }
-        />
-        <label className={styles.checkboxLabel} htmlFor="answers-toggle">
-          {t('checkboxes.answers')}
-        </label>
-      </div>
-
-      <div className={styles.twoColumnGrid}>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="custom-width">
-            {t('fields.width')}
-          </label>
-          <input
-            id="custom-width"
-            className={styles.sizeInput}
-            value={preferences.customSize.width}
-            onChange={(event) =>
-              setUserPreferences((prev) => ({
-                ...prev,
-                customSize: { ...prev.customSize, width: event.target.value },
-              }))
-            }
-          />
+          {renderField(block.rangeToggleField)}
         </div>
-        <div className={styles.field}>
-          <label className={styles.label} htmlFor="custom-height">
-            {t('fields.height')}
-          </label>
-          <input
-            id="custom-height"
-            className={styles.sizeInput}
-            value={preferences.customSize.height}
-            onChange={(event) =>
-              setUserPreferences((prev) => ({
-                ...prev,
-                customSize: { ...prev.customSize, height: event.target.value },
-              }))
-            }
-          />
-        </div>
-      </div>
+      );
+    },
+    [preferences, formContext, renderField, renderSelectControl, t],
+  );
+
+  /**
+   * Render a layout block based on its kind.
+   *
+   * @param {WidgetFormBlock} block - Block config.
+   * @param {number} index - Index used for React keys.
+   * @returns {JSX.Element | null} Rendered block.
+   */
+  const renderBlock = useCallback(
+    (block: WidgetFormBlock, index: number): JSX.Element | null => {
+      switch (block.kind) {
+        case 'twoColumn':
+          return (
+            <div className={styles.twoColumnGrid} key={`block-${index}`}>
+              {block.fields.map((field) => (
+                <React.Fragment key={field.id}>{renderField(field)}</React.Fragment>
+              ))}
+            </div>
+          );
+
+        case 'translations':
+          return (
+            <React.Fragment key={`block-${index}`}>{renderTranslationsBlock()}</React.Fragment>
+          );
+
+        case 'surahAyahRange':
+          return (
+            <React.Fragment key={`block-${index}`}>
+              {renderSurahAyahRangeBlock(block)}
+            </React.Fragment>
+          );
+
+        case 'field':
+          return <React.Fragment key={`block-${index}`}>{renderField(block.field)}</React.Fragment>;
+
+        default:
+          return null;
+      }
+    },
+    [renderField, renderTranslationsBlock, renderSurahAyahRangeBlock],
+  );
+
+  return (
+    <section className={styles.panel}>
+      <h2 className={styles.panelTitle}>{t('sections.configuration')}</h2>
+      {WIDGET_FORM_BLOCKS.map((block: WidgetFormBlock, index: number) => renderBlock(block, index))}
     </section>
   );
 };
