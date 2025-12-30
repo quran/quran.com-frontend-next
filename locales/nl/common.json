@@ -244,6 +244,10 @@
   },
   "fundraising": {
     "description": "Met maandelijkse donaties kunnen we Quran.com verbeteren en onze activiteiten voortzetten. Zo hoeven we ons minder op fondsenwerving te richten en meer op het creëren van impact.",
+    "donation-campaign": {
+      "cta": "Doneer vandaag nog",
+      "text": "Word supporter"
+    },
     "title": "Word een maandelijkse donateur"
   },
   "get-started": "Aan de slag",
