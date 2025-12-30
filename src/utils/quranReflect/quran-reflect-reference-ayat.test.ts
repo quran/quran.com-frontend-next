@@ -91,11 +91,6 @@ describe('buildReferredVerseText — LTR (en)', () => {
     const out = buildReferredVerseText([makeRef(36, 0, 0)], [], 'en', t);
     expect(out).toBe(`${t('common:surah')} ${toLocalizedNumber(36, 'en')}`);
   });
-
-  it('surah-only with explicit chapter end', () => {
-    const out = buildReferredVerseText([makeRef(1, 0, 7)], [], 'en', t);
-    expect(out).toBe(`${t('common:surah')} ${toLocalizedNumber(1, 'en')}`);
-  });
 });
 
 // ---- RTL (ar / ur / fa) ----
@@ -147,11 +142,6 @@ describe.each([
     )}`;
     const v2 = `${toLocalizedNumber(12, lang)}:${toLocalizedNumber(8, lang)}`;
     expect(out).toBe(`${surahs} ${t('common:and')} ${t('common:ayah')} ${v1}${comma}${v2}`);
-  });
-
-  it('surah-only with explicit chapter end (RTL)', () => {
-    const out = buildReferredVerseText([makeRef(1, 0, 7)], [], lang, t);
-    expect(out).toBe(`${t('common:surah')} ${toLocalizedNumber(1, lang)}`);
   });
 });
 

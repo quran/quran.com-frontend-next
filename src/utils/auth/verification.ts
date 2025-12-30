@@ -1,6 +1,9 @@
 import { completeSignup, requestVerificationCode } from './api';
 import { makeUserProfileUrl } from './apiPaths';
 
+import { persistCurrentSettings } from '@/redux/slices/defaultSettings';
+import store from '@/redux/store';
+
 /**
  * Handles the verification code submission process
  *

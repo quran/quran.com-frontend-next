@@ -60,7 +60,7 @@
     "play": "تشغيل الصوت",
     "playback-normal": "طبيعي",
     "playback-speed": "سرعة التشغيل",
-    "playback-speed-unit": "x",
+    "playback-speed-unit": "إغلاق",
     "player": {
       "close-audio-player": "أغلق مشغل الصوت",
       "currently-playing": "أنت الآن تستمع إلى",
@@ -411,7 +411,7 @@
   "sitemap": "خريطة الموقع",
   "sort": {
     "ascending": "تصاعدي",
-    "by": "ترتيب",
+    "by": "ترتيب حسب",
     "descending": "تنازلي"
   },
   "style": "النمط",

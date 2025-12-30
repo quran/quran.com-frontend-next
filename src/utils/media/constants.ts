@@ -5,6 +5,7 @@ import defaultAudio from './defaultAudio.json';
 import defaultChaptersData from './defaultChaptersData.json';
 import defaultVerses from './defaultVerses.json';
 
+import Language from '@/types/Language';
 import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
 import PreviewMode from '@/types/Media/PreviewMode';
@@ -38,7 +39,7 @@ export const MINIMUM_BORDER = 0;
 export const MAXIMUM_BORDER = 10;
 export const DEFAULT_PREVIEW_MODE = PreviewMode.DISABLED;
 
-export function getDefaultVerseKeys(lang = 'en') {
+export function getDefaultVerseKeys(lang = Language.EN) {
   const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
   return keys.map((chapterVersesKey) => ({
     id: chapterVersesKey,

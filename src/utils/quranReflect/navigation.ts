@@ -1,35 +1,7 @@
-import { logErrorToSentry } from '@/lib/sentry';
 import Room, { RoomType } from '@/types/QuranReflect/Room';
 import stringify from '@/utils/qs-stringify';
 
 export const API_HOST = process.env.NEXT_PUBLIC_QURAN_REFLECT_URL;
-
-const stripTrailingSlash = (value: string) => value.replace(/\/+$/, '');
-
-const buildSubdomainUrl = (baseUrl: string, subdomain: string) => {
-  const sanitizedBase = stripTrailingSlash(baseUrl || '');
-  const trimmedSubdomain = (subdomain || '').trim();
-
-  if (!sanitizedBase) return '';
-  if (!trimmedSubdomain) return sanitizedBase;
-
-  try {
-    const parsedUrl = new URL(sanitizedBase);
-    const portSegment = parsedUrl.port ? `:${parsedUrl.port}` : '';
-    const hostWithSubdomain = `${trimmedSubdomain}.${parsedUrl.hostname}${portSegment}`;
-    const pathSegment = parsedUrl.pathname === '/' ? '' : parsedUrl.pathname;
-    return `${parsedUrl.protocol}//${hostWithSubdomain}${pathSegment}${parsedUrl.search}${parsedUrl.hash}`;
-  } catch (error) {
-    logErrorToSentry(error as Error, {
-      metadata: { baseUrl, subdomain },
-      transactionName: 'getReflectionGroupLink',
-    });
-    const protocolMatch = sanitizedBase.match(/^(https?:\/\/)/i);
-    const protocol = protocolMatch?.[1] ?? 'https://';
-    const hostWithoutProtocol = sanitizedBase.replace(/^(https?:\/\/)/i, '');
-    return `${protocol}${trimmedSubdomain}.${hostWithoutProtocol}`;
-  }
-};
 
 const getQuranReflectFilteredVerseUrl = (chapterId: string, verseNumber: string, params) => {
   return `${API_HOST}?filters=${chapterId}:${verseNumber}&${stringify(params)}`;
@@ -63,13 +35,11 @@ export const getQRNavigationUrl = () => `${API_HOST}`;
  * @returns {string} - The link to the reflection group or page.
  */
 export const getReflectionGroupLink = (groupOrPage: Room) => {
-  if (!API_HOST) return '';
-
+  // if it's a page, return the subdomain link
   if (groupOrPage?.roomType === RoomType.PAGE) {
-    return buildSubdomainUrl(API_HOST, groupOrPage?.subdomain ?? '');
+    return `${API_HOST}/${groupOrPage?.subdomain || ''}`;
   }
 
-  const sanitizedBase = stripTrailingSlash(API_HOST);
-  const groupPath = groupOrPage?.url ? `/${groupOrPage.url}` : '';
-  return `${sanitizedBase}/groups${groupPath}`;
+  // if it's a group, return the groups link
+  return `${API_HOST}/groups/${groupOrPage?.url || ''}`;
 };

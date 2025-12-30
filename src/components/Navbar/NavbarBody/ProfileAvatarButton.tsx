@@ -134,7 +134,11 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
             {t(menu.translationKey)}
           </PopoverMenu.Item>
         ))}
-        <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
+        <PopoverMenu.Item
+          onClick={onLogoutClicked}
+          icon={<LogoutIcon />}
+          dataTestId="profile-menu-item-logout"
+        >
           {t('logout')}
         </PopoverMenu.Item>
       </PopoverMenu>
