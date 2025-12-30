@@ -36,7 +36,6 @@ test.describe('Notes - Guest Users', () => {
         await notesButton.click();
 
         // Verify user is redirected to login page
-        await page.waitForURL(loginPageRegex);
         await expect(page).toHaveURL(loginPageRegex);
       },
     );
@@ -62,7 +61,6 @@ test.describe('Notes - Guest Users', () => {
         await notesMenuItem.click();
 
         // Verify user is redirected to login page
-        await page.waitForURL(loginPageRegex);
         await expect(page).toHaveURL(loginPageRegex);
       },
     );

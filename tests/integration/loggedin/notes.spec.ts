@@ -1,3 +1,35 @@
+/**
+ * Notes Backend Simulation for Integration Tests
+ *
+ * This test suite simulates a real notes backend environment using Playwright's request interception.
+ * The simulation maintains in-memory state that persists across mock function calls within each test,
+ * allowing for realistic testing of CRUD operations on notes.
+ *
+ * STATE MANAGEMENT APPROACH:
+ * - Uses a module-level `notes` array to simulate persistent backend storage
+ * - Each test starts with a fresh state via `beforeEach` hook
+ * - Mock functions directly mutate this state to simulate real backend behavior
+ * - State changes happen within route handlers to reflect immediate persistence
+ *
+ * SIMULATED API ENDPOINTS:
+ * - GET /notes/count-within-range* - Returns note count for verse ranges
+ * - GET /notes/by-verse/:verseKey - Returns all notes for a specific verse
+ * - DELETE /notes/:noteId - Deletes a note and returns the deleted note
+ * - PATCH /notes/:noteId - Updates a note (edit/publish operations)
+ * - POST /notes - Creates a new note
+ *
+ * STATE MUTATION PATTERN:
+ * Mock functions receive parameters for the intended operation, then:
+ * 1. Mutate the in-memory `notes` array to reflect the change
+ * 2. Return a route handler that responds with appropriate HTTP status/data
+ * This ensures the next API call sees the updated state, simulating real persistence.
+ *
+ * TEST ISOLATION:
+ * - Each test gets a clean state via beforeEach reset
+ * - Mock functions can be called multiple times within a test to simulate sequences
+ * - State mutations are explicit but happen inside mocks for realistic simulation
+ */
+
 /* eslint-disable no-await-in-loop, no-restricted-syntax, react-func/max-lines-per-function, max-lines */
 
 import { test, expect } from '@playwright/test';
@@ -5,6 +37,7 @@ import type { Page } from '@playwright/test';
 
 import { switchToTranslationMode } from '@/tests/helpers/mode-switching';
 import Homepage from '@/tests/POM/home-page';
+import { AttachedEntity, AttachedEntityType, Note } from '@/types/auth/Note';
 
 let homePage: Homepage;
 
@@ -18,9 +51,13 @@ const TEST_VERSE_KEY = `${ayah.surah}:${ayah.ayah}`;
 const UPDATED_NOTE_TEXT = 'This is an updated test private note';
 
 /**
- * Open the notes modal from translation view by clicking the notes action button
+ * Helper function to open the notes modal from translation view.
+ * Clicks the notes action button on a verse and verifies the modal opens.
  */
-const openNotesModalFromTranslationView = async (page: Page, verseKey: string = TEST_VERSE_KEY) => {
+const openNotesModalFromTranslationView = async (
+  page: Page,
+  verseKey: string = TEST_VERSE_KEY,
+): Promise<void> => {
   const verse = page.getByTestId(`verse-${verseKey}`);
   const notesButton = verse.getByTestId('notes-action-button');
   await expect(notesButton).toBeVisible();
@@ -32,7 +69,15 @@ const openNotesModalFromTranslationView = async (page: Page, verseKey: string = 
   await expect(modal).toBeVisible();
 };
 
-const mockNotes = async (page: Page, count?: number) => {
+/**
+ * MOCK NOTES STATE INITIALIZATION
+ * Sets up the initial notes state for a test and mocks the API endpoints.
+ *
+ * Simulates: GET /notes/count-within-range* and GET /notes/by-verse/:verseKey
+ * State Effect: Replaces the module-level notes array with generated test data
+ * Why: Tests need predictable initial state, and this simulates loading notes from backend
+ */
+const mockNotes = async (page: Page, count?: number): Promise<void> => {
   notes = generateNotes(TEST_VERSE_KEY).slice(0, count ?? notes.length);
 
   await page.route('**/notes/count-within-range*', async (route) => {
@@ -52,16 +97,33 @@ const mockNotes = async (page: Page, count?: number) => {
   });
 };
 
-const generateAttachedEntity = (id: string) => {
+/**
+ * Generates a mock attached entity object representing a QuranReflect reflection post.
+ * Used to simulate entities that can be attached to notes during publishing operations.
+ *
+ * @returns {object} An attached entity object with reflection type and current timestamps
+ */
+const generateAttachedEntity = (id: string): AttachedEntity => {
   return {
     id,
-    type: 'reflection',
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    type: AttachedEntityType.REFLECTION,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 };
 
-const generateNote = (id: string, body: string, verseKey: string, attachedEntities?: string[]) => {
+/**
+ * Generates a mock note object for testing purposes with realistic properties.
+ * Creates notes with randomized timestamps and optional attached entities.
+ *
+ * @returns {Note} A complete note object with all required properties for testing
+ */
+const generateNote = (
+  id: string,
+  body: string,
+  verseKey: string,
+  attachedEntities?: string[],
+): Note => {
   const randomDate = () => new Date(new Date().getTime() + Math.random() * 10000);
 
   return {
@@ -70,14 +132,20 @@ const generateNote = (id: string, body: string, verseKey: string, attachedEntiti
     body,
     verseKey,
     ranges: [`${verseKey}-${verseKey}`],
-    createdAt: randomDate().toISOString(),
-    updatedAt: randomDate().toISOString(),
+    createdAt: randomDate(),
+    updatedAt: randomDate(),
     saveToQR: attachedEntities?.length > 0,
     attachedEntities: attachedEntities?.map(generateAttachedEntity),
   };
 };
 
-const generateNotes = (verseKey: string) => {
+/**
+ * Generates an array of mock notes for testing, including a mix of private and published notes.
+ * Creates three test notes: two private notes and one note with attached QuranReflect entities.
+ *
+ * @returns {Note[]} Array of three note objects with varying properties for comprehensive testing
+ */
+const generateNotes = (verseKey: string): Note[] => {
   return [
     generateNote('note-1', `note-1 Note body`, verseKey),
     generateNote('note-2', `note-2 Note body`, verseKey),
@@ -88,7 +156,24 @@ const generateNotes = (verseKey: string) => {
   ];
 };
 
-const mockDeleteNote = async (page: Page, noteId: string) => {
+/**
+ * SHARED TEST STATE
+ * Module-level array simulating persistent backend storage for notes.
+ * This state is shared across all mock functions within a test to simulate
+ * real backend persistence where changes are immediately visible to subsequent requests.
+ *
+ * Reset in beforeEach to ensure test isolation.
+ */
+let notes = generateNotes(TEST_VERSE_KEY);
+
+/**
+ * MOCK NOTE DELETION
+ * Simulates: DELETE /notes/:noteId
+ * State Effect: Removes the note from the module-level notes array
+ * Why: Simulates immediate deletion from backend storage
+ * @returns {Promise} The route handler for the delete request (note is returned in response)
+ */
+const mockDeleteNote = async (page: Page, noteId: string): Promise<void> => {
   const note = notes.find((n) => n.id === noteId);
   if (!note) throw new Error(`Note with id ${noteId} not found`);
 
@@ -102,7 +187,14 @@ const mockDeleteNote = async (page: Page, noteId: string) => {
   });
 };
 
-const mockEditNote = async (page: Page, noteId: string, noteText: string) => {
+/**
+ * MOCK NOTE EDITING
+ * Simulates: PATCH /notes/:noteId (for editing note content)
+ * State Effect: Updates the note's body in the module-level notes array
+ * Why: Simulates immediate persistence of note edits to backend storage
+ * @returns {Promise} The route handler for the edit request (updated note returned in response)
+ */
+const mockEditNote = async (page: Page, noteId: string, noteText: string): Promise<void> => {
   const note = notes.find((n) => n.id === noteId);
   if (!note) throw new Error(`Note with id ${noteId} not found`);
 
@@ -117,7 +209,14 @@ const mockEditNote = async (page: Page, noteId: string, noteText: string) => {
   });
 };
 
-const mockPublishNote = async (page: Page, noteId: string, attachId: string) => {
+/**
+ * MOCK NOTE PUBLISHING
+ * Simulates: PATCH /notes/:noteId (for publishing note to QuranReflect)
+ * State Effect: Adds attached entity to the note's attachedEntities array
+ * Why: Simulates linking note to a published reflection post in backend storage
+ * @returns {Promise} The route handler for the publish request (updated note returned in response)
+ */
+const mockPublishNote = async (page: Page, noteId: string, attachId: string): Promise<void> => {
   const note = notes.find((n) => n.id === noteId);
   if (!note) throw new Error(`Note with id ${noteId} not found`);
 
@@ -141,6 +240,13 @@ const mockPublishNote = async (page: Page, noteId: string, attachId: string) => 
   });
 };
 
+/**
+ * MOCK NOTE CREATION
+ * Simulates: POST /notes
+ * State Effect: Adds new note to the beginning of the module-level notes array
+ * Why: Simulates immediate creation and storage of new notes in backend
+ * @returns {Promise} The route handler for the create request (created note returned in response)
+ */
 const mockAddNote = async (
   page: Page,
   {
@@ -150,7 +256,7 @@ const mockAddNote = async (
     noteId: string;
     noteText: string;
   },
-) => {
+): Promise<void> => {
   const note = generateNote(noteId, noteText, TEST_VERSE_KEY);
 
   return page.route(`**/notes`, async (route) => {
@@ -164,12 +270,14 @@ const mockAddNote = async (
   });
 };
 
-let notes = generateNotes(TEST_VERSE_KEY);
-
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 
-  // Reset notes to default state - this will be overridden by mockNotes calls in tests
+  /**
+   * TEST ISOLATION: Reset shared state before each test
+   * Ensures each test starts with a clean, predictable notes state.
+   * Individual tests can override this with mockNotes() calls for specific scenarios.
+   */
   notes = generateNotes(TEST_VERSE_KEY);
 });
 
@@ -546,8 +654,6 @@ test.describe('Notes - Authenticated Users', () => {
         await expect(myNotesModal).toBeVisible();
         await expect(noteQrViewButton).toBeVisible();
         const parentLink = noteQrViewButton.locator('..');
-
-        await page.waitForTimeout(10000);
 
         await expect(parentLink).toHaveAttribute(
           'href',
