@@ -3,6 +3,8 @@
 @use 'src/styles/theme';
 @use 'sass:math';
 
+$sections-menu-height: 2.25rem;
+$progress-bar-height: var(--spacing-micro);
 $navbar-height: var(--navbar-container-height);
 $banner-height: var(--banner-height);
 
@@ -45,7 +47,7 @@ $isNavbarVisible: var(--isNavbarVisible);
       // TODO: we should add the banner height here if it's shown
       // transform: translateX(-100%) translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateX(-100%) translateY(calc($top-menu-height-home));
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         // transform: translateX(100%) translateY(calc($top-menu-height-home + var(--banner-height)));
         transform: translateX(100%) translateY(calc($top-menu-height-home));
       }
@@ -68,7 +70,7 @@ $isNavbarVisible: var(--isNavbarVisible);
       // TODO: we should add the banner height here if it's shown
       // transform: translateX(-100%) translateY(calc($top-menu-height + var(--banner-height)));
       transform: translateX(-100%) translateY($top-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         // transform: translateX(100%) translateY(calc($top-menu-height + var(--banner-height)));
         transform: translateX(100%) translateY($top-menu-height);
       }
@@ -173,7 +175,7 @@ $isNavbarVisible: var(--isNavbarVisible);
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height + var(--banner-height)));
       transform: translateY($top-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         // transform: translateY(calc($top-menu-height + var(--banner-height)));
         transform: translateY($top-menu-height);
       }
