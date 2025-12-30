@@ -2,7 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useHotkeys } from 'react-hotkeys-hook';
 
 import styles from './LanguageContainer.module.scss';
 
@@ -26,8 +25,6 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
   const handleLanguageChange = async (newLocale: string) => {
     await onLanguageChange(newLocale, onBack);
   };
-
-  useHotkeys('Escape', () => {}, { enabled: isChangingLanguage });
 
   return (
     <div
