@@ -1,6 +1,9 @@
 import { RootState } from '../RootState';
 import SliceName from '../types/SliceName';
 
+// NOTE: This key must stay in sync with `persistConfig.key` in `store.ts`.
+// `redux-persist` prefixes the key with `persist:`, so if `persistConfig.key`
+// changes from 'root', this constant must be updated accordingly.
 const PERSIST_KEY = 'persist:root';
 
 /**
@@ -28,6 +31,9 @@ const getPersistedTheme = (): RootState[SliceName.THEME] | null => {
 
     return JSON.parse(themeState);
   } catch (error) {
+    // Log the error to aid diagnosing issues with localStorage access or corrupted persisted state.
+    // eslint-disable-next-line no-console -- Console logging is acceptable here for debugging persistence issues.
+    console.error('Failed to get persisted theme from localStorage', error);
     return null;
   }
 };

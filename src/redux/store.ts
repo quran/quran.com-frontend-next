@@ -117,16 +117,20 @@ const getStore = (
   detectedLanguage?: string,
   detectedCountry?: string,
 ) => {
-  const initialState =
+  const baseInitialState =
     preloadedState ||
     getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry);
 
   // Preserve persisted theme synchronously to prevent flash during language switching.
   // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
+  let initialState = baseInitialState;
   if (typeof window !== 'undefined') {
     const persistedTheme = getPersistedTheme();
     if (persistedTheme) {
-      initialState[SliceName.THEME] = persistedTheme;
+      initialState = {
+        ...baseInitialState,
+        [SliceName.THEME]: persistedTheme,
+      };
     }
   }
 
