@@ -1,0 +1,16 @@
+.container {
+  padding: 0;
+}
+
+.arabicVerseContainer {
+  margin: var(--spacing-xlarge-px) 0;
+  padding: var(--spacing-medium);
+  border-bottom: 1px solid var(--color-borders-hairline);
+}
+
+.translationsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  padding: var(--spacing-medium);
+}

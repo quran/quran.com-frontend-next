@@ -1,13 +1,51 @@
+$study-mode-modal-width: 1310px;
+$study-mode-modal-content-width: 1230px;
+
 .container {
-  padding: var(--spacing-large);
-  min-height: 300px;
+  padding: 0;
+  min-width: $study-mode-modal-width;
 }
 
 .contentModal {
-  max-width: 800px;
-  width: 100%;
+  padding: var(--spacing-xlarge-px);
+  min-width: $study-mode-modal-content-width;
 }
 
 .innerContent {
   padding: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  width: 100%;
+  margin-block-end: var(--spacing-xlarge-px);
+}
+
+.selectionWrapper {
+  display: flex;
+}
+
+.navButton {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: var(--spacing-small-px);
+    height: var(--spacing-small-px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.prevButton {
+  svg {
+    transform: scaleX(-1);
+  }
 }
