@@ -45,6 +45,11 @@
     },
     "title": "Browse All Apps"
   },
+  "cta": {
+    "app-store": "Download on the App Store",
+    "google-play": "Get it on Google Play",
+    "visit": "Visit"
+  },
   "featured": {
     "apps": {
       "qariah": {
