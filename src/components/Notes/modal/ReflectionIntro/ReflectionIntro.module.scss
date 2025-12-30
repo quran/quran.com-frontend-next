@@ -18,9 +18,17 @@
 .learnMoreButton {
   all: unset;
   color: var(--color-text-link-new);
+  font: inherit;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-small);
   cursor: pointer;
+}
+
+.seeLessButton:focus-visible,
+.learnMoreButton:focus-visible {
+  outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+  outline-offset: var(--spacing-micro-px);
+  border-radius: var(--border-radius-default);
 }
 
 .contentContainer {

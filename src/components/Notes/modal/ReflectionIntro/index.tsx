@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
@@ -7,23 +7,13 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReflectionIntro.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { logEvent } from '@/utils/eventLogger';
+import useToggle from '@/hooks/useToggle';
 
 const ReflectionIntro = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('notes');
-
-  const toggleOpen = () => {
-    setIsOpen((prev) => {
-      if (prev) {
-        logEvent('new_note_reflection_intro_closed');
-        return false;
-      }
-
-      logEvent('new_note_reflection_intro_opened');
-      return true;
-    });
-  };
+  const [isOpen, toggleOpen] = useToggle({
+    eventName: 'new_note_reflection_intro',
+  });
 
   return (
     <div className={styles.container} data-testid="reflection-intro">
@@ -33,13 +23,19 @@ const ReflectionIntro = () => {
           type="button"
           onClick={toggleOpen}
           className={styles.learnMoreButton}
+          aria-expanded={isOpen}
+          aria-controls="reflection-intro-content"
           data-testid="ri-toggle"
         >
           {isOpen ? t('new-note-reflc-intro.see-less') : t('new-note-reflc-intro.learn-more')}
         </button>
       </div>
       {isOpen && (
-        <div className={styles.contentContainer} data-testid="ri-content">
+        <div
+          id="reflection-intro-content"
+          className={styles.contentContainer}
+          data-testid="ri-content"
+        >
           <div className={styles.sectionContainer}>
             <div className={styles.sectionHeader}>
               {t('new-note-reflc-intro.what-is-reflc.title')}
@@ -100,7 +96,7 @@ const ReflectionIntro = () => {
             <div className={styles.sectionHeader}>
               {t('new-note-reflc-intro.reflc-prompts.title')}
             </div>
-            <div className={classNames(styles.subSectionHeader)}>
+            <div className={styles.subSectionHeader}>
               {t('new-note-reflc-intro.reflc-prompts.personal.title')}
             </div>
             <ul className={styles.bulletList}>
@@ -109,7 +105,7 @@ const ReflectionIntro = () => {
                 components={{ li: <li /> }}
               />
             </ul>
-            <div className={classNames(styles.subSectionHeader)}>
+            <div className={styles.subSectionHeader}>
               {t('new-note-reflc-intro.reflc-prompts.deeper.title')}
             </div>
             <ul className={styles.bulletList}>
@@ -123,6 +119,8 @@ const ReflectionIntro = () => {
             type="button"
             onClick={toggleOpen}
             className={classNames(styles.learnMoreButton, styles.seeLessButton)}
+            aria-expanded={isOpen}
+            aria-controls="reflection-intro-content"
           >
             {t('new-note-reflc-intro.see-less')}
           </button>
