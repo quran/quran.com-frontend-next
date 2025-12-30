@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
@@ -23,11 +24,9 @@ import {
 import { isValidHizbId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 interface HizbPageProps {
   hizbVerses?: VersesResponse;
-  chaptersData: ChaptersData;
 }
 
 const HizbPage: NextPage<HizbPageProps> = ({ hizbVerses }) => {

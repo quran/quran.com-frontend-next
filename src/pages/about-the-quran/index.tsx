@@ -3,7 +3,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../contentPage.module.scss';
@@ -17,7 +17,6 @@ import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAboutTheQuranImageUrl } from '@/lib/og';
-import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -331,16 +330,6 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
       </PageContainer>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
 };
 
 export default AboutQuranPage;

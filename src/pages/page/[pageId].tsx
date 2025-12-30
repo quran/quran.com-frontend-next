@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { getPagesLookup, getPageVerses } from '@/api';
+import { getPageVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';

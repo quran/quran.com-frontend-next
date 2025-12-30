@@ -26,7 +26,7 @@ import {
   UpdateQuranReadingProgramActivityDayBody,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
-import { Course } from '@/types/auth/Course';
+import { Course, CoursesResponse } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
@@ -94,9 +94,11 @@ import {
   makeUserProfileUrl,
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
+  makeTranslationFeedbackUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
+import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
@@ -224,8 +226,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl());
+export const getUserProfile = async (): Promise<UserProfile> => {
+  return privateFetcher<UserProfile>(makeUserProfileUrl());
+};
 
 export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
   privateFetcher(makeUserFeatureFlagsUrl());
@@ -471,9 +474,18 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
-export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+type EnrollUserParams = {
+  courseId: string;
+  enrollmentMethod: EnrollmentMethod;
+};
+
+export const enrollUser = async ({
+  courseId,
+  enrollmentMethod,
+}: EnrollUserParams): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
+    enrollmentMethod,
   });
 
 export const postCourseFeedback = async ({
@@ -490,7 +502,32 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+export const getCourses = async (params?: {
+  myCourses?: boolean;
+  languages?: string[];
+}): Promise<Course[]> => privateFetcher(makeGetCoursesUrl(params));
+
+/**
+ * Fetch courses with language filter, retrying without languages param for backward compatibility.
+ * If the API doesn't support the languages query param, it falls back to fetching without it.
+ *
+ * @param {string[]} languages - Array of ISO language codes
+ * @returns {Promise<Course[]>} - Array of courses or empty array on error
+ */
+export const fetchCoursesWithLanguages = async (languages: string[]): Promise<Course[]> => {
+  try {
+    const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false, languages }));
+    return res?.data || [];
+  } catch {
+    // Retry without languages param (old BE does not support extra params)
+    try {
+      const res = await fetcher<CoursesResponse>(makeGetCoursesUrl({ myCourses: false }));
+      return res?.data || [];
+    } catch {
+      return [];
+    }
+  }
+};
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
@@ -642,6 +679,15 @@ export const getQuranProgramWeek = async (
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
+};
+
+export const submitTranslationFeedback = async (params: {
+  translationId: number;
+  surahNumber: number;
+  ayahNumber: number;
+  feedback: string;
+}): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
+  return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
 const shouldRefreshToken = (error) => {

@@ -47,6 +47,7 @@ const LearningPlanBanner: React.FC<Props> = ({ language }) => {
 
   return (
     <aside
+      data-testid="learning-plan-banner"
       className={styles.bannerWrapper}
       aria-label={t('learning-plan-banner.banner-wrapper-aria-label')}
       aria-live="polite"

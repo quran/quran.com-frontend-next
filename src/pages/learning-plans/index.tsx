@@ -4,11 +4,16 @@ import useTranslation from 'next-translate/useTranslation';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
+import { Course } from '@/types/auth/Course';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
-const LearningPlansPage: NextPage = () => {
+type LearningPlansPageProps = {
+  courses: Course[];
+};
+
+const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ courses }) => {
   const { t, lang } = useTranslation('learn');
 
   return (
@@ -24,7 +29,7 @@ const LearningPlansPage: NextPage = () => {
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout />
+      <CoursesPageLayout initialCourses={courses} />
     </>
   );
 };

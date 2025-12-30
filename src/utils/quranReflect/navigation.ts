@@ -69,7 +69,6 @@ export const getReflectionGroupLink = (groupOrPage: Room) => {
     return buildSubdomainUrl(API_HOST, groupOrPage?.subdomain ?? '');
   }
 
-  const sanitizedBase = stripTrailingSlash(API_HOST);
-  const groupPath = groupOrPage?.url ? `/${groupOrPage.url}` : '';
-  return `${sanitizedBase}/groups${groupPath}`;
+  // if it's a group, return the groups link
+  return `${API_HOST}/groups/${groupOrPage?.url || ''}`;
 };

@@ -56,6 +56,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -157,7 +159,16 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+};
+
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
+  const { languages, ...restParams } = params || {};
+  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
+  return makeUrl('courses', queryParams);
+};
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
@@ -296,3 +307,11 @@ export const makeEnrollUserInQuranProgramUrl = (): string =>
 
 export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
+
+/**
+ * Compose the URL for the translation feedback API endpoint.
+ * This endpoint is used for submitting user feedback about translations.
+ *
+ * @returns {string} The complete URL for the translation feedback API
+ */
+export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');

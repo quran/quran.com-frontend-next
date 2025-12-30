@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import { memo, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,18 +12,20 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
-import LanguageSelector from '@/components/Navbar/LanguageSelector';
+import Banner from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
-  setIsSearchDrawerOpen,
-  setIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
+  selectIsNavigationDrawerOpen,
 } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
@@ -49,6 +52,10 @@ const logDrawerOpenEvent = (drawerName: string) => {
   logEvent(`drawer_${drawerName}_open`);
 };
 
+interface Props {
+  isBannerVisible: boolean;
+}
+
 const QURAN_READER_ROUTES = new Set([
   '/[chapterId]',
   '/[chapterId]/[verseId]',
@@ -60,9 +67,11 @@ const QURAN_READER_ROUTES = new Set([
 
 const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
 
-const NavbarBody: React.FC = () => {
+const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
@@ -129,32 +138,41 @@ const NavbarBody: React.FC = () => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
+  const bannerProps = {
+    text: t('stay-on-track'),
+    ctaButtonText: t('create-my-goal'),
+  };
+
   return (
-    <div className={styles.itemsContainer}>
-      <div className={styles.centerVertically}>
-        <div className={styles.leftCTA}>
-          <>
-            <Button
-              tooltip={t('menu')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={openNavigationDrawer}
-              ariaLabel={t('aria.nav-drawer-open')}
-            >
-              <IconMenu />
-            </Button>
-            <NavigationDrawer />
-          </>
-          <NavbarLogoWrapper />
+    <>
+      {isBannerVisible && (
+        <div
+          className={classNames(styles.bannerContainerTop, {
+            [styles.dimmed]: isNavigationDrawerOpen,
+          })}
+        >
+          <Banner {...bannerProps} />
         </div>
-      </div>
-      <div className={styles.centerVertically}>
-        <div className={styles.rightCTA}>
-          <>
-            <ProfileAvatarButton />
-            <LanguageSelector />
-          </>
-          <>
+      )}
+      <div
+        className={classNames(styles.itemsContainer, {
+          [styles.dimmed]: isNavigationDrawerOpen,
+        })}
+        inert={isNavigationDrawerOpen || undefined}
+      >
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
+            <NavbarLogoWrapper />
+          </div>
+        </div>
+        {isBannerVisible && (
+          <div className={styles.bannerContainerCenter}>
+            <Banner {...bannerProps} />
+          </div>
+        )}
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
+            {!isLoggedIn && <ProfileAvatarButton />}
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
@@ -162,18 +180,31 @@ const NavbarBody: React.FC = () => {
               shape={ButtonShape.Circle}
               shouldFlipOnRTL={false}
               ariaLabel={t('search.title')}
+              data-testid="open-search-drawer"
             >
               <IconSearch />
             </Button>
             <SearchDrawer />
 
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            {isLoggedIn && <ProfileAvatarButton />}
 
+            <Button
+              tooltip={t('menu')}
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
+              data-testid="open-navigation-drawer"
+            >
+              <IconMenu />
+            </Button>
             <SettingsDrawer />
-          </>
+            <NavigationDrawer />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

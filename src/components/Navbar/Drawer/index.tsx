@@ -19,7 +19,7 @@ import {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
-  setIsVisible,
+  setLockVisibilityState,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -35,6 +35,7 @@ export enum DrawerSide {
 }
 
 interface Props {
+  id?: string;
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
@@ -86,6 +87,7 @@ enum ActionSource {
 }
 
 const Drawer: React.FC<Props> = ({
+  id,
   type,
   side = DrawerSide.Right,
   header,
@@ -125,11 +127,16 @@ const Drawer: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    // Keep nav bar visible when drawer is open
+    // Lock navbar visibility state when drawer is open to prevent scroll-based changes
+    // Unlock when drawer is closed to restore normal scroll behavior
     if (isOpen) {
-      dispatch(setIsVisible(true));
+      dispatch(setLockVisibilityState(true));
+    } else {
+      dispatch(setLockVisibilityState(false));
     }
+  }, [dispatch, isOpen]);
 
+  useEffect(() => {
     // Hide navbar after successful navigation
     const handleRouteChange = () => {
       if (isOpen && closeOnNavigation) {
@@ -143,7 +150,7 @@ const Drawer: React.FC<Props> = ({
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
@@ -156,6 +163,7 @@ const Drawer: React.FC<Props> = ({
   const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
+      data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
       className={classNames(styles.container, {
         [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,
@@ -164,7 +172,7 @@ const Drawer: React.FC<Props> = ({
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
       })}
       ref={drawerRef}
-      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
+      id={id || (type === DrawerType.Settings ? 'settings-drawer-container' : undefined)}
     >
       <div
         className={classNames(styles.header, {

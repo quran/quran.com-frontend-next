@@ -4,7 +4,48 @@
     "action-text": "I understand the consequence, delete my account",
     "confirmation-text": "delete my account",
     "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
-    "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
+    "subtitle": "Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
     "title": "Are you absolutely sure?"
+  },
+  "delete-profile-picture": {
+    "action-text": "Yes",
+    "cancel-text": "No",
+    "subtitle": "You will delete the profile pic and reset it to the default, Are you sure?",
+    "title": "Delete Profile Picture"
+  },
+  "my-profile": "My Profile",
+  "personalization": "Personalization",
+  "profile-picture": "Profile Picture",
+  "max-file-size": "Max {{size}}",
+  "allowed-formats": "Only {{formats}}",
+  "upload-picture": "Upload Picture",
+  "save-picture": "Save Picture",
+  "remove-picture": "Remove Picture",
+  "upload-success": "Profile picture uploaded successfully",
+  "remove-success": "Profile picture removed successfully",
+  "edit-details": "Edit Details",
+  "email-notification-settings": "Email Notification Settings",
+  "save-changes": "Save Changes",
+  "change-password": "Change Password",
+  "update-password": "Update Password",
+  "delete-account-warning-title": "Warning",
+  "success": {
+    "details": "Your profile is updated successfully",
+    "password": "Your password has been updated successfully",
+    "notifications": "Your notifications settings have been updated successfully"
+  },
+  "errors": {
+    "upload-failed": "Failed to upload profile picture. Please try again.",
+    "remove-failed": "Failed to remove profile picture. Please try again."
+  },
+  "notifications": {
+    "streaks-that-will-break": {
+      "title": "Streaks",
+      "description": "An email will be sent to notify you of a streak that is about to break."
+    },
+    "quran-reading-program": {
+      "title": "Quran in a Year",
+      "description": "An email will be sent with links to weekly reading assignment, reflection prompts, and more resources to keep you on track."
+    }
   }
 }

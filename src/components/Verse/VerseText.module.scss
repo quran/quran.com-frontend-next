@@ -1,7 +1,34 @@
-@use "src/styles/constants";
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/constants';
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
+
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
+
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
 
 .verseTitleText {
   font-size: var(--font-size-normal);
@@ -73,14 +100,14 @@
   flex-wrap: wrap;
 }
 
-@include utility.generate-font-scales("code_v1");
-@include utility.generate-font-scales("code_v2");
-@include utility.generate-font-scales("tajweed_v4");
-@include utility.generate-font-scales("text_indopak_15_lines");
-@include utility.generate-font-scales("text_indopak_16_lines");
-@include utility.generate-font-scales("qpc_uthmani_hafs");
-@include utility.generate-font-scales("fallback_qpc_uthmani_hafs");
-@include utility.generate-font-scales("tajweed");
+@include utility.generate-font-scales('code_v1');
+@include utility.generate-font-scales('code_v2');
+@include utility.generate-font-scales('tajweed_v4');
+@include utility.generate-font-scales('text_indopak_15_lines');
+@include utility.generate-font-scales('text_indopak_16_lines');
+@include utility.generate-font-scales('qpc_uthmani_hafs');
+@include utility.generate-font-scales('fallback_qpc_uthmani_hafs');
+@include utility.generate-font-scales('tajweed');
 
 .highlighted {
   background-color: var(--color-background-alternative-faded);

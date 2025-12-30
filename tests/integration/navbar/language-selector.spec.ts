@@ -1,53 +1,94 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+import Homepage from '../../POM/home-page';
+
+import languages from '@/tests/mocks/languages';
+
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/');
 });
 
-test('Clicking on Nav bar language selector icon should open the language selector menu', async ({
-  page,
-}) => {
-  // 1. make sure the language selector items are not visible
-  await expect(page.locator('div[role="menuitem"]:has-text("English")')).not.toBeVisible();
-  // 2. Click on the language selector nav bar trigger
-  await page.locator('[aria-label="Select Language"]').click();
-  // 3. Make sure the language selector items are visible
-  await expect(page.locator('div[role="menuitem"]:has-text("English")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("العربية")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("বাংলা")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("فارسی")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Français")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Italiano")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Dutch")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Português")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("русский")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Shqip")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("ภาษาไทย")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Türkçe")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("اردو")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("简体中文")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Melayu")')).toBeVisible();
-});
+test(
+  'Clicking on Nav bar language selector icon should open the language selector menu',
+  { tag: ['@nav', '@language', '@fast', '@smoke'] },
+  async ({ page }) => {
+    // 1. Make sure the language container is not visible initially
+    await expect(page.getByTestId('language-container')).not.toBeVisible();
 
-test('Choosing a language should navigate the user to the localized page of that language', async ({
-  page,
-}) => {
-  // 1. Make sure we are on the English version
-  await expect(page).toHaveURL('/');
-  // 2. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
-  // 3. select the Bengali language and make sure we are navigated to /bn
-  await Promise.all([page.waitForNavigation({ url: '/bn' }), page.locator('text=বাংলা').click()]);
-});
+    // 2. Click on the navigation drawer
+    await page.getByTestId('open-navigation-drawer').click();
 
-test('Choosing a language should persist', async ({ page, baseURL }) => {
-  // 1. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
-  // 2. select the Arabic language and make sure we are navigated to /ar
-  await Promise.all([page.waitForNavigation({ url: '/ar' }), page.locator('text=العربية').click()]);
-  // 3. Navigate again to /
-  await page.goto('/');
-  const currentUrl = page.url();
-  // 4. Make sure the user is redirected to /ar
-  expect(currentUrl).toBe(`${baseURL}/ar`);
-});
+    // 3. Click on the language selector button
+    await page.getByTestId('language-selector-button').click();
+
+    // 4. Get the language container
+    const languageContainer = page.getByTestId('language-container');
+
+    // 5. Make sure all language selector items are visible (scoped to language container)
+    await Promise.all(
+      languages.map(async (language) => {
+        await expect(languageContainer.getByRole('button', { name: language })).toBeVisible();
+      }),
+    );
+  },
+);
+
+test(
+  'Choosing a language should navigate the user to the localized page of that language',
+  { tag: ['@nav', '@language', '@slow'] },
+  async ({ page }) => {
+    // 1. Make sure we are on the English version
+    await expect(page).toHaveURL('/');
+
+    // 2. Click on the navigation drawer
+    await page.getByTestId('open-navigation-drawer').click();
+
+    // 3. Click on the language selector button
+    await page.getByTestId('language-selector-button').click();
+
+    // 4. Get the language container
+    const languageContainer = page.getByTestId('language-container');
+
+    // 5. Select the Bengali language and wait for navigation
+    await Promise.all([
+      languageContainer.getByRole('button', { name: 'বাংলা' }).click(),
+      page.waitForURL('/bn'),
+    ]);
+  },
+);
+
+test(
+  'Choosing a language should persist and HTML lang attribute should be updated',
+  { tag: ['@nav', '@language', '@slow'] },
+  async ({ page, baseURL }) => {
+    // 1. Make sure the lang attribute is set to en initially
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    // 2. Click on the navigation drawer
+    await page.getByTestId('open-navigation-drawer').click();
+
+    // 3. Click on the language selector button
+    await page.getByTestId('language-selector-button').click();
+
+    // 4. Get the language container
+    const languageContainer = page.getByTestId('language-container');
+
+    // 5. Select Arabic and wait for navigation
+    await Promise.all([
+      languageContainer.getByRole('button', { name: 'العربية' }).click(),
+      page.waitForURL('/ar'),
+    ]);
+
+    // 6. Make sure the lang attribute is updated to ar
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+
+    // 7. Navigate to root again
+    await page.goto('/');
+
+    // 8. Make sure the user is redirected to /ar (language persistence)
+    expect(page.url()).toBe(`${baseURL}/ar`);
+  },
+);

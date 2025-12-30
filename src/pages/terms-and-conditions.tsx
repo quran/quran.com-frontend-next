@@ -3,14 +3,13 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
@@ -801,16 +800,6 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
       </PageContainer>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
 };
 
 export default TermsAndConditionsPage;

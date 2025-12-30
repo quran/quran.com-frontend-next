@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import classNames from 'classnames';
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import WhatIsRamadanArabic from './WhatIsRamadanArabic';
@@ -13,7 +13,6 @@ import InlineLink from '@/components/RamadanActivity/InlineLink';
 import { getWhatIsRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
 
@@ -181,16 +180,6 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
       </PageContainer>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
 };
 
 export default WhatIsRamadanPage;

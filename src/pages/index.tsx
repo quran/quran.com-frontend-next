@@ -18,6 +18,8 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { Course } from '@/types/auth/Course';
+import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -30,11 +32,13 @@ import ChaptersData from 'types/ChaptersData';
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
+  learningPlans: Course[];
 };
 
 const Index: NextPage<IndexProps> = ({
   chaptersResponse: { chapters },
   chaptersData,
+  learningPlans,
 }): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
@@ -62,6 +66,7 @@ const Index: NextPage<IndexProps> = ({
                 isUserLoggedIn={isUserLoggedIn}
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
+                learningPlans={learningPlans}
               />
             ) : (
               <>
@@ -81,7 +86,7 @@ const Index: NextPage<IndexProps> = ({
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection courses={learningPlans} />
                     </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
@@ -104,7 +109,7 @@ const Index: NextPage<IndexProps> = ({
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection courses={learningPlans} />
                     </div>
                     {todayAyah && (
                       <div
@@ -138,17 +143,23 @@ const Index: NextPage<IndexProps> = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
+  // Fetch learning plans statically for default language(s)
+  const learningPlans = await fetchCoursesWithLanguages([locale]);
+
+  // You need to statically obtain chaptersData (from a file, env, or a public API)
+  // Here's a pseudo-code example:
+  const chaptersData = await getAllChaptersData(locale);
 
   return {
     props: {
-      chaptersData: allChaptersData,
+      chaptersData,
       chaptersResponse: {
-        chapters: Object.keys(allChaptersData).map((chapterId) => {
-          const chapterData = allChaptersData[chapterId];
+        chapters: Object.keys(chaptersData).map((chapterId) => {
+          const chapterData = chaptersData[chapterId];
           return { ...chapterData, id: Number(chapterId) };
         }),
       },
+      learningPlans,
     },
   };
 };

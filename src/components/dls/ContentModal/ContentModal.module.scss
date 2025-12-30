@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/mixins/z-index" as z-index-mixins;
+@use 'src/styles/breakpoints';
+@use 'src/styles/mixins/z-index' as z-index-mixins;
 
 $translateYDistance: 200px;
 
@@ -41,14 +41,14 @@ $translateYDistance: 200px;
 
 .modalContainer {
   @include breakpoints.desktop {
-    max-width: initial;
-    width: 60vw;
+    max-inline-size: initial;
+    inline-size: 60vw;
   }
 }
 
 .contentContainer {
   overflow-y: scroll;
-  height: 80vh;
+  block-size: 80vh;
 }
 
 .overlay {
@@ -84,9 +84,9 @@ $translateYDistance: 200px;
   border-radius: var(--border-radius-rounded);
   position: relative;
 
-  width: 100vw;
+  inline-size: 100vw;
 
-  height: 100%;
+  block-size: 100%;
   overflow-y: scroll;
   @include breakpoints.tablet {
     overflow-y: visible;
@@ -101,7 +101,7 @@ $translateYDistance: 200px;
 
 .autoHeight {
   @include breakpoints.tablet {
-    height: auto;
+    block-size: auto;
   }
 }
 
@@ -109,56 +109,51 @@ $translateYDistance: 200px;
 .medium {
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
-    width: 85vw;
+    inline-size: 85vw;
   }
   @include breakpoints.desktop {
-    width: 60vw;
+    inline-size: 60vw;
   }
 }
 
 .small {
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
-    width: 60vw;
+    inline-size: 60vw;
   }
   @include breakpoints.desktop {
-    width: 40vw;
+    inline-size: 40vw;
   }
 }
 
-.overlay[data-state="open"] {
+.overlay[data-state='open'] {
   animation: fadeIn var(--transition-regular);
 }
-.overlay[data-state="closed"] {
+.overlay[data-state='closed'] {
   animation: fadeOut var(--transition-regular);
 }
 
-.contentWrapper[data-state="open"] {
-  animation:
-    contentIn var(--transition-regular) ease,
-    fadeIn var(--transition-regular) ease;
+.contentWrapper[data-state='open'] {
+  animation: contentIn var(--transition-regular) ease, fadeIn var(--transition-regular) ease;
 }
 
-.contentWrapper[data-state="closed"] {
-  animation:
-    contentOut var(--transition-regular) ease,
-    fadeOut var(--transition-regular) ease;
+.contentWrapper[data-state='closed'] {
+  animation: contentOut var(--transition-regular) ease, fadeOut var(--transition-regular) ease;
 }
 
 .closeIcon {
   position: absolute;
-  inset-block-start: 0;
+  inset-block-start: 50%;
   inset-inline-end: 0;
-  padding-block-start: var(--spacing-xsmall);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
   background-color: transparent;
   border: none;
   @include breakpoints.tablet {
-    padding-block-start: var(--spacing-small);
-    margin-block-start: var(--spacing-mega);
-    margin-inline-end: var(--spacing-mega);
+    inset-inline-end: var(--spacing-mega);
   }
 }
-
 .header {
   position: sticky;
   inset-block-start: 0;
@@ -166,13 +161,15 @@ $translateYDistance: 200px;
   padding-block: var(--spacing-small);
   z-index: 1;
   padding-inline: var(--spacing-small);
+  padding-inline-end: var(--spacing-xlarge-px);
+
   @include breakpoints.tablet {
-    position: initial;
+    position: relative;
     padding-inline: 0;
+    padding-inline-end: var(--spacing-xlarge-px);
     border: none;
-    padding: 0;
+    padding-block: 0;
   }
-  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .content {
