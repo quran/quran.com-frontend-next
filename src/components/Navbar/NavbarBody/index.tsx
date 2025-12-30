@@ -185,8 +185,6 @@ const NavbarBody: React.FC = () => {
             <SearchDrawer />
 
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
-
-            <SettingsDrawer />
           </>
         </div>
       </div>
