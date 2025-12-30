@@ -17,6 +17,7 @@ import type Reciter from 'types/Reciter';
 type Props = {
   preferences: Preferences;
   setPreferences: React.Dispatch<React.SetStateAction<Preferences>>;
+  setUserPreferences: React.Dispatch<React.SetStateAction<Preferences>>;
   surahs: Chapter[];
   verseOptions: number[];
   groupedTranslations: [string, AvailableTranslation[]][];
@@ -37,6 +38,7 @@ type Props = {
 const BuilderConfigForm = ({
   preferences,
   setPreferences,
+  setUserPreferences,
   surahs,
   verseOptions,
   groupedTranslations,
@@ -109,7 +111,7 @@ const BuilderConfigForm = ({
           className={styles.input}
           value={preferences.containerId}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               containerId: event.target.value || prev.containerId,
             }))
@@ -127,7 +129,7 @@ const BuilderConfigForm = ({
             className={styles.select}
             value={preferences.selectedSurah}
             onChange={(event) =>
-              setPreferences((prev) => ({
+              setUserPreferences((prev) => ({
                 ...prev,
                 selectedSurah: Number(event.target.value),
                 selectedAyah: 1,
@@ -152,7 +154,7 @@ const BuilderConfigForm = ({
               className={styles.select}
               value={preferences.selectedAyah}
               onChange={(event) =>
-                setPreferences((prev) => ({
+                setUserPreferences((prev) => ({
                   ...prev,
                   selectedAyah: Number(event.target.value),
                 }))
@@ -173,7 +175,7 @@ const BuilderConfigForm = ({
                   className={styles.select}
                   value={preferences.rangeEnd}
                   onChange={(event) =>
-                    setPreferences((prev) => ({
+                    setUserPreferences((prev) => ({
                       ...prev,
                       rangeEnd: Number(event.target.value),
                     }))
@@ -197,7 +199,7 @@ const BuilderConfigForm = ({
             checked={preferences.rangeEnabled}
             disabled={!rangeSelectable}
             onChange={(event) =>
-              setPreferences((prev) => ({
+              setUserPreferences((prev) => ({
                 ...prev,
                 rangeEnabled: event.target.checked,
                 rangeEnd: prev.rangeEnd || rangeOptions[0] || prev.selectedAyah + 1,
@@ -219,7 +221,7 @@ const BuilderConfigForm = ({
           className={styles.select}
           value={preferences.theme}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               theme: event.target.value as Preferences['theme'],
             }))
@@ -240,7 +242,7 @@ const BuilderConfigForm = ({
           className={styles.select}
           value={preferences.locale}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               locale: event.target.value,
             }))
@@ -260,7 +262,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.showArabic}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               showArabic: event.target.checked,
             }))
@@ -281,7 +283,7 @@ const BuilderConfigForm = ({
           value={preferences.mushaf}
           disabled={!preferences.showArabic}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               mushaf: event.target.value as MushafType,
             }))
@@ -360,7 +362,7 @@ const BuilderConfigForm = ({
           value={preferences.reciter ?? ''}
           disabled={!reciters.length}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               reciter: event.target.value ? Number(event.target.value) : null,
             }))
@@ -383,7 +385,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.enableAudio}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               enableAudio: event.target.checked,
             }))
@@ -400,7 +402,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.enableWbwTranslation}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               enableWbwTranslation: event.target.checked,
             }))
@@ -418,7 +420,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.showTranslatorName}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               showTranslatorName: event.target.checked,
             }))
@@ -435,7 +437,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.showTafsirs}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               showTafsirs: event.target.checked,
             }))
@@ -452,7 +454,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.showReflections}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               showReflections: event.target.checked,
             }))
@@ -469,7 +471,7 @@ const BuilderConfigForm = ({
           type="checkbox"
           checked={preferences.showAnswers}
           onChange={(event) =>
-            setPreferences((prev) => ({
+            setUserPreferences((prev) => ({
               ...prev,
               showAnswers: event.target.checked,
             }))
@@ -490,7 +492,7 @@ const BuilderConfigForm = ({
             className={styles.sizeInput}
             value={preferences.customSize.width}
             onChange={(event) =>
-              setPreferences((prev) => ({
+              setUserPreferences((prev) => ({
                 ...prev,
                 customSize: { ...prev.customSize, width: event.target.value },
               }))
@@ -506,7 +508,7 @@ const BuilderConfigForm = ({
             className={styles.sizeInput}
             value={preferences.customSize.height}
             onChange={(event) =>
-              setPreferences((prev) => ({
+              setUserPreferences((prev) => ({
                 ...prev,
                 customSize: { ...prev.customSize, height: event.target.value },
               }))

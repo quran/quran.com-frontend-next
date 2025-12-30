@@ -1,10 +1,10 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { Dispatch, SetStateAction } from 'react';
+import { useCallback, useEffect, useMemo, useState, type SetStateAction } from 'react';
 
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import type { Preferences } from '@/components/AyahWidget/builder/types';
 import BuilderConfigForm from '@/components/AyahWidget/BuilderConfigForm';
@@ -14,6 +14,8 @@ import useAyahWidgetPreview from '@/hooks/widget/useAyahWidgetPreview';
 import useAyahWidgetReciters from '@/hooks/widget/useAyahWidgetReciters';
 import useAyahWidgetSurahs from '@/hooks/widget/useAyahWidgetSurahs';
 import useAyahWidgetTranslations from '@/hooks/widget/useAyahWidgetTranslations';
+import type { AyahWidgetOverrides } from '@/redux/slices/ayahWidget';
+import { selectAyahWidgetOverrides, updateAyahWidgetOverrides } from '@/redux/slices/ayahWidget';
 import { selectReadingPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -157,30 +159,105 @@ function makeVerseOptions(versesCount?: number): number[] {
   return Array.from({ length: versesCount }, (unused, i) => i + 1);
 }
 
-type SetState<T> = Dispatch<SetStateAction<T>>;
+const hasOverride = (overrides: AyahWidgetOverrides, key: keyof AyahWidgetOverrides) =>
+  Object.prototype.hasOwnProperty.call(overrides, key);
 
-/**
- * Sync a preference field from an external source unless the user already changed it.
- */
-function useSyncPreferenceField<
-  TPreferences extends Record<string, unknown>,
-  K extends keyof TPreferences,
->(externalValue: TPreferences[K], setPreferences: SetState<TPreferences>, field: K): void {
-  const lastExternalRef = useRef(externalValue);
+const getTranslationIds = (translations: AvailableTranslation[]): number[] =>
+  translations.map((t) => t.id).filter((id): id is number => typeof id === 'number');
 
-  useEffect(() => {
-    const prevExternal = lastExternalRef.current;
-    if (Object.is(externalValue, prevExternal)) return;
+const applyWidgetOverrides = (base: Preferences, overrides: AyahWidgetOverrides): Preferences => {
+  const next: Preferences = { ...base };
 
-    lastExternalRef.current = externalValue;
+  // Apply overrides explicitly so falsy values (false, null) still work.
+  if (hasOverride(overrides, 'containerId')) {
+    next.containerId = overrides.containerId ?? base.containerId;
+  }
+  if (hasOverride(overrides, 'selectedSurah')) {
+    next.selectedSurah = overrides.selectedSurah ?? base.selectedSurah;
+  }
+  if (hasOverride(overrides, 'selectedAyah')) {
+    next.selectedAyah = overrides.selectedAyah ?? base.selectedAyah;
+  }
+  if (hasOverride(overrides, 'theme')) next.theme = overrides.theme ?? base.theme;
+  if (hasOverride(overrides, 'mushaf')) next.mushaf = overrides.mushaf ?? base.mushaf;
+  if (hasOverride(overrides, 'enableAudio')) {
+    next.enableAudio = overrides.enableAudio ?? base.enableAudio;
+  }
+  if (hasOverride(overrides, 'enableWbwTranslation')) {
+    next.enableWbwTranslation = overrides.enableWbwTranslation ?? base.enableWbwTranslation;
+  }
+  if (hasOverride(overrides, 'showTranslatorName')) {
+    next.showTranslatorName = overrides.showTranslatorName ?? base.showTranslatorName;
+  }
+  if (hasOverride(overrides, 'showTafsirs')) {
+    next.showTafsirs = overrides.showTafsirs ?? base.showTafsirs;
+  }
+  if (hasOverride(overrides, 'showReflections')) {
+    next.showReflections = overrides.showReflections ?? base.showReflections;
+  }
+  if (hasOverride(overrides, 'showAnswers')) {
+    next.showAnswers = overrides.showAnswers ?? base.showAnswers;
+  }
+  if (hasOverride(overrides, 'locale')) next.locale = overrides.locale ?? base.locale;
+  if (hasOverride(overrides, 'reciter')) next.reciter = overrides.reciter;
+  if (hasOverride(overrides, 'showArabic')) {
+    next.showArabic = overrides.showArabic ?? base.showArabic;
+  }
+  if (hasOverride(overrides, 'rangeEnabled')) {
+    next.rangeEnabled = overrides.rangeEnabled ?? base.rangeEnabled;
+  }
+  if (hasOverride(overrides, 'rangeEnd')) next.rangeEnd = overrides.rangeEnd ?? base.rangeEnd;
+  if (hasOverride(overrides, 'customSize')) {
+    next.customSize = {
+      width: overrides.customSize?.width ?? base.customSize.width,
+      height: overrides.customSize?.height ?? base.customSize.height,
+    };
+  }
 
-    setPreferences((prev) => {
-      const userDidNotOverride = Object.is(prev[field], prevExternal);
-      if (!userDidNotOverride) return prev;
-      return { ...prev, [field]: externalValue };
-    });
-  }, [externalValue, field, setPreferences]);
-}
+  return next;
+};
+
+const buildOverridesFromDiff = (prev: Preferences, next: Preferences): AyahWidgetOverrides => {
+  const overrides: AyahWidgetOverrides = {};
+
+  if (prev.containerId !== next.containerId) overrides.containerId = next.containerId;
+  if (prev.selectedSurah !== next.selectedSurah) overrides.selectedSurah = next.selectedSurah;
+  if (prev.selectedAyah !== next.selectedAyah) overrides.selectedAyah = next.selectedAyah;
+  if (prev.theme !== next.theme) overrides.theme = next.theme;
+  if (prev.mushaf !== next.mushaf) overrides.mushaf = next.mushaf;
+  if (prev.enableAudio !== next.enableAudio) overrides.enableAudio = next.enableAudio;
+  if (prev.enableWbwTranslation !== next.enableWbwTranslation) {
+    overrides.enableWbwTranslation = next.enableWbwTranslation;
+  }
+  if (prev.showTranslatorName !== next.showTranslatorName) {
+    overrides.showTranslatorName = next.showTranslatorName;
+  }
+  if (prev.showTafsirs !== next.showTafsirs) overrides.showTafsirs = next.showTafsirs;
+  if (prev.showReflections !== next.showReflections) {
+    overrides.showReflections = next.showReflections;
+  }
+  if (prev.showAnswers !== next.showAnswers) overrides.showAnswers = next.showAnswers;
+  if (prev.locale !== next.locale) overrides.locale = next.locale;
+  if (prev.reciter !== next.reciter) overrides.reciter = next.reciter;
+  if (prev.showArabic !== next.showArabic) overrides.showArabic = next.showArabic;
+  if (prev.rangeEnabled !== next.rangeEnabled) overrides.rangeEnabled = next.rangeEnabled;
+  if (prev.rangeEnd !== next.rangeEnd) overrides.rangeEnd = next.rangeEnd;
+
+  const prevTranslationIds = getTranslationIds(prev.translations);
+  const nextTranslationIds = getTranslationIds(next.translations);
+  if (!areArraysEqual(prevTranslationIds, nextTranslationIds)) {
+    overrides.translationIds = nextTranslationIds;
+  }
+
+  if (
+    prev.customSize.width !== next.customSize.width ||
+    prev.customSize.height !== next.customSize.height
+  ) {
+    overrides.customSize = { ...next.customSize };
+  }
+
+  return overrides;
+};
 
 /**
  * Build the external embed snippet based on current preferences.
@@ -275,9 +352,11 @@ function buildEmbedSnippet(preferences: Preferences, translationIdsCsv: string):
 
 const AyahWidgetBuilderPage = () => {
   const { t, lang } = useTranslation('ayah-widget');
+  const dispatch = useDispatch();
 
   // Redux selectors and memoized values
   const { themeVariant, settingsTheme } = useThemeDetector();
+  const widgetOverrides = useSelector(selectAyahWidgetOverrides);
   const selectedTranslationIdsFromRedux = useSelector(selectSelectedTranslations);
   const quranFont = useSelector(selectQuranFont);
   const readingPreferences = useSelector(selectReadingPreferences);
@@ -294,18 +373,47 @@ const AyahWidgetBuilderPage = () => {
     WordByWordType.Translation,
   );
 
-  // Builder preferences state
-  const [preferences, setPreferences] = useState<Preferences>(() => ({
-    ...INITIAL_PREFERENCES,
-    theme: resolvedTheme,
-    locale: lang,
-    mushaf: mushafFromFont,
-    enableWbwTranslation: shouldEnableWbwTranslation,
-  }));
-  useSyncPreferenceField(resolvedTheme, setPreferences, 'theme');
-  useSyncPreferenceField(lang, setPreferences, 'locale');
-  useSyncPreferenceField(mushafFromFont, setPreferences, 'mushaf');
-  useSyncPreferenceField(shouldEnableWbwTranslation, setPreferences, 'enableWbwTranslation');
+  const basePreferences = useMemo(
+    () => ({
+      ...INITIAL_PREFERENCES,
+      theme: resolvedTheme,
+      locale: lang,
+      mushaf: mushafFromFont,
+      enableWbwTranslation: shouldEnableWbwTranslation,
+    }),
+    [resolvedTheme, lang, mushafFromFont, shouldEnableWbwTranslation],
+  );
+
+  // Builder preferences state (base defaults + user overrides).
+  const [preferences, setPreferences] = useState<Preferences>(() =>
+    applyWidgetOverrides(basePreferences, widgetOverrides),
+  );
+
+  // Keep preferences in sync when base defaults or stored overrides change.
+  useEffect(() => {
+    setPreferences((prev) => ({
+      ...applyWidgetOverrides(basePreferences, widgetOverrides),
+      // Preserve translations; we resolve them once translations are loaded.
+      translations: prev.translations,
+    }));
+  }, [basePreferences, widgetOverrides]);
+
+  // User-driven updates should persist their overrides to Redux.
+  const setUserPreferences = useCallback(
+    (updater: SetStateAction<Preferences>) => {
+      setPreferences((prev) => {
+        const next = typeof updater === 'function' ? updater(prev) : updater;
+        if (next === prev) return prev;
+
+        const overridesPatch = buildOverridesFromDiff(prev, next);
+        if (Object.keys(overridesPatch).length) {
+          dispatch(updateAyahWidgetOverrides(overridesPatch));
+        }
+        return next;
+      });
+    },
+    [dispatch],
+  );
 
   // Remote data sources used by the builder
   const surahs = useAyahWidgetSurahs(preferences.locale);
@@ -315,7 +423,6 @@ const AyahWidgetBuilderPage = () => {
   // UI state
   const [translationSearch, setTranslationSearch] = useState('');
   const [copySuccess, setCopySuccess] = useState(false);
-  const hasUserUpdatedTranslationsRef = useRef(false);
 
   // CSV of selected translation IDs: "131,20,17"
   const translationIdsCsv = useMemo(
@@ -331,11 +438,12 @@ const AyahWidgetBuilderPage = () => {
    */
   useEffect(() => {
     if (!translations.length) return;
-    if (hasUserUpdatedTranslationsRef.current) return;
 
-    const selectedIds = selectedTranslationIdsFromRedux.filter(
+    const hasTranslationOverride = hasOverride(widgetOverrides, 'translationIds');
+    const baseIds = selectedTranslationIdsFromRedux.filter(
       (id): id is number => typeof id === 'number',
     );
+    const selectedIds = hasTranslationOverride ? widgetOverrides.translationIds ?? [] : baseIds;
     const selectedSet = new Set(selectedIds);
     let nextTranslations = selectedSet.size
       ? translations.filter((tr) => selectedSet.has(tr.id))
@@ -362,7 +470,7 @@ const AyahWidgetBuilderPage = () => {
 
       return { ...prev, translations: nextTranslations };
     });
-  }, [translations, selectedTranslationIdsFromRedux]);
+  }, [translations, selectedTranslationIdsFromRedux, widgetOverrides]);
 
   /**
    * If the user changes Surah, ensure the selected Ayah remains valid.
@@ -432,19 +540,21 @@ const AyahWidgetBuilderPage = () => {
   /**
    * Toggle a translation selection on/off.
    */
-  const toggleTranslation = useCallback((translation: AvailableTranslation) => {
-    hasUserUpdatedTranslationsRef.current = true;
-    setPreferences((prev) => {
-      const exists = prev.translations.some((selected) => selected.id === translation.id);
+  const toggleTranslation = useCallback(
+    (translation: AvailableTranslation) => {
+      setUserPreferences((prev) => {
+        const exists = prev.translations.some((selected) => selected.id === translation.id);
 
-      return {
-        ...prev,
-        translations: exists
-          ? prev.translations.filter((selected) => selected.id !== translation.id)
-          : [...prev.translations, translation],
-      };
-    });
-  }, []);
+        return {
+          ...prev,
+          translations: exists
+            ? prev.translations.filter((selected) => selected.id !== translation.id)
+            : [...prev.translations, translation],
+        };
+      });
+    },
+    [setUserPreferences],
+  );
 
   /**
    * Quick lookup for selected translation IDs
@@ -471,6 +581,7 @@ const AyahWidgetBuilderPage = () => {
             <BuilderConfigForm
               preferences={preferences}
               setPreferences={setPreferences}
+              setUserPreferences={setUserPreferences}
               surahs={surahs}
               verseOptions={verseOptions}
               groupedTranslations={groupedTranslations}
