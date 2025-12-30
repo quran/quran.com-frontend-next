@@ -35,12 +35,17 @@ test.describe('Navigation Sidebar Operations', () => {
   test(
     'Navigation drawer should only appear on Quran reader pages',
     { tag: ['@slow', '@drawer'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // 1. Make sure the navigation drawer is not mounted by default
       await expect(page.getByTestId('sidebar-navigation')).not.toBeAttached();
 
       // 2. Go to a a surah page
       await homePage.goTo('/2');
+
+      if (isMobile) {
+        // Scroll down a little to make sure the chapter navigation button is visible
+        await page.mouse.wheel(0, 500);
+      }
 
       // 3. Open the navigation drawer
       await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
@@ -113,10 +118,16 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Leaving a reader page through the header logo hides the sidebar on the homepage',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       await homePage.goTo('/1');
       const sidebar = page.getByTestId('sidebar-navigation');
       await expect(sidebar).not.toBeAttached();
+
+      if (isMobile) {
+        // Scroll down a little to make sure the chapter navigation button is visible
+        await page.mouse.wheel(0, 500);
+        await page.mouse.wheel(0, -300);
+      }
 
       await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
       await expect(sidebar).toBeVisible();
@@ -134,10 +145,16 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Sidebar hides after navigating from a reader page to the learning plans index',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       await homePage.goTo('/1');
       const sidebar = page.getByTestId('sidebar-navigation');
       await expect(sidebar).not.toBeAttached();
+
+      if (isMobile) {
+        // Scroll down a little to make sure the chapter navigation button is visible
+        await page.mouse.wheel(0, 500);
+        await page.mouse.wheel(0, -300);
+      }
 
       await page.getByTestId('chapter-navigation').click({ position: { x: 5, y: 5 } });
       await expect(sidebar).toBeVisible();

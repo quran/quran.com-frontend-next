@@ -66,7 +66,7 @@ test(
 test(
   'User interface is displayed in the selected language',
   { tag: ['@language', '@slow'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
     // 1. Click on the menu
     await homePage.closeNextjsErrorDialog();
     await page.getByTestId('open-navigation-drawer').click();
@@ -93,7 +93,7 @@ test(
     await homePage.goTo('/fr/1');
 
     // Open the settings drawer and check some elements are in French
-    await homePage.openSettingsDrawer();
+    await homePage.openSettingsDrawer(isMobile);
 
     const settingsBody = page.getByTestId('settings-drawer-body');
 

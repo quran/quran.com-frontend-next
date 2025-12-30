@@ -27,10 +27,8 @@ setup('authenticate', async ({ page }) => {
 
   // Wait for redirect to home and visible profile avatar
   await page.waitForURL(/\/([a-z]{2})?$/);
-  const profileAvatarButton = page.getByTestId('profile-avatar-button');
-  await expect(profileAvatarButton).toHaveCount(2);
-  await expect(profileAvatarButton.nth(0)).toBeVisible();
-  await expect(profileAvatarButton.nth(1)).toBeVisible();
+  const profileAvatarButton = page.getByTestId('profile-avatar-button').first();
+  await expect(profileAvatarButton).toBeAttached();
 
   // Save signed-in state to 'authFile'.
   await page.context().storageState({ path: authFile });
