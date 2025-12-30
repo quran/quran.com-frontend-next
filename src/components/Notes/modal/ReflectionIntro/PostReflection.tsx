@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
@@ -7,23 +7,13 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReflectionIntro.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { logEvent } from '@/utils/eventLogger';
+import useToggle from '@/hooks/useToggle';
 
 const PublicReflectionDescription: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('notes');
-
-  const toggleOpen = () => {
-    setIsOpen((prev) => {
-      if (prev) {
-        logEvent('public_reflection_intro_closed');
-        return false;
-      }
-
-      logEvent('public_reflection_intro_opened');
-      return true;
-    });
-  };
+  const [isOpen, toggleOpen] = useToggle({
+    eventName: 'public_reflection_intro',
+  });
 
   return (
     <div className={styles.container} data-testid="post-reflection-intro">
