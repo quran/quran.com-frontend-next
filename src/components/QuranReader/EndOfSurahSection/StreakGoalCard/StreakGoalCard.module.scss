@@ -1,0 +1,194 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.withGoalBackground {
+  background-color: var(--color-streaks-light);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-medium);
+  height: 100%;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--spacing-medium);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: row;
+    height: 54px;
+    gap: var(--spacing-small);
+    padding: var(--spacing-small);
+  }
+}
+
+// GUEST STATE (No Goal/Streak)
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small-px);
+  margin-block-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: 0;
+    flex: 1;
+  }
+}
+
+.titleIcon {
+  width: var(--spacing-large-px);
+  height: var(--spacing-large-px);
+
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large2);
+  }
+}
+
+.subtitle {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.button {
+  margin-block-start: var(--spacing-small);
+  background-color: var(--color-streaks-dark);
+  border-color: var(--color-streaks-dark);
+  font-weight: var(--font-weight-semibold);
+
+  &:hover {
+    background-color: var(--color-streaks-dark);
+    border-color: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    border-radius: var(--border-radius-medium-px);
+    padding: var(--spacing-small-px) var(--spacing-medium-px);
+    font-size: var(--font-size-normal);
+    margin-block-start: 0;
+    flex-shrink: 0;
+  }
+}
+
+.buttonIcon {
+  margin-inline-end: var(--spacing-xsmall);
+
+  path {
+    fill: var(--color-text-white);
+  }
+}
+
+// USER WITH GOAL/STREAK STATE
+
+// Streak Section
+.streakSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small);
+  width: 100%;
+}
+
+.streakIcon {
+  width: calc(var(--spacing-large-px) * 2);
+  height: calc(var(--spacing-large-px) * 2);
+
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    width: var(--spacing-medium2-px);
+    height: var(--spacing-medium2-px);
+  }
+}
+
+.streakDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro);
+}
+
+.streakNumber {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-black);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xjumbo-px);
+  }
+}
+
+.streakText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-gray);
+  font-weight: var(--font-weight-semibold);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+
+// Goal Progress Section
+.goalLink {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  padding-block-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: 0;
+  }
+}
+
+.endOfSurahGoalContent {
+  width: 100%;
+  gap: var(--spacing-small);
+
+  // Override shared component styles for end-of-surah variant
+  :global(.circularProgressbar) {
+    height: var(--spacing-xxlarge-px);
+    width: var(--spacing-xxlarge-px);
+
+    @include breakpoints.smallerThanTablet {
+      height: calc(--spacing-large-px + var(--spacing-xxsmall-px));
+      width: calc(--spacing-large-px + var(--spacing-xxsmall-px));
+    }
+  }
+
+  :global(.circularProgressbarText) {
+    fill: var(--color-streaks-dark);
+    font-size: var(--font-size-small-px);
+
+    @include breakpoints.smallerThanTablet {
+      font-size: var(--font-size-xxsmall-px);
+    }
+  }
+
+  :global(.goalStatusContainer) {
+    text-align: left;
+  }
+}

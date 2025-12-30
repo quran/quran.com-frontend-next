@@ -6,15 +6,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import cardStyles from '../ReadingSection.module.scss';
 
-import GoalStatus from './GoalStatus';
+import ReadingGoalCardContent from './ReadingGoalCardContent';
 import styles from './StreakOrGoalCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import CircularProgressbar from '@/dls/CircularProgress';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PlantIcon from '@/icons/plant.svg';
-import ArrowIcon from '@/public/icons/arrow.svg';
 import CirclesIcon from '@/public/icons/circles.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { QuranGoalStatus } from '@/types/auth/Goal';
@@ -46,6 +43,21 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
     logButtonClick('homepage_reading_goal_card_set_goal');
   };
 
+  const goalCta = (
+    <Button
+      size={ButtonSize.Small}
+      className={styles.customGoalButton}
+      variant={ButtonVariant.Simplified}
+      prefix={<CirclesIcon />}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSetGoalButtonClicked();
+      }}
+    >
+      {t('set-custom-goal')}
+    </Button>
+  );
+
   return (
     <Card
       className={cardStyles.streakCard}
@@ -70,50 +82,12 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                 />
               </div>
 
-              <div className={styles.container}>
-                {goal ? (
-                  <div className={styles.circularProgressbarContainer}>
-                    <div className={styles.circularProgressbar}>
-                      <CircularProgressbar
-                        text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
-                        value={goal.progress.percent}
-                        maxValue={100}
-                        strokeWidth={12}
-                        classes={{
-                          path: styles.circularProgressbarPath,
-                          trail: styles.circularProgressbarTrail,
-                          text: styles.circularProgressbarText,
-                        }}
-                      />
-                    </div>
-                    <GoalStatus
-                      goal={goal}
-                      currentActivityDay={currentActivityDay}
-                      percent={goal.progress.percent}
-                    />
-                    <IconContainer
-                      size={IconSize.Xsmall}
-                      icon={<ArrowIcon />}
-                      shouldForceSetColors={false}
-                      className={styles.goalArrowIcon}
-                      aria-hidden="true"
-                    />
-                  </div>
-                ) : (
-                  <Button
-                    size={ButtonSize.Small}
-                    className={styles.customGoalButton}
-                    variant={ButtonVariant.Simplified}
-                    prefix={<CirclesIcon />}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSetGoalButtonClicked();
-                    }}
-                  >
-                    {t('set-custom-goal')}
-                  </Button>
-                )}
-              </div>
+              <ReadingGoalCardContent
+                goal={goal}
+                currentActivityDay={currentActivityDay}
+                goalCta={goalCta}
+                onGoalArrowClick={goal ? onGoalArrowClicked : undefined}
+              />
             </div>
           </div>
         </div>

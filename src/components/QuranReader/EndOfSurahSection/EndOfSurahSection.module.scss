@@ -47,7 +47,7 @@ $cards-grid-min-height: 321px;
 }
 
 // Shared card wrapper styles for End of Surah cards
-.card {
+.container .card {
   border-radius: var(--border-radius-rounded);
   box-shadow: var(--shadow-end-surah-card);
 }
