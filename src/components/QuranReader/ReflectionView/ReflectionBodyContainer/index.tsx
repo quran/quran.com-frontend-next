@@ -18,9 +18,9 @@ import {
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
 import {
-  LESSON_POST_TYPE_ID,
-  REFLECTION_POST_TYPE_ID,
   makeAyahReflectionsUrl,
+  REFLECTION_POST_TYPE_ID,
+  LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
