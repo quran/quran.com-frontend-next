@@ -3,6 +3,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { expect, Locator, Page } from '@playwright/test';
 
+import { TestId } from '@/tests/test-ids';
+
 export default class AudioUtilities {
   readonly page: Page;
 
@@ -83,7 +85,7 @@ export default class AudioUtilities {
   }
 
   async startAudioPlayback(waitForPlayback = true) {
-    const listenButton = this.page.getByTestId('listen-button');
+    const listenButton = this.page.getByTestId(TestId.LISTEN_BUTTON);
     await expect(listenButton).toBeVisible();
     await listenButton.click();
     if (waitForPlayback) {
@@ -101,13 +103,13 @@ export default class AudioUtilities {
   }
 
   async resumeAudioPlayback() {
-    const playButton = this.page.getByTestId('audio-play-toggle');
+    const playButton = this.page.getByTestId(TestId.AUDIO_PLAY_TOGGLE);
     await expect(playButton).toBeVisible();
     await playButton.click();
   }
 
   async pauseAudioPlayback() {
-    const pauseButton = this.page.getByTestId('audio-pause-toggle');
+    const pauseButton = this.page.getByTestId(TestId.AUDIO_PAUSE_TOGGLE);
     await expect(pauseButton).toBeVisible();
     await pauseButton.click();
   }
@@ -117,7 +119,7 @@ export default class AudioUtilities {
     await this.openOverflowMenu();
 
     // select playback rate
-    const playbackItem = this.page.getByTestId('playback-rate-menu');
+    const playbackItem = this.page.getByTestId(TestId.PLAYBACK_RATE_MENU);
     await expect(playbackItem).toBeVisible();
     await playbackItem.click();
     const targetRate = this.page.getByRole('menuitem').filter({ hasText: speed }); // select the speed
@@ -152,7 +154,7 @@ export default class AudioUtilities {
       .first();
     await repeatItem.click();
 
-    const modal = this.page.getByTestId('repeat-audio-modal');
+    const modal = this.page.getByTestId(TestId.REPEAT_AUDIO_MODAL);
     await expect(modal).toBeVisible();
     return modal;
   }
@@ -163,8 +165,8 @@ export default class AudioUtilities {
    * @returns {Locator} The counter value locator
    */
   getRepeatModalInput(counterType: string): Locator {
-    const modal = this.page.getByTestId('repeat-audio-modal');
-    const counters = modal.getByTestId('counter');
+    const modal = this.page.getByTestId(TestId.REPEAT_AUDIO_MODAL);
+    const counters = modal.getByTestId(TestId.COUNTER);
 
     let counterIndex = 0;
     if (counterType === 'playback-range') {
@@ -175,7 +177,7 @@ export default class AudioUtilities {
       counterIndex = 2;
     }
 
-    return counters.nth(counterIndex).getByTestId('counter-value');
+    return counters.nth(counterIndex).getByTestId(TestId.COUNTER_VALUE);
   }
 
   /**
@@ -183,20 +185,20 @@ export default class AudioUtilities {
    */
   // eslint-disable-next-line class-methods-use-this
   private async adjustCounterValue(counterLocator: Locator, desiredValue: string): Promise<void> {
-    let currentValue = await counterLocator.getByTestId('counter-value').innerText();
+    let currentValue = await counterLocator.getByTestId(TestId.COUNTER_VALUE).innerText();
 
     while (currentValue !== desiredValue) {
       const currentNum = parseInt(currentValue, 10);
       const desiredNum = parseInt(desiredValue, 10);
 
       if (currentNum < desiredNum) {
-        await counterLocator.getByTestId('increment-button').click();
+        await counterLocator.getByTestId(TestId.INCREMENT_BUTTON).click();
       } else {
-        await counterLocator.getByTestId('decrement-button').click();
+        await counterLocator.getByTestId(TestId.DECREMENT_BUTTON).click();
       }
 
       // Update current value for next iteration
-      currentValue = await counterLocator.getByTestId('counter-value').innerText();
+      currentValue = await counterLocator.getByTestId(TestId.COUNTER_VALUE).innerText();
     }
   }
 
@@ -217,7 +219,7 @@ export default class AudioUtilities {
 
     // There's 3 counter components in the modal, first one is play range,
     // second is repeat each verse, third is delay between verses
-    const counters = modal.getByTestId('counter');
+    const counters = modal.getByTestId(TestId.COUNTER);
     const playRangeCounter = counters.nth(0);
     const repeatEachVerseCounter = counters.nth(1);
     const delayBetweenVerseCounter = counters.nth(2);

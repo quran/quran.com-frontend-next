@@ -1,7 +1,9 @@
+/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import ayahOfTheDayData from '@/data/ayah_of_the_day.json';
 import Homepage from '@/tests/POM/home-page';
+import { getChapterContainerTestId, getJuzContainerTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -36,7 +38,7 @@ test(
     await homePage.goTo();
 
     // Make sure the last visited ayah is displayed on the homepage
-    const lastVisitedAyah = page.getByTestId('chapter-card');
+    const lastVisitedAyah = page.getByTestId(TestId.CHAPTER_CARD);
     await expect(lastVisitedAyah).toBeVisible();
     const text = await lastVisitedAyah.textContent();
     expect(text).toContain("5. Al-Ma'idah");
@@ -71,7 +73,7 @@ test(
     await page.evaluate(() => localStorage.clear());
     await homePage.reload();
 
-    const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
+    const quranInAYearSection = page.getByTestId(TestId.QURAN_IN_A_YEAR_SECTION);
     await expect(quranInAYearSection).toBeVisible();
     await expect
       .poll(async () => (await quranInAYearSection.textContent()) || '')
@@ -85,7 +87,7 @@ test(
   async ({ page }) => {
     await homePage.goTo();
 
-    const learningPlansSection = page.getByTestId('learning-plans-section');
+    const learningPlansSection = page.getByTestId(TestId.LEARNING_PLANS_SECTION);
     await expect(learningPlansSection).toBeVisible();
 
     const items = learningPlansSection.getByRole('link');
@@ -96,7 +98,7 @@ test(
 test('Community section appears with at least 1 item', async ({ page }) => {
   await homePage.goTo();
 
-  const communitySection = page.getByTestId('community-section');
+  const communitySection = page.getByTestId(TestId.COMMUNITY_SECTION);
   await expect(communitySection).toBeVisible();
 
   const items = communitySection.getByRole('link');
@@ -106,9 +108,9 @@ test('Community section appears with at least 1 item', async ({ page }) => {
 test('Surah is selected by default', { tag: ['@smoke'] }, async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
+  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
   await expect(chapterAndJuzList).toBeVisible();
-  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
   // Make sure the Surah tab is selected by default
   expect(await tabContainer.getAttribute('data-selectedtab')).toBe('surah');
 });
@@ -116,32 +118,32 @@ test('Surah is selected by default', { tag: ['@smoke'] }, async ({ page }) => {
 test('All 114 surahs are displayed in the surah list', async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
+  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
 
-  await expect(chapterAndJuzList.getByTestId('chapter-1-container')).toBeVisible();
-  await expect(chapterAndJuzList.getByTestId('chapter-114-container')).toBeVisible();
+  await expect(chapterAndJuzList.getByTestId(getChapterContainerTestId(1))).toBeVisible();
+  await expect(chapterAndJuzList.getByTestId(getChapterContainerTestId(114))).toBeVisible();
 });
 
 test('All 30 juz are displayed when switching to the juz tab', async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
-  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
+  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
   const juzTab = tabContainer.getByText('Juz');
   await juzTab.click();
 
   await expect(tabContainer).toHaveAttribute('data-selectedtab', 'juz');
 
-  await expect(chapterAndJuzList.getByTestId('juz-1-container')).toBeVisible();
-  await expect(chapterAndJuzList.getByTestId('juz-30-container')).toBeVisible();
+  await expect(chapterAndJuzList.getByTestId(getJuzContainerTestId(1))).toBeVisible();
+  await expect(chapterAndJuzList.getByTestId(getJuzContainerTestId(30))).toBeVisible();
 
   // Juz 1 container should have 3 links: juz link + surahs 1 and 2
-  const juz1Container = chapterAndJuzList.getByTestId('juz-1-container');
+  const juz1Container = chapterAndJuzList.getByTestId(getJuzContainerTestId(1));
   const links = juz1Container.getByRole('link');
   expect(await links.count()).toBe(3);
 
   // Juz 30 container should have 38 links (surahs from 78 to 114 + juz link)
-  const juz30Container = chapterAndJuzList.getByTestId('juz-30-container');
+  const juz30Container = chapterAndJuzList.getByTestId(getJuzContainerTestId(30));
   const links30 = juz30Container.getByRole('link');
   expect(await links30.count()).toBe(38);
 });
@@ -151,8 +153,8 @@ test('All 114 surahs are displayed according to the revelation order when switch
 }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
-  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
+  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
   const revelationTab = tabContainer.getByText('Revelation Order');
   await revelationTab.click();
 
@@ -173,14 +175,14 @@ test('All 114 surahs are displayed according to the revelation order when switch
 test('Sort by ascending/descending works correctly', async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
-  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
+  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
   const sorter = tabContainer.getByText('Ascending');
   // Ensure 'Ascending' is selected by default
   await expect(sorter).toBeVisible();
 
-  const firstChapter = chapterAndJuzList.getByTestId('chapter-1-container');
-  const lastChapter = chapterAndJuzList.getByTestId('chapter-114-container');
+  const firstChapter = chapterAndJuzList.getByTestId(getChapterContainerTestId(1));
+  const lastChapter = chapterAndJuzList.getByTestId(getChapterContainerTestId(114));
 
   // Ensure the first chapter appears before the last chapter
   const firstChapterBoundingBox = await firstChapter.boundingBox();
@@ -203,11 +205,11 @@ test('Sort by ascending/descending works correctly', async ({ page }) => {
 test('Popular button shows the popular surahs/verses', { tag: ['@homepage'] }, async ({ page }) => {
   await homePage.goTo();
 
-  const popularButton = page.getByTestId('popular-button');
+  const popularButton = page.getByTestId(TestId.POPULAR_BUTTON);
   await expect(popularButton).toBeVisible();
   await popularButton.click();
 
-  const dropdownContainer = page.getByTestId('quick-links');
+  const dropdownContainer = page.getByTestId(TestId.QUICK_LINKS);
   await expect(dropdownContainer).toBeVisible();
 
   const items = dropdownContainer.getByRole('link');

@@ -4,6 +4,7 @@ import type { Page } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseArabicTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -17,13 +18,13 @@ const openTranslationFeedbackModal = async (
 ) => {
   if (mode === 'translation') {
     // Open verse actions menu from translation view
-    const verse = page.getByTestId(`verse-${verseKey}`);
+    const verse = page.getByTestId(getVerseTestId(verseKey));
     const moreButton = verse.getByLabel('More');
     await expect(moreButton).toBeVisible();
     await moreButton.click();
   } else {
     // Open verse actions menu from reading view
-    const verse = page.getByTestId(`verse-arabic-${verseKey}`);
+    const verse = page.getByTestId(getVerseArabicTestId(verseKey));
     await verse.click();
 
     // Open More submenu (handles both mobile button and desktop menuitem)
@@ -41,7 +42,7 @@ const openTranslationFeedbackModal = async (
   await translationFeedbackOption.click();
 
   // Modal should open
-  const modal = page.getByTestId('modal-content');
+  const modal = page.getByTestId(TestId.MODAL_CONTENT);
   await expect(modal).toBeVisible();
 };
 
@@ -53,7 +54,7 @@ const openTranslationFeedbackModal = async (
  * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
-  const translationSelect = page.getByTestId('translation-select');
+  const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
   await translationSelect.selectOption(translationId);
 };
 
@@ -117,7 +118,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Check translation dropdown
-      const translationSelect = page.getByTestId('translation-select');
+      const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
       await expect(translationSelect).toBeVisible();
 
       // Should have at least one translation option (from user preferences)
@@ -135,12 +136,11 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
-      // Open translation feedback modal
-      await openTranslationFeedbackModal(page, 'translation');
-
       // Test empty form submission
       const reportButton = page.getByRole('button', { name: 'Report' });
-      await reportButton.click();
+
+      // Open translation feedback modal and directly submit empty form so that the translation doesnt have time to load
+      await Promise.all([openTranslationFeedbackModal(page, 'translation'), reportButton.click()]);
 
       // Verify both fields show validation errors
       await expect(page.getByText('Translation is required')).toBeVisible();
@@ -178,7 +178,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
 
-      const translationSelect = page.getByTestId('translation-select');
+      const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
       await translationSelect.selectOption('131'); // This one must be available in authenticated user's preferences
 
       const feedbackTextarea = page.getByPlaceholder(
@@ -218,7 +218,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
 
       // Should show translation preview
-      const modal = page.getByTestId('modal-content');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
       await expect(
         modal.getByText('In the Name of Allah—the Most Compassionate, Most Merciful.'),
       ).toBeVisible();
@@ -260,7 +260,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByText('Your feedback is sent successfully')).toBeVisible();
 
       // Modal should be closed
-      const modal = page.getByTestId('modal-content');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
       await expect(modal).toBeHidden();
     },
   );
@@ -300,7 +300,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByText('Something went wrong. Please try again.')).toBeVisible();
 
       // Modal should still be open
-      const modal = page.getByTestId('modal-content');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
       await expect(modal).toBeVisible();
     },
   );
@@ -316,7 +316,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Modal should be open
-      const modal = page.getByTestId('modal-content');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
       await expect(modal).toBeVisible();
 
       await page.keyboard.press('Escape');

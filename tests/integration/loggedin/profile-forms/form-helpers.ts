@@ -8,7 +8,7 @@ import { expect, type Locator, type Page } from '@playwright/test';
  */
 export const fillAndBlur = async (input: Locator, value: string): Promise<void> => {
   await input.clear();
-  await input.fill(value);
+  await input.fill(value, { force: true });
   await input.blur();
 };
 

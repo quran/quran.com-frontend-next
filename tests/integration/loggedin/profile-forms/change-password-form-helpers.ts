@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 
+import { TestId } from '@/tests/test-ids';
 import TEST_IDS from '@/utils/test-ids';
 
 /**
@@ -56,7 +57,7 @@ export const getFormInputs = (section: Locator) => {
  * @returns {Locator} The password validation section locator
  */
 export const getPasswordValidation = (section: Locator): Locator => {
-  return section.getByTestId('password-validation');
+  return section.getByTestId(TestId.PASSWORD_VALIDATION);
 };
 
 /**

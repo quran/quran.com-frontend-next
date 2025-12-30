@@ -2,6 +2,7 @@
 import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -27,7 +28,7 @@ test(
     await expect(page).toHaveURL(/\/([a-z]{2})?$/);
 
     // We should be logged in
-    const profileAvatarButton = page.getByTestId('profile-avatar-button').first();
+    const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
     await expect(profileAvatarButton).toBeAttached();
   },
 );

@@ -1,6 +1,7 @@
 import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -14,17 +15,17 @@ const verifyModalContainsSurahInfo = async (
   expectedAyahs: string,
 ) => {
   // Verify modal is open and contains surah info content
-  await expect(page.getByTestId('modal-content')).toBeVisible();
+  await expect(page.getByTestId(TestId.MODAL_CONTENT)).toBeVisible();
   await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
 
   // Verify surah info content is inside the modal
-  const modalContent = page.getByTestId('modal-content');
-  await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-  await expect(modalContent.getByTestId('surah-name')).toContainText(expectedSurahName);
-  await expect(modalContent.getByTestId('surah-revelation-place')).toContainText(
+  const modalContent = page.getByTestId(TestId.MODAL_CONTENT);
+  await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toBeVisible();
+  await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toContainText(expectedSurahName);
+  await expect(modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE)).toContainText(
     expectedRevelationPlace,
   );
-  await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText(expectedAyahs);
+  await expect(modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS)).toContainText(expectedAyahs);
 };
 
 test.beforeEach(async ({ page, context }) => {

@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseArabicTestId, getVerseTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -20,7 +21,7 @@ test.describe('Translation Feedback - Guest Users', () => {
       await switchToTranslationMode(page);
 
       // Open verse actions menu
-      const verse = page.getByTestId('verse-1:1');
+      const verse = page.getByTestId(getVerseTestId('1:1'));
       const moreButton = verse.getByLabel('More');
       await expect(moreButton).toBeVisible();
       await moreButton.click();
@@ -46,7 +47,7 @@ test.describe('Translation Feedback - Guest Users', () => {
       await switchToReadingMode(page);
 
       // Tap verse to reveal actions menu
-      const verse = page.getByTestId('verse-arabic-1:1');
+      const verse = page.getByTestId(getVerseArabicTestId('1:1'));
       await verse.click();
 
       // Open More submenu (handles both mobile button and desktop menuitem)

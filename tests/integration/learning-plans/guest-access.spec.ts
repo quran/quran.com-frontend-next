@@ -1,5 +1,7 @@
 import { test, expect, type Page, type BrowserContext } from '@playwright/test';
 
+import { getSyllabusLessonTestId, TestId } from '@/tests/test-ids';
+
 const LP_URL = '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
 const FIRST_LESSON_URL = `${LP_URL}/lessons/the-king-of-all-kings`;
 
@@ -10,7 +12,7 @@ const clearState = async (context: BrowserContext, page: Page): Promise<void> =>
 };
 
 const enrollGuest = async (page: Page): Promise<void> => {
-  await page.getByTestId('learning-plan-enroll-button').first().click();
+  await page.getByTestId(TestId.LEARNING_PLAN_ENROLL_BUTTON).first().click();
   await page.waitForURL(/\/learning-plans\/.*\/lessons\/.+/);
 };
 /**
@@ -32,7 +34,7 @@ const enrollAndReturn = async (page: Page): Promise<void> => {
 
 const expectLessonView = async (page: Page): Promise<void> => {
   await expect(page).toHaveURL(/\/lessons\//);
-  await expect(page.getByTestId('learning-plan-lesson-view')).toBeVisible();
+  await expect(page.getByTestId(TestId.LEARNING_PLAN_LESSON_VIEW)).toBeVisible();
 };
 
 const setupNonEnrolled = async (page: Page): Promise<void> => {
@@ -46,20 +48,20 @@ test.describe('Guest Enrollment', () => {
   test.beforeEach(async ({ page, context }) => clearState(context, page));
 
   test.skip('should show enroll button', async ({ page }) => {
-    await expect(page.getByTestId('learning-plan-enroll-button').first()).toBeVisible();
+    await expect(page.getByTestId(TestId.LEARNING_PLAN_ENROLL_BUTTON).first()).toBeVisible();
   });
 
   test.skip('should redirect to lesson and save to localStorage', async ({ page }) => {
     await enrollGuest(page);
     await expect(page).toHaveURL(/.*\/lessons\/.*/);
-    await expect(page.getByTestId('learning-plan-lesson-view')).toBeVisible();
+    await expect(page.getByTestId(TestId.LEARNING_PLAN_LESSON_VIEW)).toBeVisible();
   });
 
   test.skip('should persist after reload', async ({ page }) => {
     await enrollGuest(page);
     await page.reload();
     await expect(page).toHaveURL(/.*\/lessons\/.*/);
-    await expect(page.getByTestId('learning-plan-lesson-view')).toBeVisible();
+    await expect(page.getByTestId(TestId.LEARNING_PLAN_LESSON_VIEW)).toBeVisible();
   });
 });
 
@@ -69,12 +71,12 @@ test.describe('Post-Enrollment Navigation', () => {
 
   test.skip('should show start learning button', async ({ page }) => {
     await enrollAndReturn(page);
-    await expect(page.getByTestId('learning-plan-enroll-button').first()).toBeVisible();
+    await expect(page.getByTestId(TestId.LEARNING_PLAN_ENROLL_BUTTON).first()).toBeVisible();
   });
 
   test.skip('should navigate from start learning button', async ({ page }) => {
     await enrollAndReturn(page);
-    await page.getByTestId('learning-plan-enroll-button').first().click();
+    await page.getByTestId(TestId.LEARNING_PLAN_ENROLL_BUTTON).first().click();
     await page.waitForURL(/\/lessons\//);
   });
 });
@@ -86,7 +88,7 @@ test.describe('Login Redirects', () => {
   test.skip('should redirect to login on mark complete', async ({ page }) => {
     await enrollGuest(page);
     await scrollToEnd(page);
-    const markComplete = page.getByTestId('lesson-mark-complete-button').first();
+    const markComplete = page.getByTestId(TestId.LESSON_MARK_COMPLETE_BUTTON).first();
     await expect(markComplete).toBeVisible({ timeout: 10000 });
     await markComplete.click();
     await page.waitForURL(/\/(login|signup)/);
@@ -109,11 +111,11 @@ test.describe('Access Control', () => {
   test.skip('should navigate to lesson when clicking syllabus lesson', async ({ page }) => {
     await setupNonEnrolled(page);
     // Open Syllabus tab (rendered as button)
-    const syllabusTab = page.getByTestId('syllabus-button');
+    const syllabusTab = page.getByTestId(TestId.SYLLABUS_BUTTON);
     await syllabusTab.scrollIntoViewIfNeeded();
     await expect(syllabusTab).toBeVisible({ timeout: 10000 });
     await syllabusTab.click();
-    const firstSyllabusLink = page.getByTestId('syllabus-lesson-1').getByRole('link');
+    const firstSyllabusLink = page.getByTestId(getSyllabusLessonTestId(1)).getByRole('link');
     await Promise.all([firstSyllabusLink.click(), expectLessonView(page)]);
   });
 });

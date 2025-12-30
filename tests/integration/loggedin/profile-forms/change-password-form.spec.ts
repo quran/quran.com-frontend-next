@@ -157,9 +157,8 @@ test.describe('Password Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
+      const { newPassword } = getFormInputs(section);
 
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'Pass1!');
       await page.waitForTimeout(VALIDATION_WAIT);
 

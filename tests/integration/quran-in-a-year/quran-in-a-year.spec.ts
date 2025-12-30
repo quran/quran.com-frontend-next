@@ -2,6 +2,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homepage: Homepage;
 
@@ -17,11 +18,11 @@ test.describe('@quran-in-a-year', () => {
     async ({ page }) => {
       await homepage.goTo('/');
 
-      const section = page.getByTestId('quran-in-a-year-section');
+      const section = page.getByTestId(TestId.QURAN_IN_A_YEAR_SECTION);
       await expect(section).toBeVisible();
 
-      const copiedText = await page.evaluate(async () => {
-        const sectionElement = document.querySelector('[data-testid="quran-in-a-year-section"]');
+      const copiedText = await page.evaluate(async (sectionTestId: string) => {
+        const sectionElement = document.querySelector(`[data-testid="${sectionTestId}"]`);
         if (!sectionElement) {
           return null;
         }
@@ -61,7 +62,7 @@ test.describe('@quran-in-a-year', () => {
             resolve(capturedText);
           }, 50);
         });
-      });
+      }, TestId.QURAN_IN_A_YEAR_SECTION);
 
       expect(copiedText).not.toBeNull();
       // Should contain at least one space between words

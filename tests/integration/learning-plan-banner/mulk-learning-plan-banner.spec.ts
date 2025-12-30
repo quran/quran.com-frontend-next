@@ -1,9 +1,11 @@
 /* eslint-disable no-await-in-loop */
 import { test, expect, Page } from '@playwright/test';
 
+import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
-const banner = (page: Page) => page.getByTestId('learning-plan-banner');
+const banner = (page: Page) => page.getByTestId(TestId.LEARNING_PLAN_BANNER);
 const bannerImage = (page: Page) => banner(page).locator('img');
 
 async function scrollToBottom(page: Page) {
@@ -61,26 +63,14 @@ test.describe('Non-English language', () => {
   });
 
   test('Arabic version does not render the banner', async ({ page }) => {
-    await page.getByTestId('open-navigation-drawer').click();
-    await page.getByTestId('language-selector-button').click();
-    const languageContainer = page.getByTestId('language-container');
-    await Promise.all([
-      languageContainer.getByTestId('language-item-ar').click(),
-      page.waitForURL('/ar/67'),
-    ]);
+    await Promise.all([selectNavigationDrawerLanguage(page, 'ar'), page.waitForURL('/ar/67')]);
 
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);
   });
 
   test('French version does not render the banner', async ({ page }) => {
-    await page.getByTestId('open-navigation-drawer').click();
-    await page.getByTestId('language-selector-button').click();
-    const languageContainer = page.getByTestId('language-container');
-    await Promise.all([
-      languageContainer.getByTestId('language-item-fr').click(),
-      page.waitForURL('/fr/67'),
-    ]);
+    await Promise.all([selectNavigationDrawerLanguage(page, 'fr'), page.waitForURL('/fr/67')]);
 
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);

@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -34,7 +35,7 @@ test.describe('Dedicated Search Page', () => {
     { tag: ['@fast', '@search', '@page'] },
     async ({ page }) => {
       // 1. Make sure we see the popular searches section
-      const popularSearchesSection = page.getByTestId('popular-search-section');
+      const popularSearchesSection = page.getByTestId(TestId.POPULAR_SEARCH_SECTION);
       await expect(popularSearchesSection).toBeVisible();
 
       // 2. Make sure there's at least one popular search (one children to the popular searches section)
@@ -56,7 +57,7 @@ test.describe('Dedicated Search Page', () => {
       ]);
 
       // We should see the "No results found" message
-      const searchResults = page.getByTestId('search-drawer-container');
+      const searchResults = page.getByTestId(TestId.SEARCH_DRAWER_CONTAINER);
       await expect(searchResults.getByText('No results found')).toBeVisible();
     },
   );
@@ -73,7 +74,7 @@ test.describe('Dedicated Search Page', () => {
       ]);
 
       // 2. In the "search-drawer-container" div, we should see the "2:255" result
-      const searchResults = page.getByTestId('search-drawer-container');
+      const searchResults = page.getByTestId(TestId.SEARCH_DRAWER_CONTAINER);
       await expect(searchResults.getByText('2:255')).toBeVisible();
     },
   );
