@@ -165,48 +165,47 @@ const hasOverride = (overrides: AyahWidgetOverrides, key: keyof AyahWidgetOverri
 const getTranslationIds = (translations: AvailableTranslation[]): number[] =>
   translations.map((t) => t.id).filter((id): id is number => typeof id === 'number');
 
+/**
+ * Simple property keys that can be copied directly from overrides to preferences.
+ */
+const SIMPLE_OVERRIDE_KEYS: Array<keyof AyahWidgetOverrides> = [
+  'containerId',
+  'selectedSurah',
+  'selectedAyah',
+  'theme',
+  'mushaf',
+  'enableAudio',
+  'enableWbwTranslation',
+  'showTranslatorName',
+  'showTafsirs',
+  'showReflections',
+  'showAnswers',
+  'locale',
+  'reciter',
+  'showArabic',
+  'rangeEnabled',
+  'rangeEnd',
+];
+
+/**
+ * Apply widget overrides to base preferences.
+ * Handles simple properties via iteration and special cases (customSize) explicitly.
+ * @param {Preferences} base The base preferences.
+ * @param {AyahWidgetOverrides} overrides The overrides to apply.
+ * @returns {Preferences} The merged preferences.
+ */
 const applyWidgetOverrides = (base: Preferences, overrides: AyahWidgetOverrides): Preferences => {
   const next: Preferences = { ...base };
 
-  // Apply overrides explicitly so falsy values (false, null) still work.
-  if (hasOverride(overrides, 'containerId')) {
-    next.containerId = overrides.containerId ?? base.containerId;
-  }
-  if (hasOverride(overrides, 'selectedSurah')) {
-    next.selectedSurah = overrides.selectedSurah ?? base.selectedSurah;
-  }
-  if (hasOverride(overrides, 'selectedAyah')) {
-    next.selectedAyah = overrides.selectedAyah ?? base.selectedAyah;
-  }
-  if (hasOverride(overrides, 'theme')) next.theme = overrides.theme ?? base.theme;
-  if (hasOverride(overrides, 'mushaf')) next.mushaf = overrides.mushaf ?? base.mushaf;
-  if (hasOverride(overrides, 'enableAudio')) {
-    next.enableAudio = overrides.enableAudio ?? base.enableAudio;
-  }
-  if (hasOverride(overrides, 'enableWbwTranslation')) {
-    next.enableWbwTranslation = overrides.enableWbwTranslation ?? base.enableWbwTranslation;
-  }
-  if (hasOverride(overrides, 'showTranslatorName')) {
-    next.showTranslatorName = overrides.showTranslatorName ?? base.showTranslatorName;
-  }
-  if (hasOverride(overrides, 'showTafsirs')) {
-    next.showTafsirs = overrides.showTafsirs ?? base.showTafsirs;
-  }
-  if (hasOverride(overrides, 'showReflections')) {
-    next.showReflections = overrides.showReflections ?? base.showReflections;
-  }
-  if (hasOverride(overrides, 'showAnswers')) {
-    next.showAnswers = overrides.showAnswers ?? base.showAnswers;
-  }
-  if (hasOverride(overrides, 'locale')) next.locale = overrides.locale ?? base.locale;
-  if (hasOverride(overrides, 'reciter')) next.reciter = overrides.reciter;
-  if (hasOverride(overrides, 'showArabic')) {
-    next.showArabic = overrides.showArabic ?? base.showArabic;
-  }
-  if (hasOverride(overrides, 'rangeEnabled')) {
-    next.rangeEnabled = overrides.rangeEnabled ?? base.rangeEnabled;
-  }
-  if (hasOverride(overrides, 'rangeEnd')) next.rangeEnd = overrides.rangeEnd ?? base.rangeEnd;
+  // Apply simple properties
+  SIMPLE_OVERRIDE_KEYS.forEach((key) => {
+    if (hasOverride(overrides, key)) {
+      // Use type assertion since we know the types match between overrides and preferences
+      (next as any)[key] = overrides[key] ?? (base as any)[key];
+    }
+  });
+
+  // Handle customSize separately (nested object)
   if (hasOverride(overrides, 'customSize')) {
     next.customSize = {
       width: overrides.customSize?.width ?? base.customSize.width,
@@ -217,38 +216,31 @@ const applyWidgetOverrides = (base: Preferences, overrides: AyahWidgetOverrides)
   return next;
 };
 
+/**
+ * Build overrides object by comparing previous and next preferences.
+ * Only includes properties that actually changed.
+ * @param {Preferences} prev The previous preferences.
+ * @param {Preferences} next The next preferences.
+ * @returns {AyahWidgetOverrides} The overrides representing the differences.
+ */
 const buildOverridesFromDiff = (prev: Preferences, next: Preferences): AyahWidgetOverrides => {
   const overrides: AyahWidgetOverrides = {};
 
-  if (prev.containerId !== next.containerId) overrides.containerId = next.containerId;
-  if (prev.selectedSurah !== next.selectedSurah) overrides.selectedSurah = next.selectedSurah;
-  if (prev.selectedAyah !== next.selectedAyah) overrides.selectedAyah = next.selectedAyah;
-  if (prev.theme !== next.theme) overrides.theme = next.theme;
-  if (prev.mushaf !== next.mushaf) overrides.mushaf = next.mushaf;
-  if (prev.enableAudio !== next.enableAudio) overrides.enableAudio = next.enableAudio;
-  if (prev.enableWbwTranslation !== next.enableWbwTranslation) {
-    overrides.enableWbwTranslation = next.enableWbwTranslation;
-  }
-  if (prev.showTranslatorName !== next.showTranslatorName) {
-    overrides.showTranslatorName = next.showTranslatorName;
-  }
-  if (prev.showTafsirs !== next.showTafsirs) overrides.showTafsirs = next.showTafsirs;
-  if (prev.showReflections !== next.showReflections) {
-    overrides.showReflections = next.showReflections;
-  }
-  if (prev.showAnswers !== next.showAnswers) overrides.showAnswers = next.showAnswers;
-  if (prev.locale !== next.locale) overrides.locale = next.locale;
-  if (prev.reciter !== next.reciter) overrides.reciter = next.reciter;
-  if (prev.showArabic !== next.showArabic) overrides.showArabic = next.showArabic;
-  if (prev.rangeEnabled !== next.rangeEnabled) overrides.rangeEnabled = next.rangeEnabled;
-  if (prev.rangeEnd !== next.rangeEnd) overrides.rangeEnd = next.rangeEnd;
+  // Compare simple properties
+  SIMPLE_OVERRIDE_KEYS.forEach((key) => {
+    if ((prev as any)[key] !== (next as any)[key]) {
+      (overrides as any)[key] = (next as any)[key];
+    }
+  });
 
+  // Handle translations (convert to translationIds)
   const prevTranslationIds = getTranslationIds(prev.translations);
   const nextTranslationIds = getTranslationIds(next.translations);
   if (!areArraysEqual(prevTranslationIds, nextTranslationIds)) {
     overrides.translationIds = nextTranslationIds;
   }
 
+  // Handle customSize (nested object comparison)
   if (
     prev.customSize.width !== next.customSize.width ||
     prev.customSize.height !== next.customSize.height
