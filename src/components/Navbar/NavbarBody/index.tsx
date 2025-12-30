@@ -22,10 +22,10 @@ import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
-  selectIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
+  selectIsNavigationDrawerOpen,
 } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {

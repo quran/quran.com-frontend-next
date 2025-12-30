@@ -12,4 +12,18 @@
     display: block;
     margin-block-end: var(--spacing-medium2-px);
   }
+  .divider {
+    margin-block: var(--spacing-medium2-px);
+  }
+  .deleteAccountSection {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium2-px);
+    .deleteAccountSectionDescription {
+      font-size: var(--font-size-small-px);
+      .deleteAccountSectionDescriptionTitle {
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
 }
