@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import { getUserIdCookie } from './auth/login';
+
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
@@ -23,8 +25,17 @@ const getSearchQuery = (rawSearchQuery: string): string => {
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   if (isFirebaseEnabled) {
     import('src/lib/firebase').then((firebaseModule) => {
+      const userId = getUserIdCookie();
+      // Set GA4 User-ID (idempotent, safe to call on every event)
+      if (userId) {
+        firebaseModule.analytics().setUserId(userId);
+      }
+      const eventParams = {
+        ...params,
+        ...(userId && { user_id: userId }),
+      };
       // eslint-disable-next-line i18next/no-literal-string
-      firebaseModule.analytics().logEvent(eventName, params);
+      firebaseModule.analytics().logEvent(eventName, eventParams);
     });
   }
 };

@@ -5,11 +5,13 @@
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
+  --spacing-xmicro: 0.125rem;
   --spacing-micro: 0.1875rem;
   --spacing-xxsmall: 0.375rem;
   --spacing-xsmall: 0.625rem;
   --spacing-small: 0.8125rem;
   --spacing-medium: 1rem;
+  --spacing-medium2: 1.25rem;
   --spacing-large: 1.1875rem;
   --spacing-mega: 2rem;
 
@@ -29,6 +31,7 @@
   --font-size-small: 0.875rem;
   --font-size-normal: 1rem;
   --font-size-large: 1.125rem;
+  --font-size-large2: 1.25rem;
   --font-size-xlarge: 1.5rem;
   --font-size-jumbo: 2rem;
 
@@ -61,6 +64,8 @@
   --border-radius-default: 0.25rem;
   --border-radius-rounded: 15px;
   --border-radius-circle: 50%;
+  --border-radius-large-px: 20px;
+  --border-radius-xlarge-px: 50px;
   --border-radius-circle-small: 30px;
   --border-radius-medium-px: 10px;
   --border-radius-large-px: 20px;

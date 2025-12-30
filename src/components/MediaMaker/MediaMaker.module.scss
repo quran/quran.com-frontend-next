@@ -55,7 +55,8 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   max-width: 30% !important;
   @include breakpoints.smallerThanTablet {
     max-width: 90% !important;
-    margin-block-start: var(--banner-height);
+    // TODO: we should add the banner height here if it's shown
+    // margin-block-start: var(--banner-height);
   }
 }
 
@@ -94,7 +95,8 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
   @include breakpoints.smallerThanDesktop {
     width: 90%;
-    margin-block-start: var(--banner-height);
+    // TODO: we should add the banner height here if it's shown
+    // margin-block-start: var(--banner-height);
   }
 }
 

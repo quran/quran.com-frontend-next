@@ -6,6 +6,8 @@
 :root {
   // TODO: migrate constants.scss to use css variables
   --navbar-height: 3.6rem;
+  --context-menu-container-height: 3rem;
+  --mobile-reading-mode-tabs-height: 3.25rem;
   --navbar-container-height: var(--navbar-height);
   --banner-height: 3rem;
   --day-circle-color: transparent;

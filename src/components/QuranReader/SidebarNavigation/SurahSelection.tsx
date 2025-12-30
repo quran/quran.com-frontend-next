@@ -2,7 +2,7 @@ import styles from './SidebarNavigation.module.scss';
 import SurahList from './SurahList';
 
 type Props = {
-  onAfterNavigationItemRouted?: () => void;
+  onAfterNavigationItemRouted?: (itemValue?: string, itemType?: string) => void;
 };
 
 const SurahSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
