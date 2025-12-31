@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -10,6 +10,7 @@ import { Note } from '@/types/auth/Note';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 enum ModalType {
   ADD_NOTE = 'add-note',
@@ -52,6 +53,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
   children,
 }) => {
   const router = useRouter();
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
   const [editingNote, setEditingNote] = useState<Note | null>(null);
@@ -85,13 +87,14 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
 
   const handleTriggerClick = useCallback(() => {
     if (!isLoggedIn()) {
+      audioService.send({ type: 'CLOSE' });
       router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
       logNoteEvent('note_redirect_to_login');
       return;
     }
 
     openAddNoteModal();
-  }, [router, verseKey, openAddNoteModal, logNoteEvent]);
+  }, [audioService, router, verseKey, openAddNoteModal, logNoteEvent]);
 
   const openMyNotesModal = useCallback(() => {
     setActiveModal(ModalType.MY_NOTES);
