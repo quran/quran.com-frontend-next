@@ -1,0 +1,72 @@
+$arrow-rotation-open: 180deg;
+
+.selectWrapper {
+  position: relative;
+  inline-size: 100%;
+}
+
+.trigger {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xsmall);
+  outline: none;
+  user-select: none;
+  position: relative;
+  border-radius: var(--border-radius-default);
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  background: var(--color-background-alternative-faint);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  text-align: start;
+  block-size: calc(2 * var(--spacing-large));
+  padding-block: 0;
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  box-sizing: border-box;
+  inline-size: 100%;
+
+  &:focus-visible {
+    background: var(--color-background-alternative-medium);
+    outline: none;
+  }
+}
+
+.triggerOpen {
+  background: var(--color-background-alternative-medium);
+}
+
+.triggerLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.triggerArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+
+  > svg {
+    color: currentcolor;
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
+  }
+}
+
+.triggerArrowOpen {
+  transform: rotate($arrow-rotation-open);
+}
+
+.popoverContent {
+  inline-size: var(--trigger-width, 100%);
+  min-inline-size: unset;
+  max-inline-size: var(--trigger-width, 100%);
+  z-index: var(--z-index-high);
+  margin-block-start: var(--spacing-xxsmall);
+}
