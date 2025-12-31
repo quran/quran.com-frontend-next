@@ -16,3 +16,14 @@ export const selectNavigationDrawerLanguage = async (page: Page, locale: string)
   const languageContainer = await openNavigationDrawerLanguageSelector(page);
   await languageContainer.getByTestId(getLanguageItemTestId(locale)).click();
 };
+
+export const ensureEnglishLanguage = async (page: Page): Promise<void> => {
+  const html = page.locator('html');
+  const currentLang = await html.getAttribute('lang');
+  if (currentLang === 'en') {
+    return;
+  }
+
+  await selectNavigationDrawerLanguage(page, 'en');
+  await expect(html).toHaveAttribute('lang', 'en');
+};

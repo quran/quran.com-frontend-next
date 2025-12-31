@@ -3,6 +3,7 @@
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
 import { clearSelectedTranslations, selectTranslationPreference } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
@@ -64,6 +65,7 @@ test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 
   await homePage.goTo('/1/1');
+  await ensureEnglishLanguage(page);
 });
 
 test.describe('Translation Feedback - Logged In Users', () => {
@@ -189,9 +191,10 @@ test.describe('Translation Feedback - Logged In Users', () => {
   test(
     'Feedback text validation enforces minimum and maximum length',
     { tag: ['@translation-feedback', '@form-validation'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
+      await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
@@ -225,9 +228,10 @@ test.describe('Translation Feedback - Logged In Users', () => {
   test(
     'Translation preview shows selected translation text',
     { tag: ['@translation-feedback', '@ui'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
+      await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
@@ -246,9 +250,10 @@ test.describe('Translation Feedback - Logged In Users', () => {
   test(
     'Successful feedback submission shows success toast and closes modal',
     { tag: ['@translation-feedback', '@submission', '@success'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
+      await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock successful API response
       await page.route('**/translation-feedback', async (route) => {
@@ -286,9 +291,10 @@ test.describe('Translation Feedback - Logged In Users', () => {
   test(
     'Failed feedback submission shows error toast and keeps modal open',
     { tag: ['@translation-feedback', '@submission', '@error'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
+      await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock failed API response
       await page.route('**/translation-feedback', async (route) => {

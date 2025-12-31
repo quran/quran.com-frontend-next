@@ -26,6 +26,18 @@ consistent, stable, and fast.
 - `tests/auth.setup.ts` creates that file using `TEST_USER_EMAIL` and `TEST_USER_PASSWORD`.
 - If those env vars are missing, logged-in tests will fail.
 
+## Logged-in prerequisites (shared account state)
+
+Logged-in tests run against a shared account that can carry state across runs. Do not assume any
+user preferences are still at defaults. Always set prerequisites explicitly before assertions.
+
+- If a test asserts English text, call `ensureEnglishLanguage(page)` at the start.
+- If a test depends on selected translations, reset them via
+  `clearSelectedTranslations(page, { isMobile })` and then add exactly what you need with
+  `selectTranslationPreference(page, translationId, { isMobile })`.
+- For other user settings (theme, word-by-word toggles, mushaf lines), set them explicitly using
+  helpers in `tests/helpers/settings.ts`. Do not rely on previous test state.
+
 ## Selector strategy
 
 Prefer stable, user-facing queries:
@@ -48,7 +60,7 @@ Settings and UI:
 - `tests/helpers/navigation.ts`
   - `openNavigationDrawer`, `openSearchDrawer`, `openQuranNavigation`.
 - `tests/helpers/language.ts`
-  - `selectNavigationDrawerLanguage`.
+  - `selectNavigationDrawerLanguage`, `ensureEnglishLanguage`.
 - `tests/helpers/mode-switching.ts`
   - `switchToReadingMode`, `switchToTranslationMode`.
 - `tests/helpers/banner.ts`
@@ -75,7 +87,6 @@ If a helper exists, use it. If not, add a new helper instead of duplicating logi
 
 - For shared API mocks, extend `tests/mocks/msw/handlers.js`.
 - For test-specific API behavior, use `page.route(...)` inside the spec.
-- MSW is enabled in Playwright webServer via `MSW_ENABLED=true`.
 
 ## Adding new test ids
 

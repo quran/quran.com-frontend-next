@@ -9,6 +9,12 @@ let homePage: Homepage;
 
 test.describe('Banner Test - Logged In User', () => {
   test.beforeEach(async ({ page, context }) => {
+    // Skip all tests if MSW is not enabled
+    test.skip(
+      !process.env.MSW_ENABLED || process.env.MSW_ENABLED === 'false',
+      'MSW must be enabled for these tests',
+    );
+
     homePage = new Homepage(page, context);
     await homePage.goTo();
   });
