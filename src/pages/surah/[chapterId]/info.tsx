@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import { getPagesLookup, getChapterInfo, getChapterIdBySlug } from '@/api';
@@ -8,18 +8,23 @@ import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { ChapterResponse, VersesResponse, ChapterInfoResponse } from '@/types/ApiResponses';
+import ChaptersData from '@/types/ChaptersData';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
+import {
+  ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+} from '@/utils/staticPageGeneration';
 import { isValidChapterId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import withSsrRedux from '@/utils/withSsrRedux';
-import { ChapterResponse, VersesResponse, ChapterInfoResponse } from 'types/ApiResponses';
 
 type ChapterInfoProps = {
+  chaptersData: ChaptersData;
   chapterResponse: ChapterResponse;
   versesResponse: VersesResponse;
   chapterInfoResponse: ChapterInfoResponse;
@@ -63,7 +68,7 @@ const ChapterInfo: NextPage<ChapterInfoProps> = ({
 
       <QuranReader
         initialData={versesResponse}
-        id={chapterResponse!.chapter.id}
+        id={chapterResponse.chapter.id}
         quranReaderDataType={quranReaderDataType}
       />
     </>
@@ -104,7 +109,7 @@ const getChapterInfoData = async (chapterId: string, locale: string) => {
   return { versesResponse: minimalVersesResponse, chaptersData };
 };
 
-export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { params, locale } = context;
   let chapterId = String(params.chapterId);
 
@@ -119,24 +124,36 @@ export const getServerSideProps = withSsrRedux('/surah/[chapterId]/info', async 
     const chapterData = getChapterData(chaptersData, chapterId);
     const chapterInfoResponse = await getChapterInfo(chapterId, locale);
 
+    /**
+     * If the request succeeds, `chapterInfo` should exist.
+     * Its absence means the surah has no chapter info yet.
+     */
     if (!chapterInfoResponse?.chapterInfo) return { notFound: true };
 
     return {
       props: {
+        chaptersData,
         chapterResponse: { chapter: { ...chapterData, id: chapterId } },
         versesResponse,
         chapterInfoResponse,
         quranReaderDataType: QuranReaderDataType.Chapter,
       },
+
+      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {
-      transactionName: 'getServerSideProps-SurahInfoPage',
+      transactionName: 'getStaticProps-SurahInfoPage',
       metadata: { chapterId, locale },
     });
 
-    return { notFound: true };
+    return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
   }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking',
 });
 
 export default ChapterInfo;
