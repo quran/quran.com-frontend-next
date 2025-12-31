@@ -119,7 +119,8 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
     id: 'quran_android',
     title: t('browse.apps.quran_android.title'),
-    description: t('browse.apps.quran_android.caption'),
+    description: t('browse.apps.quran_android.description'),
+    tagline: t('browse.apps.quran_android.tagline'),
     iconSrc: '/images/app-portal/qdc-android-logo.webp',
     iconAlt: 'Quran for Android',
     androidHref: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran',
@@ -128,7 +129,8 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
     id: 'quran_ios',
     title: t('browse.apps.quran_ios.title'),
-    description: t('browse.apps.quran_ios.caption'),
+    description: t('browse.apps.quran_ios.description'),
+    tagline: t('browse.apps.quran_ios.tagline'),
     iconSrc: '/images/app-portal/qdc-ios-logo.webp',
     iconAlt: 'Quran for iOS',
     iosHref:
@@ -138,7 +140,8 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
     id: 'quranreflect',
     title: t('browse.apps.quranreflect.title'),
-    description: t('browse.apps.quranreflect.caption'),
+    description: t('browse.apps.quranreflect.description'),
+    tagline: t('browse.apps.quranreflect.tagline'),
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     webHref: 'https://quranreflect.com',
@@ -147,50 +150,52 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
   {
     id: 'sunnah',
     title: t('browse.apps.sunnah.title'),
-    description: t('browse.apps.sunnah.caption'),
+    description: t('browse.apps.sunnah.description'),
+    tagline: t('browse.apps.sunnah.tagline'),
     iconSrc: '/images/app-portal/sunnah_icon_web_optimized.png',
     iconAlt: 'Sunnah.com',
     webHref: 'https://sunnah.com',
     categories: ['hadith-sunnah', 'popular'],
   },
-
-  // -------------------------------------------
-  // 2. ReadTafsir (Tafsir.one)
-  // -------------------------------------------
   {
     id: 'readtafsir',
     title: t('browse.apps.readtafsir.title'),
-    description: t('browse.apps.readtafsir.caption'),
+    description: t('browse.apps.readtafsir.description'),
+    tagline: t('browse.apps.readtafsir.tagline'),
     iconSrc: '/images/app-portal/readtafsir_app_icon.png',
     iconAlt: 'ReadTafsir',
     webHref: 'https://read.tafsir.one/',
     categories: ['study-tools', 'quran-reader', 'popular'],
   },
-
-  // -------------------------------------------
-  // 3. Tafsir App
-  // -------------------------------------------
   {
     id: 'tafsirapp',
     title: t('browse.apps.tafsirapp.title'),
-    description: t('browse.apps.tafsirapp.caption'),
+    description: t('browse.apps.tafsirapp.description'),
+    tagline: t('browse.apps.tafsirapp.tagline'),
     iconSrc: '/images/app-portal/tafsir_app_icon.png',
     iconAlt: 'Tafsir App',
     webHref: 'https://tafsir.app/',
     categories: ['study-tools', 'quran-reader'],
   },
-
-  // -------------------------------------------
-  // 4. Muhaffidh
-  // -------------------------------------------
   {
     id: 'muhaffidh',
     title: t('browse.apps.muhaffidh.title'),
-    description: t('browse.apps.muhaffidh.caption'),
+    description: t('browse.apps.muhaffidh.description'),
+    tagline: t('browse.apps.muhaffidh.tagline'),
     iconSrc: '/images/app-portal/muhaffidh_app_icon.png',
     iconAlt: 'Muhaffidh App',
     webHref: 'https://muhaffidh.app/',
     categories: ['study-tools', 'quran-reader', 'popular'],
+  },
+  {
+    id: 'quranmeet',
+    title: t('browse.apps.quranmeet.title'),
+    description: t('browse.apps.quranmeet.description'),
+    tagline: t('browse.apps.quranmeet.tagline'),
+    iconSrc: '/images/app-portal/quranmeet_app_icon.png',
+    iconAlt: 'QuranMeet',
+    webHref: 'https://www.quranmeet.com/',
+    categories: ['community', 'study-tools'],
   },
 ];
 
@@ -278,8 +283,8 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
           <Image
             alt={ctaLabels.playStoreAlt}
             src="/images/play-store.svg"
-            width={135}
-            height={40}
+            width={90}
+            height={30}
             className={styles.storeBadgeImage}
           />
         </a>
@@ -296,8 +301,8 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
           <Image
             alt={ctaLabels.appStoreAlt}
             src="/images/app-store.svg"
-            width={136}
-            height={40}
+            width={90}
+            height={30}
             className={styles.storeBadgeImage}
           />
         </a>
