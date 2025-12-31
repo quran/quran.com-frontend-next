@@ -132,6 +132,7 @@
   display: flex;
   flex-direction: column;
   block-size: 100%;
+  min-block-size: 239px;
 }
 
 .cardBody {
@@ -173,25 +174,40 @@
 .appName {
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .appTagline {
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .appDescription {
   margin: 0;
   color: var(--color-text-faded);
-  line-height: 1.6;
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-block-size: calc(3 * 1.4em);
 }
 
 .cardActions {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: var(--spacing-small);
+  gap: var(--spacing-xsmall);
   margin-block-start: auto;
+  min-block-size: 30px;
 }
 
 .storeBadge {
@@ -202,22 +218,29 @@
   overflow: hidden;
   line-height: 0;
   box-shadow: var(--shadow-small);
+  inline-size: 90px;
+  block-size: 30px;
+  flex: 0 0 auto;
 }
 
 .storeBadgeImage {
   display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
 }
 
 .visitButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-block-size: 2.5rem;
-  padding: 0 var(--spacing-medium);
+  min-block-size: 30px;
+  padding: 0 var(--spacing-xsmall);
   border-radius: var(--border-radius-small-px);
   background: var(--color-success-medium);
   color: var(--color-text-inverse);
   font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-small);
   text-decoration: none;
   box-shadow: var(--shadow-small);
   transition: background var(--transition-fast);
