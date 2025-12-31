@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import { openSearchDrawer } from '@/tests/helpers/navigation';

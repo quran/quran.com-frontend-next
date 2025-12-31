@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 /* eslint-disable no-await-in-loop */
 import { expect, type Locator, type Page } from '@playwright/test';
 

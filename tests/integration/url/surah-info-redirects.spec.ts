@@ -34,7 +34,6 @@ test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Surah Info URL Redirects', () => {
   test(
     'should redirect /surah-info/1 to /surah/1/info and display surah info modal',

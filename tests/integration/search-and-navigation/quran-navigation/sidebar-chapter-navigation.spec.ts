@@ -1,5 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import { openQuranNavigation } from '@/tests/helpers/navigation';
@@ -169,7 +167,6 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   );
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Chapter Navigation and Search', () => {
   test(
     'Chapter list displays and chapter search filters correctly',
@@ -260,7 +257,6 @@ test.describe('Quran Structure Navigation', () => {
   );
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Navigation Functionality', () => {
   test(
     'Surah navigation navigates to correct URL',

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import ayahOfTheDayData from '@/data/ayah_of_the_day.json';

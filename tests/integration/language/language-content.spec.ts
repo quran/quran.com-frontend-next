@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';

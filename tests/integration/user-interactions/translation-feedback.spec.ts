@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';

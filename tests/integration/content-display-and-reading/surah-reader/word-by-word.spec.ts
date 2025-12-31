@@ -1,5 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect, type Locator, type Page } from '@playwright/test';
 
 import {

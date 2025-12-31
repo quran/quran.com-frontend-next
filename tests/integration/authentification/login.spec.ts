@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';

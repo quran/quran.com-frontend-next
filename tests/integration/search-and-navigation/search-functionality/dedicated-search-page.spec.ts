@@ -10,7 +10,6 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo('/search');
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Dedicated Search Page', () => {
   test(
     'Search for Juz from dedicated search page works correctly',

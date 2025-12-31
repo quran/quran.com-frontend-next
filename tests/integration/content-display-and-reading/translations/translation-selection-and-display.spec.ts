@@ -81,7 +81,6 @@ test.describe('Translation Selection', () => {
   );
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Translation Display and Persistence', () => {
   test(
     'Multiple translation selection persists and displays correctly',

@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect, type Page } from '@playwright/test';
 
 import { selectQuranFont, withSettingsDrawer } from '@/tests/helpers/settings';

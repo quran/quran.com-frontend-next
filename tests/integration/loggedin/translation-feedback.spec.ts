@@ -1,5 +1,4 @@
 /* eslint-disable no-await-in-loop */
-/* eslint-disable react-func/max-lines-per-function, max-lines */
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 

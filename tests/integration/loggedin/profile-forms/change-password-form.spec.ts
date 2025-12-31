@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import {

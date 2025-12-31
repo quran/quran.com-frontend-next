@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import { expectToastError } from './form-helpers';

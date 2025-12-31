@@ -1,4 +1,4 @@
-/* eslint-disable max-lines, no-await-in-loop, no-restricted-syntax, react-func/max-lines-per-function */
+/* eslint-disable no-await-in-loop, no-restricted-syntax */
 
 import { test, expect } from '@playwright/test';
 
