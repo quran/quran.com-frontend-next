@@ -4,10 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationFeedbackModal.module.scss';
 import TranslationPreview from './TranslationPreview';
+import TranslationSelect from './TranslationSelect';
 import useTranslationFeedbackForm from './useTranslationFeedbackForm';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
-import PopoverSelect from '@/dls/Forms/PopoverSelect';
 import TextArea from '@/dls/Forms/TextArea';
 import { WordVerse } from '@/types/Word';
 
@@ -34,17 +34,13 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
     <form onSubmit={onSubmit} noValidate className={styles.form}>
       <div className={styles.inputGroup}>
         <label htmlFor="translation-select">{t('translation-feedback.select-translation')}</label>
-
-        <PopoverSelect
+        <TranslationSelect
+          selectedTranslationId={selectedTranslationId}
+          selectOptions={selectOptions}
+          onTranslationChange={handleTranslationChange}
           id="translation-select"
           name="translation-select"
-          options={selectOptions}
-          value={selectedTranslationId}
-          placeholder={t('translation-feedback.select')}
-          onChange={handleTranslationChange}
-          fullWidth
         />
-
         {errors.translation && <div className={styles.error}>{errors.translation}</div>}
       </div>
 

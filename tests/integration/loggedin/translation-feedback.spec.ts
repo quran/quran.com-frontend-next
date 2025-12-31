@@ -53,12 +53,12 @@ const openTranslationFeedbackModal = async (
  * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
-  // Click the popover select trigger to open the dropdown
-  const translationSelectTrigger = page.getByTestId('popover-select-trigger');
+  // Click the translation select trigger to open the dropdown
+  const translationSelectTrigger = page.getByTestId('translation-select-trigger');
   await translationSelectTrigger.click();
 
   // Click the desired option
-  const option = page.getByTestId(`popover-select-option-${translationId}`);
+  const option = page.getByTestId(`translation-select-option-${translationId}`);
   await expect(option).toBeVisible();
   await option.click();
 };
@@ -123,7 +123,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Check translation dropdown
-      const translationSelect = page.getByTestId('popover-select-trigger');
+      const translationSelect = page.getByTestId('translation-select-trigger');
       await expect(translationSelect).toBeVisible();
 
       // Open the popover to see options
@@ -131,7 +131,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
 
       // Should have at least one translation option (from user preferences)
       // Note: Exact options depend on user's selected translations
-      const options = page.getByTestId(/popover-select-option-/);
+      const options = page.getByTestId(/translation-select-option-/);
       await expect(options.first()).toBeVisible();
       const optionCount = await options.count();
       expect(optionCount).toBeGreaterThan(0);
