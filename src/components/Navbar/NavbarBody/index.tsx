@@ -82,9 +82,20 @@ const NavbarBody: React.FC = () => {
     dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isQuranReaderRoute, normalizedPathname]);
 
+  // Determine whether to render the SidebarNavigation component.
+  // We keep it mounted during transitions to allow smooth CSS animations.
+  // Conditions:
+  // 1. isQuranReaderRoute: Always render on Quran reader pages (even if sidebar is hidden)
+  // 2. isSidebarNavigationVisible: Render when sidebar is actively visible
+  // 3. isSidebarClosing: Keep mounted during closing animation (timeout-based state)
+  // 4. isTransitioningToClose: Keep mounted during initial transition from visible to hidden (ref-based detection)
   const shouldRenderSidebarNavigation =
     isQuranReaderRoute || isSidebarNavigationVisible || isSidebarClosing || isTransitioningToClose;
 
+  // Manage sidebar closing animation timing.
+  // When sidebar becomes visible: cancel any pending close timeout
+  // When sidebar starts closing: set isSidebarClosing state and schedule its cleanup after transition duration
+  // This keeps the component mounted during CSS transitions, then unmounts it cleanly.
   useEffect(() => {
     if (isSidebarNavigationVisible) {
       setIsSidebarClosing(false);
