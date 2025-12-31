@@ -18,6 +18,14 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo('/profile');
 });
 
+const isNovuConfigured = [
+  process.env.NEXT_PUBLIC_NOVU_BACKEND_URL,
+  process.env.NEXT_PUBLIC_NOVU_SOCKET_URL,
+  process.env.NEXT_PUBLIC_NOVU_APP_ID,
+].every((value) => typeof value === 'string' && value.trim().length > 0);
+
+test.skip(!isNovuConfigured, 'Novu env vars are missing');
+
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@email-notification-settings'];
 
 // Wait time constants

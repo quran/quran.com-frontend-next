@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable react-func/max-lines-per-function, max-lines */
 import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
+import { clearSelectedTranslations, selectTranslationPreference } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import { getVerseArabicTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
@@ -132,9 +134,11 @@ test.describe('Translation Feedback - Logged In Users', () => {
   test(
     'Translation feedback form validation works correctly',
     { tag: ['@translation-feedback', '@form-validation'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
+
+      const translationId = await clearSelectedTranslations(page, { isMobile });
 
       // Test empty form submission
       const reportButton = page.getByRole('button', { name: 'Report' });
@@ -157,10 +161,24 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByText('Translation is required')).toBeVisible();
       await expect(page.getByText('Feedback is required')).not.toBeVisible();
 
+      await page.keyboard.press('Escape');
+      const modal = page.getByTestId(TestId.MODAL_CONTENT);
+      await expect(modal).toBeHidden();
+
+      await page.getByTestId('verse-1:1').click({ force: true, position: { x: 0, y: 0 } }); // Defocus to close the context menu if it's still open
+
+      await selectTranslationPreference(page, translationId, { isMobile });
+      await openTranslationFeedbackModal(page, 'translation');
+
+      const updatedFeedbackTextarea = page.getByPlaceholder(
+        'Use this space to report an issue relating to the selected translation of this Ayah.',
+      );
+      const updatedReportButton = page.getByRole('button', { name: 'Report' });
+
       // Test partial form - translation only
-      await selectTranslationOption(page, '131'); // Must be in user's preferences
-      await feedbackTextarea.clear();
-      await reportButton.click();
+      await selectTranslationOption(page, translationId); // Must be in user's preferences
+      await updatedFeedbackTextarea.clear();
+      await updatedReportButton.click();
 
       // Feedback error appears, translation error clears
       await expect(page.getByText('Translation is required')).not.toBeVisible();

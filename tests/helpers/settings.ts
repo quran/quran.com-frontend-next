@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-await-in-loop */
 import { expect, type Locator, type Page } from '@playwright/test';
 
@@ -14,6 +15,9 @@ export interface SettingsDrawerOptions {
   closeAfter?: boolean;
   isMobile?: boolean;
 }
+
+const EN_TRANSLATIONS_SELECTED_CARD_TEST_ID = 'Selected Translations Card';
+const TRANSLATIONS_SEARCH_INPUT_ID = 'translations-search';
 
 const setCheckboxValue = async (locator: Locator, enabled: boolean): Promise<void> => {
   const label = locator.locator('..');
@@ -90,6 +94,34 @@ export const withSettingsDrawer = async (
   }
 };
 
+const getTranslationsSelectionCard = (settingsBody: Locator): Locator => {
+  return settingsBody.locator(
+    `[data-testid="${EN_TRANSLATIONS_SELECTED_CARD_TEST_ID}"], [data-testid="${TestId.TRANSLATIONS_SELECTED_CARD}"]`,
+  );
+};
+
+const openTranslationSettings = async (
+  page: Page,
+  options: SettingsDrawerOptions = {},
+): Promise<Locator> => {
+  const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
+  if (!(await settingsBody.isVisible())) {
+    await openSettingsDrawer(page, options);
+  }
+
+  const translationSearch = settingsBody.locator(`#${TRANSLATIONS_SEARCH_INPUT_ID}`);
+  if (await translationSearch.isVisible()) {
+    return settingsBody;
+  }
+
+  const selectionCard = getTranslationsSelectionCard(settingsBody);
+  await expect(selectionCard.first()).toBeVisible();
+  await selectionCard.first().click();
+  await expect(translationSearch).toBeVisible();
+
+  return settingsBody;
+};
+
 export const selectTheme = async (page: Page, theme: ThemeType): Promise<void> => {
   await page.getByTestId(getThemeButtonTestId(theme)).click();
 };
@@ -113,6 +145,50 @@ export const changeWebsiteTheme = async (
     },
     options,
   );
+
+export const clearSelectedTranslations = async (
+  page: Page,
+  options: SettingsDrawerOptions = {},
+): Promise<string> => {
+  const settingsBody = await openTranslationSettings(page, options);
+  const translationCheckboxes = settingsBody.getByRole('checkbox');
+  await expect(translationCheckboxes.first()).toBeVisible();
+
+  const firstTranslationId = await translationCheckboxes.first().getAttribute('id');
+  const checkedTranslations = settingsBody.getByRole('checkbox', { checked: true });
+  let checkedCount = await checkedTranslations.count();
+
+  while (checkedCount > 0) {
+    await checkedTranslations.first().click();
+    await expect(checkedTranslations).toHaveCount(checkedCount - 1);
+    checkedCount = await checkedTranslations.count();
+  }
+
+  await closeSettingsDrawer(page);
+
+  if (!firstTranslationId) {
+    throw new Error('Unable to determine a translation id from settings.');
+  }
+
+  return firstTranslationId;
+};
+
+export const selectTranslationPreference = async (
+  page: Page,
+  translationId: string,
+  options: SettingsDrawerOptions = {},
+): Promise<void> => {
+  const settingsBody = await openTranslationSettings(page, options);
+  const translationCheckbox = settingsBody.locator(`[id="${translationId}"]`);
+  await expect(translationCheckbox).toBeVisible();
+
+  const isChecked = (await translationCheckbox.getAttribute('aria-checked')) === 'true';
+  if (!isChecked) {
+    await translationCheckbox.click();
+  }
+
+  await closeSettingsDrawer(page);
+};
 
 export const selectQuranFont = async (page: Page, font: SettingsQuranFont): Promise<void> => {
   await page.getByTestId(getQuranFontButtonTestId(font)).click();

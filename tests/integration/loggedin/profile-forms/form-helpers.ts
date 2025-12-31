@@ -19,7 +19,7 @@ export const fillAndBlur = async (input: Locator, value: string): Promise<void> 
  * @returns {Promise<void>}
  */
 export const enableValidation = async (page: Page, saveButton: Locator): Promise<void> => {
-  await saveButton.click();
+  await saveButton.click({ force: true });
   await page.waitForTimeout(500);
 };
 
