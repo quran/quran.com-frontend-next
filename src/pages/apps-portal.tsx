@@ -145,6 +145,9 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     iconSrc: '/images/app-portal/icon_web_optimized.png',
     iconAlt: 'QuranReflect',
     webHref: 'https://quranreflect.com',
+    androidHref:
+      'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+    iosHref: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
     categories: ['reflections', 'community'],
   },
   {
@@ -165,6 +168,9 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     iconSrc: '/images/app-portal/readtafsir_app_icon.png',
     iconAlt: 'ReadTafsir',
     webHref: 'https://read.tafsir.one/',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=one.tafsir.read',
+    iosHref:
+      'https://apps.apple.com/gb/app/%D8%A7%D9%84%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D9%8A/id6503959086',
     categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
@@ -175,6 +181,9 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     iconSrc: '/images/app-portal/tafsir_app_icon.png',
     iconAlt: 'Tafsir App',
     webHref: 'https://tafsir.app/',
+    androidHref: 'https://play.google.com/store/apps/details?id=com.thedawah.furqan',
+    iosHref:
+      'https://apps.apple.com/sa/app/%D8%A7%D9%84%D8%A8%D8%A7%D8%AD%D8%AB-%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86%D9%8A/id1450111969',
     categories: ['study-tools', 'quran-reader'],
   },
   {
@@ -185,6 +194,9 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     iconSrc: '/images/app-portal/muhaffidh_app_icon.png',
     iconAlt: 'Muhaffidh App',
     webHref: 'https://muhaffidh.app/',
+    androidHref: 'https://play.google.com/store/apps/details?hl=en&id=com.nuqayah.muhaffidh',
+    iosHref:
+      'https://apps.apple.com/us/app/%D8%A7%D9%84%D9%85%D8%B5%D8%AD%D9%81-%D8%A7%D9%84%D9%85%D8%AD%D9%81%D8%B8/id6642706361',
     categories: ['study-tools', 'quran-reader', 'popular'],
   },
   {
@@ -192,7 +204,7 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
     title: t('browse.apps.quranmeet.title'),
     description: t('browse.apps.quranmeet.description'),
     tagline: t('browse.apps.quranmeet.tagline'),
-    iconSrc: '/images/app-portal/quranmeet_app_icon.png',
+    iconSrc: '/images/app-portal/quran_meet_app.png',
     iconAlt: 'QuranMeet',
     webHref: 'https://www.quranmeet.com/',
     categories: ['community', 'study-tools'],
