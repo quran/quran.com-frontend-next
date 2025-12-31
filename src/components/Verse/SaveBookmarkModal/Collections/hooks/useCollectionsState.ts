@@ -54,7 +54,7 @@ export const useCollectionsState = ({
 
   const isInFavorites = useMemo(() => {
     if (isPage) return isResourceBookmarked;
-    return isResourceBookmarked && resourceBookmark?.isInDefaultCollection === true;
+    return isResourceBookmarked && resourceBookmark?.isInDefaultCollection;
   }, [isPage, isResourceBookmarked, resourceBookmark?.isInDefaultCollection]);
 
   const sortedCollections = useMemo((): CollectionItem[] => {
@@ -72,7 +72,7 @@ export const useCollectionsState = ({
     const collections = collectionListData.data.map((collection) => ({
       id: collection.id,
       name: collection.name,
-      checked: bookmarkCollectionIdsData?.includes(collection.id) || false,
+      checked: !!bookmarkCollectionIdsData?.includes(collection.id),
       updatedAt: collection.updatedAt,
       isDefault: false,
     }));
