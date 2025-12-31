@@ -2,6 +2,15 @@ import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 
 export enum TestId {
+  AUTH_UPDATE_PROFILE_CHANGE_PASSWORD_SECTION = 'auth-update-profile-change-password-section',
+  AUTH_UPDATE_PROFILE_CONFIRM_NEW_PASSWORD_INPUT = 'auth-update-profile-confirm-new-password-input',
+  AUTH_UPDATE_PROFILE_CURRENT_PASSWORD_INPUT = 'auth-update-profile-current-password-input',
+  AUTH_UPDATE_PROFILE_EDIT_DETAILS_SECTION = 'auth-update-profile-edit-details-section',
+  AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_CHECKBOX = 'auth-update-profile-email-notification-settings-checkbox',
+  AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_SECTION = 'auth-update-profile-email-notification-settings-section',
+  AUTH_UPDATE_PROFILE_NEW_PASSWORD_INPUT = 'auth-update-profile-new-password-input',
+  AUTH_UPDATE_PROFILE_PERSONALIZATION_SECTION = 'auth-update-profile-personalization-section',
+  AUTH_UPDATE_PROFILE_PROFILE_INPUT = 'auth-update-profile-input',
   AUDIO_CLOSE_PLAYER = 'audio-close-player',
   AUDIO_ELAPSED = 'audio-elapsed',
   AUDIO_NEXT_AYAH = 'audio-next-ayah',
