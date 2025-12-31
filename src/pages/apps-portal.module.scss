@@ -132,14 +132,14 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  block-size: 239px;
+  min-block-size: 220px;
 }
 
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 14px;
+  padding: 16px;
   flex: 1;
 }
 
@@ -156,9 +156,9 @@
 }
 
 .appIcon {
-  inline-size: 2.75rem;
-  block-size: 2.75rem;
-  border-radius: 15px;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: 16px;
   background: var(--color-background-alternative-faded);
   display: grid;
   place-items: center;
@@ -173,7 +173,7 @@
 
 .appName {
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-large2);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -182,7 +182,7 @@
 
 .appTagline {
   color: var(--color-text-faded);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -192,13 +192,13 @@
 .appDescription {
   margin: 0;
   color: var(--color-text-faded);
-  font-size: var(--font-size-small);
-  line-height: 1.4;
+  font-size: var(--font-size-normal);
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-block-size: calc(3 * 1.4em);
+  min-block-size: calc(2 * 1.5em);
 }
 
 .cardActions {
@@ -218,8 +218,8 @@
   overflow: hidden;
   line-height: 0;
   box-shadow: var(--shadow-small);
-  inline-size: 90px;
-  block-size: 30px;
+  inline-size: 96px;
+  block-size: 32px;
   flex: 0 0 auto;
 }
 
@@ -236,13 +236,13 @@
   justify-content: center;
   gap: 7px;
   box-sizing: border-box;
-  block-size: 30px;
-  padding: 5px 10px;
+  block-size: 32px;
+  padding: 6px 12px;
   border-radius: var(--border-radius-xsmall-px);
   background: var(--color-success-medium);
   color: var(--color-text-inverse);
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
   line-height: 1;
   text-decoration: none;
   box-shadow: var(--shadow-small);
@@ -259,18 +259,18 @@
 
 @include breakpoints.smallerThanTablet {
   .cardBody {
-    gap: 16px;
-    padding: 16px;
+    gap: 12px;
+    padding: 14px;
   }
 
   .appMeta {
-    gap: 14px;
+    gap: 12px;
   }
 
   .appIcon {
-    inline-size: 2.5rem;
-    block-size: 2.5rem;
-    border-radius: 12px;
+    inline-size: 3rem;
+    block-size: 3rem;
+    border-radius: 14px;
   }
 
   .cardActions {
@@ -278,12 +278,12 @@
   }
 
   .storeBadge {
-    inline-size: 80px;
+    inline-size: 88px;
     block-size: 30px;
   }
 
   .visitButton {
-    padding: 0 8px;
+    padding: 0 10px;
   }
 }
 
