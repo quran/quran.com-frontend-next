@@ -343,7 +343,7 @@ const FeaturedCard: FC<{ app: FeaturedApp; ctaLabels: AppCtaLabels }> = ({ app, 
             alt={app.iconAlt}
             src={app.iconSrc}
             fill
-            sizes="44px"
+            sizes="70px"
             className={styles.appIconImage}
           />
         </span>
@@ -399,7 +399,7 @@ const AppTileCard: FC<{ app: AppTile; ctaLabels: AppCtaLabels }> = ({ app, ctaLa
             alt={app.iconAlt}
             src={app.iconSrc}
             fill
-            sizes="44px"
+            sizes="70px"
             className={styles.appIconImage}
           />
         </span>
