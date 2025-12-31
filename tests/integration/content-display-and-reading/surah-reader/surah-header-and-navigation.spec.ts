@@ -43,6 +43,7 @@ test.describe('Surah Header Display', () => {
   );
 });
 
+// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Surah Navigation', () => {
   test(
     'Surah info button navigates to surah information page',
@@ -63,15 +64,13 @@ test.describe('Surah Navigation', () => {
     'Clicking surah info button opens modal with surah information',
     { tag: ['@slow', '@surah', '@modal', '@info'] },
     async ({ page }) => {
-      // Pre-calculate the surah info button locator
       const infoButton = page.getByTestId('surah-info-button');
-
-      // Click on the info button
       await infoButton.click();
 
       // Verify modal is open and contains surah info content
       await expect(page.getByTestId('modal-content')).toBeVisible();
-      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
+      const modalHeader = page.getByText('Surah Info');
+      await expect(modalHeader).toBeVisible(); // Modal header
 
       // Verify surah info content is inside the modal
       const modalContent = page.getByTestId('modal-content');
@@ -79,6 +78,23 @@ test.describe('Surah Navigation', () => {
       await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
       await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
       await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+
+      // Verify sticky header behavior while scrolling
+      const dialogContent = page.getByTestId('dialog-content');
+      const surahInfoContent = page.getByTestId('surah-info-content');
+
+      // Find which element is scrollable and scroll it
+      const dialogScrollable = await dialogContent.evaluate(
+        (el) => el.scrollHeight > el.clientHeight,
+      );
+      const scrollableElement = dialogScrollable ? dialogContent : surahInfoContent;
+
+      await scrollableElement.evaluate((el) => {
+        // eslint-disable-next-line no-param-reassign
+        el.scrollTop = el.scrollHeight;
+      });
+
+      await expect(modalHeader).toBeVisible();
     },
   );
 });

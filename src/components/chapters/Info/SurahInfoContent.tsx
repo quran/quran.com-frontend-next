@@ -24,7 +24,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({ chapterId, chapterI
   return (
     <>
       <div className={styles.bottomSheetOnDesktopHeaderSeparator} />
-      <div className={styles.surahInfoModalContent}>
+      <div className={styles.surahInfoModalContent} data-testid="surah-info-content">
         <div className={styles.headerContainer}>
           <div className={styles.calligraphyContainer}>
             <ChapterIconContainer

@@ -123,6 +123,7 @@ const FakeContentModal = ({
         <div
           ref={contentRef}
           data-state={dataState}
+          data-testid="fake-dialog-content"
           className={classNames(styles.contentWrapper, contentClassName, {
             [styles.small]: size === ContentModalSize.SMALL,
             [styles.medium]: size === ContentModalSize.MEDIUM,
