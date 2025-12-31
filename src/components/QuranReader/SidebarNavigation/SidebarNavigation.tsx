@@ -41,8 +41,13 @@ const SidebarNavigation = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
+
+  // Delay the visibility state calculation to prevent unwanted CSS transitions on initial mount.
+  // When the component first renders with sidebar visible, we temporarily set this to true,
+  // then set it to false after the next animation frame. This ensures the browser completes
+  // the initial render before applying transition classes, avoiding flash/animation artifacts.
   const [shouldDelayVisibleState, setShouldDelayVisibleState] = useState(
-    () => isSidebarVisible === true || isSidebarVisible === 'auto',
+    isSidebarVisible === true || isSidebarVisible === 'auto',
   );
   useEffect(() => {
     if (!shouldDelayVisibleState) return undefined;

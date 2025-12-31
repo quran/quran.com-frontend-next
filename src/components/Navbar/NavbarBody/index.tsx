@@ -30,6 +30,7 @@ import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { logEvent } from '@/utils/eventLogger';
 
 const SidebarNavigation = dynamic(
@@ -59,8 +60,6 @@ const QURAN_READER_ROUTES = new Set([
   '/rub/[rubId]',
 ]);
 
-const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
-
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -75,6 +74,7 @@ const NavbarBody: React.FC = () => {
   const previousSidebarVisibilityRef = useRef(isSidebarNavigationVisible);
   const wasSidebarVisible = previousSidebarVisibilityRef.current;
   const isTransitioningToClose = wasSidebarVisible && !isSidebarNavigationVisible;
+  const sidebarTransitionDuration = getSidebarTransitionDurationFromCss();
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -97,7 +97,7 @@ const NavbarBody: React.FC = () => {
       sidebarVisibilityTimeoutRef.current = setTimeout(() => {
         setIsSidebarClosing(false);
         sidebarVisibilityTimeoutRef.current = null;
-      }, SIDEBAR_TRANSITION_DURATION_MS);
+      }, sidebarTransitionDuration);
     }
 
     previousSidebarVisibilityRef.current = isSidebarNavigationVisible;
@@ -108,7 +108,7 @@ const NavbarBody: React.FC = () => {
         sidebarVisibilityTimeoutRef.current = null;
       }
     };
-  }, [isSidebarNavigationVisible]);
+  }, [isSidebarNavigationVisible, sidebarTransitionDuration]);
 
   useEffect(() => {
     if (hasResetSidebarAfterHydration.current) return;

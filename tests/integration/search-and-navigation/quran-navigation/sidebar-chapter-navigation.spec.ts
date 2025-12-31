@@ -39,7 +39,7 @@ test.describe('Navigation Sidebar Operations', () => {
       // 1. Make sure the navigation drawer is not mounted by default
       await expect(page.getByTestId('sidebar-navigation')).not.toBeAttached();
 
-      // 2. Go to a a surah page
+      // 2. Go to a surah page
       await homePage.goTo('/2');
 
       // 3. Open the navigation drawer
