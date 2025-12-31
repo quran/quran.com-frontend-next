@@ -65,6 +65,14 @@ $container-min-height: 200px;
     line-height: 1.6;
   }
 
+  @include breakpoints.tablet {
+    /**
+    * Adds a small inline-end padding to create visual spacing
+    * between the content and the scrollbar.
+    */
+    padding-inline-end: var(--spacing-xxsmall);
+  }
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-max);
   }
@@ -129,9 +137,7 @@ div {
   &.bottomSheetOnDesktopContent {
     @include breakpoints.tablet {
       border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
-      block-size: auto;
-      max-block-size: 95vh;
-      min-block-size: 95vh;
+      block-size: 95vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -153,7 +159,9 @@ div {
 }
 
 .bottomSheetOnDesktopHeaderSeparator {
+  display: none;
   @include breakpoints.tablet {
+    display: block;
     padding-block-start: var(--spacing-medium3-px);
     margin-block-end: var(--spacing-micro);
     border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
@@ -162,7 +170,10 @@ div {
 
 .bottomSheetOnDesktopInnerContent {
   @include breakpoints.tablet {
-    flex: 1;
+    /**
+    * Acts as a non-scrollable flex container so that
+    * scrollability is delegated to its inner content.
+    */
     min-block-size: 0;
     display: flex;
     flex-direction: column;
