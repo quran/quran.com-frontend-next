@@ -15,6 +15,38 @@ interface BookmarkIconProps {
   isVerseMultipleBookmarked?: boolean;
 }
 
+type BookmarkState = Pick<
+  BookmarkIconProps,
+  'isBookmarked' | 'isReadingBookmark' | 'isVerseMultipleBookmarked'
+>;
+
+// Prioritized icon rules; first predicate match determines the rendered icon.
+const prioritizedIcons: Array<{
+  predicate: (state: BookmarkState) => boolean;
+  icon: JSX.Element;
+}> = [
+  {
+    predicate: ({ isReadingBookmark, isBookmarked }) => Boolean(isReadingBookmark && isBookmarked),
+    icon: <ReadingBookmarkAndOther className={styles.bookmarkIcon} />,
+  },
+  {
+    predicate: ({ isReadingBookmark }) => Boolean(isReadingBookmark),
+    icon: <BookmarkStar className={styles.bookmarkIcon} />,
+  },
+  {
+    predicate: ({ isVerseMultipleBookmarked }) => Boolean(isVerseMultipleBookmarked),
+    icon: <BookmarkMultiple className={styles.bookmarkIcon} />,
+  },
+  {
+    predicate: ({ isBookmarked }) => Boolean(isBookmarked),
+    icon: <BookmarkFilled className={styles.bookmarkIcon} />,
+  },
+];
+
+const defaultIcon = (
+  <IconContainer icon={<UnBookmarkedIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+);
+
 /**
  * Renders the appropriate bookmark icon based on loading and bookmark state.
  *
@@ -27,29 +59,15 @@ const BookmarkIcon: React.FC<BookmarkIconProps> = ({
   isReadingBookmark,
   isVerseMultipleBookmarked,
 }): JSX.Element => {
+  const match = prioritizedIcons.find(({ predicate }) =>
+    predicate({ isBookmarked, isReadingBookmark, isVerseMultipleBookmarked }),
+  );
+
   if (isLoading) {
     return <Spinner />;
   }
 
-  if (isReadingBookmark && isBookmarked) {
-    return <ReadingBookmarkAndOther className={styles.bookmarkIcon} />;
-  }
-
-  if (isReadingBookmark) {
-    return <BookmarkStar className={styles.bookmarkIcon} />;
-  }
-
-  if (isVerseMultipleBookmarked) {
-    return <BookmarkMultiple className={styles.bookmarkIcon} />;
-  }
-
-  if (isBookmarked) {
-    return <BookmarkFilled className={styles.bookmarkIcon} />;
-  }
-
-  return (
-    <IconContainer icon={<UnBookmarkedIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
-  );
+  return match?.icon ?? defaultIcon;
 };
 
 export default BookmarkIcon;
