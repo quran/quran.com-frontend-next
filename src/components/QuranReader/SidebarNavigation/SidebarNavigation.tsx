@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -41,6 +42,21 @@ const SidebarNavigation = () => {
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
 
+  // Delay the visibility state calculation to prevent unwanted CSS transitions on initial mount.
+  // When the component first renders with sidebar visible, we temporarily set this to true,
+  // then set it to false after the next animation frame. This ensures the browser completes
+  // the initial render before applying transition classes, avoiding flash/animation artifacts.
+  const [shouldDelayVisibleState, setShouldDelayVisibleState] = useState(
+    isSidebarVisible === true || isSidebarVisible === 'auto',
+  );
+  useEffect(() => {
+    if (!shouldDelayVisibleState) return undefined;
+    const animationFrameId = requestAnimationFrame(() => {
+      setShouldDelayVisibleState(false);
+    });
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [shouldDelayVisibleState]);
+
   useOutsideClickDetector(
     sidebarRef,
     () => {
@@ -69,8 +85,9 @@ const SidebarNavigation = () => {
     },
   ];
 
-  const isSidebarAuto = isSidebarVisible === 'auto';
-  const showSidebar = isSidebarVisible === true;
+  const isSidebarAuto = isSidebarVisible === 'auto' && !shouldDelayVisibleState;
+  const showSidebar = isSidebarVisible === true && !shouldDelayVisibleState;
+  const isSidebarActive = Boolean(isSidebarVisible) && !shouldDelayVisibleState;
 
   return (
     <div
@@ -83,8 +100,8 @@ const SidebarNavigation = () => {
         [styles.containerAutoCollapsed]: isSidebarAuto && !isNavbarVisible,
         [styles.inVisibleContainer]: isNavbarVisible,
         [styles.inVisibleContainerCollapsed]: !isNavbarVisible,
-        [styles.spaceOnTop]: isSidebarVisible && isNavbarVisible,
-        [styles.spaceOnTopCollapsed]: isSidebarVisible && !isNavbarVisible,
+        [styles.spaceOnTop]: isSidebarActive && isNavbarVisible,
+        [styles.spaceOnTopCollapsed]: isSidebarActive && !isNavbarVisible,
       })}
     >
       {!isReadingByRevelationOrder ? (
