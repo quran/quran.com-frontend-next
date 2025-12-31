@@ -125,28 +125,28 @@
 
 .featuredCard {
   background: var(--color-background-default);
-  border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
+  border: 1px solid var(--color-separators-ayah-level);
   border-radius: var(--border-radius-large-px);
+  box-sizing: border-box;
   box-shadow: var(--shadow-small-new);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  block-size: 100%;
-  min-block-size: 239px;
+  block-size: 239px;
 }
 
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-small);
-  padding: var(--spacing-medium);
+  gap: 20px;
+  padding: 20px;
   flex: 1;
 }
 
 .appMeta {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-small);
+  gap: 18px;
 }
 
 .appMetaText {
@@ -205,7 +205,7 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: var(--spacing-xsmall);
+  gap: 7px;
   margin-block-start: auto;
   min-block-size: 30px;
 }
@@ -214,7 +214,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius-xsmall2-px);
+  border-radius: var(--border-radius-xsmall-px);
   overflow: hidden;
   line-height: 0;
   box-shadow: var(--shadow-small);
@@ -234,13 +234,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-block-size: 30px;
-  padding: 0 var(--spacing-xsmall);
-  border-radius: var(--border-radius-small-px);
+  gap: 7px;
+  box-sizing: border-box;
+  block-size: 30px;
+  padding: 5px 10px;
+  border-radius: var(--border-radius-xsmall-px);
   background: var(--color-success-medium);
   color: var(--color-text-inverse);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-small);
+  line-height: 1;
   text-decoration: none;
   box-shadow: var(--shadow-small);
   transition: background var(--transition-fast);
@@ -248,6 +251,40 @@
 
 .visitButton:hover {
   background: var(--color-success-deep);
+}
+
+.visitIcon {
+  display: inline-flex;
+}
+
+@include breakpoints.smallerThanTablet {
+  .cardBody {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .appMeta {
+    gap: 14px;
+  }
+
+  .appIcon {
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    border-radius: 12px;
+  }
+
+  .cardActions {
+    gap: 6px;
+  }
+
+  .storeBadge {
+    inline-size: 80px;
+    block-size: 30px;
+  }
+
+  .visitButton {
+    padding: 0 8px;
+  }
 }
 
 .filters {
