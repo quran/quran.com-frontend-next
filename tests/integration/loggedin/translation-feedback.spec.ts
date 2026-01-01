@@ -46,10 +46,6 @@ const openTranslationFeedbackModal = async (
 
 /**
  * Selects a translation option in the translation feedback modal.
- *
- * By default, this function selects the translation (Dr. Mustafa Khattab) with ID `131`.
- * This ID is expected to exist in the user's preferences and is used
- * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
   // Click the translation select trigger to open the dropdown
@@ -86,7 +82,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
       await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
 
-      // As per spec when there is only one translation in user's preferences, that should be selected by default
+      // As per spec when there is only one translation, that should be selected by default
       await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
@@ -110,7 +106,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
       await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
 
-      // As per spec when there is only one translation in user's preferences, that should be selected by default
+      // As per spec when there is only one translation, that should be selected by default
       await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
@@ -135,8 +131,6 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Open the popover to see options
       await translationSelect.click();
 
-      // Should have at least one translation option (from user preferences)
-      // Note: Exact options depend on user's selected translations
       const options = page.getByTestId(/translation-select-option-/);
       await expect(options).toHaveCount(3);
     },
@@ -159,7 +153,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
-      // Verify both fields should show validation errors, user has 3 translations in their preferences so no translation should be default selected
+      // Verify both fields should show validation errors, no translation should be default selected
       await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
       await expect(page.getByTestId('feedback-error-required-field')).toBeVisible();
 
@@ -233,7 +227,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Fill in the form
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
       const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
       await feedbackTextarea.fill('This is a test feedback about the translation.');
@@ -274,7 +268,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Fill in the form
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
       const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
       await feedbackTextarea.fill('This is a test feedback about the translation.');
