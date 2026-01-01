@@ -27,6 +27,7 @@ import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffs
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -51,6 +52,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
   });

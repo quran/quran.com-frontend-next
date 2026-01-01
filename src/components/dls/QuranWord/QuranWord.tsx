@@ -37,6 +37,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word, { CharType } from 'types/Word';
 
@@ -104,6 +105,9 @@ const QuranWord = ({
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useXstateSelector(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { surah, ayahNumber, wordLocation: wordPosition } = state.context;
     return `${surah}:${ayahNumber}:${wordPosition}` === wordLocation;
   });
