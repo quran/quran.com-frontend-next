@@ -15,6 +15,7 @@ interface TranslationSelectProps {
   onTranslationChange: (value: string | number) => void;
   id?: string;
   name?: string;
+  dataTestId?: string;
 }
 
 const TranslationSelect: React.FC<TranslationSelectProps> = ({
@@ -23,6 +24,7 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
   onTranslationChange,
   id,
   name,
+  dataTestId,
 }) => {
   const { t } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,7 +57,7 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
   }, [isMenuOpen]);
 
   return (
-    <div ref={wrapperRef} className={styles.selectWrapper}>
+    <div ref={wrapperRef} className={styles.selectWrapper} data-testid={dataTestId}>
       <PopoverMenu
         isOpen={isMenuOpen}
         onOpenChange={setIsMenuOpen}

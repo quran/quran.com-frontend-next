@@ -94,6 +94,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
           />
         }
         onClick={handleGuestUserClick}
+        dataTestId="verse-actions-menu-translation-feedback"
       >
         {t('translation-feedback.title')}
       </PopoverMenu.Item>

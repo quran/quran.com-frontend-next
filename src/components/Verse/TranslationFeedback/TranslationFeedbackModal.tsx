@@ -33,7 +33,10 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
   return (
     <form onSubmit={onSubmit} noValidate className={styles.form}>
       <div className={styles.inputGroup}>
-        <label htmlFor="translation-select">{t('translation-feedback.select-translation')}</label>
+        <label htmlFor="translation-select" data-testid="translation-select-label">
+          {t('translation-feedback.select-translation')}
+        </label>
+
         <TranslationSelect
           selectedTranslationId={selectedTranslationId}
           selectOptions={selectOptions}
@@ -41,7 +44,11 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           id="translation-select"
           name="translation-select"
         />
-        {errors.translation && <div className={styles.error}>{errors.translation}</div>}
+        {errors.translation && (
+          <div className={styles.error} data-testid={`translation-error-${errors.translation.id}`}>
+            {errors.translation.message}
+          </div>
+        )}
       </div>
 
       <TranslationPreview verse={verse} selectedTranslationId={selectedTranslationId} />
@@ -54,9 +61,14 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           containerClassName={styles.textArea}
           value={feedback}
           onChange={handleFeedbackChange}
+          dataTestId="translation-feedback-textarea"
         />
 
-        {errors.feedback && <div className={styles.error}>{errors.feedback}</div>}
+        {errors.feedback && (
+          <div className={styles.error} data-testid={`feedback-error-${errors.feedback.id}`}>
+            {errors.feedback.message}
+          </div>
+        )}
       </div>
 
       <div className={styles.actions}>
@@ -65,6 +77,7 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           isLoading={isSubmitting}
           size={ButtonSize.Small}
           className={styles.reportButton}
+          data-testid="translation-feedback-submit-button"
         >
           {t('translation-feedback.report')}
         </Button>

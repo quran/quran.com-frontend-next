@@ -73,15 +73,18 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
         });
 
         if (response && response.success) {
-          toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
+          toast(t('translation-feedback.submission-success'), {
+            status: ToastStatus.Success,
+            testId: 'success-toast',
+          });
           onClose();
         } else {
           // It's not likely to happen, but if it does, we'll log the error to Sentry.
-          toast(t('error.general'), { status: ToastStatus.Error });
+          toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
           sendFeedbackErrorToSentry(response, verse.verseKey, selectedTranslationId);
         }
       } catch (error) {
-        toast(t('error.general'), { status: ToastStatus.Error });
+        toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
         sendFeedbackErrorToSentry(error, verse.verseKey, selectedTranslationId);
       } finally {
         setIsSubmitting(false);

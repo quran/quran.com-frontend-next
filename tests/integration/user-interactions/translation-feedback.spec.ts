@@ -26,9 +26,7 @@ test.describe('Translation Feedback - Guest Users', () => {
       await moreButton.click();
 
       // Select Translation Feedback option
-      const translationFeedbackOption = page.getByRole('menuitem', {
-        name: 'Translation Feedback',
-      });
+      const translationFeedbackOption = page.getByTestId('verse-actions-menu-translation-feedback');
       await expect(translationFeedbackOption).toBeVisible();
       await translationFeedbackOption.click();
 
@@ -50,7 +48,7 @@ test.describe('Translation Feedback - Guest Users', () => {
       await verse.click();
 
       // Open More submenu (handles both mobile button and desktop menuitem)
-      const moreMenuitem = page.getByRole('menuitem', { name: 'More' });
+      const moreMenuitem = page.getByTestId('verse-actions-menu-more');
       const moreButton = page.getByLabel('More');
 
       await Promise.race([moreMenuitem.click(), moreButton.click()]);
