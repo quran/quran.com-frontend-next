@@ -1,4 +1,4 @@
-import ChapterPage, { getServerSideProps } from '@/pages/[chapterId]/index';
+import ChapterPage from '@/pages/[chapterId]/index';
 
-export { getServerSideProps };
+export { getStaticProps, getStaticPaths } from '@/pages/[chapterId]/index';
 export default ChapterPage;
