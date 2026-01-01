@@ -1,14 +1,23 @@
+@use 'src/styles/breakpoints';
+
 $study-mode-modal-width: 1310px;
 $study-mode-modal-content-width: 1230px;
 
 .container {
   padding: 0;
-  min-width: $study-mode-modal-width;
+
+  @include breakpoints.tablet {
+    min-width: $study-mode-modal-width;
+  }
 }
 
 .contentModal {
-  padding: var(--spacing-xlarge-px);
-  min-width: $study-mode-modal-content-width;
+  padding: var(--spacing-small);
+
+  @include breakpoints.tablet {
+    padding: var(--spacing-xlarge-px);
+    min-width: $study-mode-modal-content-width;
+  }
 }
 
 .innerContent {
@@ -20,7 +29,11 @@ $study-mode-modal-content-width: 1230px;
   align-items: center;
   gap: var(--spacing-small-px);
   width: 100%;
-  margin-block-end: var(--spacing-xlarge-px);
+  margin-block-end: var(--spacing-small);
+
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-xlarge-px);
+  }
 }
 
 .selectionWrapper {
@@ -29,18 +42,33 @@ $study-mode-modal-content-width: 1230px;
 
 .navButton {
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: var(--border-radius-xsmall-px) !important;
+  padding: var(--spacing-xsmall-px) !important;
+  background: var(--color-background-alternative-faint) !important;
+  background-color: var(--color-background-alternative-faint) !important;
 
   svg {
     width: var(--spacing-small-px);
     height: var(--spacing-small-px);
   }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  &:hover,
+  &:active,
+  &:focus {
+    background: var(--color-background-alternative-faint) !important;
+    background-color: var(--color-background-alternative-faint) !important;
+  }
+
+  &:disabled,
+  &[aria-disabled='true'],
+  &:global(.disabled) {
+    opacity: 1 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+
+    svg {
+      color: var(--color-daily-progress) !important;
+    }
   }
 }
 
@@ -48,4 +76,21 @@ $study-mode-modal-content-width: 1230px;
   svg {
     transform: scaleX(-1);
   }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+  color: var(--color-error-medium);
 }

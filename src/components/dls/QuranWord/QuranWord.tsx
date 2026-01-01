@@ -3,7 +3,6 @@ import React, {
   memo,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useState,
   lazy,
@@ -68,7 +67,6 @@ export type QuranWordProps = {
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
   verse?: Verse;
-  isClickDisabled?: boolean;
 };
 
 const QuranWord = ({
@@ -81,7 +79,6 @@ const QuranWord = ({
   isFontLoaded = true,
   bookmarksRangeUrl,
   verse,
-  isClickDisabled = false,
 }: QuranWordProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
@@ -94,15 +91,6 @@ const QuranWord = ({
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const [isStudyModeModalOpen, setIsStudyModeModalOpen] = useState(false);
   const [highlightedWordLocation, setHighlightedWordLocation] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    if (isClickDisabled) {
-      setIsMobileModalOpen(false);
-      setIsTooltipOpened(false);
-      setIsStudyModeModalOpen(false);
-      setHighlightedWordLocation(undefined);
-    }
-  }, [isClickDisabled]);
 
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
@@ -185,11 +173,34 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
+  // Shared handler for both click and keyboard interactions
+  const handleInteraction = useCallback(() => {
+    if (word.charTypeName === CharType.End && isTranslationMode) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+      setHighlightedWordLocation(undefined);
+      setIsStudyModeModalOpen(true);
+      return;
+    }
+
+    if (!isRecitationEnabled && isTranslationMode && word.charTypeName === CharType.Word) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+      setHighlightedWordLocation(word.location);
+      setIsStudyModeModalOpen(true);
+      return;
+    }
+
+    handleWordAction();
+  }, [
+    word.charTypeName,
+    word.location,
+    isTranslationMode,
+    isRecitationEnabled,
+    handleWordAction,
+    dispatch,
+  ]);
+
   const onClick = useCallback(
     (e: React.MouseEvent) => {
-      // Early return if clicking is disabled
-      if (isClickDisabled) return;
-
       // Only handle clicks that are directly on word elements
       // This prevents word pronunciation when clicking on modal content in Reading mode
       if (e && e.target) {
@@ -208,33 +219,19 @@ const QuranWord = ({
         }
       }
 
-      if (word.charTypeName === CharType.End && isTranslationMode) {
-        dispatch(setReadingViewHoveredVerseKey(null));
-        setHighlightedWordLocation(undefined);
-        setIsStudyModeModalOpen(true);
-        return;
-      }
-
-      if (!isRecitationEnabled && isTranslationMode && word.charTypeName === CharType.Word) {
-        dispatch(setReadingViewHoveredVerseKey(null));
-        setHighlightedWordLocation(word.location);
-        setIsStudyModeModalOpen(true);
-        return;
-      }
-
-      handleWordAction();
+      handleInteraction();
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
-    [handleWordAction, word.charTypeName, isTranslationMode, isRecitationEnabled, isClickDisabled],
+    [handleInteraction],
   );
 
   const onKeyPress = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        handleWordAction();
+        e.preventDefault();  // Prevent scrolling on Space key
+        handleInteraction();
       }
     },
-    [handleWordAction],
+    [handleInteraction],
   );
 
   const onMobileModalTriggerClick = useCallback(() => {
@@ -258,35 +255,34 @@ const QuranWord = ({
   }, [handleWordAction]);
 
   const onMouseEnter = useCallback(() => {
-    if (isClickDisabled) return;
     if (word.charTypeName === CharType.End && isTranslationMode) {
       dispatch(setReadingViewHoveredVerseKey(word.verseKey));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
-  }, [word.charTypeName, word.verseKey, isTranslationMode, isClickDisabled]);
+  }, [word.charTypeName, word.verseKey, isTranslationMode]);
 
   const onMouseLeave = useCallback(() => {
-    if (isClickDisabled) return;
     if (word.charTypeName === CharType.End && isTranslationMode) {
       dispatch(setReadingViewHoveredVerseKey(null));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
-  }, [word.charTypeName, isTranslationMode, isClickDisabled]);
+  }, [word.charTypeName, isTranslationMode]);
 
   const shouldHandleWordClicking = word.charTypeName !== CharType.End || isTranslationMode;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
-      {...(!isClickDisabled && shouldHandleWordClicking && { onClick, onKeyPress })}
-      {...(!isClickDisabled && { onMouseEnter, onMouseLeave })}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress })}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       role="button"
       tabIndex={0}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
-        [styles.highlightOnHover]: isRecitationEnabled && !isClickDisabled,
+        [styles.highlightOnHover]: isRecitationEnabled,
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -302,7 +298,7 @@ const QuranWord = ({
       })}
     >
       <Wrapper
-        shouldWrap={!isClickDisabled}
+        shouldWrap
         wrapper={(children) => {
           if (isTranslationMode && showTooltip) {
             return (
@@ -372,20 +368,18 @@ const QuranWord = ({
         </>
       )}
 
-      {!isClickDisabled && (
-        <Suspense fallback={null}>
-          <StudyModeModal
-            isOpen={isStudyModeModalOpen}
-            onClose={() => {
-              setIsStudyModeModalOpen(false);
-              setHighlightedWordLocation(undefined);
-            }}
-            word={word}
-            verse={verse}
-            highlightedWordLocation={highlightedWordLocation}
-          />
-        </Suspense>
-      )}
+      <Suspense fallback={null}>
+        <StudyModeModal
+          isOpen={isStudyModeModalOpen}
+          onClose={() => {
+            setIsStudyModeModalOpen(false);
+            setHighlightedWordLocation(undefined);
+          }}
+          word={word}
+          verse={verse}
+          highlightedWordLocation={highlightedWordLocation}
+        />
+      </Suspense>
     </div>
   );
 };

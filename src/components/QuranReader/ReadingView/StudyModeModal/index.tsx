@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useCallback, useContext, useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
+import Word, { CharType } from 'types/Word';
 
 interface Props {
   isOpen: boolean;
@@ -44,23 +44,37 @@ const StudyModeModal: React.FC<Props> = ({ isOpen, onClose, word, verse: initial
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
 
+  // Word navigation state
+  const [selectedWordLocation, setSelectedWordLocation] = useState<string | undefined>(
+    highlightedWordLocation,
+  );
+  const [showWordBox, setShowWordBox] = useState<boolean>(!!highlightedWordLocation);
+
   useEffect(() => {
     let isMounted = true;
     if (isOpen && isMounted) {
       setSelectedChapterId(initialChapterId);
       setSelectedVerseNumber(initialVerseNumber);
+      setSelectedWordLocation(highlightedWordLocation);
+      setShowWordBox(!!highlightedWordLocation);
     }
-    return () => { isMounted = false; };
-  }, [isOpen, initialChapterId, initialVerseNumber]);
+    return () => {
+      isMounted = false;
+    };
+  }, [isOpen, initialChapterId, initialVerseNumber, highlightedWordLocation]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
-  const queryKey = isOpen ? makeByVerseKeyUrl(verseKey, {
-    words: true,
-    translationFields: 'resource_name,language_id',
-    translations: selectedTranslations.join(','),
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-  }) : null;
+  const queryKey = isOpen
+    ? makeByVerseKeyUrl(verseKey, {
+        words: true,
+        translationFields: 'resource_name,language_id',
+        translations: selectedTranslations.join(','),
+        ...getDefaultWordFields(quranReaderStyles.quranFont),
+        ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+        wordTranslationLanguage: 'en',
+        wordTransliteration: 'true',
+      })
+    : null;
 
   const { data, isValidating } = useSWR<VerseResponse>(queryKey, fetcher, {
     revalidateOnFocus: false,
@@ -76,33 +90,65 @@ const StudyModeModal: React.FC<Props> = ({ isOpen, onClose, word, verse: initial
   const handleVerseChange = useCallback((newVerseNumber: string) => setSelectedVerseNumber(newVerseNumber), []);
   const handlePreviousVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
-    if (currentVerseNum > 1) {
-      setSelectedVerseNumber(String(currentVerseNum - 1));
-    } else {
-      const prevChapterId = Number(selectedChapterId) - 1;
-      if (prevChapterId >= 1 && chaptersData[prevChapterId]) {
-        setSelectedChapterId(String(prevChapterId));
-        setSelectedVerseNumber(String(chaptersData[prevChapterId]?.versesCount || 1));
-      }
-    }
-  }, [selectedChapterId, selectedVerseNumber, chaptersData]);
+    // Button is disabled when currentVerseNum === 1, so this is always safe
+    setSelectedVerseNumber(String(currentVerseNum - 1));
+  }, [selectedVerseNumber]);
   const handleNextVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
-    const currentChapter = chaptersData[Number(selectedChapterId)];
-    if (currentChapter && currentVerseNum < currentChapter.versesCount) {
-      setSelectedVerseNumber(String(currentVerseNum + 1));
-    } else {
-      const nextChapterId = Number(selectedChapterId) + 1;
-      if (nextChapterId <= 114 && chaptersData[nextChapterId]) {
-        setSelectedChapterId(String(nextChapterId));
-        setSelectedVerseNumber('1');
-      }
-    }
-  }, [selectedChapterId, selectedVerseNumber, chaptersData]);
+    // Button is disabled on last verse, so this is always safe
+    setSelectedVerseNumber(String(currentVerseNum + 1));
+  }, [selectedVerseNumber]);
 
-  const canNavigatePrev = Number(selectedChapterId) > 1 || Number(selectedVerseNumber) > 1;
-  const canNavigateNext = Number(selectedChapterId) < 114 ||
-    (Number(selectedChapterId) === 114 && Number(selectedVerseNumber) < (chaptersData[114]?.versesCount || 0));
+  // Disable prev if on first verse of current chapter
+  const canNavigatePrev = Number(selectedVerseNumber) > 1;
+
+  // Disable next if on last verse of current chapter
+  const currentChapter = chaptersData[Number(selectedChapterId)];
+  const canNavigateNext = currentChapter && Number(selectedVerseNumber) < currentChapter.versesCount;
+
+  // Filter only Quranic words (CharType.Word) for word navigation
+  const quranWords = useMemo(() => {
+    if (!currentVerse?.words) return [];
+    return currentVerse.words.filter((w) => w.charTypeName === CharType.Word);
+  }, [currentVerse?.words]);
+
+  // Find current selected word
+  const selectedWord = useMemo(() => {
+    if (!selectedWordLocation) return undefined;
+    return quranWords.find((w) => w.location === selectedWordLocation);
+  }, [quranWords, selectedWordLocation]);
+
+  // Find current word index for navigation
+  const currentWordIndex = useMemo(() => {
+    if (!selectedWordLocation) return -1;
+    return quranWords.findIndex((w) => w.location === selectedWordLocation);
+  }, [quranWords, selectedWordLocation]);
+
+  // Word navigation handlers
+  const handleWordClick = useCallback((word: Word) => {
+    setSelectedWordLocation(word.location);
+    setShowWordBox(true);
+  }, []);
+
+  const handlePreviousWord = useCallback(() => {
+    if (currentWordIndex > 0) {
+      setSelectedWordLocation(quranWords[currentWordIndex - 1].location);
+    }
+  }, [currentWordIndex, quranWords]);
+
+  const handleNextWord = useCallback(() => {
+    if (currentWordIndex < quranWords.length - 1) {
+      setSelectedWordLocation(quranWords[currentWordIndex + 1].location);
+    }
+  }, [currentWordIndex, quranWords]);
+
+  const handleCloseWordBox = useCallback(() => {
+    setShowWordBox(false);
+    setSelectedWordLocation(undefined);
+  }, []);
+
+  const canNavigateWordPrev = currentWordIndex > 0;
+  const canNavigateWordNext = currentWordIndex < quranWords.length - 1;
 
   const header = (
     <div className={styles.header}>
@@ -128,9 +174,33 @@ const StudyModeModal: React.FC<Props> = ({ isOpen, onClose, word, verse: initial
   if (!isOpen || !chaptersData) return null;
 
   const renderContent = () => {
-    if (isValidating && !data) return <div className={styles.loadingContainer}><Spinner /></div>;
-    if (currentVerse) return <StudyModeBody verse={currentVerse} bookmarksRangeUrl="" highlightedWordLocation={highlightedWordLocation} />;
-    return <div className={styles.errorContainer}><p>{t('error:general')}</p></div>;
+    if (isValidating && !data)
+      return (
+        <div className={styles.loadingContainer}>
+          <Spinner />
+        </div>
+      );
+    if (currentVerse)
+      return (
+        <StudyModeBody
+          verse={currentVerse}
+          bookmarksRangeUrl=""
+          selectedWord={selectedWord}
+          selectedWordLocation={selectedWordLocation}
+          showWordBox={showWordBox}
+          onWordClick={handleWordClick}
+          onWordBoxClose={handleCloseWordBox}
+          onNavigatePreviousWord={handlePreviousWord}
+          onNavigateNextWord={handleNextWord}
+          canNavigateWordPrev={canNavigateWordPrev}
+          canNavigateWordNext={canNavigateWordNext}
+        />
+      );
+    return (
+      <div className={styles.errorContainer}>
+        <p>{t('error:general')}</p>
+      </div>
+    );
   };
 
   return (
