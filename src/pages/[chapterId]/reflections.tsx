@@ -36,6 +36,7 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 type AyahReflectionProp = {
   chapter?: ChapterResponse;
@@ -43,6 +44,7 @@ type AyahReflectionProp = {
   chapterId?: string;
   chaptersData: ChaptersData;
   fallback?: any;
+  initialAyahReflections?: AyahReflectionsResponse;
 };
 
 const ReflectionsPage: NextPage<AyahReflectionProp> = ({
@@ -50,6 +52,7 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
   verseNumber,
   chapterId,
   fallback,
+  initialAyahReflections,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
@@ -84,6 +87,7 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
                 scrollToTop={scrollWindowToTop}
                 initialChapterId={chapterId}
                 initialVerseNumber={verseNumber.toString()}
+                initialAyahReflections={initialAyahReflections}
                 render={({ body, surahAndAyahSelection }) => {
                   return (
                     <div>
@@ -158,6 +162,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
           chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
           verseNumber,
           fallback,
+          initialAyahReflections: verseReflectionsData,
         },
       };
     } catch (error) {

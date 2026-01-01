@@ -11,9 +11,12 @@ import QueryParamMessage from '../QueryParamMessage';
 import useGetVersesCount from './hooks/useGetVersesCount';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
+import TranslationViewCell from './TranslationViewCell';
 import TranslationViewVerse from './TranslationViewVerse';
 
+import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
 import Spinner from '@/dls/Spinner/Spinner';
 import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
@@ -21,6 +24,9 @@ import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue
 import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import Verse from 'types/Verse';
@@ -85,6 +91,11 @@ const TranslationView = ({
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
+  const mushafId = useMemo(
+    () => getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+    [quranReaderStyles.mushafLines, quranReaderStyles.quranFont],
+  );
+
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
     verses?.length > 0
       ? {
@@ -125,16 +136,58 @@ const TranslationView = ({
     translationsQueryParamDifferent ||
     reciterQueryParamDifferent ||
     wordByWordLocaleQueryParamDifferent;
+  const queryParamMessage = shouldShowQueryParamMessage ? (
+    <QueryParamMessage
+      translationsQueryParamDifferent={translationsQueryParamDifferent}
+      reciterQueryParamDifferent={reciterQueryParamDifferent}
+      wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+    />
+  ) : null;
 
   return (
     <>
-      {shouldShowQueryParamMessage && (
-        <QueryParamMessage
-          translationsQueryParamDifferent={translationsQueryParamDifferent}
-          reciterQueryParamDifferent={reciterQueryParamDifferent}
-          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-        />
-      )}
+      {queryParamMessage}
+      <noscript suppressHydrationWarning>
+        <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
+          <div
+            className={styles.wrapper}
+            onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+          >
+            {verses.map((verse, verseIdx) => {
+              const bookmarksRangeUrl = isLoggedIn()
+                ? makeBookmarksRangeUrl(
+                    mushafId,
+                    Number(verse.chapterId),
+                    Number(verse.verseNumber),
+                    initialData.pagination.perPage,
+                  )
+                : undefined;
+              const translationsLabel = getTranslationsLabelString(verse.translations);
+              return (
+                <div key={verse.verseKey} className={styles.container}>
+                  {verse.verseNumber === 1 && (
+                    <ChapterHeader
+                      translationsLabel={translationsLabel}
+                      translationsCount={verse.translations?.length}
+                      chapterId={String(verse.chapterId)}
+                      pageNumber={verse.pageNumber}
+                      hizbNumber={verse.hizbNumber}
+                      isTranslationView
+                    />
+                  )}
+                  <TranslationViewCell
+                    verseIndex={verseIdx}
+                    verse={verse}
+                    quranReaderStyles={quranReaderStyles}
+                    bookmarksRangeUrl={bookmarksRangeUrl}
+                    hasNotes={false}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </PageQuestionsContext.Provider>
+      </noscript>
 
       <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
         <div
