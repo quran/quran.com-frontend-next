@@ -35,6 +35,7 @@ const MoreMenuItem: React.FC<Props> = ({ onMenuChange }) => {
         />
       }
       onClick={onMoreClicked}
+      dataTestId="verse-actions-menu-more"
     >
       <div className={styles.menuWithChevron}>
         {t('more')}

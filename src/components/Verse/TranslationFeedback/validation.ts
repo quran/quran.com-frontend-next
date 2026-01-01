@@ -1,6 +1,6 @@
 import { Translate } from 'next-translate';
 
-import { TranslationFeedbackFormErrors } from './types';
+import { FormErrorId, TranslationFeedbackFormErrors } from './types';
 
 export const MAX_FEEDBACK_CHARS = 10000;
 export const MIN_FEEDBACK_CHARS = 1;
@@ -21,26 +21,31 @@ export const getTranslationFeedbackErrors = (
   const errors: TranslationFeedbackFormErrors = {};
   const trimmedFeedbackLength = feedback.trim().length;
 
+  const translationText = t('translation-feedback.translation');
+  const feedbackText = t('translation-feedback.feedback');
+
   if (!selectedTranslationId) {
-    errors.translation = t('validation.required-field', {
-      field: t('translation-feedback.translation'),
-    });
+    errors.translation = {
+      id: FormErrorId.RequiredField,
+      message: t('validation.required-field', { field: translationText }),
+    };
   }
 
   if (trimmedFeedbackLength === 0) {
-    errors.feedback = t('validation.required-field', {
-      field: t('translation-feedback.feedback'),
-    });
+    errors.feedback = {
+      id: FormErrorId.RequiredField,
+      message: t('validation.required-field', { field: feedbackText }),
+    };
   } else if (trimmedFeedbackLength < MIN_FEEDBACK_CHARS) {
-    errors.feedback = t('validation.minimum-length', {
-      field: t('translation-feedback.feedback'),
-      value: MIN_FEEDBACK_CHARS,
-    });
+    errors.feedback = {
+      id: FormErrorId.MinimumLength,
+      message: t('validation.minimum-length', { field: feedbackText, value: MIN_FEEDBACK_CHARS }),
+    };
   } else if (trimmedFeedbackLength > MAX_FEEDBACK_CHARS) {
-    errors.feedback = t('validation.maximum-length', {
-      field: t('translation-feedback.feedback'),
-      value: MAX_FEEDBACK_CHARS,
-    });
+    errors.feedback = {
+      id: FormErrorId.MaximumLength,
+      message: t('validation.maximum-length', { field: feedbackText, value: MAX_FEEDBACK_CHARS }),
+    };
   }
 
   return errors;
