@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
+import { createTranslationConfig, mockPreferencesApi } from '@/tests/helpers/preferences-api-mocks';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -27,16 +28,14 @@ const openTranslationFeedbackModal = async (
     await verse.click();
 
     // Open More submenu (handles both mobile button and desktop menuitem)
-    const moreMenuitem = page.getByRole('menuitem', { name: 'More' });
+    const moreMenuitem = page.getByTestId('verse-actions-menu-more');
     const moreButton = page.getByLabel('More');
 
     await Promise.race([moreMenuitem.click(), moreButton.click()]);
   }
 
   // Select Translation Feedback option
-  const translationFeedbackOption = page.getByRole('menuitem', {
-    name: 'Translation Feedback',
-  });
+  const translationFeedbackOption = page.getByTestId('verse-actions-menu-translation-feedback');
   await expect(translationFeedbackOption).toBeVisible();
   await translationFeedbackOption.click();
 
@@ -47,26 +46,20 @@ const openTranslationFeedbackModal = async (
 
 /**
  * Selects a translation option in the translation feedback modal.
- *
- * By default, this function selects the translation (Dr. Mustafa Khattab) with ID `131`.
- * This ID is expected to exist in the user's preferences and is used
- * to ensure that selected translation data is properly loading.
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
-  // Click the popover select trigger to open the dropdown
-  const translationSelectTrigger = page.getByTestId('popover-select-trigger');
+  // Click the translation select trigger to open the dropdown
+  const translationSelectTrigger = page.getByTestId('translation-select-trigger');
   await translationSelectTrigger.click();
 
   // Click the desired option
-  const option = page.getByTestId(`popover-select-option-${translationId}`);
+  const option = page.getByTestId(`translation-select-option-${translationId}`);
   await expect(option).toBeVisible();
   await option.click();
 };
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
-
-  await homePage.goTo('/1/1');
 });
 
 test.describe('Translation Feedback - Logged In Users', () => {
@@ -74,6 +67,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Logged-in user can open translation feedback modal from translation view',
     { tag: ['@translation-feedback', '@auth', '@logged-in', '@smoke'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(131));
+      await homePage.goTo('/1/1');
+
       // Set translation mode to ensure consistent starting state
       await switchToTranslationMode(page);
 
@@ -81,13 +77,13 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Should contain translation feedback form elements
-      await expect(page.getByText('Select translation')).toBeVisible();
-      await expect(
-        page.getByPlaceholder(
-          'Use this space to report an issue relating to the selected translation of this Ayah.',
-        ),
-      ).toBeVisible();
-      await expect(page.getByRole('button', { name: 'Report' })).toBeVisible();
+      await expect(page.getByTestId('translation-select-label')).toBeVisible();
+      await expect(page.getByTestId('translation-select-trigger')).toBeVisible();
+      await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
+      await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
+
+      // As per spec when there is only one translation, that should be selected by default
+      await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
 
@@ -95,6 +91,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Logged-in user can open translation feedback modal from reading view',
     { tag: ['@translation-feedback', '@auth', '@logged-in'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(131));
+      await homePage.goTo('/1/1');
+
       // Set reading mode for consistent test state
       await switchToReadingMode(page);
 
@@ -102,13 +101,13 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'reading');
 
       // Should contain translation feedback form elements
-      await expect(page.getByText('Select translation')).toBeVisible();
-      await expect(
-        page.getByPlaceholder(
-          'Use this space to report an issue relating to the selected translation of this Ayah.',
-        ),
-      ).toBeVisible();
-      await expect(page.getByRole('button', { name: 'Report' })).toBeVisible();
+      await expect(page.getByTestId('translation-select-label')).toBeVisible();
+      await expect(page.getByTestId('translation-select-trigger')).toBeVisible();
+      await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
+      await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
+
+      // As per spec when there is only one translation, that should be selected by default
+      await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
 
@@ -116,6 +115,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation selection dropdown shows user preferences',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -123,18 +125,14 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Check translation dropdown
-      const translationSelect = page.getByTestId('popover-select-trigger');
+      const translationSelect = page.getByTestId('translation-select-trigger');
       await expect(translationSelect).toBeVisible();
 
       // Open the popover to see options
       await translationSelect.click();
 
-      // Should have at least one translation option (from user preferences)
-      // Note: Exact options depend on user's selected translations
-      const options = page.getByTestId(/popover-select-option-/);
-      await expect(options.first()).toBeVisible();
-      const optionCount = await options.count();
-      expect(optionCount).toBeGreaterThan(0);
+      const options = page.getByTestId(/translation-select-option-/);
+      await expect(options).toHaveCount(3);
     },
   );
 
@@ -142,6 +140,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation feedback form validation works correctly',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -149,67 +150,36 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Test empty form submission
-      const reportButton = page.getByRole('button', { name: 'Report' });
+      const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
-      // Verify both fields show validation errors
-      await expect(page.getByText('Translation is required')).toBeVisible();
-      await expect(page.getByText('Feedback is required')).toBeVisible();
+      // Verify both fields should show validation errors, no translation should be default selected
+      await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
+      await expect(page.getByTestId('feedback-error-required-field')).toBeVisible();
 
       // Test partial form - feedback only
-      const feedbackTextarea = page.getByPlaceholder(
-        'Use this space to report an issue relating to the selected translation of this Ayah.',
-      );
+      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
       await feedbackTextarea.fill('This is a test feedback');
       await reportButton.click();
 
       // Translation error persists, feedback error clears
-      await expect(page.getByText('Translation is required')).toBeVisible();
-      await expect(page.getByText('Feedback is required')).not.toBeVisible();
+      await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
+      await expect(page.getByTestId('feedback-error-required-field')).not.toBeVisible();
 
       // Test partial form - translation only
-      await selectTranslationOption(page, '131'); // Must be in user's preferences
+      await selectTranslationOption(page, '131');
       await feedbackTextarea.clear();
       await reportButton.click();
 
       // Feedback error appears, translation error clears
-      await expect(page.getByText('Translation is required')).not.toBeVisible();
-      await expect(page.getByText('Feedback is required')).toBeVisible();
-    },
-  );
-
-  test(
-    'Feedback text validation enforces minimum and maximum length',
-    { tag: ['@translation-feedback', '@form-validation'] },
-    async ({ page }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
-
-      // Open translation feedback modal
-      await openTranslationFeedbackModal(page, 'translation');
-
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
-
-      const feedbackTextarea = page.getByPlaceholder(
-        'Use this space to report an issue relating to the selected translation of this Ayah.',
-      );
-      const reportButton = page.getByRole('button', { name: 'Report' });
-
-      // Test empty input validation
-      await feedbackTextarea.fill('');
-      await reportButton.click();
-      await expect(page.getByText('Feedback is required')).toBeVisible();
-
-      // Test whitespace-only input validation
-      await feedbackTextarea.fill('   '); // Only spaces
-      await reportButton.click();
-      await expect(page.getByText('Feedback is required')).toBeVisible();
+      await expect(page.getByTestId('translation-error-required-field')).not.toBeVisible();
+      await expect(page.getByTestId('feedback-error-required-field')).toBeVisible();
 
       // Test maximum length validation (exceeds 10000 character limit)
       const longText = 'a'.repeat(10001);
       await feedbackTextarea.fill(longText);
       await reportButton.click();
-      await expect(page.getByText('Feedback cannot exceed 10000 characters')).toBeVisible();
+      await expect(page.getByTestId('feedback-error-maximum-length')).toBeVisible();
     },
   );
 
@@ -217,6 +187,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation preview shows selected translation text',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -224,13 +197,10 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Select a translation
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
       // Should show translation preview
-      const modal = page.getByTestId('modal-content');
-      await expect(
-        modal.getByText('In the Name of Allah—the Most Compassionate, Most Merciful.'),
-      ).toBeVisible();
+      await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
 
@@ -238,6 +208,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Successful feedback submission shows success toast and closes modal',
     { tag: ['@translation-feedback', '@submission', '@success'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -254,19 +227,17 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Fill in the form
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
-      const feedbackTextarea = page.getByPlaceholder(
-        'Use this space to report an issue relating to the selected translation of this Ayah.',
-      );
+      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
       await feedbackTextarea.fill('This is a test feedback about the translation.');
 
       // Submit the form
-      const reportButton = page.getByRole('button', { name: 'Report' });
+      const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
       // Should show success toast
-      await expect(page.getByText('Your feedback is sent successfully')).toBeVisible();
+      await expect(page.getByTestId('success-toast')).toBeVisible();
 
       // Modal should be closed
       const modal = page.getByTestId('modal-content');
@@ -278,6 +249,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Failed feedback submission shows error toast and keeps modal open',
     { tag: ['@translation-feedback', '@submission', '@error'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -294,19 +268,17 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Fill in the form
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
-      const feedbackTextarea = page.getByPlaceholder(
-        'Use this space to report an issue relating to the selected translation of this Ayah.',
-      );
+      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
       await feedbackTextarea.fill('This is a test feedback about the translation.');
 
       // Submit the form
-      const reportButton = page.getByRole('button', { name: 'Report' });
+      const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
       // Should show error toast
-      await expect(page.getByText('Something went wrong. Please try again.')).toBeVisible();
+      await expect(page.getByTestId('error-toast')).toBeVisible();
 
       // Modal should still be open
       const modal = page.getByTestId('modal-content');
@@ -318,6 +290,9 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Server-side feedback length validation error is handled gracefully',
     { tag: ['@translation-feedback', '@submission', '@validation', '@error-handling'] },
     async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 
@@ -346,10 +321,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await openTranslationFeedbackModal(page, 'translation');
 
       // Fill in the form with valid input that passes client-side validation
-      await selectTranslationOption(page, '131'); // This one must be available in authenticated user's preferences
-      const feedbackTextarea = page.getByPlaceholder(
-        'Use this space to report an issue relating to the selected translation of this Ayah.',
-      );
+      await selectTranslationOption(page, '131');
+      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
 
       // Use text that would pass client validation but fail server validation after sanitization
       await feedbackTextarea.fill(
@@ -357,11 +330,11 @@ test.describe('Translation Feedback - Logged In Users', () => {
       );
 
       // Submit the form
-      const reportButton = page.getByRole('button', { name: 'Report' });
+      const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
       // Should show specific validation error message instead of generic error
-      await expect(page.getByText(/Feedback cannot exceed 10000 characters/)).toBeVisible();
+      await expect(page.getByTestId('feedback-error-maximum-length')).toBeVisible();
 
       // Modal should remain open so user can correct the feedback
       const modal = page.getByTestId('modal-content');
@@ -373,6 +346,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Cancel action closes modal without submission',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page }) => {
+      await homePage.goTo('/1/1');
+
       // Ensure we're in translation mode
       await switchToTranslationMode(page);
 

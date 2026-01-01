@@ -72,7 +72,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
 
   if (translation) {
     return (
-      <div>
+      <div data-testid={`translation-preview-${selectedTranslationId}`}>
         <TranslationText
           key={selectedTranslationId}
           text={`"${translation.text}"`}

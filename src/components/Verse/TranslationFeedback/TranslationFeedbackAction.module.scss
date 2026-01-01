@@ -4,7 +4,7 @@
 .title {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
 }
 
 .overlay {
@@ -22,5 +22,16 @@
     overflow-y: auto;
     max-block-size: 100%;
     padding-block-end: var(--spacing-large);
+  }
+}
+
+.headerClassName {
+  @include breakpoints.smallerThanTablet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    block-size: calc(2 * var(--spacing-mega));
+    padding-block: 0;
   }
 }

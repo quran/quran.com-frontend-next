@@ -94,34 +94,39 @@ const ReflectionBodyContainer = ({
     [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType, isModal],
   );
 
+  const dataFetcher = (
+    <DataFetcher
+      loading={TafsirSkeleton}
+      queryKey={makeAyahReflectionsUrl({
+        surahId: selectedChapterId,
+        ayahNumber: selectedVerseNumber,
+        locale: lang,
+
+        reviewed: true,
+        reflectionLanguages: reflectionLanguageIsoCodes,
+
+        postTypeIds: [
+          selectedContentType === ContentType.REFLECTIONS
+            ? REFLECTION_POST_TYPE_ID
+            : LESSON_POST_TYPE_ID,
+        ],
+      })}
+      render={renderBody}
+    />
+  );
+
   const body = (
-    <>
+    <div className={styles.tabsContainerWrapper}>
       <Tabs
-        tabs={getReflectionTabs(t)}
+        tabs={getReflectionTabs(t, isModal)}
         selected={selectedContentType}
         onSelect={handleTabChange}
         className={styles.tab}
+        containerClassName={styles.tabsContainer}
         activeClassName={styles.tabActive}
       />
-      <DataFetcher
-        loading={TafsirSkeleton}
-        queryKey={makeAyahReflectionsUrl({
-          surahId: selectedChapterId,
-          ayahNumber: selectedVerseNumber,
-          locale: lang,
-
-          reviewed: true,
-          reflectionLanguages: reflectionLanguageIsoCodes,
-
-          postTypeIds: [
-            selectedContentType === ContentType.REFLECTIONS
-              ? REFLECTION_POST_TYPE_ID
-              : LESSON_POST_TYPE_ID,
-          ],
-        })}
-        render={renderBody}
-      />
-    </>
+      {isModal ? <div className={styles.reflectionDataContainer}>{dataFetcher}</div> : dataFetcher}
+    </div>
   );
 
   return render({

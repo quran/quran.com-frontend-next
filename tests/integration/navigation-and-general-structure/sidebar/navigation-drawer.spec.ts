@@ -135,7 +135,7 @@ test(
     // 3. Make sure a new tab is opened with the correct url
     const newPage = await newPagePromise;
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(/donate\.quran\.foundation/);
+    await expect(newPage).toHaveURL(/give\.quran\.foundation\/give/);
   },
 );
 
@@ -173,5 +173,9 @@ const drawerLinks = [
   { text: 'Corpus.quran.com', href: 'https://corpus.quran.com', target: '_blank' },
 
   // Fundraising Banner Links
-  { text: 'Become A Monthly Donor', href: 'https://donate.quran.foundation', target: '_blank' },
+  {
+    text: 'Become A Monthly Donor',
+    href: 'https://give.quran.foundation/give/474400/#!/donation/checkout',
+    target: '_blank',
+  },
 ];

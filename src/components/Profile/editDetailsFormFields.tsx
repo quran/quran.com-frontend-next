@@ -80,7 +80,7 @@ const getEditDetailsFormFields = (t: Translate, userData?: UserProfile): FormBui
       {
         type: RuleType.MaximumLength,
         value: NAME_MAX_LENGTH,
-        errorMessage: t('errors.max', {
+        errorMessage: t('common:errors.max', {
           fieldName: t('common:form.firstName'),
           max: NAME_MAX_LENGTH,
         }),
@@ -126,7 +126,7 @@ const getEditDetailsFormFields = (t: Translate, userData?: UserProfile): FormBui
       {
         type: RuleType.MaximumLength,
         value: NAME_MAX_LENGTH,
-        errorMessage: t('errors.max', {
+        errorMessage: t('common:errors.max', {
           fieldName: t('common:form.lastName'),
           max: NAME_MAX_LENGTH,
         }),

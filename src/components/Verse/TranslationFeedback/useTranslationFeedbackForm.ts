@@ -9,6 +9,7 @@ import {
   TranslationFeedbackFormErrors,
   UseTranslationFeedbackFormProps,
   FeedbackValidationErrorResponse,
+  FormErrorId,
 } from './types';
 import {
   getTranslationFeedbackErrors,
@@ -90,9 +91,7 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
           feedback: feedbackText,
         });
 
-        if (response && response.success) {
-          return { success: true };
-        }
+        if (response && response.success) return { success: true };
 
         /**
          * Corner case handling for feedback length validation.
@@ -108,21 +107,24 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
          */
         if (isFeedbackLengthValidationError(response)) {
           setErrors({
-            feedback: t('validation.maximum-length', {
-              field: t('translation-feedback.feedback'),
-              value: MAX_FEEDBACK_CHARS,
-            }),
+            feedback: {
+              id: FormErrorId.MaximumLength,
+              message: t('validation.maximum-length', {
+                field: t('translation-feedback.feedback'),
+                value: MAX_FEEDBACK_CHARS,
+              }),
+            },
           });
 
           return { success: false, response };
         }
 
         sendFeedbackErrorToSentry(response, verseKey, translationId);
-        toast(t('error.general'), { status: ToastStatus.Error });
+        toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
         return { success: false, response };
       } catch (error) {
         sendFeedbackErrorToSentry(error, verseKey, translationId);
-        toast(t('error.general'), { status: ToastStatus.Error });
+        toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
         return { success: false, response: error };
       }
     },
@@ -137,7 +139,10 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
       const result = await submitFeedback(selectedTranslationId, verse.verseKey, feedback);
 
       if (result.success) {
-        toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
+        toast(t('translation-feedback.submission-success'), {
+          status: ToastStatus.Success,
+          testId: 'success-toast',
+        });
         onClose();
       }
 
