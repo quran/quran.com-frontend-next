@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,7 +9,6 @@ import styles from './developers.module.scss';
 
 import ApiDocsSection from '@/components/ApiDocsSection/ApiDocsSection';
 import AppPortalSection from '@/components/AppPortalSection';
-import MTFBanner from '@/components/MuslimTechFestBanner';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import LabsSection from '@/components/Navbar/NavigationDrawer/LabsSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -17,7 +16,6 @@ import PageContainer from '@/components/PageContainer';
 import commonStyles from '@/pages/contentPage.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const path = '/developers';
 const DevelopersPage: NextPage = () => {
@@ -38,7 +36,6 @@ const DevelopersPage: NextPage = () => {
       />
       <PageContainer>
         <div className={commonStyles.contentPage}>
-          <MTFBanner />
           <div className={styles.pageHero}>
             <p className={styles.kicker}>{t('common:developers')}</p>
             <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
@@ -135,7 +132,5 @@ const DevelopersPage: NextPage = () => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/developers');
 
 export default DevelopersPage;

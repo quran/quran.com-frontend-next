@@ -5,6 +5,11 @@
     var(--color-background-lighten),
     var(--color-background-lighten)
   );
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-lighten),
+    var(--color-background-lighten)
+  );
 }
 
 .base {
@@ -232,7 +237,7 @@
 
 .simplified {
   @extend .simplified_base;
-  --themed-bg: #22a5ad;
+  --themed-bg: var(--color-qdc-blue);
 }
 
 .simplified_accent {

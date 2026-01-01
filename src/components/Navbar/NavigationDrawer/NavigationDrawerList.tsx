@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import MoreMenuCollapsible from './MoreMenuCollapsible';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -8,10 +9,11 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconAbout from '@/icons/about.svg';
-import IconBookmark from '@/icons/bookmark.svg';
-import IconHeadphones from '@/icons/headphones.svg';
+import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
+import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
+import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   ABOUT_US_URL,
@@ -37,6 +39,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   projectsDescClassName,
 }) => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   const continueReadingUrl = useGetContinueReadingUrl();
 
   const ITEMS = [
@@ -54,19 +57,19 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
     {
       title: t('my-quran'),
-      icon: <IconBookmark />,
+      icon: <IconBookmarkFilled />,
       href: getProfileNavigationUrl(),
       eventName: 'navigation_drawer_my_quran',
     },
     {
       title: t('quran-radio'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RADIO_URL,
       eventName: 'navigation_drawer_quran_radio',
     },
     {
       title: t('reciters'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RECITERS_URL,
       eventName: 'navigation_drawer_reciters',
     },
@@ -78,6 +81,14 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
   ];
 
+  const handleItemClick = useCallback(
+    (eventName: string) => {
+      dispatch(setIsNavigationDrawerOpen(false));
+      logButtonClick(eventName);
+    },
+    [dispatch],
+  );
+
   return (
     <>
       {ITEMS.map((item) => (
@@ -86,21 +97,23 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
           title={item.title}
           icon={item.icon}
           href={item.href}
-          onClick={() => logButtonClick(item.eventName)}
+          onClick={() => handleItemClick(item.eventName)}
         />
       ))}
       <MoreMenuCollapsible
+        onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}
         headerLeftClassName={accordionHeaderLeftClassName}
         contentClassName={accordionContentClassName}
         itemTitleClassName={accordionItemTitleClassName}
       />
       <OurProjectsCollapsible
+        onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}
         headerLeftClassName={accordionHeaderLeftClassName}
+        descriptionClassName={projectsDescClassName}
         contentClassName={accordionContentClassName}
         itemTitleClassName={accordionItemTitleClassName}
-        descriptionClassName={projectsDescClassName}
       />
     </>
   );

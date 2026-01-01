@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -21,6 +21,7 @@ import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue
 import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
+import { QuestionsData } from '@/utils/auth/api';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import Verse from 'types/Verse';
@@ -94,6 +95,28 @@ const TranslationView = ({
       : null,
   );
 
+  // Accumulate questions data to prevent flickering when new verses are loaded.
+  // When the verse range changes, SWR fetches new data with undefined initial state.
+  // By merging new data with existing data, we preserve visibility of the answers button.
+  const [accumulatedQuestionsData, setAccumulatedQuestionsData] = useState<
+    Record<string, QuestionsData>
+  >({});
+
+  // Reset accumulated questions data when the resource context changes
+  // to avoid leaking stale data across chapters/pages and unbounded growth.
+  useEffect(() => {
+    setAccumulatedQuestionsData({});
+  }, [resourceId]);
+
+  useEffect(() => {
+    if (pageVersesQuestionsData) {
+      setAccumulatedQuestionsData((prev) => ({
+        ...prev,
+        ...pageVersesQuestionsData,
+      }));
+    }
+  }, [pageVersesQuestionsData]);
+
   const itemContentRenderer = (verseIdx: number) => {
     if (verseIdx === versesCount) {
       return (
@@ -136,7 +159,7 @@ const TranslationView = ({
         />
       )}
 
-      <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
+      <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
         <div
           className={styles.wrapper}
           onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}

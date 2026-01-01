@@ -53,7 +53,7 @@ const nextConfig = {
       'platform-lookaside.fbsbx.com',
     ],
   },
-  webpack: (webpackConfig, { isServer }) => {
+  webpack: (webpackConfig) => {
     webpackConfig.resolve = {
       ...webpackConfig.resolve,
       alias: {
@@ -96,19 +96,6 @@ const nextConfig = {
       ],
     });
 
-    if (!webpackConfig.externals) {
-      webpackConfig.externals = [];
-    }
-
-    // New Relic is a server-side dependency, so we don't want to bundle it in the client-side build.
-    if (!isServer) {
-      webpackConfig.externals.push('newrelic');
-    }
-
-    if (isServer) {
-      webpackConfig.externals.push('msw/node');
-    }
-
     return webpackConfig;
   },
   headers: async () => {
@@ -149,6 +136,16 @@ const nextConfig = {
         ];
   },
   redirects: async () => [
+    {
+      source: '/surah-info/:identifier([\\w-]+)',
+      destination: '/surah/:identifier/info',
+      permanent: true,
+    },
+    {
+      source: '/chapter_info/:identifier([\\w-]+)',
+      destination: '/surah/:identifier/info',
+      permanent: true,
+    },
     {
       source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
       destination: '/:surah/:from-:to',
