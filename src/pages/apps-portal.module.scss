@@ -221,6 +221,7 @@
   inline-size: 96px;
   block-size: 32px;
   flex: 0 0 auto;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .storeBadgeImage {
@@ -228,6 +229,16 @@
   inline-size: 100%;
   block-size: 100%;
   object-fit: contain;
+}
+
+.storeBadge:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.storeBadge:focus-visible {
+  outline: 2px solid var(--color-primary-medium);
+  outline-offset: 2px;
 }
 
 .visitButton {
