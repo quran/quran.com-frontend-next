@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -10,7 +10,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = '/privacy';
 const PrivacyPage: NextPage = (): JSX.Element => {
@@ -101,7 +100,5 @@ const PrivacyPage: NextPage = (): JSX.Element => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/privacy');
 
 export default PrivacyPage;

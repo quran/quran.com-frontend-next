@@ -8,7 +8,7 @@ import Collapsible from '@/dls/Collapsible/Collapsible';
 import IconArrowRight from '@/icons/arrow-right.svg';
 import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
   EXTERNAL_ROUTES,
@@ -29,6 +29,7 @@ interface MoreMenuCollapsibleProps {
   headerLeftClassName?: string;
   contentClassName?: string;
   itemTitleClassName?: string;
+  onItemClick: (eventName: string) => void;
 }
 
 const MENUS: MenuItem[] = [
@@ -64,6 +65,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
   headerLeftClassName,
   contentClassName,
   itemTitleClassName,
+  onItemClick,
 }) => {
   const { t } = useTranslation('common');
 
@@ -103,7 +105,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
                 titleClassName={itemTitleClassName}
                 icon={menu.icon}
                 href={menu.href}
-                onClick={() => logButtonClick(menu.eventName)}
+                onClick={() => onItemClick(menu.eventName)}
                 isExternalLink={menu.isExternalLink}
               />
             ))}
