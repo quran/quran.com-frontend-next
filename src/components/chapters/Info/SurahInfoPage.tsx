@@ -5,8 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '@/components/chapters/ChapterHeader/ChapterHeader.module.scss';
 import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
-import FakeContentModal from '@/components/dls/ContentModal/FakeContentModal';
-import { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import Chapter from '@/types/Chapter';
 import ChapterInfo from '@/types/ChapterInfo';
 import { fakeNavigate, getSurahNavigationUrl } from '@/utils/navigation';
@@ -25,7 +24,8 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) =
   }, [chapter.id, router.locale]);
 
   return (
-    <FakeContentModal
+    <ContentModal
+      isFakeSEOFriendlyMode
       onClose={handleClose}
       hasCloseButton
       header={<div className={styles.surahInfoHeader}>{t('surah-info')}</div>}
@@ -36,7 +36,7 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) =
         chapterInfo={chapterInfo}
         chapter={chapter}
       />
-    </FakeContentModal>
+    </ContentModal>
   );
 };
 
