@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Page } from '@playwright/test';
+import type { FrameLocator, Page } from '@playwright/test';
 
 type WidgetParams = {
   ayah?: string;
@@ -20,17 +20,21 @@ type WidgetParams = {
   height?: string;
   targetId?: string;
   scriptSrc?: string;
+  hostUrl?: string;
   extraAttributes?: Record<string, string | number | boolean | undefined>;
 };
 
 /**
- * Render a standalone page with the embed widget injected via script tag.
+ * Render a standalone page with the embed widget inside an iframe.
  *
  * @param {Page} page - Playwright page instance.
  * @param {WidgetParams} params - Widget configuration to pass as data-* attributes.
- * @returns {Promise<void>} Resolves after the HTML is set (widget render still async).
+ * @returns {Promise<FrameLocator>} Frame locator for the widget iframe.
  */
-export const renderWidgetPage = async (page: Page, params: WidgetParams = {}) => {
+export const renderWidgetPage = async (
+  page: Page,
+  params: WidgetParams = {},
+): Promise<FrameLocator> => {
   const {
     ayah = '33:56',
     translationIds = '131',
@@ -48,41 +52,54 @@ export const renderWidgetPage = async (page: Page, params: WidgetParams = {}) =>
     rangeEnd,
     width,
     height,
-    targetId = 'quran-embed-1',
-    scriptSrc = 'http://localhost:3005/embed/quran-embed.js',
+    scriptSrc = 'http://localhost:3005/embed/v1',
+    hostUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3005',
     extraAttributes = {},
   } = params;
 
-  // Build data-* attributes for the script tag
-  const attrs: Record<string, string> = {
-    'data-quran-target': targetId,
-    'data-quran-ayah': ayah,
-    'data-quran-translation-ids': translationIds,
-    'data-quran-locale': locale,
-    'data-quran-reciter-id': reciterId === null ? '' : String(reciterId),
-    'data-quran-audio': String(enableAudio),
-    'data-quran-word-by-word': String(enableWbw),
-    'data-quran-theme': theme,
-    'data-quran-mushaf': mushaf,
-    'data-quran-show-translator-names': String(showTranslatorNames),
-    'data-quran-show-arabic': String(showArabic),
-    'data-quran-show-tafsirs': String(showTafsirs),
-    'data-quran-show-reflections': String(showReflections),
-    'data-quran-show-answers': String(showAnswers),
+  const mapTheme = (value: string) => (value === 'dark' ? 'dark' : 'light');
+  const mapFont = (value: string) => {
+    switch (value) {
+      case 'kfgqpc_v1':
+        return 'v1';
+      case 'indopak':
+        return 'indopak';
+      case 'tajweed':
+        return 'uthmani';
+      case 'kfgqpc_v2':
+        return 'v2';
+      case 'qpc':
+      default:
+        return 'uthmani';
+    }
   };
-  if (rangeEnd !== undefined) {
-    attrs['data-quran-range-end'] = String(rangeEnd);
-  }
-  if (width) attrs['data-width'] = width;
-  if (height) attrs['data-height'] = height;
+
+  const [chapterPart, versePart] = ayah.split(':');
+  const startVerse = Number(versePart?.split('-')[0]);
+  const versesParam =
+    rangeEnd && Number.isFinite(Number(rangeEnd)) && Number(rangeEnd) > startVerse
+      ? `${chapterPart}:${startVerse}-${rangeEnd}`
+      : ayah;
+
+  const url = new URL(scriptSrc);
+  url.searchParams.set('verses', versesParam);
+  if (translationIds) url.searchParams.set('translations', translationIds);
+  url.searchParams.set('audio', String(enableAudio));
+  if (reciterId !== null) url.searchParams.set('reciter', String(reciterId));
+  url.searchParams.set('theme', mapTheme(theme));
+  url.searchParams.set('font', mapFont(mushaf));
+  url.searchParams.set('mushaf', mushaf);
+  url.searchParams.set('locale', locale);
+  url.searchParams.set('wbw', String(enableWbw));
+  url.searchParams.set('showTranslationName', String(showTranslatorNames));
+  url.searchParams.set('showArabic', String(showArabic));
+  url.searchParams.set('tafsir', String(showTafsirs));
+  url.searchParams.set('reflections', String(showReflections));
+  url.searchParams.set('answers', String(showAnswers));
   Object.entries(extraAttributes).forEach(([key, value]) => {
     if (value === undefined || value === null) return;
-    attrs[`data-quran-${key}`] = String(value);
+    url.searchParams.set(key, String(value));
   });
-
-  const attrsString = Object.entries(attrs)
-    .map(([key, value]) => `${key}="${value}"`)
-    .join('\n  ');
 
   const html = `
 <!DOCTYPE html>
@@ -90,22 +107,24 @@ export const renderWidgetPage = async (page: Page, params: WidgetParams = {}) =>
   <head><meta charset="utf-8" /></head>
   <body>
     <div style="width: 50%; margin: 0 auto;">
-      <div id="${targetId}"></div>
+      <iframe
+        src="${url.toString()}"
+        width="${width || '100%'}"
+        height="${height || '500'}"
+        frameborder="0"
+      ></iframe>
     </div>
-    <script
-      src="${scriptSrc}"
-      ${attrsString}
-      async>
-    </script>
   </body>
 </html>`;
 
+  // Ensure the page has an http(s) origin so the iframe passes frame-ancestors checks.
+  await page.goto(hostUrl, { waitUntil: 'domcontentloaded' });
   await page.setContent(html);
 
-  // Wait for widget to finish loading
-  await page.waitForSelector('[data-verse-block]', {
-    timeout: 15000,
-  });
+  const frameLocator = page.frameLocator('iframe');
+  await frameLocator.locator('.quran-widget').waitFor({ timeout: 15000, state: 'visible' });
+
+  return frameLocator;
 };
 
 export default renderWidgetPage;

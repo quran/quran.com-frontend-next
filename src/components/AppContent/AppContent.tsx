@@ -29,8 +29,13 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { t } = useTranslation('common');
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
+  const isEmbedPage = router.pathname.startsWith('/embed');
 
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+
+  if (isEmbedPage) {
+    return <Component {...pageProps} />;
+  }
 
   return (
     <>

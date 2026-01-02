@@ -286,6 +286,9 @@
   font-size: 0.82rem;
   overflow: auto;
   line-height: 1.6;
+  max-inline-size: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .info {

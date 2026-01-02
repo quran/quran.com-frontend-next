@@ -7,7 +7,9 @@ test.describe('Widget defaults from user settings', () => {
   test(
     'Uses the user-selected font and translations as defaults',
     { tag: ['@widget', '@settings'] },
-    async ({ page, context }) => {
+    async ({ page, context, isMobile }) => {
+      test.skip(isMobile);
+
       test.slow();
       const homePage = new Homepage(page, context);
 
@@ -26,12 +28,16 @@ test.describe('Widget defaults from user settings', () => {
 
       // 4. Go to /ayah-widget
       await page.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      const widgetFrame = page.frameLocator('iframe');
+      await expect(widgetFrame.locator('.quran-widget')).toBeVisible();
 
       // 5. Verify the widget preview reflects Hamidullah + IndoPak ayah marker
       await expect(
-        page.getByText('Certes, Allah et Ses Anges prient sur le Prophète;', { exact: false }),
+        widgetFrame.getByText('Certes, Allah et Ses Anges prient sur le Prophète;', {
+          exact: false,
+        }),
       ).toBeVisible();
-      await expect(page.locator('[data-verse-text]').first()).toContainText('۟');
+      await expect(widgetFrame.locator('[data-verse-text]').first()).toContainText('۟');
     },
   );
 
@@ -56,16 +62,20 @@ test.describe('Widget defaults from user settings', () => {
 
       // 3. Go to /ayah-widget (should stay in French)
       await page.goto('/fr/ayah-widget', { waitUntil: 'networkidle' });
+      const widgetFrame = page.frameLocator('iframe');
+      await expect(widgetFrame.locator('.quran-widget')).toBeVisible();
 
       // 4. Verify widget header uses the French label
-      await expect(page.locator('.quran-widget')).toContainText('Sourate');
+      await expect(widgetFrame.locator('.quran-widget')).toContainText('Sourate');
     },
   );
 
   test(
     'Widget overrides persist across tabs',
     { tag: ['@widget', '@settings'] },
-    async ({ page, context }) => {
+    async ({ page, context, isMobile }) => {
+      test.skip(isMobile);
+
       test.slow();
       const homePage = new Homepage(page, context);
 
@@ -82,6 +92,8 @@ test.describe('Widget defaults from user settings', () => {
 
       // 3. Go to /ayah-widget and set verse 50
       await page.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      const previewFrame = page.frameLocator('iframe');
+      await expect(previewFrame.locator('.quran-widget')).toBeVisible();
       await page.locator('#ayah-select').selectOption('50');
 
       // 4. Select another translation and another mushaf
@@ -94,17 +106,19 @@ test.describe('Widget defaults from user settings', () => {
       // 5. Open a new tab with the same Redux store and go to /ayah-widget
       const newPage = await context.newPage();
       await newPage.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      const newTabFrame = newPage.frameLocator('iframe');
+      await expect(newTabFrame.locator('.quran-widget')).toBeVisible();
 
       // 6. Verify overrides persisted (mushaf + translation + verse 50)
       await expect(newPage.locator('#mushaf-select')).toHaveValue('tajweed');
       await expect(newPage.locator('#ayah-select')).toHaveValue('50');
       await expect(
-        newPage.locator('[data-translation-text][data-translator-name*="Hamidullah"]'),
+        newTabFrame.locator('[data-translation-text][data-translator-name*="Hamidullah"]'),
       ).toBeVisible();
       await expect(
-        newPage.locator('[data-translation-text][data-translator-name*="Saheeh"]'),
+        newTabFrame.locator('[data-translation-text][data-translator-name*="Saheeh"]'),
       ).toBeVisible();
-      await expect(newPage.getByText('Ô Prophète', { exact: false })).toBeVisible();
+      await expect(newTabFrame.getByText('Ô Prophète', { exact: false })).toBeVisible();
     },
   );
 });

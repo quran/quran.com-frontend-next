@@ -65,9 +65,12 @@ export const DEFAULTS = {
   reciterId: 7, // Mishary Rashid Alafasy (ID 7)
   translationId: 131, // Mustafa Khattab
   copySuccessDurationMs: 2000,
-  snippetScriptUrl:
-    process.env.NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL || 'https://quran.com/embed/quran-embed.js',
-  snippetWidgetOrigin: process.env.NEXT_PUBLIC_AYAH_WIDGET_ORIGIN || '',
+  // Optional override for the iframe src base URL.
+  embedUrl: process.env.NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL || '',
+  // Optional override for the iframe origin (useful for local/testing).
+  embedOrigin: process.env.NEXT_PUBLIC_AYAH_WIDGET_ORIGIN || '',
+  // Default iframe height when no custom height is provided.
+  iframeHeight: 500,
 } as const;
 
 /**
@@ -733,92 +736,118 @@ export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
   { kind: 'twoColumn', fields: [WIDGET_FIELDS.customWidth, WIDGET_FIELDS.customHeight] },
 ];
 
-type AttributeEntry = [string, string];
-
 const normalizeWidth = (width: string): string => width?.trim() || '100%';
-const normalizeHeight = (height: string): string => height?.trim() || '';
+const normalizeHeight = (height: string): string => height?.trim() || String(DEFAULTS.iframeHeight);
 
-type BuildAttributeOptions = {
+type BuildEmbedOptions = {
   omitDefaults?: boolean;
-  origin?: string;
 };
 
-export type WidgetAttributeResult = {
-  attributes: AttributeEntry[];
+export type WidgetIframeConfig = {
+  src: string;
   widthValue: string;
   heightValue: string;
 };
 
+const resolveEmbedBaseUrl = (): string => {
+  if (DEFAULTS.embedUrl) {
+    if (/^https?:\/\//i.test(DEFAULTS.embedUrl)) return DEFAULTS.embedUrl;
+    const origin = DEFAULTS.embedOrigin || 'https://quran.com';
+    return `${origin.replace(/\/$/, '')}/${DEFAULTS.embedUrl.replace(/^\//, '')}`;
+  }
+  if (DEFAULTS.embedOrigin) {
+    return `${DEFAULTS.embedOrigin.replace(/\/$/, '')}/embed/v1`;
+  }
+  return 'https://quran.com/embed/v1';
+};
+
+const mapEmbedTheme = (theme: ThemeTypeVariant): string =>
+  theme === ThemeType.Dark ? 'dark' : 'light';
+
+const mapEmbedFont = (mushaf: MushafType): string => {
+  switch (mushaf) {
+    case 'kfgqpc_v1':
+      return 'v1';
+    case 'indopak':
+      return 'indopak';
+    case 'tajweed':
+      return 'uthmani';
+    case 'kfgqpc_v2':
+      return 'v2';
+    case 'qpc':
+    default:
+      return 'uthmani';
+  }
+};
+
+const buildVersesParam = (preferences: Preferences): string => {
+  const chapter = preferences.selectedSurah;
+  const start = preferences.selectedAyah;
+  if (preferences.rangeEnabled && preferences.rangeEnd > start) {
+    return `${chapter}:${start}-${preferences.rangeEnd}`;
+  }
+  return `${chapter}:${start}`;
+};
+
 /**
- * Build data-* attributes for the widget script (preview + embed snippet).
- *
+ * Build the iframe src for /embed/v1.
  * @param {Preferences} preferences - Current builder preferences.
  * @param {string} translationIdsCsv - Translation IDs as a CSV string.
- * @param {BuildAttributeOptions} options - Extra options (omitDefaults, origin override).
- * @returns {WidgetAttributeResult} The data-* attributes + resolved width/height.
+ * @param {BuildEmbedOptions} options - Build options.
+ * @returns {string} Complete iframe src URL.
  */
-export const buildWidgetScriptAttributes = (
+export const buildEmbedIframeSrc = (
   preferences: Preferences,
   translationIdsCsv: string,
-  options: BuildAttributeOptions = {},
-): WidgetAttributeResult => {
-  const widthValue: string = normalizeWidth(preferences.customSize.width);
-  const heightValue: string = normalizeHeight(preferences.customSize.height);
+  options: BuildEmbedOptions = {},
+): string => {
+  const url = new URL(resolveEmbedBaseUrl());
 
-  const entries: AttributeEntry[] = [];
-
-  /**
-   * Push a data-* attribute entry.
-   * - Skips undefined values.
-   * - When omitDefaults=true, skips values equal to their defaults.
-   *
-   * @param {string} key - The attribute key.
-   * @param {string | undefined} value - The attribute value.
-   * @param {string | undefined} defaultValue - Default value to compare against when omitDefaults=true.
-   * @returns {void}
-   */
-  const pushAttr = (key: string, value: string | undefined, defaultValue?: string): void => {
+  const setParam = (key: string, value: string | undefined, defaultValue?: string) => {
     if (value === undefined) return;
     if (options.omitDefaults && defaultValue !== undefined && value === defaultValue) return;
-    entries.push([key, value]);
+    if (String(value).length === 0) return;
+    url.searchParams.set(key, value);
   };
 
-  // Keep origin near the script src (makes reading generated snippet easier).
-  if (options.origin) {
-    entries.push(['data-quran-origin', options.origin]);
-  }
+  setParam('verses', buildVersesParam(preferences));
+  setParam('translations', translationIdsCsv, '');
 
-  pushAttr('data-quran-target', preferences.containerId);
-  pushAttr('data-quran-ayah', `${preferences.selectedSurah}:${preferences.selectedAyah}`);
-  pushAttr('data-quran-translation-ids', translationIdsCsv, '');
-
-  const reciterValue: string = preferences.reciter
+  const reciterValue = preferences.reciter
     ? String(preferences.reciter)
     : String(DEFAULTS.reciterId);
-  pushAttr('data-quran-reciter-id', reciterValue, String(DEFAULTS.reciterId));
+  setParam('audio', String(preferences.enableAudio), 'true');
+  setParam('reciter', reciterValue, String(DEFAULTS.reciterId));
+  setParam('theme', mapEmbedTheme(preferences.theme), 'light');
+  setParam('font', mapEmbedFont(preferences.mushaf), 'v2');
+  setParam('mushaf', preferences.mushaf, 'qpc');
+  setParam('locale', preferences.locale, 'en');
+  setParam('wbw', String(preferences.enableWbwTranslation), 'false');
+  setParam('showTranslationName', String(preferences.showTranslatorName), 'false');
 
-  pushAttr('data-quran-audio', String(preferences.enableAudio), 'true');
-  pushAttr('data-quran-word-by-word', String(preferences.enableWbwTranslation), 'false');
-  pushAttr('data-quran-theme', preferences.theme, 'light');
-  pushAttr('data-quran-mushaf', preferences.mushaf, 'qpc');
-  pushAttr('data-quran-show-translator-names', String(preferences.showTranslatorName), 'false');
-  pushAttr('data-quran-show-arabic', String(preferences.showArabic), 'true');
-  pushAttr('data-quran-show-tafsirs', String(preferences.showTafsirs), 'true');
-  pushAttr('data-quran-show-reflections', String(preferences.showReflections), 'true');
-  pushAttr('data-quran-show-answers', String(preferences.showAnswers), 'true');
-  pushAttr('data-quran-locale', preferences.locale, 'en');
+  // Additional flags (embed may ignore unknown params but will not break).
+  setParam('showArabic', String(preferences.showArabic), 'true');
+  setParam('tafsir', String(preferences.showTafsirs), 'true');
+  setParam('reflections', String(preferences.showReflections), 'true');
+  setParam('answers', String(preferences.showAnswers), 'true');
 
-  if (preferences.rangeEnabled) {
-    pushAttr('data-quran-range-end', String(preferences.rangeEnd));
-  }
+  return url.toString();
+};
 
-  // Keep width/height data attributes for compatibility with existing embeds.
-  pushAttr('data-width', widthValue, '100%');
-  if (heightValue) {
-    pushAttr('data-height', heightValue);
-  }
+/**
+ * Build iframe sizing + URL for the preview and snippet.
+ * @returns {WidgetIframeConfig} Iframe configuration.
+ */
+export const buildEmbedIframeConfig = (
+  preferences: Preferences,
+  translationIdsCsv: string,
+  options: BuildEmbedOptions = {},
+): WidgetIframeConfig => {
+  const widthValue = normalizeWidth(preferences.customSize.width);
+  const heightValue = normalizeHeight(preferences.customSize.height);
+  const src = buildEmbedIframeSrc(preferences, translationIdsCsv, options);
 
-  return { attributes: entries, widthValue, heightValue };
+  return { src, widthValue, heightValue };
 };
 
 /**
@@ -829,31 +858,12 @@ export const buildWidgetScriptAttributes = (
  * @returns {string} Complete HTML snippet to embed the widget.
  */
 export const buildEmbedSnippet = (preferences: Preferences, translationIdsCsv: string): string => {
-  const { attributes, widthValue, heightValue } = buildWidgetScriptAttributes(
-    preferences,
-    translationIdsCsv,
-    {
-      omitDefaults: true,
-      origin: DEFAULTS.snippetWidgetOrigin || undefined,
-    },
-  );
+  const { src, widthValue, heightValue } = buildEmbedIframeConfig(preferences, translationIdsCsv);
 
-  const containerStyles: string[] = [`width: ${widthValue}`];
-  if (heightValue) containerStyles.push(`height: ${heightValue}`);
-
-  const containerStyleAttr: string = containerStyles.length
-    ? ` style="${containerStyles.join('; ')}"`
-    : '';
-
-  const attrs: string[] = [
-    `src="${DEFAULTS.snippetScriptUrl}"`,
-    ...attributes.map(([key, value]) => `${key}="${value}"`),
-  ];
-
-  return `<div id="${preferences.containerId}"${containerStyleAttr}></div>
-
-<script
-  ${attrs.join('\n  ')}
-  async>
-</script>`;
+  return `<iframe
+  src="${src}"
+  width="${widthValue}"
+  height="${heightValue}"
+  frameborder="0">
+</iframe>`;
 };

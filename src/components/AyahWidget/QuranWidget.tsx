@@ -148,6 +148,8 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
           borderRadius: 12,
           margin: '0 auto',
           boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          boxSizing: 'border-box',
+          overflowX: 'hidden',
           ...customWidthStyle,
           ...customHeightStyle,
         }}

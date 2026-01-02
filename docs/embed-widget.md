@@ -6,14 +6,14 @@ to extend it safely. Use this if you are onboarding or adding new widget options
 ## What the widget is
 
 The widget renders one ayah (or a small range) with Arabic text, translations, optional audio, and
-action buttons. It can be embedded on external sites via a `<script>` tag, and it can also be
-configured through the builder page inside this app.
+action buttons. It is embedded on external sites via an `<iframe>` pointing to `/embed/v1`, and it
+can also be configured through the builder page inside this app.
 
 ## Key entry points
 
 - Builder page UI: `src/pages/ayah-widget.tsx`
-- Embed script: `public/embed/quran-embed.js`
-- API endpoint: `src/pages/api/ayah-widget.tsx`
+- Embed page: `/embed/v1` (served by Quran.com)
+- Legacy API endpoint (script-based embed): `src/pages/api/ayah-widget.tsx`
 - Widget components: `src/components/AyahWidget/*`
 - Preview hook: `src/hooks/widget/useAyahWidgetPreview.ts`
 - Widget config registry: `src/components/AyahWidget/widget-config.ts`
@@ -23,10 +23,8 @@ configured through the builder page inside this app.
 1. Builder page renders a configuration UI (`BuilderConfigForm`) and a live preview
    (`BuilderPreview`).
 2. User changes are stored in React state + Redux overrides.
-3. Preview hook injects the embed script and passes data attributes based on preferences.
-4. The embed script reads `data-*` attributes and calls `/api/ayah-widget`.
-5. The API returns rendered HTML + data needed for the widget.
-6. The embed script injects the HTML into the target container.
+3. Preview hook builds an iframe URL for `/embed/v1` based on preferences.
+4. The iframe renders the embed page, which loads the widget UI.
 
 ## The centralized registry (single source of truth)
 
@@ -38,19 +36,20 @@ This file is the single place to:
 
 - Define default values
 - Define which options are "simple" and auto-handled
-- Build the embed snippet and preview attributes
+- Build the embed snippet and iframe URL
 - Render builder fields
 - Normalize range behavior
 - Map site preferences to widget defaults
 
 ### Important exports
 
-- `DEFAULTS`: static defaults (surah, ayah, reciter, snippet URL)
+- `DEFAULTS`: static defaults (surah, ayah, reciter, iframe URL)
 - `INITIAL_PREFERENCES`: base preferences for a blank widget
 - `getBasePreferences`: merges site defaults (theme/locale/mushaf/wbw) into widget defaults
 - `applyWidgetOverrides`: merges Redux overrides into base preferences
 - `buildOverridesFromDiff`: creates a minimal override patch after user changes
-- `buildWidgetScriptAttributes`: generates `data-quran-*` attributes
+- `buildEmbedIframeSrc`: builds the `/embed/v1` URL with query params
+- `buildEmbedIframeConfig`: computes iframe URL + sizing for snippet/preview
 - `buildEmbedSnippet`: builds the final embed HTML snippet
 - `WIDGET_FIELDS` and `WIDGET_FORM_BLOCKS`: drive the builder UI
 
@@ -96,49 +95,43 @@ recomputes a valid `rangeEnd`.
 `src/hooks/widget/useAyahWidgetPreview.ts`:
 
 - Clears the preview container
-- Creates a target `<div>`
-- Injects the embed script
-- Sets `data-quran-allow-rerender` so the script can rerender without full reload
-- Uses `buildWidgetScriptAttributes` for the rest of the attributes
+- Creates an `<iframe>` inside the preview container
+- Uses `buildEmbedIframeConfig` to compute URL + sizing
 
-## Embed script
+## Embed iframe
 
-`public/embed/quran-embed.js` is the external entry point. It reads the `data-quran-*` attributes
-and fetches HTML from the API.
+The embed is an iframe pointing to `/embed/v1` with query params.
 
 ### Environment variables
 
 These are the widget-specific environment variables currently supported:
 
-- `NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL`: overrides the embed script URL used in the snippet.
-- `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN`: forces the embed script to use a specific API origin (useful for
-  local/testing).
+- `NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL`: overrides the iframe base URL (full URL or path). Default:
+  `https://quran.com/embed/v1`.
+- `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN`: forces the iframe base origin (useful for local/testing if the
+  URL override is not set).
 
-### Common data attributes
+### Common query parameters
 
-- `data-quran-target`
-- `data-quran-ayah` (S:V)
-- `data-quran-translation-ids`
-- `data-quran-reciter-id`
-- `data-quran-audio`
-- `data-quran-word-by-word`
-- `data-quran-theme`
-- `data-quran-mushaf`
-- `data-quran-show-translator-names`
-- `data-quran-show-arabic`
-- `data-quran-show-tafsirs`
-- `data-quran-show-reflections`
-- `data-quran-show-answers`
-- `data-quran-locale`
-- `data-quran-range-end`
-- `data-width`, `data-height`
-- `data-quran-origin` (optional, mostly for local/testing)
-
-The embed script should be treated as the external contract: changes here affect all external users.
+- `verses` (S:V or S:V-V)
+- `translations`
+- `audio`
+- `reciter`
+- `theme`
+- `font`
+- `locale`
+- `wbw`
+- `showTranslationName`
+- `showArabic`
+- `tafsir`
+- `reflections`
+- `answers`
 
 ## API endpoint
 
-`src/pages/api/ayah-widget.tsx` reads query parameters and returns the widget HTML.
+`src/pages/api/ayah-widget.tsx` is the legacy HTML API used by the old script-based embed. The
+iframe-based embed uses `/embed/v1` directly, so this endpoint is no longer part of the main
+integration flow (keep it only if you still need the legacy path).
 
 ### Validation and errors
 
@@ -147,7 +140,7 @@ The embed script should be treated as the external contract: changes here affect
 - Validates locale against `i18n.json`.
 - Range is capped to 10 verses; requesting more returns an error.
 
-Errors are returned with a `message` and surfaced by the embed script.
+Errors are returned with a `message` and surfaced by the legacy script-based embed.
 
 ### Word by word translation locale
 
@@ -190,12 +183,11 @@ Example: add a new "playButtonPosition".
 1. Add the new field in `Preferences` inside `src/components/AyahWidget/widget-config.ts`.
 2. Add a default value in `INITIAL_PREFERENCES`.
 3. If it is not a simple scalar, add it to `SPECIAL_PREFERENCE_KEYS`.
-4. If it needs to be passed to the embed script, add it in `buildWidgetScriptAttributes`.
+4. If it needs to be passed to the iframe, add it in `buildEmbedIframeSrc`.
 5. Add a UI field to `WIDGET_FIELDS` and place it in `WIDGET_FORM_BLOCKS`.
-6. Update the embed script (`public/embed/quran-embed.js`) to read the new `data-*` attribute.
-7. Update the API endpoint to parse, validate, and pass it into widget rendering.
-8. Update widget components to consume the option.
-9. Add or update Playwright tests in `tests/integration/widget`.
+6. Update the embed page (Quran.com `/embed/v1`) to read and apply the new query param.
+7. Update widget components to consume the option.
+8. Add or update Playwright tests in `tests/integration/widget`.
 
 If you do steps 1-5 only, the builder UI and override logic update automatically.
 
@@ -215,6 +207,5 @@ Add tests for:
 
 ## Debug tips
 
-- Use `data-quran-origin` to point the embed script at a local API.
-- Check the API error response body if the widget shows a generic error.
-- Verify the `data-quran-*` attributes in the generated snippet and preview.
+- Inspect the iframe `src` to confirm the right query params.
+- Use `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN` for local/testing if you need a custom origin.

@@ -304,7 +304,7 @@ const AyahWidgetBuilderPage = () => {
   }, [surahs, preferences.selectedSurah]);
 
   /**
-   * Embed snippet to copy/paste (container + script tag).
+   * Embed snippet to copy/paste (iframe).
    */
   const embedSnippet = useMemo(() => {
     return buildEmbedSnippet(preferences, translationIdsCsv);

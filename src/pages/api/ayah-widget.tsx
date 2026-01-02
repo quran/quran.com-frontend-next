@@ -2,44 +2,18 @@
 import React from 'react';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import getT from 'next-translate/getT';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import i18nConfig from '../../../i18n.json';
-
-import { fetcher, getChapterAudioData } from '@/api';
-import { getQuranFontForMushaf } from '@/components/AyahWidget/mushaf-fonts';
-import QuranWidget from '@/components/AyahWidget/QuranWidget';
-import { logDebug } from '@/lib/newrelic';
-import ThemeType from '@/redux/types/ThemeType';
-import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
-import type { WidgetOptions, MushafType, WidgetLabels } from '@/types/ayah-widget';
-import { isMushafType } from '@/types/ayah-widget';
-import { MushafLines } from '@/types/QuranReader';
-import { getMushafId, getDefaultWordFields } from '@/utils/api';
 import {
-  DEFAULT_VERSES_PARAMS,
-  makeByVerseKeyUrl,
-  makeChapterUrl,
-  makeTranslationsInfoUrl,
-  makeWordByWordTranslationsUrl,
-} from '@/utils/apiPaths';
-import type {
-  ChapterResponse,
-  TranslationsResponse,
-  VerseResponse,
-  WordByWordTranslationsResponse,
-} from 'types/ApiResponses';
-import type AvailableTranslation from 'types/AvailableTranslation';
-import type Translation from 'types/Translation';
-import type Verse from 'types/Verse';
-
-// Default values
-const DEFAULT_VERSE = '33:56';
-const DEFAULT_RECITER = '7'; // Mishary Alafasy
-const INCORRECT_SUKUN_REGEX = /[\u06DF\u06E1\u06E2\u06E3\u06E4]/g; // Needed because of a font issue
-const FOOTNOTE_REGEX = /<sup[^>]*>.*?<\/sup>/g; // Needed to remove footnotes from translation text
-const MAX_RANGE_SPAN = 10;
+  DEFAULT_RECITER,
+  DEFAULT_VERSE,
+  WidgetInputError,
+  getAyahWidgetData,
+} from '@/components/AyahWidget/getAyahWidgetData';
+import QuranWidget from '@/components/AyahWidget/QuranWidget';
+import ThemeType from '@/redux/types/ThemeType';
+import type { MushafType, WidgetOptions } from '@/types/ayah-widget';
+import { isMushafType } from '@/types/ayah-widget';
 
 /**
  * The response type for the Ayah Widget API.
@@ -54,34 +28,6 @@ type WidgetResponse =
       error: string;
       html: string;
     };
-
-/**
- * Normalize the text by replacing incorrect sukun characters.
- * @param {string | null | undefined} value The arabic text to normalize.
- * @returns {string} The normalized text.
- */
-const normalizeText = (value?: string | null) =>
-  value ? value.replace(INCORRECT_SUKUN_REGEX, '\u0652') : '';
-
-/**
- * Sanitize the verse by normalizing the text and removing footnotes.
- * Replaces incorrect sukun characters in the Quranic text and strips HTML footnote tags from translations.
- * @param {Verse} verse The verse to sanitize.
- * @returns {Verse} The sanitized verse.
- */
-const sanitizeVerse = (verse: Verse): Verse => ({
-  ...verse,
-  textUthmani: normalizeText(verse.textUthmani),
-  words:
-    verse.words?.map((word) => ({
-      ...word,
-      textUthmani: normalizeText(word.textUthmani),
-    })) ?? [],
-  translations: verse.translations?.map((translation) => ({
-    ...translation,
-    text: translation.text?.replace(FOOTNOTE_REGEX, '') ?? '',
-  })),
-});
 
 /**
  * Parse a boolean value from a string or array of strings.
@@ -103,134 +49,6 @@ const parseBool = (value: string | string[] | undefined, defaultValue = false): 
 const parseString = (value: string | string[] | undefined): string | undefined => {
   if (Array.isArray(value)) return value[0];
   return value;
-};
-
-/**
- * Build the widget options for the Ayah Widget.
- * @returns {WidgetOptions} The widget options.
- */
-const buildWidgetOptions = (
-  ayah: string,
-  params: {
-    enableAudio: boolean;
-    enableWbw: boolean;
-    rangeEnd?: number;
-    theme: ThemeTypeVariant;
-    mushaf: MushafType;
-    showTranslatorNames: boolean;
-    showTafsirs: boolean;
-    showReflections: boolean;
-    showAnswers: boolean;
-    locale: string;
-    labels: WidgetLabels;
-    customWidth?: string;
-    customHeight?: string;
-    showArabic: boolean;
-  },
-  meta?: {
-    hasAnyTranslations: boolean;
-    surahName?: string;
-    audioUrl?: string;
-    audioStart?: number;
-    audioEnd?: number;
-  },
-): WidgetOptions => ({
-  enableAudio: params.enableAudio,
-  enableWbw: params.enableWbw,
-  theme: params.theme,
-  mushaf: params.mushaf,
-  showTranslatorNames: params.showTranslatorNames,
-  showArabic: params.showArabic,
-  showTafsirs: params.showTafsirs,
-  showReflections: params.showReflections,
-  showAnswers: params.showAnswers,
-  locale: params.locale,
-  labels: params.labels,
-  rangeEnd: params.rangeEnd,
-  ayah,
-  hasAnyTranslations: meta?.hasAnyTranslations ?? false,
-  surahName: meta?.surahName,
-  customWidth: params.customWidth,
-  customHeight: params.customHeight,
-  audioUrl: meta?.audioUrl,
-  audioStart: meta?.audioStart,
-  audioEnd: meta?.audioEnd,
-});
-
-/**
- * Enrich the translation objects with additional metadata.
- * Fills in missing translation names and author names by looking them up in the provided metadata map.
- * @param {Translation[]} translations The translations to enrich.
- * @param {Map<number, AvailableTranslation>} metaById A map of metadata by resource ID.
- * @returns {Translation[]} The enriched translations.
- */
-const enrichTranslations = (
-  translations: Translation[] | undefined,
-  metaById: Map<number, AvailableTranslation>,
-): Translation[] | undefined => {
-  if (!translations?.length) return translations;
-  return translations.map((translation) => {
-    const meta = translation.resourceId ? metaById.get(translation.resourceId) : undefined;
-    if (!meta) return translation;
-    return {
-      ...translation,
-      resourceName: translation.resourceName || meta.name || translation.resourceName,
-      authorName: translation.authorName || meta.authorName || translation.authorName,
-    };
-  });
-};
-
-/**
- * Build the parameters for the verse API request.
- * @param {number[]} translationIds The IDs of the translations to include.
- * @param {string} reciter The ID of the reciter to use.
- * @param {MushafType} mushaf The type of Mushaf to use.
- * @returns {Record<string, unknown>} The built parameters.
- */
-const buildVerseParams = (
-  translationIds: number[],
-  reciter: string,
-  mushaf: MushafType,
-  wordByWordLocale: string,
-  range?: { from: number; to: number; perPage: number },
-) => {
-  const quranFont = getQuranFontForMushaf(mushaf);
-  // Use the 16-line IndoPak mushaf so verse-end glyphs (ayah markers) include the proper IndoPak styling.
-  const mushafId =
-    mushaf === 'indopak'
-      ? getMushafId(quranFont, MushafLines.SixteenLines).mushaf
-      : getMushafId(quranFont).mushaf;
-
-  const params: Record<string, unknown> = {
-    ...DEFAULT_VERSES_PARAMS,
-    perPage: range?.perPage ?? 1,
-    translations: translationIds.length ? translationIds.join(',') : undefined,
-    reciter,
-    audio: reciter,
-    wordFields: getDefaultWordFields(quranFont).wordFields,
-    wordTranslationLanguage: wordByWordLocale,
-    translationFields: 'resource_name,language_name,author_name',
-    mushaf: mushafId,
-  };
-
-  // Add mushaf-specific word fields
-  if (mushaf === 'indopak') params.wordFields += ',text_indopak';
-  if (mushaf === 'tajweed') params.wordFields += ',text_uthmani_tajweed';
-  if (mushaf === 'kfgqpc_v1' && !String(params.wordFields).includes('code_v1')) {
-    params.wordFields += ',code_v1';
-  }
-
-  if (range) {
-    params.from = range.from;
-    params.to = range.to;
-  }
-
-  // Remove undefined parameters
-  Object.keys(params).forEach((key) => {
-    if (params[key] === undefined) delete params[key];
-  });
-
-  return params;
 };
 
 /**
@@ -263,28 +81,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
 
   // Parse query parameters
   const ayah = parseString(req.query.ayah) || DEFAULT_VERSE;
-  // Validate ayah format: must be "chapter:verse" where both are positive integers
-  if (!/^\d+:\d+$/.test(ayah)) {
-    return sendError(400, 'Invalid ayah format. Expected "chapter:verse" (e.g., "1:1").');
-  }
-
-  const [chapterSegment, verseSegment] = ayah.split(':');
-  const chapterNumber = Number(chapterSegment);
-  const verseNumber = Number(verseSegment);
-
-  // Quick bounds check for chapter/verse
-  if (
-    !Number.isInteger(chapterNumber) ||
-    chapterNumber < 1 ||
-    chapterNumber > 114 ||
-    !Number.isInteger(verseNumber) ||
-    verseNumber < 1 ||
-    verseNumber > 286
-  ) {
-    return sendError(400, 'Invalid ayah bounds.');
-  }
-
-  // Parse translation IDs, reciter, and other options
   const translationIdsQuery = parseString(req.query.translations) ?? '';
   const reciter = parseString(req.query.reciter) || DEFAULT_RECITER;
   const enableAudio = parseBool(req.query.audio, true);
@@ -299,57 +95,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
   const showTafsirs = parseBool(req.query.showTafsirs, true);
   const showReflections = parseBool(req.query.showReflections, true);
   const showAnswers = parseBool(req.query.showAnswers, true);
-  const localeParam = parseString(req.query.locale);
-  const localeIsSupported = localeParam && i18nConfig.locales.includes(localeParam);
-  if (localeParam && !localeIsSupported) {
-    return sendError(
-      400,
-      `Unsupported locale "${localeParam}". Supported locales: ${i18nConfig.locales.join(', ')}`,
-    );
-  }
-
-  const locale = localeIsSupported ? localeParam : i18nConfig.defaultLocale;
-
-  // Fetch chapter metadata once to validate verse bounds
-  let chapterData: ChapterResponse['chapter'] | undefined;
-  try {
-    const chapterResponse = await fetcher<ChapterResponse>(
-      makeChapterUrl(String(chapterNumber), locale),
-    );
-    chapterData = chapterResponse.chapter;
-  } catch (error) {
-    return sendError(400, 'Invalid chapter requested.');
-  }
-
-  const versesCount = chapterData?.versesCount;
-  if (!versesCount || verseNumber > versesCount) {
-    return sendError(400, 'Verse number is out of range for the selected chapter.');
-  }
-
-  // Parse range end if provided and clamp to valid verse count (and 10-verse limit)
+  const locale = parseString(req.query.locale);
   const rangeEndParam = parseString(req.query.rangeEnd);
   const parsedRangeEnd = rangeEndParam ? Number(rangeEndParam) : undefined;
-  const maxAllowedRangeEnd = Math.min(verseNumber + MAX_RANGE_SPAN, versesCount);
-
-  // If user explicitly asks beyond the limit, return a clear error instead of silently capping.
-  if (parsedRangeEnd && Number.isFinite(parsedRangeEnd) && parsedRangeEnd > maxAllowedRangeEnd) {
-    return sendError(
-      400,
-      `Requested range exceeds the maximum allowed span (up to ${maxAllowedRangeEnd}).`,
-    );
-  }
-  const normalizedRangeEnd =
-    parsedRangeEnd &&
-    Number.isFinite(parsedRangeEnd) &&
-    parsedRangeEnd > verseNumber &&
-    parsedRangeEnd <= maxAllowedRangeEnd
-      ? parsedRangeEnd
-      : undefined;
-
-  // Parse custom dimensions
+  const normalizedRangeEnd = Number.isFinite(parsedRangeEnd) ? parsedRangeEnd : undefined;
   const customWidth = parseString(req.query.width) || undefined;
   const customHeight = parseString(req.query.height) || undefined;
-  const reciterId = Number(reciter) || Number(DEFAULT_RECITER);
 
   // Parse translation IDs
   const translationIdList = translationIdsQuery
@@ -358,190 +109,26 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     .filter((id) => !Number.isNaN(id));
 
   try {
-    // Load localized labels
-    const tCommon = await getT(locale, 'common');
-    const tQuranReader = await getT(locale, 'quran-reader');
-    const labels: WidgetLabels = {
-      surah: tCommon('surah'),
-      verse: tCommon('verse'),
-      tafsirs: tQuranReader('tafsirs'),
-      reflectionsAndLessons: tCommon('reflections-and-lessons'),
-      answers: tCommon('answers'),
-    };
-
-    // Determine word-by-word translation locale
-    let wordByWordLocale = 'en';
-    if (enableWbw && locale !== 'en') {
-      try {
-        const wbwResponse = await fetcher<WordByWordTranslationsResponse>(
-          makeWordByWordTranslationsUrl(locale),
-        );
-        const isoCodes = new Set(
-          (wbwResponse.wordByWordTranslations ?? [])
-            .map((translation) => translation.isoCode)
-            .filter(Boolean),
-        );
-        // If the requested locale is available for word-by-word, use it. Otherwise, default to 'en'.
-        if (isoCodes.has(locale)) {
-          wordByWordLocale = locale;
-        }
-      } catch (error) {
-        logDebug('Ayah widget: Failed to load word-by-word translations', { error, locale });
-      }
-    }
-
-    // Build each verse key that needs to be requested; range produces multiple keys, otherwise a single verse.
-    const verseKeys = normalizedRangeEnd
-      ? Array.from(
-          { length: normalizedRangeEnd - verseNumber + 1 },
-          (unused, idx) => `${chapterNumber}:${verseNumber + idx}`,
-        )
-      : [ayah];
-    const verseResponses = await Promise.all(
-      verseKeys.map((verseKey) =>
-        fetcher<VerseResponse>(
-          makeByVerseKeyUrl(
-            verseKey,
-            buildVerseParams(translationIdList, reciter, mushaf, wordByWordLocale),
-          ),
-        ),
-      ),
-    );
-
-    const verses = verseResponses.map((response) => response.verse).filter(Boolean) as Verse[];
-    if (!verses.length) {
-      throw new Error('No verses returned for the requested range.');
-    }
-
-    // Sanitize verses
-    const sanitizedVerses = verses.map(sanitizeVerse);
-    const translationResourceIds = new Set<number>();
-    sanitizedVerses.forEach((verseItem) => {
-      verseItem.translations?.forEach((translation) => {
-        if (translation.resourceId) {
-          translationResourceIds.add(translation.resourceId);
-        }
-      });
+    const { verses, options } = await getAyahWidgetData({
+      ayah,
+      translationIds: translationIdList,
+      reciter,
+      enableAudio,
+      enableWbw,
+      theme,
+      mushaf,
+      showTranslatorNames,
+      showArabic,
+      showTafsirs,
+      showReflections,
+      showAnswers,
+      locale: locale || undefined,
+      rangeEnd: normalizedRangeEnd,
+      customWidth,
+      customHeight,
     });
 
-    if (translationResourceIds.size) {
-      try {
-        const translationsMeta = await fetcher<TranslationsResponse>(
-          makeTranslationsInfoUrl('en', Array.from(translationResourceIds)),
-        );
-        const metaById = new Map<number, AvailableTranslation>();
-        translationsMeta.translations?.forEach((translation) => {
-          if (translation.id) {
-            metaById.set(translation.id, translation);
-          }
-        });
-        sanitizedVerses.forEach((verseItem, index) => {
-          const enrichedTranslations = enrichTranslations(verseItem.translations, metaById);
-          sanitizedVerses[index] = {
-            ...verseItem,
-            translations: enrichedTranslations,
-          };
-        });
-      } catch (error) {
-        logDebug('Ayah widget: Failed to load translation metadata', {
-          error,
-          translationResourceIds: Array.from(translationResourceIds),
-          ayah,
-        });
-      }
-    }
-
-    // Fetch Surah name and audio data if needed
-    const chapterCandidate = sanitizedVerses[0].chapterId || chapterNumber;
-    let surahName: string | undefined;
-    let audioUrl: string | undefined;
-    let audioStartSeconds: number | undefined;
-    let audioEndSeconds: number | undefined;
-
-    // Turn the chapter number into its transliterated name
-    const numericChapterId = Number(chapterCandidate);
-    if (Number.isFinite(numericChapterId) && numericChapterId > 0) {
-      try {
-        // Reuse already-fetched chapter data when available
-        if (chapterData) {
-          surahName = locale === 'ar' ? chapterData?.nameArabic : chapterData?.nameSimple;
-        } else {
-          const chapterResponse = await fetcher<ChapterResponse>(
-            makeChapterUrl(String(numericChapterId), locale),
-          );
-          const chapterMeta = chapterResponse.chapter;
-          surahName = locale === 'ar' ? chapterMeta?.nameArabic : chapterMeta?.nameSimple;
-        }
-      } catch (error) {
-        logDebug('Failed to fetch chapter info for Surah name', { numericChapterId, error });
-      }
-
-      // Fetch audio data if audio is enabled
-      if (enableAudio) {
-        try {
-          const { audioUrl: fetchedAudioUrl, verseTimings } = await getChapterAudioData(
-            reciterId,
-            numericChapterId,
-            true,
-          );
-          audioUrl = fetchedAudioUrl;
-          // Find start and end timings for the requested verse(s)
-          const firstVerse = sanitizedVerses[0];
-          const lastVerse = sanitizedVerses[sanitizedVerses.length - 1];
-          const startTiming = verseTimings?.find(
-            (verseTiming) => verseTiming.verseKey === firstVerse.verseKey,
-          );
-          const endTiming = verseTimings?.find(
-            (verseTiming) => verseTiming.verseKey === lastVerse.verseKey,
-          );
-          if (startTiming) audioStartSeconds = startTiming.timestampFrom / 1000;
-          if (endTiming) audioEndSeconds = endTiming.timestampTo / 1000;
-        } catch (error) {
-          logDebug('Ayah widget audio data load error', {
-            error,
-            reciterId,
-            chapterId: numericChapterId,
-          });
-        }
-      }
-    }
-
-    // Determine if any translations exist for the current ayah
-    const hasTranslations = sanitizedVerses.some(
-      (verseItem) => (verseItem.translations?.length ?? 0) > 0,
-    );
-
-    const widgetOptions = buildWidgetOptions(
-      ayah,
-      {
-        enableAudio,
-        enableWbw,
-        theme,
-        mushaf,
-        showTranslatorNames,
-        showArabic,
-        showTafsirs,
-        showReflections,
-        showAnswers,
-        locale,
-        labels,
-        rangeEnd: normalizedRangeEnd,
-        customWidth,
-        customHeight,
-      },
-      {
-        hasAnyTranslations: hasTranslations,
-        surahName,
-        audioUrl,
-        audioStart: audioStartSeconds,
-        audioEnd: audioEndSeconds,
-      },
-    );
-
-    // Create the widget component and then render it to static HTML
-    const html = renderToStaticMarkup(
-      <QuranWidget verses={sanitizedVerses} options={widgetOptions} />,
-    );
+    const html = renderToStaticMarkup(<QuranWidget verses={verses} options={options} />);
 
     setCorsHeaders();
     res.setHeader('Cache-Control', 'public, max-age=3600');
@@ -549,7 +136,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<WidgetResponse>
     // Return the rendered HTML
     return res.status(200).json({ success: true, html });
   } catch (error) {
-    logDebug('Ayah widget error', { error });
+    if (error instanceof WidgetInputError) {
+      return sendError(error.status, error.message);
+    }
 
     setCorsHeaders();
     return res.status(500).json({
