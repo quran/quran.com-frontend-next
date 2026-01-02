@@ -32,8 +32,9 @@ export const buildTafsirUrl = ({
   verseKey: string;
   selectedTafsirs: string[];
 }): string => {
+  if (!selectedTafsirs?.length) return '';
   const [, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const tafsirId = selectedTafsirs?.[0] as string;
+  const tafsirId = selectedTafsirs[0];
   return getVerseSelectedTafsirNavigationUrl(chapterNumber, Number(verseNumber), tafsirId);
 };
 
@@ -56,7 +57,7 @@ export const ACTION_BUTTONS: ActionButton[] = [
     key: 'lessons',
     icon: LearningPlanIcon,
     namespace: 'common',
-    modalType: ModalType.REFLECTION,
+    modalType: ModalType.LESSON,
     getNavigationUrl: ({ verseKey }) => getVerseLessonNavigationUrl(verseKey),
   },
   {
