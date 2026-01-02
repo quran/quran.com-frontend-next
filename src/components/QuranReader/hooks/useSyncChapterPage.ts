@@ -25,8 +25,6 @@ import { VersesResponse } from 'types/ApiResponses';
 const useSyncChapterPage = (initialData: VersesResponse): void => {
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
-  // const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  // const canLookupPages = shouldSync && !!lastReadVerseKey?.chapterId;
 
   const firstVerse = initialData?.verses?.[0];
   // Use verseKey as the dependency to detect navigation changes
