@@ -230,8 +230,8 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         pagesLookupResponse.lookupRange.to,
       ).length;
 
-      const firstPageOfRange = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfRangeLookup = pagesLookupResponse.pages[firstPageOfRange];
+      const firstPageNumber = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfRangeLookup = pagesLookupResponse.pages[firstPageNumber];
       const versesResponse = await getRangeVerses(locale, {
         ...apiParams,
         ...{

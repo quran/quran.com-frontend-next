@@ -221,7 +221,7 @@ const TranslationView = ({
   return (
     <>
       {queryParamMessage}
-      <noscript suppressHydrationWarning>
+      <noscript>
         <TranslationViewWrapper
           verses={verses}
           quranReaderStyles={quranReaderStyles}

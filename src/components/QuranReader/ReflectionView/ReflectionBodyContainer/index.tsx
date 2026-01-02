@@ -122,7 +122,7 @@ const ReflectionBodyContainer = ({
             setSelectedVerseNumber={setSelectedVerseNumber}
             scrollToTop={scrollToTop}
             selectedContentType={initialContentType}
-            isModal
+            isModal={isModal}
           />
         </noscript>
       )}

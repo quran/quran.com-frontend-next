@@ -73,13 +73,13 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         juzNumber: Number(juzId),
         mushaf: defaultMushafId,
       });
+      const firstPageOfJuz = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfJuzLookup = pagesLookupResponse.pages[firstPageOfJuz];
       const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
         chaptersData,
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
-      const firstPageOfJuz = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfJuzLookup = pagesLookupResponse.pages[firstPageOfJuz];
 
       const juzVersesResponse = await getJuzVerses(juzId, locale, {
         ...getDefaultWordFields(quranReaderStyles.quranFont),
