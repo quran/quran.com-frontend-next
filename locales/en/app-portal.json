@@ -3,51 +3,51 @@
     "apps": {
       "muhaffidh": {
         "title": "Muhaffidh",
-        "caption": "Memorize and review Quran efficiently",
         "tagline": "An innovative Quran memorization & review companion",
-        "description": "A Quran app designed to help you memorize and review the Quran in an innovative way."
+        "description": "A Quran app designed to help you memorize and review the Quran in an innovative way.",
+        "caption": "Memorize and review Quran efficiently"
       },
       "quran_android": {
         "title": "Quran for Android",
-        "caption": "Read, bookmark, and listen to the Quran on Android devices",
         "tagline": "Free, open-source Quran app for Android",
-        "description": "Features include Madani-style pages, gapless audio, bookmarking/tagging/sharing, search, night mode, audio repeat, and translations/tafsir in many languages."
+        "description": "Features include Madani-style pages, gapless audio, bookmarking/tagging/sharing, search, night mode, audio repeat, and translations/tafsir in many languages.",
+        "caption": "Read, bookmark, and listen to the Quran on Android devices"
       },
       "quran_ios": {
         "title": "Quran for iOS (by quran.com)",
-        "caption": "Beautiful, ad-free Quran reading and listening app for iPhone & iPad",
         "tagline": "A beautiful, ad-free Mushaf app",
-        "description": "From the makers of Quran.com: read the Quran on the go, memorize, and listen to your favorite reciters in a clean, ad-free experience."
+        "description": "From the makers of Quran.com: read the Quran on the go, memorize, and listen to your favorite reciters in a clean, ad-free experience.",
+        "caption": "Beautiful, ad-free Quran reading and listening app for iPhone & iPad"
       },
       "quranmeet": {
         "title": "QuranMeet",
-        "caption": "Live Quran study sessions",
         "tagline": "1-to-1 and small-group Quran sessions",
-        "description": "A platform that connects students with teachers and study groups for one-on-one and small-group Quran learning sessions."
+        "description": "A platform that connects students with teachers and study groups for one-on-one and small-group Quran learning sessions.",
+        "caption": "Live Quran study sessions"
       },
       "quranreflect": {
         "title": "QuranReflect",
-        "caption": "Share reflections",
         "tagline": "Share reflections and grow together",
-        "description": "A social platform for encouraging and facilitating Quranic reflections - share reflections, explore topics, and engage with the community."
+        "description": "A social platform for encouraging and facilitating Quranic reflections - share reflections, explore topics, and engage with the community.",
+        "caption": "Share reflections"
       },
       "readtafsir": {
         "title": "ReadTafsir",
-        "caption": "Search and compare classical tafsirs",
         "tagline": "Interactive tafsir reading & listening",
-        "description": "Read and listen to multiple classical tafsir sources in one place, making it easy to browse, search, and compare interpretations."
+        "description": "Read and listen to multiple classical tafsir sources in one place, making it easy to browse, search, and compare interpretations.",
+        "caption": "Search and compare classical tafsirs"
       },
       "sunnah": {
         "title": "Sunnah.com",
-        "caption": "Hadith collection",
         "tagline": "Hadith at your fingertips",
-        "description": "A hadith library with major collections available online, including translations in multiple languages and search tools."
+        "description": "A hadith library with major collections available online, including translations in multiple languages and search tools.",
+        "caption": "Hadith collection"
       },
       "tafsirapp": {
         "title": "Tafsir App",
-        "caption": "Interactive tafsir with multiple sources",
         "tagline": "A Quran research hub",
-        "description": "A Quran research portal that brings together tafsir, qira'at, mushafs, i'rab, Qur'anic sciences, asbab al-nuzul, rulings, and dictionaries."
+        "description": "A Quran research portal that brings together tafsir, qira'at, mushafs, i'rab, Qur'anic sciences, asbab al-nuzul, rulings, and dictionaries.",
+        "caption": "Interactive tafsir with multiple sources"
       }
     },
     "filters": {
