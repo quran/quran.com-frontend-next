@@ -218,8 +218,8 @@
   overflow: hidden;
   line-height: 0;
   box-shadow: var(--shadow-small);
-  inline-size: 96px;
-  block-size: 32px;
+  inline-size: 90px;
+  block-size: 30px;
   flex: 0 0 auto;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -292,7 +292,7 @@
   }
 
   .storeBadge {
-    inline-size: 88px;
+    inline-size: 90px;
     block-size: 30px;
   }
 
