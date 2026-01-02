@@ -1,9 +1,7 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
-
 import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -18,7 +16,7 @@ test(
   async ({ page }) => {
     // Email form should be visible immediately (no need to click "Continue with Email")
     // Click on the "Sign Up" tab - use test ID to avoid ambiguity
-    await page.getByTestId('signup-button').click();
+    await page.getByTestId(TestId.SIGNUP_BUTTON).click();
 
     // Fill in the form fields with default values
     await fillInSignUpForm(page);
@@ -27,7 +25,7 @@ test(
     await page.locator('form').getByRole('button', { name: 'Sign up' }).click();
 
     // The "verification-code" component should be visible
-    const verificationCodeComponent = page.getByTestId('verification-code');
+    const verificationCodeComponent = page.getByTestId(TestId.VERIFICATION_CODE);
     await expect(verificationCodeComponent).toBeVisible();
   },
 );
@@ -38,10 +36,10 @@ test(
   async ({ page }) => {
     // Email form should be visible immediately (no need to click "Continue with Email")
     // Click on the "Sign Up" tab - use test ID to avoid ambiguity
-    await page.getByTestId('signup-button').click();
+    await page.getByTestId(TestId.SIGNUP_BUTTON).click();
 
     // Get the password validation component
-    const passwordValidation = page.getByTestId('password-validation');
+    const passwordValidation = page.getByTestId(TestId.PASSWORD_VALIDATION);
     await expect(passwordValidation).not.toBeVisible();
 
     // When typing a password, the password validation should appear
@@ -90,7 +88,7 @@ test('Sign up with an existing email shows an error', async ({ page }) => {
   test.skip(!process.env.TEST_USER_EMAIL, 'No credentials provided');
 
   // Click on the "Sign Up" tab
-  const signUpTab = page.getByTestId('signup-button');
+  const signUpTab = page.getByTestId(TestId.SIGNUP_BUTTON);
   await signUpTab.click();
 
   await fillInSignUpForm(page);
@@ -107,7 +105,7 @@ test('Sign up with an existing email shows an error', async ({ page }) => {
 
 // Helper to get password validation rules
 async function getRules(page: Page) {
-  const passwordValidation = page.getByTestId('password-validation');
+  const passwordValidation = page.getByTestId(TestId.PASSWORD_VALIDATION);
   const minRule = passwordValidation.locator('div', { hasText: 'Min 8 characters' });
   const maxRule = passwordValidation.locator('div', { hasText: 'Max 20 characters' });
   const uppercaseRule = passwordValidation.locator('div', {

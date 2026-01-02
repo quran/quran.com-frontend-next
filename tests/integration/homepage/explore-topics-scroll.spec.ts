@@ -2,6 +2,8 @@
 /* eslint-disable no-restricted-syntax */
 import { test, expect, Page, Locator } from '@playwright/test';
 
+import { TestId } from '@/tests/test-ids';
+
 const VIEWPORT_HEIGHT = 844;
 const VIEWPORT_WIDTHS = [320, 280, 240, 200];
 
@@ -11,7 +13,7 @@ async function setupMobileHome(page: Page, localePath: string): Promise<void> {
 }
 
 async function getExploreContainer(page: Page): Promise<Locator> {
-  const container = page.getByTestId('explore-topics-container');
+  const container = page.getByTestId(TestId.EXPLORE_TOPICS_CONTAINER);
   await expect(container).toBeVisible();
   await container.scrollIntoViewIfNeeded();
   return container;

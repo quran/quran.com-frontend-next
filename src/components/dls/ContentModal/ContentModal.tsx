@@ -28,8 +28,9 @@ type ContentModalProps = {
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
   onClick?: (e: React.MouseEvent) => void;
-  contentClassName?: string;
   overlayClassName?: string;
+  contentClassName?: string;
+  innerContentClassName?: string;
   closeIconClassName?: string;
   headerClassName?: string;
   size?: ContentModalSize;
@@ -49,8 +50,9 @@ const ContentModal = ({
   children,
   header,
   innerRef,
-  contentClassName,
   overlayClassName,
+  contentClassName,
+  innerContentClassName,
   closeIconClassName,
   headerClassName,
   size = ContentModalSize.MEDIUM,
@@ -123,8 +125,7 @@ const ContentModal = ({
           <Dialog.Content
             {...(onClick && { onClick })}
             ref={contentRef}
-            className={classNames(styles.contentWrapper, {
-              [contentClassName]: contentClassName,
+            className={classNames(styles.contentWrapper, contentClassName, {
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
@@ -151,7 +152,10 @@ const ContentModal = ({
               </div>
             )}
 
-            <div className={styles.content} data-testid="modal-content">
+            <div
+              className={classNames(styles.content, innerContentClassName)}
+              data-testid="modal-content"
+            >
               {children}
             </div>
           </Dialog.Content>

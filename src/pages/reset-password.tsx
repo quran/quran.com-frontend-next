@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -6,7 +6,6 @@ import ResetPasswordForm from '@/components/Login/ResetPassword/ResetPasswordFor
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getResetPasswordNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const ResetPasswordPage: NextPage = () => {
   const { t } = useTranslation('login');
@@ -25,7 +24,5 @@ const ResetPasswordPage: NextPage = () => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/reset-password');
 
 export default ResetPasswordPage;

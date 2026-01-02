@@ -1,8 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-
-import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -15,7 +13,6 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const path = '/about-us';
 const AboutUsPage = () => {
@@ -155,7 +152,5 @@ const AboutUsPage = () => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/about-us');
 
 export default AboutUsPage;

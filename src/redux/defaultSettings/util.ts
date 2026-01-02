@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable @typescript-eslint/no-var-requires */
@@ -20,7 +21,6 @@ import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
 /* eslint-disable react-func/max-lines-per-function */
-
 /**
  * Get the initial state of the store.
  *

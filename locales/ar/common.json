@@ -60,7 +60,7 @@
     "play": "تشغيل الصوت",
     "playback-normal": "طبيعي",
     "playback-speed": "سرعة التشغيل",
-    "playback-speed-unit": "إغلاق",
+    "playback-speed-unit": "x",
     "player": {
       "close-audio-player": "أغلق مشغل الصوت",
       "currently-playing": "أنت الآن تستمع إلى",
@@ -245,6 +245,10 @@
   },
   "fundraising": {
     "description": "التبرعات الشهرية تساعدنا على تحسين Quran.com وضمان استمراريته، لنتمكّن من التركيز أقل على جمع التبرعات وأكثر على تحقيق الأثر.",
+    "donation-campaign": {
+      "cta": "تبرع اليوم",
+      "text": "انضم إلى الداعمين"
+    },
     "title": "كن متبرعا شهريا"
   },
   "get-started": "ابدأ الآن",
@@ -407,7 +411,7 @@
   "sitemap": "خريطة الموقع",
   "sort": {
     "ascending": "تصاعدي",
-    "by": "ترتيب حسب",
+    "by": "ترتيب",
     "descending": "تنازلي"
   },
   "style": "النمط",
