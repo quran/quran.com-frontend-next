@@ -86,7 +86,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                 goal={goal}
                 currentActivityDay={currentActivityDay}
                 goalCta={goalCta}
-                onGoalArrowClick={goal ? onGoalArrowClicked : undefined}
+                shouldShowArrow={!!goal}
               />
             </div>
           </div>

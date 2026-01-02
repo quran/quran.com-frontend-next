@@ -22,7 +22,7 @@
 
   @include breakpoints.smallerThanTablet {
     flex-direction: row;
-    height: 54px;
+    height: calc(var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)); // 50px + 3px + 1px = 54px - maintains consistent card size on mobile
     gap: var(--spacing-small);
     padding: var(--spacing-small);
   }
@@ -171,28 +171,30 @@
 .endOfSurahGoalContent {
   width: 100%;
   gap: var(--spacing-small);
+}
 
-  // Override shared component styles for end-of-surah variant
-  :global(.circularProgressbar) {
-    height: var(--spacing-xxlarge-px);
-    width: var(--spacing-xxlarge-px);
+// Custom styles for end-of-surah variant progressbar
+.customProgressbar {
+  height: var(--spacing-xxlarge-px);
+  width: var(--spacing-xxlarge-px);
 
-    @include breakpoints.smallerThanTablet {
-      height: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
-      width: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
-    }
+  @include breakpoints.smallerThanTablet {
+    height: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
+    width: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
   }
+}
 
-  :global(.circularProgressbarText) {
-    fill: var(--color-streaks-dark);
-    font-size: var(--font-size-small-px);
+// Custom styles for end-of-surah variant progressbar text
+.customProgressbarText {
+  fill: var(--color-streaks-dark);
+  font-size: var(--font-size-small-px);
 
-    @include breakpoints.smallerThanTablet {
-      font-size: var(--font-size-xxsmall-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xxsmall-px);
   }
+}
 
-  :global(.goalStatusContainer) {
-    text-align: start;
-  }
+// Custom styles for end-of-surah variant status container
+.customStatusContainer {
+  text-align: start;
 }

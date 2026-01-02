@@ -17,8 +17,13 @@ export type ReadingGoalCardContentProps = {
   goal?: QuranGoalStatus | null;
   currentActivityDay?: CurrentQuranActivityDay;
   goalCta?: React.ReactNode;
-  onGoalArrowClick?: () => void;
+  shouldShowArrow?: boolean;
   className?: string;
+  classes?: {
+    progressbar?: string;
+    progressbarText?: string;
+    statusContainer?: string;
+  };
 };
 
 /**
@@ -31,8 +36,9 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
   goal,
   currentActivityDay,
   goalCta,
-  onGoalArrowClick,
+  shouldShowArrow,
   className,
+  classes,
 }) => {
   const { lang } = useTranslation();
 
@@ -41,7 +47,10 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
       {/* Goal Progress Section */}
       {goal ? (
         <div className={classNames(styles.goalProgressSection, className)}>
-          <div className={styles.circularProgressbar} data-testid="goal-progress">
+          <div
+            className={classNames(styles.circularProgressbar, classes?.progressbar)}
+            data-testid="goal-progress"
+          >
             <CircularProgressbar
               text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
               value={goal.progress.percent}
@@ -50,18 +59,18 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
               classes={{
                 path: styles.circularProgressbarPath,
                 trail: styles.circularProgressbarTrail,
-                text: styles.circularProgressbarText,
+                text: classNames(styles.circularProgressbarText, classes?.progressbarText),
               }}
             />
           </div>
-          <div className={styles.goalStatusContainer}>
+          <div className={classNames(styles.goalStatusContainer, classes?.statusContainer)}>
             <GoalStatus
               goal={goal}
               currentActivityDay={currentActivityDay}
               percent={goal.progress.percent}
             />
           </div>
-          {onGoalArrowClick && (
+          {shouldShowArrow && (
             <IconContainer
               size={IconSize.Xsmall}
               icon={<ArrowIcon />}

@@ -117,8 +117,13 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
               goal={goal}
               currentActivityDay={currentActivityDay}
               goalCta={goalCta}
-              onGoalArrowClick={onGoalArrowClicked}
+              shouldShowArrow
               className={styles.endOfSurahGoalContent}
+              classes={{
+                progressbar: styles.customProgressbar,
+                progressbarText: styles.customProgressbarText,
+                statusContainer: styles.customStatusContainer,
+              }}
             />
           </Link>
         ) : (
@@ -127,6 +132,11 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
             currentActivityDay={currentActivityDay}
             goalCta={goalCta}
             className={styles.endOfSurahGoalContent}
+            classes={{
+              progressbar: styles.customProgressbar,
+              progressbarText: styles.customProgressbarText,
+              statusContainer: styles.customStatusContainer,
+            }}
           />
         )}
       </div>
