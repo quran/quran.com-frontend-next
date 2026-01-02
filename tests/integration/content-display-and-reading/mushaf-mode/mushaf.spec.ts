@@ -1,8 +1,10 @@
-/* eslint-disable react-func/max-lines-per-function */
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
+import { selectQuranFont, withSettingsDrawer } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import QuranPage from '@/tests/POM/mushaf-mode';
+import { TestId } from '@/tests/test-ids';
+import { QuranFont } from '@/types/QuranReader';
 
 let homePage: Homepage;
 
@@ -14,16 +16,19 @@ test.beforeEach(async ({ page, context }) => {
  * Shared helper that runs the common mushaf page navigation assertions.
  * If `fontTestId` is provided it will open settings and select that font first.
  */
-const runMushafPageTest = async (page, isMobile, fontTestId?: string) => {
+const runMushafPageTest = async (
+  page: Page,
+  isMobile: boolean,
+  font?: QuranFont,
+): Promise<void> => {
   // Go to Surah 1
   await homePage.goTo('/1');
 
   // Set the font if provided
-  if (fontTestId) {
-    await homePage.openSettingsDrawer();
-    await page.getByTestId(fontTestId).click();
-    // Close settings drawer
-    await page.keyboard.press('Escape');
+  if (font) {
+    await withSettingsDrawer(page, async () => {
+      await selectQuranFont(page, font);
+    });
   }
 
   // Enable mushaf mode
@@ -34,11 +39,11 @@ const runMushafPageTest = async (page, isMobile, fontTestId?: string) => {
   await homePage.goTo('/page/123');
 
   // Verify that the page number is displayed correctly
-  const pageInfo = page.getByTestId('page-info');
+  const pageInfo = page.getByTestId(TestId.PAGE_INFO);
   await expect(pageInfo).toContainText('123');
 
   // The end of scrolling buttons should be visible
-  const endOfScrollingControls = page.getByTestId('end-of-scrolling-controls');
+  const endOfScrollingControls = page.getByTestId(TestId.END_OF_SCROLLING_CONTROLS);
   await expect(endOfScrollingControls).toBeVisible();
 
   // Previous page button should take us to page 122
@@ -66,7 +71,7 @@ test.describe.skip('temporarily disabled', () => {
     'Mushaf mode displays page number correctly (Indopak)',
     { tag: ['@slow', '@mushaf', '@page', '@font'] },
     async ({ page, isMobile }) => {
-      await runMushafPageTest(page, isMobile, 'text_indopak-button');
+      await runMushafPageTest(page, isMobile, QuranFont.IndoPak);
     },
   );
 
@@ -74,7 +79,7 @@ test.describe.skip('temporarily disabled', () => {
     'Mushaf mode displays page number correctly (Tajweed)',
     { tag: ['@slow', '@mushaf', '@page', '@font'] },
     async ({ page, isMobile }) => {
-      await runMushafPageTest(page, isMobile, 'tajweed-button');
+      await runMushafPageTest(page, isMobile, QuranFont.Tajweed);
     },
   );
 
@@ -93,15 +98,15 @@ test.describe.skip('temporarily disabled', () => {
       await homePage.goTo('/page/123');
 
       // Verify that the page number is displayed correctly
-      const pageInfo = page.getByTestId('page-info');
+      const pageInfo = page.getByTestId(TestId.PAGE_INFO);
       await expect(pageInfo).toContainText('123');
 
-      const header = page.getByTestId('header');
+      const header = page.getByTestId(TestId.HEADER);
       // Open the navigation drawer
       await header.getByText("5. Al-Ma'idah", { exact: true }).click();
 
       // Search for the buttom with text "Page"
-      await page.getByTestId('page-button').click();
+      await page.getByTestId(TestId.PAGE_BUTTON).click();
 
       // Click on page 137
       await page.getByText('Page 137', { exact: true }).click();
@@ -126,16 +131,15 @@ test.describe.skip('temporarily disabled', () => {
       await homePage.goTo('/page/123');
 
       // Page info should show "Hizb 13"
-      const pageInfo = page.getByTestId('page-info');
-      const contextMenu = page.getByTestId('header');
+      const pageInfo = page.getByTestId(TestId.PAGE_INFO);
+      const contextMenu = page.getByTestId(TestId.HEADER);
       await expect(pageInfo).toContainText('Hizb 13');
       await expect(contextMenu).toContainText("5. Al-Ma'idah");
 
       // Switch to IndoPak font
-      await homePage.openSettingsDrawer();
-      await page.getByTestId('text_indopak-button').click();
-      // Close settings drawer
-      await page.keyboard.press('Escape');
+      await withSettingsDrawer(page, async () => {
+        await selectQuranFont(page, QuranFont.IndoPak);
+      });
 
       // Page info should now show "Hizb 14" (IndoPak has 16 lines per page vs 15 for Uthmani)
       await expect(pageInfo).toContainText('Hizb 14');
@@ -143,20 +147,18 @@ test.describe.skip('temporarily disabled', () => {
       await expect(contextMenu).toContainText("6. Al-An'am");
 
       // Switch to Tajweed font
-      await homePage.openSettingsDrawer();
-      await page.getByTestId('tajweed-button').click();
-      // Close settings drawer
-      await page.keyboard.press('Escape');
+      await withSettingsDrawer(page, async () => {
+        await selectQuranFont(page, QuranFont.Tajweed);
+      });
 
       // Page info should still show "Hizb 13"
       await expect(pageInfo).toContainText('Hizb 13');
       await expect(contextMenu).toContainText("5. Al-Ma'idah");
 
       // Switch back to Uthmani font
-      await homePage.openSettingsDrawer();
-      await page.getByTestId('text_uthmani-button').click();
-      // Close settings drawer
-      await page.keyboard.press('Escape');
+      await withSettingsDrawer(page, async () => {
+        await selectQuranFont(page, QuranFont.Uthmani);
+      });
 
       // Page info should still show "Hizb 13"
       await expect(pageInfo).toContainText('Hizb 13');

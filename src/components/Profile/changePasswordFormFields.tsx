@@ -8,9 +8,9 @@ import PasswordInput from '../Login/SignUpForm/PasswordInput';
 import styles from './SharedProfileStyles.module.scss';
 
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
+import { TestId } from '@/tests/test-ids';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
-import TEST_IDS from '@/utils/test-ids';
 
 /**
  * Get form fields for the change password form
@@ -33,7 +33,7 @@ const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => [
     ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordInput
-        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CURRENT_PASSWORD_INPUT}
+        dataTestId={TestId.AUTH_UPDATE_PROFILE_CURRENT_PASSWORD_INPUT}
         label={t('common:form.current-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}
@@ -50,7 +50,7 @@ const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => [
     containerClassName: styles.formInputContainer,
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordField
-        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.NEW_PASSWORD_INPUT}
+        dataTestId={TestId.AUTH_UPDATE_PROFILE_NEW_PASSWORD_INPUT}
         label={t('common:form.new-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}
@@ -74,7 +74,7 @@ const getChangePasswordFormFields = (t: Translate): FormBuilderFormField[] => [
     ],
     customRender: ({ value, onChange, placeholder }) => (
       <PasswordInput
-        dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CONFIRM_NEW_PASSWORD_INPUT}
+        dataTestId={TestId.AUTH_UPDATE_PROFILE_CONFIRM_NEW_PASSWORD_INPUT}
         label={t('common:form.confirm-new-password')}
         containerClassName={styles.passwordFormInput}
         onChange={onChange}

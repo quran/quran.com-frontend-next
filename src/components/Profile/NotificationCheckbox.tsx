@@ -7,7 +7,7 @@ import { Translate } from 'next-translate';
 import styles from './EmailNotificationSettingsForm.module.scss';
 
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 interface NotificationCheckboxProps {
   preference: IUserPreferenceSettings;
@@ -30,7 +30,7 @@ const NotificationCheckbox: FC<NotificationCheckboxProps> = ({
   return (
     <Checkbox
       keepIndicatorOnUnchecked
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_CHECKBOX}
+      dataTestId={TestId.AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_CHECKBOX}
       containerClassName={styles.checkboxContainer}
       indicatorClassName={styles.indicator}
       checkboxClassName={styles.checkbox}
