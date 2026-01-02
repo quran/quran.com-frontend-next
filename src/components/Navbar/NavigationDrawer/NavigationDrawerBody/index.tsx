@@ -95,7 +95,7 @@ const NavigationDrawerBody = (): JSX.Element => {
             <ThemeSwitcher />
           </div>
           <Button
-            href={makeDonatePageUrl()}
+            href={makeDonatePageUrl(false, true)}
             isNewTab
             prefix={<IconDiamond />}
             className={styles.ctaDonateButton}
