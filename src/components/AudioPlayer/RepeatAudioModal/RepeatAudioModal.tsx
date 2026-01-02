@@ -139,6 +139,7 @@ const RepeatAudioModal = ({
   const parsedChapterNumber = Number.parseInt(chapterId, 10);
   const chapterNumber = Number.isNaN(parsedChapterNumber) ? 1 : parsedChapterNumber;
 
+  // Priority: explicit selection -> repeat actor -> persisted settings -> chapter defaults.
   const defaultVerseRepetition = useMemo<VerseRepetitionState>(
     () =>
       buildDefaultVerseRepetition({
