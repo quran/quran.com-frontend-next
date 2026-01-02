@@ -79,14 +79,15 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         pagesLookup.lookupRange.from,
         pagesLookup.lookupRange.to,
       ).length;
+      const firstPageOfHizb = Object.keys(pagesLookup.pages)[0];
+      const firstPageOfHizbLookup = pagesLookup.pages[firstPageOfHizb];
 
-      // Fetch all the verses in the hizb for SSR
       const hizbVerses = await getHizbVerses(hizbId, locale, {
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         mushaf,
-        perPage: numberOfVerses,
-        from: pagesLookup.lookupRange.from,
-        to: pagesLookup.lookupRange.to,
+        perPage: 'all',
+        from: firstPageOfHizbLookup.from,
+        to: firstPageOfHizbLookup.to,
       });
       hizbVerses.pagesLookup = pagesLookup;
       hizbVerses.metaData = {

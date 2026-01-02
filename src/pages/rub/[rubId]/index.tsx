@@ -64,14 +64,15 @@ const buildRubPageProps = async (
     pagesLookup.lookupRange.from,
     pagesLookup.lookupRange.to,
   ).length;
+  const firstPageOfRub = Object.keys(pagesLookup.pages)[0];
+  const firstPageOfRubLookup = pagesLookup.pages[firstPageOfRub];
 
-  // Fetch all the verses in the rub for SSR
   const rubVerses = await getRubVerses(rubId, locale, {
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     mushaf,
-    perPage: numberOfVerses,
-    from: pagesLookup.lookupRange.from,
-    to: pagesLookup.lookupRange.to,
+    perPage: 'all',
+    from: firstPageOfRubLookup.from,
+    to: firstPageOfRubLookup.to,
   });
   rubVerses.pagesLookup = pagesLookup;
   rubVerses.metaData = {

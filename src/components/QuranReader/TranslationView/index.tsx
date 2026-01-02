@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useMemo, useRef, useState } from 'react';
+import { ReactNode, useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -38,12 +38,86 @@ type TranslationViewProps = {
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
+type PageVersesQuestionsData = ReturnType<typeof useCountRangeQuestions>['data'];
+
 const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
   ssr: false,
   loading: () => <Spinner />,
 });
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1000;
+
+type TranslationViewWrapperProps = {
+  verses: Verse[];
+  quranReaderStyles: QuranReaderStyles;
+  pageVersesQuestionsData: PageVersesQuestionsData;
+  children: ReactNode;
+};
+
+const TranslationViewWrapper = ({
+  verses,
+  quranReaderStyles,
+  pageVersesQuestionsData,
+  children,
+}: TranslationViewWrapperProps) => (
+  <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
+    <div
+      className={styles.wrapper}
+      onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+    >
+      {children}
+    </div>
+  </PageQuestionsContext.Provider>
+);
+
+type StaticVerseListProps = {
+  verses: Verse[];
+  quranReaderStyles: QuranReaderStyles;
+  mushafId: number;
+  perPage: number;
+};
+
+const StaticVerseList = ({
+  verses,
+  quranReaderStyles,
+  mushafId,
+  perPage,
+}: StaticVerseListProps) => (
+  <>
+    {verses.map((verse, verseIdx) => {
+      const bookmarksRangeUrl = isLoggedIn()
+        ? makeBookmarksRangeUrl(
+            mushafId,
+            Number(verse.chapterId),
+            Number(verse.verseNumber),
+            perPage,
+          )
+        : undefined;
+      const translationsLabel = getTranslationsLabelString(verse.translations);
+      return (
+        <div key={verse.verseKey} className={styles.container}>
+          {verse.verseNumber === 1 && (
+            <ChapterHeader
+              translationsLabel={translationsLabel}
+              translationsCount={verse.translations?.length}
+              chapterId={String(verse.chapterId)}
+              pageNumber={verse.pageNumber}
+              hizbNumber={verse.hizbNumber}
+              isTranslationView
+            />
+          )}
+          <TranslationViewCell
+            verseIndex={verseIdx}
+            verse={verse}
+            quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+            hasNotes={false}
+          />
+        </div>
+      );
+    })}
+  </>
+);
 
 const TranslationView = ({
   quranReaderStyles,
@@ -148,62 +222,34 @@ const TranslationView = ({
     <>
       {queryParamMessage}
       <noscript suppressHydrationWarning>
-        <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
-          <div
-            className={styles.wrapper}
-            onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-          >
-            {verses.map((verse, verseIdx) => {
-              const bookmarksRangeUrl = isLoggedIn()
-                ? makeBookmarksRangeUrl(
-                    mushafId,
-                    Number(verse.chapterId),
-                    Number(verse.verseNumber),
-                    initialData.pagination.perPage,
-                  )
-                : undefined;
-              const translationsLabel = getTranslationsLabelString(verse.translations);
-              return (
-                <div key={verse.verseKey} className={styles.container}>
-                  {verse.verseNumber === 1 && (
-                    <ChapterHeader
-                      translationsLabel={translationsLabel}
-                      translationsCount={verse.translations?.length}
-                      chapterId={String(verse.chapterId)}
-                      pageNumber={verse.pageNumber}
-                      hizbNumber={verse.hizbNumber}
-                      isTranslationView
-                    />
-                  )}
-                  <TranslationViewCell
-                    verseIndex={verseIdx}
-                    verse={verse}
-                    quranReaderStyles={quranReaderStyles}
-                    bookmarksRangeUrl={bookmarksRangeUrl}
-                    hasNotes={false}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </PageQuestionsContext.Provider>
+        <TranslationViewWrapper
+          verses={verses}
+          quranReaderStyles={quranReaderStyles}
+          pageVersesQuestionsData={pageVersesQuestionsData}
+        >
+          <StaticVerseList
+            verses={verses}
+            quranReaderStyles={quranReaderStyles}
+            mushafId={mushafId}
+            perPage={initialData.pagination.perPage}
+          />
+        </TranslationViewWrapper>
       </noscript>
 
-      <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
-        <div
-          className={styles.wrapper}
-          onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-        >
-          <Virtuoso
-            ref={virtuosoRef}
-            useWindowScroll
-            totalCount={versesCount + 1}
-            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-            initialItemCount={1} // needed for SSR.
-            itemContent={itemContentRenderer}
-          />
-        </div>
-      </PageQuestionsContext.Provider>
+      <TranslationViewWrapper
+        verses={verses}
+        quranReaderStyles={quranReaderStyles}
+        pageVersesQuestionsData={pageVersesQuestionsData}
+      >
+        <Virtuoso
+          ref={virtuosoRef}
+          useWindowScroll
+          totalCount={versesCount + 1}
+          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+          initialItemCount={1} // needed for SSR.
+          itemContent={itemContentRenderer}
+        />
+      </TranslationViewWrapper>
     </>
   );
 };

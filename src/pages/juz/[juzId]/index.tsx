@@ -78,14 +78,15 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
+      const firstPageOfJuz = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfJuzLookup = pagesLookupResponse.pages[firstPageOfJuz];
 
-      // request the full juz so SSR renders every verse
       const juzVersesResponse = await getJuzVerses(juzId, locale, {
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         mushaf: defaultMushafId,
-        perPage: numberOfVerses,
-        from: pagesLookupResponse.lookupRange.from,
-        to: pagesLookupResponse.lookupRange.to,
+        perPage: 'all',
+        from: firstPageOfJuzLookup.from,
+        to: firstPageOfJuzLookup.to,
       });
       const metaData = { numberOfVerses };
       juzVersesResponse.metaData = metaData;
