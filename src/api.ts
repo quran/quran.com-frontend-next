@@ -103,7 +103,7 @@ export const fetcher = async function fetcher<T>(
  * @param {string} params.locale - Target locale for the request
  * @param {number} params.chapter - Chapter number of the target ayah
  * @param {number} params.verse - Verse number of the target ayah
- * @param {number[]} params.translationIds - Preferred translation IDs, first one is used
+ * @param {number[]} params.translationIds - Preferred translation IDs, first one is used; empty means no translations
  * @param {MushafLines} params.mushafLines - Mushaf line configuration to build the mushaf id
  * @returns {Promise<VersesResponse | undefined>} Verse payload or undefined on failure
  */
@@ -115,10 +115,11 @@ export const getQuranInYearVerse = async ({
   mushafLines,
 }: QuranInYearVerseRequest): Promise<VersesResponse | undefined> => {
   try {
+    const translationsParam = translationIds.slice(0, 1).join(',');
     const quranInYearParams = {
       ...getDefaultWordFields(QuranFont.QPCHafs),
       translationFields: 'resource_name,language_id',
-      translations: translationIds.slice(0, 1).join(','),
+      ...(translationsParam ? { translations: translationsParam } : {}),
       mushaf: getMushafId(QuranFont.QPCHafs, mushafLines).mushaf,
       from: `${chapter}:${verse}`,
       to: `${chapter}:${verse}`,
