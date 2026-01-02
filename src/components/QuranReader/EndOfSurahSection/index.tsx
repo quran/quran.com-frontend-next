@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -32,9 +32,9 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
     () => getChapterMetadata(chapterNumber, lang),
   );
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setOpenedModal(null);
-  }, []);
+  };
 
   const chapterMetadata = metadataResponse?.chapterMetadata;
 
