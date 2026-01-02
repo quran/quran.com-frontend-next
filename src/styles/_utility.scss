@@ -860,13 +860,13 @@ $page-container-max-width: 80rem;
   }
 }
 
-@mixin dimmedOverlay {
+@mixin dimmedOverlay($position: fixed) {
   position: relative;
   transition: var(--transition-slow);
 
   &::before {
     content: '';
-    position: fixed;
+    position: $position;
     inset: 0;
     background-color: var(--color-background-backdrop);
     opacity: 0;

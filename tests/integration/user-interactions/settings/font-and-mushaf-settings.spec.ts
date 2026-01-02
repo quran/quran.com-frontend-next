@@ -1,8 +1,9 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { selectMushafLines, selectQuranFont } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 
 let homepage: Homepage;
@@ -21,15 +22,14 @@ test.describe('Font and Mushaf Settings', () => {
       let persistedQuranReaderStyles = (await homepage.getPersistedValue(
         'quranReaderStyles',
       )) as QuranReaderStyles;
-      expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.QPCHafs);
+      expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.MadaniV1);
       expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.SixteenLines);
       // 2. Open the settings drawer
       await homepage.openSettingsDrawer();
       // 3. Choose Indopak font
-      await page.getByTestId('text_indopak-button').click();
+      await selectQuranFont(page, QuranFont.IndoPak);
       // 4. Choose Indopak 15-line Mushaf
-      await expect(page.getByTestId('lines')).toBeVisible();
-      await page.getByTestId('lines').selectOption(MushafLines.FifteenLines);
+      await selectMushafLines(page, MushafLines.FifteenLines);
       // 5. make sure indopak and 15-line Mushaf are persisted
       persistedQuranReaderStyles = (await homepage.getPersistedValue(
         'quranReaderStyles',
@@ -43,7 +43,7 @@ test.describe('Font and Mushaf Settings', () => {
       // 7. Open the settings drawer
       await homepage.openSettingsDrawer();
       // 8. Make sure the selected font is 15 lines that was hydrated from Redux
-      expect(await page.getByTestId('lines').inputValue()).toBe(MushafLines.FifteenLines);
+      expect(await page.getByTestId(TestId.LINES).inputValue()).toBe(MushafLines.FifteenLines);
     },
   );
 
@@ -54,7 +54,7 @@ test.describe('Font and Mushaf Settings', () => {
       // Open the settings drawer
       await homepage.openSettingsDrawer();
       // Choose Indopak font
-      await page.getByTestId('text_indopak-button').click();
+      await selectQuranFont(page, QuranFont.IndoPak);
       // Make sure the font in the reader is updated
       const firstWord = page.locator('[data-word-location="112:1:1"]').first();
       // Get the deepest nested span element which contains the actual font styling
@@ -70,7 +70,7 @@ test.describe('Font and Mushaf Settings', () => {
       // Open the settings drawer
       await homepage.openSettingsDrawer();
       // Choose Tajweed font
-      await page.getByTestId('tajweed-button').click();
+      await selectQuranFont(page, QuranFont.Tajweed);
       // Make sure the font in the reader is updated
       const firstWord = page.locator('[data-word-location="112:1:1"]').first();
       // Get the deepest nested span element which contains the actual font styling

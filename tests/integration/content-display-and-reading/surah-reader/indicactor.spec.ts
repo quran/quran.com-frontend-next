@@ -2,6 +2,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -14,13 +15,13 @@ test(
   'Progress bar indicator increase when scrolling down',
   { tag: ['@slow', '@reader', '@progress'] },
   async ({ page, isMobile }) => {
-    const progressBar = page.getByTestId('progress-bar');
+    const progressBar = page.getByTestId(TestId.PROGRESS_BAR);
 
     if (isMobile) {
       // The progress bar is not shown on mobile unless we scroll a bit
       await page.waitForTimeout(1500);
       await page.mouse.wheel(0, 150);
-      await page.waitForSelector('[data-testid="progress-bar"]', { state: 'visible' });
+      await progressBar.waitFor({ state: 'visible' });
     }
 
     const initialProgress = await progressBar.getAttribute('data-progress');

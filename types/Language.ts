@@ -15,6 +15,7 @@ enum Language {
   UR = 'ur',
   ZH = 'zh',
   MS = 'ms',
+  ML = 'ml',
   DV = 'dv',
   HE = 'he',
   KU = 'ku',
@@ -26,6 +27,7 @@ enum Language {
   DE = 'de',
   ES = 'es',
   SW = 'sw',
+  SD = 'sd',
 }
 
 export default Language;

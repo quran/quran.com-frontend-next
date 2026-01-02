@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -11,7 +12,7 @@ test.beforeEach(async ({ page, context }) => {
 test('Learning Plans are displayed correctly and navigate to the correct URL', async ({ page }) => {
   await homePage.goTo('/learning-plans');
 
-  const learningPlansSection = page.getByTestId('courses-list');
+  const learningPlansSection = page.getByTestId(TestId.COURSES_LIST);
   await expect(learningPlansSection).toBeVisible();
 
   // Check that there are at least 3 items in the Learning Plans section

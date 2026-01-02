@@ -1,13 +1,12 @@
 /* eslint-disable react/no-multi-comp */
 import { useCallback } from 'react';
 
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import LessonContent from '@/components/Course/LessonContent';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
-import { logError } from '@/lib/newrelic';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { BaseResponse } from '@/types/ApiResponses';
@@ -18,7 +17,6 @@ import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
 import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCourseNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 interface Props {
   hasError?: boolean;
@@ -79,31 +77,19 @@ const LessonPage: NextPage<Props> = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/learning-plans/[slug]/lessons/[lessonSlugOrId]',
-  async (context) => {
-    const { params, locale } = context;
-    const { slug } = params;
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
 
-    try {
-      const chaptersData = await getAllChaptersData(locale);
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
 
-      return {
-        props: {
-          chaptersData,
-        },
-      };
-    } catch (error) {
-      logError('Error occurred while getting chapters data', error as Error, {
-        slug,
-      });
-      return {
-        props: {
-          hasError: true,
-        },
-      };
-    }
-  },
-);
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
 
 export default LessonPage;

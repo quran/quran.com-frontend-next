@@ -1,10 +1,9 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import { getEditDetailsSection, getFormInputs } from './edit-details-form-helpers';
 import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -12,6 +11,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@edit-details'];
@@ -281,7 +281,7 @@ test.describe('Form Submission', () => {
       await fillAndBlur(lastName, 'Doe');
       await saveButton.click();
 
-      const successMessage = page.getByText(/success|updated.*successfully/i);
+      const successMessage = page.getByText(/profile.*is.*updated.*successfully/i);
       await expect(successMessage).toBeVisible({ timeout: 10000 });
 
       await page.reload();

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Player, PlayerRef, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -30,7 +30,6 @@ import VideoIcon from '@/icons/video.svg';
 import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
-import Language from '@/types/Language';
 import Orientation from '@/types/Media/Orientation';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
@@ -60,8 +59,11 @@ import {
   orientationToDimensions,
 } from '@/utils/media/utils';
 import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import {
+  ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+} from '@/utils/staticPageGeneration';
 import { isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '@/utils/validator';
-import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -519,7 +521,7 @@ const fetchRecitersAndTranslations = async (locale) => {
 
 const fetchChapterData = async (locale) => {
   const chaptersData = await getAllChaptersData(locale);
-  const englishChaptersList = await getAllChaptersData(Language.EN);
+  const englishChaptersList = await getAllChaptersData('en');
   return { chaptersData, englishChaptersList };
 };
 
@@ -529,8 +531,7 @@ const fetchVersesAndAudio = async (locale) => {
   return { verses, chapterAudioData };
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/media', async (context) => {
-  const { locale } = context;
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters, translations } = await fetchRecitersAndTranslations(locale);
     const { chaptersData, englishChaptersList } = await fetchChapterData(locale);
@@ -545,21 +546,14 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux('/media', asy
         reciters: reciters || [],
         translationsData: translations || [],
       },
+      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };
-  } catch (error) {
+  } catch (e) {
     return {
-      props: {
-        audio: {},
-        verses: {},
-        chaptersData: {},
-        englishChaptersList: {},
-        reciters: [],
-        translationsData: [],
-        hasError: true,
-      },
-      revalidate: 60, // In case of error, we will re-generate this page every 1 minute.
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
-});
+};
 
 export default MediaMaker;
