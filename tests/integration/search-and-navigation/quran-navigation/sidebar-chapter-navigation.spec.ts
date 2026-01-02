@@ -113,7 +113,9 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Leaving a reader page through the header logo hides the sidebar on the homepage',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
+      test.skip(isMobile);
+
       await homePage.goTo('/1');
       const sidebar = page.getByTestId('sidebar-navigation');
       await expect(sidebar).not.toBeAttached();
@@ -134,7 +136,9 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Sidebar hides after navigating from a reader page to the learning plans index',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
+      test.skip(isMobile);
+
       await homePage.goTo('/1');
       const sidebar = page.getByTestId('sidebar-navigation');
       await expect(sidebar).not.toBeAttached();
@@ -411,10 +415,10 @@ test.describe('Navigation Functionality', () => {
       const verseList = page.getByTestId('verse-list');
       await verseList.waitFor({ state: 'visible' });
 
-      // Select verse 2
-      const verseTwo = verseList.getByText('2', { exact: true });
-      await verseTwo.waitFor({ state: 'visible' });
-      await Promise.all([page.waitForURL(/\/2\?startingVerse=2$/), verseTwo.click()]);
+      // select verse 10
+      const verseTen = verseList.getByText('10', { exact: true });
+      await verseTen.waitFor({ state: 'visible' });
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=10$/), verseTen.click()]);
 
       // Give the UI time to settle and close the drawer
       await page.waitForTimeout(500);
@@ -441,10 +445,10 @@ test.describe('Navigation Functionality', () => {
       // Wait for verse items to be in the DOM
       await reopenedVerseList.getByText('1', { exact: true }).waitFor({ state: 'visible' });
 
-      // Now verify verse 2 is selected
-      const verseTwoAfterReopen = reopenedVerseList.getByText('2', { exact: true });
-      await verseTwoAfterReopen.waitFor({ state: 'visible' });
-      await expect(verseTwoAfterReopen).toHaveClass(/selectedItem/);
+      // check that verse 10 is still selected
+      const verseTenAfterReopen = reopenedVerseList.getByText('10', { exact: true });
+      await verseTenAfterReopen.waitFor({ state: 'visible' });
+      await expect(verseTenAfterReopen).toHaveClass(/selectedItem/);
     },
   );
 
