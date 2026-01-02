@@ -253,6 +253,9 @@
   background: var(--color-success-deep);
 }
 
+.visitButton:focus-visible {
+  background: var(--color-success-deep);
+}
 .visitIcon {
   display: inline-flex;
 }
