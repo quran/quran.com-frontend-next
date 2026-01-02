@@ -54,7 +54,6 @@ $line-height-relaxed: 1.6;
 }
 
 .descriptionContainer {
-  --_space-bottom: var(--spacing-medium3-px);
   color: var(--color-text-default-new);
 
   p,
@@ -70,13 +69,13 @@ $line-height-relaxed: 1.6;
   }
 
   p {
-    margin-block-end: var(--_space-bottom);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   h2,
   h3 {
     font-weight: var(--font-weight-bold);
-    margin-block-end: var(--_space-bottom);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   em {
