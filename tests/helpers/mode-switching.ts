@@ -1,5 +1,7 @@
 import type { Page } from '@playwright/test';
 
+import { getVerseArabicTestId, getVerseTestId, TestId } from '@/tests/test-ids';
+
 /**
  * Switch to translation mode with extra logic to handle mobile environments
  * where the tab might not be visible initially.
@@ -10,9 +12,9 @@ export const switchToTranslationMode = async (page: Page, verseKey: string = '1:
   await page.waitForTimeout(1000);
   await page.evaluate(() => window.scrollTo(0, 0));
 
-  const translationTab = page.getByTestId('translation-tab');
-  const translationButton = page.getByTestId('translation-button');
-  const verse = page.getByTestId(`verse-${verseKey}`);
+  const translationTab = page.getByTestId(TestId.TRANSLATION_TAB);
+  const translationButton = page.getByTestId(TestId.TRANSLATION_BUTTON);
+  const verse = page.getByTestId(getVerseTestId(verseKey));
 
   await Promise.race([
     translationTab.click(),
@@ -33,9 +35,9 @@ export const switchToReadingMode = async (page: Page, verseKey: string = '1:1') 
   await page.waitForTimeout(1000);
   await page.evaluate(() => window.scrollTo(0, 0));
 
-  const readingTab = page.getByTestId('reading-tab');
-  const readingButton = page.getByTestId('reading-button');
-  const verse = page.getByTestId(`verse-arabic-${verseKey}`);
+  const readingTab = page.getByTestId(TestId.READING_TAB);
+  const readingButton = page.getByTestId(TestId.READING_BUTTON);
+  const verse = page.getByTestId(getVerseArabicTestId(verseKey));
 
   await Promise.race([
     readingTab.click(),
