@@ -36,8 +36,7 @@ $virtual-scrolling-height-bandage: calc(
 
 .container {
   @include breakpoints.smallerThanTablet {
-    // Add banner height since banner is not absolute on mobile
-    padding-block-start: calc($quran-reader-padding-mobile + var(--banner-height));
+    padding-block-start: $quran-reader-padding-mobile;
   }
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;

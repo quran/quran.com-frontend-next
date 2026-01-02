@@ -6,7 +6,6 @@
 $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
 $navbar-height: var(--navbar-container-height);
-$banner-height: var(--banner-height);
 
 // Homepage heights (without sections menu and without progress bar)
 $top-menu-height-home: $navbar-height;
@@ -16,12 +15,10 @@ $context-menu-height-home: 0;
 $top-menu-height: calc($sections-menu-height + $navbar-height + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
 
-// Mobile heights (include banner height since banner is not absolute on mobile)
-$top-menu-height-home-mobile: calc($navbar-height + $banner-height);
-$top-menu-height-mobile: calc(
-  $sections-menu-height + $navbar-height + $progress-bar-height + $banner-height
-);
-$context-menu-height-mobile: calc($sections-menu-height + $progress-bar-height + $banner-height);
+// Mobile heights (same as desktop now that banner is removed)
+$top-menu-height-home-mobile: $navbar-height;
+$top-menu-height-mobile: calc($sections-menu-height + $navbar-height + $progress-bar-height);
+$context-menu-height-mobile: calc($sections-menu-height + $progress-bar-height);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
@@ -60,12 +57,14 @@ $isNavbarVisible: var(--isNavbarVisible);
 
 @mixin sidebarInvisibleCollapsed {
   &[data-is-homepage='true'] {
-    transform: translateX(-100%) translateY($context-menu-height-home);
+    // Use $top-menu-height-home to match visible state transform and prevent
+    // vertical movement during the sidebar open/close animation.
+    transform: translateX(-100%) translateY($top-menu-height-home);
     @include breakpoints.smallerThanTablet {
       transform: translateX(-100%) translateY($top-menu-height-home-mobile);
     }
     [dir='rtl'] & {
-      transform: translateX(100%) translateY($context-menu-height-home);
+      transform: translateX(100%) translateY($top-menu-height-home);
       @include breakpoints.smallerThanTablet {
         transform: translateX(100%) translateY($top-menu-height-home-mobile);
       }
@@ -157,12 +156,14 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include sidebarVisible();
 
   &[data-is-homepage='true'] {
-    transform: translateY($context-menu-height-home);
+    // Use $top-menu-height-home to match visible state and prevent vertical
+    // jumping when navbar collapses while sidebar is open.
+    transform: translateY($top-menu-height-home);
     @include breakpoints.smallerThanTablet {
       transform: translateY($top-menu-height-home-mobile);
     }
     [dir='rtl'] & {
-      transform: translateY($context-menu-height-home);
+      transform: translateY($top-menu-height-home);
       @include breakpoints.smallerThanTablet {
         transform: translateY($top-menu-height-home-mobile);
       }
@@ -208,9 +209,10 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include sidebarVisible();
 
     &[data-is-homepage='true'] {
-      transform: translateY($context-menu-height-home);
+      // Use $top-menu-height-home to match visible state and prevent vertical jumping.
+      transform: translateY($top-menu-height-home);
       [dir='rtl'] & {
-        transform: translateY($context-menu-height-home);
+        transform: translateY($top-menu-height-home);
       }
     }
 
