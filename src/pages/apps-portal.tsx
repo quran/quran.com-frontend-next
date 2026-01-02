@@ -199,16 +199,6 @@ const getAppTiles = (t: (key: string) => string): AppTile[] => [
       'https://apps.apple.com/us/app/%D8%A7%D9%84%D9%85%D8%B5%D8%AD%D9%81-%D8%A7%D9%84%D9%85%D8%AD%D9%81%D8%B8/id6642706361',
     categories: ['study-tools', 'quran-reader', 'popular'],
   },
-  // {
-  //   id: 'quranmeet',
-  //   title: t('browse.apps.quranmeet.title'),
-  //   description: t('browse.apps.quranmeet.description'),
-  //   tagline: t('browse.apps.quranmeet.tagline'),
-  //   iconSrc: '/images/app-portal/quran_meet_app.png',
-  //   iconAlt: 'QuranMeet',
-  //   webHref: 'https://www.quranmeet.com/',
-  //   categories: ['community', 'study-tools'],
-  // },
 ];
 
 interface FiltersBarProps {
