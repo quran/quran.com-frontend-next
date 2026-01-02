@@ -175,7 +175,7 @@ const Chapter: NextPage<ChapterProps> = ({
 };
 
 // TODO: this needs to be localized and also reflected in next-sitemap.js
-const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'Ø¢ÛŒØª Ø§Ù„Ú©Ø±Ø³ÛŒ'];
+const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی'];
 
 export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) => {
   const { params, locale } = context;
