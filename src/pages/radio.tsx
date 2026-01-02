@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import pageStyle from './index.module.scss';
@@ -9,9 +9,9 @@ import { getAvailableReciters } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import CuratedStationList from '@/components/Radio/CuratedStationList';
 import ReciterStationList from '@/components/Radio/ReciterStationList';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 import Reciter from 'types/Reciter';
 
 type RadioPageProps = {
@@ -54,11 +54,13 @@ const RadioPage = ({ reciters }: RadioPageProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/radio', async ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
+    const chaptersData = await getAllChaptersData(locale);
     const { reciters } = await getAvailableReciters(locale, ['profile_picture']);
     return {
       props: {
+        chaptersData,
         reciters,
       },
     };
@@ -67,6 +69,6 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux('/radio', asy
       notFound: true,
     };
   }
-});
+};
 
 export default RadioPage;

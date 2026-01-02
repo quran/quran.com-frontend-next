@@ -1,8 +1,8 @@
 .inputContainer {
-  width: 100%;
+  inline-size: 100%;
 }
 .deleteButton {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .confirmationText {
@@ -11,4 +11,8 @@
 
 .instructionText {
   padding-block: var(--spacing-medium);
+}
+
+.deleteAccountWarningTitle {
+  font-weight: var(--font-weight-bold);
 }

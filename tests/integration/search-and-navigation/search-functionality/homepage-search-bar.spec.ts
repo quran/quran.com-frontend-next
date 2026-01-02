@@ -48,7 +48,6 @@ test.describe('Homepage Search Bar - Navigation Search', () => {
   );
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Homepage Search Bar - Verse Content Search', () => {
   test(
     'Search for English verse content displays correct results',

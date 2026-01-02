@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 import QuranPage from '@/tests/POM/mushaf-mode';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 let quranPage: QuranPage;
@@ -18,11 +19,11 @@ test(
   async ({ page }) => {
     await homePage.goTo('/1');
 
-    await expect(page.getByTestId('bismillah-section')).not.toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
 
     await homePage.goTo('/9');
 
-    await expect(page.getByTestId('bismillah-section')).not.toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
   },
 );
 
@@ -32,7 +33,7 @@ test(
   async ({ page }) => {
     await homePage.goTo('/2');
 
-    await expect(page.getByTestId('bismillah-section')).toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).toBeVisible();
   },
 );
 
@@ -49,20 +50,20 @@ test(
       page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
     ]);
 
-    await expect(page.getByTestId('bismillah-section')).toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).toBeVisible();
 
     // Surah 1 - no basmala
     await Promise.all([
       homePage.goTo('/1'),
       page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
     ]);
-    await expect(page.getByTestId('bismillah-section')).not.toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
 
     // Go to Surah 9 - no basmala
     await Promise.all([
       homePage.goTo('/9'),
       page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
     ]);
-    await expect(page.getByTestId('bismillah-section')).not.toBeVisible();
+    await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
   },
 );
