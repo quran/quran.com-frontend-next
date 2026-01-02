@@ -207,11 +207,11 @@ export const makeChapterInfoUrl = (chapterId: string, language: string): string 
 /**
  * Compose the url for the chapter metadata API.
  *
- * @param {number} chapterId the chapter Id.
- * @param {string} language the user's language ISO code.
+ * @param {string} chapterId the chapter Id.
+ * @param {string} language the user's language code.
  * @returns {string}
  */
-export const makeChapterMetadataUrl = (chapterId: number, language: string): string =>
+export const makeChapterMetadataUrl = (chapterId: string, language: string): string =>
   makeUrl(`/chapters/${chapterId}/metadata`, { language });
 
 /**

@@ -280,12 +280,12 @@ export const getChapterInfo = async (
 /**
  * Get chapter metadata including suggestions and next/previous summaries.
  *
- * @param {number} chapterId
+ * @param {string} chapterId
  * @param {string} language
  * @returns {Promise<ChapterMetadataResponse>}
  */
 export const getChapterMetadata = async (
-  chapterId: number,
+  chapterId: string,
   language: string,
 ): Promise<ChapterMetadataResponse> => fetcher(makeChapterMetadataUrl(chapterId, language));
 

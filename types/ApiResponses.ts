@@ -133,15 +133,15 @@ export interface ChapterContent {
   text: string;
 }
 
+export interface ChapterSummaries {
+  summaries: ChapterContent[];
+}
+
 export interface ChapterMetadata {
   chapterId: number;
   suggestions: ChapterContent[];
-  nextChapter?: {
-    summaries: ChapterContent[];
-  };
-  previousChapter?: {
-    summaries: ChapterContent[];
-  };
+  nextChapter?: ChapterSummaries;
+  previousChapter?: ChapterSummaries;
 }
 
 export interface ChapterMetadataResponse extends BaseResponse {
