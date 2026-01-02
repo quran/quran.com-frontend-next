@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import mockFootnoteKhattabSurah1Verse2 from '@/tests/mocks/footnotes';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
 
 const TRANSLATION_KHATTAB = {
   languageName: 'english',
@@ -25,7 +26,7 @@ test.describe('Verse Content Display', () => {
     { tag: ['@fast', '@content', '@verses', '@smoke'] },
     async ({ page }) => {
       // Verify the first verse contains Arabic text
-      const firstVerse = page.getByTestId('verse-1:1');
+      const firstVerse = page.getByTestId(getVerseTestId('1:1'));
       await expect(firstVerse).toContainText(TRANSLATION_KHATTAB.arabic);
     },
   );
@@ -35,7 +36,7 @@ test.describe('Verse Content Display', () => {
     { tag: ['@fast', '@content', '@verses', '@smoke'] },
     async ({ page }) => {
       // Verify the first verse translation is visible
-      const firstVerse = page.getByTestId('verse-1:1');
+      const firstVerse = page.getByTestId(getVerseTestId('1:1'));
       await expect(firstVerse).toContainText(TRANSLATION_KHATTAB.text);
     },
   );
@@ -47,18 +48,18 @@ test.describe('Verse Footnotes', () => {
     { tag: ['@fast', '@content', '@footnotes'] },
     async ({ page }) => {
       // 1. Make sure the footnote content is not visible
-      await expect(page.getByTestId('footnote-content')).not.toBeVisible();
+      await expect(page.getByTestId(TestId.FOOTNOTE_CONTENT)).not.toBeVisible();
 
       // 2. Make sure the footnote trigger is present in the second verse
-      const secondVerse = page.getByTestId('verse-1:2');
+      const secondVerse = page.getByTestId(getVerseTestId('1:2'));
       const footnoteTrigger = secondVerse.locator('sup').first();
 
       // 3. Make sure the footnote content is visible after clicking the trigger
       await footnoteTrigger.click();
-      await expect(page.getByTestId('footnote-content')).toBeVisible();
+      await expect(page.getByTestId(TestId.FOOTNOTE_CONTENT)).toBeVisible();
 
       // 4. Make sure the footnote content is correct
-      await expect(page.getByTestId('footnote-content')).toContainText(
+      await expect(page.getByTestId(TestId.FOOTNOTE_CONTENT)).toContainText(
         mockFootnoteKhattabSurah1Verse2().text,
       );
 
@@ -66,7 +67,7 @@ test.describe('Verse Footnotes', () => {
       await footnoteTrigger.click();
 
       // 6. Make sure the footnote content is not visible anymore
-      await expect(page.getByTestId('footnote-content')).not.toBeVisible();
+      await expect(page.getByTestId(TestId.FOOTNOTE_CONTENT)).not.toBeVisible();
     },
   );
 });
@@ -77,13 +78,13 @@ test.describe('Progressive Verse Loading', () => {
     { tag: ['@fast', '@content', '@loading'] },
     async ({ page }) => {
       // Verify the first verse is visible
-      await expect(page.getByTestId('verse-1:7')).not.toBeVisible();
+      await expect(page.getByTestId(getVerseTestId('1:7'))).not.toBeVisible();
 
       // Scroll to the verse 5 to make sure it's in the viewport
-      await page.getByTestId('verse-1:5').scrollIntoViewIfNeeded();
+      await page.getByTestId(getVerseTestId('1:5')).scrollIntoViewIfNeeded();
 
       // Verify the verse 7 is now visible
-      await expect(page.getByTestId('verse-1:7')).toBeVisible();
+      await expect(page.getByTestId(getVerseTestId('1:7'))).toBeVisible();
     },
   );
 
@@ -94,10 +95,11 @@ test.describe('Progressive Verse Loading', () => {
       // Verify all 7 verses are present using Promise.all for parallel execution
       const verseChecks = Array.from({ length: 7 }, (unused, index) => {
         const verseNumber = index + 1;
+        const verseTestId = getVerseTestId(`1:${verseNumber}`);
         return page
-          .getByTestId(`verse-1:${verseNumber}`)
+          .getByTestId(verseTestId)
           .scrollIntoViewIfNeeded()
-          .then(() => expect(page.getByTestId(`verse-1:${verseNumber}`)).toBeVisible());
+          .then(() => expect(page.getByTestId(verseTestId)).toBeVisible());
       });
 
       await Promise.all(verseChecks);
