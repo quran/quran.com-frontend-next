@@ -5,8 +5,8 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './LessonsList.module.scss';
+import useCoursesList from './useCoursesList';
 
-import useCoursesList from '@/components/Course/CoursesList/useCoursesList';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Pill from '@/dls/Pill';
