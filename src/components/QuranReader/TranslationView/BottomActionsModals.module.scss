@@ -10,6 +10,7 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+    border-block-end: none;
 
     @include breakpoints.tablet {
       padding-inline: var(--spacing-large-px);
