@@ -43,21 +43,17 @@ const useNavbarAutoHide = (
 
       // Unlock the navbar visibility state after the specified timeout
       hideNavbarTimeoutRef.current = window.setTimeout(() => {
-        dispatch(setIsVisible(false));
         dispatch(setLockVisibilityState(false));
       }, timeout);
     }
-  }, [dispatch, shouldTrigger, scrollCallback, timeout, dependencies]);
 
-  // Cleanup function to clear timeout on unmount
-  useEffect(
-    () => () => {
+    // Cleanup function to clear timeout on unmount or when dependencies change
+    return () => {
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
       }
-    },
-    [],
-  );
+    };
+  }, [dispatch, shouldTrigger, scrollCallback, timeout, dependencies]);
 
   return hideNavbarTimeoutRef;
 };
