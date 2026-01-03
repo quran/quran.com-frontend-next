@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { chapter } from '@/tests/mocks/chapters';
 import Homepage from '@/tests/POM/home-page';
-import { TestId } from '@/tests/test-ids';
+import { getVerseArabicTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -35,6 +35,14 @@ test.describe('Surah Information Page', () => {
       const numberOfAyahs = modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS);
       await expect(numberOfAyahs).toBeVisible();
       await expect(numberOfAyahs).toContainText(chapter.versesCount.toString());
+
+      // Close the modal and verify it gets closed
+      await page.keyboard.press('Escape');
+      await expect(modalContent).toBeHidden();
+
+      // Verify verse data has loaded
+      const verse1 = page.getByTestId(getVerseArabicTestId('1:1'));
+      await expect(verse1).toBeVisible();
     },
   );
 });
