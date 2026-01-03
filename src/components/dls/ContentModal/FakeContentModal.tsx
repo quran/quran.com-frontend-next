@@ -215,7 +215,10 @@ const FakeContentClose = ({ children, ...props }: Dialog.DialogCloseProps) => {
   const filteredProps = omit(props, ['onClick']) as unknown as React.ComponentProps<'div'>;
 
   const childrenWithProps = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) return React.cloneElement(child, { onClick: handleClose });
+    if (React.isValidElement(child)) {
+      return React.cloneElement<React.ComponentProps<'button'>>(child, { onClick: handleClose });
+    }
+
     return child;
   });
 
