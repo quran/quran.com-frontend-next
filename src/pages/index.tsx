@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
+import { getChapterVerses } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -18,7 +19,11 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { logError } from '@/lib/newrelic';
 import { Course } from '@/types/auth/Course';
+import Language from '@/types/Language';
+import { QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -26,19 +31,85 @@ import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { ChaptersResponse } from 'types/ApiResponses';
+import { GetSsrPropsWithReduxContext } from '@/utils/withSsrRedux.types';
+import { QuranInYearVerseRequest } from 'types/ApiRequests';
+import {
+  ChaptersResponse,
+  CountryLanguagePreferenceResponse,
+  VersesResponse,
+} from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+
+// Helper function to derive learning plan languages and fetch courses
+async function fetchLearningPlansData(
+  countryLanguagePreference?: CountryLanguagePreferenceResponse,
+): Promise<Course[]> {
+  // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
+  // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
+  const learningPlanLanguages = countryLanguagePreference?.learningPlanLanguages
+    ?.map((lang) => lang.isoCode)
+    .filter((code): code is string => Boolean(code))
+    .map((code) => code.toLowerCase()) || [Language.EN];
+
+  // Fetch learning plans with fallback retry for backward compatibility
+  return fetchCoursesWithLanguages(learningPlanLanguages);
+}
+
+// Helper function to build chapters response from chapters data
+function buildChaptersResponse(chaptersData: ChaptersData): ChaptersResponse {
+  return {
+    chapters: Object.keys(chaptersData).map((chapterId) => {
+      const chapterData = chaptersData[chapterId];
+      return { ...chapterData, id: Number(chapterId) };
+    }),
+  };
+}
+
+// Helper function to fetch Quran in a Year verse data
+async function fetchQuranInYearVerses(
+  params?: QuranInYearVerseRequest,
+): Promise<VersesResponse | undefined> {
+  if (!params) return undefined;
+
+  // Destructure parameters
+  const { locale, chapter, verse, translationIds, mushafLines } = params;
+  const translationsParam = translationIds.join(',');
+
+  // Build API parameters
+  const quranInYearParams = {
+    ...getDefaultWordFields(QuranFont.QPCHafs),
+    translationFields: 'resource_name,language_id',
+    ...(translationsParam ? { translations: translationsParam } : {}),
+    ...getMushafId(QuranFont.QPCHafs, mushafLines),
+    from: `${chapter}:${verse}`,
+    to: `${chapter}:${verse}`,
+  };
+
+  try {
+    // Fetch and return the ayah data
+    return await getChapterVerses(chapter, locale, quranInYearParams);
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    logError('Failed to fetch Quran in a Year verse', err, {
+      locale,
+      from: `${chapter}:${verse}`,
+    });
+    return undefined;
+  }
+}
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
   learningPlans: Course[];
+  quranInYearVerses?: VersesResponse; // SSR-fetched verse data
 };
 
 const Index: NextPage<IndexProps> = ({
   chaptersResponse: { chapters },
   chaptersData,
   learningPlans,
+  quranInYearVerses,
 }): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
@@ -67,6 +138,7 @@ const Index: NextPage<IndexProps> = ({
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
                 learningPlans={learningPlans}
+                quranInYearVerses={quranInYearVerses}
               />
             ) : (
               <>
@@ -80,7 +152,10 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses}
+                        />
                       </div>
                     )}
                     <div
@@ -119,7 +194,10 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses}
+                        />
                       </div>
                     )}
 
@@ -146,28 +224,36 @@ const Index: NextPage<IndexProps> = ({
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/',
   async (context, languageResult) => {
-    const { chaptersData } = context as typeof context & { chaptersData: ChaptersData };
+    const typedContext = context as GetSsrPropsWithReduxContext & { chaptersData: ChaptersData };
+    const { chaptersData, store } = typedContext;
 
-    // Derive learningPlanLanguages from countryLanguagePreference; fallback to ['en'] if not available
-    // Filter out null/undefined isoCode values and convert to lowercase (type-guarded as string[])
-    const learningPlanLanguages = languageResult?.countryLanguagePreference?.learningPlanLanguages
-      ?.map((lang) => lang.isoCode)
-      .filter((code): code is string => code != null)
-      .map((code) => code.toLowerCase()) || ['en'];
+    const todayAyah = getCurrentDayAyah();
+    const currentLocale = languageResult.detectedLanguage || context.locale || Language.EN;
+    const state = store.getState();
+    const translationIds = state.translations.selectedTranslations.slice(0, 1);
+    const { mushafLines } = state.quranReaderStyles;
 
-    // Fetch learning plans with fallback retry for backward compatibility
-    const learningPlans = await fetchCoursesWithLanguages(learningPlanLanguages);
+    const [quranInYearVerses, learningPlans] = await Promise.all([
+      fetchQuranInYearVerses(
+        todayAyah
+          ? {
+              locale: currentLocale,
+              translationIds,
+              mushafLines,
+              chapter: todayAyah.chapter,
+              verse: todayAyah.verse,
+            }
+          : undefined,
+      ),
+      fetchLearningPlansData(languageResult?.countryLanguagePreference),
+    ]);
 
     return {
       props: {
         chaptersData,
-        chaptersResponse: {
-          chapters: Object.keys(chaptersData).map((chapterId) => {
-            const chapterData = chaptersData[chapterId];
-            return { ...chapterData, id: Number(chapterId) };
-          }),
-        },
+        chaptersResponse: buildChaptersResponse(chaptersData),
         learningPlans,
+        quranInYearVerses,
       },
     };
   },

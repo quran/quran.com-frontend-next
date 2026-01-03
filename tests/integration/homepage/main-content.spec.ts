@@ -1,9 +1,18 @@
+/* eslint-disable max-lines */
 import { test, expect } from '@playwright/test';
 
 import ayahOfTheDayData from '@/data/ayah_of_the_day.json';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
+
+const getTodayStringUTC = () => {
+  const now = new Date();
+  const day = String(now.getUTCDate()).padStart(2, '0');
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const year = now.getUTCFullYear();
+  return `${day}/${month}/${year}`;
+};
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
@@ -55,11 +64,7 @@ test(
   { tag: ['@slow', '@homepage', '@quran-in-a-year', '@smoke'] },
   async ({ page }) => {
     // Check if today's date has an entry in the ayah_of_the_day.json file
-    const now = new Date();
-    const day = String(now.getUTCDate()).padStart(2, '0');
-    const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    const year = now.getUTCFullYear();
-    const todayString = `${day}/${month}/${year}`;
+    const todayString = getTodayStringUTC();
 
     const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
     if (!ayahEntry) {
@@ -73,9 +78,31 @@ test(
 
     const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
     await expect(quranInAYearSection).toBeVisible();
-    await expect
-      .poll(async () => (await quranInAYearSection.textContent()) || '')
-      .toContain('Week’s Reading'); // Translator name indicates verse + translation rendered
+    const verseContainer = quranInAYearSection.getByTestId('quran-in-a-year-verse');
+    await expect(verseContainer.locator('[class*="Spinner"]')).toHaveCount(0); // Ensure the verse rendered (no spinner)
+  },
+);
+
+test(
+  'Quran in a Year section renders when JavaScript is disabled',
+  { tag: ['@quran-in-a-year', '@ssr'] },
+  async ({ browser }) => {
+    const todayString = getTodayStringUTC();
+
+    const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
+    test.skip(!ayahEntry, `No Ayah of the Day entry for today's date: ${todayString}`);
+
+    const ssrContext = await browser.newContext({ javaScriptEnabled: false }); // Disable JS to simulate no-hydration scenario
+    const ssrPage = await ssrContext.newPage();
+
+    await ssrPage.goto('/', { waitUntil: 'networkidle' });
+
+    const quranInAYearSection = ssrPage.getByTestId('quran-in-a-year-section');
+    await expect(quranInAYearSection).toBeVisible();
+    const verseContainer = quranInAYearSection.getByTestId('quran-in-a-year-verse');
+    await expect(verseContainer.locator('[class*="Spinner"]')).toHaveCount(0); // Ensure SSR rendered verse (no spinner)
+
+    await ssrContext.close(); // Clean up the no-JS context
   },
 );
 
@@ -213,3 +240,21 @@ test('Popular button shows the popular surahs/verses', { tag: ['@homepage'] }, a
   const items = dropdownContainer.getByRole('link');
   expect(await items.count()).toBeGreaterThanOrEqual(3);
 });
+
+test(
+  'All 114 surahs render on the homepage when JavaScript is disabled',
+  { tag: ['@homepage', '@ssr'] },
+  async ({ browser }) => {
+    const ssrContext = await browser.newContext({ javaScriptEnabled: false }); // Disable JS to verify SSR output
+    const ssrPage = await ssrContext.newPage();
+
+    await ssrPage.goto('/', { waitUntil: 'networkidle' });
+
+    const chapterAndJuzList = ssrPage.getByTestId('chapter-and-juz-list');
+    await expect(chapterAndJuzList).toBeVisible();
+    await expect(chapterAndJuzList.getByTestId('chapter-1-container')).toBeVisible();
+    await expect(chapterAndJuzList.getByTestId('chapter-114-container')).toBeVisible();
+
+    await ssrContext.close(); // Clean up the no-JS context
+  },
+);
