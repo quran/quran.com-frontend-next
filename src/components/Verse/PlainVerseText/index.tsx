@@ -100,6 +100,7 @@ const PlainVerseText: React.FC<Props> = ({
   const isQcfFont = isQCFFont(quranFont);
   const { pageNumber } = words[0];
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
+  const shouldShowTitle = !!titleText;
 
   const handleCopy = useCallback(
     (event: React.ClipboardEvent<HTMLDivElement>) => {
@@ -124,8 +125,6 @@ const PlainVerseText: React.FC<Props> = ({
     },
     [quranFont, words],
   );
-
-  const shouldShowTitle = !!titleText;
 
   return (
     <>
