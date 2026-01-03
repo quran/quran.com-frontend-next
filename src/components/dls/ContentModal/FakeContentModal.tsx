@@ -7,6 +7,11 @@
  *
  * Use only for SEO-critical content. For regular modals, use ContentModal instead.
  *
+ * Unlike ContentModal, FakeContentModal cannot be controlled externally (no open/close props).
+ * Renders open by default, closes via internal interaction only (ESC, outside click, close button).
+ *
+ * For external control (not recommended): use useFakeContentModal hook.
+ *
  * When modifying: ensure compatibility with ContentModal.tsx.
  */
 
@@ -36,6 +41,7 @@ const ANIMATION_DURATION = 380;
 
 interface FakeContentModalContextValue {
   overlayRef: React.MutableRefObject<HTMLDivElement | null>;
+  contentRef: React.MutableRefObject<HTMLDivElement | null>;
 
   isOpen: boolean;
   isAnimatingOut: boolean;
@@ -45,7 +51,6 @@ interface FakeContentModalContextValue {
   setIsAnimatingOut: (value: boolean) => void;
   setIsOpen: (value: boolean) => void;
   handleClose: () => void;
-  onClose?: () => void;
   onPointerDownOutside: (event: React.PointerEvent<HTMLDivElement>) => void;
 }
 
@@ -63,6 +68,8 @@ interface FakeContentRootProps extends Dialog.DialogProps {
 
 const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
   const [isOpen, setIsOpen] = useState(true);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const setSafeTimeout = useSafeTimeout();
@@ -85,10 +92,10 @@ const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
     (event: React.PointerEvent<HTMLDivElement>) => {
       const target = event.target as Node;
       if (event.button !== 0) return;
-      if (overlayRef.current?.contains(target)) return;
+      if (contentRef.current?.contains(target)) return;
       handleClose();
     },
-    [handleClose, overlayRef],
+    [handleClose],
   );
 
   // Using 'fake-open' (instead of 'open') as the data-state to prevent entry animation
@@ -97,28 +104,19 @@ const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
   const value: FakeContentModalContextValue = useMemo(
     () => ({
       overlayRef,
+      contentRef,
+
       isOpen,
       isAnimatingOut,
       isVisible,
       dataState,
+
       setIsAnimatingOut,
       setIsOpen,
       handleClose,
-      onClose,
       onPointerDownOutside,
     }),
-    [
-      overlayRef,
-      isOpen,
-      isAnimatingOut,
-      isVisible,
-      dataState,
-      setIsAnimatingOut,
-      setIsOpen,
-      handleClose,
-      onClose,
-      onPointerDownOutside,
-    ],
+    [isOpen, isAnimatingOut, isVisible, dataState, handleClose, onPointerDownOutside],
   );
 
   if (!isVisible) return null;
@@ -137,6 +135,10 @@ const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>
     return (
       <div
         {...props}
+        onPointerDown={onPointerDownOutside}
+        role="dialog"
+        aria-modal={isVisible}
+        data-state={dataState}
         ref={(node) => {
           overlayRef.current = node;
           if (typeof ref === 'function') {
@@ -146,10 +148,6 @@ const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>
             ref.current = node;
           }
         }}
-        onPointerDown={onPointerDownOutside}
-        role="dialog"
-        aria-modal={isVisible}
-        data-state={dataState}
       >
         {children}
       </div>
@@ -161,7 +159,7 @@ FakeContentOverlay.displayName = 'FakeContentOverlay';
 
 const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>(
   ({ children, onEscapeKeyDown, ...props }, ref) => {
-    const { dataState, handleClose, isVisible } = useFakeContentModal();
+    const { dataState, handleClose, isVisible, contentRef } = useFakeContentModal();
 
     /**
      * Omit Radix UI behavioral props - handled internally by FakeContentModal.
@@ -181,11 +179,23 @@ const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>
       [handleClose, onEscapeKeyDown],
     );
 
-    useHotkeys('Escape', hotKeyCallback, { enabled: isVisible, enableOnFormTags: ['INPUT'] });
+    useHotkeys('Escape', hotKeyCallback, { enabled: isVisible, enableOnFormTags: true });
 
     return (
       <FocusScope loop trapped>
-        <div ref={ref} data-state={dataState} {...filteredProps}>
+        <div
+          {...filteredProps}
+          data-state={dataState}
+          ref={(node) => {
+            contentRef.current = node;
+            if (typeof ref === 'function') {
+              ref(node);
+            } else if (ref) {
+              // eslint-disable-next-line no-param-reassign
+              ref.current = node;
+            }
+          }}
+        >
           {children}
         </div>
       </FocusScope>

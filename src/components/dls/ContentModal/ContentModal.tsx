@@ -47,7 +47,7 @@ const SCROLLBAR_WIDTH = 15;
 /**
  * IMPORTANT: FakeContentModal Compatibility Notice
  *
- * This component supports a "fake" mode (via `isFake` prop) that uses FakeContentModal
+ * This component supports a "fake" mode (via `isFakeSEOFriendlyMode` prop) that uses FakeContentModal
  * components instead of Radix UI Dialog primitives. FakeContentModal exists for SEO purposes:
  * it renders modal content directly in the DOM (so search engines can index it) while still
  * looking and behaving like a modal for users. See FakeContentModal.tsx for details.
@@ -71,8 +71,8 @@ const SCROLLBAR_WIDTH = 15;
  *    how search engines see the content, ensure FakeContentModal maintains the same structure
  *    to preserve SEO benefits.
  *
- * 5. **Testing**: When adding new props or behaviors, test with both `isFake={false}` and
- *    `isFake={true}` to ensure both implementations work correctly.
+ * 5. **Testing**: When adding new props or behaviors, test with both `isFakeSEOFriendlyMode={false}` and
+ *    `isFakeSEOFriendlyMode={true}` to ensure both implementations work correctly.
  *
  * See FakeContentModal.tsx for implementation details and current prop filtering logic.
  * @returns {React.ReactNode}
