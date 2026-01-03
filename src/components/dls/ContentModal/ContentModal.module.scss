@@ -137,6 +137,7 @@ $translateYDistance: 200px;
   inset-block-start: 50%;
   inset-inline-end: 0;
   transform: translateY(-50%);
+  padding-block-start: var(--spacing-small);
   background-color: transparent;
   border: none;
   padding: 0;
