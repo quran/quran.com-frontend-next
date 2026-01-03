@@ -9,7 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
-import { getQuranInYearVerse } from '@/api';
+import { getChapterVerses } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -19,8 +19,11 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { logError } from '@/lib/newrelic';
 import { Course } from '@/types/auth/Course';
 import Language from '@/types/Language';
+import { QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { fetchCoursesWithLanguages } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -29,6 +32,7 @@ import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { GetSsrPropsWithReduxContext } from '@/utils/withSsrRedux.types';
+import { QuranInYearVerseRequest } from 'types/ApiRequests';
 import {
   ChaptersResponse,
   CountryLanguagePreferenceResponse,
@@ -59,6 +63,39 @@ function buildChaptersResponse(chaptersData: ChaptersData): ChaptersResponse {
       return { ...chapterData, id: Number(chapterId) };
     }),
   };
+}
+
+// Helper function to fetch Quran in a Year verse data
+async function fetchQuranInYearVerses(
+  params?: QuranInYearVerseRequest,
+): Promise<VersesResponse | undefined> {
+  if (!params) return undefined;
+
+  // Destructure parameters
+  const { locale, chapter, verse, translationIds, mushafLines } = params;
+  const translationsParam = translationIds.join(',');
+
+  // Build API parameters
+  const quranInYearParams = {
+    ...getDefaultWordFields(QuranFont.QPCHafs),
+    translationFields: 'resource_name,language_id',
+    ...(translationsParam ? { translations: translationsParam } : {}),
+    ...getMushafId(QuranFont.QPCHafs, mushafLines),
+    from: `${chapter}:${verse}`,
+    to: `${chapter}:${verse}`,
+  };
+
+  try {
+    // Fetch and return the ayah data
+    return await getChapterVerses(chapter, locale, quranInYearParams);
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    logError('Failed to fetch Quran in a Year verse', err, {
+      locale,
+      from: `${chapter}:${verse}`,
+    });
+    return undefined;
+  }
 }
 
 type IndexProps = {
@@ -197,15 +234,17 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const { mushafLines } = state.quranReaderStyles;
 
     const [quranInYearVerses, learningPlans] = await Promise.all([
-      todayAyah
-        ? getQuranInYearVerse({
-            locale: currentLocale,
-            chapter: todayAyah.chapter,
-            verse: todayAyah.verse,
-            translationIds,
-            mushafLines,
-          })
-        : Promise.resolve(undefined),
+      fetchQuranInYearVerses(
+        todayAyah
+          ? {
+              locale: currentLocale,
+              translationIds,
+              mushafLines,
+              chapter: todayAyah.chapter,
+              verse: todayAyah.verse,
+            }
+          : undefined,
+      ),
       fetchLearningPlansData(languageResult?.countryLanguagePreference),
     ]);
 
