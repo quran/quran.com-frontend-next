@@ -156,9 +156,9 @@
 }
 
 .appIcon {
-  inline-size: 3.25rem;
-  block-size: 3.25rem;
-  border-radius: 16px;
+  inline-size: calc(var(--spacing-xxlarge-px) + var(--spacing-micro-px));
+  block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-micro-px));
+  border-radius: var(--spacing-medium-plus-px);
   background: var(--color-background-alternative-faded);
   display: grid;
   place-items: center;
