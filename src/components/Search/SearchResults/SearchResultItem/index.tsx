@@ -19,13 +19,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getResultType } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   source: SearchQuerySource;
   service: SearchService;
   result: SearchNavigationResult;
-  arabicChaptersData?: ChaptersData;
 }
 
 /**
@@ -74,7 +72,7 @@ const forceScrollToVerse = (router: NextRouter, verseNumber: string): void => {
     });
 };
 
-const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChaptersData }) => {
+const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
   const router = useRouter();
   const type = getResultType(result);
   const url = resolveUrlBySearchNavigationType(type, result.key, true);
@@ -107,7 +105,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result, arabicChap
         <div className={styles.iconContainer}>
           <SearchResultItemIcon type={type} />
         </div>
-        <SearchResultText result={result} arabicChaptersData={arabicChaptersData} />
+        <SearchResultText result={result} />
       </Link>
     </div>
   );

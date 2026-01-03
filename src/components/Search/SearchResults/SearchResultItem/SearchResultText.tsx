@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import searchResultTextStyles from './SearchResultText.module.scss';
 
 import DataContext from '@/contexts/DataContext';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import Language from '@/types/Language';
 import {
   SearchNavigationResult,
@@ -16,7 +17,6 @@ import { getChapterData } from '@/utils/chapter';
 import { Direction, isRTLLocale, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { getResultSuffix, getResultType, getSearchNavigationResult } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import ChaptersData from 'types/ChaptersData';
 
 export type SearchResultTextClasses = {
   textWrapper: string;
@@ -31,7 +31,6 @@ export type SearchResultTextClasses = {
 
 type Props = {
   result: SearchNavigationResult;
-  arabicChaptersData?: ChaptersData;
   classes?: SearchResultTextClasses;
   /**
    * Whether to transform the result (normalize into a display-ready SearchNavigationResult).
@@ -74,12 +73,12 @@ const shouldIncludeTranslatedName = (
  */
 const SearchResultText: React.FC<Props> = ({
   result,
-  arabicChaptersData,
   classes,
   shouldTransform = true,
   textTag = 'div',
 }) => {
   const { t, lang } = useTranslation('common');
+  const arabicChaptersData = useGetChaptersData(Language.AR);
   const chaptersData = useContext(DataContext);
   const textClasses = (classes || searchResultTextStyles) as SearchResultTextClasses;
 
