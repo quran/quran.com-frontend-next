@@ -21,20 +21,18 @@ const UTHMANI_HAFS_FONTS = decamelizeKeys({
   textIndopak: INDO_PAK,
 });
 
-const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => {
-  const mappedFont = UTHMANI_HAFS_FONTS[font];
-  const isIndoPakFont = mappedFont === INDO_PAK;
-  return (
-    <span
-      className={classNames(styles.word, {
-        [styles[DEFAULT_FONT_FAMILY]]:
-          charType === CharType.End || !mappedFont || mappedFont === DEFAULT_FONT_FAMILY,
-        [styles[INDO_PAK]]: isIndoPakFont,
-      })}
-    >
-      {text}
-    </span>
-  );
-};
+const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
+  <span
+    className={classNames(styles.word, {
+      [styles[DEFAULT_FONT_FAMILY]]:
+        charType === CharType.End ||
+        !UTHMANI_HAFS_FONTS[font] ||
+        UTHMANI_HAFS_FONTS[font] === DEFAULT_FONT_FAMILY,
+      [styles[INDO_PAK]]: UTHMANI_HAFS_FONTS[font] === INDO_PAK,
+    })}
+  >
+    {text}
+  </span>
+);
 
 export default TextWord;
