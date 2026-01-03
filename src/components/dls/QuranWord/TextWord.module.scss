@@ -9,8 +9,3 @@
 .IndoPak {
   font-family: IndoPak !important; // important is needed to over-ride the language specific font-family
 }
-
-.hasIndoPakStopSign {
-  display: inline-block;
-  padding-inline-end: 0.25em; // IndoPak stop signs overlap with the next word, so we add some padding
-}
