@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { setIsVisible, setLockVisibilityState } from '@/redux/slices/navbar';
 
+const DEFAULT_TIMEOUT_MS = 1000;
+
 /**
  * A custom hook that handles navbar auto-hide functionality during automatic scrolling.
  *
@@ -14,15 +16,15 @@ import { setIsVisible, setLockVisibilityState } from '@/redux/slices/navbar';
  *
  * @param {boolean} shouldTrigger - Boolean condition that determines when to trigger the auto-hide behavior
  * @param {() => void} scrollCallback - Function to call for scrolling (e.g., scrollToSelectedItem)
- * @param {number} timeout - Time in milliseconds to wait before unlocking navbar visibility (default: 1000ms)
  * @param {React.DependencyList} dependencies - Additional dependencies for the useEffect hook
+ * @param {number} timeout - Time in milliseconds to wait before unlocking navbar visibility (default: 1000ms)
  * @returns {React.MutableRefObject<number | undefined>} Reference to the timeout ID for cleanup
  */
 const useNavbarAutoHide = (
   shouldTrigger: boolean,
   scrollCallback: () => void,
-  timeout: number = 1000,
   dependencies: React.DependencyList = [],
+  timeout: number = DEFAULT_TIMEOUT_MS,
 ) => {
   const dispatch = useDispatch();
   const hideNavbarTimeoutRef = useRef<number | undefined>(undefined);

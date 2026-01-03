@@ -64,7 +64,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   const shouldTrigger =
     (isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1;
-  useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, 1000, [
+  useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, [
     enableAutoScrolling,
     isHighlighted,
     scrollToSelectedItem,

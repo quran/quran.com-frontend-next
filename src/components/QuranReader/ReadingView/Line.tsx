@@ -56,8 +56,8 @@ const Line = ({
     shallowEqual,
   );
 
-  // Use the custom hook for navbar auto-hide functionality with 1500ms timeout
-  useNavbarAutoHide(isHighlighted && enableAutoScrolling, scrollToSelectedItem, 1500, [
+  // Use the custom hook for navbar auto-hide functionality
+  useNavbarAutoHide(isHighlighted && enableAutoScrolling, scrollToSelectedItem, [
     enableAutoScrolling,
     isHighlighted,
     scrollToSelectedItem,
