@@ -137,7 +137,7 @@ const FakeContentModal = ({
                   <Button
                     variant={ButtonVariant.Ghost}
                     shape={ButtonShape.Circle}
-                    data-testid="fake-modal-close-button"
+                    data-testid="modal-close-button"
                     onClick={handleClose}
                   >
                     <CloseIcon />
@@ -150,7 +150,7 @@ const FakeContentModal = ({
 
           <div
             className={classNames(styles.content, innerContentClassName)}
-            data-testid="fake-modal-content"
+            data-testid="modal-content"
           >
             {children}
           </div>

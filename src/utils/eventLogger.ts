@@ -26,6 +26,10 @@ export const logEvent = async (eventName: string, params?: { [key: string]: any 
   if (isFirebaseEnabled) {
     import('src/lib/firebase').then((firebaseModule) => {
       const userId = getUserIdCookie();
+      // Set GA4 User-ID (idempotent, safe to call on every event)
+      if (userId) {
+        firebaseModule.analytics().setUserId(userId);
+      }
       const eventParams = {
         ...params,
         ...(userId && { user_id: userId }),

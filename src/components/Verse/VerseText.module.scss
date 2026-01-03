@@ -21,6 +21,24 @@
   }
 }
 
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
+
+.verseTitleText {
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large);
+  }
+}
+
 .verseText {
   display: flex;
   line-height: var(--line-height);

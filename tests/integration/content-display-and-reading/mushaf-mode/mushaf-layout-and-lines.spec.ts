@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -65,14 +66,20 @@ test(
   { tag: ['@mushaf', '@navigation'] },
   async ({ page, isMobile }) => {
     // Click on the next surah button
-    await Promise.all([page.getByTestId('next-surah-button').click(), page.waitForURL('/79')]);
+    await Promise.all([page.getByTestId(TestId.NEXT_SURAH_BUTTON).click(), page.waitForURL('/79')]);
     await expect(page).toHaveURL(/\/79$/);
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_TAB)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     } else {
-      await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_BUTTON)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     }
   },
 );
@@ -85,7 +92,7 @@ test(
     await page.evaluate(() => window.scrollTo(0, 500));
 
     // Click on the chapter beginning button
-    await page.getByTestId('chapter-beginning-button').click();
+    await page.getByTestId(TestId.CHAPTER_BEGINNING_BUTTON).click();
     await expect.poll(async () => page.evaluate(() => window.scrollY)).toBeLessThan(1);
 
     // We should be at the top of the page now
@@ -99,14 +106,23 @@ test(
   { tag: ['@mushaf', '@navigation'] },
   async ({ page, isMobile }) => {
     // Click on the previous surah button
-    await Promise.all([page.getByTestId('previous-surah-button').click(), page.waitForURL('/77')]);
+    await Promise.all([
+      page.getByTestId(TestId.PREVIOUS_SURAH_BUTTON).click(),
+      page.waitForURL('/77'),
+    ]);
     await expect(page).toHaveURL(/\/77$/);
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_TAB)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     } else {
-      await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_BUTTON)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     }
   },
 );
@@ -118,7 +134,7 @@ test(
     await homePage.goTo('/1');
 
     // Verify the previous surah button is not visible
-    const previousSurahButton = page.getByTestId('previous-surah-button');
+    const previousSurahButton = page.getByTestId(TestId.PREVIOUS_SURAH_BUTTON);
     await expect(previousSurahButton).toHaveCount(0);
   },
 );
@@ -130,7 +146,7 @@ test(
     await homePage.goTo('/114');
 
     // Verify the next surah button is not visible
-    const nextSurahButton = page.getByTestId('next-surah-button');
+    const nextSurahButton = page.getByTestId(TestId.NEXT_SURAH_BUTTON);
     await expect(nextSurahButton).toHaveCount(0);
   },
 );
@@ -140,8 +156,8 @@ test(
   { tag: ['@slow', '@mushaf', '@persistence'] },
   async ({ page, isMobile }) => {
     const mushafIndicator = isMobile
-      ? page.getByTestId('reading-tab')
-      : page.getByTestId('reading-button');
+      ? page.getByTestId(TestId.READING_TAB)
+      : page.getByTestId(TestId.READING_BUTTON);
     await expect(mushafIndicator).toHaveAttribute('data-is-selected', 'true');
 
     await page.waitForTimeout(1000); // wait for 1 second
@@ -151,9 +167,15 @@ test(
 
     // Verify we are still in the mushaf view
     if (isMobile) {
-      await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_TAB)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     } else {
-      await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
+      await expect(page.getByTestId(TestId.READING_BUTTON)).toHaveAttribute(
+        'data-is-selected',
+        'true',
+      );
     }
   },
 );

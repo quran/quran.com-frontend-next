@@ -1,9 +1,8 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import AudioUtilities from '@/tests/POM/audio-utilities';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 let audioUtilities: AudioUtilities;
@@ -20,7 +19,7 @@ test(
   { tag: ['@reading', '@audio', '@scroll'] },
   async ({ page }) => {
     // Find the play button of the fourth ayah
-    const fourthAyah = page.getByTestId('verse-68:4');
+    const fourthAyah = page.getByTestId(getVerseTestId('68:4'));
     const fourthAyahPlayButton = fourthAyah.locator('#play-verse-button');
     await expect(fourthAyahPlayButton).toBeVisible();
 
@@ -42,8 +41,8 @@ test(
   async ({ page }) => {
     // TODO: unskip this test when the PR #2531 about QF-1295 is merged
     test.skip(true, 'Unskip this when PR #2531 about QF-1295 is merged');
-    const firstAyah = page.getByTestId('verse-68:1');
-    const secondAyah = page.getByTestId('verse-68:2');
+    const firstAyah = page.getByTestId(getVerseTestId('68:1'));
+    const secondAyah = page.getByTestId(getVerseTestId('68:2'));
 
     await audioUtilities.startAudioPlayback(false);
     await audioUtilities.pauseAudioPlayback();
@@ -55,7 +54,9 @@ test(
     // Scroll up a little to make the navbar show
     await page.mouse.wheel(0, -50);
     await page.waitForTimeout(1500); // wait for the navbar to appear
-    await expect(page.getByTestId('navbar').getAttribute('data-isvisible')).resolves.toBe('true');
+    await expect(page.getByTestId(TestId.NAVBAR).getAttribute('data-isvisible')).resolves.toBe(
+      'true',
+    );
 
     const currentScrollPosition = await page.evaluate(() => window.scrollY);
 
@@ -64,7 +65,9 @@ test(
     // The page should scroll up to bring the first ayah into view and the navbar should hide
     await expect(secondAyah).toHaveClass(/highlighted/, { timeout: 15000 }); // wait until the second ayah has been read
     await page.waitForTimeout(1500); // wait for the navbar to hide
-    await expect(page.getByTestId('navbar').getAttribute('data-isvisible')).resolves.toBe('false');
+    await expect(page.getByTestId(TestId.NAVBAR).getAttribute('data-isvisible')).resolves.toBe(
+      'false',
+    );
     await expect(firstAyah).toBeInViewport();
 
     const newScrollPosition = await page.evaluate(() => window.scrollY);
