@@ -10,7 +10,7 @@ import { logEvent } from '@/utils/eventLogger';
 
 type TopActionsProps = {
   verse: WordVerse;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string | null; // allow missing bookmarks range during SSR fallback
   hasNotes?: boolean;
   isTranslationView?: boolean;
 };
