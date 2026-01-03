@@ -112,7 +112,10 @@ const useDedupedFetchVerse = ({
     translationParams,
     selectedTranslations,
   });
-  const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
+
+  // Only use initial data if it has actual verses (not empty array)
+  const hasInitialVerses = initialData?.verses && initialData.verses.length > 0;
+  const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings && hasInitialVerses;
 
   /**
    * CRITICAL: Only generate request key after hydration completes.

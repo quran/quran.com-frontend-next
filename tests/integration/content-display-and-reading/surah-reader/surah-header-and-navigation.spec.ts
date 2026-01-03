@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { chapter } from '@/tests/mocks/chapters';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -16,7 +17,7 @@ test.describe('Surah Header Display', () => {
     { tag: ['@fast', '@surah', '@header', '@smoke'] },
     async ({ page }) => {
       // Pre-calcul of the chapter title locator
-      const chapterTitle = page.getByTestId('chapter-title');
+      const chapterTitle = page.getByTestId(TestId.CHAPTER_TITLE);
       // Verify the chapter title is displayed
       await expect(chapterTitle).toBeVisible();
 
@@ -36,7 +37,7 @@ test.describe('Surah Header Display', () => {
     { tag: ['@fast', '@surah', '@verses'] },
     async ({ page }) => {
       // Get the first verse (1:1)
-      const firstVerse = page.getByTestId('verse-1:1');
+      const firstVerse = page.getByTestId(getVerseTestId('1:1'));
       // Verify the first verse is visible
       await expect(firstVerse).toBeVisible();
     },
@@ -50,7 +51,7 @@ test.describe('Surah Navigation', () => {
     { tag: ['@slow', '@surah', '@navigation'] },
     async ({ page }) => {
       // Locate the surah info button
-      const infoButton = page.getByTestId('surah-info-button');
+      const infoButton = page.getByTestId(TestId.SURAH_INFO_BUTTON);
 
       // Click on the info button
       await infoButton.click();
@@ -64,24 +65,36 @@ test.describe('Surah Navigation', () => {
     'Clicking surah info button opens modal with surah information',
     { tag: ['@slow', '@surah', '@modal', '@info'] },
     async ({ page }) => {
-      const infoButton = page.getByTestId('surah-info-button');
+      // Open the surah info modal
+      const infoButton = page.getByTestId(TestId.SURAH_INFO_BUTTON);
       await infoButton.click();
 
-      // Verify modal is open and contains surah info content
-      await expect(page.getByTestId('modal-content')).toBeVisible();
+      // Get the modal content
+      const modalContent = page.getByTestId(TestId.MODAL_CONTENT);
+      await expect(modalContent).toBeVisible();
+
+      // Verify the modal header is visible
       const modalHeader = page.getByText('Surah Info');
-      await expect(modalHeader).toBeVisible(); // Modal header
+      await expect(modalHeader).toBeVisible();
 
-      // Verify surah info content is inside the modal
-      const modalContent = page.getByTestId('modal-content');
-      await expect(modalContent.getByTestId('surah-name')).toBeVisible();
-      await expect(modalContent.getByTestId('surah-name')).toContainText('Surah Al-Fatihah');
-      await expect(modalContent.getByTestId('surah-revelation-place')).toContainText('Mecca');
-      await expect(modalContent.getByTestId('surah-number-of-ayahs')).toContainText('7');
+      // Verify the surah name is visible
+      const surahName = modalContent.getByTestId(TestId.SURAH_NAME);
+      await expect(surahName).toBeVisible();
+      await expect(surahName).toContainText(`Surah ${chapter.transliteratedName}`);
 
-      // Verify sticky header behavior while scrolling
-      const dialogContent = page.getByTestId('dialog-content');
-      const surahInfoContent = page.getByTestId('surah-info-content');
+      // Verify the revelation place is visible
+      const revelationPlace = modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE);
+      await expect(revelationPlace).toBeVisible();
+      await expect(revelationPlace).toContainText('Mecca');
+
+      // Verify the number of ayahs is visible
+      const numberOfAyahs = modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS);
+      await expect(numberOfAyahs).toBeVisible();
+      await expect(numberOfAyahs).toContainText(chapter.versesCount.toString());
+
+      // Verify the surah info header is sticky while scrolling
+      const dialogContent = page.getByTestId(TestId.ROOT_DIALOG);
+      const surahInfoContent = page.getByTestId(TestId.SURAH_INFO_CONTENT);
 
       // Find which element is scrollable and scroll it
       const dialogScrollable = await dialogContent.evaluate(

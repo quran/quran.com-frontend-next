@@ -8,17 +8,34 @@ Closes: [QF-XXXX](https://quranfoundation.atlassian.net/browse/QF-XXXX)
 
 - [ ] 🐛 Bug fix (non-breaking change which fixes an issue)
 - [ ] ✨ New feature (non-breaking change which adds functionality)
-- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as
+      expected)
 - [ ] 📝 Documentation update
 - [ ] ♻️ Refactoring (no functional changes)
 
+### If Breaking Change
+
+<!-- What breaks? What coordination is needed with backend/infra? Delete section if not applicable -->
+
+## Scope Confirmation
+
+- [ ] This PR addresses **one** feature/fix only
+- [ ] If multiple changes were needed, they are split into separate PRs
+
 ## Environment Variables
 
-<!-- List any new environment variables introduced. Remove this section if not applicable. -->
+<!-- List any new environment variables introduced. Delete section if not applicable. -->
 
-| Variable | Description | Required |
-| -------- | ----------- | -------- |
-| `EXAMPLE_VAR` | Description here | Yes/No |
+| Variable      | Description      | Required |
+| ------------- | ---------------- | -------- |
+| `EXAMPLE_VAR` | Description here | Yes/No   |
+
+## Rollback Safety
+
+- [ ] Can be safely reverted without data issues or migrations
+- [ ] Rollback requires special steps (describe below):
+
+<!-- If complex rollback needed, describe steps. Delete section if straightforward. -->
 
 ## Test Plan
 
@@ -32,6 +49,13 @@ Closes: [QF-XXXX](https://quranfoundation.atlassian.net/browse/QF-XXXX)
 
 1. Step one
 2. Step two
+
+### Edge Cases Verified
+
+- [ ] ⏳ Loading state handled
+- [ ] ❌ Error state handled
+- [ ] 📭 Empty state handled
+- [ ] 👤 Logged-in vs guest behavior (if applicable)
 
 ## Pre-Review Checklist
 
@@ -73,7 +97,7 @@ Closes: [QF-XXXX](https://quranfoundation.atlassian.net/browse/QF-XXXX)
 
 ## Screenshots/Videos
 
-<!-- Add screenshots or videos for UI changes. Remove if not applicable. -->
+<!-- Add screenshots or videos for UI changes. Delete section if not applicable. -->
 
 | Before | After |
 | ------ | ----- |
@@ -81,7 +105,11 @@ Closes: [QF-XXXX](https://quranfoundation.atlassian.net/browse/QF-XXXX)
 
 ## Related PRs
 
-<!-- Link any related PRs here. Remove if not applicable. -->
+<!-- Link any related PRs here. Delete section if not applicable. -->
+
+## Reviewer Notes
+
+<!-- Optional: Anything specific you want reviewed? Concerns or trade-offs? -->
 
 ## AI Assistance Disclosure
 

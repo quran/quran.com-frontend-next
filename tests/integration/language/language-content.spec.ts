@@ -1,7 +1,10 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
+import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
+import { openNavigationDrawer } from '@/tests/helpers/navigation';
+import { closeSettingsDrawer } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
+import { getChapterContainerTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -18,15 +21,11 @@ test(
 
     // 1. Click on the menu
     await homePage.closeNextjsErrorDialog();
-    await page.getByTestId('open-navigation-drawer').click();
+    await openNavigationDrawer(page);
     await homePage.closeNextjsErrorDialog();
-    // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 3. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-    // 4. select Arabic and wait for navigation to /ar
+    // 2. select Arabic and wait for navigation to /ar
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'العربية' }).click(),
+      selectNavigationDrawerLanguage(page, 'ar'),
       page.waitForURL('**/ar', { waitUntil: 'networkidle' }),
     ]);
 
@@ -41,18 +40,14 @@ test(
   async ({ page }) => {
     // 1. Click on the menu
     await homePage.closeNextjsErrorDialog();
-    await page.getByTestId('open-navigation-drawer').click();
-    // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 3. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-    // 4. select Spanish and wait for navigation to /es
+    await openNavigationDrawer(page);
+    // 2. select Spanish and wait for navigation to /es
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Español' }).click(),
+      selectNavigationDrawerLanguage(page, 'es'),
       page.waitForURL('**/es', { waitUntil: 'networkidle' }),
     ]);
 
-    const surah108 = page.getByTestId('chapter-108-container');
+    const surah108 = page.getByTestId(getChapterContainerTestId(108));
 
     // Espanol translation of Al-Kawthar is Al-Káuzar
     await expect(surah108.getByText('Al-Káuzar')).toBeVisible();
@@ -66,22 +61,18 @@ test(
 test(
   'User interface is displayed in the selected language',
   { tag: ['@language', '@slow'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
     // 1. Click on the menu
     await homePage.closeNextjsErrorDialog();
-    await page.getByTestId('open-navigation-drawer').click();
-    // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 3. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-    // 4. Select French and wait for navigation to /fr
+    await openNavigationDrawer(page);
+    // 2. Select French and wait for navigation to /fr
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Français' }).click(),
+      selectNavigationDrawerLanguage(page, 'fr'),
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
     ]);
 
     // 5. Make sure some UI elements are displayed in French
-    await expect(page.getByTestId('open-search-drawer')).toHaveAttribute(
+    await expect(page.getByTestId(TestId.OPEN_SEARCH_DRAWER)).toHaveAttribute(
       'aria-label',
       'Rechercher',
     );
@@ -93,19 +84,19 @@ test(
     await homePage.goTo('/fr/1');
 
     // Open the settings drawer and check some elements are in French
-    await homePage.openSettingsDrawer();
+    await homePage.openSettingsDrawer(isMobile);
 
-    const settingsBody = page.getByTestId('settings-drawer-body');
+    const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
 
     await expect(settingsBody).toBeVisible();
 
     // Close the settings drawer
-    await page.keyboard.press('Escape');
+    await closeSettingsDrawer(page);
 
     // Open the menu drawer and check some elements are in French
-    await page.getByTestId('open-navigation-drawer').click();
+    await openNavigationDrawer(page);
 
-    const navigationDrawer = page.getByTestId('navigation-drawer-body');
+    const navigationDrawer = page.getByTestId(TestId.NAVIGATION_DRAWER_BODY);
     const navText = (await navigationDrawer.evaluate((el) => el.textContent)) || '';
     expect(navText).toContain('Devenir un donateur mensuel');
   },
@@ -118,15 +109,10 @@ test(
   },
   async ({ page }) => {
     // 1. Click on the menu
-    await page.getByTestId('open-navigation-drawer').click();
-    // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 3. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-
-    // Select French and wait for navigation to /fr
+    await openNavigationDrawer(page);
+    // 2. Select French and wait for navigation to /fr
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Français' }).click(),
+      selectNavigationDrawerLanguage(page, 'fr'),
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
     ]);
 
@@ -135,17 +121,17 @@ test(
     // Navigate to surah Al-Fatiha
     await Promise.all([
       page.waitForURL('**/fr/1'),
-      page.getByTestId('chapter-1-container').click(),
+      page.getByTestId(getChapterContainerTestId(1)).click(),
     ]);
 
-    const firstVerse = page.getByTestId('verse-1:3');
+    const firstVerse = page.getByTestId(getVerseTestId('1:3'));
     // Make sure the translation in French is visible
     await expect(
       firstVerse.getByText('le Tout Miséricordieux, le Très Miséricordieux'),
     ).toBeVisible();
     // Make sure Isa Garcia translation is selected in the settings
     await homePage.openSettingsDrawer();
-    const translationSelect = page.getByTestId('Traductions sélectionnées Card');
+    const translationSelect = page.getByTestId(TestId.TRANSLATIONS_SELECTED_CARD);
     await expect(translationSelect).toBeVisible();
     await expect(translationSelect).toContainText('Muhammad Hamidullah');
   },

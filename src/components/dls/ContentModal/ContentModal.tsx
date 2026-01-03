@@ -134,7 +134,7 @@ const ContentModal = ({
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
             onOpenAutoFocus={handleOpenAutoFocus}
-            data-testid="dialog-content"
+            data-testid="root-dialog"
           >
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>
