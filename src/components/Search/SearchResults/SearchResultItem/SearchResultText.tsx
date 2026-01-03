@@ -231,9 +231,9 @@ const SearchResultText: React.FC<Props> = ({
     return isRTLLocale(lang) ? Direction.RTL : Direction.LTR;
   }, [isArabicResult, isSurahResult, lang]);
   const singleLineDirection = useMemo(() => {
-    if (isArabic) return Direction.RTL;
+    if (isArabic || isRTLLocale(lang)) return Direction.RTL;
     return translationDir;
-  }, [isArabic, translationDir]);
+  }, [isArabic, lang, translationDir]);
 
   const singleLineLanguage = useMemo(() => {
     if (isArabic) return Language.AR;
