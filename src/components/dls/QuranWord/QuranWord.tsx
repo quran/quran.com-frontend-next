@@ -40,6 +40,23 @@ import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
+// IndoPak stop sign characters that require additional spacing
+const INDO_PAK_STOP_SIGN_CHARS = new Set([
+  '\u06D6', // Arabic small high meem (ۖ)
+  '\u06D7', // Arabic small high qaf (ۗ)
+  '\u06D8', // Arabic small high noon (ۘ)
+  '\u06D9', // Arabic small high meem (ۙ)
+  '\u06DA', // Arabic small high lam alef (ۚ)
+  '\u06DB', // Arabic small high jeem (ۛ)
+  '\u06DC', // Arabic small high seen (ۜ)
+  '\u06E2', // Arabic small high madda (ۢ)
+  '\u0615', // Arabic small high tah (ؕ)
+  '\u06EA', // Arabic empty centre high stop (۪)
+  '\u06EB', // Arabic empty centre low stop (۫)
+  '\u0617', // Arabic inverted damma (ُ)
+  '\u06E5', // Arabic small waw (ۥ)
+]);
+
 export type QuranWordProps = {
   word: Word;
   font?: QuranFont;
@@ -86,6 +103,16 @@ const QuranWord = ({
   let wordText = null;
   const shouldBeHighLighted =
     isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
+
+  // Check if the current word has IndoPak stop signs
+  const isIndoPakFont = font === QuranFont.IndoPak;
+  const hasIndoPakStopSign = useMemo(
+    () =>
+      isIndoPakFont &&
+      word.text &&
+      Array.from(word.text).some((char) => INDO_PAK_STOP_SIGN_CHARS.has(char)),
+    [isIndoPakFont, word.text],
+  );
 
   if (isQCFFont(font)) {
     wordText = (
@@ -143,7 +170,7 @@ const QuranWord = ({
   }, [audioService, isRecitationEnabled, word]);
 
   const shouldHandleWordClicking = word.charTypeName !== CharType.End;
-
+  const isTranslationMode = readingPreference === ReadingPreference.Translation;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress: onClick })}
@@ -165,7 +192,8 @@ const QuranWord = ({
         [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
         [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
-        [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
+        [styles.additionalWordGap]: isTranslationMode,
+        [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,
       })}
     >
       <Wrapper
