@@ -89,12 +89,17 @@ const useCoursesList = ({
     const sentinelElement = sentinelRef.current;
     if (!sentinelElement) return undefined;
 
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      if (entry?.isIntersecting && !isLoadingMore) {
-        setSize((currentSize) => currentSize + 1);
-      }
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting && !isLoadingMore) {
+          setSize((currentSize) => currentSize + 1);
+        }
+      },
+      {
+        rootMargin: '400px 0px',
+      },
+    );
 
     observer.observe(sentinelElement);
     return () => observer.disconnect();
