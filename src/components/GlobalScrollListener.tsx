@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
-import { setIsVisible } from '@/redux/slices/navbar';
+import { setIsVisible, selectNavbar } from '@/redux/slices/navbar';
 import {
   setIsExpanded,
   setShowReadingPreferenceSwitcher,
@@ -14,6 +14,7 @@ import OnboardingGroup from '@/types/OnboardingGroup';
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
   const { isActive, activeStepGroup } = useOnboarding();
+  const { lockVisibilityState } = useSelector(selectNavbar);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection, newYPosition: number) => {
       // if we are in the Quran Reader, disable default scroll behavior to avoid having 2 preference switchers {@see: <ReadingPreferenceSwitcher}
@@ -28,10 +29,16 @@ const GlobalScrollListener = () => {
        */
       if (newYPosition > 50 && direction === ScrollDirection.Down) {
         dispatch({ type: setIsExpanded.type, payload: false });
-        dispatch({ type: setIsVisible.type, payload: false });
+        // Only update navbar visibility if it's not locked
+        if (!lockVisibilityState) {
+          dispatch({ type: setIsVisible.type, payload: false });
+        }
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
         dispatch({ type: setIsExpanded.type, payload: true });
-        dispatch({ type: setIsVisible.type, payload: true });
+        // Only update navbar visibility if it's not locked
+        if (!lockVisibilityState) {
+          dispatch({ type: setIsVisible.type, payload: true });
+        }
       }
       if (newYPosition > 150 && direction === ScrollDirection.Down) {
         dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: true });
@@ -39,7 +46,7 @@ const GlobalScrollListener = () => {
         dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: false });
       }
     },
-    [activeStepGroup, dispatch, isActive],
+    [activeStepGroup, dispatch, isActive, lockVisibilityState],
   );
   useScrollDirection(onDirectionChange);
   return <></>;

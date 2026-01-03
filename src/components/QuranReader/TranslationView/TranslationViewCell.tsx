@@ -1,4 +1,5 @@
-import React, { RefObject, memo, useContext, useEffect } from 'react';
+/* eslint-disable max-lines */
+import React, { RefObject, memo, useContext } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
@@ -26,6 +27,7 @@ import VerseQuestions from '@/components/Verse/Questions';
 import VerseLink from '@/components/Verse/VerseLink';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
+import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -71,11 +73,15 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_TOP);
 
-  useEffect(() => {
-    if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
-      scrollToSelectedItem();
-    }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
+  const shouldTrigger =
+    (isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1;
+  useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, [
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+    startingVerse,
+    verseIndex,
+  ]);
 
   return (
     <div ref={selectedItemRef}>

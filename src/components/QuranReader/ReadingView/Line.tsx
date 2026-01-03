@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useContext, RefObject } from 'react';
+import React, { memo, useContext, RefObject } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import styles from './Line.module.scss';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
+import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
@@ -39,7 +40,6 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
-
   const { isActive } = useOnboarding();
   // disable auto scrolling when the user is onboarding
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
@@ -48,12 +48,12 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     shallowEqual,
   );
 
-  useEffect(() => {
-    if (isHighlighted && enableAutoScrolling) {
-      scrollToSelectedItem();
-    }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
-
+  // Use the custom hook for navbar auto-hide functionality
+  useNavbarAutoHide(isHighlighted && enableAutoScrolling, scrollToSelectedItem, [
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+  ]);
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
