@@ -30,8 +30,9 @@ test('Learning Plans are displayed correctly and navigate to the correct URL', a
   await expect(page).toHaveURL(/\/learning-plans\/.*/);
 });
 
-// TODO: Unskip when PR about QF-3600 is merged
-test.skip('loads more courses when scrolling near the end of the list', async ({ page }) => {
+test('loads more courses when scrolling near the end of the list', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'Skipping infinite scroll test on mobile devices');
+
   await homePage.goTo('/learning-plans');
 
   const courseCards = page.locator('a[href^="/learning-plans/"]');
