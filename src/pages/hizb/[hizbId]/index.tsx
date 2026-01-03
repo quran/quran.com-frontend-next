@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { GetServerSideProps, NextPage } from 'next';
@@ -7,14 +8,13 @@ import useTranslation from 'next-translate/useTranslation';
 import { getHizbVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
-import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getHizbNavigationUrl } from '@/utils/navigation';
-import { formatStringNumber } from '@/utils/number';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import { isValidHizbId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
@@ -57,17 +57,50 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
     const { params, locale } = context;
     const hizbId = String(params.hizbId);
     const chaptersData = await getAllChaptersData(locale);
-    if (!isValidHizbId(chaptersData, hizbId)) {
+    if (!isValidHizbId(hizbId)) {
       return {
         notFound: true,
       };
     }
+
     try {
-      const hizbVerses = await getHizbVerses(locale, hizbId);
+      // Validate locale against Language enum; use Language.EN if invalid
+      const validLocale = Object.values(Language).includes(locale as Language)
+        ? (locale as Language)
+        : Language.EN;
+      const quranReaderStyles = getQuranReaderStylesInitialState(validLocale);
+      const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
+
+      // Get pages lookup to determine the range of verses in the hizb
+      const pagesLookup = await getPagesLookup({ mushaf, hizbNumber: Number(hizbId) });
+
+      const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+        chaptersData,
+        pagesLookup.lookupRange.from,
+        pagesLookup.lookupRange.to,
+      ).length;
+      const firstPageOfHizb = Object.keys(pagesLookup.pages)[0];
+      const firstPageOfHizbLookup = pagesLookup.pages[firstPageOfHizb];
+
+      const hizbVerses = await getHizbVerses(hizbId, locale, {
+        ...getDefaultWordFields(quranReaderStyles.quranFont),
+        mushaf,
+        perPage: 'all',
+        from: firstPageOfHizbLookup.from,
+        to: firstPageOfHizbLookup.to,
+      });
+      hizbVerses.pagesLookup = pagesLookup;
+      hizbVerses.metaData = {
+        ...(hizbVerses.metaData || {}),
+        numberOfVerses,
+        from: pagesLookup.lookupRange.from,
+        to: pagesLookup.lookupRange.to,
+      };
+
       return {
         props: {
-          chaptersData,
           hizbVerses,
+          chaptersData,
         },
       };
     } catch (error) {

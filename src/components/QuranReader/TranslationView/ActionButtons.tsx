@@ -17,7 +17,7 @@ import Verse from 'types/Verse';
 
 type ActionButtonsProps = {
   verse: Verse;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string | null; // optional when bookmarks data isn't available
   hasNotes?: boolean;
   isTranslationView?: boolean;
   openShareModal: () => void;

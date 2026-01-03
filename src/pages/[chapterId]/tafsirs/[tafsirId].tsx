@@ -92,6 +92,7 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
             initialChapterId={chapterId}
             initialVerseNumber={verseNumber.toString()}
             initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
+            initialTafsirData={tafsirData}
             render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
               return (
                 <div>

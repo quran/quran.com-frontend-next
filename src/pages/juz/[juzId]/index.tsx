@@ -80,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
+
       const juzVersesResponse = await getJuzVerses(juzId, locale, {
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         mushaf: defaultMushafId,

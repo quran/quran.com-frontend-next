@@ -19,9 +19,10 @@ const Loading = () => <Spinner />;
 
 type Props = {
   isMyCourses?: boolean;
+  initialCoursesData?: CoursesResponse;
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
+const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCoursesData }) => {
   const { t } = useTranslation('learn');
   return (
     <div className={layoutStyles.pageContainer}>
@@ -48,6 +49,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
             loading={Loading}
             fetcher={privateFetcher}
             queryKey={makeGetCoursesUrl({ myCourses: isMyCourses })}
+            initialData={initialCoursesData}
             render={(data: CoursesResponse) => (
               <CoursesList courses={data.data} isMyCourses={isMyCourses} />
             )}

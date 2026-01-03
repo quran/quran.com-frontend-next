@@ -10,7 +10,7 @@ import Verse from 'types/Verse';
 
 type TopActionsProps = {
   verse: Verse;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string | null; // allow missing bookmarks range during SSR fallback
   hasNotes?: boolean;
   isTranslationView?: boolean;
 };

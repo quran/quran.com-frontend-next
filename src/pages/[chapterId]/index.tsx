@@ -229,14 +229,15 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
-      const firstPageOfRange = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfRange];
+
+      const firstPageNumber = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfRangeLookup = pagesLookupResponse.pages[firstPageNumber];
       const versesResponse = await getRangeVerses(locale, {
         ...apiParams,
         ...{
           perPage: 'all',
-          from: firstPageOfChapterLookup.from,
-          to: firstPageOfChapterLookup.to,
+          from: firstPageOfRangeLookup.from,
+          to: firstPageOfRangeLookup.to,
         },
       });
       const metaData = { numberOfVerses };
@@ -276,7 +277,6 @@ export const getServerSideProps = withSsrRedux('/[chapterId]', async (context) =
         pagesLookupResponse.lookupRange.from,
         pagesLookupResponse.lookupRange.to,
       ).length;
-
       const firstPageOfChapter = Object.keys(pagesLookupResponse.pages)[0];
       const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfChapter];
       apiParams = {
