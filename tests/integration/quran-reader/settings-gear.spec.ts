@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -17,8 +18,8 @@ test(
 
     await homePage.openSettingsDrawer();
 
-    await expect(page.getByTestId('settings-drawer')).toBeVisible();
-    await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER)).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER_BODY)).toBeVisible();
   },
 );
 
@@ -32,12 +33,12 @@ test.skip(
 
     // Test settings button before scroll
     await homePage.openSettingsDrawer();
-    await expect(page.getByTestId('settings-drawer')).toBeVisible();
-    await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER)).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER_BODY)).toBeVisible();
 
     // Close the drawer
     await page
-      .getByTestId('settings-drawer')
+      .getByTestId(TestId.SETTINGS_DRAWER)
       .getByRole('button', { name: /close drawer/i })
       .first()
       .click();
@@ -49,7 +50,7 @@ test.skip(
     const settingsButtons = page.locator('#settings-button');
     await expect(settingsButtons.last()).toBeVisible();
     await settingsButtons.last().click();
-    await expect(page.getByTestId('settings-drawer')).toBeVisible();
-    await expect(page.getByTestId('settings-drawer-body')).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER)).toBeVisible();
+    await expect(page.getByTestId(TestId.SETTINGS_DRAWER_BODY)).toBeVisible();
   },
 );

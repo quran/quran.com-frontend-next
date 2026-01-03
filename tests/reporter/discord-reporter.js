@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-console */
 
 // Load environment variables from .env file

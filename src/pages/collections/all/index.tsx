@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
@@ -8,8 +8,8 @@ import CollectionDetailContainer from '@/components/Collection/CollectionDetailC
 import BookmarkType from '@/types/BookmarkType';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
-import withSsrRedux from '@/utils/withSsrRedux';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
+import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = () => {
@@ -62,6 +62,14 @@ const CollectionDetailPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/collections/all');
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
+};
 
 export default withAuth(CollectionDetailPage);

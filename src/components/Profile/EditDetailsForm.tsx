@@ -14,8 +14,8 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useUpdateUserProfile from '@/hooks/auth/useUpdateUserProfile';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
-import TEST_IDS from '@/utils/test-ids';
 
 type FormData = {
   firstName: string;
@@ -73,10 +73,7 @@ const EditDetailsForm: FC = () => {
   );
 
   return (
-    <Section
-      title={t('edit-details')}
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EDIT_DETAILS_SECTION}
-    >
+    <Section title={t('edit-details')} dataTestId={TestId.AUTH_UPDATE_PROFILE_EDIT_DETAILS_SECTION}>
       <FormBuilder
         key={userData ? `${userData.email}-${userData.firstName}-${userData.lastName}` : 'loading'}
         className={styles.formContainer}

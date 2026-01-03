@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import styles from './ReflectionBodyContainer.module.scss';
 
 import { Tab } from '@/dls/Tabs/Tabs';
@@ -8,10 +10,10 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logPostView } from '@/utils/quranReflect/apiPaths';
 import ContentType from 'types/QuranReflect/ContentType';
 
-export const getReflectionTabs = (t: (key: string) => string): Tab[] => [
+export const getReflectionTabs = (t: (key: string) => string, isModal: boolean): Tab[] => [
   {
     title: (
-      <div className={styles.titleContainer}>
+      <div className={classNames(styles.titleContainer, { [styles.modalTitleContainer]: isModal })}>
         <ChatIcon />
         {t('common:reflections')}
       </div>
@@ -20,7 +22,7 @@ export const getReflectionTabs = (t: (key: string) => string): Tab[] => [
   },
   {
     title: (
-      <div className={styles.titleContainer}>
+      <div className={classNames(styles.titleContainer, { [styles.modalTitleContainer]: isModal })}>
         <LearningPlanIcon />
         {t('common:lessons')}
       </div>

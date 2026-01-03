@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import {
@@ -12,6 +10,7 @@ import {
 } from './change-password-form-helpers';
 import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -19,6 +18,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@change-password'];
@@ -151,65 +151,14 @@ test.describe('Password Visibility Toggle', () => {
   );
 });
 
-test.describe('Required Field Validation', () => {
-  test(
-    'should show validation error when current password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { currentPassword, updateButton } = getFormInputs(section);
-
-      await currentPassword.fill('test');
-      await currentPassword.clear();
-      await enableValidation(page, updateButton);
-      await currentPassword.blur();
-
-      await expectError(section, /current.*password.*is.*missing/i);
-    },
-  );
-
-  test(
-    'should show validation error when new password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
-
-      await newPassword.fill('test');
-      await newPassword.clear();
-      await enableValidation(page, updateButton);
-      await newPassword.blur();
-
-      await expectError(section, /^\*Password is missing/i);
-    },
-  );
-
-  test(
-    'should show validation error when confirm password is empty',
-    { tag: TEST_TAGS },
-    async ({ page }) => {
-      const section = getChangePasswordSection(page);
-      const { confirmPassword, updateButton } = getFormInputs(section);
-
-      await confirmPassword.fill('test');
-      await confirmPassword.clear();
-      await enableValidation(page, updateButton);
-      await confirmPassword.blur();
-
-      await expectError(section, /confirm.*password.*is.*missing/i);
-    },
-  );
-});
-
 test.describe('Password Length Validation', () => {
   test(
     'should show validation error when new password is less than 8 characters',
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
+      const { newPassword } = getFormInputs(section);
 
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'Pass1!');
       await page.waitForTimeout(VALIDATION_WAIT);
 

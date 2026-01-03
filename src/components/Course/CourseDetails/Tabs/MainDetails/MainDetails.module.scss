@@ -1,6 +1,7 @@
 .htmlDescription {
     p + p,
-    ul + p {
+    ul + p,
+    ol + p {
         margin-top: var(--spacing-large);
     }
 }
