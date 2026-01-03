@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import ThemeType from '@/redux/types/ThemeType';
+import { expectThemeSelected, selectTheme } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -17,8 +19,7 @@ test.describe('Theme Selection', () => {
       // 1. Open the settings drawer
       await homePage.openSettingsDrawer();
       // 2. get the current active theme
-      const activeTheme = await page.getByTestId('auto-button').getAttribute('data-is-selected');
-      expect(activeTheme).toBe('true');
+      await expectThemeSelected(page, ThemeType.Auto);
     },
   );
 
@@ -32,7 +33,7 @@ test.describe('Theme Selection', () => {
       // 2. Open the settings drawer
       await homePage.openSettingsDrawer();
       // 3. Click on the light theme
-      await page.getByTestId('light-button').click();
+      await selectTheme(page, ThemeType.Light);
       // 4. Make sure the light theme is the currently selected theme
       bodyTheme = await page.locator('body').getAttribute('data-theme');
       expect(bodyTheme).toBe('light');

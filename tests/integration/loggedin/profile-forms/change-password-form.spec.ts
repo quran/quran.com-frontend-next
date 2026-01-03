@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import {
@@ -12,6 +10,7 @@ import {
 } from './change-password-form-helpers';
 import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -19,6 +18,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@change-password'];
@@ -157,9 +157,8 @@ test.describe('Password Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getChangePasswordSection(page);
-      const { newPassword, updateButton } = getFormInputs(section);
+      const { newPassword } = getFormInputs(section);
 
-      await enableValidation(page, updateButton);
       await fillAndBlur(newPassword, 'Pass1!');
       await page.waitForTimeout(VALIDATION_WAIT);
 

@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+import { openSearchDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
+import { getChapterContainerTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -18,17 +20,17 @@ test(
     test.skip(true, 'Unskip when #2515 is merged');
 
     await homePage.goTo('/');
-    await page.getByTestId('chapter-1-container').click();
+    await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
-    await page.getByTestId('open-search-drawer').click();
+    await openSearchDrawer(page);
     await page.keyboard.type('light');
-    await expect(page.getByTestId('more-results')).toBeVisible();
-    await page.getByTestId('more-results').click();
+    await expect(page.getByTestId(TestId.MORE_RESULTS)).toBeVisible();
+    await page.getByTestId(TestId.MORE_RESULTS).click();
     await expect(page).toHaveURL(/search\?page=1&query=light/);
-    await page.getByTestId('next-page-button').click();
+    await page.getByTestId(TestId.NEXT_PAGE_BUTTON).click();
     await expect(page).toHaveURL(/search\?page=2&query=light/);
 
-    const navigationButtons = page.getByTestId('page-navigation-buttons');
+    const navigationButtons = page.getByTestId(TestId.PAGE_NAVIGATION_BUTTONS);
     await expect(navigationButtons).toBeVisible();
     await navigationButtons.getByText('4').click();
     await expect(page).toHaveURL(/search\?page=4&query=light/);
@@ -53,14 +55,14 @@ test(
     test.skip(true, 'Unskip when #2515 is merged');
 
     await homePage.goTo('/');
-    await page.getByTestId('chapter-1-container').click();
+    await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
-    await page.getByTestId('open-search-drawer').click();
+    await openSearchDrawer(page);
     await page.keyboard.type('light');
-    await expect(page.getByTestId('more-results')).toBeVisible();
-    await page.getByTestId('more-results').click();
+    await expect(page.getByTestId(TestId.MORE_RESULTS)).toBeVisible();
+    await page.getByTestId(TestId.MORE_RESULTS).click();
     await expect(page).toHaveURL(/search\?page=1&query=light/);
-    await page.getByTestId('next-page-button').click();
+    await page.getByTestId(TestId.NEXT_PAGE_BUTTON).click();
     await expect(page).toHaveURL(/search\?page=2&query=light/);
 
     await page.goBack();

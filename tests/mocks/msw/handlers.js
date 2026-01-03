@@ -1,8 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-console */
-/* eslint-disable max-lines */
 const { http, HttpResponse } = require('msw');
 
 const { mockCountryLanguagePreferences } = require('../data');

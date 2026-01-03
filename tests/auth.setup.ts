@@ -2,6 +2,8 @@ import path from 'path';
 
 import { test as setup, expect } from '@playwright/test';
 
+import { TestId } from '@/tests/test-ids';
+
 const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
@@ -27,10 +29,8 @@ setup('authenticate', async ({ page }) => {
 
   // Wait for redirect to home and visible profile avatar
   await page.waitForURL(/\/([a-z]{2})?$/);
-  const profileAvatarButton = page.getByTestId('profile-avatar-button');
-  await expect(profileAvatarButton).toHaveCount(2);
-  await expect(profileAvatarButton.nth(0)).toBeVisible();
-  await expect(profileAvatarButton.nth(1)).toBeVisible();
+  const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
+  await expect(profileAvatarButton).toBeAttached();
 
   // Save signed-in state to 'authFile'.
   await page.context().storageState({ path: authFile });

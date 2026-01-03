@@ -1,7 +1,7 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -27,7 +27,7 @@ test(
     await playVerseButton.click();
 
     // Wait for the audio player to be visible before interacting with its controls
-    await expect(page.getByTestId('audio-player-body')).toBeVisible();
+    await expect(page.getByTestId(TestId.AUDIO_PLAYER_BODY)).toBeVisible();
 
     const overflowMenuTrigger = page.locator('#audio-player-overflow-menu-trigger');
     await expect(overflowMenuTrigger).toBeVisible();

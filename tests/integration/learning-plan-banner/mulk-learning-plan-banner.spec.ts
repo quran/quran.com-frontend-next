@@ -1,13 +1,12 @@
 /* eslint-disable no-await-in-loop */
 import { test, expect, Page } from '@playwright/test';
 
+import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
-const banner = (page: Page) => page.getByTestId('learning-plan-banner');
+const banner = (page: Page) => page.getByTestId(TestId.LEARNING_PLAN_BANNER);
 const bannerImage = (page: Page) => banner(page).locator('img');
-
-const ACCEPT_LANGUAGE = 'Accept-Language';
-const CF_IP_COUNTRY = 'CF-IPCountry';
 
 async function scrollToBottom(page: Page) {
   let previousHeight = 0;
@@ -58,40 +57,23 @@ test.describe('English language - navigation', () => {
 });
 
 test.describe('Non-English language', () => {
-  test('Arabic version does not render the banner', async ({ browser }) => {
-    const context = await browser.newContext({ locale: 'ar-SA' });
-    const page = await context.newPage();
-
-    // Set headers to simulate Saudi Arabia location and Arabic language preference
-    await page.setExtraHTTPHeaders({
-      [ACCEPT_LANGUAGE]: 'ar-SA,ar',
-      [CF_IP_COUNTRY]: 'SA',
-    });
-
+  test.beforeEach(async ({ page, context }) => {
     homePage = new Homepage(page, context);
     await homePage.goTo('/67');
-    await scrollToBottom(page);
-    await expect(banner(page)).toHaveCount(0);
-
-    await context.close();
   });
 
-  test('French version does not render the banner', async ({ browser }) => {
-    const context = await browser.newContext({ locale: 'fr-FR' });
-    const page = await context.newPage();
+  test('Arabic version does not render the banner', async ({ page }) => {
+    await Promise.all([selectNavigationDrawerLanguage(page, 'ar'), page.waitForURL('/ar/67')]);
 
-    // Set headers to simulate France location and French language preference
-    await page.setExtraHTTPHeaders({
-      [ACCEPT_LANGUAGE]: 'fr-FR,fr',
-      [CF_IP_COUNTRY]: 'FR',
-    });
-
-    homePage = new Homepage(page, context);
-    await homePage.goTo('/67');
     await scrollToBottom(page);
     await expect(banner(page)).toHaveCount(0);
+  });
 
-    await context.close();
+  test('French version does not render the banner', async ({ page }) => {
+    await Promise.all([selectNavigationDrawerLanguage(page, 'fr'), page.waitForURL('/fr/67')]);
+
+    await scrollToBottom(page);
+    await expect(banner(page)).toHaveCount(0);
   });
 });
 
