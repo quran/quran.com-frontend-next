@@ -44,6 +44,7 @@ const CompleteButton: React.FC<Props> = ({ isLoading, id, markLessonAsCompleted 
       isDisabled={isLoading}
       size={ButtonSize.Small}
       onClick={onMarkAsCompletedClicked}
+      data-testid="lesson-mark-complete-button"
     >
       {t('mark-complete')}
     </Button>

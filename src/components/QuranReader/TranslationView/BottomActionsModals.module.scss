@@ -1,0 +1,30 @@
+@use 'src/styles/breakpoints';
+
+.reflectionOverlay .reflectionContentModal {
+  padding: 0;
+  .reflectionHeader {
+    border-radius: var(--border-radius-rounded);
+    padding-inline: var(--spacing-medium-px);
+    padding-block: var(--spacing-small-px);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+
+    @include breakpoints.tablet {
+      padding-inline: var(--spacing-large-px);
+      padding-block: var(--spacing-medium-px);
+    }
+
+    .reflectionHeaderCloseIcon {
+      position: relative;
+      inset-block: unset;
+      inset-inline: unset;
+      transform: unset;
+    }
+  }
+  // Remove default padding to allow full-width tabs in reflection modal
+  .reflectionInnerContentModal {
+    padding-inline: 0;
+  }
+}

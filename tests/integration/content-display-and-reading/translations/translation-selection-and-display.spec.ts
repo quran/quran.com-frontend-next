@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -41,7 +42,7 @@ test.describe('Translation Selection', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. Check that the settings drawer is opened and the translations card is clicked
-      const settingsBody = page.getByTestId('settings-drawer-body');
+      const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
 
       // check that the translations list is visible
       await expect(settingsBody.getByText(TRANSLATION_KHATTAB.resourceName)).toBeVisible();
@@ -58,7 +59,7 @@ test.describe('Translation Selection', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-body');
+      const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
 
       // 3. Type "French" in the search input
       const searchInput = settingsBody.getByPlaceholder('Search Translations');
@@ -80,7 +81,6 @@ test.describe('Translation Selection', () => {
   );
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Translation Display and Persistence', () => {
   test(
     'Multiple translation selection persists and displays correctly',
@@ -90,7 +90,7 @@ test.describe('Translation Display and Persistence', () => {
       await page.getByLabel('Change Translation').click();
 
       // 2. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-body');
+      const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
 
       // 3. Select two translations
       await settingsBody.getByText(TRANSLATION_KHATTAB.resourceName).click(); // uncheck
@@ -98,7 +98,7 @@ test.describe('Translation Display and Persistence', () => {
       await settingsBody.getByText(TRANSLATION_HAMIDULLAH.resourceName).click(); // check
 
       // Wait for the selection to take effect: Khattab hidden, Saheeh and Hamidullah visible
-      const firstVerse = page.getByTestId('verse-1:1');
+      const firstVerse = page.getByTestId(getVerseTestId('1:1'));
       await expect(firstVerse.getByText(TRANSLATION_KHATTAB.text)).not.toBeVisible();
       await expect(firstVerse.getByText(TRANSLATION_SAHEEH.text)).toBeVisible();
       await expect(firstVerse.getByText(TRANSLATION_HAMIDULLAH.text)).toBeVisible();
@@ -119,21 +119,21 @@ test.describe('Translation Display and Persistence', () => {
     async ({ page }) => {
       // 1. Check that the author names is not shown (only one translation is selected by default)
       await expect(
-        page.getByTestId('verse-1:1').getByText(TRANSLATION_KHATTAB.authorName),
+        page.getByTestId(getVerseTestId('1:1')).getByText(TRANSLATION_KHATTAB.authorName),
       ).not.toBeVisible();
 
       // 2. Open the translation selection drawer
       await page.getByLabel('Change Translation').click();
 
       // 3. In the settings-drawer-body, we should see the translations list
-      const settingsBody = page.getByTestId('settings-drawer-body');
+      const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
 
       // 4. Select two translations (Dr. Mustafa Khattab is selected by default)
       await settingsBody.getByText(TRANSLATION_HAMIDULLAH.resourceName).click(); // check
 
       // 5. Check that the author names are shown
       await expect(
-        page.getByTestId('verse-1:1').getByText(TRANSLATION_KHATTAB.authorName),
+        page.getByTestId(getVerseTestId('1:1')).getByText(TRANSLATION_KHATTAB.authorName),
       ).toBeVisible();
     },
   );
