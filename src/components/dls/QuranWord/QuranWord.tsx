@@ -54,6 +54,7 @@ const INDO_PAK_STOP_SIGN_CHARS = new Set([
   '\u06E2', // Arabic small high madda (ۢ)
   '\u0615', // Arabic small high tah (ؕ)
   '\u06EA', // Arabic empty centre high stop (۪)
+  '\u06EB', // Arabic empty centre low stop (۫)
 ]);
 
 export type QuranWordProps = {
