@@ -68,6 +68,12 @@ describe('RepeatAudioModal.helpers', () => {
       const result = normalizeVerseRange('3:10', '3:5');
       expect(result).toEqual({ from: '3:5', to: '3:10' });
     });
+
+    it('should return as-is when verses are from different chapters', () => {
+      // Edge case: shouldn't happen in normal usage, but handled gracefully
+      const result = normalizeVerseRange('2:10', '1:5');
+      expect(result).toEqual({ from: '2:10', to: '1:5' });
+    });
   });
 
   describe('isVerseInChapter', () => {

@@ -7,7 +7,7 @@ let homePage: Homepage;
 let audioUtilities: AudioUtilities;
 
 test.beforeEach(async ({ page, context, isMobile }) => {
-  test.skip(isMobile, 'Repeat audio tests does not need to run on mobile devices');
+  test.skip(isMobile, 'Repeat audio tests do not need to run on mobile devices');
 
   homePage = new Homepage(page, context);
   audioUtilities = new AudioUtilities(page);
@@ -73,7 +73,7 @@ test(
 );
 
 test(
-  'Repeat modal lost only the verse values when switching chapters',
+  'Repeat modal loses only the verse values when switching chapters',
   { tag: ['@slow', '@audio', '@repeat-audio'] },
   async () => {
     const modal = await audioUtilities.openRepeatModal();

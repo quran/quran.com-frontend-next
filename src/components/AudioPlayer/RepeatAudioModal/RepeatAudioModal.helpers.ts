@@ -31,6 +31,9 @@ export const toPersistedValue = (value: number): number => {
  * Ensure from <= to by swapping if needed.
  * This prevents invalid ranges where the start verse is after the end verse.
  *
+ * Note: Both verses must be from the same chapter. If they're from different
+ * chapters, the original values are returned without swapping.
+ *
  * @param {string} fromKey - The starting verse key (e.g. "1:2").
  * @param {string} toKey - The ending verse key (e.g. "1:5").
  * @returns {{ from: string; to: string }} Normalized verse range with from <= to guaranteed.
@@ -39,12 +42,22 @@ export const normalizeVerseRange = (
   fromKey: string,
   toKey: string,
 ): { from: string; to: string } => {
+  const fromChapter = getChapterNumberFromKey(fromKey);
+  const toChapter = getChapterNumberFromKey(toKey);
+
+  // If verses are from different chapters, return as-is (shouldn't happen in normal usage)
+  if (fromChapter !== toChapter) {
+    return { from: fromKey, to: toKey };
+  }
+
   const fromVerse = getVerseNumberFromKey(fromKey);
   const toVerse = getVerseNumberFromKey(toKey);
+
   // Swap if from > to
   if (fromVerse > toVerse) {
     return { from: toKey, to: fromKey };
   }
+
   return { from: fromKey, to: toKey };
 };
 
