@@ -28,8 +28,30 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const questionsData = usePageQuestions();
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
+  // For Tafsir, Reflections, Lessons - always use verse 1
   const verseKey = `${chapterNumber}:1`;
-  const hasQuestions = questionsData?.[verseKey]?.total > 0;
+
+  // For Answers - find the first verse in the chapter that has questions
+  const questionsVerseKey = React.useMemo(() => {
+    if (!questionsData) return verseKey;
+
+    const verseWithQuestions = Object.keys(questionsData).find((key) => {
+      const [chapter] = key.split(':');
+      return Number(chapter) === chapterNumber && questionsData[key]?.total > 0;
+    });
+
+    return verseWithQuestions || verseKey;
+  }, [questionsData, chapterNumber, verseKey]);
+
+  // Check if any verse in the chapter has questions
+  const hasQuestions = React.useMemo(() => {
+    if (!questionsData) return false;
+
+    return Object.keys(questionsData).some((key) => {
+      const [chapter] = key.split(':');
+      return Number(chapter) === chapterNumber && questionsData[key]?.total > 0;
+    });
+  }, [questionsData, chapterNumber]);
 
   const { data: metadataResponse } = useSWRImmutable(
     makeChapterMetadataUrl(chapterNumber, lang),
@@ -63,6 +85,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           cardClassName={styles.card}
           chapterNumber={chapterNumber}
           verseKey={verseKey}
+          questionsVerseKey={questionsVerseKey}
           suggestions={chapterMetadata?.suggestions}
           hasQuestions={hasQuestions}
           onModalOpen={handleModalOpen}
@@ -72,7 +95,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
       <BottomActionsModals
         chapterId={String(chapterNumber)}
         verseNumber="1"
-        verseKey={verseKey}
+        verseKey={openedModal === ModalType.QUESTIONS ? questionsVerseKey : verseKey}
         tafsirs={selectedTafsirs}
         openedModal={openedModal}
         hasQuestions={hasQuestions}

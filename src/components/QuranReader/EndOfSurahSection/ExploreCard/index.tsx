@@ -22,6 +22,7 @@ interface ExploreCardProps {
   cardClassName?: string;
   chapterNumber: number;
   verseKey: string;
+  questionsVerseKey: string;
   suggestions?: ChapterContent[];
   hasQuestions: boolean;
   onModalOpen: (modalType: ModalType) => void;
@@ -33,6 +34,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   cardClassName,
   chapterNumber,
   verseKey,
+  questionsVerseKey,
   suggestions,
   hasQuestions,
   onModalOpen,
@@ -55,16 +57,21 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       onModalOpen(button.modalType);
       const normalizedKey = button.key.replace(/\./g, '_');
       logButtonClick(`end_of_surah_${normalizedKey}`, { chapterNumber });
+
+      // Use questionsVerseKey for Answers button, verseKey for others
+      const navigationVerseKey =
+        button.modalType === ModalType.QUESTIONS ? questionsVerseKey : verseKey;
+
       fakeNavigate(
         button.getNavigationUrl({
           chapterNumber,
-          verseKey,
+          verseKey: navigationVerseKey,
           selectedTafsirs,
         }),
         lang,
       );
     },
-    [onModalOpen, chapterNumber, verseKey, selectedTafsirs, lang],
+    [onModalOpen, chapterNumber, verseKey, questionsVerseKey, selectedTafsirs, lang],
   );
 
   return (
