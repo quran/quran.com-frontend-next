@@ -4,6 +4,7 @@ export enum FormErrorId {
   RequiredField = 'required-field',
   MinimumLength = 'minimum-length',
   MaximumLength = 'maximum-length',
+  UnknownError = 'unknown-error',
 }
 
 export interface FormError {
@@ -19,8 +20,4 @@ export interface TranslationFeedbackFormErrors {
 export interface UseTranslationFeedbackFormProps {
   verse: WordVerse;
   onClose: () => void;
-}
-
-export interface FeedbackValidationErrorResponse {
-  details?: { error?: { code?: string; details?: { feedback?: string } } };
 }

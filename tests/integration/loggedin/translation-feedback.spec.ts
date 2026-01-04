@@ -310,6 +310,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
                 code: 'ValidationError',
                 details: {
                   feedback: 'MAX_LENGTH',
+                  translationId: 'MISSING',
                 },
               },
             },
@@ -335,6 +336,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
 
       // Should show specific validation error message instead of generic error
       await expect(page.getByTestId('feedback-error-maximum-length')).toBeVisible();
+      await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
+      await expect(page.getByTestId('error-toast')).not.toBeVisible();
 
       // Modal should remain open so user can correct the feedback
       const modal = page.getByTestId('modal-content');

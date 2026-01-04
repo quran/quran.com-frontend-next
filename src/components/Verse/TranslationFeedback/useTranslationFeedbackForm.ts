@@ -5,16 +5,11 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import sendFeedbackErrorToSentry from './logging';
-import {
-  TranslationFeedbackFormErrors,
-  UseTranslationFeedbackFormProps,
-  FeedbackValidationErrorResponse,
-  FormErrorId,
-} from './types';
+import { TranslationFeedbackFormErrors, UseTranslationFeedbackFormProps } from './types';
 import {
   getTranslationFeedbackErrors,
+  getTranslationFeedbackServerErrors,
   isTranslationFeedbackValid,
-  MAX_FEEDBACK_CHARS,
 } from './validation';
 
 import { getAvailableTranslations } from '@/api';
@@ -24,16 +19,6 @@ import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translati
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { submitTranslationFeedback } from '@/utils/auth/api';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
-
-const isFeedbackLengthValidationError = (response: unknown): boolean => {
-  if (typeof response !== 'object' || response === null) return false;
-  const error = response as FeedbackValidationErrorResponse;
-
-  return (
-    error.details?.error?.code === 'ValidationError' &&
-    error.details?.error?.details?.feedback?.toLowerCase() === 'max_length'
-  );
-};
 
 /**
  * Manage translation feedback form state, validation, and submission side effects.
@@ -70,10 +55,10 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
   }, [selectedTranslationsOptions, selectedTranslationId]);
 
   const validate = useCallback(() => {
-    const newErrors = getTranslationFeedbackErrors(selectedTranslationId, feedback, t);
+    const newErrors = getTranslationFeedbackErrors(selectedTranslationId, feedback, t, lang);
     setErrors(newErrors);
     return isTranslationFeedbackValid(newErrors);
-  }, [selectedTranslationId, feedback, t]);
+  }, [selectedTranslationId, feedback, t, lang]);
 
   const submitFeedback = useCallback(
     async (
@@ -93,29 +78,9 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
 
         if (response && response.success) return { success: true };
 
-        /**
-         * Corner case handling for feedback length validation.
-         *
-         * Although `MAX_FEEDBACK_CHARS` is enforced on the client,
-         * the server still sanitizes the feedback. In rare cases,
-         * sanitization can transform certain characters into longer
-         * strings, causing the final feedback length to exceed the
-         * maximum allowed size.
-         *
-         * This check ensures we gracefully handle that scenario by
-         * surfacing a proper validation error to the user.
-         */
-        if (isFeedbackLengthValidationError(response)) {
-          setErrors({
-            feedback: {
-              id: FormErrorId.MaximumLength,
-              message: t('validation.maximum-length', {
-                field: t('translation-feedback.feedback'),
-                value: MAX_FEEDBACK_CHARS,
-              }),
-            },
-          });
-
+        const serverErrors = getTranslationFeedbackServerErrors(response, t, lang);
+        if (serverErrors) {
+          setErrors(serverErrors);
           return { success: false, response };
         }
 
@@ -128,7 +93,7 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
         return { success: false, response: error };
       }
     },
-    [t, toast, setErrors],
+    [t, toast, lang],
   );
 
   const onSubmit = useCallback(
@@ -143,6 +108,7 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
           status: ToastStatus.Success,
           testId: 'success-toast',
         });
+
         onClose();
       }
 
