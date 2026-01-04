@@ -8,10 +8,12 @@ import styles from './StreakGoalCard.module.scss';
 import Card from '@/components/HomePage/Card';
 import ReadingGoalCardContent from '@/components/HomePage/ReadingSection/StreakOrGoalCard/ReadingGoalCardContent';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link from '@/dls/Link/Link';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useIsMobile from '@/hooks/useIsMobile';
 import PlantIcon from '@/icons/plant.svg';
+import ArrowIcon from '@/public/icons/arrow.svg';
 import CirclesIcon from '@/public/icons/circles.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -43,7 +45,7 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
   if (!hasGoalOrStreak) {
     return (
       <Card
-        className={classNames(styles.endOfSurahCard, cardClassName)}
+        className={classNames(styles.endOfSurahCard, styles.guestState, cardClassName)}
         data-testid="streak-goal-card"
       >
         <div className={styles.container}>
@@ -85,7 +87,7 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
       onClick={onSetGoalButtonClicked}
     >
       <CirclesIcon className={styles.buttonIcon} />
-      {t('end-of-surah.set-custom-goal')}
+      {isMobile ? t('end-of-surah.set-goal') : t('end-of-surah.set-custom-goal')}
     </Button>
   );
 
@@ -104,6 +106,15 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
             </span>
             <span className={styles.streakText}>{streakLabel}</span>
           </div>
+          {!goal && (
+            <IconContainer
+              size={IconSize.Xsmall}
+              icon={<ArrowIcon />}
+              shouldForceSetColors={false}
+              className={styles.streakArrowIcon}
+              aria-hidden="true"
+            />
+          )}
         </div>
 
         {/* Goal Progress Section */}
