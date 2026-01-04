@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { memo, useContext, useEffect } from 'react';
+import React, { memo, useContext } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
@@ -21,6 +21,7 @@ import styles from './TranslationViewCell.module.scss';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
+import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -61,12 +62,15 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   // Use our custom hook that handles scrolling with context menu offset
   const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();
 
-  useEffect(() => {
-    if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
-      scrollToSelectedItem();
-    }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
-
+  const shouldTrigger =
+    (isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1;
+  useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, [
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+    startingVerse,
+    verseIndex,
+  ]);
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
   const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);

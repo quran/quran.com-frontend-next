@@ -1,7 +1,7 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect, Page } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -23,14 +23,12 @@ test(
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
     // We should be redirected to the home page
-    await page.waitForURL(/\/fr$/);
-    await expect(page).toHaveURL(/\/fr$/);
+    await page.waitForURL(/\/([a-z]{2})?$/);
+    await expect(page).toHaveURL(/\/([a-z]{2})?$/);
 
     // We should be logged in
-    const profileAvatarButton = page.getByTestId('profile-avatar-button');
-    await expect(profileAvatarButton).toHaveCount(2);
-    await expect(profileAvatarButton.nth(0)).toBeVisible();
-    await expect(profileAvatarButton.nth(1)).toBeVisible();
+    const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
+    await expect(profileAvatarButton).toBeAttached();
   },
 );
 

@@ -63,6 +63,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             )}
             shouldFlipOnRTL={false}
             ariaLabel={t('more')}
+            data-testid="verse-actions-more"
           >
             <span className={cellStyles.icon}>
               <IconContainer

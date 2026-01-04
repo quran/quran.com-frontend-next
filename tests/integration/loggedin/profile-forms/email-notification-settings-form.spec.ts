@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import {
@@ -9,6 +7,7 @@ import {
   getSaveButton,
 } from './email-notification-settings-form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -16,7 +15,16 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
+
+const isNovuConfigured = [
+  process.env.NEXT_PUBLIC_NOVU_BACKEND_URL,
+  process.env.NEXT_PUBLIC_NOVU_SOCKET_URL,
+  process.env.NEXT_PUBLIC_NOVU_APP_ID,
+].every((value) => typeof value === 'string' && value.trim().length > 0);
+
+test.skip(!isNovuConfigured, 'Novu env vars are missing');
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@email-notification-settings'];
 

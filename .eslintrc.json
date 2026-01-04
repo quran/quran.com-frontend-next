@@ -204,6 +204,13 @@
       }
     },
     {
+      "files": ["tests/**/*.{ts,tsx,js}"],
+      "rules": {
+        "react-func/max-lines-per-function": "off",
+        "max-lines": "off"
+      }
+    },
+    {
       "files": ["remotion/*.{ts,tsx}"],
       "extends": ["plugin:@remotion/recommended"]
     }
