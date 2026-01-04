@@ -1,6 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 /**
  * Gets the test user password from environment variable
@@ -18,7 +18,7 @@ export const getTestUserPassword = (): string => {
  * @returns {Locator} The change password section locator
  */
 export const getChangePasswordSection = (page: Page): Locator => {
-  return page.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.CHANGE_PASSWORD_SECTION);
+  return page.getByTestId(TestId.AUTH_UPDATE_PROFILE_CHANGE_PASSWORD_SECTION);
 };
 
 /**
@@ -28,11 +28,11 @@ export const getChangePasswordSection = (page: Page): Locator => {
  */
 export const getFormInputs = (section: Locator) => {
   const currentPasswordInput = section.getByTestId(
-    TEST_IDS.AUTH.UPDATE_PROFILE.CURRENT_PASSWORD_INPUT,
+    TestId.AUTH_UPDATE_PROFILE_CURRENT_PASSWORD_INPUT,
   );
-  const newPasswordInput = section.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.NEW_PASSWORD_INPUT);
+  const newPasswordInput = section.getByTestId(TestId.AUTH_UPDATE_PROFILE_NEW_PASSWORD_INPUT);
   const confirmPasswordInput = section.getByTestId(
-    TEST_IDS.AUTH.UPDATE_PROFILE.CONFIRM_NEW_PASSWORD_INPUT,
+    TestId.AUTH_UPDATE_PROFILE_CONFIRM_NEW_PASSWORD_INPUT,
   );
 
   return {
@@ -56,7 +56,7 @@ export const getFormInputs = (section: Locator) => {
  * @returns {Locator} The password validation section locator
  */
 export const getPasswordValidation = (section: Locator): Locator => {
-  return section.getByTestId(TEST_IDS.FORM_BUILDER.VALIDATION_ERRORS);
+  return section.getByTestId(TestId.PASSWORD_VALIDATION);
 };
 
 /**

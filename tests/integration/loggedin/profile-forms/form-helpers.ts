@@ -8,8 +8,19 @@ import { expect, type Locator, type Page } from '@playwright/test';
  */
 export const fillAndBlur = async (input: Locator, value: string): Promise<void> => {
   await input.clear();
-  await input.fill(value);
+  await input.fill(value, { force: true });
   await input.blur();
+};
+
+/**
+ * Enables form validation by clicking the save button
+ * @param {Page} page - The Playwright page object
+ * @param {Locator} saveButton - The save button locator
+ * @returns {Promise<void>}
+ */
+export const enableValidation = async (page: Page, saveButton: Locator): Promise<void> => {
+  await saveButton.click({ force: true });
+  await page.waitForTimeout(500);
 };
 
 /**

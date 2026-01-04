@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -16,7 +16,6 @@ import PageContainer from '@/components/PageContainer';
 import commonStyles from '@/pages/contentPage.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const path = '/developers';
 const DevelopersPage: NextPage = () => {
@@ -133,7 +132,5 @@ const DevelopersPage: NextPage = () => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/developers');
 
 export default DevelopersPage;
