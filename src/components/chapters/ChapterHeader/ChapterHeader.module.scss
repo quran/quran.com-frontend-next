@@ -246,9 +246,30 @@ $bismillahSvgInlineSizeMobile: 148px;
   min-block-size: calc(3.75 * var(--spacing-medium));
 }
 
-.surahInfoHeader {
-  font-size: var(--font-size-large2);
+.surahInfoTitle {
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-large2);
+}
+
+.surahInfoContent {
+  @include breakpoints.smallerThanTablet {
+    overflow-y: auto;
+  }
+}
+
+// Need div to get higher specificity
+div {
+  &.surahInfoHeader {
+    @include breakpoints.smallerThanTablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      block-size: calc(2 * var(--spacing-mega));
+      padding-block: 0;
+    }
+  }
 }
 
 .chapterIconContainer {
