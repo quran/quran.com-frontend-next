@@ -115,7 +115,6 @@ export const getSearchNavigationResult = (
 ): SearchNavigationResult => {
   const { key, isArabic, isTransliteration } = result;
   const resultType = getResultType(result);
-  const resultSuffix = getResultSuffix(resultType, key as string, locale, chaptersData);
   let returnedResult = {
     isTransliteration,
     isArabic,
@@ -206,7 +205,7 @@ export const getSearchNavigationResult = (
     ...returnedResult,
     arabic: result.arabic,
     resultType: returnedResult.resultType,
-    name: `${returnedResult.name} ${resultSuffix}`,
+    name: returnedResult.name,
   };
 };
 
