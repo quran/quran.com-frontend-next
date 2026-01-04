@@ -13,6 +13,20 @@ test.describe.configure({ mode: 'serial' });
 let homePage: Homepage;
 let audioUtilities: AudioUtilities;
 
+test.beforeEach(async ({ page, context, isMobile }) => {
+  test.skip(isMobile, 'Repeat audio tests does not need to run on mobile devices');
+
+  homePage = new Homepage(page, context);
+  audioUtilities = new AudioUtilities(page);
+
+  await Promise.all([
+    homePage.goTo('/75'),
+    page.waitForRequest(
+      (request) => request.url().includes('/preferences') && request.method() === 'GET',
+    ),
+  ]);
+});
+
 // Setup: Set some values for the repeat modal on surah 75 so that
 // they are saved in the DB for the logged in user
 test(
