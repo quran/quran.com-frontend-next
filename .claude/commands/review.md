@@ -22,22 +22,16 @@ Review PR(s) using the comprehensive review guidelines.
 
 Before reviewing, check if this PR has been previously reviewed:
 
-1. **Fetch previous reviews:**
+1. **Fetch previous reviews and comments:**
 
    ```bash
-   gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/reviews --jq '.[] | {user: .user.login, state: .state, submitted_at: .submitted_at}'
+   gh pr view {PR_NUMBER} --json reviews,comments
    ```
 
-2. **Fetch previous review comments:**
-
-   ```bash
-   gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/comments --jq '.[] | {user: .user.login, body: .body, path: .path, created_at: .created_at}'
-   ```
-
-3. **If previous reviews exist:**
-   - Summarize previous review status (approved, changes requested, commented)
+2. **If previous reviews exist:**
+   - Summarize previous review status (APPROVED, CHANGES_REQUESTED, COMMENTED)
    - List key issues raised in previous reviews
-   - Check commits since last review: `gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/commits`
+   - Check commits since last review: `gh pr view {PR_NUMBER} --json commits`
    - Focus on:
      - Whether previous feedback was addressed
      - New changes introduced since last review
