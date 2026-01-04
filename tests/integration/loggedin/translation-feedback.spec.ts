@@ -19,7 +19,7 @@ const openTranslationFeedbackModal = async (
   if (mode === 'translation') {
     // Open verse actions menu from translation view
     const verse = page.getByTestId(`verse-${verseKey}`);
-    const moreButton = verse.getByLabel('More');
+    const moreButton = verse.getByTestId('verse-actions-more');
     await expect(moreButton).toBeVisible();
     await moreButton.click();
   } else {
@@ -29,7 +29,7 @@ const openTranslationFeedbackModal = async (
 
     // Open More submenu (handles both mobile button and desktop menuitem)
     const moreMenuitem = page.getByTestId('verse-actions-menu-more');
-    const moreButton = page.getByLabel('More');
+    const moreButton = page.getByTestId('verse-actions-more');
 
     await Promise.race([moreMenuitem.click(), moreButton.click()]);
   }
@@ -82,7 +82,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
       await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
 
-      // As per spec when there is only one translation, that should be selected by default
+      // As per spec when there is only one translation in user's preferences, that should be selected by default
       await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
@@ -106,7 +106,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await expect(page.getByTestId('translation-feedback-textarea')).toBeVisible();
       await expect(page.getByTestId('translation-feedback-submit-button')).toBeVisible();
 
-      // As per spec when there is only one translation, that should be selected by default
+      // As per spec when there is only one translation in user's preferences, that should be selected by default
       await expect(page.getByTestId('translation-preview-131')).toBeVisible();
     },
   );
@@ -131,6 +131,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Open the popover to see options
       await translationSelect.click();
 
+      // Should have at least one translation option (from user preferences)
+      // Note: Exact options depend on user's selected translations
       const options = page.getByTestId(/translation-select-option-/);
       await expect(options).toHaveCount(3);
     },
@@ -153,7 +155,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
       const reportButton = page.getByTestId('translation-feedback-submit-button');
       await reportButton.click();
 
-      // Verify both fields should show validation errors, no translation should be default selected
+      // Verify both fields should show validation errors, user has 3 translations in their preferences so no translation should be default selected
       await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
       await expect(page.getByTestId('feedback-error-required-field')).toBeVisible();
 
