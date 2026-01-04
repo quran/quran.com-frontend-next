@@ -2,6 +2,7 @@
 
 $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
+$line-height-relaxed: 1.6;
 
 .headerContainer {
   display: flex;
@@ -10,6 +11,11 @@ $container-min-height: 200px;
   padding-block: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
   border-block-end: 1px solid var(--color-borders-hairline);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(2 * var(--spacing-small));
+    margin-block-end: calc(2 * var(--spacing-small));
+  }
 }
 
 .calligraphyContainer {
@@ -26,10 +32,12 @@ $container-min-height: 200px;
 .surahName {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
 }
 
 .detailsContainer {
   display: flex;
+  color: var(--color-text-default-new);
   font-size: var(--font-size-normal);
   gap: var(--spacing-medium);
 }
@@ -43,22 +51,31 @@ $container-min-height: 200px;
 
 .detailHeader {
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
 }
 
 .descriptionContainer {
+  color: var(--color-text-default-new);
+
+  p,
+  h2,
+  h3,
+  li,
+  em {
+    line-height: $line-height-relaxed;
+  }
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-max);
   }
 
   p {
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   h2,
   h3 {
     font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   em {
@@ -74,7 +91,6 @@ $container-min-height: 200px;
 
   li {
     display: list-item;
-    line-height: normal;
     margin-block-end: var(--spacing-xxsmall);
   }
 }
