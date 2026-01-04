@@ -32,5 +32,7 @@ $playChapterAudioButtonMinInlineSize: 95px;
     @include customButton;
     min-inline-size: $playChapterAudioButtonMinInlineSize;
     font-size: var(--font-size-small);
+    padding-inline: var(--spacing-small-px);
+    white-space: nowrap;
   }
 }
