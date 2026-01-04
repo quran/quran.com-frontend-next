@@ -15,17 +15,9 @@
  * When modifying: ensure compatibility with ContentModal.tsx.
  */
 
-/* eslint-disable max-lines, react/no-multi-comp */
+/* eslint-disable react/no-multi-comp */
 
-import React, {
-  useCallback,
-  useRef,
-  useState,
-  createContext,
-  useContext,
-  useMemo,
-  forwardRef,
-} from 'react';
+import * as React from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 // This dependency already exists via @radix-ui/react-dialog so we have not added any new package.
@@ -35,6 +27,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import omit from '@/utils/object';
+import mergeRefs from '@/utils/react';
 
 // Sneakily less than the CSS transition duration to avoid any visual glitches.
 const ANIMATION_DURATION = 380;
@@ -54,10 +47,10 @@ interface FakeContentModalContextValue {
   onPointerDownOutside: (event: React.PointerEvent<HTMLDivElement>) => void;
 }
 
-const FakeContentModalContext = createContext<FakeContentModalContextValue | null>(null);
+const FakeContentModalContext = React.createContext<FakeContentModalContextValue | null>(null);
 
-const useFakeContentModal = () => {
-  const context = useContext(FakeContentModalContext);
+export const useFakeContentModal = () => {
+  const context = React.useContext(FakeContentModalContext);
   if (!context) throw new Error('useFakeContentModal must be used within a FakeContentRoot');
   return context;
 };
@@ -66,15 +59,15 @@ interface FakeContentRootProps extends Dialog.DialogProps {
   onClose?: () => void;
 }
 
-const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
-  const overlayRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+export const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
+  const overlayRef = React.useRef<HTMLDivElement | null>(null);
+  const contentRef = React.useRef<HTMLDivElement | null>(null);
 
-  const [isOpen, setIsOpen] = useState(true);
-  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
+  const [isAnimatingOut, setIsAnimatingOut] = React.useState(false);
   const setSafeTimeout = useSafeTimeout();
 
-  const handleClose = useCallback(() => {
+  const handleClose = React.useCallback(() => {
     setIsAnimatingOut(true);
     setIsOpen(false);
     if (onClose) onClose();
@@ -88,7 +81,7 @@ const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
 
   usePreventBodyScrolling(isVisible);
 
-  const onPointerDownOutside = useCallback(
+  const onPointerDownOutside = React.useCallback(
     (event: React.PointerEvent<HTMLDivElement>) => {
       const target = event.target as Node;
       if (event.button !== 0) return;
@@ -101,7 +94,7 @@ const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
   // Using 'fake-open' (instead of 'open') as the data-state to prevent entry animation
   const dataState = isOpen ? 'fake-open' : 'closed';
 
-  const value: FakeContentModalContextValue = useMemo(
+  const value: FakeContentModalContextValue = React.useMemo(
     () => ({
       overlayRef,
       contentRef,
@@ -126,9 +119,12 @@ const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
   );
 };
 
-const FakeContentPortal = ({ children }: Dialog.DialogPortalProps) => children;
+FakeContentRoot.displayName = 'FakeContentRoot';
 
-const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>(
+export const FakeContentPortal = ({ children }: Dialog.DialogPortalProps) => children;
+FakeContentPortal.displayName = 'FakeContentPortal';
+
+export const FakeContentOverlay = React.forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>(
   ({ children, ...props }, ref) => {
     const { overlayRef, isVisible, dataState, onPointerDownOutside } = useFakeContentModal();
 
@@ -139,15 +135,7 @@ const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>
         role="dialog"
         aria-modal={isVisible}
         data-state={dataState}
-        ref={(node) => {
-          overlayRef.current = node;
-          if (typeof ref === 'function') {
-            ref(node);
-          } else if (ref) {
-            // eslint-disable-next-line no-param-reassign
-            ref.current = node;
-          }
-        }}
+        ref={mergeRefs(overlayRef, ref)}
       >
         {children}
       </div>
@@ -157,7 +145,7 @@ const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>
 
 FakeContentOverlay.displayName = 'FakeContentOverlay';
 
-const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>(
+export const FakeContentContent = React.forwardRef<HTMLDivElement, Dialog.DialogContentProps>(
   ({ children, onEscapeKeyDown, ...props }, ref) => {
     const { dataState, handleClose, isVisible, contentRef } = useFakeContentModal();
 
@@ -171,7 +159,7 @@ const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>
       'onOpenAutoFocus',
     ]) as unknown as React.ComponentProps<'div'>;
 
-    const hotKeyCallback = useCallback(
+    const hotKeyCallback = React.useCallback(
       (keyboardEvent: KeyboardEvent) => {
         handleClose();
         onEscapeKeyDown?.(keyboardEvent);
@@ -183,19 +171,7 @@ const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>
 
     return (
       <FocusScope loop trapped>
-        <div
-          {...filteredProps}
-          data-state={dataState}
-          ref={(node) => {
-            contentRef.current = node;
-            if (typeof ref === 'function') {
-              ref(node);
-            } else if (ref) {
-              // eslint-disable-next-line no-param-reassign
-              ref.current = node;
-            }
-          }}
-        >
+        <div {...filteredProps} data-state={dataState} ref={mergeRefs(contentRef, ref)}>
           {children}
         </div>
       </FocusScope>
@@ -205,7 +181,7 @@ const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>
 
 FakeContentContent.displayName = 'FakeContentContent';
 
-const FakeContentClose = ({ children, ...props }: Dialog.DialogCloseProps) => {
+export const FakeContentClose = ({ children, ...props }: Dialog.DialogCloseProps) => {
   const { handleClose } = useFakeContentModal();
 
   /**
@@ -223,12 +199,4 @@ const FakeContentClose = ({ children, ...props }: Dialog.DialogCloseProps) => {
   });
 
   return <div {...filteredProps}>{childrenWithProps}</div>;
-};
-
-export {
-  FakeContentRoot,
-  FakeContentPortal,
-  FakeContentOverlay,
-  FakeContentContent,
-  FakeContentClose,
 };
