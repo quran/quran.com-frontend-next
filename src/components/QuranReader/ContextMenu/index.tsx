@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 
-import ReadingPreferenceSwitcher, {
-  ReadingPreferenceSwitcherType,
-} from '../ReadingPreferenceSwitcher';
+import ReadingPreferenceSwitcher from '../ReadingPreferenceSwitcher';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
 import ChapterNavigation from './components/ChapterNavigation';
 import MobileReadingTabs from './components/MobileReadingTabs';
 import PageInfo from './components/PageInfo';
+import SettingsButton from './components/SettingsButton';
 import ProgressBar from './components/ProgressBar';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
 import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
+import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
@@ -53,6 +53,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     return null;
   }
 
+  const isMobileView = useMemo(() => isMobile(), []);
   const isMobileScrolledView = !showNavbar && isMobile();
   const isNotMobileOrScrolledView = !showNavbar || !isMobile();
 
@@ -116,12 +117,17 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
             [styles.hideReadingPreferenceSectionOnMobile]: showNavbar,
           })}
         >
-          <ReadingPreferenceSwitcher
-            isIconsOnly={isMobileScrolledView}
-            size={SwitchSize.XSmall}
-            type={ReadingPreferenceSwitcherType.ContextMenu}
-            variant={SwitchVariant.Alternative}
-          />
+          <div className={styles.readingPreferenceContainer}>
+            <ReadingPreferenceSwitcher
+              isIconsOnly={isMobileScrolledView}
+              size={SwitchSize.XSmall}
+              type={SwitcherContext.ContextMenu}
+              variant={SwitchVariant.Alternative}
+            />
+            {(!isMobileView || !showNavbar) && (
+              <SettingsButton className={styles.settingsNextToSwitcher} />
+            )}
+          </div>
         </div>
       </div>
 
