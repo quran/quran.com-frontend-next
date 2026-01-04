@@ -37,6 +37,7 @@ export enum TestId {
   END_OF_SCROLLING_CONTROLS = 'end-of-scrolling-controls',
   EXPLORE_TOPICS_CONTAINER = 'explore-topics-container',
   FOOTNOTE_CONTENT = 'footnote-content',
+  FORM_BUILDER_VALIDATION_ERRORS = 'form-builder-validation-errors',
   HEADER = 'header',
   INCREMENT_BUTTON = 'increment-button',
   JUZ_BUTTON = 'juz-button',

@@ -10,7 +10,7 @@ import { FormBuilderFieldRule } from '@/components/FormBuilder/FormBuilderTypes'
 import IconContainer from '@/dls/IconContainer/IconContainer';
 import CheckIcon from '@/icons/checkmark-icon.svg';
 import CloseIcon from '@/icons/close-icon.svg';
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 interface Props {
   error: MultipleFieldErrors;
@@ -38,7 +38,7 @@ const ValidationErrors: FC<Props> = ({ error, rules }) => {
   return (
     <div
       className={styles.validationErrors}
-      data-testid={TEST_IDS.FORM_BUILDER.VALIDATION_ERRORS}
+      data-testid={TestId.FORM_BUILDER_VALIDATION_ERRORS}
       aria-live="polite"
     >
       {validationRules.map(({ rule, isValid, key }) => (
