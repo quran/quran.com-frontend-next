@@ -70,10 +70,11 @@ const useReadingPreferenceSwitcher = ({
       if (context === SwitcherContext.SurahHeader) {
         // In SurahHeader, user is at the top of the page, so remove startingVerse
         delete newQueryParams.startingVerse;
-      } else if (lastReadVerse) {
+      } else {
         // For ContextMenu and MobileTabs, always set startingVerse to ensure
-        // the virtualized scroll hooks navigate to the correct verse/page
-        newQueryParams.startingVerse = lastReadVerse;
+        // the virtualized scroll hooks navigate to the correct verse/page.
+        // Default to verse 1 if no verse has been tracked yet.
+        newQueryParams.startingVerse = lastReadVerse || '1';
       }
 
       const newUrlObject = {
@@ -81,10 +82,7 @@ const useReadingPreferenceSwitcher = ({
         query: newQueryParams,
       };
 
-      // Update URL with shallow routing (no page reload), then update Redux state.
-      // The useScrollToVirtualizedVerse hooks in ReadingView/TranslationView
-      // will handle scrolling to the correct position based on startingVerse.
-      router.replace(newUrlObject, null, { shallow: true, scroll: false }).then(() => {
+      const updateReduxState = () => {
         onSettingsChange(
           'readingPreference',
           newPreference,
@@ -92,7 +90,15 @@ const useReadingPreferenceSwitcher = ({
           setReadingPreference(readingPreference),
           PreferenceGroup.READING,
         );
-      });
+      };
+
+      // Update URL with shallow routing (no page reload), then update Redux state.
+      // The useScrollToVirtualizedVerse hooks in ReadingView/TranslationView
+      // will handle scrolling to the correct position based on startingVerse.
+      router
+        .replace(newUrlObject, null, { shallow: true, scroll: false })
+        .then(updateReduxState)
+        .catch(updateReduxState); // Still update Redux if router fails to keep UI in sync
     },
     [context, lastReadVerse, onSettingsChange, readingPreference, router],
   );
