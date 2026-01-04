@@ -8,6 +8,7 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
+import * as FakeContentModal from '@/dls/ContentModal/FakeContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import CloseIcon from '@/icons/close.svg';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
@@ -38,10 +39,44 @@ type ContentModalProps = {
   shouldBeFullScreen?: boolean;
   zIndexVariant?: ZIndexVariant;
   isBottomSheetOnMobile?: boolean;
+  isFakeSEOFriendlyMode?: boolean;
 };
 
 const SCROLLBAR_WIDTH = 15;
 
+/**
+ * IMPORTANT: FakeContentModal Compatibility Notice
+ *
+ * This component supports a "fake" mode (via `isFakeSEOFriendlyMode` prop) that uses FakeContentModal
+ * components instead of Radix UI Dialog primitives. FakeContentModal exists for SEO purposes:
+ * it renders modal content directly in the DOM (so search engines can index it) while still
+ * looking and behaving like a modal for users. See FakeContentModal.tsx for details.
+ *
+ * When making changes to this component, please consider the following:
+ *
+ * 1. **Behavioral Changes**: If you're modifying open/close behavior, adding refs, or changing
+ *    callbacks related to how ContentModal works (not styling), you may need to update
+ *    FakeContentModal.tsx accordingly. Check existing uses of FakeContentModal to ensure
+ *    compatibility.
+ *
+ * 2. **Props Filtering**: FakeContentModal omits certain behavioral props (like onEscapeKeyDown,
+ *    onPointerDownOutside, onOpenAutoFocus) because it handles these internally. If you add
+ *    new behavioral callbacks, consider whether they should be omitted in FakeContentContent
+ *    to avoid breaking functionality or adding unnecessary side effects.
+ *
+ * 3. **Styling Changes**: Styling-related changes (className props, CSS modules) are generally
+ *    safe and don't require FakeContentModal updates.
+ *
+ * 4. **SEO Considerations**: If you change the DOM structure or styling in ways that affect
+ *    how search engines see the content, ensure FakeContentModal maintains the same structure
+ *    to preserve SEO benefits.
+ *
+ * 5. **Testing**: When adding new props or behaviors, test with both `isFakeSEOFriendlyMode={false}` and
+ *    `isFakeSEOFriendlyMode={true}` to ensure both implementations work correctly.
+ *
+ * See FakeContentModal.tsx for implementation details and current prop filtering logic.
+ * @returns {React.ReactNode}
+ */
 const ContentModal = ({
   isOpen,
   onClose,
@@ -62,6 +97,7 @@ const ContentModal = ({
   shouldBeFullScreen = false,
   zIndexVariant,
   isBottomSheetOnMobile = true,
+  isFakeSEOFriendlyMode: isFake = false,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -110,19 +146,26 @@ const ContentModal = ({
     contentRef.current?.focus({ preventScroll: true });
   }, []);
 
+  const Root = isFake ? FakeContentModal.FakeContentRoot : Dialog.Root;
+  const Portal = isFake ? FakeContentModal.FakeContentPortal : Dialog.Portal;
+  const Overlay = isFake ? FakeContentModal.FakeContentOverlay : Dialog.Overlay;
+  const Content = isFake ? FakeContentModal.FakeContentContent : Dialog.Content;
+  const Close = isFake ? FakeContentModal.FakeContentClose : Dialog.Close;
+
   return (
-    <Dialog.Root open={isOpen}>
-      <Dialog.Portal>
-        <Dialog.Overlay
+    <Root open={isOpen} onClose={onClose}>
+      <Portal>
+        <Overlay
+          ref={overlayRef}
+          data-is-fake-seo-friendly-mode={isFake}
           className={classNames(styles.overlay, overlayClassName, {
             [styles.fullScreen]: shouldBeFullScreen,
             [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
             [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
             [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
           })}
-          ref={overlayRef}
         >
-          <Dialog.Content
+          <Content
             {...(onClick && { onClick })}
             ref={contentRef}
             className={classNames(styles.contentWrapper, contentClassName, {
@@ -138,7 +181,7 @@ const ContentModal = ({
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>
                 {hasCloseButton && (
-                  <Dialog.Close className={classNames(styles.closeIcon, closeIconClassName)}>
+                  <Close className={classNames(styles.closeIcon, closeIconClassName)}>
                     <Button
                       variant={ButtonVariant.Ghost}
                       shape={ButtonShape.Circle}
@@ -146,7 +189,7 @@ const ContentModal = ({
                     >
                       <CloseIcon />
                     </Button>
-                  </Dialog.Close>
+                  </Close>
                 )}
                 {header}
               </div>
@@ -158,10 +201,10 @@ const ContentModal = ({
             >
               {children}
             </div>
-          </Dialog.Content>
-        </Dialog.Overlay>
-      </Dialog.Portal>
-    </Dialog.Root>
+          </Content>
+        </Overlay>
+      </Portal>
+    </Root>
   );
 };
 export default ContentModal;

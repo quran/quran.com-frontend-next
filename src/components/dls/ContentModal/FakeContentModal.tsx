@@ -1,81 +1,78 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+/**
+ * FakeContentModal - SEO-oriented alternative to ContentModal
+ *
+ * Renders modal content directly in the DOM (for SEO crawlers) while maintaining modal appearance
+ * and behavior. Avoids portals but provides focus trapping and keyboard navigation. Reuses
+ * ContentModal styles and DOM structure.
+ *
+ * Use only for SEO-critical content. For regular modals, use ContentModal instead.
+ *
+ * Unlike ContentModal, FakeContentModal cannot be controlled externally (no open/close props).
+ * Renders open by default, closes via internal interaction only (ESC, outside click, close button).
+ *
+ * For external control (not recommended): use useFakeContentModal hook.
+ *
+ * When modifying: ensure compatibility with ContentModal.tsx.
+ */
 
+/* eslint-disable max-lines, react/no-multi-comp */
+
+import React, {
+  useCallback,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+  useMemo,
+  forwardRef,
+} from 'react';
+
+import * as Dialog from '@radix-ui/react-dialog';
 // This dependency already exists via @radix-ui/react-dialog so we have not added any new package.
 import { FocusScope } from '@radix-ui/react-focus-scope';
-import classNames from 'classnames';
+import { useHotkeys } from 'react-hotkeys-hook';
 
-import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
-
-import styles from './ContentModal.module.scss';
-
-import { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
-import CloseIcon from '@/icons/close.svg';
-
-type FakeContentModalProps = {
-  children: React.ReactNode;
-  onClose?: () => void;
-  hasCloseButton?: boolean;
-  hasHeader?: boolean;
-  header?: React.ReactNode;
-  overlayClassName?: string;
-  contentClassName?: string;
-  innerContentClassName?: string;
-  closeIconClassName?: string;
-  headerClassName?: string;
-  size?: ContentModalSize;
-  isFixedHeight?: boolean;
-  shouldBeFullScreen?: boolean;
-  isBottomSheetOnMobile?: boolean;
-};
+import omit from '@/utils/object';
 
 // Sneakily less than the CSS transition duration to avoid any visual glitches.
 const ANIMATION_DURATION = 380;
 
-/**
- * FakeContentModal is a lightweight, SEO-oriented version of `ContentModal`.
- *
- * It intentionally reuses the same styles and a similar DOM structure as `ContentModal`,
- * but avoids depending on the full modal implementation (e.g. portals) while still
- * providing essential accessibility features like focus trapping for a better user
- * experience. This keeps the content in the DOM for SEO crawlers while ensuring
- * keyboard navigation works properly when needed.
- *
- * Use this component only in places where we need modal-like styling/markup for content
- * that is primarily rendered for search engines or non-interactive views. For regular,
- * interactive modals in the app, always prefer `ContentModal` instead.
- *
- * If the public structure or styling contract of `ContentModal` changes in ways that
- * are important for SEO, make sure to review and update this "fake" counterpart to keep
- * the rendered HTML consistent where required.
- *
- * @returns {JSX.Element} The rendered FakeContentModal component
- */
-const FakeContentModal = ({
-  onClose,
-  hasCloseButton = true,
-  children,
-  header,
-  overlayClassName,
-  contentClassName,
-  innerContentClassName,
-  closeIconClassName,
-  headerClassName,
-  size = ContentModalSize.MEDIUM,
-  isFixedHeight,
-  hasHeader = true,
-  shouldBeFullScreen = false,
-  isBottomSheetOnMobile = true,
-}: FakeContentModalProps) => {
+interface FakeContentModalContextValue {
+  overlayRef: React.MutableRefObject<HTMLDivElement | null>;
+  contentRef: React.MutableRefObject<HTMLDivElement | null>;
+
+  isOpen: boolean;
+  isAnimatingOut: boolean;
+  isVisible: boolean;
+  dataState: string;
+
+  setIsAnimatingOut: (value: boolean) => void;
+  setIsOpen: (value: boolean) => void;
+  handleClose: () => void;
+  onPointerDownOutside: (event: React.PointerEvent<HTMLDivElement>) => void;
+}
+
+const FakeContentModalContext = createContext<FakeContentModalContextValue | null>(null);
+
+const useFakeContentModal = () => {
+  const context = useContext(FakeContentModalContext);
+  if (!context) throw new Error('useFakeContentModal must be used within a FakeContentRoot');
+  return context;
+};
+
+interface FakeContentRootProps extends Dialog.DialogProps {
+  onClose?: () => void;
+}
+
+const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => {
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
   const [isOpen, setIsOpen] = useState(true);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const setSafeTimeout = useSafeTimeout();
-
-  const isVisible = isOpen || isAnimatingOut;
-
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const handleClose = useCallback(() => {
     setIsAnimatingOut(true);
@@ -87,77 +84,151 @@ const FakeContentModal = ({
     }, ANIMATION_DURATION);
   }, [onClose, setSafeTimeout]);
 
+  const isVisible = isOpen || isAnimatingOut;
+
   usePreventBodyScrolling(isVisible);
 
-  const onPointerDownOutside = (event: React.PointerEvent<HTMLDivElement>) => {
-    const target = event.target as Node;
-    if (event.button !== 0) return;
-    if (contentRef.current?.contains(target)) return;
-    handleClose();
-  };
+  const onPointerDownOutside = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      const target = event.target as Node;
+      if (event.button !== 0) return;
+      if (contentRef.current?.contains(target)) return;
+      handleClose();
+    },
+    [handleClose],
+  );
 
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') handleClose();
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [handleClose]);
-
-  if (!isVisible) return null;
+  // Using 'fake-open' (instead of 'open') as the data-state to prevent entry animation
   const dataState = isOpen ? 'fake-open' : 'closed';
 
+  const value: FakeContentModalContextValue = useMemo(
+    () => ({
+      overlayRef,
+      contentRef,
+
+      isOpen,
+      isAnimatingOut,
+      isVisible,
+      dataState,
+
+      setIsAnimatingOut,
+      setIsOpen,
+      handleClose,
+      onPointerDownOutside,
+    }),
+    [isOpen, isAnimatingOut, isVisible, dataState, handleClose, onPointerDownOutside],
+  );
+
+  if (!isVisible) return null;
+
   return (
-    <FocusScope loop trapped>
+    <FakeContentModalContext.Provider value={value}>{children}</FakeContentModalContext.Provider>
+  );
+};
+
+const FakeContentPortal = ({ children }: Dialog.DialogPortalProps) => children;
+
+const FakeContentOverlay = forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>(
+  ({ children, ...props }, ref) => {
+    const { overlayRef, isVisible, dataState, onPointerDownOutside } = useFakeContentModal();
+
+    return (
       <div
-        ref={overlayRef}
+        {...props}
         onPointerDown={onPointerDownOutside}
         role="dialog"
         aria-modal={isVisible}
         data-state={dataState}
-        className={classNames(styles.overlay, overlayClassName, {
-          [styles.fullScreen]: shouldBeFullScreen,
-        })}
+        ref={(node) => {
+          overlayRef.current = node;
+          if (typeof ref === 'function') {
+            ref(node);
+          } else if (ref) {
+            // eslint-disable-next-line no-param-reassign
+            ref.current = node;
+          }
+        }}
       >
-        <div
-          ref={contentRef}
-          data-state={dataState}
-          className={classNames(styles.contentWrapper, contentClassName, {
-            [styles.small]: size === ContentModalSize.SMALL,
-            [styles.medium]: size === ContentModalSize.MEDIUM,
-            [styles.autoHeight]: !isFixedHeight,
-            [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
-          })}
-        >
-          {hasHeader && (
-            <div className={classNames(styles.header, headerClassName)}>
-              {hasCloseButton && (
-                <div className={classNames(styles.closeIcon, closeIconClassName)}>
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    shape={ButtonShape.Circle}
-                    data-testid="modal-close-button"
-                    onClick={handleClose}
-                  >
-                    <CloseIcon />
-                  </Button>
-                </div>
-              )}
-              {header}
-            </div>
-          )}
-
-          <div
-            className={classNames(styles.content, innerContentClassName)}
-            data-testid="modal-content"
-          >
-            {children}
-          </div>
-        </div>
+        {children}
       </div>
-    </FocusScope>
-  );
+    );
+  },
+);
+
+FakeContentOverlay.displayName = 'FakeContentOverlay';
+
+const FakeContentContent = forwardRef<HTMLDivElement, Dialog.DialogContentProps>(
+  ({ children, onEscapeKeyDown, ...props }, ref) => {
+    const { dataState, handleClose, isVisible, contentRef } = useFakeContentModal();
+
+    /**
+     * Omit Radix UI behavioral props - handled internally by FakeContentModal.
+     * onEscapeKeyDown uses react-hotkeys-hook, onPointerDownOutside is in FakeContentOverlay,
+     * onOpenAutoFocus not needed (no Radix focus management).
+     */
+    const filteredProps = omit(props, [
+      'onPointerDownOutside',
+      'onOpenAutoFocus',
+    ]) as unknown as React.ComponentProps<'div'>;
+
+    const hotKeyCallback = useCallback(
+      (keyboardEvent: KeyboardEvent) => {
+        handleClose();
+        onEscapeKeyDown?.(keyboardEvent);
+      },
+      [handleClose, onEscapeKeyDown],
+    );
+
+    useHotkeys('Escape', hotKeyCallback, { enabled: isVisible, enableOnFormTags: true });
+
+    return (
+      <FocusScope loop trapped>
+        <div
+          {...filteredProps}
+          data-state={dataState}
+          ref={(node) => {
+            contentRef.current = node;
+            if (typeof ref === 'function') {
+              ref(node);
+            } else if (ref) {
+              // eslint-disable-next-line no-param-reassign
+              ref.current = node;
+            }
+          }}
+        >
+          {children}
+        </div>
+      </FocusScope>
+    );
+  },
+);
+
+FakeContentContent.displayName = 'FakeContentContent';
+
+const FakeContentClose = ({ children, ...props }: Dialog.DialogCloseProps) => {
+  const { handleClose } = useFakeContentModal();
+
+  /**
+   * Inject handleClose into children to ensure proper animation state management
+   * and call the developer-provided onClose callback.
+   */
+  const filteredProps = omit(props, ['onClick']) as unknown as React.ComponentProps<'div'>;
+
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement<React.ComponentProps<'button'>>(child, { onClick: handleClose });
+    }
+
+    return child;
+  });
+
+  return <div {...filteredProps}>{childrenWithProps}</div>;
 };
 
-export default FakeContentModal;
+export {
+  FakeContentRoot,
+  FakeContentPortal,
+  FakeContentOverlay,
+  FakeContentContent,
+  FakeContentClose,
+};
