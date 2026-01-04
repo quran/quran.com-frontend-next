@@ -367,6 +367,28 @@
   box-shadow: 0 6px 16px rgba(34, 165, 173, 0.2);
 }
 
+@include breakpoints.smallerThanTablet {
+  .filters {
+    margin-block-end: var(--spacing-small);
+  }
+
+  .pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: var(--spacing-xsmall);
+    padding-block: var(--spacing-xxsmall);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pill {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: var(--spacing-xxsmall) var(--spacing-medium);
+    font-size: var(--font-size-small);
+  }
+}
+
 .appCard {
   @extend .featuredCard;
 }
