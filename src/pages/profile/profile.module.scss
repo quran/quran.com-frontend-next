@@ -4,14 +4,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xlarge-px);
-}
-
-.topDivider {
-  display: none;
-  @include breakpoints.tablet {
-    display: block;
-    margin-block-end: var(--spacing-medium2-px);
-  }
   .divider {
     margin-block: var(--spacing-medium2-px);
   }
@@ -20,10 +12,19 @@
     flex-direction: column;
     gap: var(--spacing-medium2-px);
     .deleteAccountSectionDescription {
+      color: var(--color-text-default-new);
       font-size: var(--font-size-small-px);
       .deleteAccountSectionDescriptionTitle {
         font-weight: var(--font-weight-bold);
       }
     }
+  }
+}
+
+.topDivider {
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+    margin-block-end: var(--spacing-medium2-px);
   }
 }

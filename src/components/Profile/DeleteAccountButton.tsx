@@ -58,15 +58,22 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
       >
         {t('delete-account')}
       </Button>
-      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
+      <Modal
+        isOpen={isModalVisible}
+        onClickOutside={closeModal}
+        hasCloseButton
+        onClose={closeModal}
+      >
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
             <Modal.Subtitle>
-              <span className={styles.deleteAccountWarningTitle}>
-                {t('delete-account-warning-title')}:{' '}
-              </span>
-              {t('delete-confirmation.subtitle')}
+              <div className={styles.deleteAccountWarningContainer}>
+                <span className={styles.deleteAccountWarningTitle}>
+                  {t('delete-account-warning-title')}:{' '}
+                </span>
+                {t('delete-confirmation.subtitle')}
+              </div>
             </Modal.Subtitle>
 
             <p className={styles.instructionText}>

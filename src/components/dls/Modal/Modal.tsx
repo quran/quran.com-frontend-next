@@ -3,6 +3,8 @@ import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 
+import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
+
 import Action from './Action';
 import Body from './Body';
 import CloseAction from './CloseAction';
@@ -13,6 +15,7 @@ import styles from './Modal.module.scss';
 import Subtitle from './Subtitle';
 import Title from './Title';
 
+import CloseIcon from '@/icons/close.svg';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 
 type ModalProps = {
@@ -28,6 +31,8 @@ type ModalProps = {
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
   zIndexVariant?: ZIndexVariant;
+  hasCloseButton?: boolean;
+  onClose?: () => void;
 };
 
 const Modal = ({
@@ -43,6 +48,8 @@ const Modal = ({
   isInvertedOverlay = false,
   size,
   zIndexVariant,
+  hasCloseButton = false,
+  onClose,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     {trigger && (
@@ -71,6 +78,13 @@ const Modal = ({
         })}
         size={size}
       >
+        {hasCloseButton && (
+          <DialogPrimitive.Close className={styles.closeButton} onClick={onClose}>
+            <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+              <CloseIcon />
+            </Button>
+          </DialogPrimitive.Close>
+        )}
         {children}
       </Content>
     </DialogPrimitive.Portal>
