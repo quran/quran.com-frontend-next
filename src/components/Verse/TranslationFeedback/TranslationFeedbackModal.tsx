@@ -77,6 +77,7 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           isLoading={isSubmitting}
           size={ButtonSize.Small}
           className={styles.reportButton}
+          isDisabled={isSubmitting}
           data-testid="translation-feedback-submit-button"
         >
           {t('translation-feedback.report')}
