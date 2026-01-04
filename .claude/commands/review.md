@@ -1,11 +1,48 @@
-Review PR #$ARGUMENTS using the comprehensive review guidelines.
+Review PR(s) using the comprehensive review guidelines.
+
+## Arguments
+
+`$ARGUMENTS` can be:
+
+- Single PR: `2732`
+- Multiple PRs: `2732 2700 2699` (space-separated)
+- Multiple PRs: `2732,2700,2699` (comma-separated)
 
 ## Steps
 
+### For Each PR:
+
 1. Read the review prompt from `docs/REVIEW_PROMPT.md` for all criteria
-2. Fetch PR details: `gh pr view $ARGUMENTS --json title,body,files,additions,deletions,author`
-3. Fetch PR diff: `gh pr diff $ARGUMENTS`
+2. Fetch PR details: `gh pr view {PR_NUMBER} --json title,body,files,additions,deletions,author`
+3. Fetch PR diff: `gh pr diff {PR_NUMBER}`
 4. If files changed > 15, flag for potential split before deep review
+5. **Check for previous reviews** (see Re-review Protocol below)
+
+## Re-review Protocol
+
+Before reviewing, check if this PR has been previously reviewed:
+
+1. **Fetch previous reviews:**
+
+   ```bash
+   gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/reviews --jq '.[] | {user: .user.login, state: .state, submitted_at: .submitted_at}'
+   ```
+
+2. **Fetch previous review comments:**
+
+   ```bash
+   gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/comments --jq '.[] | {user: .user.login, body: .body, path: .path, created_at: .created_at}'
+   ```
+
+3. **If previous reviews exist:**
+   - Summarize previous review status (approved, changes requested, commented)
+   - List key issues raised in previous reviews
+   - Check commits since last review: `gh api repos/{owner}/{repo}/pulls/{PR_NUMBER}/commits`
+   - Focus on:
+     - Whether previous feedback was addressed
+     - New changes introduced since last review
+     - Any regressions caused while fixing previous issues
+   - In the review output, add a "📋 Previous Review Status" section
 
 ## Review Criteria
 
@@ -48,12 +85,24 @@ Use these labels when categorizing issues:
 Use the format from `docs/REVIEW_PROMPT.md`:
 
 - **Summary** (brief, note if part of PR chain)
+- **📋 Previous Review Status** (only for re-reviews: what was raised, what's addressed)
 - **🔴 Critical Issues** - Use `[Category]` in title (e.g.,
   `#### 1. [Regression] Theme Settings Removed`)
 - **🟠 Medium Issues** - Use `[Category]` in title
 - **🟡 Low Issues** - Use `[Category]` in title
 - **✅ What's Done Well**
 - **🎯 Verdict** (conversational conclusion)
+
+## Multi-PR Workflow
+
+When reviewing multiple PRs:
+
+1. Review each PR individually following all steps above
+2. After each review, ask whether to:
+   - Post review to GitHub
+   - Make adjustments
+   - Continue to next PR
+3. After all PRs are reviewed, provide a brief summary of all reviews
 
 ## Final Step
 
