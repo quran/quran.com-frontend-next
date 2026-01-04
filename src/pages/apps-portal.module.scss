@@ -246,6 +246,33 @@
 }
 
 @include breakpoints.smallerThanTablet {
+  .page {
+    gap: var(--spacing-large);
+    padding-block: var(--spacing-large);
+  }
+
+  .hero {
+    padding-inline: var(--spacing-medium);
+  }
+
+  .section {
+    padding: var(--spacing-large) var(--spacing-medium);
+  }
+
+  .sectionAlt {
+    padding: var(--spacing-large) 0;
+  }
+
+  .sectionAltInner {
+    padding: var(--spacing-large) var(--spacing-medium);
+    gap: var(--spacing-small);
+  }
+
+  .sectionHeader,
+  .sectionHeaderAlt {
+    margin-block-end: var(--spacing-small);
+  }
+
   .cardBody {
     gap: 12px;
     padding: 14px;
