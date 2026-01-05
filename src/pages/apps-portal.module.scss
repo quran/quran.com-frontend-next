@@ -256,7 +256,8 @@
   }
 
   .section {
-    padding: var(--spacing-large) var(--spacing-medium);
+    padding-block: var(--spacing-large);
+    padding-inline: var(--spacing-medium2);
   }
 
   .sectionAlt {
@@ -264,7 +265,8 @@
   }
 
   .sectionAltInner {
-    padding: var(--spacing-large) var(--spacing-medium);
+    padding-block: var(--spacing-large);
+    padding-inline: var(--spacing-medium2);
     gap: var(--spacing-small);
   }
 
@@ -316,6 +318,7 @@
   background: var(--color-background-default);
   border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   border-radius: var(--border-radius-pill);
+  box-sizing: border-box;
   padding: var(--spacing-small) var(--spacing-medium);
   min-block-size: 2.75rem;
   inline-size: 100%; // full width of Browse All Apps inner container
@@ -385,6 +388,20 @@
     flex: 0 0 auto;
     white-space: nowrap;
     padding: var(--spacing-xxsmall) var(--spacing-medium);
+    font-size: var(--font-size-small);
+  }
+
+  .search {
+    padding: var(--spacing-xxsmall) var(--spacing-medium);
+    min-block-size: 2.25rem;
+  }
+
+  .searchIcon {
+    inline-size: 1.1rem;
+    block-size: 1.1rem;
+  }
+
+  .search input {
     font-size: var(--font-size-small);
   }
 }
