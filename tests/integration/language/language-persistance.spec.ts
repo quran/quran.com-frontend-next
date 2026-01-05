@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
+import { getChapterContainerTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -14,15 +16,10 @@ test(
   { tag: ['@persistence', '@language', '@slow'] },
   async ({ page, context }) => {
     // 1. Click on the menu
-    await page.getByTestId('open-navigation-drawer').click();
-    // 2. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 3. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-
-    // 4. select Spanish and wait for navigation to /es
+    await homePage.closeNextjsErrorDialog();
+    // 2. select Spanish and wait for navigation to /es
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Español' }).click(),
+      selectNavigationDrawerLanguage(page, 'es'),
       page.waitForURL('**/es', { waitUntil: 'networkidle' }),
     ]);
 
@@ -31,7 +28,7 @@ test(
     // 5. Navigate to surah An Naml and make sure we are still on /es/27
     await Promise.all([
       page.waitForURL('**/es/27'),
-      page.getByTestId('chapter-27-container').click(),
+      page.getByTestId(getChapterContainerTestId(27)).click(),
     ]);
     await expect(page).toHaveURL(/\/es\/27/);
 

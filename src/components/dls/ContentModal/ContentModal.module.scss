@@ -146,19 +146,20 @@ $translateYDistance: 200px;
   inset-block-start: 50%;
   inset-inline-end: 0;
   transform: translateY(-50%);
-  display: flex;
-  align-items: center;
   background-color: transparent;
   border: none;
-  @include breakpoints.tablet {
-    inset-inline-end: var(--spacing-mega);
-  }
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .header {
   position: sticky;
   inset-block-start: 0;
   background-color: var(--color-background-default);
   padding-block: var(--spacing-small);
+  display: flex;
+  align-items: center;
   z-index: 1;
   padding-inline: var(--spacing-small);
   padding-inline-end: var(--spacing-xlarge-px);
@@ -166,11 +167,10 @@ $translateYDistance: 200px;
   @include breakpoints.tablet {
     position: relative;
     padding-inline: 0;
-    padding-inline-end: var(--spacing-xlarge-px);
     border: none;
-    padding-block: 0;
+    padding: 0;
+    padding-inline-end: var(--spacing-xlarge-px);
   }
-  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .content {

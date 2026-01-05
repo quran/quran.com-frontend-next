@@ -42,6 +42,23 @@ import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
+// IndoPak stop sign characters that require additional spacing
+const INDO_PAK_STOP_SIGN_CHARS = new Set([
+  '\u06D6', // Arabic small high meem (ۖ)
+  '\u06D7', // Arabic small high qaf (ۗ)
+  '\u06D8', // Arabic small high noon (ۘ)
+  '\u06D9', // Arabic small high meem (ۙ)
+  '\u06DA', // Arabic small high lam alef (ۚ)
+  '\u06DB', // Arabic small high jeem (ۛ)
+  '\u06DC', // Arabic small high seen (ۜ)
+  '\u06E2', // Arabic small high madda (ۢ)
+  '\u0615', // Arabic small high tah (ؕ)
+  '\u06EA', // Arabic empty centre high stop (۪)
+  '\u06EB', // Arabic empty centre low stop (۫)
+  '\u0617', // Arabic inverted damma (ُ)
+  '\u06E5', // Arabic small waw (ۥ)
+]);
+
 export type QuranWordProps = {
   word: Word;
   font?: QuranFont;
@@ -50,6 +67,7 @@ export type QuranWordProps = {
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
+  bookmarksRangeUrl?: string | null;
 };
 
 const QuranWord = ({
@@ -60,6 +78,7 @@ const QuranWord = ({
   isHighlighted,
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
+  bookmarksRangeUrl,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -93,6 +112,16 @@ const QuranWord = ({
   let wordText = null;
   const shouldBeHighLighted =
     isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
+
+  // Check if the current word has IndoPak stop signs
+  const isIndoPakFont = font === QuranFont.IndoPak;
+  const hasIndoPakStopSign = useMemo(
+    () =>
+      isIndoPakFont &&
+      word.text &&
+      Array.from(word.text).some((char) => INDO_PAK_STOP_SIGN_CHARS.has(char)),
+    [isIndoPakFont, word.text],
+  );
 
   if (isQCFFont(font)) {
     wordText = (
@@ -228,6 +257,7 @@ const QuranWord = ({
         [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: isTranslationMode,
+        [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,
       })}
     >
       <Wrapper
@@ -263,6 +293,7 @@ const QuranWord = ({
                   isOpen={isMobileModalOpen}
                   onClose={() => setIsMobileModalOpen(false)}
                   word={word}
+                  bookmarksRangeUrl={bookmarksRangeUrl}
                 />
               </>
             );
@@ -270,7 +301,11 @@ const QuranWord = ({
 
           if (isReadingModeDesktop) {
             return (
-              <ReadingViewWordPopover word={word} onOpenChange={onReadingModeOpenChange}>
+              <ReadingViewWordPopover
+                word={word}
+                onOpenChange={onReadingModeOpenChange}
+                bookmarksRangeUrl={bookmarksRangeUrl}
+              >
                 {children}
               </ReadingViewWordPopover>
             );

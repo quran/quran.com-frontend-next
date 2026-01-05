@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+import { openSearchDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
+import { getChapterContainerTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -14,30 +16,27 @@ test(
   'Navigating using back button works',
   { tag: ['@url', '@slow', '@navigation'] },
   async ({ page }) => {
-    // TODO: unskip this when https://github.com/quran/quran.com-frontend-next/pull/2515 is merged
-    test.skip(true, 'Unskip when #2515 is merged');
-
     await homePage.goTo('/');
-    await page.getByTestId('chapter-1-container').click();
+    await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
-    await page.getByTestId('open-search-drawer').click();
-    await page.keyboard.type('light');
-    await expect(page.getByTestId('more-results')).toBeVisible();
-    await page.getByTestId('more-results').click();
-    await expect(page).toHaveURL(/search\?page=1&query=light/);
-    await page.getByTestId('next-page-button').click();
-    await expect(page).toHaveURL(/search\?page=2&query=light/);
+    await openSearchDrawer(page);
+    await page.keyboard.type('eat');
+    await expect(page.getByTestId(TestId.MORE_RESULTS)).toBeVisible();
+    await page.getByTestId(TestId.MORE_RESULTS).click();
+    await expect(page).toHaveURL(/search\?page=1&query=eat/);
+    await page.getByTestId(TestId.NEXT_PAGE_BUTTON).click();
+    await expect(page).toHaveURL(/search\?page=2&query=eat/);
 
-    const navigationButtons = page.getByTestId('page-navigation-buttons');
+    const navigationButtons = page.getByTestId(TestId.PAGE_NAVIGATION_BUTTONS);
     await expect(navigationButtons).toBeVisible();
     await navigationButtons.getByText('4').click();
-    await expect(page).toHaveURL(/search\?page=4&query=light/);
+    await expect(page).toHaveURL(/search\?page=4&query=eat/);
 
     // go back
     await page.goBack();
-    await expect(page).toHaveURL(/search\?page=2&query=light/);
+    await expect(page).toHaveURL(/search\?page=2&query=eat/);
     await page.goBack();
-    await expect(page).toHaveURL(/search\?page=1&query=light/);
+    await expect(page).toHaveURL(/search\?page=1&query=eat/);
     await page.goBack();
     await expect(page).toHaveURL(/\/1$/);
     await page.goBack();
@@ -49,28 +48,25 @@ test(
   'Navigating using forward button works',
   { tag: ['@url', '@slow', '@navigation'] },
   async ({ page }) => {
-    // TODO: unskip this when https://github.com/quran/quran.com-frontend-next/pull/2515 is merged
-    test.skip(true, 'Unskip when #2515 is merged');
-
     await homePage.goTo('/');
-    await page.getByTestId('chapter-1-container').click();
+    await page.getByTestId(getChapterContainerTestId(1)).click();
     await expect(page).toHaveURL(/\/1$/);
-    await page.getByTestId('open-search-drawer').click();
-    await page.keyboard.type('light');
-    await expect(page.getByTestId('more-results')).toBeVisible();
-    await page.getByTestId('more-results').click();
-    await expect(page).toHaveURL(/search\?page=1&query=light/);
-    await page.getByTestId('next-page-button').click();
-    await expect(page).toHaveURL(/search\?page=2&query=light/);
+    await openSearchDrawer(page);
+    await page.keyboard.type('eat');
+    await expect(page.getByTestId(TestId.MORE_RESULTS)).toBeVisible();
+    await page.getByTestId(TestId.MORE_RESULTS).click();
+    await expect(page).toHaveURL(/search\?page=1&query=eat/);
+    await page.getByTestId(TestId.NEXT_PAGE_BUTTON).click();
+    await expect(page).toHaveURL(/search\?page=2&query=eat/);
 
     await page.goBack();
-    await expect(page).toHaveURL(/search\?page=1&query=light/);
+    await expect(page).toHaveURL(/search\?page=1&query=eat/);
     await page.goBack();
     await expect(page).toHaveURL(/\/1$/);
 
     await page.goForward();
-    await expect(page).toHaveURL(/search\?page=1&query=light/);
+    await expect(page).toHaveURL(/search\?page=1&query=eat/);
     await page.goForward();
-    await expect(page).toHaveURL(/search\?page=2&query=light/);
+    await expect(page).toHaveURL(/search\?page=2&query=eat/);
   },
 );
