@@ -1,0 +1,62 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+}
+
+.description {
+  color: var(--color-text-faded);
+  max-inline-size: 65ch;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--spacing-large);
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+}
+
+.listItem {
+  margin: 0;
+}
+
+.card {
+  display: block;
+  padding: var(--spacing-medium2);
+  border-radius: var(--border-radius-medium-px);
+  background: transparent;
+  border: none;
+  box-shadow: var(--shadow-large);
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease,
+    border-color var(--transition-fast) ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-jumbo);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-text-link);
+    outline-offset: 2px;
+  }
+}
+
+.container .card {
+  text-decoration: none !important;
+}
+
+.cardTitle {
+  display: block;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.cardDescription {
+  display: block;
+  color: var(--color-text-faded);
+  line-height: var(--line-height-large);
+}

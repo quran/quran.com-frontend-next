@@ -1,0 +1,26 @@
+{
+  "title": "Articles",
+  "description": "Explore essays and guides about the Quran and life around it.",
+  "items": {
+    "about-the-quran": {
+      "title": "About the Quran",
+      "description": "What the Quran is, how it was revealed, and why it matters."
+    },
+    "what-is-ramadan": {
+      "title": "What Is Ramadan?",
+      "description": "A primer on Ramadan and its connection to the Quran."
+    },
+    "ramadan": {
+      "title": "Ramadan Activities",
+      "description": "Ideas and practices to make the most of the month."
+    },
+    "beyond-ramadan": {
+      "title": "Beyond Ramadan",
+      "description": "Ways to keep the momentum going after Ramadan."
+    },
+    "take-notes": {
+      "title": "Take Notes",
+      "description": "How to capture reflections and organize your learning."
+    }
+  }
+}
