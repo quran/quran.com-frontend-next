@@ -1,7 +1,12 @@
 /* eslint-disable max-lines */
 import { it, expect, describe } from 'vitest';
 
-import { truncateString, stripHTMLTags, formatVerseReferencesToLinks } from './string';
+import {
+  truncateString,
+  stripHTMLTags,
+  formatVerseReferencesToLinks,
+  getWordCount,
+} from './string';
 
 describe('Test truncateString', () => {
   it('should shorten english text correctly', () => {
@@ -252,5 +257,15 @@ describe('Test formatVerseReferencesToLinks', () => {
   it('should not modify Russian text without verse references', () => {
     const input = 'Это обычный текст без ссылок на аяты';
     expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+});
+
+describe('getWordCount', () => {
+  it('counts words in a simple sentence', () => {
+    expect(getWordCount('hello world from Quran')).toBe(4);
+  });
+
+  it('ignores extra whitespace', () => {
+    expect(getWordCount('  multiple   spaces\nnew\tlines ')).toBe(4);
   });
 });
