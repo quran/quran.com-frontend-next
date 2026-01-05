@@ -1,4 +1,4 @@
-Review PR(s) using the comprehensive review guidelines.
+Review PR(s) using the comprehensive review guidelines
 
 ## Arguments
 
@@ -10,7 +10,7 @@ Review PR(s) using the comprehensive review guidelines.
 
 ## Steps
 
-### For Each PR:
+### For Each PR
 
 1. Read the review prompt from `docs/REVIEW_PROMPT.md` for all criteria
 2. Fetch PR details: `gh pr view {PR_NUMBER} --json title,body,files,additions,deletions,author`
@@ -47,7 +47,12 @@ Apply all sections from the review prompt:
 3. **Clean Code**: DRY, KISS, single responsibility, separation of concerns, SOLID
 4. **Polish**: Function size, comments, dead code, console.log, naming
 5. **Watch Out For**: Common bug patterns
-6. **Bugs & Regressions**:
+6. **Testing & Validation**:
+   - Tests pass (`yarn test`)
+   - Linting passes (`yarn lint`)
+   - Build succeeds (`yarn build`)
+   - Edge cases: loading, error, empty states, logged-in vs guest (if auth-related)
+7. **Bugs & Regressions**:
    - Existing functionality still works
    - Side effects on shared code/styles/state
    - Runtime issues (race conditions, memory leaks)
