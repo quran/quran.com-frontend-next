@@ -44,7 +44,8 @@
     "nav-drawer-open": "打开导航抽屉",
     "play-surah": "播放古兰经{{surahName}}",
     "select-lng": "选择语言",
-    "sidebar-nav-close": "关闭导航侧边栏"
+    "sidebar-nav-close": "关闭导航侧边栏",
+    "translation-info": "查看翻译信息"
   },
   "audio": {
     "auto-scroll": {

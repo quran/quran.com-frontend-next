@@ -44,7 +44,8 @@
     "nav-drawer-open": "Hapni sirtarin e navigimit",
     "play-surah": "Luaj suren {{surahName}}",
     "select-lng": "Zgjidh gjuhen",
-    "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
+    "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit",
+    "translation-info": "Shiko informacionin e përkthimit"
   },
   "audio": {
     "auto-scroll": {

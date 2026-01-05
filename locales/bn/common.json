@@ -44,7 +44,8 @@
     "nav-drawer-open": "নেভিগেশন ড্রয়ার খুলুন",
     "play-surah": "সূরা {{surahName}} প্লে করুন",
     "select-lng": "ভাষা নির্বাচন কর",
-    "sidebar-nav-close": "নেভিগেশন সাইডবার বন্ধ করুন"
+    "sidebar-nav-close": "নেভিগেশন সাইডবার বন্ধ করুন",
+    "translation-info": "অনুবাদ তথ্য দেখুন"
   },
   "audio": {
     "auto-scroll": {

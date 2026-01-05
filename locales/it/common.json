@@ -44,7 +44,8 @@
     "nav-drawer-open": "Apri il cassetto di navigazione",
     "play-surah": "Suona Sura {{surahName}}",
     "select-lng": "Seleziona la lingua",
-    "sidebar-nav-close": "Chiudi la barra laterale di navigazione"
+    "sidebar-nav-close": "Chiudi la barra laterale di navigazione",
+    "translation-info": "Visualizza le informazioni sulla traduzione"
   },
   "audio": {
     "auto-scroll": {

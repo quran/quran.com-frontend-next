@@ -1,4 +1,4 @@
-@use "src/styles/shades";
+@use 'src/styles/shades';
 
 @mixin mode {
   --color-primary-faded: #fff;
@@ -73,6 +73,7 @@
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
   --shadow-strong: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  --shadow-tooltip: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   font-palette: --Light;
 
   // scrollbar styles

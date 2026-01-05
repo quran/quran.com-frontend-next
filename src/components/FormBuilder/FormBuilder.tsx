@@ -148,6 +148,7 @@ const FormBuilder = <T,>({
         renderAction({
           htmlType: 'submit',
           isLoading: isSubmitting,
+          isDisabled: isSubmitting,
           onClick: (e) => {
             e.stopPropagation();
           },
@@ -157,6 +158,7 @@ const FormBuilder = <T,>({
           {...actionProps}
           htmlType="submit"
           isLoading={isSubmitting}
+          isDisabled={isSubmitting}
           onClick={(e) => {
             e.stopPropagation();
           }}
