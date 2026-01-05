@@ -1,0 +1,16 @@
+@use 'src/styles/breakpoints';
+
+.article {
+  max-inline-size: 70ch;
+  margin: 0 auto;
+}
+
+.articleBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+
+  p {
+    margin-block-end: var(--spacing-medium);
+  }
+}
