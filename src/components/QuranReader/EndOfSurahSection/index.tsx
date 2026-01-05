@@ -7,6 +7,7 @@ import useSWRImmutable from 'swr/immutable';
 import styles from './EndOfSurahSection.module.scss';
 import ExploreCard from './ExploreCard';
 import ReadMoreCard from './ReadMoreCard';
+import StreakGoalCard from './StreakGoalCard';
 
 import { getChapterMetadata } from '@/api';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
@@ -90,6 +91,8 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           hasQuestions={hasQuestions}
           onModalOpen={handleModalOpen}
         />
+
+        <StreakGoalCard cardClassName={styles.card} />
       </div>
 
       <BottomActionsModals
