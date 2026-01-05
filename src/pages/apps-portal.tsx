@@ -70,8 +70,8 @@ interface AppCtaLabels {
 const VisitBadge: FC<{ label: string }> = ({ label }) => (
   <svg
     className={styles.storeBadgeImage}
-    width={90}
-    height={30}
+    width={96}
+    height={32}
     viewBox="0 0 135 40"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
@@ -334,8 +334,8 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
           <Image
             alt={ctaLabels.playStoreAlt}
             src="/images/play-store.svg"
-            width={90}
-            height={30}
+            width={96}
+            height={32}
             className={styles.storeBadgeImage}
           />
         </a>
@@ -352,8 +352,8 @@ const AppCtaRow: FC<AppCtaRowProps> = ({
           <Image
             alt={ctaLabels.appStoreAlt}
             src="/images/app-store.svg"
-            width={90}
-            height={30}
+            width={96}
+            height={32}
             className={styles.storeBadgeImage}
           />
         </a>
