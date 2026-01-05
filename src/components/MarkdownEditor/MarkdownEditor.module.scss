@@ -76,6 +76,11 @@
       font-weight: var(--font-weight-semibold);
       line-height: var(--line-height-xlarge);
       text-align: center;
+
+      // For Urdu in RTL pages, increase line-height to reduce glyph collisions inside the blockquote.
+      :global(html[lang='ur'][dir='rtl']) & {
+        line-height: 160%;
+      }
     }
   }
   img {

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -48,28 +48,34 @@ const ChangePasswordForm: FC = () => {
 
   const formFields = useMemo(() => getChangePasswordFormFields(t), [t]);
 
-  const onFormSubmit = async (data: FormData) => {
-    logButtonClick('profile_update_password');
-    const result = await updatePassword({
-      currentPassword: data.currentPassword,
-      newPassword: data.newPassword,
-      confirmPassword: data.confirmPassword,
-    });
+  const onFormSubmit = useCallback(
+    async (data: FormData) => {
+      logButtonClick('profile_update_password');
+      const result = await updatePassword({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
+      });
 
-    return transformErrors(result);
-  };
+      return transformErrors(result);
+    },
+    [updatePassword, transformErrors],
+  );
 
-  const renderAction = (props: RenderActionProps) => (
-    <div>
-      <Button
-        {...props}
-        className={styles.button}
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Accent}
-      >
-        {t('update-password')}
-      </Button>
-    </div>
+  const renderAction = useCallback(
+    (props: RenderActionProps) => (
+      <div>
+        <Button
+          {...props}
+          className={styles.button}
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Accent}
+        >
+          {t('update-password')}
+        </Button>
+      </div>
+    ),
+    [t],
   );
 
   return (
@@ -84,9 +90,11 @@ const ChangePasswordForm: FC = () => {
         actionText={t('update-password')}
         isSubmitting={isUpdating}
         renderAction={renderAction}
+        shouldDisplayAllValidation
+        shouldClearOnSuccess
       />
     </Section>
   );
 };
 
-export default ChangePasswordForm;
+export default memo(ChangePasswordForm);
