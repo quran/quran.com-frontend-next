@@ -102,8 +102,12 @@ const TranslationView = ({
   const handleQuestionsLoaded = useCallback(
     (pageNumber: number, data: Record<string, QuestionsData>) => {
       setPageQuestionsMap((prev) => {
-        // Avoid unnecessary state updates if data is the same
-        if (prev[pageNumber] === data) return prev;
+        const prevPageData = prev[pageNumber];
+        // Avoid unnecessary state updates if data content is the same.
+        // Deep compare since SWR may return new object references for identical data.
+        if (prevPageData && JSON.stringify(prevPageData) === JSON.stringify(data)) {
+          return prev;
+        }
         return {
           ...prev,
           [pageNumber]: data,
@@ -165,12 +169,12 @@ const TranslationView = ({
         />
       )}
 
+      {/* Fetches questions for each loaded page without rendering any UI */}
+      <PageQuestionsLoaders
+        apiPageToVersesMap={apiPageToVersesMap}
+        onQuestionsLoaded={handleQuestionsLoaded}
+      />
       <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
-        {/* Invisible component that fetches questions for each loaded page */}
-        <PageQuestionsLoaders
-          apiPageToVersesMap={apiPageToVersesMap}
-          onQuestionsLoaded={handleQuestionsLoaded}
-        />
         <div
           className={styles.wrapper}
           onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}

@@ -28,7 +28,7 @@ const PageQuestionsLoader = ({
   const { data: questionsData } = useCountRangeQuestions(questionsRange);
 
   useEffect(() => {
-    if (questionsData && Object.keys(questionsData).length > 0) {
+    if (questionsData) {
       onQuestionsLoaded(pageNumber, questionsData);
     }
   }, [questionsData, pageNumber, onQuestionsLoaded]);
