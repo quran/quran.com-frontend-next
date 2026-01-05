@@ -317,8 +317,15 @@ export const resolveUrlBySearchNavigationType = (
  * @param {string} query the search query.
  * @returns {string}
  */
-export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
+export const getSearchQueryNavigationUrl = (query?: string): string => {
+  if (!query) return '/search';
+
+  const params = new URLSearchParams();
+  params.set(QueryParam.PAGE, '1');
+  params.set(QueryParam.QUERY, query);
+
+  return `/search?${params.toString()}`;
+};
 
 /**
  * Get the href link to the info page of a Surah.
@@ -420,6 +427,25 @@ export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   const baseUrl = '/media';
   return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
+};
+
+/**
+ * Build a url with query parameters
+ *
+ * @param {string} baseUrl
+ * @param {Record<string, unknown>} params
+ * @returns {string}
+ */
+export const buildUrlWithParams = (baseUrl: string, params: Record<string, unknown>): string => {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+    searchParams.set(key, String(value));
+  });
+
+  const queryString = searchParams.toString();
+  return `${baseUrl}${queryString ? `?${queryString}` : ''}`;
 };
 
 /**
