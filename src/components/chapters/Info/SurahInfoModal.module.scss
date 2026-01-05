@@ -8,12 +8,12 @@ $line-height-relaxed: 1.6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xsmall);
-  padding-block: var(--spacing-mega);
+  padding-block-start: calc(2 * var(--spacing-small));
+  padding-block-end: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
-  border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 
   @include breakpoints.smallerThanTablet {
-    padding-block-start: calc(2 * var(--spacing-small));
     margin-block-end: calc(2 * var(--spacing-small));
   }
 }
@@ -64,6 +64,14 @@ $line-height-relaxed: 1.6;
     line-height: $line-height-relaxed;
   }
 
+  @include breakpoints.tablet {
+    /**
+    * Adds a small inline-end padding to create visual spacing
+    * between the content and the scrollbar.
+    */
+    padding-inline-end: var(--spacing-xxsmall);
+  }
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-max);
   }
@@ -93,6 +101,10 @@ $line-height-relaxed: 1.6;
     display: list-item;
     margin-block-end: var(--spacing-xxsmall);
   }
+
+  & > *:last-child {
+    margin-block-end: 0;
+  }
 }
 
 .loadingContainer,
@@ -106,4 +118,63 @@ $line-height-relaxed: 1.6;
 
 .errorContainer {
   color: var(--color-text-error);
+}
+
+div {
+  &.bottomSheetOnDesktopOverlay {
+    @include breakpoints.tablet {
+      overflow-y: hidden;
+      align-items: flex-end;
+      justify-items: center;
+      padding-block-start: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+div {
+  &.bottomSheetOnDesktopContent {
+    @include breakpoints.tablet {
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+      block-size: 95vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-block-end: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+div {
+  &.surahInfoModalContent {
+    @include breakpoints.tablet {
+      flex: 1;
+      min-block-size: 0;
+      overflow-y: auto;
+      padding-block-end: calc(1.5 * var(--spacing-mega));
+    }
+  }
+}
+
+.bottomSheetOnDesktopHeaderSeparator {
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+    padding-block-start: var(--spacing-medium3-px);
+    margin-block-end: var(--spacing-micro);
+    border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  }
+}
+
+.bottomSheetOnDesktopInnerContent {
+  @include breakpoints.tablet {
+    /**
+    * Acts as a non-scrollable flex container so that
+    * scrollability is delegated to its inner content.
+    */
+    min-block-size: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }
