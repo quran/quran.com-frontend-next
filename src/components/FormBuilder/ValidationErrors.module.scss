@@ -1,0 +1,43 @@
+@use 'src/styles/theme';
+
+.validationErrors {
+  margin-block-start: var(--spacing-xxsmall-px);
+  margin-inline-start: var(--spacing-small-px);
+  row-gap: var(--spacing-small-px);
+  display: flex;
+  flex-direction: column;
+}
+
+.validationRule {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.ruleText {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded-new);
+}
+
+.ruleIcon {
+  width: var(--spacing-small2-px);
+  height: var(--spacing-small2-px);
+}
+
+.valid {
+  .ruleIcon {
+    svg path,
+    svg g {
+      fill: var(--color-success-medium);
+    }
+  }
+}
+
+.invalid {
+  .ruleIcon {
+    svg path,
+    svg g {
+      fill: var(--color-text-default-new);
+    }
+  }
+}
