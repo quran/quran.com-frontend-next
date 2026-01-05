@@ -11,12 +11,19 @@ can also be configured through the builder page inside this app.
 
 ## Key entry points
 
-- Builder page UI: `src/pages/ayah-widget.tsx`
-- Embed page: `/embed/v1` (served by Quran.com)
-- Legacy API endpoint (script-based embed): `src/pages/api/ayah-widget.tsx`
-- Widget components: `src/components/AyahWidget/*`
-- Preview hook: `src/hooks/widget/useAyahWidgetPreview.ts`
-- Widget config registry: `src/components/AyahWidget/widget-config.ts`
+| File                                             | Purpose                                       |
+| ------------------------------------------------ | --------------------------------------------- |
+| `src/pages/ayah-widget.tsx`                      | Builder page UI                               |
+| `src/pages/embed/v1.tsx`                         | Embed page (iframe content)                   |
+| `src/components/AyahWidget/widget-config.ts`     | Main config entry (re-exports modules)        |
+| `src/components/AyahWidget/widget-types.ts`      | Type definitions                              |
+| `src/components/AyahWidget/widget-defaults.ts`   | Default values and constants                  |
+| `src/components/AyahWidget/widget-embed.ts`      | Iframe URL and snippet builders               |
+| `src/components/AyahWidget/widget-form.ts`       | Builder form field definitions                |
+| `src/components/AyahWidget/getAyahWidgetData.ts` | Server-side data fetching                     |
+| `src/components/AyahWidget/queryParsing.ts`      | Query parameter parsing utilities             |
+| `src/hooks/widget/useAyahWidgetPreview.ts`       | Preview hook for the builder                  |
+| `src/hooks/widget/useWidgetInteractions.ts`      | Client-side interactions (copy, share, audio) |
 
 ## High-level data flow
 
@@ -24,24 +31,24 @@ can also be configured through the builder page inside this app.
    (`BuilderPreview`).
 2. User changes are stored in React state + Redux overrides.
 3. Preview hook builds an iframe URL for `/embed/v1` based on preferences.
-4. The iframe renders the embed page, which loads the widget UI.
+4. The iframe renders the embed page, which loads the widget UI via SSR.
 
-## The centralized registry (single source of truth)
+## Module structure
 
-All widget option metadata and helpers live in:
+The widget configuration is split into focused modules:
 
-`src/components/AyahWidget/widget-config.ts`
+```
+src/components/AyahWidget/
+├── widget-types.ts      # Type definitions (Preferences, RangeMeta, etc.)
+├── widget-defaults.ts   # DEFAULTS, INITIAL_PREFERENCES, getMushafFromQuranFont
+├── widget-embed.ts      # buildEmbedIframeSrc, buildEmbedIframeConfig, buildEmbedSnippet
+├── widget-form.ts       # WIDGET_FIELDS, WIDGET_FORM_BLOCKS, getWidgetLocaleOptions
+├── widget-config.ts     # Main entry: re-exports + utility functions
+├── getAyahWidgetData.ts # Server-side data fetching
+└── queryParsing.ts      # Shared query param parsers
+```
 
-This file is the single place to:
-
-- Define default values
-- Define which options are "simple" and auto-handled
-- Build the embed snippet and iframe URL
-- Render builder fields
-- Normalize range behavior
-- Map site preferences to widget defaults
-
-### Important exports
+### Main exports from widget-config.ts
 
 - `DEFAULTS`: static defaults (surah, ayah, reciter, iframe URL)
 - `INITIAL_PREFERENCES`: base preferences for a blank widget
@@ -52,9 +59,6 @@ This file is the single place to:
 - `buildEmbedIframeConfig`: computes iframe URL + sizing for snippet/preview
 - `buildEmbedSnippet`: builds the final embed HTML snippet
 - `WIDGET_FIELDS` and `WIDGET_FORM_BLOCKS`: drive the builder UI
-
-Because the builder, snippet, and preview all read from this registry, adding a new option should be
-centralized here.
 
 ## Builder behavior
 
@@ -104,48 +108,36 @@ The embed is an iframe pointing to `/embed/v1` with query params.
 
 ### Environment variables
 
-These are the widget-specific environment variables currently supported:
-
 - `NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL`: overrides the iframe base URL (full URL or path). Default:
   `https://quran.com/embed/v1`.
 - `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN`: forces the iframe base origin (useful for local/testing if the
   URL override is not set).
 
-### Common query parameters
+### Query parameters
 
-- `verses` (S:V or S:V-V)
-- `translations`
-- `audio`
-- `reciter`
-- `theme`
-- `font`
-- `locale`
-- `wbw`
-- `showTranslationName`
-- `showArabic`
-- `tafsir`
-- `reflections`
-- `answers`
+| Parameter             | Description                               | Default |
+| --------------------- | ----------------------------------------- | ------- |
+| `verses`              | Verse range (e.g., `33:56` or `33:56-60`) | `33:56` |
+| `translations`        | Comma-separated translation IDs           | -       |
+| `audio`               | Enable audio (`true`/`false`)             | `true`  |
+| `reciter`             | Reciter ID                                | `7`     |
+| `theme`               | Theme (`light`/`dark`/`sepia`)            | `light` |
+| `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)    | `qpc`   |
+| `locale`              | Widget locale                             | `en`    |
+| `wbw`                 | Enable word-by-word (`true`/`false`)      | `false` |
+| `showTranslationName` | Show translator names                     | `false` |
+| `showArabic`          | Show Arabic text                          | `true`  |
+| `tafsir`              | Show tafsirs button                       | `true`  |
+| `reflections`         | Show reflections button                   | `true`  |
+| `answers`             | Show answers button                       | `true`  |
 
-## API endpoint
+## Widget interactions
 
-`src/pages/api/ayah-widget.tsx` is the legacy HTML API used by the old script-based embed. The
-iframe-based embed uses `/embed/v1` directly, so this endpoint is no longer part of the main
-integration flow (keep it only if you still need the legacy path).
+Client-side interactions are handled by `src/hooks/widget/useWidgetInteractions.ts`:
 
-### Validation and errors
-
-- Validates ayah format and bounds.
-- Validates chapter/verse ranges against chapter metadata.
-- Validates locale against `i18n.json`.
-- Range is capped to 10 verses; requesting more returns an error.
-
-Errors are returned with a `message` and surfaced by the legacy script-based embed.
-
-### Word by word translation locale
-
-If WBW is enabled, the API tries to use the widget locale for WBW if available. If not available, it
-falls back to `en`.
+- **Copy**: Copies formatted text (Arabic + translation + URL) to clipboard
+- **Share**: Copies the quran.com URL to clipboard
+- **Audio**: Toggle play/pause with time clamping for verse segments
 
 ## Fonts and mushaf system
 
@@ -163,33 +155,29 @@ Notes:
 - The API uses 16-line mushaf for IndoPak to ensure glyphs exist.
 - The verse-end glyph spans should use the same mushaf font family to render correctly.
 
-If you change mushaf handling, validate both Arabic text and end glyphs in the widget and reader.
-
 ## Localization
 
-Widget labels are localized via `next-translate` in the API. The builder locale list is derived from
-`i18n.json`.
+Widget labels are localized via `next-translate` in the embed page. The builder locale list is
+derived from `i18n.json`.
 
 If you add new labels:
 
 - Add keys in translation JSONs
 - Update `WidgetLabels` in `types/ayah-widget.ts` if needed
-- Ensure the API returns the new labels
+- Ensure the embed page returns the new labels
 
 ## Adding a new widget option
 
 Example: add a new "playButtonPosition".
 
-1. Add the new field in `Preferences` inside `src/components/AyahWidget/widget-config.ts`.
-2. Add a default value in `INITIAL_PREFERENCES`.
-3. If it is not a simple scalar, add it to `SPECIAL_PREFERENCE_KEYS`.
-4. If it needs to be passed to the iframe, add it in `buildEmbedIframeSrc`.
-5. Add a UI field to `WIDGET_FIELDS` and place it in `WIDGET_FORM_BLOCKS`.
-6. Update the embed page (Quran.com `/embed/v1`) to read and apply the new query param.
+1. Add the new field in `Preferences` inside `widget-types.ts`.
+2. Add a default value in `INITIAL_PREFERENCES` in `widget-defaults.ts`.
+3. If it is not a simple scalar, add it to `SPECIAL_PREFERENCE_KEYS` in `widget-config.ts`.
+4. If it needs to be passed to the iframe, add it in `buildEmbedIframeSrc` in `widget-embed.ts`.
+5. Add a UI field to `WIDGET_FIELDS` and place it in `WIDGET_FORM_BLOCKS` in `widget-form.ts`.
+6. Update the embed page (`src/pages/embed/v1.tsx`) to parse and apply the new query param.
 7. Update widget components to consume the option.
 8. Add or update Playwright tests in `tests/integration/widget`.
-
-If you do steps 1-5 only, the builder UI and override logic update automatically.
 
 ## Testing
 
@@ -209,3 +197,4 @@ Add tests for:
 
 - Inspect the iframe `src` to confirm the right query params.
 - Use `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN` for local/testing if you need a custom origin.
+- Check the browser console for clipboard or audio errors.
