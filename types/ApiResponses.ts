@@ -127,6 +127,27 @@ export interface TafsirContentResponse extends BaseResponse {
   };
 }
 
+export interface ChapterContent {
+  id: number;
+  languageName: string;
+  text: string;
+}
+
+export interface ChapterSummaries {
+  summaries: ChapterContent[];
+}
+
+export interface ChapterMetadata {
+  chapterId: number;
+  suggestions: ChapterContent[];
+  nextChapter?: ChapterSummaries;
+  previousChapter?: ChapterSummaries;
+}
+
+export interface ChapterMetadataResponse extends BaseResponse {
+  chapterMetadata?: ChapterMetadata;
+}
+
 export interface CountryLanguagePreferenceResponse extends BaseResponse {
   id: number;
   country: string;
