@@ -44,7 +44,8 @@
     "nav-drawer-open": "Gezinti Çekmecesini Aç",
     "play-surah": "{{surahName}} Ayeti Seslendir",
     "select-lng": "Dil Seçin",
-    "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat"
+    "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat",
+    "translation-info": "Çeviri bilgilerini görüntüle"
   },
   "audio": {
     "auto-scroll": {

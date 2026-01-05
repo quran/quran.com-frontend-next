@@ -44,7 +44,8 @@
     "nav-drawer-open": "Fungua Navigation Drawer",
     "play-surah": "Cheza Sura {{surahName}}",
     "select-lng": "Chagua Lugha",
-    "sidebar-nav-close": "Funga Upau wa pembeni wa Uchunguzi"
+    "sidebar-nav-close": "Funga Upau wa pembeni wa Uchunguzi",
+    "translation-info": "Tazama maelezo ya tafsiri"
   },
   "audio": {
     "auto-scroll": {

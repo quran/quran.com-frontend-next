@@ -44,7 +44,8 @@
     "nav-drawer-open": "کشوی پیمایش را باز کنید",
     "play-surah": "پخش سوره {{surahName}}",
     "select-lng": "زبان را انتخاب کنید",
-    "sidebar-nav-close": "نوار کناری ناوبری را ببندید"
+    "sidebar-nav-close": "نوار کناری ناوبری را ببندید",
+    "translation-info": "مشاهده اطلاعات ترجمه"
   },
   "audio": {
     "auto-scroll": {

@@ -44,7 +44,8 @@
     "nav-drawer-open": "افتح القائمة الجانبية",
     "play-surah": "تشغيل السورة {{surahName}}",
     "select-lng": "اختر اللغة",
-    "sidebar-nav-close": "اغلق القائمة الجانبية"
+    "sidebar-nav-close": "اغلق القائمة الجانبية",
+    "translation-info": "عرض معلومات الترجمة"
   },
   "audio": {
     "auto-scroll": {
@@ -266,7 +267,7 @@
   "learn-more": "تعرف على المزيد",
   "learning-plans": "الخطط التعليمية",
   "less": "أقل",
-  "lessons": "الدروس",
+  "lessons": "الفوائد",
   "listen": "استمع",
   "loading": "جارٍ التحميل",
   "login": "تسجيل الدخول",
@@ -343,7 +344,7 @@
   "reciters": "القرّاء",
   "reflect": "تدبر",
   "reflections": "تدبرات",
-  "reflections-and-lessons": "تدبرات ودروس",
+  "reflections-and-lessons": "تدبرات وفوائد",
   "remove": "إزالة",
   "rename": "إعادة تسمية",
   "retry": "أعد المحاولة",

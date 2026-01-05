@@ -44,7 +44,8 @@
     "nav-drawer-open": "Abrir gaveta de navegação",
     "play-surah": "Jogue Sura {{surahName}}",
     "select-lng": "Selecione o idioma",
-    "sidebar-nav-close": "Fechar a barra lateral de navegação"
+    "sidebar-nav-close": "Fechar a barra lateral de navegação",
+    "translation-info": "Ver informações de tradução"
   },
   "audio": {
     "auto-scroll": {

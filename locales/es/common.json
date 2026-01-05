@@ -44,7 +44,8 @@
     "nav-drawer-open": "Abrir la ventana de navegación desplegable.",
     "play-surah": "Reproducir Sura {{surahName}}",
     "select-lng": "Seleccione idioma",
-    "sidebar-nav-close": "Cerrar barra lateral de navegación"
+    "sidebar-nav-close": "Cerrar barra lateral de navegación",
+    "translation-info": "Ver información de traducción"
   },
   "audio": {
     "auto-scroll": {
