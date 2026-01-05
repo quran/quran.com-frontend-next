@@ -18,6 +18,7 @@ export type Navbar = {
   isSettingsDrawerOpen: boolean;
   settingsView: SettingsView;
   disableSearchDrawerTransition: boolean;
+  lockVisibilityState: boolean; // Flag to temporarily lock visibility state during tab switching
 };
 
 const initialState: Navbar = {
@@ -27,6 +28,7 @@ const initialState: Navbar = {
   isSettingsDrawerOpen: false,
   settingsView: SettingsView.Body,
   disableSearchDrawerTransition: false,
+  lockVisibilityState: false,
 };
 
 export const navbarSlice = createSlice({
@@ -36,6 +38,10 @@ export const navbarSlice = createSlice({
     setIsVisible: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
       isVisible: action.payload,
+    }),
+    setLockVisibilityState: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      lockVisibilityState: action.payload,
     }),
     setIsNavigationDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
@@ -66,6 +72,7 @@ export const navbarSlice = createSlice({
 
 export const {
   setIsVisible,
+  setLockVisibilityState,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
