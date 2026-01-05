@@ -1,21 +1,17 @@
 /* eslint-disable react-func/max-lines-per-function */
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './StatusHeader.module.scss';
-
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
-import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
+import CompletedStatus from '@/components/Course/CompletedStatus';
 import Button from '@/dls/Button/Button';
-import Pill from '@/dls/Pill';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
+import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import { Course } from '@/types/auth/Course';
-import { enrollUser } from '@/utils/auth/api';
-import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
+import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
+import { getUserType, isLoggedIn } from '@/utils/auth/login';
+import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCourseNavigationUrl,
@@ -29,81 +25,73 @@ type Props = {
 };
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
-  const { title, id, isUserEnrolled, slug, isCompleted, lessons } = course;
-  const [isLoading, setIsLoading] = useState(false);
-  const toast = useToast();
+  const { id, isUserEnrolled, slug, isCompleted, lessons, allowGuestAccess } = course;
   const router = useRouter();
   const { t } = useTranslation('learn');
-  const mutate = useMutateWithoutRevalidation();
+  const toast = useToast();
+  const userLoggedIn = isLoggedIn();
+  const { enroll, isEnrolling } = useCourseEnrollment(slug);
 
-  const onEnrollClicked = () => {
-    if (isLoggedIn()) {
-      logButtonClick('user_enroll_course', { courseId: id, isCTA });
-      setIsLoading(true);
-      enrollUser(course.id)
-        .then(() => {
-          toast(
-            t('enroll-success', {
-              title,
-            }),
-            {
-              status: ToastStatus.Success,
-            },
-          );
-          mutate(makeGetCourseUrl(slug), (currentCourse: Course) => {
-            return {
-              ...currentCourse,
-              isUserEnrolled: true,
-            };
-          });
-          // if the course has lessons, redirect to the first lesson
-          if (lessons?.length > 0) {
-            router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
-          }
-        })
-        .catch(() => {
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    } else {
-      logButtonClick('guest_enroll_course', { courseId: id, isCTA });
-      router.replace(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+  const redirectToFirstLesson = () => {
+    if (lessons?.length > 0) {
+      router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
     }
   };
 
-  if (isCTA) {
-    if (isUserEnrolled === true) {
-      return <></>;
+  const handleUnauthenticatedUser = () => {
+    if (allowGuestAccess) {
+      redirectToFirstLesson();
+      return;
     }
+    const redirectUrl = getCourseNavigationUrl(slug);
+    router.replace(getLoginNavigationUrl(redirectUrl));
+  };
+
+  const onStartHereClicked = async (): Promise<void> => {
+    const userType = getUserType(userLoggedIn);
+
+    logButtonClick('course_enroll', {
+      courseId: id,
+      isCTA,
+      userType,
+    });
+
+    if (!userLoggedIn) {
+      handleUnauthenticatedUser();
+      return;
+    }
+
+    const enrollmentResult = await enroll(id, EnrollmentMethod.MANUAL);
+    if (enrollmentResult.success) {
+      redirectToFirstLesson();
+    } else {
+      toast(t('common:error.general'), {
+        status: ToastStatus.Error,
+      });
+    }
+  };
+
+  const renderStartHereButton = () => {
     return (
-      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
-        {t('enroll')}
+      <Button isDisabled={isEnrolling} isLoading={isEnrolling} onClick={onStartHereClicked}>
+        {t('start-here')}
       </Button>
     );
+  };
+  if (isCTA) {
+    if (isUserEnrolled) {
+      return <></>;
+    }
+    return renderStartHereButton();
   }
   if (isCompleted) {
-    return (
-      <div className={styles.completedContainer}>
-        <Pill>{t('completed')}</Pill>
-        {course?.userHasFeedback === false && (
-          <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
-        )}
-      </div>
-    );
+    return <CompletedStatus course={course} />;
   }
-  if (isUserEnrolled === true) {
+  if (isUserEnrolled) {
     return <StartOrContinueLearning course={course} />;
   }
 
-  return (
-    <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
-      {t('enroll')}
-    </Button>
-  );
+  return renderStartHereButton();
 };
 
 export default StatusHeader;

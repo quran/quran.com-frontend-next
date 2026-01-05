@@ -25,7 +25,7 @@
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
 
-  &>span {
+  & > span {
     fill: var(--color-background-default);
   }
 }
@@ -40,7 +40,7 @@
   text-align: center;
   box-shadow: none;
 
-  &>span {
+  & > span {
     fill: var(--color-background-inverse);
   }
 }
