@@ -4,12 +4,9 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './StatusHeader.module.scss';
-
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
-import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
+import CompletedStatus from '@/components/Course/CompletedStatus';
 import Button from '@/dls/Button/Button';
-import Pill from '@/dls/Pill';
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import { Course } from '@/types/auth/Course';
 import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
@@ -88,14 +85,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     return renderStartHereButton();
   }
   if (isCompleted) {
-    return (
-      <div className={styles.completedContainer}>
-        <Pill>{t('completed')}</Pill>
-        {course?.userHasFeedback === false && (
-          <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
-        )}
-      </div>
-    );
+    return <CompletedStatus course={course} />;
   }
   if (isUserEnrolled) {
     return <StartOrContinueLearning course={course} />;
