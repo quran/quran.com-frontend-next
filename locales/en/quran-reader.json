@@ -64,6 +64,8 @@
   "prev-page": "Previous page",
   "prev-rub": "Previous Rub el Hizb",
   "prev-surah": "Previous Surah",
+  "prev": "Previous",
+  "next": "Next",
   "q-and-a": {
     "answer": "Answer",
     "clarification": "Clarification",
@@ -117,5 +119,23 @@
     "button-accessibility-label": "Learn more about The Rescuer learning plan",
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
     "banner-wrapper-aria-label": "Learning plan promotion banner"
+  },
+  "end-of-surah": {
+    "header": "End of Chapter",
+    "read-more": "Read More",
+    "beginning-of-surah": "Read again",
+    "explore": "Explore",
+    "my-quran": "My Quran",
+    "suggestions": "Suggestions:",
+    "achieve-quran-goals-desktop": "Track Streaks, Create Custom Goals, Stay Consistent",
+    "achieve-quran-goals-responsive": "Achieve Your Quran Goals",
+    "track-your-journey": "Track your Journey!",
+    "day-streak": "Day streak",
+    "days-streak": "Days streak",
+    "set-custom-goal": "Set a Custom Goal",
+    "set-goal": "Set a Goal",
+    "set-goal-mobile": "Set a Goal",
+    "next-surah-aria-label": "Read next surah: {{surahName}} ({{surahNumber}})",
+    "previous-surah-aria-label": "Read previous surah: {{surahName}} ({{surahNumber}})"
   }
 }

@@ -91,6 +91,7 @@ const ChangePasswordForm: FC = () => {
         isSubmitting={isUpdating}
         renderAction={renderAction}
         shouldDisplayAllValidation
+        shouldClearOnSuccess
       />
     </Section>
   );

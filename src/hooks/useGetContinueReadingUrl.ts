@@ -20,18 +20,15 @@ const useGetContinueReadingUrl = (): string => {
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys(false);
 
   const continueReadingUrl = useMemo(() => {
-    // First, try to use the most recent reading session
     const lastReadSession = recentlyReadVerseKeys?.[0];
     if (lastReadSession) {
       return getChapterWithStartingVerseUrl(`${lastReadSession.surah}:${lastReadSession.ayah}`);
     }
 
-    // Fallback to Redux lastReadVerse
     if (lastReadVerseFromRedux?.verseKey) {
       return getChapterWithStartingVerseUrl(lastReadVerseFromRedux.verseKey);
     }
 
-    // Default to first surah
     return getChapterWithStartingVerseUrl('1:1');
   }, [recentlyReadVerseKeys, lastReadVerseFromRedux]);
 

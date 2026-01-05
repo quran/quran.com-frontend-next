@@ -141,7 +141,26 @@ Common patterns that cause bugs:
 
 ---
 
-## 6. 🔍 Bugs & Regressions
+## 6. ✅ Testing & Validation
+
+Before approving, verify:
+
+**Automated Checks**
+
+- [ ] Tests pass (`yarn test`)
+- [ ] Linting passes (`yarn lint`)
+- [ ] Build succeeds (`yarn build`)
+
+**Edge Cases Handled**
+
+- [ ] ⏳ Loading state
+- [ ] ❌ Error state
+- [ ] 📭 Empty state
+- [ ] 👤 Logged-in vs guest behavior (if auth-related)
+
+---
+
+## 7. 🔍 Bugs & Regressions
 
 **Existing Functionality**
 

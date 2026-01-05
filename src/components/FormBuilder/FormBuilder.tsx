@@ -19,7 +19,10 @@ import { FormFieldType } from '@/types/FormField';
 // Stable empty object reference to prevent unnecessary re-renders
 const EMPTY_ERROR_TYPES = {};
 
-export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
+export type SubmissionResult<T> = Promise<void | {
+  errors?: { [key in keyof T]: string };
+  success?: boolean;
+}>;
 type FormBuilderProps<T> = {
   className?: string;
   formFields: FormBuilderFormField[];
@@ -30,6 +33,11 @@ type FormBuilderProps<T> = {
   renderAction?: (props: ButtonProps) => React.ReactNode;
   shouldSkipValidation?: boolean;
   shouldDisplayAllValidation?: boolean;
+  /**
+   * When true, automatically clears all form fields after successful submission (when the promise resolves without errors).
+   * Note: The onSubmit handler must return a promise that resolves with { success: true } for the form to be cleared.
+   */
+  shouldClearOnSuccess?: boolean;
 };
 
 /**
@@ -64,11 +72,13 @@ const FormBuilder = <T,>({
   renderAction,
   shouldSkipValidation,
   shouldDisplayAllValidation = false,
+  shouldClearOnSuccess = false,
 }: FormBuilderProps<T>) => {
   const {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { isValid, isDirty },
   } = useForm({
     mode: 'onChange',
@@ -84,6 +94,8 @@ const FormBuilder = <T,>({
             Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
               setError(field, { type: 'manual', message: errorMessage as string });
             });
+          } else if (result.success && shouldClearOnSuccess) {
+            reset();
           }
         });
       }
