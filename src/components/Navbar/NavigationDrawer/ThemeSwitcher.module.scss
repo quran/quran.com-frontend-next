@@ -1,16 +1,16 @@
 @use 'src/styles/theme';
 
 .triggerContainer {
-  width: 100%;
+  inline-size: 100%;
   justify-content: center;
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 }
 
 .popoverContent {
   padding: var(--spacing-small-px);
-  min-width: unset;
-  max-width: calc(var(--spacing-large-px) * 8);
-  width: 100%;
+  min-inline-size: unset;
+  max-inline-size: calc(var(--spacing-large-px) * 8);
+  inline-size: 100%;
   box-shadow: var(--shadow-flat);
 
   @include theme.dark {

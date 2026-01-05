@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .chapterListContainer {
   display: grid;
@@ -39,8 +39,8 @@
   align-items: center;
   position: relative;
 
-  height: var(--spacing-large);
-  width: var(--spacing-large);
+  block-size: var(--spacing-large);
+  inline-size: var(--spacing-large);
 }
 .playIcon {
   inset-inline-start: calc(0.25 * var(--spacing-xxsmall));

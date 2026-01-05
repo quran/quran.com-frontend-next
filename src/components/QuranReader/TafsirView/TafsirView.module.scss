@@ -1,6 +1,6 @@
-@use "src/styles/constants";
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
+@use 'src/styles/constants';
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 $container-max-width: calc(23 * var(--spacing-mega));
 
@@ -40,7 +40,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
     line-height: normal;
   }
   br {
-    content: "";
+    content: '';
     margin-block-start: var(--spacing-small);
     margin-inline-end: var(--spacing-small);
     margin-block-end: var(--spacing-small);
@@ -61,14 +61,14 @@ $container-max-width: calc(23 * var(--spacing-mega));
     line-height: normal;
   }
   // target any item which has a class that contains arabic
-  *[class~="arabic"] {
+  *[class~='arabic'] {
     direction: rtl;
     /* stylelint-disable-next-line csstools/use-logical */
     text-align: right;
     margin-block-end: var(--spacing-small);
   }
   // target any item which has a class that contains uthmani
-  *[class~="uthmani"] {
+  *[class~='uthmani'] {
     font-family: UthmanicHafs;
     font-size: larger;
   }
@@ -163,4 +163,4 @@ $container-max-width: calc(23 * var(--spacing-mega));
   width: calc(6 * var(--spacing-medium));
 }
 
-@include utility.generate-font-scales("tafsir");
+@include utility.generate-font-scales('tafsir');

@@ -32,9 +32,9 @@
     margin-inline-end: var(--spacing-xxsmall-px);
   }
 
-  span>svg {
-    width: 11px;
-    height: var(--spacing-medium);
+  span > svg {
+    inline-size: 11px;
+    block-size: var(--spacing-medium);
   }
 }
 
@@ -50,7 +50,7 @@
   box-shadow: var(--shadow-end-surah-card);
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-xsmall-px) var(--spacing-small-px);
-  min-height: 0;
+  min-block-size: 0;
   overflow: hidden;
 }
 
@@ -59,7 +59,7 @@
   justify-content: space-between;
   align-items: center;
   flex: 1;
-  padding-bottom: var(--spacing-xsmall-px);
+  padding-block-end: var(--spacing-xsmall-px);
 }
 
 .surahInfo {
@@ -67,14 +67,14 @@
   flex-direction: column;
   gap: var(--spacing-micro);
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
 }
 
 .surahTitle {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default-new);
-  width: fit-content;
+  inline-size: fit-content;
 
   &:hover {
     text-decoration: underline;
@@ -98,8 +98,8 @@
 .summary {
   font-size: var(--font-size-small-px);
   color: var(--color-text-faded-new);
-  border-top: var(--spacing-hairline-px) solid var(--color-separators-new);
-  padding-top: var(--spacing-xsmall-px);
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-new);
+  padding-block-start: var(--spacing-xsmall-px);
   word-wrap: break-word;
   overflow-wrap: break-word;
 

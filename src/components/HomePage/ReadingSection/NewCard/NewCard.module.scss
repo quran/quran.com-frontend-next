@@ -1,79 +1,79 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .cardWithIcon {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-micro);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-micro);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 
-    @include breakpoints.smallerThanTablet {
-        margin: auto;
-    }
+  @include breakpoints.smallerThanTablet {
+    margin: auto;
+  }
 }
 
 .iconContainer {
-    display: flex;
-    padding-inline-end: var(--spacing-small-px);
-    svg {
-        width: var(--spacing-large-px);
-        height: var(--spacing-large-px);
-    }
+  display: flex;
+  padding-inline-end: var(--spacing-small-px);
+  svg {
+    inline-size: var(--spacing-large-px);
+    block-size: var(--spacing-large-px);
+  }
 
-    @include breakpoints.smallerThanTablet {
-        padding-inline-end: var(--spacing-xxsmall-px);
-        svg {
-            width: var(--spacing-medium-px);
-            height: var(--spacing-medium-px);
-        }
+  @include breakpoints.smallerThanTablet {
+    padding-inline-end: var(--spacing-xxsmall-px);
+    svg {
+      inline-size: var(--spacing-medium-px);
+      block-size: var(--spacing-medium-px);
     }
+  }
 }
 
 .srOnly {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 .cardOuterContainer {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-micro);
-    font-weight: var(--font-weight-semibold);
-    width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-micro);
+  font-weight: var(--font-weight-semibold);
+  inline-size: 100%;
 }
 
 .link {
-    @include breakpoints.smallerThanTablet {
-        color: var(--color-text-faded-new);
-    }
+  @include breakpoints.smallerThanTablet {
+    color: var(--color-text-faded-new);
+  }
 }
 
 .linkHref {
-    color: var(--color-text-link);
+  color: var(--color-text-link);
 }
 
 .firstTimeReadingCard {
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-        box-shadow: none !important;
-        border-radius: 0;
-        padding: 0 !important;
-    }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+    box-shadow: none !important;
+    border-radius: 0;
+    padding: 0 !important;
+  }
 }
 
 .arrowIcon {
-    @include breakpoints.smallerThanTablet {
-        display: none;
-    }
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }

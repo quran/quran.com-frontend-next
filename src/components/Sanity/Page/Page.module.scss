@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 $blocks-container-max-width: calc(25 * var(--spacing-mega));
 
@@ -10,11 +10,11 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
   @include breakpoints.desktop {
     display: flex;
     justify-content: center;
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       flex-direction: row-reverse;
     }
   }
-  width: 100%;
+  inline-size: 100%;
 }
 
 .bold {
@@ -32,7 +32,7 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
 .headerSection {
   padding-block-start: var(--spacing-medium);
   padding-inline-end: calc(1.5 * var(--spacing-mega));
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     padding-inline-start: calc(1.5 * var(--spacing-mega));
     padding-inline-end: 0;
   }
@@ -53,7 +53,7 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
 }
 
 .blocksContainer {
-  max-width: $blocks-container-max-width;
+  max-inline-size: $blocks-container-max-width;
 }
 
 .backLink {
@@ -61,7 +61,7 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
   align-items: center;
   margin-block-end: calc(1.5 * var(--spacing-medium));
   line-height: normal;
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     flex-direction: row-reverse;
     & > svg {
       transform: scaleX(-1);
@@ -70,13 +70,13 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
     }
   }
   & > svg {
-    width: var(--spacing-medium);
+    inline-size: var(--spacing-medium);
     margin-inline-end: var(--spacing-xxsmall);
   }
 }
 
 .image {
-  max-width: 100%;
+  max-inline-size: 100%;
   border-radius: var(--border-radius-rounded);
   margin: var(--spacing-large) 0;
 }

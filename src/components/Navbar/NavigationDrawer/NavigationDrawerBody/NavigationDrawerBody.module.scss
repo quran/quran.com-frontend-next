@@ -1,11 +1,11 @@
 @use 'src/styles/utility';
 
 .listItemsContainer {
-  height: 100%;
+  block-size: 100%;
   position: relative;
   overflow: hidden !important;
   /* Fallback for browsers without dynamic viewport units */
-  max-height: calc(100vh - var(--navbar-container-height));
+  max-block-size: calc(100vh - var(--navbar-container-height));
   /* Prefer dynamic viewport units where supported */
   max-height: calc(100dvh - var(--navbar-container-height));
 }
@@ -15,8 +15,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
   overflow: hidden !important;
-  height: 100%;
-  min-height: 0;
+  block-size: 100%;
+  min-block-size: 0;
 
   &.hide {
     pointer-events: none;
@@ -24,7 +24,7 @@
 }
 
 .listItems {
-  min-height: 0;
+  min-block-size: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-inline: var(--spacing-medium3-px);
@@ -62,7 +62,7 @@
 
 .ctaContainer {
   margin-inline: auto;
-  max-width: fit-content;
+  max-inline-size: fit-content;
   padding: var(--spacing-medium2-px) var(--spacing-medium3-px);
 }
 
@@ -74,11 +74,11 @@
 }
 
 .ctaDonateButton {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .languageTrigger {
-  width: 100%;
+  inline-size: 100%;
   justify-content: center;
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   cursor: pointer;

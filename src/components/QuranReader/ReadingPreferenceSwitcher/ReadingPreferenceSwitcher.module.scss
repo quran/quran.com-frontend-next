@@ -4,7 +4,7 @@ $contextMenuReadingPreferenceIconOnlyWidth: 73px;
 $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 
 .container {
-  max-width: $readingPreferenceMaxWidth;
+  max-inline-size: $readingPreferenceMaxWidth;
   margin-inline-start: auto;
   margin-inline-end: auto;
   padding-block-start: 0;
@@ -19,13 +19,13 @@ $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 }
 
 .tajweedMushaf {
-  padding-top: $readingPreferenceSwitcherContainerTopPadding;
+  padding-block-start: $readingPreferenceSwitcherContainerTopPadding;
 }
 
 .contextMenuContainer {
-  width: $contextMenuReadingPreferenceMaxWidth;
+  inline-size: $contextMenuReadingPreferenceMaxWidth;
 }
 
 .contextMenuIconOnlyContainer {
-  width: $contextMenuReadingPreferenceIconOnlyWidth;
+  inline-size: $contextMenuReadingPreferenceIconOnlyWidth;
 }

@@ -3,7 +3,7 @@
 @use 'src/styles/constants';
 
 body {
-  min-height: 100vh;
+  min-block-size: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
   padding: 0px !important;
@@ -74,10 +74,7 @@ select option {
 .__remotion-player {
   /* Center the video */
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
   margin: 0 auto;
 }
 

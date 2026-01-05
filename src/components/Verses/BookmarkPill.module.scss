@@ -14,7 +14,7 @@
 .closeIconContainer {
   display: flex;
   border: none;
-  width: var(--spacing-xsmall);
+  inline-size: var(--spacing-xsmall);
   box-sizing: border-box;
   justify-content: center;
   padding-inline-start: var(--spacing-small);
@@ -33,8 +33,8 @@
     justify-content: center;
   }
   & svg {
-    width: var(--spacing-medium);
-    height: var(--spacing-medium);
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
   }
 }
 
