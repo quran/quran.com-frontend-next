@@ -13,7 +13,10 @@ import StarRating from '@/dls/Forms/StarRating';
 import TextArea from '@/dls/Forms/TextArea';
 import { FormFieldType } from '@/types/FormField';
 
-export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
+export type SubmissionResult<T> = Promise<void | {
+  errors?: { [key in keyof T]: string };
+  success?: boolean;
+}>;
 type FormBuilderProps<T> = {
   className?: string;
   formFields: FormBuilderFormField[];
@@ -23,6 +26,11 @@ type FormBuilderProps<T> = {
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
   shouldSkipValidation?: boolean;
+  /**
+   * When true, automatically clears all form fields after successful submission (when the promise resolves without errors).
+   * Note: The onSubmit handler must return a promise that resolves with { success: true } for the form to be cleared.
+   */
+  shouldClearOnSuccess?: boolean;
 };
 
 /**
@@ -56,22 +64,28 @@ const FormBuilder = <T,>({
   isSubmitting,
   renderAction,
   shouldSkipValidation,
+  shouldClearOnSuccess = false,
 }: FormBuilderProps<T>) => {
   const {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { isValid, isDirty },
   } = useForm({ mode: 'onChange' });
 
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
     if (onSubmitPromise) {
-      onSubmitPromise.then((errorData) => {
-        if (errorData && errorData?.errors) {
-          Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
-            setError(field, { type: 'manual', message: errorMessage as string });
-          });
+      onSubmitPromise.then((result) => {
+        if (result) {
+          if (result.errors) {
+            Object.entries(result.errors).forEach(([field, errorMessage]) => {
+              setError(field, { type: 'manual', message: errorMessage as string });
+            });
+          } else if (result.success && shouldClearOnSuccess) {
+            reset();
+          }
         }
       });
     }

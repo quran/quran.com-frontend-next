@@ -19,7 +19,7 @@ interface UpdateUserProfileData {
 interface UseUpdateUserProfileReturn {
   updateProfile: (
     data: UpdateUserProfileData,
-  ) => Promise<{ errors?: Record<string, string> } | void>;
+  ) => Promise<{ errors?: Record<string, string>; success?: boolean } | void>;
   isUpdating: boolean;
 }
 
@@ -38,9 +38,10 @@ const enum ProfileUpdateTelemetry {
  *     - lastName?: string - User's last name
  *     - avatar?: string - Avatar image URL
  *     - removeAvatar?: boolean - Flag to remove the current avatar
- *     Returns Promise<{ errors?: Record<string, string> } | void>:
+ *     Returns Promise<{ errors?: Record<string, string>; success?: boolean } | void>:
  *     - Resolves to { errors?: Record<string, string> } if validation fails
- *     - Resolves to undefined if update succeeds or generic error occurs
+ *     - Resolves to { success: true } if update succeeds
+ *     - Resolves to undefined if generic error or exception occurs
  *   - isUpdating: boolean - Indicates whether a profile update is currently in progress
  */
 const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
@@ -134,18 +135,18 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
     response: { success: boolean; message?: string },
     errors: Record<string, string> | undefined,
     updateFields: string[],
-  ): { errors?: Record<string, string> } | void => {
+  ): { errors?: Record<string, string>; success?: boolean } | void => {
     if (!response.success) {
       return errors?.avatar
         ? { errors: { avatar: response.message || t('errors.upload-avatar-failed') } }
         : handleUpdateError(errors, updateFields);
     }
-    return undefined;
+    return { success: response.success };
   };
 
   const updateProfile = async (
     data: UpdateUserProfileData,
-  ): Promise<{ errors?: Record<string, string> } | void> => {
+  ): Promise<{ errors?: Record<string, string>; success?: boolean } | void> => {
     setIsUpdating(true);
     const updateFields = getUpdateFields(data);
     addSentryBreadcrumb(ProfileUpdateTelemetry.BreadcrumbCategory, 'Update user profile started', {
@@ -157,13 +158,13 @@ const useUpdateUserProfile = (): UseUpdateUserProfileReturn => {
     try {
       const updateData = buildUpdateData(data);
       const { data: response, errors } = await updateUserProfile(updateData);
-      const errorResult = processUpdateResponse(response, errors, updateFields);
-      if (errorResult) {
-        return errorResult;
+      const result = processUpdateResponse(response, errors, updateFields);
+      if (result && result.errors) {
+        return result;
       }
 
       handleUpdateSuccess(data, updateFields);
-      return undefined;
+      return { success: response.success };
     } catch (error) {
       handleUpdateException(error, updateFields);
       return undefined;

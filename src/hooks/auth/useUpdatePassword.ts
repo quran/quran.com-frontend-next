@@ -13,7 +13,9 @@ interface UpdatePasswordData {
 }
 
 interface UseUpdatePasswordReturn {
-  updatePassword: (data: UpdatePasswordData) => Promise<{ errors?: Record<string, string> } | void>;
+  updatePassword: (
+    data: UpdatePasswordData,
+  ) => Promise<{ errors?: Record<string, string>; success?: boolean } | void>;
   isUpdating: boolean;
 }
 
@@ -31,9 +33,10 @@ const enum PasswordUpdateTelemetry {
  *     - currentPassword: string - User's current password
  *     - newPassword: string - New password to set
  *     - confirmPassword: string - Confirmation of new password
- *     Returns Promise<{ errors?: Record<string, string> } | void>:
+ *     Returns Promise<{ errors?: Record<string, string>; success?: boolean } | void>:
  *     - Resolves to { errors?: Record<string, string> } if validation fails
- *     - Resolves to undefined if update succeeds or generic error occurs
+ *     - Resolves to { success: true } if update succeeds
+ *     - Resolves to undefined if generic error or exception occurs
  *   - isUpdating: boolean - Indicates whether a password update is currently in progress
  */
 const useUpdatePassword = (): UseUpdatePasswordReturn => {
@@ -85,28 +88,28 @@ const useUpdatePassword = (): UseUpdatePasswordReturn => {
   const processUpdateResponse = (
     response: { success: boolean; message?: string },
     errors: Record<string, string> | undefined,
-  ): { errors?: Record<string, string> } | void => {
+  ): { errors?: Record<string, string>; success?: boolean } | void => {
     if (!response.success) {
       return handleUpdateError(errors);
     }
-    return undefined;
+    return { success: response.success };
   };
 
   const updatePasswordHandler = async (
     data: UpdatePasswordData,
-  ): Promise<{ errors?: Record<string, string> } | void> => {
+  ): Promise<{ errors?: Record<string, string>; success?: boolean } | void> => {
     setIsUpdating(true);
     addSentryBreadcrumb(PasswordUpdateTelemetry.BreadcrumbCategory, 'Update password started', {});
 
     try {
       const { data: response, errors } = await updatePassword(data);
-      const errorResult = processUpdateResponse(response, errors);
-      if (errorResult) {
-        return errorResult;
+      const result = processUpdateResponse(response, errors);
+      if (result && result.errors) {
+        return result;
       }
 
       handleUpdateSuccess();
-      return undefined;
+      return { success: true };
     } catch (error) {
       handleUpdateException(error);
       return undefined;
