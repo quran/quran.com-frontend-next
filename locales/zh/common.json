@@ -244,6 +244,10 @@
   },
   "fundraising": {
     "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
+    "donation-campaign": {
+      "cta": "立即捐款",
+      "text": "成为支持者"
+    },
     "title": "成为每月捐助者"
   },
   "get-started": "立即开始",

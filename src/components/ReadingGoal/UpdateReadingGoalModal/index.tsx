@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -17,6 +17,7 @@ import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import useIsMobile from '@/hooks/useIsMobile';
 import { logErrorToSentry } from '@/lib/sentry';
 import {
   Goal,
@@ -31,9 +32,12 @@ import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/event
 import { generateDurationDaysOptions } from '@/utils/generators';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-type UpdateReadingGoalButtonProps = {
+type PropsUpdateReadingGoalModal = {
   isDisabled?: boolean;
   goal: Goal;
+  isOpen: boolean;
+  onModalChange: (visible: boolean) => void;
+  onShowDeleteModal: () => void;
 };
 
 const getPages = (readingGoal: Goal) => {
@@ -64,10 +68,16 @@ const types = [
   { value: GoalType.RANGE, key: 'range' },
 ] as const;
 
-const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonProps) => {
+const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
+  isDisabled,
+  goal,
+  isOpen,
+  onModalChange,
+  onShowDeleteModal,
+}) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const isMobile = useIsMobile();
 
   const mushaf = useGetMushaf();
   const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
@@ -104,7 +114,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
   }, [goal]);
 
   const closeModal = () => {
-    setIsModalVisible(false);
+    onModalChange(false);
 
     resetState();
   };
@@ -115,7 +125,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
 
   const onUpdateGoalClicked = () => {
     logButtonClick('edit_reading_goal');
-    setIsModalVisible(true);
+    onModalChange(true);
   };
 
   const onUpdateClicked = async () => {
@@ -187,11 +197,16 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
 
   return (
     <>
-      <Button onClick={onUpdateGoalClicked} isDisabled={isDisabled}>
+      <Button
+        onClick={onUpdateGoalClicked}
+        isDisabled={isDisabled}
+        variant={isMobile ? ButtonVariant.Rounded : ButtonVariant.Compact}
+        className={styles.editGoalButton}
+      >
         {t('edit-goal.action')}
       </Button>
 
-      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
+      <Modal isOpen={isOpen} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('edit-goal.title')}</Modal.Title>
@@ -267,15 +282,25 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
             </div>
           </Modal.Header>
           <Modal.Footer>
-            <Button
-              type={ButtonType.Primary}
-              variant={ButtonVariant.Outlined}
-              className={styles.deleteButton}
-              onClick={onUpdateClicked}
-              isDisabled={getIsUpdateDisabled()}
-            >
-              {t('edit-goal.action')}
-            </Button>
+            <div className={styles.footerCtaContainer}>
+              <Button
+                type={ButtonType.Primary}
+                variant={ButtonVariant.Outlined}
+                className={styles.actionButton}
+                onClick={onUpdateClicked}
+                isDisabled={getIsUpdateDisabled()}
+              >
+                {t('edit-goal.action')}
+              </Button>
+              <Button
+                type={ButtonType.Error}
+                variant={ButtonVariant.Ghost}
+                className={styles.actionButton}
+                onClick={onShowDeleteModal}
+              >
+                {t('delete-goal.action')}
+              </Button>
+            </div>
           </Modal.Footer>
         </Modal.Body>
       </Modal>

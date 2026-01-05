@@ -53,7 +53,7 @@ const nextConfig = {
       'platform-lookaside.fbsbx.com',
     ],
   },
-  webpack: (webpackConfig, { isServer }) => {
+  webpack: (webpackConfig) => {
     webpackConfig.resolve = {
       ...webpackConfig.resolve,
       alias: {
@@ -95,19 +95,6 @@ const nextConfig = {
         },
       ],
     });
-
-    if (!webpackConfig.externals) {
-      webpackConfig.externals = [];
-    }
-
-    // New Relic is a server-side dependency, so we don't want to bundle it in the client-side build.
-    if (!isServer) {
-      webpackConfig.externals.push('newrelic');
-    }
-
-    if (isServer) {
-      webpackConfig.externals.push('msw/node');
-    }
 
     return webpackConfig;
   },

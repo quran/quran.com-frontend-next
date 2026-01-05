@@ -1,10 +1,9 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import { expect, test } from '@playwright/test';
 
 import { getEditDetailsSection, getFormInputs } from './edit-details-form-helpers';
-import { enableValidation, expectError, expectNoError, fillAndBlur } from './form-helpers';
+import { expectError, expectNoError, fillAndBlur } from './form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -12,6 +11,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@edit-details'];
@@ -95,10 +95,9 @@ test.describe('Required Field Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { firstName, saveButton } = getFormInputs(section);
+      const { firstName } = getFormInputs(section);
 
       await firstName.clear();
-      await enableValidation(page, saveButton);
       await firstName.blur();
 
       await expectError(section, /first.*name.*is.*missing|missing/i);
@@ -110,10 +109,9 @@ test.describe('Required Field Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { lastName, saveButton } = getFormInputs(section);
+      const { lastName } = getFormInputs(section);
 
       await lastName.clear();
-      await enableValidation(page, saveButton);
       await lastName.blur();
 
       await expectError(section, /last.*name.*is.*missing|missing/i);
@@ -155,9 +153,8 @@ test.describe('Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { firstName, saveButton } = getFormInputs(section);
+      const { firstName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(firstName, 'Ab');
       await page.waitForTimeout(500);
 
@@ -170,9 +167,8 @@ test.describe('Length Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { lastName, saveButton } = getFormInputs(section);
+      const { lastName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(lastName, 'Do');
       await page.waitForTimeout(500);
 
@@ -215,9 +211,8 @@ test.describe('Character Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { firstName, saveButton } = getFormInputs(section);
+      const { firstName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(firstName, 'John@Doe');
 
       await expectError(section, /this.*first.*name.*is.*invalid|invalid/i);
@@ -229,9 +224,8 @@ test.describe('Character Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { lastName, saveButton } = getFormInputs(section);
+      const { lastName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(lastName, 'Doe!Smith');
 
       await expectError(section, /this.*last.*name.*is.*invalid|invalid/i);
@@ -243,9 +237,8 @@ test.describe('Character Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { firstName, saveButton } = getFormInputs(section);
+      const { firstName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(firstName, 'John#Doe');
       await page.waitForTimeout(500);
 
@@ -258,9 +251,8 @@ test.describe('Character Validation', () => {
     { tag: TEST_TAGS },
     async ({ page }) => {
       const section = getEditDetailsSection(page);
-      const { lastName, saveButton } = getFormInputs(section);
+      const { lastName } = getFormInputs(section);
 
-      await enableValidation(page, saveButton);
       await fillAndBlur(lastName, 'Doe*Smith');
       await page.waitForTimeout(500);
 
@@ -281,7 +273,7 @@ test.describe('Form Submission', () => {
       await fillAndBlur(lastName, 'Doe');
       await saveButton.click();
 
-      const successMessage = page.getByText(/success|updated.*successfully/i);
+      const successMessage = page.getByText(/profile.*is.*updated.*successfully/i);
       await expect(successMessage).toBeVisible({ timeout: 10000 });
 
       await page.reload();

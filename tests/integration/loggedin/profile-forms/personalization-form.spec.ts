@@ -8,6 +8,7 @@ import {
   uploadProfilePicture,
 } from './personalization-form-helpers';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -15,6 +16,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
+  await ensureEnglishLanguage(page);
 });
 
 const TEST_TAGS = ['@slow', '@auth', '@profile', '@personalization'];
@@ -76,7 +78,7 @@ test.describe('File Validation', () => {
 
     await expectToastError(
       page,
-      /file.*size.*exceeds.*limit|file.*too.*large/i,
+      /profile.*pic.*size.*should.*be.*5.*mb.*maximum/i,
       TIMEOUTS.VISIBILITY,
     );
   });
@@ -95,28 +97,67 @@ test.describe('File Validation', () => {
   });
 });
 
+const ensureProfilePictureExists = async (page) => {
+  const { removeButton } = getProfilePictureButtons(page);
+  const hasProfilePicture = await removeButton
+    .isVisible({ timeout: TIMEOUTS.ERROR })
+    .catch(() => false);
+
+  if (!hasProfilePicture) {
+    const testImage = createTestImage('small');
+    await uploadProfilePicture(page, testImage, 'test-image.jpg', 'image/jpg');
+    await page.waitForTimeout(TIMEOUTS.UPLOAD);
+    await expect(removeButton).toBeVisible({ timeout: TIMEOUTS.REMOVAL });
+  }
+};
+
+const expectDeleteModalVisible = async (page) => {
+  await expect(page.getByText('Delete Profile Picture')).toBeVisible();
+  await expect(
+    page.getByText(/You will delete the profile pic and reset it to the default/i),
+  ).toBeVisible();
+};
+
+const confirmDeletion = async (page) => {
+  const confirmButton = page.getByRole('button', { name: 'Yes' });
+  await expect(confirmButton).toBeVisible();
+  await confirmButton.click();
+};
+
 test.describe('Remove Functionality', () => {
   test(
-    'should remove profile picture when remove button is clicked',
+    'should remove profile picture when remove button is clicked and confirmed',
     { tag: TEST_TAGS },
     async ({ page }) => {
       const { removeButton, uploadButton } = getProfilePictureButtons(page);
-      const hasProfilePicture = await removeButton
-        .isVisible({ timeout: TIMEOUTS.ERROR })
-        .catch(() => false);
-
-      if (!hasProfilePicture) {
-        const testImage = createTestImage('small');
-        await uploadProfilePicture(page, testImage, 'test-image.jpg', 'image/jpg');
-        await page.waitForTimeout(TIMEOUTS.UPLOAD);
-        await expect(removeButton).toBeVisible({ timeout: TIMEOUTS.REMOVAL });
-      }
+      await ensureProfilePictureExists(page);
 
       await removeButton.click();
+      await expectDeleteModalVisible(page);
+      await confirmDeletion(page);
       await page.waitForTimeout(TIMEOUTS.ERROR);
 
       await expect(removeButton).not.toBeVisible({ timeout: TIMEOUTS.REMOVAL });
       await expect(uploadButton).toBeVisible();
+    },
+  );
+
+  test(
+    'should cancel profile picture removal when cancel button is clicked',
+    { tag: TEST_TAGS },
+    async ({ page }) => {
+      const { removeButton } = getProfilePictureButtons(page);
+      await ensureProfilePictureExists(page);
+
+      await removeButton.click();
+      await expect(page.getByText('Delete Profile Picture')).toBeVisible();
+
+      const cancelButton = page.getByRole('button', { name: 'No' });
+      await expect(cancelButton).toBeVisible();
+      await cancelButton.click();
+
+      await expect(page.getByText('Delete Profile Picture')).not.toBeVisible();
+      await expect(removeButton).toBeVisible();
     },
   );
 });

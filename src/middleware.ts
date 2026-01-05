@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-/**
- * Middleware to handle various request processing needs.
- *
- * @param {NextRequest} req - The incoming request
- * @returns {NextResponse} The response or continuation
- */
-export default function middleware(req: NextRequest): NextResponse {
+import {
+  CLOUD_FLARE_HEADER,
+  COUNTRY_COOKIE_NAME,
+  COUNTRY_RESPONSE_HEADER,
+} from '@/constants/country';
+
+export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // If the request is for _next/data, return a 404 response
@@ -41,14 +41,17 @@ export default function middleware(req: NextRequest): NextResponse {
     return response;
   }
 
-  /**
-   * For all other pages (non-embed), add X-Frame-Options: SAMEORIGIN to prevent clickjacking attacks.
-   * This header ensures that these pages cannot be embedded in iframes on external sites,
-   * protecting users from UI redress/clickjacking vulnerabilities.
-   * Note: This is intentionally not set for /embed/ pages, which are designed to be embedded.
-   */
+  const country = req.headers.get(CLOUD_FLARE_HEADER) ?? 'unknown';
   const response = NextResponse.next();
-  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+
+  response.cookies.set({
+    name: COUNTRY_COOKIE_NAME,
+    value: country,
+    path: '/',
+    sameSite: 'lax',
+  });
+
+  response.headers.set(COUNTRY_RESPONSE_HEADER, country);
 
   return response;
 }

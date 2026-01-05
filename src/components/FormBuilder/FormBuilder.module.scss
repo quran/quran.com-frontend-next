@@ -7,6 +7,12 @@
   margin-block: var(--spacing-xxsmall);
 }
 
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
 .errorText {
   color: var(--color-error-deep);
 }
