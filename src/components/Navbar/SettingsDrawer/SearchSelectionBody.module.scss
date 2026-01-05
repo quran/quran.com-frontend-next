@@ -15,6 +15,14 @@
   margin-block-end: var(--spacing-xsmall);
   display: flex;
   align-items: center;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.infoIcon {
+  width: var(--spacing-medium-px);
+  height: var(--spacing-medium-px);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .group {
