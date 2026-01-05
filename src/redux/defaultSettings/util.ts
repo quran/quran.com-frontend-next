@@ -17,8 +17,8 @@ import Theme from '@/redux/types/Theme';
 import TranslationsSettings from '@/redux/types/TranslationsSettings';
 import Language from '@/types/Language';
 import { QuranFont, Mushaf, MushafLines } from '@/types/QuranReader';
+import ReflectionLanguage from '@/types/QuranReflect/ReflectionLanguage';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
-import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
 /* eslint-disable react-func/max-lines-per-function */
 /**
