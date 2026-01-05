@@ -89,18 +89,20 @@ const FormBuilder = <T,>({
     (data: T) => {
       const onSubmitPromise = onSubmit(data);
       if (onSubmitPromise) {
-        onSubmitPromise.then((errorData) => {
-          if (errorData && errorData?.errors) {
-            Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
-              setError(field, { type: 'manual', message: errorMessage as string });
-            });
-          } else if (result.success && shouldClearOnSuccess) {
-            reset();
+        onSubmitPromise.then((result) => {
+          if (result) {
+            if (result.errors) {
+              Object.entries(result.errors).forEach(([field, errorMessage]) => {
+                setError(field, { type: 'manual', message: errorMessage as string });
+              });
+            } else if (result.success && shouldClearOnSuccess) {
+              reset();
+            }
           }
         });
       }
     },
-    [onSubmit, setError],
+    [onSubmit, setError, reset, shouldClearOnSuccess],
   );
 
   const renderError = useCallback(
