@@ -1,5 +1,4 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function, no-await-in-loop */
+/* eslint-disable max-lines, react-func/max-lines-per-function, no-await-in-loop */
 import { test, expect } from '@playwright/test';
 
 import { switchToReadingMode, switchToTranslationMode } from '@/tests/helpers/mode-switching';
