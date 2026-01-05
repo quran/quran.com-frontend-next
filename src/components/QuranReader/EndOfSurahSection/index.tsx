@@ -55,8 +55,8 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   }, [questionsData, chapterNumber]);
 
   const { data: metadataResponse } = useSWRImmutable(
-    makeChapterMetadataUrl(chapterNumber, lang),
-    () => getChapterMetadata(chapterNumber, lang),
+    makeChapterMetadataUrl(String(chapterNumber), lang),
+    () => getChapterMetadata(String(chapterNumber), lang),
   );
 
   const handleModalOpen = (modalType: ModalType) => {
