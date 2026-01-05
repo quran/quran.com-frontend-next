@@ -763,23 +763,6 @@ const resolveEmbedBaseUrl = (): string => {
 
 const mapEmbedTheme = (theme: ThemeTypeVariant): string =>
   theme === ThemeType.Dark ? 'dark' : 'light';
-
-const mapEmbedFont = (mushaf: MushafType): string => {
-  switch (mushaf) {
-    case 'kfgqpc_v1':
-      return 'v1';
-    case 'indopak':
-      return 'indopak';
-    case 'tajweed':
-      return 'uthmani';
-    case 'kfgqpc_v2':
-      return 'v2';
-    case 'qpc':
-    default:
-      return 'uthmani';
-  }
-};
-
 const buildVersesParam = (preferences: Preferences): string => {
   const chapter = preferences.selectedSurah;
   const start = preferences.selectedAyah;
@@ -819,7 +802,6 @@ export const buildEmbedIframeSrc = (
   setParam('audio', String(preferences.enableAudio), 'true');
   setParam('reciter', reciterValue, String(DEFAULTS.reciterId));
   setParam('theme', mapEmbedTheme(preferences.theme), 'light');
-  setParam('font', mapEmbedFont(preferences.mushaf), 'v2');
   setParam('mushaf', preferences.mushaf, 'qpc');
   setParam('locale', preferences.locale, 'en');
   setParam('wbw', String(preferences.enableWbwTranslation), 'false');

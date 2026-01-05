@@ -100,43 +100,7 @@ const parseVersesParam = (value: string): VerseRangeParam => {
   if (rangeEnd !== undefined && (!Number.isFinite(rangeEnd) || rangeEnd <= Number(from))) {
     throw new WidgetInputError(400, 'Invalid range end. It must be a number greater than start.');
   }
-
   return { ayah, rangeEnd };
-};
-
-/**
- * Resolve mushaf type from query params.
- *
- * Back-compat:
- * - "font=v1|v2|indopak|tajweed|uthmani" maps to mushaf types
- * - "mushaf=..." (preferred) supports direct MushafType values
- *
- * @param {string | undefined} fontParam - Legacy font param.
- * @param {string | undefined} mushafParam - Mushaf type param.
- * @returns {MushafType} Resolved mushaf.
- */
-const resolveMushaf = (fontParam?: string, mushafParam?: string): MushafType => {
-  // Prefer explicit mushaf selection when provided.
-  if (isMushafType(mushafParam)) return mushafParam;
-
-  if (fontParam) {
-    switch (fontParam) {
-      case 'v1':
-        return 'kfgqpc_v1';
-      case 'v2':
-        return 'kfgqpc_v2';
-      case 'indopak':
-        return 'indopak';
-      case 'tajweed':
-        return 'tajweed';
-      case 'uthmani':
-        return 'qpc';
-      default:
-        break;
-    }
-  }
-
-  return 'qpc';
 };
 
 /**
@@ -457,10 +421,8 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
         ? themeParam
         : ThemeType.Light;
 
-    // Mushaf font (legacy "font") + current "mushaf"
-    const fontParam: string | undefined = parseString(query.font);
     const mushafParam: string | undefined = parseString(query.mushaf);
-    const mushaf: MushafType = resolveMushaf(fontParam, mushafParam);
+    const mushaf: MushafType = isMushafType(mushafParam) ? mushafParam : 'qpc';
 
     // Display toggles (support legacy keys too)
     const showTranslatorNames: boolean = parseBool(
