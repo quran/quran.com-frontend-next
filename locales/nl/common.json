@@ -44,7 +44,8 @@
     "nav-drawer-open": "Navigatie lade openen",
     "play-surah": "Surah {{surahName}}afspelen",
     "select-lng": "Selecteer taal",
-    "sidebar-nav-close": "Navigatie zijbalk sluiten"
+    "sidebar-nav-close": "Navigatie zijbalk sluiten",
+    "translation-info": "Bekijk vertaalinformatie"
   },
   "audio": {
     "auto-scroll": {

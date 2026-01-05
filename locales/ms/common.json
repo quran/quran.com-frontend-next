@@ -44,7 +44,8 @@
     "nav-drawer-open": "Buka Laci Navigasi",
     "play-surah": "Mainkan Surah {{surahName}}",
     "select-lng": "Pilih Bahasa",
-    "sidebar-nav-close": "Tutup Bar Sisi Navigasi"
+    "sidebar-nav-close": "Tutup Bar Sisi Navigasi",
+    "translation-info": "Lihat maklumat terjemahan"
   },
   "audio": {
     "auto-scroll": {

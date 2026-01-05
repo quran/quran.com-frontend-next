@@ -44,7 +44,8 @@
     "nav-drawer-open": "เปิดลิ้นชักการนำทาง",
     "play-surah": "เล่นซูเราะห์ {{surahName}}",
     "select-lng": "เลือกภาษา",
-    "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง"
+    "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง",
+    "translation-info": "ดูข้อมูลการแปล"
   },
   "audio": {
     "auto-scroll": {

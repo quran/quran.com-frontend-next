@@ -44,7 +44,8 @@
     "nav-drawer-open": "Ouvrir le tiroir de navigation",
     "play-surah": "Écouter la Sourate {{surahName}}",
     "select-lng": "Choisir la langue",
-    "sidebar-nav-close": "Fermer la barre latérale de navigation"
+    "sidebar-nav-close": "Fermer la barre latérale de navigation",
+    "translation-info": "Afficher les informations de traduction"
   },
   "audio": {
     "auto-scroll": {
