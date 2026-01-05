@@ -44,7 +44,6 @@ const useFetchVersePageNumber = (quranFont: QuranFont, mushafLines: MushafLines)
         abortControllerRef.current.abort();
       }
       const controller = new AbortController();
-      // eslint-disable-next-line no-param-reassign
       abortControllerRef.current = controller;
 
       try {

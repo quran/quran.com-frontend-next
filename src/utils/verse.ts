@@ -506,15 +506,15 @@ const SCROLL_POSITION_THRESHOLDS = {
  *    otherwise return 'end'.
  *
  * @param {string} startingVerseKey
- * @param {LookupRecord} pagesVerseRange
+ * @param {LookupRecord} pagesVersesRange
  * @returns {ScrollAlign}
  */
 export const getVersePositionWithinAMushafPage = (
   startingVerseKey: string,
-  pagesVerseRange: LookupRecord,
+  pagesVersesRange: LookupRecord,
 ): ScrollAlign => {
-  const pageStartVerseNumber = getVerseNumberFromKey(pagesVerseRange.from);
-  const pageEndVerseNumber = getVerseNumberFromKey(pagesVerseRange.to);
+  const pageStartVerseNumber = getVerseNumberFromKey(pagesVersesRange.from);
+  const pageEndVerseNumber = getVerseNumberFromKey(pagesVersesRange.to);
   const verseOrderWithinPage = getVerseNumberFromKey(startingVerseKey) - pageStartVerseNumber + 1;
   const totalPageNumberOfVerses = pageEndVerseNumber - pageStartVerseNumber + 1;
   const verseKeyPosition = (verseOrderWithinPage * 100) / totalPageNumberOfVerses;

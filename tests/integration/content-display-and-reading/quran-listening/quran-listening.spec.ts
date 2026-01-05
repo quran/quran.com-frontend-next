@@ -273,7 +273,7 @@ test.describe('Audio Player Advanced Behaviour', () => {
     await expect(secondAyah).toBeInViewport();
 
     // Navigate to last ayah and test prev button
-    // Click next multiple times to reach last ayah
+    // Al-Fatiha has 7 ayat. We're currently at ayah 2, so click next 4 times to reach ayah 6
     for (let i = 3; i < 7; i += 1) {
       await nextButton.click();
       await page.waitForTimeout(500);
@@ -343,6 +343,27 @@ test.describe('Audio Player Advanced Behaviour', () => {
     // Should scroll back to first ayah
     await expect(firstAyah.first()).toHaveClass(/highlighted/);
     await expect(firstAyah.first()).toBeInViewport();
+  });
+
+  test('Rapid next/prev clicking does not cause incorrect scroll position', async ({ page }) => {
+    await audioUtilities.startAudioPlayback(true);
+    await audioUtilities.setAudioTime(0);
+    await audioUtilities.pauseAudioPlayback();
+
+    // Scroll to bottom of page
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const nextButton = page.getByTestId(TestId.AUDIO_NEXT_AYAH);
+
+    // Click next 5 times rapidly without waiting, but ensure button is not disabled before each click
+    for (let i = 0; i < 5; i += 1) {
+      await expect(nextButton).not.toBeDisabled();
+      await nextButton.click();
+    }
+
+    // Should end up at ayah 6, not some intermediate state
+    const sixthAyah = page.getByTestId(getVerseTestId('1:6'));
+    await expect(sixthAyah).toHaveClass(/highlighted/);
   });
 });
 
