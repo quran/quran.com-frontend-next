@@ -33,6 +33,8 @@ type ContentModalProps = {
   size?: ContentModalSize;
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
+  isOverlayMax?: boolean;
+  isBottomSheetOnMobile?: boolean;
 };
 
 const SCROLLBAR_WIDTH = 15;
@@ -53,11 +55,12 @@ const ContentModal = ({
   hasHeader = true,
   onClick,
   shouldBeFullScreen = false,
+  isOverlayMax = false,
+  isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
   const { locale } = useRouter();
-
   useImperativeHandle(innerRef, () => ({
     scrollToTop: () => {
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
@@ -106,7 +109,10 @@ const ContentModal = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
+          className={classNames(styles.overlay, {
+            [styles.fullScreen]: shouldBeFullScreen,
+            [styles.overlayMax]: isOverlayMax,
+          })}
           ref={overlayRef}
         >
           <Dialog.Content
@@ -117,6 +123,7 @@ const ContentModal = ({
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
+              [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}

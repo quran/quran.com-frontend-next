@@ -122,6 +122,16 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
     } else {
       // For logged-out users, use Redux to store bookmarks locally
       dispatch(togglePageBookmark(pageNumber.toString()));
+
+      if (bookmarkedPages?.[pageNumber.toString()]) {
+        toast(t('quran-reader:page-bookmark-removed'), {
+          status: ToastStatus.Success,
+        });
+      } else {
+        toast(t('quran-reader:page-bookmarked'), {
+          status: ToastStatus.Success,
+        });
+      }
     }
   };
 

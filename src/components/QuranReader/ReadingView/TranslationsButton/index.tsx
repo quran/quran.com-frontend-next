@@ -27,12 +27,13 @@ const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
 
 interface Props {
   verse: Verse;
-  onActionTriggered: () => void;
+  onActionTriggered?: () => void;
+  isTranslationView: boolean;
 }
 
 const CLOSE_POPOVER_AFTER_MS = 200;
 
-const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
+const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTranslationView }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations);
@@ -57,19 +58,17 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
 
   const onButtonClicked = () => {
     logButtonClick(
-      // eslint-disable-next-line i18next/no-literal-string
-      `reading_view_translations_modal_open`,
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_open`,
     );
     setIsContentModalOpen(true);
   };
 
   const onModalClosed = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logEvent(`reading_view_translations_modal_close`);
+    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_close`);
     setIsContentModalOpen(false);
     setTimeout(() => {
       // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
-      onActionTriggered();
+      onActionTriggered?.();
     }, CLOSE_POPOVER_AFTER_MS);
   };
 
@@ -97,6 +96,8 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
         hasCloseButton
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
+        isOverlayMax
+        isBottomSheetOnMobile
       >
         <DataFetcher
           loading={loading}

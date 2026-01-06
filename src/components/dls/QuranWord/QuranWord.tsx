@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useMemo, useCallback, memo, useContext } from 'react';
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
@@ -13,21 +13,23 @@ import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
+import WordMobileModal from '@/components/QuranReader/ReadingView/WordMobileModal';
 import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
+import useIsMobile from '@/hooks/useIsMobile';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
-  selectWordClickFunctionality,
+  selectInlineDisplayWordByWordPreferences,
   selectReadingPreference,
   selectTooltipContentType,
-  selectInlineDisplayWordByWordPreferences,
+  selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
-  ReadingPreference,
   QuranFont,
-  WordClickFunctionality,
+  ReadingPreference,
   WordByWordType,
+  WordClickFunctionality,
 } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
@@ -81,6 +83,7 @@ const QuranWord = ({
 
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
+  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
@@ -88,6 +91,10 @@ const QuranWord = ({
   );
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
+
+  const isMobile = useIsMobile();
+  const isTranslationMode = readingPreference === ReadingPreference.Translation;
+  const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
@@ -130,6 +137,7 @@ const QuranWord = ({
   } else if (word.charTypeName !== CharType.Pause) {
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
+
   /*
     Only show the tooltip when the following conditions are met:
 
@@ -141,12 +149,11 @@ const QuranWord = ({
   const showTooltip =
     word.charTypeName === CharType.Word &&
     isWordByWordAllowed &&
-    (readingPreference === ReadingPreference.Translation ? !!showTooltipFor.length : true);
+    (isTranslationMode ? !!showTooltipFor.length : true);
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
-  const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   const onClick = useCallback(() => {
     if (isRecitationEnabled) {
@@ -169,8 +176,63 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
+  const onClick = useCallback(
+    (e: React.MouseEvent) => {
+      // Only handle clicks that are directly on word elements
+      // This prevents word pronunciation when clicking on modal content in Reading mode
+      if (e && e.target) {
+        const target = e.target as Element;
+        const wordElement = e.currentTarget as Element;
+
+        // Ensure the click is on this word element or its children, not bubbled from elsewhere
+        if (!wordElement.contains(target)) {
+          return;
+        }
+
+        // Additional check: ensure we're clicking on the actual word content, not just the container
+        const isClickingOnWordContent = wordElement?.getAttribute(DATA_ATTRIBUTE_WORD_LOCATION);
+        if (!isClickingOnWordContent) {
+          return;
+        }
+      }
+
+      handleWordAction();
+    },
+    [handleWordAction],
+  );
+
+  const onKeyPress = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        handleWordAction();
+      }
+    },
+    [handleWordAction],
+  );
+
+  const onMobileModalTriggerClick = useCallback(() => {
+    setIsMobileModalOpen(true);
+    handleWordAction();
+  }, [handleWordAction]);
+
+  const onKeyPressMobileModalTrigger = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        setIsMobileModalOpen(true);
+      }
+      handleWordAction();
+    },
+    [handleWordAction],
+  );
+
+  const onReadingModeOpenChange = useCallback(() => {
+    handleWordAction();
+  }, [handleWordAction]);
+
   const shouldHandleWordClicking = word.charTypeName !== CharType.End;
-  const isTranslationMode = readingPreference === ReadingPreference.Translation;
+  const isReadingModeDesktop = !isMobile && !isTranslationMode;
+  const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress: onClick })}
@@ -197,21 +259,53 @@ const QuranWord = ({
       })}
     >
       <Wrapper
-        shouldWrap={showTooltip}
-        wrapper={(children) =>
-          readingPreference === ReadingPreference.Translation ? (
-            <MobilePopover
-              isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
-              defaultStyling={false}
-              content={translationViewTooltipContent}
-              onOpenChange={setIsTooltipOpened}
-            >
-              {children}
-            </MobilePopover>
-          ) : (
-            <ReadingViewWordPopover word={word}>{children}</ReadingViewWordPopover>
-          )
-        }
+        shouldWrap
+        wrapper={(children) => {
+          if (isTranslationMode && showTooltip) {
+            return (
+              <MobilePopover
+                isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
+                defaultStyling={false}
+                content={translationViewTooltipContent}
+                onOpenChange={setIsTooltipOpened}
+              >
+                {children}
+              </MobilePopover>
+            );
+          }
+
+          if (isReadingModeMobile) {
+            return (
+              <>
+                <div
+                  onClick={onMobileModalTriggerClick}
+                  onKeyDown={onKeyPressMobileModalTrigger}
+                  aria-label="Open word actions"
+                  role="button"
+                  tabIndex={0}
+                >
+                  {children}
+                </div>
+
+                <WordMobileModal
+                  isOpen={isMobileModalOpen}
+                  onClose={() => setIsMobileModalOpen(false)}
+                  word={word}
+                />
+              </>
+            );
+          }
+
+          if (isReadingModeDesktop) {
+            return (
+              <ReadingViewWordPopover word={word} onOpenChange={onReadingModeOpenChange}>
+                {children}
+              </ReadingViewWordPopover>
+            );
+          }
+
+          return <>{children}</>;
+        }}
       >
         {wordText}
       </Wrapper>

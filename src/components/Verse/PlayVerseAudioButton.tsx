@@ -61,9 +61,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       reciterId: reciterQueryParamDifferent ? reciterId : undefined,
     });
 
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
 
     // if the user clicks on the play button while the onboarding is active, we should automatically go to the next step
     if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE && isVisible) {

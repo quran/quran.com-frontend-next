@@ -1,8 +1,8 @@
 .shareOptionsButtons {
     display: flex;
-    align-items: center;
-    gap: var(--spacing-medium);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: calc(var(--spacing-max) / 2);
     justify-content: center;
     width: 100%;
 }
@@ -18,8 +18,15 @@
     padding: 0;
 
     span {
-        font-size: var(--font-size-small);
+        font-size: var(--font-size-xsmall);
         color: var(--color-text-default);
+        max-width: fit-content;
+    }
+}
+
+.generateMediaButton {
+    span {
+        max-width: min-content;
     }
 }
 

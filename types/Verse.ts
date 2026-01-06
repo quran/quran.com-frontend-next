@@ -1,7 +1,7 @@
 import AudioResponse from './AudioResponse';
 import Tafsir from './Tafsir';
 import Translation from './Translation';
-import Word from './Word';
+import type Word from './Word';
 
 interface Verse {
   id: number;

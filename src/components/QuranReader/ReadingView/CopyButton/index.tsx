@@ -51,9 +51,7 @@ const CopyButton: React.FC<Props> = ({
     if (isCopied) {
       timeoutId = setTimeout(() => {
         setIsCopied(false);
-        if (onActionTriggered) {
-          onActionTriggered();
-        }
+        onActionTriggered?.();
       }, RESET_ACTION_TEXT_TIMEOUT_MS);
     }
     return () => {

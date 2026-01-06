@@ -23,6 +23,8 @@ interface NoteModalProps {
   noteId?: string;
   onNoteUpdated?: (data: Note) => void;
   onNoteDeleted?: () => void;
+  isBottomSheetOnMobile?: boolean;
+  isOverlayMax?: boolean;
 }
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -32,6 +34,8 @@ const NoteModal: React.FC<NoteModalProps> = ({
   noteId,
   onNoteUpdated,
   onNoteDeleted,
+  isBottomSheetOnMobile = false,
+  isOverlayMax = false,
 }) => {
   const contentModalRef = useRef<ContentModalHandles>();
 
@@ -63,6 +67,8 @@ const NoteModal: React.FC<NoteModalProps> = ({
       onClose={onClose}
       onEscapeKeyDown={onClose}
       size={ContentModalSize.MEDIUM}
+      isBottomSheetOnMobile={isBottomSheetOnMobile}
+      isOverlayMax={isOverlayMax}
     >
       <DataFetcher
         queryKey={queryKey}

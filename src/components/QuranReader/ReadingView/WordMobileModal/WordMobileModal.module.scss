@@ -1,0 +1,32 @@
+// This is less than the modal and the popover in (OverflowVerseActionsMenu)
+$word-modal-z-index: var(--z-index-smaller-modal);
+$word-modal-overlay-z-index: var(--z-index-sticky);
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.topActionsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.separator {
+  height: 1px;
+  background-color: var(--color-borders-hairline);
+  margin-block: var(--spacing-medium);
+}
+
+.bottomActionsContainer {
+  width: 100%;
+}
+
+.contentClassName {
+  z-index: $word-modal-z-index;
+}
+.overlayClassName {
+  z-index: $word-modal-overlay-z-index;
+}

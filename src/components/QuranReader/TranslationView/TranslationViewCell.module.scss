@@ -8,11 +8,6 @@
   direction: ltr;
   padding: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
-  @include breakpoints.tablet {
-    --gap-size: calc(1.5 * var(--spacing-mega));
-    flex-direction: row;
-    padding: 0;
-  }
 }
 
 .highlightedContainer {
@@ -29,13 +24,8 @@
   display: flex;
   direction: ltr;
   flex-direction: row;
-  justify-content: space-between;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: start;
-    margin-inline-end: calc(2 * var(--spacing-mega));
-  }
   align-items: center;
+  justify-content: space-between;
 }
 .arabicVerseContainer {
   direction: rtl;
@@ -55,10 +45,6 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: center;
-  }
 }
 .actionContainerLeft {
   justify-content: flex-start;
@@ -88,6 +74,18 @@
   }
 }
 
+.overlayMax {
+  z-index: var(--z-index-max);
+}
+
+.overlayModal {
+  z-index: var(--z-index-header);
+}
+
+.menuOffset {
+  margin-inline-end: calc(var(--spacing-medium) * 1.125);
+}
+
 .fadedVerseAction {
   opacity: var(--opacity-50);
 }
@@ -108,17 +106,76 @@
   margin-left: calc(0.5 * var(--spacing-xxsmall));
 }
 
-.priorityAction {
-  order: 1;
-  @include breakpoints.tablet {
-    order: unset;
-  }
-}
-
 .actionContainerLeft .actionItem {
   display: inline-block;
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
   @include breakpoints.tablet {
     margin-inline-end: 0;
+  }
+}
+
+.bottomActionsContainer {
+  width: 100%;
+}
+
+.tabsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-medium);
+
+  @media (min-width: 768px) {
+    gap: var(--spacing-large);
+  }
+}
+
+.center {
+  justify-content: center;
+}
+
+.separatorContainer {
+  display: flex;
+  height: var(--spacing-medium);
+  align-items: center;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--spacing-xsmall) / 2);
+  cursor: pointer;
+  color: var(--color-text-faded);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-success-medium);
+  }
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    color: currentColor;
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+
+    @include breakpoints.smallerThanTablet {
+      width: calc(var(--spacing-medium) * 1.125);
+      height: calc(var(--spacing-medium) * 1.125);
+    }
+  }
+}
+
+.tabLabel {
+  font-size: var(--font-size-normal);
+  color: inherit;
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall);
   }
 }

@@ -1,6 +1,24 @@
-@use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 .verseLink {
-  opacity: var(--opacity-50);
   text-align: center;
+  color: var(--color-text-default);
+
+  &:hover {
+    color: var(--color-success-medium);
+    opacity: 1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      color: var(--color-success-medium);
+      background-color: var(--color-success-medium);
+      @include utility.lighten-background-color;
+    }
+  }
+}
+
+.fadedVerseAction {
+  opacity: var(--opacity-50);
 }

@@ -12,19 +12,12 @@ import {
   verseTranslationFontChanged,
 } from '../utils/memoization';
 
-import BookmarkIcon from './BookmarkIcon';
+import BottomActions from './BottomActions';
+import TopActions from './TopActions';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
-import CopyButton from '@/components/QuranReader/ReadingView/CopyButton';
-import TafsirButton from '@/components/QuranReader/TafsirButton';
-import VerseNotes from '@/components/Verse/Notes';
-import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
-import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
-import VerseQuestions from '@/components/Verse/Questions';
-import VerseLink from '@/components/Verse/VerseLink';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
@@ -33,7 +26,6 @@ import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -41,26 +33,21 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  pageBookmarks: BookmarksMap | undefined;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
-  hasQuestions?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verse,
   quranReaderStyles,
   verseIndex,
-  pageBookmarks,
   bookmarksRangeUrl,
   hasNotes,
-  hasQuestions,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
 
   const audioService = useContext(AudioPlayerMachineContext);
-
   const isHighlighted = useSelectorXstate(audioService, (state) => {
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
@@ -90,40 +77,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.highlightedContainer]: isHighlighted,
         })}
       >
-        <div className={styles.actionContainer}>
-          <div className={styles.actionContainerLeft}>
-            <div className={styles.actionItem}>
-              <VerseLink verseKey={verse.verseKey} />
-            </div>
-            <div className={styles.actionItem}>
-              <BookmarkIcon
-                verse={verse}
-                pageBookmarks={pageBookmarks}
-                bookmarksRangeUrl={bookmarksRangeUrl}
-              />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <CopyButton verseKey={verse.verseKey} isTranslationView />
-            </div>
-            <div className={styles.actionItem}>
-              <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
-            </div>
-            <div className={classNames(styles.actionItem, styles.priorityAction)}>
-              <PlayVerseAudioButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <TafsirButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
-            </div>
-          </div>
-          <div className={styles.actionContainerRight}>
-            <div className={styles.actionItem}>
-              <OverflowVerseActionsMenu bookmarksRangeUrl={bookmarksRangeUrl} verse={verse} />
-            </div>
-          </div>
-        </div>
+        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -141,8 +95,8 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               </div>
             ))}
           </div>
-          <VerseQuestions verseKey={verse.verseKey} isTranslationView hasQuestions={hasQuestions} />
         </div>
+        <BottomActions verseKey={verse.verseKey} />
       </div>
       <Separator />
     </div>
@@ -180,8 +134,6 @@ const areVersesEqual = (
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  JSON.stringify(prevProps.pageBookmarks) === JSON.stringify(nextProps.pageBookmarks) &&
   prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
-  prevProps.hasNotes === nextProps.hasNotes &&
-  prevProps.hasQuestions === nextProps.hasQuestions;
+  prevProps.hasNotes === nextProps.hasNotes;
 export default memo(TranslationViewCell, areVersesEqual);

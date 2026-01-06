@@ -15,6 +15,7 @@ import TranslationViewVerse from './TranslationViewVerse';
 
 import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import Spinner from '@/dls/Spinner/Spinner';
+import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
@@ -37,7 +38,6 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
 });
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1000;
-const EMPTY_QUESTIONS = {} as Record<string, number>;
 
 const TranslationView = ({
   quranReaderStyles,
@@ -85,6 +85,15 @@ const TranslationView = ({
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
+  const { data: pageVersesQuestionsData } = useCountRangeQuestions(
+    verses?.length > 0
+      ? {
+          from: verses?.[0].verseKey,
+          to: verses?.[verses.length - 1].verseKey,
+        }
+      : null,
+  );
+
   const itemContentRenderer = (verseIdx: number) => {
     if (verseIdx === versesCount) {
       return (
@@ -127,7 +136,7 @@ const TranslationView = ({
         />
       )}
 
-      <PageQuestionsContext.Provider value={EMPTY_QUESTIONS}>
+      <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
         <div
           className={styles.wrapper}
           onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}

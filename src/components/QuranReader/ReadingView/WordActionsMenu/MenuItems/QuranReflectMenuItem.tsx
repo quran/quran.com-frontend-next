@@ -1,36 +1,30 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
-import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ChatIcon from '@/icons/chat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import Verse from 'types/Verse';
 
-type QuranReflectButtonProps = {
-  verseKey: string;
-  isTranslationView?: boolean;
+interface Props {
+  verse: Verse;
   onActionTriggered?: () => void;
-};
+}
 
-const QuranReflectButton = ({
-  verseKey,
-  isTranslationView = true,
-  onActionTriggered,
-}: QuranReflectButtonProps) => {
+const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const { verseKey } = verse;
 
-  const onButtonClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
+  const onMenuItemClicked = () => {
+    logButtonClick('reading_view_reflect');
     setIsContentModalOpen(true);
     fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
   };
@@ -40,41 +34,21 @@ const QuranReflectButton = ({
   const onModalClose = () => {
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, lang);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   const [initialChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
 
   return (
     <>
-      <Button
-        variant={ButtonVariant.Ghost}
-        onClick={onButtonClicked}
-        size={ButtonSize.Small}
-        tooltip={t('reflections-and-lessons')}
-        shouldFlipOnRTL={false}
-        shape={ButtonShape.Circle}
-        className={classNames(
-          styles.iconContainer,
-          styles.verseAction,
-          {
-            [styles.fadedVerseAction]: isTranslationView,
-          },
-          'reflection-verse-button', // for onboarding
-        )}
-        ariaLabel={t('quran-reader:aria.read-ayah-refls')}
-      >
-        <span className={styles.icon}>
-          <ChatIcon />
-        </span>
-      </Button>
+      <PopoverMenu.Item icon={<ChatIcon />} onClick={onMenuItemClicked}>
+        {t('reflections-and-lessons')}
+      </PopoverMenu.Item>
       <ReflectionBodyContainer
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
         scrollToTop={() => {
-          contentModalRef.current.scrollToTop();
+          contentModalRef.current?.scrollToTop();
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
@@ -93,4 +67,4 @@ const QuranReflectButton = ({
   );
 };
 
-export default QuranReflectButton;
+export default QuranReflectMenuItem;
