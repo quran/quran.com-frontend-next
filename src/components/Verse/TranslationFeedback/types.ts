@@ -4,6 +4,7 @@ export enum FormErrorId {
   RequiredField = 'required-field',
   MinimumLength = 'minimum-length',
   MaximumLength = 'maximum-length',
+  UnknownError = 'unknown-error',
 }
 
 export interface FormError {

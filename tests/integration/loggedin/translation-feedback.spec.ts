@@ -298,6 +298,65 @@ test.describe('Translation Feedback - Logged In Users', () => {
   );
 
   test(
+    'Server-side feedback length validation error is handled gracefully',
+    { tag: ['@translation-feedback', '@submission', '@validation', '@error-handling'] },
+    async ({ page }) => {
+      await mockPreferencesApi(page, createTranslationConfig(85, 131, 84));
+      await homePage.goTo('/1/1');
+
+      // Ensure we're in translation mode
+      await switchToTranslationMode(page);
+
+      // Mock API response that simulates server-side validation failure
+      // This happens when client-side validation passes but server sanitization
+      // (e.g., HTML entity encoding) makes the feedback exceed the max length
+      await page.route('**/translation-feedback', async (route) => {
+        await route.fulfill({
+          status: 400,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            success: false,
+            details: {
+              error: {
+                code: 'ValidationError',
+                details: {
+                  feedback: 'MAX_LENGTH',
+                  translationId: 'MISSING',
+                },
+              },
+            },
+          }),
+        });
+      });
+
+      // Open translation feedback modal
+      await openTranslationFeedbackModal(page, 'translation');
+
+      // Fill in the form with valid input that passes client-side validation
+      await selectTranslationOption(page, '131');
+      const feedbackTextarea = page.getByTestId('translation-feedback-textarea');
+
+      // Use text that would pass client validation but fail server validation after sanitization
+      await feedbackTextarea.fill(
+        'This feedback contains special characters like & < > that might get encoded and exceed server limits.',
+      );
+
+      // Submit the form
+      const reportButton = page.getByTestId('translation-feedback-submit-button');
+      await reportButton.click();
+
+      // Should show specific validation error message instead of generic error
+      await expect(page.getByTestId('feedback-error-maximum-length')).toBeVisible();
+      await expect(page.getByTestId('translation-error-required-field')).toBeVisible();
+      await expect(page.getByTestId('error-toast')).not.toBeVisible();
+
+      // Modal should remain open so user can correct the feedback
+      const modal = page.getByTestId('modal-content');
+      await expect(modal).toBeVisible();
+    },
+  );
+
+  test(
     'Cancel action closes modal without submission',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page }) => {
