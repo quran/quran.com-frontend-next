@@ -67,6 +67,7 @@ export type QuranWordProps = {
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
+  bookmarksRangeUrl?: string | null;
 };
 
 const QuranWord = ({
@@ -77,6 +78,7 @@ const QuranWord = ({
   isHighlighted,
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
+  bookmarksRangeUrl,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -155,7 +157,7 @@ const QuranWord = ({
     [isWordByWordAllowed, showTooltipFor, word],
   );
 
-  const onClick = useCallback(() => {
+  const handleWordAction = useCallback(() => {
     if (isRecitationEnabled) {
       logButtonClick('quran_word_pronounce');
       const currentState = audioService.getSnapshot();
@@ -197,15 +199,6 @@ const QuranWord = ({
       }
 
       handleWordAction();
-    },
-    [handleWordAction],
-  );
-
-  const onKeyPress = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        handleWordAction();
-      }
     },
     [handleWordAction],
   );
@@ -291,6 +284,7 @@ const QuranWord = ({
                   isOpen={isMobileModalOpen}
                   onClose={() => setIsMobileModalOpen(false)}
                   word={word}
+                  bookmarksRangeUrl={bookmarksRangeUrl}
                 />
               </>
             );
@@ -298,7 +292,11 @@ const QuranWord = ({
 
           if (isReadingModeDesktop) {
             return (
-              <ReadingViewWordPopover word={word} onOpenChange={onReadingModeOpenChange}>
+              <ReadingViewWordPopover
+                word={word}
+                onOpenChange={onReadingModeOpenChange}
+                bookmarksRangeUrl={bookmarksRangeUrl}
+              >
                 {children}
               </ReadingViewWordPopover>
             );
