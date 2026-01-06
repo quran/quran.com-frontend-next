@@ -41,6 +41,8 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
   classes,
 }) => {
   const { lang } = useTranslation();
+  const percent = goal?.isCompleted ? 100 : Math.min(goal?.progress?.percent || 0, 100);
+  const localizedPercent = toLocalizedNumber(percent, lang);
 
   return (
     <>
@@ -52,8 +54,8 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
             data-testid="goal-progress"
           >
             <CircularProgressbar
-              text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
-              value={goal.progress.percent}
+              text={`${localizedPercent}%`}
+              value={percent}
               maxValue={100}
               strokeWidth={12}
               classes={{
@@ -64,11 +66,7 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
             />
           </div>
           <div className={classNames(styles.goalStatusContainer, classes?.statusContainer)}>
-            <GoalStatus
-              goal={goal}
-              currentActivityDay={currentActivityDay}
-              percent={goal.progress.percent}
-            />
+            <GoalStatus goal={goal} currentActivityDay={currentActivityDay} percent={percent} />
           </div>
           {shouldShowArrow && (
             <IconContainer
