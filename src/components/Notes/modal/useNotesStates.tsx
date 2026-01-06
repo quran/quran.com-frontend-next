@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { logErrorToSentry } from '@/lib/sentry';
+import { toLocalizedNumber } from '@/utils/locale';
 
 const MIN_NOTE_LENGTH = 6;
 const MAX_NOTE_LENGTH = 10000;
@@ -23,7 +24,7 @@ export const useNotesStates = (
   onMyNotes?: () => void,
   isModalOpen?: boolean,
 ) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const [noteInput, setNoteInput] = useState(initialNote);
   const [errors, setErrors] = useState<Record<string, ValidationError>>({});
@@ -46,7 +47,10 @@ export const useNotesStates = (
     if (noteInput.length < MIN_NOTE_LENGTH) {
       setNoteError(
         'minimum-length',
-        t('common:validation.minimum-length', { field: t('notes:note'), value: MIN_NOTE_LENGTH }),
+        t('common:validation.minimum-length', {
+          field: t('notes:note'),
+          value: toLocalizedNumber(MIN_NOTE_LENGTH, lang),
+        }),
       );
 
       return false;
@@ -55,14 +59,17 @@ export const useNotesStates = (
     if (noteInput.length > MAX_NOTE_LENGTH) {
       setNoteError(
         'maximum-length',
-        t('common:validation.maximum-length', { field: t('notes:note'), value: MAX_NOTE_LENGTH }),
+        t('common:validation.maximum-length', {
+          field: t('notes:note'),
+          value: toLocalizedNumber(MAX_NOTE_LENGTH, lang),
+        }),
       );
 
       return false;
     }
 
     return true;
-  }, [noteInput, t, setNoteError]);
+  }, [noteInput, t, lang, setNoteError]);
 
   const onSubmit = useCallback(
     async (isPublic: boolean) => {
