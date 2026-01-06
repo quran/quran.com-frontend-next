@@ -8,13 +8,14 @@ $line-height-relaxed: 1.6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xsmall);
-  padding-block-start: calc(2 * var(--spacing-small));
+  padding-block-start: var(--spacing-large-px);
   padding-block-end: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
   border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 
   @include breakpoints.smallerThanTablet {
     margin-block-end: calc(2 * var(--spacing-small));
+    padding-block-start: calc(2 * var(--spacing-small));
   }
 }
 
@@ -162,7 +163,6 @@ div {
   @include breakpoints.tablet {
     display: block;
     padding-block-start: var(--spacing-medium3-px);
-    margin-block-end: var(--spacing-micro);
     border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   }
 }
