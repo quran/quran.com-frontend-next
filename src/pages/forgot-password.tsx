@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -6,7 +6,6 @@ import ForgotPasswordForm from '@/components/Login/ForgotPassword/ForgotPassword
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getForgotPasswordNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 
 const ForgotPasswordPage: NextPage = () => {
   const { t } = useTranslation('login');
@@ -25,7 +24,5 @@ const ForgotPasswordPage: NextPage = () => {
     </>
   );
 };
-
-export const getServerSideProps: GetServerSideProps = withSsrRedux('/forgot-password');
 
 export default ForgotPasswordPage;

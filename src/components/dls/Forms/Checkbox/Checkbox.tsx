@@ -48,7 +48,11 @@ const Checkbox: React.FC<Props> = ({
   const iconElement = checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />;
 
   const indicatorContent = (
-    <RadixCheckbox.Indicator className={keepIndicatorOnUnchecked ? undefined : indicatorClasses}>
+    <RadixCheckbox.Indicator
+      className={classNames({
+        [styles.indicatorClasses]: !keepIndicatorOnUnchecked,
+      })}
+    >
       {iconElement}
     </RadixCheckbox.Indicator>
   );

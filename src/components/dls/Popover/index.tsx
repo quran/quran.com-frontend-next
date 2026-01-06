@@ -38,6 +38,7 @@ interface Props {
   contentSideOffset?: number;
   isContainerSpan?: boolean;
   tooltipType?: TooltipType;
+  stopPropagation?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -58,6 +59,7 @@ const Popover: React.FC<Props> = ({
   contentStyles,
   isContainerSpan = false,
   tooltipType,
+  stopPropagation = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -69,6 +71,16 @@ const Popover: React.FC<Props> = ({
         [styles.tooltipContent]: useTooltipStyles,
         [styles.info]: tooltipType === TooltipType.INFO,
         [contentStyles]: contentStyles,
+      })}
+      {...(stopPropagation && {
+        onClick: (e) => e.stopPropagation(),
+        // Only stop propagation for non-navigation keys (example: Enter, Space)
+        onKeyDown: (e) => {
+          // Allow Tab and Escape to propagate for accessibility
+          if (e.key !== 'Tab' && e.key !== 'Escape') {
+            e.stopPropagation();
+          }
+        },
       })}
     >
       {children}

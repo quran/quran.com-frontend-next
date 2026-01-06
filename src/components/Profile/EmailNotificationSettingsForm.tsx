@@ -16,7 +16,7 @@ import Section from './Section';
 import sharedStyles from './SharedProfileStyles.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 const MARKETING_TAG_NAME = 'marketing';
 
@@ -30,10 +30,10 @@ const EmailNotificationSettingsForm: FC = () => {
     status,
   } = useFetchUserPreferences();
   const [preferences, setPreferences] = useState<IUserPreferenceSettings[]>(
-    userPreferences as IUserPreferenceSettings[],
+    userPreferences as IUserPreferenceSettings[] | [],
   );
   const [localPreferences, setLocalPreferences] = useState<IUserPreferenceSettings[]>(
-    userPreferences as IUserPreferenceSettings[],
+    userPreferences as IUserPreferenceSettings[] | [],
   );
   const [isSaving, setIsSaving] = useState(false);
   const { updatePreference } = useUpdateEmailNotificationPreferences();
@@ -133,7 +133,7 @@ const EmailNotificationSettingsForm: FC = () => {
   return (
     <Section
       title={t('email-notification-settings')}
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_SECTION}
+      dataTestId={TestId.AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_SECTION}
     >
       {flattenedPreferences.map((preference) => (
         <NotificationCheckbox

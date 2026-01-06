@@ -12,8 +12,8 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useAuthData from '@/hooks/auth/useAuthData';
 import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
 import DefaultUserIcon from '@/icons/default-user.svg';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
-import TEST_IDS from '@/utils/test-ids';
 
 const PersonalizationForm: FC = () => {
   const { t } = useTranslation('profile');
@@ -43,7 +43,7 @@ const PersonalizationForm: FC = () => {
   return (
     <Section
       title={t('personalization')}
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.PERSONALIZATION_SECTION}
+      dataTestId={TestId.AUTH_UPDATE_PROFILE_PERSONALIZATION_SECTION}
     >
       <div className={styles.profilePictureContainer}>
         <p className={styles.profilePictureTitle}>{t('profile-picture')}</p>
@@ -74,7 +74,7 @@ const PersonalizationForm: FC = () => {
               accept="image/jpeg,image/jpg,image/png"
               onChange={handleFileSelect}
               className={styles.profilePictureInput}
-              data-testid={TEST_IDS.AUTH.UPDATE_PROFILE.PROFILE_INPUT}
+              data-testid={TestId.AUTH_UPDATE_PROFILE_PROFILE_INPUT}
             />
             <Button
               variant={ButtonVariant.Ghost}

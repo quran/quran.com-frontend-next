@@ -1,5 +1,8 @@
 /* eslint-disable no-await-in-loop */
-import { BrowserContext, Locator, Page, expect } from '@playwright/test';
+import { BrowserContext, Locator, Page } from '@playwright/test';
+
+import { openSettingsDrawer as openSettingsDrawerHelper } from '@/tests/helpers/settings';
+import { TestId } from '@/tests/test-ids';
 
 class Homepage {
   readonly page: Page;
@@ -123,29 +126,15 @@ class Homepage {
     }
   }
 
-  async openSettingsDrawer() {
-    await this.page.waitForTimeout(1000);
-    const buttons = this.page.getByTestId('settings-button');
-    await expect(buttons).not.toHaveCount(0, { timeout: 10000 });
-    const count = await buttons.count();
-    for (let index = 0; index < count; index += 1) {
-      const button = buttons.nth(index);
-      try {
-        await expect(button).toBeVisible({ timeout: 6000 });
-        await button.click();
-        return;
-      } catch (error) {
-        // Continue trying other buttons in case this one disappears
-      }
-    }
-    throw new Error('Unable to find a visible settings button.');
+  async openSettingsDrawer(isMobile: boolean = false) {
+    await openSettingsDrawerHelper(this.page, { isMobile });
   }
 
   async enableMushafMode(isMobile: boolean) {
     if (isMobile) {
-      await this.page.getByTestId('reading-tab').click();
+      await this.page.getByTestId(TestId.READING_TAB).click();
     } else {
-      await this.page.getByTestId('reading-button').click();
+      await this.page.getByTestId(TestId.READING_BUTTON).click();
     }
   }
 
@@ -157,7 +146,7 @@ class Homepage {
   async searchFor(query: string): Promise<Locator> {
     const searchBar = this.page.locator('#searchQuery');
     await searchBar.fill(query);
-    return this.page.getByTestId('search-results');
+    return this.page.getByTestId(TestId.SEARCH_RESULTS);
   }
 }
 

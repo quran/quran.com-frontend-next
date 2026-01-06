@@ -1,6 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 /**
  * Gets the email notification settings section locator from the page
@@ -8,7 +8,7 @@ import TEST_IDS from '@/utils/test-ids';
  * @returns {Locator} The email notification settings section locator
  */
 export const getEmailNotificationSettingsSection = (page: Page): Locator => {
-  return page.getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_SECTION);
+  return page.getByTestId(TestId.AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_SECTION);
 };
 
 /**
@@ -27,7 +27,7 @@ export const getSaveButton = (section: Locator): Locator => {
  */
 export const getAllCheckboxes = async (section: Locator): Promise<Locator[]> => {
   const checkboxes = section.getByTestId(
-    TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_CHECKBOX,
+    TestId.AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_CHECKBOX,
   );
   const count = await checkboxes.count();
   const locators: Locator[] = [];
@@ -47,7 +47,7 @@ export const getAllCheckboxes = async (section: Locator): Promise<Locator[]> => 
  */
 export const getCheckboxByIndex = (section: Locator, index: number): Locator => {
   return section
-    .getByTestId(TEST_IDS.AUTH.UPDATE_PROFILE.EMAIL_NOTIFICATION_SETTINGS_CHECKBOX)
+    .getByTestId(TestId.AUTH_UPDATE_PROFILE_EMAIL_NOTIFICATION_SETTINGS_CHECKBOX)
     .nth(index);
 };
 
