@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 import React from 'react';
 
-import Translations from '@/components/AyahWidget/Translations';
 import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
 import useQcfFont from '@/hooks/useQcfFont';
 import ThemeType from '@/redux/types/ThemeType';
@@ -173,9 +173,13 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
           // Apply Tajweed font palette based on theme (--Light, --Dark, --Sepia)
           // This ensures Tajweed colors are readable on all theme backgrounds
           fontPalette: getTajweedFontPalette(options.theme),
+          // Inject CSS variables for TranslationText component
+          /* eslint-disable @typescript-eslint/naming-convention */
+          '--color-text-faded': colors.secondaryText,
+          '--color-text-link': colors.linkColor,
           ...customWidthStyle,
           ...customHeightStyle,
-        } as React.CSSProperties
+        } as unknown as React.CSSProperties
       }
     >
       <WidgetHeader verse={firstVerse} options={options} colors={colors} />
@@ -217,7 +221,27 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
                   isStandaloneMode
                 />
               )}
-              <Translations verse={verseItem} options={options} colors={colors} />
+              {/* Render translations for the verse using the shared TranslationText component */}
+              <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
+                {verseItem.translations?.map((translation) => (
+                  <TranslationText
+                    key={translation.id}
+                    languageId={translation.languageId}
+                    resourceName={
+                      options.showTranslatorNames
+                        ? translation.resourceName || translation.authorName
+                        : undefined
+                    }
+                    translationFontScale={3} // Default scale
+                    text={
+                      // In range mode, prefix with verse number
+                      options.rangeEnd
+                        ? `${verseItem.verseNumber}. ${translation.text}`
+                        : translation.text
+                    }
+                  />
+                ))}
+              </div>
             </div>
           );
         })}

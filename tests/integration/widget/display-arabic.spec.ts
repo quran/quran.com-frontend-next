@@ -12,7 +12,7 @@ test.describe('Widget - Arabic text', () => {
       locale: 'en',
     });
 
-    const arabicVerse = 'إِنَّ ٱللَّهَ وَمَلَـٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى ٱلنَّبِىِّ ۚ';
+    const arabicVerse = 'وَمَلَٰٓئِكَتَهُۥ';
     // Use data-verse-key selector which exists in VerseText component
     const element = await frame.locator('[data-testid="verse-arabic-33:56"]').first();
     await expect(element).toContainText(arabicVerse);

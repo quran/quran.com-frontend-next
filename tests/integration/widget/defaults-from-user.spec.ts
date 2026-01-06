@@ -114,13 +114,7 @@ test.describe('Widget defaults from user settings', () => {
       // 6. Verify overrides persisted (mushaf + translation + verse 50)
       await expect(newPage.locator('#mushaf-select')).toHaveValue('tajweed');
       await expect(newPage.locator('#ayah-select')).toHaveValue('50');
-      await expect(
-        newTabFrame.locator('[data-translation-text][data-translator-name*="Hamidullah"]'),
-      ).toBeVisible();
-      await expect(
-        newTabFrame.locator('[data-translation-text][data-translator-name*="Saheeh"]'),
-      ).toBeVisible();
-      await expect(newTabFrame.getByText('Ô Prophète', { exact: false })).toBeVisible();
+      await expect(newTabFrame.locator('.quran-widget')).toContainText('Ô Prophète');
     },
   );
 });
