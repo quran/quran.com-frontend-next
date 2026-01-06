@@ -74,9 +74,12 @@ const useScrollToVirtualizedReadingView = (
     async (verseNumber: number, respectScrollGuard = false) => {
       if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
-      const firstPageOfCurrentChapter = isUsingDefaultFont
-        ? initialData.verses[0].pageNumber
-        : Number(Object.keys(pagesVersesRange)[0]);
+
+      const initialDataFirstPage = initialData.verses[0]?.pageNumber;
+      const firstPageOfCurrentChapter =
+        isUsingDefaultFont && initialDataFirstPage
+          ? initialDataFirstPage
+          : Number(Object.keys(pagesVersesRange)[0]);
 
       const startFromVerseData = verses.find((verse) => verse.verseNumber === verseNumber);
       if (startFromVerseData && pagesVersesRange[startFromVerseData.pageNumber]) {
