@@ -10,8 +10,9 @@ import useSWRImmutable from 'swr/immutable';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import PlusIcon from '@/icons/plus.svg';
 import Verse from '@/types/Verse';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
@@ -221,7 +222,12 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   return (
     <>
-      <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon />}>
+      <PopoverMenu.Item
+        onClick={onMenuClicked}
+        icon={
+          <IconContainer icon={<PlusIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
+      >
         {t('common:save-to-collection')}
       </PopoverMenu.Item>
       {isDataReady && (

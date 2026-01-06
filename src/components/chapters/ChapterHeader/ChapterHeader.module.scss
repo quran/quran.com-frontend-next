@@ -1,10 +1,12 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 $chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
 
 @mixin customButton {
+  border: none;
+  background-color: var(--color-background-elevated-new);
   box-shadow: var(--shadow-small-new);
 
   svg {
@@ -12,7 +14,7 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   }
 
   &:hover {
-    border-color: var(--color-success-medium);
+    border: 1px solid var(--color-success-medium);
     color: var(--color-text-faded-new);
   }
 }

@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import NoteModal from '@/components/Notes/NoteModal';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
-import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
+import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -66,9 +67,15 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
     <>
       <PopoverMenu.Item
         onClick={onNotesClicked}
-        icon={hasNotes ? <NotesIcon /> : <EmptyNotesIcon />}
+        icon={
+          hasNotes ? (
+            <NotesFilledIcon />
+          ) : (
+            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          )
+        }
       >
-        {t('notes.title')}
+        {t('notes.label')}
       </PopoverMenu.Item>
       <NoteModal isOpen={isModalOpen} onClose={onModalClose} verseKey={verse.verseKey} />
     </>

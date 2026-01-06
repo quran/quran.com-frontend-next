@@ -8,6 +8,7 @@ import styles from './WordByWordVerseAction.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import SearchIcon from '@/icons/search-book.svg';
@@ -59,7 +60,12 @@ const WordByWordVerseAction: React.FC<Props> = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer icon={<SearchIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
+        onClick={onIconClicked}
+      >
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal

@@ -1,8 +1,14 @@
 @use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .verseLink {
   text-align: center;
-  color: var(--color-text-default);
+  color: var(--color-grey-icons-new);
+  font-size: var(--font-size-large2);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal);
+  }
 
   &:hover {
     color: var(--color-success-medium);
@@ -17,8 +23,4 @@
       @include utility.lighten-background-color;
     }
   }
-}
-
-.fadedVerseAction {
-  opacity: var(--opacity-50);
 }

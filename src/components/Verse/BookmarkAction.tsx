@@ -14,6 +14,7 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
@@ -178,9 +179,13 @@ const BookmarkAction: React.FC<Props> = ({
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
     bookmarkIcon = isVerseBookmarked ? (
-      <BookmarkedIcon style={{ color: 'var(--color-text-default)' }} />
+      <BookmarkedIcon color="var(--color-text-default)" />
     ) : (
-      <UnBookmarkedIcon />
+      <IconContainer
+        icon={<UnBookmarkedIcon />}
+        color={IconColor.tertiary}
+        size={IconSize.Custom}
+      />
     );
   }
 
@@ -195,9 +200,6 @@ const BookmarkAction: React.FC<Props> = ({
         className={classNames(
           styles.iconContainer,
           styles.verseAction,
-          {
-            [styles.fadedVerseAction]: isTranslationView && !isVerseBookmarked,
-          },
           'bookmark-verse-action-button',
         )}
         onClick={(e) => {

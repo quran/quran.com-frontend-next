@@ -71,14 +71,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
       >
         <>
           <ActionItem>
+            <CopyButton verseKey={verse.verseKey} isTranslationView={isTranslationView} />
+          </ActionItem>
+          <ActionItem>
             <VerseNotes
               verseKey={verse.verseKey}
               isTranslationView={isTranslationView}
               hasNotes={hasNotes}
             />
-          </ActionItem>
-          <ActionItem>
-            <CopyButton verseKey={verse.verseKey} isTranslationView={isTranslationView} />
           </ActionItem>
           <ActionItem>
             <ShareButton

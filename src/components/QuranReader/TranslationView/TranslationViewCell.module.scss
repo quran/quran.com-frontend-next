@@ -55,8 +55,8 @@
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  height: calc(2.2 * var(--spacing-medium));
-  width: calc(2.2 * var(--spacing-medium));
+  block-size: calc(2.2 * var(--spacing-medium));
+  inline-size: calc(2.2 * var(--spacing-medium));
 
   &:hover {
     color: var(--color-text-default);
@@ -66,10 +66,15 @@
 
   @media (hover: hover) {
     &:hover {
-      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
+
+      .icon span {
+        svg {
+          color: var(--color-success-medium) !important;
+        }
+      }
     }
   }
 }
@@ -86,17 +91,26 @@
   margin-inline-end: calc(var(--spacing-medium) * 1.125);
 }
 
-.fadedVerseAction {
-  opacity: var(--opacity-50);
-}
-
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   svg {
-    width: calc(1.1 * var(--spacing-medium));
-    height: calc(1.1 * var(--spacing-medium));
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
+  }
+}
+
+.actionItem {
+  &:hover {
+    svg {
+      color: var(--color-success-medium);
+    }
   }
 }
 
@@ -115,7 +129,7 @@
 }
 
 .bottomActionsContainer {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .tabsContainer {
@@ -135,7 +149,7 @@
 
 .separatorContainer {
   display: flex;
-  height: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   align-items: center;
 }
 
@@ -145,7 +159,7 @@
   align-items: center;
   gap: calc(var(--spacing-xsmall) / 2);
   cursor: pointer;
-  color: var(--color-text-faded);
+  color: var(--color-grey-icons-new);
   transition: color 0.2s ease;
 
   &:hover {
@@ -159,23 +173,26 @@
   justify-content: center;
 
   svg {
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
     color: currentColor;
-    width: var(--spacing-medium2);
-    height: var(--spacing-medium2);
+
+    &:hover {
+      color: currentColor;
+    }
 
     @include breakpoints.smallerThanTablet {
-      width: calc(var(--spacing-medium) * 1.125);
-      height: calc(var(--spacing-medium) * 1.125);
+      inline-size: var(--spacing-medium);
+      block-size: var(--spacing-medium);
     }
   }
 }
 
 .tabLabel {
-  font-size: var(--font-size-normal);
-  color: inherit;
+  font-size: var(--font-size-medium);
   white-space: nowrap;
 
   @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-xsmall);
+    font-size: var(--font-size-small);
   }
 }
