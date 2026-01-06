@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import readingPreferenceStyles from '../../ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import styles from '../styles/MobileReadingTabs.module.scss';
@@ -10,6 +10,8 @@ import styles from '../styles/MobileReadingTabs.module.scss';
 import { Tab } from '@/components/dls/Tabs/Tabs';
 import { getReadingPreferenceIcon } from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreferenceIcon';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
+import { setLockVisibilityState } from '@/redux/slices/navbar';
 import {
   selectReadingPreferences,
   setReadingPreference,
@@ -40,6 +42,7 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
 
   // Hooks
   const router = useRouter();
+  const dispatch = useDispatch();
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
@@ -67,10 +70,15 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
    *
    * @param {ReadingPreference} view - The new reading preference to switch to
    */
-  const onViewSwitched = (view: ReadingPreference) => {
-    // Log the change event
-    logValueChange('mobile_tabs_reading_preference', readingPreference, view);
+  // Use the shared scroll restoration hook
+  const { restoreScrollPosition } = useScrollRestoration();
 
+  /**
+   * Prepares URL parameters for the reading preference change
+   *
+   * @returns {object} URL object with query parameters
+   */
+  const prepareUrlParams = () => {
     // Prepare URL parameters
     const newQueryParams = { ...router.query };
 
@@ -81,20 +89,58 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
     }
 
     // Create the new URL object
-    const newUrlObject = {
+    return {
       pathname: router.pathname,
       query: newQueryParams,
     };
+  };
 
-    // Update the URL and then update the reading preference in Redux
-    router.replace(newUrlObject, null, { shallow: true }).then(() => {
-      onSettingsChange(
-        'readingPreference',
-        view,
-        setReadingPreference(view),
-        setReadingPreference(readingPreference),
-        PreferenceGroup.READING,
-      );
+  /**
+   * Handle the post-navigation tasks after the URL has been updated
+   *
+   * @param {ReadingPreference} view - The new reading preference
+   * @param {number} scrollPosition - The scroll position to maintain
+   * @param {boolean} isTranslationTab - Whether this is the translation tab
+   */
+  const handlePostNavigation = (
+    view: ReadingPreference,
+    scrollPosition: number,
+    isTranslationTab: boolean,
+  ) => {
+    // Update reading preference in Redux
+    onSettingsChange(
+      'readingPreference',
+      view,
+      setReadingPreference(view),
+      setReadingPreference(readingPreference),
+      PreferenceGroup.READING,
+    );
+
+    // Use the shared hook to restore scroll position and handle completion
+    restoreScrollPosition(scrollPosition, isTranslationTab, () => {
+      dispatch(setLockVisibilityState(false));
+    });
+  };
+
+  const onViewSwitched = (view: ReadingPreference) => {
+    // Log the change event
+    logValueChange('mobile_tabs_reading_preference', readingPreference, view);
+
+    // Lock navbar visibility state to prevent flickering during tab switching
+    dispatch(setLockVisibilityState(true));
+
+    // Save current scroll position
+    const scrollPosition = window.scrollY;
+
+    // Check if this is the translation tab which tends to cause scrolling
+    const isTranslationTab = view === ReadingPreference.Translation;
+
+    // Get URL parameters for the navigation
+    const newUrlObject = prepareUrlParams();
+
+    // Update the URL and then handle post-navigation tasks
+    router.replace(newUrlObject, null, { shallow: true, scroll: false }).then(() => {
+      handlePostNavigation(view, scrollPosition, isTranslationTab);
     });
   };
 
