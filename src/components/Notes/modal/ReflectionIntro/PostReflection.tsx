@@ -18,7 +18,7 @@ const PublicReflectionDescription: React.FC = () => {
   return (
     <div className={styles.container} data-testid="post-reflection-intro">
       <div className={styles.titleContainer}>
-        {t('post-refl-intro.post-button')}
+        {t('checkbox-refl-intro.post-button')}
         <button
           type="button"
           onClick={toggleOpen}
@@ -37,7 +37,7 @@ const PublicReflectionDescription: React.FC = () => {
           data-testid="pr-content"
         >
           <div className={styles.sectionContainer}>
-            <div className={styles.sectionHeader}>{t('post-refl-intro.qr-title')}</div>
+            <div className={styles.sectionHeader}>{t('checkbox-refl-intro.qr-title')}</div>
             <Trans
               components={{
                 link: (
@@ -49,14 +49,14 @@ const PublicReflectionDescription: React.FC = () => {
                   />
                 ),
               }}
-              i18nKey="notes:post-refl-intro.qr-intro"
+              i18nKey="notes:checkbox-refl-intro.qr-intro"
             />
           </div>
           <div className={styles.sectionContainer}>
-            <div className={styles.sectionHeader}>{t('post-refl-intro.post.title')}</div>
+            <div className={styles.sectionHeader}>{t('checkbox-refl-intro.checkbox.title')}</div>
             <ul className={styles.bulletList}>
               <Trans
-                i18nKey="notes:post-refl-intro.post.desc"
+                i18nKey="notes:checkbox-refl-intro.checkbox.desc"
                 components={{
                   li: <li />,
                   link: (

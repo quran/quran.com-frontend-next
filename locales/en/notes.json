@@ -3,15 +3,15 @@
 
   "add-another-note": "Add another note",
   "body-placeholder": "Use this space to save general notes, or to write a reflection.",
-  "post-refl-intro": {
-    "post": {
+  "checkbox-refl-intro": {
+    "checkbox": {
       "desc": "<li>Posting means that your reflection will be shared on QuranReflect under your name where it will be reviewed by the moderation team and visible to the QuranReflect community.</li><li>Once your post is reviewed and approved or promoted by our moderation team, you may get likes, comments and follow notifications. Upon signing into QuranReflect, you can update your notification settings to suit your preferences.</li><li>You may view your notes and posted reflections under your Quran.com login profile in the “My Notes and Reflections” section, or log into <link>QuranReflect</link> using your Quran.com sign-in email.</li>",
       "title": "What happens if I click \"Save and Post to QuranReflect\"?"
     },
 
     "post-button": "What happens when I post?",
-    "qr-title": "What is QuranReflect?",
-    "qr-intro": "QuranReflect, along with Quran.com, is a part of the Quran.Foundation family. It is a social platform for sharing personal reflections on the Quran, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. User posts to QuranReflect are reviewed and moderated by a qualified team, who will help ensure quality of content, etiquettes when interacting with the Quran, and they will empower users by sharing feedback and highlighting valuable discourse thus fostering a spiritually uplifting, Quran-focused community. Learn more: <link>Quranreflect.com/faq</link>"
+    "qr-intro": "QuranReflect, along with Quran.com, is a part of the Quran.Foundation family. It is a social platform for sharing personal reflections on the Quran, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. User posts to QuranReflect are reviewed and moderated by a qualified team, who will help ensure quality of content, etiquettes when interacting with the Quran, and they will empower users by sharing feedback and highlighting valuable discourse thus fostering a spiritually uplifting, Quran-focused community. Learn more: <link>Quranreflect.com/faq</link>",
+    "qr-title": "What is QuranReflect?"
   },
   "click-to-see-more": "click to see more",
   "delete-note": "Delete note",
