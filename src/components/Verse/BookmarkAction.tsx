@@ -10,7 +10,7 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
-import useVerseBookmark from '@/hooks/useVerseBookmark';
+import useVerseBookmark, { BookmarkableVerse } from '@/hooks/useVerseBookmark';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -38,7 +38,7 @@ const BookmarkAction: React.FC<Props> = ({
 
   // Use custom hook for all bookmark logic
   const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
-    verse,
+    verse: verse as BookmarkableVerse,
     mushafId,
     bookmarksRangeUrl,
   });

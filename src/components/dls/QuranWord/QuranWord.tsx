@@ -203,6 +203,15 @@ const QuranWord = ({
     [handleWordAction],
   );
 
+  const onKeyPress = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        handleWordAction();
+      }
+    },
+    [handleWordAction],
+  );
+
   const onMobileModalTriggerClick = useCallback(() => {
     setIsMobileModalOpen(true);
     handleWordAction();
@@ -228,7 +237,7 @@ const QuranWord = ({
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
-      {...(shouldHandleWordClicking && { onClick, onKeyPress: onClick })}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress })}
       role="button"
       tabIndex={0}
       {...{

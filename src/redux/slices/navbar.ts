@@ -44,10 +44,6 @@ export const navbarSlice = createSlice({
       ...state,
       lockVisibilityState: action.payload,
     }),
-    setLockVisibilityState: (state: Navbar, action: PayloadAction<boolean>) => ({
-      ...state,
-      lockVisibilityState: action.payload,
-    }),
     setIsNavigationDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
       isNavigationDrawerOpen: action.payload,
