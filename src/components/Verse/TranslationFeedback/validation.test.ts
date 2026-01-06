@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention, react-func/max-lines-per-function */
+/* eslint-disable @typescript-eslint/naming-convention, react-func/max-lines-per-function, max-lines */
 import { Translate } from 'next-translate';
 import { describe, it, expect } from 'vitest';
 
@@ -29,12 +29,12 @@ describe('getTranslationFeedbackErrors', () => {
   }) as Translate;
 
   it('returns empty errors when all fields are valid', () => {
-    const errors = getTranslationFeedbackErrors('1', 'Valid feedback text', mockT);
+    const errors = getTranslationFeedbackErrors('1', 'Valid feedback text', mockT, 'en');
     expect(errors).toEqual({});
   });
 
   it('returns translation error when translation is not selected', () => {
-    const errors = getTranslationFeedbackErrors('', 'Valid feedback text', mockT);
+    const errors = getTranslationFeedbackErrors('', 'Valid feedback text', mockT, 'en');
     expect(errors).toEqual({
       translation: {
         id: FormErrorId.RequiredField,
@@ -44,7 +44,7 @@ describe('getTranslationFeedbackErrors', () => {
   });
 
   it('returns feedback error when feedback is empty', () => {
-    const errors = getTranslationFeedbackErrors('1', '', mockT);
+    const errors = getTranslationFeedbackErrors('1', '', mockT, 'en');
     expect(errors).toEqual({
       feedback: {
         id: FormErrorId.RequiredField,
@@ -54,7 +54,7 @@ describe('getTranslationFeedbackErrors', () => {
   });
 
   it('returns feedback error when feedback is only whitespace', () => {
-    const errors = getTranslationFeedbackErrors('1', '   ', mockT);
+    const errors = getTranslationFeedbackErrors('1', '   ', mockT, 'en');
     expect(errors).toEqual({
       feedback: {
         id: FormErrorId.RequiredField,
@@ -65,7 +65,7 @@ describe('getTranslationFeedbackErrors', () => {
 
   it('returns feedback error when feedback is too short', () => {
     const shortFeedback = 'a'.repeat(MIN_FEEDBACK_CHARS - 1);
-    const errors = getTranslationFeedbackErrors('1', shortFeedback, mockT);
+    const errors = getTranslationFeedbackErrors('1', shortFeedback, mockT, 'en');
 
     if (MIN_FEEDBACK_CHARS > 1) {
       expect(errors).toEqual({
@@ -86,17 +86,17 @@ describe('getTranslationFeedbackErrors', () => {
 
   it('returns feedback error when feedback is too long', () => {
     const longFeedback = 'a'.repeat(MAX_FEEDBACK_CHARS + 1);
-    const errors = getTranslationFeedbackErrors('1', longFeedback, mockT);
+    const errors = getTranslationFeedbackErrors('1', longFeedback, mockT, 'en');
     expect(errors).toEqual({
       feedback: {
         id: FormErrorId.MaximumLength,
-        message: 'The feedback field must be at most 10000 characters',
+        message: 'The feedback field must be at most 10,000 characters',
       },
     });
   });
 
   it('returns multiple errors when both fields are invalid', () => {
-    const errors = getTranslationFeedbackErrors('', '', mockT);
+    const errors = getTranslationFeedbackErrors('', '', mockT, 'en');
     expect(errors).toEqual({
       translation: {
         id: FormErrorId.RequiredField,
@@ -110,7 +110,12 @@ describe('getTranslationFeedbackErrors', () => {
   });
 
   it('returns all validation errors when multiple issues exist', () => {
-    const errors = getTranslationFeedbackErrors('', 'a'.repeat(MAX_FEEDBACK_CHARS + 1), mockT);
+    const errors = getTranslationFeedbackErrors(
+      '',
+      'a'.repeat(MAX_FEEDBACK_CHARS + 1),
+      mockT,
+      'en',
+    );
     expect(errors).toEqual({
       translation: {
         id: FormErrorId.RequiredField,
@@ -118,7 +123,7 @@ describe('getTranslationFeedbackErrors', () => {
       },
       feedback: {
         id: FormErrorId.MaximumLength,
-        message: 'The feedback field must be at most 10000 characters',
+        message: 'The feedback field must be at most 10,000 characters',
       },
     });
   });
