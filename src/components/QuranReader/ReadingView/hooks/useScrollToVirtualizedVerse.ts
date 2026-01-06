@@ -101,9 +101,11 @@ const useScrollToVirtualizedReadingView = (
           const startingVerseNumber = Number(startingVerse);
           // if the startingVerse is a valid integer and is above 1
           if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-            const firstPageOfCurrentChapter = isUsingDefaultFont
-              ? initialData.verses[0].pageNumber
-              : Number(Object.keys(pagesVersesRange)[0]);
+            const initialDataFirstPage = initialData.verses[0]?.pageNumber;
+            const firstPageOfCurrentChapter =
+              isUsingDefaultFont && initialDataFirstPage
+                ? initialDataFirstPage
+                : Number(Object.keys(pagesVersesRange)[0]);
             // search for the verse number in the already fetched verses first
             const startFromVerseData = verses.find(
               (verse) => verse.verseNumber === startingVerseNumber,

@@ -126,14 +126,12 @@ FakeContentPortal.displayName = 'FakeContentPortal';
 
 export const FakeContentOverlay = React.forwardRef<HTMLDivElement, Dialog.DialogOverlayProps>(
   ({ children, ...props }, ref) => {
-    const { overlayRef, isVisible, dataState, onPointerDownOutside } = useFakeContentModal();
+    const { overlayRef, dataState, onPointerDownOutside } = useFakeContentModal();
 
     return (
       <div
         {...props}
         onPointerDown={onPointerDownOutside}
-        role="dialog"
-        aria-modal={isVisible}
         data-state={dataState}
         ref={mergeRefs(overlayRef, ref)}
       >
@@ -174,6 +172,8 @@ export const FakeContentContent = React.forwardRef<HTMLDivElement, Dialog.Dialog
         {...filteredProps}
         loop
         trapped
+        role="dialog"
+        aria-modal={isVisible}
         data-state={dataState}
         ref={mergeRefs(contentRef, ref)}
       >
