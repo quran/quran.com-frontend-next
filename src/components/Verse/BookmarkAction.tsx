@@ -83,10 +83,11 @@ const BookmarkAction: React.FC<Props> = ({
 
   // For use in the TopActions component (standalone button)
   if (isTranslationView || (!isTranslationView && isMobile)) {
+    const tooltipText = isVerseBookmarked ? t('bookmarked') : t('bookmark');
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        tooltip={isMobile ? undefined : tooltipText}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         className={classNames(
@@ -98,7 +99,7 @@ const BookmarkAction: React.FC<Props> = ({
           onToggleBookmarkClicked(e);
         }}
         shouldFlipOnRTL={false}
-        ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        ariaLabel={tooltipText}
       >
         <span className={styles.icon}>{bookmarkIcon}</span>
       </Button>

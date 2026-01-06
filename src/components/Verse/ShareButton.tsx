@@ -10,6 +10,7 @@ import ShareVerseActionsMenu from './OverflowVerseActionsMenuBody/ShareVerseActi
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import useIsMobile from '@/hooks/useIsMobile';
 import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
@@ -34,6 +35,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
 }) => {
   const { t } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const onActionTriggered = () => {
     setIsMenuOpen(false);
@@ -48,7 +50,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   const trigger = (
     <Button
       size={ButtonSize.Small}
-      tooltip={t('share')}
+      tooltip={isMobile ? undefined : t('share')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
       className={classNames(styles.iconContainer, styles.verseAction)}
