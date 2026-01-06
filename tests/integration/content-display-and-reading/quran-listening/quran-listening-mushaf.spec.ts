@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import AudioUtilities from '@/tests/POM/audio-utilities';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseArabicTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 let audioUtilities: AudioUtilities;
@@ -19,9 +20,9 @@ test(
 
     await homePage.enableMushafMode(isMobile);
 
-    const firstLine = page.getByTestId('verse-arabic-1:1');
-    const secondLine = page.getByTestId('verse-arabic-1:2');
-    const thirdLine = page.getByTestId('verse-arabic-1:3');
+    const firstLine = page.getByTestId(getVerseArabicTestId('1:1'));
+    const secondLine = page.getByTestId(getVerseArabicTestId('1:2'));
+    const thirdLine = page.getByTestId(getVerseArabicTestId('1:3'));
 
     await expect(firstLine).not.toHaveClass(/highlight/);
 

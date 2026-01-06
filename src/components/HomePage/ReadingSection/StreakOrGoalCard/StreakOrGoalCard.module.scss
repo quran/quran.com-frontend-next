@@ -60,53 +60,11 @@
   }
 }
 
-.circularProgressbar {
-  block-size: 60px;
-  inline-size: 60px;
-}
-
-.circularProgressbarContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-micro);
-}
-
 .streakDay {
   font-size: var(--font-size-normal);
   color: var(--color-text-gray);
   font-weight: var(--font-weight-semibold);
   @include breakpoints.tablet {
     font-size: var(--font-size-large-px);
-  }
-}
-
-.circularProgressbarPath {
-  stroke: var(--color-streaks-dark);
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s ease 0s;
-}
-
-.circularProgressbarTrail {
-  stroke: var(--color-daily-progress);
-  /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
-  stroke-linecap: round;
-}
-
-.circularProgressbarText {
-  fill: var(--color-text-black);
-  font-size: 20px;
-  dominant-baseline: middle;
-  text-anchor: middle;
-  font-weight: var(--font-weight-bold);
-}
-
-.goalArrowIcon {
-  svg {
-    @include breakpoints.smallerThanTablet {
-      inline-size: 12px !important;
-      block-size: 12px !important;
-    }
   }
 }

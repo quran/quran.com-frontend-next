@@ -13,6 +13,7 @@ import { setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { setSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import SliceName from '@/redux/types/SliceName';
 import { QuranFont, MushafLines, Mushaf } from '@/types/QuranReader';
+import ReflectionLanguage from '@/types/QuranReflect/ReflectionLanguage';
 import { getMushafId } from '@/utils/api';
 import { addOrUpdateBulkUserPreferences } from '@/utils/auth/api';
 import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
@@ -21,7 +22,6 @@ import {
   getCountryCodeForPreferences,
 } from '@/utils/serverSideLanguageDetection';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
-import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
 // Import the necessary action creators for the thunk
 

@@ -1,77 +1,144 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
-$section-spacing: calc(var(--spacing-mega) * 1.5);
-$section-padding: calc(var(--spacing-large));
+$section-spacing: calc(var(--spacing-large-px) * 1.5);
+$section-padding: var(--spacing-large-px);
 
-.contentContainer {
-  padding-block: $section-spacing;
+$widget-border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+$widget-border-radius: var(--border-radius-rounded);
 
-  h1 {
-    font-size: var(--font-size-jumbo);
-    line-height: var(--line-height-jumbo);
-    font-weight: var(--font-weight-bold);
+.heroContainer {
+  position: relative;
+  overflow: hidden;
+  padding-block-start: var(--spacing-medium3-px);
+  padding-block-end: var(--spacing-xlarge-px);
+  padding-inline: var(--spacing-medium2-px);
+  margin-block-end: calc(-1 * (var(--spacing-xlarge-px) - var(--spacing-medium2-px)));
+
+  @include breakpoints.tablet {
+    padding-block: var(--spacing-large-px);
+    padding-inline: var(--spacing-medium2-px);
+    margin-block-end: 0;
   }
 }
 
-.historySection {
-  margin-block-start: $section-spacing;
+.heroBackgroundImage {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-color: var(--color-search-background);
+
+  svg {
+    width: 100%;
+    transform: translateY(-40%);
+  }
 }
 
-.historyContainer {
-  margin-block-start: $section-padding;
-}
+.heroInnerContainer {
+  @include utility.pageContainer();
 
-.manageGoalSection {
-  margin-block-start: $section-spacing;
-}
-
-.manageGoalContainer {
-  margin-block-start: $section-padding;
   display: flex;
-  gap: var(--spacing-large);
+  height: 100%;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  margin-inline: auto;
+
+  h1 {
+    font-size: var(--font-size-large-px);
+    line-height: var(--line-height-jumbo);
+    font-weight: var(--font-weight-bold);
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxxlarge-px);
+    }
+  }
+}
+
+.contentContainer {
+  background-color: var(--color-background-default);
+  border-radius: $widget-border-radius;
+
+  @include breakpoints.tablet {
+    border-radius: 0;
+  }
 }
 
 .widgetsContainer {
   display: flex;
   flex-direction: row;
-  gap: var(--spacing-large);
-  margin-block-start: $section-padding;
+  gap: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    margin-block-start: $section-padding;
+  }
 
   @include breakpoints.smallerThanDesktop {
     flex-direction: column;
   }
 }
 
-.widget {
-  --day-circle-color: var(--color-success-faded) !important;
-  flex: 1;
-  background-color: var(--color-success-faded);
-  padding: var(--spacing-mega);
-  border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--color-success-faint);
+.streakContainer {
   display: flex;
-  justify-content: space-between;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  margin-block-end: var(--spacing-large-px);
+}
 
-  &.streakWidget {
-    flex-direction: column;
+.mushaf {
+  width: var(--spacing-xlarge-px);
+  height: var(--spacing-xlarge-px);
+
+  @include breakpoints.tablet {
+    width: var(--spacing-xxlarge-px);
+    height: var(--spacing-xxlarge-px);
+  }
+
+  path {
+    stroke: var(--color-blue-buttons-and-icons);
   }
 }
 
-.streakContainer {
+.streakText {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-block-end: var(--spacing-mega);
+  align-items: baseline;
+  gap: var(--spacing-small-px);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-normal-px);
+  color: var(--color-text-faded);
 
-  h2 {
-    font-size: var(--font-size-jumbo);
-    color: var(--color-primary-medium);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+
+.streakNumber {
+  color: var(--color-primary-medium);
+  font-size: var(--font-size-jumbo-px);
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-jumbo2-px);
+  }
+}
+
+.widget {
+  --day-circle-color: var(--color-success-faded);
+
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  padding-block: var(--spacing-medium-px);
+  padding-inline: var(--spacing-medium2-px);
+  border: $widget-border;
+  border-radius: $widget-border-radius;
+
+  @include breakpoints.tablet {
+    padding-block: var(--spacing-large-px);
+    padding-inline: var(--spacing-large-px);
   }
 
-  p {
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-success-medium);
+  &.streakWidget {
+    flex-direction: column;
+    background-color: var(--color-background-alternative-faint-new);
   }
 }
 
@@ -81,7 +148,82 @@ $section-padding: calc(var(--spacing-large));
   align-items: center;
 }
 
+.progressWidget {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-large-px);
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-medium2-px);
+  background-color: var(--color-streaks-light);
+  border: $widget-border;
+  border-radius: $widget-border-radius;
+}
+
+.progressWidgetWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+}
+
 .circularProgressbar {
-  height: 130px;
-  width: 130px;
+  width: var(--spacing-xxxlarge-px);
+  height: var(--spacing-xxxlarge-px);
+}
+
+.circularProgressbarPath {
+  stroke: var(--color-streaks-dark);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.circularProgressbarTrail {
+  stroke: var(--color-daily-progress);
+  stroke-linecap: round;
+}
+
+.circularProgressbarText {
+  fill: var(--color-text-black);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.progressWidgetContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.progressWidgetTitle {
+  color: var(--color-text-black);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-bold);
+}
+
+.progressWidgetDaysLeft {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-gray);
+
+  span {
+    color: var(--color-text-black);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.progressWidgetCta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium2-px);
+}
+
+.historySection {
+  margin-block-start: $section-spacing;
+}
+
+.historyContainer {
+  margin-block-start: $section-padding;
 }
