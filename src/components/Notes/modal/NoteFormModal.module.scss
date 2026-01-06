@@ -1,0 +1,136 @@
+@use '@/styles/constants';
+@use '@/styles/breakpoints';
+
+$note_text_area_height: 22.5rem;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+  margin-block-start: var(--spacing-mega);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
+// tag is used to increase specificity to override the default styles.
+div.textArea {
+  padding: 0;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+    block-size: $note_text_area_height;
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+.notesButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xsmall);
+
+  background-color: var(--color-background-alternative-faint-new);
+  block-size: var(--spacing-large2-px);
+  border-radius: var(--border-radius-medium-px);
+  padding-inline: var(--spacing-medium2);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  &:focus-visible {
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.notesButtonChevron,
+.notesButtonPencil {
+  inline-size: var(--spacing-small);
+  block-size: var(--spacing-small);
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+}
+
+.notesButtonChevron {
+  margin-inline-start: calc(var(--spacing-xsmall) * -1);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
+}
+
+.notesButtonText {
+  line-height: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-medium2);
+
+  @include breakpoints.smallerThanMobileL {
+    // Make the save private button (last button) take available space
+    > button:last-child {
+      flex: 1;
+    }
+  }
+}
+
+.saveToQrButton {
+  border-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  background-color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    opacity: var(--opacity-85);
+  }
+}
+
+.rounded {
+  border-radius: var(--border-radius-medium-px);
+}
+
+.error {
+  color: var(--color-text-error);
+}
+
+.verseRangesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.verseRangePill {
+  display: inline-block;
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-default-new);
+  padding-inline: var(--spacing-medium-px);
+  padding-block: var(--spacing-xsmall-px);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-small);
+}

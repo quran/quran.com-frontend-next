@@ -9,7 +9,7 @@ import styles from './ReflectionIntro.module.scss';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useToggle from '@/hooks/useToggle';
 
-const PublicReflectionDescription: React.FC = () => {
+const PostReflectionIntro: React.FC = () => {
   const { t } = useTranslation('notes');
   const [isOpen, toggleOpen] = useToggle({
     eventName: 'public_reflection_intro',
@@ -86,4 +86,4 @@ const PublicReflectionDescription: React.FC = () => {
   );
 };
 
-export default PublicReflectionDescription;
+export default PostReflectionIntro;

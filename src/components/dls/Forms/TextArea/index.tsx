@@ -42,6 +42,7 @@ interface Props {
   containerClassName?: string;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLTextAreaElement>;
+  dataTestId?: string;
 }
 
 const TextArea: React.FC<Props> = ({
@@ -60,6 +61,7 @@ const TextArea: React.FC<Props> = ({
   inputRef,
   size = TextAreaSize.Medium,
   fieldSetLegend = null,
+  dataTestId,
 }) => {
   const [inputValue, setTextAreaValue] = useState(value);
   // listen to any change in value in-case the value gets populated after an API call.
@@ -102,6 +104,7 @@ const TextArea: React.FC<Props> = ({
           disabled={disabled}
           onChange={onValueChange}
           value={inputValue}
+          data-testid={dataTestId}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
         />
