@@ -8,8 +8,8 @@ import TajweedColors from '../TajweedBar/TajweedBar';
 import ChapterNavigation from './components/ChapterNavigation';
 import MobileReadingTabs from './components/MobileReadingTabs';
 import PageInfo from './components/PageInfo';
-import SettingsButton from './components/SettingsButton';
 import ProgressBar from './components/ProgressBar';
+import SettingsButton from './components/SettingsButton';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
@@ -48,12 +48,14 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
+  // useMemo must be called before any early returns (Rules of Hooks)
+  const isMobileView = useMemo(() => isMobile(), []);
+
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
 
-  const isMobileView = useMemo(() => isMobile(), []);
   const isMobileScrolledView = !showNavbar && isMobile();
   const isNotMobileOrScrolledView = !showNavbar || !isMobile();
 
