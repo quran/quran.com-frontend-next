@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { ChannelTypeEnum, IUserPreferenceSettings } from '@novu/headless';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,7 +10,6 @@ const useUpdateEmailNotificationPreferences = () => {
   const { headlessService } = useHeadlessService();
   const toast = useToast();
   const { t } = useTranslation('common');
-  const [mutatingTemplateId, setMutatingTemplateId] = useState<string | null>(null);
 
   const handleError = (err: unknown, templateId: string, isChecked: boolean) => {
     toast(t('error.general'), { status: ToastStatus.Error });
@@ -47,7 +44,6 @@ const useUpdateEmailNotificationPreferences = () => {
     const { template } = preference;
     // eslint-disable-next-line no-underscore-dangle
     const templateId = template._id;
-    setMutatingTemplateId(templateId);
 
     logValueChange('email_notification_settings', !isChecked, isChecked, {
       templateName: template.name,
@@ -58,11 +54,7 @@ const useUpdateEmailNotificationPreferences = () => {
         templateId,
         checked: isChecked,
         channelType: ChannelTypeEnum.EMAIL,
-        listener: ({ isLoading }) => {
-          if (!isLoading) {
-            setMutatingTemplateId(null);
-          }
-        },
+        listener: () => {},
         onSuccess: () => {
           handleSuccess(templateId, isChecked, onSuccess);
           resolve();
@@ -75,7 +67,7 @@ const useUpdateEmailNotificationPreferences = () => {
     });
   };
 
-  return { updatePreference, mutatingTemplateId };
+  return { updatePreference };
 };
 
 export default useUpdateEmailNotificationPreferences;
