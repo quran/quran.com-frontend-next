@@ -6,10 +6,10 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
 import { CharType } from '@/types/Word';
 import { isFirefox } from '@/utils/device-detector';
 import { getFontClassName, getFontFaceNameForPage } from '@/utils/fontFaceHelper';
+import { FALLBACK_FONT, MushafLines, QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;
@@ -20,6 +20,9 @@ type UthmaniWordTextProps = {
   isFontLoaded: boolean;
   isHighlighted?: boolean;
   charType?: CharType;
+
+  quranTextFontScaleOverride?: number; // Optional font scale override
+  mushafLinesOverride?: MushafLines; // Optional mushaf lines override
 };
 
 /**
@@ -55,8 +58,15 @@ const GlyphWord = ({
   isFontLoaded,
   isHighlighted,
   charType,
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
 }: UthmaniWordTextProps) => {
-  const { quranTextFontScale, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  // Get values from Redux as the default
+  const reduxStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  // Use prop overrides if provided, otherwise fall back to Redux values.
+  const quranTextFontScale = quranTextFontScaleOverride ?? reduxStyles.quranTextFontScale;
+  const mushafLines = mushafLinesOverride ?? reduxStyles.mushafLines;
 
   // The extra space before the glyph should only be added where the issue occurs,
   // which is in firefox with the Madani V1 Mushaf and the font scale is less than 6

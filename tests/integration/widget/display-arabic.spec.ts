@@ -13,11 +13,9 @@ test.describe('Widget - Arabic text', () => {
     });
 
     const arabicVerse = 'إِنَّ ٱللَّهَ وَمَلَـٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى ٱلنَّبِىِّ ۚ';
-    const element = await frame.locator('[data-arabic-verse]').first();
-    await expect(element).toHaveAttribute(
-      'data-arabic-verse',
-      expect.stringContaining(arabicVerse),
-    );
+    // Use data-verse-key selector which exists in VerseText component
+    const element = await frame.locator('[data-testid="verse-arabic-33:56"]').first();
+    await expect(element).toContainText(arabicVerse);
   });
 
   test(
@@ -31,8 +29,9 @@ test.describe('Widget - Arabic text', () => {
         locale: 'en',
       });
 
-      const arabicVerse = 'إِنَّ ٱللَّهَ وَمَلَـٰٓئِكَتَهُۥ يُصَلُّونَ عَلَى ٱلنَّبِىِّ ۚ';
-      await expect(frame.locator(`[data-arabic-verse*="${arabicVerse}"]`)).toHaveCount(0);
+      // Check that the Arabic text specifically doesn't exist when Arabic is disabled
+      // Use data-testid which targets the Arabic text container specifically
+      await expect(frame.locator('[data-testid="verse-arabic-33:56"]')).toHaveCount(0);
     },
   );
 
@@ -88,7 +87,9 @@ test.describe('Widget - Arabic text', () => {
       locale: 'en',
     });
 
-    await expect(frame.locator('[data-verse-text]')).toContainText('۟');
+    // Check for IndoPak ayah marker in the Arabic text container
+    // Use data-testid to ensure we are checking the Arabic text
+    await expect(frame.locator('[data-testid="verse-arabic-1:1"]')).toContainText('۟');
   });
 
   test('IndoPak mushaf renders ayah marker for verse 2', async ({ page }) => {
@@ -99,6 +100,7 @@ test.describe('Widget - Arabic text', () => {
       locale: 'en',
     });
 
-    await expect(frame.locator('[data-verse-text]')).toContainText('۟ۙ');
+    // Check for IndoPak ayah marker in the Arabic text container
+    await expect(frame.locator('[data-testid="verse-arabic-1:2"]')).toContainText('۟ۙ');
   });
 });

@@ -5,7 +5,6 @@ import getT from 'next-translate/getT';
 import i18nConfig from '../../../i18n.json';
 
 import { fetcher, getChapterAudioData } from '@/api';
-import { getQuranFontForMushaf } from '@/components/AyahWidget/mushaf-fonts';
 import { logDebug } from '@/lib/newrelic';
 import ThemeType from '@/redux/types/ThemeType';
 import type ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
@@ -26,6 +25,7 @@ import type {
   WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import type AvailableTranslation from 'types/AvailableTranslation';
+import { getQuranFontForMushaf } from 'types/ayah-widget';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
 

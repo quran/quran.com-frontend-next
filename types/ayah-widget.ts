@@ -1,3 +1,5 @@
+import { QuranFont } from './QuranReader';
+
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 
 export type MushafType = 'qpc' | 'kfgqpc_v1' | 'kfgqpc_v2' | 'indopak' | 'tajweed';
@@ -12,6 +14,26 @@ export const isMushafType = (value: unknown): value is MushafType => {
     typeof value === 'string' &&
     ['qpc', 'kfgqpc_v1', 'kfgqpc_v2', 'indopak', 'tajweed'].includes(value)
   );
+};
+
+/**
+ * Gets the Quran font for a specific mushaf.
+ * @param {MushafType} mushaf The mushaf type.
+ * @returns {QuranFont} The corresponding Quran font.
+ */
+export const getQuranFontForMushaf = (mushaf: MushafType): QuranFont => {
+  switch (mushaf) {
+    case 'indopak':
+      return QuranFont.IndoPak;
+    case 'kfgqpc_v1':
+      return QuranFont.MadaniV1;
+    case 'kfgqpc_v2':
+      return QuranFont.MadaniV2;
+    case 'tajweed':
+      return QuranFont.TajweedV4;
+    default:
+      return QuranFont.QPCHafs;
+  }
 };
 
 /**

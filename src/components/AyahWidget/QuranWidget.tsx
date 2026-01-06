@@ -1,19 +1,39 @@
 /* eslint-disable max-lines */
 import React from 'react';
 
-import { buildMushafFontFaceCss, buildQcffFontFaceCss } from './mushaf-fonts';
-
-import ArabicVerse from '@/components/AyahWidget/ArabicVerse';
 import Translations from '@/components/AyahWidget/Translations';
 import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
+import VerseText from '@/components/Verse/VerseText';
+import useQcfFont from '@/hooks/useQcfFont';
 import ThemeType from '@/redux/types/ThemeType';
-import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
+import { MushafLines } from '@/types/QuranReader';
+import { getVerseWords } from '@/utils/verse';
+import { getQuranFontForMushaf } from 'types/ayah-widget';
+import type { WidgetOptions, WidgetColors } from 'types/ayah-widget';
 import type Verse from 'types/Verse';
 
 type Props = {
   verses: Verse[];
   options: WidgetOptions;
+};
+
+/**
+ * Map widget theme to Tajweed font-palette CSS value.
+ * The font palettes are defined by TajweedFontPalettes component.
+ * @param {WidgetOptions['theme']} theme - The widget theme.
+ * @returns {string} The CSS font-palette value.
+ */
+const getTajweedFontPalette = (theme: WidgetOptions['theme']): string => {
+  switch (theme) {
+    case ThemeType.Dark:
+      return '--Dark';
+    case ThemeType.Sepia:
+      return '--Sepia';
+    case ThemeType.Light:
+    default:
+      return '--Light';
+  }
 };
 
 // eslint-disable-next-line react-func/max-lines-per-function
@@ -87,39 +107,38 @@ const getVerseMarginTop = (index: number, showArabic: boolean): number => {
 
 /**
  * Quran Widget Component
+ *
+ * This component renders the Quran widget with Arabic text and translations.
+ * It reuses the existing VerseText component from the QuranReader in standalone mode,
+ * which disables interactive features like tooltips and audio highlighting.
+ *
  * @returns {JSX.Element} QuranWidget JSX Element
  */
 const QuranWidget = ({ verses, options }: Props): JSX.Element => {
+  // Convert widget mushaf option to QuranFont for VerseText component
+  const quranFont = getQuranFontForMushaf(options.mushaf);
+
+  // Use the existing font loading hook - this handles loading QCF fonts dynamically
+  // Works because the widget iframe loads a quran.com page, so local fonts are accessible
+  useQcfFont(quranFont, verses);
+
   if (!verses.length) {
     return <div />;
   }
+
   const chapterNumber =
     verses[0]?.chapterId ?? (Number(options.ayah.split(':')[0] || 0) || undefined);
   const startVerse = verses[0]?.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
   const verseLabel = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
   const rangeCaption = chapterNumber ? `${chapterNumber}:${verseLabel}` : options.ayah;
+
   // Get widget colors based on the selected theme
   const colors = getColors(options.theme);
 
   // Get audio URL if audio is enabled
   const audioUrl = options.audioUrl || null;
 
-  // Build font-face CSS for mushaf and QCF fonts
   const firstVerse = verses[0];
-  const mushafBaseFontFaces = options.showArabic ? buildMushafFontFaceCss() : '';
-  const uniquePages = Array.from(
-    new Set(
-      verses
-        .map((verseItem) => verseItem.pageNumber)
-        .filter((pageNumber): pageNumber is number => typeof pageNumber === 'number'),
-    ),
-  );
-  const qcfFontFaces = options.showArabic
-    ? uniquePages
-        .map((pageNumber) => buildQcffFontFaceCss(options.mushaf, pageNumber, options.theme))
-        .join('\n')
-    : '';
-
   const hasTranslations = verses.some((verseItem) => (verseItem.translations?.length ?? 0) > 0);
 
   // Determine content padding based on whether Arabic text and translations are shown
@@ -133,13 +152,14 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
     ? { maxHeight: options.customHeight, overflow: 'auto' as const }
     : { overflow: 'hidden' as const };
 
+  // Default font scale for widget (medium size)
+  const widgetFontScale = 3;
+
   return (
-    <div>
-      {/* eslint-disable-next-line react/no-danger */}
-      <style dangerouslySetInnerHTML={{ __html: `${mushafBaseFontFaces}\n${qcfFontFaces}` }} />
-      <div
-        className="quran-widget"
-        style={{
+    <div
+      className="quran-widget"
+      style={
+        {
           fontFamily:
             "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
           backgroundColor: colors.bgColor,
@@ -150,50 +170,67 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
           boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
           boxSizing: 'border-box',
           overflowX: 'hidden',
+          // Apply Tajweed font palette based on theme (--Light, --Dark, --Sepia)
+          // This ensures Tajweed colors are readable on all theme backgrounds
+          fontPalette: getTajweedFontPalette(options.theme),
           ...customWidthStyle,
           ...customHeightStyle,
+        } as React.CSSProperties
+      }
+    >
+      <WidgetHeader verse={firstVerse} options={options} colors={colors} />
+      <div
+        style={{
+          padding: contentPadding,
         }}
+        data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
+        data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
       >
-        <WidgetHeader verse={firstVerse} options={options} colors={colors} />
-        <div
-          style={{
-            padding: contentPadding,
-          }}
-          data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
-          data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
-        >
-          {/* Render each verse block in the range sequentially. */}
-          {verses.map((verseItem, index) => {
-            const marginTop = getVerseMarginTop(index, options.showArabic);
-            return (
-              <div
-                key={
-                  verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`
-                }
-                data-verse-block
-                data-verse-key={verseItem.verseKey ?? ''}
-                data-verse-number={verseItem.verseNumber}
-                data-surah-name={options.surahName}
-                style={{ marginTop }}
-              >
-                {options.showArabic && (
-                  <ArabicVerse verse={verseItem} options={options} colors={colors} />
-                )}
-                <Translations verse={verseItem} options={options} colors={colors} />
-              </div>
-            );
-          })}
-        </div>
-        <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />
-        {options.enableAudio && audioUrl && (
-          <audio
-            data-audio-element
-            data-audio-start={options.audioStart ?? ''}
-            data-audio-end={options.audioEnd ?? ''}
-            src={audioUrl}
-          />
-        )}
+        {/* Render each verse block in the range sequentially. */}
+        {verses.map((verseItem, index) => {
+          const marginTop = getVerseMarginTop(index, options.showArabic);
+          return (
+            <div
+              key={verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`}
+              data-verse-block
+              data-verse-key={verseItem.verseKey ?? ''}
+              data-verse-number={verseItem.verseNumber}
+              data-surah-name={options.surahName}
+              style={{ marginTop }}
+            >
+              {/*
+               * Use the shared VerseText component in standalone mode.
+               * This reuses the same rendering logic as the main QuranReader,
+               * ensuring consistent font handling and word rendering.
+               */}
+              {options.showArabic && (
+                <VerseText
+                  words={getVerseWords(verseItem)}
+                  isReadingMode={false}
+                  shouldShowH1ForSEO={index === 0}
+                  // Override props for widget/standalone usage
+                  quranFontOverride={quranFont}
+                  quranTextFontScaleOverride={widgetFontScale}
+                  mushafLinesOverride={MushafLines.FifteenLines}
+                  shouldShowWordByWordTranslation={options.enableWbw}
+                  shouldShowWordByWordTransliteration={false}
+                  isStandaloneMode
+                />
+              )}
+              <Translations verse={verseItem} options={options} colors={colors} />
+            </div>
+          );
+        })}
       </div>
+      <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />
+      {options.enableAudio && audioUrl && (
+        <audio
+          data-audio-element
+          data-audio-start={options.audioStart ?? ''}
+          data-audio-end={options.audioEnd ?? ''}
+          src={audioUrl}
+        />
+      )}
     </div>
   );
 };

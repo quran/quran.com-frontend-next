@@ -37,7 +37,9 @@ test.describe('Widget defaults from user settings', () => {
           exact: false,
         }),
       ).toBeVisible();
-      await expect(widgetFrame.locator('[data-verse-text]').first()).toContainText('۟');
+      await expect(widgetFrame.locator('[data-testid="verse-arabic-33:56"]').first()).toContainText(
+        '۟',
+      );
     },
   );
 
