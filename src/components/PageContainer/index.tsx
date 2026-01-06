@@ -4,19 +4,39 @@ import classNames from 'classnames';
 
 import styles from './PageContainer.module.scss';
 
-type Props = {
+export interface PageContainerProps {
   children: ReactNode | ReactNode[];
   isLessonView?: boolean;
-};
+  isSheetsLike?: boolean;
+  wrapperClassName?: string;
+  className?: string;
+}
 
-const PageContainer: FC<Props> = ({ children, isLessonView = false }) => {
+const PageContainer: FC<PageContainerProps> = ({
+  children,
+  isLessonView = false,
+  isSheetsLike = false,
+  wrapperClassName,
+  className,
+}) => {
   return (
     <div
-      className={classNames(styles.container, {
-        [styles.lessonView]: isLessonView,
+      className={classNames(wrapperClassName, {
+        [styles.wrapperSheets]: isSheetsLike,
       })}
     >
-      {children}
+      <div
+        className={classNames(
+          styles.container,
+          {
+            [styles.lessonView]: isLessonView,
+            [styles.sheets]: isSheetsLike,
+          },
+          className,
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };

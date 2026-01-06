@@ -16,17 +16,24 @@
   --spacing-mega: 2rem;
   --spacing-max: 3rem;
 
+  --spacing-hairline-px: 1px;
   --spacing-micro-px: 2px;
+  --spacing-xxxsmall-px: 3px;
   --spacing-micro2-px: 3px;
   --spacing-xxsmall-px: 5px;
   --spacing-xsmall-px: 8px;
   --spacing-small-px: 10px;
+  --spacing-small2-px: 12px;
   --spacing-medium-px: 15px;
+  --spacing-medium-plus-px: 16px;
+  --spacing-medium1-5-px: 18px;
   --spacing-medium2-px: 20px;
   --spacing-medium3-px: 24px;
   --spacing-large-px: 30px;
+  --spacing-large2-px: 35px;
   --spacing-xlarge-px: 40px;
   --spacing-xxlarge-px: 50px;
+  --spacing-xxxlarge-px: 65px;
   --spacing-mega-px: 100px;
 
   --font-size-xsmall-dangerous: 0.6rem;
@@ -38,6 +45,7 @@
   --font-size-xlarge: 1.5rem;
   --font-size-jumbo: 2rem;
 
+  --font-size-xxsmall-px: 12px;
   --font-size-xsmall-px: 14px;
   --font-size-small-px: 16px;
   --font-size-medium-px: 18px;
@@ -45,7 +53,9 @@
   --font-size-large-px: 24px;
   --font-size-xlarge-px: 26px;
   --font-size-xxlarge-px: 32px;
+  --font-size-xxxlarge-px: 36px;
   --font-size-jumbo-px: 40px;
+  --font-size-jumbo2-px: 48px;
   --font-size-xjumbo-px: 64px;
 
   --line-height-small: 0.8125rem;
@@ -67,11 +77,13 @@
   --border-radius-default: 0.25rem;
   --border-radius-rounded: 15px;
   --border-radius-circle: 50%;
+  --border-radius-xsmall-px: 5px;
+  --border-radius-xsmall2-px: 6px;
+  --border-radius-small-px: 10px;
   --border-radius-large-px: 20px;
   --border-radius-xlarge-px: 50px;
   --border-radius-circle-small: 30px;
   --border-radius-medium-px: 10px;
-  --border-radius-large-px: 20px;
 
   --opacity-10: 10%;
   --opacity-30: 30%;
@@ -96,6 +108,7 @@
   --z-index-ultra: 1200;
 
   --transition-fast: 0.16s;
+  --transition-moderate: 0.2s;
   --transition-regular: 0.4s;
   --transition-slow: 0.6s;
 

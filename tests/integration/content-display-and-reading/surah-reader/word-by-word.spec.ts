@@ -1,51 +1,49 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable react-func/max-lines-per-function */
-import { test, expect, Page } from '@playwright/test';
+import { test, expect, type Locator, type Page } from '@playwright/test';
 
+import {
+  setWordByWordDisplay,
+  setWordByWordLanguage,
+  setWordByWordTooltipEnabled,
+  setWordByWordTranslationEnabled,
+  setWordByWordTransliterationEnabled,
+  withSettingsDrawer,
+} from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
+import { WordByWordDisplay } from '@/types/QuranReader';
 
 let homePage: Homepage;
 
 // Helper functions to reduce code duplication
-async function hoverFirstWordInVerse2(page: any): Promise<string | null> {
+async function hoverFirstWordInVerse2(page: Page): Promise<string | null> {
   const firstWord = page.locator('[data-word-location="78:2:2"]').first();
   await firstWord.hover();
 
-  const verse2 = page.getByTestId('verse-78:2');
+  const verse2 = page.getByTestId(getVerseTestId('78:2'));
   return verse2.textContent();
 }
 
-async function modifySettingsAndClose(
-  page: any,
-  settingsFn: (page: Page) => Promise<void>,
-): Promise<void> {
-  await homePage.openSettingsDrawer();
-  await page.waitForTimeout(1000); // Wait for the drawer animation
-  await settingsFn(page);
-  await page.keyboard.press('Escape');
-}
-
 async function openWordByWordModal(
-  page: any,
-): Promise<{ wbwTranslation: any; wbwTransliteration: any }> {
+  page: Page,
+): Promise<{ wbwTranslation: Locator; wbwTransliteration: Locator }> {
   // Get verse 2
-  const verse = page.getByTestId('verse-78:2');
+  const verse = page.getByTestId(getVerseTestId('78:2'));
   await expect(verse).toBeVisible();
 
   // Click on the more button
   const moreButton = verse.getByLabel('More');
   await expect(moreButton).toBeVisible();
-  await moreButton.click();
+  await moreButton.click({ force: true });
 
   // Click on the role="menuitem" with text "Word By Word"
   const wordByWordButton = page.getByRole('menuitem', { name: 'Word By Word' });
   await expect(wordByWordButton).toBeVisible();
-  await wordByWordButton.click();
+  await wordByWordButton.click({ force: true });
 
   // Check that the modal is open
-  const wbwTranslation = page.getByTestId('wbw-translation');
+  const wbwTranslation = page.getByTestId(TestId.WBW_TRANSLATION);
   await expect(wbwTranslation).toBeVisible();
-  const wbwTransliteration = page.getByTestId('wbw-transliteration');
+  const wbwTransliteration = page.getByTestId(TestId.WBW_TRANSLITERATION);
   await expect(wbwTransliteration).toBeVisible();
 
   return { wbwTranslation, wbwTransliteration };
@@ -82,10 +80,9 @@ test.describe('Word by Word Modal', () => {
         'Remove .skip when issue is fixed: wbw modal does not have the correct translation',
       );
 
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Change the language to German
-      await page.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordLanguage(page, 'de'); // (Deutsch)
+      });
 
       const { wbwTranslation } = await openWordByWordModal(page);
 
@@ -113,8 +110,8 @@ test.describe('Word by Word Tooltip', () => {
     'Should show transliteration tooltip when enabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#wbw-transliteration').check();
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordTransliterationEnabled(page, true);
       });
 
       // Hover over the first word in verse 2
@@ -129,8 +126,8 @@ test.describe('Word by Word Tooltip', () => {
     'Should show German translation tooltip when language changed',
     { tag: ['@reader', '@word-by-word', '@language'] },
     async ({ page }) => {
-      await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordLanguage(page, 'de'); // (Deutsch)
       });
 
       // Hover over the first word in verse 2
@@ -145,8 +142,8 @@ test.describe('Word by Word Tooltip', () => {
     'Should not show tooltip when disabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#tooltip').uncheck();
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordTooltipEnabled(page, false);
       });
 
       // Hover over the first word in verse 2
@@ -163,13 +160,13 @@ test.describe('Word by Word Inline Display', () => {
     'Should display inline translation and transliteration when enabled',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#inline').check();
-        await settingsPage.locator('#wbw-transliteration').check();
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordDisplay(page, WordByWordDisplay.INLINE);
+        await setWordByWordTransliterationEnabled(page, true);
       });
 
       // Get verse 2
-      const verse = page.getByTestId('verse-78:2');
+      const verse = page.getByTestId(getVerseTestId('78:2'));
       await expect(verse).toBeVisible();
 
       // The translation and transliteration should be visible without hovering
@@ -184,9 +181,9 @@ test.describe('Word by Word Settings', () => {
     'Should hide translation and transliteration when disabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      await modifySettingsAndClose(page, async (settingsPage) => {
-        await settingsPage.locator('#wbw-translation').uncheck();
-        await settingsPage.locator('#wbw-transliteration').uncheck();
+      await withSettingsDrawer(page, async () => {
+        await setWordByWordTranslationEnabled(page, false);
+        await setWordByWordTransliterationEnabled(page, false);
       });
 
       // Hover over the first word in verse 2

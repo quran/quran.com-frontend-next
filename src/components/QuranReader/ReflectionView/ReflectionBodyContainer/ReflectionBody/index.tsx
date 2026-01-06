@@ -85,9 +85,7 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {isModal ? (
-        <div className={styles.separatorContainer} />
-      ) : (
+      {!isModal && (
         <>
           <VerseAndTranslation
             from={Number(selectedVerseNumber)}

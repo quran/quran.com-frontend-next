@@ -1,50 +1,50 @@
 /* Auth-specific container overrides */
 .authContainer {
-    height: var(--spacing-xxlarge-px);
-    border-radius: var(--border-radius-medium-px) !important;
-    border: 1px solid var(--color-border-gray-lighter) !important;
-    width: 100%;
-    background-color: var(--color-background-default);
-    transition: border-color 0.2s ease;
-    box-sizing: border-box;
+  height: var(--spacing-xxlarge-px) !important;
+  border-radius: var(--border-radius-medium-px) !important;
+  border: 1px solid var(--color-border-gray-lighter) !important;
+  width: 100%;
+  background-color: var(--color-background-default);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--color-success-medium) !important;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    background-color: var(--color-border-gray-faded);
+    border-color: var(--color-border-gray-lighter) !important;
 
     &:hover,
     &:focus-within {
-        border-color: var(--color-success-medium) !important;
+      border-color: var(--color-border-gray-lighter) !important;
     }
-
-    &.disabled {
-        cursor: not-allowed;
-        background-color: var(--color-border-gray-faded);
-        border-color: var(--color-border-gray-lighter) !important;
-
-        &:hover,
-        &:focus-within {
-            border-color: var(--color-border-gray-lighter) !important;
-        }
-    }
+  }
 }
 
 /* Auth-specific input overrides */
 .authInput {
-    height: var(--spacing-xxlarge-px);
-    box-sizing: border-box;
-    border: none;
-    margin: 0;
+  height: var(--spacing-xxlarge-px);
+  box-sizing: border-box;
+  border: none;
+  margin: 0;
 
-    &::placeholder {
-        color: var(--color-border-gray-light) !important;
-    }
+  &::placeholder {
+    color: var(--color-border-gray-light) !important;
+  }
 
-    &:hover,
-    &:focus,
-    &.hasValue {
-        border: none; /* Let container handle the border */
-    }
+  &:hover,
+  &:focus,
+  &.hasValue {
+    border: none; /* Let container handle the border */
+  }
 
-    &:disabled {
-        cursor: not-allowed;
-        color: var(--color-border-gray-dark);
-        background-color: var(--color-border-gray-faded);
-    }
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--color-border-gray-dark);
+    background-color: var(--color-border-gray-faded);
+  }
 }

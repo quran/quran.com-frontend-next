@@ -28,6 +28,7 @@ import {
   makeNewSearchResultsUrl,
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
+  makeChapterMetadataUrl,
   makeCountryLanguagePreferenceUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
@@ -42,6 +43,7 @@ import {
   TafsirsResponse,
   VersesResponse,
   ChapterInfoResponse,
+  ChapterMetadataResponse,
   FootnoteResponse,
   ChapterResponse,
   ReciterResponse,
@@ -274,6 +276,18 @@ export const getChapterInfo = async (
   chapterId: string,
   language: string,
 ): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language));
+
+/**
+ * Get chapter metadata including suggestions and next/previous summaries.
+ *
+ * @param {string} chapterId
+ * @param {string} language
+ * @returns {Promise<ChapterMetadataResponse>}
+ */
+export const getChapterMetadata = async (
+  chapterId: string,
+  language: string,
+): Promise<ChapterMetadataResponse> => fetcher(makeChapterMetadataUrl(chapterId, language));
 
 /**
  * Get a chapter's.

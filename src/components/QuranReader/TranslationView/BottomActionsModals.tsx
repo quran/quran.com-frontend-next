@@ -3,12 +3,15 @@ import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './BottomActionsModals.module.scss';
+
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import { logEvent } from '@/utils/eventLogger';
 import { fakeNavigate } from '@/utils/navigation';
+import ContentType from 'types/QuranReflect/ContentType';
 
 /**
  * Enum for modal types
@@ -16,6 +19,7 @@ import { fakeNavigate } from '@/utils/navigation';
 export enum ModalType {
   TAFSIR = 'tafsir',
   REFLECTION = 'reflection',
+  LESSON = 'lesson',
   QUESTIONS = 'questions',
 }
 
@@ -46,6 +50,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
   // Refs for content modals
   const tafsirModalRef = useRef(null);
   const reflectionModalRef = useRef(null);
+  const lessonModalRef = useRef(null);
 
   // Modal close handlers
   const handleModalClose = (modalType: ModalType) => {
@@ -94,9 +99,36 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
+            overlayClassName={styles.reflectionOverlay}
+            contentClassName={styles.reflectionContentModal}
+            innerContentClassName={styles.reflectionInnerContentModal}
             innerRef={reflectionModalRef}
             isOpen={openedModal === ModalType.REFLECTION}
             onClose={() => handleModalClose(ModalType.REFLECTION)}
+            hasCloseButton
+            header={surahAndAyahSelection}
+            headerClassName={styles.reflectionHeader}
+            closeIconClassName={styles.reflectionHeaderCloseIcon}
+          >
+            {body}
+          </ContentModal>
+        )}
+      />
+
+      {/* Lesson Modal */}
+      <ReflectionBodyContainer
+        initialChapterId={chapterId}
+        initialVerseNumber={verseNumber}
+        initialContentType={ContentType.LESSONS}
+        isModal
+        scrollToTop={() => {
+          lessonModalRef.current?.scrollToTop();
+        }}
+        render={({ surahAndAyahSelection, body }) => (
+          <ContentModal
+            innerRef={lessonModalRef}
+            isOpen={openedModal === ModalType.LESSON}
+            onClose={() => handleModalClose(ModalType.LESSON)}
           >
             {surahAndAyahSelection}
             {body}

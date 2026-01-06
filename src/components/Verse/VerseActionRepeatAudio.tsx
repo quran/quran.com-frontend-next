@@ -40,7 +40,12 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
       />
       <PopoverMenu.Item
         icon={
-          <IconContainer icon={<RepeatIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          <IconContainer
+            icon={<RepeatIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
         }
         onClick={onItemClicked}
       >

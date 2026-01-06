@@ -2,14 +2,21 @@
 @use 'src/styles/breakpoints';
 
 .itemsContainer {
+  @include utility.dimmedOverlay(absolute);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
   background-color: var(--color-background-elevated);
+
+  svg,
+  g {
+    clip-path: none;
+  }
 }
 
 .bannerContainerTop {
+  @include utility.dimmedOverlay(absolute);
   display: flex;
   justify-content: center;
   align-items: center;

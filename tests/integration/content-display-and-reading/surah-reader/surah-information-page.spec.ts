@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 import { chapter } from '@/tests/mocks/chapters';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -12,28 +13,33 @@ test.beforeEach(async ({ page, context }) => {
 
 test.describe('Surah Information Page', () => {
   test(
-    'Surah information displays transliteration, revelation place, and verse count',
+    'Surah information displays transliteration, revelation place, and verse count in modal',
     { tag: ['@fast', '@surah', '@info', '@smoke'] },
     async ({ page }) => {
-      // Verify the surah name is displayed
-      await expect(page.getByTestId('surah-name')).toBeVisible();
+      // Verify modal is open and contains surah info content
+      await expect(page.getByTestId(TestId.MODAL_CONTENT)).toBeVisible();
+      await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
+
+      // Verify surah info content is inside the modal
+      const modalContent = page.getByTestId(TestId.MODAL_CONTENT);
+      await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toBeVisible();
 
       // Verify the surah name transliteration is displayed
-      await expect(page.getByTestId('surah-name')).toContainText(
+      await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toContainText(
         `Surah ${chapter.transliteratedName}`,
       );
 
       // Verify the surah revelation place is displayed
-      await expect(page.getByTestId('surah-revelation-place')).toBeVisible();
+      await expect(modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE)).toBeVisible();
 
       // Verify the surah revelation place is Meccan
-      await expect(page.getByTestId('surah-revelation-place')).toHaveText('Mecca');
+      await expect(modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE)).toHaveText('Mecca');
 
       // Verify the surah number of ayahs is displayed
-      await expect(page.getByTestId('surah-number-of-ayahs')).toBeVisible();
+      await expect(modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS)).toBeVisible();
 
       // Verify the surah number of ayahs is 7
-      await expect(page.getByTestId('surah-number-of-ayahs')).toContainText(
+      await expect(modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS)).toContainText(
         chapter.versesCount.toString(),
       );
     },

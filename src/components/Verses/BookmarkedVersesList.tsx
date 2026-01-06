@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
@@ -14,87 +14,98 @@ import BookmarkPill from './BookmarkPill';
 
 import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { deleteBookmarkById, privateFetcher } from '@/utils/auth/api';
 import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import mutatingFetcherConfig from '@/utils/swr';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import Bookmark from 'types/Bookmark';
 
-const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
+const BOOKMARKS_API_LIMIT = 10;
 
 const BookmarkedVersesList = () => {
   const { t } = useTranslation('home');
+  const { isLoggedIn } = useIsLoggedIn();
 
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const dispatch = useDispatch();
 
   const toast = useToast();
+  const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
 
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
 
+  const [deletingVerseKey, setDeletingVerseKey] = useState<string | null>(null);
+
   const { data, isValidating, mutate } = useSWR<Bookmark[]>(
-    isLoggedIn() // only fetch the data when user is loggedIn
+    isLoggedIn
       ? makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
           BOOKMARKS_API_LIMIT,
         )
       : null,
     privateFetcher,
+    mutatingFetcherConfig,
   );
 
   const bookmarkedVersesKeys = useMemo(() => {
     if (isValidating) return [];
 
-    const isUserLoggedIn = isLoggedIn();
-    if (isUserLoggedIn && data) {
+    if (isLoggedIn && data) {
       return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
     }
 
-    if (!isUserLoggedIn) {
+    if (!isLoggedIn) {
       return Object.keys(bookmarkedVerses);
     }
 
     return [];
-  }, [bookmarkedVerses, data, isValidating]);
+  }, [bookmarkedVerses, data, isValidating, isLoggedIn]);
 
-  // Flag when a user is using the API and has more bookmarks than the api limit
   const hasReachedBookmarksLimit = useMemo(() => {
-    const isUserLoggedIn = isLoggedIn();
+    return isLoggedIn && data && data.length >= BOOKMARKS_API_LIMIT;
+  }, [data, isLoggedIn]);
 
-    if (isUserLoggedIn && data && data.length >= BOOKMARKS_API_LIMIT) {
-      return true;
-    }
-    return false;
-  }, [data]);
+  const onBookmarkDeleted = useCallback(
+    async (verseKey: string) => {
+      // Prevent duplicate delete requests
+      if (deletingVerseKey !== null) return;
 
-  const onBookmarkDeleted = (verseKey: string) => {
-    logButtonClick('bookmarked_verses_list_delete');
-    if (isLoggedIn()) {
-      const selectedBookmark = data.find((bookmark) => {
-        const [chapter, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-        return (
-          Number(chapter) === Number(bookmark.key) &&
-          Number(verseNumber) === Number(bookmark.verseNumber)
-        );
-      });
-
-      deleteBookmarkById(selectedBookmark.id)
-        .then(() => {
-          mutate();
-        })
-        .catch(() => {
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
+      logButtonClick('bookmarked_verses_list_delete');
+      if (isLoggedIn) {
+        const selectedBookmark = data?.find((bookmark) => {
+          const [chapter, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+          return (
+            Number(chapter) === Number(bookmark.key) &&
+            Number(verseNumber) === Number(bookmark.verseNumber)
+          );
         });
-    } else {
-      dispatch(toggleVerseBookmark(verseKey));
-    }
-  };
+
+        if (selectedBookmark) {
+          setDeletingVerseKey(verseKey);
+          try {
+            await deleteBookmarkById(selectedBookmark.id);
+            mutate();
+            invalidateAllBookmarkCaches();
+          } catch {
+            toast(t('common:error.general'), {
+              status: ToastStatus.Error,
+            });
+          } finally {
+            setDeletingVerseKey(null);
+          }
+        }
+      } else {
+        dispatch(toggleVerseBookmark(verseKey));
+      }
+    },
+    [isLoggedIn, data, mutate, invalidateAllBookmarkCaches, toast, t, dispatch, deletingVerseKey],
+  );
 
   const onViewAllBookmarksClicked = () => {
     logButtonClick('view_all_bookmarks');
@@ -117,7 +128,12 @@ const BookmarkedVersesList = () => {
       {bookmarkedVersesKeys.length > 0 ? (
         <div className={styles.verseLinksContainer}>
           {bookmarkedVersesKeys?.map((verseKey) => (
-            <BookmarkPill key={verseKey} verseKey={verseKey} onDeleted={onBookmarkDeleted} />
+            <BookmarkPill
+              key={verseKey}
+              verseKey={verseKey}
+              onDeleted={onBookmarkDeleted}
+              isDeleting={deletingVerseKey === verseKey}
+            />
           ))}
           {hasReachedBookmarksLimit && (
             <Link

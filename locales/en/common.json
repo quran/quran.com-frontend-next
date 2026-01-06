@@ -101,6 +101,7 @@
   "bookmarked": "Bookmarked",
   "both": "Both",
   "cancel": "Cancel",
+  "change-theme": "Change Theme",
   "click-here": "Click here",
   "close": "Close",
   "command-bar": {
@@ -160,6 +161,7 @@
   },
   "end-year-donate": "End 2024 with Sadaqah ❤️",
   "error": {
+    "language-change-failed": "Failed to change language. Please try again.",
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "bookmark-sync": "Bookmark is out of sync.",
     "email-login-fail": "Failed to login with email. Please try again",
@@ -176,22 +178,30 @@
     "banned": "*Sorry, Your account is banned. Contact Quran.Foundation",
     "complete-signup-failed": "Failed to complete signup. Please try again.",
     "confirm": "*Confirm password doesn't match the password",
+    "equal": "*{{fieldName}} doesn't match",
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
+    "file-exceeds-limit": "File size exceeds the limit. Please choose a smaller file.",
     "forgot-password-failed": "Failed to send password reset email. Please try again.",
+    "image-remove-failed": "Failed to remove image. Please try again.",
+    "image-upload-failed": "Failed to upload image. Please try again.",
     "immutable": "*This value cannot be changed",
     "invalid": "*This {{fieldName}} is invalid",
+    "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",
     "invalidEmailOrPassword": "*Invalid email or password",
     "max": "*{{fieldName}} must be less than or equal to {{max}} digits",
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",
     "notFound": "*Not found",
+    "profile-pic-size-limit": "Profile pic size should be {{size}}MB maximum",
     "required": "*{{fieldName}} is missing!",
+    "remove-avatar-failed": "Failed to remove avatar. Please try again.",
     "reset-password-failed": "Failed to reset password. Please try again.",
     "signin-failed": "Signin failed. Please try again.",
     "signup-failed": "Signup failed. Please try again.",
     "taken": "*{{fieldName}} already exists!",
+    "upload-avatar-failed": "Failed to upload avatar. Please try again.",
     "usedToken": "*This token already used",
     "username": "*{{fieldName}} accept underscore and letters only",
     "verification-code-invalid": "This verification code is invalid",
@@ -230,10 +240,13 @@
     "body": "Body",
     "code": "Verification Code",
     "confirm-password": "Confirm Password",
+    "current-password": "Current Password",
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
     "password": "Password",
+    "new-password": "New Password",
+    "confirm-new-password": "Confirm New Password",
     "title": "Title",
     "username": "Username",
     "verification-code": "Verification Code"
@@ -246,6 +259,10 @@
   },
   "fundraising": {
     "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
+    "donation-campaign": {
+      "cta": "Donate today",
+      "text": "Become a supporter"
+    },
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",
@@ -261,6 +278,7 @@
   "juz": "Juz",
   "language": "Language",
   "languages": "Languages",
+  "learn": "Learn",
   "learn-more": "Learn more",
   "learning-plans": "Learning Plans",
   "less": "Less",
@@ -277,6 +295,7 @@
   "mode": "Mode",
   "more": "More",
   "my-learning-plans": "My Learning Plans",
+  "my-quran": "My Quran",
   "navigate": "Navigate",
   "network": "Network",
   "new": "New!",
@@ -329,6 +348,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "read": "Read",
   "reading-history": "Reading history",
   "reading-preference": {
     "reading": "Reading",
@@ -368,6 +388,7 @@
   },
   "seconds": "Seconds",
   "see-new": "See What's New",
+  "select-language": "Select Language",
   "settings": {
     "no-tafsir-selected": "No tafsir selected",
     "no-translation-selected": "No translation selected",
@@ -484,5 +505,20 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+
+  "translation-feedback": {
+    "title": "Translation Feedback",
+
+    "translation": "Translation",
+    "feedback": "Feedback",
+    "report": "Report",
+
+    "select-translation": "Select translation:",
+    "select": "Select...",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+
+    "submission-success": "Your feedback is sent successfully"
+  }
 }

@@ -2,6 +2,8 @@ import path from 'path';
 
 import { test as setup, expect } from '@playwright/test';
 
+import { TestId } from '@/tests/test-ids';
+
 const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
@@ -12,11 +14,6 @@ setup('authenticate', async ({ page }) => {
   // Open the login page (Playwright will resolve relative URLs if baseURL is configured)
   await page.goto('/login');
 
-  // Click on the "Continue with Email" button
-  const authButtons = page.getByTestId('auth-buttons');
-  const continueWithEmailButton = authButtons.getByText('Email');
-  await continueWithEmailButton.click();
-
   // Fill in credentials from environment variables
   if (!process.env.TEST_USER_EMAIL || !process.env.TEST_USER_PASSWORD) {
     // make the test framework aware this should be skipped when creds missing
@@ -24,15 +21,16 @@ setup('authenticate', async ({ page }) => {
     throw new Error('TEST_USER_EMAIL and TEST_USER_PASSWORD must be set for auth.setup to run');
   }
 
-  await page.getByPlaceholder('Email').fill(process.env.TEST_USER_EMAIL || '');
+  await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
   await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
 
   // Submit the login form
-  await page.getByRole('button', { name: 'Continue' }).click();
+  await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
 
   // Wait for redirect to home and visible profile avatar
-  await page.waitForURL(/\/[a-z]{2}?$/);
-  await expect(page.getByTestId('profile-avatar-button')).toBeVisible();
+  await page.waitForURL(/\/([a-z]{2})?$/);
+  const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
+  await expect(profileAvatarButton).toBeAttached();
 
   // Save signed-in state to 'authFile'.
   await page.context().storageState({ path: authFile });

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './ChapterAndJuzList.module.scss';
 
@@ -28,6 +29,7 @@ type RevelationOrderViewProps = {
 const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProps) => {
   const { t, lang } = useTranslation();
   const router = useRouter();
+  const dispatch = useDispatch();
   const {
     actions: { onSettingsChange },
     isLoading,
@@ -49,7 +51,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
         },
       );
     } else {
-      setIsReadingByRevelationOrder(true);
+      dispatch(setIsReadingByRevelationOrder(true));
       router.push(getSurahNavigationUrl(surahId));
     }
     logButtonClick('revelation_ordering_surah');

@@ -39,6 +39,29 @@ export const AUTH_ROUTES = [
   ROUTES.COMPLETE_SIGNUP,
 ];
 
+export const EXTERNAL_ROUTES = {
+  QURAN_REFLECT: 'https://quranreflect.com',
+  SUNNAH: 'https://sunnah.com',
+  NUQAYAH: 'https://nuqayah.com',
+  LEGACY_QURAN_COM: 'https://legacy.quran.com',
+  CORPUS_QURAN_COM: 'https://corpus.quran.com',
+  QURAN_ANDROID:
+    'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1',
+  QURAN_IOS:
+    'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
+  FEEDBACK: 'https://feedback.quran.com',
+  QURAN_FOUNDATION: 'https://quran.foundation',
+};
+
+export const QURAN_URL = 'https://quran.com';
+export const LEARNING_PLANS_URL = '/learning-plans';
+export const RADIO_URL = '/radio';
+export const RECITERS_URL = '/reciters';
+export const ABOUT_US_URL = '/about-us';
+export const DEVELOPERS_URL = '/developers';
+export const PRODUCT_UPDATES_URL = '/product-updates';
+export const SUPPORT_URL = '/support';
+
 /**
  * Get the href link to a verse.
  *
@@ -317,8 +340,15 @@ export const resolveUrlBySearchNavigationType = (
  * @param {string} query the search query.
  * @returns {string}
  */
-export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
+export const getSearchQueryNavigationUrl = (query?: string): string => {
+  if (!query) return '/search';
+
+  const params = new URLSearchParams();
+  params.set(QueryParam.PAGE, '1');
+  params.set(QueryParam.QUERY, query);
+
+  return `/search?${params.toString()}`;
+};
 
 /**
  * Get the href link to the info page of a Surah.

@@ -1,13 +1,11 @@
 /* eslint-disable unicorn/no-array-reduce */
 import React from 'react';
 
-import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DetailSection from './DetailSection';
 import styles from './MainDetails.module.scss';
 
-import MarkdownEditor from '@/components/MarkdownEditor';
 import HtmlContent from '@/components/RichText/HtmlContent';
 import { Course } from '@/types/auth/Course';
 
@@ -24,9 +22,6 @@ const MainDetails: React.FC<Props> = ({ course }) => {
   //   return `${acc}, ${currentValue}`;
   // }, '');
 
-  // FIXME: remove once markdown in api is converted to html
-  const shouldUseMilkdown = /(^|\n)\s*#/m.test(description ?? '') || /\\$/m.test(description ?? '');
-
   return (
     <>
       <DetailSection
@@ -36,23 +31,14 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           days: lessons.length,
         })}.`}
       />
-      {shouldUseMilkdown ? (
-        <MilkdownProvider>
-          <DetailSection
-            title={t('description')}
-            description={<MarkdownEditor isEditable={false} defaultValue={description} />}
-          />
-        </MilkdownProvider>
-      ) : (
-        <DetailSection
-          title={t('description')}
-          description={
-            <div className={styles.htmlDescription}>
-              <HtmlContent html={description} />
-            </div>
-          }
-        />
-      )}
+      <DetailSection
+        title={t('description')}
+        description={
+          <div className={styles.htmlDescription}>
+            <HtmlContent html={description} />
+          </div>
+        }
+      />
     </>
   );
 };

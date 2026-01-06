@@ -12,7 +12,10 @@ export const getLastSyncAt = (): Date | null => {
   return !Number.isNaN(dateValue.getTime()) ? dateValue : null;
 };
 
-export const removeLastSyncAt = () => Cookies.remove(USER_DATA_SYNC_COOKIE_NAME);
+export const removeLastSyncAt = () => {
+  // Remove with path '/' to ensure cookie is removed regardless of current path
+  Cookies.remove(USER_DATA_SYNC_COOKIE_NAME, { path: '/' });
+};
 
 export const setLastSyncAt = (lastSyncAt: Date) =>
-  Cookies.set(USER_DATA_SYNC_COOKIE_NAME, lastSyncAt.toString());
+  Cookies.set(USER_DATA_SYNC_COOKIE_NAME, lastSyncAt.toString(), { path: '/' });
