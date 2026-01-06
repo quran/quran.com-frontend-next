@@ -1,6 +1,8 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
+$arabicVerseTopMargin: 2.75rem;
+
 .cellContainer {
   display: flex;
   justify-content: space-between;
@@ -26,15 +28,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-xxsmall-px);
+  }
 }
 .arabicVerseContainer {
   direction: rtl;
   padding-block-start: var(--spacing-xxsmall);
-  margin-block-start: var(--gap-size);
+  margin-block-start: $arabicVerseTopMargin;
   margin-block-end: var(--gap-size);
 }
 .verseTranslationsContainer {
-  margin-block-end: calc(1.3 * var(--gap-size));
+  margin-block-end: calc(var(--spacing-medium2) * 3);
 }
 
 .verseTranslationContainer {
@@ -45,6 +51,7 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
+  gap: var(--spacing-xxsmall-px);
 }
 .actionContainerLeft {
   justify-content: flex-start;
@@ -133,6 +140,7 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
@@ -191,4 +199,9 @@
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-small);
   }
+}
+
+.verseSeparator {
+  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
+  margin-inline: auto;
 }

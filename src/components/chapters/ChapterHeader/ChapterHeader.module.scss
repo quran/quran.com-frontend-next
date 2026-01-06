@@ -1,8 +1,9 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
+$bismillahSvgInlineSizeMobile: 148px;
 
 @mixin customButton {
   border: none;
@@ -58,6 +59,7 @@ $changeTranslationButtonInlineSizeMobile: 257px;
 
 .translationName {
   max-inline-size: 85%;
+  font-size: var(--font-size-small);
 
   span {
     overflow: hidden;
@@ -147,6 +149,13 @@ $changeTranslationButtonInlineSizeMobile: 257px;
       color: var(--color-success-deep);
     }
   }
+
+  @include breakpoints.smallerThanTablet {
+    svg {
+      inline-size: var(--spacing-small);
+      block-size: var(--spacing-small);
+    }
+  }
 }
 
 .infoIconButtonWithSurahName {
@@ -165,13 +174,34 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-block-end: calc(2 * var(--spacing-mega));
+
+  svg {
+    @include breakpoints.smallerThanTablet {
+      inline-size: $bismillahSvgInlineSizeMobile;
+    }
+  }
+}
+
+.withReadingView {
+  margin-block-end: var(--spacing-xxlarge-px);
+}
+
+.withTranslationView {
+  margin-block-end: var(--spacing-medium3-px);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .bismillahTranslation {
+  font-size: var(--font-size-small);
   text-align: center;
   margin-block-start: var(--spacing-xxsmall);
   color: var(--color-text-faded-new);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-dangerous);
+  }
 }
 
 .arabicSurahNameContainer {

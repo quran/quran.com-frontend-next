@@ -74,13 +74,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             <CopyButton verseKey={verse.verseKey} isTranslationView={isTranslationView} />
           </ActionItem>
           <ActionItem>
-            <VerseNotes
-              verseKey={verse.verseKey}
-              isTranslationView={isTranslationView}
-              hasNotes={hasNotes}
-            />
-          </ActionItem>
-          <ActionItem>
             <ShareButton
               verse={verse}
               isTranslationView={isTranslationView}
@@ -88,6 +81,14 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               onClick={openShareModal}
             />
           </ActionItem>
+          <ActionItem>
+            <VerseNotes
+              verseKey={verse.verseKey}
+              isTranslationView={isTranslationView}
+              hasNotes={hasNotes}
+            />
+          </ActionItem>
+
           <ActionItem>
             <OverflowVerseActionsMenu
               bookmarksRangeUrl={bookmarksRangeUrl}

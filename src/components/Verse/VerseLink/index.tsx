@@ -20,8 +20,9 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
   return (
     <Button
       className={classNames(styles.verseLink)}
+      contentClassName={styles.verseLinkContent}
       size={ButtonSize.Small}
-      shape={ButtonShape.Circle}
+      shape={ButtonShape.Square}
       href={getChapterWithStartingVerseUrl(verseKey)}
       shouldShallowRoute
       variant={ButtonVariant.Ghost}

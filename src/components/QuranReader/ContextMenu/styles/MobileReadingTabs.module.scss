@@ -1,9 +1,9 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .container {
-  width: 100%;
+  inline-size: 100%;
   display: none; // Hidden by default
 
   // Only show on mobile when navbar is visible
@@ -13,10 +13,10 @@
 }
 
 .tabsContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated-new);
   block-size: var(--mobile-reading-mode-tabs-height);
 }
@@ -29,22 +29,21 @@
   text-align: center;
   font-size: var(--font-size-small);
   padding-inline: var(--spacing-medium);
-  padding-top: var(--spacing-medium);
-  padding-bottom: var(--spacing-large);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
-  width: 50%;
-  border-bottom: 2px solid var(--color-separators-ayah-level);
+  padding-block: var(--spacing-medium) var(--spacing-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-faded-new);
+  inline-size: 50%;
+  border-block-end: 2px solid var(--color-separators-ayah-level);
   cursor: pointer;
   transition: all 0.3s ease;
 
   span {
-    margin-left: var(--spacing-xsmall);
+    margin-inline-start: var(--spacing-xsmall);
   }
 }
 
 .selectedTab {
   color: var(--color-success-medium);
-  border-bottom: 2px solid var(--color-success-medium);
-  font-weight: var(--font-weight-bold);
+  border-block-end: 2px solid var(--color-success-medium);
+  font-weight: var(--font-weight-semibold);
 }

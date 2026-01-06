@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
@@ -9,6 +10,7 @@ import Bismillah from '@/dls/Bismillah/Bismillah';
 interface BismillahSectionProps {
   chapterId: string;
   showTranslatedName: boolean;
+  isTranslationView: boolean;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
@@ -18,7 +20,11 @@ const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
  * @param {BismillahSectionProps} props - Component props
  * @returns {JSX.Element | null} The BismillahSection component
  */
-const BismillahSection: React.FC<BismillahSectionProps> = ({ chapterId, showTranslatedName }) => {
+const BismillahSection: React.FC<BismillahSectionProps> = ({
+  chapterId,
+  showTranslatedName,
+  isTranslationView,
+}) => {
   const { t } = useTranslation('quran-reader');
 
   if (CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId)) {
@@ -26,7 +32,12 @@ const BismillahSection: React.FC<BismillahSectionProps> = ({ chapterId, showTran
   }
 
   return (
-    <div className={styles.bismillahContainer}>
+    <div
+      className={classNames(styles.bismillahContainer, {
+        [styles.withReadingView]: !isTranslationView,
+        [styles.withTranslationView]: isTranslationView,
+      })}
+    >
       <Bismillah />
       {!showTranslatedName && <span className={styles.bismillahTranslation}>{t('bismillah')}</span>}
     </div>
