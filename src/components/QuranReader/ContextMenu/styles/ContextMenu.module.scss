@@ -99,6 +99,16 @@ $pixel: 1px;
   }
 }
 
+.readingPreferenceContainer {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-medium);
+}
+
+.settingsNextToSwitcher {
+  display: inline-flex;
+}
+
 .hideReadingPreferenceSectionOnMobile {
   @include breakpoints.smallerThanTablet {
     visibility: hidden;
