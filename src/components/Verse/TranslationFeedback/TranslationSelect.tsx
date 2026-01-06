@@ -45,14 +45,22 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
 
   useEffect(() => {
     const wrapperElement = wrapperRef.current;
-    if (triggerRef.current && wrapperElement && isMenuOpen) {
-      const width = triggerRef.current.offsetWidth;
+    const triggerElement = triggerRef.current;
+
+    if (!wrapperElement || !triggerElement || !isMenuOpen) return undefined;
+
+    const updateTriggerWidth = () => {
+      const width = triggerElement.offsetWidth;
       wrapperElement.style.setProperty('--trigger-width', `${width}px`);
-    }
+    };
+
+    updateTriggerWidth();
+    const resizeObserver = new ResizeObserver(updateTriggerWidth);
+    resizeObserver.observe(triggerElement);
+
     return () => {
-      if (wrapperElement) {
-        wrapperElement.style.removeProperty('--trigger-width');
-      }
+      resizeObserver.disconnect();
+      wrapperElement.style.removeProperty('--trigger-width');
     };
   }, [isMenuOpen]);
 
