@@ -7,7 +7,9 @@ $tablet-max-width: 50rem;
 
   // TODO: remove this when we remove banner
   @include breakpoints.smallerThanTablet {
-    padding-block-start: calc(var(--spacing-micro) + var(--banner-height));
+    // TODO: we should add the banner height here if it's shown
+    // padding-block-start: calc(var(--spacing-micro) + var(--banner-height));
+    padding-block-start: calc(var(--spacing-micro));
   }
 
   margin-block-end: calc(2 * var(--spacing-mega));

@@ -1,85 +1,201 @@
 @use "src/styles/breakpoints";
+
+$chapterHeaderContainerMaxInlineSize: 450px;
+$changeTranslationButtonInlineSize: 310px;
+$changeTranslationButtonInlineSizeMobile: 257px;
+
+@mixin customButton {
+  box-shadow: var(--shadow-small-new);
+
+  svg {
+    color: var(--color-success-medium);
+  }
+
+  &:hover {
+    border-color: var(--color-success-medium);
+    color: var(--color-text-faded-new);
+  }
+}
+
 .container {
   display: flex;
-  justify-content: space-between;
-  margin-block-start: var(--spacing-xxsmall);
-  margin-block-end: var(--spacing-xxsmall);
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-block-start: var(--spacing-xxsmall);
-  padding-block-end: var(--spacing-xxsmall);
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  position: relative;
-  direction: ltr;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  inline-size: 100%;
+  max-inline-size: $chapterHeaderContainerMaxInlineSize;
+  margin-block-start: var(--spacing-medium2);
 }
 
-.left {
+.topControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+}
+
+.leftControls {
+  display: flex;
+  align-items: center;
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+}
+
+.changeTranslationButton {
+  @include customButton;
+  inline-size: $changeTranslationButtonInlineSize;
+  margin-inline-start: var(--spacing-xsmall);
+  white-space: nowrap;
+  @include breakpoints.smallerThanTablet {
+    inline-size: $changeTranslationButtonInlineSizeMobile;
+  }
+}
+
+.translationName {
+  max-inline-size: 85%;
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.translationsCount {
+  margin-inline-start: var(--spacing-micro);
+}
+
+.titleContainer {
+  display: flex;
+  flex: 1;
+  inline-size: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleTextContainer {
   display: flex;
   flex-direction: column;
-  text-align: start;
-  justify-content: space-between;
+  align-items: flex-end;
+
+  @include breakpoints.smallerThanTablet {
+    p {
+      font-size: var(--font-size-large2);
+    }
+  }
 }
 
-.right {
+.titleRow {
   display: flex;
-  flex-direction: column;
-  text-align: start;
-  justify-content: space-between;
+  align-items: center;
+  gap: calc(var(--spacing-xsmall) / 2);
 }
 
-.chapterId {
+.chapterTitle {
+  display: flex;
+  inline-size: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: var(--spacing-medium2);
+  margin-block-end: var(--spacing-mega);
+}
+
+.chapterTitleWithTranslationName {
+  justify-content: center;
+  column-gap: var(--spacing-medium2);
+}
+
+.chapterNumber {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+}
+
+.transliteratedName {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.translatedName {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-faded-new);
   text-align: end;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded);
-  z-index: var(--z-index-default);
+}
+
+.infoIconButton {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  svg {
+    color: var(--color-success-medium);
+  }
+
+  &:hover {
+    cursor: pointer;
+    svg {
+      color: var(--color-success-deep);
+    }
+  }
+}
+
+.infoIconButtonWithSurahName {
+  align-self: start;
+  margin-block-start: var(--spacing-small);
+}
+
+.arabicSurahNameContainer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }
 
 .bismillahContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  margin-block-end: calc(2 * var(--spacing-mega));
+}
+
+.bismillahTranslation {
+  text-align: center;
   margin-block-start: var(--spacing-xxsmall);
-  margin-block-end: calc(1.5 * var(--spacing-mega));
 }
-.translatedName {
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-faded);
-  font-size: var(--font-size-xsmall);
-  margin-block-end: var(--spacing-xxsmall);
-  z-index: var(--z-index-default);
-}
+
 .arabicSurahNameContainer {
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  padding-block-start: var(--spacing-xsmall);
-  margin-block-end: var(--spacing-xxsmall);
-  z-index: var(--z-index-default);
 }
-.transliteratedName {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-large);
-  margin-block-end: var(--spacing-xxsmall);
-  z-index: var(--z-index-default);
-}
+
 .actionContainer {
   position: relative;
-  z-index: var(--z-index-default);
 }
 
 .translation {
-  max-width: calc(5 * var(--spacing-mega));
+  max-inline-size: calc(5 * var(--spacing-mega));
   @include breakpoints.mobileM {
-    max-width: calc(7 * var(--spacing-mega));
+    max-inline-size: calc(7 * var(--spacing-mega));
   }
   @include breakpoints.tablet {
-    max-width: calc(11 * var(--spacing-mega));
+    max-inline-size: calc(11 * var(--spacing-mega));
   }
 }
+
 .translationBy {
   color: var(--color-text-faded);
+  font-weight: var(--font-weight-semibold);
 }
+
 .changeTranslation {
   color: var(--color-success-medium);
   cursor: pointer;
@@ -87,19 +203,19 @@
     text-decoration: underline;
   }
 }
+
 .header {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-block-start: var(--spacing-large);
   // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
-  min-height: calc(3.75 * var(--spacing-medium));
+  min-block-size: calc(3.75 * var(--spacing-medium));
 }
 
 .chapterIconContainer {
   // a hack to center the surah name, because the font width is not correct
   // leave a lot of empty space on the left
   /* stylelint-disable-next-line csstools/use-logical */
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
 }
