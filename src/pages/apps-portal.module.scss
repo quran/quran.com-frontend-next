@@ -426,8 +426,24 @@
 }
 
 @include breakpoints.desktop {
+  .page {
+    gap: var(--spacing-large);
+  }
+
   .featuredGrid,
   .appGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .section {
+    padding-block-end: var(--spacing-medium);
+  }
+
+  .sectionAlt {
+    padding-block-start: var(--spacing-large);
+  }
+
+  .sectionAltInner {
+    padding-block-start: var(--spacing-large);
   }
 }
