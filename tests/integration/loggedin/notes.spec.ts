@@ -199,7 +199,7 @@ const mockEditNote = async (page: Page, noteId: string, noteText: string): Promi
   if (!note) throw new Error(`Note with id ${noteId} not found`);
 
   return page.route(`**/notes/${noteId}`, async (route) => {
-    notes = notes.map((n) => (n.id === noteId ? { ...n, body: noteText } : n));
+    note.body = noteText;
 
     await route.fulfill({
       status: 200,
@@ -221,16 +221,7 @@ const mockPublishNote = async (page: Page, noteId: string, attachId: string): Pr
   if (!note) throw new Error(`Note with id ${noteId} not found`);
 
   return page.route(`**/notes/${noteId}`, async (route) => {
-    notes = notes.map((n) => {
-      if (n.id === noteId) {
-        return {
-          ...n,
-          attachedEntities: [...(n.attachedEntities || []), generateAttachedEntity(attachId)],
-        };
-      }
-
-      return n;
-    });
+    note.attachedEntities = [...(note.attachedEntities || []), generateAttachedEntity(attachId)];
 
     await route.fulfill({
       status: 200,

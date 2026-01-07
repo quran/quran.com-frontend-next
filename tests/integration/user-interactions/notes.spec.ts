@@ -13,7 +13,7 @@ const ayah = {
 };
 
 // It can have locale prefix and query params
-const loginPageRegex = /(?:\/[a-z]{2})?\/login(?:\?.*)?$/;
+const loginPageRegex = /(?:\/[a-z]{2})?\/login(?:\?.*)?\/?$/;
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
