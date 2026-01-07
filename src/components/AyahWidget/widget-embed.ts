@@ -51,8 +51,16 @@ const resolveEmbedBaseUrl = (): string => {
  * @param {ThemeTypeVariant} theme - Theme variant.
  * @returns {string} Theme string for URL.
  */
-const mapEmbedTheme = (theme: ThemeTypeVariant): string =>
-  theme === ThemeType.Dark ? 'dark' : 'light';
+const mapEmbedTheme = (theme: ThemeTypeVariant): string => {
+  switch (theme) {
+    case ThemeType.Dark:
+      return 'dark';
+    case ThemeType.Sepia:
+      return 'sepia';
+    default:
+      return 'light';
+  }
+};
 
 /**
  * Build the verses parameter for the embed URL.

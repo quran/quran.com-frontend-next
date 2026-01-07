@@ -36,44 +36,35 @@ const getTajweedFontPalette = (theme: WidgetOptions['theme']): string => {
   }
 };
 
-// eslint-disable-next-line react-func/max-lines-per-function
-const getColors = (theme: WidgetOptions['theme']): WidgetColors => {
+/**
+ * Get the data-theme attribute value for the widget.
+ * @param {WidgetOptions['theme']} theme - The widget theme.
+ * @returns {string} The data-theme attribute value.
+ */
+const getThemeDataAttribute = (theme: WidgetOptions['theme']): string => {
   switch (theme) {
     case ThemeType.Dark:
-      return {
-        borderColor: '#2d3748',
-        linkColor: '#60a5fa',
-        secondaryBg: '#252525',
-        secondaryText: '#a0aec0',
-        hoverBg: '#2d3748',
-        iconColor: '#cbd5e0',
-        bgColor: '#1a1a1a',
-        textColor: '#e0e0e0',
-      };
+      return 'dark';
     case ThemeType.Sepia:
-      return {
-        borderColor: '#d8c7a0',
-        linkColor: '#a2693e',
-        secondaryBg: '#f5ecd8',
-        secondaryText: '#8a7754',
-        hoverBg: '#f1e2c5',
-        iconColor: '#6b4f2c',
-        bgColor: '#fdf6e3',
-        textColor: '#5b4630',
-      };
+      return 'sepia';
     case ThemeType.Light:
     default:
-      return {
-        borderColor: '#e2e8f0',
-        linkColor: '#20a49b',
-        secondaryBg: '#f7fafc',
-        secondaryText: '#718096',
-        hoverBg: '#edf2f7',
-        iconColor: '#4a5568',
-        bgColor: '#ffffff',
-        textColor: '#2b3a4a',
-      };
+      return 'light';
   }
+};
+
+const getColors = (): WidgetColors => {
+  // Use CSS variables directly - they will be resolved based on data-theme attribute
+  return {
+    borderColor: 'var(--color-borders-hairline)',
+    linkColor: 'var(--color-text-link)',
+    secondaryBg: 'var(--color-background-alternative-faint)',
+    secondaryText: 'var(--color-text-faded)',
+    hoverBg: 'var(--color-background-alternative-medium)',
+    iconColor: 'var(--color-grey-icons)',
+    bgColor: 'var(--color-background-default)',
+    textColor: 'var(--color-text-default)',
+  };
 };
 
 /**
@@ -170,8 +161,8 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
   const verseLabel = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
   const rangeCaption = chapterNumber ? `${chapterNumber}:${verseLabel}` : options.ayah;
 
-  // Get widget colors based on the selected theme
-  const colors = getColors(options.theme);
+  // Get widget colors based on the selected theme (via CSS variables)
+  const colors = getColors();
 
   // Get audio URL if audio is enabled
   const audioUrl = options.audioUrl || null;
@@ -200,6 +191,7 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
   return (
     <div
       className="quran-widget"
+      data-theme={getThemeDataAttribute(options.theme)}
       style={
         {
           fontFamily:
