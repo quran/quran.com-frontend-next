@@ -123,4 +123,9 @@
   &:active:not(:disabled) {
     transform: scale(constants.$button-active-scale);
   }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
 }
