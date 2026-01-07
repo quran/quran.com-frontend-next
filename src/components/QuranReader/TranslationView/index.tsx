@@ -127,32 +127,51 @@ const TranslationView = ({
     return result;
   }, [pageQuestionsMap]);
 
-  const itemContentRenderer = (verseIdx: number) => {
-    if (verseIdx === versesCount) {
+  // Wrap in useCallback with accumulatedQuestionsData as dependency.
+  // This ensures Virtuoso re-renders items when questions data changes,
+  // fixing the issue where Answers buttons wouldn't appear after async data loads.
+  const itemContentRenderer = useCallback(
+    (verseIdx: number) => {
+      if (verseIdx === versesCount) {
+        return (
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+            initialData={initialData}
+          />
+        );
+      }
+
       return (
-        <EndOfScrollingControls
+        <TranslationViewVerse
+          verseIdx={verseIdx}
+          totalVerses={versesCount}
           quranReaderDataType={quranReaderDataType}
-          lastVerse={verses[verses.length - 1]}
+          quranReaderStyles={quranReaderStyles}
+          setApiPageToVersesMap={setApiPageToVersesMap}
+          selectedTranslations={selectedTranslations}
+          wordByWordLocale={wordByWordLocale}
+          reciterId={reciterId}
           initialData={initialData}
+          resourceId={resourceId}
+          questionsData={accumulatedQuestionsData}
         />
       );
-    }
-
-    return (
-      <TranslationViewVerse
-        verseIdx={verseIdx}
-        totalVerses={versesCount}
-        quranReaderDataType={quranReaderDataType}
-        quranReaderStyles={quranReaderStyles}
-        setApiPageToVersesMap={setApiPageToVersesMap}
-        selectedTranslations={selectedTranslations}
-        wordByWordLocale={wordByWordLocale}
-        reciterId={reciterId}
-        initialData={initialData}
-        resourceId={resourceId}
-      />
-    );
-  };
+    },
+    [
+      versesCount,
+      quranReaderDataType,
+      verses,
+      initialData,
+      accumulatedQuestionsData,
+      quranReaderStyles,
+      setApiPageToVersesMap,
+      selectedTranslations,
+      wordByWordLocale,
+      reciterId,
+      resourceId,
+    ],
+  );
 
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||
