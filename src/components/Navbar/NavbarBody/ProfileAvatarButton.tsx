@@ -13,7 +13,7 @@ import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
-import NotesIcon from '@/icons/notes-filled.svg';
+import NotesIcon from '@/icons/notes-with-pencil.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';

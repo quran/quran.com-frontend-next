@@ -1,4 +1,4 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 
 .container {
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   &.fixedWidth {
-    width: calc(8 * var(--spacing-mega));
+    inline-size: calc(8 * var(--spacing-mega));
   }
   &.disabled,
   &.disabled * {
@@ -40,19 +40,19 @@
 }
 
 .rtlInput {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }
 
 .smallContainer {
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
 }
 .mediumContainer {
-  height: calc(2 * var(--spacing-large));
+  block-size: calc(2 * var(--spacing-large));
 }
 .largeContainer {
-  height: calc(3 * var(--spacing-medium));
+  block-size: calc(3 * var(--spacing-medium));
 }
 
 .label {
@@ -69,8 +69,8 @@
   margin-block-end: var(--spacing-micro);
   margin-inline-start: var(--spacing-micro);
   border: 0;
-  height: 80%;
-  width: 100%;
+  block-size: 80%;
+  inline-size: 100%;
   font-size: var(--font-size-normal);
   color: var(--color-text-default);
   background: transparent;
@@ -106,7 +106,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
+  block-size: 100%;
 }
 
 .clearContainer {
@@ -126,7 +126,7 @@
   color: var(--color-text-faded);
 
   > svg {
-    width: var(--spacing-large);
+    inline-size: var(--spacing-large);
   }
 }
 
@@ -147,11 +147,11 @@
   padding-inline: var(--spacing-small);
 
   &.fixedWidth {
-    width: calc(8 * var(--spacing-mega));
+    inline-size: calc(8 * var(--spacing-mega));
   }
 
   &.fullWidth {
-    width: 100%;
+    inline-size: 100%;
   }
 
   &.disabled,
@@ -180,26 +180,26 @@
 
 .smallContainer {
   @extend .container;
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
 }
 
 .mediumContainer {
   @extend .container;
-  height: var(--spacing-large);
+  block-size: var(--spacing-large);
 }
 
 .largeContainer {
   @extend .container;
-  height: var(--spacing-xlarge);
+  block-size: var(--spacing-medium3-px);
 }
 
 .authContainer {
   @extend .container;
-  height: var(--spacing-xxlarge-px);
+  block-size: var(--spacing-xxlarge-px);
   border-radius: var(--border-radius-medium-px);
   border: 1px solid var(--color-border-gray-lighter);
   padding-inline: 0;
-  width: 100%;
+  inline-size: 100%;
 
   &:hover,
   &:focus-within {
@@ -252,7 +252,7 @@
 .authInput {
   @extend .input;
   padding-inline: calc(var(--spacing-xsmall-px) * 2);
-  height: 100%;
+  block-size: 100%;
   margin: 0;
 
   &::placeholder {
@@ -262,7 +262,7 @@
 
 // RTL support
 .rtlInput {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }

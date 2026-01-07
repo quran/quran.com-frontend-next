@@ -1,0 +1,219 @@
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+
+$sections-container-height: 2rem;
+$pixel: 1px;
+
+.container {
+  background: var(--color-background-elevated);
+  color: var(--color-text-default);
+  text-align: center;
+  position: fixed;
+  z-index: var(--z-index-sticky);
+  transition: transform var(--transition-regular);
+  inline-size: 100%;
+  inset-block-start: calc($pixel * -1);
+  min-block-size: var(--context-menu-container-height);
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+.hide {
+  display: none;
+  block-size: 0;
+  visibility: hidden;
+}
+
+.visibleContainer {
+  transform: translate3d(0, var(--navbar-container-height), 0);
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+}
+
+.withVisibleBanner {
+  @include breakpoints.smallerThanTablet {
+    // TODO: we should add the banner height here if it's shown
+    // transform: translate3d(0, calc(var(--navbar-container-height) + var(--banner-height)), 0);
+    transform: translate3d(0, calc(var(--navbar-container-height)), 0);
+  }
+}
+
+.expandedContainer {
+  min-block-size: var(--context-menu-container-height);
+}
+
+.withVisibleSideBar {
+  @include breakpoints.tablet {
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
+    inline-size: calc(100% - #{constants.$notes-side-bar-desktop-width});
+  }
+}
+
+.chapter {
+  font-size: var(--font-size-large);
+  margin-inline: var(--spacing-large);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.sectionsContainer {
+  block-size: $sections-container-height;
+  padding-block: calc(var(--spacing-medium) / 2);
+  display: flex;
+  align-items: center;
+  padding-inline: calc(1.3 * var(--spacing-large));
+  z-index: var(--z-index-default);
+  position: relative;
+  background: var(--color-background-elevated);
+  @include breakpoints.tablet {
+    padding-inline: calc(1.2 * var(--spacing-mega));
+  }
+}
+
+.section {
+  flex: 1;
+}
+
+.pageInfoCustomContainer {
+  @include breakpoints.smallerThanTablet {
+    visibility: hidden;
+    display: none;
+    block-size: 0;
+    visibility: hidden;
+  }
+}
+
+.pageInfoCustomContainerMobileScrolled {
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  padding-inline: calc(1.3 * var(--spacing-large));
+  padding-block: calc(var(--spacing-medium) * 0.75);
+}
+
+.readingPreferenceSection {
+  div {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
+  }
+}
+
+.readingPreferenceContainer {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-medium);
+}
+
+.settingsNextToSwitcher {
+  display: inline-flex;
+}
+
+.hideReadingPreferenceSectionOnMobile {
+  @include breakpoints.smallerThanTablet {
+    visibility: hidden;
+    display: none;
+    block-size: 0;
+    visibility: hidden;
+  }
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  inline-size: 100%;
+}
+
+.pageInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--spacing-xsmall);
+  color: var(--color-text-faded-new);
+  background: var(--color-background-elevated);
+  z-index: var(--z-index-default);
+}
+
+.bookmarkButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+}
+
+.unbookmarkedIcon {
+  color: var(--color-text-faded-new);
+
+  &:hover {
+    color: var(--color-text-default);
+  }
+}
+.bookmarkedIcon {
+  color: var(--color-text-default);
+}
+
+.primaryInfo {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-xxsmall-px);
+  font-weight: var(--font-weight-semibold);
+}
+
+.secondaryInfo {
+  font-weight: var(--font-weight-normal);
+}
+
+.surahName {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.chevronIconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: var(--spacing-xxsmall);
+  box-sizing: border-box;
+}
+
+.rotate180 {
+  transition: var(--transition-fast);
+  transform: rotate(180deg);
+}
+
+.rotateAuto {
+  transition: var(--transition-fast);
+  transform: rotate(0);
+  @include breakpoints.tablet {
+    transition: var(--transition-fast);
+    transform: rotate(180deg);
+  }
+}
+
+.disabledOnMobile {
+  pointer-events: none;
+  @include breakpoints.tablet {
+    pointer-events: inherit;
+  }
+}
+
+.chapterInteractiveSpan {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-semibold);
+}

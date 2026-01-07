@@ -13,6 +13,7 @@
   "my-quran": "Al Quran saya",
   "navigate-quran": "Navigasi Al Quran",
   "no-bookmarks": "Anda belum memiliki penanda apa pun",
+  "no-page-bookmarks": "Anda belum memiliki bookmark halaman apa pun.",
   "no-recently-read": "Anda belum memiliki sesi membaca apa pun",
   "noble-quran": "Al-Qur'an yang mulia",
   "popular": "Populer",
@@ -59,6 +60,7 @@
   "stay-consistent": "Lacak Rekor, Buat Sasaran Khusus, Tetap Konsisten",
   "tab": {
     "bookmarks": "Penanda",
+    "page-bookmarks": "Halaman",
     "popular": "Populer"
   },
   "take-notes": "Sudahkan Anda membuat  <modalLink> Catatan? </modalLink>",

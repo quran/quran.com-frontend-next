@@ -49,10 +49,12 @@ const useNavbarAutoHide = (
       }, timeout);
     }
 
-    // Cleanup function to clear timeout on unmount or when dependencies change
+    // Cleanup function to clear timeout and unlock visibility state on unmount or when dependencies change
     return () => {
       if (hideNavbarTimeoutRef.current) {
         window.clearTimeout(hideNavbarTimeoutRef.current);
+        // Ensure visibility state is unlocked when component unmounts to prevent getting stuck
+        dispatch(setLockVisibilityState(false));
       }
     };
   }, [dispatch, shouldTrigger, scrollCallback, timeout, dependencies]);

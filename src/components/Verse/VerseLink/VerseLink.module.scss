@@ -1,6 +1,31 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .verseLink {
-  opacity: var(--opacity-50);
+  display: inline-flex;
+  align-items: center;
   text-align: center;
+  color: var(--color-grey-icons-new);
+  font-size: var(--font-size-large2);
+  margin-inline-end: var(--spacing-xxsmall-px);
+  box-sizing: content-box;
+  inline-size: max-content;
+  block-size: max-content;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      color: var(--color-success-medium);
+      background-color: var(--color-success-medium);
+      @include utility.lighten-background-color;
+    }
+  }
+}
+
+.verseLinkContent {
+  inline-size: 100%;
 }

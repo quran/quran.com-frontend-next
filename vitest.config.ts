@@ -17,8 +17,13 @@ export default defineConfig({
       '@/data': path.resolve(__dirname, './data'),
       '@/utils': path.resolve(__dirname, './src/utils'),
       '@/types': path.resolve(__dirname, './types'),
+      '@/redux': path.resolve(__dirname, './src/redux'),
       '@/lib': path.resolve(__dirname, './src/lib'),
+      '@/hooks': path.resolve(__dirname, './src/hooks'),
+      '@/contexts': path.resolve(__dirname, './src/contexts'),
+      '@/components': path.resolve(__dirname, './src/components'),
       '@': path.resolve(__dirname, './src'),
+      types: path.resolve(__dirname, './types'),
     },
   },
 });

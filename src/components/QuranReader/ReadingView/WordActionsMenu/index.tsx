@@ -1,55 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import QuranReflectButton from '../../QuranReflectButton';
-import CopyButton from '../CopyButton';
-
+import MainActionsMenu from './MainActionsMenu';
+import MoreActionsMenu from './MoreActionsMenu';
+import VerseActionsMenuType from './types';
 import styles from './WordActionsMenu.module.scss';
 
-import QuestionsButton from '@/components/QuranReader/ReadingView/Buttons/QuestionsButton';
-import TranslationsButton from '@/components/QuranReader/ReadingView/TranslationsButton';
-import TafsirButton from '@/components/QuranReader/TafsirButton';
-import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
-import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {
   word: Word;
   onActionTriggered?: () => void;
+  openShareModal?: () => void;
+  bookmarksRangeUrl?: string | null;
 };
 
-const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }) => {
-  return (
-    <div className={styles.container}>
-      <CopyButton verseKey={word.verseKey} onActionTriggered={onActionTriggered} />
-      <QuestionsButton verseKey={word.verseKey} onActionTriggered={onActionTriggered} />
-      <TafsirButton
-        verseKey={word.verseKey}
-        isTranslationView={false}
-        onActionTriggered={onActionTriggered}
-      />
-      <QuranReflectButton
-        verseKey={word.verseKey}
-        isTranslationView={false}
-        onActionTriggered={onActionTriggered}
-      />
-      <TranslationsButton verse={word.verse} onActionTriggered={onActionTriggered} />
-      {word?.verse?.timestamps && (
-        <PlayVerseAudioButton
-          verseKey={word.verseKey}
-          isTranslationView={false}
-          onActionTriggered={onActionTriggered}
-        />
-      )}
+const ReadingViewWordActionsMenu: React.FC<Props> = ({
+  word,
+  onActionTriggered,
+  openShareModal,
+  bookmarksRangeUrl,
+}) => {
+  const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
 
-      <div className={styles.readingViewOverflowVerseActionsMenu}>
-        <OverflowVerseActionsMenu
-          isTranslationView={false}
-          verse={word.verse}
-          onActionTriggered={onActionTriggered}
-        />
-      </div>
-    </div>
-  );
+  const onMenuChange = (menu: VerseActionsMenuType) => {
+    logEvent(`reading_view_verse_actions_menu_${menu}`);
+    setSelectedMenu(menu);
+  };
+
+  // Render the appropriate menu based on the selected state
+  const renderMenu = () => {
+    switch (selectedMenu) {
+      case VerseActionsMenuType.Main:
+        return (
+          <MainActionsMenu
+            word={word}
+            onActionTriggered={onActionTriggered}
+            openShareModal={openShareModal}
+            onMenuChange={onMenuChange}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+          />
+        );
+      case VerseActionsMenuType.More:
+        return (
+          <MoreActionsMenu
+            verse={word.verse}
+            onActionTriggered={onActionTriggered}
+            onMenuChange={onMenuChange}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  return <div className={styles.container}>{renderMenu()}</div>;
 };
 
 export default ReadingViewWordActionsMenu;

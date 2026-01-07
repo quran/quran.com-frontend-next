@@ -14,6 +14,7 @@ import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import NavigationItemType from '@/types/NavigationItemType';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -42,7 +43,7 @@ const filterSurah = (surahs: Chapter[], searchQuery: string) => {
 };
 
 type Props = {
-  onAfterNavigationItemRouted?: () => void;
+  onAfterNavigationItemRouted?: (itemValue?: string, itemType?: string) => void;
   customChapterSelectHandler?: (chapterId: string) => void;
   shouldDisableNavigation?: boolean;
   selectedChapterId?: string;
@@ -122,10 +123,10 @@ const SurahList: React.FC<Props> = ({
     scrollTo();
   }, [currentChapterId, scrollTo]);
 
-  const navigateAndHandleAfterNavigation = (href: string) => {
+  const navigateAndHandleAfterNavigation = (href: string, chapterId: string) => {
     router.push(href).then(() => {
       if (onAfterNavigationItemRouted) {
-        onAfterNavigationItemRouted();
+        onAfterNavigationItemRouted(chapterId, NavigationItemType.CHAPTER);
       }
     });
   };
@@ -136,7 +137,7 @@ const SurahList: React.FC<Props> = ({
     const firstFilteredChapter = filteredChapters[0];
     if (firstFilteredChapter) {
       const href = getSurahNavigationUrl(firstFilteredChapter.id);
-      navigateAndHandleAfterNavigation(href);
+      navigateAndHandleAfterNavigation(href, firstFilteredChapter.id.toString());
     }
   };
 
@@ -150,7 +151,7 @@ const SurahList: React.FC<Props> = ({
     }
 
     // Otherwise use the default navigation behavior
-    navigateAndHandleAfterNavigation(href);
+    navigateAndHandleAfterNavigation(href, chapterId);
   };
 
   return (

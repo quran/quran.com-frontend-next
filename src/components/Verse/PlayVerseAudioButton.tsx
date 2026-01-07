@@ -10,7 +10,9 @@ import Spinner from '@/components/dls/Spinner/Spinner';
 import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
+import useIsMobile from '@/hooks/useIsMobile';
 import PlayIcon from '@/icons/play-outline.svg';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import QueryParam from '@/types/QueryParam';
@@ -33,6 +35,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
+  const isMobile = useIsMobile();
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
@@ -61,9 +64,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       reciterId: reciterQueryParamDifferent ? reciterId : undefined,
     });
 
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
 
     // if the user clicks on the play button while the onboarding is active, we should automatically go to the next step
     if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE && isVisible) {
@@ -100,7 +101,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip={t('loading')}
+        tooltip={isMobile ? undefined : t('loading')}
         type={ButtonType.Success}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
@@ -114,19 +115,22 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   return (
     <Button
       size={ButtonSize.Small}
-      tooltip={t('audio.player.play')}
+      tooltip={isMobile ? undefined : t('audio.player.play')}
       variant={ButtonVariant.Ghost}
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
       id="play-verse-button" // this ID is for onboarding
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
-        <PlayIcon />
+        <IconContainer
+          icon={<PlayIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
       </span>
     </Button>
   );

@@ -41,12 +41,18 @@ $virtual-scrolling-height-bandage: calc(
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
   @include breakpoints.tablet {
     transition: var(--transition-regular);
     margin-inline-end: 0;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    // TODO: we should add the banner height here if it's shown
+    // padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height) + var(--banner-height));
+    padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height));
   }
 }
 

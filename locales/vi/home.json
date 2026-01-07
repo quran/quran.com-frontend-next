@@ -1,0 +1,74 @@
+{
+  "achieve-quran-goals": "Đạt được mục tiêu theo Kinh Qur'an của bạn",
+  "begin": "Bắt đầu",
+  "calendar-cta": "Lịch",
+  "chapters-and-verses": "Chương và câu",
+  "continue-read": "Tiếp tục đọc",
+  "explore-topics": "Khám phá các chủ đề",
+  "first-time-reading": "Bạn mới làm quen với Kinh Qur'an? <link>Bắt đầu từ đây</link>",
+  "grow-beyond-ramadan": "Hãy cùng phát triển với chúng tôi <modalLink>Ngoài tháng Ramadan</modalLink>",
+  "know-someone": "Hãy cùng phát triển với chúng tôi! <modalLink>Ramadan</modalLink>",
+  "learning-plan": "Kế hoạch học tập",
+  "listen-to-radio": "Nghe Đài Phát Thanh Kinh Qur'an",
+  "my-quran": "Kinh Qur'an của tôi",
+  "navigate-quran": "Tìm hiểu Kinh Qur'an",
+  "no-bookmarks": "Bạn chưa có dấu trang nào.",
+  "no-page-bookmarks": "Bạn chưa có bất kỳ dấu trang nào.",
+  "no-recently-read": "Bạn chưa có buổi đọc nào cả.",
+  "noble-quran": "Kinh Qur'an cao quý",
+  "popular": "Phổ biến",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Xem tất cả các bài học",
+        "my-plans": "Kế hoạch của tôi"
+      },
+      "desc": {
+        "logged-in": "Bạn đã bao giờ bắt đầu một chương trình học tập và bỏ dở giữa chừng chưa? Các kế hoạch học tập được chia thành các phần nhỏ dễ quản lý và chúng tôi sẽ theo dõi tiến độ của bạn cho đến khi bạn hoàn thành. Khám phá ngay các khóa học hiện có của chúng tôi!",
+        "logged-in-no-plans": "Bạn đã bao giờ bắt đầu một chương trình học tập và bỏ dở giữa chừng chưa? Các kế hoạch học tập được chia thành các phần nhỏ dễ quản lý và chúng tôi sẽ theo dõi tiến độ của bạn cho đến khi bạn hoàn thành. Khám phá ngay các khóa học hiện có của chúng tôi!",
+        "logged-out": "Bạn đã bao giờ bắt đầu một chương trình học tập và bỏ dở giữa chừng chưa? Các kế hoạch học tập được chia thành các phần nhỏ dễ quản lý và chúng tôi sẽ theo dõi tiến độ của bạn cho đến khi bạn hoàn thành. Khám phá ngay các khóa học hiện có của chúng tôi!"
+      },
+      "title": "Kế hoạch học tập"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Bạn muốn đọc 10 phút mỗi ngày, hoàn thành một Juz (một phần Kinh Qur'an) trong một tháng, hay đọc hết toàn bộ Kinh Qur'an trong một năm? Thật dễ dàng để tạo mục tiêu tùy chỉnh và theo dõi tiến độ của bạn."
+      },
+      "title": "Mục tiêu đọc Kinh Quran tùy chỉnh"
+    },
+    "title": "Hành trình trưởng thành qua Kinh Qur'an"
+  },
+  "qr-community": "Hãy đọc những câu kinh và suy ngẫm nổi bật hôm nay",
+  "quran-in-year": "Kinh Qur'an trong một năm",
+  "quran-in-year-cta": "Bài đọc tuần này",
+  "quran-in-year-verse-title": "Một câu kinh từ bài đọc tuần này",
+  "ramadan-activities-cta": "<link>Hãy theo dõi <b>Lịch Kinh Qur'an toàn cầu</b> Để có những bài đọc hàng tuần, những podcast truyền cảm hứng và lời kêu gọi suy ngẫm!</link>",
+  "ramadan": {
+    "header": "Những công cụ giúp bạn tăng cường kết nối với Kinh Qur'an",
+    "title": "Bạn đã sẵn sàng cho tháng Ramadan chưa?"
+  },
+  "read-juz": "Đọc Juz",
+  "recently-read": "Mới đọc",
+  "revelation-order-disclaimer": "Hình ảnh này thể hiện thứ tự thời gian của các Surah trong Kinh Qur'an dựa trên thời điểm chúng được tiết lộ cho Nhà tiên tri Muhammad. <hover>ﷺ</hover>Trình tự thời gian là một chủ đề gây tranh cãi giữa các học giả và một số Surah được tiết lộ từng phần vào những thời điểm khác nhau. Thứ tự được sắp xếp ở đây dựa trên công trình nghiên cứu của... <link>Tanzil.net</link>[Lưu ý: Thứ tự các đoạn trong Mushaf được biên soạn từ al-Fatiha đến al-Nas là vấn đề được đồng thuận.]",
+  "see-more-learning-plans": "Xem thêm",
+  "set-custom-goal": "Đặt mục tiêu",
+  "share-quran": {
+    "description": "Hãy giúp lan tỏa Kinh Qur'an đến những người học mới.",
+    "title": "Hãy chia sẻ Kinh Qur'an!"
+  },
+  "start-read": "Bắt đầu đọc",
+  "stay-consistent": "Theo dõi chuỗi thành tích, thiết lập mục tiêu tùy chỉnh, duy trì sự nhất quán",
+  "tab": {
+    "bookmarks": "Đánh dấu trang",
+    "page-bookmarks": "Trang",
+    "popular": "Phổ biến"
+  },
+  "take-notes": "Bạn đã bỏ lỡ điều gì vậy? <modalLink>Ghi chú?</modalLink>",
+  "view-all-bookmarks": "Xem tất cả dấu trang",
+  "voice": {
+    "trigger": "Truy cập nhanh chóng vào mọi thứ"
+  },
+  "welcome": {
+    "title": "Đây là Tháng của Kinh Qur'an! Hãy giúp hàng triệu người dùng tiếp cận sự hướng dẫn của Kinh Qur'an."
+  }
+}

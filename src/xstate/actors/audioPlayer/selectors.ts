@@ -6,6 +6,8 @@ import { makeVerseKey } from '@/utils/verse';
 export const selectIsUsingDefaultReciter = (state) =>
   state.context.reciterId === DEFAULT_RECITER.id;
 
+export const selectIsAudioPlayerVisible = (state) => state.matches('VISIBLE');
+
 export const selectCurrentAudioReciterId = (state) => state.context.audioData?.reciterId;
 
 export const selectIsLoading = (state) => state.hasTag('loading');

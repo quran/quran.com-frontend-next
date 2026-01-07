@@ -8,6 +8,7 @@ import styles from './WordByWordVerseAction.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import SearchIcon from '@/icons/search-book.svg';
@@ -21,18 +22,24 @@ const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
 type Props = {
   verse: Verse;
   onActionTriggered?: () => void;
+  isTranslationView?: boolean;
 };
 
 const CLOSE_POPOVER_AFTER_MS = 150;
 
-const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
+const WordByWordVerseAction: React.FC<Props> = ({
+  verse,
+  onActionTriggered,
+  isTranslationView,
+}) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
 
   const onModalClosed = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logEvent(`reading_view_wbw_modal_close`);
+    logEvent(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_reading_view_wbw_modal_close`,
+    );
     setIsContentModalOpen(false);
     if (onActionTriggered) {
       setTimeout(() => {
@@ -43,14 +50,27 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
   };
 
   const onIconClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`reading_view_verse_actions_menu_wbw`);
+    logButtonClick(
+      `${
+        isTranslationView ? 'translation_view' : 'reading_view'
+      }_reading_view_verse_actions_menu_wbw`,
+    );
     setIsContentModalOpen(true);
   };
 
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<SearchIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
+        }
+        onClick={onIconClicked}
+      >
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal

@@ -1,41 +1,35 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
-import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import TafsirIcon from '@/icons/book-open.svg';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import BookOpenIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import Verse from 'types/Verse';
 
-type Props = {
-  verseKey: string;
-  isTranslationView?: boolean;
+interface Props {
+  verse: Verse;
   onActionTriggered?: () => void;
-};
+}
 
-const TafsirButton: React.FC<Props> = ({
-  verseKey,
-  isTranslationView = true,
-  onActionTriggered,
-}) => {
+const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const { verseKey } = verse;
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
 
-  const onButtonClicked = () => {
-    logButtonClick(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,
-    );
+  const onMenuItemClicked = () => {
+    logButtonClick('reading_view_verse_actions_menu_tafsir');
     setIsContentModalOpen(true);
     fakeNavigate(
       getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
@@ -46,47 +40,33 @@ const TafsirButton: React.FC<Props> = ({
   const contentModalRef = useRef(null);
 
   const onModalClose = () => {
-    if (isTranslationView) {
-      logEvent('translation_view_tafsir_modal_close');
-    } else {
-      logEvent('reading_view_tafsir_modal_close');
-    }
+    logEvent('reading_view_tafsir_modal_close');
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   return (
     <>
-      <Button
-        variant={ButtonVariant.Ghost}
-        onClick={onButtonClicked}
-        size={ButtonSize.Small}
-        tooltip={t('quran-reader:tafsirs')}
-        shouldFlipOnRTL={false}
-        shape={ButtonShape.Circle}
-        className={classNames(
-          styles.iconContainer,
-          styles.verseAction,
-          {
-            [styles.fadedVerseAction]: isTranslationView,
-          },
-          'tafsir-verse-button', // for onboarding
-        )}
-        ariaLabel={t('quran-reader:aria.read-tafsirs')}
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<BookOpenIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
+        }
+        onClick={onMenuItemClicked}
       >
-        <span className={styles.icon}>
-          <TafsirIcon />
-        </span>
-      </Button>
+        {t('quran-reader:tafsirs')}
+      </PopoverMenu.Item>
       <TafsirBody
         shouldRender={isContentModalOpen}
         initialChapterId={chapterId.toString()}
         initialVerseNumber={verseNumber.toString()}
         scrollToTop={() => {
-          contentModalRef.current.scrollToTop();
+          contentModalRef.current?.scrollToTop();
         }}
         render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
           return (
@@ -108,4 +88,4 @@ const TafsirButton: React.FC<Props> = ({
   );
 };
 
-export default TafsirButton;
+export default TafsirMenuItem;

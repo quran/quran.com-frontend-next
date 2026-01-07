@@ -10,6 +10,7 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
@@ -35,9 +36,19 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   bookmarksRangeUrl,
 }) => {
   const { t } = useTranslation('common');
+
+  const onOpenModalChange = (open: boolean) => {
+    logEvent(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+        open ? 'open' : 'close'
+      }`,
+    );
+  };
+
   return (
     <div className={styles.container}>
       <PopoverMenu
+        contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
         trigger={
           <Button
             size={ButtonSize.Small}
@@ -47,27 +58,25 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(
               cellStyles.iconContainer,
               cellStyles.verseAction,
-              {
-                [cellStyles.fadedVerseAction]: isTranslationView,
-              },
+              { [styles.moreMenuTrigger]: isTranslationView },
               'overflow-verse-actions-menu-trigger', // for onboarding
             )}
+            shouldFlipOnRTL={false}
             ariaLabel={t('more')}
           >
-            <span className={styles.icon}>
-              <OverflowMenuIcon />
+            <span className={cellStyles.icon}>
+              <IconContainer
+                icon={<OverflowMenuIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+                shouldFlipOnRTL={false}
+              />
             </span>
           </Button>
         }
         isModal
         isPortalled
-        onOpenChange={(open: boolean) => {
-          logEvent(
-            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-              open ? 'open' : 'close'
-            }`,
-          );
-        }}
+        onOpenChange={onOpenModalChange}
       >
         <OverflowVerseActionsMenuBody
           verse={verse}

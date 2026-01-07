@@ -1,166 +1,116 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
+import { shallowEqual, useSelector } from 'react-redux';
 
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
+import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import useIsMobile from '@/hooks/useIsMobile';
+import useVerseBookmark, { BookmarkableVerse } from '@/hooks/useVerseBookmark';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { addBookmark, deleteBookmarkById, getBookmark } from 'src/utils/auth/api';
-import { makeBookmarksUrl, makeBookmarkUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
-import BookmarkType from 'types/BookmarkType';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import Verse from '@/types/Verse';
+import { getMushafId } from '@/utils/api';
+import { logButtonClick } from '@/utils/eventLogger';
 
-const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarksRangeUrl }) => {
-  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
+interface Props {
+  verse: Verse;
+  isTranslationView: boolean;
+  onActionTriggered?: () => void;
+  bookmarksRangeUrl?: string;
+}
+
+const BookmarkAction: React.FC<Props> = ({
+  verse,
+  isTranslationView,
+  onActionTriggered,
+  bookmarksRangeUrl,
+}) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
+  const isMobile = useIsMobile();
 
-  const toast = useToast();
-  const { cache, mutate: globalMutate } = useSWRConfig();
+  // Use custom hook for all bookmark logic
+  const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
+    verse: verse as BookmarkableVerse,
+    mushafId,
+    bookmarksRangeUrl,
+  });
 
-  const {
-    data: bookmark,
-    isValidating: isVerseBookmarkedLoading,
-    mutate,
-  } = useSWRImmutable(
-    isLoggedIn()
-      ? makeBookmarkUrl(
-          mushafId,
-          Number(verse.chapterId),
-          BookmarkType.Ayah,
-          Number(verse.verseNumber),
-        )
-      : null,
-    async () => {
-      const response = await getBookmark(
-        mushafId,
-        Number(verse.chapterId),
-        BookmarkType.Ayah,
-        Number(verse.verseNumber),
-      );
-      return response;
-    },
-  );
-  const isVerseBookmarked = useMemo(() => {
-    const isUserLoggedIn = isLoggedIn();
-    if (isUserLoggedIn && bookmark) {
-      return bookmark;
-    }
-    if (!isUserLoggedIn) {
-      return !!bookmarkedVerses[verse.verseKey];
-    }
-    return false;
-  }, [bookmarkedVerses, bookmark, verse.verseKey]);
+  // Helper: Get event name for analytics
+  const getEventName = useCallback(() => {
+    const view = isTranslationView ? 'translation_view' : 'reading_view';
+    const action = isVerseBookmarked ? 'un_bookmark' : 'bookmark';
+    return `${view}_verse_actions_menu_${action}`;
+  }, [isTranslationView, isVerseBookmarked]);
 
-  const updateInBookmarkRange = (value) => {
-    // when it's translation view, we need to invalidate the cached bookmarks range
-    if (bookmarksRangeUrl) {
-      const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
-      const nextBookmarkedVersesRange = {
-        ...bookmarkedVersesRange,
-        [verse.verseKey]: value,
-      };
-      globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
-        revalidate: false,
-      });
-    }
-  };
+  const onToggleBookmarkClicked = useCallback(
+    (e?: React.MouseEvent) => {
+      // Prevent default to avoid page scroll
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
 
-  const onToggleBookmarkClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(
       // eslint-disable-next-line i18next/no-literal-string
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-        isVerseBookmarked ? 'un_bookmark' : 'bookmark'
-      }`,
+      logButtonClick(getEventName());
+
+      handleToggleBookmark();
+      onActionTriggered?.();
+    },
+    [getEventName, handleToggleBookmark, onActionTriggered],
+  );
+
+  const bookmarkIcon = useMemo(() => {
+    if (isVerseBookmarked) {
+      return <BookmarkedIcon color="var(--color-text-default)" />;
+    }
+    return (
+      <IconContainer
+        icon={<UnBookmarkedIcon />}
+        color={IconColor.tertiary}
+        size={IconSize.Custom}
+        shouldFlipOnRTL={false}
+      />
     );
+  }, [isVerseBookmarked]);
 
-    if (isLoggedIn()) {
-      // optimistic update, we are making assumption that the bookmark update will succeed
-
-      if (isVerseBookmarked) {
-        mutate(() => null, {
-          revalidate: false,
-        });
-      }
-
-      cache.delete(
-        makeBookmarksUrl(
-          getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-        ),
-      );
-
-      if (!isVerseBookmarked) {
-        addBookmark({
-          key: Number(verse.chapterId),
-          mushafId,
-          type: BookmarkType.Ayah,
-          verseNumber: verse.verseNumber,
-        })
-          .then((newBookmark) => {
-            mutate();
-            updateInBookmarkRange(newBookmark);
-            toast(t('verse-bookmarked'), {
-              status: ToastStatus.Success,
-            });
-          })
-          .catch((err) => {
-            if (err.status === 400) {
-              toast(t('common:error.bookmark-sync'), {
-                status: ToastStatus.Error,
-              });
-              return;
-            }
-            toast(t('error.general'), {
-              status: ToastStatus.Error,
-            });
-          });
-      } else {
-        deleteBookmarkById(bookmark.id).then(() => {
-          updateInBookmarkRange(null);
-          toast(t('verse-bookmark-removed'), {
-            status: ToastStatus.Success,
-          });
-        });
-      }
-    } else {
-      dispatch(toggleVerseBookmark(verse.verseKey));
-    }
-
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
-  };
-
-  let bookmarkIcon = <Spinner />;
-  if (!isVerseBookmarkedLoading) {
-    bookmarkIcon = isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />;
+  // For use in the TopActions component (standalone button)
+  if (isTranslationView || (!isTranslationView && isMobile)) {
+    const tooltipText = isVerseBookmarked ? t('bookmarked') : t('bookmark');
+    return (
+      <Button
+        size={ButtonSize.Small}
+        tooltip={isMobile ? undefined : tooltipText}
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          'bookmark-verse-action-button',
+        )}
+        onClick={(e) => {
+          onToggleBookmarkClicked(e);
+        }}
+        shouldFlipOnRTL={false}
+        ariaLabel={tooltipText}
+      >
+        <span className={styles.icon}>{bookmarkIcon}</span>
+      </Button>
+    );
   }
 
+  // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
-    <>
-      <PopoverMenu.Item
-        onClick={onToggleBookmarkClicked}
-        icon={bookmarkIcon}
-        isDisabled={isVerseBookmarkedLoading}
-      >
-        {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
-      </PopoverMenu.Item>
-    </>
+    <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
+      {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
+    </PopoverMenu.Item>
   );
 };
 

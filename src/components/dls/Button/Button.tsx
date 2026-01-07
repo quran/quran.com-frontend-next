@@ -54,6 +54,7 @@ export type ButtonProps = {
   tooltip?: string | React.ReactNode;
   tooltipContentSide?: ContentSide;
   className?: string;
+  contentClassName?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
   shouldShallowRoute?: boolean;
@@ -80,6 +81,7 @@ const Button: React.FC<ButtonProps> = ({
   tooltip,
   tooltipContentSide = ContentSide.BOTTOM,
   className,
+  contentClassName,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
   shouldShallowRoute: shallowRouting = false,
@@ -145,7 +147,7 @@ const Button: React.FC<ButtonProps> = ({
               {prefixFinal}
             </span>
           )}
-          <span className={styles.content}>{children}</span>
+          <span className={classNames(styles.content, contentClassName)}>{children}</span>
           {suffix && (
             <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
               {suffix}
@@ -173,7 +175,7 @@ const Button: React.FC<ButtonProps> = ({
             {prefixFinal}
           </span>
         )}
-        <span className={styles.content}>{children}</span>
+        <span className={classNames(styles.content, contentClassName)}>{children}</span>
         {suffix && (
           <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
             {suffix}

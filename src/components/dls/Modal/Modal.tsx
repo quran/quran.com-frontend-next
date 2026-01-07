@@ -13,6 +13,8 @@ import styles from './Modal.module.scss';
 import Subtitle from './Subtitle';
 import Title from './Title';
 
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
+
 type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -22,8 +24,10 @@ type ModalProps = {
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
   contentClassName?: string;
+  overlayClassName?: string;
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
+  zIndexVariant?: ZIndexVariant;
 };
 
 const Modal = ({
@@ -34,9 +38,11 @@ const Modal = ({
   onEscapeKeyDown,
   isPropagationStopped,
   contentClassName,
+  overlayClassName,
   isBottomSheetOnMobile = true,
   isInvertedOverlay = false,
   size,
+  zIndexVariant,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     {trigger && (
@@ -46,14 +52,23 @@ const Modal = ({
     )}
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay
-        className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
+        className={classNames(styles.overlay, overlayClassName, {
+          [styles.invertedOverlay]: isInvertedOverlay,
+          [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+          [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+          [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
+        })}
       />
       <Content
         isPropagationStopped={isPropagationStopped}
         onEscapeKeyDown={onEscapeKeyDown}
         onPointerDownOutside={onClickOutside}
         isBottomSheetOnMobile={isBottomSheetOnMobile}
-        contentClassName={contentClassName}
+        contentClassName={classNames(contentClassName, {
+          [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+          [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+          [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
+        })}
         size={size}
       >
         {children}

@@ -3,8 +3,6 @@
 @use 'src/styles/theme';
 @use 'sass:math';
 
-$sections-menu-height: 2.25rem;
-$progress-bar-height: var(--spacing-micro);
 $navbar-height: var(--navbar-container-height);
 
 // Homepage heights (without sections menu and without progress bar)
@@ -12,13 +10,8 @@ $top-menu-height-home: $navbar-height;
 $context-menu-height-home: 0;
 
 // Non-homepage heights (with sections menu and progress bar)
-$top-menu-height: calc($sections-menu-height + $navbar-height + $progress-bar-height);
-$context-menu-height: calc($sections-menu-height + $progress-bar-height);
-
-// Mobile heights (same as desktop now that banner is removed)
-$top-menu-height-home-mobile: $navbar-height;
-$top-menu-height-mobile: calc($sections-menu-height + $navbar-height + $progress-bar-height);
-$context-menu-height-mobile: calc($sections-menu-height + $progress-bar-height);
+$top-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
+$context-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
@@ -30,26 +23,34 @@ $isNavbarVisible: var(--isNavbarVisible);
 @mixin sidebarInvisibleExpanded {
   &[data-is-homepage='true'] {
     transform: translateX(-100%) translateY($top-menu-height-home);
-    @include breakpoints.smallerThanTablet {
-      transform: translateX(-100%) translateY($top-menu-height-home-mobile);
-    }
     [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height-home);
-      @include breakpoints.smallerThanTablet {
-        transform: translateX(100%) translateY($top-menu-height-home-mobile);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateX(-100%) translateY(calc($top-menu-height-home + var(--banner-height)));
+      transform: translateX(-100%) translateY(calc($top-menu-height-home));
+      [dir='rtl'] & {
+        // transform: translateX(100%) translateY(calc($top-menu-height-home + var(--banner-height)));
+        transform: translateX(100%) translateY(calc($top-menu-height-home));
       }
     }
   }
 
   &[data-is-homepage='false'] {
     transform: translateX(-100%) translateY($top-menu-height);
-    @include breakpoints.smallerThanTablet {
-      transform: translateX(-100%) translateY($top-menu-height-mobile);
-    }
     [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateX(100%) translateY($top-menu-height-mobile);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateX(-100%) translateY(calc($top-menu-height + var(--banner-height)));
+      transform: translateX(-100%) translateY($top-menu-height);
+      [dir='rtl'] & {
+        // transform: translateX(100%) translateY(calc($top-menu-height + var(--banner-height)));
+        transform: translateX(100%) translateY($top-menu-height);
       }
     }
   }
@@ -57,32 +58,26 @@ $isNavbarVisible: var(--isNavbarVisible);
 
 @mixin sidebarInvisibleCollapsed {
   &[data-is-homepage='true'] {
-    // Use $top-menu-height-home to match visible state transform and prevent
-    // vertical movement during the sidebar open/close animation.
     transform: translateX(-100%) translateY($top-menu-height-home);
-    @include breakpoints.smallerThanTablet {
-      transform: translateX(-100%) translateY($top-menu-height-home-mobile);
-    }
     [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height-home);
-      @include breakpoints.smallerThanTablet {
-        transform: translateX(100%) translateY($top-menu-height-home-mobile);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateX(-100%) translateY(calc($top-menu-height-home + var(--banner-height)));
+      transform: translateX(-100%) translateY($top-menu-height-home);
+      [dir='rtl'] & {
+        // transform: translateX(100%) translateY(calc($top-menu-height-home + var(--banner-height)));
+        transform: translateX(100%) translateY($top-menu-height-home);
       }
     }
   }
 
   &[data-is-homepage='false'] {
-    // Use $top-menu-height to match visible state transform and prevent
-    // vertical movement during the sidebar open/close animation.
     transform: translateX(-100%) translateY($top-menu-height);
-    @include breakpoints.smallerThanTablet {
-      transform: translateX(-100%) translateY($top-menu-height-mobile);
-    }
     [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateX(100%) translateY($top-menu-height-mobile);
-      }
     }
   }
 }
@@ -98,9 +93,6 @@ $isNavbarVisible: var(--isNavbarVisible);
   inset-block-start: 0;
   inset-inline-start: 0;
   padding-block-start: calc(1.5 * var(--spacing-mega));
-  @include breakpoints.tablet {
-    --sidebar-size: calc(10 * var(--spacing-mega));
-  }
   background-color: var(--color-background-elevated);
   overflow-x: hidden;
   z-index: var(--z-index-sticky);
@@ -127,26 +119,24 @@ $isNavbarVisible: var(--isNavbarVisible);
 
   &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-home-mobile);
-    }
     [dir='rtl'] & {
       transform: translateY($top-menu-height-home);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-home-mobile);
-      }
     }
   }
 
   &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-mobile);
-    }
     [dir='rtl'] & {
       transform: translateY($top-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-mobile);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateY(calc($top-menu-height + var(--banner-height)));
+      transform: translateY($top-menu-height);
+      [dir='rtl'] & {
+        // transform: translateY(calc($top-menu-height + var(--banner-height)));
+        transform: translateY($top-menu-height);
       }
     }
   }
@@ -156,30 +146,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include sidebarVisible();
 
   &[data-is-homepage='true'] {
-    // Use $top-menu-height-home to match visible state and prevent vertical
-    // jumping when navbar collapses while sidebar is open.
-    transform: translateY($top-menu-height-home);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-home-mobile);
-    }
+    transform: translateY($context-menu-height-home);
     [dir='rtl'] & {
-      transform: translateY($top-menu-height-home);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-home-mobile);
-      }
+      transform: translateY($context-menu-height-home);
     }
   }
 
   &[data-is-homepage='false'] {
     transform: translateY($context-menu-height);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($context-menu-height-mobile);
-    }
     [dir='rtl'] & {
       transform: translateY($context-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($context-menu-height-mobile);
-      }
     }
   }
 }
@@ -209,10 +185,9 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include sidebarVisible();
 
     &[data-is-homepage='true'] {
-      // Use $top-menu-height-home to match visible state and prevent vertical jumping.
-      transform: translateY($top-menu-height-home);
+      transform: translateY($context-menu-height-home);
       [dir='rtl'] & {
-        transform: translateY($top-menu-height-home);
+        transform: translateY($context-menu-height-home);
       }
     }
 
@@ -244,6 +219,8 @@ $isNavbarVisible: var(--isNavbarVisible);
 .surahBodyContainer {
   display: flex;
   flex: 1;
+  min-block-size: 0;
+  overflow: hidden;
 }
 
 .scrollableSectionContainer {
@@ -285,11 +262,13 @@ $isNavbarVisible: var(--isNavbarVisible);
   flex: 2;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .verseListContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .searchInput {
@@ -311,37 +290,12 @@ $isNavbarVisible: var(--isNavbarVisible);
   &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
     block-size: calc(100vh - $top-menu-height-home);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-home-mobile);
-      // Use 100vh to ensure sidebar always reaches bottom on mobile
-      block-size: 100vh;
-    }
-    // RTL needs same rules with matching specificity to override .visibleContainer RTL rules
-    [dir='rtl'] & {
-      transform: translateY($top-menu-height-home);
-      block-size: calc(100vh - $top-menu-height-home);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-home-mobile);
-        block-size: 100vh;
-      }
-    }
-  }
 
-  &[data-is-homepage='false'] {
-    transform: translateY($top-menu-height);
-    block-size: calc(100vh - $top-menu-height);
     @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-mobile);
-      // Use height without banner subtraction - banner scrolls away on mobile
-      block-size: calc(100vh - $top-menu-height);
-    }
-    [dir='rtl'] & {
-      transform: translateY($top-menu-height);
-      block-size: calc(100vh - $top-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-mobile);
-        block-size: calc(100vh - $top-menu-height);
-      }
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
+      transform: translateY($top-menu-height-home);
+      block-size: 100vh;
     }
   }
 }
@@ -350,40 +304,12 @@ $isNavbarVisible: var(--isNavbarVisible);
   &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
     block-size: 100vh;
+
     @include breakpoints.smallerThanTablet {
-      // On mobile, compensate for navbar shift like we do for non-homepage
-      transform: translateY($top-menu-height-home-mobile);
-      // Use 100vh to ensure sidebar always reaches bottom
-      block-size: 100vh;
-    }
-    [dir='rtl'] & {
+      // TODO: we should add the banner height here if it's shown
+      // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
       block-size: 100vh;
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-home-mobile);
-        block-size: 100vh;
-      }
-    }
-  }
-
-  &[data-is-homepage='false'] {
-    // When navbar is collapsed, it shifts up by navbar-height.
-    // Since sidebar is a child of navbar, we need to compensate by using $top-menu-height
-    // instead of just $context-menu-height to push the sidebar down correctly.
-    transform: translateY($top-menu-height);
-    block-size: calc(100vh - $context-menu-height);
-    @include breakpoints.smallerThanTablet {
-      transform: translateY($top-menu-height-mobile);
-      // Use height without banner subtraction - sidebar extends past viewport when needed
-      block-size: calc(100vh - $context-menu-height);
-    }
-    [dir='rtl'] & {
-      transform: translateY($top-menu-height);
-      block-size: calc(100vh - $context-menu-height);
-      @include breakpoints.smallerThanTablet {
-        transform: translateY($top-menu-height-mobile);
-        block-size: calc(100vh - $context-menu-height);
-      }
     }
   }
 }

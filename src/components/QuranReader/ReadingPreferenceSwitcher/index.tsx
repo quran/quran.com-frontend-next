@@ -1,53 +1,45 @@
-import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
-import LoadingSwitcher from './ReadingPreferenceOption';
+import classNames from 'classnames';
+
+import ReadingPreferenceOption from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch, { SwitchSize } from '@/dls/Switch/Switch';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import Switch, { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import useGetMushaf from '@/hooks/useGetMushaf';
-import {
-  selectReadingPreferences,
-  setReadingPreference,
-} from '@/redux/slices/QuranReader/readingPreferences';
-import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import useReadingPreferenceSwitcher, {
+  SwitcherContext,
+} from '@/hooks/useReadingPreferenceSwitcher';
 import { logValueChange } from '@/utils/eventLogger';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { Mushaf, ReadingPreference } from 'types/QuranReader';
 
-export enum ReadingPreferenceSwitcherType {
-  SurahHeader = 'surah_header',
-  ContextMenu = 'context_menu',
-}
-
-interface Props {
-  size?: SwitchSize;
+type Props = {
+  type: SwitcherContext;
   isIconsOnly?: boolean;
-  type?: ReadingPreferenceSwitcherType;
-}
+  size?: SwitchSize;
+  variant?: SwitchVariant;
+};
 
-const ReadingPreferenceSwitcher: React.FC<Props> = ({
-  size,
+/**
+ * Component for switching between different reading preferences (Translation/Reading).
+ *
+ * @returns {JSX.Element} React component for switching reading preferences
+ */
+const ReadingPreferenceSwitcher = ({
+  type,
   isIconsOnly = false,
-  type = ReadingPreferenceSwitcherType.SurahHeader,
-}) => {
-  const readingPreferences = useSelector(selectReadingPreferences);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
-  const { readingPreference } = readingPreferences;
-  const {
-    actions: { onSettingsChange },
-    isLoading,
-  } = usePersistPreferenceGroup();
-  const router = useRouter();
+  size = SwitchSize.Normal,
+  variant = SwitchVariant.Default,
+}: Props) => {
   const mushaf = useGetMushaf();
+  const { readingPreference, switchReadingPreference, isLoading } = useReadingPreferenceSwitcher({
+    context: type,
+  });
 
-  const readingPreferencesOptions = [
+  const readingPreferencesOptions = (): Array<{ name: JSX.Element; value: ReadingPreference }> => [
     {
       name: (
-        <LoadingSwitcher
+        <ReadingPreferenceOption
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Translation}
           isLoading={isLoading}
@@ -58,7 +50,7 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
     },
     {
       name: (
-        <LoadingSwitcher
+        <ReadingPreferenceOption
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Reading}
           isLoading={isLoading}
@@ -71,52 +63,27 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
 
   const onViewSwitched = (view: ReadingPreference) => {
     logValueChange(`${type}_reading_preference`, readingPreference, view);
-
-    const newQueryParams = { ...router.query };
-
-    // Track `startingVerse` once we're past the start of the page so we can
-    // continue from the same ayah when switching views. Without the > 1 check,
-    // switching views at the start of the page causes unnecessary scrolls
-
-    if (type === ReadingPreferenceSwitcherType.SurahHeader) {
-      delete newQueryParams.startingVerse;
-    } else if (parseInt(lastReadVerse, 10) > 1) {
-      newQueryParams.startingVerse = lastReadVerse;
-    }
-
-    const newUrlObject = {
-      pathname: router.pathname,
-      query: newQueryParams,
-    };
-
-    router.replace(newUrlObject, null, { shallow: true }).then(() => {
-      onSettingsChange(
-        'readingPreference',
-        view,
-        setReadingPreference(view),
-        setReadingPreference(readingPreference),
-        PreferenceGroup.READING,
-      );
-    });
+    switchReadingPreference(view);
   };
 
+  const containerClassNames = classNames(styles.container, {
+    [styles.surahHeaderContainer]: type === SwitcherContext.SurahHeader,
+    [styles.contextMenuContainer]: type === SwitcherContext.ContextMenu && !isIconsOnly,
+    [styles.contextMenuIconOnlyContainer]: type === SwitcherContext.ContextMenu && isIconsOnly,
+    [styles.tajweedMushaf]: mushaf === Mushaf.QCFTajweedV4 && type === SwitcherContext.SurahHeader,
+  });
+
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
-        [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
-        [styles.tajweedMushaf]:
-          mushaf === Mushaf.QCFTajweedV4 && type === ReadingPreferenceSwitcherType.SurahHeader,
-      })}
-      id="reading-preference-switcher"
-    >
+    <div className={containerClassNames} id="reading-preference-switcher">
       <Switch
-        items={readingPreferencesOptions}
+        items={readingPreferencesOptions()}
         selected={readingPreference}
         onSelect={onViewSwitched}
         size={size}
+        variant={variant}
       />
     </div>
   );
 };
+
 export default ReadingPreferenceSwitcher;

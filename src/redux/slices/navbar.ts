@@ -37,7 +37,8 @@ export const navbarSlice = createSlice({
   reducers: {
     setIsVisible: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
-      isVisible: action.payload,
+      // Only update visibility if the lock is not active
+      isVisible: state.lockVisibilityState ? state.isVisible : action.payload,
     }),
     setLockVisibilityState: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,

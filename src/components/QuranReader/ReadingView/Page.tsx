@@ -22,21 +22,26 @@ type PageProps = {
   pageNumber: number;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
+  bookmarksRangeUrl: string | null;
 };
 
-const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) => {
-  const { data: pageVersesQuestionsCount } = useCountRangeQuestions(
-    verses && verses.length > 0
+const Page = ({
+  verses,
+  pageNumber,
+  quranReaderStyles,
+  pageIndex,
+  bookmarksRangeUrl,
+}: PageProps) => {
+  const { data: pageVersesQuestionsData } = useCountRangeQuestions(
+    verses?.length > 0
       ? {
           from: verses?.[0].verseKey,
           to: verses?.[verses.length - 1].verseKey,
         }
       : null,
   );
-  const lines = useMemo(
-    () => (verses && verses.length ? groupLinesByVerses(verses) : {}),
-    [verses],
-  );
+
+  const lines = useMemo(() => (verses?.length > 0 ? groupLinesByVerses(verses) : {}), [verses]);
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
@@ -47,7 +52,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
 
   return (
-    <PageQuestionsContext.Provider value={pageVersesQuestionsCount}>
+    <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
       <div
         id={`page-${pageNumber}`}
         className={classNames(styles.container, {
@@ -65,6 +70,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
             key={key}
             isBigTextLayout={isBigTextLayout}
             quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
           />
         ))}
         <PageFooter page={pageNumber} />
