@@ -219,6 +219,8 @@ $isNavbarVisible: var(--isNavbarVisible);
 .surahBodyContainer {
   display: flex;
   flex: 1;
+  min-block-size: 0;
+  overflow: hidden;
 }
 
 .scrollableSectionContainer {
@@ -260,11 +262,13 @@ $isNavbarVisible: var(--isNavbarVisible);
   flex: 2;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .verseListContainer {
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .searchInput {
