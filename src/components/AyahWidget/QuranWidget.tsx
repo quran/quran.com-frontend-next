@@ -123,7 +123,7 @@ const groupTranslationsByTranslator = (
       const existing = translatorMap.get(translatorName);
 
       // Prefix with verse number for merged display
-      const textWithNumber = `${verse.verseNumber}. ${translation.text}`;
+      const textWithNumber = `${translation.text} (${verse.verseNumber})`;
 
       if (existing) {
         existing.texts.push(textWithNumber);
