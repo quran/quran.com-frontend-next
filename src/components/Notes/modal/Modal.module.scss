@@ -41,6 +41,7 @@ $note_modal_max_width: 48rem;
 
 .content {
   max-inline-size: $note_modal_max_width;
+  background-color: var(--color-background-elevated-new);
 
   @include breakpoints.smallerThanTablet {
     overflow-y: auto;
@@ -51,6 +52,19 @@ $note_modal_max_width: 48rem;
 }
 
 .headerClassName {
+  background-color: var(--color-background-elevated-new);
+
+  @include breakpoints.tablet {
+    block-size: calc(var(--spacing-medium-plus-px) * 2.75);
+    align-items: flex-start;
+
+    border-block-end: var(--spacing-hairline-px) solid var(--color-separators);
+
+    .cloneIconContainer {
+      inset-block-start: var(--spacing-small2-px);
+    }
+  }
+
   @include breakpoints.smallerThanTablet {
     display: flex;
     justify-content: space-between;

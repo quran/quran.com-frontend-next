@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: calc(2 * var(--spacing-medium2));
 
-  margin-block-start: calc(3 * var(--spacing-medium2));
+  margin-block-start: calc(2 * var(--spacing-medium2));
 
   @include breakpoints.smallerThanTablet {
     margin-block-start: var(--spacing-medium2);

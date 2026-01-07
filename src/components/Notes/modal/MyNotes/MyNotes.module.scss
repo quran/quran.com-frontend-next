@@ -7,10 +7,10 @@
   flex-direction: column;
   gap: var(--spacing-large-px);
 
-  margin-block-start: var(--spacing-mega);
+  margin-block-start: var(--spacing-large-px);
 
   @include breakpoints.smallerThanTablet {
-    margin-block-start: var(--spacing-xsmall);
+    margin-block-start: var(--spacing-medium2-px);
   }
 }
 
