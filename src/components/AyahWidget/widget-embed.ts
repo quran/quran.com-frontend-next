@@ -1,9 +1,8 @@
 /**
  * Widget Embed - Functions for building iframe embed URLs and snippets.
  */
-
-import { DEFAULTS } from './widget-defaults';
-import type { Preferences, WidgetIframeConfig } from './widget-types';
+import { DEFAULTS, INITIAL_PREFERENCES } from './widget-defaults';
+import type { AyahWidgetOverrides, Preferences, WidgetIframeConfig } from './widget-types';
 
 import ThemeType from '@/redux/types/ThemeType';
 import type ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
@@ -156,6 +155,68 @@ export const buildEmbedSnippet = (preferences: Preferences, translationIdsCsv: s
   src="${src}"
   width="${widthValue}"
   height="${heightValue}"
+  frameborder="0">
+</iframe>`;
+};
+
+/**
+ * Build a simple embed snippet for a single verse with optional user overrides.
+ * Used for quick sharing from the context menu.
+ *
+ * @param {number} chapterId - Chapter number.
+ * @param {number} verseNumber - Verse number.
+ * @param {Partial<Preferences>} overrides - Optional user overrides from Redux.
+ * @returns {string} Complete HTML iframe snippet.
+ */
+export const buildSimpleEmbedSnippet = (
+  chapterId: number,
+  verseNumber: number,
+  overrides?: Partial<Preferences> | AyahWidgetOverrides,
+): string => {
+  const baseUrl = resolveEmbedBaseUrl();
+  const url = new URL(baseUrl);
+
+  // Merge overrides with defaults to always have values
+  const prefs = { ...INITIAL_PREFERENCES, ...(overrides as any) };
+
+  // Set the verse
+  url.searchParams.set('verses', `${chapterId}:${verseNumber}`);
+
+  // Apply preferences (always set since we have defaults now)
+  url.searchParams.set('clientId', prefs.clientId);
+  url.searchParams.set('audio', String(prefs.enableAudio));
+  url.searchParams.set('reciter', String(prefs.reciter || DEFAULTS.reciterId));
+  url.searchParams.set('theme', mapEmbedTheme(prefs.theme));
+  url.searchParams.set('mushaf', prefs.mushaf);
+  url.searchParams.set('locale', prefs.locale);
+  url.searchParams.set('wbw', String(prefs.enableWbwTranslation));
+  url.searchParams.set('showTranslationName', String(prefs.showTranslatorName));
+  url.searchParams.set('showArabic', String(prefs.showArabic));
+  url.searchParams.set('tafsir', String(prefs.showTafsirs));
+  url.searchParams.set('reflections', String(prefs.showReflections));
+  url.searchParams.set('answers', String(prefs.showAnswers));
+  url.searchParams.set('mergeVerses', String(prefs.mergeVerses));
+
+  // For translations:
+  // if we have explicit translationIds (from overrides), use them
+  // otherwise use the translations from QDC
+  if ((overrides as AyahWidgetOverrides)?.translationIds?.length > 0) {
+    url.searchParams.set(
+      'translations',
+      (overrides as AyahWidgetOverrides).translationIds.join(','),
+    );
+  } else if (prefs.translations && prefs.translations.length > 0) {
+    const ids = prefs.translations.map((t) => t.id).join(',');
+    url.searchParams.set('translations', ids);
+  }
+
+  const width = prefs.customSize?.width?.trim() || '100%';
+  const height = prefs.customSize?.height?.trim() || String(DEFAULTS.iframeHeight);
+
+  return `<iframe
+  src="${url.toString()}"
+  width="${width}"
+  height="${height}"
   frameborder="0">
 </iframe>`;
 };

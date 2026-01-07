@@ -39,7 +39,12 @@ export {
 } from './widget-defaults';
 
 // Re-export embed functions
-export { buildEmbedIframeConfig, buildEmbedIframeSrc, buildEmbedSnippet } from './widget-embed';
+export {
+  buildEmbedIframeConfig,
+  buildEmbedIframeSrc,
+  buildEmbedSnippet,
+  buildSimpleEmbedSnippet,
+} from './widget-embed';
 
 // Re-export form config
 export type { WidgetFieldConfig, WidgetFormBlock, WidgetFormContext } from './widget-form';
