@@ -126,6 +126,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
     const locale = parseString(query.locale);
     const customWidth = parseString(query.width) || undefined;
     const customHeight = parseString(query.height) || undefined;
+    const mergeVerses = parseBool(query.mergeVerses as string | string[] | undefined, false);
 
     const data = await getAyahWidgetData({
       ayah,
@@ -142,6 +143,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       showAnswers,
       locale: locale || undefined,
       rangeEnd,
+      mergeVerses,
       customWidth,
       customHeight,
     });

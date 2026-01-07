@@ -200,6 +200,15 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
       normalizeRangePreferences({ ...prev, rangeEnabled: Boolean(value) }, rangeMeta),
   },
 
+  mergeVerses: {
+    id: 'mergeVerses',
+    type: 'checkbox',
+    labelKey: 'checkboxes.mergeVerses',
+    controlId: 'merge-verses-toggle',
+    preferenceKey: 'mergeVerses',
+    isVisible: (preferences) => preferences.rangeEnabled,
+  },
+
   theme: {
     id: 'theme',
     type: 'select',
@@ -370,6 +379,7 @@ export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
     rangeField: WIDGET_FIELDS.rangeEnd,
     rangeToggleField: WIDGET_FIELDS.rangeEnabled,
   },
+  { kind: 'field', field: WIDGET_FIELDS.mergeVerses },
   { kind: 'field', field: WIDGET_FIELDS.theme },
   { kind: 'field', field: WIDGET_FIELDS.locale },
   { kind: 'field', field: WIDGET_FIELDS.showArabic },

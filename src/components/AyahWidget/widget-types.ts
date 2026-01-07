@@ -23,6 +23,7 @@ export type Preferences = {
   showArabic: boolean;
   rangeEnabled: boolean;
   rangeEnd: number;
+  mergeVerses: boolean;
   customSize: {
     width: string;
     height: string;

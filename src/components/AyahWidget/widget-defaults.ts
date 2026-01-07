@@ -44,6 +44,7 @@ export const INITIAL_PREFERENCES: Preferences = {
   showArabic: true,
   rangeEnabled: false,
   rangeEnd: DEFAULTS.ayah + 1,
+  mergeVerses: false,
   customSize: {
     width: '100%',
     height: '',

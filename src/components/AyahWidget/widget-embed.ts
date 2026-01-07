@@ -108,6 +108,7 @@ export const buildEmbedIframeSrc = (
   setParam('tafsir', String(preferences.showTafsirs), 'true');
   setParam('reflections', String(preferences.showReflections), 'true');
   setParam('answers', String(preferences.showAnswers), 'true');
+  setParam('mergeVerses', String(preferences.mergeVerses), 'false');
 
   return url.toString();
 };

@@ -106,6 +106,44 @@ const getVerseMarginTop = (index: number, showArabic: boolean): number => {
 };
 
 /**
+ * Group translations by translator (resourceName or authorName).
+ * Used in merged mode to display all verses' translations grouped by translator.
+ *
+ * @param {Verse[]} verses - Array of verses.
+ * @returns {Array<{ translatorName: string; texts: string[] }>} Grouped translations.
+ */
+const groupTranslationsByTranslator = (
+  verses: Verse[],
+): { translatorName: string; languageId: number; texts: string[] }[] => {
+  const translatorMap = new Map<string, { languageId: number; texts: string[] }>();
+
+  verses.forEach((verse) => {
+    verse.translations?.forEach((translation) => {
+      const translatorName = translation.resourceName || translation.authorName || 'Unknown';
+      const existing = translatorMap.get(translatorName);
+
+      // Prefix with verse number for merged display
+      const textWithNumber = `${verse.verseNumber}. ${translation.text}`;
+
+      if (existing) {
+        existing.texts.push(textWithNumber);
+      } else {
+        translatorMap.set(translatorName, {
+          languageId: translation.languageId,
+          texts: [textWithNumber],
+        });
+      }
+    });
+  });
+
+  return Array.from(translatorMap.entries()).map(([translatorName, data]) => ({
+    translatorName,
+    languageId: data.languageId,
+    texts: data.texts,
+  }));
+};
+
+/**
  * Quran Widget Component
  *
  * This component renders the Quran widget with Arabic text and translations.
@@ -190,61 +228,93 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
         data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
       >
-        {/* Render each verse block in the range sequentially. */}
-        {verses.map((verseItem, index) => {
-          const marginTop = getVerseMarginTop(index, options.showArabic);
-          return (
-            <div
-              key={verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`}
-              data-verse-block
-              data-verse-key={verseItem.verseKey ?? ''}
-              data-verse-number={verseItem.verseNumber}
-              data-surah-name={options.surahName}
-              style={{ marginTop }}
-            >
-              {/*
-               * Use the shared VerseText component in standalone mode.
-               * This reuses the same rendering logic as the main QuranReader,
-               * ensuring consistent font handling and word rendering.
-               */}
-              {options.showArabic && (
-                <VerseText
-                  words={getVerseWords(verseItem)}
-                  isReadingMode={false}
-                  shouldShowH1ForSEO={index === 0}
-                  // Override props for widget/standalone usage
-                  quranFontOverride={quranFont}
-                  quranTextFontScaleOverride={widgetFontScale}
-                  mushafLinesOverride={MushafLines.FifteenLines}
-                  shouldShowWordByWordTranslation={options.enableWbw}
-                  shouldShowWordByWordTransliteration={false}
-                  isStandaloneMode
+        {/* Render merged verses when mergeVerses is enabled */}
+        {options.mergeVerses && options.rangeEnd ? (
+          <div data-merged-verses>
+            {/* All Arabic text together - merge all words from all verses into one continuous flow */}
+            {options.showArabic && (
+              <VerseText
+                words={verses.flatMap((verseItem) => getVerseWords(verseItem))}
+                isReadingMode={false}
+                shouldShowH1ForSEO
+                quranFontOverride={quranFont}
+                quranTextFontScaleOverride={widgetFontScale}
+                mushafLinesOverride={MushafLines.FifteenLines}
+                shouldShowWordByWordTranslation={options.enableWbw}
+                shouldShowWordByWordTransliteration={false}
+                isStandaloneMode
+              />
+            )}
+            {/* All translations grouped by translator */}
+            <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
+              {groupTranslationsByTranslator(verses).map((group) => (
+                <TranslationText
+                  key={group.translatorName}
+                  languageId={group.languageId}
+                  resourceName={options.showTranslatorNames ? group.translatorName : undefined}
+                  translationFontScale={3}
+                  text={group.texts.join(' ')}
                 />
-              )}
-              {/* Render translations for the verse using the shared TranslationText component */}
-              <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
-                {verseItem.translations?.map((translation) => (
-                  <TranslationText
-                    key={translation.id}
-                    languageId={translation.languageId}
-                    resourceName={
-                      options.showTranslatorNames
-                        ? translation.resourceName || translation.authorName
-                        : undefined
-                    }
-                    translationFontScale={3} // Default scale
-                    text={
-                      // In range mode, prefix with verse number
-                      options.rangeEnd
-                        ? `${verseItem.verseNumber}. ${translation.text}`
-                        : translation.text
-                    }
-                  />
-                ))}
-              </div>
+              ))}
             </div>
-          );
-        })}
+          </div>
+        ) : (
+          /* Render each verse block in the range sequentially (default mode). */
+          verses.map((verseItem, index) => {
+            const marginTop = getVerseMarginTop(index, options.showArabic);
+            return (
+              <div
+                key={verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`}
+                data-verse-block
+                data-verse-key={verseItem.verseKey ?? ''}
+                data-verse-number={verseItem.verseNumber}
+                data-surah-name={options.surahName}
+                style={{ marginTop }}
+              >
+                {/*
+                 * Use the shared VerseText component in standalone mode.
+                 * This reuses the same rendering logic as the main QuranReader,
+                 * ensuring consistent font handling and word rendering.
+                 */}
+                {options.showArabic && (
+                  <VerseText
+                    words={getVerseWords(verseItem)}
+                    isReadingMode={false}
+                    shouldShowH1ForSEO={index === 0}
+                    // Override props for widget/standalone usage
+                    quranFontOverride={quranFont}
+                    quranTextFontScaleOverride={widgetFontScale}
+                    mushafLinesOverride={MushafLines.FifteenLines}
+                    shouldShowWordByWordTranslation={options.enableWbw}
+                    shouldShowWordByWordTransliteration={false}
+                    isStandaloneMode
+                  />
+                )}
+                {/* Render translations for the verse using the shared TranslationText component */}
+                <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
+                  {verseItem.translations?.map((translation) => (
+                    <TranslationText
+                      key={translation.id}
+                      languageId={translation.languageId}
+                      resourceName={
+                        options.showTranslatorNames
+                          ? translation.resourceName || translation.authorName
+                          : undefined
+                      }
+                      translationFontScale={3} // Default scale
+                      text={
+                        // In range mode, prefix with verse number
+                        options.rangeEnd
+                          ? `${verseItem.verseNumber}. ${translation.text}`
+                          : translation.text
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
       <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />
       {options.enableAudio && audioUrl && (

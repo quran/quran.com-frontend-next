@@ -61,6 +61,9 @@ export type WidgetOptions = {
   // Inclusive ending verse number when rendering a range
   rangeEnd?: number;
 
+  // Should verses in a range be merged (Arabic together, then translations together)
+  mergeVerses?: boolean;
+
   // Should the widget display tafsirs button
   showTafsirs: boolean;
 

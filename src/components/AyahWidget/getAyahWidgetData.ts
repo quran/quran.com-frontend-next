@@ -129,6 +129,7 @@ const buildWidgetOptions = (
     customWidth?: string;
     customHeight?: string;
     showArabic: boolean;
+    mergeVerses?: boolean;
   },
   meta?: {
     hasAnyTranslations: boolean;
@@ -158,6 +159,7 @@ const buildWidgetOptions = (
   audioUrl: meta?.audioUrl,
   audioStart: meta?.audioStart,
   audioEnd: meta?.audioEnd,
+  mergeVerses: params.mergeVerses,
 });
 
 /**
@@ -270,6 +272,7 @@ export type AyahWidgetDataInput = {
   showAnswers?: boolean;
   locale?: string;
   rangeEnd?: number;
+  mergeVerses?: boolean;
   customWidth?: string;
   customHeight?: string;
 };
@@ -632,6 +635,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
   const showTafsirs: boolean = input.showTafsirs ?? true;
   const showReflections: boolean = input.showReflections ?? true;
   const showAnswers: boolean = input.showAnswers ?? true;
+  const mergeVerses: boolean = input.mergeVerses ?? false;
 
   const locale: string = resolveLocale(input.locale);
 
@@ -715,6 +719,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
       rangeEnd: normalizedRangeEnd,
       customWidth,
       customHeight,
+      mergeVerses,
     },
     {
       hasAnyTranslations,
