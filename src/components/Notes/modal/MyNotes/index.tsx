@@ -51,9 +51,9 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
     { success: boolean; postId: string },
     { note: Note }
   >(async ({ note }) => publishNoteToQR(note.id, { body: note.body, ranges: note.ranges }), {
-    // _ is the response from the mutation, we are not using that so we can ignore the warning
-    // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-unused-vars
-    onSuccess: (_, variables) => {
+    // we are not using response from the mutation so we can safely ignore the warning
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onSuccess: (response, variables) => {
       if (!variables?.note) return;
       toast(t('export-success'), { status: ToastStatus.Success });
 
@@ -121,6 +121,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         contentClassName={modalStyles.content}
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
+        closeIconClassName={modalStyles.cloneIconContainer}
       >
         <MyNotes
           onAddNote={onAddNote}

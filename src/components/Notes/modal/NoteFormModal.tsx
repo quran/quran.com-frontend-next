@@ -85,8 +85,9 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
         contentClassName={modalStyles.content}
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
+        closeIconClassName={modalStyles.cloneIconContainer}
       >
-        <div className={styles.container} data-testid={dataTestId || 'notes-modal-content'}>
+        <div className={styles.container} data-testid={dataTestId}>
           <ReflectionIntro />
 
           {verseRanges.length > 0 && (
