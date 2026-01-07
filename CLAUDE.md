@@ -111,6 +111,19 @@ repository.
 - Extensive i18n support with RTL languages
 - Audio functionality uses XState for complex state management
 
+## Git Workflow
+
+### Branch Strategy
+
+- **Production branch**: `production` (NOT `master`)
+- When asked to create a PR "on production" or "for production", target the `production` branch
+
+### Commit & PR Guidelines
+
+- **Never mention "Claude" or "Claude Code"** in commit messages or PR descriptions
+- Keep commit messages concise and descriptive
+- PR descriptions should include a summary and test plan
+
 ## Code Quality Guidelines
 
 - **Before writing code**: Read `docs/COMMON_MISTAKES.md` for patterns that have caused production
