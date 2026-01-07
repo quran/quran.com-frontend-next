@@ -20,6 +20,7 @@ import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
 
@@ -44,6 +45,9 @@ const Line = ({
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { surah, ayahNumber } = state.context;
     const verseKeys = words.map((word) => word.verseKey);
     return verseKeys.includes(`${surah}:${ayahNumber}`);
