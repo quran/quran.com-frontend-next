@@ -77,8 +77,8 @@ const VisitBadge: FC<{ label: string }> = ({ label }) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <rect width="135" height="40" rx="5" fill="#000" />
-    <g transform="translate(12 13)">
-      <g transform="scale(0.6666667)">
+    <g transform="translate(8 7)">
+      <g transform="scale(1.1)">
         <path
           d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
           stroke="#FFF"
@@ -103,10 +103,10 @@ const VisitBadge: FC<{ label: string }> = ({ label }) => (
       </g>
     </g>
     <text
-      x="35"
-      y="21"
+      x="46"
+      y="20"
       fill="#FFF"
-      fontSize="16"
+      fontSize="15"
       fontFamily="inherit"
       fontWeight="600"
       dominantBaseline="middle"
