@@ -7,7 +7,7 @@ $note_text_area_height: 22.5rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium2);
-  margin-block-start: var(--spacing-mega);
+  margin-block-start: var(--spacing-medium2);
 
   @include breakpoints.smallerThanTablet {
     margin-block-start: var(--spacing-xsmall);
