@@ -18,11 +18,9 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
-import IconSettings from '@/icons/settings.svg';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
-  setIsSettingsDrawerOpen,
   setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
@@ -141,11 +139,6 @@ const NavbarBody: React.FC = () => {
     dispatch(setDisableSearchDrawerTransition(false));
   };
 
-  const openSettingsDrawer = () => {
-    logDrawerOpenEvent('settings');
-    dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
-  };
-
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.centerVertically}>
@@ -170,16 +163,6 @@ const NavbarBody: React.FC = () => {
           <>
             <ProfileAvatarButton />
             <LanguageSelector />
-            <Button
-              tooltip={t('settings.title')}
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={openSettingsDrawer}
-              ariaLabel={t('aria.change-settings')}
-              id="settings-button"
-            >
-              <IconSettings />
-            </Button>
             <SettingsDrawer />
           </>
           <>
