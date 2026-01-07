@@ -838,19 +838,19 @@ $line-width-map: (
 $large-device-width-ratio: 95%;
 $quran-max-container-width: 112rem;
 @mixin quranContainer() {
-  width: 95%;
+  inline-size: 95%;
 
   @include breakpoints.tablet {
-    width: $large-device-width-ratio;
-    max-width: $quran-max-container-width;
+    inline-size: $large-device-width-ratio;
+    max-inline-size: $quran-max-container-width;
   }
 }
 
 $page-container-max-width: 80rem;
 @mixin pageContainer {
-  max-width: $page-container-max-width;
+  max-inline-size: $page-container-max-width;
   @include breakpoints.tablet {
-    max-width: 80%;
+    max-inline-size: 80%;
   }
 }
 

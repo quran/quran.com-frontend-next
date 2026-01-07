@@ -24,14 +24,16 @@
   align-items: center;
   text-align: center;
   gap: var(--spacing-medium);
-  height: 100%;
+  block-size: 100%;
   justify-content: center;
   overflow: hidden;
   padding: var(--spacing-medium);
 
   @include breakpoints.smallerThanTablet {
     flex-direction: row;
-    height: calc(var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)); // maintains consistent card size on mobile
+    block-size: calc(
+      var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)
+    ); // maintains consistent card size on mobile
     gap: var(--spacing-small);
     padding: var(--spacing-medium-px) var(--spacing-small-px);
   }
@@ -49,13 +51,13 @@
   @include breakpoints.smallerThanTablet {
     margin-block-end: 0;
     flex: 1;
-    min-width: 0;
+    min-inline-size: 0;
   }
 }
 
 .titleIcon {
-  width: var(--spacing-large-px);
-  height: var(--spacing-large-px);
+  inline-size: var(--spacing-large-px);
+  block-size: var(--spacing-large-px);
 
   path {
     fill: var(--color-streaks-dark);
@@ -125,26 +127,26 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-small);
-  width: 100%;
+  inline-size: 100%;
 
   @include breakpoints.smallerThanTablet {
-    width: auto;
+    inline-size: auto;
     flex: 1;
     justify-content: flex-start;
   }
 }
 
 .streakIcon {
-  width: calc(var(--spacing-large-px) * 2);
-  height: calc(var(--spacing-large-px) * 2);
+  inline-size: calc(var(--spacing-large-px) * 2);
+  block-size: calc(var(--spacing-large-px) * 2);
 
   path {
     fill: var(--color-streaks-dark);
   }
 
   @include breakpoints.smallerThanTablet {
-    width: var(--spacing-large-px);
-    height: var(--spacing-large-px);
+    inline-size: var(--spacing-large-px);
+    block-size: var(--spacing-large-px);
   }
 }
 
@@ -190,10 +192,10 @@
     margin-inline-start: var(--spacing-micro);
   }
 
-  >svg {
+  > svg {
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-medium-px);
-      height: var(--spacing-medium-px);
+      inline-size: var(--spacing-medium-px);
+      block-size: var(--spacing-medium-px);
     }
   }
 }
@@ -201,7 +203,7 @@
 // Goal Progress Section
 .goalLink {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   text-decoration: none;
   color: inherit;
   padding-block-end: var(--spacing-small);
@@ -212,18 +214,18 @@
 }
 
 .endOfSurahGoalContent {
-  width: 100%;
+  inline-size: 100%;
   gap: var(--spacing-small);
 }
 
 // Custom styles for end-of-surah variant progressbar
 .customProgressbar {
-  height: var(--spacing-xxlarge-px);
-  width: var(--spacing-xxlarge-px);
+  block-size: var(--spacing-xxlarge-px);
+  inline-size: var(--spacing-xxlarge-px);
 
   @include breakpoints.smallerThanTablet {
-    height: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
-    width: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
+    block-size: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
+    inline-size: calc(var(--spacing-large-px) + var(--spacing-xxsmall-px));
   }
 }
 

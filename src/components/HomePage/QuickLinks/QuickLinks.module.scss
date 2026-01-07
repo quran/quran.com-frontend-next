@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .quickLink {
   background-color: var(--color-topics-grey);
@@ -6,7 +6,7 @@
   @include breakpoints.tablet {
     padding: var(--spacing-small-px);
   }
-  min-width: max-content;
+  min-inline-size: max-content;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,7 +15,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
+  inline-size: 100%;
   gap: var(--spacing-xxsmall-px);
   padding-block: var(--spacing-small-px);
 }

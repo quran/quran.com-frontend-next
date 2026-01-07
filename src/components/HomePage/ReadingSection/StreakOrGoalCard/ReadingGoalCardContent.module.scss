@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 // GOAL PROGRESS SECTION (shared styles)
 .goalProgressSection {
@@ -9,8 +9,8 @@
 }
 
 .circularProgressbar {
-  height: calc(2 * var(--spacing-large-px));
-  width: calc(2 * var(--spacing-large-px));
+  block-size: calc(2 * var(--spacing-large-px));
+  inline-size: calc(2 * var(--spacing-large-px));
   flex-shrink: 0;
 }
 
@@ -22,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  inline-size: 100%;
 }
 
 // PROGRESS BAR STYLES (shared styles)
@@ -46,10 +46,10 @@
 }
 
 .goalArrowIcon {
-  >svg {
+  > svg {
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-small2-px);
-      height: var(--spacing-small2-px);
+      inline-size: var(--spacing-small2-px);
+      block-size: var(--spacing-small2-px);
     }
   }
 }

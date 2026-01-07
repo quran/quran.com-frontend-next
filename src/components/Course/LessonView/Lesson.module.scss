@@ -62,11 +62,11 @@
 }
 
 .htmlContent {
-    p + p,
-    ul + p,
-    ol + p {
-        margin-top: var(--spacing-large);
-    }
+  p + p,
+  ul + p,
+  ol + p {
+    margin-block-start: var(--spacing-large);
+  }
 }
 
 .headerButtonsContainer {

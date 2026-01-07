@@ -1,24 +1,24 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+@use 'src/styles/theme';
 
 .container {
-  width: 100%;
+  inline-size: 100%;
   padding: var(--spacing-medium);
   background-color: var(--color-background-default);
 }
 
 .headingContainer {
-  width: 60%;
-  height: var(--spacing-mega);
-  margin-bottom: var(--spacing-large);
+  inline-size: 60%;
+  block-size: var(--spacing-mega);
+  margin-block-end: var(--spacing-large);
 }
 
 .wordGroup {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
 }
 
 .wordItem {
@@ -26,21 +26,21 @@
   flex-direction: column;
   align-items: center;
   margin: 0 var(--spacing-medium) var(--spacing-medium);
-  width: calc(var(--spacing-xlarge-px) * 2);
+  inline-size: calc(var(--spacing-xlarge-px) * 2);
 }
 
 .arabicWord {
-  height: calc(var(--spacing-medium2) * 2);
-  width: calc(var(--spacing-large-px) * 2);
-  margin-bottom: var(--spacing-xsmall);
+  block-size: calc(var(--spacing-medium2) * 2);
+  inline-size: calc(var(--spacing-large-px) * 2);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .translation {
-  height: var(--spacing-medium2);
-  width: calc(var(--spacing-xlarge-px) * 2);
+  block-size: var(--spacing-medium2);
+  inline-size: calc(var(--spacing-xlarge-px) * 2);
 }
 
 .separator {
   margin: var(--spacing-large) 0;
-  width: 100%;
+  inline-size: 100%;
 }

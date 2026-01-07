@@ -9,8 +9,8 @@
     margin: 0;
     outline: var(--spacing-hairline-px) solid var(--color-daily-progress);
     border: none;
-    height: var(--spacing-medium2-px);
-    width: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+    inline-size: var(--spacing-medium2-px);
     border-radius: var(--border-radius-xsmall2-px);
 
     &[data-state='checked'] {
@@ -23,8 +23,8 @@
     .indicator {
       background-color: var(--color-daily-progress);
       border-radius: var(--border-radius-xsmall2-px);
-      height: var(--spacing-medium2-px);
-      width: var(--spacing-medium2-px);
+      block-size: var(--spacing-medium2-px);
+      inline-size: var(--spacing-medium2-px);
     }
   }
 }

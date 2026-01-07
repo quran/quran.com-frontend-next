@@ -13,7 +13,7 @@ $container-min-height: 200px;
 }
 
 .calligraphyContainer {
-  max-width: max-content;
+  max-inline-size: max-content;
 
   // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
   // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
@@ -84,7 +84,7 @@ $container-min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: $container-min-height;
+  min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
 }
 

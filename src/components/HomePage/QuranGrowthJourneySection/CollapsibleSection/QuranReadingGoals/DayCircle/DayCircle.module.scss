@@ -1,6 +1,6 @@
 .dayCircle {
-  width: var(--spacing-medium3-px);
-  height: var(--spacing-medium3-px);
+  inline-size: var(--spacing-medium3-px);
+  block-size: var(--spacing-medium3-px);
   border-radius: var(--border-radius-circle);
   border: var(--spacing-micro-px) solid var(--color-blue-buttons-and-icons);
   background-color: var(--color-background-default);
@@ -17,8 +17,8 @@
   }
 
   & svg {
-    width: 90%;
-    height: 90%;
+    inline-size: 90%;
+    block-size: 90%;
     color: white;
   }
 }

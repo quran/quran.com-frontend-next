@@ -1,5 +1,5 @@
 .container {
-  min-height: calc(4 * var(--spacing-mega));
+  min-block-size: calc(4 * var(--spacing-mega));
 }
 .changeReciterButtonContainer {
   display: flex;
@@ -8,6 +8,6 @@
 }
 
 .skeleton {
-  height: calc(2.2 * var(--spacing-mega));
-  width: 100%;
+  block-size: calc(2.2 * var(--spacing-mega));
+  inline-size: 100%;
 }

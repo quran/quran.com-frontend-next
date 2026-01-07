@@ -29,7 +29,7 @@ $widget-border-radius: var(--border-radius-rounded);
   background-color: var(--color-search-background);
 
   svg {
-    width: 100%;
+    inline-size: 100%;
     transform: translateY(-40%);
   }
 }
@@ -38,7 +38,7 @@ $widget-border-radius: var(--border-radius-rounded);
   @include utility.pageContainer();
 
   display: flex;
-  height: 100%;
+  block-size: 100%;
   gap: var(--spacing-small-px);
   align-items: center;
   margin-inline: auto;
@@ -85,12 +85,12 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .mushaf {
-  width: var(--spacing-xlarge-px);
-  height: var(--spacing-xlarge-px);
+  inline-size: var(--spacing-xlarge-px);
+  block-size: var(--spacing-xlarge-px);
 
   @include breakpoints.tablet {
-    width: var(--spacing-xxlarge-px);
-    height: var(--spacing-xxlarge-px);
+    inline-size: var(--spacing-xxlarge-px);
+    block-size: var(--spacing-xxlarge-px);
   }
 
   path {
@@ -169,8 +169,8 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .circularProgressbar {
-  width: var(--spacing-xxxlarge-px);
-  height: var(--spacing-xxxlarge-px);
+  inline-size: var(--spacing-xxxlarge-px);
+  block-size: var(--spacing-xxxlarge-px);
 }
 
 .circularProgressbarPath {

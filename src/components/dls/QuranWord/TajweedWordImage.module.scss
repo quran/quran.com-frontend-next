@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg);
 $light-theme-filter: contrast(100%) hue-rotate(50deg);
@@ -23,83 +23,83 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 
 .xs {
   img {
-    height: 40px;
+    block-size: 40px;
     @include breakpoints.tablet {
-      height: 50px;
+      block-size: 50px;
     }
   }
 }
 .sm {
   img {
-    height: 50px;
+    block-size: 50px;
     @include breakpoints.tablet {
-      height: 65px;
+      block-size: 65px;
     }
   }
 }
 .md {
   img {
-    height: 70px;
+    block-size: 70px;
     @include breakpoints.tablet {
-      height: 75px;
+      block-size: 75px;
     }
   }
 }
 .lg {
   img {
-    height: 80px;
+    block-size: 80px;
     @include breakpoints.tablet {
-      height: 90px;
+      block-size: 90px;
     }
   }
 }
 .xl {
   img {
-    height: 90px;
+    block-size: 90px;
     @include breakpoints.tablet {
-      height: 92px;
+      block-size: 92px;
     }
   }
 }
 
 .xl2 {
   img {
-    height: 100px;
+    block-size: 100px;
   }
 }
 
 .xl3 {
   img {
-    height: 110px;
+    block-size: 110px;
     @include breakpoints.tablet {
-      height: 102px;
+      block-size: 102px;
     }
   }
 }
 
 .xl4 {
   img {
-    height: 120px;
+    block-size: 120px;
     @include breakpoints.tablet {
-      height: 104px;
+      block-size: 104px;
     }
   }
 }
 
 .xl5 {
   img {
-    height: 130px;
+    block-size: 130px;
     @include breakpoints.tablet {
-      height: 106px;
+      block-size: 106px;
     }
   }
 }
 
 .xl6 {
   img {
-    height: 140px;
+    block-size: 140px;
     @include breakpoints.tablet {
-      height: 108px;
+      block-size: 108px;
     }
   }
 }
