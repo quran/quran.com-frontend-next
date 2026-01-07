@@ -18,6 +18,7 @@ import ArrowIcon from '@/icons/arrow.svg';
 import { logErrorToSentry } from '@/lib/sentry';
 import { Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
+import { toLocalizedNumber } from '@/utils/locale';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
 interface MyNotesModalProps {
@@ -37,7 +38,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
   notesCount = 0,
   verseKey,
 }) => {
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
 
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -114,7 +115,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
               className={modalStyles.arrowIcon}
             />
 
-            {t('my-notes', { count: notesCount })}
+            {t('my-notes', { count: toLocalizedNumber(notesCount, lang) })}
           </button>
         }
         contentClassName={modalStyles.content}

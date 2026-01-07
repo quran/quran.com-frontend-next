@@ -5,6 +5,7 @@ import styles from './NoteFormModal.module.scss';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
+import { toLocalizedNumber } from '@/utils/locale';
 
 interface NotesOnVerseButtonProps {
   notesCount: number;
@@ -17,7 +18,7 @@ const NotesOnVerseButton: React.FC<NotesOnVerseButtonProps> = ({
   onClick,
   disabled,
 }) => {
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
 
   return (
     <button
@@ -35,7 +36,7 @@ const NotesOnVerseButton: React.FC<NotesOnVerseButtonProps> = ({
         className={styles.notesButtonPencil}
       />
       <span className={styles.notesButtonText}>
-        {t('notes-on-this-verse', { count: notesCount })}
+        {t('notes-on-this-verse', { count: toLocalizedNumber(notesCount, lang) })}
       </span>
       <IconContainer
         icon={<ChevronRightIcon />}
