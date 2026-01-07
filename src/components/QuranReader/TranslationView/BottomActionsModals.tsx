@@ -3,6 +3,8 @@ import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './BottomActionsModals.module.scss';
+
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
@@ -88,17 +90,23 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
       <ReflectionBodyContainer
         initialChapterId={chapterId}
         initialVerseNumber={verseNumber}
+        isModal
         scrollToTop={() => {
           reflectionModalRef.current?.scrollToTop();
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
+            overlayClassName={styles.reflectionOverlay}
+            contentClassName={styles.reflectionContentModal}
+            innerContentClassName={styles.reflectionInnerContentModal}
             innerRef={reflectionModalRef}
             isOpen={openedModal === ModalType.REFLECTION}
             onClose={() => handleModalClose(ModalType.REFLECTION)}
-            header={t('reflections-and-lessons')}
+            hasCloseButton
+            header={surahAndAyahSelection}
+            headerClassName={styles.reflectionHeader}
+            closeIconClassName={styles.reflectionHeaderCloseIcon}
           >
-            {surahAndAyahSelection}
             {body}
           </ContentModal>
         )}

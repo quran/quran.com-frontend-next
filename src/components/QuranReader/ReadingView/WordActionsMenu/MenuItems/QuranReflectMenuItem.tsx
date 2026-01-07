@@ -58,6 +58,7 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
       <ReflectionBodyContainer
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
+        isModal
         scrollToTop={() => {
           contentModalRef.current?.scrollToTop();
         }}

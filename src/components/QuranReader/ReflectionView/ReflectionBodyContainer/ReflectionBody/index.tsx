@@ -26,6 +26,7 @@ interface Props {
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
   selectedContentType: ContentType;
+  isModal?: boolean;
 }
 
 const ReflectionBody: React.FC<Props> = ({
@@ -35,6 +36,7 @@ const ReflectionBody: React.FC<Props> = ({
   scrollToTop,
   setSelectedVerseNumber,
   selectedContentType,
+  isModal = false,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
@@ -83,14 +85,18 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      <VerseAndTranslation
-        from={Number(selectedVerseNumber)}
-        to={Number(selectedVerseNumber)}
-        chapter={Number(selectedChapterId)}
-      />
-      <div className={styles.separatorContainer}>
-        <Separator />
-      </div>
+      {!isModal && (
+        <>
+          <VerseAndTranslation
+            from={Number(selectedVerseNumber)}
+            to={Number(selectedVerseNumber)}
+            chapter={Number(selectedChapterId)}
+          />
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+        </>
+      )}
       {data?.data?.length === 0 ? (
         <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
