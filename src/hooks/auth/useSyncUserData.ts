@@ -6,6 +6,7 @@ import { useSWRConfig } from 'swr';
 
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { logErrorToSentry } from '@/lib/sentry';
+import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectBookmarkedPages, selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
@@ -95,7 +96,9 @@ const useSyncUserData = () => {
   const { mutate } = useSWRConfig();
   const retryTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isSyncingRef = useRef(false);
+  const hasSyncedRef = useRef(false);
   const { isLoggedIn } = useIsLoggedIn();
+  const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
@@ -114,6 +117,7 @@ const useSyncUserData = () => {
         mutate(makeReadingSessionsUrl());
         mutate(isBookmarkCacheKey, undefined, { revalidate: true });
         setLastSyncAt(new Date(lastSyncAt));
+        hasSyncedRef.current = true;
       } catch (error) {
         const readingSessionsCount = Object.keys(recentReadingSessions).length;
         logErrorToSentry(error, {
@@ -135,10 +139,17 @@ const useSyncUserData = () => {
     // Clear lastSyncAt cookie when user is logged out (handles server-side logout via /logout page)
     if (!isLoggedIn) {
       if (getLastSyncAt()) removeLastSyncAt();
+      hasSyncedRef.current = false;
+      return () => {};
+    }
+    // Wait for Redux hydration to complete before syncing to ensure we have the full bookmark data
+    if (!isPersistGateHydrationComplete) {
       return () => {};
     }
     // Sync local data to DB when user logs in and hasn't synced yet
-    if (!getLastSyncAt() && !isSyncingRef.current) {
+    // Use hasSyncedRef to track if we've successfully synced (not just started syncing)
+    // This ensures we retry if the first sync ran before hydration completed
+    if (!getLastSyncAt() && !hasSyncedRef.current && !isSyncingRef.current) {
       isSyncingRef.current = true;
       performSync().finally(() => {
         isSyncingRef.current = false;
@@ -147,7 +158,7 @@ const useSyncUserData = () => {
     return () => {
       if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
     };
-  }, [isLoggedIn, performSync, bookmarkedVerses, bookmarkedPages]);
+  }, [isLoggedIn, isPersistGateHydrationComplete, performSync, bookmarkedVerses, bookmarkedPages]);
 };
 
 export default useSyncUserData;
