@@ -64,17 +64,11 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
     return notesArray.map((note) => {
       const attachedEntities = note.attachedEntities || [];
 
-      let attachedEntity;
-      /** Find the last reflection entity.
-       * Using manual loop instead of findLast() for ES5 compatibility.
-       * findLast() is ES2023 and may not be supported in older browsers.
-       */
-      for (let i = attachedEntities.length - 1; i >= 0; i -= 1) {
-        if (attachedEntities[i].type === AttachedEntityType.REFLECTION) {
-          attachedEntity = attachedEntities[i];
-          break;
-        }
-      }
+      /** Find the last reflection entity. */
+      const attachedEntity = attachedEntities
+        .slice()
+        .reverse()
+        .find((entity) => entity.type === AttachedEntityType.REFLECTION);
 
       const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
       return { ...note, postUrl };
