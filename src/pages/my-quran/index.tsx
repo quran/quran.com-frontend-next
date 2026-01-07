@@ -1,130 +1,85 @@
-/* eslint-disable max-lines */
-import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useMemo, useState } from 'react';
 
-import layoutStyle from '../index.module.scss';
+import { GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
 
+import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
-import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
-import Button from '@/dls/Button/Button';
-import Skeleton from '@/dls/Skeleton/Skeleton';
-import useAuthData from '@/hooks/auth/useAuthData';
-import useLogout from '@/hooks/auth/useLogout';
-import Error from '@/pages/_error';
-import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
+import PageContainer from '@/components/PageContainer';
+import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
-import ChaptersData from 'types/ChaptersData';
+import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
 
-interface Props {
-  chaptersData?: ChaptersData;
+enum Tab {
+  SAVED = 'saved',
+  RECENT = 'recent',
+  NOTES_AND_REFLECTIONS = 'notes-and-reflections',
 }
 
-const nameSample = 'Mohammad Ali';
-const emailSample = 'mohammadali@quran.com';
-const MyQuranPage: NextPage<Props> = () => {
-  const { t, lang } = useTranslation();
-  const { userData: user, isLoading, userDataError: error, isAuthenticated } = useAuthData();
-  const runLogout = useLogout();
+const MyQuranPage = (): JSX.Element => {
+  const { lang, t } = useTranslation('my-quran');
+  const PATH = ROUTES.MY_QURAN;
+  const title = t('common:my-quran');
+  const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
 
-  const onLogoutClicked = async () =>
-    runLogout({ eventName: 'profile_logout', redirectToLogin: true });
-
-  if (error) {
-    return <Error statusCode={500} />;
-  }
-
-  const email = user?.email || emailSample;
-  const firstName = user?.firstName || '';
-  const lastName = user?.lastName || '';
-  const photoUrl = user?.photoUrl || DEFAULT_PHOTO_URL;
-
-  const profileSkeletonInfoSkeleton = (
-    <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
-      <Skeleton>
-        <h2 className={styles.name}>{nameSample}</h2>
-      </Skeleton>
-      <Skeleton>
-        <div className={styles.email}>{emailSample}</div>
-      </Skeleton>
-    </div>
+  const tabs = useMemo(
+    () => [
+      {
+        name: t('saved'),
+        value: Tab.SAVED,
+      },
+      {
+        name: t('recent'),
+        value: Tab.RECENT,
+      },
+      {
+        name: t('notes-and-reflections'),
+        value: Tab.NOTES_AND_REFLECTIONS,
+      },
+    ],
+    [t],
   );
 
-  const accountActions = (
-    <div
-      className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.actionsContainer)}
-    >
-      <div className={styles.action}>
-        <Button isDisabled={isLoading} onClick={onLogoutClicked}>
-          {t('common:logout')}
-        </Button>
-      </div>
-      <div className={styles.action}>
-        <DeleteAccountButton isDisabled={isLoading} />
-      </div>
-    </div>
-  );
+  const onTabChange = (value: string) => {
+    logEvent('my_quran_tab_change', { value });
+    setSelectedTab(value as Tab);
+  };
 
-  const profileInfo = (
-    <div className={classNames(layoutStyle.flowItem)}>
-      <div className={styles.profileContainer}>
-        <div className={styles.profilePicture}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.profilePicture} alt="avatar" src={photoUrl} />
-        </div>
-        {isLoading ? (
-          profileSkeletonInfoSkeleton
-        ) : (
-          <div className={styles.profileInfoContainer}>
-            <h2 className={styles.name}>{`${firstName} ${lastName}`.trim() || nameSample}</h2>
-            <div className={styles.email}>{email}</div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  const tabComponents = {
+    [Tab.SAVED]: null,
+    [Tab.RECENT]: null,
+    [Tab.NOTES_AND_REFLECTIONS]: null,
+  };
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:profile')}
-        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
-        languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
+        title={title}
+        canonical={getCanonicalUrl(lang, PATH)}
+        languageAlternates={getLanguageAlternates(PATH)}
         nofollow
         noindex
       />
-      <div className={layoutStyle.pageContainer}>
-        <div className={layoutStyle.flow}>
-          <div className={styles.container}>
-            {isAuthenticated && profileInfo}
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.recentReadingContainer,
-              )}
-            >
-              <RecentReadingSessions />
-            </div>
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.bookmarksAndCollectionsContainer,
-              )}
-            >
-              <BookmarksAndCollectionsSection isHomepage={false} />
-            </div>
-            {isAuthenticated && accountActions}
-          </div>
-        </div>
-      </div>
+      <main className={styles.main}>
+        <HeaderNavigation title={title} innerClassName={styles.headerNavigationInnerClassName} />
+        <PageContainer
+          isSheetsLike
+          wrapperClassName={styles.mainContent}
+          className={styles.pageContainer}
+        >
+          <TabSwitcher
+            hasSeparator={false}
+            selected={selectedTab}
+            items={tabs}
+            onSelect={onTabChange}
+          />
+          <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
+        </PageContainer>
+      </main>
     </>
   );
 };

@@ -29,7 +29,7 @@ import {
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
-  MY_QURAN_URL,
+  ROUTES,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -41,7 +41,7 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: MY_QURAN_URL,
+    navigationUrl: ROUTES.MY_QURAN,
     translationKey: 'my-quran',
     icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
   },
