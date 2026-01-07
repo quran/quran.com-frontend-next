@@ -389,3 +389,25 @@ export const compareDateWithToday = (
 
   return { today, normalizedDate, isToday };
 };
+
+/**
+ * Convert a date to a safe ISO string.
+ *
+ * @param {string | Date} date
+ * @returns {string | undefined}
+ *
+ * @example
+ * const isoString = toSafeISOString('2024-01-15');
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('2024-01-15'));
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('invalid date'));
+ * // isoString: undefined
+ */
+export const toSafeISOString = (date: string | Date): string | undefined => {
+  const timestamp = typeof date === 'string' ? Date.parse(date) : date.getTime();
+  if (Number.isNaN(timestamp)) return undefined;
+  return new Date(timestamp).toISOString();
+};
