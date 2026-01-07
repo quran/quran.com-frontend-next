@@ -6,7 +6,7 @@ import type AvailableTranslation from 'types/AvailableTranslation';
  * User preferences for the Ayah Widget Builder.
  */
 export type Preferences = {
-  containerId: string;
+  clientId: string;
   selectedSurah: number;
   selectedAyah: number;
   translations: AvailableTranslation[];

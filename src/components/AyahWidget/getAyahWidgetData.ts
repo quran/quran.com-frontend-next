@@ -200,6 +200,14 @@ type VerseRangeRequest = {
 type VerseApiParams = Record<string, unknown>;
 
 /**
+ * Tracking params for widget analytics.
+ */
+type WidgetTracking = {
+  clientId?: string;
+  referer?: string;
+};
+
+/**
  * Build parameters for the verse API request.
  *
  * @param {number[]} translationIds - Selected translation IDs.
@@ -215,6 +223,7 @@ const buildVerseParams = (
   mushaf: MushafType,
   wordByWordLocale: string,
   range?: VerseRangeRequest,
+  tracking?: WidgetTracking,
 ): VerseApiParams => {
   const quranFont = getQuranFontForMushaf(mushaf);
 
@@ -250,6 +259,10 @@ const buildVerseParams = (
     params.to = range.to;
   }
 
+  // Add tracking params for widget analytics
+  if (tracking?.clientId) params.clientId = tracking.clientId;
+  if (tracking?.referer) params.referer = tracking.referer;
+
   // Strip undefined keys (clean query string)
   Object.keys(params).forEach((key: string) => {
     if (params[key] === undefined) delete params[key];
@@ -276,6 +289,8 @@ export type AyahWidgetDataInput = {
   mergeVerses?: boolean;
   customWidth?: string;
   customHeight?: string;
+  clientId?: string; // for tracking usage
+  referer?: string; // url of the page hosting the widget iframe
 };
 
 export type AyahWidgetData = {
@@ -458,6 +473,7 @@ const buildVerseKeys = (
  * @param {string} params.reciter - Reciter ID.
  * @param {MushafType} params.mushaf - Mushaf style.
  * @param {string} params.wordByWordLocale - WBW locale.
+ * @param {WidgetTracking} params.tracking - Tracking params.
  * @returns {Promise<Verse[]>} Raw verses.
  */
 const fetchVersesByKeys = async (
@@ -467,6 +483,7 @@ const fetchVersesByKeys = async (
     reciter: string;
     mushaf: MushafType;
     wordByWordLocale: string;
+    tracking?: WidgetTracking;
   },
 ): Promise<Verse[]> => {
   const verseResponses: VerseResponse[] = await Promise.all(
@@ -479,6 +496,8 @@ const fetchVersesByKeys = async (
             params.reciter,
             params.mushaf,
             params.wordByWordLocale,
+            undefined, // range
+            params.tracking, // add clientId + referer to track usage
           ),
         ),
       ),
@@ -677,6 +696,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
     reciter,
     mushaf,
     wordByWordLocale,
+    tracking: { clientId: input.clientId, referer: input.referer },
   });
 
   if (!rawVerses.length) {

@@ -12,7 +12,7 @@ import { QuranFont } from '@/types/QuranReader';
  * Static default values for the Ayah Widget Builder.
  */
 export const DEFAULTS = {
-  containerId: 'quran-embed-1',
+  clientId: 'My Website Name',
   surah: 33,
   ayah: 56,
   reciterId: 7,
@@ -27,7 +27,7 @@ export const DEFAULTS = {
  * Initial settings shown in the builder UI (static defaults only).
  */
 export const INITIAL_PREFERENCES: Preferences = {
-  containerId: DEFAULTS.containerId,
+  clientId: DEFAULTS.clientId,
   selectedSurah: DEFAULTS.surah,
   selectedAyah: DEFAULTS.ayah,
   translations: [],

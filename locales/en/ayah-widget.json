@@ -13,7 +13,7 @@
     "snippet": "Embed snippet"
   },
   "fields": {
-    "containerId": "Container Id",
+    "clientId": "Client Id",
     "surah": "Surah",
     "ayah": "Ayah",
     "language": "Language",

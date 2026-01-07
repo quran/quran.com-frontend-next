@@ -70,7 +70,10 @@ const EmbedPage = ({ verses, options, error }: EmbedProps): JSX.Element => {
 export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<EmbedProps>> => {
-  const { query, res } = context;
+  const { query, req, res } = context;
+
+  // Get referer header (the page hosting the iframe)
+  const referer = req.headers.referer || req.headers.origin || '';
 
   try {
     const versesParam = parseString(query.verses);
@@ -127,6 +130,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
     const customWidth = parseString(query.width) || undefined;
     const customHeight = parseString(query.height) || undefined;
     const mergeVerses = parseBool(query.mergeVerses as string | string[] | undefined, false);
+    const clientId = parseString(query.clientId) || undefined;
 
     const data = await getAyahWidgetData({
       ayah,
@@ -146,6 +150,8 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       mergeVerses,
       customWidth,
       customHeight,
+      clientId,
+      referer: String(referer),
     });
 
     const serializable = JSON.parse(JSON.stringify({ verses: data.verses, options: data.options }));

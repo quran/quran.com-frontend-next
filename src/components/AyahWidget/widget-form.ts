@@ -120,16 +120,16 @@ const normalizeRangePreferences = (prev: Preferences, rangeMeta: RangeMeta): Pre
  * Field configurations for the widget builder form.
  */
 export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
-  containerId: {
-    id: 'containerId',
+  clientId: {
+    id: 'clientId',
     type: 'text',
-    labelKey: 'fields.containerId',
-    controlId: 'container-id',
+    labelKey: 'fields.clientId',
+    controlId: 'client-id',
     inputVariant: 'default',
-    preferenceKey: 'containerId',
+    preferenceKey: 'clientId',
     setValue: (value, prev) => ({
       ...prev,
-      containerId: String(value || prev.containerId),
+      clientId: String(value || prev.clientId),
     }),
   },
 
@@ -371,7 +371,7 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
  * Add new options here to render them automatically in the UI.
  */
 export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
-  { kind: 'field', field: WIDGET_FIELDS.containerId },
+  { kind: 'field', field: WIDGET_FIELDS.clientId },
   {
     kind: 'surahAyahRange',
     surahField: WIDGET_FIELDS.selectedSurah,
