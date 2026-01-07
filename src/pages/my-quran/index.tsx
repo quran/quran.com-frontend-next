@@ -1,13 +1,16 @@
 import { useMemo, useState } from 'react';
 
+import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
+import RecentContent from './RecentContent';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
+import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
@@ -49,7 +52,7 @@ const MyQuranPage = (): JSX.Element => {
 
   const tabComponents = {
     [Tab.SAVED]: null,
-    [Tab.RECENT]: null,
+    [Tab.RECENT]: <RecentContent />,
     [Tab.NOTES_AND_REFLECTIONS]: null,
   };
 
@@ -80,6 +83,16 @@ const MyQuranPage = (): JSX.Element => {
       </main>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default MyQuranPage;

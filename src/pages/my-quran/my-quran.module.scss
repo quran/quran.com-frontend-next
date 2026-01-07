@@ -3,16 +3,16 @@ $max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (
 
 .main {
   div .headerNavigationInnerClassName {
-    max-width: $max-width;
+    max-inline-size: $max-width;
   }
 
   .mainContent {
     .pageContainer {
       overflow: hidden;
-      max-width: unset;
+      max-inline-size: unset;
       padding: unset;
       @include breakpoints.tablet {
-        max-width: $max-width;
+        max-inline-size: $max-width;
         padding-block: var(--spacing-xlarge-px);
       }
 
