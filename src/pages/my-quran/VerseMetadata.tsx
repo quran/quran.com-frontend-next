@@ -6,6 +6,7 @@ import styles from './VerseMetadata.module.scss';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { TestId } from '@/tests/test-ids';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import { toLocalizedNumber } from '@/utils/locale';
 import { fetcher } from 'src/api';
 import { VerseResponse } from 'types/ApiResponses';
 
@@ -15,7 +16,7 @@ interface VerseMetadataProps {
 }
 
 const VerseMetadata = ({ verseKey, mushafId }: VerseMetadataProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const { data, error } = useSWR<VerseResponse>(
     makeByVerseKeyUrl(verseKey, { mushaf: mushafId }),
@@ -32,8 +33,9 @@ const VerseMetadata = ({ verseKey, mushafId }: VerseMetadataProps) => {
 
   return (
     <p data-testid={TestId.MY_QURAN_RECENT_CONTENT_VERSE_METADATA}>
-      {t('page')} {data.verse.pageNumber}, {t('juz')} {data.verse.juzNumber} / {t('hizb')}{' '}
-      {data.verse.hizbNumber}
+      {t('page')} {toLocalizedNumber(data.verse.pageNumber, lang)}, {t('juz')}{' '}
+      {toLocalizedNumber(data.verse.juzNumber, lang)} / {t('hizb')}{' '}
+      {toLocalizedNumber(data.verse.hizbNumber, lang)}
     </p>
   );
 };

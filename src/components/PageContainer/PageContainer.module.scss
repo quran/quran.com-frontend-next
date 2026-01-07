@@ -11,6 +11,7 @@
 
 .wrapperSheets {
   background-color: var(--color-background-elevated-new);
+  box-shadow: 0 4px 25px -25px rgba(0, 0, 0, 0.1);
   @include roundedTopBorders;
 }
 

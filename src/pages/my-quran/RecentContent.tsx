@@ -14,13 +14,18 @@ import DataContext from '@/contexts/DataContext';
 import IconContainer from '@/dls/IconContainer/IconContainer';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
-import ChevronRightIcon from '@/icons/chevron-right.svg';
+import ArrowIcon from '@/icons/arrow.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
 import { getMushafId } from '@/utils/api';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedDate } from '@/utils/locale';
+import {
+  isRTLLocale,
+  toLocalizedDate,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
@@ -85,8 +90,13 @@ const RecentContent = () => {
               size={ChapterIconsSize.Large}
             />
             <div className={styles.recentContentItemTitle}>
-              <p>{surah.transliteratedName}</p>
-              <IconContainer icon={<ChevronRightIcon />} />
+              <p>
+                {surah.transliteratedName}{' '}
+                {isRTLLocale(lang)
+                  ? toLocalizedVerseKeyRTL(verseKey, lang)
+                  : toLocalizedVerseKey(verseKey, lang)}
+              </p>
+              <IconContainer icon={<ArrowIcon />} />
             </div>
             <div className={styles.recentContentItemDescription}>
               <p>
