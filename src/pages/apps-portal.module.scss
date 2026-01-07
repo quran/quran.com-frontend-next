@@ -41,7 +41,7 @@
 
 .heroSubtitle {
   margin: 0;
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   font-size: var(--font-size-large);
   line-height: 1.6;
   max-inline-size: 36rem;
@@ -106,7 +106,7 @@
   gap: 0.35rem;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   text-decoration: underline;
 }
 
@@ -120,7 +120,7 @@
 
 .emptyState {
   margin: 0;
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
 }
 
 .featuredCard {
@@ -181,7 +181,7 @@
 }
 
 .appTagline {
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   font-size: var(--font-size-normal);
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -191,7 +191,7 @@
 
 .appDescription {
   margin: 0;
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   font-size: var(--font-size-normal);
   line-height: 1.5;
   display: -webkit-box;
@@ -334,7 +334,7 @@
 }
 
 .search input::placeholder {
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
 }
 
 .searchIcon {
