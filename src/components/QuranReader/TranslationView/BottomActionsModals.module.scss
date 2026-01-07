@@ -1,7 +1,6 @@
 @use 'src/styles/breakpoints';
 
 .reflectionOverlay .reflectionContentModal {
-  overflow-y: auto;
   padding: 0;
   .reflectionHeader {
     border-block-end: unset;
