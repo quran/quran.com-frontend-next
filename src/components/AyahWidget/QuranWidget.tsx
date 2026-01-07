@@ -193,6 +193,10 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
   // Default font scale for widget (medium size)
   const widgetFontScale = 3;
 
+  // Fixed font sizes for the widget (non-responsive)
+  const widgetArabicFontSize = '28px';
+  const widgetTranslationFontSize = '16px';
+
   return (
     <div
       className="quran-widget"
@@ -220,10 +224,30 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         } as unknown as React.CSSProperties
       }
     >
+      {/* Override font sizes to be fixed (non-responsive) within the widget */}
+      <style>{`
+        .quran-widget [data-verse-key] span,
+        .quran-widget h1 span,
+        .quran-widget [data-merged-verses] span {
+          font-size: ${widgetArabicFontSize} !important;
+        }
+        .quran-widget [data-verse-key],
+        .quran-widget h1,
+        .quran-widget [data-merged-verses] {
+          --line-height: calc(${widgetArabicFontSize} + 20px) !important;
+        }
+        .quran-widget [class*="translation-font-size-"] {
+          font-size: ${widgetTranslationFontSize} !important;
+        }
+        .quran-widget [class*="translation-font-size-"] p {
+          font-size: ${widgetTranslationFontSize} !important;
+        }
+      `}</style>
       <WidgetHeader verse={firstVerse} options={options} colors={colors} />
       <div
         style={{
           padding: contentPadding,
+          marginBottom: 16,
         }}
         data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
         data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
@@ -264,7 +288,9 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
             const marginTop = getVerseMarginTop(index, options.showArabic);
             return (
               <div
-                key={verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`}
+                key={
+                  verseItem.verseKey ?? `${verseItem.chapterId}-${verseItem.verseNumber}-${index}`
+                }
                 data-verse-block
                 data-verse-key={verseItem.verseKey ?? ''}
                 data-verse-number={verseItem.verseNumber}
