@@ -242,6 +242,10 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         .quran-widget [class*="translation-font-size-"] p {
           font-size: ${widgetTranslationFontSize} !important;
         }
+        .quran-widget [class*="translationName"],
+        .quran-widget p[class*="translationName"] {
+          font-size: 12px !important;
+        }
       `}</style>
       <WidgetHeader verse={firstVerse} options={options} colors={colors} />
       <div
