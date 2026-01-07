@@ -9,7 +9,7 @@ interface UseToggleParams {
 
 /**
  * Custom hook for managing toggle state with event logging
- * @returns {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} A tuple containing the current state and the toggle function
+ * @returns {[boolean, () => void]} A tuple containing the current state and the toggle function
  */
 const useToggle = ({ initialState = false, eventName }: UseToggleParams) => {
   const [isOpen, setIsOpen] = useState<boolean>(initialState);

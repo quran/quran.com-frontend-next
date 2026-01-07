@@ -22,10 +22,12 @@ const switchToMode = async (
     await tab.click();
   } else if (await button.isVisible()) {
     await button.click();
+  } else {
+    throw new Error(`Neither ${mode} tab nor button is visible`);
   }
 
   // Verify the mode switch was successful by checking that the verse is visible
-  await expect(page.getByTestId(getVerseArabicTestId(verseKey))).toBeVisible();
+  await expect(page.getByTestId(getVerseArabicTestId(verseKey ?? '1:1'))).toBeVisible();
 };
 
 /**

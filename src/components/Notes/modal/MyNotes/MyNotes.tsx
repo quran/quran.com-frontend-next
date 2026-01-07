@@ -18,6 +18,7 @@ import { AttachedEntityType, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
+import { toSafeISOString } from '@/utils/datetime';
 import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
@@ -93,10 +94,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
               <div className={styles.noteHeader}>
                 <div>
                   <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
-                  <time
-                    className={styles.noteDate}
-                    dateTime={new Date(note.createdAt).toISOString()}
-                  >
+                  <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
                     {formatNoteDate(note.createdAt, lang)}
                   </time>
                 </div>

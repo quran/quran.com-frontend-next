@@ -94,6 +94,7 @@ const invalidateCountCaches = (
         return verseKeys.some((verseKey) => isVerseKeyWithinRanges(verseKey, rangeString));
       }
 
+      // When verseKeys is empty, invalidate all countNotes/* keys (invalidate all counts scenario)
       return true;
     });
 

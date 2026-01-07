@@ -150,9 +150,11 @@ export const readableVerseRangeKeys = (
       const showMinimalUi = shouldUseMinimalLayout(lang);
 
       const chapterData = getChapterData(chaptersData, from.chapter.toString());
+      if (!chapterData) return null;
+
       const chapterName = showMinimalUi
-        ? chapterData?.translatedName
-        : chapterData?.transliteratedName;
+        ? chapterData.translatedName
+        : chapterData.transliteratedName;
 
       const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
 
