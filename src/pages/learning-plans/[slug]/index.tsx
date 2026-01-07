@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -9,17 +9,19 @@ import CourseDetails from '@/components/Course/CourseDetails';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { getCourseBySlug } from '@/components/Sanity/utils';
 import Spinner from '@/dls/Spinner/Spinner';
-import { logError } from '@/lib/newrelic';
+import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
-import { privateFetcher } from '@/utils/auth/api';
+import { getCourse, privateFetcher } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCourseNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
+import {
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+} from '@/utils/staticPageGeneration';
 
 const Loading = () => (
   <div className={layoutStyles.loadingContainer}>
@@ -70,36 +72,34 @@ const LearningPlanPage: NextPage<Props> = ({ course }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/learning-plans/[slug]',
-  async (context) => {
-    const { params, locale } = context;
-    const { slug } = params;
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
 
-    try {
-      const [course, chaptersData] = await Promise.all([
-        getCourseBySlug(slug as string),
-        getAllChaptersData(locale),
-      ]);
-
-      return {
-        props: {
-          course,
-          chaptersData,
-        },
-      };
-    } catch (error) {
-      const err = error instanceof Error ? error : new Error(String(error));
-      logError('Error occurred while getting course from Sanity', err, {
-        slug,
-      });
-      return {
-        props: {
-          hasError: true,
-        },
-      };
-    }
-  },
-);
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  try {
+    const course = await getCourse(params.slug as string);
+    const chaptersData = await getAllChaptersData(locale);
+    return {
+      props: {
+        course,
+        chaptersData,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+    };
+  } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-LearningPlanPage',
+      metadata: {
+        slug: String(params.slug),
+      },
+    });
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+    };
+  }
+};
 
 export default LearningPlanPage;

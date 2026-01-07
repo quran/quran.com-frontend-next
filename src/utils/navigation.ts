@@ -341,8 +341,15 @@ export const resolveUrlBySearchNavigationType = (
  * @param {string} query the search query.
  * @returns {string}
  */
-export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
+export const getSearchQueryNavigationUrl = (query?: string): string => {
+  if (!query) return '/search';
+
+  const params = new URLSearchParams();
+  params.set(QueryParam.PAGE, '1');
+  params.set(QueryParam.QUERY, query);
+
+  return `/search?${params.toString()}`;
+};
 
 /**
  * Get the href link to the info page of a Surah.

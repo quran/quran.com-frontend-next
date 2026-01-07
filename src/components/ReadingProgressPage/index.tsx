@@ -1,8 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
-import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
-
 import ProgressPageGoalWidget from './ProgressPageGoalWidget';
 import ProgressPageStreakWidget from './ProgressPageStreakWidget';
 import ReadingHistory from './ReadingHistory';
@@ -10,13 +7,22 @@ import styles from './ReadingProgressPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import useIsMobile from '@/hooks/useIsMobile';
+import ArrowLeft from '@/icons/arrow-left.svg';
+import Background from '@/icons/background.svg';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import {
+  getCanonicalUrl,
+  getReadingGoalNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
-  const { error, goal, weekData, streak, currentActivityDay, isLoading } = useGetStreakWithMetadata(
+  const isMobile = useIsMobile();
+  const { error, goal, weekData, streak, isLoading, currentActivityDay } = useGetStreakWithMetadata(
     {
       showDayName: true,
     },
@@ -34,10 +40,28 @@ const ReadingProgressPage = () => {
         noindex
       />
 
-      <PageContainer>
-        <div className={styles.contentContainer}>
-          <h1>{t('reading-progress-header')}</h1>
+      <div className={styles.heroContainer}>
+        <div className={styles.heroBackgroundImage}>
+          <Background aria-hidden="true" focusable="false" />
+        </div>
+        <div>
+          <div className={styles.heroInnerContainer}>
+            <Button
+              type={ButtonType.Secondary}
+              size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
+              variant={ButtonVariant.Compact}
+              href={getReadingGoalNavigationUrl()}
+              ariaLabel={t('back-to-reading-goal')}
+            >
+              <ArrowLeft />
+            </Button>
+            <h1>{t('reading-progress-header')}</h1>
+          </div>
+        </div>
+      </div>
 
+      <div className={styles.contentContainer}>
+        <PageContainer>
           <div className={styles.widgetsContainer}>
             <ProgressPageStreakWidget
               weekData={weekData}
@@ -47,26 +71,15 @@ const ReadingProgressPage = () => {
             />
 
             <ProgressPageGoalWidget
-              currentActivityDay={currentActivityDay}
               goal={goal}
               isLoading={isLoading}
+              currentActivityDay={currentActivityDay}
             />
           </div>
 
           <ReadingHistory />
-
-          {goal && (
-            <div className={styles.manageGoalSection}>
-              <h1>{t('manage-goal')}</h1>
-
-              <div className={styles.manageGoalContainer}>
-                <DeleteReadingGoalModal />
-                <UpdateReadingGoalModal goal={goal} />
-              </div>
-            </div>
-          )}
-        </div>
-      </PageContainer>
+        </PageContainer>
+      </div>
     </>
   );
 };

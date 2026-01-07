@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,8 +13,8 @@ import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useUpdatePassword from '@/hooks/auth/useUpdatePassword';
 import useTransformFormErrors from '@/hooks/useTransformFormErrors';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
-import TEST_IDS from '@/utils/test-ids';
 
 type FormData = {
   currentPassword: string;
@@ -48,34 +48,40 @@ const ChangePasswordForm: FC = () => {
 
   const formFields = useMemo(() => getChangePasswordFormFields(t), [t]);
 
-  const onFormSubmit = async (data: FormData) => {
-    logButtonClick('profile_update_password');
-    const result = await updatePassword({
-      currentPassword: data.currentPassword,
-      newPassword: data.newPassword,
-      confirmPassword: data.confirmPassword,
-    });
+  const onFormSubmit = useCallback(
+    async (data: FormData) => {
+      logButtonClick('profile_update_password');
+      const result = await updatePassword({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+        confirmPassword: data.confirmPassword,
+      });
 
-    return transformErrors(result);
-  };
+      return transformErrors(result);
+    },
+    [updatePassword, transformErrors],
+  );
 
-  const renderAction = (props: RenderActionProps) => (
-    <div>
-      <Button
-        {...props}
-        className={styles.button}
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Accent}
-      >
-        {t('update-password')}
-      </Button>
-    </div>
+  const renderAction = useCallback(
+    (props: RenderActionProps) => (
+      <div>
+        <Button
+          {...props}
+          className={styles.button}
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Accent}
+        >
+          {t('update-password')}
+        </Button>
+      </div>
+    ),
+    [t],
   );
 
   return (
     <Section
       title={t('change-password')}
-      dataTestId={TEST_IDS.AUTH.UPDATE_PROFILE.CHANGE_PASSWORD_SECTION}
+      dataTestId={TestId.AUTH_UPDATE_PROFILE_CHANGE_PASSWORD_SECTION}
     >
       <FormBuilder
         className={styles.passwordFormContainer}
@@ -84,9 +90,11 @@ const ChangePasswordForm: FC = () => {
         actionText={t('update-password')}
         isSubmitting={isUpdating}
         renderAction={renderAction}
+        shouldDisplayAllValidation
+        shouldClearOnSuccess
       />
     </Section>
   );
 };
 
-export default ChangePasswordForm;
+export default memo(ChangePasswordForm);

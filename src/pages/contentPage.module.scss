@@ -6,6 +6,7 @@
     inline-size: 65%;
   }
   @include breakpoints.smallerThanDesktop {
+    padding-block-start: var(--banner-height);
     inline-size: 90%;
   }
   * {

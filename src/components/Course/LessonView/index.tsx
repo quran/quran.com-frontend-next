@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import ActionButtons from './ActionButtons';
@@ -8,7 +7,6 @@ import CourseMaterial from './CourseMaterial';
 import styles from './Lesson.module.scss';
 
 import ContentContainer from '@/components/Course/ContentContainer';
-import MarkdownEditor from '@/components/MarkdownEditor';
 import PageContainer from '@/components/PageContainer';
 import HtmlContent from '@/components/RichText/HtmlContent';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -39,9 +37,6 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
     setCourseMaterialModalOpen(true);
   };
 
-  // FIXME: remove once markdown in api is converted to html
-  const shouldUseMilkdown = /(^|\n)\s*#/m.test(content ?? '') || /\\$/m.test(content ?? '');
-
   return (
     <ContentContainer>
       <div className={styles.viewContainer}>
@@ -65,7 +60,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
           currentLessonId={lesson.id}
           lessons={lesson.course.lessons}
         />
-        <div className={styles.container}>
+        <div className={styles.container} data-testid="learning-plan-lesson-view">
           <PageContainer isLessonView>
             <div className={styles.headerButtonsContainer}>
               <Button
@@ -90,20 +85,8 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                 {`: ${title}`}
               </p>
             </div>
-            <div
-              className={
-                shouldUseMilkdown
-                  ? styles.contentContainer
-                  : `${styles.contentContainer} ${styles.htmlContent}`
-              }
-            >
-              {shouldUseMilkdown ? (
-                <MilkdownProvider>
-                  <MarkdownEditor isEditable={false} defaultValue={content} />
-                </MilkdownProvider>
-              ) : (
-                <HtmlContent html={content} />
-              )}
+            <div className={`${styles.contentContainer} ${styles.htmlContent}`}>
+              <HtmlContent html={content} />
             </div>
             <ActionButtons lesson={lesson} courseSlug={courseSlug} />
           </PageContainer>

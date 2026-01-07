@@ -178,6 +178,7 @@
     "banned": "*Sorry, Your account is banned. Contact Quran.Foundation",
     "complete-signup-failed": "Failed to complete signup. Please try again.",
     "confirm": "*Confirm password doesn't match the password",
+    "equal": "*{{fieldName}} doesn't match",
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
@@ -259,6 +260,10 @@
   },
   "fundraising": {
     "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
+    "donation-campaign": {
+      "cta": "Donate today",
+      "text": "Become a supporter"
+    },
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",

@@ -15,7 +15,9 @@ type Month = {
 
 // Constants for better readability
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const WEEK_SHIFT_DAYS = 3; // Shift to make weeks start on Friday
+// Weeks in quranic-calendar.json are already anchored to start on Friday per the Google Sheet,
+// so we don't need to shift them in code. Set to 0 to keep anchors as-is.
+const WEEK_SHIFT_DAYS = 0;
 
 // Pre-compute all UTC timestamps for better performance
 const weekUTCCache = new Map<string, { startTimestamp: number; endTimestamp: number }>();
@@ -46,10 +48,11 @@ for (const weeks of Object.values(monthsMap)) {
  * @returns {number}
  */
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
-  // Today's date - use UTC to avoid timezone issues
+  // Force a stable timezone by using the calendar day in local time,
+  // then convert that day to a UTC timestamp. This prevents the date
+  // from drifting a day earlier/later on machines with non-UTC offsets.
   const today = currentHijriDate.date;
-  // IMPORTANT: Use UTC date components to avoid timezone mismatches
-  const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
+  const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
 
   // Look up from cache - use for...of with Array.from to allow early return
   for (const [weekNumber, cache] of Array.from(weekUTCCache.entries())) {

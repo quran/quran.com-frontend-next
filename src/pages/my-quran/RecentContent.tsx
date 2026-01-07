@@ -20,8 +20,8 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedDate } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
-import TEST_IDS from '@/utils/test-ids';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { TestId } from '@/tests/test-ids';
 
 const RecentContent = () => {
   const { lang } = useTranslation();
@@ -44,7 +44,7 @@ const RecentContent = () => {
   if (recentItems.length === 0) {
     return (
       <div className={styles.recentContentContainer}>
-        <p className={styles.emptyState} data-testid={TEST_IDS.MY_QURAN.RECENT_CONTENT.EMPTY_STATE}>
+        <p className={styles.emptyState} data-testid={TestId.MY_QURAN_RECENT_CONTENT_EMPTY_STATE}>
           {t('recent-empty')}
         </p>
       </div>
@@ -64,7 +64,7 @@ const RecentContent = () => {
             href={verseUrl}
             onClick={() => handleRecentContentClick(verseKey)}
             className={styles.recentContentItem}
-            data-testid={TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM}
+            data-testid={TestId.MY_QURAN_RECENT_CONTENT_ITEM}
             aria-label={t('recent-read-verse', { verseKey })}
           >
             <ChapterIconContainer
