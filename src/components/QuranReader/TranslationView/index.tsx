@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -117,32 +117,48 @@ const TranslationView = ({
     }
   }, [pageVersesQuestionsData]);
 
-  const itemContentRenderer = (verseIdx: number) => {
-    if (verseIdx === versesCount) {
+  const itemContentRenderer = useCallback(
+    (verseIdx: number) => {
+      if (verseIdx === versesCount) {
+        return (
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+            initialData={initialData}
+          />
+        );
+      }
+
       return (
-        <EndOfScrollingControls
+        <TranslationViewVerse
+          verseIdx={verseIdx}
+          totalVerses={versesCount}
           quranReaderDataType={quranReaderDataType}
-          lastVerse={verses[verses.length - 1]}
+          quranReaderStyles={quranReaderStyles}
+          setApiPageToVersesMap={setApiPageToVersesMap}
+          selectedTranslations={selectedTranslations}
+          wordByWordLocale={wordByWordLocale}
+          reciterId={reciterId}
           initialData={initialData}
+          resourceId={resourceId}
+          questionsData={accumulatedQuestionsData}
         />
       );
-    }
-
-    return (
-      <TranslationViewVerse
-        verseIdx={verseIdx}
-        totalVerses={versesCount}
-        quranReaderDataType={quranReaderDataType}
-        quranReaderStyles={quranReaderStyles}
-        setApiPageToVersesMap={setApiPageToVersesMap}
-        selectedTranslations={selectedTranslations}
-        wordByWordLocale={wordByWordLocale}
-        reciterId={reciterId}
-        initialData={initialData}
-        resourceId={resourceId}
-      />
-    );
-  };
+    },
+    [
+      versesCount,
+      quranReaderDataType,
+      verses,
+      initialData,
+      accumulatedQuestionsData,
+      quranReaderStyles,
+      setApiPageToVersesMap,
+      selectedTranslations,
+      wordByWordLocale,
+      reciterId,
+      resourceId,
+    ],
+  );
 
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||

@@ -35,6 +35,10 @@ interface BottomActionsProps {
    * Whether this is in translation view
    */
   isTranslationView?: boolean;
+  /**
+   * Whether this verse has questions (passed from parent to ensure memo re-renders)
+   */
+  hasQuestions?: boolean;
 }
 
 /**
@@ -42,12 +46,18 @@ interface BottomActionsProps {
  * @param {BottomActionsProps} props - Component props
  * @returns {JSX.Element} The rendered component
  */
-const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
+const BottomActions = ({
+  verseKey,
+  isTranslationView = true,
+  hasQuestions: hasQuestionsProp,
+}: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const questionsData = usePageQuestions();
-  const hasQuestions = questionsData?.[verseKey]?.total > 0;
+  // Use prop if provided (from memoized parent), otherwise compute from context
+  // Only show Answers tab when we confirm questions exist (not while loading)
+  const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
   const isMobile = useIsMobile(MobileSizeVariant.SMALL);
   // Modal state using enum

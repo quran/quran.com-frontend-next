@@ -36,6 +36,7 @@ type TranslationViewCellProps = {
   verseIndex: number;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
+  hasQuestions?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -44,6 +45,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   bookmarksRangeUrl,
   hasNotes,
+  hasQuestions,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
@@ -98,7 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} />
+        <BottomActions verseKey={verse.verseKey} hasQuestions={hasQuestions} />
       </div>
       <Separator className={styles.verseSeparator} />
     </div>
@@ -128,6 +130,7 @@ const areVersesEqual = (
 ): boolean =>
   prevProps.verse.id === nextProps.verse.id &&
   prevProps.hasNotes === nextProps.hasNotes &&
+  prevProps.hasQuestions === nextProps.hasQuestions &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,
@@ -136,6 +139,5 @@ const areVersesEqual = (
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
-  prevProps.hasNotes === nextProps.hasNotes;
+  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl;
 export default memo(TranslationViewCell, areVersesEqual);
