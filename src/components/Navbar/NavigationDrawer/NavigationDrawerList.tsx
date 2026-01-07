@@ -17,10 +17,10 @@ import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   ABOUT_US_URL,
-  getProfileNavigationUrl,
   LEARNING_PLANS_URL,
   RADIO_URL,
   RECITERS_URL,
+  ROUTES,
 } from '@/utils/navigation';
 
 interface NavigationDrawerListProps {
@@ -58,7 +58,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     {
       title: t('my-quran'),
       icon: <IconBookmarkFilled />,
-      href: getProfileNavigationUrl(),
+      href: ROUTES.MY_QURAN,
       eventName: 'navigation_drawer_my_quran',
     },
     {

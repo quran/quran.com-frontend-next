@@ -1,0 +1,45 @@
+@use 'src/styles/breakpoints';
+
+.tabSwitcherContainer {
+  .switchContainer {
+    @include breakpoints.smallerThanTablet {
+      display: none;
+    }
+    background-color: var(--color-background-alternative-faint);
+    .switchButton {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-default-new);
+    }
+  }
+
+  .tabsContainer {
+    display: grid;
+    @include breakpoints.tablet {
+      display: none;
+    }
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(fit-content, 1fr);
+    width: 100%;
+    border-block-end: unset;
+
+    .tabs {
+      background-color: var(--color-background-elevated-new);
+      text-align: center;
+      font-size: var(--font-size-xsmall-px);
+      color: var(--color-text-faded-new);
+      font-weight: var(--font-weight-medium);
+      padding-inline: var(--spacing-medium3-px);
+      padding-block: var(--spacing-medium2-px);
+      border-block-end: var(--spacing-micro-px) solid var(--color-separators-ayah-level);
+    }
+
+    .tabs + .tabs {
+      margin-inline-start: unset;
+    }
+
+    .activeTab {
+      border-block-end: var(--spacing-micro-px) solid var(--color-success-medium);
+      color: var(--color-text-link-new);
+    }
+  }
+}
