@@ -1,5 +1,5 @@
 .skeleton {
   flex-grow: 1;
-  height: 1rem;
-  max-width: calc(2 * var(--spacing-mega-px));
+  block-size: 1rem;
+  max-inline-size: calc(2 * var(--spacing-mega-px));
 }

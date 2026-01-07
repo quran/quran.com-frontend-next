@@ -22,8 +22,8 @@
   color: var(--color-text-default-new);
   font-size: var(--font-size-small-px);
   svg {
-    width: var(--spacing-small2-px);
-    height: var(--spacing-small2-px);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
     path {
       fill: var(--color-text-default-new);
     }
@@ -45,4 +45,9 @@
   color: var(--color-text-faded-new);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-small-px);
+}
+
+.skeleton {
+  block-size: calc(2 * var(--spacing-xxlarge-px));
+  inline-size: 100%;
 }

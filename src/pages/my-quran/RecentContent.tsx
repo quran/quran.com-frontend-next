@@ -12,22 +12,23 @@ import ChapterIconContainer, {
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import DataContext from '@/contexts/DataContext';
 import IconContainer from '@/dls/IconContainer/IconContainer';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { TestId } from '@/tests/test-ids';
 import { getMushafId } from '@/utils/api';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedDate } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { TestId } from '@/tests/test-ids';
 
 const RecentContent = () => {
   const { lang } = useTranslation();
   const { t } = useTranslation('my-quran');
   const chaptersData = useContext(DataContext);
-  const { recentlyReadVerseKeys, timestamps } = useGetRecentlyReadVerseKeys(true, true);
+  const { recentlyReadVerseKeys, timestamps, isLoading } = useGetRecentlyReadVerseKeys(true, true);
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
@@ -40,6 +41,17 @@ const RecentContent = () => {
   const handleRecentContentClick = (verseKey: string) => {
     logButtonClick('my_quran_recent_content_item', { verseKey });
   };
+
+  if (isLoading) {
+    return (
+      <div className={styles.recentContentContainer}>
+        {Array.from({ length: 3 }).map((item, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Skeleton key={`skeleton-${index}`} className={styles.skeleton} />
+        ))}
+      </div>
+    );
+  }
 
   if (recentItems.length === 0) {
     return (

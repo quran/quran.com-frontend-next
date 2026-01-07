@@ -4,8 +4,8 @@ import useSWR from 'swr/immutable';
 import styles from './VerseMetadata.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import { TestId } from '@/tests/test-ids';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
-import TEST_IDS from '@/utils/test-ids';
 import { fetcher } from 'src/api';
 import { VerseResponse } from 'types/ApiResponses';
 
@@ -31,7 +31,7 @@ const VerseMetadata = ({ verseKey, mushafId }: VerseMetadataProps) => {
   }
 
   return (
-    <p data-testid={TEST_IDS.MY_QURAN.RECENT_CONTENT.VERSE_METADATA}>
+    <p data-testid={TestId.MY_QURAN_RECENT_CONTENT_VERSE_METADATA}>
       {t('page')} {data.verse.pageNumber}, {t('juz')} {data.verse.juzNumber} / {t('hizb')}{' '}
       {data.verse.hizbNumber}
     </p>
