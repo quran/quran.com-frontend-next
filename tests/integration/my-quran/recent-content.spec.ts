@@ -7,7 +7,7 @@ import {
   navigateToVerseAndWaitForTracking,
 } from '@/tests/helpers/my-quran/recent-content';
 import Homepage from '@/tests/POM/home-page';
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -22,7 +22,7 @@ test.describe('My Quran - Recent Content (Guest)', () => {
     async ({ page }) => {
       await homePage.goTo('/my-quran');
       await clickRecentTab(page);
-      await expect(page.getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.EMPTY_STATE)).toBeVisible();
+      await expect(page.getByTestId(TestId.MY_QURAN_RECENT_CONTENT_EMPTY_STATE)).toBeVisible();
     },
   );
 
@@ -37,7 +37,7 @@ test.describe('My Quran - Recent Content (Guest)', () => {
       await homePage.goTo('/my-quran');
       await clickRecentTab(page);
 
-      const recentItems = page.getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM);
+      const recentItems = page.getByTestId(TestId.MY_QURAN_RECENT_CONTENT_ITEM);
       const itemCount = await recentItems.count();
       expect(itemCount).toBeGreaterThan(1);
       expect(itemCount).toBeLessThanOrEqual(10);
@@ -57,9 +57,7 @@ test.describe('My Quran - Recent Content (Guest)', () => {
       await homePage.goTo('/my-quran');
       await clickRecentTab(page);
 
-      const recentItem = page
-        .getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM)
-        .first();
+      const recentItem = page.getByTestId(TestId.MY_QURAN_RECENT_CONTENT_ITEM).first();
       await expect(recentItem).toBeVisible();
 
       await Promise.all([

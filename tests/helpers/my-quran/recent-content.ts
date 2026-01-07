@@ -24,6 +24,7 @@ export const navigateToVerse = async (page: Page, verseKey: string): Promise<voi
   await expect(verseElement).toBeVisible();
 
   await verseElement.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(2000);
 };
 
 /**

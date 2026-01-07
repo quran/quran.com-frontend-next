@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import { clickRecentTab, navigateToVerse } from '@/tests/helpers/my-quran/recent-content';
-import TEST_IDS from '@/utils/test-ids';
+import { TestId } from '@/tests/test-ids';
 
 test.describe('My Quran - Recent Content (Logged In)', () => {
   test(
@@ -12,14 +12,12 @@ test.describe('My Quran - Recent Content (Logged In)', () => {
       await page.goto('/my-quran', { waitUntil: 'networkidle' });
       await clickRecentTab(page);
 
-      const recentItem = page
-        .getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.RECENT_CONTENT_ITEM)
-        .first();
+      const recentItem = page.getByTestId(TestId.MY_QURAN_RECENT_CONTENT_ITEM).first();
       await expect(recentItem).toBeVisible();
       await expect(recentItem.getByText('Al-Baqarah')).toBeVisible();
 
       // Wait for metadata to load (useSWR call completes)
-      const metadataText = recentItem.getByTestId(TEST_IDS.MY_QURAN.RECENT_CONTENT.VERSE_METADATA);
+      const metadataText = recentItem.getByTestId(TestId.MY_QURAN_RECENT_CONTENT_VERSE_METADATA);
       await expect(metadataText).toBeVisible({ timeout: 5000 });
 
       const chapterIcon = recentItem.locator('svg, img').first();
