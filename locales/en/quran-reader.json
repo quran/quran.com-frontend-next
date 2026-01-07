@@ -84,9 +84,6 @@
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
-  "add-bookmark": "Add bookmark",
-  "page-bookmarked": "Page bookmarked",
-  "page-bookmark-removed": "Page bookmark removed",
   "remove-bookmark": "Remove bookmark",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",
@@ -106,7 +103,5 @@
   "trans-change": "Change",
   "translation-by": "Translation by",
   "verses-range": "Range of verses",
-  "view-on-quran-reflect": "View on QuranReflect",
-  "change-translation": "Change Translation",
-  "bismillah": "In the Name of Allah—the Most Compassionate, Most Merciful"
+  "view-on-quran-reflect": "View on QuranReflect"
 }

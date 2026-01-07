@@ -13,6 +13,7 @@
   "my-quran": "Mijn Koran",
   "navigate-quran": "Navigeer door de Koran",
   "no-bookmarks": "U heeft nog geen bladwijzers",
+  "no-page-bookmarks": "Je hebt nog geen bladwijzers voor pagina's.",
   "no-recently-read": "Je hebt nog geen leessessies",
   "noble-quran": "De Edele Koran",
   "popular": "Populair",
@@ -59,6 +60,7 @@
   "stay-consistent": "Volg Stappen, Creëer Aangepaste Doelen, Blijf Consistent",
   "tab": {
     "bookmarks": "Bladwijzers",
+    "page-bookmarks": "Pagina's",
     "popular": "Populair"
   },
   "take-notes": "Heb je iets gemist <modalLink> Notities ? </modalLink>",

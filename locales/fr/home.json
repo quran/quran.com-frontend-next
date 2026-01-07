@@ -13,6 +13,7 @@
   "my-quran": "Mon Coran",
   "navigate-quran": "Naviguer dans le Coran",
   "no-bookmarks": "Vous n'avez pas encore de favoris",
+  "no-page-bookmarks": "Vous n'avez pas encore de signets.",
   "no-recently-read": "Vous n'avez pas encore de séance de lecture",
   "noble-quran": "Le Noble Coran",
   "popular": "Populaire",
@@ -59,6 +60,7 @@
   "stay-consistent": "Suivez vos Séries, Créez des Objectifs Personnalisés, Restez Consistant(e)",
   "tab": {
     "bookmarks": "Favoris",
+    "page-bookmarks": "Pages",
     "popular": "Populaire"
   },
   "take-notes": "Avez-vous manqué des <modalLink> Notes ? </modalLink>",

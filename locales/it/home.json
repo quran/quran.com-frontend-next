@@ -13,6 +13,7 @@
   "my-quran": "Il mio Corano",
   "navigate-quran": "Navigare nel Corano",
   "no-bookmarks": "Non hai ancora nessun segnalibro",
+  "no-page-bookmarks": "Non hai ancora segnalibri di pagina",
   "no-recently-read": "Non hai ancora sessioni di lettura",
   "noble-quran": "Il Nobile Corano",
   "popular": "Popolare",
@@ -59,6 +60,7 @@
   "stay-consistent": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
   "tab": {
     "bookmarks": "segnalibri",
+    "page-bookmarks": "Pagine",
     "popular": "Popolare"
   },
   "take-notes": "Ti sei perso le <modalLink> Note? </modalLink>",

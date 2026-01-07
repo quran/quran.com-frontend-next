@@ -13,6 +13,7 @@
   "my-quran": "อัลกุรอานของฉัน",
   "navigate-quran": "นำทางอัลกุรอาน",
   "no-bookmarks": "คุณยังไม่มีบุ๊คมาร์กใดๆ",
+  "no-page-bookmarks": "คุณยังไม่ได้คั่นหน้าใดๆ เลย",
   "no-recently-read": "คุณยังไม่มีเซสชันการอ่านใดๆ",
   "noble-quran": "คัมภีร์กุรอานอันสูงส่ง",
   "popular": "เป็นที่นิยม",
@@ -59,6 +60,7 @@
   "stay-consistent": "ติดตามสตรีค สร้างเป้าหมายที่กำหนดเอง รักษาความสม่ำเสมอ",
   "tab": {
     "bookmarks": "บุ๊คมาร์ก",
+    "page-bookmarks": "หน้า",
     "popular": "เป็นที่นิยม"
   },
   "take-notes": "คุณเคยพลาด <modalLink> Notes หรือเปล่า? </modalLink>",

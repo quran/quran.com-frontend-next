@@ -13,6 +13,7 @@
   "my-quran": "Al-Quran saya",
   "navigate-quran": "Navigasi Quran",
   "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+  "no-page-bookmarks": "Anda belum mempunyai sebarang penanda halaman lagi",
   "no-recently-read": "Anda belum mempunyai sebarang bacaan",
   "noble-quran": "Al-Quran  Karim",
   "popular": "Popular",
@@ -59,6 +60,7 @@
   "stay-consistent": "Jejaki Trek, Cipta Matlamat Tersuai, Kekal Konsisten",
   "tab": {
     "bookmarks": "Penanda buku",
+    "page-bookmarks": "Halaman",
     "popular": "Popular"
   },
   "take-notes": "Adakah anda telah kehilangan Nota <modalLink>? </modalLink>",

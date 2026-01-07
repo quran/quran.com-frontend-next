@@ -13,6 +13,7 @@
   "my-quran": "Kurani im",
   "navigate-quran": "Lundroni në Kuran",
   "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+  "no-page-bookmarks": "Nuk ke ende asnjë faqeshënues faqeje",
   "no-recently-read": "Nuk keni ende asnjë seancë leximi",
   "noble-quran": "Kurani Fisnik",
   "popular": "Popullore",
@@ -59,6 +60,7 @@
   "stay-consistent": "Ndiqni vijat, krijoni qëllime të personalizuara, qëndroni konsistent",
   "tab": {
     "bookmarks": "Faqeruajtësit",
+    "page-bookmarks": "Faqet",
     "popular": "Popullore"
   },
   "take-notes": "A keni humbur ndonjë gjë nga Shënimet e <modalLink>? </modalLink>",
