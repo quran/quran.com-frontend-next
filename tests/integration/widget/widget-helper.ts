@@ -18,6 +18,7 @@ type WidgetParams = {
   locale?: string;
   width?: string;
   height?: string;
+  mergeVerses?: boolean;
   targetId?: string;
   scriptSrc?: string;
   hostUrl?: string;
@@ -52,6 +53,7 @@ export const renderWidgetPage = async (
     rangeEnd,
     width,
     height,
+    mergeVerses = false,
     scriptSrc = 'http://localhost:3005/embed/v1',
     hostUrl = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3005',
     extraAttributes = {},
@@ -96,6 +98,7 @@ export const renderWidgetPage = async (
   url.searchParams.set('tafsir', String(showTafsirs));
   url.searchParams.set('reflections', String(showReflections));
   url.searchParams.set('answers', String(showAnswers));
+  url.searchParams.set('mergeVerses', String(mergeVerses));
   Object.entries(extraAttributes).forEach(([key, value]) => {
     if (value === undefined || value === null) return;
     url.searchParams.set(key, String(value));

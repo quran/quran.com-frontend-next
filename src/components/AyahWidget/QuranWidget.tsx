@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import React from 'react';
 
@@ -75,7 +76,8 @@ const getColors = (): WidgetColors => {
  */
 const getContentPadding = (showArabic: boolean, hasTranslations: boolean): string => {
   if (!showArabic) {
-    return '0px 24px 0 24px';
+    // Add 16px top padding when Arabic is hidden to prevent translation from touching header
+    return '16px 24px 0 24px';
   }
   return hasTranslations ? '20px 24px 0 24px' : '20px 24px 20px 24px';
 };
@@ -135,6 +137,58 @@ const groupTranslationsByTranslator = (
 };
 
 /**
+ * Build copy data from verses for the widget.
+ * This creates a structured object that can be serialized and used by the copy handler.
+ *
+ * @param {Verse[]} verses - Array of verses.
+ * @param {WidgetOptions} options - Widget options.
+ * @returns {object} Copy data object.
+ */
+const buildWidgetCopyData = (
+  verses: Verse[],
+  options: WidgetOptions,
+): {
+  mergeVerses: boolean;
+  verses: {
+    verseNumber: number;
+    arabicText: string;
+    translations: { text: string; translatorName?: string }[];
+  }[];
+} => {
+  const verseData = verses.map((verse) => {
+    // Get Arabic text from words' textUthmani (plain Arabic, not font glyphs)
+    let arabicText = '';
+    if (options.showArabic) {
+      const words = getVerseWords(verse);
+      arabicText = words
+        .filter((word) => word.charTypeName !== 'end') // Exclude verse end markers
+        .map((word) => word.textUthmani || word.text || '')
+        .join(' ')
+        .trim();
+    }
+
+    // Collect translations
+    const translations = (verse.translations || []).map((translation) => ({
+      text: translation.text.replace(/<[^>]*>/g, ''), // Strip HTML tags
+      translatorName: options.showTranslatorNames
+        ? translation.resourceName || translation.authorName
+        : undefined,
+    }));
+
+    return {
+      verseNumber: verse.verseNumber,
+      arabicText,
+      translations,
+    };
+  });
+
+  return {
+    mergeVerses: Boolean(options.mergeVerses && options.rangeEnd),
+    verses: verseData,
+  };
+};
+
+/**
  * Quran Widget Component
  *
  * This component renders the Quran widget with Arabic text and translations.
@@ -188,10 +242,14 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
   const widgetArabicFontSize = '28px';
   const widgetTranslationFontSize = '16px';
 
+  // Build copy data for the widget
+  const copyData = buildWidgetCopyData(verses, options);
+
   return (
     <div
       className="quran-widget"
       data-theme={getThemeDataAttribute(options.theme)}
+      data-copy-data={JSON.stringify(copyData)}
       style={
         {
           fontFamily:

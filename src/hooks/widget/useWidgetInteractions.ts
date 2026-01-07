@@ -1,7 +1,9 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { useEffect } from 'react';
 
 import type { WidgetOptions } from '@/types/ayah-widget';
+import { toLocalizedNumber } from '@/utils/locale';
 
 const WIDGET_ROOT_SELECTOR = '.quran-widget';
 
@@ -18,7 +20,16 @@ const buildVerseUrl = (options: WidgetOptions): string => {
 };
 
 /**
+ * Convert number to Arabic numeral using the locale utility.
+ * @param {number} num - The number to convert.
+ * @returns {string} Arabic numeral string.
+ */
+const toArabicNumeral = (num: number): string => toLocalizedNumber(num, 'ar');
+
+/**
  * Build the text that should be copied when clicking "Copy".
+ * Uses pre-built copy data from the widget's data attribute for proper Arabic text.
+ * Formats differently based on mergeVerses mode.
  * @param {HTMLElement} root - The root element of the widget.
  * @param {WidgetOptions} options - The widget options.
  * @returns {string} The text that should be copied when clicking "Copy".
@@ -29,46 +40,87 @@ const buildCopyText = (root: HTMLElement, options: WidgetOptions): string => {
   const rangeCaption = `${chapterId}:${verseLabel}`;
   const header = options.surahName ? `${options.surahName} (${rangeCaption})` : rangeCaption;
 
-  const verseBlocks = Array.from(root.querySelectorAll('[data-verse-block]')) as HTMLElement[];
-  const blocks: string[] = [];
+  const parts: string[] = [header];
 
-  verseBlocks.forEach((block) => {
-    const lines: string[] = [];
+  // Try to get copy data from the data attribute (contains proper Arabic text)
+  const copyDataAttr = root.getAttribute('data-copy-data');
+  if (copyDataAttr) {
+    try {
+      const copyData = JSON.parse(copyDataAttr) as {
+        mergeVerses: boolean;
+        verses: {
+          verseNumber: number;
+          arabicText: string;
+          translations: { text: string; translatorName?: string }[];
+        }[];
+      };
 
-    const arabicNode = block.querySelector('[data-verse-text]') as HTMLElement | null;
-    const arabicText = arabicNode?.dataset?.arabicVerse?.trim();
-    if (options.showArabic && arabicText) lines.push(arabicText);
+      if (copyData.mergeVerses) {
+        // MERGED MODE: All Arabic together with verse numbers, then all translations together
+        // Arabic: بِسْمِ ٱللَّهِ ١ ٱلْحَمْدُ لِلَّهِ ٢
+        const arabicParts = copyData.verses
+          .filter((v) => v.arabicText)
+          .map((v) => `${v.arabicText}  ${toArabicNumeral(v.verseNumber)}`);
+        if (arabicParts.length) {
+          parts.push(arabicParts.join('  '));
+          parts.push(''); // Empty line between Arabic and translations
+        }
 
-    const translationNodes = Array.from(block.querySelectorAll('[data-translation-text]'));
-    translationNodes.forEach((node) => {
-      const text = (node.textContent || '').trim();
-      if (!text) return;
-      lines.push(text);
-      if (options.showTranslatorNames) {
-        const name = node.getAttribute('data-translator-name');
-        if (name) lines.push(`- ${name}`);
+        // Translations grouped by translator, with verse numbers inline: text (1) text (2)
+        // Group translations by translator name
+        const translatorGroups = new Map<string, string[]>();
+        copyData.verses.forEach((verse) => {
+          verse.translations.forEach((t) => {
+            const key = t.translatorName || '';
+            if (!translatorGroups.has(key)) {
+              translatorGroups.set(key, []);
+            }
+            translatorGroups.get(key)!.push(`${t.text} (${verse.verseNumber})`);
+          });
+        });
+
+        translatorGroups.forEach((texts, translatorName) => {
+          parts.push(texts.join(' '));
+          if (translatorName) {
+            parts.push(`— ${translatorName}`);
+          }
+        });
+      } else {
+        // NON-MERGED MODE: Each verse as a separate block
+        // ١ Arabic text
+        // 1. Translation
+        // - translator
+        copyData.verses.forEach((verse) => {
+          const verseLines: string[] = [];
+
+          // Arabic with verse number at end
+          if (verse.arabicText) {
+            verseLines.push(`${verse.arabicText} ${toArabicNumeral(verse.verseNumber)}`);
+            verseLines.push(''); // Empty line between Arabic and translation
+          }
+
+          // Translations with verse number prefix
+          verse.translations.forEach((t) => {
+            verseLines.push(`${verse.verseNumber}. ${t.text}`);
+            if (t.translatorName) {
+              verseLines.push(`— ${t.translatorName}`);
+            }
+          });
+
+          if (verseLines.length) {
+            parts.push(verseLines.join('\n'));
+          }
+        });
       }
-    });
-
-    if (lines.length) blocks.push(lines.join('\n'));
-  });
-
-  // Fallback: if no verse blocks, copy translation-only nodes
-  if (!blocks.length) {
-    const translationNodes = Array.from(root.querySelectorAll('[data-translation-text]'));
-    translationNodes.forEach((node) => {
-      const text = (node.textContent || '').trim();
-      if (!text) return;
-      const lines = [text];
-      if (options.showTranslatorNames) {
-        const name = node.getAttribute('data-translator-name');
-        if (name) lines.push(`- ${name}`);
-      }
-      blocks.push(lines.join('\n'));
-    });
+    } catch {
+      // Fallback: if JSON parsing fails, return just header and URL
+    }
   }
 
-  return [header, ...blocks, buildVerseUrl(options)].filter(Boolean).join('\n\n');
+  // Add the URL at the end
+  parts.push(buildVerseUrl(options));
+
+  return parts.filter(Boolean).join('\n\n');
 };
 
 /**
