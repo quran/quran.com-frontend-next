@@ -16,7 +16,6 @@ import Section from './Section';
 import sharedStyles from './SharedProfileStyles.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import Error from '@/pages/_error';
 import { TestId } from '@/tests/test-ids';
 
 const MARKETING_TAG_NAME = 'marketing';
@@ -124,11 +123,7 @@ const EmailNotificationSettingsForm: FC = () => {
   }
 
   if (hasError) {
-    return (
-      <div className={sharedStyles.loadingContainer}>
-        <Error statusCode={500} />
-      </div>
-    );
+    return null;
   }
 
   if (!preferences || preferences.length === 0) return null;

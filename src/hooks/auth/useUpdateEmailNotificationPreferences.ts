@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { ChannelTypeEnum, IUserPreferenceSettings } from '@novu/headless';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,7 +10,6 @@ const useUpdateEmailNotificationPreferences = () => {
   const { headlessService } = useHeadlessService();
   const toast = useToast();
   const { t } = useTranslation('common');
-  const [mutatingTemplateId, setMutatingTemplateId] = useState<string | null>(null);
 
   const handleError = (err: unknown, templateId: string, isChecked: boolean) => {
     toast(t('error.general'), { status: ToastStatus.Error });
@@ -43,31 +40,34 @@ const useUpdateEmailNotificationPreferences = () => {
     preference: IUserPreferenceSettings,
     isChecked: boolean,
     onSuccess?: (templateId: string, isChecked: boolean) => void,
-  ) => {
+  ): Promise<void> => {
     const { template } = preference;
     // eslint-disable-next-line no-underscore-dangle
     const templateId = template._id;
-    setMutatingTemplateId(templateId);
 
     logValueChange('email_notification_settings', !isChecked, isChecked, {
       templateName: template.name,
     });
 
-    headlessService.updateUserPreferences({
-      templateId,
-      checked: isChecked,
-      channelType: ChannelTypeEnum.EMAIL,
-      listener: ({ isLoading }) => {
-        if (!isLoading) {
-          setMutatingTemplateId(null);
-        }
-      },
-      onSuccess: () => handleSuccess(templateId, isChecked, onSuccess),
-      onError: (err) => handleError(err, templateId, isChecked),
+    return new Promise<void>((resolve, reject) => {
+      headlessService.updateUserPreferences({
+        templateId,
+        checked: isChecked,
+        channelType: ChannelTypeEnum.EMAIL,
+        listener: () => {},
+        onSuccess: () => {
+          handleSuccess(templateId, isChecked, onSuccess);
+          resolve();
+        },
+        onError: (err) => {
+          handleError(err, templateId, isChecked);
+          reject(err);
+        },
+      });
     });
   };
 
-  return { updatePreference, mutatingTemplateId };
+  return { updatePreference };
 };
 
 export default useUpdateEmailNotificationPreferences;
