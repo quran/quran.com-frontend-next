@@ -104,6 +104,7 @@ const sanitizeVerse = (verse: Verse): Verse => ({
  * @param {string | undefined} params.customWidth - Custom width.
  * @param {string | undefined} params.customHeight - Custom height.
  * @param {boolean} params.showArabic - Show Arabic text.
+ * @param {boolean} params.mergeVerses - Merge verses into a single block.
  * @param {object | undefined} meta - Computed metadata.
  * @param {boolean} meta.hasAnyTranslations - Whether any translation exists for the fetched verses.
  * @param {string | undefined} meta.surahName - Resolved Surah name.
