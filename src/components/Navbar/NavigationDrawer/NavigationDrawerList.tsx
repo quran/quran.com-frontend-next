@@ -9,8 +9,8 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconAbout from '@/icons/about.svg';
-import IconBookmark from '@/icons/bookmark.svg';
-import IconHeadphones from '@/icons/headphones.svg';
+import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
+import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
@@ -57,19 +57,19 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     },
     {
       title: t('my-quran'),
-      icon: <IconBookmark />,
+      icon: <IconBookmarkFilled />,
       href: getProfileNavigationUrl(),
       eventName: 'navigation_drawer_my_quran',
     },
     {
       title: t('quran-radio'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RADIO_URL,
       eventName: 'navigation_drawer_quran_radio',
     },
     {
       title: t('reciters'),
-      icon: <IconHeadphones />,
+      icon: <IconHeadphonesFilled />,
       href: RECITERS_URL,
       eventName: 'navigation_drawer_reciters',
     },
