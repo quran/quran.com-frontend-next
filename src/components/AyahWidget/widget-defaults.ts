@@ -18,8 +18,7 @@ export const DEFAULTS = {
   reciterId: 7,
   translationId: 131,
   copySuccessDurationMs: 2000,
-  embedUrl: process.env.NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL || '',
-  embedOrigin: process.env.NEXT_PUBLIC_AYAH_WIDGET_ORIGIN || '',
+  embedUrl: process.env.NEXT_PUBLIC_EMBED_URL || '',
   iframeHeight: 500,
 } as const;
 

@@ -35,12 +35,8 @@ const normalizeHeight = (height: string): string => height?.trim() || String(DEF
 const resolveEmbedBaseUrl = (): string => {
   if (DEFAULTS.embedUrl) {
     if (/^https?:\/\//i.test(DEFAULTS.embedUrl)) return DEFAULTS.embedUrl;
-    const origin = DEFAULTS.embedOrigin || 'https://quran.com';
-    return `${origin.replace(/\/$/, '')}/${DEFAULTS.embedUrl.replace(/^\//, '')}`;
   }
-  if (DEFAULTS.embedOrigin) {
-    return `${DEFAULTS.embedOrigin.replace(/\/$/, '')}/embed/v1`;
-  }
+
   return 'https://quran.com/embed/v1';
 };
 

@@ -110,10 +110,7 @@ The embed is an iframe pointing to `/embed/v1` with query params.
 
 ### Environment variables
 
-- `NEXT_PUBLIC_AYAH_WIDGET_SCRIPT_URL`: overrides the iframe base URL (full URL or path). Default:
-  `https://quran.com/embed/v1`.
-- `NEXT_PUBLIC_AYAH_WIDGET_ORIGIN`: forces the iframe base origin (useful for local/testing if the
-  URL override is not set).
+- `NEXT_PUBLIC_EMBED_URL`: forces the iframe base URL (useful for local/testing)
 
 ### Query parameters
 
