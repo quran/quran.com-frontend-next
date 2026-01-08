@@ -205,6 +205,7 @@ type VerseApiParams = Record<string, unknown>;
 type WidgetTracking = {
   clientId?: string;
   referer?: string;
+  isWidget?: boolean;
 };
 
 /**
@@ -696,7 +697,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
     reciter,
     mushaf,
     wordByWordLocale,
-    tracking: { clientId: input.clientId, referer: input.referer },
+    tracking: { clientId: input.clientId, referer: input.referer, isWidget: true },
   });
 
   if (!rawVerses.length) {
