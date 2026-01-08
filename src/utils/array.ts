@@ -70,3 +70,14 @@ export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
 export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
   return Array.from(new Set(array1.concat(array2)));
 };
+
+/**
+ * Pick a random item from an array.
+ *
+ * @param {T[] | null | undefined} array Optional array that can be null or undefined
+ * @returns {T | null} Random item from array or null if array is null/undefined or empty
+ */
+export const pickRandom = <T>(array?: T[] | null): T | null => {
+  if (!array || array.length === 0) return null;
+  return array[Math.floor(Math.random() * array.length)];
+};

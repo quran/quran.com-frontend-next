@@ -10,8 +10,8 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link from '@/dls/Link/Link';
+import ArrowIcon from '@/icons/arrow.svg';
 import PlantIcon from '@/icons/plant.svg';
-import ArrowIcon from '@/public/icons/arrow.svg';
 import CirclesIcon from '@/public/icons/circles.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { QuranGoalStatus } from '@/types/auth/Goal';
@@ -58,13 +58,6 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
             }}
             i18nKey="reading-goal:x-days-streak"
           />
-          {!goal && (
-            <IconContainer
-              size={IconSize.Xsmall}
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-            />
-          )}
         </div>
       </Link>
       <div className={styles.container}>

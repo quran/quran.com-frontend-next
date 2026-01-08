@@ -125,3 +125,76 @@ export interface TafsirContentResponse extends BaseResponse {
     slug?: string;
   };
 }
+
+export interface ChapterContent {
+  id: number;
+  languageName: string;
+  text: string;
+}
+
+export interface ChapterSummaries {
+  summaries: ChapterContent[];
+}
+
+export interface ChapterMetadata {
+  chapterId: number;
+  suggestions: ChapterContent[];
+  nextChapter?: ChapterSummaries;
+  previousChapter?: ChapterSummaries;
+}
+
+export interface ChapterMetadataResponse extends BaseResponse {
+  chapterMetadata?: ChapterMetadata;
+}
+
+export interface CountryLanguagePreferenceResponse extends BaseResponse {
+  id: number;
+  country: string;
+  userDeviceLanguage: string;
+  defaultLocale?: string;
+  qrDefaultLocale?: string;
+  defaultMushaf: {
+    id: number;
+    name: string;
+  } | null;
+  defaultTranslations: {
+    id: number;
+    name: string;
+    authorName: string;
+    slug: string;
+    languageName: string;
+    translatedName: {
+      name: string;
+      languageName: string;
+    };
+  }[];
+  defaultTafsir: {
+    id: number;
+    name: string;
+    authorName: string;
+  } | null;
+  defaultWbwLanguage: {
+    id: number;
+    name: string;
+    isoCode: string;
+  } | null;
+  defaultReciter: {
+    id: number;
+    name: string;
+  } | null;
+  ayahReflectionsLanguages: {
+    id: number;
+    name: string;
+    isoCode: string;
+  }[];
+  learningPlanLanguages: {
+    id: number;
+    name: string;
+    isoCode: string;
+  }[];
+  qrReflectionLanguages: {
+    id: number;
+    name: string;
+    isoCode: string;
+  }[];
+}
