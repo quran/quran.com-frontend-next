@@ -1,24 +1,16 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import styles from './LanguageContainer.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useLanguageChange from '@/hooks/useLanguageChange';
 import IconArrowLeft from '@/icons/arrow-left.svg';
-import resetSettings from '@/redux/actions/reset-settings';
-import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
-import { addOrUpdateUserPreference } from '@/utils/auth/api';
-import { isLoggedIn } from '@/utils/auth/login';
-import { setLocaleCookie } from '@/utils/cookies';
-import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import i18nConfig from 'i18n.json';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;
 
@@ -29,61 +21,13 @@ interface LanguageContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...props }) => {
   const { t, lang } = useTranslation('common');
-  const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
-  const dispatch = useDispatch();
-  const toast = useToast();
+  const { isChangingLanguage, changingLocale, onLanguageChange } = useLanguageChange();
 
-  const handleLanguagePersistError = () => {
-    toast(t('error.pref-persist-fail'), {
-      status: ToastStatus.Warning,
-      actions: [
-        {
-          text: t('undo'),
-          primary: true,
-          onClick: async () => {
-            await setLanguage(lang);
-            setLocaleCookie(lang);
-          },
-        },
-        {
-          text: t('continue'),
-          primary: false,
-          onClick: () => {
-            // do nothing
-          },
-        },
-      ],
-    });
+  const handleLanguageChange = async (newLocale: string) => {
+    await onLanguageChange(newLocale, onBack);
   };
 
-  const onLanguageChange = async (newLocale: string) => {
-    if (newLocale === lang) {
-      onBack();
-      return;
-    }
-    try {
-      if (isUsingDefaultSettings) {
-        dispatch(resetSettings(newLocale));
-      }
-      logValueChange('locale', lang, newLocale);
-
-      await setLanguage(newLocale);
-      setLocaleCookie(newLocale);
-
-      if (isLoggedIn()) {
-        addOrUpdateUserPreference(
-          PreferenceGroup.LANGUAGE,
-          newLocale,
-          PreferenceGroup.LANGUAGE,
-        ).catch(handleLanguagePersistError);
-      }
-      onBack();
-    } catch (error) {
-      toast(t('error.language-change-failed'), {
-        status: ToastStatus.Error,
-      });
-    }
-  };
+  useHotkeys('Escape', () => {}, { enabled: isChangingLanguage });
 
   return (
     <div
@@ -104,10 +48,11 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       <div className={styles.languageHeader}>
         <Button
           prefix={<IconArrowLeft />}
-          variant={ButtonVariant.Compact}
+          variant={ButtonVariant.Ghost}
           size={ButtonSize.Small}
           onClick={onBack}
           className={styles.backButton}
+          isDisabled={isChangingLanguage}
         >
           <span id="language-dialog-title" className={styles.languageTitle}>
             {t('select-language')}
@@ -118,12 +63,15 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
         {locales.map((locale) => (
           <Button
             key={locale}
-            onClick={() => onLanguageChange(locale)}
+            onClick={() => handleLanguageChange(locale)}
             variant={ButtonVariant.Ghost}
             aria-current={locale === lang ? 'true' : undefined}
             className={classNames(styles.languageItem, {
               [styles.selected]: locale === lang,
             })}
+            data-testid={`language-item-${locale}`}
+            isLoading={isChangingLanguage && changingLocale === locale}
+            isDisabled={isChangingLanguage}
           >
             {getLocaleName(locale)}
           </Button>
