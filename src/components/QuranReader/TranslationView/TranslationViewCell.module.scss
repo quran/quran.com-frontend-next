@@ -141,9 +141,20 @@ $arabicVerseTopMargin: 2.75rem;
   align-items: center;
   gap: var(--spacing-medium);
   margin-block-end: var(--spacing-medium);
+  overflow-x: auto;
+  inline-size: 100%;
+  -webkit-overflow-scrolling: touch;
+
+  @include breakpoints.smallerThanTablet {
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
+    overflow-x: visible;
   }
 }
 
@@ -159,6 +170,7 @@ $arabicVerseTopMargin: 2.75rem;
   display: flex;
   block-size: var(--spacing-medium);
   align-items: center;
+  flex-shrink: 0;
 }
 
 .tabItem {
@@ -169,6 +181,7 @@ $arabicVerseTopMargin: 2.75rem;
   cursor: pointer;
   color: var(--color-grey-icons-new);
   transition: color 0.2s ease;
+  flex-shrink: 0;
 
   &:hover {
     color: var(--color-success-medium);

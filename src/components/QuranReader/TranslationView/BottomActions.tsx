@@ -10,6 +10,7 @@ import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/P
 import useIsMobile, { MobileSizeVariant } from '@/hooks/useIsMobile';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
+import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
@@ -18,6 +19,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
+  getVerseLessonNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
@@ -76,6 +78,8 @@ const BottomActions = ({
         setOpenedModal(ModalType.TAFSIR);
       } else if (tabType === TabId.REFLECTIONS) {
         setOpenedModal(ModalType.REFLECTION);
+      } else if (tabType === TabId.LESSONS) {
+        setOpenedModal(ModalType.LESSONS);
       } else if (tabType === TabId.ANSWERS) {
         setOpenedModal(ModalType.QUESTIONS);
       }
@@ -103,8 +107,15 @@ const BottomActions = ({
       condition: true,
     },
     {
+      id: TabId.LESSONS,
+      label: t('lessons'),
+      icon: <GraduationCapIcon />,
+      onClick: createTabHandler(TabId.LESSONS, () => getVerseLessonNavigationUrl(verseKey)),
+      condition: true,
+    },
+    {
       id: TabId.REFLECTIONS,
-      label: isMobile ? t('reflections') : t('reflections-and-lessons'),
+      label: t('reflections'),
       icon: <ChatIcon />,
       onClick: createTabHandler(TabId.REFLECTIONS, () => getVerseReflectionNavigationUrl(verseKey)),
       condition: true,
