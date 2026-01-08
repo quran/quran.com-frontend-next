@@ -173,6 +173,25 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
             valueOverride: '',
           },
     parseValue: (raw) => Number(raw),
+    // When ayah changes, ensure rangeEnd stays valid (must be > selectedAyah)
+    setValue: (value, prev, { rangeMeta }) => {
+      const nextAyah = Number(value);
+      const next = { ...prev, selectedAyah: nextAyah };
+
+      // If rangeEnd is now invalid (not greater than new selectedAyah), reset it
+      if (prev.rangeEnabled && prev.rangeEnd <= nextAyah) {
+        // Set to first valid option (selectedAyah + 1) if available
+        const newRangeEnd = nextAyah + 1;
+        const maxAyah = rangeMeta.rangeEndCap;
+        if (newRangeEnd <= maxAyah) {
+          return { ...next, rangeEnd: newRangeEnd };
+        }
+        // If no valid range possible, disable range mode
+        return { ...next, rangeEnabled: false };
+      }
+
+      return next;
+    },
   },
 
   rangeEnd: {
