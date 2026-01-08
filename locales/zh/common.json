@@ -140,6 +140,7 @@
     "decrease": "减少",
     "increase": "增加"
   },
+  "create-my-goal": "创建我的目标",
   "default-description": "古兰经翻译成多种语言，界面简单易用",
   "delete": "删除",
   "developers": "开发者",
@@ -414,6 +415,7 @@
     "by": "排序方式",
     "descending": "倒序"
   },
+  "stay-on-track": "🎯 保持专注！",
   "style": "风格",
   "submit": "提交",
   "subscribe": "订阅",

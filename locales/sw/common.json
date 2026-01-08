@@ -140,6 +140,7 @@
     "decrease": "Punguza",
     "increase": "Ongeza"
   },
+  "create-my-goal": "Unda Lengo Langu",
   "default-description": "Qur'ani iliyotarjumiwa katika lugha nyingi katika kiolesura rahisi na ya kawaida",
   "delete": "Futa",
   "developers": "Watengenezaji",
@@ -414,6 +415,7 @@
     "by": "Panga kwa",
     "descending": "Kushuka"
   },
+  "stay-on-track": "🎯 Endelea kufuatilia!",
   "style": "Mtindo",
   "submit": "Wasilisha",
   "subscribe": "Jisajili",

@@ -140,6 +140,7 @@
     "decrease": "Diminuer",
     "increase": "Augmenter"
   },
+  "create-my-goal": "Créer mon objectif",
   "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
   "delete": "Supprimer",
   "developers": "Développeurs",
@@ -414,6 +415,7 @@
     "by": "Trier par",
     "descending": "Décroissant"
   },
+  "stay-on-track": "🎯 Restez sur la bonne voie !",
   "style": "Style",
   "submit": "Soumettre",
   "subscribe": "S'abonner",
