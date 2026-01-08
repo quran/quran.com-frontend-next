@@ -66,10 +66,6 @@ const AyahWidgetBuilderPage = () => {
 
   const dispatch = useDispatch();
 
-  /* -------------------------------------------------------------------------- */
-  /*                           Base defaults from QDC                           */
-  /* -------------------------------------------------------------------------- */
-
   // Theme can be Light/Dark/Auto. If Auto, we resolve it to the current variant.
   const { themeVariant, settingsTheme } = useThemeDetector();
 
@@ -113,10 +109,6 @@ const AyahWidgetBuilderPage = () => {
       enableWbwTranslation: shouldEnableWbwTranslation,
     });
   }, [resolvedTheme, lang, mushafFromFont, shouldEnableWbwTranslation]);
-
-  /* -------------------------------------------------------------------------- */
-  /*                     Local preferences + override syncing                   */
-  /* -------------------------------------------------------------------------- */
 
   /**
    * Local preferences state = base defaults + persisted Redux overrides.
@@ -172,17 +164,9 @@ const AyahWidgetBuilderPage = () => {
     [dispatch],
   );
 
-  /* -------------------------------------------------------------------------- */
-  /*                              Remote data sources                           */
-  /* -------------------------------------------------------------------------- */
-
   const surahs = useAyahWidgetSurahs(preferences.locale);
   const translations = useAyahWidgetTranslations(preferences.locale);
   const reciters = useAyahWidgetReciters(undefined, DEFAULTS.reciterId);
-
-  /* -------------------------------------------------------------------------- */
-  /*                                  UI state                                  */
-  /* -------------------------------------------------------------------------- */
 
   const [translationSearch, setTranslationSearch] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
@@ -198,10 +182,6 @@ const AyahWidgetBuilderPage = () => {
    * Live preview ref (the hook handles rendering/re-rendering into a DOM node).
    */
   const previewRef = useAyahWidgetPreview({ preferences, translationIds: translationIdsCsv });
-
-  /* -------------------------------------------------------------------------- */
-  /*                    Initialize translations (from QDC prefs)                 */
-  /* -------------------------------------------------------------------------- */
 
   /**
    * When translations are loaded, initialize selection from QDC user's current settings
@@ -258,10 +238,6 @@ const AyahWidgetBuilderPage = () => {
     });
   }, [translations, selectedTranslationIdsFromRedux, widgetOverrides]);
 
-  /* -------------------------------------------------------------------------- */
-  /*                         Validate Surah/Ayah selection                       */
-  /* -------------------------------------------------------------------------- */
-
   /**
    * If the user changes Surah, ensure the selected Ayah remains valid.
    */
@@ -278,10 +254,6 @@ const AyahWidgetBuilderPage = () => {
       return { ...prev, selectedAyah: nextAyah };
     });
   }, [surahs, preferences.selectedSurah]);
-
-  /* -------------------------------------------------------------------------- */
-  /*                              Derived UI values                             */
-  /* -------------------------------------------------------------------------- */
 
   /**
    * Translations grouped by language, filtered by user search.
@@ -316,10 +288,6 @@ const AyahWidgetBuilderPage = () => {
   const selectedTranslationIds = useMemo(() => {
     return new Set<number>(preferences.translations.map((tr) => tr.id));
   }, [preferences.translations]);
-
-  /* -------------------------------------------------------------------------- */
-  /*                                 Handlers                                   */
-  /* -------------------------------------------------------------------------- */
 
   /**
    * Copy the embed snippet to clipboard and show a short success state.
@@ -364,10 +332,6 @@ const AyahWidgetBuilderPage = () => {
     },
     [setUserPreferences],
   );
-
-  /* -------------------------------------------------------------------------- */
-  /*                                   Render                                   */
-  /* -------------------------------------------------------------------------- */
 
   return (
     <>

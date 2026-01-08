@@ -301,7 +301,7 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
       <div
         style={{
           padding: contentPadding,
-          marginBottom: 16,
+          marginBottom: hasTranslations ? 16 : 0,
         }}
         data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
         data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
