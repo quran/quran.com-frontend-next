@@ -42,7 +42,7 @@ const VerseActionEmbedWidget = ({
     dispatch(updateAyahWidgetOverrides({ selectedSurah: surah, selectedAyah: ayah }));
 
     // Navigate to widget builder (Redux will pre-fill the verse)
-    router.push('/ayah-widget');
+    router.push('/embed');
 
     if (onActionTriggered) {
       onActionTriggered();

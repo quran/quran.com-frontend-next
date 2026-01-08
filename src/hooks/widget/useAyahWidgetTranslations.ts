@@ -17,7 +17,7 @@ const DEFAULT_LOCALE = 'en';
  * @returns {AvailableTranslation[]} list of available translations.
  */
 const useAyahWidgetTranslations = (locale: string = DEFAULT_LOCALE): AvailableTranslation[] => {
-  const { t } = useTranslation('ayah-widget');
+  const { t } = useTranslation('embed');
   const toast = useToast();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const hasLoadedRef = useRef(false);

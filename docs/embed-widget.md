@@ -13,7 +13,7 @@ can also be configured through the builder page inside this app.
 
 | File                                                | Purpose                                       |
 | --------------------------------------------------- | --------------------------------------------- |
-| `src/pages/ayah-widget.tsx`                         | Builder page UI                               |
+| `src/pages/embed/index.tsx`                         | Builder page UI                               |
 | `src/pages/embed/v1.tsx`                            | Embed page (iframe content)                   |
 | `src/components/AyahWidget/widget-config.ts`        | Main config entry (re-exports modules)        |
 | `src/components/AyahWidget/widget-types.ts`         | Type definitions                              |
@@ -69,7 +69,7 @@ The builder maintains two "sources" of defaults:
 - Site settings (theme, locale, mushaf, WBW)
 - Previously saved widget overrides (Redux)
 
-Flow in `src/pages/ayah-widget.tsx`:
+Flow in `src/pages/embed/index.tsx`:
 
 1. Build base preferences from site settings (`getBasePreferences`).
 2. Apply stored widget overrides (`applyWidgetOverrides`).
@@ -79,7 +79,7 @@ This means:
 
 - First time visit uses site defaults.
 - Any user change becomes an override.
-- Returning to `/ayah-widget` uses overrides first, otherwise site defaults.
+- Returning to `/embed` uses overrides first, otherwise site defaults.
 
 ### Translations behavior
 
@@ -166,7 +166,7 @@ derived from `i18n.json`.
 If you add new labels:
 
 - Add keys in translation JSONs
-- Update `WidgetLabels` in `types/ayah-widget.ts` if needed
+- Update `WidgetLabels` in `types/Embed.ts` if needed
 - Ensure the embed page returns the new labels
 
 ## Adding a new widget option

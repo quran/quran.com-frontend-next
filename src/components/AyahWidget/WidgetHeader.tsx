@@ -4,7 +4,7 @@ import React from 'react';
 import CopyIcon from '@/icons/copy.svg';
 import PlayIcon from '@/icons/play-outline.svg';
 import ShareIcon from '@/icons/share.svg';
-import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
+import type { WidgetOptions, WidgetColors } from '@/types/Embed';
 import { isRTLLocale, toLocalizedNumber } from '@/utils/locale';
 import type Verse from 'types/Verse';
 

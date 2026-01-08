@@ -14,8 +14,8 @@ import WidgetContent from '@/components/AyahWidget/WidgetContent';
 import WidgetFooterActions from '@/components/AyahWidget/WidgetFooterActions';
 import WidgetHeader from '@/components/AyahWidget/WidgetHeader';
 import useQcfFont from '@/hooks/useQcfFont';
-import { getQuranFontForMushaf } from 'types/ayah-widget';
-import type { WidgetOptions, WidgetColors } from 'types/ayah-widget';
+import { getQuranFontForMushaf } from '@/types/Embed';
+import type { WidgetOptions, WidgetColors } from '@/types/Embed';
 import type Verse from 'types/Verse';
 
 type Props = {

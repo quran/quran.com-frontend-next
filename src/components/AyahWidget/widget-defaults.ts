@@ -5,7 +5,7 @@
 import type { BasePreferenceContext, Preferences } from './widget-types';
 
 import ThemeType from '@/redux/types/ThemeType';
-import type { MushafType } from '@/types/ayah-widget';
+import type { MushafType } from '@/types/Embed';
 import { QuranFont } from '@/types/QuranReader';
 
 /**

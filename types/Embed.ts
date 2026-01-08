@@ -1,144 +1,127 @@
 import { QuranFont } from './QuranReader';
 
+import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
+
+export type MushafType = 'qpc' | 'kfgqpc_v1' | 'kfgqpc_v2' | 'indopak' | 'tajweed';
+
 /**
- * Embed widget configuration types for the Quran.com embed feature.
- * Allows third-party websites to embed Quran verses with translations.
+ * Type guard to check if a value is a valid MushafType.
+ * @param {unknown} value The value to check.
+ * @returns {boolean} True if the value is a valid MushafType.
  */
-
-/** Supported embed themes */
-export enum EmbedTheme {
-  Light = 'light',
-  Dark = 'dark',
-  Auto = 'auto',
-}
-
-/** Embed text alignment options */
-export enum EmbedTextAlignment {
-  Start = 'start',
-  Center = 'center',
-  End = 'end',
-}
-
-/** Supported Quran fonts for embed */
-export enum EmbedQuranFont {
-  MadaniV1 = 'v1',
-  MadaniV2 = 'v2',
-  Uthmani = 'uthmani',
-  IndoPak = 'indopak',
-}
-
-/** Font size options for embed */
-export enum EmbedFontSize {
-  Small = 'small',
-  Normal = 'normal',
-  Large = 'large',
-  XLarge = 'xlarge',
-}
-
-/** Map embed font values to QuranFont enum */
-export const EmbedFontToQuranFont: Record<EmbedQuranFont, QuranFont> = {
-  [EmbedQuranFont.MadaniV1]: QuranFont.MadaniV1,
-  [EmbedQuranFont.MadaniV2]: QuranFont.MadaniV2,
-  [EmbedQuranFont.Uthmani]: QuranFont.Uthmani,
-  [EmbedQuranFont.IndoPak]: QuranFont.IndoPak,
+export const isMushafType = (value: unknown): value is MushafType => {
+  return (
+    typeof value === 'string' &&
+    ['qpc', 'kfgqpc_v1', 'kfgqpc_v2', 'indopak', 'tajweed'].includes(value)
+  );
 };
 
 /**
- * Query parameters accepted by the embed endpoint.
- * Example: /embed/v1?verses=1:1-7&translations=131,85&theme=light&font=v2
+ * Gets the Quran font for a specific mushaf.
+ * @param {MushafType} mushaf The mushaf type.
+ * @returns {QuranFont} The corresponding Quran font.
  */
-export interface EmbedQueryParams {
-  /** Verse range in format "chapter:from-to" or single verse "chapter:verse" */
-  verses: string;
-  /** Comma-separated translation IDs */
-  translations?: string;
-  /** Theme for the embed widget */
-  theme?: string;
-  /** Locale/language code */
-  locale?: string;
-  /** Analytics ID for tracking (optional) */
-  aid?: string;
-  /** Whether to show the verse reference (default: true) */
-  showReference?: string;
-  /** Whether to show the translation author name (default: true) */
-  showTranslationName?: string;
-  /** Text alignment for the content */
-  textAlign?: string;
-  /** Border radius in pixels */
-  borderRadius?: string;
-  /** Quran font style (v1, v2, uthmani, indopak) */
-  font?: string;
-  /** Font size scale (small, normal, large, xlarge) */
-  fontSize?: string;
-  /** Enable audio player */
-  audio?: string;
-  /** Reciter ID for audio */
-  reciter?: string;
-  /** Auto-play audio on load */
-  autoPlay?: string;
-  /** Enable word-by-word translation */
-  wbw?: string;
-  /** Word-by-word translation locale */
-  wbwLocale?: string;
-  /** Show word-by-word transliteration */
-  wbwTransliteration?: string;
-  /** Show tafsir button */
-  tafsir?: string;
-}
+export const getQuranFontForMushaf = (mushaf: MushafType): QuranFont => {
+  switch (mushaf) {
+    case 'indopak':
+      return QuranFont.IndoPak;
+    case 'kfgqpc_v1':
+      return QuranFont.MadaniV1;
+    case 'kfgqpc_v2':
+      return QuranFont.MadaniV2;
+    case 'tajweed':
+      return QuranFont.TajweedV4;
+    default:
+      return QuranFont.QPCHafs;
+  }
+};
 
 /**
- * Parsed and validated embed configuration.
+ * Options for configuring the Ayah Widget.
  */
-export interface EmbedConfig {
-  chapterId: number;
-  fromVerse: number;
-  toVerse: number;
-  translations: number[];
-  theme: EmbedTheme;
-  locale: string;
-  analyticsId: string | null;
-  showReference: boolean;
-  showTranslationName: boolean;
-  textAlign: EmbedTextAlignment;
-  borderRadius: number;
-  /** The Quran font to use for Arabic text */
-  quranFont: QuranFont;
-  /** Font size scale */
-  fontSize: EmbedFontSize;
-  /** Enable audio player */
-  showAudio: boolean;
-  /** Reciter ID for audio playback */
-  reciterId: number;
-  /** Auto-play audio on load */
-  autoPlay: boolean;
-  /** Enable word-by-word translation */
-  showWordByWord: boolean;
-  /** Word-by-word translation locale */
-  wbwLocale: string;
-  /** Show word-by-word transliteration */
-  showWbwTransliteration: boolean;
-  /** Show tafsir button */
-  showTafsir: boolean;
-}
+export type WidgetOptions = {
+  // Should the widget have a play button
+  enableAudio: boolean;
 
-/**
- * Analytics event data collected for embed usage tracking.
- */
-export interface EmbedAnalyticsEvent {
-  /** Type of event */
-  type: 'load' | 'error';
-  /** Referer domain */
-  referer?: string;
-  /** Analytics ID provided by embedder */
-  analyticsId?: string;
-  /** Verses being viewed */
-  verses: string;
-  /** Translations selected */
-  translations: number[];
-  /** Locale used */
+  // Should the widget display inline word-by-word translations
+  enableWbw: boolean;
+
+  // Should the widget display inline word-by-word transliteration
+  enableWbwTransliteration: boolean;
+
+  // The theme of the widget
+  theme: ThemeTypeVariant;
+
+  // The type of Mushaf to display
+  mushaf: MushafType;
+
+  // Should the widget display translator names
+  showTranslatorNames: boolean;
+
+  // Should the arabic verse be rendered
+  showArabic: boolean;
+
+  // Inclusive ending verse number when rendering a range
+  rangeEnd?: number;
+
+  // Should verses in a range be merged (Arabic together, then translations together)
+  mergeVerses?: boolean;
+
+  // Should the widget display tafsirs button
+  showTafsirs: boolean;
+
+  // Should the widget display reflections button
+  showReflections: boolean;
+
+  // Should the widget display answers button
+  showAnswers: boolean;
+
+  // Locale code for widget labels (e.g. "en", "fr")
   locale: string;
-  /** Theme applied */
-  theme: EmbedTheme;
-  /** Timestamp */
-  timestamp: number;
-}
+
+  // Localized labels for the widget
+  labels: WidgetLabels;
+
+  // Ayah identifier in S:V format (e.g. "33:56")
+  ayah: string;
+
+  // Whether any translations exist for the current ayah
+  hasAnyTranslations: boolean;
+
+  // Surah name to show in the header
+  surahName?: string;
+
+  // Custom width to constrain the widget (e.g. "600px" or "100%")
+  customWidth?: string;
+
+  // Custom height to constrain the widget (e.g. "500px")
+  customHeight?: string;
+
+  // Audio URL for playback
+  audioUrl?: string;
+
+  // Start time (seconds) for the selected ayah audio segment
+  audioStart?: number;
+
+  // End time (seconds) for the selected ayah audio segment
+  audioEnd?: number;
+};
+
+export type WidgetColors = {
+  borderColor: string;
+  linkColor: string;
+  secondaryBg: string;
+  secondaryText: string;
+  hoverBg: string;
+  iconColor: string;
+  bgColor: string;
+  textColor: string;
+};
+
+export type WidgetLabels = {
+  surah: string;
+  verse: string;
+  tafsirs: string;
+  reflectionsAndLessons: string;
+  answers: string;
+};

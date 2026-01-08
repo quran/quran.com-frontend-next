@@ -1,8 +1,3 @@
-/**
- * Shared query parameter parsing utilities.
- * Used by both /embed/v1 and /api/ayah-widget endpoints.
- */
-
 import { WidgetInputError } from '@/components/AyahWidget/getAyahWidgetData';
 
 export type VerseRangeParam = {

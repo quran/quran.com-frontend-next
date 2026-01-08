@@ -17,7 +17,7 @@ const DEFAULT_LOCALE = 'en';
  * @returns {Chapter[]} list of surahs sorted by id.
  */
 const useAyahWidgetSurahs = (locale: string = DEFAULT_LOCALE): Chapter[] => {
-  const { t } = useTranslation('ayah-widget');
+  const { t } = useTranslation('embed');
   const [surahs, setSurahs] = useState<Chapter[]>([]);
   const toast = useToast();
   const hasLoadedRef = useRef(false);

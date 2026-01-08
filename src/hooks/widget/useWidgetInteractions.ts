@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useEffect } from 'react';
 
-import type { WidgetOptions } from '@/types/ayah-widget';
+import type { WidgetOptions } from '@/types/Embed';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const WIDGET_ROOT_SELECTOR = '.quran-widget';

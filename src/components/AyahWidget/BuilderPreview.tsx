@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from '@/styles/ayah-widget.module.scss';
+import styles from '@/styles/embed.module.scss';
 
 type Props = {
   previewRef: React.RefObject<HTMLDivElement>;
@@ -17,7 +17,7 @@ const BuilderPreview = ({
   isCopySuccess: copySuccess,
   onCopy,
 }: Props) => {
-  const { t } = useTranslation('ayah-widget');
+  const { t } = useTranslation('embed');
   return (
     <div className={styles.previewColumn}>
       <div className={styles.previewPanel}>

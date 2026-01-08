@@ -20,8 +20,8 @@ import {
 import QuranWidget from '@/components/AyahWidget/QuranWidget';
 import useWidgetInteractions from '@/hooks/widget/useWidgetInteractions';
 import ThemeType from '@/redux/types/ThemeType';
-import type { MushafType, WidgetOptions } from '@/types/ayah-widget';
-import { isMushafType } from '@/types/ayah-widget';
+import type { MushafType, WidgetOptions } from '@/types/Embed';
+import { isMushafType } from '@/types/Embed';
 import type Verse from 'types/Verse';
 
 type EmbedProps = {

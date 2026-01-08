@@ -1,6 +1,6 @@
 import ThemeType from '@/redux/types/ThemeType';
+import type { WidgetOptions, WidgetColors } from '@/types/Embed';
 import { getVerseWords } from '@/utils/verse';
-import type { WidgetOptions, WidgetColors } from 'types/ayah-widget';
 import type Verse from 'types/Verse';
 
 /** Default font scale for widget (medium size). */

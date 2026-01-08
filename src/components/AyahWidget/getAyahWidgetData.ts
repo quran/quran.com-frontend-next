@@ -8,7 +8,8 @@ import { fetcher, getChapterAudioData } from '@/api';
 import { logDebug } from '@/lib/newrelic';
 import ThemeType from '@/redux/types/ThemeType';
 import type ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
-import type { MushafType, WidgetLabels, WidgetOptions } from '@/types/ayah-widget';
+import type { MushafType, WidgetLabels, WidgetOptions } from '@/types/Embed';
+import { getQuranFontForMushaf } from '@/types/Embed';
 import { MushafLines } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
@@ -25,7 +26,6 @@ import type {
   WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import type AvailableTranslation from 'types/AvailableTranslation';
-import { getQuranFontForMushaf } from 'types/ayah-widget';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
 

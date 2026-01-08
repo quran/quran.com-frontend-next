@@ -4,9 +4,9 @@ import { groupTranslationsByTranslator, WIDGET_FONT_SCALE } from './widget-utils
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
+import type { WidgetOptions } from '@/types/Embed';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { getVerseWords } from '@/utils/verse';
-import type { WidgetOptions } from 'types/ayah-widget';
 import type Verse from 'types/Verse';
 
 type Props = {

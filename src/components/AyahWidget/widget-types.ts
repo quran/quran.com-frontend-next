@@ -1,5 +1,5 @@
 import type ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
-import type { MushafType } from '@/types/ayah-widget';
+import type { MushafType } from '@/types/Embed';
 import type AvailableTranslation from 'types/AvailableTranslation';
 
 /**

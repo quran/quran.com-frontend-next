@@ -3,7 +3,7 @@ import React from 'react';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
-import type { WidgetOptions, WidgetColors } from '@/types/ayah-widget';
+import type { WidgetOptions, WidgetColors } from '@/types/Embed';
 import { isRTLLocale } from '@/utils/locale';
 import type Verse from 'types/Verse';
 

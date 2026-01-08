@@ -15,7 +15,7 @@ import {
   type WidgetSelectOptions,
 } from './widget-config';
 
-import styles from '@/styles/ayah-widget.module.scss';
+import styles from '@/styles/embed.module.scss';
 import type Chapter from '@/types/Chapter';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Reciter from 'types/Reciter';
@@ -61,7 +61,7 @@ const BuilderConfigForm = ({
   toggleTranslation,
   reciters,
 }: Props): JSX.Element => {
-  const { t } = useTranslation('ayah-widget');
+  const { t } = useTranslation('embed');
 
   /**
    * Locale options are static for the session (read from i18n config).

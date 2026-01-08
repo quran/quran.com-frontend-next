@@ -3,8 +3,8 @@ import React from 'react';
 import MergedVersesContent from './MergedVersesContent';
 import VerseBlock from './VerseBlock';
 
+import type { WidgetOptions } from '@/types/Embed';
 import { QuranFont } from '@/types/QuranReader';
-import type { WidgetOptions } from 'types/ayah-widget';
 import type Verse from 'types/Verse';
 
 type Props = {

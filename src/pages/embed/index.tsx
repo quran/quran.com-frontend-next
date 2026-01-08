@@ -38,7 +38,7 @@ import { selectReadingPreferences } from '@/redux/slices/QuranReader/readingPref
 import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ThemeType from '@/redux/types/ThemeType';
-import styles from '@/styles/ayah-widget.module.scss';
+import styles from '@/styles/embed.module.scss';
 import { WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import type AvailableTranslation from 'types/AvailableTranslation';
@@ -62,7 +62,7 @@ type SetPreferences = Dispatch<SetStateAction<Preferences>>;
  * @returns {JSX.Element} The Ayah Widget Builder page.
  */
 const AyahWidgetBuilderPage = () => {
-  const { t, lang } = useTranslation('ayah-widget');
+  const { t, lang } = useTranslation('embed');
 
   const dispatch = useDispatch();
 
@@ -98,6 +98,13 @@ const AyahWidgetBuilderPage = () => {
   }, [readingPreferences.wordByWordContentType]);
 
   /**
+   * Enable WBW transliteration by default if reading preferences include it.
+   */
+  const shouldEnableWbwTransliteration = useMemo(() => {
+    return readingPreferences.wordByWordContentType.includes(WordByWordType.Transliteration);
+  }, [readingPreferences.wordByWordContentType]);
+
+  /**
    * Base preferences = QDC-derived defaults (theme/locale/mushaf/wbw, etc.)
    * Note: this does NOT include persisted user overrides from the widget builder.
    */
@@ -107,8 +114,15 @@ const AyahWidgetBuilderPage = () => {
       locale: lang,
       mushaf: mushafFromFont,
       enableWbwTranslation: shouldEnableWbwTranslation,
+      enableWbwTransliteration: shouldEnableWbwTransliteration,
     });
-  }, [resolvedTheme, lang, mushafFromFont, shouldEnableWbwTranslation]);
+  }, [
+    resolvedTheme,
+    lang,
+    mushafFromFont,
+    shouldEnableWbwTranslation,
+    shouldEnableWbwTransliteration,
+  ]);
 
   /**
    * Local preferences state = base defaults + persisted Redux overrides.

@@ -26,8 +26,8 @@ test.describe('Widget defaults from user settings', () => {
       await settingsBody.getByText('Dr. Mustafa Khattab').click(); // uncheck default
       await settingsBody.getByText('Muhammad Hamidullah').click();
 
-      // 4. Go to /ayah-widget
-      await page.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      // 4. Go to /embed
+      await page.goto('/embed', { waitUntil: 'networkidle' });
       const widgetFrame = page.frameLocator('iframe');
       await expect(widgetFrame.locator('.quran-widget')).toBeVisible();
 
@@ -62,8 +62,8 @@ test.describe('Widget defaults from user settings', () => {
 
       await page.waitForTimeout(500); // wait for language to fully propagate
 
-      // 3. Go to /ayah-widget (should stay in French)
-      await page.goto('/fr/ayah-widget', { waitUntil: 'networkidle' });
+      // 3. Go to /embed (should stay in French)
+      await page.goto('/fr/embed', { waitUntil: 'networkidle' });
       const widgetFrame = page.frameLocator('iframe');
       await expect(widgetFrame.locator('.quran-widget')).toBeVisible();
 
@@ -92,8 +92,8 @@ test.describe('Widget defaults from user settings', () => {
       await settingsBody.getByText('Dr. Mustafa Khattab').click(); // uncheck default
       await settingsBody.getByText('Muhammad Hamidullah').click();
 
-      // 3. Go to /ayah-widget and set verse 50
-      await page.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      // 3. Go to /embed and set verse 50
+      await page.goto('/embed', { waitUntil: 'networkidle' });
       const previewFrame = page.frameLocator('iframe');
       await expect(previewFrame.locator('.quran-widget')).toBeVisible();
       await page.locator('#ayah-select').selectOption('50');
@@ -105,9 +105,9 @@ test.describe('Widget defaults from user settings', () => {
       await expect(page.locator('#mushaf-select')).toHaveValue('tajweed');
       await expect(page.locator('#ayah-select')).toHaveValue('50');
 
-      // 5. Open a new tab with the same Redux store and go to /ayah-widget
+      // 5. Open a new tab with the same Redux store and go to /embed
       const newPage = await context.newPage();
-      await newPage.goto('/ayah-widget', { waitUntil: 'networkidle' });
+      await newPage.goto('/embed', { waitUntil: 'networkidle' });
       const newTabFrame = newPage.frameLocator('iframe');
       await expect(newTabFrame.locator('.quran-widget')).toBeVisible();
 
