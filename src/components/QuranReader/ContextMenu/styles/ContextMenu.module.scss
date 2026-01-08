@@ -84,6 +84,12 @@ $pixel: 1px;
   }
 }
 
+.pageInfoSectionDesktop {
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
 .pageInfoCustomContainerMobileScrolled {
   display: flex;
   align-items: center;
@@ -127,6 +133,21 @@ $pixel: 1px;
   justify-content: space-between;
   flex-direction: column;
   inline-size: 100%;
+}
+
+.mobileNavRow {
+  @include breakpoints.smallerThanTablet {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.mobileSettingsButton {
+  display: none;
+
+  @include breakpoints.smallerThanTablet {
+    display: inline-flex;
+  }
 }
 
 .pageInfoContainer {

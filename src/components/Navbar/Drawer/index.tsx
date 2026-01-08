@@ -19,7 +19,7 @@ import {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
-  setIsVisible,
+  setLockVisibilityState,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -125,11 +125,16 @@ const Drawer: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    // Keep nav bar visible when drawer is open
+    // Lock navbar visibility state when drawer is open to prevent scroll-based changes
+    // Unlock when drawer is closed to restore normal scroll behavior
     if (isOpen) {
-      dispatch(setIsVisible(true));
+      dispatch(setLockVisibilityState(true));
+    } else {
+      dispatch(setLockVisibilityState(false));
     }
+  }, [dispatch, isOpen]);
 
+  useEffect(() => {
     // Hide navbar after successful navigation
     const handleRouteChange = () => {
       if (isOpen && closeOnNavigation) {
@@ -143,7 +148,7 @@ const Drawer: React.FC<Props> = ({
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,

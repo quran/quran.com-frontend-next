@@ -87,19 +87,21 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       <div className={styles.sectionsContainer}>
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
-          <div className={styles.row}>
+          <div className={classNames(styles.row, { [styles.mobileNavRow]: showNavbar })}>
             <ChapterNavigation
               chapterName={chapterData.transliteratedName}
               isSidebarNavigationVisible={isSidebarNavigationVisible}
               onToggleSidebar={handleSidebarToggle}
               chapterNumber={getChapterNumberFromKey(verseKey)}
             />
+            {/* Settings button for mobile when navbar is visible */}
+            {showNavbar && <SettingsButton className={styles.mobileSettingsButton} />}
           </div>
         </div>
 
         {/* Page Information Section (default, not mobile scrolled view) */}
         {!isMobileScrolledView && (
-          <div className={classNames(styles.section)}>
+          <div className={classNames(styles.section, styles.pageInfoSectionDesktop)}>
             <div className={styles.row}>
               <p className={styles.alignCenter} />
               <PageInfo
