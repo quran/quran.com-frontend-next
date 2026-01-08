@@ -8,10 +8,12 @@ import styles from './ReadingGoalCardContent.module.scss';
 
 import CircularProgressbar from '@/dls/CircularProgress';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import Link from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { QuranGoalStatus } from '@/types/auth/Goal';
 import { toLocalizedNumber } from '@/utils/locale';
+import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 export type ReadingGoalCardContentProps = {
   goal?: QuranGoalStatus | null;
@@ -24,6 +26,7 @@ export type ReadingGoalCardContentProps = {
     progressbarText?: string;
     statusContainer?: string;
   };
+  onArrowClick?: () => void;
 };
 
 /**
@@ -39,6 +42,7 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
   shouldShowArrow,
   className,
   classes,
+  onArrowClick,
 }) => {
   const { lang } = useTranslation();
 
@@ -70,15 +74,26 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
               percent={goal.progress.percent}
             />
           </div>
-          {shouldShowArrow && (
-            <IconContainer
-              size={IconSize.Xsmall}
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              className={styles.goalArrowIcon}
-              aria-hidden="true"
-            />
-          )}
+          {shouldShowArrow &&
+            (onArrowClick ? (
+              <Link href={getReadingGoalProgressNavigationUrl()} onClick={onArrowClick}>
+                <IconContainer
+                  size={IconSize.Xsmall}
+                  icon={<ArrowIcon />}
+                  shouldForceSetColors={false}
+                  className={styles.goalArrowIcon}
+                  aria-hidden="true"
+                />
+              </Link>
+            ) : (
+              <IconContainer
+                size={IconSize.Xsmall}
+                icon={<ArrowIcon />}
+                shouldForceSetColors={false}
+                className={styles.goalArrowIcon}
+                aria-hidden="true"
+              />
+            ))}
         </div>
       ) : (
         goalCta && <div className={styles.goalCtaSection}>{goalCta}</div>
