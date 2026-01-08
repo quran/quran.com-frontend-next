@@ -55,6 +55,7 @@
   "checkboxes": {
     "audio": "Enable audio playback",
     "wordByWord": "Enable word-by-word translation",
+    "wordByWordTransliteration": "Enable word-by-word transliteration",
     "verseRange": "Enable verse range",
     "mergeVerses": "Merge verses (inline display)",
     "showArabic": "Show Arabic verse",

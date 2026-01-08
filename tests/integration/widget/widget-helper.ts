@@ -8,6 +8,7 @@ type WidgetParams = {
   reciterId?: string | number | null;
   enableAudio?: boolean;
   enableWbw?: boolean;
+  enableWbwTransliteration?: boolean;
   theme?: string;
   mushaf?: string;
   showTranslatorNames?: boolean;
@@ -42,6 +43,7 @@ export const renderWidgetPage = async (
     reciterId = 7,
     enableAudio = true,
     enableWbw = false,
+    enableWbwTransliteration = false,
     theme = 'light',
     mushaf = 'qpc',
     showTranslatorNames = false,
@@ -93,6 +95,7 @@ export const renderWidgetPage = async (
   url.searchParams.set('mushaf', mushaf);
   url.searchParams.set('locale', locale);
   url.searchParams.set('wbw', String(enableWbw));
+  url.searchParams.set('wbwTransliteration', String(enableWbwTransliteration));
   url.searchParams.set('showTranslationName', String(showTranslatorNames));
   url.searchParams.set('showArabic', String(showArabic));
   url.searchParams.set('tafsir', String(showTafsirs));

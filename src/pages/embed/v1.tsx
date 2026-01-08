@@ -98,6 +98,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
     const reciter = parseString(query.reciter) || DEFAULT_RECITER;
     const enableAudio = parseBool(query.audio, true);
     const enableWbw = parseBool(query.wbw);
+    const enableWbwTransliteration = parseBool(query.wbwTransliteration);
 
     const themeParam = parseString(query.theme);
     const theme: WidgetOptions['theme'] =
@@ -138,6 +139,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       reciter,
       enableAudio,
       enableWbw,
+      enableWbwTransliteration,
       theme,
       mushaf,
       showTranslatorNames,

@@ -14,6 +14,7 @@ export type Preferences = {
   mushaf: MushafType;
   enableAudio: boolean;
   enableWbwTranslation: boolean;
+  enableWbwTransliteration: boolean;
   showTranslatorName: boolean;
   showTafsirs: boolean;
   showReflections: boolean;
@@ -47,6 +48,7 @@ export type BasePreferenceContext = {
   locale: string;
   mushaf: MushafType;
   enableWbwTranslation: boolean;
+  enableWbwTransliteration: boolean;
 };
 
 export type RangeMeta = {

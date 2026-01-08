@@ -35,6 +35,7 @@ export const INITIAL_PREFERENCES: Preferences = {
   mushaf: 'qpc',
   enableAudio: true,
   enableWbwTranslation: false,
+  enableWbwTransliteration: false,
   showTranslatorName: false,
   showTafsirs: true,
   showReflections: true,
@@ -85,4 +86,5 @@ export const getBasePreferences = (context: BasePreferenceContext): Preferences 
   locale: context.locale,
   mushaf: context.mushaf,
   enableWbwTranslation: context.enableWbwTranslation,
+  enableWbwTransliteration: context.enableWbwTransliteration,
 });

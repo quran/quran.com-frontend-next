@@ -118,6 +118,7 @@ const buildWidgetOptions = (
   params: {
     enableAudio: boolean;
     enableWbw: boolean;
+    enableWbwTransliteration: boolean;
     rangeEnd?: number;
     theme: ThemeTypeVariant;
     mushaf: MushafType;
@@ -142,6 +143,7 @@ const buildWidgetOptions = (
 ): WidgetOptions => ({
   enableAudio: params.enableAudio,
   enableWbw: params.enableWbw,
+  enableWbwTransliteration: params.enableWbwTransliteration,
   theme: params.theme,
   mushaf: params.mushaf,
   showTranslatorNames: params.showTranslatorNames,
@@ -278,6 +280,7 @@ export type AyahWidgetDataInput = {
   reciter?: string;
   enableAudio?: boolean;
   enableWbw?: boolean;
+  enableWbwTransliteration?: boolean;
   theme?: ThemeTypeVariant;
   mushaf?: MushafType;
   showTranslatorNames?: boolean;
@@ -647,6 +650,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
 
   const enableAudio: boolean = input.enableAudio ?? true;
   const enableWbw: boolean = input.enableWbw ?? false;
+  const enableWbwTransliteration: boolean = input.enableWbwTransliteration ?? false;
 
   const theme: ThemeTypeVariant = input.theme ?? ThemeType.Light;
   const mushaf: MushafType = input.mushaf ?? 'qpc';
@@ -729,6 +733,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
     {
       enableAudio,
       enableWbw,
+      enableWbwTransliteration,
       theme,
       mushaf,
       showTranslatorNames,

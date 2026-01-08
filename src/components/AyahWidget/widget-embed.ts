@@ -111,6 +111,7 @@ export const buildEmbedIframeSrc = (
   setParam('mushaf', preferences.mushaf, 'qpc');
   setParam('locale', preferences.locale, 'en');
   setParam('wbw', String(preferences.enableWbwTranslation), 'false');
+  setParam('wbwTransliteration', String(preferences.enableWbwTransliteration), 'false');
   setParam('showTranslationName', String(preferences.showTranslatorName), 'false');
   setParam('showArabic', String(preferences.showArabic), 'true');
   setParam('tafsir', String(preferences.showTafsirs), 'true');

@@ -46,6 +46,9 @@ export type WidgetOptions = {
   // Should the widget display inline word-by-word translations
   enableWbw: boolean;
 
+  // Should the widget display inline word-by-word transliteration
+  enableWbwTransliteration: boolean;
+
   // The theme of the widget
   theme: ThemeTypeVariant;
 

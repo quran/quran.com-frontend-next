@@ -34,7 +34,7 @@ const MergedVersesContent = ({ verses, options, quranFont }: Props): JSX.Element
           quranTextFontScaleOverride={WIDGET_FONT_SCALE}
           mushafLinesOverride={MushafLines.FifteenLines}
           shouldShowWordByWordTranslation={options.enableWbw}
-          shouldShowWordByWordTransliteration={false}
+          shouldShowWordByWordTransliteration={options.enableWbwTransliteration}
           isStandaloneMode
         />
       )}

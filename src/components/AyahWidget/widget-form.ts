@@ -326,6 +326,15 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
     isDisabled: (preferences) => !preferences.showArabic,
   },
 
+  enableWbwTransliteration: {
+    id: 'enableWbwTransliteration',
+    type: 'checkbox',
+    labelKey: 'checkboxes.wordByWordTransliteration',
+    controlId: 'wbw-transliteration-toggle',
+    preferenceKey: 'enableWbwTransliteration',
+    isDisabled: (preferences) => !preferences.showArabic,
+  },
+
   showTranslatorName: {
     id: 'showTranslatorName',
     type: 'checkbox',
@@ -407,6 +416,7 @@ export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
   { kind: 'field', field: WIDGET_FIELDS.reciter },
   { kind: 'field', field: WIDGET_FIELDS.enableAudio },
   { kind: 'field', field: WIDGET_FIELDS.enableWbwTranslation },
+  { kind: 'field', field: WIDGET_FIELDS.enableWbwTransliteration },
   { kind: 'field', field: WIDGET_FIELDS.showTranslatorName },
   { kind: 'field', field: WIDGET_FIELDS.showTafsirs },
   { kind: 'field', field: WIDGET_FIELDS.showReflections },

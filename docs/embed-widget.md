@@ -11,19 +11,21 @@ can also be configured through the builder page inside this app.
 
 ## Key entry points
 
-| File                                             | Purpose                                       |
-| ------------------------------------------------ | --------------------------------------------- |
-| `src/pages/ayah-widget.tsx`                      | Builder page UI                               |
-| `src/pages/embed/v1.tsx`                         | Embed page (iframe content)                   |
-| `src/components/AyahWidget/widget-config.ts`     | Main config entry (re-exports modules)        |
-| `src/components/AyahWidget/widget-types.ts`      | Type definitions                              |
-| `src/components/AyahWidget/widget-defaults.ts`   | Default values and constants                  |
-| `src/components/AyahWidget/widget-embed.ts`      | Iframe URL and snippet builders               |
-| `src/components/AyahWidget/widget-form.ts`       | Builder form field definitions                |
-| `src/components/AyahWidget/getAyahWidgetData.ts` | Server-side data fetching                     |
-| `src/components/AyahWidget/queryParsing.ts`      | Query parameter parsing utilities             |
-| `src/hooks/widget/useAyahWidgetPreview.ts`       | Preview hook for the builder                  |
-| `src/hooks/widget/useWidgetInteractions.ts`      | Client-side interactions (copy, share, audio) |
+| File                                                | Purpose                                       |
+| --------------------------------------------------- | --------------------------------------------- |
+| `src/pages/ayah-widget.tsx`                         | Builder page UI                               |
+| `src/pages/embed/v1.tsx`                            | Embed page (iframe content)                   |
+| `src/components/AyahWidget/widget-config.ts`        | Main config entry (re-exports modules)        |
+| `src/components/AyahWidget/widget-types.ts`         | Type definitions                              |
+| `src/components/AyahWidget/widget-defaults.ts`      | Default values and constants                  |
+| `src/components/AyahWidget/widget-embed.ts`         | Iframe URL and snippet builders               |
+| `src/components/AyahWidget/widget-form.ts`          | Builder form field definitions                |
+| `src/components/AyahWidget/widget-utils.ts`         | Utility functions (formatting, grouping)      |
+| `src/components/AyahWidget/getAyahWidgetData.ts`    | Server-side data fetching                     |
+| `src/components/AyahWidget/queryParsing.ts`         | Query parameter parsing utilities             |
+| `src/hooks/widget/useAyahWidgetPreview.ts`          | Preview hook for the builder                  |
+| `src/hooks/widget/useWidgetInteractions.ts`         | Client-side interactions (copy, share, audio) |
+| `src/hooks/widget/useAyahWidgetEmbedPreferences.ts` | Hook for widget embed preferences             |
 
 ## High-level data flow
 
@@ -115,21 +117,22 @@ The embed is an iframe pointing to `/embed/v1` with query params.
 
 ### Query parameters
 
-| Parameter             | Description                               | Default |
-| --------------------- | ----------------------------------------- | ------- |
-| `verses`              | Verse range (e.g., `33:56` or `33:56-60`) | `33:56` |
-| `translations`        | Comma-separated translation IDs           | -       |
-| `audio`               | Enable audio (`true`/`false`)             | `true`  |
-| `reciter`             | Reciter ID                                | `7`     |
-| `theme`               | Theme (`light`/`dark`/`sepia`)            | `light` |
-| `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)    | `qpc`   |
-| `locale`              | Widget locale                             | `en`    |
-| `wbw`                 | Enable word-by-word (`true`/`false`)      | `false` |
-| `showTranslationName` | Show translator names                     | `false` |
-| `showArabic`          | Show Arabic text                          | `true`  |
-| `tafsir`              | Show tafsirs button                       | `true`  |
-| `reflections`         | Show reflections button                   | `true`  |
-| `answers`             | Show answers button                       | `true`  |
+| Parameter             | Description                                          | Default |
+| --------------------- | ---------------------------------------------------- | ------- |
+| `verses`              | Verse range (e.g., `33:56` or `33:56-60`)            | `33:56` |
+| `translations`        | Comma-separated translation IDs                      | -       |
+| `audio`               | Enable audio (`true`/`false`)                        | `true`  |
+| `reciter`             | Reciter ID                                           | `7`     |
+| `theme`               | Theme (`light`/`dark`/`sepia`)                       | `light` |
+| `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)               | `qpc`   |
+| `locale`              | Widget locale                                        | `en`    |
+| `wbw`                 | Enable word-by-word translation (`true`/`false`)     | `false` |
+| `wbwTransliteration`  | Enable word-by-word transliteration (`true`/`false`) | `false` |
+| `showTranslationName` | Show translator names                                | `false` |
+| `showArabic`          | Show Arabic text                                     | `true`  |
+| `tafsir`              | Show tafsirs button                                  | `true`  |
+| `reflections`         | Show reflections button                              | `true`  |
+| `answers`             | Show answers button                                  | `true`  |
 
 ## Widget interactions
 
