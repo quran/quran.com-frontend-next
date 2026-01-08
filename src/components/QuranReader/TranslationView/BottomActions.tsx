@@ -7,7 +7,6 @@ import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
-import useIsMobile, { MobileSizeVariant } from '@/hooks/useIsMobile';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
@@ -61,7 +60,6 @@ const BottomActions = ({
   // Only show Answers tab when we confirm questions exist (not while loading)
   const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-  const isMobile = useIsMobile(MobileSizeVariant.SMALL);
   // Modal state using enum
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
