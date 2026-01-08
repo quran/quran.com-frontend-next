@@ -859,26 +859,3 @@ $page-container-max-width: 80rem;
     display: none;
   }
 }
-
-@mixin dimmedOverlay($position: fixed) {
-  position: relative;
-  transition: var(--transition-slow);
-
-  &::before {
-    content: '';
-    position: $position;
-    inset: 0;
-    background-color: var(--color-background-backdrop);
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition-slow);
-    z-index: var(--z-index-smaller-modal);
-  }
-
-  &.dimmed {
-    &::before {
-      opacity: var(--opacity-50);
-      pointer-events: auto;
-    }
-  }
-}

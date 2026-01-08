@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { memo, useEffect, useRef, useState } from 'react';
 
-import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -24,7 +23,6 @@ import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
-  selectIsNavigationDrawerOpen,
 } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
@@ -72,7 +70,6 @@ interface Props {
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
@@ -159,11 +156,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   return (
     <>
       {isBannerVisible && (
-        <div
-          className={classNames(styles.bannerContainerTop, {
-            [styles.dimmed]: isNavigationDrawerOpen,
-          })}
-        >
+        <div className={styles.bannerContainerTop}>
           <Banner {...bannerProps} />
         </div>
       )}
