@@ -93,6 +93,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
 
   return (
     <Collapsible
+      id="navigation-links-our-projects"
       headerClassName={headerClassName}
       headerLeftClassName={headerLeftClassName}
       title={<NavigationDrawerItem title={t('our-projects')} icon={<IconSquareMore />} />}

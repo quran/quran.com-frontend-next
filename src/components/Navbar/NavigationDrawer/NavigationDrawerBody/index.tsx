@@ -54,7 +54,7 @@ const NavigationDrawerBody = (): JSX.Element => {
   }, [showLanguageContainer]);
 
   return (
-    <div className={styles.listItemsContainer}>
+    <div className={styles.listItemsContainer} data-testid="navigation-drawer-body">
       <LanguageContainer
         id="nav-lang-container"
         show={showLanguageContainer}
@@ -86,6 +86,7 @@ const NavigationDrawerBody = (): JSX.Element => {
               shape={ButtonShape.Pill}
               onClick={onLanguageButtonClick}
               aria-expanded={showLanguageContainer}
+              data-testid="language-selector-button"
               aria-controls="nav-lang-container"
               aria-haspopup="dialog"
             >

@@ -83,6 +83,7 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
       aria-modal="true"
       aria-hidden={!show}
       aria-labelledby="language-dialog-title"
+      data-testid="language-container"
       className={classNames(
         styles.languageContainer,
         {
