@@ -128,7 +128,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -137,15 +137,15 @@ table {
   border-spacing: 0;
 }
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
@@ -169,7 +169,7 @@ video {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 /**
@@ -179,7 +179,7 @@ video {
 
 audio:not([controls]) {
   display: none;
-  height: 0;
+  block-size: 0;
 }
 
 /**
@@ -361,15 +361,15 @@ html input[disabled] {
  *    Known issue: excess padding remains in IE 6.
  */
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   box-sizing: border-box; /* 1 */
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: 0;
   padding-inline-end: 0; /* 2 */
-  *height: 13px; /* 3 */
-  *width: 13px; /* 3 */
+  *block-size: 13px; /* 3 */
+  *inline-size: 13px; /* 3 */
 }
 
 /**
@@ -378,7 +378,7 @@ input[type="radio"] {
  *    (include '-moz' to future-proof).
  */
 
-input[type="search"] {
+input[type='search'] {
   -webkit-appearance: textfield; /* 1 */
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box; /* 2 */
@@ -390,8 +390,8 @@ input[type="search"] {
  * on OS X.
  */
 
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -413,8 +413,8 @@ input::-moz-focus-inner {
 */
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  inline-size: 10px;
+  block-size: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -490,4 +490,8 @@ textarea {
   padding-block-end: 0.2em;
   padding-inline-start: 0;
   padding-inline-end: 0;
+}
+
+svg g {
+  clip-path: none !important;
 }

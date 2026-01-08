@@ -1,9 +1,31 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .listItemsContainer {
+  block-size: 100%;
+  position: relative;
+  overflow: hidden !important;
+  max-block-size: calc(100vh - var(--navbar-height));
+}
+
+.mainListItems {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  overflow: hidden !important;
+  block-size: 100%;
+  transition: opacity 0.3s ease-in-out;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.listItems {
+  overflow-y: auto;
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  padding-block-end: calc(5 * var(--spacing-mega));
 }
 
 .subtitle {
@@ -12,10 +34,49 @@
   text-transform: uppercase;
   font-weight: var(--font-weight-bold);
   border-block-end: 1px var(--color-borders-hairline) solid;
-  min-height: calc(var(--spacing-mega) + var(--spacing-small));
+  min-block-size: calc(var(--spacing-mega) + var(--spacing-small));
 }
 
 .projectsDesc {
   font-size: var(--font-size-small);
-  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+}
+
+.accordionHeaderLeft {
+  gap: var(--spacing-xxsmall);
+  align-items: center !important;
+}
+
+.accordionContent {
+  margin-inline-start: var(--spacing-mega);
+}
+
+.accordionItemTitle {
+  font-weight: var(--font-weight-normal);
+}
+
+.ctaContainer {
+  padding: var(--spacing-medium) var(--spacing-max);
+}
+
+.ctaTop {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+}
+
+.ctaDonateButton {
+  inline-size: 100%;
+}
+
+.languageTrigger {
+  inline-size: 100%;
+  justify-content: center;
+  border: 1px solid var(--color-borders-hairline);
+  cursor: pointer;
+
+  svg path {
+    stroke: var(--color-text-default);
+  }
 }

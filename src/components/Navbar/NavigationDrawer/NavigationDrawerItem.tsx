@@ -14,6 +14,7 @@ type NavigationDrawerItemProps = {
   isExternalLink?: boolean;
   href?: string;
   isStale?: boolean;
+  titleClassName?: string;
   onClick?: () => void;
 };
 
@@ -22,6 +23,7 @@ const NavigationDrawerItem = ({
   icon,
   isExternalLink,
   href,
+  titleClassName,
   isStale = false,
   onClick,
 }: NavigationDrawerItemProps) => (
@@ -32,10 +34,10 @@ const NavigationDrawerItem = ({
           <IconContainer
             icon={icon}
             size={IconSize.Xsmall}
-            color={IconColor.secondary}
+            color={IconColor.quaternary}
             shouldFlipOnRTL={false}
           />
-          <span className={styles.titleContainer}>{title}</span>
+          <span className={classNames(styles.titleContainer, titleClassName)}>{title}</span>
         </div>
         <div>
           {isExternalLink && (

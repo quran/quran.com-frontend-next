@@ -94,6 +94,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "Ayahs",
+  "become-monthly-donor": "Become A Monthly Donor",
   "back": "Back",
   "beta": "Beta",
   "beyond-ramadan": "Grow Beyond Ramadan!",
@@ -101,6 +102,7 @@
   "bookmarked": "Bookmarked",
   "both": "Both",
   "cancel": "Cancel",
+  "change-theme": "Change Theme",
   "click-here": "Click here",
   "close": "Close",
   "command-bar": {
@@ -265,6 +267,7 @@
   "juz": "Juz",
   "language": "Language",
   "languages": "Languages",
+  "learn": "Learn",
   "learn-more": "Learn more",
   "learning-plans": "Learning Plans",
   "less": "Less",
@@ -281,6 +284,7 @@
   "mode": "Mode",
   "more": "More",
   "my-learning-plans": "My Learning Plans",
+  "my-quran": "My Quran",
   "navigate": "Navigate",
   "network": "Network",
   "new": "New!",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "read": "Read",
   "reading-history": "Reading history",
   "reading-preference": {
     "reading": "Reading",
@@ -372,6 +377,7 @@
   },
   "seconds": "Seconds",
   "see-new": "See What's New",
+  "select-language": "Select Language",
   "settings": {
     "no-tafsir-selected": "No tafsir selected",
     "no-translation-selected": "No translation selected",

@@ -1,25 +1,25 @@
 /* eslint-disable max-lines */
 import { memo, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Banner from '@/components/Banner/Banner';
-import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
-import SettingsDrawer from '@/components/Navbar/SettingsDrawer/SettingsDrawer';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
+  selectNavbar,
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setDisableSearchDrawerTransition,
@@ -29,6 +29,7 @@ import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { isLoggedIn } from '@/utils/auth/login';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -70,6 +71,8 @@ interface Props {
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const { isNavigationDrawerOpen } = useSelector(selectNavbar, shallowEqual);
+
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
   const normalizedPathname = router.asPath.split(/[?#]/)[0];
@@ -160,20 +163,13 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
           <Banner {...bannerProps} />
         </div>
       )}
-      <div className={styles.itemsContainer}>
+      <div
+        className={classNames(styles.itemsContainer, {
+          [styles.dimmed]: isNavigationDrawerOpen,
+        })}
+      >
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
-            <Button
-              tooltip={t('menu')}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={openNavigationDrawer}
-              ariaLabel={t('aria.nav-drawer-open')}
-              data-testid="open-navigation-drawer"
-            >
-              <IconMenu />
-            </Button>
-            <NavigationDrawer />
             <NavbarLogoWrapper />
           </div>
         </div>
@@ -184,26 +180,29 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         )}
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
-            <>
-              <ProfileAvatarButton />
-              <LanguageSelector />
-              <SettingsDrawer />
-            </>
-            <div>
-              <Button
-                tooltip={t('search.title')}
-                variant={ButtonVariant.Ghost}
-                onClick={openSearchDrawer}
-                shape={ButtonShape.Circle}
-                shouldFlipOnRTL={false}
-                ariaLabel={t('search.title')}
-                data-testid="open-search-drawer"
-              >
-                <IconSearch />
-              </Button>
-              <SearchDrawer />
-              {shouldRenderSidebarNavigation && <SidebarNavigation />}
-            </div>
+            {!isLoggedIn() && <ProfileAvatarButton />}
+            <Button
+              tooltip={t('search.title')}
+              variant={ButtonVariant.Ghost}
+              onClick={openSearchDrawer}
+              shape={ButtonShape.Circle}
+              shouldFlipOnRTL={false}
+              ariaLabel={t('search.title')}
+            >
+              <IconSearch />
+            </Button>
+            <SearchDrawer />
+            {shouldRenderSidebarNavigation && <SidebarNavigation />}
+            <Button
+              tooltip={t('menu')}
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
+            >
+              <IconMenu />
+            </Button>
+            <NavigationDrawer />
           </div>
         </div>
       </div>

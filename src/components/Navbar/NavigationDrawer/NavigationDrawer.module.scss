@@ -1,9 +1,11 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .leftCTA {
   display: flex;
   margin-inline-start: var(--spacing-xsmall);
+  gap: var(--spacing-xsmall);
+  justify-content: space-between;
 }
 
 .rightCTA {
@@ -25,4 +27,5 @@
 
 .centerVertically {
   @include utility.center-vertically;
+  inline-size: 100%;
 }

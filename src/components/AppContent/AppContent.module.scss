@@ -1,0 +1,25 @@
+.contentContainer {
+  position: relative;
+  transition: var(--transition-fast);
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
+    background-color: var(--color-text-black);
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-fast);
+    z-index: var(--z-index-smaller-modal);
+  }
+
+  &.dimmed {
+    &::before {
+      opacity: var(--opacity-50);
+      pointer-events: auto;
+    }
+  }
+}
