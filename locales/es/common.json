@@ -101,6 +101,7 @@
   "bookmarked": "Marcado como favorito",
   "both": "Ambas",
   "cancel": "Cancelar",
+  "change-theme": "Cambiar tema",
   "click-here": "Haz clic aquí",
   "close": "Cerrar",
   "command-bar": {
@@ -140,6 +141,7 @@
     "decrease": "Disminuir",
     "increase": "Aumentar"
   },
+  "create-my-goal": "Crea mi meta",
   "default-description": "El Corán traducido a muchos idiomas en una interfaz sencilla y fácil de usar",
   "delete": "Borrar",
   "developers": "Desarrolladores",
@@ -163,6 +165,7 @@
     "bookmark-sync": "El marcador no está sincronizado.",
     "email-login-fail": "No se pudo iniciar sesión con el correo electrónico. Inténtalo nuevamente.",
     "general": "Algo salió mal. Inténtalo de nuevo.",
+    "language-change-failed": "No se pudo cambiar el idioma. Inténtalo de nuevo.",
     "offline": "Parece que perdiste la conexión. Verifícala y vuelve a intentarlo.",
     "pref-persist-fail": "No se pudo sincronizar tu configuración a la nube.",
     "ranges-no-value": "La secuencia de inicio y final deben tener un valor",
@@ -264,6 +267,7 @@
   "juz": "Juz",
   "language": "Idioma",
   "languages": "Idiomas",
+  "learn": "Aprender",
   "learn-more": "Más información",
   "learning-plans": "Planes de aprendizaje",
   "less": "Menos",
@@ -280,6 +284,7 @@
   "mode": "Modo",
   "more": "Más",
   "my-learning-plans": "Mis planes de aprendizaje",
+  "my-quran": "Mi Corán",
   "navigate": "Navegar",
   "network": "Comunidad",
   "new": "¡Nuevo!",
@@ -332,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
+  "read": "Leer",
   "reading-history": "Historial de lectura",
   "reading-preference": {
     "reading": "Lectura",
@@ -371,6 +377,7 @@
   },
   "seconds": "Segundos",
   "see-new": "Mira que hay de nuevo.",
+  "select-language": "Seleccionar idioma",
   "settings": {
     "no-tafsir-selected": "No se ha seleccionado ningún tafsir",
     "no-translation-selected": "No se ha seleccionado ninguna traducción",
@@ -414,6 +421,7 @@
     "by": "Ordenar por",
     "descending": "Descendiente"
   },
+  "stay-on-track": "¡Manténgase en el buen camino!",
   "style": "Estilo",
   "submit": "Enviar",
   "subscribe": "Suscribirse.",

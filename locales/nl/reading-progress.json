@@ -1,6 +1,7 @@
 {
   "add": "Toevoegen",
   "add-data-success": "Uw leesgegevens zijn succesvol toegevoegd.",
+  "back-to-reading-goal": "Terug naar leesdoel",
   "delete-goal": {
     "action": "Doel verwijderen",
     "confirmation": {

@@ -1,6 +1,7 @@
 {
   "add": "أضف",
   "add-data-success": "تمت إضافة بيانات قراءتك بنجاح",
+  "back-to-reading-goal": "العودة إلى هدف القراءة",
   "delete-goal": {
     "action": "احذف الهدف",
     "confirmation": {

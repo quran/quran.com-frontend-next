@@ -12,8 +12,10 @@
     "description": "Qëllimi juaj do të rivendoset çdo ditë",
     "title": "Qëllimi i përditshëm"
   },
+  "day-streak": "Seri ditore",
   "day-x": "dita {{day}}",
   "days": "Ditët",
+  "days-remaining": "ditët e mbetura",
   "duration": "Kohëzgjatja (ditë)",
   "ending-chapter": "Surja përfunduese",
   "ending-verse": "Përfundimi i Ajetit",

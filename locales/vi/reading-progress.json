@@ -1,0 +1,32 @@
+{
+  "add": "Thêm vào",
+  "add-data-success": "Dữ liệu đọc của bạn đã được thêm thành công.",
+  "back-to-reading-goal": "Quay lại mục tiêu đọc",
+  "delete-goal": {
+    "action": "Xóa mục tiêu",
+    "confirmation": {
+      "action-text": "Tôi hiểu hậu quả, hãy xóa mục tiêu của tôi.",
+      "confirmation-text": "xóa mục tiêu của tôi",
+      "instruction-text": "Vui lòng nhập <strong>{{text}}</strong> để xác nhận",
+      "subtitle": "Thao tác này không thể thay đổi. Thao tác này sẽ xóa vĩnh viễn mục tiêu của bạn và chúng tôi sẽ ngừng theo dõi tiến độ của bạn.",
+      "title": "Bạn chắc chắn chứ?"
+    },
+    "success": "Mục tiêu đọc của bạn đã được xóa thành công."
+  },
+  "edit-goal": {
+    "action": "Chỉnh sửa mục tiêu",
+    "subtitle": "Chúng tôi sẽ tính toán lại tiến độ của bạn dựa trên mục tiêu mới.",
+    "success": "Mục tiêu đọc của bạn đã được cập nhật thành công.",
+    "title": "Chỉnh sửa mục tiêu đọc của bạn"
+  },
+  "history": "Lịch sử đọc",
+  "history-for": "Lịch sử đọc cho ngày {{date}}",
+  "manage-goal": "Quản lý mục tiêu đọc sách của bạn",
+  "manually-add": "Thêm số liệu thủ công",
+  "no-reading-history-for": "Không có lịch sử đọc nào cho ngày {{date}}",
+  "reading-progress-header": "Tiến trình của bạn",
+  "reading-progress-streak": "Chuỗi",
+  "reading-time": "Thời gian đọc kinh",
+  "seconds-read-tooltip": "Đây là thời gian bạn đã dành để đọc các câu kinh bạn đã nhập. Chúng tôi tự động điền thời gian này dựa trên tốc độ đọc trung bình trên Quran.com, nhưng bạn có thể thay đổi nó bằng thời gian đọc thực tế của mình.",
+  "you-read": "Bạn đã đọc:"
+}

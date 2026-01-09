@@ -1,12 +1,37 @@
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .itemsContainer {
+  @include utility.dimmedOverlay(absolute);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100%;
+  block-size: 100%;
   background-color: var(--color-background-elevated);
+
+  svg,
+  g {
+    clip-path: none;
+  }
+}
+
+.bannerContainerTop {
+  @include utility.dimmedOverlay(absolute);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.bannerContainerCenter {
+  display: none;
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .centerVertically {

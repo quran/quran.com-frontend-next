@@ -1,16 +1,18 @@
+@use 'src/styles/breakpoints';
+
 .inputs {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .inputContainer {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   flex-direction: column;
   justify-content: center;
   margin-block: var(--spacing-large);
 
   select {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
@@ -20,8 +22,8 @@
   margin-block-end: var(--spacing-small);
 }
 
-.deleteButton {
-  width: 100%;
+.actionButton {
+  inline-size: 100%;
 }
 
 .confirmationText {
@@ -37,11 +39,25 @@
   justify-content: space-between;
   align-items: center;
   margin-block: var(--spacing-large) !important;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .radioItem {
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall);
+}
+
+.footerCtaContainer {
+  inline-size: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro);
+}
+
+.editGoalButton {
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.tablet {
+    color: var(--color-streaks-dark);
+  }
 }

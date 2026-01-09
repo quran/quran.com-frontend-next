@@ -12,8 +12,10 @@
     "description": "Je doel wordt elke dag gereset",
     "title": "Dagelijks doel"
   },
+  "day-streak": "Dagreeks",
   "day-x": "Dag {{day}}",
   "days": "Dagen",
+  "days-remaining": "resterende dagen",
   "duration": "Duur (dagen)",
   "ending-chapter": "Einde soera",
   "ending-verse": "Ayah beëindigen",

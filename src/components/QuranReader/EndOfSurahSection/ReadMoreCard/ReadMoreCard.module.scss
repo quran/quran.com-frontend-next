@@ -139,7 +139,7 @@
 .badge {
   font-size: var(--font-size-xsmall-px);
   font-weight: var(--font-weight-semibold);
-  padding: var(--spacing-xxmicro-px) var(--spacing-small-px);
+  padding: var(--spacing-micro2-px) var(--spacing-small-px);
   border-radius: var(--border-radius-medium-px);
 
   @include breakpoints.smallerThanTablet {

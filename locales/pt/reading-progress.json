@@ -1,6 +1,7 @@
 {
   "add": "Adicionar",
   "add-data-success": "Seus dados de leitura foram adicionados com sucesso.",
+  "back-to-reading-goal": "Voltar ao objetivo de leitura",
   "delete-goal": {
     "action": "Excluir meta",
     "confirmation": {

@@ -57,7 +57,7 @@ export const ACTION_BUTTONS: ActionButton[] = [
     key: 'lessons',
     icon: LearningPlanIcon,
     namespace: 'common',
-    modalType: ModalType.LESSON,
+    modalType: ModalType.LESSONS,
     getNavigationUrl: ({ verseKey }) => getVerseLessonNavigationUrl(verseKey),
   },
   {

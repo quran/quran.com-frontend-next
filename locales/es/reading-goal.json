@@ -12,8 +12,10 @@
     "description": "Tu objetivo se reiniciará cada día",
     "title": "Objetivo diario"
   },
+  "day-streak": "Racha de días",
   "day-x": "Día {{day}}",
   "days": "Días",
+  "days-remaining": "días restantes",
   "duration": "Duración (días)",
   "ending-chapter": "Sura final",
   "ending-verse": "Aleya final",

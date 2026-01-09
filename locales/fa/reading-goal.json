@@ -12,8 +12,10 @@
     "description": "هدف شما هر روز بازنشانی خواهد شد",
     "title": "هدف روزانه"
   },
+  "day-streak": "خط روز",
   "day-x": "روز {{day}}",
   "days": "روزها",
+  "days-remaining": "روزهای باقی مانده",
   "duration": "مدت زمان (روزها)",
   "ending-chapter": "پایان سوره",
   "ending-verse": "پایان آیه",

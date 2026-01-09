@@ -12,8 +12,10 @@
     "description": "Votre objectif sera réinitialisé chaque jour",
     "title": "Objectif quotidien"
   },
+  "day-streak": "Série d'un jour",
   "day-x": "Jour {{day}}",
   "days": "Jours",
+  "days-remaining": "jours restants",
   "duration": "Durée (jours)",
   "ending-chapter": "Sourate Finale",
   "ending-verse": "Ayah Finale",

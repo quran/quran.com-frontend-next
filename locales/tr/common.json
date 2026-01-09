@@ -101,6 +101,7 @@
   "bookmarked": "İşaretli",
   "both": "Her ikisi de",
   "cancel": "İptal",
+  "change-theme": "Temayı Değiştir",
   "click-here": "Buraya Tıkla",
   "close": "Kapat",
   "command-bar": {
@@ -140,6 +141,7 @@
     "decrease": "Azalt",
     "increase": "Arttır"
   },
+  "create-my-goal": "Hedefimi Oluştur",
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
   "delete": "Sil",
   "developers": "Geliştiriciler",
@@ -163,6 +165,7 @@
     "bookmark-sync": "Yer imi senkronize değil.",
     "email-login-fail": "E-posta ile oturum açılamadı. Lütfen tekrar deneyin",
     "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "language-change-failed": "Dil değiştirme işlemi başarısız oldu. Lütfen tekrar deneyin.",
     "offline": "Görünüşe göre bağlantınız kesildi. Lütfen bağlantınızı kontrol edip yeniden deneyiniz.",
     "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
@@ -264,6 +267,7 @@
   "juz": "Cüz",
   "language": "Dil",
   "languages": "Diller",
+  "learn": "Öğrenmek",
   "learn-more": "Daha fazla bilgi edinin",
   "learning-plans": "Öğrenme Planları",
   "less": "Daha az",
@@ -280,6 +284,7 @@
   "mode": "Mod",
   "more": "Daha fazla",
   "my-learning-plans": "Öğrenme Planlarım",
+  "my-quran": "Benim Kuranım",
   "navigate": "Keşfedin",
   "network": "Ağ",
   "new": "Yeni!",
@@ -332,6 +337,7 @@
   "q-reflect": "KuranYansıtmak",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
+  "read": "Okumak",
   "reading-history": "tarih okuma",
   "reading-preference": {
     "reading": "Okuma",
@@ -371,6 +377,7 @@
   },
   "seconds": "Saniye",
   "see-new": "Yenilikleri görün",
+  "select-language": "Dil Seçin",
   "settings": {
     "no-tafsir-selected": "Tefsir seçilmedi",
     "no-translation-selected": "Çeviri seçilmedi",
@@ -414,6 +421,7 @@
     "by": "Sırala",
     "descending": "Azalan"
   },
+  "stay-on-track": "🎯 Yolda kalın!",
   "style": "Stil",
   "submit": "Gönder",
   "subscribe": "Abone ol",

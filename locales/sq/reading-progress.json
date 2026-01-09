@@ -1,6 +1,7 @@
 {
   "add": "Shto",
   "add-data-success": "Të dhënat tuaja të leximit janë shtuar me sukses.",
+  "back-to-reading-goal": "Kthehu te qëllimi i leximit",
   "delete-goal": {
     "action": "Fshi objektivin",
     "confirmation": {
