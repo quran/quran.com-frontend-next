@@ -101,6 +101,7 @@
   "bookmarked": "Ditandai",
   "both": "Keduanya",
   "cancel": "Batal",
+  "change-theme": "Ubah Tema",
   "click-here": "Klik disini",
   "close": "Tutup",
   "command-bar": {
@@ -140,6 +141,7 @@
     "decrease": "Mengurangi",
     "increase": "Meningkatkan"
   },
+  "create-my-goal": "Buat Tujuan Saya",
   "default-description": "Al-Qur'an diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
   "delete": "Hapus",
   "developers": "Pengembang",
@@ -163,6 +165,7 @@
     "bookmark-sync": "Penanda tidak sinkron.",
     "email-login-fail": "Gagal masuk dengan email. Silakan coba lagi",
     "general": "Ada yang salah. Silakan coba lagi.",
+    "language-change-failed": "Gagal mengubah bahasa. Silakan coba lagi.",
     "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi.",
     "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud.",
     "ranges-no-value": "Rentang awal dan akhir harus memiliki nilai",
@@ -264,6 +267,7 @@
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
+  "learn": "Mempelajari",
   "learn-more": "Pelajari lebih lanjut",
   "learning-plans": "Rencana Pembelajaran",
   "less": "Tampilkan Lebih Sedikit",
@@ -280,6 +284,7 @@
   "mode": "Mode",
   "more": "Lagi",
   "my-learning-plans": "Rencana Pembelajaran Saya",
+  "my-quran": "Al-Quran saya",
   "navigate": "Navigasi",
   "network": "Jaringan",
   "new": "Baru!",
@@ -332,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Qur'an",
+  "read": "Membaca",
   "reading-history": "Riwayat membaca",
   "reading-preference": {
     "reading": "Membaca",
@@ -371,6 +377,7 @@
   },
   "seconds": "Detik",
   "see-new": "Lihat Apa yang Baru",
+  "select-language": "Pilih Bahasa",
   "settings": {
     "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
     "no-translation-selected": "Tidak ada terjemahan yang dipilih",
@@ -414,6 +421,7 @@
     "by": "Sortir dengan",
     "descending": "Menurun"
   },
+  "stay-on-track": "🎯 Tetap di jalur yang benar!",
   "style": "Gaya",
   "submit": "Kirim",
   "subscribe": "Mendaftar",

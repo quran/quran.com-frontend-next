@@ -31,8 +31,8 @@
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Chúng tôi rất vui mừng thông báo rằng giờ đây bạn có thể nhóm các dấu trang lại với nhau theo \"bộ sưu tập\"! <br/><br/> <li>Bạn có thể thêm bao nhiêu bộ sưu tập tùy thích.</li><li>Thêm dấu trang vào một hoặc nhiều bộ sưu tập</li><li>Và còn nhiều hơn thế nữa!</li>",
-        "title": "Bộ sưu tập dấu trang đã có mặt!"
+        "description": "Chúng tôi rất vui mừng thông báo rằng giờ đây bạn có thể nhóm các dấu trang lại với nhau theo \"bộ sưu tập\"! <br/><br/> <li>Bạn có thể thêm bao nhiêu bộ sưu tập tùy thích.</li><li>Thêm đánh dấu trang vào một hoặc nhiều bộ sưu tập</li><li>Và còn nhiều hơn thế nữa!</li>",
+        "title": "Bộ sưu tập đánh dấu trang đã có mặt!"
       }
     }
   },
@@ -56,7 +56,7 @@
     "displaying": "Đang hiển thị",
     "exp-tip": "<span>Thay đổi nội dung hiển thị bên dưới</span><br></br> <boldSpan>Cài đặt</boldSpan> > <boldSpan>Từng chữ một</boldSpan>",
     "exp-tip-no-select": "<span>Chọn tùy chọn hiển thị chú giải công cụ và chọn <br></br> Tùy chọn dịch thuật và/hoặc phiên âm</span><br></br><span> dưới </span><boldSpan>Cài đặt</boldSpan> > <boldSpan>Từng chữ một</boldSpan><span>, ĐẾN</span><br></br> <span>Hãy bật tính năng này.</span>",
-    "experience": "Kinh nghiệm",
+    "experience": "Trải nghiệm",
     "play": "Phát âm thanh",
     "playback-normal": "Bình thường",
     "playback-speed": "Tốc độ phát lại",
@@ -101,6 +101,7 @@
   "bookmarked": "Đã đánh dấu",
   "both": "Cả hai",
   "cancel": "Hủy bỏ",
+  "change-theme": "Thay đổi chủ đề",
   "click-here": "Nhấp vào đây",
   "close": "Đóng",
   "command-bar": {
@@ -127,7 +128,7 @@
   "consents": {
     "communication": {
       "body": "🚀 Tăng tốc tiến độ của bạn thông qua <boldSpan>cá nhân hóa</boldSpan> Nhận thông báo về tiến độ đạt mục tiêu, duy trì chuỗi thành tích và nâng cao trải nghiệm sử dụng các tính năng hiện có của chúng tôi.<br></br><br></br> Chúng tôi có thể cập nhật thông tin cho bạn qua email và các kênh khác không? Bạn hoàn toàn chủ động – hãy thoải mái điều chỉnh các tùy chọn này bất cứ lúc nào trong cài đặt tài khoản của bạn.<br></br><br></br> Chỉ cần chọn 'Cho phép' <boldSpan>những lời nhắc nhở đầy cảm hứng</boldSpan> hoặc dùng \"Không phải bây giờ\" để từ chối.",
-      "header": "Chúng tôi rất muốn giúp bạn lưu trú. <boldSpan>tận tâm và nhất quán</boldSpan> Chúc bạn có một hành trình trưởng thành cùng Kinh Quran! 📖🌟"
+      "header": "Chúng tôi rất sẵn lòng đồng hành để bạn luôn <boldSpan>tận tâm và nhất quán</boldSpan> trên Hành Trình Trưởng Thành Cùng Kinh Qur'an! 📖🌟"
     }
   },
   "continue": "Tiếp tục",
@@ -140,10 +141,11 @@
     "decrease": "Giảm",
     "increase": "Tăng"
   },
+  "create-my-goal": "Tạo mục tiêu của tôi",
   "default-description": "Kinh Qur'an được dịch sang nhiều ngôn ngữ với giao diện đơn giản và dễ sử dụng.",
   "delete": "Xóa",
   "developers": "Các nhà phát triển",
-  "display": "Trưng bày",
+  "display": "Hiển thị",
   "donate": "Quyên góp",
   "donate-now": "Quyên góp ngay",
   "donate_monthly": "Quyên góp định kỳ hàng tháng",
@@ -163,11 +165,12 @@
     "bookmark-sync": "Đánh dấu trang không đồng bộ.",
     "email-login-fail": "Đăng nhập bằng email không thành công. Vui lòng thử lại.",
     "general": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "language-change-failed": "Không thể thay đổi ngôn ngữ. Vui lòng thử lại.",
     "offline": "Có vẻ như bạn đã mất kết nối. Vui lòng kiểm tra lại và thử lại.",
     "pref-persist-fail": "Không thể đồng bộ cài đặt của bạn lên đám mây.",
     "ranges-no-value": "Điểm bắt đầu và điểm kết thúc của phạm vi phải có giá trị.",
     "ranges-too-many-verses": "*Tối đa {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "Câu thơ mở đầu phải đứng trước câu thơ kết thúc."
+    "ranges-wrong-order": "Câu kinh bắt đầu phải đứng trước câu kinh kết thúc."
   },
   "errors": {
     "account-banned": "Rất tiếc, tài khoản của bạn đã bị khóa. Vui lòng liên hệ với Quran.Foundation.",
@@ -211,7 +214,7 @@
     "qcf-v4-desc": "Các phông chữ Tajweed được tạo ra bằng cách sử dụng Easy Quran - Dar Al Marifa Tajweed Mushaf và King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts sau khi nhận được sự cho phép từ cả hai bên.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Phông chữ Kinh Qur'an",
-    "quran-font-size": "cỡ chữ kinh Quran",
+    "quran-font-size": "Cỡ chữ Kinh Qur'an",
     "tajweed": "Tajweed",
     "tajweed-desc": "Phông chữ Tajweed hiển thị một cuốn Mushaf được tô màu theo quy tắc Tajweed. Bạn có thể đọc thêm về các quy tắc màu sắc Tajweed <0>tại đây</0>",
     "tajweed_v4": "King Fahad Complex V4",
@@ -220,7 +223,7 @@
     "translation-font-size": "Kích thước phông chữ dịch"
   },
   "footer": {
-    "description": "Quran.com là một nền tảng đáng tin cậy được hàng triệu người trên toàn thế giới sử dụng để đọc, tìm kiếm, nghe và suy ngẫm về Kinh Qur'an bằng nhiều ngôn ngữ. Nền tảng này cung cấp các bản dịch, tafsir (giải thích Kinh Qur'an), các bài tụng, bản dịch từng từ và các công cụ để nghiên cứu sâu hơn, giúp Kinh Qur'an trở nên dễ tiếp cận với mọi người. <br/> <br/> Với tư cách là một Sadaqah Jariyah (việc làm thiện nguyện liên tục), Quran.com cam kết giúp mọi người kết nối sâu sắc hơn với Kinh Qur'an. Được hỗ trợ bởi <link>Kinh Qur'an.Nền tảng</link>Là một tổ chức phi lợi nhuận 501(c)(3), Quran.com tiếp tục phát triển như một nguồn tài nguyên miễn phí và có giá trị cho tất cả mọi người, Alhamdulillah.",
+    "description": "Quran.com là một nền tảng đáng tin cậy được hàng triệu người trên toàn thế giới sử dụng để đọc, tìm kiếm, nghe và suy ngẫm về Kinh Qur'an bằng nhiều ngôn ngữ. Nền tảng này cung cấp các bản dịch, tafsir (giải thích Kinh Qur'an), các bài tụng, bản dịch từng từ và các công cụ để nghiên cứu sâu hơn, giúp Kinh Qur'an trở nên dễ tiếp cận với mọi người. <br/> <br/> Với tư cách là một Sadaqah Jariyah (việc làm thiện nguyện liên tục), Quran.com cam kết giúp mọi người kết nối sâu sắc hơn với Kinh Qur'an. Được hỗ trợ bởi <link>Quran.Foundation</link>, là một tổ chức phi lợi nhuận 501(c)(3), Quran.com tiếp tục phát triển như một nguồn tài nguyên miễn phí và có giá trị cho tất cả mọi người, Alhamdulillah.",
     "hiring": "Chúng tôi đang tuyển dụng! Hãy gia nhập đội ngũ của QuranFoundation và đóng góp vào sứ mệnh của chúng tôi. <link>Ứng tuyển ngay!</link>",
     "rights": "Bản quyền đã được bảo lưu.",
     "title": "Đọc, nghe, tìm kiếm và suy ngẫm về Kinh Qur'an"
@@ -257,13 +260,14 @@
   "hizb": "Hizb",
   "home": "Trang chủ",
   "hours": "Giờ",
-  "inline": "Trong dòng",
+  "inline": "In-line",
   "input": {
     "clear": "Xoá"
   },
   "juz": "Juz",
   "language": "Ngôn ngữ",
   "languages": "Ngôn ngữ",
+  "learn": "Học hỏi",
   "learn-more": "Tìm hiểu thêm",
   "learning-plans": "Kế hoạch học tập",
   "less": "Ít hơn",
@@ -272,7 +276,7 @@
   "loading": "Đang tải",
   "login": "Đăng nhập",
   "logout": "Đăng xuất",
-  "meccan": "Mecca",
+  "meccan": "Meccan",
   "medinan": "Medinan",
   "menu": "Menu",
   "minutes": "Phút",
@@ -280,6 +284,7 @@
   "mode": "Chế độ",
   "more": "Thêm",
   "my-learning-plans": "Kế hoạch học tập của tôi",
+  "my-quran": "Kinh Qur'an của tôi",
   "navigate": "Điều hướng",
   "network": "Mạng",
   "new": "Mới!",
@@ -321,7 +326,7 @@
   "powered-by": "Được cung cấp bởi",
   "prepare-hearts": {
     "cta": "Tìm hiểu thêm",
-    "title": "Hãy tiếp tục cố gắng sau tháng Ramadan!"
+    "title": "Hãy tiếp tục cố gắng ngay cả sau tháng Ramadan!"
   },
   "prev": "Trước",
   "previous-ayah": "Ayah trước",
@@ -332,13 +337,14 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Đài phát thanh Kinh Qur'an",
+  "read": "Đọc",
   "reading-history": "Lịch sử đọc",
   "reading-preference": {
     "reading": "Đọc",
     "translation": "Bản dịch"
   },
   "ready-for-ramadan": "Bạn đã sẵn sàng cho tháng Ramadan chưa?",
-  "recitation": "Đọc thuộc lòng",
+  "recitation": "Đọc kinh",
   "reciter": "Người đọc kinh",
   "reciter-summary": "(Với sự cho phép của Trung tâm Tafsir)",
   "reciters": "Người xướng kinh",
@@ -348,7 +354,7 @@
   "remove": "Di dời",
   "rename": "Đổi tên",
   "retry": "Thử lại",
-  "revelation_order": "Trật tự Khải Huyền",
+  "revelation_order": "Thứ tự mặc khải",
   "rub": "Rub el Hizb",
   "save": "Lưu",
   "save-to-collection": "Lưu vào bộ sưu tập",
@@ -371,6 +377,7 @@
   },
   "seconds": "Giây",
   "see-new": "Xem có gì mới",
+  "select-language": "Chọn ngôn ngữ",
   "settings": {
     "no-tafsir-selected": "Không có tafsir nào được chọn.",
     "no-translation-selected": "Chưa có bản dịch nào được chọn.",
@@ -414,6 +421,7 @@
     "by": "Sắp xếp theo",
     "descending": "Đi xuống"
   },
+  "stay-on-track": "🎯 Hãy giữ vững mục tiêu!",
   "style": "Kiểu chữ",
   "submit": "Nộp",
   "subscribe": "Đăng ký",
@@ -455,7 +463,7 @@
     "minimum-length": "{{field}} phải ít nhất {{value}} ký tự",
     "required-field": "{{field}} là bắt buộc"
   },
-  "verse": "Thơ",
+  "verse": "Câu kinh",
   "verse-bookmark-removed": "Dấu trang câu kinh đã bị xóa!",
   "verse-bookmarked": "Đã đánh dấu câu kinh này!",
   "verse-copied": "Câu kinh đã được sao chép vào clipboard!",
@@ -476,7 +484,7 @@
     "voice-search-powered-by": "Tìm kiếm bằng giọng nói được hỗ trợ bởi"
   },
   "wbw": "Từng chữ một",
-  "wbw-lang-summary": "Nguồn dịch từng từ một: <link>{{source}}</link>Nguồn này độc lập với việc lựa chọn bản dịch câu thơ.",
+  "wbw-lang-summary": "Nguồn dịch từng từ một: <link>{{source}}</link>Nguồn này độc lập với việc lựa chọn bản dịch câu kinh.",
   "wbw-trans-lang": "Ngôn ngữ từng từ",
   "wbw-translation": "Dịch từng từ một",
   "wbw-transliteration": "Phiên âm từng từ",
