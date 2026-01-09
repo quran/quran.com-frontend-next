@@ -12,8 +12,10 @@
     "description": "เป้าหมายของคุณจะรีเซ็ตทุกวัน",
     "title": "เป้าหมายรายวัน"
   },
+  "day-streak": "สตรีควัน",
   "day-x": "วัน {{day}}",
   "days": "วัน",
+  "days-remaining": "เหลืออีกกี่วัน",
   "duration": "ระยะเวลา (วัน)",
   "ending-chapter": "จบซูเราะห์",
   "ending-verse": "จบอายะห์",

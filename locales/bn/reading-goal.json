@@ -12,8 +12,10 @@
     "description": "আপনার লক্ষ্য প্রতিদিন পুনরায় সেট করা হবে",
     "title": "প্রতিদিনের লক্ষ্য"
   },
+  "day-streak": "দিনের ধারা",
   "day-x": "দিন {{day}}",
   "days": "দিন",
+  "days-remaining": "বাকি দিন",
   "duration": "সময়কাল (দিন)",
   "ending-chapter": "শেষ সূরা",
   "ending-verse": "আয়াত শেষ",

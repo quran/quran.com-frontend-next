@@ -12,8 +12,10 @@
     "description": "Sasaran Anda akan disetel ulang setiap hari",
     "title": "Sasaran harian"
   },
+  "day-streak": "Rentetan hari",
   "day-x": "Hari {{day}}",
   "days": "Hari",
+  "days-remaining": "hari tersisa",
   "duration": "Durasi (hari)",
   "ending-chapter": "Surah Akhir",
   "ending-verse": "Ayat Akhir",

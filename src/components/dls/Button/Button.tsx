@@ -38,6 +38,7 @@ export enum ButtonVariant {
   Compact = 'compact',
   Outlined = 'outlined',
   Simplified = 'simplified',
+  Rounded = 'rounded',
   SimplifiedAccent = 'simplified_accent',
   Accent = 'accent',
 }
@@ -139,9 +140,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.ghost]: variant === ButtonVariant.Ghost,
       [styles.compact]: variant === ButtonVariant.Compact,
       [styles.outlined]: variant === ButtonVariant.Outlined,
+      [styles.rounded]: variant === ButtonVariant.Rounded,
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,
+      [styles.rounded]: variant === ButtonVariant.Rounded,
       [styles.disabled]: disabled || isLoading,
       [styles.noSidePadding]: !hasSidePadding,
     });

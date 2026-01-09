@@ -1,9 +1,9 @@
 .dayCircle {
-  width: var(--spacing-large);
-  height: var(--spacing-large);
+  inline-size: var(--spacing-medium3-px);
+  block-size: var(--spacing-medium3-px);
   border-radius: var(--border-radius-circle);
-  border: 2px solid var(--color-success-medium);
-  background-color: var(--day-circle-color);
+  border: var(--spacing-micro-px) solid var(--color-blue-buttons-and-icons);
+  background-color: var(--color-background-default);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,21 +12,22 @@
   inset-block-start: 50%;
   transform: translate(-50%, -50%);
 
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     transform: translate(50%, -50%);
   }
 
   & svg {
-    width: 90%;
-    height: 90%;
+    inline-size: 90%;
+    block-size: 90%;
     color: white;
   }
 }
 
-.filled {
-  background-color: var(--color-success-medium) !important;
+.checked {
+  background-color: var(--color-blue-buttons-and-icons);
 }
 
-.stroked {
-  border-style: dashed;
+.future {
+  border-color: var(--color-grey-icons);
+  background-color: var(--color-grey-icons);
 }

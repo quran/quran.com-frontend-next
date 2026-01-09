@@ -12,8 +12,10 @@
     "description": "Seu objetivo será redefinido todos os dias",
     "title": "meta diária"
   },
+  "day-streak": "sequência de dias",
   "day-x": "Dia {{day}}",
   "days": "Dias",
+  "days-remaining": "dias restantes",
   "duration": "Duração (dias)",
   "ending-chapter": "Surata Final",
   "ending-verse": "Fim de Ayah",

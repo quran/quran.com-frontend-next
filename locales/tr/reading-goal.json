@@ -12,8 +12,10 @@
     "description": "Hedefiniz her gün sıfırlanacak",
     "title": "günlük hedef"
   },
+  "day-streak": "Günlük seri",
   "day-x": "Gün {{day}}",
   "days": "günler",
+  "days-remaining": "kalan günler",
   "duration": "Süre (gün)",
   "ending-chapter": "Bitiş Suresi",
   "ending-verse": "Biten Ayah",

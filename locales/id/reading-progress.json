@@ -1,6 +1,7 @@
 {
   "add": "Menambahkan",
   "add-data-success": "Data bacaan Anda berhasil ditambahkan.",
+  "back-to-reading-goal": "Kembali ke tujuan membaca",
   "delete-goal": {
     "action": "Hapus Sasaran",
     "confirmation": {

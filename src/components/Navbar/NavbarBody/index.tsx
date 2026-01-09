@@ -161,7 +161,11 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   return (
     <>
       {isBannerVisible && (
-        <div className={styles.bannerContainerTop}>
+        <div
+          className={classNames(styles.bannerContainerTop, {
+            [styles.dimmed]: isNavigationDrawerOpen,
+          })}
+        >
           <Banner {...bannerProps} />
         </div>
       )}

@@ -1,6 +1,7 @@
 {
   "add": "Tambah",
   "add-data-success": "Data bacaan anda telah berjaya ditambahkan.",
+  "back-to-reading-goal": "Kembali kepada matlamat membaca",
   "delete-goal": {
     "action": "Padamkan Matlamat",
     "confirmation": {
