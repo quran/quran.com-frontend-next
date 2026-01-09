@@ -140,6 +140,7 @@
     "decrease": "Ulje",
     "increase": "Rrit"
   },
+  "create-my-goal": "Krijo Qëllimin Tim",
   "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
   "delete": "Fshije",
   "developers": "Zhvilluesit",
@@ -414,6 +415,7 @@
     "by": "Ndaj sipas",
     "descending": "Duke zbritur"
   },
+  "stay-on-track": "🎯 Qëndroni në rrugën e duhur!",
   "style": "Stili",
   "submit": "Paraqisni",
   "subscribe": "Abonohu",

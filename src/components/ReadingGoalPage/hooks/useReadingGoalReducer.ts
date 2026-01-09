@@ -8,12 +8,23 @@ import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
 import { QuranGoalPeriod, GoalType } from '@/types/auth/Goal';
 
+export enum ReadingGoalExampleKey {
+  TEN_MINS = '10_mins',
+  KHATM = 'khatm',
+  YEARLY = 'yearly',
+  CUSTOM = 'custom',
+}
+
+export function isReadingGoalExampleKey(key: string): key is ReadingGoalExampleKey {
+  return Object.values(ReadingGoalExampleKey).includes(key as ReadingGoalExampleKey);
+}
+
 interface ReadingGoalState {
   period: QuranGoalPeriod;
   type: GoalType;
   pages: number;
   seconds: number;
-  exampleKey: keyof typeof readingGoalExamples | null;
+  exampleKey: ReadingGoalExampleKey | null;
   duration: number | null;
   rangeStartVerse: string | null;
   rangeEndVerse: string | null;
@@ -123,7 +134,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
 };
 
 export const readingGoalExamples = {
-  '10_mins': {
+  [ReadingGoalExampleKey.TEN_MINS]: {
     i18nKey: 'time',
     icon: ClockIcon,
     recommended: true,
@@ -133,7 +144,7 @@ export const readingGoalExamples = {
       period: QuranGoalPeriod.Daily,
     },
   },
-  khatm: {
+  [ReadingGoalExampleKey.KHATM]: {
     i18nKey: 'khatm',
     icon: BookIcon,
     values: {
@@ -144,7 +155,7 @@ export const readingGoalExamples = {
       period: QuranGoalPeriod.Continuous,
     },
   },
-  yearly: {
+  [ReadingGoalExampleKey.YEARLY]: {
     i18nKey: 'year',
     icon: CalendarIcon,
     values: {
@@ -155,7 +166,7 @@ export const readingGoalExamples = {
       period: QuranGoalPeriod.Continuous,
     },
   },
-  custom: {
+  [ReadingGoalExampleKey.CUSTOM]: {
     i18nKey: 'custom',
     icon: SettingsIcon,
   },
@@ -172,8 +183,18 @@ const initialState: ReadingGoalState = {
   rangeEndVerse: '114:6',
 };
 
-const useReadingGoalReducer = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const initFromExample = (key?: ReadingGoalExampleKey): ReadingGoalState => {
+  if (!key) return initialState;
+  if (key === ReadingGoalExampleKey.CUSTOM) return { ...initialState, exampleKey: key };
+  return {
+    ...initialState,
+    exampleKey: key,
+    ...readingGoalExamples[key].values,
+  };
+};
+
+const useReadingGoalReducer = (initialExampleKey?: ReadingGoalExampleKey) => {
+  const [state, dispatch] = useReducer(reducer, initialExampleKey, initFromExample);
 
   return [state, dispatch] as const;
 };

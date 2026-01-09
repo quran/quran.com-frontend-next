@@ -140,6 +140,7 @@
     "decrease": "Giảm",
     "increase": "Tăng"
   },
+  "create-my-goal": "Tạo mục tiêu của tôi",
   "default-description": "Kinh Qur'an được dịch sang nhiều ngôn ngữ với giao diện đơn giản và dễ sử dụng.",
   "delete": "Xóa",
   "developers": "Các nhà phát triển",
@@ -414,6 +415,7 @@
     "by": "Sắp xếp theo",
     "descending": "Đi xuống"
   },
+  "stay-on-track": "🎯 Hãy giữ vững mục tiêu!",
   "style": "Kiểu chữ",
   "submit": "Nộp",
   "subscribe": "Đăng ký",

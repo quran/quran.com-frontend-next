@@ -140,6 +140,7 @@
     "decrease": "Verminderen",
     "increase": "Toename"
   },
+  "create-my-goal": "Mijn doel creëren",
   "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
   "delete": "Verwijderen",
   "developers": "Ontwikkelaars",
@@ -414,6 +415,7 @@
     "by": "Sorteer op",
     "descending": "Aflopend"
   },
+  "stay-on-track": "🎯 Blijf op koers!",
   "style": "Stijl",
   "submit": "Indienen",
   "subscribe": "Abonneren",

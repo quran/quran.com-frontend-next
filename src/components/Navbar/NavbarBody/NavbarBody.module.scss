@@ -33,6 +33,24 @@
   }
 }
 
+.bannerContainerTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.bannerContainerCenter {
+  display: none;
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .centerVertically {
   @include utility.center-vertically;
 }

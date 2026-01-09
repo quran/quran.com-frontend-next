@@ -422,7 +422,10 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
   return `/collections/${collectionId}`;
 };
 
-export const getReadingGoalNavigationUrl = () => '/reading-goal';
+export const getReadingGoalNavigationUrl = (example?: string) =>
+  example && example.trim() !== ''
+    ? `/reading-goal?example=${encodeURIComponent(example)}`
+    : '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
@@ -430,7 +433,7 @@ export const getBeyondRamadanNavigationUrl = () => '/beyond-ramadan';
 export const getWhatIsRamadanNavigationUrl = () => '/what-is-ramadan';
 export const getTakeNotesNavigationUrl = () => '/take-notes';
 export const getLoginNavigationUrl = (redirectTo?: string) =>
-  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
+  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${encodeURIComponent(redirectTo)}` : ''}`;
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 

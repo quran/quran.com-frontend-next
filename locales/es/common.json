@@ -140,6 +140,7 @@
     "decrease": "Disminuir",
     "increase": "Aumentar"
   },
+  "create-my-goal": "Crea mi meta",
   "default-description": "El Corán traducido a muchos idiomas en una interfaz sencilla y fácil de usar",
   "delete": "Borrar",
   "developers": "Desarrolladores",
@@ -414,6 +415,7 @@
     "by": "Ordenar por",
     "descending": "Descendiente"
   },
+  "stay-on-track": "¡Manténgase en el buen camino!",
   "style": "Estilo",
   "submit": "Enviar",
   "subscribe": "Suscribirse.",
