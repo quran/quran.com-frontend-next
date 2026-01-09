@@ -1,12 +1,10 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationViewCell.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
-import { isRTLLocale } from '@/utils/locale';
 
 export enum TabId {
   TAFSIR = 'tafsir',
@@ -29,9 +27,6 @@ interface BottomActionsTabsProps {
 }
 
 const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslationView }) => {
-  const { lang } = useTranslation();
-  const isRTL = isRTLLocale(lang);
-
   const handleTabClick = (
     e: React.MouseEvent,
     onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
@@ -51,7 +46,6 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
       <div
         className={classNames(styles.tabsContainer, {
           [styles.center]: !isTranslationView,
-          [styles.tabsContainerRTL]: isRTL,
         })}
       >
         {tabs
