@@ -56,6 +56,14 @@ $virtual-scrolling-height-bandage: calc(
   }
 }
 
+.translationView {
+  padding-block-end: var(--spacing-xxlarge-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: var(--spacing-medium2-px);
+  }
+}
+
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;

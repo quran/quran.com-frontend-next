@@ -47,6 +47,7 @@ const QuranReader = ({
         className={classNames(styles.container, {
           [styles.withVisibleSideBar]: isSideBarVisible,
           [styles.withSidebarNavigationOpenOrAuto]: isSidebarNavigationVisible,
+          [styles.translationView]: !isReadingPreference,
         })}
       >
         <div

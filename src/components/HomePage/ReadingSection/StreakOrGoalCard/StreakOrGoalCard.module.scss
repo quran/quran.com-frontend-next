@@ -56,11 +56,19 @@
 }
 
 .circularProgressbar {
-    height: 60px;
-    width: 60px;
+    height: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
+    width: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
 }
 
 .circularProgressbarContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-micro);
+}
+
+.container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -91,7 +99,7 @@
 
 .circularProgressbarText {
     fill: var(--color-text-black);
-    font-size: 20px;
+    font-size: var(--font-size-normal-px);
     dominant-baseline: middle;
     text-anchor: middle;
     font-weight: var(--font-weight-bold);
@@ -100,8 +108,8 @@
 .goalArrowIcon {
     svg {
         @include breakpoints.smallerThanTablet {
-            width: 12px !important;
-            height: 12px !important;
+            width: var(--spacing-small-px) !important;
+            height: var(--spacing-small-px) !important;
         }
     }
 }
