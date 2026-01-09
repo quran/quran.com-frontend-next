@@ -21,7 +21,7 @@ $cards-grid-min-height: 321px;
   margin: auto auto var(--spacing-xlarge-px);
 
   @include breakpoints.smallerThanTablet {
-    margin: auto auto var(--spacing-medium);
+    margin: auto auto var(--spacing-medium2-px);
   }
 }
 

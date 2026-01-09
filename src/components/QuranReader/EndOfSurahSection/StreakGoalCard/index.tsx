@@ -42,6 +42,29 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
     logButtonClick('end_of_surah_goal_card_set_goal');
   };
 
+  // Helper function to split subtitle text intelligently for line break
+  const getFormattedSubtitle = (text: string) => {
+    // Find the last comma in the text
+    const lastCommaIndex = text.lastIndexOf(',');
+
+    if (lastCommaIndex === -1) {
+      // No comma found, return text as is
+      return text;
+    }
+
+    // Split at the last comma
+    const firstPart = text.substring(0, lastCommaIndex + 1); // Include the comma
+    const secondPart = text.substring(lastCommaIndex + 1).trim();
+
+    return (
+      <>
+        {firstPart}
+        <br />
+        {secondPart}
+      </>
+    );
+  };
+
   if (!hasGoalOrStreak) {
     return (
       <Card
@@ -58,11 +81,13 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
             </h3>
           </div>
           {!isMobile && (
-            <p className={styles.subtitle}>{t('end-of-surah.achieve-quran-goals-desktop')}</p>
+            <p className={styles.subtitle}>
+              {getFormattedSubtitle(t('end-of-surah.achieve-quran-goals-desktop'))}
+            </p>
           )}
           <Button
             type={ButtonType.Success}
-            size={ButtonSize.Medium}
+            size={isMobile ? ButtonSize.Small : ButtonSize.Medium}
             href={getReadingGoalNavigationUrl()}
             className={styles.button}
             onClick={onSetGoalButtonClicked}
@@ -107,13 +132,19 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
             <span className={styles.streakText}>{streakLabel}</span>
           </div>
           {!goal && (
-            <IconContainer
-              size={IconSize.Xsmall}
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              className={styles.streakArrowIcon}
-              aria-hidden="true"
-            />
+            <Link
+              href={getReadingGoalNavigationUrl()}
+              onClick={onSetGoalButtonClicked}
+              className={styles.streakArrowLink}
+            >
+              <IconContainer
+                size={IconSize.Xsmall}
+                icon={<ArrowIcon />}
+                shouldForceSetColors={false}
+                className={styles.streakArrowIcon}
+                aria-hidden="true"
+              />
+            </Link>
           )}
         </div>
 
