@@ -2,13 +2,16 @@ import { useState, useMemo, useEffect, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 import VerseListItem from './VerseListItem';
 
 import useChapterIdsByUrlPath from '@/hooks/useChapterId';
-import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import {
+  selectLastReadVerseKey,
+  setLastReadVerse,
+} from '@/redux/slices/QuranReader/readingTracker';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -25,6 +28,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const dispatch = useDispatch();
   const router = useRouter();
   const chaptersData = useContext(DataContext);
 
@@ -109,6 +113,22 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
 
   const handleVerseClick = (e: React.MouseEvent, verseKey: string) => {
     e.preventDefault();
+    // If the verse is already selected, do nothing
+    if (lastReadVerseKey.verseKey === verseKey) {
+      return;
+    }
+
+    // Save the selected verse in the redux store as the last read verse
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          ...lastReadVerseKey,
+          verseKey,
+          chapterId: currentChapterId,
+        },
+        chaptersData,
+      }),
+    );
     const href = getChapterWithStartingVerseUrl(verseKey);
     navigateAndHandleAfterNavigation(href);
     logButtonClick(`navigation_list_verse`, {
