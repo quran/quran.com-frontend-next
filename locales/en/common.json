@@ -140,6 +140,7 @@
     "decrease": "Decrease",
     "increase": "Increase"
   },
+  "create-my-goal": "Create My Goal",
   "default-description": "The Quran translated into many languages in a simple and easy interface",
   "delete": "Delete",
   "developers": "Developers",
@@ -414,6 +415,7 @@
     "by": "Sort by",
     "descending": "Descending"
   },
+  "stay-on-track": "🎯 Stay on track!",
   "style": "Style",
   "submit": "Submit",
   "subscribe": "Subscribe",

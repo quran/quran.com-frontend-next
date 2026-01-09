@@ -140,6 +140,7 @@
     "decrease": "Diminuir",
     "increase": "Aumentar"
   },
+  "create-my-goal": "Criar meu objetivo",
   "default-description": "O Quran traduzido para vários idiomas em uma interface simples e fácil",
   "delete": "Excluir",
   "developers": "Desenvolvedores",
@@ -414,6 +415,7 @@
     "by": "Ordenar por",
     "descending": "descendente"
   },
+  "stay-on-track": "🎯 Mantenha o foco!",
   "style": "Estilo",
   "submit": "Enviar",
   "subscribe": "Se inscrever",

@@ -140,6 +140,7 @@
     "decrease": "Mengurangi",
     "increase": "Meningkatkan"
   },
+  "create-my-goal": "Buat Tujuan Saya",
   "default-description": "Al-Qur'an diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
   "delete": "Hapus",
   "developers": "Pengembang",
@@ -414,6 +415,7 @@
     "by": "Sortir dengan",
     "descending": "Menurun"
   },
+  "stay-on-track": "🎯 Tetap di jalur yang benar!",
   "style": "Gaya",
   "submit": "Kirim",
   "subscribe": "Mendaftar",

@@ -140,6 +140,7 @@
     "decrease": "Azalt",
     "increase": "Arttır"
   },
+  "create-my-goal": "Hedefimi Oluştur",
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
   "delete": "Sil",
   "developers": "Geliştiriciler",
@@ -414,6 +415,7 @@
     "by": "Sırala",
     "descending": "Azalan"
   },
+  "stay-on-track": "🎯 Yolda kalın!",
   "style": "Stil",
   "submit": "Gönder",
   "subscribe": "Abone ol",
