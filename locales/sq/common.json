@@ -101,6 +101,7 @@
   "bookmarked": "Shënuar si faqeshënues",
   "both": "të dyja",
   "cancel": "Anullo",
+  "change-theme": "Ndrysho temën",
   "click-here": "Kliko këtu",
   "close": "Mbylle",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
     "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
     "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
+    "language-change-failed": "Ndryshimi i gjuhës dështoi. Ju lutemi provoni përsëri.",
     "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
     "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi.",
     "ranges-no-value": "Fillimi dhe mbarimi i diapazonit duhet të kenë një vlerë",
@@ -265,6 +267,7 @@
   "juz": "Xhuz",
   "language": "Gjuhë",
   "languages": "Gjuhët",
+  "learn": "Mëso",
   "learn-more": "Mëso më shumë",
   "learning-plans": "Planet mësimore",
   "less": "Më pak",
@@ -281,6 +284,7 @@
   "mode": "Modaliteti",
   "more": "Më shumë",
   "my-learning-plans": "Planet e mia të mësimit",
+  "my-quran": "Kurani im",
   "navigate": "Navigoni",
   "network": "Rrjeti",
   "new": "I ri!",
@@ -333,6 +337,7 @@
   "q-reflect": "Kurani Reflekto",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
+  "read": "Lexo",
   "reading-history": "Leximi i historisë",
   "reading-preference": {
     "reading": "Leximi",
@@ -372,6 +377,7 @@
   },
   "seconds": "Sekonda",
   "see-new": "Shihni çfarë ka të re",
+  "select-language": "Zgjidh Gjuhën",
   "settings": {
     "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
     "no-translation-selected": "Nuk u zgjodh asnjë përkthim",

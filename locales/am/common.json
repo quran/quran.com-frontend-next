@@ -101,6 +101,7 @@
   "bookmarked": "ዕልባት የተደረገበት",
   "both": "ሁለቱም",
   "cancel": "ሰርዝ",
+  "change-theme": "ገጽታ ቀይር",
   "click-here": "እዚህ ጠቅ ያድርጉ",
   "close": "ገጠመ",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "ዕልባት ከስምረት ውጪ ነው።",
     "email-login-fail": "በኢሜይል መግባት አልተሳካም። እባክዎ እንደገና ይሞክሩ።",
     "general": "የሆነ ችግር ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።",
+    "language-change-failed": "ቋንቋውን መቀየር አልተሳካም። እባክዎ እንደገና ይሞክሩ።",
     "offline": "ግንኙነትዎን የጣሉ ይመስላል። እባክዎ ያረጋግጡትና እንደገና ይሞክሩ።",
     "pref-persist-fail": "ቅንብሮችዎን ከደመናው ጋር ማመሳሰል አልተሳካም።",
     "ranges-no-value": "የክልል መጀመሪያ እና መጨረሻ እሴት ሊኖራቸው ይገባል",
@@ -265,6 +267,7 @@
   "juz": "ጁዝ",
   "language": "ቋንቋ",
   "languages": "ቋንቋዎች",
+  "learn": "ተማር",
   "learn-more": "ተጨማሪ ይወቁ",
   "learning-plans": "የመማሪያ ዕቅዶች",
   "less": "ያነሰ",
@@ -281,6 +284,7 @@
   "mode": "ሁነታ",
   "more": "ተጨማሪ",
   "my-learning-plans": "የእኔ የትምህርት ዕቅዶች",
+  "my-quran": "ቁርዓኔ",
   "navigate": "ዳስስ",
   "network": "አውታረ መረብ",
   "new": "አዲስ!",
@@ -333,6 +337,7 @@
   "q-reflect": "ቁርዓን ነጸብራቅ",
   "quran-com": "Quran.com",
   "quran-radio": "የቁርአን ሬዲዮ",
+  "read": "አንብብ",
   "reading-history": "የንባብ ታሪክ",
   "reading-preference": {
     "reading": "ንባብ",
@@ -372,6 +377,7 @@
   },
   "seconds": "ሰከንዶች",
   "see-new": "ምን አዲስ ነገር እንዳለ ይመልከቱ",
+  "select-language": "ቋንቋ ይምረጡ",
   "settings": {
     "no-tafsir-selected": "ምንም ታፍሲር አልተመረጠም",
     "no-translation-selected": "ምንም ትርጉም አልተመረጠም",

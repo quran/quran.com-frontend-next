@@ -101,6 +101,7 @@
   "bookmarked": "تم الحفظ",
   "both": "كلاهما",
   "cancel": "إلغاء",
+  "change-theme": "تغيير المظهر",
   "click-here": "اضغط هنا",
   "close": "أغلِاق",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "الإشارة المرجعية غير متزامنة.",
     "email-login-fail": "فشل تسجيل الدخول بالبريد الإلكتروني. يرجى المحاولة مرة أخرى",
     "general": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "language-change-failed": "فشل تغيير اللغة. يرجى المحاولة مرة أخرى.",
     "offline": "يبدو أنك فقدت الاتصال. يرجى التحقق والمحاولة مرة أخرى.",
     "pref-persist-fail": "فشل مزامنة إعداداتك مع جميع أجهزتك",
     "ranges-no-value": "يجب تحديد قيمة لكل من البداية والنهاية",
@@ -265,6 +267,7 @@
   "juz": "جزء",
   "language": "لغة",
   "languages": "اللغات",
+  "learn": "يتعلم",
   "learn-more": "تعرف على المزيد",
   "learning-plans": "الخطط التعليمية",
   "less": "أقل",
@@ -281,6 +284,7 @@
   "mode": "الوضع",
   "more": "المزيد",
   "my-learning-plans": "خططي التعليمية",
+  "my-quran": "مصحفي",
   "navigate": "تصفّح",
   "network": "الشبكة",
   "new": "جديد!",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "راديو القرآن الكريم",
+  "read": "يقرأ",
   "reading-history": "سجل القراءة",
   "reading-preference": {
     "reading": "القراءة",
@@ -372,6 +377,7 @@
   },
   "seconds": "ثواني",
   "see-new": "اطلع على الجديد",
+  "select-language": "اختر اللغة",
   "settings": {
     "no-tafsir-selected": "لم يتم اختيار أي تفسير",
     "no-translation-selected": "لم يتم اختيار ترجمة",

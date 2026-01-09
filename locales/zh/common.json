@@ -101,6 +101,7 @@
   "bookmarked": "书签",
   "both": "全选",
   "cancel": "取消",
+  "change-theme": "更改主题",
   "click-here": "点击这里",
   "close": "关闭",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "书签不同步。",
     "email-login-fail": "使用电子邮件登录失败。请再试一次",
     "general": "出了些问题。请再试一次。",
+    "language-change-failed": "语言切换失败，请重试。",
     "offline": "看起来你失去了连接。请检查并重试。",
     "pref-persist-fail": "无法将您的设置同步到云端。",
     "ranges-no-value": "范围开始和结束必须具有值",
@@ -265,6 +267,7 @@
   "juz": "卷",
   "language": "语",
   "languages": "语言",
+  "learn": "学习",
   "learn-more": "学到更多",
   "learning-plans": "学习计划",
   "less": "较少的",
@@ -281,6 +284,7 @@
   "mode": "模式",
   "more": "更多的",
   "my-learning-plans": "我的学习计划",
+  "my-quran": "我的古兰经",
   "navigate": "导航",
   "network": "友情链接",
   "new": "新的！",
@@ -333,6 +337,7 @@
   "q-reflect": "古兰经反射",
   "quran-com": "Quran.com",
   "quran-radio": "在线听古兰经",
+  "read": "读",
   "reading-history": "阅读历史",
   "reading-preference": {
     "reading": "诵读",
@@ -372,6 +377,7 @@
   },
   "seconds": "秒数",
   "see-new": "查看最新动态",
+  "select-language": "选择语言",
   "settings": {
     "no-tafsir-selected": "尚未选择经注",
     "no-translation-selected": "尚未选择译文",

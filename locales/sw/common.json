@@ -101,6 +101,7 @@
   "bookmarked": "Zilizoalamishwa",
   "both": "Zote mbili",
   "cancel": "Batilisha",
+  "change-theme": "Badilisha Mandhari",
   "click-here": "Bofya hapa",
   "close": "Funga",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "Alamisho haijasawazishwa.",
     "email-login-fail": "Imeshindikana kuingia kwa kutumia barua pepe. Tafadhali jaribu tena",
     "general": "Hitilafu fulani imetokea. Tafadhali jaribu tena.",
+    "language-change-failed": "Imeshindwa kubadilisha lugha. Tafadhali jaribu tena.",
     "offline": "Inaonekana umepoteza muunganisho wako. Tafadhali iangalie na ujaribu tena.",
     "pref-persist-fail": "Imeshindikana kusawazisha mipangilio yako kwenye cloud.",
     "ranges-no-value": "Msururu wa mwanzo na wa mwisho lazima iwe na tarakimu",
@@ -265,6 +267,7 @@
   "juz": "Juzuu",
   "language": "Lugha",
   "languages": "Lugha",
+  "learn": "Jifunze",
   "learn-more": "Jifunze zaidi",
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
@@ -281,6 +284,7 @@
   "mode": "Hali",
   "more": "Zaidi",
   "my-learning-plans": "Mipango Yangu ya Kujifunza",
+  "my-quran": "Qurani Yangu",
   "navigate": "Chunguza",
   "network": "Mtandao",
   "new": "Mpya!",
@@ -333,6 +337,7 @@
   "q-reflect": "Quranreflect",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
+  "read": "Soma",
   "reading-history": "Historia ya kusoma",
   "reading-preference": {
     "reading": "Soma",
@@ -372,6 +377,7 @@
   },
   "seconds": "Sekunde",
   "see-new": "Tazama Nini Kipya",
+  "select-language": "Chagua Lugha",
   "settings": {
     "no-tafsir-selected": "Hakuna tafsir iliyochaguliwa",
     "no-translation-selected": "Hakuna tarjuma iliyochaguliwa",

@@ -101,6 +101,7 @@
   "bookmarked": "Ditanda buku",
   "both": "Kedua-duanya",
   "cancel": "Batal",
+  "change-theme": "Tukar Tema",
   "click-here": "Tekan di sini",
   "close": "Tutup",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "Penanda halaman tidak segerak.",
     "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
     "general": "Kesilapan telah berlaku. Sila cuba lagi.",
+    "language-change-failed": "Gagal menukar bahasa. Sila cuba lagi.",
     "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
     "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
     "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
@@ -265,6 +267,7 @@
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
+  "learn": "Belajar",
   "learn-more": "Ketahui lebih lanjut",
   "learning-plans": "Rancangan Pembelajaran",
   "less": "Kurang",
@@ -281,6 +284,7 @@
   "mode": "Mod",
   "more": "Lagi",
   "my-learning-plans": "Rancangan Pembelajaran Saya",
+  "my-quran": "Al-Quran saya",
   "navigate": "Navigasi",
   "network": "Rangkaian",
   "new": "Terbaru!",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
+  "read": "Baca",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
     "reading": "Membaca",
@@ -372,6 +377,7 @@
   },
   "seconds": "Saat",
   "see-new": "Lihat terbaru",
+  "select-language": "Pilih Bahasa",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",
