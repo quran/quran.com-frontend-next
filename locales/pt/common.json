@@ -101,6 +101,7 @@
   "bookmarked": "Favorito",
   "both": "Ambos",
   "cancel": "Cancelar",
+  "change-theme": "Alterar tema",
   "click-here": "Clique aqui",
   "close": "Fechar",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "O marcador está fora de sincronia.",
     "email-login-fail": "Falha ao fazer login com e-mail. Por favor, tente novamente",
     "general": "Algo deu errado. Por favor, tente novamente.",
+    "language-change-failed": "Não foi possível alterar o idioma. Tente novamente.",
     "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente.",
     "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem.",
     "ranges-no-value": "O início e o fim do intervalo devem ter um valor",
@@ -265,6 +267,7 @@
   "juz": "Juz",
   "language": "Língua",
   "languages": "línguas",
+  "learn": "Aprender",
   "learn-more": "Saber mais",
   "learning-plans": "Planos de aprendizagem",
   "less": "Menos",
@@ -281,6 +284,7 @@
   "mode": "Modo",
   "more": "Mais",
   "my-learning-plans": "Meus planos de aprendizagem",
+  "my-quran": "Meu Alcorão",
   "navigate": "Navegar",
   "network": "Rede",
   "new": "Novo!",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Rádio Quran",
+  "read": "Ler",
   "reading-history": "Lendo o histórico",
   "reading-preference": {
     "reading": "Lendo",
@@ -372,6 +377,7 @@
   },
   "seconds": "Segundos",
   "see-new": "Veja as novidades",
+  "select-language": "Selecione o idioma",
   "settings": {
     "no-tafsir-selected": "Nenhum tafsir selecionado",
     "no-translation-selected": "Nenhuma tradução selecionada",

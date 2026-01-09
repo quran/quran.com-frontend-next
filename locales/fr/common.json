@@ -101,6 +101,7 @@
   "bookmarked": "Favori ajouté",
   "both": "Tous",
   "cancel": "Annuler",
+  "change-theme": "Changer de thème",
   "click-here": "Cliquer ici",
   "close": "Fermer",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "Le favori n'est pas synchronisé.",
     "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
     "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "language-change-failed": "Impossible de changer la langue. Veuillez réessayer.",
     "offline": "On dirait que vous avez perdu votre connexion. Veuillez vérifier et réessayer.",
     "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud.",
     "ranges-no-value": "Le début et la fin de la plage doivent avoir une valeur",
@@ -265,6 +267,7 @@
   "juz": "Juz",
   "language": "Langue",
   "languages": "Langues",
+  "learn": "Apprendre",
   "learn-more": "En savoir plus",
   "learning-plans": "Plans d'Apprentissage",
   "less": "Moins",
@@ -281,6 +284,7 @@
   "mode": "Mode",
   "more": "Plus",
   "my-learning-plans": "Mes Plans d'Apprentissage",
+  "my-quran": "Mon Coran",
   "navigate": "Naviguer",
   "network": "Réseau",
   "new": "Nouveauté !",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "read": "Lire",
   "reading-history": "Historique de lecture",
   "reading-preference": {
     "reading": "Lecture",
@@ -372,6 +377,7 @@
   },
   "seconds": "Secondes",
   "see-new": "Voir les nouveautés",
+  "select-language": "Sélectionner la langue",
   "settings": {
     "no-tafsir-selected": "Aucun tafsir sélectionné",
     "no-translation-selected": "Aucune traduction sélectionnée",

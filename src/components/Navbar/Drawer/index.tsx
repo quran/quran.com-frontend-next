@@ -35,6 +35,7 @@ export enum DrawerSide {
 }
 
 interface Props {
+  id?: string;
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
@@ -86,6 +87,7 @@ enum ActionSource {
 }
 
 const Drawer: React.FC<Props> = ({
+  id,
   type,
   side = DrawerSide.Right,
   header,
@@ -161,6 +163,7 @@ const Drawer: React.FC<Props> = ({
   const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
+      data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
       className={classNames(styles.container, {
         [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,
@@ -169,7 +172,7 @@ const Drawer: React.FC<Props> = ({
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
       })}
       ref={drawerRef}
-      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
+      id={id || (type === DrawerType.Settings ? 'settings-drawer-container' : undefined)}
     >
       <div
         className={classNames(styles.header, {

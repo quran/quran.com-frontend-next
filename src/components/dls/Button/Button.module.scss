@@ -1,6 +1,10 @@
 // we are using this mixin ase using the one from utility.scss will break the remotion build
 @mixin lighten-background-color {
-  background-image: linear-gradient(to right, var(--color-background-lighten), var(--color-background-lighten));
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-lighten),
+    var(--color-background-lighten)
+  );
 }
 
 .base {
@@ -13,8 +17,8 @@
   color: var(--themed-fg, var(--color-text-default));
   background-color: var(--themed-bg, var(--color-background-default));
   font-weight: var(--font-weight-medium);
-  border: 1px solid var(--themed-border);
-  height: var(--button-size);
+  border: var(--spacing-hairline-px) solid var(--themed-border);
+  block-size: var(--button-size);
   justify-content: center;
   border-radius: var(--border-radius-default);
   padding-inline: var(--spacing-small);
@@ -102,12 +106,12 @@
 // shape
 .square {
   border-radius: var(--border-radius-default);
-  width: var(--button-size);
+  inline-size: var(--button-size);
   padding: 0;
 }
 .circle {
   border-radius: var(--border-radius-circle);
-  width: var(--button-size);
+  inline-size: var(--button-size);
   padding: 0;
 }
 .pill {
@@ -180,17 +184,17 @@
 
 // svg sizes
 .base > span > svg {
-  height: calc(0.5 * var(--button-size));
-  width: calc(0.5 * var(--button-size));
+  block-size: calc(0.5 * var(--button-size));
+  inline-size: calc(0.5 * var(--button-size));
 }
-.base[dir="rtl"][data-auto-flip-icon="true"] svg {
+.base[dir='rtl'][data-auto-flip-icon='true'] svg {
   transform: scaleX(-1);
 }
 
 .base.disabled {
   cursor: not-allowed;
   background-color: var(--color-background-alternative-medium);
-  border: 1px solid var(--color-secondary-medium);
+  border: var(--spacing-hairline-px) solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
   @media (hover: hover) {
@@ -216,13 +220,52 @@
   padding-inline-end: 0;
 }
 
-.simplified {
-  --themed-bg: #22a5ad;
+.simplified_base {
   background-color: transparent;
   color: var(--themed-bg);
   font-weight: var(--font-weight-bold);
   border-radius: var(--border-radius-rounded);
-  border: 1px solid var(--themed-bg);
+  border: var(--spacing-hairline-px) solid var(--themed-bg);
   font-size: var(--font-size-small);
   padding: var(--spacing-xxsmall);
+}
+
+.simplified {
+  @extend .simplified_base;
+  --themed-bg: #22a5ad;
+}
+
+.simplified_accent {
+  @extend .simplified_base;
+  --themed-bg: var(--color-success-medium);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-success-deep);
+      color: var(--color-text-inverse);
+      opacity: var(--opacity-85);
+    }
+  }
+}
+
+.accent {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-rounded);
+  border: none;
+  font-size: var(--font-size-small-px);
+  padding: var(--spacing-xxsmall-px);
+
+  .prefix svg path {
+    fill: var(--color-text-inverse);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-success-deep);
+      color: var(--color-text-inverse);
+      opacity: var(--opacity-85);
+    }
+  }
 }

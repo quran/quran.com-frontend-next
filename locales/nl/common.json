@@ -101,6 +101,7 @@
   "bookmarked": "Bladwijzer",
   "both": "Beide",
   "cancel": "Annuleren",
+  "change-theme": "Thema wijzigen",
   "click-here": "Klik hier",
   "close": "Uitzetten",
   "command-bar": {
@@ -164,6 +165,7 @@
     "bookmark-sync": "Bladwijzer loopt niet synchroon.",
     "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
     "general": "Er is iets fout gegaan. Probeer het opnieuw a.u.b.",
+    "language-change-failed": "Het wijzigen van de taal is mislukt. Probeer het opnieuw.",
     "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw a.u.b.",
     "pref-persist-fail": "Het synchroniseren van je instellingen met de cloud is mislukt.",
     "ranges-no-value": "Het begin en einde van het bereik moeten een waarde hebben",
@@ -265,6 +267,7 @@
   "juz": "Juz",
   "language": "Taal",
   "languages": "Talen",
+  "learn": "Leren",
   "learn-more": "Leer meer",
   "learning-plans": "Leerplannen",
   "less": "Minder",
@@ -281,6 +284,7 @@
   "mode": "Modus",
   "more": "Meer",
   "my-learning-plans": "Mijn leerplannen",
+  "my-quran": "Mijn Koran",
   "navigate": "Navigeren",
   "network": "Netwerk",
   "new": "Nieuw!",
@@ -333,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Koran Radio",
+  "read": "Lezen",
   "reading-history": "Geschiedenis lezen",
   "reading-preference": {
     "reading": "Lezing",
@@ -372,6 +377,7 @@
   },
   "seconds": "Seconden",
   "see-new": "Bekijk wat er nieuw is",
+  "select-language": "Taal selecteren",
   "settings": {
     "no-tafsir-selected": "Geen tafsir geselecteerd",
     "no-translation-selected": "Geen vertaling geselecteerd",
