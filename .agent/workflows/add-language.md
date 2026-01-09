@@ -84,6 +84,39 @@ Then translate each JSON file (e.g., `common.json`, `home.json`, etc.).
 
 ---
 
+### 4.5 Create Chapters Data File
+
+**File:** `data/chapters/{iso_code}.json`
+
+Create a chapters data file with translated surah names. This file is **required** for sitemap
+generation.
+
+**Purpose:** Provides localized `translatedName` for each surah (used in SEO, page titles, sitemap).
+
+```bash
+# Copy from English as starting point
+cp data/chapters/en.json data/chapters/vi.json
+```
+
+Then translate the `translatedName` field for each chapter. Example structure:
+
+```json
+{
+  "1": {
+    "revelationPlace": "makkah",
+    "transliteratedName": "Al-Fatihah",
+    "versesCount": 7,
+    "translatedName": "The Opener", // <-- Translate this
+    "slug": "al-fatihah"
+  }
+}
+```
+
+> [!IMPORTANT] This file is required for `yarn run generate-sitemap` to work. Without it, the build
+> will fail.
+
+---
+
 ### 5. Add Locale Metadata
 
 **File:** `src/utils/locale.ts`
