@@ -30,6 +30,8 @@ type Props = {
 
 const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay }) => {
   const { t, lang } = useTranslation('home');
+  const percent = goal?.isCompleted ? 100 : Math.min(goal?.progress?.percent || 0, 100);
+  const localizedPercent = toLocalizedNumber(percent, lang);
 
   const onStreakCardClicked = () => {
     logButtonClick('homepage_reading_streak_card');
@@ -72,8 +74,8 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
           <div className={styles.circularProgressbarContainer}>
             <div className={styles.circularProgressbar}>
               <CircularProgressbar
-                text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
-                value={goal.progress.percent}
+                text={`${localizedPercent}%`}
+                value={percent}
                 maxValue={100}
                 strokeWidth={12}
                 classes={{
@@ -83,11 +85,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                 }}
               />
             </div>
-            <GoalStatus
-              goal={goal}
-              currentActivityDay={currentActivityDay}
-              percent={goal.progress.percent}
-            />
+            <GoalStatus goal={goal} currentActivityDay={currentActivityDay} percent={percent} />
             <Link href={getReadingGoalProgressNavigationUrl()} onClick={onGoalArrowClicked}>
               <IconContainer
                 size={IconSize.Xsmall}
