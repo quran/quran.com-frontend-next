@@ -5,9 +5,9 @@
   position: relative;
   overflow: hidden !important;
   /* Fallback for browsers without dynamic viewport units */
-  max-block-size: calc(100vh - var(--navbar-container-height));
+  max-block-size: calc(100vh - var(--navbar-height));
   /* Prefer dynamic viewport units where supported */
-  max-height: calc(100dvh - var(--navbar-container-height));
+  max-block-size: calc(100dvh - var(--navbar-height));
 }
 
 .mainListItems {
