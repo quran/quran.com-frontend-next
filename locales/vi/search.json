@@ -1,0 +1,12 @@
+{
+  "default-translations": "Bản dịch mặc định",
+  "filter": "lọc",
+  "language-filter-label": "Tìm kiếm tất cả các bản dịch của một ngôn ngữ",
+  "language-select": "Chọn ngôn ngữ",
+  "reset": "cài lại",
+  "search": "Tìm kiếm",
+  "search-desc": "Tìm kiếm trong toàn bộ kho tàng Kinh Qur'an và các bản dịch bằng công cụ tìm kiếm đa ngôn ngữ mạnh mẽ và chính xác cao.",
+  "search-title": "Tìm kiếm '{{searchQuery}}'",
+  "searching-translations": "Tìm kiếm bản dịch",
+  "translation-select": "Chọn bản dịch"
+}

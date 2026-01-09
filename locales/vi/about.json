@@ -1,0 +1,41 @@
+{
+  "credits": {
+    "desc": "Chúng tôi xin bày tỏ lòng biết ơn sâu sắc đến tất cả những người đã ủng hộ và đóng góp cho dự án này, giúp cho Kinh Qur'an đến được với hàng triệu người trên toàn thế giới.",
+    "lokalize": "<0>Lokalize</0>: Một hệ thống dịch thuật hỗ trợ bằng máy tính tập trung vào năng suất và đảm bảo chất lượng, cung cấp quy trình bản địa hóa liền mạch.",
+    "quran-align": "<0>Collin Fair</0>: Một công cụ để phân đoạn chính xác từng từ trong bản ghi âm bài tụng Kinh Qur'an.",
+    "quran-complex": "<0>QuranComplex</0>: Tổ hợp In ấn Kinh Qur'an Vinh Quang của Vua Fahd là đơn vị hàng đầu trong việc phục vụ Kinh Qur'an Vinh Quang và các khoa học liên quan, dịch thuật ý nghĩa của Kinh Qur'an và bảo vệ văn bản Kinh Qur'an khỏi sự xuyên tạc, thông qua việc sử dụng tối ưu các công nghệ tiên tiến trong lĩnh vực in ấn, ghi âm, xuất bản điện tử và ứng dụng kỹ thuật số.",
+    "quran-enc": "<0>QuranEnc</0>: Một cổng thông tin cung cấp các bản dịch miễn phí và đáng tin cậy về ý nghĩa và chú giải của Kinh Qur'an cao quý bằng nhiều ngôn ngữ trên thế giới.",
+    "tanzil": "<0>Tanzil</0>: Một dự án quốc tế về Kinh Qur'an nhằm cung cấp một bản văn Kinh Qur'an chính xác và được kiểm chứng cao.",
+    "tarteel": "<0>Tarteel</0>: Một ứng dụng ghi nhớ Kinh Qur'an được hỗ trợ bởi trí tuệ nhân tạo. Ứng dụng được thiết kế để giúp bạn ghi nhớ thông minh hơn, cho dù bạn đang tìm kiếm một câu kinh, theo dõi tiến độ học tập hay theo dõi cùng với bài đọc của mình.",
+    "title": "Lời cảm ơn",
+    "zekr": "<0>Zekr</0>: Một công cụ học tập Kinh Qur'an trên nền tảng mở để duyệt và nghiên cứu Kinh Qur'an."
+  },
+  "global-effort": {
+    "desc": "Hàng triệu người trên khắp thế giới coi Quran.com là nguồn tài liệu kỹ thuật số chính về Kinh Qur'an. Cho dù họ đến để đọc tụng, suy ngẫm, học thuộc lòng hay nghiên cứu, họ đều có chung một mục đích: một mong muốn chân thành được kết nối với lời dạy của Allah. Khi tiếp tục phát triển, chúng tôi vẫn cam kết đảm bảo rằng Quran.com vẫn là một không gian đáng tin cậy, dễ tiếp cận và được thiết kế đẹp mắt dành cho bất kỳ ai muốn tương tác với Kinh Qur'an.",
+    "title": "Một nỗ lực toàn cầu"
+  },
+  "key-features": {
+    "desc": "Quran.com được thiết kế để hỗ trợ mọi giai đoạn tiếp cận Kinh Qur'an—từ đọc và học thuộc lòng đến nghiên cứu và suy ngẫm. Các tính năng của chúng tôi bao gồm:",
+    "features": [
+      "Giao diện Kinh Qur'an thân thiện với người dùng – Trải nghiệm đọc rõ ràng và trực quan trên mọi thiết bị.",
+      "Nhiều bản dịch và chú giải – Truy cập các bản dịch bằng nhiều ngôn ngữ, cùng với phần chú giải.",
+      "Bài đọc kinh bằng âm thanh – Nghe những bài đọc kinh chất lượng cao từ các Qari nổi tiếng thế giới, với tính năng theo dõi từng từ một.",
+      "Tìm kiếm và điều hướng nâng cao – Tìm kiếm các câu thơ ngay lập tức theo chủ đề hoặc từ khóa trên toàn bộ Kinh Qur'an.",
+      "Đánh dấu và ghi chú các câu kinh Ayah – Lưu lại các câu kinh và viết những suy ngẫm cá nhân để tham khảo sau này.",
+      "Tích hợp QuranReflect – Kết nối với cộng đồng toàn cầu thông qua những suy ngẫm và hiểu biết được chia sẻ bởi các học giả và cá nhân.",
+      "Theo dõi tiến độ đọc và mục tiêu – Ghi lại mục tiêu hàng ngày và lịch sử đọc của bạn.",
+      "API dành cho nhà phát triển – Truy cập miễn phí vào nội dung và tính năng để hỗ trợ các ứng dụng Hồi giáo và hoạt động nghiên cứu & phát triển.",
+      "Và còn nhiều hơn thế nữa, Alhamdulillah."
+    ],
+    "title": "Các tính năng và ưu điểm chính"
+  },
+  "main-description": "Từ khi thành lập vào năm 1995, Quran.com luôn cam kết mang Kinh Qur'an đến với mọi người một cách rõ ràng, chân thực và dễ tiếp cận. Mỗi ngày, hàng triệu người trên toàn thế giới truy cập Quran.com để đọc, nghe, nghiên cứu và suy ngẫm về Kinh Qur'an—cho dù họ là những người học tập suốt đời, các học giả, hay chỉ mới bắt đầu hành trình của mình.",
+  "our-mission": {
+    "desc": "Kinh Qur'an được viết ra để đọc, hiểu và suy ngẫm. Sứ mệnh của chúng tôi là xóa bỏ các rào cản tiếp cận và trao quyền cho cá nhân và cộng đồng bằng cách cung cấp trải nghiệm Kinh Qur'an đáng tin cậy, được thiết kế tốt và vô cùng phong phú. Chúng tôi hướng đến việc trở thành nguồn thông tin đáng tin cậy cho bất kỳ ai muốn tiếp cận Kinh Qur'an, được dẫn dắt bởi các nguyên tắc về tính chính xác, rõ ràng và chân thành.",
+    "title": "Sứ mệnh của chúng tôi"
+  },
+  "who-we-are": {
+    "desc": "Quran.com là một waqf (tài sản hiến tặng), được thành lập như một quỹ tín thác công cộng để đảm bảo rằng Kinh Qur'an luôn dễ tiếp cận với tất cả mọi người, miễn phí và không vì mục đích thương mại. Trang web này được quản lý bởi <link>Quran.Foundation</link>, một tổ chức phi lợi nhuận 501(c)(3), duy trì và phát triển Quran.com như một phần trong sứ mệnh cung cấp các nguồn tài liệu Kinh Qur'an chất lượng cao, chính thống cho thế giới. Cam kết của chúng tôi là phục vụ Kinh Qur'an và độc giả của nó với sự xuất sắc, chân thành và trách nhiệm.",
+    "title": "Chúng tôi là ai"
+  }
+}

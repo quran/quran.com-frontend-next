@@ -1,0 +1,48 @@
+{
+  "communication": {
+    "desc": "Chúng tôi có thể sử dụng địa chỉ email của bạn để gửi cho bạn các bản cập nhật quan trọng, bản tin hoặc thông báo liên quan đến dịch vụ, nội dung, v.v. Bạn có thể hủy đăng ký nhận các thông báo này bất cứ lúc nào.",
+    "title": "Giao tiếp"
+  },
+  "contact-us": {
+    "desc": "Nếu bạn có bất kỳ câu hỏi, thắc mắc hoặc yêu cầu nào liên quan đến Chính sách Bảo mật này hoặc việc xử lý thông tin cá nhân của bạn, vui lòng liên hệ với chúng tôi <0>tại đây</0>. Bằng cách sử dụng trang web của chúng tôi, bạn thừa nhận rằng bạn đã đọc và hiểu Chính sách Bảo mật này và đồng ý với việc thu thập, sử dụng và tiết lộ thông tin cá nhân của bạn như được mô tả.",
+    "title": "Liên hệ với chúng tôi"
+  },
+  "cookies": {
+    "desc": "Quran.com sử dụng cookie để nâng cao trải nghiệm duyệt web của bạn, cung cấp nội dung cá nhân hóa và phân tích lưu lượng truy cập trang web. Bằng cách truy cập và sử dụng trang web của chúng tôi, bạn đồng ý với việc sử dụng cookie theo Chính sách Bảo mật này.<br/><br/><li>Các loại cookie chúng tôi sử dụng:</li><subLi>Cookie cần thiết: Những cookie này rất cần thiết cho hoạt động bình thường của trang web và cho phép các tính năng cơ bản, chẳng hạn như điều hướng trang và truy cập vào các khu vực an toàn. Chúng không thu thập bất kỳ thông tin nhận dạng cá nhân nào. Nếu không có những cookie này, một số phần của trang web có thể không hoạt động chính xác.</subLi><subLi>Cookie phân tích và hiệu suất: Chúng tôi sử dụng các cookie này để thu thập thông tin về cách khách truy cập sử dụng trang web của chúng tôi, bao gồm số lượng khách truy cập, các trang họ truy cập và thời gian dành cho mỗi trang. Dữ liệu này giúp chúng tôi phân tích và cải thiện hiệu suất và chức năng của trang web. Các cookie này không xác định danh tính cá nhân của bạn; tất cả dữ liệu đều được tổng hợp và ẩn danh.</subLi>",
+    "title": "Sử dụng Cookie"
+  },
+  "data-analysis": {
+    "desc": "Chúng tôi sử dụng Google Analytics để đảm bảo trang web tiếp tục hoạt động như mong đợi và để biết nên ưu tiên cải thiện những tính năng nào, v.v. Thông tin này được ẩn danh và chúng tôi không truy vết đến bất kỳ cá nhân cụ thể nào.",
+    "title": "Phân tích dữ liệu"
+  },
+  "data-deletion": {
+    "desc": "Để đảm bảo quyền riêng tư và quyền kiểm soát thông tin cá nhân của bạn, chúng tôi cung cấp quy trình xóa tài khoản đơn giản. Khi bạn chọn xóa tài khoản, tất cả dữ liệu cá nhân liên quan sẽ tự động và vĩnh viễn bị xóa khỏi hệ thống của chúng tôi. Bạn có thể bắt đầu quá trình xóa tài khoản bằng cách truy cập trang hồ sơ của mình. Sau khi quá trình xóa được bắt đầu, dữ liệu cá nhân của bạn sẽ được xóa an toàn khỏi máy chủ của chúng tôi trong một khoảng thời gian hợp lý.",
+    "title": "Xóa dữ liệu"
+  },
+  "data-protection": {
+    "desc": "<boldSpan>Quyền truy cập:</boldSpan> Bạn có quyền yêu cầu Quran Foundation cung cấp bản sao dữ liệu cá nhân của mình. Chúng tôi có thể tính phí nhỏ cho dịch vụ này. <br/><br/><boldSpan>Quyền sửa đổi</boldSpan>Bạn có quyền yêu cầu Quran Foundation chỉnh sửa bất kỳ thông tin nào mà bạn cho là không chính xác. Bạn cũng có quyền yêu cầu Quran Foundation bổ sung thông tin mà bạn cho là chưa đầy đủ. <br/><br/><boldSpan>Quyền được xóa bỏ:</boldSpan> Bạn có quyền yêu cầu Quran Foundation xóa dữ liệu cá nhân của mình, trong một số điều kiện nhất định. <br/><br/><boldSpan>Quyền hạn chế xử lý dữ liệu:</boldSpan> Bạn có quyền yêu cầu Quran Foundation hạn chế việc xử lý dữ liệu cá nhân của bạn, trong một số điều kiện nhất định.<br/><br/><boldSpan>Quyền phản đối việc xử lý</boldSpan>Bạn có quyền phản đối việc Quran Foundation xử lý dữ liệu cá nhân của bạn, trong một số điều kiện nhất định. <br/><br/><boldSpan>Quyền chuyển đổi dữ liệu</boldSpan>Bạn có quyền yêu cầu Quran Foundation chuyển giao dữ liệu mà chúng tôi đã thu thập cho một tổ chức khác, hoặc trực tiếp cho bạn, trong một số điều kiện nhất định.",
+    "title": "Quyền bảo vệ dữ liệu"
+  },
+  "data-security": {
+    "desc": "Chúng tôi thực hiện các biện pháp thích hợp để bảo vệ thông tin cá nhân của bạn khỏi sự truy cập trái phép, sửa đổi, tiết lộ hoặc phá hủy. Chúng tôi sử dụng các giao thức bảo mật tiêu chuẩn ngành và áp dụng các biện pháp bảo vệ vật lý, điện tử và quản lý để đảm bảo tính bảo mật và toàn vẹn dữ liệu của bạn.",
+    "title": "Bảo mật dữ liệu"
+  },
+  "data-sharing": {
+    "desc": "Chúng tôi không bán, trao đổi hoặc cho thuê thông tin cá nhân của bạn cho bên thứ ba.",
+    "title": "Chia sẻ dữ liệu"
+  },
+  "info-collection": {
+    "desc": "Chúng tôi thu thập một số thông tin cá nhân từ người dùng lựa chọn tạo tài khoản trên Quran.com. Thông tin này có thể bao gồm:<br/><br/><underline>Địa chỉ email</underline>Chúng tôi thu thập địa chỉ email của bạn để hỗ trợ quá trình tạo tài khoản và cho mục đích liên lạc liên quan đến tài khoản của bạn, bao gồm khôi phục tài khoản và các thông báo bảo mật.",
+    "title": "Thu thập thông tin"
+  },
+  "log-data": {
+    "desc": "Chúng tôi thu thập thông tin mà trình duyệt của bạn gửi mỗi khi bạn truy cập Dịch vụ của chúng tôi (“Dữ liệu nhật ký”). Dữ liệu nhật ký này có thể bao gồm thông tin như địa chỉ Giao thức Internet (“IP”) của máy tính, loại trình duyệt, phiên bản trình duyệt, các trang của Dịch vụ mà bạn truy cập, thời gian và ngày truy cập, thời gian dành cho các trang đó và các số liệu thống kê khác.",
+    "title": "Dữ liệu nhật ký"
+  },
+  "main-privacy-desc": "Tổ chức Quran Foundation, Inc. (bao gồm cả Quran.com) là một tổ chức phi lợi nhuận 501(c)(3) nỗ lực giúp mọi người được hưởng lợi từ Kinh Qur'an. Quran Foundation, Inc. coi trọng và tôn trọng quyền riêng tư của tất cả người dùng.",
+  "personal-info-use": {
+    "desc": "Chúng tôi sử dụng thông tin cá nhân thu thập được cho các mục đích sau:<br/> <li><underline>Tạo và quản lý tài khoản</underline>Địa chỉ email của bạn được sử dụng để tạo và quản lý tài khoản trên trang web của chúng tôi. Nó cho phép bạn đăng nhập, truy cập cài đặt và lưu dấu trang cũng như lịch sử đọc của bạn.</li><li><underline>Cá nhân hóa</underline>Chúng tôi có thể sử dụng lịch sử đọc của bạn để cung cấp các đề xuất và gợi ý được cá nhân hóa dựa trên sở thích và mối quan tâm của bạn.</li>",
+    "title": "Sử dụng thông tin cá nhân"
+  },
+  "privacy-header": "Chính sách bảo mật"
+}

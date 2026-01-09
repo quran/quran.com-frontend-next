@@ -1,0 +1,10 @@
+{
+  "delete-account": "Xóa tài khoản",
+  "delete-confirmation": {
+    "action-text": "Tôi hiểu hậu quả, hãy xóa tài khoản của tôi.",
+    "confirmation-text": "xóa tài khoản của tôi",
+    "instruction-text": "Vui lòng nhập <strong>{{text}}</strong> để xác nhận",
+    "subtitle": "Thao tác này không thể huỷ bỏ. Thao tác này sẽ xóa vĩnh viễn tài khoản, dấu trang đã lưu, lịch đọc và tất cả dữ liệu của bạn.",
+    "title": "Bạn hoàn toàn chắc chắn chứ?"
+  }
+}

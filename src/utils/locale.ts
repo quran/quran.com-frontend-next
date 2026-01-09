@@ -38,6 +38,7 @@ const LOCALE_NAME = {
   [Language.DV]: 'ދިވެހި',
   [Language.ML]: 'മലയാളം',
   [Language.SD]: 'سنڌي',
+  [Language.VI]: 'Tiếng Việt',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -48,6 +49,7 @@ const LOCALE_NAME_TO_CODE = {
   urdu: Language.UR,
   Kurdish: Language.KU,
   swahili: Language.SW,
+  vietnamese: Language.VI,
 };
 
 export const LANG_LOCALE_MAP = {
@@ -69,6 +71,7 @@ export const LANG_LOCALE_MAP = {
   [Language.MS]: 'ms-MY',
   [Language.ES]: 'es-ES',
   [Language.SW]: 'sw-TZ',
+  [Language.VI]: 'vi-VN',
 };
 
 export enum Direction {
@@ -164,6 +167,10 @@ export const Languages = {
   157: {
     // Swahili
     locale: Language.SW,
+  },
+  177: {
+    // Vietnamese
+    locale: Language.VI,
   },
 };
 

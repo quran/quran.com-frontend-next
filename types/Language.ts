@@ -28,6 +28,7 @@ enum Language {
   ES = 'es',
   SW = 'sw',
   SD = 'sd',
+  VI = 'vi',
 }
 
 export default Language;

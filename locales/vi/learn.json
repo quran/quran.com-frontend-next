@@ -1,6 +1,6 @@
 {
   "about-author": "Về tác giả",
-  "add-reflection": "Thêm phản chiếu",
+  "add-reflection": "Thêm suy ngẫm",
   "all-learning-plans": "Tất cả các kế hoạch học tập",
   "author": "Tác giả",
   "back-to-learning-plan": "Trở lại Kế hoạch Học tập",
@@ -11,11 +11,11 @@
   "continue-learning": "Tiếp tục học tập",
   "contributors": "Người đóng góp",
   "day": "Ngày",
-  "description": "Sự miêu tả",
-  "duration-daily": "Mỗi bài học ngắn chỉ mất chưa đến... {{dailyMins}} phút để hoàn thành {{days}} Tổng số bài học",
-  "empty-learning-plans": "Bạn chưa đăng ký bất kỳ chương trình nào. <link>Kế hoạch học tập</link> chưa.",
+  "description": "Miêu tả",
+  "duration-daily": "Mỗi bài học ngắn chỉ mất chưa đến {{dailyMins}} phút để hoàn thành {{days}} Tổng số bài học",
+  "empty-learning-plans": "Bạn chưa đăng ký bất kỳ chương trình nào <link>Kế hoạch học tập</link>",
   "enroll": "Tham gia",
-  "enroll-success": "Chúc mừng, bạn đã thêm {{title}} Thêm vào danh sách của bạn!",
+  "enroll-success": "Chúc mừng, bạn đã thêm {{title}} vào danh sách của bạn!",
   "enrolled": "Đã đăng ký",
   "feedback": {
     "add-feedback": "Thêm phản hồi",
@@ -24,7 +24,7 @@
     "feedback-success": "Cảm ơn phản hồi của bạn!",
     "your-feedback": "Phản hồi của bạn"
   },
-  "help-about-reflection": "Trợ giúp về tính năng phản chiếu",
+  "help-about-reflection": "Trợ giúp về tính năng suy ngẫm",
   "learn-duration": "Khoảng thời gian",
   "learn-more": "Tìm hiểu thêm",
   "learning-plan-material": "Tài liệu kế hoạch học tập",
@@ -34,7 +34,7 @@
   "mark-complete": "Đánh dấu là đã hoàn thành",
   "mark-complete-success": "Bài học đã được đánh dấu hoàn thành thành công!",
   "next-lesson": "Bài học tiếp theo",
-  "not-enrolled": "Bạn chưa đăng ký vào <link>Kế hoạch học tập</link> chưa.",
+  "not-enrolled": "Bạn chưa đăng ký vào <link>Kế hoạch học tập</link> nào.",
   "prev-lesson": "Bài học trước",
   "reflection-description-1": "Nhấp vào \"Thêm suy ngẫm\" sẽ đưa bạn đến QuranReflect, một nền tảng để chia sẻ những suy ngẫm cá nhân về Kinh Qur'an. Không giống như Tafsir (giải thích học thuật), những suy ngẫm là những hiểu biết và trải nghiệm cá nhân liên quan đến các câu kinh.",
   "reflection-description-2": "Nếu bạn đăng công khai, bài viết của bạn sẽ được nhóm kiểm duyệt xem xét và hiển thị cho cộng đồng QuranReflect.",
@@ -43,5 +43,5 @@
     "main": "Thông tin chính",
     "syllabus": "Chương trình học"
   },
-  "what-happens-when-you-click-add-reflection": "Điều gì xảy ra khi bạn nhấp vào \"Thêm phản chiếu\"?"
+  "what-happens-when-you-click-add-reflection": "Điều gì xảy ra khi bạn nhấp vào \"Thêm suy ngẫm\"?"
 }
