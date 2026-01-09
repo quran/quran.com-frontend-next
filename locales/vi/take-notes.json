@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Ghi chú của bạn được lưu trữ an toàn trong tài khoản Quran.com của bạn.",
+        "Đồng bộ hóa trên nhiều thiết bị — tiếp tục học tập trên điện thoại di động, máy tính bảng hoặc máy tính để bàn."
+      ],
+      "description": "Ghi chú của bạn sẽ được đồng bộ hóa trên tất cả các thiết bị khi bạn đăng nhập, cho phép bạn truy cập vào những suy ngẫm của mình dù đang sử dụng điện thoại, máy tính bảng hay máy tính.",
+      "login-prompt": "Chỉ cần tạo một tài khoản đăng nhập miễn phí để bắt đầu.",
+      "title": "Truy cập mọi lúc, mọi nơi"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Hãy ghi thêm lời giải thích hoặc lời nhắc bên cạnh mỗi câu kinh để hỗ trợ việc ghi nhớ.",
+        "Ghi chú lại những từ hoặc khái niệm khó để ôn tập sau.",
+        "Sử dụng ghi chú để đánh dấu tiến độ trong lịch trình học thuộc lòng."
+      ],
+      "description": "Việc ghi chú lại những câu kinh bạn đang học thuộc lòng có thể cải thiện đáng kể khả năng ghi nhớ. Hãy tạo ra các phương pháp ghi nhớ, ghi chú các mẫu câu, hoặc viết ra những liên tưởng cá nhân giúp các câu thơ dễ nhớ hơn.",
+      "image": {
+        "alt": "Ghi chú để ghi nhớ và ôn tập"
+      },
+      "paragraph": "Dù bạn đang chủ động ghi nhớ hay ôn tập những gì đã học, ghi chú đều có thể là một công cụ hỗ trợ ghi nhớ hiệu quả.",
+      "title": "Tăng cường khả năng ghi nhớ và ôn tập"
+    },
+    "organize-preserve": {
+      "description": "Hãy ghi chép hiểu biết theo từng câu kinh để dần xây dựng bộ chú giải (tafsir) cá nhân của bạn. Ghi chú được lưu trong tài khoản, nên bạn không lo mất cảm hứng hay hiểu biết đã ghi lại.",
+      "images": {
+        "organized": "Ghi chú được sắp xếp theo từng câu kinh.",
+        "preserved": "Ghi chú học tập được lưu giữ"
+      },
+      "paragraph": "Bạn đã bao giờ rời khỏi lớp học hay bài giảng và quên hết những ghi chú mình đã viết ở đâu đó trong sổ tay, ứng dụng ghi chú hoặc tài liệu chưa? Hãy tưởng tượng bạn có thể dễ dàng truy cập mọi ghi chú mình đã viết về một câu kinh ở cấp độ từng câu bất cứ khi nào bạn đọc lại câu kinh đó.",
+      "title": "Sắp xếp và bảo quản tài liệu học tập của bạn"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Hãy ghi lại những suy nghĩ, chiêm nghiệm và nhận thức của bạn khi đọc Kinh Qur'an - dù đơn giản hay sâu sắc đến đâu.",
+        "Hãy củng cố mối quan hệ của bạn với Kinh Qur'an bằng cách chủ động tương tác với các câu kinh thay vì chỉ đọc nhanh mà không suy ngẫm."
+      ],
+      "description": "Việc ghi chép cho phép bạn ghi lại hành trình cá nhân của mình với Kinh Qur'an. Hãy ghi lại những suy nghĩ, câu hỏi và những khoảnh khắc giác ngộ trong quá trình học tập. Theo thời gian, những ghi chép này sẽ trở thành một tư liệu quý giá về sự phát triển tâm linh và sự hiểu biết sâu sắc hơn của bạn.",
+      "examples-heading": "Ví dụ về ghi chú:",
+      "images": {
+        "growth": "Ví dụ về ghi chú về sự phát triển tâm linh",
+        "reflection": "Ví dụ về ghi chú suy ngẫm cá nhân"
+      },
+      "title": "Suy ngẫm cá nhân và sự phát triển tâm linh"
+    },
+    "share-reflections": {
+      "community-paragraph": "Khi được chia sẻ, những suy ngẫm của bạn có thể gây được tiếng vang sâu sắc với người khác và nuôi dưỡng một cộng đồng phát triển dựa trên Kinh Qur'an. Tìm hiểu thêm tại <0>QuranReflect.com/faq</0> và khám phá <1>Năm Góc Nhìn</1> để làm phong phú thêm những suy ngẫm của bạn.",
+      "conclusion": {
+        "dua": "Nguyện xin Allah làm cho Kinh Qur'an trở thành ánh sáng soi rọi lồng ngực bạn, mùa xuân tươi mát trong trái tim bạn, xua tan nỗi buồn và giải thoát khỏi khổ đau của bạn. Ameen.",
+        "paragraph1": "Kinh Qur'an là người bạn đồng hành suốt đời, và việc sử dụng tính năng Ghi chú có thể giúp bạn xây dựng mối quan hệ ý nghĩa và tương tác với Kinh Qur'an. Hãy sử dụng nó để ghi lại những suy ngẫm, đánh dấu những thử thách, lưu giữ những hiểu biết và nhiều hơn nữa. Theo thời gian, nó sẽ trở thành một nhật ký cá nhân về nỗ lực, sự chân thành và sự trưởng thành của bạn với Kinh sách của Allah, Insha'Allah.",
+        "paragraph2": "Chúng tôi mời bạn thử thách bản thân bằng cách kết nối với Kinh Qur'an mỗi ngày - dù chỉ là một câu - và dành chút thời gian để suy ngẫm và viết một vài dòng. <0>Hãy để hành động nhỏ bé, đều đặn này trở thành phương tiện để bạn gắn bó sâu sắc hơn với Kinh sách của Allah, từng câu một.</0>",
+        "title": "Hãy bắt đầu hành trình của bạn ngay hôm nay!"
+      },
+      "deeper-insights-title": "Những hiểu biết sâu sắc hơn:",
+      "deeper-insights": [
+        "Có tên gọi nào của Allah được nhắc đến không, và Chúng liên quan như thế nào đến câu kinh?",
+        "Những từ ngữ hoặc khía cạnh ngôn ngữ nào thu hút sự chú ý của bạn?",
+        "Bạn có thể liên hệ câu kinh này với bối cảnh, các câu kinh khác trong Kinh Qur'an, hadith, hoặc các sự kiện khác không?"
+      ],
+      "description": "Sắp ra mắt: tính năng chia sẻ các ghi chú đã chọn với bạn bè, gia đình hoặc nhóm học tập. Cùng nhau hợp tác để hiểu bài và lan tỏa kiến thức bổ ích.",
+      "paragraph1": "Trong khi các ghi chú trên Quran.com được lưu trữ riêng tư, bạn cũng có tùy chọn chia sẻ công khai những suy ngẫm đã chọn trên <0>QuranReflect.com</0>. Đây là một nền tảng cộng đồng phi lợi nhuận được thiết kế để khuyến khích sự tương tác sâu sắc với Kinh Qur'an - không phải thông qua tafsir học thuật (chỉ dành cho các học giả đủ điều kiện), mà thông qua những suy ngẫm cá nhân chân thành được xem xét và hướng dẫn bởi một nhóm kiểm duyệt có trình độ.",
+      "paragraph2": "Allah mời gọi tất cả tín đồ, không chỉ các học giả, tham gia vào tadabbur (sự suy ngẫm, học tập):",
+      "quote": "Đây là một Kinh Sách (Qur'an) đầy phúc đức mà TA đã ban xuống cho Ngươi để giúp họ nghiền ngẫm về những Câu của Nó và để cho những người thông hiểu ghi nhớ. (Surah Sad 38:29)",
+      "reflection-prompt": "Dưới đây là một số ví dụ về câu hỏi tự suy ngẫm cá nhân mà bạn có thể sử dụng:",
+      "reflection-questions": [
+        "Câu kinh này đã lay động hay truyền cảm hứng cho bạn như thế nào?",
+        "Có những phẩm chất hoặc hành động nào được đề cập mà bạn có thể cải thiện không?",
+        "Có lời hứa hoặc lời cảnh báo/điều cấm nào mà bạn có thể áp dụng vào cuộc sống của mình không?",
+        "Bạn có câu chuyện cá nhân nào liên quan đến câu kinh này không?",
+        "Dựa trên câu kinh này, bạn muốn thực hiện những thay đổi nào, và bạn hoặc người khác có thể áp dụng chúng vào thực tế như thế nào?"
+      ],
+      "title": "Hãy chia sẻ những suy nghĩ của bạn để người khác cùng được hưởng lợi."
+    },
+    "title": "Lợi ích của việc sử dụng tính năng Ghi chú"
+  },
+  "description": "Khám phá 6 lý do thuyết phục để ghi chú trên Quran.com và vai trò quan trọng của ghi chú trong hành trình học Kinh Qur'an của bạn.",
+  "heading": "6 Lý do quan trọng để ghi chép - Và cách chúng có thể thay đổi hành trình học Kinh Qur'an của bạn.",
+  "how-to-use": {
+    "saved-note-explanation": "Khi bạn lưu ghi chú cho một câu thơ, biểu tượng ghi chú sẽ chuyển sang màu xanh lam, giúp bạn dễ dàng nhận biết những câu kinh mà bạn đã ghi chú trước đó trong những lần đọc sau.",
+    "step1": "<0>Chọn một câu kinh:</0> Nhấp vào bất kỳ câu kinh nào và chọn tùy chọn Ghi chú.",
+    "step2": "<0>Thêm ý kiến của bạn:</0> Hãy viết những suy nghĩ, lời nhắc nhở hoặc câu hỏi của bạn.",
+    "step3": "<0>Lưu:</0> Ghi chú của bạn sẽ được lưu vào tài khoản của bạn.",
+    "step4": "<0>Truy cập mọi lúc:</0> Quay lại ghi chú của bạn thông qua hồ sơ cá nhân hoặc trực tiếp trên câu kinh.",
+    "title": "Hướng dẫn sử dụng tính năng Ghi chú"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Thêm ghi chú vào một câu kinh"
+    },
+    "blue-icon": {
+      "alt": "Biểu tượng chuyển màu xanh lam biểu thị ghi chú đã lưu."
+    },
+    "feature-available": {
+      "alt": "Phần ghi chú có sẵn bên cạnh mỗi câu kinh",
+      "caption": "Tính năng ghi chú có sẵn bên cạnh mỗi câu kinh"
+    }
+  },
+  "introduction": "Tính năng Ghi chú trên Quran.com là một cách hữu ích để giúp bạn gắn kết sâu sắc hơn với Kinh Qur'an. Cho dù bạn đang học tập, suy ngẫm, hay đơn giản chỉ muốn hiểu rõ hơn thông điệp, việc ghi chú có thể giúp bạn kết nối sâu sắc hơn với các câu kinh và ghi nhớ những hiểu biết mà nếu không sẽ bị lãng quên.",
+  "meta": {
+    "description": "Hãy tìm hiểu cách sử dụng tính năng ghi chú trên Quran.com để nâng cao trải nghiệm học Kinh Qur'an của bạn.",
+    "title": "Ghi chú - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Suy ngẫm cá nhân và sự phát triển tâm linh",
+      "Sắp xếp và bảo quản tài liệu học tập của bạn",
+      "Truy cập mọi lúc, mọi nơi",
+      "Tăng cường khả năng ghi nhớ và ôn tập",
+      "Hãy chia sẻ những suy nghĩ của bạn để người khác cùng được hưởng lợi."
+    ],
+    "title": "Lợi ích của việc sử dụng tính năng Ghi chú"
+  }
+}

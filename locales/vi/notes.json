@@ -1,0 +1,64 @@
+{
+  "add-another-note": "Thêm ghi chú khác",
+  "body-placeholder": "Hãy sử dụng khoảng trống này để ghi chú chung hoặc viết bài suy ngẫm.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>Việc đăng bài có nghĩa là bài suy ngẫm của bạn sẽ được chia sẻ trên QuranReflect dưới tên của bạn, nơi bài viết sẽ được nhóm kiểm duyệt xem xét và hiển thị cho cộng đồng QuranReflect.</li><li>Sau khi bài đăng của bạn được nhóm kiểm duyệt xem xét, chấp thuận hoặc đề xuất, bạn có thể nhận được thông báo về lượt thích, bình luận và theo dõi. Khi đăng nhập vào QuranReflect, bạn có thể cập nhật cài đặt thông báo theo sở thích của mình.</li><li>Bạn có thể xem ghi chú và những suy ngẫm đã đăng của mình trong mục “Ghi chú và suy ngẫm của tôi” trên trang cá nhân Quran.com của bạn, hoặc đăng nhập vào... <link>QuranReflect</link> Sử dụng địa chỉ email đăng nhập Quran.com của bạn.</li>",
+      "title": "Điều gì sẽ xảy ra nếu tôi chọn ô này?"
+    },
+    "post-button": "Điều gì sẽ xảy ra khi tôi đăng bài trên QuranReflect?",
+    "qr-intro": "QuranReflect, cùng với Quran.com, là một phần của gia đình Quran.Foundation. Đây là một nền tảng xã hội để chia sẻ những suy ngẫm cá nhân về Kinh Qur'an, khuyến khích người dùng thấu hiểu thông điệp của Kinh Qur'an và chia sẻ những hiểu biết truyền cảm hứng cho sự thay đổi tích cực. Không giống như tafsir, là một hình thức giải thích học thuật, những suy ngẫm là những suy nghĩ và trải nghiệm cá nhân liên quan đến các câu kinh. Bài đăng của người dùng trên QuranReflect được xem xét và kiểm duyệt bởi một nhóm chuyên gia có trình độ, những người sẽ giúp đảm bảo chất lượng nội dung, quy tắc ứng xử khi tương tác với Kinh Qur'an, và họ sẽ trao quyền cho người dùng bằng cách chia sẻ phản hồi và làm nổi bật những cuộc thảo luận có giá trị, từ đó thúc đẩy một cộng đồng hướng đến Kinh Qur'an và nâng cao đời sống tinh thần. Tìm hiểu thêm: <link>Quranreflect.com/faq</link>",
+    "title": "QuranReflect là gì và điều gì sẽ xảy ra nếu tôi chọn ô này?"
+  },
+  "click-to-see-more": "Nhấp chuột để xem thêm",
+  "delete-note": "Xóa ghi chú",
+  "delete-note-modal": {
+    "subtitle": "Bạn có chắc chắn muốn xóa ghi chú này không?",
+    "title": "Xóa ghi chú"
+  },
+  "delete-success": "Ghi chú đã được xóa thành công.",
+  "empty-notes": "Không tìm thấy ghi chú nào",
+  "empty-reflections": "Không tìm thấy suy ngẫm nào",
+  "export-success": "Thông báo đã được đăng tải thành công lên tài khoản của bạn trên QuranReflect.",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>Có tên gọi nào của Allah được nhắc đến không, và Chúng liên quan như thế nào đến câu kinh?</li><li>Những từ ngữ hoặc khía cạnh ngôn ngữ nào thu hút sự chú ý của bạn?</li><li>Bạn có thể liên hệ câu kinh này với bối cảnh, các câu kinh khác trong Kinh Qur'an, hadith, hoặc các sự kiện khác không?</li>",
+        "title": "Những hiểu biết sâu sắc hơn:"
+      },
+      "personal": {
+        "desc": "<li>Câu kinh này đã chạm đến bạn hoặc truyền cảm hứng cho bạn ra sao?</li><li>Trong những phẩm chất hay hành động được nhắc đến, điều nào bạn có thể trau dồi hoặc cải thiện hơn?</li><li>Có lời hứa hoặc lời cảnh báo/điều răn nào ở đây mà bạn có thể vận dụng vào cuộc sống mình không?</li><li>Bạn có trải nghiệm cá nhân nào gắn liền với câu kinh này không?</li><li>Từ câu kinh này, bạn muốn thay đổi điều gì, và bạn hoặc người khác có thể thực hiện những thay đổi đó một cách cụ thể như thế nào?</li>",
+        "title": "Câu hỏi tự suy ngẫm:"
+      },
+      "title": "Gợi ý suy ngẫm"
+    },
+    "title": "Bạn cần trợ giúp trong việc suy ngẫm về Kinh Qur'an? Tìm hiểu thêm",
+    "what-is-reflc": {
+      "desc": "Việc suy ngẫm hay chiêm nghiệm Kinh Qur'an bao gồm việc đọc hoặc lắng nghe cẩn thận lời của Allah, thấu hiểu ý nghĩa của nó, và để cho nó tác động và thay đổi chúng ta theo hướng tốt đẹp hơn. Điều này được gọi là \"Tadabbur\". Ngược lại, Tafsir là một sự giải thích học thuật về Kinh Qur'an, cung cấp những giải thích chi tiết về các câu thơ dựa trên các nguồn cổ điển và phân tích học thuật. Trong khi Tafsir chỉ dành cho các học giả, Allah ﷻ yêu cầu mọi người tham gia vào Tadabbur (suy ngẫm Kinh Qur'an). <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>và còn nhiều nữa).<br></br><br></br>Người dùng có thể lưu lại ghi chú và suy ngẫm cá nhân của mình một cách riêng tư. Thông thường, những suy ngẫm của chúng ta có thể tạo được sự đồng cảm sâu sắc với người khác, giúp họ kết nối với Kinh Qur'an và mối quan hệ của họ với Allah ﷻ. Đó là lý do tại sao người dùng có tùy chọn chia sẻ suy ngẫm của mình lên QuranReflect như một phần trong nỗ lực giúp mọi người cùng nhau phát triển trên hành trình của mình. Để tìm hiểu thêm, hãy truy cập: <link4>QuranReflect.com/faq</link4> và <link5>Năm góc nhìn để suy ngẫm về Kinh Qur'an</link5>",
+      "title": "Suy ngẫm là gì?"
+    }
+  },
+  "note": "Ghi chú",
+  "notes-and-reflcs": "Ghi chú và suy ngẫm",
+  "post-on-qr": "Bài đăng trên QuranReflect",
+  "posted-reflections": "Những suy ngẫm đã đăng",
+  "private-notes": "Ghi chú",
+  "qr-tooltip": "<span><link>QuranReflect</link> là một nền tảng xã hội để chia sẻ những suy ngẫm về Kinh Qur'an. Kết nối xung quanh Kinh Qur'an, kết nối với những điều quan trọng.</span>",
+  "reflection-update-success": "Dòng suy ngẫm đã được cập nhật thành công.",
+  "reflections-intro": {
+    "line-1": "Để xem và tương tác với các bình luận, tham gia cộng đồng và làm nhiều việc khác, hãy truy cập <link>QuranReflect.com</link>.",
+    "line-2": "Bạn có thể đăng nhập vào tài khoản QuranReflect đã liên kết bằng cách đăng nhập hoặc đăng ký bằng cùng địa chỉ email Quran.com mà bạn đã sử dụng khi đăng nhập.",
+    "line-3": "Nội dung không phù hợp để công khai sẽ bị ẩn hoặc xóa. Người dùng đăng tải nội dung không phù hợp sẽ bị chặn.",
+    "title": "Tìm hiểu thêm về những suy ngẫm đã đăng"
+  },
+  "save-post-to-qr": "Lưu và chia sẻ lên QuranReflect",
+  "save-privately": "Lưu riêng tư",
+  "save-publish-failed": "Ghi chú đã được lưu thành công nhưng không thể xuất bản.",
+  "save-success": "Ghi chú đã được lưu thành công.",
+  "share-to-qr": "Chia sẻ lên QuranReflect.com",
+  "share-to-qr-desc": "Chia sẻ như <b>{{name}}</b>Khán giả là <b>Người dùng QuranReflect</b>",
+  "update-publish-failed": "Ghi chú đã được cập nhật thành công nhưng không thể xuất bản.",
+  "update-reflection": "Cập nhật suy ngẫm",
+  "update-success": "Ghi chú đã được cập nhật thành công.",
+  "view-on-qr": "Xem trên QuranReflect"
+}

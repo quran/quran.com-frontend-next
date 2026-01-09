@@ -1,0 +1,27 @@
+{
+  "change": "Thay đổi",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Hãy lắng nghe phần Juz cuối cùng của Kinh Qur'an.",
+      "title": "Juz Amma"
+    },
+    "popular-recitations": {
+      "description": "Các bài đọc kinh được tuyển chọn mỗi ngày",
+      "title": "Các bài đọc kinh được nhiều người đọc"
+    },
+    "surah-al-kahf": {
+      "description": "Nghe Surah Alkahf lặp lại",
+      "title": "Surah Al-Kahf"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Các Surah từ nhiều người đọc kinh được tuyển chọn",
+      "title": "Yaseen, Al-Waqiah, Al-Mulk"
+    }
+  },
+  "curated-stations": "Góc tuyển chọn",
+  "pause-radio": "Tạm dừng Radio",
+  "play-radio": "Phát Radio",
+  "radio-desc": "Hãy lắng nghe những bài xướng Kinh Qur'an tuyệt đẹp liên tục do nhiều người đọc khác nhau trình bày.",
+  "reciter-stations": "Góc người xướng kinh",
+  "station": "Góc"
+}
