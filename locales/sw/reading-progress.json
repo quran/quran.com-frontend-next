@@ -1,6 +1,7 @@
 {
   "add": "Ongeza",
   "add-data-success": "Data yako ya kusoma imeongezwa.",
+  "back-to-reading-goal": "Rudi kwenye lengo la kusoma",
   "delete-goal": {
     "action": "Futa Lengo",
     "confirmation": {

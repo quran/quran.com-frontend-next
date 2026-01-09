@@ -6,16 +6,16 @@
   },
   "create-plan": "Create plan",
   "create-reading-goal": "Create Goal",
-  "day-streak": "Day streak",
-  "days-remaining": "days remaining",
   "daily-progress": "Daily Progress",
   "daily-progress-completed": "Completed! 🎉",
   "daily": {
     "description": "Your goal will reset every day",
     "title": "Daily goal"
   },
+  "day-streak": "Day streak",
   "day-x": "Day {{day}}",
   "days": "Days",
+  "days-remaining": "days remaining",
   "duration": "Duration (days)",
   "ending-chapter": "Ending Surah",
   "ending-verse": "Ending Ayah",

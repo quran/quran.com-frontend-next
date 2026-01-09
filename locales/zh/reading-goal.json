@@ -12,8 +12,10 @@
     "description": "您的目标每天都会重置",
     "title": "每日目标"
   },
+  "day-streak": "连胜",
   "day-x": "第{{day}}天",
   "days": "天",
+  "days-remaining": "剩余天数",
   "duration": "持续时间（天）",
   "ending-chapter": "结束古兰经",
   "ending-verse": "结束 Ayah",

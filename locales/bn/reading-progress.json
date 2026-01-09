@@ -1,6 +1,7 @@
 {
   "add": "যোগ করুন",
   "add-data-success": "আপনার পড়ার ডেটা সফলভাবে যোগ করা হয়েছে।",
+  "back-to-reading-goal": "পড়ার লক্ষ্যে ফিরে যান",
   "delete-goal": {
     "action": "লক্ষ্য মুছুন",
     "confirmation": {

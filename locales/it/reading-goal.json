@@ -12,8 +12,10 @@
     "description": "Il tuo obiettivo verrà reimpostato ogni giorno",
     "title": "Obiettivo giornaliero"
   },
+  "day-streak": "Serie di giorni",
   "day-x": "Giorno {{day}}",
   "days": "Giorni",
+  "days-remaining": "giorni rimanenti",
   "duration": "Durata (giorni)",
   "ending-chapter": "Sura finale",
   "ending-verse": "Fine Ayah",

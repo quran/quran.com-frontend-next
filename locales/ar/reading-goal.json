@@ -12,8 +12,10 @@
     "description": "سيتم إعادة تحديد هدفك كل يوم",
     "title": "الهدف اليومي"
   },
+  "day-streak": "خط النهار",
   "day-x": "اليوم {{day}}",
   "days": "أيام",
+  "days-remaining": "الأيام المتبقية",
   "duration": "المدة (أيام)",
   "ending-chapter": "السورة الأخيرة",
   "ending-verse": "الآية الأخيرة",

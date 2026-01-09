@@ -12,8 +12,10 @@
     "description": "آپ کا ہدف ہر روز دوبارہ شروع ہوگا۔",
     "title": "روزانہ کا ہدف"
   },
+  "day-streak": "دن کا سلسلہ",
   "day-x": "دن {{day}}",
   "days": "دن",
+  "days-remaining": "دن باقی ہیں",
   "duration": "دورانیہ (دن)",
   "ending-chapter": "اختتامی سورہ",
   "ending-verse": "اختتامی آیت",
