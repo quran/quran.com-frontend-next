@@ -33,12 +33,14 @@ $arabicVerseTopMargin: 2.75rem;
     gap: var(--spacing-xxsmall-px);
   }
 }
+
 .arabicVerseContainer {
   direction: rtl;
   padding-block-start: var(--spacing-xxsmall);
   margin-block-start: $arabicVerseTopMargin;
   margin-block-end: var(--gap-size);
 }
+
 .verseTranslationsContainer {
   margin-block-end: calc(var(--spacing-medium2) * 3);
 }
@@ -53,9 +55,11 @@ $arabicVerseTopMargin: 2.75rem;
   align-items: center;
   gap: var(--spacing-xxsmall-px);
 }
+
 .actionContainerLeft {
   justify-content: flex-start;
 }
+
 .actionContainerRight {
   justify-content: flex-end;
 }
@@ -98,6 +102,7 @@ $arabicVerseTopMargin: 2.75rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   svg {
     inline-size: var(--spacing-medium2);
     block-size: var(--spacing-medium2);
@@ -126,6 +131,7 @@ $arabicVerseTopMargin: 2.75rem;
 .actionContainerLeft .actionItem {
   display: inline-block;
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+
   @include breakpoints.tablet {
     margin-inline-end: 0;
   }
@@ -141,14 +147,27 @@ $arabicVerseTopMargin: 2.75rem;
   align-items: center;
   gap: var(--spacing-medium);
   margin-block-end: var(--spacing-medium);
+  overflow-x: auto;
+  inline-size: 100%;
+  -webkit-overflow-scrolling: touch;
+
+  @include breakpoints.smallerThanTablet {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
+    overflow-x: visible;
   }
 }
 
 .tabsContainerRTL {
-  justify-content: flex-end;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
 }
 
 .center {
@@ -159,6 +178,7 @@ $arabicVerseTopMargin: 2.75rem;
   display: flex;
   block-size: var(--spacing-medium);
   align-items: center;
+  flex-shrink: 0;
 }
 
 .tabItem {
@@ -169,10 +189,15 @@ $arabicVerseTopMargin: 2.75rem;
   cursor: pointer;
   color: var(--color-grey-icons-new);
   transition: color 0.2s ease;
+  flex-shrink: 0;
 
   &:hover {
     color: var(--color-success-medium);
   }
+}
+
+.tabItemRTL {
+  flex-direction: row-reverse;
 }
 
 .tabIcon {
