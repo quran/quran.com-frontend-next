@@ -1,12 +1,12 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { VersesResponse } from 'types/ApiResponses';
 
 import EndOfSurahSection from '../EndOfSurahSection';
 import LearningPlanBanner from '../LearningPlanBanner';
 
 import Language from '@/types/Language';
+import { VersesResponse } from 'types/ApiResponses';
 
 // Surah Al-Mulk
 const LEARNING_PLAN_CHAPTER = 67;

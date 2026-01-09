@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import { VersesResponse } from 'types/ApiResponses';
 
 import ContextMenu from './ContextMenu';
 import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
@@ -17,6 +16,7 @@ import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPrefe
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
+import { VersesResponse } from 'types/ApiResponses';
 
 type QuranReaderProps = {
   initialData: VersesResponse;

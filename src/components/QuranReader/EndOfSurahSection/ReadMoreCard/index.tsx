@@ -3,7 +3,6 @@ import React, { useContext, useMemo } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
-import { ChapterContent } from 'types/ApiResponses';
 
 import ChapterLink from './ChapterLink';
 import styles from './ReadMoreCard.module.scss';
@@ -12,6 +11,7 @@ import Card from '@/components/HomePage/Card';
 import DataContext from '@/contexts/DataContext';
 import ReplayIcon from '@/icons/replay.svg';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import { ChapterContent } from '@/types/ApiResponses';
 import { pickRandom } from '@/utils/array';
 import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';

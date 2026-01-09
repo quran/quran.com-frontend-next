@@ -29,7 +29,6 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
   makeChapterMetadataUrl,
-  makeCountryLanguagePreferenceUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
