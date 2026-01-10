@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, type MutableRefObject } from 'react';
+import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 
 import type { Preferences } from '@/components/AyahWidget/builder/types';
 import { buildEmbedIframeConfig } from '@/components/AyahWidget/widget-config';
@@ -22,8 +22,12 @@ type UseAyahWidgetPreviewParams = {
 const useAyahWidgetPreview = ({
   preferences,
   translationIds,
-}: UseAyahWidgetPreviewParams): MutableRefObject<HTMLDivElement | null> => {
+}: UseAyahWidgetPreviewParams): {
+  previewRef: MutableRefObject<HTMLDivElement | null>;
+  isLoading: boolean;
+} => {
   const previewRef = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const iframeConfig = useMemo(
     () => buildEmbedIframeConfig(preferences, translationIds),
@@ -38,6 +42,7 @@ const useAyahWidgetPreview = ({
     containerEl.replaceChildren();
 
     const iframe = document.createElement('iframe');
+    setIsLoading(true);
     iframe.src = iframeConfig.src;
     iframe.width = iframeConfig.widthValue;
     iframe.height = iframeConfig.heightValue;
@@ -49,12 +54,21 @@ const useAyahWidgetPreview = ({
     iframe.style.maxWidth = '100%';
     iframe.style.display = 'block';
 
+    // Set loading state when iframe is loaded or fails to load.
+    const handleLoaded = () => setIsLoading(false);
+    iframe.addEventListener('load', handleLoaded);
+    iframe.addEventListener('error', handleLoaded);
+
     containerEl.appendChild(iframe);
 
-    return undefined;
+    // Cleanup event listeners.
+    return () => {
+      iframe.removeEventListener('load', handleLoaded);
+      iframe.removeEventListener('error', handleLoaded);
+    };
   }, [iframeConfig]);
 
-  return previewRef;
+  return { previewRef, isLoading };
 };
 
 export default useAyahWidgetPreview;

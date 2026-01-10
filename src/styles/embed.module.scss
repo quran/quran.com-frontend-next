@@ -256,6 +256,35 @@
   align-items: center;
   justify-content: center;
   inline-size: 100%;
+  position: relative;
+}
+
+.previewFrame {
+  inline-size: 100%;
+}
+
+.previewLoading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.spinner {
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border-gray-lighter);
+  border-block-start-color: var(--color-blue-buttons-and-icons);
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .codePanel {

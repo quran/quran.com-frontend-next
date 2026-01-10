@@ -9,6 +9,7 @@ type Props = {
   embedSnippet: string;
   isCopySuccess: boolean;
   onCopy: () => void;
+  isPreviewLoading: boolean;
 };
 
 const BuilderPreview = ({
@@ -16,13 +17,26 @@ const BuilderPreview = ({
   embedSnippet,
   isCopySuccess: copySuccess,
   onCopy,
+  isPreviewLoading,
 }: Props) => {
   const { t } = useTranslation('embed');
   return (
     <div className={styles.previewColumn}>
       <div className={styles.previewPanel}>
         <h2 className={styles.panelTitle}>{t('sections.preview')}</h2>
-        <div className={styles.previewContainer} ref={previewRef} />
+        <div className={styles.previewContainer}>
+          {isPreviewLoading && (
+            <div
+              className={styles.previewLoading}
+              role="status"
+              aria-live="polite"
+              aria-label={t('states.loadingPreview')}
+            >
+              <div className={styles.spinner} />
+            </div>
+          )}
+          <div className={styles.previewFrame} ref={previewRef} />
+        </div>
       </div>
 
       <div className={styles.codePanel}>

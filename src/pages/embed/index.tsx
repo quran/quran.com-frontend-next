@@ -200,7 +200,10 @@ const AyahWidgetBuilderPage = () => {
   /**
    * Live preview ref (the hook handles rendering/re-rendering into a DOM node).
    */
-  const previewRef = useAyahWidgetPreview({ preferences, translationIds: translationIdsCsv });
+  const { previewRef, isLoading: isPreviewLoading } = useAyahWidgetPreview({
+    preferences,
+    translationIds: translationIdsCsv,
+  });
 
   /**
    * When translations are loaded, initialize selection from QDC user's current settings
@@ -425,6 +428,7 @@ const AyahWidgetBuilderPage = () => {
               embedSnippet={embedSnippet}
               isCopySuccess={copySuccess}
               onCopy={handleCopy}
+              isPreviewLoading={isPreviewLoading}
             />
           </div>
         </div>
