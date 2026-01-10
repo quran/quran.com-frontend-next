@@ -128,6 +128,7 @@ The embed is an iframe pointing to `/embed/v1` with query params.
 | `showTranslationName` | Show translator names                                | `false` |
 | `showArabic`          | Show Arabic text                                     | `true`  |
 | `tafsir`              | Show tafsirs button                                  | `true`  |
+| `lessons`             | Show lessons button                                  | `true`  |
 | `reflections`         | Show reflections button                              | `true`  |
 | `answers`             | Show answers button                                  | `true`  |
 
@@ -158,7 +159,7 @@ Notes:
 ## Localization
 
 Widget labels are localized via `next-translate` in the embed page. The builder locale list is
-derived from `i18n.json`.
+derived from `i18n.json`. Action labels now include separate `reflections` and `lessons` keys.
 
 If you add new labels:
 
