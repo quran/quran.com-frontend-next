@@ -22,7 +22,6 @@ import type Reciter from 'types/Reciter';
 
 type Props = {
   preferences: Preferences;
-  setPreferences: React.Dispatch<React.SetStateAction<Preferences>>;
   setUserPreferences: React.Dispatch<React.SetStateAction<Preferences>>;
   surahs: Chapter[];
   verseOptions: number[];
@@ -50,7 +49,6 @@ type Props = {
  */
 const BuilderConfigForm = ({
   preferences,
-  setPreferences,
   setUserPreferences,
   surahs,
   verseOptions,
@@ -84,8 +82,8 @@ const BuilderConfigForm = ({
    * Example: if user had range enabled but the new surah cannot support it, we disable it.
    */
   useEffect(() => {
-    setPreferences((prev: Preferences) => normalizeRangePreferences(prev, rangeMeta));
-  }, [rangeMeta, setPreferences]);
+    setUserPreferences((prev: Preferences) => normalizeRangePreferences(prev, rangeMeta));
+  }, [rangeMeta, setUserPreferences]);
 
   /**
    * Context passed to field config resolvers (options/getValue/setValue, visibility, etc.).

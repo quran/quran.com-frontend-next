@@ -174,7 +174,7 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
           },
     parseValue: (raw) => Number(raw),
     // When ayah changes, ensure rangeEnd stays valid (must be > selectedAyah)
-    setValue: (value, prev, { rangeMeta }) => {
+    setValue: (value, prev, { verseOptions }) => {
       const nextAyah = Number(value);
       const next = { ...prev, selectedAyah: nextAyah };
 
@@ -182,8 +182,9 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
       if (prev.rangeEnabled && prev.rangeEnd <= nextAyah) {
         // Set to first valid option (selectedAyah + 1) if available
         const newRangeEnd = nextAyah + 1;
-        const maxAyah = rangeMeta.rangeEndCap;
-        if (newRangeEnd <= maxAyah) {
+        const verseMax = verseOptions.length ? verseOptions[verseOptions.length - 1] : nextAyah;
+        const rangeEndCap = Math.min(nextAyah + 10, verseMax);
+        if (newRangeEnd <= rangeEndCap) {
           return { ...next, rangeEnd: newRangeEnd };
         }
         // If no valid range possible, disable range mode

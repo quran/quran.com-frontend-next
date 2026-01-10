@@ -409,7 +409,6 @@ const AyahWidgetBuilderPage = () => {
           <div className={styles.grid}>
             <BuilderConfigForm
               preferences={preferences}
-              setPreferences={setPreferences as SetPreferences}
               setUserPreferences={setUserPreferences as SetPreferences}
               surahs={surahs}
               verseOptions={verseOptions}
