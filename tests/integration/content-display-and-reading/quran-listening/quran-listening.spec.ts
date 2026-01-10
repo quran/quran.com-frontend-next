@@ -4,6 +4,7 @@ import { test, expect } from '@playwright/test';
 import { switchToReadingMode, switchToTranslationMode } from '@/tests/helpers/mode-switching';
 import AudioUtilities from '@/tests/POM/audio-utilities';
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId, TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 let audioUtilities: AudioUtilities;

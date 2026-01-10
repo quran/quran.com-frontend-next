@@ -7,7 +7,7 @@ const switchToMode = async (
   mode: 'translation' | 'reading',
   verseKey: string = '1:1',
 ) => {
-  // Sometime on mobile, the tab is not visible, so we need to scroll down and up to make it visible
+  // Sometimes on mobile, the tab is not visible, so we need to scroll down and up to make it visible
   await page.evaluate(() => window.scrollBy(0, 100));
   await page.evaluate(() => window.scrollTo(0, 0));
 
@@ -22,6 +22,8 @@ const switchToMode = async (
     await tab.click();
   } else if (await button.isVisible()) {
     await button.click();
+  } else {
+    throw new Error(`Neither ${tabTestId} nor ${buttonTestId} is visible`);
   }
 
   // Verify the mode switch was successful by checking that the verse is visible
