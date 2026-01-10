@@ -73,6 +73,9 @@ export type WidgetOptions = {
   // Should the widget display reflections button
   showReflections: boolean;
 
+  // Should the widget display lessons button
+  showLessons: boolean;
+
   // Should the widget display answers button
   showAnswers: boolean;
 
@@ -90,6 +93,9 @@ export type WidgetOptions = {
 
   // Whether any answers exist for the current ayah
   hasAnswers: boolean;
+
+  // Whether the verse has clarification questions (for answers icon state)
+  isClarificationQuestion: boolean;
 
   // Surah name to show in the header
   surahName?: string;
@@ -125,6 +131,7 @@ export type WidgetLabels = {
   surah: string;
   verse: string;
   tafsirs: string;
-  reflectionsAndLessons: string;
+  reflections: string;
+  lessons: string;
   answers: string;
 };

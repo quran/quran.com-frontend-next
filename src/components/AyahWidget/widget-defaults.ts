@@ -38,6 +38,7 @@ export const INITIAL_PREFERENCES: Preferences = {
   showTranslatorName: false,
   showTafsirs: true,
   showReflections: true,
+  showLessons: true,
   showAnswers: true,
   locale: 'en',
   reciter: DEFAULTS.reciterId,

@@ -18,6 +18,7 @@ export type Preferences = {
   showTranslatorName: boolean;
   showTafsirs: boolean;
   showReflections: boolean;
+  showLessons: boolean;
   showAnswers: boolean;
   locale: string;
   reciter: number | null;

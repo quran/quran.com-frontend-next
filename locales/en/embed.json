@@ -62,7 +62,8 @@
     "showArabic": "Show Arabic verse",
     "translator": "Show translator name",
     "tafsirs": "Show Tafsirs button",
-    "reflections": "Show Reflections & Lessons button",
+    "lessons": "Show Lessons button",
+    "reflections": "Show Reflections button",
     "answers": "Show Answers button (if available)",
     "customSize": "Use custom width/height"
   },

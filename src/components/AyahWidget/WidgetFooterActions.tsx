@@ -2,6 +2,8 @@ import React from 'react';
 
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
+import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import type { WidgetOptions, WidgetColors } from '@/types/Embed';
 import { isRTLLocale } from '@/utils/locale';
@@ -51,8 +53,13 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
       href: `${baseUrl}/tafsirs/169`,
       icon: <BookIcon style={ICON_STYLE} />,
     },
+    options.showLessons && {
+      label: options.labels?.lessons || 'Lessons',
+      href: `${baseUrl}/lessons`,
+      icon: <GraduationCapIcon style={ICON_STYLE} />,
+    },
     options.showReflections && {
-      label: options.labels?.reflectionsAndLessons || 'Reflections & Lessons',
+      label: options.labels?.reflections || 'Reflections',
       href: `${baseUrl}/reflections`,
       icon: <ChatIcon style={ICON_STYLE} />,
     },
@@ -60,7 +67,11 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
       options.hasAnswers && {
         label: options.labels?.answers || 'Answers',
         href: `${baseUrl}/answers`,
-        icon: <LightbulbIcon style={ICON_STYLE} />,
+        icon: options.isClarificationQuestion ? (
+          <LightbulbOnIcon style={ICON_STYLE} />
+        ) : (
+          <LightbulbIcon style={ICON_STYLE} />
+        ),
       },
   ].filter((action): action is FooterAction => Boolean(action));
 

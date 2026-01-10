@@ -28,6 +28,7 @@ import type {
 } from 'types/ApiResponses';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import Language from 'types/Language';
+import QuestionType from 'types/QuestionsAndAnswers/QuestionType';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
 
@@ -100,6 +101,7 @@ const sanitizeVerse = (verse: Verse): Verse => ({
  * @param {boolean} params.showTranslatorNames - Show translator names.
  * @param {boolean} params.showTafsirs - Show tafsirs CTA.
  * @param {boolean} params.showReflections - Show reflections CTA.
+ * @param {boolean} params.showLessons - Show lessons CTA.
  * @param {boolean} params.showAnswers - Show answers CTA.
  * @param {string} params.locale - Locale code.
  * @param {WidgetLabels} params.labels - Localized widget labels.
@@ -127,6 +129,7 @@ const buildWidgetOptions = (
     showTranslatorNames: boolean;
     showTafsirs: boolean;
     showReflections: boolean;
+    showLessons: boolean;
     showAnswers: boolean;
     locale: string;
     labels: WidgetLabels;
@@ -138,6 +141,7 @@ const buildWidgetOptions = (
   meta?: {
     hasAnyTranslations: boolean;
     hasAnswers: boolean;
+    isClarificationQuestion: boolean;
     surahName?: string;
     audioUrl?: string;
     audioStart?: number;
@@ -153,6 +157,7 @@ const buildWidgetOptions = (
   showArabic: params.showArabic,
   showTafsirs: params.showTafsirs,
   showReflections: params.showReflections,
+  showLessons: params.showLessons,
   showAnswers: params.showAnswers,
   locale: params.locale,
   labels: params.labels,
@@ -160,6 +165,7 @@ const buildWidgetOptions = (
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
   hasAnswers: meta?.hasAnswers ?? false,
+  isClarificationQuestion: meta?.isClarificationQuestion ?? false,
   surahName: meta?.surahName,
   customWidth: params.customWidth,
   customHeight: params.customHeight,
@@ -291,6 +297,7 @@ export type AyahWidgetDataInput = {
   showArabic?: boolean;
   showTafsirs?: boolean;
   showReflections?: boolean;
+  showLessons?: boolean;
   showAnswers?: boolean;
   locale?: string;
   rangeEnd?: number;
@@ -438,14 +445,14 @@ const resolveWordByWordLocale = async (enableWbw: boolean, locale: string): Prom
  * @param {string} verseKey - Ayah key "chapter:verse".
  * @param {string} locale - Locale code.
  * @param {boolean} showAnswers - Whether answers are enabled by config.
- * @returns {Promise<boolean>} True if answers exist.
+ * @returns {Promise<{ hasAnswers: boolean; isClarificationQuestion: boolean }>} Answers metadata.
  */
-const resolveHasAnswers = async (
+const resolveAnswersMeta = async (
   verseKey: string,
   locale: string,
   showAnswers: boolean,
-): Promise<boolean> => {
-  if (!showAnswers) return false;
+): Promise<{ hasAnswers: boolean; isClarificationQuestion: boolean }> => {
+  if (!showAnswers) return { hasAnswers: false, isClarificationQuestion: false };
 
   const language = (Object.values(Language) as string[]).includes(locale)
     ? (locale as Language)
@@ -453,10 +460,14 @@ const resolveHasAnswers = async (
 
   try {
     const questionsByVerse = await countQuestionsWithinRange(verseKey, verseKey, language);
-    return (questionsByVerse?.[verseKey]?.total ?? 0) > 0;
+    const verseQuestions = questionsByVerse?.[verseKey];
+    return {
+      hasAnswers: (verseQuestions?.total ?? 0) > 0,
+      isClarificationQuestion: Boolean(verseQuestions?.types?.[QuestionType.CLARIFICATION]),
+    };
   } catch (error) {
     logDebug('Ayah widget: Failed to load answers count', { error, verseKey, locale });
-    return false;
+    return { hasAnswers: false, isClarificationQuestion: false };
   }
 };
 
@@ -474,7 +485,8 @@ const loadWidgetLabels = async (locale: string): Promise<WidgetLabels> => {
     surah: tCommon('surah'),
     verse: tCommon('verse'),
     tafsirs: tQuranReader('tafsirs'),
-    reflectionsAndLessons: tCommon('reflections-and-lessons'),
+    reflections: tCommon('reflections'),
+    lessons: tCommon('lessons'),
     answers: tCommon('answers'),
   };
 };
@@ -691,6 +703,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
   const showArabic: boolean = input.showArabic ?? true;
   const showTafsirs: boolean = input.showTafsirs ?? true;
   const showReflections: boolean = input.showReflections ?? true;
+  const showLessons: boolean = input.showLessons ?? true;
   const showAnswers: boolean = input.showAnswers ?? true;
   const mergeVerses: boolean = input.mergeVerses ?? false;
 
@@ -727,7 +740,11 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
   const wordByWordLocale: string = await resolveWordByWordLocale(enableWbw, locale);
 
   const startVerseKey = `${chapterNumber}:${verseNumber}`;
-  const hasAnswers: boolean = await resolveHasAnswers(startVerseKey, locale, showAnswers);
+  const { hasAnswers, isClarificationQuestion } = await resolveAnswersMeta(
+    startVerseKey,
+    locale,
+    showAnswers,
+  );
 
   // Verse keys & verses fetch.
   const verseKeys: string[] = buildVerseKeys(chapterNumber, verseNumber, normalizedRangeEnd);
@@ -775,6 +792,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
       showArabic,
       showTafsirs,
       showReflections,
+      showLessons,
       showAnswers,
       locale,
       labels,
@@ -786,6 +804,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
     {
       hasAnyTranslations,
       hasAnswers,
+      isClarificationQuestion,
       surahName: meta.surahName,
       audioUrl: meta.audioUrl,
       audioStart: meta.audioStart,

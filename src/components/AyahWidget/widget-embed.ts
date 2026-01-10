@@ -112,6 +112,7 @@ export const buildEmbedIframeSrc = (
   setParam('showArabic', String(preferences.showArabic), 'true');
   setParam('tafsir', String(preferences.showTafsirs), 'true');
   setParam('reflections', String(preferences.showReflections), 'true');
+  setParam('lessons', String(preferences.showLessons), 'true');
   setParam('answers', String(preferences.showAnswers), 'true');
   setParam('mergeVerses', String(preferences.mergeVerses), 'false');
 

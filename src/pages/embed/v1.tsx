@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -122,6 +123,10 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       (query.reflections ?? query.showReflections) as string | string[] | undefined,
       true,
     );
+    const showLessons = parseBool(
+      (query.lessons ?? query.showLessons) as string | string[] | undefined,
+      true,
+    );
     const showAnswers = parseBool(
       (query.answers ?? query.showAnswers) as string | string[] | undefined,
       true,
@@ -146,6 +151,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       showArabic,
       showTafsirs,
       showReflections,
+      showLessons,
       showAnswers,
       locale: locale || undefined,
       rangeEnd,
