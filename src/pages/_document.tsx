@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import Script from 'next/script';
 
 import { getDir } from '@/utils/locale';
 
@@ -16,6 +17,23 @@ class MyDocument extends Document {
       <body>
         <Main />
         <NextScript />
+        {/* Mind Rockets Access In Hand - Accessibility Plugin */}
+        <Script
+          src="https://cdn.mindrocketsapis.com/client/Latest/jquery-3.7.1.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cdn.mindrocketsapis.com/client/Latest/toolkit.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cdn.mindrocketsapis.com/client/Latest/mrmegapack.bundle.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cdn.mindrocketsapis.com/client/MRUAP/quran/integrator-uap.js"
+          strategy="afterInteractive"
+        />
       </body>
     </Html>
   );
