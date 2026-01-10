@@ -82,8 +82,9 @@ const BuilderConfigForm = ({
    * Example: if user had range enabled but the new surah cannot support it, we disable it.
    */
   useEffect(() => {
+    if (!verseOptions.length) return;
     setUserPreferences((prev: Preferences) => normalizeRangePreferences(prev, rangeMeta));
-  }, [rangeMeta, setUserPreferences]);
+  }, [rangeMeta, setUserPreferences, verseOptions.length]);
 
   /**
    * Context passed to field config resolvers (options/getValue/setValue, visibility, etc.).
