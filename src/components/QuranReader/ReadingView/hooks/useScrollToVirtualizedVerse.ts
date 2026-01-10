@@ -146,7 +146,7 @@ const useScrollToVirtualizedReadingView = (
   ]);
 
   // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons in audio player
-  useAudioNavigationScroll(quranReaderDataType, scrollToVerse);
+  useAudioNavigationScroll(quranReaderDataType, chapterId as string, scrollToVerse);
 };
 
 export default useScrollToVirtualizedReadingView;
