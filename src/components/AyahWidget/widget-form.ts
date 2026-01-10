@@ -129,7 +129,7 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
     preferenceKey: 'clientId',
     setValue: (value, prev) => ({
       ...prev,
-      clientId: String(value || prev.clientId),
+      clientId: String(value ?? ''),
     }),
   },
 
