@@ -5,6 +5,7 @@ import { NextApiRequest } from 'next';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
+import { getMushafId } from '@/utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -29,6 +30,7 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
   makeChapterMetadataUrl,
+  makeVersesFilterUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -404,5 +406,33 @@ export const getTafsirContent = (
       quranFont,
       mushafLines,
     }),
+  );
+};
+
+/**
+ * Get the page number for a specific verse by chapter and verse number.
+ * This is used as a fallback when verse data is not already available in memory.
+ *
+ * @param {string} chapterId the chapter ID
+ * @param {number} verseNumber the verse number
+ * @param {QuranFont} quranFont the selected Quran font
+ * @param {MushafLines} mushafLines the selected mushaf lines
+ * @param {AbortSignal} signal optional abort signal for request cancellation
+ * @returns {Promise<VersesResponse>}
+ */
+export const getVersePageNumber = async (
+  chapterId: string,
+  verseNumber: number,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  signal?: AbortSignal,
+): Promise<VersesResponse> => {
+  return fetcher<VersesResponse>(
+    makeVersesFilterUrl({
+      filters: `${chapterId}:${verseNumber}`,
+      fields: `page_number`,
+      ...getMushafId(quranFont, mushafLines),
+    }),
+    { signal },
   );
 };
