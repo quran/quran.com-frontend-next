@@ -31,6 +31,7 @@
 .grid {
   display: grid;
   grid-template-columns: 360px 1fr;
+  grid-template-areas: 'config preview';
   gap: 24px;
   align-items: flex-start;
   align-self: stretch;
@@ -42,6 +43,10 @@
   border-radius: 16px;
   padding: 20px;
   box-shadow: var(--shadow-medium);
+}
+
+.configPanel {
+  grid-area: config;
 }
 
 .panelTitle {
@@ -224,6 +229,7 @@
   flex-direction: column;
   gap: 24px;
   block-size: 100%;
+  grid-area: preview;
 }
 
 .sticky {
@@ -239,6 +245,7 @@
   justify-content: flex-start;
   gap: 16px;
   align-items: stretch;
+  grid-area: preview;
 }
 
 .previewContainer {
@@ -253,6 +260,7 @@
 
 .codePanel {
   @extend .panel;
+  grid-area: snippet;
 }
 
 .codeHeader {
@@ -314,6 +322,9 @@
 @media (max-width: 1200px) {
   .grid {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      'config'
+      'preview';
   }
 
   .sticky {
@@ -332,5 +343,16 @@
 
   .panel {
     padding: 16px;
+  }
+
+  .grid {
+    grid-template-areas:
+      'preview'
+      'config'
+      'snippet';
+  }
+
+  .previewColumn {
+    display: contents;
   }
 }

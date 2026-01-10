@@ -517,7 +517,7 @@ const BuilderConfigForm = ({
   );
 
   return (
-    <section className={styles.panel}>
+    <section className={`${styles.panel} ${styles.configPanel}`}>
       <h2 className={styles.panelTitle}>{t('sections.configuration')}</h2>
       {WIDGET_FORM_BLOCKS.map((block: WidgetFormBlock, index: number) => renderBlock(block, index))}
     </section>
