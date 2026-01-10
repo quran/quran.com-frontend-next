@@ -62,7 +62,7 @@
     "translator": "Show translator name",
     "tafsirs": "Show Tafsirs button",
     "reflections": "Show Reflections & Lessons button",
-    "answers": "Show Answers button",
+    "answers": "Show Answers button (if available)",
     "customSize": "Use custom width/height"
   },
   "actions": {
