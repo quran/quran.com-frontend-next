@@ -30,10 +30,12 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateX(-100%) translateY(calc($top-menu-height-home + var(--banner-height)));
-      transform: translateX(-100%) translateY(calc($top-menu-height-home));
+      transform: translateX(-100%)
+        translateY(calc($top-menu-height-home + var(--mobile-reading-mode-tabs-height)));
       [dir='rtl'] & {
         // transform: translateX(100%) translateY(calc($top-menu-height-home + var(--banner-height)));
-        transform: translateX(100%) translateY(calc($top-menu-height-home));
+        transform: translateX(100%)
+          translateY(calc($top-menu-height-home + var(--mobile-reading-mode-tabs-height)));
       }
     }
   }
@@ -47,10 +49,12 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateX(-100%) translateY(calc($top-menu-height + var(--banner-height)));
-      transform: translateX(-100%) translateY($top-menu-height);
+      transform: translateX(-100%)
+        translateY(calc($top-menu-height + var(--mobile-reading-mode-tabs-height)));
       [dir='rtl'] & {
         // transform: translateX(100%) translateY(calc($top-menu-height + var(--banner-height)));
-        transform: translateX(100%) translateY($top-menu-height);
+        transform: translateX(100%)
+          translateY(calc($top-menu-height + var(--mobile-reading-mode-tabs-height)));
       }
     }
   }
@@ -66,10 +70,12 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateX(-100%) translateY(calc($top-menu-height-home + var(--banner-height)));
-      transform: translateX(-100%) translateY($top-menu-height-home);
+      transform: translateX(-100%)
+        translateY(calc($top-menu-height-home + var(--mobile-reading-mode-tabs-height)));
       [dir='rtl'] & {
         // transform: translateX(100%) translateY(calc($top-menu-height-home + var(--banner-height)));
-        transform: translateX(100%) translateY($top-menu-height-home);
+        transform: translateX(100%)
+          translateY(calc($top-menu-height-home + var(--mobile-reading-mode-tabs-height)));
       }
     }
   }
@@ -78,6 +84,25 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateX(-100%) translateY($top-menu-height);
     [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      transform: translateX(-100%)
+        translateY(
+          calc(
+            $top-menu-height + var(--sections-container-height) + var(--progress-bar-height) +
+              0.6rem
+          )
+        );
+      [dir='rtl'] & {
+        transform: translateX(100%)
+          translateY(
+            calc(
+              $top-menu-height + var(--sections-container-height) + var(--progress-bar-height) +
+                0.6rem
+            )
+          );
+      }
     }
   }
 }
@@ -133,10 +158,10 @@ $isNavbarVisible: var(--isNavbarVisible);
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height + var(--banner-height)));
-      transform: translateY($top-menu-height);
+      transform: translateY(calc($top-menu-height + var(--mobile-reading-mode-tabs-height)));
       [dir='rtl'] & {
         // transform: translateY(calc($top-menu-height + var(--banner-height)));
-        transform: translateY($top-menu-height);
+        transform: translateY(calc($top-menu-height + var(--mobile-reading-mode-tabs-height)));
       }
     }
   }
@@ -156,6 +181,23 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($context-menu-height);
     [dir='rtl'] & {
       transform: translateY($context-menu-height);
+    }
+
+    @include breakpoints.smallerThanTablet {
+      transform: translateY(
+        calc(
+          $context-menu-height + var(--sections-container-height) + var(--progress-bar-height) +
+            0.6rem
+        )
+      );
+      [dir='rtl'] & {
+        transform: translateY(
+          calc(
+            $context-menu-height + var(--sections-container-height) + var(--progress-bar-height) +
+              0.6rem
+          )
+        );
+      }
     }
   }
 }

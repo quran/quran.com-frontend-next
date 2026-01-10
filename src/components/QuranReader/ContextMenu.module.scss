@@ -1,7 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-$sections-container-height: 2.25rem;
 $pixel: 1px;
 
 .container {
@@ -69,7 +68,7 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  block-size: $sections-container-height;
+  block-size: var(--sections-container-height);
   inline-size: 100%;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
