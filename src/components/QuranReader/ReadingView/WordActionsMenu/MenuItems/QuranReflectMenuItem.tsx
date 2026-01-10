@@ -8,8 +8,14 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChatIcon from '@/icons/chat.svg';
+import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import ContentType from '@/types/QuranReflect/ContentType';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import {
+  fakeNavigate,
+  getVerseLessonNavigationUrl,
+  getVerseReflectionNavigationUrl,
+} from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import Verse from 'types/Verse';
 
@@ -21,19 +27,33 @@ interface Props {
 const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
+  const [isReflectionModalOpen, setIsReflectionModalOpen] = useState(false);
+  const [isLessonsModalOpen, setIsLessonsModalOpen] = useState(false);
   const { verseKey } = verse;
 
-  const onMenuItemClicked = () => {
+  const reflectionModalRef = useRef(null);
+  const lessonsModalRef = useRef(null);
+
+  const onReflectionClicked = () => {
     logButtonClick('reading_view_reflect');
-    setIsContentModalOpen(true);
+    setIsReflectionModalOpen(true);
     fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
   };
 
-  const contentModalRef = useRef(null);
+  const onLessonsClicked = () => {
+    logButtonClick('reading_view_lessons');
+    setIsLessonsModalOpen(true);
+    fakeNavigate(getVerseLessonNavigationUrl(verseKey), lang);
+  };
 
-  const onModalClose = () => {
-    setIsContentModalOpen(false);
+  const onReflectionModalClose = () => {
+    setIsReflectionModalOpen(false);
+    fakeNavigate(router.asPath, lang);
+    onActionTriggered?.();
+  };
+
+  const onLessonsModalClose = () => {
+    setIsLessonsModalOpen(false);
     fakeNavigate(router.asPath, lang);
     onActionTriggered?.();
   };
@@ -42,6 +62,7 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
 
   return (
     <>
+      {/* Reflections Menu Item */}
       <PopoverMenu.Item
         icon={
           <IconContainer
@@ -51,24 +72,64 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
             shouldFlipOnRTL={false}
           />
         }
-        onClick={onMenuItemClicked}
+        onClick={onReflectionClicked}
       >
-        {t('reflections-and-lessons')}
+        {t('reflections')}
       </PopoverMenu.Item>
+
+      {/* Lessons Menu Item */}
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<GraduationCapIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
+        }
+        onClick={onLessonsClicked}
+      >
+        {t('lessons')}
+      </PopoverMenu.Item>
+
+      {/* Reflection Modal */}
       <ReflectionBodyContainer
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
         isModal
         scrollToTop={() => {
-          contentModalRef.current?.scrollToTop();
+          reflectionModalRef.current?.scrollToTop();
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
-            innerRef={contentModalRef}
-            isOpen={isContentModalOpen}
+            innerRef={reflectionModalRef}
+            isOpen={isReflectionModalOpen}
             hasCloseButton
-            onClose={onModalClose}
-            onEscapeKeyDown={onModalClose}
+            onClose={onReflectionModalClose}
+            onEscapeKeyDown={onReflectionModalClose}
+            header={surahAndAyahSelection}
+          >
+            {body}
+          </ContentModal>
+        )}
+      />
+
+      {/* Lessons Modal */}
+      <ReflectionBodyContainer
+        initialChapterId={initialChapterId}
+        initialVerseNumber={verseNumber}
+        initialContentType={ContentType.LESSONS}
+        isModal
+        scrollToTop={() => {
+          lessonsModalRef.current?.scrollToTop();
+        }}
+        render={({ surahAndAyahSelection, body }) => (
+          <ContentModal
+            innerRef={lessonsModalRef}
+            isOpen={isLessonsModalOpen}
+            hasCloseButton
+            onClose={onLessonsModalClose}
+            onEscapeKeyDown={onLessonsModalClose}
             header={surahAndAyahSelection}
           >
             {body}

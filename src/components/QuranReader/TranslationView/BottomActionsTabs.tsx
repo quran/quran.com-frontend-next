@@ -51,7 +51,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
       <div
         className={classNames(styles.tabsContainer, {
           [styles.center]: !isTranslationView,
-          [styles.tabsContainerRTL]: isRTL,
+          [styles.tabsContainerRTL]: isRTL && isTranslationView,
         })}
       >
         {tabs
