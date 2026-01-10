@@ -10,14 +10,12 @@ import {
 } from 'react';
 
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import type { Preferences } from '@/components/AyahWidget/builder/types';
 import BuilderConfigForm from '@/components/AyahWidget/BuilderConfigForm';
 import BuilderPreview from '@/components/AyahWidget/BuilderPreview';
-import { parseString, parseVersesParam } from '@/components/AyahWidget/queryParsing';
 import {
   DEFAULTS,
   applyWidgetOverrides,
@@ -43,7 +41,6 @@ import ThemeType from '@/redux/types/ThemeType';
 import styles from '@/styles/embed.module.scss';
 import { WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import type AvailableTranslation from 'types/AvailableTranslation';
 
 /**
@@ -65,7 +62,6 @@ type SetPreferences = Dispatch<SetStateAction<Preferences>>;
  * @returns {JSX.Element} The Ayah Widget Builder page.
  */
 const AyahWidgetBuilderPage = () => {
-  const router = useRouter();
   const { t, lang } = useTranslation('embed');
 
   const dispatch = useDispatch();
@@ -188,7 +184,6 @@ const AyahWidgetBuilderPage = () => {
 
   const [translationSearch, setTranslationSearch] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
-  const [lastParsedVersesParam, setLastParsedVersesParam] = useState<string | null>(null);
 
   /**
    * CSV of selected translation IDs: "131,20,17"
@@ -256,46 +251,6 @@ const AyahWidgetBuilderPage = () => {
       return { ...prev, translations: nextTranslations };
     });
   }, [translations, selectedTranslationIdsFromRedux, widgetOverrides]);
-
-  /**
-   * If the page is loaded with a "verses" query param (e.g. from /embed/1/3-5),
-   * override the builder's selected surah/ayah and range settings.
-   */
-  useEffect(() => {
-    if (!router.isReady) return;
-
-    const versesParam = parseString(router.query.verses as string | string[] | undefined);
-    if (!versesParam || versesParam === lastParsedVersesParam) return;
-
-    try {
-      const { ayah, rangeEnd } = parseVersesParam(versesParam);
-      const [chapterIdRaw, verseNumberRaw] = getVerseAndChapterNumbersFromKey(ayah);
-      const chapterId = Number(chapterIdRaw);
-      const verseNumber = Number(verseNumberRaw);
-
-      if (!Number.isFinite(chapterId) || !Number.isFinite(verseNumber)) {
-        return;
-      }
-
-      const hasRange: boolean = Number.isFinite(rangeEnd);
-
-      setUserPreferences((prev: Preferences) => ({
-        ...prev,
-        selectedSurah: chapterId,
-        selectedAyah: verseNumber,
-        rangeEnabled: hasRange,
-        rangeEnd: rangeEnd ?? prev.rangeEnd,
-      }));
-
-      if (!hasRange) {
-        dispatch(updateAyahWidgetOverrides({ rangeEnabled: false }));
-      }
-
-      setLastParsedVersesParam(versesParam);
-    } catch (error) {
-      // Ignore invalid query params and keep current preferences.
-    }
-  }, [dispatch, lastParsedVersesParam, router.isReady, router.query.verses, setUserPreferences]);
 
   /**
    * If the user changes Surah, ensure the selected Ayah remains valid.

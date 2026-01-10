@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CodeIcon from '@/icons/code.svg';
+import { updateAyahWidgetOverrides } from '@/redux/slices/ayahWidget';
 import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -25,6 +27,7 @@ const VerseActionEmbedWidget = ({
 }: VerseActionEmbedWidgetProps) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onClick = () => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -35,8 +38,11 @@ const VerseActionEmbedWidget = ({
     const surah = Number(surahStr);
     const ayah = Number(ayahStr);
 
-    // Navigate to widget builder with the selected verse
-    router.push(`/embed/${surah}/${ayah}`);
+    // Update Redux state with the selected verse
+    dispatch(updateAyahWidgetOverrides({ selectedSurah: surah, selectedAyah: ayah }));
+
+    // Navigate to widget builder (Redux will pre-fill the verse)
+    router.push('/embed');
 
     if (onActionTriggered) {
       onActionTriggered();
