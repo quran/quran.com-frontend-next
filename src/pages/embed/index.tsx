@@ -41,7 +41,7 @@ import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ThemeType from '@/redux/types/ThemeType';
 import styles from '@/styles/embed.module.scss';
-import { WordByWordType } from '@/types/QuranReader';
+import { WordByWordDisplay, WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import type AvailableTranslation from 'types/AvailableTranslation';
@@ -98,15 +98,29 @@ const AyahWidgetBuilderPage = () => {
    * Enable WBW translation by default if reading preferences include it.
    */
   const shouldEnableWbwTranslation = useMemo(() => {
-    return readingPreferences.wordByWordContentType.includes(WordByWordType.Translation);
-  }, [readingPreferences.wordByWordContentType]);
+    // Need to have both inline and translation to enable wbw translation by default
+    const shouldDisplayInline = readingPreferences.wordByWordDisplay.includes(
+      WordByWordDisplay.INLINE,
+    );
+    return (
+      shouldDisplayInline &&
+      readingPreferences.wordByWordContentType.includes(WordByWordType.Translation)
+    );
+  }, [readingPreferences.wordByWordContentType, readingPreferences.wordByWordDisplay]);
 
   /**
    * Enable WBW transliteration by default if reading preferences include it.
    */
   const shouldEnableWbwTransliteration = useMemo(() => {
-    return readingPreferences.wordByWordContentType.includes(WordByWordType.Transliteration);
-  }, [readingPreferences.wordByWordContentType]);
+    // Need to have both inline and transliteration to enable wbw transliteration by default
+    const shouldDisplayInline = readingPreferences.wordByWordDisplay.includes(
+      WordByWordDisplay.INLINE,
+    );
+    return (
+      shouldDisplayInline &&
+      readingPreferences.wordByWordContentType.includes(WordByWordType.Transliteration)
+    );
+  }, [readingPreferences.wordByWordContentType, readingPreferences.wordByWordDisplay]);
 
   /**
    * Base preferences = QDC-derived defaults (theme/locale/mushaf/wbw, etc.)
