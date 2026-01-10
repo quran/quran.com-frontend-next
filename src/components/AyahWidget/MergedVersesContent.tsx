@@ -39,7 +39,14 @@ const MergedVersesContent = ({ verses, options, quranFont }: Props): JSX.Element
         />
       )}
       {/* All translations grouped by translator */}
-      <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
+      <div
+        style={{
+          marginTop: options.showArabic ? 12 : 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+        }}
+      >
         {groupTranslationsByTranslator(verses).map((group) => (
           <TranslationText
             key={group.translatorName}

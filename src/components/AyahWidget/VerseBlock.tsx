@@ -53,7 +53,14 @@ const VerseBlock = ({ verse, index, options, quranFont }: Props): JSX.Element =>
         />
       )}
       {/* Render translations for the verse using the shared TranslationText component */}
-      <div style={{ marginTop: options.showArabic ? 12 : 0 }}>
+      <div
+        style={{
+          marginTop: options.showArabic ? 12 : 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+        }}
+      >
         {verse.translations?.map((translation) => (
           <TranslationText
             key={translation.id}
