@@ -1,14 +1,14 @@
 {
   "about-author": "Về tác giả",
-  "add-reflection": "Thêm suy ngẫm",
-  "all-learning-plans": "Tất cả các kế hoạch học tập",
+  "add-reflection": "Thêm Suy ngẫm",
+  "all-learning-plans": "Tất cả Kế hoạch học tập",
   "author": "Tác giả",
   "back-to-learning-plan": "Trở lại Kế hoạch Học tập",
   "back-to-learning-plans": "Trở lại Kế hoạch Học tập",
   "category": "Loại",
   "coming-soon": "Sắp ra mắt...",
   "completed": "Hoàn thành",
-  "continue-learning": "Tiếp tục học tập",
+  "continue-learning": "Tiếp tục học",
   "contributors": "Người đóng góp",
   "day": "Ngày",
   "description": "Miêu tả",
@@ -19,18 +19,18 @@
   "enrolled": "Đã đăng ký",
   "feedback": {
     "add-feedback": "Thêm phản hồi",
-    "desc": "Chúc mừng! Bạn đã hoàn thành '{{courseName}}' kế hoạch học tập. <br></br>  Vui lòng xem xét kế hoạch học tập và chia sẻ phản hồi của bạn để giúp chúng tôi cải thiện nội dung.",
+    "desc": "Chúc mừng! Bạn đã hoàn thành kế hoạch học tập '{{courseName}}'. <br></br>  Hãy xem lại kế hoạch và góp ý để chúng tôi cải thiện nội dung.",
     "feedback-placeholder": "Hãy viết phản hồi của bạn",
     "feedback-success": "Cảm ơn phản hồi của bạn!",
     "your-feedback": "Phản hồi của bạn"
   },
   "help-about-reflection": "Trợ giúp về tính năng suy ngẫm",
-  "learn-duration": "Khoảng thời gian",
+  "learn-duration": "Thời lượng",
   "learn-more": "Tìm hiểu thêm",
   "learning-plan-material": "Tài liệu kế hoạch học tập",
-  "learning-plan-meta-desc": "Kế hoạch học tập này sẽ giúp thay đổi cách bạn tiếp cận Kinh Qur'an, hãy bắt đầu hành trình của bạn ngay hôm nay!",
-  "learning-plans-desc": "Nâng cao kiến thức của bạn với những bài học dễ hiểu, giúp bạn không ngừng tiến bộ trên hành trình tìm hiểu Kinh Qur'an. <br></br>Hãy bắt đầu Kế hoạch Học tập ngay hôm nay! Quá trình học tập của bạn sẽ được theo dõi cho đến khi bạn hoàn thành.",
-  "learning-plans-meta-desc": "Các kế hoạch học tập của Quran.com sẽ giúp thay đổi cách bạn tiếp cận Kinh Qur'an. Khám phá bộ sưu tập các bài học được tuyển chọn kỹ lưỡng của chúng tôi và bắt đầu hành trình của bạn ngay hôm nay!",
+  "learning-plan-meta-desc": "Kế hoạch học tập này sẽ thay đổi cách bạn tiếp cận Kinh Qur'an, hãy bắt đầu ngay hôm nay!",
+  "learning-plans-desc": "Nâng cao kiến thức với các bài học dễ hiểu, đồng hành cùng bạn trên hành trình với Kinh Qur'an. <br></br>Bắt đầu Kế hoạch Học tập ngay hôm nay, tiến trình của bạn sẽ được theo dõi đến khi hoàn thành.",
+  "learning-plans-meta-desc": "Các kế hoạch học tập trên Quran.com sẽ đổi mới cách bạn tiếp cận Kinh Qur'an. Khám phá các bài học tuyển chọn và bắt đầu hành trình của bạn ngay hôm nay!",
   "mark-complete": "Đánh dấu là đã hoàn thành",
   "mark-complete-success": "Bài học đã được đánh dấu hoàn thành thành công!",
   "next-lesson": "Bài học tiếp theo",
@@ -43,5 +43,5 @@
     "main": "Thông tin chính",
     "syllabus": "Chương trình học"
   },
-  "what-happens-when-you-click-add-reflection": "Điều gì xảy ra khi bạn nhấp vào \"Thêm suy ngẫm\"?"
+  "what-happens-when-you-click-add-reflection": "Khi bạn nhấp \"Thêm suy ngẫm\" thì điều gì xảy ra?"
 }

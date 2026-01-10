@@ -6,7 +6,7 @@
     "email": "E-mail",
     "in_app": "In-App",
     "push": "Push",
-    "sms": "Tin nhắn SMS"
+    "sms": "SMS"
   },
   "notif-settings-not-enabled": "Cài đặt thông báo chưa được bật.",
   "notif-update-success": "Cài đặt thông báo của bạn đã được cập nhật thành công!",
@@ -15,9 +15,9 @@
     "global-settings": "Cài đặt toàn cầu"
   },
   "tags": {
-    "calendar": "Kinh Qur'an trong một năm",
+    "calendar": "Đọc Kinh Qur'an trong một năm",
     "learning-plans": "Kế hoạch học tập",
-    "qgj": "Hành trình trưởng thành qua Kinh Qur'an",
+    "qgj": "Hành trình Phát triển cùng Kinh Qur'an",
     "streaks": "Chuỗi ngày liên tục"
   }
 }

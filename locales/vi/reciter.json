@@ -1,8 +1,8 @@
 {
-  "copy-link": "Sao chép liên kết",
-  "quran-reciters": "Người đọc Kinh Qur'an",
+  "copy-link": "Sao chép link",
+  "quran-reciters": "Qari Kinh Qur'an",
   "read": "Đọc",
-  "reciter-desc": "Lắng nghe và tải về bài đọc Thiên Kinh tuyệt mỹ bởi {{reciterName}}.",
-  "reciters-desc": "Lắng nghe và tải về những bài đọc Thiên Kinh tuyệt mỹ từ nhiều giọng khác nhau.",
+  "reciter-desc": "Nghe và tải bài đọc Thiên Kinh tuyệt mỹ bởi {{reciterName}}.",
+  "reciters-desc": "Lắng nghe và tải về các bài đọc Thiên Kinh từ nhiều giọng khác nhau.",
   "search-chapter": "Tìm kiếm chương"
 }

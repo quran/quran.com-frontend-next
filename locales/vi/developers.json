@@ -2,34 +2,34 @@
   "api-docs": {
     "cta": "Xem tài liệu API",
     "header": "Tài liệu API",
-    "sub-header": "Tích hợp dữ liệu từ Quran.com vào ứng dụng của bạn với API toàn diện của chúng tôi.",
+    "sub-header": "Tích hợp dữ liệu Quran.com vào ứng dụng bằng API toàn diện của chúng tôi.",
     "title": "Tài liệu API"
   },
   "app-portal": {
     "cta-explore": "Truy cập Cổng ứng dụng Kinh Qur'an",
     "cta-oauth": "Xem hướng dẫn OAuth2.",
-    "description": "Khám phá các ứng dụng đột phá đáp ứng nhu cầu riêng biệt và đa dạng của xã hội.",
+    "description": "Khám phá các ứng dụng đột phá cho nhiều nhóm người dùng khác nhau.",
     "heading": "Cổng ứng dụng Kinh Qur'an",
     "oauth-pitch": "Sử dụng OAuth2.0 do Quran.Foundation cung cấp để người dùng truy cập lại dữ liệu của họ và tiếp tục những phần còn dang dở trên Quran.com và các ứng dụng tích hợp.",
-    "tagline": "Giới thiệu các ứng dụng Kinh Qur'an của bạn"
+    "tagline": "Giới thiệu ứng dụng Qur'an của bạn"
   },
   "careers": {
     "career": "Cơ hội nghề nghiệp",
     "cta": "Xem các vị trí tuyển dụng",
-    "header": "Khám phá các vị trí tuyển dụng hiện tại của chúng tôi"
+    "header": "Khám phá các vị trí đang tuyển"
   },
   "footer": "- Team Quran.com",
   "header": "Hỗ trợ phát triển",
   "hero": {
-    "subtitle": "Nguồn tài liệu, công cụ và hướng dẫn dành cho các nhà phát triển xây dựng trải nghiệm Kinh Qur'an.",
-    "title": "Được xây dựng bằng Quran.com"
+    "subtitle": "Tài nguyên, công cụ và hướng dẫn cho lập trình viên tạo trải nghiệm Kinh Qur'an.",
+    "title": "Xây dựng với Quran.com"
   },
   "issues-cta": "Nếu bạn có bất kỳ câu hỏi nào hoặc muốn liên hệ với người bảo trì, chỉ cần để lại câu hỏi đó. Chúng tôi sẽ phản hồi lại bạn sớm nhất có thể, Insha'Allah.",
   "issues-guide": "Thông thường, chúng tôi sử dụng <0>các dự án Github</0> làm nguồn thông tin về những việc cần làm tiếp theo, những dự án sắp tới và những lỗi cần được khắc phục. Ví dụ: <1>đường dẫn này</1> chứa danh sách các lỗi, những việc chúng tôi cần hỗ trợ và các tính năng sắp ra mắt.",
   "labs": "Quran Labs",
   "labs-cta": "Khám phá Labs",
-  "labs-description": "Khám phá các tính năng thử nghiệm do cộng đồng đóng góp và những cải tiến sắp ra mắt.",
-  "labs-pitch": "Hãy đóng góp ý tưởng của bạn và cùng kiến tạo tương lai cho cách tiếp cận và trải nghiệm với Kinh Qur'an.",
+  "labs-description": "Khám phá các tính năng thử nghiệm từ cộng đồng và những cải tiến sắp ra mắt.",
+  "labs-pitch": "Chia sẻ ý tưởng của bạn và cùng định hình tương lai cho việc tiếp cận và trải nghiệm với Kinh Qur'an.",
   "main-desc": "Khám phá các chương trình, công cụ và tài liệu được thiết kế để giúp bạn mở rộng hệ sinh thái của Quran.com.",
   "projects": {
     "all": "Chúng tôi có một số dự án, tất cả đều được lưu trữ trên Github. Bạn có thể tìm thấy tất cả chúng <0>tại đây</0>. Nhưng để tóm tắt chúng như sau:",
@@ -57,7 +57,7 @@
       "q-next": {
         "description": "Trải nghiệm web Next.js dành cho việc đọc, tìm kiếm và nghe Kinh Qur'an.",
         "name": "Giao diện người dùng của Quran.com",
-        "stack": "Được xây dựng bằng TypeScript và Next.js"
+        "stack": "Lập trình bằng TypeScript và Next.js"
       }
     },
     "lead": "Các dự án mã nguồn mở được duy trì bởi nhóm và cộng đồng của Quran.com.",

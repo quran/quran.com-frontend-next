@@ -2,7 +2,7 @@
   "browse": {
     "apps": {
       "muhaffidh": {
-        "caption": "Ghi nhớ và luyện tập Kinh Qur'an một cách hiệu quả",
+        "caption": "Ghi nhớ và ôn Qur'an hiệu quả",
         "title": "Muhaffidh"
       },
       "quran_android": {
@@ -14,15 +14,15 @@
         "title": "Ứng dụng Kinh Qur'an cho iOS (từ quran.com)"
       },
       "quranmeet": {
-        "caption": "Buổi học Kinh Qur'an trực tiếp",
+        "caption": "Buổi học Qur'an trực tiếp",
         "title": "QuranMeet"
       },
       "quranreflect": {
-        "caption": "Chia sẻ những suy ngẫm của bạn",
+        "caption": "Chia sẻ suy ngẫm",
         "title": "QuranReflect"
       },
       "readtafsir": {
-        "caption": "Tìm kiếm và so sánh các bản tafsir cổ điển.",
+        "caption": "Tìm và so sánh các tafsir cổ điển",
         "title": "ReadTafsir"
       },
       "sunnah": {
@@ -30,37 +30,37 @@
         "title": "Sunnah.com"
       },
       "tafsirapp": {
-        "caption": "Tafsir tương tác với nhiều nguồn tham khảo.",
+        "caption": "Tafsir tương tác từ nhiều nguồn.",
         "title": "Ứng dụng Tafsir"
       }
     },
     "filters": {
-      "all": "Tất cả ứng dụng",
+      "all": "Tất cả app",
       "community": "Cộng đồng",
       "hadith-sunnah": "Hadith và Sunnah",
       "popular": "Phổ biến",
-      "quran-reader": "Người đọc Kinh Qur'an",
+      "quran-reader": "Trình đọc Kinh Qur'an",
       "reflections": "Suy ngẫm",
       "study-tools": "Công cụ học tập"
     },
-    "title": "Xem tất cả ứng dụng"
+    "title": "Xem mọi ứng dụng"
   },
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Cuối cùng cũng có một ứng dụng Kinh Qur'an cho các con gái của chúng ta.",
+        "headline": "Cuối cùng cũng có app Qur'an dành cho con gái chúng ta.",
         "name": "Qariah",
-        "tagline": "Giọng đọc Kinh Qu'ran nữ"
+        "tagline": "Giọng đọc Kinh Qur'an nữ"
       },
       "quran-kareem": {
-        "headline": "Cổng thông tin mới giúp bạn kết nối với Kinh sách của Allah.",
-        "name": "Kinh Qur'an Kareem",
+        "headline": "Cánh cửa mới để bạn gắn kết với Kinh Sách của Allah.",
+        "name": "Thiên Kinh Qur'an",
         "tagline": "Đọc, nghe và suy ngẫm"
       },
       "quran-link": {
-        "headline": "Khám phá hơn 25 bản tafsir và hơn 100 bản dịch tại một nơi duy nhất.",
-        "name": "Liên kết Kinh Qur'an",
-        "tagline": "Tafsir & tài liệu học tập bổ trợ"
+        "headline": "Khám phá hơn 25 tafsir và 100 bản dịch tại một nơi.",
+        "name": "Quran Link",
+        "tagline": "Tafsir & tài liệu học"
       }
     },
     "learn-more": "Tìm hiểu thêm",
@@ -68,7 +68,7 @@
     "view-all": "Xem tất cả"
   },
   "hero": {
-    "description": "Khám phá bộ sưu tập ứng dụng Hồi giáo được tuyển chọn kỹ lưỡng, phát triển bởi Quran.foundation. Từ công cụ học tập đến tiện ích cầu nguyện, hãy tìm những ứng dụng giúp nâng cao hành trình tâm linh của bạn.",
+    "description": "Khám phá bộ ứng dụng Hồi giáo chọn lọc, xây dựng với Quran.foundation, từ công cụ học tập đến tiện ích cầu nguyện, đồng hành cùng hành trình tâm linh của bạn.",
     "title": "Khám phá hệ sinh thái ứng dụng của chúng tôi."
   },
   "quran-apps-portal": "Cổng ứng dụng Kinh Qur'an"

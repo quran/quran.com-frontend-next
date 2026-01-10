@@ -6,7 +6,7 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Kế tiếp",
-        "description": "Dù bạn sử dụng Quran.com trên điện thoại hay máy tính xách tay,  các đánh dấu trang, các câu kinh đã đọc gần đây và tùy chọn của bạn đều sẽ được lưu lại.",
+        "description": "Dù dùng Quran.com trên điện thoại hay máy tính, dấu trang, câu đã đọc gần đây và tùy chọn của bạn luôn sẵn có.",
         "title": "Dữ liệu của bạn sẽ được đồng bộ hóa <br></br> trên các thiết bị"
       },
       "feedback": {
@@ -21,8 +21,8 @@
       },
       "quran-growth-journey": {
         "action": "Kế tiếp",
-        "description": "Hãy duy trì thói quen đọc Kinh Qur'an và tiến bộ trong việc đạt được mục tiêu đồng thời xây dựng những thói quen mới",
-        "title": "Hãy bắt đầu hành trình học tập Kinh Qur'an của bạn!"
+        "description": "Duy trì chuỗi đọc Kinh Qur'an, tiến tới mục tiêu và xây thói quen mới",
+        "title": "Hãy bắt đầu Hành trình Phát triển cùng Kinh Qur'an của bạn!"
       },
       "welcome": {
         "action": "Xem có gì mới nhé!",
@@ -39,12 +39,12 @@
   "answers": "Câu trả lời",
   "aria": {
     "change-settings": "Thay đổi cài đặt",
-    "drawer-close": "Đóng ngăn kéo",
+    "drawer-close": "Đóng ngăn",
     "msg-close": "Đóng thông báo",
-    "nav-drawer-open": "Mở ngăn kéo điều hướng",
+    "nav-drawer-open": "Mở menu điều hướng",
     "play-surah": "Phát Surah {{surahName}}",
     "select-lng": "Chọn ngôn ngữ",
-    "sidebar-nav-close": "Đóng thanh điều hướng bên",
+    "sidebar-nav-close": "Đóng thanh điều hướng",
     "translation-info": "Xem thông tin dịch thuật"
   },
   "audio": {
@@ -55,7 +55,7 @@
     },
     "displaying": "Đang hiển thị",
     "exp-tip": "<span>Thay đổi nội dung hiển thị bên dưới</span><br></br> <boldSpan>Cài đặt</boldSpan> > <boldSpan>Từng chữ một</boldSpan>",
-    "exp-tip-no-select": "<span>Chọn tùy chọn hiển thị chú giải công cụ và chọn <br></br> Tùy chọn dịch thuật và/hoặc phiên âm</span><br></br><span> dưới </span><boldSpan>Cài đặt</boldSpan> > <boldSpan>Từng chữ một</boldSpan><span>, ĐẾN</span><br></br> <span>Hãy bật tính năng này.</span>",
+    "exp-tip-no-select": "<span>Chọn tùy chọn hiển thị chú giải công cụ và chọn <br></br> tùy chọn dịch thuật và/hoặc phiên âm</span><br></br><span> dưới </span><boldSpan>cài đặt</boldSpan> > <boldSpan>Từng chữ một</boldSpan><span>, đến</span><br></br> <span> bật tính năng này.</span>",
     "experience": "Trải nghiệm",
     "play": "Phát âm thanh",
     "playback-normal": "Bình thường",
@@ -74,7 +74,7 @@
       "play": "Phát",
       "play-audio": "Phát âm thanh",
       "play-range": "Phạm vi phát",
-      "previous-ayah": "Câu trước",
+      "previous-ayah": "Ayah trước",
       "repeat-1-verse": "Lặp lại câu",
       "repeat-settings": "Lặp lại cài đặt",
       "repeat-verse": "Lặp lại từng câu",
@@ -85,7 +85,7 @@
       "stop-repeating": "Dừng lặp lại",
       "times": "lần",
       "verses-range": "Phạm vi các câu",
-      "volume-control": "Điều khiển âm lượng"
+      "volume-control": "Chỉnh âm lượng"
     },
     "repeat-moved": "Các cài đặt lặp lại đã được chuyển sang trình phát âm thanh. Nhấp vào biểu tượng <0></0> để truy cập chúng.",
     "select-reciter": "Chọn người đọc",
@@ -107,20 +107,20 @@
   "command-bar": {
     "navigations": "Điều hướng",
     "no-nav-results": "Không có kết quả điều hướng",
-    "placeholder": "Tìm kiếm trong Kinh Qur'an...",
+    "placeholder": "Tìm kiếm Qur'an...",
     "recent-navigations": "Điều hướng gần đây",
     "search-by-voice": "Tìm kiếm bằng giọng nói",
     "try-navigating": "Hãy thử điều hướng đến"
   },
   "community": {
     "cta": "Hãy liên hệ với chúng tôi",
-    "header": "Bạn có muốn tình nguyện đóng góp kỹ năng của mình để giúp phát triển sứ mệnh của Kinh Qur'an không?",
+    "header": "Bạn muốn dùng kỹ năng kỹ thuật để đóng góp cho sứ mệnh của Thiên Kinh Qur'an?",
     "sub-header": "Hãy bày tỏ sự quan tâm của bạn bằng cách điền vào mẫu đơn này, và chúng tôi sẽ liên hệ khi có cơ hội phù hợp, Insha'Allah.",
     "title": "Cộng đồng"
   },
   "complete-sign-up": "Hoàn tất đăng ký của bạn",
   "complete-signup": {
-    "description": "Chúng tôi cần những thông tin còn thiếu sau đây để hoàn tất quá trình đăng ký của bạn.",
+    "description": "Chúng tôi cần các thông tin còn thiếu sau để hoàn tất đăng ký của bạn.",
     "title": "Hoàn tất đăng ký của bạn",
     "verification-code": "Mã xác minh",
     "verification-code-sent-to": "Mã xác minh đã được gửi đến {{email}}"
@@ -128,20 +128,20 @@
   "consents": {
     "communication": {
       "body": "🚀 Tăng tốc tiến độ của bạn thông qua <boldSpan>cá nhân hóa</boldSpan> Nhận thông báo về tiến độ đạt mục tiêu, duy trì chuỗi thành tích và nâng cao trải nghiệm sử dụng các tính năng hiện có của chúng tôi.<br></br><br></br> Chúng tôi có thể cập nhật thông tin cho bạn qua email và các kênh khác không? Bạn hoàn toàn chủ động – hãy thoải mái điều chỉnh các tùy chọn này bất cứ lúc nào trong cài đặt tài khoản của bạn.<br></br><br></br> Chỉ cần chọn 'Cho phép' <boldSpan>những lời nhắc nhở đầy cảm hứng</boldSpan> hoặc dùng \"Không phải bây giờ\" để từ chối.",
-      "header": "Chúng tôi rất sẵn lòng đồng hành để bạn luôn <boldSpan>tận tâm và nhất quán</boldSpan> trên Hành Trình Trưởng Thành Cùng Kinh Qur'an! 📖🌟"
+      "header": "Chúng tôi rất sẵn lòng đồng hành để bạn luôn <boldSpan>tận tâm và nhất quán</boldSpan> trên Hành trình Phát triển cùng Kinh Qur'an! 📖🌟"
     }
   },
   "continue": "Tiếp tục",
-  "contribute-to-our-mission": "Hãy cùng chung tay thực hiện sứ mệnh của chúng tôi.",
+  "contribute-to-our-mission": "Chung tay vì sứ mệnh của chúng tôi",
   "copied": "Đã sao chép",
   "copied-to-clipboard": "Đã sao chép vào clipboard",
   "copy": "Sao chép",
-  "copylink": "Sao chép liên kết",
+  "copylink": "Sao chép link",
   "counter": {
     "decrease": "Giảm",
     "increase": "Tăng"
   },
-  "create-my-goal": "Tạo mục tiêu của tôi",
+  "create-my-goal": "Đặt mục tiêu của tôi",
   "default-description": "Kinh Qur'an được dịch sang nhiều ngôn ngữ với giao diện đơn giản và dễ sử dụng.",
   "delete": "Xóa",
   "developers": "Các nhà phát triển",
@@ -163,20 +163,20 @@
   "error": {
     "MediaVersesRangeLimitExceeded": "Bạn chỉ có thể chọn tối đa {{limit}} từng câu một. Vui lòng chọn phạm vi nhỏ hơn.",
     "bookmark-sync": "Đánh dấu trang không đồng bộ.",
-    "email-login-fail": "Đăng nhập bằng email không thành công. Vui lòng thử lại.",
+    "email-login-fail": "Không đăng nhập được bằng email. Vui lòng thử lại.",
     "general": "Đã xảy ra lỗi. Vui lòng thử lại.",
     "language-change-failed": "Không thể thay đổi ngôn ngữ. Vui lòng thử lại.",
     "offline": "Có vẻ như bạn đã mất kết nối. Vui lòng kiểm tra lại và thử lại.",
     "pref-persist-fail": "Không thể đồng bộ cài đặt của bạn lên đám mây.",
     "ranges-no-value": "Điểm bắt đầu và điểm kết thúc của phạm vi phải có giá trị.",
     "ranges-too-many-verses": "*Tối đa {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "Câu kinh bắt đầu phải đứng trước câu kinh kết thúc."
+    "ranges-wrong-order": "Câu bắt đầu phải trước câu kết thúc."
   },
   "errors": {
     "account-banned": "Rất tiếc, tài khoản của bạn đã bị khóa. Vui lòng liên hệ với Quran.Foundation.",
     "badRequest": "*Yêu cầu không hợp lệ",
     "banned": "*Rất tiếc, tài khoản của bạn đã bị khóa. Vui lòng liên hệ với Quran.Foundation",
-    "complete-signup-failed": "Đăng ký không thành công. Vui lòng thử lại.",
+    "complete-signup-failed": "Đăng ký thất bại. Vui lòng thử lại.",
     "confirm": "*Xác nhận mật khẩu không khớp với mật khẩu",
     "email": "*Định dạng email không hợp lệ!",
     "exactLength": "*Giá trị phải có độ dài chính xác",
@@ -191,8 +191,8 @@
     "notFound": "*Không tìm thấy",
     "required": "*{{fieldName}} bị thiếu!",
     "reset-password-failed": "Không thể đặt lại mật khẩu. Vui lòng thử lại.",
-    "signin-failed": "Đăng nhập không thành công. Vui lòng thử lại.",
-    "signup-failed": "Đăng ký không thành công. Vui lòng thử lại.",
+    "signin-failed": "Đăng nhập thất bại. Vui lòng thử lại.",
+    "signup-failed": "Đăng ký thất bại. Vui lòng thử lại.",
     "taken": "*{{fieldName}} đã tồn tại!",
     "usedToken": "*Mã thông báo này đã được sử dụng",
     "username": "*{{fieldName}} chỉ chấp nhận dấu gạch dưới và chữ cái",
@@ -201,35 +201,35 @@
     "verification-failed": "Xác thực thất bại. Vui lòng thử lại.",
     "verification-resend-failed": "Không thể gửi lại mã xác minh"
   },
-  "exciting-updates": "Những cập nhật thú vị",
-  "feedback": "Nhận xét",
+  "exciting-updates": "Cập nhật thú vị",
+  "feedback": "Phản hồi",
   "fonts": {
     "15_lines": "15 dòng",
     "16_lines": "16 dòng",
     "code_v1": "King Fahad Complex V1",
     "code_v2": "King Fahad Complex V2",
-    "font-size": "Kích thước phông chữ",
+    "font-size": "Cỡ phông",
     "lines": "Dòng",
     "qcf-desc": "Bộ phông chữ King Fahad Complex (V1 và V2) có chất lượng cao hơn nhưng thời gian tải lâu hơn.",
     "qcf-v4-desc": "Các phông chữ Tajweed được tạo ra bằng cách sử dụng Easy Quran - Dar Al Marifa Tajweed Mushaf và King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts sau khi nhận được sự cho phép từ cả hai bên.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-    "quran-font": "Phông chữ Kinh Qur'an",
-    "quran-font-size": "Cỡ chữ Kinh Qur'an",
+    "quran-font": "Phông chữ Qur'an",
+    "quran-font-size": "Cỡ chữ Qur'an",
     "tajweed": "Tajweed",
     "tajweed-desc": "Phông chữ Tajweed hiển thị một cuốn Mushaf được tô màu theo quy tắc Tajweed. Bạn có thể đọc thêm về các quy tắc màu sắc Tajweed <0>tại đây</0>",
     "tajweed_v4": "King Fahad Complex V4",
     "text_indopak": "IndoPak",
     "text_uthmani": "Uthmani",
-    "translation-font-size": "Kích thước phông chữ dịch"
+    "translation-font-size": "Cỡ chữ dịch"
   },
   "footer": {
-    "description": "Quran.com là một nền tảng đáng tin cậy được hàng triệu người trên toàn thế giới sử dụng để đọc, tìm kiếm, nghe và suy ngẫm về Kinh Qur'an bằng nhiều ngôn ngữ. Nền tảng này cung cấp các bản dịch, tafsir (giải thích Kinh Qur'an), các bài tụng, bản dịch từng từ và các công cụ để nghiên cứu sâu hơn, giúp Kinh Qur'an trở nên dễ tiếp cận với mọi người. <br/> <br/> Với tư cách là một Sadaqah Jariyah (việc làm thiện nguyện liên tục), Quran.com cam kết giúp mọi người kết nối sâu sắc hơn với Kinh Qur'an. Được hỗ trợ bởi <link>Quran.Foundation</link>, là một tổ chức phi lợi nhuận 501(c)(3), Quran.com tiếp tục phát triển như một nguồn tài nguyên miễn phí và có giá trị cho tất cả mọi người, Alhamdulillah.",
+    "description": "Quran.com là nền tảng đáng tin cậy, được hàng triệu người dùng trên thế giới để đọc, tra cứu, lắng nghe và suy ngẫm Kinh Qur'an bằng nhiều ngôn ngữ, với bản dịch, tafsir, tụng đọc, dịch từng từ và các công cụ học sâu, giúp ai cũng có thể tiếp cận Kinh Qur'an. <br/> <br/> Là một Sadaqah Jariyah, Quran.com tận tâm giúp mọi người gắn bó sâu sắc hơn với Kinh Qur'an. Được hậu thuẫn bởi tổ chức phi lợi nhuận 501(c)(3) <link>Quran.Foundation</link>, Quran.com không ngừng phát triển như một nguồn tài nguyên miễn phí và hữu ích cho tất cả, Alhamdulillah.",
     "hiring": "Chúng tôi đang tuyển dụng! Hãy gia nhập đội ngũ của QuranFoundation và đóng góp vào sứ mệnh của chúng tôi. <link>Ứng tuyển ngay!</link>",
     "rights": "Bản quyền đã được bảo lưu.",
-    "title": "Đọc, nghe, tìm kiếm và suy ngẫm về Kinh Qur'an"
+    "title": "Đọc, Lắng nghe, Tra cứu và Suy ngẫm về Kinh Qur'an"
   },
   "form": {
-    "body": "Thân",
+    "body": "Thân bài",
     "code": "Mã xác minh",
     "confirm-password": "Xác nhận mật khẩu",
     "email": "E-mail",
@@ -241,22 +241,22 @@
     "verification-code": "Mã xác minh"
   },
   "from": "Từ",
-  "fundraising-share-title": "Chia sẻ thông tin gây quỹ trên Quran.com",
+  "fundraising-share-title": "Chia sẻ gây quỹ Quran.com",
   "fundraising-sticky-banner": {
     "cta": "Quyên góp",
     "title": "Hãy cho đi vào những ngày tốt đẹp nhất!"
   },
   "fundraising": {
-    "description": "Những khoản đóng góp định kỳ hàng tháng giúp chúng tôi cải thiện Quran.com và duy trì hoạt động, để chúng tôi có thể tập trung ít hơn vào việc gây quỹ và nhiều hơn vào việc mang đến lợi ích.",
+    "description": "Các khoản ủng hộ định kỳ hàng tháng giúp chúng tôi cải thiện Quran.com, duy trì hoạt động và bớt lo gây quỹ để tập trung tạo ra nhiều giá trị hơn.",
     "donation-campaign": {
-      "cta": "Hãy quyên góp ngay hôm nay!",
+      "cta": "Quyên góp ngay hôm nay!",
       "text": "Trở thành người ủng hộ"
     },
     "title": "Trở thành nhà tài trợ hàng tháng"
   },
   "get-started": "Bắt đầu",
-  "hear-it-pronounced": "Nhấp vào các từ trong Kinh Qur'an để nghe cách phát âm",
-  "help": "Giúp đỡ",
+  "hear-it-pronounced": "Nhấp vào từ Qur'an để nghe phát âm",
+  "help": "Trợ giúp",
   "hizb": "Hizb",
   "home": "Trang chủ",
   "hours": "Giờ",
@@ -298,7 +298,7 @@
   "not-now": "Không phải bây giờ",
   "notes": {
     "label": "Ghi chú",
-    "title": "Ghi chú và suy ngẫm của tôi"
+    "title": "Ghi chú & Suy ngẫm của tôi"
   },
   "notification-settings": "Cài đặt thông báo",
   "notification": {
@@ -309,18 +309,18 @@
   "off": "Tắt",
   "oldest": "Cũ nhất",
   "on": "Mở",
-  "our-projects": "Các dự án của chúng tôi",
+  "our-projects": "Dự án của chúng tôi",
   "page": "Trang",
   "pages": "Trang",
   "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} của {{totalNumberOfResults}} kết quả tìm kiếm",
   "pbuh": "Cầu mong phước lành của Allah đến với ông ấy.",
-  "popular-links": "Các liên kết phổ biến",
+  "popular-links": "Liên kết phổ biến",
   "popup": {
-    "companion-title": "Thân gửi người bạn đồng hành của Kinh Qur'an,",
+    "companion-title": "Thân gửi bạn đồng hành của Kinh Qur'an,",
     "footnote": "Các khoản quyên góp định kỳ hàng tháng cho phép chúng tôi tập trung ít hơn vào việc gây quỹ.",
     "subtitle": "\"Không có ngày nào mà việc làm thiện lại làm hài lòng Allah hơn những ngày này\" [Al-Bukhari 969]",
     "text-1": "Chúng tôi cam kết phục vụ toàn thế giới kiến thức và công nghệ về Kinh Qur'an, luôn luôn miễn phí.",
-    "text-2": "Đây là cơ hội hoàn hảo để làm từ thiện liên tục (Sadaqa Jariyah). Hãy đầu tư cho kiếp sau của bạn bằng cách quyên góp hàng tháng (hoặc một lần).",
+    "text-2": "Cơ hội lý tưởng để làm từ thiện liên tục (Sadaqa Jariyah). Hãy đầu tư cho đời sau của bạn bằng khoản quyên góp hàng tháng hoặc một lần.",
     "title": "Hãy cho đi vào những ngày tuyệt vời nhất!"
   },
   "powered-by": "Được cung cấp bởi",
@@ -333,28 +333,28 @@
   "privacy": "Quyền riêng tư",
   "product-updates": "Cập nhật sản phẩm",
   "profile": "Hồ sơ",
-  "projects-desc": "Các dự án phi lợi nhuận do sở hữu, quản lý hoặc tài trợ bởi <link>Quran.Foundation</link>",
+  "projects-desc": "Dự án phi lợi nhuận do <link>Quran.Foundation</link> sở hữu, quản lý hoặc tài trợ",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
-  "quran-radio": "Đài phát thanh Kinh Qur'an",
+  "quran-radio": "Đài Qur'an",
   "read": "Đọc",
   "reading-history": "Lịch sử đọc",
   "reading-preference": {
     "reading": "Đọc",
     "translation": "Bản dịch"
   },
-  "ready-for-ramadan": "Bạn đã sẵn sàng cho tháng Ramadan chưa?",
+  "ready-for-ramadan": "Bạn sẵn sàng cho Ramadan chưa?",
   "recitation": "Đọc kinh",
   "reciter": "Người đọc kinh",
   "reciter-summary": "(Với sự cho phép của Trung tâm Tafsir)",
-  "reciters": "Người xướng kinh",
+  "reciters": "Người đọc kinh",
   "reflect": "Suy ngẫm",
   "reflections": "Suy ngẫm",
   "reflections-and-lessons": "Suy ngẫm & Bài học",
   "remove": "Di dời",
   "rename": "Đổi tên",
   "retry": "Thử lại",
-  "revelation_order": "Thứ tự mặc khải",
+  "revelation_order": "Trình tự mặc khải",
   "rub": "Rub el Hizb",
   "save": "Lưu",
   "save-to-collection": "Lưu vào bộ sưu tập",
@@ -403,7 +403,7 @@
   "share-quran-description-line-1": "Nhà tiên tri ﷺ nói:",
   "share-quran-description-line-2": "'Hãy chuyển lời từ tôi, dù chỉ là một câu kinh.'",
   "share-quran-description-line-3": "(Bukhari 3461)",
-  "share-quran-title": "Hãy chia sẻ Kinh Qur'an!",
+  "share-quran-title": "Chia sẻ Thiên Kinh Qur'an!",
   "shared": "Liên kết đã được sao chép vào clipboard!",
   "show-more": "Hiển thị thêm",
   "sidebar": {
@@ -411,7 +411,7 @@
     "search-juz": "Tìm kiếm Juz",
     "search-page": "Trang tìm kiếm",
     "search-surah": "Tìm kiếm Surah",
-    "search-verse": "Tìm kiếm câu kinh",
+    "search-verse": "Tìm kiếm Câu",
     "try-navigating-with": "Mẹo: hãy thử điều hướng bằng"
   },
   "sign-in": "Đăng nhập",
@@ -421,8 +421,8 @@
     "by": "Sắp xếp theo",
     "descending": "Đi xuống"
   },
-  "stay-on-track": "🎯 Hãy giữ vững mục tiêu!",
-  "style": "Kiểu chữ",
+  "stay-on-track": "🎯 Giữ vững mục tiêu!",
+  "style": "Phong cách",
   "submit": "Nộp",
   "subscribe": "Đăng ký",
   "subscribed": "Đã đăng ký",
@@ -442,18 +442,18 @@
     "auto": "Tự động",
     "dark": "Tối",
     "light": "Sáng",
-    "sepia": "Màu nâu sepia",
+    "sepia": "Sepia",
     "system": "Hệ thống",
     "system-desc": "Giao diện hệ thống sẽ tự động điều chỉnh theo cài đặt chế độ sáng/tối của bạn."
   },
   "to": "Đến",
   "tooltip": "Chú thích công cụ",
   "tooltip-trans-lang": "Ngôn ngữ chú thích",
-  "trans-lang": "Ngôn ngữ dịch",
+  "trans-lang": "Ngôn ngữ bản dịch",
   "translation": "Bản dịch",
   "translations": "Bản dịch",
   "transliteration": "Phiên âm",
-  "type": "Loại chữ",
+  "type": "Kiểu chữ",
   "unavailable": "Hiện không có sẵn",
   "undo": "Quay lại thao tác trước",
   "validation": {
@@ -473,18 +473,18 @@
     "ask-permission": "Vui lòng cho phép quyền truy cập micro để bắt đầu sử dụng Tìm kiếm bằng giọng nói.",
     "error": "Đã xảy ra lỗi, vui lòng thử lại ({{errorCode}}).",
     "language-unavailable": "Trình duyệt của bạn không hỗ trợ tiếng Ả Rập.",
-    "network": "Lỗi mạng. Vui lòng kiểm tra kết nối internet của bạn và thử lại.",
-    "no-microphone": "Không phát hiện thấy micro. Vui lòng kết nối micro và thử lại.",
+    "network": "Lỗi mạng. Kiểm tra kết nối internet và thử lại.",
+    "no-microphone": "Không phát hiện micro. Vui lòng kết nối và thử lại.",
     "no-permission": "Có vẻ như bạn chưa bật quyền truy cập micro. Vui lòng bật quyền truy cập micro và thử lại.",
-    "no-speech": "Không phát hiện thấy giọng nói nào. Vui lòng thử nói lại.",
-    "not-supported": "Có vẻ như trình duyệt của bạn không hỗ trợ micro. Vui lòng thử trình duyệt khác.",
-    "suggest": "Hãy bắt đầu đọc và câu Kinh của bạn sẽ hiện lên.",
-    "suggest-subtitle": "Hãy đọc bất kỳ câu Kinh nào bằng tiếng Ả Rập, và câu Kinh đó sẽ được hiển thị",
-    "suggest-title": "Hãy đọc ngay bây giờ",
-    "voice-search-powered-by": "Tìm kiếm bằng giọng nói được hỗ trợ bởi"
+    "no-speech": "Không phát hiện giọng nói. Vui lòng thử lại.",
+    "not-supported": "Trình duyệt của bạn không hỗ trợ micro. Hãy dùng trình duyệt khác.",
+    "suggest": "Hãy bắt đầu đọc, câu Kinh của bạn sẽ hiện lên.",
+    "suggest-subtitle": "Hãy đọc bất kỳ câu Kinh tiếng Ả Rập nào, câu đó sẽ hiện lên",
+    "suggest-title": "Đọc ngay",
+    "voice-search-powered-by": "Tìm kiếm giọng nói được hỗ trợ bởi"
   },
-  "wbw": "Từng chữ một",
-  "wbw-lang-summary": "Nguồn dịch từng từ một: <link>{{source}}</link>Nguồn này độc lập với việc lựa chọn bản dịch câu kinh.",
+  "wbw": "Từng từ",
+  "wbw-lang-summary": "Nguồn dịch từng từ: <link>{{source}}</link>. Nguồn này tách biệt với lựa chọn bản dịch câu kinh.",
   "wbw-trans-lang": "Ngôn ngữ từng từ",
   "wbw-translation": "Dịch từng từ một",
   "wbw-transliteration": "Phiên âm từng từ",

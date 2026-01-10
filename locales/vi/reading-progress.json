@@ -21,12 +21,12 @@
   },
   "history": "Lịch sử đọc",
   "history-for": "Lịch sử đọc cho ngày {{date}}",
-  "manage-goal": "Quản lý mục tiêu đọc sách của bạn",
+  "manage-goal": "Quản lý mục tiêu đọc",
   "manually-add": "Thêm số liệu thủ công",
   "no-reading-history-for": "Không có lịch sử đọc nào cho ngày {{date}}",
-  "reading-progress-header": "Tiến trình của bạn",
+  "reading-progress-header": "Tiến độ của bạn",
   "reading-progress-streak": "Chuỗi",
-  "reading-time": "Thời gian đọc kinh",
-  "seconds-read-tooltip": "Đây là thời gian bạn đã dành để đọc các câu kinh bạn đã nhập. Chúng tôi tự động điền thời gian này dựa trên tốc độ đọc trung bình trên Quran.com, nhưng bạn có thể thay đổi nó bằng thời gian đọc thực tế của mình.",
+  "reading-time": "Thời gian đọc",
+  "seconds-read-tooltip": "Đây là thời gian bạn đã dùng để đọc các câu kinh đã nhập. Hệ thống tự điền theo tốc độ đọc trung bình trên Quran.com, nhưng bạn có thể sửa thành thời gian đọc thực tế.",
   "you-read": "Bạn đã đọc:"
 }
