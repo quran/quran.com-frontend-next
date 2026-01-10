@@ -88,6 +88,9 @@ export type WidgetOptions = {
   // Whether any translations exist for the current ayah
   hasAnyTranslations: boolean;
 
+  // Whether any answers exist for the current ayah
+  hasAnswers: boolean;
+
   // Surah name to show in the header
   surahName?: string;
 

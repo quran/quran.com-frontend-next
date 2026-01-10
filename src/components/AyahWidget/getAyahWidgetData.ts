@@ -19,6 +19,7 @@ import {
   makeTranslationsInfoUrl,
   makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
+import { countQuestionsWithinRange } from '@/utils/auth/api';
 import type {
   ChapterResponse,
   TranslationsResponse,
@@ -26,6 +27,7 @@ import type {
   WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import type AvailableTranslation from 'types/AvailableTranslation';
+import Language from 'types/Language';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
 
@@ -135,6 +137,7 @@ const buildWidgetOptions = (
   },
   meta?: {
     hasAnyTranslations: boolean;
+    hasAnswers: boolean;
     surahName?: string;
     audioUrl?: string;
     audioStart?: number;
@@ -156,6 +159,7 @@ const buildWidgetOptions = (
   rangeEnd: params.rangeEnd,
   ayah,
   hasAnyTranslations: meta?.hasAnyTranslations ?? false,
+  hasAnswers: meta?.hasAnswers ?? false,
   surahName: meta?.surahName,
   customWidth: params.customWidth,
   customHeight: params.customHeight,
@@ -429,6 +433,34 @@ const resolveWordByWordLocale = async (enableWbw: boolean, locale: string): Prom
 };
 
 /**
+ * Resolve whether the selected verse has any answers.
+ *
+ * @param {string} verseKey - Ayah key "chapter:verse".
+ * @param {string} locale - Locale code.
+ * @param {boolean} showAnswers - Whether answers are enabled by config.
+ * @returns {Promise<boolean>} True if answers exist.
+ */
+const resolveHasAnswers = async (
+  verseKey: string,
+  locale: string,
+  showAnswers: boolean,
+): Promise<boolean> => {
+  if (!showAnswers) return false;
+
+  const language = (Object.values(Language) as string[]).includes(locale)
+    ? (locale as Language)
+    : Language.EN;
+
+  try {
+    const questionsByVerse = await countQuestionsWithinRange(verseKey, verseKey, language);
+    return (questionsByVerse?.[verseKey]?.total ?? 0) > 0;
+  } catch (error) {
+    logDebug('Ayah widget: Failed to load answers count', { error, verseKey, locale });
+    return false;
+  }
+};
+
+/**
  * Load widget labels in the requested locale.
  *
  * @param {string} locale - Locale code.
@@ -694,6 +726,9 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
   // Word-by-word locale.
   const wordByWordLocale: string = await resolveWordByWordLocale(enableWbw, locale);
 
+  const startVerseKey = `${chapterNumber}:${verseNumber}`;
+  const hasAnswers: boolean = await resolveHasAnswers(startVerseKey, locale, showAnswers);
+
   // Verse keys & verses fetch.
   const verseKeys: string[] = buildVerseKeys(chapterNumber, verseNumber, normalizedRangeEnd);
   const rawVerses: Verse[] = await fetchVersesByKeys(verseKeys, {
@@ -750,6 +785,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
     },
     {
       hasAnyTranslations,
+      hasAnswers,
       surahName: meta.surahName,
       audioUrl: meta.audioUrl,
       audioStart: meta.audioStart,

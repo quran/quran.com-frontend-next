@@ -38,12 +38,11 @@ const ICON_STYLE: React.CSSProperties = { width: 16, height: 16, display: 'inlin
 const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => {
   const chapterNumber = verse.chapterId ?? options.ayah.split(':')[0];
   const startVerse = verse.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
-  const verseSegment = options.rangeEnd ? `${startVerse}-${options.rangeEnd}` : `${startVerse}`;
 
   // Construct the base URL for the verse actions based on locale and verse reference.
   const locale = options.locale || 'en';
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
-  const baseUrl = `https://quran.com${localePrefix}/${chapterNumber}:${verseSegment}`;
+  const baseUrl = `https://quran.com${localePrefix}/${chapterNumber}:${startVerse}`;
   const isRtl = isRTLLocale(locale);
 
   const actions = [
@@ -57,11 +56,12 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
       href: `${baseUrl}/reflections`,
       icon: <ChatIcon style={ICON_STYLE} />,
     },
-    options.showAnswers && {
-      label: options.labels?.answers || 'Answers',
-      href: `${baseUrl}/answers`,
-      icon: <LightbulbIcon style={ICON_STYLE} />,
-    },
+    options.showAnswers &&
+      options.hasAnswers && {
+        label: options.labels?.answers || 'Answers',
+        href: `${baseUrl}/answers`,
+        icon: <LightbulbIcon style={ICON_STYLE} />,
+      },
   ].filter((action): action is FooterAction => Boolean(action));
 
   if (!actions.length) {
