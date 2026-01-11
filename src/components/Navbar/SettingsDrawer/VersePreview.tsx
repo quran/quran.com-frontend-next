@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './VersePreview.module.scss';
 
-import PlainVerseText from '@/components/Verse/PlainVerseText';
-import TajweedFontPalettes from '@/components/Verse/TajweedFontPalettes';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
+import VerseText from '@/components/Verse/VerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import { TooltipType } from '@/dls/Tooltip';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -19,7 +21,10 @@ import getSampleVerse from '@/utils/sampleVerse';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
+const HIGHLIGHTED_WORD_POSITION = 3;
+
 const VersePreview = () => {
+  const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const settingsTheme: { type: ThemeType } = useSelector(selectTheme, shallowEqual);
   const { themeVariant } = useThemeDetector();
@@ -65,13 +70,25 @@ const VersePreview = () => {
   }
 
   return (
-    <div dir="rtl">
-      <TajweedFontPalettes
-        pageNumber={sampleVerse.pageNumber}
-        quranFont={quranReaderStyles.quranFont}
-      />
-      <PlainVerseText words={sampleVerse.words as Word[]} />
-    </div>
+    <>
+      <div className={styles.previewTitle}>{t('verse-preview-title')}</div>
+      <div dir="rtl" className={styles.container}>
+        <VerseText
+          words={sampleVerse.words as Word[]}
+          tooltipType={TooltipType.SUCCESS}
+          highlightedWordPosition={HIGHLIGHTED_WORD_POSITION}
+          isWordInteractionDisabled
+        />
+        {sampleVerse.translations?.[0]?.text && sampleVerse.translations?.[0]?.languageId && (
+          <TranslationText
+            translationFontScale={quranReaderStyles.translationFontScale}
+            text={sampleVerse.translations[0].text}
+            languageId={sampleVerse.translations[0].languageId}
+            className={styles.translationText}
+          />
+        )}
+      </div>
+    </>
   );
 };
 
