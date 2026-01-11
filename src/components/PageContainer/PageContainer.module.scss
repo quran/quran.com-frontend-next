@@ -10,8 +10,10 @@
 }
 
 .wrapperSheets {
+  --spread: calc(var(--spacing-medium-px) + var(--spacing-small-px));
   background-color: var(--color-background-elevated-new);
-  box-shadow: 0 4px 25px -25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 calc(var(--spacing-micro-px) * 2) var(--spread) calc(var(--spread) * -1)
+    rgba(0, 0, 0, 0.1);
   @include roundedTopBorders;
 }
 
