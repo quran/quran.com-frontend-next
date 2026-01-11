@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
 import Homepage from '@/tests/POM/home-page';
+import { TestId, getVerseTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -20,18 +21,19 @@ test.describe('Translation Feedback - Guest Users', () => {
       await switchToTranslationMode(page);
 
       // Open verse actions menu
-      const verse = page.getByTestId('verse-1:1');
-      const moreButton = verse.getByLabel('More');
+      const verse = page.getByTestId(getVerseTestId('1:1'));
+      const moreButton = verse.getByTestId(TestId.VERSE_ACTIONS_MORE);
       await expect(moreButton).toBeVisible();
       await moreButton.click();
 
       // Select Translation Feedback option
-      const translationFeedbackOption = page.getByTestId('verse-actions-menu-translation-feedback');
+      const translationFeedbackOption = page.getByTestId(
+        TestId.VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK,
+      );
       await expect(translationFeedbackOption).toBeVisible();
       await translationFeedbackOption.click();
 
       // Should be redirected to login page
-      await page.waitForURL(/\/login/);
       await expect(page).toHaveURL(/\/login/);
     },
   );
@@ -48,20 +50,17 @@ test.describe('Translation Feedback - Guest Users', () => {
       await verse.click();
 
       // Open More submenu (handles both mobile button and desktop menuitem)
-      const moreMenuitem = page.getByTestId('verse-actions-menu-more');
-      const moreButton = page.getByLabel('More');
-
+      const moreMenuitem = page.getByTestId(TestId.VERSE_ACTIONS_MENU_MORE);
+      const moreButton = page.getByTestId(TestId.VERSE_ACTIONS_MORE);
       await Promise.race([moreMenuitem.click(), moreButton.click()]);
 
-      const translationFeedbackOption = page.getByRole('menuitem', {
-        name: 'Translation Feedback',
-      });
-
+      const translationFeedbackOption = page.getByTestId(
+        TestId.VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK,
+      );
       await expect(translationFeedbackOption).toBeVisible();
       await translationFeedbackOption.click();
 
       // Should be redirected to login page
-      await page.waitForURL(/\/login/);
       await expect(page).toHaveURL(/\/login/);
     },
   );
