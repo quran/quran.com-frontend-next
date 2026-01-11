@@ -86,5 +86,6 @@ export const selectNavbar = (state: RootState) => state.navbar;
 export const selectIsSearchDrawerOpen = (state: RootState) => state.navbar.isSearchDrawerOpen;
 export const selectIsNavigationDrawerOpen = (state: RootState) =>
   state.navbar.isNavigationDrawerOpen;
+export const selectIsSettingsDrawerOpen = (state: RootState) => state.navbar.isSettingsDrawerOpen;
 
 export default navbarSlice.reducer;

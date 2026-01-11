@@ -15,7 +15,7 @@ import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import { selectIsNavigationDrawerOpen } from '@/redux/slices/navbar';
+import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
 
@@ -31,6 +31,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
@@ -43,10 +44,12 @@ function AppContent({ Component, pageProps }: AppContentProps) {
       <DeveloperUtility />
       <div
         className={classNames(styles.contentContainer, {
-          [styles.dimmed]: isNavigationDrawerOpen,
+          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
         })}
-        inert={isNavigationDrawerOpen || undefined}
-        aria-hidden={isNavigationDrawerOpen || undefined}
+        {...((isNavigationDrawerOpen || isSettingsDrawerOpen) && {
+          inert: true,
+          'aria-hidden': true,
+        })}
       >
         <Component {...pageProps} />
       </div>

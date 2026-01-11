@@ -174,6 +174,7 @@ const Drawer: React.FC<Props> = ({
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
+        [styles.settingsDrawer]: type === DrawerType.Settings,
       })}
       ref={drawerRef}
       id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}

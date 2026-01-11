@@ -15,32 +15,46 @@
   overflow-y: auto !important;
   overflow-x: hidden;
   overscroll-behavior-y: contain !important;
+
   @include breakpoints.tablet {
     inline-size: constants.$side-menu-desktop-width;
   }
+
   &.left {
     inset-inline-start: -100%;
+
     @include breakpoints.tablet {
       inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
+
   &.right {
     inset-inline-end: -100%;
+
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
+
   &.noTransition {
     transition: none;
+  }
+
+  &.settingsDrawer {
+    overflow-y: visible !important;
+    overflow-x: visible;
+    overscroll-behavior-y: auto !important;
   }
 }
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
   transition-timing-function: ease-out;
+
   &.left {
     inset-inline-start: 0;
   }
+
   &.right {
     inset-inline-end: 0;
   }
@@ -50,9 +64,11 @@
   display: flex;
   flex-direction: column;
   min-block-size: calc(100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega))));
+
   @include breakpoints.tablet {
     min-block-size: calc(100% - calc(var(--navbar-container-height) + var(--spacing-small)));
   }
+
   justify-content: space-between;
 }
 
@@ -91,9 +107,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   @include breakpoints.tablet {
     inline-size: constants.$side-menu-desktop-width;
   }
+
   z-index: var(--z-index-header);
 }
 
