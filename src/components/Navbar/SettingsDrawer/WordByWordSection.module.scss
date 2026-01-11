@@ -1,7 +1,31 @@
-.checkboxContainer {
+.titleRow {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-small-px);
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-borders-hairline);
+  padding-block-end: var(--spacing-medium2-px);
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sectionLabel {
+  font-weight: var(--font-weight-semibold);
+  padding-block-start: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium2-px);
+}
+
+.checkboxContainer {
+  & > div {
+    margin-inline-start: var(--spacing-xxsmall);
+  }
 }
 
 .separator {

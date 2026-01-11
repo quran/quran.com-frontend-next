@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 
-import QuranFontSection from './QuranFontSection';
+import DoneButton from './DoneButton';
 import ResetButton from './ResetButton';
-import ThemeSection from './ThemeSection';
-import TranslationSection from './TranslationSection';
-import WordByWordSection from './WordByWordSection';
+import styles from './SettingsBody.module.scss';
+import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 
@@ -24,13 +23,13 @@ const SettingsBody = () => {
   }, [activeStepIndex, isActive]);
 
   return (
-    <>
-      <ThemeSection />
-      <QuranFontSection />
-      <WordByWordSection />
-      <TranslationSection />
-      <ResetButton />
-    </>
+    <div className={styles.container}>
+      <SettingTabs />
+      <div className={styles.buttonsContainer}>
+        <ResetButton />
+        <DoneButton />
+      </div>
+    </div>
   );
 };
 
