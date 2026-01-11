@@ -29,7 +29,7 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
  * @returns {object} Hook state, derived options, and handlers for the translation feedback form.
  */
 const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFormProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('quran-reader');
   const toast = useToast();
   const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations);
   const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
@@ -85,11 +85,11 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
         }
 
         sendFeedbackErrorToSentry(response, verseKey, translationId);
-        toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
+        toast(t('common:error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
         return { success: false, response };
       } catch (error) {
         sendFeedbackErrorToSentry(error, verseKey, translationId);
-        toast(t('error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
+        toast(t('common:error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
         return { success: false, response: error };
       }
     },

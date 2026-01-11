@@ -16,7 +16,7 @@ interface TranslationFeedbackModalProps {
 }
 
 const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ verse, onClose }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
 
   const {
     selectedTranslationId,

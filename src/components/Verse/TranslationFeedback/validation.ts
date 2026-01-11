@@ -20,14 +20,14 @@ const getFeedbackError = (feedback: string, t: Translate, lang: string) => {
   if (trimmedFeedbackLength === 0) {
     return {
       id: FormErrorId.RequiredField,
-      message: t('validation.required-field', { field: feedbackText }),
+      message: t('common:validation.required-field', { field: feedbackText }),
     };
   }
 
   if (trimmedFeedbackLength < MIN_FEEDBACK_CHARS) {
     return {
       id: FormErrorId.MinimumLength,
-      message: t('validation.minimum-length', {
+      message: t('common:validation.minimum-length', {
         field: feedbackText,
         value: toLocalizedNumber(MIN_FEEDBACK_CHARS, lang),
       }),
@@ -37,7 +37,7 @@ const getFeedbackError = (feedback: string, t: Translate, lang: string) => {
   if (trimmedFeedbackLength > MAX_FEEDBACK_CHARS) {
     return {
       id: FormErrorId.MaximumLength,
-      message: t('validation.maximum-length', {
+      message: t('common:validation.maximum-length', {
         field: feedbackText,
         value: toLocalizedNumber(MAX_FEEDBACK_CHARS, lang),
       }),
@@ -57,7 +57,7 @@ const getTranslationError = (selectedTranslationId: string, t: Translate) => {
   if (!selectedTranslationId) {
     return {
       id: FormErrorId.RequiredField,
-      message: t('validation.required-field', { field: translationText }),
+      message: t('common:validation.required-field', { field: translationText }),
     };
   }
 
@@ -101,17 +101,17 @@ export const isTranslationFeedbackValid = (errors: TranslationFeedbackFormErrors
 const FORM_ERROR_ID_TO_TRANSLATION_KEY = {
   [BASE_SERVER_ERRORS_MAP.MAX_LENGTH]: {
     id: FormErrorId.MaximumLength,
-    key: 'validation.maximum-length',
+    key: 'common:validation.maximum-length',
     query: (locale: string) => ({ value: toLocalizedNumber(MAX_FEEDBACK_CHARS, locale) }),
   },
   [BASE_SERVER_ERRORS_MAP.MIN_LENGTH]: {
     id: FormErrorId.MinimumLength,
-    key: 'validation.minimum-length',
+    key: 'common:validation.minimum-length',
     query: (locale: string) => ({ value: toLocalizedNumber(MIN_FEEDBACK_CHARS, locale) }),
   },
   [BASE_SERVER_ERRORS_MAP.MISSING]: {
     id: FormErrorId.RequiredField,
-    key: 'validation.required-field',
+    key: 'common:validation.required-field',
     query: () => ({}),
   },
 };
@@ -161,14 +161,14 @@ export const getTranslationFeedbackServerErrors = (
       };
     } else if (localizeKey) {
       // The error is not common Translation Feedback Error, We are fallback to global errors
-      const localizeText = t(localizeKey, {
+      const localizeText = t(`common:${localizeKey}`, {
         fieldName,
         min: toLocalizedNumber(MIN_FEEDBACK_CHARS, lang),
         max: toLocalizedNumber(MAX_FEEDBACK_CHARS, lang),
       });
 
       // If same that means we don't have a translation for this error code
-      if (localizeText !== localizeKey) {
+      if (localizeText !== `common:${localizeKey}`) {
         errors[fieldKey] = { id: FormErrorId.UnknownError, message: localizeText };
       }
     }

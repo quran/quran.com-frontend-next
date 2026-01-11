@@ -26,7 +26,7 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
   name,
   dataTestId,
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);

@@ -28,7 +28,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   onActionTriggered,
 }) => {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
