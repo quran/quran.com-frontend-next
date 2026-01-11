@@ -1,0 +1,117 @@
+{
+  "additional-resources": "Tài liệu bổ sung",
+  "additional-resources-subtitle": "Những tài liệu bổ sung này giúp bạn gắn bó sâu hơn với các câu kinh đã đọc.",
+  "ask-question": "Đặt câu hỏi",
+  "complete": "Hoàn thành",
+  "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Số tuần đã hoàn thành",
+  "divine-book-club": "The Divine Book Club",
+  "divine-book-club-description": "Đây là buổi thảo luận nhóm nhẹ nhàng giúp bạn theo kịp bối cảnh bài đọc hàng tuần.",
+  "end-of-calendar": "Hết lịch",
+  "english-pdf": "PDF tiếng Anh",
+  "faq": "Câu hỏi thường gặp",
+  "faq-items": [
+    {
+      "answer": "\"Đọc Kinh Qur'an trong một năm\" là kế hoạch đọc đơn giản, giúp bạn hoàn thành toàn bộ Kinh Qur'an trong một năm, từ cuối Ramadan này đến đầu Ramadan sau, với mục tiêu hiểu khái quát kinh sách mà không thấy áp lực.",
+      "question": "\"Đọc Kinh Qur'an trong một năm\" là gì?"
+    },
+    {
+      "answer": "Bạn được mời dành mỗi tuần ít thời gian đọc vài trang Kinh Qur'an bằng ngôn ngữ bạn hiểu. Có 46 bài đọc, tương ứng 46 tuần trong lịch Hồi giáo từ Shawwal đến Sha'ban, bổ sung cho cách chia Kinh Qur'an thành 30 phần để đọc hết trong một tháng.",
+      "question": "Chương trình hoạt động ra sao?"
+    },
+    {
+      "answer": "Hoàn toàn không. Bạn có thể bắt đầu bằng cách tìm hiểu ý nghĩa Kinh Qur'an qua bất kỳ ngôn ngữ dịch nào bạn thấy thuận tiện. Quran.com có nhiều bản dịch để ai cũng dễ tiếp cận, và chúng tôi mong khích lệ bạn nâng tầm mỗi năm.",
+      "question": "Tôi có phải biết đọc tiếng Ả Rập mới tham gia được không?"
+    },
+    {
+      "answer": "Mỗi tuần, bài đọc cập nhật có tại Quran.com/calendar. Bạn có thể đọc trực tiếp trên Quran.com qua liên kết dẫn thẳng đến bài đọc chính trong tuần.\\n\\nBạn cũng có thể mở file PDF tiếng Anh để in tại nhà. Mỗi tài liệu tuần gồm bản dịch mạch lạc (dựa chủ yếu trên MAS Abdel Haleem), chia thành bảy phần, kèm giới thiệu ngắn về Surahs, tiêu đề, ghi chú, câu hỏi suy ngẫm và gợi ý hành động mỗi ngày.",
+      "question": "Tôi tìm các bài đọc hàng tuần ở đâu?"
+    },
+    {
+      "answer": "Bạn có nhiều cách để theo dõi. Hãy đăng ký nhận email kèm bài đọc hàng tuần và tham gia kênh cộng đồng trên Telegram, WhatsApp. Nhấp các nút tương ứng trên Quran.com/calendar để đăng ký; bạn có thể chọn cả ba.",
+      "question": "Làm sao để tôi nhận lời nhắc đọc hàng tuần?"
+    },
+    {
+      "answer": "Trên Quran.com, vào cài đặt để:\\n• Điều chỉnh phông chữ\\n• Chọn chế độ sáng, tối hoặc sepia\\n• Chọn bản dịch bạn muốn\\n\\nGiúp bạn dễ dàng đọc bằng ngôn ngữ quen thuộc, với bản dịch rõ ràng, dễ hiểu.",
+      "question": "Làm sao để tôi cá nhân hóa trải nghiệm đọc?"
+    },
+    {
+      "answer": "Chúng tôi khuyến khích bạn vào QuranReflect.com đọc suy ngẫm của người khác về các đoạn kinh mỗi tuần, và khi sẵn sàng, hãy chia sẻ suy nghĩ của mình!\\n\\nĐồng thời, hãy nghe podcast The Divine Book Club, cuộc thảo luận sâu sắc theo lịch trình này, chỉ một giờ mỗi tuần nhưng rất hữu ích.",
+      "question": "Bạn cung cấp thêm tài liệu gì?"
+    },
+    {
+      "answer": "Không sao. Cứ đọc từ tuần này, không cần bù các tuần trước. Chỉ cần đều đặn và tiến về phía trước; năm sau bạn vẫn có thể đọc bù.",
+      "question": "Nếu tôi bị chậm hoặc tham gia trễ thì sao?"
+    },
+    {
+      "answer": "Cách tốt nhất để giữ thói quen là đọc cùng người khác. Hãy lập câu lạc bộ đọc sách riêng với gia đình, bạn bè hoặc online, gặp nhau hằng tuần và cùng trao đổi, động viên nhau.",
+      "question": "Làm sao để tận dụng tốt nhất hành trình này?"
+    },
+    {
+      "answer": "Chúng tôi sẽ khuyến khích những bước tiếp theo và cấp độ cao hơn, nhưng năm nay mời bạn bắt đầu thật đơn giản: đọc trọn Thiên Kinh Qur'an với hiểu biết cơ bản, rồi sau đó sẽ sẵn sàng đọc lại và đào sâu hơn!",
+      "question": "Sau này có thêm lựa chọn học sâu hơn không?"
+    },
+    {
+      "answer": "Vâng. \"Đọc Kinh Qur'an trong một năm\" hoàn toàn miễn phí, hãy thoải mái chia sẻ với mọi người và rủ bạn bè cùng đọc.",
+      "question": "Miễn phí à? Tôi được chia sẻ chứ?"
+    }
+  ],
+  "hero": {
+    "description": "Một kế hoạch đọc được soạn thảo cẩn thận, giúp bạn thuận tiện đọc và nắm vững toàn bộ Kinh Qur'an từ Ramadan này sang Ramadan sau, với nhịp độ ổn định và vừa sức.",
+    "line-1": "Lịch đọc Kinh Qur'an toàn cầu là một lịch trình đọc được thiết kế để khuyến khích việc đọc suy ngẫm toàn bộ Kinh Qur'an từ cuối tháng Ramadan này đến đầu tháng Ramadan tiếp theo. Chúng tôi khuyến khích bạn dành thời gian để hiểu và suy ngẫm về các câu kinh để có được sự kết nối sâu sắc và chân thành hơn."
+  },
+  "interact-with-post": "Tương tác với bài đăng này trên QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sha'ban",
+    "9": "Ramadan",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-qc": {
+    "line-1": "Chúng tôi đang ở <highlight>Tuần {{weekNumber}}</highlight> của Lịch Kinh Qur'an.",
+    "line-2": "<normal>Hãy tham gia buổi đọc tuần này với chúng tôi, dù đây là lần đầu của bạn!</normal>"
+  },
+  "join-quranic-calendar": "Đăng ký để nhận thông tin cập nhật và tài liệu qua QuranReflect.",
+  "join-quranic-calendar-success": "Bạn đã tham gia thành công Đọc Kinh Qur'an trong một năm!",
+  "join-telegram": "Tham gia Telegram của chúng tôi",
+  "join-telegram-mobile": "Telegram",
+  "join-whatsapp": "Tham gia Whatsapp của chúng tôi",
+  "join-whatsapp-mobile": "WhatsApp",
+  "mark-as-completed": "Đánh dấu hoàn thành",
+  "marked-as-completed": "Tuần này đã được đánh dấu là hoàn thành!",
+  "month": "Tháng",
+  "my-progress": "Tiến độ của tôi",
+  "progress-subtitle": "Bạn cứ quay lại hoàn thành các tuần đã bỏ lỡ!",
+  "quran-calendar-description": "Kế hoạch đọc Kinh Qur'an trong một năm, giúp bạn đều đặn, hiểu sâu hơn và không bị quá tải.",
+  "quran-calendar-title": "Đọc Kinh Qur'an trong một năm – Kế hoạch đơn giản để đọc và hiểu trọn bộ Kinh Qur'an",
+  "quran-reflect": "QuranReflect",
+  "quran-reflect-description": "Trao đổi với người khác về các câu kinh bạn đã đọc tuần này.",
+  "quranic-calendar": "Đọc Kinh Qur'an trong một năm",
+  "ramadan": "Ramadan",
+  "read-online": "Đọc trực tuyến",
+  "read-this-weeks-verses": "Đọc những câu kinh của tuần này",
+  "reading-options": {
+    "default-settings": "Đọc với cài đặt mặc định",
+    "en-and-ar": "Đọc bằng tiếng Anh và tiếng Ả Rập",
+    "en-only": "Chỉ đọc bằng tiếng Anh"
+  },
+  "reflection-prompts": "💭 Gợi ý suy ngẫm từ bài đọc tuần này <span>(Tải xuống file PDF để xem thêm)</span>:",
+  "share-reflections": "Chia sẻ suy ngẫm của bạn",
+  "start-tracking": "Bắt đầu theo dõi",
+  "supplemental-resources": "Tài liệu hỗ trợ",
+  "today": "Hôm nay là ngày: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
+  "verse": "Ayah",
+  "verses-subtitle": "Bạn nên tập trung vào việc nắm bắt ý nghĩa cơ bản, và hãy chọn ngôn ngữ phù hợp với mình.",
+  "watch-episode": "Xem tập {{weekNumber}}",
+  "week": "Tuần",
+  "week-completed": "Hoàn thành",
+  "week-title": "Tuần {{weekNumber}} ({{month}}) bao gồm các câu {{rangeStart}} đến {{rangeEnd}}",
+  "weekly-verses-help-description-1": "Tài liệu PDF này chứa bản dịch mạch lạc, chủ yếu được chuyển thể từ tác phẩm của MAS Abdel Haleem. Mỗi tài liệu hàng tuần được chia thành bảy phần, giúp bạn dễ dàng phân bổ việc đọc trong suốt tuần nếu muốn. Có những lời giới thiệu ngắn gọn về các surah, tiêu đề và ghi chú để làm rõ một số điểm quan trọng, và mỗi phần hàng ngày đều có một câu hỏi suy ngẫm và gợi ý hành động."
+}

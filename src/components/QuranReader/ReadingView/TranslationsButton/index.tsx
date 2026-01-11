@@ -22,13 +22,14 @@ import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
+import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onActionTriggered?: () => void;
   isTranslationView: boolean;
 }

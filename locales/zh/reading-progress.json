@@ -1,6 +1,7 @@
 {
   "add": "添加",
   "add-data-success": "您的阅读数据已成功添加。",
+  "back-to-reading-goal": "返回阅读目标",
   "delete-goal": {
     "action": "删除目标",
     "confirmation": {

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -32,10 +32,7 @@ const PageInfo: React.FC<PageInfoProps> = ({
 
   const localizedPageNumber = toLocalizedNumber(Number(pageNumber), lang);
 
-  // Memoize the bookmark component to prevent unnecessary re-renders
-  const bookmarkComponent = useMemo(() => {
-    return <PageBookmarkAction pageNumber={Number(pageNumber || 1)} />;
-  }, [pageNumber]);
+  const shouldShowPageBookmarks = false; // TODO: Enable when backend task (QF-1720) is done.
 
   return (
     <div
@@ -43,7 +40,7 @@ const PageInfo: React.FC<PageInfoProps> = ({
       data-testid="page-info"
     >
       <div className={styles.primaryInfo}>
-        {bookmarkComponent}
+        {shouldShowPageBookmarks && <PageBookmarkAction pageNumber={Number(pageNumber || 1)} />}
         <span>
           {t('page')} {localizedPageNumber}
         </span>

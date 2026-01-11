@@ -2,9 +2,7 @@ import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 
-import ReadingPreferenceSwitcher, {
-  ReadingPreferenceSwitcherType,
-} from '../ReadingPreferenceSwitcher';
+import ReadingPreferenceSwitcher from '../ReadingPreferenceSwitcher';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
 import ChapterNavigation from './components/ChapterNavigation';
@@ -16,6 +14,7 @@ import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
 import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
+import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
@@ -49,14 +48,16 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
+  // useMemo must be called before any early returns (Rules of Hooks)
   const isMobileView = useMemo(() => isMobile(), []);
-  const isMobileScrolledView = !showNavbar && isMobileView;
-  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
+
+  const isMobileScrolledView = !showNavbar && isMobile();
+  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
 
   return (
     <div
@@ -88,22 +89,21 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       <div className={styles.sectionsContainer}>
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
-          <div className={classNames(styles.row, styles.chapterNavigationRow)}>
-            <div className={styles.chapterNavigationWrapper}>
-              <ChapterNavigation
-                chapterName={chapterData.transliteratedName}
-                isSidebarNavigationVisible={isSidebarNavigationVisible}
-                onToggleSidebar={handleSidebarToggle}
-                chapterNumber={getChapterNumberFromKey(verseKey)}
-              />
-              {showNavbar && <SettingsButton className={styles.settingsNextToChapter} />}
-            </div>
+          <div className={classNames(styles.row, { [styles.mobileNavRow]: showNavbar })}>
+            <ChapterNavigation
+              chapterName={chapterData.transliteratedName}
+              isSidebarNavigationVisible={isSidebarNavigationVisible}
+              onToggleSidebar={handleSidebarToggle}
+              chapterNumber={getChapterNumberFromKey(verseKey)}
+            />
+            {/* Settings button for mobile when navbar is visible */}
+            {showNavbar && <SettingsButton className={styles.mobileSettingsButton} />}
           </div>
         </div>
 
         {/* Page Information Section (default, not mobile scrolled view) */}
         {!isMobileScrolledView && (
-          <div className={classNames(styles.section)}>
+          <div className={classNames(styles.section, styles.pageInfoSectionDesktop)}>
             <div className={styles.row}>
               <p className={styles.alignCenter} />
               <PageInfo
@@ -127,7 +127,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
             <ReadingPreferenceSwitcher
               isIconsOnly={isMobileScrolledView}
               size={SwitchSize.XSmall}
-              type={ReadingPreferenceSwitcherType.ContextMenu}
+              type={SwitcherContext.ContextMenu}
               variant={SwitchVariant.Alternative}
             />
             {(!isMobileView || !showNavbar) && (

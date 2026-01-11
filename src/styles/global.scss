@@ -3,7 +3,7 @@
 @use 'src/styles/constants';
 
 body {
-  min-height: 100vh;
+  min-block-size: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
   padding: 0px !important;
@@ -45,6 +45,11 @@ body {
     font-family: 'DroidArabicNaskh', 'Noto Nastaliq Arabic', 'NotoNastaliq', 'Figtree', Helvetica,
       Arial;
   }
+
+  :lang(vi),
+  :lang(vietnamese) {
+    font-family: 'BeVietnamPro', 'Be Vietnam Pro', 'Figtree', 'Helvetica Neue', Helvetica, Arial;
+  }
 }
 
 // reference: https://github.com/necolas/normalize.css/blob/fc091cce1534909334c1911709a39c22d406977b/normalize.css#L165
@@ -74,10 +79,7 @@ select option {
 .__remotion-player {
   /* Center the video */
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
   margin: 0 auto;
 }
 

@@ -1,6 +1,7 @@
 {
   "additional-resources": "แหล่งข้อมูลเพิ่มเติม",
   "additional-resources-subtitle": "แหล่งข้อมูลเพิ่มเติมเหล่านี้จะช่วยให้คุณมีความเชื่อมโยงที่ลึกซึ้งยิ่งขึ้นกับข้อพระคัมภีร์ที่คุณอ่าน",
+  "ask-question": "ถามคำถาม",
   "complete": "สมบูรณ์",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} สัปดาห์ที่เสร็จสมบูรณ์",
   "divine-book-club": "ชมรมหนังสือศักดิ์สิทธิ์",

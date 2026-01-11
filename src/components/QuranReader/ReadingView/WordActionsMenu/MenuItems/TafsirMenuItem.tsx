@@ -14,9 +14,10 @@ import { WordVerse } from '@/types/Word';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onActionTriggered?: () => void;
 }
 

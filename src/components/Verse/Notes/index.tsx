@@ -8,6 +8,7 @@ import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import useIsMobile from '@/hooks/useIsMobile';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesIcon from '@/icons/notes-with-pencil.svg';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -34,6 +35,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   const { t } = useTranslation('common');
   const router = useRouter();
   const audioPlayerService = useContext(AudioPlayerMachineContext);
+  const isMobile = useIsMobile();
 
   const onItemClicked = () => {
     const isUserLoggedIn = isLoggedIn();
@@ -47,8 +49,8 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
 
       try {
         router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
-      } catch (e) {
-        logErrorToSentry(e);
+      } catch (error) {
+        logErrorToSentry(error);
         // If there's an error parsing the verseKey, navigate to chapter 1
         router.push(getLoginNavigationUrl('/1'));
       }
@@ -66,7 +68,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
       <Button
         className={classNames(styles.iconContainer, styles.verseAction)}
         onClick={onItemClicked}
-        tooltip={t('notes.label')}
+        tooltip={isMobile ? undefined : t('notes.label')}
         type={ButtonType.Primary}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}

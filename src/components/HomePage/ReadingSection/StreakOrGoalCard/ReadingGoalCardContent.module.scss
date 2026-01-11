@@ -1,0 +1,55 @@
+@use 'src/styles/breakpoints';
+
+// GOAL PROGRESS SECTION (shared styles)
+.goalProgressSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro);
+}
+
+.circularProgressbar {
+  block-size: calc(2 * var(--spacing-large-px));
+  inline-size: calc(2 * var(--spacing-large-px));
+  flex-shrink: 0;
+}
+
+.goalStatusContainer {
+  flex: 1;
+}
+
+.goalCtaSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+}
+
+// PROGRESS BAR STYLES (shared styles)
+.circularProgressbarPath {
+  stroke: var(--color-streaks-dark);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.circularProgressbarTrail {
+  stroke: var(--color-daily-progress);
+  stroke-linecap: round;
+}
+
+.circularProgressbarText {
+  fill: var(--color-text-black);
+  font-size: var(--font-size-large-px);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: var(--font-weight-bold);
+}
+
+.goalArrowIcon {
+  > svg {
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-small2-px);
+      block-size: var(--spacing-small2-px);
+    }
+  }
+}

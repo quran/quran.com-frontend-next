@@ -7,9 +7,10 @@ import styles from './TranslationViewCell.module.scss';
 
 import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 
 type TopActionsProps = {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   isTranslationView?: boolean;

@@ -1,6 +1,7 @@
 {
   "add": "Eklemek",
   "add-data-success": "Okuma verileriniz başarıyla eklendi.",
+  "back-to-reading-goal": "Okuma hedefine geri dön",
   "delete-goal": {
     "action": "Hedefi Sil",
     "confirmation": {
@@ -26,6 +27,6 @@
   "reading-progress-header": "Senin ilerlemen",
   "reading-progress-streak": "Rüzgâr gibi geçmek",
   "reading-time": "Okuma zamanı",
-  "seconds-read-tooltip": "Bu, girdiğiniz ayetleri okuyarak geçirdiğiniz süredir. Bunu Kuran.com'daki ortalama okuma hızıyla otomatik olarak dolduruyoruz, ancak siz bunu gerçek okuma sürenizle geçersiz kılabilirsiniz.",
+  "seconds-read-tooltip": "Bu, girdiğiniz ayetleri okuyarak geçirdiğiniz süredir. Bunu Quran.com'daki ortalama okuma hızıyla otomatik olarak dolduruyoruz, ancak siz bunu gerçek okuma sürenizle geçersiz kılabilirsiniz.",
   "you-read": "Sen okumak:"
 }

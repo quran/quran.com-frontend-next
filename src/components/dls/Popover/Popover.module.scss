@@ -23,6 +23,7 @@
   padding-inline-end: var(--spacing-xsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
+
   & > span {
     fill: var(--color-background-default);
   }
@@ -37,6 +38,7 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   box-shadow: none;
+
   & > span {
     fill: var(--color-background-inverse);
   }
@@ -45,5 +47,5 @@
 .info {
   @include infoTooltipStyles;
   border-radius: var(--border-radius-medium-px);
-  z-index: var(--z-index-high);
+  z-index: var(--z-index-max);
 }

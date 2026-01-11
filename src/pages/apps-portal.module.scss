@@ -41,7 +41,7 @@
 
 .heroSubtitle {
   margin: 0;
-  color: var(--color-text-faded-new);
+  color: var(--color-text-faded);
   font-size: var(--font-size-large);
   line-height: 1.6;
   max-inline-size: 36rem;
@@ -106,7 +106,7 @@
   gap: 0.35rem;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
-  color: var(--color-text-faded-new);
+  color: var(--color-text-faded);
   text-decoration: underline;
 }
 
@@ -120,45 +120,59 @@
 
 .emptyState {
   margin: 0;
-  color: var(--color-text-faded-new);
+  color: var(--color-text-faded);
 }
 
 .featuredCard {
   background: var(--color-background-default);
-  border: 1px solid var(--color-separators-ayah-level);
+  border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   border-radius: var(--border-radius-large-px);
-  box-sizing: border-box;
   box-shadow: var(--shadow-small-new);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-block-size: 220px;
+  gap: var(--spacing-medium);
+  block-size: 100%;
 }
 
-.cardBody {
+.cardVisual {
+  margin: var(--spacing-small);
+  border-radius: 20px;
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
   display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 16px;
-  flex: 1;
+  align-items: flex-end;
+  padding: var(--spacing-medium);
+  color: var(--color-text-inverse);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.cardHeadline {
+  margin: 0;
+  font-size: var(--font-size-large2);
+  line-height: 1.35;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-medium);
+  padding: 0 var(--spacing-medium) var(--spacing-medium);
 }
 
 .appMeta {
   display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.appMetaText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  align-items: center;
+  gap: var(--spacing-small);
 }
 
 .appIcon {
-  inline-size: calc(var(--spacing-xxlarge-px) + var(--spacing-micro-px));
-  block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-micro-px));
-  border-radius: var(--spacing-medium-plus-px);
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border-radius: 15px;
   background: var(--color-background-alternative-faded);
   display: grid;
   place-items: center;
@@ -173,135 +187,21 @@
 
 .appName {
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-large2);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .appTagline {
-  color: var(--color-text-faded-new);
-  font-size: var(--font-size-normal);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
 }
 
-.appDescription {
-  margin: 0;
-  color: var(--color-text-faded-new);
-  font-size: var(--font-size-normal);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-block-size: calc(3 * 1.5em);
+.link {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded);
+  text-decoration: underline;
 }
 
-.cardActions {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 7px;
-  margin-block-start: auto;
-  min-block-size: var(--cta-badge-height);
-  --cta-badge-width: 96px;
-  --cta-badge-height: 32px;
-}
-
-.storeBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--border-radius-xsmall-px);
-  overflow: hidden;
-  line-height: 0;
-  box-shadow: var(--shadow-small);
-  inline-size: var(--cta-badge-width);
-  block-size: var(--cta-badge-height);
-  min-block-size: var(--cta-badge-height);
-  max-block-size: var(--cta-badge-height);
-  flex: 0 0 auto;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.storeBadgeImage {
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: contain;
-}
-
-.storeBadge:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-medium);
-}
-
-.storeBadge:focus-visible {
-  outline: 2px solid var(--color-primary-medium);
-  outline-offset: 2px;
-}
-
-@include breakpoints.smallerThanTablet {
-  .page {
-    gap: var(--spacing-large);
-    padding-block: var(--spacing-large);
-  }
-
-  .hero {
-    padding-inline: var(--spacing-medium);
-  }
-
-  .section {
-    padding-block: var(--spacing-large);
-    padding-inline: var(--spacing-medium2);
-  }
-
-  .sectionAlt {
-    padding: var(--spacing-large) 0;
-  }
-
-  .sectionAltInner {
-    padding-block: var(--spacing-large);
-    padding-inline: var(--spacing-medium2);
-    gap: var(--spacing-small);
-  }
-
-  .sectionHeader,
-  .sectionHeaderAlt {
-    margin-block-end: var(--spacing-small);
-  }
-
-  .cardBody {
-    gap: 12px;
-    padding: 14px;
-  }
-
-  .appMeta {
-    gap: 12px;
-  }
-
-  .appIcon {
-    inline-size: 3rem;
-    block-size: 3rem;
-    border-radius: 14px;
-  }
-
-  .cardActions {
-    gap: 5px;
-    --cta-badge-width: 88px;
-    --cta-badge-height: 30px;
-  }
-
-  .storeBadge {
-    inline-size: var(--cta-badge-width);
-    block-size: var(--cta-badge-height);
-    min-block-size: var(--cta-badge-height);
-    max-block-size: var(--cta-badge-height);
-  }
+.link:hover {
+  color: var(--color-text-default);
 }
 
 .filters {
@@ -318,7 +218,6 @@
   background: var(--color-background-default);
   border: 1px solid var(--color-border-gray-faded, var(--color-borders-hairline));
   border-radius: var(--border-radius-pill);
-  box-sizing: border-box;
   padding: var(--spacing-small) var(--spacing-medium);
   min-block-size: 2.75rem;
   inline-size: 100%; // full width of Browse All Apps inner container
@@ -334,7 +233,7 @@
 }
 
 .search input::placeholder {
-  color: var(--color-text-faded-new);
+  color: var(--color-text-faded);
 }
 
 .searchIcon {
@@ -370,44 +269,25 @@
   box-shadow: 0 6px 16px rgba(34, 165, 173, 0.2);
 }
 
-@include breakpoints.smallerThanTablet {
-  .filters {
-    margin-block-end: var(--spacing-small);
-  }
-
-  .pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: var(--spacing-xsmall);
-    padding-block: var(--spacing-xxsmall);
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .pill {
-    flex: 0 0 auto;
-    white-space: nowrap;
-    padding: var(--spacing-xxsmall) var(--spacing-medium);
-    font-size: var(--font-size-small);
-  }
-
-  .search {
-    padding: var(--spacing-xxsmall) var(--spacing-medium);
-    min-block-size: 2.25rem;
-  }
-
-  .searchIcon {
-    inline-size: 1.1rem;
-    block-size: 1.1rem;
-  }
-
-  .search input {
-    font-size: var(--font-size-small);
-  }
-}
-
 .appCard {
   @extend .featuredCard;
+}
+
+.appVisual {
+  @extend .cardVisual;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.appVisualText {
+  margin: 0;
+  font-size: var(--font-size-large2);
+  line-height: 1.35;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.appFooterRow {
+  @extend .cardFooter;
 }
 
 @include breakpoints.tablet {
@@ -420,30 +300,16 @@
     // flex-direction: column;
   }
 
-  .cardActions {
+  .cardFooter,
+  .appFooterRow {
     align-items: flex-start;
+    // flex-direction: column;
   }
 }
 
 @include breakpoints.desktop {
-  .page {
-    gap: var(--spacing-large);
-  }
-
   .featuredGrid,
   .appGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .section {
-    padding-block-end: var(--spacing-medium);
-  }
-
-  .sectionAlt {
-    padding-block-start: var(--spacing-large);
-  }
-
-  .sectionAltInner {
-    padding-block-start: var(--spacing-large);
   }
 }

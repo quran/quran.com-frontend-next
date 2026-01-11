@@ -13,6 +13,7 @@
   "my-quran": "مصحفي",
   "navigate-quran": "تصفح القرآن الكريم",
   "no-bookmarks": "لا توجد لديك أي سجلات حفظ بعد",
+  "no-page-bookmarks": "ليس لديك أي إشارات مرجعية للصفحات حتى الآن",
   "no-recently-read": "ليس لديك أي جلسات قراءة بعد",
   "noble-quran": "القرآن الكريم",
   "popular": "الأكثر شيوعًا",
@@ -59,6 +60,7 @@
   "stay-consistent": "تتبع إنجازاتك، أنشئ أهدافك المخصصة، وابقَ مستمرًا.",
   "tab": {
     "bookmarks": "سجلات الحفظ",
+    "page-bookmarks": "الصفحات",
     "popular": "الأكثر شيوعًا"
   },
   "take-notes": "هل فاتتك <modalLink>الملاحظات؟</modalLink>",

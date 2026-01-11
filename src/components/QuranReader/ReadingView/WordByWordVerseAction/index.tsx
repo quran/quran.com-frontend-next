@@ -19,6 +19,7 @@ import SearchIcon from '@/icons/search-book.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { VersesResponse } from '@/types/ApiResponses';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { getMushafId, getDefaultWordFields } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
@@ -31,7 +32,7 @@ const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
 });
 
 type Props = {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onActionTriggered?: () => void;
   isTranslationView?: boolean;
 };

@@ -1,3 +1,4 @@
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 
 export interface TranslationFeedbackFormErrors {
@@ -6,6 +7,6 @@ export interface TranslationFeedbackFormErrors {
 }
 
 export interface UseTranslationFeedbackFormProps {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onClose: () => void;
 }

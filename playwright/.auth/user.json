@@ -1,0 +1,73 @@
+{
+  "cookies": [
+    {
+      "name": "at_development",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMCIsImFzIjoiRU1MIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTc2NTgwNzE1MywiZXhwIjoxNzY1ODA4OTUzfQ.4B82hvWFmPle8z12rJlg9r-HUWv6phW8j2Uiqbzkvds",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1765808983.458122,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "rt_development",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMCIsImFzIjoiRU1MIiwiaXNBZG1pbiI6ZmFsc2UsImp0aSI6IjY2NjMwNjJiLTU2MzYtNDk1NC04ODVjLTY0Y2NkZTQ1MmUyMiIsImlhdCI6MTc2NTgwNzE1MywiZXhwIjoxNzY4Mzk5MTUzfQ.JuzZJc3xt1HN-C0HiYF6K3mOS7PXfXFJfZan91bFh2w",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1768399153.458943,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "id_development",
+      "value": "10",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1768399153.45897,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "notif_sub_id_development",
+      "value": "b89d36c38d9c85b6eeed9154db590daa58cd14c7e00e85fa5fd50f3a938fccbc",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1768399153.459005,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NEXT_LOCALE",
+      "value": "en",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1800367154.322347,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:3005",
+      "localStorage": [
+        {
+          "name": "persist:commandBar",
+          "value": "{\"recentNavigations\":\"[]\",\"_persist\":\"{\\\"version\\\":1,\\\"rehydrated\\\":true}\"}"
+        },
+        {
+          "name": "persist:root",
+          "value": "{\"quranReaderStyles\":\"{\\\"tafsirFontScale\\\":3,\\\"quranTextFontScale\\\":3,\\\"translationFontScale\\\":3,\\\"wordByWordFontScale\\\":3,\\\"quranFont\\\":\\\"tajweed_v4\\\",\\\"mushafLines\\\":\\\"16_lines\\\",\\\"isUsingDefaultFont\\\":false}\",\"readingPreferences\":\"{\\\"readingPreference\\\":\\\"translation\\\",\\\"selectedWordByWordLocale\\\":\\\"en\\\",\\\"isUsingDefaultWordByWordLocale\\\":false,\\\"wordByWordContentType\\\":[\\\"translation\\\"],\\\"wordByWordDisplay\\\":[\\\"tooltip\\\"],\\\"wordClickFunctionality\\\":\\\"play-audio\\\"}\",\"translations\":\"{\\\"selectedTranslations\\\":[131],\\\"isUsingDefaultTranslations\\\":true}\",\"theme\":\"{\\\"type\\\":\\\"sepia\\\"}\",\"tafsirs\":\"{\\\"selectedTafsirs\\\":[\\\"en-tafisr-ibn-kathir\\\"],\\\"isUsingDefaultTafsirs\\\":true}\",\"bookmarks\":\"{\\\"bookmarkedVerses\\\":{},\\\"bookmarkedPages\\\":{}}\",\"search\":\"{\\\"searchHistory\\\":[]}\",\"readingTracker\":\"{\\\"lastReadVerse\\\":{\\\"verseKey\\\":null,\\\"chapterId\\\":null,\\\"page\\\":null,\\\"hizb\\\":null},\\\"recentReadingSessions\\\":{}}\",\"welcomeMessage\":\"{\\\"isVisible\\\":true}\",\"defaultSettings\":\"{\\\"isUsingDefaultSettings\\\":true,\\\"detectedCountry\\\":\\\"US\\\",\\\"detectedLanguage\\\":\\\"en\\\",\\\"userHasCustomised\\\":false,\\\"ayahReflectionsLanguages\\\":[\\\"ENGLISH\\\"],\\\"ayahReflectionsLanguageIsoCodes\\\":[\\\"en\\\"],\\\"learningPlanLanguageIsoCodes\\\":[\\\"en\\\"]}\",\"sidebarNavigation\":\"{\\\"isVisible\\\":false,\\\"selectedNavigationItem\\\":\\\"surah\\\"}\",\"banner\":\"{\\\"isBannerVisible\\\":true}\",\"fundraisingBanner\":\"{\\\"isHomepageBannerVisible\\\":true}\",\"session\":\"{\\\"count\\\":3,\\\"isDonationPopupVisible\\\":true}\",\"revelationOrder\":\"{\\\"isReadingByRevelationOrder\\\":false}\",\"onboarding\":\"{\\\"isChecklistVisible\\\":true,\\\"checklistDismissals\\\":0,\\\"lastChecklistDismissal\\\":null,\\\"activeStep\\\":{\\\"group\\\":\\\"HOMEPAGE\\\",\\\"index\\\":0},\\\"completedGroups\\\":{}}\",\"mediaMaker\":\"{\\\"opacity\\\":0.4,\\\"borderColor\\\":\\\"#000000\\\",\\\"borderSize\\\":0,\\\"backgroundColor\\\":\\\"#000000\\\",\\\"reciter\\\":7,\\\"quranTextFontScale\\\":4,\\\"translationFontScale\\\":3,\\\"quranTextFontStyle\\\":\\\"qpc_uthmani_hafs\\\",\\\"translations\\\":[131],\\\"fontColor\\\":\\\"#ffffff\\\",\\\"verseAlignment\\\":\\\"centre\\\",\\\"translationAlignment\\\":\\\"centre\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"videoId\\\":4,\\\"surah\\\":1,\\\"verseFrom\\\":\\\"1\\\",\\\"verseTo\\\":\\\"1\\\",\\\"previewMode\\\":\\\"disabled\\\"}\",\"guestEnrollment\":\"{\\\"enrolledCourses\\\":[]}\",\"_persist\":\"{\\\"version\\\":36,\\\"rehydrated\\\":true}\"}"
+        },
+        {
+          "name": "persist:audioPlayerState",
+          "value": "{\"enableAutoScrolling\":\"true\",\"showTooltipWhenPlayingAudio\":\"false\",\"_persist\":\"{\\\"version\\\":3,\\\"rehydrated\\\":true}\",\"quranReaderStyles\":\"{\\\"tafsirFontScale\\\":3,\\\"quranTextFontScale\\\":3,\\\"translationFontScale\\\":3,\\\"wordByWordFontScale\\\":3,\\\"quranFont\\\":\\\"tajweed_v4\\\",\\\"mushafLines\\\":\\\"16_lines\\\",\\\"isUsingDefaultFont\\\":false}\",\"readingPreferences\":\"{\\\"readingPreference\\\":\\\"translation\\\",\\\"selectedWordByWordLocale\\\":\\\"en\\\",\\\"isUsingDefaultWordByWordLocale\\\":false,\\\"wordByWordContentType\\\":[\\\"translation\\\"],\\\"wordByWordDisplay\\\":[\\\"tooltip\\\"],\\\"wordClickFunctionality\\\":\\\"play-audio\\\"}\",\"translations\":\"{\\\"selectedTranslations\\\":[131],\\\"isUsingDefaultTranslations\\\":true}\",\"theme\":\"{\\\"type\\\":\\\"sepia\\\"}\",\"tafsirs\":\"{\\\"selectedTafsirs\\\":[\\\"en-tafisr-ibn-kathir\\\"],\\\"isUsingDefaultTafsirs\\\":true}\",\"bookmarks\":\"{\\\"bookmarkedVerses\\\":{},\\\"bookmarkedPages\\\":{}}\",\"search\":\"{\\\"searchHistory\\\":[]}\",\"readingTracker\":\"{\\\"lastReadVerse\\\":{\\\"verseKey\\\":null,\\\"chapterId\\\":null,\\\"page\\\":null,\\\"hizb\\\":null},\\\"recentReadingSessions\\\":{}}\",\"welcomeMessage\":\"{\\\"isVisible\\\":true}\",\"defaultSettings\":\"{\\\"isUsingDefaultSettings\\\":true,\\\"detectedCountry\\\":\\\"US\\\",\\\"detectedLanguage\\\":\\\"en\\\",\\\"userHasCustomised\\\":false,\\\"ayahReflectionsLanguages\\\":[\\\"ENGLISH\\\"],\\\"ayahReflectionsLanguageIsoCodes\\\":[\\\"en\\\"],\\\"learningPlanLanguageIsoCodes\\\":[\\\"en\\\"]}\",\"sidebarNavigation\":\"{\\\"isVisible\\\":false,\\\"selectedNavigationItem\\\":\\\"surah\\\"}\",\"banner\":\"{\\\"isBannerVisible\\\":true}\",\"fundraisingBanner\":\"{\\\"isHomepageBannerVisible\\\":true}\",\"session\":\"{\\\"count\\\":2,\\\"isDonationPopupVisible\\\":true}\",\"revelationOrder\":\"{\\\"isReadingByRevelationOrder\\\":false}\",\"onboarding\":\"{\\\"isChecklistVisible\\\":true,\\\"checklistDismissals\\\":0,\\\"lastChecklistDismissal\\\":null,\\\"activeStep\\\":{\\\"group\\\":\\\"HOMEPAGE\\\",\\\"index\\\":0},\\\"completedGroups\\\":{}}\",\"mediaMaker\":\"{\\\"opacity\\\":0.4,\\\"borderColor\\\":\\\"#000000\\\",\\\"borderSize\\\":0,\\\"backgroundColor\\\":\\\"#000000\\\",\\\"reciter\\\":7,\\\"quranTextFontScale\\\":4,\\\"translationFontScale\\\":3,\\\"quranTextFontStyle\\\":\\\"qpc_uthmani_hafs\\\",\\\"translations\\\":[131],\\\"fontColor\\\":\\\"#ffffff\\\",\\\"verseAlignment\\\":\\\"centre\\\",\\\"translationAlignment\\\":\\\"centre\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"videoId\\\":4,\\\"surah\\\":1,\\\"verseFrom\\\":\\\"1\\\",\\\"verseTo\\\":\\\"1\\\",\\\"previewMode\\\":\\\"disabled\\\"}\",\"guestEnrollment\":\"{\\\"enrolledCourses\\\":[]}\",\"recentNavigations\":\"[]\"}"
+        }
+      ]
+    }
+  ]
+}

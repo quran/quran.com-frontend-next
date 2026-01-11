@@ -8,6 +8,7 @@ import Loader from '@/components/QuranReader/Loader';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { VersesResponse } from '@/types/ApiResponses';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
@@ -30,7 +31,7 @@ const findSelectedTranslation = (data: VersesResponse, selectedTranslationId: st
 };
 
 interface TranslationPreviewProps {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   selectedTranslationId: string;
 }
 

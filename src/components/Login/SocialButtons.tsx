@@ -33,9 +33,9 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         onClick={() => onSocialButtonClick(AuthType.Google)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-        data-testid="google-login-button"
         size={ButtonSize.Medium}
         ariaLabel={t('continue-google')}
+        data-testid="google-login-button"
       />
 
       <Button
@@ -45,9 +45,9 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         onClick={() => onSocialButtonClick(AuthType.Facebook)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-        data-testid="facebook-login-button"
         size={ButtonSize.Medium}
         ariaLabel={t('continue-facebook')}
+        data-testid="facebook-login-button"
       />
 
       <Button
@@ -57,9 +57,9 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         onClick={() => onSocialButtonClick(AuthType.Apple)}
         shape={ButtonShape.Pill}
         shouldFlipOnRTL={false}
-        data-testid="apple-login-button"
         size={ButtonSize.Medium}
         ariaLabel={t('continue-apple')}
+        data-testid="apple-login-button"
       />
     </div>
   );

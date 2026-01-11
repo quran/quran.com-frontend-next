@@ -32,6 +32,7 @@ import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { logEvent } from '@/utils/eventLogger';
 
 const SidebarNavigation = dynamic(
@@ -65,8 +66,6 @@ const QURAN_READER_ROUTES = new Set([
   '/rub/[rubId]',
 ]);
 
-const SIDEBAR_TRANSITION_DURATION_MS = 400; // Keep in sync with --transition-regular (src/styles/theme.scss)
-
 const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -83,6 +82,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const previousSidebarVisibilityRef = useRef(isSidebarNavigationVisible);
   const wasSidebarVisible = previousSidebarVisibilityRef.current;
   const isTransitioningToClose = wasSidebarVisible && !isSidebarNavigationVisible;
+  const sidebarTransitionDuration = getSidebarTransitionDurationFromCss();
 
   useEffect(() => {
     if (isQuranReaderRoute) return;
@@ -90,9 +90,20 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isQuranReaderRoute, normalizedPathname]);
 
+  // Determine whether to render the SidebarNavigation component.
+  // We keep it mounted during transitions to allow smooth CSS animations.
+  // Conditions:
+  // 1. isQuranReaderRoute: Always render on Quran reader pages (even if sidebar is hidden)
+  // 2. isSidebarNavigationVisible: Render when sidebar is actively visible
+  // 3. isSidebarClosing: Keep mounted during closing animation (timeout-based state)
+  // 4. isTransitioningToClose: Keep mounted during initial transition from visible to hidden (ref-based detection)
   const shouldRenderSidebarNavigation =
     isQuranReaderRoute || isSidebarNavigationVisible || isSidebarClosing || isTransitioningToClose;
 
+  // Manage sidebar closing animation timing.
+  // When sidebar becomes visible: cancel any pending close timeout
+  // When sidebar starts closing: set isSidebarClosing state and schedule its cleanup after transition duration
+  // This keeps the component mounted during CSS transitions, then unmounts it cleanly.
   useEffect(() => {
     if (isSidebarNavigationVisible) {
       setIsSidebarClosing(false);
@@ -105,7 +116,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       sidebarVisibilityTimeoutRef.current = setTimeout(() => {
         setIsSidebarClosing(false);
         sidebarVisibilityTimeoutRef.current = null;
-      }, SIDEBAR_TRANSITION_DURATION_MS);
+      }, sidebarTransitionDuration);
     }
 
     previousSidebarVisibilityRef.current = isSidebarNavigationVisible;
@@ -116,7 +127,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
         sidebarVisibilityTimeoutRef.current = null;
       }
     };
-  }, [isSidebarNavigationVisible]);
+  }, [isSidebarNavigationVisible, sidebarTransitionDuration]);
 
   useEffect(() => {
     if (hasResetSidebarAfterHydration.current) return;

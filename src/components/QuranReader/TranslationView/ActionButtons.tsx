@@ -14,9 +14,10 @@ import ShareButton from '@/components/Verse/ShareButton';
 import VerseLink from '@/components/Verse/VerseLink';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import { WordVerse } from '@/types/Word';
+import Verse from 'types/Verse';
 
 type ActionButtonsProps = {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   isTranslationView?: boolean;

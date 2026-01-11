@@ -14,6 +14,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -23,7 +24,7 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 });
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;

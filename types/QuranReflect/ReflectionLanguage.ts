@@ -6,4 +6,5 @@ enum ReflectionLanguage {
   URDU = 'URDU',
   ARABIC = 'ARABIC',
 }
+
 export default ReflectionLanguage;

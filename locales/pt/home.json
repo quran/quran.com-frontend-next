@@ -13,6 +13,7 @@
   "my-quran": "Meu Quran",
   "navigate-quran": "Navegar pelo Quran",
   "no-bookmarks": "Você ainda não tem favoritos",
+  "no-page-bookmarks": "Você ainda não adicionou nenhuma página aos seus favoritos.",
   "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
   "noble-quran": "O Nobre Quran",
   "popular": "Popular",
@@ -59,6 +60,7 @@
   "stay-consistent": "Acompanhe as sequências, crie metas personalizadas e seja consistente",
   "tab": {
     "bookmarks": "Favoritos",
+    "page-bookmarks": "Páginas",
     "popular": "Popular"
   },
   "take-notes": "Você está perdendo o <modalLink> Notes? </modalLink>",

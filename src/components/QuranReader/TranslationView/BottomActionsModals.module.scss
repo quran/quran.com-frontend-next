@@ -3,6 +3,7 @@
 .reflectionOverlay .reflectionContentModal {
   padding: 0;
   .reflectionHeader {
+    border-block-end: unset;
     border-radius: var(--border-radius-rounded);
     padding-inline: var(--spacing-medium-px);
     padding-block: var(--spacing-small-px);

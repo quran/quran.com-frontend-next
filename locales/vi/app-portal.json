@@ -1,0 +1,75 @@
+{
+  "browse": {
+    "apps": {
+      "muhaffidh": {
+        "caption": "Ghi nhớ và ôn Qur'an hiệu quả",
+        "title": "Muhaffidh"
+      },
+      "quran_android": {
+        "caption": "Đọc, đánh dấu trang và nghe kinh Quran trên thiết bị Android.",
+        "title": "Kinh Qur'an cho Android"
+      },
+      "quran_ios": {
+        "caption": "Ứng dụng đọc và nghe Kinh Qur'an đẹp mắt, không quảng cáo dành cho iPhone & iPad",
+        "title": "Ứng dụng Kinh Qur'an cho iOS (từ quran.com)"
+      },
+      "quranmeet": {
+        "caption": "Buổi học Qur'an trực tiếp",
+        "title": "QuranMeet"
+      },
+      "quranreflect": {
+        "caption": "Chia sẻ suy ngẫm",
+        "title": "QuranReflect"
+      },
+      "readtafsir": {
+        "caption": "Tìm và so sánh các tafsir cổ điển",
+        "title": "ReadTafsir"
+      },
+      "sunnah": {
+        "caption": "Tuyển tập Hadith",
+        "title": "Sunnah.com"
+      },
+      "tafsirapp": {
+        "caption": "Tafsir tương tác từ nhiều nguồn.",
+        "title": "Ứng dụng Tafsir"
+      }
+    },
+    "filters": {
+      "all": "Tất cả app",
+      "community": "Cộng đồng",
+      "hadith-sunnah": "Hadith và Sunnah",
+      "popular": "Phổ biến",
+      "quran-reader": "Trình đọc Kinh Qur'an",
+      "reflections": "Suy ngẫm",
+      "study-tools": "Công cụ học tập"
+    },
+    "title": "Xem mọi ứng dụng"
+  },
+  "featured": {
+    "apps": {
+      "qariah": {
+        "headline": "Cuối cùng cũng có app Qur'an dành cho con gái chúng ta.",
+        "name": "Qariah",
+        "tagline": "Giọng đọc Kinh Qur'an nữ"
+      },
+      "quran-kareem": {
+        "headline": "Cánh cửa mới để bạn gắn kết với Kinh Sách của Allah.",
+        "name": "Thiên Kinh Qur'an",
+        "tagline": "Đọc, nghe và suy ngẫm"
+      },
+      "quran-link": {
+        "headline": "Khám phá hơn 25 tafsir và 100 bản dịch tại một nơi.",
+        "name": "Quran Link",
+        "tagline": "Tafsir & tài liệu học"
+      }
+    },
+    "learn-more": "Tìm hiểu thêm",
+    "title": "Ứng dụng nổi bật",
+    "view-all": "Xem tất cả"
+  },
+  "hero": {
+    "description": "Khám phá bộ ứng dụng Hồi giáo chọn lọc, xây dựng với Quran.foundation, từ công cụ học tập đến tiện ích cầu nguyện, đồng hành cùng hành trình tâm linh của bạn.",
+    "title": "Khám phá hệ sinh thái ứng dụng của chúng tôi."
+  },
+  "quran-apps-portal": "Cổng ứng dụng Kinh Qur'an"
+}

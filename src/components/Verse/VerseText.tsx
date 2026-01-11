@@ -71,7 +71,6 @@ const VerseText = ({
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
   const { chapterId } = firstWordData;
-
   const VerseTextContainer = shouldShowH1ForSEO ? 'h1' : 'div';
   const fontClassName = isFontLoaded
     ? getFontClassName(quranFont, quranTextFontScale, mushafLines)

@@ -12,8 +12,10 @@
     "description": "Matlamat anda akan ditetapkan semula setiap hari",
     "title": "Matlamat harian"
   },
+  "day-streak": "Rentetan hari",
   "day-x": "Hari {{day}}",
   "days": "hari-hari",
+  "days-remaining": "hari yang tinggal",
   "duration": "Tempoh (hari)",
   "ending-chapter": "Surah Akhir",
   "ending-verse": "Ayah Akhir",

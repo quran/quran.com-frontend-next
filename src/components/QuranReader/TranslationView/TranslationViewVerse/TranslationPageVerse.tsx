@@ -4,10 +4,11 @@ import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
-import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
+import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Verse from '@/types/Verse';
+import { QuestionsData } from '@/utils/auth/api';
 
 interface TranslationPageVerse {
   verse: Verse;
@@ -19,6 +20,7 @@ interface TranslationPageVerse {
     from: string;
     to: string;
   } | null;
+  questionsData?: Record<string, QuestionsData>;
 }
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
@@ -28,11 +30,15 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   quranReaderStyles,
   isLastVerseInView,
   notesRange,
+  questionsData,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
 
   const { data: notesCount } = useCountRangeNotes(notesRange);
+
+  // Only show Answers tab when we confirm questions exist
+  const hasQuestions = questionsData?.[verse.verseKey]?.total > 0;
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -69,11 +75,9 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     >
       {verse.verseNumber === 1 && (
         <ChapterHeader
-          translationsLabel={getTranslationsLabelString(verse.translations)}
+          translationName={getTranslationNameString(verse.translations)}
           translationsCount={verse.translations?.length}
           chapterId={String(verse.chapterId)}
-          pageNumber={verse.pageNumber}
-          hizbNumber={verse.hizbNumber}
           isTranslationView
         />
       )}
@@ -85,6 +89,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
         hasNotes={hasNotes}
+        hasQuestions={hasQuestions}
       />
     </div>
   );

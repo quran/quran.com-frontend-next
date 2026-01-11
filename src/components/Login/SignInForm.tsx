@@ -34,13 +34,11 @@ interface Props {
 
 const SignInForm: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
-
   const router = useRouter();
   const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
 
   const { redirectWithToken } = useAuthRedirect();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
@@ -98,7 +96,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       }
 
       redirectWithToken(redirect || '/', response?.token, targetLocale);
-
       return undefined;
     } catch (error) {
       setIsSubmitting(false);

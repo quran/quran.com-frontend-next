@@ -1,0 +1,32 @@
+{
+  "add": "ያክሉ",
+  "add-data-success": "የንባብ ውሂብዎ በተሳካ ሁኔታ ታክሏል።",
+  "back-to-reading-goal": "ወደ ንባብ ግብ ተመለስ",
+  "delete-goal": {
+    "action": "ግብ ሰርዝ",
+    "confirmation": {
+      "action-text": "ውጤቱን ተረድቻለሁ፣ ግቤን ሰርዝ",
+      "confirmation-text": "ግቤን ሰርዝ",
+      "instruction-text": "እባክዎ ይተይቡ <strong>{{text}}</strong> ለማረጋገጥ",
+      "subtitle": "ይህ እርምጃ ሊቀለበስ አይችልም። ይህ ግብዎን በቋሚነት ይሰርዘዋል፣ እና እድገትዎን መከታተል እናቆማለን።",
+      "title": "ኧረ"
+    },
+    "success": "የንባብ ግብዎ በተሳካ ሁኔታ ተሰርዟል።"
+  },
+  "edit-goal": {
+    "action": "ግብን አርትዕ ያድርጉ",
+    "subtitle": "በአዲሱ ግብ ላይ በመመስረት የእድገትዎን ሂደት እንደገና እናሰላለን።",
+    "success": "የንባብ ግብዎ በተሳካ ሁኔታ ተዘምኗል።",
+    "title": "የንባብ ግብዎን ያርትዑ"
+  },
+  "history": "የንባብ ታሪክ",
+  "history-for": "ታሪክን በማንበብ ላይ {{date}}",
+  "manage-goal": "የንባብ ግብዎን ያስተዳድሩ",
+  "manually-add": "ንባቦችን በእጅ ያክሉ",
+  "no-reading-history-for": "የንባብ ታሪክ የለም ለ {{date}}",
+  "reading-progress-header": "የእርስዎ እድገት",
+  "reading-progress-streak": "ስትሬክ",
+  "reading-time": "የንባብ ጊዜ",
+  "seconds-read-tooltip": "ይህ የገቡትን አያዎች በማንበብ ያሳለፉት ጊዜ ነው። በQuran.com ላይ በአማካይ የንባብ ፍጥነት በራስ-ሰር እንሞላዋለን፣ ነገር ግን በትክክለኛው የንባብ ጊዜዎ ሊሽሩት ይችላሉ።",
+  "you-read": "እንዲህ ብለህ ታነባለህ፦"
+}

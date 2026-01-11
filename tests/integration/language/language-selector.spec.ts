@@ -16,8 +16,8 @@ test(
     tag: ['@nav', '@language', '@fast', '@smoke'],
   },
   async ({ page }) => {
-    // 1. make sure the language container is not visible
-    await expect(page.getByTestId('language-container')).not.toBeVisible();
+    // 1. make sure the language selector items are not visible
+    await expect(page.getByRole('button', { name: 'English' })).not.toBeVisible();
     // 2. Click on the menu
     await page.getByTestId('open-navigation-drawer').click();
     // 3. Click on the language selector nav bar trigger

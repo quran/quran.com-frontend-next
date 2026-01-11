@@ -20,6 +20,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
 import { QuranFont } from '@/types/QuranReader';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
@@ -36,7 +37,7 @@ import { getAvailableTranslations } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   children({ onCopy, actionText, ayahSelectionComponent, loading }): React.ReactElement;
 }
 const RESET_BUTTON_TIMEOUT_MS = 5 * 1000;

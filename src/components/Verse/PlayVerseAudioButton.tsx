@@ -12,6 +12,7 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
+import useIsMobile from '@/hooks/useIsMobile';
 import PlayIcon from '@/icons/play-outline.svg';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import QueryParam from '@/types/QueryParam';
@@ -34,6 +35,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
+  const isMobile = useIsMobile();
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
@@ -99,7 +101,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip={t('loading')}
+        tooltip={isMobile ? undefined : t('loading')}
         type={ButtonType.Success}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
@@ -113,7 +115,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   return (
     <Button
       size={ButtonSize.Small}
-      tooltip={t('audio.player.play')}
+      tooltip={isMobile ? undefined : t('audio.player.play')}
       variant={ButtonVariant.Ghost}
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}

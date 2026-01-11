@@ -10,16 +10,17 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
-import useVerseBookmark from '@/hooks/useVerseBookmark';
+import useVerseBookmark, { BookmarkableVerse } from '@/hooks/useVerseBookmark';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;
@@ -38,7 +39,7 @@ const BookmarkAction: React.FC<Props> = ({
 
   // Use custom hook for all bookmark logic
   const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
-    verse,
+    verse: verse as BookmarkableVerse,
     mushafId,
     bookmarksRangeUrl,
   });
@@ -83,10 +84,11 @@ const BookmarkAction: React.FC<Props> = ({
 
   // For use in the TopActions component (standalone button)
   if (isTranslationView || (!isTranslationView && isMobile)) {
+    const tooltipText = isVerseBookmarked ? t('bookmarked') : t('bookmark');
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        tooltip={isMobile ? undefined : tooltipText}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         className={classNames(
@@ -98,7 +100,7 @@ const BookmarkAction: React.FC<Props> = ({
           onToggleBookmarkClicked(e);
         }}
         shouldFlipOnRTL={false}
-        ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        ariaLabel={tooltipText}
       >
         <span className={styles.icon}>{bookmarkIcon}</span>
       </Button>

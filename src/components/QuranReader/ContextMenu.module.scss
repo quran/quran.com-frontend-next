@@ -1,5 +1,5 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 $sections-container-height: 2.25rem;
 $pixel: 1px;
@@ -13,18 +13,18 @@ $pixel: 1px;
   position: fixed;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
-  width: 100%;
+  inline-size: 100%;
   inset-block-start: calc($pixel * -1);
-  padding-bottom: $pixel;
-  min-height: var(--spacing-medium);
+  padding-block-end: $pixel;
+  min-block-size: var(--spacing-medium);
   will-change: transform;
   &:after {
     display: block;
-    content: "";
-    width: var(--progress);
+    content: '';
+    inline-size: var(--progress);
     transition: var(--transition-fast);
     transition-timing-function: linear;
-    height: var(--spacing-micro);
+    block-size: var(--spacing-micro);
     background: var(--color-success-deep);
     inset-block-end: calc(-1 * var(--spacing-micro));
   }
@@ -32,13 +32,16 @@ $pixel: 1px;
 
 .hide {
   display: none;
-  height: 0;
+  block-size: 0;
   visibility: hidden;
 }
 
 .visibleContainer {
   transform: translate3d(0, var(--navbar-container-height), 0);
   // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+  @include breakpoints.smallerThanTablet {
+    transform: translate3d(0, var(--navbar-container-height), 0);
+  }
 }
 
 .withVisibleBanner {
@@ -46,13 +49,13 @@ $pixel: 1px;
 }
 
 .expandedContainer {
-  min-height: var(--spacing-mega);
+  min-block-size: var(--spacing-mega);
 }
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;
-    width: calc(100% - #{constants.$notes-side-bar-desktop-width});
+    inline-size: calc(100% - #{constants.$notes-side-bar-desktop-width});
   }
 }
 
@@ -66,8 +69,8 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  height: $sections-container-height;
-  width: 100%;
+  block-size: $sections-container-height;
+  inline-size: 100%;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
   display: flex;
@@ -79,18 +82,19 @@ $pixel: 1px;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   @include breakpoints.tablet {
+    padding-block-start: var(--spacing-micro);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
 }
 
 .halfSection {
-  width: 50%; // when reading preference toggle is hidden
+  inline-size: 50%; // when reading preference toggle is hidden
 }
 
 .section {
-  width: calc(100% / 3);
+  inline-size: calc(100% / 3);
   @include breakpoints.smallerThanTablet {
-    width: 50%;
+    inline-size: 50%;
   }
 }
 
@@ -106,7 +110,7 @@ $pixel: 1px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .primaryInfo {

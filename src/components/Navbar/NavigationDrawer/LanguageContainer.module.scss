@@ -23,11 +23,15 @@
   display: flex;
   align-items: center;
   padding-block: var(--spacing-medium-px);
-  padding-inline: var(--spacing-medium2-px);
+  padding-inline-end: var(--spacing-medium2-px);
+  padding-inline-start: var(--spacing-xxsmall-px);
 }
 
 .backButton {
   gap: var(--spacing-xxsmall-px);
+  &:hover {
+    background: var(--color-background-alternative-faded);
+  }
 }
 
 .languageTitle {
@@ -46,7 +50,7 @@
   justify-content: flex-start;
   padding-inline: var(--spacing-xxlarge-px);
   padding-block: var(--spacing-small-px);
-  width: 100%;
+  inline-size: 100%;
   text-align: start;
 
   &:hover {

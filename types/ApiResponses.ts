@@ -178,3 +178,24 @@ export interface CountryLanguagePreferenceResponse extends BaseResponse {
     isoCode: string;
   }[];
 }
+
+export interface ChapterContent {
+  id: number;
+  languageName: string;
+  text: string;
+}
+
+export interface ChapterSummaries {
+  summaries: ChapterContent[];
+}
+
+export interface ChapterMetadata {
+  chapterId: number;
+  suggestions: ChapterContent[];
+  nextChapter?: ChapterSummaries;
+  previousChapter?: ChapterSummaries;
+}
+
+export interface ChapterMetadataResponse extends BaseResponse {
+  chapterMetadata?: ChapterMetadata;
+}

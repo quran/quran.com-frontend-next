@@ -11,6 +11,7 @@ import { isRTLLocale } from '@/utils/locale';
 export enum TabId {
   TAFSIR = 'tafsir',
   REFLECTIONS = 'reflections',
+  LESSONS = 'lessons',
   ANSWERS = 'answers',
 }
 
@@ -50,7 +51,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
       <div
         className={classNames(styles.tabsContainer, {
           [styles.center]: !isTranslationView,
-          [styles.tabsContainerRTL]: isRTL,
+          [styles.tabsContainerRTL]: isRTL && isTranslationView,
         })}
       >
         {tabs

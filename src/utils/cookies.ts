@@ -24,7 +24,6 @@ export const setServerLocaleCookie = (newLocale: string, res: GetServerSideProps
     res.setHeader('Set-Cookie', [existingSetCookieHeader.toString(), newCookie]);
   }
 };
-
 /**
  * Sets cookies from the proxy response to the server-side response.
  *

@@ -14,11 +14,12 @@ import Footer from '@/dls/Modal/Footer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import AdvancedCopyIcon from '@/icons/clipboard.svg';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
 
 type VerseActionAdvancedCopyProps = {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
 };

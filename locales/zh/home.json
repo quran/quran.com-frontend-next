@@ -13,6 +13,7 @@
   "my-quran": "我的古兰经",
   "navigate-quran": "浏览古兰经",
   "no-bookmarks": "您还没有任何书签",
+  "no-page-bookmarks": "您目前还没有任何页面书签。",
   "no-recently-read": "您还没有任何读书会",
   "noble-quran": "尊贵的古兰经",
   "popular": "受欢迎的",
@@ -59,6 +60,7 @@
   "stay-consistent": "追踪连胜记录，创建自定义目标，保持一致",
   "tab": {
     "bookmarks": "书签",
+    "page-bookmarks": "页",
     "popular": "受欢迎的"
   },
   "take-notes": "您是否错过了<modalLink> Notes？ </modalLink>",

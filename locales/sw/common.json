@@ -44,7 +44,8 @@
     "nav-drawer-open": "Fungua Navigation Drawer",
     "play-surah": "Cheza Sura {{surahName}}",
     "select-lng": "Chagua Lugha",
-    "sidebar-nav-close": "Funga Upau wa pembeni wa Uchunguzi"
+    "sidebar-nav-close": "Funga Upau wa pembeni wa Uchunguzi",
+    "translation-info": "Tazama maelezo ya tarjuma"
   },
   "audio": {
     "auto-scroll": {
@@ -53,7 +54,7 @@
       "title": "Sogeza kiotomatiki"
     },
     "displaying": "Inaonyesha",
-    "exp-tip": "<span> Badilisha maudhui yanayoonyeshwa chini ya </span> <br></br> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan>",
+    "exp-tip": "<span> Badilisha maudhui yanayoonyeshwa kwenye </span> <br></br> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan>",
     "exp-tip-no-select": "<span> Weka alama kwenye chaguo la kuonyesha tooltip na uchague <br></br> Chaguo la Tarjuma na/au Unukuzi </span> <br></br> <span> chini ya </span> <boldSpan> Mipangilio </boldSpan> > <boldSpan> Neno Kwa Neno </boldSpan> <span>, ili </span> <br></br> <span> kuwezesha kipengele hiki. </span>",
     "experience": "Uzoefu",
     "play": "Cheza Sauti",
@@ -100,6 +101,7 @@
   "bookmarked": "Zilizoalamishwa",
   "both": "Zote mbili",
   "cancel": "Batilisha",
+  "change-theme": "Badilisha Mandhari",
   "click-here": "Bofya hapa",
   "close": "Funga",
   "command-bar": {
@@ -139,6 +141,7 @@
     "decrease": "Punguza",
     "increase": "Ongeza"
   },
+  "create-my-goal": "Unda Lengo Langu",
   "default-description": "Qur'ani iliyotarjumiwa katika lugha nyingi katika kiolesura rahisi na ya kawaida",
   "delete": "Futa",
   "developers": "Watengenezaji",
@@ -162,6 +165,7 @@
     "bookmark-sync": "Alamisho haijasawazishwa.",
     "email-login-fail": "Imeshindikana kuingia kwa kutumia barua pepe. Tafadhali jaribu tena",
     "general": "Hitilafu fulani imetokea. Tafadhali jaribu tena.",
+    "language-change-failed": "Imeshindwa kubadilisha lugha. Tafadhali jaribu tena.",
     "offline": "Inaonekana umepoteza muunganisho wako. Tafadhali iangalie na ujaribu tena.",
     "pref-persist-fail": "Imeshindikana kusawazisha mipangilio yako kwenye cloud.",
     "ranges-no-value": "Msururu wa mwanzo na wa mwisho lazima iwe na tarakimu",
@@ -219,7 +223,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali isiyolipishwa na yenye thamani kwa wote, Alhamdulillah.",
+    "description": "Quran.com ni jukwaa linaloaminika na linalotumiwa na mamilioni duniani kote kusoma, kutafuta, kusikiliza na kutafakari kuhusu Qur'ani katika lugha tofauti. Inatoa huduma za tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za ufahamu wa kina, kuifanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama mbinu ya Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Qur'ani. Ikiungwa mkono na <link> Quran.Foundation </link>, shirika lisilo la faida la 501(c)(3), Quran.com inaendelea kukua kama rasilimali ya bila malipo na yenye thamani kwa wote, Alhamdulillah.",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
     "title": "Soma, Sikiliza, Tafuta, na Tafakari Qur'ani"
@@ -243,7 +247,11 @@
     "title": "Toa wakati wa siku bora!"
   },
   "fundraising": {
-    "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tuzingatie kuunda athari na tusizingatie kwa kiwango cha juu uchangishaji.",
+    "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kuendeleza shughuli zetu, ili tuweke mkazo mdogo kwenye ukusanyaji wa fedha na zaidi kwenye kuleta athari chanya",
+    "donation-campaign": {
+      "cta": "Toa mchango leo",
+      "text": "Kuwa msaidizi"
+    },
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "get-started": "Anza",
@@ -256,9 +264,10 @@
   "input": {
     "clear": "Futa"
   },
-  "juz": "Juz",
+  "juz": "Juzuu",
   "language": "Lugha",
   "languages": "Lugha",
+  "learn": "Jifunze",
   "learn-more": "Jifunze zaidi",
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
@@ -275,6 +284,7 @@
   "mode": "Hali",
   "more": "Zaidi",
   "my-learning-plans": "Mipango Yangu ya Kujifunza",
+  "my-quran": "Qurani Yangu",
   "navigate": "Chunguza",
   "network": "Mtandao",
   "new": "Mpya!",
@@ -327,6 +337,7 @@
   "q-reflect": "Quranreflect",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
+  "read": "Soma",
   "reading-history": "Historia ya kusoma",
   "reading-preference": {
     "reading": "Soma",
@@ -343,7 +354,7 @@
   "remove": "Ondoa",
   "rename": "Badilisha jina",
   "retry": "Jaribu tena",
-  "revelation_order": "Taratibu za Uteremshaji",
+  "revelation_order": "Taratibu ya Uteremshaji",
   "rub": "Rub el Hizb",
   "save": "Hifadhi",
   "save-to-collection": "Hifadhi kwenye Mkusanyiko",
@@ -366,6 +377,7 @@
   },
   "seconds": "Sekunde",
   "see-new": "Tazama Nini Kipya",
+  "select-language": "Chagua Lugha",
   "settings": {
     "no-tafsir-selected": "Hakuna tafsir iliyochaguliwa",
     "no-translation-selected": "Hakuna tarjuma iliyochaguliwa",
@@ -396,7 +408,7 @@
   "show-more": "Onyesha zaidi",
   "sidebar": {
     "search-hizb": "Tafuta Hizb",
-    "search-juz": "Tafuta Juz",
+    "search-juz": "Tafuta Juzuu",
     "search-page": "Tafuta Ukurasa",
     "search-surah": "Tafuta Sura",
     "search-verse": "Tafuta Aya",
@@ -405,10 +417,11 @@
   "sign-in": "Ingia",
   "sitemap": "Ramani ya tovuti",
   "sort": {
-    "ascending": "Kuenda juu",
-    "by": "Panga",
-    "descending": "Kuenda chini"
+    "ascending": "Kupanda",
+    "by": "Panga kwa",
+    "descending": "Kushuka"
   },
+  "stay-on-track": "🎯 Endelea kufuatilia!",
   "style": "Mtindo",
   "submit": "Wasilisha",
   "subscribe": "Jisajili",

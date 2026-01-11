@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $playChapterAudioButtonMinInlineSize: 95px;
 
@@ -11,8 +11,8 @@ $playChapterAudioButtonMinInlineSize: 95px;
     color: var(--color-success-medium);
 
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-medium-px);
-      height: var(--spacing-medium-px);
+      inline-size: var(--spacing-medium-px);
+      block-size: var(--spacing-medium-px);
     }
   }
 
@@ -32,5 +32,7 @@ $playChapterAudioButtonMinInlineSize: 95px;
     @include customButton;
     min-inline-size: $playChapterAudioButtonMinInlineSize;
     font-size: var(--font-size-small);
+    padding-inline: var(--spacing-small-px);
+    white-space: nowrap;
   }
 }

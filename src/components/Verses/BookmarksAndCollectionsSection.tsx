@@ -21,6 +21,8 @@ enum View {
   Collections = 'collections',
 }
 
+const SHOULD_SHOW_PAGE_BOOKMARKS = false; // TODO: Enable when backend task (QF-1720) is done.
+
 type Props = {
   isHomepage?: boolean;
 };
@@ -39,7 +41,9 @@ const BookmarksAndCollectionsSection: React.FC<Props> = ({ isHomepage = false })
       tabsList.push({ title: t('recently-read'), value: View.ReadingSessions });
     }
     tabsList.push({ title: t('tab.bookmarks'), value: View.Bookmarks });
-    tabsList.push({ title: t('tab.page-bookmarks'), value: View.PageBookmarks });
+    if (SHOULD_SHOW_PAGE_BOOKMARKS) {
+      tabsList.push({ title: t('tab.page-bookmarks'), value: View.PageBookmarks });
+    }
 
     if (isLoggedIn) {
       tabsList.push({ title: t('collection:collections'), value: View.Collections });
@@ -61,7 +65,9 @@ const BookmarksAndCollectionsSection: React.FC<Props> = ({ isHomepage = false })
       <div className={classNames(styles.contentContainer, styles.tabsContainer)}>
         {selectedTab === View.ReadingSessions && <RecentReadingSessionsList />}
         {selectedTab === View.Bookmarks && <BookmarkedVersesList />}
-        {selectedTab === View.PageBookmarks && <BookmarkedPagesList />}
+        {SHOULD_SHOW_PAGE_BOOKMARKS && selectedTab === View.PageBookmarks && (
+          <BookmarkedPagesList />
+        )}
         {selectedTab === View.Collections && <CollectionList />}
       </div>
     </div>

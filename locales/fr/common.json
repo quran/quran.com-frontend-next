@@ -44,7 +44,8 @@
     "nav-drawer-open": "Ouvrir le tiroir de navigation",
     "play-surah": "Écouter la Sourate {{surahName}}",
     "select-lng": "Choisir la langue",
-    "sidebar-nav-close": "Fermer la barre latérale de navigation"
+    "sidebar-nav-close": "Fermer la barre latérale de navigation",
+    "translation-info": "Afficher les informations de traduction"
   },
   "audio": {
     "auto-scroll": {
@@ -100,6 +101,7 @@
   "bookmarked": "Favori ajouté",
   "both": "Tous",
   "cancel": "Annuler",
+  "change-theme": "Changer de thème",
   "click-here": "Cliquer ici",
   "close": "Fermer",
   "command-bar": {
@@ -139,6 +141,7 @@
     "decrease": "Diminuer",
     "increase": "Augmenter"
   },
+  "create-my-goal": "Créer mon objectif",
   "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
   "delete": "Supprimer",
   "developers": "Développeurs",
@@ -162,6 +165,7 @@
     "bookmark-sync": "Le favori n'est pas synchronisé.",
     "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
     "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "language-change-failed": "Impossible de changer la langue. Veuillez réessayer.",
     "offline": "On dirait que vous avez perdu votre connexion. Veuillez vérifier et réessayer.",
     "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud.",
     "ranges-no-value": "Le début et la fin de la plage doivent avoir une valeur",
@@ -244,6 +248,10 @@
   },
   "fundraising": {
     "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir nos opérations afin que nous nous concentrions moins sur la collecte de fonds et davantage sur la création d'un impact.",
+    "donation-campaign": {
+      "cta": "Faites un don aujourd'hui",
+      "text": "Devenez un supporter"
+    },
     "title": "Devenir un donateur mensuel"
   },
   "get-started": "Commencer",
@@ -259,6 +267,7 @@
   "juz": "Juz",
   "language": "Langue",
   "languages": "Langues",
+  "learn": "Apprendre",
   "learn-more": "En savoir plus",
   "learning-plans": "Plans d'Apprentissage",
   "less": "Moins",
@@ -275,6 +284,7 @@
   "mode": "Mode",
   "more": "Plus",
   "my-learning-plans": "Mes Plans d'Apprentissage",
+  "my-quran": "Mon Coran",
   "navigate": "Naviguer",
   "network": "Réseau",
   "new": "Nouveauté !",
@@ -327,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
+  "read": "Lire",
   "reading-history": "Historique de lecture",
   "reading-preference": {
     "reading": "Lecture",
@@ -366,6 +377,7 @@
   },
   "seconds": "Secondes",
   "see-new": "Voir les nouveautés",
+  "select-language": "Sélectionner la langue",
   "settings": {
     "no-tafsir-selected": "Aucun tafsir sélectionné",
     "no-translation-selected": "Aucune traduction sélectionnée",
@@ -409,6 +421,7 @@
     "by": "Trier par",
     "descending": "Décroissant"
   },
+  "stay-on-track": "🎯 Restez sur la bonne voie !",
   "style": "Style",
   "submit": "Soumettre",
   "subscribe": "S'abonner",

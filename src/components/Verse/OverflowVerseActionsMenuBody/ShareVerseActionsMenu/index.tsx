@@ -12,6 +12,7 @@ import CopyLinkIcon from '@/icons/copy-link.svg';
 import VideoIcon from '@/icons/video.svg';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
@@ -38,7 +39,7 @@ export const copyLink = (
 };
 
 type Props = {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   setSelectedMenu: (selectedMenu: VerseActionsMenuType) => void;
@@ -95,7 +96,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
     );
     router.push(
       getQuranMediaMakerNavigationUrl({
-        [QueryParam.SURAH]: verse.chapterId as string,
+        [QueryParam.SURAH]: String(verse.chapterId ?? ''),
         [QueryParam.VERSE_FROM]: String(verse.verseNumber),
         [QueryParam.VERSE_TO]: String(verse.verseNumber),
         [QueryParam.PREVIEW_MODE]: PreviewMode.DISABLED,

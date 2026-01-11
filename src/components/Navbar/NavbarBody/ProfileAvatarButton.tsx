@@ -9,7 +9,7 @@ import styles from './ProfileAvatarButton.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
-import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
+import BookmarkIconFilled from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
@@ -40,7 +40,7 @@ const MENU_ITEMS = [
     eventName: 'profile_avatar_my_quran',
     navigationUrl: getProfileNavigationUrl(),
     translationKey: 'my-quran',
-    icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
+    icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',

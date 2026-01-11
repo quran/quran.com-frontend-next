@@ -1,0 +1,275 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.endOfSurahCard {
+  padding: var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding: 0;
+  }
+
+  &.withGoalBackground.withGoalBackground.withGoalBackground {
+    background-color: var(--color-streaks-light);
+    box-shadow: none;
+  }
+}
+
+.guestState {
+  background-color: var(--color-background-default);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-medium);
+  block-size: 100%;
+  justify-content: center;
+  overflow: hidden;
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: row;
+    align-items: center;
+    block-size: calc(
+      var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)
+    ); // maintains consistent card size on mobile
+    gap: var(--spacing-small);
+    padding: var(--spacing-medium-px) var(--spacing-small-px);
+  }
+}
+
+// GUEST STATE (No Goal/Streak)
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: 0;
+    flex: 1;
+    min-inline-size: 0;
+  }
+}
+
+.titleIcon {
+  inline-size: var(--spacing-large-px);
+  block-size: var(--spacing-large-px);
+
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal-px);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+.subtitle {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  text-wrap: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.button {
+  background-color: var(--color-streaks-dark);
+  border: none;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-medium-px);
+  padding-inline: var(--spacing-small-px);
+
+  &:hover {
+    background-color: var(--color-streaks-dark);
+    color: var(--color-text-white);
+    border-color: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    block-size: auto;
+    border-radius: var(--border-radius-medium-px);
+    padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+    font-size: var(--font-size-normal);
+    margin-block-start: 0;
+    flex-shrink: 0;
+
+    // Target button content span on mobile
+    > span {
+      align-items: center;
+    }
+  }
+}
+
+.button .buttonIcon {
+  margin-inline-end: var(--spacing-xsmall);
+
+  path {
+    fill: var(--color-text-white);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    margin-inline-end: var(--spacing-small-px);
+    inline-size: var(--spacing-medium-px);
+    block-size: var(--spacing-medium-px);
+  }
+}
+
+// USER WITH GOAL/STREAK STATE
+
+// Streak Section
+.streakSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-medium2-px);
+  inline-size: 100%;
+
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-small-px);
+    inline-size: auto;
+    flex: 1;
+    justify-content: flex-start;
+  }
+}
+
+.streakIcon {
+  inline-size: calc(var(--spacing-large-px) * 2);
+  block-size: calc(var(--spacing-large-px) * 2);
+
+  path {
+    fill: var(--color-streaks-dark);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: var(--spacing-large-px);
+    block-size: var(--spacing-large-px);
+  }
+}
+
+.streakDisplay {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-small-px);
+  }
+}
+
+.streakNumber {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-black);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xxlarge-px);
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xjumbo-px);
+  }
+}
+
+.streakText {
+  font-size: var(--font-size-large-px);
+  color: var(--color-text-gray);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.streakArrowLink {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.streakArrowIcon {
+  > svg {
+    fill: var(--color-text-gray);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-medium-plus2-px);
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-xsmall-px);
+      block-size: var(--spacing-small2-px);
+    }
+  }
+}
+
+// Goal Progress Section
+.goalLink {
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  color: inherit;
+  padding-block-end: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: 0;
+  }
+}
+
+.endOfSurahGoalContent {
+  inline-size: 100%;
+  gap: var(--spacing-small);
+}
+
+// Custom styles for end-of-surah variant progressbar
+.endOfSurahGoalContent .customProgressbar {
+  block-size: auto;
+  inline-size: auto;
+  padding-inline-end: var(--spacing-medium-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline-end: var(--spacing-small-px);
+    block-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+    inline-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+
+    svg {
+      block-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+      inline-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+    }
+  }
+}
+
+// Custom styles for end-of-surah variant progressbar text
+.customProgressbarText {
+  fill: var(--color-streaks-dark);
+  font-size: var(--font-size-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xxsmall-px);
+  }
+}
+
+// Custom styles for end-of-surah variant status container
+.customStatusContainer {
+  text-align: start;
+  padding-inline-end: var(--spacing-medium2-px);
+  text-wrap: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline-end: var(--spacing-small-plus-px);
+  }
+}

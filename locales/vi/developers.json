@@ -1,0 +1,74 @@
+{
+  "api-docs": {
+    "cta": "Xem tài liệu API",
+    "header": "Tài liệu API",
+    "sub-header": "Tích hợp dữ liệu Quran.com vào ứng dụng bằng API toàn diện của chúng tôi.",
+    "title": "Tài liệu API"
+  },
+  "app-portal": {
+    "cta-explore": "Truy cập Cổng ứng dụng Kinh Qur'an",
+    "cta-oauth": "Xem hướng dẫn OAuth2.",
+    "description": "Khám phá các ứng dụng đột phá cho nhiều nhóm người dùng khác nhau.",
+    "heading": "Cổng ứng dụng Kinh Qur'an",
+    "oauth-pitch": "Sử dụng OAuth2.0 do Quran.Foundation cung cấp để người dùng truy cập lại dữ liệu của họ và tiếp tục những phần còn dang dở trên Quran.com và các ứng dụng tích hợp.",
+    "tagline": "Giới thiệu ứng dụng Qur'an của bạn"
+  },
+  "careers": {
+    "career": "Cơ hội nghề nghiệp",
+    "cta": "Xem các vị trí tuyển dụng",
+    "header": "Khám phá các vị trí đang tuyển"
+  },
+  "footer": "- Team Quran.com",
+  "header": "Hỗ trợ phát triển",
+  "hero": {
+    "subtitle": "Tài nguyên, công cụ và hướng dẫn cho lập trình viên tạo trải nghiệm Kinh Qur'an.",
+    "title": "Xây dựng với Quran.com"
+  },
+  "issues-cta": "Nếu bạn có bất kỳ câu hỏi nào hoặc muốn liên hệ với người bảo trì, chỉ cần để lại câu hỏi đó. Chúng tôi sẽ phản hồi lại bạn sớm nhất có thể, Insha'Allah.",
+  "issues-guide": "Thông thường, chúng tôi sử dụng <0>các dự án Github</0> làm nguồn thông tin về những việc cần làm tiếp theo, những dự án sắp tới và những lỗi cần được khắc phục. Ví dụ: <1>đường dẫn này</1> chứa danh sách các lỗi, những việc chúng tôi cần hỗ trợ và các tính năng sắp ra mắt.",
+  "labs": "Quran Labs",
+  "labs-cta": "Khám phá Labs",
+  "labs-description": "Khám phá các tính năng thử nghiệm từ cộng đồng và những cải tiến sắp ra mắt.",
+  "labs-pitch": "Chia sẻ ý tưởng của bạn và cùng định hình tương lai cho việc tiếp cận và trải nghiệm với Kinh Qur'an.",
+  "main-desc": "Khám phá các chương trình, công cụ và tài liệu được thiết kế để giúp bạn mở rộng hệ sinh thái của Quran.com.",
+  "projects": {
+    "all": "Chúng tôi có một số dự án, tất cả đều được lưu trữ trên Github. Bạn có thể tìm thấy tất cả chúng <0>tại đây</0>. Nhưng để tóm tắt chúng như sau:",
+    "items": {
+      "q-android": {
+        "description": "Trải nghiệm mushaf và trình phát âm thanh gốc trên Android dành cho điện thoại và máy tính bảng.",
+        "name": "Kinh Qur'an trên Android",
+        "stack": "Kotlin và Java"
+      },
+      "q-api": {
+        "description": "Ứng dụng Ruby on Rails làm hệ thống máy chủ (backend) cung cấp dữ liệu, tìm kiếm và dịch thuật Kinh Qur'an.",
+        "name": "API của Quran.com",
+        "stack": "Rails, PostgreSQL"
+      },
+      "q-audio": {
+        "description": "Nền tảng phát trực tuyến âm thanh và ứng dụng di động đi kèm dành cho việc đọc Kinh Qur'an.",
+        "name": "Âm thanh Kinh Qur'an",
+        "stack": "Ứng dụng web và di động"
+      },
+      "q-ios": {
+        "description": "Ứng dụng đọc Kinh Qur'an dựa trên Swift với tính năng đánh dấu trang, đọc kinh và hỗ trợ ngoại tuyến.",
+        "name": "Kinh Qur'an trên iOS",
+        "stack": "Swift"
+      },
+      "q-next": {
+        "description": "Trải nghiệm web Next.js dành cho việc đọc, tìm kiếm và nghe Kinh Qur'an.",
+        "name": "Giao diện người dùng của Quran.com",
+        "stack": "Lập trình bằng TypeScript và Next.js"
+      }
+    },
+    "lead": "Các dự án mã nguồn mở được duy trì bởi nhóm và cộng đồng của Quran.com.",
+    "q-android": "<0>Ứng dụng Kinh Qur'an cho Android</0> - được viết bằng Kotlin và Java.",
+    "q-api": "<0>API của Quran.com</0> - được viết bằng Ruby on Rails.",
+    "q-api-docs": "<0>Tài liệu API của Quran.com</0> - Cổng thông tin tài liệu API của chúng tôi.",
+    "q-audio": "<0>Âm thanh Kinh Qur'an</0> và <1>Ứng dụng di động Âm thanh Kinh Qur'an</1>",
+    "q-audio-segments": "<0>Các đoạn âm thanh Kinh Qur'an</0>",
+    "q-ios": "<0>Ứng dụng Kinh Qur'an cho iOS</0> - được viết bằng Swift.",
+    "q-next": "<0>Giao diện người dùng của Quran.com</0> - được viết bằng Next.js.",
+    "q-v2": "<0>Quran.com</0> - được viết bằng Ruby on Rails."
+  },
+  "thanks": "Chúng tôi rất mong nhận được sự đóng góp của bạn!"
+}

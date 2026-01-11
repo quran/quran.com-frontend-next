@@ -44,7 +44,8 @@
     "nav-drawer-open": "Buka Laci Navigasi",
     "play-surah": "Mainkan Surah {{surahName}}",
     "select-lng": "Pilih Bahasa",
-    "sidebar-nav-close": "Tutup Bar Sisi Navigasi"
+    "sidebar-nav-close": "Tutup Bar Sisi Navigasi",
+    "translation-info": "Lihat maklumat terjemahan"
   },
   "audio": {
     "auto-scroll": {
@@ -100,6 +101,7 @@
   "bookmarked": "Ditanda buku",
   "both": "Kedua-duanya",
   "cancel": "Batal",
+  "change-theme": "Tukar Tema",
   "click-here": "Tekan di sini",
   "close": "Tutup",
   "command-bar": {
@@ -139,6 +141,7 @@
     "decrease": "Mengurang",
     "increase": "Meningkat"
   },
+  "create-my-goal": "Cipta Matlamat Saya",
   "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
   "delete": "Padam",
   "developers": "Pemaju (Developers)",
@@ -162,6 +165,7 @@
     "bookmark-sync": "Penanda halaman tidak segerak.",
     "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
     "general": "Kesilapan telah berlaku. Sila cuba lagi.",
+    "language-change-failed": "Gagal menukar bahasa. Sila cuba lagi.",
     "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
     "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
     "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
@@ -244,6 +248,10 @@
   },
   "fundraising": {
     "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
+    "donation-campaign": {
+      "cta": "Derma hari ini",
+      "text": "Jadilah penyokong"
+    },
     "title": "Jadilah Penderma Bulanan"
   },
   "get-started": "Mulakan",
@@ -259,6 +267,7 @@
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
+  "learn": "Belajar",
   "learn-more": "Ketahui lebih lanjut",
   "learning-plans": "Rancangan Pembelajaran",
   "less": "Kurang",
@@ -275,6 +284,7 @@
   "mode": "Mod",
   "more": "Lagi",
   "my-learning-plans": "Rancangan Pembelajaran Saya",
+  "my-quran": "Al-Quran saya",
   "navigate": "Navigasi",
   "network": "Rangkaian",
   "new": "Terbaru!",
@@ -327,6 +337,7 @@
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
+  "read": "Baca",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
     "reading": "Membaca",
@@ -366,6 +377,7 @@
   },
   "seconds": "Saat",
   "see-new": "Lihat terbaru",
+  "select-language": "Pilih Bahasa",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",
@@ -409,6 +421,7 @@
     "by": "Disusun mengikut",
     "descending": "Menurun"
   },
+  "stay-on-track": "🎯 Kekal di landasan yang betul!",
   "style": "Gaya",
   "submit": "Hantar",
   "subscribe": "Langgan",

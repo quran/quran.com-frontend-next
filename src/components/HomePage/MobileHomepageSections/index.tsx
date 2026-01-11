@@ -15,7 +15,6 @@ import ChaptersData from 'types/ChaptersData';
 type Props = {
   isUserLoggedIn: boolean;
   todayAyah: { chapter: number; verse: number } | null;
-
   learningPlans: Course[];
 
   chaptersData?: ChaptersData;

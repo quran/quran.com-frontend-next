@@ -1,6 +1,7 @@
 {
   "add": "Agregar",
   "add-data-success": "Tus datos de lectura se han añadido correctamente.",
+  "back-to-reading-goal": "Volver al objetivo de lectura",
   "delete-goal": {
     "action": "Eliminar objetivo",
     "confirmation": {

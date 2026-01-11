@@ -1,0 +1,41 @@
+{
+  "credits": {
+    "desc": "Chúng tôi xin gửi lời tri ân chân thành đến tất cả những ai đã ủng hộ và đóng góp cho dự án này, giúp Kinh Qur'an tiếp cận được với hàng triệu người trên khắp thế giới.",
+    "lokalize": "<0>Lokalize</0>: Một hệ thống dịch thuật hỗ trợ bằng máy tính tập trung vào năng suất và đảm bảo chất lượng, cung cấp quy trình bản địa hóa liền mạch.",
+    "quran-align": "<0>Collin Fair</0>: Một công cụ để phân đoạn chính xác từng từ trong bản ghi âm bài tụng Kinh Qur'an.",
+    "quran-complex": "<0>QuranComplex</0>: Tổ hợp In ấn Kinh Qur'an Vinh Quang của Vua Fahd là đơn vị hàng đầu trong việc phục vụ Kinh Qur'an Vinh Quang và các khoa học liên quan, dịch thuật ý nghĩa của Kinh Qur'an và bảo vệ văn bản Kinh Qur'an khỏi sự xuyên tạc, thông qua việc sử dụng tối ưu các công nghệ tiên tiến trong lĩnh vực in ấn, ghi âm, xuất bản điện tử và ứng dụng kỹ thuật số.",
+    "quran-enc": "<0>QuranEnc</0>: Một cổng thông tin cung cấp các bản dịch miễn phí và đáng tin cậy về ý nghĩa và chú giải của Kinh Qur'an cao quý bằng nhiều ngôn ngữ trên thế giới.",
+    "tanzil": "<0>Tanzil</0>: Một dự án quốc tế về Kinh Qur'an nhằm cung cấp một bản văn Kinh Qur'an chính xác và được kiểm chứng cao.",
+    "tarteel": "<0>Tarteel</0>: Một ứng dụng ghi nhớ Kinh Qur'an được hỗ trợ bởi trí tuệ nhân tạo. Ứng dụng được thiết kế để giúp bạn ghi nhớ thông minh hơn, cho dù bạn đang tìm kiếm một câu kinh, theo dõi tiến độ học tập hay theo dõi cùng với bài đọc của mình.",
+    "title": "Lời cảm ơn",
+    "zekr": "<0>Zekr</0>: Một công cụ học tập Kinh Qur'an trên nền tảng mở để duyệt và nghiên cứu Kinh Qur'an."
+  },
+  "global-effort": {
+    "desc": "Hàng triệu người trên khắp thế giới tin dùng Quran.com như nguồn Kinh Qur'an số chính, một không gian tin cậy, dễ tiếp cận và đẹp mắt để đọc, suy ngẫm, học thuộc và nghiên cứu lời dạy của Allah.",
+    "title": "Nỗ lực toàn cầu"
+  },
+  "key-features": {
+    "desc": "Quran.com được tạo ra để hỗ trợ mọi cách tiếp cận Kinh Qur'an—từ đọc, học thuộc đến nghiên cứu, suy ngẫm. Các tính năng chính gồm:",
+    "features": [
+      "Giao diện Qur'an thân thiện – Trải nghiệm đọc rõ ràng trên mọi thiết bị.",
+      "Nhiều bản dịch và Tafsirs – Truy cập bản dịch đa ngôn ngữ kèm tafsir.",
+      "Bài đọc kinh âm thanh – Nghe các bài đọc chất lượng cao từ Qari nổi tiếng thế giới, kèm tính năng theo dõi từng từ.",
+      "Tìm kiếm nâng cao – Tìm câu thơ tức thì theo chủ đề hoặc từ khóa trong toàn bộ Kinh Qur'an.",
+      "Đánh dấu Ayah và ghi chú – Lưu câu kinh, viết suy ngẫm cá nhân để xem lại sau.",
+      "Tích hợp QuranReflect – Kết nối cộng đồng toàn cầu qua những suy ngẫm và hiểu biết từ học giả và cá nhân.",
+      "Theo dõi tiến độ đọc – Quản lý mục tiêu ngày và lịch sử đọc.",
+      "API dành cho nhà phát triển – Truy cập miễn phí vào nội dung và tính năng để hỗ trợ các ứng dụng Hồi giáo và hoạt động nghiên cứu & phát triển.",
+      "Và còn nhiều hơn thế nữa, Alhamdulillah."
+    ],
+    "title": "Tính năng & ưu điểm chính"
+  },
+  "main-description": "Từ khi thành lập vào năm 1995, Quran.com luôn cam kết mang Kinh Qur'an đến với mọi người một cách rõ ràng, chân thực và dễ tiếp cận. Mỗi ngày, hàng triệu người trên toàn thế giới truy cập Quran.com để đọc, nghe, nghiên cứu và suy ngẫm về Kinh Qur'an—cho dù họ là những người học tập suốt đời, các học giả, hay chỉ mới bắt đầu hành trình của mình.",
+  "our-mission": {
+    "desc": "Kinh Qur'an được mặc khải để đọc, hiểu và suy ngẫm. Chúng tôi nỗ lực xóa bỏ rào cản tiếp cận và trao quyền cho mọi người bằng trải nghiệm Kinh Qur'an đáng tin cậy, đẹp và sâu sắc, dựa trên các nguyên tắc chính xác, rõ ràng và chân thành.",
+    "title": "Sứ mệnh của chúng tôi"
+  },
+  "who-we-are": {
+    "desc": "Quran.com là một waqf (tài sản hiến tặng) thuộc quỹ tín thác công cộng, bảo đảm Kinh Qur'an luôn được mọi người truy cập miễn phí, không vì thương mại. Trang được <link>Quran.Foundation</link>, tổ chức phi lợi nhuận 501(c)(3), vận hành để cung cấp nguồn Kinh Qur'an chính thống, chất lượng cao cho thế giới, với cam kết phục vụ Kinh Qur'an và độc giả bằng sự xuất sắc, chân thành và trách nhiệm.",
+    "title": "Chúng tôi là ai"
+  }
+}

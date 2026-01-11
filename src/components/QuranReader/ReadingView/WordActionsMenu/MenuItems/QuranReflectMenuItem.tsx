@@ -8,13 +8,14 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChatIcon from '@/icons/chat.svg';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onActionTriggered?: () => void;
 }
 

@@ -15,9 +15,10 @@ import { QuranFont } from '@/types/QuranReader';
 import { WordVerse } from '@/types/Word';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   onActionTriggered?: () => void;
 }
 

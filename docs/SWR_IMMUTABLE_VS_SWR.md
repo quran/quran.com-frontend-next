@@ -18,14 +18,14 @@ Is the data user-specific? (bookmarks, preferences, notes)
 
 Answer these questions about your data:
 
-| Question | YES → | NO → |
-|----------|-------|------|
-| Can data change while user is on the page? | `useSWR` | Consider `useSWRImmutable` |
-| Can data be modified from multiple pages? | `useSWR` | Either works |
-| Do users expect cross-tab sync? | `useSWR` | Either works |
-| Is data user-specific (requires auth)? | `useSWR` | Either works |
-| Is data truly static/immutable? | `useSWRImmutable` | `useSWR` |
-| Is minimizing requests critical? | `useSWRImmutable` | `useSWR` |
+| Question                                   | YES →             | NO →                       |
+| ------------------------------------------ | ----------------- | -------------------------- |
+| Can data change while user is on the page? | `useSWR`          | Consider `useSWRImmutable` |
+| Can data be modified from multiple pages?  | `useSWR`          | Either works               |
+| Do users expect cross-tab sync?            | `useSWR`          | Either works               |
+| Is data user-specific (requires auth)?     | `useSWR`          | Either works               |
+| Is data truly static/immutable?            | `useSWRImmutable` | `useSWR`                   |
+| Is minimizing requests critical?           | `useSWRImmutable` | `useSWR`                   |
 
 ## Available Configurations
 
@@ -115,20 +115,20 @@ const { data } = useSWR(key, fetcher, mutatingFetcherConfig);
 
 ## Examples by Data Type
 
-| Data Type | Strategy | Reason |
-|-----------|----------|--------|
-| Quran verses | `useSWRImmutable` | Never changes |
-| Translations | `useSWRImmutable` | Never changes |
-| Tafsir | `useSWRImmutable` | Never changes |
-| Bookmarks | `useSWR` + config | User-mutable, multi-page |
-| Collections | `useSWR` + config | User-mutable, multi-page |
-| Notes | `useSWR` + config | User-mutable, multi-page |
-| User preferences | `useSWR` + config | User-mutable |
-| Reading progress | `useSWR` + config | Changes frequently |
-| Chapter list | `useSWRImmutable` | Static data |
-| Juz/Hizb list | `useSWRImmutable` | Static data |
-| Search results | `useSWR` | Changes per query |
-| Reciter list | `useSWRImmutable` | Rarely changes |
+| Data Type        | Strategy          | Reason                   |
+| ---------------- | ----------------- | ------------------------ |
+| Quran verses     | `useSWRImmutable` | Never changes            |
+| Translations     | `useSWRImmutable` | Never changes            |
+| Tafsir           | `useSWRImmutable` | Never changes            |
+| Bookmarks        | `useSWR` + config | User-mutable, multi-page |
+| Collections      | `useSWR` + config | User-mutable, multi-page |
+| Notes            | `useSWR` + config | User-mutable, multi-page |
+| User preferences | `useSWR` + config | User-mutable             |
+| Reading progress | `useSWR` + config | Changes frequently       |
+| Chapter list     | `useSWRImmutable` | Static data              |
+| Juz/Hizb list    | `useSWRImmutable` | Static data              |
+| Search results   | `useSWR`          | Changes per query        |
+| Reciter list     | `useSWRImmutable` | Rarely changes           |
 
 ## Cache Invalidation
 
@@ -155,14 +155,17 @@ mutate(key, newData, { revalidate: false });
 ## Common Pitfalls
 
 1. **Using `useSWRImmutable` for user data**
+
    - Problem: Cache doesn't update when user makes changes elsewhere
    - Solution: Use `useSWR` for any user-mutable data
 
 2. **Using `useSWR` for static content**
+
    - Problem: Unnecessary network requests on every tab focus
    - Solution: Use `useSWRImmutable` for truly static data
 
 3. **Forgetting cross-tab sync needs**
+
    - Problem: User edits in one tab, sees stale data in another
    - Solution: Use `useSWR` with `revalidateOnFocus: true`
 

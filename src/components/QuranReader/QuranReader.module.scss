@@ -1,8 +1,9 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 $quran-reader-padding: 3rem;
+$quran-reader-padding-mobile: 4.5rem;
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
@@ -18,15 +19,15 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .readingView {
-  min-height: 100vh;
+  min-block-size: 100vh;
   @include breakpoints.smallerThanTablet {
-    width: 85%;
+    inline-size: 85%;
   }
 }
 
 .loading {
   text-align: center;
-  max-width: 80%;
+  max-inline-size: 80%;
   margin-block-start: var(--spacing-medium);
   margin-block-end: var(--spacing-medium);
   margin-inline-start: auto;
@@ -34,6 +35,9 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: $quran-reader-padding-mobile;
+  }
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
@@ -49,6 +53,14 @@ $virtual-scrolling-height-bandage: calc(
     // TODO: we should add the banner height here if it's shown
     // padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height) + var(--banner-height));
     padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height));
+  }
+}
+
+.translationView {
+  padding-block-end: var(--spacing-xxlarge-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: var(--spacing-medium2-px);
   }
 }
 

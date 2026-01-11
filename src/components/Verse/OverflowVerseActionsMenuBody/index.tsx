@@ -9,14 +9,15 @@ import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import type Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 
 interface Props {
-  verse: WordVerse;
+  verse: WordVerse | Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string;
 }
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({

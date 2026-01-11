@@ -101,10 +101,8 @@ const ReflectionBodyContainer = ({
         surahId: selectedChapterId,
         ayahNumber: selectedVerseNumber,
         locale: lang,
-
         reviewed: true,
         reflectionLanguages: reflectionLanguageIsoCodes,
-
         postTypeIds: [
           selectedContentType === ContentType.REFLECTIONS
             ? REFLECTION_POST_TYPE_ID

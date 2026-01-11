@@ -44,7 +44,8 @@
     "nav-drawer-open": "Hapni sirtarin e navigimit",
     "play-surah": "Luaj suren {{surahName}}",
     "select-lng": "Zgjidh gjuhen",
-    "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
+    "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit",
+    "translation-info": "Shiko informacionin e përkthimit"
   },
   "audio": {
     "auto-scroll": {
@@ -100,6 +101,7 @@
   "bookmarked": "Shënuar si faqeshënues",
   "both": "të dyja",
   "cancel": "Anullo",
+  "change-theme": "Ndrysho temën",
   "click-here": "Kliko këtu",
   "close": "Mbylle",
   "command-bar": {
@@ -139,6 +141,7 @@
     "decrease": "Ulje",
     "increase": "Rrit"
   },
+  "create-my-goal": "Krijo Qëllimin Tim",
   "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
   "delete": "Fshije",
   "developers": "Zhvilluesit",
@@ -162,6 +165,7 @@
     "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
     "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
     "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
+    "language-change-failed": "Ndryshimi i gjuhës dështoi. Ju lutemi provoni përsëri.",
     "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
     "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi.",
     "ranges-no-value": "Fillimi dhe mbarimi i diapazonit duhet të kenë një vlerë",
@@ -244,6 +248,10 @@
   },
   "fundraising": {
     "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+    "donation-campaign": {
+      "cta": "Dhuro sot",
+      "text": "Bëhu një mbështetës"
+    },
     "title": "Bëhuni një donator mujor"
   },
   "get-started": "Filloni",
@@ -259,6 +267,7 @@
   "juz": "Xhuz",
   "language": "Gjuhë",
   "languages": "Gjuhët",
+  "learn": "Mëso",
   "learn-more": "Mëso më shumë",
   "learning-plans": "Planet mësimore",
   "less": "Më pak",
@@ -275,6 +284,7 @@
   "mode": "Modaliteti",
   "more": "Më shumë",
   "my-learning-plans": "Planet e mia të mësimit",
+  "my-quran": "Kurani im",
   "navigate": "Navigoni",
   "network": "Rrjeti",
   "new": "I ri!",
@@ -327,6 +337,7 @@
   "q-reflect": "Kurani Reflekto",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
+  "read": "Lexo",
   "reading-history": "Leximi i historisë",
   "reading-preference": {
     "reading": "Leximi",
@@ -366,6 +377,7 @@
   },
   "seconds": "Sekonda",
   "see-new": "Shihni çfarë ka të re",
+  "select-language": "Zgjidh Gjuhën",
   "settings": {
     "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
     "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
@@ -409,6 +421,7 @@
     "by": "Ndaj sipas",
     "descending": "Duke zbritur"
   },
+  "stay-on-track": "🎯 Qëndroni në rrugën e duhur!",
   "style": "Stili",
   "submit": "Paraqisni",
   "subscribe": "Abonohu",

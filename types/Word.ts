@@ -1,5 +1,6 @@
 import Translation from './Translation';
 import Transliteration from './Transliteration';
+import type Verse from './Verse';
 import type VerseTiming from './VerseTiming';
 
 export enum CharType {
@@ -37,8 +38,7 @@ interface Word {
   highlight?: string | boolean;
   text?: string;
   audioUrl: $TsFixMe;
-  verse?: WordVerse;
+  verse?: WordVerse | Verse;
   [key: string]: $TsFixMe;
 }
-
 export default Word;

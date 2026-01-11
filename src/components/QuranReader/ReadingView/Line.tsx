@@ -1,21 +1,26 @@
-import { memo, RefObject, useContext, useEffect } from 'react';
+import { memo, RefObject, useCallback, useContext, useRef } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { QURAN_READER_OBSERVER_ID } from '../observer';
 import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
+import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
+import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
 
@@ -40,6 +45,9 @@ const Line = ({
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { surah, ayahNumber } = state.context;
     const verseKeys = words.map((word) => word.verseKey);
     return verseKeys.includes(`${surah}:${ayahNumber}`);
@@ -48,6 +56,21 @@ const Line = ({
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
+  // Register with intersection observer for page tracking
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
+
+  // Merge refs for both auto-scroll and observer
+  const mergedRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      // Update both refs
+      if (selectedItemRef) {
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+      observerRef.current = node;
+    },
+    [selectedItemRef],
+  );
   const { isActive } = useOnboarding();
   // disable auto scrolling when the user is onboarding
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
@@ -56,22 +79,41 @@ const Line = ({
     shallowEqual,
   );
 
-  useEffect(() => {
-    if (isHighlighted && enableAutoScrolling) {
-      scrollToSelectedItem();
-    }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
-
+  // Use the custom hook for navbar auto-hide functionality
+  useNavbarAutoHide(isHighlighted && enableAutoScrolling, scrollToSelectedItem, [
+    enableAutoScrolling,
+    isHighlighted,
+    scrollToSelectedItem,
+  ]);
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const translationsCount = words[0].verse?.translationsCount;
-  const translationsLabel = words[0].verse?.translationsLabel;
+  const { verse } = words[0];
+  const verseTranslations = verse && 'translations' in verse ? verse.translations : undefined;
+  const translationsLabel =
+    verse && 'translationsLabel' in verse ? verse.translationsLabel : undefined;
+  const translationsCount =
+    verse && 'translationsCount' in verse
+      ? verse.translationsCount
+      : verseTranslations?.length ?? 0;
+  const translationName =
+    verseTranslations?.length > 0
+      ? getTranslationNameString(verseTranslations)
+      : translationsLabel || getTranslationNameString(undefined);
+
+  // Get data from first word for page tracking
+  const firstWord = words[0];
+  const { verseKey, pageNumber, hizbNumber } = firstWord;
+  const chapterId = firstWordData[0];
 
   return (
     <div
-      ref={selectedItemRef}
+      ref={mergedRef}
       id={lineKey}
+      data-verse-key={verseKey}
+      data-page={pageNumber}
+      data-chapter-id={chapterId}
+      data-hizb={hizbNumber}
       className={classNames(styles.container, {
         [styles.highlighted]: isHighlighted,
         [styles.mobileInline]: isBigTextLayout,
@@ -79,11 +121,9 @@ const Line = ({
     >
       {shouldShowChapterHeader && (
         <ChapterHeader
-          translationsLabel={translationsLabel}
+          translationName={translationName}
           translationsCount={translationsCount}
           chapterId={firstWordData[0]}
-          pageNumber={words[0].pageNumber}
-          hizbNumber={words[0].hizbNumber}
           isTranslationView={false}
         />
       )}

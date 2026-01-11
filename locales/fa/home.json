@@ -13,6 +13,7 @@
   "my-quran": "قرآن من",
   "navigate-quran": "در قرآن سیر کنید",
   "no-bookmarks": "شما هنوز هیچ نشانکی ندارید",
+  "no-page-bookmarks": "شما هنوز هیچ نشانک صفحه‌ای ندارید",
   "no-recently-read": "شما هنوز هیچ جلسه خواندنی ندارید",
   "noble-quran": "قرآن کریم",
   "popular": "محبوب",
@@ -59,6 +60,7 @@
   "stay-consistent": "رگه ها را دنبال کنید، اهداف سفارشی ایجاد کنید، ثابت بمانید",
   "tab": {
     "bookmarks": "نشانک ها",
+    "page-bookmarks": "صفحات",
     "popular": "محبوب"
   },
   "take-notes": "آیا تا به حال یادداشت‌های <modalLink> را از دست داده‌اید؟ </modalLink>",
