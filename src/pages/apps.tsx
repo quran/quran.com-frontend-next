@@ -274,7 +274,7 @@ interface BrowseAppsProps {
   ctaLabels: AppCtaLabels;
 }
 
-const path = '/app-portal';
+const path = '/apps';
 
 interface HeroProps {
   title: string;
@@ -579,8 +579,19 @@ const BrowseApps: FC<BrowseAppsProps> = ({
 };
 
 const AppPortalPage: NextPage = () => {
-  const { t, lang } = useTranslation('app-portal');
+  const { t: tApps, lang } = useTranslation('apps');
+  const { t: tAppPortal } = useTranslation('app-portal');
   const { t: tCommon } = useTranslation('common');
+
+  // Prefer apps namespace; fallback to app-portal because most strings still live there across locales.
+  // Keep both namespaces mapped for /apps in i18n.json until Lokalise migration completes.
+  const t = useCallback(
+    (key: string) => {
+      const value = tApps(key);
+      return value === key ? tAppPortal(key) : value;
+    },
+    [tApps, tAppPortal],
+  );
 
   const featuredApps = useMemo(() => getFeaturedApps(t), [t]);
   const appTiles = useMemo(() => getAppTiles(t), [t]);
