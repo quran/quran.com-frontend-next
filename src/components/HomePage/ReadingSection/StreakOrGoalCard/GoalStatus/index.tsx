@@ -21,9 +21,15 @@ type Props = {
   currentActivityDay: CurrentQuranActivityDay;
   goal: QuranGoalStatus;
   percent: number;
+  shouldShowOnlyLargestTimeUnit?: boolean;
 };
 
-const GoalStatus: React.FC<Props> = ({ currentActivityDay, goal, percent }) => {
+const GoalStatus: React.FC<Props> = ({
+  currentActivityDay,
+  goal,
+  percent,
+  shouldShowOnlyLargestTimeUnit,
+}) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
   if (!goal) return null;
@@ -67,12 +73,16 @@ const GoalStatus: React.FC<Props> = ({ currentActivityDay, goal, percent }) => {
       />
     );
   } else if (goalType === GoalType.TIME) {
+    let timeDisplay = secondsToShortReadableFormat(goal.progress.amountLeft, lang);
+    if (shouldShowOnlyLargestTimeUnit) {
+      // Only show the first/largest unit (e.g., "1 hour" from "1 hour, 5 minutes, 12 seconds")
+      const firstUnit = timeDisplay.split(',')[0];
+      timeDisplay = firstUnit;
+    }
     subSection = (
       <>
         <span className={styles.remaining}>{`${t('remaining-base')}:`}</span>{' '}
-        <span className={styles.remainingValue}>
-          {secondsToShortReadableFormat(goal.progress.amountLeft, lang)}
-        </span>
+        <span className={styles.remainingValue}>{timeDisplay}</span>
       </>
     );
   } else if (goalType === GoalType.PAGES) {
