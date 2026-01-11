@@ -120,6 +120,17 @@
   "text-copied": "คัดลอกข้อความไปยังคลิปบอร์ดแล้ว!",
   "trans-change": "เปลี่ยน",
   "translation-by": "แปลโดย",
+  "translation-feedback": {
+    "feedback": "ข้อเสนอแนะ",
+    "no-translations-in-preferences": "ไม่มีการแปลในการตั้งค่าของคุณ",
+    "placeholder": "โปรดใช้พื้นที่นี้เพื่อรายงานปัญหาที่เกี่ยวข้องกับการแปลอายะห์ที่เลือกไว้",
+    "report": "รายงาน",
+    "select": "เลือก...",
+    "select-translation": "เลือกคำแปล:",
+    "submission-success": "ข้อเสนอแนะของคุณถูกส่งเรียบร้อยแล้ว",
+    "title": "ข้อเสนอแนะเกี่ยวกับการแปล",
+    "translation": "การแปล"
+  },
   "verses-range": "ช่วงของอายะห์",
   "view-on-quran-reflect": "ดูคัมภีร์กุรอานสะท้อน"
 }

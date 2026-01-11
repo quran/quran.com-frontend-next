@@ -120,6 +120,17 @@
   "text-copied": "Teks telah disalin ke papan keratan!",
   "trans-change": "Ubah",
   "translation-by": "Di terjemahkan oleh",
+  "translation-feedback": {
+    "feedback": "Maklum balas",
+    "no-translations-in-preferences": "Tiada terjemahan dalam pilihan anda",
+    "placeholder": "Gunakan ruang ini untuk melaporkan isu berkaitan dengan terjemahan pilihan bagi Ayat ini.",
+    "report": "Laporan",
+    "select": "Pilih...",
+    "select-translation": "Pilih terjemahan:",
+    "submission-success": "Maklum balas anda berjaya dihantar",
+    "title": "Maklum Balas Terjemahan",
+    "translation": "Terjemahan"
+  },
   "verses-range": "Jarak rangka ayat",
   "view-on-quran-reflect": "Lihat di QuranReflect"
 }

@@ -120,6 +120,17 @@
   "text-copied": "Il testo è stato copiato negli appunti!",
   "trans-change": "Modificare",
   "translation-by": "Traduzione di",
+  "translation-feedback": {
+    "feedback": "Feedback",
+    "no-translations-in-preferences": "Nessuna traduzione nelle tue preferenze",
+    "placeholder": "Utilizza questo spazio per segnalare un problema relativo alla traduzione selezionata di questo Ayah.",
+    "report": "Rapporto",
+    "select": "Selezionare...",
+    "select-translation": "Seleziona la traduzione:",
+    "submission-success": "Il tuo feedback è stato inviato con successo",
+    "title": "Feedback sulla traduzione",
+    "translation": "Traduzione"
+  },
   "verses-range": "Gamma di versi",
   "view-on-quran-reflect": "Visualizza su QuranReflect"
 }
