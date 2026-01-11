@@ -9,10 +9,9 @@ import useTranslationFeedbackForm from './useTranslationFeedbackForm';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import TextArea from '@/dls/Forms/TextArea';
-import { WordVerse } from '@/types/Word';
 
 interface TranslationFeedbackModalProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   onClose: () => void;
 }
 

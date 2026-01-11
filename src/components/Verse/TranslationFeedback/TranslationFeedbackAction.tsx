@@ -10,13 +10,12 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import FeedbackIcon from '@/icons/translation-feedback.svg';
-import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 interface TranslationFeedbackActionProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   isTranslationView: boolean;
   onActionTriggered?: () => void;
 }
