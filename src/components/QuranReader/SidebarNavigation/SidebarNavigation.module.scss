@@ -15,11 +15,6 @@ $top-menu-height: calc(
     var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
     var(--mobile-reading-mode-tabs-height)
 );
-$context-menu-height: calc(
-  $navbar-height + var(--context-menu-container-height-visible) +
-    var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
-    var(--mobile-reading-mode-tabs-height)
-);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
@@ -161,9 +156,9 @@ $isNavbarVisible: var(--isNavbarVisible);
   }
 
   &[data-is-homepage='false'] {
-    transform: translateY($context-menu-height);
+    transform: translateY($top-menu-height);
     [dir='rtl'] & {
-      transform: translateY($context-menu-height);
+      transform: translateY($top-menu-height);
     }
   }
 }
@@ -200,9 +195,9 @@ $isNavbarVisible: var(--isNavbarVisible);
     }
 
     &[data-is-homepage='false'] {
-      transform: translateY($context-menu-height);
+      transform: translateY($top-menu-height);
       [dir='rtl'] & {
-        transform: translateY($context-menu-height);
+        transform: translateY($top-menu-height);
       }
     }
   }
