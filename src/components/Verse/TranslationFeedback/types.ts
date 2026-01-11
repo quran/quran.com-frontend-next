@@ -1,5 +1,3 @@
-import { WordVerse } from '@/types/Word';
-
 export enum FormErrorId {
   RequiredField = 'required-field',
   MinimumLength = 'minimum-length',
@@ -18,6 +16,6 @@ export interface TranslationFeedbackFormErrors {
 }
 
 export interface UseTranslationFeedbackFormProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   onClose: () => void;
 }

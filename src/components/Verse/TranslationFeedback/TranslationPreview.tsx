@@ -8,7 +8,6 @@ import Loader from '@/components/QuranReader/Loader';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { VersesResponse } from '@/types/ApiResponses';
-import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 const TRANSLATION_PREVIEW_FONT_SCALE = 2; // Scale 2 corresponds to 16px font size according to design specifications
@@ -32,7 +31,7 @@ const findSelectedTranslation = (data: VersesResponse, selectedTranslationId: st
 };
 
 interface TranslationPreviewProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   selectedTranslationId: string;
 }
 
