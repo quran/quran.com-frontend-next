@@ -1,8 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-$pixel: 1px;
-
 .container {
   background: var(--color-background-elevated);
   color: var(--color-text-default);
@@ -11,7 +9,7 @@ $pixel: 1px;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   inline-size: 100%;
-  inset-block-start: calc($pixel * -1);
+  inset-block-start: calc(var(--context-menu-inset-height) * -1);
   min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;

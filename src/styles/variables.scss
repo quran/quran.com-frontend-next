@@ -7,6 +7,9 @@
   // TODO: migrate constants.scss to use css variables
   --navbar-height: 3.6rem;
   --navbar-container-height: var(--navbar-height);
+  --context-menu-inset-height: 1px;
+  --context-menu-inset-height-visible: 1px;
+  --context-menu-inset-height-hidden: 0px;
   --context-menu-container-height: 3rem;
   --context-menu-container-height-visible: 3rem;
   --context-menu-container-height-hidden: 0rem;
