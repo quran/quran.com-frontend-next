@@ -17,6 +17,7 @@ import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '
 import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import REVELATION_ORDER from '@/utils/revelationOrder';
 
 interface ReadMoreCardProps {
   cardClassName?: string;
@@ -56,6 +57,15 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
     ? getChapterData(chaptersData, String(prevChapterNumber))
     : null;
 
+  // Display number: revelation order position when in revelation order, otherwise actual chapter number
+  const getDisplayNumber = (chapterNum: number | null) => {
+    if (!chapterNum) return null;
+    if (!isReadingByRevelationOrder) return chapterNum;
+    return REVELATION_ORDER.indexOf(chapterNum) + 1;
+  };
+  const nextDisplayNumber = getDisplayNumber(nextChapterNumber);
+  const prevDisplayNumber = getDisplayNumber(prevChapterNumber);
+
   const nextSummary = useMemo(() => pickRandom(nextSummaries), [nextSummaries]);
   const prevSummary = useMemo(() => pickRandom(previousSummaries), [previousSummaries]);
 
@@ -88,7 +98,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
         {canShowNext && (
           <ChapterLink
             chapter={nextChapter}
-            chapterNumber={nextChapterNumber}
+            chapterNumber={nextDisplayNumber}
             navigationUrl={getSurahNavigationUrl(nextChapterNumber as number)}
             summary={nextSummary}
             isNext
@@ -96,7 +106,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
             badgeLabel={t('common:next')}
             ariaLabel={t('quran-reader:end-of-surah.next-surah-aria-label', {
               surahName: nextChapter.transliteratedName,
-              surahNumber: nextChapterNumber,
+              surahNumber: nextDisplayNumber,
             })}
           />
         )}
@@ -104,7 +114,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
         {canShowPrev && (
           <ChapterLink
             chapter={prevChapter}
-            chapterNumber={prevChapterNumber}
+            chapterNumber={prevDisplayNumber}
             navigationUrl={getSurahNavigationUrl(prevChapterNumber as number)}
             summary={prevSummary}
             isNext={false}
@@ -112,7 +122,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
             badgeLabel={t('common:prev')}
             ariaLabel={t('quran-reader:end-of-surah.previous-surah-aria-label', {
               surahName: prevChapter.transliteratedName,
-              surahNumber: prevChapterNumber,
+              surahNumber: prevDisplayNumber,
             })}
           />
         )}
