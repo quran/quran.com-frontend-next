@@ -26,6 +26,13 @@
     @include breakpoints.tablet {
       inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-start: 0 !important;
+      }
+    }
   }
 
   &.right {
@@ -33,6 +40,13 @@
 
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
+    }
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-end: 0 !important;
+      }
     }
   }
 
@@ -44,6 +58,13 @@
     overflow-y: visible !important;
     overflow-x: visible;
     overscroll-behavior-y: auto !important;
+
+    @include breakpoints.smallerThanTablet {
+      inset-block-start: var(--navbar-height);
+      inset-block-end: auto;
+      border-radius: var(--border-radius-rounded);
+      transform: translateY(100%);
+    }
   }
 }
 
@@ -53,10 +74,24 @@
 
   &.left {
     inset-inline-start: 0;
+
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        transform: translateY(0);
+      }
+    }
   }
 
   &.right {
     inset-inline-end: 0;
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-end: 0 !important;
+        transform: translateY(0);
+      }
+    }
   }
 }
 
@@ -143,4 +178,8 @@
 
 .navbarInvisible {
   padding-block-start: var(--navbar-container-height);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--navbar-height);
+  }
 }

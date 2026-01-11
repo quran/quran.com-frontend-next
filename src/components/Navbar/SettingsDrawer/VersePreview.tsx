@@ -24,7 +24,7 @@ const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const HIGHLIGHTED_WORD_POSITION = 3;
 
 const VersePreview = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const settingsTheme: { type: ThemeType } = useSelector(selectTheme, shallowEqual);
   const { themeVariant } = useThemeDetector();

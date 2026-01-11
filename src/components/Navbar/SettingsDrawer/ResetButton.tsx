@@ -67,7 +67,7 @@ const ResetButton = () => {
 
   return (
     <Button onClick={onResetSettingsClicked} data-testid="reset-settings-button">
-      {t('settings.reset-cta')}
+      {t('settings.reset')}
     </Button>
   );
 };

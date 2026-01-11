@@ -121,5 +121,11 @@
   "trans-change": "Change",
   "translation-by": "Translation by",
   "verses-range": "Range of verses",
-  "view-on-quran-reflect": "View on QuranReflect"
+  "view-on-quran-reflect": "View on QuranReflect",
+  "arabic": "Arabic",
+  "done": "Done",
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "on-click": "On Click:",
+  "below-word": "Below word:",
+  "verse-preview-title": "Preview:"
 }

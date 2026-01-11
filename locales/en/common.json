@@ -37,7 +37,6 @@
     }
   },
   "answers": "Answers",
-  "arabic": "Arabic",
   "aria": {
     "change-settings": "Change Settings",
     "drawer-close": "Close Drawer",
@@ -151,7 +150,6 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
-  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -486,19 +484,15 @@
     "voice-search-powered-by": "Voice Search Powered by"
   },
   "wbw": "Word By Word",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
   "wbw-lang-summary": "Word by word translation source: <link>{{source}}</link>. This source is independent of the verse translation selection.",
   "wbw-trans-lang": "Word By Word Language",
   "wbw-translation": "Word By Word Translation",
   "wbw-transliteration": "Word By Word Transliteration",
-  "on-click": "On Click:",
-  "below-word": "Below word:",
   "word-click": {
     "no-audio": "No Audio",
     "play-audio": "Play Audio",
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes",
-  "verse-preview-title": "Preview:"
+  "yes": "Yes"
 }

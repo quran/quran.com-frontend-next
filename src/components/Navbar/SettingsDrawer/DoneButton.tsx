@@ -7,7 +7,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 const DoneButton = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
 
   const onDoneClicked = () => {
     logButtonClick('done_settings');

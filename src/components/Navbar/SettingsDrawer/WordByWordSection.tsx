@@ -180,7 +180,7 @@ const WordByWordSection = () => {
           <SpinnerContainer isLoading={isLoading}>
             <span className={styles.title}>{t('wbw')}</span>
           </SpinnerContainer>
-          <HelperTooltip>{t('wbw-helper-text')}</HelperTooltip>
+          <HelperTooltip>{t('quran-reader:wbw-helper-text')}</HelperTooltip>
         </div>
         <DataFetcher
           queryKey={makeWordByWordTranslationsUrl(lang)}
@@ -208,7 +208,7 @@ const WordByWordSection = () => {
       </div>
       <Section.Row>
         <div>
-          <p className={styles.sectionLabel}>{t('on-click')}</p>
+          <p className={styles.sectionLabel}>{t('quran-reader:on-click')}</p>
           <div className={styles.checkboxContainer}>
             <div id="wbw-translation-section">
               <CheckboxChip
@@ -244,7 +244,7 @@ const WordByWordSection = () => {
       </Section.Row>
       <Section.Row>
         <div>
-          <p className={styles.sectionLabel}>{t('below-word')}</p>
+          <p className={styles.sectionLabel}>{t('quran-reader:below-word')}</p>
           <div className={styles.checkboxContainer}>
             <CheckboxChip
               checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}

@@ -19,7 +19,7 @@ const SettingTabs = () => {
   const { t } = useTranslation('common');
 
   const tabs = [
-    { id: SettingTab.Arabic, label: t('arabic') },
+    { id: SettingTab.Arabic, label: t('quran-reader:arabic') },
     { id: SettingTab.Translation, label: t('translation') },
     { id: SettingTab.More, label: t('more') },
   ];
