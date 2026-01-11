@@ -144,7 +144,7 @@ const ReflectionItem: React.FC<Props> = ({
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
           }}
         />
-        {visibleTextLength >= MAX_REFLECTION_LENGTH && (
+        {visibleTextLength > MAX_REFLECTION_LENGTH && (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <span
             className={styles.moreOrLessText}

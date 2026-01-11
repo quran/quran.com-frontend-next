@@ -88,20 +88,6 @@ function truncate(string, maxLength, options?) {
   }
 
   /**
-   * Get the visible text length (excluding HTML tags)
-   * Counts <br> tags as 1 character (newline equivalent)
-   *
-   * @private
-   * @function _getVisibleLength
-   * @param {string} string html string
-   * @returns {number} visible text length
-   */
-  function _getVisibleLength(string) {
-    const withBrAsNewline = string.replace(/<br\s*\/?>/gi, '\n');
-    return withBrAsNewline.replace(/<[^>]*>/g, '').length;
-  }
-
-  /**
    * Process tag string to get pure tag name
    *
    * @private
@@ -261,7 +247,7 @@ function truncate(string, maxLength, options?) {
     string = string.substring(index + result.length);
   }
 
-  if (string.length > 0 && _getVisibleLength(string) > 0 && options.ellipsis) {
+  if (string.length > 0 && getVisibleTextLength(string) > 0 && options.ellipsis) {
     content += options.ellipsis;
   }
   content += _dumpCloseTag(items);
