@@ -199,7 +199,8 @@
     "verification-code-invalid": "This verification code is invalid",
     "verification-code-length": "Verification code must be {{length}} digits",
     "verification-failed": "Verification failed. Please try again.",
-    "verification-resend-failed": "Failed to resend verification code"
+    "verification-resend-failed": "Failed to resend verification code",
+    "verse-metadata-failed": "Failed to load verse metadata"
   },
   "exciting-updates": "Exciting Updates",
   "feedback": "Feedback",
