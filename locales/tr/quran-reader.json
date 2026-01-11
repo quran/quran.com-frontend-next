@@ -120,6 +120,17 @@
   "text-copied": "Metin panoya kopyalandı!",
   "trans-change": "Değiştir",
   "translation-by": "Çeviri:",
+  "translation-feedback": {
+    "feedback": "Geri bildirim",
+    "no-translations-in-preferences": "Tercihlerinizde çeviri yok.",
+    "placeholder": "Bu ayetin seçilen çevirisiyle ilgili bir sorunu bildirmek için bu alanı kullanın.",
+    "report": "Rapor",
+    "select": "Seçme...",
+    "select-translation": "Çeviri seçin:",
+    "submission-success": "Geri bildiriminiz başarıyla gönderildi.",
+    "title": "Çeviri Geri Bildirimi",
+    "translation": "Çeviri"
+  },
   "verses-range": "Ayet aralığı",
   "view-on-quran-reflect": "Kuran'da görüntüle"
 }

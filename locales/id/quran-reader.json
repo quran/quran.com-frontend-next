@@ -120,6 +120,17 @@
   "text-copied": "Teks telah disalin ke papan klip!",
   "trans-change": "Ubah",
   "translation-by": "Diterjemahkan oleh",
+  "translation-feedback": {
+    "feedback": "Masukan",
+    "no-translations-in-preferences": "Tidak ada terjemahan di preferensi Anda",
+    "placeholder": "Gunakan ruang ini untuk melaporkan masalah yang berkaitan dengan terjemahan ayat yang dipilih ini.",
+    "report": "Laporan",
+    "select": "Memilih...",
+    "select-translation": "Pilih terjemahan:",
+    "submission-success": "Masukan Anda telah berhasil dikirim.",
+    "title": "Umpan Balik Terjemahan",
+    "translation": "Terjemahan"
+  },
   "verses-range": "Jangkauan ayat",
   "view-on-quran-reflect": "Lihat di QuranReflect"
 }

@@ -120,6 +120,17 @@
   "text-copied": "Teksti është kopjuar në kujtesë!",
   "trans-change": "Ndryshimi",
   "translation-by": "Përkthim nga",
+  "translation-feedback": {
+    "feedback": "Reagime",
+    "no-translations-in-preferences": "Nuk ka përkthime në preferencat tuaja",
+    "placeholder": "Përdoreni këtë hapësirë për të raportuar një problem që lidhet me përkthimin e zgjedhur të këtij Ajeti.",
+    "report": "Raporto",
+    "select": "Zgjidh...",
+    "select-translation": "Zgjidhni përkthimin:",
+    "submission-success": "Reagimi juaj u dërgua me sukses",
+    "title": "Reagime për përkthimin",
+    "translation": "Përkthim"
+  },
   "verses-range": "Gama e vargjeve",
   "view-on-quran-reflect": "Shiko në QuranReflect"
 }

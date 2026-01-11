@@ -120,6 +120,17 @@
   "text-copied": "文本已复制到剪贴板！",
   "trans-change": "修改",
   "translation-by": "翻译者",
+  "translation-feedback": {
+    "feedback": "反馈",
+    "no-translations-in-preferences": "您的偏好设置中没有翻译",
+    "placeholder": "请在此处报告与所选经文翻译相关的问题。",
+    "report": "报告",
+    "select": "选择...",
+    "select-translation": "选择翻译：",
+    "submission-success": "您的反馈已成功发送。",
+    "title": "翻译反馈",
+    "translation": "翻译"
+  },
   "verses-range": "节文范围",
   "view-on-quran-reflect": "查看 QuranReflect"
 }
