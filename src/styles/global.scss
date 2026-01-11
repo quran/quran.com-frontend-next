@@ -114,12 +114,3 @@ select option {
     --page-info-container-height-visible: var(--page-info-container-height-hidden);
   }
 }
-
-nextjs-portal {
-  display: none;
-}
-
-body {
-  padding: 0 !important;
-  overflow: auto !important;
-}
