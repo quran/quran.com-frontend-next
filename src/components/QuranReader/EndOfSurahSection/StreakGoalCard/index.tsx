@@ -105,6 +105,7 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
                 progressbarText: styles.customProgressbarText,
                 statusContainer: styles.customStatusContainer,
               }}
+              showOnlyLargestTimeUnit={isMobile}
             />
           </Link>
         ) : (

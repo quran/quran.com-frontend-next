@@ -227,12 +227,18 @@
 
   @include breakpoints.smallerThanTablet {
     padding-block-end: 0;
+    min-width: 0;
+    flex: 1;
   }
 }
 
 .endOfSurahGoalContent {
   width: 100%;
   gap: var(--spacing-small);
+
+  @include breakpoints.smallerThanTablet {
+    min-width: 0;
+  }
 }
 
 // Custom styles for end-of-surah variant progressbar
@@ -273,6 +279,8 @@
 
   @include breakpoints.smallerThanTablet {
     padding-inline-end: var(--spacing-small-plus-px);
+    text-wrap: wrap;
+    min-width: 0;
+    overflow: hidden;
   }
-
 }

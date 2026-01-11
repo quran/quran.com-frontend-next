@@ -27,6 +27,7 @@ export type ReadingGoalCardContentProps = {
     statusContainer?: string;
   };
   onArrowClick?: () => void;
+  showOnlyLargestTimeUnit?: boolean;
 };
 
 /**
@@ -43,6 +44,7 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
   className,
   classes,
   onArrowClick,
+  showOnlyLargestTimeUnit,
 }) => {
   const { lang } = useTranslation();
 
@@ -72,7 +74,12 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
             />
           </div>
           <div className={classNames(styles.goalStatusContainer, classes?.statusContainer)}>
-            <GoalStatus goal={goal} currentActivityDay={currentActivityDay} percent={percent} />
+            <GoalStatus
+              goal={goal}
+              currentActivityDay={currentActivityDay}
+              percent={percent}
+              showOnlyLargestTimeUnit={showOnlyLargestTimeUnit}
+            />
           </div>
           {shouldShowArrow &&
             (onArrowClick ? (
