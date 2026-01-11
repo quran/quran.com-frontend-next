@@ -1,6 +1,21 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
-@use "src/styles/constants";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+@use 'src/styles/constants';
+
+@mixin roundedTopBorders {
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  @include breakpoints.tablet {
+    border-radius: 0;
+  }
+}
+
+.wrapperSheets {
+  --spread: calc(var(--spacing-medium-px) + var(--spacing-small-px));
+  background-color: var(--color-background-elevated-new);
+  box-shadow: 0 calc(var(--spacing-micro-px) * 2) var(--spread) calc(var(--spread) * -1)
+    rgba(0, 0, 0, 0.1);
+  @include roundedTopBorders;
+}
 
 .container {
   @include utility.pageContainer();
@@ -34,7 +49,12 @@
 
   &.lessonView {
     @include breakpoints.tablet {
-      width: 80%;
+      inline-size: 80%;
     }
+  }
+
+  &.sheets {
+    @include roundedTopBorders;
+    padding: var(--spacing-medium2-px);
   }
 }
