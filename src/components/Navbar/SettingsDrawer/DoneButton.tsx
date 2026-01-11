@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -15,7 +15,7 @@ const DoneButton = () => {
   };
 
   return (
-    <Button onClick={onDoneClicked} variant={ButtonVariant.Primary} data-testid="done-settings-button">
+    <Button onClick={onDoneClicked} data-testid="done-settings-button">
       {t('done')}
     </Button>
   );

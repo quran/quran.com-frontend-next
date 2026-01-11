@@ -37,6 +37,7 @@
     }
   },
   "answers": "Answers",
+  "arabic": "Arabic",
   "aria": {
     "change-settings": "Change Settings",
     "drawer-close": "Close Drawer",
@@ -150,6 +151,7 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",

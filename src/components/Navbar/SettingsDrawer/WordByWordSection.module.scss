@@ -23,9 +23,9 @@
 }
 
 .checkboxContainer {
-  & > div {
-    margin-inline-start: var(--spacing-xxsmall);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small-px);
 }
 
 .separator {
