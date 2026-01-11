@@ -3,7 +3,6 @@ import React, { memo, useContext } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import getTranslationsLabelString from '../ReadingView/utils/translation';
@@ -46,9 +45,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   bookmarksRangeUrl,
   hasNotes,
 }) => {
-  const router = useRouter();
-  const { startingVerse } = router.query;
-
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
     const { ayahNumber, surah } = state.context;
@@ -62,14 +58,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   // Use our custom hook that handles scrolling with context menu offset
   const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();
 
-  const shouldTrigger =
-    (isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1;
+  const shouldTrigger = isHighlighted && enableAutoScrolling;
   useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, [
     enableAutoScrolling,
     isHighlighted,
     scrollToSelectedItem,
-    startingVerse,
-    verseIndex,
   ]);
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
