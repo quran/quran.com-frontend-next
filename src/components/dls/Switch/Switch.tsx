@@ -25,6 +25,9 @@ export enum SwitchVariant {
   Alternative = 'alternative',
 }
 type SwitchProps = {
+  hasSeparator?: boolean;
+  buttonClassName?: string;
+  containerClassName?: string;
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
@@ -33,6 +36,9 @@ type SwitchProps = {
 };
 
 const Switch = ({
+  hasSeparator = true,
+  buttonClassName,
+  containerClassName,
   items,
   onSelect,
   selected,
@@ -43,7 +49,7 @@ const Switch = ({
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, {
+      className={classNames(styles.container, containerClassName, {
         [styles.xSmallContainer]: size === SwitchSize.XSmall,
         [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
       })}
@@ -52,12 +58,19 @@ const Switch = ({
         <button
           disabled={item.disabled}
           type="button"
-          className={classNames(styles.item, selected === item.value && styles.itemSelected, {
-            [styles.itemLarge]: size === SwitchSize.Large,
-            [styles.itemNormal]: size === SwitchSize.Normal,
-            [styles.itemSmall]: size === SwitchSize.Small,
-            [styles.itemXSmall]: size === SwitchSize.XSmall,
-          })}
+          data-testid={`${item.value}-button`}
+          data-is-selected={selected === item.value}
+          className={classNames(
+            styles.item,
+            buttonClassName,
+            selected === item.value && styles.itemSelected,
+            {
+              [styles.itemLarge]: size === SwitchSize.Large,
+              [styles.itemNormal]: size === SwitchSize.Normal,
+              [styles.itemSmall]: size === SwitchSize.Small,
+              [styles.itemXSmall]: size === SwitchSize.XSmall,
+            },
+          )}
           key={item.value}
           onClick={() => onSelect(item.value)}
         >
@@ -65,8 +78,8 @@ const Switch = ({
         </button>
       ))}
 
-      {/* seprator  */}
-      {items.length > 2 &&
+      {hasSeparator &&
+        items.length > 2 &&
         range(1, items.length).map((i) => {
           return (
             <div

@@ -9,7 +9,7 @@ import styles from './ProfileAvatarButton.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
-import BookmarkIconFilled from '@/icons/bookmark_filled.svg';
+import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
@@ -27,6 +27,7 @@ import {
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  ROUTES,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -38,9 +39,9 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: getProfileNavigationUrl(),
+    navigationUrl: ROUTES.MY_QURAN,
     translationKey: 'my-quran',
-    icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
+    icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',
@@ -117,6 +118,7 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
             shouldFlipOnRTL={false}
+            data-testid="profile-avatar-button"
           >
             <IconPerson />
           </Button>
