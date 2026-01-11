@@ -1,7 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-$sections-container-height: 2rem;
 $pixel: 1px;
 
 .container {
@@ -58,7 +57,8 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  block-size: $sections-container-height;
+  box-sizing: border-box;
+  block-size: var(--sections-container-height);
   padding-block: calc(var(--spacing-medium) / 2);
   display: flex;
   align-items: center;
@@ -151,6 +151,8 @@ $pixel: 1px;
 }
 
 .pageInfoContainer {
+  box-sizing: border-box;
+  block-size: var(--page-info-container-height);
   display: flex;
   flex-direction: row;
   align-items: center;

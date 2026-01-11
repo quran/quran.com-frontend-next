@@ -6,9 +6,22 @@
 :root {
   // TODO: migrate constants.scss to use css variables
   --navbar-height: 3.6rem;
-  --context-menu-container-height: 3rem;
-  --mobile-reading-mode-tabs-height: 3.25rem;
   --navbar-container-height: var(--navbar-height);
+  --context-menu-container-height: 3rem;
+  --context-menu-container-height-visible: 3rem;
+  --context-menu-container-height-hidden: 0rem;
+  --page-info-container-height: 2.875rem;
+  --page-info-container-height-visible: 2.875rem;
+  --page-info-container-height-hidden: 0rem;
+  --sections-container-height: 3rem;
+  --sections-container-height-visible: 3rem;
+  --sections-container-height-hidden: 0rem;
+  --mobile-reading-mode-tabs-height: 0rem;
+  --mobile-reading-mode-tabs-height-visible: 3.25rem;
+  --mobile-reading-mode-tabs-height-hidden: 0rem;
+  --progress-bar-height: 3px;
+  --progress-bar-height-visible: 3px;
+  --progress-bar-height-hidden: 0px;
   --banner-height: 3rem;
   --day-circle-color: transparent;
 }

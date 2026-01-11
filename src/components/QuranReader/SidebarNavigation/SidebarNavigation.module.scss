@@ -10,8 +10,16 @@ $top-menu-height-home: $navbar-height;
 $context-menu-height-home: 0;
 
 // Non-homepage heights (with sections menu and progress bar)
-$top-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
-$context-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
+$top-menu-height: calc(
+  $navbar-height + var(--context-menu-container-height-visible) +
+    var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
+    var(--mobile-reading-mode-tabs-height)
+);
+$context-menu-height: calc(
+  $navbar-height + var(--context-menu-container-height-visible) +
+    var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
+    var(--mobile-reading-mode-tabs-height)
+);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
