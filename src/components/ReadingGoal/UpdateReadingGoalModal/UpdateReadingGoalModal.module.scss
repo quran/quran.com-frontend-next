@@ -1,5 +1,10 @@
 @use 'src/styles/breakpoints';
 
+.modalContent {
+  // max-height: 80dvh;
+  // overflow-y: auto;
+}
+
 .inputs {
   inline-size: 100%;
 }

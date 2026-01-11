@@ -12,10 +12,12 @@ import styles from './ReadingProgressPage.module.scss';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
+import Link from '@/dls/Link/Link';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import useIsMobile from '@/hooks/useIsMobile';
+import ArrowIcon from '@/icons/arrow.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -106,6 +108,11 @@ const ProgressPageGoalWidget = ({ goal, isLoading, currentActivityDay }: Props) 
             chaptersData={chaptersData}
           />
         </div>
+        {isMobile && (
+          <Link href={ctaUrl} className={styles.arrowLink}>
+            <ArrowIcon />
+          </Link>
+        )}
       </div>
       <div className={styles.progressWidgetCta}>
         {!isMobile && (

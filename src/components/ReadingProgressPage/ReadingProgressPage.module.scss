@@ -138,7 +138,6 @@ $widget-border-radius: var(--border-radius-rounded);
 
   &.streakWidget {
     flex-direction: column;
-    background-color: var(--color-background-alternative-faint-new);
   }
 }
 
@@ -186,7 +185,7 @@ $widget-border-radius: var(--border-radius-rounded);
 
 .circularProgressbarText {
   fill: var(--color-text-black);
-  font-size: var(--font-size-normal-px);
+  font-size: var(--font-size-small-px);
   font-weight: var(--font-weight-bold);
   dominant-baseline: middle;
   text-anchor: middle;
@@ -204,6 +203,7 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .progressWidgetDaysLeft {
+  font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-gray);
 
