@@ -33,7 +33,6 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 const TranslationSection = () => {
   const {
     actions: { onSettingsChange },
-    isLoading,
   } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();

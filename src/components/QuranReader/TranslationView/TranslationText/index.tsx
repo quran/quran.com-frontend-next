@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
+/* eslint-disable max-lines */
 
 import React, { MouseEvent, useState } from 'react';
 

@@ -33,7 +33,6 @@ const QuranFontSection = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
-    isLoading,
   } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use

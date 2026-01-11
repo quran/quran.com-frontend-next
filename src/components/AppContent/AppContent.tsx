@@ -48,7 +48,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
         })}
         {...((isNavigationDrawerOpen || isSettingsDrawerOpen) && {
           inert: true,
-          'aria-hidden': true,
+          'aria-hidden': true, // eslint-disable-line @typescript-eslint/naming-convention
         })}
       >
         <Component {...pageProps} />
