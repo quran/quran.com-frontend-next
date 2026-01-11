@@ -15,7 +15,7 @@ import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import truncate from '@/utils/html-truncate';
+import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
 import { toLocalizedNumber } from '@/utils/locale';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
 import { getReflectionGroupLink } from '@/utils/quranReflect/navigation';
@@ -91,6 +91,7 @@ const ReflectionItem: React.FC<Props> = ({
   }, [estimatedReadingTime, reflectionTextLength]);
 
   const formattedText = useReflectionBodyParser(reflectionText, styles.hashtag);
+  const visibleTextLength = getVisibleTextLength(formattedText);
 
   return (
     <div className={styles.container}>
@@ -143,7 +144,7 @@ const ReflectionItem: React.FC<Props> = ({
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
           }}
         />
-        {reflectionTextLength > MAX_REFLECTION_LENGTH && (
+        {visibleTextLength >= MAX_REFLECTION_LENGTH && (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <span
             className={styles.moreOrLessText}
