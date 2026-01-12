@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import modalStyles from './Modal.module.scss';
@@ -128,7 +129,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
 
           <div className={styles.actions}>
             <Button
-              className={`${styles.rounded} ${styles.saveToQrButton}`}
+              className={classNames(styles.button, styles.saveToQrButton)}
               size={ButtonSize.Small}
               variant={ButtonVariant.Simplified}
               isLoading={loading === LoadingState.Public}
@@ -139,7 +140,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
               {t('notes:save-post-to-qr')}
             </Button>
             <Button
-              className={styles.rounded}
+              className={classNames(styles.button)}
               size={ButtonSize.Small}
               isLoading={loading === LoadingState.Private}
               isDisabled={loading !== null}

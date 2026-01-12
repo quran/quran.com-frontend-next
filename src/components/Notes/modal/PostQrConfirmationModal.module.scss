@@ -31,6 +31,11 @@
   border-radius: var(--border-radius-medium-px);
   border-color: var(--color-blue-buttons-and-icons);
 
+  span {
+    white-space: break-spaces;
+    line-height: 1;
+  }
+
   &:hover {
     background-color: var(--color-blue-buttons-and-icons);
     color: var(--color-text-white);
