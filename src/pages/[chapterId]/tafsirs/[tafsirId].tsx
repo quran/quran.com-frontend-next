@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,6 +16,7 @@ import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   getCanonicalUrl,
@@ -50,6 +51,11 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
   fallback,
 }) => {
   const { t, lang } = useTranslation('common');
+
+  // Log tafsir URL access event once when page loads (direct URL navigation)
+  useEffect(() => {
+    logEvent('tafsir_url_access');
+  }, []);
 
   const navigationUrl = getVerseSelectedTafsirNavigationUrl(
     chapterId,
