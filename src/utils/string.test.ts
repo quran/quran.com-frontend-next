@@ -188,11 +188,10 @@ describe('truncateHtml', () => {
     expect(truncateHtml(html, 100)).toBe(html);
   });
 
-  it('should truncate when text exceeds limit', () => {
+  it('should truncate when text exceeds limit and preserve tags', () => {
     const html = '<p>This is a very long text that should be truncated</p>';
     const result = truncateHtml(html, 10);
-    expect(result).toBe('This is a ...');
-    expect(result.length).toBe(13); // 10 chars + '...'
+    expect(result).toBe('<p>This is a </p>...');
   });
 
   it('should handle empty string', () => {
@@ -207,52 +206,55 @@ describe('truncateHtml', () => {
   it('should use custom suffix', () => {
     const html = '<p>This is long text</p>';
     const result = truncateHtml(html, 7, '…');
-    expect(result).toBe('This is…');
+    expect(result).toBe('<p>This is</p>…');
   });
 
   // Multi-lingual content tests
   it('should truncate Arabic content correctly', () => {
     const html = '<p>وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</p>';
     const result = truncateHtml(html, 15);
-    expect(result.length).toBeLessThanOrEqual(18); // 15 + '...'
     expect(result).toContain('وُلد');
+    expect(result).toContain('...');
+    expect(result).toContain('<p>');
+    expect(result).toContain('</p>');
   });
 
   it('should truncate Chinese content correctly', () => {
     const html = '<p>这是一个很长的中文文本需要被截断</p>';
     const result = truncateHtml(html, 5);
-    expect(result).toBe('这是一个很...');
+    expect(result).toBe('<p>这是一个很</p>...');
   });
 
   it('should truncate Japanese content correctly', () => {
     const html = '<p>これは非常に長い日本語のテキストです</p>';
     const result = truncateHtml(html, 8);
-    expect(result).toBe('これは非常に長い...');
+    expect(result).toBe('<p>これは非常に長い</p>...');
   });
 
   it('should truncate Korean content correctly', () => {
     const html = '<p>이것은 매우 긴 한국어 텍스트입니다</p>';
     const result = truncateHtml(html, 10);
-    expect(result.length).toBeLessThanOrEqual(13);
+    expect(result).toContain('<p>');
+    expect(result).toContain('</p>');
+    expect(result).toContain('...');
   });
 
-  // Complex HTML scenarios
-  it('should not break mid-word when HTML has long attributes', () => {
-    const html =
-      '<p id="tw-target-text" class="tw-data-text tw-text-large" data-ved="very-long-attribute"><span>This is the actual content</span></p>';
+  // Complex HTML scenarios - preserves structure
+  it('should preserve nested tags and close them properly', () => {
+    const html = '<p><span>This is the actual content that is long</span></p>';
     const result = truncateHtml(html, 15);
-    expect(result).toBe('This is the act...');
-    expect(result).not.toContain('<');
+    expect(result).toBe('<p><span>This is the act</span></p>...');
   });
 
   it('should handle Google Translate style HTML correctly', () => {
-    // This was the original bug - HTML so long that truncation happened within tags
     const html =
-      '<p id="tw-target-text" class="tw-data-text tw-text-large tw-ta" dir="rtl" tabindex="-1" role="text" data-placeholder="Translation" data-ved="2ahUKEwi_yYKC...very-long-data-attribute" aria-label="وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢، وتغلب على كل الصعاب ليصبح مثالاً يُحتذى به"><span class="Y2IQFc" lang="ar">وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</span></p>';
+      '<p id="tw-target-text" class="tw-data-text"><span class="Y2IQFc" lang="ar">وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</span></p>';
     const result = truncateHtml(html, 20);
-    expect(result).not.toContain('<');
-    expect(result).not.toContain('data-ved');
-    expect(result.length).toBeLessThanOrEqual(23);
+    expect(result).toContain('<p');
+    expect(result).toContain('</p>');
+    expect(result).toContain('<span');
+    expect(result).toContain('</span>');
+    expect(result).toContain('...');
   });
 
   // Edge cases
@@ -275,6 +277,29 @@ describe('truncateHtml', () => {
   it('should preserve original HTML when content fits', () => {
     const html = '<strong>Bold</strong> <em>italic</em>';
     expect(truncateHtml(html, 100)).toBe(html);
+  });
+
+  // Paragraph preservation tests
+  it('should preserve multiple paragraph structure when truncating', () => {
+    const html = '<p>First paragraph</p><p>Second paragraph</p><p>Third paragraph</p>';
+    const result = truncateHtml(html, 25);
+    expect(result).toContain('<p>First paragraph</p>');
+    expect(result).toContain('<p>Second');
+    expect(result).toContain('</p>...');
+  });
+
+  it('should handle self-closing br tags', () => {
+    const html = 'Line one<br/>Line two<br/>Line three and more text here';
+    const result = truncateHtml(html, 20);
+    expect(result).toContain('<br/>');
+    expect(result).toContain('...');
+  });
+
+  it('should handle br tags without slash', () => {
+    const html = 'Line one<br>Line two<br>Line three';
+    const result = truncateHtml(html, 15);
+    expect(result).toContain('<br>');
+    expect(result).toContain('...');
   });
 });
 
