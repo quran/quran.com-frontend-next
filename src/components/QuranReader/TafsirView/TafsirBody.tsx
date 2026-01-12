@@ -25,12 +25,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
-import {
-  logButtonClick,
-  logEvent,
-  logItemSelectionChange,
-  logValueChange,
-} from '@/utils/eventLogger';
+import { logButtonClick, logItemSelectionChange, logValueChange } from '@/utils/eventLogger';
 import { getLanguageDataById } from '@/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import {
