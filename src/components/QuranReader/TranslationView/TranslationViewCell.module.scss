@@ -200,7 +200,7 @@ $arabicVerseTopMargin: 2.75rem;
 
   @include breakpoints.smallerThanTablet {
     // this min-width is to prevent the tab from overlapping with the next tab
-    // (when this happens, we can  @include breakpoints.smallerThanTablet {
+    // (when this happens, we can scroll to see the next tab to access it)
     .fullWidthTabs & {
       @media (min-width: 360px) {
         flex: 1 1 auto;
