@@ -120,6 +120,17 @@
   "text-copied": "Tekst is gekopieerd naar het klembord!",
   "trans-change": "Wijziging",
   "translation-by": "Vertaling door",
+  "translation-feedback": {
+    "feedback": "Feedback",
+    "no-translations-in-preferences": "Geen vertalingen in uw voorkeuren",
+    "placeholder": "Gebruik deze ruimte om een probleem te melden met betrekking tot de geselecteerde vertaling van deze Ayah.",
+    "report": "Rapport",
+    "select": "Selecteer...",
+    "select-translation": "Selecteer vertaling:",
+    "submission-success": "Uw feedback is succesvol verzonden.",
+    "title": "Feedback over de vertaling",
+    "translation": "Vertaling"
+  },
   "verses-range": "Bereik van verzen",
   "view-on-quran-reflect": "Bekijk op KoranReflect"
 }

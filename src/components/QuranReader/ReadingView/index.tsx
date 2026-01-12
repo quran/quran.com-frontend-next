@@ -53,15 +53,25 @@ type ReadingViewProps = {
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
 
+const getInitialMushafMap = (initialData: VersesResponse): Record<number, Verse[]> => {
+  const firstVerse = initialData?.verses?.[0];
+
+  if (!firstVerse || !Number.isInteger(firstVerse.pageNumber) || firstVerse.pageNumber <= 0) {
+    return {};
+  }
+
+  return { [firstVerse.pageNumber]: initialData.verses };
+};
+
 const ReadingView = ({
   quranReaderStyles,
   quranReaderDataType,
   initialData,
   resourceId,
 }: ReadingViewProps) => {
-  const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
-    [initialData.verses[0].pageNumber]: initialData.verses,
-  });
+  const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
+    getInitialMushafMap(initialData),
+  );
   const { lang } = useTranslation('quran-reader');
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);

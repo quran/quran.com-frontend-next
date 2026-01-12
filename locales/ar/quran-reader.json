@@ -120,6 +120,17 @@
   "text-copied": "تم نسخ النص إلى الحافظة!",
   "trans-change": "تغيير",
   "translation-by": "ترجمة",
+  "translation-feedback": {
+    "feedback": "تعليق",
+    "no-translations-in-preferences": "لا توجد ترجمات في تفضيلاتك",
+    "placeholder": "استخدم هذه المساحة للإبلاغ عن مشكلة تتعلق بالترجمة المختارة لهذه الآية.",
+    "report": "تقرير",
+    "select": "يختار...",
+    "select-translation": "اختر الترجمة:",
+    "submission-success": "تم إرسال ملاحظاتك بنجاح",
+    "title": "ملاحظات الترجمة",
+    "translation": "ترجمة"
+  },
   "verses-range": "نطاق الآيات",
   "view-on-quran-reflect": "عرض على QuranReflect"
 }

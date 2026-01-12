@@ -120,6 +120,17 @@
   "text-copied": "Текст скопирован в буфер обмена!",
   "trans-change": "Изменять",
   "translation-by": "Перевод по",
+  "translation-feedback": {
+    "feedback": "Обратная связь",
+    "no-translations-in-preferences": "В ваших настройках нет переводов.",
+    "placeholder": "Используйте это поле, чтобы сообщить о проблеме, связанной с выбранным переводом этого аята.",
+    "report": "Отчет",
+    "select": "Выбирать...",
+    "select-translation": "Выберите перевод:",
+    "submission-success": "Ваш отзыв успешно отправлен.",
+    "title": "Отзывы о переводе",
+    "translation": "Перевод"
+  },
   "verses-range": "Диапазон стихов",
   "view-on-quran-reflect": "Посмотреть на QuranReflect"
 }

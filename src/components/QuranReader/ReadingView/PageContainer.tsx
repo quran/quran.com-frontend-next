@@ -113,7 +113,10 @@ const PageContainer: React.FC<Props> = ({
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
 
   const isUsingDefaultSettings = useIsUsingDefaultSettings();
-  const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings;
+
+  // Only use initial data if it has actual verses (not empty array)
+  const hasInitialVerses = initialVerses && initialVerses.length > 0;
+  const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings && hasInitialVerses;
 
   /**
    * CRITICAL: Only generate request key after hydration completes.

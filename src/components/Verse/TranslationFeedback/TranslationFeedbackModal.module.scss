@@ -1,0 +1,50 @@
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+
+  margin-block-start: var(--spacing-medium3-px);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xsmall);
+}
+
+.textArea {
+  padding: 0;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+    block-size: constants.$translation-feedback-textarea-height;
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+.error {
+  color: var(--color-text-error);
+}
+
+.reportButton {
+  font-size: var(--font-size-small);
+
+  padding-inline: var(--spacing-large2-px);
+  border-radius: var(--border-radius-medium-px);
+}

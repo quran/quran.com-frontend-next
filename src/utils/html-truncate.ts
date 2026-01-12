@@ -4,6 +4,20 @@
 
 // Source: https://github.com/huang47/nodejs-html-truncate/blob/master/lib/truncate.js
 
+/**
+ * Get the visible text length (excluding HTML tags)
+ * Counts <br> tags as 1 character (newline equivalent)
+ *
+ * @function getVisibleTextLength
+ * @param {string} htmlString html string
+ * @returns {number} visible text length
+ */
+export function getVisibleTextLength(htmlString: string): number {
+  // Replace <br> tags with a single character placeholder before stripping other tags
+  const withBrAsNewline = htmlString.replace(/<br\s*\/?>/gi, '\n');
+  return withBrAsNewline.replace(/<[^>]*>/g, '').length;
+}
+
 function truncate(string, maxLength, options?) {
   const EMPTY_OBJECT = {};
   const EMPTY_STRING = '';
@@ -11,9 +25,9 @@ function truncate(string, maxLength, options?) {
   const DEFAULT_SLOP = maxLength < 10 ? maxLength : 10;
   const EXCLUDE_TAGS = ['img', 'br']; // non-closed tags
   const items = []; // stack for saving tags
-  let total = 0; // record how many characters we traced so far
+  let total = 0; // record how many visible characters we traced so far
   let content = EMPTY_STRING; // truncated text storage
-  const KEY_VALUE_REGEX = '([\\w|-]+\\s*=\\s*"[^"]*"\\s*)*';
+  const KEY_VALUE_REGEX = '([\\w|-]+\\s*=\\s*["\'][^"\']*["\']\\s*)*';
   const IS_CLOSE_REGEX = '\\s*\\/?\\s*';
   const CLOSE_REGEX = '\\s*\\/\\s*';
   const SELF_CLOSE_REGEX = new RegExp(`<\\/?\\w+\\s*${KEY_VALUE_REGEX}${CLOSE_REGEX}>`);
@@ -155,7 +169,14 @@ function truncate(string, maxLength, options?) {
     undefined !== options.truncateLastWord ? options.truncateLastWord : true;
   options.slop = undefined !== options.slop ? options.slop : DEFAULT_SLOP;
 
+  // If visible length is within limit, return as-is (no truncation needed)
+  if (getVisibleTextLength(string) <= maxLength) {
+    return string;
+  }
+
   while (matches) {
+    // Reset lastIndex to avoid infinite loops with global regex
+    HTML_TAG_REGEX.lastIndex = 0;
     matches = HTML_TAG_REGEX.exec(string);
 
     if (!matches) {
@@ -163,8 +184,9 @@ function truncate(string, maxLength, options?) {
         break;
       }
 
+      URL_REGEX.lastIndex = 0;
       matches = URL_REGEX.exec(string);
-      if (!matches || matches.index >= maxLength) {
+      if (!matches || matches.index >= maxLength - total) {
         content += string.substring(0, _getEndPosition(string));
         break;
       }
@@ -172,8 +194,10 @@ function truncate(string, maxLength, options?) {
       while (matches) {
         result = matches[0];
         index = matches.index;
-        content += string.substring(0, index + result.length - total);
+        content += string.substring(0, index + result.length);
+        total += index + result.length;
         string = string.substring(index + result.length);
+        URL_REGEX.lastIndex = 0;
         matches = URL_REGEX.exec(string);
       }
       break;
@@ -182,13 +206,16 @@ function truncate(string, maxLength, options?) {
     result = matches[0];
     index = matches.index;
 
-    if (total + index > maxLength) {
+    // Only count visible text (before the tag) towards the limit
+    const visibleTextBeforeTag = string.substring(0, index);
+
+    if (total + visibleTextBeforeTag.length > maxLength) {
       // exceed given `maxLength`, dump everything to clear stack
       content += string.substring(0, _getEndPosition(string, index));
       break;
     } else {
-      total += index;
-      content += string.substring(0, index);
+      total += visibleTextBeforeTag.length;
+      content += visibleTextBeforeTag;
     }
 
     if (result[1] === '/') {
@@ -206,13 +233,21 @@ function truncate(string, maxLength, options?) {
 
     if (selfClose) {
       content += selfClose[0];
+      // Count <br> as 1 visible character (newline equivalent)
+      if (selfClose[0].match(/<br\s*\/?>/i)) {
+        total += 1;
+      }
     } else {
       content += result;
+      // Count <br> as 1 visible character (newline equivalent)
+      if (result.match(/<br\s*\/?>/i)) {
+        total += 1;
+      }
     }
     string = string.substring(index + result.length);
   }
 
-  if (string.length > maxLength - total && options.ellipsis) {
+  if (string.length > 0 && getVisibleTextLength(string) > 0 && options.ellipsis) {
     content += options.ellipsis;
   }
   content += _dumpCloseTag(items);

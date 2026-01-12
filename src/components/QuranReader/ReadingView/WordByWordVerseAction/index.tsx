@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -35,6 +35,7 @@ const WordByWordVerseAction: React.FC<Props> = ({
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const onModalClosed = () => {
     logEvent(
@@ -42,7 +43,10 @@ const WordByWordVerseAction: React.FC<Props> = ({
     );
     setIsContentModalOpen(false);
     if (onActionTriggered) {
-      setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+      closeTimeoutRef.current = setTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
@@ -57,6 +61,14 @@ const WordByWordVerseAction: React.FC<Props> = ({
     );
     setIsContentModalOpen(true);
   };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>

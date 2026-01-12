@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo } from 'react';
 
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
@@ -12,12 +12,15 @@ import styles from './ReciterInfo.module.scss';
 import PlayIcon from '@/icons/play-arrow.svg';
 import { makeCDNUrl } from '@/utils/cdn';
 import { logEvent } from '@/utils/eventLogger';
+import { stripHtml, truncateHtml } from '@/utils/string';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Reciter from 'types/Reciter';
 
 type ReciterInfoProps = {
   selectedReciter: Reciter;
 };
+
+const MAX_BIO_LENGTH = 400;
 
 const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const { t } = useTranslation();
@@ -34,10 +37,16 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
     });
   };
 
-  const bio =
-    isBioTruncated && selectedReciter?.bio?.length > maxBioLength
-      ? truncateText(selectedReciter?.bio, maxBioLength)
-      : selectedReciter?.bio;
+  const bioText = useMemo(() => stripHtml(selectedReciter?.bio || ''), [selectedReciter?.bio]);
+  const shouldShowMoreButton = bioText.length > MAX_BIO_LENGTH;
+
+  const displayBio = useMemo(() => {
+    if (!selectedReciter?.bio) return '';
+    if (isBioTruncated && shouldShowMoreButton) {
+      return truncateHtml(selectedReciter.bio, MAX_BIO_LENGTH);
+    }
+    return selectedReciter.bio;
+  }, [selectedReciter?.bio, isBioTruncated, shouldShowMoreButton]);
 
   return (
     <div className={styles.container}>
@@ -54,8 +63,8 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       <div>
         <div className={styles.reciterName}>{selectedReciter?.translatedName?.name}</div>
         <div className={styles.reciterBio}>
-          <span dangerouslySetInnerHTML={{ __html: bio }} />
-          {selectedReciter?.bio.length > maxBioLength && (
+          <span dangerouslySetInnerHTML={{ __html: displayBio }} />
+          {shouldShowMoreButton && (
             <span
               className={styles.moreLessButton}
               role="button"
@@ -80,12 +89,6 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       </div>
     </div>
   );
-};
-
-const maxBioLength = 400;
-
-const truncateText = (text: string, maxTextLength: number) => {
-  return `${text.slice(0, maxTextLength)}...`;
 };
 
 export default ReciterInfo;

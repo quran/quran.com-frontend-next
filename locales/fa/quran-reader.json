@@ -120,6 +120,17 @@
   "text-copied": "متن در کلیپ بورد کپی شده است!",
   "trans-change": "تغییر دادن",
   "translation-by": "ترجمه توسط",
+  "translation-feedback": {
+    "feedback": "بازخورد",
+    "no-translations-in-preferences": "هیچ ترجمه‌ای در تنظیمات برگزیده شما وجود ندارد",
+    "placeholder": "از این قسمت برای گزارش مشکل مربوط به ترجمه انتخابی این آیه استفاده کنید.",
+    "report": "گزارش",
+    "select": "انتخاب کنید...",
+    "select-translation": "انتخاب ترجمه:",
+    "submission-success": "بازخورد شما با موفقیت ارسال شد",
+    "title": "بازخورد ترجمه",
+    "translation": "ترجمه"
+  },
   "verses-range": "طیف آیات",
   "view-on-quran-reflect": "مشاهده قرآن رفلکت"
 }
