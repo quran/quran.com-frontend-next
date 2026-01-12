@@ -34,11 +34,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
-    <div
-      className={classNames({
-        bannerActive: isBannerVisible,
-      })}
-    >
+    <div className={classNames({ bannerActive: isBannerVisible })}>
       <AuthRedirects />
       <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
       <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
