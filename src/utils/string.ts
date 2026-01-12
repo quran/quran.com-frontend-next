@@ -22,12 +22,85 @@ export const truncateString = (rawString: string, length: number, suffix = '...'
 };
 
 /**
- * Strip HTML tags from a string.
+ * Strip HTML tags from a string using regex.
+ * For simple cases where a quick strip is needed.
  *
  * @param {string} rawString
  * @returns {string}
  */
 export const stripHTMLTags = (rawString: string): string => rawString.replace(/(<([^>]+)>)/gi, '');
+
+/**
+ * Strip HTML tags from a string, extracting only the text content.
+ * Uses DOMParser in browser for accurate parsing, regex fallback for SSR.
+ * Handles complex HTML with nested tags, attributes, and special characters.
+ *
+ * @param {string} html - The HTML string to strip
+ * @returns {string} - Plain text content without HTML tags
+ */
+export const stripHtml = (html: string): string => {
+  if (!html) return '';
+
+  // Use DOMParser in browser for accurate HTML parsing
+  if (typeof window !== 'undefined' && typeof DOMParser !== 'undefined') {
+    try {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || '';
+    } catch {
+      // Fallback to regex if DOMParser fails
+    }
+  }
+
+  // Server-side fallback: regex strip
+  // This handles most HTML but may not be 100% accurate for malformed HTML
+  return html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // Remove script tags and content
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '') // Remove style tags and content
+    .replace(/<[^>]+>/g, '') // Remove HTML tags
+    .replace(/&nbsp;/g, ' ') // Replace &nbsp; with space
+    .replace(/&amp;/g, '&') // Replace &amp; with &
+    .replace(/&lt;/g, '<') // Replace &lt; with <
+    .replace(/&gt;/g, '>') // Replace &gt; with >
+    .replace(/&quot;/g, '"') // Replace &quot; with "
+    .replace(/&#39;/g, "'") // Replace &#39; with '
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim();
+};
+
+/**
+ * Get the text length of HTML content (excluding tags).
+ * Useful for determining if content should be truncated.
+ *
+ * @param {string} html - The HTML string to measure
+ * @returns {number} - Length of the text content
+ */
+export const getHtmlTextLength = (html: string): number => {
+  return stripHtml(html).length;
+};
+
+/**
+ * Truncate HTML content safely by extracting text content.
+ * Returns truncated plain text when the text content exceeds maxLength.
+ * Returns original HTML if text content is within limit.
+ *
+ * @param {string} html - The HTML string to truncate
+ * @param {number} maxLength - Maximum length of text content allowed
+ * @param {string} suffix - Suffix to add when truncating (default: '...')
+ * @returns {string} - Truncated text or original HTML
+ */
+export const truncateHtml = (html: string, maxLength: number, suffix = '...'): string => {
+  if (!html) return '';
+
+  const text = stripHtml(html);
+
+  // If text is within limit, return original HTML
+  if (text.length <= maxLength) {
+    return html;
+  }
+
+  // Return truncated plain text with suffix
+  return `${text.slice(0, maxLength)}${suffix}`;
+};
 
 /**
  * Convert a slugified collection id to collection id only after
