@@ -94,7 +94,6 @@ const TafsirBody = ({
   // we did not use `useState(initialTafsirIdOrSlug)` because `useRouter`'s query string is undefined on first render
   useEffect(() => {
     if (initialTafsirIdOrSlug) {
-      logEvent('tafsir_url_access');
       setSelectedTafsirIdOrSlug(initialTafsirIdOrSlug);
     }
   }, [initialTafsirIdOrSlug]);
