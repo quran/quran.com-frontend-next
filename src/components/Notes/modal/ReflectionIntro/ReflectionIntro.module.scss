@@ -1,7 +1,11 @@
+$content-line-height: 1.6;
+
 .container {
   border-radius: var(--border-radius-rounded);
   background-color: var(--color-background-alternative-faint-new);
   padding: var(--spacing-medium-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-small);
 }
 
 .titleContainer {
@@ -50,6 +54,7 @@
 .sectionContainer {
   margin-block: var(--spacing-small);
   padding-block-end: var(--spacing-small);
+  line-height: $content-line-height;
 
   &:last-of-type {
     padding-block-end: 0;
@@ -63,6 +68,11 @@
 .bulletList {
   list-style: initial;
   padding-inline-start: var(--spacing-medium);
+
+  li,
+  ol {
+    line-height: $content-line-height;
+  }
 }
 
 .seeLessButton {
