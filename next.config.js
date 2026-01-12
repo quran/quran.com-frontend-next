@@ -137,6 +137,11 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/apps-portal',
+      destination: '/apps',
+      permanent: true,
+    },
+    {
       source: '/surah-info/:identifier([\\w-]+)',
       destination: '/surah/:identifier/info',
       permanent: true,

@@ -2,64 +2,85 @@
   "browse": {
     "apps": {
       "muhaffidh": {
-        "caption": "Kukariri na kuhakiki Quran kwa ufanisi",
+        "caption": "Kariri na Hakiki Qur'ani kwa ufanisi",
+        "description": "Programu ya Quran iliyoundwa ili kukusaidia kukariri na kupitia Quran kwa njia bunifu.",
+        "tagline": "Msaidizi bunifu wa kuhifadhi na kuhakiki Quran",
         "title": "Muhafidh"
       },
       "quran_android": {
-        "caption": "Soma, alamisho na usikilize Kurani kwenye vifaa vya Android",
-        "title": "Quran kwa Android"
+        "caption": "Soma, alamisha na usikilize Qur'ani kwenye vifaa vya Android",
+        "description": "Vipengele ni pamoja na kurasa za mtindo wa Madani, sauti isiyo na nafasi, kuweka alama/kuweka lebo/kushiriki, utafutaji, hali ya usiku, kurudia sauti, na tafsiri/tafsir katika lugha nyingi.",
+        "tagline": "Programu ya Quran ya bure na huria kwa Android",
+        "title": "Qur'ani kwa Android"
       },
       "quran_ios": {
-        "caption": "Programu nzuri ya kusoma na kusikiliza Kurani bila matangazo kwa iPhone na iPad",
-        "title": "Quran kwa iOS (na quran.com)"
+        "caption": "Programu nzuri ya kusoma na kusikiliza Qur'ani bila matangazo kwa iPhone na iPad",
+        "description": "Kutoka kwa watengenezaji wa Quran.com: soma Quran popote ulipo, kariri, na usikilize wasomaji wako uwapendao katika hali safi na isiyo na matangazo.",
+        "tagline": "Programu nzuri ya Mushaf isiyo na matangazo",
+        "title": "Qur'ani kwa iOS (iliyoundwa na quran.com)"
       },
       "quranmeet": {
-        "caption": "Vipindi vya moja kwa moja vya masomo ya Kurani",
-        "title": "QuranKutana"
+        "caption": "Vipindi vya moja kwa moja vya masomo ya Qur'ani",
+        "description": "Jukwaa linalowaunganisha wanafunzi na walimu na vikundi vya masomo kwa ajili ya vipindi vya kujifunza Quran vya mtu mmoja mmoja na vikundi vidogo.",
+        "tagline": "Vipindi vya Quran vya kikundi kimoja hadi kimoja na vikundi vidogo",
+        "title": "QuranMeet"
       },
       "quranreflect": {
         "caption": "Shiriki tafakari",
-        "title": "QuranTafakari"
+        "description": "Jukwaa la kijamii la kuhimiza na kuwezesha tafakari za Quran - shiriki tafakari, chunguza mada, na shiriki na jamii.",
+        "tagline": "Shiriki tafakari na ukue pamoja",
+        "title": "QuranReflect"
       },
       "readtafsir": {
-        "caption": "Tafuta na ulinganishe tafsir za kitambo",
-        "title": "SomaTafsir"
+        "caption": "Tafuta na ulinganishe tafsir za awali",
+        "description": "Soma na usikilize vyanzo vingi vya tafsir vya kitambo katika sehemu moja, na kurahisisha kuvinjari, kutafuta, na kulinganisha tafsiri.",
+        "tagline": "Usomaji na kusikiliza tafsir shirikishi",
+        "title": "ReadTafsir"
       },
       "sunnah": {
         "caption": "Mkusanyiko wa Hadith",
+        "description": "Maktaba ya hadithi yenye makusanyo makubwa yanayopatikana mtandaoni, ikiwa ni pamoja na tafsiri katika lugha nyingi na zana za utafutaji.",
+        "tagline": "Hadithi karibu nawe",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
-        "caption": "Tafsir inayoingiliana na vyanzo vingi",
-        "title": "Programu ya Tafsir"
+        "caption": "Tafsiri shirikishi yenye vyanzo vingi",
+        "description": "Tovuti ya utafiti wa Kurani ambayo huleta pamoja tafsir, qira'at, mushafs, i'rab, sayansi ya Qur'ani, asbab al-nuzul, hukumu na kamusi.",
+        "tagline": "Kitovu cha utafiti wa Quran",
+        "title": "Tafsir App"
       }
     },
     "filters": {
       "all": "Programu zote",
       "community": "Jumuiya",
-      "hadith-sunnah": "Hadiyth na Sunnah",
+      "hadith-sunnah": "Hadith na Sunnah",
       "popular": "Maarufu",
-      "quran-reader": "Msomaji wa Quran",
+      "quran-reader": "Quran Reader",
       "reflections": "Tafakari",
       "study-tools": "Zana za kujifunzia"
     },
     "title": "Vinjari Programu Zote"
   },
+  "cta": {
+    "app-store": "Pakua kwenye Duka la Programu",
+    "google-play": "Ipate kwenye Google Play",
+    "visit": "Tembelea"
+  },
   "featured": {
     "apps": {
       "qariah": {
-        "headline": "Hatimaye, programu ya Kurani kwa binti zetu",
+        "headline": "Hatimaye, programu ya Qur'ani kwa kina dada",
         "name": "Qariah",
-        "tagline": "Wanawake wasomaji wa Quran"
+        "tagline": "Wasomaji wanawake wa Qur'ani"
       },
       "quran-kareem": {
-        "headline": "Lango lako jipya la kuunganishwa na Kitabu cha Mwenyezi Mungu",
+        "headline": "Lango lako jipya la kuungana na Kitabu cha Mwenyezi Mungu",
         "name": "Quran Kareem",
         "tagline": "Soma, sikiliza na tafakari"
       },
       "quran-link": {
-        "headline": "Gundua tafsir 25+ na tafsiri 100+ katika sehemu moja",
-        "name": "Kiungo cha Quran",
+        "headline": "Gundua zaidi ya tafsir 25 na zaidi ya tarjuma 100 katika sehemu moja",
+        "name": "Quran Link",
         "tagline": "Tafsir & mwenzi wa masomo"
       }
     },
@@ -68,8 +89,8 @@
     "view-all": "Tazama yote"
   },
   "hero": {
-    "description": "Gundua mkusanyiko uliochaguliwa wa programu za Kiislamu zilizojengwa kwa msingi wa Quran. Kuanzia zana za kujifunzia hadi huduma za maombi, pata programu zinazoboresha safari yako ya kiroho.",
+    "description": "Gundua mkusanyiko khasa wa programu za Kiislamu zilizoundwa na Quran.Foundation. Kuanzia zana za kujifunzia hadi huduma za maombi, pata programu zinazoboresha safari yako ya kiroho.",
     "title": "Gundua Mfumo wetu wa Ikolojia wa Programu"
   },
-  "quran-apps-portal": "Quran Apps Portal"
+  "quran-apps-portal": "Tovuti ya Programu za Qur'ani"
 }
