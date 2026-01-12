@@ -8,7 +8,7 @@
 
 .list {
   display: flex;
-  border-bottom: 2px solid var(--color-borders-hairline);
+  border-bottom: var(--spacing-micro-px) solid var(--color-borders-hairline);
 }
 
 .trigger {
@@ -34,10 +34,10 @@
     &::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: calc(-1 * var(--spacing-hairline-px));
       left: 0;
       right: 0;
-      height: var(--spacing-micro-px);
+      height: var(--spacing-hairline-px);
       background-color: var(--color-blue-buttons-and-icons);
     }
   }

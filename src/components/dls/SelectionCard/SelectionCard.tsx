@@ -8,11 +8,12 @@ type SelectionCard = {
   label?: string;
   value?: string;
   onClick?: () => void;
+  className?: string;
 };
 
-const SelectionCard = ({ label, value, onClick }: SelectionCard) => {
+const SelectionCard = ({ label, value, onClick, className }: SelectionCard) => {
   return (
-    <div className={styles.container} onClick={onClick}>
+    <div className={`${styles.container} ${className || ''}`} onClick={onClick}>
       <div className={styles.labelContainer}>
         <div className={styles.label}>{label}</div>
         <div className={styles.value}>{value}</div>

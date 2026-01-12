@@ -3,25 +3,24 @@ import { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
-
-import Section from './Section';
-import styles from './TranslationSection.module.scss';
-
-import DataFetcher from '@/components/DataFetcher';
-import SelectionCard from '@/dls/SelectionCard/SelectionCard';
-import Skeleton from '@/dls/Skeleton/Skeleton';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
-import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
-import { logValueChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
+import styles from './ReciterSection.module.scss';
+import Section from './Section';
+import translationStyles from './TranslationSection.module.scss';
+
+import DataFetcher from '@/components/DataFetcher';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
+import { logValueChange } from '@/utils/eventLogger';
+
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const ReciterSection = () => {
-  const { isLoading } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ const ReciterSection = () => {
   const reciterLoading = useCallback(
     () => (
       <div>
-        <Skeleton className={styles.skeleton} />
+        <Skeleton className={translationStyles.skeleton} />
       </div>
     ),
     [],
@@ -63,6 +62,7 @@ const ReciterSection = () => {
           label={t('settings.selected-reciter')}
           value={selectedValueString}
           onClick={onSelectionCardClicked}
+          className={styles.reciterSelectionCard}
         />
       );
     },
@@ -71,7 +71,6 @@ const ReciterSection = () => {
 
   return (
     <Section id="reciter-section" hideSeparator>
-      <Section.Title isLoading={isLoading}>{t('reciter')}</Section.Title>
       <Section.Row>
         <DataFetcher
           loading={reciterLoading}

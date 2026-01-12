@@ -10,7 +10,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium-px);
+  gap: var(--spacing-medium-plus-px);
 }
 
 .translationText {
@@ -23,6 +23,6 @@
   width: 100%;
 }
 
-.skeletonContainer + .skeletonContainer {
+.skeletonContainer+.skeletonContainer {
   margin-block-start: var(--spacing-large);
 }
