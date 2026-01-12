@@ -157,6 +157,13 @@ $arabicVerseTopMargin: 2.75rem;
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &.fullWidthTabs {
+      @media (min-width: 360px) {
+        overflow-x: visible;
+        justify-content: space-between;
+      }
+    }
   }
 
   @media (min-width: 768px) {
@@ -190,6 +197,18 @@ $arabicVerseTopMargin: 2.75rem;
   color: var(--color-grey-icons-new);
   transition: color 0.2s ease;
   flex-shrink: 0;
+
+  @include breakpoints.smallerThanTablet {
+    // this min-width is to prevent the tab from overlapping with the next tab
+    // (when this happens, we can  @include breakpoints.smallerThanTablet {
+    .fullWidthTabs & {
+      @media (min-width: 360px) {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: 0;
+      }
+    }
+  }
 
   &:hover {
     color: var(--color-success-medium);
