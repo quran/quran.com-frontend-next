@@ -4,8 +4,6 @@ import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import useContextMenuState from '../QuranReader/ContextMenu/hooks/useContextMenuState';
-
 import styles from './AppContent.module.scss';
 
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
@@ -16,6 +14,7 @@ import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
+import useShowNavbar from '@/hooks/useShowNavbar';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { selectIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { isAuthPage } from '@/utils/routes';
@@ -32,7 +31,7 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { t } = useTranslation('common');
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
-  const { showNavbar } = useContextMenuState();
+  const showNavbar = useShowNavbar();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
