@@ -83,73 +83,73 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
         hasCloseButton
         onClose={onModalClose}
         onEscapeKeyDown={onModalClose}
-        contentClassName={modalStyles.content}
+        contentClassName={classNames(modalStyles.content, modalStyles.formModalContent)}
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
         closeIconClassName={modalStyles.cloneIconContainer}
+        innerContentClassName={classNames(modalStyles.formModalContent, styles.container)}
+        dataTestId={dataTestId}
       >
-        <div className={styles.container} data-testid={dataTestId}>
-          <ReflectionIntro />
+        <ReflectionIntro />
 
-          {verseRanges.length > 0 && (
-            <div className={styles.verseRangesContainer}>
-              {verseRanges.map((range) => (
-                <span key={range} className={styles.verseRangePill}>
-                  {range}
-                </span>
-              ))}
+        {verseRanges.length > 0 && (
+          <div className={styles.verseRangesContainer}>
+            {verseRanges.map((range) => (
+              <span key={range} className={styles.verseRangePill}>
+                {range}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className={styles.inputGroup}>
+          <TextArea
+            id="note"
+            name="note"
+            placeholder={t('notes:body-placeholder')}
+            containerClassName={styles.textArea}
+            value={noteInput}
+            onChange={onNoteInputChange}
+            dataTestId="notes-textarea"
+          />
+
+          {errors.note && (
+            <div className={styles.error} data-testid={`note-input-error-${errors.note.id}`}>
+              {errors.note.message}
             </div>
           )}
+        </div>
 
-          <div className={styles.inputGroup}>
-            <TextArea
-              id="note"
-              name="note"
-              placeholder={t('notes:body-placeholder')}
-              containerClassName={styles.textArea}
-              value={noteInput}
-              onChange={onNoteInputChange}
-              dataTestId="notes-textarea"
-            />
+        {showNotesOnVerseButton && notesCount > 0 && (
+          <NotesOnVerseButton
+            notesCount={notesCount}
+            onClick={onMyNotes}
+            disabled={loading !== null}
+          />
+        )}
 
-            {errors.note && (
-              <div className={styles.error} data-testid={`note-input-error-${errors.note.id}`}>
-                {errors.note.message}
-              </div>
-            )}
-          </div>
-
-          {showNotesOnVerseButton && notesCount > 0 && (
-            <NotesOnVerseButton
-              notesCount={notesCount}
-              onClick={onMyNotes}
-              disabled={loading !== null}
-            />
-          )}
-
-          <div className={styles.actions}>
-            <Button
-              className={classNames(styles.button, styles.saveToQrButton)}
-              size={ButtonSize.Small}
-              variant={ButtonVariant.Simplified}
-              isLoading={loading === LoadingState.Public}
-              isDisabled={loading !== null}
-              onClick={handlePublicSaveClick}
-              data-testid="save-to-qr-button"
-            >
-              {t('notes:save-post-to-qr')}
-            </Button>
-            <Button
-              className={classNames(styles.button)}
-              size={ButtonSize.Small}
-              isLoading={loading === LoadingState.Private}
-              isDisabled={loading !== null}
-              onClick={onPrivateSave}
-              data-testid="save-private-button"
-            >
-              {t('notes:save-privately')}
-            </Button>
-          </div>
+        <div className={styles.actions}>
+          <Button
+            className={classNames(styles.button, styles.saveToQrButton)}
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Simplified}
+            isLoading={loading === LoadingState.Public}
+            isDisabled={loading !== null}
+            onClick={handlePublicSaveClick}
+            data-testid="save-to-qr-button"
+          >
+            {t('notes:save-post-to-qr')}
+          </Button>
+          <Button
+            className={classNames(styles.button)}
+            size={ButtonSize.Small}
+            isLoading={loading === LoadingState.Private}
+            isDisabled={loading !== null}
+            onClick={onPrivateSave}
+            data-testid="save-private-button"
+          >
+            {t('notes:save-privately')}
+          </Button>
         </div>
       </ContentModal>
 

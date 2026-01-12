@@ -18,15 +18,24 @@ $note_text_area_height: 22.5rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall);
+
+  flex: 1;
 }
 
 // tag is used to increase specificity to override the default styles.
 div.textArea {
   padding: 0;
+  flex: 1;
 
   textarea {
     padding: var(--spacing-xsmall);
-    block-size: $note_text_area_height;
+    margin: var(--spacing-micro);
+
+    --total-side-space: calc(var(--spacing-xsmall) + var(--spacing-micro));
+
+    color: var(--color-text-default-new);
+    block-size: unset;
+    block-size: calc(100% - (2 * var(--total-side-space)));
 
     &:focus::placeholder {
       color: transparent;
@@ -43,7 +52,7 @@ div.textArea {
   gap: var(--spacing-xsmall);
 
   background-color: var(--color-background-alternative-faint-new);
-  block-size: var(--spacing-large2-px);
+  min-block-size: var(--spacing-large2-px);
   border-radius: var(--border-radius-medium-px);
   padding-inline: var(--spacing-medium2);
   font-size: var(--font-size-small);
@@ -90,6 +99,7 @@ div.textArea {
   display: flex;
   justify-content: flex-end;
   gap: var(--spacing-medium2);
+  padding-block-end: var(--content-padding-end, 0);
 
   @include breakpoints.smallerThanMobileL {
     // Make the save private button (last button) take available space

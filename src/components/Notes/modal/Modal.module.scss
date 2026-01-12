@@ -51,11 +51,22 @@ $note_modal_max_width: 48rem;
   }
 }
 
+.formModalContent {
+  block-size: calc(100% - 0px);
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoints.smallerThanTablet {
+    --content-padding-end: var(--spacing-large);
+    padding-block-end: 0;
+  }
+}
+
 .headerClassName {
   background-color: var(--color-background-elevated-new);
 
   @include breakpoints.tablet {
-    block-size: calc(var(--spacing-medium-plus-px) * 2.75);
+    min-block-size: calc(var(--spacing-medium-plus-px) * 2.75);
     align-items: flex-start;
 
     border-block-end: var(--spacing-hairline-px) solid var(--color-separators);
@@ -70,7 +81,7 @@ $note_modal_max_width: 48rem;
     justify-content: space-between;
     align-items: center;
 
-    block-size: calc(2 * var(--spacing-mega));
+    min-block-size: calc(2 * var(--spacing-mega));
     padding-block: 0;
   }
 }

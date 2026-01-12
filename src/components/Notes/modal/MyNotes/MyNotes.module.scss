@@ -14,16 +14,16 @@
   }
 }
 
+.notesListContainer {
+  block-size: 100%;
+  overflow-y: auto;
+}
+
 .notesList {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  overflow-y: auto;
-  max-block-size: 45vh;
-
-  @include breakpoints.smallerThanTablet {
-    max-block-size: 60vh;
-  }
+  block-size: 0rem;
 }
 
 .noteCard {
@@ -87,6 +87,7 @@
 
 .actions {
   margin-inline-start: auto;
+  padding-block-end: var(--content-padding-end, 0);
 }
 
 .addNoteButton {

@@ -80,7 +80,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
   const showStatus = isLoading || error || showEmptyState;
 
   return (
-    <div className={styles.container} data-testid="my-notes-modal-content">
+    <>
       {showStatus ? (
         <div className={styles.statusContainer} data-error={!!error}>
           {isLoading && <Spinner size={SpinnerSize.Large} />}
@@ -88,45 +88,51 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
           {showEmptyState && t('empty-notes')}
         </div>
       ) : (
-        <div className={styles.notesList}>
-          {notes.map((note) => (
-            <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
-              <div className={styles.noteHeader}>
-                <div>
-                  <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
-                  <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
-                    {formatNoteDate(note.createdAt, lang)}
-                  </time>
-                </div>
-                <div className={styles.noteActions}>
-                  <QRButton note={note} postUrl={note.postUrl} onPostToQrClick={onPostToQrClick} />
-
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    size={ButtonSize.Small}
-                    shape={ButtonShape.Square}
-                    onClick={() => onEditNote(note)}
-                    tooltip={t('common:edit')}
-                    ariaLabel={t('common:edit')}
-                    data-testid="edit-note-button"
-                  >
-                    <IconContainer
-                      icon={<EditIcon />}
-                      shouldForceSetColors={false}
-                      size={IconSize.Xsmall}
-                      className={styles.actionIcon}
+        <div className={styles.notesListContainer}>
+          <div className={styles.notesList}>
+            {notes.map((note) => (
+              <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
+                <div className={styles.noteHeader}>
+                  <div>
+                    <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
+                    <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
+                      {formatNoteDate(note.createdAt, lang)}
+                    </time>
+                  </div>
+                  <div className={styles.noteActions}>
+                    <QRButton
+                      note={note}
+                      postUrl={note.postUrl}
+                      onPostToQrClick={onPostToQrClick}
                     />
-                  </Button>
 
-                  <DeleteNoteButton note={note} />
+                    <Button
+                      variant={ButtonVariant.Ghost}
+                      size={ButtonSize.Small}
+                      shape={ButtonShape.Square}
+                      onClick={() => onEditNote(note)}
+                      tooltip={t('common:edit')}
+                      ariaLabel={t('common:edit')}
+                      data-testid="edit-note-button"
+                    >
+                      <IconContainer
+                        icon={<EditIcon />}
+                        shouldForceSetColors={false}
+                        size={IconSize.Xsmall}
+                        className={styles.actionIcon}
+                      />
+                    </Button>
+
+                    <DeleteNoteButton note={note} />
+                  </div>
                 </div>
-              </div>
 
-              <p className={styles.noteText} data-testid="note-text">
-                {note.body}
-              </p>
-            </div>
-          ))}
+                <p className={styles.noteText} data-testid="note-text">
+                  {note.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -143,7 +149,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
           {t('add-another-note')}
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

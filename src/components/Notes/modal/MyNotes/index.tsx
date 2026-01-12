@@ -7,6 +7,7 @@ import { useSWRConfig } from 'swr';
 import modalStyles from '../Modal.module.scss';
 
 import MyNotes from '@/components/Notes/modal/MyNotes/MyNotes';
+import myNotesStyles from '@/components/Notes/modal/MyNotes/MyNotes.module.scss';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import { invalidateCache } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
@@ -100,6 +101,12 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         onClose={onClose}
         onEscapeKeyDown={onClose}
         hasCloseButton
+        overlayClassName={modalStyles.overlay}
+        headerClassName={modalStyles.headerClassName}
+        closeIconClassName={modalStyles.cloneIconContainer}
+        contentClassName={classNames(modalStyles.content, modalStyles.formModalContent)}
+        innerContentClassName={classNames(myNotesStyles.container, modalStyles.formModalContent)}
+        dataTestId="my-notes-modal-content"
         header={
           <button
             type="button"
@@ -118,10 +125,6 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
             {t('my-notes', { count: toLocalizedNumber(notesCount, lang) })}
           </button>
         }
-        contentClassName={modalStyles.content}
-        overlayClassName={modalStyles.overlay}
-        headerClassName={modalStyles.headerClassName}
-        closeIconClassName={modalStyles.cloneIconContainer}
       >
         <MyNotes
           onAddNote={onAddNote}
