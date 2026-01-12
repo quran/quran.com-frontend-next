@@ -126,6 +126,7 @@ $isNavbarVisible: var(--isNavbarVisible);
 
   &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
     [dir='rtl'] & {
       transform: translateY($top-menu-height);
     }
@@ -154,6 +155,7 @@ $isNavbarVisible: var(--isNavbarVisible);
 
   &[data-is-homepage='false'] {
     transform: translateY($context-menu-height);
+    block-size: calc(95vh);
     [dir='rtl'] & {
       transform: translateY($context-menu-height);
     }
