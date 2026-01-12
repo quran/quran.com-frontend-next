@@ -216,10 +216,12 @@ Note: visibleContainerCollapsed uses transform: translateY($context-menu-height-
 
 On QuranReader pages, the ContextMenu appears below the Navbar.
 
+**Shows: Navbar (Banner Center) + Context Menu**
+
 ```
 ╔═══════════════════════════════════════════════════════════════╗
 ║                     NAVBAR (z-index: 400)                     ║
-║              [Banner] + [NavbarBody]                          ║
+║              [Banner Center] + [NavbarBody]                   ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                  CONTEXT MENU (z-index: 300)                  ║
 ║              [Surah Info] [Reading Mode] [Page #]             ║
@@ -249,6 +251,8 @@ Sidebar: OFF-SCREEN (translateX(-100%) translateY($top-menu-height))
 ---
 
 ### 6. Desktop, QuranReader, Scrolling DOWN, Sidebar CLOSED
+
+**Shows: Context Menu**
 
 ```
 ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─┐
@@ -510,6 +514,8 @@ $top-menu-height-home-mobile to maintain position consistency
 
 ### 13. Mobile, QuranReader, Scrolling UP, Sidebar CLOSED
 
+**Shows: Banner, Navbar, Context Menu Section, Mobile Reading Mode Tabs**
+
 ```
 ╔═══════════════════════════════════════════════════════════════╗
 ║                     NAVBAR (z-index: 400)                     ║
@@ -517,7 +523,8 @@ $top-menu-height-home-mobile to maintain position consistency
 ║              [NavbarBody]                                     ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                  CONTEXT MENU (z-index: 300)                  ║
-║              [Al-Fatihah ▼]              [Page 1]             ║
+║              [Context Menu Section]                           ║
+║              [Mobile Reading Mode Tabs]                       ║
 ║              transform: translateY(navbar + banner)           ║
 ╠═════════════════════════════════════════════════════════════  ║
 ║                    [PROGRESS BAR]                             ║
@@ -546,13 +553,16 @@ Sidebar: OFF-SCREEN
 
 ### 14. Mobile, QuranReader, Scrolling DOWN, Sidebar CLOSED
 
+**Shows: Context Menu Page Info, Context Menu Section, Progress Bar**
+
 ```
 ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─┐
 │ NAVBAR (HIDDEN - translateY(-(navbar + banner)))              │
 └ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─┘
 ╔═══════════════════════════════════════════════════════════════╗
 ║                  CONTEXT MENU (z-index: 300)                  ║
-║              [Al-Fatihah ▼]               [Page 1]            ║
+║              [Context Menu Page Info]                         ║
+║              [Context Menu Section]                           ║
 ║              Stays visible at top of screen!                  ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                    [PROGRESS BAR]                             ║

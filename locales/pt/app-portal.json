@@ -3,34 +3,50 @@
     "apps": {
       "muhaffidh": {
         "caption": "Memorize e revise o Alcorão de forma eficiente.",
+        "description": "Um aplicativo do Alcorão desenvolvido para ajudar você a memorizar e revisar o Alcorão de uma forma inovadora.",
+        "tagline": "Um guia inovador para memorização e revisão do Alcorão.",
         "title": "Muhaffidh"
       },
       "quran_android": {
         "caption": "Leia, marque e ouça o Alcorão em dispositivos Android.",
+        "description": "Os recursos incluem páginas no estilo Madani, áudio sem interrupções, marcação/etiquetagem/compartilhamento, busca, modo noturno, repetição de áudio e traduções/tafsir em vários idiomas.",
+        "tagline": "Aplicativo gratuito e de código aberto do Alcorão para Android",
         "title": "Alcorão para Android"
       },
       "quran_ios": {
         "caption": "Aplicativo de leitura e audição do Alcorão bonito e sem anúncios para iPhone e iPad.",
+        "description": "Dos criadores do Quran.com: leia o Alcorão em qualquer lugar, memorize e ouça seus recitadores favoritos em uma experiência limpa e sem anúncios.",
+        "tagline": "Um aplicativo Mushaf lindo e sem anúncios.",
         "title": "Alcorão para iOS (por quran.com)"
       },
       "quranmeet": {
         "caption": "Sessões de estudo do Alcorão ao vivo",
+        "description": "Uma plataforma que conecta alunos com professores e grupos de estudo para sessões de aprendizado do Alcorão individuais e em pequenos grupos.",
+        "tagline": "Sessões de estudo do Alcorão individuais e em pequenos grupos",
         "title": "Encontro com o Alcorão"
       },
       "quranreflect": {
         "caption": "Compartilhe suas reflexões",
+        "description": "Uma plataforma social para incentivar e facilitar reflexões sobre o Alcorão - compartilhe reflexões, explore tópicos e interaja com a comunidade.",
+        "tagline": "Compartilhem reflexões e cresçam juntos.",
         "title": "Refletir sobre o Alcorão"
       },
       "readtafsir": {
         "caption": "Pesquise e compare tafsirs clássicos",
+        "description": "Leia e ouça diversas fontes clássicas de tafsir em um só lugar, facilitando a navegação, a busca e a comparação de interpretações.",
+        "tagline": "Leitura e audição interativas do tafsir",
         "title": "Leia Tafsir"
       },
       "sunnah": {
         "caption": "Coleção de Hadiths",
+        "description": "Uma biblioteca de hadith com grandes coleções disponíveis online, incluindo traduções em vários idiomas e ferramentas de busca.",
+        "tagline": "Hadith ao seu alcance",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
         "caption": "Tafsir interativo com múltiplas fontes",
+        "description": "Um portal de pesquisa do Alcorão que reúne tafsir, qira'at, mushafs, i'rab, ciências do Alcorão, asbab al-nuzul, decisões e dicionários.",
+        "tagline": "Um centro de pesquisa do Alcorão",
         "title": "Aplicativo Tafsir"
       }
     },
@@ -44,6 +60,11 @@
       "study-tools": "Ferramentas de estudo"
     },
     "title": "Veja todos os aplicativos"
+  },
+  "cta": {
+    "app-store": "Baixe na App Store",
+    "google-play": "Baixe no Google Play",
+    "visit": "Visita"
   },
   "featured": {
     "apps": {

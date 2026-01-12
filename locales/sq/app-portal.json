@@ -3,34 +3,50 @@
     "apps": {
       "muhaffidh": {
         "caption": "Mëso përmendësh dhe përsërit Kuranin në mënyrë efikase",
+        "description": "Një aplikacion Kurani i krijuar për t'ju ndihmuar të mësoni përmendësh dhe të rilexoni Kuranin në një mënyrë inovative.",
+        "tagline": "Një shoqërues inovativ për mësimin përmendësh dhe rishikimin e Kuranit",
         "title": "Muhaffidh"
       },
       "quran_android": {
         "caption": "Lexoni, shtoni në faqeshënues dhe dëgjoni Kuranin në pajisjet Android",
+        "description": "Karakteristikat përfshijnë faqe në stilin Madani, audio pa boshllëqe, shënjues/etiketim/ndarje, kërkim, modalitet nate, përsëritje audio dhe përkthime/tefsir në shumë gjuhë.",
+        "tagline": "Aplikacion falas dhe me burim të hapur për Kuranin për Android",
         "title": "Kurani për Android"
       },
       "quran_ios": {
         "caption": "Aplikacion i bukur dhe pa reklama për leximin dhe dëgjimin e Kuranit për iPhone dhe iPad",
+        "description": "Nga krijuesit e Quran.com: lexoni Kuranin në lëvizje, mësoni përmendësh dhe dëgjoni recituesit tuaj të preferuar në një përvojë të pastër dhe pa reklama.",
+        "tagline": "Një aplikacion i bukur dhe pa reklama Mushaf",
         "title": "Kurani për iOS (nga quran.com)"
       },
       "quranmeet": {
         "caption": "Seanca të drejtpërdrejta të studimit të Kuranit",
+        "description": "Një platformë që lidh studentët me mësuesit dhe grupet e studimit për seanca individuale dhe në grupe të vogla të të mësuarit të Kuranit.",
+        "tagline": "Sesione Kurani 1-me-1 dhe në grupe të vogla",
         "title": "Takim me Kuranin"
       },
       "quranreflect": {
         "caption": "Ndani reflektimet",
+        "description": "Një platformë sociale për inkurajimin dhe lehtësimin e reflektimeve kuranore - ndani reflektime, eksploroni tema dhe angazhohuni me komunitetin.",
+        "tagline": "Ndani reflektimet dhe rrituni së bashku",
         "title": "Reflektimi i Kuranit"
       },
       "readtafsir": {
         "caption": "Kërko dhe krahaso tefsiret klasike",
+        "description": "Lexoni dhe dëgjoni burime të shumta klasike të tefsirit në një vend, duke e bërë të lehtë shfletimin, kërkimin dhe krahasimin e interpretimeve.",
+        "tagline": "Lexim dhe dëgjim interaktiv i tefsirit",
         "title": "Lexo Tefsirin"
       },
       "sunnah": {
         "caption": "Koleksion Hadithi",
+        "description": "Një bibliotekë hadithesh me koleksione të mëdha të disponueshme në internet, duke përfshirë përkthime në gjuhë të shumta dhe mjete kërkimi.",
+        "tagline": "Hadithi në majë të gishtave tuaj",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
         "caption": "Tefsir interaktiv me burime të shumta",
+        "description": "Një portal kërkimor i Kur'anit që bashkon tefsir, kiraat, mushaf, i'rab, shkenca Kur'anore, asbab al-nuzul, vendime dhe fjalorë.",
+        "tagline": "Një qendër kërkimore për Kuranin",
         "title": "Aplikacioni Tafsir"
       }
     },
@@ -44,6 +60,11 @@
       "study-tools": "Mjete studimi"
     },
     "title": "Shfleto të gjitha aplikacionet"
+  },
+  "cta": {
+    "app-store": "Shkarko në App Store",
+    "google-play": "Merre në Google Play",
+    "visit": "Vizitë"
   },
   "featured": {
     "apps": {

@@ -120,6 +120,17 @@
   "text-copied": "ጽሑፉ ወደ ቅንጥብ ሰሌዳው ተገልብጧል!",
   "trans-change": "ለውጥ",
   "translation-by": "ትርጉም በ",
+  "translation-feedback": {
+    "feedback": "ግብረመልስ",
+    "no-translations-in-preferences": "በምርጫዎችዎ ውስጥ ምንም ትርጉሞች የሉም",
+    "placeholder": "ከተመረጠው የዚህ አያህ ትርጉም ጋር የተያያዘ ችግርን ሪፖርት ለማድረግ ይህንን ቦታ ይጠቀሙ።",
+    "report": "ሪፖርት ያድርጉ",
+    "select": "ምረጥ...",
+    "select-translation": "ትርጉም ምረጥ፡",
+    "submission-success": "የእርስዎ ግብረመልስ በተሳካ ሁኔታ ተልኳል",
+    "title": "የትርጉም ግብረመልስ",
+    "translation": "ትርጉም"
+  },
   "verses-range": "የጥቅሶች ክልል",
   "view-on-quran-reflect": "በቁርዓን ሪፍሌክት ላይ ይመልከቱ"
 }

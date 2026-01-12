@@ -120,6 +120,17 @@
   "text-copied": "Text has been copied to the clipboard!",
   "trans-change": "Change",
   "translation-by": "Translation by",
+  "translation-feedback": {
+    "feedback": "Feedback",
+    "no-translations-in-preferences": "No translations in your preferences",
+    "placeholder": "Use this space to report an issue relating to the selected translation of this Ayah.",
+    "report": "Report",
+    "select": "Select...",
+    "select-translation": "Select translation:",
+    "submission-success": "Your feedback is sent successfully",
+    "title": "Translation Feedback",
+    "translation": "Translation"
+  },
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect"
 }

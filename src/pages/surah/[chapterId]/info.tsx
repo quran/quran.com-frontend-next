@@ -1,68 +1,159 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
-import InfoPage from '@/components/chapters/Info/InfoPage';
+import { getPagesLookup, getChapterInfo, getChapterIdBySlug } from '@/api';
+import SurahInfoPage from '@/components/chapters/Info/SurahInfoPage';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import QuranReader from '@/components/QuranReader';
+import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import { getChapterData, getAllChaptersData } from '@/utils/chapter';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { ChapterResponse, VersesResponse, ChapterInfoResponse } from '@/types/ApiResponses';
+import ChaptersData from '@/types/ChaptersData';
+import Language from '@/types/Language';
+import { QuranReaderDataType } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { toLocalizedNumber, getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
 import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidChapterId } from '@/utils/validator';
-import { getChapterIdBySlug, getChapterInfo } from 'src/api';
-import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 
-interface Props {
-  chapterResponse?: ChapterResponse;
-  chapterInfoResponse?: ChapterInfoResponse;
+type ChapterInfoProps = {
   chaptersData: ChaptersData;
-}
-
-const ChapterInfo: NextPage<Props> = ({ chapterResponse, chapterInfoResponse, chaptersData }) => {
-  return <InfoPage {...{ chapterResponse, chapterInfoResponse, chaptersData }} />;
+  chapterResponse: ChapterResponse;
+  versesResponse: VersesResponse;
+  chapterInfoResponse: ChapterInfoResponse;
+  quranReaderDataType: QuranReaderDataType;
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  let chapterIdOrSlug = String(params.chapterId);
-  // we need to validate the chapterId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidChapterId(chapterIdOrSlug)) {
-    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
-    // if it's not a valid slug
-    if (!sluggedChapterId) {
-      return { notFound: true };
-    }
-    chapterIdOrSlug = sluggedChapterId;
-  }
+const ChapterInfo: NextPage<ChapterInfoProps> = ({
+  chapterResponse,
+  versesResponse,
+  chapterInfoResponse,
+  quranReaderDataType,
+}) => {
+  const { t, lang } = useTranslation('common');
+
+  // Early return if required data is missing
+  if (!versesResponse || !chapterResponse || !chapterInfoResponse?.chapterInfo) return null;
+  const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
+
+  return (
+    <>
+      <NextSeoWrapper
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          1,
+          lang,
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
+        image={getChapterOgImageUrl({
+          chapterId: chapterInfoResponse.chapterInfo.id,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+        description={chapterInfoResponse.chapterInfo.shortText}
+      />
+
+      <SurahInfoPage
+        chapterInfo={chapterInfoResponse.chapterInfo}
+        chapter={chapterResponse.chapter}
+      />
+
+      <QuranReader
+        initialData={versesResponse}
+        id={chapterResponse.chapter.id}
+        quranReaderDataType={quranReaderDataType}
+      />
+    </>
+  );
+};
+
+const getChapterInfoData = async (chapterId: string, locale: string) => {
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale as Language).quranFont,
+    getQuranReaderStylesInitialState(locale as Language).mushafLines,
+  ).mushaf;
+
+  const pagesLookupResponse = await getPagesLookup({
+    chapterNumber: Number(chapterId),
+    mushaf: defaultMushafId,
+  });
+
   const chaptersData = await getAllChaptersData(locale);
+  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+    chaptersData,
+    pagesLookupResponse.lookupRange.from,
+    pagesLookupResponse.lookupRange.to,
+  ).length;
+
+  const minimalVersesResponse: VersesResponse = {
+    metaData: { numberOfVerses },
+    pagesLookup: pagesLookupResponse,
+    verses: [],
+    pagination: {
+      perPage: 10,
+      currentPage: 1,
+      nextPage: null,
+      totalRecords: numberOfVerses,
+      totalPages: Math.ceil(numberOfVerses / 10),
+    },
+  };
+
+  return { versesResponse: minimalVersesResponse, chaptersData };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { params, locale } = context;
+  let chapterId = String(params.chapterId);
+
+  if (!isValidChapterId(chapterId)) {
+    const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+    if (!sluggedChapterId) return { notFound: true };
+    chapterId = sluggedChapterId;
+  }
+
   try {
-    const chapterInfoResponse = await getChapterInfo(chapterIdOrSlug, locale);
+    const { versesResponse, chaptersData } = await getChapterInfoData(chapterId, locale);
+    const chapterData = getChapterData(chaptersData, chapterId);
+    const chapterInfoResponse = await getChapterInfo(chapterId, locale);
+
+    /**
+     * If the request succeeds, `chapterInfo` should exist.
+     * Its absence means the surah has no chapter info yet.
+     */
+    if (!chapterInfoResponse?.chapterInfo) return { notFound: true };
+
     return {
       props: {
         chaptersData,
+        chapterResponse: { chapter: { ...chapterData, id: chapterId } },
+        versesResponse,
         chapterInfoResponse,
-        chapterResponse: { chapter: getChapterData(chaptersData, chapterIdOrSlug) },
+        quranReaderDataType: QuranReaderDataType.Chapter,
       },
-      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
+
+      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-SurahInfoPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
-      },
+      metadata: { chapterId, locale },
     });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
+
+    return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
   }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+  paths: [],
+  fallback: 'blocking',
 });
 
 export default ChapterInfo;

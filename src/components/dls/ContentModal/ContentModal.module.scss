@@ -154,6 +154,7 @@ $translateYDistance: 200px;
   align-items: center;
   justify-content: center;
 }
+
 .header {
   position: sticky;
   inset-block-start: 0;
@@ -164,6 +165,7 @@ $translateYDistance: 200px;
   z-index: 1;
   padding-inline: var(--spacing-small);
   padding-inline-end: var(--spacing-xlarge-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 
   @include breakpoints.tablet {
     position: relative;

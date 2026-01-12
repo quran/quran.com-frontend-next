@@ -7,53 +7,6 @@ $section-padding: var(--spacing-large-px);
 $widget-border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
 $widget-border-radius: var(--border-radius-rounded);
 
-.heroContainer {
-  position: relative;
-  overflow: hidden;
-  padding-block-start: var(--spacing-medium3-px);
-  padding-block-end: var(--spacing-xlarge-px);
-  padding-inline: var(--spacing-medium2-px);
-  margin-block-end: calc(-1 * (var(--spacing-xlarge-px) - var(--spacing-medium2-px)));
-
-  @include breakpoints.tablet {
-    padding-block: var(--spacing-large-px);
-    padding-inline: var(--spacing-medium2-px);
-    margin-block-end: 0;
-  }
-}
-
-.heroBackgroundImage {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--color-search-background);
-
-  svg {
-    inline-size: 100%;
-    transform: translateY(-40%);
-  }
-}
-
-.heroInnerContainer {
-  @include utility.pageContainer();
-
-  display: flex;
-  block-size: 100%;
-  gap: var(--spacing-small-px);
-  align-items: center;
-  margin-inline: auto;
-
-  h1 {
-    font-size: var(--font-size-large-px);
-    line-height: var(--line-height-jumbo);
-    font-weight: var(--font-weight-bold);
-
-    @include breakpoints.tablet {
-      font-size: var(--font-size-xxxlarge-px);
-    }
-  }
-}
-
 .contentContainer {
   background-color: var(--color-background-default);
   border-radius: $widget-border-radius;

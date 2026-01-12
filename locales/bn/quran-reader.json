@@ -120,6 +120,17 @@
   "text-copied": "টেক্সট ক্লিপবোর্ডে কপি করা হয়েছে!",
   "trans-change": "পরিবর্তন",
   "translation-by": "দ্বারা অনুবাদ",
+  "translation-feedback": {
+    "feedback": "প্রতিক্রিয়া",
+    "no-translations-in-preferences": "আপনার পছন্দগুলিতে কোনও অনুবাদ নেই",
+    "placeholder": "এই আয়াতের নির্বাচিত অনুবাদ সম্পর্কিত কোনও সমস্যা রিপোর্ট করতে এই স্থানটি ব্যবহার করুন।",
+    "report": "রিপোর্ট",
+    "select": "নির্বাচন করুন...",
+    "select-translation": "অনুবাদ নির্বাচন করুন:",
+    "submission-success": "আপনার প্রতিক্রিয়া সফলভাবে পাঠানো হয়েছে।",
+    "title": "অনুবাদ প্রতিক্রিয়া",
+    "translation": "অনুবাদ"
+  },
   "verses-range": "শ্লোকের পরিসর",
   "view-on-quran-reflect": "কুরআন রিফ্লেক্টে দেখুন"
 }

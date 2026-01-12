@@ -120,6 +120,17 @@
   "text-copied": "¡El texto ha sido copiado al portapapeles!",
   "trans-change": "Cambiar",
   "translation-by": "Traducción por",
+  "translation-feedback": {
+    "feedback": "Comentario",
+    "no-translations-in-preferences": "No hay traducciones en tus preferencias",
+    "placeholder": "Utilice este espacio para informar un problema relacionado con la traducción seleccionada de esta aleya.",
+    "report": "Informe",
+    "select": "Seleccionar...",
+    "select-translation": "Seleccionar traducción:",
+    "submission-success": "Su comentario se ha enviado correctamente",
+    "title": "Comentarios sobre la traducción",
+    "translation": "Traducción"
+  },
   "verses-range": "Gama de versos",
   "view-on-quran-reflect": "Ver en QuranReflect"
 }

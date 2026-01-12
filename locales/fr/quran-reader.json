@@ -120,6 +120,17 @@
   "text-copied": "Le texte a été copié dans le presse-papier !",
   "trans-change": "Modifier",
   "translation-by": "Traduction par",
+  "translation-feedback": {
+    "feedback": "Retour",
+    "no-translations-in-preferences": "Aucune traduction dans vos préférences",
+    "placeholder": "Utilisez cet espace pour signaler un problème concernant la traduction sélectionnée de ce verset.",
+    "report": "Rapport",
+    "select": "Sélectionner...",
+    "select-translation": "Sélectionner la traduction :",
+    "submission-success": "Votre commentaire a bien été envoyé.",
+    "title": "Commentaires sur la traduction",
+    "translation": "Traduction"
+  },
   "verses-range": "Plage d'Ayahs",
   "view-on-quran-reflect": "Voir sur QuranReflect"
 }
