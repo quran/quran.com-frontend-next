@@ -11,7 +11,7 @@ import QueryParam from '@/types/QueryParam';
 import { removeUserIdCookie } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
+import { ROUTES, PROTECTED_ROUTES } from '@/utils/navigation';
 
 type LogoutOptions = {
   eventName?: string;
@@ -48,8 +48,12 @@ const useLogout = (): LogoutFunction => {
         dispatch(clearReadingTracker());
 
         if (!redirectToLogin) {
-          const redirect = router.asPath;
-          await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
+          if (PROTECTED_ROUTES.includes(router.pathname)) {
+            await router.push(ROUTES.HOME);
+          } else {
+            const redirect = router.asPath;
+            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
+          }
         }
       } catch (error) {
         // TODO: Notify user of remote logout failure (e.g., toast/snackbar)
