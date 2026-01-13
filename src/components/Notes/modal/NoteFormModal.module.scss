@@ -1,8 +1,6 @@
 @use '@/styles/constants';
 @use '@/styles/breakpoints';
 
-$note_text_area_height: 22.5rem;
-
 .container {
   display: flex;
   flex-direction: column;
@@ -34,7 +32,7 @@ div.textArea {
     color: var(--color-text-default-new);
     block-size: unset;
     block-size: calc(100% - (2 * var(--total-side-space)));
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-medium);
     resize: none;
 
     &::placeholder {

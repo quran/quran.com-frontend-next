@@ -28,8 +28,6 @@ interface MyNotesProps {
   onEditNote: (note: Note) => void;
   verseKey: string;
   deletingNoteId: string | undefined;
-  // will use it for jumping to that location
-  // eslint-disable-next-line react/no-unused-prop-types
   processingNoteId: string | undefined;
   onPostToQrClick: (note: Note) => void;
   onDeleteNoteClick: (note: Note) => void;

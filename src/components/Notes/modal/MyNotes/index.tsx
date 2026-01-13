@@ -55,7 +55,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         hasCloseButton
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
-        closeIconClassName={modalStyles.cloneIconContainer}
+        closeIconClassName={modalStyles.closeIconContainer}
         contentClassName={classNames(modalStyles.content, modalStyles.myNotesModalContent)}
         innerContentClassName={myNotesStyles.container}
         dataTestId="my-notes-modal-content"

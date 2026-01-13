@@ -54,7 +54,7 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
       contentClassName={modalStyles.content}
       overlayClassName={modalStyles.overlay}
       headerClassName={modalStyles.headerClassName}
-      closeIconClassName={modalStyles.cloneIconContainer}
+      closeIconClassName={modalStyles.closeIconContainer}
     >
       <div className={styles.container} data-testid="qr-confirmation-modal-content">
         <p className={styles.question}>{t('post-confirmation.question')}</p>

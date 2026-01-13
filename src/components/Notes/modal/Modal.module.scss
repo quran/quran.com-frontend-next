@@ -9,6 +9,12 @@ $note_modal_max_width: 48rem;
   align-items: center;
   gap: var(--spacing-xsmall-px);
   cursor: pointer;
+
+  &:focus-visible {
+    border-radius: var(--border-radius-default);
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
 }
 
 .title {
@@ -84,7 +90,7 @@ $note_modal_max_width: 48rem;
 
     border-block-end: var(--spacing-hairline-px) solid var(--color-separators);
 
-    .cloneIconContainer {
+    .closeIconContainer {
       inset-block-start: var(--spacing-small2-px);
     }
   }
