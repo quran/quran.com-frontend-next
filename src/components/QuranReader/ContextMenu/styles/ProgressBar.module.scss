@@ -10,7 +10,7 @@
 
 .track {
   inline-size: 100%;
-  block-size: 3px;
+  block-size: var(--progress-bar-height);
   background-color: var(--color-separators-new);
   position: relative;
 }

@@ -24,14 +24,16 @@
   align-items: center;
   text-align: center;
   gap: var(--spacing-medium);
-  height: 100%;
+  block-size: 100%;
   justify-content: center;
   overflow: hidden;
 
   @include breakpoints.smallerThanTablet {
     flex-direction: row;
     align-items: center;
-    height: calc(var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)); // maintains consistent card size on mobile
+    block-size: calc(
+      var(--spacing-xxlarge-px) + var(--spacing-micro2-px) + var(--spacing-hairline-px)
+    ); // maintains consistent card size on mobile
     gap: var(--spacing-small);
     padding: var(--spacing-medium-px) var(--spacing-small-px);
   }
@@ -48,13 +50,13 @@
   @include breakpoints.smallerThanTablet {
     margin-block-end: 0;
     flex: 1;
-    min-width: 0;
+    min-inline-size: 0;
   }
 }
 
 .titleIcon {
-  width: var(--spacing-large-px);
-  height: var(--spacing-large-px);
+  inline-size: var(--spacing-large-px);
+  block-size: var(--spacing-large-px);
 
   path {
     fill: var(--color-streaks-dark);
@@ -96,7 +98,6 @@
   border-radius: var(--border-radius-medium-px);
   padding-inline: var(--spacing-small-px);
 
-
   &:hover {
     background-color: var(--color-streaks-dark);
     color: var(--color-text-white);
@@ -104,7 +105,7 @@
   }
 
   @include breakpoints.smallerThanTablet {
-    height: auto;
+    block-size: auto;
     border-radius: var(--border-radius-medium-px);
     padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
     font-size: var(--font-size-normal);
@@ -112,7 +113,7 @@
     flex-shrink: 0;
 
     // Target button content span on mobile
-    >span {
+    > span {
       align-items: center;
       text-wrap: nowrap;
     }
@@ -128,8 +129,8 @@
 
   @include breakpoints.smallerThanTablet {
     margin-inline-end: var(--spacing-small-px);
-    width: var(--spacing-medium-px);
-    height: var(--spacing-medium-px);
+    inline-size: var(--spacing-medium-px);
+    block-size: var(--spacing-medium-px);
   }
 }
 
@@ -141,27 +142,27 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-medium2-px);
-  width: 100%;
+  inline-size: 100%;
 
   @include breakpoints.smallerThanTablet {
     gap: var(--spacing-small-px);
-    width: auto;
+    inline-size: auto;
     flex: 1;
     justify-content: flex-start;
   }
 }
 
 .streakIcon {
-  width: calc(var(--spacing-large-px) * 2);
-  height: calc(var(--spacing-large-px) * 2);
+  inline-size: calc(var(--spacing-large-px) * 2);
+  block-size: calc(var(--spacing-large-px) * 2);
 
   path {
     fill: var(--color-streaks-dark);
   }
 
   @include breakpoints.smallerThanTablet {
-    width: var(--spacing-large-px);
-    height: var(--spacing-large-px);
+    inline-size: var(--spacing-large-px);
+    block-size: var(--spacing-large-px);
   }
 }
 
@@ -206,15 +207,14 @@
 }
 
 .streakArrowIcon {
-
-  >svg {
+  > svg {
     fill: var(--color-text-gray);
-    width: var(--spacing-small2-px);
-    height: var(--spacing-medium-plus2-px);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-medium-plus2-px);
 
     @include breakpoints.smallerThanTablet {
-      width: var(--spacing-xsmall-px);
-      height: var(--spacing-small2-px);
+      inline-size: var(--spacing-xsmall-px);
+      block-size: var(--spacing-small2-px);
     }
   }
 }
@@ -229,34 +229,34 @@
 
   @include breakpoints.smallerThanTablet {
     padding-block-end: 0;
-    min-width: 0;
+    min-inline-size: 0;
     flex: 1;
   }
 }
 
 .endOfSurahGoalContent {
-  width: 100%;
+  inline-size: 100%;
   gap: var(--spacing-small);
 
   @include breakpoints.smallerThanTablet {
-    min-width: 0;
+    min-inline-size: 0;
   }
 }
 
 // Custom styles for end-of-surah variant progressbar
 .endOfSurahGoalContent .customProgressbar {
-  height: auto;
-  width: auto;
+  block-size: auto;
+  inline-size: auto;
   padding-inline-end: var(--spacing-medium-px);
 
   @include breakpoints.smallerThanTablet {
     padding-inline-end: var(--spacing-small-px);
-    height: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
-    width: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+    block-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+    inline-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
 
     svg {
-      height: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
-      width: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+      block-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
+      inline-size: calc(var(--spacing-large-px) + var(--spacing-xsmall-px));
     }
   }
 }
@@ -268,8 +268,6 @@
 
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-xxsmall-px);
-
-
   }
 }
 
@@ -282,7 +280,7 @@
   @include breakpoints.smallerThanTablet {
     padding-inline-end: var(--spacing-small-plus-px);
     text-wrap: wrap;
-    min-width: 0;
+    min-inline-size: 0;
     overflow: hidden;
   }
 }
