@@ -83,11 +83,11 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
         hasCloseButton
         onClose={onModalClose}
         onEscapeKeyDown={onModalClose}
-        contentClassName={classNames(modalStyles.content, modalStyles.formModalContent)}
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
         closeIconClassName={modalStyles.cloneIconContainer}
-        innerContentClassName={classNames(modalStyles.formModalContent, styles.container)}
+        contentClassName={classNames(modalStyles.content, modalStyles.formModalContent)}
+        innerContentClassName={classNames(styles.container, modalStyles.formModalContent)}
         dataTestId={dataTestId}
       >
         <ReflectionIntro />

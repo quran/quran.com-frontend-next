@@ -2,10 +2,13 @@
 @use '@/styles/utility';
 @use '@/styles/constants';
 
+$note_title_line_height: 1.5;
+
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
   gap: var(--spacing-large-px);
+  overflow: hidden;
 
   margin-block-start: var(--spacing-large-px);
 
@@ -14,16 +17,12 @@
   }
 }
 
-.notesListContainer {
-  block-size: 100%;
-  overflow-y: auto;
-}
-
 .notesList {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  block-size: 0rem;
+  overflow-y: auto;
+  min-block-size: 8rem;
 }
 
 .noteCard {
@@ -42,17 +41,23 @@
   gap: var(--spacing-small);
 }
 
+.noteInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall-px);
+}
+
 .noteTitle {
+  color: var(--color-text-default);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text-default);
-  line-height: var(--line-height-normal);
-  margin-block-end: var(--spacing-xsmall-px);
+  line-height: $note_title_line_height;
 }
 
 .noteDate {
   font-size: var(--font-size-xsmall);
   color: var(--color-text-faded-new);
+  line-height: 1;
 }
 
 .noteActions {
@@ -60,6 +65,9 @@
   align-items: center;
   gap: var(--spacing-xxsmall-px);
   flex-shrink: 0;
+
+  // To make the note actions visually aligned with the note title
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
 }
 
 .actionIcon {
@@ -70,7 +78,7 @@
   font-size: var(--font-size-normal);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-bold);
-  @include utility.textClamp(1);
+  @include utility.textClamp(2);
 }
 
 .statusContainer {

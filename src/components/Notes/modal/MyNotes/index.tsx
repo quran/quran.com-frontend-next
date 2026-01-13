@@ -104,8 +104,8 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
         overlayClassName={modalStyles.overlay}
         headerClassName={modalStyles.headerClassName}
         closeIconClassName={modalStyles.cloneIconContainer}
-        contentClassName={classNames(modalStyles.content, modalStyles.formModalContent)}
-        innerContentClassName={classNames(myNotesStyles.container, modalStyles.formModalContent)}
+        contentClassName={classNames(modalStyles.content, modalStyles.myNotesModalContent)}
+        innerContentClassName={myNotesStyles.container}
         dataTestId="my-notes-modal-content"
         header={
           <button

@@ -30,12 +30,17 @@ div.textArea {
   textarea {
     padding: var(--spacing-xsmall);
     margin: var(--spacing-micro);
-
     --total-side-space: calc(var(--spacing-xsmall) + var(--spacing-micro));
 
     color: var(--color-text-default-new);
     block-size: unset;
     block-size: calc(100% - (2 * var(--total-side-space)));
+
+    font-weight: var(--font-weight-bold);
+
+    &::placeholder {
+      font-weight: var(--font-weight-normal);
+    }
 
     &:focus::placeholder {
       color: transparent;
@@ -111,13 +116,11 @@ div.textArea {
 
 .saveToQrButton {
   border-color: var(--color-blue-buttons-and-icons);
-  color: var(--color-text-white);
-  background-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-blue-buttons-and-icons);
 
   &:hover {
     background-color: var(--color-blue-buttons-and-icons);
     color: var(--color-text-white);
-    opacity: var(--opacity-85);
   }
 }
 

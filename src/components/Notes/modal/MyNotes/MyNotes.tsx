@@ -88,51 +88,45 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
           {showEmptyState && t('empty-notes')}
         </div>
       ) : (
-        <div className={styles.notesListContainer}>
-          <div className={styles.notesList}>
-            {notes.map((note) => (
-              <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
-                <div className={styles.noteHeader}>
-                  <div>
-                    <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
-                    <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
-                      {formatNoteDate(note.createdAt, lang)}
-                    </time>
-                  </div>
-                  <div className={styles.noteActions}>
-                    <QRButton
-                      note={note}
-                      postUrl={note.postUrl}
-                      onPostToQrClick={onPostToQrClick}
-                    />
-
-                    <Button
-                      variant={ButtonVariant.Ghost}
-                      size={ButtonSize.Small}
-                      shape={ButtonShape.Square}
-                      onClick={() => onEditNote(note)}
-                      tooltip={t('common:edit')}
-                      ariaLabel={t('common:edit')}
-                      data-testid="edit-note-button"
-                    >
-                      <IconContainer
-                        icon={<EditIcon />}
-                        shouldForceSetColors={false}
-                        size={IconSize.Xsmall}
-                        className={styles.actionIcon}
-                      />
-                    </Button>
-
-                    <DeleteNoteButton note={note} />
-                  </div>
+        <div className={styles.notesList}>
+          {notes.map((note) => (
+            <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
+              <div className={styles.noteHeader}>
+                <div className={styles.noteInfo}>
+                  <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
+                  <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
+                    {formatNoteDate(note.createdAt, lang)}
+                  </time>
                 </div>
+                <div className={styles.noteActions}>
+                  <QRButton note={note} postUrl={note.postUrl} onPostToQrClick={onPostToQrClick} />
 
-                <p className={styles.noteText} data-testid="note-text">
-                  {note.body}
-                </p>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    size={ButtonSize.Small}
+                    shape={ButtonShape.Square}
+                    onClick={() => onEditNote(note)}
+                    tooltip={t('common:edit')}
+                    ariaLabel={t('common:edit')}
+                    data-testid="edit-note-button"
+                  >
+                    <IconContainer
+                      icon={<EditIcon />}
+                      shouldForceSetColors={false}
+                      size={IconSize.Xsmall}
+                      className={styles.actionIcon}
+                    />
+                  </Button>
+
+                  <DeleteNoteButton note={note} />
+                </div>
               </div>
-            ))}
-          </div>
+
+              <p className={styles.noteText} data-testid="note-text">
+                {note.body}
+              </p>
+            </div>
+          ))}
         </div>
       )}
 

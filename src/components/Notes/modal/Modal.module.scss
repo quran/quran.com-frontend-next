@@ -33,13 +33,21 @@ $note_modal_max_width: 48rem;
 }
 
 .overlay {
+  --space-taken: calc(2 * (2 * var(--spacing-mega)));
+  padding-block: calc(2 * var(--spacing-mega));
+
   scrollbar-gutter: stable both-edges;
   @include breakpoints.smallerThanTablet {
+    --space-taken: calc(2 * var(--spacing-large));
+    padding-block-end: 0;
     place-items: end;
   }
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+
   max-inline-size: $note_modal_max_width;
   background-color: var(--color-background-elevated-new);
 
@@ -51,10 +59,14 @@ $note_modal_max_width: 48rem;
   }
 }
 
+.myNotesModalContent {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  max-block-size: calc(100dvh - var(--space-taken, 0px));
+}
+
 .formModalContent {
-  block-size: calc(100% - 0px);
-  display: flex;
-  flex-direction: column;
+  block-size: 100%;
 
   @include breakpoints.smallerThanTablet {
     --content-padding-end: var(--spacing-large);
