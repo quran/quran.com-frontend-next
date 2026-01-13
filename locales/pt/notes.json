@@ -8,6 +8,7 @@
     },
     "post-button": "O que acontece quando eu posto no QuranReflect?",
     "qr-intro": "QuranReflect, junto com Quran.com, faz parte da família Quran.Foundation. É uma plataforma social para compartilhar reflexões pessoais sobre o Quran, incentivando os usuários a internalizar suas mensagens e compartilhar ideias que inspiram mudanças positivas. Ao contrário do tafsir, que é uma interpretação acadêmica, as reflexões são pensamentos e experiências pessoais relacionadas aos versos. As postagens dos usuários no QuranReflect são revisadas e moderadas por uma equipe qualificada, que ajudará a garantir a qualidade do conteúdo e as etiquetas ao interagir com o Quran, e capacitarão os usuários compartilhando feedback e destacando discursos valiosos, promovendo assim uma comunidade espiritualmente edificante e focada no Quran. Saiba mais: <link> Quranreflect.com/faq </link>",
+    "qr-title": "O que é o QuranReflect?",
     "title": "O que é QuranReflect e o que acontece se eu marcar esta caixa?"
   },
   "click-to-see-more": "clique para ver mais",
@@ -17,10 +18,13 @@
     "title": "Excluir nota"
   },
   "delete-success": "A nota foi excluída com sucesso",
+  "edit-note": "Editar nota",
   "empty-notes": "Nenhuma nota encontrada",
   "empty-reflections": "Nenhum reflexo encontrado",
   "export-success": "A nota foi publicada em sua conta no QuranReflect com sucesso",
+  "my-notes": "Minhas anotações ({{count}})",
   "new-note-reflc-intro": {
+    "learn-more": "Saber mais",
     "reflc-prompts": {
       "deeper": {
         "desc": "<li> Há algum nome de Allah mencionado e como eles se relacionam com o versículo? </li> <li> Quais palavras ou aspectos linguísticos chamaram sua atenção? </li> <li> Você consegue estabelecer conexões com o contexto do versículo, outros versículos do Quran, hadith ou eventos? </li>",
@@ -32,6 +36,7 @@
       },
       "title": "Solicitações de reflexão"
     },
+    "see-less": "Ver menos",
     "title": "Precisa de ajuda para refletir sobre o Quran? Saber mais",
     "what-is-reflc": {
       "desc": "Refletir ou ponderar sobre o Quran envolve ler ou ouvir atentamente as palavras de Allah, envolver-se com seus significados e permitir que isso nos afete e nos mude para melhor. Isso é conhecido como \"Tadabbur\". Tafsir, por outro lado, é uma interpretação acadêmica do Quran, fornecendo explicações detalhadas de seus versículos com base em fontes clássicas e análises acadêmicas. Embora Tafsir seja reservado aos estudiosos, Allah ﷻ pede a todos que se envolvam em Tadabbur (Quran <link1> 38:29 </link1> , <link2> 47:24 </link2> , <link3> 4:82 </link3> , e muitos mais). <br></br> <br></br> Os usuários podem salvar suas notas e reflexões pessoais de forma privada. Muitas vezes, nossas reflexões podem ressoar profundamente nos outros, ajudando na sua conexão com o Quran e no seu relacionamento com Allah ﷻ. É por isso que os usuários têm a opção de compartilhar suas reflexões no QuranReflect como parte de nossos esforços para ajudar as pessoas a crescerem juntas em sua jornada. Para saber mais, visite: <link4> QuranReflect.com/faq </link4> e <link5> Cinco lentes para refletir sobre o Quran </link5>",
@@ -40,7 +45,12 @@
   },
   "note": "Observação",
   "notes-and-reflcs": "Notas e reflexões",
+  "notes-on-this-verse": "{{count}} notas sobre este verso",
+  "post-confirmation": {
+    "question": "Tem certeza de que deseja publicar esta reflexão no QuranReflect?"
+  },
   "post-on-qr": "Postar no QuranReflect",
+  "post-to": "Postar em",
   "posted-reflections": "Reflexões postadas",
   "private-notes": "Notas",
   "qr-tooltip": "<span> <link> QuranReflect </link> é uma plataforma social para compartilhar reflexões sobre o Quran. Conecte-se em torno do Quran, conecte-se com o que importa. </span>",
@@ -57,6 +67,7 @@
   "save-success": "A nota foi salva com sucesso",
   "share-to-qr": "Compartilhe no QuranReflect.com",
   "share-to-qr-desc": "Compartilhe como <b> {{name}} </b> . O público-alvo são <b> usuários do QuranReflect </b>",
+  "take-a-note-or-reflection": "Faça uma anotação ou reflexão.",
   "update-publish-failed": "A nota foi atualizada com sucesso, mas não foi publicada",
   "update-reflection": "Atualização de Reflexão",
   "update-success": "A nota foi atualizada com sucesso",

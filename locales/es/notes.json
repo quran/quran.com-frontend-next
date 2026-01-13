@@ -8,6 +8,7 @@
     },
     "post-button": "¿Qué sucede cuando publico en QuranReflect?",
     "qr-intro": "QuranReflect, junto con Quran.com, es parte de la familia Quran.Foundation. Es una plataforma social para compartir reflexiones personales sobre el Corán, animando a los usuarios a interiorizar sus mensajes y compartir ideas que inspiren cambios positivos. A diferencia del tafsir, que es una interpretación académica, las reflexiones son pensamientos y experiencias personales relacionadas con los versículos. Las publicaciones de los usuarios en QuranReflect son revisadas y moderadas por un equipo calificado, que ayudará a garantizar la calidad del contenido y las normas de etiqueta al interactuar con el Corán, y empoderará a los usuarios a compartir comentarios y destacando comentarios valiosos, fomentando así una comunidad espiritualmente edificante y centrada en el Corán. Obtén más información: <link> Quranreflect.com/faq </link>",
+    "qr-title": "¿Qué es QuranReflect?",
     "title": "¿Qué es QuranReflect y qué pasa si selecciono este apartado?"
   },
   "click-to-see-more": "Haz clic para ver más",
@@ -17,10 +18,13 @@
     "title": "Borrar nota."
   },
   "delete-success": "La nota ha sido eliminada con éxito",
+  "edit-note": "Editar nota",
   "empty-notes": "No se encontraron notas.",
   "empty-reflections": "No se encontraron reflexiones.",
   "export-success": "La nota se ha publicado en tu cuenta de QuranReflect con éxito",
+  "my-notes": "Mis notas ({{count}})",
   "new-note-reflc-intro": {
+    "learn-more": "Más información",
     "reflc-prompts": {
       "deeper": {
         "desc": "<li> ¿Se menciona algún nombre de Alá y cómo se relaciona con el versículo? </li> <li> ¿Qué palabras o aspectos lingüísticos te llamaron la atención? </li> <li> ¿Puedes establecer conexiones con el contexto del versículo, otros versículos coránicos, hadices o eventos? </li>",
@@ -32,6 +36,7 @@
       },
       "title": "Apuntes para la reflexión"
     },
+    "see-less": "Ver menos",
     "title": "¿Necesitas ayuda para reflexionar sobre el Corán? Aprende más",
     "what-is-reflc": {
       "desc": "Reflexionar o meditar sobre el Corán implica leer o escuchar atentamente las palabras de Alá, involucrarse con sus significados y permitir que nos afecte y nos cambie para mejor. Esto se conoce como \"Tadabbur\". El Tafsir, en cambio, es una interpretación académica del Corán, que proporciona explicaciones detalladas de sus versículos basadas en fuentes clásicas y análisis académicos. Mientras que el Tafsir está reservado para los eruditos, Alá ﷻ pide a todos que participen en Tadabbur (Corán <link1> 38:29 </link1>, <link2> 47:24 </link2>, <link3> 4:82 </link3>, y muchos más). <br> </br> <br> </br> Los usuarios pueden guardar sus notas y reflexiones personales de forma privada. A menudo, nuestras reflexiones pueden resonar profundamente a los demás, lo que ayuda a su conexión con el Corán y su relación con Alá ﷻ. Por eso, los usuarios tienen la opción de compartir sus reflexiones en QuranReflect como parte de nuestros esfuerzos por ayudar a las personas a crecer juntas en su camino. Para obtener más información, visita: <link4> QuranReflect.com/faq </link4> y <link5> Cinco puntos de vista para reflexionar sobre el Corán </link5>",
@@ -40,7 +45,12 @@
   },
   "note": "Nota",
   "notes-and-reflcs": "Notas y reflexiones",
+  "notes-on-this-verse": "{{count}} notas sobre este verso",
+  "post-confirmation": {
+    "question": "¿Estás seguro de que deseas publicar esta reflexión en QuranReflect?"
+  },
   "post-on-qr": "Publicación en QuranReflect",
+  "post-to": "Publicar en",
   "posted-reflections": "Reflexiones publicadas",
   "private-notes": "Notas",
   "qr-tooltip": "<span> <link> QuranReflect </link> es una plataforma social para compartir reflexiones sobre el Corán. Conéctate en torno al Corán, conéctate con lo que importa. </span>",
@@ -57,6 +67,7 @@
   "save-success": "La nota se ha guardado correctamente.",
   "share-to-qr": "Compartir en QuranReflect.com",
   "share-to-qr-desc": "Compartir como <b> {{name}} </b>. La audiencia son <b> usuarios de QuranReflect </b>",
+  "take-a-note-or-reflection": "Tome una nota o reflexión",
   "update-publish-failed": "La nota se actualizó correctamente pero no se pudo publicar",
   "update-reflection": "Reflexión sobre la actualización",
   "update-success": "La nota se ha actualizado correctamente.",
