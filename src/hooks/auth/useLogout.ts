@@ -11,7 +11,7 @@ import QueryParam from '@/types/QueryParam';
 import { removeUserIdCookie } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES, WITH_AUTH_ROUTES } from '@/utils/navigation';
+import { ROUTES, PROTECTED_ROUTES } from '@/utils/navigation';
 
 type LogoutOptions = {
   eventName?: string;
@@ -48,7 +48,7 @@ const useLogout = (): LogoutFunction => {
         dispatch(clearReadingTracker());
 
         if (!redirectToLogin) {
-          if (WITH_AUTH_ROUTES.includes(router.pathname)) {
+          if (PROTECTED_ROUTES.includes(router.pathname)) {
             await router.push(ROUTES.HOME);
           } else {
             const redirect = router.asPath;

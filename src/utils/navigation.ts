@@ -44,7 +44,10 @@ export const AUTH_ROUTES = [
   ROUTES.COMPLETE_SIGNUP,
 ];
 
-export const WITH_AUTH_ROUTES = [
+/**
+ * routes that require authentication
+ */
+export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
   ROUTES.COLLECTIONS_ALL,
