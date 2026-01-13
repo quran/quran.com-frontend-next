@@ -111,12 +111,22 @@ $widget-border-radius: var(--border-radius-rounded);
   color: var(--color-text-default-new);
   font-size: var(--font-size-large-px);
   font-weight: var(--font-weight-semibold);
+  svg {
+    block-size: var(--spacing-large-px);
+    inline-size: var(--spacing-large-px);
+  }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
 
 .emptyWidgetDescription {
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .emptyWidgetCta {
