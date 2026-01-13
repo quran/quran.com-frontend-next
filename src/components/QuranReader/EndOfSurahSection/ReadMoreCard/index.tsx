@@ -17,6 +17,7 @@ import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '
 import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import REVELATION_ORDER from '@/utils/revelationOrder';
 
 interface ReadMoreCardProps {
   cardClassName?: string;
@@ -56,11 +57,22 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
     ? getChapterData(chaptersData, String(prevChapterNumber))
     : null;
 
+  // Display number: revelation order position when in revelation order, otherwise actual chapter number
+  const getDisplayNumber = (chapterNum: number | null) => {
+    if (!chapterNum) return null;
+    if (!isReadingByRevelationOrder) return chapterNum;
+    const revelationIndex = REVELATION_ORDER.indexOf(chapterNum);
+    if (revelationIndex === -1) return null;
+    return revelationIndex + 1;
+  };
+  const nextDisplayNumber = getDisplayNumber(nextChapterNumber);
+  const prevDisplayNumber = getDisplayNumber(prevChapterNumber);
+
   const nextSummary = useMemo(() => pickRandom(nextSummaries), [nextSummaries]);
   const prevSummary = useMemo(() => pickRandom(previousSummaries), [previousSummaries]);
 
-  const canShowNext = Boolean(nextChapterNumber && nextChapter);
-  const canShowPrev = Boolean(prevChapterNumber && prevChapter);
+  const canShowNext = Boolean(nextChapterNumber && nextChapter && nextDisplayNumber);
+  const canShowPrev = Boolean(prevChapterNumber && prevChapter && prevDisplayNumber);
 
   const handleScrollToTop = () => {
     logButtonClick('end_of_surah_scroll_to_beginning');
@@ -87,32 +99,32 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
       <div className={styles.content}>
         {canShowNext && (
           <ChapterLink
-            chapter={nextChapter}
-            chapterNumber={nextChapterNumber}
+            chapter={nextChapter!}
+            chapterNumber={nextDisplayNumber!}
             navigationUrl={getSurahNavigationUrl(nextChapterNumber as number)}
             summary={nextSummary}
             isNext
             shouldShowArabicName={shouldShowArabicName}
             badgeLabel={t('common:next')}
             ariaLabel={t('quran-reader:end-of-surah.next-surah-aria-label', {
-              surahName: nextChapter.transliteratedName,
-              surahNumber: nextChapterNumber,
+              surahName: nextChapter!.transliteratedName,
+              surahNumber: nextDisplayNumber,
             })}
           />
         )}
 
         {canShowPrev && (
           <ChapterLink
-            chapter={prevChapter}
-            chapterNumber={prevChapterNumber}
+            chapter={prevChapter!}
+            chapterNumber={prevDisplayNumber!}
             navigationUrl={getSurahNavigationUrl(prevChapterNumber as number)}
             summary={prevSummary}
             isNext={false}
             shouldShowArabicName={shouldShowArabicName}
             badgeLabel={t('common:prev')}
             ariaLabel={t('quran-reader:end-of-surah.previous-surah-aria-label', {
-              surahName: prevChapter.transliteratedName,
-              surahNumber: prevChapterNumber,
+              surahName: prevChapter!.transliteratedName,
+              surahNumber: prevDisplayNumber,
             })}
           />
         )}

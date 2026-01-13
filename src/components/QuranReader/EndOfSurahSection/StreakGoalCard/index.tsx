@@ -72,7 +72,7 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
           </div>
           {!goal && (
             <Link
-              href={getReadingGoalNavigationUrl()}
+              href={getReadingGoalProgressNavigationUrl()}
               onClick={onSetGoalButtonClicked}
               className={styles.streakArrowLink}
             >
