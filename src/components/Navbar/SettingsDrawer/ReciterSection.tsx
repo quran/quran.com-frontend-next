@@ -3,9 +3,6 @@ import { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import { RecitersResponse } from 'types/ApiResponses';
-import Reciter from 'types/Reciter';
 
 import styles from './ReciterSection.module.scss';
 import Section from './Section';
@@ -17,6 +14,9 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import { logValueChange } from '@/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { RecitersResponse } from 'types/ApiResponses';
+import Reciter from 'types/Reciter';
 
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 

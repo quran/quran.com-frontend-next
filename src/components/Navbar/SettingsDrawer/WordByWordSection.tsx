@@ -5,7 +5,7 @@ import { Action } from '@reduxjs/toolkit';
 import uniqBy from 'lodash/uniqBy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import CheckboxChip from './CheckboxChip';
 import Section from './Section';
@@ -21,6 +21,8 @@ import {
   selectReadingPreferences,
   setSelectedWordByWordLocale,
   setWordByWordContentType,
+  setWordByWordTooltipContentType,
+  setWordByWordInlineContentType,
   setWordByWordDisplay,
   setWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
@@ -47,12 +49,14 @@ const WordByWordSection = () => {
     isLoading,
   } = usePersistPreferenceGroup();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const {
     selectedWordByWordLocale: wordByWordLocale,
     wordByWordDisplay,
-    wordByWordContentType,
+    wordByWordTooltipContentType,
+    wordByWordInlineContentType,
     wordClickFunctionality,
   } = readingPreferences;
 
@@ -138,39 +142,130 @@ const WordByWordSection = () => {
     );
   };
 
-  const onDisplaySettingChange = (isInlineCheckbox: boolean, isChecked: boolean) => {
-    const type = isInlineCheckbox ? WordByWordDisplay.INLINE : WordByWordDisplay.TOOLTIP;
-    const nextWordByWordDisplay = isChecked
-      ? [...wordByWordDisplay, type]
-      : removeItemFromArray(type, wordByWordDisplay);
-    logValueChange('wbw_display', wordByWordDisplay, nextWordByWordDisplay);
-    onWordByWordSettingsChange(
-      'wordByWordDisplay',
-      nextWordByWordDisplay,
-      setWordByWordDisplay(nextWordByWordDisplay),
-      setWordByWordDisplay(wordByWordDisplay),
+  const onInlineTranslationChange = (isChecked: boolean) => {
+    const nextWordByWordInlineContentType = isChecked
+      ? [...wordByWordInlineContentType, WordByWordType.Translation]
+      : removeItemFromArray(WordByWordType.Translation, wordByWordInlineContentType);
+    logValueChange(
+      'wbw_inline_content_type_translation',
+      wordByWordInlineContentType,
+      nextWordByWordInlineContentType,
     );
+
+    // Auto-enable Inline display when any content is checked
+    let nextWordByWordDisplay = wordByWordDisplay;
+    if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.INLINE)) {
+      nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.INLINE];
+    }
+    // Auto-disable Inline display when all content is unchecked
+    if (
+      !isChecked &&
+      nextWordByWordInlineContentType.length === 0 &&
+      wordByWordDisplay.includes(WordByWordDisplay.INLINE)
+    ) {
+      nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
+    }
+
+    // Dispatch local-only action (not persisted to backend)
+    dispatch(setWordByWordInlineContentType(nextWordByWordInlineContentType));
+
+    // Update display if needed
+    if (nextWordByWordDisplay !== wordByWordDisplay) {
+      onWordByWordSettingsChange(
+        'wordByWordDisplay',
+        nextWordByWordDisplay,
+        setWordByWordDisplay(nextWordByWordDisplay),
+        setWordByWordDisplay(wordByWordDisplay),
+      );
+    }
+  };
+
+  const onInlineTransliterationChange = (isChecked: boolean) => {
+    const nextWordByWordInlineContentType = isChecked
+      ? [...wordByWordInlineContentType, WordByWordType.Transliteration]
+      : removeItemFromArray(WordByWordType.Transliteration, wordByWordInlineContentType);
+    logValueChange(
+      'wbw_inline_content_type_transliteration',
+      wordByWordInlineContentType,
+      nextWordByWordInlineContentType,
+    );
+
+    // Auto-enable Inline display when any content is checked
+    let nextWordByWordDisplay = wordByWordDisplay;
+    if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.INLINE)) {
+      nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.INLINE];
+    }
+    // Auto-disable Inline display when all content is unchecked
+    if (
+      !isChecked &&
+      nextWordByWordInlineContentType.length === 0 &&
+      wordByWordDisplay.includes(WordByWordDisplay.INLINE)
+    ) {
+      nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
+    }
+
+    // Dispatch local-only action (not persisted to backend)
+    dispatch(setWordByWordInlineContentType(nextWordByWordInlineContentType));
+
+    // Update display if needed
+    if (nextWordByWordDisplay !== wordByWordDisplay) {
+      onWordByWordSettingsChange(
+        'wordByWordDisplay',
+        nextWordByWordDisplay,
+        setWordByWordDisplay(nextWordByWordDisplay),
+        setWordByWordDisplay(wordByWordDisplay),
+      );
+    }
   };
 
   const onContentTypeChange = (isTranslationCheckbox: boolean, isChecked: boolean) => {
     const type = isTranslationCheckbox
       ? WordByWordType.Translation
       : WordByWordType.Transliteration;
-    const nextWordByWordContentType = isChecked
-      ? [...wordByWordContentType, type]
-      : removeItemFromArray(type, wordByWordContentType);
-    logValueChange('wbw_content_type', wordByWordContentType, nextWordByWordContentType);
+
+    // Update tooltip content type
+    const nextWordByWordTooltipContentType = isChecked
+      ? [...wordByWordTooltipContentType, type]
+      : removeItemFromArray(type, wordByWordTooltipContentType);
+
+    logValueChange(
+      'wbw_content_type',
+      wordByWordTooltipContentType,
+      nextWordByWordTooltipContentType,
+    );
+
+    // Auto-enable Tooltip display when any content is checked
+    let nextWordByWordDisplay = wordByWordDisplay;
+    if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)) {
+      nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.TOOLTIP];
+    }
+
+    // Save as wordByWordContentType for backend compatibility (backend only knows this field)
+    // This will persist to backend for logged-in users
     onWordByWordSettingsChange(
       'wordByWordContentType',
-      nextWordByWordContentType,
-      setWordByWordContentType(nextWordByWordContentType),
-      setWordByWordContentType(wordByWordContentType),
+      nextWordByWordTooltipContentType,
+      setWordByWordContentType(nextWordByWordTooltipContentType),
+      setWordByWordContentType(wordByWordTooltipContentType),
     );
+
+    // Also update the tooltip-specific field locally
+    dispatch(setWordByWordTooltipContentType(nextWordByWordTooltipContentType));
+
+    // Update display if tooltip was auto-enabled
+    if (nextWordByWordDisplay !== wordByWordDisplay) {
+      onWordByWordSettingsChange(
+        'wordByWordDisplay',
+        nextWordByWordDisplay,
+        setWordByWordDisplay(nextWordByWordDisplay),
+        setWordByWordDisplay(wordByWordDisplay),
+      );
+    }
   };
 
-  const shouldDisableWordByWordDisplay = !wordByWordContentType || !wordByWordContentType.length;
   const shouldDisableLanguageSelect =
-    !wordByWordContentType || !wordByWordContentType.includes(WordByWordType.Translation);
+    !wordByWordTooltipContentType.includes(WordByWordType.Translation) &&
+    !wordByWordInlineContentType.includes(WordByWordType.Translation);
 
   return (
     <Section hideSeparator>
@@ -211,7 +306,7 @@ const WordByWordSection = () => {
           <div className={styles.checkboxContainer}>
             <div id="wbw-translation-section">
               <CheckboxChip
-                checked={wordByWordContentType.includes(WordByWordType.Translation)}
+                checked={wordByWordTooltipContentType.includes(WordByWordType.Translation)}
                 id="wbw-translation"
                 name="wbw-translation"
                 label={t('translation')}
@@ -221,7 +316,7 @@ const WordByWordSection = () => {
 
             <div id="wbw-transliteration-section">
               <CheckboxChip
-                checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
+                checked={wordByWordTooltipContentType.includes(WordByWordType.Transliteration)}
                 id="wbw-transliteration"
                 name="wbw-transliteration"
                 label={t('transliteration')}
@@ -246,20 +341,18 @@ const WordByWordSection = () => {
           <p className={styles.sectionLabel}>{t('quran-reader:below-word')}</p>
           <div className={styles.checkboxContainer}>
             <CheckboxChip
-              checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
-              id="inline"
-              name="inline"
-              label={t('inline')}
-              disabled={shouldDisableWordByWordDisplay}
-              onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
+              checked={wordByWordInlineContentType.includes(WordByWordType.Translation)}
+              id="inline-translation"
+              name="inline-translation"
+              label={t('translation')}
+              onChange={onInlineTranslationChange}
             />
             <CheckboxChip
-              checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
-              id="tooltip"
-              name="word-tooltip"
-              label={t('tooltip')}
-              disabled={shouldDisableWordByWordDisplay}
-              onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
+              checked={wordByWordInlineContentType.includes(WordByWordType.Transliteration)}
+              id="inline-transliteration"
+              name="inline-transliteration"
+              label={t('transliteration')}
+              onChange={onInlineTransliterationChange}
             />
           </div>
         </div>

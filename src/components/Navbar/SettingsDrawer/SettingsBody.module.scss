@@ -14,12 +14,38 @@
   display: flex;
   gap: var(--spacing-small);
   justify-content: space-between;
-  margin-inline-start: var(--spacing-medium2-px);
-  margin-inline-end: var(--spacing-medium2-px);
-  margin-block-start: auto;
+  padding-inline-start: var(--spacing-medium2-px);
+  padding-inline-end: var(--spacing-medium2-px);
+  padding-block-start: auto;
   padding-block-start: var(--spacing-medium-px);
   padding-block-end: var(--spacing-medium2-px);
   border-top: 1px solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated);
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+
+  button {
+    border-radius: var(--border-radius-medium-px);
+    padding-block: var(--spacing-small-px);
+    padding-inline: var(--spacing-small-px);
+    border: none;
+
+    &:hover {
+      background: var(--color-black-buttons);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  > :first-child {
+    &:hover {
+      background: var(--color-background-elevated);
+      color: var(--color-text-faded-new);
+    }
+
+    span {
+      color: var(--color-text-faded-new);
+    }
+  }
 }

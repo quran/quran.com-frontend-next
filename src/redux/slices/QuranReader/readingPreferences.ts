@@ -40,6 +40,14 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       wordByWordContentType: action.payload,
     }),
+    setWordByWordTooltipContentType: (state, action: PayloadAction<WordByWordType[]>) => ({
+      ...state,
+      wordByWordTooltipContentType: action.payload,
+    }),
+    setWordByWordInlineContentType: (state, action: PayloadAction<WordByWordType[]>) => ({
+      ...state,
+      wordByWordInlineContentType: action.payload,
+    }),
     setWordByWordDisplay: (state, action: PayloadAction<WordByWordDisplay[]>) => ({
       ...state,
       wordByWordDisplay: action.payload,
@@ -59,9 +67,23 @@ export const readingPreferencesSlice = createSlice({
       if (remotePreferences) {
         const { selectedWordByWordLocale: defaultWordByWordLocale } =
           getReadingPreferencesInitialState(locale);
+
+        // Map backend wordByWordContentType to tooltip content
+        // Backend only knows about wordByWordContentType, which we use for tooltip
+        const wordByWordTooltipContentType = remotePreferences.wordByWordContentType || [];
+
+        const mappedPreferences = {
+          ...remotePreferences,
+          wordByWordTooltipContentType,
+          // IMPORTANT: Keep local inline content, don't overwrite from backend
+          // wordByWordInlineContentType is local-only and persists via redux-persist
+        };
+
         return {
           ...state,
-          ...remotePreferences,
+          ...mappedPreferences,
+          // Preserve local inline content type from current state
+          wordByWordInlineContentType: state.wordByWordInlineContentType || [],
           isUsingDefaultWordByWordLocale:
             remotePreferences.selectedWordByWordLocale === defaultWordByWordLocale,
         };
@@ -76,6 +98,8 @@ export const {
   setSelectedWordByWordLocale,
   setWordClickFunctionality,
   setWordByWordContentType,
+  setWordByWordTooltipContentType,
+  setWordByWordInlineContentType,
   setWordByWordDisplay,
 } = readingPreferencesSlice.actions;
 
@@ -89,15 +113,15 @@ export const selectInlineDisplayWordByWordPreferences = (
   state: RootState,
 ): { showWordByWordTranslation: boolean; showWordByWordTransliteration: boolean } => {
   const { readingPreferences } = state;
-  const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
+  const { wordByWordDisplay, wordByWordInlineContentType } = readingPreferences;
 
   const shouldDisplayInline = wordByWordDisplay.includes(WordByWordDisplay.INLINE);
 
   return {
     showWordByWordTranslation:
-      shouldDisplayInline && wordByWordContentType.includes(WordByWordType.Translation),
+      shouldDisplayInline && wordByWordInlineContentType.includes(WordByWordType.Translation),
     showWordByWordTransliteration:
-      shouldDisplayInline && wordByWordContentType.includes(WordByWordType.Transliteration),
+      shouldDisplayInline && wordByWordInlineContentType.includes(WordByWordType.Transliteration),
   };
 };
 
@@ -113,7 +137,7 @@ export const selectInlineDisplayWordByWordPreferences = (
  */
 export const selectIsTooltipContentEnabled = (state: RootState): boolean => {
   const { readingPreferences } = state;
-  const { wordByWordContentType, wordByWordDisplay } = readingPreferences;
+  const { wordByWordTooltipContentType, wordByWordDisplay } = readingPreferences;
 
   const shouldDisplayTooltip = wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP);
 
@@ -122,8 +146,8 @@ export const selectIsTooltipContentEnabled = (state: RootState): boolean => {
   }
 
   return (
-    wordByWordContentType.includes(WordByWordType.Translation) ||
-    wordByWordContentType.includes(WordByWordType.Transliteration)
+    wordByWordTooltipContentType.includes(WordByWordType.Translation) ||
+    wordByWordTooltipContentType.includes(WordByWordType.Transliteration)
   );
 };
 export const selectReadingPreferences = (state: RootState): ReadingPreferences =>
@@ -140,16 +164,16 @@ export const selectReadingPreferences = (state: RootState): ReadingPreferences =
  */
 export const selectTooltipContentType = (state: RootState): WordByWordType[] => {
   const { readingPreferences } = state;
-  const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
+  const { wordByWordDisplay, wordByWordTooltipContentType } = readingPreferences;
   if (
     !wordByWordDisplay ||
     !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP) ||
-    !wordByWordContentType ||
-    !wordByWordContentType.length
+    !wordByWordTooltipContentType ||
+    !wordByWordTooltipContentType.length
   ) {
     return [];
   }
-  return wordByWordContentType;
+  return wordByWordTooltipContentType;
 };
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;

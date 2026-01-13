@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import resetSettings from '@/redux/actions/reset-settings';
 import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
@@ -66,7 +66,11 @@ const ResetButton = () => {
   };
 
   return (
-    <Button onClick={onResetSettingsClicked} data-testid="reset-settings-button">
+    <Button
+      onClick={onResetSettingsClicked}
+      data-testid="reset-settings-button"
+      variant={ButtonVariant.Simplified}
+    >
       {t('settings.reset')}
     </Button>
   );

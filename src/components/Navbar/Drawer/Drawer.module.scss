@@ -55,10 +55,6 @@
   }
 
   &.settingsDrawer {
-    overflow-y: visible !important;
-    overflow-x: visible;
-    overscroll-behavior-y: auto !important;
-
     @include breakpoints.smallerThanTablet {
       inset-block-start: var(--navbar-height);
       inset-block-end: auto;
@@ -70,6 +66,9 @@
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
+  &.settingsDrawer {
+      box-shadow: none;
+  }
   transition-timing-function: ease-out;
 
   &.left {
@@ -123,6 +122,9 @@
 }
 
 .bodyWithBottomPadding {
+  .settingsDrawer & {
+    padding-block-end: 0;
+  }
   padding-block-end: calc(4 * var(--spacing-large));
 }
 

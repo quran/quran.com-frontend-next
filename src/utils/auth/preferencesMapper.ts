@@ -1,5 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable react-func/max-lines-per-function */
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+
 import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
 import AudioState from '@/redux/types/AudioState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -7,7 +9,6 @@ import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
 import TafsirsSettings from '@/redux/types/TafsirsSettings';
 import TranslationsSettings from '@/redux/types/TranslationsSettings';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const SLICE_NAME_TO_PREFERENCE_GROUP = {
   [SliceName.AUDIO_PLAYER_STATE]: PreferenceGroup.AUDIO,
@@ -51,7 +52,20 @@ const getPreferenceGroupValue = (
       ...currentSliceValue,
     } as ReadingPreferences;
     delete newPreferences.isUsingDefaultWordByWordLocale;
-    return newPreferences;
+
+    // Map tooltip content type to wordByWordContentType for backend compatibility
+    // Backend only knows about wordByWordContentType, not the tooltip/inline variants
+    const backendPreferences = {
+      ...newPreferences,
+      wordByWordContentType:
+        newPreferences.wordByWordTooltipContentType || newPreferences.wordByWordContentType,
+    };
+
+    // Remove local-only fields that backend doesn't recognize
+    delete backendPreferences.wordByWordTooltipContentType;
+    delete backendPreferences.wordByWordInlineContentType;
+
+    return backendPreferences;
   }
 
   if (sliceName === SliceName.TRANSLATIONS) {
