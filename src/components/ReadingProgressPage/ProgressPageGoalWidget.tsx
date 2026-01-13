@@ -18,6 +18,7 @@ import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import useIsMobile from '@/hooks/useIsMobile';
 import ArrowIcon from '@/icons/arrow.svg';
+import CirclesIcon from '@/icons/circles.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { GoalType } from '@/types/auth/Goal';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -55,29 +56,44 @@ const ProgressPageGoalWidget = ({ goal, isLoading, currentActivityDay }: Props) 
     setModalVisible((prev) => ({ ...prev, update: false, delete: true }));
   };
 
+  const onCreateReadingGoalClick = () => {
+    logButtonClick('progress_page_create_goal');
+  };
+
   const ctaUrl =
     goal?.type === GoalType.RANGE && goal?.progress?.nextVerseToRead
       ? getChapterWithStartingVerseUrl(goal.progress.nextVerseToRead)
       : continueReadingUrl;
 
+  const createReadingGoalButton = (
+    <Button
+      onClick={onCreateReadingGoalClick}
+      variant={ButtonVariant.Rounded}
+      contentClassName={styles.emptyWidgetCta}
+      href={getReadingGoalNavigationUrl()}
+    >
+      <CirclesIcon />
+      <span>{t('set-custom-goal')}</span>
+    </Button>
+  );
+
   if (isLoading) {
     return (
       <Skeleton className={classNames(styles.widget, styles.emptyWidget)}>
-        <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
+        {createReadingGoalButton}
       </Skeleton>
     );
   }
 
   if (!goal) {
-    const onCreateReadingGoalClick = () => {
-      logButtonClick('progress_page_create_goal');
-    };
-
     return (
       <div className={classNames(styles.widget, styles.emptyWidget)}>
-        <Button href={getReadingGoalNavigationUrl()} onClick={onCreateReadingGoalClick}>
-          {t('create-reading-goal')}
-        </Button>
+        <div className={styles.emptyWidgetHeader}>
+          <CirclesIcon />
+          <p>{t('achieve-quran-goals')}</p>
+        </div>
+        <p className={styles.emptyWidgetDescription}>{t('track-your-streak')}</p>
+        {createReadingGoalButton}
       </div>
     );
   }

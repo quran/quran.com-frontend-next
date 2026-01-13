@@ -95,9 +95,37 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .emptyWidget {
+  background-color: var(--color-background-elevated-new);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: var(--spacing-medium2-px);
+}
+
+.emptyWidgetHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+}
+
+.emptyWidgetDescription {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
+}
+
+.emptyWidgetCta {
+  align-items: center;
+  gap: var(--spacing-small-px);
+  svg,
+  path {
+    fill: var(--color-text-white);
+  }
 }
 
 .progressWidget {
