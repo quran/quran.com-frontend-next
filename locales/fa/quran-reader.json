@@ -2,12 +2,14 @@
   "add-bookmark": "اضافه کردن نشانک",
   "add-collection": "افزودن مجموعه",
   "advanced-copy": "کپی پیشرفته",
+  "arabic": "عربی",
   "aria": {
     "read-ayah-refls": "بازتاب آیه را بخوانید",
     "read-tafsirs": "آیات تفسیر را بخوانید"
   },
   "ayatul-kursi": "آیت الکرسی",
   "back-to-ayah": "بازگشت به آیه",
+  "below-word": "کلمه زیر:",
   "bismillah": "به نام خداوند بخشنده و مهربان",
   "change-translation": "تغییر ترجمه",
   "copy-arabic": "متن عربی (متن عثمانی)",
@@ -17,6 +19,7 @@
   "copy-verse": "متن را کپی کن",
   "cpy-link": "لینک را کپی کنید",
   "current-verse": "آیه فعلی",
+  "done": "انجام شد",
   "download-copy": "اگر می خواهید فایل متنی را دانلود کنید.",
   "edgham": "ادغام",
   "ekhfa": "اخفا و غنا",
@@ -40,6 +43,7 @@
   },
   "font": "فونت عربی برای کپی",
   "font-placeholder": "یک فونت انتخاب کنید",
+  "font-style": "سبک فونت",
   "font-tooltip": "فونت های شاه فهد V1 و V2 به صورت یونیکد خواهند بود.",
   "footnote": "پاورقی",
   "footnote-dl": "<b> دوگانه </b> <br/> شکلی برای افعال و ضمایر در زبان عربی هنگام خطاب به دو نفر",
@@ -73,6 +77,7 @@
   "next-page": "صفحه بعد",
   "next-rub": "بعدی راب الحزب",
   "next-surah": "سوره بعدی",
+  "on-click": "با کلیک:",
   "page-bookmark-removed": "نشانک صفحه حذف شد",
   "page-bookmarked": "صفحه نشانه‌گذاری شده",
   "posted-in": "ارسال شده در",
@@ -120,6 +125,19 @@
   "text-copied": "متن در کلیپ بورد کپی شده است!",
   "trans-change": "تغییر دادن",
   "translation-by": "ترجمه توسط",
+  "translation-feedback": {
+    "feedback": "بازخورد",
+    "no-translations-in-preferences": "هیچ ترجمه‌ای در تنظیمات برگزیده شما وجود ندارد",
+    "placeholder": "از این قسمت برای گزارش مشکل مربوط به ترجمه انتخابی این آیه استفاده کنید.",
+    "report": "گزارش",
+    "select": "انتخاب کنید...",
+    "select-translation": "انتخاب ترجمه:",
+    "submission-success": "بازخورد شما با موفقیت ارسال شد",
+    "title": "بازخورد ترجمه",
+    "translation": "ترجمه"
+  },
+  "verse-preview-title": "پیش‌نمایش:",
   "verses-range": "طیف آیات",
-  "view-on-quran-reflect": "مشاهده قرآن رفلکت"
+  "view-on-quran-reflect": "مشاهده قرآن رفلکت",
+  "wbw-helper-text": "گزینه‌هایی را برای نمایش ترجمه، آوانگاری و/یا تلاوت هر کلمه انتخاب کنید."
 }

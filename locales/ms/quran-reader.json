@@ -2,12 +2,14 @@
   "add-bookmark": "Tambah penanda halaman",
   "add-collection": "Tambah Koleksi",
   "advanced-copy": "Salinan Lanjutan",
+  "arabic": "Bahasa Arab",
   "aria": {
     "read-ayah-refls": "Baca Renungan Ayah",
     "read-tafsirs": "Baca Tafsiran Ayah"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Kembali kepada Ayat",
+  "below-word": "Perkataan di bawah:",
   "bismillah": "Dengan Nama Allah Yang Maha Pengasih lagi Maha Penyayang",
   "change-translation": "Tukar Terjemahan",
   "copy-arabic": "Teks Arab (teks Uthmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Salin Teks",
   "cpy-link": "Salin pautan",
   "current-verse": "Ayat semasa",
+  "done": "Selesai",
   "download-copy": "jika anda ingin memuat turun fail teks.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa dan Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Font tulisan Arab untuk disalin (copy)",
   "font-placeholder": "Pilih font tulisan",
+  "font-style": "Gaya fon",
   "font-tooltip": "Font King Fahad V1 dan V2 akan berada dalam bentuk unicode.",
   "footnote": "Nota kaki",
   "footnote-dl": "<b> Dwi </b> <br/> Bentuk untuk kata kerja dan kata ganti nama dalam bahasa Arab apabila merujuk kepada dua orang",
@@ -73,6 +77,7 @@
   "next-page": "Muka surat seterusnya",
   "next-rub": "Rub el Hizb seterusnya",
   "next-surah": "Surah seterusnya",
+  "on-click": "Pada Klik:",
   "page-bookmark-removed": "Penanda halaman halaman dialih keluar",
   "page-bookmarked": "Halaman ditandakan",
   "posted-in": "Disiarkan dalam",
@@ -120,6 +125,19 @@
   "text-copied": "Teks telah disalin ke papan keratan!",
   "trans-change": "Ubah",
   "translation-by": "Di terjemahkan oleh",
+  "translation-feedback": {
+    "feedback": "Maklum balas",
+    "no-translations-in-preferences": "Tiada terjemahan dalam pilihan anda",
+    "placeholder": "Gunakan ruang ini untuk melaporkan isu berkaitan dengan terjemahan pilihan bagi Ayat ini.",
+    "report": "Laporan",
+    "select": "Pilih...",
+    "select-translation": "Pilih terjemahan:",
+    "submission-success": "Maklum balas anda berjaya dihantar",
+    "title": "Maklum Balas Terjemahan",
+    "translation": "Terjemahan"
+  },
+  "verse-preview-title": "Pratonton:",
   "verses-range": "Jarak rangka ayat",
-  "view-on-quran-reflect": "Lihat di QuranReflect"
+  "view-on-quran-reflect": "Lihat di QuranReflect",
+  "wbw-helper-text": "Pilih pilihan untuk menunjukkan terjemahan, transliterasi dan/atau bacaan bagi setiap perkataan."
 }

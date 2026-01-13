@@ -2,12 +2,14 @@
   "add-bookmark": "ዕልባት አድርግ",
   "add-collection": "ስብስብ ያክሉ",
   "advanced-copy": "የላቀ ቅጂ",
+  "arabic": "አረብኛ",
   "aria": {
     "read-ayah-refls": "የአያህን ነጸብራቆች ያንብቡ",
     "read-tafsirs": "የአያህ ታፍሲሮችን ያንብቡ"
   },
   "ayatul-kursi": "አያቱል ኩርሲ",
   "back-to-ayah": "ወደ አያህ ተመለስ",
+  "below-word": "ከታች ያለው ቃል፦",
   "bismillah": "በአላህ ስም እጅግ በጣም ሩህሩህ በጣም አዛኝ በሆነው (እጀምራለሁ)።",
   "change-translation": "የቁርዓን ትርጉም ይምረጡ",
   "copy-arabic": "የአረብኛ ጽሑፍ (የኡስማኒ ጽሑፍ)",
@@ -17,6 +19,7 @@
   "copy-verse": "ጥቅስ ቅዳ",
   "cpy-link": "አገናኝ ቅዳ",
   "current-verse": "የአሁኑ ጥቅስ",
+  "done": "ተጠናቅቋል",
   "download-copy": "የጽሑፍ ፋይል ማውረድ ከፈለጉ።",
   "edgham": "ጸጥ ያለ ፊደል",
   "ekhfa": "ጉንና/ኢኽፋ",
@@ -40,6 +43,7 @@
   },
   "font": "ለመቅዳት የአረብኛ ቅርጸ-ቁምፊ",
   "font-placeholder": "ቅርጸ-ቁምፊ ይምረጡ",
+  "font-style": "የቅርጸ-ቁምፊ ዘይቤ",
   "font-tooltip": "የኪንግ ፋሃድ V1 እና V2 ቅርጸ-ቁምፊዎች በዩኒኮድ ውስጥ ይሆናሉ።",
   "footnote": "የግርጌ ማስታወሻ",
   "footnote-dl": "<b>ድርብ</b> <br/> ሁለት ሰዎችን ሲያነጋግሩ በአረብኛ ቋንቋ ግሶችን እና ተውላጠ ስሞችን የሚያሳይ ቅጽ",
@@ -73,6 +77,7 @@
   "next-page": "የሚቀጥለው ገጽ",
   "next-rub": "ኔክስት ሩብ ኤል ሂዝብ",
   "next-surah": "ቀጣይ ሱራ",
+  "on-click": "ጠቅ ሲደረግ፦",
   "page-bookmark-removed": "የገጽ ዕልባት ተወግዷል",
   "page-bookmarked": "በዚህ ገፅ ዕልባት ተደርጓል",
   "posted-in": "የተለጠፈው በ",
@@ -120,6 +125,19 @@
   "text-copied": "ጽሑፉ ወደ ቅንጥብ ሰሌዳው ተገልብጧል!",
   "trans-change": "ለውጥ",
   "translation-by": "ትርጉም በ",
+  "translation-feedback": {
+    "feedback": "ግብረመልስ",
+    "no-translations-in-preferences": "በምርጫዎችዎ ውስጥ ምንም ትርጉሞች የሉም",
+    "placeholder": "ከተመረጠው የዚህ አያህ ትርጉም ጋር የተያያዘ ችግርን ሪፖርት ለማድረግ ይህንን ቦታ ይጠቀሙ።",
+    "report": "ሪፖርት ያድርጉ",
+    "select": "ምረጥ...",
+    "select-translation": "ትርጉም ምረጥ፡",
+    "submission-success": "የእርስዎ ግብረመልስ በተሳካ ሁኔታ ተልኳል",
+    "title": "የትርጉም ግብረመልስ",
+    "translation": "ትርጉም"
+  },
+  "verse-preview-title": "ቅድመ እይታ፡",
   "verses-range": "የጥቅሶች ክልል",
-  "view-on-quran-reflect": "በቁርዓን ሪፍሌክት ላይ ይመልከቱ"
+  "view-on-quran-reflect": "በቁርዓን ሪፍሌክት ላይ ይመልከቱ",
+  "wbw-helper-text": "የእያንዳንዱን ቃል ትርጉም፣ በቋንቋ ፊደል መጻፍ እና/ወይም ንባብ ለማሳየት አማራጮችን ይምረጡ።"
 }
