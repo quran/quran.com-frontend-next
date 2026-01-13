@@ -15,7 +15,12 @@ export enum SettingTab {
   More = 'more',
 }
 
-const SettingTabs = () => {
+type SettingTabsProps = {
+  activeTab?: SettingTab;
+  onTabChange?: (tab: SettingTab) => void;
+};
+
+const SettingTabs = ({ activeTab = SettingTab.Arabic, onTabChange }: SettingTabsProps) => {
   const { t } = useTranslation('common');
 
   const tabs = [
@@ -25,7 +30,11 @@ const SettingTabs = () => {
   ];
 
   return (
-    <Tabs.Root className={styles.root} defaultValue={SettingTab.Arabic}>
+    <Tabs.Root
+      className={styles.root}
+      value={activeTab}
+      onValueChange={(value) => onTabChange?.(value as SettingTab)}
+    >
       <Tabs.List className={styles.list} aria-label="Settings tabs">
         {tabs.map((tab) => (
           <Tabs.Trigger className={styles.trigger} key={tab.id} value={tab.id}>

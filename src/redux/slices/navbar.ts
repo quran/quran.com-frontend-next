@@ -17,6 +17,7 @@ export type Navbar = {
   isSearchDrawerOpen: boolean;
   isSettingsDrawerOpen: boolean;
   settingsView: SettingsView;
+  lastSettingsView: SettingsView; // Track the last non-Body settings view for navigation context
   disableSearchDrawerTransition: boolean;
   lockVisibilityState: boolean; // Flag to temporarily lock visibility state during tab switching
 };
@@ -27,6 +28,7 @@ const initialState: Navbar = {
   isSearchDrawerOpen: false,
   isSettingsDrawerOpen: false,
   settingsView: SettingsView.Body,
+  lastSettingsView: SettingsView.Body,
   disableSearchDrawerTransition: false,
   lockVisibilityState: false,
 };
@@ -59,10 +61,18 @@ export const navbarSlice = createSlice({
     setIsSettingsDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
       isSettingsDrawerOpen: action.payload,
+      // Reset views when drawer is closed
+      ...(action.payload === false && {
+        settingsView: SettingsView.Body,
+        lastSettingsView: SettingsView.Body,
+      }),
     }),
     setSettingsView: (state: Navbar, action: PayloadAction<SettingsView>) => ({
       ...state,
       settingsView: action.payload,
+      // Track the last non-Body view for navigation context
+      lastSettingsView:
+        action.payload !== SettingsView.Body ? action.payload : state.lastSettingsView,
     }),
     setDisableSearchDrawerTransition: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
