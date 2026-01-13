@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "实现你的古兰经目标",
   "continue-reading": "继续阅读",
   "continuous": {
     "description": "您的目标将计算您在几天内的进度",
@@ -95,6 +96,7 @@
     "other": "还剩 {{days}} 天"
   },
   "set-a-new-goal": "设定新目标",
+  "set-custom-goal": "设定自定义目标",
   "set-reading-goal-success": "您的阅读目标已成功设定。",
   "start-journey": "开始你的旅程！",
   "start-reading": "开始阅读",
@@ -110,6 +112,7 @@
     "stroked": "你今天什么都没读"
   },
   "todays-goal": "今天的目标",
+  "track-your-streak": "追踪连胜纪录，创建自定义目标，保持稳定",
   "view-progress": "查看进度",
   "week-progress": "本周进展",
   "x-days": {

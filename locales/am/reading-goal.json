@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "የቁርዓን ግቦችህን ማሳካት",
   "continue-reading": "ማንበብ ይቀጥሉ",
   "continuous": {
     "description": "ግብዎ እድገትዎን በቀናት ቆይታ ያሰላል",
@@ -97,6 +98,7 @@
     "other": ""
   },
   "set-a-new-goal": "አዲስ ግብ ያዘጋጁ",
+  "set-custom-goal": "ብጁ ግብ ያዘጋጁ",
   "set-reading-goal-success": "የንባብ ግብዎ በተሳካ ሁኔታ ተቀምጧል።",
   "start-journey": "ጉዞዎን ይጀምሩ!",
   "start-reading": "ማንበብ ይጀምሩ",
@@ -112,6 +114,7 @@
     "stroked": "ዛሬ ምንም አላነበብክም"
   },
   "todays-goal": "የዛሬው ግብ",
+  "track-your-streak": "ትራኮችን ይከታተሉ፣ ብጁ ግቦችን ይፍጠሩ፣ ወጥነት ይኑርዎት",
   "view-progress": "ሂደትን ይመልከቱ",
   "week-progress": "የዚህ ሳምንት እድገት",
   "x-days": {

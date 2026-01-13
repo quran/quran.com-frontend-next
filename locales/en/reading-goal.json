@@ -97,8 +97,8 @@
     "one": "{{days}} day remaining",
     "other": "{{days}} days remaining"
   },
-  "set-custom-goal": "Set a Custom Goal",
   "set-a-new-goal": "Set a new Goal",
+  "set-custom-goal": "Set a Custom Goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
   "start-journey": "Start your journey!",
   "start-reading": "Start Reading",
