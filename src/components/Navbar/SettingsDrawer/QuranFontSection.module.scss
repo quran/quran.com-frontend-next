@@ -1,13 +1,30 @@
 .fontStyleLabel {
-  font-size: 16px;
-  color: var(--color-text-default-new) !important;
+  color: var(--color-text-default-new);
   font-weight: var(--font-weight-medium);
-  opacity: 1 !important;
+  opacity: unset;
   padding-left: var(--spacing-small-plus-px);
   padding-right: var(--spacing-small-plus-px);
+
 }
 
 .fontSizeSection {
+  padding-block-start: var(--spacing-small-px);
   padding-block-end: var(--spacing-medium2-px);
 }
 
+.counter {
+  gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
+  direction: initial;
+
+  &>svg {
+    color: var(--color-text-default-new);
+  }
+
+  span {
+    color: var(--color-text-default-new);
+  }
+}
+
+.fontStyleSection {
+  padding-block-start: var(--spacing-small-px);
+}

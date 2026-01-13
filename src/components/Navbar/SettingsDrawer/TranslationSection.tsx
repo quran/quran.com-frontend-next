@@ -4,6 +4,8 @@ import { useCallback, useMemo } from 'react';
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
@@ -27,8 +29,6 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { TranslationsResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const TranslationSection = () => {
   const {
@@ -152,7 +152,7 @@ const TranslationSection = () => {
           />
         </Section.Row>
         <Section.Row>
-          <Section.Label>{t('fonts.font-size')}</Section.Label>
+          <Section.Label className={styles.fontStyleLabel}>{t('fonts.font-size')}</Section.Label>
 
           {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop
@@ -167,6 +167,7 @@ const TranslationSection = () => {
             onDecrement={
               MINIMUM_FONT_STEP === translationFontScale ? null : onFontScaleDecreaseClicked
             }
+            className={styles.counter}
           />
         </Section.Row>
       </Section>

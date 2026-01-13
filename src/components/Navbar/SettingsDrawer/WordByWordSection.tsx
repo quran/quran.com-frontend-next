@@ -6,6 +6,7 @@ import uniqBy from 'lodash/uniqBy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import CheckboxChip from './CheckboxChip';
 import Section from './Section';
@@ -40,7 +41,6 @@ import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
 import { removeItemFromArray } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
@@ -274,7 +274,9 @@ const WordByWordSection = () => {
           <SpinnerContainer isLoading={isLoading}>
             <span className={styles.title}>{t('wbw')}</span>
           </SpinnerContainer>
-          <HelperTooltip>{t('quran-reader:wbw-helper-text')}</HelperTooltip>
+          <HelperTooltip iconClassName={styles.helperTooltipIcon}>
+            {t('quran-reader:wbw-helper-text')}
+          </HelperTooltip>
         </div>
         <DataFetcher
           queryKey={makeWordByWordTranslationsUrl(lang)}
@@ -295,6 +297,7 @@ const WordByWordSection = () => {
                 value={wordByWordLocale}
                 disabled={shouldDisableLanguageSelect}
                 onChange={onWordByWordLocaleChange}
+                className={styles.select}
               />
             );
           }}
@@ -358,7 +361,7 @@ const WordByWordSection = () => {
         </div>
       </Section.Row>
       <Section.Row>
-        <Section.Label>{t('fonts.font-size')}</Section.Label>
+        <Section.Label className={styles.fontStyleLabel}>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={wordByWordFontScale}
           onIncrement={
@@ -369,6 +372,7 @@ const WordByWordSection = () => {
           onDecrement={
             MINIMUM_FONT_STEP === wordByWordFontScale ? null : onFontScaleDecreaseClicked
           }
+          className={styles.counter}
         />
       </Section.Row>
     </Section>

@@ -25,3 +25,20 @@
     fill: var(--color-text-faded);
   }
 }
+
+.counter {
+  gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
+  direction: initial;
+
+  &>svg {
+    color: var(--color-text-default-new);
+  }
+}
+
+.fontStyleLabel {
+  color: var(--color-text-default-new);
+  opacity: unset;
+  font-weight: var(--font-weight-medium);
+  padding-left: var(--spacing-small-plus-px);
+  padding-right: var(--spacing-small-plus-px);
+}

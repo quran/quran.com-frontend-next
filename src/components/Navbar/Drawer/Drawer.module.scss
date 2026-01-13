@@ -59,7 +59,8 @@
       inset-block-start: var(--navbar-height);
       inset-block-end: auto;
       block-size: calc(100vh - var(--navbar-height));
-      border-radius: var(--border-radius-rounded);
+      border-top-left-radius: var(--border-radius-rounded);
+      border-top-right-radius: var(--border-radius-rounded);
       transform: translateY(100%);
       transition: transform var(--transition-regular), inset-block-start var(--transition-regular), block-size var(--transition-regular);
     }
@@ -71,8 +72,9 @@
       @include breakpoints.smallerThanTablet {
         inset-block-start: calc(3* var(--spacing-max));
         block-size: 100vh;
-        border-radius: var(--border-radius-rounded);
-        paddin-block-start: 5px;
+        border-top-left-radius: var(--border-radius-rounded);
+        border-top-right-radius: var(--border-radius-rounded);
+        padding-block-start: 5px;
       }
     }
   }

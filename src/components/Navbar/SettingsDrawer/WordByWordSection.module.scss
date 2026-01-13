@@ -31,3 +31,29 @@
 .separator {
   margin-block: var(--spacing-small);
 }
+
+.counter {
+  gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
+  direction: initial;
+
+  &>svg {
+    color: var(--color-text-default-new);
+  }
+}
+
+.fontStyleLabel {
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
+  opacity: unset;
+  padding-left: var(--spacing-small-plus-px);
+  padding-right: var(--spacing-small-plus-px);
+}
+
+.helperTooltipIcon {
+  color: var(--color-blue-buttons-and-icons);
+  fill: var(--color-blue-buttons-and-icons);
+}
+
+.select {
+  background-color: var(--color-background-alternative-faint);
+}

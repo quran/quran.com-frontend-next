@@ -196,7 +196,7 @@ const QuranFontSection = () => {
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
-      <Section.Row>
+      <Section.Row className={styles.fontStyleSection}>
         <Section.Label className={styles.fontStyleLabel}>
           {t('quran-reader:font-style')}
         </Section.Label>
@@ -228,6 +228,7 @@ const QuranFontSection = () => {
           onIncrement={
             quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
           }
+          className={styles.counter}
         />
       </Section.Row>
       <ReciterSection />
