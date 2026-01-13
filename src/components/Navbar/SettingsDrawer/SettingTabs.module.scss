@@ -32,8 +32,7 @@
       content: '';
       position: absolute;
       bottom: calc(-1 * var(--spacing-micro-px));
-      left: 0;
-      right: 0;
+      inset-inline: 0;
       height: var(--spacing-micro-px);
       background-color: var(--color-blue-buttons-and-icons);
     }

@@ -2,9 +2,8 @@
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-medium);
   opacity: unset;
-  padding-left: var(--spacing-small-plus-px);
-  padding-right: var(--spacing-small-plus-px);
-
+  padding-inline-start: var(--spacing-small-plus-px);
+  padding-inline-end: var(--spacing-small-plus-px);
 }
 
 .fontSizeSection {

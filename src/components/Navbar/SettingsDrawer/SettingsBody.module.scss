@@ -9,8 +9,6 @@
     min-height: unset;
     height: calc(100dvh - var(--navbar-height));
   }
-
-  @include breakpoints.smallerThanTablet {}
 }
 
 .buttonsContainer {
