@@ -18,14 +18,13 @@ $note_text_area_height: 22.5rem;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xxsmall);
-
-  flex: 1;
+  block-size: 100%;
 }
 
 // tag is used to increase specificity to override the default styles.
 div.textArea {
   padding: 0;
-  flex: 1;
+  block-size: 100%;
 
   textarea {
     padding: var(--spacing-xsmall);
@@ -39,6 +38,7 @@ div.textArea {
     font-weight: var(--font-weight-bold);
 
     &::placeholder {
+      color: var(--color-text-faded-new);
       font-weight: var(--font-weight-normal);
     }
 

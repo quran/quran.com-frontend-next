@@ -18,8 +18,8 @@ import { AttachedEntityType, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
-import { toSafeISOString } from '@/utils/datetime';
-import { getLangFullLocale, toLocalizedNumber } from '@/utils/locale';
+import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
+import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
@@ -95,7 +95,7 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
                 <div className={styles.noteInfo}>
                   <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
                   <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
-                    {formatNoteDate(note.createdAt, lang)}
+                    {dateToMonthDayYearFormat(note.createdAt, lang)}
                   </time>
                 </div>
                 <div className={styles.noteActions}>
@@ -145,17 +145,6 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
       </div>
     </>
   );
-};
-
-const formatNoteDate = (date: Date | string | number, locale: string): string => {
-  const dateInstance = new Date(date);
-  if (Number.isNaN(dateInstance.getTime())) return '';
-
-  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
 };
 
 export default MyNotes;

@@ -411,3 +411,29 @@ export const toSafeISOString = (date: string | Date): string | undefined => {
   if (Number.isNaN(timestamp)) return undefined;
   return new Date(timestamp).toISOString();
 };
+
+/**
+ * Format a date to a month, day, year format.
+ *
+ * @param {Date | string | number} date
+ * @param {string} locale
+ * @returns {string} The date in the format of "Month Day, Year"
+ *
+ * @example
+ * const date = new Date('2024-01-15');
+ * const formattedDate = dateToMonthDayYearFormat(date, 'en');
+ * // formattedDate: "January 15, 2024"
+ *
+ * const formattedDate = dateToMonthDayYearFormat('2024-01-15', 'en');
+ * // formattedDate: "January 15, 2024"
+ */
+export const dateToMonthDayYearFormat = (date: Date | string | number, locale: string): string => {
+  const dateInstance = new Date(date);
+  if (Number.isNaN(dateInstance.getTime())) return '';
+
+  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
