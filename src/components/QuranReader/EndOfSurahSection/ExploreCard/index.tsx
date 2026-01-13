@@ -3,7 +3,6 @@ import React, { useMemo, useCallback } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
-import { ChapterContent } from 'types/ApiResponses';
 
 import { ACTION_BUTTONS, ActionButton } from './actions';
 import styles from './ExploreCard.module.scss';
@@ -18,6 +17,7 @@ import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { pickRandom } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getProfileNavigationUrl } from '@/utils/navigation';
+import { ChapterContent } from 'types/ApiResponses';
 
 interface ExploreCardProps {
   cardClassName?: string;
