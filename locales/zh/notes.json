@@ -4,12 +4,12 @@
   "checkbox-refl-intro": {
     "checkbox": {
       "desc": "<li>发帖意味着您的反思将以您的名义在 QuranReflect 上分享，并由审核团队审核并对 QuranReflect 社区可见。 </li> <li>一旦您的帖子被我们的审核团队审核、批准或推广，您可能会收到点赞、评论和关注通知。登录 QuranReflect 后，您可以更新通知设置以满足您的偏好。 </li> <li>您可以在“我的笔记和反思”部分中的 Quran.com 登录个人资料下查看您的笔记和发布的反思，或使用您的 Quran.com 登录名登录<link> QuranReflect </link>在电子邮件中。 </li>",
-      "title": "如果我选中此框会发生什么？"
+      "title": "如果我点击“保存并发布到 QuranReflect”会发生什么？"
     },
-    "post-button": "当我在 QuranReflect 上发帖时会发生什么？",
+    "post-button": "我发帖后会发生什么？",
     "qr-intro": "QuranReflect 和 Quran.com 都是 Quran.Foundation 家族的一部分。它是一个社交平台，用于分享个人对《古兰经》的看法，鼓励用户内化其信息并分享激发积极变革的见解。与学术解释不同，反思是与诗句相关的个人想法和经历。 QuranReflect 上的用户帖子由合格的团队进行审核和审核，他们将帮助确保内容质量和与《古兰经》互动时的礼仪，他们将通过分享反馈和突出有价值的话语来增强用户的能力，从而培育一个精神振奋、以《古兰经》为中心的社区。了解更多： <link> Quranreflect.com/faq </link>",
     "qr-title": "QuranReflect是什么？",
-    "title": "什么是 QuranReflect？如果我选中此框会发生什么？"
+    "title": "QuranReflect是什么？如果我勾选这个复选框会发生什么？"
   },
   "click-to-see-more": "点击查看更多",
   "delete-note": "删除注释",
@@ -37,7 +37,7 @@
       "title": "反思提示"
     },
     "see-less": "查看更少",
-    "title": "需要帮助反思《古兰经》吗？了解更多",
+    "title": "需要帮助反思《古兰经》吗？",
     "what-is-reflc": {
       "desc": "反思或思考《古兰经》包括仔细阅读或聆听安拉的话语，理解其含义，并让它影响和改变我们，让我们变得更好。这被称为“Tadabbur”。相比之下，《塔夫西尔》是对《古兰经》的学术解释，根据经典资料和学术分析对其经文进行详细解释。虽然 Tafsir 是为学者保留的，但真主 SWT 要求每个人都参与 Tadabbur（《古兰经》 <link1> 38:29 </link1> , <link2> 47:24 </link2> , <link3> 4:82 </link3> ， 还有很多）。 <br></br> <br></br>用户可以私下保存他们的笔记和个人感想。通常，我们的反思可以与他人产生深刻的共鸣，有助于他们与《古兰经》的联系，以及他们与安拉 SWT 的关系。这就是为什么用户可以选择将他们的想法分享到 QuranReflect，作为我们帮助人们在旅程中共同成长的努力的一部分。要了解更多信息，请访问： <link4> QuranReflect.com/faq </link4>和<link5>反思《古兰经》的五个视角</link5>",
       "title": "什么是反射？"

@@ -4,12 +4,12 @@
   "checkbox-refl-intro": {
     "checkbox": {
       "desc": "<li> Göndermek, yansımanızın, moderasyon ekibi tarafından inceleneceği ve QuranReflect topluluğu tarafından görüleceği, adınızla QuranReflect'te paylaşılacağı anlamına gelir. </li> <li> Gönderiniz moderasyon ekibimiz tarafından incelenip onaylandıktan veya tanıtıldıktan sonra beğeni, yorum ve takip bildirimleri alabilirsiniz. QuranReflect'te oturum açtıktan sonra bildirim ayarlarınızı tercihlerinize uyacak şekilde güncelleyebilirsiniz. </li> <li> Notlarınızı ve yayınladığınız yansımaları, Quran.com giriş profilinizin “Notlarım ve Düşüncelerim” bölümünde görüntüleyebilir veya Quran.com imzanızı kullanarak <link> QuranReflect </link> te oturum açabilirsiniz. e-postada. </li>",
-      "title": "Bu kutuyu işaretlersem ne olur?"
+      "title": "\"Kaydet ve QuranReflect'e Gönder\" seçeneğine tıklarsam ne olur?"
     },
-    "post-button": "KuranReflect'te paylaşım yaptığımda ne olur?",
+    "post-button": "Paylaşım yaptığımda ne oluyor?",
     "qr-intro": "QuranReflect, Quran.com ile birlikte Quran.Foundation ailesinin bir parçasıdır. Kuran hakkındaki kişisel düşüncelerin paylaşıldığı, kullanıcıların Kur'an'ın mesajlarını içselleştirmesine ve olumlu değişime ilham veren içgörüleri paylaşmaya teşvik ettiği sosyal bir platformdur. İlmî bir yorum olan tefsirden farklı olarak yansımalar, ayetlerle ilgili kişisel düşünce ve tecrübelerdir. QuranReflect'teki kullanıcı gönderileri, içeriğin kalitesinin ve Kuran'la etkileşimde görgü kurallarının sağlanmasına yardımcı olacak nitelikli bir ekip tarafından incelenir ve denetlenir ve geri bildirimleri paylaşarak ve değerli söylemi vurgulayarak kullanıcıları güçlendirerek manevi açıdan canlandırıcı, Kuran odaklı bir topluluğa teşvik eder. Daha fazla bilgi edinin: <link> Quranreflect.com/faq </link>",
     "qr-title": "QuranReflect nedir?",
-    "title": "Kur'an-ı Kerim nedir ve bu kutuyu işaretlersem ne olur?"
+    "title": "QuranReflect nedir ve bu kutuyu işaretlersem ne olur?"
   },
   "click-to-see-more": "Daha fazlasını görmek için tıklayın",
   "delete-note": "Notu sil",
@@ -37,7 +37,7 @@
       "title": "Yansıma İstemleri"
     },
     "see-less": "Daha az göster",
-    "title": "Kuran'ı derinlemesine düşünmek için yardıma mı ihtiyacınız var? Daha fazla bilgi edin",
+    "title": "Kur'an üzerine tefekkür etmekte yardıma mı ihtiyacınız var?",
     "what-is-reflc": {
       "desc": "Kuran üzerinde analize etmek veya üzerinde derin düşünmek, Allah'ın sözlerini dikkatle okumayı veya dinlemeyi, anlamlarıyla ilgilenmeyi ve onun bizi daha iyiye doğru etkilemesine ve değiştirmesine izin vermeyi gerektirir. Buna \"Tefekkür\" denir. Tefsir, aksine, Kur'an'ın bilimsel bir yorumudur ve ayetlerinin klasik kaynaklara ve bilimsel analizlere dayalı olarak ayrıntılı açıklamalarını sağlar. Tefsir alimlere ayrılmışken, Allah ﷻ herkesin tefekkür meşgul olmasını ister (Kuran <link1> 38:29 </link1> , <link2> 47:24 </link2> , <link3> 4:82 </link3> , ve daha fazlası). <br></br> <br></br> Kullanıcılar notlarını ve kişisel düşüncelerini özel olarak kaydedebilirler. Çoğu zaman düşüncelerimiz başkalarında derin bir yankı uyandırabilir, onların Kur'an'la bağlantılarına ve Allah ﷻ ile ilişkilerine yardımcı olabilir. Bu nedenle kullanıcılar, insanların yolculuklarında birlikte büyümelerine yardımcı olma çabalarımızın bir parçası olarak, QuranReflect'e olan yansımalarını paylaşma seçeneğine sahiptir. Daha fazla bilgi edinmek için şu adresleri ziyaret edin: <link4> QuranReflect.com/faq </link4> ve <link5> Kuran'ı Yansıtacak Beş Mercek </link5>",
       "title": "Yansıma Nedir?"

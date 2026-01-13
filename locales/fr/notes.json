@@ -4,12 +4,12 @@
   "checkbox-refl-intro": {
     "checkbox": {
       "desc": "<li> La publication signifie que votre réflexion sera partagée sur QuranReflect sous votre nom où elle sera examinée par l'équipe de modération et visible par la communauté QuranReflect. </li> <li> Une fois votre message examiné et approuvé ou promu par notre équipe de modération, vous pourrez recevoir des likes, des commentaires et suivre des notifications. Une fois connecté à QuranReflect, vous pourrez mettre à jour vos paramètres de notification en fonction de vos préférences. </li> <li> Vous pouvez consulter vos notes et réflexions publiées sous votre profil Quran.com dans la section « Mes notes et réflexions », ou vous connecter à <link> QuranReflect </link> en utilisant votre identifiant Quran.com par e-mail. </li>",
-      "title": "Que se passe-t-il si je coche cette case ?"
+      "title": "Que se passe-t-il si je clique sur « Enregistrer et publier sur QuranReflect » ?"
     },
-    "post-button": "Que se passe-t-il lorsque je publie sur QuranReflect ?",
+    "post-button": "Que se passe-t-il lorsque je publie un message ?",
     "qr-intro": "QuranReflect, en partenariat avec Quran.com, fait partie de la famille Quran.Foundation. C’est une plateforme sociale dédiée au partage de réflexions personnelles sur le Coran, encourageant chacun à s’approprier ses messages et à échanger des idées qui inspirent un changement positif. Contrairement au tafsir, qui est une interprétation des savants, les réflexions sont des pensées et expériences personnelles en lien avec les Ayahs. Les publications des utilisateurs sur QuranReflect sont examinées et modérées par une équipe qualifiée, chargée d’assurer la qualité des contenus, le respect des règles d’étiquette liées au Coran, tout en accompagnant les utilisateurs via des retours constructifs et en mettant en lumière les échanges enrichissants, afin de favoriser une communauté spirituellement stimulante et centrée autour du Coran.\\nPour en savoir plus : <link> Quranreflect.com/faq </link>",
     "qr-title": "Qu'est-ce que QuranReflect ?",
-    "title": "Qu'est-ce que QuranReflect et que se passe-t-il si je coche cette case ?"
+    "title": "Qu’est-ce que QuranReflect et que se passe-t-il si je coche cette case ?"
   },
   "click-to-see-more": "cliquez pour en voir plus",
   "delete-note": "Supprimer la note",
@@ -37,7 +37,7 @@
       "title": "Réflexions"
     },
     "see-less": "Voir moins",
-    "title": "Besoin d’aide pour réfléchir sur le Coran ? En apprendre davantage",
+    "title": "Besoin d'aide pour réfléchir au Coran ?",
     "what-is-reflc": {
       "desc": "Réfléchir ou méditer sur le Coran implique de lire ou d'écouter attentivement les paroles d'Allah, de s'engager dans leurs significations et de leur permettre de nous affecter et de nous changer pour le mieux. C'est ce qu'on appelle \"Tadabbur\". Le Tafsir, en revanche, est une interprétation savante du Coran, fournissant des explications détaillées de ses Ayahs basées sur des sources classiques et des analyses savantes. Alors que le Tafsir est réservé aux savants, Allah ﷻ demande à chacun de s'engager dans le Tadabbur (Coran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, et beaucoup plus). <br></br><br></br>Les utilisateurs peuvent enregistrer leurs notes et réflexions personnelles en privé. Souvent, nos réflexions peuvent profondément résonner chez les autres, contribuant ainsi à leur connexion avec le Coran et à leur relation avec Allah ﷻ. C'est pourquoi les utilisateurs ont la possibilité de partager leur réflexion sur QuranReflect dans le cadre de nos efforts visant à aider les gens à progresser ensemble dans leur voyage. Pour en savoir plus, visitez : <link4>QuranReflect.com/faq</link4> et <link5>Cinq Façon de Méditer sur le Coran</link5>",
       "title": "Qu'est-ce qu'une réflexion ?"
