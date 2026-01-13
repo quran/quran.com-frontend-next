@@ -11,7 +11,7 @@ interface UseToggleParams {
  * Custom hook for managing toggle state with event logging
  * @returns {[boolean, () => void]} A tuple containing the current state and the toggle function
  */
-const useToggle = ({ initialState = false, eventName }: UseToggleParams) => {
+const useToggle = ({ initialState = false, eventName }: UseToggleParams): [boolean, () => void] => {
   const [isOpen, setIsOpen] = useState<boolean>(initialState);
 
   const toggle = () => {
@@ -22,7 +22,7 @@ const useToggle = ({ initialState = false, eventName }: UseToggleParams) => {
     });
   };
 
-  return [isOpen, toggle] as const;
+  return [isOpen, toggle];
 };
 
 export default useToggle;

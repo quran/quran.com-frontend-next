@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
@@ -9,13 +9,11 @@ import styles from './MyNotes.module.scss';
 import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
-import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
@@ -29,10 +27,23 @@ interface MyNotesProps {
   onAddNote: () => void;
   onEditNote: (note: Note) => void;
   verseKey: string;
+  deletingNoteId: string | undefined;
+  // will use it for jumping to that location
+  // eslint-disable-next-line react/no-unused-prop-types
+  processingNoteId: string | undefined;
   onPostToQrClick: (note: Note) => void;
+  onDeleteNoteClick: (note: Note) => void;
 }
 
-const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPostToQrClick }) => {
+const MyNotes: React.FC<MyNotesProps> = ({
+  onAddNote,
+  onEditNote,
+  verseKey,
+  deletingNoteId,
+  processingNoteId,
+  onPostToQrClick,
+  onDeleteNoteClick,
+}) => {
   const { t, lang } = useTranslation('notes');
   const chaptersData = useContext(DataContext);
 
@@ -79,6 +90,13 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
   const showEmptyState = !isLoading && !error && notes.length === 0;
   const showStatus = isLoading || error || showEmptyState;
 
+  useEffect(() => {
+    if (processingNoteId) {
+      const noteElement = document.querySelector(`[data-testid="note-card-${processingNoteId}"]`);
+      if (noteElement) noteElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [processingNoteId]);
+
   return (
     <>
       {showStatus ? (
@@ -118,7 +136,11 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
                     />
                   </Button>
 
-                  <DeleteNoteButton note={note} />
+                  <DeleteNoteButton
+                    note={note}
+                    onDeleteNoteClick={onDeleteNoteClick}
+                    isDeletingNote={note.id === deletingNoteId}
+                  />
                 </div>
               </div>
 
@@ -129,8 +151,6 @@ const MyNotes: React.FC<MyNotesProps> = ({ onAddNote, onEditNote, verseKey, onPo
           ))}
         </div>
       )}
-
-      <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />
 
       <div className={styles.actions}>
         <Button

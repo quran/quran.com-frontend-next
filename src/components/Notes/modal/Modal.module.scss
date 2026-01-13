@@ -39,7 +39,7 @@ $note_modal_max_width: 48rem;
   scrollbar-gutter: stable both-edges;
 
   @include breakpoints.smallerThanTablet {
-    --space-taken: calc(2 * var(--spacing-large));
+    --space-taken: calc(2 * var(--spacing-mega));
     padding-block-end: 0;
     place-items: end;
   }

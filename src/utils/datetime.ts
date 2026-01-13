@@ -435,5 +435,6 @@ export const dateToMonthDayYearFormat = (date: Date | string | number, locale: s
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 };
