@@ -389,3 +389,52 @@ export const compareDateWithToday = (
 
   return { today, normalizedDate, isToday };
 };
+
+/**
+ * Convert a date to a safe ISO string.
+ *
+ * @param {string | Date} date
+ * @returns {string | undefined}
+ *
+ * @example
+ * const isoString = toSafeISOString('2024-01-15');
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('2024-01-15'));
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('invalid date'));
+ * // isoString: undefined
+ */
+export const toSafeISOString = (date: string | Date): string | undefined => {
+  const timestamp = typeof date === 'string' ? Date.parse(date) : date.getTime();
+  if (Number.isNaN(timestamp)) return undefined;
+  return new Date(timestamp).toISOString();
+};
+
+/**
+ * Format a date to a month, day, year format.
+ *
+ * @param {Date | string | number} date
+ * @param {string} locale
+ * @returns {string} The date in the format of "Month Day, Year"
+ *
+ * @example
+ * const date = new Date('2024-01-15');
+ * const formattedDate = dateToMonthDayYearFormat(date, 'en');
+ * // formattedDate: "January 15, 2024"
+ *
+ * const formattedDate = dateToMonthDayYearFormat('2024-01-15', 'en');
+ * // formattedDate: "January 15, 2024"
+ */
+export const dateToMonthDayYearFormat = (date: Date | string | number, locale: string): string => {
+  const dateInstance = new Date(date);
+  if (Number.isNaN(dateInstance.getTime())) return '';
+
+  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+};
