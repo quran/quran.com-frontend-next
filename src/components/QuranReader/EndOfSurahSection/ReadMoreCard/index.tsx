@@ -68,8 +68,14 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
   const nextDisplayNumber = getDisplayNumber(nextChapterNumber);
   const prevDisplayNumber = getDisplayNumber(prevChapterNumber);
 
-  const nextSummary = useMemo(() => pickRandom(nextSummaries), [nextSummaries]);
-  const prevSummary = useMemo(() => pickRandom(previousSummaries), [previousSummaries]);
+  const nextSummary = useMemo(() => {
+    if (!nextSummaries || nextSummaries.length === 0) return null;
+    return pickRandom(nextSummaries);
+  }, [nextSummaries]);
+  const prevSummary = useMemo(() => {
+    if (!previousSummaries || previousSummaries.length === 0) return null;
+    return pickRandom(previousSummaries);
+  }, [previousSummaries]);
 
   const canShowNext = Boolean(nextChapterNumber && nextChapter && nextDisplayNumber);
   const canShowPrev = Boolean(prevChapterNumber && prevChapter && prevDisplayNumber);
