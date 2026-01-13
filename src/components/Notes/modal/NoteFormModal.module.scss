@@ -40,6 +40,11 @@ div.textArea {
       font-weight: var(--font-weight-normal);
     }
 
+    [dir='rtl'] &::placeholder {
+      direction: rtl;
+      text-align: end;
+    }
+
     &:focus::placeholder {
       color: transparent;
     }
