@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Arritni Qëllimet Tuaja Kur'anore",
   "continue-reading": "Vazhdo te lexosh",
   "continuous": {
     "description": "Qëllimi juaj do të llogarisë përparimin tuaj për një kohëzgjatje prej ditësh",
@@ -97,6 +98,7 @@
     "other": "Kanë mbetur edhe {{days}} ditë"
   },
   "set-a-new-goal": "Vendosni një qëllim të ri",
+  "set-custom-goal": "Vendos një Objektiv të Personalizuar",
   "set-reading-goal-success": "Qëllimi juaj i leximit është vendosur me sukses.",
   "start-journey": "Filloni udhëtimin tuaj!",
   "start-reading": "Filloni të lexoni",
@@ -112,6 +114,7 @@
     "stroked": "Ju nuk keni lexuar asgjë sot"
   },
   "todays-goal": "Goli i sotëm",
+  "track-your-streak": "Ndiqni Seritë, Krijoni Objektiva të Personalizuara, Qëndroni të Qëndrueshëm",
   "view-progress": "Shiko Progresin",
   "week-progress": "Progresi i kësaj jave",
   "x-days": {
