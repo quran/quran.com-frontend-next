@@ -26,6 +26,11 @@ export const ROUTES = {
   PRIVACY: '/privacy',
   TERMS: '/terms-and-conditions',
   SITEMAP: '/sitemap.xml',
+  READING_GOAL_PROGRESS: '/reading-goal/progress',
+  MY_LEARNING_PLANS: '/my-learning-plans',
+  COLLECTIONS_ALL: '/collections/all',
+  NOTES: '/notes-and-reflections',
+  NOTIFICATION_SETTINGS: '/notification-settings',
   // TODO: add all static routes here for incremental adoption
 };
 
@@ -36,6 +41,15 @@ export const AUTH_ROUTES = [
   ROUTES.LOGIN,
   ROUTES.FORGET_PASSWORD,
   ROUTES.RESET_PASSWORD,
+  ROUTES.COMPLETE_SIGNUP,
+];
+
+export const WITH_AUTH_ROUTES = [
+  ROUTES.READING_GOAL_PROGRESS,
+  ROUTES.MY_LEARNING_PLANS,
+  ROUTES.COLLECTIONS_ALL,
+  ROUTES.NOTES,
+  ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
 
