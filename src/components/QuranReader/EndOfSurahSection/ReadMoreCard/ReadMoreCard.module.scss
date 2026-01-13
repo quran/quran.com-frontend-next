@@ -108,7 +108,6 @@
 }
 
 .summary {
-  font-size: var(--font-size-small-px);
   color: var(--color-text-faded-new);
   border-top: var(--spacing-hairline-px) solid var(--color-separators-new);
   padding-block-start: var(--spacing-small-px);
@@ -121,8 +120,6 @@
 }
 
 .longText {
-  font-size: var(--font-size-xsmall-px);
-  line-height: var(--line-height-small);
 
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-xsmall);

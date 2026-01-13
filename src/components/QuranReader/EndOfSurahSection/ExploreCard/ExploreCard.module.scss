@@ -26,6 +26,8 @@ div.endOfSurahCard {
   justify-content: center;
 
   svg {
+    color: var(--color-blue-buttons-and-icons);
+    fill: var(--color-blue-buttons-and-icons);
     width: var(--spacing-small2-px);
     height: var(--spacing-small2-px);
   }
@@ -33,7 +35,7 @@ div.endOfSurahCard {
 
 .myQuranLink {
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
+  color: var(--color-text-faded-new);
   text-decoration: none;
   cursor: pointer;
 
@@ -84,4 +86,5 @@ div.endOfSurahCard {
 .suggestionText {
   word-wrap: break-word;
   overflow-wrap: break-word;
+  color: var(--color-text-faded-new);
 }

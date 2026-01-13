@@ -85,6 +85,10 @@
 
 .myQuranContainer {
     display: flex;
+    svg{
+        fill: var(--color-blue-buttons-and-icons);
+        color: var(--color-blue-buttons-and-icons);
+    }
     @include breakpoints.smallerThanTablet {
         svg {
             width: 12px !important;
