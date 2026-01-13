@@ -6,7 +6,6 @@ import uniqBy from 'lodash/uniqBy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import CheckboxChip from './CheckboxChip';
 import Section from './Section';
@@ -41,6 +40,7 @@ import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
 import { removeItemFromArray } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
