@@ -49,7 +49,7 @@ const useLogout = (): LogoutFunction => {
 
         if (!redirectToLogin) {
           if (PROTECTED_ROUTES.includes(router.pathname)) {
-            await router.push(ROUTES.HOME);
+            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${ROUTES.HOME}`);
           } else {
             const redirect = router.asPath;
             await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
