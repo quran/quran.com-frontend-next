@@ -7,6 +7,10 @@
   font-weight: var(--font-weight-medium);
 }
 
+.previewTitleExpanded {
+  margin-block-end: calc(var(--spacing-xxxlarge-px) + var(--spacing-medium-px));
+}
+
 .container {
   display: flex;
   flex-direction: column;

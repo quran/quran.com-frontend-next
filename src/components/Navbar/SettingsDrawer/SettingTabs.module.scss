@@ -24,9 +24,6 @@
   cursor: pointer;
   position: relative;
 
-  &:hover {
-    color: var(--color-text-link-new);
-  }
 
   &[data-state='active'] {
     color: var(--color-text-link-new);
@@ -34,10 +31,10 @@
     &::after {
       content: '';
       position: absolute;
-      bottom: calc(-1 * var(--spacing-hairline-px));
+      bottom: calc(-1 * var(--spacing-micro-px));
       left: 0;
       right: 0;
-      height: var(--spacing-hairline-px);
+      height: var(--spacing-micro-px);
       background-color: var(--color-blue-buttons-and-icons);
     }
   }

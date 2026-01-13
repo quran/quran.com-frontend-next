@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
@@ -12,10 +13,12 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import { TooltipType } from '@/dls/Tooltip';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { selectTooltipContentType } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
-import { QuranFont } from '@/types/QuranReader';
+import { QuranFont, WordByWordType } from '@/types/QuranReader';
+import { areArraysEqual } from '@/utils/array';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
 import Word from 'types/Word';
@@ -32,6 +35,12 @@ const VersePreview = () => {
   const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () => getSampleVerse());
   const dispatch = useDispatch();
   const [showContent, setShowContent] = useState(false);
+  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
+
+  // Check if both translation and transliteration are enabled
+  const hasBothTooltipTypes =
+    showTooltipFor.includes(WordByWordType.Translation) &&
+    showTooltipFor.includes(WordByWordType.Transliteration);
 
   // Delay showing content by 400ms to prevent layout shift
   useEffect(() => {
@@ -79,7 +88,13 @@ const VersePreview = () => {
 
   return (
     <>
-      <div className={styles.previewTitle}>{t('verse-preview-title')}</div>
+      <div
+        className={classNames(styles.previewTitle, {
+          [styles.previewTitleExpanded]: hasBothTooltipTypes,
+        })}
+      >
+        {t('verse-preview-title')}
+      </div>
       <div dir="rtl" className={styles.container}>
         {showContent ? (
           <>

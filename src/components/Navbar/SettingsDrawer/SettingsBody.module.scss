@@ -6,8 +6,11 @@
   min-height: 100vh;
 
   @include breakpoints.smallerThanTablet {
-    min-height: 95vh;
+    min-height: unset;
+    height: calc(100dvh - var(--navbar-height));
   }
+
+  @include breakpoints.smallerThanTablet {}
 }
 
 .buttonsContainer {
@@ -16,7 +19,6 @@
   justify-content: space-between;
   padding-inline-start: var(--spacing-medium2-px);
   padding-inline-end: var(--spacing-medium2-px);
-  padding-block-start: auto;
   padding-block-start: var(--spacing-medium-px);
   padding-block-end: var(--spacing-medium2-px);
   border-top: 1px solid var(--color-borders-hairline);
@@ -24,7 +26,8 @@
   flex-shrink: 0;
   position: sticky;
   bottom: 0;
-  z-index: 1;
+  z-index: 10;
+  margin-top: auto;
 
   button {
     border-radius: var(--border-radius-medium-px);

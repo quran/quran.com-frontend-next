@@ -58,17 +58,33 @@
     @include breakpoints.smallerThanTablet {
       inset-block-start: var(--navbar-height);
       inset-block-end: auto;
+      block-size: calc(100vh - var(--navbar-height));
       border-radius: var(--border-radius-rounded);
       transform: translateY(100%);
+      transition: transform var(--transition-regular), inset-block-start var(--transition-regular), block-size var(--transition-regular);
+    }
+  }
+
+  // When navbar is hidden on scroll, remove top gap and top rounded corners
+  &.navbarInvisible {
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-block-start: calc(3* var(--spacing-max));
+        block-size: 100vh;
+        border-radius: var(--border-radius-rounded);
+        paddin-block-start: 5px;
+      }
     }
   }
 }
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
+
   &.settingsDrawer {
-      box-shadow: none;
+    box-shadow: none;
   }
+
   transition-timing-function: ease-out;
 
   &.left {
@@ -108,7 +124,6 @@
 
 .bodyContainer {
   flex: 1;
-  margin-block-start: var(--navbar-height);
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
@@ -125,6 +140,7 @@
   .settingsDrawer & {
     padding-block-end: 0;
   }
+
   padding-block-end: calc(4 * var(--spacing-large));
 }
 
@@ -150,6 +166,17 @@
   }
 
   z-index: var(--z-index-header);
+
+  // Settings drawer header positioning on mobile
+  .settingsDrawer & {
+    @include breakpoints.smallerThanTablet {
+      position: sticky;
+      padding-block: var(--spacing-small-px);
+      inset-block-start: 0;
+      background-color: var(--color-background-elevated);
+
+    }
+  }
 }
 
 .headerContentContainer {
@@ -182,6 +209,6 @@
   padding-block-start: var(--navbar-container-height);
 
   @include breakpoints.smallerThanTablet {
-    padding-block-start: var(--navbar-height);
+    padding-block-start: 0;
   }
 }
