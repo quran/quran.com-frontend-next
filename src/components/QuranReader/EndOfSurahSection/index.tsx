@@ -16,6 +16,7 @@ import BottomActionsModals, {
 } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
 
 interface EndOfSurahSectionProps {
@@ -43,6 +44,12 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
 
     return verseWithQuestions || verseKey;
   }, [questionsData, chapterNumber, verseKey]);
+
+  // Check if the verse used for Answers has clarification questions
+  const hasClarificationQuestion = React.useMemo(() => {
+    if (!questionsData) return false;
+    return !!questionsData[questionsVerseKey]?.types?.[QuestionType.CLARIFICATION];
+  }, [questionsData, questionsVerseKey]);
 
   // Check if any verse in the chapter has questions
   const hasQuestions = React.useMemo(() => {
@@ -89,6 +96,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           questionsVerseKey={questionsVerseKey}
           suggestions={chapterMetadata?.suggestions}
           hasQuestions={hasQuestions}
+          hasClarificationQuestion={hasClarificationQuestion}
           onModalOpen={handleModalOpen}
         />
 

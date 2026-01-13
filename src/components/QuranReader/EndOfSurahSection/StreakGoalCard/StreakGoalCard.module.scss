@@ -15,7 +15,7 @@
 }
 
 .guestState {
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-default-new);
 }
 
 .container {
@@ -80,6 +80,7 @@
 .subtitle {
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
   text-align: center;
   text-wrap: nowrap;
 
@@ -113,6 +114,7 @@
     // Target button content span on mobile
     >span {
       align-items: center;
+      text-wrap: nowrap;
     }
   }
 }
