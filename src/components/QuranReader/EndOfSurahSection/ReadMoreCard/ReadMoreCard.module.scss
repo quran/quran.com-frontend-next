@@ -41,7 +41,7 @@
 
   svg {
     inline-size: calc(var(--spacing-small-px) + var(--spacing-hairline-px));
-    block-size: var(var(--spacing-medium-plus-px));
+    block-size: var(--spacing-medium-plus-px);
     flex-shrink: 0;
 
     path {
