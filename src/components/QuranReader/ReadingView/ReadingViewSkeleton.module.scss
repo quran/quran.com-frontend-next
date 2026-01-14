@@ -1,10 +1,11 @@
-@use "src/styles/utility";
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 .skeletonContainer {
   // the page's bottom margin + the height of the page footer
   margin-block-end: calc(var(--spacing-mega) + var(--spacing-large));
+  inline-size: 100%;
 }
 
 .skeleton {
@@ -13,9 +14,135 @@
     margin-block-start: constants.$reading-view-container-top-margin;
   }
   margin-block-start: var(--spacing-xsmall);
-  height: var(--skeleton-height);
+  block-size: var(--skeleton-height);
 }
 
 .fixedWidth {
-  width: var(--line-width, auto);
+  inline-size: var(--line-width, auto);
+}
+
+.translationWidth {
+  // Use fixed width to match TranslationPage content width
+  // This avoids issues with percentage-based width in flex containers
+  inline-size: min(600px, calc(100vw - 32px));
+}
+
+// Chapter header skeleton - matches ChapterHeader structure exactly
+.chapterHeaderSkeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: auto;
+  inline-size: 100%;
+  max-inline-size: 450px;
+  margin-block-start: var(--spacing-mega);
+}
+
+// Top controls - matches .topControls layout
+.headerControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playButton {
+  inline-size: 80px;
+  block-size: 32px;
+  border-radius: var(--border-radius-pill);
+}
+
+.modeButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
+}
+
+.modeButton {
+  inline-size: 55px;
+  block-size: 32px;
+  border-radius: var(--border-radius-pill);
+}
+
+.translationButton {
+  inline-size: 110px;
+  block-size: 32px;
+  border-radius: var(--border-radius-pill);
+}
+
+// Title section - matches .chapterTitle layout
+.headerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: var(--spacing-medium2);
+  margin-block-start: var(--spacing-medium2);
+  margin-block-end: var(--spacing-mega);
+}
+
+.titleText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xxsmall);
+}
+
+.chapterName {
+  inline-size: 110px;
+  block-size: 24px;
+  border-radius: var(--border-radius-default);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 85px;
+    block-size: 20px;
+  }
+}
+
+.chapterTranslation {
+  inline-size: 70px;
+  block-size: 18px;
+  border-radius: var(--border-radius-default);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 55px;
+    block-size: 16px;
+  }
+}
+
+.chapterIcon {
+  inline-size: 65px;
+  block-size: 40px;
+  border-radius: var(--border-radius-default);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 45px;
+    block-size: 28px;
+  }
+}
+
+// Bismillah - matches .bismillahContainer layout
+.bismillahContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-block-end: var(--spacing-xxlarge-px);
+}
+
+.bismillah {
+  inline-size: 200px;
+  block-size: 24px;
+  border-radius: var(--border-radius-default);
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: 148px;
+    block-size: 20px;
+  }
+}
+
+.bismillahTranslation {
+  inline-size: 140px;
+  block-size: 12px;
+  border-radius: var(--border-radius-default);
+  margin-block-start: var(--spacing-xxsmall);
 }

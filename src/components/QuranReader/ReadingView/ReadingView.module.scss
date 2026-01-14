@@ -1,16 +1,19 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
-@include utility.generate-line-width-scales("code_v1");
-@include utility.generate-line-width-scales("code_v2");
-@include utility.generate-line-width-scales("tajweed_v4");
-@include utility.generate-line-width-scales("text_indopak_15_lines");
-@include utility.generate-line-width-scales("text_indopak_16_lines");
-@include utility.generate-line-width-scales("qpc_uthmani_hafs");
-@include utility.generate-line-width-scales("tajweed");
+$empty-state-gap-desktop: 146px;
+$empty-state-gap-mobile: 50px;
+
+@include utility.generate-line-width-scales('code_v1');
+@include utility.generate-line-width-scales('code_v2');
+@include utility.generate-line-width-scales('tajweed_v4');
+@include utility.generate-line-width-scales('text_indopak_15_lines');
+@include utility.generate-line-width-scales('text_indopak_16_lines');
+@include utility.generate-line-width-scales('qpc_uthmani_hafs');
+@include utility.generate-line-width-scales('tajweed');
 
 .container {
-  max-width: 100%;
+  max-inline-size: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -18,8 +21,27 @@
 }
 
 .virtuosoScroller {
-  & [data-viewport-type="window"] {
+  & [data-viewport-type='window'] {
     // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;
   }
+}
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  inline-size: 100%;
+  gap: $empty-state-gap-desktop;
+
+  @include breakpoints.smallerThanTablet {
+    gap: $empty-state-gap-mobile;
+  }
+}
+
+.emptyStateControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: var(--spacing-mega);
 }
