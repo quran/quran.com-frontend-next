@@ -1,0 +1,45 @@
+@use 'src/styles/breakpoints';
+
+$translation-content-max-width: 600px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-mega);
+  padding: var(--spacing-mega) var(--spacing-medium);
+  inline-size: 100%;
+}
+
+.translationContent {
+  max-inline-size: $translation-content-max-width;
+  inline-size: 100%;
+  text-align: justify;
+  font-family: 'Figtree', var(--font-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-large);
+  line-height: 180%;
+  color: var(--color-text-default);
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-small);
+  }
+}
+
+.verseNumber {
+  font-weight: var(--font-weight-bold);
+}
+
+.pageFooter {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+  padding-block-start: var(--spacing-medium);
+}
+
+.pageNumber {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-faded);
+}
