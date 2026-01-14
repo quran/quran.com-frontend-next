@@ -1,8 +1,46 @@
+.previewTitle {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-xxsmall-px);
+  padding-block-end: var(--spacing-xsmall-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  margin-block-end: calc(2 * var(--spacing-large-px));
+  font-weight: var(--font-weight-medium);
+}
+
+.previewTitleExpanded {
+  margin-block-end: calc(var(--spacing-xxxlarge-px) + var(--spacing-medium-px));
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-plus-px);
+  position: relative;
+
+  // Constrain tooltips to be flexible and stay at top
+  :global {
+    // Style the success tooltip (used in preview) to stay contained and at top
+    [role="tooltip"][data-side="top"].success {
+      max-width: min(400px, calc(100vw - var(--spacing-large-px) * 2));
+      word-wrap: break-word;
+      white-space: normal;
+      overflow-wrap: break-word;
+      text-align: start;
+    }
+  }
+}
+
+.translationText {
+  font-size: calc(var(--font-size)* 0.847);
+  line-height: 150%;
+  color: var(--color-text-default);
+}
+
 .skeletonPlaceholder {
   height: calc(1.5 * var(--spacing-mega));
   width: 100%;
 }
 
-.skeletonContainer + .skeletonContainer {
+.skeletonContainer+.skeletonContainer {
   margin-block-start: var(--spacing-large);
 }

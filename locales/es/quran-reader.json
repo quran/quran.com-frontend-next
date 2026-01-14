@@ -2,12 +2,14 @@
   "add-bookmark": "Añadir marcador",
   "add-collection": "Agregar colección",
   "advanced-copy": "Copia avanzada ",
+  "arabic": "árabe",
   "aria": {
     "read-ayah-refls": "Leer las reflexiones de la aleya",
     "read-tafsirs": "Leer Tafsirs de aleyas"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Volver a la aleya",
+  "below-word": "Palabra de abajo:",
   "bismillah": "En el nombre de Alá, el Compasivo, el Misericordioso.",
   "change-translation": "Cambiar traducción",
   "copy-arabic": "Texto árabe (texto utmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Copiar texto",
   "cpy-link": "Copiar enlace",
   "current-verse": "Verso actual",
+  "done": "Hecho",
   "download-copy": "Si desea descargar un archivo de texto.",
   "edgham": "Letra silenciada",
   "ekhfa": "Ghuna/ikhfa´",
@@ -40,6 +43,7 @@
   },
   "font": "Fuente árabe para copiar",
   "font-placeholder": "Seleccione una fuente",
+  "font-style": "Estilo de fuente",
   "font-tooltip": "Las fuentes King Fahad V1 y V2 estarán en Unicode.",
   "footnote": "Nota al pie",
   "footnote-dl": "</b>Dual<b> <br/>En el idioma árabe hay una forma para verbos y pronombres cuando se dirige a dos personas.",
@@ -73,6 +77,7 @@
   "next-page": "Página siguiente",
   "next-rub": "Rub el Hizb siguiente",
   "next-surah": "Sura siguiente",
+  "on-click": "Al hacer clic:",
   "page-bookmark-removed": "Marcador de página eliminado",
   "page-bookmarked": "Página marcada",
   "posted-in": "Publicado en",
@@ -131,6 +136,8 @@
     "title": "Comentarios sobre la traducción",
     "translation": "Traducción"
   },
+  "verse-preview-title": "Avance:",
   "verses-range": "Gama de versos",
-  "view-on-quran-reflect": "Ver en QuranReflect"
+  "view-on-quran-reflect": "Ver en QuranReflect",
+  "wbw-helper-text": "Seleccione opciones para mostrar la traducción, transliteración y/o recitación de cada palabra."
 }

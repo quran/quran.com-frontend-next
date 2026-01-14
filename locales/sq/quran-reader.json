@@ -2,12 +2,14 @@
   "add-bookmark": "Shto faqeshënues",
   "add-collection": "Shto Koleksion",
   "advanced-copy": "Kopje e avancuar",
+  "arabic": "Arabisht",
   "aria": {
     "read-ayah-refls": "Lexoni Reflektime të Ajetit",
     "read-tafsirs": "Lexoni Ajet Tefsire"
   },
   "ayatul-kursi": "Ajeti Kursi",
   "back-to-ayah": "Kthehu tek Ajeti",
+  "below-word": "Fjala më poshtë:",
   "bismillah": "Në emër të Allahut - Mëshirëplotit, Mëshirëplotit",
   "change-translation": "Ndrysho Përkthimin",
   "copy-arabic": "Teksti arab (teksti osmanisht)",
@@ -17,6 +19,7 @@
   "copy-verse": "Kopjoni tekstin",
   "cpy-link": "Kopjo linkun",
   "current-verse": "Vargu aktual",
+  "done": "U krye",
   "download-copy": "nëse dëshironi të shkarkoni një skedar teksti.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa dhe Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Font arab për të kopjuar",
   "font-placeholder": "Zgjidhni një font",
+  "font-style": "Stili i shkronjave",
   "font-tooltip": "Fontet King Fahad V1 dhe V2 do të jenë në unicode.",
   "footnote": "Fusnota",
   "footnote-dl": "<b> Dyfish </b> <br/> Një formë për foljet dhe përemrat në gjuhën arabe kur u drejtohen dy personave",
@@ -73,6 +77,7 @@
   "next-page": "Faqja tjetër",
   "next-rub": "Next Rub el Hizb",
   "next-surah": "Surja tjetër",
+  "on-click": "Me klikim:",
   "page-bookmark-removed": "Faqeshënuesi i faqes u hoq",
   "page-bookmarked": "Faqja u shënua",
   "posted-in": "Postuar ne",
@@ -131,6 +136,8 @@
     "title": "Reagime për përkthimin",
     "translation": "Përkthim"
   },
+  "verse-preview-title": "Pamje paraprake:",
   "verses-range": "Gama e vargjeve",
-  "view-on-quran-reflect": "Shiko në QuranReflect"
+  "view-on-quran-reflect": "Shiko në QuranReflect",
+  "wbw-helper-text": "Zgjidh opsionet për të shfaqur përkthimin, transliterimin dhe/ose recitimin për secilën fjalë."
 }

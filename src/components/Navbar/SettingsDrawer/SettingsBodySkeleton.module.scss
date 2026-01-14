@@ -1,6 +1,10 @@
 .skeletonContainer {
   display: flex;
   flex-direction: column;
+  margin-block-start: var(--navbar-height);
+  padding-block-start: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .title {

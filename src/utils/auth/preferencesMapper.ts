@@ -51,7 +51,20 @@ const getPreferenceGroupValue = (
       ...currentSliceValue,
     } as ReadingPreferences;
     delete newPreferences.isUsingDefaultWordByWordLocale;
-    return newPreferences;
+
+    // Map tooltip content type to wordByWordContentType for backend compatibility
+    // Backend only knows about wordByWordContentType, not the tooltip/inline variants
+    const backendPreferences = {
+      ...newPreferences,
+      wordByWordContentType:
+        newPreferences.wordByWordTooltipContentType || newPreferences.wordByWordContentType,
+    };
+
+    // Remove local-only fields that backend doesn't recognize
+    delete backendPreferences.wordByWordTooltipContentType;
+    delete backendPreferences.wordByWordInlineContentType;
+
+    return backendPreferences;
   }
 
   if (sliceName === SliceName.TRANSLATIONS) {

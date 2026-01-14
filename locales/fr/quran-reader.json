@@ -2,12 +2,14 @@
   "add-bookmark": "Ajouter un signet",
   "add-collection": "Ajouter une collection",
   "advanced-copy": "Copie avancée",
+  "arabic": "arabe",
   "aria": {
     "read-ayah-refls": "Lire les Réflexions de l'Ayah",
     "read-tafsirs": "Lire les Tasfirs de l'Ayah"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Retour à l'Ayah",
+  "below-word": "Mot ci-dessous :",
   "bismillah": "Au nom d'Allah, le Plus Miséricordieux, le Plus Miséricordieux",
   "change-translation": "Changer la traduction",
   "copy-arabic": "Texte arabe (texte Uthmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Copier l'Ayah",
   "cpy-link": "Copier le lien",
   "current-verse": "Ayah Actuelle",
+  "done": "Fait",
   "download-copy": "si vous voulez télécharger un fichier texte.",
   "edgham": "Lettre muette",
   "ekhfa": "Ghunna/ikhfa’",
@@ -40,6 +43,7 @@
   },
   "font": "Police arabe à copier",
   "font-placeholder": "Sélectionner une police",
+  "font-style": "Style de police",
   "font-tooltip": "Les polices King Fahad V1 et V2 seront en unicode.",
   "footnote": "Note de bas de page",
   "footnote-dl": "<b>Duel</b> <br/> Une forme pour les verbes et les pronoms en langue arabe lorsqu'on s'adresse à deux personnes",
@@ -73,6 +77,7 @@
   "next-page": "Page suivante",
   "next-rub": "Rub el Hizb suivant",
   "next-surah": "Sourate suivante",
+  "on-click": "En cliquant :",
   "page-bookmark-removed": "Signet de page supprimé",
   "page-bookmarked": "Page marquée d'un signet",
   "posted-in": "Publié dans",
@@ -131,6 +136,8 @@
     "title": "Commentaires sur la traduction",
     "translation": "Traduction"
   },
+  "verse-preview-title": "Aperçu :",
   "verses-range": "Plage d'Ayahs",
-  "view-on-quran-reflect": "Voir sur QuranReflect"
+  "view-on-quran-reflect": "Voir sur QuranReflect",
+  "wbw-helper-text": "Sélectionnez les options permettant d'afficher la traduction, la translittération et/ou la récitation de chaque mot."
 }

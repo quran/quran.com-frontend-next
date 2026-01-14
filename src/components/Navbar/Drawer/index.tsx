@@ -44,6 +44,8 @@ interface Props {
   closeOnNavigation?: boolean;
   canCloseDrawer?: boolean;
   bodyId?: string;
+  removeHeaderWrapper?: boolean;
+  removeBodySpacing?: boolean;
 }
 
 /**
@@ -96,6 +98,8 @@ const Drawer: React.FC<Props> = ({
   closeOnNavigation = true,
   canCloseDrawer = true,
   bodyId,
+  removeHeaderWrapper = false,
+  removeBodySpacing = false,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -170,31 +174,40 @@ const Drawer: React.FC<Props> = ({
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
+        [styles.settingsDrawer]: type === DrawerType.Settings,
       })}
       ref={drawerRef}
-      id={id || (type === DrawerType.Settings ? 'settings-drawer-container' : undefined)}
+      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
     >
-      <div
-        className={classNames(styles.header, {
-          [styles.hiddenButtonHeader]: hideCloseButton,
-        })}
-      >
+      {removeHeaderWrapper ? (
+        <>
+          {header}
+          {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+        </>
+      ) : (
         <div
-          className={classNames(styles.headerContentContainer, {
-            [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+          className={classNames(styles.header, {
+            [styles.hiddenButtonHeader]: hideCloseButton,
           })}
         >
-          <div className={styles.headerContent}>
-            {header}
-            {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+          <div
+            className={classNames(styles.headerContentContainer, {
+              [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+            })}
+          >
+            <div className={styles.headerContent}>
+              {header}
+              {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div
         className={classNames(styles.bodyContainer, {
           [styles.navigationBodyContainer]: type === DrawerType.Navigation,
           [styles.bodyWithBottomPadding]: !isSearchDrawer,
           [styles.searchContainer]: isSearchDrawer,
+          [styles.noBodySpacing]: removeBodySpacing,
         })}
         id={bodyId}
       >

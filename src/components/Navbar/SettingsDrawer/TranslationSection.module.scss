@@ -1,6 +1,7 @@
 .container {
   min-height: calc(4 * var(--spacing-mega));
 }
+
 .changeReciterButtonContainer {
   display: flex;
   flex-direction: column;
@@ -10,4 +11,34 @@
 .skeleton {
   height: calc(2.2 * var(--spacing-mega));
   width: 100%;
+}
+
+.translationSelectionCard {
+  background-color: var(--color-background-alternative-faded) !important;
+
+  :global(.value) {
+    color: var(--color-text-default-new) !important;
+  }
+
+  > :global(div:last-child)> :global(svg) {
+    color: var(--color-text-faded);
+    fill: var(--color-text-faded);
+  }
+}
+
+.counter {
+  gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
+  direction: initial;
+
+  &>svg {
+    color: var(--color-text-default-new);
+  }
+}
+
+.fontStyleLabel {
+  color: var(--color-text-default-new);
+  opacity: unset;
+  font-weight: var(--font-weight-medium);
+  padding-inline-start: var(--spacing-small-plus-px);
+  padding-inline-end: var(--spacing-small-plus-px);
 }

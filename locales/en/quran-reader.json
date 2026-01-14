@@ -2,12 +2,14 @@
   "add-bookmark": "Add bookmark",
   "add-collection": "Add Collection",
   "advanced-copy": "Advanced Copy",
+  "arabic": "Arabic",
   "aria": {
     "read-ayah-refls": "Read Ayah Reflections",
     "read-tafsirs": "Read Ayah Tafsirs"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Back to Ayah",
+  "below-word": "Below word:",
   "bismillah": "In the Name of Allah—the Most Compassionate, Most Merciful",
   "change-translation": "Change Translation",
   "copy-arabic": "Arabic text (Uthmani text)",
@@ -17,6 +19,7 @@
   "copy-verse": "Copy verse",
   "cpy-link": "Copy Link",
   "current-verse": "Current verse",
+  "done": "Done",
   "download-copy": "if you want to download text file.",
   "edgham": "Silent letter",
   "ekhfa": "Ghunna/ikhfa’",
@@ -40,6 +43,7 @@
   },
   "font": "Arabic font to copy",
   "font-placeholder": "Select a font",
+  "font-style": "Font style",
   "font-tooltip": "King Fahad V1 and V2 fonts will be in unicode.",
   "footnote": "Footnote",
   "footnote-dl": "<b>Dual</b> <br/> A form for verbs and pronouns in Arabic language when addressing two people",
@@ -73,6 +77,7 @@
   "next-page": "Next page",
   "next-rub": "Next Rub el Hizb",
   "next-surah": "Next Surah",
+  "on-click": "On Click:",
   "page-bookmark-removed": "Page bookmark removed",
   "page-bookmarked": "Page bookmarked",
   "posted-in": "Posted in",
@@ -131,6 +136,8 @@
     "title": "Translation Feedback",
     "translation": "Translation"
   },
+  "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
-  "view-on-quran-reflect": "View on QuranReflect"
+  "view-on-quran-reflect": "View on QuranReflect",
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
 }

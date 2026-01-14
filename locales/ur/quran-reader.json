@@ -2,12 +2,14 @@
   "add-bookmark": "بک مارک شامل کریں۔",
   "add-collection": "کلیکشن شامل کریں۔",
   "advanced-copy": "ایڈوانسڈ کاپی",
+  "arabic": "عربی",
   "aria": {
     "read-ayah-refls": "آیت کے تدبرات پڑھیں",
     "read-tafsirs": "آیت کے تفاسیر پڑھیں"
   },
   "ayatul-kursi": "آیت الکرسی",
   "back-to-ayah": "آیت پر واپس جائیں۔",
+  "below-word": "ذیل کا لفظ:",
   "bismillah": "اللہ کے نام سے جو رحمان و رحیم ہے۔",
   "change-translation": "ترجمہ تبدیل کریں۔",
   "copy-arabic": "عربی متن (عثمانی رسم الخط)",
@@ -17,6 +19,7 @@
   "copy-verse": "متن کاپی کریں۔",
   "cpy-link": "لنک کاپی کریں۔",
   "current-verse": "موجودہ آیت",
+  "done": "ہو گیا",
   "download-copy": "اگر آپ ٹیکسٹ فائل ڈاؤن لوڈ کرنا چاہتے ہیں۔",
   "edgham": "ادغام",
   "ekhfa": "اخفاء اور غنہ",
@@ -40,6 +43,7 @@
   },
   "font": "کاپی کرنے کے لیے عربی فونٹ",
   "font-placeholder": "فونٹ منتخب کریں۔",
+  "font-style": "فونٹ کا انداز",
   "font-tooltip": "کنگ فہد V1 اور V2 فونٹس یونیکوڈ میں ہوں گے۔",
   "footnote": "فوٹ نوٹ",
   "footnote-dl": "<b> دوہری </b> <br/> دو لوگوں کو مخاطب کرتے وقت عربی زبان میں فعل اور ضمیر کے لیے ایک شکل",
@@ -73,6 +77,7 @@
   "next-page": "اگلا صفحہ",
   "next-rub": "اگلا ربع الحزب",
   "next-surah": "اگلی سورہ",
+  "on-click": "کلک پر:",
   "page-bookmark-removed": "پیج بک مارک ہٹا دیا گیا۔",
   "page-bookmarked": "پیج بک مارک کر دیا گیا۔",
   "posted-in": "میں پوسٹ کیا گیا",
@@ -131,6 +136,8 @@
     "title": "ترجمہ فیڈ بیک",
     "translation": "ترجمہ"
   },
+  "verse-preview-title": "پیش نظارہ:",
   "verses-range": "آیات کی حد",
-  "view-on-quran-reflect": "QuranReflect پر دیکھیں"
+  "view-on-quran-reflect": "QuranReflect پر دیکھیں",
+  "wbw-helper-text": "ہر لفظ کے لیے ترجمہ، نقل حرفی، اور/یا تلاوت دکھانے کے لیے اختیارات منتخب کریں۔"
 }
