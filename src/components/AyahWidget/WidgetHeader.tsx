@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
@@ -57,12 +58,12 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   // Display the selected verse or verse range in the header with localized numbers.
   const verseLabel = formatVerseLabel(verse.verseNumber, options.rangeEnd, locale);
   const verseCaption = `${verse.chapterId}:${verse.verseNumber}`;
+  const chapterSlug = options.chapterSlug || String(verse.chapterId);
 
   // For URL, we use non-localized numbers
-  const verseCaptionUrl = options.rangeEnd
-    ? `${verse.chapterId}:${verse.verseNumber}-${options.rangeEnd}`
-    : verseCaption;
-  const siteLinkLabel = `Quran.com/${verseCaption}`;
+  const versePath = options.rangeEnd
+    ? `${chapterSlug}/${verse.verseNumber}-${options.rangeEnd}`
+    : `${chapterSlug}/${verse.verseNumber}`;
 
   // Labels with defaults
   const surahLabel = options.labels?.surah || 'Surah';
@@ -70,7 +71,8 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
 
   // Construct the URL to the verse on Quran.com
-  const verseUrl = `https://quran.com${localePrefix}/${verseCaptionUrl}`;
+  const verseUrl = `https://quran.com${localePrefix}/${versePath}`;
+  const siteLinkLabel = `quran.com${localePrefix}/${versePath}`;
 
   // Action buttons component (reused in both positions)
   const ActionButtons = (
@@ -146,10 +148,18 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           style={{
             fontSize: 13,
             color: colors.secondaryText,
+            fontWeight: 500,
             textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+            flexDirection: isRtl ? 'row-reverse' : 'row',
           }}
         >
-          {siteLinkLabel}
+          <span>{isRtl ? '◀️' : '▶️'}</span>
+          <span style={{ textDecoration: 'underline', textUnderlineOffset: 2 }}>
+            {siteLinkLabel}
+          </span>
         </a>
       </div>
     </div>

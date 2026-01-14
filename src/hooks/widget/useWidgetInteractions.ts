@@ -15,8 +15,9 @@ const WIDGET_ROOT_SELECTOR = '.quran-widget';
 const buildVerseUrl = (options: WidgetOptions): string => {
   const [chapterId, verseId] = options.ayah.split(':');
   const verseLabel = options.rangeEnd ? `${verseId}-${options.rangeEnd}` : verseId;
+  const chapterSlug = options.chapterSlug || chapterId;
   const localePrefix = options.locale === 'en' ? '' : `/${options.locale}`;
-  return `https://quran.com${localePrefix}/${chapterId}:${verseLabel}`;
+  return `https://quran.com${localePrefix}/${chapterSlug}/${verseLabel}`;
 };
 
 /**
