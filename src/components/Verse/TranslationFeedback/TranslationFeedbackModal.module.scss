@@ -1,7 +1,7 @@
 @use '@/styles/constants';
 @use '@/styles/breakpoints';
 
-.container {
+div.container {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium2);
@@ -49,7 +49,6 @@ div.textArea {
     --total-side-space: calc(var(--spacing-xsmall) + var(--spacing-micro));
 
     color: var(--color-text-default-new);
-    block-size: unset;
     block-size: calc(100% - (2 * var(--total-side-space)));
     font-weight: var(--font-weight-medium);
     resize: none;

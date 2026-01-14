@@ -9,7 +9,7 @@ $translation_feedback_modal_max_width: 48rem;
   font-size: var(--font-size-large2);
 }
 
-.overlay {
+div.overlay {
   --space-taken: calc(2 * (2 * var(--spacing-mega)));
   padding-block: calc(2 * var(--spacing-mega));
 
@@ -22,7 +22,7 @@ $translation_feedback_modal_max_width: 48rem;
   }
 }
 
-.content {
+div.content {
   display: flex;
   flex-direction: column;
 
@@ -37,7 +37,7 @@ $translation_feedback_modal_max_width: 48rem;
   }
 }
 
-.formModalContent {
+div.formModalContent {
   block-size: 100%;
 
   @include breakpoints.smallerThanTablet {
@@ -46,7 +46,7 @@ $translation_feedback_modal_max_width: 48rem;
   }
 }
 
-.headerClassName {
+div.headerClassName {
   background-color: var(--color-background-elevated-new);
 
   @include breakpoints.tablet {

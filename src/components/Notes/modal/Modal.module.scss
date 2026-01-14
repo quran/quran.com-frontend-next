@@ -38,7 +38,7 @@ $note_modal_max_width: 48rem;
   }
 }
 
-.overlay {
+div.overlay {
   --space-taken: calc(2 * (2 * var(--spacing-mega)));
   padding-block: calc(2 * var(--spacing-mega));
 
@@ -51,7 +51,7 @@ $note_modal_max_width: 48rem;
   }
 }
 
-.content {
+div.content {
   display: flex;
   flex-direction: column;
 
@@ -66,13 +66,13 @@ $note_modal_max_width: 48rem;
   }
 }
 
-.myNotesModalContent {
+div.myNotesModalContent {
   display: grid;
   grid-template-rows: 1fr auto;
   max-block-size: calc(100dvh - var(--space-taken, 0px));
 }
 
-.formModalContent {
+div.formModalContent {
   block-size: 100%;
 
   @include breakpoints.smallerThanTablet {
@@ -81,7 +81,7 @@ $note_modal_max_width: 48rem;
   }
 }
 
-.headerClassName {
+div.headerClassName {
   background-color: var(--color-background-elevated-new);
 
   @include breakpoints.tablet {
