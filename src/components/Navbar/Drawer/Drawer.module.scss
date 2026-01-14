@@ -178,10 +178,14 @@
   .settingsDrawer & {
     @include breakpoints.smallerThanTablet {
       position: sticky;
-      padding-block: var(--spacing-small-px);
       inset-block-start: 0;
       background-color: var(--color-background-elevated);
+    }
+  }
 
+  .translationView & {
+    @include breakpoints.smallerThanTablet {
+      padding-block: var(--spacing-small-px);
     }
   }
 }

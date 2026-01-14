@@ -46,6 +46,7 @@ interface Props {
   bodyId?: string;
   removeHeaderWrapper?: boolean;
   removeBodySpacing?: boolean;
+  className?: string;
 }
 
 /**
@@ -100,6 +101,7 @@ const Drawer: React.FC<Props> = ({
   bodyId,
   removeHeaderWrapper = false,
   removeBodySpacing = false,
+  className,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -168,7 +170,7 @@ const Drawer: React.FC<Props> = ({
   return (
     <div
       data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
-      className={classNames(styles.container, {
+      className={classNames(styles.container, className, {
         [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
