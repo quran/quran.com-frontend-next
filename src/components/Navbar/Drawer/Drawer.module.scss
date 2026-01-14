@@ -132,7 +132,9 @@
   padding-inline-end: var(--spacing-small);
 
   .settingsDrawer & {
-    margin-block-start: 0;
+    @include breakpoints.smallerThanTablet {
+      margin-block-start: 0;
+    }
   }
 }
 
