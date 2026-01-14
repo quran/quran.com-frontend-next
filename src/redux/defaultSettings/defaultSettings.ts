@@ -71,6 +71,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   wordByWordContentType: [WordByWordType.Translation],
   wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
+  selectedReadingTranslation: null,
 };
 
 const THEME_INITIAL_STATE: Theme = {

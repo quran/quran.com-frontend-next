@@ -12,6 +12,7 @@ type ReadingPreferences = {
   wordByWordDisplay: WordByWordDisplay[];
   wordClickFunctionality: WordClickFunctionality;
   isUsingDefaultWordByWordLocale: boolean;
+  selectedReadingTranslation: string | null;
 };
 
 export default ReadingPreferences;
