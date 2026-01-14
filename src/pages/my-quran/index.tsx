@@ -54,6 +54,7 @@ const MyQuranPage = (): JSX.Element => {
   const onTabChange = (value: string) => {
     logEvent('my_quran_tab_change', { value });
     setSelectedTab(value as MyQuranTab);
+    if (tab) router.replace(router.pathname, undefined, { shallow: true });
   };
 
   useEffect(() => {
