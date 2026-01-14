@@ -1,6 +1,8 @@
-@use 'src/styles/constants';
 @use 'src/styles/breakpoints';
-@use 'src/styles/theme';
+
+$icon-size: var(--spacing-medium-px); // 15px - matches other mode icons
+$border-width: var(--spacing-hairline-px);
+$selected-border-width: 2px;
 
 .container {
   inline-size: 100%;
@@ -16,7 +18,7 @@
   inline-size: 100%;
   display: flex;
   justify-content: space-between;
-  border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: $border-width solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated-new);
   block-size: var(--mobile-reading-mode-tabs-height);
 }
@@ -33,9 +35,9 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
   inline-size: 50%;
-  border-block-end: 2px solid var(--color-separators-ayah-level);
+  border-block-end: $selected-border-width solid var(--color-separators-ayah-level);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color var(--transition-regular), border-color var(--transition-regular);
 
   span {
     margin-inline-start: var(--spacing-xsmall);
@@ -44,6 +46,23 @@
 
 .selectedTab {
   color: var(--color-success-medium);
-  border-block-end: 2px solid var(--color-success-medium);
+  border-block-end: $selected-border-width solid var(--color-success-medium);
   font-weight: var(--font-weight-semibold);
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+
+  & > svg {
+    inline-size: $icon-size;
+    block-size: $icon-size;
+  }
+}
+
+.icon {
+  transition: color var(--transition-regular);
+  color: inherit;
 }
