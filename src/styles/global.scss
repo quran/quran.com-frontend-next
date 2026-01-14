@@ -91,3 +91,30 @@ select option {
     --navbar-container-height: var(--navbar-height);
   }
 }
+
+.mobileReadingModeVisible {
+  --context-menu-container-height-visible: var(--context-menu-container-height);
+  --progress-bar-height-visible: var(--progress-bar-height-hidden);
+  --sections-container-height-visible: var(--sections-container-height-hidden);
+  --page-info-container-height-visible: var(--page-info-container-height-hidden);
+  --context-menu-inset-height-visible: var(--context-menu-inset-height);
+  @include breakpoints.smallerThanTablet {
+    --context-menu-container-height-visible: var(--context-menu-container-height-hidden);
+    --sections-container-height-visible: var(--sections-container-height);
+    --mobile-reading-mode-tabs-height: var(--mobile-reading-mode-tabs-height-visible);
+    --context-menu-inset-height-visible: var(--context-menu-inset-height-hidden);
+  }
+}
+
+.mobileReadingModeHidden {
+  --context-menu-container-height-visible: var(--context-menu-container-height-hidden);
+  --mobile-reading-mode-tabs-height: var(--mobile-reading-mode-tabs-height-hidden);
+  --context-menu-inset-height-visible: var(--context-menu-inset-height);
+  @include breakpoints.tablet {
+    --context-menu-inset-height-visible: var(--context-menu-inset-height-hidden);
+    --context-menu-container-height-visible: var(--context-menu-container-height);
+    --progress-bar-height-visible: var(--progress-bar-height-hidden);
+    --sections-container-height-visible: var(--sections-container-height-hidden);
+    --page-info-container-height-visible: var(--page-info-container-height-hidden);
+  }
+}

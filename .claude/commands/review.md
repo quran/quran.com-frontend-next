@@ -13,11 +13,10 @@ Review PR(s) using the comprehensive review guidelines
 ### For Each PR
 
 1. Read the review prompt from `docs/REVIEW_PROMPT.md` for all criteria
-2. Read `docs/COMMON_MISTAKES.md` to check for patterns that have caused production bugs
-3. Fetch PR details: `gh pr view {PR_NUMBER} --json title,body,files,additions,deletions,author`
-4. Fetch PR diff: `gh pr diff {PR_NUMBER}`
-5. If files changed > 15, flag for potential split before deep review
-6. **Check for previous reviews** (see Re-review Protocol below)
+2. Fetch PR details: `gh pr view {PR_NUMBER} --json title,body,files,additions,deletions,author`
+3. Fetch PR diff: `gh pr diff {PR_NUMBER}`
+4. If files changed > 15, flag for potential split before deep review
+5. **Check for previous reviews** (see Re-review Protocol below)
 
 ## Re-review Protocol
 

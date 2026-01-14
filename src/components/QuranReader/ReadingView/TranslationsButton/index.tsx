@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -41,6 +41,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
   const selectedTranslations = useSelector(selectSelectedTranslations);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const contentModalRef = useRef<ContentModalHandles>();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const translationsQueryKey = makeByVerseKeyUrl(`${verse.chapterId}:${verse.verseNumber}`, {
     words: true,
     translationFields: 'resource_name,language_id',
@@ -68,13 +69,24 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
   const onModalClosed = () => {
     logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_close`);
     setIsContentModalOpen(false);
-    setTimeout(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
       // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
       onActionTriggered?.();
     }, CLOSE_POPOVER_AFTER_MS);
   };
 
   const loading = useCallback(() => <TranslationViewCellSkeleton hasActionMenuItems={false} />, []);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>

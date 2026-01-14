@@ -14,6 +14,7 @@ import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/dls/Footer/Footer';
 import useAuthData from '@/hooks/auth/useAuthData';
+import useShowNavbar from '@/hooks/useShowNavbar';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { isAuthPage } from '@/utils/routes';
@@ -30,12 +31,19 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const { t } = useTranslation('common');
   const { userData } = useAuthData();
   const isAuth = isAuthPage(router);
+  const showNavbar = useShowNavbar();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
-    <div className={classNames({ bannerActive: isBannerVisible })}>
+    <div
+      className={classNames({
+        bannerActive: isBannerVisible,
+        mobileReadingModeVisible: showNavbar,
+        mobileReadingModeHidden: !showNavbar,
+      })}
+    >
       <AuthRedirects />
       <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
       <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />

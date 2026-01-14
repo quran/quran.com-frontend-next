@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Đạt được mục tiêu theo Kinh Qur'an của bạn",
   "continue-reading": "Tiếp tục đọc",
   "continuous": {
     "description": "Mục tiêu của bạn sẽ tính tiến độ trong một khoảng thời gian",
@@ -49,7 +50,7 @@
     "title": "Bạn đã hoàn thành mục tiêu ngày hôm nay."
   },
   "goal-target": {
-    "description": "Bạn cần đọc bao lâu, bao nhiêu trang hoặc bao nhiêu câu kinh để đạt mục tiêu?",
+    "description": "Bạn cần đọc bao lâu, bao nhiêu trang hoặc bao nhiêu câu để đạt mục tiêu?",
     "title": "Đặt mục tiêu cho bản thân"
   },
   "goal-type": {
@@ -62,7 +63,7 @@
       "title": "Trang"
     },
     "range": {
-      "description": "Mục tiêu của bạn sẽ dựa trên một phạm vi câu kinh tùy chọn (có thể là một Surah, một Juz hoặc toàn bộ Kinh Qur'an)",
+      "description": "Mục tiêu của bạn sẽ dựa trên một phạm vi câu tùy chọn (có thể là một Surah, một Juz hoặc toàn bộ Kinh Qur'an)",
       "title": "Phạm vi tùy chỉnh"
     },
     "time": {
@@ -95,6 +96,7 @@
     "other": ""
   },
   "set-a-new-goal": "Đặt mục tiêu mới",
+  "set-custom-goal": "Đặt mục tiêu tùy chỉnh",
   "set-reading-goal-success": "Mục tiêu đọc của bạn đã được đặt xong.",
   "start-journey": "Bắt đầu hành trình của bạn!",
   "start-reading": "Bắt đầu đọc",
@@ -110,6 +112,7 @@
     "stroked": "Hôm nay bạn chưa đọc gì"
   },
   "todays-goal": "Mục tiêu hôm nay",
+  "track-your-streak": "Theo dõi chuỗi thành tích, thiết lập mục tiêu tùy chỉnh, duy trì sự nhất quán",
   "view-progress": "Xem tiến độ",
   "week-progress": "Tiến độ tuần này",
   "x-days": {

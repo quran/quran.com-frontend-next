@@ -204,7 +204,13 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
         {t('edit-goal.action')}
       </Button>
 
-      <Modal isOpen={isOpen} onClickOutside={closeModal}>
+      <Modal
+        isOpen={isOpen}
+        onClickOutside={closeModal}
+        contentClassName={styles.modalContent}
+        hasCloseButton
+        onClose={closeModal}
+      >
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('edit-goal.title')}</Modal.Title>

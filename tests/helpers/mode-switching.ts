@@ -1,7 +1,5 @@
 import { expect, type Page } from '@playwright/test';
 
-import { getVerseArabicTestId } from '@/tests/test-ids';
-
 const switchToMode = async (
   page: Page,
   mode: 'translation' | 'reading',
@@ -27,7 +25,7 @@ const switchToMode = async (
   }
 
   // Verify the mode switch was successful by checking that the verse is visible
-  await expect(page.getByTestId(getVerseArabicTestId(verseKey))).toBeVisible();
+  await expect(page.getByTestId(`verse-arabic-${verseKey}`)).toBeVisible();
 };
 
 /**

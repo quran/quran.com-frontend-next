@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Raggiungi i tuoi obiettivi coranici",
   "continue-reading": "Continua a leggere",
   "continuous": {
     "description": "Il tuo obiettivo calcolerà i tuoi progressi su una durata di giorni",
@@ -97,6 +98,7 @@
     "other": "{{days}} giorni rimanenti"
   },
   "set-a-new-goal": "Imposta un nuovo obiettivo",
+  "set-custom-goal": "Imposta un obiettivo personalizzato",
   "set-reading-goal-success": "Il tuo obiettivo di lettura è stato impostato correttamente.",
   "start-journey": "Inizia il tuo viaggio!",
   "start-reading": "Inizia a leggere",
@@ -112,6 +114,7 @@
     "stroked": "Non hai letto niente oggi"
   },
   "todays-goal": "Obiettivo di oggi",
+  "track-your-streak": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
   "view-progress": "Visualizza i progressi",
   "week-progress": "I progressi di questa settimana",
   "x-days": {

@@ -2,6 +2,9 @@
 /* eslint-disable import/prefer-default-export */
 import { getQuranReflectTagUrl } from './navigation';
 
+// Matches any letter/number from any language (equivalent to [\p{L}\p{N}_-] without ES6 unicode flag)
+const HASHTAG_REGEX = /#([^\s!@#$%^&*()=+[\]{};:'",.<>?/\\|`~]+)/g;
+
 /**
  * Wraps hashtags in links: It finds all hashtags starting with # followed
  * by one or more word characters (\w+). The captured hashtag is then
@@ -25,7 +28,7 @@ const tagToLink = (tag: string, hashtagStyle: string): string => {
  * @returns {string} The text with URLs replaced by anchor tags.
  */
 const replaceUrlsWithLinks = (text: string): string => {
-  const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi;
+  const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;#]*[-A-Z0-9+&@#/%=~_])/gi;
   return text.replace(regex, (url) => {
     // Check if URL is already linked
     const surroundingLength = 100; // Number of characters around the URL to check for <a> tag
@@ -50,7 +53,19 @@ export const parseReflectionBody = (reflectionBody: string, hashtagStyle: string
     replaceUrlsWithLinks(reflectionBody)
       // 2. Replaces new lines: match all occurrences of new lines (\n) and carriage returns (\r) and replaces them with the <br> tag.
       .replace(/\r?\n/g, '<br>')
-      // 3. Wraps hashtags in links: Find all hashtags starting with # followed by one or more word characters (\w+). The captured hashtag is then used to create a link.
-      .replace(/#(\w+)/g, (_, tag) => tagToLink(tag, hashtagStyle))
+      // 3. Wraps hashtags in links: Find all hashtags starting with # followed by one or more word characters. Skip hashtags inside anchor tags.
+      .replace(HASHTAG_REGEX, (match, tag, offset, string) => {
+        // Check if this hashtag is inside an anchor tag (href or link text)
+        const beforeText = string.slice(0, offset);
+        const lastAnchorOpen = beforeText.lastIndexOf('<a ');
+        const lastAnchorClose = beforeText.lastIndexOf('</a>');
+
+        // If we're inside an anchor tag (opened but not yet closed), don't convert to hashtag link
+        if (lastAnchorOpen !== -1 && lastAnchorOpen > lastAnchorClose) {
+          return match;
+        }
+
+        return tagToLink(tag, hashtagStyle);
+      })
   );
 };
