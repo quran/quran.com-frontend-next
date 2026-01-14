@@ -16,6 +16,7 @@ import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPrefe
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
+import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
 
 type QuranReaderProps = {
@@ -34,7 +35,7 @@ const QuranReader = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
-  const isReadingPreference = readingPreference === ReadingPreference.Reading;
+  const isReadingPreference = isInReadingMode(readingPreference);
 
   useSyncChapterPage(initialData);
 
@@ -58,6 +59,7 @@ const QuranReader = ({
           <VerseTrackerContextProvider>
             <QuranReaderView
               isReadingPreference={isReadingPreference}
+              readingPreference={readingPreference}
               quranReaderStyles={quranReaderStyles}
               initialData={initialData}
               quranReaderDataType={quranReaderDataType}

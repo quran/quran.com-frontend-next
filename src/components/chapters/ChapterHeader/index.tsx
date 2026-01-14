@@ -2,21 +2,26 @@
 import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
+import ReadingModeActions from './ReadingModeActions';
 
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
+import { ReadingPreference } from 'types/QuranReader';
 
 interface ChapterHeaderProps {
   chapterId: string;
@@ -44,6 +49,16 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
+  const readingPreference = useSelector(selectReadingPreference);
+  const selectedTranslations = useSelector(selectSelectedTranslations);
+
+  // Check if we're in Reading mode (Arabic or Translation)
+  const isReadingMode = isInReadingMode(readingPreference);
+
+  // Check if we should show empty state (in ReadingTranslation mode with no translations)
+  const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
+  const hasTranslations = selectedTranslations && selectedTranslations.length > 0;
+  const showEmptyState = isTranslationMode && !hasTranslations;
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
@@ -56,28 +71,32 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
-          <PlayChapterAudioButton chapterId={Number(chapterId)} />
+          {!showEmptyState && <PlayChapterAudioButton chapterId={Number(chapterId)} />}
         </div>
         <div className={styles.rightControls}>
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Small}
-            shape={ButtonShape.Pill}
-            onClick={onChangeTranslationClicked}
-            ariaLabel={t('change-translation')}
-            tooltip={t('change-translation')}
-            className={styles.changeTranslationButton}
-            contentClassName={styles.translationName}
-            suffix={
-              translationsCount > 1 && (
-                <span className={styles.translationsCount}>
-                  {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                </span>
-              )
-            }
-          >
-            <span>{translationName}</span>
-          </Button>
+          {isReadingMode ? (
+            <ReadingModeActions />
+          ) : (
+            <Button
+              type={ButtonType.Secondary}
+              size={ButtonSize.Small}
+              shape={ButtonShape.Pill}
+              onClick={onChangeTranslationClicked}
+              ariaLabel={t('change-translation')}
+              tooltip={t('change-translation')}
+              className={styles.changeTranslationButton}
+              contentClassName={styles.translationName}
+              suffix={
+                translationsCount > 1 && (
+                  <span className={styles.translationsCount}>
+                    {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
+                  </span>
+                )
+              }
+            >
+              <span>{translationName}</span>
+            </Button>
+          )}
         </div>
       </div>
 

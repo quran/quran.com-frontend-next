@@ -58,7 +58,7 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  block-size: $sections-container-height;
+  min-block-size: $sections-container-height;
   padding-block: calc(var(--spacing-medium) / 2);
   display: flex;
   align-items: center;
@@ -99,10 +99,9 @@ $pixel: 1px;
 }
 
 .readingPreferenceSection {
-  div {
-    margin-inline-end: 0;
-    padding-inline-end: 0;
-  }
+  display: flex;
+  justify-content: flex-end;
+  flex: none;
 }
 
 .readingPreferenceContainer {
