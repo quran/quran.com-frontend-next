@@ -25,11 +25,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   getLoginNavigationUrl,
   getMyCoursesNavigationUrl,
+  getMyQuranNavigationUrl,
   getNotesNavigationUrl,
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
-  ROUTES,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -41,7 +41,7 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: ROUTES.MY_QURAN,
+    navigationUrl: getMyQuranNavigationUrl(),
     translationKey: 'my-quran',
     icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
   },

@@ -5,44 +5,47 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
-import RecentContent from './tabs/RecentContent/RecentContent';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
+import MyQuranTab from '@/components/MyQuran/tabs';
+import NotesAndReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab';
+import RecentContent from '@/components/MyQuran/tabs/RecentContent/RecentContent';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
+import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
-enum Tab {
-  SAVED = 'saved',
-  RECENT = 'recent',
-  NOTES_AND_REFLECTIONS = 'notes-and-reflections',
-}
+const MY_QURAN_PATH = getMyQuranNavigationUrl();
+const tabComponents = {
+  [MyQuranTab.SAVED]: null,
+  [MyQuranTab.RECENT]: <RecentContent />,
+  [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
+};
 
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
   const router = useRouter();
   const { tab } = router.query;
-  const PATH = ROUTES.MY_QURAN;
+  const [selectedTab, setSelectedTab] = useState(MyQuranTab.SAVED);
+
   const title = t('common:my-quran');
-  const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
 
   const tabs = useMemo(
     () => [
       {
         name: t('saved'),
-        value: Tab.SAVED,
+        value: MyQuranTab.SAVED,
       },
       {
         name: t('recent'),
-        value: Tab.RECENT,
+        value: MyQuranTab.RECENT,
       },
       {
         name: t('notes-and-reflections'),
-        value: Tab.NOTES_AND_REFLECTIONS,
+        value: MyQuranTab.NOTES_AND_REFLECTIONS,
       },
     ],
     [t],
@@ -50,18 +53,12 @@ const MyQuranPage = (): JSX.Element => {
 
   const onTabChange = (value: string) => {
     logEvent('my_quran_tab_change', { value });
-    setSelectedTab(value as Tab);
-  };
-
-  const tabComponents = {
-    [Tab.SAVED]: null,
-    [Tab.RECENT]: <RecentContent />,
-    [Tab.NOTES_AND_REFLECTIONS]: null,
+    setSelectedTab(value as MyQuranTab);
   };
 
   useEffect(() => {
-    if (tab && Object.values(Tab).includes(tab as Tab)) {
-      setSelectedTab(tab as Tab);
+    if (tab && Object.values(MyQuranTab).includes(tab as MyQuranTab)) {
+      setSelectedTab(tab as MyQuranTab);
     }
   }, [tab]);
 
@@ -69,8 +66,8 @@ const MyQuranPage = (): JSX.Element => {
     <>
       <NextSeoWrapper
         title={title}
-        canonical={getCanonicalUrl(lang, PATH)}
-        languageAlternates={getLanguageAlternates(PATH)}
+        canonical={getCanonicalUrl(lang, MY_QURAN_PATH)}
+        languageAlternates={getLanguageAlternates(MY_QURAN_PATH)}
         nofollow
         noindex
       />
@@ -96,12 +93,7 @@ const MyQuranPage = (): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
+  return { props: { chaptersData: allChaptersData } };
 };
 
 export default MyQuranPage;
