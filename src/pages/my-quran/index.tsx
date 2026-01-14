@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
+import NotesAndReflectionsTab from './tabs/NotesAndReflectionsTab';
 import RecentContent from './tabs/RecentContent/RecentContent';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
@@ -13,7 +14,7 @@ import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
+import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
 enum Tab {
   SAVED = 'saved',
@@ -23,7 +24,7 @@ enum Tab {
 
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
-  const PATH = ROUTES.MY_QURAN;
+  const PATH = getMyQuranNavigationUrl();
   const title = t('common:my-quran');
   const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
 
@@ -53,7 +54,7 @@ const MyQuranPage = (): JSX.Element => {
   const tabComponents = {
     [Tab.SAVED]: null,
     [Tab.RECENT]: <RecentContent />,
-    [Tab.NOTES_AND_REFLECTIONS]: null,
+    [Tab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
   };
 
   return (
