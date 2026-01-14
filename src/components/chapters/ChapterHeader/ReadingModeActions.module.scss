@@ -1,0 +1,75 @@
+@use 'src/styles/breakpoints';
+
+$translation-button-max-width-desktop: 200px;
+$translation-button-max-width-mobile: 150px;
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
+}
+
+.modeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-family);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-regular), color var(--transition-regular);
+  white-space: nowrap;
+  border: none;
+  box-shadow: var(--shadow-small-new);
+}
+
+.modeButtonSelected {
+  background-color: var(--color-text-default-new);
+  color: var(--color-background-elevated);
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.modeButtonUnselected {
+  background-color: var(--color-background-elevated-new);
+  color: var(--color-text-faded-new);
+
+  &:hover {
+    color: var(--color-text-default-new);
+  }
+}
+
+.translationButtonWrapper {
+  position: relative;
+}
+
+.translationButton {
+  max-inline-size: $translation-button-max-width-desktop;
+
+  @include breakpoints.smallerThanTablet {
+    max-inline-size: $translation-button-max-width-mobile;
+  }
+}
+
+.translationText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownIcon {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+  flex-shrink: 0;
+  transition: transform var(--transition-regular);
+}
+
+.dropdownIconOpen {
+  transform: rotate(180deg);
+}
