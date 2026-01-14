@@ -6,6 +6,7 @@ import { searchIdToNavigationKey } from './search';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
+import MyQuranTab from '@/components/MyQuran/tabs';
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
 import ContentType from '@/types/QuranReflect/ContentType';
@@ -82,10 +83,10 @@ export const SUPPORT_URL = '/support';
 /**
  * Get the href link to the my quran page.
  *
- * @param {string} tab - The tab to navigate to specific tab.
+ * @param {MyQuranTab} tab - The tab to navigate to specific tab.
  * @returns {string} - The href link to the my quran page with the specified tab.
  */
-export const getMyQuranNavigationUrl = (tab?: string) =>
+export const getMyQuranNavigationUrl = (tab?: MyQuranTab): string =>
   `/my-quran${tab ? `?${QueryParam.TAB}=${tab}` : ''}`;
 
 /**

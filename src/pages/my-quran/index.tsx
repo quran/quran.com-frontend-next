@@ -4,10 +4,11 @@ import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
-import NotesAndReflectionsTab from './tabs/NotesAndReflectionsTab';
-import RecentContent from './tabs/RecentContent/RecentContent';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
+import MyQuranTab from '@/components/MyQuran/tabs';
+import NotesAndReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab';
+import RecentContent from '@/components/MyQuran/tabs/RecentContent/RecentContent';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
@@ -16,31 +17,25 @@ import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
-enum Tab {
-  SAVED = 'saved',
-  RECENT = 'recent',
-  NOTES_AND_REFLECTIONS = 'notes-and-reflections',
-}
-
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
   const PATH = getMyQuranNavigationUrl();
   const title = t('common:my-quran');
-  const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
+  const [selectedTab, setSelectedTab] = useState(MyQuranTab.SAVED);
 
   const tabs = useMemo(
     () => [
       {
         name: t('saved'),
-        value: Tab.SAVED,
+        value: MyQuranTab.SAVED,
       },
       {
         name: t('recent'),
-        value: Tab.RECENT,
+        value: MyQuranTab.RECENT,
       },
       {
         name: t('notes-and-reflections'),
-        value: Tab.NOTES_AND_REFLECTIONS,
+        value: MyQuranTab.NOTES_AND_REFLECTIONS,
       },
     ],
     [t],
@@ -48,13 +43,13 @@ const MyQuranPage = (): JSX.Element => {
 
   const onTabChange = (value: string) => {
     logEvent('my_quran_tab_change', { value });
-    setSelectedTab(value as Tab);
+    setSelectedTab(value as MyQuranTab);
   };
 
   const tabComponents = {
-    [Tab.SAVED]: null,
-    [Tab.RECENT]: <RecentContent />,
-    [Tab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
+    [MyQuranTab.SAVED]: null,
+    [MyQuranTab.RECENT]: <RecentContent />,
+    [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
   };
 
   return (

@@ -1,0 +1,76 @@
+.container {
+  padding: var(--spacing-medium2-px);
+  border-radius: var(--border-radius-large-px);
+  background-color: var(--color-background-elevated-new);
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+}
+
+.title {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium-px);
+  line-height: var(--line-height-xlarge);
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small-px);
+  list-style: none;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  block-size: var(--spacing-medium3-px);
+}
+
+.checkIcon svg {
+  block-size: calc(var(--spacing-small-plus-px) * 2);
+  inline-size: calc(var(--spacing-small-plus-px) * 2);
+  color: var(--color-blue-buttons-and-icons);
+
+  &,
+  & path {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+}
+
+.featureText {
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  line-height: 0;
+}
+
+.separator {
+  block-size: 1px;
+  background-color: var(--color-separators-ayah-level);
+  margin-block: var(--spacing-medium-px);
+}
+
+.signInButton {
+  background-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  font-weight: var(--font-weight-semibold);
+  padding-inline: var(--spacing-small);
+  border-radius: var(--border-radius-medium-px);
+  border-color: var(--color-blue-buttons-and-icons);
+
+  span {
+    white-space: break-spaces;
+    line-height: 1;
+  }
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-text-black);
+    outline-offset: var(--spacing-hairline-px);
+  }
+}
