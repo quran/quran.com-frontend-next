@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationFeedbackAction.module.scss';
 import TranslationFeedbackModal from './TranslationFeedbackModal';
+import feedbackModalStyles from './TranslationFeedbackModal.module.scss';
 
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
@@ -103,10 +105,12 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
         header={<p className={styles.title}>{t('translation-feedback.title')}</p>}
         hasCloseButton
         onClose={onModalClose}
-        contentClassName={styles.content}
+        onEscapeKeyDown={onModalClose}
         overlayClassName={styles.overlay}
         headerClassName={styles.headerClassName}
-        onEscapeKeyDown={onModalClose}
+        closeIconClassName={styles.closeIconContainer}
+        contentClassName={classNames(styles.content, styles.formModalContent)}
+        innerContentClassName={classNames(feedbackModalStyles.container, styles.formModalContent)}
       >
         <TranslationFeedbackModal verse={verse} onClose={onModalClose} />
       </ContentModal>
