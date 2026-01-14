@@ -18,7 +18,8 @@ import sharedStyles from './SharedProfileStyles.module.scss';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { TestId } from '@/tests/test-ids';
 
-const MARKETING_TAG_NAME = 'marketing';
+const MARKETING_TAG = 'marketing';
+const QDC_TAG = 'QDC';
 
 const EmailNotificationSettingsForm: FC = () => {
   const { t } = useTranslation('profile');
@@ -45,7 +46,8 @@ const EmailNotificationSettingsForm: FC = () => {
           (preference) =>
             preference.template.critical === false &&
             !!preference.template.tags.length &&
-            !preference.template.tags.includes(MARKETING_TAG_NAME),
+            !preference.template.tags.includes(MARKETING_TAG) &&
+            preference.template.tags.includes(QDC_TAG),
         ),
         (preference) => preference.template.tags,
       ),
