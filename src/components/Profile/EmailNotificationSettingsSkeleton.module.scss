@@ -1,0 +1,47 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+}
+
+.notificationRow {
+  display: flex;
+  align-items: start;
+  gap: var(--spacing-xsmall-px);
+}
+
+.checkbox {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  border-radius: var(--border-radius-xsmall2-px);
+  flex-shrink: 0;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-micro-px);
+  flex: 1;
+}
+
+.title {
+  block-size: var(--spacing-small-px);
+  inline-size: 40%;
+  border-radius: var(--border-radius-xsmall-px);
+}
+
+.description {
+  block-size: var(--font-size-xsmall-px);
+  inline-size: 80%;
+  border-radius: var(--border-radius-xsmall-px);
+}
+
+.buttonContainer {
+  margin-block-start: var(--spacing-small-px);
+}
+
+.button {
+  block-size: var(--spacing-medium3-px);
+  inline-size: calc(var(--spacing-mega-px) + var(--spacing-medium2-px));
+  border-radius: var(--border-radius-small-px);
+}
