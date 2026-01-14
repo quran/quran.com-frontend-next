@@ -43,6 +43,7 @@
   color: var(--color-text-faded);
 }
 
-.input {
+.searchInputContainer .input {
   inline-size: 95%;
+  block-size: var(--spacing-xlarge-px);
 }

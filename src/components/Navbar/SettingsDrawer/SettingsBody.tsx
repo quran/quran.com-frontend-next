@@ -1,15 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
-import QuranFontSection from './QuranFontSection';
+import { useSelector } from 'react-redux';
+
+import DoneButton from './DoneButton';
 import ResetButton from './ResetButton';
-import ThemeSection from './ThemeSection';
-import TranslationSection from './TranslationSection';
-import WordByWordSection from './WordByWordSection';
+import styles from './SettingsBody.module.scss';
+import SettingTabs, { SettingTab } from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import { selectNavbar, SettingsView } from '@/redux/slices/navbar';
 
 const SettingsBody = () => {
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
+  const { lastSettingsView } = useSelector(selectNavbar);
+
+  // Map the last settings view to the corresponding tab
+  const getTabFromSettingsView = (view: SettingsView): SettingTab => {
+    switch (view) {
+      case SettingsView.Translation:
+        return SettingTab.Translation;
+      case SettingsView.Tafsir:
+        return SettingTab.More;
+      case SettingsView.Reciter:
+      case SettingsView.Body:
+      default:
+        return SettingTab.Arabic;
+    }
+  };
+
+  // Initialize with the tab corresponding to the last visited view
+  const initialTab = useMemo(() => getTabFromSettingsView(lastSettingsView), [lastSettingsView]);
+  const [activeTab, setActiveTab] = useState<SettingTab>(initialTab);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout = null;
@@ -23,14 +44,20 @@ const SettingsBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStepIndex, isActive]);
 
+  // Update active tab when returning from a sub-view
+  useEffect(() => {
+    const targetTab = getTabFromSettingsView(lastSettingsView);
+    setActiveTab(targetTab);
+  }, [lastSettingsView]);
+
   return (
-    <>
-      <ThemeSection />
-      <QuranFontSection />
-      <WordByWordSection />
-      <TranslationSection />
-      <ResetButton />
-    </>
+    <div className={styles.container}>
+      <SettingTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className={styles.buttonsContainer}>
+        <ResetButton />
+        <DoneButton />
+      </div>
+    </div>
   );
 };
 

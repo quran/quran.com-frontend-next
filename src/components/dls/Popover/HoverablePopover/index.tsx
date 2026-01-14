@@ -55,8 +55,8 @@ const HoverablePopover: React.FC<Props> = ({
         text={content}
         contentSide={contentSide}
         delay={tooltipDelay}
+        type={tooltipType}
         {...(onOpenChange && { onOpenChange })}
-        {...(tooltipType && { type: tooltipType })}
       >
         {children}
       </Tooltip>

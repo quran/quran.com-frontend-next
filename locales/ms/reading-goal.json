@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Capai Matlamat Al-Quran Anda",
   "continue-reading": "Teruskan membaca",
   "continuous": {
     "description": "Matlamat anda akan mengira kemajuan anda dalam tempoh beberapa hari",
@@ -95,6 +96,7 @@
     "other": "{{days}} hari lagi"
   },
   "set-a-new-goal": "Tetapkan Matlamat baharu",
+  "set-custom-goal": "Tetapkan Matlamat Tersuai",
   "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
   "start-journey": "Mulakan pengembaraan anda!",
   "start-reading": "Mula membaca",
@@ -110,6 +112,7 @@
     "stroked": "Anda tidak membaca apa-apa hari ini"
   },
   "todays-goal": "Matlamat Hari Ini",
+  "track-your-streak": "Jejaki Rentetan, Cipta Matlamat Tersuai, Kekal Konsisten",
   "view-progress": "Lihat Kemajuan",
   "week-progress": "Kemajuan minggu ini",
   "x-days": {

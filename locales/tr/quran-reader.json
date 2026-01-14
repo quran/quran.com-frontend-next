@@ -2,12 +2,14 @@
   "add-bookmark": "Yer işareti ekle",
   "add-collection": "Koleksiyon Ekle",
   "advanced-copy": "Gelişmiş Kopyalama",
+  "arabic": "Arapça",
   "aria": {
     "read-ayah-refls": "Ayetin Yansımalarını Okuyun",
     "read-tafsirs": "Ayetin Tefsirlerini Okuyun"
   },
   "ayatul-kursi": "Ayetel Kürsi",
   "back-to-ayah": "Ayete geri dön",
+  "below-word": "Aşağıdaki kelime:",
   "bismillah": "Rahman ve Rahim olan Allah'ın adıyla",
   "change-translation": "Çeviriyi Değiştir",
   "copy-arabic": "Arapça metin (Osmani metin)",
@@ -17,6 +19,7 @@
   "copy-verse": "Metni kopyala",
   "cpy-link": "Bağlantıyı kopyala",
   "current-verse": "Geçerli ayet",
+  "done": "Tamamlamak",
   "download-copy": "Metin dosyasını indirmek istiyorsanız.",
   "edgham": "İdğam",
   "ekhfa": "İhfa ve Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Kopyalanacak Arapça yazı tipi",
   "font-placeholder": "Bir yazı tipi seçin",
+  "font-style": "Yazı tipi stili",
   "font-tooltip": "King Fahad V1 ve V2 yazı tipleri unicode olacak.",
   "footnote": "Dipnot",
   "footnote-dl": "<b> İkili </b> <br/> Arapçada iki kişiye hitap ederken fiiller ve zamirler için bir form",
@@ -73,6 +77,7 @@
   "next-page": "Sonraki Sayfa",
   "next-rub": "Sonraki Rub el Hizb",
   "next-surah": "Sonraki Sure",
+  "on-click": "Tıklama Üzerine:",
   "page-bookmark-removed": "Sayfa yer işareti kaldırıldı",
   "page-bookmarked": "Sayfa yer i̇şareti eklendi",
   "posted-in": "Yayınlanan",
@@ -120,6 +125,19 @@
   "text-copied": "Metin panoya kopyalandı!",
   "trans-change": "Değiştir",
   "translation-by": "Çeviri:",
+  "translation-feedback": {
+    "feedback": "Geri bildirim",
+    "no-translations-in-preferences": "Tercihlerinizde çeviri yok.",
+    "placeholder": "Bu ayetin seçilen çevirisiyle ilgili bir sorunu bildirmek için bu alanı kullanın.",
+    "report": "Rapor",
+    "select": "Seçme...",
+    "select-translation": "Çeviri seçin:",
+    "submission-success": "Geri bildiriminiz başarıyla gönderildi.",
+    "title": "Çeviri Geri Bildirimi",
+    "translation": "Çeviri"
+  },
+  "verse-preview-title": "Önizleme:",
   "verses-range": "Ayet aralığı",
-  "view-on-quran-reflect": "Kuran'da görüntüle"
+  "view-on-quran-reflect": "Kuran'da görüntüle",
+  "wbw-helper-text": "Her kelime için çeviri, transkripsiyon ve/veya sesli okuma seçeneklerini belirleyin."
 }

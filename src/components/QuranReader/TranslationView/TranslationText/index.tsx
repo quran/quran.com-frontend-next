@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
+/* eslint-disable max-lines */
 
 import React, { MouseEvent, useState } from 'react';
 
@@ -25,6 +26,7 @@ interface Props {
   languageId: number;
   reference?: string;
   chapterName?: string;
+  className?: string;
 }
 
 const TranslationText: React.FC<Props> = ({
@@ -35,6 +37,7 @@ const TranslationText: React.FC<Props> = ({
   resourceName,
   reference,
   chapterName,
+  className,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const [isLoading, setIsLoading] = useState(false);
@@ -161,7 +164,10 @@ const TranslationText: React.FC<Props> = ({
 
   const shouldShowFootnote = showFootnote && (footnote !== null || isLoading);
   return (
-    <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
+    <div
+      className={classNames(styles[`translation-font-size-${translationFontScale}`], className)}
+      translate="no"
+    >
       <TranslationAndReference
         text={text}
         fontClass={styles[langData.font]}

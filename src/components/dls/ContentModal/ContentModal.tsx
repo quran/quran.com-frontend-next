@@ -40,6 +40,8 @@ type ContentModalProps = {
   zIndexVariant?: ZIndexVariant;
   isBottomSheetOnMobile?: boolean;
   isFakeSEOFriendlyMode?: boolean;
+
+  dataTestId?: string;
 };
 
 const SCROLLBAR_WIDTH = 15;
@@ -98,6 +100,7 @@ const ContentModal = ({
   zIndexVariant,
   isBottomSheetOnMobile = true,
   isFakeSEOFriendlyMode: isFake = false,
+  dataTestId,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -177,7 +180,7 @@ const ContentModal = ({
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
             onOpenAutoFocus={handleOpenAutoFocus}
-            data-testid="root-dialog"
+            data-testid={dataTestId ?? 'root-dialog'}
           >
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>

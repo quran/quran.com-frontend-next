@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Counter.module.scss';
@@ -14,6 +15,7 @@ type CounterProps = {
   onIncrement?: () => void;
   onDecrement?: () => void;
   isPercent?: boolean;
+  className?: string;
 };
 
 /**
@@ -25,15 +27,22 @@ type CounterProps = {
  * Button is disabled when  the value is `undefined` or `null`
  * @param {() => void} props.onDecrement - the function to call when the decrement button is clicked.
  * Button is disabled when  the value is `undefined` or `null`
+ * @param {string} props.className - optional className to apply to the container
  * @returns {JSX.Element}
  */
-const Counter = ({ count, onIncrement, onDecrement, isPercent }: CounterProps): JSX.Element => {
+const Counter = ({
+  count,
+  onIncrement,
+  onDecrement,
+  isPercent,
+  className,
+}: CounterProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const percent = Number(count) * 100;
   const localizedCount = useMemo(() => toLocalizedNumber(Number(count), lang), [count, lang]);
   const localizedPercent = useMemo(() => toLocalizedNumber(Number(percent), lang), [percent, lang]);
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       <Button
         tooltip={t('counter.decrease')}
         shape={ButtonShape.Circle}

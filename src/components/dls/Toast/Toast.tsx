@@ -28,11 +28,12 @@ type Options = {
   preserve?: boolean;
   actions?: Action[];
   status?: ToastStatus;
+  testId?: string;
 };
 const TOAST_DURATION = 3000; // 3 second
 const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
-    <div className={styles.contentContainer}>
+    <div className={styles.contentContainer} data-testid={options.testId}>
       {content}
       {options.actions && (
         <div className={styles.actionsContainer}>

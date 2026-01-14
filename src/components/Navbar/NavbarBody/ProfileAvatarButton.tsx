@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
@@ -18,6 +19,7 @@ import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { TestId } from '@/tests/test-ids';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -138,7 +140,7 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
         <PopoverMenu.Item
           onClick={onLogoutClicked}
           icon={<LogoutIcon />}
-          dataTestId="profile-menu-item-logout"
+          dataTestId={TestId.LOGOUT_BUTTON}
         >
           {t('logout')}
         </PopoverMenu.Item>

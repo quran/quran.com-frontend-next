@@ -2,12 +2,14 @@
   "add-bookmark": "Tambahkan penanda buku",
   "add-collection": "Tambahkan Koleksi",
   "advanced-copy": "Salinan Lanjutan",
+  "arabic": "Arab",
   "aria": {
     "read-ayah-refls": "Baca Refleksi Ayat",
     "read-tafsirs": "Baca Tafsir Ayat"
   },
   "ayatul-kursi": "Ayat Kursi",
   "back-to-ayah": "Kembali ke Ayat",
+  "below-word": "Kata di bawah ini:",
   "bismillah": "Dengan Nama Allah Yang Maha Pengasih dan Maha Penyayang",
   "change-translation": "Ubah Terjemahan",
   "copy-arabic": "Teks Arab (teks Utsmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Salin Teks",
   "cpy-link": "Salin tautan",
   "current-verse": "Ayat saat ini",
+  "done": "Selesai",
   "download-copy": "jika Anda ingin mengunduh file teks.",
   "edgham": "Idgham",
   "ekhfa": "Ikhfa/Ghunnah",
@@ -40,6 +43,7 @@
   },
   "font": "Font tulisan Arab untuk disalin (copy)",
   "font-placeholder": "Pilih font tulisan",
+  "font-style": "Gaya huruf",
   "font-tooltip": "Font King Fahad V1 dan V2 akan berada dalam bentuk unicode.",
   "footnote": "Catatan kaki",
   "footnote-dl": "<b> Ganda </b> <br/> Bentuk kata kerja dan kata ganti dalam bahasa Arab saat menyapa dua orang",
@@ -73,6 +77,7 @@
   "next-page": "Halaman selanjutnya",
   "next-rub": "Rub el Hizb berikutnya",
   "next-surah": "Surah berikutnya",
+  "on-click": "Saat Diklik:",
   "page-bookmark-removed": "Penanda halaman dihapus",
   "page-bookmarked": "Halaman ditandai",
   "posted-in": "Diposting di",
@@ -120,6 +125,19 @@
   "text-copied": "Teks telah disalin ke papan klip!",
   "trans-change": "Ubah",
   "translation-by": "Diterjemahkan oleh",
+  "translation-feedback": {
+    "feedback": "Masukan",
+    "no-translations-in-preferences": "Tidak ada terjemahan di preferensi Anda",
+    "placeholder": "Gunakan ruang ini untuk melaporkan masalah yang berkaitan dengan terjemahan ayat yang dipilih ini.",
+    "report": "Laporan",
+    "select": "Memilih...",
+    "select-translation": "Pilih terjemahan:",
+    "submission-success": "Masukan Anda telah berhasil dikirim.",
+    "title": "Umpan Balik Terjemahan",
+    "translation": "Terjemahan"
+  },
+  "verse-preview-title": "Pratinjau:",
   "verses-range": "Jangkauan ayat",
-  "view-on-quran-reflect": "Lihat di QuranReflect"
+  "view-on-quran-reflect": "Lihat di QuranReflect",
+  "wbw-helper-text": "Pilih opsi untuk menampilkan terjemahan, transliterasi, dan/atau pembacaan untuk setiap kata."
 }

@@ -3,34 +3,50 @@
     "apps": {
       "muhaffidh": {
         "caption": "Memorizzare e rivedere il Corano in modo efficiente",
+        "description": "Un'app sul Corano progettata per aiutarti a memorizzare e ripassare il Corano in modo innovativo.",
+        "tagline": "Un innovativo strumento per la memorizzazione e la revisione del Corano",
         "title": "Muhaffidh"
       },
       "quran_android": {
         "caption": "Leggi, aggiungi ai preferiti e ascolta il Corano sui dispositivi Android",
+        "description": "Le funzionalità includono pagine in stile Madani, audio senza interruzioni, aggiunta di segnalibri/tag/condivisione, ricerca, modalità notturna, ripetizione audio e traduzioni/tafsir in molte lingue.",
+        "tagline": "App gratuita e open source per il Corano per Android",
         "title": "Corano per Android"
       },
       "quran_ios": {
         "caption": "Bellissima app per leggere e ascoltare il Corano senza pubblicità per iPhone e iPad",
+        "description": "Dai creatori di Quran.com: leggi il Corano ovunque ti trovi, memorizzalo e ascolta i tuoi recitatori preferiti in un'esperienza pulita e senza pubblicità.",
+        "tagline": "Una bellissima app Mushaf senza pubblicità",
         "title": "Corano per iOS (di quran.com)"
       },
       "quranmeet": {
         "caption": "Sessioni di studio del Corano dal vivo",
+        "description": "Una piattaforma che mette in contatto studenti, insegnanti e gruppi di studio per sessioni di apprendimento del Corano individuali o in piccoli gruppi.",
+        "tagline": "Sessioni di Corano individuali e in piccoli gruppi",
         "title": "QuranMeet"
       },
       "quranreflect": {
         "caption": "Condividi le riflessioni",
+        "description": "Una piattaforma sociale per incoraggiare e facilitare le riflessioni coraniche: condividi riflessioni, esplora argomenti e interagisci con la comunità.",
+        "tagline": "Condividiamo riflessioni e cresciamo insieme",
         "title": "CoranoRiflettere"
       },
       "readtafsir": {
         "caption": "Cerca e confronta i tafsir classici",
+        "description": "Leggi e ascolta più fonti di tafsir classici in un unico posto, semplificando la consultazione, la ricerca e il confronto delle interpretazioni.",
+        "tagline": "Lettura e ascolto interattivi del tafsir",
         "title": "LeggiTafsir"
       },
       "sunnah": {
         "caption": "Raccolta di Hadith",
+        "description": "Una biblioteca di hadith con importanti raccolte disponibili online, tra cui traduzioni in più lingue e strumenti di ricerca.",
+        "tagline": "Hadith a portata di mano",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
         "caption": "Tafsir interattivo con più fonti",
+        "description": "Un portale di ricerca sul Corano che riunisce tafsir, qira'at, mushafs, i'rab, scienze coraniche, asbab al-nuzul, sentenze e dizionari.",
+        "tagline": "Un centro di ricerca sul Corano",
         "title": "Applicazione Tafsir"
       }
     },
@@ -44,6 +60,11 @@
       "study-tools": "Strumenti di studio"
     },
     "title": "Sfoglia tutte le app"
+  },
+  "cta": {
+    "app-store": "Scarica dall'App Store",
+    "google-play": "Scaricalo su Google Play",
+    "visit": "Visita"
   },
   "featured": {
     "apps": {

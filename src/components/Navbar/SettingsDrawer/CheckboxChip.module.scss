@@ -1,0 +1,43 @@
+.hiddenCheckbox {
+  position: absolute;
+  inline-size: var(--spacing-hairline-px);
+  block-size: var(--spacing-hairline-px);
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  padding-block-start: var(--spacing-xxsmall-px);
+  padding-block-end: var(--spacing-xxsmall-px);
+  padding-inline-start: var(--spacing-medium-px);
+  padding-inline-end: var(--spacing-medium-px);
+  background-color: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-text-faded-new);
+  cursor: pointer;
+}
+
+.chipSelected {
+  background-color: var(--color-text-default-new);
+  color: var(--color-text-inverse);
+}
+
+.checkIcon {
+  display: inline-flex;
+
+  svg {
+    inline-size: var(--spacing-medium1-5-px);
+    block-size: var(--spacing-medium1-5-px);
+  }
+}
+
+.label {
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+}

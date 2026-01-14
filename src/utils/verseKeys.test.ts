@@ -3,7 +3,11 @@
 import { it, expect } from 'vitest';
 
 import { getAllChaptersData } from './chapter';
-import { generateVerseKeysBetweenTwoVerseKeys } from './verseKeys';
+import {
+  generateVerseKeysBetweenTwoVerseKeys,
+  verseRangesToVerseKeys,
+  readableVerseRangeKeys,
+} from './verseKeys';
 
 it('generates verse keys within the same chapter', async () => {
   const chaptersData = await getAllChaptersData();
@@ -229,5 +233,97 @@ it('generates verse keys for 3 chapters', async () => {
     '114:4',
     '114:5',
     '114:6',
+  ]);
+});
+
+it('converts verse ranges to verse keys - basic functionality', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-1:3'])).toEqual(['1:1', '1:2', '1:3']);
+  expect(verseRangesToVerseKeys(chaptersData, ['78:1-78:2', '79:1-79:1'])).toEqual([
+    '78:1',
+    '78:2',
+    '79:1',
+  ]);
+});
+
+it('converts verse ranges to verse keys - removes duplicates', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-1:2', '1:1-1:3'])).toEqual([
+    '1:1',
+    '1:2',
+    '1:3',
+  ]);
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-1:1', '1:1-1:1'])).toEqual(['1:1']);
+});
+
+it('converts verse ranges to verse keys - handles invalid ranges', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(verseRangesToVerseKeys(chaptersData, ['invalid-range'])).toEqual([]);
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-1:3', 'not-a-range'])).toEqual([
+    '1:1',
+    '1:2',
+    '1:3',
+  ]);
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1'])).toEqual([]);
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-'])).toEqual([]);
+});
+
+it('converts verse ranges to verse keys - handles empty arrays', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(verseRangesToVerseKeys(chaptersData, [])).toEqual([]);
+});
+
+it('converts verse ranges to verse keys - handles multi-chapter ranges', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(verseRangesToVerseKeys(chaptersData, ['1:1-2:1'])).toEqual([
+    '1:1',
+    '1:2',
+    '1:3',
+    '1:4',
+    '1:5',
+    '1:6',
+    '1:7',
+    '2:1',
+  ]);
+});
+
+it('formats verse ranges to readable format - basic functionality', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersData, 'en')).toEqual(['Al-Fatihah 1:1-1:3']);
+  expect(readableVerseRangeKeys(['78:1-78:2'], chaptersData, 'en')).toEqual(['An-Naba 78:1-78:2']);
+});
+
+it('formats verse ranges to readable format - single verses', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(readableVerseRangeKeys(['1:1-1:1'], chaptersData, 'en')).toEqual(['Al-Fatihah 1:1']);
+  expect(readableVerseRangeKeys(['2:255-2:255'], chaptersData, 'en')).toEqual(['Al-Baqarah 2:255']);
+});
+
+it('formats verse ranges to readable format - handles localization', async () => {
+  const chaptersDataAr = await getAllChaptersData('ar');
+  const chaptersDataEn = await getAllChaptersData('en');
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataAr, 'ar')).toEqual(['الفاتحة ١:١-١:٣']);
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataEn, 'en')).toEqual(['Al-Fatihah 1:1-1:3']);
+});
+
+it('formats verse ranges to readable format - filters invalid ranges', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(readableVerseRangeKeys(['invalid-range'], chaptersData, 'en')).toEqual([]);
+  expect(readableVerseRangeKeys(['1:1-1:3', 'not-a-range'], chaptersData, 'en')).toEqual([
+    'Al-Fatihah 1:1-1:3',
+  ]);
+  expect(readableVerseRangeKeys(['1:1'], chaptersData, 'en')).toEqual([]);
+});
+
+it('formats verse ranges to readable format - handles empty arrays', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(readableVerseRangeKeys([], chaptersData, 'en')).toEqual([]);
+});
+
+it('formats verse ranges to readable format - handles multiple ranges', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(readableVerseRangeKeys(['1:1-1:1', '2:1-2:2'], chaptersData, 'en')).toEqual([
+    'Al-Fatihah 1:1',
+    'Al-Baqarah 2:1-2:2',
   ]);
 });

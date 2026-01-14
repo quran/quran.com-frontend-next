@@ -49,7 +49,7 @@
     "/support": ["support"],
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
-    "/apps": ["apps"],
+    "/apps": ["apps", "app-portal"],
     "/radio": ["home", "radio"],
     "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
