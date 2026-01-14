@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 $white: #fff;
 $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
@@ -15,25 +15,25 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: calc(8 * var(--spacing-mega));
+  min-block-size: calc(8 * var(--spacing-mega));
 }
 
 .player {
-  width: 100% !important;
-  margin-top: var(--spacing-large);
+  inline-size: 100% !important;
+  margin-block-start: var(--spacing-large);
 }
 
 .playerHeight {
-  height: 100% !important;
+  block-size: 100% !important;
 }
 
 .playerHeightSafari {
-  height: calc(100% - 40px) !important;
+  block-size: calc(100% - 40px) !important;
 }
 
 .loadingContainer {
-  width: 100% !important;
-  height: 100% !important;
+  inline-size: 100% !important;
+  block-size: 100% !important;
   display: flex;
   align-items: center;
 }
@@ -52,9 +52,9 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .portraitAspectRatio {
   aspect-ratio: 9 / 16;
-  max-width: 30% !important;
+  max-inline-size: 30% !important;
   @include breakpoints.smallerThanTablet {
-    max-width: 90% !important;
+    max-inline-size: 90% !important;
     // TODO: we should add the banner height here if it's shown
     // margin-block-start: var(--banner-height);
   }
@@ -74,27 +74,27 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 .loadingContainer {
   display: flex;
   justify-content: center;
-  height: 100%;
+  block-size: 100%;
   flex-direction: column;
 }
 
 .titleContainer {
-  border-bottom: solid;
+  border-block-end: solid;
   border-color: var(--color-secondary-medium);
   border-width: 1px;
-  width: 70%;
+  inline-size: 70%;
   margin: 0 auto;
   text-align: center;
 
   h1 {
     margin: auto;
-    margin-bottom: var(--spacing-large);
+    margin-block-end: var(--spacing-large);
     font-size: var(--font-size-xlarge);
     font-weight: var(--font-weight-bold);
   }
 
   @include breakpoints.smallerThanDesktop {
-    width: 90%;
+    inline-size: 90%;
     // TODO: we should add the banner height here if it's shown
     // margin-block-start: var(--banner-height);
   }
@@ -110,28 +110,28 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 .settingsContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .switchContainer {
   display: flex;
   align-items: center;
   flex-direction: row;
-  width: 75%;
+  inline-size: 75%;
   margin: 0 auto;
-  margin-bottom: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
   @include breakpoints.smallerThanTablet {
-    width: 90%;
+    inline-size: 90%;
   }
 }
 
 .switch {
-  width: 100%;
-  margin-right: var(--spacing-mega);
+  inline-size: 100%;
+  margin-inline-end: var(--spacing-mega);
 }
 
 .settings {
-  width: 90%;
+  inline-size: 90%;
   align-self: center;
 }
 
@@ -152,7 +152,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .number {
   font-size: 12px;
-  text-align: right;
+  text-align: end;
   display: flex;
   align-items: center;
   border-radius: 50%;
@@ -162,8 +162,8 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .text {
   font-size: 3.5rem;
-  text-align: right;
-  margin-left: 10px;
+  text-align: end;
+  margin-inline-start: 10px;
   padding: 0 2rem;
 }
 
@@ -176,10 +176,9 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .translationText {
   font-size: 1.4rem;
-  text-align: right;
-  margin-left: 10px;
-  margin-left: auto;
-  margin-right: 0;
+  text-align: end;
+  margin-inline: 10px 0;
+  margin-inline-start: auto;
   padding: 0 2rem;
 }
 
@@ -190,7 +189,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .colorPicker {
-  width: 100%;
+  inline-size: 100%;
   appearance: none;
   background: transparent;
   border: none;
@@ -243,11 +242,11 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .input {
-  width: 95%;
+  inline-size: 95%;
 }
 
 .container {
-  min-height: calc(4 * var(--spacing-mega));
+  min-block-size: calc(4 * var(--spacing-mega));
 }
 .changeReciterButtonContainer {
   display: flex;
@@ -256,14 +255,14 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .skeleton {
-  height: calc(2.2 * var(--spacing-mega));
-  width: 100%;
+  block-size: calc(2.2 * var(--spacing-mega));
+  inline-size: 100%;
 }
 
 .translationControlButtons {
   display: flex;
   justify-content: flex-start;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .translationControlButtons > button {
@@ -304,12 +303,13 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .versesLabel {
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
 }
 
 .translationListContainer {
-  height: 50vh;
-  min-width: 100%;
+  block-size: 50vh;
+  height: 50dvh;
+  min-inline-size: 100%;
   overflow: auto;
   position: relative;
   margin-block-start: var(--spacing-medium);
@@ -317,8 +317,8 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .translationClearSearchButton {
   position: absolute;
-  top: 10px;
-  right: 20px;
+  inset-block-start: 10px;
+  inset-inline-end: 20px;
 }
 
 .translationModalWrapper .body {
@@ -331,7 +331,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   flex-direction: column;
 
   button {
-    width: 10rem;
+    inline-size: 10rem;
   }
 }
 
@@ -346,7 +346,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .select select {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .tabContainer {
@@ -363,7 +363,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   flex: 1;
   margin-block: var(--spacing-large);
   @include breakpoints.smallerThanTablet {
-    width: 90%;
+    inline-size: 90%;
   }
 }
 
@@ -386,7 +386,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   font-size: var(--font-size-xsmall);
   padding-inline-start: var(--spacing-xxsmall);
   @include breakpoints.desktop {
-    padding-top: var(--spacing-micro);
+    padding-block-start: var(--spacing-micro);
   }
 }
 
@@ -401,14 +401,14 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 .opacityCounter {
   display: flex;
   justify-content: center;
-  padding-top: var(--spacing-xsmall);
+  padding-block-start: var(--spacing-xsmall);
 }
 
 .generateVideoButton {
-  width: 100%;
-  max-width: 250px;
+  inline-size: 100%;
+  max-inline-size: 250px;
   margin: 0 auto;
-  margin-bottom: var(--spacing-mega);
+  margin-block-end: var(--spacing-mega);
   display: flex;
   justify-content: center;
   align-items: center;

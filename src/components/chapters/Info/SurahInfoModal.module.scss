@@ -138,6 +138,7 @@ div {
     @include breakpoints.tablet {
       border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
       block-size: 95vh;
+      block-size: 95dvh;
       display: flex;
       flex-direction: column;
       overflow: hidden;

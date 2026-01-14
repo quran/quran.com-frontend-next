@@ -5,6 +5,7 @@ $container-width: 370px;
 
 .outerContainer {
   min-block-size: 100vh;
+  min-block-size: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .juzContainer + .juzContainer {
   margin-block-start: var(--spacing-small);
@@ -9,7 +9,7 @@
 
 .juzContainer {
   display: inline-block;
-  width: 100%;
+  inline-size: 100%;
   margin-block-end: var(--spacing-small);
   box-sizing: border-box;
   padding-block-start: var(--spacing-small);
@@ -42,5 +42,6 @@
 }
 
 .loadingContainer {
-  min-height: 100vh; // reduce layout shift
+  min-block-size: 100vh; // reduce layout shift
+  min-height: 100dvh; // reduce layout shift
 }

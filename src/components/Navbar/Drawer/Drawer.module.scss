@@ -7,6 +7,7 @@
   background: var(--color-background-elevated);
   position: fixed;
   block-size: 100vh;
+  block-size: 100dvh;
   inline-size: 100%;
   inset-block: 0;
   z-index: var(--z-index-header);
@@ -59,10 +60,12 @@
       inset-block-start: var(--navbar-height);
       inset-block-end: auto;
       block-size: calc(100vh - var(--navbar-height));
+      block-size: calc(100dvh - var(--navbar-height));
       border-start-start-radius: var(--border-radius-rounded);
       border-start-end-radius: var(--border-radius-rounded);
       transform: translateY(100%);
-      transition: transform var(--transition-regular), inset-block-start var(--transition-regular), block-size var(--transition-regular);
+      transition: transform var(--transition-regular), inset-block-start var(--transition-regular),
+        block-size var(--transition-regular);
     }
   }
 
@@ -72,6 +75,7 @@
       @include breakpoints.smallerThanTablet {
         inset-block-start: calc(3 * var(--spacing-max));
         block-size: 100vh;
+        block-size: 100dvh;
         border-start-start-radius: var(--border-radius-rounded);
         border-start-end-radius: var(--border-radius-rounded);
         padding-block-start: var(--spacing-xxsmall-px);

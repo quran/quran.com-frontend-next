@@ -20,6 +20,7 @@ $virtual-scrolling-height-bandage: calc(
 
 .readingView {
   min-block-size: 100vh;
+  min-block-size: 100dvh;
   @include breakpoints.smallerThanTablet {
     inline-size: 85%;
   }
