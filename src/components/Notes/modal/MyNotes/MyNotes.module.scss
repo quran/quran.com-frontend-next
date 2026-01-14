@@ -4,7 +4,7 @@
 
 $note_title_line_height: 1.5;
 
-.container {
+div.container {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: var(--spacing-large-px);

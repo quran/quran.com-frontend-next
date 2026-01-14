@@ -52,7 +52,7 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
 
       <TranslationPreview verse={verse} selectedTranslationId={selectedTranslationId} />
 
-      <div className={styles.inputGroup}>
+      <div className={styles.textAreaInputGroup}>
         <TextArea
           id="feedback"
           name="feedback"
