@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
@@ -17,11 +18,20 @@ import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
+const MY_QURAN_PATH = getMyQuranNavigationUrl();
+const tabComponents = {
+  [MyQuranTab.SAVED]: null,
+  [MyQuranTab.RECENT]: <RecentContent />,
+  [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
+};
+
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
-  const PATH = getMyQuranNavigationUrl();
-  const title = t('common:my-quran');
+  const router = useRouter();
+  const { tab } = router.query;
   const [selectedTab, setSelectedTab] = useState(MyQuranTab.SAVED);
+
+  const title = t('common:my-quran');
 
   const tabs = useMemo(
     () => [
@@ -46,18 +56,18 @@ const MyQuranPage = (): JSX.Element => {
     setSelectedTab(value as MyQuranTab);
   };
 
-  const tabComponents = {
-    [MyQuranTab.SAVED]: null,
-    [MyQuranTab.RECENT]: <RecentContent />,
-    [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
-  };
+  useEffect(() => {
+    if (tab && Object.values(MyQuranTab).includes(tab as MyQuranTab)) {
+      setSelectedTab(tab as MyQuranTab);
+    }
+  }, [tab]);
 
   return (
     <>
       <NextSeoWrapper
         title={title}
-        canonical={getCanonicalUrl(lang, PATH)}
-        languageAlternates={getLanguageAlternates(PATH)}
+        canonical={getCanonicalUrl(lang, MY_QURAN_PATH)}
+        languageAlternates={getLanguageAlternates(MY_QURAN_PATH)}
         nofollow
         noindex
       />
@@ -83,12 +93,7 @@ const MyQuranPage = (): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
+  return { props: { chaptersData: allChaptersData } };
 };
 
 export default MyQuranPage;
