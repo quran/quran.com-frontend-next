@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
@@ -23,6 +24,8 @@ enum Tab {
 
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
+  const router = useRouter();
+  const { tab } = router.query;
   const PATH = ROUTES.MY_QURAN;
   const title = t('common:my-quran');
   const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
@@ -55,6 +58,12 @@ const MyQuranPage = (): JSX.Element => {
     [Tab.RECENT]: <RecentContent />,
     [Tab.NOTES_AND_REFLECTIONS]: null,
   };
+
+  useEffect(() => {
+    if (tab && Object.values(Tab).includes(tab as Tab)) {
+      setSelectedTab(tab as Tab);
+    }
+  }, [tab]);
 
   return (
     <>
