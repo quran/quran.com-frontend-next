@@ -8,7 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReciterSelectionBody.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
-import Input, { InputSize } from '@/dls/Forms/Input';
+import Input from '@/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from '@/dls/Forms/RadioGroup/RadioGroup';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -78,7 +78,6 @@ const SettingsReciter = () => {
             prefix={<IconSearch />}
             id="translations-search"
             value={searchQuery}
-            size={InputSize.Large}
             onChange={setSearchQuery}
             placeholder={t('settings.search-reciter')}
             fixedWidth={false}

@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import drawerStyles from '../Drawer/Drawer.module.scss';
+
 import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
@@ -58,6 +60,8 @@ const SettingsDrawer = () => {
     );
   }
 
+  const isTranslationView = settingsView === SettingsView.Translation;
+
   return (
     <Drawer
       id="settings-drawer"
@@ -69,6 +73,7 @@ const SettingsDrawer = () => {
       removeHeaderWrapper={settingsView === SettingsView.Body}
       hideCloseButton={settingsView === SettingsView.Body}
       removeBodySpacing={settingsView === SettingsView.Body}
+      className={isTranslationView ? drawerStyles.translationView : undefined}
     >
       {isSettingsDrawerOpen && (
         <div data-testid="settings-drawer-body">
