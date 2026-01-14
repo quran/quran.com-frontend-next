@@ -1,6 +1,6 @@
 @use '@/styles/breakpoints';
-
-$note_modal_max_width: 48rem;
+@use '@/styles/constants';
+@use '@/styles/mixins/modal';
 
 .headerButton {
   all: unset;
@@ -39,14 +39,14 @@ $note_modal_max_width: 48rem;
 }
 
 div.overlay {
-  --space-taken: calc(2 * (2 * var(--spacing-mega)));
-  padding-block: calc(2 * var(--spacing-mega));
+  @include modal.modal-overlay-spacing;
 
+  padding-block: var(--padding-per-side);
   scrollbar-gutter: stable both-edges;
 
   @include breakpoints.smallerThanTablet {
-    --space-taken: calc(2 * var(--spacing-mega));
     padding-block-end: 0;
+    --space-taken: var(--padding-per-side);
     place-items: end;
   }
 }
@@ -55,7 +55,7 @@ div.content {
   display: flex;
   flex-direction: column;
 
-  max-inline-size: $note_modal_max_width;
+  max-inline-size: constants.$modal-max-width;
   background-color: var(--color-background-elevated-new);
 
   @include breakpoints.smallerThanTablet {
