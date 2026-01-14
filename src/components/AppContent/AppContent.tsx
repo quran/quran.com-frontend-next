@@ -40,8 +40,8 @@ function AppContent({ Component, pageProps }: AppContentProps) {
     <div
       className={classNames({
         bannerActive: isBannerVisible,
-        mobileReadingModeVisible: showNavbar,
-        mobileReadingModeHidden: !showNavbar,
+        navbarVisible: showNavbar,
+        navbarHidden: !showNavbar,
       })}
     >
       <AuthRedirects />

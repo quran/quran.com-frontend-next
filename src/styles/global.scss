@@ -92,29 +92,24 @@ select option {
   }
 }
 
-.mobileReadingModeVisible {
-  --context-menu-container-height-visible: var(--context-menu-container-height);
-  --progress-bar-height-visible: var(--progress-bar-height-hidden);
-  --sections-container-height-visible: var(--sections-container-height-hidden);
-  --page-info-container-height-visible: var(--page-info-container-height-hidden);
-  --context-menu-inset-height-visible: var(--context-menu-inset-height);
+.navbarVisible {
   @include breakpoints.smallerThanTablet {
-    --context-menu-container-height-visible: var(--context-menu-container-height-hidden);
-    --sections-container-height-visible: var(--sections-container-height);
-    --mobile-reading-mode-tabs-height: var(--mobile-reading-mode-tabs-height-visible);
-    --context-menu-inset-height-visible: var(--context-menu-inset-height-hidden);
+    --top-bar-height: var(--top-bar-height-mobile-full);
   }
 }
 
-.mobileReadingModeHidden {
-  --context-menu-container-height-visible: var(--context-menu-container-height-hidden);
-  --mobile-reading-mode-tabs-height: var(--mobile-reading-mode-tabs-height-hidden);
-  --context-menu-inset-height-visible: var(--context-menu-inset-height);
+.navbarHidden {
+  --top-bar-height: var(--top-bar-height-mobile-collapsed);
   @include breakpoints.tablet {
-    --context-menu-inset-height-visible: var(--context-menu-inset-height-hidden);
-    --context-menu-container-height-visible: var(--context-menu-container-height);
-    --progress-bar-height-visible: var(--progress-bar-height-hidden);
-    --sections-container-height-visible: var(--sections-container-height-hidden);
-    --page-info-container-height-visible: var(--page-info-container-height-hidden);
+    --top-bar-height: var(--top-bar-height-collapsed);
   }
+}
+
+nextjs-portal {
+  display: none;
+}
+
+body {
+  padding: 0 !important;
+  overflow: auto !important;
 }

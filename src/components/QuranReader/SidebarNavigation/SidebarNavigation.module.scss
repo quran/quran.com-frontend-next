@@ -11,11 +11,7 @@ $top-menu-height-home: $navbar-height;
 $context-menu-height-home: 0;
 
 // Non-homepage heights (with sections menu and progress bar)
-$top-menu-height: calc(
-  $navbar-height + var(--context-menu-container-height-visible) +
-    var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
-    var(--mobile-reading-mode-tabs-height) - var(--context-menu-inset-height-visible)
-);
+$top-menu-height: calc(var(--top-bar-height) + $navbar-height);
 
 $isNavbarVisible: var(--isNavbarVisible);
 

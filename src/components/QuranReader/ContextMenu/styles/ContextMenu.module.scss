@@ -1,6 +1,9 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
+$sections-container-height: 2rem;
+$pixel: 1px;
+
 .container {
   background: var(--color-background-elevated);
   color: var(--color-text-default);
@@ -9,7 +12,7 @@
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   inline-size: 100%;
-  inset-block-start: calc(var(--context-menu-inset-height) * -1);
+  inset-block-start: calc($pixel * -1);
   min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;
@@ -55,8 +58,7 @@
 }
 
 .sectionsContainer {
-  box-sizing: border-box;
-  block-size: var(--sections-container-height);
+  block-size: $sections-container-height;
   padding-block: calc(var(--spacing-medium) / 2);
   display: flex;
   align-items: center;
@@ -149,8 +151,6 @@
 }
 
 .pageInfoContainer {
-  box-sizing: border-box;
-  block-size: var(--page-info-container-height);
   display: flex;
   flex-direction: row;
   align-items: center;
