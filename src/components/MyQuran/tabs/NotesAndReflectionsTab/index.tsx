@@ -1,7 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import SignInPrompt from '../../SignInPrompt';
-
+import SignInPrompt from '@/components/MyQuran/SignInPrompt';
 import MyQuranTab from '@/components/MyQuran/tabs';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { getMyQuranNavigationUrl } from '@/utils/navigation';
