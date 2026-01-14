@@ -15,7 +15,7 @@ div.container {
 .inputGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxsmall);
+  gap: var(--spacing-xsmall);
   block-size: 100%;
 }
 
@@ -136,6 +136,7 @@ div.textArea {
 
 .error {
   color: var(--color-text-error);
+  line-height: 1;
 }
 
 .verseRangesContainer {
