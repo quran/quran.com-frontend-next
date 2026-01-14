@@ -46,6 +46,7 @@ div.overlay {
 
   @include breakpoints.smallerThanTablet {
     padding-block-end: 0;
+    --space-taken: var(--padding-per-side);
     place-items: end;
   }
 }
