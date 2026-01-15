@@ -78,6 +78,7 @@
   "next-rub": "Next Rub el Hizb",
   "next-surah": "Next Surah",
   "on-click": "On Click:",
+  "on-hover": "On Hover:",
   "page-bookmark-removed": "Page bookmark removed",
   "page-bookmarked": "Page bookmarked",
   "posted-in": "Posted in",
@@ -103,6 +104,7 @@
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Read More on QuranReflect",
+  "reciter-summary": "Recitation source: With kind permission of Tafsir Center",
   "referencing": "Referencing",
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
@@ -139,7 +141,5 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
-  "on-hover":"On Hover:",
-  "reciter-summary": "Recitation source: With kind permission of Tafsir Center"
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
 }
