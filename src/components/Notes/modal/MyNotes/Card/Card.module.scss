@@ -57,7 +57,6 @@ $note_title_line_height: 1.5;
   font-size: var(--font-size-normal);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-bold);
-  @include utility.textClamp(2);
 }
 
 .statsContainer {

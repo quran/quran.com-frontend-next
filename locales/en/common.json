@@ -339,6 +339,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Read",
+  "read-more": "Read More",
   "reading-history": "Reading history",
   "reading-preference": {
     "reading": "Reading",
@@ -377,6 +378,7 @@
     "title": "Search"
   },
   "seconds": "Seconds",
+  "see-less": "See less",
   "see-new": "See What's New",
   "select-language": "Select Language",
   "settings": {

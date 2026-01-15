@@ -89,6 +89,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
             onPostToQr={handlePostToQrClick}
             onDelete={handleDeleteNoteClick}
             isDeletingNote={isDeletingNote ? note.id === noteToDelete?.id : false}
+            showReadMore
           />
         </div>
       );

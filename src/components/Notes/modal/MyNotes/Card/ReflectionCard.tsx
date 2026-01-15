@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Card.module.scss';
 
+import InlineShowMore from '@/components/InlineShowMore';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant, ButtonShape } from '@/dls/Button/Button';
 import ChatIcon from '@/icons/chat.svg';
@@ -21,9 +22,10 @@ export type NoteWithPostUrl = Note & { postUrl?: string };
 
 export interface ReflectionCardProps {
   reflection: AyahReflection;
+  showReadMore?: boolean;
 }
 
-const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection }) => {
+const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMore = false }) => {
   const { t, lang } = useTranslation('notes');
   const chaptersData = useContext(DataContext);
 
@@ -87,9 +89,14 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection }) => {
         </div>
       </div>
 
-      <p className={styles.noteText} data-testid="reflection-text">
+      <InlineShowMore
+        lines={2}
+        contentClassName={styles.noteText}
+        showReadMore={showReadMore}
+        data-testid="reflection-text"
+      >
         {reflection.body}
-      </p>
+      </InlineShowMore>
 
       <div className={styles.statsContainer}>
         <Button

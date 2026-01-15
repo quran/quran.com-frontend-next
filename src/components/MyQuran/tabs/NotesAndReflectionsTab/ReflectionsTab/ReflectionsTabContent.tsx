@@ -32,7 +32,7 @@ const ReflectionsTabContent: React.FC<ReflectionsTabContentProps> = ({
   const renderReflection = useCallback((index: number, reflection: AyahReflection) => {
     return (
       <div className={styles.noteItem}>
-        <ReflectionCard key={reflection.id} reflection={reflection} />
+        <ReflectionCard key={reflection.id} reflection={reflection} showReadMore />
       </div>
     );
   }, []);

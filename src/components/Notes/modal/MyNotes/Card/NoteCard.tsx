@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Card.module.scss';
 
+import InlineShowMore from '@/components/InlineShowMore';
 import DeleteNoteButton from '@/components/Notes/modal/MyNotes/DeleteNoteButton';
 import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
 import DataContext from '@/contexts/DataContext';
@@ -23,6 +24,7 @@ export interface NoteCardProps {
   onPostToQr: (note: Note) => void;
   onDelete: (note: Note) => void;
   isDeletingNote: boolean;
+  showReadMore?: boolean;
 }
 
 const NoteCard: React.FC<NoteCardProps> = ({
@@ -31,6 +33,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
   onPostToQr,
   onDelete,
   isDeletingNote,
+  showReadMore = false,
 }) => {
   const { t, lang } = useTranslation('notes');
   const chaptersData = useContext(DataContext);
@@ -83,9 +86,14 @@ const NoteCard: React.FC<NoteCardProps> = ({
         </div>
       </div>
 
-      <p className={styles.noteText} data-testid="note-text">
+      <InlineShowMore
+        lines={2}
+        contentClassName={styles.noteText}
+        showReadMore={showReadMore}
+        data-testid="note-text"
+      >
         {note.body}
-      </p>
+      </InlineShowMore>
     </div>
   );
 };
