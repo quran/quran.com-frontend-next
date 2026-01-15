@@ -14,7 +14,7 @@ import useDirection from '@/hooks/useDirection';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import DataContext from 'src/contexts/DataContext';
 
@@ -47,6 +47,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
+    logEvent('drawer_settings_open');
     dispatch(setIsSettingsDrawerOpen(true));
     logButtonClick('chapter_header_change_translation');
   };

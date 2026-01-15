@@ -13,7 +13,7 @@ import { SettingsTab } from '@/redux/slices/navbar';
 
 type SettingTabsProps = {
   activeTab?: SettingsTab;
-  onTabChange?: (tab: SettingsTab) => void;
+  onTabChange?: (tab: SettingsTab, shouldLog?: boolean) => void;
 };
 
 const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTabsProps) => {

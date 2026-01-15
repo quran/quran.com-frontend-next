@@ -309,10 +309,7 @@ const WordByWordSection = () => {
         />
       </Section.Footer>
       <Section.Footer className={styles.footerWithBorder}>
-        <Trans
-          components={{ span: <span className={styles.source} /> }}
-          i18nKey="quran-reader:reciter-summary"
-        />
+        <Trans components={{ span: <span /> }} i18nKey="quran-reader:reciter-summary" />
       </Section.Footer>
       <Section.Row>
         <div>

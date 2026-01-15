@@ -9,6 +9,7 @@ import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { selectNavbar, setLastSettingsTab, SettingsTab, SettingsView } from '@/redux/slices/navbar';
+import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = () => {
   const dispatch = useDispatch();
@@ -29,10 +30,13 @@ const SettingsBody = () => {
   };
 
   const handleTabChange = useCallback(
-    (tab: SettingsTab) => {
+    (tab: SettingsTab, shouldLog = true) => {
+      if (shouldLog) {
+        logValueChange('settings_tab', lastSettingsTab, tab);
+      }
       dispatch(setLastSettingsTab(tab));
     },
-    [dispatch],
+    [dispatch, lastSettingsTab],
   );
 
   useEffect(() => {
@@ -48,10 +52,11 @@ const SettingsBody = () => {
   }, [activeStepIndex, isActive]);
 
   // Update active tab when returning from a sub-view (e.g., Translation or Tafsir detail view)
+  // Don't log since this is auto-navigation, not user-initiated
   useEffect(() => {
     if (lastSettingsView !== SettingsView.Body) {
       const targetTab = getTabFromSettingsView(lastSettingsView);
-      handleTabChange(targetTab);
+      handleTabChange(targetTab, false);
     }
   }, [lastSettingsView, handleTabChange]);
 
