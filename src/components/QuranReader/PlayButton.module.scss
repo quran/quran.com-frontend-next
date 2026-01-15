@@ -31,8 +31,11 @@ $playChapterAudioButtonMinInlineSize: 95px;
   button {
     @include customButton;
     min-inline-size: $playChapterAudioButtonMinInlineSize;
+    // Match ReadingModeActions button styling
+    block-size: auto;
     font-size: var(--font-size-small);
-    padding-inline: var(--spacing-small-px);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-xxsmall) var(--spacing-small);
     white-space: nowrap;
   }
 }
