@@ -8,6 +8,7 @@ import SignInPrompt from '@/components/MyQuran/SignInPrompt';
 import MyQuranTab from '@/components/MyQuran/tabs';
 import BasicSwitcher from '@/components/MyQuran/tabs/NotesAndReflectionsTab/BasicSwitcher';
 import NotesSorter from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesSorter/NotesSorter';
+import NotesTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesTab';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { logEvent } from '@/utils/eventLogger';
@@ -56,10 +57,10 @@ const NotesAndReflectionsTab = () => {
 
   const tabComponents = useMemo(
     () => ({
-      [SubTab.Notes]: null,
+      [SubTab.Notes]: <NotesTab sortBy={sortOption} />,
       [SubTab.Reflections]: null,
     }),
-    [],
+    [sortOption],
   );
 
   const onSortByChange = (value: NotesSortOption) => {
