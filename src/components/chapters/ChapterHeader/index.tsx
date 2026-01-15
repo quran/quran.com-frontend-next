@@ -14,14 +14,12 @@ import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button
 import useDirection from '@/hooks/useDirection';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
-import { ReadingPreference } from 'types/QuranReader';
 
 interface ChapterHeaderProps {
   chapterId: string;
@@ -50,15 +48,9 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
   const readingPreference = useSelector(selectReadingPreference);
-  const selectedTranslations = useSelector(selectSelectedTranslations);
 
   // Check if we're in Reading mode (Arabic or Translation)
   const isReadingMode = isInReadingMode(readingPreference);
-
-  // Check if we should show empty state (in ReadingTranslation mode with no translations)
-  const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
-  const hasTranslations = selectedTranslations && selectedTranslations.length > 0;
-  const showEmptyState = isTranslationMode && !hasTranslations;
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
@@ -71,7 +63,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
-          {!showEmptyState && <PlayChapterAudioButton chapterId={Number(chapterId)} />}
+          <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
           {isReadingMode ? (
