@@ -29,6 +29,9 @@ const getPersistedTheme = (): RootState[SliceName.THEME] | null => {
       return null;
     }
 
+    // NOTE: Double JSON.parse is intentional. Redux-persist stringifies each slice
+    // value individually before storing them in the top-level object. So after the
+    // first parse (line 26), `themeState` is still a JSON string, not an object.
     return JSON.parse(themeState);
   } catch (error) {
     // Log the error to aid diagnosing issues with localStorage access or corrupted persisted state.
