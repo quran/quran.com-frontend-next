@@ -1,0 +1,121 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-large-px);
+}
+
+.wordNavigationBox {
+  position: relative;
+  flex: 1;
+  padding: var(--spacing-small);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: var(--spacing-hairline-px) solid var(--color-success-faint);
+  font-size: var(--font-size-small);
+
+  @include breakpoints.tablet {
+    padding: var(--spacing-medium);
+    font-size: var(--font-size-normal);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  padding-inline-end: var(--spacing-large);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  min-width: calc(var(--spacing-xlarge-px) * 2);
+  flex-shrink: 0;
+
+  @include breakpoints.tablet {
+    min-width: var(--spacing-mega-px);
+  }
+}
+
+.text {
+  color: var(--color-text-default);
+  flex: 1;
+  line-height: 1.6;
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-small);
+  inset-inline-end: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-medium3-px);
+  height: var(--spacing-medium3-px);
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-default);
+  opacity: var(--opacity-75);
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg {
+    width: var(--spacing-medium-plus-px);
+    height: var(--spacing-medium-plus-px);
+  }
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-default);
+  flex-shrink: 0;
+
+  svg {
+    width: var(--spacing-small-px);
+    height: var(--spacing-medium-px);
+
+    @include breakpoints.tablet {
+      width: var(--spacing-medium-px);
+      height: var(--spacing-medium-px);
+    }
+  }
+
+  @include breakpoints.tablet {
+    padding: var(--spacing-small);
+  }
+
+  &:disabled {
+    opacity: var(--opacity-30);
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    opacity: var(--opacity-75);
+  }
+}
+
+.prevButton {
+  svg {
+    transform: scaleX(-1);
+  }
+}

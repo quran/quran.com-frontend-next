@@ -24,6 +24,7 @@ type Props = {
   fontScale?: number;
   titleText?: string;
   quranFont?: QuranFont;
+  highlightedWordLocation?: string;
 };
 
 /**
@@ -41,6 +42,7 @@ const PlainVerseText: React.FC<Props> = ({
   fontScale,
   titleText,
   quranFont: quranFontFromProps,
+  highlightedWordLocation,
 }: Props): JSX.Element => {
   const {
     quranFont: quranFontFromStore,
@@ -75,6 +77,7 @@ const PlainVerseText: React.FC<Props> = ({
           translate="no"
         >
           {words?.map((word) => {
+            const isHighlighted = highlightedWordLocation && word.location === highlightedWordLocation;
             if (isQcfFont) {
               return (
                 <PlainVerseTextWord
@@ -82,6 +85,7 @@ const PlainVerseText: React.FC<Props> = ({
                   word={word}
                   shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                   shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
+                  isHighlighted={isHighlighted}
                 >
                   <GlyphWord
                     font={quranFont}
@@ -90,6 +94,7 @@ const PlainVerseText: React.FC<Props> = ({
                     textCodeV1={word.codeV1}
                     textCodeV2={word.codeV2}
                     isFontLoaded={isFontLoaded}
+                    isHighlighted={isHighlighted}
                   />
                 </PlainVerseTextWord>
               );
@@ -100,6 +105,7 @@ const PlainVerseText: React.FC<Props> = ({
                 word={word}
                 shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                 shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
+                isHighlighted={isHighlighted}
               >
                 <TextWord font={quranFont} text={word.text} charType={word.charTypeName} />
               </PlainVerseTextWord>
