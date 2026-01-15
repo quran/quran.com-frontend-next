@@ -8,6 +8,7 @@ import styles from './ReadingModeActions.module.scss';
 
 import PopoverMenu, { PopoverMenuAlign } from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationDropdownContent from '@/components/QuranReader/ContextMenu/components/TranslationDropdownContent';
+import useCloseOnScroll from '@/hooks/useCloseOnScroll';
 import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
@@ -68,6 +69,10 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     [isTranslationSelected],
   );
 
+  // Close dropdown after scrolling beyond threshold to prevent navbar overlap
+  const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
+  useCloseOnScroll(isDropdownOpen, closeDropdown);
+
   // When no translations selected, show "Translation: None selected" button
   if (!hasTranslations) {
     return (
@@ -123,10 +128,11 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     <PopoverMenu
       trigger={triggerButton}
       isOpen={isDropdownOpen}
+      isModal={false}
       onOpenChange={handleOpenChange}
       contentClassName={styles.dropdownContent}
       align={isMobile ? PopoverMenuAlign.END : PopoverMenuAlign.START}
-      sideOffset={4}
+      sideOffset={8}
     >
       <TranslationDropdownContent
         translations={translations || []}
