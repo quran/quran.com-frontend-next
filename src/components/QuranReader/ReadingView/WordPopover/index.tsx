@@ -3,7 +3,10 @@ import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
-import PopoverMenu, { PopoverMenuExpandDirection } from '@/components/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, {
+  PopoverMenuAlign,
+  PopoverMenuExpandDirection,
+} from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReadingViewWordActionsMenu from '@/components/QuranReader/ReadingView/WordActionsMenu';
 import {
   setReadingViewHoveredVerseKey,
@@ -23,6 +26,7 @@ type Props = {
   verse?: Verse;
   children: React.ReactNode;
   onOpenChange?: (isOpen: boolean) => void;
+  isOpen?: boolean;
   bookmarksRangeUrl?: string | null;
 };
 
@@ -37,12 +41,16 @@ const ReadingViewWordPopover: React.FC<Props> = ({
   verse: verseProp,
   children,
   onOpenChange,
+  isOpen: isOpenProp,
   bookmarksRangeUrl,
 }) => {
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const [isMenuOpenedInternal, setIsMenuOpenedInternal] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const dispatch = useDispatch();
+
+  // Use controlled state if provided, otherwise use internal state
+  const isMenuOpened = isOpenProp !== undefined ? isOpenProp : isMenuOpenedInternal;
 
   // Use verse prop directly if provided, otherwise extract from word
   const verse = verseProp || word?.verse;
@@ -50,15 +58,18 @@ const ReadingViewWordPopover: React.FC<Props> = ({
 
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {
-      setIsMenuOpened(isOpen);
+      // Only update internal state if not controlled
+      if (isOpenProp === undefined) {
+        setIsMenuOpenedInternal(isOpen);
+      }
       logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
       dispatch(setReadingViewSelectedVerseKey(isOpen ? verseKey : null));
 
-      if (isOpen && onOpenChange) {
+      if (onOpenChange) {
         onOpenChange(isOpen);
       }
     },
-    [dispatch, verseKey, onOpenChange],
+    [dispatch, verseKey, onOpenChange, isOpenProp],
   );
 
   const onHoverChange = useCallback(
@@ -100,6 +111,8 @@ const ReadingViewWordPopover: React.FC<Props> = ({
         isOpen={isMenuOpened}
         onOpenChange={handleOpenChange}
         expandDirection={PopoverMenuExpandDirection.BOTTOM}
+        align={PopoverMenuAlign.START}
+        sideOffset={4}
       >
         <ReadingViewWordActionsMenu
           verse={verse}
