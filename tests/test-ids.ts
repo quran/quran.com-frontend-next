@@ -59,6 +59,7 @@ export enum TestId {
   LINES = 'lines',
   LISTEN_BUTTON = 'listen-button',
   ROOT_DIALOG = 'root-dialog',
+  LOGOUT_BUTTON = 'profile-menu-item-logout',
   MODAL_CONTENT = 'modal-content',
   MORE_RESULTS = 'more-results',
   NAVBAR = 'navbar',

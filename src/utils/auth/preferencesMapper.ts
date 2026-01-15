@@ -47,11 +47,19 @@ const getPreferenceGroupValue = (
   }
 
   if (sliceName === SliceName.READING_PREFERENCES) {
-    const newPreferences = {
-      ...currentSliceValue,
-    } as ReadingPreferences;
-    delete newPreferences.isUsingDefaultWordByWordLocale;
-    return newPreferences;
+    const prefs = currentSliceValue as ReadingPreferences;
+
+    return {
+      readingPreference: prefs.readingPreference,
+      selectedWordByWordLocale: prefs.selectedWordByWordLocale,
+      wordClickFunctionality: prefs.wordClickFunctionality,
+      // New fields - sync to backend
+      wordByWordTooltipContentType: prefs.wordByWordTooltipContentType,
+      wordByWordInlineContentType: prefs.wordByWordInlineContentType,
+      // Deprecated - keep for backward compatibility during transition
+      wordByWordContentType: prefs.wordByWordTooltipContentType,
+      // wordByWordDisplay is now auto-computed, don't send
+    };
   }
 
   if (sliceName === SliceName.TRANSLATIONS) {

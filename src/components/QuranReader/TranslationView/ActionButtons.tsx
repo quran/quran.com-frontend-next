@@ -5,9 +5,9 @@ import TranslationsButton from '../ReadingView/TranslationsButton';
 import ActionItem from './ActionItem';
 import styles from './TranslationViewCell.module.scss';
 
+import TranslationViewNoteAction from '@/components/Notes/modal/TranslationViewNoteAction';
 import CopyButton from '@/components/QuranReader/ReadingView/CopyButton';
 import BookmarkAction from '@/components/Verse/BookmarkAction';
-import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import ShareButton from '@/components/Verse/ShareButton';
@@ -81,12 +81,9 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               onClick={openShareModal}
             />
           </ActionItem>
+
           <ActionItem>
-            <VerseNotes
-              verseKey={verse.verseKey}
-              isTranslationView={isTranslationView}
-              hasNotes={hasNotes}
-            />
+            <TranslationViewNoteAction verseKey={verse.verseKey} hasNotes={hasNotes} />
           </ActionItem>
 
           <ActionItem>

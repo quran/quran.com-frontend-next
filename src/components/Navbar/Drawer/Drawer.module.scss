@@ -15,34 +15,100 @@
   overflow-y: auto !important;
   overflow-x: hidden;
   overscroll-behavior-y: contain !important;
+
   @include breakpoints.tablet {
     inline-size: constants.$side-menu-desktop-width;
   }
+
   &.left {
     inset-inline-start: -100%;
+
     @include breakpoints.tablet {
       inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-start: 0 !important;
+      }
+    }
   }
+
   &.right {
     inset-inline-end: -100%;
+
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-end: 0 !important;
+      }
+    }
   }
+
   &.noTransition {
     transition: none;
+  }
+
+  &.settingsDrawer {
+    @include breakpoints.smallerThanTablet {
+      inset-block-start: var(--navbar-height);
+      inset-block-end: auto;
+      block-size: calc(100vh - var(--navbar-height));
+      border-start-start-radius: var(--border-radius-rounded);
+      border-start-end-radius: var(--border-radius-rounded);
+      transform: translateY(100%);
+      transition: transform var(--transition-regular), inset-block-start var(--transition-regular), block-size var(--transition-regular);
+    }
+  }
+
+  // When navbar is hidden on scroll, remove top gap and top rounded corners
+  &.navbarInvisible {
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-block-start: calc(3 * var(--spacing-max));
+        block-size: 100vh;
+        border-start-start-radius: var(--border-radius-rounded);
+        border-start-end-radius: var(--border-radius-rounded);
+        padding-block-start: var(--spacing-xxsmall-px);
+      }
+    }
   }
 }
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
+
+  &.settingsDrawer {
+    box-shadow: none;
+  }
+
   transition-timing-function: ease-out;
+
   &.left {
     inset-inline-start: 0;
+
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        transform: translateY(0);
+      }
+    }
   }
+
   &.right {
     inset-inline-end: 0;
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-end: 0 !important;
+        transform: translateY(0);
+      }
+    }
   }
 }
 
@@ -50,9 +116,11 @@
   display: flex;
   flex-direction: column;
   min-block-size: calc(100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega))));
+
   @include breakpoints.tablet {
     min-block-size: calc(100% - calc(var(--navbar-container-height) + var(--spacing-small)));
   }
+
   justify-content: space-between;
 }
 
@@ -62,9 +130,26 @@
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+
+  .settingsDrawer & {
+    @include breakpoints.smallerThanTablet {
+      margin-block-start: 0;
+    }
+  }
+}
+
+.noBodySpacing {
+  margin-block-start: 0;
+  padding-block-start: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .bodyWithBottomPadding {
+  .settingsDrawer & {
+    padding-block-end: 0;
+  }
+
   padding-block-end: calc(4 * var(--spacing-large));
 }
 
@@ -84,10 +169,27 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   @include breakpoints.tablet {
     inline-size: constants.$side-menu-desktop-width;
   }
+
   z-index: var(--z-index-header);
+
+  // Settings drawer header positioning on mobile
+  .settingsDrawer & {
+    @include breakpoints.smallerThanTablet {
+      position: sticky;
+      inset-block-start: 0;
+      background-color: var(--color-background-elevated);
+    }
+  }
+
+  .translationView & {
+    @include breakpoints.smallerThanTablet {
+      padding-block: var(--spacing-small-px);
+    }
+  }
 }
 
 .headerContentContainer {
@@ -118,4 +220,8 @@
 
 .navbarInvisible {
   padding-block-start: var(--navbar-container-height);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: 0;
+  }
 }

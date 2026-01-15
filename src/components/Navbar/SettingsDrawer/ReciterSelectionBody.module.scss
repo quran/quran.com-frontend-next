@@ -7,6 +7,7 @@
 
 .reciterLabel {
   padding-inline-start: var(--spacing-small);
+ text-wrap: balance;
 }
 
 $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
@@ -28,6 +29,7 @@ $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
   width: 100%;
 }
 
-.input {
+.searchInputContainer .input {
   width: 95%;
+  block-size: var(--spacing-xlarge-px);
 }

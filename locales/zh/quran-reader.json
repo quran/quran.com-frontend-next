@@ -2,12 +2,14 @@
   "add-bookmark": "添加书签",
   "add-collection": "添加收藏",
   "advanced-copy": "高级复制",
+  "arabic": "阿拉伯",
   "aria": {
     "read-ayah-refls": "阅读相关参悟",
     "read-tafsirs": "阅读 Ayah Tafsirs"
   },
   "ayatul-kursi": "阿叶提库尔西",
   "back-to-ayah": "回到阿亚",
+  "below-word": "下方文字：",
   "bismillah": "奉至仁至慈的真主之名",
   "change-translation": "更改翻译",
   "copy-arabic": "阿拉伯文（纳斯赫体）",
@@ -17,6 +19,7 @@
   "copy-verse": "复制文本",
   "cpy-link": "复制链接",
   "current-verse": "当前节文",
+  "done": "完毕",
   "download-copy": "如果你想下载文本文件。",
   "edgham": "伊德加姆",
   "ekhfa": "伊克法和古纳",
@@ -40,6 +43,7 @@
   },
   "font": "要复制的阿拉伯字体",
   "font-placeholder": "选择字体",
+  "font-style": "字体样式",
   "font-tooltip": "King Fahad V1 和 V2 字体将采用 unicode。",
   "footnote": "脚注",
   "footnote-dl": "<b> Dual </b> <br/>阿拉伯语中动词和代词的一种形式，用于称呼两个人",
@@ -73,6 +77,8 @@
   "next-page": "下一页",
   "next-rub": "下一个 Rub el Hizb",
   "next-surah": "下一章",
+  "on-click": "点击：",
+  "on-hover": "悬停时：",
   "page-bookmark-removed": "页面书签已删除",
   "page-bookmarked": "页面已添加书签",
   "posted-in": "张贴在",
@@ -98,6 +104,7 @@
   "query-param-message": "您正在查看预先选择的阅读设置。 <0>关闭</0>以查看当前设置或<1>保存</1>以更新您的设置",
   "ramadan-of-reflection": "加入 QuranReflect “反思的斋月”",
   "read-more-quran-reflect": "阅读更多关于古兰经的参悟",
+  "reciter-summary": "（经 Tafsir Center 友情许可）",
   "referencing": "参考",
   "reflection-disclaimer": "这些参悟不代表 Quran.com 的观点，不应断章取义",
   "reflection-not-available": "没有评论过这个啊啊啊",
@@ -131,6 +138,8 @@
     "title": "翻译反馈",
     "translation": "翻译"
   },
+  "verse-preview-title": "预览：",
   "verses-range": "节文范围",
-  "view-on-quran-reflect": "查看 QuranReflect"
+  "view-on-quran-reflect": "查看 QuranReflect",
+  "wbw-helper-text": "选择选项以显示每个单词的翻译、音译和/或朗诵。"
 }

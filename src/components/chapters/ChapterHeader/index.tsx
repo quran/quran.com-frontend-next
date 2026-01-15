@@ -16,7 +16,7 @@ import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
@@ -54,6 +54,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
+    logEvent('drawer_settings_open');
     dispatch(setIsSettingsDrawerOpen(true));
     logButtonClick('chapter_header_change_translation');
   };

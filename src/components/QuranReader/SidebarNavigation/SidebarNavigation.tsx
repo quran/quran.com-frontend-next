@@ -18,7 +18,7 @@ import KeyboardInput from '@/dls/KeyboardInput';
 import Switch from '@/dls/Switch/Switch';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import IconClose from '@/icons/close.svg';
-import { selectNavbar } from '@/redux/slices/navbar';
+import { selectIsNavigationDrawerOpen, selectNavbar } from '@/redux/slices/navbar';
 import {
   NavigationItem,
   selectIsSidebarNavigationVisible,
@@ -37,6 +37,7 @@ const SidebarNavigation = () => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
+  const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
 
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
@@ -94,6 +95,9 @@ const SidebarNavigation = () => {
       ref={sidebarRef}
       data-is-homepage={isHomePage}
       className={classNames(styles.container, {
+        [styles.dimmed]: isNavigationDrawerOpen,
+        [styles.drawerShown]: isNavigationDrawerOpen,
+        [styles.drawerHide]: !isNavigationDrawerOpen,
         [styles.visibleContainer]: showSidebar && isNavbarVisible,
         [styles.visibleContainerCollapsed]: showSidebar && !isNavbarVisible,
         [styles.containerAuto]: isSidebarAuto && isNavbarVisible,

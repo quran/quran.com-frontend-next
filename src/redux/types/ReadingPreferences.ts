@@ -9,6 +9,8 @@ type ReadingPreferences = {
   readingPreference: ReadingPreference;
   selectedWordByWordLocale: string;
   wordByWordContentType: WordByWordType[];
+  wordByWordTooltipContentType: WordByWordType[];
+  wordByWordInlineContentType: WordByWordType[];
   wordByWordDisplay: WordByWordDisplay[];
   wordClickFunctionality: WordClickFunctionality;
   isUsingDefaultWordByWordLocale: boolean;

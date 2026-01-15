@@ -284,6 +284,16 @@ export default {
     ...state,
     readingPreferences: {
       ...state.readingPreferences,
+      // Map old wordByWordContentType to tooltip (most common case for old users)
+      wordByWordTooltipContentType: state.readingPreferences.wordByWordContentType || [],
+      // Start with empty inline content
+      wordByWordInlineContentType: [],
+    },
+  }),
+  38: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
       lastUsedReadingMode: initialState.readingPreferences.lastUsedReadingMode,
     },
   }),
