@@ -9,6 +9,7 @@ import useSyncChapterPage from './hooks/useSyncChapterPage';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
+import ReaderTopActions from './ReaderTopActions';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
@@ -57,6 +58,7 @@ const QuranReader = ({
           })}
         >
           <VerseTrackerContextProvider>
+            <ReaderTopActions initialData={initialData} quranReaderDataType={quranReaderDataType} />
             <QuranReaderView
               isReadingPreference={isReadingPreference}
               readingPreference={readingPreference}
