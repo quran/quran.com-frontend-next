@@ -16,22 +16,9 @@
   flex-direction: column;
   gap: var(--spacing-medium-plus-px);
   position: relative;
-
-  // Constrain tooltips to be flexible and stay at top
-  :global {
-    // Style the success tooltip (used in preview) to stay contained and at top
-    [role="tooltip"][data-side="top"].success {
-      max-width: min(400px, calc(100vw - var(--spacing-large-px) * 2));
-      word-wrap: break-word;
-      white-space: normal;
-      overflow-wrap: break-word;
-      text-align: start;
-    }
-  }
 }
 
 .translationText {
-  font-size: calc(var(--font-size)* 0.847);
   line-height: 150%;
   color: var(--color-text-default);
 }

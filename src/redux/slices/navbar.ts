@@ -11,15 +11,22 @@ export enum SettingsView {
   RepeatSettings = 'repeatSettings',
 }
 
+export enum SettingsTab {
+  Arabic = 'arabic',
+  Translation = 'translation',
+  More = 'more',
+}
+
 export type Navbar = {
   isVisible: boolean;
   isNavigationDrawerOpen: boolean;
   isSearchDrawerOpen: boolean;
   isSettingsDrawerOpen: boolean;
   settingsView: SettingsView;
-  lastSettingsView: SettingsView; // Track the last non-Body settings view for navigation context
+  lastSettingsView: SettingsView;
+  lastSettingsTab: SettingsTab;
   disableSearchDrawerTransition: boolean;
-  lockVisibilityState: boolean; // Flag to temporarily lock visibility state during tab switching
+  lockVisibilityState: boolean;
 };
 
 const initialState: Navbar = {
@@ -29,6 +36,7 @@ const initialState: Navbar = {
   isSettingsDrawerOpen: false,
   settingsView: SettingsView.Body,
   lastSettingsView: SettingsView.Body,
+  lastSettingsTab: SettingsTab.Arabic,
   disableSearchDrawerTransition: false,
   lockVisibilityState: false,
 };
@@ -78,6 +86,10 @@ export const navbarSlice = createSlice({
       ...state,
       disableSearchDrawerTransition: action.payload,
     }),
+    setLastSettingsTab: (state: Navbar, action: PayloadAction<SettingsTab>) => ({
+      ...state,
+      lastSettingsTab: action.payload,
+    }),
   },
 });
 
@@ -90,6 +102,7 @@ export const {
   setSettingsView,
   toggleSearchDrawerIsOpen,
   setDisableSearchDrawerTransition,
+  setLastSettingsTab,
 } = navbarSlice.actions;
 
 export const selectNavbar = (state: RootState) => state.navbar;

@@ -2,8 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-borders-hairline);
-  padding-block-end: var(--spacing-medium2-px);
 }
 
 .titleContainer {
@@ -56,4 +54,14 @@
 
 .select {
   background-color: var(--color-background-alternative-faint);
+}
+
+.footerOpacityUnset {
+  opacity: unset;
+}
+
+.footerWithBorder {
+  opacity: unset;
+  border-bottom: 1px solid var(--color-borders-hairline);
+  padding-block-end: var(--spacing-medium2-px);
 }

@@ -1,36 +1,39 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DoneButton from './DoneButton';
 import ResetButton from './ResetButton';
 import styles from './SettingsBody.module.scss';
-import SettingTabs, { SettingTab } from './SettingTabs';
+import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import { selectNavbar, SettingsView } from '@/redux/slices/navbar';
+import { selectNavbar, setLastSettingsTab, SettingsTab, SettingsView } from '@/redux/slices/navbar';
 
 const SettingsBody = () => {
+  const dispatch = useDispatch();
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
-  const { lastSettingsView } = useSelector(selectNavbar);
+  const { lastSettingsView, lastSettingsTab } = useSelector(selectNavbar);
 
-  // Map the last settings view to the corresponding tab
-  const getTabFromSettingsView = (view: SettingsView): SettingTab => {
+  const getTabFromSettingsView = (view: SettingsView): SettingsTab => {
     switch (view) {
       case SettingsView.Translation:
-        return SettingTab.Translation;
+        return SettingsTab.Translation;
       case SettingsView.Tafsir:
-        return SettingTab.More;
+        return SettingsTab.More;
       case SettingsView.Reciter:
       case SettingsView.Body:
       default:
-        return SettingTab.Arabic;
+        return SettingsTab.Arabic;
     }
   };
 
-  // Initialize with the tab corresponding to the last visited view
-  const initialTab = useMemo(() => getTabFromSettingsView(lastSettingsView), [lastSettingsView]);
-  const [activeTab, setActiveTab] = useState<SettingTab>(initialTab);
+  const handleTabChange = useCallback(
+    (tab: SettingsTab) => {
+      dispatch(setLastSettingsTab(tab));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     let timeout: NodeJS.Timeout = null;
@@ -44,15 +47,17 @@ const SettingsBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStepIndex, isActive]);
 
-  // Update active tab when returning from a sub-view
+  // Update active tab when returning from a sub-view (e.g., Translation or Tafsir detail view)
   useEffect(() => {
-    const targetTab = getTabFromSettingsView(lastSettingsView);
-    setActiveTab(targetTab);
-  }, [lastSettingsView]);
+    if (lastSettingsView !== SettingsView.Body) {
+      const targetTab = getTabFromSettingsView(lastSettingsView);
+      handleTabChange(targetTab);
+    }
+  }, [lastSettingsView, handleTabChange]);
 
   return (
     <div className={styles.container}>
-      <SettingTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <SettingTabs activeTab={lastSettingsTab} onTabChange={handleTabChange} />
       <div className={styles.buttonsContainer}>
         <ResetButton />
         <DoneButton />

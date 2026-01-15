@@ -139,5 +139,7 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "on-hover":"On Hover:",
+  "reciter-summary": "Recitation source: With kind permission of Tafsir Center"
 }
