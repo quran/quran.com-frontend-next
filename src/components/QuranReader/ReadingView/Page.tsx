@@ -29,6 +29,8 @@ type PageProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   bookmarksRangeUrl: string | null;
+  lang: string;
+  onAyahClick?: (verseKey: string) => void;
 };
 
 const Page = ({
@@ -37,6 +39,8 @@ const Page = ({
   quranReaderStyles,
   pageIndex,
   bookmarksRangeUrl,
+  lang,
+  onAyahClick,
 }: PageProps) => {
   const readingPreference = useSelector(selectReadingPreference);
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
@@ -83,7 +87,12 @@ const Page = ({
     return (
       <div id={`page-${pageNumber}`} className={styles.translationPageContainer}>
         {chapterHeader}
-        <TranslationPage verses={verses} pageNumber={pageNumber} />
+        <TranslationPage
+          verses={verses}
+          pageNumber={pageNumber}
+          lang={lang}
+          onAyahClick={onAyahClick}
+        />
       </div>
     );
   }

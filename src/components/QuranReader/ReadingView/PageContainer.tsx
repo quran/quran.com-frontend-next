@@ -33,6 +33,7 @@ type Props = {
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
   readingPreference: ReadingPreference;
+  onAyahClick?: (verseKey: string) => void;
 };
 
 const getPageVersesRange = (
@@ -81,6 +82,7 @@ const PageContainer: React.FC<Props> = ({
   setMushafPageToVersesMap,
   initialData,
   readingPreference,
+  onAyahClick,
 }: Props): JSX.Element => {
   /**
    * HYDRATION RACE CONDITION FIX:
@@ -181,13 +183,7 @@ const PageContainer: React.FC<Props> = ({
   // Only show skeleton when we truly have no data.
   // Keep showing existing content while revalidating to prevent header flickering during mode switches.
   if (!effectiveVerses) {
-    // Show chapter header skeleton for the first page (likely start of a chapter)
-    return (
-      <ReadingViewSkeleton
-        shouldShowChapterHeaderSkeleton={pageIndex === 0}
-        readingPreference={readingPreference}
-      />
-    );
+    return <ReadingViewSkeleton readingPreference={readingPreference} />;
   }
 
   return (
@@ -198,6 +194,8 @@ const PageContainer: React.FC<Props> = ({
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
       bookmarksRangeUrl={bookmarksRangeUrl}
+      lang={lang}
+      onAyahClick={onAyahClick}
     />
   );
 };

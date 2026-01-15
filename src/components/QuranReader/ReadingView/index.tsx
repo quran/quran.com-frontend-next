@@ -22,6 +22,7 @@ import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeA
 import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/components/EmptyTranslationMessage';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
 import Spinner from '@/dls/Spinner/Spinner';
 import useDirection from '@/hooks/useDirection';
@@ -175,6 +176,12 @@ const ReadingView = ({
     [scrollToNextPage],
   );
 
+  // Handler for ayah clicks in Reading Translation mode
+  // TODO: This will open Study Mode popup when implemented (separate story)
+  const handleAyahClick = useCallback((verseKey: string) => {
+    logButtonClick('reading_translation_ayah_click', { verseKey });
+  }, []);
+
   useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
   useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
@@ -204,6 +211,7 @@ const ReadingView = ({
         setMushafPageToVersesMap={setMushafPageToVersesMap}
         initialData={initialData}
         readingPreference={readingPreference}
+        onAyahClick={handleAyahClick}
       />
     );
   };
@@ -217,9 +225,11 @@ const ReadingView = ({
 
   // When in empty state, show only the top controls bar and empty message (no mushaf content)
   if (showEmptyState) {
+    const chapterId = initialData?.verses?.[0]?.chapterId;
     return (
       <div className={styles.emptyStateContainer}>
         <div dir={direction} className={styles.emptyStateControls}>
+          {chapterId && <PlayChapterAudioButton chapterId={Number(chapterId)} />}
           <ReadingModeActions />
         </div>
         <EmptyTranslationMessage />
