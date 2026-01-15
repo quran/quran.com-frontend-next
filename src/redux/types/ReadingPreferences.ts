@@ -13,6 +13,7 @@ type ReadingPreferences = {
   wordClickFunctionality: WordClickFunctionality;
   isUsingDefaultWordByWordLocale: boolean;
   selectedReadingTranslation: string | null;
+  lastUsedReadingMode: ReadingPreference.Reading | ReadingPreference.ReadingTranslation;
 };
 
 export default ReadingPreferences;

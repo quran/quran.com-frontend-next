@@ -280,4 +280,11 @@ export default {
       bookmarkedPages: state.bookmarks?.bookmarkedPages || {},
     },
   }),
+  37: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      lastUsedReadingMode: initialState.readingPreferences.lastUsedReadingMode,
+    },
+  }),
 };

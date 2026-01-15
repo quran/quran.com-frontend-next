@@ -18,10 +18,20 @@ export const readingPreferencesSlice = createSlice({
   name: SliceName.READING_PREFERENCES,
   initialState: getReadingPreferencesInitialState(),
   reducers: {
-    setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => ({
-      ...state,
-      readingPreference: action.payload,
-    }),
+    setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => {
+      const newState = {
+        ...state,
+        readingPreference: action.payload,
+      };
+      // Update lastUsedReadingMode when switching to a reading mode
+      if (
+        action.payload === ReadingPreference.Reading ||
+        action.payload === ReadingPreference.ReadingTranslation
+      ) {
+        newState.lastUsedReadingMode = action.payload;
+      }
+      return newState;
+    },
     setSelectedWordByWordLocale: (
       state,
       action: PayloadAction<{ value: string; locale: string }>,
@@ -166,5 +176,7 @@ export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
   state.readingPreferences.isUsingDefaultWordByWordLocale;
 export const selectSelectedReadingTranslation = (state: RootState) =>
   state.readingPreferences.selectedReadingTranslation;
+export const selectLastUsedReadingMode = (state: RootState) =>
+  state.readingPreferences.lastUsedReadingMode;
 
 export default readingPreferencesSlice.reducer;
