@@ -4,6 +4,7 @@
 import { Action } from '@reduxjs/toolkit';
 import uniqBy from 'lodash/uniqBy';
 import { useRouter } from 'next/router';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
@@ -15,8 +16,10 @@ import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useIsMobile from '@/hooks/useIsMobile';
 import {
   selectReadingPreferences,
   setSelectedWordByWordLocale,
@@ -50,7 +53,7 @@ const WordByWordSection = () => {
   } = usePersistPreferenceGroup();
   const router = useRouter();
   const dispatch = useDispatch();
-
+  const isMobile = useIsMobile();
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const {
     selectedWordByWordLocale: wordByWordLocale,
@@ -166,17 +169,15 @@ const WordByWordSection = () => {
       nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
     }
 
-    // Dispatch local-only action (not persisted to backend)
-    dispatch(setWordByWordInlineContentType(nextWordByWordInlineContentType));
+    onWordByWordSettingsChange(
+      'wordByWordInlineContentType',
+      nextWordByWordInlineContentType,
+      setWordByWordInlineContentType(nextWordByWordInlineContentType),
+      setWordByWordInlineContentType(wordByWordInlineContentType),
+    );
 
-    // Update display if needed
     if (nextWordByWordDisplay !== wordByWordDisplay) {
-      onWordByWordSettingsChange(
-        'wordByWordDisplay',
-        nextWordByWordDisplay,
-        setWordByWordDisplay(nextWordByWordDisplay),
-        setWordByWordDisplay(wordByWordDisplay),
-      );
+      dispatch(setWordByWordDisplay(nextWordByWordDisplay));
     }
   };
 
@@ -204,26 +205,32 @@ const WordByWordSection = () => {
       nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
     }
 
-    // Dispatch local-only action (not persisted to backend)
-    dispatch(setWordByWordInlineContentType(nextWordByWordInlineContentType));
+    onWordByWordSettingsChange(
+      'wordByWordInlineContentType',
+      nextWordByWordInlineContentType,
+      setWordByWordInlineContentType(nextWordByWordInlineContentType),
+      setWordByWordInlineContentType(wordByWordInlineContentType),
+    );
 
-    // Update display if needed
     if (nextWordByWordDisplay !== wordByWordDisplay) {
-      onWordByWordSettingsChange(
-        'wordByWordDisplay',
-        nextWordByWordDisplay,
-        setWordByWordDisplay(nextWordByWordDisplay),
-        setWordByWordDisplay(wordByWordDisplay),
-      );
+      dispatch(setWordByWordDisplay(nextWordByWordDisplay));
     }
+  };
+
+  const getUpdatedTooltipDisplay = (isChecked: boolean, nextContentType: WordByWordType[]) => {
+    if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)) {
+      return [...wordByWordDisplay, WordByWordDisplay.TOOLTIP];
+    }
+    if (!isChecked && nextContentType.length === 0) {
+      return removeItemFromArray(WordByWordDisplay.TOOLTIP, wordByWordDisplay);
+    }
+    return wordByWordDisplay;
   };
 
   const onContentTypeChange = (isTranslationCheckbox: boolean, isChecked: boolean) => {
     const type = isTranslationCheckbox
       ? WordByWordType.Translation
       : WordByWordType.Transliteration;
-
-    // Update tooltip content type
     const nextWordByWordTooltipContentType = isChecked
       ? [...wordByWordTooltipContentType, type]
       : removeItemFromArray(type, wordByWordTooltipContentType);
@@ -234,32 +241,20 @@ const WordByWordSection = () => {
       nextWordByWordTooltipContentType,
     );
 
-    // Auto-enable Tooltip display when any content is checked
-    let nextWordByWordDisplay = wordByWordDisplay;
-    if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)) {
-      nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.TOOLTIP];
-    }
-
-    // Save as wordByWordContentType for backend compatibility (backend only knows this field)
-    // This will persist to backend for logged-in users
-    onWordByWordSettingsChange(
-      'wordByWordContentType',
+    const nextWordByWordDisplay = getUpdatedTooltipDisplay(
+      isChecked,
       nextWordByWordTooltipContentType,
-      setWordByWordContentType(nextWordByWordTooltipContentType),
-      setWordByWordContentType(wordByWordTooltipContentType),
     );
+    onWordByWordSettingsChange(
+      'wordByWordTooltipContentType',
+      nextWordByWordTooltipContentType,
+      setWordByWordTooltipContentType(nextWordByWordTooltipContentType),
+      setWordByWordTooltipContentType(wordByWordTooltipContentType),
+    );
+    dispatch(setWordByWordContentType(nextWordByWordTooltipContentType));
 
-    // Also update the tooltip-specific field locally
-    dispatch(setWordByWordTooltipContentType(nextWordByWordTooltipContentType));
-
-    // Update display if tooltip was auto-enabled
     if (nextWordByWordDisplay !== wordByWordDisplay) {
-      onWordByWordSettingsChange(
-        'wordByWordDisplay',
-        nextWordByWordDisplay,
-        setWordByWordDisplay(nextWordByWordDisplay),
-        setWordByWordDisplay(wordByWordDisplay),
-      );
+      dispatch(setWordByWordDisplay(nextWordByWordDisplay));
     }
   };
 
@@ -278,6 +273,7 @@ const WordByWordSection = () => {
             {t('quran-reader:wbw-helper-text')}
           </HelperTooltip>
         </div>
+
         <DataFetcher
           queryKey={makeWordByWordTranslationsUrl(lang)}
           render={(data: WordByWordTranslationsResponse) => {
@@ -303,9 +299,23 @@ const WordByWordSection = () => {
           }}
         />
       </div>
+      <Section.Footer className={styles.footerOpacityUnset}>
+        <Trans
+          components={{
+            link: <Link isNewTab href="https://quranwbw.com/" variant={LinkVariant.Blend} />,
+          }}
+          i18nKey="common:wbw-lang-summary"
+          values={{ source: 'quranwbw' }}
+        />
+      </Section.Footer>
+      <Section.Footer className={styles.footerWithBorder}>
+        <Trans components={{ span: <span /> }} i18nKey="quran-reader:reciter-summary" />
+      </Section.Footer>
       <Section.Row>
         <div>
-          <p className={styles.sectionLabel}>{t('quran-reader:on-click')}</p>
+          <p className={styles.sectionLabel}>
+            {isMobile ? t('quran-reader:on-click') : t('quran-reader:on-hover')}
+          </p>
           <div className={styles.checkboxContainer}>
             <div id="wbw-translation-section">
               <CheckboxChip

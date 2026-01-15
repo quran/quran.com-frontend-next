@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -19,6 +19,7 @@ import { selectTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont, WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
+import { logEvent } from '@/utils/eventLogger';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
 import Word from 'types/Word';
@@ -36,6 +37,15 @@ const VersePreview = () => {
   const dispatch = useDispatch();
   const [showContent, setShowContent] = useState(false);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
+  const hasLoggedInteraction = useRef(false);
+
+  // Log verse preview interaction only once per drawer session
+  const handleInteraction = useCallback(() => {
+    if (!hasLoggedInteraction.current) {
+      logEvent('verse_preview_interaction');
+      hasLoggedInteraction.current = true;
+    }
+  }, []);
 
   // Check if both translation and transliteration are enabled
   const hasBothTooltipTypes =
@@ -95,7 +105,13 @@ const VersePreview = () => {
       >
         {t('verse-preview-title')}
       </div>
-      <div dir="rtl" className={styles.container}>
+      <div
+        dir="rtl"
+        className={styles.container}
+        onClick={handleInteraction}
+        onKeyDown={handleInteraction}
+        role="presentation"
+      >
         {showContent ? (
           <>
             <VerseText

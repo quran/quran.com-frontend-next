@@ -1,10 +1,11 @@
 .footer {
-  padding-block-start: var(--spacing-medium);
+  padding-block-start: var(--spacing-small-px);
   font-style: italic;
   opacity: var(--opacity-75);
-  font-size: var(--font-size-small);
-  margin-block-end: var(--spacing-micro);
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-default);
 }
+
 .invisible {
   display: none;
 }

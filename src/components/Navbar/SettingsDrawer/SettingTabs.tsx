@@ -9,31 +9,27 @@ import TranslationSection from './TranslationSection';
 import VersePreview from './VersePreview';
 import WordByWordSection from './WordByWordSection';
 
-export enum SettingTab {
-  Arabic = 'arabic',
-  Translation = 'translation',
-  More = 'more',
-}
+import { SettingsTab } from '@/redux/slices/navbar';
 
 type SettingTabsProps = {
-  activeTab?: SettingTab;
-  onTabChange?: (tab: SettingTab) => void;
+  activeTab?: SettingsTab;
+  onTabChange?: (tab: SettingsTab, shouldLog?: boolean) => void;
 };
 
-const SettingTabs = ({ activeTab = SettingTab.Arabic, onTabChange }: SettingTabsProps) => {
+const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTabsProps) => {
   const { t } = useTranslation('common');
 
   const tabs = [
-    { id: SettingTab.Arabic, label: t('quran-reader:arabic') },
-    { id: SettingTab.Translation, label: t('translation') },
-    { id: SettingTab.More, label: t('more') },
+    { id: SettingsTab.Arabic, label: t('quran-reader:arabic') },
+    { id: SettingsTab.Translation, label: t('translation') },
+    { id: SettingsTab.More, label: t('more') },
   ];
 
   return (
     <Tabs.Root
       className={styles.root}
       value={activeTab}
-      onValueChange={(value) => onTabChange?.(value as SettingTab)}
+      onValueChange={(value) => onTabChange?.(value as SettingsTab)}
     >
       <Tabs.List className={styles.list} aria-label="Settings tabs">
         {tabs.map((tab) => (
@@ -47,9 +43,9 @@ const SettingTabs = ({ activeTab = SettingTab.Arabic, onTabChange }: SettingTabs
       </div>
       {tabs.map((tab) => (
         <Tabs.Content className={styles.content} key={tab.id} value={tab.id}>
-          {tab.id === SettingTab.Arabic && <QuranFontSection />}
-          {tab.id === SettingTab.Translation && <TranslationSection />}
-          {tab.id === SettingTab.More && <WordByWordSection />}
+          {tab.id === SettingsTab.Arabic && <QuranFontSection />}
+          {tab.id === SettingsTab.Translation && <TranslationSection />}
+          {tab.id === SettingsTab.More && <WordByWordSection />}
         </Tabs.Content>
       ))}
     </Tabs.Root>

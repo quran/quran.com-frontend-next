@@ -47,24 +47,19 @@ const getPreferenceGroupValue = (
   }
 
   if (sliceName === SliceName.READING_PREFERENCES) {
-    const newPreferences = {
-      ...currentSliceValue,
-    } as ReadingPreferences;
-    delete newPreferences.isUsingDefaultWordByWordLocale;
+    const prefs = currentSliceValue as ReadingPreferences;
 
-    // Map tooltip content type to wordByWordContentType for backend compatibility
-    // Backend only knows about wordByWordContentType, not the tooltip/inline variants
-    const backendPreferences = {
-      ...newPreferences,
-      wordByWordContentType:
-        newPreferences.wordByWordTooltipContentType || newPreferences.wordByWordContentType,
+    return {
+      readingPreference: prefs.readingPreference,
+      selectedWordByWordLocale: prefs.selectedWordByWordLocale,
+      wordClickFunctionality: prefs.wordClickFunctionality,
+      // New fields - sync to backend
+      wordByWordTooltipContentType: prefs.wordByWordTooltipContentType,
+      wordByWordInlineContentType: prefs.wordByWordInlineContentType,
+      // Deprecated - keep for backward compatibility during transition
+      wordByWordContentType: prefs.wordByWordTooltipContentType,
+      // wordByWordDisplay is now auto-computed, don't send
     };
-
-    // Remove local-only fields that backend doesn't recognize
-    delete backendPreferences.wordByWordTooltipContentType;
-    delete backendPreferences.wordByWordInlineContentType;
-
-    return backendPreferences;
   }
 
   if (sliceName === SliceName.TRANSLATIONS) {
