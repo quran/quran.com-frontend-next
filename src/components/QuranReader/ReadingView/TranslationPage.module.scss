@@ -6,8 +6,8 @@ $translation-content-max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-mega);
-  padding: var(--spacing-mega) var(--spacing-medium);
+  gap: var(--spacing-large-px);
+  padding: var(--spacing-large-px) var(--spacing-medium-plus-px);
   inline-size: 100%;
   box-sizing: border-box;
 }
@@ -23,7 +23,7 @@ $translation-content-max-width: 600px;
   color: var(--color-text-default);
 
   @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-small);
+    padding-inline: var(--spacing-small2-px);
   }
 }
 
@@ -31,7 +31,7 @@ $translation-content-max-width: 600px;
   display: flex;
   justify-content: center;
   inline-size: 100%;
-  padding-block-start: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium-plus-px);
 }
 
 .pageNumber {

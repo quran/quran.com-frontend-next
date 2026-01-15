@@ -8,12 +8,12 @@ $dropdown-width: 315px;
   flex-direction: column;
   gap: var(--spacing-small-px);
   inline-size: $dropdown-width;
-  max-inline-size: calc(100vw - var(--spacing-medium) * 2);
+  max-inline-size: calc(100vw - var(--spacing-medium-plus-px) * 2);
   padding: var(--spacing-small-px);
   box-sizing: border-box;
 
   @include breakpoints.smallerThanTablet {
-    inline-size: calc(100vw - var(--spacing-large) * 2);
+    inline-size: calc(100vw - var(--spacing-medium2-px) * 2);
   }
 }
 

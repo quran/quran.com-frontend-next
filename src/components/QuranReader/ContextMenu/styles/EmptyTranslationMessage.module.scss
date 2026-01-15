@@ -5,9 +5,9 @@ $message-max-width: 396px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-mega);
+  padding: var(--spacing-large-px);
   text-align: center;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-medium-plus-px);
 }
 
 .message {

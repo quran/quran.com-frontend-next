@@ -30,8 +30,8 @@ $selected-border-width: 2px;
   justify-content: center;
   text-align: center;
   font-size: var(--font-size-small);
-  padding-inline: var(--spacing-medium);
-  padding-block: var(--spacing-medium) var(--spacing-large);
+  padding-inline: var(--spacing-medium-plus-px);
+  padding-block: var(--spacing-medium-plus-px) var(--spacing-medium2-px);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
   inline-size: 50%;
@@ -40,7 +40,7 @@ $selected-border-width: 2px;
   transition: color var(--transition-regular), border-color var(--transition-regular);
 
   span {
-    margin-inline-start: var(--spacing-xsmall);
+    margin-inline-start: var(--spacing-small-px);
   }
 }
 

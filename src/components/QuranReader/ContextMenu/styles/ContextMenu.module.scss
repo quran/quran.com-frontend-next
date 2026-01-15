@@ -154,7 +154,7 @@ $pixel: 1px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  column-gap: var(--spacing-xsmall);
+  column-gap: var(--spacing-small-px);
   color: var(--color-text-faded-new);
   background: var(--color-background-elevated);
   z-index: var(--z-index-default);
@@ -206,7 +206,7 @@ $pixel: 1px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-inline-start: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall-px);
   box-sizing: border-box;
 }
 

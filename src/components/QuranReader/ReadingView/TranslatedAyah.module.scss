@@ -50,12 +50,12 @@
 .footnoteContainer {
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-small);
-  margin-block: var(--spacing-xxsmall);
+  padding: var(--spacing-small2-px);
+  margin-block: var(--spacing-xxsmall-px);
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   background-color: var(--color-background-alternative-faded);
-  min-block-size: calc(3 * var(--spacing-large));
+  min-block-size: calc(3 * var(--spacing-medium2-px));
   inline-size: 100%;
   box-sizing: border-box;
   overflow-wrap: break-word;
@@ -67,7 +67,7 @@
   justify-content: space-between;
   align-items: center;
   inline-size: 100%;
-  margin-block-end: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall-px);
 }
 
 .footnoteTitle {

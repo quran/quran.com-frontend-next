@@ -6,16 +6,16 @@ $translation-button-max-width-mobile: 150px;
 .container {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xsmall);
-  margin-inline-start: var(--spacing-xsmall);
+  gap: var(--spacing-small-px);
+  margin-inline-start: var(--spacing-small-px);
 }
 
 .modeButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xxsmall);
-  padding: var(--spacing-xxsmall) var(--spacing-small);
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
   border-radius: var(--border-radius-pill);
   font-family: var(--font-family);
   font-size: var(--font-size-small);

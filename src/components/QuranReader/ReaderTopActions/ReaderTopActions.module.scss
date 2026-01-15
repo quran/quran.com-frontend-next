@@ -25,8 +25,8 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   margin-inline: auto;
   inline-size: 100%;
   max-inline-size: 450px;
-  margin-block-start: calc(var(--spacing-mega) + var(--spacing-medium));
-  margin-block-end: var(--spacing-medium);
+  margin-block-start: calc(var(--spacing-large-px) + var(--spacing-medium-plus-px));
+  margin-block-end: var(--spacing-medium-plus-px);
 }
 
 .topControls {
@@ -41,7 +41,7 @@ $changeTranslationButtonInlineSizeMobile: 257px;
 .changeTranslationButton {
   @include customButton;
   inline-size: $changeTranslationButtonInlineSize;
-  margin-inline-start: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-small-px);
   white-space: nowrap;
 
   @include breakpoints.smallerThanTablet {
@@ -60,5 +60,5 @@ $changeTranslationButtonInlineSizeMobile: 257px;
 }
 
 .translationsCount {
-  margin-inline-start: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro2-px);
 }

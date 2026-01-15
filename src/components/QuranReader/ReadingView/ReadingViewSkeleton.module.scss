@@ -4,7 +4,7 @@
 
 .skeletonContainer {
   // the page's bottom margin + the height of the page footer
-  margin-block-end: calc(var(--spacing-mega) + var(--spacing-large));
+  margin-block-end: calc(var(--spacing-large-px) + var(--spacing-medium2-px));
   inline-size: 100%;
 }
 
@@ -13,7 +13,7 @@
   @include breakpoints.tablet {
     margin-block-start: constants.$reading-view-container-top-margin;
   }
-  margin-block-start: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-small-px);
   block-size: var(--skeleton-height);
 }
 
