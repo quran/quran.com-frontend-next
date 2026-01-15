@@ -4,6 +4,7 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 
 import ReflectionsTabContent from './ReflectionsTabContent';
 
+import Introduction from '@/components/MyQuran/tabs/NotesAndReflectionsTab/ReflectionsTab/Introduction';
 import GetUserReflectionsResponse from '@/types/QuranReflect/GetUserReflectionsResponse';
 import { privateFetcher } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -41,6 +42,7 @@ const ReflectionsTab: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <Introduction />
       <ReflectionsTabContent
         reflections={reflections}
         isLoading={!data && !error}
