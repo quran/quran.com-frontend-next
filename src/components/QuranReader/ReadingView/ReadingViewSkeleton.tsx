@@ -13,14 +13,10 @@ import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getMushafLinesNumber } from '@/utils/page';
 
 type Props = {
-  shouldShowChapterHeaderSkeleton?: boolean;
   readingPreference?: ReadingPreference;
 };
 
-const ReadingViewSkeleton = ({
-  shouldShowChapterHeaderSkeleton = false,
-  readingPreference,
-}: Props) => {
+const ReadingViewSkeleton = ({ readingPreference }: Props) => {
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
@@ -35,33 +31,6 @@ const ReadingViewSkeleton = ({
 
   return (
     <div className={styles.skeletonContainer}>
-      {shouldShowChapterHeaderSkeleton && (
-        <div className={styles.chapterHeaderSkeleton}>
-          {/* Top controls */}
-          <div className={styles.headerControls}>
-            <Skeleton className={styles.playButton} />
-            <div className={styles.modeButtons}>
-              <Skeleton className={styles.modeButton} />
-              <Skeleton className={styles.translationButton} />
-            </div>
-          </div>
-
-          {/* Chapter title */}
-          <div className={styles.headerTitle}>
-            <div className={styles.titleText}>
-              <Skeleton className={styles.chapterName} />
-              <Skeleton className={styles.chapterTranslation} />
-            </div>
-            <Skeleton className={styles.chapterIcon} />
-          </div>
-
-          {/* Bismillah */}
-          <div className={styles.bismillahContainer}>
-            <Skeleton className={styles.bismillah} />
-            <Skeleton className={styles.bismillahTranslation} />
-          </div>
-        </div>
-      )}
       {range(numberOfLines).map((i) => (
         <Skeleton
           key={i}
