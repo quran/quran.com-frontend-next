@@ -9,6 +9,7 @@ $translation-content-max-width: 600px;
   gap: var(--spacing-mega);
   padding: var(--spacing-mega) var(--spacing-medium);
   inline-size: 100%;
+  box-sizing: border-box;
 }
 
 .translationContent {

@@ -1,46 +1,53 @@
-/* eslint-disable react/no-danger */
+/* eslint-disable max-lines -- Component handles ayah interactions, footnotes, and mobile/desktop rendering */
+/* eslint-disable react/no-danger -- Translation HTML from trusted backend API contains necessary formatting */
 import React, { useCallback, useState, MouseEvent } from 'react';
 
 import classNames from 'classnames';
 
 import InlineFootnote from './InlineFootnote';
 import styles from './TranslatedAyah.module.scss';
+import WordMobileModal from './WordMobileModal';
+import ReadingViewWordPopover from './WordPopover';
 
+import useIsMobile from '@/hooks/useIsMobile';
 import { logErrorToSentry } from '@/lib/sentry';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 import Language from 'types/Language';
+import Verse from 'types/Verse';
 
 type TranslatedAyahProps = {
-  verseKey: string;
-  verseNumber: number;
+  verse: Verse;
   translationHtml: string;
   languageId: number;
   lang: string;
   isLastVerse?: boolean;
-  onAyahClick?: (verseKey: string) => void;
+  bookmarksRangeUrl?: string | null;
 };
 
 /**
  * Renders a single translated ayah with hover highlight, click interactions, and footnote support.
+ * On desktop: shows a popover with verse actions on click
+ * On mobile: shows a bottom sheet modal with verse actions on click
  *
  * @returns {JSX.Element} The translated ayah component
  */
 const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
-  verseKey,
-  verseNumber,
+  verse,
   translationHtml,
   languageId,
   lang,
   isLastVerse = false,
-  onAyahClick,
+  bookmarksRangeUrl,
 }) => {
   const [footnote, setFootnote] = useState<Footnote | null>(null);
   const [activeFootnoteName, setActiveFootnoteName] = useState<string | null>(null);
   const [isLoadingFootnote, setIsLoadingFootnote] = useState(false);
+  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
 
+  const isMobile = useIsMobile();
   const langData = getLanguageDataById(languageId || findLanguageIdByLocale(lang as Language));
 
   const resetFootnote = useCallback(() => {
@@ -85,7 +92,21 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
     [footnote, resetFootnote],
   );
 
-  const handleClick = useCallback(
+  // Handle click for footnotes only - verse action popover/modal handles verse clicks
+  const handleFootnoteOnlyClick = useCallback(
+    (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName === 'SUP') {
+        event.stopPropagation();
+        event.preventDefault();
+        handleFootnoteClick(target);
+      }
+    },
+    [handleFootnoteClick],
+  );
+
+  // Handle mobile click - open the modal
+  const handleMobileClick = useCallback(
     (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (target.tagName === 'SUP') {
@@ -93,43 +114,59 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
         handleFootnoteClick(target);
         return;
       }
-      if (onAyahClick) onAyahClick(verseKey);
+      logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
+      setIsMobileModalOpen(true);
     },
-    [onAyahClick, verseKey, handleFootnoteClick],
+    [handleFootnoteClick, verse.verseKey],
   );
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent) => {
-      if ((event.key === 'Enter' || event.key === ' ') && onAyahClick) {
-        event.preventDefault();
-        onAyahClick(verseKey);
-      }
-    },
-    [onAyahClick, verseKey],
-  );
+  const handleMobileKeyDown = useCallback((event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setIsMobileModalOpen(true);
+    }
+  }, []);
 
   const showFootnote = footnote !== null || isLoadingFootnote;
 
+  const ayahContent = (
+    <span
+      className={classNames(styles.ayah, styles[langData.direction], styles.clickable, {
+        [styles.hasActiveFootnote]: showFootnote,
+      })}
+      data-verse-key={verse.verseKey}
+      onClick={isMobile ? handleMobileClick : handleFootnoteOnlyClick}
+      onKeyDown={isMobile ? handleMobileKeyDown : undefined}
+      role="button"
+      tabIndex={0}
+    >
+      <span className={styles.verseNumber}>{verse.verseNumber}.</span>
+      {/* Safe: translationHtml comes from backend API and contains footnote markup */}
+      <span
+        className={styles.translationText}
+        dangerouslySetInnerHTML={{ __html: translationHtml }}
+      />
+      {!isLastVerse && !showFootnote && ' '}
+    </span>
+  );
+
   return (
     <>
-      <span
-        className={classNames(styles.ayah, styles[langData.direction], {
-          [styles.clickable]: !!onAyahClick,
-          [styles.hasActiveFootnote]: showFootnote,
-        })}
-        data-verse-key={verseKey}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-        role="button"
-        tabIndex={0}
-      >
-        <span className={styles.verseNumber}>{verseNumber}.</span>
-        <span
-          className={styles.translationText}
-          dangerouslySetInnerHTML={{ __html: translationHtml }}
-        />
-        {!isLastVerse && !showFootnote && ' '}
-      </span>
+      {isMobile ? (
+        <>
+          {ayahContent}
+          <WordMobileModal
+            isOpen={isMobileModalOpen}
+            onClose={() => setIsMobileModalOpen(false)}
+            verse={verse}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+          />
+        </>
+      ) : (
+        <ReadingViewWordPopover verse={verse} bookmarksRangeUrl={bookmarksRangeUrl}>
+          {ayahContent}
+        </ReadingViewWordPopover>
+      )}
       {showFootnote && (
         <InlineFootnote
           footnoteName={activeFootnoteName}

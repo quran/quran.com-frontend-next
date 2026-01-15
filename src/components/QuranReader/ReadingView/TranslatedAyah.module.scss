@@ -54,6 +54,8 @@
   min-block-size: calc(3 * var(--spacing-large));
   inline-size: 100%;
   box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .footnoteHeader {

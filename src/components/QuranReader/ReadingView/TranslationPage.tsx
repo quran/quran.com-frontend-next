@@ -10,7 +10,7 @@ type TranslationPageProps = {
   verses: Verse[];
   pageNumber: number;
   lang: string;
-  onAyahClick?: (verseKey: string) => void;
+  bookmarksRangeUrl?: string | null;
 };
 
 /**
@@ -24,7 +24,7 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   verses,
   pageNumber,
   lang,
-  onAyahClick,
+  bookmarksRangeUrl,
 }) => {
   // Build continuous translation text with inline verse numbers
   const getTranslationContent = () => {
@@ -37,13 +37,12 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
       return (
         <TranslatedAyah
           key={verse.verseKey}
-          verseKey={verse.verseKey}
-          verseNumber={verse.verseNumber}
+          verse={verse}
           translationHtml={translation.text}
           languageId={translation.languageId}
           lang={lang}
           isLastVerse={index === verses.length - 1}
-          onAyahClick={onAyahClick}
+          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       );
     });
