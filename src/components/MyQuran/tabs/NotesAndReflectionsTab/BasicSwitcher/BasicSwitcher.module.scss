@@ -1,0 +1,39 @@
+@use '@/styles/constants';
+
+.basicSwitcher {
+  display: flex;
+  gap: var(--spacing-xsmall-px);
+}
+
+.tabButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  block-size: calc(var(--spacing-small-plus-px) * 4);
+  padding-inline: var(--spacing-medium-px);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-default-new);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+
+  &[data-selected='true'] {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
+}
