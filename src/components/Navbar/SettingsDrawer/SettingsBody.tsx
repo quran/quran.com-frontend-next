@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,6 +15,13 @@ const SettingsBody = () => {
   const dispatch = useDispatch();
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
   const { lastSettingsView, lastSettingsTab } = useSelector(selectNavbar);
+  // Use ref to track previous tab for logging without causing handleTabChange to change
+  const lastSettingsTabRef = useRef(lastSettingsTab);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    lastSettingsTabRef.current = lastSettingsTab;
+  }, [lastSettingsTab]);
 
   const getTabFromSettingsView = (view: SettingsView): SettingsTab => {
     switch (view) {
@@ -32,11 +39,11 @@ const SettingsBody = () => {
   const handleTabChange = useCallback(
     (tab: SettingsTab, shouldLog = true) => {
       if (shouldLog) {
-        logValueChange('settings_tab', lastSettingsTab, tab);
+        logValueChange('settings_tab', lastSettingsTabRef.current, tab);
       }
       dispatch(setLastSettingsTab(tab));
     },
-    [dispatch, lastSettingsTab],
+    [dispatch],
   );
 
   useEffect(() => {

@@ -190,12 +190,6 @@
       padding-block: var(--spacing-small-px);
     }
   }
-
-  .reciterView & {
-    @include breakpoints.smallerThanTablet {
-      padding-block: var(--spacing-small-px);
-    }
-  }
 }
 
 .headerContentContainer {
