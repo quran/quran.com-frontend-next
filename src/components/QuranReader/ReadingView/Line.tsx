@@ -33,6 +33,7 @@ export type LineProps = {
   pageIndex: number;
   lineIndex: number;
   bookmarksRangeUrl: string | null;
+  shouldHideChapterHeader?: boolean;
 };
 
 const Line = ({
@@ -42,6 +43,7 @@ const Line = ({
   pageIndex,
   lineIndex,
   bookmarksRangeUrl,
+  shouldHideChapterHeader = false,
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
@@ -110,7 +112,7 @@ const Line = ({
         [styles.mobileInline]: isBigTextLayout,
       })}
     >
-      {shouldShowChapterHeader && (
+      {shouldShowChapterHeader && !shouldHideChapterHeader && (
         <ChapterHeader
           translationName={translationName}
           translationsCount={translationsCount}
@@ -158,6 +160,7 @@ const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
   prevProps.lineKey === nextProps.lineKey &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
   prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
+  prevProps.shouldHideChapterHeader === nextProps.shouldHideChapterHeader &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,

@@ -3,13 +3,17 @@ import React, { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
-import PopoverMenu, { PopoverMenuExpandDirection } from '@/components/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, {
+  PopoverMenuAlign,
+  PopoverMenuExpandDirection,
+} from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReadingViewWordActionsMenu from '@/components/QuranReader/ReadingView/WordActionsMenu';
 import {
   setReadingViewHoveredVerseKey,
   setReadingViewSelectedVerseKey,
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { logEvent } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 import Word from 'types/Word';
 
 const ShareQuranModal = dynamic(
@@ -18,41 +22,61 @@ const ShareQuranModal = dynamic(
 );
 
 type Props = {
-  word: Word;
+  word?: Word;
+  verse?: Verse;
   children: React.ReactNode;
-  onOpenChange: (isOpen: boolean) => void;
+  onOpenChange?: (isOpen: boolean) => void;
+  isOpen?: boolean;
   bookmarksRangeUrl?: string | null;
 };
 
+/**
+ * Popover for word/verse actions in reading view.
+ * Accepts either a Word (extracts verse from it) or a Verse directly.
+ *
+ * @returns {React.ReactElement} The popover component wrapping children
+ */
 const ReadingViewWordPopover: React.FC<Props> = ({
   word,
+  verse: verseProp,
   children,
   onOpenChange,
+  isOpen: isOpenProp,
   bookmarksRangeUrl,
 }) => {
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
+  const [isMenuOpenedInternal, setIsMenuOpenedInternal] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
+  // Use controlled state if provided, otherwise use internal state
+  const isMenuOpened = isOpenProp !== undefined ? isOpenProp : isMenuOpenedInternal;
+
+  // Use verse prop directly if provided, otherwise extract from word
+  const verse = verseProp || word?.verse;
+  const verseKey = verse?.verseKey || word?.verseKey;
+
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {
-      setIsMenuOpened(isOpen);
+      // Only update internal state if not controlled
+      if (isOpenProp === undefined) {
+        setIsMenuOpenedInternal(isOpen);
+      }
       logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
-      dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
+      dispatch(setReadingViewSelectedVerseKey(isOpen ? verseKey : null));
 
-      if (isOpen) {
+      if (onOpenChange) {
         onOpenChange(isOpen);
       }
     },
-    [dispatch, word.verseKey, onOpenChange],
+    [dispatch, verseKey, onOpenChange, isOpenProp],
   );
 
   const onHoverChange = useCallback(
     (isHovering: boolean) => {
-      dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
+      dispatch(setReadingViewHoveredVerseKey(isHovering ? verseKey : null));
     },
-    [dispatch, word.verseKey],
+    [dispatch, verseKey],
   );
   const onActionTriggered = useCallback(() => {
     handleOpenChange(false);
@@ -74,26 +98,30 @@ const ReadingViewWordPopover: React.FC<Props> = ({
     onHoverChange(false);
   }, [onHoverChange]);
 
+  if (!verse) return <>{children}</>;
+
   return (
     <>
       <PopoverMenu
         trigger={
-          <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          <span onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {children}
-          </div>
+          </span>
         }
         isOpen={isMenuOpened}
         onOpenChange={handleOpenChange}
         expandDirection={PopoverMenuExpandDirection.BOTTOM}
+        align={PopoverMenuAlign.START}
+        sideOffset={4}
       >
         <ReadingViewWordActionsMenu
-          word={word}
+          verse={verse}
           onActionTriggered={onActionTriggered}
           openShareModal={openShareModal}
           bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
-      <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
+      <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={verse} />
     </>
   );
 };

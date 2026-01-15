@@ -4,8 +4,9 @@ export enum WordByWordType {
 }
 
 export enum ReadingPreference {
-  Translation = 'translation', // Displays verse by verse with translation
-  Reading = 'reading', // Displays the Quran text only similar to a physical Quran page without any translations.
+  Translation = 'translation', // "Verse by Verse" - Displays verse by verse with translation
+  Reading = 'reading', // "Reading Mode - Arabic" - Displays the Quran text only similar to a physical Quran page without any translations.
+  ReadingTranslation = 'readingTranslation', // "Reading Mode - Translation" - Displays Reading Mode with a single selected translation.
 }
 
 export enum WordClickFunctionality {

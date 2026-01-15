@@ -18,18 +18,23 @@ import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
+import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/components/EmptyTranslationMessage';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
 import Spinner from '@/dls/Spinner/Spinner';
+import useDirection from '@/hooks/useDirection';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
 import Error from '@/pages/_error';
 import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { QuranReaderDataType } from '@/types/QuranReader';
+import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
@@ -49,6 +54,7 @@ type ReadingViewProps = {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
+  readingPreference: ReadingPreference;
 };
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1200;
@@ -68,13 +74,22 @@ const ReadingView = ({
   quranReaderDataType,
   initialData,
   resourceId,
+  readingPreference,
 }: ReadingViewProps) => {
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>(() =>
     getInitialMushafMap(initialData),
   );
   const { lang } = useTranslation('quran-reader');
+  const direction = useDirection();
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations);
+
+  // Check if we should show empty state (in ReadingTranslation mode with no translations)
+  const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
+  const hasTranslations = selectedTranslations && selectedTranslations.length > 0;
+  const showEmptyState = isTranslationMode && !hasTranslations;
+
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -189,6 +204,7 @@ const ReadingView = ({
         pageIndex={pageIndex}
         setMushafPageToVersesMap={setMushafPageToVersesMap}
         initialData={initialData}
+        readingPreference={readingPreference}
       />
     );
   };
@@ -199,6 +215,20 @@ const ReadingView = ({
 
   const shouldShowQueryParamMessage =
     reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
+
+  // When in empty state, show only the top controls bar and empty message (no mushaf content)
+  if (showEmptyState) {
+    const chapterId = initialData?.verses?.[0]?.chapterId;
+    return (
+      <div className={styles.emptyStateContainer}>
+        <div dir={direction} className={styles.emptyStateControls}>
+          {chapterId && <PlayChapterAudioButton chapterId={Number(chapterId)} />}
+          <ReadingModeActions />
+        </div>
+        <EmptyTranslationMessage />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -218,7 +248,7 @@ const ReadingView = ({
       >
         {isLoading ? (
           <div className={styles.virtuosoScroller}>
-            <ReadingViewSkeleton />
+            <ReadingViewSkeleton readingPreference={readingPreference} />
           </div>
         ) : (
           <Virtuoso
