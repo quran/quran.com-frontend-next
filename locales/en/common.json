@@ -346,8 +346,8 @@
     "reading": "Reading",
     "reading-translation": "Translation",
     "select-translation": "Select Translation",
-    "select-translations": "Select Translations",
     "select-translation-message": "You do not have any translations selected. Please select a translation through settings.",
+    "select-translations": "Select Translations",
     "translation": "Translation",
     "verse-by-verse": "Verse by Verse"
   },

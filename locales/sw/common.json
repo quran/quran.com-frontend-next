@@ -340,8 +340,16 @@
   "read": "Soma",
   "reading-history": "Historia ya kusoma",
   "reading-preference": {
+    "arabic": "Kiarabu",
+    "my-translations": "Tafsiri Zangu",
+    "none-selected": "Hakuna kilichochaguliwa",
     "reading": "Soma",
-    "translation": "Tarjuma"
+    "reading-translation": "Tafsiri",
+    "select-translation": "Chagua Tafsiri",
+    "select-translation-message": "Huna tafsiri zozote zilizochaguliwa. Tafadhali chagua tafsiri kupitia mipangilio.",
+    "select-translations": "Chagua Tafsiri",
+    "translation": "Tarjuma",
+    "verse-by-verse": "Mstari kwa Mstari"
   },
   "ready-for-ramadan": "Je, uko tayari kwa Ramadhani?",
   "recitation": "Usomaji",

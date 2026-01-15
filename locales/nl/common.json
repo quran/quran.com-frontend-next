@@ -340,8 +340,16 @@
   "read": "Lezen",
   "reading-history": "Geschiedenis lezen",
   "reading-preference": {
+    "arabic": "Arabisch",
+    "my-translations": "Mijn vertalingen",
+    "none-selected": "Geen geselecteerd",
     "reading": "Lezing",
-    "translation": "Vertaling"
+    "reading-translation": "Vertaling",
+    "select-translation": "Selecteer vertaling",
+    "select-translation-message": "Je hebt geen vertalingen geselecteerd. Selecteer een vertaling via de instellingen.",
+    "select-translations": "Selecteer vertalingen",
+    "translation": "Vertaling",
+    "verse-by-verse": "Vers voor vers"
   },
   "ready-for-ramadan": "Klaar voor de Ramadan?",
   "recitation": "Recitatie",

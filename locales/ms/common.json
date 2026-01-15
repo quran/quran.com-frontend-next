@@ -340,8 +340,16 @@
   "read": "Baca",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
+    "arabic": "Bahasa Arab",
+    "my-translations": "Terjemahan Saya",
+    "none-selected": "Tiada yang dipilih",
     "reading": "Membaca",
-    "translation": "Terjemahan"
+    "reading-translation": "Terjemahan",
+    "select-translation": "Pilih Terjemahan",
+    "select-translation-message": "Anda tidak mempunyai sebarang terjemahan yang dipilih. Sila pilih terjemahan melalui tetapan.",
+    "select-translations": "Pilih Terjemahan",
+    "translation": "Terjemahan",
+    "verse-by-verse": "Ayat demi Ayat"
   },
   "ready-for-ramadan": "Bersedia untuk Ramadan?",
   "recitation": "Tilawah",

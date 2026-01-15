@@ -340,8 +340,16 @@
   "read": "Читать",
   "reading-history": "Чтение истории",
   "reading-preference": {
+    "arabic": "арабский",
+    "my-translations": "Мои переводы",
+    "none-selected": "Ничего не выбрано",
     "reading": "Чтение",
-    "translation": "Перевод"
+    "reading-translation": "Перевод",
+    "select-translation": "Выберите перевод",
+    "select-translation-message": "У вас не выбраны никакие переводы. Пожалуйста, выберите перевод в настройках.",
+    "select-translations": "Выберите переводы",
+    "translation": "Перевод",
+    "verse-by-verse": "Стих за стихом"
   },
   "ready-for-ramadan": "Готовы к Рамадану?",
   "recitation": "Чтение",

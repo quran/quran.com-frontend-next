@@ -340,8 +340,16 @@
   "read": "Ler",
   "reading-history": "Lendo o histórico",
   "reading-preference": {
+    "arabic": "árabe",
+    "my-translations": "Minhas traduções",
+    "none-selected": "Nenhuma selecionada",
     "reading": "Lendo",
-    "translation": "Tradução"
+    "reading-translation": "Tradução",
+    "select-translation": "Selecione a tradução",
+    "select-translation-message": "Você não selecionou nenhuma tradução. Por favor, selecione uma tradução nas configurações.",
+    "select-translations": "Selecionar traduções",
+    "translation": "Tradução",
+    "verse-by-verse": "Verso por verso"
   },
   "ready-for-ramadan": "Pronto para o Ramadan?",
   "recitation": "Recitação",
