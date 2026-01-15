@@ -2,9 +2,9 @@ import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import DeleteNoteButton from './DeleteNoteButton';
-import styles from './MyNotes.module.scss';
+import styles from './Card.module.scss';
 
+import DeleteNoteButton from '@/components/Notes/modal/MyNotes/DeleteNoteButton';
 import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';

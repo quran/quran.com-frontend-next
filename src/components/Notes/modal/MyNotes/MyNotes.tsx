@@ -5,7 +5,7 @@ import useSWR from 'swr';
 
 import styles from './MyNotes.module.scss';
 
-import NoteCard from '@/components/Notes/modal/MyNotes/NoteCard';
+import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import PlusIcon from '@/icons/plus.svg';

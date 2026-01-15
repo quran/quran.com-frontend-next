@@ -6,7 +6,7 @@ import { Virtuoso } from 'react-virtuoso';
 import styles from './NotesTab.module.scss';
 
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
-import NoteCard from '@/components/Notes/modal/MyNotes/NoteCard';
+import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import useDeleteNote from '@/components/Notes/modal/MyNotes/useDeleteNote';
 import usePostNoteToQR from '@/components/Notes/modal/MyNotes/usePostNoteToQr';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
