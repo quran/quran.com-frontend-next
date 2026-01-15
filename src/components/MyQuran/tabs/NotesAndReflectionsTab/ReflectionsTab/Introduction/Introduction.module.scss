@@ -15,20 +15,15 @@
   ul {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-micro);
-    margin-block-start: var(--spacing-xxsmall);
+    gap: var(--spacing-xxsmall);
+    margin-block-start: var(--spacing-xsmall);
     line-height: inherit;
 
     list-style: initial;
     padding-inline-start: var(--spacing-medium2);
-
-    li {
-      line-height: calc(var(--font-size-xsmall-px) * 1.5);
-    }
   }
 }
 
 .title {
   font-weight: var(--font-weight-bold);
-  line-height: calc(var(--font-size-xsmall-px) * 1.5);
 }
