@@ -6,6 +6,7 @@
 
   --background-color: var(--color-background-alternative-faint-new);
   --text-color: var(--color-text-link-new);
+  --fade-stop-percentage: 25%;
 }
 
 .textWrapper {
@@ -29,16 +30,33 @@
   position: absolute;
   inset-block-end: 0;
   inset-inline-end: 0;
-  background: linear-gradient(to right, transparent, var(--background-color) 20%);
+
+  [dir='rtl'] & {
+    inset-inline-end: 0;
+    inset-block-end: var(--spacing-hairline-px);
+  }
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--background-color) var(--fade-stop-percentage)
+  );
   padding-inline-start: var(--spacing-mega);
   padding-inline-end: var(--spacing-xxsmall-px);
+
+  [dir='rtl'] & {
+    background: linear-gradient(
+      to left,
+      transparent,
+      var(--background-color) var(--fade-stop-percentage)
+    );
+  }
 }
 
 .moreBtn,
 .lessBtn {
   display: inline;
   cursor: pointer;
-  color: var(--text-color);
   font-weight: var(--font-weight-bold);
   background: none;
   border: none;
@@ -47,12 +65,19 @@
   line-height: inherit;
   font-family: inherit;
   white-space: nowrap;
+  color: inherit;
 
-  &:hover {
-    text-decoration: underline;
+  span {
+    color: var(--text-color);
   }
 
-  &:focus-visible {
+  &:hover span {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro-px);
+    text-decoration-thickness: var(--spacing-micro-px);
+  }
+
+  &:focus-visible span {
     outline: var(--spacing-micro-px) solid var(--color-primary-medium);
     outline-offset: var(--spacing-micro-px);
   }

@@ -29,6 +29,7 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   seeLessText,
   readMoreText,
 }) => {
+  const { lang } = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const [needsTruncation, setNeedsTruncation] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -42,18 +43,25 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
     if (!element) return undefined;
 
     const checkTruncation = () => {
-      const isOverflowing = element.scrollHeight > element.clientHeight;
+      // Add tolerance threshold to avoid false positives from subpixel rendering
+      // especially in RTL mode where browsers can have measurement discrepancies
+      const TOLERANCE = 2;
+      const isOverflowing = element.scrollHeight > element.clientHeight + TOLERANCE;
       setNeedsTruncation(isOverflowing);
     };
 
-    checkTruncation();
+    // Small delay to ensure proper measurement after render, especially for RTL
+    const timeoutId = setTimeout(checkTruncation, 5);
 
     // Re-check when element size changes
     const resizeObserver = new ResizeObserver(checkTruncation);
     resizeObserver.observe(element);
 
-    return () => resizeObserver.disconnect();
-  }, [content, lines]);
+    return () => {
+      clearTimeout(timeoutId);
+      resizeObserver.disconnect();
+    };
+  }, [content, lines, lang]);
 
   const toggleExpanded = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -73,14 +81,14 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
           {content}{' '}
           {expanded && showReadMore && (
             <button type="button" className={styles.lessBtn} onClick={toggleExpanded}>
-              {seeLessText ?? t('see-less')}
+              <span>{seeLessText ?? t('see-less')}</span>
             </button>
           )}
         </div>
         {!expanded && needsTruncation && showReadMore && (
           <div className={styles.fadeOverlay}>
             <button type="button" className={styles.moreBtn} onClick={toggleExpanded}>
-              ... {readMoreText ?? t('read-more')}
+              ... <span>{readMoreText ?? t('read-more')}</span>
             </button>
           </div>
         )}
