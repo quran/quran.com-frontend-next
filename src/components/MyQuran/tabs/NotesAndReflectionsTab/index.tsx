@@ -9,6 +9,7 @@ import MyQuranTab from '@/components/MyQuran/tabs';
 import BasicSwitcher from '@/components/MyQuran/tabs/NotesAndReflectionsTab/BasicSwitcher';
 import NotesSorter from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesSorter/NotesSorter';
 import NotesTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesTab';
+import ReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab/ReflectionsTab';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { logEvent } from '@/utils/eventLogger';
@@ -58,7 +59,7 @@ const NotesAndReflectionsTab = () => {
   const tabComponents = useMemo(
     () => ({
       [SubTab.Notes]: <NotesTab sortBy={sortOption} />,
-      [SubTab.Reflections]: null,
+      [SubTab.Reflections]: <ReflectionsTab />,
     }),
     [sortOption],
   );

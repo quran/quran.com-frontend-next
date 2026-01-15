@@ -1,6 +1,37 @@
+@use '@/styles/breakpoints';
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-medium);
+}
+
+.container {
+  padding-block-start: var(--spacing-xlarge-px);
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--spacing-large-px);
+  }
+}
+
+.noteItem {
+  padding-block-end: var(--spacing-medium2);
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(3 * var(--spacing-max));
+  color: var(--color-text-faded-new);
+
+  &[data-error='true'] {
+    color: var(--color-text-error);
+  }
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--color-text-faded-new);
 }

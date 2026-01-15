@@ -3,15 +3,15 @@ import { useCallback, useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
-import styles from './NotesTab.module.scss';
+import styles from '../NotesAndReflectionsTab.module.scss';
 
+import CardsSkeleton from '@/components/MyQuran/Skeleton';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import useDeleteNote from '@/components/Notes/modal/MyNotes/useDeleteNote';
 import usePostNoteToQR from '@/components/Notes/modal/MyNotes/usePostNoteToQr';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
@@ -101,14 +101,6 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     );
   }
 
-  if (isLoading) {
-    return (
-      <div className={styles.statusContainer}>
-        <Spinner size={SpinnerSize.Large} />
-      </div>
-    );
-  }
-
   const isEmpty = !isLoading && notes.length === 0;
 
   if (isEmpty) {
@@ -132,11 +124,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         useWindowScroll
       />
 
-      {isLoadingMore && (
-        <div className={styles.loadMoreContainer}>
-          <Spinner size={SpinnerSize.Medium} />
-        </div>
-      )}
+      {(isLoadingMore || isLoading) && <CardsSkeleton count={5} />}
 
       <EditNoteModal
         isModalOpen={modalState === ModalState.Edit}

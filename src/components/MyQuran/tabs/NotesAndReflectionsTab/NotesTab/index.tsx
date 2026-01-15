@@ -1,6 +1,7 @@
 import useSWRInfinite from 'swr/infinite';
 
-import styles from './NotesTab.module.scss';
+import styles from '../NotesAndReflectionsTab.module.scss';
+
 import NotesTabContent from './NotesTabContent';
 
 import { GetAllNotesResponse } from '@/types/auth/Note';
