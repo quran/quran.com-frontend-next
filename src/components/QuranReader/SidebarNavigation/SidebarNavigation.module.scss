@@ -299,11 +299,19 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: calc(100vh - $top-menu-height-home);
 
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+    }
+
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
       block-size: 100vh;
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
     }
   }
 }
@@ -313,11 +321,19 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: 100vh;
 
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+    }
+
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
       block-size: 100vh;
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
     }
   }
 }
