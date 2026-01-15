@@ -32,6 +32,7 @@ import {
   dateToReadableFormat,
   getCurrentDay,
   getCurrentMonth,
+  getCurrentYear,
   getMonthsInYear,
 } from '@/utils/datetime';
 import { logValueChange, logButtonClick, logFormSubmission } from '@/utils/eventLogger';
@@ -42,8 +43,9 @@ const AddReading = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [selectedMonth, setSelectedMonth] = useState<number>(() => getCurrentMonth());
+  const [selectedYear, setSelectedYear] = useState<number>(() => getCurrentYear());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const selectedYear = useMemo(() => new Date().getFullYear(), []);
+  const currentYear = useMemo(() => getCurrentYear(), []);
 
   const [ranges, setRanges] = useState<string[]>([]);
   const [totalSeconds, setTotalSeconds] = useState<number>(0);
@@ -99,6 +101,18 @@ const AddReading = () => {
     setSelectedMonth(newMonth);
   };
 
+  const onYearBackClick = () => {
+    const newYear = selectedYear - 1;
+    logValueChange('add_reading_year', selectedYear, newYear);
+    setSelectedYear(newYear);
+  };
+
+  const onYearForwardClick = () => {
+    const newYear = selectedYear + 1;
+    logValueChange('add_reading_year', selectedYear, newYear);
+    setSelectedYear(newYear);
+  };
+
   const onGoBackClick = () => {
     logButtonClick('add_reading_back_to_calendar');
     setSelectedDate(null);
@@ -128,6 +142,15 @@ const AddReading = () => {
    * @returns {boolean}
    */
   const getIsDayDisabled = (day: number): boolean => {
+    // if the selected year is before the current year, don't disable any day
+    if (selectedYear < currentYear) {
+      return false;
+    }
+    // if the selected year is after the current year, disable all of the days
+    if (selectedYear > currentYear) {
+      return true;
+    }
+
     const currentMonth = getCurrentMonth();
     // if the selected month is before the current month, don't disable any day
     if (selectedMonth < currentMonth) {
@@ -228,6 +251,24 @@ const AddReading = () => {
           </Modal.Header>
           {!selectedDate ? (
             <>
+              <div className={styles.calendarMonthSelector}>
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  shape={ButtonShape.Circle}
+                  onClick={onYearBackClick}
+                >
+                  <ChevronLeft />
+                </Button>
+                <p className={styles.yearName}>{selectedYear}</p>
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  shape={ButtonShape.Circle}
+                  onClick={onYearForwardClick}
+                  isDisabled={selectedYear === currentYear}
+                >
+                  <ChevronRight />
+                </Button>
+              </div>
               <div className={styles.calendarMonthSelector}>
                 <Button
                   variant={ButtonVariant.Ghost}
