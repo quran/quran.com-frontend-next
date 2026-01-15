@@ -46,14 +46,28 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
   // Get the first verse from initial data
   const firstVerse = initialData?.verses?.[0];
 
-  // Determine if we should show this component
-  // Don't show if the first verse is verse 1 (ChapterHeader will show the actions)
-  // Also don't show for Tafsir views
-  const shouldShow =
-    firstVerse &&
-    firstVerse.verseNumber !== 1 &&
-    quranReaderDataType !== QuranReaderDataType.Tafsir &&
-    quranReaderDataType !== QuranReaderDataType.SelectedTafsir;
+  // Determine if we should show this component based on the data type:
+  // - Chapter: Never show - ChapterHeader always appears at verse 1
+  // - Verse/Ranges: Show only if not starting at verse 1
+  // - Page/Juz/Hizb/Rub: Show only if first verse is not verse 1
+  // - Tafsir: Never show
+  const shouldShow = (() => {
+    if (!firstVerse) return false;
+
+    // Never show for full chapter views - ChapterHeader handles this
+    if (quranReaderDataType === QuranReaderDataType.Chapter) return false;
+
+    // Never show for Tafsir views
+    if (
+      quranReaderDataType === QuranReaderDataType.Tafsir ||
+      quranReaderDataType === QuranReaderDataType.SelectedTafsir
+    ) {
+      return false;
+    }
+
+    // For all other types, show only if not starting at verse 1
+    return firstVerse.verseNumber !== 1;
+  })();
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
