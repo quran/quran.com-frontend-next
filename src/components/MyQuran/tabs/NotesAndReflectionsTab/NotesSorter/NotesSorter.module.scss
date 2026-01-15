@@ -1,0 +1,15 @@
+.sortTrigger {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-small);
+  cursor: pointer;
+}
+
+.itemIcon {
+  display: flex;
+  --icon-size: var(--spacing-medium);
+  inline-size: var(--icon-size);
+  > svg {
+    inline-size: 100%;
+  }
+}

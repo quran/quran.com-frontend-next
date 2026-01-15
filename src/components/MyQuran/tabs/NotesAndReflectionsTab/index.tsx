@@ -1,13 +1,15 @@
-/* eslint-disable i18next/no-literal-string */
-
 import { useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './NotesAndReflectionsTab.module.scss';
+
 import SignInPrompt from '@/components/MyQuran/SignInPrompt';
 import MyQuranTab from '@/components/MyQuran/tabs';
 import BasicSwitcher from '@/components/MyQuran/tabs/NotesAndReflectionsTab/BasicSwitcher';
+import NotesSorter from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesSorter/NotesSorter';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import NotesSortOption from '@/types/NotesSortOptions';
 import { logEvent } from '@/utils/eventLogger';
 import { getMyQuranNavigationUrl } from '@/utils/navigation';
 
@@ -16,15 +18,12 @@ enum SubTab {
   Reflections = 'reflections',
 }
 
-const tabComponents = {
-  [SubTab.Notes]: <div>NotesComingSoon</div>,
-  [SubTab.Reflections]: <div>ReflectionsComingSoon</div>,
-};
-
 const NotesAndReflectionsTab = () => {
   const { t } = useTranslation('my-quran');
   const { isLoggedIn } = useIsLoggedIn();
+
   const [selectedSubTab, setSelectedSubTab] = useState(SubTab.Notes);
+  const [sortOption, setSortOption] = useState(NotesSortOption.Newest);
 
   const onSubTabChange = (value: string) => {
     logEvent('my_quran_notes_reflections_subtab_change', { value });
@@ -47,6 +46,27 @@ const NotesAndReflectionsTab = () => {
     [t],
   );
 
+  const sortOptions = useMemo(
+    () => [
+      { id: NotesSortOption.Newest, label: t('common:newest') },
+      { id: NotesSortOption.Oldest, label: t('common:oldest') },
+    ],
+    [t],
+  );
+
+  const tabComponents = useMemo(
+    () => ({
+      [SubTab.Notes]: null,
+      [SubTab.Reflections]: null,
+    }),
+    [],
+  );
+
+  const onSortByChange = (value: NotesSortOption) => {
+    logEvent('my_quran_notes_reflections_sort_by_change', { value });
+    setSortOption(value);
+  };
+
   if (!isLoggedIn) {
     return (
       <SignInPrompt
@@ -59,7 +79,16 @@ const NotesAndReflectionsTab = () => {
 
   return (
     <>
-      <BasicSwitcher tabs={tabs} onSelect={onSubTabChange} selected={selectedSubTab} />
+      <div className={styles.header}>
+        <BasicSwitcher tabs={tabs} onSelect={onSubTabChange} selected={selectedSubTab} />
+        {selectedSubTab === SubTab.Notes && (
+          <NotesSorter
+            options={sortOptions}
+            selectedOptionId={sortOption}
+            onChange={onSortByChange}
+          />
+        )}
+      </div>
 
       {tabComponents[selectedSubTab]}
     </>
