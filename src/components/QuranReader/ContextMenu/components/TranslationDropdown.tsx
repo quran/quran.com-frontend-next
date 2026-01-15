@@ -63,18 +63,12 @@ const TranslationDropdown: React.FC<TranslationDropdownProps> = ({
       }
     };
 
-    const handleScroll = () => {
-      onClose();
-    };
-
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('scroll', handleScroll, true);
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('scroll', handleScroll, true);
     };
   }, [onClose, triggerRef]);
 

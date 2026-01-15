@@ -7,6 +7,7 @@ $dropdown-width: 315px;
   inset-block-start: calc(100% + var(--spacing-small-px));
   inset-inline-start: 0;
   inline-size: $dropdown-width;
+  max-inline-size: calc(100vw - var(--spacing-medium) * 2);
   padding: var(--spacing-small-px);
   display: flex;
   flex-direction: column;
@@ -15,6 +16,7 @@ $dropdown-width: 315px;
   border-radius: var(--border-radius-medium-px);
   box-shadow: var(--shadow-large);
   z-index: var(--z-index-sticky);
+  box-sizing: border-box;
 }
 
 .header {
@@ -33,6 +35,8 @@ $dropdown-width: 315px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-small-px);
+  max-block-size: 300px;
+  overflow-y: auto;
 }
 
 .dropdownItem {

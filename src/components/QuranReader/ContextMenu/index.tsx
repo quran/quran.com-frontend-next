@@ -32,6 +32,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isExpanded,
     mushaf,
     verseKey,
+    isTranslationMode,
 
     // Data
     chapterData,
@@ -136,8 +137,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Tajweed colors bar will only show when tajweed mushaf enabled */}
-      {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
+      {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
 
       {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './ReadingModeToggle.module.scss';
 
@@ -12,6 +13,7 @@ import ReadingModeIcon from '@/public/icons/reading-mode.svg';
 import ArabicIcon from '@/public/icons/reading.svg';
 import TranslationIcon from '@/public/icons/translation-mode.svg';
 import VerseByVerseIcon from '@/public/icons/verse-by-verse.svg';
+import { selectLastUsedReadingMode } from '@/redux/slices/QuranReader/readingPreferences';
 import { logValueChange } from '@/utils/eventLogger';
 import isInReadingMode from '@/utils/readingPreference';
 import { ReadingPreference } from 'types/QuranReader';
@@ -29,6 +31,7 @@ const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({
   const { readingPreference, switchReadingPreference } = useReadingPreferenceSwitcher({
     context,
   });
+  const lastUsedReadingMode = useSelector(selectLastUsedReadingMode);
 
   const isReadingMode = isInReadingMode(readingPreference);
 
@@ -73,7 +76,7 @@ const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({
           role="tab"
           aria-selected={false}
           className={classNames(styles.pill, styles.pillUnselected)}
-          onClick={() => handleModeChange(ReadingPreference.Reading)}
+          onClick={() => handleModeChange(lastUsedReadingMode || ReadingPreference.Reading)}
         >
           <span className={styles.iconContainer}>
             <ReadingModeIcon className={classNames(styles.icon, styles.iconUnselected)} />
