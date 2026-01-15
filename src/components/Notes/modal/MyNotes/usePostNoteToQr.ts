@@ -45,6 +45,7 @@ const usePostNoteToQR = (): UsePostNoteToQRReturn => {
         cache,
         note,
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
+        invalidateReflections: true,
       });
 
       setShowConfirmationModal(false);

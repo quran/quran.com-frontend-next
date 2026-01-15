@@ -58,6 +58,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
         note: getNoteFromResponse(data),
         invalidateCount: true,
+        invalidateReflections: isPublic,
       });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });

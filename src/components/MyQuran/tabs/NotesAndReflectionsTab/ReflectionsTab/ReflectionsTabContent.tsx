@@ -10,7 +10,7 @@ import ReflectionCard from '@/components/Notes/modal/MyNotes/Card/ReflectionCard
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
 
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
-const PROXIMATE_REFLECTION_HEIGHT = 160;
+const PROXIMATE_REFLECTION_HEIGHT = 140;
 
 interface ReflectionsTabContentProps {
   reflections: AyahReflection[];

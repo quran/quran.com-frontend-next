@@ -17,7 +17,7 @@ import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
-const PROXIMATE_NOTE_HEIGHT = 140;
+const PROXIMATE_NOTE_HEIGHT = 100;
 
 type NoteWithPostUrl = Note & { postUrl?: string };
 

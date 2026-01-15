@@ -2,6 +2,7 @@ import { ScopedMutator, Cache } from 'swr/dist/types';
 
 import { Note } from '@/types/auth/Note';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl, makeNotesUrl } from '@/utils/auth/apiPaths';
+import { makeGetUserReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
 
 /**
@@ -56,12 +57,14 @@ export const invalidateCache = ({
   verseKeys,
   note,
   invalidateCount = false,
+  invalidateReflections = false,
 }: {
   mutate: ScopedMutator<unknown>;
   cache?: Cache<unknown>;
   verseKeys?: string[];
   note?: Note;
   invalidateCount?: boolean;
+  invalidateReflections?: boolean;
 }): void => {
   const uniqueVerseKeys = verseKeys ? Array.from(new Set(verseKeys)) : [];
 
@@ -71,6 +74,7 @@ export const invalidateCache = ({
 
   invalidateVerseCaches(mutate, uniqueVerseKeys);
   invalidateNoteCaches(mutate, note);
+  if (invalidateReflections) invalidateReflectionsCaches(mutate, cache);
 };
 
 /**
@@ -121,4 +125,20 @@ const invalidateVerseCaches = (mutate: ScopedMutator<unknown>, verseKeys: string
 const invalidateNoteCaches = (mutate: ScopedMutator<unknown>, note: Note | undefined): void => {
   mutate(makeNotesUrl(), undefined, { revalidate: true });
   if (note) mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
+};
+
+/**
+ * Invalidates reflections caches for the given verse keys.
+ */
+const invalidateReflectionsCaches = (
+  mutate: ScopedMutator<unknown>,
+  cache?: Cache<unknown>,
+): void => {
+  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+
+  if (cacheKeys) {
+    const urlKey = makeGetUserReflectionsUrl({ page: 1, limit: 10 }).split('?')[0];
+    const keys = [...cacheKeys].filter((key) => key.startsWith(urlKey));
+    keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
+  }
 };

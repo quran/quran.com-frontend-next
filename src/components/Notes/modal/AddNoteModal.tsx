@@ -52,6 +52,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         verseKeys: [verseKey],
         note: getNoteFromResponse(data),
         invalidateCount: true,
+        invalidateReflections: isPublic,
       });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
