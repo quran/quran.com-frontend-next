@@ -38,3 +38,15 @@
 .overlay[data-state='closed'] {
   animation: fadeOut constants.$animationDuration constants.$animationEasing;
 }
+
+.closeButton {
+  position: absolute;
+  inset-block-start: var(--spacing-medium-px);
+  inset-inline-end: var(--spacing-medium-px);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -91,3 +91,16 @@ select option {
     --navbar-container-height: var(--navbar-height);
   }
 }
+
+.navbarVisible {
+  @include breakpoints.smallerThanTablet {
+    --top-bar-height: var(--top-bar-height-mobile-full);
+  }
+}
+
+.navbarHidden {
+  --top-bar-height: var(--top-bar-height-mobile-collapsed);
+  @include breakpoints.tablet {
+    --top-bar-height: var(--top-bar-height-collapsed);
+  }
+}

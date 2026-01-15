@@ -6,9 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
-import QuranFontSectionFooter from './QuranFontSectionFooter';
+import ReciterSection from './ReciterSection';
 import Section from './Section';
-import VersePreview from './VersePreview';
 
 import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
@@ -36,7 +35,6 @@ const QuranFontSection = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
-    isLoading,
   } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
@@ -195,14 +193,15 @@ const QuranFontSection = () => {
   };
 
   return (
-    <Section id="quran-font-section">
-      <Section.Title isLoading={isLoading}>{t('fonts.quran-font')}</Section.Title>
+    <Section id="quran-font-section" hideSeparator>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
-      <Section.Row>
-        <Section.Label>{t('style')}</Section.Label>
 
+      <Section.Row className={styles.fontStyleSection}>
+        <Section.Label className={styles.fontStyleLabel}>
+          {t('quran-reader:font-style')}
+        </Section.Label>
         <Select
           id="quranFontStyles"
           name="quranFontStyles"
@@ -225,24 +224,18 @@ const QuranFontSection = () => {
           />
         </Section.Row>
       )}
-      <Section.Row id="font-size-section">
-        <Section.Label>{t('fonts.font-size')}</Section.Label>
+      <Section.Row id="font-size-section" className={styles.fontSizeSection}>
+        <Section.Label className={styles.fontStyleLabel}>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
           onIncrement={
             quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
           }
+          className={styles.counter}
         />
       </Section.Row>
-      <Section.Row>
-        <QuranFontSectionFooter quranFont={quranFont} />
-      </Section.Row>
-      <Section.Row>
-        <div className={styles.versePreviewContainer}>
-          <VersePreview />
-        </div>
-      </Section.Row>
+      <ReciterSection />
     </Section>
   );
 };

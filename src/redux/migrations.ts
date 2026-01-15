@@ -280,4 +280,14 @@ export default {
       bookmarkedPages: state.bookmarks?.bookmarkedPages || {},
     },
   }),
+  37: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      // Map old wordByWordContentType to tooltip (most common case for old users)
+      wordByWordTooltipContentType: state.readingPreferences.wordByWordContentType || [],
+      // Start with empty inline content
+      wordByWordInlineContentType: [],
+    },
+  }),
 };

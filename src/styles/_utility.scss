@@ -860,6 +860,13 @@ $page-container-max-width: 80rem;
   }
 }
 
+@mixin textClamp($lines: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
 @mixin dimmedOverlay($position: fixed) {
   position: relative;
   transition: var(--transition-slow);

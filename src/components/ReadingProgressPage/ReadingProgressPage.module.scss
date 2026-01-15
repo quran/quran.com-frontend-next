@@ -95,9 +95,47 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .emptyWidget {
+  background-color: var(--color-background-elevated-new);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: var(--spacing-medium2-px);
+}
+
+.emptyWidgetHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  svg {
+    block-size: var(--spacing-large-px);
+    inline-size: var(--spacing-large-px);
+  }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal-px);
+  }
+}
+
+.emptyWidgetDescription {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.emptyWidgetCta {
+  align-items: center;
+  gap: var(--spacing-small-px);
+  svg,
+  path {
+    fill: var(--color-text-white);
+  }
 }
 
 .progressWidget {
@@ -138,7 +176,7 @@ $widget-border-radius: var(--border-radius-rounded);
 
 .circularProgressbarText {
   fill: var(--color-text-black);
-  font-size: var(--font-size-normal-px);
+  font-size: var(--font-size-small-px);
   font-weight: var(--font-weight-bold);
   dominant-baseline: middle;
   text-anchor: middle;
@@ -156,6 +194,7 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .progressWidgetDaysLeft {
+  font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-gray);
 

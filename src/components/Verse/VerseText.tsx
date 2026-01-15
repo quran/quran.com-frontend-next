@@ -11,6 +11,7 @@ import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import QuranWord from '@/dls/QuranWord/QuranWord';
+import { TooltipType } from '@/dls/Tooltip';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,
@@ -28,6 +29,9 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
   bookmarksRangeUrl?: string | null;
+  tooltipType?: TooltipType;
+  highlightedWordPosition?: number;
+  isWordInteractionDisabled?: boolean;
 };
 
 const VerseText = ({
@@ -36,6 +40,9 @@ const VerseText = ({
   isHighlighted,
   shouldShowH1ForSEO = false,
   bookmarksRangeUrl,
+  tooltipType,
+  highlightedWordPosition,
+  isWordInteractionDisabled = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -90,17 +97,24 @@ const VerseText = ({
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}
         >
-          {words?.map((word) => (
-            <QuranWord
-              key={word.location}
-              word={word}
-              font={quranFont}
-              isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
-              bookmarksRangeUrl={bookmarksRangeUrl}
-            />
-          ))}
+          {words?.map((word) => {
+            const isHighlightedWord =
+              highlightedWordPosition !== undefined && word.position === highlightedWordPosition;
+            return (
+              <QuranWord
+                key={word.location}
+                word={word}
+                font={quranFont}
+                isFontLoaded={isFontLoaded}
+                isHighlighted={isHighlightedWord || word.verseKey === selectedVerseKey}
+                shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+                bookmarksRangeUrl={bookmarksRangeUrl}
+                tooltipType={tooltipType}
+                isWordInteractionDisabled={isWordInteractionDisabled}
+                shouldForceShowTooltip={isHighlightedWord}
+              />
+            );
+          })}
         </div>
       </VerseTextContainer>
     </>

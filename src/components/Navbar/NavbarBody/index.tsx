@@ -23,6 +23,7 @@ import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import {
   selectIsNavigationDrawerOpen,
+  selectIsSettingsDrawerOpen,
   setDisableSearchDrawerTransition,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
@@ -75,6 +76,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const { isLoggedIn } = useIsLoggedIn();
   const router = useRouter();
   const isQuranReaderRoute = QURAN_READER_ROUTES.has(router.pathname);
@@ -164,7 +166,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       {isBannerVisible && (
         <div
           className={classNames(styles.bannerContainerTop, {
-            [styles.dimmed]: isNavigationDrawerOpen,
+            [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
           })}
         >
           <Banner {...bannerProps} />
@@ -172,9 +174,9 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
       )}
       <div
         className={classNames(styles.itemsContainer, {
-          [styles.dimmed]: isNavigationDrawerOpen,
+          [styles.dimmed]: isNavigationDrawerOpen || isSettingsDrawerOpen,
         })}
-        inert={isNavigationDrawerOpen || undefined}
+        inert={isNavigationDrawerOpen || isSettingsDrawerOpen || undefined}
       >
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>

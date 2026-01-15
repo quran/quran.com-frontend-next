@@ -4,11 +4,12 @@
   "checkbox-refl-intro": {
     "checkbox": {
       "desc": "<li> Posting berarti refleksi Anda akan dibagikan di QuranReflect atas nama Anda dan akan ditinjau oleh tim moderasi dan dapat dilihat oleh komunitas QuranReflect. </li> <li> Setelah postingan Anda ditinjau dan disetujui atau dipromosikan oleh tim moderasi kami, Anda mungkin mendapatkan notifikasi suka, komentar, dan ikuti. Setelah masuk ke QuranReflect, Anda dapat memperbarui pengaturan notifikasi agar sesuai dengan preferensi Anda. </li> <li> Anda dapat melihat catatan Anda dan memposting refleksi di bawah profil login Quran.com Anda di bagian “Catatan dan Refleksi Saya”, atau masuk ke <link> QuranReflect </link> menggunakan email yang terdaftar di Quran.com Anda. </li>",
-      "title": "Apa yang terjadi jika saya centang kotak ini?"
+      "title": "Apa yang terjadi jika saya mengklik \"Simpan dan Posting ke QuranReflect\"?"
     },
-    "post-button": "Apa yang terjadi apabila saya menulis di QuranReflect?",
+    "post-button": "Apa yang terjadi ketika saya memposting?",
     "qr-intro": "QuranReflect, bersama dengan Quran.com, adalah bagian dari keluarga Quran.Foundation. Ini adalah platform sosial untuk berbagi refleksi pribadi tentang Al-Qur'an, mendorong pengguna untuk menginternalisasi pesan-pesannya dan berbagi wawasan  dan pemahaman yang menginspirasi perubahan positif. Berbeda dengan tafsir yang merupakan tafsir ilmiah, renungan merupakan pemikiran dan pengalaman pribadi yang berkaitan dengan ayat tersebut. Postingan pengguna ke QuranReflect ditinjau dan dimoderatori oleh tim yang berkualifikasi, yang akan membantu memastikan kualitas konten, etika ketika berinteraksi dengan Al-Qur'an, dan mereka akan memberdayakan pengguna dengan berbagi umpan balik dan menyoroti wacana yang bernilai sehingga menumbuhkan komunitas yang memiliki semangat spiritual yang berfokus pada Al-Qur'an . Pelajari lebih lanjut: <link> Quranreflect.com/faq </link>",
-    "title": "Apa itu QuranReflect dan apa yang terjadi jika saya mencontreng kotak ini?"
+    "qr-title": "Apa itu QuranReflect?",
+    "title": "Apa itu QuranReflect dan apa yang terjadi jika saya mencentang kotak ini?"
   },
   "click-to-see-more": "klik untuk melihat lebih lanjut",
   "delete-note": "Hapus catatan",
@@ -17,10 +18,13 @@
     "title": "Hapus catatan"
   },
   "delete-success": "Catatan berhasil dihapus",
+  "edit-note": "Catatan Pengeditan",
   "empty-notes": "Tidak ada catatan yang ditemukan",
   "empty-reflections": "Tidak ada refleksi yang ditemukan",
   "export-success": "Catatan berhasil diterbitkan ke akun Anda di QuranReflect",
+  "my-notes": "Catatan Saya ({{count}})",
   "new-note-reflc-intro": {
+    "learn-more": "Pelajari selengkapnya",
     "reflc-prompts": {
       "deeper": {
         "desc": "<li> Apakah ada nama-nama Allah yang disebutkan, dan bagaimana kaitannya dengan ayat tersebut? </li> <li> Kata atau aspek kebahasaan manakah yang menarik perhatian Anda? </li> <li> Dapatkah Anda menghubungkannya dengan konteks ayat tersebut, ayat-ayat Al-Qur'an lainnya, hadis, atau peristiwa? </li>",
@@ -32,7 +36,8 @@
       },
       "title": "Kiat-kiat Refleksi"
     },
-    "title": "Butuh bantuan untuk merefleksikan Al-Qur'an? Pelajari lebih lanjut",
+    "see-less": "Lihat lebih sedikit",
+    "title": "Butuh bantuan untuk merenungkan Al-Quran?",
     "what-is-reflc": {
       "desc": "Refleksi atau perenungan terhadap Al-Qur'an melibatkan pembacaan atau pendengaran dengan teliti, memahami dan mendalami maknanya, hingga dapat menyentuh dan membuat kita menjadi lebih baik. Ini disebut sebagai \"Tadabbur\". Tafsir, sebaliknya, adalah penafsiran ilmiah terhadap Al-Qur'an, yang memberikan penjelasan rinci tentang ayat-ayatnya berdasarkan sumber-sumber klasik dan analisis ilmiah. Meskipun Tafsir diperuntukkan bagi para ulama, Allah ﷻ meminta setiap orang untuk melakukan Tadabbur (QS <link1> 38:29 </link1> , <link2> 47:24 </link2> , <link3> 4:82 </link3> , dan masih banyak lagi). <br></br> <br></br> Pengguna dapat menyimpan catatan dan refleksi pribadi mereka dengan leluasa. Seringkali refleksi kita dapat menyentuh  pembaca lain, dan membantu meningkatkan kedekatan mereka dengan Al-Qur'an, dan hubungan mereka dengan Allah ﷻ. Untuk tujuan itulah kami menyediakan pilihan kepada pengguna untuk membagikan refleksinya di QuranReflect, sebagai upaya kami membantu semua orang bertumbuh bersama dalam pengembaraan Al-Qur'an yang lebih bermakna. Untuk mempelajari lebih lanjut, kunjungi: <link4> QuranReflect.com/faq </link4> dan <link5> Lima Lensa untuk Merenungkan Al-Qur'an </link5>",
       "title": "Apa itu Refleksi?"
@@ -40,7 +45,12 @@
   },
   "note": "Catatan",
   "notes-and-reflcs": "Catatan & Refleksi",
+  "notes-on-this-verse": "{{count}} catatan tentang ayat ini",
+  "post-confirmation": {
+    "question": "Apakah Anda yakin ingin memposting Renungan ini ke QuranReflect?"
+  },
   "post-on-qr": "Posting di QuranReflect",
+  "post-to": "Kirim ke",
   "posted-reflections": "Refleksi yang Diposting",
   "private-notes": "Catatan",
   "qr-tooltip": "<span> <link> QuranReflect </link> adalah platform sosial untuk berbagi refleksi tentang Al-Qur'an. Terhubung dengan Al-Qur'an, terhubung dengan hal-hal yang penting. </span>",
@@ -57,6 +67,7 @@
   "save-success": "Catatan berhasil disimpan",
   "share-to-qr": "Bagikan ke QuranReflect.com",
   "share-to-qr-desc": "Bagikan sebagai <b> {{name}} </b> . Pembacanya adalah <b> pengguna QuranReflect </b>",
+  "take-a-note-or-reflection": "Buat Catatan atau Refleksi",
   "update-publish-failed": "Catatan berhasil diperbarui tetapi gagal dipublikasikan",
   "update-reflection": "Perbarui Refleksi",
   "update-success": "Catatan berhasil diperbarui",

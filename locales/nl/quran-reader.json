@@ -2,12 +2,14 @@
   "add-bookmark": "Bladwijzer toevoegen",
   "add-collection": "Collectie toevoegen",
   "advanced-copy": "Geavanceerd kopiëren",
+  "arabic": "Arabisch",
   "aria": {
     "read-ayah-refls": "Lees Ayah Reflecties",
     "read-tafsirs": "Lees de tafseer van de Ayah"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "terug naar Ayah",
+  "below-word": "Onderliggend woord:",
   "bismillah": "In de naam van Allah, de meest Barmhartige, de meest Genadevolle.",
   "change-translation": "Vertaling wijzigen",
   "copy-arabic": "Arabische tekst (Uthmani-tekst)",
@@ -17,6 +19,7 @@
   "copy-verse": "Vers kopiëren",
   "cpy-link": "Kopieer link",
   "current-verse": "huidige vers",
+  "done": "Klaar",
   "download-copy": "als u een tekstbestand wilt downloaden.",
   "edgham": "Idghaam (samenvoegen van een letter)",
   "ekhfa": "Ikhfa en Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Arabisch lettertype om te kopiëren",
   "font-placeholder": "Selecteer een lettertype",
+  "font-style": "Lettertype",
   "font-tooltip": "King Fahad V1- en V2-lettertypen zijn in unicode.",
   "footnote": "Voetnoot",
   "footnote-dl": "<b> tweevoud </b> <br/> Een vorm voor werkwoorden en voornaamwoorden in de Arabische taal bij het aanspreken van twee personen",
@@ -73,6 +77,8 @@
   "next-page": "Volgende bladzijde",
   "next-rub": "Volgende Rub el Hizb",
   "next-surah": "volgende surah",
+  "on-click": "Klikken:",
+  "on-hover": "Bij het hoveren:",
   "page-bookmark-removed": "Pagina als bladwijzer verwijderd",
   "page-bookmarked": "Pagina als bladwijzer toegevoegd",
   "posted-in": "Geplaatst in",
@@ -98,6 +104,7 @@
   "query-param-message": "U bekijkt vooraf geselecteerde leesinstellingen. <0> Sluiten </0> om uw huidige instellingen te bekijken of <1> Opslaan </1> om uw instellingen bij te werken",
   "ramadan-of-reflection": "Sluit je aan bij QuranReflect \"Ramadan met reflectie\"",
   "read-more-quran-reflect": "Lees meer over Koran Reflect",
+  "reciter-summary": "(Met vriendelijke toestemming van Tafseer Center)",
   "referencing": "Verwijzen naar",
   "reflection-disclaimer": "Reflecties zijn persoonlijke perspectieven, deze kunnen niet worden aangenomen als maatstaf voor de interpretatie.",
   "reflection-not-available": "Er zijn geen beoordeelde reflecties voor deze ayah",
@@ -131,6 +138,8 @@
     "title": "Feedback over de vertaling",
     "translation": "Vertaling"
   },
+  "verse-preview-title": "Voorbeeld:",
   "verses-range": "Bereik van verzen",
-  "view-on-quran-reflect": "Bekijk op KoranReflect"
+  "view-on-quran-reflect": "Bekijk op KoranReflect",
+  "wbw-helper-text": "Selecteer de opties om voor elk woord een vertaling, transliteratie en/of voordracht weer te geven."
 }

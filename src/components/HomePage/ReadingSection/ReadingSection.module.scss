@@ -1,166 +1,171 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding-block-start: var(--spacing-medium2-px);
-    padding-block-end: var(--spacing-medium);
-    @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
-        padding-block-start: var(--spacing-xlarge-px);
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-block-start: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+    padding-block-start: var(--spacing-xlarge-px);
+  }
 
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxlarge-px);
     }
+  }
 }
 
 .cardsContainer {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: var(--spacing-medium);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--spacing-medium);
 
-    @include breakpoints.smallerThanTablet {
-        gap: 0;
-        flex-direction: column;
-    }
+  @include breakpoints.smallerThanTablet {
+    gap: 0;
+    flex-direction: column;
+  }
 }
 
 .cardContainer {
-    @include breakpoints.smallerThanTablet {
-        width: 100%;
-        padding-block-end: var(--spacing-small-px);
-    }
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-medium);
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+    padding-block-end: var(--spacing-small-px);
+  }
+  inline-size: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
 
-    &:first-child {
-        > :first-child {
-            height: 100%;
-        }
+  &:first-child {
+    > :first-child {
+      block-size: 100%;
     }
+  }
 }
 
 .myQuranText {
-    font-size: var(--font-size-small-px);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-normal-px);
-    }
+  font-size: var(--font-size-small-px);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
 
 .stayConsistentText {
-    padding-block-start: var(--spacing-xxsmall-px);
-    font-size: var(--font-size-xsmall-px);
-    @include breakpoints.tablet {
-        padding-block-start: var(--spacing-small-px);
-        font-size: var(--font-size-normal-px);
-    }
+  padding-block-start: var(--spacing-xxsmall-px);
+  font-size: var(--font-size-xsmall-px);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-small-px);
+    font-size: var(--font-size-normal-px);
+  }
 }
 
 .iconContainer {
-    display: flex;
-    padding-inline-end: var(--spacing-xxsmall-px);
-    @include breakpoints.tablet {
-        padding-inline-end: var(--spacing-small-px);
-    }
+  display: flex;
+  padding-inline-end: var(--spacing-xxsmall-px);
+  @include breakpoints.tablet {
+    padding-inline-end: var(--spacing-small-px);
+  }
 
-    svg {
-        width: var(--spacing-medium2-px);
-        height: var(--spacing-medium2-px);
-        @include breakpoints.tablet {
-            width: var(--spacing-large-px);
-            height: var(--spacing-large-px);
-        }
+  svg {
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+    @include breakpoints.tablet {
+      inline-size: var(--spacing-large-px);
+      block-size: var(--spacing-large-px);
     }
+  }
 }
 
 .myQuranContainer {
-    display: flex;
-    @include breakpoints.smallerThanTablet {
-        svg {
-            width: 12px !important;
-            height: 12px !important;
-        }
+  display: flex;
+  svg {
+    fill: var(--color-blue-buttons-and-icons);
+    color: var(--color-blue-buttons-and-icons);
+  }
+  @include breakpoints.smallerThanTablet {
+    svg {
+      inline-size: 12px !important;
+      block-size: 12px !important;
     }
+  }
 }
 
 .cardWithIcon {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-micro);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-micro);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .streakCardLeft {
-    width: 100%;
+  inline-size: 100%;
 }
 
 .cardOuterContainer {
-    justify-content: space-between;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-micro);
-    font-weight: var(--font-weight-semibold);
-    width: 100%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-micro);
+  font-weight: var(--font-weight-semibold);
+  inline-size: 100%;
 }
 
 .streakCard {
-    box-shadow: none !important;
-    padding-inline: var(--spacing-medium-px);
-    background-color: var(--color-streaks-light);
-    @include breakpoints.smallerThanTablet {
-        padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px) var(--spacing-medium-px);
-    }
+  box-shadow: none !important;
+  padding-inline: var(--spacing-medium-px);
+  background-color: var(--color-streaks-light);
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px)
+      var(--spacing-medium-px);
+  }
 }
 
 .readingSectionContainer {
-    @include breakpoints.smallerThanTablet {
-        padding: var(--spacing-small-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    padding: var(--spacing-small-px);
+  }
 }
 
 .link {
-    @include breakpoints.smallerThanTablet {
-        color: var(--color-text-faded-new);
-    }
+  @include breakpoints.smallerThanTablet {
+    color: var(--color-text-faded-new);
+  }
 }
 
 .linkHref {
-    color: var(--color-text-link);
+  color: var(--color-text-link);
 }
 
 .firstTimeReadingCard {
-    @include breakpoints.smallerThanTablet {
-        box-shadow: none !important;
-        border-radius: 0;
-        padding: var(--spacing-xxsmall);
-    }
+  @include breakpoints.smallerThanTablet {
+    box-shadow: none !important;
+    border-radius: 0;
+    padding: var(--spacing-xxsmall);
+  }
 }
 
 .arrowIcon {
-    @include breakpoints.smallerThanTablet {
-        display: none;
-    }
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }
 
 .arrowIconRight {
-    @include breakpoints.smallerThanTablet {
-        svg {
-            width: 12px !important;
-            height: 12px !important;
-        }
+  @include breakpoints.smallerThanTablet {
+    svg {
+      inline-size: 12px !important;
+      block-size: 12px !important;
     }
+  }
 }

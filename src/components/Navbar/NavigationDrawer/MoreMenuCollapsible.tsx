@@ -10,7 +10,7 @@ import IconCaretDown from '@/icons/caret-down.svg';
 import IconSquareMore from '@/icons/square-more.svg';
 import { logEvent } from '@/utils/eventLogger';
 import {
-  DEVELOPERS_URL,
+  ABOUT_US_URL,
   EXTERNAL_ROUTES,
   PRODUCT_UPDATES_URL,
   SUPPORT_URL,
@@ -34,10 +34,10 @@ interface MoreMenuCollapsibleProps {
 
 const MENUS: MenuItem[] = [
   {
-    title: 'developers',
+    title: 'about',
     icon: <IconArrowRight />,
-    href: DEVELOPERS_URL,
-    eventName: 'navigation_drawer_developers',
+    href: ABOUT_US_URL,
+    eventName: 'navigation_drawer_about',
   },
   {
     title: 'product-updates',

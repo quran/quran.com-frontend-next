@@ -9,9 +9,10 @@ type ActionProps = {
   onClick?: MouseEventHandler;
   isDisabled?: boolean;
   isPrimary?: boolean;
+  dataTestId?: string;
 };
 
-const Action = ({ children, onClick, isDisabled, isPrimary }: ActionProps) => (
+const Action = ({ children, onClick, isDisabled, isPrimary, dataTestId }: ActionProps) => (
   <button
     type="button"
     className={classNames(styles.action, {
@@ -19,6 +20,7 @@ const Action = ({ children, onClick, isDisabled, isPrimary }: ActionProps) => (
     })}
     onClick={onClick}
     disabled={isDisabled}
+    data-testid={dataTestId}
   >
     {children}
   </button>

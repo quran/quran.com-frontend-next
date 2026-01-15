@@ -1,0 +1,27 @@
+@use '@/styles/constants';
+
+/**
+ * Calculates modal overlay spacing to constrain content height and prevent internal scrolling.
+ *
+ * Ensures modal content never exceeds available viewport space by calculating
+ * the total vertical space consumed by padding. This allows content to be
+ * sized as `max-block-size: calc(100dvh - var(--space-taken))` without creating
+ * scrollbars inside the modal.
+ *
+ * Sets three CSS custom properties:
+ * - `--min-space-one-side`: Minimum spacing for one side of the overlay
+ * - `--padding-per-side`: Vertical padding applied to each side of overlay
+ * - `--space-taken`: Total vertical space consumed for content height calculations
+ *
+ * @see Used with `padding-block: var(--padding-per-side)` and `max-block-size: calc(100dvh - var(--space-taken))`
+ */
+@mixin modal-overlay-spacing {
+  --min-space-one-side: calc(2 * var(--spacing-mega));
+
+  --padding-per-side: max(
+    var(--min-space-one-side),
+    calc((100dvh - #{constants.$modal-max-height}) / 2)
+  );
+
+  --space-taken: calc(var(--padding-per-side) * 2);
+}
