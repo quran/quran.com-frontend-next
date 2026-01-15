@@ -142,6 +142,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
         isModalOpen={activeModal === ModalType.EDIT_NOTE}
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
+        onBack={openMyNotesModal}
       />
     </>
   );

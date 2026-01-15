@@ -92,6 +92,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       <PostQRConfirmationModal
         isModalOpen={showConfirmationModal}
         isLoading={isPosting}
+        onBack={handleNotePostToQRClose}
         onModalClose={handleNotePostToQRClose}
         onConfirm={handleNotePostToQR}
       />

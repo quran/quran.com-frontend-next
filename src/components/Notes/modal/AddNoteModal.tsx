@@ -3,6 +3,7 @@ import { useSWRConfig } from 'swr';
 
 import modalStyles from './Modal.module.scss';
 
+import Header from '@/components/Notes/modal/Header';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   getNoteFromResponse,
@@ -61,9 +62,9 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   return (
     <NoteFormModal
       header={
-        <h2 className={modalStyles.title} data-testid="add-note-modal-title">
+        <Header className={modalStyles.title} data-testid="add-note-modal-title">
           {t('take-a-note-or-reflection')}
-        </h2>
+        </Header>
       }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}

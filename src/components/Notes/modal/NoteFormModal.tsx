@@ -156,6 +156,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
       <PostQRConfirmationModal
         isModalOpen={showConfirmationModal && isModalOpen}
         isLoading={loading === LoadingState.Public}
+        onBack={handleConfirmationBack}
         onModalClose={handleConfirmationBack}
         onEdit={handleConfirmationBack}
         onConfirm={handleConfirmationConfirm}

@@ -1,11 +1,9 @@
 import { useContext } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import modalStyles from './Modal.module.scss';
-
+import Header from '@/components/Notes/modal/Header';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   getNoteFromResponse,
@@ -13,15 +11,14 @@ import {
   isNotePublishFailed,
 } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import ArrowIcon from '@/icons/arrow.svg';
 import { Note } from '@/types/auth/Note';
 import { updateNote } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
 interface EditNoteModalProps {
   note: Note;
+  onBack?: () => void;
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
@@ -29,6 +26,7 @@ interface EditNoteModalProps {
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
   note,
+  onBack,
   onMyNotes,
   isModalOpen,
   onModalClose,
@@ -79,21 +77,9 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
       showNotesOnVerseButton={false}
       dataTestId="edit-note-modal-content"
       header={
-        <button
-          type="button"
-          className={classNames(modalStyles.headerButton, modalStyles.title)}
-          onClick={onMyNotes}
-          data-testid="edit-modal-back-button"
-        >
-          <IconContainer
-            icon={<ArrowIcon />}
-            shouldForceSetColors={false}
-            size={IconSize.Custom}
-            className={modalStyles.arrowIcon}
-          />
-
+        <Header onClick={onBack} data-testid="edit-modal-back-button">
           {t('edit-note')}
-        </button>
+        </Header>
       }
     />
   );
