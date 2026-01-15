@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ReadingModeActions.module.scss';
 
-import TranslationDropdown from '@/components/QuranReader/ContextMenu/components/TranslationDropdown';
+import PopoverMenu, { PopoverMenuAlign } from '@/components/dls/PopoverMenu/PopoverMenu';
+import TranslationDropdownContent from '@/components/QuranReader/ContextMenu/components/TranslationDropdownContent';
+import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectSelectedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
@@ -34,8 +36,8 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const selectedReadingTranslation = useSelector(selectSelectedReadingTranslation);
+  const isMobile = useIsMobile();
 
   const openTranslationSettings = useCallback(() => {
     logButtonClick('chapter_header_select_translation');
@@ -52,21 +54,19 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
         ReadingPreference.ReadingTranslation,
       );
       switchReadingPreference(ReadingPreference.ReadingTranslation);
-    } else {
-      setIsDropdownOpen((prev) => !prev);
     }
+    // When already selected, the PopoverMenu handles the toggle
   }, [isTranslationSelected, readingPreference, switchReadingPreference]);
 
-  const handleNoTranslationsClick = useCallback(() => {
-    if (!isTranslationSelected) {
-      logValueChange(
-        'chapter_header_reading_mode',
-        readingPreference,
-        ReadingPreference.ReadingTranslation,
-      );
-      switchReadingPreference(ReadingPreference.ReadingTranslation);
-    }
-  }, [isTranslationSelected, readingPreference, switchReadingPreference]);
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      // Only allow opening via PopoverMenu if translation mode is selected
+      if (isTranslationSelected) {
+        setIsDropdownOpen(open);
+      }
+    },
+    [isTranslationSelected],
+  );
 
   // When no translations selected, show "Translation: None selected" button
   if (!hasTranslations) {
@@ -77,7 +77,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
           [styles.modeButtonSelected]: isTranslationSelected,
           [styles.modeButtonUnselected]: !isTranslationSelected,
         })}
-        onClick={handleNoTranslationsClick}
+        onClick={handleTranslationClick}
       >
         {t('translation')}: {t('reading-preference.none-selected')}
       </button>
@@ -97,38 +97,44 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     ? `${t('translation')}: ${activeTranslation?.name || ''}`
     : t('translation');
 
-  return (
-    <div className={styles.translationButtonWrapper}>
-      <button
-        ref={triggerButtonRef}
-        type="button"
-        aria-expanded={isDropdownOpen}
-        aria-haspopup="listbox"
-        className={classNames(styles.modeButton, styles.translationButton, {
-          [styles.modeButtonSelected]: isTranslationSelected,
-          [styles.modeButtonUnselected]: !isTranslationSelected,
-        })}
-        onClick={handleTranslationClick}
-      >
-        <span className={styles.translationText}>{displayText}</span>
-        {isTranslationSelected && (
-          <ChevronDownIcon
-            className={classNames(styles.dropdownIcon, {
-              [styles.dropdownIconOpen]: isDropdownOpen,
-            })}
-          />
-        )}
-      </button>
-      {isDropdownOpen && (
-        <TranslationDropdown
-          translations={translations || []}
-          selectedTranslations={selectedTranslations}
-          onClose={() => setIsDropdownOpen(false)}
-          onOpenSettings={openTranslationSettings}
-          triggerRef={triggerButtonRef}
+  const triggerButton = (
+    <button
+      type="button"
+      aria-expanded={isDropdownOpen}
+      aria-haspopup="listbox"
+      className={classNames(styles.modeButton, styles.translationButton, {
+        [styles.modeButtonSelected]: isTranslationSelected,
+        [styles.modeButtonUnselected]: !isTranslationSelected,
+      })}
+      onClick={handleTranslationClick}
+    >
+      <span className={styles.translationText}>{displayText}</span>
+      {isTranslationSelected && (
+        <ChevronDownIcon
+          className={classNames(styles.dropdownIcon, {
+            [styles.dropdownIconOpen]: isDropdownOpen,
+          })}
         />
       )}
-    </div>
+    </button>
+  );
+
+  return (
+    <PopoverMenu
+      trigger={triggerButton}
+      isOpen={isDropdownOpen}
+      onOpenChange={handleOpenChange}
+      contentClassName={styles.dropdownContent}
+      align={isMobile ? PopoverMenuAlign.END : PopoverMenuAlign.START}
+      sideOffset={4}
+    >
+      <TranslationDropdownContent
+        translations={translations || []}
+        selectedTranslations={selectedTranslations}
+        onClose={() => setIsDropdownOpen(false)}
+        onOpenSettings={openTranslationSettings}
+      />
+    </PopoverMenu>
   );
 };
 

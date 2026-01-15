@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,23 +16,26 @@ import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
 
-interface TranslationDropdownProps {
+interface TranslationDropdownContentProps {
   translations: AvailableTranslation[];
   selectedTranslations: number[];
   onClose: () => void;
   onOpenSettings: () => void;
-  triggerRef?: React.RefObject<HTMLButtonElement>;
 }
 
-const TranslationDropdown: React.FC<TranslationDropdownProps> = ({
+/**
+ * Content for the translation dropdown menu.
+ * Used inside PopoverMenu which handles positioning and portal rendering.
+ *
+ * @returns {JSX.Element} The dropdown content component
+ */
+const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
   translations,
   selectedTranslations,
   onClose,
   onOpenSettings,
-  triggerRef,
 }) => {
   const { t } = useTranslation('common');
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
@@ -45,32 +48,6 @@ const TranslationDropdown: React.FC<TranslationDropdownProps> = ({
   const currentPrimaryId = currentReadingTranslation
     ? Number(currentReadingTranslation)
     : selectedTranslations[0];
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Node;
-      const isInsideDropdown = dropdownRef.current?.contains(target);
-      const isOnTrigger = triggerRef?.current?.contains(target);
-
-      if (!isInsideDropdown && !isOnTrigger) {
-        onClose();
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose, triggerRef]);
 
   const handleTranslationSelect = (translationId: number) => {
     if (translationId === currentPrimaryId) {
@@ -98,7 +75,7 @@ const TranslationDropdown: React.FC<TranslationDropdownProps> = ({
   };
 
   return (
-    <div ref={dropdownRef} className={styles.dropdown}>
+    <div className={styles.content}>
       <div className={styles.header}>{t('reading-preference.my-translations')}:</div>
       <div className={styles.divider} />
       <div className={styles.itemsContainer}>
@@ -127,4 +104,4 @@ const TranslationDropdown: React.FC<TranslationDropdownProps> = ({
   );
 };
 
-export default TranslationDropdown;
+export default TranslationDropdownContent;

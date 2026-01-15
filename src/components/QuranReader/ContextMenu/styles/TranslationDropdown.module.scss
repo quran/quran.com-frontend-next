@@ -2,21 +2,19 @@
 
 $dropdown-width: 315px;
 
-.dropdown {
-  position: absolute;
-  inset-block-start: calc(100% + var(--spacing-small-px));
-  inset-inline-start: 0;
-  inline-size: $dropdown-width;
-  max-inline-size: calc(100vw - var(--spacing-medium) * 2);
-  padding: var(--spacing-small-px);
+// Content styles for use inside PopoverMenu
+.content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-small-px);
-  background-color: var(--color-background-elevated);
-  border-radius: var(--border-radius-medium-px);
-  box-shadow: var(--shadow-large);
-  z-index: var(--z-index-sticky);
+  inline-size: $dropdown-width;
+  max-inline-size: calc(100vw - var(--spacing-medium) * 2);
+  padding: var(--spacing-small-px);
   box-sizing: border-box;
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: calc(100vw - var(--spacing-large) * 2);
+  }
 }
 
 .header {
@@ -37,6 +35,10 @@ $dropdown-width: 315px;
   gap: var(--spacing-small-px);
   max-block-size: 300px;
   overflow-y: auto;
+
+  @include breakpoints.smallerThanTablet {
+    max-block-size: 200px;
+  }
 }
 
 .dropdownItem {
