@@ -28,6 +28,7 @@ type ModalProps = {
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
   zIndexVariant?: ZIndexVariant;
+  testId?: string;
 };
 
 const Modal = ({
@@ -43,6 +44,7 @@ const Modal = ({
   isInvertedOverlay = false,
   size,
   zIndexVariant,
+  testId,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     {trigger && (
@@ -60,6 +62,7 @@ const Modal = ({
         })}
       />
       <Content
+        testId={testId}
         isPropagationStopped={isPropagationStopped}
         onEscapeKeyDown={onEscapeKeyDown}
         onPointerDownOutside={onClickOutside}

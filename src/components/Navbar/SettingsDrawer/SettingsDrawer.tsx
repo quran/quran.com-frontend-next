@@ -61,6 +61,7 @@ const SettingsDrawer = () => {
   return (
     <Drawer
       id="settings-drawer"
+      data-testid="settings-drawer"
       type={DrawerType.Settings}
       header={header}
       closeOnNavigation={false}

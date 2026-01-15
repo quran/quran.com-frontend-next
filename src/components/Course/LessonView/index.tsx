@@ -44,7 +44,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
 
   return (
     <ContentContainer>
-      <div className={styles.viewContainer}>
+      <div className={styles.viewContainer} data-testid="learning-plan-lesson-view">
         <ContentModal
           isOpen={isCourseMaterialModalOpen}
           onClose={() => {

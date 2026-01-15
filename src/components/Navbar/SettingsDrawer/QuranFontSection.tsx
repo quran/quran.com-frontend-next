@@ -25,6 +25,7 @@ import {
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
+import { TestId } from '@/tests/test-ids';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -201,12 +202,14 @@ const QuranFontSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>{t('style')}</Section.Label>
+
         <Select
           id="quranFontStyles"
           name="quranFontStyles"
           options={fonts[selectedType]}
           value={quranFont}
           onChange={onFontStyleChange}
+          testId={`quran-font-styles-${selectedType}`}
         />
       </Section.Row>
       {selectedType === QuranFont.IndoPak && (
@@ -215,6 +218,7 @@ const QuranFontSection = () => {
           <Select
             id="lines"
             name="lines"
+            testId={TestId.LINES}
             options={lines}
             value={mushafLines}
             onChange={onMushafLinesChange}

@@ -8,6 +8,7 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import TheListIcon from '@/icons/the_list.svg';
 import { toggleIsVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const NavigationButton = () => {
@@ -23,6 +24,7 @@ const NavigationButton = () => {
       className={heroButtonStyles.button}
       onClick={onClick}
       size={ButtonSize.Small}
+      data-testid={TestId.NAVIGATE_QURAN_BUTTON}
     >
       <div className={heroButtonStyles.buttonContent}>
         <IconContainer size={IconSize.Xsmall} icon={<TheListIcon />} shouldForceSetColors={false} />

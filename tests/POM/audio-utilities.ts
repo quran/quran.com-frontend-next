@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-await-in-loop */
 import { expect, Locator, Page } from '@playwright/test';
 

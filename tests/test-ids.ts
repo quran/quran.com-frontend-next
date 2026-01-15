@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 
@@ -23,6 +21,7 @@ export enum TestId {
   AUTO_BUTTON = 'auto-button',
   AYAH_SELECTION = 'ayah-selection',
   BANNER = 'banner',
+  CHANGE_THEME_BUTTON = 'change-theme',
   BISMILLAH_SECTION = 'bismillah-section',
   BOTTOM_ACTION_TAB_TAFSIR = 'bottom-action-tab-tafsir',
   CHAPTER_AND_JUZ_LIST = 'chapter-and-juz-list',
@@ -37,10 +36,7 @@ export enum TestId {
   DARK_BUTTON = 'dark-button',
   DECREMENT_BUTTON = 'decrement-button',
   END_OF_SCROLLING_CONTROLS = 'end-of-scrolling-controls',
-  ERROR_TOAST = 'error-toast',
   EXPLORE_TOPICS_CONTAINER = 'explore-topics-container',
-  FEEDBACK_ERROR_MAXIMUM_LENGTH = 'feedback-error-maximum-length',
-  FEEDBACK_ERROR_REQUIRED_FIELD = 'feedback-error-required-field',
   FOOTNOTE_CONTENT = 'footnote-content',
   FORM_BUILDER_VALIDATION_ERRORS = 'form-builder-validation-errors',
   HEADER = 'header',
@@ -58,12 +54,12 @@ export enum TestId {
   LIGHT_BUTTON = 'light-button',
   LINES = 'lines',
   LISTEN_BUTTON = 'listen-button',
-  ROOT_DIALOG = 'root-dialog',
   MODAL_CONTENT = 'modal-content',
   MORE_RESULTS = 'more-results',
   NAVBAR = 'navbar',
   NAVIGATE_QURAN_BUTTON = 'navigate-quran-button',
   NAVIGATION_DRAWER = 'navigation-drawer',
+  NAVIGATION_DRAWER_CLOSE_BUTTON = 'drawer-close-button',
   NAVIGATION_DRAWER_BODY = 'navigation-drawer-body',
   NAVIGATION_LINKS_OUR_PROJECTS = 'navigation-links-our-projects',
   NEXT_PAGE_BUTTON = 'next-page-button',
@@ -95,9 +91,7 @@ export enum TestId {
   SEPIA_BUTTON = 'sepia-button',
   SIDEBAR_NAVIGATION = 'sidebar-navigation',
   SIGNUP_BUTTON = 'signup-button',
-  SUCCESS_TOAST = 'success-toast',
   SURAH_INFO_BUTTON = 'surah-info-button',
-  SURAH_INFO_CONTENT = 'surah-info-content',
   SURAH_NAME = 'surah-name',
   SURAH_NUMBER_OF_AYAHS = 'surah-number-of-ayahs',
   SURAH_REVELATION_PLACE = 'surah-revelation-place',
@@ -108,22 +102,15 @@ export enum TestId {
   TEXT_UTHMANI_BUTTON = 'text_uthmani-button',
   THEME_SWITCHER = 'theme-switcher',
   TRANSLATION_BUTTON = 'translation-button',
-  TRANSLATION_ERROR_REQUIRED_FIELD = 'translation-error-required-field',
-  TRANSLATION_FEEDBACK_SUBMIT_BUTTON = 'translation-feedback-submit-button',
-  TRANSLATION_FEEDBACK_TEXTAREA = 'translation-feedback-textarea',
-  TRANSLATION_SELECT_LABEL = 'translation-select-label',
-  TRANSLATION_SELECT_TRIGGER = 'translation-select-trigger',
+  TRANSLATION_SELECT = 'translation-select',
   TRANSLATION_TAB = 'translation-tab',
-  TRANSLATIONS_SELECTED_CARD = 'Traductions s\u00E9lectionn\u00E9es Card',
+  TRANSLATION_CARD = 'translation-card',
   VERIFICATION_CODE = 'verification-code',
-  VERSE_ACTIONS_MORE = 'verse-actions-more',
-  VERSE_ACTIONS_MENU_MORE = 'verse-actions-menu-more',
-  VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK = 'verse-actions-menu-translation-feedback',
   VERSE_BUTTON = 'verse-button',
   VERSE_LIST = 'verse-list',
   WBW_TRANSLATION = 'wbw-translation',
   WBW_TRANSLITERATION = 'wbw-transliteration',
-  WORD_BY_WORD = 'wordByWord',
+  WORD_BY_WORD = 'wbw-language-select',
 }
 
 export type SettingsQuranFont = QuranFont.IndoPak | QuranFont.Uthmani | QuranFont.Tajweed;
@@ -162,9 +149,3 @@ export const getThemeButtonTestId = (theme: ThemeType): TestId => THEME_BUTTON_T
 
 export const getQuranFontButtonTestId = (font: SettingsQuranFont): TestId =>
   QURAN_FONT_BUTTON_TEST_IDS[font];
-
-export const getTranslationPreviewTestId = (translationId: string): string =>
-  `translation-preview-${translationId}`;
-
-export const getTranslationSelectOptionTestId = (translationId: string): string =>
-  `translation-select-option-${translationId}`;

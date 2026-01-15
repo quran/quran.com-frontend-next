@@ -24,6 +24,7 @@ const NavigationDrawer = () => {
   return (
     <Drawer
       id="navigation-drawer"
+      data-testid="navigation-drawer"
       type={DrawerType.Navigation}
       side={DrawerSide.Right}
       header={

@@ -232,6 +232,7 @@ const WordByWordSection = () => {
             return (
               <Select
                 size={SelectSize.Small}
+                testId="wbw-language-select"
                 id="wordByWord"
                 name="wordByWord"
                 options={options}

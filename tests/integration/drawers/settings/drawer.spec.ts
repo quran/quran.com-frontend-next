@@ -8,6 +8,8 @@ test.beforeEach(async ({ page }) => {
 
 test('Settings drawer icon should open the drawer when clicked', async ({ page, context }) => {
   const homepage = new Homepage(page, context);
+  homepage.goTo('/1');
+
   // 1. Make sure the theme section is not visible
   await expect(page.locator('button:has-text("Light")')).not.toBeVisible();
   // 2. Click the settings drawer trigger

@@ -33,6 +33,7 @@ const BismillahSection: React.FC<BismillahSectionProps> = ({
 
   return (
     <div
+      data-testid="bismillah-section"
       className={classNames(styles.bismillahContainer, {
         [styles.withReadingView]: !isTranslationView,
         [styles.withTranslationView]: isTranslationView,

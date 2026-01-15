@@ -102,6 +102,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         data-page={verse.pageNumber}
         data-chapter-id={verse.chapterId}
         data-hizb={verse.hizbNumber}
+        data-testid={`verse-${verse.verseKey}`}
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
         })}

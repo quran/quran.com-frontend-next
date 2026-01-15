@@ -22,11 +22,17 @@ const Card: React.FC<CardProps> = ({
   className,
   linkClassName,
   onClick,
+  testId,
 }) => {
   if (link) {
     return (
       <Link href={link} isNewTab={isNewTab} className={linkClassName} onClick={onClick}>
-        <div className={classNames(className, styles.card, styles.cardWithLink)}>{children}</div>
+        <div
+          className={classNames(className, styles.card, styles.cardWithLink)}
+          data-testid={testId}
+        >
+          {children}
+        </div>
       </Link>
     );
   }

@@ -66,6 +66,7 @@ public/robots.txt
 # playwright
 test-results/
 playwright-report/
+playwright/.auth/user.json
 
 keys
 

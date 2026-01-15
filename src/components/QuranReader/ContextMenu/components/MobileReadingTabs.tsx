@@ -59,6 +59,8 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
             role="tab"
             tabIndex={0}
             id={tab.id}
+            data-testid={tab.id}
+            data-is-selected={readingPreference === tab.value}
             onClick={() => onViewSwitched(tab.value as ReadingPreference)}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {

@@ -93,6 +93,7 @@ const SidebarNavigation = () => {
     <div
       ref={sidebarRef}
       data-is-homepage={isHomePage}
+      data-testid={showSidebar ? 'sidebar-navigation' : undefined}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showSidebar && isNavbarVisible,
         [styles.visibleContainerCollapsed]: showSidebar && !isNavbarVisible,
