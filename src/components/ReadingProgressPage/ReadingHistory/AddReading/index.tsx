@@ -36,6 +36,7 @@ import {
   getMonthsInYear,
 } from '@/utils/datetime';
 import { logValueChange, logButtonClick, logFormSubmission } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 
 const AddReading = () => {
   const { t, lang } = useTranslation('reading-progress');
@@ -52,6 +53,13 @@ const AddReading = () => {
   const [totalSecondsError, setTotalSecondsError] = useState<string | null>(null);
 
   const months = useMemo(() => getMonthsInYear(selectedYear, lang), [selectedYear, lang]);
+  const localizedSelectedYear = useMemo(
+    () =>
+      toLocalizedNumber(selectedYear, lang, undefined, {
+        useGrouping: false,
+      }),
+    [selectedYear, lang],
+  );
   const mushaf = useGetMushaf();
   const toast = useToast();
   const { cache, mutate } = useSWRConfig();
@@ -259,7 +267,7 @@ const AddReading = () => {
                 >
                   <ChevronLeft />
                 </Button>
-                <p className={styles.yearName}>{selectedYear}</p>
+                <p className={styles.yearName}>{localizedSelectedYear}</p>
                 <Button
                   variant={ButtonVariant.Ghost}
                   shape={ButtonShape.Circle}
