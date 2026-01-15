@@ -92,7 +92,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   // Use selectedReadingTranslation if set, otherwise fall back to first in list
   const activeTranslationId = selectedReadingTranslation
     ? Number(selectedReadingTranslation)
-    : selectedTranslations[0];
+    : selectedTranslations?.[0] ?? null;
 
   const activeTranslation = translations?.find(
     (translation) => translation.id === activeTranslationId,

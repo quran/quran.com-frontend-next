@@ -295,6 +295,7 @@ export default {
     readingPreferences: {
       ...state.readingPreferences,
       lastUsedReadingMode: initialState.readingPreferences.lastUsedReadingMode,
+      selectedReadingTranslation: initialState.readingPreferences.selectedReadingTranslation,
     },
   }),
 };

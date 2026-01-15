@@ -45,9 +45,9 @@ const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
   const availableTranslations = translations.filter((tr) => selectedTranslations.includes(tr.id));
 
   // Current primary translation: use selectedReadingTranslation if set, otherwise first in list
-  const currentPrimaryId = currentReadingTranslation
+  const currentPrimaryId: number | null = currentReadingTranslation
     ? Number(currentReadingTranslation)
-    : selectedTranslations[0];
+    : selectedTranslations?.[0] ?? null;
 
   const handleTranslationSelect = (translationId: number) => {
     if (translationId === currentPrimaryId) {

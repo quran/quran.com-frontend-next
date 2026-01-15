@@ -3,6 +3,7 @@ import React from 'react';
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
 
+import { toLocalizedNumber } from '@/utils/locale';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -52,7 +53,7 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
     <div className={styles.container}>
       <div className={styles.translationContent}>{getTranslationContent()}</div>
       <div className={styles.pageFooter}>
-        <span className={styles.pageNumber}>{pageNumber}</span>
+        <span className={styles.pageNumber}>{toLocalizedNumber(pageNumber, lang)}</span>
       </div>
     </div>
   );

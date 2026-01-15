@@ -12,7 +12,7 @@ import ReadingViewWordPopover from './WordPopover';
 import useIsMobile from '@/hooks/useIsMobile';
 import { logErrorToSentry } from '@/lib/sentry';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
+import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
 import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 import Language from 'types/Language';
@@ -97,9 +97,10 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   const handleMobileClick = useCallback(
     (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.tagName === 'SUP') {
+      const supElement = target.closest('sup');
+      if (supElement) {
         event.stopPropagation();
-        handleFootnoteClick(target);
+        handleFootnoteClick(supElement as HTMLElement);
         return;
       }
       logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
@@ -122,10 +123,11 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   const handleDesktopClick = useCallback(
     (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      if (target.tagName === 'SUP') {
+      const supElement = target.closest('sup');
+      if (supElement) {
         event.stopPropagation();
         event.preventDefault();
-        handleFootnoteClick(target);
+        handleFootnoteClick(supElement as HTMLElement);
         return;
       }
       logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
@@ -142,7 +144,9 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   }, []);
 
   // Verse number element - used as popover trigger on desktop for consistent positioning
-  const verseNumberElement = <span className={styles.verseNumber}>{verse.verseNumber}.</span>;
+  const verseNumberElement = (
+    <span className={styles.verseNumber}>{toLocalizedNumber(verse.verseNumber, lang)}.</span>
+  );
 
   // Translation text element
   const translationTextElement = (
