@@ -35,6 +35,8 @@ $bismillahSvgInlineSizeMobile: 148px;
   justify-content: center;
   align-items: center;
   inline-size: 100%;
+  box-sizing: border-box;
+  max-inline-size: 100%;
 }
 
 .leftControls {

@@ -176,12 +176,6 @@ const ReadingView = ({
     [scrollToNextPage],
   );
 
-  // Handler for ayah clicks in Reading Translation mode
-  // TODO: This will open Study Mode popup when implemented (separate story)
-  const handleAyahClick = useCallback((verseKey: string) => {
-    logButtonClick('reading_translation_ayah_click', { verseKey });
-  }, []);
-
   useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
   useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
@@ -211,7 +205,6 @@ const ReadingView = ({
         setMushafPageToVersesMap={setMushafPageToVersesMap}
         initialData={initialData}
         readingPreference={readingPreference}
-        onAyahClick={handleAyahClick}
       />
     );
   };

@@ -30,7 +30,6 @@ type PageProps = {
   pageIndex: number;
   bookmarksRangeUrl: string | null;
   lang: string;
-  onAyahClick?: (verseKey: string) => void;
 };
 
 const Page = ({
@@ -40,7 +39,6 @@ const Page = ({
   pageIndex,
   bookmarksRangeUrl,
   lang,
-  onAyahClick,
 }: PageProps) => {
   const readingPreference = useSelector(selectReadingPreference);
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
@@ -91,7 +89,7 @@ const Page = ({
           verses={verses}
           pageNumber={pageNumber}
           lang={lang}
-          onAyahClick={onAyahClick}
+          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </div>
     );
