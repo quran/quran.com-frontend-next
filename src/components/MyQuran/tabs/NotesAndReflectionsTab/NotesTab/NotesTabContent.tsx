@@ -16,6 +16,9 @@ import { AttachedEntityType, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
+// It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
+const PROXIMATE_NOTE_HEIGHT = 140;
+
 type NoteWithPostUrl = Note & { postUrl?: string };
 
 interface NotesTabContentProps {
@@ -115,14 +118,17 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
 
   return (
     <>
-      <Virtuoso
-        data={notesWithPostUrl}
-        overscan={10}
-        increaseViewportBy={{ top: 10, bottom: 10 }}
-        endReached={loadMore}
-        itemContent={renderNote}
-        useWindowScroll
-      />
+      <div style={{ minBlockSize: notesWithPostUrl.length * PROXIMATE_NOTE_HEIGHT }}>
+        <Virtuoso
+          data={notesWithPostUrl}
+          className={styles.virtuosoList}
+          overscan={10}
+          increaseViewportBy={100}
+          endReached={loadMore}
+          itemContent={renderNote}
+          useWindowScroll
+        />
+      </div>
 
       {(isLoadingMore || isLoading) && <CardsSkeleton count={5} />}
 

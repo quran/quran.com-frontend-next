@@ -9,6 +9,9 @@ import CardsSkeleton from '@/components/MyQuran/Skeleton';
 import ReflectionCard from '@/components/Notes/modal/MyNotes/Card/ReflectionCard';
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
 
+// It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
+const PROXIMATE_REFLECTION_HEIGHT = 160;
+
 interface ReflectionsTabContentProps {
   reflections: AyahReflection[];
   isLoading: boolean;
@@ -56,14 +59,17 @@ const ReflectionsTabContent: React.FC<ReflectionsTabContentProps> = ({
 
   return (
     <>
-      <Virtuoso
-        data={reflections}
-        overscan={10}
-        increaseViewportBy={{ top: 10, bottom: 10 }}
-        endReached={loadMore}
-        itemContent={renderReflection}
-        useWindowScroll
-      />
+      <div style={{ minBlockSize: reflections.length * PROXIMATE_REFLECTION_HEIGHT }}>
+        <Virtuoso
+          data={reflections}
+          className={styles.virtuosoList}
+          overscan={10}
+          increaseViewportBy={100}
+          endReached={loadMore}
+          itemContent={renderReflection}
+          useWindowScroll
+        />
+      </div>
 
       {(isLoadingMore || isLoading) && <CardsSkeleton count={5} />}
     </>
