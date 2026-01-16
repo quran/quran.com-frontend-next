@@ -128,6 +128,7 @@ export type WidgetColors = {
 };
 
 export type WidgetLabels = {
+  quran: string;
   surah: string;
   verse: string;
   tafsirs: string;

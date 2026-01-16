@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
@@ -49,6 +50,21 @@ const formatVerseLabel = (
   return localizedStart;
 };
 
+const formatVerseCaption = (
+  chapterId: number,
+  verseNumber: number,
+  rangeEnd: number | undefined,
+  locale: string,
+): string => {
+  const localizedChapter = toLocalizedNumber(chapterId, locale);
+  const localizedStart = toLocalizedNumber(verseNumber, locale);
+  if (rangeEnd) {
+    const localizedEnd = toLocalizedNumber(rangeEnd, locale);
+    return `${localizedChapter}:${localizedStart}-${localizedEnd}`;
+  }
+  return `${localizedChapter}:${localizedStart}`;
+};
+
 const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const audioUrl = options.audioUrl || null;
   const locale = options.locale || 'en';
@@ -62,11 +78,21 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const verseCaptionUrl = options.rangeEnd
     ? `${verse.chapterId}:${verse.verseNumber}-${options.rangeEnd}`
     : verseCaption;
-  const siteLinkLabel = `Quran.com/${verseCaption}`;
+  const siteLinkLabel = `quran.com/${verseCaption}`;
 
   // Labels with defaults
+  const quranLabel = options.labels?.quran || 'Quran';
   const surahLabel = options.labels?.surah || 'Surah';
   const verseWordLabel = options.labels?.verse || 'Verse';
+  const localizedVerseCaption = formatVerseCaption(
+    Number(verse.chapterId),
+    Number(verse.verseNumber),
+    Number(options.rangeEnd),
+    locale,
+  );
+  const headerTitle = options.surahName
+    ? `${quranLabel} ${localizedVerseCaption} (${surahLabel} ${options.surahName})`
+    : `${verseWordLabel} ${verseLabel}`;
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
 
   // Construct the URL to the verse on Quran.com
@@ -127,9 +153,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           textAlign: isRtl ? 'right' : 'left',
         }}
       >
-        {options.surahName
-          ? `${surahLabel} ${options.surahName}, ${verseWordLabel} ${verseLabel}`
-          : `${verseWordLabel} ${verseCaption}`}
+        {headerTitle}
       </div>
       <div
         style={{
@@ -146,7 +170,8 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           style={{
             fontSize: 13,
             color: colors.secondaryText,
-            textDecoration: 'none',
+            textUnderlineOffset: 2,
+            fontWeight: 500,
           }}
         >
           {siteLinkLabel}

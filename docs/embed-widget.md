@@ -159,7 +159,8 @@ Notes:
 ## Localization
 
 Widget labels are localized via `next-translate` in the embed page. The builder locale list is
-derived from `i18n.json`. Action labels now include separate `reflections` and `lessons` keys.
+derived from `i18n.json`. The header now uses a `quran` label from `quran-reader` (`q-and-a.quran`).
+Action labels include separate `reflections` and `lessons` keys.
 
 If you add new labels:
 

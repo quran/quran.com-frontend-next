@@ -482,6 +482,7 @@ const loadWidgetLabels = async (locale: string): Promise<WidgetLabels> => {
   const tQuranReader = await getT(locale, 'quran-reader');
 
   return {
+    quran: tQuranReader('q-and-a.quran'),
     surah: tCommon('surah'),
     verse: tCommon('verse'),
     tafsirs: tQuranReader('tafsirs'),
