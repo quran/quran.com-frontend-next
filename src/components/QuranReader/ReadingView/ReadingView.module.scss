@@ -1,7 +1,7 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$empty-state-gap-desktop: 146px;
+$empty-state-gap-desktop: 140px;
 $empty-state-gap-mobile: 50px;
 
 @include utility.generate-line-width-scales('code_v1');
@@ -32,16 +32,9 @@ $empty-state-gap-mobile: 50px;
   flex-direction: column;
   align-items: center;
   inline-size: 100%;
-  gap: $empty-state-gap-desktop;
+  padding-block-start: $empty-state-gap-desktop;
 
   @include breakpoints.smallerThanTablet {
-    gap: $empty-state-gap-mobile;
+    padding-block-start: $empty-state-gap-mobile;
   }
-}
-
-.emptyStateControls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-block-start: var(--spacing-large-px);
 }

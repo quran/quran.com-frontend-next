@@ -18,14 +18,11 @@ import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
 import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/components/EmptyTranslationMessage';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
-import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
 import Spinner from '@/dls/Spinner/Spinner';
-import useDirection from '@/hooks/useDirection';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
@@ -80,7 +77,6 @@ const ReadingView = ({
     getInitialMushafMap(initialData),
   );
   const { lang } = useTranslation('quran-reader');
-  const direction = useDirection();
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations);
@@ -216,15 +212,11 @@ const ReadingView = ({
   const shouldShowQueryParamMessage =
     reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
 
-  // When in empty state, show only the top controls bar and empty message (no mushaf content)
+  // When in empty state, show only the empty message (no mushaf content)
+  // Note: We don't render ReadingModeActions here because ContextMenu already handles mode switching
   if (showEmptyState) {
-    const chapterId = initialData?.verses?.[0]?.chapterId;
     return (
       <div className={styles.emptyStateContainer}>
-        <div dir={direction} className={styles.emptyStateControls}>
-          {chapterId && <PlayChapterAudioButton chapterId={Number(chapterId)} />}
-          <ReadingModeActions />
-        </div>
         <EmptyTranslationMessage />
       </div>
     );
