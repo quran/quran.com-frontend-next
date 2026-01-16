@@ -26,7 +26,6 @@ type LinkProps = {
   title?: string;
   children?: React.ReactNode;
   ariaLabel?: string;
-  testId?: string;
 };
 
 const Link: React.FC<LinkProps> = ({
