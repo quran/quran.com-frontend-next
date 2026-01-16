@@ -501,7 +501,10 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+export const getCourses = async (params?: {
+  myCourses?: boolean;
+  languages?: string[];
+}): Promise<Course[]> => privateFetcher(makeGetCoursesUrl(params));
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));

@@ -22,7 +22,7 @@ type Props = {
 };
 
 const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
-  const { t } = useTranslation('learn');
+  const { t, lang } = useTranslation('learn');
   return (
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>
@@ -47,7 +47,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
           <DataFetcher
             loading={Loading}
             fetcher={privateFetcher}
-            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses })}
+            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses, languages: [lang] })}
             render={(data: CoursesResponse) => (
               <CoursesList courses={data.data} isMyCourses={isMyCourses} />
             )}
