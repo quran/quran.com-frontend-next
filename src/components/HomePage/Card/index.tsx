@@ -13,6 +13,7 @@ interface CardProps {
   className?: string;
   linkClassName?: string;
   onClick?: () => void;
+  testId?: string;
 }
 
 const Card: React.FC<CardProps> = ({
