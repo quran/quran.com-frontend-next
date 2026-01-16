@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
+import { KeyedMutator } from 'swr';
 
 import styles from '../NotesAndReflectionsTab.module.scss';
 
@@ -12,7 +13,7 @@ import useDeleteNote from '@/components/Notes/modal/MyNotes/useDeleteNote';
 import usePostNoteToQR from '@/components/Notes/modal/MyNotes/usePostNoteToQr';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import { AttachedEntityType, Note } from '@/types/auth/Note';
+import { AttachedEntityType, GetAllNotesResponse, Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
@@ -27,6 +28,7 @@ interface NotesTabContentProps {
   isLoadingMore: boolean;
   error: any;
   loadMore: () => void;
+  mutateCache: KeyedMutator<GetAllNotesResponse[]>;
 }
 
 enum ModalState {
@@ -40,11 +42,17 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
   isLoadingMore,
   error,
   loadMore,
+  mutateCache,
 }) => {
   const { t } = useTranslation('notes');
 
   const [modalState, setModalState] = useState<ModalState | null>(null);
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+
+  // Revalidate the SWRInfinite cache after mutations
+  const revalidateCache = useCallback(() => {
+    mutateCache();
+  }, [mutateCache]);
 
   const {
     showConfirmationModal,
@@ -52,9 +60,11 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR();
+  } = usePostNoteToQR({ onSuccess: revalidateCache });
 
-  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote();
+  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
+    onSuccess: revalidateCache,
+  });
 
   const notesWithPostUrl = useMemo((): NoteWithPostUrl[] => {
     return notes.map((note) => {
@@ -138,6 +148,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         onModalClose={handleCloseModal}
         onMyNotes={handleCloseModal}
         note={selectedNote}
+        onSuccess={revalidateCache}
       />
 
       <PostQRConfirmationModal

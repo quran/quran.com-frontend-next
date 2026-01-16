@@ -73,7 +73,7 @@ export const invalidateCache = ({
   }
 
   invalidateVerseCaches(mutate, uniqueVerseKeys);
-  invalidateNoteCaches(mutate, note);
+  invalidateNoteCaches(mutate, cache, note);
   if (invalidateReflections) invalidateReflectionsCaches(mutate, cache);
 };
 
@@ -121,9 +121,24 @@ const invalidateVerseCaches = (mutate: ScopedMutator<unknown>, verseKeys: string
 
 /**
  * Invalidates individual note and general notes list caches.
+ * Also invalidates paginated notes lists used by useSWRInfinite.
  */
-const invalidateNoteCaches = (mutate: ScopedMutator<unknown>, note: Note | undefined): void => {
-  mutate(makeNotesUrl(), undefined, { revalidate: true });
+const invalidateNoteCaches = (
+  mutate: ScopedMutator<unknown>,
+  cache: Cache<unknown> | undefined,
+  note: Note | undefined,
+): void => {
+  const baseNotesPath = makeNotesUrl();
+  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+
+  // Invalidate paginated notes lists (useSWRInfinite keys like "notes?sortBy=...&limit=...&cursor=...")
+  if (cacheKeys) {
+    const keys = [...cacheKeys].filter((key) => key.startsWith(baseNotesPath));
+    keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
+  }
+
+  // Also invalidate the base URL for regular useSWR consumers
+  mutate(baseNotesPath, undefined, { revalidate: true });
   if (note) mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
 };
 

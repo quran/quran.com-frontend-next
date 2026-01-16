@@ -22,6 +22,7 @@ interface EditNoteModalProps {
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
+  onSuccess?: () => void;
 }
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
@@ -30,6 +31,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   onMyNotes,
   isModalOpen,
   onModalClose,
+  onSuccess,
 }) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('notes');
@@ -60,6 +62,8 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         invalidateCount: true,
         invalidateReflections: isPublic,
       });
+
+      onSuccess?.();
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

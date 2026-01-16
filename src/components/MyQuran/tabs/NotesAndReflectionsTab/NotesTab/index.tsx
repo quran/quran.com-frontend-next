@@ -31,7 +31,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     return makeNotesUrl({ sortBy, cursor: endCursor, limit: 10 });
   };
 
-  const { data, size, setSize, isValidating, error } = useSWRInfinite<GetAllNotesResponse>(
+  const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
     async (key) => getNotes(sortBy, key),
     { revalidateOnFocus: false, revalidateFirstPage: false, revalidateOnMount: true },
@@ -55,6 +55,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
         isLoadingMore={notes?.length > 0 && size > 1 && isValidating}
         error={error}
         loadMore={loadMore}
+        mutateCache={mutate}
       />
     </div>
   );

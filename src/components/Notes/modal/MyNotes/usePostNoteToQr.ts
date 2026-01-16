@@ -12,6 +12,10 @@ import { Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
+interface UsePostNoteToQROptions {
+  onSuccess?: () => void;
+}
+
 interface UsePostNoteToQRReturn {
   showConfirmationModal: boolean;
   noteToPost: Note | null;
@@ -21,7 +25,7 @@ interface UsePostNoteToQRReturn {
   handleNotePostToQR: () => Promise<void>;
 }
 
-const usePostNoteToQR = (): UsePostNoteToQRReturn => {
+const usePostNoteToQR = (options?: UsePostNoteToQROptions): UsePostNoteToQRReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -50,6 +54,7 @@ const usePostNoteToQR = (): UsePostNoteToQRReturn => {
 
       setShowConfirmationModal(false);
       setNoteToPost(null);
+      options?.onSuccess?.();
     },
     onError: (error, note) => {
       toast(t('common:error.general'), { status: ToastStatus.Error });

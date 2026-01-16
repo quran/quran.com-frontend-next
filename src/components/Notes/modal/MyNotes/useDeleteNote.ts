@@ -14,6 +14,10 @@ import { Note } from '@/types/auth/Note';
 import { deleteNote } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
+interface UseDeleteNoteOptions {
+  onSuccess?: () => void;
+}
+
 interface UseDeleteNoteReturn {
   showDeleteConfirmation: boolean;
   noteToDelete: Note | null;
@@ -21,7 +25,7 @@ interface UseDeleteNoteReturn {
   handleDeleteNoteClick: (note: Note) => Promise<void>;
 }
 
-const useDeleteNote = (): UseDeleteNoteReturn => {
+const useDeleteNote = (options?: UseDeleteNoteOptions): UseDeleteNoteReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -54,6 +58,7 @@ const useDeleteNote = (): UseDeleteNoteReturn => {
 
         setShowDeleteConfirmation(false);
         clearDeleteNote();
+        options?.onSuccess?.();
       },
       onError: (error, note) => {
         toast(t('common:error.general'), { status: ToastStatus.Error });
