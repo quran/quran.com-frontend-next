@@ -100,9 +100,6 @@ export type WidgetOptions = {
   // Surah name to show in the header
   surahName?: string;
 
-  // Surah slug for building canonical URLs
-  chapterSlug?: string;
-
   // Custom width to constrain the widget (e.g. "600px" or "100%")
   customWidth?: string;
 

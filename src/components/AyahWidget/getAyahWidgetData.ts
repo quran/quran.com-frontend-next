@@ -29,7 +29,6 @@ import type {
 import type AvailableTranslation from 'types/AvailableTranslation';
 import Language from 'types/Language';
 import QuestionType from 'types/QuestionsAndAnswers/QuestionType';
-import type Slug from 'types/Slug';
 import type Translation from 'types/Translation';
 import type Verse from 'types/Verse';
 
@@ -113,7 +112,6 @@ const sanitizeVerse = (verse: Verse): Verse => ({
  * @param {object | undefined} meta - Computed metadata.
  * @param {boolean} meta.hasAnyTranslations - Whether any translation exists for the fetched verses.
  * @param {string | undefined} meta.surahName - Resolved Surah name.
- * @param {string | undefined} meta.chapterSlug - Resolved Surah slug.
  * @param {string | undefined} meta.audioUrl - Chapter audio URL.
  * @param {number | undefined} meta.audioStart - Start second for the range.
  * @param {number | undefined} meta.audioEnd - End second for the range.
@@ -145,7 +143,6 @@ const buildWidgetOptions = (
     hasAnswers: boolean;
     isClarificationQuestion: boolean;
     surahName?: string;
-    chapterSlug?: string;
     audioUrl?: string;
     audioStart?: number;
     audioEnd?: number;
@@ -170,7 +167,6 @@ const buildWidgetOptions = (
   hasAnswers: meta?.hasAnswers ?? false,
   isClarificationQuestion: meta?.isClarificationQuestion ?? false,
   surahName: meta?.surahName,
-  chapterSlug: meta?.chapterSlug,
   customWidth: params.customWidth,
   customHeight: params.customHeight,
   audioUrl: meta?.audioUrl,
@@ -631,24 +627,6 @@ const enrichVerseTranslations = async (verses: Verse[]): Promise<Verse[]> => {
 };
 
 /**
- * Resolve chapter slug from chapter data.
- *
- * @param {ChapterResponse['chapter']} chapterData - Chapter metadata.
- * @param {number} chapterNumber - Chapter number.
- * @returns {Promise<string | undefined>} Chapter slug or chapter number as string.
- */
-const resolveChapterSlug = async (
-  chapterData: ChapterResponse['chapter'],
-  chapterNumber: number,
-): Promise<string | undefined> => {
-  if (!chapterData) return undefined;
-
-  const chapterSlug =
-    typeof chapterData.slug === 'string' ? chapterData.slug : (chapterData.slug as Slug)?.slug;
-  return chapterSlug || String(chapterNumber);
-};
-
-/**
  * Resolve surah name and audio segment bounds (best-effort).
  *
  * @param {object} params - Param bag.
@@ -658,7 +636,7 @@ const resolveChapterSlug = async (
  * @param {boolean} params.enableAudio - Enable audio.
  * @param {number} params.reciterId - Numeric reciter id.
  * @param {ChapterResponse['chapter']} params.chapterData - Chapter data.
- * @returns {Promise<{ surahName?: string; chapterSlug?: string; audioUrl?: string; audioStart?: number; audioEnd?: number }>} Meta.
+ * @returns {Promise<{ surahName?: string; audioUrl?: string; audioStart?: number; audioEnd?: number }>} Meta.
  */
 const resolveWidgetMeta = async (params: {
   verses: Verse[];
@@ -667,23 +645,15 @@ const resolveWidgetMeta = async (params: {
   enableAudio: boolean;
   reciterId: number;
   chapterData: ChapterResponse['chapter'];
-}): Promise<{
-  surahName?: string;
-  chapterSlug?: string;
-  audioUrl?: string;
-  audioStart?: number;
-  audioEnd?: number;
-}> => {
+}): Promise<{ surahName?: string; audioUrl?: string; audioStart?: number; audioEnd?: number }> => {
   const firstVerse: Verse = params.verses[0];
   const lastVerse: Verse = params.verses[params.verses.length - 1];
 
   const surahName: string | undefined =
     params.locale === 'ar' ? params.chapterData?.nameArabic : params.chapterData?.nameSimple;
 
-  const chapterSlug = await resolveChapterSlug(params.chapterData, params.chapterNumber);
-
   // Audio is best-effort. If it fails, the widget can still render.
-  if (!params.enableAudio) return { surahName, chapterSlug };
+  if (!params.enableAudio) return { surahName };
 
   try {
     const audioData = await getChapterAudioData(params.reciterId, params.chapterNumber, true);
@@ -698,14 +668,14 @@ const resolveWidgetMeta = async (params: {
       : undefined;
     const audioEnd: number | undefined = endTiming ? endTiming.timestampTo / 1000 : undefined;
 
-    return { surahName, chapterSlug, audioUrl, audioStart, audioEnd };
+    return { surahName, audioUrl, audioStart, audioEnd };
   } catch (error) {
     logDebug('Ayah widget audio data load error', {
       error,
       reciterId: params.reciterId,
       chapterId: params.chapterNumber,
     });
-    return { surahName, chapterSlug };
+    return { surahName };
   }
 };
 
@@ -836,7 +806,6 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
       hasAnswers,
       isClarificationQuestion,
       surahName: meta.surahName,
-      chapterSlug: meta.chapterSlug,
       audioUrl: meta.audioUrl,
       audioStart: meta.audioStart,
       audioEnd: meta.audioEnd,
