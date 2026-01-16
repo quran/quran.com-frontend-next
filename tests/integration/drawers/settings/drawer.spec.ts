@@ -1,21 +1,27 @@
 import { test, expect } from '@playwright/test';
 
+import { openNavigationDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('Settings drawer icon should open the drawer when clicked', async ({ page, context }) => {
+test('Navigation drawer icon should open the theme switcher', async ({ page, context }) => {
   const homepage = new Homepage(page, context);
-  homepage.goTo('/1');
+  await homepage.goTo('/1');
 
-  // 1. Make sure the theme section is not visible
-  await expect(page.locator('button:has-text("Light")')).not.toBeVisible();
-  // 2. Click the settings drawer trigger
-  await homepage.openSettingsDrawer();
-  // 3. Make sure the theme section is visible
-  await expect(page.locator('button:has-text("Light")')).toBeVisible();
-  await expect(page.locator('button:has-text("Sepia")')).toBeVisible();
-  await expect(page.locator('button:has-text("Dark")')).toBeVisible();
+  // 1. Make sure the theme switcher is not visible before opening the navigation drawer
+  await expect(page.getByTestId(TestId.CHANGE_THEME_BUTTON)).toHaveCount(0);
+  // 2. Click the navigation drawer trigger
+  await openNavigationDrawer(page);
+  // 3. Theme switcher should now be visible
+  await expect(page.getByTestId(TestId.CHANGE_THEME_BUTTON)).toBeVisible();
+
+  // 4. Open the theme popover and ensure options are present
+  await page.getByTestId(TestId.CHANGE_THEME_BUTTON).click();
+  await expect(page.getByTestId('theme-option-light')).toBeVisible();
+  await expect(page.getByTestId('theme-option-sepia')).toBeVisible();
+  await expect(page.getByTestId('theme-option-dark')).toBeVisible();
 });

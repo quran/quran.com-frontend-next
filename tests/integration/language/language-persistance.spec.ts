@@ -25,6 +25,8 @@ test(
 
     await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 
+    await homePage.hideNextJSOverlay();
+
     // 5. Navigate to surah An Naml and make sure we are still on /es/27
     await Promise.all([
       page.waitForURL('**/es/27'),

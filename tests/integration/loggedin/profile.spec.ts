@@ -15,8 +15,6 @@ test(
   { tag: ['@slow', '@auth', '@login-user'] },
   async ({ page }) => {
     const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON);
-    await expect(profileAvatarButton).toHaveCount(2);
-    await expect(profileAvatarButton.nth(0)).toBeVisible();
-    await expect(profileAvatarButton.nth(1)).toBeVisible();
+    await expect(profileAvatarButton).toBeVisible();
   },
 );

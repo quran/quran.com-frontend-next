@@ -1,7 +1,14 @@
 import { test, expect, Page } from '@playwright/test';
 
+import Homepage from '@/tests/POM/home-page';
 import { TestId } from '@/tests/test-ids';
 import { PROTECTED_ROUTES } from '@/utils/navigation';
+
+let homepage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homepage = new Homepage(page, context);
+});
 
 const loginUser = async (page: Page) => {
   test.skip(
@@ -23,7 +30,7 @@ test.describe('Logout Redirection Behavior', () => {
     async ({ page }) => {
       await loginUser(page);
 
-      await page.goto(PROTECTED_ROUTES[0], { waitUntil: 'networkidle' });
+      await homepage.goTo(PROTECTED_ROUTES[0]);
 
       const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
       await expect(profileAvatarButton).toBeAttached();
@@ -44,7 +51,7 @@ test.describe('Logout Redirection Behavior', () => {
     async ({ page }) => {
       await loginUser(page);
 
-      await page.goto('/1', { waitUntil: 'networkidle' });
+      await homepage.goTo('/1');
 
       const profileAvatarButton = page.getByTestId(TestId.PROFILE_AVATAR_BUTTON).first();
       await expect(profileAvatarButton).toBeAttached();

@@ -4,7 +4,11 @@ import type { Page } from '@playwright/test';
 
 import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
-import { clearSelectedTranslations, selectTranslationPreference } from '@/tests/helpers/settings';
+import {
+  clearSelectedTranslations,
+  openSettingsDrawer,
+  selectTranslationPreference,
+} from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import { getVerseArabicTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
@@ -120,7 +124,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page }) => {
       // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+
+      await openSettingsDrawer(page);
 
       // Select translation 20
       await selectTranslationPreference(page, '20');
@@ -143,8 +148,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation feedback form validation works correctly',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
 
       const translationId = await clearSelectedTranslations(page, { isMobile });
 
@@ -175,6 +179,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
 
       await page.getByTestId('verse-1:1').click({ force: true, position: { x: 0, y: 0 } }); // Defocus to close the context menu if it's still open
 
+      await openSettingsDrawer(page);
+
       await selectTranslationPreference(page, translationId, { isMobile });
       await openTranslationFeedbackModal(page, 'translation');
 
@@ -198,8 +204,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Feedback text validation enforces minimum and maximum length',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
+
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
@@ -236,8 +242,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation preview shows selected translation text',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
@@ -258,8 +263,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Successful feedback submission shows success toast and closes modal',
     { tag: ['@translation-feedback', '@submission', '@success'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock successful API response
@@ -299,8 +303,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Failed feedback submission shows error toast and keeps modal open',
     { tag: ['@translation-feedback', '@submission', '@error'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock failed API response
@@ -340,9 +343,6 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Cancel action closes modal without submission',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
-
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
 

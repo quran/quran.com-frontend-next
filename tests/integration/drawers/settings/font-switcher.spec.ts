@@ -25,6 +25,7 @@ test('Selecting a non-default theme should persist the selected font', async ({
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.SixteenLines);
   // 2. Open the settings drawer
   await homepage.openSettingsDrawer();
+
   // 3. Choose Indopak font
   await page.locator('text=IndoPak').click();
   // 4. Choose Indopak 15-line Mushaf

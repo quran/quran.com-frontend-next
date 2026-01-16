@@ -33,7 +33,7 @@ const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTab
     >
       <Tabs.List className={styles.list} aria-label="Settings tabs">
         {tabs.map((tab) => (
-          <Tabs.Trigger className={styles.trigger} key={tab.id} value={tab.id}>
+          <Tabs.Trigger className={styles.trigger} key={tab.id} value={tab.id} data-testid={tab.id}>
             {tab.label}
           </Tabs.Trigger>
         ))}

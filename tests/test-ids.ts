@@ -2,6 +2,9 @@ import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 
 export enum TestId {
+  MORE_SETTINGS_TAB = 'more',
+  TRANSLATION_SETTINGS_TAB = 'translation',
+  ARABIC_SETTINGS_TAB = 'arabic',
   AUTH_UPDATE_PROFILE_CHANGE_PASSWORD_SECTION = 'auth-update-profile-change-password-section',
   AUTH_UPDATE_PROFILE_CONFIRM_NEW_PASSWORD_INPUT = 'auth-update-profile-confirm-new-password-input',
   AUTH_UPDATE_PROFILE_CURRENT_PASSWORD_INPUT = 'auth-update-profile-current-password-input',

@@ -71,22 +71,13 @@ test(
     ]);
 
     // 5. Make sure some UI elements are displayed in French
-    await expect(page.getByTestId(TestId.OPEN_SEARCH_DRAWER)).toHaveAttribute(
-      'aria-label',
-      'Rechercher',
-    );
-    await expect(page.locator('#searchQuery')).toHaveAttribute(
-      'placeholder',
-      'Rechercher dans le Coran...',
-    );
+    await expect(page.getByText('Rechercher').first()).toBeVisible();
+    await expect(page.getByText('Naviguer').first()).toBeVisible();
+    await expect(page.getByText('Sourate').first()).toBeVisible();
 
     await homePage.goTo('/fr/1');
 
-    // Open the menu drawer and check some elements are in French
-    await openNavigationDrawer(page);
-
-    const navigationDrawer = page.getByTestId(TestId.NAVIGATION_DRAWER_BODY);
-    expect(navigationDrawer).toContainText('Nos projets');
+    await expect(page.getByText("L'Ouverture").first()).toBeVisible();
   },
 );
 
@@ -119,6 +110,7 @@ test(
     ).toBeVisible();
     // Make sure Isa Garcia translation is selected in the settings
     await homePage.openSettingsDrawer();
+    await page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB).click();
     const translationSelect = page.getByText('Traductions sélectionnées');
     await expect(translationSelect).toBeVisible();
     const translationSelectParent = translationSelect.locator('..');

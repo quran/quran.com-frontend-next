@@ -1,20 +1,24 @@
 import { test, expect } from '@playwright/test';
 
+import Homepage from '@/tests/POM/home-page';
 import { TestId } from '@/tests/test-ids';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/');
 });
 
 test('Navigation drawer icon should open the drawer when clicked', async ({ page }) => {
   // 1. Make sure the navigation drawer is not visible before opening it
-  await expect(page.locator('text=Menu')).not.toBeVisible();
+  await expect(page.getByTestId(TestId.NAVIGATION_DRAWER_BODY)).not.toBeVisible();
 
   // 2. Click to open the drawer [aria-label="Open Navigation Drawer"]
-  await page.locator('[aria-label="Open Navigation Drawer"]').click();
+  await page.getByTestId(TestId.OPEN_NAVIGATION_DRAWER).click();
 
   // 3. Make sure the navigation drawer is visible after opening it
-  await expect(page.locator('text=Menu')).toBeVisible();
+  await expect(page.getByTestId(TestId.NAVIGATION_DRAWER_BODY)).toBeVisible();
 });
 
 test('Navigation drawer close icon should close the drawer', async ({ page }) => {
@@ -25,7 +29,7 @@ test('Navigation drawer close icon should close the drawer', async ({ page }) =>
   await expect(page.getByTestId(TestId.NAVIGATION_DRAWER_BODY)).toBeVisible();
 
   // 3. Click on the close drawer button
-  await page.getByTestId(TestId.NAVIGATION_DRAWER_CLOSE_BUTTON).nth(2).click();
+  await page.getByTestId(TestId.NAVIGATION_DRAWER_CLOSE_BUTTON).nth(1).click();
 
   // 4. Make sure the navigation drawer is no longer visible after closing it
   await expect(page.getByTestId(TestId.NAVIGATION_DRAWER_BODY)).not.toBeVisible();
