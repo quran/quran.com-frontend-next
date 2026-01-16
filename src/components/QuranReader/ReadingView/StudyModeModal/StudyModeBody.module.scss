@@ -1,0 +1,31 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  padding: 0;
+}
+
+.arabicVerseContainer {
+  margin: var(--spacing-medium) 0;
+  padding: var(--spacing-small);
+
+  @include breakpoints.tablet {
+    margin: var(--spacing-medium-plus-px) 0;
+    padding: var(--spacing-medium);
+  }
+}
+
+.translationsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  padding: var(--spacing-small);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-medium);
+    padding: var(--spacing-medium);
+  }
+}
+
+.separator {
+  margin: var(--spacing-medium) 0;
+}

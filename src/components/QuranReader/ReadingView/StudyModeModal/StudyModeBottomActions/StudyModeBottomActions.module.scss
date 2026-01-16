@@ -1,0 +1,75 @@
+@use 'src/styles/breakpoints';
+
+.bottomActionsContainer {
+  inline-size: 100%;
+  padding: var(--spacing-medium) 0;
+}
+
+.tabsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-medium);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-large);
+  }
+}
+
+.tabsContainerRTL {
+  justify-content: flex-end;
+}
+
+.separatorContainer {
+  display: flex;
+  block-size: var(--spacing-medium);
+  align-items: center;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--spacing-xsmall) / 2);
+  cursor: pointer;
+  color: var(--color-grey-icons-new);
+  transition: color var(--transition-moderate) ease;
+
+  &:hover {
+    color: var(--color-success-medium);
+  }
+}
+
+.tabItemRTL {
+  flex-direction: row-reverse;
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
+    color: currentColor;
+
+    &:hover {
+      color: currentColor;
+    }
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-medium);
+      block-size: var(--spacing-medium);
+    }
+  }
+}
+
+.tabLabel {
+  font-size: var(--font-size-medium);
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small);
+  }
+}

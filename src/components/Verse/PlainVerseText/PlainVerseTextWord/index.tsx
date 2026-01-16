@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
 
+import classNames from 'classnames';
+
 import styles from './PlainVerseTextWord.module.scss';
 
 import InlineWordByWord from '@/dls/InlineWordByWord';
@@ -10,6 +12,7 @@ interface Props {
   children: ReactNode;
   shouldShowWordByWordTranslation: boolean;
   shouldShowWordByWordTransliteration: boolean;
+  isHighlighted?: boolean;
 }
 
 const PlainVerseTextWord: React.FC<Props> = ({
@@ -17,9 +20,15 @@ const PlainVerseTextWord: React.FC<Props> = ({
   children,
   shouldShowWordByWordTransliteration,
   shouldShowWordByWordTranslation,
+  isHighlighted = false,
 }) => {
   return (
-    <div className={styles.plainVerseWordContainer} key={word.location}>
+    <div
+      className={classNames(styles.plainVerseWordContainer, {
+        [styles.highlighted]: isHighlighted,
+      })}
+      key={word.location}
+    >
       {children}
       {shouldShowWordByWordTranslation && (
         <InlineWordByWord

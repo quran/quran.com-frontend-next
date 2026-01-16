@@ -39,6 +39,9 @@ interface Props {
   isContainerSpan?: boolean;
   stopPropagation?: boolean;
   tooltipType?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
+  iconAriaLabel?: string;
 }
 
 const Popover: React.FC<Props> = ({
@@ -60,6 +63,9 @@ const Popover: React.FC<Props> = ({
   isContainerSpan = false,
   stopPropagation = false,
   tooltipType,
+  icon,
+  onIconClick,
+  iconAriaLabel,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -70,6 +76,7 @@ const Popover: React.FC<Props> = ({
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
         [styles.info]: tooltipType === TooltipType.INFO,
+        [styles.success]: tooltipType === TooltipType.SUCCESS,
         [contentStyles]: contentStyles,
       })}
       {...(stopPropagation && {
@@ -84,6 +91,27 @@ const Popover: React.FC<Props> = ({
       })}
     >
       {children}
+      {icon && (
+        <span
+          className={styles.icon}
+          onClick={(e) => {
+            e.stopPropagation();
+            onIconClick?.();
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label={iconAriaLabel}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              onIconClick?.();
+            }
+          }}
+        >
+          {icon}
+        </span>
+      )}
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );

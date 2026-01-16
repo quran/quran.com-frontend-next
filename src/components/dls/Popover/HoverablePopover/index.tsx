@@ -15,6 +15,9 @@ interface Props {
   triggerStyles?: string;
   isContainerSpan?: boolean;
   tooltipType?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
+  iconAriaLabel?: string;
 }
 
 /**
@@ -38,6 +41,9 @@ const HoverablePopover: React.FC<Props> = ({
   triggerStyles,
   isContainerSpan = false,
   tooltipType,
+  icon,
+  onIconClick,
+  iconAriaLabel,
 }: Props): JSX.Element => (
   <Popover
     open={isOpen}
@@ -48,6 +54,9 @@ const HoverablePopover: React.FC<Props> = ({
     defaultStyling={defaultStyling}
     isContainerSpan={isContainerSpan}
     {...(tooltipType && { tooltipType })}
+    {...(icon && { icon })}
+    {...(onIconClick && { onIconClick })}
+    {...(iconAriaLabel && { iconAriaLabel })}
     trigger={
       <Tooltip
         open={isOpen}
@@ -57,6 +66,9 @@ const HoverablePopover: React.FC<Props> = ({
         delay={tooltipDelay}
         type={tooltipType}
         {...(onOpenChange && { onOpenChange })}
+        {...(icon && { icon })}
+        {...(onIconClick && { onIconClick })}
+        {...(iconAriaLabel && { iconAriaLabel })}
       >
         {children}
       </Tooltip>

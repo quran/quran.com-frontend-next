@@ -100,14 +100,19 @@ const VerseText = ({
           {words?.map((word) => {
             const isHighlightedWord =
               highlightedWordPosition !== undefined && word.position === highlightedWordPosition;
+            const isHoveredWord = word.verseKey === hoveredVerseKey;
             return (
               <QuranWord
                 key={word.location}
                 word={word}
                 font={quranFont}
                 isFontLoaded={isFontLoaded}
-                isHighlighted={isHighlightedWord || word.verseKey === selectedVerseKey}
-                shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+                isHighlighted={
+                  isHighlightedWord ||
+                  word.verseKey === selectedVerseKey ||
+                  (!isReadingMode && isHoveredWord)
+                }
+                shouldShowSecondaryHighlight={isReadingMode && isHoveredWord}
                 bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
