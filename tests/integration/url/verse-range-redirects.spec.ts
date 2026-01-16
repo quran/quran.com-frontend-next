@@ -1,8 +1,9 @@
-/* eslint-disable max-lines, no-await-in-loop, no-restricted-syntax, react-func/max-lines-per-function */
+/* eslint-disable no-await-in-loop, no-restricted-syntax */
 
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { getVerseTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -156,7 +157,7 @@ test.describe('Verse Range URL Redirects', () => {
         await expect(page).toHaveURL(expected);
 
         // Verify the first verse is displayed (virtualization means only first few are visible)
-        await expect(page.getByTestId(`verse-${verseToCheck}`)).toBeVisible();
+        await expect(page.getByTestId(getVerseTestId(verseToCheck))).toBeVisible();
       },
     );
   });
@@ -175,7 +176,7 @@ test.describe('Verse Range URL Redirects', () => {
       for (const { input, expected, verseToCheck } of testCases) {
         await homePage.goTo(input);
         await expect(page).toHaveURL(expected);
-        await expect(page.getByTestId(`verse-${verseToCheck}`)).toBeVisible();
+        await expect(page.getByTestId(getVerseTestId(verseToCheck))).toBeVisible();
       }
     },
   );

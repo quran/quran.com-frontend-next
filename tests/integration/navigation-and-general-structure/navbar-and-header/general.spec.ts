@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -28,14 +29,14 @@ test(
   async ({ page }) => {
     // Verify that the breadcrumb below the navbar displays the correct information about the current surah (76)
     // Verify page, hizb and juz number
-    const pageInfo = page.getByTestId('page-info');
+    const pageInfo = page.getByTestId(TestId.PAGE_INFO);
     const pageInfoText = await pageInfo.textContent();
     expect(pageInfoText).toContain('Juz 29');
     expect(pageInfoText).toContain('Hizb 58');
     expect(pageInfoText).toContain('Page 578');
 
     // Verify surah name
-    const currentSurahInfo = page.getByTestId('chapter-navigation');
+    const currentSurahInfo = page.getByTestId(TestId.CHAPTER_NAVIGATION);
     const currentSurahInfoText = await currentSurahInfo.textContent();
     expect(currentSurahInfoText.includes('76. Al-Insan'));
   },
@@ -47,16 +48,27 @@ test(
     tag: ['@header', '@nav'],
   },
   async ({ page }) => {
-    const navBar = page.getByTestId('navbar');
-    const header = page.getByTestId('header');
+    const navBar = page.getByTestId(TestId.NAVBAR);
+    const header = page.getByTestId(TestId.HEADER);
 
     await expect(navBar).toHaveAttribute('data-isvisible', 'true');
     await expect(header).toHaveAttribute('data-isvisible', 'true');
 
-    await page.mouse.wheel(0, 200);
+    await page.waitForTimeout(500);
+
+    const isMobile = page.viewportSize()?.width && page.viewportSize()?.width <= 768;
+
+    if (isMobile) {
+      // On mobile, use scrollBy instead of mouse.wheel
+      await page.evaluate(() => window.scrollBy(0, 200));
+    } else {
+      await page.mouse.wheel(0, 200);
+    }
+
+    await page.waitForTimeout(300); // Wait for scroll animation
     await expect(navBar).toHaveAttribute('data-isvisible', 'false');
 
-    if (page.viewportSize()?.width && page.viewportSize()?.width <= 768) {
+    if (isMobile) {
       // Mobile view - the header should collapse to a minimal information one
       await expect(header).toHaveAttribute('data-isvisible', 'false');
     } else {
@@ -64,7 +76,13 @@ test(
       await expect(header).toHaveAttribute('data-isvisible', 'true');
     }
 
-    await page.mouse.wheel(0, -10);
+    if (isMobile) {
+      await page.evaluate(() => window.scrollBy(0, -100));
+    } else {
+      await page.mouse.wheel(0, -100);
+    }
+
+    await page.waitForTimeout(300); // Wait for scroll animation
     await expect(navBar).toHaveAttribute('data-isvisible', 'true');
     await expect(header).toHaveAttribute('data-isvisible', 'true');
   },

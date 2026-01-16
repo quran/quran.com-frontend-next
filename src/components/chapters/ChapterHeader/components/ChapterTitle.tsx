@@ -34,6 +34,7 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
   return (
     <div dir={Direction.RTL} className={styles.titleContainer}>
       <h1
+        data-testid="chapter-title"
         className={classNames(styles.chapterTitle, {
           [styles.chapterTitleWithTranslationName]: showTranslatedName,
         })}

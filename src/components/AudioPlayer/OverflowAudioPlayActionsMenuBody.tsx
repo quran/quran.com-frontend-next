@@ -16,6 +16,7 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import ExperienceIcon from '@/icons/experience.svg';
 import PersonIcon from '@/icons/person.svg';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -92,6 +93,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
+          dataTestId={TestId.PLAYBACK_RATE_MENU}
           key={4}
           icon={
             <span style={{ fontSize: getPlaybackRateLabelFontSize(playbackRate) }}>

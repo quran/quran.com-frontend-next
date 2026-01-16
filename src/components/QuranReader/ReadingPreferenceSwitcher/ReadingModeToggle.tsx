@@ -14,6 +14,7 @@ import ArabicIcon from '@/public/icons/reading.svg';
 import TranslationIcon from '@/public/icons/translation-mode.svg';
 import VerseByVerseIcon from '@/public/icons/verse-by-verse.svg';
 import { selectLastUsedReadingMode } from '@/redux/slices/QuranReader/readingPreferences';
+import { TestId } from '@/tests/test-ids';
 import { logValueChange } from '@/utils/eventLogger';
 import isInReadingMode from '@/utils/readingPreference';
 import { ReadingPreference } from 'types/QuranReader';
@@ -50,6 +51,8 @@ const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({
       <button
         type="button"
         role="tab"
+        data-testid={TestId.TRANSLATION_BUTTON}
+        data-is-selected={isVerseByVerseSelected}
         aria-selected={isVerseByVerseSelected}
         className={classNames(styles.pill, {
           [styles.pillSelected]: isVerseByVerseSelected,
@@ -74,6 +77,8 @@ const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({
         <button
           type="button"
           role="tab"
+          data-testid={TestId.READING_BUTTON}
+          data-is-selected={isReadingMode}
           aria-selected={false}
           className={classNames(styles.pill, styles.pillUnselected)}
           onClick={() => handleModeChange(lastUsedReadingMode || ReadingPreference.Reading)}
@@ -86,6 +91,8 @@ const ReadingModeToggle: React.FC<ReadingModeToggleProps> = ({
       ) : (
         <div
           role="group"
+          data-testid={TestId.READING_BUTTON}
+          data-is-selected={isReadingMode}
           aria-label={t('reading-preference.reading')}
           className={classNames(styles.pill, styles.pillSelected, styles.expandedPill)}
         >

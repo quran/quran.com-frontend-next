@@ -9,6 +9,7 @@ import Loading from './Loading';
 import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { TestId } from '@/tests/test-ids';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
@@ -42,7 +43,7 @@ const LearningPlansSection = () => {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className={styles.header} data-testid="learning-plans-section">
         <h1>{t('learning-plan')}</h1>
         <div>
           <Link
@@ -66,7 +67,7 @@ const LearningPlansSection = () => {
           );
 
           return (
-            <div className={styles.cardsContainer}>
+            <div className={styles.cardsContainer} data-testid={TestId.COURSES_LIST}>
               {sortedCourses.map((course, index) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
                 const { isCompleted } = course;

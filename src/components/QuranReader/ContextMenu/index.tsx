@@ -14,6 +14,7 @@ import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
 import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
+import { TestId } from '@/tests/test-ids';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
@@ -61,6 +62,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
   return (
     <div
+      data-testid={TestId.HEADER}
+      data-isvisible={!isMobileScrolledView}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,

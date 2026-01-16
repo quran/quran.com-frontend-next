@@ -11,6 +11,7 @@ import Card from '@/components/HomePage/Card';
 import DataContext from '@/contexts/DataContext';
 import ReplayIcon from '@/icons/replay.svg';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import { TestId } from '@/tests/test-ids';
 import { ChapterContent } from '@/types/ApiResponses';
 import { pickRandom } from '@/utils/array';
 import { getChapterData, getNextChapterNumber, getPreviousChapterNumber } from '@/utils/chapter';
@@ -94,6 +95,7 @@ const ReadMoreCard: React.FC<ReadMoreCardProps> = ({
           className={styles.replayButton}
           aria-label={t('quran-reader:end-of-surah.beginning-of-surah')}
           type="button"
+          data-testid={TestId.CHAPTER_BEGINNING_BUTTON}
         >
           <span className={styles.replayButtonContent}>
             <ReplayIcon />

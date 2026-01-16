@@ -3,11 +3,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-block-size: 100vh;
 
   @include breakpoints.smallerThanTablet {
-    min-height: unset;
-    height: calc(100dvh - var(--navbar-height));
+    min-block-size: unset;
+    block-size: calc(100dvh - var(--navbar-height));
   }
 }
 
@@ -19,13 +19,13 @@
   padding-inline-end: var(--spacing-medium2-px);
   padding-block-start: var(--spacing-medium-px);
   padding-block-end: var(--spacing-medium2-px);
-  border-top: 1px solid var(--color-borders-hairline);
+  border-block-start: 1px solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated);
   flex-shrink: 0;
   position: sticky;
-  bottom: 0;
+  inset-block-end: 0;
   z-index: 10;
-  margin-top: auto;
+  margin-block-start: auto;
 
   button {
     border-radius: var(--border-radius-medium-px);

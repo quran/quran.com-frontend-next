@@ -54,6 +54,7 @@ const SurahAndAyahSelection = ({
           size={SelectSize.Small}
           id="ayah-selection"
           name="ayah-selection"
+          testId="ayah-selection"
           options={ayahOptions}
           onChange={onVerseNumberChange}
           value={selectedVerseNumber}

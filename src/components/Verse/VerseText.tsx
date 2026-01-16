@@ -81,6 +81,7 @@ const VerseText = ({
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <VerseTextContainer
         ref={textRef}
+        data-testid={`verse-arabic-${firstWord.verseKey}`}
         className={classNames(styles.verseTextContainer, styles[fontClassName], {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,

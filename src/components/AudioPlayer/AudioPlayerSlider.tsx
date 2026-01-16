@@ -23,7 +23,9 @@ const AudioPlayerSlider = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.currentTime}>{secondsFormatter(elapsed, locale)}</span>
+      <span className={styles.currentTime} data-testid="audio-elapsed">
+        {secondsFormatter(elapsed, locale)}
+      </span>
       <div className={styles.sliderContainer}>
         <Slider
           showThumbs={false}

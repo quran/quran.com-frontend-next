@@ -15,7 +15,7 @@
   gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
   direction: initial;
 
-  &>svg {
+  & > svg {
     color: var(--color-text-default-new);
   }
 

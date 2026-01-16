@@ -9,6 +9,7 @@ import useReadingPreferenceSwitcher, {
 } from '@/hooks/useReadingPreferenceSwitcher';
 import ReadingModeIcon from '@/public/icons/reading-mode.svg';
 import VerseByVerseIcon from '@/public/icons/verse-by-verse.svg';
+import { TestId } from '@/tests/test-ids';
 import { logValueChange } from '@/utils/eventLogger';
 import isInReadingMode from '@/utils/readingPreference';
 import { ReadingPreference } from 'types/QuranReader';
@@ -61,6 +62,8 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
           role="tab"
           tabIndex={0}
           id="verse-by-verse-tab"
+          data-testid={TestId.TRANSLATION_TAB}
+          data-is-selected={isVerseByVerseSelected}
           aria-selected={isVerseByVerseSelected}
           onClick={handleVerseByVerseClick}
           onKeyDown={(event) => {
@@ -80,6 +83,8 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
           role="tab"
           tabIndex={0}
           id="reading-tab"
+          data-testid={TestId.READING_TAB}
+          data-is-selected={isReadingMode}
           aria-selected={isReadingMode}
           onClick={handleReadingClick}
           onKeyDown={(event) => {
