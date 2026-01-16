@@ -50,16 +50,21 @@ export const getThemeDataAttribute = (theme: WidgetOptions['theme']): string => 
 /**
  * Get widget colors using CSS variables.
  * These will be resolved based on data-theme attribute.
+ * @param {WidgetOptions['theme']} theme - Widget theme.
  * @returns {WidgetColors} The widget color configuration.
  */
-export const getColors = (): WidgetColors => {
+export const getColors = (theme: WidgetOptions['theme']): WidgetColors => {
+  // for sepia theme, we use a different color for icons to ensure sufficient contrast
+  const iconColor =
+    theme === ThemeType.Sepia ? 'var(--color-blue-buttons-and-icons)' : 'var(--color-grey-icons)';
+
   return {
     borderColor: 'var(--color-borders-hairline)',
     linkColor: 'var(--color-text-link)',
     secondaryBg: 'var(--color-background-alternative-faint)',
     secondaryText: 'var(--color-text-faded)',
     hoverBg: 'var(--color-background-alternative-medium)',
-    iconColor: 'var(--color-grey-icons)',
+    iconColor,
     bgColor: 'var(--color-background-default)',
     textColor: 'var(--color-text-default)',
   };

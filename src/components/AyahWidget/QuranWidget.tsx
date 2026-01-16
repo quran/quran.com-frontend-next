@@ -127,7 +127,7 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
   const rangeCaption = chapterNumber ? `${chapterNumber}:${verseLabel}` : options.ayah;
 
   // Get widget colors and compute derived values
-  const colors = getColors();
+  const colors = getColors(options.theme);
   const audioUrl = options.audioUrl || null;
   const firstVerse = verses[0];
   const hasTranslations = verses.some((v) => (v.translations?.length ?? 0) > 0);
