@@ -47,33 +47,25 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     setIsDropdownOpen(false);
   }, [dispatch]);
 
-  const handleTranslationClick = useCallback(() => {
-    if (!isTranslationSelected) {
-      logValueChange(
-        'chapter_header_reading_mode',
-        readingPreference,
-        ReadingPreference.ReadingTranslation,
-      );
-      switchReadingPreference(ReadingPreference.ReadingTranslation);
-    }
-    // When already selected, the PopoverMenu handles the toggle
-  }, [isTranslationSelected, readingPreference, switchReadingPreference]);
+  const switchToTranslationMode = useCallback(() => {
+    logValueChange(
+      'chapter_header_reading_mode',
+      readingPreference,
+      ReadingPreference.ReadingTranslation,
+    );
+    switchReadingPreference(ReadingPreference.ReadingTranslation);
+  }, [readingPreference, switchReadingPreference]);
 
-  const handleOpenChange = useCallback(
-    (open: boolean) => {
-      // Only allow opening via PopoverMenu if translation mode is selected
-      if (isTranslationSelected) {
-        setIsDropdownOpen(open);
-      }
-    },
-    [isTranslationSelected],
-  );
-
-  // Close dropdown after scrolling beyond threshold to prevent navbar overlap
   const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
   useCloseOnScroll(isDropdownOpen, closeDropdown);
 
-  // When no translations selected, show "Translation: None selected" button
+  const activeTranslationId = selectedReadingTranslation
+    ? Number(selectedReadingTranslation)
+    : selectedTranslations?.[0] ?? null;
+
+  const activeTranslation = translations?.find((tr) => tr.id === activeTranslationId);
+
+  // No translations selected
   if (!hasTranslations) {
     return (
       <button
@@ -82,54 +74,57 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
           [styles.modeButtonSelected]: isTranslationSelected,
           [styles.modeButtonUnselected]: !isTranslationSelected,
         })}
-        onClick={handleTranslationClick}
+        onClick={switchToTranslationMode}
       >
         {t('translation')}: {t('reading-preference.none-selected')}
       </button>
     );
   }
 
-  // Use selectedReadingTranslation if set, otherwise fall back to first in list
-  const activeTranslationId = selectedReadingTranslation
-    ? Number(selectedReadingTranslation)
-    : selectedTranslations?.[0] ?? null;
+  // Arabic mode: plain button (no PopoverMenu)
+  if (!isTranslationSelected) {
+    return (
+      <button
+        type="button"
+        className={classNames(
+          styles.modeButton,
+          styles.translationButton,
+          styles.modeButtonUnselected,
+        )}
+        onClick={switchToTranslationMode}
+      >
+        <span className={styles.translationText}>{t('translation')}</span>
+      </button>
+    );
+  }
 
-  const activeTranslation = translations?.find(
-    (translation) => translation.id === activeTranslationId,
-  );
-
-  const displayText = isTranslationSelected
-    ? `${t('translation')}: ${activeTranslation?.name || ''}`
-    : t('translation');
-
-  const triggerButton = (
-    <button
-      type="button"
-      aria-expanded={isDropdownOpen}
-      aria-haspopup="listbox"
-      className={classNames(styles.modeButton, styles.translationButton, {
-        [styles.modeButtonSelected]: isTranslationSelected,
-        [styles.modeButtonUnselected]: !isTranslationSelected,
-      })}
-      onClick={handleTranslationClick}
-    >
-      <span className={styles.translationText}>{displayText}</span>
-      {isTranslationSelected && (
-        <ChevronDownIcon
-          className={classNames(styles.dropdownIcon, {
-            [styles.dropdownIconOpen]: isDropdownOpen,
-          })}
-        />
-      )}
-    </button>
-  );
+  // Translation mode: PopoverMenu with dropdown
+  const displayText = `${t('translation')}: ${activeTranslation?.name || ''}`;
 
   return (
     <PopoverMenu
-      trigger={triggerButton}
+      trigger={
+        <button
+          type="button"
+          aria-expanded={isDropdownOpen}
+          aria-haspopup="listbox"
+          className={classNames(
+            styles.modeButton,
+            styles.translationButton,
+            styles.modeButtonSelected,
+          )}
+        >
+          <span className={styles.translationText}>{displayText}</span>
+          <ChevronDownIcon
+            className={classNames(styles.dropdownIcon, {
+              [styles.dropdownIconOpen]: isDropdownOpen,
+            })}
+          />
+        </button>
+      }
       isOpen={isDropdownOpen}
       isModal={false}
-      onOpenChange={handleOpenChange}
+      onOpenChange={setIsDropdownOpen}
       contentClassName={styles.dropdownContent}
       align={isMobile ? PopoverMenuAlign.END : PopoverMenuAlign.START}
       sideOffset={8}
@@ -137,7 +132,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
       <TranslationDropdownContent
         translations={translations || []}
         selectedTranslations={selectedTranslations}
-        onClose={() => setIsDropdownOpen(false)}
+        onClose={closeDropdown}
         onOpenSettings={openTranslationSettings}
       />
     </PopoverMenu>
