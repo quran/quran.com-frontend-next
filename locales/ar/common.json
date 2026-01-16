@@ -340,8 +340,16 @@
   "read": "اقرأ",
   "reading-history": "سجل القراءة",
   "reading-preference": {
+    "arabic": "عربي",
+    "my-translations": "ترجماتي",
+    "none-selected": "لا شيء محدد",
     "reading": "القراءة",
-    "translation": "الترجمة"
+    "reading-translation": "ترجمة",
+    "select-translation": "اختر الترجمة",
+    "select-translation-message": "لم يتم تحديد أي ترجمات. يرجى تحديد ترجمة من خلال الإعدادات.",
+    "select-translations": "اختر الترجمات",
+    "translation": "الترجمة",
+    "verse-by-verse": "آية بآية"
   },
   "ready-for-ramadan": "هل أنت مستعد لرمضان؟",
   "recitation": "التلاوة",

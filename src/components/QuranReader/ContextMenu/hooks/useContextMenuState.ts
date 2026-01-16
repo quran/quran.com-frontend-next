@@ -9,11 +9,13 @@ import useGetMushaf from '@/hooks/useGetMushaf';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { ReadingPreference } from '@/types/QuranReader';
 import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getJuzNumberByHizb } from '@/utils/juz';
@@ -37,6 +39,8 @@ const useContextMenuState = () => {
 
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const readingPreference = useSelector(selectReadingPreference);
+  const isTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
 
   // Use the shared hook to debounce navbar visibility changes
   const showNavbar = useDebounceNavbarVisibility(isNavbarVisible, isActive);
@@ -96,6 +100,7 @@ const useContextMenuState = () => {
     isExpanded,
     mushaf,
     verseKey,
+    isTranslationMode,
 
     // Data
     chapterData,

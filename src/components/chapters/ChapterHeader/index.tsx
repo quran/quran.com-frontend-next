@@ -2,20 +2,23 @@
 import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
+import ReadingModeActions from './ReadingModeActions';
 
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
@@ -44,6 +47,10 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
+  const readingPreference = useSelector(selectReadingPreference);
+
+  // Check if we're in Reading mode (Arabic or Translation)
+  const isReadingMode = isInReadingMode(readingPreference);
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
@@ -60,25 +67,29 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Small}
-            shape={ButtonShape.Pill}
-            onClick={onChangeTranslationClicked}
-            ariaLabel={t('change-translation')}
-            tooltip={t('change-translation')}
-            className={styles.changeTranslationButton}
-            contentClassName={styles.translationName}
-            suffix={
-              translationsCount > 1 && (
-                <span className={styles.translationsCount}>
-                  {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                </span>
-              )
-            }
-          >
-            <span>{translationName}</span>
-          </Button>
+          {isReadingMode ? (
+            <ReadingModeActions />
+          ) : (
+            <Button
+              type={ButtonType.Secondary}
+              size={ButtonSize.Small}
+              shape={ButtonShape.Pill}
+              onClick={onChangeTranslationClicked}
+              ariaLabel={t('change-translation')}
+              tooltip={t('change-translation')}
+              className={styles.changeTranslationButton}
+              contentClassName={styles.translationName}
+              suffix={
+                translationsCount > 1 && (
+                  <span className={styles.translationsCount}>
+                    {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
+                  </span>
+                )
+              }
+            >
+              <span>{translationName}</span>
+            </Button>
+          )}
         </div>
       </div>
 

@@ -340,8 +340,16 @@
   "read": "Lexo",
   "reading-history": "Leximi i historisë",
   "reading-preference": {
+    "arabic": "Arabisht",
+    "my-translations": "Përkthimet e mia",
+    "none-selected": "Asnjë i zgjedhur",
     "reading": "Leximi",
-    "translation": "Përkthimi"
+    "reading-translation": "Përkthim",
+    "select-translation": "Zgjidh Përkthimin",
+    "select-translation-message": "Nuk keni zgjedhur asnjë përkthim. Ju lutemi zgjidhni një përkthim përmes cilësimeve.",
+    "select-translations": "Zgjidh Përkthimet",
+    "translation": "Përkthimi",
+    "verse-by-verse": "Varg për varg"
   },
   "ready-for-ramadan": "Gati për Ramazan?",
   "recitation": "Recitim",

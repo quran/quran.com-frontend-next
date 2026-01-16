@@ -12,8 +12,10 @@ import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import { selectSelectedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { ReadingPreference } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
@@ -30,6 +32,7 @@ type Props = {
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
+  readingPreference: ReadingPreference;
 };
 
 const getPageVersesRange = (
@@ -77,6 +80,7 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
+  readingPreference,
 }: Props): JSX.Element => {
   /**
    * HYDRATION RACE CONDITION FIX:
@@ -111,6 +115,7 @@ const PageContainer: React.FC<Props> = ({
   );
 
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+  const selectedReadingTranslation = useSelector(selectSelectedReadingTranslation);
 
   const isUsingDefaultSettings = useIsUsingDefaultSettings();
 
@@ -135,10 +140,12 @@ const PageContainer: React.FC<Props> = ({
         locale: lang,
         wordByWordLocale,
         selectedTranslations,
+        readingPreference,
+        selectedReadingTranslation,
       })
     : null;
 
-  const { data: verses, isValidating } = useSWRImmutable(requestKey, verseFetcher, {
+  const { data: verses } = useSWRImmutable(requestKey, verseFetcher, {
     // CRITICAL: Always provide fallbackData for SSR compatibility
     // This ensures verses render immediately server-side and during hydration
     fallbackData: shouldUseInitialData ? initialVerses : null,
@@ -171,8 +178,10 @@ const PageContainer: React.FC<Props> = ({
     );
   }, [effectiveVerses, isLoggedIn, quranReaderStyles.quranFont, quranReaderStyles.mushafLines]);
 
-  if (!effectiveVerses || isValidating) {
-    return <ReadingViewSkeleton />;
+  // Only show skeleton when we truly have no data.
+  // Keep showing existing content while revalidating to prevent header flickering during mode switches.
+  if (!effectiveVerses) {
+    return <ReadingViewSkeleton readingPreference={readingPreference} />;
   }
 
   return (
@@ -183,6 +192,7 @@ const PageContainer: React.FC<Props> = ({
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
       bookmarksRangeUrl={bookmarksRangeUrl}
+      lang={lang}
     />
   );
 };

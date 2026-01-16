@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 import { ensureEnglishLanguage } from '@/tests/helpers/language';
-import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
+import { switchToReadingMode } from '@/tests/helpers/mode-switching';
 import {
   clearSelectedTranslations,
   openSettingsDrawer,
@@ -78,9 +78,6 @@ test.describe('Translation Feedback - Logged In Users', () => {
     { tag: ['@translation-feedback', '@auth', '@logged-in', '@smoke'] },
     async ({ page }) => {
       await page.setViewportSize({ width: 1920, height: 1080 });
-
-      // Set translation mode to ensure consistent starting state
-      await switchToTranslationMode(page);
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');

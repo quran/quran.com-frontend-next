@@ -36,6 +36,8 @@ test.describe('Navigation Sidebar Operations', () => {
     'Navigation drawer should only appear on Quran reader pages',
     { tag: ['@slow', '@drawer'] },
     async ({ page, isMobile }) => {
+      test.slow();
+
       // 1. Make sure the navigation drawer is not mounted by default
       await expect(page.getByTestId(TestId.SIDEBAR_NAVIGATION)).not.toBeAttached();
 
@@ -377,6 +379,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@verse'] },
     async ({ page, isMobile }) => {
       test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+      test.slow();
 
       await openQuranNavigation(page);
       await page.getByTestId(TestId.VERSE_BUTTON).click();

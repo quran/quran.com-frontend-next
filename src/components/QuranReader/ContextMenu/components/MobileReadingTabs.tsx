@@ -2,15 +2,16 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import readingPreferenceStyles from '../../ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import styles from '../styles/MobileReadingTabs.module.scss';
 
-import { Tab } from '@/components/dls/Tabs/Tabs';
-import { getReadingPreferenceIcon } from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreferenceIcon';
 import useReadingPreferenceSwitcher, {
   SwitcherContext,
 } from '@/hooks/useReadingPreferenceSwitcher';
+import ReadingModeIcon from '@/public/icons/reading-mode.svg';
+import VerseByVerseIcon from '@/public/icons/verse-by-verse.svg';
+import { TestId } from '@/tests/test-ids';
 import { logValueChange } from '@/utils/eventLogger';
+import isInReadingMode from '@/utils/readingPreference';
 import { ReadingPreference } from 'types/QuranReader';
 
 interface MobileReadingTabsProps {
@@ -21,6 +22,9 @@ interface MobileReadingTabsProps {
  * Mobile-specific tabs for switching between reading preferences.
  * Appears only on mobile breakpoints when the navbar is visible.
  *
+ * Shows two main tabs: "Verse by Verse" and "Reading"
+ * When "Reading" is selected, clicking it shows the current sub-mode (Arabic/Translation)
+ *
  * @returns {JSX.Element} React component for mobile reading preference tabs
  */
 const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
@@ -28,56 +32,72 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
     context: SwitcherContext.MobileTabs,
   });
 
-  const tabs: Tab[] = [
-    {
-      title: t('reading-preference.translation'),
-      value: ReadingPreference.Translation,
-      id: 'translation-tab',
-    },
-    {
-      title: t('reading-preference.reading'),
-      value: ReadingPreference.Reading,
-      id: 'reading-tab',
-    },
-  ];
+  // Determine if we're in a "Reading" mode (either Arabic or Translation)
+  const isReadingMode = isInReadingMode(readingPreference);
 
-  const onViewSwitched = (view: ReadingPreference) => {
-    logValueChange('mobile_tabs_reading_preference', readingPreference, view);
-    switchReadingPreference(view);
+  const isVerseByVerseSelected = readingPreference === ReadingPreference.Translation;
+
+  const handleVerseByVerseClick = () => {
+    if (isVerseByVerseSelected) return;
+    logValueChange(
+      'mobile_tabs_reading_preference',
+      readingPreference,
+      ReadingPreference.Translation,
+    );
+    switchReadingPreference(ReadingPreference.Translation);
+  };
+
+  const handleReadingClick = () => {
+    if (isReadingMode) return;
+    // Default to Arabic when entering Reading mode
+    logValueChange('mobile_tabs_reading_preference', readingPreference, ReadingPreference.Reading);
+    switchReadingPreference(ReadingPreference.Reading);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.tabsContainer} role="tablist">
-        {tabs.map((tab) => (
-          <div
-            className={classNames(
-              styles.tab,
-              readingPreference === tab.value && styles.selectedTab,
-            )}
-            key={tab.value}
-            role="tab"
-            tabIndex={0}
-            id={tab.id}
-            data-testid={tab.id}
-            data-is-selected={readingPreference === tab.value}
-            onClick={() => onViewSwitched(tab.value as ReadingPreference)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                onViewSwitched(tab.value as ReadingPreference);
-              }
-            }}
-          >
-            <span className={readingPreferenceStyles.iconContainer}>
-              {getReadingPreferenceIcon({
-                currentReadingPreference: readingPreference,
-                optionReadingPreference: tab.value as ReadingPreference,
-                useSuccessVariant: true,
-              })}
-            </span>
-            <span>{tab.title}</span>
-          </div>
-        ))}
+        <div
+          className={classNames(styles.tab, isVerseByVerseSelected && styles.selectedTab)}
+          role="tab"
+          tabIndex={0}
+          id="verse-by-verse-tab"
+          data-testid={TestId.TRANSLATION_TAB}
+          data-is-selected={isVerseByVerseSelected}
+          aria-selected={isVerseByVerseSelected}
+          onClick={handleVerseByVerseClick}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              handleVerseByVerseClick();
+            }
+          }}
+        >
+          <span className={styles.iconContainer}>
+            <VerseByVerseIcon className={styles.icon} />
+          </span>
+          <span>{t('reading-preference.verse-by-verse')}</span>
+        </div>
+
+        <div
+          className={classNames(styles.tab, isReadingMode && styles.selectedTab)}
+          role="tab"
+          tabIndex={0}
+          id="reading-tab"
+          data-testid={TestId.READING_TAB}
+          data-is-selected={isReadingMode}
+          aria-selected={isReadingMode}
+          onClick={handleReadingClick}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              handleReadingClick();
+            }
+          }}
+        >
+          <span className={styles.iconContainer}>
+            <ReadingModeIcon className={styles.icon} />
+          </span>
+          <span>{t('reading-preference.reading')}</span>
+        </div>
       </div>
     </div>
   );

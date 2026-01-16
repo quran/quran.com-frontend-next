@@ -17,6 +17,12 @@ export enum PopoverMenuExpandDirection {
   LEFT = 'left',
 }
 
+export enum PopoverMenuAlign {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+}
+
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -25,6 +31,8 @@ type PopoverMenuProps = {
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
   expandDirection?: PopoverMenuExpandDirection;
+  align?: PopoverMenuAlign;
+  sideOffset?: number;
   contentClassName?: string;
   shouldClose?: boolean;
 };
@@ -38,6 +46,8 @@ const PopoverMenu = ({
   shouldClose = true,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
+  align = PopoverMenuAlign.CENTER,
+  sideOffset = 0,
   contentClassName,
 }: PopoverMenuProps) => {
   const [open, setOpen] = useState(isOpen);
@@ -46,6 +56,8 @@ const PopoverMenu = ({
     <PrimitiveDropdownMenu.Content
       className={classNames(styles.content, contentClassName)}
       side={side}
+      align={align}
+      sideOffset={sideOffset}
     >
       {children}
     </PrimitiveDropdownMenu.Content>

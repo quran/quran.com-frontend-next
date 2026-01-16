@@ -340,8 +340,16 @@
   "read": "بخوانید",
   "reading-history": "سابقه قرآئت",
   "reading-preference": {
+    "arabic": "عربی",
+    "my-translations": "ترجمه‌های من",
+    "none-selected": "هیچ کدام انتخاب نشده اند",
     "reading": "خواندن",
-    "translation": "ترجمه"
+    "reading-translation": "ترجمه",
+    "select-translation": "انتخاب ترجمه",
+    "select-translation-message": "شما هیچ ترجمه‌ای انتخاب نکرده‌اید. لطفاً از طریق تنظیمات، ترجمه‌ای را انتخاب کنید.",
+    "select-translations": "انتخاب ترجمه‌ها",
+    "translation": "ترجمه",
+    "verse-by-verse": "آیه به آیه"
   },
   "ready-for-ramadan": "برای ماه رمضان آماده اید؟",
   "recitation": "بازگو کردن",

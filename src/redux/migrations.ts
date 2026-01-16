@@ -290,4 +290,12 @@ export default {
       wordByWordInlineContentType: [],
     },
   }),
+  38: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      lastUsedReadingMode: initialState.readingPreferences.lastUsedReadingMode,
+      selectedReadingTranslation: initialState.readingPreferences.selectedReadingTranslation,
+    },
+  }),
 };

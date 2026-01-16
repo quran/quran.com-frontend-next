@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { QuranReaderDataType } from '@/types/QuranReader';
+import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
   makeHizbVersesUrl,
@@ -38,6 +38,8 @@ interface ReadingViewRequestKeyInput {
   wordByWordLocale: string;
   pageVersesRange?: LookupRecord;
   selectedTranslations: number[];
+  readingPreference?: ReadingPreference;
+  selectedReadingTranslation?: string | null;
 }
 
 /**
@@ -126,7 +128,27 @@ export const getReaderViewRequestKey = ({
   wordByWordLocale,
   pageVersesRange,
   selectedTranslations,
+  readingPreference,
+  selectedReadingTranslation,
 }: ReadingViewRequestKeyInput): string => {
+  // Determine translations param based on reading preference:
+  // - Reading (Arabic only): No translations needed
+  // - ReadingTranslation: Use selectedReadingTranslation (single ID) or fall back to first selected
+  // - Other modes: No translations in reading view (translations shown via TranslationView)
+  const getTranslationsParam = () => {
+    if (readingPreference === ReadingPreference.Reading) {
+      return {}; // No translations for Arabic-only mode
+    }
+    if (readingPreference === ReadingPreference.ReadingTranslation) {
+      // Use selectedReadingTranslation if set, otherwise default to first translation
+      const translationId = selectedReadingTranslation || String(selectedTranslations[0] || '');
+      return translationId ? { translations: translationId } : {};
+    }
+    // For other modes (Translation/verse-by-verse), reading view doesn't need translations
+    // as they're handled by TranslationView component
+    return {};
+  };
+
   return makePageVersesUrl(pageNumber, locale, {
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
@@ -134,7 +156,7 @@ export const getReaderViewRequestKey = ({
     perPage: 'all',
     wordTranslationLanguage: wordByWordLocale,
     filterPageWords: true,
-    translations: selectedTranslations.join(','),
+    ...getTranslationsParam(),
     ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
   });
 };

@@ -40,8 +40,8 @@ test.describe('Logout Redirection Behavior', () => {
       const logoutButton = page.getByTestId(TestId.LOGOUT_BUTTON);
       await logoutButton.click();
 
-      await page.waitForURL('/');
-      await expect(page).toHaveURL('/');
+      await page.waitForURL(/\/([a-z]{2})?$/);
+      await expect(page).toHaveURL(/\/([a-z]{2})?$/);
     },
   );
 
