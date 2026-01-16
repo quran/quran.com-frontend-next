@@ -7,10 +7,10 @@ import useSWR from 'swr';
 
 import PreviewTooltip from './PreviewTooltip';
 import styles from './VersePreview.module.scss';
+import VersePreviewSkeleton from './VersePreviewSkeleton';
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
-import Skeleton from '@/dls/Skeleton/Skeleton';
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
@@ -27,8 +27,13 @@ import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const HIGHLIGHTED_WORD_POSITION = 3;
-const CONTENT_DELAY = 400; // ms
+const CONTENT_DELAY = 400;
 
+/**
+ * Verse preview component for settings drawer.
+ *
+ * @returns {JSX.Element} The verse preview UI
+ */
 const VersePreview = () => {
   const { t } = useTranslation('quran-reader');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -40,61 +45,32 @@ const VersePreview = () => {
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
   const hasLoggedInteraction = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [tooltipPosition, setTooltipPosition] = useState<{
-    left: number;
-    isReady: boolean;
-  }>({ left: 0, isReady: false });
+  const [tooltipLeft, setTooltipLeft] = useState(0);
+  const [isTooltipReady, setIsTooltipReady] = useState(false);
 
-  // Log verse preview interaction only once per drawer session
-  const handleInteraction = useCallback(() => {
-    if (!hasLoggedInteraction.current) {
-      logEvent('verse_preview_interaction');
-      hasLoggedInteraction.current = true;
-    }
-  }, []);
-
-  // Check if both translation and transliteration are enabled
-  const hasBothTooltipTypes =
-    showTooltipFor.includes(WordByWordType.Translation) &&
-    showTooltipFor.includes(WordByWordType.Transliteration);
-
-  // Get the highlighted word for the static tooltip
-  const highlightedWord = useMemo(() => {
-    if (!sampleVerse?.words) return null;
-    return (sampleVerse.words as Word[]).find(
-      (word) => word.position === HIGHLIGHTED_WORD_POSITION,
-    );
-  }, [sampleVerse?.words]);
-
-  // Calculate tooltip position based on highlighted word's actual position
+  // Calculate tooltip position based on highlighted word's location
   useBrowserLayoutEffect(() => {
     const calculatePosition = () => {
       if (!containerRef.current || !sampleVerse?.words || !showContent) return;
 
-      // Find the highlighted word element using data-word-location attribute
-      const highlightedWordElement = containerRef.current.querySelector(
-        `[data-word-location$=":${HIGHLIGHTED_WORD_POSITION}"]`,
-      ) as HTMLElement;
-
-      if (!highlightedWordElement) return;
+      // Find the highlighted word using data-word-location attribute
+      const selector = `[data-word-location$=":${HIGHLIGHTED_WORD_POSITION}"]`;
+      const wordElement = containerRef.current.querySelector(selector) as HTMLElement;
+      if (!wordElement) return;
 
       const containerRect = containerRef.current.getBoundingClientRect();
-      const targetRect = highlightedWordElement.getBoundingClientRect();
+      const wordRect = wordElement.getBoundingClientRect();
 
-      // Calculate the center of the target word relative to container's left edge
-      const targetCenterX = targetRect.left + targetRect.width / 2;
-      const left = targetCenterX - containerRect.left;
+      // Calculate center of word relative to container
+      const wordCenterX = wordRect.left + wordRect.width / 2;
+      const left = wordCenterX - containerRect.left;
 
-      setTooltipPosition({ left, isReady: true });
+      setTooltipLeft(left);
+      setIsTooltipReady(true);
     };
 
-    // Initial calculation with a small delay to ensure DOM is ready
     const timeoutId = setTimeout(calculatePosition, 50);
-
-    // Recalculate on container size changes (font loading, resize, etc.)
-    const resizeObserver = new ResizeObserver(() => {
-      calculatePosition();
-    });
+    const resizeObserver = new ResizeObserver(calculatePosition);
 
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
@@ -104,14 +80,24 @@ const VersePreview = () => {
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
     };
-  }, [
-    quranReaderStyles.quranFont,
-    quranReaderStyles.quranTextFontScale,
-    showContent,
-    sampleVerse,
-  ]);
+  }, [quranReaderStyles.quranFont, quranReaderStyles.quranTextFontScale, showContent, sampleVerse]);
 
-  // Delay showing content by 400ms to prevent layout shift
+  const handleInteraction = useCallback(() => {
+    if (!hasLoggedInteraction.current) {
+      logEvent('verse_preview_interaction');
+      hasLoggedInteraction.current = true;
+    }
+  }, []);
+
+  const hasBothTooltipTypes =
+    showTooltipFor.includes(WordByWordType.Translation) &&
+    showTooltipFor.includes(WordByWordType.Transliteration);
+
+  const highlightedWord = useMemo(() => {
+    if (!sampleVerse?.words) return null;
+    return (sampleVerse.words as Word[]).find((w) => w.position === HIGHLIGHTED_WORD_POSITION);
+  }, [sampleVerse?.words]);
+
   useEffect(() => {
     const timer = setTimeout(() => setShowContent(true), CONTENT_DELAY);
     return () => clearTimeout(timer);
@@ -132,28 +118,11 @@ const VersePreview = () => {
         ),
       );
       document.fonts.add(fontFace);
-      fontFace.load().then(() => {
-        dispatch(addLoadedFontFace(fontFaceName));
-      });
+      fontFace.load().then(() => dispatch(addLoadedFontFace(fontFaceName)));
     }
   }, [dispatch, quranReaderStyles.quranFont, sampleVerse, settingsTheme, themeVariant]);
 
-  if (!sampleVerse) {
-    return (
-      <>
-        <div className={styles.skeletonContainer}>
-          <Skeleton>
-            <div className={styles.skeletonPlaceholder} />
-          </Skeleton>
-        </div>
-        <div className={styles.skeletonContainer}>
-          <Skeleton>
-            <div className={styles.skeletonPlaceholder} />
-          </Skeleton>
-        </div>
-      </>
-    );
-  }
+  if (!sampleVerse) return <VersePreviewSkeleton />;
 
   return (
     <>
@@ -177,8 +146,8 @@ const VersePreview = () => {
             {highlightedWord && (
               <PreviewTooltip
                 word={highlightedWord}
-                left={tooltipPosition.left}
-                isVisible={tooltipPosition.isReady}
+                leftPosition={tooltipLeft}
+                isVisible={isTooltipReady}
               />
             )}
             <VerseText
@@ -197,18 +166,7 @@ const VersePreview = () => {
             )}
           </>
         ) : (
-          <>
-            <div className={styles.skeletonContainer}>
-              <Skeleton>
-                <div className={styles.skeletonPlaceholder} />
-              </Skeleton>
-            </div>
-            <div className={styles.skeletonContainer}>
-              <Skeleton>
-                <div className={styles.skeletonPlaceholder} />
-              </Skeleton>
-            </div>
-          </>
+          <VersePreviewSkeleton />
         )}
       </div>
     </>

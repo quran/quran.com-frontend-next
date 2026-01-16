@@ -49,7 +49,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
-
   const isMobileView = useIsMobile();
 
   // Early return if no verse key (SSR or first render)
