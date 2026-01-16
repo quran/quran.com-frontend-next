@@ -58,12 +58,27 @@ const EmbedPage = ({ verses, options, error }: EmbedProps): JSX.Element => {
           margin: 0;
           padding: 0;
           background: transparent;
-          overflow-x: hidden;
-          overflow-y: auto;
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+        }
+        body > div:first-child,
+        body > div:first-child > div:first-child {
+          height: 100%;
+          width: 100%;
         }
       `}</style>
 
-      <QuranWidget verses={verses} options={options} />
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <QuranWidget verses={verses} options={options} />
+      </div>
     </>
   );
 };

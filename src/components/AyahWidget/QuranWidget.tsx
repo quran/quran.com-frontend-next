@@ -35,9 +35,10 @@ const getCustomDimensionStyles = (
     ? { width: options.customWidth, maxWidth: options.customWidth }
     : { width: '100%' };
 
+  // Always use 100% height to fill iframe, but respect customHeight as maxHeight
   const heightStyle = options.customHeight
-    ? { maxHeight: options.customHeight, overflow: 'auto' as const }
-    : { overflow: 'hidden' as const };
+    ? { height: '100%', maxHeight: options.customHeight }
+    : { height: '100%' };
 
   return { widthStyle, heightStyle };
 };
@@ -58,7 +59,6 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
     color: colors.textColor,
     border: `1px solid ${colors.borderColor}`,
     borderRadius: 12,
-    margin: '0 auto',
     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
     boxSizing: 'border-box',
     overflowX: 'hidden',
@@ -68,6 +68,10 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
     /* eslint-disable @typescript-eslint/naming-convention */
     '--color-text-faded': colors.secondaryText,
     '--color-text-link': colors.linkColor,
+    // Use flexbox layout to fill iframe height with fixed header/footer
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: 0,
     ...widthStyle,
     ...heightStyle,
   } as unknown as React.CSSProperties;
@@ -150,11 +154,19 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         style={{
           padding: contentPadding,
           marginBottom: hasTranslations ? 16 : 0,
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
         }}
         data-translations-wrapper={options.showArabic ? 'with-arabic' : 'translations-only'}
         data-range-caption={options.rangeEnd ? rangeCaption : options.ayah}
       >
-        <WidgetContent verses={verses} options={options} quranFont={quranFont} />
+        <div style={{ margin: 'auto 0' }}>
+          <WidgetContent verses={verses} options={options} quranFont={quranFont} />
+        </div>
       </div>
 
       <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />

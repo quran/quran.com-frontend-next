@@ -190,6 +190,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
         padding: '14px 16px',
         backgroundColor: colors.secondaryBg,
         borderBottom: `1px solid ${colors.borderColor}`,
+        flexShrink: 0,
       }}
     >
       {TextInfo}

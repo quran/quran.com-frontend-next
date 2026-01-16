@@ -85,6 +85,7 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
         padding: '12px 16px',
         borderTop: `1px solid ${colors.borderColor}`,
         backgroundColor: colors.secondaryBg,
+        flexShrink: 0,
       }}
     >
       <div
