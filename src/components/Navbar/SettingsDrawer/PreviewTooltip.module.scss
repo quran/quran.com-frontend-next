@@ -1,0 +1,44 @@
+.container {
+  position: absolute;
+  inset-block-start: 0;
+  // left is set via inline style
+  // Transform to center the tooltip horizontally and move above the word
+  transform: translateX(-50%) translateY(calc(-100% - 6px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+  // Smooth transition for opacity when position becomes ready
+  transition: opacity 0.15s ease-out;
+}
+
+.tooltip {
+  font-size: var(--font-size-normal);
+  border-radius: var(--border-radius-default);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
+  background-color: var(--color-success-medium);
+  color: var(--color-text-white);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tooltipText {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.arrow {
+  inline-size: 0;
+  block-size: 0;
+  border-inline-start: 6px solid transparent;
+  border-inline-end: 6px solid transparent;
+  border-block-start: 6px solid var(--color-success-medium);
+}

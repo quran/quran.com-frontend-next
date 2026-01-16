@@ -7,7 +7,7 @@
 
   @include breakpoints.smallerThanTablet {
     min-block-size: unset;
-    block-size: calc(100dvh - var(--navbar-height));
+    block-size: calc(101dvh - var(--context-menu-container-height));
   }
 }
 

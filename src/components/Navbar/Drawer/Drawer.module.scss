@@ -42,12 +42,6 @@
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
 
-    // Settings drawer on mobile: override side positioning
-    &.settingsDrawer {
-      @include breakpoints.smallerThanTablet {
-        inset-inline-end: 0 !important;
-      }
-    }
   }
 
   &.noTransition {

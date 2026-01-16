@@ -263,7 +263,7 @@ const WordByWordSection = () => {
     !wordByWordInlineContentType.includes(WordByWordType.Translation);
 
   return (
-    <Section hideSeparator>
+    <Section hideSeparator className={styles.sectionContainer}>
       <div className={styles.titleRow}>
         <div className={styles.titleContainer}>
           <SpinnerContainer isLoading={isLoading}>
@@ -350,7 +350,7 @@ const WordByWordSection = () => {
           </div>
         </div>
       </Section.Row>
-      <Section.Row>
+      <Section.Row className={styles.inlineContentRow}>
         <div>
           <p className={styles.sectionLabel}>{t('quran-reader:below-word')}</p>
           <div className={styles.checkboxContainer}>
@@ -371,7 +371,7 @@ const WordByWordSection = () => {
           </div>
         </div>
       </Section.Row>
-      <Section.Row>
+      <Section.Row className={styles.fontSizeRow}>
         <Section.Label className={styles.fontStyleLabel}>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={wordByWordFontScale}

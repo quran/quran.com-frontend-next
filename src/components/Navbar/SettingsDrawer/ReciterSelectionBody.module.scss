@@ -1,3 +1,11 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: var(--spacing-xxlarge-px);
+  }
+}
+
 .reciter {
   margin-block-end: var(--spacing-small);
   display: flex;

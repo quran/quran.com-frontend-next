@@ -43,9 +43,16 @@ const ResetButton = () => {
 
   const resetAndSetInitialState = () => {
     dispatch(resetSettings(lang));
+    // Update the audio player context with default values
     audioService.send({
       type: 'SET_INITIAL_CONTEXT',
       ...DEFAULT_XSTATE_INITIAL_STATE,
+    });
+    // Also send CHANGE_RECITER to reload audio data if player is visible
+    // This ensures the audio player uses the new reciter's audio files
+    audioService.send({
+      type: 'CHANGE_RECITER',
+      reciterId: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
     });
   };
 

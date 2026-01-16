@@ -1,16 +1,17 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
+import PreviewTooltip from './PreviewTooltip';
 import styles from './VersePreview.module.scss';
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { TooltipType } from '@/dls/Tooltip';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectTooltipContentType } from '@/redux/slices/QuranReader/readingPreferences';
@@ -38,6 +39,11 @@ const VersePreview = () => {
   const [showContent, setShowContent] = useState(false);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
   const hasLoggedInteraction = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [tooltipPosition, setTooltipPosition] = useState<{
+    left: number;
+    isReady: boolean;
+  }>({ left: 0, isReady: false });
 
   // Log verse preview interaction only once per drawer session
   const handleInteraction = useCallback(() => {
@@ -51,6 +57,59 @@ const VersePreview = () => {
   const hasBothTooltipTypes =
     showTooltipFor.includes(WordByWordType.Translation) &&
     showTooltipFor.includes(WordByWordType.Transliteration);
+
+  // Get the highlighted word for the static tooltip
+  const highlightedWord = useMemo(() => {
+    if (!sampleVerse?.words) return null;
+    return (sampleVerse.words as Word[]).find(
+      (word) => word.position === HIGHLIGHTED_WORD_POSITION,
+    );
+  }, [sampleVerse?.words]);
+
+  // Calculate tooltip position based on highlighted word's actual position
+  useBrowserLayoutEffect(() => {
+    const calculatePosition = () => {
+      if (!containerRef.current || !sampleVerse?.words || !showContent) return;
+
+      // Find the highlighted word element using data-word-location attribute
+      const highlightedWordElement = containerRef.current.querySelector(
+        `[data-word-location$=":${HIGHLIGHTED_WORD_POSITION}"]`,
+      ) as HTMLElement;
+
+      if (!highlightedWordElement) return;
+
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const targetRect = highlightedWordElement.getBoundingClientRect();
+
+      // Calculate the center of the target word relative to container's left edge
+      const targetCenterX = targetRect.left + targetRect.width / 2;
+      const left = targetCenterX - containerRect.left;
+
+      setTooltipPosition({ left, isReady: true });
+    };
+
+    // Initial calculation with a small delay to ensure DOM is ready
+    const timeoutId = setTimeout(calculatePosition, 50);
+
+    // Recalculate on container size changes (font loading, resize, etc.)
+    const resizeObserver = new ResizeObserver(() => {
+      calculatePosition();
+    });
+
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+      resizeObserver.disconnect();
+    };
+  }, [
+    quranReaderStyles.quranFont,
+    quranReaderStyles.quranTextFontScale,
+    showContent,
+    sampleVerse,
+  ]);
 
   // Delay showing content by 400ms to prevent layout shift
   useEffect(() => {
@@ -106,6 +165,7 @@ const VersePreview = () => {
         {t('verse-preview-title')}
       </div>
       <div
+        ref={containerRef}
         dir="rtl"
         className={styles.container}
         onClick={handleInteraction}
@@ -114,11 +174,18 @@ const VersePreview = () => {
       >
         {showContent ? (
           <>
+            {highlightedWord && (
+              <PreviewTooltip
+                word={highlightedWord}
+                left={tooltipPosition.left}
+                isVisible={tooltipPosition.isReady}
+              />
+            )}
             <VerseText
               words={sampleVerse.words as Word[]}
-              tooltipType={TooltipType.SUCCESS}
               highlightedWordPosition={HIGHLIGHTED_WORD_POSITION}
               isWordInteractionDisabled
+              shouldDisableForceTooltip
             />
             {sampleVerse.translations?.[0]?.text && sampleVerse.translations?.[0]?.languageId && (
               <TranslationText
