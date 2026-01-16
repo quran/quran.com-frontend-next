@@ -196,7 +196,7 @@ const AyahWidgetBuilderPage = () => {
     [dispatch],
   );
 
-  const surahs = useAyahWidgetSurahs(preferences.locale);
+  const surahs = useAyahWidgetSurahs(lang);
   const translations = useAyahWidgetTranslations(preferences.locale);
   const reciters = useAyahWidgetReciters(undefined, DEFAULTS.reciterId);
 
