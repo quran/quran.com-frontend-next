@@ -81,7 +81,7 @@ const DataFetcher: React.FC<Props> = ({
   }
 
   if (!data) {
-    // Guard against undefined data during locale switches
+    // Guard against undefined data during cache invalidation or query key changes
     return loading();
   }
 
