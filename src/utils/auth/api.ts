@@ -95,6 +95,7 @@ import {
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
   makeTranslationFeedbackUrl,
+  GetCoursesQueryParams,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -501,10 +502,8 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (params?: {
-  myCourses?: boolean;
-  languages?: string[];
-}): Promise<Course[]> => privateFetcher(makeGetCoursesUrl(params));
+export const getCourses = async (params?: GetCoursesQueryParams): Promise<Course[]> =>
+  privateFetcher(makeGetCoursesUrl(params));
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
