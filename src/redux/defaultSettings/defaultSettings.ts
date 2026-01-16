@@ -73,7 +73,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   wordByWordInlineContentType: [],
   wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
-  selectedReadingTranslation: null,
+  selectedReadingTranslation: String(DEFAULT_TRANSLATIONS[0]),
   lastUsedReadingMode: ReadingPreference.Reading,
 };
 
