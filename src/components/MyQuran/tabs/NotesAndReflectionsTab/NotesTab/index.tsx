@@ -10,10 +10,12 @@ import { getAllNotes } from '@/utils/auth/api';
 import { makeNotesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 
+const NOTE_LIMIT = 10;
+
 const getNotes = async (sortBy: NotesSortOption, key?: string) => {
   return getAllNotes({
     sortBy,
-    limit: 10,
+    limit: NOTE_LIMIT,
     ...(key.includes('cursor') && { cursor: new URL(key).searchParams.get('cursor') || '' }),
   }) as Promise<GetAllNotesResponse>;
 };
@@ -25,16 +27,16 @@ interface NotesTabProps {
 const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   const getKey = (pageIndex: number, previousPageData: GetAllNotesResponse) => {
     if (!isLoggedIn() || (previousPageData && !previousPageData.data)) return null;
-    if (pageIndex === 0) return makeNotesUrl({ sortBy, limit: 10 });
+    if (pageIndex === 0) return makeNotesUrl({ sortBy, limit: NOTE_LIMIT });
     const { endCursor, hasNextPage } = previousPageData.pagination;
     if (!endCursor || !hasNextPage) return null;
-    return makeNotesUrl({ sortBy, cursor: endCursor, limit: 10 });
+    return makeNotesUrl({ sortBy, cursor: endCursor, limit: NOTE_LIMIT });
   };
 
   const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
     async (key) => getNotes(sortBy, key),
-    { revalidateOnFocus: false, revalidateFirstPage: false, revalidateOnMount: true },
+    { revalidateOnFocus: false, revalidateFirstPage: false, revalidateIfStale: true },
   );
 
   const notes = data ? data.map((response) => response.data).flat() : [];

@@ -91,7 +91,7 @@ const invalidateCountCaches = (
 
   if (cacheKeys) {
     const keys = [...cacheKeys].filter((key) => {
-      if (!key.startsWith('countNotes/')) return false;
+      if (!key.includes('countNotes/')) return false;
 
       if (verseKeys.length > 0) {
         const rangeString = key.replace('countNotes/', '');
@@ -133,12 +133,10 @@ const invalidateNoteCaches = (
 
   // Invalidate paginated notes lists (useSWRInfinite keys like "notes?sortBy=...&limit=...&cursor=...")
   if (cacheKeys) {
-    const keys = [...cacheKeys].filter((key) => key.startsWith(baseNotesPath));
+    const keys = [...cacheKeys].filter((key) => key.includes(baseNotesPath));
     keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
   }
 
-  // Also invalidate the base URL for regular useSWR consumers
-  mutate(baseNotesPath, undefined, { revalidate: true });
   if (note) mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
 };
 
@@ -153,7 +151,7 @@ const invalidateReflectionsCaches = (
 
   if (cacheKeys) {
     const urlKey = makeGetUserReflectionsUrl({ page: 1, limit: 10 }).split('?')[0];
-    const keys = [...cacheKeys].filter((key) => key.startsWith(urlKey));
+    const keys = [...cacheKeys].filter((key) => key.includes(urlKey));
     keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
   }
 };
