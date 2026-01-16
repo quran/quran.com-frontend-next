@@ -239,7 +239,6 @@
 
 .previewPanel {
   @extend .panel;
-  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -250,11 +249,6 @@
 
 .previewContainer {
   min-block-size: 320px;
-  margin: 0 auto;
-  display: flex;
-  flex: 1 1 auto;
-  align-items: center;
-  justify-content: center;
   inline-size: 100%;
   position: relative;
 }
