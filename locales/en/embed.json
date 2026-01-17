@@ -69,6 +69,7 @@
   },
   "actions": {
     "copy": "Copy",
+    "copyEmbedSnippet": "Copy Embed Snippet",
     "copied": "Copied!"
   },
   "errors": {

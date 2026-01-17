@@ -23,7 +23,12 @@ const BuilderPreview = ({
   return (
     <div className={styles.previewColumn}>
       <div className={styles.previewPanel}>
-        <h2 className={styles.panelTitle}>{t('sections.preview')}</h2>
+        <div className={styles.codeHeader}>
+          <h2 className={styles.panelTitle}>{t('sections.preview')}</h2>
+          <button className={styles.copyButton} type="button" onClick={onCopy}>
+            {copySuccess ? t('actions.copied') : t('actions.copyEmbedSnippet')}
+          </button>
+        </div>
         <div className={styles.previewContainer}>
           {isPreviewLoading && (
             <div
