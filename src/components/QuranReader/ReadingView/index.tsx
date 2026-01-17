@@ -18,6 +18,7 @@ import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
 import EmptyTranslationMessage from '@/components/QuranReader/ContextMenu/components/EmptyTranslationMessage';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
@@ -212,11 +213,13 @@ const ReadingView = ({
   const shouldShowQueryParamMessage =
     reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
 
-  // When in empty state, show only the empty message (no mushaf content)
-  // Note: We don't render ReadingModeActions here because ContextMenu already handles mode switching
+  // When in empty state, show mode actions and empty message
   if (showEmptyState) {
     return (
       <div className={styles.emptyStateContainer}>
+        <div className={styles.emptyStateActions}>
+          <ReadingModeActions />
+        </div>
         <EmptyTranslationMessage />
       </div>
     );
