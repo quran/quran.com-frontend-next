@@ -17,11 +17,11 @@ test('Selecting a non-default theme should persist the selected font', async ({
 
   // we cannot access the local storage in webkit straight away so we need to wait for 1 second
   await page.waitForTimeout(1000);
-  // 1. make sure code v1 and 16-line Mushaf are persisted by default
+  // 1. make sure QPC Uthmani Hafs and 16-line Mushaf are persisted by default
   let persistedQuranReaderStyles = (await homepage.getPersistedValue(
     'quranReaderStyles',
   )) as QuranReaderStyles;
-  expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.MadaniV1);
+  expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.QPCHafs);
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.SixteenLines);
   // 2. Open the settings drawer
   await homepage.openSettingsDrawer();
