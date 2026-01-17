@@ -15,8 +15,8 @@ import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
 import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
-import { getLoginNavigationUrl, getCourseNavigationUrl } from '@/utils/navigation';
 import { getAllChaptersData } from '@/utils/chapter';
+import { getLoginNavigationUrl, getCourseNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
 
 interface Props {

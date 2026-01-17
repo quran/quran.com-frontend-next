@@ -2,7 +2,8 @@
 
 ## Problem Description
 
-The Playwright tests for QDC localization are encountering a `SecurityError` when trying to access `localStorage`:
+The Playwright tests for QDC localization are encountering a `SecurityError` when trying to access
+`localStorage`:
 
 ```
 Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.
@@ -11,6 +12,7 @@ Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property 
 ## Root Cause
 
 This error occurs when:
+
 1. The page hasn't fully loaded or initialized
 2. The test tries to access localStorage in a context where it's restricted
 3. Redux hasn't finished hydrating the store
@@ -153,7 +155,9 @@ Give more time for Redux hydration and page loading:
 
 ```typescript
 // Increase timeout from 10s to 15s
-{ timeout: 15000 }
+{
+  timeout: 15000;
+}
 
 // Add page load waiting
 await this.page.waitForLoadState('networkidle');
@@ -216,4 +220,5 @@ Test the fix with various scenarios:
 - [ ] All test categories execute successfully
 - [ ] No hanging or timeout issues
 
-This fix ensures robust localStorage access in Playwright tests while maintaining the comprehensive test coverage for QDC localization features.
+This fix ensures robust localStorage access in Playwright tests while maintaining the comprehensive
+test coverage for QDC localization features.

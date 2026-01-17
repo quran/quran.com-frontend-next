@@ -56,9 +56,7 @@ export const localeToTranslationID = (locale: string): number | null => {
  * @param {number | ReflectionLanguage} languageIdOrLanguage
  * @returns {boolean}
  */
-export const isRTLReflection = (
-  languageIdOrLanguage: number | ReflectionLanguage,
-): boolean => {
+export const isRTLReflection = (languageIdOrLanguage: number | ReflectionLanguage): boolean => {
   if (typeof languageIdOrLanguage === 'number') {
     return RTL_LANGUAGE_IDS.includes(languageIdOrLanguage);
   }

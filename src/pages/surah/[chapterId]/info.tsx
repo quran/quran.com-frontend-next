@@ -17,9 +17,9 @@ import { getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
-import withSsrRedux from '@/utils/withSsrRedux';
 import { isValidChapterId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type ChapterInfoProps = {
   chaptersData: ChaptersData;
