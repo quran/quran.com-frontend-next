@@ -54,7 +54,7 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
 
   return {
     fontFamily:
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "var(--font-family-figtree, 'Figtree', 'Helvetica Neue', Helvetica, Arial, sans-serif)",
     backgroundColor: colors.bgColor,
     color: colors.textColor,
     border: `1px solid ${colors.borderColor}`,
