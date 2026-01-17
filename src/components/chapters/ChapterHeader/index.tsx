@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import React, { useContext } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -26,6 +27,7 @@ interface ChapterHeaderProps {
   translationName?: string;
   translationsCount?: number;
   isTranslationView: boolean;
+  className?: string;
 }
 
 /**
@@ -40,6 +42,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   translationName,
   translationsCount,
   isTranslationView,
+  className,
 }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('quran-reader');
@@ -60,7 +63,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
