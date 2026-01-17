@@ -226,7 +226,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       props: {
         chaptersData: allChaptersData,
         chaptersResponse: buildChaptersResponse(allChaptersData),
-        quranInYearVerses,
+        quranInYearVerses: quranInYearVerses || null,
       },
     };
   },

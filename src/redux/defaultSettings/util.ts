@@ -56,6 +56,10 @@ export const getStoreInitialState = (
     [SliceName.NOTIFICATIONS]: getNotificationsInitialState(locale as Language),
   } as unknown as RootState;
 
+  if (!countryPreference) {
+    return baseState;
+  }
+
   const learningPlanLanguageIsoCodes = (
     countryPreference.learningPlanLanguages?.map((lang) => lang.isoCode) || ['en']
   )
@@ -70,10 +74,6 @@ export const getStoreInitialState = (
     ...baseState[SliceName.DEFAULT_SETTINGS],
     learningPlanLanguageIsoCodes,
   } as any;
-
-  if (!countryPreference) {
-    return baseState;
-  }
 
   // Helper to map mushaf id → quranFont & mushafLines
   const mapMushafToFontAndLines = (

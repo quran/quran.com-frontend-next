@@ -66,7 +66,8 @@ const LearningPlansSection = () => {
         fetcher={privateFetcher}
         queryKey={makeGetCoursesUrl({ myCourses: false, languages: resolvedLanguageIsoCodes })}
         render={(data: CoursesResponse) => {
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
+          const courses = data?.data || [];
+          const sortedCourses = [...courses].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(
             (course) => typeof course.isCompleted === 'undefined',
           );
