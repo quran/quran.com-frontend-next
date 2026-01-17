@@ -11,6 +11,7 @@ import {
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -420,7 +421,15 @@ const AyahWidgetBuilderPage = () => {
         <div className={styles.inner}>
           <header className={styles.header}>
             <h1 className={styles.title}>{t('header.title')}</h1>
-            <p className={styles.subtitle}>{t('header.subtitle')}</p>
+            <p className={styles.subtitle}>
+              <Trans
+                i18nKey="embed:header.subtitle"
+                components={{
+                  bold: <span className={styles.subtitleBold} />,
+                  br: <br />,
+                }}
+              />
+            </p>
           </header>
 
           <div className={styles.grid}>

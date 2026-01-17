@@ -28,6 +28,11 @@
   font-size: 1rem;
 }
 
+.subtitleBold {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+}
+
 .grid {
   display: grid;
   grid-template-columns: 360px 1fr;
