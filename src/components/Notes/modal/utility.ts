@@ -1,6 +1,6 @@
 import { ScopedMutator, Cache } from 'swr/dist/types';
 
-import { Note } from '@/types/auth/Note';
+import { GetAllNotesResponse, Note } from '@/types/auth/Note';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl, makeNotesUrl } from '@/utils/auth/apiPaths';
 import { makeGetUserReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
@@ -160,9 +160,7 @@ const updateNoteCaches = (
   // Update single note cache
   if (note && action === CacheAction.UPDATE) {
     mutate(makeGetNoteByIdUrl(note.id), note, { revalidate: true });
-  } else if (note && action === CacheAction.DELETE) {
-    mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
-  } else if (note) {
+  } else if (note || action === CacheAction.DELETE) {
     mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
   }
 
@@ -172,40 +170,44 @@ const updateNoteCaches = (
   const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
   if (!cacheKeys) mutate(baseNotesUrl, undefined, { revalidate: true });
 
-  const notesListKeys = [...cacheKeys].filter((key) => key.includes(baseNotesUrl));
+  const notesListKeys = [...cacheKeys].filter(
+    (key) => key.startsWith('$inf$') && key.includes(baseNotesUrl),
+  );
 
   notesListKeys.forEach((key) =>
-    mutate(key, (data: any | undefined) => updatePaginatedNotes(data, note, action), {
-      revalidate: true,
-    }),
+    mutate(
+      key,
+      (data: GetAllNotesResponse[] | undefined) => updatePaginatedNotes(data, note, action),
+      { revalidate: true },
+    ),
   );
 };
 
-const updatePaginatedNotes = (data: any, note?: Note, action?: CacheAction) => {
+const updatePaginatedNotes = (
+  data: GetAllNotesResponse[] | undefined,
+  note?: Note,
+  action?: CacheAction,
+) => {
   if (!data || !note || !action) return undefined;
 
-  // Check if it's an infinite loader response (array of pages)
   if (Array.isArray(data)) {
-    // We only attempt to update the first page for 'create'
-    // and traverse all pages for 'update'/'delete'
-    const newPages = data.map((page, index) => {
-      if (!page || !page.data) return page;
+    if (action === CacheAction.CREATE) {
+      const firstPage = data[0];
+      if (!firstPage) return data;
+      return [{ ...firstPage, data: [note, ...firstPage.data] }, ...data.slice(1)];
+    }
 
-      let newData = [...page.data];
-
-      if (action === CacheAction.CREATE && index === 0) {
-        // Prepend to first page
-        newData = [note, ...newData];
-      } else if (action === CacheAction.UPDATE) {
-        newData = newData.map((n) => (n.id === note.id ? note : n));
-      } else if (action === CacheAction.DELETE) {
-        newData = newData.filter((n) => n.id !== note.id);
+    return data.map((page) => {
+      if (action === CacheAction.UPDATE) {
+        return { ...page, data: page.data.map((n) => (n.id === note.id ? note : n)) };
       }
 
-      return { ...page, data: newData };
-    });
+      if (action === CacheAction.DELETE) {
+        return { ...page, data: page.data.filter((n) => n.id !== note.id) };
+      }
 
-    return newPages;
+      return page;
+    });
   }
 
   // Fallback for non-array data structure if any (shouldn't happen with useSWRInfinite)
