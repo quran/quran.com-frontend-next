@@ -50,10 +50,11 @@ const VersePreview = () => {
 
   // Calculate tooltip position based on highlighted word's location
   useBrowserLayoutEffect(() => {
-    const calculatePosition = () => {
-      if (!containerRef.current || !sampleVerse?.words || !showContent) return;
+    let isMounted = true;
 
-      // Find the highlighted word using data-word-location attribute
+    const calculatePosition = () => {
+      if (!isMounted || !containerRef.current || !sampleVerse?.words || !showContent) return;
+
       const selector = `[data-word-location$=":${HIGHLIGHTED_WORD_POSITION}"]`;
       const wordElement = containerRef.current.querySelector(selector) as HTMLElement;
       if (!wordElement) return;
@@ -61,7 +62,6 @@ const VersePreview = () => {
       const containerRect = containerRef.current.getBoundingClientRect();
       const wordRect = wordElement.getBoundingClientRect();
 
-      // Calculate center of word relative to container
       const wordCenterX = wordRect.left + wordRect.width / 2;
       const left = wordCenterX - containerRect.left;
 
@@ -77,6 +77,7 @@ const VersePreview = () => {
     }
 
     return () => {
+      isMounted = false;
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
     };
