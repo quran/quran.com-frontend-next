@@ -99,11 +99,9 @@ const StaticVerseList = ({
         <div key={verse.verseKey} className={styles.container}>
           {verse.verseNumber === 1 && (
             <ChapterHeader
-              translationsLabel={translationsLabel}
+              translationName={translationsLabel}
               translationsCount={verse.translations?.length}
               chapterId={String(verse.chapterId)}
-              pageNumber={verse.pageNumber}
-              hizbNumber={verse.hizbNumber}
               isTranslationView
             />
           )}
