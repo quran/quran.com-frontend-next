@@ -6,8 +6,12 @@
   min-block-size: 100vh;
 
   @include breakpoints.smallerThanTablet {
-    min-block-size: unset;
-    block-size: calc(101dvh - var(--context-menu-container-height));
+    // Fill entire available space so buttons are at screen bottom
+    min-block-size: 0;
+    flex: 1;
+    block-size: 100%;
+    // Force proper rendering in Chrome during parent transform animation
+    transform: translateZ(0);
   }
 }
 
@@ -21,11 +25,9 @@
   padding-block-end: var(--spacing-medium2-px);
   border-block-start: 1px solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated);
+  // Fixed footer - flex layout naturally positions at bottom
   flex-shrink: 0;
-  position: sticky;
-  inset-block-end: 0;
   z-index: 10;
-  margin-block-start: auto;
 
   button {
     border-radius: var(--border-radius-medium-px);

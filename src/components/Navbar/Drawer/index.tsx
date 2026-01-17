@@ -167,6 +167,8 @@ const Drawer: React.FC<Props> = ({
   );
 
   const isSearchDrawer = type === DrawerType.Search;
+  const isSettingsDrawer = type === DrawerType.Settings;
+
   return (
     <div
       data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
@@ -176,10 +178,10 @@ const Drawer: React.FC<Props> = ({
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
-        [styles.settingsDrawer]: type === DrawerType.Settings,
+        [styles.settingsDrawer]: isSettingsDrawer,
       })}
       ref={drawerRef}
-      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
+      id={isSettingsDrawer ? 'settings-drawer-container' : undefined}
     >
       {removeHeaderWrapper ? (
         <>

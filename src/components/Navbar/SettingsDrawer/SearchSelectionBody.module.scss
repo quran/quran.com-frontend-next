@@ -3,6 +3,8 @@
 .container {
   @include breakpoints.smallerThanTablet {
     padding-block-end: var(--spacing-xxlarge-px);
+    flex: 1;
+    overflow-y: auto;
   }
 }
 

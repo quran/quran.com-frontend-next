@@ -51,22 +51,25 @@
   &.settingsDrawer {
     @include breakpoints.smallerThanTablet {
       inset-block-start: var(--navbar-height);
-      inset-block-end: auto;
-      block-size: calc(100vh - var(--navbar-height));
+      inset-block-end: 0;
+      block-size: calc(100dvh - var(--navbar-height));
       border-start-start-radius: var(--border-radius-rounded);
       border-start-end-radius: var(--border-radius-rounded);
       transform: translateY(100%);
       transition: transform var(--transition-regular), inset-block-start var(--transition-regular),
         block-size var(--transition-regular);
+      overflow: hidden;
+      will-change: transform;
+      backface-visibility: hidden;
+      contain: layout;
     }
   }
 
-  // When navbar is hidden on scroll, remove top gap and top rounded corners
   &.navbarInvisible {
     &.settingsDrawer {
       @include breakpoints.smallerThanTablet {
-        inset-block-start: calc(3 * var(--spacing-max));
-        block-size: 100vh;
+        inset-block-start: calc(var(--top-bar-height-mobile-collapsed) + var(--navbar-height));
+        block-size: calc(100dvh - var(--context-menu-container-height));
         border-start-start-radius: var(--border-radius-rounded);
         border-start-end-radius: var(--border-radius-rounded);
         padding-block-start: var(--spacing-xxsmall-px);
@@ -129,6 +132,12 @@
   .settingsDrawer & {
     @include breakpoints.smallerThanTablet {
       margin-block-start: 0;
+      // Fill the drawer completely so buttons reach screen bottom
+      min-block-size: 0;
+      block-size: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
   }
 }
@@ -175,16 +184,12 @@
   .settingsDrawer & {
     @include breakpoints.smallerThanTablet {
       position: sticky;
-      inset-block-start: 0;
+      inset-block-start: calc(-1 * var(--spacing-xxsmall-px));
       background-color: var(--color-background-elevated);
     }
   }
 
-  .translationView & {
-    @include breakpoints.smallerThanTablet {
-      padding-block: var(--spacing-small-px);
-    }
-  }
+
 }
 
 .headerContentContainer {
