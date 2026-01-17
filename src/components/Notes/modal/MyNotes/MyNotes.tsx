@@ -40,8 +40,8 @@ const MyNotes: React.FC<MyNotesProps> = ({
     makeGetNotesByVerseUrl(verseKey),
     () => getNotesByVerse(verseKey),
     {
+      revalidateOnReconnect: true,
       revalidateOnFocus: true,
-      revalidateOnReconnect: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     },
   );

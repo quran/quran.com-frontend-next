@@ -12,6 +12,7 @@ import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNote
 import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
+import { NoteWithRecentReflection } from '@/components/Notes/modal/type';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
@@ -19,10 +20,8 @@ import ZIndexVariant from '@/types/enums/ZIndexVariant';
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
 const PROXIMATE_NOTE_HEIGHT = 100;
 
-type NoteWithPostUrl = Note & { postUrl?: string };
-
 interface NotesTabContentProps {
-  notes: Note[];
+  notes: NoteWithRecentReflection[];
   isLoading: boolean;
   isLoadingMore: boolean;
   error: any;
@@ -68,7 +67,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
   }, []);
 
   const renderNote = useCallback(
-    (index: number, note: NoteWithPostUrl) => {
+    (index: number, note: NoteWithRecentReflection) => {
       return (
         <div className={styles.noteItem}>
           <NoteCard

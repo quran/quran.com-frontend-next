@@ -2,7 +2,7 @@
  * Default deduping interval for SWR cache invalidation in milliseconds.
  * Determines how long identical requests are deduped to prevent unnecessary API calls.
  */
-export const DEFAULT_DEDUPING_INTERVAL = 10000;
+export const DEFAULT_DEDUPING_INTERVAL = 1 * 1000;
 
 /**
  * Timeout delay in milliseconds after closing the notes modal before triggering action callbacks.

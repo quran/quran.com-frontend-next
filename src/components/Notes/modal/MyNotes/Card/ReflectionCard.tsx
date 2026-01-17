@@ -10,15 +10,12 @@ import Button, { ButtonSize, ButtonVariant, ButtonShape } from '@/dls/Button/But
 import ChatIcon from '@/icons/chat.svg';
 import LoveIcon from '@/icons/love.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
-import { Note } from '@/types/auth/Note';
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
 import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
-
-export type NoteWithPostUrl = Note & { postUrl?: string };
 
 export interface ReflectionCardProps {
   reflection: AyahReflection;

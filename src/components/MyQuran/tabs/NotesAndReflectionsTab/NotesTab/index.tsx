@@ -5,6 +5,7 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 import NotesTabContent from './NotesTabContent';
 
 import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
+import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
 import { GetAllNotesResponse } from '@/types/auth/Note';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { getAllNotes } from '@/utils/auth/api';
@@ -39,13 +40,15 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     async (key) => getNotes(sortBy, key),
     {
       revalidateFirstPage: false,
-      revalidateOnReconnect: false,
+      revalidateAll: true,
+      revalidateOnReconnect: true,
       revalidateOnFocus: true,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     },
   );
 
   const notes = data ? data.map((response) => response.data).flat() : [];
+  const notesWithRecentReflection = useNotesWithRecentReflection(notes);
 
   const lastPageData = data?.[data.length - 1];
   const hasNextPage = lastPageData?.pagination?.hasNextPage || false;
@@ -58,7 +61,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   return (
     <div className={styles.container}>
       <NotesTabContent
-        notes={notes}
+        notes={notesWithRecentReflection}
         isLoading={!data && !error}
         isLoadingMore={notes?.length > 0 && size > 1 && isValidating}
         error={error}
