@@ -13,6 +13,7 @@ import Homepage from '../../POM/home-page';
 import { DefaultSettings } from '@/redux/slices/defaultSettings';
 import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import { openNavigationDrawer } from '@/tests/helpers/navigation';
+import { openSettingsDrawer } from '@/tests/helpers/settings';
 
 // Add TypeScript declaration for window.__store
 declare global {
@@ -1509,7 +1510,7 @@ test.describe('Category 3: Language Selector Behavior', () => {
       await testHelper.expectNextLocaleCookieToBe('ar');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
-      expect(translations.selectedTranslations).toContain(131); // Arabic default
+      expect(translations.selectedTranslations).toContain(1113); // Arabic default
     });
 
     await test.step('Cleanup', async () => {
@@ -1538,8 +1539,8 @@ test.describe('Category 3: Language Selector Behavior', () => {
     });
 
     await test.step('Customize settings', async () => {
-      await testHelper.homepage.openSettingsDrawer();
-      await expect(page.locator('#theme-section')).toBeVisible();
+      await openNavigationDrawer(page);
+      await expect(page.getByTestId('change-theme')).toBeVisible();
 
       await page.evaluate(() => {
         window.__store?.dispatch({
@@ -1600,8 +1601,7 @@ test.describe('Category 4: Reset Settings Functionality', () => {
 
     await test.step('Modify settings and verify customization', async () => {
       await openNavigationDrawer(page);
-      await testHelper.homepage.openSettingsDrawer();
-      await expect(page.locator('#theme-section')).toBeVisible();
+      await expect(page.getByTestId('change-theme')).toBeVisible();
 
       await page.evaluate(() => {
         window.__store?.dispatch({
@@ -1618,6 +1618,10 @@ test.describe('Category 4: Reset Settings Functionality', () => {
     });
 
     await test.step('Reset settings to defaults', async () => {
+      // escape navigation drawer first
+      await page.keyboard.press('Escape');
+
+      await openSettingsDrawer(page);
       await page.locator('[data-testid="reset-settings-button"]').click();
       await page.waitForTimeout(2000); // Allow reset to complete
       await page.keyboard.press('Escape');

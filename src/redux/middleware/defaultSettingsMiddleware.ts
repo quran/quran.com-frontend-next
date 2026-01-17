@@ -9,7 +9,8 @@ import { RESET_SETTINGS_EVENT } from '@/redux/actions/reset-settings';
 
 const OBSERVED_ACTIONS = [
   `${SliceName.THEME}/setTheme`,
-  `${SliceName.READING_PREFERENCES}/setReadingPreference`,
+  // commented out because I do not consider changing reading view from mushaf to translation or vice versa as changing default settings
+  // `${SliceName.READING_PREFERENCES}/setReadingPreference`,
   `${SliceName.READING_PREFERENCES}/setSelectedWordByWordLocale`,
   `${SliceName.READING_PREFERENCES}/setWordByWordContentType`,
   `${SliceName.READING_PREFERENCES}/setWordByWordDisplay`,

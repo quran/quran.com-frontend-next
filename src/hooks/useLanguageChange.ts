@@ -1,16 +1,25 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useState } from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { getCountryLanguagePreference } from '@/api';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
-import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
+import {
+  selectDetectedCountry,
+  selectIsUsingDefaultSettings,
+  setDefaultsFromCountryPreference,
+  setIsUsingDefaultSettings,
+  setUserHasCustomised,
+} from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
-import { logValueChange } from '@/utils/eventLogger';
+import { getCountryCodeForPreferences } from '@/utils/serverSideLanguageDetection';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 interface UseLanguageChangeReturn {
@@ -22,6 +31,7 @@ interface UseLanguageChangeReturn {
 const useLanguageChange = (): UseLanguageChangeReturn => {
   const { t, lang } = useTranslation('common');
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
+  const detectedCountry = useSelector(selectDetectedCountry);
   const dispatch = useDispatch();
   const toast = useToast();
   const [isChangingLanguage, setIsChangingLanguage] = useState(false);
@@ -64,7 +74,23 @@ const useLanguageChange = (): UseLanguageChangeReturn => {
         dispatch(resetSettings(newLocale));
       }
 
-      logValueChange('locale', lang, newLocale);
+      if (isUsingDefaultSettings) {
+        try {
+          const preferenceCountry = getCountryCodeForPreferences(newLocale, detectedCountry);
+          const countryPreference = await getCountryLanguagePreference(
+            newLocale,
+            preferenceCountry,
+          );
+          dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
+        } catch (error) {
+          logErrorToSentry('Error fetching country language preference:', error);
+        }
+
+        // Ensure defaults don't mark the user as customised when only switching language.
+        dispatch(setIsUsingDefaultSettings(true));
+        dispatch(setUserHasCustomised(false));
+      }
+
       await setLanguage(newLocale);
       setLocaleCookie(newLocale);
 

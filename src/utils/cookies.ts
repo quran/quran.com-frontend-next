@@ -10,6 +10,21 @@ export const setLocaleCookie = (newLocale: string) => {
   document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
 };
 
+export const setServerLocaleCookie = (newLocale: string, res: GetServerSidePropsContext['res']) => {
+  // Aligns server-set cookie with client behaviour so SSR redirects also persist locale.
+  const expires = new Date();
+  expires.setTime(LOCALE_COOKIE_PERSISTENCE_PERIOD_MS);
+  const newCookie = `NEXT_LOCALE=${newLocale}; Path=/; Expires=${expires.toUTCString()}; SameSite=Lax`;
+  const existingSetCookieHeader = res.getHeader('Set-Cookie');
+  if (!existingSetCookieHeader) {
+    res.setHeader('Set-Cookie', newCookie);
+  } else if (Array.isArray(existingSetCookieHeader)) {
+    res.setHeader('Set-Cookie', [...existingSetCookieHeader, newCookie]);
+  } else {
+    res.setHeader('Set-Cookie', [existingSetCookieHeader.toString(), newCookie]);
+  }
+};
+
 /**
  * Sets cookies from the proxy response to the server-side response.
  *
