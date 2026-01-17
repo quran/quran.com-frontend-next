@@ -8,6 +8,5 @@
   flex-direction: column;
   block-size: 100%;
   flex: 1;
-  // Force proper rendering in Chrome during parent transform animation
   transform: translateZ(0);
 }

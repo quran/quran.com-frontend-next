@@ -1,11 +1,9 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  @include breakpoints.smallerThanTablet {
-    padding-block-end: var(--spacing-xxlarge-px);
-    flex: 1;
-    overflow-y: auto;
-  }
+  flex: 1;
+  overflow-y: auto;
+  padding-block-end: var(--spacing-xxlarge-px);
 }
 
 .titleContainer {

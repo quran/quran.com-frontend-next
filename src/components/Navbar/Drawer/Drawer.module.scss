@@ -41,7 +41,6 @@
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
-
   }
 
   &.noTransition {
@@ -130,15 +129,19 @@
   padding-inline-end: var(--spacing-small);
 
   .settingsDrawer & {
+    min-block-size: 0;
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
     @include breakpoints.smallerThanTablet {
       margin-block-start: 0;
-      // Fill the drawer completely so buttons reach screen bottom
-      min-block-size: 0;
-      block-size: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
     }
+  }
+  .translationView &,
+  .reciterView & {
+    margin-block-start: 0;
   }
 }
 
@@ -188,8 +191,12 @@
       background-color: var(--color-background-elevated);
     }
   }
-
-
+  .translationView &,
+  .reciterView & {
+    position: sticky;
+    inset-block-start: 0;
+    background-color: var(--color-background-elevated);
+  }
 }
 
 .headerContentContainer {
