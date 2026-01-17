@@ -125,6 +125,8 @@ The embed is an iframe pointing to `/embed/v1` with query params.
 | `locale`              | Widget locale                                        | `en`    |
 | `wbw`                 | Enable word-by-word translation (`true`/`false`)     | `false` |
 | `wbwTransliteration`  | Enable word-by-word transliteration (`true`/`false`) | `false` |
+| `width`               | Iframe width (CSS length)                            | `100%`  |
+| `height`              | Iframe height (CSS length)                           | `500px` |
 | `showTranslationName` | Show translator names                                | `false` |
 | `showArabic`          | Show Arabic text                                     | `true`  |
 | `tafsir`              | Show tafsirs button                                  | `true`  |
