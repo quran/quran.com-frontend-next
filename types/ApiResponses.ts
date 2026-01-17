@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import AudioData from './AudioData';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
@@ -151,6 +152,8 @@ export interface CountryLanguagePreferenceResponse extends BaseResponse {
   id: number;
   country: string;
   userDeviceLanguage: string;
+  defaultLocale?: string;
+  qrDefaultLocale?: string;
   defaultMushaf: {
     id: number;
     name: string;
