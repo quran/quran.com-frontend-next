@@ -2,6 +2,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './LearningPlansSection.module.scss';
 import Loading from './Loading';
@@ -9,6 +10,7 @@ import Loading from './Loading';
 import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 import { TestId } from '@/tests/test-ids';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
@@ -30,6 +32,9 @@ const learningPlansSorter = (a: Course, b: Course) => {
 
 const LearningPlansSection = () => {
   const { t } = useTranslation('home');
+  const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+  const resolvedLanguageIsoCodes =
+    languageIsoCodes && languageIsoCodes.length > 0 ? languageIsoCodes : ['en'];
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -59,7 +64,7 @@ const LearningPlansSection = () => {
       <DataFetcher
         loading={Loading}
         fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false })}
+        queryKey={makeGetCoursesUrl({ myCourses: false, languages: resolvedLanguageIsoCodes })}
         render={(data: CoursesResponse) => {
           const sortedCourses = [...data.data].sort(learningPlansSorter);
           const firstNonEnrolledIndex = sortedCourses.findIndex(

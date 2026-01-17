@@ -39,10 +39,17 @@ const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ initialCoursesDat
 
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/learning-plans',
-  async (context) => {
+  async (context, languageResult) => {
     const { locale } = context;
     const allChaptersData = await getAllChaptersData(locale);
-    const coursesUrl = makeGetCoursesUrl({ myCourses: false });
+    const learningPlanLanguages = languageResult.countryLanguagePreference?.learningPlanLanguages
+      ?.map((lang) => lang.isoCode)
+      .filter((code): code is string => Boolean(code))
+      .map((code) => code.toLowerCase()) || ['en'];
+    const coursesUrl = makeGetCoursesUrl({
+      myCourses: false,
+      languages: learningPlanLanguages,
+    });
     const initialCoursesData = await privateFetcher(coursesUrl);
 
     return {

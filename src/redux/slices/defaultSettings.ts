@@ -42,6 +42,20 @@ export type DefaultSettings = {
   detectedLanguage: string;
   userHasCustomised: boolean;
   ayahReflectionsLanguages: ReflectionLanguage[];
+  learningPlanLanguageIsoCodes: string[];
+};
+
+const normalizeLearningPlanLanguageIsoCodes = (languageIsoCodes?: string[]): string[] => {
+  const normalized =
+    languageIsoCodes
+      ?.map((code) => code?.trim().toLowerCase())
+      .filter((code, index, array) => code && array.indexOf(code) === index) || [];
+
+  if (normalized.length === 0) {
+    return ['en'];
+  }
+
+  return normalized;
 };
 
 const initialState: DefaultSettings = {
@@ -50,6 +64,7 @@ const initialState: DefaultSettings = {
   detectedLanguage: '',
   userHasCustomised: false,
   ayahReflectionsLanguages: [ReflectionLanguage.ENGLISH], // Default to English only
+  learningPlanLanguageIsoCodes: normalizeLearningPlanLanguageIsoCodes(),
 };
 
 /**
@@ -114,6 +129,7 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
       defaultTafsir,
       defaultWbwLanguage,
       ayahReflectionsLanguages,
+      learningPlanLanguages,
     } = countryPreference;
 
     applyMushafSettings(defaultMushaf, locale, dispatch);
@@ -155,6 +171,11 @@ export const setDefaultsFromCountryPreference = createAsyncThunk<
 
       dispatch(setAyahReflectionsLanguages(reflectionLanguages));
     }
+
+    const learningPlanLanguageIsoCodes = normalizeLearningPlanLanguageIsoCodes(
+      learningPlanLanguages?.map((lang) => lang.isoCode) || [],
+    );
+    dispatch(setLearningPlanLanguageIsoCodes(learningPlanLanguageIsoCodes));
 
     dispatch(setDetectedCountry(countryPreference.country));
     dispatch(setDetectedLanguage(countryPreference.userDeviceLanguage));
@@ -222,6 +243,10 @@ export const defaultSettingsSlice = createSlice({
       ...state,
       ayahReflectionsLanguages: action.payload,
     }),
+    setLearningPlanLanguageIsoCodes: (state: DefaultSettings, action: PayloadAction<string[]>) => ({
+      ...state,
+      learningPlanLanguageIsoCodes: normalizeLearningPlanLanguageIsoCodes(action.payload),
+    }),
   },
 });
 
@@ -259,6 +284,7 @@ export const {
   setDetectedLanguage,
   setUserHasCustomised,
   setAyahReflectionsLanguages,
+  setLearningPlanLanguageIsoCodes,
 } = defaultSettingsSlice.actions;
 
 export default defaultSettingsSlice.reducer;
@@ -275,3 +301,6 @@ export const selectUserHasCustomised = (state: RootState) =>
 
 export const selectAyahReflectionsLanguages = (state: RootState) =>
   state.defaultSettings.ayahReflectionsLanguages;
+
+export const selectLearningPlanLanguageIsoCodes = (state: RootState) =>
+  state.defaultSettings.learningPlanLanguageIsoCodes;
