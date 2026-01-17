@@ -416,6 +416,7 @@ export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
     rangeToggleField: WIDGET_FIELDS.rangeEnabled,
   },
   { kind: 'field', field: WIDGET_FIELDS.mergeVerses },
+  { kind: 'twoColumn', fields: [WIDGET_FIELDS.customWidth, WIDGET_FIELDS.customHeight] },
   { kind: 'field', field: WIDGET_FIELDS.theme },
   { kind: 'field', field: WIDGET_FIELDS.locale },
   { kind: 'field', field: WIDGET_FIELDS.showArabic },
@@ -430,5 +431,4 @@ export const WIDGET_FORM_BLOCKS: WidgetFormBlock[] = [
   { kind: 'field', field: WIDGET_FIELDS.showLessons },
   { kind: 'field', field: WIDGET_FIELDS.showReflections },
   { kind: 'field', field: WIDGET_FIELDS.showAnswers },
-  { kind: 'twoColumn', fields: [WIDGET_FIELDS.customWidth, WIDGET_FIELDS.customHeight] },
 ];

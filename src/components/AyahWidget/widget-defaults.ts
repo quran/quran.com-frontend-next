@@ -19,7 +19,7 @@ export const DEFAULTS = {
   translationId: 131,
   copySuccessDurationMs: 2000,
   embedUrl: process.env.NEXT_PUBLIC_EMBED_URL || '',
-  iframeHeight: 500,
+  iframeHeight: '350px',
 } as const;
 
 /**
@@ -48,7 +48,7 @@ export const INITIAL_PREFERENCES: Preferences = {
   mergeVerses: false,
   customSize: {
     width: '100%',
-    height: '',
+    height: DEFAULTS.iframeHeight,
   },
 };
 
