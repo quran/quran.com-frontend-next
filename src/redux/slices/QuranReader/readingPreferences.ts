@@ -167,7 +167,7 @@ export const selectSelectedReadingTranslation = (state: RootState) =>
  * (e.g., when user deselects that translation or switches locales).
  *
  * @param {RootState} state - The Redux root state
- * @returns {number | null} A valid translation ID or null if no translations selected
+ * @returns {number | null} A valid translation ID from selectedTranslations, or null if none are selected
  */
 export const selectValidatedReadingTranslation = (state: RootState): number | null => {
   const { selectedReadingTranslation } = state.readingPreferences;
