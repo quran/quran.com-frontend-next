@@ -18,9 +18,17 @@ interface Props {
   to: number;
   quranFont?: QuranFont;
   translationsLimit?: number;
+  initialData?: VersesResponse; // Use SSR-fetched data when available so we can render without JS
 }
 
-const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimit }: Props) => {
+const useVerseAndTranslation = ({
+  chapter,
+  from,
+  to,
+  quranFont,
+  translationsLimit,
+  initialData,
+}: Props) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const {
@@ -48,6 +56,7 @@ const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimi
   const { data, error, mutate } = useSWR<VersesResponse>(
     shouldFetchData ? makeVersesUrl(chapter, lang, apiParams) : null,
     fetcher,
+    { fallbackData: initialData }, // Populate data on first render so SSR works even if JS is off
   );
 
   useQcfFont(resolvedFont, data?.verses ? data.verses : []);

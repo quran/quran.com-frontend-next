@@ -1,3 +1,5 @@
+import { MushafLines } from './QuranReader';
+
 export type AdvancedCopyRequest = {
   from: string;
   to: string;
@@ -20,4 +22,12 @@ export type PagesLookUpRequest = {
   mushaf?: number;
   from?: number | string;
   to?: number | string;
+};
+
+export type QuranInYearVerseRequest = {
+  locale: string;
+  chapter: number;
+  verse: number;
+  translationIds: number[];
+  mushafLines: MushafLines;
 };

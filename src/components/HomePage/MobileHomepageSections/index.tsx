@@ -9,20 +9,27 @@ import QuranGrowthJourneySection from '../QuranGrowthJourneySection';
 import QuranInYearSection from '../QuranInYearSection';
 
 import styles from '@/pages/index.module.scss';
+import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
 type Props = {
   isUserLoggedIn: boolean;
   todayAyah: { chapter: number; verse: number } | null;
   chaptersData?: ChaptersData;
+  quranInYearVerses?: VersesResponse; // SSR verse data so section renders without JS
 };
 
-const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, chaptersData }) => {
+const MobileHomepageSections: React.FC<Props> = ({
+  isUserLoggedIn,
+  todayAyah,
+  chaptersData,
+  quranInYearVerses,
+}) => {
   return isUserLoggedIn ? (
     <>
       {todayAyah && (
         <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-          <QuranInYearSection chaptersData={chaptersData} />
+          <QuranInYearSection chaptersData={chaptersData} initialVersesData={quranInYearVerses} />
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
@@ -45,7 +52,7 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah, ch
       </div>
       {todayAyah && (
         <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-          <QuranInYearSection chaptersData={chaptersData} />
+          <QuranInYearSection chaptersData={chaptersData} initialVersesData={quranInYearVerses} />
         </div>
       )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>

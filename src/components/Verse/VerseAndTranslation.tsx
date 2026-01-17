@@ -12,6 +12,7 @@ import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { QuranFont } from '@/types/QuranReader';
 import { getChapterData } from '@/utils/chapter';
 import { getVerseWords } from '@/utils/verse';
+import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
 /**
@@ -58,6 +59,7 @@ interface Props {
   arabicVerseClassName?: string;
   translationClassName?: string;
   fixedFontScale?: number; // Optional override for font scales of Quran text and translations
+  initialData?: VersesResponse; // SSR fallback data so the verse renders without JS
 }
 
 const VerseAndTranslation: React.FC<Props> = (props) => {

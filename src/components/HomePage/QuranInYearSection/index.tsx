@@ -15,6 +15,7 @@ import { QuranFont } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
+import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
 // Set a fixed font scale for both Arabic and translation text
@@ -22,9 +23,10 @@ const FONT_SCALE = 3;
 
 interface Props {
   chaptersData?: ChaptersData;
+  initialVersesData?: VersesResponse; // SSR data so the verse shows when JS is disabled
 }
 
-const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
+const QuranInYearSection: React.FC<Props> = ({ chaptersData, initialVersesData }) => {
   const { t } = useTranslation('home');
 
   const onCalendarClicked = () => {
@@ -52,19 +54,23 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           </Link>
         </div>
       </div>
+
       <div className={styles.container} data-testid={TestId.QURAN_IN_A_YEAR_SECTION}>
-        <VerseAndTranslation
-          chaptersData={chaptersData}
-          chapter={todayAyah.chapter}
-          from={todayAyah.verse}
-          to={todayAyah.verse}
-          titleText={t('quran-in-year-verse-title')}
-          quranFont={QuranFont.QPCHafs}
-          translationsLimit={1}
-          arabicVerseClassName={styles.customArabicVerse}
-          translationClassName={styles.customTranslation}
-          fixedFontScale={FONT_SCALE}
-        />
+        <div data-testid="quran-in-a-year-verse">
+          <VerseAndTranslation
+            chaptersData={chaptersData}
+            chapter={todayAyah.chapter}
+            from={todayAyah.verse}
+            to={todayAyah.verse}
+            titleText={t('quran-in-year-verse-title')}
+            quranFont={QuranFont.QPCHafs}
+            translationsLimit={1}
+            arabicVerseClassName={styles.customArabicVerse}
+            translationClassName={styles.customTranslation}
+            fixedFontScale={FONT_SCALE}
+            initialData={initialVersesData}
+          />
+        </div>
         <Button
           type={ButtonType.Primary}
           variant={ButtonVariant.Compact}
