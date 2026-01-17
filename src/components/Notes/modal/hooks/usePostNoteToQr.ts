@@ -3,18 +3,14 @@ import { useCallback, useState, useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import { invalidateCache } from '@/components/Notes/modal/utility';
+import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import { logErrorToSentry } from '@/lib/sentry';
-import { Note } from '@/types/auth/Note';
+import { AttachedEntityType, Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
-
-interface UsePostNoteToQROptions {
-  onSuccess?: () => void;
-}
 
 interface UsePostNoteToQRReturn {
   showConfirmationModal: boolean;
@@ -25,7 +21,7 @@ interface UsePostNoteToQRReturn {
   handleNotePostToQR: () => Promise<void>;
 }
 
-const usePostNoteToQR = (options?: UsePostNoteToQROptions): UsePostNoteToQRReturn => {
+const usePostNoteToQR = (): UsePostNoteToQRReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -47,14 +43,14 @@ const usePostNoteToQR = (options?: UsePostNoteToQROptions): UsePostNoteToQRRetur
       invalidateCache({
         mutate,
         cache,
-        note,
+        note: addReflectionEntityToNote(note, response.postId),
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
         invalidateReflections: true,
+        action: CacheAction.UPDATE,
       });
 
       setShowConfirmationModal(false);
       setNoteToPost(null);
-      options?.onSuccess?.();
     },
     onError: (error, note) => {
       toast(t('common:error.general'), { status: ToastStatus.Error });
@@ -87,6 +83,21 @@ const usePostNoteToQR = (options?: UsePostNoteToQROptions): UsePostNoteToQRRetur
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
+  };
+};
+
+export const addReflectionEntityToNote = (note: Note, postId: string): Note => {
+  return {
+    ...note,
+    attachedEntities: [
+      ...(note.attachedEntities || []),
+      {
+        type: AttachedEntityType.REFLECTION,
+        id: postId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
   };
 };
 

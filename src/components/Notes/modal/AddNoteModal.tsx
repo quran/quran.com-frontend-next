@@ -3,9 +3,12 @@ import { useSWRConfig } from 'swr';
 
 import modalStyles from './Modal.module.scss';
 
+import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
+import { addReflectionEntityToNote } from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
+  CacheAction,
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
@@ -40,7 +43,10 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         saveToQR: isPublic,
       });
 
-      if (isNotePublishFailed(data)) {
+      const failedToPublish = isNotePublishFailed(data);
+      const noteFromResponse = getNoteFromResponse(data);
+
+      if (failedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
       } else {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
@@ -50,9 +56,13 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         mutate,
         cache,
         verseKeys: [verseKey],
-        note: getNoteFromResponse(data),
+        note:
+          failedToPublish || !isPublic
+            ? noteFromResponse
+            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
+        action: CacheAction.CREATE,
       });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });

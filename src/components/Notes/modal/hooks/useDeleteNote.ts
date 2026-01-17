@@ -3,7 +3,7 @@ import { useCallback, useContext, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import { invalidateCache } from '@/components/Notes/modal/utility';
+import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -14,10 +14,6 @@ import { Note } from '@/types/auth/Note';
 import { deleteNote } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
-interface UseDeleteNoteOptions {
-  onSuccess?: () => void;
-}
-
 interface UseDeleteNoteReturn {
   showDeleteConfirmation: boolean;
   noteToDelete: Note | null;
@@ -25,7 +21,7 @@ interface UseDeleteNoteReturn {
   handleDeleteNoteClick: (note: Note) => Promise<void>;
 }
 
-const useDeleteNote = (options?: UseDeleteNoteOptions): UseDeleteNoteReturn => {
+const useDeleteNote = (): UseDeleteNoteReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -53,12 +49,13 @@ const useDeleteNote = (options?: UseDeleteNoteOptions): UseDeleteNoteReturn => {
             cache,
             verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
             invalidateCount: true,
+            note,
+            action: CacheAction.DELETE,
           });
         }
 
         setShowDeleteConfirmation(false);
         clearDeleteNote();
-        options?.onSuccess?.();
       },
       onError: (error, note) => {
         toast(t('common:error.general'), { status: ToastStatus.Error });

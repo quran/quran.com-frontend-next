@@ -1,20 +1,19 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
 import styles from './MyNotes.module.scss';
 
+import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
+import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import PlusIcon from '@/icons/plus.svg';
-import { AttachedEntityType, Note } from '@/types/auth/Note';
+import { Note } from '@/types/auth/Note';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
-import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
-
-type NoteWithPostUrl = Note & { postUrl?: string };
 
 interface MyNotesProps {
   onAddNote: () => void;
@@ -40,27 +39,16 @@ const MyNotes: React.FC<MyNotesProps> = ({
   const { data, error } = useSWR(
     makeGetNotesByVerseUrl(verseKey),
     () => getNotesByVerse(verseKey),
-    { revalidateOnFocus: false, revalidateOnReconnect: false, revalidateIfStale: false },
+    {
+      revalidateOnFocus: true,
+      revalidateOnReconnect: false,
+      dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
+    },
   );
 
   const isLoading = !data && !error;
 
-  const notes = useMemo((): NoteWithPostUrl[] => {
-    const notesArray = Array.isArray(data) ? data : [];
-
-    return notesArray.map((note) => {
-      const attachedEntities = note.attachedEntities || [];
-
-      /** Find the last reflection entity. */
-      const attachedEntity = attachedEntities
-        .slice()
-        .reverse()
-        .find((entity) => entity.type === AttachedEntityType.REFLECTION);
-
-      const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
-      return { ...note, postUrl };
-    });
-  }, [data]);
+  const notes = useNotesWithRecentReflection(data);
 
   const showEmptyState = !isLoading && !error && notes.length === 0;
   const showStatus = isLoading || error || showEmptyState;

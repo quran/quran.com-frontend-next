@@ -1,21 +1,20 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
-import { KeyedMutator } from 'swr';
 
 import styles from '../NotesAndReflectionsTab.module.scss';
 
 import CardsSkeleton from '@/components/MyQuran/Skeleton';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
+import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
+import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
+import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
-import useDeleteNote from '@/components/Notes/modal/MyNotes/useDeleteNote';
-import usePostNoteToQR from '@/components/Notes/modal/MyNotes/usePostNoteToQr';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import { AttachedEntityType, GetAllNotesResponse, Note } from '@/types/auth/Note';
+import { Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
-import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
 const PROXIMATE_NOTE_HEIGHT = 100;
@@ -28,7 +27,6 @@ interface NotesTabContentProps {
   isLoadingMore: boolean;
   error: any;
   loadMore: () => void;
-  mutateCache: KeyedMutator<GetAllNotesResponse[]>;
 }
 
 enum ModalState {
@@ -42,17 +40,11 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
   isLoadingMore,
   error,
   loadMore,
-  mutateCache,
 }) => {
   const { t } = useTranslation('notes');
 
   const [modalState, setModalState] = useState<ModalState | null>(null);
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
-
-  // Revalidate the SWRInfinite cache after mutations
-  const revalidateCache = useCallback(() => {
-    mutateCache();
-  }, [mutateCache]);
 
   const {
     showConfirmationModal,
@@ -60,24 +52,11 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR({ onSuccess: revalidateCache });
+  } = usePostNoteToQR();
 
-  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
-    onSuccess: revalidateCache,
-  });
+  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote();
 
-  const notesWithPostUrl = useMemo((): NoteWithPostUrl[] => {
-    return notes.map((note) => {
-      const attachedEntities = note.attachedEntities || [];
-      const attachedEntity = attachedEntities
-        .slice()
-        .reverse()
-        .find((entity) => entity.type === AttachedEntityType.REFLECTION);
-
-      const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
-      return { ...note, postUrl };
-    });
-  }, [notes]);
+  const notesWithPostUrl = useNotesWithRecentReflection(notes);
 
   const handleEditNote = useCallback((note: Note) => {
     setSelectedNote(note);
@@ -148,7 +127,6 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         onModalClose={handleCloseModal}
         onMyNotes={handleCloseModal}
         note={selectedNote}
-        onSuccess={revalidateCache}
       />
 
       <PostQRConfirmationModal

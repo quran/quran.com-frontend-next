@@ -7,6 +7,7 @@ import styles from './Card.module.scss';
 import InlineShowMore from '@/components/InlineShowMore';
 import DeleteNoteButton from '@/components/Notes/modal/MyNotes/DeleteNoteButton';
 import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
+import { NoteWithRecentReflection } from '@/components/Notes/modal/type';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
@@ -16,10 +17,8 @@ import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 import { readableVerseRangeKeys } from '@/utils/verseKeys';
 
-export type NoteWithPostUrl = Note & { postUrl?: string };
-
 export interface NoteCardProps {
-  note: NoteWithPostUrl;
+  note: NoteWithRecentReflection;
   onEdit: (note: Note) => void;
   onPostToQr: (note: Note) => void;
   onDelete: (note: Note) => void;
@@ -39,7 +38,7 @@ const NoteCard: React.FC<NoteCardProps> = ({
   const chaptersData = useContext(DataContext);
 
   const formatNoteTitle = useCallback(
-    (noteWithPostUrl: NoteWithPostUrl) => {
+    (noteWithPostUrl: NoteWithRecentReflection) => {
       if (!noteWithPostUrl.ranges || noteWithPostUrl.ranges.length === 0) return '';
       const readableRangeKeys = readableVerseRangeKeys(noteWithPostUrl.ranges, chaptersData, lang);
       if (readableRangeKeys.length === 0) return '';

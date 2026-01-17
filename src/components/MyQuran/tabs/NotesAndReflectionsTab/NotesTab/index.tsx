@@ -4,6 +4,7 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 
 import NotesTabContent from './NotesTabContent';
 
+import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
 import { GetAllNotesResponse } from '@/types/auth/Note';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { getAllNotes } from '@/utils/auth/api';
@@ -33,10 +34,15 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     return makeNotesUrl({ sortBy, cursor: endCursor, limit: NOTE_LIMIT });
   };
 
-  const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
+  const { data, size, setSize, isValidating, error } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
     async (key) => getNotes(sortBy, key),
-    { revalidateOnFocus: false, revalidateFirstPage: false, revalidateIfStale: true },
+    {
+      revalidateFirstPage: false,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: true,
+      dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
+    },
   );
 
   const notes = data ? data.map((response) => response.data).flat() : [];
@@ -57,7 +63,6 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
         isLoadingMore={notes?.length > 0 && size > 1 && isValidating}
         error={error}
         loadMore={loadMore}
-        mutateCache={mutate}
       />
     </div>
   );

@@ -5,6 +5,7 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 import ReflectionsTabContent from './ReflectionsTabContent';
 
 import Introduction from '@/components/MyQuran/tabs/NotesAndReflectionsTab/ReflectionsTab/Introduction';
+import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
 import GetUserReflectionsResponse from '@/types/QuranReflect/GetUserReflectionsResponse';
 import { privateFetcher } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -29,7 +30,12 @@ const ReflectionsTab: React.FC = () => {
   const { data, size, setSize, isValidating, error } = useSWRInfinite<GetUserReflectionsResponse>(
     getKey,
     getReflections,
-    { revalidateOnFocus: false, revalidateFirstPage: false, revalidateIfStale: true },
+    {
+      revalidateFirstPage: false,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: true,
+      dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
+    },
   );
 
   const reflections = data ? data.map((response) => response.data).flat() : [];

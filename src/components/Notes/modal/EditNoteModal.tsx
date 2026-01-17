@@ -9,6 +9,7 @@ import {
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
+  CacheAction,
 } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -22,7 +23,6 @@ interface EditNoteModalProps {
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
-  onSuccess?: () => void;
 }
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
@@ -31,7 +31,6 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   onMyNotes,
   isModalOpen,
   onModalClose,
-  onSuccess,
 }) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('notes');
@@ -61,9 +60,8 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         note: getNoteFromResponse(data),
         invalidateCount: true,
         invalidateReflections: isPublic,
+        action: CacheAction.UPDATE,
       });
-
-      onSuccess?.();
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

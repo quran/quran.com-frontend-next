@@ -40,6 +40,15 @@ export const getNoteFromResponse = (data: unknown): Note | undefined => {
 };
 
 /**
+ * Enum representing the type of cache mutation action.
+ */
+export enum CacheAction {
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+}
+
+/**
  * Invalidates SWR cache entries related to notes after mutations.
  * When invalidateCount is true, this function invalidates:
  * - All countNotes/* keys that overlap with the provided verseKeys (when cache is available)
@@ -58,6 +67,7 @@ export const invalidateCache = ({
   note,
   invalidateCount = false,
   invalidateReflections = false,
+  action,
 }: {
   mutate: ScopedMutator<unknown>;
   cache?: Cache<unknown>;
@@ -65,16 +75,15 @@ export const invalidateCache = ({
   note?: Note;
   invalidateCount?: boolean;
   invalidateReflections?: boolean;
+  action?: CacheAction;
 }): void => {
   const uniqueVerseKeys = verseKeys ? Array.from(new Set(verseKeys)) : [];
 
-  if (invalidateCount) {
-    invalidateCountCaches(mutate, cache, uniqueVerseKeys);
-  }
-
-  invalidateVerseCaches(mutate, uniqueVerseKeys);
-  invalidateNoteCaches(mutate, cache, note);
+  if (invalidateCount) invalidateCountCaches(mutate, cache, uniqueVerseKeys);
   if (invalidateReflections) invalidateReflectionsCaches(mutate, cache);
+
+  updateVerseCaches(mutate, uniqueVerseKeys, note, action);
+  updateNoteCaches(mutate, cache, note, action);
 };
 
 /**
@@ -110,34 +119,97 @@ const invalidateCountCaches = (
 };
 
 /**
- * Invalidates note-by-verse caches for the given verse keys.
+ * Updates note-by-verse caches for the given verse keys.
  */
-const invalidateVerseCaches = (mutate: ScopedMutator<unknown>, verseKeys: string[]): void => {
-  if (verseKeys.length > 0) {
-    const updatedKeys = verseKeys.map((key) => makeGetNotesByVerseUrl(key));
-    updatedKeys.forEach((key) => mutate(key, undefined, { revalidate: true }));
-  }
+const updateVerseCaches = (
+  mutate: ScopedMutator<unknown>,
+  verseKeys: string[],
+  note?: Note,
+  action?: CacheAction,
+): void => {
+  if (verseKeys.length === 0) return;
+
+  const updatedKeys = verseKeys.map((key) => makeGetNotesByVerseUrl(key));
+
+  updatedKeys.forEach((key) => {
+    mutate(
+      key,
+      (data: Note[] | undefined) => {
+        if (!data || !note || !action) return data;
+
+        if (action === CacheAction.CREATE) return [note, ...data];
+        if (action === CacheAction.UPDATE) return data.map((n) => (n.id === note.id ? note : n));
+        if (action === CacheAction.DELETE) return data.filter((n) => n.id !== note.id);
+
+        return undefined;
+      },
+      { revalidate: true },
+    );
+  });
 };
 
 /**
- * Invalidates individual note and general notes list caches.
- * Also invalidates paginated notes lists used by useSWRInfinite.
+ * Updates individual note and general notes list caches.
  */
-const invalidateNoteCaches = (
+const updateNoteCaches = (
   mutate: ScopedMutator<unknown>,
   cache: Cache<unknown> | undefined,
   note: Note | undefined,
-): void => {
-  const baseNotesPath = makeNotesUrl();
-  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
-
-  // Invalidate paginated notes lists (useSWRInfinite keys like "notes?sortBy=...&limit=...&cursor=...")
-  if (cacheKeys) {
-    const keys = [...cacheKeys].filter((key) => key.includes(baseNotesPath));
-    keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
+  action?: CacheAction,
+) => {
+  // Update single note cache
+  if (note && action === CacheAction.UPDATE) {
+    mutate(makeGetNoteByIdUrl(note.id), note, { revalidate: true });
+  } else if (note && action === CacheAction.DELETE) {
+    mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
+  } else if (note) {
+    mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
   }
 
-  if (note) mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
+  const baseNotesUrl = makeNotesUrl().split('?')[0];
+
+  // Update general notes list (My Notes tab)
+  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+  if (!cacheKeys) mutate(baseNotesUrl, undefined, { revalidate: true });
+
+  const notesListKeys = [...cacheKeys].filter((key) => key.includes(baseNotesUrl));
+
+  notesListKeys.forEach((key) =>
+    mutate(key, (data: any | undefined) => updatePaginatedNotes(data, note, action), {
+      revalidate: true,
+    }),
+  );
+};
+
+const updatePaginatedNotes = (data: any, note?: Note, action?: CacheAction) => {
+  if (!data || !note || !action) return undefined;
+
+  // Check if it's an infinite loader response (array of pages)
+  if (Array.isArray(data)) {
+    // We only attempt to update the first page for 'create'
+    // and traverse all pages for 'update'/'delete'
+    const newPages = data.map((page, index) => {
+      if (!page || !page.data) return page;
+
+      let newData = [...page.data];
+
+      if (action === CacheAction.CREATE && index === 0) {
+        // Prepend to first page
+        newData = [note, ...newData];
+      } else if (action === CacheAction.UPDATE) {
+        newData = newData.map((n) => (n.id === note.id ? note : n));
+      } else if (action === CacheAction.DELETE) {
+        newData = newData.filter((n) => n.id !== note.id);
+      }
+
+      return { ...page, data: newData };
+    });
+
+    return newPages;
+  }
+
+  // Fallback for non-array data structure if any (shouldn't happen with useSWRInfinite)
+  return undefined;
 };
 
 /**
