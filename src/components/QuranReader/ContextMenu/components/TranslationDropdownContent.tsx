@@ -9,7 +9,7 @@ import styles from '../styles/TranslationDropdown.module.scss';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import SettingsIcon from '@/public/icons/settings-stroke.svg';
 import {
-  selectSelectedReadingTranslation,
+  selectValidatedReadingTranslation,
   setSelectedReadingTranslation,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { logValueChange } from '@/utils/eventLogger';
@@ -39,26 +39,21 @@ const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
-  const currentReadingTranslation = useSelector(selectSelectedReadingTranslation);
+  const currentReadingTranslation = useSelector(selectValidatedReadingTranslation);
 
   // Filter to only show user's selected translations
   const availableTranslations = translations.filter((tr) => selectedTranslations.includes(tr.id));
 
-  // Current primary translation: use selectedReadingTranslation if set, otherwise first in list
-  const currentPrimaryId: number | null = currentReadingTranslation
-    ? Number(currentReadingTranslation)
-    : selectedTranslations?.[0] ?? null;
-
   const handleTranslationSelect = (translationId: number) => {
-    if (translationId === currentPrimaryId) {
+    if (translationId === currentReadingTranslation) {
       onClose();
       return;
     }
 
     const translationIdStr = String(translationId);
-    const previousValue = currentReadingTranslation;
+    const previousValueStr = currentReadingTranslation ? String(currentReadingTranslation) : null;
 
-    logValueChange('chapter_header_reading_translation', currentPrimaryId, translationId);
+    logValueChange('chapter_header_reading_translation', currentReadingTranslation, translationId);
 
     // Persist selectedReadingTranslation to the backend (PreferenceGroup.READING)
     // This only changes which translation is shown in "Reading Mode - Translation"
@@ -67,7 +62,7 @@ const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
       'selectedReadingTranslation',
       translationIdStr,
       setSelectedReadingTranslation(translationIdStr),
-      setSelectedReadingTranslation(previousValue),
+      setSelectedReadingTranslation(previousValueStr),
       PreferenceGroup.READING,
     );
 
@@ -80,7 +75,7 @@ const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
       <div className={styles.divider} />
       <div className={styles.itemsContainer}>
         {availableTranslations.map((translation) => {
-          const isSelected = translation.id === currentPrimaryId;
+          const isSelected = translation.id === currentReadingTranslation;
           return (
             <button
               key={translation.id}
