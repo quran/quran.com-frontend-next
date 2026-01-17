@@ -100,7 +100,14 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
 
   // Action buttons component (reused in both positions)
   const ActionButtons = (
-    <div style={{ display: 'flex', gap: 8 }}>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 8,
+        alignItems: 'center',
+      }}
+    >
       {options.enableAudio && audioUrl && (
         <>
           <button
@@ -187,6 +194,9 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
         flexDirection: isRtl ? 'row-reverse' : 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        flexWrap: 'wrap',
+        columnGap: 12,
+        rowGap: 10,
         padding: '14px 16px',
         backgroundColor: colors.secondaryBg,
         borderBottom: `1px solid ${colors.borderColor}`,
