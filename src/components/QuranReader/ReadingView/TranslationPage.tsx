@@ -1,9 +1,11 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
 
-import { toLocalizedNumber } from '@/utils/locale';
+import { getLanguageDataById, toLocalizedNumber } from '@/utils/locale';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -27,6 +29,12 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   lang,
   bookmarksRangeUrl,
 }) => {
+  // Get language data from the first translation for RTL direction and number formatting
+  const firstTranslation: Translation | undefined = verses?.[0]?.translations?.[0];
+  const langData = firstTranslation?.languageId
+    ? getLanguageDataById(firstTranslation.languageId)
+    : null;
+
   // Build continuous translation text with inline verse numbers
   const getTranslationContent = () => {
     if (!verses || verses.length === 0) return null;
@@ -50,10 +58,12 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, langData && styles[langData.direction])}>
       <div className={styles.translationContent}>{getTranslationContent()}</div>
       <div className={styles.pageFooter}>
-        <span className={styles.pageNumber}>{toLocalizedNumber(pageNumber, lang)}</span>
+        <span className={styles.pageNumber}>
+          {toLocalizedNumber(pageNumber, langData?.code || lang)}
+        </span>
       </div>
     </div>
   );
