@@ -40,6 +40,7 @@ const ThemeSection = () => {
             styles.iconContainer,
             theme.type === themeValue && styles.iconActive,
           )}
+          data-testid={`${themeValue}-button`}
         >
           {themeIcons[themeValue]}
         </span>

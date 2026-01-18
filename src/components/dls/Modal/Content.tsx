@@ -15,6 +15,7 @@ interface ContentProps extends ComponentProps<typeof DialogPrimitive.Content> {
   isBottomSheetOnMobile?: boolean;
   contentClassName?: string;
   size?: ModalSize;
+  testId?: string;
 }
 
 const Content: React.FC<ContentProps> = ({
@@ -23,10 +24,12 @@ const Content: React.FC<ContentProps> = ({
   isBottomSheetOnMobile,
   contentClassName,
   size = ModalSize.MEDIUM,
+  testId,
   ...props
 }) => (
   <DialogPrimitive.Content
     {...props}
+    data-testid={testId}
     className={classNames(
       styles.content,
       { [ModalSize.MEDIUM]: styles.medium, [ModalSize.LARGE]: styles.large }[size],

@@ -1,14 +1,14 @@
 .root {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
   flex: 1;
-  min-height: 0;
+  min-block-size: 0;
 }
 
 .list {
   display: flex;
-  border-bottom: var(--spacing-micro-px) solid var(--color-borders-hairline);
+  border-block-end: var(--spacing-micro-px) solid var(--color-borders-hairline);
 }
 
 .trigger {
@@ -24,16 +24,15 @@
   cursor: pointer;
   position: relative;
 
-
   &[data-state='active'] {
     color: var(--color-text-link-new);
 
     &::after {
       content: '';
       position: absolute;
-      bottom: calc(-1 * var(--spacing-micro-px));
+      inset-block-end: calc(-1 * var(--spacing-micro-px));
       inset-inline: 0;
-      height: var(--spacing-micro-px);
+      block-size: var(--spacing-micro-px);
       background-color: var(--color-blue-buttons-and-icons);
     }
   }
@@ -45,7 +44,7 @@
   padding-block-end: var(--spacing-large);
   overflow-y: auto;
   flex: 1;
-  min-height: 0;
+  min-block-size: 0;
 }
 
 .versePreviewContainer {

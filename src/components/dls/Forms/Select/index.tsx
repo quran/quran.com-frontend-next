@@ -31,6 +31,7 @@ interface Props {
   defaultStyle?: boolean;
   className?: string;
   withBackground?: boolean;
+  testId?: string;
 }
 
 const Select: React.FC<Props> = ({
@@ -46,6 +47,7 @@ const Select: React.FC<Props> = ({
   defaultStyle = true,
   className,
   withBackground = true,
+  testId,
 }) => {
   const onSelectChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -79,6 +81,7 @@ const Select: React.FC<Props> = ({
         disabled={disabled}
         required={required}
         {...(value ? { value } : { defaultValue: '' })}
+        data-testid={testId}
       >
         <option value="" disabled hidden>
           {placeholder}

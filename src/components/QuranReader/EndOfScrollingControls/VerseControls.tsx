@@ -32,6 +32,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
           onClick={() => {
             logButtonClick('verse_control_prev_chapter');
           }}
+          data-testid="previous-surah-button"
         >
           {t('prev-surah')}
         </Button>
@@ -64,6 +65,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
           onClick={() => {
             logButtonClick('verse_control_chapter_beginning');
           }}
+          data-testid="chapter-beginning-button"
         >
           {t('surah-beginning')}
         </Button>
@@ -76,6 +78,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
           onClick={() => {
             logButtonClick('verse_control_next_chapter');
           }}
+          data-testid="next-surah-button"
         >
           {t('next-surah')}
         </Button>

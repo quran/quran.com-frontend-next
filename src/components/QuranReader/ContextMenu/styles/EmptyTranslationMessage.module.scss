@@ -1,0 +1,39 @@
+$message-max-width: 396px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-large-px);
+  text-align: center;
+  gap: var(--spacing-medium-plus-px);
+}
+
+.message {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  max-inline-size: $message-max-width;
+  line-height: 1.2em;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  border: none;
+  border-radius: var(--border-radius-medium-px);
+  background-color: var(--color-text-default-new);
+  color: var(--color-background-elevated);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  block-size: var(--spacing-large-px);
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

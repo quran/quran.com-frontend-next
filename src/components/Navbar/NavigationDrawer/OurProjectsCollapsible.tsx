@@ -105,6 +105,7 @@ const OurProjectsCollapsible: React.FC<OurProjectsCollapsibleProps> = ({
       shouldRotateSuffixOnToggle
       shouldSuffixTrigger
       onOpenChange={onOpenChange}
+      data-testid="navigation-links-our-projects"
     >
       {({ isOpen }) => {
         if (!isOpen) return null;

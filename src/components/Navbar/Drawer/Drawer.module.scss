@@ -62,7 +62,8 @@
       border-start-start-radius: var(--border-radius-rounded);
       border-start-end-radius: var(--border-radius-rounded);
       transform: translateY(100%);
-      transition: transform var(--transition-regular), inset-block-start var(--transition-regular), block-size var(--transition-regular);
+      transition: transform var(--transition-regular), inset-block-start var(--transition-regular),
+        block-size var(--transition-regular);
     }
   }
 

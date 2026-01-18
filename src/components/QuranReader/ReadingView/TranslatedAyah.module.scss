@@ -1,0 +1,81 @@
+@use 'src/components/QuranReader/TranslationView/TranslationText/footnote';
+
+.ayah {
+  transition: color 0.15s ease-in-out;
+
+  // Only show hover effects on devices that support hover (non-touch)
+  @media (hover: hover) {
+    // Apply verse hover only when NOT hovering on a footnote sup
+    &:hover:not(:has(sup:hover)) {
+      color: var(--color-success-medium);
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:focus-visible {
+    color: var(--color-success-medium);
+  }
+}
+
+.hasActiveFootnote {
+  color: var(--color-success-medium);
+}
+
+.isActive {
+  color: var(--color-success-medium);
+}
+
+.verseNumber {
+  font-weight: var(--font-weight-bold);
+  margin-inline-end: 0.3em;
+}
+
+.translationText {
+  @include footnote.footnote-styling;
+}
+
+// RTL/LTR direction support
+.ltr {
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+// Footnote container styles
+.footnoteContainer {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-small2-px);
+  margin-block: var(--spacing-xxsmall-px);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-alternative-faded);
+  min-block-size: calc(3 * var(--spacing-medium2-px));
+  inline-size: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.footnoteHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  inline-size: 100%;
+  margin-block-end: var(--spacing-xxsmall-px);
+}
+
+.footnoteTitle {
+  font-weight: var(--font-weight-bold);
+  font-size: calc(0.8 * var(--font-size-large));
+}
+
+.footnoteText {
+  @include footnote.footnote-styling;
+  line-height: 1.6;
+}

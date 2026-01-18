@@ -14,26 +14,18 @@ const verifyModalContainsSurahInfo = async (
   expectedRevelationPlace: string,
   expectedAyahs: string,
 ) => {
-  const modalContent = page.getByTestId(TestId.MODAL_CONTENT);
-
   // Verify modal is open and contains surah info content
-  await expect(modalContent).toBeVisible();
-
-  const surahName = modalContent.getByTestId(TestId.SURAH_NAME);
+  await expect(page.getByTestId(TestId.MODAL_CONTENT)).toBeVisible();
+  await expect(page.getByText('Surah Info')).toBeVisible(); // Modal header
 
   // Verify surah info content is inside the modal
-  await expect(surahName).toBeVisible();
-  await expect(surahName).toContainText(expectedSurahName);
-
-  // Verify the surah revelation place is correct
-  const revelationPlace = modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE);
-  await expect(revelationPlace).toBeVisible();
-  await expect(revelationPlace).toContainText(expectedRevelationPlace);
-
-  // Verify the surah number of ayahs is correct
-  const numberOfAyahs = modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS);
-  await expect(numberOfAyahs).toBeVisible();
-  await expect(numberOfAyahs).toContainText(expectedAyahs);
+  const modalContent = page.getByTestId(TestId.MODAL_CONTENT);
+  await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toBeVisible();
+  await expect(modalContent.getByTestId(TestId.SURAH_NAME)).toContainText(expectedSurahName);
+  await expect(modalContent.getByTestId(TestId.SURAH_REVELATION_PLACE)).toContainText(
+    expectedRevelationPlace,
+  );
+  await expect(modalContent.getByTestId(TestId.SURAH_NUMBER_OF_AYAHS)).toContainText(expectedAyahs);
 };
 
 test.beforeEach(async ({ page, context }) => {
@@ -42,7 +34,6 @@ test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
 });
 
-// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Surah Info URL Redirects', () => {
   test(
     'should redirect /surah-info/1 to /surah/1/info and display surah info modal',

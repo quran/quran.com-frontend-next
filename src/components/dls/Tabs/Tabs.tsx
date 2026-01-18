@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import styles from './Tabs.module.scss';
 
+import { TestId } from '@/tests/test-ids';
+
 export type Tab = {
   title: string | JSX.Element;
   value: string;
@@ -29,7 +31,12 @@ const Tabs = ({
   containerClassName,
 }: TabsProps) => {
   return (
-    <div className={classNames(styles.container, containerClassName)} role="tablist">
+    <div
+      className={classNames(styles.container, containerClassName)}
+      role="tablist"
+      data-selectedtab={selected}
+      data-testid={TestId.TABS_CONTAINER}
+    >
       {tabs.map((tab) => (
         <div
           className={classNames(styles.tabItem, className, {

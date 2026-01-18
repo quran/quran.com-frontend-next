@@ -157,7 +157,14 @@
         "import/no-extraneous-dependencies": [
           "error",
           {
-            "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "tests/**/*"]
+            "devDependencies": [
+              "**/*.test.ts",
+              "**/*.test.tsx",
+              "tests/**/*",
+              "**/playwright.config.{ts,js,mjs,cjs}",
+              "playwright.config.{ts,js,mjs,cjs}",
+              "playwright/**"
+            ]
           }
         ],
         "@typescript-eslint/ban-ts-comment": 0,
@@ -194,6 +201,13 @@
       "files": ["**/*.ts", "*.stories.tsx", "*.js"],
       "rules": {
         "i18next/no-literal-string": 0
+      }
+    },
+    {
+      "files": ["tests/**/*.{ts,tsx,js}"],
+      "rules": {
+        "react-func/max-lines-per-function": "off",
+        "max-lines": "off"
       }
     },
     {

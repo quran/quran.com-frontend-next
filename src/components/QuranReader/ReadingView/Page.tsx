@@ -8,12 +8,18 @@ import groupLinesByVerses from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
+import TranslationPage from './TranslationPage';
+import getTranslationNameString from './utils/translation';
 
+import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
-import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  selectInlineDisplayWordByWordPreferences,
+  selectReadingPreference,
+} from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { FALLBACK_FONT } from '@/types/QuranReader';
+import { FALLBACK_FONT, ReadingPreference } from '@/types/QuranReader';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import Verse from 'types/Verse';
 
@@ -23,6 +29,7 @@ type PageProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   bookmarksRangeUrl: string | null;
+  lang: string;
 };
 
 const Page = ({
@@ -31,7 +38,9 @@ const Page = ({
   quranReaderStyles,
   pageIndex,
   bookmarksRangeUrl,
+  lang,
 }: PageProps) => {
+  const readingPreference = useSelector(selectReadingPreference);
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
     verses?.length > 0
       ? {
@@ -51,6 +60,43 @@ const Page = ({
   const isBigTextLayout = isWordByWordLayout || quranTextFontScale > 3;
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
 
+  // Check if this page contains the first verse of a chapter (for chapter header)
+  const firstVerse = verses?.[0];
+  const shouldShowChapterHeader = firstVerse?.verseNumber === 1;
+  const chapterId = firstVerse?.chapterId?.toString();
+  const verseTranslations = firstVerse?.translations;
+  const translationName = getTranslationNameString(verseTranslations);
+  const translationsCount = verseTranslations?.length ?? 0;
+
+  const isReadingTranslation = readingPreference === ReadingPreference.ReadingTranslation;
+
+  // Render the chapter header at page level to prevent re-mounting when switching modes
+  const chapterHeader = shouldShowChapterHeader && chapterId && (
+    <ChapterHeader
+      translationName={translationName}
+      translationsCount={translationsCount}
+      chapterId={chapterId}
+      isTranslationView={false}
+      className={styles.chapterHeaderNoTopMargin}
+    />
+  );
+
+  // Render translation-only page for "Reading - Translation" mode
+  if (isReadingTranslation) {
+    return (
+      <div id={`page-${pageNumber}`} className={styles.translationPageContainer}>
+        {chapterHeader}
+        <TranslationPage
+          verses={verses}
+          pageNumber={pageNumber}
+          lang={lang}
+          bookmarksRangeUrl={bookmarksRangeUrl}
+          pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
+        />
+      </div>
+    );
+  }
+
   return (
     <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
       <div
@@ -61,6 +107,7 @@ const Page = ({
             !isFontLoaded,
         })}
       >
+        {chapterHeader}
         {Object.keys(lines).map((key, lineIndex) => (
           <Line
             pageIndex={pageIndex}
@@ -71,6 +118,7 @@ const Page = ({
             isBigTextLayout={isBigTextLayout}
             quranReaderStyles={quranReaderStyles}
             bookmarksRangeUrl={bookmarksRangeUrl}
+            pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
           />
         ))}
         <PageFooter page={pageNumber} />

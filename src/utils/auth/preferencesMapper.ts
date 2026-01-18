@@ -59,6 +59,7 @@ const getPreferenceGroupValue = (
       // Deprecated - keep for backward compatibility during transition
       wordByWordContentType: prefs.wordByWordTooltipContentType,
       // wordByWordDisplay is now auto-computed, don't send
+      selectedReadingTranslation: prefs.selectedReadingTranslation,
     };
   }
 

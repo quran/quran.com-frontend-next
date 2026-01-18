@@ -73,6 +73,8 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   wordByWordInlineContentType: [],
   wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
+  selectedReadingTranslation: String(DEFAULT_TRANSLATIONS[0]),
+  lastUsedReadingMode: ReadingPreference.Reading,
 };
 
 const THEME_INITIAL_STATE: Theme = {

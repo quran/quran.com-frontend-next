@@ -1,5 +1,5 @@
 .container {
-  min-height: calc(4 * var(--spacing-mega));
+  min-block-size: calc(4 * var(--spacing-mega));
 }
 
 .changeReciterButtonContainer {
@@ -9,8 +9,8 @@
 }
 
 .skeleton {
-  height: calc(2.2 * var(--spacing-mega));
-  width: 100%;
+  block-size: calc(2.2 * var(--spacing-mega));
+  inline-size: 100%;
 }
 
 .translationSelectionCard {
@@ -30,7 +30,7 @@
   gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
   direction: initial;
 
-  &>svg {
+  & > svg {
     color: var(--color-text-default-new);
   }
 }

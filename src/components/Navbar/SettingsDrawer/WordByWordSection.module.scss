@@ -34,7 +34,7 @@
   gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
   direction: initial;
 
-  &>svg {
+  & > svg {
     color: var(--color-text-default-new);
   }
 }
@@ -62,6 +62,6 @@
 
 .footerWithBorder {
   opacity: unset;
-  border-bottom: 1px solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
   padding-block-end: var(--spacing-medium2-px);
 }

@@ -340,8 +340,16 @@
   "read": "Đọc",
   "reading-history": "Lịch sử đọc",
   "reading-preference": {
+    "arabic": "tiếng Ả Rập",
+    "my-translations": "Bản dịch của tôi",
+    "none-selected": "Không có mục nào được chọn",
     "reading": "Đọc",
-    "translation": "Bản dịch"
+    "reading-translation": "Bản dịch",
+    "select-translation": "Chọn bản dịch",
+    "select-translation-message": "Bạn chưa chọn bản dịch nào. Vui lòng chọn bản dịch thông qua phần cài đặt.",
+    "select-translations": "Chọn bản dịch",
+    "translation": "Bản dịch",
+    "verse-by-verse": "Từng câu từng chữ"
   },
   "ready-for-ramadan": "Bạn sẵn sàng cho Ramadan chưa?",
   "recitation": "Đọc kinh",

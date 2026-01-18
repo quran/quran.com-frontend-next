@@ -22,10 +22,18 @@ const PlainVerseTextWord: React.FC<Props> = ({
     <div className={styles.plainVerseWordContainer} key={word.location}>
       {children}
       {shouldShowWordByWordTranslation && (
-        <InlineWordByWord className={styles.plainVerseWbwText} text={word?.translation?.text} />
+        <InlineWordByWord
+          className={styles.plainVerseWbwText}
+          text={word?.translation?.text}
+          data-testid="wbw-translation"
+        />
       )}
       {shouldShowWordByWordTransliteration && (
-        <InlineWordByWord className={styles.plainVerseWbwText} text={word?.transliteration?.text} />
+        <InlineWordByWord
+          className={styles.plainVerseWbwText}
+          text={word?.transliteration?.text}
+          data-testid="wbw-transliteration"
+        />
       )}
     </div>
   );

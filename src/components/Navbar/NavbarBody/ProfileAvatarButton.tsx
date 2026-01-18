@@ -118,6 +118,7 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
             shouldFlipOnRTL={false}
+            data-testid="profile-avatar-button"
           >
             <IconPerson />
           </Button>

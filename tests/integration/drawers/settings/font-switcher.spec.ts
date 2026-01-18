@@ -13,6 +13,8 @@ test('Selecting a non-default theme should persist the selected font', async ({
   context,
 }) => {
   const homepage = new Homepage(page, context);
+  await homepage.goTo('/1');
+
   // we cannot access the local storage in webkit straight away so we need to wait for 1 second
   await page.waitForTimeout(1000);
   // 1. make sure code v1 and 16-line Mushaf are persisted by default
@@ -23,6 +25,7 @@ test('Selecting a non-default theme should persist the selected font', async ({
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.SixteenLines);
   // 2. Open the settings drawer
   await homepage.openSettingsDrawer();
+
   // 3. Choose Indopak font
   await page.locator('text=IndoPak').click();
   // 4. Choose Indopak 15-line Mushaf
@@ -35,6 +38,7 @@ test('Selecting a non-default theme should persist the selected font', async ({
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.FifteenLines);
   // 6. reload the page.
   await page.reload();
+  await homepage.hideNextJSOverlay();
   // 7. Open the settings drawer
   await homepage.openSettingsDrawer();
   // 8. Make sure the selected font is 15 lines that was hydrated from Redux

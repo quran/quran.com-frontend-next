@@ -12,10 +12,10 @@ import VerseActionsMenuType from './types';
 
 import ReadingViewNoteAction from '@/components/Notes/modal/ReadingViewNoteAction';
 import BookmarkAction from '@/components/Verse/BookmarkAction';
-import Word from 'types/Word';
+import Verse from 'types/Verse';
 
 interface Props {
-  word: Word;
+  verse: Verse;
   onActionTriggered?: () => void;
   onMenuChange: (menu: VerseActionsMenuType) => void;
   openShareModal?: () => void;
@@ -23,7 +23,7 @@ interface Props {
 }
 
 const MainActionsMenu: React.FC<Props> = ({
-  word,
+  verse,
   onActionTriggered,
   onMenuChange,
   openShareModal,
@@ -31,31 +31,31 @@ const MainActionsMenu: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {word?.verse?.timestamps && (
+      {verse?.timestamps && (
         <PlayAudioMenuItem
           verse={{
-            verseKey: word.verseKey,
-            timestamps: word.verse.timestamps,
-            chapterId: word.verse.chapterId,
-            verseNumber: word.verse.verseNumber,
+            verseKey: verse.verseKey,
+            timestamps: verse.timestamps,
+            chapterId: verse.chapterId,
+            verseNumber: verse.verseNumber,
           }}
           onActionTriggered={onActionTriggered}
         />
       )}
 
-      <TranslationsMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
-      <TafsirMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
-      <QuranReflectMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
-      <QuestionsMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
+      <TranslationsMenuItem verse={verse} onActionTriggered={onActionTriggered} />
+      <TafsirMenuItem verse={verse} onActionTriggered={onActionTriggered} />
+      <QuranReflectMenuItem verse={verse} onActionTriggered={onActionTriggered} />
+      <QuestionsMenuItem verse={verse} onActionTriggered={onActionTriggered} />
       <BookmarkAction
-        verse={word.verse}
+        verse={verse}
         isTranslationView={false}
         onActionTriggered={onActionTriggered}
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
-      <CopyMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
+      <CopyMenuItem verse={verse} onActionTriggered={onActionTriggered} />
 
-      <ReadingViewNoteAction verseKey={word.verseKey} onActionTriggered={onActionTriggered} />
+      <ReadingViewNoteAction verseKey={verse.verseKey} onActionTriggered={onActionTriggered} />
 
       {/* Submenu navigation items */}
       <ShareMenuItem onActionTriggered={onActionTriggered} openShareModal={openShareModal} />

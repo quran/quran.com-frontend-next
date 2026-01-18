@@ -33,6 +33,7 @@ import {
   selectIsSidebarNavigationVisible,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { TestId } from '@/tests/test-ids';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -212,7 +213,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
               ariaLabel={t('aria.nav-drawer-open')}
-              data-testid="open-navigation-drawer"
+              data-testid={TestId.OPEN_NAVIGATION_DRAWER}
             >
               <IconMenu />
             </Button>

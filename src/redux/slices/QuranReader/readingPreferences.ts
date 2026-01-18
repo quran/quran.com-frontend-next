@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from '@/redux/actions/reset-settings';
@@ -36,10 +37,20 @@ export const readingPreferencesSlice = createSlice({
   name: SliceName.READING_PREFERENCES,
   initialState: getReadingPreferencesInitialState(),
   reducers: {
-    setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => ({
-      ...state,
-      readingPreference: action.payload,
-    }),
+    setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => {
+      const newState = {
+        ...state,
+        readingPreference: action.payload,
+      };
+      // Update lastUsedReadingMode when switching to a reading mode
+      if (
+        action.payload === ReadingPreference.Reading ||
+        action.payload === ReadingPreference.ReadingTranslation
+      ) {
+        newState.lastUsedReadingMode = action.payload;
+      }
+      return newState;
+    },
     setSelectedWordByWordLocale: (
       state,
       action: PayloadAction<{ value: string; locale: string }>,
@@ -70,31 +81,32 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       wordByWordDisplay: action.payload,
     }),
+    setSelectedReadingTranslation: (state, action: PayloadAction<string | null>) => ({
+      ...state,
+      selectedReadingTranslation: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
       getReadingPreferencesInitialState(action.payload.locale),
     );
     builder.addCase(syncUserPreferences, (state, action) => {
-      const { userPreferences, locale } = action.payload;
-      const remotePreferences = userPreferences[PreferenceGroup.READING] as ReadingPreferences;
-      if (!remotePreferences) return state;
-
-      const { tooltip, inline, display } = getWordByWordFieldsFromRemote(remotePreferences);
-      const defaultLocale = getReadingPreferencesInitialState(locale).selectedWordByWordLocale;
+      const remote = action.payload.userPreferences[PreferenceGroup.READING] as ReadingPreferences;
+      if (!remote) return state;
+      const { tooltip, inline, display } = getWordByWordFieldsFromRemote(remote);
+      const defLocale = getReadingPreferencesInitialState(
+        action.payload.locale,
+      ).selectedWordByWordLocale;
       return {
         ...state,
-        readingPreference: remotePreferences.readingPreference ?? state.readingPreference,
-        selectedWordByWordLocale:
-          remotePreferences.selectedWordByWordLocale ?? state.selectedWordByWordLocale,
-        wordClickFunctionality:
-          remotePreferences.wordClickFunctionality ?? state.wordClickFunctionality,
+        readingPreference: remote.readingPreference ?? state.readingPreference,
+        selectedWordByWordLocale: remote.selectedWordByWordLocale ?? state.selectedWordByWordLocale,
+        wordClickFunctionality: remote.wordClickFunctionality ?? state.wordClickFunctionality,
         wordByWordTooltipContentType: tooltip,
         wordByWordInlineContentType: inline,
         wordByWordDisplay: display,
         wordByWordContentType: tooltip,
-        isUsingDefaultWordByWordLocale:
-          remotePreferences.selectedWordByWordLocale === defaultLocale,
+        isUsingDefaultWordByWordLocale: remote.selectedWordByWordLocale === defLocale,
       };
     });
   },
@@ -108,19 +120,19 @@ export const {
   setWordByWordTooltipContentType,
   setWordByWordInlineContentType,
   setWordByWordDisplay,
+  setSelectedReadingTranslation,
 } = readingPreferencesSlice.actions;
 
 export const selectInlineDisplayWordByWordPreferences = (state: RootState) => {
   const { wordByWordDisplay, wordByWordInlineContentType } = state.readingPreferences;
-  const shouldDisplayInline = wordByWordDisplay.includes(WordByWordDisplay.INLINE);
+  const inline = wordByWordDisplay.includes(WordByWordDisplay.INLINE);
   return {
     showWordByWordTranslation:
-      shouldDisplayInline && wordByWordInlineContentType.includes(WordByWordType.Translation),
+      inline && wordByWordInlineContentType.includes(WordByWordType.Translation),
     showWordByWordTransliteration:
-      shouldDisplayInline && wordByWordInlineContentType.includes(WordByWordType.Transliteration),
+      inline && wordByWordInlineContentType.includes(WordByWordType.Transliteration),
   };
 };
-
 export const selectIsTooltipContentEnabled = (state: RootState): boolean => {
   const { wordByWordTooltipContentType, wordByWordDisplay } = state.readingPreferences;
   if (!wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)) return false;
@@ -131,13 +143,10 @@ export const selectIsTooltipContentEnabled = (state: RootState): boolean => {
 };
 
 export const selectReadingPreferences = (state: RootState) => state.readingPreferences;
-
 export const selectTooltipContentType = (state: RootState): WordByWordType[] => {
-  const { wordByWordDisplay, wordByWordTooltipContentType } = state.readingPreferences;
-  const noTooltip = !wordByWordDisplay?.includes(WordByWordDisplay.TOOLTIP);
-  return noTooltip || !wordByWordTooltipContentType?.length ? [] : wordByWordTooltipContentType;
+  const { wordByWordDisplay: d, wordByWordTooltipContentType: t } = state.readingPreferences;
+  return d?.includes(WordByWordDisplay.TOOLTIP) && t?.length ? t : [];
 };
-
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;
 export const selectWordClickFunctionality = (state: RootState) =>
@@ -146,5 +155,36 @@ export const selectWordByWordLocale = (state: RootState) =>
   state.readingPreferences.selectedWordByWordLocale;
 export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
   state.readingPreferences.isUsingDefaultWordByWordLocale;
+export const selectSelectedReadingTranslation = (state: RootState) =>
+  state.readingPreferences.selectedReadingTranslation;
+
+/**
+ * Validated selector that ensures selectedReadingTranslation is always valid.
+ * Returns the stored value only if it exists in selectedTranslations,
+ * otherwise falls back to the first selected translation or null.
+ *
+ * This prevents bugs where selectedReadingTranslation becomes "orphaned"
+ * (e.g., when user deselects that translation or switches locales).
+ *
+ * @param {RootState} state - The Redux root state
+ * @returns {number | null} A valid translation ID from selectedTranslations, or null if none are selected
+ */
+export const selectValidatedReadingTranslation = (state: RootState): number | null => {
+  const { selectedReadingTranslation } = state.readingPreferences;
+  const { selectedTranslations } = state.translations;
+
+  // If stored value exists AND is in selectedTranslations, use it
+  if (selectedReadingTranslation) {
+    const numericId = Number(selectedReadingTranslation);
+    if (selectedTranslations.includes(numericId)) {
+      return numericId;
+    }
+  }
+  // Otherwise, fall back to first translation or null
+  return selectedTranslations.length > 0 ? selectedTranslations[0] : null;
+};
+
+export const selectLastUsedReadingMode = (state: RootState) =>
+  state.readingPreferences.lastUsedReadingMode;
 
 export default readingPreferencesSlice.reducer;

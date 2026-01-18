@@ -1,129 +1,129 @@
 {
-    "id": 1,
-    "verseNumber": 1,
-    "verseKey": "1:1",
-    "juzNumber": 1,
-    "hizbNumber": 1,
-    "rubNumber": 1,
-    "rubElHizbNumber": 1,
-    "pageNumber": 1,
-    "verseIndex": 1,
-    "words": [
-      {
-        "position": 1,
-        "charTypeName": "word",
-        "verseKey": "1:1",
-        "location": "1:1:1",
-        "codeV1": "ﭑ",
-        "codeV2": "ﱁ",
-        "pageNumber": 1,
-        "lineNumber": 9,
-        "hizbNumber": 1,
-        "qpcUthmaniHafs": "بِسۡمِ",
-        "text": "بِسْمِ",
-        "audioUrl": null,
-        "translation": {
-          "text": "In (the) name",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "bis'mi",
-          "languageId": 38
-        }
+  "id": 1,
+  "verseNumber": 1,
+  "verseKey": "1:1",
+  "juzNumber": 1,
+  "hizbNumber": 1,
+  "rubNumber": 1,
+  "rubElHizbNumber": 1,
+  "pageNumber": 1,
+  "verseIndex": 1,
+  "words": [
+    {
+      "position": 1,
+      "charTypeName": "word",
+      "verseKey": "1:1",
+      "location": "1:1:1",
+      "codeV1": "ﭑ",
+      "codeV2": "ﱁ",
+      "pageNumber": 1,
+      "lineNumber": 9,
+      "hizbNumber": 1,
+      "qpcUthmaniHafs": "بِسۡمِ",
+      "text": "بِسْمِ",
+      "audioUrl": null,
+      "translation": {
+        "text": "In (the) name",
+        "languageId": 38
       },
-      {
-        "position": 2,
-        "charTypeName": "word",
-        "verseKey": "1:1",
-        "location": "1:1:2",
-        "codeV1": "ﭒ",
-        "codeV2": "ﱂ",
-        "pageNumber": 1,
-        "lineNumber": 9,
-        "hizbNumber": 1,
-        "qpcUthmaniHafs": "ٱللَّهِ",
-        "text": "ٱللَّهِ",
-        "audioUrl": null,
-        "translation": {
-          "text": "(of) Allah",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "l-lahi",
-          "languageId": 38
-        }
-      },
-      {
-        "position": 3,
-        "charTypeName": "word",
-        "verseKey": "1:1",
-        "location": "1:1:3",
-        "codeV1": "ﭓ",
-        "codeV2": "ﱃ",
-        "pageNumber": 1,
-        "lineNumber": 9,
-        "hizbNumber": 1,
-        "qpcUthmaniHafs": "ٱلرَّحۡمَٰنِ",
-        "text": "ٱلرَّحْمَـٰنِ",
-        "audioUrl": null,
-        "translation": {
-          "text": "the Most Gracious",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "l-raḥmāni",
-          "languageId": 38
-        }
-      },
-      {
-        "position": 4,
-        "charTypeName": "word",
-        "verseKey": "1:1",
-        "location": "1:1:4",
-        "codeV1": "ﭔ",
-        "codeV2": "ﱄ",
-        "pageNumber": 1,
-        "lineNumber": 9,
-        "hizbNumber": 1,
-        "qpcUthmaniHafs": "ٱلرَّحِيمِ",
-        "text": "ٱلرَّحِيمِ",
-        "audioUrl": null,
-        "translation": {
-          "text": "the Most Merciful",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "l-raḥīmi",
-          "languageId": 38
-        }
-      },
-      {
-        "position": 5,
-        "charTypeName": "end",
-        "verseKey": "1:1",
-        "location": "1:1:5",
-        "codeV1": "ﭕ",
-        "codeV2": "ﱅ",
-        "pageNumber": 1,
-        "lineNumber": 9,
-        "hizbNumber": 1,
-        "qpcUthmaniHafs": "١",
-        "text": "١",
-        "audioUrl": null,
-        "translation": {
-          "text": "(1)",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": null,
-          "languageId": 38
-        }
-      }
-    ],
-    "translations": [
-      {
-        "text": "In the Name of Allah—the Most Compassionate, Most Merciful.",
+      "transliteration": {
+        "text": "bis'mi",
         "languageId": 38
       }
-    ]
-  }
+    },
+    {
+      "position": 2,
+      "charTypeName": "word",
+      "verseKey": "1:1",
+      "location": "1:1:2",
+      "codeV1": "ﭒ",
+      "codeV2": "ﱂ",
+      "pageNumber": 1,
+      "lineNumber": 9,
+      "hizbNumber": 1,
+      "qpcUthmaniHafs": "ٱللَّهِ",
+      "text": "ٱللَّهِ",
+      "audioUrl": null,
+      "translation": {
+        "text": "(of) Allah",
+        "languageId": 38
+      },
+      "transliteration": {
+        "text": "l-lahi",
+        "languageId": 38
+      }
+    },
+    {
+      "position": 3,
+      "charTypeName": "word",
+      "verseKey": "1:1",
+      "location": "1:1:3",
+      "codeV1": "ﭓ",
+      "codeV2": "ﱃ",
+      "pageNumber": 1,
+      "lineNumber": 9,
+      "hizbNumber": 1,
+      "qpcUthmaniHafs": "ٱلرَّحۡمَٰنِ",
+      "text": "ٱلرَّحْمَـٰنِ",
+      "audioUrl": null,
+      "translation": {
+        "text": "the Most Gracious",
+        "languageId": 38
+      },
+      "transliteration": {
+        "text": "l-raḥmāni",
+        "languageId": 38
+      }
+    },
+    {
+      "position": 4,
+      "charTypeName": "word",
+      "verseKey": "1:1",
+      "location": "1:1:4",
+      "codeV1": "ﭔ",
+      "codeV2": "ﱄ",
+      "pageNumber": 1,
+      "lineNumber": 9,
+      "hizbNumber": 1,
+      "qpcUthmaniHafs": "ٱلرَّحِيمِ",
+      "text": "ٱلرَّحِيمِ",
+      "audioUrl": null,
+      "translation": {
+        "text": "the Most Merciful",
+        "languageId": 38
+      },
+      "transliteration": {
+        "text": "l-raḥīmi",
+        "languageId": 38
+      }
+    },
+    {
+      "position": 5,
+      "charTypeName": "end",
+      "verseKey": "1:1",
+      "location": "1:1:5",
+      "codeV1": "ﭕ",
+      "codeV2": "ﱅ",
+      "pageNumber": 1,
+      "lineNumber": 9,
+      "hizbNumber": 1,
+      "qpcUthmaniHafs": "١",
+      "text": "١",
+      "audioUrl": null,
+      "translation": {
+        "text": "(1)",
+        "languageId": 38
+      },
+      "transliteration": {
+        "text": null,
+        "languageId": 38
+      }
+    }
+  ],
+  "translations": [
+    {
+      "text": "In the Name of Allah—the Most Compassionate, Most Merciful.",
+      "languageId": 38
+    }
+  ]
+}

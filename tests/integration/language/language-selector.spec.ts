@@ -1,7 +1,12 @@
 import { test, expect } from '@playwright/test';
 
+import {
+  openNavigationDrawerLanguageSelector,
+  selectNavigationDrawerLanguage,
+} from '@/tests/helpers/language';
 import languages from '@/tests/mocks/languages';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -16,14 +21,10 @@ test(
     tag: ['@nav', '@language', '@fast', '@smoke'],
   },
   async ({ page }) => {
-    // 1. make sure the language selector items are not visible
-    await expect(page.getByRole('button', { name: 'English' })).not.toBeVisible();
-    // 2. Click on the menu
-    await page.getByTestId('open-navigation-drawer').click();
-    // 3. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 4. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
+    // 1. make sure the language container is not visible
+    await expect(page.getByTestId(TestId.LANGUAGE_CONTAINER)).not.toBeVisible();
+    // 2. Open the language selector
+    const languageContainer = await openNavigationDrawerLanguageSelector(page);
     // 5. Make sure all language selector items are visible (scoped to language container)
     await Promise.all(
       languages.map(async (language) => {
@@ -38,7 +39,7 @@ test(
   { tag: ['@footer', '@language', '@fast'] },
   async ({ page }) => {
     const footer = page.locator('footer');
-    const languageSelector = footer.getByTestId('language-selector');
+    const languageSelector = footer.getByTestId(TestId.LANGUAGE_SELECTOR);
     await expect(languageSelector).toBeVisible();
 
     await languageSelector.locator('button').click();
@@ -62,17 +63,8 @@ test(
   async ({ page }) => {
     // 1. Make sure we are on the English version
     await expect(page).toHaveURL('/');
-    // 2. Click on the menu
-    await page.getByTestId('open-navigation-drawer').click();
-    // 3. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 4. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-    // 5. select the Bengali language and make sure we are navigated to /bn
-    await Promise.all([
-      languageContainer.getByRole('button', { name: 'বাংলা' }).click(),
-      page.waitForURL('/bn'),
-    ]);
+    // 2. select the Bengali language and make sure we are navigated to /bn
+    await Promise.all([selectNavigationDrawerLanguage(page, 'bn'), page.waitForURL('/bn')]);
   },
 );
 
@@ -82,15 +74,9 @@ test(
   async ({ page }) => {
     // 1. Make sure the lang attribute is set to en on the homepage
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    // 2. Click on the menu
-    await page.getByTestId('open-navigation-drawer').click();
-    // 3. Click on the language selector nav bar trigger
-    await page.getByTestId('language-selector-button').click();
-    // 4. Grab the language container
-    const languageContainer = page.getByTestId('language-container');
-    // 5. select French and wait for navigation to /fr
+    // 2. select French and wait for navigation to /fr
     await Promise.all([
-      languageContainer.getByRole('button', { name: 'Français' }).click(),
+      selectNavigationDrawerLanguage(page, 'fr'),
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
     ]);
 

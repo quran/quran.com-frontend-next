@@ -8,6 +8,7 @@ import styles from './TranslationSelect.module.scss';
 import { SelectOption } from '@/dls/Forms/Select';
 import PopoverMenu, { PopoverMenuExpandDirection } from '@/dls/PopoverMenu/PopoverMenu';
 import CaretIcon from '@/icons/caret-down.svg';
+import { TestId } from '@/tests/test-ids';
 
 interface TranslationSelectProps {
   selectedTranslationId: string;
@@ -84,7 +85,7 @@ const TranslationSelect: React.FC<TranslationSelectProps> = ({
             aria-haspopup="listbox"
             aria-expanded={isMenuOpen}
             aria-label={displayLabel}
-            data-testid="translation-select-trigger"
+            data-testid={TestId.TRANSLATION_SELECT}
           >
             <span className={styles.triggerLabel}>{displayLabel}</span>
             <span
