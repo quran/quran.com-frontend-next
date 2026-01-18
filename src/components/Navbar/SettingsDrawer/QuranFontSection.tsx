@@ -195,25 +195,35 @@ const QuranFontSection = () => {
   return (
     <Section id="quran-font-section" hideSeparator>
       <Section.Row>
-        <Switch items={types} selected={selectedType} onSelect={onFontChange} />
-      </Section.Row>
-
-      <Section.Row className={styles.fontStyleSection}>
-        <Section.Label className={styles.fontStyleLabel}>
-          {t('quran-reader:font-style')}
-        </Section.Label>
-        <Select
-          id="quranFontStyles"
-          name="quranFontStyles"
-          options={fonts[selectedType]}
-          value={quranFont}
-          onChange={onFontStyleChange}
-          testId={`quran-font-styles-${selectedType}`}
+        <Switch
+          items={types}
+          selected={selectedType}
+          onSelect={onFontChange}
+          className={styles.fontSwitch}
+          shouldHideSeparators
         />
       </Section.Row>
+
+      {selectedType === QuranFont.Uthmani && (
+        <Section.Row className={styles.fontStyleSection}>
+          <Section.Label className={styles.fontStyleLabel}>
+            {t('quran-reader:font-style')}
+          </Section.Label>
+          <Select
+            id="quranFontStyles"
+            name="quranFontStyles"
+            options={fonts[selectedType]}
+            value={quranFont}
+            onChange={onFontStyleChange}
+            testId={`quran-font-styles-${selectedType}`}
+            className={styles.select}
+            arrowClassName={styles.selectArrow}
+          />
+        </Section.Row>
+      )}
       {selectedType === QuranFont.IndoPak && (
-        <Section.Row>
-          <Section.Label>{t('fonts.lines')}</Section.Label>
+        <Section.Row className={styles.fontStyleSection}>
+          <Section.Label className={styles.fontStyleLabel}>{t('fonts.lines')}</Section.Label>
           <Select
             id="lines"
             name="lines"
@@ -221,6 +231,8 @@ const QuranFontSection = () => {
             options={lines}
             value={mushafLines}
             onChange={onMushafLinesChange}
+            className={styles.select}
+            arrowClassName={styles.selectArrow}
           />
         </Section.Row>
       )}

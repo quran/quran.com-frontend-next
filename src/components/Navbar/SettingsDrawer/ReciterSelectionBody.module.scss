@@ -1,3 +1,11 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding-block-end: var(--spacing-xxlarge-px);
+}
+
 .reciter {
   margin-block-end: var(--spacing-small);
   display: flex;
@@ -30,6 +38,6 @@ $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
 }
 
 .searchInputContainer .input {
-  inline-size: 95%;
+  inline-size: 100%;
   block-size: var(--spacing-xlarge-px);
 }
