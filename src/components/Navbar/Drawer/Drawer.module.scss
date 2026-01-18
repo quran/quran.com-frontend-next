@@ -50,7 +50,7 @@
   &.settingsDrawer {
     @include breakpoints.smallerThanTablet {
       inset-block-start: var(--navbar-height);
-      inset-block-end: 0;
+      inset-block-end: auto;
       block-size: calc(100dvh - var(--navbar-height));
       border-start-start-radius: var(--border-radius-rounded);
       border-start-end-radius: var(--border-radius-rounded);
@@ -61,6 +61,20 @@
       will-change: transform;
       backface-visibility: hidden;
       contain: layout;
+
+      @include breakpoints.tablet {
+        inset-block-start: 0;
+        inset-block-end: auto;
+        block-size: 100vh;
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
+        transform: none;
+        transition: var(--transition-regular);
+        overflow-y: auto;
+        will-change: auto;
+        backface-visibility: visible;
+        contain: none;
+      }
     }
   }
 
@@ -68,6 +82,7 @@
     &.settingsDrawer {
       @include breakpoints.smallerThanTablet {
         inset-block-start: calc(var(--top-bar-height-mobile-collapsed) + var(--navbar-height));
+        inset-block-end: auto;
         block-size: calc(100dvh - var(--context-menu-container-height));
         border-start-start-radius: var(--border-radius-rounded);
         border-start-end-radius: var(--border-radius-rounded);
@@ -92,6 +107,10 @@
     &.settingsDrawer {
       @include breakpoints.smallerThanTablet {
         transform: translateY(0);
+
+        @include breakpoints.tablet {
+          transform: none;
+        }
       }
     }
   }
@@ -104,6 +123,10 @@
       @include breakpoints.smallerThanTablet {
         inset-inline-end: 0 !important;
         transform: translateY(0);
+
+        @include breakpoints.tablet {
+          transform: none;
+        }
       }
     }
   }
