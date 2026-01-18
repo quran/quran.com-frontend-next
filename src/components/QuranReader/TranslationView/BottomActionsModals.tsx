@@ -80,6 +80,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
             innerRef={tafsirModalRef}
             isOpen={openedModal === ModalType.TAFSIR}
             onClose={() => handleModalClose(ModalType.TAFSIR)}
+            hasCloseButton
             header={t('quran-reader:tafsirs')}
           >
             {surahAndAyahSelection}
