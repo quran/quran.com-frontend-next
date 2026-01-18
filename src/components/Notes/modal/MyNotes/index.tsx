@@ -41,10 +41,10 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR();
+  } = usePostNoteToQR({});
 
   const { showDeleteConfirmation, noteToDelete, isDeletingNote, handleDeleteNoteClick } =
-    useDeleteNote();
+    useDeleteNote({});
 
   return (
     <>

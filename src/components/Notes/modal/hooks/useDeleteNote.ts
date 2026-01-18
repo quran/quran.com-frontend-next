@@ -21,7 +21,11 @@ interface UseDeleteNoteReturn {
   handleDeleteNoteClick: (note: Note) => Promise<void>;
 }
 
-const useDeleteNote = (): UseDeleteNoteReturn => {
+interface UseDeleteNoteProps {
+  onSuccess?: (response: Awaited<ReturnType<typeof deleteNote>>) => void;
+}
+
+const useDeleteNote = ({ onSuccess }: UseDeleteNoteProps): UseDeleteNoteReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -42,7 +46,10 @@ const useDeleteNote = (): UseDeleteNoteReturn => {
       // we are not using response from the mutation so we can safely ignore the warning
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (response, note) => {
+        if (!note) return;
         toast(t('delete-success'), { status: ToastStatus.Success });
+        onSuccess?.(response);
+
         if (note) {
           invalidateCache({
             mutate,

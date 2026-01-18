@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import useSWRInfinite from 'swr/infinite';
 
@@ -40,12 +40,11 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     return makeNotesUrl({ ...baseConfig, sortBy, cursor: endCursor });
   };
 
-  const { data, size, setSize, isValidating, error } = useSWRInfinite<GetAllNotesResponse>(
+  const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
     async (key) => getNotes(sortBy, key),
     {
       revalidateFirstPage: false,
-      revalidateAll: true,
       revalidateOnReconnect: true,
       revalidateOnFocus: true,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
@@ -66,6 +65,10 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     setSize(size + 1);
   };
 
+  const mutateCache = useCallback(() => {
+    mutate();
+  }, [mutate]);
+
   return (
     <div className={styles.container}>
       <NotesTabContent
@@ -74,6 +77,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
         isLoadingMore={notes?.length > 0 && size > 1 && isValidating}
         error={error}
         loadMore={loadMore}
+        mutateCache={mutateCache}
       />
     </div>
   );

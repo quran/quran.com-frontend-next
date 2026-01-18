@@ -178,7 +178,7 @@ const updateNoteCaches = (
     mutate(
       key,
       (data: GetAllNotesResponse[] | undefined) => updatePaginatedNotes(data, note, action),
-      { revalidate: true },
+      { revalidate: false },
     ),
   );
 };
@@ -225,7 +225,7 @@ const invalidateReflectionsCaches = (
 
   if (cacheKeys) {
     const urlKey = makeGetUserReflectionsUrl({ page: 1, limit: 10 }).split('?')[0];
-    const keys = [...cacheKeys].filter((key) => key.includes(urlKey));
+    const keys = [...cacheKeys].filter((key) => key.startsWith('$inf$') && key.includes(urlKey));
     keys.forEach((key) => mutate(key, undefined, { revalidate: true }));
   }
 };

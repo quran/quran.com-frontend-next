@@ -12,6 +12,10 @@ import { AttachedEntityType, Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
 
+interface UsePostNoteToQRProps {
+  onSuccess?: (response: Awaited<ReturnType<typeof publishNoteToQR>>) => void;
+}
+
 interface UsePostNoteToQRReturn {
   showConfirmationModal: boolean;
   noteToPost: Note | null;
@@ -21,7 +25,7 @@ interface UsePostNoteToQRReturn {
   handleNotePostToQR: () => Promise<void>;
 }
 
-const usePostNoteToQR = (): UsePostNoteToQRReturn => {
+const usePostNoteToQR = ({ onSuccess }: UsePostNoteToQRProps): UsePostNoteToQRReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -39,6 +43,7 @@ const usePostNoteToQR = (): UsePostNoteToQRReturn => {
     onSuccess: (response, note) => {
       if (!note) return;
       toast(t('export-success'), { status: ToastStatus.Success });
+      onSuccess?.(response);
 
       invalidateCache({
         mutate,

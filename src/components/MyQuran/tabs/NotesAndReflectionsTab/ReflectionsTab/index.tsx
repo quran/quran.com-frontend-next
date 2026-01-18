@@ -34,7 +34,6 @@ const ReflectionsTab: React.FC = () => {
     getReflections,
     {
       revalidateFirstPage: false,
-      revalidateAll: true,
       revalidateOnReconnect: true,
       revalidateOnFocus: true,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,

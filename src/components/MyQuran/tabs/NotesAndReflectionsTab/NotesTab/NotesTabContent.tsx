@@ -26,6 +26,7 @@ interface NotesTabContentProps {
   isLoadingMore: boolean;
   error: any;
   loadMore: (index: number) => void;
+  mutateCache: () => void;
 }
 
 enum ModalState {
@@ -39,6 +40,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
   isLoadingMore,
   error,
   loadMore,
+  mutateCache,
 }) => {
   const { t } = useTranslation('notes');
 
@@ -51,9 +53,11 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR();
+  } = usePostNoteToQR({ onSuccess: mutateCache });
 
-  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote();
+  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
+    onSuccess: mutateCache,
+  });
 
   const notesWithPostUrl = useNotesWithRecentReflection(notes);
 
@@ -126,6 +130,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         onModalClose={handleCloseModal}
         onMyNotes={handleCloseModal}
         note={selectedNote}
+        onSuccess={mutateCache}
       />
 
       <PostQRConfirmationModal

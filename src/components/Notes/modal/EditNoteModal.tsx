@@ -23,6 +23,7 @@ interface EditNoteModalProps {
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
+  onSuccess?: (data: { note: Note; isPublished: boolean }) => void;
 }
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
@@ -31,6 +32,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   onMyNotes,
   isModalOpen,
   onModalClose,
+  onSuccess,
 }) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('notes');
@@ -47,7 +49,12 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
     try {
       const data = await updateNote(note.id, noteBody, isPublic);
 
-      if (isNotePublishFailed(data)) {
+      const isFailedToPublish = isNotePublishFailed(data);
+      const noteFromResponse = getNoteFromResponse(data);
+
+      onSuccess?.({ note: noteFromResponse, isPublished: !isFailedToPublish });
+
+      if (isFailedToPublish) {
         toast(t('notes:update-publish-failed'), { status: ToastStatus.Error });
       } else {
         toast(t('notes:update-success'), { status: ToastStatus.Success });
@@ -57,7 +64,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         mutate,
         cache,
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
-        note: getNoteFromResponse(data),
+        note: noteFromResponse,
         invalidateCount: true,
         invalidateReflections: isPublic,
         action: CacheAction.UPDATE,
