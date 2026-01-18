@@ -8,6 +8,7 @@ import { ACTION_BUTTONS, ActionButton } from './actions';
 import styles from './ExploreCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import { ModalType } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
@@ -28,6 +29,7 @@ interface ExploreCardProps {
   hasQuestions: boolean;
   hasClarificationQuestion: boolean;
   onModalOpen: (modalType: ModalType) => void;
+  onStudyModeOpen: (tabId: StudyModeTabId, verseKey: string) => void;
 }
 
 // Action helpers are defined in ./actions
@@ -41,6 +43,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   hasQuestions,
   hasClarificationQuestion,
   onModalOpen,
+  onStudyModeOpen,
 }) => {
   const { t, lang } = useTranslation();
   const selectedTafsirs = useSelector(selectSelectedTafsirs);
@@ -57,13 +60,20 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 
   const handleButtonClick = useCallback(
     (button: ActionButton) => {
-      onModalOpen(button.modalType);
       const normalizedKey = button.key.replace(/\./g, '_');
       logButtonClick(`end_of_surah_${normalizedKey}`, { chapterNumber });
 
       // Use questionsVerseKey for Answers button, verseKey for others
       const navigationVerseKey =
         button.modalType === ModalType.QUESTIONS ? questionsVerseKey : verseKey;
+
+      // If this button opens Study Mode, use onStudyModeOpen
+      if (button.studyModeTabId) {
+        onStudyModeOpen(button.studyModeTabId, verseKey);
+      } else if (button.modalType) {
+        // For Answers, use the separate modal
+        onModalOpen(button.modalType);
+      }
 
       fakeNavigate(
         button.getNavigationUrl({
@@ -74,7 +84,15 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         lang,
       );
     },
-    [onModalOpen, chapterNumber, verseKey, questionsVerseKey, selectedTafsirs, lang],
+    [
+      onModalOpen,
+      onStudyModeOpen,
+      chapterNumber,
+      verseKey,
+      questionsVerseKey,
+      selectedTafsirs,
+      lang,
+    ],
   );
 
   return (

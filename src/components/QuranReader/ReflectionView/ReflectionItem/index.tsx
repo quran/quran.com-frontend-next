@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import AuthorInfo from './AuthorInfo';
 import HeaderMenu from './HeaderMenu';
@@ -13,6 +15,7 @@ import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflecti
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
@@ -26,6 +29,15 @@ import {
 } from '@/utils/quranReflect/views';
 import { makeVerseKey } from '@/utils/verse';
 import AyahReflection from 'types/QuranReflect/AyahReflection';
+
+// Font size class map for reflection font scaling
+const FONT_SIZE_CLASS_MAP: Record<number, string> = {
+  1: styles.fontXs,
+  2: styles.fontSm,
+  3: styles.fontMd,
+  4: styles.fontLg,
+  5: styles.fontXl,
+};
 
 type Props = {
   reflection: AyahReflection;
@@ -45,6 +57,8 @@ const ReflectionItem: React.FC<Props> = ({
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
   const reflectionBodyRef = useRef(null);
+  // Use fallback default for users who don't have the new reflectionFontScale field yet
+  const { reflectionFontScale = 3 } = useSelector(selectQuranReaderStyles);
   useIntersectionObserver(reflectionBodyRef, REFLECTIONS_OBSERVER_ID);
 
   const onReferredVersesHeaderClicked = () => {
@@ -138,7 +152,7 @@ const ReflectionItem: React.FC<Props> = ({
       >
         <p className="debugger" />
         <span
-          className={styles.body}
+          className={classNames(styles.body, FONT_SIZE_CLASS_MAP[reflectionFontScale])}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),

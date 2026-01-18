@@ -16,6 +16,7 @@ type ReadingPreferences = {
   isUsingDefaultWordByWordLocale: boolean;
   selectedReadingTranslation: string | null;
   lastUsedReadingMode: ReadingPreference.Reading | ReadingPreference.ReadingTranslation;
+  selectedReflectionLanguages: string[];
 };
 
 export default ReadingPreferences;

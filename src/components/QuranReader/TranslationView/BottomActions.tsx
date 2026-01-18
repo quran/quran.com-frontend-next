@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
@@ -23,6 +24,8 @@ import {
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+
+const StudyModeModal = lazy(() => import('@/components/QuranReader/ReadingView/StudyModeModal'));
 
 /**
  * Props for the BottomActions component
@@ -60,8 +63,11 @@ const BottomActions = ({
   // Only show Answers tab when we confirm questions exist (not while loading)
   const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-  // Modal state using enum
+  // Modal state using enum (for Answers only now)
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
+  // Study Mode modal state
+  const [isStudyModeOpen, setIsStudyModeOpen] = useState(false);
+  const [studyModeInitialTab, setStudyModeInitialTab] = useState<StudyModeTabId | null>(null);
 
   /**
    * Handle tab click or keyboard event
@@ -71,14 +77,18 @@ const BottomActions = ({
    */
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
     return () => {
-      // Open the corresponding modal
+      // Open Study Mode for tafsir, reflections, and lessons
       if (tabType === TabId.TAFSIR) {
-        setOpenedModal(ModalType.TAFSIR);
+        setStudyModeInitialTab(StudyModeTabId.TAFSIR);
+        setIsStudyModeOpen(true);
       } else if (tabType === TabId.REFLECTIONS) {
-        setOpenedModal(ModalType.REFLECTION);
+        setStudyModeInitialTab(StudyModeTabId.REFLECTIONS);
+        setIsStudyModeOpen(true);
       } else if (tabType === TabId.LESSONS) {
-        setOpenedModal(ModalType.LESSONS);
+        setStudyModeInitialTab(StudyModeTabId.LESSONS);
+        setIsStudyModeOpen(true);
       } else if (tabType === TabId.ANSWERS) {
+        // Answers still uses the separate Q&A modal
         setOpenedModal(ModalType.QUESTIONS);
       }
 
@@ -132,15 +142,24 @@ const BottomActions = ({
       <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
 
       <BottomActionsModals
-        chapterId={chapterId}
-        verseNumber={verseNumber}
         verseKey={verseKey}
-        tafsirs={tafsirs}
         openedModal={openedModal}
         hasQuestions={hasQuestions}
         isTranslationView={isTranslationView}
         onCloseModal={() => setOpenedModal(null)}
       />
+
+      <Suspense fallback={null}>
+        <StudyModeModal
+          isOpen={isStudyModeOpen}
+          onClose={() => {
+            setIsStudyModeOpen(false);
+            setStudyModeInitialTab(null);
+          }}
+          verseKey={verseKey}
+          initialActiveTab={studyModeInitialTab}
+        />
+      </Suspense>
     </>
   );
 };

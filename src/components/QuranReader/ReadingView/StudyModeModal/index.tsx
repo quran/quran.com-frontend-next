@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import StudyModeBody from './StudyModeBody';
+import { StudyModeTabId } from './StudyModeBottomActions';
 import styles from './StudyModeModal.module.scss';
 
 import { fetcher } from '@/api';
@@ -26,9 +27,11 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  word: Word;
+  word?: Word;
+  verseKey?: string;
   verse?: Verse;
   highlightedWordLocation?: string;
+  initialActiveTab?: StudyModeTabId | null;
 }
 
 interface VerseResponse {
@@ -39,15 +42,19 @@ const StudyModeModal: React.FC<Props> = ({
   isOpen,
   onClose,
   word,
+  verseKey: verseKeyProp,
   verse: initialVerse,
   highlightedWordLocation,
+  initialActiveTab,
 }) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
-  const initialChapterId = getChapterNumberFromKey(word.verseKey).toString();
-  const initialVerseNumber = getVerseNumberFromKey(word.verseKey).toString();
+  // Derive verseKey from word if provided, otherwise use direct verseKey prop
+  const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
+  const initialChapterId = getChapterNumberFromKey(derivedVerseKey).toString();
+  const initialVerseNumber = getVerseNumberFromKey(derivedVerseKey).toString();
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
 
@@ -60,15 +67,17 @@ const StudyModeModal: React.FC<Props> = ({
   useEffect(() => {
     let isMounted = true;
     if (isOpen && isMounted) {
-      setSelectedChapterId(initialChapterId);
-      setSelectedVerseNumber(initialVerseNumber);
+      // Re-derive from props when modal opens to ensure correct initial state
+      const currentVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
+      setSelectedChapterId(getChapterNumberFromKey(currentVerseKey).toString());
+      setSelectedVerseNumber(getVerseNumberFromKey(currentVerseKey).toString());
       setSelectedWordLocation(highlightedWordLocation);
       setShowWordBox(!!highlightedWordLocation);
     }
     return () => {
       isMounted = false;
     };
-  }, [isOpen, initialChapterId, initialVerseNumber, highlightedWordLocation]);
+  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
@@ -220,6 +229,9 @@ const StudyModeModal: React.FC<Props> = ({
           onNavigateNextWord={handleNextWord}
           canNavigateWordPrev={canNavigateWordPrev}
           canNavigateWordNext={canNavigateWordNext}
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
+          initialActiveTab={initialActiveTab}
         />
       );
     }

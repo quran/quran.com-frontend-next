@@ -298,4 +298,13 @@ export default {
       selectedReadingTranslation: initialState.readingPreferences.selectedReadingTranslation,
     },
   }),
+  39: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      reflectionFontScale:
+        state.quranReaderStyles.reflectionFontScale ??
+        initialState.quranReaderStyles.reflectionFontScale,
+    },
+  }),
 };

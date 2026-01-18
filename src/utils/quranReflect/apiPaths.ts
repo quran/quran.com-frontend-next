@@ -30,10 +30,11 @@ export const makeGetUserReflectionsUrl = ({
 export const makeAyahReflectionsUrl = ({
   surahId,
   ayahNumber,
-  locale,
+  locales,
   page = 1,
   postTypeIds = [],
 }: AyahReflectionsRequestParams) => {
+  const languageIds = locales.map(localeToQuranReflectLanguageID);
   return makeQuranReflectApiUrl('posts/feed', {
     'filter[references][0][chapterId]': surahId,
     'filter[references][0][from]': ayahNumber,
@@ -41,7 +42,7 @@ export const makeAyahReflectionsUrl = ({
     ...(postTypeIds.length > 0 && { 'filter[postTypeIds]': postTypeIds.join(',') }),
     page,
     tab: Tab.Popular, // always reviewed content
-    languages: localeToQuranReflectLanguageID(locale),
+    languages: languageIds.join(','),
     'filter[verifiedOnly]': true,
   });
 };

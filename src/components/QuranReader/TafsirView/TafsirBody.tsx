@@ -51,6 +51,9 @@ type TafsirBodyProps = {
   initialTafsirIdOrSlug?: number | string;
   scrollToTop: () => void;
   shouldRender?: boolean;
+  showArabicText?: boolean;
+  showNavigation?: boolean;
+  showFontControl?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -65,6 +68,9 @@ const TafsirBody = ({
   render,
   scrollToTop,
   shouldRender,
+  showArabicText = true,
+  showNavigation = true,
+  showFontControl = true,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
@@ -227,25 +233,46 @@ const TafsirBody = ({
           {Object.values(verses).length > 1 && !!text && (
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
-          <div className={styles.verseTextContainer}>
-            <VerseTextPreview verses={Object.values(verses)} />
-          </div>
-          <div className={styles.separatorContainer}>
-            <Separator />
-          </div>
-          {!!text && (
-            <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
+          {showArabicText && (
+            <>
+              <div className={styles.verseTextContainer}>
+                <VerseTextPreview verses={Object.values(verses)} />
+              </div>
+              <div className={styles.separatorContainer}>
+                <Separator />
+              </div>
+            </>
           )}
-          <TafsirEndOfScrollingActions
-            hasNextVerseGroup={hasNextVerseGroup}
-            hasPrevVerseGroup={hasPrevVerseGroup}
-            onNextButtonClicked={loadNextVerseGroup}
-            onPreviousButtonClicked={loadPrevVerseGroup}
-          />
+          {!!text && (
+            <TafsirText
+              direction={langData.direction}
+              languageCode={langData.code}
+              text={text}
+              showFontControl={showFontControl}
+            />
+          )}
+          {showNavigation && (
+            <TafsirEndOfScrollingActions
+              hasNextVerseGroup={hasNextVerseGroup}
+              hasPrevVerseGroup={hasPrevVerseGroup}
+              onNextButtonClicked={loadNextVerseGroup}
+              onPreviousButtonClicked={loadPrevVerseGroup}
+            />
+          )}
         </div>
       );
     },
-    [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
+    [
+      chaptersData,
+      lang,
+      scrollToTop,
+      selectedChapterId,
+      selectedTafsirIdOrSlug,
+      showArabicText,
+      showFontControl,
+      showNavigation,
+      t,
+    ],
   );
 
   const onChapterIdChange = (newChapterId) => {

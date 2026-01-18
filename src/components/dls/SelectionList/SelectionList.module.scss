@@ -1,0 +1,57 @@
+.triggerButton {
+  min-width: 120px;
+  justify-content: space-between;
+}
+
+.chevronIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: var(--spacing-xxs);
+}
+
+.popoverContent {
+  padding: var(--spacing-xxs);
+  min-width: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.popoverTitle {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded);
+  border-bottom: 1px solid var(--color-borders-hairline);
+  margin-bottom: var(--spacing-xxs);
+}
+
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  border-radius: var(--border-radius-default);
+  transition: background-color var(--transition-fast);
+  font-size: var(--font-size-small);
+
+  &:hover {
+    background-color: var(--color-background-alternative);
+  }
+}
+
+.itemSelected {
+  color: var(--color-primary-medium);
+}
+
+.emptyIcon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}

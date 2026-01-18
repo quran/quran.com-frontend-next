@@ -85,6 +85,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedReadingTranslation: action.payload,
     }),
+    setReflectionLanguages: (state, action: PayloadAction<string[]>) => ({
+      ...state,
+      selectedReflectionLanguages: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
@@ -121,6 +125,7 @@ export const {
   setWordByWordInlineContentType,
   setWordByWordDisplay,
   setSelectedReadingTranslation,
+  setReflectionLanguages,
 } = readingPreferencesSlice.actions;
 
 export const selectInlineDisplayWordByWordPreferences = (state: RootState) => {
@@ -159,5 +164,7 @@ export const selectSelectedReadingTranslation = (state: RootState) =>
   state.readingPreferences.selectedReadingTranslation;
 export const selectLastUsedReadingMode = (state: RootState) =>
   state.readingPreferences.lastUsedReadingMode;
+export const selectReflectionLanguages = (state: RootState) =>
+  state.readingPreferences.selectedReflectionLanguages;
 
 export default readingPreferencesSlice.reducer;

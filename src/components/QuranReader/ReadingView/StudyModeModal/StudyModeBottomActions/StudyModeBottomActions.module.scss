@@ -3,6 +3,10 @@
 .bottomActionsContainer {
   inline-size: 100%;
   padding: var(--spacing-medium) 0;
+  position: sticky;
+  bottom: 0;
+  background: var(--color-background-default);
+  z-index: 1;
 }
 
 .tabsContainer {
@@ -38,6 +42,10 @@
   &:hover {
     color: var(--color-success-medium);
   }
+}
+
+.tabItemActive {
+  color: var(--color-success-medium);
 }
 
 .tabItemRTL {

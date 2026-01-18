@@ -23,6 +23,7 @@ type TafsirTextProps = {
   direction: string;
   languageCode: string;
   text: string;
+  showFontControl?: boolean;
 };
 
 const FONT_SIZE_CLASS_MAP = {
@@ -33,7 +34,12 @@ const FONT_SIZE_CLASS_MAP = {
   5: styles.xl,
 };
 
-const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }) => {
+const TafsirText: React.FC<TafsirTextProps> = ({
+  direction,
+  languageCode,
+  text,
+  showFontControl = true,
+}) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const {
     actions: { onSettingsChange },
@@ -81,17 +87,21 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
   };
   return (
     <>
-      <div dir={direction} className={styles.counter}>
-        <SpinnerContainer isLoading={isLoading}>
-          <Counter
-            count={tafsirFontScale}
-            onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-            onIncrement={
-              tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
-            }
-          />
-        </SpinnerContainer>
-      </div>
+      {showFontControl && (
+        <div dir={direction} className={styles.counter}>
+          <SpinnerContainer isLoading={isLoading}>
+            <Counter
+              count={tafsirFontScale}
+              onDecrement={
+                tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked
+              }
+              onIncrement={
+                tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
+              }
+            />
+          </SpinnerContainer>
+        </div>
+      )}
       <div
         className={FONT_SIZE_CLASS_MAP[tafsirFontScale]}
         dir={direction}

@@ -48,7 +48,7 @@ import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 38,
+  version: 39,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',

@@ -72,3 +72,20 @@
 .ltr {
   direction: ltr;
 }
+
+// Font size classes for reflection font scaling
+.fontXs {
+  font-size: var(--font-size-xsmall);
+}
+.fontSm {
+  font-size: var(--font-size-normal);
+}
+.fontMd {
+  font-size: var(--font-size-large);
+}
+.fontLg {
+  font-size: var(--font-size-xlarge);
+}
+.fontXl {
+  font-size: var(--font-size-jumbo);
+}

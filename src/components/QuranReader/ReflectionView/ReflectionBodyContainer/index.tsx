@@ -1,7 +1,9 @@
-import { useCallback, useState } from 'react';
+/* eslint-disable max-lines */
+import { useCallback, useMemo, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { getReflectionTabs, handleReflectionViewed } from './helpers';
 import styles from './ReflectionBodyContainer.module.scss';
@@ -9,8 +11,14 @@ import styles from './ReflectionBodyContainer.module.scss';
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import SelectionList from '@/dls/SelectionList';
 import Tabs from '@/dls/Tabs/Tabs';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import {
+  selectReflectionLanguages,
+  setReflectionLanguages,
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -22,6 +30,8 @@ import {
   REFLECTION_POST_TYPE_ID,
   makeAyahReflectionsUrl,
 } from '@/utils/quranReflect/apiPaths';
+import { getReflectionLanguageItems } from '@/utils/quranReflect/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
 
@@ -37,9 +47,15 @@ type ReflectionBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
   scrollToTop: () => void;
-  render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
+  render: (renderProps: {
+    surahAndAyahSelection: JSX.Element;
+    languageSelection: JSX.Element;
+    body: JSX.Element;
+  }) => JSX.Element;
   initialContentType?: ContentType;
   isModal?: boolean;
+  showEndActions?: boolean;
+  showTabs?: boolean;
 };
 
 const ReflectionBodyContainer = ({
@@ -49,11 +65,36 @@ const ReflectionBodyContainer = ({
   scrollToTop,
   initialContentType = ContentType.REFLECTIONS,
   isModal = false,
+  showEndActions = true,
+  showTabs = true,
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedContentType, setSelectedContentType] = useState(initialContentType);
   const { lang, t } = useTranslation();
+  const dispatch = useDispatch();
+  const storedLanguages = useSelector(selectReflectionLanguages);
+  const selectedLanguages = useMemo(
+    () => storedLanguages || [lang] || ['en'],
+    [storedLanguages, lang],
+  );
+  const {
+    actions: { onSettingsChange },
+  } = usePersistPreferenceGroup();
+
+  const handleLanguageChange = useCallback(
+    (newLanguages: string[]) => {
+      onSettingsChange(
+        'selectedReflectionLanguages',
+        newLanguages,
+        setReflectionLanguages(newLanguages),
+        setReflectionLanguages(selectedLanguages),
+        PreferenceGroup.READING,
+      );
+      dispatch(setReflectionLanguages(newLanguages));
+    },
+    [dispatch, onSettingsChange, selectedLanguages],
+  );
 
   const handleTabChange = (value: ContentType) => {
     logEvent('reflection_view_tab_change', { tab: value });
@@ -84,9 +125,17 @@ const ReflectionBodyContainer = ({
         scrollToTop={scrollToTop}
         selectedContentType={selectedContentType}
         isModal={isModal}
+        hideEndActions={!showEndActions}
       />
     ),
-    [scrollToTop, selectedChapterId, selectedVerseNumber, selectedContentType, isModal],
+    [
+      scrollToTop,
+      selectedChapterId,
+      selectedVerseNumber,
+      selectedContentType,
+      isModal,
+      showEndActions,
+    ],
   );
 
   const dataFetcher = (
@@ -95,7 +144,7 @@ const ReflectionBodyContainer = ({
       queryKey={makeAyahReflectionsUrl({
         surahId: selectedChapterId,
         ayahNumber: selectedVerseNumber,
-        locale: lang,
+        locales: selectedLanguages,
         postTypeIds: [
           selectedContentType === ContentType.REFLECTIONS
             ? REFLECTION_POST_TYPE_ID
@@ -108,16 +157,34 @@ const ReflectionBodyContainer = ({
 
   const body = (
     <div className={styles.tabsContainerWrapper}>
-      <Tabs
-        tabs={getReflectionTabs(t, isModal)}
-        selected={selectedContentType}
-        onSelect={handleTabChange}
-        className={styles.tab}
-        containerClassName={styles.tabsContainer}
-        activeClassName={styles.tabActive}
-      />
-      {isModal ? <div className={styles.reflectionDataContainer}>{dataFetcher}</div> : dataFetcher}
+      {showTabs && (
+        <Tabs
+          tabs={getReflectionTabs(t, isModal)}
+          selected={selectedContentType}
+          onSelect={handleTabChange}
+          className={styles.tab}
+          containerClassName={styles.tabsContainer}
+          activeClassName={styles.tabActive}
+        />
+      )}
+      {isModal && showTabs ? (
+        <div className={styles.reflectionDataContainer}>{dataFetcher}</div>
+      ) : (
+        dataFetcher
+      )}
     </div>
+  );
+
+  const languageSelection = (
+    <SelectionList
+      id="reflection-languages"
+      title={t('common:languages')}
+      items={getReflectionLanguageItems()}
+      selectedValues={selectedLanguages}
+      onChange={handleLanguageChange}
+      minimumRequired={1}
+      isPortalled={false}
+    />
   );
 
   return render({
@@ -130,6 +197,7 @@ const ReflectionBodyContainer = ({
         selectedContentType={selectedContentType}
       />
     ),
+    languageSelection,
     body,
   });
 };

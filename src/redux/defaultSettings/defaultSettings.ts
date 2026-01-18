@@ -8,6 +8,7 @@ import TafsirsSettings from '@/redux/types/TafsirsSettings';
 import Theme from '@/redux/types/Theme';
 import ThemeType from '@/redux/types/ThemeType';
 import TranslationsSettings from '@/redux/types/TranslationsSettings';
+import Language from '@/types/Language';
 import {
   ReadingPreference,
   WordByWordType,
@@ -54,6 +55,7 @@ const TRANSLATIONS_INITIAL_STATE: TranslationsSettings = {
 const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   // the base sizes in rem
   tafsirFontScale: 3,
+  reflectionFontScale: 3,
   quranTextFontScale: 3,
   translationFontScale: 3,
   wordByWordFontScale: 3,
@@ -75,6 +77,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
   selectedReadingTranslation: String(DEFAULT_TRANSLATIONS[0]),
   lastUsedReadingMode: ReadingPreference.Reading,
+  selectedReflectionLanguages: [Language.EN],
 };
 
 const THEME_INITIAL_STATE: Theme = {

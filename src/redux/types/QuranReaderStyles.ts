@@ -2,6 +2,7 @@ import { MushafLines, QuranFont } from '@/types/QuranReader';
 
 type QuranReaderStyles = {
   tafsirFontScale: number;
+  reflectionFontScale: number;
   translationFontScale: number;
   quranTextFontScale: number;
   wordByWordFontScale: number;

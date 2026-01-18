@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -17,12 +18,34 @@ import BxBookIcon from '@/icons/bx-book.svg';
 import ChatIcon from '@/icons/chat.svg';
 import DeviceHubIcon from '@/icons/device-hub.svg';
 import DifferenceIcon from '@/icons/difference.svg';
+import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { constructWordVerse, getVerseWords } from '@/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
+
+const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
+  ssr: false,
+});
+
+const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
+  ssr: false,
+});
+
+const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
+  ssr: false,
+});
+
+// Tab component lookup map for dynamic rendering
+const TAB_COMPONENTS: Partial<
+  Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
+> = {
+  [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
+  [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
+  [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
+};
 
 interface StudyModeBodyProps {
   verse: Verse;
@@ -37,6 +60,9 @@ interface StudyModeBodyProps {
   onNavigateNextWord: () => void;
   canNavigateWordPrev: boolean;
   canNavigateWordNext: boolean;
+  selectedChapterId: string;
+  selectedVerseNumber: string;
+  initialActiveTab?: StudyModeTabId | null;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -52,66 +78,70 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   onNavigateNextWord,
   canNavigateWordPrev,
   canNavigateWordNext,
+  selectedChapterId,
+  selectedVerseNumber,
+  initialActiveTab,
 }) => {
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
 
-  // Placeholder tabs - no functionality for now, just UI
+  // Active tab state - initialized from prop if provided, otherwise null
+  const [activeTab, setActiveTab] = useState<StudyModeTabId | null>(initialActiveTab ?? null);
+
+  const handleTabClick = (tabId: StudyModeTabId) => {
+    setActiveTab((current) => (current === tabId ? null : tabId));
+  };
+
   const tabs = [
     {
       id: StudyModeTabId.TAFSIR,
       label: t('tafsir'),
       icon: <BookIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
+      condition: true,
+    },
+    {
+      id: StudyModeTabId.LESSONS,
+      label: t('lessons'),
+      icon: <GraduationCapIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.LESSONS),
       condition: true,
     },
     {
       id: StudyModeTabId.REFLECTIONS,
       label: t('reflections'),
       icon: <LightbulbIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },
     {
       id: StudyModeTabId.ANSWERS,
       label: t('answers'),
       icon: <ChatIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: true,
     },
     {
       id: StudyModeTabId.HADITH,
       label: t('hadith'),
       icon: <BxBookIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.HADITH),
       condition: true,
     },
     {
       id: StudyModeTabId.QIRAAT,
       label: t('qiraat'),
       icon: <DeviceHubIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
       condition: true,
     },
     {
       id: StudyModeTabId.RELATED_VERSES,
       label: t('related-verses'),
       icon: <DifferenceIcon />,
-      onClick: () => {
-        // No functionality yet
-      },
+      onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
       condition: true,
     },
   ];
@@ -156,7 +186,14 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
           </div>
         ))}
       </div>
-      <StudyModeBottomActions tabs={tabs} />
+      <StudyModeBottomActions tabs={tabs} activeTab={activeTab} />
+
+      {activeTab &&
+        TAB_COMPONENTS[activeTab] &&
+        (() => {
+          const TabComponent = TAB_COMPONENTS[activeTab];
+          return <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />;
+        })()}
     </div>
   );
 };

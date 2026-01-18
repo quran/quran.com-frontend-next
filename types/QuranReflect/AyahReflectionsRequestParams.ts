@@ -1,7 +1,7 @@
 type AyahReflectionsRequestParams = {
   surahId: string;
   ayahNumber: string;
-  locale: string;
+  locales: string[];
   page?: number;
   postTypeIds?: string[];
 };

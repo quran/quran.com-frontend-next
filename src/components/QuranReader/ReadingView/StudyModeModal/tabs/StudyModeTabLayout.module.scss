@@ -1,0 +1,32 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+}
+
+.fontControl {
+  flex-shrink: 0;
+}
+
+.selectionContainer {
+  flex: 1;
+  min-width: 0;
+}
+
+.bodyContainer {
+  margin-block-start: var(--spacing-xsmall);
+}

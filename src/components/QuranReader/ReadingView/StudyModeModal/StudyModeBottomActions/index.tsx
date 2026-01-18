@@ -10,6 +10,7 @@ import { isRTLLocale } from '@/utils/locale';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
   HADITH = 'hadith',
@@ -27,9 +28,10 @@ export interface StudyModeTabConfig {
 
 interface StudyModeBottomActionsProps {
   tabs: StudyModeTabConfig[];
+  activeTab?: StudyModeTabId | null;
 }
 
-const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs }) => {
+const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
   const { lang } = useTranslation();
   const isRTL = isRTLLocale(lang);
 
@@ -44,7 +46,11 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs })
     e: React.KeyboardEvent,
     onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
   ) => {
-    onClick(e);
+    // Only trigger on Enter or Space key
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick(e);
+    }
   };
 
   return (
@@ -59,7 +65,10 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs })
           .map((tab, index, filteredTabs) => (
             <React.Fragment key={tab.id}>
               <div
-                className={classNames(styles.tabItem, { [styles.tabItemRTL]: isRTL })}
+                className={classNames(styles.tabItem, {
+                  [styles.tabItemRTL]: isRTL,
+                  [styles.tabItemActive]: activeTab === tab.id,
+                })}
                 data-testid={`study-mode-tab-${tab.id}`}
                 onClick={(e) => handleTabClick(e, tab.onClick)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
