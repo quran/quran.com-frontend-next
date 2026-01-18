@@ -25,7 +25,7 @@ interface NotesTabContentProps {
   isLoading: boolean;
   isLoadingMore: boolean;
   error: any;
-  loadMore: () => void;
+  loadMore: (index: number) => void;
 }
 
 enum ModalState {

@@ -17,7 +17,7 @@ interface ReflectionsTabContentProps {
   isLoading: boolean;
   isLoadingMore: boolean;
   error: any;
-  loadMore: () => void;
+  loadMore: (index: number) => void;
 }
 
 const ReflectionsTabContent: React.FC<ReflectionsTabContentProps> = ({

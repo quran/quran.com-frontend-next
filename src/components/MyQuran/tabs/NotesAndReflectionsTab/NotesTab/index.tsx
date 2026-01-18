@@ -1,3 +1,5 @@
+import React from 'react';
+
 import useSWRInfinite from 'swr/infinite';
 
 import styles from '../NotesAndReflectionsTab.module.scss';
@@ -12,12 +14,15 @@ import { getAllNotes } from '@/utils/auth/api';
 import { makeNotesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 
-const NOTE_LIMIT = 10;
+const baseConfig = {
+  limit: 10,
+  withAttachedEntities: true,
+};
 
 const getNotes = async (sortBy: NotesSortOption, key?: string) => {
   return getAllNotes({
     sortBy,
-    limit: NOTE_LIMIT,
+    ...baseConfig,
     ...(key.includes('cursor') && { cursor: new URL(key).searchParams.get('cursor') || '' }),
   }) as Promise<GetAllNotesResponse>;
 };
@@ -29,10 +34,10 @@ interface NotesTabProps {
 const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   const getKey = (pageIndex: number, previousPageData: GetAllNotesResponse) => {
     if (!isLoggedIn() || (previousPageData && !previousPageData.data)) return null;
-    if (pageIndex === 0) return makeNotesUrl({ sortBy, limit: NOTE_LIMIT });
+    if (pageIndex === 0) return makeNotesUrl({ ...baseConfig, sortBy });
     const { endCursor, hasNextPage } = previousPageData.pagination;
     if (!endCursor || !hasNextPage) return null;
-    return makeNotesUrl({ sortBy, cursor: endCursor, limit: NOTE_LIMIT });
+    return makeNotesUrl({ ...baseConfig, sortBy, cursor: endCursor });
   };
 
   const { data, size, setSize, isValidating, error } = useSWRInfinite<GetAllNotesResponse>(
@@ -53,8 +58,11 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   const lastPageData = data?.[data.length - 1];
   const hasNextPage = lastPageData?.pagination?.hasNextPage || false;
 
-  const loadMore = () => {
+  const lastLoadedIndexRef = React.useRef<number | null>(null);
+  const loadMore = (index: number) => {
     if (!hasNextPage || isValidating) return;
+    if (lastLoadedIndexRef.current === index) return;
+    lastLoadedIndexRef.current = index;
     setSize(size + 1);
   };
 

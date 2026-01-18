@@ -1,3 +1,5 @@
+import React from 'react';
+
 import useSWRInfinite from 'swr/infinite';
 
 import styles from '../NotesAndReflectionsTab.module.scss';
@@ -44,8 +46,11 @@ const ReflectionsTab: React.FC = () => {
   const lastPageData = data?.[data.length - 1];
   const hasNextPage = lastPageData?.currentPage < lastPageData?.pages;
 
-  const loadMore = () => {
+  const lastLoadedIndexRef = React.useRef<number | null>(null);
+  const loadMore = (index: number) => {
     if (!hasNextPage || isValidating) return;
+    if (lastLoadedIndexRef.current === index) return;
+    lastLoadedIndexRef.current = index;
     setSize(size + 1);
   };
 
