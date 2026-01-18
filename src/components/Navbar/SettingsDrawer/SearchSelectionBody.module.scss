@@ -55,3 +55,7 @@
   inline-size: 100%;
   block-size: var(--spacing-xlarge-px);
 }
+
+div.popoverContent.popoverContent {
+  z-index: var(--z-index-high);
+}

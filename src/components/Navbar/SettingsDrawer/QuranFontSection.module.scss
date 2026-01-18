@@ -27,3 +27,20 @@
 .fontStyleSection {
   padding-block-start: var(--spacing-small-px);
 }
+
+div.fontSwitch.fontSwitch {
+  background-color: var(--color-background-alternative-faint);
+
+  // Hide separator lines
+  > div[class*='separatorLine'] {
+    display: none;
+  }
+}
+
+div.select.select {
+  background-color: var(--color-background-alternative-faint);
+}
+
+div.selectArrow.selectArrow {
+  background-color: var(--color-background-alternative-faint);
+}

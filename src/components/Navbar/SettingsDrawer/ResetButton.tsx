@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
+import styles from './SettingsBody.module.scss';
+
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import resetSettings from '@/redux/actions/reset-settings';
@@ -74,6 +76,7 @@ const ResetButton = () => {
       onClick={onResetSettingsClicked}
       data-testid="reset-settings-button"
       variant={ButtonVariant.Simplified}
+      className={styles.resetButton}
     >
       {t('settings.reset')}
     </Button>

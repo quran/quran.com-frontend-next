@@ -269,7 +269,11 @@ const WordByWordSection = () => {
           <SpinnerContainer isLoading={isLoading}>
             <span className={styles.title}>{t('wbw')}</span>
           </SpinnerContainer>
-          <HelperTooltip iconClassName={styles.helperTooltipIcon}>
+          <HelperTooltip
+            iconClassName={styles.helperTooltipIcon}
+            contentClassName={styles.helperTooltipContent}
+            useTooltipStyles={false}
+          >
             {t('quran-reader:wbw-helper-text')}
           </HelperTooltip>
         </div>
@@ -295,6 +299,7 @@ const WordByWordSection = () => {
                 disabled={shouldDisableLanguageSelect}
                 onChange={onWordByWordLocaleChange}
                 className={styles.select}
+                arrowClassName={styles.selectArrow}
               />
             );
           }}

@@ -1,7 +1,7 @@
 .container {
   position: absolute;
   inset-block-start: 0;
-  transform: translateX(-50%) translateY(calc(-100% - var(--spacing-xsmall-px)));
+  transform: translateX(-50%) translateY(-100%);
   display: flex;
   flex-direction: column;
   align-items: center;

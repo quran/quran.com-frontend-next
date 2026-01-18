@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .titleRow {
   display: flex;
   justify-content: space-between;
@@ -47,11 +49,44 @@
 }
 
 .helperTooltipIcon {
+  display: flex;
+  align-items: center;
   color: var(--color-blue-buttons-and-icons);
   fill: var(--color-blue-buttons-and-icons);
+  margin-inline: var(--spacing-xxsmall-px);
+
+  svg {
+    width: var(--font-size-xxsmall-px);
+    height: var(--font-size-xxsmall-px);
+  }
 }
 
-.select {
+div.helperTooltipContent.helperTooltipContent {
+  padding: var(--spacing-small-px);
+  @include theme.dark {
+    background-color: var(--color-background-alternative-faint-new);
+  }
+  background-color: var(--color-background-elevated-new);
+  span{
+    @include theme.dark {
+      fill:var(--color-background-alternative-faint-new);
+    }
+    color:var(--color-text-default-new);
+    fill: var(--color-background-elevated-new); 
+  }
+  z-index: var(--z-index-high);
+  font-size: var(--font-size-xxsmall-px);
+  line-height: 140%;
+  text-align: center;
+  color: var(--color-text-default-new);
+}
+
+div.select.select {
+  background-color: var(--color-background-alternative-faint);
+  max-width: calc(var(--spacing-mega-px) - var(--spacing-xxsmall2-px));
+}
+
+div.selectArrow.selectArrow {
   background-color: var(--color-background-alternative-faint);
 }
 

@@ -30,6 +30,7 @@ type SwitchProps = {
   onSelect: (value: string) => void;
   size?: SwitchSize;
   variant?: SwitchVariant;
+  className?: string;
 };
 
 const Switch = ({
@@ -38,15 +39,20 @@ const Switch = ({
   selected,
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
+  className,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, {
-        [styles.xSmallContainer]: size === SwitchSize.XSmall,
-        [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
-      })}
+      className={classNames(
+        styles.container,
+        {
+          [styles.xSmallContainer]: size === SwitchSize.XSmall,
+          [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
+        },
+        className,
+      )}
     >
       {items.map((item) => (
         <button
