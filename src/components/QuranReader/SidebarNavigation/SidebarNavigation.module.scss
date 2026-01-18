@@ -1,6 +1,7 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 @use 'src/styles/theme';
+@use 'src/styles/utility';
 @use 'sass:math';
 
 $navbar-height: var(--navbar-container-height);
@@ -10,8 +11,7 @@ $top-menu-height-home: $navbar-height;
 $context-menu-height-home: 0;
 
 // Non-homepage heights (with sections menu and progress bar)
-$top-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
-$context-menu-height: calc(var(--context-menu-container-height) + $navbar-height);
+$top-menu-height: calc(var(--top-bar-height) + $navbar-height);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
@@ -82,7 +82,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   }
 }
 
+.drawerShown {
+  border-inline-end: 0px solid var(--color-borders-hairline);
+}
+
+.drawerHide {
+  border-inline-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+}
+
 .container {
+  @include utility.dimmedOverlay(absolute);
   --sidebar-size: calc(100% - calc(1.5 * var(--spacing-mega)));
   @include breakpoints.tablet {
     --sidebar-size: calc(10 * var(--spacing-mega));
@@ -97,7 +106,6 @@ $isNavbarVisible: var(--isNavbarVisible);
   overflow-x: hidden;
   z-index: var(--z-index-sticky);
   box-sizing: border-box;
-  border-inline-end: 1px solid var(--color-borders-hairline);
   inline-size: var(--sidebar-size);
   padding-inline: var(--spacing-large);
   transition: transform var(--transition-regular), height var(--transition-regular);
@@ -126,7 +134,6 @@ $isNavbarVisible: var(--isNavbarVisible);
 
   &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    block-size: calc(100vh - $top-menu-height);
     [dir='rtl'] & {
       transform: translateY($top-menu-height);
     }
@@ -154,10 +161,9 @@ $isNavbarVisible: var(--isNavbarVisible);
   }
 
   &[data-is-homepage='false'] {
-    transform: translateY($context-menu-height);
-    block-size: calc(95vh);
+    transform: translateY($top-menu-height);
     [dir='rtl'] & {
-      transform: translateY($context-menu-height);
+      transform: translateY($top-menu-height);
     }
   }
 }
@@ -194,9 +200,9 @@ $isNavbarVisible: var(--isNavbarVisible);
     }
 
     &[data-is-homepage='false'] {
-      transform: translateY($context-menu-height);
+      transform: translateY($top-menu-height);
       [dir='rtl'] & {
-        transform: translateY($context-menu-height);
+        transform: translateY($top-menu-height);
       }
     }
   }
@@ -293,11 +299,26 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: calc(100vh - $top-menu-height-home);
 
-    @include breakpoints.smallerThanTablet {
-      // TODO: we should add the banner height here if it's shown
-      // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
+    [dir='rtl'] & {
       transform: translateY($top-menu-height-home);
-      block-size: 100vh;
+    }
+
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-home);
+      block-size: calc(100vh - $top-menu-height-home);
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
+    }
+  }
+
+  &[data-is-homepage='false'] {
+    transform: translateY($top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
+
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height);
     }
   }
 }
@@ -307,12 +328,24 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: 100vh;
 
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+    }
+
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
       block-size: 100vh;
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
     }
+  }
+
+  &[data-is-homepage='false'] {
+    padding-block-end: $navbar-height;
   }
 }
 
