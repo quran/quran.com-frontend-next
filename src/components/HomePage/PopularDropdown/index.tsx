@@ -10,6 +10,7 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import CloseIcon from '@/icons/close.svg';
 import PopularIcon from '@/icons/trend_up.svg';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface PopularDropdownProps {
@@ -28,7 +29,7 @@ const PopularDropdown = ({ isOpen, onClose }: PopularDropdownProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.dropdownContainer}>
+    <div className={styles.dropdownContainer} data-testid={TestId.QUICK_LINKS}>
       <div className={styles.container}>
         <div className={styles.bodyContainer}>
           <div className={styles.header}>

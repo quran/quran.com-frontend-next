@@ -1,0 +1,53 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100vh;
+
+  @include breakpoints.smallerThanTablet {
+    min-block-size: unset;
+    block-size: calc(100dvh - var(--navbar-height));
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: var(--spacing-small);
+  justify-content: space-between;
+  padding-inline-start: var(--spacing-medium2-px);
+  padding-inline-end: var(--spacing-medium2-px);
+  padding-block-start: var(--spacing-medium-px);
+  padding-block-end: var(--spacing-medium2-px);
+  border-block-start: 1px solid var(--color-borders-hairline);
+  background-color: var(--color-background-elevated);
+  flex-shrink: 0;
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 10;
+  margin-block-start: auto;
+
+  button {
+    border-radius: var(--border-radius-medium-px);
+    padding-block: var(--spacing-small-px);
+    padding-inline: var(--spacing-small-px);
+    border: none;
+    font-weight: var(--font-weight-semibold);
+
+    &:hover {
+      background: var(--color-black-buttons);
+      color: var(--color-text-inverse);
+    }
+  }
+
+  > :first-child {
+    &:hover {
+      background: var(--color-background-elevated);
+      color: var(--color-text-faded-new);
+    }
+
+    span {
+      color: var(--color-text-faded-new);
+    }
+  }
+}

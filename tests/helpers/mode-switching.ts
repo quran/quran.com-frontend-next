@@ -1,7 +1,5 @@
 import { expect, type Page } from '@playwright/test';
 
-import { getVerseArabicTestId } from '@/tests/test-ids';
-
 const switchToMode = async (
   page: Page,
   mode: 'translation' | 'reading',
@@ -9,6 +7,7 @@ const switchToMode = async (
 ) => {
   // Sometimes on mobile, the tab is not visible, so we need to scroll down and up to make it visible
   await page.evaluate(() => window.scrollBy(0, 100));
+  await page.waitForTimeout(1000);
   await page.evaluate(() => window.scrollTo(0, 0));
 
   const tabTestId = `${mode}-tab`;
@@ -26,8 +25,10 @@ const switchToMode = async (
     throw new Error(`Neither ${tabTestId} nor ${buttonTestId} is visible`);
   }
 
+  await page.waitForTimeout(200); // Wait for the page to be fully loaded
+
   // Verify the mode switch was successful by checking that the verse is visible
-  await expect(page.getByTestId(getVerseArabicTestId(verseKey))).toBeVisible();
+  await expect(page.getByTestId(`verse-arabic-${verseKey}`)).toBeVisible();
 };
 
 /**

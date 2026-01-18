@@ -2,12 +2,14 @@
   "add-bookmark": "Aggiungi segnalibro",
   "add-collection": "Aggiungi raccolta",
   "advanced-copy": "Copia avanzata",
+  "arabic": "arabo",
   "aria": {
     "read-ayah-refls": "Leggi Ayah Riflessioni",
     "read-tafsirs": "Leggi Ayah Tafsir"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Torna ad Ayah",
+  "below-word": "Parola sottostante:",
   "bismillah": "Nel nome di Allah, il Compassionevole, il Misericordioso",
   "change-translation": "Cambia traduzione",
   "copy-arabic": "Testo arabo (testo Uthmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Copia testo",
   "cpy-link": "Copia link",
   "current-verse": "Verso corrente",
+  "done": "Fatto",
   "download-copy": "se vuoi scaricare un file di testo.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa e Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Carattere arabo da copiare",
   "font-placeholder": "Seleziona un carattere",
+  "font-style": "Stile del carattere",
   "font-tooltip": "I caratteri King Fahad V1 e V2 saranno in unicode.",
   "footnote": "Nota",
   "footnote-dl": "<b> Dual </b> <br/> Una forma per verbi e pronomi in lingua araba quando ci si rivolge a due persone",
@@ -73,6 +77,8 @@
   "next-page": "Pagina successiva",
   "next-rub": "Il prossimo Rub el Hizb",
   "next-surah": "Sura successiva",
+  "on-click": "Al clic:",
+  "on-hover": "Al passaggio del mouse:",
   "page-bookmark-removed": "Segnalibro di pagina rimosso",
   "page-bookmarked": "Pagina aggiunta ai segnalibri",
   "posted-in": "pubblicato in",
@@ -98,6 +104,7 @@
   "query-param-message": "Stai visualizzando le impostazioni di lettura preselezionate. <0> Ignora </0> per visualizzare le impostazioni correnti o <1> Salva </1> per aggiornare le impostazioni",
   "ramadan-of-reflection": "Unisciti a QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Leggi di più su Quran Reflect",
+  "reciter-summary": "(Con la gentile autorizzazione del Tafsir Center)",
   "referencing": "Riferimento",
   "reflection-disclaimer": "Le riflessioni non rappresentano l'opinione di Quran.com e non dovrebbero essere estrapolate dal contesto",
   "reflection-not-available": "Non ci sono riflessioni riviste per questo ayah",
@@ -131,6 +138,8 @@
     "title": "Feedback sulla traduzione",
     "translation": "Traduzione"
   },
+  "verse-preview-title": "Anteprima:",
   "verses-range": "Gamma di versi",
-  "view-on-quran-reflect": "Visualizza su QuranReflect"
+  "view-on-quran-reflect": "Visualizza su QuranReflect",
+  "wbw-helper-text": "Seleziona le opzioni per mostrare la traduzione, la traslitterazione e/o la recitazione di ogni parola."
 }

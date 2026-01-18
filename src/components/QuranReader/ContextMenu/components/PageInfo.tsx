@@ -40,7 +40,10 @@ const PageInfo: React.FC<PageInfoProps> = ({
   // }, [pageNumber]);
 
   return (
-    <div className={classNames(styles.pageInfoContainer, containerClassName)}>
+    <div
+      className={classNames(styles.pageInfoContainer, containerClassName)}
+      data-testid="page-info"
+    >
       <div className={styles.primaryInfo}>
         {/* TODO: Uncomment when backend task for page bookmarks is done (QF-1720) */}
         {/* {bookmarkComponent} */}

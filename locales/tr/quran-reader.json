@@ -2,12 +2,14 @@
   "add-bookmark": "Yer işareti ekle",
   "add-collection": "Koleksiyon Ekle",
   "advanced-copy": "Gelişmiş Kopyalama",
+  "arabic": "Arapça",
   "aria": {
     "read-ayah-refls": "Ayetin Yansımalarını Okuyun",
     "read-tafsirs": "Ayetin Tefsirlerini Okuyun"
   },
   "ayatul-kursi": "Ayetel Kürsi",
   "back-to-ayah": "Ayete geri dön",
+  "below-word": "Aşağıdaki kelime:",
   "bismillah": "Rahman ve Rahim olan Allah'ın adıyla",
   "change-translation": "Çeviriyi Değiştir",
   "copy-arabic": "Arapça metin (Osmani metin)",
@@ -17,6 +19,7 @@
   "copy-verse": "Metni kopyala",
   "cpy-link": "Bağlantıyı kopyala",
   "current-verse": "Geçerli ayet",
+  "done": "Tamamlamak",
   "download-copy": "Metin dosyasını indirmek istiyorsanız.",
   "edgham": "İdğam",
   "ekhfa": "İhfa ve Ghunna",
@@ -40,6 +43,7 @@
   },
   "font": "Kopyalanacak Arapça yazı tipi",
   "font-placeholder": "Bir yazı tipi seçin",
+  "font-style": "Yazı tipi stili",
   "font-tooltip": "King Fahad V1 ve V2 yazı tipleri unicode olacak.",
   "footnote": "Dipnot",
   "footnote-dl": "<b> İkili </b> <br/> Arapçada iki kişiye hitap ederken fiiller ve zamirler için bir form",
@@ -73,6 +77,8 @@
   "next-page": "Sonraki Sayfa",
   "next-rub": "Sonraki Rub el Hizb",
   "next-surah": "Sonraki Sure",
+  "on-click": "Tıklama Üzerine:",
+  "on-hover": "Üzerine gelindiğinde:",
   "page-bookmark-removed": "Sayfa yer işareti kaldırıldı",
   "page-bookmarked": "Sayfa yer i̇şareti eklendi",
   "posted-in": "Yayınlanan",
@@ -98,6 +104,7 @@
   "query-param-message": "Önceden seçilmiş okuma ayarlarını görüntülüyorsunuz. Geçerli ayarlarınızda görüntülemek için <0> Reddet </0> veya ayarlarınızı güncellemek için <1> Kaydet </1>",
   "ramadan-of-reflection": "KuranReflect'e Katılın \"Yansıma Ramazanı\"",
   "read-more-quran-reflect": "Kuran Yansıtması hakkında devamını oku",
+  "reciter-summary": "(Tefsir Merkezi'nin izniyle)",
   "referencing": "referans",
   "reflection-disclaimer": "Düşünceler Kuran.com'un görüşünü temsil etmemektedir ve bağlamdan çıkarılmamalıdır.",
   "reflection-not-available": "Bu ayet için gözden geçirilmiş bir yansıma yok",
@@ -131,6 +138,8 @@
     "title": "Çeviri Geri Bildirimi",
     "translation": "Çeviri"
   },
+  "verse-preview-title": "Önizleme:",
   "verses-range": "Ayet aralığı",
-  "view-on-quran-reflect": "Kuran'da görüntüle"
+  "view-on-quran-reflect": "Kuran'da görüntüle",
+  "wbw-helper-text": "Her kelime için çeviri, transkripsiyon ve/veya sesli okuma seçeneklerini belirleyin."
 }

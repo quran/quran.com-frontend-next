@@ -13,9 +13,12 @@ $maximum-font-step: 10;
 
 $reading-view-page-min-width: calc(9.5 * var(--spacing-mega));
 
-$reading-view-container-top-margin: 1.5vh;
-
-$translation-feedback-modal-max-width: 56.25rem;
-$translation-feedback-textarea-height: 16rem;
+$reading-view-container-top-margin: var(--spacing-medium2-px);
 
 $oauth-social-button-height: 2.75rem;
+
+$button-active-scale: 0.92;
+
+// Maximum dimensions for Translation Feedback and Notes modals. Other similar modals should use these values for consistency.
+$modal-max-height: 44.375rem;
+$modal-max-width: 43.75rem;

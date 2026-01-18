@@ -340,13 +340,20 @@
   "read": "ဖတ်ရန်",
   "reading-history": "သမိုင်းဖတ်ခြင်း",
   "reading-preference": {
+    "arabic": "အာရပ်",
+    "my-translations": "ကျွန်ုပ်၏ ဘာသာပြန်များ",
+    "none-selected": "ရွေးချယ်မထားပါ",
     "reading": "စာဖတ်ခြင်း",
-    "translation": "ဘာသာပြန်ဆိုချက်"
+    "reading-translation": "ဘာသာပြန်ဆိုချက်",
+    "select-translation": "ဘာသာပြန်ဆိုချက်ကို ရွေးချယ်ပါ",
+    "select-translation-message": "သင်ရွေးချယ်ထားသော ဘာသာပြန်ဆိုချက်များ မရှိပါ။ ဆက်တင်များမှတစ်ဆင့် ဘာသာပြန်ဆိုချက်ကို ရွေးချယ်ပါ။",
+    "select-translations": "ဘာသာပြန်ဆိုချက်များကို ရွေးချယ်ပါ",
+    "translation": "ဘာသာပြန်ဆိုချက်",
+    "verse-by-verse": "တစ်ပိုဒ်ချင်းစီ"
   },
   "ready-for-ramadan": "ရမ်ဇာန်အတွက် အဆင်သင့်ဖြစ်ပြီလား။",
   "recitation": "ရွတ်ဆိုခြင်း",
   "reciter": "ရွတ်ဆိုသူ",
-  "reciter-summary": "(Tafsir Center မှ ကြင်နာစွာ ခွင့်ပြုချက်ဖြင့်)",
   "reciters": "ရွတ်ဆိုသူများ",
   "reflect": "ရောင်ပြန်ဟပ်ပါ",
   "reflections": "ဆင်ခြင်သုံးသပ်ချက်များ",

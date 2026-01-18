@@ -173,7 +173,7 @@ const TranslationSelectionBody = () => {
           ]);
 
           return (
-            <div>
+            <div data-testid="translation-select">
               {renderTranslationGroup(selectedTranslationLanguage, selectedTranslationGroup)}
               {Object.entries(translationByLanguagesWithoutSelectedLanguage)
                 .sort((a, b) => {

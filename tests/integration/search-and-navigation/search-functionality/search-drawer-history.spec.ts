@@ -1,7 +1,8 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
+import { openSearchDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -22,7 +23,7 @@ test(
     await page.keyboard.press('Control+KeyK');
 
     // 2. Make sure the search drawer is visible
-    const searchDrawer = page.getByTestId('search-drawer-container');
+    const searchDrawer = page.getByTestId(TestId.SEARCH_DRAWER_CONTAINER);
     await expect(searchDrawer).toBeVisible();
   },
 );
@@ -33,11 +34,10 @@ test.describe('Search Drawer History', () => {
     { tag: ['@fast', '@search', '@drawer', '@nav'] },
     async ({ page }) => {
       // 1. Click on the search bar
-      const searchBar = page.getByTestId('open-search-drawer');
-      await searchBar.click();
+      await openSearchDrawer(page);
 
       // 2. Make sure the search input is focused
-      const searchDrawer = page.getByTestId('search-drawer-header');
+      const searchDrawer = page.getByTestId(TestId.SEARCH_DRAWER_HEADER);
       await expect(searchDrawer.getByPlaceholder('Search')).toBeFocused();
     },
   );
@@ -47,11 +47,10 @@ test.describe('Search Drawer History', () => {
     { tag: ['@slow', '@search', '@drawer', '@nav'] },
     async ({ page }) => {
       // 1. Click on the search icon in the navbar to open the search drawer
-      const searchBar = page.getByTestId('open-search-drawer');
-      await searchBar.click();
+      await openSearchDrawer(page);
 
       // focus on the search input
-      const searchDrawer = page.getByTestId('search-drawer-header');
+      const searchDrawer = page.getByTestId(TestId.SEARCH_DRAWER_HEADER);
       await searchDrawer.getByPlaceholder('Search').focus();
 
       // fill the current focused element (the search input) and wait for API response
@@ -61,7 +60,7 @@ test.describe('Search Drawer History', () => {
       ]);
 
       // 2. In the "search-results" div, we should see the "Juz 30" result
-      const bodyContainer = page.getByTestId('search-drawer-container');
+      const bodyContainer = page.getByTestId(TestId.SEARCH_DRAWER_CONTAINER);
 
       await expect(bodyContainer.getByText('Juz 30')).toBeVisible();
 
@@ -73,8 +72,10 @@ test.describe('Search Drawer History', () => {
       await homePage.goTo();
 
       // 5. Click on the search bar again and make sure that we see "Juz 30" in the recent navigations
-      await searchBar.click();
-      await expect(page.getByTestId('search-drawer-container').getByText('Juz 30')).toBeVisible();
+      await openSearchDrawer(page);
+      await expect(
+        page.getByTestId(TestId.SEARCH_DRAWER_CONTAINER).getByText('Juz 30'),
+      ).toBeVisible();
     },
   );
 });

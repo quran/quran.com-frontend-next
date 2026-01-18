@@ -71,7 +71,14 @@ const FormBuilder = <T,>({
   };
 
   const renderError = (error: any, errorClassName?: string) =>
-    error && <span className={classNames(styles.errorText, errorClassName)}>{error.message}</span>;
+    error && (
+      <span
+        className={classNames(styles.errorText, errorClassName)}
+        data-testid="form-builder-validation-errors"
+      >
+        {error.message}
+      </span>
+    );
   const renderExtraSection = (formField: FormBuilderFormField, value: string) => {
     if (!formField.extraSection) return null;
     return typeof formField.extraSection === 'function'

@@ -11,7 +11,6 @@ import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
-import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
@@ -35,9 +34,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
 
   return (
     <>
-      <div className={styles.progressWidgetContainer}>
-        <QuranReaderReadingStreak />
-      </div>
       {isReadingByRevelationOrder && quranReaderDataType === QuranReaderDataType.Chapter && (
         <RevelationOrderNavigationNotice
           view={RevelationOrderNavigationNoticeView.EndOfScrollingControls}

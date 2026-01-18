@@ -25,7 +25,12 @@
 }
 
 .monthName {
-  width: calc(3 * var(--spacing-mega));
+  inline-size: calc(3 * var(--spacing-mega));
+  text-align: center;
+}
+
+.yearName {
+  inline-size: calc(2 * var(--spacing-mega));
   text-align: center;
 }
 

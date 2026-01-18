@@ -1,0 +1,50 @@
+@use 'src/styles/breakpoints';
+
+$translation-content-max-width: 600px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-large-px);
+  padding: var(--spacing-large-px) var(--spacing-medium-plus-px);
+  inline-size: 100%;
+  box-sizing: border-box;
+
+  &.rtl {
+    direction: rtl;
+  }
+
+  &.ltr {
+    direction: ltr;
+  }
+}
+
+.translationContent {
+  max-inline-size: $translation-content-max-width;
+  inline-size: 100%;
+  text-align: justify;
+  font-family: 'Figtree', var(--font-primary);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-large);
+  line-height: 180%;
+  color: var(--color-text-default);
+
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-small2-px);
+  }
+}
+
+.pageFooter {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+  padding-block-start: var(--spacing-medium-plus-px);
+}
+
+.pageNumber {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-faded);
+}

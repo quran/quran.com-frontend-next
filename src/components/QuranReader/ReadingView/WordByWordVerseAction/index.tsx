@@ -93,11 +93,15 @@ const WordByWordVerseAction: React.FC<Props> = ({
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
       >
-        <WordByWordHeading isTranslation />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
+        <div data-testid="wbw-translation">
+          <WordByWordHeading isTranslation />
+          <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
+        </div>
         <Separator className={styles.separator} />
-        <WordByWordHeading isTranslation={false} />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
+        <div data-testid="wbw-transliteration">
+          <WordByWordHeading isTranslation={false} />
+          <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
+        </div>
       </ContentModal>
     </>
   );

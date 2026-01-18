@@ -340,13 +340,20 @@
   "read": "Lire",
   "reading-history": "Historique de lecture",
   "reading-preference": {
+    "arabic": "arabe",
+    "my-translations": "Mes traductions",
+    "none-selected": "Aucun sélectionné",
     "reading": "Lecture",
-    "translation": "Traduction"
+    "reading-translation": "Traduction",
+    "select-translation": "Sélectionner la traduction",
+    "select-translation-message": "Aucune traduction n'est sélectionnée. Veuillez en sélectionner une dans les paramètres.",
+    "select-translations": "Sélectionner les traductions",
+    "translation": "Traduction",
+    "verse-by-verse": "Verset par verset"
   },
   "ready-for-ramadan": "Prêt pour le Ramadan ?",
   "recitation": "Récitation",
   "reciter": "Récitateur",
-  "reciter-summary": "(Avec l'aimable autorisation du Centre Tafsir)",
   "reciters": "Récitateurs",
   "reflect": "Méditer",
   "reflections": "Réflexions",

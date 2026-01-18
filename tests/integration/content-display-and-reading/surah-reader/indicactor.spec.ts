@@ -1,0 +1,35 @@
+/* eslint-disable no-await-in-loop */
+import { test, expect } from '@playwright/test';
+
+import Homepage from '@/tests/POM/home-page';
+import { TestId } from '@/tests/test-ids';
+
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/78');
+});
+
+test(
+  'Progress bar indicator increase when scrolling down',
+  { tag: ['@slow', '@reader', '@progress'] },
+  async ({ page, isMobile }) => {
+    test.skip(isMobile);
+
+    const progressBar = page.getByTestId(TestId.PROGRESS_BAR);
+
+    const initialProgress = await progressBar.getAttribute('data-progress');
+
+    // Scroll a bit
+    for (let i = 0; i < 5; i += 1) {
+      await page.mouse.wheel(0, 500);
+      await page.waitForTimeout(500);
+    }
+
+    // The progress bar should be > initial progress
+    await expect
+      .poll(async () => Number(await progressBar.getAttribute('data-progress')))
+      .toBeGreaterThan(Number(initialProgress));
+  },
+);

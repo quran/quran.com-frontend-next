@@ -340,13 +340,20 @@
   "read": "Okumak",
   "reading-history": "tarih okuma",
   "reading-preference": {
+    "arabic": "Arapça",
+    "my-translations": "Çevirilerim",
+    "none-selected": "Hiçbiri seçilmedi.",
     "reading": "Okuma",
-    "translation": "Meal"
+    "reading-translation": "Çeviri",
+    "select-translation": "Çeviri Seç",
+    "select-translation-message": "Şu anda hiçbir çeviri seçili değil. Lütfen ayarlar üzerinden bir çeviri seçin.",
+    "select-translations": "Çevirileri Seç",
+    "translation": "Meal",
+    "verse-by-verse": "Ayet Ayet"
   },
   "ready-for-ramadan": "Ramazan'a hazır mısınız?",
   "recitation": "okuma",
   "reciter": "Okuyucu",
-  "reciter-summary": "(Tefsir Merkezi'nin izniyle)",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
   "reflections": "Yansımalar",

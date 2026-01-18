@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Fikia Malengo Yako ya Quran",
   "continue-reading": "Endelea Kusoma",
   "continuous": {
     "description": "Lengo lako litahesabu maendeleo yako kwa muda wa siku kadhaa",
@@ -97,6 +98,7 @@
     "other": ""
   },
   "set-a-new-goal": "Weka Lengo jipya",
+  "set-custom-goal": "Weka Lengo Maalum",
   "set-reading-goal-success": "Lengo lako la kusoma limetengenezwa kwa mafanikio.",
   "start-journey": "Anza safari yako!",
   "start-reading": "Anza Kusoma",
@@ -112,6 +114,7 @@
     "stroked": "Hujasoma chochote leo"
   },
   "todays-goal": "Lengo la Leo",
+  "track-your-streak": "Fuatilia Mistari, Unda Malengo Maalum, Endelea Kuendelea",
   "view-progress": "Tazama Maendeleo",
   "week-progress": "Maendeleo ya wiki hii",
   "x-days": {

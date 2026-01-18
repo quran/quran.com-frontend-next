@@ -12,6 +12,7 @@ import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerBodySkeleton from './NavigationDrawerBodySkeleton';
 
 import { selectNavbar } from '@/redux/slices/navbar';
+import { isLoggedIn } from '@/utils/auth/login';
 
 const NavigationDrawerBody = dynamic(() => import('./NavigationDrawerBody'), {
   ssr: false,
@@ -20,17 +21,19 @@ const NavigationDrawerBody = dynamic(() => import('./NavigationDrawerBody'), {
 
 const NavigationDrawer = () => {
   const { isNavigationDrawerOpen } = useSelector(selectNavbar, shallowEqual);
+  const isUserLoggedIn = isLoggedIn();
 
   return (
     <Drawer
       id="navigation-drawer"
+      data-testid="navigation-drawer"
       type={DrawerType.Navigation}
       side={DrawerSide.Right}
       header={
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
             <NavbarLogoWrapper />
-            <ProfileAvatarButton isPopoverPortalled={false} />
+            {!isUserLoggedIn && <ProfileAvatarButton isPopoverPortalled={false} />}
           </div>
         </div>
       }

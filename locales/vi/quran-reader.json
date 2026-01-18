@@ -2,12 +2,14 @@
   "add-bookmark": "Thêm đánh dấu trang",
   "add-collection": "Thêm bộ sưu tập",
   "advanced-copy": "Sao chép nâng cao",
+  "arabic": "tiếng Ả Rập",
   "aria": {
     "read-ayah-refls": "Đọc Suy ngẫm Ayah",
     "read-tafsirs": "Đọc Ayah Tafsirs"
   },
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Trở lại Ayah",
+  "below-word": "Từ ngữ bên dưới:",
   "bismillah": "Nhân danh Allah - Đấng Rất Mực Độ Lượng, Đấng Rất Mực Khoan Dung",
   "change-translation": "Thay đổi bản dịch",
   "copy-arabic": "Văn bản tiếng Ả Rập (Văn bản Uthmani)",
@@ -17,6 +19,7 @@
   "copy-verse": "Sao chép câu",
   "cpy-link": "Sao chép link",
   "current-verse": "Câu hiện tại",
+  "done": "Xong",
   "download-copy": "Nếu bạn muốn tải xuống tệp văn bản.",
   "edgham": "Âm câm",
   "ekhfa": "Ghunna/ikhfa'",
@@ -40,6 +43,7 @@
   },
   "font": "Phông chữ Ả Rập để sao chép",
   "font-placeholder": "Chọn phông chữ",
+  "font-style": "Kiểu chữ",
   "font-tooltip": "Phông chữ King Fahad V1 và V2 sẽ hỗ trợ Unicode.",
   "footnote": "Chú thích cuối trang",
   "footnote-dl": "<b>Hai</b> <br/> Một dạng thức dùng cho động từ và đại từ trong tiếng Ả Rập khi xưng hô với hai người.",
@@ -73,6 +77,8 @@
   "next-page": "Trang tiếp theo",
   "next-rub": "Rub el Hizb kế tiếp",
   "next-surah": "Surah tiếp theo",
+  "on-click": "Khi nhấp chuột:",
+  "on-hover": "Khi di chuột:",
   "page-bookmark-removed": "Đánh dấu trang đã bị xóa",
   "page-bookmarked": "Trang đã được đánh dấu",
   "posted-in": "Đăng trong",
@@ -98,6 +104,7 @@
   "query-param-message": "Bạn đang xem các cài đặt đọc được chọn trước. <0>Bỏ qua</0> để xem cài đặt hiện tại hoặc <1>Lưu</1> để cập nhật cài đặt của bạn.",
   "ramadan-of-reflection": "Tham gia \"Suy ngẫm Ramadan\" cùng QuranReflect!",
   "read-more-quran-reflect": "Đọc thêm trên QuranReflect",
+  "reciter-summary": "(Với sự cho phép của Trung tâm Tafsir)",
   "referencing": "Tham chiếu",
   "reflection-disclaimer": "Những suy nghĩ này là quan điểm cá nhân (đã được duyệt về chất lượng) và không mang tính chính thống.",
   "reflection-not-available": "Hiện chưa có bài bình luận nào cho ayah này",
@@ -131,6 +138,8 @@
     "title": "Phản hồi dịch thuật",
     "translation": "Bản dịch"
   },
+  "verse-preview-title": "Xem trước:",
   "verses-range": "Phạm vi các câu",
-  "view-on-quran-reflect": "Xem trên QuranReflect"
+  "view-on-quran-reflect": "Xem trên QuranReflect",
+  "wbw-helper-text": "Chọn các tùy chọn để hiển thị bản dịch, phiên âm và/hoặc đọc thuộc lòng cho mỗi từ."
 }

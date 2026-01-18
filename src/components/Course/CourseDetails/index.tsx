@@ -54,7 +54,13 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         value: Tab.MAIN,
       },
       {
-        name: <TabSwitcherItem icon={<SyllabusIcon />} value={t('tabs.syllabus')} />,
+        name: (
+          <TabSwitcherItem
+            icon={<SyllabusIcon />}
+            value={t('tabs.syllabus')}
+            data-testid="syllabus-button"
+          />
+        ),
         value: Tab.SYLLABUS,
       },
     ],

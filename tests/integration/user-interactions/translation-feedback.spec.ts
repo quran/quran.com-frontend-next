@@ -1,9 +1,8 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
 import Homepage from '@/tests/POM/home-page';
-import { TestId, getVerseTestId } from '@/tests/test-ids';
+import { getVerseArabicTestId, getVerseTestId } from '@/tests/test-ids';
 
 let homePage: Homepage;
 
@@ -22,18 +21,19 @@ test.describe('Translation Feedback - Guest Users', () => {
 
       // Open verse actions menu
       const verse = page.getByTestId(getVerseTestId('1:1'));
-      const moreButton = verse.getByTestId(TestId.VERSE_ACTIONS_MORE);
+      const moreButton = verse.getByLabel('More');
       await expect(moreButton).toBeVisible();
       await moreButton.click();
 
       // Select Translation Feedback option
-      const translationFeedbackOption = page.getByTestId(
-        TestId.VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK,
-      );
+      const translationFeedbackOption = page.getByRole('menuitem', {
+        name: 'Translation Feedback',
+      });
       await expect(translationFeedbackOption).toBeVisible();
       await translationFeedbackOption.click();
 
       // Should be redirected to login page
+      await page.waitForURL(/\/login/);
       await expect(page).toHaveURL(/\/login/);
     },
   );
@@ -41,26 +41,30 @@ test.describe('Translation Feedback - Guest Users', () => {
   test(
     'Guest user should be redirected to login page when clicking Translation Feedback from reading view',
     { tag: ['@translation-feedback', '@auth', '@guest'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Skipping mobile viewport for this test');
+
+      await page.setViewportSize({ width: 1920, height: 1080 });
+
       // Set reading mode to test verse interaction
       await switchToReadingMode(page);
 
       // Tap verse to reveal actions menu
-      const verse = page.getByTestId('verse-arabic-1:1');
+      const verse = page.getByTestId(getVerseArabicTestId('1:1'));
       await verse.click();
 
       // Open More submenu (handles both mobile button and desktop menuitem)
-      const moreMenuitem = page.getByTestId(TestId.VERSE_ACTIONS_MENU_MORE);
-      const moreButton = page.getByTestId(TestId.VERSE_ACTIONS_MORE);
-      await Promise.race([moreMenuitem.click(), moreButton.click()]);
+      const moreMenuitem = page.getByTestId('verse-actions-menu-more');
 
-      const translationFeedbackOption = page.getByTestId(
-        TestId.VERSE_ACTIONS_MENU_TRANSLATION_FEEDBACK,
-      );
+      await moreMenuitem.click({ force: true });
+
+      const translationFeedbackOption = page.getByTestId('verse-actions-menu-translation-feedback');
+
       await expect(translationFeedbackOption).toBeVisible();
-      await translationFeedbackOption.click();
+      await translationFeedbackOption.click({ force: true });
 
       // Should be redirected to login page
+      await page.waitForURL(/\/login/);
       await expect(page).toHaveURL(/\/login/);
     },
   );

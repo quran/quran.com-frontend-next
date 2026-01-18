@@ -340,13 +340,20 @@
   "read": "পড়ুন",
   "reading-history": "ইতিহাস পড়া",
   "reading-preference": {
+    "arabic": "আরবি",
+    "my-translations": "আমার অনুবাদ",
+    "none-selected": "কোনওটিই নির্বাচিত হয়নি",
     "reading": "পড়া",
-    "translation": "অনুবাদ"
+    "reading-translation": "অনুবাদ",
+    "select-translation": "অনুবাদ নির্বাচন করুন",
+    "select-translation-message": "আপনার কোনও অনুবাদ নির্বাচিত নেই। দয়া করে সেটিংসের মাধ্যমে একটি অনুবাদ নির্বাচন করুন।",
+    "select-translations": "অনুবাদ নির্বাচন করুন",
+    "translation": "অনুবাদ",
+    "verse-by-verse": "পদ্য দ্বারা পদ্য"
   },
   "ready-for-ramadan": "রমজানের জন্য প্রস্তুত?",
   "recitation": "আবৃত্তি",
   "reciter": "আবৃত্তিকারী",
-  "reciter-summary": "(তাফসির কেন্দ্রের সদয় অনুমতিক্রমে)",
   "reciters": "আবৃত্তিকারী",
   "reflect": "প্রতিফলিত করা",
   "reflections": "প্রতিফলন",

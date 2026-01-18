@@ -340,13 +340,20 @@
   "read": "Membaca",
   "reading-history": "Riwayat membaca",
   "reading-preference": {
+    "arabic": "Arab",
+    "my-translations": "Terjemahan Saya",
+    "none-selected": "Tidak ada yang dipilih",
     "reading": "Membaca",
-    "translation": "Terjemahan"
+    "reading-translation": "Terjemahan",
+    "select-translation": "Pilih Terjemahan",
+    "select-translation-message": "Anda belum memilih terjemahan apa pun. Silakan pilih terjemahan melalui pengaturan.",
+    "select-translations": "Pilih Terjemahan",
+    "translation": "Terjemahan",
+    "verse-by-verse": "Ayat demi Ayat"
   },
   "ready-for-ramadan": "Siap untuk Ramadan?",
   "recitation": "Pembacaan",
   "reciter": "Qari",
-  "reciter-summary": "(Dengan izin dari Tafsir Center)",
   "reciters": "Qari",
   "reflect": "Refleksi",
   "reflections": "Refleksi",
