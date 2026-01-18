@@ -10,7 +10,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import { logErrorToSentry } from '@/lib/sentry';
-import { makeUrl } from '@/utils/auth/apiPaths';
+import { makeUrl } from '@/utils/api';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
@@ -75,7 +75,7 @@ const ArticlePage: NextPage<Props> = ({ article }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    const response = await fetcher<ArticleListResponse>(makeUrl('articles'), {
+    const response = await fetcher<ArticleListResponse>(makeUrl('/articles'), {
       headers: {
         origin: getBasePath(),
       },
@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   }
 
   try {
-    const response = await fetcher<ArticleDetailResponse>(makeUrl(`articles/${slug}`), {
+    const response = await fetcher<ArticleDetailResponse>(makeUrl(`/articles/${slug}`), {
       headers: {
         origin: getBasePath(),
       },

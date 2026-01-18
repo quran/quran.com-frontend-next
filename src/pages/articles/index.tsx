@@ -13,7 +13,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { logErrorToSentry } from '@/lib/sentry';
-import { makeUrl } from '@/utils/auth/apiPaths';
+import { makeUrl } from '@/utils/api';
 import { getDir, getLanguageAlternates } from '@/utils/locale';
 import {
   getBeyondRamadanNavigationUrl,
@@ -136,7 +136,7 @@ const ArticlesPage: NextPage<Props> = ({ articles }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   try {
-    const response = await fetcher<ArticleListResponse>(makeUrl('articles'), {
+    const response = await fetcher<ArticleListResponse>(makeUrl('/articles'), {
       headers: {
         origin: getBasePath(),
       },
