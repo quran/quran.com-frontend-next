@@ -3,6 +3,7 @@
   "begin": "شروع کنید",
   "calendar-cta": "تقویم",
   "chapters-and-verses": "سوره ها و آیات",
+  "continue-learning-plan": "ادامه یادگیری",
   "continue-read": "به خواندن ادامه دهید",
   "explore-topics": "موضوعات را کاوش کنید",
   "first-time-reading": "تازه با قرآن؟ <link> از اینجا شروع کنید </link>",
@@ -56,6 +57,7 @@
     "description": "کمک به گسترش قرآن به نوآموزان",
     "title": "قرآن را به اشتراک بگذارید"
   },
+  "start-learning-plan": "شروع به یادگیری کنید",
   "start-read": "شروع به خواندن کنید",
   "stay-consistent": "رگه ها را دنبال کنید، اهداف سفارشی ایجاد کنید، ثابت بمانید",
   "tab": {

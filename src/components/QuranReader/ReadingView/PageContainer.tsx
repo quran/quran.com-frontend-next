@@ -11,8 +11,9 @@ import ReadingViewSkeleton from './ReadingViewSkeleton';
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
-import { selectSelectedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { ReadingPreference } from '@/types/QuranReader';
@@ -115,13 +116,26 @@ const PageContainer: React.FC<Props> = ({
   );
 
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
-  const selectedReadingTranslation = useSelector(selectSelectedReadingTranslation);
+  const selectedReadingTranslation = useSelector(selectValidatedReadingTranslation);
 
   const isUsingDefaultSettings = useIsUsingDefaultSettings();
 
   // Only use initial data if it has actual verses (not empty array)
   const hasInitialVerses = initialVerses && initialVerses.length > 0;
-  const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings && hasInitialVerses;
+
+  // For ReadingTranslation mode, we can only use initialData if the selected translation
+  // matches the default for the current locale (which is what SSR would have used).
+  // Otherwise, we need to fetch fresh data with the user's selected translation.
+  const defaultTranslationForLocale = getTranslationsInitialState(lang).selectedTranslations[0];
+  const isUsingDefaultReadingTranslation =
+    readingPreference !== ReadingPreference.ReadingTranslation ||
+    selectedReadingTranslation === defaultTranslationForLocale;
+
+  const shouldUseInitialData =
+    pageIndex === 0 &&
+    isUsingDefaultSettings &&
+    hasInitialVerses &&
+    isUsingDefaultReadingTranslation;
 
   /**
    * CRITICAL: Only generate request key after hydration completes.
@@ -141,7 +155,9 @@ const PageContainer: React.FC<Props> = ({
         wordByWordLocale,
         selectedTranslations,
         readingPreference,
-        selectedReadingTranslation,
+        selectedReadingTranslation: selectedReadingTranslation
+          ? String(selectedReadingTranslation)
+          : null,
       })
     : null;
 

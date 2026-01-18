@@ -3,6 +3,7 @@
   "begin": "Anza",
   "calendar-cta": "Kalenda",
   "chapters-and-verses": "Surah na Aya",
+  "continue-learning-plan": "Endelea kujifunza",
   "continue-read": "Endelea Kusoma",
   "explore-topics": "Chunguza Mada",
   "first-time-reading": "Mgeni kwa Qur'ani? <link> Anzia hapa </link>",
@@ -13,7 +14,7 @@
   "my-quran": "Qur'ani yangu",
   "navigate-quran": "Pitia Qur'ani",
   "no-bookmarks": "Huna alamisho zozote bado",
-  "no-page-bookmarks": "Bado huna alamisho zozote za ukurasa",
+  "no-page-bookmarks": "Huna alamisho zozote za ukurasa kwa sasa",
   "no-recently-read": "Bado huna vipindi vyovyote vya kusoma",
   "noble-quran": "Qur'ani Tukufu",
   "popular": "Maarufu",
@@ -56,6 +57,7 @@
     "description": "Saidia kueneza Qur'ani kwa wanafunzi wapya",
     "title": "Shiriki Qur'ani!"
   },
+  "start-learning-plan": "Anza kujifunza",
   "start-read": "Anza Kusoma",
   "stay-consistent": "Fuatilia Mifululizo, Unda Malengo Maalum, Kaa thabiti",
   "tab": {

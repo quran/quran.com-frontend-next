@@ -125,8 +125,8 @@ const ReadingSection: React.FC<Props> = () => {
         <>
           {header}
           <div className={styles.cardsContainer}>
-            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{continueReadingCard}</div>
+            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{newCard}</div>
           </div>
         </>

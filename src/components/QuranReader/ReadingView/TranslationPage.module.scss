@@ -10,6 +10,14 @@ $translation-content-max-width: 600px;
   padding: var(--spacing-large-px) var(--spacing-medium-plus-px);
   inline-size: 100%;
   box-sizing: border-box;
+
+  &.rtl {
+    direction: rtl;
+  }
+
+  &.ltr {
+    direction: ltr;
+  }
 }
 
 .translationContent {

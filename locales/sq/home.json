@@ -3,6 +3,7 @@
   "begin": "Filloni",
   "calendar-cta": "Kalendari",
   "chapters-and-verses": "Kapitujt dhe vargjet",
+  "continue-learning-plan": "Vazhdo të mësosh",
   "continue-read": "Vazhdo Leximi",
   "explore-topics": "Eksploroni Temat",
   "first-time-reading": "I ri në Kuran? <link> Fillo këtu </link>",
@@ -56,6 +57,7 @@
     "description": "Ndihmoni në përhapjen e Kuranit te nxënësit e rinj",
     "title": "Shpërndaje Kuranin!"
   },
+  "start-learning-plan": "Filloni të mësoni",
   "start-read": "Filloni të lexoni",
   "stay-consistent": "Ndiqni vijat, krijoni qëllime të personalizuara, qëndroni konsistent",
   "tab": {

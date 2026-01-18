@@ -304,14 +304,21 @@ $isNavbarVisible: var(--isNavbarVisible);
     }
 
     @include breakpoints.smallerThanTablet {
-      // TODO: we should add the banner height here if it's shown
-      // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
-      block-size: 100vh;
+      block-size: calc(100vh - $top-menu-height-home);
 
       [dir='rtl'] & {
         transform: translateY($top-menu-height-home);
       }
+    }
+  }
+
+  &[data-is-homepage='false'] {
+    transform: translateY($top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
+
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height);
     }
   }
 }
@@ -335,6 +342,10 @@ $isNavbarVisible: var(--isNavbarVisible);
         transform: translateY($top-menu-height-home);
       }
     }
+  }
+
+  &[data-is-homepage='false'] {
+    padding-block-end: $navbar-height;
   }
 }
 

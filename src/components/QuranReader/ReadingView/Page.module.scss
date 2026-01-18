@@ -20,3 +20,12 @@
     text-align: start;
   }
 }
+
+.translationPageContainer {
+  padding-block-start: constants.$reading-view-container-top-margin;
+}
+
+.chapterHeaderNoTopMargin {
+  // !important needed to override ChapterHeader's default margin since both classes have equal specificity
+  margin-block-start: 0 !important;
+}

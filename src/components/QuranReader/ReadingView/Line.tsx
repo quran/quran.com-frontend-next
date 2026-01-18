@@ -33,7 +33,7 @@ export type LineProps = {
   pageIndex: number;
   lineIndex: number;
   bookmarksRangeUrl: string | null;
-  shouldHideChapterHeader?: boolean;
+  pageHeaderChapterId?: string;
 };
 
 const Line = ({
@@ -43,7 +43,7 @@ const Line = ({
   pageIndex,
   lineIndex,
   bookmarksRangeUrl,
-  shouldHideChapterHeader = false,
+  pageHeaderChapterId,
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
@@ -112,7 +112,7 @@ const Line = ({
         [styles.mobileInline]: isBigTextLayout,
       })}
     >
-      {shouldShowChapterHeader && !shouldHideChapterHeader && (
+      {shouldShowChapterHeader && chapterId !== pageHeaderChapterId && (
         <ChapterHeader
           translationName={translationName}
           translationsCount={translationsCount}
@@ -147,7 +147,8 @@ const Line = ({
  *  1. Check if the line keys are the same.
  *  2. Check if isBigTextLayout values are the same.
  *  3. Check if bookmarksRangeUrl values are the same.
- *  4. Check if the font changed.
+ *  4. Check if pageHeaderChapterId values are the same.
+ *  5. Check if the font changed.
  *
  * If the above conditions are met, it's safe to assume that the result
  * of both renders are the same.
@@ -160,7 +161,7 @@ const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
   prevProps.lineKey === nextProps.lineKey &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
   prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
-  prevProps.shouldHideChapterHeader === nextProps.shouldHideChapterHeader &&
+  prevProps.pageHeaderChapterId === nextProps.pageHeaderChapterId &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,
