@@ -94,7 +94,9 @@ const Select: React.FC<Props> = ({
           </option>
         ))}
       </select>
-      <div className={classNames(styles.arrow, arrowClassName, { [styles.disabledArrow]: disabled })}>
+      <div
+        className={classNames(styles.arrow, arrowClassName, { [styles.disabledArrow]: disabled })}
+      >
         <CaretIcon />
       </div>
     </div>
