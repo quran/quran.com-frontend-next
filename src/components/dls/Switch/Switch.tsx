@@ -31,6 +31,7 @@ type SwitchProps = {
   size?: SwitchSize;
   variant?: SwitchVariant;
   className?: string;
+  shouldHideSeparators?: boolean;
 };
 
 const Switch = ({
@@ -40,6 +41,7 @@ const Switch = ({
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
   className,
+  shouldHideSeparators = false,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
@@ -73,8 +75,9 @@ const Switch = ({
         </button>
       ))}
 
-      {/* seprator  */}
+      {/* separator */}
       {items.length > 2 &&
+        !shouldHideSeparators &&
         range(1, items.length).map((i) => {
           return (
             <div

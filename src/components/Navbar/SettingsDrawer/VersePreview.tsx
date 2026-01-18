@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 
 import classNames from 'classnames';
@@ -29,11 +30,6 @@ const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const HIGHLIGHTED_WORD_POSITION = 3;
 const CONTENT_DELAY = 400;
 
-/**
- * Verse preview component for settings drawer.
- *
- * @returns {JSX.Element} The verse preview UI
- */
 const VersePreview = () => {
   const { t } = useTranslation('quran-reader');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -48,40 +44,33 @@ const VersePreview = () => {
   const [tooltipLeft, setTooltipLeft] = useState(0);
   const [isTooltipReady, setIsTooltipReady] = useState(false);
 
-  // Calculate tooltip position based on highlighted word's location
   useBrowserLayoutEffect(() => {
     let isMounted = true;
-
     const calculatePosition = () => {
       if (!isMounted || !containerRef.current || !sampleVerse?.words || !showContent) return;
-
       const selector = `[data-word-location$=":${HIGHLIGHTED_WORD_POSITION}"]`;
       const wordElement = containerRef.current.querySelector(selector) as HTMLElement;
       if (!wordElement) return;
-
       const containerRect = containerRef.current.getBoundingClientRect();
       const wordRect = wordElement.getBoundingClientRect();
-
       const wordCenterX = wordRect.left + wordRect.width / 2;
-      const left = wordCenterX - containerRect.left;
-
-      setTooltipLeft(left);
+      setTooltipLeft(wordCenterX - containerRect.left);
       setIsTooltipReady(true);
     };
-
     const timeoutId = setTimeout(calculatePosition, 50);
     const resizeObserver = new ResizeObserver(calculatePosition);
-
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
-    }
-
+    if (containerRef.current) resizeObserver.observe(containerRef.current);
     return () => {
       isMounted = false;
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
     };
-  }, [quranReaderStyles.quranFont, quranReaderStyles.quranTextFontScale, showContent, sampleVerse]);
+  }, [
+    quranReaderStyles.quranFont,
+    quranReaderStyles.quranTextFontScale,
+    showContent,
+    sampleVerse?.words,
+  ]);
 
   const handleInteraction = useCallback(() => {
     if (!hasLoggedInteraction.current) {
@@ -93,11 +82,11 @@ const VersePreview = () => {
   const hasBothTooltipTypes =
     showTooltipFor.includes(WordByWordType.Translation) &&
     showTooltipFor.includes(WordByWordType.Transliteration);
-
-  const highlightedWord = useMemo(() => {
-    if (!sampleVerse?.words) return null;
-    return (sampleVerse.words as Word[]).find((w) => w.position === HIGHLIGHTED_WORD_POSITION);
-  }, [sampleVerse?.words]);
+  const highlightedWord = useMemo(
+    () =>
+      (sampleVerse?.words as Word[])?.find((w) => w.position === HIGHLIGHTED_WORD_POSITION) ?? null,
+    [sampleVerse?.words],
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => setShowContent(true), CONTENT_DELAY);
@@ -105,22 +94,21 @@ const VersePreview = () => {
   }, []);
 
   useEffect(() => {
-    if (isQCFFont(quranReaderStyles.quranFont) && sampleVerse) {
-      const fontFaceName = getFontFaceNameForPage(
+    if (!isQCFFont(quranReaderStyles.quranFont) || !sampleVerse) return;
+    const fontFaceName = getFontFaceNameForPage(
+      quranReaderStyles.quranFont as QuranFont,
+      sampleVerse.pageNumber,
+    );
+    const fontFace = new FontFace(
+      fontFaceName,
+      getQCFFontFaceSource(
         quranReaderStyles.quranFont as QuranFont,
         sampleVerse.pageNumber,
-      );
-      const fontFace = new FontFace(
-        fontFaceName,
-        getQCFFontFaceSource(
-          quranReaderStyles.quranFont as QuranFont,
-          sampleVerse.pageNumber,
-          themeVariant,
-        ),
-      );
-      document.fonts.add(fontFace);
-      fontFace.load().then(() => dispatch(addLoadedFontFace(fontFaceName)));
-    }
+        themeVariant,
+      ),
+    );
+    document.fonts.add(fontFace);
+    fontFace.load().then(() => dispatch(addLoadedFontFace(fontFaceName)));
   }, [dispatch, quranReaderStyles.quranFont, sampleVerse, settingsTheme, themeVariant]);
 
   if (!sampleVerse) return <VersePreviewSkeleton />;
