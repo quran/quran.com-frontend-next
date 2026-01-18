@@ -206,7 +206,8 @@ const QuranWord = ({
 
   // Shared handler for both click and keyboard interactions
   const handleInteraction = useCallback(() => {
-    if (word.charTypeName === CharType.End && isTranslationMode) {
+    // Open study mode modal when clicking ayah number (in both reading and translation mode)
+    if (word.charTypeName === CharType.End) {
       dispatch(setReadingViewHoveredVerseKey(null));
       setHighlightedWordLocation(undefined);
       setIsStudyModeModalOpen(true);
@@ -286,22 +287,21 @@ const QuranWord = ({
   }, [handleWordAction]);
 
   const onMouseEnter = useCallback(() => {
-    if (word.charTypeName === CharType.End && isTranslationMode) {
+    if (word.charTypeName === CharType.End) {
       dispatch(setReadingViewHoveredVerseKey(word.verseKey));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
-  }, [word.charTypeName, word.verseKey, isTranslationMode]);
+  }, [word.charTypeName, word.verseKey]);
 
   const onMouseLeave = useCallback(() => {
-    if (word.charTypeName === CharType.End && isTranslationMode) {
+    if (word.charTypeName === CharType.End) {
       dispatch(setReadingViewHoveredVerseKey(null));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
-  }, [word.charTypeName, isTranslationMode]);
+  }, [word.charTypeName]);
 
-  // Allow clicking on ayah number in translation mode for study mode modal
-  const shouldHandleWordClicking =
-    !isWordInteractionDisabled && (word.charTypeName !== CharType.End || isTranslationMode);
+  // Allow clicking on ayah number in both reading and translation mode for study mode modal
+  const shouldHandleWordClicking = !isWordInteractionDisabled;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
@@ -361,7 +361,8 @@ const QuranWord = ({
             );
           }
 
-          if (isReadingModeMobile && !isWordInteractionDisabled) {
+          // Exclude ayah numbers from mobile modal wrapping - they open study mode directly
+          if (isReadingModeMobile && !isWordInteractionDisabled && word.charTypeName !== CharType.End) {
             return (
               <>
                 <div
@@ -384,7 +385,8 @@ const QuranWord = ({
             );
           }
 
-          if (isReadingModeDesktop && !isWordInteractionDisabled) {
+          // Exclude ayah numbers from desktop popover wrapping - they open study mode directly
+          if (isReadingModeDesktop && !isWordInteractionDisabled && word.charTypeName !== CharType.End) {
             return (
               <ReadingViewWordPopover
                 word={word}

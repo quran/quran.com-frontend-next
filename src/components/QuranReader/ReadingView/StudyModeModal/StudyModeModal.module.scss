@@ -1,27 +1,33 @@
 @use 'src/styles/breakpoints';
 
-$study-mode-modal-width: 1310px;
-$study-mode-modal-content-width: 1230px;
-
 .container {
   padding: 0;
-
-  @include breakpoints.tablet {
-    min-inline-size: $study-mode-modal-width;
-  }
 }
 
 .contentModal {
   padding: var(--spacing-small);
+  display: flex;
+  flex-direction: column;
+  // Flexible height - grows with content, max at 90vh
+  max-block-size: 90vh;
+  // Responsive width matching TranslationView pattern
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow-x: hidden;
 
   @include breakpoints.tablet {
     padding: var(--spacing-xlarge-px);
-    min-inline-size: $study-mode-modal-content-width;
+    max-block-size: 85vh;
+    // Match TranslationView: 80% width, centered
+    inline-size: 80%;
+    max-inline-size: 80%;
   }
 }
 
 .innerContent {
   padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .header {
@@ -30,6 +36,7 @@ $study-mode-modal-content-width: 1230px;
   gap: var(--spacing-small-px);
   inline-size: 100%;
   margin-block-end: var(--spacing-small);
+  flex-shrink: 0;
 
   @include breakpoints.tablet {
     margin-block-end: var(--spacing-xlarge-px);
@@ -93,4 +100,45 @@ $study-mode-modal-content-width: 1230px;
   min-block-size: calc(var(--spacing-mega-px) * 2);
   padding: var(--spacing-mega);
   color: var(--color-error-medium);
+}
+
+// Bottom sheet overlay - positions content at bottom
+div {
+  &.bottomSheetOverlay {
+    @include breakpoints.tablet {
+      overflow-y: hidden;
+      align-items: flex-end;
+      justify-items: center;
+      padding-block-start: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+// Bottom sheet content - full height from bottom
+div {
+  &.bottomSheetContent {
+    @include breakpoints.tablet {
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+      block-size: 95vh !important;
+      max-block-size: 95vh !important;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden !important;
+      margin-block-end: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+// Inner content scrollable for bottom sheet mode
+div {
+  &.bottomSheetInnerContent {
+    @include breakpoints.tablet {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      min-block-size: 0;
+    }
+  }
 }

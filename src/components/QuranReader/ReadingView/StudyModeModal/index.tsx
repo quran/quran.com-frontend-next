@@ -1,27 +1,36 @@
 /* eslint-disable max-lines */
 import React, { useState, useCallback, useContext, useEffect, useMemo } from 'react';
 
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
+import SearchableVerseSelector from './SearchableVerseSelector';
 import StudyModeBody from './StudyModeBody';
 import { StudyModeTabId } from './StudyModeBottomActions';
 import styles from './StudyModeModal.module.scss';
 
 import { fetcher } from '@/api';
-import SurahAndAyahSelection from '@/components/QuranReader/TafsirView/SurahAndAyahSelection';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import Spinner from '@/dls/Spinner/Spinner';
 import ArrowIcon from '@/icons/arrow.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
 import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import {
+  fakeNavigate,
+  getVerseSelectedTafsirNavigationUrl,
+  getVerseReflectionNavigationUrl,
+  getVerseLessonNavigationUrl,
+} from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 interface Props {
@@ -48,9 +57,12 @@ const StudyModeModal: React.FC<Props> = ({
   initialActiveTab,
 }) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
+  const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
+
   // Derive verseKey from word if provided, otherwise use direct verseKey prop
   const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
   const initialChapterId = getChapterNumberFromKey(derivedVerseKey).toString();
@@ -58,12 +70,19 @@ const StudyModeModal: React.FC<Props> = ({
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
 
+  // URL navigation state
+  const [originalUrl, setOriginalUrl] = useState<string>('');
+  const [activeContentTab, setActiveContentTab] = useState<StudyModeTabId | null>(
+    initialActiveTab ?? null,
+  );
+
   // Word navigation state
   const [selectedWordLocation, setSelectedWordLocation] = useState<string | undefined>(
     highlightedWordLocation,
   );
   const [showWordBox, setShowWordBox] = useState<boolean>(!!highlightedWordLocation);
 
+  // Save original URL when modal opens
   useEffect(() => {
     let isMounted = true;
     if (isOpen && isMounted) {
@@ -73,11 +92,13 @@ const StudyModeModal: React.FC<Props> = ({
       setSelectedVerseNumber(getVerseNumberFromKey(currentVerseKey).toString());
       setSelectedWordLocation(highlightedWordLocation);
       setShowWordBox(!!highlightedWordLocation);
+      setOriginalUrl(router.asPath);
+      setActiveContentTab(initialActiveTab ?? null);
     }
     return () => {
       isMounted = false;
     };
-  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation]);
+  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation, router.asPath, initialActiveTab]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
@@ -172,14 +193,55 @@ const StudyModeModal: React.FC<Props> = ({
   const canNavigateWordPrev = currentWordIndex > 0;
   const canNavigateWordNext = currentWordIndex < quranWords.length - 1;
 
+  // Handle tab change with URL updates
+  const handleTabChange = useCallback(
+    (tabId: StudyModeTabId | null) => {
+      setActiveContentTab(tabId);
+      const currentVerseKey = `${selectedChapterId}:${selectedVerseNumber}`;
+
+      if (tabId === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            selectedChapterId,
+            Number(selectedVerseNumber),
+            tafsirs[0],
+          ),
+          router.locale,
+        );
+      } else if (tabId === StudyModeTabId.REFLECTIONS) {
+        fakeNavigate(getVerseReflectionNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.LESSONS) {
+        fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === null) {
+        fakeNavigate(originalUrl, router.locale);
+      }
+    },
+    [selectedChapterId, selectedVerseNumber, tafsirs, router.locale, originalUrl],
+  );
+
+  // Handle modal close with URL restoration
+  const handleClose = useCallback(() => {
+    if (originalUrl) {
+      fakeNavigate(originalUrl, router.locale);
+    }
+    onClose();
+  }, [originalUrl, router.locale, onClose]);
+
+  // Check if a content tab is active for bottom sheet styling
+  const isContentTabActive =
+    activeContentTab &&
+    [StudyModeTabId.TAFSIR, StudyModeTabId.REFLECTIONS, StudyModeTabId.LESSONS].includes(
+      activeContentTab,
+    );
+
   const header = (
     <div className={styles.header}>
       <div className={styles.selectionWrapper}>
-        <SurahAndAyahSelection
+        <SearchableVerseSelector
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
-          onChapterIdChange={handleChapterChange}
-          onVerseNumberChange={handleVerseChange}
+          onChapterChange={handleChapterChange}
+          onVerseChange={handleVerseChange}
         />
       </div>
       <Button
@@ -231,7 +293,8 @@ const StudyModeModal: React.FC<Props> = ({
           canNavigateWordNext={canNavigateWordNext}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
-          initialActiveTab={initialActiveTab}
+          activeTab={activeContentTab}
+          onTabChange={handleTabChange}
         />
       );
     }
@@ -245,12 +308,19 @@ const StudyModeModal: React.FC<Props> = ({
   return (
     <ContentModal
       isOpen={isOpen}
-      onClose={onClose}
-      onEscapeKeyDown={onClose}
+      onClose={handleClose}
+      onEscapeKeyDown={handleClose}
       header={header}
       hasCloseButton
-      contentClassName={styles.contentModal}
-      innerContentClassName={styles.innerContent}
+      contentClassName={classNames(styles.contentModal, {
+        [styles.bottomSheetContent]: isContentTabActive,
+      })}
+      overlayClassName={classNames({
+        [styles.bottomSheetOverlay]: isContentTabActive,
+      })}
+      innerContentClassName={classNames(styles.innerContent, {
+        [styles.bottomSheetInnerContent]: isContentTabActive,
+      })}
     >
       {renderContent()}
     </ContentModal>

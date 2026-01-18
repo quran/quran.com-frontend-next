@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -62,7 +62,8 @@ interface StudyModeBodyProps {
   canNavigateWordNext: boolean;
   selectedChapterId: string;
   selectedVerseNumber: string;
-  initialActiveTab?: StudyModeTabId | null;
+  activeTab?: StudyModeTabId | null;
+  onTabChange?: (tabId: StudyModeTabId | null) => void;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -80,18 +81,38 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   canNavigateWordNext,
   selectedChapterId,
   selectedVerseNumber,
-  initialActiveTab,
+  activeTab,
+  onTabChange,
 }) => {
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
+  const tabContentRef = useRef<HTMLDivElement>(null);
 
-  // Active tab state - initialized from prop if provided, otherwise null
-  const [activeTab, setActiveTab] = useState<StudyModeTabId | null>(initialActiveTab ?? null);
+  // Smooth scroll to tab content when a tab is opened
+  useEffect(() => {
+    if (activeTab && tabContentRef.current) {
+      // Small delay to ensure the content is rendered
+      setTimeout(() => {
+        if (tabContentRef.current) {
+          const scrollContainer = tabContentRef.current.closest(`.${styles.container}`)?.parentElement;
+          if (scrollContainer) {
+            const tabContentTop = tabContentRef.current.offsetTop;
+            // Scroll to tab content with 80px offset above
+            scrollContainer.scrollTo({
+              top: tabContentTop - 80,
+              behavior: 'smooth',
+            });
+          }
+        }
+      }, 100);
+    }
+  }, [activeTab]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
-    setActiveTab((current) => (current === tabId ? null : tabId));
+    const newTab = activeTab === tabId ? null : tabId;
+    onTabChange?.(newTab);
   };
 
   const tabs = [
@@ -186,13 +207,20 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
           </div>
         ))}
       </div>
+
+      {/* Bottom actions after verse and translations */}
       <StudyModeBottomActions tabs={tabs} activeTab={activeTab} />
 
+      {/* Tab content appears below bottom actions */}
       {activeTab &&
         TAB_COMPONENTS[activeTab] &&
         (() => {
           const TabComponent = TAB_COMPONENTS[activeTab];
-          return <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />;
+          return (
+            <div ref={tabContentRef} className={styles.tabContentContainer}>
+              <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
+            </div>
+          );
         })()}
     </div>
   );

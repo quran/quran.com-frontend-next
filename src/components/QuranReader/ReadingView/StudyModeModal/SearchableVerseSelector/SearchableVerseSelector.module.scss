@@ -1,0 +1,179 @@
+@use 'src/styles/breakpoints';
+
+// Main container with position relative for dropdown positioning
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+// Collapsed view - shows chapter : verse buttons
+.collapsedContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+}
+
+.selectorButton {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xsmall) var(--spacing-small);
+  background-color: var(--color-background-alternative-faint);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
+}
+
+.buttonText {
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+  white-space: nowrap;
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal);
+  }
+}
+
+.separator {
+  color: var(--color-text-faded);
+  font-size: var(--font-size-normal);
+}
+
+// Dropdown container - absolute positioned
+.dropdownContainer {
+  position: absolute;
+  top: calc(100% + var(--spacing-xxsmall));
+  inset-inline-start: 0;
+  z-index: var(--z-index-dropdown);
+  background-color: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  min-width: 250px;
+  max-width: 300px;
+  box-shadow: var(--shadow-large);
+
+  @include breakpoints.tablet {
+    min-width: 280px;
+    max-width: 320px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-bottom: 1px solid var(--color-borders-hairline);
+}
+
+.title {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxsmall);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-small);
+  color: var(--color-text-faded);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+    color: var(--color-text-default);
+  }
+
+  svg {
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+  }
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-bottom: 1px solid var(--color-borders-hairline);
+}
+
+.searchIcon {
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+  color: var(--color-text-faded);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+  padding: 0;
+
+  &::placeholder {
+    color: var(--color-text-faded);
+  }
+}
+
+.listContainer {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: var(--spacing-xxsmall) 0;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  width: 100%;
+  padding: var(--spacing-small) var(--spacing-medium);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: start;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+  }
+}
+
+.selectedItem {
+  background-color: var(--color-background-alternative-medium);
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
+}
+
+.itemNumber {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  min-width: 24px;
+}
+
+.itemName {
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+}
+
+.noResults {
+  padding: var(--spacing-medium);
+  text-align: center;
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+}

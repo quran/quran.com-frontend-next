@@ -1,0 +1,211 @@
+import React, { useState, useCallback, useContext, useMemo, useRef, useEffect } from 'react';
+
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+
+import styles from './SearchableVerseSelector.module.scss';
+
+import DataContext from '@/contexts/DataContext';
+import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
+import CloseIcon from '@/icons/close.svg';
+import SearchIcon from '@/icons/search.svg';
+import { toLocalizedNumber } from '@/utils/locale';
+
+type SelectionMode = 'none' | 'chapter' | 'verse';
+
+interface SearchableVerseSelectorProps {
+  selectedChapterId: string;
+  selectedVerseNumber: string;
+  onChapterChange: (chapterId: string) => void;
+  onVerseChange: (verseNumber: string) => void;
+}
+
+const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
+  selectedChapterId,
+  selectedVerseNumber,
+  onChapterChange,
+  onVerseChange,
+}) => {
+  const { t, lang } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
+  const [selectionMode, setSelectionMode] = useState<SelectionMode>('none');
+  const [searchQuery, setSearchQuery] = useState('');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Get current chapter name for display
+  const currentChapter = chaptersData[Number(selectedChapterId)];
+  const chapterDisplayText = currentChapter?.transliteratedName || `Surah ${selectedChapterId}`;
+  const verseDisplayText = toLocalizedNumber(Number(selectedVerseNumber), lang);
+
+  // Reset search when closing
+  const handleClose = useCallback(() => {
+    setSelectionMode('none');
+    setSearchQuery('');
+  }, []);
+
+  // Close when clicking outside
+  useOutsideClickDetector(containerRef, handleClose, selectionMode !== 'none');
+
+  // Focus input when selection mode changes
+  useEffect(() => {
+    if (selectionMode !== 'none' && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [selectionMode]);
+
+  // Filter chapters based on search
+  const filteredChapters = useMemo(() => {
+    if (!chaptersData) return [];
+
+    const query = searchQuery.toLowerCase().trim();
+
+    return Object.entries(chaptersData)
+      .filter(([id, chapter]) => {
+        if (!query) return true;
+        const chapterName = chapter.transliteratedName.toLowerCase();
+        return chapterName.includes(query) || id.startsWith(query);
+      })
+      .map(([id, chapter]) => ({
+        id,
+        name: chapter.transliteratedName,
+        versesCount: chapter.versesCount,
+      }));
+  }, [chaptersData, searchQuery]);
+
+  // Generate verse options for selected chapter
+  const verseOptions = useMemo(() => {
+    if (!currentChapter) return [];
+    const verses = [];
+    for (let i = 1; i <= currentChapter.versesCount; i += 1) {
+      verses.push(i);
+    }
+    return verses;
+  }, [currentChapter]);
+
+  // Filter verses based on search
+  const filteredVerses = useMemo(() => {
+    const query = searchQuery.trim();
+    if (!query) return verseOptions;
+    return verseOptions.filter((v) => v.toString().startsWith(query));
+  }, [verseOptions, searchQuery]);
+
+  const handleChapterClick = useCallback(() => {
+    setSelectionMode('chapter');
+    setSearchQuery('');
+  }, []);
+
+  const handleVerseClick = useCallback(() => {
+    setSelectionMode('verse');
+    setSearchQuery('');
+  }, []);
+
+  const handleSelectChapter = useCallback(
+    (chapterId: string) => {
+      onChapterChange(chapterId);
+      onVerseChange('1');
+      setSelectionMode('none');
+      setSearchQuery('');
+    },
+    [onChapterChange, onVerseChange],
+  );
+
+  const handleSelectVerse = useCallback(
+    (verseNumber: number) => {
+      onVerseChange(verseNumber.toString());
+      setSelectionMode('none');
+      setSearchQuery('');
+    },
+    [onVerseChange],
+  );
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  }, []);
+
+  const isExpanded = selectionMode !== 'none';
+  const isChapterMode = selectionMode === 'chapter';
+  const title = isChapterMode
+    ? t('select-chapter') || 'Select Chapter'
+    : t('select-ayah') || 'Select Ayah';
+
+  return (
+    <div ref={containerRef} className={styles.container}>
+      <div className={styles.collapsedContainer}>
+        <button type="button" className={styles.selectorButton} onClick={handleChapterClick}>
+          <span className={styles.buttonText}>{chapterDisplayText}</span>
+        </button>
+        <span className={styles.separator}>:</span>
+        <button type="button" className={styles.selectorButton} onClick={handleVerseClick}>
+          <span className={styles.buttonText}>{verseDisplayText}</span>
+        </button>
+      </div>
+
+      {isExpanded && (
+        <div className={styles.dropdownContainer}>
+          <div className={styles.header}>
+            <span className={styles.title}>{title}</span>
+            <button
+              type="button"
+              className={styles.closeButton}
+              onClick={handleClose}
+              aria-label="Close"
+            >
+              <CloseIcon />
+            </button>
+          </div>
+
+          <div className={styles.searchWrapper}>
+            <SearchIcon className={styles.searchIcon} />
+            <input
+              ref={inputRef}
+              type="text"
+              className={styles.searchInput}
+              placeholder={t('search') || 'Search'}
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
+
+          <div className={styles.listContainer}>
+            {isChapterMode
+              ? filteredChapters.map((chapter) => (
+                  <button
+                    key={chapter.id}
+                    type="button"
+                    className={classNames(styles.listItem, {
+                      [styles.selectedItem]: chapter.id === selectedChapterId,
+                    })}
+                    onClick={() => handleSelectChapter(chapter.id)}
+                  >
+                    <span className={styles.itemNumber}>{chapter.id}.</span>
+                    <span className={styles.itemName}>{chapter.name}</span>
+                  </button>
+                ))
+              : filteredVerses.map((verse) => (
+                  <button
+                    key={verse}
+                    type="button"
+                    className={classNames(styles.listItem, {
+                      [styles.selectedItem]: verse.toString() === selectedVerseNumber,
+                    })}
+                    onClick={() => handleSelectVerse(verse)}
+                  >
+                    <span className={styles.itemName}>
+                      {t('ayah') || 'Ayah'} {toLocalizedNumber(verse, lang)}
+                    </span>
+                  </button>
+                ))}
+
+            {((isChapterMode && filteredChapters.length === 0) ||
+              (!isChapterMode && filteredVerses.length === 0)) && (
+              <div className={styles.noResults}>{t('no-results') || 'No results found'}</div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchableVerseSelector;
