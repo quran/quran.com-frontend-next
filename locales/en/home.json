@@ -3,13 +3,12 @@
   "begin": "Begin",
   "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
+  "continue-learning-plan": "Continue learning",
   "continue-read": "Continue Reading",
   "explore-topics": "Explore Topics",
   "first-time-reading": "New to the Quran? <link>Start here</link>",
   "grow-beyond-ramadan": "Grow with us <modalLink>Beyond Ramadan</modalLink>",
   "know-someone": "Grow with us this <modalLink>Ramadan</modalLink>",
-  "start-learning-plan": "Start learning",
-  "continue-learning-plan": "Continue learning",
   "learning-plan": "Learning Plans",
   "listen-to-radio": "Listen to Quran Radio",
   "my-quran": "My Quran",
@@ -58,6 +57,7 @@
     "description": "Help spread the Quran to new learners",
     "title": "Share the Quran!"
   },
+  "start-learning-plan": "Start learning",
   "start-read": "Start Reading",
   "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
   "tab": {

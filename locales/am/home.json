@@ -3,6 +3,7 @@
   "begin": "ይጀምሩ",
   "calendar-cta": "የቀን መቁጠሪያ",
   "chapters-and-verses": "ምዕራፎች እና አንቀፆች",
+  "continue-learning-plan": "መማርዎን ይቀጥሉ",
   "continue-read": "ማንበቡን ይቀጥሉ",
   "explore-topics": "ርዕሶችን ያስሱ",
   "first-time-reading": "ለቁርዓን አዲስ ነዎት? <link> እዚህ ይጀምሩ</link>",
@@ -56,6 +57,7 @@
     "description": "ቁርኣንን ለአዲስ ተማሪዎች ለማዳረስ ይርዱ",
     "title": "ቁርኣንን ተጋሩ!"
   },
+  "start-learning-plan": "መማር ጀምር",
   "start-read": "ማንበብ ጀምር",
   "stay-consistent": "ዱካዎችን ይከታተሉ፣ የራስዎን ግቦችን ይፍጠሩ፣ ወጥነት ባለው መልኩ ይቆዩ",
   "tab": {
