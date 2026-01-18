@@ -8,6 +8,7 @@ import NotesTabContent from './NotesTabContent';
 
 import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
 import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
+import useRefocusAndReconnect from '@/hooks/useRefocusAndReconnect';
 import { GetAllNotesResponse } from '@/types/auth/Note';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { getAllNotes } from '@/utils/auth/api';
@@ -40,13 +41,31 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     return makeNotesUrl({ ...baseConfig, sortBy, cursor: endCursor });
   };
 
+  /**
+   * Custom revalidation strategy for infinite scroll with SWR
+   *
+   * Problem: Using `revalidateAll: true` with useSWRInfinite causes a performance issue
+   * where all pages are fetched every time a new page is loaded. Loading N pages
+   * results in N(N+1)/2 requests instead of just N requests.
+   *
+   * Reference: https://github.com/vercel/swr/issues/590#issuecomment-2166199620
+   *
+   * Solution: We disable all built-in revalidation options and implement custom logic:
+   * 1. Disable revalidateFirstPage, revalidateOnReconnect, and revalidateOnFocus
+   * 2. Use a custom hook (useRefocusAndReconnect) to manually trigger mutate()
+   *    when the window refocuses or network reconnects
+   *
+   * Note: Calling mutate() without arguments revalidates all pages, which is the desired
+   * behavior when changes occur (on focus/reconnect). The trade-off is writing extra code
+   * for manual control instead of using built-in SWR options.
+   */
   const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
     async (key) => getNotes(sortBy, key),
     {
       revalidateFirstPage: false,
-      revalidateOnReconnect: true,
-      revalidateOnFocus: true,
+      revalidateOnReconnect: false,
+      revalidateOnFocus: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     },
   );
@@ -68,6 +87,14 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   const mutateCache = useCallback(() => {
     mutate();
   }, [mutate]);
+
+  /**
+   * Trigger manual revalidation when window refocuses or network reconnects
+   * This replaces the built-in revalidateOnFocus and revalidateOnReconnect options
+   * to avoid the performance issue with revalidateAll in infinite scroll scenarios.
+   * Note: mutate() will revalidate all cached pages.
+   */
+  useRefocusAndReconnect(mutateCache);
 
   return (
     <div className={styles.container}>
