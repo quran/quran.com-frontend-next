@@ -74,11 +74,26 @@ export const quranReaderStylesSlice = createSlice({
       const isUsingDefaultFont =
         defaultQuranStylesForLocale.quranFont === quranFont &&
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
-      return {
-        ...state,
-        quranFont,
-        isUsingDefaultFont,
-      };
+      switch (quranFont) {
+        case QuranFont.MadaniV1:
+          return {
+            ...state,
+            quranFont,
+            isUsingDefaultFont,
+          };
+        case QuranFont.IndoPak:
+          return {
+            ...state,
+            quranFont,
+            isUsingDefaultFont,
+          };
+        default:
+          return {
+            ...state,
+            quranFont,
+            isUsingDefaultFont,
+          };
+      }
     },
   },
   // reset the state to the initial state
