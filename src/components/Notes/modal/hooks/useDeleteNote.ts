@@ -48,7 +48,6 @@ const useDeleteNote = ({ onSuccess }: UseDeleteNoteProps): UseDeleteNoteReturn =
       onSuccess: (response, note) => {
         if (!note) return;
         toast(t('delete-success'), { status: ToastStatus.Success });
-        onSuccess?.(response);
 
         if (note) {
           invalidateCache({
@@ -63,6 +62,7 @@ const useDeleteNote = ({ onSuccess }: UseDeleteNoteProps): UseDeleteNoteReturn =
 
         setShowDeleteConfirmation(false);
         clearDeleteNote();
+        onSuccess?.(response);
       },
       onError: (error, note) => {
         toast(t('common:error.general'), { status: ToastStatus.Error });

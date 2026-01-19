@@ -43,7 +43,6 @@ const usePostNoteToQR = ({ onSuccess }: UsePostNoteToQRProps): UsePostNoteToQRRe
     onSuccess: (response, note) => {
       if (!note) return;
       toast(t('export-success'), { status: ToastStatus.Success });
-      onSuccess?.(response);
 
       invalidateCache({
         mutate,
@@ -56,6 +55,7 @@ const usePostNoteToQR = ({ onSuccess }: UsePostNoteToQRProps): UsePostNoteToQRRe
 
       setShowConfirmationModal(false);
       setNoteToPost(null);
+      onSuccess?.(response);
     },
     onError: (error, note) => {
       toast(t('common:error.general'), { status: ToastStatus.Error });

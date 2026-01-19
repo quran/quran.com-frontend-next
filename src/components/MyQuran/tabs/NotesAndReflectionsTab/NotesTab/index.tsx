@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import useSWRInfinite from 'swr/infinite';
 
@@ -70,7 +70,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     },
   );
 
-  const notes = data ? data.map((response) => response.data).flat() : [];
+  const notes = useMemo(() => (data ? data.map((response) => response.data).flat() : []), [data]);
   const notesWithRecentReflection = useNotesWithRecentReflection(notes);
 
   const lastPageData = data?.[data.length - 1];

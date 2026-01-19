@@ -8,7 +8,6 @@ import styles from '../NotesAndReflectionsTab.module.scss';
 import CardsSkeleton from '@/components/MyQuran/Skeleton';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
-import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
 import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
@@ -58,8 +57,6 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
   const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
     onSuccess: mutateCache,
   });
-
-  const notesWithPostUrl = useNotesWithRecentReflection(notes);
 
   const handleEditNote = useCallback((note: Note) => {
     setSelectedNote(note);
@@ -111,9 +108,9 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
 
   return (
     <>
-      <div style={{ minBlockSize: notesWithPostUrl.length * PROXIMATE_NOTE_HEIGHT }}>
+      <div style={{ minBlockSize: notes.length * PROXIMATE_NOTE_HEIGHT }}>
         <Virtuoso
-          data={notesWithPostUrl}
+          data={notes}
           className={styles.virtuosoList}
           overscan={10}
           increaseViewportBy={100}

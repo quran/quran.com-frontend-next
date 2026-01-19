@@ -54,8 +54,6 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
       const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
 
-      onSuccess?.({ note: noteFromResponse, isPublished: !isFailedToPublish });
-
       if (isFailedToPublish) {
         toast(t('notes:update-publish-failed'), { status: ToastStatus.Error });
       } else {
@@ -74,6 +72,8 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         invalidateReflections: isPublic,
         action: CacheAction.UPDATE,
       });
+
+      onSuccess?.({ note: noteFromResponse, isPublished: !isFailedToPublish });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;
