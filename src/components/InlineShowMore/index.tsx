@@ -68,7 +68,7 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   }, []);
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={classNames(styles.container, className)} dir="auto">
       <div className={styles.textWrapper}>
         <div
           ref={contentRef}

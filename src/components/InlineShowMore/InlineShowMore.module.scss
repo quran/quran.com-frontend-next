@@ -30,21 +30,18 @@
   position: absolute;
   inset-block-end: 0;
   inset-inline-end: 0;
-
-  [dir='rtl'] & {
-    inset-inline-end: 0;
-    inset-block-end: var(--spacing-hairline-px);
-  }
+  padding-inline-start: var(--spacing-mega);
+  padding-inline-end: var(--spacing-xxsmall-px);
 
   background: linear-gradient(
     to right,
     transparent,
     var(--background-color) var(--fade-stop-percentage)
   );
-  padding-inline-start: var(--spacing-mega);
-  padding-inline-end: var(--spacing-xxsmall-px);
 
-  [dir='rtl'] & {
+  :dir(rtl) & {
+    inset-inline-end: 0;
+    inset-block-end: var(--spacing-hairline-px);
     background: linear-gradient(
       to left,
       transparent,
