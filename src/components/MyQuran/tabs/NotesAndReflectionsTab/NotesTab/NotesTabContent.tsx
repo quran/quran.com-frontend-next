@@ -88,7 +88,7 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
 
   if (error) {
     return (
-      <div className={styles.statusContainer} data-error="true">
+      <div className={styles.statusContainer} data-status="error">
         {t('common:error.general')}
       </div>
     );
@@ -98,10 +98,8 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
 
   if (isEmpty) {
     return (
-      <div className={styles.statusContainer}>
-        <div className={styles.emptyState}>
-          <p>{t('empty-notes')}</p>
-        </div>
+      <div className={styles.statusContainer} data-status="empty">
+        {t('empty-notes')}
       </div>
     );
   }

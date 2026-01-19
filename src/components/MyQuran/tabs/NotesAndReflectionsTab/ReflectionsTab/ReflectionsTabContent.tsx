@@ -39,7 +39,7 @@ const ReflectionsTabContent: React.FC<ReflectionsTabContentProps> = ({
 
   if (error) {
     return (
-      <div className={styles.statusContainer} data-error="true">
+      <div className={styles.statusContainer} data-status="error">
         {t('common:error.general')}
       </div>
     );
@@ -49,10 +49,8 @@ const ReflectionsTabContent: React.FC<ReflectionsTabContentProps> = ({
 
   if (isEmpty) {
     return (
-      <div className={styles.statusContainer}>
-        <div className={styles.emptyState}>
-          <p>{t('empty-reflections')}</p>
-        </div>
+      <div className={styles.statusContainer} data-status="empty">
+        {t('empty-reflections')}
       </div>
     );
   }

@@ -26,12 +26,19 @@
   min-block-size: calc(3 * var(--spacing-max));
   color: var(--color-text-faded-new);
 
-  &[data-error='true'] {
+  &:where([data-status='empty'], [data-status='error']) {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-faded-new);
+    text-align: center;
+    text-wrap: balance;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-large2);
+    }
+  }
+
+  &[data-status='error'] {
     color: var(--color-text-error);
   }
-}
-
-.emptyState {
-  text-align: center;
-  color: var(--color-text-faded-new);
 }
