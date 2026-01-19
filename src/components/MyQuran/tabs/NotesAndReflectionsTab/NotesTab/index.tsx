@@ -64,8 +64,9 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     async (key) => getNotes(sortBy, key),
     {
       revalidateFirstPage: false,
-      revalidateOnReconnect: false,
+      revalidateOnMount: true,
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     },
   );

@@ -87,7 +87,7 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
         {!expanded && needsTruncation && showReadMore && (
           <div className={styles.fadeOverlay}>
             <button type="button" className={styles.moreBtn} onClick={toggleExpanded}>
-              ... <span>{readMoreText ?? t('read-more')}</span>
+              <span>{readMoreText ?? t('read-more')}</span>
             </button>
           </div>
         )}

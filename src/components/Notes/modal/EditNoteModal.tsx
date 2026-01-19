@@ -5,13 +5,13 @@ import { useSWRConfig } from 'swr';
 
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
-import { addReflectionEntityToNote } from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
   CacheAction,
+  addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -26,6 +26,7 @@ interface EditNoteModalProps {
   isModalOpen: boolean;
   onModalClose: () => void;
   onSuccess?: (data: { note: Note; isPublished: boolean }) => void;
+  flushNotesList?: boolean;
 }
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
@@ -35,6 +36,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   isModalOpen,
   onModalClose,
   onSuccess,
+  flushNotesList = false,
 }) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('notes');
@@ -70,10 +72,11 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
             : addReflectionEntityToNote({ ...note, ...noteFromResponse }, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
+        flushNotesList,
         action: CacheAction.UPDATE,
       });
 
-      onSuccess?.({ note: noteFromResponse, isPublished: !isFailedToPublish });
+      onSuccess?.({ note: noteFromResponse, isPublished: isPublic && !isFailedToPublish });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
       throw error;

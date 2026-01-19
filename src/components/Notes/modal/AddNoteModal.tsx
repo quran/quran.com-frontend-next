@@ -3,13 +3,13 @@ import { useSWRConfig } from 'swr';
 
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
-import { addReflectionEntityToNote } from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   CacheAction,
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
+  addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { addNote } from '@/utils/auth/api';
@@ -60,6 +60,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
             : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
+        flushNotesList: true,
         action: CacheAction.CREATE,
       });
     } catch (error) {

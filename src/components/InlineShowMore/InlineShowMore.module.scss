@@ -1,12 +1,13 @@
 .container {
   inline-size: 100%;
-  font-size: var(--font-size-xsmall-px);
-  line-height: var(--line-height-large);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-bold);
+  line-height: inherit;
   margin: 0;
 
-  --background-color: var(--color-background-alternative-faint-new);
-  --text-color: var(--color-text-link-new);
-  --fade-stop-percentage: 25%;
+  --_background-color: var(--background-color, var(--color-background-alternative-faint-new));
+  --_text-color: var(--text-color, var(--color-text-link-new));
+  --_fade-stop-percentage: var(--fade-stop-percentage, 45%);
 }
 
 .textWrapper {
@@ -30,13 +31,13 @@
   position: absolute;
   inset-block-end: 0;
   inset-inline-end: 0;
-  padding-inline-start: var(--spacing-mega);
-  padding-inline-end: var(--spacing-xxsmall-px);
+  padding-inline-start: calc(var(--spacing-mega) * 2.5);
+  padding-inline-end: var(--spacing-micro2-px);
 
   background: linear-gradient(
     to right,
     transparent,
-    var(--background-color) var(--fade-stop-percentage)
+    var(--_background-color) var(--_fade-stop-percentage)
   );
 
   :dir(rtl) & {
@@ -45,7 +46,7 @@
     background: linear-gradient(
       to left,
       transparent,
-      var(--background-color) var(--fade-stop-percentage)
+      var(--_background-color) var(--_fade-stop-percentage)
     );
   }
 }
@@ -54,18 +55,18 @@
 .lessBtn {
   display: inline;
   cursor: pointer;
-  font-weight: var(--font-weight-bold);
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
   background: none;
   border: none;
   padding: 0;
-  font-size: inherit;
   line-height: inherit;
   font-family: inherit;
   white-space: nowrap;
-  color: inherit;
 
   span {
-    color: var(--text-color);
+    color: var(--_text-color);
   }
 
   &:hover span {

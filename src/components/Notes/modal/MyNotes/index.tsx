@@ -41,10 +41,10 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR({});
+  } = usePostNoteToQR({ flushNotesList: true });
 
   const { showDeleteConfirmation, noteToDelete, isDeletingNote, handleDeleteNoteClick } =
-    useDeleteNote({});
+    useDeleteNote({ flushNotesList: true });
 
   return (
     <>

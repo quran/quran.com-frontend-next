@@ -51,8 +51,9 @@ const ReflectionsTab: React.FC = () => {
   const { data, size, setSize, isValidating, error, mutate } =
     useSWRInfinite<GetUserReflectionsResponse>(getKey, getReflections, {
       revalidateFirstPage: false,
-      revalidateOnReconnect: false,
+      revalidateOnMount: true,
       revalidateOnFocus: false,
+      revalidateOnReconnect: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     });
 

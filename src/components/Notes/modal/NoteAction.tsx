@@ -142,6 +142,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
         onBack={openMyNotesModal}
+        flushNotesList
       />
     </>
   );

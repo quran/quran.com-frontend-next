@@ -3,7 +3,7 @@ import { useCallback, useContext, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility';
+import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility/cache';
 import DataContext from '@/contexts/DataContext';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -23,9 +23,13 @@ interface UseDeleteNoteReturn {
 
 interface UseDeleteNoteProps {
   onSuccess?: (response: Awaited<ReturnType<typeof deleteNote>>) => void;
+  flushNotesList?: boolean;
 }
 
-const useDeleteNote = ({ onSuccess }: UseDeleteNoteProps): UseDeleteNoteReturn => {
+const useDeleteNote = ({
+  onSuccess,
+  flushNotesList = false,
+}: UseDeleteNoteProps): UseDeleteNoteReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -56,6 +60,7 @@ const useDeleteNote = ({ onSuccess }: UseDeleteNoteProps): UseDeleteNoteReturn =
             verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
             invalidateCount: true,
             note,
+            flushNotesList,
             action: CacheAction.DELETE,
           });
         }
