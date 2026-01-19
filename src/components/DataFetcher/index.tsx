@@ -80,6 +80,11 @@ const DataFetcher: React.FC<Props> = ({
     return <Error onRetryClicked={onRetryClicked} error={error} />;
   }
 
+  if (!data) {
+    // Guard against undefined data during cache invalidation or query key changes
+    return loading();
+  }
+
   return render(data);
 };
 
