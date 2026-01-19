@@ -2,3 +2,11 @@
   display: flex;
   align-items: center;
 }
+
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  flex: 1;
+  transform: translateZ(0);
+}

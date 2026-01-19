@@ -157,6 +157,33 @@ export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
   state.readingPreferences.isUsingDefaultWordByWordLocale;
 export const selectSelectedReadingTranslation = (state: RootState) =>
   state.readingPreferences.selectedReadingTranslation;
+
+/**
+ * Validated selector that ensures selectedReadingTranslation is always valid.
+ * Returns the stored value only if it exists in selectedTranslations,
+ * otherwise falls back to the first selected translation or null.
+ *
+ * This prevents bugs where selectedReadingTranslation becomes "orphaned"
+ * (e.g., when user deselects that translation or switches locales).
+ *
+ * @param {RootState} state - The Redux root state
+ * @returns {number | null} A valid translation ID from selectedTranslations, or null if none are selected
+ */
+export const selectValidatedReadingTranslation = (state: RootState): number | null => {
+  const { selectedReadingTranslation } = state.readingPreferences;
+  const { selectedTranslations } = state.translations;
+
+  // If stored value exists AND is in selectedTranslations, use it
+  if (selectedReadingTranslation) {
+    const numericId = Number(selectedReadingTranslation);
+    if (selectedTranslations.includes(numericId)) {
+      return numericId;
+    }
+  }
+  // Otherwise, fall back to first translation or null
+  return selectedTranslations.length > 0 ? selectedTranslations[0] : null;
+};
+
 export const selectLastUsedReadingMode = (state: RootState) =>
   state.readingPreferences.lastUsedReadingMode;
 

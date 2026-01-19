@@ -3,7 +3,6 @@ import React, { memo, useCallback, useContext, useRef } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../observer';
@@ -49,9 +48,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   hasNotes,
   hasQuestions,
 }) => {
-  const router = useRouter();
-  const { startingVerse } = router.query;
-
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
     // Don't highlight when audio player is closed
@@ -68,14 +64,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   // Use our custom hook that handles scrolling with context menu offset
   const [scrollToSelectedItem, selectedItemRef] = useScrollWithContextMenuOffset<HTMLDivElement>();
 
-  const shouldTrigger =
-    (isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1;
+  const shouldTrigger = isHighlighted && enableAutoScrolling;
   useNavbarAutoHide(shouldTrigger, scrollToSelectedItem, [
     enableAutoScrolling,
     isHighlighted,
     scrollToSelectedItem,
-    startingVerse,
-    verseIndex,
   ]);
 
   // Register this cell with the global intersection observer for page tracking

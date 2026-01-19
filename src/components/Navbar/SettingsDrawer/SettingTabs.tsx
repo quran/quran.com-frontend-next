@@ -38,16 +38,18 @@ const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTab
           </Tabs.Trigger>
         ))}
       </Tabs.List>
-      <div className={styles.versePreviewContainer}>
-        <VersePreview />
+      <div className={styles.scrollableArea}>
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+        {tabs.map((tab) => (
+          <Tabs.Content className={styles.content} key={tab.id} value={tab.id}>
+            {tab.id === SettingsTab.Arabic && <QuranFontSection />}
+            {tab.id === SettingsTab.Translation && <TranslationSection />}
+            {tab.id === SettingsTab.More && <WordByWordSection />}
+          </Tabs.Content>
+        ))}
       </div>
-      {tabs.map((tab) => (
-        <Tabs.Content className={styles.content} key={tab.id} value={tab.id}>
-          {tab.id === SettingsTab.Arabic && <QuranFontSection />}
-          {tab.id === SettingsTab.Translation && <TranslationSection />}
-          {tab.id === SettingsTab.More && <WordByWordSection />}
-        </Tabs.Content>
-      ))}
     </Tabs.Root>
   );
 };

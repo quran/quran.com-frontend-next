@@ -3,6 +3,7 @@
   "begin": "Begin",
   "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
+  "continue-learning-plan": "Continue learning",
   "continue-read": "Continue Reading",
   "explore-topics": "Explore Topics",
   "first-time-reading": "New to the Quran? <link>Start here</link>",
@@ -56,6 +57,7 @@
     "description": "Help spread the Quran to new learners",
     "title": "Share the Quran!"
   },
+  "start-learning-plan": "Start learning",
   "start-read": "Start Reading",
   "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
   "tab": {

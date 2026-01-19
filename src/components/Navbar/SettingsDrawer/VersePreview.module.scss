@@ -21,6 +21,7 @@
 .translationText {
   line-height: 150%;
   color: var(--color-text-default);
+  word-break: break-word;
 }
 
 .skeletonPlaceholder {

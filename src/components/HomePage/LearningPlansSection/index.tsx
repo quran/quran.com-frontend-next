@@ -42,31 +42,34 @@ const LearningPlansSection = () => {
   };
 
   return (
-    <>
-      <div className={styles.header} data-testid="learning-plans-section">
-        <h1>{t('learning-plan')}</h1>
-        <div>
-          <Link
-            variant={LinkVariant.Blend}
-            href={getCoursesNavigationUrl()}
-            className={styles.seeMore}
-            onClick={onSeeMoreClicked}
-          >
-            {t('see-more-learning-plans')}
-          </Link>
-        </div>
-      </div>
-      <DataFetcher
-        loading={Loading}
-        fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
-        render={(data: CoursesResponse) => {
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
-          const firstNonEnrolledIndex = sortedCourses.findIndex(
-            (course) => typeof course.isCompleted === 'undefined',
-          );
+    <DataFetcher
+      loading={Loading}
+      fetcher={privateFetcher}
+      queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
+      render={(data: CoursesResponse) => {
+        const sortedCourses = [...data.data].sort(learningPlansSorter);
+        const firstNonEnrolledIndex = sortedCourses.findIndex(
+          (course) => typeof course.isCompleted === 'undefined',
+        );
+        const hasEnrolledCourses = sortedCourses.some(
+          (course) => typeof course.isCompleted !== 'undefined',
+        );
 
-          return (
+        return (
+          <>
+            <div className={styles.header} data-testid="learning-plans-section">
+              <h1>{t(hasEnrolledCourses ? 'continue-learning-plan' : 'start-learning-plan')}</h1>
+              <div>
+                <Link
+                  variant={LinkVariant.Blend}
+                  href={getCoursesNavigationUrl()}
+                  className={styles.seeMore}
+                  onClick={onSeeMoreClicked}
+                >
+                  {t('see-more-learning-plans')}
+                </Link>
+              </div>
+            </div>
             <div className={styles.cardsContainer} data-testid={TestId.COURSES_LIST}>
               {sortedCourses.map((course, index) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
@@ -108,10 +111,10 @@ const LearningPlansSection = () => {
                 );
               })}
             </div>
-          );
-        }}
-      />
-    </>
+          </>
+        );
+      }}
+    />
   );
 };
 
