@@ -138,3 +138,7 @@ div.container {
     outline-offset: var(--spacing-micro-px);
   }
 }
+
+.bidiText {
+  unicode-bidi: plaintext;
+}
