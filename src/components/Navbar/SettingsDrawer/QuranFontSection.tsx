@@ -25,6 +25,7 @@ import {
   MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
+import Language from '@/types/Language';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -86,7 +87,7 @@ const QuranFontSection = () => {
       return view;
     }
     // if no font is given, or invalid font is given, get type for default font
-    return getSelectedType(getQuranReaderStylesInitialState(locale).quranFont, locale);
+    return getSelectedType(getQuranReaderStylesInitialState(locale as Language).quranFont, locale);
   };
 
   // get default font for selected type. We take the first font in this case

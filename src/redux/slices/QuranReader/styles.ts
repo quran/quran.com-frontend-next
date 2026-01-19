@@ -6,6 +6,7 @@ import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { RootState } from '@/redux/RootState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import SliceName from '@/redux/types/SliceName';
+import Language from '@/types/Language';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -56,7 +57,7 @@ export const quranReaderStylesSlice = createSlice({
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
     ) => {
       const { mushafLines, locale } = action.payload;
-      const defaultQuranStylesForLocale = getQuranReaderStylesInitialState(locale);
+      const defaultQuranStylesForLocale = getQuranReaderStylesInitialState(locale as Language);
       return {
         ...state,
         mushafLines,
@@ -70,7 +71,7 @@ export const quranReaderStylesSlice = createSlice({
       action: PayloadAction<{ quranFont: QuranFont; locale: string }>,
     ) => {
       const { quranFont, locale } = action.payload;
-      const defaultQuranStylesForLocale = getQuranReaderStylesInitialState(locale);
+      const defaultQuranStylesForLocale = getQuranReaderStylesInitialState(locale as Language);
       const isUsingDefaultFont =
         defaultQuranStylesForLocale.quranFont === quranFont &&
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
@@ -100,7 +101,7 @@ export const quranReaderStylesSlice = createSlice({
   // when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
-      return getQuranReaderStylesInitialState(action.payload.locale);
+      return getQuranReaderStylesInitialState(action.payload.locale as Language);
     });
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
@@ -111,7 +112,7 @@ export const quranReaderStylesSlice = createSlice({
       ] as QuranReaderStyles;
       if (remotePreferences) {
         const { quranFont: defaultQuranFont, mushafLines: defaultMushafLines } =
-          getQuranReaderStylesInitialState(locale);
+          getQuranReaderStylesInitialState(locale as Language);
         return {
           ...state,
           ...remotePreferences,

@@ -8,6 +8,7 @@ import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
 import Theme from '@/redux/types/Theme';
 import ThemeType from '@/redux/types/ThemeType';
+import Language from '@/types/Language';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeSlice = createSlice({
@@ -21,7 +22,7 @@ export const themeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
-      return getThemeInitialState(action.payload.locale);
+      return getThemeInitialState(action.payload.locale as Language);
     });
     builder.addCase(syncUserPreferences, (state, action) => {
       const {

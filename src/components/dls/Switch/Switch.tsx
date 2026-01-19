@@ -52,7 +52,6 @@ const Switch = ({
         <button
           disabled={item.disabled}
           type="button"
-          data-testid={`${item.value}-button`}
           data-is-selected={selected === item.value}
           className={classNames(styles.item, selected === item.value && styles.itemSelected, {
             [styles.itemLarge]: size === SwitchSize.Large,

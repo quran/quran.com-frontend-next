@@ -7,6 +7,7 @@ import { getReadingPreferencesInitialState } from '@/redux/defaultSettings/util'
 import { RootState } from '@/redux/RootState';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
+import Language from '@/types/Language';
 import {
   ReadingPreference,
   WordByWordDisplay,
@@ -59,7 +60,8 @@ export const readingPreferencesSlice = createSlice({
       selectedWordByWordLocale: action.payload.value,
       isUsingDefaultWordByWordLocale:
         action.payload.value ===
-        getReadingPreferencesInitialState(action.payload.locale).selectedWordByWordLocale,
+        getReadingPreferencesInitialState(action.payload.locale as Language)
+          .selectedWordByWordLocale,
     }),
     setWordClickFunctionality: (state, action: PayloadAction<WordClickFunctionality>) => ({
       ...state,
@@ -88,14 +90,14 @@ export const readingPreferencesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
-      getReadingPreferencesInitialState(action.payload.locale),
+      getReadingPreferencesInitialState(action.payload.locale as Language),
     );
     builder.addCase(syncUserPreferences, (state, action) => {
       const remote = action.payload.userPreferences[PreferenceGroup.READING] as ReadingPreferences;
       if (!remote) return state;
       const { tooltip, inline, display } = getWordByWordFieldsFromRemote(remote);
       const defLocale = getReadingPreferencesInitialState(
-        action.payload.locale,
+        action.payload.locale as Language,
       ).selectedWordByWordLocale;
       return {
         ...state,

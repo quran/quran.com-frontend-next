@@ -16,6 +16,7 @@ import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGate
 import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import Language from '@/types/Language';
 import { ReadingPreference } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
@@ -126,7 +127,8 @@ const PageContainer: React.FC<Props> = ({
   // For ReadingTranslation mode, we can only use initialData if the selected translation
   // matches the default for the current locale (which is what SSR would have used).
   // Otherwise, we need to fetch fresh data with the user's selected translation.
-  const defaultTranslationForLocale = getTranslationsInitialState(lang).selectedTranslations[0];
+  const defaultTranslationForLocale = getTranslationsInitialState(lang as Language)
+    .selectedTranslations[0];
   const isUsingDefaultReadingTranslation =
     readingPreference !== ReadingPreference.ReadingTranslation ||
     selectedReadingTranslation === defaultTranslationForLocale;

@@ -9,14 +9,11 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
-import { getProductUpdatesPage } from '@/components/Sanity/utils';
-import { logError } from '@/lib/newrelic';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { Course } from 'types/auth/Course';
 
 interface Props {
   pages?: any[];

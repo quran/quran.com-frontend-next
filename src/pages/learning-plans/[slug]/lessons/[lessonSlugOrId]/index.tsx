@@ -93,8 +93,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         },
       };
     } catch (error) {
-      logError('Error occurred while getting chapters data', {
-        error,
+      logError('Error occurred while getting chapter data', error as Error, {
         slug,
       });
       return {

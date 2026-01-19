@@ -13,11 +13,9 @@ import { filterReciters } from '@/components/Navbar/SettingsDrawer/ReciterSelect
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReciterListHero from '@/components/Reciter/QuranReciterListHero';
 import RecitersList from '@/components/Reciter/RecitersList';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getRecitersNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
-import { AvailableRecitersResponse } from 'types/ApiResponses';
 
 const NAVIGATION_URL = '/reciters';
 
@@ -52,8 +50,8 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux('/reciters', 
   const { locale } = context;
   let reciters = [];
   try {
-    const availableRecitersResponse = await getAvailableReciters(locale, []);
-    reciters = availableRecitersResponse.reciters;
+    const { reciters: availableReciters } = await getAvailableReciters(locale, []);
+    reciters = availableReciters;
   } catch (error) {
     // ignore the error and fall back to showing the page with default reciters
   }

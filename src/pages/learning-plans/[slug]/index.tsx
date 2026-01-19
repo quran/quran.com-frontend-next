@@ -9,10 +9,8 @@ import CourseDetails from '@/components/Course/CourseDetails';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { getCourseBySlug } from '@/components/Sanity/utils';
 import Spinner from '@/dls/Spinner/Spinner';
 import { logError } from '@/lib/newrelic';
-import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { getCourse, privateFetcher } from '@/utils/auth/api';
@@ -79,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
 
     try {
       const [course, chaptersData] = await Promise.all([
-        getCourseBySlug(slug as string),
+        getCourse(slug as string),
         getAllChaptersData(locale),
       ]);
 
@@ -90,8 +88,7 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         },
       };
     } catch (error) {
-      logError('Error occurred while getting course from Sanity', {
-        error,
+      logError('Error occurred while getting course from Sanity', error as Error, {
         slug,
       });
       return {

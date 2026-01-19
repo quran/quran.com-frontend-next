@@ -123,7 +123,6 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
         surahId: chapterNumber,
         ayahNumber: verseNumber,
         locale,
-        reviewed: true,
         postTypeIds: [REFLECTION_POST_TYPE_ID],
       });
 
