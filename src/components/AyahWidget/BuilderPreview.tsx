@@ -48,7 +48,7 @@ const BuilderPreview = ({
         <div className={styles.codeHeader}>
           <h2 className={styles.panelTitle}>{t('sections.snippet')}</h2>
           <button className={styles.copyButton} type="button" onClick={onCopy}>
-            {copySuccess ? t('actions.copied') : t('actions.copy')}
+            {copySuccess ? t('actions.copied') : t('actions.copyEmbedSnippet')}
           </button>
         </div>
         <pre className={styles.codeBlock}>
