@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import Footer from './Footer';
 import Label from './Label';
 import Row from './Row';
@@ -10,10 +12,11 @@ interface SectionProps {
   id?: string;
   children?: React.ReactNode;
   hideSeparator?: boolean;
+  className?: string;
 }
 
-const Section = ({ children, hideSeparator, ...props }: SectionProps) => (
-  <div className={styles.section} {...props}>
+const Section = ({ children, hideSeparator, className, ...props }: SectionProps) => (
+  <div className={classNames(styles.section, className)} {...props}>
     {children}
     {!hideSeparator && (
       <div className={styles.separator}>

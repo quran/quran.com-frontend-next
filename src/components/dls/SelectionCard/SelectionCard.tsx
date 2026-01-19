@@ -13,9 +13,17 @@ type SelectionCard = {
   onClick?: () => void;
   className?: string;
   valueClassName?: string;
+  labelClassName?: string;
 };
 
-const SelectionCard = ({ label, value, onClick, className, valueClassName }: SelectionCard) => {
+const SelectionCard = ({
+  label,
+  value,
+  onClick,
+  className,
+  valueClassName,
+  labelClassName,
+}: SelectionCard) => {
   return (
     <div
       className={classNames(styles.container, className)}
@@ -23,7 +31,7 @@ const SelectionCard = ({ label, value, onClick, className, valueClassName }: Sel
       data-testid={TestId.TRANSLATION_CARD}
     >
       <div className={styles.labelContainer}>
-        <div className={styles.label}>{label}</div>
+        <div className={classNames(styles.label, labelClassName)}>{label}</div>
         <div className={classNames(styles.value, valueClassName)}>{value}</div>
       </div>
       <div className={styles.iconContainer}>

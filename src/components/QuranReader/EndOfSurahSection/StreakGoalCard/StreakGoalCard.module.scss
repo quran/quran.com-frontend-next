@@ -84,7 +84,7 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded-new);
   text-align: center;
-  text-wrap: nowrap;
+  text-wrap: balance;
 
   @include breakpoints.smallerThanTablet {
     display: none;
