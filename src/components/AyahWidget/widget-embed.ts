@@ -153,6 +153,7 @@ export const buildEmbedSnippet = (preferences: Preferences, translationIdsCsv: s
   src="${src}"
   width="${widthValue}"
   height="${heightValue}"
+  allow="clipboard-write"
   frameborder="0">
 </iframe>`;
 };

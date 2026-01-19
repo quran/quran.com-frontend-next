@@ -47,6 +47,7 @@ const useAyahWidgetPreview = ({
     iframe.width = iframeConfig.widthValue;
     iframe.height = iframeConfig.heightValue;
     iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'clipboard-write');
     iframe.setAttribute('loading', 'lazy');
     iframe.setAttribute('title', 'Quran.com embed preview');
     iframe.style.border = '0';

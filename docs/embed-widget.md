@@ -108,6 +108,15 @@ recomputes a valid `rangeEnd`.
 
 The embed is an iframe pointing to `/embed/v1` with query params.
 
+### Clipboard permissions
+
+The widget uses the Clipboard API for copy/share actions. When embedding, allow clipboard access on
+the iframe:
+
+```html
+<iframe allow="clipboard-write" ...></iframe>
+```
+
 ### Environment variables
 
 - `NEXT_PUBLIC_EMBED_URL`: forces the iframe base URL (useful for local/testing)
