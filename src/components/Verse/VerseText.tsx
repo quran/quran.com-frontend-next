@@ -32,6 +32,7 @@ type VerseTextProps = {
   tooltipType?: TooltipType;
   highlightedWordPosition?: number;
   isWordInteractionDisabled?: boolean;
+  shouldDisableForceTooltip?: boolean;
 };
 
 const VerseText = ({
@@ -43,6 +44,7 @@ const VerseText = ({
   tooltipType,
   highlightedWordPosition,
   isWordInteractionDisabled = false,
+  shouldDisableForceTooltip = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -116,7 +118,7 @@ const VerseText = ({
                 bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
-                shouldForceShowTooltip={isHighlightedWord}
+                shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}
               />
             );
           })}

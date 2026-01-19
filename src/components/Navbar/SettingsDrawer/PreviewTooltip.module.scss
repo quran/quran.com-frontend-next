@@ -1,0 +1,35 @@
+.container {
+  position: absolute;
+  inset-block-start: 0;
+  transform: translateX(-50%) translateY(-100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.15s ease-out;
+}
+
+.tooltip {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-white);
+  border-radius: var(--border-radius-default);
+  padding-block: var(--spacing-xxsmall);
+  padding-inline: var(--spacing-xxsmall);
+  text-align: center;
+}
+
+.tooltipText {
+  padding-block: var(--spacing-micro);
+  padding-inline: var(--spacing-micro);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.arrow {
+  inline-size: 0;
+  block-size: 0;
+  border-inline-start: var(--spacing-xxsmall2-px) solid transparent;
+  border-inline-end: var(--spacing-xxsmall2-px) solid transparent;
+  border-block-start: var(--spacing-xsmall-px) solid var(--color-success-medium);
+}

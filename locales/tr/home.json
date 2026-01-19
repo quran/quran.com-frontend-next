@@ -3,6 +3,7 @@
   "begin": "Başla",
   "calendar-cta": "Takvim",
   "chapters-and-verses": "Bölümler ve Ayetler",
+  "continue-learning-plan": "Öğrenmeye devam edin",
   "continue-read": "Okumaya devam et",
   "explore-topics": "Konuları Keşfedin",
   "first-time-reading": "Kuran'a yeni misiniz? <link> Buradan başlayın </link>",
@@ -56,6 +57,7 @@
     "description": "Kuran'ı yeni öğrenenlere yaymaya yardımcı olun",
     "title": "Kuran'ı paylaş!"
   },
+  "start-learning-plan": "Öğrenmeye başlayın",
   "start-read": "Okumaya Başla",
   "stay-consistent": "Devam serilerini takip edin, özel hedefler oluşturun, istikrarlı kalın",
   "tab": {

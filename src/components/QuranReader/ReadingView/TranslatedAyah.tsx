@@ -115,8 +115,11 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   const showFootnote = footnote !== null || isLoadingFootnote;
 
   // Verse number element - used as popover trigger on desktop for consistent positioning
+  // Use translation's language (langData.code) for number formatting to show Arabic numerals for RTL translations
   const verseNumberElement = (
-    <span className={styles.verseNumber}>{toLocalizedNumber(verse.verseNumber, lang)}.</span>
+    <span className={styles.verseNumber}>
+      {toLocalizedNumber(verse.verseNumber, langData.code)}.
+    </span>
   );
 
   // Translation text element

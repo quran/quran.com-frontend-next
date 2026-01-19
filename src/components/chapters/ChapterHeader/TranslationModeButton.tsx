@@ -12,7 +12,7 @@ import useCloseOnScroll from '@/hooks/useCloseOnScroll';
 import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
-import { selectSelectedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import AvailableTranslation from 'types/AvailableTranslation';
 import { ReadingPreference } from 'types/QuranReader';
@@ -37,7 +37,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const selectedReadingTranslation = useSelector(selectSelectedReadingTranslation);
+  const selectedReadingTranslation = useSelector(selectValidatedReadingTranslation);
   const isMobile = useIsMobile();
 
   const openTranslationSettings = useCallback(() => {
@@ -59,11 +59,7 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
   useCloseOnScroll(isDropdownOpen, closeDropdown);
 
-  const activeTranslationId = selectedReadingTranslation
-    ? Number(selectedReadingTranslation)
-    : selectedTranslations?.[0] ?? null;
-
-  const activeTranslation = translations?.find((tr) => tr.id === activeTranslationId);
+  const activeTranslation = translations?.find((tr) => tr.id === selectedReadingTranslation);
 
   // No translations selected
   if (!hasTranslations) {
@@ -99,7 +95,10 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   }
 
   // Translation mode: PopoverMenu with dropdown
-  const displayText = `${t('translation')}: ${activeTranslation?.name || ''}`;
+  // Only show "Translation: Name" if we found the translation, otherwise just "Translation"
+  const displayText = activeTranslation?.name
+    ? `${t('translation')}: ${activeTranslation.name}`
+    : t('translation');
 
   return (
     <PopoverMenu

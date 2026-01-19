@@ -84,7 +84,7 @@ const SettingsDrawer = () => {
       className={getDrawerClassName()}
     >
       {isSettingsDrawerOpen && (
-        <div data-testid="settings-drawer-body">
+        <div data-testid="settings-drawer-body" className={styles.bodyWrapper}>
           {settingsView === SettingsView.Body && <SettingsBody />}
           {settingsView === SettingsView.Translation && <TranslationSelectionBody />}
           {settingsView === SettingsView.Reciter && <ReciterSelectionBody />}

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -13,10 +13,10 @@ import SettingsButton from './components/SettingsButton';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
+import useIsMobile from '@/hooks/useIsMobile';
 import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
 import { TestId } from '@/tests/test-ids';
 import { Mushaf } from '@/types/QuranReader';
-import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 /**
@@ -49,16 +49,15 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
-  // useMemo must be called before any early returns (Rules of Hooks)
-  const isMobileView = useMemo(() => isMobile(), []);
+  const isMobileView = useIsMobile();
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
 
-  const isMobileScrolledView = !showNavbar && isMobile();
-  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
+  const isMobileScrolledView = !showNavbar && isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
 
   return (
     <div
