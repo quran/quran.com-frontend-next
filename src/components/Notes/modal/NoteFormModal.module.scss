@@ -128,6 +128,12 @@ div.textArea {
 
 .button {
   border-radius: var(--border-radius-medium-px);
+
+  &,
+  span {
+    unicode-bidi: plaintext;
+  }
+
   span {
     white-space: break-spaces;
     line-height: 1;
