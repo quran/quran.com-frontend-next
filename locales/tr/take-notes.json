@@ -59,7 +59,7 @@
         "Ayetin bağlamıyla, diğer Kuran ayetleriyle, hadislerle veya olaylarla bağlantı kurabilir misiniz?"
       ],
       "description": "Çok yakında: Seçtiğiniz notları arkadaşlarınızla, ailenizle veya çalışma gruplarınızla paylaşabileceksiniz. Anlayışınız üzerinde birlikte çalışın ve faydalı bilgiyi yayın.",
-      "paragraph1": "Quran.com’daki notlarınız özel olarak kaydedilir, ancak seçtiğiniz tefekkürleri <0>QuranReflect.com</0> üzerinde herkesle paylaşma seçeneğiniz de var. Bu, Kuran ile derin bir etkileşimi - akademik tefsir yoluyla değil (ki bu yetkin âlimlere mahsus olan), ancak ehil bir moderasyon ekibi tarafından incelenen ve yönlendirilen samimi, kişisel düşünceler yoluyla - teşvik etmek için kurulmuş kar amacı gütmeyen bir topluluk platformudur",
+      "paragraph1": "Quran.com’daki notlarınız özel olarak kaydedilir, bunun yani sira seçtiğiniz tefekkürleri <0>QuranReflect.com</0> üzerinde herkesle paylaşma seçeneğiniz de var. Bu, Kuran ile derin bir etkileşimi - akademik tefsir yoluyla değil (ki bu yetkin âlimlere mahsus olan), ancak ehil bir moderasyon ekibi tarafından incelenen ve yönlendirilen samimi, kişisel düşünceler yoluyla - teşvik etmek için kurulmuş kar amacı gütmeyen bir topluluk platformudur",
       "paragraph2": "Allah, sadece âlimleri değil, bütün müminleri tedebbüre davet ediyor:",
       "quote": "Bu bir mübarek kitaptır ki onu sana [ey Muhammed], insanlar âyetleri üzerinde iyice düşünsünler, akıl iz‘an sahipleri ondan dersler, öğütler alsınlar diye indirdik. (Sad Suresi, 38:29)",
       "reflection-prompt": "Kendi tefekkürünüz için kullanabileceğiniz örnek sorular:",
@@ -74,8 +74,8 @@
     },
     "title": "Notlar özelliğinin faydaları"
   },
-  "description": "Quran.com’da not almanız için 6 güçlü nedeni keşfedin ve notların Kur’ân ile yolculuğunuzda nasıl hayati bir rol oynayabileceğini öğrenin.",
-  "heading": "Not almanın 6 güçlü nedeni – ve Kur’ân yolculuğunuzu nasıl dönüştürebileceği",
+  "description": "Quran.com’da not almanız için 5 güçlü nedeni keşfedin ve notların Kur’ân ile yolculuğunuzda nasıl hayati bir rol oynayabileceğini öğrenin.",
+  "heading": "Not almanın 5 güçlü nedeni – ve Kur’ân yolculuğunuzu nasıl dönüştürebileceği",
   "how-to-use": {
     "saved-note-explanation": "Bir ayete not eklediğinizde, not simgesi maviye dönüşür. Bu sayede sonraki okumalarınızda daha önce not yazdığınız ayetleri kolayca görebilirsiniz.",
     "step1": "<0>Bir Ayet Seçin:</0> Herhangi bir ayete tıklayın ve notlar seçeneğini seçin.",
