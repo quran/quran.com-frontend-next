@@ -1,8 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import modalStyles from './Modal.module.scss';
-
 import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
 import { addReflectionEntityToNote } from '@/components/Notes/modal/hooks/usePostNoteToQr';
@@ -72,11 +70,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
 
   return (
     <NoteFormModal
-      header={
-        <Header className={modalStyles.title} data-testid="add-note-modal-title">
-          {t('take-a-note-or-reflection')}
-        </Header>
-      }
+      header={<Header data-testid="add-note-modal-title">{t('take-a-note-or-reflection')}</Header>}
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
       onMyNotes={onMyNotes}

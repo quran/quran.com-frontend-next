@@ -7,12 +7,12 @@ import ArrowIcon from '@/icons/arrow.svg';
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {}
 
-const Header: React.FC<HeaderProps> = ({ onClick, children, ...props }) => {
+const Header: React.FC<HeaderProps> = ({ onClick, children, className, ...props }) => {
   if (onClick) {
     return (
       <button
         type="button"
-        className={classNames(modalStyles.headerButton, modalStyles.title)}
+        className={classNames(modalStyles.headerButton, modalStyles.title, className)}
         onClick={onClick}
         {...props}
       >
@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ onClick, children, ...props }) => {
   }
 
   return (
-    <h2 className={modalStyles.title} {...props}>
+    <h2 className={classNames(modalStyles.title, className)} {...props}>
       {children}
     </h2>
   );
