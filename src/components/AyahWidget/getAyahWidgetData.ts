@@ -254,7 +254,7 @@ const buildVerseParams = (
     audio: reciter,
     wordFields: getDefaultWordFields(quranFont).wordFields,
     wordTranslationLanguage: wordByWordLocale,
-    translationFields: 'resource_name,language_name,author_name',
+    translationFields: 'resource_name,language_name,author_name,language_id',
     mushaf: mushafId,
   };
 
