@@ -16,7 +16,7 @@ interface ReflectionsTabContentProps {
   reflections: AyahReflection[];
   isLoading: boolean;
   isLoadingMore: boolean;
-  error: any;
+  error: unknown;
   loadMore: (index: number) => void;
 }
 

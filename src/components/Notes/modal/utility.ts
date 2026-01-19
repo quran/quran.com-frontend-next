@@ -158,9 +158,9 @@ const updateNoteCaches = (
   action?: CacheAction,
 ) => {
   // Update single note cache
-  if (note && action === CacheAction.UPDATE) {
+  if (note && [CacheAction.UPDATE, CacheAction.CREATE].includes(action)) {
     mutate(makeGetNoteByIdUrl(note.id), note, { revalidate: true });
-  } else if (note || action === CacheAction.DELETE) {
+  } else if (note && action === CacheAction.DELETE) {
     mutate(makeGetNoteByIdUrl(note.id), undefined, { revalidate: true });
   }
 

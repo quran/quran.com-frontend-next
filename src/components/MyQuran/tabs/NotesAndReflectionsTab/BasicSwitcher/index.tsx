@@ -14,11 +14,13 @@ interface BasicSwitcherProps {
 
 const BasicSwitcher: React.FC<BasicSwitcherProps> = ({ tabs, onSelect, selected }) => {
   return (
-    <div className={styles.basicSwitcher}>
+    <div className={styles.basicSwitcher} role="tablist">
       {tabs.map((tab) => (
         <button
-          key={tab.id}
+          key={tab.value}
           type="button"
+          role="tab"
+          aria-selected={selected === tab.value}
           className={styles.tabButton}
           onClick={() => onSelect(tab.value)}
           data-selected={selected === tab.value}

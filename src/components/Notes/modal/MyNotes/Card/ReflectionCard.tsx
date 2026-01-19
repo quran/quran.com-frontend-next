@@ -41,17 +41,17 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
     [chaptersData, lang],
   );
 
-  const onViewOnQrClicked = (e) => {
+  const onViewOnQrClicked = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     logButtonClick('posted_ref_view_on_qr', { postId: reflection.id });
   };
 
-  const onLikesCountClicked = (e) => {
+  const onLikesCountClicked = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     logButtonClick('reflection_likes', { postId: reflection.id });
   };
 
-  const onCommentsCountClicked = (e) => {
+  const onCommentsCountClicked = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     logButtonClick('reflection_comments', { postId: reflection.id });
   };

@@ -29,11 +29,10 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   seeLessText,
   readMoreText,
 }) => {
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation('common');
   const [expanded, setExpanded] = useState(false);
   const [needsTruncation, setNeedsTruncation] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation('common');
 
   const content = children ?? '';
 

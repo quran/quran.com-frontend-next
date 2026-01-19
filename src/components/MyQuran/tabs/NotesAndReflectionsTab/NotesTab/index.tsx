@@ -24,7 +24,7 @@ const getNotes = async (sortBy: NotesSortOption, key?: string) => {
   return getAllNotes({
     sortBy,
     ...baseConfig,
-    ...(key.includes('cursor') && { cursor: new URL(key).searchParams.get('cursor') || '' }),
+    ...(key && key.includes('cursor') && { cursor: new URL(key).searchParams.get('cursor') || '' }),
   }) as Promise<GetAllNotesResponse>;
 };
 

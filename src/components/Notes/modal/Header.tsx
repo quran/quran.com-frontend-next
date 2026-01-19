@@ -5,7 +5,7 @@ import modalStyles from './Modal.module.scss';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import ArrowIcon from '@/icons/arrow.svg';
 
-interface HeaderProps extends React.ButtonHTMLAttributes<HTMLElement> {}
+interface HeaderProps extends React.HTMLAttributes<HTMLElement> {}
 
 const Header: React.FC<HeaderProps> = ({ onClick, children, ...props }) => {
   if (onClick) {

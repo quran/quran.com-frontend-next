@@ -27,6 +27,8 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
     logButtonClick('my_notes_post_to_qr');
   }, [note, onPostToQrClick]);
 
+  const isLoading = note.recentReflection?.id === LOADING_POST_ID;
+
   return postUrl ? (
     <Button
       variant={ButtonVariant.Ghost}
@@ -34,6 +36,7 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
       shape={ButtonShape.Square}
       isNewTab
       href={postUrl}
+      isDisabled={isLoading}
       tooltip={t('view-on-qr')}
       ariaLabel={t('view-on-qr')}
       onClick={() => logButtonClick('my_notes_view_on_qr')}
@@ -43,7 +46,7 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
         size={IconSize.Xsmall}
         shouldForceSetColors={false}
         icon={
-          note.recentReflection?.id === LOADING_POST_ID ? (
+          isLoading ? (
             <Spinner shouldDelayVisibility={false} size={SpinnerSize.Small} />
           ) : (
             <QRColoredIcon />

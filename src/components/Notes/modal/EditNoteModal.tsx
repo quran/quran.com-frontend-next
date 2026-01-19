@@ -66,8 +66,8 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
         note:
           isFailedToPublish || !isPublic
-            ? noteFromResponse
-            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
+            ? { ...note, ...noteFromResponse }
+            : addReflectionEntityToNote({ ...note, ...noteFromResponse }, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
         action: CacheAction.UPDATE,
