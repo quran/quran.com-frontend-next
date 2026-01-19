@@ -420,6 +420,7 @@
   "sign-in": "Sign in",
   "sitemap": "Sitemap",
   "sort": {
+    "sort": "Sort",
     "ascending": "Ascending",
     "by": "Sort by",
     "descending": "Descending"

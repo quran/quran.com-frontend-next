@@ -1,11 +1,22 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './NotesSorter.module.scss';
 
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
+import ArrowRightIcon from '@/icons/arrow-right.svg';
+import ArrowsVerticalIcon from '@/icons/arrows-vertical.svg';
+import NotesSortOption from '@/types/NotesSortOptions';
 import { logEvent } from '@/utils/eventLogger';
 
-const NotesSorter = ({ options, selectedOptionId, onChange }) => {
-  const selectedOption = options.find((option) => option.id === selectedOptionId);
+type NotesSorterProps = {
+  options: { id: NotesSortOption; label: string }[];
+  selectedOptionId: NotesSortOption;
+  onChange: (optionId: NotesSortOption) => void;
+};
+
+const NotesSorter: React.FC<NotesSorterProps> = ({ options, selectedOptionId, onChange }) => {
+  const { t } = useTranslation('common');
 
   const onOpenChange = (isOpen: boolean) => {
     if (isOpen) {
@@ -15,15 +26,34 @@ const NotesSorter = ({ options, selectedOptionId, onChange }) => {
     }
   };
 
+  const getRotationClass = (optionId: NotesSortOption) => {
+    if (optionId === NotesSortOption.Newest) {
+      return styles.arrowDown;
+    }
+    if (optionId === NotesSortOption.Oldest) {
+      return styles.arrowUp;
+    }
+    return '';
+  };
+
   return (
     <PopoverMenu
+      contentClassName={styles.popoverMenuContent}
       trigger={
-        <span className={styles.sortTrigger}>
-          {selectedOption.label}
-          <span className={styles.itemIcon}>
-            <ChevronDownIcon />
-          </span>
-        </span>
+        <button
+          type="button"
+          className={styles.sortTrigger}
+          data-has-selected={selectedOptionId !== null}
+        >
+          <IconContainer
+            className={styles.iconWrapper}
+            size={IconSize.Custom}
+            shouldForceSetColors={false}
+            icon={<ArrowsVerticalIcon />}
+          />
+
+          <span className={styles.sortText}>{t('sort.sort')}</span>
+        </button>
       }
       onOpenChange={onOpenChange}
     >
@@ -32,8 +62,20 @@ const NotesSorter = ({ options, selectedOptionId, onChange }) => {
           shouldCloseMenuAfterClick
           key={option.id}
           onClick={() => onChange(option.id)}
+          isSelected={option.id === selectedOptionId}
+          dataTestId={`notes-sorter-option-${option.id}`}
+          className={styles.menuItem}
         >
-          {option.label}
+          <span className={styles.menuItemText}>
+            <IconContainer
+              className={`${styles.optionIcon} ${getRotationClass(option.id)}`}
+              size={IconSize.Custom}
+              shouldForceSetColors={false}
+              icon={<ArrowRightIcon />}
+            />
+
+            {option.label}
+          </span>
         </PopoverMenu.Item>
       ))}
     </PopoverMenu>

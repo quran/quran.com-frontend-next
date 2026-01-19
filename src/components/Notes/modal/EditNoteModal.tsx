@@ -3,7 +3,9 @@ import { useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
 import Header from '@/components/Notes/modal/Header';
+import { addReflectionEntityToNote } from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
   getNoteFromResponse,
@@ -64,7 +66,10 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         mutate,
         cache,
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
-        note: noteFromResponse,
+        note:
+          isFailedToPublish || !isPublic
+            ? noteFromResponse
+            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
         invalidateReflections: isPublic,
         action: CacheAction.UPDATE,

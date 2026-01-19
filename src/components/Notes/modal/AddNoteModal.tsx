@@ -43,10 +43,10 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         saveToQR: isPublic,
       });
 
-      const failedToPublish = isNotePublishFailed(data);
+      const isFailedToPublish = isNotePublishFailed(data);
       const noteFromResponse = getNoteFromResponse(data);
 
-      if (failedToPublish) {
+      if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
       } else {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
@@ -57,7 +57,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         cache,
         verseKeys: [verseKey],
         note:
-          failedToPublish || !isPublic
+          isFailedToPublish || !isPublic
             ? noteFromResponse
             : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,

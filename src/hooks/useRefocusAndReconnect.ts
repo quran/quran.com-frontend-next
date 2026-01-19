@@ -39,22 +39,16 @@ const useRefocusAndReconnect = (callback: () => void): void => {
       }
     };
 
-    const handleFocus = () => {
-      callback();
-    };
-
     const handleOnline = () => {
       callback();
     };
 
     // Listen for visibility changes, window focus and network reconnection
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('focus', handleFocus);
     window.addEventListener('online', handleOnline);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', handleFocus);
       window.removeEventListener('online', handleOnline);
     };
   }, [callback]);
