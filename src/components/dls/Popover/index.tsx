@@ -42,6 +42,7 @@ interface Props {
   icon?: ReactNode;
   onIconClick?: () => void;
   iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -66,6 +67,7 @@ const Popover: React.FC<Props> = ({
   icon,
   onIconClick,
   iconAriaLabel,
+  shouldContentBeClickable = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -90,17 +92,15 @@ const Popover: React.FC<Props> = ({
         },
       })}
     >
-      {children}
-      {icon && (
-        <span
-          className={styles.icon}
+      {shouldContentBeClickable ? (
+        <div
+          role="button"
+          tabIndex={0}
+          className={styles.clickableContent}
           onClick={(e) => {
             e.stopPropagation();
             onIconClick?.();
           }}
-          role="button"
-          tabIndex={0}
-          aria-label={iconAriaLabel}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -108,9 +108,36 @@ const Popover: React.FC<Props> = ({
               onIconClick?.();
             }
           }}
+          aria-label={iconAriaLabel}
         >
-          {icon}
-        </span>
+          {children}
+          {icon && <span className={styles.icon}>{icon}</span>}
+        </div>
+      ) : (
+        <>
+          {children}
+          {icon && (
+            <span
+              className={styles.icon}
+              onClick={(e) => {
+                e.stopPropagation();
+                onIconClick?.();
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={iconAriaLabel}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onIconClick?.();
+                }
+              }}
+            >
+              {icon}
+            </span>
+          )}
+        </>
       )}
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>

@@ -14,10 +14,11 @@ import styles from './StudyModeModal.module.scss';
 
 import { fetcher } from '@/api';
 import DataContext from '@/contexts/DataContext';
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import Spinner from '@/dls/Spinner/Spinner';
 import ArrowIcon from '@/icons/arrow.svg';
+import CloseIcon from '@/icons/close.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -264,6 +265,15 @@ const StudyModeModal: React.FC<Props> = ({
       >
         <ArrowIcon />
       </Button>
+      <Button
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        onClick={handleClose}
+        className={styles.closeButton}
+        ariaLabel="Close"
+      >
+        <CloseIcon />
+      </Button>
     </div>
   );
 
@@ -311,7 +321,8 @@ const StudyModeModal: React.FC<Props> = ({
       onClose={handleClose}
       onEscapeKeyDown={handleClose}
       header={header}
-      hasCloseButton
+      headerClassName={styles.modalHeader}
+      hasCloseButton={false}
       contentClassName={classNames(styles.contentModal, {
         [styles.bottomSheetContent]: isContentTabActive,
       })}

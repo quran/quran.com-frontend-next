@@ -42,6 +42,7 @@ interface Props {
   icon?: ReactNode;
   onIconClick?: () => void;
   iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 const Tooltip: React.FC<Props> = ({
@@ -60,6 +61,7 @@ const Tooltip: React.FC<Props> = ({
   icon,
   onIconClick,
   iconAriaLabel,
+  shouldContentBeClickable = false,
 }) => (
   <RadixTooltip.Root
     delayDuration={delay}
@@ -84,16 +86,15 @@ const Tooltip: React.FC<Props> = ({
         [styles.info]: type === TooltipType.INFO,
       })}
     >
-      {icon && (
-        <span
-          className={styles.icon}
+      {shouldContentBeClickable ? (
+        <div
+          role="button"
+          tabIndex={0}
+          className={styles.clickableContent}
           onClick={(e) => {
             e.stopPropagation();
             onIconClick?.();
           }}
-          role="button"
-          tabIndex={0}
-          aria-label={iconAriaLabel}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
               e.preventDefault();
@@ -101,12 +102,37 @@ const Tooltip: React.FC<Props> = ({
               onIconClick?.();
             }
           }}
+          aria-label={iconAriaLabel}
         >
-          {icon}
-        </span>
+          {icon && <span className={styles.icon}>{icon}</span>}
+          {text}
+        </div>
+      ) : (
+        <>
+          {icon && (
+            <span
+              className={styles.icon}
+              onClick={(e) => {
+                e.stopPropagation();
+                onIconClick?.();
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={iconAriaLabel}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onIconClick?.();
+                }
+              }}
+            >
+              {icon}
+            </span>
+          )}
+          {text}
+        </>
       )}
-      {text}
-
       {tip && <RadixTooltip.Arrow />}
     </RadixTooltip.Content>
   </RadixTooltip.Root>

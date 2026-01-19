@@ -26,7 +26,8 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   onChapterChange,
   onVerseChange,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('quran-reader');
+  const { t: tCommon } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const [selectionMode, setSelectionMode] = useState<SelectionMode>('none');
   const [searchQuery, setSearchQuery] = useState('');
@@ -125,9 +126,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
 
   const isExpanded = selectionMode !== 'none';
   const isChapterMode = selectionMode === 'chapter';
-  const title = isChapterMode
-    ? t('select-chapter') || 'Select Chapter'
-    : t('select-ayah') || 'Select Ayah';
+  const title = isChapterMode ? t('select-chapter') : t('select-verses');
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -161,7 +160,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
               ref={inputRef}
               type="text"
               className={styles.searchInput}
-              placeholder={t('search') || 'Search'}
+              placeholder={tCommon('search')}
               value={searchQuery}
               onChange={handleSearchChange}
             />
@@ -178,8 +177,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
                     })}
                     onClick={() => handleSelectChapter(chapter.id)}
                   >
-                    <span className={styles.itemNumber}>{chapter.id}.</span>
-                    <span className={styles.itemName}>{chapter.name}</span>
+                    {chapter.id}. {chapter.name}
                   </button>
                 ))
               : filteredVerses.map((verse) => (
@@ -191,15 +189,13 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
                     })}
                     onClick={() => handleSelectVerse(verse)}
                   >
-                    <span className={styles.itemName}>
-                      {t('ayah') || 'Ayah'} {toLocalizedNumber(verse, lang)}
-                    </span>
+                    {toLocalizedNumber(verse, lang)}
                   </button>
                 ))}
 
             {((isChapterMode && filteredChapters.length === 0) ||
               (!isChapterMode && filteredVerses.length === 0)) && (
-              <div className={styles.noResults}>{t('no-results') || 'No results found'}</div>
+              <div className={styles.noResults}>{tCommon('no-results')}</div>
             )}
           </div>
         </div>

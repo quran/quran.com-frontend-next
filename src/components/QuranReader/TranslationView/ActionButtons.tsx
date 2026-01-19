@@ -22,6 +22,7 @@ type ActionButtonsProps = {
   isTranslationView?: boolean;
   openShareModal: () => void;
   hasTranslationsButton?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 /**
@@ -36,6 +37,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   isTranslationView = true,
   openShareModal,
   hasTranslationsButton = false,
+  shouldUseModalZIndex = false,
 }) => {
   return (
     <>
@@ -91,6 +93,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               bookmarksRangeUrl={bookmarksRangeUrl}
               verse={verse}
               isTranslationView={isTranslationView}
+              shouldUseModalZIndex={shouldUseModalZIndex}
             />
           </ActionItem>
         </>

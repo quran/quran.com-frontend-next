@@ -14,10 +14,6 @@ import WordNavigationBox from './WordNavigationBox';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import BookIcon from '@/icons/book-open.svg';
-import BxBookIcon from '@/icons/bx-book.svg';
-import ChatIcon from '@/icons/chat.svg';
-import DeviceHubIcon from '@/icons/device-hub.svg';
-import DifferenceIcon from '@/icons/difference.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -118,7 +114,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const tabs = [
     {
       id: StudyModeTabId.TAFSIR,
-      label: t('tafsir'),
+      label: t('quran-reader:tafsirs'),
       icon: <BookIcon />,
       onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
       condition: true,
@@ -137,34 +133,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
       onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },
-    {
-      id: StudyModeTabId.ANSWERS,
-      label: t('answers'),
-      icon: <ChatIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
-      condition: true,
-    },
-    {
-      id: StudyModeTabId.HADITH,
-      label: t('hadith'),
-      icon: <BxBookIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.HADITH),
-      condition: true,
-    },
-    {
-      id: StudyModeTabId.QIRAAT,
-      label: t('qiraat'),
-      icon: <DeviceHubIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
-      condition: true,
-    },
-    {
-      id: StudyModeTabId.RELATED_VERSES,
-      label: t('related-verses'),
-      icon: <DifferenceIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
-      condition: true,
-    },
   ];
 
   // Ensure verse has chapterId (extract from verseKey if needed)
@@ -177,7 +145,12 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
 
   return (
     <div className={styles.container}>
-      <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+      <TopActions
+        verse={wordVerse}
+        bookmarksRangeUrl={bookmarksRangeUrl}
+        hasNotes={hasNotes}
+        shouldUseModalZIndex
+      />
       <div className={styles.arabicVerseContainer}>
         {showWordBox && selectedWord && (
           <WordNavigationBox

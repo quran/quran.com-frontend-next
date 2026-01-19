@@ -49,6 +49,10 @@ $separator-size: 1px;
 
 .content {
   z-index: var(--z-index-sticky);
+
+  &.modalZIndex {
+    z-index: var(--z-index-ultra);
+  }
   padding-block-start: var(--spacing-small);
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;

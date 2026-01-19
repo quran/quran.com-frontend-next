@@ -79,3 +79,20 @@
   margin-inline-start: auto;
   cursor: pointer;
 }
+
+.clickableContent {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro2-px);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-default);
+  }
+}

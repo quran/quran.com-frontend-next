@@ -35,12 +35,8 @@
   align-items: center;
   gap: var(--spacing-small-px);
   inline-size: 100%;
-  margin-block-end: var(--spacing-small);
+  padding-block-end: var(--spacing-medium2-px);
   flex-shrink: 0;
-
-  @include breakpoints.tablet {
-    margin-block-end: var(--spacing-xlarge-px);
-  }
 }
 
 .selectionWrapper {
@@ -83,6 +79,15 @@
   svg {
     transform: scaleX(-1);
   }
+}
+
+.closeButton {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+.modalHeader {
+  padding-inline-end: 0;
 }
 
 .loadingContainer {

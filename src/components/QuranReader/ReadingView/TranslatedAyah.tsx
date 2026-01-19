@@ -1,15 +1,12 @@
 /* eslint-disable max-lines -- Component handles ayah interactions, footnotes, and mobile/desktop rendering */
 /* eslint-disable react/no-danger -- Translation HTML from trusted backend API contains necessary formatting */
-import React, { useCallback, useState, MouseEvent } from 'react';
+import React, { useCallback, useState, MouseEvent, lazy, Suspense } from 'react';
 
 import classNames from 'classnames';
 
 import InlineFootnote from './InlineFootnote';
 import styles from './TranslatedAyah.module.scss';
-import WordMobileModal from './WordMobileModal';
-import ReadingViewWordPopover from './WordPopover';
 
-import useIsMobile from '@/hooks/useIsMobile';
 import { logErrorToSentry } from '@/lib/sentry';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
@@ -17,6 +14,8 @@ import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 import Language from 'types/Language';
 import Verse from 'types/Verse';
+
+const StudyModeModal = lazy(() => import('./StudyModeModal'));
 
 type TranslatedAyahProps = {
   verse: Verse;
@@ -29,8 +28,7 @@ type TranslatedAyahProps = {
 
 /**
  * Renders a single translated ayah with hover highlight, click interactions, and footnote support.
- * On desktop: shows a popover with verse actions on click
- * On mobile: shows a bottom sheet modal with verse actions on click
+ * Opens the StudyModeModal when clicked for verse actions (tafsir, reflections, lessons, etc.)
  *
  * @returns {JSX.Element} The translated ayah component
  */
@@ -45,10 +43,8 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   const [footnote, setFootnote] = useState<Footnote | null>(null);
   const [activeFootnoteName, setActiveFootnoteName] = useState<string | null>(null);
   const [isLoadingFootnote, setIsLoadingFootnote] = useState(false);
-  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isStudyModeModalOpen, setIsStudyModeModalOpen] = useState(false);
 
-  const isMobile = useIsMobile();
   const langData = getLanguageDataById(languageId || findLanguageIdByLocale(lang as Language));
 
   const resetFootnote = useCallback(() => {
@@ -93,8 +89,8 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
     [footnote, resetFootnote],
   );
 
-  // Handle mobile click - open the modal
-  const handleMobileClick = useCallback(
+  // Handle click - open the StudyModeModal
+  const handleAyahClick = useCallback(
     (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       const supElement = target.closest('sup');
@@ -104,44 +100,19 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
         return;
       }
       logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
-      setIsMobileModalOpen(true);
+      setIsStudyModeModalOpen(true);
     },
     [handleFootnoteClick, verse.verseKey],
   );
 
-  const handleMobileKeyDown = useCallback((event: React.KeyboardEvent) => {
+  const handleAyahKeyDown = useCallback((event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
-      setIsMobileModalOpen(true);
+      setIsStudyModeModalOpen(true);
     }
   }, []);
 
   const showFootnote = footnote !== null || isLoadingFootnote;
-  const isActionMenuOpen = isMobileModalOpen || isPopoverOpen;
-
-  // Handle desktop click - open the popover
-  const handleDesktopClick = useCallback(
-    (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      const supElement = target.closest('sup');
-      if (supElement) {
-        event.stopPropagation();
-        event.preventDefault();
-        handleFootnoteClick(supElement as HTMLElement);
-        return;
-      }
-      logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
-      setIsPopoverOpen(true);
-    },
-    [handleFootnoteClick, verse.verseKey],
-  );
-
-  const handleDesktopKeyDown = useCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      setIsPopoverOpen(true);
-    }
-  }, []);
 
   // Verse number element - used as popover trigger on desktop for consistent positioning
   const verseNumberElement = (
@@ -162,52 +133,30 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
 
   return (
     <>
-      {isMobile ? (
-        <>
-          <span
-            className={classNames(styles.ayah, styles[langData.direction], styles.clickable, {
-              [styles.hasActiveFootnote]: showFootnote,
-              [styles.isActive]: isActionMenuOpen,
-            })}
-            data-verse-key={verse.verseKey}
-            onClick={handleMobileClick}
-            onKeyDown={handleMobileKeyDown}
-            role="button"
-            tabIndex={0}
-          >
-            {verseNumberElement}
-            {translationTextElement}
-          </span>
-          <WordMobileModal
-            isOpen={isMobileModalOpen}
-            onClose={() => setIsMobileModalOpen(false)}
-            verse={verse}
-            bookmarksRangeUrl={bookmarksRangeUrl}
-          />
-        </>
-      ) : (
-        <span
-          className={classNames(styles.ayah, styles[langData.direction], styles.clickable, {
-            [styles.hasActiveFootnote]: showFootnote,
-            [styles.isActive]: isActionMenuOpen,
-          })}
-          data-verse-key={verse.verseKey}
-          onClick={handleDesktopClick}
-          onKeyDown={handleDesktopKeyDown}
-          role="button"
-          tabIndex={0}
-        >
-          <ReadingViewWordPopover
-            verse={verse}
-            bookmarksRangeUrl={bookmarksRangeUrl}
-            onOpenChange={setIsPopoverOpen}
-            isOpen={isPopoverOpen}
-          >
-            {verseNumberElement}
-          </ReadingViewWordPopover>
-          {translationTextElement}
-        </span>
-      )}
+      <span
+        className={classNames(styles.ayah, styles[langData.direction], styles.clickable, {
+          [styles.hasActiveFootnote]: showFootnote,
+          [styles.isActive]: isStudyModeModalOpen,
+        })}
+        data-verse-key={verse.verseKey}
+        onClick={handleAyahClick}
+        onKeyDown={handleAyahKeyDown}
+        role="button"
+        tabIndex={0}
+      >
+        {verseNumberElement}
+        {translationTextElement}
+      </span>
+
+      <Suspense fallback={null}>
+        <StudyModeModal
+          isOpen={isStudyModeModalOpen}
+          onClose={() => setIsStudyModeModalOpen(false)}
+          verse={verse}
+          verseKey={verse.verseKey}
+        />
+      </Suspense>
+
       {showFootnote && (
         <InlineFootnote
           footnoteName={activeFootnoteName}

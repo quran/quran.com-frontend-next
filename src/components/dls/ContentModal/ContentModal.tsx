@@ -155,8 +155,19 @@ const ContentModal = ({
   const Content = isFake ? FakeContentModal.FakeContentContent : Dialog.Content;
   const Close = isFake ? FakeContentModal.FakeContentClose : Dialog.Close;
 
+  // Handle dialog open state changes - ensures onClose is called when dialog closes
+  // This fixes the issue where clicking outside the modal didn't properly trigger onClose
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      if (!open && onClose) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
+
   return (
-    <Root open={isOpen} onClose={onClose}>
+    <Root open={isOpen} onClose={onClose} onOpenChange={handleOpenChange}>
       <Portal>
         <Overlay
           ref={overlayRef}

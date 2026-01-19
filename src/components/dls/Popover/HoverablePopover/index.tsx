@@ -18,6 +18,7 @@ interface Props {
   icon?: ReactNode;
   onIconClick?: () => void;
   iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 /**
@@ -44,6 +45,7 @@ const HoverablePopover: React.FC<Props> = ({
   icon,
   onIconClick,
   iconAriaLabel,
+  shouldContentBeClickable,
 }: Props): JSX.Element => (
   <Popover
     open={isOpen}
@@ -57,6 +59,7 @@ const HoverablePopover: React.FC<Props> = ({
     {...(icon && { icon })}
     {...(onIconClick && { onIconClick })}
     {...(iconAriaLabel && { iconAriaLabel })}
+    {...(shouldContentBeClickable && { shouldContentBeClickable })}
     trigger={
       <Tooltip
         open={isOpen}
@@ -69,6 +72,7 @@ const HoverablePopover: React.FC<Props> = ({
         {...(icon && { icon })}
         {...(onIconClick && { onIconClick })}
         {...(iconAriaLabel && { iconAriaLabel })}
+        {...(shouldContentBeClickable && { shouldContentBeClickable })}
       >
         {children}
       </Tooltip>
