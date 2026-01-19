@@ -25,17 +25,21 @@ const BUTTON_BASE_STYLE = (colors: WidgetColors): React.CSSProperties => ({
   display: 'inline-flex',
   alignItems: 'center',
   gap: 8,
-  padding: '10px 14px',
-  borderRadius: 10,
+  padding: 'var(--widget-footer-button-padding, 10px 14px)',
+  borderRadius: 'var(--widget-footer-button-radius, 10px)',
   border: `1px solid ${colors.borderColor}`,
   color: colors.textColor,
   backgroundColor: colors.bgColor,
   textDecoration: 'none',
-  fontSize: 14,
+  fontSize: 'var(--widget-footer-font-size, 14px)',
   fontWeight: 600,
 });
 
-const ICON_STYLE: React.CSSProperties = { width: 16, height: 16, display: 'inline-flex' };
+const ICON_STYLE: React.CSSProperties = {
+  width: 'var(--widget-footer-icon-size, 16px)',
+  height: 'var(--widget-footer-icon-size, 16px)',
+  display: 'inline-flex',
+};
 
 const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => {
   const chapterNumber = verse.chapterId ?? options.ayah.split(':')[0];
@@ -82,7 +86,7 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
   return (
     <div
       style={{
-        padding: '12px 16px',
+        padding: 'var(--widget-footer-padding, 12px 16px)',
         borderTop: `1px solid ${colors.borderColor}`,
         backgroundColor: colors.secondaryBg,
       }}

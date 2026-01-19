@@ -16,9 +16,9 @@ type Props = {
 };
 
 const ICON_BUTTON_STYLE = (colors: WidgetColors): React.CSSProperties => ({
-  width: 34,
-  height: 34,
-  borderRadius: 10,
+  width: 'var(--widget-header-action-size, 34px)',
+  height: 'var(--widget-header-action-size, 34px)',
+  borderRadius: 'var(--widget-header-action-radius, 10px)',
   border: `1px solid ${colors.borderColor}`,
   backgroundColor: colors.bgColor,
   color: colors.iconColor,
@@ -126,7 +126,13 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
               </svg>
             </span>
           </button>
-          <div style={{ width: 1, height: 32, backgroundColor: colors.borderColor }} />
+          <div
+            style={{
+              width: 1,
+              height: 'var(--widget-header-action-divider-height, 32px)',
+              backgroundColor: colors.borderColor,
+            }}
+          />
         </>
       )}
       <button
@@ -154,7 +160,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
       <div
         style={{
           fontWeight: 700,
-          fontSize: 15,
+          fontSize: 'var(--widget-header-title-size, 15px)',
           color: colors.textColor,
           direction: isRtl ? 'rtl' : 'ltr',
           textAlign: isRtl ? 'right' : 'left',
@@ -175,7 +181,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            fontSize: 13,
+            fontSize: 'var(--widget-header-link-size, 13px)',
             color: colors.secondaryText,
             textUnderlineOffset: 2,
             fontWeight: 500,
@@ -197,7 +203,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
         flexWrap: 'wrap',
         columnGap: 12,
         rowGap: 10,
-        padding: '14px 16px',
+        padding: 'var(--widget-header-padding, 14px 16px)',
         backgroundColor: colors.secondaryBg,
         borderBottom: `1px solid ${colors.borderColor}`,
         flexShrink: 0,

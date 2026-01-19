@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import {
@@ -81,6 +82,7 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
  * Generate the inline style tag for fixed font sizes in the widget.
  * @returns {string} The CSS string for the style tag.
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 const getWidgetFontStyles = (): string => `
   .quran-widget [data-verse-key] span,
   .quran-widget h1 span,
@@ -101,6 +103,49 @@ const getWidgetFontStyles = (): string => `
   .quran-widget [class*="translationName"],
   .quran-widget p[class*="translationName"] {
     font-size: 12px !important;
+  }
+  .quran-widget [class*="InlineWordByWord_word"] {
+    font-size: 12px !important;
+    line-height: 1.2;
+  }
+  @media (max-width: 420px) {
+    .quran-widget [data-verse-key] span,
+    .quran-widget h1 span,
+    .quran-widget [data-merged-verses] span {
+      font-size: 22px !important;
+    }
+    .quran-widget [data-verse-key],
+    .quran-widget h1,
+    .quran-widget [data-merged-verses] {
+      --line-height: calc(22px + 16px) !important;
+    }
+    .quran-widget [class*="translation-font-size-"] {
+      font-size: 14px !important;
+    }
+    .quran-widget [class*="translation-font-size-"] p {
+      font-size: 14px !important;
+    }
+    .quran-widget [class*="translationName"],
+    .quran-widget p[class*="translationName"] {
+      font-size: 11px !important;
+    }
+    .quran-widget [class*="InlineWordByWord_word"] {
+      font-size: 11px !important;
+      line-height: 1.2;
+    }
+    .quran-widget {
+      --widget-header-title-size: 13px;
+      --widget-header-link-size: 12px;
+      --widget-header-padding: 12px 12px;
+      --widget-header-action-size: 30px;
+      --widget-header-action-radius: 8px;
+      --widget-header-action-divider-height: 26px;
+      --widget-footer-font-size: 13px;
+      --widget-footer-button-padding: 8px 10px;
+      --widget-footer-button-radius: 8px;
+      --widget-footer-icon-size: 14px;
+      --widget-footer-padding: 10px 12px;
+    }
   }
 `;
 
