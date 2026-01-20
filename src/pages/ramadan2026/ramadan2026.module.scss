@@ -1,0 +1,83 @@
+@use 'src/styles/breakpoints';
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.subtext {
+  font-size: var(--font-size-small);
+}
+
+.container {
+  text-align: start !important;
+}
+
+.postRamadanVerseContainer {
+  padding-block: var(--spacing-large-px);
+}
+
+.verseContainer {
+  text-align: justify;
+  margin: auto;
+  @include breakpoints.desktop {
+    inline-size: 65%;
+  }
+  @include breakpoints.smallerThanDesktop {
+    inline-size: 90%;
+  }
+  @include breakpoints.smallerThanTablet {
+    min-block-size: calc(9 * var(--spacing-mega));
+  }
+  min-block-size: calc(5 * var(--spacing-mega));
+}
+
+.mainVerse {
+  @include breakpoints.tablet {
+    max-inline-size: 50%;
+  }
+}
+.ayahLevelSettings {
+  display: flex;
+  align-items: center;
+}
+
+.storeButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  svg {
+    inline-size: calc(2 * var(--spacing-mega-px));
+    block-size: auto;
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-mega-px);
+    }
+  }
+}
+
+.starContainer {
+  display: flex;
+  align-items: center;
+
+  svg {
+    inline-size: var(--spacing-medium3-px);
+    stroke: #fb923c;
+    color: #fdba74;
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-medium-px);
+    }
+  }
+
+  .googlePlay {
+    clip-path: inset(0 70% 0 0);
+  }
+
+  .appStore {
+    clip-path: inset(0 20% 0 0);
+  }
+}

@@ -51,6 +51,9 @@ export const EXTERNAL_ROUTES = {
     'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
   FEEDBACK: 'https://feedback.quran.com',
   QURAN_FOUNDATION: 'https://quran.foundation',
+  QURAN_REFLECT_ANDROID:
+    'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+  QURAN_REFLECT_IOS: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
 };
 
 export const QURAN_URL = 'https://quran.com';
@@ -61,6 +64,8 @@ export const ABOUT_US_URL = '/about-us';
 export const DEVELOPERS_URL = '/developers';
 export const PRODUCT_UPDATES_URL = '/product-updates';
 export const SUPPORT_URL = '/support';
+export const RAMADAN_2026_URL = '/ramadan2026';
+export const RAMADAN_CHALLENGE_URL = '/ramadanchallenge';
 
 /**
  * Get the href link to a verse.
