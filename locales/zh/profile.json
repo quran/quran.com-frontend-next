@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "仅有的 {{formats}}",
+  "change-password": "更改密码",
   "delete-account": "删除帐户",
+  "delete-account-warning-title": "警告",
   "delete-confirmation": {
     "action-text": "我明白后果，删除我的帐户",
     "confirmation-text": "删除我的账户",
     "instruction-text": "请输入<strong> {{text}} </strong>进行确认",
     "subtitle": "此操作无法撤消。这将永久删除您的帐户、保存的书签、阅读会话以及您的所有数据。",
     "title": "你绝对确定吗？"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "是的",
+    "cancel-text": "不",
+    "subtitle": "您将删除个人资料图片并将其重置为默认图片，您确定吗？",
+    "title": "删除个人资料图片"
+  },
+  "edit-details": "编辑详情",
+  "email-notification-settings": "电子邮件通知设置",
+  "errors": {
+    "remove-failed": "移除头像失败，请重试。",
+    "upload-failed": "上传头像失败，请重试。"
+  },
+  "max-file-size": "最大限度 {{size}}",
+  "my-profile": "我的个人资料",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "我们将通过电子邮件发送每周阅读作业链接、反思提示以及其他资源，以帮助您保持学习进度。",
+      "title": "一年读完古兰经"
+    },
+    "streaks-that-will-break": {
+      "description": "系统会发送电子邮件通知您连续记录即将中断。",
+      "title": "连胜"
+    }
+  },
+  "personalization": "个性化",
+  "profile-picture": "头像",
+  "remove-picture": "移除图片",
+  "remove-success": "头像已成功移除",
+  "save-changes": "保存更改",
+  "save-picture": "保存图片",
+  "success": {
+    "details": "您的个人资料已成功更新",
+    "notifications": "您的通知设置已成功更新",
+    "password": "您的密码已成功更新"
+  },
+  "update-password": "更新密码",
+  "upload-picture": "上传图片",
+  "upload-success": "头像上传成功"
 }

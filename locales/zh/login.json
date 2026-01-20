@@ -11,6 +11,7 @@
   "continue-email": "继续使用电子邮件",
   "continue-facebook": "继续使用 Facebook",
   "continue-google": "继续使用 Google",
+  "current-password-placeholder": "当前密码",
   "email-placeholder": "电子邮件地址",
   "error": {
     "email-required": "電子郵件缺失！",
@@ -58,6 +59,7 @@
   "forgot-password-description": "输入您的电子邮件地址，我们将向您发送重置密码的说明。",
   "forgot-password-success": "密码重置电子邮件已发送！请检查您的收件箱。",
   "forgot-password-title": "忘记密码？",
+  "hide-password": "隐藏密码",
   "last-name-placeholder": "姓",
   "login-cta": "立即登录或注册：",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "重设密码",
   "reset-password-success": "密码重置成功！",
   "set-new-password": "设置新密码",
+  "show-password": "显示密码",
   "sign-in": "登入",
   "sign-in-or-sign-up": "请在下方登录或注册以继续。",
   "sign-up": "报名",

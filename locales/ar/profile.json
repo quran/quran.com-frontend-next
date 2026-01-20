@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "فقط {{formats}}",
+  "change-password": "تغيير كلمة المرور",
   "delete-account": "حذف الحساب",
+  "delete-account-warning-title": "تحذير",
   "delete-confirmation": {
     "action-text": "أفهم العواقب، احذف حسابي",
     "confirmation-text": "احذف حسابي",
     "instruction-text": "الرجاء كتابة <strong> {{text}}</strong> للتأكيد",
     "subtitle": "هذا الإجراء لا يمكن التراجع عنه. سيؤدي ذلك إلى حذف حسابك بشكل دائم، بما في ذلك سجلات الحفظ، وجلسات القراءة، وجميع بياناتك.",
     "title": "هل أنت متأكد تمامًا؟"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "نعم",
+    "cancel-text": "لا",
+    "subtitle": "ستقوم بحذف صورة الملف الشخصي وإعادة ضبطها إلى الصورة الافتراضية، هل أنت متأكد؟",
+    "title": "حذف صورة الملف الشخصي"
+  },
+  "edit-details": "تعديل التفاصيل",
+  "email-notification-settings": "إعدادات إشعارات البريد الإلكتروني",
+  "errors": {
+    "remove-failed": "فشلت عملية إزالة صورة الملف الشخصي. يرجى المحاولة مرة أخرى.",
+    "upload-failed": "فشل تحميل صورة الملف الشخصي. يرجى المحاولة مرة أخرى."
+  },
+  "max-file-size": "الأعلى {{size}}",
+  "my-profile": "ملفي الشخصي",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "سيتم إرسال بريد إلكتروني يحتوي على روابط لمهمة القراءة الأسبوعية، ومطالبات للتأمل، وموارد إضافية لمساعدتك على البقاء على المسار الصحيح.",
+      "title": "قراءة القرآن في عام واحد"
+    },
+    "streaks-that-will-break": {
+      "description": "سيتم إرسال بريد إلكتروني لإعلامك بأن سلسلة انتصاراتك على وشك الانتهاء.",
+      "title": "خطوط"
+    }
+  },
+  "personalization": "التخصيص",
+  "profile-picture": "صورة الملف الشخصي",
+  "remove-picture": "إزالة الصورة",
+  "remove-success": "تمت إزالة صورة الملف الشخصي بنجاح",
+  "save-changes": "حفظ التغييرات",
+  "save-picture": "حفظ الصورة",
+  "success": {
+    "details": "تم تحديث ملفك الشخصي بنجاح",
+    "notifications": "تم تحديث إعدادات الإشعارات بنجاح",
+    "password": "تم تحديث كلمة مرورك بنجاح"
+  },
+  "update-password": "تحديث كلمة المرور",
+  "upload-picture": "تحميل صورة",
+  "upload-success": "تم تحميل صورة الملف الشخصي بنجاح"
 }

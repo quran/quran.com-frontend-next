@@ -17,8 +17,8 @@ import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
-  getProfileNavigationUrl,
   LEARNING_PLANS_URL,
+  MY_QURAN_URL,
   RADIO_URL,
   RECITERS_URL,
 } from '@/utils/navigation';
@@ -58,7 +58,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     {
       title: t('my-quran'),
       icon: <IconBookmarkFilled />,
-      href: getProfileNavigationUrl(),
+      href: MY_QURAN_URL,
       eventName: 'navigation_drawer_my_quran',
     },
     {

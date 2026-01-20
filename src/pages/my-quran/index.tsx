@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import layoutStyle from './index.module.scss';
-import styles from './profile.module.scss';
+import layoutStyle from '../index.module.scss';
+
+import styles from './my-quran.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
@@ -27,7 +28,7 @@ interface Props {
 
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
-const ProfilePage: NextPage<Props> = () => {
+const MyQuranPage: NextPage<Props> = () => {
   const { t, lang } = useTranslation();
   const { userData: user, isLoading, userDataError: error, isAuthenticated } = useAuthData();
   const runLogout = useLogout();
@@ -138,4 +139,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default ProfilePage;
+export default MyQuranPage;

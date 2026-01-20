@@ -17,7 +17,7 @@ import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { pickRandom } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getProfileNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, MY_QURAN_URL } from '@/utils/navigation';
 import { ChapterContent } from 'types/ApiResponses';
 
 interface ExploreCardProps {
@@ -100,7 +100,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       <div className={styles.header}>
         <span className={styles.title}>{t('quran-reader:end-of-surah.explore')}</span>
         <Link
-          href={getProfileNavigationUrl()}
+          href={MY_QURAN_URL}
           className={styles.myQuranContainer}
           onClick={handleMyQuranClick}
           aria-label={t('quran-reader:end-of-surah.my-quran')}

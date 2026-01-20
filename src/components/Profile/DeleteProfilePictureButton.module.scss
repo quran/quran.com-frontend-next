@@ -1,0 +1,14 @@
+.deleteProfilePictureFooter {
+  inline-size: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-small);
+  .actionButton {
+    inline-size: 100%;
+  }
+}
+
+.profilePictureActionButton {
+  border-radius: var(--border-radius-small-px);
+  font-weight: var(--font-weight-normal);
+}

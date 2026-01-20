@@ -71,6 +71,7 @@ export const EXTERNAL_ROUTES = {
 };
 
 export const QURAN_URL = 'https://quran.com';
+export const MY_QURAN_URL = '/my-quran';
 export const LEARNING_PLANS_URL = '/learning-plans';
 export const RADIO_URL = '/radio';
 export const RECITERS_URL = '/reciters';
