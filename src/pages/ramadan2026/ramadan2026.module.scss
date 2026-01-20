@@ -16,35 +16,6 @@
   text-align: start !important;
 }
 
-.postRamadanVerseContainer {
-  padding-block: var(--spacing-large-px);
-}
-
-.verseContainer {
-  text-align: justify;
-  margin: auto;
-  @include breakpoints.desktop {
-    inline-size: 65%;
-  }
-  @include breakpoints.smallerThanDesktop {
-    inline-size: 90%;
-  }
-  @include breakpoints.smallerThanTablet {
-    min-block-size: calc(9 * var(--spacing-mega));
-  }
-  min-block-size: calc(5 * var(--spacing-mega));
-}
-
-.mainVerse {
-  @include breakpoints.tablet {
-    max-inline-size: 50%;
-  }
-}
-.ayahLevelSettings {
-  display: flex;
-  align-items: center;
-}
-
 .storeButtons {
   display: flex;
   align-items: center;
