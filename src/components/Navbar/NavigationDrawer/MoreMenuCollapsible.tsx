@@ -92,6 +92,7 @@ const MoreMenuCollapsible: React.FC<MoreMenuCollapsibleProps> = ({
       shouldRotateSuffixOnToggle
       shouldSuffixTrigger
       onOpenChange={onOpenChange}
+      data-testid="quick-links"
     >
       {({ isOpen }) => {
         if (!isOpen) return null;

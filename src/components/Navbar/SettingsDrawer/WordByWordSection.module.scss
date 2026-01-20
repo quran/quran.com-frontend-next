@@ -1,9 +1,9 @@
+@use 'src/styles/theme';
+
 .titleRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-block-end: 1px solid var(--color-borders-hairline);
-  padding-block-end: var(--spacing-medium2-px);
 }
 
 .titleContainer {
@@ -45,15 +45,65 @@
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-medium);
   opacity: unset;
-  padding-inline-start: var(--spacing-small-plus-px);
   padding-inline-end: var(--spacing-small-plus-px);
 }
 
 .helperTooltipIcon {
+  display: flex;
+  align-items: center;
   color: var(--color-blue-buttons-and-icons);
   fill: var(--color-blue-buttons-and-icons);
+  margin-inline: var(--spacing-xxsmall-px);
+
+  svg {
+    inline-size: var(--font-size-xxsmall-px);
+    block-size: var(--font-size-xxsmall-px);
+  }
 }
 
-.select {
+div.helperTooltipContent.helperTooltipContent {
+  padding: var(--spacing-small-px);
+  @include theme.dark {
+    background-color: var(--color-background-alternative-faint-new);
+  }
+  background-color: var(--color-background-elevated-new);
+  span {
+    @include theme.dark {
+      fill: var(--color-background-alternative-faint-new);
+    }
+    color: var(--color-text-default-new);
+    fill: var(--color-background-elevated-new);
+  }
+  z-index: var(--z-index-high);
+  font-size: var(--font-size-xxsmall-px);
+  line-height: 140%;
+  text-align: center;
+  color: var(--color-text-default-new);
+}
+
+div.select.select {
   background-color: var(--color-background-alternative-faint);
+  max-inline-size: calc(var(--spacing-mega-px) - var(--spacing-xxsmall2-px));
+}
+
+div.selectArrow.selectArrow {
+  background-color: var(--color-background-alternative-faint);
+}
+
+.footerOpacityUnset {
+  opacity: unset;
+}
+
+.footerWithBorder {
+  opacity: unset;
+  border-block-end: 1px solid var(--color-borders-hairline);
+  padding-block-end: var(--spacing-medium2-px);
+}
+
+.sectionContainer .fontSizeRow {
+  margin-block-start: var(--spacing-medium2-px);
+}
+
+.sectionContainer .inlineContentRow {
+  margin-block-start: 0;
 }

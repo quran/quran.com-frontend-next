@@ -217,6 +217,8 @@ export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 export const getCurrentDay = () => new Date().getDate();
 
+export const getCurrentYear = () => new Date().getFullYear();
+
 /**
  * Converts a date instance to a string in this format: YYYY-MM-DD
  *

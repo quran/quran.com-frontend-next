@@ -3,6 +3,7 @@
   "begin": "Bắt đầu",
   "calendar-cta": "Lịch",
   "chapters-and-verses": "Chương và Câu",
+  "continue-learning-plan": "Tiếp tục học tập",
   "continue-read": "Tiếp tục đọc",
   "explore-topics": "Khám phá chủ đề",
   "first-time-reading": "Mới tìm hiểu Kinh Qur'an? <link>Bắt đầu tại đây</link>",
@@ -38,10 +39,10 @@
     },
     "title": "Hành trình Phát triển cùng Kinh Qur'an"
   },
-  "qr-community": "Đọc các câu kinh và suy ngẫm nổi bật hôm nay",
+  "qr-community": "Đọc các câu Kinh và suy ngẫm nổi bật hôm nay",
   "quran-in-year": "Đọc Kinh Qur'an trong một năm",
   "quran-in-year-cta": "Bài đọc tuần này",
-  "quran-in-year-verse-title": "Một câu kinh từ bài đọc tuần này",
+  "quran-in-year-verse-title": "Một câu Kinh từ bài đọc tuần này",
   "ramadan-activities-cta": "<link>Theo dõi <b>Lịch Kinh Qur'an toàn cầu</b> để nhận bài đọc hàng tuần, podcast truyền cảm hứng và lời mời suy ngẫm!</link>",
   "ramadan": {
     "header": "Công cụ giúp bạn gắn bó hơn với Kinh Qur'an",
@@ -56,6 +57,7 @@
     "description": "Giúp lan tỏa Kinh Qur'an đến người học mới",
     "title": "Chia sẻ Thiên Kinh Qur'an!"
   },
+  "start-learning-plan": "Bắt đầu học tập",
   "start-read": "Bắt đầu đọc",
   "stay-consistent": "Theo dõi chuỗi thành tích, thiết lập mục tiêu tùy chỉnh, duy trì sự nhất quán",
   "tab": {

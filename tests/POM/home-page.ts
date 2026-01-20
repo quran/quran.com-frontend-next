@@ -1,4 +1,8 @@
+/* eslint-disable no-await-in-loop */
 import { BrowserContext, Locator, Page } from '@playwright/test';
+
+import { openSettingsDrawer as openSettingsDrawerHelper } from '@/tests/helpers/settings';
+import { TestId } from '@/tests/test-ids';
 
 class Homepage {
   readonly page: Page;
@@ -97,20 +101,40 @@ class Homepage {
     return JSON.parse(parentObject[name]);
   }
 
-  async openSettingsDrawer() {
-    await this.page.getByTestId('settings-button').click();
+  /**
+   * Close any Next.js error dialog that might be blocking UI interactions
+   * This should be called before any UI interaction that might be blocked
+   */
+  async closeNextjsErrorDialog() {
+    const errorDialog = this.page.locator('[data-nextjs-dialog-overlay="true"]');
+    if (await errorDialog.isVisible()) {
+      // Try to close by clicking the X button first
+      const closeButton = this.page.locator(
+        '[data-nextjs-errors-dialog-left-right-close-button="true"]',
+      );
+      if (await closeButton.isVisible()) {
+        await closeButton.click();
+      } else {
+        // Fallback: click on the backdrop to close
+        const backdrop = this.page.locator('[data-nextjs-dialog-backdrop="true"]');
+        if (await backdrop.isVisible()) {
+          await backdrop.click();
+        }
+      }
+      // Wait for the dialog to disappear
+      await errorDialog.waitFor({ state: 'hidden' });
+    }
+  }
+
+  async openSettingsDrawer(isMobile: boolean = false) {
+    await openSettingsDrawerHelper(this.page, { isMobile });
   }
 
   async enableMushafMode(isMobile: boolean) {
     if (isMobile) {
-      // scroll down a little to make the tab visible (bypassing a render issue)
-      // FIXME: Remove this workaround when the underlying issue is fixed
-      await this.page.mouse.wheel(0, 200);
-      await this.page.mouse.wheel(0, -100);
-
-      await this.page.getByTestId('reading-tab').click();
+      await this.page.getByTestId(TestId.READING_TAB).click();
     } else {
-      await this.page.getByTestId('reading-button').click();
+      await this.page.getByTestId(TestId.READING_BUTTON).click();
     }
   }
 
@@ -122,7 +146,7 @@ class Homepage {
   async searchFor(query: string): Promise<Locator> {
     const searchBar = this.page.locator('#searchQuery');
     await searchBar.fill(query);
-    return this.page.getByTestId('search-results');
+    return this.page.getByTestId(TestId.SEARCH_RESULTS);
   }
 }
 

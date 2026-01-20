@@ -10,6 +10,7 @@ import CoursesList from '@/components/Course/CoursesList';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
+import { TestId } from '@/tests/test-ids';
 import { CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
@@ -21,7 +22,7 @@ type Props = {
 };
 
 const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
-  const { t } = useTranslation('learn');
+  const { t, lang } = useTranslation('learn');
   return (
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>
@@ -39,11 +40,14 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
           </div>
         )}
 
-        <div className={classNames(layoutStyles.flow, styles.container)}>
+        <div
+          className={classNames(layoutStyles.flow, styles.container)}
+          data-testid={TestId.COURSES_LIST}
+        >
           <DataFetcher
             loading={Loading}
             fetcher={privateFetcher}
-            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses })}
+            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses, languages: [lang] })}
             render={(data: CoursesResponse) => (
               <CoursesList courses={data.data} isMyCourses={isMyCourses} />
             )}

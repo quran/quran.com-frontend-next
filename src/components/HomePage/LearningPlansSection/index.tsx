@@ -9,6 +9,7 @@ import Loading from './Loading';
 import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { TestId } from '@/tests/test-ids';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
@@ -28,7 +29,7 @@ const learningPlansSorter = (a: Course, b: Course) => {
 };
 
 const LearningPlansSection = () => {
-  const { t } = useTranslation('home');
+  const { t, lang } = useTranslation('home');
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -41,32 +42,35 @@ const LearningPlansSection = () => {
   };
 
   return (
-    <>
-      <div className={styles.header}>
-        <h1>{t('learning-plan')}</h1>
-        <div>
-          <Link
-            variant={LinkVariant.Blend}
-            href={getCoursesNavigationUrl()}
-            className={styles.seeMore}
-            onClick={onSeeMoreClicked}
-          >
-            {t('see-more-learning-plans')}
-          </Link>
-        </div>
-      </div>
-      <DataFetcher
-        loading={Loading}
-        fetcher={privateFetcher}
-        queryKey={makeGetCoursesUrl({ myCourses: false })}
-        render={(data: CoursesResponse) => {
-          const sortedCourses = [...data.data].sort(learningPlansSorter);
-          const firstNonEnrolledIndex = sortedCourses.findIndex(
-            (course) => typeof course.isCompleted === 'undefined',
-          );
+    <DataFetcher
+      loading={Loading}
+      fetcher={privateFetcher}
+      queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
+      render={(data: CoursesResponse) => {
+        const sortedCourses = [...data.data].sort(learningPlansSorter);
+        const firstNonEnrolledIndex = sortedCourses.findIndex(
+          (course) => typeof course.isCompleted === 'undefined',
+        );
+        const hasEnrolledCourses = sortedCourses.some(
+          (course) => typeof course.isCompleted !== 'undefined',
+        );
 
-          return (
-            <div className={styles.cardsContainer}>
+        return (
+          <>
+            <div className={styles.header} data-testid="learning-plans-section">
+              <h1>{t(hasEnrolledCourses ? 'continue-learning-plan' : 'start-learning-plan')}</h1>
+              <div>
+                <Link
+                  variant={LinkVariant.Blend}
+                  href={getCoursesNavigationUrl()}
+                  className={styles.seeMore}
+                  onClick={onSeeMoreClicked}
+                >
+                  {t('see-more-learning-plans')}
+                </Link>
+              </div>
+            </div>
+            <div className={styles.cardsContainer} data-testid={TestId.COURSES_LIST}>
               {sortedCourses.map((course, index) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
                 const { isCompleted } = course;
@@ -107,10 +111,10 @@ const LearningPlansSection = () => {
                 );
               })}
             </div>
-          );
-        }}
-      />
-    </>
+          </>
+        );
+      }}
+    />
   );
 };
 

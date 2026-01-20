@@ -3,7 +3,7 @@ import range from 'lodash/range';
 import { getChapterData } from './chapter';
 
 import ChaptersData from '@/types/ChaptersData';
-import { shouldUseMinimalLayout, toLocalizedVerseKey } from '@/utils/locale';
+import { toLocalizedVerseKey } from '@/utils/locale';
 
 /**
  * Generate the verse keys between two verse keys.
@@ -147,15 +147,10 @@ export const readableVerseRangeKeys = (
       const from = parsedRange[0];
       const to = parsedRange[1];
 
-      const showMinimalUi = shouldUseMinimalLayout(lang);
-
       const chapterData = getChapterData(chaptersData, from.chapter.toString());
       if (!chapterData) return null;
 
-      const chapterName = showMinimalUi
-        ? chapterData.translatedName
-        : chapterData.transliteratedName;
-
+      const chapterName = chapterData.transliteratedName;
       const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
 
       if (from.chapter === to.chapter && from.verse === to.verse) {

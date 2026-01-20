@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import styles from './TranslationsMenuItem.module.scss';
+
 import DataFetcher from '@/components/DataFetcher';
 import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
@@ -93,7 +95,7 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
       <ContentModal
         innerRef={contentModalRef}
         isOpen={isContentModalOpen}
-        header={<p>{t('translations')}</p>}
+        header={<p className={styles.header}>{t('translations')}</p>}
         hasCloseButton
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}

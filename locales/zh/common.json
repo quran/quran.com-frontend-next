@@ -340,13 +340,20 @@
   "read": "读",
   "reading-history": "阅读历史",
   "reading-preference": {
+    "arabic": "阿拉伯",
+    "my-translations": "我的翻译",
+    "none-selected": "未选择",
     "reading": "诵读",
-    "translation": "翻译"
+    "reading-translation": "翻译",
+    "select-translation": "选择翻译",
+    "select-translation-message": "您尚未选择任何翻译。请通过设置选择翻译。",
+    "select-translations": "选择翻译",
+    "translation": "翻译",
+    "verse-by-verse": "逐节"
   },
   "ready-for-ramadan": "准备好迎接斋月了吗？",
   "recitation": "朗诵",
   "reciter": "诵读家",
-  "reciter-summary": "（经 Tafsir Center 友情许可）",
   "reciters": "朗诵者",
   "reflect": "参悟",
   "reflections": "反思",

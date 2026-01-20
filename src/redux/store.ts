@@ -44,10 +44,11 @@ import session from './slices/session';
 import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
+import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 37,
+  version: 38,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -106,8 +107,23 @@ export const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const getStore = (locale: string) =>
-  configureStore({
+const getStore = (locale: string) => {
+  const baseInitialState = getStoreInitialState(locale);
+
+  // Preserve persisted theme synchronously to prevent flash during language switching.
+  // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
+  let initialState = baseInitialState;
+  if (typeof window !== 'undefined') {
+    const persistedTheme = getPersistedTheme();
+    if (persistedTheme) {
+      initialState = {
+        ...baseInitialState,
+        [SliceName.THEME]: persistedTheme,
+      };
+    }
+  }
+
+  return configureStore({
     reducer: persistedReducer,
     // @ts-ignore
     middleware: (getDefaultMiddleware) =>
@@ -120,7 +136,8 @@ const getStore = (locale: string) =>
       }).concat(DefaultSettingsMiddleware),
     devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
-    preloadedState: getStoreInitialState(locale),
+    preloadedState: initialState,
   });
+};
 
 export default getStore;

@@ -32,6 +32,7 @@ type BaseModalProps = {
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
   zIndexVariant?: ZIndexVariant;
+  testId?: string;
 };
 
 type ModalWithCloseButtonProps = BaseModalProps & {
@@ -61,6 +62,7 @@ const Modal = ({
   zIndexVariant,
   hasCloseButton = false,
   onClose,
+  testId,
 }: ModalProps) => {
   const { t } = useTranslation('common');
 
@@ -81,6 +83,7 @@ const Modal = ({
           })}
         />
         <Content
+          testId={testId}
           isPropagationStopped={isPropagationStopped}
           onEscapeKeyDown={onEscapeKeyDown}
           onPointerDownOutside={onClickOutside}

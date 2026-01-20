@@ -32,6 +32,7 @@ type VerseTextProps = {
   tooltipType?: TooltipType;
   highlightedWordPosition?: number;
   isWordInteractionDisabled?: boolean;
+  shouldDisableForceTooltip?: boolean;
 };
 
 const VerseText = ({
@@ -43,6 +44,7 @@ const VerseText = ({
   tooltipType,
   highlightedWordPosition,
   isWordInteractionDisabled = false,
+  shouldDisableForceTooltip = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
@@ -81,6 +83,7 @@ const VerseText = ({
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <VerseTextContainer
         ref={textRef}
+        data-testid={`verse-arabic-${firstWord.verseKey}`}
         className={classNames(styles.verseTextContainer, styles[fontClassName], {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
@@ -110,7 +113,7 @@ const VerseText = ({
                 bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
-                shouldForceShowTooltip={isHighlightedWord}
+                shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}
               />
             );
           })}

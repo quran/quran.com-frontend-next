@@ -14,6 +14,8 @@ const OBSERVED_ACTIONS = [
   `${SliceName.READING_PREFERENCES}/setWordByWordContentType`,
   `${SliceName.READING_PREFERENCES}/setWordByWordDisplay`,
   `${SliceName.READING_PREFERENCES}/setWordClickFunctionality`,
+  `${SliceName.READING_PREFERENCES}/setWordByWordTooltipContentType`,
+  `${SliceName.READING_PREFERENCES}/setWordByWordInlineContentType`,
   `${SliceName.QURAN_READER_STYLES}/setQuranFont`,
   `${SliceName.QURAN_READER_STYLES}/setMushafLines`,
   `${SliceName.QURAN_READER_STYLES}/increaseQuranTextFontScale`,

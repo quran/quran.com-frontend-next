@@ -1,11 +1,21 @@
 ---
-description: Generate verified, hallucination-free documentation from codebase features
+name: generate-verified-docs
+description:
+  Generates audit-grade, hallucination-free documentation from codebase features with full
+  traceability. Use when documenting features, creating technical specs, or generating verified
+  documentation with code references.
 ---
 
-# Verified Documentation Generator Workflow
+# Verified Documentation Generator
 
 Generate audit-grade documentation from a codebase feature with full traceability and zero
 hallucination.
+
+## Arguments
+
+`$ARGUMENTS` should be:
+
+- Feature name and description (e.g., "User Registration", "Bookmark System", "Reading Progress")
 
 ## Prerequisites
 

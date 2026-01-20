@@ -340,13 +340,20 @@
   "read": "อ่าน",
   "reading-history": "ประวัติการอ่าน",
   "reading-preference": {
+    "arabic": "ภาษาอาหรับ",
+    "my-translations": "งานแปลของฉัน",
+    "none-selected": "ไม่มีการเลือก",
     "reading": "โหมดอ่าน",
-    "translation": "โหมดคำแปล"
+    "reading-translation": "การแปล",
+    "select-translation": "เลือกการแปล",
+    "select-translation-message": "คุณยังไม่ได้เลือกคำแปลใดๆ โปรดเลือกคำแปลผ่านการตั้งค่า",
+    "select-translations": "เลือกคำแปล",
+    "translation": "โหมดคำแปล",
+    "verse-by-verse": "ทีละบท"
   },
   "ready-for-ramadan": "พร้อมสำหรับรอมฎอนหรือยัง?",
   "recitation": "เสียงอ่าน",
   "reciter": "ผู้อ่าน",
-  "reciter-summary": "(ได้รับอนุญาตจากศูนย์ตัฟซีร)",
   "reciters": "ผู้อ่าน",
   "reflect": "สะท้อน",
   "reflections": "ภาพสะท้อน",

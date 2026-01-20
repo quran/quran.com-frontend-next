@@ -39,6 +39,7 @@ const LanguageAndTafsirSelection = ({
           className={styles.languageSelection}
           size={SelectSize.Small}
           id="lang-selection"
+          testId="lang-selection"
           name="lang-selection"
           options={languageOptions.map((lng) => ({
             label: getLocaleNameByFullName(lng),
@@ -66,6 +67,8 @@ const LanguageAndTafsirSelection = ({
                 className={classNames(styles.tafsirSelectionItem, {
                   [styles.tafsirItemSelected]: selected,
                 })}
+                data-testid={`tafsir-selection-${tafsir.slug}`}
+                data-isselected={selected}
               >
                 {tafsir.translatedName.name}
               </Button>

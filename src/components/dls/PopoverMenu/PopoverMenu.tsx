@@ -31,6 +31,8 @@ type PopoverMenuProps = {
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
   expandDirection?: PopoverMenuExpandDirection;
+  align?: PopoverMenuAlign;
+  sideOffset?: number;
   contentClassName?: string;
   shouldClose?: boolean;
   align?: PopoverMenuAlign;
@@ -45,6 +47,8 @@ const PopoverMenu = ({
   shouldClose = true,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
+  align = PopoverMenuAlign.CENTER,
+  sideOffset = 0,
   contentClassName,
   align,
 }: PopoverMenuProps) => {
@@ -55,6 +59,7 @@ const PopoverMenu = ({
       className={classNames(styles.content, contentClassName)}
       side={side}
       align={align}
+      sideOffset={sideOffset}
     >
       {children}
     </PrimitiveDropdownMenu.Content>

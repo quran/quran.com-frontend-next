@@ -14,6 +14,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
+import { TestId } from '@/tests/test-ids';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 
@@ -62,6 +63,7 @@ const ThemeSwitcher = () => {
           variant={ButtonVariant.Ghost}
           size={ButtonSize.Small}
           shape={ButtonShape.Pill}
+          data-testid={TestId.CHANGE_THEME_BUTTON}
         >
           {t('change-theme')}
         </Button>
@@ -77,6 +79,7 @@ const ThemeSwitcher = () => {
               [styles.popoverItemSelected]: option.value === theme.type,
             })}
             icon={themeIcons[option.value]}
+            dataTestId={`theme-option-${option.value}`}
           >
             {option.label}
           </PopoverMenu.Item>

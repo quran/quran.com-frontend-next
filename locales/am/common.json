@@ -340,13 +340,20 @@
   "read": "አንብብ",
   "reading-history": "የንባብ ታሪክ",
   "reading-preference": {
+    "arabic": "አረብኛ",
+    "my-translations": "የእኔ ትርጉሞች",
+    "none-selected": "ምንም አልተመረጠም",
     "reading": "ንባብ",
-    "translation": "ትርጉም"
+    "reading-translation": "ትርጉም",
+    "select-translation": "ትርጉም ምረጥ",
+    "select-translation-message": "ምንም አይነት ትርጉሞችን አልመረጡም። እባክዎ በቅንብሮች በኩል ትርጉም ይምረጡ።",
+    "select-translations": "ትርጉሞችን ይምረጡ",
+    "translation": "ትርጉም",
+    "verse-by-verse": "ቁጥር በቁጥር"
   },
   "ready-for-ramadan": "ለረመዳን ዝግጁ ነዎት?",
   "recitation": "ንባብ",
   "reciter": "ዘጋቢ",
-  "reciter-summary": "(ከታፍሲር ማዕከል በደግነት ፈቃድ)",
   "reciters": "አንባቢዎች",
   "reflect": "ነጸብራቅ",
   "reflections": "እይታዎች/ነጸብራቅ",

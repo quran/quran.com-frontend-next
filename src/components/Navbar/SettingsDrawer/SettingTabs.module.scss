@@ -9,6 +9,10 @@
 .list {
   display: flex;
   border-block-end: var(--spacing-micro-px) solid var(--color-borders-hairline);
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 5;
+  background-color: var(--color-background-elevated);
 }
 
 .trigger {
@@ -38,13 +42,17 @@
   }
 }
 
+.scrollableArea {
+  flex: 1;
+  overflow-y: auto;
+  min-block-size: 0;
+  transform: translateZ(0);
+}
+
 .content {
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
   padding-block-end: var(--spacing-large);
-  overflow-y: auto;
-  flex: 1;
-  min-block-size: 0;
 }
 
 .versePreviewContainer {

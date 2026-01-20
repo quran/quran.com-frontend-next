@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import ReadingPreferenceSwitcher from '../ReadingPreferenceSwitcher';
+import ReadingModeToggle from '../ReadingPreferenceSwitcher/ReadingModeToggle';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
 import ChapterNavigation from './components/ChapterNavigation';
@@ -13,10 +13,10 @@ import SettingsButton from './components/SettingsButton';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
-import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
+import useIsMobile from '@/hooks/useIsMobile';
 import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
+import { TestId } from '@/tests/test-ids';
 import { Mushaf } from '@/types/QuranReader';
-import { isMobile } from '@/utils/responsive';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 /**
@@ -33,6 +33,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isExpanded,
     mushaf,
     verseKey,
+    isTranslationMode,
 
     // Data
     chapterData,
@@ -48,19 +49,20 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     handleSidebarToggle,
   } = useContextMenuState();
 
-  // useMemo must be called before any early returns (Rules of Hooks)
-  const isMobileView = useMemo(() => isMobile(), []);
+  const isMobileView = useIsMobile();
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
     return null;
   }
 
-  const isMobileScrolledView = !showNavbar && isMobile();
-  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
+  const isMobileScrolledView = !showNavbar && isMobileView;
+  const isNotMobileOrScrolledView = !showNavbar || !isMobileView;
 
   return (
     <div
+      data-testid={TestId.HEADER}
+      data-isvisible={!isMobileScrolledView}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
@@ -122,11 +124,9 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
           })}
         >
           <div className={styles.readingPreferenceContainer}>
-            <ReadingPreferenceSwitcher
+            <ReadingModeToggle
               isIconsOnly={isMobileScrolledView}
-              size={SwitchSize.XSmall}
-              type={SwitcherContext.ContextMenu}
-              variant={SwitchVariant.Alternative}
+              context={SwitcherContext.ContextMenu}
             />
             {(!isMobileView || !showNavbar) && (
               <SettingsButton className={styles.settingsNextToSwitcher} />
@@ -139,8 +139,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Tajweed colors bar will only show when tajweed mushaf enabled */}
-      {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
+      {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
 
       {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}

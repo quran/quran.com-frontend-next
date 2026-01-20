@@ -92,13 +92,14 @@ const Pagination: React.FC<Props> = ({
 
   const showingUntilItem = currentPage * pageSize;
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="page-navigation-buttons">
       <div className={styles.buttonContainer}>
         <Button
           tooltip={t('prev')}
           variant={ButtonVariant.Ghost}
           isDisabled={currentPage === 1}
           onClick={onPrevious}
+          data-testid="previous-page-button"
         >
           <PreviousIcon />
         </Button>
@@ -130,6 +131,7 @@ const Pagination: React.FC<Props> = ({
           variant={ButtonVariant.Ghost}
           isDisabled={currentPage === paginationRange[paginationRange.length - 1]}
           onClick={onNext}
+          data-testid="next-page-button"
         >
           <NextIcon />
         </Button>

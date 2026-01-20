@@ -1,10 +1,11 @@
-@use "src/styles/utility";
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 .skeletonContainer {
   // the page's bottom margin + the height of the page footer
-  margin-block-end: calc(var(--spacing-mega) + var(--spacing-large));
+  margin-block-end: calc(var(--spacing-large-px) + var(--spacing-medium2-px));
+  inline-size: 100%;
 }
 
 .skeleton {
@@ -12,10 +13,16 @@
   @include breakpoints.tablet {
     margin-block-start: constants.$reading-view-container-top-margin;
   }
-  margin-block-start: var(--spacing-xsmall);
-  height: var(--skeleton-height);
+  margin-block-start: var(--spacing-small-px);
+  block-size: var(--skeleton-height);
 }
 
 .fixedWidth {
-  width: var(--line-width, auto);
+  inline-size: var(--line-width, auto);
+}
+
+.translationWidth {
+  // Use fixed width to match TranslationPage content width
+  // This avoids issues with percentage-based width in flex containers
+  inline-size: min(600px, calc(100vw - 32px));
 }

@@ -63,6 +63,8 @@ const ReciterSection = () => {
           value={selectedValueString}
           onClick={onSelectionCardClicked}
           className={styles.reciterSelectionCard}
+          valueClassName={styles.reciterValue}
+          labelClassName={styles.reciterLabel}
         />
       );
     },

@@ -61,10 +61,18 @@ const SettingsDrawer = () => {
   }
 
   const isTranslationView = settingsView === SettingsView.Translation;
+  const isReciterView = settingsView === SettingsView.Reciter;
+
+  const getDrawerClassName = () => {
+    if (isTranslationView) return drawerStyles.translationView;
+    if (isReciterView) return drawerStyles.reciterView;
+    return undefined;
+  };
 
   return (
     <Drawer
       id="settings-drawer"
+      data-testid="settings-drawer"
       type={DrawerType.Settings}
       header={header}
       closeOnNavigation={false}
@@ -73,10 +81,10 @@ const SettingsDrawer = () => {
       removeHeaderWrapper={settingsView === SettingsView.Body}
       hideCloseButton={settingsView === SettingsView.Body}
       removeBodySpacing={settingsView === SettingsView.Body}
-      className={isTranslationView ? drawerStyles.translationView : undefined}
+      className={getDrawerClassName()}
     >
       {isSettingsDrawerOpen && (
-        <div data-testid="settings-drawer-body">
+        <div data-testid="settings-drawer-body" className={styles.bodyWrapper}>
           {settingsView === SettingsView.Body && <SettingsBody />}
           {settingsView === SettingsView.Translation && <TranslationSelectionBody />}
           {settingsView === SettingsView.Reciter && <ReciterSelectionBody />}

@@ -1,12 +1,19 @@
-.reciterSelectionCard {
+.reciterSelectionCard.reciterSelectionCard {
   background-color: var(--color-background-alternative-faded);
 
-  :global(.value) {
-    color: var(--color-text-default-new) !important;
-  }
-
-  > :global(div:last-child) > :global(svg) {
+  svg {
     color: var(--color-text-faded);
     fill: var(--color-text-faded);
   }
+}
+
+div.reciterLabel {
+  font-size: var(--font-size-xsmall-px);
+  opacity: unset;
+  color: var(--color-text-faded-new);
+  padding-block-end: var(--spacing-xxsmall-px);
+}
+
+.reciterValue {
+  color: var(--color-text-default-new);
 }

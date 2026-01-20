@@ -71,7 +71,7 @@ const SettingsReciter = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input

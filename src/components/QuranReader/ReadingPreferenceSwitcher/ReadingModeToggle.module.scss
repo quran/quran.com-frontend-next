@@ -1,0 +1,217 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+// Component-specific design tokens
+$container-gap: var(--spacing-xxsmall-px);
+$container-padding: var(--spacing-hairline-px);
+$container-border-radius: var(--border-radius-rounded);
+
+$pill-gap: var(--spacing-xxsmall-px);
+$pill-padding-block: var(--spacing-xxsmall-px);
+$pill-padding-inline: var(--spacing-small-px);
+$pill-border-radius: var(--border-radius-pill);
+$icon-only-pill-padding-inline: var(--spacing-small-px);
+
+$expanded-gap: var(--spacing-small-px);
+$font-size: var(--font-size-small);
+
+$icon-size: var(--spacing-medium-px); // 15px - matches other mode icons
+$sub-option-icon-height: var(--spacing-medium-px);
+$divider-height: var(--spacing-medium-px);
+$icon-border-radius: var(--spacing-hairline-px);
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: $container-gap;
+  padding: $container-padding;
+  background-color: var(--color-background-alternative-faded);
+  border-radius: $container-border-radius;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $pill-gap;
+  padding: $pill-padding-block $pill-padding-inline;
+  border-radius: $pill-border-radius;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-regular), color var(--transition-regular),
+    box-shadow var(--transition-regular);
+  font-family: var(--font-family);
+  font-size: $font-size;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2em;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.pillSelected {
+  background-color: var(--color-background-elevated);
+  box-shadow: var(--shadow-small-new);
+  color: var(--color-text-default-new);
+}
+
+.pillUnselected {
+  background-color: transparent;
+  color: var(--color-text-faded-new);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+
+  & > svg {
+    inline-size: $icon-size;
+    block-size: $icon-size;
+    flex-shrink: 0;
+  }
+}
+
+.icon {
+  transition: all var(--transition-regular);
+  border-radius: $icon-border-radius;
+
+  rect,
+  path {
+    transition: all var(--transition-regular);
+  }
+}
+
+// Unselected state for main pill icons (Verse by Verse, Reading)
+.iconUnselected {
+  rect:first-child {
+    fill: none;
+    stroke: var(--color-text-faded-new);
+  }
+
+  path {
+    fill: var(--color-text-faded-new);
+  }
+}
+
+// Selected state for main pill icons (dark background)
+.iconSelected {
+  rect:first-child {
+    fill: var(--color-text-default-new, #272727);
+    stroke: var(--color-text-default-new, #272727);
+  }
+
+  path {
+    fill: var(--color-background-elevated-new, #ffffff);
+  }
+}
+
+.label {
+  color: inherit;
+}
+
+// Expanded pill with sub-options
+.expandedPill {
+  gap: $expanded-gap;
+  padding: $pill-padding-block $pill-padding-inline;
+}
+
+.subOption {
+  display: flex;
+  align-items: center;
+  gap: $pill-gap;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: $font-size;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2em;
+  color: var(--color-text-faded-new);
+  transition: color var(--transition-regular);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.subOptionSelected {
+  color: var(--color-text-link-new);
+}
+
+.subOptionIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  & > svg {
+    inline-size: $icon-size;
+    block-size: $icon-size;
+    flex-shrink: 0;
+    border-radius: $icon-border-radius;
+  }
+}
+
+// Icon styling for Arabic/Translation sub-option icons
+// Following the same pattern as ReadingPreference.module.scss
+.subOptionIcon {
+  transition: all var(--transition-regular);
+  border-radius: $icon-border-radius;
+
+  rect,
+  path {
+    transition: all var(--transition-regular);
+  }
+}
+
+// Unselected state for sub-option icons
+.subOptionIconUnselected {
+  rect:first-child {
+    fill: none;
+    stroke: var(--color-text-faded-new);
+  }
+
+  path {
+    fill: var(--color-text-faded-new);
+  }
+}
+
+// Selected state for sub-option icons - teal in light/dark, #72603F in sepia
+.subOptionIconSelected {
+  rect:first-child {
+    fill: var(--color-text-link-new);
+    stroke: var(--color-text-link-new);
+  }
+
+  path {
+    fill: var(--color-background-elevated-new, #ffffff);
+  }
+}
+
+.subOptionLabel {
+  color: inherit;
+}
+
+.divider {
+  inline-size: var(--spacing-hairline-px);
+  block-size: $divider-height;
+  background-color: var(--color-borders-hairline);
+}
+
+// Icon-only mode adjustments
+@include breakpoints.smallerThanTablet {
+  .pill {
+    padding: $pill-padding-block $icon-only-pill-padding-inline;
+  }
+
+  .expandedPill {
+    padding: $pill-padding-block $icon-only-pill-padding-inline;
+  }
+}

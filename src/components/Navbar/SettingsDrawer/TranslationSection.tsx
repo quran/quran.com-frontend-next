@@ -96,6 +96,8 @@ const TranslationSection = () => {
           value={selectedValueString}
           onClick={onSelectionCardClicked}
           className={styles.translationSelectionCard}
+          valueClassName={styles.translationValue}
+          labelClassName={styles.translationLabel}
         />
       );
     },

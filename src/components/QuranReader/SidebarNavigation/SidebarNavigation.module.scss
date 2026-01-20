@@ -11,11 +11,7 @@ $top-menu-height-home: $navbar-height;
 $context-menu-height-home: 0;
 
 // Non-homepage heights (with sections menu and progress bar)
-$top-menu-height: calc(
-  $navbar-height + var(--context-menu-container-height-visible) +
-    var(--page-info-container-height-visible) + var(--sections-container-height-visible) +
-    var(--mobile-reading-mode-tabs-height) - var(--context-menu-inset-height-visible)
-);
+$top-menu-height: calc(var(--top-bar-height) + $navbar-height);
 
 $isNavbarVisible: var(--isNavbarVisible);
 
@@ -303,11 +299,26 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: calc(100vh - $top-menu-height-home);
 
-    @include breakpoints.smallerThanTablet {
-      // TODO: we should add the banner height here if it's shown
-      // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
+    [dir='rtl'] & {
       transform: translateY($top-menu-height-home);
-      block-size: 100vh;
+    }
+
+    @include breakpoints.smallerThanTablet {
+      transform: translateY($top-menu-height-home);
+      block-size: calc(100vh - $top-menu-height-home);
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
+    }
+  }
+
+  &[data-is-homepage='false'] {
+    transform: translateY($top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
+
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height);
     }
   }
 }
@@ -317,12 +328,24 @@ $isNavbarVisible: var(--isNavbarVisible);
     transform: translateY($top-menu-height-home);
     block-size: 100vh;
 
+    [dir='rtl'] & {
+      transform: translateY($top-menu-height-home);
+    }
+
     @include breakpoints.smallerThanTablet {
       // TODO: we should add the banner height here if it's shown
       // transform: translateY(calc($top-menu-height-home + var(--banner-height)));
       transform: translateY($top-menu-height-home);
       block-size: 100vh;
+
+      [dir='rtl'] & {
+        transform: translateY($top-menu-height-home);
+      }
     }
+  }
+
+  &[data-is-homepage='false'] {
+    padding-block-end: $navbar-height;
   }
 }
 

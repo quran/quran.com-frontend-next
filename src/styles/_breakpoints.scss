@@ -5,6 +5,8 @@ $breakpoints-mobileL: 425px;
 $breakpoints-tablet: 768px;
 $breakpoints-desktop: 1024px;
 
+$breakpoint-buffer-max-width: 1px;
+
 @mixin mobileS {
   @media only screen and (min-width: $breakpoints-mobileS) {
     @content;
@@ -12,7 +14,7 @@ $breakpoints-desktop: 1024px;
 }
 
 @mixin smallerThanMobileS {
-  @media only screen and (max-width: $breakpoints-mobileS) {
+  @media only screen and (max-width: ($breakpoints-mobileS - $breakpoint-buffer-max-width)) {
     @content;
   }
 }
@@ -24,7 +26,7 @@ $breakpoints-desktop: 1024px;
 }
 
 @mixin smallerThanMobileM {
-  @media only screen and (max-width: $breakpoints-mobileM) {
+  @media only screen and (max-width: ($breakpoints-mobileM - $breakpoint-buffer-max-width)) {
     @content;
   }
 }
@@ -36,7 +38,7 @@ $breakpoints-desktop: 1024px;
 }
 
 @mixin smallerThanMobileL {
-  @media only screen and (max-width: $breakpoints-mobileL) {
+  @media only screen and (max-width: ($breakpoints-mobileL - $breakpoint-buffer-max-width)) {
     @content;
   }
 }
@@ -48,7 +50,7 @@ $breakpoints-desktop: 1024px;
 }
 
 @mixin smallerThanTablet {
-  @media only screen and (max-width: $breakpoints-tablet) {
+  @media only screen and (max-width: ($breakpoints-tablet - $breakpoint-buffer-max-width)) {
     @content;
   }
 }
@@ -60,7 +62,7 @@ $breakpoints-desktop: 1024px;
 }
 
 @mixin smallerThanDesktop {
-  @media only screen and (max-width: $breakpoints-desktop) {
+  @media only screen and (max-width: ($breakpoints-desktop - $breakpoint-buffer-max-width)) {
     @content;
   }
 }
