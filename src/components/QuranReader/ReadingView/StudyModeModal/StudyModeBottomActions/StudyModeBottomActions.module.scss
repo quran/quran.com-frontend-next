@@ -19,10 +19,6 @@
   }
 }
 
-.tabsContainerRTL {
-  justify-content: flex-end;
-}
-
 .separatorContainer {
   display: flex;
   block-size: var(--spacing-medium);
@@ -45,10 +41,6 @@
 
 .tabItemActive {
   color: var(--color-success-medium);
-}
-
-.tabItemRTL {
-  flex-direction: row-reverse;
 }
 
 .tabIcon {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './WordNavigationBox.module.scss';
@@ -40,7 +41,7 @@ const WordNavigationBox: React.FC<WordNavigationBoxProps> = ({
         type="button"
         onClick={onPrevious}
         disabled={!canNavigatePrev}
-        className={`${styles.navButton} ${styles.prevButton}`}
+        className={classNames(styles.navButton, styles.prevButton)}
         aria-label={t('aria.prev-page')}
       >
         <ArrowIcon />
@@ -76,7 +77,7 @@ const WordNavigationBox: React.FC<WordNavigationBoxProps> = ({
         type="button"
         onClick={onNext}
         disabled={!canNavigateNext}
-        className={styles.navButton}
+        className={classNames(styles.navButton, styles.nextButton)}
         aria-label={t('aria.next-page')}
       >
         <ArrowIcon />

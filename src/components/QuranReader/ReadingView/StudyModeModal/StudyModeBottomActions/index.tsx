@@ -1,12 +1,10 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
-import { isRTLLocale } from '@/utils/locale';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
@@ -28,9 +26,6 @@ interface StudyModeBottomActionsProps {
 }
 
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
-  const { lang } = useTranslation();
-  const isRTL = isRTLLocale(lang);
-
   const handleTabClick = (
     e: React.MouseEvent,
     onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
@@ -51,18 +46,13 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
 
   return (
     <div className={styles.bottomActionsContainer}>
-      <div
-        className={classNames(styles.tabsContainer, {
-          [styles.tabsContainerRTL]: isRTL,
-        })}
-      >
+      <div className={styles.tabsContainer}>
         {tabs
           .filter((tab) => tab.condition !== false)
           .map((tab, index, filteredTabs) => (
             <React.Fragment key={tab.id}>
               <div
                 className={classNames(styles.tabItem, {
-                  [styles.tabItemRTL]: isRTL,
                   [styles.tabItemActive]: activeTab === tab.id,
                 })}
                 data-testid={`study-mode-tab-${tab.id}`}

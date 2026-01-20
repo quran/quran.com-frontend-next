@@ -113,8 +113,30 @@
   }
 }
 
-.prevButton {
+// In LTR: prev arrow points left (flipped), next arrow points right (default)
+// In RTL: prev arrow points right (default), next arrow points left (flipped)
+button.prevButton {
   svg {
     transform: scaleX(-1);
+  }
+}
+
+button.nextButton {
+  svg {
+    transform: scaleX(1);
+  }
+}
+
+[dir='rtl'] {
+  button.prevButton {
+    svg {
+      transform: scaleX(1);
+    }
+  }
+
+  button.nextButton {
+    svg {
+      transform: scaleX(-1);
+    }
   }
 }

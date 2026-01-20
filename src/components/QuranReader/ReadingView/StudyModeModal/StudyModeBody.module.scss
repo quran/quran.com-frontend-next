@@ -33,7 +33,7 @@
 
 // Tab content container - appears below bottom actions
 .tabContentContainer {
-  border-top: 1px solid var(--color-borders-hairline);
+  border-block-start: 1px solid var(--color-borders-hairline);
 }
 
 // Gradient fade overlay above bottom actions
@@ -49,10 +49,9 @@
 
 .scrollGradient {
   position: absolute;
-  top: calc(-1 * (var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px)));
-  left: 0;
-  right: 0;
-  height: calc(var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px));
+  inset-block-start: calc(-1 * (var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px)));
+  inset-inline: 0;
+  block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px));
   background: linear-gradient(
     to bottom,
     transparent 0%,

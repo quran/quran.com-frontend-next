@@ -274,9 +274,10 @@ const StudyModeModal: React.FC<Props> = ({
         size={ButtonSize.Small}
         variant={ButtonVariant.Ghost}
         onClick={handlePreviousVerse}
-        className={`${styles.navButton} ${styles.prevButton}`}
+        className={classNames(styles.navButton, styles.prevButton)}
         ariaLabel="Previous verse"
         isDisabled={!canNavigatePrev}
+        shouldFlipOnRTL={false}
       >
         <ArrowIcon />
       </Button>
@@ -284,9 +285,10 @@ const StudyModeModal: React.FC<Props> = ({
         size={ButtonSize.Small}
         variant={ButtonVariant.Ghost}
         onClick={handleNextVerse}
-        className={styles.navButton}
+        className={classNames(styles.navButton, styles.nextButton)}
         ariaLabel="Next verse"
         isDisabled={!canNavigateNext}
+        shouldFlipOnRTL={false}
       >
         <ArrowIcon />
       </Button>
