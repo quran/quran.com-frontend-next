@@ -73,6 +73,7 @@ const NotesSorter: React.FC<NotesSorterProps> = ({ options, selectedOptionId, on
               className={`${styles.optionIcon} ${getRotationClass(option.id)}`}
               size={IconSize.Custom}
               shouldForceSetColors={false}
+              shouldFlipOnRTL={false}
               icon={<ArrowRightIcon />}
             />
 
