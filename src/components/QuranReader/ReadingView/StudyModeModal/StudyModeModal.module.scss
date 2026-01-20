@@ -4,23 +4,34 @@
   padding: 0;
 }
 
-.contentModal {
+// Use div selector for higher specificity to override ContentModal defaults
+div.contentModal {
   padding: var(--spacing-small);
   display: flex;
   flex-direction: column;
-  // Flexible height - grows with content, max at 90vh
-  max-block-size: 90vh;
-  // Responsive width matching TranslationView pattern
+  block-size: auto;
+  max-block-size: 95dvh;
   inline-size: 100%;
   max-inline-size: 100%;
   overflow-x: hidden;
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
 
   @include breakpoints.tablet {
-    padding: var(--spacing-xlarge-px);
+    padding-block: var(--spacing-xlarge-px);
+    padding-inline:var(--spacing-large-px);
     max-block-size: 85vh;
-    // Match TranslationView: 80% width, centered
     inline-size: 80%;
     max-inline-size: 80%;
+    border-radius: var(--border-radius-rounded);
+  }
+}
+
+// Mobile bottom sheet overlay
+div.mobileBottomSheetOverlay {
+  @include breakpoints.smallerThanTablet {
+    align-items: flex-end;
+    padding-block-start: 0;
+    padding-block-end: 0;
   }
 }
 
@@ -35,20 +46,24 @@
   align-items: center;
   gap: var(--spacing-small-px);
   inline-size: 100%;
-  padding-block-end: var(--spacing-medium2-px);
   flex-shrink: 0;
+
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .selectionWrapper {
   display: flex;
 }
 
-.navButton {
+// Use button selector for higher specificity
+button.navButton {
   flex-shrink: 0;
-  border-radius: var(--border-radius-xsmall-px) !important;
-  padding: var(--spacing-xsmall-px) !important;
-  background: var(--color-background-alternative-faint) !important;
-  background-color: var(--color-background-alternative-faint) !important;
+  border-radius: var(--border-radius-xsmall-px);
+  padding: var(--spacing-xsmall-px);
+  background: var(--color-background-alternative-faint);
+  background-color: var(--color-background-alternative-faint);
 
   svg {
     inline-size: var(--spacing-small-px);
@@ -58,19 +73,19 @@
   &:hover,
   &:active,
   &:focus {
-    background: var(--color-background-alternative-faint) !important;
-    background-color: var(--color-background-alternative-faint) !important;
+    background: var(--color-background-alternative-faint);
+    background-color: var(--color-background-alternative-faint);
   }
 
   &:disabled,
   &[aria-disabled='true'],
   &:global(.disabled) {
-    opacity: 1 !important;
-    cursor: not-allowed !important;
-    pointer-events: none !important;
+    opacity: 1;
+    cursor: not-allowed;
+    pointer-events: none;
 
     svg {
-      color: var(--color-daily-progress) !important;
+      color: var(--color-daily-progress);
     }
   }
 }
@@ -108,42 +123,36 @@
 }
 
 // Bottom sheet overlay - positions content at bottom
-div {
-  &.bottomSheetOverlay {
-    @include breakpoints.tablet {
-      overflow-y: hidden;
-      align-items: flex-end;
-      justify-items: center;
-      padding-block-start: 0;
-      padding-block-end: 0;
-    }
+div.bottomSheetOverlay {
+  @include breakpoints.tablet {
+    overflow-y: hidden;
+    align-items: flex-end;
+    justify-items: center;
+    padding-block-start: 0;
+    padding-block-end: 0;
   }
 }
 
-// Bottom sheet content - full height from bottom
-div {
-  &.bottomSheetContent {
-    @include breakpoints.tablet {
-      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
-      block-size: 95vh !important;
-      max-block-size: 95vh !important;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden !important;
-      margin-block-end: 0;
-      padding-block-end: 0;
-    }
+// Bottom sheet content - full height from bottom (double div for higher specificity)
+div div.bottomSheetContent {
+  @include breakpoints.tablet {
+    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+    block-size: 95vh;
+    max-block-size: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-block-end: 0;
+    padding-block-end: 0;
   }
 }
 
 // Inner content scrollable for bottom sheet mode
-div {
-  &.bottomSheetInnerContent {
-    @include breakpoints.tablet {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-      min-block-size: 0;
-    }
+div.bottomSheetInnerContent {
+  @include breakpoints.tablet {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-block-size: 0;
   }
 }

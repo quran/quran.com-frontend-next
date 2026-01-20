@@ -23,7 +23,9 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
 
   return (
     <Button
-      className={classNames(styles.verseLink)}
+      className={classNames(styles.verseLink, {
+        [styles.staticDisplay]: isStudyModeOpen,
+      })}
       contentClassName={styles.verseLinkContent}
       size={ButtonSize.Small}
       shape={ButtonShape.Square}
@@ -31,7 +33,6 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
       shouldShallowRoute
       variant={ButtonVariant.Ghost}
       shouldPrefetch={false}
-      isDisabled={isStudyModeOpen}
       onClick={() => {
         logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_verse_link`);
       }}

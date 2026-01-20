@@ -351,7 +351,7 @@ const StudyModeModal: React.FC<Props> = ({
       contentClassName={classNames(styles.contentModal, {
         [styles.bottomSheetContent]: isContentTabActive,
       })}
-      overlayClassName={classNames({
+      overlayClassName={classNames(styles.mobileBottomSheetOverlay, {
         [styles.bottomSheetOverlay]: isContentTabActive,
       })}
       innerContentClassName={classNames(styles.innerContent, {

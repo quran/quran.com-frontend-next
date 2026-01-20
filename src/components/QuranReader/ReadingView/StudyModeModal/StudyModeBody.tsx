@@ -66,7 +66,7 @@ interface StudyModeBodyProps {
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   verse,
   bookmarksRangeUrl = '',
-  hasNotes = false,
+  hasNotes,
   selectedWord,
   selectedWordLocation,
   showWordBox,

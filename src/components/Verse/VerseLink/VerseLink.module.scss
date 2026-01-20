@@ -29,3 +29,14 @@
 .verseLinkContent {
   inline-size: 100%;
 }
+
+.staticDisplay {
+  pointer-events: none;
+  cursor: default !important;
+
+  &:hover {
+    color: var(--color-grey-icons-new);
+    background-color: transparent;
+    opacity: 1;
+  }
+}

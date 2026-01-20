@@ -3,8 +3,12 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-inline:var(--spacing-small-px);
-  padding-block-start: var(--spacing-medium2-px);
+  padding-inline: var(--spacing-small-px);
+  padding-block-start: var(--spacing-xsmall-px);
+
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-medium2-px);
+  }
 }
 
 .arabicVerseContainer {
@@ -21,13 +25,6 @@
 .translationsContainer {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-small);
-  padding: var(--spacing-small);
-
-  @include breakpoints.tablet {
-    gap: var(--spacing-medium);
-    padding: var(--spacing-medium);
-  }
 }
 
 .separator {
@@ -48,7 +45,6 @@
   position: sticky;
   bottom: 0;
   background-color: var(--color-background-elevated-new);
-  z-index: 1;
 }
 
 .scrollGradient {
