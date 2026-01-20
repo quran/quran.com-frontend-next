@@ -35,7 +35,6 @@ type PopoverMenuProps = {
   sideOffset?: number;
   contentClassName?: string;
   shouldClose?: boolean;
-  align?: PopoverMenuAlign;
 };
 
 const PopoverMenu = ({
@@ -50,7 +49,6 @@ const PopoverMenu = ({
   align = PopoverMenuAlign.CENTER,
   sideOffset = 0,
   contentClassName,
-  align,
 }: PopoverMenuProps) => {
   const [open, setOpen] = useState(isOpen);
   const direction = useDirection();
