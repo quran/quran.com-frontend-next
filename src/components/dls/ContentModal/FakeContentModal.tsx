@@ -168,16 +168,16 @@ export const FakeContentContent = React.forwardRef<HTMLDivElement, Dialog.Dialog
     useHotkeys('Escape', hotKeyCallback, { enabled: isVisible, enableOnFormTags: true });
 
     return (
-      <FocusScope
-        {...filteredProps}
-        loop
-        trapped
-        role="dialog"
-        aria-modal={isVisible}
-        data-state={dataState}
-        ref={mergeRefs(contentRef, ref)}
-      >
-        {children}
+      <FocusScope loop trapped asChild>
+        <div
+          {...filteredProps}
+          role="dialog"
+          aria-modal={isVisible}
+          data-state={dataState}
+          ref={mergeRefs(contentRef, ref)}
+        >
+          {children}
+        </div>
       </FocusScope>
     );
   },

@@ -6,8 +6,9 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
-import { fetcher } from '@/api';
+import { fetcher, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import QuranReader from '@/components/QuranReader';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import StudyModeSSRPage from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeSSRPage';
 import { getChapterOgImageUrl } from '@/lib/og';
@@ -30,9 +31,11 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { ChapterResponse, VerseResponse } from 'types/ApiResponses';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import { ChapterResponse, VerseResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
 
@@ -43,6 +46,7 @@ type AyahReflectionProp = {
   chaptersData: ChaptersData;
   fallback?: Record<string, unknown>;
   verse?: Verse;
+  versesResponse?: VersesResponse;
 };
 
 const ReflectionsPage: NextPage<AyahReflectionProp> = ({
@@ -51,6 +55,7 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
   chapterId,
   fallback,
   verse,
+  versesResponse,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
@@ -86,6 +91,12 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
           locale={lang}
         />
       </SWRConfig>
+
+      <QuranReader
+        initialData={versesResponse}
+        id={chapterId}
+        quranReaderDataType={QuranReaderDataType.Chapter}
+      />
     </>
   );
 };
@@ -100,6 +111,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
+  const defaultMushafId = getMushafId(quranFont, mushafLines).mushaf;
 
   try {
     const verseReflectionUrl = makeAyahReflectionsUrl({
@@ -120,6 +132,32 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       wordTransliteration: 'true',
     });
 
+    // Fetch pagesLookup for QuranReader background
+    const pagesLookupResponse = await getPagesLookup({
+      chapterNumber: Number(chapterNumber),
+      mushaf: defaultMushafId,
+    });
+
+    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+      chaptersData,
+      pagesLookupResponse.lookupRange.from,
+      pagesLookupResponse.lookupRange.to,
+    ).length;
+
+    // Create minimal versesResponse for QuranReader (similar to SurahInfo pattern)
+    const versesResponse: VersesResponse = {
+      metaData: { numberOfVerses },
+      pagesLookup: pagesLookupResponse,
+      verses: [],
+      pagination: {
+        perPage: 10,
+        currentPage: 1,
+        nextPage: null,
+        totalRecords: numberOfVerses,
+        totalPages: Math.ceil(numberOfVerses / 10),
+      },
+    };
+
     const [verseReflectionsData, verseData] = await Promise.all([
       getAyahReflections(verseReflectionUrl),
       fetcher(verseUrl) as Promise<VerseResponse>,
@@ -138,6 +176,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         verseNumber,
         fallback,
         verse: verseData.verse,
+        versesResponse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };

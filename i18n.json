@@ -33,6 +33,7 @@
     "/[chapterId]": ["quran-reader", "reading-goal", "notes", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader", "reading-goal", "notes"],
     "/[chapterId]/lessons": ["quran-reader", "reading-goal", "notes"],
+    "/[chapterId]/tafsirs/[tafsirId]": ["quran-reader", "reading-goal", "notes"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal", "notes"],
     "/page/[pageId]": ["quran-reader", "reading-goal", "notes"],
