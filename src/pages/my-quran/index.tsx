@@ -79,12 +79,7 @@ const MyQuranPage = (): JSX.Element => {
           wrapperClassName={styles.mainContent}
           className={styles.pageContainer}
         >
-          <TabSwitcher
-            hasSeparator={false}
-            selected={selectedTab}
-            items={tabs}
-            onSelect={onTabChange}
-          />
+          <TabSwitcher selected={selectedTab} items={tabs} onSelect={onTabChange} />
           <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
         </PageContainer>
       </main>

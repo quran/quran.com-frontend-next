@@ -15,7 +15,7 @@ interface TabSwitcherProps {
   items: TabSwitcherItem[];
   selected: string;
   onSelect: (value: string) => void;
-  hasSeparator?: boolean;
+  shouldHideSeparators?: boolean;
   size?: SwitchSize;
   variant?: SwitchVariant;
 }
@@ -24,7 +24,7 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
   items,
   selected,
   onSelect,
-  hasSeparator = true,
+  shouldHideSeparators = true,
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
 }) => {
@@ -49,7 +49,7 @@ const TabSwitcher: React.FC<TabSwitcherProps> = ({
         items={items}
         selected={selected}
         onSelect={onSelect}
-        hasSeparator={hasSeparator}
+        shouldHideSeparators={shouldHideSeparators}
         size={size}
         variant={variant}
         buttonClassName={styles.switchButton}

@@ -25,7 +25,6 @@ export enum SwitchVariant {
   Alternative = 'alternative',
 }
 type SwitchProps = {
-  hasSeparator?: boolean;
   buttonClassName?: string;
   containerClassName?: string;
   items: Item[];
@@ -33,12 +32,10 @@ type SwitchProps = {
   onSelect: (value: string) => void;
   size?: SwitchSize;
   variant?: SwitchVariant;
-  className?: string;
   shouldHideSeparators?: boolean;
 };
 
 const Switch = ({
-  hasSeparator = true,
   buttonClassName,
   containerClassName,
   items,
@@ -46,7 +43,6 @@ const Switch = ({
   selected,
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
-  className,
   shouldHideSeparators = false,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
