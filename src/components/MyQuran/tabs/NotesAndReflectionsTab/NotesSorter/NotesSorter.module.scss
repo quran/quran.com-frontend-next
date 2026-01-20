@@ -6,8 +6,7 @@
   flex-direction: column;
   padding: var(--spacing-medium-px);
   gap: var(--spacing-medium-px);
-  box-sizing: border-box;
-  max-inline-size: calc(var(--spacing-max) * 5);
+  min-inline-size: fit-content;
   border-radius: var(--border-radius-xsmall-px);
 
   & [data-selected='true'] {
@@ -36,6 +35,10 @@
   font-weight: var(--font-weight-medium);
   transition: opacity var(--transition-fast);
 
+  &:dir(rtl) {
+    flex-direction: row-reverse;
+  }
+
   &:hover {
     opacity: var(--opacity-85);
   }
@@ -63,6 +66,13 @@
     inline-size: 100%;
     block-size: 100%;
     color: var(--color-text-default-new);
+  }
+
+  &:dir(rtl)::before {
+    inset-inline-start: 0;
+    inset-inline-end: 100%;
+    // Magic number to align the dot to the inline end and block start of the icon
+    transform: translateX(100%) translateY(20%);
   }
 
   &::before {

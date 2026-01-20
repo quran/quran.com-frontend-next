@@ -34,15 +34,16 @@
   padding-inline-start: calc(var(--spacing-mega) * 2.5);
   padding-inline-end: var(--spacing-micro2-px);
 
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--_background-color) var(--_fade-stop-percentage)
-  );
+  [dir='rtl'] &:dir(ltr),
+  &:dir(ltr) {
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--_background-color) var(--_fade-stop-percentage)
+    );
+  }
 
   :dir(rtl) & {
-    inset-inline-end: 0;
-    inset-block-end: var(--spacing-hairline-px);
     background: linear-gradient(
       to left,
       transparent,

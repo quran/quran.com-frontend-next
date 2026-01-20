@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './NotesSorter.module.scss';
 
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import ArrowRightIcon from '@/icons/arrow-right.svg';
 import ArrowsVerticalIcon from '@/icons/arrows-vertical.svg';
 import NotesSortOption from '@/types/NotesSortOptions';
@@ -39,6 +39,7 @@ const NotesSorter: React.FC<NotesSorterProps> = ({ options, selectedOptionId, on
   return (
     <PopoverMenu
       contentClassName={styles.popoverMenuContent}
+      align={PopoverMenuAlign.END}
       trigger={
         <button
           type="button"
@@ -49,6 +50,7 @@ const NotesSorter: React.FC<NotesSorterProps> = ({ options, selectedOptionId, on
             className={styles.iconWrapper}
             size={IconSize.Custom}
             shouldForceSetColors={false}
+            shouldFlipOnRTL={false}
             icon={<ArrowsVerticalIcon />}
           />
 
