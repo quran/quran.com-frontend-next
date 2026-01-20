@@ -77,7 +77,6 @@ const Page = ({
       translationsCount={translationsCount}
       chapterId={chapterId}
       isTranslationView={false}
-      className={styles.chapterHeaderNoTopMargin}
     />
   );
 
