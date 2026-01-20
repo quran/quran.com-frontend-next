@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearAllHighlights } from '@/redux/slices/QuranReader/readingViewVerse';
 import {
   closeStudyMode,
+  selectStudyModeActiveTab,
+  selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
   selectStudyModeVerseKey,
-  selectStudyModeInitialTab,
-  selectStudyModeHighlightedWordLocation,
 } from '@/redux/slices/QuranReader/studyMode';
 
 const StudyModeModal = dynamic(() => import('./ReadingView/StudyModeModal'), { ssr: false });
@@ -27,7 +27,7 @@ const StudyModeContainer: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(selectStudyModeIsOpen);
   const verseKey = useSelector(selectStudyModeVerseKey);
-  const initialTab = useSelector(selectStudyModeInitialTab);
+  const activeTab = useSelector(selectStudyModeActiveTab);
   const highlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
   const handleClose = useCallback(() => {
@@ -44,7 +44,7 @@ const StudyModeContainer: React.FC = () => {
       isOpen={isOpen}
       onClose={handleClose}
       verseKey={verseKey}
-      initialActiveTab={initialTab}
+      initialActiveTab={activeTab}
       highlightedWordLocation={highlightedWordLocation ?? undefined}
     />
   );

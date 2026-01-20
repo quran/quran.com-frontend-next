@@ -4,23 +4,31 @@ import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 
+export type PreviousStudyModeState = {
+  verseKey: string;
+  activeTab: StudyModeTabId | null;
+  highlightedWordLocation: string | null;
+};
+
 export type StudyModeState = {
   isOpen: boolean;
   verseKey: string | null;
-  initialTab: StudyModeTabId | null;
+  activeTab: StudyModeTabId | null;
   highlightedWordLocation: string | null;
+  previousState: PreviousStudyModeState | null;
 };
 
 export const initialState: StudyModeState = {
   isOpen: false,
   verseKey: null,
-  initialTab: null,
+  activeTab: null,
   highlightedWordLocation: null,
+  previousState: null,
 };
 
 export type OpenStudyModePayload = {
   verseKey: string;
-  initialTab?: StudyModeTabId | null;
+  activeTab?: StudyModeTabId | null;
   highlightedWordLocation?: string | null;
 };
 
@@ -38,8 +46,9 @@ const studyMode = createSlice({
       return {
         isOpen: true,
         verseKey: payload.verseKey,
-        initialTab: payload.initialTab ?? null,
+        activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
+        previousState: state.previousState,
       };
     },
     closeStudyMode: () => {
@@ -48,15 +57,62 @@ const studyMode = createSlice({
     resetStudyModeState: () => {
       return initialState;
     },
+    setActiveTab: (state, { payload }: PayloadAction<StudyModeTabId | null>) => {
+      state.activeTab = payload;
+    },
+    setHighlightedWordLocation: (state, { payload }: PayloadAction<string | null>) => {
+      state.highlightedWordLocation = payload;
+    },
+    saveAndCloseStudyMode: (state) => {
+      if (!state.verseKey) {
+        return initialState;
+      }
+      return {
+        ...initialState,
+        previousState: {
+          verseKey: state.verseKey,
+          activeTab: state.activeTab,
+          highlightedWordLocation: state.highlightedWordLocation,
+        },
+      };
+    },
+    restoreStudyMode: (state) => {
+      if (!state.previousState) {
+        return state;
+      }
+      return {
+        isOpen: true,
+        verseKey: state.previousState.verseKey,
+        activeTab: state.previousState.activeTab,
+        highlightedWordLocation: state.previousState.highlightedWordLocation,
+        previousState: null,
+      };
+    },
+    clearPreviousState: (state) => {
+      return {
+        ...state,
+        previousState: null,
+      };
+    },
   },
 });
 
 // Selectors
 export const selectStudyModeIsOpen = (state: RootState) => state.studyMode.isOpen;
 export const selectStudyModeVerseKey = (state: RootState) => state.studyMode.verseKey;
-export const selectStudyModeInitialTab = (state: RootState) => state.studyMode.initialTab;
+export const selectStudyModeActiveTab = (state: RootState) => state.studyMode.activeTab;
 export const selectStudyModeHighlightedWordLocation = (state: RootState) =>
   state.studyMode.highlightedWordLocation;
+export const selectStudyModePreviousState = (state: RootState) => state.studyMode.previousState;
 
-export const { openStudyMode, closeStudyMode, resetStudyModeState } = studyMode.actions;
+export const {
+  openStudyMode,
+  closeStudyMode,
+  resetStudyModeState,
+  setActiveTab,
+  setHighlightedWordLocation,
+  saveAndCloseStudyMode,
+  restoreStudyMode,
+  clearPreviousState,
+} = studyMode.actions;
 export default studyMode.reducer;

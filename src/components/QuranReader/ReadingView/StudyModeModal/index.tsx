@@ -4,7 +4,7 @@ import React, { useState, useCallback, useContext, useEffect, useMemo } from 're
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import SearchableVerseSelector from './SearchableVerseSelector';
@@ -21,6 +21,7 @@ import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { setActiveTab, setHighlightedWordLocation } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
@@ -60,6 +61,7 @@ const StudyModeModal: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
+  const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
@@ -96,11 +98,14 @@ const StudyModeModal: React.FC<Props> = ({
       setShowWordBox(!!highlightedWordLocation);
       setOriginalUrl(router.asPath);
       setActiveContentTab(initialActiveTab ?? null);
+      // Sync initial state to Redux for preservation when opening secondary modals
+      dispatch(setActiveTab(initialActiveTab ?? null));
+      dispatch(setHighlightedWordLocation(highlightedWordLocation ?? null));
     }
     return () => {
       isMounted = false;
     };
-  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation, router.asPath, initialActiveTab]);
+  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation, router.asPath, initialActiveTab, dispatch]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
@@ -177,27 +182,37 @@ const StudyModeModal: React.FC<Props> = ({
   }, [quranWords, selectedWordLocation]);
 
   // Word navigation handlers
-  const handleWordClick = useCallback((clickedWord: Word) => {
-    setSelectedWordLocation(clickedWord.location);
-    setShowWordBox(true);
-  }, []);
+  const handleWordClick = useCallback(
+    (clickedWord: Word) => {
+      setSelectedWordLocation(clickedWord.location);
+      setShowWordBox(true);
+      // Sync to Redux for state preservation
+      dispatch(setHighlightedWordLocation(clickedWord.location));
+    },
+    [dispatch],
+  );
 
   const handlePreviousWord = useCallback(() => {
     if (currentWordIndex > 0) {
-      setSelectedWordLocation(quranWords[currentWordIndex - 1].location);
+      const newLocation = quranWords[currentWordIndex - 1].location;
+      setSelectedWordLocation(newLocation);
+      dispatch(setHighlightedWordLocation(newLocation));
     }
-  }, [currentWordIndex, quranWords]);
+  }, [currentWordIndex, quranWords, dispatch]);
 
   const handleNextWord = useCallback(() => {
     if (currentWordIndex < quranWords.length - 1) {
-      setSelectedWordLocation(quranWords[currentWordIndex + 1].location);
+      const newLocation = quranWords[currentWordIndex + 1].location;
+      setSelectedWordLocation(newLocation);
+      dispatch(setHighlightedWordLocation(newLocation));
     }
-  }, [currentWordIndex, quranWords]);
+  }, [currentWordIndex, quranWords, dispatch]);
 
   const handleCloseWordBox = useCallback(() => {
     setShowWordBox(false);
     setSelectedWordLocation(undefined);
-  }, []);
+    dispatch(setHighlightedWordLocation(null));
+  }, [dispatch]);
 
   const canNavigateWordPrev = currentWordIndex > 0;
   const canNavigateWordNext = currentWordIndex < quranWords.length - 1;
@@ -206,6 +221,8 @@ const StudyModeModal: React.FC<Props> = ({
   const handleTabChange = useCallback(
     (tabId: StudyModeTabId | null) => {
       setActiveContentTab(tabId);
+      // Sync to Redux for state preservation when opening secondary modals
+      dispatch(setActiveTab(tabId));
       const currentVerseKey = `${selectedChapterId}:${selectedVerseNumber}`;
 
       if (tabId === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
@@ -225,7 +242,7 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(originalUrl, router.locale);
       }
     },
-    [selectedChapterId, selectedVerseNumber, tafsirs, router.locale, originalUrl],
+    [selectedChapterId, selectedVerseNumber, tafsirs, router.locale, originalUrl, dispatch],
   );
 
   // Handle modal close with URL restoration

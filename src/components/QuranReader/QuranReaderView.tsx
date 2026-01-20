@@ -7,6 +7,8 @@ import useSyncReadingProgress from './hooks/useSyncReadingProgress';
 import StudyModeContainer from './StudyModeContainer';
 import TranslationView from './TranslationView';
 
+import VerseActionModalContainer from './VerseActionModalContainer';
+
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -45,6 +47,7 @@ const QuranReaderView: React.FC<Props> = ({
           readingPreference={readingPreference}
         />
         <StudyModeContainer />
+        <VerseActionModalContainer />
       </>
     );
   }
@@ -58,6 +61,7 @@ const QuranReaderView: React.FC<Props> = ({
         resourceId={resourceId}
       />
       <StudyModeContainer />
+      <VerseActionModalContainer />
     </>
   );
 };
