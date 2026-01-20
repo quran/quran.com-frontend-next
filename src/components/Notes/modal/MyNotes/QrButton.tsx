@@ -37,7 +37,7 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
       isNewTab
       href={postUrl}
       isDisabled={isLoading}
-      tooltip={t('view-on-qr')}
+      tooltip={<span className={styles.bidiText}>{t('view-on-qr')}</span>}
       ariaLabel={t('view-on-qr')}
       onClick={() => logButtonClick('my_notes_view_on_qr')}
       data-testid="qr-view-button"
