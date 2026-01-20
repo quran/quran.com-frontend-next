@@ -83,6 +83,7 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
           chapterId={chapterId}
           verseNumber={verseNumber}
           verse={verse}
+          locale={lang}
         />
       </SWRConfig>
     </>

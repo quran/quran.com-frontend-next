@@ -47,6 +47,7 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
   chapter,
   verseNumber,
   chapterId,
+  tafsirIdOrSlug,
   tafsirData,
   fallback,
   verse,
@@ -93,6 +94,8 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
           chapterId={chapterId}
           verseNumber={verseNumber}
           verse={verse}
+          tafsirIdOrSlug={tafsirIdOrSlug}
+          locale={lang}
         />
       </SWRConfig>
     </>

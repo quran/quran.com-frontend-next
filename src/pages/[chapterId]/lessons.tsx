@@ -83,6 +83,7 @@ const AyahLessonPage: NextPage<AyahLessonProp> = ({
           chapterId={chapterId}
           verseNumber={verseNumber}
           verse={verse}
+          locale={lang}
         />
       </SWRConfig>
     </>

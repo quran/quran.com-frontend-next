@@ -17,9 +17,17 @@ import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 interface StudyModeTafsirTabSSRProps {
   chapterId: string;
   verseNumber: string;
+  /** Tafsir ID or slug for SSR query key matching */
+  tafsirIdOrSlug?: string;
+  /** Locale for SSR - unused but kept for consistent interface */
+  locale?: string;
 }
 
-const StudyModeTafsirTabSSR: React.FC<StudyModeTafsirTabSSRProps> = ({ chapterId, verseNumber }) => {
+const StudyModeTafsirTabSSR: React.FC<StudyModeTafsirTabSSRProps> = ({
+  chapterId,
+  verseNumber,
+  tafsirIdOrSlug,
+}) => {
   const { containerRef, scrollToTop } = useStudyModeTabScroll();
 
   return (
@@ -28,10 +36,12 @@ const StudyModeTafsirTabSSR: React.FC<StudyModeTafsirTabSSRProps> = ({ chapterId
         shouldRender
         initialChapterId={chapterId}
         initialVerseNumber={verseNumber}
+        initialTafsirIdOrSlug={tafsirIdOrSlug}
         scrollToTop={scrollToTop}
         showArabicText={false}
         showNavigation={false}
         showFontControl={false}
+        showSpinnerOnRevalidate={false}
         render={({ body, languageAndTafsirSelection }) => (
           <StudyModeTabLayout selectionControl={languageAndTafsirSelection} body={body} />
         )}

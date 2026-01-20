@@ -28,6 +28,10 @@ export interface StudyModeSSRPageProps {
   chapterId: string;
   verseNumber: string;
   verse: Verse;
+  /** Tafsir ID or slug for SSR query key matching (required for tafsir pages) */
+  tafsirIdOrSlug?: string;
+  /** Locale for SSR query key matching */
+  locale?: string;
 }
 
 /**
@@ -46,11 +50,12 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
   chapterId,
   verseNumber,
   verse,
+  tafsirIdOrSlug,
+  locale,
 }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
   // Track active tab for URL updates
   const [activeTab, setActiveTab] = useState<StudyModeTabId | null>(initialTab);
@@ -137,6 +142,9 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
         onTabChange={handleTabChange}
         // SSR mode - use SSR-enabled tab components for server-side rendering
         isSsrMode
+        // SSR-specific props for query key matching
+        ssrTafsirIdOrSlug={tafsirIdOrSlug}
+        ssrLocale={locale}
         // SSR mode props - no word navigation in SSR
         showWordBox={false}
         onWordClick={() => {}}

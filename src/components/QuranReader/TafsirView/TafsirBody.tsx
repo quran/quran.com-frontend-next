@@ -54,6 +54,7 @@ type TafsirBodyProps = {
   showArabicText?: boolean;
   showNavigation?: boolean;
   showFontControl?: boolean;
+  showSpinnerOnRevalidate?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -71,6 +72,7 @@ const TafsirBody = ({
   showArabicText = true,
   showNavigation = true,
   showFontControl = true,
+  showSpinnerOnRevalidate = true,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
@@ -337,6 +339,7 @@ const TafsirBody = ({
           mushafLines: quranReaderStyles.mushafLines,
         })}
         render={renderTafsir}
+        showSpinnerOnRevalidate={showSpinnerOnRevalidate}
       />
     </div>
   );

@@ -49,14 +49,21 @@ const TAB_COMPONENTS: Partial<
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
 };
 
+// SSR tab component props interface
+interface SSRTabComponentProps {
+  chapterId: string;
+  verseNumber: string;
+  tafsirIdOrSlug?: string;
+  locale?: string;
+}
+
 // SSR-enabled tab component lookup map (for SSR pages)
-const SSR_TAB_COMPONENTS: Partial<
-  Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
-> = {
-  [StudyModeTabId.TAFSIR]: SSRStudyModeTafsirTab,
-  [StudyModeTabId.REFLECTIONS]: SSRStudyModeReflectionsTab,
-  [StudyModeTabId.LESSONS]: SSRStudyModeLessonsTab,
-};
+const SSR_TAB_COMPONENTS: Partial<Record<StudyModeTabId, React.ComponentType<SSRTabComponentProps>>> =
+  {
+    [StudyModeTabId.TAFSIR]: SSRStudyModeTafsirTab,
+    [StudyModeTabId.REFLECTIONS]: SSRStudyModeReflectionsTab,
+    [StudyModeTabId.LESSONS]: SSRStudyModeLessonsTab,
+  };
 
 interface StudyModeBodyProps {
   verse: Verse;
@@ -77,6 +84,10 @@ interface StudyModeBodyProps {
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   /** When true, uses SSR-enabled tab components for server-side rendering */
   isSsrMode?: boolean;
+  /** Tafsir ID or slug for SSR query key matching */
+  ssrTafsirIdOrSlug?: string;
+  /** Locale for SSR query key matching */
+  ssrLocale?: string;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -97,6 +108,8 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   activeTab,
   onTabChange,
   isSsrMode = false,
+  ssrTafsirIdOrSlug,
+  ssrLocale,
 }) => {
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -281,7 +294,16 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
           if (!TabComponent) return null;
           return (
             <div ref={tabContentRef} className={styles.tabContentContainer}>
-              <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
+              {isSsrMode ? (
+                <TabComponent
+                  chapterId={selectedChapterId}
+                  verseNumber={selectedVerseNumber}
+                  tafsirIdOrSlug={ssrTafsirIdOrSlug}
+                  locale={ssrLocale}
+                />
+              ) : (
+                <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
+              )}
             </div>
           );
         })()}
