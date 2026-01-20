@@ -81,7 +81,7 @@ const PersonalizationForm: FC = () => {
               size={ButtonSize.Small}
               className={classNames(styles.profilePictureActionButton, styles.uploadPictureButton)}
               onClick={onUploadPicture}
-              isLoading={isProcessing}
+              isLoading={isProcessing && !isRemoving}
               isDisabled={isProcessing || isRemoving}
             >
               {t('upload-picture')}
