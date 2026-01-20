@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Seulement {{formats}}",
+  "change-password": "Changer le mot de passe",
   "delete-account": "Supprimer le compte",
+  "delete-account-warning-title": "Avertissement",
   "delete-confirmation": {
     "action-text": "Oui je suis sûr(e) et je comprends la conséquence. Supprimez mon compte",
     "confirmation-text": "supprimer mon compte",
     "instruction-text": "Veuillez saisir <strong>{{text}}</strong> pour confirmer",
     "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre compte, vos favoris enregistrés, vos sessions de lecture et toutes vos données.",
     "title": "Êtes-vous absolument sûr(e) ?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Oui",
+    "cancel-text": "Non",
+    "subtitle": "Vous allez supprimer votre photo de profil et la réinitialiser à celle par défaut. Êtes-vous sûr ?",
+    "title": "Supprimer la photo de profil"
+  },
+  "edit-details": "Modifier les détails",
+  "email-notification-settings": "Paramètres de notification par e-mail",
+  "errors": {
+    "remove-failed": "Impossible de supprimer la photo de profil. Veuillez réessayer.",
+    "upload-failed": "Impossible de télécharger la photo de profil. Veuillez réessayer."
+  },
+  "max-file-size": "Max {{size}}",
+  "my-profile": "Mon profil",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Un courriel vous sera envoyé avec des liens vers les lectures hebdomadaires, des suggestions de réflexion et d'autres ressources pour vous aider à progresser.",
+      "title": "Le Coran en un an"
+    },
+    "streaks-that-will-break": {
+      "description": "Un courriel vous sera envoyé pour vous avertir qu'une série est sur le point de s'interrompre.",
+      "title": "Traces"
+    }
+  },
+  "personalization": "Personnalisation",
+  "profile-picture": "Photo de profil",
+  "remove-picture": "Supprimer l'image",
+  "remove-success": "Photo de profil supprimée avec succès",
+  "save-changes": "Enregistrer les modifications",
+  "save-picture": "Enregistrer l'image",
+  "success": {
+    "details": "Votre profil a été mis à jour avec succès.",
+    "notifications": "Vos paramètres de notifications ont été mis à jour avec succès.",
+    "password": "Votre mot de passe a été mis à jour avec succès"
+  },
+  "update-password": "Mettre à jour le mot de passe",
+  "upload-picture": "Télécharger une image",
+  "upload-success": "Photo de profil téléchargée avec succès"
 }

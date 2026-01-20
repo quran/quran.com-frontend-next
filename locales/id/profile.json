@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Hanya {{formats}}",
+  "change-password": "Ubah Kata Sandi",
   "delete-account": "Hapus akun",
+  "delete-account-warning-title": "Peringatan",
   "delete-confirmation": {
     "action-text": "Saya mengerti konsekuensinya, hapus akun saya",
     "confirmation-text": "Hapus akun saya",
     "instruction-text": "Ketik <strong> {{text}} </strong> untuk konfirmasi",
     "subtitle": "Tindakan ini tidak bisa dibatalkan. Tindakan ini akan menghapus akun Anda, Penanda tersimpan, sesi membaca, dan semua data Anda secara permanen.",
     "title": "Apakah Anda benar-benar yakin?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Ya",
+    "cancel-text": "TIDAK",
+    "subtitle": "Anda akan menghapus foto profil dan mengembalikannya ke pengaturan default, apakah Anda yakin?",
+    "title": "Hapus Gambar Profil"
+  },
+  "edit-details": "Edit Detail",
+  "email-notification-settings": "Pengaturan Notifikasi Email",
+  "errors": {
+    "remove-failed": "Gambar profil gagal dihapus. Silakan coba lagi.",
+    "upload-failed": "Gagal mengunggah gambar profil. Silakan coba lagi."
+  },
+  "max-file-size": "Maksimum {{size}}",
+  "my-profile": "Profil Saya",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Email akan dikirimkan berisi tautan ke tugas bacaan mingguan, pertanyaan refleksi, dan sumber daya lainnya untuk membantu Anda tetap fokus.",
+      "title": "Al-Quran dalam Setahun"
+    },
+    "streaks-that-will-break": {
+      "description": "Email akan dikirim untuk memberi tahu Anda jika rentetan kemenangan akan segera berakhir.",
+      "title": "Rentetan"
+    }
+  },
+  "personalization": "Personalisasi",
+  "profile-picture": "Foto profil",
+  "remove-picture": "Hapus Gambar",
+  "remove-success": "Gambar profil berhasil dihapus.",
+  "save-changes": "Simpan Perubahan",
+  "save-picture": "Simpan Gambar",
+  "success": {
+    "details": "Profil Anda berhasil diperbarui.",
+    "notifications": "Pengaturan notifikasi Anda telah berhasil diperbarui.",
+    "password": "Kata sandi Anda telah berhasil diperbarui."
+  },
+  "update-password": "Perbarui Kata Sandi",
+  "upload-picture": "Unggah Gambar",
+  "upload-success": "Gambar profil berhasil diunggah."
 }

@@ -11,6 +11,7 @@
   "continue-email": "تابع باستخدام البريد الإلكتروني",
   "continue-facebook": "تابع باستخدام Facebook",
   "continue-google": "تابع باستخدام Google",
+  "current-password-placeholder": "كلمة المرور الحالية",
   "email-placeholder": "عنوان البريد الإلكتروني",
   "error": {
     "email-required": "البريد الإلكتروني مطلوب!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "أدخل بريدك الإلكتروني وسنرسل إليك تعليمات إعادة تعيين كلمة المرور.",
   "forgot-password-success": "تم إرسال رسالة لإعادة تعيين كلمة المرور. يرجى التحقق من بريدك الوارد.",
   "forgot-password-title": "هل نسيت كلمة السر؟",
+  "hide-password": "إخفاء كلمة المرور",
   "last-name-placeholder": "الاسم الأخير",
   "login-cta": "سجّل الدخول أو اشترك الآن",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "إعادة تعيين كلمة المرور",
   "reset-password-success": "تمت إعادة تعيين كلمة المرور بنجاح!",
   "set-new-password": "تعيين كلمة مرور جديدة",
+  "show-password": "إظهار كلمة المرور",
   "sign-in": "تسجيل الدخول",
   "sign-in-or-sign-up": "سجّل الدخول أو اشترك أدناه للمتابعة",
   "sign-up": "أنشئ حسابًا",

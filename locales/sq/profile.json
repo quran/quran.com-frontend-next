@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Vetëm {{formats}}",
+  "change-password": "Ndrysho fjalëkalimin",
   "delete-account": "Fshij llogarine",
+  "delete-account-warning-title": "Paralajmërim",
   "delete-confirmation": {
     "action-text": "E kuptoj pasojat, fshi llogarinë time",
     "confirmation-text": "fshini llogarinë time",
     "instruction-text": "Ju lutemi shkruani <strong> {{text}} </strong> për ta konfirmuar",
     "subtitle": "Ky veprim nuk mund të zhbëhet. Kjo do të fshijë përgjithmonë llogarinë tuaj, faqeshënuesit e ruajtur, seancat e leximit dhe të gjitha të dhënat tuaja.",
     "title": "Jeni absolutisht i sigurt?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Po",
+    "cancel-text": "Jo",
+    "subtitle": "Do ta fshish foton e profilit dhe do ta rivendosësh në cilësimet fillestare, je i sigurt?",
+    "title": "Fshij Fotografinë e Profilit"
+  },
+  "edit-details": "Modifiko Detajet",
+  "email-notification-settings": "Cilësimet e Njoftimeve me Email",
+  "errors": {
+    "remove-failed": "Fotografia e profilit nuk u hoq. Provo përsëri.",
+    "upload-failed": "Ngarkimi i fotografisë së profilit dështoi. Provo përsëri."
+  },
+  "max-file-size": "Maks {{size}}",
+  "my-profile": "Profili im",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Do të dërgohet një email me lidhje për detyrën javore të leximit, nxitje për reflektim dhe më shumë burime për t'ju mbajtur në rrugën e duhur.",
+      "title": "Kurani në një vit"
+    },
+    "streaks-that-will-break": {
+      "description": "Do të dërgohet një email për t'ju njoftuar për një seri që është gati të ndërpritet.",
+      "title": "Vija"
+    }
+  },
+  "personalization": "Personalizimi",
+  "profile-picture": "Fotografia e profilit",
+  "remove-picture": "Hiq foton",
+  "remove-success": "Fotografia e profilit u hoq me sukses.",
+  "save-changes": "Ruaj ndryshimet",
+  "save-picture": "Ruaj Fotografinë",
+  "success": {
+    "details": "Profili juaj u përditësua me sukses",
+    "notifications": "Cilësimet e njoftimeve tuaja janë përditësuar me sukses",
+    "password": "Fjalëkalimi juaj është përditësuar me sukses"
+  },
+  "update-password": "Përditëso fjalëkalimin",
+  "upload-picture": "Ngarko Foto",
+  "upload-success": "Fotografia e profilit u ngarkua me sukses."
 }
