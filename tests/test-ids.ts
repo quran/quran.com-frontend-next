@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 
