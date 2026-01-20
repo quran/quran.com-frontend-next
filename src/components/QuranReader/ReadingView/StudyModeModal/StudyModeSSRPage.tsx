@@ -3,20 +3,28 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
+import useSWR from 'swr';
 
 import SearchableVerseSelector from './SearchableVerseSelector';
 import styles from './StudyModeModal.module.scss';
 import StudyModeBody from './StudyModeBody';
 import { StudyModeTabId } from './StudyModeBottomActions';
 
+import { fetcher } from '@/api';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import Spinner from '@/dls/Spinner/Spinner';
+import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QueryParam from '@/types/QueryParam';
 import Verse from '@/types/Verse';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
@@ -46,6 +54,10 @@ export interface StudyModeSSRPageProps {
  * - Uses fakeNavigate for URL updates without page navigation
  * - Closes modal by navigating back to chapter URL
  */
+interface VerseResponse {
+  verse: Verse;
+}
+
 const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
   initialTab,
   chapterId,
@@ -56,6 +68,8 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
 }) => {
   const router = useRouter();
   const chaptersData = useContext(DataContext);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
 
   // Track selected chapter and verse for SearchableVerseSelector
@@ -70,9 +84,37 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
     activeTab &&
     [StudyModeTabId.TAFSIR, StudyModeTabId.REFLECTIONS, StudyModeTabId.LESSONS].includes(activeTab);
 
-  // Handle close - navigate back to chapter URL with startingVerse param for scrolling
-  // Using router.push with shallow:true to update router.query and trigger scroll hooks
+  // Fetch verse data using SWR (like main StudyModeModal)
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
+  const queryKey = makeByVerseKeyUrl(verseKey, {
+    words: true,
+    translationFields: 'resource_name,language_id',
+    translations: selectedTranslations.join(','),
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    wordTranslationLanguage: 'en',
+    wordTransliteration: 'true',
+  });
+
+  const { data, isValidating } = useSWR<VerseResponse>(queryKey, fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    dedupingInterval: 2000,
+  });
+
+  // Use fetched verse or fall back to initial verse from props
+  const currentVerse =
+    data?.verse ||
+    (verseKey === `${chapterId}:${verseNumber}` ? verse : undefined);
+
+  // Load QCF fonts for the current verse
+  const versesForFont = useMemo(
+    () => (currentVerse ? [currentVerse] : []),
+    [currentVerse],
+  );
+  useQcfFont(quranReaderStyles.quranFont, versesForFont);
+
+  // Handle close - navigate back to chapter URL with startingVerse param for scrolling
   const handleClose = useCallback(() => {
     router.push(
       {
@@ -84,40 +126,41 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
     );
   }, [selectedChapterId, selectedVerseNumber, router]);
 
-  // Navigate to a new verse page based on current tab
-  const navigateToVerse = useCallback(
+  // Update URL when verse changes (fakeNavigate for SEO-friendly URLs without page reload)
+  const updateUrlForVerse = useCallback(
     (newChapterId: string, newVerseNumber: string) => {
       const newVerseKey = `${newChapterId}:${newVerseNumber}`;
       if (activeTab === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
-        router.push(
+        fakeNavigate(
           getVerseSelectedTafsirNavigationUrl(newChapterId, Number(newVerseNumber), tafsirs[0]),
+          router.locale,
         );
       } else if (activeTab === StudyModeTabId.REFLECTIONS) {
-        router.push(getVerseReflectionNavigationUrl(newVerseKey));
+        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale);
       } else if (activeTab === StudyModeTabId.LESSONS) {
-        router.push(getVerseLessonNavigationUrl(newVerseKey));
+        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale);
       }
     },
-    [activeTab, tafsirs, router],
+    [activeTab, tafsirs, router.locale],
   );
 
-  // Handle chapter change - navigate to verse 1 of new chapter
+  // Handle chapter change - go to verse 1 of new chapter
   const handleChapterChange = useCallback(
     (newChapterId: string) => {
       setSelectedChapterId(newChapterId);
       setSelectedVerseNumber('1');
-      navigateToVerse(newChapterId, '1');
+      updateUrlForVerse(newChapterId, '1');
     },
-    [navigateToVerse],
+    [updateUrlForVerse],
   );
 
-  // Handle verse change - navigate to new verse in same chapter
+  // Handle verse change
   const handleVerseChange = useCallback(
     (newVerseNumber: string) => {
       setSelectedVerseNumber(newVerseNumber);
-      navigateToVerse(selectedChapterId, newVerseNumber);
+      updateUrlForVerse(selectedChapterId, newVerseNumber);
     },
-    [selectedChapterId, navigateToVerse],
+    [selectedChapterId, updateUrlForVerse],
   );
 
   // Handle previous verse navigation
@@ -126,9 +169,9 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
     if (currentVerseNum > 1) {
       const newVerseNumber = String(currentVerseNum - 1);
       setSelectedVerseNumber(newVerseNumber);
-      navigateToVerse(selectedChapterId, newVerseNumber);
+      updateUrlForVerse(selectedChapterId, newVerseNumber);
     }
-  }, [selectedVerseNumber, selectedChapterId, navigateToVerse]);
+  }, [selectedVerseNumber, selectedChapterId, updateUrlForVerse]);
 
   // Handle next verse navigation
   const handleNextVerse = useCallback(() => {
@@ -137,9 +180,9 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
     if (currentChapter && currentVerseNum < currentChapter.versesCount) {
       const newVerseNumber = String(currentVerseNum + 1);
       setSelectedVerseNumber(newVerseNumber);
-      navigateToVerse(selectedChapterId, newVerseNumber);
+      updateUrlForVerse(selectedChapterId, newVerseNumber);
     }
-  }, [selectedVerseNumber, selectedChapterId, chaptersData, navigateToVerse]);
+  }, [selectedVerseNumber, selectedChapterId, chaptersData, updateUrlForVerse]);
 
   // Navigation button states
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
@@ -235,6 +278,45 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
     ],
   );
 
+  // Render loading state when fetching new verse data
+  const renderContent = () => {
+    if (isValidating && !currentVerse) {
+      return (
+        <div className={styles.loadingContainer}>
+          <Spinner />
+        </div>
+      );
+    }
+
+    if (currentVerse) {
+      return (
+        <StudyModeBody
+          verse={currentVerse}
+          bookmarksRangeUrl=""
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          // SSR mode - use SSR-enabled tab components for server-side rendering
+          isSsrMode
+          // SSR-specific props for query key matching
+          ssrTafsirIdOrSlug={tafsirIdOrSlug}
+          ssrLocale={locale}
+          // SSR mode props - no word navigation in SSR
+          showWordBox={false}
+          onWordClick={() => {}}
+          onWordBoxClose={() => {}}
+          onNavigatePreviousWord={() => {}}
+          onNavigateNextWord={() => {}}
+          canNavigateWordPrev={false}
+          canNavigateWordNext={false}
+        />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <ContentModal
       isFakeSEOFriendlyMode
@@ -252,27 +334,7 @@ const StudyModeSSRPage: React.FC<StudyModeSSRPageProps> = ({
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
     >
-      <StudyModeBody
-        verse={verse}
-        bookmarksRangeUrl=""
-        selectedChapterId={chapterId}
-        selectedVerseNumber={verseNumber}
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        // SSR mode - use SSR-enabled tab components for server-side rendering
-        isSsrMode
-        // SSR-specific props for query key matching
-        ssrTafsirIdOrSlug={tafsirIdOrSlug}
-        ssrLocale={locale}
-        // SSR mode props - no word navigation in SSR
-        showWordBox={false}
-        onWordClick={() => {}}
-        onWordBoxClose={() => {}}
-        onNavigatePreviousWord={() => {}}
-        onNavigateNextWord={() => {}}
-        canNavigateWordPrev={false}
-        canNavigateWordNext={false}
-      />
+      {renderContent()}
     </ContentModal>
   );
 };
