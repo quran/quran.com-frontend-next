@@ -65,7 +65,6 @@ export const DEVELOPERS_URL = '/developers';
 export const PRODUCT_UPDATES_URL = '/product-updates';
 export const SUPPORT_URL = '/support';
 export const RAMADAN_2026_URL = '/ramadan2026';
-export const RAMADAN_CHALLENGE_URL = '/ramadanchallenge';
 
 /**
  * Get the href link to a verse.
