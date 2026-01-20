@@ -14,9 +14,6 @@
   padding-inline-start: var(--spacing-xxsmall);
   padding-inline-end: var(--spacing-xxsmall);
   color: var(--color-text-inverse);
-  @include theme.dark {
-    color: var(--color-text-white);
-  }
   background-color: var(--color-background-inverse);
   max-inline-size: calc(10 * var(--spacing-mega));
   // Changed from text-align to flexbox to support icon alignment

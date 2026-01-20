@@ -17,6 +17,7 @@ import TextWord from './TextWord';
 
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
+import useIsMobile from '@/hooks/useIsMobile';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
@@ -92,6 +93,7 @@ const QuranWord = ({
 }: QuranWordProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
+  const isMobile = useIsMobile();
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
 
@@ -201,8 +203,13 @@ const QuranWord = ({
       return;
     }
 
-    // Open study mode modal when clicking a word (in both reading and translation mode)
-    // This replaces the old behavior of opening popover/mobile modal in reading mode
+    // On mobile with recitation disabled, let the popover handle the interaction
+    // The popover will open on click, and user can click inside to open Study Mode
+    if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word) {
+      return;
+    }
+
+    // On desktop: Open study mode modal when clicking a word (in both reading and translation mode)
     if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
@@ -210,7 +217,7 @@ const QuranWord = ({
     }
 
     handleWordAction();
-  }, [word.charTypeName, word.location, word.verseKey, isRecitationEnabled, handleWordAction, dispatch]);
+  }, [word.charTypeName, word.location, word.verseKey, isRecitationEnabled, isMobile, handleWordAction, dispatch]);
 
   const onClick = useCallback(
     (e: React.MouseEvent) => {
@@ -298,6 +305,15 @@ const QuranWord = ({
           if (shouldShowWordTooltip) {
             const isTooltipOpen =
               shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
+
+            // Handler for opening Study Mode from popover (used on mobile)
+            const handleOpenStudyMode = () => {
+              dispatch(setReadingViewHoveredVerseKey(null));
+              dispatch(
+                openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),
+              );
+            };
+
             return (
               <MobilePopover
                 icon={<ArrowIcon />}
@@ -306,13 +322,8 @@ const QuranWord = ({
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
                 tooltipType={tooltipType || TooltipType.SUCCESS}
-                shouldContentBeClickable
-                onIconClick={() => {
-                  dispatch(setReadingViewHoveredVerseKey(null));
-                  dispatch(
-                    openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),
-                  );
-                }}
+                shouldContentBeClickable={isMobile && !isRecitationEnabled}
+                onIconClick={handleOpenStudyMode}
                 iconAriaLabel={t('aria.open-study-mode')}
               >
                 {children}
