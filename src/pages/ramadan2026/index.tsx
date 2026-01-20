@@ -64,8 +64,10 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               carrying greater clarity, discipline, and closeness to Allah beyond its days.
             </div>
             <div>
-              <Link href="https://quran.com">Quran.com</Link> invites you to begin preparing for the
-              month with us!
+              <Link href="https://quran.com" isNewTab>
+                Quran.com
+              </Link>{' '}
+              invites you to begin preparing for the month with us!
             </div>
             <div>Join the following activities:</div>
             <ul>
@@ -371,7 +373,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             <br />
             <div className={pageStyles.storeButtons}>
               <div>
-                <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_ANDROID}>
+                <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_ANDROID} isNewTab>
                   <ImageGooglePlay />
                   <div className={pageStyles.starContainer}>
                     <IconStarFilled />
@@ -382,7 +384,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                   </div>
                 </Link>
               </div>
-              <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_IOS}>
+              <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_IOS} isNewTab>
                 <ImageAppStore />
                 <div className={pageStyles.starContainer}>
                   <IconStarFilled />
@@ -447,7 +449,10 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               Quran. The modern technology and human talent needed to accomplish our mission
               requires resources. Monthly donations help us retain top talent and sustain operations
               so we focus less on fundraising and more on creating impact. To learn more and donate,
-              visit: <Link href={makeDonateUrl()}>donate.quran.foundation</Link>
+              visit:{' '}
+              <Link href={makeDonateUrl()} isNewTab>
+                donate.quran.foundation
+              </Link>
             </div>
             <div className={styles.ctaContainer}>
               <Button
