@@ -11,6 +11,7 @@
   "continue-email": "Continuar com e-mail",
   "continue-facebook": "Continuar com o Facebook",
   "continue-google": "Continuar com o Google",
+  "current-password-placeholder": "Senha atual",
   "email-placeholder": "Endereço de email",
   "error": {
     "email-required": "O e-mail está faltando!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Insira seu endereço de e-mail e enviaremos instruções para redefinir sua senha.",
   "forgot-password-success": "E-mail de redefinição de senha enviado! Verifique sua caixa de entrada.",
   "forgot-password-title": "Esqueceu sua senha?",
+  "hide-password": "Ocultar senha",
   "last-name-placeholder": "Sobrenome",
   "login-cta": "Entre ou registe-se agora:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Redefinir senha",
   "reset-password-success": "Senha redefinida com sucesso!",
   "set-new-password": "Defina uma nova senha",
+  "show-password": "Mostrar senha",
   "sign-in": "Entrar",
   "sign-in-or-sign-up": "Faça login ou cadastre-se abaixo para continuar.",
   "sign-up": "Inscrever-se",

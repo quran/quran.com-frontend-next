@@ -11,6 +11,7 @@
   "continue-email": "Vazhdo me Email",
   "continue-facebook": "Vazhdo me Facebook",
   "continue-google": "Vazhdo me Google",
+  "current-password-placeholder": "Fjalëkalimi aktual",
   "email-placeholder": "Adresa e emailit",
   "error": {
     "email-required": "Email-i mungon!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Shkruani adresën tuaj të emailit dhe ne do t'ju dërgojmë udhëzime për të rivendosur fjalëkalimin tuaj.",
   "forgot-password-success": "Email për rivendosjen e fjalëkalimit u dërgua! Ju lutemi kontrolloni kutinë tuaj hyrëse.",
   "forgot-password-title": "Keni harruar fjalëkalimin?",
+  "hide-password": "Fshih fjalëkalimin",
   "last-name-placeholder": "Mbiemri",
   "login-cta": "Identifikohu ose regjistrohu tani:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Rivendos fjalëkalimin",
   "reset-password-success": "Rivendosja e fjalëkalimit me sukses!",
   "set-new-password": "Vendosni një fjalëkalim të ri",
+  "show-password": "Shfaq fjalëkalimin",
   "sign-in": "Identifikohu",
   "sign-in-or-sign-up": "Hyr ose Regjistrohu më poshtë për të vazhduar",
   "sign-up": "Regjistrohu",

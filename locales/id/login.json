@@ -11,6 +11,7 @@
   "continue-email": "Lanjutkan dengan Email",
   "continue-facebook": "Lanjutkan dengan Facebook",
   "continue-google": "Lanjutkan dengan Google",
+  "current-password-placeholder": "Kata sandi saat ini",
   "email-placeholder": "Alamat email",
   "error": {
     "email-required": "Email tidak ditemukan!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Masukkan alamat email Anda dan kami akan mengirimkan petunjuk untuk mengatur ulang kata sandi Anda.",
   "forgot-password-success": "Email pengaturan ulang kata sandi telah terkirim! Silakan periksa kotak masuk Anda.",
   "forgot-password-title": "Lupa kata sandi?",
+  "hide-password": "Sembunyikan kata sandi",
   "last-name-placeholder": "Nama Belakang",
   "login-cta": "Masuk atau Daftar sekarang:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Setel Ulang Kata Sandi",
   "reset-password-success": "Reset kata sandi berhasil!",
   "set-new-password": "Buat kata sandi baru",
+  "show-password": "Tampilkan kata sandi",
   "sign-in": "Masuk",
   "sign-in-or-sign-up": "Masuk atau Daftar di bawah ini untuk melanjutkan",
   "sign-up": "Mendaftar",

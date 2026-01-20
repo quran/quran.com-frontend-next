@@ -11,6 +11,7 @@
   "continue-email": "Continue with Email",
   "continue-facebook": "Continue with Facebook",
   "continue-google": "Continue with Google",
+  "current-password-placeholder": "Current password",
   "email-placeholder": "Email address",
   "error": {
     "email-required": "Email is missing!",
@@ -67,7 +68,6 @@
     "TokenExpiredError": "You have been logged out, please login again."
   },
   "login-title": "Login to Quran.com",
-  "current-password-placeholder": "Current password",
   "new-password-placeholder": "New password",
   "or": "OR",
   "other-options": "Other Login Options",
