@@ -13,13 +13,20 @@
   inline-size: 100%;
 }
 
-.translationSelectionCard {
+div.translationSelectionCard.translationSelectionCard {
   background-color: var(--color-background-alternative-faded);
 
   svg {
     color: var(--color-text-faded);
     fill: var(--color-text-faded);
   }
+}
+
+div.translationLabel {
+  font-size: var(--font-size-xsmall-px);
+  opacity: unset;
+  color: var(--color-text-faded-new);
+  padding-block-end: var(--spacing-xxsmall-px);
 }
 
 .translationValue {

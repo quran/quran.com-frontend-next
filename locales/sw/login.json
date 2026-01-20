@@ -11,6 +11,7 @@
   "continue-email": "Endelea na Barua pepe",
   "continue-facebook": "Endelea na Facebook",
   "continue-google": "Endelea na Google",
+  "current-password-placeholder": "Nenosiri la sasa",
   "email-placeholder": "Anwani ya Barua Pepe",
   "error": {
     "email-required": "Barua pepe haipo!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Weka barua pepe yako na tutakutumia maagizo ya kuweka upya nenosiri lako.",
   "forgot-password-success": "Barua pepe ya kuweka upya nenosiri imetumwa! Tafadhali angalia kisanduku pokezi chako.",
   "forgot-password-title": "Umesahau nenosiri?",
+  "hide-password": "Ficha nenosiri",
   "last-name-placeholder": "Jina la mwisho",
   "login-cta": "Ingia au Jisajili sasa:",
   "login-error": {
@@ -89,10 +91,11 @@
   "reset-password": "Weka upya Nenosiri",
   "reset-password-success": "Nenosiri limewekwa upya kwa mafanikio!",
   "set-new-password": "Weka nenosiri jipya",
+  "show-password": "Onyesha nenosiri",
   "sign-in": "Ingia",
   "sign-in-or-sign-up": "Ingia au Jisajili hapa chini ili kuendelea",
   "sign-up": "Jisajili",
-  "unified-registration-1": "Karibu kwenye usajili wa pamoja wa <span>Quran.</span>Wakfu",
+  "unified-registration-1": "Karibu kwenye usajili wa pamoja wa <span>Quran.</span>Foundation",
   "unified-registration-2": "Quran.Foundation",
   "unified-registration-3": ". Utaweza kufikia tovuti zifuatazo ",
   "unified-registration-4": "kupitia maelezo yako ya kuingia.",

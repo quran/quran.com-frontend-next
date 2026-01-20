@@ -3,6 +3,7 @@
   "begin": "Beginnen",
   "calendar-cta": "Kalender",
   "chapters-and-verses": "Hoofdstukken en verzen",
+  "continue-learning-plan": "Blijf leren",
   "continue-read": "Lees verder",
   "explore-topics": "Onderwerpen verkennen",
   "first-time-reading": "Nieuw in de Koran? <link> Begin hier </link>",
@@ -13,7 +14,7 @@
   "my-quran": "Mijn Koran",
   "navigate-quran": "Navigeer door de Koran",
   "no-bookmarks": "U heeft nog geen bladwijzers",
-  "no-page-bookmarks": "Je hebt nog geen bladwijzers voor pagina's.",
+  "no-page-bookmarks": "Je hebt nog geen bladwijzers",
   "no-recently-read": "Je hebt nog geen leessessies",
   "noble-quran": "De Edele Koran",
   "popular": "Populair",
@@ -56,6 +57,7 @@
     "description": "Help de Koran te verspreiden onder nieuwe leerlingen",
     "title": "Deel de Koran!"
   },
+  "start-learning-plan": "Begin met leren",
   "start-read": "Begin met lezen",
   "stay-consistent": "Volg Stappen, Creëer Aangepaste Doelen, Blijf Consistent",
   "tab": {

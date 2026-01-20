@@ -27,6 +27,7 @@ type Props = {
 const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCoursesData }) => {
   const { t } = useTranslation('learn');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+
   return (
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>

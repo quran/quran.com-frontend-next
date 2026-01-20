@@ -1,8 +1,8 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
 
 .container {
   margin-block-start: var(--spacing-medium);
-  min-height: 80vh;
+  min-block-size: 80vh;
 }
 
 .profileContainer {
@@ -13,8 +13,8 @@
 
 .profilePicture {
   --profile-picture-size: calc(5 * var(--spacing-medium));
-  width: var(--profile-picture-size);
-  height: var(--profile-picture-size);
+  inline-size: var(--profile-picture-size);
+  block-size: var(--profile-picture-size);
   background-color: var(--shade-4);
   border-radius: var(--border-radius-circle);
 }

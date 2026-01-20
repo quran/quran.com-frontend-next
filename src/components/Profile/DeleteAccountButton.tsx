@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './DeleteAccountButton.module.scss';
+import sharedStyles from './SharedProfileStyles.module.scss';
 
 import Input from '@/dls/Forms/Input';
 import Modal from '@/dls/Modal/Modal';
@@ -48,18 +49,32 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   return (
     <>
       <Button
+        className={sharedStyles.button}
+        size={ButtonSize.Small}
         type={ButtonType.Error}
-        variant={ButtonVariant.Ghost}
+        variant={ButtonVariant.Outlined}
         onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
         {t('delete-account')}
       </Button>
-      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
+      <Modal
+        isOpen={isModalVisible}
+        onClickOutside={closeModal}
+        hasCloseButton
+        onClose={closeModal}
+      >
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Subtitle>
+              <div className={styles.deleteAccountWarningContainer}>
+                <span className={styles.deleteAccountWarningTitle}>
+                  {t('delete-account-warning-title')}:{' '}
+                </span>
+                {t('delete-confirmation.subtitle')}
+              </div>
+            </Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans

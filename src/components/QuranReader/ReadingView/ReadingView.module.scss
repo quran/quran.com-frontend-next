@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 @use 'src/styles/utility';
 
 $empty-state-gap-desktop: 140px;
@@ -21,6 +22,8 @@ $empty-state-gap-mobile: 50px;
 }
 
 .virtuosoScroller {
+  max-inline-size: 100%;
+
   & [data-viewport-type='window'] {
     // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;
@@ -32,9 +35,13 @@ $empty-state-gap-mobile: 50px;
   flex-direction: column;
   align-items: center;
   inline-size: 100%;
-  padding-block-start: $empty-state-gap-desktop;
+}
+
+.emptyStateActions {
+  padding-block-start: constants.$reading-view-container-top-margin;
+  margin-block-end: $empty-state-gap-desktop;
 
   @include breakpoints.smallerThanTablet {
-    padding-block-start: $empty-state-gap-mobile;
+    margin-block-end: $empty-state-gap-mobile;
   }
 }

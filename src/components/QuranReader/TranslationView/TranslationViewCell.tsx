@@ -38,6 +38,7 @@ type TranslationViewCellProps = {
   bookmarksRangeUrl?: string | null; // optional to allow SSR fallback without auth
   hasNotes?: boolean;
   hasQuestions?: boolean;
+  isFirstCellWithHeader?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -47,6 +48,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   bookmarksRangeUrl,
   hasNotes,
   hasQuestions,
+  isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
@@ -98,6 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         data-testid={`verse-${verse.verseKey}`}
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
+          [styles.firstCellWithHeader]: isFirstCellWithHeader,
         })}
       >
         <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
@@ -150,6 +153,7 @@ const areVersesEqual = (
   prevProps.verse.id === nextProps.verse.id &&
   prevProps.hasNotes === nextProps.hasNotes &&
   prevProps.hasQuestions === nextProps.hasQuestions &&
+  prevProps.isFirstCellWithHeader === nextProps.isFirstCellWithHeader &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,

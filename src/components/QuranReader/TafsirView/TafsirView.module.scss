@@ -82,6 +82,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
 
 .surahAndAyahSelectionContainer {
   display: flex;
+  margin-block-start: var(--spacing-xxsmall);
 }
 .tafsirSelectionContainer {
   display: flex;

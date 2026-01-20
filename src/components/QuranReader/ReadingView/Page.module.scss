@@ -8,7 +8,6 @@
 
 .container {
   border-block-end: 1px var(--color-borders-hairline) solid;
-  margin-block-start: constants.$reading-view-container-top-margin;
   margin-block-end: var(--spacing-large-px);
   max-inline-size: 100%;
 }
@@ -19,4 +18,13 @@
   @include breakpoints.tablet {
     text-align: start;
   }
+}
+
+.translationPageContainer {
+  // ChapterHeader's margin provides the visual gap
+}
+
+.chapterHeaderNoTopMargin {
+  // !important needed to override ChapterHeader's default margin since both classes have equal specificity
+  margin-block-start: 0 !important;
 }

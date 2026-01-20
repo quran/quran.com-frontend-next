@@ -119,6 +119,7 @@ const TranslationSelectionBody = () => {
                   content={translation.shortDescription.description}
                   tooltipType={TooltipType.INFO}
                   contentSide={ContentSide.TOP}
+                  contentStyles={styles.popoverContent}
                 >
                   <span aria-label={t('aria.translation-info')}>
                     <IconInfo className={styles.infoIcon} />
@@ -134,7 +135,7 @@ const TranslationSelectionBody = () => {
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input

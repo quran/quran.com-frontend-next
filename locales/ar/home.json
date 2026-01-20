@@ -3,6 +3,7 @@
   "begin": "ابدأ",
   "calendar-cta": "التقويم",
   "chapters-and-verses": "السور والآيات",
+  "continue-learning-plan": "واصل التعلم",
   "continue-read": "تابع القراءة",
   "explore-topics": "تصفح المواضيع",
   "first-time-reading": "هل أنت جديد على القرآن الكريم؟  <link> ابدأ هنا </link>",
@@ -13,7 +14,7 @@
   "my-quran": "مصحفي",
   "navigate-quran": "تصفح القرآن الكريم",
   "no-bookmarks": "لا توجد لديك أي سجلات حفظ بعد",
-  "no-page-bookmarks": "ليس لديك أي إشارات مرجعية للصفحات حتى الآن",
+  "no-page-bookmarks": "ليس لديك أي إشارات مرجعية للصفحة حتى الآن",
   "no-recently-read": "ليس لديك أي جلسات قراءة بعد",
   "noble-quran": "القرآن الكريم",
   "popular": "الأكثر شيوعًا",
@@ -56,6 +57,7 @@
     "description": "ساعد في نشر القرآن الكريم للمتعلمين الجدد",
     "title": "شارك القرآن!"
   },
+  "start-learning-plan": "ابدأ التعلم",
   "start-read": "ابدأ القراءة",
   "stay-consistent": "تتبع إنجازاتك، أنشئ أهدافك المخصصة، وابقَ مستمرًا.",
   "tab": {

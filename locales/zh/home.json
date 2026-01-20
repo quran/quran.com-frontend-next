@@ -3,6 +3,7 @@
   "begin": "开始",
   "calendar-cta": "日历",
   "chapters-and-verses": "章节和诗句",
+  "continue-learning-plan": "继续学习",
   "continue-read": "继续阅读",
   "explore-topics": "探索主题",
   "first-time-reading": "第一次阅读《古兰经》？ <link>从这里开始</link>",
@@ -56,6 +57,7 @@
     "description": "帮助向新学习者传播《古兰经》",
     "title": "分享古兰经！"
   },
+  "start-learning-plan": "开始学习",
   "start-read": "开始阅读",
   "stay-consistent": "追踪连胜记录，创建自定义目标，保持一致",
   "tab": {

@@ -30,6 +30,8 @@ type SwitchProps = {
   onSelect: (value: string) => void;
   size?: SwitchSize;
   variant?: SwitchVariant;
+  className?: string;
+  shouldHideSeparators?: boolean;
 };
 
 const Switch = ({
@@ -38,15 +40,21 @@ const Switch = ({
   selected,
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
+  className,
+  shouldHideSeparators = false,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, {
-        [styles.xSmallContainer]: size === SwitchSize.XSmall,
-        [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
-      })}
+      className={classNames(
+        styles.container,
+        {
+          [styles.xSmallContainer]: size === SwitchSize.XSmall,
+          [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
+        },
+        className,
+      )}
     >
       {items.map((item) => (
         <button
@@ -67,8 +75,9 @@ const Switch = ({
         </button>
       ))}
 
-      {/* seprator  */}
+      {/* separator */}
       {items.length > 2 &&
+        !shouldHideSeparators &&
         range(1, items.length).map((i) => {
           return (
             <div

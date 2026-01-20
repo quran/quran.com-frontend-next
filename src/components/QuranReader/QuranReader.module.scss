@@ -2,8 +2,9 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$quran-reader-padding: 3rem;
-$quran-reader-padding-mobile: 4.5rem;
+// Padding clears fixed elements; ChapterHeader's margin provides the 20px visual gap
+$quran-reader-padding: var(--navbar-height);
+$quran-reader-padding-mobile: var(--navbar-height);
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
@@ -14,15 +15,12 @@ $virtual-scrolling-height-bandage: calc(
   @include utility.quranContainer;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
+  margin-inline: 0;
+  inline-size: 100%;
 }
 
 .readingView {
   min-block-size: 100vh;
-  @include breakpoints.smallerThanTablet {
-    inline-size: 85%;
-  }
 }
 
 .loading {
@@ -39,8 +37,7 @@ $virtual-scrolling-height-bandage: calc(
     padding-block-start: $quran-reader-padding-mobile;
   }
   padding-block-start: $quran-reader-padding;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
+  padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;

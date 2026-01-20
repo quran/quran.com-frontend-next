@@ -11,6 +11,7 @@
   "continue-email": "Continuar con correo electrónico",
   "continue-facebook": "Continuar con Facebook",
   "continue-google": "Continuar con Google",
+  "current-password-placeholder": "Contraseña actual",
   "email-placeholder": "Dirección de correo electrónico",
   "error": {
     "email-required": "¡Falta el correo electrónico!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Ingresa tu dirección de correo electrónico y te enviaremos instrucciones para restablecer tu contraseña.",
   "forgot-password-success": "¡Correo electrónico de restablecimiento de contraseña enviado! Por favor, revisa tu bandeja de entrada.",
   "forgot-password-title": "¿Has olvidado tu contraseña?",
+  "hide-password": "Ocultar contraseña",
   "last-name-placeholder": "Apellido",
   "login-cta": "Inicia sesión o regístrate ahora:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Restablecer contraseña",
   "reset-password-success": "¡Contraseña restablecida exitosamente!",
   "set-new-password": "Establecer una nueva contraseña",
+  "show-password": "Mostrar contraseña",
   "sign-in": "Iniciar sesión",
   "sign-in-or-sign-up": "Inicie sesión o regístrese a continuación para continuar.",
   "sign-up": "Registrarse",

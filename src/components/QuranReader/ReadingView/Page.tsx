@@ -90,6 +90,7 @@ const Page = ({
           pageNumber={pageNumber}
           lang={lang}
           bookmarksRangeUrl={bookmarksRangeUrl}
+          pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
         />
       </div>
     );
@@ -116,7 +117,7 @@ const Page = ({
             isBigTextLayout={isBigTextLayout}
             quranReaderStyles={quranReaderStyles}
             bookmarksRangeUrl={bookmarksRangeUrl}
-            shouldHideChapterHeader={shouldShowChapterHeader}
+            pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
           />
         ))}
         <PageFooter page={pageNumber} />

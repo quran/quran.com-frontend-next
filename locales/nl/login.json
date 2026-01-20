@@ -11,6 +11,7 @@
   "continue-email": "Doorgaan met e-mail",
   "continue-facebook": "Ga verder met Facebook",
   "continue-google": "Ga verder met Google",
+  "current-password-placeholder": "Huidig wachtwoord",
   "email-placeholder": "E-mailadres",
   "error": {
     "email-required": "E-mailadres ontbreekt!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Voer uw e-mailadres in, dan sturen wij u instructies om uw wachtwoord opnieuw in te stellen.",
   "forgot-password-success": "Wachtwoord reset e-mail verzonden! Controleer uw inbox.",
   "forgot-password-title": "Wachtwoord vergeten?",
+  "hide-password": "Wachtwoord verbergen",
   "last-name-placeholder": "Achternaam",
   "login-cta": "Log in of meld je nu aan:",
   "login-error": {
@@ -89,10 +91,11 @@
   "reset-password": "Wachtwoord opnieuw instellen",
   "reset-password-success": "Wachtwoord opnieuw ingesteld!",
   "set-new-password": "Stel een nieuw wachtwoord in",
+  "show-password": "Wachtwoord weergeven",
   "sign-in": "Aanmelden",
   "sign-in-or-sign-up": "Meld u hieronder aan of registreer u om verder te gaan.",
   "sign-up": "Registreren",
-  "unified-registration-1": "Welkom bij de uniforme registratie van <span>Koran.</span>Fundering",
+  "unified-registration-1": "Welkom bij de uniforme registratie van <span>Koran.</span>Fundering.",
   "unified-registration-2": "Quran.Foundation",
   "unified-registration-3": ". U krijgt toegang tot de volgende websites ",
   "unified-registration-4": "via uw aanmeldgegevens.",

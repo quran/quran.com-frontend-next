@@ -3,12 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-block-size: 100vh;
-
-  @include breakpoints.smallerThanTablet {
-    min-block-size: unset;
-    block-size: calc(100dvh - var(--navbar-height));
-  }
+  min-block-size: 0;
+  flex: 1;
+  block-size: 100%;
+  transform: translateZ(0);
 }
 
 .buttonsContainer {
@@ -22,10 +20,7 @@
   border-block-start: 1px solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated);
   flex-shrink: 0;
-  position: sticky;
-  inset-block-end: 0;
   z-index: 10;
-  margin-block-start: auto;
 
   button {
     border-radius: var(--border-radius-medium-px);
@@ -50,4 +45,8 @@
       color: var(--color-text-faded-new);
     }
   }
+}
+
+button.resetButton.resetButton {
+  font-size: var(--font-size-small-px);
 }
