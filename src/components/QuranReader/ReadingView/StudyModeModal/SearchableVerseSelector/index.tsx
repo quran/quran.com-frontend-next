@@ -7,6 +7,7 @@ import styles from './SearchableVerseSelector.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
+import CaretIcon from '@/icons/caret-down.svg';
 import CloseIcon from '@/icons/close.svg';
 import SearchIcon from '@/icons/search.svg';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -133,10 +134,11 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
       <div className={styles.collapsedContainer}>
         <button type="button" className={styles.selectorButton} onClick={handleChapterClick}>
           <span className={styles.buttonText}>{chapterDisplayText}</span>
+          <CaretIcon className={styles.caretIcon} />
         </button>
-        <span className={styles.separator}>:</span>
         <button type="button" className={styles.selectorButton} onClick={handleVerseClick}>
           <span className={styles.buttonText}>{verseDisplayText}</span>
+          <CaretIcon className={styles.caretIcon} />
         </button>
       </div>
 
@@ -160,7 +162,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
               ref={inputRef}
               type="text"
               className={styles.searchInput}
-              placeholder={tCommon('search')}
+              placeholder={tCommon('search.title')}
               value={searchQuery}
               onChange={handleSearchChange}
             />
@@ -177,7 +179,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
                     })}
                     onClick={() => handleSelectChapter(chapter.id)}
                   >
-                    {chapter.id}. {chapter.name}
+                    {toLocalizedNumber(Number(chapter.id), lang)}. {chapter.name}
                   </button>
                 ))
               : filteredVerses.map((verse) => (
@@ -195,7 +197,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
 
             {((isChapterMode && filteredChapters.length === 0) ||
               (!isChapterMode && filteredVerses.length === 0)) && (
-              <div className={styles.noResults}>{tCommon('no-results')}</div>
+              <div className={styles.noResults}>{tCommon('search.no-results')}</div>
             )}
           </div>
         </div>

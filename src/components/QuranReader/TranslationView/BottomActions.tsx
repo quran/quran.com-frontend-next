@@ -76,11 +76,11 @@ const BottomActions = ({
     return () => {
       // Open Study Mode for tafsir, reflections, and lessons
       if (tabType === TabId.TAFSIR) {
-        dispatch(openStudyMode({ verseKey, initialTab: StudyModeTabId.TAFSIR }));
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.TAFSIR }));
       } else if (tabType === TabId.REFLECTIONS) {
-        dispatch(openStudyMode({ verseKey, initialTab: StudyModeTabId.REFLECTIONS }));
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.REFLECTIONS }));
       } else if (tabType === TabId.LESSONS) {
-        dispatch(openStudyMode({ verseKey, initialTab: StudyModeTabId.LESSONS }));
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
       } else if (tabType === TabId.ANSWERS) {
         // Answers still uses the separate Q&A modal
         setOpenedModal(ModalType.QUESTIONS);
