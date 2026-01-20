@@ -29,8 +29,8 @@ const ForgotPasswordForm: React.FC = () => {
     {
       ...getEmailField(t),
       customRender: (props) => <AuthInput {...props} id="email" htmlType="email" />,
-      errorClassName: styles.errorText,
-      containerClassName: styles.inputContainer,
+      errorClassName: styles.authErrorText,
+      containerClassName: styles.authFieldWrapper,
     },
   ];
 

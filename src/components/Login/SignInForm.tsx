@@ -50,8 +50,8 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       customRender: (props) => (
         <AuthInput {...props} id="email" htmlType="email" dataTestId={props.dataTestId} />
       ),
-      errorClassName: styles.errorText,
-      containerClassName: styles.inputContainer,
+      errorClassName: styles.authErrorText,
+      containerClassName: styles.authFieldWrapper,
     },
     {
       field: 'password',
@@ -66,8 +66,8 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         },
       ],
       customRender: SignInPasswordField,
-      errorClassName: styles.errorText,
-      containerClassName: styles.inputContainer,
+      errorClassName: styles.authErrorText,
+      containerClassName: styles.authFieldWrapper,
     },
   ];
 

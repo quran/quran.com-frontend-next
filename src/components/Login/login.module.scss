@@ -5,13 +5,13 @@
 $container-width: 370px;
 
 .outerContainer {
-  min-height: 100vh;
+  min-block-size: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-inline: auto;
-  max-width: $container-width;
+  max-inline-size: $container-width;
   padding-block: calc(var(--spacing-xsmall) * 4);
   box-sizing: border-box;
 
@@ -24,10 +24,10 @@ $container-width: 370px;
   font-size: var(--font-size-normal-px);
   color: var(--color-text-default);
   text-align: center;
-  margin-bottom: var(--spacing-xsmall-px);
+  margin-block-end: var(--spacing-xsmall-px);
   @include breakpoints.desktop {
     font-size: var(--font-size-xlarge-px);
-    margin-bottom: var(--spacing-large);
+    margin-block-end: var(--spacing-large);
   }
 }
 
@@ -39,7 +39,7 @@ $container-width: 370px;
   display: flex;
   flex-direction: row;
   gap: var(--spacing-medium);
-  width: 100%;
+  inline-size: 100%;
 
   & > * {
     flex: 1;
@@ -47,8 +47,8 @@ $container-width: 370px;
 }
 
 .loginButton {
-  width: 100%;
-  height: constants.$oauth-social-button-height;
+  inline-size: 100%;
+  block-size: constants.$oauth-social-button-height;
   justify-content: center;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
@@ -67,8 +67,8 @@ $container-width: 370px;
   }
 
   svg {
-    width: 24px !important;
-    height: 24px !important;
+    inline-size: 24px !important;
+    block-size: 24px !important;
   }
 }
 
@@ -133,20 +133,20 @@ $container-width: 370px;
 }
 
 .authContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   font-family: var(--font-family-figtree);
 }
 
 .authTabs {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .authSwitchContainer {
-  width: 100%;
+  inline-size: 100%;
   margin-inline: auto;
   margin-block-end: var(--spacing-large-px);
 }
@@ -168,7 +168,7 @@ $container-width: 370px;
 }
 
 .formContainer {
-  width: 100%;
+  inline-size: 100%;
   margin-inline: auto;
   display: flex;
   align-items: center;
@@ -176,12 +176,12 @@ $container-width: 370px;
   gap: var(--spacing-small-px);
 
   form {
-    width: 100%;
+    inline-size: 100%;
   }
 
   input {
     border: none;
-    width: 100%;
+    inline-size: 100%;
     background: transparent;
     color: var(--color-text-default);
 
@@ -197,17 +197,17 @@ $container-width: 370px;
 
 .generalError {
   padding: calc(var(--spacing-xsmall-px) * 1.5);
-  margin-bottom: var(--spacing-xsmall-px);
+  margin-block-end: var(--spacing-xsmall-px);
   font-size: var(--font-size-small);
   color: white;
   background-color: var(--color-error-medium2);
   border-radius: calc(var(--border-radius-default) * 2);
-  width: 100%;
+  inline-size: 100%;
   box-sizing: border-box;
 }
 
 .submitButton {
-  width: 100%;
+  inline-size: 100%;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
   border-radius: var(--border-radius-medium-px);
@@ -227,16 +227,15 @@ $container-width: 370px;
   margin-block-start: var(--spacing-small-px);
 }
 
-.inputContainer {
+.authFieldWrapper {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-small-px);
-  margin-block: 0px !important;
-  margin-block-end: var(--spacing-small-px) !important;
+  margin-block: 0 var(--spacing-small-px);
 }
 
-.errorText {
-  color: var(--color-error-medium2) !important;
+.authErrorText {
+  color: var(--color-error-medium2);
 }
 
 .forgotPassword {
@@ -266,8 +265,8 @@ $container-width: 370px;
   margin-block-start: var(--spacing-medium2-px);
 
   svg {
-    width: 20px;
-    height: 20px;
+    inline-size: 20px;
+    block-size: 20px;
   }
 
   &:hover {
@@ -282,14 +281,14 @@ $container-width: 370px;
   justify-content: center;
   padding: var(--spacing-mega);
   gap: var(--spacing-medium);
-  width: 400px;
+  inline-size: 400px;
   margin: 0 auto;
 }
 
 .orSeparator {
   display: flex;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
   margin-block: var(--spacing-large-px);
   gap: var(--spacing-small);
 }
@@ -297,7 +296,7 @@ $container-width: 370px;
 .orLine {
   flex: 1;
   border: none;
-  border-top: 1px solid var(--color-border-gray-lighter);
+  border-block-start: 1px solid var(--color-border-gray-lighter);
   margin: 0;
 }
 
@@ -310,7 +309,7 @@ $container-width: 370px;
 }
 
 .authHeader {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -334,7 +333,7 @@ $container-width: 370px;
   gap: var(--spacing-xsmall);
   margin-block-start: var(--spacing-xxlarge-px);
   margin-block-end: var(--spacing-large-px);
-  width: 100%;
+  inline-size: 100%;
 }
 
 .welcomeSubtitle {
@@ -352,6 +351,6 @@ $container-width: 370px;
 }
 
 .quranLogo {
-  width: auto;
-  height: 18px;
+  inline-size: auto;
+  block-size: 18px;
 }

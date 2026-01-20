@@ -26,8 +26,8 @@ const addCustomRenderToFormFields = (
             dataTestId={props.dataTestId}
           />
         ),
-        errorClassName: styles.errorText,
-        containerClassName: styles.inputContainer,
+        errorClassName: styles.authErrorText,
+        containerClassName: styles.authFieldWrapper,
       };
     }
     return field;
