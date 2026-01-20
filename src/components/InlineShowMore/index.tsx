@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './InlineShowMore.module.scss';
 
-interface InlineShowMoreProps {
+interface InlineShowMoreProps extends React.ComponentProps<'div'> {
   children: string;
   lines?: number;
   className?: string;
@@ -28,6 +28,7 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   showReadMore = true,
   seeLessText,
   readMoreText,
+  ...props
 }) => {
   const { t, lang } = useTranslation('common');
   const [expanded, setExpanded] = useState(false);
@@ -68,7 +69,7 @@ const InlineShowMore: React.FC<InlineShowMoreProps> = ({
   }, []);
 
   return (
-    <div className={classNames(styles.container, className)} dir="auto">
+    <div className={classNames(styles.container, className)} dir="auto" {...props}>
       <div className={styles.textWrapper}>
         <div
           ref={contentRef}
