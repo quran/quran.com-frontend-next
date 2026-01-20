@@ -14,7 +14,6 @@ import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
-import NotesIcon from '@/icons/notes-with-pencil.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
@@ -26,7 +25,6 @@ import {
   getLoginNavigationUrl,
   getMyCoursesNavigationUrl,
   getMyQuranNavigationUrl,
-  getNotesNavigationUrl,
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
@@ -56,12 +54,6 @@ const MENU_ITEMS = [
     navigationUrl: getReadingGoalProgressNavigationUrl(),
     translationKey: 'reading-history',
     icon: <ClockIcon />,
-  },
-  {
-    eventName: 'profile_avatar_notes',
-    navigationUrl: getNotesNavigationUrl(),
-    translationKey: 'notes.title',
-    icon: <NotesIcon />,
   },
   {
     eventName: 'profile_avatar_my_courses',

@@ -464,9 +464,6 @@ export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress
 
 export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
 
-export const getNotesNavigationUrl = () =>
-  getMyQuranNavigationUrl(MyQuranTab.NOTES_AND_REFLECTIONS);
-
 export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
 
 export const getResetPasswordNavigationUrl = () => `/reset-password`;
