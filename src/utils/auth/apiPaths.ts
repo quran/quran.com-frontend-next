@@ -56,6 +56,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');

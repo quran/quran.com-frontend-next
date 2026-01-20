@@ -106,10 +106,36 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
     },
 
     error: (err, req, res) => {
-      res.end(() => ({ error: ERROR_MESSAGES.PROXY_ERROR, message: err.message }));
+      // BUGFIX: The original code was calling res.end() with a function that returns an object:
+      // res.end(() => ({ error: ERROR_MESSAGES.PROXY_ERROR, message: err.message }))
+      //
+      // This caused a TypeError because res.end() expects a string, Buffer, or ArrayBuffer,
+      // not a function. The function was being passed as the response body, which caused:
+      // "The 'string' argument must be of type string... Received type function"
+      //
+      // The fix is to properly send JSON responses based on the response object type:
+
+      // Check if res is a NextApiResponse (has status method) or a Socket
+      if ('status' in res && typeof res.status === 'function') {
+        res.status(500).json({ error: ERROR_MESSAGES.PROXY_ERROR, message: err.message });
+      } else {
+        // For Socket or other types, just end the response with a stringified error
+        res.end(JSON.stringify({ error: ERROR_MESSAGES.PROXY_ERROR, message: err.message }));
+      }
     },
   },
 });
+
+// Maximum request body size for API routes, aligned with backend limit for profile picture uploads
+const API_BODY_SIZE_LIMIT = process.env.API_BODY_SIZE_LIMIT || '8mb';
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: API_BODY_SIZE_LIMIT,
+    },
+  },
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   apiProxy(req, res, (err) => {

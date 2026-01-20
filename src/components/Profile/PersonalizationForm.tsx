@@ -1,0 +1,103 @@
+import type { FC } from 'react';
+
+import classNames from 'classnames';
+import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
+
+import DeleteProfilePictureButton from './DeleteProfilePictureButton';
+import styles from './PersonalizationForm.module.scss';
+import Section from './Section';
+
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useAuthData from '@/hooks/auth/useAuthData';
+import useProfilePictureForm from '@/hooks/auth/useProfilePictureForm';
+import DefaultUserIcon from '@/icons/default-user.svg';
+import { TestId } from '@/tests/test-ids';
+import { logButtonClick } from '@/utils/eventLogger';
+
+const PersonalizationForm: FC = () => {
+  const { t } = useTranslation('profile');
+  const { userData } = useAuthData();
+  const hasProfilePicture = !!userData?.avatars?.large;
+
+  const {
+    fileInputRef,
+    handleUploadPicture,
+    handleFileSelect,
+    isProcessing,
+    translationParams,
+    handleRemovePicture,
+    isRemoving,
+  } = useProfilePictureForm();
+
+  const onUploadPicture = () => {
+    logButtonClick('profile_upload_picture');
+    handleUploadPicture();
+  };
+
+  const onRemovePicture = () => {
+    logButtonClick('profile_remove_picture');
+    handleRemovePicture();
+  };
+
+  return (
+    <Section
+      title={t('personalization')}
+      dataTestId={TestId.AUTH_UPDATE_PROFILE_PERSONALIZATION_SECTION}
+    >
+      <div className={styles.profilePictureContainer}>
+        <p className={styles.profilePictureTitle}>{t('profile-picture')}</p>
+        <div className={styles.profilePictureDetailAction}>
+          <div className={styles.profilePictureDetail}>
+            <div className={styles.profilePictureImage}>
+              {hasProfilePicture && userData.avatars?.large ? (
+                <Image
+                  src={userData.avatars.large}
+                  alt={t('profile-picture')}
+                  width={60}
+                  height={60}
+                  className={styles.profilePictureImageElement}
+                />
+              ) : (
+                <DefaultUserIcon />
+              )}
+            </div>
+            <div className={styles.profilePictureDescription}>
+              <p>{t('max-file-size', { size: translationParams.maxSize })}</p>
+              <p>{t('allowed-formats', { formats: translationParams.allowedFormats })}</p>
+            </div>
+          </div>
+          <div className={styles.profilePictureAction}>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/jpg,image/png"
+              onChange={handleFileSelect}
+              className={styles.profilePictureInput}
+              data-testid={TestId.AUTH_UPDATE_PROFILE_PROFILE_INPUT}
+            />
+            <Button
+              variant={ButtonVariant.Ghost}
+              size={ButtonSize.Small}
+              className={classNames(styles.profilePictureActionButton, styles.uploadPictureButton)}
+              onClick={onUploadPicture}
+              isLoading={isProcessing}
+              isDisabled={isProcessing || isRemoving}
+            >
+              {t('upload-picture')}
+            </Button>
+            {hasProfilePicture && (
+              <DeleteProfilePictureButton
+                isRemoving={isRemoving}
+                isProcessing={isProcessing}
+                onRemovePicture={onRemovePicture}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+export default PersonalizationForm;

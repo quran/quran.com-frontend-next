@@ -1,4 +1,5 @@
 .inputContainer {
+  block-size: calc(2 * var(--spacing-medium2-px));
   inline-size: 100%;
 }
 .deleteButton {
@@ -11,4 +12,13 @@
 
 .instructionText {
   padding-block: var(--spacing-medium);
+}
+
+.deleteAccountWarningContainer {
+  color: var(--color-text-default-new);
+  margin-block-start: var(--spacing-small-px);
+}
+
+.deleteAccountWarningTitle {
+  font-weight: var(--font-weight-bold);
 }

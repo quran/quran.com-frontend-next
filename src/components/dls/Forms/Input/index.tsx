@@ -36,6 +36,28 @@ export enum InputVariant {
   Default = 'default',
   Main = 'main',
 }
+
+export enum HtmlInputType {
+  Text = 'text',
+  Password = 'password',
+  Email = 'email',
+  Number = 'number',
+  Tel = 'tel',
+  Url = 'url',
+  Search = 'search',
+  Date = 'date',
+  Time = 'time',
+  DateTime = 'datetime-local',
+  Month = 'month',
+  Week = 'week',
+  Color = 'color',
+  File = 'file',
+  Hidden = 'hidden',
+  Range = 'range',
+  Checkbox = 'checkbox',
+  Radio = 'radio',
+}
+
 interface Props {
   id: string;
   name?: string;
@@ -64,6 +86,7 @@ interface Props {
   inputRef?: RefObject<HTMLInputElement>;
   prefixSuffixContainerClassName?: string;
   shouldUseDefaultStyles?: boolean;
+  dataTestId?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -94,6 +117,7 @@ const Input: React.FC<Props> = ({
   isRequired,
   inputRef,
   shouldUseDefaultStyles = true,
+  dataTestId,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -171,6 +195,7 @@ const Input: React.FC<Props> = ({
           required={isRequired}
           dir="auto"
           id={id}
+          data-testid={dataTestId}
           ref={inputRef}
           disabled={disabled}
           onChange={onValueChange}

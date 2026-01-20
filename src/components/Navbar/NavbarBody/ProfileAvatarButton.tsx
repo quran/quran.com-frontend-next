@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
@@ -28,6 +29,7 @@ import {
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  MY_QURAN_URL,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -39,7 +41,7 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: getProfileNavigationUrl(),
+    navigationUrl: MY_QURAN_URL,
     translationKey: 'my-quran',
     icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
   },
