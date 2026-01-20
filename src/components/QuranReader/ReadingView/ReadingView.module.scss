@@ -22,6 +22,8 @@ $empty-state-gap-mobile: 50px;
 }
 
 .virtuosoScroller {
+  max-inline-size: 100%;
+
   & [data-viewport-type='window'] {
     // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;
