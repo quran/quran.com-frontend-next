@@ -3,7 +3,8 @@ import { useCallback, useState, useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import { invalidateCache } from '@/components/Notes/modal/utility';
+import { addReflectionEntityToNote } from '@/components/Notes/modal/utility';
+import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility/cache';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
@@ -11,6 +12,11 @@ import { logErrorToSentry } from '@/lib/sentry';
 import { Note } from '@/types/auth/Note';
 import { publishNoteToQR } from '@/utils/auth/api';
 import { verseRangesToVerseKeys } from '@/utils/verseKeys';
+
+interface UsePostNoteToQRProps {
+  onSuccess?: (response: Awaited<ReturnType<typeof publishNoteToQR>>) => void;
+  flushNotesList?: boolean;
+}
 
 interface UsePostNoteToQRReturn {
   showConfirmationModal: boolean;
@@ -21,7 +27,10 @@ interface UsePostNoteToQRReturn {
   handleNotePostToQR: () => Promise<void>;
 }
 
-const usePostNoteToQR = (): UsePostNoteToQRReturn => {
+const usePostNoteToQR = ({
+  onSuccess,
+  flushNotesList = false,
+}: UsePostNoteToQRProps): UsePostNoteToQRReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -43,12 +52,16 @@ const usePostNoteToQR = (): UsePostNoteToQRReturn => {
       invalidateCache({
         mutate,
         cache,
-        note,
+        note: addReflectionEntityToNote(note, response.postId),
         verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
+        invalidateReflections: true,
+        flushNotesList,
+        action: CacheAction.UPDATE,
       });
 
       setShowConfirmationModal(false);
       setNoteToPost(null);
+      onSuccess?.(response);
     },
     onError: (error, note) => {
       toast(t('common:error.general'), { status: ToastStatus.Error });

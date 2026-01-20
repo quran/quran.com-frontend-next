@@ -69,6 +69,6 @@
     "/[chapterId]/answers": ["quran-reader", "question"],
     "/[chapterId]/answers/[questionId]": ["quran-reader", "question"],
     "/apps-portal": ["app-portal"],
-    "/my-quran": ["my-quran"]
+    "/my-quran": ["my-quran", "notes"]
   }
 }

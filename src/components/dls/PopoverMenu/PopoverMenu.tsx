@@ -17,6 +17,12 @@ export enum PopoverMenuExpandDirection {
   LEFT = 'left',
 }
 
+export enum PopoverMenuAlign {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+}
+
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -27,6 +33,7 @@ type PopoverMenuProps = {
   expandDirection?: PopoverMenuExpandDirection;
   contentClassName?: string;
   shouldClose?: boolean;
+  align?: PopoverMenuAlign;
 };
 
 const PopoverMenu = ({
@@ -39,6 +46,7 @@ const PopoverMenu = ({
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
   contentClassName,
+  align,
 }: PopoverMenuProps) => {
   const [open, setOpen] = useState(isOpen);
   const direction = useDirection();
@@ -46,6 +54,7 @@ const PopoverMenu = ({
     <PrimitiveDropdownMenu.Content
       className={classNames(styles.content, contentClassName)}
       side={side}
+      align={align}
     >
       {children}
     </PrimitiveDropdownMenu.Content>
@@ -129,6 +138,7 @@ PopoverMenu.Item = ({
       disabled={isDisabled}
       id={id}
       data-testid={dataTestId}
+      data-selected={isSelected}
     >
       {icon && (
         <span

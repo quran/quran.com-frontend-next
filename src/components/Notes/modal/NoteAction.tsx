@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { useRouter } from 'next/router';
 
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
+import { CLOSE_POPOVER_AFTER_MS } from '@/components/Notes/modal/constant';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import MyNotesModal from '@/components/Notes/modal/MyNotes';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
@@ -12,13 +13,11 @@ import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
-enum ModalType {
+export enum ModalType {
   ADD_NOTE = 'add-note',
   MY_NOTES = 'my-notes',
   EDIT_NOTE = 'edit-note',
 }
-
-const CLOSE_POPOVER_AFTER_MS = 150;
 
 interface NoteActionControllerProps {
   verseKey: string;
@@ -142,6 +141,8 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
         isModalOpen={activeModal === ModalType.EDIT_NOTE}
         onModalClose={closeModal}
         onMyNotes={openMyNotesModal}
+        onBack={openMyNotesModal}
+        flushNotesList
       />
     </>
   );

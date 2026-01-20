@@ -3,7 +3,7 @@ import { useCallback, useContext, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import { invalidateCache } from '@/components/Notes/modal/utility';
+import { CacheAction, invalidateCache } from '@/components/Notes/modal/utility/cache';
 import DataContext from '@/contexts/DataContext';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -21,7 +21,15 @@ interface UseDeleteNoteReturn {
   handleDeleteNoteClick: (note: Note) => Promise<void>;
 }
 
-const useDeleteNote = (): UseDeleteNoteReturn => {
+interface UseDeleteNoteProps {
+  onSuccess?: (response: Awaited<ReturnType<typeof deleteNote>>) => void;
+  flushNotesList?: boolean;
+}
+
+const useDeleteNote = ({
+  onSuccess,
+  flushNotesList = false,
+}: UseDeleteNoteProps): UseDeleteNoteReturn => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const chaptersData = useContext(DataContext);
@@ -42,18 +50,24 @@ const useDeleteNote = (): UseDeleteNoteReturn => {
       // we are not using response from the mutation so we can safely ignore the warning
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSuccess: (response, note) => {
+        if (!note) return;
         toast(t('delete-success'), { status: ToastStatus.Success });
+
         if (note) {
           invalidateCache({
             mutate,
             cache,
             verseKeys: note.ranges ? verseRangesToVerseKeys(chaptersData, note.ranges) : [],
             invalidateCount: true,
+            note,
+            flushNotesList,
+            action: CacheAction.DELETE,
           });
         }
 
         setShowDeleteConfirmation(false);
         clearDeleteNote();
+        onSuccess?.(response);
       },
       onError: (error, note) => {
         toast(t('common:error.general'), { status: ToastStatus.Error });
