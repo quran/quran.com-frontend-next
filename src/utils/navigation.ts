@@ -30,7 +30,6 @@ export const ROUTES = {
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
   COLLECTIONS_ALL: '/collections/all',
-  NOTES: '/notes-and-reflections',
   NOTIFICATION_SETTINGS: '/notification-settings',
   // TODO: add all static routes here for incremental adoption
 };
@@ -52,7 +51,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
   ROUTES.COLLECTIONS_ALL,
-  ROUTES.NOTES,
   ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
@@ -465,8 +463,6 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
 export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
-
-export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
 

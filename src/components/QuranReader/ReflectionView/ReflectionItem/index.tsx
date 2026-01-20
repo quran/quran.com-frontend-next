@@ -9,7 +9,6 @@ import styles from './ReflectionItem.module.scss';
 import SocialInteraction from './SocialInteraction';
 
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
-import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflectionBodyParser';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
@@ -17,6 +16,7 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
 import { toLocalizedNumber } from '@/utils/locale';
+import { parseReflectionBody } from '@/utils/quranReflect/bodyParser';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
 import { getReflectionGroupLink } from '@/utils/quranReflect/navigation';
 import {
@@ -90,7 +90,11 @@ const ReflectionItem: React.FC<Props> = ({
     );
   }, [estimatedReadingTime, reflectionTextLength]);
 
-  const formattedText = useReflectionBodyParser(reflectionText, styles.hashtag);
+  const formattedText = useMemo(
+    () => parseReflectionBody(reflectionText, styles.hashtag),
+    [reflectionText],
+  );
+
   const visibleTextLength = getVisibleTextLength(formattedText);
 
   return (
