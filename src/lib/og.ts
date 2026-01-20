@@ -19,6 +19,9 @@ export const getMediaGeneratorOgImageUrl = ({ locale }: BaseOgOptions) =>
 export const getPreparingForRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/preparing-for-ramadan?lang=${locale}`;
 
+export const getRamadan2026OgImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/ramadan-2026?lang=${locale}`;
+
 export const getBeyondRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/beyond-ramadan?lang=${locale}`;
 
