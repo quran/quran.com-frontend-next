@@ -159,7 +159,7 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-type GetCoursesQueryParams = {
+export type GetCoursesQueryParams = {
   myCourses?: boolean;
   languages?: string[];
 };
