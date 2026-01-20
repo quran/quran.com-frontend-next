@@ -1,8 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
+import Translation from 'types/Translation';
+import Verse from 'types/Verse';
+import Word from 'types/Word';
 
 import getTranslationsLabelString from '../utils/translation';
 
@@ -18,9 +22,6 @@ import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { constructWordVerse, getVerseWords } from '@/utils/verse';
-import Translation from 'types/Translation';
-import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   ssr: false,
@@ -85,26 +86,82 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
   const tabContentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bottomActionsRef = useRef<HTMLDivElement>(null);
+  const [hasScrolledDown, setHasScrolledDown] = useState(false);
+  const [hasScrollableContent, setHasScrollableContent] = useState(false);
+  const [hasScrolledToTab, setHasScrolledToTab] = useState(false);
 
-  // Smooth scroll to tab content when a tab is opened
+  // Check if content is scrollable and detect scroll
   useEffect(() => {
-    if (activeTab && tabContentRef.current) {
-      // Small delay to ensure the content is rendered
-      setTimeout(() => {
-        if (tabContentRef.current) {
-          const scrollContainer = tabContentRef.current.closest(`.${styles.container}`)?.parentElement;
-          if (scrollContainer) {
-            const tabContentTop = tabContentRef.current.offsetTop;
-            // Scroll to tab content with 80px offset above
-            scrollContainer.scrollTo({
-              top: tabContentTop - 80,
-              behavior: 'smooth',
-            });
-          }
+    const checkScrollable = () => {
+      if (containerRef.current) {
+        const scrollContainer = containerRef.current.parentElement;
+        if (scrollContainer) {
+          const isScrollable = scrollContainer.scrollHeight > scrollContainer.clientHeight;
+          setHasScrollableContent(isScrollable);
         }
-      }, 100);
+      }
+    };
+
+    // Check after content renders
+    const timeoutId = setTimeout(checkScrollable, 100);
+
+    return () => clearTimeout(timeoutId);
+  }, [verse, activeTab]);
+
+  // Handle scroll to hide gradient once user scrolls
+  const handleScroll = useCallback(
+    (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.scrollTop > 10 && !hasScrolledDown) {
+        setHasScrolledDown(true);
+      }
+    },
+    [hasScrolledDown],
+  );
+
+  // Attach scroll listener to the modal's scroll container
+  useEffect(() => {
+    if (containerRef.current) {
+      const scrollContainer = containerRef.current.parentElement;
+      if (scrollContainer) {
+        scrollContainer.addEventListener('scroll', handleScroll);
+        return () => scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+    }
+    return undefined;
+  }, [handleScroll]);
+
+  // Reset scroll state when verse changes
+  useEffect(() => {
+    setHasScrolledDown(false);
+    setHasScrolledToTab(false);
+  }, [verse.verseKey]);
+
+  // Reset hasScrolledToTab when all tabs are closed
+  useEffect(() => {
+    if (!activeTab) {
+      setHasScrolledToTab(false);
     }
   }, [activeTab]);
+
+  // Smooth scroll to bottom actions when a tab is first opened
+  useEffect(() => {
+    if (activeTab && !hasScrolledToTab && bottomActionsRef.current && containerRef.current) {
+      setHasScrolledToTab(true);
+      const scrollContainer = containerRef.current.parentElement;
+      if (scrollContainer) {
+        const bottomActionsTop = bottomActionsRef.current.offsetTop;
+        scrollContainer.scrollTo({
+          top: bottomActionsTop - 140,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [activeTab, hasScrolledToTab]);
+
+  const showScrollGradient = hasScrollableContent && !hasScrolledDown && !activeTab;
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -144,7 +201,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const wordVerse = constructWordVerse(verseWithChapterId, translationsLabel, translationsCount);
 
   return (
-    <div className={styles.container}>
+    <div ref={containerRef} className={styles.container}>
       <TopActions
         verse={wordVerse}
         bookmarksRangeUrl={bookmarksRangeUrl}
@@ -182,7 +239,21 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
       </div>
 
       {/* Bottom actions after verse and translations */}
-      <StudyModeBottomActions tabs={tabs} activeTab={activeTab} />
+      <div
+        ref={bottomActionsRef}
+        className={classNames(styles.bottomActionsWrapper, {
+          [styles.bottomActionsWrapperSticky]: !activeTab,
+        })}
+      >
+        {showScrollGradient && (
+          <div
+            className={classNames(styles.scrollGradient, {
+              [styles.scrollGradientHidden]: hasScrolledDown,
+            })}
+          />
+        )}
+        <StudyModeBottomActions tabs={tabs} activeTab={activeTab} />
+      </div>
 
       {/* Tab content appears below bottom actions */}
       {activeTab &&

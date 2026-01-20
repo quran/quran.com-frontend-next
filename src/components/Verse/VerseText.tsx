@@ -112,9 +112,8 @@ const VerseText = ({
                 isHighlighted={
                   isHighlightedWord ||
                   word.verseKey === selectedVerseKey ||
-                  (!isReadingMode && isHoveredWord)
+                  isHoveredWord
                 }
-                shouldShowSecondaryHighlight={isReadingMode && isHoveredWord}
                 bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}

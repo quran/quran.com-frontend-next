@@ -1,21 +1,21 @@
 /* eslint-disable max-lines -- Component handles ayah interactions, footnotes, and mobile/desktop rendering */
 /* eslint-disable react/no-danger -- Translation HTML from trusted backend API contains necessary formatting */
-import React, { useCallback, useState, MouseEvent, lazy, Suspense } from 'react';
+import React, { useCallback, useState, MouseEvent } from 'react';
 
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InlineFootnote from './InlineFootnote';
 import styles from './TranslatedAyah.module.scss';
 
 import { logErrorToSentry } from '@/lib/sentry';
+import { openStudyMode, selectStudyModeIsOpen, selectStudyModeVerseKey } from '@/redux/slices/QuranReader/studyMode';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
 import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 import Language from 'types/Language';
 import Verse from 'types/Verse';
-
-const StudyModeModal = lazy(() => import('./StudyModeModal'));
 
 type TranslatedAyahProps = {
   verse: Verse;
@@ -40,10 +40,15 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   isLastVerse = false,
   bookmarksRangeUrl,
 }) => {
+  const dispatch = useDispatch();
+  const studyModeIsOpen = useSelector(selectStudyModeIsOpen);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const [footnote, setFootnote] = useState<Footnote | null>(null);
   const [activeFootnoteName, setActiveFootnoteName] = useState<string | null>(null);
   const [isLoadingFootnote, setIsLoadingFootnote] = useState(false);
-  const [isStudyModeModalOpen, setIsStudyModeModalOpen] = useState(false);
+
+  // Check if study mode is open for this specific verse
+  const isStudyModeModalOpen = studyModeIsOpen && studyModeVerseKey === verse.verseKey;
 
   const langData = getLanguageDataById(languageId || findLanguageIdByLocale(lang as Language));
 
@@ -100,17 +105,20 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
         return;
       }
       logButtonClick('reading_translation_ayah_click', { verseKey: verse.verseKey });
-      setIsStudyModeModalOpen(true);
+      dispatch(openStudyMode({ verseKey: verse.verseKey }));
     },
-    [handleFootnoteClick, verse.verseKey],
+    [handleFootnoteClick, verse.verseKey, dispatch],
   );
 
-  const handleAyahKeyDown = useCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      setIsStudyModeModalOpen(true);
-    }
-  }, []);
+  const handleAyahKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        dispatch(openStudyMode({ verseKey: verse.verseKey }));
+      }
+    },
+    [dispatch, verse.verseKey],
+  );
 
   const showFootnote = footnote !== null || isLoadingFootnote;
 
@@ -150,15 +158,6 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
         {verseNumberElement}
         {translationTextElement}
       </span>
-
-      <Suspense fallback={null}>
-        <StudyModeModal
-          isOpen={isStudyModeModalOpen}
-          onClose={() => setIsStudyModeModalOpen(false)}
-          verse={verse}
-          verseKey={verse.verseKey}
-        />
-      </Suspense>
 
       {showFootnote && (
         <InlineFootnote

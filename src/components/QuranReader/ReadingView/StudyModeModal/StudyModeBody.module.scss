@@ -9,11 +9,12 @@
 
 .arabicVerseContainer {
   margin: var(--spacing-medium) 0;
-  padding: var(--spacing-small);
-
+  padding-block: var(--spacing-small);
+  padding-inline: calc(-1 * var(--spacing-small-px));
   @include breakpoints.tablet {
-    margin: var(--spacing-medium-plus-px) 0;
-    padding: var(--spacing-medium);
+    margin: var(--spacing-medium-plus-px) 0;    
+    padding-block: var(--spacing-medium);
+    padding-inline: calc(-1 * var(--spacing-medium-px));
   }
 }
 
@@ -35,10 +36,37 @@
 
 // Tab content container - appears below bottom actions
 .tabContentContainer {
-  padding: var(--spacing-small);
   border-top: 1px solid var(--color-borders-hairline);
+}
 
-  @include breakpoints.tablet {
-    padding: var(--spacing-medium);
-  }
+// Gradient fade overlay above bottom actions
+.bottomActionsWrapper {
+  position: relative;
+}
+
+.bottomActionsWrapperSticky {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--color-background-elevated-new);
+  z-index: 1;
+}
+
+.scrollGradient {
+  position: absolute;
+  top: calc(-1 * (var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px)));
+  left: 0;
+  right: 0;
+  height: calc(var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px));
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-background-elevated-new) 100%
+  );
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
+}
+
+.scrollGradientHidden {
+  opacity: 0;
 }

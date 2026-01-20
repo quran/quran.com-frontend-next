@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { memo, useCallback, useContext, useMemo, useState, lazy, Suspense } from 'react';
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
@@ -26,6 +26,7 @@ import {
   selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { setReadingViewHoveredVerseKey } from '@/redux/slices/QuranReader/readingViewVerse';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import {
   QuranFont,
   ReadingPreference,
@@ -42,8 +43,6 @@ import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/select
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Verse from 'types/Verse';
 import Word, { CharType } from 'types/Word';
-
-const StudyModeModal = lazy(() => import('@/components/QuranReader/ReadingView/StudyModeModal'));
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
@@ -71,7 +70,6 @@ export type QuranWordProps = {
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
-  shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
   isWordInteractionDisabled?: boolean;
@@ -85,7 +83,6 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
-  shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
   bookmarksRangeUrl,
   tooltipType,
@@ -101,10 +98,6 @@ const QuranWord = ({
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
-  const [isStudyModeModalOpen, setIsStudyModeModalOpen] = useState(false);
-  const [highlightedWordLocation, setHighlightedWordLocation] = useState<string | undefined>(
-    undefined,
-  );
 
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
@@ -204,8 +197,7 @@ const QuranWord = ({
     // Open study mode modal when clicking ayah number (in both reading and translation mode)
     if (word.charTypeName === CharType.End) {
       dispatch(setReadingViewHoveredVerseKey(null));
-      setHighlightedWordLocation(undefined);
-      setIsStudyModeModalOpen(true);
+      dispatch(openStudyMode({ verseKey: word.verseKey }));
       return;
     }
 
@@ -213,19 +205,12 @@ const QuranWord = ({
     // This replaces the old behavior of opening popover/mobile modal in reading mode
     if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
       dispatch(setReadingViewHoveredVerseKey(null));
-      setHighlightedWordLocation(word.location);
-      setIsStudyModeModalOpen(true);
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
     }
 
     handleWordAction();
-  }, [
-    word.charTypeName,
-    word.location,
-    isRecitationEnabled,
-    handleWordAction,
-    dispatch,
-  ]);
+  }, [word.charTypeName, word.location, word.verseKey, isRecitationEnabled, handleWordAction, dispatch]);
 
   const onClick = useCallback(
     (e: React.MouseEvent) => {
@@ -298,7 +283,6 @@ const QuranWord = ({
          * top of the normal/black glyph.
          */
         [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
-        [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: isTranslationMode,
         [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,
@@ -325,8 +309,9 @@ const QuranWord = ({
                 shouldContentBeClickable
                 onIconClick={() => {
                   dispatch(setReadingViewHoveredVerseKey(null));
-                  setHighlightedWordLocation(word.location);
-                  setIsStudyModeModalOpen(true);
+                  dispatch(
+                    openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),
+                  );
                 }}
                 iconAriaLabel={t('aria.open-study-mode')}
               >
@@ -348,19 +333,6 @@ const QuranWord = ({
           {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
         </>
       )}
-
-      <Suspense fallback={null}>
-        <StudyModeModal
-          isOpen={isStudyModeModalOpen}
-          onClose={() => {
-            setIsStudyModeModalOpen(false);
-            setHighlightedWordLocation(undefined);
-          }}
-          word={word}
-          verse={verse}
-          highlightedWordLocation={highlightedWordLocation}
-        />
-      </Suspense>
     </div>
   );
 };

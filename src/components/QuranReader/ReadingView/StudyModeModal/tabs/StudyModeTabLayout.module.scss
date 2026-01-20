@@ -1,8 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  max-height: 60vh;
-  overflow-y: auto;
+  // Let parent handle scrolling - single scroll container
 }
 
 .content {

@@ -4,6 +4,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import useSyncReadingProgress from './hooks/useSyncReadingProgress';
+import StudyModeContainer from './StudyModeContainer';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -35,23 +36,29 @@ const QuranReaderView: React.FC<Props> = ({
 
   if (isReadingPreference) {
     return (
-      <ReadingView
-        quranReaderStyles={quranReaderStyles}
-        quranReaderDataType={quranReaderDataType}
-        initialData={initialData}
-        resourceId={resourceId}
-        readingPreference={readingPreference}
-      />
+      <>
+        <ReadingView
+          quranReaderStyles={quranReaderStyles}
+          quranReaderDataType={quranReaderDataType}
+          initialData={initialData}
+          resourceId={resourceId}
+          readingPreference={readingPreference}
+        />
+        <StudyModeContainer />
+      </>
     );
   }
 
   return (
-    <TranslationView
-      quranReaderStyles={quranReaderStyles}
-      quranReaderDataType={quranReaderDataType}
-      initialData={initialData}
-      resourceId={resourceId}
-    />
+    <>
+      <TranslationView
+        quranReaderStyles={quranReaderStyles}
+        quranReaderDataType={quranReaderDataType}
+        initialData={initialData}
+        resourceId={resourceId}
+      />
+      <StudyModeContainer />
+    </>
   );
 };
 

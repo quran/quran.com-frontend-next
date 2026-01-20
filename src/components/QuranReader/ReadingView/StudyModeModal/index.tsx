@@ -17,6 +17,7 @@ import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import Spinner from '@/dls/Spinner/Spinner';
+import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -123,6 +124,13 @@ const StudyModeModal: React.FC<Props> = ({
   const currentVerse =
     data?.verse ||
     (verseKey === `${initialChapterId}:${initialVerseNumber}` ? initialVerse : undefined);
+
+  // Load QCF fonts for the current verse when it changes (e.g., when switching chapters)
+  const versesForFont = useMemo(
+    () => (currentVerse ? [currentVerse] : []),
+    [currentVerse],
+  );
+  useQcfFont(quranReaderStyles.quranFont, versesForFont);
   const handleChapterChange = useCallback((newChapterId: string) => {
     setSelectedChapterId(newChapterId);
     setSelectedVerseNumber('1');

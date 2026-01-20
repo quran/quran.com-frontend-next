@@ -35,6 +35,7 @@ import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
+import studyMode from './slices/QuranReader/studyMode';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
@@ -103,6 +104,7 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
+  studyMode,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

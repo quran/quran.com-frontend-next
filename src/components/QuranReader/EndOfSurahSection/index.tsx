@@ -1,6 +1,7 @@
-import React, { lazy, Suspense, useState } from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './EndOfSurahSection.module.scss';
@@ -15,10 +16,9 @@ import BottomActionsModals, {
   ModalType,
 } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
-
-const StudyModeModal = lazy(() => import('@/components/QuranReader/ReadingView/StudyModeModal'));
 
 interface EndOfSurahSectionProps {
   chapterNumber: number;
@@ -26,13 +26,10 @@ interface EndOfSurahSectionProps {
 
 const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) => {
   const { t, lang } = useTranslation('quran-reader');
+  const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
   const questionsData = usePageQuestions();
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
-  // Study Mode modal state
-  const [isStudyModeOpen, setIsStudyModeOpen] = useState(false);
-  const [studyModeInitialTab, setStudyModeInitialTab] = useState<StudyModeTabId | null>(null);
-  const [studyModeVerseKey, setStudyModeVerseKey] = useState<string>(`${chapterNumber}:1`);
 
   // For Tafsir, Reflections, Lessons - always use verse 1
   const verseKey = `${chapterNumber}:1`;
@@ -75,18 +72,11 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   };
 
   const handleStudyModeOpen = (tabId: StudyModeTabId, targetVerseKey: string) => {
-    setStudyModeInitialTab(tabId);
-    setStudyModeVerseKey(targetVerseKey);
-    setIsStudyModeOpen(true);
+    dispatch(openStudyMode({ verseKey: targetVerseKey, initialTab: tabId }));
   };
 
   const handleCloseModal = () => {
     setOpenedModal(null);
-  };
-
-  const handleCloseStudyMode = () => {
-    setIsStudyModeOpen(false);
-    setStudyModeInitialTab(null);
   };
 
   const chapterMetadata = metadataResponse?.chapterMetadata;
@@ -126,15 +116,6 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
         isTranslationView
         onCloseModal={handleCloseModal}
       />
-
-      <Suspense fallback={null}>
-        <StudyModeModal
-          isOpen={isStudyModeOpen}
-          onClose={handleCloseStudyMode}
-          verseKey={studyModeVerseKey}
-          initialActiveTab={studyModeInitialTab}
-        />
-      </Suspense>
     </div>
   );
 };
