@@ -6,31 +6,31 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
-import styles from '../[verseId]/tafsirs.module.scss';
-
 import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import StudyModeSSRPage from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeSSRPage';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
-import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
+import {
+  getQuranReaderStylesInitialState,
+  getTranslationsInitialState,
+} from '@/redux/defaultSettings/util';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeByVerseKeyUrl, makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getVerseSelectedTafsirNavigationUrl,
-  scrollWindowToTop,
-} from '@/utils/navigation';
+import { getCanonicalUrl, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
+import { ChapterResponse, TafsirContentResponse, VerseResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+import Verse from 'types/Verse';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -39,7 +39,8 @@ type AyahTafsirProp = {
   chapterId?: string;
   tafsirData?: TafsirContentResponse;
   chaptersData: ChaptersData;
-  fallback: any;
+  fallback: Record<string, unknown>;
+  verse?: Verse;
 };
 
 const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
@@ -47,8 +48,8 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
   verseNumber,
   chapterId,
   tafsirData,
-  tafsirIdOrSlug,
   fallback,
+  verse,
 }) => {
   const { t, lang } = useTranslation('common');
 
@@ -87,24 +88,12 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
       />
       {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
-        <div className={styles.tafsirContainer}>
-          <TafsirBody
-            shouldRender
-            scrollToTop={scrollWindowToTop}
-            initialChapterId={chapterId}
-            initialVerseNumber={verseNumber.toString()}
-            initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
-            render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
-              return (
-                <div>
-                  {surahAndAyahSelection}
-                  {languageAndTafsirSelection}
-                  {body}
-                </div>
-              );
-            }}
-          />
-        </div>
+        <StudyModeSSRPage
+          initialTab={StudyModeTabId.TAFSIR}
+          chapterId={chapterId}
+          verseNumber={verseNumber}
+          verse={verse}
+        />
       </SWRConfig>
     </>
   );
@@ -120,6 +109,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
+  const translations = getTranslationsInitialState(locale).selectedTranslations;
+
   try {
     const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
       lang: locale,
@@ -128,9 +119,21 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
     const tafsirListUrl = makeTafsirsUrl(locale);
 
-    const [tafsirContentData, tafsirListData] = await Promise.all([
-      fetcher(tafsirContentUrl),
+    // Fetch verse data for StudyModeBody
+    const verseUrl = makeByVerseKeyUrl(verseKey, {
+      words: true,
+      translationFields: 'resource_name,language_id',
+      translations: translations.join(','),
+      ...getDefaultWordFields(quranFont),
+      ...getMushafId(quranFont, mushafLines),
+      wordTranslationLanguage: 'en',
+      wordTransliteration: 'true',
+    });
+
+    const [tafsirContentData, tafsirListData, verseData] = await Promise.all([
+      fetcher(tafsirContentUrl) as Promise<TafsirContentResponse>,
       fetcher(tafsirListUrl),
+      fetcher(verseUrl) as Promise<VerseResponse>,
     ]);
 
     return {
@@ -141,12 +144,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         fallback: {
           [tafsirListUrl]: tafsirListData,
           [tafsirContentUrl]: tafsirContentData,
+          [verseUrl]: verseData,
         },
         tafsirData: tafsirContentData,
         verseNumber,
         tafsirIdOrSlug,
+        verse: verseData.verse,
       },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {

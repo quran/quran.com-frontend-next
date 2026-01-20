@@ -8,23 +8,19 @@ import { SWRConfig } from 'swr';
 
 import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import StudyModeSSRPage from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeSSRPage';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVersesUrl } from '@/utils/apiPaths';
+import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getVerseLessonNavigationUrl,
-  scrollWindowToTop,
-} from '@/utils/navigation';
+import { getCanonicalUrl, getVerseLessonNavigationUrl } from '@/utils/navigation';
 import {
   getAyahReflections,
   makeAyahReflectionsUrl,
@@ -36,16 +32,17 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { ChapterResponse } from 'types/ApiResponses';
+import { ChapterResponse, VerseResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-import ContentType from 'types/QuranReflect/ContentType';
+import Verse from 'types/Verse';
 
 type AyahLessonProp = {
   chapter?: ChapterResponse;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
-  fallback?: any;
+  fallback?: Record<string, unknown>;
+  verse?: Verse;
 };
 
 const AyahLessonPage: NextPage<AyahLessonProp> = ({
@@ -53,6 +50,7 @@ const AyahLessonPage: NextPage<AyahLessonProp> = ({
   verseNumber,
   chapterId,
   fallback,
+  verse,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
@@ -80,26 +78,12 @@ const AyahLessonPage: NextPage<AyahLessonProp> = ({
       />
       {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
-        <div className={layoutStyle.pageContainer}>
-          <div className={layoutStyle.flow}>
-            <div className={layoutStyle.flowItem}>
-              <ReflectionBodyContainer
-                scrollToTop={scrollWindowToTop}
-                initialChapterId={chapterId}
-                initialVerseNumber={verseNumber.toString()}
-                initialContentType={ContentType.LESSONS}
-                render={({ body, surahAndAyahSelection }) => {
-                  return (
-                    <div>
-                      {surahAndAyahSelection}
-                      {body}
-                    </div>
-                  );
-                }}
-              />
-            </div>
-          </div>
-        </div>
+        <StudyModeSSRPage
+          initialTab={StudyModeTabId.LESSONS}
+          chapterId={chapterId}
+          verseNumber={verseNumber}
+          verse={verse}
+        />
       </SWRConfig>
     </>
   );
@@ -115,6 +99,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
+
   try {
     const verseLessonsUrl = makeAyahReflectionsUrl({
       surahId: chapterNumber,
@@ -123,26 +108,25 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       postTypeIds: [LESSON_POST_TYPE_ID],
     });
 
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const apiParams = {
-      ...getDefaultWordFields(quranFont),
+    // Fetch verse data for StudyModeBody
+    const verseUrl = makeByVerseKeyUrl(verseKey, {
+      words: true,
       translationFields: 'resource_name,language_id',
       translations: translations.join(','),
-      mushaf: mushafId,
-      from: `${chapterNumber}:${verseNumber}`,
-      to: `${chapterNumber}:${verseNumber}`,
-    };
+      ...getDefaultWordFields(quranFont),
+      ...getMushafId(quranFont, mushafLines),
+      wordTranslationLanguage: 'en',
+      wordTransliteration: 'true',
+    });
 
-    const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
-
-    const [verseLessonsData, versesData] = await Promise.all([
+    const [verseLessonsData, verseData] = await Promise.all([
       getAyahReflections(verseLessonsUrl),
-      fetcher(versesUrl),
+      fetcher(verseUrl) as Promise<VerseResponse>,
     ]);
 
     const fallback = {
       [verseLessonsUrl]: verseLessonsData,
-      [versesUrl]: versesData,
+      [verseUrl]: verseData,
     };
 
     return {
@@ -152,6 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
         verseNumber,
         fallback,
+        verse: verseData.verse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };

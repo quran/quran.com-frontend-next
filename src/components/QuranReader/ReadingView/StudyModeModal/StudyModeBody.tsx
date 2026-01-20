@@ -14,6 +14,10 @@ import styles from './StudyModeBody.module.scss';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
 import StudyModeVerseText from './StudyModeVerseText';
 import WordNavigationBox from './WordNavigationBox';
+// SSR-enabled tab components (imported directly for SSR pages - no dynamic imports)
+import SSRStudyModeLessonsTab from './tabs/StudyModeLessonsTabSSR';
+import SSRStudyModeReflectionsTab from './tabs/StudyModeReflectionsTabSSR';
+import SSRStudyModeTafsirTab from './tabs/StudyModeTafsirTabSSR';
 
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
@@ -23,6 +27,7 @@ import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { constructWordVerse, getVerseWords } from '@/utils/verse';
 
+// Client-side tab components (dynamic imports with ssr: false for modal use)
 const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   ssr: false,
 });
@@ -35,13 +40,22 @@ const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), 
   ssr: false,
 });
 
-// Tab component lookup map for dynamic rendering
+// Tab component lookup map for dynamic rendering (client-side)
 const TAB_COMPONENTS: Partial<
   Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
 > = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
+};
+
+// SSR-enabled tab component lookup map (for SSR pages)
+const SSR_TAB_COMPONENTS: Partial<
+  Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
+> = {
+  [StudyModeTabId.TAFSIR]: SSRStudyModeTafsirTab,
+  [StudyModeTabId.REFLECTIONS]: SSRStudyModeReflectionsTab,
+  [StudyModeTabId.LESSONS]: SSRStudyModeLessonsTab,
 };
 
 interface StudyModeBodyProps {
@@ -61,6 +75,8 @@ interface StudyModeBodyProps {
   selectedVerseNumber: string;
   activeTab?: StudyModeTabId | null;
   onTabChange?: (tabId: StudyModeTabId | null) => void;
+  /** When true, uses SSR-enabled tab components for server-side rendering */
+  isSsrMode?: boolean;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -80,6 +96,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   selectedVerseNumber,
   activeTab,
   onTabChange,
+  isSsrMode = false,
 }) => {
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -257,9 +274,11 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
 
       {/* Tab content appears below bottom actions */}
       {activeTab &&
-        TAB_COMPONENTS[activeTab] &&
         (() => {
-          const TabComponent = TAB_COMPONENTS[activeTab];
+          // Use SSR-enabled components for SSR pages, dynamic imports for client-side modal
+          const tabComponents = isSsrMode ? SSR_TAB_COMPONENTS : TAB_COMPONENTS;
+          const TabComponent = tabComponents[activeTab];
+          if (!TabComponent) return null;
           return (
             <div ref={tabContentRef} className={styles.tabContentContainer}>
               <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
