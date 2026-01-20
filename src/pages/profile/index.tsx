@@ -20,6 +20,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
 
 const ProfilePage: FC = () => {
+  const isNotificationsEnabled = process.env.NEXT_PUBLIC_ENABLE_NOTIFICATIONS === 'true';
   const { t, lang } = useTranslation('profile');
   const { userData } = useAuthData();
   const canUpdatePassword = useMemo(() => {
@@ -46,9 +47,11 @@ const ProfilePage: FC = () => {
           <PersonalizationForm />
           <EditDetailsForm />
           {canUpdatePassword && <ChangePasswordForm />}
-          <HeadlessServiceProvider>
-            <EmailNotificationSettingsForm />
-          </HeadlessServiceProvider>
+          {isNotificationsEnabled && (
+            <HeadlessServiceProvider>
+              <EmailNotificationSettingsForm />
+            </HeadlessServiceProvider>
+          )}
           <div className={styles.divider}>
             <Separator />
           </div>
