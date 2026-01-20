@@ -11,7 +11,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
-import { getRamadanChallengeOgImageUrl } from '@/lib/og';
+import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadanchallenge/ramadanchallenge.module.scss';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -33,7 +33,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description="Take the Meaningful Memorization Challenge This Ramadan"
-        image={getRamadanChallengeOgImageUrl({
+        image={getPreparingForRamadanOgImageUrl({
           locale: lang,
         })}
       />

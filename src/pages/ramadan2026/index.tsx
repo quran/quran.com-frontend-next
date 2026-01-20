@@ -14,7 +14,7 @@ import InlineLink from '@/components/RamadanActivity/InlineLink';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import IconStarFilled from '@/icons/star_filled.svg';
-import { getRamadan2026OgImageUrl } from '@/lib/og';
+import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan2026/ramadan2026.module.scss';
 import ImageAppStore from '@/public/images/app-store-button.svg';
@@ -47,7 +47,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description="Ramadan is a unique opportunity to renew your relationship with the Quran. Explore tools, programs, and features designed to help you prepare your heart, set meaningful goals, and deepen your connection with Allah’s words."
-        image={getRamadan2026OgImageUrl({
+        image={getPreparingForRamadanOgImageUrl({
           locale: lang,
         })}
       />
