@@ -41,22 +41,6 @@ const Checkbox: React.FC<Props> = ({
   name,
   onChange,
 }) => {
-  const indicatorClasses = classNames(styles.indicator, indicatorClassName, {
-    [styles.disabledIndicator]: disabled,
-  });
-
-  const iconElement = checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />;
-
-  const indicatorContent = (
-    <RadixCheckbox.Indicator
-      className={classNames({
-        [styles.indicatorClasses]: !keepIndicatorOnUnchecked,
-      })}
-    >
-      {iconElement}
-    </RadixCheckbox.Indicator>
-  );
-
   return (
     <div
       className={classNames(styles.container, containerClassName, { [styles.disabled]: disabled })}
@@ -73,9 +57,23 @@ const Checkbox: React.FC<Props> = ({
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
       >
         {keepIndicatorOnUnchecked ? (
-          <span className={indicatorClasses}>{indicatorContent}</span>
+          <span
+            className={classNames(styles.indicator, indicatorClassName, {
+              [styles.disabledIndicator]: disabled,
+            })}
+          >
+            <RadixCheckbox.Indicator>
+              {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+            </RadixCheckbox.Indicator>
+          </span>
         ) : (
-          indicatorContent
+          <RadixCheckbox.Indicator
+            className={classNames(styles.indicator, indicatorClassName, {
+              [styles.disabledIndicator]: disabled,
+            })}
+          >
+            {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+          </RadixCheckbox.Indicator>
         )}
       </RadixCheckbox.Root>
       {label && (
