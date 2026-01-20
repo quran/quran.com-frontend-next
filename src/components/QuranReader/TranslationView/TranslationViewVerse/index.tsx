@@ -74,6 +74,7 @@ const TranslationViewVerse: React.FC<Props> = ({
         bookmarksRangeUrl={bookmarksRangeUrl}
         notesRange={notesRange}
         questionsData={questionsData}
+        quranReaderDataType={quranReaderDataType}
       />
     </div>
   );
