@@ -28,5 +28,6 @@ export const contextMenuSlice = createSlice({
 export const { setIsExpanded, setShowReadingPreferenceSwitcher } = contextMenuSlice.actions;
 
 export const selectContextMenu = (state: RootState) => state.contextMenu;
+export const selectIsExpanded = (state: RootState) => state.contextMenu.isExpanded;
 
 export default contextMenuSlice.reducer;
