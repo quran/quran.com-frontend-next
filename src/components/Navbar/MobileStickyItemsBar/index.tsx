@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './MobileStickyItemsBar.module.scss';
 
@@ -8,37 +8,20 @@ import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import ProfileAvatarButton from '@/components/Navbar/NavbarBody/ProfileAvatarButton';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useNavbarDrawerActions from '@/hooks/useNavbarDrawerActions';
 import useShowOnScrollUp from '@/hooks/useShowOnScrollUp';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
-import {
-  selectIsNavigationDrawerOpen,
-  selectIsSettingsDrawerOpen,
-  setDisableSearchDrawerTransition,
-  setIsNavigationDrawerOpen,
-  setIsSearchDrawerOpen,
-} from '@/redux/slices/navbar';
-import { logEvent } from '@/utils/eventLogger';
+import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 
 const MobileStickyItemsBar = () => {
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
   const { isLoggedIn } = useIsLoggedIn();
   const isNavDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isDrawerOpen = isNavDrawerOpen || isSettingsDrawerOpen;
   const show = useShowOnScrollUp();
-
-  const openSearch = () => {
-    logEvent('drawer_search_open');
-    dispatch(setIsSearchDrawerOpen(true));
-    dispatch(setDisableSearchDrawerTransition(false));
-  };
-
-  const openMenu = () => {
-    logEvent('drawer_navigation_open');
-    dispatch(setIsNavigationDrawerOpen(true));
-  };
+  const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
 
   return (
     <div
@@ -61,7 +44,7 @@ const MobileStickyItemsBar = () => {
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
             shouldFlipOnRTL={false}
-            onClick={openSearch}
+            onClick={openSearchDrawer}
           >
             <IconSearch />
           </Button>
@@ -71,7 +54,7 @@ const MobileStickyItemsBar = () => {
             ariaLabel={t('aria.nav-drawer-open')}
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
-            onClick={openMenu}
+            onClick={openNavigationDrawer}
           >
             <IconMenu />
           </Button>

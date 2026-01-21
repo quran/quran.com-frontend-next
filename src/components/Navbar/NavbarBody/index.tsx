@@ -15,15 +15,10 @@ import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useNavbarDrawerActions from '@/hooks/useNavbarDrawerActions';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
-import {
-  selectIsNavigationDrawerOpen,
-  selectIsSettingsDrawerOpen,
-  setDisableSearchDrawerTransition,
-  setIsNavigationDrawerOpen,
-  setIsSearchDrawerOpen,
-} from '@/redux/slices/navbar';
+import { selectIsNavigationDrawerOpen, selectIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import {
   selectIsSidebarNavigationVisible,
@@ -31,7 +26,6 @@ import {
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { TestId } from '@/tests/test-ids';
 import { getSidebarTransitionDurationFromCss } from '@/utils/css';
-import { logEvent } from '@/utils/eventLogger';
 
 const SidebarNavigation = dynamic(
   () => import('@/components/QuranReader/SidebarNavigation/SidebarNavigation'),
@@ -40,16 +34,6 @@ const SidebarNavigation = dynamic(
     loading: () => <Spinner />,
   },
 );
-
-/**
- * Log drawer events.
- *
- * @param {string} drawerName
- */
-const logDrawerOpenEvent = (drawerName: string) => {
-  // eslint-disable-next-line i18next/no-literal-string
-  logEvent(`drawer_${drawerName}_open`);
-};
 
 interface Props {
   isBannerVisible: boolean;
@@ -140,17 +124,7 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
     dispatch(setIsSidebarNavigationVisible(false));
   }, [dispatch, isPersistHydrationComplete, isQuranReaderRoute]);
 
-  const openNavigationDrawer = () => {
-    logDrawerOpenEvent('navigation');
-    dispatch(setIsNavigationDrawerOpen(true));
-  };
-
-  const openSearchDrawer = () => {
-    logDrawerOpenEvent('search');
-    dispatch(setIsSearchDrawerOpen(true));
-    // reset the disable transition state
-    dispatch(setDisableSearchDrawerTransition(false));
-  };
+  const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
 
   const bannerProps = {
     text: t('stay-on-track'),
