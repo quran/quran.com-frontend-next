@@ -102,6 +102,7 @@
   },
   "qalqala": "Qalqala (echo)",
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
+  "questions-not-available": "There are no questions available for this ayah in the selected language",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Read More on QuranReflect",
   "reciter-summary": "Recitation source: With kind permission of Tafsir Center",

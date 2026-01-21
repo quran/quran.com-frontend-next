@@ -13,9 +13,14 @@ const PAGE_SIZE = 10;
 interface UseQuestionsPaginationProps {
   verseKey?: string;
   initialData?: AyahQuestionsResponse;
+  language?: Language;
 }
 
-const useQuestionsPagination = ({ verseKey, initialData }: UseQuestionsPaginationProps) => {
+const useQuestionsPagination = ({
+  verseKey,
+  initialData,
+  language,
+}: UseQuestionsPaginationProps) => {
   const { lang } = useTranslation();
   const getKey = (pageIndex: number, previousPageData: AyahQuestionsResponse) => {
     if (previousPageData && !previousPageData.questions.length) {
@@ -26,7 +31,7 @@ const useQuestionsPagination = ({ verseKey, initialData }: UseQuestionsPaginatio
       verseKey,
       page: pageIndex + 1,
       pageSize: PAGE_SIZE,
-      language: lang as Language,
+      language: language || (lang as Language),
     });
   };
 
@@ -35,6 +40,7 @@ const useQuestionsPagination = ({ verseKey, initialData }: UseQuestionsPaginatio
     size,
     setSize,
     isValidating,
+    error,
   } = useSWRInfinite<AyahQuestionsResponse>(getKey, privateFetcher, {
     fallbackData: initialData ? [initialData] : undefined,
     revalidateFirstPage: false,
@@ -56,6 +62,9 @@ const useQuestionsPagination = ({ verseKey, initialData }: UseQuestionsPaginatio
   const isLoadingMore =
     isValidating || (size > 0 && pagesData && typeof pagesData[size - 1] === 'undefined');
 
+  // Initial loading state: no data yet and first page is being fetched
+  const isLoading = !pagesData && !error;
+
   const loadMore = () => setSize(size + 1);
 
   return {
@@ -63,6 +72,8 @@ const useQuestionsPagination = ({ verseKey, initialData }: UseQuestionsPaginatio
     hasMore,
     isLoadingMore,
     loadMore,
+    isLoading,
+    error,
   };
 };
 

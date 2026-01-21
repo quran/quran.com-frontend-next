@@ -89,6 +89,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedReflectionLanguages: action.payload,
     }),
+    setQnaLanguage: (state, action: PayloadAction<string>) => ({
+      ...state,
+      selectedQnaLanguage: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
@@ -111,6 +115,9 @@ export const readingPreferencesSlice = createSlice({
         wordByWordDisplay: display,
         wordByWordContentType: tooltip,
         isUsingDefaultWordByWordLocale: remote.selectedWordByWordLocale === defLocale,
+        selectedReflectionLanguages:
+          remote.selectedReflectionLanguages ?? state.selectedReflectionLanguages,
+        selectedQnaLanguage: remote.selectedQnaLanguage ?? state.selectedQnaLanguage,
       };
     });
   },
@@ -126,6 +133,7 @@ export const {
   setWordByWordDisplay,
   setSelectedReadingTranslation,
   setReflectionLanguages,
+  setQnaLanguage,
 } = readingPreferencesSlice.actions;
 
 export const selectInlineDisplayWordByWordPreferences = (state: RootState) => {
@@ -193,5 +201,6 @@ export const selectLastUsedReadingMode = (state: RootState) =>
   state.readingPreferences.lastUsedReadingMode;
 export const selectReflectionLanguages = (state: RootState) =>
   state.readingPreferences.selectedReflectionLanguages;
+export const selectQnaLanguage = (state: RootState) => state.readingPreferences.selectedQnaLanguage;
 
 export default readingPreferencesSlice.reducer;

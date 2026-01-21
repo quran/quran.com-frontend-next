@@ -60,6 +60,14 @@ export const quranReaderStylesSlice = createSlice({
       ...state,
       wordByWordFontScale: state.wordByWordFontScale - 1,
     }),
+    increaseQnaFontScale: (state) => ({
+      ...state,
+      qnaFontScale: (state.qnaFontScale ?? 3) + 1,
+    }),
+    decreaseQnaFontScale: (state) => ({
+      ...state,
+      qnaFontScale: (state.qnaFontScale ?? 3) - 1,
+    }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
@@ -85,23 +93,11 @@ export const quranReaderStylesSlice = createSlice({
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
       switch (quranFont) {
         case QuranFont.MadaniV1:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
+          return { ...state, quranFont, isUsingDefaultFont };
         case QuranFont.IndoPak:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
+          return { ...state, quranFont, isUsingDefaultFont };
         default:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
+          return { ...state, quranFont, isUsingDefaultFont };
       }
     },
   },
@@ -146,6 +142,8 @@ export const {
   decreaseTranslationFontScale,
   increaseWordByWordFontScale,
   decreaseWordByWordFontScale,
+  increaseQnaFontScale,
+  decreaseQnaFontScale,
   setMushafLines,
 } = quranReaderStylesSlice.actions;
 

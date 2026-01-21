@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
@@ -63,8 +62,6 @@ const BottomActions = ({
   // Only show Answers tab when we confirm questions exist (not while loading)
   const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
   const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-  // Modal state using enum (for Answers only now)
-  const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
   /**
    * Handle tab click or keyboard event
@@ -82,8 +79,7 @@ const BottomActions = ({
       } else if (tabType === TabId.LESSONS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
       } else if (tabType === TabId.ANSWERS) {
-        // Answers still uses the separate Q&A modal
-        setOpenedModal(ModalType.QUESTIONS);
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
       }
 
       logButtonClick(
@@ -134,14 +130,6 @@ const BottomActions = ({
   return (
     <>
       <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
-
-      <BottomActionsModals
-        verseKey={verseKey}
-        openedModal={openedModal}
-        hasQuestions={hasQuestions}
-        isTranslationView={isTranslationView}
-        onCloseModal={() => setOpenedModal(null)}
-      />
     </>
   );
 };

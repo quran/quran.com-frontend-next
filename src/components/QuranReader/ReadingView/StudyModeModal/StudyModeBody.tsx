@@ -35,6 +35,10 @@ const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), 
   ssr: false,
 });
 
+const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
+  ssr: false,
+});
+
 // Tab component lookup map for dynamic rendering
 const TAB_COMPONENTS: Partial<
   Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
@@ -42,6 +46,7 @@ const TAB_COMPONENTS: Partial<
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
+  [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
 };
 
 interface StudyModeBodyProps {
@@ -188,6 +193,13 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
       label: t('reflections'),
       icon: <LightbulbIcon />,
       onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
+      condition: true,
+    },
+    {
+      id: StudyModeTabId.ANSWERS,
+      label: t('answers'),
+      icon: <LightbulbIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: true,
     },
   ];
