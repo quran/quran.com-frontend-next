@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { NextRouter, useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import SearchResultItemIcon from '../SearchResultItemIcon';
 
@@ -11,6 +12,8 @@ import styles from './SearchResultItem.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import Link from '@/dls/Link/Link';
+import { setIsExpanded } from '@/redux/slices/CommandBar/state';
+import { stopMicrophone } from '@/redux/slices/microphone';
 import Language from '@/types/Language';
 import QueryParam from '@/types/QueryParam';
 import {
@@ -81,6 +84,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const router = useRouter();
+  const dispatch = useDispatch();
   const type = getResultType(result);
 
   const {
@@ -96,6 +100,12 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
       service,
       source,
     });
+
+    // Stop the microphone if it's active
+    dispatch(stopMicrophone());
+
+    // Close the dropdown/search results
+    dispatch({ type: setIsExpanded.type, payload: false });
 
     // Check if we're navigating to the same URL as current page
     if (isSameUrl(router.asPath, url)) {

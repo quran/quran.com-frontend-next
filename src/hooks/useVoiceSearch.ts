@@ -18,6 +18,15 @@ import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import { cleanTranscript } from '@/utils/string';
 
+let sharedSpeechRecognitionInstance: SpeechRecognitionInterface | null = null;
+
+export const getSpeechRecognitionInstance = (): SpeechRecognitionInterface | null =>
+  sharedSpeechRecognitionInstance;
+
+export const setSpeechRecognitionInstance = (instance: SpeechRecognitionInterface | null): void => {
+  sharedSpeechRecognitionInstance = instance;
+};
+
 export interface UseVoiceSearchOptions {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -53,6 +62,22 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
     }
   }, [options.searchQuery, dispatch, options.isInSearchDrawer]);
 
+  // Effect to stop speech recognition when microphone is deactivated
+  useEffect(() => {
+    if (!isMicActive) {
+      if (sharedSpeechRecognitionInstance) {
+        try {
+          sharedSpeechRecognitionInstance.stop();
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error stopping speech recognition', error);
+        }
+        sharedSpeechRecognitionInstance = null;
+        speechRecRef.current = null;
+      }
+    }
+  }, [isMicActive]);
+
   /**
    * Handle speech recognition result
    */
@@ -64,12 +89,13 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
       // Set the cleaned transcript as the search query
       options.setSearchQuery(cleanedTranscript);
 
-      // Only expand the command bar if we're not in the search drawer
-      if (!options.isInSearchDrawer) {
+      // Only expand the command bar if we're not in the search drawer AND microphone is still active
+      // This prevents reopening the dropdown after user clicks on a search result
+      if (!options.isInSearchDrawer && isMicActive) {
         dispatch({ type: setIsExpanded.type, payload: true });
       }
     },
-    [options, dispatch],
+    [options, dispatch, isMicActive],
   );
 
   /**
@@ -88,6 +114,8 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
 
     // Update Redux state
     dispatch(stopMicrophone());
+    sharedSpeechRecognitionInstance = null;
+    speechRecRef.current = null;
   }, [dispatch]);
 
   /**
@@ -142,10 +170,14 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
    * Initialize speech recognition
    */
   const initializeSpeechRecognition = useCallback(() => {
-    if (speechRecRef.current) return true;
+    if (sharedSpeechRecognitionInstance) {
+      speechRecRef.current = sharedSpeechRecognitionInstance;
+      return true;
+    }
 
     try {
       speechRecRef.current = createSpeechRecognition(createSpeechRecognitionConfig());
+      sharedSpeechRecognitionInstance = speechRecRef.current;
       return true;
     } catch (error) {
       if (options.onError && error instanceof Error) {
