@@ -3,10 +3,15 @@
 .streakCard {
   inline-size: 100%;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-micro-px);
+  @include breakpoints.smallerThanTablet {
+    justify-content: center;
+    gap: var(--spacing-small-px);
+  }
   @include breakpoints.tablet {
+    flex-wrap: wrap;
     & > :nth-child(1) {
       margin: auto;
     }
@@ -14,7 +19,6 @@
 }
 
 .streak {
-  padding-inline-end: var(--spacing-small-px);
   font-size: var(--font-size-jumbo);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-black);
@@ -26,20 +30,13 @@
 .streakCardLeft {
   display: flex;
   align-items: center;
-  gap: var(--spacing-micro);
+  gap: var(--spacing-small-px);
   & > svg:first-child {
-    padding-inline-start: var(--spacing-small-px);
-    padding-inline-end: var(--spacing-small-px);
-
-    inline-size: var(--spacing-medium2-px);
-    block-size: var(--spacing-medium2-px);
+    min-inline-size: var(--spacing-medium3-px);
+    min-block-size: var(--spacing-medium3-px);
     @include breakpoints.tablet {
-      inline-size: var(--spacing-large-px);
-      block-size: var(--spacing-large-px);
-      padding-inline-start: var(--spacing-medium-px);
-      padding-inline-end: var(--spacing-medium2-px);
-      width: 60px;
-      height: 60px;
+      min-inline-size: var(--spacing-xxlarge-px);
+      min-block-size: var(--spacing-xxlarge-px);
     }
   }
 }
@@ -64,6 +61,10 @@
 .circularProgressbar {
   block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
   inline-size: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
+  @include breakpoints.smallerThanTablet {
+    block-size: calc(var(--spacing-large-px) + var(--spacing-small-px));
+    inline-size: calc(var(--spacing-large-px) + var(--spacing-small-px));
+  }
 }
 
 .circularProgressbarContainer {
@@ -71,7 +72,20 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-micro);
+  gap: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    overflow: hidden;
+  }
+}
+
+.statusContainer {
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .container {
@@ -80,6 +94,10 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    overflow: hidden;
+  }
   @include breakpoints.tablet {
     margin: auto;
   }
