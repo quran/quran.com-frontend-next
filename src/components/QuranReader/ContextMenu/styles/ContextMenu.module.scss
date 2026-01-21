@@ -69,6 +69,12 @@ $pixel: 1px;
   @include breakpoints.tablet {
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
+
+  .visibleContainer & {
+    @include breakpoints.smallerThanTablet {
+      padding-block: 0;
+    }
+  }
 }
 
 .section {
