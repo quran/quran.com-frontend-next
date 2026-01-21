@@ -9,7 +9,7 @@ import QuestionHeader from '../QuestionHeader';
 import styles from './QuestionsList.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import Collapsible from '@/dls/Collapsible/Collapsible';
+import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
 import LoadingSpinner from '@/dls/Spinner/Spinner';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
@@ -21,6 +21,7 @@ type Props = {
   hasMore?: boolean;
   isLoadingMore?: boolean;
   onLoadMore?: () => void;
+  baseUrl?: string;
 };
 
 const QuestionsList: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const QuestionsList: React.FC<Props> = ({
   hasMore = false,
   isLoadingMore = false,
   onLoadMore,
+  baseUrl,
 }) => {
   const { lang } = useTranslation();
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
@@ -46,7 +48,9 @@ const QuestionsList: React.FC<Props> = ({
       const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
       fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), lang);
     } else {
-      fakeNavigate(router.asPath, router.locale);
+      // Use provided baseUrl or fallback to router.asPath
+      const urlToNavigate = baseUrl || router.asPath;
+      fakeNavigate(urlToNavigate, router.locale);
     }
   };
 
@@ -54,6 +58,8 @@ const QuestionsList: React.FC<Props> = ({
     <div className={styles.container}>
       {questions?.map((question) => (
         <Collapsible
+          direction={CollapsibleDirection.Right}
+          headerClassName={styles.header}
           title={
             <QuestionHeader body={question.body} theme={question.theme} type={question.type} />
           }

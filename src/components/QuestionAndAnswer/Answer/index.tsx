@@ -37,11 +37,13 @@ const Answer = ({ question }: AnswerProps) => {
           if (!isOpenRenderProp) return null;
 
           return (
-            <GroupedVerseAndTranslation
-              chapter={rangeStartData.chapter}
-              from={rangeStartData.verse}
-              to={rangeEndData.verse}
-            />
+            <div className={styles.verseAndTranslationContainer}>
+              <GroupedVerseAndTranslation
+                chapter={rangeStartData.chapter}
+                from={rangeStartData.verse}
+                to={rangeEndData.verse}
+              />
+            </div>
           );
         }}
       </Collapsible>

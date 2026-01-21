@@ -17,6 +17,7 @@ import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
+import { getVerseAnswersNavigationUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -48,6 +49,8 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, ve
   );
 
   const verseKey = makeVerseKey(Number(chapterId), Number(verseNumber));
+  const baseUrl = getVerseAnswersNavigationUrl(verseKey);
+  const scaleClass = styles[`qna-font-size-${quranReaderStyles.qnaFontScale}`];
 
   const { questions, hasMore, isLoadingMore, loadMore, isLoading } = useQuestionsPagination({
     verseKey,
@@ -88,24 +91,20 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, ve
 
     if (!questions || questions.length === 0) {
       return (
-        <div className={styles.notAvailableMessage}>
+        <div className={classNames(styles.notAvailableMessage, scaleClass)}>
           {t('quran-reader:questions-not-available')}
         </div>
       );
     }
 
     return (
-      <div
-        className={classNames(
-          styles.answersContainer,
-          styles[`qna-font-size-${quranReaderStyles.qnaFontScale}`],
-        )}
-      >
+      <div className={classNames(styles.answersContainer, scaleClass)}>
         <QuestionsList
           questions={questions}
           hasMore={hasMore}
           isLoadingMore={isLoadingMore}
           onLoadMore={loadMore}
+          baseUrl={baseUrl}
         />
       </div>
     );

@@ -17,7 +17,7 @@ type Props = {
   isButton?: boolean;
 };
 
-const TYPE_TO_ICON = {
+export const TYPE_TO_ICON = {
   [QuestionType.TAFSIR]: TafsirIcon,
   [QuestionType.COMMUNITY]: CommunityIcon,
   [QuestionType.CLARIFICATION]: ClarificationIcon,
@@ -26,7 +26,6 @@ const TYPE_TO_ICON = {
 
 const QuestionAndAnswerPill: React.FC<Props> = ({ type, isButton = true }) => {
   const { t } = useTranslation();
-  const Icon = TYPE_TO_ICON[type];
   const typeLabel = type.toLowerCase();
   const typeText = t(`quran-reader:q-and-a.${typeLabel}`);
   const prefix = type === QuestionType.EXPLORE_ANSWERS ? ` >` : '';
@@ -36,7 +35,6 @@ const QuestionAndAnswerPill: React.FC<Props> = ({ type, isButton = true }) => {
         [styles.button]: isButton,
       })}
     >
-      <Icon />
       <span>
         {typeText}
         {prefix}

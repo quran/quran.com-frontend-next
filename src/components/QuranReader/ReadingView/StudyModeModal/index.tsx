@@ -20,8 +20,8 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { setActiveTab, setHighlightedWordLocation } from '@/redux/slices/QuranReader/studyMode';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
@@ -33,6 +33,7 @@ import {
   getVerseSelectedTafsirNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseAnswersNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
@@ -105,7 +106,15 @@ const StudyModeModal: React.FC<Props> = ({
     return () => {
       isMounted = false;
     };
-  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation, router.asPath, initialActiveTab, dispatch]);
+  }, [
+    isOpen,
+    word?.verseKey,
+    verseKeyProp,
+    highlightedWordLocation,
+    router.asPath,
+    initialActiveTab,
+    dispatch,
+  ]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
@@ -131,10 +140,7 @@ const StudyModeModal: React.FC<Props> = ({
     (verseKey === `${initialChapterId}:${initialVerseNumber}` ? initialVerse : undefined);
 
   // Load QCF fonts for the current verse when it changes (e.g., when switching chapters)
-  const versesForFont = useMemo(
-    () => (currentVerse ? [currentVerse] : []),
-    [currentVerse],
-  );
+  const versesForFont = useMemo(() => (currentVerse ? [currentVerse] : []), [currentVerse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
   const handleChapterChange = useCallback((newChapterId: string) => {
     setSelectedChapterId(newChapterId);
@@ -238,6 +244,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.ANSWERS) {
+        fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === null) {
         fakeNavigate(originalUrl, router.locale);
       }
@@ -256,9 +264,12 @@ const StudyModeModal: React.FC<Props> = ({
   // Check if a content tab is active for bottom sheet styling
   const isContentTabActive =
     activeContentTab &&
-    [StudyModeTabId.TAFSIR, StudyModeTabId.REFLECTIONS, StudyModeTabId.LESSONS].includes(
-      activeContentTab,
-    );
+    [
+      StudyModeTabId.TAFSIR,
+      StudyModeTabId.REFLECTIONS,
+      StudyModeTabId.LESSONS,
+      StudyModeTabId.ANSWERS,
+    ].includes(activeContentTab);
 
   const header = (
     <div className={styles.header}>

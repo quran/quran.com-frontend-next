@@ -33,29 +33,29 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
   const title = t('q-and-a.explore_answers');
 
   return (
-    <>
-      <div className={styles.answerBody}>
-        <p className={styles.header}>{t('q-and-a.answer')}</p>
-        <MilkdownProvider>
-          <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
-        </MilkdownProvider>
-        {question?.summary && (
-          <>
-            <p className={styles.header}>{t('q-and-a.summary')}</p>
-            <MilkdownProvider>
-              <MarkdownEditor isEditable={false} defaultValue={question?.summary} />
-            </MilkdownProvider>
-          </>
-        )}
-        {question?.references && (
-          <>
-            <p className={styles.header}>{t('q-and-a.references')}</p>
-            {question?.references.map((reference) => (
+    <div className={styles.answerBody}>
+      <p className={styles.header}>{t('q-and-a.answer')}</p>
+      <MilkdownProvider>
+        <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
+      </MilkdownProvider>
+      {question?.summary && (
+        <>
+          <p className={styles.header}>{t('q-and-a.summary')}</p>
+          <MilkdownProvider>
+            <MarkdownEditor isEditable={false} defaultValue={question?.summary} />
+          </MilkdownProvider>
+        </>
+      )}
+      {(question?.references?.length ?? 0) > 0 && (
+        <>
+          <p className={styles.header}>{t('q-and-a.references')}</p>
+          <ul className={styles.referencesList}>
+            {question.references.map((reference) => (
               <li key={reference}>{reference}</li>
             ))}
-          </>
-        )}
-      </div>
+          </ul>
+        </>
+      )}
       <div className={styles.shareButton}>
         <Button
           variant={ButtonVariant.Compact}
@@ -70,7 +70,7 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
       {shouldShowShareOptions && (
         <ShareButtons url={shareURL} title={title} analyticsContext="q_and_a_answer" />
       )}
-    </>
+    </div>
   );
 };
 
