@@ -26,6 +26,7 @@ type CardProps = {
   shouldShowFullTitle?: boolean;
   ariaLabel?: string;
   tooltip?: string;
+  shouldSkipImageOptimization?: boolean;
 };
 
 const Card = ({
@@ -42,6 +43,7 @@ const Card = ({
   shouldShowFullTitle = false,
   ariaLabel,
   tooltip,
+  shouldSkipImageOptimization = false,
 }: CardProps) => {
   return (
     <div
@@ -57,7 +59,15 @@ const Card = ({
         onKeyPress={onImgClick}
         onClick={onImgClick}
       >
-        {imgSrc && <Image alt={imgAlt} className={styles.img} src={imgSrc} layout="fill" />}
+        {imgSrc && (
+          <Image
+            alt={imgAlt}
+            className={styles.img}
+            src={imgSrc}
+            layout="fill"
+            unoptimized={shouldSkipImageOptimization}
+          />
+        )}
 
         {actionIcon && (
           <div className={styles.cardHoverEffectContainer} data-theme="dark">
