@@ -53,9 +53,9 @@ const TRANSLATIONS_INITIAL_STATE: TranslationsSettings = {
 };
 
 const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
-  // the base sizes in rem
   tafsirFontScale: 3,
   reflectionFontScale: 3,
+  lessonFontScale: 3,
   quranTextFontScale: 3,
   translationFontScale: 3,
   wordByWordFontScale: 3,

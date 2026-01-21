@@ -322,7 +322,7 @@ const QuranWord = ({
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
                 tooltipType={tooltipType || TooltipType.SUCCESS}
-                shouldContentBeClickable={isMobile && !isRecitationEnabled}
+                shouldContentBeClickable={!isRecitationEnabled}
                 onIconClick={handleOpenStudyMode}
                 iconAriaLabel={t('aria.open-study-mode')}
               >

@@ -30,7 +30,6 @@ interface FontSizeControlProps {
   fontType?: FontSizeType;
 }
 
-// Configuration for each font type
 const FONT_TYPE_CONFIG = {
   tafsir: {
     key: 'tafsirFontScale' as const,
@@ -54,7 +53,6 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
   const [isExpanded, setIsExpanded] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const config = FONT_TYPE_CONFIG[fontType];
-  // Use fallback default for users who don't have the new reflectionFontScale field yet
   const currentFontScale = quranReaderStyles[config.key] ?? config.defaultValue;
   const {
     actions: { onSettingsChange },

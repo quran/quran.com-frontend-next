@@ -35,33 +35,26 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Get current chapter name for display
   const currentChapter = chaptersData[Number(selectedChapterId)];
   const chapterDisplayText = currentChapter?.transliteratedName || `Surah ${selectedChapterId}`;
   const verseDisplayText = toLocalizedNumber(Number(selectedVerseNumber), lang);
 
-  // Reset search when closing
   const handleClose = useCallback(() => {
     setSelectionMode('none');
     setSearchQuery('');
   }, []);
 
-  // Close when clicking outside
   useOutsideClickDetector(containerRef, handleClose, selectionMode !== 'none');
 
-  // Focus input when selection mode changes
   useEffect(() => {
     if (selectionMode !== 'none' && inputRef.current) {
       inputRef.current.focus();
     }
   }, [selectionMode]);
 
-  // Filter chapters based on search
   const filteredChapters = useMemo(() => {
     if (!chaptersData) return [];
-
     const query = searchQuery.toLowerCase().trim();
-
     return Object.entries(chaptersData)
       .filter(([id, chapter]) => {
         if (!query) return true;
@@ -75,7 +68,6 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
       }));
   }, [chaptersData, searchQuery]);
 
-  // Generate verse options for selected chapter
   const verseOptions = useMemo(() => {
     if (!currentChapter) return [];
     const verses = [];
@@ -85,7 +77,6 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
     return verses;
   }, [currentChapter]);
 
-  // Filter verses based on search
   const filteredVerses = useMemo(() => {
     const query = searchQuery.trim();
     if (!query) return verseOptions;
@@ -104,7 +95,6 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
 
   const handleSelectChapter = useCallback(
     (chapterId: string) => {
-      // onChapterChange already sets verse to '1', no need to call onVerseChange
       onChapterChange(chapterId);
       setSelectionMode('none');
       setSearchQuery('');

@@ -13,6 +13,7 @@ export const MAXIMUM_QURAN_FONT_STEP = 10;
 export const MAXIMUM_TRANSLATIONS_FONT_STEP = 10;
 export const MAXIMUM_TAFSIR_FONT_STEP = 10;
 export const MAXIMUM_REFLECTION_FONT_STEP = 10;
+export const MAXIMUM_LESSON_FONT_STEP = 10;
 export const MAXIMUM_WORD_BY_WORD_FONT_STEP = 6;
 export const MINIMUM_FONT_STEP = 1;
 
@@ -51,6 +52,14 @@ export const quranReaderStylesSlice = createSlice({
     decreaseReflectionFontScale: (state) => ({
       ...state,
       reflectionFontScale: (state.reflectionFontScale ?? 3) - 1,
+    }),
+    increaseLessonFontScale: (state) => ({
+      ...state,
+      lessonFontScale: (state.lessonFontScale ?? 3) + 1,
+    }),
+    decreaseLessonFontScale: (state) => ({
+      ...state,
+      lessonFontScale: (state.lessonFontScale ?? 3) - 1,
     }),
     increaseWordByWordFontScale: (state) => ({
       ...state,
@@ -139,6 +148,8 @@ export const {
   decreaseTafsirFontScale,
   increaseReflectionFontScale,
   decreaseReflectionFontScale,
+  increaseLessonFontScale,
+  decreaseLessonFontScale,
   setQuranFont,
   increaseQuranTextFontScale,
   decreaseQuranTextFontScale,

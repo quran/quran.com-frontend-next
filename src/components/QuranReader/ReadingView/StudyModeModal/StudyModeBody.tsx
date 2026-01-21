@@ -35,7 +35,6 @@ const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), 
   ssr: false,
 });
 
-// Tab component lookup map for dynamic rendering
 const TAB_COMPONENTS: Partial<
   Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
 > = {
@@ -92,7 +91,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const [hasScrollableContent, setHasScrollableContent] = useState(false);
   const [hasScrolledToTab, setHasScrolledToTab] = useState(false);
 
-  // Check if content is scrollable and detect scroll
   useEffect(() => {
     const checkScrollable = () => {
       if (containerRef.current) {
@@ -103,14 +101,10 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
         }
       }
     };
-
-    // Check after content renders
     const timeoutId = setTimeout(checkScrollable, 100);
-
     return () => clearTimeout(timeoutId);
   }, [verse, activeTab]);
 
-  // Handle scroll to hide gradient once user scrolls
   const handleScroll = useCallback(
     (e: Event) => {
       const target = e.target as HTMLElement;
@@ -121,7 +115,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
     [hasScrolledDown],
   );
 
-  // Attach scroll listener to the modal's scroll container
   useEffect(() => {
     if (containerRef.current) {
       const scrollContainer = containerRef.current.parentElement;
@@ -133,20 +126,17 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
     return undefined;
   }, [handleScroll]);
 
-  // Reset scroll state when verse changes
   useEffect(() => {
     setHasScrolledDown(false);
     setHasScrolledToTab(false);
   }, [verse.verseKey]);
 
-  // Reset hasScrolledToTab when all tabs are closed
   useEffect(() => {
     if (!activeTab) {
       setHasScrolledToTab(false);
     }
   }, [activeTab]);
 
-  // Smooth scroll to bottom actions when a tab is first opened
   useEffect(() => {
     if (activeTab && !hasScrolledToTab && bottomActionsRef.current && containerRef.current) {
       setHasScrolledToTab(true);
@@ -192,7 +182,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
     },
   ];
 
-  // Ensure verse has chapterId (extract from verseKey if needed)
   const verseWithChapterId = {
     ...verse,
     chapterId: verse.chapterId || verse.verseKey?.split(':')[0],
@@ -238,7 +227,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
         ))}
       </div>
 
-      {/* Bottom actions after verse and translations */}
       <div
         ref={bottomActionsRef}
         className={classNames(styles.bottomActionsWrapper, {
@@ -255,7 +243,6 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
         <StudyModeBottomActions tabs={tabs} activeTab={activeTab} />
       </div>
 
-      {/* Tab content appears below bottom actions */}
       {activeTab &&
         TAB_COMPONENTS[activeTab] &&
         (() => {

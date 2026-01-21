@@ -28,7 +28,6 @@ const WordNavigationBox: React.FC<WordNavigationBoxProps> = ({
 }) => {
   const { t } = useTranslation('common');
 
-  // Always show translation and transliteration if available (ignore user settings)
   const hasContent = word.translation?.text || word.transliteration?.text;
 
   if (!hasContent) {
