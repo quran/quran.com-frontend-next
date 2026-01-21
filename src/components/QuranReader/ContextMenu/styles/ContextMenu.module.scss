@@ -2,7 +2,6 @@
 @use 'src/styles/breakpoints';
 
 $sections-container-height: 2rem;
-$pixel: 1px;
 
 .container {
   background: var(--color-background-elevated);
@@ -12,7 +11,7 @@ $pixel: 1px;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   inline-size: 100%;
-  inset-block-start: calc($pixel * -1);
+  inset-block-start: 0;
   min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;
@@ -66,6 +65,7 @@ $pixel: 1px;
   z-index: var(--z-index-default);
   position: relative;
   background: var(--color-background-elevated);
+  margin-block-start: -1px;
   @include breakpoints.tablet {
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
