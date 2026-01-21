@@ -32,9 +32,11 @@
 
 .staticDisplay {
   pointer-events: none;
-  cursor: default !important;
 
-  &:hover {
+  &,
+  &:hover,
+  &:focus {
+    cursor: default;
     color: var(--color-grey-icons-new);
     background-color: transparent;
     opacity: 1;

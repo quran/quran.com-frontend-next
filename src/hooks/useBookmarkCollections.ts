@@ -36,11 +36,15 @@ interface UseBookmarkCollectionsReturn {
   mutateBookmarkCollections: (newIds?: string[]) => void;
 }
 
-// Helper to safely extract array from API response (handles both array and { data: array } formats)
 const toSafeArray = (value: unknown): string[] => {
   if (Array.isArray(value)) return value;
-  if (value && typeof value === 'object' && Array.isArray((value as any).data)) {
-    return (value as any).data;
+  if (
+    value !== null &&
+    typeof value === 'object' &&
+    'data' in value &&
+    Array.isArray((value as { data: unknown }).data)
+  ) {
+    return (value as { data: string[] }).data;
   }
   return [];
 };

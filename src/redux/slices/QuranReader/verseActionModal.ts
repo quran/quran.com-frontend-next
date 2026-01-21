@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
@@ -37,12 +38,9 @@ export type VerseActionModalState = {
   modalType: VerseActionModalType | null;
   verseKey: string | null;
   verse: Verse | null;
-  // Notes-specific
   editingNote: Note | null;
-  // Translation/Collection-specific
   isTranslationView: boolean;
   bookmarksRangeUrl: string;
-  // Study Mode restoration
   wasOpenedFromStudyMode: boolean;
   studyModeRestoreState: StudyModeRestoreState | null;
 };
@@ -107,89 +105,55 @@ const verseActionModal = createSlice({
   name: SliceName.VERSE_ACTION_MODAL,
   initialState,
   reducers: {
-    /**
-     * Opens the Add Note or My Notes modal.
-     */
-    openNotesModal: (state, { payload }: PayloadAction<OpenNotesModalPayload>) => {
-      return {
-        ...initialState,
-        isOpen: true,
-        modalType: payload.modalType,
-        verseKey: payload.verseKey,
-        wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-        studyModeRestoreState: payload.studyModeRestoreState ?? null,
-      };
+    openNotesModal: (unusedState, { payload }: PayloadAction<OpenNotesModalPayload>) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: payload.modalType,
+      verseKey: payload.verseKey,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
+    openFeedbackModal: (unusedState, { payload }: PayloadAction<OpenFeedbackModalPayload>) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: VerseActionModalType.TRANSLATION_FEEDBACK,
+      verseKey: payload.verseKey,
+      verse: payload.verse,
+      isTranslationView: payload.isTranslationView ?? false,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
+    openCollectionModal: (unusedState, { payload }: PayloadAction<OpenCollectionModalPayload>) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: VerseActionModalType.SAVE_TO_COLLECTION,
+      verseKey: payload.verseKey,
+      verse: payload.verse,
+      isTranslationView: payload.isTranslationView ?? false,
+      bookmarksRangeUrl: payload.bookmarksRangeUrl ?? '',
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
+    openAdvancedCopyModal: (
+      unusedState,
+      { payload }: PayloadAction<OpenAdvancedCopyModalPayload>,
+    ) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: VerseActionModalType.ADVANCED_COPY,
+      verseKey: payload.verseKey,
+      verse: payload.verse,
+      isTranslationView: payload.isTranslationView ?? false,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
+    setModalType: (draft, { payload }: PayloadAction<VerseActionModalType>) => {
+      draft.modalType = payload;
     },
-
-    /**
-     * Opens the Translation Feedback modal.
-     */
-    openFeedbackModal: (state, { payload }: PayloadAction<OpenFeedbackModalPayload>) => {
-      return {
-        ...initialState,
-        isOpen: true,
-        modalType: VerseActionModalType.TRANSLATION_FEEDBACK,
-        verseKey: payload.verseKey,
-        verse: payload.verse,
-        isTranslationView: payload.isTranslationView ?? false,
-        wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-        studyModeRestoreState: payload.studyModeRestoreState ?? null,
-      };
+    setEditingNote: (draft, { payload }: PayloadAction<Note | null>) => {
+      draft.editingNote = payload;
     },
-
-    /**
-     * Opens the Save to Collection modal.
-     */
-    openCollectionModal: (state, { payload }: PayloadAction<OpenCollectionModalPayload>) => {
-      return {
-        ...initialState,
-        isOpen: true,
-        modalType: VerseActionModalType.SAVE_TO_COLLECTION,
-        verseKey: payload.verseKey,
-        verse: payload.verse,
-        isTranslationView: payload.isTranslationView ?? false,
-        bookmarksRangeUrl: payload.bookmarksRangeUrl ?? '',
-        wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-        studyModeRestoreState: payload.studyModeRestoreState ?? null,
-      };
-    },
-
-    /**
-     * Opens the Advanced Copy modal.
-     */
-    openAdvancedCopyModal: (state, { payload }: PayloadAction<OpenAdvancedCopyModalPayload>) => {
-      return {
-        ...initialState,
-        isOpen: true,
-        modalType: VerseActionModalType.ADVANCED_COPY,
-        verseKey: payload.verseKey,
-        verse: payload.verse,
-        isTranslationView: payload.isTranslationView ?? false,
-        wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-        studyModeRestoreState: payload.studyModeRestoreState ?? null,
-      };
-    },
-
-    /**
-     * Changes the current modal type (e.g., from Add Note to My Notes).
-     */
-    setModalType: (state, { payload }: PayloadAction<VerseActionModalType>) => {
-      state.modalType = payload;
-    },
-
-    /**
-     * Sets the note being edited.
-     */
-    setEditingNote: (state, { payload }: PayloadAction<Note | null>) => {
-      state.editingNote = payload;
-    },
-
-    /**
-     * Closes the modal and resets state.
-     */
-    closeVerseActionModal: () => {
-      return initialState;
-    },
+    closeVerseActionModal: () => initialState,
   },
 });
 

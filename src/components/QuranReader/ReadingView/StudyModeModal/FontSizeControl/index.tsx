@@ -108,6 +108,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           onClick={handleToggle}
           aria-label="Adjust font size"
         >
+          {/* eslint-disable-next-line i18next/no-literal-string -- "Aa" is a universal font size symbol */}
           <span className={styles.fontSizeLabel}>Aa</span>
         </button>
       </div>
@@ -117,6 +118,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
   return (
     <div className={classNames(styles.container, className)}>
       <div className={styles.expandedContainer}>
+        {/* eslint-disable-next-line i18next/no-literal-string -- "Aa" is a universal font size symbol */}
         <span className={styles.fontSizeLabel}>Aa</span>
         <button
           type="button"
