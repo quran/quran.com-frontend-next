@@ -17,6 +17,7 @@ import WordNavigationBox from './WordNavigationBox';
 
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
+import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
@@ -37,6 +38,7 @@ const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), 
 
 const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
   ssr: false,
+  loading: () => <TafsirSkeleton />,
 });
 
 // Tab component lookup map for dynamic rendering

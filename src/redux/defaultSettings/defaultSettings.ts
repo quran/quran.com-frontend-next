@@ -79,7 +79,6 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   selectedReadingTranslation: String(DEFAULT_TRANSLATIONS[0]),
   lastUsedReadingMode: ReadingPreference.Reading,
   selectedReflectionLanguages: [Language.EN],
-  selectedQnaLanguage: Language.EN,
 };
 
 const THEME_INITIAL_STATE: Theme = {

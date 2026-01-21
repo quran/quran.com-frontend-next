@@ -70,7 +70,12 @@ const AnswerBody: React.FC<Props> = ({ question, className }) => {
         </Button>
       </div>
       {shouldShowShareOptions && (
-        <ShareButtons url={shareURL} title={title} analyticsContext="q_and_a_answer" />
+        <ShareButtons
+          url={shareURL}
+          title={title}
+          analyticsContext="q_and_a_answer"
+          hideVideoGeneration
+        />
       )}
     </div>
   );

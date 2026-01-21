@@ -17,7 +17,6 @@ type ReadingPreferences = {
   selectedReadingTranslation: string | null;
   lastUsedReadingMode: ReadingPreference.Reading | ReadingPreference.ReadingTranslation;
   selectedReflectionLanguages: string[];
-  selectedQnaLanguage?: string;
 };
 
 export default ReadingPreferences;

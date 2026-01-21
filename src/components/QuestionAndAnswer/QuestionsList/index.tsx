@@ -31,7 +31,7 @@ const QuestionsList: React.FC<Props> = ({
   onLoadMore,
   baseUrl,
 }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation();
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
   const router = useRouter();
 
@@ -86,7 +86,7 @@ const QuestionsList: React.FC<Props> = ({
             onClick={onLoadMore}
             isDisabled={isLoadingMore}
           >
-            {isLoadingMore ? <LoadingSpinner /> : 'Load More'}
+            {isLoadingMore ? <LoadingSpinner /> : t('common:load-more')}
           </Button>
         </div>
       )}

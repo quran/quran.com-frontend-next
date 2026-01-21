@@ -1,30 +1,19 @@
-import React, { useMemo, useCallback } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './StudyModeAnswersTab.module.scss';
 import StudyModeTabLayout, { useStudyModeTabScroll } from './StudyModeTabLayout';
 
+import QuestionsList from '@/components/QuestionAndAnswer/QuestionsList';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import Select from '@/dls/Forms/Select';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useQuestionsPagination from '@/hooks/useQuestionsPagination';
-import { selectQnaLanguage, setQnaLanguage } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
-import { logValueChange } from '@/utils/eventLogger';
-import { getLocaleName } from '@/utils/locale';
 import { getVerseAnswersNavigationUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
-
-const QuestionsList = dynamic(() => import('@/components/QuestionAndAnswer/QuestionsList'), {
-  ssr: false,
-  loading: () => <TafsirSkeleton />,
-});
 
 interface StudyModeAnswersTabProps {
   chapterId: string;
@@ -33,58 +22,18 @@ interface StudyModeAnswersTabProps {
 
 const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, verseNumber }) => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
-  const storedLanguage = useSelector(selectQnaLanguage);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const { containerRef, scrollToTop } = useStudyModeTabScroll();
-
-  const {
-    actions: { onSettingsChange },
-  } = usePersistPreferenceGroup();
-
-  // Use stored language preference or fall back to current locale
-  const selectedLanguage = useMemo(
-    () => storedLanguage || (lang as Language) || Language.EN,
-    [storedLanguage, lang],
-  );
+  const { containerRef } = useStudyModeTabScroll();
 
   const verseKey = makeVerseKey(Number(chapterId), Number(verseNumber));
   const baseUrl = getVerseAnswersNavigationUrl(verseKey);
   const scaleClass = styles[`qna-font-size-${quranReaderStyles.qnaFontScale}`];
 
+  // Use global site language for Q&A
   const { questions, hasMore, isLoadingMore, loadMore, isLoading } = useQuestionsPagination({
     verseKey,
-    language: selectedLanguage as Language,
+    language: lang as Language,
   });
-
-  const onLanguageChange = useCallback(
-    (value: string) => {
-      const newLanguage = value as Language;
-      logValueChange('qna_language', selectedLanguage, newLanguage);
-
-      // Persist to user preferences (syncs with backend if logged in)
-      onSettingsChange(
-        'selectedQnaLanguage',
-        newLanguage,
-        setQnaLanguage(newLanguage),
-        setQnaLanguage(selectedLanguage),
-        PreferenceGroup.READING,
-      );
-
-      dispatch(setQnaLanguage(newLanguage));
-      scrollToTop();
-    },
-    [dispatch, onSettingsChange, selectedLanguage, scrollToTop],
-  );
-
-  const languageOptions = useMemo(
-    () =>
-      Object.values(Language).map((l) => ({
-        label: getLocaleName(l),
-        value: l,
-      })),
-    [],
-  );
 
   const renderBody = () => {
     if (isLoading) return <TafsirSkeleton />;
@@ -112,21 +61,7 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, ve
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <StudyModeTabLayout
-        fontType="qna"
-        selectionControl={
-          <div className={styles.languageSelectContainer}>
-            <Select
-              id="qna-language"
-              name="qna-language"
-              options={languageOptions}
-              value={selectedLanguage}
-              onChange={onLanguageChange}
-            />
-          </div>
-        }
-        body={renderBody()}
-      />
+      <StudyModeTabLayout fontType="qna" selectionControl={null} body={renderBody()} />
     </div>
   );
 };
