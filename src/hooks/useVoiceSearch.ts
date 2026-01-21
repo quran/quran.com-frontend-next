@@ -20,13 +20,6 @@ import { cleanTranscript } from '@/utils/string';
 
 let sharedSpeechRecognitionInstance: SpeechRecognitionInterface | null = null;
 
-export const getSpeechRecognitionInstance = (): SpeechRecognitionInterface | null =>
-  sharedSpeechRecognitionInstance;
-
-export const setSpeechRecognitionInstance = (instance: SpeechRecognitionInterface | null): void => {
-  sharedSpeechRecognitionInstance = instance;
-};
-
 export interface UseVoiceSearchOptions {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -170,12 +163,15 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
    * Initialize speech recognition
    */
   const initializeSpeechRecognition = useCallback(() => {
-    if (sharedSpeechRecognitionInstance) {
-      speechRecRef.current = sharedSpeechRecognitionInstance;
-      return true;
-    }
-
     try {
+      if (sharedSpeechRecognitionInstance) {
+        try {
+          sharedSpeechRecognitionInstance.stop();
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error stopping speech recognition', error);
+        }
+      }
       speechRecRef.current = createSpeechRecognition(createSpeechRecognitionConfig());
       sharedSpeechRecognitionInstance = speechRecRef.current;
       return true;
