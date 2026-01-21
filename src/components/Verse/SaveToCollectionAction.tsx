@@ -76,6 +76,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
   return (
     <PopoverMenu.Item
       onClick={onMenuClicked}
+      shouldCloseMenuAfterClick
       icon={
         <IconContainer
           icon={<PlusIcon />}

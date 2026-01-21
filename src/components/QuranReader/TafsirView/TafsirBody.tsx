@@ -90,6 +90,12 @@ const TafsirBody = ({
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
 
+  // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
+  useEffect(() => {
+    setSelectedChapterId(initialChapterId);
+    setSelectedVerseNumber(initialVerseNumber);
+  }, [initialChapterId, initialVerseNumber]);
+
   // if user opened tafsirBody via a url, we will have initialTafsirIdOrSlug
   // we need to set this `initialTafsirIdOrSlug` as a selectedTafsirIdOrSlug
   // we did not use `useState(initialTafsirIdOrSlug)` because `useRouter`'s query string is undefined on first render

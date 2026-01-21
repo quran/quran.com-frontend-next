@@ -91,6 +91,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
         />
       }
       onClick={handleClick}
+      shouldCloseMenuAfterClick
       dataTestId="verse-actions-menu-translation-feedback"
     >
       {t('translation-feedback.title')}

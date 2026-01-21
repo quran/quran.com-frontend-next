@@ -60,6 +60,9 @@ const studyMode = createSlice({
     setActiveTab: (state, { payload }: PayloadAction<StudyModeTabId | null>) => {
       state.activeTab = payload;
     },
+    setVerseKey: (state, { payload }: PayloadAction<string>) => {
+      state.verseKey = payload;
+    },
     setHighlightedWordLocation: (state, { payload }: PayloadAction<string | null>) => {
       state.highlightedWordLocation = payload;
     },
@@ -110,6 +113,7 @@ export const {
   closeStudyMode,
   resetStudyModeState,
   setActiveTab,
+  setVerseKey,
   setHighlightedWordLocation,
   saveAndCloseStudyMode,
   restoreStudyMode,

@@ -30,10 +30,20 @@ interface UseBookmarkCollectionsProps {
 
 interface UseBookmarkCollectionsReturn {
   collectionIds: string[];
+  isReady: boolean;
   addToCollection: (collectionId: string) => Promise<boolean>;
   removeFromCollection: (collectionId: string) => Promise<boolean>;
   mutateBookmarkCollections: (newIds?: string[]) => void;
 }
+
+// Helper to safely extract array from API response (handles both array and { data: array } formats)
+const toSafeArray = (value: unknown): string[] => {
+  if (Array.isArray(value)) return value;
+  if (value && typeof value === 'object' && Array.isArray((value as any).data)) {
+    return (value as any).data;
+  }
+  return [];
+};
 
 const useBookmarkCollections = ({
   mushafId,
@@ -48,11 +58,20 @@ const useBookmarkCollections = ({
   const { t } = useTranslation('common');
   const isPendingRef = useRef(false);
 
-  const { data: collectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
-    isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
+  // Only fetch when logged in AND we have valid key (chapter/surah number > 0)
+  const shouldFetch = isLoggedIn && key > 0;
+
+  const { data: rawCollectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
+    shouldFetch ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
     () => getBookmarkCollections(mushafId, key, type, verseNumber),
-    mutatingFetcherConfig,
+    {
+      ...mutatingFetcherConfig,
+      revalidateOnFocus: false, // Prevent excessive refetches on window focus
+    },
   );
+
+  // Ensure collectionIds is always an array (API might return { data: [...] } or other formats)
+  const collectionIds = toSafeArray(rawCollectionIds);
 
   const showErrorToast = useCallback(
     (err: unknown) => {
@@ -78,10 +97,10 @@ const useBookmarkCollections = ({
         await mutateBookmarkCollections(
           async (current) => {
             await addCollectionBookmark({ collectionId, key, mushafId, type, verseNumber });
-            return [...(current || []), collectionId];
+            return [...toSafeArray(current), collectionId];
           },
           {
-            optimisticData: [...(collectionIds || []), collectionId],
+            optimisticData: [...collectionIds, collectionId],
             rollbackOnError: true,
             revalidate: false,
           },
@@ -115,10 +134,10 @@ const useBookmarkCollections = ({
         await mutateBookmarkCollections(
           async (current) => {
             await deleteCollectionBookmarkByKey({ collectionId, key, mushafId, type, verseNumber });
-            return (current || []).filter((id) => id !== collectionId);
+            return toSafeArray(current).filter((id) => id !== collectionId);
           },
           {
-            optimisticData: (collectionIds || []).filter((id) => id !== collectionId),
+            optimisticData: collectionIds.filter((id) => id !== collectionId),
             rollbackOnError: true,
             revalidate: false,
           },
@@ -144,8 +163,12 @@ const useBookmarkCollections = ({
     ],
   );
 
+  // isReady indicates data has been fetched (rawCollectionIds is defined)
+  const isReady = rawCollectionIds !== undefined;
+
   return {
-    collectionIds: collectionIds || [],
+    collectionIds,
+    isReady,
     addToCollection,
     removeFromCollection,
     mutateBookmarkCollections: (newIds?: string[]) =>

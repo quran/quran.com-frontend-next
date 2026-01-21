@@ -85,6 +85,7 @@ const VerseActionAdvancedCopy = ({
         />
       }
       onClick={onModalOpen}
+      shouldCloseMenuAfterClick
     >
       {t('advanced-copy')}
     </PopoverMenu.Item>

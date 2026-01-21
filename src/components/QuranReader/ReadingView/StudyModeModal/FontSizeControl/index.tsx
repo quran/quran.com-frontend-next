@@ -10,7 +10,6 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CloseIcon from '@/icons/close.svg';
 import MinusIcon from '@/icons/minus.svg';
 import PlusIcon from '@/icons/plus.svg';
-import TextIcon from '@/icons/text.svg';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MAXIMUM_REFLECTION_FONT_STEP,
@@ -109,7 +108,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           onClick={handleToggle}
           aria-label="Adjust font size"
         >
-          <TextIcon />
+          <span className={styles.fontSizeLabel}>Aa</span>
         </button>
       </div>
     );

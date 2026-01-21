@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -71,6 +71,18 @@ const ReflectionBodyContainer = ({
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedContentType, setSelectedContentType] = useState(initialContentType);
+
+  // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
+  useEffect(() => {
+    setSelectedChapterId(initialChapterId);
+    setSelectedVerseNumber(initialVerseNumber);
+  }, [initialChapterId, initialVerseNumber]);
+
+  // Sync content type when initial prop changes
+  useEffect(() => {
+    setSelectedContentType(initialContentType);
+  }, [initialContentType]);
+
   const { lang, t } = useTranslation();
   const dispatch = useDispatch();
   const storedLanguages = useSelector(selectReflectionLanguages);

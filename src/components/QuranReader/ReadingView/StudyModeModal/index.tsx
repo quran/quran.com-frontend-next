@@ -21,7 +21,7 @@ import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { setActiveTab, setHighlightedWordLocation } from '@/redux/slices/QuranReader/studyMode';
+import { setActiveTab, setHighlightedWordLocation, setVerseKey } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
@@ -99,6 +99,7 @@ const StudyModeModal: React.FC<Props> = ({
       setOriginalUrl(router.asPath);
       setActiveContentTab(initialActiveTab ?? null);
       // Sync initial state to Redux for preservation when opening secondary modals
+      dispatch(setVerseKey(currentVerseKey));
       dispatch(setActiveTab(initialActiveTab ?? null));
       dispatch(setHighlightedWordLocation(highlightedWordLocation ?? null));
     }
@@ -139,21 +140,33 @@ const StudyModeModal: React.FC<Props> = ({
   const handleChapterChange = useCallback((newChapterId: string) => {
     setSelectedChapterId(newChapterId);
     setSelectedVerseNumber('1');
-  }, []);
+    // Sync to Redux for state preservation when opening secondary modals
+    dispatch(setVerseKey(`${newChapterId}:1`));
+  }, [dispatch]);
   const handleVerseChange = useCallback(
-    (newVerseNumber: string) => setSelectedVerseNumber(newVerseNumber),
-    [],
+    (newVerseNumber: string) => {
+      setSelectedVerseNumber(newVerseNumber);
+      // Sync to Redux for state preservation when opening secondary modals
+      dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+    },
+    [dispatch, selectedChapterId],
   );
   const handlePreviousVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     // Button is disabled when currentVerseNum === 1, so this is always safe
-    setSelectedVerseNumber(String(currentVerseNum - 1));
-  }, [selectedVerseNumber]);
+    const newVerseNumber = String(currentVerseNum - 1);
+    setSelectedVerseNumber(newVerseNumber);
+    // Sync to Redux for state preservation when opening secondary modals
+    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+  }, [selectedVerseNumber, selectedChapterId, dispatch]);
   const handleNextVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     // Button is disabled on last verse, so this is always safe
-    setSelectedVerseNumber(String(currentVerseNum + 1));
-  }, [selectedVerseNumber]);
+    const newVerseNumber = String(currentVerseNum + 1);
+    setSelectedVerseNumber(newVerseNumber);
+    // Sync to Redux for state preservation when opening secondary modals
+    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+  }, [selectedVerseNumber, selectedChapterId, dispatch]);
 
   // Disable prev if on first verse of current chapter
   const canNavigatePrev = Number(selectedVerseNumber) > 1;

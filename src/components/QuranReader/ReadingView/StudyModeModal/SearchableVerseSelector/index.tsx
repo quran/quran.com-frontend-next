@@ -104,12 +104,12 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
 
   const handleSelectChapter = useCallback(
     (chapterId: string) => {
+      // onChapterChange already sets verse to '1', no need to call onVerseChange
       onChapterChange(chapterId);
-      onVerseChange('1');
       setSelectionMode('none');
       setSearchQuery('');
     },
-    [onChapterChange, onVerseChange],
+    [onChapterChange],
   );
 
   const handleSelectVerse = useCallback(

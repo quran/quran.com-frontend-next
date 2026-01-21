@@ -124,10 +124,6 @@ const VerseActionModalContainer: React.FC = () => {
   }, [isOpen]);
 
   // ============ Common Handlers ============
-  const handleClose = useCallback(() => {
-    dispatch(closeVerseActionModal());
-  }, [dispatch]);
-
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
     // Use studyModeRestoreState to restore Study Mode with correct verseKey and tab
@@ -144,6 +140,15 @@ const VerseActionModalContainer: React.FC = () => {
       dispatch(openStudyMode({ verseKey }));
     }
   }, [dispatch, studyModeRestoreState, verseKey]);
+
+  // Close handler that reopens Study Mode if modal was opened from there
+  const handleClose = useCallback(() => {
+    if (wasOpenedFromStudyMode) {
+      handleBackToStudyMode();
+    } else {
+      dispatch(closeVerseActionModal());
+    }
+  }, [dispatch, wasOpenedFromStudyMode, handleBackToStudyMode]);
 
   // ============ Notes Handlers ============
   const handleOpenMyNotes = useCallback(() => {
@@ -223,8 +228,6 @@ const VerseActionModalContainer: React.FC = () => {
       })),
     [collections, bookmarkCollectionIds],
   );
-
-  const isCollectionDataReady = bookmarkCollectionIds !== undefined;
 
   // Don't render if modal is closed or missing required data
   if (!isOpen || !verseKey) {
@@ -311,7 +314,7 @@ const VerseActionModalContainer: React.FC = () => {
   }
 
   // ============ Render Save to Collection Modal ============
-  if (modalType === VerseActionModalType.SAVE_TO_COLLECTION && isCollectionDataReady) {
+  if (modalType === VerseActionModalType.SAVE_TO_COLLECTION) {
     return (
       <SaveToCollectionModal
         isOpen
