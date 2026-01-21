@@ -12,6 +12,10 @@ $arabicVerseTopMargin: 2.75rem;
   --gap-size: calc(0.5 * var(--spacing-mega));
 }
 
+.firstCellWithHeader {
+  padding-block-start: 0;
+}
+
 .highlightedContainer {
   background: var(--color-background-alternative-faded);
 }
@@ -205,7 +209,7 @@ $arabicVerseTopMargin: 2.75rem;
       @media (min-width: 360px) {
         flex: 1 1 auto;
         justify-content: center;
-        min-width: 0;
+        min-inline-size: 0;
       }
     }
   }

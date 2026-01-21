@@ -106,8 +106,8 @@ $bismillahSvgInlineSizeMobile: 148px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-block-start: var(--spacing-medium2);
-  margin-block-end: var(--spacing-large-px);
+  margin-block-start: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium2-px);
 }
 
 .chapterTitleWithTranslationName {
@@ -190,10 +190,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .withTranslationView {
-  margin-block-end: var(--spacing-medium3-px);
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: var(--spacing-medium2-px);
-  }
+  margin-block-end: var(--spacing-medium2-px);
 }
 
 .bismillahTranslation {

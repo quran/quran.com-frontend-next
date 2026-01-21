@@ -2,7 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import pageStyles from './Page.module.scss';
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
 import getTranslationNameString from './utils/translation';
@@ -64,7 +63,6 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
               translationsCount={translationsCount}
               chapterId={chapterId}
               isTranslationView={false}
-              className={pageStyles.chapterHeaderNoTopMargin}
             />
           )}
           <TranslatedAyah
