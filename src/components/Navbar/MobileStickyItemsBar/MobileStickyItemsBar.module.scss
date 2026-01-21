@@ -1,0 +1,49 @@
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
+
+.container {
+  @include utility.dimmedOverlay(absolute);
+  position: fixed;
+  inset-block-start: 0;
+  inline-size: 100%;
+  block-size: var(--navbar-height);
+  z-index: var(--z-index-header);
+  background-color: var(--color-background-elevated);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  will-change: transform;
+  transition: transform var(--transition-regular);
+
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
+.visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.hidden {
+  transform: translate3d(0, -100%, 0);
+}
+
+.centerVertically {
+  @include utility.center-vertically;
+}
+
+.leftCTA {
+  display: flex;
+  margin-inline-start: var(--spacing-medium);
+  align-items: center;
+}
+
+.rightCTA {
+  display: flex;
+  margin-inline-end: var(--spacing-medium);
+  align-items: center;
+
+  > button {
+    margin-inline-start: var(--spacing-micro);
+  }
+}

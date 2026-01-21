@@ -7,15 +7,11 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
-
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Banner from '@/components/Banner/Banner';
 import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
-import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
-import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
@@ -202,7 +198,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             >
               <IconSearch />
             </Button>
-            <SearchDrawer />
 
             {shouldRenderSidebarNavigation && <SidebarNavigation />}
             {isLoggedIn && <ProfileAvatarButton />}
@@ -217,8 +212,6 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
             >
               <IconMenu />
             </Button>
-            <SettingsDrawer />
-            <NavigationDrawer />
           </div>
         </div>
       </div>

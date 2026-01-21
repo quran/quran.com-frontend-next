@@ -1,0 +1,84 @@
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './MobileStickyItemsBar.module.scss';
+
+import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
+import ProfileAvatarButton from '@/components/Navbar/NavbarBody/ProfileAvatarButton';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useShowOnScrollUp from '@/hooks/useShowOnScrollUp';
+import IconMenu from '@/icons/menu.svg';
+import IconSearch from '@/icons/search.svg';
+import {
+  selectIsNavigationDrawerOpen,
+  selectIsSettingsDrawerOpen,
+  setDisableSearchDrawerTransition,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
+} from '@/redux/slices/navbar';
+import { logEvent } from '@/utils/eventLogger';
+
+const MobileStickyItemsBar = () => {
+  const { t } = useTranslation('common');
+  const dispatch = useDispatch();
+  const { isLoggedIn } = useIsLoggedIn();
+  const isNavDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
+  const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
+  const isDrawerOpen = isNavDrawerOpen || isSettingsDrawerOpen;
+  const show = useShowOnScrollUp();
+
+  const openSearch = () => {
+    logEvent('drawer_search_open');
+    dispatch(setIsSearchDrawerOpen(true));
+    dispatch(setDisableSearchDrawerTransition(false));
+  };
+
+  const openMenu = () => {
+    logEvent('drawer_navigation_open');
+    dispatch(setIsNavigationDrawerOpen(true));
+  };
+
+  return (
+    <div
+      className={classNames(styles.container, styles[show ? 'visible' : 'hidden'], {
+        [styles.dimmed]: isDrawerOpen,
+      })}
+      inert={isDrawerOpen || undefined}
+    >
+      <div className={styles.centerVertically}>
+        <div className={styles.leftCTA}>
+          <NavbarLogoWrapper />
+        </div>
+      </div>
+      <div className={styles.centerVertically}>
+        <div className={styles.rightCTA}>
+          {!isLoggedIn && <ProfileAvatarButton isPopoverPortalled={false} />}
+          <Button
+            tooltip={t('search.title')}
+            ariaLabel={t('search.title')}
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            shouldFlipOnRTL={false}
+            onClick={openSearch}
+          >
+            <IconSearch />
+          </Button>
+          {isLoggedIn && <ProfileAvatarButton isPopoverPortalled={false} />}
+          <Button
+            tooltip={t('menu')}
+            ariaLabel={t('aria.nav-drawer-open')}
+            variant={ButtonVariant.Ghost}
+            shape={ButtonShape.Circle}
+            onClick={openMenu}
+          >
+            <IconMenu />
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MobileStickyItemsBar;
