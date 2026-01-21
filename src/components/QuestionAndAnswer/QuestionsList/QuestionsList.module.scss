@@ -1,6 +1,12 @@
 .container {
   > div {
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--spacing-large);
+    padding-block-end: var(--spacing-large);
+    border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+
+    &:last-child {
+      border-block-end: none;
+    }
   }
 }
 
@@ -10,6 +16,12 @@
   padding: var(--spacing-medium);
 }
 
-.header {
+div.headerClassName {
   align-items: flex-start;
+  gap: var(--spacing-xsmall);
+
+  & > :nth-child(2) {
+    margin-inline-end: 0;
+    margin-block-start: calc(2 * var(--spacing-micro-px));
+  }
 }

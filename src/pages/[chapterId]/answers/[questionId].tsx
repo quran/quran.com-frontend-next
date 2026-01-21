@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Answer from '@/components/QuestionAndAnswer/Answer';
+import Answer from '@/components/QuestionAndAnswer/Answer/AnswerBody';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';

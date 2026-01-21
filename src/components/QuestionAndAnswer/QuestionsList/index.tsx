@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import Answer from '../Answer';
+import Answer from '../Answer/AnswerBody';
 import QuestionHeader from '../QuestionHeader';
 
 import styles from './QuestionsList.module.scss';
@@ -59,7 +59,7 @@ const QuestionsList: React.FC<Props> = ({
       {questions?.map((question) => (
         <Collapsible
           direction={CollapsibleDirection.Right}
-          headerClassName={styles.header}
+          headerClassName={styles.headerClassName}
           title={
             <QuestionHeader body={question.body} theme={question.theme} type={question.type} />
           }

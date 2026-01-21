@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { MilkdownProvider } from '@milkdown/react';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AnswerBody.module.scss';
@@ -17,9 +18,10 @@ import { getBasePath } from '@/utils/url';
 
 type Props = {
   question: Question;
+  className?: string;
 };
 
-const AnswerBody: React.FC<Props> = ({ question }) => {
+const AnswerBody: React.FC<Props> = ({ question, className }) => {
   const [shouldShowShareOptions, setShouldShowShareOptions] = useState(false);
   const { t } = useTranslation('quran-reader');
 
@@ -33,7 +35,7 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
   const title = t('q-and-a.explore_answers');
 
   return (
-    <div className={styles.answerBody}>
+    <div className={classNames(styles.answerBody, className)}>
       <p className={styles.header}>{t('q-and-a.answer')}</p>
       <MilkdownProvider>
         <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
