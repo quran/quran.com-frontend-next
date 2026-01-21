@@ -82,6 +82,7 @@ const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
                       className={styles.card}
                       link={courseUrl}
                       onClick={() => onLearningPlanCardClicked(course.slug)}
+                      shouldPrefetch={false}
                     >
                       <div className={styles.thumbnailWrapper}>
                         <Image
