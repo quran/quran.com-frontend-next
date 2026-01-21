@@ -74,3 +74,20 @@ $virtual-scrolling-height-bandage: calc(
   display: flex;
   justify-content: center;
 }
+
+// Mobile collapsed state: when context menu is collapsed (scrolled past threshold)
+.mobileCollapsed {
+  padding-block-start: 0;
+}
+
+// Mobile collapsed state with Tajweed mushaf: needs extra padding for tajweed trigger
+.mobileCollapsedTajweed {
+  padding-block-start: var(--tajweed-trigger-height);
+}
+
+// Mobile expanded state with Tajweed mushaf: add extra padding for tajweed trigger
+.mobileTajweedExpanded {
+  padding-block-start: calc(
+    var(--navbar-height) + var(--mobile-reading-mode-tabs-height) + var(--tajweed-trigger-height)
+  );
+}
