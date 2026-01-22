@@ -8,6 +8,22 @@ $pill-font-size-multiplier: 0.625;
   flex-direction: column;
   align-items: flex-start;
   color: var(--color-text-default-new);
+
+  & :global(.milkdown) *,
+  & :global(.ProseMirror) *,
+  :global(.content) *,
+  :global(.editor) * {
+    font-size: inherit;
+
+    & :where(ol, ul) {
+      list-style-position: inside;
+      padding-inline: 0;
+
+      & > li > * {
+        display: inline;
+      }
+    }
+  }
 }
 
 .pillContainer {
