@@ -54,6 +54,7 @@ type TafsirBodyProps = {
   showArabicText?: boolean;
   showNavigation?: boolean;
   shouldShowFontControl?: boolean;
+  hasSeparateTafsirLayout?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -71,6 +72,7 @@ const TafsirBody = ({
   showArabicText = true,
   showNavigation = true,
   shouldShowFontControl = true,
+  hasSeparateTafsirLayout = false,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
@@ -322,6 +324,7 @@ const TafsirBody = ({
       languageOptions={languageOptions}
       data={tafsirSelectionList}
       isLoading={isLoading}
+      hasSeparateLayout={hasSeparateTafsirLayout}
     />
   );
 

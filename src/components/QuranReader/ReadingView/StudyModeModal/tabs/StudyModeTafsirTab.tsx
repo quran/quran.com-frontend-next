@@ -32,6 +32,7 @@ const StudyModeTafsirTab: React.FC<StudyModeTafsirTabProps> = ({ chapterId, vers
         showArabicText={false}
         showNavigation={false}
         shouldShowFontControl={false}
+        hasSeparateTafsirLayout
         render={({ body, languageAndTafsirSelection }) => (
           <StudyModeTabLayout selectionControl={languageAndTafsirSelection} body={body} />
         )}
