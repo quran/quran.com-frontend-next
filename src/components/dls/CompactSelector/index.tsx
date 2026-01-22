@@ -92,7 +92,7 @@ const CompactSelector: React.FC<CompactSelectorProps> = ({
       }
       contentClassName={styles.popoverContent}
     >
-      <div className={styles.popoverHeader}>{t('languages')}</div>
+      <div className={styles.popoverHeader}>{t('common:languages')}</div>
       <div className={styles.itemsContainer} id={id}>
         {items.map((item) => {
           const isSelected = selectedValues.includes(item.value);

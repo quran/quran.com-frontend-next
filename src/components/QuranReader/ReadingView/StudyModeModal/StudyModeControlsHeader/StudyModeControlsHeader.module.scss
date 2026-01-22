@@ -1,13 +1,15 @@
 .container {
   display: flex;
   align-items: center;
-  gap: var(--spacing-small-px);
+  flex-wrap: nowrap;
+  gap: var(--spacing-xsmall-px);
   padding-block-start: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium);
+  overflow-x: auto;
 }
 
 .fontControl {
   flex-shrink: 0;
-  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
 }
 
 .languageSelector {
