@@ -21,7 +21,6 @@ import Word from 'types/Word';
 interface StudyModeBodyProps {
   verse: Verse;
   bookmarksRangeUrl?: string;
-  hasNotes?: boolean;
   selectedWord?: Word;
   selectedWordLocation?: string;
   showWordBox: boolean;
@@ -40,7 +39,6 @@ interface StudyModeBodyProps {
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   verse,
   bookmarksRangeUrl = '',
-  hasNotes,
   selectedWord,
   selectedWordLocation,
   showWordBox,
@@ -60,16 +58,11 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
 
-  const tabs = useStudyModeTabs(activeTab, onTabChange);
+  const tabs = useStudyModeTabs(activeTab, verse.verseKey, onTabChange);
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <TopActions
-        verse={verse}
-        bookmarksRangeUrl={bookmarksRangeUrl}
-        hasNotes={hasNotes}
-        shouldUseModalZIndex
-      />
+      <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} shouldUseModalZIndex />
       <div className={styles.arabicVerseContainer}>
         {showWordBox && selectedWord && (
           <WordNavigationBox
@@ -120,9 +113,18 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
         TAB_COMPONENTS[activeTab] &&
         (() => {
           const TabComponent = TAB_COMPONENTS[activeTab];
+
           return (
-            <div ref={tabContentRef} className={styles.tabContentContainer}>
-              <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
+            <div
+              key={`${activeTab}-${verse.verseKey}`}
+              ref={tabContentRef}
+              className={styles.tabContentContainer}
+            >
+              <TabComponent
+                chapterId={selectedChapterId}
+                verseNumber={selectedVerseNumber}
+                switchTab={onTabChange}
+              />
             </div>
           );
         })()}

@@ -9,7 +9,7 @@ import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
 import useCollectionHandlers from './useCollectionHandlers';
 
-import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
   closeStudyMode,
   openStudyMode,
@@ -51,9 +51,7 @@ const VerseActionModalContainer: React.FC = () => {
   const chapterId = verse ? Number(verse.chapterId) : 0;
   const verseNumber = verse?.verseNumber ?? 0;
 
-  const { data: notesCount } = useCountRangeNotes(
-    isOpen && verseKey ? { from: verseKey, to: verseKey } : null,
-  );
+  const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
 
   const { modalCollections, onCollectionToggled, onNewCollectionCreated } = useCollectionHandlers({
     chapterId,
@@ -113,7 +111,7 @@ const VerseActionModalContainer: React.FC = () => {
     return null;
   }
 
-  const count = notesCount?.[verseKey] ?? 0;
+  const count = notesCount ?? 0;
   const isNotesModal =
     modalType === VerseActionModalType.ADD_NOTE ||
     modalType === VerseActionModalType.MY_NOTES ||

@@ -69,7 +69,7 @@ export const ACTION_BUTTONS: ActionButton[] = [
     key: 'answers',
     icon: LightbulbIcon,
     namespace: 'common',
-    modalType: ModalType.QUESTIONS,
+    studyModeTabId: StudyModeTabId.ANSWERS,
     getNavigationUrl: ({ verseKey }) => getVerseAnswersNavigationUrl(verseKey),
   },
 ];

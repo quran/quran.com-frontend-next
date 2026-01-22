@@ -22,14 +22,17 @@ import {
   decreaseTafsirFontScale,
   increaseReflectionFontScale,
   decreaseReflectionFontScale,
+  increaseQnaFontScale,
+  decreaseQnaFontScale,
   increaseLessonFontScale,
   decreaseLessonFontScale,
+  MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-export type FontSizeType = 'tafsir' | 'reflection' | 'lesson';
+export type FontSizeType = 'tafsir' | 'reflection' | 'lesson' | 'qna';
 
 interface FontSizeControlProps {
   className?: string;
@@ -51,6 +54,14 @@ const FONT_TYPE_CONFIG = {
     increaseAction: increaseReflectionFontScale,
     decreaseAction: decreaseReflectionFontScale,
     logKey: 'reflection_font_scale',
+    defaultValue: 3,
+  },
+  qna: {
+    key: 'qnaFontScale' as const,
+    maxStep: MAXIMUM_QURAN_FONT_STEP,
+    increaseAction: increaseQnaFontScale,
+    decreaseAction: decreaseQnaFontScale,
+    logKey: 'qna_font_scale',
     defaultValue: 3,
   },
   lesson: {

@@ -41,6 +41,7 @@ import {
   getVerseSelectedTafsirNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseAnswersNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
@@ -294,6 +295,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.ANSWERS) {
+        fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === null) {
         fakeNavigate(originalUrl, router.locale);
       }
@@ -321,9 +324,12 @@ const StudyModeModal: React.FC<Props> = ({
 
   const isContentTabActive =
     activeContentTab &&
-    [StudyModeTabId.TAFSIR, StudyModeTabId.REFLECTIONS, StudyModeTabId.LESSONS].includes(
-      activeContentTab,
-    );
+    [
+      StudyModeTabId.TAFSIR,
+      StudyModeTabId.REFLECTIONS,
+      StudyModeTabId.LESSONS,
+      StudyModeTabId.ANSWERS,
+    ].includes(activeContentTab);
 
   const header = (
     <div className={styles.header}>

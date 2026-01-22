@@ -5,11 +5,9 @@ import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
-import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { QuestionsData } from '@/utils/auth/api';
 
 interface TranslationPageVerse {
   verse: Verse;
@@ -17,11 +15,6 @@ interface TranslationPageVerse {
   verseIdx: number;
   quranReaderStyles: QuranReaderStyles;
   isLastVerseInView: boolean;
-  notesRange: {
-    from: string;
-    to: string;
-  } | null;
-  questionsData?: Record<string, QuestionsData>;
   quranReaderDataType: QuranReaderDataType;
 }
 
@@ -31,17 +24,10 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verseIdx,
   quranReaderStyles,
   isLastVerseInView,
-  notesRange,
-  questionsData,
   quranReaderDataType,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
-
-  const { data: notesCount } = useCountRangeNotes(notesRange);
-
-  // Only show Answers tab when we confirm questions exist
-  const hasQuestions = questionsData?.[verse.verseKey]?.total > 0;
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -66,8 +52,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
       observer?.disconnect();
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
-
-  const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
 
   // Show chapter header when:
   // 1. It's a single verse view (QuranReaderDataType.Verse) - always show the header
@@ -105,8 +89,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         key={verse.id}
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
-        hasNotes={hasNotes}
-        hasQuestions={hasQuestions}
         isFirstCellWithHeader={isFirstCellWithHeader}
       />
     </div>

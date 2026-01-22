@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { PageQuestionsContext } from './context/PageQuestionsContext';
 import groupLinesByVerses from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
@@ -13,7 +12,6 @@ import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import {
   selectInlineDisplayWordByWordPreferences,
   selectReadingPreference,
@@ -41,14 +39,6 @@ const Page = ({
   lang,
 }: PageProps) => {
   const readingPreference = useSelector(selectReadingPreference);
-  const { data: pageVersesQuestionsData } = useCountRangeQuestions(
-    verses?.length > 0
-      ? {
-          from: verses?.[0].verseKey,
-          to: verses?.[verses.length - 1].verseKey,
-        }
-      : null,
-  );
 
   const lines = useMemo(() => (verses?.length > 0 ? groupLinesByVerses(verses) : {}), [verses]);
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
@@ -96,32 +86,30 @@ const Page = ({
   }
 
   return (
-    <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
-      <div
-        id={`page-${pageNumber}`}
-        className={classNames(styles.container, {
-          [styles.mobileCenterText]: isBigTextLayout,
-          [styles[getLineWidthClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
-            !isFontLoaded,
-        })}
-      >
-        {chapterHeader}
-        {Object.keys(lines).map((key, lineIndex) => (
-          <Line
-            pageIndex={pageIndex}
-            lineIndex={lineIndex}
-            lineKey={key}
-            words={lines[key]}
-            key={key}
-            isBigTextLayout={isBigTextLayout}
-            quranReaderStyles={quranReaderStyles}
-            bookmarksRangeUrl={bookmarksRangeUrl}
-            pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
-          />
-        ))}
-        <PageFooter page={pageNumber} />
-      </div>
-    </PageQuestionsContext.Provider>
+    <div
+      id={`page-${pageNumber}`}
+      className={classNames(styles.container, {
+        [styles.mobileCenterText]: isBigTextLayout,
+        [styles[getLineWidthClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
+          !isFontLoaded,
+      })}
+    >
+      {chapterHeader}
+      {Object.keys(lines).map((key, lineIndex) => (
+        <Line
+          pageIndex={pageIndex}
+          lineIndex={lineIndex}
+          lineKey={key}
+          words={lines[key]}
+          key={key}
+          isBigTextLayout={isBigTextLayout}
+          quranReaderStyles={quranReaderStyles}
+          bookmarksRangeUrl={bookmarksRangeUrl}
+          pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
+        />
+      ))}
+      <PageFooter page={pageNumber} />
+    </div>
   );
 };
 

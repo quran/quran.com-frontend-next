@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
-import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
@@ -38,10 +37,6 @@ interface BottomActionsProps {
    * Whether this is in translation view
    */
   isTranslationView?: boolean;
-  /**
-   * Whether this verse has questions (passed from parent to ensure memo re-renders)
-   */
-  hasQuestions?: boolean;
 }
 
 /**
@@ -49,22 +44,18 @@ interface BottomActionsProps {
  * @param {BottomActionsProps} props - Component props
  * @returns {JSX.Element} The rendered component
  */
-const BottomActions = ({
-  verseKey,
-  isTranslationView = true,
-  hasQuestions: hasQuestionsProp,
-}: BottomActionsProps): JSX.Element => {
+const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const questionsData = usePageQuestions();
-  // Use prop if provided (from memoized parent), otherwise compute from context
-  // Only show Answers tab when we confirm questions exist (not while loading)
-  const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-  // Modal state using enum (for Answers only now)
-  const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
+
+  // Fetch questions data directly - SWR handles deduplication automatically
+  const { data: questionsData } = useBatchedCountRangeQuestions(verseKey);
+
+  // Only show Answers tab when we confirm questions exist
+  const hasQuestions = questionsData?.total > 0;
+  const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
   /**
    * Handle tab click or keyboard event
@@ -82,8 +73,7 @@ const BottomActions = ({
       } else if (tabType === TabId.LESSONS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
       } else if (tabType === TabId.ANSWERS) {
-        // Answers still uses the separate Q&A modal
-        setOpenedModal(ModalType.QUESTIONS);
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
       }
 
       logButtonClick(
@@ -134,14 +124,6 @@ const BottomActions = ({
   return (
     <>
       <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
-
-      <BottomActionsModals
-        verseKey={verseKey}
-        openedModal={openedModal}
-        hasQuestions={hasQuestions}
-        isTranslationView={isTranslationView}
-        onCloseModal={() => setOpenedModal(null)}
-      />
     </>
   );
 };
