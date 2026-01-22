@@ -3,6 +3,12 @@ import { useCallback, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR, { useSWRConfig } from 'swr';
 
+import {
+  UseBookmarkCollectionsProps,
+  UseBookmarkCollectionsReturn,
+  toSafeArray,
+} from './useBookmarkCollections.types';
+
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import {
@@ -18,36 +24,6 @@ import {
 } from '@/utils/auth/apiPaths';
 import { isBookmarkSyncError } from '@/utils/auth/errors';
 import mutatingFetcherConfig from '@/utils/swr';
-import BookmarkType from 'types/BookmarkType';
-
-interface UseBookmarkCollectionsProps {
-  mushafId: number;
-  key: number;
-  type: BookmarkType;
-  verseNumber?: number;
-  bookmarksRangeUrl?: string;
-}
-
-interface UseBookmarkCollectionsReturn {
-  collectionIds: string[];
-  isReady: boolean;
-  addToCollection: (collectionId: string) => Promise<boolean>;
-  removeFromCollection: (collectionId: string) => Promise<boolean>;
-  mutateBookmarkCollections: (newIds?: string[]) => void;
-}
-
-const toSafeArray = (value: unknown): string[] => {
-  if (Array.isArray(value)) return value;
-  if (
-    value !== null &&
-    typeof value === 'object' &&
-    'data' in value &&
-    Array.isArray((value as { data: unknown }).data)
-  ) {
-    return (value as { data: string[] }).data;
-  }
-  return [];
-};
 
 const useBookmarkCollections = ({
   mushafId,

@@ -92,38 +92,16 @@ export const quranReaderStylesSlice = createSlice({
       const isUsingDefaultFont =
         defaultQuranStylesForLocale.quranFont === quranFont &&
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
-      switch (quranFont) {
-        case QuranFont.MadaniV1:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
-        case QuranFont.IndoPak:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
-        default:
-          return {
-            ...state,
-            quranFont,
-            isUsingDefaultFont,
-          };
-      }
+      return { ...state, quranFont, isUsingDefaultFont };
     },
   },
-  // reset the state to the initial state
-  // when `reset` action is dispatched
+  // reset the state to the initial state when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getQuranReaderStylesInitialState(action.payload.locale);
     });
     builder.addCase(syncUserPreferences, (state, action) => {
-      const {
-        payload: { userPreferences, locale },
-      } = action;
+      const { userPreferences, locale } = action.payload;
       const remotePreferences = userPreferences[
         PreferenceGroup.QURAN_READER_STYLES
       ] as QuranReaderStyles;

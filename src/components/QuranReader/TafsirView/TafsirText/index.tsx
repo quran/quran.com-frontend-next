@@ -23,7 +23,7 @@ type TafsirTextProps = {
   direction: string;
   languageCode: string;
   text: string;
-  showFontControl?: boolean;
+  shouldShowFontControl?: boolean;
 };
 
 const FONT_SIZE_CLASS_MAP = {
@@ -38,7 +38,7 @@ const TafsirText: React.FC<TafsirTextProps> = ({
   direction,
   languageCode,
   text,
-  showFontControl = true,
+  shouldShowFontControl = true,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const {
@@ -87,7 +87,7 @@ const TafsirText: React.FC<TafsirTextProps> = ({
   };
   return (
     <>
-      {showFontControl && (
+      {shouldShowFontControl && (
         <div dir={direction} className={styles.counter}>
           <SpinnerContainer isLoading={isLoading}>
             <Counter
