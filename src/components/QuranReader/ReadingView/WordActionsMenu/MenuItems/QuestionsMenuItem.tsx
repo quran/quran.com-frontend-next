@@ -4,9 +4,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
-import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
@@ -21,12 +21,12 @@ interface Props {
 }
 
 const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
-  const questionsData = usePageQuestions();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const { verseKey } = verse;
-  const hasQuestions = !!questionsData && questionsData[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
+  const { data: questionsData } = useBatchedCountRangeQuestions(verseKey);
+  const hasQuestions = !!questionsData && questionsData.total > 0;
+  const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
   const onMenuItemClicked = () => {
     logButtonClick('reading_view_verse_actions_menu_questions');

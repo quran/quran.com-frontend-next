@@ -61,7 +61,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
-  const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
+  const hasNotes = !!notesCount && notesCount[verse.verseKey] > 0;
 
   // Show chapter header when:
   // 1. It's a single verse view (QuranReaderDataType.Verse) - always show the header
