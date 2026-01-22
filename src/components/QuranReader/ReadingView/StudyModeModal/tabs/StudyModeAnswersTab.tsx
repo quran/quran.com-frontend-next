@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,6 +8,7 @@ import styles from './StudyModeAnswersTab.module.scss';
 import StudyModeTabLayout, { useStudyModeTabScroll } from './StudyModeTabLayout';
 
 import QuestionsList from '@/components/QuestionAndAnswer/QuestionsList';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useQuestionsPagination from '@/hooks/useQuestionsPagination';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -18,10 +19,15 @@ import { makeVerseKey } from '@/utils/verse';
 interface StudyModeAnswersTabProps {
   chapterId: string;
   verseNumber: string;
+  switchTab?: (tabId: StudyModeTabId | null) => void;
 }
 
-const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, verseNumber }) => {
-  const { t, lang } = useTranslation('common');
+const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
+  chapterId,
+  verseNumber,
+  switchTab,
+}) => {
+  const { lang } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { containerRef } = useStudyModeTabScroll();
 
@@ -35,16 +41,15 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({ chapterId, ve
     language: lang as Language,
   });
 
+  // Auto-close tab when there are no answered questions
+  useEffect(() => {
+    if (!isLoading && (!questions || questions.length === 0) && switchTab) {
+      switchTab(null);
+    }
+  }, [isLoading, questions, switchTab]);
+
   const renderBody = () => {
     if (isLoading) return <TafsirSkeleton />;
-
-    if (!questions || questions.length === 0) {
-      return (
-        <div className={classNames(styles.notAvailableMessage, scaleClass)}>
-          {t('quran-reader:questions-not-available')}
-        </div>
-      );
-    }
 
     return (
       <div className={classNames(styles.answersContainer, scaleClass)}>

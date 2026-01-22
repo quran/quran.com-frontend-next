@@ -1,12 +1,10 @@
+/* eslint-disable max-lines */
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import Translation from 'types/Translation';
-import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 import getTranslationsLabelString from '../utils/translation';
 
@@ -15,14 +13,21 @@ import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions
 import StudyModeVerseText from './StudyModeVerseText';
 import WordNavigationBox from './WordNavigationBox';
 
+import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
+import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
+import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { constructWordVerse, getVerseWords } from '@/utils/verse';
+import Translation from 'types/Translation';
+import Verse from 'types/Verse';
+import Word from 'types/Word';
 
 const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   ssr: false,
@@ -43,7 +48,14 @@ const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), 
 
 // Tab component lookup map for dynamic rendering
 const TAB_COMPONENTS: Partial<
-  Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
+  Record<
+    StudyModeTabId,
+    React.ComponentType<{
+      chapterId: string;
+      verseNumber: string;
+      switchTab?: (tabId: StudyModeTabId | null) => void;
+    }>
+  >
 > = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
@@ -98,6 +110,21 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   const [hasScrolledDown, setHasScrolledDown] = useState(false);
   const [hasScrollableContent, setHasScrollableContent] = useState(false);
   const [hasScrolledToTab, setHasScrolledToTab] = useState(false);
+
+  // Fetch question count for the current verse (batched in groups of 10)
+  const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
+  const { data: questionData, isLoading: isLoadingQuestions } =
+    useBatchedCountRangeQuestions(verseKey);
+
+  // Check if questions exist and their type
+  const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
+  const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
+
+  useEffect(() => {
+    if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
+      onTabChange?.(null);
+    }
+  }, [activeTab, hasQuestions, onTabChange]);
 
   // Check if content is scrollable and detect scroll
   useEffect(() => {
@@ -193,16 +220,16 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
     {
       id: StudyModeTabId.REFLECTIONS,
       label: t('reflections'),
-      icon: <LightbulbIcon />,
+      icon: <ChatIcon />,
       onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
       condition: true,
     },
     {
       id: StudyModeTabId.ANSWERS,
       label: t('answers'),
-      icon: <LightbulbIcon />,
+      icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
-      condition: true,
+      condition: hasQuestions,
     },
   ];
 
@@ -274,9 +301,14 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
         TAB_COMPONENTS[activeTab] &&
         (() => {
           const TabComponent = TAB_COMPONENTS[activeTab];
+
           return (
             <div ref={tabContentRef} className={styles.tabContentContainer}>
-              <TabComponent chapterId={selectedChapterId} verseNumber={selectedVerseNumber} />
+              <TabComponent
+                chapterId={selectedChapterId}
+                verseNumber={selectedVerseNumber}
+                switchTab={onTabChange}
+              />
             </div>
           );
         })()}
