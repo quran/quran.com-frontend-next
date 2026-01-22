@@ -45,6 +45,7 @@
     "play-surah": "播放古兰经{{surahName}}",
     "select-lng": "选择语言",
     "sidebar-nav-close": "关闭导航侧边栏",
+    "tooltip-action": "工具提示操作",
     "translation-info": "查看翻译信息"
   },
   "audio": {

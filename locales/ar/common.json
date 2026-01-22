@@ -45,6 +45,7 @@
     "play-surah": "تشغيل السورة {{surahName}}",
     "select-lng": "اختر اللغة",
     "sidebar-nav-close": "اغلق القائمة الجانبية",
+    "tooltip-action": "إجراء تلميح الأداة",
     "translation-info": "عرض معلومات الترجمة"
   },
   "audio": {

@@ -45,6 +45,7 @@
     "play-surah": "Putar Surah {{SurahName}}",
     "select-lng": "Pilih Bahasa",
     "sidebar-nav-close": "Tutup Sidebar Navigasi",
+    "tooltip-action": "Aksi tooltip",
     "translation-info": "Lihat informasi terjemahan"
   },
   "audio": {

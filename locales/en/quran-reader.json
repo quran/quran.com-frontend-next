@@ -18,7 +18,6 @@
     "read-ayah-refls": "Read Ayah Reflections",
     "read-tafsirs": "Read Ayah Tafsirs"
   },
-  "study-mode": "Study mode",
   "ayatul-kursi": "Ayatul Kursi",
   "back-to-ayah": "Back to Ayah",
   "below-word": "Below word:",
@@ -135,7 +134,9 @@
   "select-chapter": "Select Chapter",
   "select-range": "Select verses range",
   "select-verses": "Select Verse",
+  "selected-count": "{{count}} selected",
   "share-your-reflection": "Share your reflection on this ayah",
+  "study-mode": "Study mode",
   "surah-beginning": "Beginning of Surah",
   "surah-info": "Surah Info",
   "tafkhim": "Tafkhim (heavy)",
@@ -158,6 +159,5 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
-  "selected-count": "{{count}} selected"
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
 }
