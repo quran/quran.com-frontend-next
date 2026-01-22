@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import { setIsExpanded } from '@/redux/slices/CommandBar/state';
 import {
   selectMicrophoneActive,
@@ -62,8 +63,7 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
         try {
           sharedSpeechRecognitionInstance.stop();
         } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error('Error stopping speech recognition', error);
+          logErrorToSentry('Error stopping speech recognition', error);
         }
         sharedSpeechRecognitionInstance = null;
         speechRecRef.current = null;
@@ -101,8 +101,7 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
       speechRecRef.current.stop();
       logButtonClick('voice_search_stop');
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error stopping speech recognition', error);
+      logErrorToSentry('Error stopping speech recognition', error);
     }
 
     // Update Redux state
@@ -168,8 +167,7 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
         try {
           sharedSpeechRecognitionInstance.stop();
         } catch (error) {
-          // eslint-disable-next-line no-console
-          console.error('Error stopping speech recognition', error);
+          logErrorToSentry('Error stopping speech recognition', error);
         }
       }
       speechRecRef.current = createSpeechRecognition(createSpeechRecognitionConfig());
