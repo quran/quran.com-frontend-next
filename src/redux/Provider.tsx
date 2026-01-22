@@ -1,6 +1,5 @@
 import React, { useContext, useMemo, useEffect } from 'react';
 
-import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -8,14 +7,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { RootState } from './RootState';
 import getStore from './store';
 
-import syncUserPreferences from '@/redux/actions/sync-user-preferences';
-import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
-import { setLocaleCookie } from '@/utils/cookies';
+import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import isClient from '@/utils/isClient';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -86,27 +82,18 @@ const ReduxProvider = ({
   const onBeforeLift = async () => {
     if (isClient && isLoggedIn()) {
       try {
-        const userPreferences = await getUserPreferences();
-        // if the user has no preferences, apply guest defaults
-        if (Object?.keys(userPreferences)?.length === 0) {
-          applyGuestDefaults();
-          return;
-        }
+        const { hasRemotePreferences } = await syncPreferencesFromServer({
+          locale,
+          dispatch: store.dispatch,
+          audioService,
+        });
 
-        const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
-        if (remoteLocale) {
-          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
-          setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
+        if (!hasRemotePreferences) {
+          applyGuestDefaults();
         }
-        store.dispatch(syncUserPreferences(userPreferences, locale));
-        const audioPlayerContext = audioService.getSnapshot().context;
-        const playbackRate =
-          userPreferences[PreferenceGroup.AUDIO]?.playbackRate || audioPlayerContext.playbackRate;
-        const reciterId =
-          userPreferences[PreferenceGroup.AUDIO]?.reciter || audioPlayerContext.reciterId;
-        setAudioPlayerContext(playbackRate, reciterId, audioPlayerContext.volume);
-        // eslint-disable-next-line no-empty
-      } catch (error) {}
+      } catch (error) {
+        applyGuestDefaults();
+      }
     } else {
       applyGuestDefaults();
     }
