@@ -305,6 +305,17 @@ export default {
       reflectionFontScale:
         state.quranReaderStyles.reflectionFontScale ??
         initialState.quranReaderStyles.reflectionFontScale,
+      lessonFontScale:
+        state.quranReaderStyles.lessonFontScale ?? initialState.quranReaderStyles.lessonFontScale,
+    },
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedReflectionLanguages:
+        state.readingPreferences.selectedReflectionLanguages ??
+        initialState.readingPreferences.selectedReflectionLanguages,
+      selectedLessonLanguages:
+        state.readingPreferences.selectedLessonLanguages ??
+        initialState.readingPreferences.selectedLessonLanguages,
     },
   }),
 };

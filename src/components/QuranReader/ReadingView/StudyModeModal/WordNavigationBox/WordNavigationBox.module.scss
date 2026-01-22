@@ -33,17 +33,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-micro2-px);
 }
 
 .label {
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
-  min-inline-size: calc(var(--spacing-xlarge-px) * 2);
   flex-shrink: 0;
-
-  @include breakpoints.tablet {
-    min-inline-size: var(--spacing-mega-px);
-  }
 }
 
 .text {

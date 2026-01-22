@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useCallback, useContext, useMemo, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -10,6 +11,7 @@ import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import CaretIcon from '@/icons/caret-down.svg';
 import CloseIcon from '@/icons/close.svg';
 import SearchIcon from '@/icons/search.svg';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type SelectionMode = 'none' | 'chapter' | 'verse';
@@ -35,33 +37,27 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Get current chapter name for display
   const currentChapter = chaptersData[Number(selectedChapterId)];
   const chapterDisplayText = currentChapter?.transliteratedName || `Surah ${selectedChapterId}`;
   const verseDisplayText = toLocalizedNumber(Number(selectedVerseNumber), lang);
 
-  // Reset search when closing
   const handleClose = useCallback(() => {
+    logButtonClick('study_mode_selector_close', { mode: selectionMode });
     setSelectionMode('none');
     setSearchQuery('');
-  }, []);
+  }, [selectionMode]);
 
-  // Close when clicking outside
   useOutsideClickDetector(containerRef, handleClose, selectionMode !== 'none');
 
-  // Focus input when selection mode changes
   useEffect(() => {
     if (selectionMode !== 'none' && inputRef.current) {
       inputRef.current.focus();
     }
   }, [selectionMode]);
 
-  // Filter chapters based on search
   const filteredChapters = useMemo(() => {
     if (!chaptersData) return [];
-
     const query = searchQuery.toLowerCase().trim();
-
     return Object.entries(chaptersData)
       .filter(([id, chapter]) => {
         if (!query) return true;
@@ -75,7 +71,6 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
       }));
   }, [chaptersData, searchQuery]);
 
-  // Generate verse options for selected chapter
   const verseOptions = useMemo(() => {
     if (!currentChapter) return [];
     const verses = [];
@@ -85,7 +80,6 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
     return verses;
   }, [currentChapter]);
 
-  // Filter verses based on search
   const filteredVerses = useMemo(() => {
     const query = searchQuery.trim();
     if (!query) return verseOptions;
@@ -93,32 +87,37 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   }, [verseOptions, searchQuery]);
 
   const handleChapterClick = useCallback(() => {
+    logButtonClick('study_mode_chapter_selector_open');
     setSelectionMode('chapter');
     setSearchQuery('');
   }, []);
 
   const handleVerseClick = useCallback(() => {
+    logButtonClick('study_mode_verse_selector_open');
     setSelectionMode('verse');
     setSearchQuery('');
   }, []);
 
   const handleSelectChapter = useCallback(
     (chapterId: string) => {
+      logValueChange('study_mode_chapter', selectedChapterId, chapterId);
       onChapterChange(chapterId);
-      onVerseChange('1');
       setSelectionMode('none');
       setSearchQuery('');
     },
-    [onChapterChange, onVerseChange],
+    [onChapterChange, selectedChapterId],
   );
 
   const handleSelectVerse = useCallback(
     (verseNumber: number) => {
+      logValueChange('study_mode_verse', selectedVerseNumber, verseNumber.toString(), {
+        chapterId: selectedChapterId,
+      });
       onVerseChange(verseNumber.toString());
       setSelectionMode('none');
       setSearchQuery('');
     },
-    [onVerseChange],
+    [onVerseChange, selectedVerseNumber, selectedChapterId],
   );
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -150,7 +149,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
               type="button"
               className={styles.closeButton}
               onClick={handleClose}
-              aria-label="Close"
+              aria-label={t('aria.close')}
             >
               <CloseIcon />
             </button>

@@ -25,6 +25,8 @@ interface Props {
 /**
  * Action component for saving verses to collections.
  * Dispatches Redux action to open the modal in VerseActionModalContainer.
+ *
+ * @returns {React.ReactElement} The save to collection menu component.
  */
 const SaveToCollectionAction: React.FC<Props> = ({
   verse,
@@ -76,6 +78,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
   return (
     <PopoverMenu.Item
       onClick={onMenuClicked}
+      shouldCloseMenuAfterClick
       icon={
         <IconContainer
           icon={<PlusIcon />}

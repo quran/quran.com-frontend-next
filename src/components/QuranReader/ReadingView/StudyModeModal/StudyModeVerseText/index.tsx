@@ -54,12 +54,10 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
 
   const handleWordClick = useCallback(
     (word: Word) => {
-      // Only allow clicking on Quranic words, not end markers
       if (word.charTypeName !== CharType.Word) {
         return;
       }
 
-      // Handle recitation if enabled
       if (isRecitationEnabled) {
         const currentState = audioService.getSnapshot();
         const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
@@ -78,7 +76,6 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
         }
       }
 
-      // Call the onWordClick handler to update word navigation box
       if (onWordClick) {
         onWordClick(word);
       }

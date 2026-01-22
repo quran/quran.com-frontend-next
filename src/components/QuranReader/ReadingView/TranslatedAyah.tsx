@@ -9,7 +9,11 @@ import InlineFootnote from './InlineFootnote';
 import styles from './TranslatedAyah.module.scss';
 
 import { logErrorToSentry } from '@/lib/sentry';
-import { openStudyMode, selectStudyModeIsOpen, selectStudyModeVerseKey } from '@/redux/slices/QuranReader/studyMode';
+import {
+  openStudyMode,
+  selectStudyModeIsOpen,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
 import { getFootnote } from 'src/api';
@@ -23,7 +27,6 @@ type TranslatedAyahProps = {
   languageId: number;
   lang: string;
   isLastVerse?: boolean;
-  bookmarksRangeUrl?: string | null;
 };
 
 /**
@@ -38,7 +41,6 @@ const TranslatedAyah: React.FC<TranslatedAyahProps> = ({
   languageId,
   lang,
   isLastVerse = false,
-  bookmarksRangeUrl,
 }) => {
   const dispatch = useDispatch();
   const studyModeIsOpen = useSelector(selectStudyModeIsOpen);

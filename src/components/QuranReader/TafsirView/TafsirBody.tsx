@@ -53,7 +53,7 @@ type TafsirBodyProps = {
   shouldRender?: boolean;
   showArabicText?: boolean;
   showNavigation?: boolean;
-  showFontControl?: boolean;
+  shouldShowFontControl?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -70,7 +70,7 @@ const TafsirBody = ({
   shouldRender,
   showArabicText = true,
   showNavigation = true,
-  showFontControl = true,
+  shouldShowFontControl = true,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
@@ -89,6 +89,12 @@ const TafsirBody = ({
   const [selectedTafsirIdOrSlug, setSelectedTafsirIdOrSlug] = useState<number | string>(
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
+
+  // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
+  useEffect(() => {
+    setSelectedChapterId(initialChapterId);
+    setSelectedVerseNumber(initialVerseNumber);
+  }, [initialChapterId, initialVerseNumber]);
 
   // if user opened tafsirBody via a url, we will have initialTafsirIdOrSlug
   // we need to set this `initialTafsirIdOrSlug` as a selectedTafsirIdOrSlug
@@ -248,7 +254,7 @@ const TafsirBody = ({
               direction={langData.direction}
               languageCode={langData.code}
               text={text}
-              showFontControl={showFontControl}
+              shouldShowFontControl={shouldShowFontControl}
             />
           )}
           {showNavigation && (
@@ -269,7 +275,7 @@ const TafsirBody = ({
       selectedChapterId,
       selectedTafsirIdOrSlug,
       showArabicText,
-      showFontControl,
+      shouldShowFontControl,
       showNavigation,
       t,
     ],

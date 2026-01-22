@@ -72,7 +72,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   };
 
   const handleStudyModeOpen = (tabId: StudyModeTabId, targetVerseKey: string) => {
-    dispatch(openStudyMode({ verseKey: targetVerseKey, initialTab: tabId }));
+    dispatch(openStudyMode({ verseKey: targetVerseKey, activeTab: tabId }));
   };
 
   const handleCloseModal = () => {

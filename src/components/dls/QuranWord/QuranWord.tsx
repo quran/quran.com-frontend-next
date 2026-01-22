@@ -42,7 +42,6 @@ import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import Verse from 'types/Verse';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -71,11 +70,9 @@ export type QuranWordProps = {
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
-  bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
   isWordInteractionDisabled?: boolean;
   shouldForceShowTooltip?: boolean;
-  verse?: Verse;
 };
 
 const QuranWord = ({
@@ -85,14 +82,12 @@ const QuranWord = ({
   isAudioHighlightingAllowed = true,
   isHighlighted,
   isFontLoaded = true,
-  bookmarksRangeUrl,
   tooltipType,
   isWordInteractionDisabled = false,
   shouldForceShowTooltip = false,
-  verse,
 }: QuranWordProps) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const isMobile = useIsMobile();
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -217,7 +212,15 @@ const QuranWord = ({
     }
 
     handleWordAction();
-  }, [word.charTypeName, word.location, word.verseKey, isRecitationEnabled, isMobile, handleWordAction, dispatch]);
+  }, [
+    word.charTypeName,
+    word.location,
+    word.verseKey,
+    isRecitationEnabled,
+    isMobile,
+    handleWordAction,
+    dispatch,
+  ]);
 
   const onClick = useCallback(
     (e: React.MouseEvent) => {
@@ -322,7 +325,7 @@ const QuranWord = ({
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
                 tooltipType={tooltipType || TooltipType.SUCCESS}
-                shouldContentBeClickable={isMobile && !isRecitationEnabled}
+                shouldContentBeClickable
                 onIconClick={handleOpenStudyMode}
                 iconAriaLabel={t('aria.open-study-mode')}
               >

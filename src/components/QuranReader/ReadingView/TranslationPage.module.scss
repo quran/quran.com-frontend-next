@@ -1,5 +1,3 @@
-@use 'src/styles/breakpoints';
-
 $translation-content-max-width: 600px;
 
 .container {
@@ -7,7 +5,7 @@ $translation-content-max-width: 600px;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-large-px);
-  padding: var(--spacing-large-px) var(--spacing-medium-plus-px);
+  padding-block-end: var(--spacing-medium2-px);
   inline-size: 100%;
   box-sizing: border-box;
 
@@ -23,16 +21,12 @@ $translation-content-max-width: 600px;
 .translationContent {
   max-inline-size: $translation-content-max-width;
   inline-size: 100%;
-  text-align: justify;
+  text-align: start;
   font-family: 'Figtree', var(--font-primary);
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-large);
   line-height: 180%;
   color: var(--color-text-default);
-
-  @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-small2-px);
-  }
 }
 
 .pageFooter {

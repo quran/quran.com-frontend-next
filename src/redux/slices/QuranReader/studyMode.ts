@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 
 export type PreviousStudyModeState = {
   verseKey: string;
@@ -58,10 +58,13 @@ const studyMode = createSlice({
       return initialState;
     },
     setActiveTab: (state, { payload }: PayloadAction<StudyModeTabId | null>) => {
-      state.activeTab = payload;
+      return { ...state, activeTab: payload };
+    },
+    setVerseKey: (state, { payload }: PayloadAction<string>) => {
+      return { ...state, verseKey: payload };
     },
     setHighlightedWordLocation: (state, { payload }: PayloadAction<string | null>) => {
-      state.highlightedWordLocation = payload;
+      return { ...state, highlightedWordLocation: payload };
     },
     saveAndCloseStudyMode: (state) => {
       if (!state.verseKey) {
@@ -110,6 +113,7 @@ export const {
   closeStudyMode,
   resetStudyModeState,
   setActiveTab,
+  setVerseKey,
   setHighlightedWordLocation,
   saveAndCloseStudyMode,
   restoreStudyMode,

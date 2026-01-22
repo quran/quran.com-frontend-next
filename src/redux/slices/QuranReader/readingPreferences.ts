@@ -89,6 +89,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedReflectionLanguages: action.payload,
     }),
+    setLessonLanguages: (state, action: PayloadAction<string[]>) => ({
+      ...state,
+      selectedLessonLanguages: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (unusedState, action) =>
@@ -113,6 +117,7 @@ export const readingPreferencesSlice = createSlice({
         isUsingDefaultWordByWordLocale: remote.selectedWordByWordLocale === defLocale,
         selectedReflectionLanguages:
           remote.selectedReflectionLanguages ?? state.selectedReflectionLanguages,
+        selectedLessonLanguages: remote.selectedLessonLanguages ?? state.selectedLessonLanguages,
       };
     });
   },
@@ -128,6 +133,7 @@ export const {
   setWordByWordDisplay,
   setSelectedReadingTranslation,
   setReflectionLanguages,
+  setLessonLanguages,
 } = readingPreferencesSlice.actions;
 
 export const selectInlineDisplayWordByWordPreferences = (state: RootState) => {
@@ -195,5 +201,7 @@ export const selectLastUsedReadingMode = (state: RootState) =>
   state.readingPreferences.lastUsedReadingMode;
 export const selectReflectionLanguages = (state: RootState) =>
   state.readingPreferences.selectedReflectionLanguages;
+export const selectLessonLanguages = (state: RootState) =>
+  state.readingPreferences.selectedLessonLanguages;
 
 export default readingPreferencesSlice.reducer;

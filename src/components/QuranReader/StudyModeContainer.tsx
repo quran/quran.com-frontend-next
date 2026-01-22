@@ -22,6 +22,8 @@ const StudyModeModal = dynamic(() => import('./ReadingView/StudyModeModal'), { s
  *
  * Mount this component once in the QuranReaderView so the modal is
  * accessible from all entry points.
+ *
+ * @returns {React.ReactElement | null} The StudyModeModal when open, null otherwise.
  */
 const StudyModeContainer: React.FC = () => {
   const dispatch = useDispatch();

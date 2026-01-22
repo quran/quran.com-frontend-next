@@ -1,9 +1,13 @@
+@use 'src/styles/breakpoints';
 // Main container with position relative for dropdown positioning
 .container {
   position: relative;
   display: flex;
   align-items: center;
   padding-inline-start: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    padding-inline-start: 0;
+  }
 }
 
 // Collapsed view - shows chapter verse buttons
@@ -45,7 +49,7 @@ svg.caretIcon {
 // Dropdown container - absolute positioned
 .dropdownContainer {
   position: absolute;
-  top: 0px;
+  inset-block-start: 0px;
   inset-inline-start: 0;
   z-index: var(--z-index-dropdown);
   background-color: var(--color-background-default);
@@ -103,8 +107,8 @@ svg.caretIcon {
 }
 
 .searchIcon {
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   color: var(--color-text-faded);
   flex-shrink: 0;
 }
@@ -124,7 +128,7 @@ svg.caretIcon {
 }
 
 .listContainer {
-  max-height: 200px;
+  max-block-size: 200px;
   overflow-y: auto;
   margin: var(--spacing-small-px);
 }
@@ -132,7 +136,7 @@ svg.caretIcon {
 .listItem {
   display: flex;
   align-items: center;
-  width: 100%;
+  inline-size: 100%;
   padding-inline: var(--spacing-small-px);
   padding-block: var(--spacing-xsmall-px);
   background: transparent;

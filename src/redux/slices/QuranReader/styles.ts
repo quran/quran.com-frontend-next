@@ -13,6 +13,7 @@ export const MAXIMUM_QURAN_FONT_STEP = 10;
 export const MAXIMUM_TRANSLATIONS_FONT_STEP = 10;
 export const MAXIMUM_TAFSIR_FONT_STEP = 10;
 export const MAXIMUM_REFLECTION_FONT_STEP = 10;
+export const MAXIMUM_LESSON_FONT_STEP = 10;
 export const MAXIMUM_WORD_BY_WORD_FONT_STEP = 6;
 export const MINIMUM_FONT_STEP = 1;
 
@@ -52,6 +53,14 @@ export const quranReaderStylesSlice = createSlice({
       ...state,
       reflectionFontScale: (state.reflectionFontScale ?? 3) - 1,
     }),
+    increaseLessonFontScale: (state) => ({
+      ...state,
+      lessonFontScale: (state.lessonFontScale ?? 3) + 1,
+    }),
+    decreaseLessonFontScale: (state) => ({
+      ...state,
+      lessonFontScale: (state.lessonFontScale ?? 3) - 1,
+    }),
     increaseWordByWordFontScale: (state) => ({
       ...state,
       wordByWordFontScale: state.wordByWordFontScale + 1,
@@ -60,14 +69,8 @@ export const quranReaderStylesSlice = createSlice({
       ...state,
       wordByWordFontScale: state.wordByWordFontScale - 1,
     }),
-    increaseQnaFontScale: (state) => ({
-      ...state,
-      qnaFontScale: (state.qnaFontScale ?? 3) + 1,
-    }),
-    decreaseQnaFontScale: (state) => ({
-      ...state,
-      qnaFontScale: (state.qnaFontScale ?? 3) - 1,
-    }),
+    increaseQnaFontScale: (state) => ({ ...state, qnaFontScale: (state.qnaFontScale ?? 3) + 1 }),
+    decreaseQnaFontScale: (state) => ({ ...state, qnaFontScale: (state.qnaFontScale ?? 3) - 1 }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
@@ -91,26 +94,16 @@ export const quranReaderStylesSlice = createSlice({
       const isUsingDefaultFont =
         defaultQuranStylesForLocale.quranFont === quranFont &&
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
-      switch (quranFont) {
-        case QuranFont.MadaniV1:
-          return { ...state, quranFont, isUsingDefaultFont };
-        case QuranFont.IndoPak:
-          return { ...state, quranFont, isUsingDefaultFont };
-        default:
-          return { ...state, quranFont, isUsingDefaultFont };
-      }
+      return { ...state, quranFont, isUsingDefaultFont };
     },
   },
-  // reset the state to the initial state
-  // when `reset` action is dispatched
+  // reset the state to the initial state when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getQuranReaderStylesInitialState(action.payload.locale);
     });
     builder.addCase(syncUserPreferences, (state, action) => {
-      const {
-        payload: { userPreferences, locale },
-      } = action;
+      const { userPreferences, locale } = action.payload;
       const remotePreferences = userPreferences[
         PreferenceGroup.QURAN_READER_STYLES
       ] as QuranReaderStyles;
@@ -135,6 +128,8 @@ export const {
   decreaseTafsirFontScale,
   increaseReflectionFontScale,
   decreaseReflectionFontScale,
+  increaseLessonFontScale,
+  decreaseLessonFontScale,
   setQuranFont,
   increaseQuranTextFontScale,
   decreaseQuranTextFontScale,

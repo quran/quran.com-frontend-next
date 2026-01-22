@@ -110,6 +110,7 @@ const ReflectionBody: React.FC<Props> = ({
           reflection={reflection}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
+          contentType={selectedContentType}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>

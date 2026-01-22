@@ -30,11 +30,7 @@
   svg {
     block-size: var(--spacing-small);
     inline-size: var(--spacing-small);
-
-    // arrow.svg has hard coded fill color, so we need to override it
-    path {
-      fill: var(--color-text-faded-new);
-    }
+    color: var(--color-text-faded-new);
   }
 }
 

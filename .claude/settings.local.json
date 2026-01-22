@@ -54,7 +54,13 @@
       "Bash(fi)",
       "Bash(__NEW_LINE__ echo \"\")",
       "Bash(git cherry-pick:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(gh pr close:*)",
+      "Bash(git worktree:*)",
+      "Bash(yarn stylelint:*)",
+      "Bash(python3:*)",
+      "Bash(yarn tsc:*)",
+      "Bash(npx stylelint:*)"
     ]
   }
 }

@@ -17,6 +17,7 @@ type ReadingPreferences = {
   selectedReadingTranslation: string | null;
   lastUsedReadingMode: ReadingPreference.Reading | ReadingPreference.ReadingTranslation;
   selectedReflectionLanguages: string[];
+  selectedLessonLanguages: string[];
 };
 
 export default ReadingPreferences;

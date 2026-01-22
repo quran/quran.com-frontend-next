@@ -84,13 +84,10 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   return (
     <PopoverMenu.Item
       icon={
-        <IconContainer
-          icon={<FeedbackIcon />}
-          color={IconColor.tertiary}
-          size={IconSize.Custom}
-        />
+        <IconContainer icon={<FeedbackIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       }
       onClick={handleClick}
+      shouldCloseMenuAfterClick
       dataTestId="verse-actions-menu-translation-feedback"
     >
       {t('translation-feedback.title')}

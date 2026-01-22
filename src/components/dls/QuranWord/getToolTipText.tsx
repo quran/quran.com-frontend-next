@@ -15,7 +15,7 @@ import Word from 'types/Word';
 const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode => (
   <div className={styles.tooltipContent}>
     {showTooltipFor.map((tooltipTextType) => (
-      <p key={tooltipTextType} className={styles.tooltipText}>
+      <p key={tooltipTextType} className={styles.tooltipText} dir="auto">
         {word[tooltipTextType].text}
       </p>
     ))}

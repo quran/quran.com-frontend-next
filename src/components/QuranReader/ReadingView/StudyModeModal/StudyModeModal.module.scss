@@ -6,7 +6,7 @@
 
 // Use div selector for higher specificity to override ContentModal defaults
 div.contentModal {
-  padding: var(--spacing-small);
+  padding: var(--spacing-medium-px);
   display: flex;
   flex-direction: column;
   block-size: auto;
@@ -15,10 +15,10 @@ div.contentModal {
   max-inline-size: 100%;
   overflow-x: hidden;
   border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
-
   @include breakpoints.tablet {
-    padding-block: var(--spacing-xlarge-px);
-    padding-inline:var(--spacing-large-px);
+    padding-inline: var(--spacing-large-px);
+    padding-block-start: var(--spacing-xlarge-px);
+    padding-block-end: var(--spacing-medium2-px);
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;
@@ -47,6 +47,7 @@ div.mobileBottomSheetOverlay {
   gap: var(--spacing-small-px);
   inline-size: 100%;
   flex-shrink: 0;
+  border-bottom: 1px solid var(--color-separators);
 
   @include breakpoints.tablet {
     padding-block-end: var(--spacing-medium2-px);
@@ -62,12 +63,14 @@ button.navButton {
   flex-shrink: 0;
   border-radius: var(--border-radius-xsmall-px);
   padding: var(--spacing-xsmall-px);
+  max-block-size: var(--spacing-large-px);
   background: var(--color-background-alternative-faint);
   background-color: var(--color-background-alternative-faint);
 
   svg {
     inline-size: var(--spacing-small-px);
     block-size: var(--spacing-small2-px);
+    color: var(--color-text-default);
   }
 
   &:hover,
@@ -119,6 +122,10 @@ button.nextButton {
 
 .modalHeader {
   padding-inline-end: 0;
+  @include breakpoints.smallerThanTablet {
+    padding:0;
+    padding-block-end: var(--spacing-medium-px);
+  }
 }
 
 .loadingContainer {
@@ -171,4 +178,95 @@ div.bottomSheetInnerContent {
     overflow-x: hidden;
     min-block-size: 0;
   }
+}
+
+// Skeleton styles
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding: var(--spacing-xsmall-px);
+}
+
+// Top actions row: split between left and right groups
+.skeletonTopActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--spacing-xsmall-px);
+}
+
+.skeletonLeftActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.skeletonRightActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.skeletonVerseKey {
+  block-size: var(--spacing-medium-px);
+  inline-size: calc(var(--spacing-mega-px) * 0.8);
+  border-radius: var(--border-radius-default);
+}
+
+.skeletonActionIcon {
+  block-size: var(--spacing-large-px);
+  inline-size: var(--spacing-large-px);
+  border-radius: var(--border-radius-circle);
+}
+
+// Arabic text area - right aligned
+.skeletonArabicArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-block: var(--spacing-medium-px);
+  padding-inline: var(--spacing-small-px);
+}
+
+.skeletonArabicLine {
+  block-size: var(--spacing-xlarge-px);
+  inline-size: 70%;
+  border-radius: var(--border-radius-default);
+}
+
+// Translation text area
+.skeletonTranslationArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall-px);
+  padding-inline: var(--spacing-small-px);
+  padding-block-end: var(--spacing-medium-px);
+}
+
+.skeletonTranslationLine {
+  block-size: var(--spacing-medium-px);
+  inline-size: 100%;
+  border-radius: var(--border-radius-default);
+}
+
+.skeletonTranslationLineShort {
+  block-size: var(--spacing-medium-px);
+  inline-size: 75%;
+  border-radius: var(--border-radius-default);
+}
+
+// Bottom tabs
+.skeletonBottomTabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-large-px);
+  padding-block: var(--spacing-small-px);
+  border-block-start: 1px solid var(--color-borders-hairline);
+}
+
+.skeletonTab {
+  block-size: var(--spacing-medium2-px);
+  inline-size: calc(var(--spacing-mega-px) * 1.2);
+  border-radius: var(--border-radius-default);
 }

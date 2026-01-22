@@ -4,6 +4,7 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 
 import styles from './Popover.module.scss';
+import PopoverContentBody from './PopoverContentBody';
 
 import { TooltipType } from '@/dls/Tooltip';
 
@@ -83,62 +84,19 @@ const Popover: React.FC<Props> = ({
       })}
       {...(stopPropagation && {
         onClick: (e) => e.stopPropagation(),
-        // Only stop propagation for non-navigation keys (example: Enter, Space)
         onKeyDown: (e) => {
-          // Allow Tab and Escape to propagate for accessibility
-          if (e.key !== 'Tab' && e.key !== 'Escape') {
-            e.stopPropagation();
-          }
+          if (e.key !== 'Tab' && e.key !== 'Escape') e.stopPropagation();
         },
       })}
     >
-      {shouldContentBeClickable ? (
-        <div
-          role="button"
-          tabIndex={0}
-          className={styles.clickableContent}
-          onClick={(e) => {
-            e.stopPropagation();
-            onIconClick?.();
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              e.stopPropagation();
-              onIconClick?.();
-            }
-          }}
-          aria-label={iconAriaLabel}
-        >
-          {children}
-          {icon && <span className={styles.icon}>{icon}</span>}
-        </div>
-      ) : (
-        <>
-          {children}
-          {icon && (
-            <span
-              className={styles.icon}
-              onClick={(e) => {
-                e.stopPropagation();
-                onIconClick?.();
-              }}
-              role="button"
-              tabIndex={0}
-              aria-label={iconAriaLabel}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  onIconClick?.();
-                }
-              }}
-            >
-              {icon}
-            </span>
-          )}
-        </>
-      )}
+      <PopoverContentBody
+        icon={icon}
+        onIconClick={onIconClick}
+        iconAriaLabel={iconAriaLabel}
+        shouldContentBeClickable={shouldContentBeClickable}
+      >
+        {children}
+      </PopoverContentBody>
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );
