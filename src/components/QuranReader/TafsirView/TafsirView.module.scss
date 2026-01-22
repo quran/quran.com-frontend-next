@@ -114,6 +114,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   block-size: auto;
   padding-block: var(--spacing-xxsmall-px);
   padding-inline: var(--spacing-small-px);
+  font-size: var(--font-size-xsmall-px);
   border: none;
   color: var(--color-text-faded-new);
   &:hover {
