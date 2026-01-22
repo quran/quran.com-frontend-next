@@ -7,7 +7,7 @@ import { getChapterData } from '@/utils/chapter';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type BatchedCountRangeNotesResponse = {
-  data: number;
+  data: number | null;
   isLoading: boolean;
   error: Error | null;
 };

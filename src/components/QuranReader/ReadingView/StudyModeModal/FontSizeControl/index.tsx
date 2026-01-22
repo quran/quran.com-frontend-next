@@ -61,6 +61,7 @@ const FONT_TYPE_CONFIG = {
     increaseAction: increaseQnaFontScale,
     decreaseAction: decreaseQnaFontScale,
     logKey: 'qna_font_scale',
+    defaultValue: 3,
   },
   lesson: {
     key: 'lessonFontScale' as const,

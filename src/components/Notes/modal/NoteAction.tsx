@@ -111,7 +111,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
     onActionTriggered,
   ]);
 
-  const hasNote = hasNotesProp ?? notesCount > 0;
+  const hasNote = hasNotesProp ?? (notesCount && notesCount > 0);
 
   return <>{children({ onClick: handleTriggerClick, hasNote })}</>;
 };

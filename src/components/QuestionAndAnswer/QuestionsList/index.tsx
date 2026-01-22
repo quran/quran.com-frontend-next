@@ -31,7 +31,7 @@ const QuestionsList: React.FC<Props> = ({
   onLoadMore,
   baseUrl,
 }) => {
-  const { lang, t } = useTranslation();
+  const { t } = useTranslation();
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
   const router = useRouter();
 
@@ -46,7 +46,7 @@ const QuestionsList: React.FC<Props> = ({
     setOpenQuestionId(isOpen ? questionId : null);
     if (isOpen) {
       const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
-      fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), lang);
+      fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), router.locale);
     } else {
       // Use provided baseUrl or fallback to router.asPath
       const urlToNavigate = baseUrl || router.asPath;
