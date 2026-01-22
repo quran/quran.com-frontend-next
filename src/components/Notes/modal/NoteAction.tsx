@@ -3,7 +3,7 @@ import React, { useCallback, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
@@ -56,8 +56,8 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
-  const { data: notesCount } = useCountRangeNotes(
-    hasNotesProp === undefined ? { from: verseKey, to: verseKey } : null,
+  const { data: notesCount } = useBatchedCountRangeNotes(
+    hasNotesProp === undefined ? verseKey : null,
   );
 
   const logNoteEvent = useCallback(
@@ -111,7 +111,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
     onActionTriggered,
   ]);
 
-  const hasNote = hasNotesProp || (notesCount?.[verseKey] ?? 0) > 0;
+  const hasNote = hasNotesProp ?? notesCount > 0;
 
   return <>{children({ onClick: handleTriggerClick, hasNote })}</>;
 };

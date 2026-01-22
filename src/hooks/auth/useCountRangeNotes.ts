@@ -14,6 +14,7 @@ const useCountRangeNotes = (notesRange: Range) => {
     async () => {
       return countNotesWithinRange(notesRange.from, notesRange.to);
     },
+    { dedupingInterval: Infinity },
   );
 
   return {

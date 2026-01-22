@@ -11,7 +11,6 @@ import Verse from 'types/Verse';
 type TopActionsProps = {
   verse: Verse;
   bookmarksRangeUrl: string;
-  hasNotes?: boolean;
   isTranslationView?: boolean;
   shouldUseModalZIndex?: boolean;
 };
@@ -24,7 +23,6 @@ type TopActionsProps = {
 const TopActions: React.FC<TopActionsProps> = ({
   verse,
   bookmarksRangeUrl,
-  hasNotes,
   isTranslationView = true,
   shouldUseModalZIndex = false,
 }) => {
@@ -48,7 +46,6 @@ const TopActions: React.FC<TopActionsProps> = ({
         <ActionButtons
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
-          hasNotes={hasNotes}
           isTranslationView={isTranslationView}
           openShareModal={() => onOpenModalChange(true)}
           hasTranslationsButton={!isTranslationView}
