@@ -146,7 +146,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
     try {
       const result = await submitVerificationCode(email, code);
       try {
-        // Persist current settings
+        // Sync user preferences from server
         await syncPreferencesFromServer({
           locale: router.locale || 'en',
           dispatch,

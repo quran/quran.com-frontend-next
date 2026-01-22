@@ -125,6 +125,4 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
   };
 
   return preferenceGroups;
-
-  return preferenceGroups;
 };

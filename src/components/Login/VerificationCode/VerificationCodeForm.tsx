@@ -35,7 +35,7 @@ const VerificationCodeForm: FC<Props> = ({
   handleSubmit,
 }) => {
   const router = useRouter();
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
 
   const { redirectWithToken } = useAuthRedirect();
@@ -71,7 +71,7 @@ const VerificationCodeForm: FC<Props> = ({
       }
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error('Failed to sync user preferences after verification', error);
+      logErrorToSentry('Failed to sync user preferences after verification', error);
     }
 
     // If successful, call onSuccess callback or redirect

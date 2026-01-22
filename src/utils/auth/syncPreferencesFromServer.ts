@@ -3,6 +3,7 @@ import setLanguage from 'next-translate/setLanguage';
 import { InterpreterFrom } from 'xstate';
 
 import { getCountryLanguagePreference } from '@/api';
+import { logErrorToSentry } from '@/lib/sentry';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import {
   setAyahReflectionsLanguages,
@@ -89,7 +90,8 @@ const applyAudioPreferences = (
  * Fetch the authenticated user's preferences from the backend
  * and apply them to the Redux store and XState audio service.
  *
- * @returns {Promise<boolean>} whether preferences existed and got applied.
+ * @returns {Promise<SyncPreferencesResult>} result indicating whether remote preferences
+ * existed and were applied, and any applied locale.
  */
 // eslint-disable-next-line react-func/max-lines-per-function
 export const syncPreferencesFromServer = async ({
@@ -141,7 +143,7 @@ export const syncPreferencesFromServer = async ({
       dispatch(setAyahReflectionsLanguages(reflectionLanguages));
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error('Failed to update language preferences after login', error);
+      logErrorToSentry('Failed to fetch country language preference during sync', error);
     }
 
     setLocaleCookie(remoteLocale);
