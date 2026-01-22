@@ -25,9 +25,9 @@ const GlobalScrollListener = () => {
       }
 
       if (isMobile) {
-        // MOBILE: Asymmetric thresholds for smooth crossfade with MobileStickyItemsBar
+        // MOBILE: Asymmetric thresholds for smooth handoff with MobileStickyItemsBar
         // - Hide early on scroll-down (10px) to prevent content jump
-        // - Show early on scroll-up (75px) to allow smooth crossfade
+        // - Show early on scroll-up (75px) to allow smooth handoff
         const HIDE_THRESHOLD = 10;
         const SHOW_THRESHOLD = 75;
 

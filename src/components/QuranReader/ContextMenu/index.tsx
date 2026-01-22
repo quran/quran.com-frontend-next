@@ -137,7 +137,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
       {/* Mobile-specific tabs for switching between reading preferences
       Appears only on mobile breakpoints when the navbar is visible */}
-      {showNavbar && <MobileReadingTabs t={t} isVisible={showNavbar} />}
+      {showNavbar && <MobileReadingTabs t={t} />}
 
       {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
       {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
