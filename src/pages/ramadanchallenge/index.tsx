@@ -3,28 +3,25 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+
 import classNames from 'classnames';
 import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Button, { ButtonVariant } from '@/dls/Button/Button';
+import EnrollButton from '@/components/RamadanChallenge/EnrollButton';
+import EnrollmentCount from '@/components/RamadanChallenge/EnrollmentCount';
 import Link from '@/dls/Link/Link';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadanchallenge/ramadanchallenge.module.scss';
-import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
 
 const RamadanChallengePage: NextPage = (): JSX.Element => {
   const PATH = ROUTES.RAMADAN_CHALLENGE_URL;
-  const { lang } = useTranslation();
-
-  const onButtonClicked = (section: string) => {
-    logButtonClick(`ramadan_challenge_${section}`);
-  };
+  const { lang } = useTranslation('common');
 
   return (
     <>
@@ -50,17 +47,9 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             </div>
             <h2>✅ Sign up today and invite others to join (FREE):</h2>
             <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked('join_surah_mulk_challenge');
-                }}
-                variant={ButtonVariant.Shadow}
-                className={styles.button}
-              >
-                Join the Surah Al-Mulk Challenge
-              </Button>
+              <EnrollButton section="join_surah_mulk_challenge" />
             </div>
-            <h2>🌍 68+ people around the world have joined the challenge!</h2>
+            <EnrollmentCount />
             <h2>
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
@@ -118,15 +107,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             </div>
             <h2>Sign up today and share with your friends, family, and community:</h2>
             <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked('join_surah_mulk_challenge');
-                }}
-                variant={ButtonVariant.Shadow}
-                className={styles.button}
-              >
-                Join the Surah Al-Mulk Challenge
-              </Button>
+              <EnrollButton section="join_surah_mulk_challenge" />
             </div>
           </div>
           <hr />
@@ -149,15 +130,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Sign up today and begin your journey with this powerful Surah.
             </div>
             <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked('join_surah_mulk_challenge');
-                }}
-                variant={ButtonVariant.Shadow}
-                className={styles.button}
-              >
-                Join the Surah Al-Mulk Challenge
-              </Button>
+              <EnrollButton section="join_surah_mulk_challenge" />
             </div>
             <div>
               To learn more about our Ramadan activities, visit{' '}

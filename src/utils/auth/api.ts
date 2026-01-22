@@ -40,18 +40,21 @@ import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { Mushaf } from '@/types/QuranReader';
 import {
+  makeRamadanChallengeStatusUrl,
+  makeRamadanChallengeCountUrl,
+  makeRamadanChallengeEnrollUrl,
+  makeRamadanChallengeUnenrollUrl,
   CollectionsQueryParams,
   makeActivityDaysUrl,
   makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
   makeBookmarksRangeUrl,
-  makeBookmarksUrl,
   makeBookmarkUrl,
+  makeBookmarksUrl,
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
-  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -61,6 +64,7 @@ import {
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteCollectionUrl,
   makeDeleteOrUpdateNoteUrl,
+  makeEnrollUserInQuranProgramUrl,
   makeEnrollUserUrl,
   makeEstimateRangesReadingTimeUrl,
   makeFilterActivityDaysUrl,
@@ -69,18 +73,19 @@ import {
   makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
-  makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
   makeGetNoteByIdUrl,
   makeGetNotesByVerseUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
+  makeGetQuranicWeekUrl,
   makeGetUserCoursesCountUrl,
   makeGetUserQuranProgramUrl,
   makeGoalUrl,
   makeLogoutUrl,
   makeNotesUrl,
+  makePublishNoteUrl,
   makeReadingSessionsUrl,
   makeRefreshTokenUrl,
   makeShortenUrlUrl,
@@ -93,9 +98,13 @@ import {
   makeUserPreferencesUrl,
   makeUserProfileUrl,
   makeVerificationCodeUrl,
-  makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
+import {
+  RamadanChallengeStatusResponse,
+  RamadanChallengeEnrollResponse,
+  RamadanChallengeUnenrollResponse,
+} from 'types/ApiResponses';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
@@ -693,3 +702,17 @@ export const privateFetcher = configureRefreshFetch({
   refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });
+
+export const getRamadanChallengeStatus = async (): Promise<{
+  data: RamadanChallengeStatusResponse;
+}> => privateFetcher(makeRamadanChallengeStatusUrl());
+
+export const getRamadanChallengeCount = async (): Promise<{
+  data: { count: number };
+}> => privateFetcher(makeRamadanChallengeCountUrl());
+
+export const enrollInRamadanChallenge = async (): Promise<RamadanChallengeEnrollResponse> =>
+  postRequest(makeRamadanChallengeEnrollUrl(), {});
+
+export const unenrollRamadanChallenge = async (): Promise<RamadanChallengeUnenrollResponse> =>
+  postRequest(makeRamadanChallengeUnenrollUrl(), {});

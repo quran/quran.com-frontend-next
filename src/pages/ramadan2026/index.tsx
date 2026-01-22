@@ -132,6 +132,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
             <div className={styles.ctaContainer}>
               <Button
+                href={ROUTES.RAMADAN_CHALLENGE_URL}
                 onClick={() => {
                   onButtonClicked('join_surah_mulk_challenge');
                 }}
