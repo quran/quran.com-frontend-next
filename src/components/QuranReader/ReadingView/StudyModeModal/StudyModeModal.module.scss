@@ -18,7 +18,7 @@ div.contentModal {
 
   @include breakpoints.tablet {
     padding-block: var(--spacing-xlarge-px);
-    padding-inline:var(--spacing-large-px);
+    padding-inline: var(--spacing-large-px);
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;

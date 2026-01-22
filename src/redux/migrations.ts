@@ -306,8 +306,7 @@ export default {
         state.quranReaderStyles.reflectionFontScale ??
         initialState.quranReaderStyles.reflectionFontScale,
       lessonFontScale:
-        state.quranReaderStyles.lessonFontScale ??
-        initialState.quranReaderStyles.lessonFontScale,
+        state.quranReaderStyles.lessonFontScale ?? initialState.quranReaderStyles.lessonFontScale,
     },
   }),
 };

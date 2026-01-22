@@ -1,47 +1,24 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
-import dynamic from 'next/dynamic';
-import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import Translation from 'types/Translation';
-import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 import getTranslationsLabelString from '../utils/translation';
 
 import styles from './StudyModeBody.module.scss';
+import { TAB_COMPONENTS, useStudyModeTabs } from './StudyModeBodyTabs';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
 import StudyModeVerseText from './StudyModeVerseText';
+import useStudyModeScroll from './useStudyModeScroll';
 import WordNavigationBox from './WordNavigationBox';
 
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import BookIcon from '@/icons/book-open.svg';
-import GraduationCapIcon from '@/icons/graduation-cap.svg';
-import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { constructWordVerse, getVerseWords } from '@/utils/verse';
-
-const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  ssr: false,
-});
-
-const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  ssr: false,
-});
-
-const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  ssr: false,
-});
-
-const TAB_COMPONENTS: Partial<
-  Record<StudyModeTabId, React.ComponentType<{ chapterId: string; verseNumber: string }>>
-> = {
-  [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
-  [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
-  [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
-};
+import Translation from 'types/Translation';
+import Verse from 'types/Verse';
+import Word from 'types/Word';
 
 interface StudyModeBodyProps {
   verse: Verse;
@@ -80,107 +57,14 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   activeTab,
   onTabChange,
 }) => {
-  const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
-  const tabContentRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const bottomActionsRef = useRef<HTMLDivElement>(null);
-  const [hasScrolledDown, setHasScrolledDown] = useState(false);
-  const [hasScrollableContent, setHasScrollableContent] = useState(false);
-  const [hasScrolledToTab, setHasScrolledToTab] = useState(false);
 
-  useEffect(() => {
-    const checkScrollable = () => {
-      if (containerRef.current) {
-        const scrollContainer = containerRef.current.parentElement;
-        if (scrollContainer) {
-          const isScrollable = scrollContainer.scrollHeight > scrollContainer.clientHeight;
-          setHasScrollableContent(isScrollable);
-        }
-      }
-    };
-    const timeoutId = setTimeout(checkScrollable, 100);
-    return () => clearTimeout(timeoutId);
-  }, [verse, activeTab]);
+  const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
+    useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
 
-  const handleScroll = useCallback(
-    (e: Event) => {
-      const target = e.target as HTMLElement;
-      if (target.scrollTop > 10 && !hasScrolledDown) {
-        setHasScrolledDown(true);
-      }
-    },
-    [hasScrolledDown],
-  );
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const scrollContainer = containerRef.current.parentElement;
-      if (scrollContainer) {
-        scrollContainer.addEventListener('scroll', handleScroll);
-        return () => scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    }
-    return undefined;
-  }, [handleScroll]);
-
-  useEffect(() => {
-    setHasScrolledDown(false);
-    setHasScrolledToTab(false);
-  }, [verse.verseKey]);
-
-  useEffect(() => {
-    if (!activeTab) {
-      setHasScrolledToTab(false);
-    }
-  }, [activeTab]);
-
-  useEffect(() => {
-    if (activeTab && !hasScrolledToTab && bottomActionsRef.current && containerRef.current) {
-      setHasScrolledToTab(true);
-      const scrollContainer = containerRef.current.parentElement;
-      if (scrollContainer) {
-        const bottomActionsTop = bottomActionsRef.current.offsetTop;
-        scrollContainer.scrollTo({
-          top: bottomActionsTop - 140,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [activeTab, hasScrolledToTab]);
-
-  const showScrollGradient = hasScrollableContent && !hasScrolledDown && !activeTab;
-
-  const handleTabClick = (tabId: StudyModeTabId) => {
-    const newTab = activeTab === tabId ? null : tabId;
-    onTabChange?.(newTab);
-  };
-
-  const tabs = [
-    {
-      id: StudyModeTabId.TAFSIR,
-      label: t('quran-reader:tafsirs'),
-      icon: <BookIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
-      condition: true,
-    },
-    {
-      id: StudyModeTabId.LESSONS,
-      label: t('lessons'),
-      icon: <GraduationCapIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.LESSONS),
-      condition: true,
-    },
-    {
-      id: StudyModeTabId.REFLECTIONS,
-      label: t('reflections'),
-      icon: <LightbulbIcon />,
-      onClick: () => handleTabClick(StudyModeTabId.REFLECTIONS),
-      condition: true,
-    },
-  ];
+  const tabs = useStudyModeTabs(activeTab, onTabChange);
 
   const verseWithChapterId = {
     ...verse,

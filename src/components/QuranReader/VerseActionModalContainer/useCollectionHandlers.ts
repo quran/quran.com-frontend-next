@@ -17,7 +17,11 @@ interface UseCollectionHandlersParams {
   bookmarksRangeUrl: string;
 }
 
-const useCollectionHandlers = ({ chapterId, verseNumber, bookmarksRangeUrl }: UseCollectionHandlersParams) => {
+const useCollectionHandlers = ({
+  chapterId,
+  verseNumber,
+  bookmarksRangeUrl,
+}: UseCollectionHandlersParams) => {
   const { t } = useTranslation();
   const toast = useToast();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -56,11 +60,12 @@ const useCollectionHandlers = ({ chapterId, verseNumber, bookmarksRangeUrl }: Us
   );
 
   const modalCollections: CollectionOption[] = useMemo(
-    () => collections.map((c) => ({
-      id: c.id,
-      name: c.name,
-      checked: collectionIds?.includes(c.id) ?? false,
-    })),
+    () =>
+      collections.map((c) => ({
+        id: c.id,
+        name: c.name,
+        checked: collectionIds?.includes(c.id) ?? false,
+      })),
     [collections, collectionIds],
   );
 

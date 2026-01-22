@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import useSyncReadingProgress from './hooks/useSyncReadingProgress';
 import StudyModeContainer from './StudyModeContainer';
 import TranslationView from './TranslationView';
-
 import VerseActionModalContainer from './VerseActionModalContainer';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';

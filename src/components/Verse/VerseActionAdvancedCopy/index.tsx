@@ -25,6 +25,8 @@ type VerseActionAdvancedCopyProps = {
 /**
  * Action component for advanced copy functionality.
  * Dispatches Redux action to open the modal in VerseActionModalContainer.
+ *
+ * @returns {JSX.Element} The advanced copy action menu item
  */
 const VerseActionAdvancedCopy = ({
   verse,
@@ -39,9 +41,7 @@ const VerseActionAdvancedCopy = ({
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
   const onModalOpen = useCallback(() => {
-    logEvent(
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_open`,
-    );
+    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_open`);
 
     dispatch(
       openAdvancedCopyModal({

@@ -4,7 +4,7 @@
   inline-size: 100%;
   padding: var(--spacing-medium) 0;
   position: sticky;
-  bottom: 0;
+  inset-block-end: 0;
   background: var(--color-background-default);
 }
 

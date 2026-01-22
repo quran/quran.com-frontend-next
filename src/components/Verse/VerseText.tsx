@@ -110,9 +110,7 @@ const VerseText = ({
                 font={quranFont}
                 isFontLoaded={isFontLoaded}
                 isHighlighted={
-                  isHighlightedWord ||
-                  word.verseKey === selectedVerseKey ||
-                  isHoveredWord
+                  isHighlightedWord || word.verseKey === selectedVerseKey || isHoveredWord
                 }
                 bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}

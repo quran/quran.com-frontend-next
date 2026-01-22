@@ -19,14 +19,14 @@
     &::before {
       margin-block-start: var(--spacing-medium);
       display: block;
-      content: "\A";
+      content: '\A';
     }
     display: inline;
   }
 
-  & p[lang="ar"],
-  & p[lang="fa"],
-  & p[lang="ur"] {
+  & p[lang='ar'],
+  & p[lang='fa'],
+  & p[lang='ur'] {
     direction: rtl;
     display: block;
   }

@@ -1,5 +1,5 @@
 .triggerButton {
-  min-width: 120px;
+  min-inline-size: 120px;
   justify-content: space-between;
 }
 
@@ -12,8 +12,8 @@
 
 .popoverContent {
   padding: var(--spacing-xxs);
-  min-width: 200px;
-  max-height: 400px;
+  min-inline-size: 200px;
+  max-block-size: 400px;
   overflow-y: auto;
 }
 
@@ -22,8 +22,8 @@
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded);
-  border-bottom: 1px solid var(--color-borders-hairline);
-  margin-bottom: var(--spacing-xxs);
+  border-block-end: 1px solid var(--color-borders-hairline);
+  margin-block-end: var(--spacing-xxs);
 }
 
 .itemsContainer {
@@ -51,7 +51,7 @@
 }
 
 .emptyIcon {
-  width: 20px;
-  height: 20px;
+  inline-size: 20px;
+  block-size: 20px;
   display: inline-block;
 }

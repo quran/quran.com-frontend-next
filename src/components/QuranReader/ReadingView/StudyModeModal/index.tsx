@@ -21,8 +21,12 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
+import {
+  setActiveTab,
+  setHighlightedWordLocation,
+  setVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { setActiveTab, setHighlightedWordLocation, setVerseKey } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
@@ -62,7 +66,7 @@ const StudyModeModal: React.FC<Props> = ({
   highlightedWordLocation,
   initialActiveTab,
 }) => {
-  const { t } = useTranslation('common');
+  useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
@@ -101,7 +105,15 @@ const StudyModeModal: React.FC<Props> = ({
     return () => {
       isMounted = false;
     };
-  }, [isOpen, word?.verseKey, verseKeyProp, highlightedWordLocation, router.asPath, initialActiveTab, dispatch]);
+  }, [
+    isOpen,
+    word?.verseKey,
+    verseKeyProp,
+    highlightedWordLocation,
+    router.asPath,
+    initialActiveTab,
+    dispatch,
+  ]);
 
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
@@ -131,17 +143,17 @@ const StudyModeModal: React.FC<Props> = ({
     ? makeBookmarksRangeUrl(mushafId, Number(selectedChapterId), Number(selectedVerseNumber), 1)
     : '';
 
-  const versesForFont = useMemo(
-    () => (currentVerse ? [currentVerse] : []),
-    [currentVerse],
-  );
+  const versesForFont = useMemo(() => (currentVerse ? [currentVerse] : []), [currentVerse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
 
-  const handleChapterChange = useCallback((newChapterId: string) => {
-    setSelectedChapterId(newChapterId);
-    setSelectedVerseNumber('1');
-    dispatch(setVerseKey(`${newChapterId}:1`));
-  }, [dispatch]);
+  const handleChapterChange = useCallback(
+    (newChapterId: string) => {
+      setSelectedChapterId(newChapterId);
+      setSelectedVerseNumber('1');
+      dispatch(setVerseKey(`${newChapterId}:1`));
+    },
+    [dispatch],
+  );
 
   const handleVerseChange = useCallback(
     (newVerseNumber: string) => {

@@ -16,7 +16,7 @@
   padding-block: var(--spacing-small);
   padding-inline: calc(-1 * var(--spacing-small-px));
   @include breakpoints.tablet {
-    margin: var(--spacing-medium-plus-px) 0;    
+    margin: var(--spacing-medium-plus-px) 0;
     padding-block: var(--spacing-medium);
     padding-inline: calc(-1 * var(--spacing-medium-px));
   }
@@ -43,7 +43,7 @@
 
 .bottomActionsWrapperSticky {
   position: sticky;
-  bottom: 0;
+  inset-block-end: 0;
   background-color: var(--color-background-elevated-new);
 }
 
@@ -52,11 +52,7 @@
   inset-block-start: calc(-1 * (var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px)));
   inset-inline: 0;
   block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-medium-plus-px));
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--color-background-elevated-new) 100%
-  );
+  background: linear-gradient(to bottom, transparent 0%, var(--color-background-elevated-new) 100%);
   pointer-events: none;
   opacity: 1;
   transition: opacity 0.3s ease-out;

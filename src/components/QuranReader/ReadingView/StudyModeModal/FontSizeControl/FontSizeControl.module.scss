@@ -23,8 +23,8 @@
   padding: var(--spacing-xsmall-px);
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-xsmall-px);
-  max-width: 154px;
-  max-height: 28px;
+  max-inline-size: 154px;
+  max-block-size: 28px;
 }
 
 .fontSizeLabel {
@@ -48,8 +48,8 @@
   }
 
   svg {
-    width: var(--spacing-small2-px);
-    height: var(--spacing-small2-px);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
   }
 }
 
@@ -71,7 +71,7 @@
   color: var(--color-text-faded-new);
 
   svg {
-    width: var(--spacing-small2-px);
-    height: var(--spacing-small2-px);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
   }
 }
