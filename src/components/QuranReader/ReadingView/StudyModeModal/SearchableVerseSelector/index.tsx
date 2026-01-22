@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useCallback, useContext, useMemo, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -10,6 +11,7 @@ import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import CaretIcon from '@/icons/caret-down.svg';
 import CloseIcon from '@/icons/close.svg';
 import SearchIcon from '@/icons/search.svg';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type SelectionMode = 'none' | 'chapter' | 'verse';
@@ -40,9 +42,10 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   const verseDisplayText = toLocalizedNumber(Number(selectedVerseNumber), lang);
 
   const handleClose = useCallback(() => {
+    logButtonClick('study_mode_selector_close', { mode: selectionMode });
     setSelectionMode('none');
     setSearchQuery('');
-  }, []);
+  }, [selectionMode]);
 
   useOutsideClickDetector(containerRef, handleClose, selectionMode !== 'none');
 
@@ -84,31 +87,37 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
   }, [verseOptions, searchQuery]);
 
   const handleChapterClick = useCallback(() => {
+    logButtonClick('study_mode_chapter_selector_open');
     setSelectionMode('chapter');
     setSearchQuery('');
   }, []);
 
   const handleVerseClick = useCallback(() => {
+    logButtonClick('study_mode_verse_selector_open');
     setSelectionMode('verse');
     setSearchQuery('');
   }, []);
 
   const handleSelectChapter = useCallback(
     (chapterId: string) => {
+      logValueChange('study_mode_chapter', selectedChapterId, chapterId);
       onChapterChange(chapterId);
       setSelectionMode('none');
       setSearchQuery('');
     },
-    [onChapterChange],
+    [onChapterChange, selectedChapterId],
   );
 
   const handleSelectVerse = useCallback(
     (verseNumber: number) => {
+      logValueChange('study_mode_verse', selectedVerseNumber, verseNumber.toString(), {
+        chapterId: selectedChapterId,
+      });
       onVerseChange(verseNumber.toString());
       setSelectionMode('none');
       setSearchQuery('');
     },
-    [onVerseChange],
+    [onVerseChange, selectedVerseNumber, selectedChapterId],
   );
 
   const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

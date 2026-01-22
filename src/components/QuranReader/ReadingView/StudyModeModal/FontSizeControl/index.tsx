@@ -20,7 +20,7 @@ import {
   increaseReflectionFontScale,
   decreaseReflectionFontScale,
 } from '@/redux/slices/QuranReader/styles';
-import { logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export type FontSizeType = 'tafsir' | 'reflection';
@@ -87,15 +87,23 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
     [currentFontScale, onFontSettingsChange, config],
   );
 
-  const handleToggle = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded((prev) => !prev);
-  }, []);
+  const handleToggle = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      logButtonClick('study_mode_font_control_toggle', { fontType, isExpanded: true });
+      setIsExpanded((prev) => !prev);
+    },
+    [fontType],
+  );
 
-  const handleClose = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded(false);
-  }, []);
+  const handleClose = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      logButtonClick('study_mode_font_control_toggle', { fontType, isExpanded: false });
+      setIsExpanded(false);
+    },
+    [fontType],
+  );
 
   if (!isExpanded) {
     return (

@@ -35,6 +35,7 @@ import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseSelectedTafsirNavigationUrl,
@@ -166,15 +167,19 @@ const StudyModeModal: React.FC<Props> = ({
   const handlePreviousVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     const newVerseNumber = String(currentVerseNum - 1);
+    const newVerseKey = `${selectedChapterId}:${newVerseNumber}`;
+    logButtonClick('study_mode_previous_verse', { verseKey: newVerseKey });
     setSelectedVerseNumber(newVerseNumber);
-    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+    dispatch(setVerseKey(newVerseKey));
   }, [selectedVerseNumber, selectedChapterId, dispatch]);
 
   const handleNextVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
     const newVerseNumber = String(currentVerseNum + 1);
+    const newVerseKey = `${selectedChapterId}:${newVerseNumber}`;
+    logButtonClick('study_mode_next_verse', { verseKey: newVerseKey });
     setSelectedVerseNumber(newVerseNumber);
-    dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+    dispatch(setVerseKey(newVerseKey));
   }, [selectedVerseNumber, selectedChapterId, dispatch]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
@@ -199,6 +204,7 @@ const StudyModeModal: React.FC<Props> = ({
 
   const handleWordClick = useCallback(
     (clickedWord: Word) => {
+      logButtonClick('study_mode_word', { wordLocation: clickedWord.location });
       setSelectedWordLocation(clickedWord.location);
       setShowWordBox(true);
       dispatch(setHighlightedWordLocation(clickedWord.location));
@@ -209,6 +215,7 @@ const StudyModeModal: React.FC<Props> = ({
   const handlePreviousWord = useCallback(() => {
     if (currentWordIndex > 0) {
       const newLocation = quranWords[currentWordIndex - 1].location;
+      logButtonClick('study_mode_previous_word', { wordLocation: newLocation });
       setSelectedWordLocation(newLocation);
       dispatch(setHighlightedWordLocation(newLocation));
     }
@@ -217,12 +224,14 @@ const StudyModeModal: React.FC<Props> = ({
   const handleNextWord = useCallback(() => {
     if (currentWordIndex < quranWords.length - 1) {
       const newLocation = quranWords[currentWordIndex + 1].location;
+      logButtonClick('study_mode_next_word', { wordLocation: newLocation });
       setSelectedWordLocation(newLocation);
       dispatch(setHighlightedWordLocation(newLocation));
     }
   }, [currentWordIndex, quranWords, dispatch]);
 
   const handleCloseWordBox = useCallback(() => {
+    logButtonClick('study_mode_word_box_close');
     setShowWordBox(false);
     setSelectedWordLocation(undefined);
     dispatch(setHighlightedWordLocation(null));
@@ -233,9 +242,10 @@ const StudyModeModal: React.FC<Props> = ({
 
   const handleTabChange = useCallback(
     (tabId: StudyModeTabId | null) => {
+      const currentVerseKey = `${selectedChapterId}:${selectedVerseNumber}`;
+      logValueChange('study_mode_tab', activeContentTab, tabId, { verseKey: currentVerseKey });
       setActiveContentTab(tabId);
       dispatch(setActiveTab(tabId));
-      const currentVerseKey = `${selectedChapterId}:${selectedVerseNumber}`;
 
       if (tabId === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
         fakeNavigate(
@@ -254,15 +264,26 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(originalUrl, router.locale);
       }
     },
-    [selectedChapterId, selectedVerseNumber, tafsirs, router.locale, originalUrl, dispatch],
+    [
+      selectedChapterId,
+      selectedVerseNumber,
+      tafsirs,
+      router.locale,
+      originalUrl,
+      dispatch,
+      activeContentTab,
+    ],
   );
 
   const handleClose = useCallback(() => {
+    logButtonClick('study_mode_close', {
+      verseKey: `${selectedChapterId}:${selectedVerseNumber}`,
+    });
     if (originalUrl) {
       fakeNavigate(originalUrl, router.locale);
     }
     onClose();
-  }, [originalUrl, router.locale, onClose]);
+  }, [originalUrl, router.locale, onClose, selectedChapterId, selectedVerseNumber]);
 
   const isContentTabActive =
     activeContentTab &&
@@ -317,6 +338,7 @@ const StudyModeModal: React.FC<Props> = ({
   if (!isOpen || !chaptersData) return null;
 
   const handleRetry = () => {
+    logButtonClick('study_mode_retry', { verseKey });
     mutate();
   };
 
