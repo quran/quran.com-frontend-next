@@ -3,6 +3,7 @@
   "begin": "Filloni",
   "calendar-cta": "Kalendari",
   "chapters-and-verses": "Kapitujt dhe vargjet",
+  "continue-learning-plan": "Vazhdo të mësosh",
   "continue-read": "Vazhdo Leximi",
   "explore-topics": "Eksploroni Temat",
   "first-time-reading": "I ri në Kuran? <link> Fillo këtu </link>",
@@ -13,6 +14,7 @@
   "my-quran": "Kurani im",
   "navigate-quran": "Lundroni në Kuran",
   "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+  "no-page-bookmarks": "Nuk ke ende asnjë faqeshënues faqeje",
   "no-recently-read": "Nuk keni ende asnjë seancë leximi",
   "noble-quran": "Kurani Fisnik",
   "popular": "Popullore",
@@ -55,10 +57,12 @@
     "description": "Ndihmoni në përhapjen e Kuranit te nxënësit e rinj",
     "title": "Shpërndaje Kuranin!"
   },
+  "start-learning-plan": "Filloni të mësoni",
   "start-read": "Filloni të lexoni",
   "stay-consistent": "Ndiqni vijat, krijoni qëllime të personalizuara, qëndroni konsistent",
   "tab": {
     "bookmarks": "Faqeruajtësit",
+    "page-bookmarks": "Faqet",
     "popular": "Popullore"
   },
   "take-notes": "A keni humbur ndonjë gjë nga Shënimet e <modalLink>? </modalLink>",

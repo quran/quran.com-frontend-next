@@ -17,6 +17,7 @@ import WordMobileModal from '@/components/QuranReader/ReadingView/WordMobileModa
 import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
+import { TooltipType } from '@/dls/Tooltip';
 import useIsMobile from '@/hooks/useIsMobile';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
@@ -37,6 +38,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word, { CharType } from 'types/Word';
 
@@ -68,6 +70,9 @@ export type QuranWordProps = {
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
+  tooltipType?: TooltipType;
+  isWordInteractionDisabled?: boolean;
+  shouldForceShowTooltip?: boolean;
 };
 
 const QuranWord = ({
@@ -79,6 +84,9 @@ const QuranWord = ({
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
   bookmarksRangeUrl,
+  tooltipType,
+  isWordInteractionDisabled = false,
+  shouldForceShowTooltip = false,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -104,6 +112,9 @@ const QuranWord = ({
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useXstateSelector(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { surah, ayahNumber, wordLocation: wordPosition } = state.context;
     return `${surah}:${ayahNumber}:${wordPosition}` === wordLocation;
   });
@@ -232,19 +243,18 @@ const QuranWord = ({
     handleWordAction();
   }, [handleWordAction]);
 
-  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
+  const shouldHandleWordClicking = !isWordInteractionDisabled && word.charTypeName !== CharType.End;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (
     <div
-      {...(shouldHandleWordClicking && { onClick, onKeyPress })}
-      role="button"
-      tabIndex={0}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress, role: 'button', tabIndex: 0 })}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
-        [styles.highlightOnHover]: isRecitationEnabled,
+        [styles.interactionDisabled]: isWordInteractionDisabled,
+        [styles.highlightOnHover]: !isWordInteractionDisabled && isRecitationEnabled,
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -263,20 +273,28 @@ const QuranWord = ({
       <Wrapper
         shouldWrap
         wrapper={(children) => {
-          if (isTranslationMode && showTooltip) {
+          const shouldShowTranslationTooltip =
+            isTranslationMode &&
+            showTooltip &&
+            (shouldForceShowTooltip || !isWordInteractionDisabled);
+
+          if (shouldShowTranslationTooltip) {
+            const isTooltipOpen =
+              shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
             return (
               <MobilePopover
-                isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
+                isOpen={isTooltipOpen ? true : undefined}
                 defaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
+                tooltipType={tooltipType}
               >
                 {children}
               </MobilePopover>
             );
           }
 
-          if (isReadingModeMobile) {
+          if (isReadingModeMobile && !isWordInteractionDisabled) {
             return (
               <>
                 <div
@@ -299,7 +317,7 @@ const QuranWord = ({
             );
           }
 
-          if (isReadingModeDesktop) {
+          if (isReadingModeDesktop && !isWordInteractionDisabled) {
             return (
               <ReadingViewWordPopover
                 word={word}

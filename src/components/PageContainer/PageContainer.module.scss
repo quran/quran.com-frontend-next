@@ -10,7 +10,10 @@
 }
 
 .wrapperSheets {
+  --spread: calc(var(--spacing-medium-px) + var(--spacing-small-px));
   background-color: var(--color-background-elevated-new);
+  box-shadow: 0 calc(var(--spacing-micro-px) * 2) var(--spread) calc(var(--spread) * -1)
+    rgba(0, 0, 0, 0.1);
   @include roundedTopBorders;
 }
 
@@ -46,7 +49,7 @@
 
   &.lessonView {
     @include breakpoints.tablet {
-      width: 80%;
+      inline-size: 80%;
     }
   }
 

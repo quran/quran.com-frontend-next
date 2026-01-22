@@ -41,7 +41,11 @@ test.describe('Translation Feedback - Guest Users', () => {
   test(
     'Guest user should be redirected to login page when clicking Translation Feedback from reading view',
     { tag: ['@translation-feedback', '@auth', '@guest'] },
-    async ({ page }) => {
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Skipping mobile viewport for this test');
+
+      await page.setViewportSize({ width: 1920, height: 1080 });
+
       // Set reading mode to test verse interaction
       await switchToReadingMode(page);
 
@@ -50,17 +54,14 @@ test.describe('Translation Feedback - Guest Users', () => {
       await verse.click();
 
       // Open More submenu (handles both mobile button and desktop menuitem)
-      const moreMenuitem = page.getByRole('menuitem', { name: 'More' });
-      const moreButton = page.getByLabel('More');
+      const moreMenuitem = page.getByTestId('verse-actions-menu-more');
 
-      await Promise.race([moreMenuitem.click(), moreButton.click()]);
+      await moreMenuitem.click({ force: true });
 
-      const translationFeedbackOption = page.getByRole('menuitem', {
-        name: 'Translation Feedback',
-      });
+      const translationFeedbackOption = page.getByTestId('verse-actions-menu-translation-feedback');
 
       await expect(translationFeedbackOption).toBeVisible();
-      await translationFeedbackOption.click();
+      await translationFeedbackOption.click({ force: true });
 
       // Should be redirected to login page
       await page.waitForURL(/\/login/);

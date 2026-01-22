@@ -7,53 +7,6 @@ $section-padding: var(--spacing-large-px);
 $widget-border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
 $widget-border-radius: var(--border-radius-rounded);
 
-.heroContainer {
-  position: relative;
-  overflow: hidden;
-  padding-block-start: var(--spacing-medium3-px);
-  padding-block-end: var(--spacing-xlarge-px);
-  padding-inline: var(--spacing-medium2-px);
-  margin-block-end: calc(-1 * (var(--spacing-xlarge-px) - var(--spacing-medium2-px)));
-
-  @include breakpoints.tablet {
-    padding-block: var(--spacing-large-px);
-    padding-inline: var(--spacing-medium2-px);
-    margin-block-end: 0;
-  }
-}
-
-.heroBackgroundImage {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-color: var(--color-search-background);
-
-  svg {
-    width: 100%;
-    transform: translateY(-40%);
-  }
-}
-
-.heroInnerContainer {
-  @include utility.pageContainer();
-
-  display: flex;
-  height: 100%;
-  gap: var(--spacing-small-px);
-  align-items: center;
-  margin-inline: auto;
-
-  h1 {
-    font-size: var(--font-size-large-px);
-    line-height: var(--line-height-jumbo);
-    font-weight: var(--font-weight-bold);
-
-    @include breakpoints.tablet {
-      font-size: var(--font-size-xxxlarge-px);
-    }
-  }
-}
-
 .contentContainer {
   background-color: var(--color-background-default);
   border-radius: $widget-border-radius;
@@ -85,12 +38,12 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .mushaf {
-  width: var(--spacing-xlarge-px);
-  height: var(--spacing-xlarge-px);
+  inline-size: var(--spacing-xlarge-px);
+  block-size: var(--spacing-xlarge-px);
 
   @include breakpoints.tablet {
-    width: var(--spacing-xxlarge-px);
-    height: var(--spacing-xxlarge-px);
+    inline-size: var(--spacing-xxlarge-px);
+    block-size: var(--spacing-xxlarge-px);
   }
 
   path {
@@ -138,14 +91,51 @@ $widget-border-radius: var(--border-radius-rounded);
 
   &.streakWidget {
     flex-direction: column;
-    background-color: var(--color-background-alternative-faint-new);
   }
 }
 
 .emptyWidget {
+  background-color: var(--color-background-elevated-new);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: var(--spacing-medium2-px);
+}
+
+.emptyWidgetHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  svg {
+    block-size: var(--spacing-large-px);
+    inline-size: var(--spacing-large-px);
+  }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal-px);
+  }
+}
+
+.emptyWidgetDescription {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small-px);
+  }
+}
+
+.emptyWidgetCta {
+  align-items: center;
+  gap: var(--spacing-small-px);
+  svg,
+  path {
+    fill: var(--color-text-white);
+  }
 }
 
 .progressWidget {
@@ -169,8 +159,8 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .circularProgressbar {
-  width: var(--spacing-xxxlarge-px);
-  height: var(--spacing-xxxlarge-px);
+  inline-size: var(--spacing-xxxlarge-px);
+  block-size: var(--spacing-xxxlarge-px);
 }
 
 .circularProgressbarPath {
@@ -186,7 +176,7 @@ $widget-border-radius: var(--border-radius-rounded);
 
 .circularProgressbarText {
   fill: var(--color-text-black);
-  font-size: var(--font-size-normal-px);
+  font-size: var(--font-size-small-px);
   font-weight: var(--font-weight-bold);
   dominant-baseline: middle;
   text-anchor: middle;
@@ -204,6 +194,7 @@ $widget-border-radius: var(--border-radius-rounded);
 }
 
 .progressWidgetDaysLeft {
+  font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-gray);
 

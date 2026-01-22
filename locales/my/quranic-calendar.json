@@ -1,0 +1,117 @@
+{
+  "additional-resources": "",
+  "additional-resources-subtitle": "",
+  "ask-question": "မေးခွန်းတစ်ခုမေးပါ",
+  "complete": "",
+  "completed-weeks": "",
+  "divine-book-club": "",
+  "divine-book-club-description": "",
+  "end-of-calendar": "",
+  "english-pdf": "",
+  "faq": "",
+  "faq-items": [
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    },
+    {
+      "answer": "",
+      "question": ""
+    }
+  ],
+  "hero": {
+    "description": "",
+    "line-1": ""
+  },
+  "interact-with-post": "",
+  "islamic-months": {
+    "1": "",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": "",
+    "6": "",
+    "7": "",
+    "8": "",
+    "9": "",
+    "10": "",
+    "11": "",
+    "12": ""
+  },
+  "join-qc": {
+    "line-1": "",
+    "line-2": ""
+  },
+  "join-quranic-calendar": "",
+  "join-quranic-calendar-success": "",
+  "join-telegram": "",
+  "join-telegram-mobile": "",
+  "join-whatsapp": "",
+  "join-whatsapp-mobile": "",
+  "mark-as-completed": "",
+  "marked-as-completed": "",
+  "month": "",
+  "my-progress": "",
+  "progress-subtitle": "",
+  "quran-calendar-description": "",
+  "quran-calendar-title": "",
+  "quran-reflect": "",
+  "quran-reflect-description": "",
+  "quranic-calendar": "",
+  "ramadan": "",
+  "read-online": "",
+  "read-this-weeks-verses": "",
+  "reading-options": {
+    "default-settings": "",
+    "en-and-ar": "",
+    "en-only": ""
+  },
+  "reflection-prompts": "",
+  "share-reflections": "",
+  "start-tracking": "",
+  "supplemental-resources": "",
+  "today": "",
+  "verse": "",
+  "verses-subtitle": "",
+  "watch-episode": "",
+  "week": "",
+  "week-completed": "",
+  "week-title": "",
+  "weekly-verses-help-description-1": ""
+}

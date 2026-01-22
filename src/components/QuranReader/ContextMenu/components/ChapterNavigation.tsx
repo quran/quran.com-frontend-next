@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from '../styles/ContextMenu.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import { TestId } from '@/tests/test-ids';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface ChapterNavigationProps {
@@ -28,7 +29,7 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   const { lang } = useTranslation();
   return (
     <p
-      data-testid="chapter-navigation"
+      data-testid={TestId.CHAPTER_NAVIGATION}
       className={classNames(styles.bold, styles.alignStart, styles.surahName, {
         [styles.disabledOnMobile]: isSidebarNavigationVisible,
       })}

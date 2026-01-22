@@ -6,3 +6,20 @@ export const throwIfError = (res: BaseResponse) => {
     throw new Error('internal server error');
   }
 };
+
+export interface APIErrorResponse {
+  details: {
+    error: {
+      code: string;
+      details: Record<string, string>;
+    };
+  };
+}
+
+export const isValidationError = (response: unknown): response is APIErrorResponse => {
+  if (typeof response !== 'object' || response === null) return false;
+  const error = response as APIErrorResponse;
+  const detailsError = error.details?.error;
+
+  return detailsError?.code === 'ValidationError' && !!detailsError?.details;
+};

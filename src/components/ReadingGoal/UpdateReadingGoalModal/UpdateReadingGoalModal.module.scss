@@ -1,18 +1,26 @@
 @use 'src/styles/breakpoints';
 
+.modalContent {
+  max-block-size: 90dvh;
+  overflow-y: auto;
+  div {
+    overflow: hidden;
+  }
+}
+
 .inputs {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .inputContainer {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   flex-direction: column;
   justify-content: center;
   margin-block: var(--spacing-large);
 
   select {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
@@ -23,7 +31,7 @@
 }
 
 .actionButton {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .confirmationText {
@@ -39,7 +47,7 @@
   justify-content: space-between;
   align-items: center;
   margin-block: var(--spacing-large) !important;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .radioItem {
@@ -49,7 +57,7 @@
 }
 
 .footerCtaContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-micro);

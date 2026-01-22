@@ -1,11 +1,11 @@
 /* eslint-disable max-lines */
-import React, { memo, useContext } from 'react';
+import React, { memo, useCallback, useContext, useRef } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import getTranslationsLabelString from '../ReadingView/utils/translation';
+import { QURAN_READER_OBSERVER_ID } from '../observer';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -21,11 +21,12 @@ import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useNavbarAutoHide from '@/hooks/useNavbarAutoHide';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { WordVerse } from '@/types/Word';
-import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
+import { getVerseWords, makeVerseKey } from '@/utils/verse';
+import { selectIsAudioPlayerVisible } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -36,6 +37,8 @@ type TranslationViewCellProps = {
   verseIndex: number;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
+  hasQuestions?: boolean;
+  isFirstCellWithHeader?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -44,9 +47,14 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   bookmarksRangeUrl,
   hasNotes,
+  hasQuestions,
+  isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
+    // Don't highlight when audio player is closed
+    if (!selectIsAudioPlayerVisible(state)) return false;
+
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
   });
@@ -64,19 +72,38 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     isHighlighted,
     scrollToSelectedItem,
   ]);
-  const translationsLabel = getTranslationsLabelString(verse.translations);
-  const translationsCount = verse.translations?.length || 0;
-  const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
+
+  // Register this cell with the global intersection observer for page tracking
+  const observerRef = useRef<HTMLDivElement | null>(null);
+  useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
+
+  // Callback ref to merge both selectedItemRef and observerRef
+  const mergedRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      // Update both refs
+      if (selectedItemRef) {
+        (selectedItemRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+      observerRef.current = node;
+    },
+    [selectedItemRef],
+  );
 
   return (
-    <div ref={selectedItemRef}>
+    <>
       <div
+        ref={mergedRef}
+        data-verse-key={verse.verseKey}
+        data-page={verse.pageNumber}
+        data-chapter-id={verse.chapterId}
+        data-hizb={verse.hizbNumber}
+        data-testid={`verse-${verse.verseKey}`}
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
+          [styles.firstCellWithHeader]: isFirstCellWithHeader,
         })}
-        data-testid={`verse-${verse.verseKey}`}
       >
-        <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -95,10 +122,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} />
+        <BottomActions verseKey={verse.verseKey} hasQuestions={hasQuestions} />
       </div>
       <Separator className={styles.verseSeparator} />
-    </div>
+    </>
   );
 };
 
@@ -125,6 +152,8 @@ const areVersesEqual = (
 ): boolean =>
   prevProps.verse.id === nextProps.verse.id &&
   prevProps.hasNotes === nextProps.hasNotes &&
+  prevProps.hasQuestions === nextProps.hasQuestions &&
+  prevProps.isFirstCellWithHeader === nextProps.isFirstCellWithHeader &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,
@@ -133,6 +162,5 @@ const areVersesEqual = (
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
-  prevProps.hasNotes === nextProps.hasNotes;
+  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl;
 export default memo(TranslationViewCell, areVersesEqual);

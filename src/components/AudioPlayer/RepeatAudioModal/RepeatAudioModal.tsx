@@ -13,6 +13,7 @@ import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { TestId } from '@/tests/test-ids';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -167,13 +168,18 @@ const RepeatAudioModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
+      testId={TestId.REPEAT_AUDIO_MODAL}
+    >
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{t('audio.player.repeat-settings')}</Modal.Title>
           <Modal.Subtitle>{`${t('surah')} ${chapterName}`}</Modal.Subtitle>
         </Modal.Header>
-        <div data-testid="repeat-audio-modal">
+        <div>
           <SelectRepetitionMode
             repetitionMode={repetitionMode}
             rangeEndVerse={verseRepetition.to}

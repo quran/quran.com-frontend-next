@@ -12,7 +12,7 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useBookmarkCollections from '@/hooks/useBookmarkCollections';
 import useCollections from '@/hooks/useCollections';
 import PlusIcon from '@/icons/plus.svg';
-import { WordVerse } from '@/types/Word';
+import Verse from '@/types/Verse';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
@@ -20,7 +20,7 @@ import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   isTranslationView: boolean;
   bookmarksRangeUrl?: string;
 }

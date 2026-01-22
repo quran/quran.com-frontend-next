@@ -1,22 +1,23 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationFeedbackAction.module.scss';
 import TranslationFeedbackModal from './TranslationFeedbackModal';
+import feedbackModalStyles from './TranslationFeedbackModal.module.scss';
 
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import FeedbackIcon from '@/icons/translation-feedback.svg';
-import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 interface TranslationFeedbackActionProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   isTranslationView: boolean;
   onActionTriggered?: () => void;
 }
@@ -29,7 +30,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   onActionTriggered,
 }) => {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -94,6 +95,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
           />
         }
         onClick={handleGuestUserClick}
+        dataTestId="verse-actions-menu-translation-feedback"
       >
         {t('translation-feedback.title')}
       </PopoverMenu.Item>
@@ -103,9 +105,12 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
         header={<p className={styles.title}>{t('translation-feedback.title')}</p>}
         hasCloseButton
         onClose={onModalClose}
-        contentClassName={styles.content}
-        overlayClassName={styles.overlay}
         onEscapeKeyDown={onModalClose}
+        overlayClassName={styles.overlay}
+        headerClassName={styles.headerClassName}
+        closeIconClassName={styles.closeIconContainer}
+        contentClassName={classNames(styles.content, styles.formModalContent)}
+        innerContentClassName={classNames(feedbackModalStyles.container, styles.formModalContent)}
       >
         <TranslationFeedbackModal verse={verse} onClose={onModalClose} />
       </ContentModal>

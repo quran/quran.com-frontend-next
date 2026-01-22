@@ -3,8 +3,12 @@ import { test, expect } from '@playwright/test';
 import type { Page } from '@playwright/test';
 
 import { ensureEnglishLanguage } from '@/tests/helpers/language';
-import { switchToTranslationMode, switchToReadingMode } from '@/tests/helpers/mode-switching';
-import { clearSelectedTranslations, selectTranslationPreference } from '@/tests/helpers/settings';
+import { switchToReadingMode } from '@/tests/helpers/mode-switching';
+import {
+  clearSelectedTranslations,
+  openSettingsDrawer,
+  selectTranslationPreference,
+} from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import { getVerseArabicTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
@@ -57,7 +61,8 @@ const openTranslationFeedbackModal = async (
  */
 const selectTranslationOption = async (page: Page, translationId: string = '131') => {
   const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
-  await translationSelect.selectOption(translationId);
+  await translationSelect.click();
+  await page.getByTestId(`translation-select-option-${translationId}`).click();
 };
 
 test.beforeEach(async ({ page, context }) => {
@@ -72,8 +77,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Logged-in user can open translation feedback modal from translation view',
     { tag: ['@translation-feedback', '@auth', '@logged-in', '@smoke'] },
     async ({ page }) => {
-      // Set translation mode to ensure consistent starting state
-      await switchToTranslationMode(page);
+      await page.setViewportSize({ width: 1920, height: 1080 });
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
@@ -93,6 +97,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Logged-in user can open translation feedback modal from reading view',
     { tag: ['@translation-feedback', '@auth', '@logged-in'] },
     async ({ page }) => {
+      await page.setViewportSize({ width: 1920, height: 1080 });
+
       // Set reading mode for consistent test state
       await switchToReadingMode(page);
 
@@ -115,7 +121,11 @@ test.describe('Translation Feedback - Logged In Users', () => {
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page }) => {
       // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+
+      await openSettingsDrawer(page);
+
+      // Select translation 20
+      await selectTranslationPreference(page, '20');
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
@@ -123,12 +133,11 @@ test.describe('Translation Feedback - Logged In Users', () => {
       // Check translation dropdown
       const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
       await expect(translationSelect).toBeVisible();
+      await translationSelect.click();
 
-      // Should have at least one translation option (from user preferences)
-      // Note: Exact options depend on user's selected translations
-      const options = translationSelect.locator('option');
-      const optionCount = await options.count();
-      expect(optionCount).toBeGreaterThan(0);
+      // Should show options from user's preferences
+      const options = page.getByTestId('translation-select-option-20');
+      await expect(options).toBeVisible();
     },
   );
 
@@ -136,8 +145,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation feedback form validation works correctly',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
 
       const translationId = await clearSelectedTranslations(page, { isMobile });
 
@@ -168,6 +176,8 @@ test.describe('Translation Feedback - Logged In Users', () => {
 
       await page.getByTestId('verse-1:1').click({ force: true, position: { x: 0, y: 0 } }); // Defocus to close the context menu if it's still open
 
+      await openSettingsDrawer(page);
+
       await selectTranslationPreference(page, translationId, { isMobile });
       await openTranslationFeedbackModal(page, 'translation');
 
@@ -191,15 +201,14 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Feedback text validation enforces minimum and maximum length',
     { tag: ['@translation-feedback', '@form-validation'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
+
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
 
-      const translationSelect = page.getByTestId(TestId.TRANSLATION_SELECT);
-      await translationSelect.selectOption('131'); // This one must be available in authenticated user's preferences
+      await selectTranslationOption(page, '131');
 
       const feedbackTextarea = page.getByPlaceholder(
         'Use this space to report an issue relating to the selected translation of this Ayah.',
@@ -215,12 +224,14 @@ test.describe('Translation Feedback - Logged In Users', () => {
       await feedbackTextarea.fill('   '); // Only spaces
       await reportButton.click();
       await expect(page.getByText('Feedback is required')).toBeVisible();
+      await page.waitForTimeout(500); // Wait for any debounce
 
       // Test maximum length validation (exceeds 10000 character limit)
       const longText = 'a'.repeat(10001);
       await feedbackTextarea.fill(longText);
+      await page.waitForTimeout(500); // Wait for any debounce
       await reportButton.click();
-      await expect(page.getByText('Feedback cannot exceed 10000 characters')).toBeVisible();
+      await expect(page.getByText('Feedback cannot exceed')).toBeVisible();
     },
   );
 
@@ -228,8 +239,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Translation preview shows selected translation text',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Open translation feedback modal
@@ -250,8 +260,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Successful feedback submission shows success toast and closes modal',
     { tag: ['@translation-feedback', '@submission', '@success'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock successful API response
@@ -291,8 +300,7 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Failed feedback submission shows error toast and keeps modal open',
     { tag: ['@translation-feedback', '@submission', '@error'] },
     async ({ page, isMobile }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
+      await openSettingsDrawer(page);
       await selectTranslationPreference(page, '131', { isMobile });
 
       // Mock failed API response
@@ -332,9 +340,6 @@ test.describe('Translation Feedback - Logged In Users', () => {
     'Cancel action closes modal without submission',
     { tag: ['@translation-feedback', '@ui'] },
     async ({ page }) => {
-      // Ensure we're in translation mode
-      await switchToTranslationMode(page);
-
       // Open translation feedback modal
       await openTranslationFeedbackModal(page, 'translation');
 

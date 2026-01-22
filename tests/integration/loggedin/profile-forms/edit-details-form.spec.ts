@@ -9,6 +9,8 @@ import Homepage from '@/tests/POM/home-page';
 let homePage: Homepage;
 
 test.beforeEach(async ({ page, context }) => {
+  test.skip(true, 'Unskip when the feature is on production');
+
   homePage = new Homepage(page, context);
   await homePage.goTo('/profile');
   await ensureEnglishLanguage(page);

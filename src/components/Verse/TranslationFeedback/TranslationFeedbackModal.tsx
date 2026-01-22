@@ -4,20 +4,19 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationFeedbackModal.module.scss';
 import TranslationPreview from './TranslationPreview';
+import TranslationSelect from './TranslationSelect';
 import useTranslationFeedbackForm from './useTranslationFeedbackForm';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
-import Select from '@/dls/Forms/Select';
 import TextArea from '@/dls/Forms/TextArea';
-import { WordVerse } from '@/types/Word';
 
 interface TranslationFeedbackModalProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   onClose: () => void;
 }
 
 const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ verse, onClose }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
 
   const {
     selectedTranslationId,
@@ -33,24 +32,27 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
   return (
     <form onSubmit={onSubmit} noValidate className={styles.form}>
       <div className={styles.inputGroup}>
-        <label htmlFor="translation-select">{t('translation-feedback.select-translation')}</label>
+        <label htmlFor="translation-select" data-testid="translation-select-label">
+          {t('translation-feedback.select-translation')}
+        </label>
 
-        <Select
+        <TranslationSelect
+          selectedTranslationId={selectedTranslationId}
+          selectOptions={selectOptions}
+          onTranslationChange={handleTranslationChange}
           id="translation-select"
           name="translation-select"
-          options={selectOptions}
-          value={selectedTranslationId}
-          className={styles.selectContainer}
-          placeholder={t('translation-feedback.select')}
-          onChange={handleTranslationChange}
         />
-
-        {errors.translation && <div className={styles.error}>{errors.translation}</div>}
+        {errors.translation && (
+          <div className={styles.error} data-testid={`translation-error-${errors.translation.id}`}>
+            {errors.translation.message}
+          </div>
+        )}
       </div>
 
       <TranslationPreview verse={verse} selectedTranslationId={selectedTranslationId} />
 
-      <div className={styles.inputGroup}>
+      <div className={styles.textAreaInputGroup}>
         <TextArea
           id="feedback"
           name="feedback"
@@ -58,13 +60,25 @@ const TranslationFeedbackModal: React.FC<TranslationFeedbackModalProps> = ({ ver
           containerClassName={styles.textArea}
           value={feedback}
           onChange={handleFeedbackChange}
+          dataTestId="translation-feedback-textarea"
         />
 
-        {errors.feedback && <div className={styles.error}>{errors.feedback}</div>}
+        {errors.feedback && (
+          <div className={styles.error} data-testid={`feedback-error-${errors.feedback.id}`}>
+            {errors.feedback.message}
+          </div>
+        )}
       </div>
 
       <div className={styles.actions}>
-        <Button htmlType="submit" isLoading={isSubmitting} size={ButtonSize.Small}>
+        <Button
+          htmlType="submit"
+          isLoading={isSubmitting}
+          size={ButtonSize.Small}
+          className={styles.reportButton}
+          isDisabled={isSubmitting}
+          data-testid="translation-feedback-submit-button"
+        >
           {t('translation-feedback.report')}
         </Button>
       </div>

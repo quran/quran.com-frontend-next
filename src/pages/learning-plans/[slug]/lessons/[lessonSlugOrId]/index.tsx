@@ -1,7 +1,6 @@
-/* eslint-disable react/no-multi-comp */
 import { useCallback } from 'react';
 
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 
 import LessonContent from '@/components/Course/LessonContent';
@@ -15,8 +14,7 @@ import EnrollmentMethod from '@/types/auth/EnrollmentMethod';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
 import useCourseEnrollment from '@/utils/auth/useCourseEnrollment';
-import { getAllChaptersData } from '@/utils/chapter';
-import { getCourseNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import { getLoginNavigationUrl, getCourseNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   hasError?: boolean;
@@ -76,20 +74,5 @@ const LessonPage: NextPage<Props> = () => {
     </div>
   );
 };
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
 
 export default LessonPage;

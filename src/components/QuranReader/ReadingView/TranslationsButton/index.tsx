@@ -17,18 +17,18 @@ import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
-import { WordVerse } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
+import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
   isTranslationView: boolean;
 }

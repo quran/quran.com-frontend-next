@@ -36,15 +36,20 @@ test.describe('Navigation Sidebar Operations', () => {
     'Navigation drawer should only appear on Quran reader pages',
     { tag: ['@slow', '@drawer'] },
     async ({ page, isMobile }) => {
+      test.slow();
+
       // 1. Make sure the navigation drawer is not mounted by default
       await expect(page.getByTestId(TestId.SIDEBAR_NAVIGATION)).not.toBeAttached();
 
       // 2. Go to a a surah page
       await homePage.goTo('/2');
 
+      await page.waitForTimeout(500);
+      // Scroll down a little to make sure the chapter navigation button is visible
       if (isMobile) {
-        // Scroll down a little to make sure the chapter navigation button is visible
-        await page.mouse.wheel(0, 500);
+        await page.evaluate(() => window.scrollBy(0, 1500));
+      } else {
+        await page.mouse.wheel(0, 1500);
       }
 
       // 3. Open the navigation drawer
@@ -118,16 +123,14 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Leaving a reader page through the header logo hides the sidebar on the homepage',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page, isMobile }) => {
+    async ({ page }) => {
       await homePage.goTo('/1');
       const sidebar = page.getByTestId(TestId.SIDEBAR_NAVIGATION);
       await expect(sidebar).not.toBeAttached();
 
-      if (isMobile) {
-        // Scroll down a little to make sure the chapter navigation button is visible
-        await page.mouse.wheel(0, 500);
-        await page.mouse.wheel(0, -300);
-      }
+      // Scroll down a little to make sure the chapter navigation button is visible
+      await page.evaluate(() => window.scrollBy(0, 500));
+      await page.evaluate(() => window.scrollBy(0, -300));
 
       await page.getByTestId(TestId.CHAPTER_NAVIGATION).click({ position: { x: 5, y: 5 } });
       await expect(sidebar).toBeVisible();
@@ -145,16 +148,14 @@ test.describe('Navigation Sidebar Route Regressions', () => {
   test(
     'Sidebar hides after navigating from a reader page to the learning plans index',
     { tag: ['@slow', '@navigation', '@sidebar'] },
-    async ({ page, isMobile }) => {
+    async ({ page }) => {
       await homePage.goTo('/1');
       const sidebar = page.getByTestId(TestId.SIDEBAR_NAVIGATION);
       await expect(sidebar).not.toBeAttached();
 
-      if (isMobile) {
-        // Scroll down a little to make sure the chapter navigation button is visible
-        await page.mouse.wheel(0, 500);
-        await page.mouse.wheel(0, -300);
-      }
+      // Scroll down a little to make sure the chapter navigation button is visible
+      await page.evaluate(() => window.scrollBy(0, 500));
+      await page.evaluate(() => window.scrollBy(0, -300));
 
       await page.getByTestId(TestId.CHAPTER_NAVIGATION).click({ position: { x: 5, y: 5 } });
       await expect(sidebar).toBeVisible();
@@ -378,6 +379,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@verse'] },
     async ({ page, isMobile }) => {
       test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+      test.slow();
 
       await openQuranNavigation(page);
       await page.getByTestId(TestId.VERSE_BUTTON).click();

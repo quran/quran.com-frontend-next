@@ -19,6 +19,8 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { TestId } from '@/tests/test-ids';
 
 const MARKETING_TAG_NAME = 'marketing';
+const QDC_TAG = 'QDC';
+const QR_TAG = 'QR';
 
 const EmailNotificationSettingsForm: FC = () => {
   const { t } = useTranslation('profile');
@@ -45,9 +47,17 @@ const EmailNotificationSettingsForm: FC = () => {
           (preference) =>
             preference.template.critical === false &&
             !!preference.template.tags.length &&
-            !preference.template.tags.includes(MARKETING_TAG_NAME),
+            !preference.template.tags.includes(MARKETING_TAG_NAME) &&
+            preference.template.tags.includes(QDC_TAG),
         ),
-        (preference) => preference.template.tags,
+        // Group by category tags, excluding QDC/QR marker tags
+        (preference) => {
+          const categoryTags = preference.template.tags.filter(
+            (tag) => tag !== QDC_TAG && tag !== QR_TAG,
+          );
+          // Take the first category tag; workflows should have exactly one category tag
+          return categoryTags[0] || 'uncategorized';
+        },
       ),
     [localPreferences],
   );

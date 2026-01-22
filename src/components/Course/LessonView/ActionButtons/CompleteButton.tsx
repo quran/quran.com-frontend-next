@@ -29,7 +29,7 @@ const CompleteButton: React.FC<Props> = ({ isLoading, id, markLessonAsCompleted 
     });
 
     if (!userIsLoggedIn) {
-      router.replace(getLoginNavigationUrl(encodeURIComponent(router.asPath)));
+      router.push(getLoginNavigationUrl(encodeURIComponent(router.asPath)));
       return;
     }
     markLessonAsCompleted(id, () => {

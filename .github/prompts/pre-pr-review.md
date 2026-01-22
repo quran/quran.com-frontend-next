@@ -4,11 +4,11 @@ Run an AI code review before opening a PR.
 
 ## Quick Commands
 
-| IDE | Command |
-|-----|---------|
-| **VS Code** | Open Copilot Chat → Type `/review` |
-| **Cursor** | Open Chat (Cmd+L) → Type `/review` |
-| **Windsurf** | Open Cascade → Type `/review` |
+| IDE          | Command                            |
+| ------------ | ---------------------------------- |
+| **VS Code**  | Open Copilot Chat → Type `/review` |
+| **Cursor**   | Open Chat (Cmd+L) → Type `/review` |
+| **Windsurf** | Open Cascade → Type `/review`      |
 
 ## Alternative: VS Code Task
 

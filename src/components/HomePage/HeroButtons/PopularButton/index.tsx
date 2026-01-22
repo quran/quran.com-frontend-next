@@ -6,6 +6,7 @@ import heroButtonStyles from '@/components/HomePage/HeroButtons/HeroButtons.modu
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopularIcon from '@/icons/trend_up.svg';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface PopularButtonProps {
@@ -26,7 +27,7 @@ const PopularButton = ({ onClick }: PopularButtonProps) => {
       className={heroButtonStyles.button}
       onClick={handleClick}
       size={ButtonSize.Small}
-      data-testid="popular-button"
+      data-testid={TestId.POPULAR_BUTTON}
     >
       <div className={heroButtonStyles.buttonContent}>
         <IconContainer size={IconSize.Xsmall} icon={<PopularIcon />} shouldForceSetColors={false} />

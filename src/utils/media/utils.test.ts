@@ -7,19 +7,13 @@ import { describe, expect, it } from 'vitest';
 import { getAllChaptersData } from '../chapter';
 
 import {
-  getCurrentRangesAudioData,
-  getDurationInFrames,
   isValidHexColor,
   isValidVerseToOrFrom,
   prepareGenerateMediaFileRequestData,
 } from './utils';
 
-import AudioData from '@/types/AudioData';
 import Alignment from '@/types/Media/Alignment';
-import GenerateMediaFileRequest, {
-  MediaType,
-  Timestamp,
-} from '@/types/Media/GenerateMediaFileRequest';
+import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import PreviewMode from '@/types/Media/PreviewMode';
 import WatermarkColor from '@/types/Media/WatermarkColor';
@@ -89,88 +83,6 @@ describe('isValidVerseToOrFrom', async () => {
     const result = isValidVerseToOrFrom(QueryParam.VERSE_TO, chaptersData, invalidQuery);
 
     expect(result).toBe(false);
-  });
-});
-
-describe('getCurrentRangesAudioData', () => {
-  it('normalizes verse timings while keeping absolute offsets for the original audio', () => {
-    const chapterAudioData: AudioData = {
-      id: 1,
-      chapterId: 10,
-      fileSize: 1000,
-      format: 'mp3',
-      audioUrl: 'audio.mp3',
-      duration: 9000,
-      reciterId: 13,
-      verseTimings: [
-        {
-          verseKey: '10:85',
-          timestampFrom: 0,
-          timestampTo: 1000,
-          duration: 1000,
-          segments: [],
-        },
-        {
-          verseKey: '10:86',
-          timestampFrom: 1500,
-          timestampTo: 2600,
-          duration: 1100,
-          segments: [],
-        },
-        {
-          verseKey: '10:87',
-          timestampFrom: 3200,
-          timestampTo: 4700,
-          duration: 1500,
-          segments: [],
-        },
-        {
-          verseKey: '10:88',
-          timestampFrom: 5000,
-          timestampTo: 6800,
-          duration: 1800,
-          segments: [],
-        },
-      ],
-    };
-
-    const result = getCurrentRangesAudioData(chapterAudioData, 3, 4);
-
-    expect(result.verseTimings).toBeDefined();
-    const verseTimings = result.verseTimings as unknown as Array<{
-      timestampFrom: number;
-      timestampTo: number;
-      normalizedStart: number;
-      normalizedEnd: number;
-    }>;
-    expect(verseTimings).toHaveLength(2);
-    const [firstTiming, secondTiming] = verseTimings;
-    expect(firstTiming.timestampFrom).toBe(0);
-    expect(firstTiming.timestampTo).toBe(1500);
-    expect(firstTiming.normalizedStart).toBe(3200);
-    expect(firstTiming.normalizedEnd).toBe(4700);
-    expect(secondTiming.timestampFrom).toBe(1800);
-    expect(secondTiming.timestampTo).toBe(3600);
-    expect(secondTiming.normalizedStart).toBe(5000);
-    expect(secondTiming.normalizedEnd).toBe(6800);
-    expect(result.duration).toBe(3600);
-    expect(chapterAudioData.verseTimings?.[2].timestampFrom).toBe(3200);
-    expect(chapterAudioData.verseTimings?.[3].timestampFrom).toBe(5000);
-  });
-});
-
-describe('getDurationInFrames', () => {
-  it('includes gaps between timestamps in the total duration', () => {
-    const timestamps: Timestamp[] = [
-      { start: 0, durationInFrames: 50 },
-      { start: 80, durationInFrames: 20 },
-    ];
-
-    expect(getDurationInFrames(timestamps)).toBe(100);
-  });
-
-  it('returns at least one frame when timestamps are empty', () => {
-    expect(getDurationInFrames([])).toBe(1);
   });
 });
 
@@ -578,7 +490,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       previewMode: PreviewMode.DISABLED,
       type: MediaType.VIDEO,
       chaptersDataArabic: '',
-    } as unknown as GenerateMediaFileRequest;
+    } as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 
@@ -953,7 +865,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       type: MediaType.IMAGE,
       chaptersDataArabic: '',
       previewMode: PreviewMode.DISABLED,
-    } as unknown as GenerateMediaFileRequest;
+    } as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
 

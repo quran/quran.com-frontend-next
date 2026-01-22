@@ -4,6 +4,9 @@ import { it, expect, describe } from 'vitest';
 import {
   truncateString,
   stripHTMLTags,
+  stripHtml,
+  getHtmlTextLength,
+  truncateHtml,
   formatVerseReferencesToLinks,
   getWordCount,
 } from './string';
@@ -45,6 +48,258 @@ describe('Test stripHTMLTags', () => {
     ).toEqual(
       'Which was revealed in MakkahThe Meaning of Al-Fatihah and its Various Names This Surah is called - Al-Fatihah, that is, the Opener of the Book, the Surah with which prayers are begun. - It is also called, Umm Al-Kitab (the Mother of the Book), according to the majority of the scholars.',
     );
+  });
+});
+
+describe('stripHtml', () => {
+  // Basic functionality
+  it('should strip simple HTML tags', () => {
+    expect(stripHtml('<p>Hello World</p>')).toBe('Hello World');
+  });
+
+  it('should strip nested HTML tags', () => {
+    expect(stripHtml('<div><p><strong>Nested</strong> content</p></div>')).toBe('Nested content');
+  });
+
+  it('should handle empty string', () => {
+    expect(stripHtml('')).toBe('');
+  });
+
+  it('should handle null/undefined input', () => {
+    expect(stripHtml(null as any)).toBe('');
+    expect(stripHtml(undefined as any)).toBe('');
+  });
+
+  it('should handle plain text without HTML', () => {
+    expect(stripHtml('Plain text without tags')).toBe('Plain text without tags');
+  });
+
+  // Multi-lingual content tests
+  it('should strip HTML from Arabic content', () => {
+    expect(stripHtml('<p>وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</p>')).toBe(
+      'وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢',
+    );
+  });
+
+  it('should strip HTML from Chinese content', () => {
+    expect(stripHtml('<span>这是中文内容</span>')).toBe('这是中文内容');
+  });
+
+  it('should strip HTML from Japanese content', () => {
+    expect(stripHtml('<div>これは日本語のテキストです</div>')).toBe('これは日本語のテキストです');
+  });
+
+  it('should strip HTML from Korean content', () => {
+    expect(stripHtml('<p>이것은 한국어 텍스트입니다</p>')).toBe('이것은 한국어 텍스트입니다');
+  });
+
+  it('should strip HTML from Russian content', () => {
+    expect(stripHtml('<p>Это русский текст</p>')).toBe('Это русский текст');
+  });
+
+  it('should strip HTML from mixed RTL and LTR content', () => {
+    const html = '<p>English and العربية mixed</p>';
+    expect(stripHtml(html)).toBe('English and العربية mixed');
+  });
+
+  // Complex HTML scenarios
+  it('should handle HTML with long attributes (Google Translate scenario)', () => {
+    const html =
+      '<p id="tw-target-text" class="tw-data-text tw-text-large" dir="rtl" aria-label="Very long label text here" data-ved="extremely-long-data-attribute-value"><span class="Y2IQFc" lang="ar">وُلد الشيخ</span></p>';
+    expect(stripHtml(html)).toBe('وُلد الشيخ');
+  });
+
+  it('should handle pre tags with whitespace', () => {
+    const html = '<pre>  Preformatted   text  </pre>';
+    expect(stripHtml(html).trim()).toContain('Preformatted');
+  });
+
+  it('should handle self-closing tags', () => {
+    expect(stripHtml('Hello<br/>World<br />Test')).toBe('HelloWorldTest');
+  });
+
+  it('should handle HTML comments', () => {
+    expect(stripHtml('Hello<!-- comment -->World')).toBe('HelloWorld');
+  });
+
+  // HTML entities
+  it('should decode common HTML entities', () => {
+    // Note: Server-side regex-based strip handles these; browser DOMParser handles automatically
+    const result = stripHtml('Hello&nbsp;World&amp;Test');
+    expect(result).toContain('Hello');
+    expect(result).toContain('World');
+  });
+
+  // Edge cases
+  it('should handle malformed HTML', () => {
+    expect(stripHtml('<p>Unclosed tag')).toBe('Unclosed tag');
+  });
+
+  it('should handle deeply nested HTML', () => {
+    const html = '<div><div><div><div><p>Deep</p></div></div></div></div>';
+    expect(stripHtml(html)).toBe('Deep');
+  });
+
+  it('should handle multiple paragraphs', () => {
+    const html = '<p>First paragraph.</p><p>Second paragraph.</p>';
+    expect(stripHtml(html)).toBe('First paragraph.Second paragraph.');
+  });
+
+  it('should handle list elements', () => {
+    const html = '<ul><li>Item 1</li><li>Item 2</li></ul>';
+    expect(stripHtml(html)).toBe('Item 1Item 2');
+  });
+
+  it('should handle table content', () => {
+    const html = '<table><tr><td>Cell 1</td><td>Cell 2</td></tr></table>';
+    expect(stripHtml(html)).toBe('Cell 1Cell 2');
+  });
+});
+
+describe('getHtmlTextLength', () => {
+  it('should return correct length for simple HTML', () => {
+    expect(getHtmlTextLength('<p>Hello</p>')).toBe(5);
+  });
+
+  it('should return correct length for empty string', () => {
+    expect(getHtmlTextLength('')).toBe(0);
+  });
+
+  it('should not count HTML tags in length', () => {
+    const html = '<div><strong>Bold</strong> text</div>';
+    expect(getHtmlTextLength(html)).toBe(9); // "Bold text"
+  });
+
+  it('should return correct length for Arabic text', () => {
+    const html = '<p>مرحبا</p>';
+    expect(getHtmlTextLength(html)).toBe(5); // 5 Arabic characters
+  });
+
+  it('should handle HTML with long attributes', () => {
+    const html = '<p class="very-long-class-name" data-attribute="extremely-long-value">Short</p>';
+    expect(getHtmlTextLength(html)).toBe(5); // Only "Short"
+  });
+});
+
+describe('truncateHtml', () => {
+  // Basic functionality
+  it('should return original HTML when text is within limit', () => {
+    const html = '<p>Short text</p>';
+    expect(truncateHtml(html, 100)).toBe(html);
+  });
+
+  it('should truncate when text exceeds limit and preserve tags', () => {
+    const html = '<p>This is a very long text that should be truncated</p>';
+    const result = truncateHtml(html, 10);
+    expect(result).toBe('<p>This is a </p>...');
+  });
+
+  it('should handle empty string', () => {
+    expect(truncateHtml('', 100)).toBe('');
+  });
+
+  it('should handle null/undefined input', () => {
+    expect(truncateHtml(null as any, 100)).toBe('');
+    expect(truncateHtml(undefined as any, 100)).toBe('');
+  });
+
+  it('should use custom suffix', () => {
+    const html = '<p>This is long text</p>';
+    const result = truncateHtml(html, 7, '…');
+    expect(result).toBe('<p>This is</p>…');
+  });
+
+  // Multi-lingual content tests
+  it('should truncate Arabic content correctly', () => {
+    const html = '<p>وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</p>';
+    const result = truncateHtml(html, 15);
+    expect(result).toContain('وُلد');
+    expect(result).toContain('...');
+    expect(result).toContain('<p>');
+    expect(result).toContain('</p>');
+  });
+
+  it('should truncate Chinese content correctly', () => {
+    const html = '<p>这是一个很长的中文文本需要被截断</p>';
+    const result = truncateHtml(html, 5);
+    expect(result).toBe('<p>这是一个很</p>...');
+  });
+
+  it('should truncate Japanese content correctly', () => {
+    const html = '<p>これは非常に長い日本語のテキストです</p>';
+    const result = truncateHtml(html, 8);
+    expect(result).toBe('<p>これは非常に長い</p>...');
+  });
+
+  it('should truncate Korean content correctly', () => {
+    const html = '<p>이것은 매우 긴 한국어 텍스트입니다</p>';
+    const result = truncateHtml(html, 10);
+    expect(result).toContain('<p>');
+    expect(result).toContain('</p>');
+    expect(result).toContain('...');
+  });
+
+  // Complex HTML scenarios - preserves structure
+  it('should preserve nested tags and close them properly', () => {
+    const html = '<p><span>This is the actual content that is long</span></p>';
+    const result = truncateHtml(html, 15);
+    expect(result).toBe('<p><span>This is the act</span></p>...');
+  });
+
+  it('should handle Google Translate style HTML correctly', () => {
+    const html =
+      '<p id="tw-target-text" class="tw-data-text"><span class="Y2IQFc" lang="ar">وُلد الشيخ عبد الله حمد أبو شريدة عام ١٩٩٢</span></p>';
+    const result = truncateHtml(html, 20);
+    expect(result).toContain('<p');
+    expect(result).toContain('</p>');
+    expect(result).toContain('<span');
+    expect(result).toContain('</span>');
+    expect(result).toContain('...');
+  });
+
+  // Edge cases
+  it('should handle exact length match', () => {
+    const html = '<p>Exact</p>';
+    expect(truncateHtml(html, 5)).toBe(html);
+  });
+
+  it('should handle maxLength of 0', () => {
+    const html = '<p>Test</p>';
+    const result = truncateHtml(html, 0);
+    expect(result).toBe('...');
+  });
+
+  it('should handle very long HTML with short visible content', () => {
+    const html = `<div class="${'a'.repeat(1000)}">Hi</div>`;
+    expect(truncateHtml(html, 10)).toBe(html); // "Hi" is only 2 chars
+  });
+
+  it('should preserve original HTML when content fits', () => {
+    const html = '<strong>Bold</strong> <em>italic</em>';
+    expect(truncateHtml(html, 100)).toBe(html);
+  });
+
+  // Paragraph preservation tests
+  it('should preserve multiple paragraph structure when truncating', () => {
+    const html = '<p>First paragraph</p><p>Second paragraph</p><p>Third paragraph</p>';
+    const result = truncateHtml(html, 25);
+    expect(result).toContain('<p>First paragraph</p>');
+    expect(result).toContain('<p>Second');
+    expect(result).toContain('</p>...');
+  });
+
+  it('should handle self-closing br tags', () => {
+    const html = 'Line one<br/>Line two<br/>Line three and more text here';
+    const result = truncateHtml(html, 20);
+    expect(result).toContain('<br/>');
+    expect(result).toContain('...');
+  });
+
+  it('should handle br tags without slash', () => {
+    const html = 'Line one<br>Line two<br>Line three';
+    const result = truncateHtml(html, 15);
+    expect(result).toContain('<br>');
+    expect(result).toContain('...');
   });
 });
 

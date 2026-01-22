@@ -1,3 +1,11 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  flex: 1;
+  overflow-y: auto;
+  padding-block-end: var(--spacing-xxlarge-px);
+}
+
 .titleContainer {
   display: flex;
   align-items: center;
@@ -19,8 +27,8 @@
 }
 
 .infoIcon {
-  width: var(--spacing-medium-px);
-  height: var(--spacing-medium-px);
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -43,6 +51,11 @@
   color: var(--color-text-faded);
 }
 
-.input {
-  width: 95%;
+.searchInputContainer .input {
+  inline-size: 100%;
+  block-size: var(--spacing-xlarge-px);
+}
+
+div.popoverContent.popoverContent {
+  z-index: var(--z-index-high);
 }

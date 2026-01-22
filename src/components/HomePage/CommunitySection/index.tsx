@@ -9,6 +9,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import QRColoredIcon from '@/icons/qr-colored.svg';
 import QRLogoIcon from '@/icons/qr-logo.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
@@ -24,7 +25,7 @@ const CommunitySection = () => {
       <div className={styles.header}>
         <h1>{t('common:community.title')}</h1>
       </div>
-      <div className={styles.cardsContainer} data-testid="community-section">
+      <div className={styles.cardsContainer} data-testid={TestId.COMMUNITY_SECTION}>
         <Card
           className={styles.card}
           link={getQRNavigationUrl()}

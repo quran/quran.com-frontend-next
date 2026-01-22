@@ -50,9 +50,9 @@ const PersonalizationForm: FC = () => {
         <div className={styles.profilePictureDetailAction}>
           <div className={styles.profilePictureDetail}>
             <div className={styles.profilePictureImage}>
-              {hasProfilePicture ? (
+              {hasProfilePicture && userData.avatars?.large ? (
                 <Image
-                  src={userData.avatars?.large || ''}
+                  src={userData.avatars.large}
                   alt={t('profile-picture')}
                   width={60}
                   height={60}
@@ -81,7 +81,7 @@ const PersonalizationForm: FC = () => {
               size={ButtonSize.Small}
               className={classNames(styles.profilePictureActionButton, styles.uploadPictureButton)}
               onClick={onUploadPicture}
-              isLoading={isProcessing}
+              isLoading={isProcessing && !isRemoving}
               isDisabled={isProcessing || isRemoving}
             >
               {t('upload-picture')}

@@ -2,18 +2,25 @@
 
 $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
+$line-height-relaxed: 1.6;
 
 .headerContainer {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xsmall);
-  padding-block: var(--spacing-mega);
+  padding-block-start: var(--spacing-large-px);
+  padding-block-end: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
-  border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: calc(2 * var(--spacing-small));
+    padding-block-start: calc(2 * var(--spacing-small));
+  }
 }
 
 .calligraphyContainer {
-  max-width: max-content;
+  max-inline-size: max-content;
 
   // The calligraphy SVG has a lot of whitespace on the left side in LTR, so we shift it left to visually center it.
   // If we applied this transform in RTL, it would shift the calligraphy further to the right, increasing whitespace on the right
@@ -26,10 +33,12 @@ $container-min-height: 200px;
 .surahName {
   font-size: var(--font-size-large2);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
 }
 
 .detailsContainer {
   display: flex;
+  color: var(--color-text-default-new);
   font-size: var(--font-size-normal);
   gap: var(--spacing-medium);
 }
@@ -43,22 +52,39 @@ $container-min-height: 200px;
 
 .detailHeader {
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
 }
 
 .descriptionContainer {
+  color: var(--color-text-default-new);
+
+  p,
+  h2,
+  h3,
+  li,
+  em {
+    line-height: $line-height-relaxed;
+  }
+
+  @include breakpoints.tablet {
+    /**
+    * Adds a small inline-end padding to create visual spacing
+    * between the content and the scrollbar.
+    */
+    padding-inline-end: var(--spacing-xxsmall);
+  }
+
   @include breakpoints.smallerThanTablet {
     margin-block-end: var(--spacing-max);
   }
 
   p {
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   h2,
   h3 {
     font-weight: var(--font-weight-bold);
-    margin-block-end: var(--spacing-small);
+    margin-block-end: var(--spacing-medium3-px);
   }
 
   em {
@@ -74,8 +100,11 @@ $container-min-height: 200px;
 
   li {
     display: list-item;
-    line-height: normal;
     margin-block-end: var(--spacing-xxsmall);
+  }
+
+  & > *:last-child {
+    margin-block-end: 0;
   }
 }
 
@@ -84,10 +113,68 @@ $container-min-height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: $container-min-height;
+  min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
 }
 
 .errorContainer {
   color: var(--color-text-error);
+}
+
+div {
+  &.bottomSheetOnDesktopOverlay {
+    @include breakpoints.tablet {
+      overflow-y: hidden;
+      align-items: flex-end;
+      justify-items: center;
+      padding-block-start: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+div {
+  &.bottomSheetOnDesktopContent {
+    @include breakpoints.tablet {
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+      block-size: 95vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-block-end: 0;
+      padding-block-end: 0;
+    }
+  }
+}
+
+div {
+  &.surahInfoModalContent {
+    @include breakpoints.tablet {
+      flex: 1;
+      min-block-size: 0;
+      overflow-y: auto;
+      padding-block-end: calc(1.5 * var(--spacing-mega));
+    }
+  }
+}
+
+.bottomSheetOnDesktopHeaderSeparator {
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+    padding-block-start: var(--spacing-medium3-px);
+    border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  }
+}
+
+.bottomSheetOnDesktopInnerContent {
+  @include breakpoints.tablet {
+    /**
+    * Acts as a non-scrollable flex container so that
+    * scrollability is delegated to its inner content.
+    */
+    min-block-size: 0;
+    display: flex;
+    flex-direction: column;
+  }
 }

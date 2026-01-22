@@ -2,7 +2,7 @@
 @use 'src/styles/theme';
 
 // Card wrapper styles
-.endOfSurahCard {
+div.endOfSurahCard {
   padding: var(--spacing-medium2-px);
 }
 
@@ -10,41 +10,41 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-block-end: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium2-px);
 }
 
 .title {
   font-size: var(--font-size-xlarge-px);
   font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
 }
 
 .myQuranContainer {
   display: flex;
   align-items: center;
-  gap: var(--spacing-micro);
+  gap: var(--spacing-xxsmall-px);
+  justify-content: center;
 
   svg {
-    width: var(--spacing-small2-px);
-    height: var(--spacing-small2-px);
+    color: var(--color-blue-buttons-and-icons);
+    fill: var(--color-blue-buttons-and-icons);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
   }
 }
 
 .myQuranLink {
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
+  color: var(--color-text-faded-new);
   text-decoration: none;
   cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .content {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  min-height: 0;
+  min-block-size: 0;
   overflow: hidden;
 }
 
@@ -56,29 +56,34 @@
 
 .buttonsRow .button {
   flex: 0 0 auto;
-  width: auto;
+  inline-size: auto;
   white-space: nowrap;
   font-weight: var(--font-weight-semibold);
-  padding-block: var(--spacing-small-px);
+  padding-block: var(--spacing-xsmall-px);
   padding-inline: calc(var(--spacing-small-px) + var(--spacing-micro-px));
   background-color: var(--color-background-alternative-faint-new);
+
+  svg {
+    color: var(--color-blue-buttons-and-icons);
+  }
 }
 
 .suggestionSection {
   margin-block-start: var(--spacing-small);
-  padding-block-start: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium2-px);
   border-block-start: var(--spacing-hairline-px) solid var(--color-separators-new);
   text-align: center;
 }
 
 .suggestionLabel {
   font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-small);
+  margin-block-end: var(--spacing-small-px);
   color: var(--color-text-default-new);
-  font-size: var(--font-size-large2);
+  font-size: var(--font-size-normal-px);
 }
 
 .suggestionText {
   word-wrap: break-word;
   overflow-wrap: break-word;
+  color: var(--color-text-faded-new);
 }

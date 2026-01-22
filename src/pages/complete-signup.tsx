@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
+import withAuth from '@/components/Auth/withAuth';
 import CompleteSignupForm from '@/components/Login/CompleteSignupForm';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useAuthData from '@/hooks/auth/useAuthData';
 import styles from '@/pages/index.module.scss';
-import { getLoginNavigationUrl, ROUTES } from '@/utils/navigation';
+import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 
 const CompleteSignupPage = () => {
   const router = useRouter();
@@ -43,4 +44,4 @@ const CompleteSignupPage = () => {
   return <CompleteSignupForm userData={userData} onSuccess={handleSuccess} />;
 };
 
-export default CompleteSignupPage;
+export default withAuth(CompleteSignupPage);

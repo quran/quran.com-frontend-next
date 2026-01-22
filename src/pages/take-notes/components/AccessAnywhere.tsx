@@ -14,6 +14,7 @@ const AccessAnywhere: React.FC = () => {
         {[
           { id: 'sync', text: t('benefits.access-anywhere.bullet-points.0') },
           { id: 'device', text: t('benefits.access-anywhere.bullet-points.1') },
+          { id: 'offline', text: t('benefits.access-anywhere.bullet-points.2') },
         ].map(({ id, text }) => (
           <li key={`aa-${id}`}>{text}</li>
         ))}

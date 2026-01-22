@@ -2,9 +2,10 @@ import { RefObject, useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import useImageUpload from '../useImageUpload';
+
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useUpdateUserProfile from '@/hooks/auth/useUpdateUserProfile';
-import useImageUpload from '@/hooks/useImageUpload';
 import { ALLOWED_IMAGE_TYPES, MAX_IMAGE_SIZE_MB } from '@/utils/image-format';
 
 const useProfilePictureForm = (): {

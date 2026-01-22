@@ -3,6 +3,7 @@
   "begin": "Mulai",
   "calendar-cta": "Kalender",
   "chapters-and-verses": "Surah dan Ayat",
+  "continue-learning-plan": "Lanjutkan belajar",
   "continue-read": "Lanjutkan Membaca",
   "explore-topics": "Jelajahi Topik",
   "first-time-reading": "Baru mengenal Al-Quran? <link> Mulai di sini </link>",
@@ -13,6 +14,7 @@
   "my-quran": "Al Quran saya",
   "navigate-quran": "Navigasi Al Quran",
   "no-bookmarks": "Anda belum memiliki penanda apa pun",
+  "no-page-bookmarks": "Anda belum memiliki bookmark halaman apa pun.",
   "no-recently-read": "Anda belum memiliki sesi membaca apa pun",
   "noble-quran": "Al-Qur'an yang mulia",
   "popular": "Populer",
@@ -55,10 +57,12 @@
     "description": "Bantu sebarkan Al Quran ke pelajar baru",
     "title": "Sebarkan Al Quran!"
   },
+  "start-learning-plan": "Mulailah belajar",
   "start-read": "Mulai Membaca",
   "stay-consistent": "Lacak Rekor, Buat Sasaran Khusus, Tetap Konsisten",
   "tab": {
     "bookmarks": "Penanda",
+    "page-bookmarks": "Halaman",
     "popular": "Populer"
   },
   "take-notes": "Sudahkan Anda membuat  <modalLink> Catatan? </modalLink>",

@@ -199,7 +199,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     const reciterData = await getReciterData(reciterId, locale);
     const chaptersData = await getAllChaptersData(locale);
-    const chapterData = getChapterData(chaptersData, chapterId);
+    const chapterData = await getChapterData(chaptersData, chapterId);
 
     if (!reciterData || !chapterData) {
       return { notFound: true };

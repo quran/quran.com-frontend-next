@@ -120,7 +120,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       surahId: chapterNumber,
       ayahNumber: verseNumber,
       locale,
-      reviewed: true,
       postTypeIds: [LESSON_POST_TYPE_ID],
     });
 

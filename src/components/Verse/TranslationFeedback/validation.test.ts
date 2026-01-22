@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/naming-convention, react-func/max-lines-per-function */
+/* eslint-disable @typescript-eslint/naming-convention, react-func/max-lines-per-function, max-lines */
 import { Translate } from 'next-translate';
 import { describe, it, expect } from 'vitest';
 
+import { FormErrorId } from './types';
 import {
   getTranslationFeedbackErrors,
   isTranslationFeedbackValid,
@@ -10,85 +11,95 @@ import {
 } from './validation';
 
 describe('getTranslationFeedbackErrors', () => {
-  const mockT = ((key: string, options?: Record<string, unknown>) => {
-    const translations: Record<string, string> = {
-      'validation.required-field': 'The {{field}} field is required',
-      'translation-feedback.translation': 'translation',
-      'translation-feedback.feedback': 'feedback',
-      'validation.minimum-length': 'The {{field}} field must be at least {{value}} characters',
-      'validation.maximum-length': 'The {{field}} field must be at most {{value}} characters',
-    };
-    let result = translations[key] || key;
-    if (options) {
-      Object.keys(options).forEach((opt) => {
-        result = result.replace(`{{${opt}}}`, options[opt] as string);
-      });
-    }
-    return result;
-  }) as Translate;
+  const mockT = ((key: string) => key) as Translate;
 
   it('returns empty errors when all fields are valid', () => {
-    const errors = getTranslationFeedbackErrors('1', 'Valid feedback text', mockT);
+    const errors = getTranslationFeedbackErrors('1', 'Valid feedback text', mockT, 'en');
     expect(errors).toEqual({});
   });
 
   it('returns translation error when translation is not selected', () => {
-    const errors = getTranslationFeedbackErrors('', 'Valid feedback text', mockT);
-    expect(errors).toEqual({
-      translation: 'The translation field is required',
+    const errors = getTranslationFeedbackErrors('', 'Valid feedback text', mockT, 'en');
+    expect(errors).toMatchObject({
+      translation: {
+        id: FormErrorId.RequiredField,
+      },
     });
   });
 
   it('returns feedback error when feedback is empty', () => {
-    const errors = getTranslationFeedbackErrors('1', '', mockT);
-    expect(errors).toEqual({
-      feedback: 'The feedback field is required',
+    const errors = getTranslationFeedbackErrors('1', '', mockT, 'en');
+    expect(errors).toMatchObject({
+      feedback: {
+        id: FormErrorId.RequiredField,
+      },
     });
   });
 
   it('returns feedback error when feedback is only whitespace', () => {
-    const errors = getTranslationFeedbackErrors('1', '   ', mockT);
-    expect(errors).toEqual({
-      feedback: 'The feedback field is required',
+    const errors = getTranslationFeedbackErrors('1', '   ', mockT, 'en');
+    expect(errors).toMatchObject({
+      feedback: {
+        id: FormErrorId.RequiredField,
+      },
     });
   });
 
   it('returns feedback error when feedback is too short', () => {
     const shortFeedback = 'a'.repeat(MIN_FEEDBACK_CHARS - 1);
-    const errors = getTranslationFeedbackErrors('1', shortFeedback, mockT);
+    const errors = getTranslationFeedbackErrors('1', shortFeedback, mockT, 'en');
 
     if (MIN_FEEDBACK_CHARS > 1) {
-      expect(errors).toEqual({
-        feedback: `The feedback field must be at least ${MIN_FEEDBACK_CHARS} characters`,
+      expect(errors).toMatchObject({
+        feedback: {
+          id: FormErrorId.MinimumLength,
+        },
       });
     } else {
-      expect(errors).toEqual({
-        feedback: 'The feedback field is required',
+      expect(errors).toMatchObject({
+        feedback: {
+          id: FormErrorId.RequiredField,
+        },
       });
     }
   });
 
   it('returns feedback error when feedback is too long', () => {
     const longFeedback = 'a'.repeat(MAX_FEEDBACK_CHARS + 1);
-    const errors = getTranslationFeedbackErrors('1', longFeedback, mockT);
-    expect(errors).toEqual({
-      feedback: 'The feedback field must be at most 10000 characters',
+    const errors = getTranslationFeedbackErrors('1', longFeedback, mockT, 'en');
+    expect(errors).toMatchObject({
+      feedback: {
+        id: FormErrorId.MaximumLength,
+      },
     });
   });
 
   it('returns multiple errors when both fields are invalid', () => {
-    const errors = getTranslationFeedbackErrors('', '', mockT);
-    expect(errors).toEqual({
-      translation: 'The translation field is required',
-      feedback: 'The feedback field is required',
+    const errors = getTranslationFeedbackErrors('', '', mockT, 'en');
+    expect(errors).toMatchObject({
+      translation: {
+        id: FormErrorId.RequiredField,
+      },
+      feedback: {
+        id: FormErrorId.RequiredField,
+      },
     });
   });
 
   it('returns all validation errors when multiple issues exist', () => {
-    const errors = getTranslationFeedbackErrors('', 'a'.repeat(MAX_FEEDBACK_CHARS + 1), mockT);
-    expect(errors).toEqual({
-      translation: 'The translation field is required',
-      feedback: 'The feedback field must be at most 10000 characters',
+    const errors = getTranslationFeedbackErrors(
+      '',
+      'a'.repeat(MAX_FEEDBACK_CHARS + 1),
+      mockT,
+      'en',
+    );
+    expect(errors).toMatchObject({
+      translation: {
+        id: FormErrorId.RequiredField,
+      },
+      feedback: {
+        id: FormErrorId.MaximumLength,
+      },
     });
   });
 });
@@ -100,19 +111,35 @@ describe('isTranslationFeedbackValid', () => {
   });
 
   it('returns false when errors object has translation error', () => {
-    const result = isTranslationFeedbackValid({ translation: 'Required' });
+    const result = isTranslationFeedbackValid({
+      translation: {
+        id: FormErrorId.RequiredField,
+        message: 'Required',
+      },
+    });
     expect(result).toBe(false);
   });
 
   it('returns false when errors object has feedback error', () => {
-    const result = isTranslationFeedbackValid({ feedback: 'Required' });
+    const result = isTranslationFeedbackValid({
+      feedback: {
+        id: FormErrorId.RequiredField,
+        message: 'Required',
+      },
+    });
     expect(result).toBe(false);
   });
 
   it('returns false when errors object has both errors', () => {
     const result = isTranslationFeedbackValid({
-      translation: 'Required',
-      feedback: 'Required',
+      translation: {
+        id: FormErrorId.RequiredField,
+        message: 'Required',
+      },
+      feedback: {
+        id: FormErrorId.RequiredField,
+        message: 'Required',
+      },
     });
     expect(result).toBe(false);
   });

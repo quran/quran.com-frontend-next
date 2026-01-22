@@ -1,7 +1,6 @@
 import { test, expect, type Locator, type Page } from '@playwright/test';
 
 import {
-  setWordByWordDisplay,
   setWordByWordLanguage,
   setWordByWordTooltipEnabled,
   setWordByWordTranslationEnabled,
@@ -10,7 +9,6 @@ import {
 } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import { getVerseTestId, TestId } from '@/tests/test-ids';
-import { WordByWordDisplay } from '@/types/QuranReader';
 
 let homePage: Homepage;
 
@@ -161,8 +159,24 @@ test.describe('Word by Word Inline Display', () => {
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
       await withSettingsDrawer(page, async () => {
-        await setWordByWordDisplay(page, WordByWordDisplay.INLINE);
-        await setWordByWordTransliterationEnabled(page, true);
+        // Navigate to More tab and enable inline display for both translation and transliteration
+        await page.getByTestId(TestId.MORE_SETTINGS_TAB).click();
+
+        // Enable inline translation checkbox
+        const inlineTranslationCheckbox = page.locator('#inline-translation');
+        await inlineTranslationCheckbox.waitFor({ state: 'visible', timeout: 10000 });
+        if (!(await inlineTranslationCheckbox.isChecked())) {
+          await inlineTranslationCheckbox.locator('xpath=ancestor::label[1]').click();
+        }
+
+        // Enable inline transliteration checkbox
+        const inlineTransliterationCheckbox = page.locator('#inline-transliteration');
+        await inlineTransliterationCheckbox.waitFor({ state: 'visible', timeout: 10000 });
+        if (!(await inlineTransliterationCheckbox.isChecked())) {
+          await inlineTransliterationCheckbox.locator('xpath=ancestor::label[1]').click();
+        }
+
+        await page.waitForTimeout(500); // Wait for settings to apply
       });
 
       // Get verse 2

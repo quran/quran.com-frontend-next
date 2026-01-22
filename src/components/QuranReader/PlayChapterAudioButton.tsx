@@ -9,6 +9,7 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import useDirection from '@/hooks/useDirection';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -29,6 +30,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
+  const direction = useDirection();
+  const isRTL = direction === 'rtl';
 
   const audioService = useContext(AudioPlayerMachineContext);
   const isLoadingCurrentChapter = useSelector(audioService, (state) =>
@@ -68,7 +71,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           type={ButtonType.Secondary}
           shape={ButtonShape.Pill}
           size={ButtonSize.Small}
-          prefix={<Spinner />}
+          prefix={isRTL ? undefined : <Spinner />}
+          suffix={isRTL ? <Spinner /> : undefined}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
           isDisabled
@@ -86,7 +90,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           type={ButtonType.Secondary}
           shape={ButtonShape.Pill}
           size={ButtonSize.Small}
-          prefix={<PauseIcon />}
+          prefix={isRTL ? undefined : <PauseIcon />}
+          suffix={isRTL ? <PauseIcon /> : undefined}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
@@ -99,7 +104,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           type={ButtonType.Secondary}
           shape={ButtonShape.Pill}
           size={ButtonSize.Small}
-          prefix={<PlayIcon />}
+          prefix={isRTL ? undefined : <PlayIcon />}
+          suffix={isRTL ? <PlayIcon /> : undefined}
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}

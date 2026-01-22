@@ -10,6 +10,7 @@ import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import CalendarIcon from '@/public/icons/new-calendar.svg';
+import { TestId } from '@/tests/test-ids';
 import { QuranFont } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
@@ -51,21 +52,19 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           </Link>
         </div>
       </div>
-      <div className={styles.container} data-testid="quran-in-a-year-section">
-        <div data-testid="quran-in-a-year-verse">
-          <VerseAndTranslation
-            chaptersData={chaptersData}
-            chapter={todayAyah.chapter}
-            from={todayAyah.verse}
-            to={todayAyah.verse}
-            titleText={t('quran-in-year-verse-title')}
-            quranFont={QuranFont.QPCHafs}
-            translationsLimit={1}
-            arabicVerseClassName={styles.customArabicVerse}
-            translationClassName={styles.customTranslation}
-            fixedFontScale={FONT_SCALE}
-          />
-        </div>
+      <div className={styles.container} data-testid={TestId.QURAN_IN_A_YEAR_SECTION}>
+        <VerseAndTranslation
+          chaptersData={chaptersData}
+          chapter={todayAyah.chapter}
+          from={todayAyah.verse}
+          to={todayAyah.verse}
+          titleText={t('quran-in-year-verse-title')}
+          quranFont={QuranFont.QPCHafs}
+          translationsLimit={1}
+          arabicVerseClassName={styles.customArabicVerse}
+          translationClassName={styles.customTranslation}
+          fixedFontScale={FONT_SCALE}
+        />
         <Button
           type={ButtonType.Primary}
           variant={ButtonVariant.Compact}

@@ -17,7 +17,12 @@ import Word from 'types/Word';
  * @returns {Record<string, Word[]}
  */
 const groupLinesByVerses = (verses: Verse[]): Record<string, Word[]> => {
-  const words: Word[] = verses.flatMap((verse) => getVerseWords(verse));
+  let words = [];
+
+  // Flattens the verses into an array of words
+  verses.forEach((verse) => {
+    words = [...words, ...getVerseWords(verse, true)];
+  });
 
   // Groups the words based on their (page and) line number
   const lines = groupBy(words, (word) => `Page${word.pageNumber}-Line${word.lineNumber}`);

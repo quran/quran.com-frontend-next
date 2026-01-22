@@ -4,6 +4,8 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import styles from './TranslationsMenuItem.module.scss';
+
 import DataFetcher from '@/components/DataFetcher';
 import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
@@ -14,18 +16,18 @@ import useSafeTimeout from '@/hooks/useSafeTimeout';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { WordVerse } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
+import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('@/components/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
 }
 
@@ -93,7 +95,7 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
       <ContentModal
         innerRef={contentModalRef}
         isOpen={isContentModalOpen}
-        header={<p>{t('translations')}</p>}
+        header={<p className={styles.header}>{t('translations')}</p>}
         hasCloseButton
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}

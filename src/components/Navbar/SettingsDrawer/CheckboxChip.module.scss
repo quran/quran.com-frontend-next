@@ -1,7 +1,7 @@
 .hiddenCheckbox {
   position: absolute;
-  width: var(--spacing-hairline-px);
-  height: var(--spacing-hairline-px);
+  inline-size: var(--spacing-hairline-px);
+  block-size: var(--spacing-hairline-px);
   padding: 0;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
@@ -32,8 +32,8 @@
   display: inline-flex;
 
   svg {
-    width: var(--spacing-medium1-5-px);
-    height: var(--spacing-medium1-5-px);
+    inline-size: var(--spacing-medium-plus2-px);
+    block-size: var(--spacing-medium-plus2-px);
   }
 }
 

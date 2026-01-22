@@ -4,7 +4,7 @@
   margin-block: var(--spacing-large);
 }
 .container {
-  min-height: calc(10 * var(--spacing-mega));
+  min-block-size: calc(10 * var(--spacing-mega));
 }
 .verseContainer {
   padding-block-start: var(--spacing-xxsmall);

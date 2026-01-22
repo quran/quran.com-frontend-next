@@ -54,10 +54,21 @@ test(
     await expect(navBar).toHaveAttribute('data-isvisible', 'true');
     await expect(header).toHaveAttribute('data-isvisible', 'true');
 
-    await page.mouse.wheel(0, 200);
+    await page.waitForTimeout(500);
+
+    const isMobile = page.viewportSize()?.width && page.viewportSize()?.width <= 768;
+
+    if (isMobile) {
+      // On mobile, use scrollBy instead of mouse.wheel
+      await page.evaluate(() => window.scrollBy(0, 200));
+    } else {
+      await page.mouse.wheel(0, 200);
+    }
+
+    await page.waitForTimeout(300); // Wait for scroll animation
     await expect(navBar).toHaveAttribute('data-isvisible', 'false');
 
-    if (page.viewportSize()?.width && page.viewportSize()?.width <= 768) {
+    if (isMobile) {
       // Mobile view - the header should collapse to a minimal information one
       await expect(header).toHaveAttribute('data-isvisible', 'false');
     } else {
@@ -65,7 +76,13 @@ test(
       await expect(header).toHaveAttribute('data-isvisible', 'true');
     }
 
-    await page.mouse.wheel(0, -10);
+    if (isMobile) {
+      await page.evaluate(() => window.scrollBy(0, -100));
+    } else {
+      await page.mouse.wheel(0, -100);
+    }
+
+    await page.waitForTimeout(300); // Wait for scroll animation
     await expect(navBar).toHaveAttribute('data-isvisible', 'true');
     await expect(header).toHaveAttribute('data-isvisible', 'true');
   },

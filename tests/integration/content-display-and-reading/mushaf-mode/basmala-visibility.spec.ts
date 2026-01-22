@@ -45,25 +45,16 @@ test(
     await homePage.goTo('/76');
 
     // Enable mushaf mode
-    await Promise.all([
-      quranPage.mushafMode(isMobile),
-      page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
-    ]);
+    await Promise.all([quranPage.mushafMode(isMobile)]);
 
     await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).toBeVisible();
 
     // Surah 1 - no basmala
-    await Promise.all([
-      homePage.goTo('/1'),
-      page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
-    ]);
+    await Promise.all([homePage.goTo('/1')]);
     await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
 
     // Go to Surah 9 - no basmala
-    await Promise.all([
-      homePage.goTo('/9'),
-      page.waitForResponse((response) => response.url().includes('/api/qdc/verses/')),
-    ]);
+    await Promise.all([homePage.goTo('/9')]);
     await expect(page.getByTestId(TestId.BISMILLAH_SECTION)).not.toBeVisible();
   },
 );

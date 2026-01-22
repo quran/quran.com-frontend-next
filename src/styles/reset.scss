@@ -169,7 +169,7 @@ video {
   display: inline-block;
   *display: inline;
   *zoom: 1;
-  max-width: 100%;
+  max-inline-size: 100%;
 }
 
 /**
@@ -179,7 +179,7 @@ video {
 
 audio:not([controls]) {
   display: none;
-  height: 0;
+  block-size: 0;
 }
 
 /**
@@ -368,8 +368,8 @@ input[type='radio'] {
   padding-block-end: 0;
   padding-inline-start: 0;
   padding-inline-end: 0; /* 2 */
-  *height: 13px; /* 3 */
-  *width: 13px; /* 3 */
+  *block-size: 13px; /* 3 */
+  *inline-size: 13px; /* 3 */
 }
 
 /**
@@ -413,8 +413,8 @@ input::-moz-focus-inner {
 */
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  inline-size: 10px;
+  block-size: 10px;
 }
 
 ::-webkit-scrollbar-track {

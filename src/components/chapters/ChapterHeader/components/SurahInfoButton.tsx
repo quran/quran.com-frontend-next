@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,12 +6,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
-import { useSurahInfoModalContext } from '@/components/chapters/ChapterHeader/components/SurahInfoModalContext';
 import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
+import surahInfoStyles from '@/components/chapters/Info/SurahInfoModal.module.scss';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
 import InfoIcon from '@/icons/info.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getSurahInfoNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
   chapterId?: string;
@@ -26,28 +26,33 @@ interface SurahInfoButtonProps {
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
-  const { isOpen, setIsOpen } = useSurahInfoModalContext();
-
-  const isInfoPage = router.pathname.includes('/surah/[chapterId]/info');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
 
-    if (!isInfoPage) {
+    /*
+     * When closing the surah info modal, we fake different URLs in the browser:
+     * - If we're on a regular surah page (e.g., /1 or /1:1), fake router.asPath to keep the same URL
+     * - If we're on the dedicated surah info page (/surah/[chapterId]/info), fake the main surah page URL
+     *
+     * This ensures the browser URL stays accurate - users on /1:1 keep /1:1 in the address bar,
+     * rather than faking it to just /1 which would be incorrect.
+     */
+    if (!router.pathname.includes('/surah/[chapterId]/info')) {
       fakeNavigate(router.asPath, router.locale);
+    } else {
+      fakeNavigate(getSurahNavigationUrl(chapterId), router.locale);
     }
-  }, [router.asPath, router.locale, isInfoPage, setIsOpen]);
+  }, [router, chapterId]);
 
   const handleClick = useCallback(() => {
     if (chapterId) {
       logButtonClick('surah_info_button_click');
       setIsOpen(true);
-
-      if (!isInfoPage) {
-        fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
-      }
+      fakeNavigate(getSurahInfoNavigationUrl(chapterId), router.locale);
     }
-  }, [chapterId, isInfoPage, router.locale, setIsOpen]);
+  }, [chapterId, router.locale]);
 
   return (
     <>
@@ -66,7 +71,14 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
           onClose={handleClose}
           onEscapeKeyDown={handleClose}
           hasCloseButton
-          header={<div className={styles.surahInfoHeader}>{t('surah-info')}</div>}
+          header={<div className={styles.surahInfoTitle}>{t('surah-info')}</div>}
+          headerClassName={styles.surahInfoHeader}
+          contentClassName={classNames(
+            styles.surahInfoContent,
+            surahInfoStyles.bottomSheetOnDesktopContent,
+          )}
+          overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
+          innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
           size={ContentModalSize.MEDIUM}
         >
           <SurahInfoModal chapterId={chapterId} />

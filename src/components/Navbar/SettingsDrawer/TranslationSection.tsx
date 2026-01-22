@@ -33,7 +33,6 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 const TranslationSection = () => {
   const {
     actions: { onSettingsChange },
-    isLoading,
   } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
@@ -96,6 +95,9 @@ const TranslationSection = () => {
           label={t('settings.selected-translations')}
           value={selectedValueString}
           onClick={onSelectionCardClicked}
+          className={styles.translationSelectionCard}
+          valueClassName={styles.translationValue}
+          labelClassName={styles.translationLabel}
         />
       );
     },
@@ -143,8 +145,7 @@ const TranslationSection = () => {
 
   return (
     <div className={styles.container}>
-      <Section id="translation-section">
-        <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
+      <Section id="translation-section" hideSeparator>
         <Section.Row>
           <DataFetcher
             loading={translationLoading}
@@ -153,7 +154,7 @@ const TranslationSection = () => {
           />
         </Section.Row>
         <Section.Row>
-          <Section.Label>{t('fonts.font-size')}</Section.Label>
+          <Section.Label className={styles.fontStyleLabel}>{t('fonts.font-size')}</Section.Label>
 
           {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop
@@ -168,6 +169,7 @@ const TranslationSection = () => {
             onDecrement={
               MINIMUM_FONT_STEP === translationFontScale ? null : onFontScaleDecreaseClicked
             }
+            className={styles.counter}
           />
         </Section.Row>
       </Section>

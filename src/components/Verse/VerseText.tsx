@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
-
 import isCenterAlignedPage from './pageUtils';
 import SEOTextForVerse from './SeoTextForVerse';
 import TajweedFontPalettes from './TajweedFontPalettes';
@@ -13,7 +11,7 @@ import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import QuranWord from '@/dls/QuranWord/QuranWord';
-import useIntersectionObserver from '@/hooks/useObserveElement';
+import { TooltipType } from '@/dls/Tooltip';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,
@@ -22,7 +20,6 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { getFirstWordOfSurah } from '@/utils/verse';
 import { FALLBACK_FONT } from 'types/QuranReader';
 import Word from 'types/Word';
 
@@ -32,6 +29,10 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
   bookmarksRangeUrl?: string | null;
+  tooltipType?: TooltipType;
+  highlightedWordPosition?: number;
+  isWordInteractionDisabled?: boolean;
+  shouldDisableForceTooltip?: boolean;
 };
 
 const VerseText = ({
@@ -40,16 +41,19 @@ const VerseText = ({
   isHighlighted,
   shouldShowH1ForSEO = false,
   bookmarksRangeUrl,
+  tooltipType,
+  highlightedWordPosition,
+  isWordInteractionDisabled = false,
+  shouldDisableForceTooltip = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
-  useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
   const [firstWord] = words;
-  const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
+  const { lineNumber, pageNumber } = firstWord;
   const isFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
@@ -65,12 +69,9 @@ const VerseText = ({
   if (isReadingMode === false && router?.query?.[QueryParam.HIDE_ARABIC] === 'true') {
     return null;
   }
-  const firstWordData = getFirstWordOfSurah(location);
   const isBigTextLayout =
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
-
-  const { chapterId } = firstWordData;
 
   const VerseTextContainer = shouldShowH1ForSEO ? 'h1' : 'div';
   const fontClassName = isFontLoaded
@@ -82,11 +83,7 @@ const VerseText = ({
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <VerseTextContainer
         ref={textRef}
-        data-verse-key={verseKey}
-        data-page={pageNumber}
-        data-chapter-id={chapterId}
-        data-hizb={hizbNumber}
-        data-testid={`verse-arabic-${verseKey}`}
+        data-testid={`verse-arabic-${firstWord.verseKey}`}
         className={classNames(styles.verseTextContainer, styles[fontClassName], {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
@@ -102,17 +99,24 @@ const VerseText = ({
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}
         >
-          {words?.map((word) => (
-            <QuranWord
-              key={word.location}
-              word={word}
-              font={quranFont}
-              isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
-              bookmarksRangeUrl={bookmarksRangeUrl}
-            />
-          ))}
+          {words?.map((word) => {
+            const isHighlightedWord =
+              highlightedWordPosition !== undefined && word.position === highlightedWordPosition;
+            return (
+              <QuranWord
+                key={word.location}
+                word={word}
+                font={quranFont}
+                isFontLoaded={isFontLoaded}
+                isHighlighted={isHighlightedWord || word.verseKey === selectedVerseKey}
+                shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+                bookmarksRangeUrl={bookmarksRangeUrl}
+                tooltipType={tooltipType}
+                isWordInteractionDisabled={isWordInteractionDisabled}
+                shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}
+              />
+            );
+          })}
         </div>
       </VerseTextContainer>
     </>

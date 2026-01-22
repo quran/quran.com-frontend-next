@@ -314,19 +314,3 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
   }
   return makeDonateUrl();
 };
-
-/**
- * Compose the url for the country language preference API.
- *
- * @param {string} userDeviceLanguage the user's device language code
- * @param {string} country the two-letter country code
- * @returns {string}
- */
-export const makeCountryLanguagePreferenceUrl = (
-  userDeviceLanguage: string,
-  country: string,
-): string =>
-  makeUrl('/resources/country_language_preference', {
-    userDeviceLanguage,
-    country: country.toUpperCase(),
-  });

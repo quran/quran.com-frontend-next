@@ -6,9 +6,13 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './LearningPlansSection.module.scss';
 import Loading from './Loading';
 
+import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { Course } from '@/types/auth/Course';
+import { TestId } from '@/tests/test-ids';
+import { Course, CoursesResponse } from '@/types/auth/Course';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCourseNavigationUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
@@ -24,12 +28,8 @@ const learningPlansSorter = (a: Course, b: Course) => {
   return 0;
 };
 
-type LearningPlansSectionProps = {
-  courses: Course[];
-};
-
-const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
-  const { t } = useTranslation('home');
+const LearningPlansSection = () => {
+  const { t, lang } = useTranslation('home');
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -42,31 +42,39 @@ const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
   };
 
   return (
-    <>
-      <div className={styles.header}>
-        <h1>{t('learning-plan')}</h1>
-        <div>
-          <Link
-            variant={LinkVariant.Blend}
-            href={getCoursesNavigationUrl()}
-            className={styles.seeMore}
-            onClick={onSeeMoreClicked}
-          >
-            {t('see-more-learning-plans')}
-          </Link>
-        </div>
-      </div>
-      {!courses?.length ? (
-        <Loading />
-      ) : (
-        (() => {
-          const sortedCourses = [...courses].sort(learningPlansSorter);
-          const firstNonEnrolledIndex = sortedCourses.findIndex(
-            (course) => typeof course.isCompleted === 'undefined',
-          );
+    <DataFetcher
+      loading={Loading}
+      fetcher={privateFetcher}
+      queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
+      render={(data: CoursesResponse) => {
+        const courses = data?.data;
+        if (!courses || !Array.isArray(courses) || courses.length === 0) {
+          return null;
+        }
+        const sortedCourses = [...courses].sort(learningPlansSorter);
+        const firstNonEnrolledIndex = sortedCourses.findIndex(
+          (course) => typeof course.isCompleted === 'undefined',
+        );
+        const hasEnrolledCourses = sortedCourses.some(
+          (course) => typeof course.isCompleted !== 'undefined',
+        );
 
-          return (
-            <div className={styles.cardsContainer} data-testid="learning-plans-section">
+        return (
+          <>
+            <div className={styles.header} data-testid="learning-plans-section">
+              <h1>{t(hasEnrolledCourses ? 'continue-learning-plan' : 'start-learning-plan')}</h1>
+              <div>
+                <Link
+                  variant={LinkVariant.Blend}
+                  href={getCoursesNavigationUrl()}
+                  className={styles.seeMore}
+                  onClick={onSeeMoreClicked}
+                >
+                  {t('see-more-learning-plans')}
+                </Link>
+              </div>
+            </div>
+            <div className={styles.cardsContainer} data-testid={TestId.COURSES_LIST}>
               {sortedCourses.map((course, index) => {
                 const courseUrl = getCourseNavigationUrl(course.slug);
                 const { isCompleted } = course;
@@ -89,7 +97,7 @@ const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
                           alt={course.title}
                           fill
                           className={styles.thumbnail}
-                          sizes="(max-width: 768px) calc((100vw - 2rem) / 2.1), 54vw"
+                          sizes="(max-width: 768px) 42vw, 54vw"
                         />
                         {hasCompletedCourse ? (
                           <div className={styles.completedPill}>{t('learn:completed')}</div>
@@ -107,10 +115,10 @@ const LearningPlansSection = ({ courses }: LearningPlansSectionProps) => {
                 );
               })}
             </div>
-          );
-        })()
-      )}
-    </>
+          </>
+        );
+      }}
+    />
   );
 };
 

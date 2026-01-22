@@ -101,8 +101,8 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   };
 
   return (
-    <div data-testid="chapter-and-juz-list">
-      <div className={styles.tabsContainer} data-selectedtab={view} data-testid="tabs-container">
+    <>
+      <div className={styles.tabsContainer}>
         <Tabs className={styles.tabItem} tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
           <div className={styles.uppercase}>{t('common:sort.by')}:</div>
@@ -142,6 +142,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         )}
       </div>
       <div
+        data-testid="chapter-and-juz-list"
         className={classNames({
           [styles.surahLayout]: view === View.Surah || view === View.RevelationOrder,
           [styles.juzLayout]: view === View.Juz,
@@ -176,7 +177,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
           <RevelationOrderView isDescending={sortBy === Sort.DESC} chapters={chapters} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

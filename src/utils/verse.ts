@@ -2,15 +2,15 @@
 /* eslint-disable react-func/max-lines-per-function */
 import range from 'lodash/range';
 
-import getTranslationsLabelString from '../components/QuranReader/ReadingView/utils/translation';
-
 import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
 import { parseVerseRange } from './verseKeys';
 
+import LookupRecord from '@/types/LookupRecord';
+import ScrollAlign from '@/types/ScrollAlign';
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
-import Word, { WordVerse } from 'types/Word';
+import Word from 'types/Word';
 
 const COLON_SPLITTER = ':';
 
@@ -241,44 +241,20 @@ export const makeWordLocation = (verseKey: string, wordPosition: number): string
  * the BE response of each word to add custom fields.
  *
  * @param {Verse} verse
+ * @param {boolean} isReadingView
  * @returns {Word[]}
  */
-export const getVerseWords = (verse: Verse): Word[] => {
+export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
-  const translationsLabel = getTranslationsLabelString(verse.translations);
-  const translationsCount = verse.translations?.length || 0;
-
   verse.words.forEach((word) => {
+    const wordVerse = { ...verse };
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
-      verse: constructWordVerse(verse, translationsLabel, translationsCount),
+      ...(isReadingView && { verse: wordVerse }),
     });
   });
   return words;
-};
-
-/**
- * Constructs a WordVerse object from a Verse object.
- *
- * @param {Verse} verse - The verse object to extract data from
- * @param {string} translationsLabel - The translations label string
- * @param {number} translationsCount - The number of translations
- * @returns {WordVerse} A WordVerse object
- */
-export const constructWordVerse = (
-  verse: Verse,
-  translationsLabel: string,
-  translationsCount: number,
-): WordVerse => {
-  return {
-    verseNumber: verse.verseNumber,
-    verseKey: verse.verseKey,
-    chapterId: verse.chapterId,
-    timestamps: verse.timestamps,
-    translationsLabel,
-    translationsCount,
-  };
 };
 
 /**
@@ -484,4 +460,43 @@ export const isVerseKeyWithinRanges = (verseKey: string, ranges: string[] | stri
   // if we're here, it means that the verse is not within any of the ranges
   // so we can return false
   return false;
+};
+
+/**
+ * The thresholds for the scroll position in a mushaf page.
+ */
+const SCROLL_POSITION_THRESHOLDS = {
+  START: 33.3,
+  CENTER: 66.6,
+} as const;
+
+/**
+ * Get where a verse lies in a mushaf page. This is achieved by:
+ *
+ * 1. Extracting verse numbers from the starting verse key and page verse range.
+ * 2. Calculating the verse's order/position within the page (1-based).
+ * 3. Calculating the percentage position of the verse within the page (0-100%).
+ * 4. If the position is <= 33.3%, return 'start'; if <= 66.6%, return 'center';
+ *    otherwise return 'end'.
+ *
+ * @param {string} startingVerseKey
+ * @param {LookupRecord} pagesVersesRange
+ * @returns {ScrollAlign}
+ */
+export const getVersePositionWithinAMushafPage = (
+  startingVerseKey: string,
+  pagesVersesRange: LookupRecord,
+): ScrollAlign => {
+  const pageStartVerseNumber = getVerseNumberFromKey(pagesVersesRange.from);
+  const pageEndVerseNumber = getVerseNumberFromKey(pagesVersesRange.to);
+  const verseOrderWithinPage = getVerseNumberFromKey(startingVerseKey) - pageStartVerseNumber + 1;
+  const totalPageNumberOfVerses = pageEndVerseNumber - pageStartVerseNumber + 1;
+  const verseKeyPosition = (verseOrderWithinPage * 100) / totalPageNumberOfVerses;
+  if (verseKeyPosition <= SCROLL_POSITION_THRESHOLDS.START) {
+    return ScrollAlign.Start;
+  }
+  if (verseKeyPosition <= SCROLL_POSITION_THRESHOLDS.CENTER) {
+    return ScrollAlign.Center;
+  }
+  return ScrollAlign.End;
 };

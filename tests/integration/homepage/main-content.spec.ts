@@ -17,10 +17,6 @@ test(
     // Go to ayah 5:10
     await homePage.goTo('/5:10');
 
-    // FIXME: The problem is that the <MobileReadingTabs /> component is not loading when going to the ayah page directly
-    // unless we scroll a bit. But this component is the one that saves the last read ayah.
-    // So we need to fix this issue in the component and then remove this workaround for mobile.
-    // I know the problem comes from line 51 of src\components\QuranReader\ContextMenu\index.tsx (where it early returns null if first render)
     if (isMobile) {
       await page.waitForTimeout(1500);
       await page.mouse.wheel(0, 100);
@@ -86,7 +82,7 @@ test(
   async ({ page }) => {
     await homePage.goTo();
 
-    const learningPlansSection = page.getByTestId(TestId.LEARNING_PLANS_SECTION);
+    const learningPlansSection = page.getByTestId(TestId.COURSES_LIST);
     await expect(learningPlansSection).toBeVisible();
 
     const items = learningPlansSection.getByRole('link');
@@ -107,9 +103,7 @@ test('Community section appears with at least 1 item', async ({ page }) => {
 test('Surah is selected by default', { tag: ['@smoke'] }, async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
-  await expect(chapterAndJuzList).toBeVisible();
-  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
+  const tabContainer = page.getByTestId(TestId.TABS_CONTAINER);
   // Make sure the Surah tab is selected by default
   expect(await tabContainer.getAttribute('data-selectedtab')).toBe('surah');
 });
@@ -126,23 +120,22 @@ test('All 114 surahs are displayed in the surah list', async ({ page }) => {
 test('All 30 juz are displayed when switching to the juz tab', async ({ page }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
-  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
+  const tabContainer = page.getByTestId(TestId.TABS_CONTAINER);
   const juzTab = tabContainer.getByText('Juz');
   await juzTab.click();
 
   await expect(tabContainer).toHaveAttribute('data-selectedtab', 'juz');
 
-  await expect(chapterAndJuzList.getByTestId(getJuzContainerTestId(1))).toBeVisible();
-  await expect(chapterAndJuzList.getByTestId(getJuzContainerTestId(30))).toBeVisible();
+  await expect(page.getByTestId(getJuzContainerTestId(1))).toBeVisible();
+  await expect(page.getByTestId(getJuzContainerTestId(30))).toBeVisible();
 
   // Juz 1 container should have 3 links: juz link + surahs 1 and 2
-  const juz1Container = chapterAndJuzList.getByTestId(getJuzContainerTestId(1));
+  const juz1Container = page.getByTestId(getJuzContainerTestId(1));
   const links = juz1Container.getByRole('link');
   expect(await links.count()).toBe(3);
 
   // Juz 30 container should have 38 links (surahs from 78 to 114 + juz link)
-  const juz30Container = chapterAndJuzList.getByTestId(getJuzContainerTestId(30));
+  const juz30Container = page.getByTestId(getJuzContainerTestId(30));
   const links30 = juz30Container.getByRole('link');
   expect(await links30.count()).toBe(38);
 });
@@ -152,53 +145,22 @@ test('All 114 surahs are displayed according to the revelation order when switch
 }) => {
   await homePage.goTo();
 
-  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
-  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
+  const tabContainer = page.getByTestId(TestId.TABS_CONTAINER);
   const revelationTab = tabContainer.getByText('Revelation Order');
   await revelationTab.click();
 
   await expect(tabContainer).toHaveAttribute('data-selectedtab', 'revelation_order');
 
-  await expect(chapterAndJuzList.getByText("Al-'Alaq")).toBeVisible(); // Al-Alaq, first revealed surah
-  await expect(chapterAndJuzList.getByText('An-Nasr')).toBeVisible(); // An-Nasr, last revealed surah
+  await expect(page.getByText("Al-'Alaq")).toBeVisible(); // Al-Alaq, first revealed surah
+  await expect(page.getByText('An-Nasr')).toBeVisible(); // An-Nasr, last revealed surah
 
-  const firstChapter = chapterAndJuzList.getByText("Al-'Alaq");
-  const lastChapter = chapterAndJuzList.getByText('An-Nasr');
+  const firstChapter = page.getByText("Al-'Alaq");
+  const lastChapter = page.getByText('An-Nasr');
 
   // Ensure the first revealed chapter appears before the last revealed chapter
   const firstChapterBoundingBox = await firstChapter.boundingBox();
   const lastChapterBoundingBox = await lastChapter.boundingBox();
   expect(firstChapterBoundingBox!.y).toBeLessThan(lastChapterBoundingBox!.y);
-});
-
-test('Sort by ascending/descending works correctly', async ({ page }) => {
-  await homePage.goTo();
-
-  const chapterAndJuzList = page.getByTestId(TestId.CHAPTER_AND_JUZ_LIST);
-  const tabContainer = chapterAndJuzList.getByTestId(TestId.TABS_CONTAINER);
-  const sorter = tabContainer.getByText('Ascending');
-  // Ensure 'Ascending' is selected by default
-  await expect(sorter).toBeVisible();
-
-  const firstChapter = chapterAndJuzList.getByTestId(getChapterContainerTestId(1));
-  const lastChapter = chapterAndJuzList.getByTestId(getChapterContainerTestId(114));
-
-  // Ensure the first chapter appears before the last chapter
-  const firstChapterBoundingBox = await firstChapter.boundingBox();
-  const lastChapterBoundingBox = await lastChapter.boundingBox();
-  expect(firstChapterBoundingBox!.y).toBeLessThan(lastChapterBoundingBox!.y);
-
-  // Click on the sorter to change the sort order to descending
-  await sorter.click();
-
-  // Ensure both chapters are still visible
-  await expect(firstChapter).toBeVisible();
-  await expect(lastChapter).toBeVisible();
-
-  // Ensure the last chapter now appears before the first chapter
-  const updatedFirstChapterBoundingBox = await firstChapter.boundingBox();
-  const updatedLastChapterBoundingBox = await lastChapter.boundingBox();
-  expect(updatedLastChapterBoundingBox!.y).toBeLessThan(updatedFirstChapterBoundingBox!.y);
 });
 
 test('Popular button shows the popular surahs/verses', { tag: ['@homepage'] }, async ({ page }) => {

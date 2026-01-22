@@ -1,15 +1,15 @@
-import React, { useContext, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import BackwardIcon from '@/icons/backward.svg';
 import ForwardIcon from '@/icons/forward.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
+import DataContext from 'src/contexts/DataContext';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum SeekButtonType {
   NextAyah = 'nextAyah',
@@ -20,20 +20,17 @@ type SeekButtonProps = {
   type: SeekButtonType;
   isLoading: boolean;
 };
-
-const SeekButton: React.FC<SeekButtonProps> = ({ type, isLoading }) => {
+const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const chaptersData = useContext(DataContext);
 
   const surah = useSelector(audioService, (state) => state.context.surah);
   const ayahNumber = useSelector(audioService, (state) => state.context.ayahNumber);
 
-  const chapterData = useMemo(() => {
-    if (!chaptersData || !surah) {
-      return undefined;
-    }
-    return getChapterData(chaptersData, surah.toString());
-  }, [chaptersData, surah]);
+  const chapterData = useMemo(
+    () => getChapterData(chaptersData, surah?.toString()),
+    [chaptersData, surah],
+  );
 
   const { t } = useTranslation('common');
 
@@ -46,7 +43,7 @@ const SeekButton: React.FC<SeekButtonProps> = ({ type, isLoading }) => {
   const isDisabled =
     isLoading ||
     (type === SeekButtonType.PrevAyah && ayahNumber <= 1) ||
-    (type === SeekButtonType.NextAyah && ayahNumber >= (chapterData?.versesCount ?? 0));
+    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData?.versesCount);
 
   return (
     <Button

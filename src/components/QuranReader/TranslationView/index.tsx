@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -10,12 +10,12 @@ import QueryParamMessage from '../QueryParamMessage';
 
 import useGetVersesCount from './hooks/useGetVersesCount';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
+import PageQuestionsLoaders from './PageQuestionsLoader';
 import styles from './TranslationView.module.scss';
 import TranslationViewVerse from './TranslationViewVerse';
 
 import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import Spinner from '@/dls/Spinner/Spinner';
-import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
@@ -86,63 +86,92 @@ const TranslationView = ({
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
-  const { data: pageVersesQuestionsData } = useCountRangeQuestions(
-    verses?.length > 0
-      ? {
-          from: verses?.[0].verseKey,
-          to: verses?.[verses.length - 1].verseKey,
-        }
-      : null,
-  );
-
-  // Accumulate questions data to prevent flickering when new verses are loaded.
-  // When the verse range changes, SWR fetches new data with undefined initial state.
-  // By merging new data with existing data, we preserve visibility of the answers button.
-  const [accumulatedQuestionsData, setAccumulatedQuestionsData] = useState<
-    Record<string, QuestionsData>
+  // Store questions data per page to avoid large API requests.
+  // Each page fetches its own questions data for a smaller verse range.
+  const [pageQuestionsMap, setPageQuestionsMap] = useState<
+    Record<number, Record<string, QuestionsData>>
   >({});
 
-  // Reset accumulated questions data when the resource context changes
+  // Reset questions data when the resource context changes (e.g., navigating between chapters)
   // to avoid leaking stale data across chapters/pages and unbounded growth.
   useEffect(() => {
-    setAccumulatedQuestionsData({});
+    setPageQuestionsMap({});
   }, [resourceId]);
 
-  useEffect(() => {
-    if (pageVersesQuestionsData) {
-      setAccumulatedQuestionsData((prev) => ({
-        ...prev,
-        ...pageVersesQuestionsData,
-      }));
-    }
-  }, [pageVersesQuestionsData]);
+  // Callback for PageQuestionsLoaders to report each page's questions data.
+  const handleQuestionsLoaded = useCallback(
+    (pageNumber: number, data: Record<string, QuestionsData>) => {
+      setPageQuestionsMap((prev) => {
+        const prevPageData = prev[pageNumber];
+        // Avoid unnecessary state updates if data content is the same.
+        // Deep compare since SWR may return new object references for identical data.
+        if (prevPageData && JSON.stringify(prevPageData) === JSON.stringify(data)) {
+          return prev;
+        }
+        return {
+          ...prev,
+          [pageNumber]: data,
+        };
+      });
+    },
+    [],
+  );
 
-  const itemContentRenderer = (verseIdx: number) => {
-    if (verseIdx === versesCount) {
+  // Compute accumulated questions data from all loaded pages.
+  // This merges questions data from each page into a single object.
+  const accumulatedQuestionsData = useMemo(() => {
+    const result: Record<string, QuestionsData> = {};
+    Object.values(pageQuestionsMap).forEach((pageData) => {
+      Object.assign(result, pageData);
+    });
+    return result;
+  }, [pageQuestionsMap]);
+
+  // Wrap in useCallback with accumulatedQuestionsData as dependency.
+  // This ensures Virtuoso re-renders items when questions data changes,
+  // fixing the issue where Answers buttons wouldn't appear after async data loads.
+  const itemContentRenderer = useCallback(
+    (verseIdx: number) => {
+      if (verseIdx === versesCount) {
+        return (
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+            initialData={initialData}
+          />
+        );
+      }
+
       return (
-        <EndOfScrollingControls
+        <TranslationViewVerse
+          verseIdx={verseIdx}
+          totalVerses={versesCount}
           quranReaderDataType={quranReaderDataType}
-          lastVerse={verses[verses.length - 1]}
+          quranReaderStyles={quranReaderStyles}
+          setApiPageToVersesMap={setApiPageToVersesMap}
+          selectedTranslations={selectedTranslations}
+          wordByWordLocale={wordByWordLocale}
+          reciterId={reciterId}
           initialData={initialData}
+          resourceId={resourceId}
+          questionsData={accumulatedQuestionsData}
         />
       );
-    }
-
-    return (
-      <TranslationViewVerse
-        verseIdx={verseIdx}
-        totalVerses={versesCount}
-        quranReaderDataType={quranReaderDataType}
-        quranReaderStyles={quranReaderStyles}
-        setApiPageToVersesMap={setApiPageToVersesMap}
-        selectedTranslations={selectedTranslations}
-        wordByWordLocale={wordByWordLocale}
-        reciterId={reciterId}
-        initialData={initialData}
-        resourceId={resourceId}
-      />
-    );
-  };
+    },
+    [
+      versesCount,
+      quranReaderDataType,
+      verses,
+      initialData,
+      accumulatedQuestionsData,
+      quranReaderStyles,
+      setApiPageToVersesMap,
+      selectedTranslations,
+      wordByWordLocale,
+      reciterId,
+      resourceId,
+    ],
+  );
 
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||
@@ -159,6 +188,11 @@ const TranslationView = ({
         />
       )}
 
+      {/* Fetches questions for each loaded page without rendering any UI */}
+      <PageQuestionsLoaders
+        apiPageToVersesMap={apiPageToVersesMap}
+        onQuestionsLoaded={handleQuestionsLoaded}
+      />
       <PageQuestionsContext.Provider value={accumulatedQuestionsData}>
         <div
           className={styles.wrapper}

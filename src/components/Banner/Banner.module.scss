@@ -1,7 +1,7 @@
 .container {
   margin-block-start: 0;
   box-sizing: border-box;
-  height: var(--banner-height);
+  block-size: var(--banner-height);
   background-color: var(--color-background-elevated-new);
   display: flex;
   justify-content: space-between;
@@ -13,17 +13,19 @@
 }
 
 .text {
+  text-align: center;
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-small-px);
+  font-size: clamp(var(--font-size-xsmall-px), 2.5vw, var(--font-size-small-px));
 }
 
 .cta {
+  text-align: center;
   padding-inline: var(--spacing-xsmall-px);
   padding-block: var(--spacing-micro2-px);
   background-color: var(--color-success-faded);
   color: var(--color-text-link-new);
-  font-size: var(--font-size-small-px);
+  font-size: clamp(var(--font-size-xsmall-px), 2.5vw, var(--font-size-small-px));
   font-weight: var(--font-weight-medium);
   display: flex;
   justify-content: center;

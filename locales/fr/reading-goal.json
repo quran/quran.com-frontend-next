@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Atteignez vos objectifs coraniques",
   "continue-reading": "Continuer la lecture",
   "continuous": {
     "description": "Votre objectif calculera votre progression sur un nombre de jours",
@@ -12,8 +13,10 @@
     "description": "Votre objectif sera réinitialisé chaque jour",
     "title": "Objectif quotidien"
   },
+  "day-streak": "Série d'un jour",
   "day-x": "Jour {{day}}",
   "days": "Jours",
+  "days-remaining": "jours restants",
   "duration": "Durée (jours)",
   "ending-chapter": "Sourate Finale",
   "ending-verse": "Ayah Finale",
@@ -95,6 +98,7 @@
     "other": "{{days}} jours restants"
   },
   "set-a-new-goal": "Définir un nouvel objectif",
+  "set-custom-goal": "Définir un objectif personnalisé",
   "set-reading-goal-success": "Votre objectif de lecture a été défini avec succès.",
   "start-journey": "Commencez votre voyage !",
   "start-reading": "Commencer la lecture",
@@ -110,6 +114,7 @@
     "stroked": "Vous n'avez rien lu aujourd'hui"
   },
   "todays-goal": "Objectif du jour",
+  "track-your-streak": "Suivez vos séries, créez des objectifs personnalisés, restez régulier.",
   "view-progress": "Voir la progression",
   "week-progress": "Progression de la semaine",
   "x-days": {

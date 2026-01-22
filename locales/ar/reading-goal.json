@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "حقق أهدافك في القرآن",
   "continue-reading": "تابع القراءة",
   "continuous": {
     "description": "سيتم حساب تقدمك بناءً على عدد الأيام",
@@ -12,8 +13,10 @@
     "description": "سيتم إعادة تحديد هدفك كل يوم",
     "title": "الهدف اليومي"
   },
+  "day-streak": "خط النهار",
   "day-x": "اليوم {{day}}",
   "days": "أيام",
+  "days-remaining": "الأيام المتبقية",
   "duration": "المدة (أيام)",
   "ending-chapter": "السورة الأخيرة",
   "ending-verse": "الآية الأخيرة",
@@ -71,7 +74,7 @@
   "plus-x-more-days": {
     "zero": "لا يوم",
     "one": "يوم آخر",
-    "two": "يومان آخران",
+    "two": "يومين",
     "few": "+{{days}} أيام قليلة",
     "many": "+{{days}} أيام كثيرة",
     "other": "+{{days}} أخرى"
@@ -97,18 +100,19 @@
   "remaining-days": {
     "zero": "تبقي صفر يوم",
     "one": "تبقي يوم واحد",
-    "two": "تبقي يومان",
+    "two": "تبقي يومين",
     "few": "تبقي {{days}} أيام قليلة",
     "many": "تبقي {{days}}أيام  كثيرة",
     "other": "تبقي {{days}} أخرى"
   },
   "set-a-new-goal": "حدد هدفًا جديدًا",
+  "set-custom-goal": "حدد هدفًا مخصصًا",
   "set-reading-goal-success": "تم تحديد هدف القراءة الخاص بك بنجاح",
   "start-journey": "ابدأ رحلتك!",
   "start-reading": "ابدأ القراءة",
   "starting-chapter": "السورة الأولى",
   "starting-verse": "الآية الأولى",
-  "streak": "الاستمرارية",
+  "streak": "أيام متتالية",
   "streak-definition": "الاستمرارية هو عدد الأيام المتتالية التي قرأت فيها القرآن الكريم.",
   "timeline-meaning": "ماذا يعني جدولك الزمني؟",
   "timeline-states": {
@@ -118,17 +122,18 @@
     "stroked": "لم تقرأ أي شيء اليوم."
   },
   "todays-goal": "هدف اليوم",
+  "track-your-streak": "تتبع سلسلة الإنجازات، أنشئ أهدافًا مخصصة، حافظ على الاستمرارية",
   "view-progress": "مشاهدة التقدم",
   "week-progress": "تقدّم هذا الأسبوع",
   "x-days": {
     "zero": "صفر",
     "one": "يوم",
-    "two": "يومان",
+    "two": "يومين",
     "few": "{{days}} أيام قليلة",
     "many": "أيام كثيرة",
     "other": "{{days}} أخرى"
   },
-  "x-days-streak": "استمرارية لمدة {{days}}",
+  "x-days-streak": "<p>{{days}}</p> <span>عدد الأيام المتتالية</span>",
   "x-hours": {
     "zero": "صفر",
     "one": "ساعة",

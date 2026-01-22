@@ -18,7 +18,6 @@ import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import useIsMobile from '@/hooks/useIsMobile';
-import { logErrorToSentry } from '@/lib/sentry';
 import {
   Goal,
   GoalCategory,
@@ -149,8 +148,7 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
       await updateReadingGoalAndClearCache(data);
       toast(t('edit-goal.success'), { status: ToastStatus.Success });
       closeModal();
-    } catch (e) {
-      logErrorToSentry(e);
+    } catch {
       toast(t('common:error.general'), { status: ToastStatus.Error });
     }
   };
@@ -206,7 +204,13 @@ const UpdateReadingGoalModal: React.FC<PropsUpdateReadingGoalModal> = ({
         {t('edit-goal.action')}
       </Button>
 
-      <Modal isOpen={isOpen} onClickOutside={closeModal}>
+      <Modal
+        isOpen={isOpen}
+        onClickOutside={closeModal}
+        contentClassName={styles.modalContent}
+        hasCloseButton
+        onClose={closeModal}
+      >
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('edit-goal.title')}</Modal.Title>

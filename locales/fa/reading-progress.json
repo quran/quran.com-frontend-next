@@ -1,6 +1,7 @@
 {
   "add": "اضافه کردن",
   "add-data-success": "اطلاعات خواندن شما با موفقیت اضافه شد.",
+  "back-to-reading-goal": "بازگشت به هدف مطالعه",
   "delete-goal": {
     "action": "حذف هدف",
     "confirmation": {

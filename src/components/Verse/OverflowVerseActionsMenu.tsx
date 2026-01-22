@@ -14,8 +14,8 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
-import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 
 const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseActionsMenuBody'), {
   ssr: false,
@@ -23,7 +23,7 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 });
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;
@@ -63,6 +63,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             )}
             shouldFlipOnRTL={false}
             ariaLabel={t('more')}
+            data-testid="verse-actions-more"
           >
             <span className={cellStyles.icon}>
               <IconContainer

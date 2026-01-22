@@ -20,8 +20,8 @@
 }
 
 .ruleIcon {
-  width: var(--spacing-small2-px);
-  height: var(--spacing-small2-px);
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
 }
 
 .valid {

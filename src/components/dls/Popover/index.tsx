@@ -37,8 +37,8 @@ interface Props {
   contentStyles?: string;
   contentSideOffset?: number;
   isContainerSpan?: boolean;
-  tooltipType?: TooltipType;
   stopPropagation?: boolean;
+  tooltipType?: TooltipType;
 }
 
 const Popover: React.FC<Props> = ({
@@ -58,8 +58,8 @@ const Popover: React.FC<Props> = ({
   triggerStyles,
   contentStyles,
   isContainerSpan = false,
-  tooltipType,
   stopPropagation = false,
+  tooltipType,
 }) => {
   const content = (
     <RadixPopover.Content

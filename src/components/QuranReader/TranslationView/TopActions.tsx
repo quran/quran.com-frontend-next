@@ -5,11 +5,11 @@ import ShareQuranModal from '../ReadingView/ShareQuranModal';
 import ActionButtons from './ActionButtons';
 import styles from './TranslationViewCell.module.scss';
 
-import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 
 type TopActionsProps = {
-  verse: WordVerse;
+  verse: Verse;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   isTranslationView?: boolean;

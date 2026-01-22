@@ -12,10 +12,11 @@ import { ModalType } from '@/components/QuranReader/TranslationView/BottomAction
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
+import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { pickRandom } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getProfileNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, MY_QURAN_URL } from '@/utils/navigation';
 import { ChapterContent } from 'types/ApiResponses';
 
 interface ExploreCardProps {
@@ -25,6 +26,7 @@ interface ExploreCardProps {
   questionsVerseKey: string;
   suggestions?: ChapterContent[];
   hasQuestions: boolean;
+  hasClarificationQuestion: boolean;
   onModalOpen: (modalType: ModalType) => void;
 }
 
@@ -37,6 +39,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   questionsVerseKey,
   suggestions,
   hasQuestions,
+  hasClarificationQuestion,
   onModalOpen,
 }) => {
   const { t, lang } = useTranslation();
@@ -79,7 +82,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       <div className={styles.header}>
         <span className={styles.title}>{t('quran-reader:end-of-surah.explore')}</span>
         <Link
-          href={getProfileNavigationUrl()}
+          href={MY_QURAN_URL}
           className={styles.myQuranContainer}
           onClick={handleMyQuranClick}
           aria-label={t('quran-reader:end-of-surah.my-quran')}
@@ -100,6 +103,14 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
             const Icon = button.icon;
             const label = getButtonLabel(button);
 
+            // For Answers button, use a special icon when there is a clarification question
+            const iconElement =
+              button.modalType === ModalType.QUESTIONS && hasClarificationQuestion ? (
+                <LightbulbOnIcon />
+              ) : (
+                <Icon />
+              );
+
             return (
               <Button
                 key={button.key}
@@ -108,7 +119,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
                 variant={ButtonVariant.Compact}
                 shape={ButtonShape.Pill}
                 onClick={() => handleButtonClick(button)}
-                prefix={<Icon />}
+                prefix={iconElement}
                 className={styles.button}
                 aria-label={label}
               >

@@ -2,8 +2,9 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$quran-reader-padding: 3rem;
-$quran-reader-padding-mobile: 4.5rem;
+// Padding clears fixed elements; ChapterHeader's margin provides the 20px visual gap
+$quran-reader-padding: var(--navbar-height);
+$quran-reader-padding-mobile: var(--navbar-height);
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
@@ -11,18 +12,12 @@ $virtual-scrolling-height-bandage: calc(
 // for example for EndOfScrollingButton component
 
 .infiniteScroll {
-  @include utility.quranContainer;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
 }
 
 .readingView {
   min-block-size: 100vh;
-  @include breakpoints.smallerThanTablet {
-    inline-size: 85%;
-  }
 }
 
 .loading {
@@ -36,12 +31,10 @@ $virtual-scrolling-height-bandage: calc(
 
 .container {
   @include breakpoints.smallerThanTablet {
-    // Add banner height since banner is not absolute on mobile
-    padding-block-start: calc($quran-reader-padding-mobile + var(--banner-height));
+    padding-block-start: $quran-reader-padding-mobile;
   }
   padding-block-start: $quran-reader-padding;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
+  padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
@@ -54,6 +47,14 @@ $virtual-scrolling-height-bandage: calc(
     // TODO: we should add the banner height here if it's shown
     // padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height) + var(--banner-height));
     padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height));
+  }
+}
+
+.translationView {
+  padding-block-end: var(--spacing-xxlarge-px);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-end: var(--spacing-medium2-px);
   }
 }
 
@@ -72,4 +73,21 @@ $virtual-scrolling-height-bandage: calc(
 .playButton {
   display: flex;
   justify-content: center;
+}
+
+// Mobile collapsed state: when context menu is collapsed (scrolled past threshold)
+.mobileCollapsed {
+  padding-block-start: 0;
+}
+
+// Mobile collapsed state with Tajweed mushaf: needs extra padding for tajweed trigger
+.mobileCollapsedTajweed {
+  padding-block-start: var(--tajweed-trigger-height);
+}
+
+// Mobile expanded state with Tajweed mushaf: add extra padding for tajweed trigger
+.mobileTajweedExpanded {
+  padding-block-start: calc(
+    var(--navbar-height) + var(--mobile-reading-mode-tabs-height) + var(--tajweed-trigger-height)
+  );
 }

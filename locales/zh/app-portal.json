@@ -3,34 +3,50 @@
     "apps": {
       "muhaffidh": {
         "caption": "高效地背诵和复习《古兰经》",
+        "description": "一款旨在以创新方式帮助您记忆和复习《古兰经》的应用程序。",
+        "tagline": "一款创新的古兰经背诵和复习辅助工具",
         "title": "穆哈菲德"
       },
       "quran_android": {
         "caption": "在安卓设备上阅读、收藏和收听《古兰经》",
+        "description": "功能包括 Madani 风格的页面、无缝音频、书签/标签/分享、搜索、夜间模式、音频重复播放以及多种语言的翻译/经注。",
+        "tagline": "适用于安卓系统的免费开源古兰经应用程序。",
         "title": "安卓版古兰经"
       },
       "quran_ios": {
         "caption": "适用于 iPhone 和 iPad 的精美无广告古兰经阅读和聆听应用程序",
+        "description": "来自 Quran.com 的制作团队：随时随地阅读古兰经、背诵经文，聆听您最喜爱的诵经者朗诵，享受纯净无广告的体验。",
+        "tagline": "一款美观且无广告的《古兰经》应用程序",
         "title": "iOS 版古兰经（由 quran.com 提供）"
       },
       "quranmeet": {
         "caption": "在线古兰经学习课程",
+        "description": "一个连接学生与教师和学习小组的平台，提供一对一和小班古兰经学习课程。",
+        "tagline": "一对一和小班古兰经课程",
         "title": "古兰经聚会"
       },
       "quranreflect": {
         "caption": "分享感想",
+        "description": "一个鼓励和促进古兰经反思的社交平台——分享反思、探索话题、与社区互动。",
+        "tagline": "分享感悟，共同成长",
         "title": "古兰经反思"
       },
       "readtafsir": {
         "caption": "搜索并比较古典经注",
+        "description": "在一个地方阅读和收听多个古典经注资料，方便浏览、搜索和比较不同的解释。",
+        "tagline": "互动式经注阅读与聆听",
         "title": "阅读经注"
       },
       "sunnah": {
         "caption": "圣训集",
+        "description": "一个拥有大量在线圣训集的圣训图书馆，提供多种语言的翻译和搜索工具。",
+        "tagline": "圣训触手可及",
         "title": "Sunnah.com"
       },
       "tafsirapp": {
         "caption": "包含多个来源的互动式经注",
+        "description": "一个古兰经研究门户网站，汇集了 tafsir、qira'at、mushafs、i'rab、古兰经科学、asbab al-nuzul、裁决和词典。",
+        "tagline": "古兰经研究中心",
         "title": "Tafsir App"
       }
     },
@@ -44,6 +60,11 @@
       "study-tools": "学习工具"
     },
     "title": "浏览所有应用"
+  },
+  "cta": {
+    "app-store": "在 App Store 下载",
+    "google-play": "在 Google Play 上获取",
+    "visit": "访问"
   },
   "featured": {
     "apps": {

@@ -8,10 +8,16 @@ type CloseActionProps = {
   children: React.ReactNode;
   onClick?: (e: MouseEvent) => void;
   isDisabled?: boolean;
+  dataTestId?: string;
 };
 
-const CloseAction = ({ children, onClick, isDisabled }: CloseActionProps) => (
-  <DialogPrimitive.Close className={styles.action} onClick={onClick} disabled={isDisabled}>
+const CloseAction = ({ children, onClick, isDisabled, dataTestId }: CloseActionProps) => (
+  <DialogPrimitive.Close
+    className={styles.action}
+    onClick={onClick}
+    disabled={isDisabled}
+    data-testid={dataTestId}
+  >
     {children}
   </DialogPrimitive.Close>
 );

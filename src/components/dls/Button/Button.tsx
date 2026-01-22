@@ -43,6 +43,13 @@ export enum ButtonVariant {
   Accent = 'accent',
 }
 
+/**
+ * Props for the Button component.
+ *
+ * **Important**: When `href` is provided, the component renders a `<Link>` with a `<div>` inside instead of a `<button>`.
+ * In this case, the `ref` parameter will not be forwarded and will be `null` when accessed by consumers.
+ * If you need to access the underlying element via ref, avoid using the `href` prop.
+ */
 export type ButtonProps = {
   size?: ButtonSize;
   shape?: ButtonShape;
@@ -137,6 +144,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,
+      [styles.rounded]: variant === ButtonVariant.Rounded,
       [styles.disabled]: disabled || isLoading,
       [styles.noSidePadding]: !hasSidePadding,
     });

@@ -8,17 +8,17 @@ import NavigationDrawerItem from './NavigationDrawerItem';
 import OurProjectsCollapsible from './OurProjectsCollapsible';
 
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
-import IconAbout from '@/icons/about.svg';
 import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
+import IconCode from '@/icons/code.svg';
 import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
-  ABOUT_US_URL,
-  getProfileNavigationUrl,
+  DEVELOPERS_URL,
   LEARNING_PLANS_URL,
+  MY_QURAN_URL,
   RADIO_URL,
   RECITERS_URL,
 } from '@/utils/navigation';
@@ -58,7 +58,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     {
       title: t('my-quran'),
       icon: <IconBookmarkFilled />,
-      href: getProfileNavigationUrl(),
+      href: MY_QURAN_URL,
       eventName: 'navigation_drawer_my_quran',
     },
     {
@@ -74,10 +74,10 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
       eventName: 'navigation_drawer_reciters',
     },
     {
-      title: t('about'),
-      icon: <IconAbout />,
-      href: ABOUT_US_URL,
-      eventName: 'navigation_drawer_about',
+      title: t('developers'),
+      icon: <IconCode />,
+      href: DEVELOPERS_URL,
+      eventName: 'navigation_drawer_developers',
     },
   ];
 

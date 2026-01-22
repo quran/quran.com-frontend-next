@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Fikia Malengo Yako ya Quran",
   "continue-reading": "Endelea Kusoma",
   "continuous": {
     "description": "Lengo lako litahesabu maendeleo yako kwa muda wa siku kadhaa",
@@ -12,8 +13,10 @@
     "description": "Lengo lako litawekwa upya kila siku",
     "title": "Lengo la kila siku"
   },
+  "day-streak": "Mfululizo wa mchana",
   "day-x": "Siku {{day}}",
   "days": "Siku",
+  "days-remaining": "siku zilizobaki",
   "duration": "Muda (siku)",
   "ending-chapter": "Sura ya kumalizia",
   "ending-verse": "Aya ya kumalizia",
@@ -25,7 +28,7 @@
       "title": "Iliyo binafsishwa"
     },
     "khatm": {
-      "description": "Lengo maarufu la Khatm. Soma Juz 1 kwa siku",
+      "description": "Lengo maarufu la Khatm. Soma Juzuu 1 kwa siku",
       "title": "Soma Qur'ani ndani ya siku 30"
     },
     "time": {
@@ -51,7 +54,7 @@
     "title": "Weka kusudio kwa lengo lako"
   },
   "goal-type": {
-    "description": "Je, lengo lako linategemea wakati, kurasa, au msururu maalum (yaani, Juzu 3 za Qur'ani)?",
+    "description": "Je, lengo lako linategemea wakati, kurasa, au msururu maalum (yaani, Juzuu 3 za Qur'ani)?",
     "title": "Chagua kigezo cha lengo lako"
   },
   "goal-types": {
@@ -84,7 +87,7 @@
     "time-goal": "soma {{time}} ya Qur'ani"
   },
   "reading-goal": "Lengo la Kusoma",
-  "reading-goal-description": "Je, unapata changamoto kudumisha uthabiti na malengo yako ya usomaji wa Qur'ani? <br/> <br/> Safari ya kukua pamoja na Qur'ani ni kipengele cha nguvu kilichoundwa ili kukusaidia kuendelea kuwa thabiti katika safari yako ya Qur'ani. Iwe unalenga kusoma dakika 10 kwa siku, kukamilisha Juz katika mwezi mmoja, au kumaliza Qur'ani nzima kwa mwaka mmoja, n.k., Quran.com sasa inaweza kukusaidia kuweka lengo maalum na kufuatilia mfululizo wako wa kusoma kila siku, huku ukirekebisha kadiri unavyoendelea. Ni bure kabisa kutumia na tunatumai itakusaidia kukaa na motisha kufikia lengo lako!",
+  "reading-goal-description": "Je, unapata changamoto kudumisha uthabiti na malengo yako ya usomaji wa Qur'ani? <br/> <br/> Safari ya kukua pamoja na Qur'ani ni kipengele cha nguvu kilichoundwa ili kukusaidia kuendelea kuwa thabiti katika safari yako ya Qur'ani. Iwe unalenga kusoma dakika 10 kwa siku, kukamilisha Juzuu katika mwezi mmoja, au kumaliza Qur'ani nzima kwa mwaka mmoja, n.k., Quran.com sasa inaweza kukusaidia kuweka lengo maalum na kufuatilia mfululizo wako wa kusoma kila siku, huku ukirekebisha kadiri unavyoendelea. Ni bure kabisa kutumia na tunatumai itakusaidia kukaa na motisha kufikia lengo lako!",
   "reading-goal-label": "Uko kwenye",
   "reading-goal-title": "Tunakuletea Safari ya Ukuaji pamoja na Qur'ani",
   "recommended": "Imependekezwa",
@@ -95,6 +98,7 @@
     "other": ""
   },
   "set-a-new-goal": "Weka Lengo jipya",
+  "set-custom-goal": "Weka Lengo Maalum",
   "set-reading-goal-success": "Lengo lako la kusoma limetengenezwa kwa mafanikio.",
   "start-journey": "Anza safari yako!",
   "start-reading": "Anza Kusoma",
@@ -110,6 +114,7 @@
     "stroked": "Hujasoma chochote leo"
   },
   "todays-goal": "Lengo la Leo",
+  "track-your-streak": "Fuatilia Mistari, Unda Malengo Maalum, Endelea Kuendelea",
   "view-progress": "Tazama Maendeleo",
   "week-progress": "Maendeleo ya wiki hii",
   "x-days": {

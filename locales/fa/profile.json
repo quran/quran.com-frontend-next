@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "فقط {{formats}}",
+  "change-password": "تغییر رمز عبور",
   "delete-account": "حذف حساب کاربری",
+  "delete-account-warning-title": "هشدار",
   "delete-confirmation": {
     "action-text": "من پیامد آن را درک می کنم، حساب من را حذف کنید",
     "confirmation-text": "اکانت من را حذف کن",
     "instruction-text": "لطفاً <strong> {{text}} </strong> را برای تأیید تایپ کنید",
     "subtitle": "این عمل قابل لغو نیست. با این کار حساب، نشانک های ذخیره شده، جلسات خواندن و تمام داده های شما برای همیشه حذف می شود.",
     "title": "آیا کاملا مطمئن هستید؟"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "بله",
+    "cancel-text": "خیر",
+    "subtitle": "عکس پروفایل رو پاک می‌کنی و به حالت پیش‌فرض برمی‌گردونی، مطمئنی؟",
+    "title": "حذف تصویر پروفایل"
+  },
+  "edit-details": "جزئیات را ویرایش کنید",
+  "email-notification-settings": "تنظیمات اعلان ایمیل",
+  "errors": {
+    "remove-failed": "حذف عکس پروفایل ناموفق بود. لطفاً دوباره امتحان کنید.",
+    "upload-failed": "آپلود عکس پروفایل ناموفق بود. لطفا دوباره امتحان کنید."
+  },
+  "max-file-size": "مکس {{size}}",
+  "my-profile": "پروفایل من",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "ایمیلی حاوی لینک‌هایی به تکلیف مطالعه هفتگی، سوالات مربوط به مرور مطالب و منابع بیشتر برای پیگیری شما ارسال خواهد شد.",
+      "title": "قرآن در یک سال"
+    },
+    "streaks-that-will-break": {
+      "description": "ایمیلی برای اطلاع‌رسانی در مورد قطع شدن یک نوار ارسال خواهد شد.",
+      "title": "رگه‌ها"
+    }
+  },
+  "personalization": "شخصی سازی",
+  "profile-picture": "تصویر پروفایل",
+  "remove-picture": "حذف تصویر",
+  "remove-success": "تصویر پروفایل با موفقیت حذف شد",
+  "save-changes": "ذخیره تغییرات",
+  "save-picture": "ذخیره تصویر",
+  "success": {
+    "details": "پروفایل شما با موفقیت به‌روزرسانی شد",
+    "notifications": "تنظیمات اعلان‌های شما با موفقیت به‌روزرسانی شد",
+    "password": "رمز عبور شما با موفقیت به‌روزرسانی شد"
+  },
+  "update-password": "به‌روزرسانی رمز عبور",
+  "upload-picture": "آپلود تصویر",
+  "upload-success": "عکس پروفایل با موفقیت آپلود شد"
 }

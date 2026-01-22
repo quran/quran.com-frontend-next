@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Raih Tujuan Anda dalam Al-Quran",
   "continue-reading": "Lanjut membaca",
   "continuous": {
     "description": "Sasaran Anda akan menghitung kemajuan Anda dalam rentang hari",
@@ -12,8 +13,10 @@
     "description": "Sasaran Anda akan disetel ulang setiap hari",
     "title": "Sasaran harian"
   },
+  "day-streak": "Rentetan hari",
   "day-x": "Hari {{day}}",
   "days": "Hari",
+  "days-remaining": "hari tersisa",
   "duration": "Durasi (hari)",
   "ending-chapter": "Surah Akhir",
   "ending-verse": "Ayat Akhir",
@@ -93,6 +96,7 @@
     "other": "{{days}} hari tersisa"
   },
   "set-a-new-goal": "Buat Sasaran baru",
+  "set-custom-goal": "Tetapkan Tujuan Khusus",
   "set-reading-goal-success": "Sasaran membaca Anda berhasil ditetapkan.",
   "start-journey": "Awali perjalanan Anda!",
   "start-reading": "Mulai Membaca",
@@ -108,6 +112,7 @@
     "stroked": "Anda belum membaca apa pun hari ini"
   },
   "todays-goal": "Sasaran hari ini",
+  "track-your-streak": "Lacak Rentetan Prestasi, Buat Sasaran Khusus, Pertahankan Konsistensi",
   "view-progress": "Lihat Progres",
   "week-progress": "Progres minggu ini",
   "x-days": {

@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Alcance seus objetivos com o Alcorão",
   "continue-reading": "Continue lendo",
   "continuous": {
     "description": "Sua meta calculará seu progresso ao longo de alguns dias",
@@ -12,8 +13,10 @@
     "description": "Seu objetivo será redefinido todos os dias",
     "title": "meta diária"
   },
+  "day-streak": "sequência de dias",
   "day-x": "Dia {{day}}",
   "days": "Dias",
+  "days-remaining": "dias restantes",
   "duration": "Duração (dias)",
   "ending-chapter": "Surata Final",
   "ending-verse": "Fim de Ayah",
@@ -95,6 +98,7 @@
     "other": "{{days}} dias restantes"
   },
   "set-a-new-goal": "Defina uma nova meta",
+  "set-custom-goal": "Defina uma meta personalizada",
   "set-reading-goal-success": "Sua meta de leitura foi definida com sucesso.",
   "start-journey": "Comece sua jornada!",
   "start-reading": "Comece a ler",
@@ -110,6 +114,7 @@
     "stroked": "Você não leu nada hoje"
   },
   "todays-goal": "Gol de hoje",
+  "track-your-streak": "Acompanhe sequências de vitórias, crie metas personalizadas e mantenha a consistência.",
   "view-progress": "Ver Progresso",
   "week-progress": "Progresso desta semana",
   "x-days": {

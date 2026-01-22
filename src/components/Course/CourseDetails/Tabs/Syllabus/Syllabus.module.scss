@@ -1,11 +1,24 @@
 .syllabusContainer {
-  padding-block-start: var(--spacing-xsmall);
+    padding-block-start: var(--spacing-xsmall);
 }
 
 .container {
-  padding-block: var(--spacing-micro);
+    padding-block: var(--spacing-micro);
 }
 
 .day {
-  font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+}
+
+.notEnrolledLink {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--color-text-link);
+    height: auto;
+
+    &:hover {
+        text-decoration: underline;
+        color: var(--color-text-link);
+    }
 }

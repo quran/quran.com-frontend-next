@@ -9,11 +9,11 @@ import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
-import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;

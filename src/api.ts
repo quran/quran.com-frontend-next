@@ -5,6 +5,7 @@ import { NextApiRequest } from 'next';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
+import { getMushafId } from '@/utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -29,7 +30,7 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
   makeChapterMetadataUrl,
-  makeCountryLanguagePreferenceUrl,
+  makeVersesFilterUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -50,7 +51,6 @@ import {
   TafsirContentResponse,
   PagesLookUpResponse,
   WordByWordTranslationsResponse,
-  CountryLanguagePreferenceResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -253,19 +253,6 @@ export const getTafsirs = async (language: string): Promise<TafsirsResponse> =>
   fetcher(makeTafsirsUrl(language));
 
 /**
- * Get country language preference data.
- *
- * @param {string} userDeviceLanguage the user's device language code
- * @param {string} country the two-letter country code
- * @returns {Promise<CountryLanguagePreferenceResponse>}
- */
-export const getCountryLanguagePreference = async (
-  userDeviceLanguage: string,
-  country: string,
-): Promise<CountryLanguagePreferenceResponse> =>
-  fetcher(makeCountryLanguagePreferenceUrl(userDeviceLanguage, country));
-
-/**
  * Get a chapter's info
  *
  * @param {string} chapterId
@@ -419,5 +406,33 @@ export const getTafsirContent = (
       quranFont,
       mushafLines,
     }),
+  );
+};
+
+/**
+ * Get the page number for a specific verse by chapter and verse number.
+ * This is used as a fallback when verse data is not already available in memory.
+ *
+ * @param {string} chapterId the chapter ID
+ * @param {number} verseNumber the verse number
+ * @param {QuranFont} quranFont the selected Quran font
+ * @param {MushafLines} mushafLines the selected mushaf lines
+ * @param {AbortSignal} signal optional abort signal for request cancellation
+ * @returns {Promise<VersesResponse>}
+ */
+export const getVersePageNumber = async (
+  chapterId: string,
+  verseNumber: number,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  signal?: AbortSignal,
+): Promise<VersesResponse> => {
+  return fetcher<VersesResponse>(
+    makeVersesFilterUrl({
+      filters: `${chapterId}:${verseNumber}`,
+      fields: `page_number`,
+      ...getMushafId(quranFont, mushafLines),
+    }),
+    { signal },
   );
 };

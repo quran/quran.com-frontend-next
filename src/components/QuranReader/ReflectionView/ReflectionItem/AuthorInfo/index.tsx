@@ -53,14 +53,14 @@ const AuthorInfo: React.FC<Props> = ({
     logButtonClick('reflection_item_author');
   };
 
-  const handleImageError = useCallback(() => {
-    setImageError(true);
-  }, []);
-
   const referredVerseText = useMemo(
     () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
     [verseReferences, nonChapterVerseReferences, lang, t],
   );
+
+  const handleImageError = useCallback(() => {
+    setImageError(true);
+  }, []);
 
   return (
     <div className={styles.authorInfo}>

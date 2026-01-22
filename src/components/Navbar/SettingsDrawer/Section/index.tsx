@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import Footer from './Footer';
 import Label from './Label';
 import Row from './Row';
@@ -9,14 +11,18 @@ import Separator, { SeparatorWeight } from '@/dls/Separator/Separator';
 interface SectionProps {
   id?: string;
   children?: React.ReactNode;
+  hideSeparator?: boolean;
+  className?: string;
 }
 
-const Section = ({ children, ...props }: SectionProps) => (
-  <div className={styles.section} {...props}>
+const Section = ({ children, hideSeparator, className, ...props }: SectionProps) => (
+  <div className={classNames(styles.section, className)} {...props}>
     {children}
-    <div className={styles.separator}>
-      <Separator weight={SeparatorWeight.Bold} />
-    </div>
+    {!hideSeparator && (
+      <div className={styles.separator}>
+        <Separator weight={SeparatorWeight.Bold} />
+      </div>
+    )}
   </div>
 );
 

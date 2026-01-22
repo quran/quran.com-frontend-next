@@ -1,32 +1,33 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
+import ReadingModeActions from './ReadingModeActions';
 
-import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
-import useIntersectionObserver from '@/hooks/useObserveElement';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
   chapterId: string;
-  translationsLabel?: string;
+  translationName?: string;
   translationsCount?: number;
-  pageNumber: number;
-  hizbNumber: number;
   isTranslationView: boolean;
+  className?: string;
 }
 
 /**
@@ -38,67 +39,60 @@ interface ChapterHeaderProps {
  */
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
-  translationsLabel,
+  translationName,
   translationsCount,
-  pageNumber,
-  hizbNumber,
   isTranslationView,
+  className,
 }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('quran-reader');
-  const headerRef = useRef<HTMLDivElement>(null);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
+  const readingPreference = useSelector(selectReadingPreference);
 
-  /**
-   * The intersection observer is needed so that we know that the first verse
-   * is visible. When the first verse is visible, we need to hide the chapter header.
-   */
-  useIntersectionObserver(headerRef, QURAN_READER_OBSERVER_ID);
+  // Check if we're in Reading mode (Arabic or Translation)
+  const isReadingMode = isInReadingMode(readingPreference);
 
   const onChangeTranslationClicked = () => {
     dispatch(setSettingsView(SettingsView.Translation));
+    logEvent('drawer_settings_open');
     dispatch(setIsSettingsDrawerOpen(true));
     logButtonClick('chapter_header_change_translation');
   };
 
   return (
-    <div
-      className={styles.container}
-      ref={headerRef}
-      data-verse-key={`${chapterId}:1`}
-      data-page={pageNumber}
-      data-chapter-id={chapterId}
-      data-hizb={hizbNumber}
-      data-is-translation-view={isTranslationView}
-    >
+    <div className={classNames(styles.container, className)}>
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Small}
-            shape={ButtonShape.Pill}
-            onClick={onChangeTranslationClicked}
-            ariaLabel={t('change-translation')}
-            tooltip={t('change-translation')}
-            className={styles.changeTranslationButton}
-            contentClassName={styles.translationName}
-            suffix={
-              translationsCount > 1 && (
-                <span className={styles.translationsCount}>
-                  {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                </span>
-              )
-            }
-          >
-            <span>{translationsLabel}</span>
-          </Button>
+          {isReadingMode ? (
+            <ReadingModeActions />
+          ) : (
+            <Button
+              type={ButtonType.Secondary}
+              size={ButtonSize.Small}
+              shape={ButtonShape.Pill}
+              onClick={onChangeTranslationClicked}
+              ariaLabel={t('change-translation')}
+              tooltip={t('change-translation')}
+              className={styles.changeTranslationButton}
+              contentClassName={styles.translationName}
+              suffix={
+                translationsCount > 1 && (
+                  <span className={styles.translationsCount}>
+                    {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
+                  </span>
+                )
+              }
+            >
+              <span>{translationName}</span>
+            </Button>
+          )}
         </div>
       </div>
 

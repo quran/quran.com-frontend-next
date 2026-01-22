@@ -12,12 +12,12 @@ import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
 import { QuranFont } from '@/types/QuranReader';
-import { WordVerse } from '@/types/Word';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
 }
 

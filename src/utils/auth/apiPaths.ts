@@ -159,17 +159,13 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-type GetCoursesQueryParams = {
+export type GetCoursesQueryParams = {
   myCourses?: boolean;
   languages?: string[];
 };
 
-export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
-  const { languages, ...restParams } = params || {};
-  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
-  return makeUrl('courses', queryParams);
-};
-
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
+  makeUrl('courses', params as GetCoursesQueryParams);
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
 export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>

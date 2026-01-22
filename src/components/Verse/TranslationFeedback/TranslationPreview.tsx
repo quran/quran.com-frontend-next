@@ -8,8 +8,9 @@ import Loader from '@/components/QuranReader/Loader';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import useVerseAndTranslation from '@/hooks/useVerseAndTranslation';
 import { VersesResponse } from '@/types/ApiResponses';
-import { WordVerse } from '@/types/Word';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+
+const TRANSLATION_PREVIEW_FONT_SCALE = 2; // Scale 2 corresponds to 16px font size according to design specifications
 
 /**
  * Finds the selected translation from the verses response data.
@@ -30,7 +31,7 @@ const findSelectedTranslation = (data: VersesResponse, selectedTranslationId: st
 };
 
 interface TranslationPreviewProps {
-  verse: WordVerse;
+  verse: { verseKey: string };
   selectedTranslationId: string;
 }
 
@@ -44,7 +45,7 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
   const chapterNumber = getChapterNumberFromKey(verse.verseKey);
   const verseNumber = getVerseNumberFromKey(verse.verseKey);
 
-  const { data, error, translationFontScale } = useVerseAndTranslation({
+  const { data, error } = useVerseAndTranslation({
     chapter: chapterNumber,
     from: shouldFetch ? verseNumber : undefined,
     to: verseNumber,
@@ -70,12 +71,12 @@ const TranslationPreview: React.FC<TranslationPreviewProps> = ({
 
   if (translation) {
     return (
-      <div>
+      <div data-testid={`translation-preview-${selectedTranslationId}`}>
         <TranslationText
           key={selectedTranslationId}
           text={`"${translation.text}"`}
           languageId={translation.languageId}
-          translationFontScale={translationFontScale}
+          translationFontScale={TRANSLATION_PREVIEW_FONT_SCALE}
         />
       </div>
     );

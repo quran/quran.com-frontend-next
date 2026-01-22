@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import GuestStateCard from './GuestStateCard';
 import styles from './StreakGoalCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
@@ -30,51 +31,14 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
   const { t, lang } = useTranslation('quran-reader');
   const { goal, streak, currentActivityDay } = useGetStreakWithMetadata({ showDayName: true });
   const isMobile = useIsMobile();
-
   const displayStreak = streak > 0 ? streak : 0;
-  const hasGoalOrStreak = !!goal || displayStreak > 0;
 
-  const onGoalArrowClicked = () => {
-    logButtonClick('end_of_surah_goal_card_arrow');
-  };
-
-  const onSetGoalButtonClicked = () => {
-    logButtonClick('end_of_surah_goal_card_set_goal');
-  };
-
-  if (!hasGoalOrStreak) {
-    return (
-      <Card
-        className={classNames(styles.endOfSurahCard, styles.guestState, cardClassName)}
-        data-testid="streak-goal-card"
-      >
-        <div className={styles.container}>
-          <div className={styles.titleContainer}>
-            <CirclesIcon className={styles.titleIcon} />
-            <h3 className={styles.title}>
-              {isMobile
-                ? t('end-of-surah.track-your-journey')
-                : t('end-of-surah.achieve-quran-goals-responsive')}
-            </h3>
-          </div>
-          {!isMobile && (
-            <p className={styles.subtitle}>{t('end-of-surah.achieve-quran-goals-desktop')}</p>
-          )}
-          <Button
-            type={ButtonType.Success}
-            size={ButtonSize.Medium}
-            href={getReadingGoalNavigationUrl()}
-            className={styles.button}
-            onClick={onSetGoalButtonClicked}
-          >
-            <CirclesIcon className={styles.buttonIcon} />
-            {isMobile ? t('end-of-surah.set-goal-mobile') : t('end-of-surah.set-custom-goal')}
-          </Button>
-        </div>
-      </Card>
-    );
+  if (!goal && displayStreak === 0) {
+    return <GuestStateCard cardClassName={cardClassName} />;
   }
 
+  const onGoalArrowClicked = () => logButtonClick('end_of_surah_goal_card_arrow');
+  const onSetGoalButtonClicked = () => logButtonClick('end_of_surah_goal_card_set_goal');
   const streakLabel =
     displayStreak === 1 ? t('end-of-surah.day-streak') : t('end-of-surah.days-streak');
 
@@ -107,13 +71,19 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
             <span className={styles.streakText}>{streakLabel}</span>
           </div>
           {!goal && (
-            <IconContainer
-              size={IconSize.Xsmall}
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              className={styles.streakArrowIcon}
-              aria-hidden="true"
-            />
+            <Link
+              href={getReadingGoalProgressNavigationUrl()}
+              onClick={onSetGoalButtonClicked}
+              className={styles.streakArrowLink}
+            >
+              <IconContainer
+                size={IconSize.Xsmall}
+                icon={<ArrowIcon />}
+                shouldForceSetColors={false}
+                className={styles.streakArrowIcon}
+                aria-hidden="true"
+              />
+            </Link>
           )}
         </div>
 
@@ -135,6 +105,7 @@ const StreakGoalCard: React.FC<StreakGoalCardProps> = ({ cardClassName }) => {
                 progressbarText: styles.customProgressbarText,
                 statusContainer: styles.customStatusContainer,
               }}
+              shouldShowOnlyLargestTimeUnit={isMobile}
             />
           </Link>
         ) : (

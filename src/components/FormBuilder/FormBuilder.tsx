@@ -108,7 +108,12 @@ const FormBuilder = <T,>({
   const renderError = useCallback(
     (error: any, errorClassName?: string) =>
       error && (
-        <span className={classNames(styles.errorText, errorClassName)}>{error.message}</span>
+        <span
+          className={classNames(styles.errorText, errorClassName)}
+          data-testid="form-builder-validation-errors"
+        >
+          {error.message}
+        </span>
       ),
     [],
   );

@@ -9,6 +9,5 @@ declare global {
     webkitAudioContext: typeof AudioContext;
     gtag: any;
     isPersistGateHydrated?: boolean;
-    __store?: any; // Redux store for testing purposes
   }
 }

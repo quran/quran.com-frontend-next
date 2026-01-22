@@ -4,8 +4,9 @@ import { renderHook } from '@testing-library/react';
 import { useSelector } from 'react-redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import useGetContinueReadingUrl from './useGetContinueReadingUrl';
+
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
-import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 

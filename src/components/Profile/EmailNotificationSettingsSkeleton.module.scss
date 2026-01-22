@@ -11,8 +11,8 @@
 }
 
 .checkbox {
-  width: var(--spacing-medium2-px);
-  height: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
   border-radius: var(--border-radius-xsmall2-px);
   flex-shrink: 0;
 }
@@ -25,14 +25,14 @@
 }
 
 .title {
-  height: var(--spacing-small-px);
-  width: 40%;
+  block-size: var(--spacing-small-px);
+  inline-size: 40%;
   border-radius: var(--border-radius-xsmall-px);
 }
 
 .description {
-  height: var(--font-size-xsmall-px);
-  width: 80%;
+  block-size: var(--font-size-xsmall-px);
+  inline-size: 80%;
   border-radius: var(--border-radius-xsmall-px);
 }
 
@@ -41,7 +41,7 @@
 }
 
 .button {
-  height: var(--spacing-medium3-px);
-  width: calc(var(--spacing-mega-px) + var(--spacing-medium2-px));
+  block-size: var(--spacing-medium3-px);
+  inline-size: calc(var(--spacing-mega-px) + var(--spacing-medium2-px));
   border-radius: var(--border-radius-small-px);
 }

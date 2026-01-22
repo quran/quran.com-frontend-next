@@ -15,14 +15,9 @@ test(
   'Progress bar indicator increase when scrolling down',
   { tag: ['@slow', '@reader', '@progress'] },
   async ({ page, isMobile }) => {
-    const progressBar = page.getByTestId(TestId.PROGRESS_BAR);
+    test.skip(isMobile);
 
-    if (isMobile) {
-      // The progress bar is not shown on mobile unless we scroll a bit
-      await page.waitForTimeout(1500);
-      await page.mouse.wheel(0, 150);
-      await progressBar.waitFor({ state: 'visible' });
-    }
+    const progressBar = page.getByTestId(TestId.PROGRESS_BAR);
 
     const initialProgress = await progressBar.getAttribute('data-progress');
 

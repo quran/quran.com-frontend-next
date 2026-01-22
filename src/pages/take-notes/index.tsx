@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { GetStaticProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import Benefits from './components/Benefits';
@@ -14,7 +14,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getTakeNotesNavigationUrl } from '@/utils/navigation';
 
@@ -45,16 +44,6 @@ const TakeNotesPage: NextPage = (): JSX.Element => {
       </PageContainer>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
 };
 
 export default TakeNotesPage;

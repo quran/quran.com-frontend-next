@@ -3,6 +3,7 @@
   "begin": "Mulakan",
   "calendar-cta": "Kalendar",
   "chapters-and-verses": "Surah dan Ayat",
+  "continue-learning-plan": "Teruskan belajar",
   "continue-read": "Teruskan Membaca",
   "explore-topics": "Terokai Topik",
   "first-time-reading": "Baru kenal Al-Quran? <link> Mulakan di sini </link>",
@@ -13,6 +14,7 @@
   "my-quran": "Al-Quran saya",
   "navigate-quran": "Navigasi Quran",
   "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+  "no-page-bookmarks": "Anda belum mempunyai sebarang penanda halaman lagi",
   "no-recently-read": "Anda belum mempunyai sebarang bacaan",
   "noble-quran": "Al-Quran  Karim",
   "popular": "Popular",
@@ -55,10 +57,12 @@
     "description": "Bantu sebarkan Al-Quran kepada pelajar baharu",
     "title": "Kongsi Al-Quran!"
   },
+  "start-learning-plan": "Mula belajar",
   "start-read": "Mulakan Membaca",
   "stay-consistent": "Jejaki Trek, Cipta Matlamat Tersuai, Kekal Konsisten",
   "tab": {
     "bookmarks": "Penanda buku",
+    "page-bookmarks": "Halaman",
     "popular": "Popular"
   },
   "take-notes": "Adakah anda telah kehilangan Nota <modalLink>? </modalLink>",

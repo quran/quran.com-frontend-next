@@ -3,6 +3,7 @@
 .reflectionOverlay .reflectionContentModal {
   padding: 0;
   .reflectionHeader {
+    border-block-end: unset;
     border-radius: var(--border-radius-rounded);
     padding-inline: var(--spacing-medium-px);
     padding-block: var(--spacing-small-px);
@@ -10,6 +11,7 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+    border-block-end: none;
 
     @include breakpoints.tablet {
       padding-inline: var(--spacing-large-px);

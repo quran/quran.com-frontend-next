@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
@@ -9,7 +10,7 @@ import styles from './ProfileAvatarButton.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
-import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
+import BookmarkIconFilled from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
@@ -18,6 +19,7 @@ import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { TestId } from '@/tests/test-ids';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -27,6 +29,7 @@ import {
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  MY_QURAN_URL,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -38,9 +41,9 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: getProfileNavigationUrl(),
+    navigationUrl: MY_QURAN_URL,
     translationKey: 'my-quran',
-    icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
+    icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',
@@ -137,7 +140,7 @@ const ProfileAvatarButton: React.FC<ProfileAvatarButtonProps> = ({ isPopoverPort
         <PopoverMenu.Item
           onClick={onLogoutClicked}
           icon={<LogoutIcon />}
-          dataTestId="profile-menu-item-logout"
+          dataTestId={TestId.LOGOUT_BUTTON}
         >
           {t('logout')}
         </PopoverMenu.Item>

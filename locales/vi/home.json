@@ -1,0 +1,76 @@
+{
+  "achieve-quran-goals": "Hoàn thành mục tiêu Qur'an của bạn",
+  "begin": "Bắt đầu",
+  "calendar-cta": "Lịch",
+  "chapters-and-verses": "Chương và Câu",
+  "continue-learning-plan": "Tiếp tục học tập",
+  "continue-read": "Tiếp tục đọc",
+  "explore-topics": "Khám phá chủ đề",
+  "first-time-reading": "Mới tìm hiểu Kinh Qur'an? <link>Bắt đầu tại đây</link>",
+  "grow-beyond-ramadan": "Hãy cùng phát triển với chúng tôi <modalLink>Ngoài tháng Ramadan</modalLink>",
+  "know-someone": "Cùng chúng tôi vươn xa <modalLink>Ramadan</modalLink>",
+  "learning-plan": "Kế hoạch học tập",
+  "listen-to-radio": "Nghe Đài Qur'an",
+  "my-quran": "Qur'an của tôi",
+  "navigate-quran": "Khám phá Kinh Qur'an",
+  "no-bookmarks": "Bạn chưa có dấu trang nào.",
+  "no-page-bookmarks": "Bạn chưa có đánh dấu trang nào.",
+  "no-recently-read": "Bạn chưa có buổi đọc nào.",
+  "noble-quran": "Kinh Qur'an Cao quý",
+  "popular": "Phổ biến",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Xem tất cả bài học",
+        "my-plans": "Kế hoạch của tôi"
+      },
+      "desc": {
+        "logged-in": "Bạn từng bắt đầu một chương trình học rồi bỏ dở giữa chừng? Kế hoạch học tập được chia nhỏ, và chúng tôi theo dõi bạn đến khi hoàn thành. Khám phá ngay các khóa học hiện có!",
+        "logged-in-no-plans": "Bạn từng bắt đầu một chương trình học rồi bỏ dở giữa chừng? Kế hoạch học tập được chia nhỏ, và chúng tôi theo dõi bạn đến khi hoàn thành. Khám phá ngay các khóa học hiện có!",
+        "logged-out": "Bạn từng bắt đầu một chương trình học rồi bỏ dở giữa chừng? Kế hoạch học tập được chia nhỏ, và chúng tôi theo dõi bạn đến khi hoàn thành. Khám phá ngay các khóa học hiện có!"
+      },
+      "title": "Kế hoạch học tập"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Bạn muốn đọc 10 phút mỗi ngày, xong một Juz trong tháng này, hay trọn bộ Qur'an trong một năm? Việc đặt mục tiêu riêng và theo dõi tiến độ rất đơn giản."
+      },
+      "title": "Mục tiêu đọc Qur'an tùy chỉnh"
+    },
+    "title": "Hành trình Phát triển cùng Kinh Qur'an"
+  },
+  "qr-community": "Đọc các câu Kinh và suy ngẫm nổi bật hôm nay",
+  "quran-in-year": "Đọc Kinh Qur'an trong một năm",
+  "quran-in-year-cta": "Bài đọc tuần này",
+  "quran-in-year-verse-title": "Một câu Kinh từ bài đọc tuần này",
+  "ramadan-activities-cta": "<link>Theo dõi <b>Lịch Kinh Qur'an toàn cầu</b> để nhận bài đọc hàng tuần, podcast truyền cảm hứng và lời mời suy ngẫm!</link>",
+  "ramadan": {
+    "header": "Công cụ giúp bạn gắn bó hơn với Kinh Qur'an",
+    "title": "Bạn sẵn sàng cho Ramadan chưa?"
+  },
+  "read-juz": "Đọc Juz",
+  "recently-read": "Mới đọc",
+  "revelation-order-disclaimer": "Chế độ xem này trình bày thứ tự các Surah trong Kinh Qur'an theo dòng thời gian, dựa trên thời điểm chúng được mặc khải cho Nhà tiên tri Muhammad. <hover>ﷺ</hover>Vấn đề niên đại là lĩnh vực quan điểm học thuật, và một số Surah đã được mặc khải từng phần vào các thời điểm khác nhau. Thứ tự ở đây được xây dựng dựa trên công trình của... <link>Tanzil.net</link>[Lưu ý: Thứ tự Mushaf được biên soạn từ al-Fatiha đến al-Nas là điều đã được thống nhất.]",
+  "see-more-learning-plans": "Xem thêm",
+  "set-custom-goal": "Đặt mục tiêu",
+  "share-quran": {
+    "description": "Giúp lan tỏa Kinh Qur'an đến người học mới",
+    "title": "Chia sẻ Thiên Kinh Qur'an!"
+  },
+  "start-learning-plan": "Bắt đầu học tập",
+  "start-read": "Bắt đầu đọc",
+  "stay-consistent": "Theo dõi chuỗi thành tích, thiết lập mục tiêu tùy chỉnh, duy trì sự nhất quán",
+  "tab": {
+    "bookmarks": "Đánh dấu trang",
+    "page-bookmarks": "Trang",
+    "popular": "Phổ biến"
+  },
+  "take-notes": "Bạn đã bỏ lỡ điều gì? <modalLink>Ghi chú?</modalLink>",
+  "view-all-bookmarks": "Xem mọi dấu trang",
+  "voice": {
+    "trigger": "Truy cập nhanh chóng vào mọi thứ"
+  },
+  "welcome": {
+    "title": "Tháng của Thiên Kinh Qur'an đã đến! Hãy giúp hàng triệu người dùng tiếp cận nguồn hướng dẫn này."
+  }
+}

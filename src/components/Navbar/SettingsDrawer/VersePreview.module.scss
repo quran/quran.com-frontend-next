@@ -1,6 +1,32 @@
+.previewTitle {
+  color: var(--color-text-faded-new);
+  font-size: var(--font-size-xxsmall-px);
+  padding-block-end: var(--spacing-xsmall-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  margin-block-end: calc(2 * var(--spacing-large-px));
+  font-weight: var(--font-weight-medium);
+}
+
+.previewTitleExpanded {
+  margin-block-end: calc(var(--spacing-xxxlarge-px) + var(--spacing-medium-px));
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-plus-px);
+  position: relative;
+}
+
+.translationText {
+  line-height: 150%;
+  color: var(--color-text-default);
+  word-break: break-word;
+}
+
 .skeletonPlaceholder {
-  height: calc(1.5 * var(--spacing-mega));
-  width: 100%;
+  block-size: calc(1.5 * var(--spacing-mega));
+  inline-size: 100%;
 }
 
 .skeletonContainer + .skeletonContainer {

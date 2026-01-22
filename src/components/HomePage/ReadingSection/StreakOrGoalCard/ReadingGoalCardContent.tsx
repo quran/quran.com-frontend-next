@@ -8,10 +8,12 @@ import styles from './ReadingGoalCardContent.module.scss';
 
 import CircularProgressbar from '@/dls/CircularProgress';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import Link from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { QuranGoalStatus } from '@/types/auth/Goal';
 import { toLocalizedNumber } from '@/utils/locale';
+import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 export type ReadingGoalCardContentProps = {
   goal?: QuranGoalStatus | null;
@@ -24,6 +26,8 @@ export type ReadingGoalCardContentProps = {
     progressbarText?: string;
     statusContainer?: string;
   };
+  onArrowClick?: () => void;
+  shouldShowOnlyLargestTimeUnit?: boolean;
 };
 
 /**
@@ -39,8 +43,14 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
   shouldShowArrow,
   className,
   classes,
+  onArrowClick,
+  shouldShowOnlyLargestTimeUnit,
 }) => {
   const { lang } = useTranslation();
+
+  // Fix: Cap percent at 100 to prevent overflow, handle completed state
+  const percent = goal?.isCompleted ? 100 : Math.min(goal?.progress?.percent || 0, 100);
+  const localizedPercent = toLocalizedNumber(percent, lang);
 
   return (
     <>
@@ -52,8 +62,8 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
             data-testid="goal-progress"
           >
             <CircularProgressbar
-              text={`${toLocalizedNumber(goal.progress.percent, lang)}%`}
-              value={goal.progress.percent}
+              text={`${localizedPercent}%`}
+              value={percent}
               maxValue={100}
               strokeWidth={12}
               classes={{
@@ -67,18 +77,30 @@ const ReadingGoalCardContent: React.FC<ReadingGoalCardContentProps> = ({
             <GoalStatus
               goal={goal}
               currentActivityDay={currentActivityDay}
-              percent={goal.progress.percent}
+              percent={percent}
+              shouldShowOnlyLargestTimeUnit={shouldShowOnlyLargestTimeUnit}
             />
           </div>
-          {shouldShowArrow && (
-            <IconContainer
-              size={IconSize.Xsmall}
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              className={styles.goalArrowIcon}
-              aria-hidden="true"
-            />
-          )}
+          {shouldShowArrow &&
+            (onArrowClick ? (
+              <Link href={getReadingGoalProgressNavigationUrl()} onClick={onArrowClick}>
+                <IconContainer
+                  size={IconSize.Xsmall}
+                  icon={<ArrowIcon />}
+                  shouldForceSetColors={false}
+                  className={styles.goalArrowIcon}
+                  aria-hidden="true"
+                />
+              </Link>
+            ) : (
+              <IconContainer
+                size={IconSize.Xsmall}
+                icon={<ArrowIcon />}
+                shouldForceSetColors={false}
+                className={styles.goalArrowIcon}
+                aria-hidden="true"
+              />
+            ))}
         </div>
       ) : (
         goalCta && <div className={styles.goalCtaSection}>{goalCta}</div>

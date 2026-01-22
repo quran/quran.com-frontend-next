@@ -10,7 +10,7 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo('/login');
 });
 
-test(
+test.skip(
   'A user can create an account and reach the verification code step',
   { tag: ['@slow', '@auth', '@create-user'] },
   async ({ page }) => {

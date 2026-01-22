@@ -1,0 +1,134 @@
+{
+  "achieve-quran-goals": "Đạt được mục tiêu theo Kinh Qur'an của bạn",
+  "continue-reading": "Tiếp tục đọc",
+  "continuous": {
+    "description": "Mục tiêu của bạn sẽ tính tiến độ trong một khoảng thời gian",
+    "title": "Trong khoảng thời gian"
+  },
+  "create-plan": "Lập kế hoạch",
+  "create-reading-goal": "Đặt mục tiêu",
+  "daily-progress": "Tiến độ hàng ngày",
+  "daily-progress-completed": "Đã xong! 🎉",
+  "daily": {
+    "description": "Mục tiêu của bạn sẽ đặt lại mỗi ngày.",
+    "title": "Mục tiêu hàng ngày"
+  },
+  "day-streak": "Chuỗi ngày",
+  "day-x": "Ngày {{day}}",
+  "days": "Ngày",
+  "days-remaining": "số ngày còn lại",
+  "duration": "Số ngày",
+  "ending-chapter": "Surah kết thúc",
+  "ending-verse": "Ayah kết thúc",
+  "examples-subtitle": "Dưới đây là một số mục tiêu phổ biến. Bạn cũng có thể tự tạo mục tiêu.",
+  "examples-title": "Chọn mục tiêu có sẵn hoặc tự đặt.",
+  "examples": {
+    "custom": {
+      "description": "Đặt mục tiêu phù hợp với bạn",
+      "title": "Tùy chỉnh"
+    },
+    "khatm": {
+      "description": "Mục tiêu Khatm chuẩn: đọc 1 Juz/ngày",
+      "title": "Đọc Kinh Qur'an trong 30 ngày"
+    },
+    "time": {
+      "description": "Một mục tiêu đơn giản, thân thiện với người mới bắt đầu",
+      "title": "Đọc 10 phút mỗi ngày"
+    },
+    "year": {
+      "description": "Đọc Kinh Qur'an với nhịp độ riêng của bạn trong năm tới.",
+      "title": "Đọc Kinh Qur'an trong một năm"
+    }
+  },
+  "frequency-tab": {
+    "description": "Bạn nên đặt lại mục tiêu mỗi ngày hay mỗi một số ngày nhất định? Đừng lo lắng, chúng tôi sẽ theo dõi tiến độ của bạn bất kể tần suất bạn chọn.",
+    "title": "Chọn tần số phù hợp với mục tiêu của bạn."
+  },
+  "goal-completed": "Hoàn thành mục tiêu! 🎉",
+  "goal-done": {
+    "description": "Mọi thông tin bổ sung vẫn sẽ được ghi lại.",
+    "title": "Bạn đã hoàn thành mục tiêu ngày hôm nay."
+  },
+  "goal-target": {
+    "description": "Bạn cần đọc bao lâu, bao nhiêu trang hoặc bao nhiêu câu để đạt mục tiêu?",
+    "title": "Đặt mục tiêu cho bản thân"
+  },
+  "goal-type": {
+    "description": "Mục tiêu của bạn nên dựa trên thời gian, số trang, hay một phạm vi tùy chỉnh (ví dụ: 3 Juz của Kinh Qur'an)?",
+    "title": "Chọn một tiêu chí cho mục tiêu bạn"
+  },
+  "goal-types": {
+    "pages": {
+      "description": "Mục tiêu của bạn sẽ dựa trên số trang.",
+      "title": "Trang"
+    },
+    "range": {
+      "description": "Mục tiêu của bạn sẽ dựa trên một phạm vi câu tùy chọn (có thể là một Surah, một Juz hoặc toàn bộ Kinh Qur'an)",
+      "title": "Phạm vi tùy chỉnh"
+    },
+    "time": {
+      "description": "Mục tiêu của bạn sẽ dựa trên thời gian.",
+      "title": "Thời gian"
+    }
+  },
+  "plus-x-more-days": {
+    "other": ""
+  },
+  "preview-schedule": {
+    "description": "Mục tiêu của bạn sẽ trông như thế này. Bạn luôn có thể thay đổi nó sau này.",
+    "title": "Đây là bản xem trước lịch trình của bạn"
+  },
+  "progress": {
+    "complete": "Mục tiêu hôm nay đã hoàn thành 🎉",
+    "goal-complete": "Mục tiêu của bạn đã hoàn thành 🎉",
+    "pages-goal": "đọc {{pages}} trang Kinh Qur'an",
+    "range-goal": "đọc {{from}} đến {{to}}",
+    "time-goal": "đọc {{time}} của Kinh Qur'an"
+  },
+  "reading-goal": "Mục tiêu đọc",
+  "reading-goal-description": "Bạn có gặp khó khăn trong việc giữ thói quen đọc Kinh Qur'an đều đặn không?<br/><br/>Hành trình phát triển cùng Kinh Qur'an là một tính năng tương tác được xây dựng để giúp bạn duy trì sự đều đặn trên hành trình đọc Kinh. Dù mục tiêu của bạn là đọc 10 phút mỗi ngày, hoàn thành một Juz trong một tháng hay hoàn tất toàn bộ Kinh Qur'an trong một năm, v.v., Quran.com giờ đây có thể giúp bạn đặt mục tiêu riêng và theo dõi chuỗi ngày đọc liên tiếp, đồng thời tự điều chỉnh khi bạn tiến bộ. Tính năng này hoàn toàn miễn phí và chúng tôi hy vọng nó sẽ giúp bạn luôn giữ được động lực để chinh phục mục tiêu của mình!",
+  "reading-goal-label": "Bạn đang ở",
+  "reading-goal-title": "Giới thiệu Hành trình phát triển cùng Kinh Qur'an",
+  "recommended": "Đề xuất",
+  "remaining": "Còn lại hôm nay",
+  "remaining-base": "Còn lại",
+  "remaining-days": {
+    "other": ""
+  },
+  "set-a-new-goal": "Đặt mục tiêu mới",
+  "set-custom-goal": "Đặt mục tiêu tùy chỉnh",
+  "set-reading-goal-success": "Mục tiêu đọc của bạn đã được đặt xong.",
+  "start-journey": "Bắt đầu hành trình của bạn!",
+  "start-reading": "Bắt đầu đọc",
+  "starting-chapter": "Surah bắt đầu",
+  "starting-verse": "Ayah bắt đầu",
+  "streak": "Chuỗi",
+  "streak-definition": "Chuỗi là số ngày liên tiếp bạn đã đọc Kinh Qur'an.",
+  "timeline-meaning": "Dòng thời gian của bạn có ý nghĩa gì?",
+  "timeline-states": {
+    "checked": "Bạn đã hoàn thành mục tiêu của mình",
+    "filled": "Bạn đã đọc nhưng vẫn chưa đủ để hoàn thành mục tiêu.",
+    "none": "Bạn chưa đọc gì trong ngày hôm đó.",
+    "stroked": "Hôm nay bạn chưa đọc gì"
+  },
+  "todays-goal": "Mục tiêu hôm nay",
+  "track-your-streak": "Theo dõi chuỗi thành tích, thiết lập mục tiêu tùy chỉnh, duy trì sự nhất quán",
+  "view-progress": "Xem tiến độ",
+  "week-progress": "Tiến độ tuần này",
+  "x-days": {
+    "other": ""
+  },
+  "x-days-streak": "<p>{{days}}</p> <span>chuỗi ngày</span>",
+  "x-hours": {
+    "other": ""
+  },
+  "x-minutes": {
+    "other": ""
+  },
+  "x-pages": {
+    "other": ""
+  },
+  "x-seconds": {
+    "other": ""
+  }
+}

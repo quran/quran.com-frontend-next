@@ -17,7 +17,8 @@
     "zh",
     "ms",
     "es",
-    "sw"
+    "sw",
+    "vi"
   ],
   "defaultLocale": "en",
   "pages": {
@@ -48,7 +49,7 @@
     "/support": ["support"],
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
-    "/apps": ["apps"],
+    "/apps": ["apps", "app-portal"],
     "/radio": ["home", "radio"],
     "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
@@ -67,6 +68,6 @@
     "/take-notes": ["take-notes"],
     "/[chapterId]/answers": ["quran-reader", "question"],
     "/[chapterId]/answers/[questionId]": ["quran-reader", "question"],
-    "/apps-portal": ["app-portal"]
+    "/my-quran": ["home", "profile", "collection", "quran-reader"]
   }
 }

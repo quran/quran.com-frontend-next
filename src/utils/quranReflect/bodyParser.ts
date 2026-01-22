@@ -28,7 +28,7 @@ const tagToLink = (tag: string, hashtagStyle: string): string => {
  * @returns {string} The text with URLs replaced by anchor tags.
  */
 const replaceUrlsWithLinks = (text: string): string => {
-  const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;#]*[-A-Z0-9+&@#/%=~_|#])/gi;
+  const regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;#]*[-A-Z0-9+&@#/%=~_])/gi;
   return text.replace(regex, (url) => {
     // Check if URL is already linked
     const surroundingLength = 100; // Number of characters around the URL to check for <a> tag

@@ -47,11 +47,20 @@ const getPreferenceGroupValue = (
   }
 
   if (sliceName === SliceName.READING_PREFERENCES) {
-    const newPreferences = {
-      ...currentSliceValue,
-    } as ReadingPreferences;
-    delete newPreferences.isUsingDefaultWordByWordLocale;
-    return newPreferences;
+    const prefs = currentSliceValue as ReadingPreferences;
+
+    return {
+      readingPreference: prefs.readingPreference,
+      selectedWordByWordLocale: prefs.selectedWordByWordLocale,
+      wordClickFunctionality: prefs.wordClickFunctionality,
+      // New fields - sync to backend
+      wordByWordTooltipContentType: prefs.wordByWordTooltipContentType,
+      wordByWordInlineContentType: prefs.wordByWordInlineContentType,
+      // Deprecated - keep for backward compatibility during transition
+      wordByWordContentType: prefs.wordByWordTooltipContentType,
+      // wordByWordDisplay is now auto-computed, don't send
+      selectedReadingTranslation: prefs.selectedReadingTranslation,
+    };
   }
 
   if (sliceName === SliceName.TRANSLATIONS) {
@@ -100,20 +109,5 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
       preferenceGroups[preferenceGroup] = getPreferenceGroupValue(sliceName, state[sliceName]);
     }
   });
-
-  // Use user selected language if available, otherwise fall back to detected language
-  const existingLanguagePreferences = preferenceGroups[PreferenceGroup.LANGUAGE] || {};
-  const fallbackLanguage =
-    existingLanguagePreferences.language ?? state?.defaultSettings?.detectedLanguage;
-
-  preferenceGroups[PreferenceGroup.LANGUAGE] = {
-    ...existingLanguagePreferences,
-    language: fallbackLanguage,
-  };
-
-  preferenceGroups[PreferenceGroup.USER_CUSTOMIZATION] = {
-    userHasCustomised: state?.defaultSettings?.userHasCustomised ?? false,
-  };
-
   return preferenceGroups;
 };

@@ -11,11 +11,11 @@ import SaveToCollectionAction from '@/components/Verse/SaveToCollectionAction';
 import TranslationFeedbackAction from '@/components/Verse/TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '@/components/Verse/VerseActionRepeatAudio';
-import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
   onMenuChange: (menu: VerseActionsMenuType) => void;
 }

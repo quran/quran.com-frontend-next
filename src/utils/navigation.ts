@@ -26,6 +26,11 @@ export const ROUTES = {
   PRIVACY: '/privacy',
   TERMS: '/terms-and-conditions',
   SITEMAP: '/sitemap.xml',
+  READING_GOAL_PROGRESS: '/reading-goal/progress',
+  MY_LEARNING_PLANS: '/my-learning-plans',
+  COLLECTIONS_ALL: '/collections/all',
+  NOTES: '/notes-and-reflections',
+  NOTIFICATION_SETTINGS: '/notification-settings',
   // TODO: add all static routes here for incremental adoption
 };
 
@@ -36,6 +41,18 @@ export const AUTH_ROUTES = [
   ROUTES.LOGIN,
   ROUTES.FORGET_PASSWORD,
   ROUTES.RESET_PASSWORD,
+  ROUTES.COMPLETE_SIGNUP,
+];
+
+/**
+ * routes that require authentication
+ */
+export const PROTECTED_ROUTES = [
+  ROUTES.READING_GOAL_PROGRESS,
+  ROUTES.MY_LEARNING_PLANS,
+  ROUTES.COLLECTIONS_ALL,
+  ROUTES.NOTES,
+  ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
 
@@ -51,12 +68,10 @@ export const EXTERNAL_ROUTES = {
     'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
   FEEDBACK: 'https://feedback.quran.com',
   QURAN_FOUNDATION: 'https://quran.foundation',
-  QURAN_REFLECT_ANDROID:
-    'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
-  QURAN_REFLECT_IOS: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
 };
 
 export const QURAN_URL = 'https://quran.com';
+export const MY_QURAN_URL = '/my-quran';
 export const LEARNING_PLANS_URL = '/learning-plans';
 export const RADIO_URL = '/radio';
 export const RECITERS_URL = '/reciters';
@@ -64,8 +79,6 @@ export const ABOUT_US_URL = '/about-us';
 export const DEVELOPERS_URL = '/developers';
 export const PRODUCT_UPDATES_URL = '/product-updates';
 export const SUPPORT_URL = '/support';
-export const RAMADAN_2026_URL = '/ramadan2026';
-export const RAMADAN_CHALLENGE_URL = '/ramadanchallenge';
 
 /**
  * Get the href link to a verse.

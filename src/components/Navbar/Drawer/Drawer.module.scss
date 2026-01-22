@@ -1,13 +1,13 @@
-@use "src/styles/breakpoints";
-@use "src/styles/constants";
+@use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 
 .container {
   display: flex;
   flex-direction: column;
   background: var(--color-background-elevated);
   position: fixed;
-  height: 100vh;
-  width: 100%;
+  block-size: 100vh;
+  inline-size: 100%;
   inset-block: 0;
   z-index: var(--z-index-header);
   transition: var(--transition-regular);
@@ -15,44 +15,132 @@
   overflow-y: auto !important;
   overflow-x: hidden;
   overscroll-behavior-y: contain !important;
+
   @include breakpoints.tablet {
-    width: constants.$side-menu-desktop-width;
+    inline-size: constants.$side-menu-desktop-width;
   }
+
   &.left {
     inset-inline-start: -100%;
+
     @include breakpoints.tablet {
       inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-start: 0 !important;
+      }
+    }
   }
+
   &.right {
     inset-inline-end: -100%;
+
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
+
   &.noTransition {
     transition: none;
+  }
+
+  &.settingsDrawer {
+    @include breakpoints.smallerThanTablet {
+      inset-block-start: var(--navbar-height);
+      inset-block-end: auto;
+      block-size: calc(100dvh - var(--navbar-height));
+      border-start-start-radius: var(--border-radius-rounded);
+      border-start-end-radius: var(--border-radius-rounded);
+      transform: translateY(100%);
+      transition: transform var(--transition-regular), inset-block-start var(--transition-regular),
+        block-size var(--transition-regular);
+      overflow: hidden;
+      will-change: transform;
+      backface-visibility: hidden;
+      contain: layout;
+
+      @include breakpoints.tablet {
+        inset-block-start: 0;
+        inset-block-end: auto;
+        block-size: 100vh;
+        border-start-start-radius: 0;
+        border-start-end-radius: 0;
+        transform: none;
+        transition: var(--transition-regular);
+        overflow-y: auto;
+        will-change: auto;
+        backface-visibility: visible;
+        contain: none;
+      }
+    }
+  }
+
+  &.navbarInvisible {
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-block-start: calc(var(--top-bar-height-mobile-collapsed) + var(--navbar-height));
+        inset-block-end: auto;
+        block-size: calc(100dvh - var(--context-menu-container-height));
+        border-start-start-radius: var(--border-radius-rounded);
+        border-start-end-radius: var(--border-radius-rounded);
+        padding-block-start: var(--spacing-xxsmall-px);
+      }
+    }
   }
 }
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
+
+  &.settingsDrawer {
+    box-shadow: none;
+  }
+
   transition-timing-function: ease-out;
+
   &.left {
     inset-inline-start: 0;
+
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        transform: translateY(0);
+
+        @include breakpoints.tablet {
+          transform: none;
+        }
+      }
+    }
   }
+
   &.right {
     inset-inline-end: 0;
+
+    // Settings drawer on mobile: override side positioning
+    &.settingsDrawer {
+      @include breakpoints.smallerThanTablet {
+        inset-inline-end: 0 !important;
+        transform: translateY(0);
+
+        @include breakpoints.tablet {
+          transform: none;
+        }
+      }
+    }
   }
 }
 
 .searchContainer {
   display: flex;
   flex-direction: column;
-  min-height: calc(100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega))));
+  min-block-size: calc(100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega))));
+
   @include breakpoints.tablet {
-    min-height: calc(100% - calc(var(--navbar-container-height) + var(--spacing-small)));
+    min-block-size: calc(100% - calc(var(--navbar-container-height) + var(--spacing-small)));
   }
+
   justify-content: space-between;
 }
 
@@ -62,9 +150,36 @@
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+
+  .settingsDrawer & {
+    min-block-size: 0;
+    block-size: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    @include breakpoints.smallerThanTablet {
+      margin-block-start: 0;
+    }
+  }
+  .translationView &,
+  .reciterView & {
+    margin-block-start: 0;
+  }
+}
+
+.noBodySpacing {
+  margin-block-start: 0;
+  padding-block-start: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .bodyWithBottomPadding {
+  .settingsDrawer & {
+    padding-block-end: 0;
+  }
+
   padding-block-end: calc(4 * var(--spacing-large));
 }
 
@@ -77,24 +192,41 @@
 
 .header {
   font-size: var(--font-size-large);
-  width: 100%;
+  inline-size: 100%;
   position: fixed;
-  height: var(--navbar-height);
+  block-size: var(--navbar-height);
   border-block-end: 1px var(--color-borders-hairline) solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   @include breakpoints.tablet {
-    width: constants.$side-menu-desktop-width;
+    inline-size: constants.$side-menu-desktop-width;
   }
+
   z-index: var(--z-index-header);
+
+  // Settings drawer header positioning on mobile
+  .settingsDrawer & {
+    @include breakpoints.smallerThanTablet {
+      position: sticky;
+      inset-block-start: calc(-1 * var(--spacing-xxsmall-px));
+      background-color: var(--color-background-elevated);
+    }
+  }
+  .translationView &,
+  .reciterView & {
+    position: sticky;
+    inset-block-start: 0;
+    background-color: var(--color-background-elevated);
+  }
 }
 
 .headerContentContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
+  inline-size: 100%;
   background-color: var(--color-background-elevated);
 }
 
@@ -118,4 +250,8 @@
 
 .navbarInvisible {
   padding-block-start: var(--navbar-container-height);
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: 0;
+  }
 }

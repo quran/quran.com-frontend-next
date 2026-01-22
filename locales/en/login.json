@@ -11,6 +11,7 @@
   "continue-email": "Continue with Email",
   "continue-facebook": "Continue with Facebook",
   "continue-google": "Continue with Google",
+  "current-password-placeholder": "Current password",
   "email-placeholder": "Email address",
   "error": {
     "email-required": "Email is missing!",
@@ -47,7 +48,12 @@
     "verification-failed": "Verification failed. Please try again.",
     "verification-resend-failed": "Failed to resend verification code"
   },
-
+  "feature-1": "Track your goals",
+  "feature-2": "Maintain reading streaks",
+  "feature-3": "Create collections",
+  "feature-4": "Sync your data across browsers",
+  "feature-5": "And more!",
+  "feature-6": "New! Notes & Reflections",
   "first-name-placeholder": "First Name",
   "forgot-password": "Forgot password",
   "forgot-password-description": "Enter your email address and we'll send you instructions to reset your password.",
@@ -55,14 +61,15 @@
   "forgot-password-title": "Forgot password?",
   "hide-password": "Hide password",
   "last-name-placeholder": "Last Name",
+  "login-cta": "Sign in or Sign up now:",
   "login-error": {
     "AuthenticationError": "Authentication failed. Please try again later",
     "BannedUserError": "Sorry, Your account is banned. Contact Quran.Foundation.",
     "TokenExpiredError": "You have been logged out, please login again."
   },
   "login-title": "Login to Quran.com",
-  "current-password-placeholder": "Current password",
   "new-password-placeholder": "New password",
+  "or": "OR",
   "other-options": "Other Login Options",
   "password-placeholder": "Password",
   "password-reset-success": "Password reset successfully!",
@@ -77,7 +84,10 @@
   "privacy-policy": "Protecting your privacy is our priority – By signing up, you consent to our <link>Privacy Policy</link> and <link1>Terms and conditions</link1>.",
   "quran-text": "Quran",
   "quran-title": "Quran.com",
-
+  "reflect-feature-1": "Reflect on the Quran",
+  "reflect-feature-2": "Join Groups",
+  "reflect-feature-3": "Interact with others",
+  "reflect-feature-4": "And more!",
   "reset-password": "Reset Password",
   "reset-password-success": "Password reset successfully!",
   "set-new-password": "Set a new password",
@@ -85,8 +95,10 @@
   "sign-in": "Sign in",
   "sign-in-or-sign-up": "Sign In or Sign Up below to continue to",
   "sign-up": "Sign up",
-  "or": "OR",
   "unified-registration-1": "Welcome to the unified registration of <span>Quran.</span>Foundation",
+  "unified-registration-2": "Quran.Foundation",
+  "unified-registration-3": ". You will have access to the following websites ",
+  "unified-registration-4": "through your sign in details.",
   "username-placeholder": "Username",
   "verification-code-instruction": "Please enter the code provided in the email to complete sign up",
   "verification-code-resend": "Resend email",
@@ -94,5 +106,9 @@
   "verification-code-sent": "Verification code sent!",
   "verification-code-sent-to": "We just sent an email to",
   "verification-code-spam-note": "Didn't receive an email? Check your spam folder",
-  "verify-code": "Verify that the provided security code matches the following text:"
+  "verify-code": "Verify that the provided security code matches the following text:",
+  "welcome-description-1": "The unified registration of",
+  "welcome-description-2": ".Foundation",
+  "welcome-description-3": "You will have access to the following websites through your sign in details.",
+  "welcome-title": "Welcome to"
 }

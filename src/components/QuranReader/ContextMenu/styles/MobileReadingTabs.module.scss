@@ -1,9 +1,11 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+
+$icon-size: var(--spacing-medium-px); // 15px - matches other mode icons
+$border-width: var(--spacing-hairline-px);
+$selected-border-width: 2px;
 
 .container {
-  width: 100%;
+  inline-size: 100%;
   display: none; // Hidden by default
 
   // Only show on mobile when navbar is visible
@@ -13,10 +15,10 @@
 }
 
 .tabsContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-borders-hairline);
+  border-block-end: $border-width solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated-new);
   block-size: var(--mobile-reading-mode-tabs-height);
 }
@@ -28,23 +30,39 @@
   justify-content: center;
   text-align: center;
   font-size: var(--font-size-small);
-  padding-inline: var(--spacing-medium);
-  padding-top: var(--spacing-medium);
-  padding-bottom: var(--spacing-large);
+  padding-inline: var(--spacing-medium-plus-px);
+  padding-block: var(--spacing-medium-plus-px) var(--spacing-medium2-px);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
-  width: 50%;
-  border-bottom: 2px solid var(--color-separators-ayah-level);
+  inline-size: 50%;
+  border-block-end: $selected-border-width solid var(--color-separators-ayah-level);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color var(--transition-regular), border-color var(--transition-regular);
 
   span {
-    margin-left: var(--spacing-xsmall);
+    margin-inline-start: var(--spacing-small-px);
   }
 }
 
 .selectedTab {
   color: var(--color-success-medium);
-  border-bottom: 2px solid var(--color-success-medium);
+  border-block-end: $selected-border-width solid var(--color-success-medium);
   font-weight: var(--font-weight-semibold);
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+
+  & > svg {
+    inline-size: $icon-size;
+    block-size: $icon-size;
+  }
+}
+
+.icon {
+  transition: color var(--transition-regular);
+  color: inherit;
 }

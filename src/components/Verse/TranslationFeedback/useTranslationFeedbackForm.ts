@@ -6,7 +6,11 @@ import useSWRImmutable from 'swr/immutable';
 
 import sendFeedbackErrorToSentry from './logging';
 import { TranslationFeedbackFormErrors, UseTranslationFeedbackFormProps } from './types';
-import { getTranslationFeedbackErrors, isTranslationFeedbackValid } from './validation';
+import {
+  getTranslationFeedbackErrors,
+  getTranslationFeedbackServerErrors,
+  isTranslationFeedbackValid,
+} from './validation';
 
 import { getAvailableTranslations } from '@/api';
 import { SelectOption } from '@/dls/Forms/Select';
@@ -25,7 +29,7 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
  * @returns {object} Hook state, derived options, and handlers for the translation feedback form.
  */
 const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFormProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('quran-reader');
   const toast = useToast();
   const selectedTranslationsFromPrefs = useSelector(selectSelectedTranslations);
   const [selectedTranslationId, setSelectedTranslationId] = useState<string>('');
@@ -51,47 +55,70 @@ const useTranslationFeedbackForm = ({ verse, onClose }: UseTranslationFeedbackFo
   }, [selectedTranslationsOptions, selectedTranslationId]);
 
   const validate = useCallback(() => {
-    const newErrors = getTranslationFeedbackErrors(selectedTranslationId, feedback, t);
+    const newErrors = getTranslationFeedbackErrors(selectedTranslationId, feedback, t, lang);
     setErrors(newErrors);
     return isTranslationFeedbackValid(newErrors);
-  }, [selectedTranslationId, feedback, t]);
+  }, [selectedTranslationId, feedback, t, lang]);
+
+  const submitFeedback = useCallback(
+    async (
+      translationId: string,
+      verseKey: string,
+      feedbackText: string,
+    ): Promise<{ success: boolean; response?: unknown }> => {
+      const chapterNumber = getChapterNumberFromKey(verseKey);
+      const verseNumber = getVerseNumberFromKey(verseKey);
+      try {
+        const response = await submitTranslationFeedback({
+          translationId: Number(translationId),
+          surahNumber: chapterNumber,
+          ayahNumber: verseNumber,
+          feedback: feedbackText,
+        });
+
+        if (response && response.success) return { success: true };
+
+        const serverErrors = getTranslationFeedbackServerErrors(response, t, lang);
+        if (serverErrors) {
+          setErrors(serverErrors);
+          return { success: false, response };
+        }
+
+        sendFeedbackErrorToSentry(response, verseKey, translationId);
+        toast(t('common:error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
+        return { success: false, response };
+      } catch (error) {
+        sendFeedbackErrorToSentry(error, verseKey, translationId);
+        toast(t('common:error.general'), { status: ToastStatus.Error, testId: 'error-toast' });
+        return { success: false, response: error };
+      }
+    },
+    [t, toast, lang],
+  );
 
   const onSubmit = useCallback(
     async (e?: React.FormEvent) => {
       e?.preventDefault();
       if (!validate()) return;
       setIsSubmitting(true);
+      const result = await submitFeedback(selectedTranslationId, verse.verseKey, feedback);
 
-      try {
-        const chapterNumber = getChapterNumberFromKey(verse.verseKey);
-        const verseNumber = getVerseNumberFromKey(verse.verseKey);
-        const response = await submitTranslationFeedback({
-          translationId: Number(selectedTranslationId),
-          surahNumber: chapterNumber,
-          ayahNumber: verseNumber,
-          feedback,
+      if (result.success) {
+        toast(t('translation-feedback.submission-success'), {
+          status: ToastStatus.Success,
+          testId: 'success-toast',
         });
 
-        if (response && response.success) {
-          toast(t('translation-feedback.submission-success'), { status: ToastStatus.Success });
-          onClose();
-        } else {
-          // It's not likely to happen, but if it does, we'll log the error to Sentry.
-          toast(t('error.general'), { status: ToastStatus.Error });
-          sendFeedbackErrorToSentry(response, verse.verseKey, selectedTranslationId);
-        }
-      } catch (error) {
-        toast(t('error.general'), { status: ToastStatus.Error });
-        sendFeedbackErrorToSentry(error, verse.verseKey, selectedTranslationId);
-      } finally {
-        setIsSubmitting(false);
+        onClose();
       }
+
+      setIsSubmitting(false);
     },
-    [validate, verse.verseKey, selectedTranslationId, feedback, t, toast, onClose],
+    [validate, verse.verseKey, selectedTranslationId, feedback, t, toast, onClose, submitFeedback],
   );
 
-  const handleTranslationChange = useCallback((value: string) => {
-    setSelectedTranslationId(value);
+  const handleTranslationChange = useCallback((value: string | number) => {
+    setSelectedTranslationId(String(value));
     setErrors((prev) => ({ ...prev, translation: undefined }));
   }, []);
 

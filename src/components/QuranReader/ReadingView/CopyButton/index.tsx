@@ -10,6 +10,7 @@ import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useIsMobile from '@/hooks/useIsMobile';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
@@ -35,6 +36,7 @@ const CopyButton: React.FC<Props> = ({
   const chaptersData = useContext(DataContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const toast = useToast();
+  const isMobile = useIsMobile();
 
   const getTranslationObjects = () => {
     const translations = {};
@@ -89,15 +91,18 @@ const CopyButton: React.FC<Props> = ({
       });
   };
 
+  const tooltipText = isCopied ? t('copied') : t('quran-reader:copy-verse');
+
   return (
     <Button
       onClick={onCopyTextClicked}
       variant={ButtonVariant.Ghost}
       size={ButtonSize.Small}
-      tooltip={isCopied ? t('copied') : t('quran-reader:copy-verse')}
+      tooltip={isMobile ? undefined : tooltipText}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
       className={classNames(styles.iconContainer, styles.verseAction)}
+      ariaLabel={tooltipText}
     >
       <span className={styles.icon}>
         <IconContainer

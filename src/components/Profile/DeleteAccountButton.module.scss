@@ -1,9 +1,9 @@
 .inputContainer {
-  height: calc(2 * var(--spacing-medium2-px));
-  width: 100%;
+  block-size: calc(2 * var(--spacing-medium2-px));
+  inline-size: 100%;
 }
 .deleteButton {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .confirmationText {

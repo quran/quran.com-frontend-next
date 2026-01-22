@@ -1,25 +1,17 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
 
-import readingPreferenceStyles from '../../ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import styles from '../styles/MobileReadingTabs.module.scss';
 
-import { Tab } from '@/components/dls/Tabs/Tabs';
-import { getReadingPreferenceIcon } from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreferenceIcon';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import useScrollRestoration from '@/hooks/useScrollRestoration';
-import { setLockVisibilityState } from '@/redux/slices/navbar';
-import {
-  selectReadingPreferences,
-  setReadingPreference,
-} from '@/redux/slices/QuranReader/readingPreferences';
-import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import useReadingPreferenceSwitcher, {
+  SwitcherContext,
+} from '@/hooks/useReadingPreferenceSwitcher';
+import ReadingModeIcon from '@/public/icons/reading-mode.svg';
+import VerseByVerseIcon from '@/public/icons/verse-by-verse.svg';
+import { TestId } from '@/tests/test-ids';
 import { logValueChange } from '@/utils/eventLogger';
-import { getVerseNumberFromKey } from '@/utils/verse';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
+import isInReadingMode from '@/utils/readingPreference';
 import { ReadingPreference } from 'types/QuranReader';
 
 interface MobileReadingTabsProps {
@@ -27,163 +19,88 @@ interface MobileReadingTabsProps {
 }
 
 /**
- * Mobile-specific tabs for switching between reading preferences
- * Appears only on mobile breakpoints when the navbar is visible
+ * Mobile-specific tabs for switching between reading preferences.
+ * Appears only on mobile breakpoints when the navbar is visible.
  *
- * @param {object} props - Component props
- * @param {Function} props.t - Translation function
+ * Shows two main tabs: "Verse by Verse" and "Reading"
+ * When "Reading" is selected, clicking it shows the current sub-mode (Arabic/Translation)
+ *
  * @returns {JSX.Element} React component for mobile reading preference tabs
  */
 const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
-  // Redux state
-  const readingPreferences = useSelector(selectReadingPreferences);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const { readingPreference } = readingPreferences;
+  const { readingPreference, switchReadingPreference } = useReadingPreferenceSwitcher({
+    context: SwitcherContext.MobileTabs,
+  });
 
-  // Hooks
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const {
-    actions: { onSettingsChange },
-  } = usePersistPreferenceGroup();
+  // Determine if we're in a "Reading" mode (either Arabic or Translation)
+  const isReadingMode = isInReadingMode(readingPreference);
 
-  const lastReadVerse = lastReadVerseKey.verseKey
-    ? getVerseNumberFromKey(lastReadVerseKey.verseKey).toString()
-    : undefined;
+  const isVerseByVerseSelected = readingPreference === ReadingPreference.Translation;
 
-  // Define tabs with icons
-  const tabs: Tab[] = [
-    {
-      title: t('reading-preference.translation'),
-      value: ReadingPreference.Translation,
-      id: 'translation-tab',
-    },
-    {
-      title: t('reading-preference.reading'),
-      value: ReadingPreference.Reading,
-      id: 'reading-tab',
-    },
-  ];
-
-  /**
-   * Handle switching between reading preferences
-   *
-   * @param {ReadingPreference} view - The new reading preference to switch to
-   */
-  // Use the shared scroll restoration hook
-  const { restoreScrollPosition } = useScrollRestoration();
-
-  /**
-   * Prepares URL parameters for the reading preference change
-   *
-   * @returns {object} URL object with query parameters
-   */
-  const prepareUrlParams = () => {
-    // Prepare URL parameters
-    const newQueryParams = { ...router.query };
-
-    // Handle starting verse based on context
-    if (parseInt(lastReadVerse, 10) > 1) {
-      // Track the verse if we're not at the beginning
-      newQueryParams.startingVerse = lastReadVerse;
-    }
-
-    // Create the new URL object
-    return {
-      pathname: router.pathname,
-      query: newQueryParams,
-    };
-  };
-
-  /**
-   * Handle the post-navigation tasks after the URL has been updated
-   *
-   * @param {ReadingPreference} view - The new reading preference
-   * @param {number} scrollPosition - The scroll position to maintain
-   * @param {boolean} isTranslationTab - Whether this is the translation tab
-   */
-  const handlePostNavigation = (
-    view: ReadingPreference,
-    scrollPosition: number,
-    isTranslationTab: boolean,
-  ) => {
-    // Update reading preference in Redux
-    onSettingsChange(
-      'readingPreference',
-      view,
-      setReadingPreference(view),
-      setReadingPreference(readingPreference),
-      PreferenceGroup.READING,
+  const handleVerseByVerseClick = () => {
+    if (isVerseByVerseSelected) return;
+    logValueChange(
+      'mobile_tabs_reading_preference',
+      readingPreference,
+      ReadingPreference.Translation,
     );
-
-    // Use the shared hook to restore scroll position and handle completion
-    restoreScrollPosition(scrollPosition, isTranslationTab, () => {
-      dispatch(setLockVisibilityState(false));
-    });
+    switchReadingPreference(ReadingPreference.Translation);
   };
 
-  const onViewSwitched = (view: ReadingPreference) => {
-    // Log the change event
-    logValueChange('mobile_tabs_reading_preference', readingPreference, view);
-
-    // Lock navbar visibility state to prevent flickering during tab switching
-    dispatch(setLockVisibilityState(true));
-
-    // Save current scroll position
-    const scrollPosition = window.scrollY;
-
-    // Check if this is the translation tab which tends to cause scrolling
-    const isTranslationTab = view === ReadingPreference.Translation;
-
-    // Get URL parameters for the navigation
-    const newUrlObject = prepareUrlParams();
-
-    // Update the URL and then handle post-navigation tasks
-    router.replace(newUrlObject, null, { shallow: true, scroll: false }).then(() => {
-      handlePostNavigation(view, scrollPosition, isTranslationTab);
-    });
+  const handleReadingClick = () => {
+    if (isReadingMode) return;
+    // Default to Arabic when entering Reading mode
+    logValueChange('mobile_tabs_reading_preference', readingPreference, ReadingPreference.Reading);
+    switchReadingPreference(ReadingPreference.Reading);
   };
 
-  // Custom tab rendering to include icons
-  const renderTabs = () => {
-    return (
+  return (
+    <div className={styles.container}>
       <div className={styles.tabsContainer} role="tablist">
-        {tabs.map((tab) => (
-          <div
-            data-is-selected={readingPreference === tab.value}
-            className={classNames(
-              styles.tab,
-              readingPreference === tab.value && styles.selectedTab,
-            )}
-            key={tab.value}
-            role="tab"
-            tabIndex={0}
-            id={tab.id}
-            data-testid={tab.id}
-            onClick={() => onViewSwitched(tab.value as ReadingPreference)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                onViewSwitched(tab.value as ReadingPreference);
-              }
-            }}
-          >
-            <>
-              <span className={readingPreferenceStyles.iconContainer}>
-                {getReadingPreferenceIcon({
-                  currentReadingPreference: readingPreference,
-                  optionReadingPreference: tab.value as ReadingPreference,
-                  useSuccessVariant: true,
-                })}
-              </span>
-              <span>{tab.title}</span>
-            </>
-          </div>
-        ))}
-      </div>
-    );
-  };
+        <div
+          className={classNames(styles.tab, isVerseByVerseSelected && styles.selectedTab)}
+          role="tab"
+          tabIndex={0}
+          id="verse-by-verse-tab"
+          data-testid={TestId.TRANSLATION_TAB}
+          data-is-selected={isVerseByVerseSelected}
+          aria-selected={isVerseByVerseSelected}
+          onClick={handleVerseByVerseClick}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              handleVerseByVerseClick();
+            }
+          }}
+        >
+          <span className={styles.iconContainer}>
+            <VerseByVerseIcon className={styles.icon} />
+          </span>
+          <span>{t('reading-preference.verse-by-verse')}</span>
+        </div>
 
-  return <div className={styles.container}>{renderTabs()}</div>;
+        <div
+          className={classNames(styles.tab, isReadingMode && styles.selectedTab)}
+          role="tab"
+          tabIndex={0}
+          id="reading-tab"
+          data-testid={TestId.READING_TAB}
+          data-is-selected={isReadingMode}
+          aria-selected={isReadingMode}
+          onClick={handleReadingClick}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              handleReadingClick();
+            }
+          }}
+        >
+          <span className={styles.iconContainer}>
+            <ReadingModeIcon className={styles.icon} />
+          </span>
+          <span>{t('reading-preference.reading')}</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default MobileReadingTabs;

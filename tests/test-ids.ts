@@ -2,6 +2,9 @@ import ThemeType from '@/redux/types/ThemeType';
 import { QuranFont } from '@/types/QuranReader';
 
 export enum TestId {
+  MORE_SETTINGS_TAB = 'more',
+  TRANSLATION_SETTINGS_TAB = 'translation',
+  ARABIC_SETTINGS_TAB = 'arabic',
   AUTH_UPDATE_PROFILE_CHANGE_PASSWORD_SECTION = 'auth-update-profile-change-password-section',
   AUTH_UPDATE_PROFILE_CONFIRM_NEW_PASSWORD_INPUT = 'auth-update-profile-confirm-new-password-input',
   AUTH_UPDATE_PROFILE_CURRENT_PASSWORD_INPUT = 'auth-update-profile-current-password-input',
@@ -21,6 +24,7 @@ export enum TestId {
   AUTO_BUTTON = 'auto-button',
   AYAH_SELECTION = 'ayah-selection',
   BANNER = 'banner',
+  CHANGE_THEME_BUTTON = 'change-theme',
   BISMILLAH_SECTION = 'bismillah-section',
   BOTTOM_ACTION_TAB_TAFSIR = 'bottom-action-tab-tafsir',
   CHAPTER_AND_JUZ_LIST = 'chapter-and-juz-list',
@@ -53,11 +57,14 @@ export enum TestId {
   LIGHT_BUTTON = 'light-button',
   LINES = 'lines',
   LISTEN_BUTTON = 'listen-button',
+  ROOT_DIALOG = 'root-dialog',
+  LOGOUT_BUTTON = 'profile-menu-item-logout',
   MODAL_CONTENT = 'modal-content',
   MORE_RESULTS = 'more-results',
   NAVBAR = 'navbar',
   NAVIGATE_QURAN_BUTTON = 'navigate-quran-button',
   NAVIGATION_DRAWER = 'navigation-drawer',
+  NAVIGATION_DRAWER_CLOSE_BUTTON = 'drawer-close-button',
   NAVIGATION_DRAWER_BODY = 'navigation-drawer-body',
   NAVIGATION_LINKS_OUR_PROJECTS = 'navigation-links-our-projects',
   NEXT_PAGE_BUTTON = 'next-page-button',
@@ -102,13 +109,13 @@ export enum TestId {
   TRANSLATION_BUTTON = 'translation-button',
   TRANSLATION_SELECT = 'translation-select',
   TRANSLATION_TAB = 'translation-tab',
-  TRANSLATIONS_SELECTED_CARD = 'Traductions s\u00E9lectionn\u00E9es Card',
+  TRANSLATION_CARD = 'translation-card',
   VERIFICATION_CODE = 'verification-code',
   VERSE_BUTTON = 'verse-button',
   VERSE_LIST = 'verse-list',
   WBW_TRANSLATION = 'wbw-translation',
   WBW_TRANSLITERATION = 'wbw-transliteration',
-  WORD_BY_WORD = 'wordByWord',
+  WORD_BY_WORD = 'wbw-language-select',
 }
 
 export type SettingsQuranFont = QuranFont.IndoPak | QuranFont.Uthmani | QuranFont.Tajweed;

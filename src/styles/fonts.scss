@@ -2,30 +2,30 @@
 
 /*Fonts for rendering different Mushaf scripts*/
 @font-face {
-  font-family: "IndoPak";
-  src:
-    local("AlQuran IndoPak by QuranWBW"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2") format("woff2"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff") format("woff"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf") format("truetype");
+  font-family: 'IndoPak';
+  src: local('AlQuran IndoPak by QuranWBW'),
+    url('/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')
+      format('woff2'),
+    url('/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff')
+      format('woff'),
+    url('/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf')
+      format('truetype');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "UthmanicHafs";
-  src:
-    local("KFGQPC HAFS Uthmanic Script"),
-    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2") format("woff2"),
-    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf") format("truetype");
+  font-family: 'UthmanicHafs';
+  src: local('KFGQPC HAFS Uthmanic Script'),
+    url('/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2') format('woff2'),
+    url('/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf') format('truetype');
   font-display: swap;
 }
 
 // TODO: regenerate this font and add font-family name
 @font-face {
-  font-family: "surahnames";
-  src:
-    url("/fonts/quran/surah-names/v1/sura_names.woff2"),
-    url("/fonts/quran/quran/surah-names/v1/sura_names.woff") format("woff");
+  font-family: 'surahnames';
+  src: url('/fonts/quran/surah-names/v1/sura_names.woff2'),
+    url('/fonts/quran/quran/surah-names/v1/sura_names.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -33,34 +33,28 @@
 
 /*Language specific fonts*/
 @font-face {
-  font-family: "divehi";
-  src:
-    local("Dhivehi Akuru"),
-    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff2"),
-    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff") format("woff"),
-    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.otf") format("opentype");
+  font-family: 'divehi';
+  src: local('Dhivehi Akuru'), url('/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff2'),
+    url('/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff') format('woff'),
+    url('/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.otf') format('opentype');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "NotoNastaliq";
-  src:
-    local("Noto Naskh Arabic"),
-    local("Nafees Regular"),
-    url("/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2"),
-    url("/fonts/lang/arabic/NotoNaskhArabic-Regular.ttf") format("truetype");
+  font-family: 'NotoNastaliq';
+  src: local('Noto Naskh Arabic'), local('Nafees Regular'),
+    url('/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2'),
+    url('/fonts/lang/arabic/NotoNaskhArabic-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "MehrNastaliq";
-  src:
-    local("Mehr Nastaliq Web"),
-    url("/fonts/lang/urdu/MehrNastaliqWeb.woff2"),
-    url("/fonts/lang/urdu/MehrNastaliqWeb.woff") format("woff"),
-    url("/fonts/lang/urdu/MehrNastaliqWeb.ttf") format("truetype");
+  font-family: 'MehrNastaliq';
+  src: local('Mehr Nastaliq Web'), url('/fonts/lang/urdu/MehrNastaliqWeb.woff2'),
+    url('/fonts/lang/urdu/MehrNastaliqWeb.woff') format('woff'),
+    url('/fonts/lang/urdu/MehrNastaliqWeb.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -69,17 +63,25 @@
 }
 
 @font-face {
-  font-family: "NotoSerifBengali";
-  src: local("Noto Serif Bengali"), url("/fonts/lang/bengali/NotoSerifBengali-Regular.woff2");
+  font-family: 'NotoSerifBengali';
+  src: local('Noto Serif Bengali'), url('/fonts/lang/bengali/NotoSerifBengali-Regular.woff2');
   font-display: swap;
 }
 
 @font-face {
-  font-family: "DroidArabicNaskh";
-  src:
-    local("Droid Arabic Naskh"),
-    url("/fonts/lang/kurdish/droid-naskh-regular.woff2"),
-    url("/fonts/lang/kurdish/droid-naskh-regular.ttf") format("truetype");
+  font-family: 'BeVietnamPro';
+  src: local('Be Vietnam Pro'),
+    url('/fonts/lang/vietnamese/BeVietnamPro-Regular.woff2') format('woff2');
+  font-display: swap;
+  // Vietnamese-specific Unicode range for efficient font loading
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0,
+    U+1EA0-1EF9;
+}
+
+@font-face {
+  font-family: 'DroidArabicNaskh';
+  src: local('Droid Arabic Naskh'), url('/fonts/lang/kurdish/droid-naskh-regular.woff2'),
+    url('/fonts/lang/kurdish/droid-naskh-regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -87,8 +89,8 @@
 
 // Fallback for browsers that don't support variable fonts
 @font-face {
-  font-family: "Figtree";
-  src: local("Open Sans"), url("/fonts/lang/Figtree/Figtree.ttf");
+  font-family: 'Figtree';
+  src: local('Open Sans'), url('/fonts/lang/Figtree/Figtree.ttf');
   font-weight: 100 900;
   /* default 400 */
   font-stretch: 50% 100%;
@@ -97,9 +99,8 @@
 }
 
 @font-face {
-  font-family: "PlayfairDisplay";
-  src:
-    local("Playfair Display"),
-    url("/fonts/lang/PlayfairDisplay/PlayfairDisplay-Black.ttf") format("truetype");
+  font-family: 'PlayfairDisplay';
+  src: local('Playfair Display'),
+    url('/fonts/lang/PlayfairDisplay/PlayfairDisplay-Black.ttf') format('truetype');
   font-display: swap;
 }

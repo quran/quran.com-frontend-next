@@ -10,12 +10,12 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
-import { WordVerse } from '@/types/Word';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
 }
 

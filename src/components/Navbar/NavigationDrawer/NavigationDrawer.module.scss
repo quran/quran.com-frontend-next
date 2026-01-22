@@ -27,5 +27,5 @@
 
 .centerVertically {
   @include utility.center-vertically;
-  width: 100%;
+  inline-size: 100%;
 }

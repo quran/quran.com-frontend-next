@@ -10,13 +10,13 @@ import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import BookOpenIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
-import { WordVerse } from '@/types/Word';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import Verse from 'types/Verse';
 
 interface Props {
-  verse: WordVerse;
+  verse: Verse;
   onActionTriggered?: () => void;
 }
 

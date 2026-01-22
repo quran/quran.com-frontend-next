@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
@@ -10,13 +11,14 @@ import NoGoalOrStreakCard from './NoGoalOrStreakCard';
 import styles from './ReadingSection.module.scss';
 import StreakOrGoalCard from './StreakOrGoalCard';
 
+import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectUserState } from '@/redux/slices/session';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getProfileNavigationUrl } from '@/utils/navigation';
+import { MY_QURAN_URL } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
 interface Props {}
@@ -51,11 +53,7 @@ const ReadingSection: React.FC<Props> = () => {
         <div className={styles.myQuranContainer}>
           <BookmarkRemoveIcon />
         </div>
-        <Link
-          variant={LinkVariant.Blend}
-          href={getProfileNavigationUrl()}
-          onClick={onMyQuranClicked}
-        >
+        <Link variant={LinkVariant.Blend} href={MY_QURAN_URL} onClick={onMyQuranClicked}>
           <p className={styles.myQuranText}>{t('my-quran')}</p>
         </Link>
       </div>
@@ -72,7 +70,13 @@ const ReadingSection: React.FC<Props> = () => {
 
   const goalsOrStreakCard =
     streak || goal ? (
-      <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
+      <Card className={styles.streakCard}>
+        <div className={styles.cardOuterContainer}>
+          <div className={classNames(styles.streakCardLeft, styles.cardWithIcon)}>
+            <StreakOrGoalCard currentActivityDay={currentActivityDay} goal={goal} streak={streak} />
+          </div>
+        </div>
+      </Card>
     ) : (
       <>{!isMobile() && <NoGoalOrStreakCard />}</>
     );
@@ -117,8 +121,8 @@ const ReadingSection: React.FC<Props> = () => {
         <>
           {header}
           <div className={styles.cardsContainer}>
-            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{continueReadingCard}</div>
+            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{newCard}</div>
           </div>
         </>

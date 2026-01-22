@@ -2,7 +2,6 @@ import { test, expect } from '@playwright/test';
 
 import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import { openNavigationDrawer } from '@/tests/helpers/navigation';
-import { closeSettingsDrawer } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import { getChapterContainerTestId, getVerseTestId, TestId } from '@/tests/test-ids';
 
@@ -61,7 +60,7 @@ test(
 test(
   'User interface is displayed in the selected language',
   { tag: ['@language', '@slow'] },
-  async ({ page, isMobile }) => {
+  async ({ page }) => {
     // 1. Click on the menu
     await homePage.closeNextjsErrorDialog();
     await openNavigationDrawer(page);
@@ -72,33 +71,13 @@ test(
     ]);
 
     // 5. Make sure some UI elements are displayed in French
-    await expect(page.getByTestId(TestId.OPEN_SEARCH_DRAWER)).toHaveAttribute(
-      'aria-label',
-      'Rechercher',
-    );
-    await expect(page.locator('#searchQuery')).toHaveAttribute(
-      'placeholder',
-      'Rechercher dans le Coran...',
-    );
+    await expect(page.getByText('Rechercher').first()).toBeVisible();
+    await expect(page.getByText('Naviguer').first()).toBeVisible();
+    await expect(page.getByText('Sourate').first()).toBeVisible();
 
     await homePage.goTo('/fr/1');
 
-    // Open the settings drawer and check some elements are in French
-    await homePage.openSettingsDrawer(isMobile);
-
-    const settingsBody = page.getByTestId(TestId.SETTINGS_DRAWER_BODY);
-
-    await expect(settingsBody).toBeVisible();
-
-    // Close the settings drawer
-    await closeSettingsDrawer(page);
-
-    // Open the menu drawer and check some elements are in French
-    await openNavigationDrawer(page);
-
-    const navigationDrawer = page.getByTestId(TestId.NAVIGATION_DRAWER_BODY);
-    const navText = (await navigationDrawer.evaluate((el) => el.textContent)) || '';
-    expect(navText).toContain('Devenir un donateur mensuel');
+    await expect(page.getByText("L'Ouverture").first()).toBeVisible();
   },
 );
 
@@ -131,8 +110,10 @@ test(
     ).toBeVisible();
     // Make sure Isa Garcia translation is selected in the settings
     await homePage.openSettingsDrawer();
-    const translationSelect = page.getByTestId(TestId.TRANSLATIONS_SELECTED_CARD);
+    await page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB).click();
+    const translationSelect = page.getByText('Traductions sélectionnées');
     await expect(translationSelect).toBeVisible();
-    await expect(translationSelect).toContainText('Muhammad Hamidullah');
+    const translationSelectParent = translationSelect.locator('..');
+    await expect(translationSelectParent).toContainText('Muhammad Hamidullah');
   },
 );

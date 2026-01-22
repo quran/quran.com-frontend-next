@@ -1,6 +1,7 @@
 {
   "additional-resources": "Additional Resources",
   "additional-resources-subtitle": "These additional resources will help you gain a deeper connection with the Verses that you have read.",
+  "ask-question": "Ask a Question",
   "complete": "Complete",
   "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Weeks Completed",
   "divine-book-club": "The Divine Book Club",
@@ -108,7 +109,6 @@
   "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
   "verse": "Verse",
   "verses-subtitle": "You are encouraged to focus on understanding the basic meanings, so select the language that works for you.",
-  "ask-question": "Ask a Question",
   "watch-episode": "Watch Episode {{weekNumber}}",
   "week": "Week",
   "week-completed": "Completed",

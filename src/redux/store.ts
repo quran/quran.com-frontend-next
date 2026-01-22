@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { getStoreInitialState } from './defaultSettings/util';
 import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
-import { RootState } from './RootState';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
 import banner from './slices/banner';
@@ -45,12 +44,11 @@ import session from './slices/session';
 import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
-
-import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
+import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 36,
+  version: 38,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -109,14 +107,23 @@ export const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const getStore = (
-  locale: string,
-  countryPreference?: CountryLanguagePreferenceResponse,
-  preloadedState?: RootState,
-  detectedLanguage?: string,
-  detectedCountry?: string,
-) =>
-  configureStore({
+const getStore = (locale: string) => {
+  const baseInitialState = getStoreInitialState(locale);
+
+  // Preserve persisted theme synchronously to prevent flash during language switching.
+  // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
+  let initialState = baseInitialState;
+  if (typeof window !== 'undefined') {
+    const persistedTheme = getPersistedTheme();
+    if (persistedTheme) {
+      initialState = {
+        ...baseInitialState,
+        [SliceName.THEME]: persistedTheme,
+      };
+    }
+  }
+
+  return configureStore({
     reducer: persistedReducer,
     // @ts-ignore
     middleware: (getDefaultMiddleware) =>
@@ -129,11 +136,8 @@ const getStore = (
       }).concat(DefaultSettingsMiddleware),
     devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
-    preloadedState:
-      preloadedState ||
-      getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry),
+    preloadedState: initialState,
   });
-
-export type AppStore = ReturnType<typeof getStore>;
+};
 
 export default getStore;

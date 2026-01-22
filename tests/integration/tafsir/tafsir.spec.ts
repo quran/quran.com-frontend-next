@@ -45,7 +45,7 @@ test(
 
     // Check that the default tafsir is selected
     const ibnKathirButton = page.getByTestId(getTafsirSelectionTestId('en-tafisr-ibn-kathir'));
-    await expect(ibnKathirButton).toHaveAttribute('data-selected', 'true');
+    await expect(ibnKathirButton).toHaveAttribute('data-isselected', 'true');
 
     // Select a different tafsir
     const maarifAlQuranButton = tafsirModal.getByTestId(
@@ -54,8 +54,8 @@ test(
     await maarifAlQuranButton.click();
 
     // Check that the selected tafsir button is updated
-    await expect(maarifAlQuranButton).toHaveAttribute('data-selected', 'true');
-    await expect(ibnKathirButton).toHaveAttribute('data-selected', 'false');
+    await expect(maarifAlQuranButton).toHaveAttribute('data-isselected', 'true');
+    await expect(ibnKathirButton).toHaveAttribute('data-isselected', 'false');
 
     // Quick check that the content has updated
     await expect(

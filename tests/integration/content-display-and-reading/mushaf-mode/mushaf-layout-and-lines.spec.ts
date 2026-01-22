@@ -66,7 +66,7 @@ test(
   { tag: ['@mushaf', '@navigation'] },
   async ({ page, isMobile }) => {
     // Click on the next surah button
-    await Promise.all([page.getByTestId(TestId.NEXT_SURAH_BUTTON).click(), page.waitForURL('/79')]);
+    await Promise.all([page.getByText("79. An-Nazi'at").click(), page.waitForURL('/79')]);
     await expect(page).toHaveURL(/\/79$/);
 
     // Verify we are still in the mushaf view
@@ -106,10 +106,7 @@ test(
   { tag: ['@mushaf', '@navigation'] },
   async ({ page, isMobile }) => {
     // Click on the previous surah button
-    await Promise.all([
-      page.getByTestId(TestId.PREVIOUS_SURAH_BUTTON).click(),
-      page.waitForURL('/77'),
-    ]);
+    await Promise.all([page.getByText('77. Al-Mursalat').click(), page.waitForURL('/77')]);
     await expect(page).toHaveURL(/\/77$/);
 
     // Verify we are still in the mushaf view
@@ -166,16 +163,9 @@ test(
     await homePage.reload();
 
     // Verify we are still in the mushaf view
-    if (isMobile) {
-      await expect(page.getByTestId(TestId.READING_TAB)).toHaveAttribute(
-        'data-is-selected',
-        'true',
-      );
-    } else {
-      await expect(page.getByTestId(TestId.READING_BUTTON)).toHaveAttribute(
-        'data-is-selected',
-        'true',
-      );
-    }
+    await expect(page.getByTestId(TestId.READING_BUTTON)).toHaveAttribute(
+      'data-is-selected',
+      'true',
+    );
   },
 );

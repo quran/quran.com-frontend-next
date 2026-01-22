@@ -3,6 +3,7 @@
   "begin": "เริ่ม",
   "calendar-cta": "ปฏิทิน",
   "chapters-and-verses": "บทและข้อพระคัมภีร์",
+  "continue-learning-plan": "เรียนรู้ต่อไป",
   "continue-read": "อ่านต่อ",
   "explore-topics": "สำรวจหัวข้อ",
   "first-time-reading": "ใหม่สำหรับอัลกุรอาน? <link> เริ่มต้นที่นี่ </link>",
@@ -13,6 +14,7 @@
   "my-quran": "อัลกุรอานของฉัน",
   "navigate-quran": "นำทางอัลกุรอาน",
   "no-bookmarks": "คุณยังไม่มีบุ๊คมาร์กใดๆ",
+  "no-page-bookmarks": "คุณยังไม่ได้คั่นหน้าใดๆ เลย",
   "no-recently-read": "คุณยังไม่มีเซสชันการอ่านใดๆ",
   "noble-quran": "คัมภีร์กุรอานอันสูงส่ง",
   "popular": "เป็นที่นิยม",
@@ -55,10 +57,12 @@
     "description": "ช่วยเผยแพร่อัลกุรอานให้กับผู้เรียนใหม่",
     "title": "แบ่งปันอัลกุรอาน!"
   },
+  "start-learning-plan": "เริ่มเรียนรู้",
   "start-read": "เริ่มอ่าน",
   "stay-consistent": "ติดตามสตรีค สร้างเป้าหมายที่กำหนดเอง รักษาความสม่ำเสมอ",
   "tab": {
     "bookmarks": "บุ๊คมาร์ก",
+    "page-bookmarks": "หน้า",
     "popular": "เป็นที่นิยม"
   },
   "take-notes": "คุณเคยพลาด <modalLink> Notes หรือเปล่า? </modalLink>",

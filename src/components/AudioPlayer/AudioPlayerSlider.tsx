@@ -22,11 +22,11 @@ const AudioPlayerSlider = (): JSX.Element => {
   const duration = useSelector(audioService, (state) => state.context.duration);
 
   return (
-    <div className={styles.container} data-testid="audio-sliders">
+    <div className={styles.container}>
       <span className={styles.currentTime} data-testid="audio-elapsed">
         {secondsFormatter(elapsed, locale)}
       </span>
-      <div className={styles.sliderContainer} data-testid="audio-buffer-slider">
+      <div className={styles.sliderContainer}>
         <Slider
           showThumbs={false}
           variant={SliderVariant.Secondary}
@@ -41,7 +41,7 @@ const AudioPlayerSlider = (): JSX.Element => {
           withBackground
         />
       </div>
-      <div className={styles.sliderContainer} data-testid="audio-progress-slider">
+      <div className={styles.sliderContainer}>
         <Slider
           label="audio-player"
           value={[elapsed]}
@@ -53,9 +53,7 @@ const AudioPlayerSlider = (): JSX.Element => {
           direction={direction as Direction}
         />
       </div>
-      <span className={styles.remainingTime} data-testid="audio-duration">
-        {secondsFormatter(duration, locale)}
-      </span>
+      <span className={styles.remainingTime}>{secondsFormatter(duration, locale)}</span>
     </div>
   );
 };
