@@ -78,8 +78,13 @@ export const makeSignInUrl = (): string => makeUrl('users/login');
 
 export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
-export const makeBookmarksUrl = (mushafId: number, limit?: number, type?: BookmarkType): string =>
-  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }) });
+export const makeBookmarksUrl = (
+  mushafId: number,
+  limit?: number,
+  type?: BookmarkType,
+  isReading?: boolean,
+): string =>
+  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }), ...(isReading && { isReading }) });
 
 export type CollectionsQueryParams = {
   cursor?: string;

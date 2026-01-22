@@ -2,20 +2,20 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
-import useSWR from 'swr';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import BookmarkType from '../../../../../types/BookmarkType';
 import styles from '../styles/ContextMenu.module.scss';
 
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
+import useGlobalReadingBookmark from '@/hooks/auth/useGlobalReadingBookmark';
 import useMappedBookmark from '@/hooks/useMappedBookmark';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
-import { getUserPreferences } from '@/utils/auth/api';
-import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -36,17 +36,16 @@ interface PageBookmarkActionProps {
  */
 const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ pageNumber }) => {
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const isGuest = !isLoggedIn();
 
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch user preferences for reading bookmark (logged-in users)
-  const { data: userPreferences, isValidating: isLoading } = useSWR(
-    !isGuest ? makeUserPreferencesUrl() : null,
-    getUserPreferences,
-  );
+  // Use global reading bookmark hook for logged-in users
+  const { readingBookmark, isLoading } = useGlobalReadingBookmark(mushafId);
 
   // Use the reusable mapping hook for cross-mushaf bookmark handling (guests only)
   const {
@@ -68,8 +67,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
       return effectivePageNumber === pageNumber;
     }
 
-    // For logged-in users, check readingBookmark data
-    const readingBookmark = userPreferences?.readingBookmark?.bookmark;
+    // For logged-in users, check readingBookmark from global hook
     if (!readingBookmark) return false;
 
     return readingBookmark.type === BookmarkType.Page && readingBookmark.key === pageNumber;
@@ -78,7 +76,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
     guestReadingBookmark,
     needsMapping,
     effectivePageNumber,
-    userPreferences,
+    readingBookmark,
     pageNumber,
   ]);
 

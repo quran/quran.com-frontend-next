@@ -73,9 +73,7 @@ export const useSaveBookmarkData = ({
           Number(verse.verseNumber),
         );
       }
-      if (isPage && pageNumber) {
-        return getBookmark(mushafId, Number(pageNumber), BookmarkType.Page);
-      }
+
       return Promise.resolve(undefined);
     },
   );

@@ -503,31 +503,15 @@ export const deleteBookmarkById = async (bookmarkId: string) => {
  */
 export const getReadingBookmark = async (mushafId: number): Promise<Bookmark | null> => {
   try {
-    // Try to get reading bookmark for Ayah type
-    const ayahBookmark = await privateFetcher<Bookmark | Bookmark[]>(
-      `${makeBookmarksUrl(mushafId, 1, BookmarkType.Ayah)}&isReading=true`,
+    // Try to get reading bookmark
+    const bookmarks = await privateFetcher<Bookmark | Bookmark[]>(
+      `${makeBookmarksUrl(mushafId, 1, undefined, true)}`,
     );
-    // Backend returns single object when isReading=true, or array otherwise
-    // Validate it's a proper bookmark object before returning
-    if (ayahBookmark && !Array.isArray(ayahBookmark) && ayahBookmark.key && ayahBookmark.type) {
-      return ayahBookmark;
+    if (bookmarks && !Array.isArray(bookmarks) && bookmarks.key && bookmarks.type) {
+      return bookmarks;
     }
-    if (ayahBookmark && Array.isArray(ayahBookmark) && ayahBookmark.length > 0) {
-      const bookmark = ayahBookmark[0];
-      if (bookmark && bookmark.key && bookmark.type) {
-        return bookmark;
-      }
-    }
-
-    // Try to get reading bookmark for Page type
-    const pageBookmark = await privateFetcher<Bookmark | Bookmark[]>(
-      `${makeBookmarksUrl(mushafId, 1, BookmarkType.Page)}&isReading=true`,
-    );
-    if (pageBookmark && !Array.isArray(pageBookmark) && pageBookmark.key && pageBookmark.type) {
-      return pageBookmark;
-    }
-    if (pageBookmark && Array.isArray(pageBookmark) && pageBookmark.length > 0) {
-      const bookmark = pageBookmark[0];
+    if (bookmarks && Array.isArray(bookmarks) && bookmarks.length > 0) {
+      const bookmark = bookmarks[0];
       if (bookmark && bookmark.key && bookmark.type) {
         return bookmark;
       }
