@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useCallback } from 'react';
 
 import { Action } from '@reduxjs/toolkit';

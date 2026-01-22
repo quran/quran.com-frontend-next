@@ -3,8 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import getTranslationsLabelString from '../utils/translation';
-
 import styles from './StudyModeBody.module.scss';
 import { TAB_COMPONENTS, useStudyModeTabs } from './StudyModeBodyTabs';
 import StudyModeBottomActions, { StudyModeTabId } from './StudyModeBottomActions';
@@ -15,7 +13,7 @@ import WordNavigationBox from './WordNavigationBox';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { constructWordVerse, getVerseWords } from '@/utils/verse';
+import { getVerseWords } from '@/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -58,25 +56,16 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   onTabChange,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const translationsLabel = getTranslationsLabelString(verse.translations);
-  const translationsCount = verse.translations?.length || 0;
 
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
 
   const tabs = useStudyModeTabs(activeTab, onTabChange);
 
-  const verseWithChapterId = {
-    ...verse,
-    chapterId: verse.chapterId || verse.verseKey?.split(':')[0],
-  };
-
-  const wordVerse = constructWordVerse(verseWithChapterId, translationsLabel, translationsCount);
-
   return (
     <div ref={containerRef} className={styles.container}>
       <TopActions
-        verse={wordVerse}
+        verse={verse}
         bookmarksRangeUrl={bookmarksRangeUrl}
         hasNotes={hasNotes}
         shouldUseModalZIndex

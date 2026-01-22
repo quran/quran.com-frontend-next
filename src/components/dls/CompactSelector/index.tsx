@@ -25,7 +25,6 @@ interface CompactSelectorProps {
   isMultiSelect?: boolean;
   /** Minimum number of items that must be selected (only applies to multi-select) */
   minimumRequired?: number;
-  className?: string;
   triggerClassName?: string;
 }
 
@@ -36,7 +35,6 @@ const CompactSelector: React.FC<CompactSelectorProps> = ({
   onChange,
   isMultiSelect = false,
   minimumRequired = 1,
-  className,
   triggerClassName,
 }) => {
   const { t, lang } = useTranslation('quran-reader');

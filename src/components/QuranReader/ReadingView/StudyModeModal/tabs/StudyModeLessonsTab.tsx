@@ -37,11 +37,7 @@ const StudyModeLessonsTab: React.FC<StudyModeLessonsTabProps> = ({ chapterId, ve
         showEndActions={false}
         showTabs={false}
         render={({ body, languageSelection }) => (
-          <StudyModeTabLayout
-            selectionControl={languageSelection}
-            body={body}
-            fontType="lesson"
-          />
+          <StudyModeTabLayout selectionControl={languageSelection} body={body} fontType="lesson" />
         )}
       />
     </div>

@@ -28,7 +28,6 @@ type VerseTextProps = {
   isReadingMode?: boolean;
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
-  bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
   highlightedWordPosition?: number;
   isWordInteractionDisabled?: boolean;
@@ -40,7 +39,6 @@ const VerseText = ({
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
-  bookmarksRangeUrl,
   tooltipType,
   highlightedWordPosition,
   isWordInteractionDisabled = false,
@@ -112,7 +110,6 @@ const VerseText = ({
                 isHighlighted={
                   isHighlightedWord || word.verseKey === selectedVerseKey || isHoveredWord
                 }
-                bookmarksRangeUrl={bookmarksRangeUrl}
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
                 shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}

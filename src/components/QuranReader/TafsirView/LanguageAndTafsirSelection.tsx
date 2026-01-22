@@ -6,8 +6,8 @@ import Button, { ButtonSize } from '@/dls/Button/Button';
 import CompactSelector from '@/dls/CompactSelector';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
-import { getLocaleNameByFullName } from '@/utils/locale';
 import { TafsirsResponse } from '@/types/ApiResponses';
+import { getLocaleNameByFullName } from '@/utils/locale';
 
 type LanguageAndTafsirSelectionProps = {
   selectedTafsirIdOrSlug: number | string;

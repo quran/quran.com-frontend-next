@@ -15,9 +15,9 @@ export enum StudyModeTabId {
 export interface StudyModeTabConfig {
   id: StudyModeTabId;
   label: string;
-  icon: JSX.Element;
-  onClick: (e: React.MouseEvent | React.KeyboardEvent) => void;
-  condition: boolean | undefined;
+  icon: React.ReactNode;
+  onClick: () => void;
+  condition: boolean;
 }
 
 interface StudyModeBottomActionsProps {
@@ -26,21 +26,15 @@ interface StudyModeBottomActionsProps {
 }
 
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
-  const handleTabClick = (
-    e: React.MouseEvent,
-    onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
-  ) => {
-    onClick(e);
+  const handleTabClick = (onClick: () => void) => {
+    onClick();
   };
 
-  const handleTabKeyDown = (
-    e: React.KeyboardEvent,
-    onClick: (e: React.MouseEvent | React.KeyboardEvent) => void,
-  ) => {
+  const handleTabKeyDown = (e: React.KeyboardEvent, onClick: () => void) => {
     // Only trigger on Enter or Space key
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onClick(e);
+      onClick();
     }
   };
 
@@ -60,7 +54,7 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
                   [styles.tabItemActive]: activeTab === tab.id,
                 })}
                 data-testid={`study-mode-tab-${tab.id}`}
-                onClick={(e) => handleTabClick(e, tab.onClick)}
+                onClick={() => handleTabClick(tab.onClick)}
                 onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
                 role="button"
                 tabIndex={0}

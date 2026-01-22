@@ -156,9 +156,18 @@ const StudyModeModal: React.FC<Props> = ({
     dedupingInterval: 2000,
   });
 
-  const currentVerse =
+  const rawVerse =
     data?.verse ||
     (verseKey === `${initialChapterId}:${initialVerseNumber}` ? initialVerse : undefined);
+
+  // Ensure chapterId is set on the verse (required for bookmarking)
+  const currentVerse = useMemo(() => {
+    if (!rawVerse) return undefined;
+    return {
+      ...rawVerse,
+      chapterId: rawVerse.chapterId ?? Number(selectedChapterId),
+    };
+  }, [rawVerse, selectedChapterId]);
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const bookmarksRangeUrl = isLoggedIn()

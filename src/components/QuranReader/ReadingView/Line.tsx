@@ -8,7 +8,6 @@ import { QURAN_READER_OBSERVER_ID } from '../observer';
 import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -32,7 +31,6 @@ export type LineProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
-  bookmarksRangeUrl: string | null;
   pageHeaderChapterId?: string;
 };
 
@@ -42,7 +40,6 @@ const Line = ({
   isBigTextLayout,
   pageIndex,
   lineIndex,
-  bookmarksRangeUrl,
   pageHeaderChapterId,
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
@@ -90,9 +87,8 @@ const Line = ({
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const verseTranslations = words[0].verse?.translations;
-  const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length || 0;
+  const translationName = words[0].verse?.translationsLabel || '';
+  const translationsCount = words[0].verse?.translationsCount || 0;
 
   // Get data from first word for page tracking
   const firstWord = words[0];
@@ -131,7 +127,6 @@ const Line = ({
           isReadingMode
           isHighlighted={isHighlighted}
           shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
-          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </div>
     </div>
@@ -146,9 +141,8 @@ const Line = ({
  *
  *  1. Check if the line keys are the same.
  *  2. Check if isBigTextLayout values are the same.
- *  3. Check if bookmarksRangeUrl values are the same.
- *  4. Check if pageHeaderChapterId values are the same.
- *  5. Check if the font changed.
+ *  3. Check if pageHeaderChapterId values are the same.
+ *  4. Check if the font changed.
  *
  * If the above conditions are met, it's safe to assume that the result
  * of both renders are the same.
@@ -160,7 +154,6 @@ const Line = ({
 const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
   prevProps.lineKey === nextProps.lineKey &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
   prevProps.pageHeaderChapterId === nextProps.pageHeaderChapterId &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
