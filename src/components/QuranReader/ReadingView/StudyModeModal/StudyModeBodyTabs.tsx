@@ -15,14 +15,17 @@ import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {

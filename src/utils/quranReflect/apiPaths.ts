@@ -30,7 +30,7 @@ export const makeGetUserReflectionsUrl = ({
 export const makeAyahReflectionsUrl = ({
   surahId,
   ayahNumber,
-  locales,
+  locales = [],
   page = 1,
   postTypeIds = [],
 }: AyahReflectionsRequestParams) => {

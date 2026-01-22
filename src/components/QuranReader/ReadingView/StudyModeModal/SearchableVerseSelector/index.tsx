@@ -62,28 +62,35 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
       .filter(([id, chapter]) => {
         if (!query) return true;
         const chapterName = chapter.transliteratedName.toLowerCase();
-        return chapterName.includes(query) || id.startsWith(query);
+        const localizedId = toLocalizedNumber(Number(id), lang);
+        return chapterName.includes(query) || id.startsWith(query) || localizedId.startsWith(query);
       })
       .map(([id, chapter]) => ({
         id,
         name: chapter.transliteratedName,
         versesCount: chapter.versesCount,
+        localizedId: toLocalizedNumber(Number(id), lang),
       }));
-  }, [chaptersData, searchQuery]);
+  }, [chaptersData, searchQuery, lang]);
 
   const verseOptions = useMemo(() => {
     if (!currentChapter) return [];
     const verses = [];
     for (let i = 1; i <= currentChapter.versesCount; i += 1) {
-      verses.push(i);
+      verses.push({
+        number: i,
+        localizedNumber: toLocalizedNumber(i, lang),
+      });
     }
     return verses;
-  }, [currentChapter]);
+  }, [currentChapter, lang]);
 
   const filteredVerses = useMemo(() => {
     const query = searchQuery.trim();
     if (!query) return verseOptions;
-    return verseOptions.filter((v) => v.toString().startsWith(query));
+    return verseOptions.filter(
+      (v) => v.number.toString().startsWith(query) || v.localizedNumber.startsWith(query),
+    );
   }, [verseOptions, searchQuery]);
 
   const handleChapterClick = useCallback(() => {
@@ -183,19 +190,20 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
                 ))
               : filteredVerses.map((verse) => (
                   <button
-                    key={verse}
+                    key={verse.number}
                     type="button"
                     className={classNames(styles.listItem, {
-                      [styles.selectedItem]: verse.toString() === selectedVerseNumber,
+                      [styles.selectedItem]: verse.number.toString() === selectedVerseNumber,
                     })}
-                    onClick={() => handleSelectVerse(verse)}
+                    onClick={() => handleSelectVerse(verse.number)}
                   >
-                    {toLocalizedNumber(verse, lang)}
+                    {verse.localizedNumber}
                   </button>
                 ))}
 
             {((isChapterMode && filteredChapters.length === 0) ||
               (!isChapterMode && filteredVerses.length === 0)) && (
+              // eslint-disable-next-line react/jsx-indent
               <div className={styles.noResults}>{tCommon('search.no-results')}</div>
             )}
           </div>
