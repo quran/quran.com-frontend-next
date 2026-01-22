@@ -16,6 +16,14 @@
   font-size: inherit;
 }
 
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+}
+
 // Font size generation
 $answer-scales: (
   tablet: (

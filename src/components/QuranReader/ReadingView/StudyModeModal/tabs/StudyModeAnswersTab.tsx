@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import styles from './StudyModeAnswersTab.module.scss';
 import StudyModeTabLayout, { useStudyModeTabScroll } from './StudyModeTabLayout';
 
+import Error from '@/components/Error';
 import QuestionsList from '@/components/QuestionAndAnswer/QuestionsList';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
@@ -36,10 +37,11 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
   const scaleClass = styles[`qna-font-size-${quranReaderStyles.qnaFontScale}`];
 
   // Use global site language for Q&A
-  const { questions, hasMore, isLoadingMore, loadMore, isLoading } = useQuestionsPagination({
-    verseKey,
-    language: lang as Language,
-  });
+  const { questions, hasMore, isLoadingMore, loadMore, isLoading, error, mutate } =
+    useQuestionsPagination({
+      verseKey,
+      language: lang as Language,
+    });
 
   // Auto-close tab when there are no answered questions
   useEffect(() => {
@@ -48,8 +50,20 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
     }
   }, [isLoading, questions, switchTab]);
 
+  const handleRetry = () => {
+    mutate?.();
+  };
+
   const renderBody = () => {
     if (isLoading) return <TafsirSkeleton />;
+
+    if (error) {
+      return (
+        <div className={styles.errorContainer}>
+          <Error error={error} onRetryClicked={handleRetry} />
+        </div>
+      );
+    }
 
     return (
       <div className={classNames(styles.answersContainer, scaleClass)}>

@@ -41,6 +41,7 @@ const useQuestionsPagination = ({
     setSize,
     isValidating,
     error,
+    mutate,
   } = useSWRInfinite<AyahQuestionsResponse>(getKey, privateFetcher, {
     fallbackData: initialData ? [initialData] : undefined,
     revalidateFirstPage: false,
@@ -74,6 +75,7 @@ const useQuestionsPagination = ({
     loadMore,
     isLoading,
     error,
+    mutate,
   };
 };
 
