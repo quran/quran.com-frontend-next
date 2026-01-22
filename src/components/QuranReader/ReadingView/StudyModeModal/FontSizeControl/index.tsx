@@ -26,6 +26,7 @@ import {
   decreaseLessonFontScale,
 } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export type FontSizeType = 'tafsir' | 'reflection' | 'lesson';
@@ -63,7 +64,7 @@ const FONT_TYPE_CONFIG = {
 };
 
 const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType = 'tafsir' }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const [isExpanded, setIsExpanded] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const config = FONT_TYPE_CONFIG[fontType];
@@ -151,7 +152,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
         >
           <MinusIcon />
         </button>
-        <span className={styles.countDisplay}>{currentFontScale}</span>
+        <span className={styles.countDisplay}>{toLocalizedNumber(currentFontScale, lang)}</span>
         <button
           type="button"
           className={classNames(styles.controlButton, {
