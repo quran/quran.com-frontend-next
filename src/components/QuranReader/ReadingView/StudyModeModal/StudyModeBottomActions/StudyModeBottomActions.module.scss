@@ -2,10 +2,11 @@
 
 .bottomActionsContainer {
   inline-size: 100%;
-  padding: var(--spacing-medium) 0;
+  padding-block: var(--spacing-medium2-px);
   position: sticky;
   inset-block-end: 0;
   background: var(--color-background-default);
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .tabsContainer {
@@ -33,14 +34,19 @@
   cursor: pointer;
   color: var(--color-grey-icons-new);
   transition: color var(--transition-moderate) ease;
+  padding-block-end: calc(var(--spacing-medium2-px) - var(--spacing-micro-px));
+  margin-block-end: calc(-1 * var(--spacing-medium2-px));
+  border-block-end: var(--spacing-micro-px) solid transparent;
 
   &:hover {
-    color: var(--color-success-medium);
+    color: var(--color-blue-buttons-and-icons);
   }
 }
 
 .tabItemActive {
-  color: var(--color-success-medium);
+  color: var(--color-blue-buttons-and-icons);
+  font-weight: var(--font-weight-semibold);
+  border-block-end: var(--spacing-micro-px) solid var(--color-blue-buttons-and-icons);
 }
 
 .tabIcon {

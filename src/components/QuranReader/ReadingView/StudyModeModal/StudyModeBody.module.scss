@@ -31,9 +31,9 @@
   margin: var(--spacing-medium) 0;
 }
 
-// Tab content container - appears below bottom actions
+// Tab content container - appears below bottom actions (border moved to bottomActionsContainer)
 .tabContentContainer {
-  border-block-start: 1px solid var(--color-borders-hairline);
+  display: block;
 }
 
 // Gradient fade overlay above bottom actions

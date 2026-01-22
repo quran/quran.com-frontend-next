@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import styles from './TafsirView.module.scss';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
-import Select, { SelectSize } from '@/dls/Forms/Select';
+import CompactSelector from '@/dls/CompactSelector';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import { getLocaleNameByFullName } from '@/utils/locale';
-import { TafsirsResponse } from 'types/ApiResponses';
+import { TafsirsResponse } from '@/types/ApiResponses';
 
 type LanguageAndTafsirSelectionProps = {
   selectedTafsirIdOrSlug: number | string;
@@ -32,21 +32,27 @@ const LanguageAndTafsirSelection = ({
       <Skeleton className={classNames(styles.tafsirSkeletonItem, styles.tafsirSelectionSkeleton)} />
     );
   }
+  const languageItems = languageOptions.map((lng) => ({
+    id: lng,
+    label: getLocaleNameByFullName(lng),
+    value: lng,
+  }));
+
+  const handleLanguageChange = (values: string[]) => {
+    if (values.length > 0) {
+      onSelectLanguage(values[0]);
+    }
+  };
+
   return (
     <SpinnerContainer isLoading={isLoading}>
       <div className={styles.tafsirSelectionContainer}>
-        <Select
-          className={styles.languageSelection}
-          size={SelectSize.Small}
-          id="lang-selection"
-          testId="lang-selection"
-          name="lang-selection"
-          options={languageOptions.map((lng) => ({
-            label: getLocaleNameByFullName(lng),
-            value: lng,
-          }))}
-          onChange={onSelectLanguage}
-          value={selectedLanguage}
+        <CompactSelector
+          id="tafsir-lang-selection"
+          items={languageItems}
+          selectedValues={selectedLanguage ? [selectedLanguage] : []}
+          onChange={handleLanguageChange}
+          isMultiSelect={false}
         />
         {data.tafsirs
           .filter(

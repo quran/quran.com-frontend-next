@@ -310,6 +310,9 @@ export default {
     },
     readingPreferences: {
       ...state.readingPreferences,
+      selectedReflectionLanguages:
+        state.readingPreferences.selectedReflectionLanguages ??
+        initialState.readingPreferences.selectedReflectionLanguages,
       selectedLessonLanguages:
         state.readingPreferences.selectedLessonLanguages ??
         initialState.readingPreferences.selectedLessonLanguages,

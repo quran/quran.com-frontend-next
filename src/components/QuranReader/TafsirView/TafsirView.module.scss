@@ -86,10 +86,10 @@ $container-max-width: calc(23 * var(--spacing-mega));
 }
 .tafsirSelectionContainer {
   display: flex;
-  margin-block-start: var(--spacing-medium);
+  align-items: center;
   overflow-x: scroll;
   inline-size: 100%;
-  padding-block-end: var(--spacing-medium);
+  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
 }
 .tafsirSelectionItem {
   text-transform: capitalize;
