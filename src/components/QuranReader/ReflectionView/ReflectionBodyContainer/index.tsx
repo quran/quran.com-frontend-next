@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,13 +11,15 @@ import styles from './ReflectionBodyContainer.module.scss';
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import SelectionList from '@/dls/SelectionList';
+import CompactSelector from '@/dls/CompactSelector';
 import Tabs from '@/dls/Tabs/Tabs';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import {
   selectReflectionLanguages,
   setReflectionLanguages,
+  selectLessonLanguages,
+  setLessonLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { logEvent } from '@/utils/eventLogger';
 import {
@@ -85,27 +87,74 @@ const ReflectionBodyContainer = ({
 
   const { lang, t } = useTranslation();
   const dispatch = useDispatch();
-  const storedLanguages = useSelector(selectReflectionLanguages);
-  const selectedLanguages = useMemo(
-    () => storedLanguages || [lang] || ['en'],
-    [storedLanguages, lang],
-  );
+  const storedReflectionLanguages = useSelector(selectReflectionLanguages);
+  const storedLessonLanguages = useSelector(selectLessonLanguages);
+  const prevLangRef = useRef(lang);
+
+  // Get the appropriate languages based on content type
+  const selectedLanguages =
+    selectedContentType === ContentType.REFLECTIONS
+      ? storedReflectionLanguages
+      : storedLessonLanguages;
+
+  // Handle locale changes - auto-update language selection based on user's customization
+  useEffect(() => {
+    const prevLang = prevLangRef.current;
+    if (prevLang === lang) return;
+    prevLangRef.current = lang;
+
+    // Update reflection languages
+    if (storedReflectionLanguages.length === 1) {
+      // Single language = follow locale (replace)
+      dispatch(setReflectionLanguages([lang]));
+    } else if (!storedReflectionLanguages.includes(lang)) {
+      // Multiple languages = add new locale if not present
+      dispatch(setReflectionLanguages([...storedReflectionLanguages, lang]));
+    }
+
+    // Update lesson languages
+    if (storedLessonLanguages.length === 1) {
+      // Single language = follow locale (replace)
+      dispatch(setLessonLanguages([lang]));
+    } else if (!storedLessonLanguages.includes(lang)) {
+      // Multiple languages = add new locale if not present
+      dispatch(setLessonLanguages([...storedLessonLanguages, lang]));
+    }
+  }, [lang, dispatch, storedReflectionLanguages, storedLessonLanguages]);
+
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
 
   const handleLanguageChange = useCallback(
     (newLanguages: string[]) => {
-      onSettingsChange(
-        'selectedReflectionLanguages',
-        newLanguages,
-        setReflectionLanguages(newLanguages),
-        setReflectionLanguages(selectedLanguages),
-        PreferenceGroup.READING,
-      );
-      dispatch(setReflectionLanguages(newLanguages));
+      if (selectedContentType === ContentType.REFLECTIONS) {
+        onSettingsChange(
+          'selectedReflectionLanguages',
+          newLanguages,
+          setReflectionLanguages(newLanguages),
+          setReflectionLanguages(storedReflectionLanguages),
+          PreferenceGroup.READING,
+        );
+        dispatch(setReflectionLanguages(newLanguages));
+      } else {
+        onSettingsChange(
+          'selectedLessonLanguages',
+          newLanguages,
+          setLessonLanguages(newLanguages),
+          setLessonLanguages(storedLessonLanguages),
+          PreferenceGroup.READING,
+        );
+        dispatch(setLessonLanguages(newLanguages));
+      }
     },
-    [dispatch, onSettingsChange, selectedLanguages],
+    [
+      dispatch,
+      onSettingsChange,
+      selectedContentType,
+      storedReflectionLanguages,
+      storedLessonLanguages,
+    ],
   );
 
   const handleTabChange = (value: ContentType) => {
@@ -188,14 +237,13 @@ const ReflectionBodyContainer = ({
   );
 
   const languageSelection = (
-    <SelectionList
-      id="reflection-languages"
-      title={t('common:languages')}
+    <CompactSelector
+      id={`${selectedContentType}-languages`}
       items={getReflectionLanguageItems()}
       selectedValues={selectedLanguages}
       onChange={handleLanguageChange}
+      isMultiSelect
       minimumRequired={1}
-      isPortalled={false}
     />
   );
 

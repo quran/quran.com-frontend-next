@@ -1,9 +1,13 @@
+@use 'src/styles/breakpoints';
 // Main container with position relative for dropdown positioning
 .container {
   position: relative;
   display: flex;
   align-items: center;
   padding-inline-start: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    padding-inline-start: 0;
+  }
 }
 
 // Collapsed view - shows chapter verse buttons

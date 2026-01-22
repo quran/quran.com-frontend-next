@@ -14,6 +14,9 @@
   border-radius: var(--border-radius-xsmall-px);
   background-color: var(--color-background-alternative-faint);
   cursor: pointer;
+  block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  box-sizing: border-box;
 }
 
 .expandedContainer {
@@ -23,8 +26,10 @@
   padding: var(--spacing-xsmall-px);
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-xsmall-px);
-  max-inline-size: 154px;
-  max-block-size: 28px;
+  max-inline-size: calc(15 * var(--spacing-small-px) + var(--spacing-xxsmall-px));
+  block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  box-sizing: border-box;
 }
 
 .fontSizeLabel {
@@ -43,7 +48,7 @@
   padding: 0;
 
   &.disabled {
-    opacity: 0.5;
+    opacity: var(--opacity-50);
     cursor: not-allowed;
   }
 

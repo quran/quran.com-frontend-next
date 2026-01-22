@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  padding-block-start: var(--spacing-medium2-px);
+}
+
+.fontControl {
+  flex-shrink: 0;
+  max-height: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+}
+
+.languageSelector {
+  flex-shrink: 0;
+}

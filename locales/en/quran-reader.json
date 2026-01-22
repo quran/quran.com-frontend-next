@@ -55,6 +55,7 @@
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",
   "juz-beginning": "Beginning of Juz",
+  "languages": "Languages",
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
     "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
@@ -64,6 +65,7 @@
     "main-headline": "Discover powerful lessons in Surah Al-Mulk today",
     "subtitle-description": "(A free Learning Plan)"
   },
+  "lesson-languages": "Lesson Languages",
   "lessons-desc": "Read and share Quranic lessons of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "lessons-disclaimer": "Lessons are informed insights from scholars and seekers of knowledge, distinct from primary sources such as Tafsir (the scholarly interpretation of the Quran).",
   "lessons-not-available": "There are no reviewed lessons for this ayah",
@@ -107,6 +109,7 @@
   "reciter-summary": "Recitation source: With kind permission of Tafsir Center",
   "referencing": "Referencing",
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
+  "reflection-languages": "Reflection Languages",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "remove-bookmark": "Remove bookmark",
@@ -143,5 +146,6 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "selected-count": "{{count}} selected"
 }

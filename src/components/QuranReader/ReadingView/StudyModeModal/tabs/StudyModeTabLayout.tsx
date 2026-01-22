@@ -1,6 +1,7 @@
 import React, { useRef, useCallback, ReactNode } from 'react';
 
-import FontSizeControl, { FontSizeType } from '../FontSizeControl';
+import { FontSizeType } from '../FontSizeControl';
+import StudyModeControlsHeader from '../StudyModeControlsHeader';
 
 import styles from './StudyModeTabLayout.module.scss';
 
@@ -27,10 +28,7 @@ const StudyModeTabLayout: React.FC<StudyModeTabLayoutProps> = ({
 }) => {
   return (
     <div className={styles.content}>
-      <div className={styles.header}>
-        <FontSizeControl className={styles.fontControl} fontType={fontType} />
-        <div className={styles.selectionContainer}>{selectionControl}</div>
-      </div>
+      <StudyModeControlsHeader languageSelector={selectionControl} fontType={fontType} />
       <div className={styles.bodyContainer}>{body}</div>
     </div>
   );

@@ -308,5 +308,11 @@ export default {
       lessonFontScale:
         state.quranReaderStyles.lessonFontScale ?? initialState.quranReaderStyles.lessonFontScale,
     },
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedLessonLanguages:
+        state.readingPreferences.selectedLessonLanguages ??
+        initialState.readingPreferences.selectedLessonLanguages,
+    },
   }),
 };

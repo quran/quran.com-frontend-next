@@ -6,7 +6,7 @@
 
 // Use div selector for higher specificity to override ContentModal defaults
 div.contentModal {
-  padding: var(--spacing-small);
+  padding: var(--spacing-medium-px);
   display: flex;
   flex-direction: column;
   block-size: auto;
@@ -15,7 +15,6 @@ div.contentModal {
   max-inline-size: 100%;
   overflow-x: hidden;
   border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
-
   @include breakpoints.tablet {
     padding-block: var(--spacing-xlarge-px);
     padding-inline: var(--spacing-large-px);
@@ -62,6 +61,7 @@ button.navButton {
   flex-shrink: 0;
   border-radius: var(--border-radius-xsmall-px);
   padding: var(--spacing-xsmall-px);
+  max-height: var(--spacing-large-px);
   background: var(--color-background-alternative-faint);
   background-color: var(--color-background-alternative-faint);
 
@@ -120,6 +120,10 @@ button.nextButton {
 
 .modalHeader {
   padding-inline-end: 0;
+  @include breakpoints.smallerThanTablet {
+    padding:0;
+    padding-block-end: var(--spacing-medium-px);
+  }
 }
 
 .loadingContainer {
