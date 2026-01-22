@@ -28,10 +28,18 @@ type PageProps = {
   pageNumber: number;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
+  bookmarksRangeUrl: string | null;
   lang: string;
 };
 
-const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex, lang }: PageProps) => {
+const Page = ({
+  verses,
+  pageNumber,
+  quranReaderStyles,
+  pageIndex,
+  bookmarksRangeUrl,
+  lang,
+}: PageProps) => {
   const readingPreference = useSelector(selectReadingPreference);
   const { data: pageVersesQuestionsData } = useCountRangeQuestions(
     verses?.length > 0
@@ -107,6 +115,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex, lang }: PagePr
             key={key}
             isBigTextLayout={isBigTextLayout}
             quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
             pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
           />
         ))}

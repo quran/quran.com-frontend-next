@@ -31,6 +31,8 @@ export type LineProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
+  // eslint-disable-next-line react/no-unused-prop-types
+  bookmarksRangeUrl: string | null;
   pageHeaderChapterId?: string;
 };
 
@@ -141,8 +143,9 @@ const Line = ({
  *
  *  1. Check if the line keys are the same.
  *  2. Check if isBigTextLayout values are the same.
- *  3. Check if pageHeaderChapterId values are the same.
- *  4. Check if the font changed.
+ *  3. Check if bookmarksRangeUrl values are the same.
+ *  4. Check if pageHeaderChapterId values are the same.
+ *  5. Check if the font changed.
  *
  * If the above conditions are met, it's safe to assume that the result
  * of both renders are the same.
@@ -154,6 +157,7 @@ const Line = ({
 const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
   prevProps.lineKey === nextProps.lineKey &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
+  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
   prevProps.pageHeaderChapterId === nextProps.pageHeaderChapterId &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
