@@ -13,6 +13,8 @@ type BatchedCountRangeQuestionsResponse = {
   error: Error | null;
 };
 
+const BATCH_SIZE = 20;
+
 /**
  * Hook that fetches question counts in batches of 10 verses to optimize API calls.
  * When asked for a verse, it fetches a predictable range of 10 verses.
@@ -39,8 +41,8 @@ const useBatchedCountRangeQuestions = (verseKey: string): BatchedCountRangeQuest
     // Verse 1-10 → batch starts at 1
     // Verse 11-20 → batch starts at 11
     // Verse 21-30 → batch starts at 21
-    const batchStart = Math.floor((verseNumber - 1) / 10) * 10 + 1;
-    const batchEnd = Math.min(batchStart + 9, chapterData.versesCount);
+    const batchStart = Math.floor((verseNumber - 1) / BATCH_SIZE) * BATCH_SIZE + 1;
+    const batchEnd = Math.min(batchStart + BATCH_SIZE - 1, chapterData.versesCount);
 
     return {
       from: `${chapterId}:${batchStart}`,

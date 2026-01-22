@@ -31,6 +31,7 @@ const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsRespo
       );
       return normalizeQuestionsData(result);
     },
+    { dedupingInterval: Infinity },
   );
 
   return {

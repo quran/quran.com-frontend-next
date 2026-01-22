@@ -9,7 +9,6 @@ import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { QuestionsData } from '@/utils/auth/api';
 
 interface TranslationPageVerse {
   verse: Verse;
@@ -21,7 +20,6 @@ interface TranslationPageVerse {
     from: string;
     to: string;
   } | null;
-  questionsData?: Record<string, QuestionsData>;
   quranReaderDataType: QuranReaderDataType;
 }
 
@@ -32,16 +30,12 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   quranReaderStyles,
   isLastVerseInView,
   notesRange,
-  questionsData,
   quranReaderDataType,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
 
   const { data: notesCount } = useCountRangeNotes(notesRange);
-
-  // Only show Answers tab when we confirm questions exist
-  const hasQuestions = questionsData?.[verse.verseKey]?.total > 0;
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -106,7 +100,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
         hasNotes={hasNotes}
-        hasQuestions={hasQuestions}
         isFirstCellWithHeader={isFirstCellWithHeader}
       />
     </div>

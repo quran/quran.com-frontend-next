@@ -37,7 +37,6 @@ type TranslationViewCellProps = {
   verseIndex: number;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
-  hasQuestions?: boolean;
   isFirstCellWithHeader?: boolean;
 };
 
@@ -47,7 +46,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   bookmarksRangeUrl,
   hasNotes,
-  hasQuestions,
   isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
@@ -122,7 +120,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} hasQuestions={hasQuestions} />
+        <BottomActions verseKey={verse.verseKey} />
       </div>
       <Separator className={styles.verseSeparator} />
     </>
@@ -152,7 +150,6 @@ const areVersesEqual = (
 ): boolean =>
   prevProps.verse.id === nextProps.verse.id &&
   prevProps.hasNotes === nextProps.hasNotes &&
-  prevProps.hasQuestions === nextProps.hasQuestions &&
   prevProps.isFirstCellWithHeader === nextProps.isFirstCellWithHeader &&
   !verseFontChanged(
     prevProps.quranReaderStyles,

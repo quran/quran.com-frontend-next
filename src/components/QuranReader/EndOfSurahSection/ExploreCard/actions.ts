@@ -1,5 +1,4 @@
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
-import { ModalType } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LearningPlanIcon from '@/icons/learning-plan.svg';
@@ -17,9 +16,8 @@ export interface ActionButton {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   namespace?: 'quran-reader' | 'common';
   /**
-   * For Answers, use ModalType. For Tafsir/Reflections/Lessons, use StudyModeTabId
+   * All buttons now use StudyModeTabId to open StudyModeModal
    */
-  modalType?: ModalType;
   studyModeTabId?: StudyModeTabId;
   getNavigationUrl: (args: {
     chapterNumber: number;
@@ -69,7 +67,7 @@ export const ACTION_BUTTONS: ActionButton[] = [
     key: 'answers',
     icon: LightbulbIcon,
     namespace: 'common',
-    modalType: ModalType.QUESTIONS,
+    studyModeTabId: StudyModeTabId.ANSWERS,
     getNavigationUrl: ({ verseKey }) => getVerseAnswersNavigationUrl(verseKey),
   },
 ];
