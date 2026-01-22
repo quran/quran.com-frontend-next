@@ -87,6 +87,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
           classes={{
             progressbar: styles.circularProgressbar,
             progressbarText: styles.circularProgressbarText,
+            statusContainer: styles.statusContainer,
           }}
           onArrowClick={onGoalArrowClicked}
         />

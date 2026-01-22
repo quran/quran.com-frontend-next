@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import useIsMobile from '@/hooks/useIsMobile';
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
 import { setIsVisible, selectNavbar } from '@/redux/slices/navbar';
 import {
@@ -13,6 +14,7 @@ import OnboardingGroup from '@/types/OnboardingGroup';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
+  const isMobile = useIsMobile();
   const { isActive, activeStepGroup } = useOnboarding();
   const { lockVisibilityState } = useSelector(selectNavbar);
   const onDirectionChange = useCallback(
@@ -21,32 +23,38 @@ const GlobalScrollListener = () => {
       if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE) {
         return;
       }
-      /**
-       * We need to only accept when the new position is >= 0 because on mobile, if the user swipes up
-       * and the scroll bar passes the uppermost part of the viewport, the new y position becomes below
-       * zero then the browser forces the view to go to exactly 0 again so the hook detects it's
-       * a down direction and hides the navbar, context menu and audioPlayer.
-       */
-      if (newYPosition > 50 && direction === ScrollDirection.Down) {
+
+      if (isMobile) {
+        // MOBILE: Position-based logic - show "top" shape only at very top of the page
+        const TOP_THRESHOLD = 10;
+        const isAtTop = newYPosition <= TOP_THRESHOLD;
+
+        dispatch({ type: setIsExpanded.type, payload: isAtTop });
+        if (!lockVisibilityState) {
+          dispatch({ type: setIsVisible.type, payload: isAtTop });
+        }
+      } else if (newYPosition > 50 && direction === ScrollDirection.Down) {
+        // DESKTOP: Direction-based logic - hide on scroll down
         dispatch({ type: setIsExpanded.type, payload: false });
-        // Only update navbar visibility if it's not locked
         if (!lockVisibilityState) {
           dispatch({ type: setIsVisible.type, payload: false });
         }
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
+        // DESKTOP: Direction-based logic - show on scroll up
         dispatch({ type: setIsExpanded.type, payload: true });
-        // Only update navbar visibility if it's not locked
         if (!lockVisibilityState) {
           dispatch({ type: setIsVisible.type, payload: true });
         }
       }
+
+      // Reading preference switcher logic (unchanged - applies to both mobile and desktop)
       if (newYPosition > 150 && direction === ScrollDirection.Down) {
         dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: true });
       } else if (newYPosition <= 150 && direction === ScrollDirection.Up) {
         dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: false });
       }
     },
-    [activeStepGroup, dispatch, isActive, lockVisibilityState],
+    [isMobile, activeStepGroup, dispatch, isActive, lockVisibilityState],
   );
   useScrollDirection(onDirectionChange);
   return <></>;
