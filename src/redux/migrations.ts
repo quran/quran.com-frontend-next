@@ -318,4 +318,11 @@ export default {
         initialState.readingPreferences.selectedLessonLanguages,
     },
   }),
+  40: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
+    },
+  }),
 };
