@@ -3,6 +3,7 @@ import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -11,6 +12,7 @@ import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import QuestionsPageLayout from '@/components/QuestionAndAnswer/QuestionsPageLayout';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
@@ -39,6 +41,7 @@ type QuestionPageProps = {
  */
 const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, verseKey }) => {
   const { t, lang } = useTranslation('question');
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   const { type, theme: themes, body, summary } = questionData as Question;
   const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
@@ -64,7 +67,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, v
         <QuestionsPageLayout
           chapterId={String(chapterNumber)}
           verseNumber={String(verseNumber)}
-          fontScale={2}
+          fontScale={quranReaderStyles.qnaFontScale}
         >
           <QuestionHeader isPage body={body} theme={themes} type={type} />
           <Answer question={questionData} />

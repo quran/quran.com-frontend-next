@@ -4,6 +4,7 @@ import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -12,6 +13,7 @@ import QuestionsPageLayout from '@/components/QuestionAndAnswer/QuestionsPageLay
 import useQuestionsPagination from '@/hooks/useQuestionsPagination';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import { getAyahQuestions } from '@/utils/auth/api';
@@ -42,6 +44,7 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
   initialData,
 }) => {
   const { t, lang } = useTranslation('question');
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   const navigationUrl = getVerseAnswersNavigationUrl(`${chapterId}:${verseNumber}`);
   const verseKey = makeVerseKey(Number(chapterId), Number(verseNumber));
@@ -71,7 +74,11 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
         description={t('questions-meta-desc')}
       />
       <PageContainer>
-        <QuestionsPageLayout chapterId={chapterId} verseNumber={verseNumber} fontScale={2}>
+        <QuestionsPageLayout
+          chapterId={chapterId}
+          verseNumber={verseNumber}
+          fontScale={quranReaderStyles.qnaFontScale}
+        >
           <QuestionsList
             questions={questions}
             hasMore={hasMore}

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 
 import Answer from '../Answer/AnswerBody';
 import QuestionHeader from '../QuestionHeader';
 
 import styles from './QuestionsList.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
-import LoadingSpinner from '@/dls/Spinner/Spinner';
+import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import { logEvent } from '@/utils/eventLogger';
@@ -31,9 +30,14 @@ const QuestionsList: React.FC<Props> = ({
   onLoadMore,
   baseUrl,
 }) => {
-  const { t } = useTranslation();
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
   const router = useRouter();
+
+  const loadMoreTriggerRef = useInfiniteScroll({
+    hasMore,
+    isLoading: isLoadingMore,
+    onLoadMore,
+  });
 
   const onQuestionCollapseOpenChange = (
     isOpen: boolean,
@@ -48,7 +52,6 @@ const QuestionsList: React.FC<Props> = ({
       const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
       fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), router.locale);
     } else {
-      // Use provided baseUrl or fallback to router.asPath
       const urlToNavigate = baseUrl || router.asPath;
       fakeNavigate(urlToNavigate, router.locale);
     }
@@ -78,19 +81,16 @@ const QuestionsList: React.FC<Props> = ({
           }}
         </Collapsible>
       ))}
-      {hasMore && (
-        <div className={styles.loadMoreContainer}>
-          <Button
-            variant={ButtonVariant.Compact}
-            className={styles.loadMoreButton}
-            shape={ButtonShape.Pill}
-            onClick={onLoadMore}
-            isDisabled={isLoadingMore}
-          >
-            {isLoadingMore ? <LoadingSpinner /> : t('common:load-more')}
-          </Button>
-        </div>
-      )}
+
+      {hasMore &&
+        onLoadMore &&
+        (isLoadingMore ? (
+          <div className={styles.loadingContainer}>
+            <LoadingSpinner size={SpinnerSize.Large} />
+          </div>
+        ) : (
+          <div ref={loadMoreTriggerRef} className={styles.infiniteScrollTrigger} />
+        ))}
     </div>
   );
 };
