@@ -66,6 +66,7 @@ const QuranReader = ({
           [styles.mobileCollapsed]: isMobileCollapsed && !showTajweedPadding,
           [styles.mobileCollapsedTajweed]: isMobileCollapsed && showTajweedPadding,
           [styles.mobileTajweedExpanded]: isMobile && !isMobileCollapsed && showTajweedPadding,
+          [styles.desktopTajweed]: !isMobile && showTajweedPadding,
         })}
       >
         <div

@@ -29,6 +29,10 @@ $bismillahSvgInlineSizeMobile: 148px;
   inline-size: 100%;
   max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: constants.$reading-view-container-top-margin;
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: constants.$reading-view-container-top-margin-mobile;
+  }
 }
 
 .topControls {
