@@ -7,7 +7,7 @@
 
 .fontControl {
   flex-shrink: 0;
-  max-height: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
 }
 
 .languageSelector {

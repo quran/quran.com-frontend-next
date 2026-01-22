@@ -45,7 +45,11 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
   };
 
   return (
-    <div className={styles.bottomActionsContainer}>
+    <div
+      className={classNames(styles.bottomActionsContainer, {
+        [styles.noBorder]: !activeTab,
+      })}
+    >
       <div className={styles.tabsContainer}>
         {tabs
           .filter((tab) => tab.condition !== false)

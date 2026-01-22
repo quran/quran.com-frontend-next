@@ -149,7 +149,7 @@ const SearchableVerseSelector: React.FC<SearchableVerseSelectorProps> = ({
               type="button"
               className={styles.closeButton}
               onClick={handleClose}
-              aria-label="Close"
+              aria-label={t('aria.close')}
             >
               <CloseIcon />
             </button>

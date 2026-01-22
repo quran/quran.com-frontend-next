@@ -7,6 +7,10 @@
   inset-block-end: 0;
   background: var(--color-background-default);
   border-block-end: 1px solid var(--color-borders-hairline);
+
+  &.noBorder {
+    border-block-end: none;
+  }
 }
 
 .tabsContainer {

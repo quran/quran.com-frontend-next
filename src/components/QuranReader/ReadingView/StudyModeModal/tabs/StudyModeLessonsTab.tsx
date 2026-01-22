@@ -40,7 +40,7 @@ const StudyModeLessonsTab: React.FC<StudyModeLessonsTabProps> = ({ chapterId, ve
           <StudyModeTabLayout
             selectionControl={languageSelection}
             body={body}
-            fontType="reflection"
+            fontType="lesson"
           />
         )}
       />

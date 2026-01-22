@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './FontSizeControl.module.scss';
@@ -13,17 +14,20 @@ import PlusIcon from '@/icons/plus.svg';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MAXIMUM_REFLECTION_FONT_STEP,
+  MAXIMUM_LESSON_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
   increaseReflectionFontScale,
   decreaseReflectionFontScale,
+  increaseLessonFontScale,
+  decreaseLessonFontScale,
 } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-export type FontSizeType = 'tafsir' | 'reflection';
+export type FontSizeType = 'tafsir' | 'reflection' | 'lesson';
 
 interface FontSizeControlProps {
   className?: string;
@@ -47,9 +51,18 @@ const FONT_TYPE_CONFIG = {
     logKey: 'reflection_font_scale',
     defaultValue: 3,
   },
+  lesson: {
+    key: 'lessonFontScale' as const,
+    maxStep: MAXIMUM_LESSON_FONT_STEP,
+    increaseAction: increaseLessonFontScale,
+    decreaseAction: decreaseLessonFontScale,
+    logKey: 'lesson_font_scale',
+    defaultValue: 3,
+  },
 };
 
 const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType = 'tafsir' }) => {
+  const { t } = useTranslation('quran-reader');
   const [isExpanded, setIsExpanded] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const config = FONT_TYPE_CONFIG[fontType];
@@ -112,7 +125,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           type="button"
           className={styles.toggleButton}
           onClick={handleToggle}
-          aria-label="Adjust font size"
+          aria-label={t('aria.adjust-font-size')}
         >
           {/* eslint-disable-next-line i18next/no-literal-string -- "Aa" is a universal font size symbol */}
           <span className={styles.fontSizeLabel}>Aa</span>
@@ -133,7 +146,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           })}
           onClick={handleDecrease}
           disabled={currentFontScale <= MINIMUM_FONT_STEP}
-          aria-label="Decrease font size"
+          aria-label={t('aria.decrease-font-size')}
         >
           <MinusIcon />
         </button>
@@ -145,7 +158,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           })}
           onClick={handleIncrease}
           disabled={currentFontScale >= config.maxStep}
-          aria-label="Increase font size"
+          aria-label={t('aria.increase-font-size')}
         >
           <PlusIcon />
         </button>
@@ -153,7 +166,7 @@ const FontSizeControl: React.FC<FontSizeControlProps> = ({ className, fontType =
           type="button"
           className={styles.closeButton}
           onClick={handleClose}
-          aria-label="Close font size control"
+          aria-label={t('aria.close-font-size-control')}
         >
           <CloseIcon />
         </button>

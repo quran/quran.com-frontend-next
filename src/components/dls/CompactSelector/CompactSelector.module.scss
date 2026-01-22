@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   gap: calc(var(--spacing-small-px) + var(--spacing-hairline-px));
-  max-width: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
-  max-height: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
+  max-inline-size: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
+  max-block-size: calc(var(--spacing-medium2-px) + var(--spacing-xsmall-px));
   padding-block: var(--spacing-xxsmall2-px);
   padding-inline: var(--spacing-small-px);
   background-color: var(--color-background-alternative-faint);
@@ -35,8 +35,8 @@
   transition: transform var(--transition-fast);
 
   svg {
-    width: var(--spacing-xsmall-px);
-    height: var(--spacing-small2-px);
+    inline-size: var(--spacing-xsmall-px);
+    block-size: var(--spacing-small2-px);
   }
 }
 
@@ -45,9 +45,9 @@
 }
 
 .popoverContent {
-  min-width: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
-  max-width: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
-  max-height: calc(30 * var(--spacing-small-px));
+  min-inline-size: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
+  max-inline-size: calc(10 * var(--spacing-small-px) + var(--spacing-hairline-px));
+  max-block-size: calc(30 * var(--spacing-small-px));
   overflow-y: auto;
   background-color: var(--color-background-elevated-new);
   border-radius: var(--border-radius-xsmall-px);
@@ -65,8 +65,8 @@
   &::after {
     content: '';
     display: block;
-    width: calc(7 * var(--spacing-small-px) + var(--spacing-xsmall-px));
-    height: var(--spacing-hairline-px);
+    inline-size: calc(7 * var(--spacing-small-px) + var(--spacing-xsmall-px));
+    block-size: var(--spacing-hairline-px);
     background-color: var(--color-borders-hairline);
     margin-inline: auto;
     margin-block-start: var(--spacing-xxsmall-px);
@@ -84,7 +84,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall-px);
-  width: calc(100% - var(--spacing-small-px));
+  inline-size: calc(100% - var(--spacing-small-px));
   padding-block: var(--spacing-micro-px);
   padding-inline: var(--spacing-xxsmall-px);
   background: none;

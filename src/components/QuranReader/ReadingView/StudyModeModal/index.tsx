@@ -67,7 +67,7 @@ const StudyModeModal: React.FC<Props> = ({
   highlightedWordLocation,
   initialActiveTab,
 }) => {
-  useTranslation('common');
+  const { t } = useTranslation('quran-reader');
   const router = useRouter();
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
@@ -116,6 +116,27 @@ const StudyModeModal: React.FC<Props> = ({
     dispatch,
   ]);
 
+  // Helper function to update URL based on active tab
+  const updateUrlForActiveTab = useCallback(
+    (chapterId: string, verseNumber: string, tab: StudyModeTabId | null) => {
+      if (!tab) return;
+
+      const newVerseKey = `${chapterId}:${verseNumber}`;
+
+      if (tab === StudyModeTabId.TAFSIR && tafsirs.length > 0) {
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
+          router.locale || 'en',
+        );
+      } else if (tab === StudyModeTabId.REFLECTIONS) {
+        fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || 'en');
+      } else if (tab === StudyModeTabId.LESSONS) {
+        fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || 'en');
+      }
+    },
+    [tafsirs, router.locale],
+  );
+
   const verseKey = `${selectedChapterId}:${selectedVerseNumber}`;
   const queryKey = isOpen
     ? makeByVerseKeyUrl(verseKey, {
@@ -152,16 +173,18 @@ const StudyModeModal: React.FC<Props> = ({
       setSelectedChapterId(newChapterId);
       setSelectedVerseNumber('1');
       dispatch(setVerseKey(`${newChapterId}:1`));
+      updateUrlForActiveTab(newChapterId, '1', activeContentTab);
     },
-    [dispatch],
+    [dispatch, activeContentTab, updateUrlForActiveTab],
   );
 
   const handleVerseChange = useCallback(
     (newVerseNumber: string) => {
       setSelectedVerseNumber(newVerseNumber);
       dispatch(setVerseKey(`${selectedChapterId}:${newVerseNumber}`));
+      updateUrlForActiveTab(selectedChapterId, newVerseNumber, activeContentTab);
     },
-    [dispatch, selectedChapterId],
+    [dispatch, selectedChapterId, activeContentTab, updateUrlForActiveTab],
   );
 
   const handlePreviousVerse = useCallback(() => {
@@ -171,7 +194,8 @@ const StudyModeModal: React.FC<Props> = ({
     logButtonClick('study_mode_previous_verse', { verseKey: newVerseKey });
     setSelectedVerseNumber(newVerseNumber);
     dispatch(setVerseKey(newVerseKey));
-  }, [selectedVerseNumber, selectedChapterId, dispatch]);
+    updateUrlForActiveTab(selectedChapterId, newVerseNumber, activeContentTab);
+  }, [selectedVerseNumber, selectedChapterId, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const handleNextVerse = useCallback(() => {
     const currentVerseNum = Number(selectedVerseNumber);
@@ -180,7 +204,8 @@ const StudyModeModal: React.FC<Props> = ({
     logButtonClick('study_mode_next_verse', { verseKey: newVerseKey });
     setSelectedVerseNumber(newVerseNumber);
     dispatch(setVerseKey(newVerseKey));
-  }, [selectedVerseNumber, selectedChapterId, dispatch]);
+    updateUrlForActiveTab(selectedChapterId, newVerseNumber, activeContentTab);
+  }, [selectedVerseNumber, selectedChapterId, dispatch, activeContentTab, updateUrlForActiveTab]);
 
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData[Number(selectedChapterId)];
@@ -306,7 +331,7 @@ const StudyModeModal: React.FC<Props> = ({
         variant={ButtonVariant.Ghost}
         onClick={handlePreviousVerse}
         className={classNames(styles.navButton, styles.prevButton)}
-        ariaLabel="Previous verse"
+        ariaLabel={t('aria.previous-verse')}
         isDisabled={!canNavigatePrev}
         shouldFlipOnRTL={false}
       >
@@ -317,7 +342,7 @@ const StudyModeModal: React.FC<Props> = ({
         variant={ButtonVariant.Ghost}
         onClick={handleNextVerse}
         className={classNames(styles.navButton, styles.nextButton)}
-        ariaLabel="Next verse"
+        ariaLabel={t('aria.next-verse')}
         isDisabled={!canNavigateNext}
         shouldFlipOnRTL={false}
       >
@@ -328,7 +353,7 @@ const StudyModeModal: React.FC<Props> = ({
         shape={ButtonShape.Circle}
         onClick={handleClose}
         className={styles.closeButton}
-        ariaLabel="Close"
+        ariaLabel={t('aria.close')}
       >
         <CloseIcon />
       </Button>

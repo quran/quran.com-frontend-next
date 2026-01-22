@@ -46,7 +46,6 @@
     "select-lng": "Select Language",
     "sidebar-nav-close": "Close Navigation Sidebar",
     "translation-info": "View translation information",
-    "open-study-mode": "Open study mode",
     "tooltip-action": "Tooltip action"
   },
   "audio": {
@@ -442,7 +441,6 @@
     "descending": "Descending"
   },
   "stay-on-track": "🎯 Stay on track!",
-  "study-mode": "Study mode",
   "style": "Style",
   "submit": "Submit",
   "subscribe": "Subscribe",
