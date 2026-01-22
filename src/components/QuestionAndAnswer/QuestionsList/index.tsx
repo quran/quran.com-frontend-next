@@ -82,6 +82,7 @@ const QuestionsList: React.FC<Props> = ({
         <div className={styles.loadMoreContainer}>
           <Button
             variant={ButtonVariant.Compact}
+            className={styles.loadMoreButton}
             shape={ButtonShape.Pill}
             onClick={onLoadMore}
             isDisabled={isLoadingMore}

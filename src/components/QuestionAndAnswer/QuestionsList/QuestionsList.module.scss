@@ -10,10 +10,20 @@
   }
 }
 
-.loadMoreContainer {
+div.loadMoreContainer {
   display: flex;
   justify-content: center;
   padding: var(--spacing-medium);
+
+  & > .loadMoreButton {
+    &,
+    &:hover,
+    &:active,
+    &:focus-visible {
+      border: 0 solid transparent;
+      background-color: transparent;
+    }
+  }
 }
 
 div.headerClassName {
