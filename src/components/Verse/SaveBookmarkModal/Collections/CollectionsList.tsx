@@ -30,7 +30,6 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   onNewCollectionClick,
 }) => {
   const { t } = useTranslation('quran-reader');
-  const collectionT = useTranslation('collection').t;
 
   const handleCollectionKeyDown = useCallback(
     (e: React.KeyboardEvent, collection: CollectionItem): void => {
@@ -45,7 +44,7 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   return (
     <div className={styles.collectionsSection}>
       <div className={styles.collectionsHeader}>
-        <span className={styles.collectionsTitle}>{collectionT('collections')}</span>
+        <span className={styles.collectionsTitle}>{t('collections')}</span>
         <Button
           variant={ButtonVariant.Ghost}
           size={ButtonSize.Small}

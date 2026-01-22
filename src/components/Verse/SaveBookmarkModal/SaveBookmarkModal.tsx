@@ -8,7 +8,7 @@ import useSaveBookmarkModal from './useSaveBookmarkModal';
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import { ReadingBookmarkType } from '@/types/Bookmark';
-import { WordVerse } from '@/types/Word';
+import Word from '@/types/Word';
 
 export { ReadingBookmarkType as SaveBookmarkType };
 
@@ -16,7 +16,7 @@ interface SaveBookmarkModalProps {
   isOpen: boolean;
   onClose: () => void;
   type: ReadingBookmarkType;
-  verse?: WordVerse;
+  verse?: Word;
   pageNumber?: number;
 }
 
@@ -48,9 +48,10 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
     isPage,
     verseKey,
     modalTitle,
-    currentReadingBookmark,
+    resourceBookmark,
+    readingBookmarkData,
+    mutateReadingBookmark,
     setNewCollectionName,
-    handleUpdateReadingBookmark,
     handleReadingBookmarkChanged,
     handleCollectionToggle,
     handleNewCollectionClick,
@@ -94,11 +95,12 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
             isPage={isPage}
             verseKey={verseKey}
             pageNumber={pageNumber}
-            currentReadingBookmark={currentReadingBookmark}
             userIsLoggedIn={userIsLoggedIn}
             mushafId={mushafId}
             lang={lang}
-            onUpdateReadingBookmark={handleUpdateReadingBookmark}
+            resourceBookmark={resourceBookmark}
+            readingBookmarkData={readingBookmarkData}
+            mutateReadingBookmark={mutateReadingBookmark}
             onReadingBookmarkChanged={handleReadingBookmarkChanged}
             sortedCollections={sortedCollections}
             isDataReady={isDataReady}

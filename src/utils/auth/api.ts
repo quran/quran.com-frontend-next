@@ -9,6 +9,7 @@ import { prepareGenerateMediaFileRequestData } from '../media/utils';
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import { MappedPage, MappedVerse, MapMushafParams } from './types/MushafMapping';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
@@ -96,7 +97,7 @@ import {
   makeGetQuranicWeekUrl,
   makeTranslationFeedbackUrl,
   GetCoursesQueryParams,
-  makeUpdateBookmarkUrl,
+  makeMapUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -282,6 +283,7 @@ type AddBookmarkParams = {
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
+  isReading?: boolean | null;
 };
 
 export const addBookmark = async ({
@@ -289,13 +291,31 @@ export const addBookmark = async ({
   mushafId,
   type,
   verseNumber,
-}: AddBookmarkParams): Promise<Bookmark> =>
-  postRequest(makeBookmarksUrl(mushafId), {
+  isReading,
+}: AddBookmarkParams): Promise<Bookmark> => {
+  // Ensure all required fields are present
+  if (!key || !mushafId || !type) {
+    throw new Error('Missing required fields: key, mushafId, and type are required');
+  }
+
+  const payload: Record<string, any> = {
     key,
     mushaf: mushafId,
     type,
-    verseNumber,
-  });
+  };
+
+  // Include verseNumber if provided (required for ayah bookmarks)
+  if (verseNumber !== undefined) {
+    payload.verseNumber = verseNumber;
+  }
+
+  // Include isReading if provided
+  if (isReading !== undefined) {
+    payload.isReading = isReading;
+  }
+
+  return postRequest(makeBookmarksUrl(mushafId), payload);
+};
 
 export const getPageBookmarks = async (
   mushafId: number,
@@ -310,7 +330,13 @@ export const getBookmark = async (
   key: number,
   type: BookmarkType,
   verseNumber?: number,
-): Promise<Bookmark> => privateFetcher(makeBookmarkUrl(mushafId, key, type, verseNumber));
+  isReading?: boolean,
+): Promise<Bookmark> => {
+  const url = makeBookmarkUrl(mushafId, key, type, verseNumber);
+  const queryParams = isReading !== undefined ? { isReading: String(isReading) } : {};
+  const fullUrl = queryParams.isReading ? `${url}?isReading=${queryParams.isReading}` : url;
+  return privateFetcher(fullUrl);
+};
 
 export const getBookmarkCollections = async (
   mushafId: number,
@@ -468,11 +494,97 @@ export const deleteBookmarkById = async (bookmarkId: string) => {
   return deleteRequest(makeDeleteBookmarkUrl(bookmarkId));
 };
 
-export const updateBookmarkById = async (
-  bookmarkId: string,
-  payload: { isInDefaultCollection?: boolean },
-) => {
-  return patchRequest<Bookmark>(makeUpdateBookmarkUrl(bookmarkId), payload);
+/**
+ * Get the user's reading bookmark by querying bookmarks with isReading=true
+ * Note: This requires a mushafId and type, so we query for both Ayah and Page types
+ * and return the first one found (there should only be one reading bookmark)
+ * @param {number} mushafId - The mushafId to get the reading bookmark for
+ * @returns {Promise<Bookmark | null>} The reading bookmark
+ */
+export const getReadingBookmark = async (mushafId: number): Promise<Bookmark | null> => {
+  try {
+    // Try to get reading bookmark for Ayah type
+    const ayahBookmark = await privateFetcher<Bookmark | Bookmark[]>(
+      `${makeBookmarksUrl(mushafId, 1, BookmarkType.Ayah)}&isReading=true`,
+    );
+    // Backend returns single object when isReading=true, or array otherwise
+    // Validate it's a proper bookmark object before returning
+    if (ayahBookmark && !Array.isArray(ayahBookmark) && ayahBookmark.key && ayahBookmark.type) {
+      return ayahBookmark;
+    }
+    if (ayahBookmark && Array.isArray(ayahBookmark) && ayahBookmark.length > 0) {
+      const bookmark = ayahBookmark[0];
+      if (bookmark && bookmark.key && bookmark.type) {
+        return bookmark;
+      }
+    }
+
+    // Try to get reading bookmark for Page type
+    const pageBookmark = await privateFetcher<Bookmark | Bookmark[]>(
+      `${makeBookmarksUrl(mushafId, 1, BookmarkType.Page)}&isReading=true`,
+    );
+    if (pageBookmark && !Array.isArray(pageBookmark) && pageBookmark.key && pageBookmark.type) {
+      return pageBookmark;
+    }
+    if (pageBookmark && Array.isArray(pageBookmark) && pageBookmark.length > 0) {
+      const bookmark = pageBookmark[0];
+      if (bookmark && bookmark.key && bookmark.type) {
+        return bookmark;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Set a bookmark as reading bookmark by using addBookmark with isReading=true
+ * @param {number} key - The key of the bookmark to set as reading bookmark
+ * @param {number} mushafId - The mushafId of the bookmark to set as reading bookmark
+ * @param {BookmarkType} type - The type of the bookmark to set as reading bookmark
+ * @param {number} verseNumber - The verse number of the bookmark to set as reading bookmark
+ * @returns {Promise<Bookmark>} The reading bookmark
+ */
+export const setReadingBookmark = async (
+  key: number,
+  mushafId: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): Promise<Bookmark> => {
+  return addBookmark({
+    key,
+    mushafId,
+    type,
+    verseNumber,
+    isReading: true,
+  });
+};
+
+/**
+ * Unset the reading bookmark by using addBookmark with isReading=false
+ * The backend will find and unset the bookmark with isReading=true
+ * @param {number} key - The key of the bookmark (chapterId for ayah, pageNumber for page)
+ * @param {number} mushafId - The mushafId
+ * @param {BookmarkType} type - The type of the bookmark
+ * @param {number} verseNumber - The verse number (for ayah type)
+ * @returns {Promise<void>}
+ * @deprecated Use addBookmark directly with isReading=false instead
+ */
+export const unsetReadingBookmark = async (
+  key: number,
+  mushafId: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): Promise<void> => {
+  await addBookmark({
+    key,
+    mushafId,
+    type,
+    verseNumber,
+    isReading: false,
+  });
 };
 
 export const getBookmarksByCollectionId = async (
@@ -713,3 +825,9 @@ export const privateFetcher = configureRefreshFetch({
   refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });
+
+export const mapMushaf = <T = MappedPage | MappedVerse>(
+  params: MapMushafParams,
+): Promise<{ success: boolean; data: T }> => {
+  return postRequest<{ success: boolean; data: T }>(makeMapUrl(), params);
+};

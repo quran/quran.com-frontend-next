@@ -15,8 +15,8 @@ vi.mock('swr', () => ({
     if (typeof key === 'string' && key.startsWith('verse-to-page-')) {
       return { data: (globalThis as any).mockSWRPage };
     }
-    if (typeof key === 'string' && key.includes('preferences')) {
-      return { data: (globalThis as any).mockUserPreferences };
+    if (typeof key === 'string' && key.startsWith('reading-bookmark-')) {
+      return { data: (globalThis as any).mockReadingBookmark };
     }
     return { data: undefined };
   },
@@ -66,6 +66,9 @@ vi.mock('@/utils/verse', () => ({
   getVersePageNumber: vi.fn(async () => 3),
   getPageFirstVerseKey: vi.fn(async () => ({ surahNumber: 2, verseNumber: 255 })),
 }));
+vi.mock('@/utils/auth/api', () => ({
+  getReadingBookmark: vi.fn(async () => (globalThis as any).mockReadingBookmark),
+}));
 
 describe('ReadingSection', () => {
   beforeEach(() => cleanup());
@@ -96,10 +99,12 @@ describe('ReadingSection', () => {
     });
   });
 
-  it('uses logged-in user preferences over guest bookmark', async () => {
+  it('uses logged-in user reading bookmark over guest bookmark', async () => {
     (globalThis as any).mockSWRPage = 9;
-    (globalThis as any).mockUserPreferences = {
-      readingBookmark: { bookmark: 'ayah:60:3' },
+    (globalThis as any).mockReadingBookmark = {
+      type: 'ayah',
+      key: 60,
+      verseNumber: 3,
     };
     (globalThis as any).mockState = {
       current: {

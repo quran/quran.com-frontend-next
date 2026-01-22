@@ -6,7 +6,7 @@ import SetBookmarkSection from './SetBookmarkSection';
 import useReadingBookmark from './useReadingBookmark';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { ReadingBookmarkType } from '@/types/Bookmark';
+import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
 
 export { ReadingBookmarkType };
 
@@ -17,8 +17,6 @@ interface ReadingBookmarkSectionProps {
   verseKey?: string;
   /** Page number (required for page type) */
   pageNumber?: number;
-  /** Current reading bookmark value (format: "ayah:chapterId:verseNumber" or "page:pageNumber") */
-  currentReadingBookmark?: string | null;
   /** Callback when reading bookmark is successfully set (for parent to invalidate caches) */
   onBookmarkChanged?: () => void | Promise<void>;
   /** Optional CSS class name for the root element */
@@ -29,13 +27,13 @@ interface ReadingBookmarkSectionProps {
   isLoggedIn?: boolean;
   /** Mushaf ID for logged-in users */
   mushafId?: number;
-  /** API function to update user preference (for logged-in users) */
-  onUpdateUserPreference?: (
-    key: string,
-    value: string,
-    group: string,
-    mushafId: number,
-  ) => Promise<void>;
+  /** Actual reading bookmark data (for logged-in users) */
+  readingBookmarkData?: Bookmark | null;
+  /** Mutate function for optimistic updates */
+  mutateReadingBookmark?: (
+    data?: Bookmark | null | Promise<Bookmark | null>,
+    opts?: { revalidate?: boolean },
+  ) => Promise<Bookmark | null | undefined>;
 }
 
 /**
@@ -49,13 +47,13 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
   type,
   verseKey,
   pageNumber,
-  currentReadingBookmark,
   onBookmarkChanged,
   className,
   lang,
   isLoggedIn = false,
   mushafId,
-  onUpdateUserPreference,
+  readingBookmarkData,
+  mutateReadingBookmark,
 }) => {
   const toast = useToast();
   const {
@@ -75,12 +73,12 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
     type,
     verseKey,
     pageNumber,
-    currentReadingBookmark,
     onBookmarkChanged,
     lang,
     isLoggedIn,
     mushafId,
-    onUpdateUserPreference,
+    readingBookmarkData,
+    mutateReadingBookmark,
   });
 
   useEffect(() => {

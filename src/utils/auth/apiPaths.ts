@@ -213,7 +213,6 @@ export const makeAllCollectionsItemsUrl = (queryParams: BookmarkByCollectionIdQu
   makeUrl(`collections/all`, queryParams);
 
 export const makeDeleteBookmarkUrl = (bookmarkId: string) => makeUrl(`bookmarks/${bookmarkId}`);
-export const makeUpdateBookmarkUrl = (bookmarkId: string) => makeUrl(`bookmarks/${bookmarkId}`);
 
 export const makeBookmarksRangeUrl = (
   mushafId: number,
@@ -312,3 +311,5 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
  * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
+
+export const makeMapUrl = (): string => makeUrl('mushaf/map');

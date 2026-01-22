@@ -1,23 +1,18 @@
 import { useMemo } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import useGlobalReadingBookmark from '@/hooks/auth/useGlobalReadingBookmark';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
-import { WordVerse } from '@/types/Word';
+import Word from '@/types/Word';
 import { getMushafId } from '@/utils/api';
-import { getBookmark, getBookmarkCollections, getUserPreferences } from '@/utils/auth/api';
-import {
-  makeBookmarkCollectionsUrl,
-  makeBookmarkUrl,
-  makeUserPreferencesUrl,
-} from '@/utils/auth/apiPaths';
+import { getBookmark, getBookmarkCollections } from '@/utils/auth/api';
+import { makeBookmarkCollectionsUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { parseReadingBookmark } from '@/utils/bookmark';
 
 interface UseBookmarkStateResult {
   isVerseBookmarked: boolean;
@@ -34,32 +29,18 @@ interface UseBookmarkStateResult {
  * @param {WordVerse} verse - The verse to check bookmark status for
  * @returns {UseBookmarkStateResult} Bookmark state and loading status
  */
-const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
+const useBookmarkState = (verse: Word): UseBookmarkStateResult => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
   const isGuest = !isLoggedIn();
 
-  // Fetch user preferences for reading bookmark (logged-in users)
-  const { data: userPreferences, isValidating: isReadingBookmarkLoading } = useSWR(
-    !isGuest ? makeUserPreferencesUrl() : null,
-    getUserPreferences,
-  );
+  // Use global reading bookmark hook (singleton pattern)
+  const { readingBookmark, isLoading: isReadingBookmarkLoading } =
+    useGlobalReadingBookmark(mushafId);
 
-  const readingBookmark = isGuest
-    ? guestReadingBookmark
-    : (userPreferences?.readingBookmark?.bookmark as string);
-
-  const isVerseReadingBookmark = useMemo((): boolean => {
-    if (readingBookmark?.startsWith?.(BookmarkType.Ayah)) {
-      const { surahNumber, verseNumber } = parseReadingBookmark(readingBookmark);
-      return surahNumber === Number(verse.chapterId) && verseNumber === Number(verse.verseNumber);
-    }
-
-    return false;
-  }, [readingBookmark, verse]);
-
+  // Fetch bookmark for the current verse (logged-in users)
   const { data: bookmark, isValidating: isVerseBookmarkedLoading } = useSWRImmutable(
     !isGuest
       ? makeBookmarkUrl(
@@ -79,6 +60,31 @@ const useBookmarkState = (verse: WordVerse): UseBookmarkStateResult => {
       return response;
     },
   );
+
+  // For logged-in users, compare readingBookmark with current verse directly
+  // For guests, use the guest reading bookmark from Redux
+  const isVerseReadingBookmark = useMemo((): boolean => {
+    if (isGuest) {
+      // Guest: check if guest reading bookmark matches this verse
+      if (guestReadingBookmark?.type === BookmarkType.Ayah) {
+        return (
+          guestReadingBookmark.key === Number(verse.chapterId) &&
+          guestReadingBookmark.verseNumber === Number(verse.verseNumber)
+        );
+      }
+      return false;
+    }
+
+    // Logged-in: check if reading bookmark matches this verse
+    if (readingBookmark && readingBookmark.type === BookmarkType.Ayah) {
+      return (
+        readingBookmark.key === Number(verse.chapterId) &&
+        readingBookmark.verseNumber === Number(verse.verseNumber)
+      );
+    }
+
+    return false;
+  }, [isGuest, guestReadingBookmark, readingBookmark, verse.chapterId, verse.verseNumber]);
 
   const { data: bookmarkCollectionIdsData, isValidating: isVerseCollectionBookmarkedLoading } =
     useSWRImmutable(

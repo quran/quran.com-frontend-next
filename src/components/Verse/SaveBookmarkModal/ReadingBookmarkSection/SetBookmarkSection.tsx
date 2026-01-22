@@ -80,8 +80,8 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
     [onUndo],
   );
 
-  const showUndoButton =
-    showNewBookmark && previousBookmarkValue !== undefined && previousBookmarkValue !== null;
+  // Show undo as long as we have a previous value to restore, regardless of pending state
+  const showUndoButton = previousBookmarkValue !== undefined;
 
   return (
     <div
@@ -106,7 +106,7 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
         <div className={styles.readingBookmarkInfo}>
           {showNewBookmark ? (
             <>
-              <span className={styles.label}>{t('new')}:</span>
+              <span className={styles.label}>{t('current')}:</span>
               <span className={styles.value}>{resourceDisplayName}</span>
               {showUndoButton && (
                 <button
@@ -126,6 +126,17 @@ const SetBookmarkSection: React.FC<SetBookmarkSectionProps> = ({
                 {effectiveCurrentBookmark ? t('current') : t('none')}:
               </span>
               <span className={styles.value}>{displayReadingBookmark || t('no-bookmark-set')}</span>
+              {showUndoButton && (
+                <button
+                  type="button"
+                  className={styles.undoButton}
+                  onClick={handleUndoClick}
+                  disabled={isLoading}
+                  aria-label={t('undo')}
+                >
+                  ({t('undo')})
+                </button>
+              )}
             </>
           )}
         </div>

@@ -10,6 +10,10 @@ interface Bookmark {
    * Undefined when collection membership hasn't been determined yet.
    */
   isInDefaultCollection?: boolean;
+  /**
+   * Indicates whether this bookmark is a reading bookmark.
+   */
+  isReading?: boolean;
 }
 
 export default Bookmark;

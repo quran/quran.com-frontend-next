@@ -3,30 +3,23 @@ import { useMemo } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import useGlobalReadingBookmark from '@/hooks/auth/useGlobalReadingBookmark';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import BookmarkType from '@/types/BookmarkType';
 import { CollectionListSortOption } from '@/types/CollectionSortOptions';
-import { WordVerse } from '@/types/Word';
-import { getMushafId } from '@/utils/api';
-import {
-  getBookmark,
-  getBookmarkCollections,
-  getCollectionsList,
-  getUserPreferences,
-} from '@/utils/auth/api';
+import Word from '@/types/Word';
+import { getBookmark, getBookmarkCollections, getCollectionsList } from '@/utils/auth/api';
 import {
   makeBookmarkCollectionsUrl,
-  makeBookmarksUrl,
   makeBookmarkUrl,
   makeCollectionsUrl,
-  makeUserPreferencesUrl,
 } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 
 interface UseSaveBookmarkDataParams {
   isVerse: boolean;
   isPage: boolean;
-  verse: WordVerse | undefined;
+  verse: Word | undefined;
   pageNumber: number | undefined;
   mushafId: number;
   quranReaderStyles: QuranReaderStyles;
@@ -44,20 +37,12 @@ export const useSaveBookmarkData = ({
   verse,
   pageNumber,
   mushafId,
-  quranReaderStyles,
 }: UseSaveBookmarkDataParams) => {
   const { mutate: globalSWRMutate } = useSWRConfig();
 
-  // Fetch user preferences
-  const { data: userPreferences } = useSWR(
-    isLoggedIn() ? makeUserPreferencesUrl() : null,
-    getUserPreferences,
-  );
-
-  const currentReadingBookmark = useMemo(() => {
-    if (!userPreferences?.readingBookmark?.bookmark) return null;
-    return userPreferences.readingBookmark.bookmark;
-  }, [userPreferences]);
+  // Use global reading bookmark hook (singleton pattern)
+  const { readingBookmark: readingBookmarkData, mutate: mutateReadingBookmark } =
+    useGlobalReadingBookmark(mushafId);
 
   // Fetch bookmark URL based on type
   const bookmarkUrl = useMemo(() => {
@@ -128,27 +113,26 @@ export const useSaveBookmarkData = ({
       },
     );
 
-  const mutateAllData = () => {
-    mutateResourceBookmark();
-    mutateCollectionListData();
-    mutateBookmarkCollectionIdsData();
-    globalSWRMutate(
-      makeBookmarksUrl(
-        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-      ),
-    );
-    globalSWRMutate(makeUserPreferencesUrl());
+  const mutateAllData = async () => {
+    // Refetch all bookmark-related data with revalidation
+    await Promise.all([
+      mutateResourceBookmark(),
+      mutateCollectionListData(),
+      mutateBookmarkCollectionIdsData(),
+      // Revalidate reading bookmark (calling without args keeps current data while refetching)
+      mutateReadingBookmark(),
+    ]);
   };
 
   return {
-    userPreferences,
-    currentReadingBookmark,
+    readingBookmarkData,
     resourceBookmark,
     collectionListData,
     bookmarkCollectionIdsData,
     mutateResourceBookmark,
     mutateCollectionListData,
     mutateBookmarkCollectionIdsData,
+    mutateReadingBookmark,
     mutateAllData,
     globalSWRMutate,
   };

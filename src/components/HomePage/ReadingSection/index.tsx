@@ -16,19 +16,19 @@ import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import useGlobalReadingBookmark from '@/hooks/auth/useGlobalReadingBookmark';
+import useMappedBookmark from '@/hooks/useMappedBookmark';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectUserState } from '@/redux/slices/session';
 import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
-import { getUserPreferences } from '@/utils/auth/api';
-import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
-import { parseReadingBookmark, parsePageReadingBookmark } from '@/utils/bookmark';
+import { GuestReadingBookmark } from '@/utils/bookmark';
 import { logButtonClick } from '@/utils/eventLogger';
 import { MY_QURAN_URL } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
-import { getPageFirstVerseKey, getVersePageNumber } from '@/utils/verse';
+import { getPageFirstVerseKey } from '@/utils/verse';
 
 interface Props {}
 
@@ -39,73 +39,83 @@ const ReadingSection: React.FC<Props> = () => {
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
-  // Fetch user preferences for reading bookmark (logged-in users)
-  const { data: userPreferences } = useSWR(
-    !isGuest ? makeUserPreferencesUrl() : null,
-    getUserPreferences,
-  );
+  // Use global reading bookmark hook (singleton pattern)
+  const { readingBookmark: readingBookmarkData } = useGlobalReadingBookmark(mushafId);
 
   // Fetch recently read verses as fallback (for all users)
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys(false);
 
-  const readingBookmark = isGuest
-    ? guestReadingBookmark
-    : userPreferences?.readingBookmark?.bookmark;
+  // Get effective bookmark data from guest or logged-in state
+  const effectiveBookmark: GuestReadingBookmark | null = useMemo(() => {
+    if (isGuest) {
+      return guestReadingBookmark;
+    }
+    if (!readingBookmarkData) return null;
+    return {
+      key: readingBookmarkData.key,
+      type: readingBookmarkData.type,
+      verseNumber: readingBookmarkData.verseNumber,
+      mushafId,
+    };
+  }, [isGuest, guestReadingBookmark, readingBookmarkData, mushafId]);
 
-  const parsed = useMemo(() => {
-    return parseReadingBookmark(readingBookmark, recentlyReadVerseKeys);
-  }, [readingBookmark, recentlyReadVerseKeys]);
+  // Use the reusable mapping hook for cross-mushaf bookmark handling
+  const {
+    needsMapping: needsCrossMushafMapping,
+    effectivePageNumber,
+    effectiveAyahVerseKey,
+    mappedPageData,
+    bookmarkMushafId,
+  } = useMappedBookmark({
+    bookmark: effectiveBookmark,
+    currentMushafId: mushafId,
+    swrKeyPrefix: 'map-bookmark-home',
+  });
 
-  const storedPageNumberFromBookmark = useMemo(
-    () => parsePageReadingBookmark(readingBookmark)?.pageNumber,
-    [readingBookmark],
-  );
+  const isPageBookmark = effectiveBookmark?.type === BookmarkType.Page;
+
+  // Get page number from page bookmark
+  const storedPageNumber = isPageBookmark ? effectiveBookmark?.key : undefined;
+
+  // For page bookmarks, fetch first verse of that page (using stored mushafId for guests)
+  const needsPageMapping = isPageBookmark && storedPageNumber && needsCrossMushafMapping;
+  const isMappingReady = !needsPageMapping || !!mappedPageData;
 
   const { data: firstVerseOfStoredPage } = useSWR(
-    !parsed.surahNumber && storedPageNumberFromBookmark
-      ? `first-verse-${storedPageNumberFromBookmark}-${mushafId}`
+    storedPageNumber && isMappingReady
+      ? `first-verse-${storedPageNumber}-${bookmarkMushafId}`
       : null,
     async () => {
-      if (!storedPageNumberFromBookmark) return null;
-      return getPageFirstVerseKey(storedPageNumberFromBookmark, mushafId);
+      // Optimization: use mapped data if available
+      if (mappedPageData?.firstVerseKey) {
+        const [surah, verse] = mappedPageData.firstVerseKey.split(':');
+        return { surahNumber: Number(surah), verseNumber: Number(verse) };
+      }
+      if (!storedPageNumber) return null;
+      return getPageFirstVerseKey(storedPageNumber, bookmarkMushafId);
     },
   );
 
-  const effectiveSurahNumber = parsed.surahNumber ?? firstVerseOfStoredPage?.surahNumber ?? 1;
+  // Derive effective surah/verse (use mapped values if available)
+  const effectiveSurahNumber =
+    effectiveAyahVerseKey?.surahNumber ??
+    firstVerseOfStoredPage?.surahNumber ??
+    recentlyReadVerseKeys?.[0]?.surah ??
+    1;
   const effectiveVerseNumber =
-    typeof parsed.verseNumber === 'number'
-      ? parsed.verseNumber
-      : firstVerseOfStoredPage?.verseNumber;
+    effectiveAyahVerseKey?.verseNumber ??
+    firstVerseOfStoredPage?.verseNumber ??
+    recentlyReadVerseKeys?.[0]?.ayah;
 
-  const { data: resolvedPageNumber } = useSWR(
-    effectiveVerseNumber
-      ? `verse-to-page-${effectiveSurahNumber}-${effectiveVerseNumber}-${mushafId}`
-      : null,
-    async () => {
-      if (!effectiveVerseNumber) return null;
-      return getVersePageNumber(
-        { surahNumber: effectiveSurahNumber, verseNumber: effectiveVerseNumber },
-        mushafId,
-      );
-    },
-  );
+  // Resolve page number for current mushaf (use effectivePageNumber from hook)
+  const resolvedPageNumber = isPageBookmark ? effectivePageNumber ?? undefined : undefined;
 
-  // Derive effective surah/verse from bookmark or first verse of stored page
-  // Resolve the page for the current mushaf using the effective surah/verse
-  // Applies to both guest and logged-in users
-  const surahNumber = effectiveSurahNumber;
-  const verseNumber = effectiveVerseNumber ?? null;
-  const isPageBookmark =
-    typeof readingBookmark === 'string' && readingBookmark.startsWith(BookmarkType.Page);
+  const surahNumber = Number(effectiveSurahNumber);
+  const verseNumber = effectiveVerseNumber ? Number(effectiveVerseNumber) : null;
+  const pageNumber = resolvedPageNumber;
 
-  const pageNumber = isPageBookmark
-    ? resolvedPageNumber ?? storedPageNumberFromBookmark ?? undefined
-    : undefined;
-
-  // Determine if user has reading sessions (either reading bookmark or recently read verses)
-  const hasReadingBookmark = isGuest
-    ? !!guestReadingBookmark
-    : !!userPreferences?.readingBookmark?.bookmark;
+  // Determine if user has reading sessions
+  const hasReadingBookmark = !!effectiveBookmark;
   const hasRecentlyReadVerses = recentlyReadVerseKeys && recentlyReadVerseKeys.length > 0;
   const hasReadingSessions = hasReadingBookmark || hasRecentlyReadVerses;
 

@@ -7,19 +7,16 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { CollectionItem } from './Collections/CollectionsListItem';
 import { useCollectionsState } from './Collections/hooks/useCollectionsState';
-import { useCollectionToggleHandler } from './Collections/hooks/useCollectionToggleHandler';
-import { useFavoritesToggle } from './Collections/hooks/useFavoritesToggle';
+import { useCollectionToggle } from './Collections/hooks/useCollectionToggle';
 import { useSaveBookmarkData } from './useSaveBookmarkData';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { logError } from '@/lib/newrelic';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import PreferenceGroup from '@/types/auth/PreferenceGroup';
-import { ReadingBookmarkType } from '@/types/Bookmark';
+import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
-import { WordVerse } from '@/types/Word';
+import Word from '@/types/Word';
 import { getMushafId } from '@/utils/api';
-import { addCollection, addCollectionBookmark, addOrUpdateUserPreference } from '@/utils/auth/api';
+import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { getErrorStatus } from '@/utils/auth/errors';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -28,7 +25,7 @@ import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/na
 
 interface UseSaveBookmarkModalOptions {
   type: ReadingBookmarkType;
-  verse?: WordVerse;
+  verse?: Word;
   pageNumber?: number;
   onClose: () => void;
 }
@@ -49,16 +46,24 @@ interface UseSaveBookmarkModalReturn {
   isPage: boolean;
   verseKey: string;
   modalTitle: string;
-  currentReadingBookmark: string | null | undefined;
+  resourceBookmark:
+    | {
+        verseNumber: number;
+        type: BookmarkType;
+        key: number;
+        id: string;
+        isReading?: boolean | null;
+      }
+    | null
+    | undefined;
+  readingBookmarkData?: Bookmark | null;
+  mutateReadingBookmark?: (
+    data?: Bookmark | null | Promise<Bookmark | null>,
+    opts?: { revalidate?: boolean },
+  ) => Promise<Bookmark | null | undefined>;
 
   // Handlers
   setNewCollectionName: (name: string) => void;
-  handleUpdateReadingBookmark: (
-    key: string,
-    value: string,
-    group: string,
-    id: number,
-  ) => Promise<void>;
   handleReadingBookmarkChanged: () => Promise<void>;
   handleFavoritesToggle: () => Promise<void>;
   handleCollectionToggle: (collection: CollectionItem, checked: boolean) => Promise<void>;
@@ -122,7 +127,7 @@ const useSaveBookmarkModal = ({
   // Handler hooks
   const verseKey = verse ? `${verse.chapterId}:${verse.verseNumber}` : '';
 
-  const favoritesToggle = useFavoritesToggle({
+  const { handleToggleCollection, handleToggleFavorites } = useCollectionToggle({
     verse,
     pageNumber,
     mushafId,
@@ -132,15 +137,6 @@ const useSaveBookmarkModal = ({
     isResourceBookmarked: !!bookmarkData.resourceBookmark,
     mutateResourceBookmark: bookmarkData.mutateResourceBookmark,
     mutateBookmarkCollectionIdsData: bookmarkData.mutateBookmarkCollectionIdsData,
-    onToast: (message, status) => toast(message, { status }),
-  });
-
-  const { handleAddToCollection, handleRemoveFromCollection } = useCollectionToggleHandler({
-    verse,
-    mushafId,
-    verseKey,
-    resourceBookmark: bookmarkData.resourceBookmark,
-    bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
     onMutate: bookmarkData.mutateAllData,
   });
 
@@ -153,34 +149,18 @@ const useSaveBookmarkModal = ({
     : t('save-page', { pageNumber: localizedPageNumber });
 
   // Handlers
-  const handleUpdateReadingBookmark = useCallback(
-    async (key: string, value: string, group: string, id: number): Promise<void> => {
-      try {
-        await addOrUpdateUserPreference(key, value, group as PreferenceGroup, id);
-      } catch (error) {
-        logError('Failed to update reading bookmark preference:', error);
-        toast(commonT('error.general'), { status: ToastStatus.Error });
-        throw error;
-      }
-    },
-    [commonT, toast],
-  );
-
   const handleReadingBookmarkChanged = useCallback(async (): Promise<void> => {
-    bookmarkData.mutateAllData();
+    await bookmarkData.mutateAllData();
   }, [bookmarkData]);
 
   const handleFavoritesToggle = useCallback(async (): Promise<void> => {
     setIsTogglingFavorites(true);
     try {
-      if (isVerse && bookmarkData.resourceBookmark) {
-        await favoritesToggle.handleVerseBookmarkToggle();
-      } else if (isPage) {
-        await favoritesToggle.handlePageBookmarkToggle();
-      } else if (isVerse && !bookmarkData.resourceBookmark && verse) {
-        await favoritesToggle.handleNewVerseBookmark();
-      }
-      bookmarkData.mutateAllData();
+      // Get the current favorites state from sortedCollections
+      const favoritesCollection = sortedCollections.find((c) => c.isDefault);
+      const isCurrentlyInFavorites = favoritesCollection?.checked ?? false;
+      // Pass the opposite (new state after toggle)
+      await handleToggleFavorites(!isCurrentlyInFavorites);
     } catch (error) {
       const status = getErrorStatus(error);
       const errorMessage =
@@ -189,7 +169,7 @@ const useSaveBookmarkModal = ({
     } finally {
       setIsTogglingFavorites(false);
     }
-  }, [isVerse, isPage, bookmarkData, favoritesToggle, verse, commonT, toast]);
+  }, [handleToggleFavorites, sortedCollections, commonT, toast]);
 
   const handleCollectionToggle = useCallback(
     async (collection: CollectionItem, checked: boolean): Promise<void> => {
@@ -198,13 +178,13 @@ const useSaveBookmarkModal = ({
         return;
       }
 
-      if (checked) {
-        await handleAddToCollection(collection.id, collection.name);
-      } else {
-        await handleRemoveFromCollection(collection.id, collection.name);
-      }
+      // For regular collections, use the unified handler
+      // The 'checked' parameter is the NEW state (after toggle), so we need to pass the CURRENT state
+      // If checked is true (will be in collection), then currently it's NOT in collection
+      // If checked is false (will not be in collection), then currently it IS in collection
+      await handleToggleCollection(collection.id, collection.name, !checked);
     },
-    [handleFavoritesToggle, handleAddToCollection, handleRemoveFromCollection],
+    [handleFavoritesToggle, handleToggleCollection],
   );
 
   const handleNewCollectionClick = useCallback((): void => {
@@ -289,11 +269,12 @@ const useSaveBookmarkModal = ({
     isPage,
     verseKey,
     modalTitle,
-    currentReadingBookmark: bookmarkData.currentReadingBookmark,
+    resourceBookmark: bookmarkData.resourceBookmark,
+    readingBookmarkData: bookmarkData.readingBookmarkData,
+    mutateReadingBookmark: bookmarkData.mutateReadingBookmark,
 
     // Handlers
     setNewCollectionName,
-    handleUpdateReadingBookmark,
     handleReadingBookmarkChanged,
     handleFavoritesToggle,
     handleCollectionToggle,

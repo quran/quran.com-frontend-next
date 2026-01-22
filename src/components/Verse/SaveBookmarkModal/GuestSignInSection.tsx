@@ -17,7 +17,6 @@ interface GuestSignInSectionProps {
  * @returns {React.FC<GuestSignInSectionProps>} The GuestSignInSection component
  */
 const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => {
-  const commonT = useTranslation('common').t;
   const { t } = useTranslation('quran-reader');
   const [showSignInPrompt, setShowSignInPrompt] = useState(false);
 
@@ -32,7 +31,7 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
   if (showSignInPrompt) {
     return (
       <div className={styles.guestSignInSection}>
-        <h3 className={styles.guestSectionTitle}>{commonT('collections')}</h3>
+        <h3 className={styles.guestSectionTitle}>{t('collections')}</h3>
 
         <div className={styles.guestMessageBox}>
           <p className={styles.guestSignInMessage}>{t('guest-prompt.sign-in-message')}</p>
@@ -52,7 +51,7 @@ const GuestSignInSection: React.FC<GuestSignInSectionProps> = ({ onSignIn }) => 
 
   return (
     <div className={styles.guestSignInSection}>
-      <h3 className={styles.guestSectionTitle}>{commonT('collections')}</h3>
+      <h3 className={styles.guestSectionTitle}>{t('collections')}</h3>
       <button
         type="button"
         className={styles.newCollectionButton}

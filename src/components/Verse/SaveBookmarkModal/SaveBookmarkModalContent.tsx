@@ -6,7 +6,8 @@ import styles from './SaveBookmarkModal.module.scss';
 import SaveBookmarkModalFooter from './SaveBookmarkModalFooter';
 import SaveBookmarkModalHeader from './SaveBookmarkModalHeader';
 
-import { ReadingBookmarkType } from '@/types/Bookmark';
+import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
+import BookmarkType from '@/types/BookmarkType';
 
 interface SaveBookmarkModalContentProps {
   // Header props
@@ -18,11 +19,21 @@ interface SaveBookmarkModalContentProps {
   isPage: boolean;
   verseKey: string;
   pageNumber?: number;
-  currentReadingBookmark: string | null | undefined;
   userIsLoggedIn: boolean;
   mushafId: number;
   lang: string;
-  onUpdateReadingBookmark: (key: string, value: string, group: string, id: number) => Promise<void>;
+  resourceBookmark?: {
+    verseNumber: number;
+    type: BookmarkType;
+    key: number;
+    id: string;
+    isReading?: boolean | null;
+  } | null;
+  readingBookmarkData?: Bookmark | null;
+  mutateReadingBookmark?: (
+    data?: Bookmark | null | Promise<Bookmark | null>,
+    opts?: { revalidate?: boolean },
+  ) => Promise<Bookmark | null | undefined>;
   onReadingBookmarkChanged: () => Promise<void>;
 
   // Collections props
@@ -52,11 +63,12 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
   isPage,
   verseKey,
   pageNumber,
-  currentReadingBookmark,
   userIsLoggedIn,
   mushafId,
   lang,
-  onUpdateReadingBookmark,
+  resourceBookmark,
+  readingBookmarkData,
+  mutateReadingBookmark,
   onReadingBookmarkChanged,
   sortedCollections,
   isDataReady,
@@ -74,10 +86,11 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
         type={isVerse ? ReadingBookmarkType.AYAH : ReadingBookmarkType.PAGE}
         verseKey={isVerse ? verseKey : undefined}
         pageNumber={isPage ? pageNumber : undefined}
-        currentReadingBookmark={currentReadingBookmark}
         isLoggedIn={userIsLoggedIn}
         mushafId={mushafId}
-        onUpdateUserPreference={onUpdateReadingBookmark}
+        resourceBookmark={resourceBookmark}
+        readingBookmarkData={readingBookmarkData}
+        mutateReadingBookmark={mutateReadingBookmark}
         onBookmarkChanged={onReadingBookmarkChanged}
         lang={lang}
       />

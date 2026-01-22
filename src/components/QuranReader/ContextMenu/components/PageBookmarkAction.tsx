@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import BookmarkType from '../../../../../types/BookmarkType';
@@ -10,12 +10,10 @@ import styles from '../styles/ContextMenu.module.scss';
 
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { SaveBookmarkType } from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal';
-import useResolvedBookmarkPage from '@/hooks/bookmarks/useResolvedBookmarkPage';
+import useMappedBookmark from '@/hooks/useMappedBookmark';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getMushafId } from '@/utils/api';
 import { getUserPreferences } from '@/utils/auth/api';
 import { makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -37,13 +35,9 @@ interface PageBookmarkActionProps {
  * @returns {JSX.Element} A React component that displays a bookmark icon for the current page
  */
 const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ pageNumber }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
   const isGuest = !isLoggedIn();
 
-  // TODO: use these to make the page mapping and normalization
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,19 +48,39 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
     getUserPreferences,
   );
 
-  const pageBookmark = isGuest
-    ? guestReadingBookmark
-    : (userPreferences?.readingBookmark?.bookmark as string);
+  // Use the reusable mapping hook for cross-mushaf bookmark handling (guests only)
+  const {
+    needsMapping,
+    effectivePageNumber,
+    isLoading: isMappingLoading,
+  } = useMappedBookmark({
+    bookmark: isGuest ? guestReadingBookmark : null,
+    swrKeyPrefix: 'map-bookmark-nav',
+  });
 
-  const { resolvedPage } = useResolvedBookmarkPage(pageBookmark, mushafId);
-
+  // Check if current page is the reading bookmark
   const isPageBookmarked = useMemo((): boolean => {
-    if (resolvedPage == null) return false;
-    if (pageBookmark?.startsWith?.(BookmarkType.Page)) {
-      return resolvedPage === pageNumber;
+    if (isGuest) {
+      // For guest, compare with effective (mapped) page number
+      if (guestReadingBookmark?.type !== BookmarkType.Page) return false;
+      // If mapping is still loading, treat as not bookmarked yet
+      if (needsMapping && effectivePageNumber === null) return false;
+      return effectivePageNumber === pageNumber;
     }
-    return false;
-  }, [pageBookmark, resolvedPage, pageNumber]);
+
+    // For logged-in users, check readingBookmark data
+    const readingBookmark = userPreferences?.readingBookmark?.bookmark;
+    if (!readingBookmark) return false;
+
+    return readingBookmark.type === BookmarkType.Page && readingBookmark.key === pageNumber;
+  }, [
+    isGuest,
+    guestReadingBookmark,
+    needsMapping,
+    effectivePageNumber,
+    userPreferences,
+    pageNumber,
+  ]);
 
   const onModalClose = useCallback((): void => {
     setIsModalOpen(false);
@@ -77,8 +91,10 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
     setIsModalOpen(true);
   }, []);
 
+  const isLoadingAny = isLoading || isMappingLoading;
+
   let bookmarkIcon = <Spinner />;
-  if (!isLoading) {
+  if (!isLoadingAny) {
     bookmarkIcon = isPageBookmarked ? (
       <BookmarkStarIcon className={styles.bookmarkedIcon} />
     ) : (
@@ -92,7 +108,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ page
         type="button"
         className={styles.bookmarkButton}
         onClick={onBookmarkClicked}
-        disabled={isLoading}
+        disabled={isLoadingAny}
         aria-label={
           isPageBookmarked ? t('quran-reader:remove-bookmark') : t('quran-reader:add-bookmark')
         }

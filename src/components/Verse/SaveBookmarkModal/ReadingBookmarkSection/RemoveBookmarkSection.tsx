@@ -34,8 +34,8 @@ const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
 }) => {
   const { t } = useTranslation('quran-reader');
 
-  const handleClick = useCallback(() => {
-    onRemove();
+  const handleClick = useCallback(async () => {
+    await onRemove();
   }, [onRemove]);
 
   const handleKeyDown = useCallback(

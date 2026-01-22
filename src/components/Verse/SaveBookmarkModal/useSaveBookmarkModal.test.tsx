@@ -42,17 +42,11 @@ vi.mock('./useSaveBookmarkData', () => ({
 vi.mock('./Collections/hooks/useCollectionsState', () => ({
   useCollectionsState: () => ({ sortedCollections: [] }),
 }));
-vi.mock('./Collections/hooks/useFavoritesToggle', () => ({
-  useFavoritesToggle: () => ({
-    handleVerseBookmarkToggle: vi.fn(),
+vi.mock('./Collections/hooks/useCollectionToggle', () => ({
+  useCollectionToggle: () => ({
+    handleToggleCollection: vi.fn(),
+    handleToggleFavorites: vi.fn(),
     handlePageBookmarkToggle: vi.fn(),
-    handleNewVerseBookmark: vi.fn(),
-  }),
-}));
-vi.mock('./Collections/hooks/useCollectionToggleHandler', () => ({
-  useCollectionToggleHandler: () => ({
-    handleAddToCollection: vi.fn(),
-    handleRemoveFromCollection: vi.fn(),
   }),
 }));
 vi.mock('@/dls/Toast/Toast', () => ({
