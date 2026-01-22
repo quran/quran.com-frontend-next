@@ -21,6 +21,16 @@ $selected-border-width: 2px;
   border-block-end: $border-width solid var(--color-borders-hairline);
   background-color: var(--color-background-elevated-new);
   block-size: var(--mobile-reading-mode-tabs-height);
+
+  // Fast fade out with ease-in
+  opacity: 0;
+  transition: opacity var(--transition-fast) ease-in 0ms;
+}
+
+.tabsContainerVisible {
+  opacity: 1;
+  // Fade in with ease-out for smooth appearance
+  transition: opacity var(--transition-fast) ease-out var(--mobile-stagger-delay-tabs);
 }
 
 .tab {

@@ -16,6 +16,7 @@ import { ReadingPreference } from 'types/QuranReader';
 
 interface MobileReadingTabsProps {
   t: (key: string) => string;
+  isVisible?: boolean;
 }
 
 /**
@@ -27,7 +28,7 @@ interface MobileReadingTabsProps {
  *
  * @returns {JSX.Element} React component for mobile reading preference tabs
  */
-const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
+const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t, isVisible = true }) => {
   const { readingPreference, switchReadingPreference } = useReadingPreferenceSwitcher({
     context: SwitcherContext.MobileTabs,
   });
@@ -56,7 +57,12 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.tabsContainer} role="tablist">
+      <div
+        className={classNames(styles.tabsContainer, {
+          [styles.tabsContainerVisible]: isVisible,
+        })}
+        role="tablist"
+      >
         <div
           className={classNames(styles.tab, isVerseByVerseSelected && styles.selectedTab)}
           role="tab"

@@ -20,12 +20,14 @@ const MobileStickyItemsBar = () => {
   const isNavDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isDrawerOpen = isNavDrawerOpen || isSettingsDrawerOpen;
-  const show = useShowOnScrollUp();
+  // Hide within top 200px for clean handoff to full navbar
+  const { show, nearTop } = useShowOnScrollUp(100, 50, 200);
+  const isVisible = show && !nearTop;
   const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
 
   return (
     <div
-      className={classNames(styles.container, styles[show ? 'visible' : 'hidden'], {
+      className={classNames(styles.container, styles[isVisible ? 'visible' : 'hidden'], {
         [styles.dimmed]: isDrawerOpen,
       })}
       inert={isDrawerOpen || undefined}
