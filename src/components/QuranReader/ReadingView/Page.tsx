@@ -89,7 +89,6 @@ const Page = ({
           verses={verses}
           pageNumber={pageNumber}
           lang={lang}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
         />
       </div>

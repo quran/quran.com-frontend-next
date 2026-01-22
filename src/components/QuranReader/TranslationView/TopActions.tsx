@@ -13,6 +13,7 @@ type TopActionsProps = {
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   isTranslationView?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 /**
@@ -25,6 +26,7 @@ const TopActions: React.FC<TopActionsProps> = ({
   bookmarksRangeUrl,
   hasNotes,
   isTranslationView = true,
+  shouldUseModalZIndex = false,
 }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -50,6 +52,7 @@ const TopActions: React.FC<TopActionsProps> = ({
           isTranslationView={isTranslationView}
           openShareModal={() => onOpenModalChange(true)}
           hasTranslationsButton={!isTranslationView}
+          shouldUseModalZIndex={shouldUseModalZIndex}
         />
       </div>
 

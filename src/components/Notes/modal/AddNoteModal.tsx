@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
@@ -9,7 +10,9 @@ import {
   invalidateCache,
   isNotePublishFailed,
 } from '@/components/Notes/modal/utility';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ArrowIcon from '@/icons/arrow.svg';
 import { addNote } from '@/utils/auth/api';
 
 interface AddNoteModalProps {
@@ -18,6 +21,7 @@ interface AddNoteModalProps {
   isModalOpen: boolean;
   onModalClose: () => void;
   verseKey: string;
+  onBack?: () => void;
 }
 
 const AddNoteModal: React.FC<AddNoteModalProps> = ({
@@ -26,6 +30,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   isModalOpen,
   onModalClose,
   verseKey,
+  onBack,
 }) => {
   const { t } = useTranslation('notes');
   const toast = useToast();
@@ -61,9 +66,26 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   return (
     <NoteFormModal
       header={
-        <h2 className={modalStyles.title} data-testid="add-note-modal-title">
-          {t('take-a-note-or-reflection')}
-        </h2>
+        onBack ? (
+          <button
+            type="button"
+            className={classNames(modalStyles.headerButton, modalStyles.title)}
+            onClick={onBack}
+            data-testid="add-note-modal-title"
+          >
+            <IconContainer
+              icon={<ArrowIcon />}
+              shouldForceSetColors={false}
+              size={IconSize.Custom}
+              className={modalStyles.arrowIcon}
+            />
+            {t('take-a-note-or-reflection')}
+          </button>
+        ) : (
+          <h2 className={modalStyles.title} data-testid="add-note-modal-title">
+            {t('take-a-note-or-reflection')}
+          </h2>
+        )
       }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}

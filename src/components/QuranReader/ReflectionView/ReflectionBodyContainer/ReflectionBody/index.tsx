@@ -27,6 +27,7 @@ interface Props {
   setSelectedVerseNumber: (verseNumber: string) => void;
   selectedContentType: ContentType;
   isModal?: boolean;
+  hideEndActions?: boolean;
 }
 
 const ReflectionBody: React.FC<Props> = ({
@@ -37,6 +38,7 @@ const ReflectionBody: React.FC<Props> = ({
   setSelectedVerseNumber,
   selectedContentType,
   isModal = false,
+  hideEndActions = false,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
@@ -108,6 +110,7 @@ const ReflectionBody: React.FC<Props> = ({
           reflection={reflection}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
+          contentType={selectedContentType}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>
@@ -120,14 +123,16 @@ const ReflectionBody: React.FC<Props> = ({
         </Button>
       </div>
 
-      <div className={styles.endOfScrollActionsContainer}>
-        <TafsirEndOfScrollingActions
-          hasNextVerseGroup={hasNextVerse}
-          hasPrevVerseGroup={hasPrevVerse}
-          onNextButtonClicked={loadNextVerse}
-          onPreviousButtonClicked={loadPrevVerse}
-        />
-      </div>
+      {!hideEndActions && (
+        <div className={styles.endOfScrollActionsContainer}>
+          <TafsirEndOfScrollingActions
+            hasNextVerseGroup={hasNextVerse}
+            hasPrevVerseGroup={hasPrevVerse}
+            onNextButtonClicked={loadNextVerse}
+            onPreviousButtonClicked={loadPrevVerse}
+          />
+        </div>
+      )}
     </div>
   );
 };

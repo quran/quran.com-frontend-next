@@ -28,6 +28,8 @@ enum SliceName {
   ONBOARDING = 'onboarding',
   MEDIA_MAKER = 'mediaMaker',
   MICROPHONE = 'microphone',
+  STUDY_MODE = 'studyMode',
+  VERSE_ACTION_MODAL = 'verseActionModal',
 }
 
 export default SliceName;

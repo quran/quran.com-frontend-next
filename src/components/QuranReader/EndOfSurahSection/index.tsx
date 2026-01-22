@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './EndOfSurahSection.module.scss';
@@ -11,11 +11,12 @@ import StreakGoalCard from './StreakGoalCard';
 
 import { getChapterMetadata } from '@/api';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import BottomActionsModals, {
   ModalType,
 } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import useScrollToTop from '@/hooks/useScrollToTop';
-import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
 
@@ -25,7 +26,7 @@ interface EndOfSurahSectionProps {
 
 const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const selectedTafsirs = useSelector(selectSelectedTafsirs);
+  const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
   const questionsData = usePageQuestions();
   const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
@@ -70,6 +71,10 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
     setOpenedModal(modalType);
   };
 
+  const handleStudyModeOpen = (tabId: StudyModeTabId, targetVerseKey: string) => {
+    dispatch(openStudyMode({ verseKey: targetVerseKey, activeTab: tabId }));
+  };
+
   const handleCloseModal = () => {
     setOpenedModal(null);
   };
@@ -98,16 +103,14 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           hasQuestions={hasQuestions}
           hasClarificationQuestion={hasClarificationQuestion}
           onModalOpen={handleModalOpen}
+          onStudyModeOpen={handleStudyModeOpen}
         />
 
         <StreakGoalCard cardClassName={styles.card} />
       </div>
 
       <BottomActionsModals
-        chapterId={String(chapterNumber)}
-        verseNumber="1"
-        verseKey={openedModal === ModalType.QUESTIONS ? questionsVerseKey : verseKey}
-        tafsirs={selectedTafsirs}
+        verseKey={questionsVerseKey}
         openedModal={openedModal}
         hasQuestions={hasQuestions}
         isTranslationView

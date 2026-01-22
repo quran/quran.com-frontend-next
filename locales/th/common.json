@@ -45,6 +45,7 @@
     "play-surah": "เล่นซูเราะห์ {{surahName}}",
     "select-lng": "เลือกภาษา",
     "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง",
+    "tooltip-action": "การดำเนินการคำแนะนำเครื่องมือ",
     "translation-info": "ดูข้อมูลการแปล"
   },
   "audio": {

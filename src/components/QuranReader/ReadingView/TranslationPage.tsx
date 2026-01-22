@@ -15,7 +15,6 @@ type TranslationPageProps = {
   verses: Verse[];
   pageNumber: number;
   lang: string;
-  bookmarksRangeUrl?: string | null;
   pageHeaderChapterId?: string;
 };
 
@@ -31,7 +30,6 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   verses,
   pageNumber,
   lang,
-  bookmarksRangeUrl,
   pageHeaderChapterId,
 }) => {
   // Get language data from the first translation for RTL direction and number formatting
@@ -71,7 +69,6 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
             languageId={translation.languageId}
             lang={lang}
             isLastVerse={index === verses.length - 1}
-            bookmarksRangeUrl={bookmarksRangeUrl}
           />
         </React.Fragment>
       );

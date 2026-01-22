@@ -45,6 +45,7 @@
     "play-surah": "Jogue Sura {{surahName}}",
     "select-lng": "Selecione o idioma",
     "sidebar-nav-close": "Fechar a barra lateral de navegação",
+    "tooltip-action": "Ação de dica de ferramenta",
     "translation-info": "Ver informações de tradução"
   },
   "audio": {

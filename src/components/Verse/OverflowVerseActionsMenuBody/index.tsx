@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import SaveToCollectionAction from '../SaveToCollectionAction';
 import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
@@ -9,6 +11,7 @@ import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import { isLoggedIn } from '@/utils/auth/login';
 import Verse from 'types/Verse';
 
@@ -26,6 +29,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   bookmarksRangeUrl,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
   return selectedMenu === VerseActionsMenuType.Main ? (
     <div>
@@ -41,8 +45,12 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
-      <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
-      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      {!isStudyModeOpen && (
+        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
+      )}
+      {!isStudyModeOpen && (
+        <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      )}
       <TranslationFeedbackAction
         verse={verse}
         isTranslationView={isTranslationView}

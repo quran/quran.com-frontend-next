@@ -1,24 +1,20 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
-import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
-import MyNotesModal from '@/components/Notes/modal/MyNotes';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
-import { Note } from '@/types/auth/Note';
+import {
+  selectStudyModeActiveTab,
+  selectStudyModeHighlightedWordLocation,
+  selectStudyModeIsOpen,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
+import { openNotesModal, VerseActionModalType } from '@/redux/slices/QuranReader/verseActionModal';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
-
-enum ModalType {
-  ADD_NOTE = 'add-note',
-  MY_NOTES = 'my-notes',
-  EDIT_NOTE = 'edit-note',
-}
-
-const CLOSE_POPOVER_AFTER_MS = 150;
 
 interface NoteActionControllerProps {
   verseKey: string;
@@ -53,14 +49,15 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
   children,
 }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
-
-  const [activeModal, setActiveModal] = useState<ModalType | null>(null);
-  const [editingNote, setEditingNote] = useState<Note | null>(null);
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
+  const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
+  const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
   const { data: notesCount } = useCountRangeNotes(
-    activeModal || hasNotesProp === undefined ? { from: verseKey, to: verseKey } : null,
+    hasNotesProp === undefined ? { from: verseKey, to: verseKey } : null,
   );
 
   const logNoteEvent = useCallback(
@@ -70,21 +67,6 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
     [isTranslationView],
   );
 
-  const closeModal = useCallback(() => {
-    setActiveModal(null);
-    logNoteEvent('close_notes_modal');
-
-    if (onActionTriggered) {
-      clearTimeout(closeTimeoutRef.current);
-      closeTimeoutRef.current = setTimeout(onActionTriggered, CLOSE_POPOVER_AFTER_MS);
-    }
-  }, [onActionTriggered, logNoteEvent]);
-
-  const openAddNoteModal = useCallback(() => {
-    setActiveModal(ModalType.ADD_NOTE);
-    logNoteEvent('open_add_note_modal');
-  }, [logNoteEvent]);
-
   const handleTriggerClick = useCallback(() => {
     if (!isLoggedIn()) {
       audioService.send({ type: 'CLOSE' });
@@ -93,58 +75,45 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
       return;
     }
 
-    openAddNoteModal();
-  }, [audioService, router, verseKey, openAddNoteModal, logNoteEvent]);
+    // Dispatch Redux action to open notes modal
+    dispatch(
+      openNotesModal({
+        modalType: VerseActionModalType.ADD_NOTE,
+        verseKey,
+        wasOpenedFromStudyMode: isStudyModeOpen,
+        studyModeRestoreState:
+          isStudyModeOpen && studyModeVerseKey
+            ? {
+                verseKey: studyModeVerseKey,
+                activeTab: studyModeActiveTab,
+                highlightedWordLocation: studyModeHighlightedWordLocation,
+              }
+            : undefined,
+      }),
+    );
 
-  const openMyNotesModal = useCallback(() => {
-    setActiveModal(ModalType.MY_NOTES);
-    logNoteEvent('open_my_notes_modal');
-  }, [logNoteEvent]);
+    logNoteEvent('open_add_note_modal');
 
-  const openEditNoteModal = useCallback(
-    (note: Note) => {
-      setEditingNote(note);
-      setActiveModal(ModalType.EDIT_NOTE);
-      logNoteEvent('open_edit_note_modal');
-    },
-    [logNoteEvent],
-  );
-
-  useEffect(() => {
-    return () => clearTimeout(closeTimeoutRef.current);
-  }, []);
+    // Trigger action callback if provided (e.g., to close popover)
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  }, [
+    audioService,
+    router,
+    verseKey,
+    logNoteEvent,
+    isStudyModeOpen,
+    studyModeVerseKey,
+    studyModeActiveTab,
+    studyModeHighlightedWordLocation,
+    dispatch,
+    onActionTriggered,
+  ]);
 
   const hasNote = hasNotesProp || (notesCount?.[verseKey] ?? 0) > 0;
 
-  return (
-    <>
-      {children({ onClick: handleTriggerClick, hasNote })}
-
-      <AddNoteModal
-        isModalOpen={activeModal === ModalType.ADD_NOTE}
-        onModalClose={closeModal}
-        onMyNotes={openMyNotesModal}
-        notesCount={notesCount?.[verseKey] ?? 0}
-        verseKey={verseKey}
-      />
-
-      <MyNotesModal
-        isOpen={activeModal === ModalType.MY_NOTES}
-        onClose={closeModal}
-        notesCount={notesCount?.[verseKey] ?? 0}
-        onAddNote={openAddNoteModal}
-        onEditNote={openEditNoteModal}
-        verseKey={verseKey}
-      />
-
-      <EditNoteModal
-        note={editingNote}
-        isModalOpen={activeModal === ModalType.EDIT_NOTE}
-        onModalClose={closeModal}
-        onMyNotes={openMyNotesModal}
-      />
-    </>
-  );
+  return <>{children({ onClick: handleTriggerClick, hasNote })}</>;
 };
 
 export default NoteActionController;
