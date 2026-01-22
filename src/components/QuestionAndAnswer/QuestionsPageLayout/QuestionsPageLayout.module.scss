@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/mixins/qna-font-scales';
 
 .container {
   min-block-size: calc(10 * var(--spacing-mega));
@@ -21,45 +22,4 @@
 
 .separatorContainer {
   margin-block: var(--spacing-large);
-}
-
-// Font size generation (same as modal)
-$answer-scales: (
-  tablet: (
-    1: 0.85rem,
-    2: 1.1rem,
-    3: 1.2rem,
-    4: 1.4rem,
-    5: 2rem,
-    6: 2.3rem,
-    7: 2.7rem,
-    8: 3rem,
-    9: 3.5rem,
-    10: 4rem,
-  ),
-  mobile: (
-    1: 0.85rem,
-    2: 0.95rem,
-    3: 1.1rem,
-    4: 1.2rem,
-    5: 1.4rem,
-    6: 1.8rem,
-    7: 2.1rem,
-    8: 2.4rem,
-    9: 2.75rem,
-    10: 3rem,
-  ),
-);
-
-@for $i from 1 through 10 {
-  .qna-font-size-#{$i} {
-    --answer-dynamic-font-size: #{map-get(map-get($answer-scales, mobile), $i)};
-    font-size: var(--answer-dynamic-font-size);
-    line-height: normal;
-
-    @include breakpoints.tablet {
-      --answer-dynamic-font-size: #{map-get(map-get($answer-scales, tablet), $i)};
-      font-size: var(--answer-dynamic-font-size);
-    }
-  }
 }

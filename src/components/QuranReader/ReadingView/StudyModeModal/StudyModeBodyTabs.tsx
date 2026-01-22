@@ -83,7 +83,7 @@ export const useStudyModeTabs = (
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
       onTabChange?.(null);
     }
-  }, [activeTab, hasQuestions, onTabChange, verseKey]);
+  }, [activeTab, hasQuestions, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
