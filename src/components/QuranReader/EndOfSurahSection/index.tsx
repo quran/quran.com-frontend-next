@@ -26,7 +26,7 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
   const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
 
-  // For Tafsir, Reflections, Lessons - always use verse 1
+  // For Tafsir, Reflections, Lessons, Answers - always use verse 1
   const verseKey = `${chapterNumber}:1`;
 
   const { data: questionData } = useBatchedCountRangeQuestions(verseKey);
@@ -61,7 +61,6 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           cardClassName={styles.card}
           chapterNumber={chapterNumber}
           verseKey={verseKey}
-          questionsVerseKey={verseKey}
           suggestions={chapterMetadata?.suggestions}
           hasQuestions={hasQuestions}
           hasClarificationQuestion={hasClarificationQuestion}

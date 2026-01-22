@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
@@ -27,6 +28,10 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   max-inline-size: 450px;
   margin-block-start: var(--spacing-medium2-px);
   margin-block-end: var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: constants.$reading-view-container-top-margin-mobile;
+  }
 }
 
 .topControls {

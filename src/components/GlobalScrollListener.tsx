@@ -25,9 +25,15 @@ const GlobalScrollListener = () => {
       }
 
       if (isMobile) {
-        // MOBILE: Position-based logic - show "top" shape only at very top of the page
-        const TOP_THRESHOLD = 10;
-        const isAtTop = newYPosition <= TOP_THRESHOLD;
+        // MOBILE: Asymmetric thresholds for smooth handoff with MobileStickyItemsBar
+        // - Hide early on scroll-down (10px) to prevent content jump
+        // - Show early on scroll-up (75px) to allow smooth handoff
+        const HIDE_THRESHOLD = 10;
+        const SHOW_THRESHOLD = 75;
+
+        const isScrollingUp = direction === ScrollDirection.Up;
+        const threshold = isScrollingUp ? SHOW_THRESHOLD : HIDE_THRESHOLD;
+        const isAtTop = newYPosition <= threshold;
 
         dispatch({ type: setIsExpanded.type, payload: isAtTop });
         if (!lockVisibilityState) {

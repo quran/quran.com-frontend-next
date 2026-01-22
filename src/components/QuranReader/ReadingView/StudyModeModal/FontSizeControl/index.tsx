@@ -15,7 +15,6 @@ import PlusIcon from '@/icons/plus.svg';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MAXIMUM_REFLECTION_FONT_STEP,
-  MAXIMUM_QURAN_FONT_STEP,
   MAXIMUM_LESSON_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
@@ -27,6 +26,7 @@ import {
   decreaseQnaFontScale,
   increaseLessonFontScale,
   decreaseLessonFontScale,
+  MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';

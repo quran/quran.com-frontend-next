@@ -81,9 +81,7 @@
   &.navbarInvisible {
     &.settingsDrawer {
       @include breakpoints.smallerThanTablet {
-        inset-block-start: calc(var(--top-bar-height-mobile-collapsed) + var(--navbar-height));
         inset-block-end: auto;
-        block-size: calc(100dvh - var(--context-menu-container-height));
         border-start-start-radius: var(--border-radius-rounded);
         border-start-end-radius: var(--border-radius-rounded);
         padding-block-start: var(--spacing-xxsmall-px);
@@ -249,8 +247,6 @@
 }
 
 .navbarInvisible {
-  padding-block-start: var(--navbar-container-height);
-
   @include breakpoints.smallerThanTablet {
     padding-block-start: 0;
   }

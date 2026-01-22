@@ -23,7 +23,6 @@ interface ExploreCardProps {
   cardClassName?: string;
   chapterNumber: number;
   verseKey: string;
-  questionsVerseKey: string;
   suggestions?: ChapterContent[];
   hasQuestions: boolean;
   hasClarificationQuestion: boolean;
@@ -36,7 +35,6 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   cardClassName,
   chapterNumber,
   verseKey,
-  questionsVerseKey,
   suggestions,
   hasQuestions,
   hasClarificationQuestion,
@@ -60,28 +58,10 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
       const normalizedKey = button.key.replace(/\./g, '_');
       logButtonClick(`end_of_surah_${normalizedKey}`, { chapterNumber });
 
-      // Use questionsVerseKey for Answers button, verseKey for others
-      const navigationVerseKey =
-        button.studyModeTabId === StudyModeTabId.ANSWERS ? questionsVerseKey : verseKey;
-
-      // All buttons now open Study Mode
-      if (button.studyModeTabId) {
-        // Use questionsVerseKey for Answers tab, verseKey for others
-        const targetVerseKey =
-          button.studyModeTabId === StudyModeTabId.ANSWERS ? questionsVerseKey : verseKey;
-        onStudyModeOpen(button.studyModeTabId, targetVerseKey);
-      }
-
-      fakeNavigate(
-        button.getNavigationUrl({
-          chapterNumber,
-          verseKey: navigationVerseKey,
-          selectedTafsirs,
-        }),
-        lang,
-      );
+      onStudyModeOpen(button.studyModeTabId, verseKey);
+      fakeNavigate(button.getNavigationUrl({ chapterNumber, verseKey, selectedTafsirs }), lang);
     },
-    [onStudyModeOpen, chapterNumber, verseKey, questionsVerseKey, selectedTafsirs, lang],
+    [onStudyModeOpen, chapterNumber, verseKey, selectedTafsirs, lang],
   );
 
   return (

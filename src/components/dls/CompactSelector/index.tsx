@@ -19,7 +19,7 @@ export interface SelectorItem {
 interface CompactSelectorProps {
   id: string;
   items: SelectorItem[];
-  selectedValues: string[];
+  selectedValues: string | string[];
   onChange: (values: string[]) => void;
   /** If true, allows multiple selection. Default: false (single selection) */
   isMultiSelect?: boolean;
@@ -31,7 +31,7 @@ interface CompactSelectorProps {
 const CompactSelector: React.FC<CompactSelectorProps> = ({
   id,
   items,
-  selectedValues,
+  selectedValues: selectedValuesProp,
   onChange,
   isMultiSelect = false,
   minimumRequired = 1,
@@ -39,6 +39,10 @@ const CompactSelector: React.FC<CompactSelectorProps> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const [isOpen, setIsOpen] = useState(false);
+
+  const selectedValues = Array.isArray(selectedValuesProp)
+    ? selectedValuesProp
+    : [selectedValuesProp];
 
   const handleItemClick = (value: string) => {
     if (isMultiSelect) {

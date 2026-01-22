@@ -45,6 +45,7 @@
     "play-surah": "پخش سوره {{surahName}}",
     "select-lng": "زبان را انتخاب کنید",
     "sidebar-nav-close": "نوار کناری ناوبری را ببندید",
+    "tooltip-action": "اقدام راهنمای ابزار",
     "translation-info": "مشاهده اطلاعات ترجمه"
   },
   "audio": {

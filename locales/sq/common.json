@@ -45,6 +45,7 @@
     "play-surah": "Luaj suren {{surahName}}",
     "select-lng": "Zgjidh gjuhen",
     "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit",
+    "tooltip-action": "Veprimi i këshillës së mjetit",
     "translation-info": "Shiko informacionin e përkthimit"
   },
   "audio": {
