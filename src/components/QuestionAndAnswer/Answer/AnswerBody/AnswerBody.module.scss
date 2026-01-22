@@ -1,9 +1,10 @@
 .answerBody {
-  background-color: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-rounded);
-  padding: var(--spacing-medium2-px);
-  font-size: var(--answer-dynamic-font-size, var(--font-size-small));
+  background-color: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-small-px);
+  padding: var(--spacing-medium-px);
+  font-size: var(--answer-dynamic-font-size, var(--font-size-large));
   margin-block: var(--spacing-large);
+  color: var(--color-text-default-new);
 
   & > *:first-child {
     padding-block-start: 0;
@@ -29,7 +30,7 @@
 
 .header {
   font-size: inherit;
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   padding-block: var(--spacing-small);
   font-weight: var(--font-weight-bold);
 
@@ -52,7 +53,7 @@
 }
 
 .shareButtonText {
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   display: flex;
   align-items: center;
   gap: var(--spacing-xxsmall);
@@ -87,13 +88,14 @@
 
   span {
     font-size: var(--font-size-small);
-    color: var(--color-text-default);
+    color: var(--color-text-faded-new);
   }
 }
 
 .socialIcon {
   inline-size: var(--spacing-xlarge-px);
   block-size: var(--spacing-xlarge-px);
+  color: var(--color-text-faded-new);
 }
 
 .utilityIconWrapper {
@@ -110,4 +112,5 @@
   list-style: disc;
   list-style-position: inside;
   padding-inline-start: 0;
+  color: var(--color-text-faded-new);
 }
