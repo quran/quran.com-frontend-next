@@ -3,20 +3,24 @@ import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
 
+import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const TAB_COMPONENTS: Partial<
