@@ -1,3 +1,4 @@
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import { ModalType } from '@/components/QuranReader/TranslationView/BottomActionsModals';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
@@ -15,7 +16,11 @@ export interface ActionButton {
   key: string;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   namespace?: 'quran-reader' | 'common';
-  modalType: ModalType;
+  /**
+   * For Answers, use ModalType. For Tafsir/Reflections/Lessons, use StudyModeTabId
+   */
+  modalType?: ModalType;
+  studyModeTabId?: StudyModeTabId;
   getNavigationUrl: (args: {
     chapterNumber: number;
     verseKey: string;
@@ -43,28 +48,28 @@ export const ACTION_BUTTONS: ActionButton[] = [
     key: 'tafsir.title',
     icon: BookIcon,
     namespace: 'common',
-    modalType: ModalType.TAFSIR,
+    studyModeTabId: StudyModeTabId.TAFSIR,
     getNavigationUrl: buildTafsirUrl,
   },
   {
     key: 'reflections',
     icon: ChatIcon,
     namespace: 'common',
-    modalType: ModalType.REFLECTION,
+    studyModeTabId: StudyModeTabId.REFLECTIONS,
     getNavigationUrl: ({ verseKey }) => getVerseReflectionNavigationUrl(verseKey),
   },
   {
     key: 'lessons',
     icon: LearningPlanIcon,
     namespace: 'common',
-    modalType: ModalType.LESSONS,
+    studyModeTabId: StudyModeTabId.LESSONS,
     getNavigationUrl: ({ verseKey }) => getVerseLessonNavigationUrl(verseKey),
   },
   {
     key: 'answers',
     icon: LightbulbIcon,
     namespace: 'common',
-    modalType: ModalType.QUESTIONS,
+    studyModeTabId: StudyModeTabId.ANSWERS,
     getNavigationUrl: ({ verseKey }) => getVerseAnswersNavigationUrl(verseKey),
   },
 ];

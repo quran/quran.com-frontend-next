@@ -1,18 +1,18 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import classNames from 'classnames';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Answer from '@/components/QuestionAndAnswer/Answer';
+import Answer from '@/components/QuestionAndAnswer/Answer/AnswerBody';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
+import QuestionsPageLayout from '@/components/QuestionAndAnswer/QuestionsPageLayout';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import styles from '@/pages/[chapterId]/answers/questions.module.scss';
-import contentPageStyles from '@/pages/contentPage.module.scss';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
@@ -24,6 +24,7 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
 type QuestionPageProps = {
@@ -40,9 +41,11 @@ type QuestionPageProps = {
  */
 const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, verseKey }) => {
   const { t, lang } = useTranslation('question');
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   const { type, theme: themes, body, summary } = questionData as Question;
   const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
+  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
 
   return (
     <>
@@ -61,10 +64,14 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, v
         description={summary}
       />
       <PageContainer>
-        <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
+        <QuestionsPageLayout
+          chapterId={String(chapterNumber)}
+          verseNumber={String(verseNumber)}
+          fontScale={quranReaderStyles.qnaFontScale}
+        >
           <QuestionHeader isPage body={body} theme={themes} type={type} />
           <Answer question={questionData} />
-        </div>
+        </QuestionsPageLayout>
       </PageContainer>
     </>
   );

@@ -20,6 +20,7 @@ interface AddNoteModalProps {
   isModalOpen: boolean;
   onModalClose: () => void;
   verseKey: string;
+  onBack?: () => void;
 }
 
 const AddNoteModal: React.FC<AddNoteModalProps> = ({
@@ -28,6 +29,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   isModalOpen,
   onModalClose,
   verseKey,
+  onBack,
 }) => {
   const { t } = useTranslation('notes');
   const toast = useToast();
@@ -71,7 +73,11 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
 
   return (
     <NoteFormModal
-      header={<Header data-testid="add-note-modal-title">{t('take-a-note-or-reflection')}</Header>}
+      header={
+        <Header onClick={onBack} data-testid="add-note-modal-title">
+          {t('take-a-note-or-reflection')}
+        </Header>
+      }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
       onMyNotes={onMyNotes}

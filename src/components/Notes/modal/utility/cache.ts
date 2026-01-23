@@ -64,7 +64,7 @@ const invalidateCountCaches = (
   cache: Cache<unknown> | undefined,
   verseKeys: string[],
 ): void => {
-  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+  const cacheKeys = (cache as unknown as { keys?: () => string[] })?.keys?.();
 
   if (cacheKeys) {
     const keys = [...cacheKeys].filter((key) => {
@@ -136,7 +136,7 @@ const updateNoteCaches = (
   const baseNotesUrl = makeNotesUrl().split('?')[0];
 
   // Update general notes list (My Notes tab)
-  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+  const cacheKeys = (cache as unknown as { keys?: () => string[] })?.keys?.();
   if (!cacheKeys) mutate(baseNotesUrl, undefined, { revalidate: true });
 
   const notesListKeys = [...cacheKeys].filter(
@@ -163,14 +163,16 @@ const updatePaginatedNotes = (
 ) => {
   if (!data || !note || !action) return undefined;
 
-  if (Array.isArray(data)) {
+  if (Array.isArray(data) && data.length > 0) {
     if (action === CacheAction.CREATE) {
       const firstPage = data[0];
-      if (!firstPage) return data;
+      if (!firstPage || !firstPage.data || !Array.isArray(firstPage.data)) return data;
       return [{ ...firstPage, data: [note, ...firstPage.data] }, ...data.slice(1)];
     }
 
     return data.map((page) => {
+      if (!page.data || !Array.isArray(page.data)) return page;
+
       if (action === CacheAction.UPDATE) {
         return { ...page, data: page.data.map((n) => (n.id === note.id ? note : n)) };
       }
@@ -194,7 +196,7 @@ const invalidateReflectionsCaches = (
   mutate: ScopedMutator<unknown>,
   cache?: Cache<unknown>,
 ): void => {
-  const cacheKeys = (cache as unknown as { keys: () => string[] })?.keys();
+  const cacheKeys = (cache as unknown as { keys?: () => string[] })?.keys?.();
 
   if (cacheKeys) {
     const urlKey = makeGetUserReflectionsUrl({ page: 1, limit: 10 }).split('?')[0];

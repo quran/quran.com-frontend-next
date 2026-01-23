@@ -11,6 +11,7 @@
   "continue-email": "ดำเนินการต่อด้วยอีเมล",
   "continue-facebook": "ดำเนินการต่อด้วย Facebook",
   "continue-google": "ดำเนินการต่อด้วย Google",
+  "current-password-placeholder": "รหัสผ่านปัจจุบัน",
   "email-placeholder": "ที่อยู่อีเมล",
   "error": {
     "email-required": "อีเมล์หายไป!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "ป้อนที่อยู่อีเมลของคุณและเราจะส่งคำแนะนำในการรีเซ็ตรหัสผ่านของคุณ",
   "forgot-password-success": "ส่งอีเมลรีเซ็ตรหัสผ่านแล้ว! กรุณาตรวจสอบกล่องจดหมายของคุณ",
   "forgot-password-title": "ลืมรหัสผ่าน?",
+  "hide-password": "ซ่อนรหัสผ่าน",
   "last-name-placeholder": "นามสกุล",
   "login-cta": "เข้าสู่ระบบหรือลงทะเบียนตอนนี้:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "รีเซ็ตรหัสผ่าน",
   "reset-password-success": "รีเซ็ตรหัสผ่านสำเร็จแล้ว!",
   "set-new-password": "ตั้งรหัสผ่านใหม่",
+  "show-password": "แสดงรหัสผ่าน",
   "sign-in": "ลงชื่อเข้าใช้",
   "sign-in-or-sign-up": "เข้าสู่ระบบหรือลงทะเบียนด้านล่างเพื่อดำเนินการต่อ",
   "sign-up": "สมัครสมาชิก",

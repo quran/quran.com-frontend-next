@@ -17,7 +17,6 @@ import { isLoggedIn } from '@/utils/auth/login';
 
 const baseConfig = {
   limit: 10,
-  withAttachedEntities: true,
 };
 
 const getNotes = async (sortBy: NotesSortOption, key?: string) => {
@@ -40,6 +39,11 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
     if (!endCursor || !hasNextPage) return null;
     return makeNotesUrl({ ...baseConfig, sortBy, cursor: endCursor });
   };
+
+  const lastLoadedIndexRef = React.useRef<number | null>(null);
+  const clearLastLoadedIndex = useCallback(() => {
+    lastLoadedIndexRef.current = null;
+  }, []);
 
   /**
    * Custom revalidation strategy for infinite scroll with SWR
@@ -68,6 +72,8 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
+      onSuccess: clearLastLoadedIndex,
+      onError: clearLastLoadedIndex,
     },
   );
 
@@ -77,7 +83,6 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
   const lastPageData = data?.[data.length - 1];
   const hasNextPage = lastPageData?.pagination?.hasNextPage || false;
 
-  const lastLoadedIndexRef = React.useRef<number | null>(null);
   const loadMore = (index: number) => {
     if (!hasNextPage || isValidating) return;
     if (lastLoadedIndexRef.current === index) return;

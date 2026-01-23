@@ -29,6 +29,10 @@ $bismillahSvgInlineSizeMobile: 148px;
   inline-size: 100%;
   max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: constants.$reading-view-container-top-margin;
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: constants.$reading-view-container-top-margin-mobile;
+  }
 }
 
 .topControls {
@@ -71,7 +75,19 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .translationsCount {
-  margin-inline-start: var(--spacing-micro2-px);
+  margin-inline-start: var(--spacing-micro-px);
+}
+
+.dropdownIcon {
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
+  flex-shrink: 0;
+  margin-inline-start: var(--spacing-xxsmall-px);
+  align-self: center;
+
+  path {
+    fill: var(--color-text-default-new);
+  }
 }
 
 .titleContainer {
@@ -106,8 +122,8 @@ $bismillahSvgInlineSizeMobile: 148px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-block-start: var(--spacing-medium2);
-  margin-block-end: var(--spacing-large-px);
+  margin-block-start: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-small-px);
 }
 
 .chapterTitleWithTranslationName {
@@ -186,14 +202,11 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .withReadingView {
-  margin-block-end: var(--spacing-xxlarge-px);
+  margin-block-end: var(--spacing-large-px);
 }
 
 .withTranslationView {
-  margin-block-end: var(--spacing-medium3-px);
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: var(--spacing-medium2-px);
-  }
+  margin-block-end: var(--spacing-large-px);
 }
 
 .bismillahTranslation {

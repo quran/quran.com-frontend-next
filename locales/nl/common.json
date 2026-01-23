@@ -45,7 +45,8 @@
     "play-surah": "Surah {{surahName}}afspelen",
     "select-lng": "Selecteer taal",
     "sidebar-nav-close": "Navigatie zijbalk sluiten",
-    "translation-info": "Bekijk vertaalinformatie"
+    "tooltip-action": "Tooltip-actie",
+    "translation-info": "Bekijk vertaal informatie"
   },
   "audio": {
     "auto-scroll": {
@@ -165,7 +166,7 @@
     "bookmark-sync": "Bladwijzer loopt niet synchroon.",
     "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
     "general": "Er is iets fout gegaan. Probeer het opnieuw a.u.b.",
-    "language-change-failed": "Het wijzigen van de taal is mislukt. Probeer het opnieuw.",
+    "language-change-failed": "Het wijzigen van de taal is mislukt. Probeer a.u.b. nogmaals.",
     "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw a.u.b.",
     "pref-persist-fail": "Het synchroniseren van je instellingen met de cloud is mislukt.",
     "ranges-no-value": "Het begin en einde van het bereik moeten een waarde hebben",
@@ -179,21 +180,29 @@
     "complete-signup-failed": "Aanmelden mislukt. Probeer nogmaals a.u.b.",
     "confirm": "*Bevestig wachtwoord komt niet overeen met het wachtwoord",
     "email": "*Ongeldig e-mailadres!",
+    "equal": "*{{fieldName}} komt niet overeen",
     "exactLength": "*Waarde moet exacte lengte zijn",
     "expiredToken": "*Dit token is verlopen",
+    "file-exceeds-limit": "Het bestand is te groot. Kies een kleiner bestand.",
     "forgot-password-failed": "Het is niet gelukt om de e-mail voor het opnieuw instellen van het wachtwoord te versturen. Probeer het opnieuw.",
+    "image-remove-failed": "Het verwijderen van de afbeelding is mislukt. Probeer het opnieuw.",
+    "image-upload-failed": "Het uploaden van de afbeelding is mislukt. Probeer het opnieuw.",
     "immutable": "*Deze waarde kan niet worden gewijzigd",
     "invalid": "*Deze {{fieldName}} is ongeldig",
+    "invalid-file-format": "Ongeldig bestandsformaat. Alleen {{formats}} Bestanden zijn toegestaan.",
     "invalidEmailOrPassword": "*Ongeldig e-mailadres of wachtwoord",
     "max": "* {{fieldName}} moet kleiner zijn dan of gelijk zijn aan {{max}} cijfers",
     "min": "* {{fieldName}} moet meer dan of gelijk zijn aan {{min}} cijfers",
     "name": "* {{fieldName}} mag alleen uit letters en cijfers bestaan",
     "notFound": "*Niet gevonden",
+    "profile-pic-size-limit": "De afmetingen van de profielfoto moeten zijn {{size}}MB maximum",
+    "remove-avatar-failed": "Het verwijderen van de avatar is mislukt. Probeer het opnieuw.",
     "required": "* {{fieldName}} ontbreekt!",
     "reset-password-failed": "Wachtwoord resetten mislukt. Probeer het opnieuw.",
     "signin-failed": "Aanmelden mislukt. Probeer het opnieuw.",
     "signup-failed": "Registratie mislukt. Probeer het opnieuw.",
     "taken": "* {{fieldName}} bestaat al!",
+    "upload-avatar-failed": "Het uploaden van de avatar is mislukt. Probeer het opnieuw.",
     "usedToken": "*Dit token is al gebruikt",
     "username": "* {{fieldName}} accepteert alleen onderstrepingstekens en letters",
     "verification-code-invalid": "Deze verificatiecode is ongeldig",
@@ -231,10 +240,13 @@
   "form": {
     "body": "Lichaam",
     "code": "Verificatie code",
+    "confirm-new-password": "Nieuw wachtwoord bevestigen",
     "confirm-password": "Bevestig wachtwoord",
+    "current-password": "Huidig wachtwoord",
     "email": "E-mail",
     "firstName": "Voornaam",
     "lastName": "Achternaam",
+    "new-password": "Nieuw wachtwoord",
     "password": "Wachtwoord",
     "title": "Titel",
     "username": "Gebruikersnaam",
@@ -250,7 +262,7 @@
     "description": "Met maandelijkse donaties kunnen we Quran.com verbeteren en onze activiteiten voortzetten. Zo hoeven we ons minder op fondsenwerving te richten en meer op het creëren van impact.",
     "donation-campaign": {
       "cta": "Doneer vandaag nog",
-      "text": "Word supporter"
+      "text": "Word steunpilaar"
     },
     "title": "Word een maandelijkse donateur"
   },
@@ -346,7 +358,7 @@
     "reading": "Lezing",
     "reading-translation": "Vertaling",
     "select-translation": "Selecteer vertaling",
-    "select-translation-message": "Je hebt geen vertalingen geselecteerd. Selecteer een vertaling via de instellingen.",
+    "select-translation-message": "Je hebt geen vertalingen geselecteerd. Selecteer a.u.b. een vertaling via de instellingen.",
     "select-translations": "Selecteer vertalingen",
     "translation": "Vertaling",
     "verse-by-verse": "Vers voor vers"

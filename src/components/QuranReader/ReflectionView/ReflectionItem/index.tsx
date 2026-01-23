@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import AuthorInfo from './AuthorInfo';
 import HeaderMenu from './HeaderMenu';
@@ -12,6 +14,7 @@ import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
@@ -26,17 +29,34 @@ import {
 } from '@/utils/quranReflect/views';
 import { makeVerseKey } from '@/utils/verse';
 import AyahReflection from 'types/QuranReflect/AyahReflection';
+import ContentType from 'types/QuranReflect/ContentType';
+
+// Font size class map for reflection font scaling
+const FONT_SIZE_CLASS_MAP: Record<number, string> = {
+  1: styles.fontXs,
+  2: styles.fontSm,
+  3: styles.fontMd,
+  4: styles.fontLg,
+  5: styles.fontXl,
+  6: styles.fontXxl,
+  7: styles.fontXxxl,
+  8: styles.fontJumbo,
+  9: styles.fontJumbo2,
+  10: styles.fontXjumbo,
+};
 
 type Props = {
   reflection: AyahReflection;
   selectedChapterId: string;
   selectedVerseNumber: string;
+  contentType?: ContentType;
 };
 
 const ReflectionItem: React.FC<Props> = ({
   reflection,
   selectedChapterId,
   selectedVerseNumber,
+  contentType = ContentType.REFLECTIONS,
 }) => {
   const { id, createdAt, author, estimatedReadingTime } = reflection;
   const reflectionText = reflection?.body;
@@ -45,6 +65,10 @@ const ReflectionItem: React.FC<Props> = ({
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
   const reflectionBodyRef = useRef(null);
+  // Use fallback default for users who don't have the new font scale fields yet
+  const { reflectionFontScale = 3, lessonFontScale = 3 } = useSelector(selectQuranReaderStyles);
+  // Use lesson font scale for lessons, reflection font scale for reflections
+  const fontScale = contentType === ContentType.LESSONS ? lessonFontScale : reflectionFontScale;
   useIntersectionObserver(reflectionBodyRef, REFLECTIONS_OBSERVER_ID);
 
   const onReferredVersesHeaderClicked = () => {
@@ -142,7 +166,7 @@ const ReflectionItem: React.FC<Props> = ({
       >
         <p className="debugger" />
         <span
-          className={styles.body}
+          className={classNames(styles.body, FONT_SIZE_CLASS_MAP[fontScale])}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),

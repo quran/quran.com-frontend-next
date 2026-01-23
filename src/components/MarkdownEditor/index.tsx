@@ -41,6 +41,7 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
 
   return (
     <div className={styles.content}>
+      <noscript>{defaultValue}</noscript>
       <Milkdown />
     </div>
   );

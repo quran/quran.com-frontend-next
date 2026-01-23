@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Sadece {{formats}}",
+  "change-password": "Şifre değiştir",
   "delete-account": "Hesabı sil",
+  "delete-account-warning-title": "Uyarı",
   "delete-confirmation": {
     "action-text": "Sonucu anlıyorum, hesabımı sil",
     "confirmation-text": "hesabımı sil",
     "instruction-text": "Lütfen onaylamak için <strong> {{text}} </strong> yazın",
     "subtitle": "Bu işlem geri alınamaz. Bu, hesabınızı, kayıtlı yer imlerinizi, okuma oturumlarınızı ve tüm verilerinizi kalıcı olarak siler.",
     "title": "Kesinlikle emin misin?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Evet",
+    "cancel-text": "HAYIR",
+    "subtitle": "Profil resmini silip varsayılan haline sıfırlayacaksınız, emin misiniz?",
+    "title": "Profil Resmini Sil"
+  },
+  "edit-details": "Ayrıntıları Düzenle",
+  "email-notification-settings": "E-posta Bildirim Ayarları",
+  "errors": {
+    "remove-failed": "Profil resmini kaldırma işlemi başarısız oldu. Lütfen tekrar deneyin.",
+    "upload-failed": "Profil resmi yüklenemedi. Lütfen tekrar deneyin."
+  },
+  "max-file-size": "Maksimum {{size}}",
+  "my-profile": "Profilim",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Haftalık okuma ödevi, düşünme soruları ve sizi doğru yolda tutacak daha birçok kaynağa ait bağlantıları içeren bir e-posta gönderilecektir.",
+      "title": "Bir Yılda Kur'an Okumak"
+    },
+    "streaks-that-will-break": {
+      "description": "Yaklaşan bir seri hakkında sizi bilgilendirmek için bir e-posta gönderilecektir.",
+      "title": "Çizgiler"
+    }
+  },
+  "personalization": "Kişiselleştirme",
+  "profile-picture": "Profil Resmi",
+  "remove-picture": "Resmi Kaldır",
+  "remove-success": "Profil resmi başarıyla kaldırıldı.",
+  "save-changes": "Değişiklikleri Kaydet",
+  "save-picture": "Resmi Kaydet",
+  "success": {
+    "details": "Profiliniz başarıyla güncellendi.",
+    "notifications": "Bildirim ayarlarınız başarıyla güncellendi.",
+    "password": "Parolanız başarıyla güncellendi."
+  },
+  "update-password": "Şifreyi Güncelle",
+  "upload-picture": "Resim Yükle",
+  "upload-success": "Profil resmi başarıyla yüklendi."
 }

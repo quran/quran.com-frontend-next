@@ -6,7 +6,10 @@ import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 const useNotesWithRecentReflection = (data: Note[]): NoteWithRecentReflection[] => {
   return useMemo(() => {
-    const notesArray = Array.isArray(data) ? data : [];
+    const notesArray = (Array.isArray(data) ? data : []).filter(
+      // filter out errors and unexpected values
+      (note) => note instanceof Object && 'id' in note && 'createdAt' in note,
+    );
 
     return notesArray.map((note) => {
       const attachedEntities = note.attachedEntities || [];

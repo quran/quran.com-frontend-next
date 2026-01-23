@@ -19,14 +19,14 @@
     &::before {
       margin-block-start: var(--spacing-medium);
       display: block;
-      content: "\A";
+      content: '\A';
     }
     display: inline;
   }
 
-  & p[lang="ar"],
-  & p[lang="fa"],
-  & p[lang="ur"] {
+  & p[lang='ar'],
+  & p[lang='fa'],
+  & p[lang='ur'] {
     direction: rtl;
     display: block;
   }
@@ -71,4 +71,36 @@
 
 .ltr {
   direction: ltr;
+}
+
+// Font size classes for reflection font scaling
+.fontXs {
+  font-size: var(--font-size-xsmall);
+}
+.fontSm {
+  font-size: var(--font-size-normal);
+}
+.fontMd {
+  font-size: var(--font-size-large);
+}
+.fontLg {
+  font-size: var(--font-size-xlarge);
+}
+.fontXl {
+  font-size: var(--font-size-xlarge-px);
+}
+.fontXxl {
+  font-size: var(--font-size-xxlarge-px);
+}
+.fontXxxl {
+  font-size: var(--font-size-xxxlarge-px);
+}
+.fontJumbo {
+  font-size: var(--font-size-jumbo-px);
+}
+.fontJumbo2 {
+  font-size: var(--font-size-jumbo2-px);
+}
+.fontXjumbo {
+  font-size: var(--font-size-xjumbo-px);
 }

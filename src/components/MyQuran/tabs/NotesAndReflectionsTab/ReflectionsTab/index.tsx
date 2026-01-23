@@ -30,6 +30,11 @@ const getKey = (pageIndex: number, previousPageData: GetUserReflectionsResponse)
 };
 
 const ReflectionsTab: React.FC = () => {
+  const lastLoadedIndexRef = React.useRef<number | null>(null);
+  const clearLastLoadedIndex = useCallback(() => {
+    lastLoadedIndexRef.current = null;
+  }, []);
+
   /**
    * Custom revalidation strategy for infinite scroll with SWR
    *
@@ -55,14 +60,18 @@ const ReflectionsTab: React.FC = () => {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
+      onSuccess: clearLastLoadedIndex,
+      onError: clearLastLoadedIndex,
     });
 
-  const reflections = data ? data.map((response) => response.data).flat() : [];
+  const reflections = (data ? data.map((response) => response.data).flat() : []).filter(
+    // filter out errors and unexpected values
+    (reflection) => reflection instanceof Object && 'id' in reflection && 'createdAt' in reflection,
+  );
 
   const lastPageData = data?.[data.length - 1];
   const hasNextPage = lastPageData?.currentPage < lastPageData?.pages;
 
-  const lastLoadedIndexRef = React.useRef<number | null>(null);
   const loadMore = (index: number) => {
     if (!hasNextPage || isValidating) return;
     if (lastLoadedIndexRef.current === index) return;

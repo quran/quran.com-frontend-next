@@ -2,7 +2,6 @@
 @use 'src/styles/breakpoints';
 
 $sections-container-height: 2rem;
-$pixel: 1px;
 
 .container {
   background: var(--color-background-elevated);
@@ -12,10 +11,15 @@ $pixel: 1px;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   inline-size: 100%;
-  inset-block-start: calc($pixel * -1);
+  inset-block-start: 0;
   min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;
+
+  @include breakpoints.smallerThanTablet {
+    // Fast collapse with ease-in
+    transition: transform var(--transition-fast) ease-in 0ms;
+  }
 }
 
 .hide {
@@ -27,6 +31,11 @@ $pixel: 1px;
 .visibleContainer {
   transform: translate3d(0, var(--navbar-container-height), 0);
   // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+
+  @include breakpoints.smallerThanTablet {
+    // Faster expand with ease-out for smooth landing
+    transition: transform var(--transition-fast) ease-out var(--mobile-stagger-delay-context-menu);
+  }
 }
 
 .withVisibleBanner {
@@ -66,8 +75,15 @@ $pixel: 1px;
   z-index: var(--z-index-default);
   position: relative;
   background: var(--color-background-elevated);
+  margin-block-start: -1px;
   @include breakpoints.tablet {
     padding-inline: calc(1.2 * var(--spacing-mega));
+  }
+
+  .visibleContainer & {
+    @include breakpoints.smallerThanTablet {
+      padding-block: 0;
+    }
   }
 }
 

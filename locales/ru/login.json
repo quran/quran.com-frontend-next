@@ -11,6 +11,7 @@
   "continue-email": "Продолжить с электронной почтой",
   "continue-facebook": "Продолжить с Facebook",
   "continue-google": "Продолжить через Google",
+  "current-password-placeholder": "Текущий пароль",
   "email-placeholder": "Адрес электронной почты",
   "error": {
     "email-required": "Электронная почта отсутствует!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Введите свой адрес электронной почты, и мы вышлем вам инструкции по сбросу пароля.",
   "forgot-password-success": "Письмо для сброса пароля отправлено! Проверьте свой почтовый ящик.",
   "forgot-password-title": "Забыли пароль?",
+  "hide-password": "Скрыть пароль",
   "last-name-placeholder": "Фамилия",
   "login-cta": "Войдите или зарегистрируйтесь сейчас:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Сбросить пароль",
   "reset-password-success": "Пароль успешно сброшен!",
   "set-new-password": "Установить новый пароль",
+  "show-password": "Показать пароль",
   "sign-in": "Войти",
   "sign-in-or-sign-up": "Для продолжения войдите или зарегистрируйтесь ниже.",
   "sign-up": "Зарегистрироваться",

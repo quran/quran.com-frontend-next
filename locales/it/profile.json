@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Soltanto {{formats}}",
+  "change-password": "Cambiare la password",
   "delete-account": "Eliminare l'account",
+  "delete-account-warning-title": "Avvertimento",
   "delete-confirmation": {
     "action-text": "Comprendo le conseguenze, cancella il mio account",
     "confirmation-text": "cancella il mio account",
     "instruction-text": "Digita <strong> {{text}} </strong> per confermare",
     "subtitle": "Questa azione non può essere annullata. Questo eliminerà definitivamente il tuo account, i segnalibri salvati, le sessioni di lettura e tutti i tuoi dati.",
     "title": "Sei assolutamente sicuro?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "SÌ",
+    "cancel-text": "NO",
+    "subtitle": "Eliminerai l'immagine del profilo e la ripristinerai ai valori predefiniti. Sei sicuro?",
+    "title": "Elimina immagine del profilo"
+  },
+  "edit-details": "Modifica dettagli",
+  "email-notification-settings": "Impostazioni di notifica e-mail",
+  "errors": {
+    "remove-failed": "Impossibile rimuovere l'immagine del profilo. Riprova.",
+    "upload-failed": "Impossibile caricare l'immagine del profilo. Riprova."
+  },
+  "max-file-size": "Massimo {{size}}",
+  "my-profile": "Il mio profilo",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Riceverai un'e-mail con i link alle letture settimanali, spunti di riflessione e altre risorse per rimanere sulla buona strada.",
+      "title": "Il Corano in un anno"
+    },
+    "streaks-that-will-break": {
+      "description": "Ti verrà inviata un'e-mail per avvisarti che una serie sta per interrompersi.",
+      "title": "Strisce"
+    }
+  },
+  "personalization": "Personalizzazione",
+  "profile-picture": "Immagine del profilo",
+  "remove-picture": "Rimuovi immagine",
+  "remove-success": "Immagine del profilo rimossa con successo",
+  "save-changes": "Salva modifiche",
+  "save-picture": "Salva immagine",
+  "success": {
+    "details": "Il tuo profilo è stato aggiornato con successo",
+    "notifications": "Le impostazioni delle notifiche sono state aggiornate correttamente",
+    "password": "La tua password è stata aggiornata con successo"
+  },
+  "update-password": "Aggiorna password",
+  "upload-picture": "Carica immagine",
+  "upload-success": "Immagine del profilo caricata con successo"
 }

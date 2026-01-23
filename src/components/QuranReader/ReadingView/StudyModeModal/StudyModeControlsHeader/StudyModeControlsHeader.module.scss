@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--spacing-xsmall-px);
+  padding-block-start: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium);
+  overflow-x: auto;
+}
+
+.fontControl {
+  flex-shrink: 0;
+}
+
+.languageSelector {
+  flex-shrink: 0;
+}

@@ -23,6 +23,7 @@ interface MyNotesModalProps {
   onEditNote: (note: Note) => void;
   notesCount?: number;
   verseKey: string;
+  onBack?: () => void;
 }
 
 const MyNotesModal: React.FC<MyNotesModalProps> = ({
@@ -32,6 +33,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
   onEditNote,
   notesCount = 0,
   verseKey,
+  onBack,
 }) => {
   const { t, lang } = useTranslation('notes');
 
@@ -63,7 +65,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
           <button
             type="button"
             className={classNames(modalStyles.headerButton, modalStyles.title)}
-            onClick={onAddNote}
+            onClick={onBack || onAddNote}
             data-testid="my-notes-modal-title"
             data-note-count={notesCount}
           >

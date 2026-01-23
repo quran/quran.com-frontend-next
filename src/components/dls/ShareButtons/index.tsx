@@ -31,12 +31,19 @@ interface Props {
     chapterId?: string;
     verseNumber?: number;
   };
+  hideVideoGeneration?: boolean;
 }
 
 const COPY_TIMEOUT_MS = 5000;
 const BG_STYLE = { fill: 'black' };
 
-const ShareButtons: React.FC<Props> = ({ url, title, analyticsContext, verse }) => {
+const ShareButtons: React.FC<Props> = ({
+  url,
+  title,
+  analyticsContext,
+  verse,
+  hideVideoGeneration = false,
+}) => {
   const { t } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
 
@@ -120,16 +127,18 @@ const ShareButtons: React.FC<Props> = ({ url, title, analyticsContext, verse }) 
         <span>{isCopied ? `${t('copied')}!` : t('copylink')}</span>
       </button>
 
-      <button
-        type="button"
-        className={classNames(styles.shareOptionButton, styles.generateMediaButton)}
-        onClick={onGenerateClicked}
-      >
-        <div className={styles.utilityIconWrapper}>
-          <VideoIcon />
-        </div>
-        <span>{t('quran-reader:generate-media')}</span>
-      </button>
+      {!hideVideoGeneration && (
+        <button
+          type="button"
+          className={classNames(styles.shareOptionButton, styles.generateMediaButton)}
+          onClick={onGenerateClicked}
+        >
+          <div className={styles.utilityIconWrapper}>
+            <VideoIcon />
+          </div>
+          <span>{t('quran-reader:generate-media')}</span>
+        </button>
+      )}
     </div>
   );
 };

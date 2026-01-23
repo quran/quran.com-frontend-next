@@ -11,6 +11,7 @@
   "continue-email": "Continuer avec l'e-mail",
   "continue-facebook": "Continuer avec Facebook",
   "continue-google": "Continuer avec Google",
+  "current-password-placeholder": "Mot de passe actuel",
   "email-placeholder": "Adresse e-mail",
   "error": {
     "email-required": "L'e-mail est manquant !",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Saisissez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe.",
   "forgot-password-success": "Un e-mail de réinitialisation de mot de passe a été envoyé ! Veuillez vérifier votre boîte e-mail.",
   "forgot-password-title": "Mot de passe oublié ?",
+  "hide-password": "Masquer le mot de passe",
   "last-name-placeholder": "Nom de famille",
   "login-cta": "Connectez-vous ou Inscrivez-vous maintenant:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Réinitialiser le mot de passe",
   "reset-password-success": "Réinitialisation du mot de passe réussie !",
   "set-new-password": "Définir un nouveau mot de passe",
+  "show-password": "Afficher le mot de passe",
   "sign-in": "Se connecter",
   "sign-in-or-sign-up": "Connectez-vous ou inscrivez-vous ci-dessous pour continuer.",
   "sign-up": "S'inscrire",

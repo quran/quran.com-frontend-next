@@ -36,8 +36,7 @@ type TranslationViewCellProps = {
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
   bookmarksRangeUrl: string;
-  hasNotes?: boolean;
-  hasQuestions?: boolean;
+  isFirstCellWithHeader?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -45,8 +44,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   quranReaderStyles,
   verseIndex,
   bookmarksRangeUrl,
-  hasNotes,
-  hasQuestions,
+  isFirstCellWithHeader = false,
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useSelectorXstate(audioService, (state) => {
@@ -98,9 +96,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         data-testid={`verse-${verse.verseKey}`}
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
+          [styles.firstCellWithHeader]: isFirstCellWithHeader,
         })}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -119,7 +118,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} hasQuestions={hasQuestions} />
+        <BottomActions verseKey={verse.verseKey} />
       </div>
       <Separator className={styles.verseSeparator} />
     </>
@@ -148,8 +147,7 @@ const areVersesEqual = (
   nextProps: TranslationViewCellProps,
 ): boolean =>
   prevProps.verse.id === nextProps.verse.id &&
-  prevProps.hasNotes === nextProps.hasNotes &&
-  prevProps.hasQuestions === nextProps.hasQuestions &&
+  prevProps.isFirstCellWithHeader === nextProps.isFirstCellWithHeader &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,

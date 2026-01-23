@@ -6,6 +6,10 @@
   margin-block-end: var(--spacing-xsmall);
 }
 
+.highlighted {
+  color: var(--color-success-medium);
+}
+
 .plainVerseWbwText {
   margin-block: var(--spacing-xxsmall);
   margin-inline: var(--spacing-xxsmall);

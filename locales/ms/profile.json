@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Hanya {{formats}}",
+  "change-password": "Tukar Kata Laluan",
   "delete-account": "Padam Akaun",
+  "delete-account-warning-title": "Amaran",
   "delete-confirmation": {
     "action-text": "Saya faham akibatnya, padam akaun saya",
     "confirmation-text": "padamkan akaun saya",
     "instruction-text": "Sila taip <strong> {{text}} </strong> untuk mengesahkan",
     "subtitle": "Tindakan ini tidak boleh dikembaoi semula. Ini akan memadamkan akaun anda secara kekal, penanda halaman yang disimpan, sesi membaca dan semua data anda.",
     "title": "Adakah anda pasti?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Ya",
+    "cancel-text": "Tidak",
+    "subtitle": "Anda akan memadam gambar profil dan menetapkannya semula kepada tetapan lalai. Adakah anda pasti?",
+    "title": "Padam Gambar Profil"
+  },
+  "edit-details": "Edit Butiran",
+  "email-notification-settings": "Tetapan Pemberitahuan E-mel",
+  "errors": {
+    "remove-failed": "Gagal mengalih keluar gambar profil. Sila cuba lagi.",
+    "upload-failed": "Gagal memuat naik gambar profil. Sila cuba lagi."
+  },
+  "max-file-size": "Maks {{size}}",
+  "my-profile": "Profil Saya",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "E-mel akan dihantar dengan pautan ke tugasan bacaan mingguan, gesaan refleksi dan lebih banyak sumber untuk memastikan anda berada di landasan yang betul.",
+      "title": "Al-Quran dalam Setahun"
+    },
+    "streaks-that-will-break": {
+      "description": "E-mel akan dihantar untuk memaklumkan anda tentang rentetan yang bakal berakhir.",
+      "title": "Jalur-jalur"
+    }
+  },
+  "personalization": "Pemperibadian",
+  "profile-picture": "Gambar Profil",
+  "remove-picture": "Alih Keluar Gambar",
+  "remove-success": "Gambar profil berjaya dialih keluar",
+  "save-changes": "Simpan Perubahan",
+  "save-picture": "Simpan Gambar",
+  "success": {
+    "details": "Profil anda berjaya dikemas kini",
+    "notifications": "Tetapan pemberitahuan anda telah berjaya dikemas kini",
+    "password": "Kata laluan anda telah berjaya dikemas kini"
+  },
+  "update-password": "Kemas Kini Kata Laluan",
+  "upload-picture": "Muat Naik Gambar",
+  "upload-success": "Gambar profil berjaya dimuat naik"
 }
