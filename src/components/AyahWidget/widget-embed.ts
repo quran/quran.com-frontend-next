@@ -96,7 +96,9 @@ export const buildEmbedIframeSrc = (
 
   setParam('verses', buildVersesParam(preferences));
   setParam('translations', translationIdsCsv, '');
-  setParam('clientId', preferences.clientId, DEFAULTS.clientId);
+  setParam('verses', buildVersesParam(preferences));
+  setParam('translations', translationIdsCsv, '');
+  if (preferences.clientId !== DEFAULTS.clientId) setParam('clientId', preferences.clientId);
 
   const reciterValue = preferences.reciter
     ? String(preferences.reciter)
