@@ -17,6 +17,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 
 const baseConfig = {
   limit: 10,
+  withAttachedEntities: true,
 };
 
 const getNotes = async (sortBy: NotesSortOption, key?: string) => {
