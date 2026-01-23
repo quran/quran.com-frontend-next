@@ -1,0 +1,49 @@
+.container {
+  padding: var(--spacing-medium);
+  max-width: 500px;
+}
+
+.header {
+  margin-block-end: var(--spacing-medium);
+  padding-block-end: var(--spacing-small);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.name {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  margin: 0;
+  margin-block-end: var(--spacing-xxsmall);
+}
+
+.city {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded);
+}
+
+.content {
+  margin-block-start: var(--spacing-small);
+}
+
+.bioTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.bioText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.noBio {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded);
+  font-style: italic;
+  margin: 0;
+}

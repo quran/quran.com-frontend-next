@@ -513,5 +513,18 @@
     "title": "نطق الكلمة عند الضغط عليها"
   },
   "word-tooltip": "مربع منبثق للكلمة",
+  "qiraat": {
+    "title": "القراءات",
+    "what-are": "ما هي القراءات؟",
+    "learn-more": "اعرف المزيد",
+    "readers": "القراء",
+    "no-junctures": "لا توجد قراءات مختلفة لهذه الآية",
+    "transliteration": "النطق الصوتي",
+    "translation": "الترجمة",
+    "explanation": "الشرح",
+    "combined-explanation": "الشرح المجمع",
+    "reader-bio": "السيرة الذاتية للقارئ",
+    "juncture": "موضع الاختلاف"
+  },
   "yes": "نعم"
 }

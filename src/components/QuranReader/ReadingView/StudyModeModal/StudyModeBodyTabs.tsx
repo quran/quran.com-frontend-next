@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
+import useQiraatData from './tabs/StudyModeQiraatTab/hooks/useQiraatData';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
@@ -11,6 +12,7 @@ import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import TextIcon from '@/icons/text.svg';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
@@ -33,6 +35,10 @@ export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswers
   loading: TafsirSkeleton,
 });
 
+const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
+  ssr: false,
+});
+
 export const TAB_COMPONENTS: Partial<
   Record<
     StudyModeTabId,
@@ -47,6 +53,7 @@ export const TAB_COMPONENTS: Partial<
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
+  [StudyModeTabId.QIRAAT]: StudyModeQiraatTab,
 };
 
 export type TabConfig = {
@@ -78,6 +85,7 @@ export const useStudyModeTabs = (
   // Check if questions exist and their type
   const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
+  const { hasData: hasQiraatData } = useQiraatData(verseKey);
 
   useEffect(() => {
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
@@ -118,6 +126,13 @@ export const useStudyModeTabs = (
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: hasQuestions,
+    },
+    {
+      id: StudyModeTabId.QIRAAT,
+      label: t('qiraat.title'),
+      icon: <TextIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
+      condition: hasQiraatData,
     },
   ];
 };

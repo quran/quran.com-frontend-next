@@ -513,5 +513,18 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
+  "qiraat": {
+    "title": "Qiraat",
+    "what-are": "What are Qiraat?",
+    "learn-more": "Learn more",
+    "readers": "Readers",
+    "no-junctures": "No variant readings available for this verse",
+    "transliteration": "Transliteration",
+    "translation": "Translation",
+    "explanation": "Explanation",
+    "combined-explanation": "Combined Explanation",
+    "reader-bio": "Reader Biography",
+    "juncture": "Juncture"
+  },
   "yes": "Yes"
 }

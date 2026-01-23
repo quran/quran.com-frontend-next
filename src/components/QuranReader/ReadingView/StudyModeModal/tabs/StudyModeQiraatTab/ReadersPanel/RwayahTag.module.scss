@@ -1,0 +1,34 @@
+.tag {
+  --tag-color: #ffffff;
+
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  border-radius: var(--border-radius-pill);
+  background: var(--tag-color);
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+  border: 1px solid var(--color-borders-hairline);
+  white-space: nowrap;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

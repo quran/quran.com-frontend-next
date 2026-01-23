@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useQiraatData from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/StudyModeQiraatTab/hooks/useQiraatData';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import TextIcon from '@/icons/text.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
@@ -57,6 +59,9 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
   const hasQuestions = questionsData?.total > 0;
   const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
+  // Check if Qiraat data exists for this verse to conditionally show the tab
+  const { hasData: hasQiraatData } = useQiraatData(verseKey);
+
   /**
    * Handle tab click or keyboard event
    * @param {TabId} tabType - Type of tab for logging
@@ -74,6 +79,8 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
       } else if (tabType === TabId.ANSWERS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
+      } else if (tabType === TabId.QIRAAT) {
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.QIRAAT }));
       }
 
       logButtonClick(
@@ -118,6 +125,13 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: createTabHandler(TabId.ANSWERS, () => getVerseAnswersNavigationUrl(verseKey)),
       condition: hasQuestions,
+    },
+    {
+      id: TabId.QIRAAT,
+      label: t('qiraat.title'),
+      icon: <TextIcon />,
+      onClick: createTabHandler(TabId.QIRAAT, () => `/${chapterId}/${verseNumber}`),
+      condition: hasQiraatData,
     },
   ];
 

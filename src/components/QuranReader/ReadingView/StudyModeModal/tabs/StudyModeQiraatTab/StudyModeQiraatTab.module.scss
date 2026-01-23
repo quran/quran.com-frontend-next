@@ -1,0 +1,84 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  padding: var(--spacing-medium);
+
+  @include breakpoints.tablet {
+    padding: var(--spacing-small);
+  }
+}
+
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: var(--spacing-large);
+}
+
+.errorText,
+.emptyText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded);
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  gap: var(--spacing-large);
+  flex-direction: column-reverse;
+
+  @include breakpoints.desktop {
+    flex-direction: row;
+  }
+}
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+
+  @include breakpoints.desktop {
+    flex: 0.7;
+    order: 1;
+  }
+}
+
+.readersContainer {
+  width: 100%;
+
+  @include breakpoints.desktop {
+    flex: 0.3;
+    order: 2;
+    max-width: 300px;
+    position: sticky;
+    top: var(--spacing-medium);
+    align-self: flex-start;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+}
+
+.commentarySection {
+  margin-block-start: var(--spacing-large);
+  padding: var(--spacing-medium);
+  background: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-default);
+  border-inline-start: 4px solid var(--color-primary-medium);
+}
+
+.commentaryTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+  margin-block-end: var(--spacing-small);
+}
+
+.commentaryText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  line-height: 1.7;
+  margin: 0;
+}

@@ -1,0 +1,77 @@
+@use 'src/styles/breakpoints';
+
+.panel {
+  background: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  overflow: hidden;
+}
+
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--spacing-small) var(--spacing-medium);
+  background: var(--color-background-alternative-faded);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  @include breakpoints.desktop {
+    display: none;
+  }
+
+  &:hover {
+    background: var(--color-background-alternative-medium);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: -2px;
+  }
+}
+
+.desktopHeader {
+  display: none;
+  padding: var(--spacing-small) var(--spacing-medium);
+  background: var(--color-background-alternative-faded);
+  border-block-end: 1px solid var(--color-borders-hairline);
+
+  @include breakpoints.desktop {
+    display: block;
+  }
+}
+
+.headerTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-text-faded);
+  transition: transform 0.3s ease;
+}
+
+.chevronRotated {
+  transform: rotate(180deg);
+}
+
+.readersList {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+
+  @include breakpoints.desktop {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+.readersListVisible {
+  max-height: 1000px; // Arbitrary large value for animation
+}
