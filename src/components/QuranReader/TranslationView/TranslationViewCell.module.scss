@@ -9,6 +9,10 @@
   padding-block: var(--spacing-medium2-px);
   padding-inline: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
+
+  @include breakpoints.tablet {
+    padding-block: var(--spacing-large-px);
+  }
 }
 
 .firstCellWithHeader {
@@ -38,10 +42,18 @@
   direction: rtl;
   margin-block-start: var(--spacing-large-px);
   margin-block-end: var(--spacing-medium-plus-px);
+
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-xxlarge-px);
+  }
 }
 
 .verseTranslationsContainer {
   margin-block-end: var(--spacing-large-px);
+
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-xxlarge-px);
+  }
 }
 
 .verseTranslationContainer {
