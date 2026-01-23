@@ -97,9 +97,10 @@ const ReflectionsTab: React.FC = () => {
       <ReflectionsTabContent
         reflections={reflections}
         isLoading={!data && !error}
-        isLoadingMore={reflections?.length > 0 && size > 1 && isValidating}
+        isValidating={isValidating}
         error={error}
         loadMore={loadMore}
+        mutateCache={mutateCache}
       />
     </div>
   );

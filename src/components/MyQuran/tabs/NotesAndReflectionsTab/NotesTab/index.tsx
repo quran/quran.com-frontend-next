@@ -108,7 +108,7 @@ const NotesTab: React.FC<NotesTabProps> = ({ sortBy }) => {
       <NotesTabContent
         notes={notesWithRecentReflection}
         isLoading={!data && !error}
-        isLoadingMore={notes?.length > 0 && size > 1 && isValidating}
+        isValidating={isValidating}
         error={error}
         loadMore={loadMore}
         mutateCache={mutateCache}

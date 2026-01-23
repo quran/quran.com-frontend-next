@@ -5,6 +5,7 @@ import { Virtuoso } from 'react-virtuoso';
 
 import styles from '../NotesAndReflectionsTab.module.scss';
 
+import Error from '@/components/Error';
 import CardsSkeleton from '@/components/MyQuran/Skeleton';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
@@ -15,6 +16,7 @@ import { NoteWithRecentReflection } from '@/components/Notes/modal/type';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
+import { logButtonClick } from '@/utils/eventLogger';
 
 // It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
 const PROXIMATE_NOTE_HEIGHT = 100;
@@ -22,7 +24,7 @@ const PROXIMATE_NOTE_HEIGHT = 100;
 interface NotesTabContentProps {
   notes: NoteWithRecentReflection[];
   isLoading: boolean;
-  isLoadingMore: boolean;
+  isValidating: boolean;
   error: unknown;
   loadMore: (index: number) => void;
   mutateCache: () => void;
@@ -36,7 +38,7 @@ enum ModalState {
 const NotesTabContent: React.FC<NotesTabContentProps> = ({
   notes,
   isLoading,
-  isLoadingMore,
+  isValidating,
   error,
   loadMore,
   mutateCache,
@@ -67,6 +69,11 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     setModalState(null);
   }, []);
 
+  const handleRetry = useCallback(() => {
+    logButtonClick('notes_tab_retry');
+    mutateCache();
+  }, [mutateCache]);
+
   const renderNote = useCallback(
     (index: number, note: NoteWithRecentReflection) => {
       return (
@@ -86,15 +93,9 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
     [handleEditNote, handlePostToQrClick, handleDeleteNoteClick, noteToDelete, isDeletingNote],
   );
 
-  if (error) {
-    return (
-      <div className={styles.statusContainer} data-status="error">
-        {t('common:error.general')}
-      </div>
-    );
-  }
-
-  const isEmpty = !isLoading && notes.length === 0;
+  const isValidatingOrLoading = isValidating || isLoading;
+  const isError = !!error && !isValidatingOrLoading;
+  const isEmpty = !isError && !isValidatingOrLoading && notes.length === 0;
 
   if (isEmpty) {
     return (
@@ -118,7 +119,13 @@ const NotesTabContent: React.FC<NotesTabContentProps> = ({
         />
       </div>
 
-      {(isLoadingMore || isLoading) && <CardsSkeleton count={5} />}
+      {isValidatingOrLoading && <CardsSkeleton count={5} />}
+
+      {isError && (
+        <div className={styles.statusContainer}>
+          <Error error={error as Error} onRetryClicked={handleRetry} />
+        </div>
+      )}
 
       <EditNoteModal
         isModalOpen={modalState === ModalState.Edit}
