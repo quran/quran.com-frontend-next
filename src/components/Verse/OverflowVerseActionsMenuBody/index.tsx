@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
+import PinVerseAction from '../PinVerseAction';
 import SaveToCollectionAction from '../SaveToCollectionAction';
 import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
@@ -40,6 +41,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           isTranslationView={isTranslationView}
         />
       )}
+      <PinVerseAction
+        verse={verse}
+        isTranslationView={isTranslationView}
+        onActionTriggered={onActionTriggered}
+      />
       <VerseActionAdvancedCopy
         onActionTriggered={onActionTriggered}
         verse={verse}

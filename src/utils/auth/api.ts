@@ -42,6 +42,7 @@ import { Mushaf } from '@/types/QuranReader';
 import {
   CollectionsQueryParams,
   makeActivityDaysUrl,
+  makeAddBulkCollectionBookmarksUrl,
   makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
@@ -434,6 +435,26 @@ export const addCollectionBookmark = async ({
     mushaf: mushafId,
     type,
     verseNumber,
+  });
+};
+
+export const addBulkCollectionBookmarks = async ({
+  collectionId,
+  bookmarks,
+  mushafId,
+}: {
+  collectionId: string;
+  bookmarks: Array<{
+    key: number;
+    type: BookmarkType;
+    verseNumber?: number;
+  }>;
+  mushafId: number;
+}): Promise<{ added: number; skipped: number }> => {
+  return postRequest(makeAddBulkCollectionBookmarksUrl(collectionId), {
+    collectionId,
+    bookmarks,
+    mushaf: mushafId,
   });
 };
 

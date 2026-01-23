@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
+import PinnedVersesSection from './PinnedVersesSection';
 import SearchableVerseSelector from './SearchableVerseSelector';
 import StudyModeBody from './StudyModeBody';
 import { StudyModeTabId } from './StudyModeBottomActions';
@@ -435,6 +436,7 @@ const StudyModeModal: React.FC<Props> = ({
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
     >
+      <PinnedVersesSection />
       {renderContent()}
     </ContentModal>
   );

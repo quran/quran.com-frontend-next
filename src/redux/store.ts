@@ -31,6 +31,7 @@ import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
 import notes from './slices/QuranReader/notes';
+import pinnedVerses from './slices/QuranReader/pinnedVerses';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
@@ -74,6 +75,7 @@ const persistConfig = {
     SliceName.REVELATION_ORDER,
     SliceName.ONBOARDING,
     SliceName.MEDIA_MAKER,
+    SliceName.PINNED_VERSES,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -107,6 +109,7 @@ export const rootReducer = combineReducers({
   microphone,
   studyMode,
   verseActionModal,
+  pinnedVerses,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

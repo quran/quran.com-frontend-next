@@ -52,23 +52,30 @@ const TajweedColors = () => {
       className={classNames(styles.container, {
         [styles.visibleContainer]: !isExpanded,
       })}
-      style={{
-        transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
-      }}
     >
+      {/* Collapsible legend container - uses height animation instead of translateY */}
       <div
-        ref={ref}
-        className={classNames(styles.tajweedContainer, {
-          [styles.shadow]: showTajweedBar,
-        })}
+        className={styles.rulesWrapper}
+        style={{
+          height: showTajweedBar ? height : 0,
+          overflow: 'hidden',
+          transition: 'height 0.2s ease-in-out',
+        }}
       >
-        <div className={styles.rulesContainer}>
-          {TAJWEED_RULES.map((rule) => (
-            <div className={styles.ruleContainer} key={rule}>
-              <div className={classNames(styles.circle, styles[`${themeVariant}-${rule}`])} />
-              <p>{t(rule)}</p>
-            </div>
-          ))}
+        <div
+          ref={ref}
+          className={classNames(styles.tajweedContainer, {
+            [styles.shadow]: showTajweedBar,
+          })}
+        >
+          <div className={styles.rulesContainer}>
+            {TAJWEED_RULES.map((rule) => (
+              <div className={styles.ruleContainer} key={rule}>
+                <div className={classNames(styles.circle, styles[`${themeVariant}-${rule}`])} />
+                <p>{t(rule)}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

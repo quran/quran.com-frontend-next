@@ -325,4 +325,10 @@ export default {
       qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
     },
   }),
+  40: (state) => ({
+    ...state,
+    pinnedVerses: {
+      verses: [],
+    },
+  }),
 };

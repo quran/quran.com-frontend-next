@@ -1,11 +1,8 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  position: fixed;
-  inset-block-end: 0;
-  inset-inline: 0;
+  // Part of the context menu flow, not fixed to bottom
   inline-size: 100%;
-  z-index: var(--z-index-sticky);
 }
 
 .track {
@@ -29,12 +26,4 @@
 .hide {
   display: none;
   visibility: hidden;
-}
-
-// Ensure it works properly on mobile
-@include breakpoints.smallerThanTablet {
-  .container {
-    inset-block-end: 0;
-    transform: none;
-  }
 }

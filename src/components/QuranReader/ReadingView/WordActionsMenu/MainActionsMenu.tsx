@@ -2,6 +2,7 @@ import React from 'react';
 
 import CopyMenuItem from './MenuItems/CopyMenuItem';
 import MoreMenuItem from './MenuItems/MoreMenuItem';
+import PinMenuItem from './MenuItems/PinMenuItem';
 import PlayAudioMenuItem from './MenuItems/PlayAudioMenuItem';
 import QuestionsMenuItem from './MenuItems/QuestionsMenuItem';
 import QuranReflectMenuItem from './MenuItems/QuranReflectMenuItem';
@@ -54,6 +55,7 @@ const MainActionsMenu: React.FC<Props> = ({
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
       <CopyMenuItem verse={verse} onActionTriggered={onActionTriggered} />
+      <PinMenuItem verse={verse} onActionTriggered={onActionTriggered} />
 
       <ReadingViewNoteAction verseKey={verse.verseKey} onActionTriggered={onActionTriggered} />
 

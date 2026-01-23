@@ -159,5 +159,21 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "pin-verse": "Pin",
+  "unpin-verse": "Unpin",
+  "pinned-verses": "Pinned verses",
+  "compare-verses": "Compare",
+  "clear-pinned": "Clear All",
+  "save-pinned-to-collection": "Save to Collection",
+  "load-from-collection": "Load from Collection",
+  "copy-pinned": "Copy",
+  "pinned-saved-successfully": "Pinned verses saved successfully",
+  "verses-loaded-successfully": "Verses loaded to pinned",
+  "no-pinned-verses": "No pinned verses",
+  "verse-pinned": "Verse pinned",
+  "verses-pinned": "{{count}} verses pinned",
+  "pin-all-verses": "Pin All",
+  "pin-verses-to-compare": "Pin verses to compare them",
+  "reflections": "Reflections"
 }

@@ -2,6 +2,7 @@
 import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
@@ -10,8 +11,11 @@ import styles from './CollectionDetail.module.scss';
 import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import PinIcon from '@/icons/bookmark.svg';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import { pinVerse, pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -47,6 +51,8 @@ const CollectionDetail = ({
   const [isOpen, setIsOpen] = useState(true);
   const { t, lang } = useTranslation();
   const confirm = useConfirm();
+  const dispatch = useDispatch();
+  const toast = useToast();
 
   const sortOptions = [
     {
@@ -96,6 +102,25 @@ const CollectionDetail = ({
       collectionId: id,
     });
     navigateToExternalUrl(getVerseNavigationUrlByVerseKey(verseKey));
+  };
+
+  const handlePinVerse = (bookmark: Bookmark) => () => {
+    const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
+    logButtonClick('collection_detail_pin_verse', {
+      verseKey,
+      collectionId: id,
+    });
+    dispatch(pinVerse(verseKey));
+    toast(t('quran-reader:verse-pinned'), { status: ToastStatus.Success });
+  };
+
+  const handlePinAllVerses = () => {
+    logButtonClick('collection_detail_pin_all_verses', { collectionId: id });
+    const verseKeys = bookmarks.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
+    dispatch(pinVerses(verseKeys));
+    toast(t('quran-reader:verses-pinned', { count: verseKeys.length }), {
+      status: ToastStatus.Success,
+    });
   };
 
   const getBookmarkName = (bookmark) => {
@@ -160,9 +185,16 @@ const CollectionDetail = ({
             />
           )}
         </div>
-        <Button variant={ButtonVariant.Ghost} onClick={onToggleAllClicked}>
-          {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
-        </Button>
+        <div className={styles.actionsRow}>
+          <Button variant={ButtonVariant.Ghost} onClick={onToggleAllClicked}>
+            {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
+          </Button>
+          {!isCollectionEmpty && (
+            <Button variant={ButtonVariant.Ghost} onClick={handlePinAllVerses} prefix={<PinIcon />}>
+              {t('quran-reader:pin-all-verses')}
+            </Button>
+          )}
+        </div>
         <div className={styles.collectionItemsContainer}>
           {isCollectionEmpty ? (
             <div className={styles.emptyCollectionContainer}>
@@ -208,6 +240,13 @@ const CollectionDetail = ({
                         shouldCloseMenuAfterClick
                       >
                         {t('collection:go-to-ayah')}
+                      </PopoverMenu.Item>
+                      <PopoverMenu.Item
+                        onClick={handlePinVerse(bookmark)}
+                        shouldCloseMenuAfterClick
+                        icon={<PinIcon />}
+                      >
+                        {t('quran-reader:pin-verse')}
                       </PopoverMenu.Item>
                     </PopoverMenu>
                   }

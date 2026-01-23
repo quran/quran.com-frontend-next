@@ -20,6 +20,14 @@
   margin-inline-start: var(--spacing-xxsmall);
 }
 
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  flex-wrap: wrap;
+  margin-block-start: var(--spacing-small);
+}
+
 .collectionItemsContainer {
   margin-block-start: var(--spacing-medium);
   > * + * {

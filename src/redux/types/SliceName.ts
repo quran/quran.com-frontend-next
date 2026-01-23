@@ -30,6 +30,7 @@ enum SliceName {
   MICROPHONE = 'microphone',
   STUDY_MODE = 'studyMode',
   VERSE_ACTION_MODAL = 'verseActionModal',
+  PINNED_VERSES = 'pinnedVerses',
 }
 
 export default SliceName;

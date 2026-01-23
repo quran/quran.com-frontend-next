@@ -188,6 +188,9 @@ export const makeDeleteCollectionUrl = (collectionId: string) =>
 export const makeAddCollectionBookmarkUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makeAddBulkCollectionBookmarksUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks/bulk`);
+
 export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookmarkId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks/${bookmarkId}`);
 

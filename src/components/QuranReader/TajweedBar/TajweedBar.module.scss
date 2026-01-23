@@ -3,9 +3,10 @@
 
 $pixel: 1px;
 
+// TajweedBar is now rendered inside ContextMenu, so no fixed positioning needed
+// It naturally flows in the document order before PinnedVersesBar
 .container {
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -24,13 +25,25 @@ $pixel: 1px;
   @include breakpoints.smallerThanTablet {
     margin-block-start: 0px;
   }
+  width: 100%;
+  color: var(--color-text-default);
+  text-align: center;
+  background: var(--color-background-elevated);
+  border-bottom: 1px solid var(--color-borders-hairline);
+}
+
+// visibleContainer no longer needed - component flows naturally in ContextMenu
+
+
+// Wrapper for collapsible legend - height is controlled via inline styles
+.rulesWrapper {
+  width: 100%;
 }
 
 .tajweedContainer {
   display: flex;
   inline-size: 100%;
   justify-content: center;
-  background: var(--color-background-default);
   background: var(--color-background-elevated);
 }
 

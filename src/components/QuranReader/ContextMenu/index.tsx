@@ -2,6 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import PinnedVersesBar from '../PinnedVersesBar';
 import ReadingModeToggle from '../ReadingPreferenceSwitcher/ReadingModeToggle';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
@@ -33,7 +34,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isExpanded,
     mushaf,
     verseKey,
-    isTranslationMode,
 
     // Data
     chapterData,
@@ -139,11 +139,14 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
-      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
-
-      {/* Reading progress bar */}
+      {/* Reading progress bar - at top of extended stack */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
+
+      {/* Pinned verses bar */}
+      <PinnedVersesBar />
+
+      {/* Tajweed colors bar - shows at the bottom of the stack */}
+      {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
     </div>
   );
 };
