@@ -1,9 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import AuthHeader from './AuthHeader';
@@ -15,15 +17,18 @@ import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
+import { logErrorToSentry } from '@/lib/sentry';
 import authStyles from '@/styles/auth/auth.module.scss';
 import UserProfile from '@/types/auth/UserProfile';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { updateUserProfile } from '@/utils/auth/authRequests';
+import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import {
   handleResendVerificationCode,
   handleVerificationCodeSubmit as submitVerificationCode,
 } from '@/utils/auth/verification';
 import { logFormSubmission } from '@/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 type FormData = {
   [key: string]: string;
@@ -37,6 +42,9 @@ interface CompleteSignupFormProps {
 const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, userData }) => {
   const { t } = useTranslation('common');
   const { mutate } = useSWRConfig();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showVerification, setShowVerification] = useState(false);
@@ -137,6 +145,16 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
   const handleVerificationCodeSubmit = async (code: string) => {
     try {
       const result = await submitVerificationCode(email, code);
+      try {
+        // Sync user preferences from server
+        await syncPreferencesFromServer({
+          locale: router.locale || 'en',
+          dispatch,
+          audioService,
+        });
+      } catch (error) {
+        logErrorToSentry('Failed to sync user preferences after verification', error);
+      }
 
       // Mutate the user profile data to update the global state
       mutate(result.profileUrl);
