@@ -4,41 +4,38 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QiraatBanner.module.scss';
 
-import HelpCircleIcon from '@/icons/help-circle.svg';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import HelpCircleIcon from '@/icons/help-circle.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 
-interface QiraatBannerProps {
-  onLearnMoreClick?: () => void;
-}
+const LEARN_MORE_URL = 'https://quran.com/learning-plans';
 
 /**
  * Educational banner explaining what Qiraat are with a link to learn more.
  * Displays at the top of the Qiraat tab.
+ * @returns {JSX.Element} Rendered Qiraat banner UI
  */
-const QiraatBanner: React.FC<QiraatBannerProps> = ({ onLearnMoreClick }) => {
+const QiraatBanner: React.FC = () => {
   const { t } = useTranslation('common');
 
-  // TODO: Replace with actual learning plan URL when available
-  const learnMoreUrl = 'https://quran.com/learning-plans';
-
-  const handleClick = () => {
-    onLearnMoreClick?.();
+  const handleLearnMoreClick = () => {
+    logButtonClick('qiraat_learn_more');
   };
 
   return (
     <div className={styles.banner}>
-      <div className={styles.content}>
-        <HelpCircleIcon className={styles.icon} />
-        <span className={styles.text}>{t('qiraat.what-are')}</span>
-      </div>
+      <HelpCircleIcon className={styles.icon} />
+
+      <span className={styles.text}>{t('qiraat.what-are')}</span>
+
       <Link
-        href={learnMoreUrl}
+        href={LEARN_MORE_URL}
         isNewTab
         variant={LinkVariant.Highlight}
-        onClick={handleClick}
+        onClick={handleLearnMoreClick}
         className={styles.learnMore}
       >
-        {t('qiraat.learn-more')} →
+        {t('qiraat.learn-more')}
       </Link>
     </div>
   );

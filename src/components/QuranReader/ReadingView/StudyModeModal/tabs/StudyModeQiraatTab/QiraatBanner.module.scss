@@ -3,39 +3,25 @@
 .banner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-small) var(--spacing-medium);
-  background: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-default);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
   margin-block-end: var(--spacing-medium);
-  gap: var(--spacing-small);
-
-  @include breakpoints.tablet {
-    padding: var(--spacing-xsmall) var(--spacing-small);
-    flex-wrap: wrap;
-  }
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-small);
+  gap: var(--spacing-xsmall);
+  flex-wrap: wrap;
 }
 
 .icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: var(--color-text-faded);
+  block-size: var(--spacing-medium2);
+  inline-size: var(--spacing-medium2);
+  color: var(--color-text-faded-new);
   flex-shrink: 0;
 }
 
 .text {
-  font-size: var(--font-size-normal);
-  color: var(--color-text-default);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
 }
 
 .learnMore {
-  font-size: var(--font-size-small);
+  color: var(--color-text-link-new);
   white-space: nowrap;
 }
