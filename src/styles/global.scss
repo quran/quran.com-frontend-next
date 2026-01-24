@@ -1,8 +1,9 @@
-@use "src/styles/theme";
-@use "src/styles/constants";
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 
 body {
-  min-height: 100vh;
+  min-block-size: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
   padding: 0px !important;
@@ -16,7 +17,7 @@ body {
   }
 
   overscroll-behavior-y: none;
-  font-family: "Figtree", "Helvetica Neue", Helvetica, Arial !important;
+  font-family: 'Figtree', 'Helvetica Neue', Helvetica, Arial !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -26,21 +27,28 @@ body {
   :lang(urdu),
   .ur,
   .urdu {
-    font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica, Arial, serif;
+    font-family: 'MehrNastaliq', 'Mehr Nastaliq Web', 'Helvetica Neue', Helvetica, Arial, serif;
   }
 
   :lang(ar),
   :lang(arabic) .ar {
-    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "Figtree", "Helvetica Neue", Helvetica, Arial;
+    font-family: 'Noto Nastaliq Arabic', 'NotoNastaliq', 'Figtree', 'Helvetica Neue', Helvetica,
+      Arial;
   }
 
   :lang(bn),
   :lang(bengali) {
-    font-family: "NotoSerifBengali", "Figtree", "Helvetica Neue", Helvetica, Arial;
+    font-family: 'NotoSerifBengali', 'Figtree', 'Helvetica Neue', Helvetica, Arial;
   }
 
   :lang(ku) {
-    font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq", "Figtree", Helvetica, Arial;
+    font-family: 'DroidArabicNaskh', 'Noto Nastaliq Arabic', 'NotoNastaliq', 'Figtree', Helvetica,
+      Arial;
+  }
+
+  :lang(vi),
+  :lang(vietnamese) {
+    font-family: 'BeVietnamPro', 'Be Vietnam Pro', 'Figtree', 'Helvetica Neue', Helvetica, Arial;
   }
 }
 
@@ -71,9 +79,28 @@ select option {
 .__remotion-player {
   /* Center the video */
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  inset: 0;
   margin: 0 auto;
+}
+
+.bannerActive {
+  --navbar-container-height: calc(var(--navbar-height) + var(--banner-height));
+
+  @include breakpoints.tablet {
+    --banner-height: var(--navbar-height);
+    --navbar-container-height: var(--navbar-height);
+  }
+}
+
+.navbarVisible {
+  @include breakpoints.smallerThanTablet {
+    --top-bar-height: var(--top-bar-height-mobile-full);
+  }
+}
+
+.navbarHidden {
+  --top-bar-height: var(--top-bar-height-mobile-collapsed);
+  @include breakpoints.tablet {
+    --top-bar-height: var(--top-bar-height-collapsed);
+  }
 }

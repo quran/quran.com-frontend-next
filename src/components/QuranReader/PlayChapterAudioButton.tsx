@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useDirection from '@/hooks/useDirection';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -28,6 +30,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
+  const direction = useDirection();
+  const isRTL = direction === 'rtl';
 
   const audioService = useContext(AudioPlayerMachineContext);
   const isLoadingCurrentChapter = useSelector(audioService, (state) =>
@@ -62,12 +66,13 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
 
   if (isLoadingCurrentChapter) {
     return (
-      <div className={styles.container}>
+      <div className={classNames(styles.container, styles.playChapterAudioButton)}>
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
-          size={ButtonSize.Small}
-          prefix={<Spinner />}
+          variant={ButtonVariant.ModeToggle}
+          shape={ButtonShape.Pill}
+          size={ButtonSize.XSmall}
+          prefix={isRTL ? undefined : <Spinner />}
+          suffix={isRTL ? <Spinner /> : undefined}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
           isDisabled
@@ -79,31 +84,36 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, styles.playChapterAudioButton)}>
       {isPlayingCurrentChapter ? (
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
-          size={ButtonSize.Small}
-          prefix={<PauseIcon />}
+          variant={ButtonVariant.ModeToggle}
+          shape={ButtonShape.Pill}
+          size={ButtonSize.XSmall}
+          prefix={isRTL ? undefined : <PauseIcon />}
+          suffix={isRTL ? <PauseIcon /> : undefined}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
+          isSelected
+          data-testid="pause-button"
         >
-          {t('audio.player.pause-audio')}
+          {t('listen')}
         </Button>
       ) : (
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
-          size={ButtonSize.Small}
-          prefix={<PlayIcon />}
+          variant={ButtonVariant.ModeToggle}
+          shape={ButtonShape.Pill}
+          size={ButtonSize.XSmall}
+          prefix={isRTL ? undefined : <PlayIcon />}
+          suffix={isRTL ? <PlayIcon /> : undefined}
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
           ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
+          data-testid="listen-button"
         >
-          {t('audio.play')}
+          {t('listen')}
         </Button>
       )}
     </div>

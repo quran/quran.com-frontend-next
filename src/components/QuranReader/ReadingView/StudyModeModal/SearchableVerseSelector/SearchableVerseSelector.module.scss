@@ -1,0 +1,169 @@
+@use 'src/styles/breakpoints';
+// Main container with position relative for dropdown positioning
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-inline-start: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    padding-inline-start: 0;
+  }
+}
+
+// Collapsed view - shows chapter verse buttons
+.collapsedContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.selectorButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  block-size: var(--spacing-large-px);
+  padding-block: var(--spacing-xsmall);
+  padding-inline: var(--spacing-small-px);
+  background-color: var(--color-background-alternative-faint);
+  border: none;
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+  }
+}
+
+.buttonText {
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+  white-space: nowrap;
+}
+
+svg.caretIcon {
+  flex-shrink: 0;
+  stroke: var(--color-text-faded-new);
+}
+
+// Dropdown container - absolute positioned
+.dropdownContainer {
+  position: absolute;
+  inset-block-start: 0px;
+  inset-inline-start: 0;
+  z-index: var(--z-index-dropdown);
+  background-color: var(--color-background-default);
+  border: 1px solid var(--color-separators-ayah-level);
+  border-radius: var(--border-radius-medium-px);
+  inline-size: 360px;
+  box-shadow: var(--shadow-surah-search);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-small-px);
+  border-block-end: 1px solid var(--color-separators-ayah-level);
+}
+
+.title {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxsmall);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius-small);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+  }
+
+  svg {
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
+    color: var(--color-text-default-new);
+    fill: var(--color-text-default-new);
+  }
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  margin: var(--spacing-small-px);
+  padding: var(--spacing-xsmall) var(--spacing-small);
+  border-radius: var(--border-radius-xsmall-px);
+  background: var(--color-background-alternative-faint);
+}
+
+.searchIcon {
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
+  color: var(--color-text-faded);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-default);
+  padding: 0;
+
+  &::placeholder {
+    color: var(--color-text-faded);
+  }
+}
+
+.listContainer {
+  max-block-size: 200px;
+  overflow-y: auto;
+  margin: var(--spacing-small-px);
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  padding-inline: var(--spacing-small-px);
+  padding-block: var(--spacing-xsmall-px);
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-xsmall-px);
+  cursor: pointer;
+  text-align: start;
+  font-size: var(--font-size-small);
+  color: var(--color-text-default-new);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+  }
+}
+
+.selectedItem {
+  background-color: var(--color-background-alternative-faint);
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+  }
+}
+
+.noResults {
+  padding: var(--spacing-medium);
+  text-align: center;
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+}

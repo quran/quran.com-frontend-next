@@ -1,21 +1,29 @@
 import { useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SaveToCollectionModal.module.scss';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
+import modalStyles from '@/components/Notes/modal/Modal.module.scss';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ArrowIcon from '@/icons/arrow.svg';
 import PlusIcon from '@/icons/plus.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
-export type Collection = {
+/**
+ * UI-specific collection type for the save modal with checked state
+ * This is different from types/Collection which is the API response type
+ */
+export type CollectionOption = {
   id: string;
   name: string;
   checked?: boolean;
@@ -23,11 +31,12 @@ export type Collection = {
 
 type SaveToCollectionModalProps = {
   isOpen: boolean;
-  collections: Collection[];
-  onCollectionToggled: (collection: Collection, newValue: boolean) => void;
+  collections: CollectionOption[];
+  onCollectionToggled: (collection: CollectionOption, newValue: boolean) => void;
   onNewCollectionCreated: (name: string) => Promise<void>;
   onClose?: () => void;
   verseKey: string;
+  onBack?: () => void;
 };
 
 const SaveToCollectionModal = ({
@@ -37,6 +46,7 @@ const SaveToCollectionModal = ({
   onNewCollectionCreated,
   onClose,
   verseKey,
+  onBack,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,7 +78,7 @@ const SaveToCollectionModal = ({
     logButtonClick('save_to_collection_add_new_collection');
   };
 
-  const handleCheckboxChange = (collection: Collection) => (checked: boolean) => {
+  const handleCheckboxChange = (collection: CollectionOption) => (checked: boolean) => {
     const eventData = {
       verseKey,
       collectionId: collection.id,
@@ -85,7 +95,25 @@ const SaveToCollectionModal = ({
     <ContentModal
       innerRef={contentModalRef}
       isOpen={isOpen}
-      header={<p className={styles.header}>{t('quran-reader:save-to')}</p>}
+      header={
+        onBack ? (
+          <button
+            type="button"
+            className={classNames(modalStyles.headerButton, modalStyles.title)}
+            onClick={onBack}
+          >
+            <IconContainer
+              icon={<ArrowIcon />}
+              shouldForceSetColors={false}
+              size={IconSize.Custom}
+              className={modalStyles.arrowIcon}
+            />
+            {t('quran-reader:save-to')}
+          </button>
+        ) : (
+          <p className={styles.header}>{t('quran-reader:save-to')}</p>
+        )
+      }
       hasCloseButton
       onClose={onClose}
       onEscapeKeyDown={onClose}
@@ -96,7 +124,7 @@ const SaveToCollectionModal = ({
           <div className={styles.collectionItem} key={collection.id}>
             <Checkbox
               id={collection.name}
-              defaultChecked={collection.checked}
+              checked={collection.checked}
               label={collection.name}
               onChange={handleCheckboxChange(collection)}
             />

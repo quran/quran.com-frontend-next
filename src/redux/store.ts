@@ -35,19 +35,22 @@ import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
+import studyMode from './slices/QuranReader/studyMode';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
+import verseActionModal from './slices/QuranReader/verseActionModal';
 import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
+import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 35,
+  version: 40,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -102,12 +105,29 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
+  studyMode,
+  verseActionModal,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const getStore = (locale: string) =>
-  configureStore({
+const getStore = (locale: string) => {
+  const baseInitialState = getStoreInitialState(locale);
+
+  // Preserve persisted theme synchronously to prevent flash during language switching.
+  // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
+  let initialState = baseInitialState;
+  if (typeof window !== 'undefined') {
+    const persistedTheme = getPersistedTheme();
+    if (persistedTheme) {
+      initialState = {
+        ...baseInitialState,
+        [SliceName.THEME]: persistedTheme,
+      };
+    }
+  }
+
+  return configureStore({
     reducer: persistedReducer,
     // @ts-ignore
     middleware: (getDefaultMiddleware) =>
@@ -120,7 +140,8 @@ const getStore = (locale: string) =>
       }).concat(DefaultSettingsMiddleware),
     devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
-    preloadedState: getStoreInitialState(locale),
+    preloadedState: initialState,
   });
+};
 
 export default getStore;

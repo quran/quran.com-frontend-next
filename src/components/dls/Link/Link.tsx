@@ -50,6 +50,7 @@ const Link: React.FC<LinkProps> = ({
         {...(shouldPassHref && { shouldPassHref })}
         {...(shouldPrefetch === false && { prefetch: false })}
         shallow={isShallow}
+        scroll={!isShallow}
         legacyBehavior
       >
         {node}

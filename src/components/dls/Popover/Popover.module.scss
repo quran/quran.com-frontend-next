@@ -1,8 +1,16 @@
+@use '../_tooltip-info.mixin' as *;
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
+
 .container {
   margin-block-start: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+.containerInfo {
+  margin-block-end: unset;
 }
 
 .trigger {
@@ -18,6 +26,7 @@
   padding-inline-end: var(--spacing-xsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
+
   & > span {
     fill: var(--color-background-default);
   }
@@ -32,7 +41,63 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro2-px);
+
+  @include breakpoints.smallerThanTablet {
+    margin-inline: var(--spacing-small);
+  }
+
   & > span {
     fill: var(--color-background-inverse);
+  }
+}
+
+.info {
+  @include infoTooltipStyles;
+  border-radius: var(--border-radius-medium-px);
+  z-index: var(--z-index-max);
+}
+
+.success {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  @include theme.dark {
+    color: var(--color-text-white);
+  }
+  & > span {
+    fill: var(--color-success-medium);
+  }
+}
+
+.success .icon {
+  color: var(--color-text-white);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  cursor: pointer;
+}
+
+.clickableContent {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro2-px);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-default);
   }
 }

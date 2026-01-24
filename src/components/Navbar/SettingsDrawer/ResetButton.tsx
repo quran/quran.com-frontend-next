@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import styles from './ResetButton.module.scss';
+import styles from './SettingsBody.module.scss';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import resetSettings from '@/redux/actions/reset-settings';
 import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
@@ -49,6 +49,10 @@ const ResetButton = () => {
       type: 'SET_INITIAL_CONTEXT',
       ...DEFAULT_XSTATE_INITIAL_STATE,
     });
+    audioService.send({
+      type: 'CHANGE_RECITER',
+      reciterId: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
+    });
   };
 
   const onResetSettingsClicked = async () => {
@@ -68,11 +72,14 @@ const ResetButton = () => {
   };
 
   return (
-    <>
-      <div className={styles.resetButtonContainer}>
-        <Button onClick={onResetSettingsClicked}>{t('settings.reset-cta')}</Button>
-      </div>
-    </>
+    <Button
+      onClick={onResetSettingsClicked}
+      data-testid="reset-settings-button"
+      variant={ButtonVariant.Simplified}
+      className={styles.resetButton}
+    >
+      {t('settings.reset')}
+    </Button>
   );
 };
 

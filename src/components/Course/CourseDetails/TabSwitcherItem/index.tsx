@@ -7,9 +7,9 @@ type Props = {
   value: string;
 };
 
-const TabSwitcherItem: React.FC<Props> = ({ icon, value }) => {
+const TabSwitcherItem: React.FC<Props> = ({ icon, value, ...props }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} {...props}>
       {icon} <p className={styles.value}>{value}</p>
     </div>
   );

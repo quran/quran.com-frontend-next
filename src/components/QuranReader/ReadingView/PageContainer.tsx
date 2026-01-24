@@ -9,9 +9,17 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import { selectValidatedReadingTranslation } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { ReadingPreference } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
+import { areArraysEqual } from '@/utils/array';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -25,6 +33,7 @@ type Props = {
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
+  readingPreference: ReadingPreference;
 };
 
 const getPageVersesRange = (
@@ -72,6 +81,7 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
+  readingPreference,
 }: Props): JSX.Element => {
   /**
    * HYDRATION RACE CONDITION FIX:
@@ -94,6 +104,7 @@ const PageContainer: React.FC<Props> = ({
    * and consistent throughout the component lifecycle, preventing cache key mismatches.
    */
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
+  const { isLoggedIn } = useIsLoggedIn();
 
   const pageNumber = useMemo(
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
@@ -104,8 +115,27 @@ const PageContainer: React.FC<Props> = ({
     [initialData.verses, pageIndex, pageNumber],
   );
 
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+  const selectedReadingTranslation = useSelector(selectValidatedReadingTranslation);
+
   const isUsingDefaultSettings = useIsUsingDefaultSettings();
-  const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings;
+
+  // Only use initial data if it has actual verses (not empty array)
+  const hasInitialVerses = initialVerses && initialVerses.length > 0;
+
+  // For ReadingTranslation mode, we can only use initialData if the selected translation
+  // matches the default for the current locale (which is what SSR would have used).
+  // Otherwise, we need to fetch fresh data with the user's selected translation.
+  const defaultTranslationForLocale = getTranslationsInitialState(lang).selectedTranslations[0];
+  const isUsingDefaultReadingTranslation =
+    readingPreference !== ReadingPreference.ReadingTranslation ||
+    selectedReadingTranslation === defaultTranslationForLocale;
+
+  const shouldUseInitialData =
+    pageIndex === 0 &&
+    isUsingDefaultSettings &&
+    hasInitialVerses &&
+    isUsingDefaultReadingTranslation;
 
   /**
    * CRITICAL: Only generate request key after hydration completes.
@@ -123,10 +153,15 @@ const PageContainer: React.FC<Props> = ({
         reciter: reciterId,
         locale: lang,
         wordByWordLocale,
+        selectedTranslations,
+        readingPreference,
+        selectedReadingTranslation: selectedReadingTranslation
+          ? String(selectedReadingTranslation)
+          : null,
       })
     : null;
 
-  const { data: verses, isValidating } = useSWRImmutable(requestKey, verseFetcher, {
+  const { data: verses } = useSWRImmutable(requestKey, verseFetcher, {
     // CRITICAL: Always provide fallbackData for SSR compatibility
     // This ensures verses render immediately server-side and during hydration
     fallbackData: shouldUseInitialData ? initialVerses : null,
@@ -147,8 +182,22 @@ const PageContainer: React.FC<Props> = ({
     }
   }, [pageNumber, setMushafPageToVersesMap, effectiveVerses]);
 
-  if (!effectiveVerses || isValidating) {
-    return <ReadingViewSkeleton />;
+  // Calculate bookmarks range URL for bulk fetching (memoized to prevent unnecessary recalculations)
+  const bookmarksRangeUrl = useMemo(() => {
+    if (!effectiveVerses?.length || !isLoggedIn) return null;
+    const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+    return makeBookmarksRangeUrl(
+      mushafId,
+      Number(effectiveVerses[0].chapterId),
+      Number(effectiveVerses[0].verseNumber),
+      effectiveVerses.length,
+    );
+  }, [effectiveVerses, isLoggedIn, quranReaderStyles.quranFont, quranReaderStyles.mushafLines]);
+
+  // Only show skeleton when we truly have no data.
+  // Keep showing existing content while revalidating to prevent header flickering during mode switches.
+  if (!effectiveVerses) {
+    return <ReadingViewSkeleton readingPreference={readingPreference} />;
   }
 
   return (
@@ -158,6 +207,8 @@ const PageContainer: React.FC<Props> = ({
       pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
+      bookmarksRangeUrl={bookmarksRangeUrl}
+      lang={lang}
     />
   );
 };

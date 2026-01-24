@@ -3,6 +3,7 @@
   "begin": "Anza",
   "calendar-cta": "Kalenda",
   "chapters-and-verses": "Surah na Aya",
+  "continue-learning-plan": "Endelea kujifunza",
   "continue-read": "Endelea Kusoma",
   "explore-topics": "Chunguza Mada",
   "first-time-reading": "Mgeni kwa Qur'ani? <link> Anzia hapa </link>",
@@ -13,6 +14,7 @@
   "my-quran": "Qur'ani yangu",
   "navigate-quran": "Pitia Qur'ani",
   "no-bookmarks": "Huna alamisho zozote bado",
+  "no-page-bookmarks": "Huna alamisho zozote za ukurasa kwa sasa",
   "no-recently-read": "Bado huna vipindi vyovyote vya kusoma",
   "noble-quran": "Qur'ani Tukufu",
   "popular": "Maarufu",
@@ -31,7 +33,7 @@
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Je, ungependa kusoma dakika 10 kwa siku, kukamilisha Juz katika mwezi mmoja, au kumaliza Qur'ani nzima kwa mwaka mmoja? Ni rahisi kuunda lengo maalum na kufuatilia maendeleo yako"
+        "logged-out": "Je, ungependa kusoma dakika 10 kwa siku, kukamilisha Juzuu katika mwezi mmoja, au kumaliza Qur'ani nzima kwa mwaka mmoja? Ni rahisi kuunda lengo maalum na kufuatilia maendeleo yako"
       },
       "title": "Malengo Maalum ya Kusoma Qur'ani"
     },
@@ -40,13 +42,13 @@
   "qr-community": "Soma Aya na Tafakari za leo",
   "quran-in-year": "Quran in a Year",
   "quran-in-year-cta": "Usomaji wa Wiki Hii",
-  "quran-in-year-verse-title": "Mstari kutoka katika usomaji wa juma hili",
+  "quran-in-year-verse-title": "Aya kutoka usomaji wa juma hili",
   "ramadan-activities-cta": "<link> Fuata <b> Global Quranic Calendar </b> kwa usomaji wa kila wiki, podikasti za kusisimua, na wito wa kutafakari! </link>",
   "ramadan": {
     "header": "Zana za Kukuza Uhusiano Wako na Qur'ani",
     "title": "Je, uko tayari kwa Ramadhani?"
   },
-  "read-juz": "Soma Juz",
+  "read-juz": "Soma Juzuu",
   "recently-read": "Uliyoisoma Hivi Karibuni",
   "revelation-order-disclaimer": "Mtazamo huu unaonyesha utaratibu wa mpangilio wa Surah katika Quran kulingana na wakati zilipoteremshwa kwa Mtume Muhammad <hover> ﷺ </hover>. Utaratibu huu ni mtazamo katika maoni ya wanazuoni na baadhi ya Sura ziliteremshwa kisehemu kwa nyakati tofauti. Utaratibu uliotumika hapa kunatokana na kazi ya <link> Tanzil.net </link>. [Kumbuka: utaratibu wa Mushaf uliyokusanywa kutoka al-Fatiha hadi al-Nas ni suala la makubaliano kati ya wanazuoni.]",
   "see-more-learning-plans": "Tazama Zaidi",
@@ -55,10 +57,12 @@
     "description": "Saidia kueneza Qur'ani kwa wanafunzi wapya",
     "title": "Shiriki Qur'ani!"
   },
+  "start-learning-plan": "Anza kujifunza",
   "start-read": "Anza Kusoma",
   "stay-consistent": "Fuatilia Mifululizo, Unda Malengo Maalum, Kaa thabiti",
   "tab": {
     "bookmarks": "Alamisho",
+    "page-bookmarks": "Kurasa",
     "popular": "Maarufu"
   },
   "take-notes": "Je, umekosa kutumia <modalLink> Maelezo? </modalLink>",

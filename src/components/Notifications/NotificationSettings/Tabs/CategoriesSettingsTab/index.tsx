@@ -101,7 +101,7 @@ const CategoriesSettingsTab = () => {
       {Object.keys(groupByTags).map((tag) => {
         const tagPreferences = groupByTags[tag];
         return (
-          <div key={tag}>
+          <div key={tag} data-testid="auth-update-profile-email-notification-settings-section">
             <FieldsetContainer title={<Pill size={PillSize.SMALL}>{t(`tags.${tag}`)}</Pill>}>
               {tagPreferences.map((preference) => {
                 return (

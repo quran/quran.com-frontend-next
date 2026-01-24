@@ -78,7 +78,7 @@ $list-max-width: 80rem;
   @include breakpoints.tablet {
     padding-block-end: var(--spacing-large-px);
   }
-  border-block-end: 1px solid var(--color-separators);
+  border-block-end: 1px solid var(--color-separators-ayah-level);
 }
 
 .mobileOnly {

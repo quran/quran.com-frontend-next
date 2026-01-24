@@ -69,7 +69,8 @@
       font-size: var(--font-size-large);
     }
   }
-  b {
+  b,
+  strong {
     font-weight: var(--font-weight-bold);
   }
 }

@@ -14,28 +14,21 @@
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);
   will-change: transform;
+
+  @include breakpoints.smallerThanTablet {
+    // Faster expand with ease-out for smooth landing
+    transition: transform var(--transition-fast) ease-out var(--mobile-stagger-delay-navbar);
+  }
 }
 
 .hiddenNav {
   // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
   transform: translate3d(0, calc(-1 * var(--navbar-container-height)), 0);
-}
-
-.donateButton {
-  color: var(--color-text-link-new);
-  --themed-bg: var(--color-success-faded);
-  --themed-border: var(--color-success-faded);
-  font-weight: var(--font-weight-semibold);
-
-  &:hover {
-    --themed-bg: var(--color-success-faded);
-    --themed-border: var(--color-success-faded);
-    color: var(--color-text-link-new);
-  }
-
-  svg {
-    path {
-      fill: var(--color-blue-buttons-and-icons);
-    }
+  @include breakpoints.smallerThanTablet {
+    // TODO: we should add the banner height here if it's shown
+    // transform: translate3d(0, calc(-1 * (var(--navbar-container-height) + var(--banner-height))), 0);
+    transform: translate3d(0, calc(-1 * (var(--navbar-container-height))), 0);
+    // Fast collapse with ease-in
+    transition: transform var(--transition-fast) ease-in 0ms;
   }
 }

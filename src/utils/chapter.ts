@@ -57,8 +57,8 @@ export const getAllChaptersData = (
  * @param {string} id
  * @returns {Chapter} chapter
  */
-export const getChapterData = (chapters: ChaptersData, id: string): Chapter =>
-  chapters[formatStringNumber(id)];
+export const getChapterData = (chapters: ChaptersData, id: string): Chapter | undefined =>
+  (chapters || {})[formatStringNumber(id)];
 
 /**
  * Given a pageId, get chapter ids from a json file
@@ -150,6 +150,54 @@ export const isLastSurah = (surahNumber: number, isReadingByRevelationOrder?: bo
 
   return REVELATION_ORDER[REVELATION_ORDER.length - 1] === surahNumber;
 };
+
+// DRY helper to get adjacent chapter in revelation order.
+// offset: +1 for next, -1 for previous.
+const getAdjacentChapterInRevelationOrder = (
+  currentChapter: number,
+  offset: 1 | -1,
+): number | null => {
+  const currentIndex = REVELATION_ORDER.indexOf(currentChapter);
+  if (currentIndex === -1) return null;
+  return REVELATION_ORDER[currentIndex + offset] ?? null;
+};
+
+/**
+ * Get the next chapter number for the given reading order.
+ * Returns null when there is no next chapter.
+ *
+ * @param {number} currentChapter
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number | null}
+ */
+export const getNextChapterNumber = (
+  currentChapter: number,
+  isReadingByRevelationOrder?: boolean,
+): number | null => {
+  if (!isReadingByRevelationOrder) {
+    return currentChapter < 114 ? currentChapter + 1 : null;
+  }
+  return getAdjacentChapterInRevelationOrder(currentChapter, 1);
+};
+
+/**
+ * Get the previous chapter number for the given reading order.
+ * Returns null when there is no previous chapter.
+ *
+ * @param {number} currentChapter
+ * @param {boolean} isReadingByRevelationOrder
+ * @returns {number | null}
+ */
+export const getPreviousChapterNumber = (
+  currentChapter: number,
+  isReadingByRevelationOrder?: boolean,
+): number | null => {
+  if (!isReadingByRevelationOrder) {
+    return currentChapter > 1 ? currentChapter - 1 : null;
+  }
+  return getAdjacentChapterInRevelationOrder(currentChapter, -1);
+};
+
 /**
  * Get how much percentage of the chapter has been read.
  *

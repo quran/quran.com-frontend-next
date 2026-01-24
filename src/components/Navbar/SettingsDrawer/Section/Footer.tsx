@@ -4,9 +4,15 @@ import classNames from 'classnames';
 
 import styles from './Footer.module.scss';
 
-const Footer = ({ children, visible = true }) => (
+interface FooterProps {
+  children: React.ReactNode;
+  visible?: boolean;
+  className?: string;
+}
+
+const Footer = ({ children, visible = true, className }: FooterProps) => (
   <div
-    className={classNames(styles.footer, {
+    className={classNames(styles.footer, className, {
       [styles.invisible]: !visible,
     })}
   >

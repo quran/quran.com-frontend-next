@@ -1,0 +1,93 @@
+@use '@/styles/constants';
+@use '@/styles/breakpoints';
+
+div.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+  margin-block-start: var(--spacing-medium2);
+  block-size: 100%;
+
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-small);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+  flex: 1;
+  min-block-size: 0;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+
+  label {
+    line-height: 1;
+  }
+}
+
+.textAreaInputGroup {
+  @extend .inputGroup;
+
+  flex: 1;
+  min-block-size: 0;
+}
+
+// tag is used to increase specificity to override the default styles.
+div.textArea {
+  padding: 0;
+  block-size: 100%;
+
+  textarea {
+    padding: var(--spacing-xsmall);
+    margin: var(--spacing-micro);
+    --total-side-space: calc(var(--spacing-xsmall) + var(--spacing-micro));
+
+    color: var(--color-text-default-new);
+    block-size: calc(100% - (2 * var(--total-side-space)));
+    font-weight: var(--font-weight-medium);
+    resize: none;
+
+    &::placeholder {
+      color: var(--color-text-faded-new);
+      font-weight: var(--font-weight-normal);
+    }
+
+    [dir='rtl'] &::placeholder {
+      direction: rtl;
+      text-align: end;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-medium2);
+  padding-block-end: var(--content-padding-end, 0);
+}
+
+.error {
+  color: var(--color-text-error);
+  line-height: 1;
+}
+
+.reportButton {
+  font-size: var(--font-size-small);
+  padding-inline: var(--spacing-large2-px);
+  border-radius: var(--border-radius-medium-px);
+
+  span {
+    white-space: break-spaces;
+    line-height: 1;
+  }
+}

@@ -1,0 +1,40 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  position: fixed;
+  inset-block-end: 0;
+  inset-inline: 0;
+  inline-size: 100%;
+  z-index: var(--z-index-sticky);
+}
+
+.track {
+  inline-size: 100%;
+  block-size: 3px;
+  background-color: var(--color-separators-new);
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  block-size: 100%;
+  background-color: var(--color-success-deep);
+  transition: width var(--transition-fast);
+  transition-timing-function: linear;
+  min-inline-size: 0;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+// Ensure it works properly on mobile
+@include breakpoints.smallerThanTablet {
+  .container {
+    inset-block-end: 0;
+    transform: none;
+  }
+}

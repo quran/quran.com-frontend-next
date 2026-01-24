@@ -1,14 +1,17 @@
 import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import { useAuthContext } from '@/contexts/AuthContext';
 import { logErrorToSentry } from '@/lib/sentry';
+import { clearBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { clearReadingTracker } from '@/redux/slices/QuranReader/readingTracker';
 import QueryParam from '@/types/QueryParam';
 import { removeUserIdCookie } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
+import { ROUTES, PROTECTED_ROUTES } from '@/utils/navigation';
 
 type LogoutOptions = {
   eventName?: string;
@@ -23,11 +26,13 @@ type LogoutFunction = (options?: LogoutOptions) => Promise<void>;
  * - Calls backend logout API
  * - Clears auth context state
  * - Removes sync timestamp
+ * - Clears local bookmarks and reading sessions (prevents data leakage on shared devices)
  * - Optionally redirects to login
  * @returns {LogoutFunction} A function that performs the logout flow with options
  */
 const useLogout = (): LogoutFunction => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { logout: authContextLogout, state } = useAuthContext();
 
   const run = useCallback(
@@ -39,10 +44,16 @@ const useLogout = (): LogoutFunction => {
       try {
         authContextLogout();
         removeLastSyncAt();
+        dispatch(clearBookmarks());
+        dispatch(clearReadingTracker());
 
         if (!redirectToLogin) {
-          const redirect = router.asPath;
-          await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
+          if (PROTECTED_ROUTES.includes(router.pathname)) {
+            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${ROUTES.HOME}`);
+          } else {
+            const redirect = router.asPath;
+            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
+          }
         }
       } catch (error) {
         // TODO: Notify user of remote logout failure (e.g., toast/snackbar)
@@ -54,7 +65,7 @@ const useLogout = (): LogoutFunction => {
         removeUserIdCookie();
       }
     },
-    [router, authContextLogout, state?.user?.id],
+    [router, dispatch, authContextLogout, state?.user?.id],
   );
 
   return run;

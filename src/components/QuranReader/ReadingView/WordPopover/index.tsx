@@ -1,47 +1,88 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
-import ReadingViewWordActionsMenu from '../WordActionsMenu';
-
-import styles from './WordPopover.module.scss';
-
-import Popover, { ContentSide } from '@/dls/Popover';
+import PopoverMenu, {
+  PopoverMenuAlign,
+  PopoverMenuExpandDirection,
+} from '@/components/dls/PopoverMenu/PopoverMenu';
+import ReadingViewWordActionsMenu from '@/components/QuranReader/ReadingView/WordActionsMenu';
 import {
-  setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
+  setReadingViewSelectedVerseKey,
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { logEvent } from '@/utils/eventLogger';
-import Word from 'types/Word';
+import Verse from 'types/Verse';
+
+const ShareQuranModal = dynamic(
+  () => import('@/components/QuranReader/ReadingView/ShareQuranModal'),
+  { ssr: false },
+);
 
 type Props = {
-  word: Word;
+  verse?: Verse;
   children: React.ReactNode;
+  onOpenChange?: (isOpen: boolean) => void;
+  isOpen?: boolean;
+  bookmarksRangeUrl?: string | null;
 };
 
-const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
-  const [isTooltipOpened, setIsTooltipOpened] = useState(false);
+/**
+ * Popover for word/verse actions in reading view.
+ *
+ * @returns {React.ReactElement} The popover component wrapping children
+ */
+const ReadingViewWordPopover: React.FC<Props> = ({
+  verse,
+  children,
+  onOpenChange,
+  isOpen: isOpenProp,
+  bookmarksRangeUrl,
+}) => {
+  const [isMenuOpenedInternal, setIsMenuOpenedInternal] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
   const dispatch = useDispatch();
 
-  const onOpenChange = useCallback(
+  // Use controlled state if provided, otherwise use internal state
+  const isMenuOpened = isOpenProp !== undefined ? isOpenProp : isMenuOpenedInternal;
+
+  const verseKey = verse?.verseKey;
+
+  const handleOpenChange = useCallback(
     (isOpen: boolean) => {
-      setIsTooltipOpened(isOpen);
-      // eslint-disable-next-line i18next/no-literal-string
+      // Only update internal state if not controlled
+      if (isOpenProp === undefined) {
+        setIsMenuOpenedInternal(isOpen);
+      }
       logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
-      dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
+      dispatch(setReadingViewSelectedVerseKey(isOpen ? verseKey : null));
+
+      if (onOpenChange) {
+        onOpenChange(isOpen);
+      }
     },
-    [dispatch, word.verseKey],
+    [dispatch, verseKey, onOpenChange, isOpenProp],
   );
 
   const onHoverChange = useCallback(
     (isHovering: boolean) => {
-      dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
+      dispatch(setReadingViewHoveredVerseKey(isHovering ? verseKey : null));
     },
-    [dispatch, word.verseKey],
+    [dispatch, verseKey],
   );
   const onActionTriggered = useCallback(() => {
-    onOpenChange(false);
-  }, [onOpenChange]);
+    handleOpenChange(false);
+  }, [handleOpenChange]);
+
+  const onCloseShareModal = useCallback(() => {
+    setIsShareModalOpen(false);
+  }, []);
+
+  const openShareModal = useCallback(() => {
+    setIsShareModalOpen(true);
+  }, []);
 
   const onMouseEnter = useCallback(() => {
     onHoverChange(true);
@@ -51,26 +92,31 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     onHoverChange(false);
   }, [onHoverChange]);
 
+  if (!verse) return <>{children}</>;
+
   return (
-    <Popover
-      contentSide={ContentSide.TOP}
-      contentSideOffset={-10}
-      trigger={
-        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          {children}
-        </div>
-      }
-      tip
-      isModal
-      open={isTooltipOpened}
-      onOpenChange={onOpenChange}
-      triggerStyles={styles.trigger}
-      contentStyles={styles.content}
-      defaultStyling={false}
-      stopPropagation
-    >
-      <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
-    </Popover>
+    <>
+      <PopoverMenu
+        trigger={
+          <span onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            {children}
+          </span>
+        }
+        isOpen={isMenuOpened}
+        onOpenChange={handleOpenChange}
+        expandDirection={PopoverMenuExpandDirection.BOTTOM}
+        align={PopoverMenuAlign.START}
+        sideOffset={4}
+      >
+        <ReadingViewWordActionsMenu
+          verse={verse}
+          onActionTriggered={onActionTriggered}
+          openShareModal={openShareModal}
+          bookmarksRangeUrl={bookmarksRangeUrl}
+        />
+      </PopoverMenu>
+      <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={verse} />
+    </>
   );
 };
 

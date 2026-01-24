@@ -41,6 +41,7 @@ node_modules/
 # next.js build output
 .next
 out
+tsconfig.tsbuildinfo
 
 .now
 build/
@@ -65,6 +66,7 @@ public/robots.txt
 # playwright
 test-results/
 playwright-report/
+playwright/.auth/user.json
 
 keys
 

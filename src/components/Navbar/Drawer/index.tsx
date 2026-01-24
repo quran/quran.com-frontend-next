@@ -19,7 +19,7 @@ import {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
-  setIsVisible,
+  setLockVisibilityState,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -35,6 +35,7 @@ export enum DrawerSide {
 }
 
 interface Props {
+  id?: string;
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
@@ -43,6 +44,9 @@ interface Props {
   closeOnNavigation?: boolean;
   canCloseDrawer?: boolean;
   bodyId?: string;
+  removeHeaderWrapper?: boolean;
+  removeBodySpacing?: boolean;
+  className?: string;
 }
 
 /**
@@ -86,6 +90,7 @@ enum ActionSource {
 }
 
 const Drawer: React.FC<Props> = ({
+  id,
   type,
   side = DrawerSide.Right,
   header,
@@ -94,6 +99,9 @@ const Drawer: React.FC<Props> = ({
   closeOnNavigation = true,
   canCloseDrawer = true,
   bodyId,
+  removeHeaderWrapper = false,
+  removeBodySpacing = false,
+  className,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -125,18 +133,30 @@ const Drawer: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    // Keep nav bar visible when drawer is open
+    // Lock navbar visibility state when drawer is open to prevent scroll-based changes
+    // Unlock when drawer is closed to restore normal scroll behavior
     if (isOpen) {
-      dispatch(setIsVisible(true));
+      dispatch(setLockVisibilityState(true));
+    } else {
+      dispatch(setLockVisibilityState(false));
     }
+  }, [dispatch, isOpen]);
 
+  useEffect(() => {
     // Hide navbar after successful navigation
-    router.events.on('routeChangeComplete', () => {
+    const handleRouteChange = () => {
       if (isOpen && closeOnNavigation) {
         closeDrawer(ActionSource.Navigation);
       }
-    });
-  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
@@ -147,39 +167,51 @@ const Drawer: React.FC<Props> = ({
   );
 
   const isSearchDrawer = type === DrawerType.Search;
+  const isSettingsDrawer = type === DrawerType.Settings;
+
   return (
     <div
-      className={classNames(styles.container, {
+      data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
+      className={classNames(styles.container, className, {
         [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
         [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
+        [styles.settingsDrawer]: isSettingsDrawer,
       })}
       ref={drawerRef}
-      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
+      id={isSettingsDrawer ? 'settings-drawer-container' : undefined}
     >
-      <div
-        className={classNames(styles.header, {
-          [styles.hiddenButtonHeader]: hideCloseButton,
-        })}
-      >
+      {removeHeaderWrapper ? (
+        <>
+          {header}
+          {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+        </>
+      ) : (
         <div
-          className={classNames(styles.headerContentContainer, {
-            [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+          className={classNames(styles.header, {
+            [styles.hiddenButtonHeader]: hideCloseButton,
           })}
         >
-          <div className={styles.headerContent}>
-            {header}
-            {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+          <div
+            className={classNames(styles.headerContentContainer, {
+              [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+            })}
+          >
+            <div className={styles.headerContent}>
+              {header}
+              {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <div
         className={classNames(styles.bodyContainer, {
           [styles.navigationBodyContainer]: type === DrawerType.Navigation,
           [styles.bodyWithBottomPadding]: !isSearchDrawer,
           [styles.searchContainer]: isSearchDrawer,
+          [styles.noBodySpacing]: removeBodySpacing,
         })}
         id={bodyId}
       >

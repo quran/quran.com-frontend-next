@@ -17,6 +17,12 @@ export enum PopoverMenuExpandDirection {
   LEFT = 'left',
 }
 
+export enum PopoverMenuAlign {
+  START = 'start',
+  CENTER = 'center',
+  END = 'end',
+}
+
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -25,8 +31,11 @@ type PopoverMenuProps = {
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
   expandDirection?: PopoverMenuExpandDirection;
+  align?: PopoverMenuAlign;
+  sideOffset?: number;
   contentClassName?: string;
   shouldClose?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 const PopoverMenu = ({
@@ -36,16 +45,23 @@ const PopoverMenu = ({
   isPortalled = true,
   isModal = true,
   shouldClose = true,
+  shouldUseModalZIndex = false,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
+  align = PopoverMenuAlign.CENTER,
+  sideOffset = 0,
   contentClassName,
 }: PopoverMenuProps) => {
   const [open, setOpen] = useState(isOpen);
   const direction = useDirection();
   const content = (
     <PrimitiveDropdownMenu.Content
-      className={classNames(styles.content, contentClassName)}
+      className={classNames(styles.content, contentClassName, {
+        [styles.modalZIndex]: shouldUseModalZIndex,
+      })}
       side={side}
+      align={align}
+      sideOffset={sideOffset}
     >
       {children}
     </PrimitiveDropdownMenu.Content>
@@ -75,7 +91,7 @@ const PopoverMenu = ({
       onOpenChange={handleOpenChange}
     >
       {trigger && (
-        <PrimitiveDropdownMenu.Trigger asChild onClick={() => setOpen(true)}>
+        <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}
@@ -99,6 +115,7 @@ type PopoverMenuItemProps = {
   id?: string;
   isSelected?: boolean;
   shouldStopPropagation?: boolean;
+  dataTestId?: string;
 };
 PopoverMenu.Item = ({
   children,
@@ -111,6 +128,7 @@ PopoverMenu.Item = ({
   id,
   isSelected,
   shouldStopPropagation,
+  dataTestId,
 }: PopoverMenuItemProps) => {
   return (
     <PrimitiveDropdownMenu.Item
@@ -126,6 +144,7 @@ PopoverMenu.Item = ({
       }}
       disabled={isDisabled}
       id={id}
+      data-testid={dataTestId}
     >
       {icon && (
         <span

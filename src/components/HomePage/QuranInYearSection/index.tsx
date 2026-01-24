@@ -10,6 +10,7 @@ import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import CalendarIcon from '@/public/icons/new-calendar.svg';
+import { TestId } from '@/tests/test-ids';
 import { QuranFont } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
@@ -51,7 +52,7 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           </Link>
         </div>
       </div>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid={TestId.QURAN_IN_A_YEAR_SECTION}>
         <VerseAndTranslation
           chaptersData={chaptersData}
           chapter={todayAyah.chapter}

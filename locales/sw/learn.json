@@ -1,6 +1,6 @@
 {
   "about-author": "Kuhusu mwandishi",
-  "add-reflection": "Ongeza Tafakari",
+  "add-reflection": "Andika Tafakari",
   "all-learning-plans": "Mipango Yote ya Kujifunza",
   "author": "Mwandishi",
   "back-to-learning-plan": "Rudi kwenye Mpango wa Mafunzo",
@@ -18,7 +18,7 @@
   "enroll-success": "Hongera, Umeongeza {{title}} kwenye orodha yako!",
   "enrolled": "Umejiandikisha",
   "feedback": {
-    "add-feedback": "Ongeza Maoni",
+    "add-feedback": "Andika Maoni",
     "desc": "Hongera! Umekamilisha mpango wa kujifunza wa ' {{courseName}} '. <br> </br> Tafadhali kagua mpango wa kujifunza na ushiriki maoni yako ili kutusaidia kuboresha maudhui.",
     "feedback-placeholder": "Andika maoni yako",
     "feedback-success": "Asante kwa maoni yako!",
@@ -29,7 +29,7 @@
   "learn-more": "Jifunze zaidi",
   "learning-plan-material": "Nyenzo ya Mpango wa Kujifunza",
   "learning-plan-meta-desc": "Mpango huu wa Mafunzo utasaidia kubadilisha uhusiano wako na Qur'ani, anza safari yako leo!",
-  "learning-plans-desc": "Ongeza maarifa yako kwa masomo rahisi ambazo zitakukuza katika safari yako ya Qur'ani. <br></br> Anzisha Mpango wa Kujifunza leo! Maendeleo yako yanafuatiliwa hadi ufike mwisho.",
+  "learning-plans-desc": "Ongeza maarifa yako kupitia masomo rahisi yatakayokukuza katika safari yako ya Qur'ani. <br></br> Anzisha mpango wako wa kujifunza leo! Maendeleo yako yatafuatiliwa hadi mwisho.",
   "learning-plans-meta-desc": "Mipango ya Kujifunza ya Quran.com itasaidia kubadilisha uhusiano wako na Qur'ani. Gundua mkusanyiko wetu wa masomo yaliyoratibiwa na uanze safari yako leo!",
   "mark-complete": "Weka alama kuwa imekamilika",
   "mark-complete-success": "Somo limekamilika kwa mafanikio!",
@@ -38,7 +38,7 @@
   "prev-lesson": "Somo Lililotangulia",
   "reflection-description-1": "Kubofya \"Andika Tafakari\" kutakupeleka kwenye QuranReflect, jukwaa la kushiriki tafakari za kibinafsi kuhusu Qur'ani. Tofauti na Tafsir (Fasiri za kitaalamu), tafakuri ni utambuzi wa kibinafsi na uzoefu unaohusiana na aya.",
   "reflection-description-2": "Ukichapisha hadharani, tafakari yako itakaguliwa na timu ya wasimamizi na itaonekana kwa jumuiya ya QuranReflect.",
-  "start-learning": "Anza Kujifunza",
+  "start-here": "Anza Hapa",
   "tabs": {
     "main": "Maelezo kuu",
     "syllabus": "Muhtasari wa masomo"

@@ -1,7 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
-import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
+import HeaderNavigation from '../HeaderNavigation';
 
 import ProgressPageGoalWidget from './ProgressPageGoalWidget';
 import ProgressPageStreakWidget from './ProgressPageStreakWidget';
@@ -16,7 +15,7 @@ import { getCanonicalUrl, getReadingGoalProgressNavigationUrl } from '@/utils/na
 
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
-  const { error, goal, weekData, streak, currentActivityDay, isLoading } = useGetStreakWithMetadata(
+  const { error, goal, weekData, streak, isLoading, currentActivityDay } = useGetStreakWithMetadata(
     {
       showDayName: true,
     },
@@ -33,11 +32,9 @@ const ReadingProgressPage = () => {
         nofollow
         noindex
       />
-
-      <PageContainer>
-        <div className={styles.contentContainer}>
-          <h1>{t('reading-progress-header')}</h1>
-
+      <HeaderNavigation title={t('reading-progress-header')} />
+      <div className={styles.contentContainer}>
+        <PageContainer isSheetsLike>
           <div className={styles.widgetsContainer}>
             <ProgressPageStreakWidget
               weekData={weekData}
@@ -47,26 +44,14 @@ const ReadingProgressPage = () => {
             />
 
             <ProgressPageGoalWidget
-              currentActivityDay={currentActivityDay}
               goal={goal}
               isLoading={isLoading}
+              currentActivityDay={currentActivityDay}
             />
           </div>
-
           <ReadingHistory />
-
-          {goal && (
-            <div className={styles.manageGoalSection}>
-              <h1>{t('manage-goal')}</h1>
-
-              <div className={styles.manageGoalContainer}>
-                <DeleteReadingGoalModal />
-                <UpdateReadingGoalModal goal={goal} />
-              </div>
-            </div>
-          )}
-        </div>
-      </PageContainer>
+        </PageContainer>
+      </div>
     </>
   );
 };

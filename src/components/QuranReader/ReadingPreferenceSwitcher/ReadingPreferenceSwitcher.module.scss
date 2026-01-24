@@ -1,6 +1,8 @@
 $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
-$contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
+$contextMenuReadingPreferenceMaxWidth: 227px;
+$contextMenuReadingPreferenceIconOnlyWidth: 73px;
 $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
+
 .container {
   max-width: $readingPreferenceMaxWidth;
   margin-inline-start: auto;
@@ -21,5 +23,9 @@ $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 }
 
 .contextMenuContainer {
-  max-width: $contextMenuReadingPreferenceMaxWidth;
+  width: $contextMenuReadingPreferenceMaxWidth;
+}
+
+.contextMenuIconOnlyContainer {
+  width: $contextMenuReadingPreferenceIconOnlyWidth;
 }

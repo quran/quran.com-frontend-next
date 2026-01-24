@@ -13,9 +13,13 @@ import styles from './SearchSelectionBody.module.scss';
 import DataFetcher from '@/components/DataFetcher';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
+import { ContentSide } from '@/dls/Popover';
+import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
+import { TooltipType } from '@/dls/Tooltip';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
+import IconInfo from '@/icons/information-circle-outline.svg';
 import IconSearch from '@/icons/search.svg';
 import {
   selectTranslations,
@@ -110,16 +114,28 @@ const TranslationSelectionBody = () => {
                 label={translation.translatedName.name}
                 onChange={onTranslationsChange(translation.id)}
               />
+              {translation.shortDescription?.description && (
+                <HoverablePopover
+                  content={translation.shortDescription.description}
+                  tooltipType={TooltipType.INFO}
+                  contentSide={ContentSide.TOP}
+                  contentStyles={styles.popoverContent}
+                >
+                  <span aria-label={t('aria.translation-info')}>
+                    <IconInfo className={styles.infoIcon} />
+                  </span>
+                </HoverablePopover>
+              )}
             </div>
           ))}
         </div>
       );
     },
-    [onTranslationsChange, selectedTranslations],
+    [onTranslationsChange, selectedTranslations, t],
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input
@@ -158,7 +174,7 @@ const TranslationSelectionBody = () => {
           ]);
 
           return (
-            <div>
+            <div data-testid="translation-select">
               {renderTranslationGroup(selectedTranslationLanguage, selectedTranslationGroup)}
               {Object.entries(translationByLanguagesWithoutSelectedLanguage)
                 .sort((a, b) => {

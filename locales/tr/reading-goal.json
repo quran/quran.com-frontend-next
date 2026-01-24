@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Kur'an Hedeflerinize Ulaşın",
   "continue-reading": "Okumaya devam et",
   "continuous": {
     "description": "Hedefiniz, ilerlemenizi bir gün boyunca hesaplar",
@@ -12,8 +13,10 @@
     "description": "Hedefiniz her gün sıfırlanacak",
     "title": "günlük hedef"
   },
+  "day-streak": "Günlük seri",
   "day-x": "Gün {{day}}",
   "days": "günler",
+  "days-remaining": "kalan günler",
   "duration": "Süre (gün)",
   "ending-chapter": "Bitiş Suresi",
   "ending-verse": "Biten Ayah",
@@ -95,6 +98,7 @@
     "other": "{{days}} gün kaldı"
   },
   "set-a-new-goal": "Yeni hedef belirle",
+  "set-custom-goal": "Özel bir hedef belirleyin",
   "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
   "start-journey": "Yolculuğunuza başlayın!",
   "start-reading": "Okumaya başlamak",
@@ -110,6 +114,7 @@
     "stroked": "bugün hiçbir şey okumadın"
   },
   "todays-goal": "bugünün hedefi",
+  "track-your-streak": "Serilerinizi takip edin, özel hedefler oluşturun, istikrarlı kalın.",
   "view-progress": "İlerlemeyi Görüntüle",
   "week-progress": "Bu haftaki ilerleme",
   "x-days": {

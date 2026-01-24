@@ -6,7 +6,20 @@
 :root {
   // TODO: migrate constants.scss to use css variables
   --navbar-height: 3.6rem;
+  --context-menu-container-height: 3rem;
+  --mobile-reading-mode-tabs-height: 3.25rem;
+  --mobile-context-menu-height: 5.75rem; // Total height of context menu on mobile
+  --tajweed-trigger-height: 25px;
   --navbar-container-height: var(--navbar-height);
+  --top-bar-height: 3rem;
+  --top-bar-height-collapsed: 3rem;
+  --top-bar-height-mobile-full: 6.2rem;
+  --top-bar-height-mobile-collapsed: 5.75rem;
   --banner-height: 3rem;
   --day-circle-color: transparent;
+
+  // Mobile animation stagger delays (expand only) - tighter timing for smoother feel
+  --mobile-stagger-delay-navbar: 0ms;
+  --mobile-stagger-delay-context-menu: 20ms;
+  --mobile-stagger-delay-content: 40ms;
 }

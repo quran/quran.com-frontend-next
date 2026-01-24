@@ -1,49 +1,64 @@
-import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useCallback, useMemo } from 'react';
 
 import styles from './Banner.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import Link from '@/dls/Link/Link';
-import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { makeDonatePageUrl } from '@/utils/apiPaths';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import DiamondIcon from '@/icons/diamond.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import {
+  getReadingGoalNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
-type BannerProps = {
+interface BannerProps {
   text: string;
-  shouldShowPrefixIcon?: boolean;
-};
+  ctaButtonText?: string;
+}
 
-const Banner = ({ text, shouldShowPrefixIcon = true }: BannerProps) => {
-  const { t } = useTranslation('common');
+const Banner = ({ text, ctaButtonText }: BannerProps) => {
+  const isLoggedIn = useIsLoggedIn();
+  const { goal, isLoading } = useGetStreakWithMetadata();
+  const hasGoal = !!goal;
 
-  const handleDonationClick = () => {
+  // Route logged-in users with an existing goal to the progress page,
+  // otherwise route to the reading-goal page.
+  // When isLoading is false, the API call has completed and hasGoal accurately reflects goal status.
+  const ctaLink = useMemo(() => {
+    return isLoggedIn && !isLoading && hasGoal
+      ? getReadingGoalProgressNavigationUrl()
+      : getReadingGoalNavigationUrl();
+  }, [isLoggedIn, isLoading, hasGoal]);
+
+  const handleButtonClick = useCallback(() => {
     logButtonClick('banner_cta', {
-      isDonationCampaign: true,
+      hasGoal,
+      isLoggedIn,
     });
-  };
+  }, [hasGoal, isLoggedIn]);
 
   return (
-    <div className={classNames(styles.container, styles.isVisible)}>
-      <div className={styles.description}>
-        {shouldShowPrefixIcon && (
-          <div className={styles.illustrationContainer}>
-            <MoonIllustrationSVG />
-          </div>
-        )}
-        <div className={styles.text}>{text}</div>
-      </div>
-      <div className={styles.ctaContainer}>
-        <Link href={makeDonatePageUrl(false, true)} isNewTab>
-          <Button
-            size={ButtonSize.Small}
-            variant={ButtonVariant.Outlined}
-            onClick={handleDonationClick}
-          >
-            {t('fundraising.donation-campaign.cta')}
-          </Button>
+    <div className={styles.container} data-testid="banner">
+      <div className={styles.text}>{text}</div>
+      {ctaButtonText && (
+        <Link
+          href={ctaLink}
+          variant={LinkVariant.Blend}
+          className={styles.cta}
+          ariaLabel={ctaButtonText}
+          onClick={handleButtonClick}
+        >
+          <IconContainer
+            icon={<DiamondIcon aria-hidden="true" />}
+            size={IconSize.Xsmall}
+            className={styles.icon}
+            color={IconColor.tertiary}
+          />
+          {ctaButtonText}
         </Link>
-      </div>
+      )}
     </div>
   );
 };

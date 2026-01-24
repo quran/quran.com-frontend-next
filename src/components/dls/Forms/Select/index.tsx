@@ -30,7 +30,9 @@ interface Props {
   onChange?: (value: string | number) => void;
   defaultStyle?: boolean;
   className?: string;
+  arrowClassName?: string;
   withBackground?: boolean;
+  testId?: string;
 }
 
 const Select: React.FC<Props> = ({
@@ -45,7 +47,9 @@ const Select: React.FC<Props> = ({
   placeholder = 'Select an option',
   defaultStyle = true,
   className,
+  arrowClassName,
   withBackground = true,
+  testId,
 }) => {
   const onSelectChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -79,6 +83,7 @@ const Select: React.FC<Props> = ({
         disabled={disabled}
         required={required}
         {...(value ? { value } : { defaultValue: '' })}
+        data-testid={testId}
       >
         <option value="" disabled hidden>
           {placeholder}
@@ -89,7 +94,9 @@ const Select: React.FC<Props> = ({
           </option>
         ))}
       </select>
-      <div className={classNames(styles.arrow, { [styles.disabledArrow]: disabled })}>
+      <div
+        className={classNames(styles.arrow, arrowClassName, { [styles.disabledArrow]: disabled })}
+      >
         <CaretIcon />
       </div>
     </div>

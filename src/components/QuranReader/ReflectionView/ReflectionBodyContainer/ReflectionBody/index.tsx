@@ -26,6 +26,8 @@ interface Props {
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
   selectedContentType: ContentType;
+  isModal?: boolean;
+  hideEndActions?: boolean;
 }
 
 const ReflectionBody: React.FC<Props> = ({
@@ -35,6 +37,8 @@ const ReflectionBody: React.FC<Props> = ({
   scrollToTop,
   setSelectedVerseNumber,
   selectedContentType,
+  isModal = false,
+  hideEndActions = false,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
@@ -83,14 +87,18 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      <VerseAndTranslation
-        from={Number(selectedVerseNumber)}
-        to={Number(selectedVerseNumber)}
-        chapter={Number(selectedChapterId)}
-      />
-      <div className={styles.separatorContainer}>
-        <Separator />
-      </div>
+      {!isModal && (
+        <>
+          <VerseAndTranslation
+            from={Number(selectedVerseNumber)}
+            to={Number(selectedVerseNumber)}
+            chapter={Number(selectedChapterId)}
+          />
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+        </>
+      )}
       {data?.data?.length === 0 ? (
         <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
@@ -102,6 +110,7 @@ const ReflectionBody: React.FC<Props> = ({
           reflection={reflection}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
+          contentType={selectedContentType}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>
@@ -114,14 +123,16 @@ const ReflectionBody: React.FC<Props> = ({
         </Button>
       </div>
 
-      <div className={styles.endOfScrollActionsContainer}>
-        <TafsirEndOfScrollingActions
-          hasNextVerseGroup={hasNextVerse}
-          hasPrevVerseGroup={hasPrevVerse}
-          onNextButtonClicked={loadNextVerse}
-          onPreviousButtonClicked={loadPrevVerse}
-        />
-      </div>
+      {!hideEndActions && (
+        <div className={styles.endOfScrollActionsContainer}>
+          <TafsirEndOfScrollingActions
+            hasNextVerseGroup={hasNextVerse}
+            hasPrevVerseGroup={hasPrevVerse}
+            onNextButtonClicked={loadNextVerse}
+            onPreviousButtonClicked={loadPrevVerse}
+          />
+        </div>
+      )}
     </div>
   );
 };

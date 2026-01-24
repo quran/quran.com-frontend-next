@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,6 +8,7 @@ import styles from './WordByWordVerseAction.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import SearchIcon from '@/icons/search-book.svg';
@@ -21,21 +22,31 @@ const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
 type Props = {
   verse: Verse;
   onActionTriggered?: () => void;
+  isTranslationView?: boolean;
 };
 
 const CLOSE_POPOVER_AFTER_MS = 150;
 
-const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
+const WordByWordVerseAction: React.FC<Props> = ({
+  verse,
+  onActionTriggered,
+  isTranslationView,
+}) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const onModalClosed = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logEvent(`reading_view_wbw_modal_close`);
+    logEvent(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_reading_view_wbw_modal_close`,
+    );
     setIsContentModalOpen(false);
     if (onActionTriggered) {
-      setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+      closeTimeoutRef.current = setTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
@@ -43,14 +54,35 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
   };
 
   const onIconClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`reading_view_verse_actions_menu_wbw`);
+    logButtonClick(
+      `${
+        isTranslationView ? 'translation_view' : 'reading_view'
+      }_reading_view_verse_actions_menu_wbw`,
+    );
     setIsContentModalOpen(true);
   };
 
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<SearchIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
+        }
+        onClick={onIconClicked}
+      >
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal
@@ -61,11 +93,15 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
       >
-        <WordByWordHeading isTranslation />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
+        <div data-testid="wbw-translation">
+          <WordByWordHeading isTranslation />
+          <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
+        </div>
         <Separator className={styles.separator} />
-        <WordByWordHeading isTranslation={false} />
-        <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
+        <div data-testid="wbw-transliteration">
+          <WordByWordHeading isTranslation={false} />
+          <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
+        </div>
       </ContentModal>
     </>
   );

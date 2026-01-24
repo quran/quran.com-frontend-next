@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Solo {{formats}}",
+  "change-password": "Cambiar la contraseña",
   "delete-account": "Eliminar cuenta",
+  "delete-account-warning-title": "Advertencia",
   "delete-confirmation": {
     "action-text": "Entiendo la consecuencia, elimina mi cuenta",
     "confirmation-text": "eliminar mi cuenta",
     "instruction-text": "Por favor, escriba <strong> {{text}} </strong> para confirmar",
     "subtitle": "Esta acción no se puede deshacer. Eliminará permanentemente tu cuenta, tus marcadores guardados, tus sesiones de lectura y todos tus datos.",
     "title": "¿Estás completamente seguro?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Sí",
+    "cancel-text": "No",
+    "subtitle": "Eliminarás la foto de perfil y la restablecerás a la predeterminada, ¿estás seguro?",
+    "title": "Eliminar foto de perfil"
+  },
+  "edit-details": "Editar detalles",
+  "email-notification-settings": "Configuración de notificaciones por correo electrónico",
+  "errors": {
+    "remove-failed": "No se pudo eliminar la foto de perfil. Inténtalo de nuevo.",
+    "upload-failed": "No se pudo subir la foto de perfil. Inténtalo de nuevo."
+  },
+  "max-file-size": "Máximo {{size}}",
+  "my-profile": "Mi perfil",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Se enviará un correo electrónico con enlaces a la tarea de lectura semanal, sugerencias de reflexión y más recursos para mantenerlo encaminado.",
+      "title": "El Corán en un año"
+    },
+    "streaks-that-will-break": {
+      "description": "Se enviará un correo electrónico para notificarle de una racha que está a punto de romperse.",
+      "title": "Manchas"
+    }
+  },
+  "personalization": "Personalización",
+  "profile-picture": "Foto de perfil",
+  "remove-picture": "Eliminar imagen",
+  "remove-success": "Foto de perfil eliminada exitosamente",
+  "save-changes": "Guardar cambios",
+  "save-picture": "Guardar imagen",
+  "success": {
+    "details": "Su perfil se ha actualizado correctamente",
+    "notifications": "Su configuración de notificaciones se ha actualizado correctamente",
+    "password": "Su contraseña ha sido actualizada exitosamente"
+  },
+  "update-password": "Actualizar contraseña",
+  "upload-picture": "Subir imagen",
+  "upload-success": "Foto de perfil cargada exitosamente"
 }

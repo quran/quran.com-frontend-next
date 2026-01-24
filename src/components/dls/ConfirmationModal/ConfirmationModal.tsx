@@ -4,8 +4,13 @@ import { useMemo } from 'react';
 import { useConfirmModal } from './hooks';
 
 import Modal from '@/dls/Modal/Modal';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 
-const ConfirmationModal = () => {
+interface ConfirmationModalProps {
+  zIndexVariant?: ZIndexVariant;
+}
+
+const ConfirmationModal = ({ zIndexVariant }: ConfirmationModalProps = {}) => {
   const { onCancel, onConfirm, state } = useConfirmModal();
 
   const actions = useMemo(() => {
@@ -14,6 +19,7 @@ const ConfirmationModal = () => {
       returnedActions.push({
         label: state.confirmText,
         onClick: onConfirm,
+        dataTestId: 'confirmation-modal-confirm-button',
       });
     }
     if (state.cancelText && onCancel) {
@@ -21,6 +27,7 @@ const ConfirmationModal = () => {
         label: state.cancelText,
         onClick: onCancel,
         isCloseAction: true,
+        dataTestId: 'confirmation-modal-cancel-button',
       });
     }
     return returnedActions;
@@ -33,7 +40,12 @@ const ConfirmationModal = () => {
   };
 
   return (
-    <Modal isOpen={!!state.open} onClickOutside={onClose} onEscapeKeyDown={onClose}>
+    <Modal
+      isOpen={!!state.open}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
+      zIndexVariant={zIndexVariant}
+    >
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{state.title}</Modal.Title>
@@ -43,16 +55,16 @@ const ConfirmationModal = () => {
       </Modal.Body>
       <Modal.Footer>
         {actions.map((action, index) => {
-          const { onClick, label } = action;
+          const { onClick, label, dataTestId } = action;
           if (action.isCloseAction) {
             return (
-              <Modal.CloseAction key={index} onClick={onClick}>
+              <Modal.CloseAction key={index} onClick={onClick} dataTestId={dataTestId}>
                 {label}
               </Modal.CloseAction>
             );
           }
           return (
-            <Modal.Action key={index} onClick={onClick}>
+            <Modal.Action key={index} onClick={onClick} dataTestId={dataTestId}>
               {label}
             </Modal.Action>
           );

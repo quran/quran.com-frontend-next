@@ -1,0 +1,103 @@
+{
+  "checklist": {
+    "1": "Tính năng trang chủ",
+    "2": "Tùy chỉnh cài đặt của bạn",
+    "3": "Nâng cao trải nghiệm đọc Ayah của bạn",
+    "4": "Tính năng cá nhân hóa"
+  },
+  "finish": "Hoàn thành",
+  "onboarding-checklist": "Danh sách kiểm việc",
+  "onboarding-title": "Tối ưu trải nghiệm của bạn trên Quran.com! <br></br> Bắt đầu tour ngay:",
+  "previous": "Trước",
+  "skip": "Bỏ qua",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Nhấn menu 3 chấm để sao chép, đánh dấu và lặp lại câu kinh với nhiều tùy chọn.",
+      "title": "Menu 3 chấm"
+    },
+    "ayah-reflection": {
+      "description": "Đọc những suy ngẫm (tadabbur) từ học giả, người học và người thường để nuôi dưỡng mối gắn bó cá nhân hơn với Kinh Qur'an",
+      "title": "Đọc suy ngẫm theo từng Ayah"
+    },
+    "ayah-tafsir": {
+      "description": "Khám phá Tafsir theo từng câu kinh, với giải thích chi tiết giúp bạn hiểu rõ hơn khi đọc. (Có thể được nhóm cho nhiều câu kinh khi phù hợp)",
+      "title": "Đọc Tafsir theo từng Ayah"
+    },
+    "font-size": {
+      "description": "Tùy chỉnh việc đọc Kinh Qur'an của bạn với kích thước chữ dễ điều chỉnh để đọc thoải mái.",
+      "title": "Cỡ chữ"
+    },
+    "font-style": {
+      "description": "Các tùy chọn bao gồm Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lines, Indopak 16 lines",
+      "title": "Chọn kiểu chữ Qur'an bạn thích"
+    },
+    "inline-wbw": {
+      "description": "Xem nghĩa từng từ ngay dưới hoặc trong bong bóng phía trên khi nghe Kinh Qur'an",
+      "title": "Hiển thị bản dịch từng từ ngay trong văn bản (bên dưới từ) hoặc hiển thị chú giải công cụ"
+    },
+    "juz": {
+      "description": "Xem Qur'an theo Juz",
+      "title": "Xem Qur'an theo Juz"
+    },
+    "listen": {
+      "description": "Mở trình phát âm thanh để nghe đọc",
+      "title": "Lắng nghe Surah hoặc Ayah"
+    },
+    "login": {
+      "description": "Đăng nhập và lưu cài đặt trên nhiều thiết bị để truy cập các tính năng bổ sung.",
+      "title": "Đăng nhập"
+    },
+    "quran-radio": {
+      "description": "Nghe QuranRadio - phát trực tuyến Kinh Qur'an không quảng cáo",
+      "title": "Đài Qur'an"
+    },
+    "reading-sessions": {
+      "description": "Dễ dàng xem lại hành trình học Qur'an qua lịch sử đọc cá nhân, theo dõi các câu đã học trên Quran.com.",
+      "title": "Xem lịch sử đọc"
+    },
+    "reading-view": {
+      "description": "Xem Qur'an ở chế độ mushaf",
+      "title": "Chế độ đọc"
+    },
+    "search-bar": {
+      "description": "Tìm câu kinh, surah, từ khóa, juz và chủ đề bạn muốn bằng thanh tìm kiếm của chúng tôi",
+      "title": "Thanh tìm kiếm"
+    },
+    "select-reciter": {
+      "description": "Cá nhân hóa trải nghiệm nghe bằng cách chọn giọng đọc bạn thích nhất!",
+      "title": "Chọn một trong nhiều người đọc kinh để nghe"
+    },
+    "settings": {
+      "description": "Quản lý tùy chọn của bạn",
+      "title": "Cài đặt"
+    },
+    "streak": {
+      "description": "Đặt mục tiêu đọc cá nhân, theo dõi tiến độ và duy trì thói quen đọc Kinh Qur'an đều đặn với Chuỗi ngày đọc và Kế hoạch.",
+      "title": "Theo dõi chuỗi ngày đọc & kế hoạch đọc"
+    },
+    "surah-info": {
+      "description": "Khám phá chi tiết từng Surah - nằm thuận tiện ở đầu Surah",
+      "title": "Đọc về Surah"
+    },
+    "theme": {
+      "description": "Chọn giao diện bạn thích—Sáng, Sepia hoặc Tối—để đọc Kinh Qur'an thoải mái hơn.",
+      "title": "Đọc Qur'an ở chế độ Sáng, Sepia hoặc Tối."
+    },
+    "translations": {
+      "description": "Chọn từ nhiều bản dịch khác nhau bằng nhiều ngôn ngữ. Mẹo: So sánh các bản dịch bằng cách chọn nhiều tùy chọn.",
+      "title": "Bản dịch"
+    },
+    "wbw-audio": {
+      "description": "Chọn tùy chọn này để nghe từng từ riêng lẻ bằng cách nhấp chuột vào từ đó!",
+      "title": "Nghe phiên âm từng từ bằng cách nhấp vào từng từ"
+    },
+    "wbw-translation": {
+      "description": "Xem nghĩa từng từ khi bạn đọc hoặc nghe Kinh Qur'an để mở rộng vốn từ vựng Kinh Qur'an.",
+      "title": "Đọc dịch từng từ"
+    },
+    "wbw-transliteration": {
+      "description": "Xem phiên âm của từng từ để hỗ trợ bạn trong hành trình đọc Kinh Qur'an",
+      "title": "Đọc phiên âm từng chữ"
+    }
+  }
+}

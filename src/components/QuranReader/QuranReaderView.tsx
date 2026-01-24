@@ -4,17 +4,19 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import useSyncReadingProgress from './hooks/useSyncReadingProgress';
-import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
+import StudyModeContainer from './StudyModeContainer';
 import TranslationView from './TranslationView';
+import VerseActionModalContainer from './VerseActionModalContainer';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { QuranReaderDataType } from '@/types/QuranReader';
+import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
 
 const ReadingView = dynamic(() => import('./ReadingView'));
 
 interface Props {
   isReadingPreference: boolean;
+  readingPreference: ReadingPreference;
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
@@ -23,6 +25,7 @@ interface Props {
 
 const QuranReaderView: React.FC<Props> = ({
   isReadingPreference,
+  readingPreference,
   quranReaderStyles,
   quranReaderDataType,
   initialData,
@@ -35,26 +38,29 @@ const QuranReaderView: React.FC<Props> = ({
   if (isReadingPreference) {
     return (
       <>
-        <ReadingPreferenceSwitcher />
         <ReadingView
           quranReaderStyles={quranReaderStyles}
           quranReaderDataType={quranReaderDataType}
           initialData={initialData}
           resourceId={resourceId}
+          readingPreference={readingPreference}
         />
+        <StudyModeContainer />
+        <VerseActionModalContainer />
       </>
     );
   }
 
   return (
     <>
-      <ReadingPreferenceSwitcher />
       <TranslationView
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
         initialData={initialData}
         resourceId={resourceId}
       />
+      <StudyModeContainer />
+      <VerseActionModalContainer />
     </>
   );
 };

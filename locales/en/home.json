@@ -3,6 +3,7 @@
   "begin": "Begin",
   "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
+  "continue-learning-plan": "Continue learning",
   "continue-read": "Continue Reading",
   "explore-topics": "Explore Topics",
   "first-time-reading": "New to the Quran? <link>Start here</link>",
@@ -13,6 +14,7 @@
   "my-quran": "My Quran",
   "navigate-quran": "Navigate Quran",
   "no-bookmarks": "You do not have any bookmarks yet",
+  "no-page-bookmarks": "You do not have any page bookmarks yet",
   "no-recently-read": "You do not have any reading sessions yet",
   "noble-quran": "The Noble Quran",
   "popular": "Popular",
@@ -55,10 +57,12 @@
     "description": "Help spread the Quran to new learners",
     "title": "Share the Quran!"
   },
+  "start-learning-plan": "Start learning",
   "start-read": "Start Reading",
   "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
   "tab": {
     "bookmarks": "Bookmarks",
+    "page-bookmarks": "Pages",
     "popular": "Popular"
   },
   "take-notes": "Have you been missing out on <modalLink>Notes?</modalLink>",

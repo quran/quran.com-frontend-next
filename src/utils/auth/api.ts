@@ -37,6 +37,7 @@ import Language from '@/types/Language';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
+import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { Mushaf } from '@/types/QuranReader';
 import {
   CollectionsQueryParams,
@@ -93,13 +94,16 @@ import {
   makeUserProfileUrl,
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
+  makeTranslationFeedbackUrl,
+  GetCoursesQueryParams,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
+import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
-import SyncDataType from 'types/auth/SyncDataType';
+import { SyncLocalDataPayload } from 'types/auth/SyncDataType';
 import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
@@ -279,7 +283,12 @@ type AddBookmarkParams = {
   verseNumber?: number;
 };
 
-export const addBookmark = async ({ key, mushafId, type, verseNumber }: AddBookmarkParams) =>
+export const addBookmark = async ({
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: AddBookmarkParams): Promise<Bookmark> =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
     mushaf: mushafId,
@@ -370,7 +379,7 @@ export const getStreakWithUserMetadata = async (
 ): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
 
 export const syncUserLocalData = async (
-  payload: Record<SyncDataType, any>,
+  payload: SyncLocalDataPayload,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
@@ -406,11 +415,23 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+export const addCollectionBookmark = async ({
+  collectionId,
+  key,
+  mushafId,
+  type,
+  verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
+}) => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -423,14 +444,20 @@ export const deleteCollectionBookmarkById = async (collectionId: string, bookmar
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
   key,
-  mushaf,
+  mushafId,
   type,
   verseNumber,
+}: {
+  collectionId: string;
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  verseNumber?: number;
 }) => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
     collectionId,
     key,
-    mushaf,
+    mushaf: mushafId,
     type,
     verseNumber,
   });
@@ -447,9 +474,18 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
-export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+type EnrollUserParams = {
+  courseId: string;
+  enrollmentMethod: EnrollmentMethod;
+};
+
+export const enrollUser = async ({
+  courseId,
+  enrollmentMethod,
+}: EnrollUserParams): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
+    enrollmentMethod,
   });
 
 export const postCourseFeedback = async ({
@@ -466,7 +502,8 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+export const getCourses = async (params?: GetCoursesQueryParams): Promise<Course[]> =>
+  privateFetcher(makeGetCoursesUrl(params));
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
@@ -474,15 +511,21 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const getUserCoursesCount = async (): Promise<{ count: number }> =>
   privateFetcher(makeGetUserCoursesCountUrl());
 
-export const addCollection = async (collectionName: string) => {
-  return postRequest(makeAddCollectionUrl(), { name: collectionName });
+export const addCollection = async (collectionName: string): Promise<Collection> => {
+  return postRequest<Collection>(makeAddCollectionUrl(), { name: collectionName });
 };
+
+type QuestionTypes = {
+  [key in QuestionType]?: number;
+};
+
+export type QuestionsData = { total: number; types: QuestionTypes };
 
 export const countQuestionsWithinRange = async (
   from: string,
   to: string,
   language: Language,
-): Promise<Record<string, number>> => {
+): Promise<Record<string, QuestionsData>> => {
   return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
 };
 
@@ -612,6 +655,15 @@ export const getQuranProgramWeek = async (
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
+};
+
+export const submitTranslationFeedback = async (params: {
+  translationId: number;
+  surahNumber: number;
+  ayahNumber: number;
+  feedback: string;
+}): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
+  return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
 const shouldRefreshToken = (error) => {

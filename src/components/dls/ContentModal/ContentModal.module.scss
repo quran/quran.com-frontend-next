@@ -1,4 +1,5 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
+@use 'src/styles/mixins/z-index' as z-index-mixins;
 
 $translateYDistance: 200px;
 
@@ -40,14 +41,14 @@ $translateYDistance: 200px;
 
 .modalContainer {
   @include breakpoints.desktop {
-    max-width: initial;
-    width: 60vw;
+    max-inline-size: initial;
+    inline-size: 60vw;
   }
 }
 
 .contentContainer {
   overflow-y: scroll;
-  height: 80vh;
+  block-size: 80vh;
 }
 
 .overlay {
@@ -69,6 +70,8 @@ $translateYDistance: 200px;
   transition: opacity var(--transition-fast) ease;
 }
 
+@include z-index-mixins.z-index-variants;
+
 .fullScreen {
   @include breakpoints.smallerThanTablet {
     padding-block-start: 0 !important;
@@ -81,18 +84,24 @@ $translateYDistance: 200px;
   border-radius: var(--border-radius-rounded);
   position: relative;
 
-  width: 100vw;
+  inline-size: 100vw;
 
-  height: 100%;
+  block-size: 100%;
   overflow-y: scroll;
   @include breakpoints.tablet {
     overflow-y: visible;
   }
 }
 
+.isBottomSheetOnMobile {
+  @include breakpoints.smallerThanTablet {
+    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  }
+}
+
 .autoHeight {
   @include breakpoints.tablet {
-    height: auto;
+    block-size: auto;
   }
 }
 
@@ -100,54 +109,50 @@ $translateYDistance: 200px;
 .medium {
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
-    width: 85vw;
+    inline-size: 85vw;
   }
   @include breakpoints.desktop {
-    width: 60vw;
+    inline-size: 60vw;
   }
 }
 
 .small {
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
-    width: 60vw;
+    inline-size: 60vw;
   }
   @include breakpoints.desktop {
-    width: 40vw;
+    inline-size: 40vw;
   }
 }
 
-.overlay[data-state="open"] {
+.overlay[data-state='open'] {
   animation: fadeIn var(--transition-regular);
 }
-.overlay[data-state="closed"] {
+.overlay[data-state='closed'] {
   animation: fadeOut var(--transition-regular);
 }
 
-.contentWrapper[data-state="open"] {
-  animation:
-    contentIn var(--transition-regular) ease,
-    fadeIn var(--transition-regular) ease;
+.contentWrapper[data-state='open'] {
+  animation: contentIn var(--transition-regular) ease, fadeIn var(--transition-regular) ease;
 }
 
-.contentWrapper[data-state="closed"] {
-  animation:
-    contentOut var(--transition-regular) ease,
-    fadeOut var(--transition-regular) ease;
+.contentWrapper[data-state='closed'] {
+  animation: contentOut var(--transition-regular) ease, fadeOut var(--transition-regular) ease;
 }
 
 .closeIcon {
   position: absolute;
-  inset-block-start: 0;
+  inset-block-start: 50%;
   inset-inline-end: 0;
-  padding-block-start: var(--spacing-xsmall);
+  transform: translateY(-50%);
+  padding-block-start: var(--spacing-small);
   background-color: transparent;
   border: none;
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-small);
-    margin-block-start: var(--spacing-mega);
-    margin-inline-end: var(--spacing-mega);
-  }
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header {
@@ -155,14 +160,22 @@ $translateYDistance: 200px;
   inset-block-start: 0;
   background-color: var(--color-background-default);
   padding-block: var(--spacing-small);
+  display: flex;
+  align-items: center;
   z-index: 1;
   padding-inline: var(--spacing-small);
+  padding-inline-end: var(--spacing-xlarge-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+
   @include breakpoints.tablet {
-    position: initial;
+    position: relative;
     padding-inline: 0;
+    padding-inline-end: var(--spacing-xlarge-px);
     border: none;
     padding: 0;
+    padding-inline-end: var(--spacing-xlarge-px);
   }
+
   border-block-end: 1px solid var(--color-borders-hairline);
 }
 

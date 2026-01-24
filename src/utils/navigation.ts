@@ -26,6 +26,11 @@ export const ROUTES = {
   PRIVACY: '/privacy',
   TERMS: '/terms-and-conditions',
   SITEMAP: '/sitemap.xml',
+  READING_GOAL_PROGRESS: '/reading-goal/progress',
+  MY_LEARNING_PLANS: '/my-learning-plans',
+  COLLECTIONS_ALL: '/collections/all',
+  NOTES: '/notes-and-reflections',
+  NOTIFICATION_SETTINGS: '/notification-settings',
   // TODO: add all static routes here for incremental adoption
 };
 
@@ -38,6 +43,42 @@ export const AUTH_ROUTES = [
   ROUTES.RESET_PASSWORD,
   ROUTES.COMPLETE_SIGNUP,
 ];
+
+/**
+ * routes that require authentication
+ */
+export const PROTECTED_ROUTES = [
+  ROUTES.READING_GOAL_PROGRESS,
+  ROUTES.MY_LEARNING_PLANS,
+  ROUTES.COLLECTIONS_ALL,
+  ROUTES.NOTES,
+  ROUTES.NOTIFICATION_SETTINGS,
+  ROUTES.COMPLETE_SIGNUP,
+];
+
+export const EXTERNAL_ROUTES = {
+  QURAN_REFLECT: 'https://quranreflect.com',
+  SUNNAH: 'https://sunnah.com',
+  NUQAYAH: 'https://nuqayah.com',
+  LEGACY_QURAN_COM: 'https://legacy.quran.com',
+  CORPUS_QURAN_COM: 'https://corpus.quran.com',
+  QURAN_ANDROID:
+    'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1',
+  QURAN_IOS:
+    'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
+  FEEDBACK: 'https://feedback.quran.com',
+  QURAN_FOUNDATION: 'https://quran.foundation',
+};
+
+export const QURAN_URL = 'https://quran.com';
+export const MY_QURAN_URL = '/my-quran';
+export const LEARNING_PLANS_URL = '/learning-plans';
+export const RADIO_URL = '/radio';
+export const RECITERS_URL = '/reciters';
+export const ABOUT_US_URL = '/about-us';
+export const DEVELOPERS_URL = '/developers';
+export const PRODUCT_UPDATES_URL = '/product-updates';
+export const SUPPORT_URL = '/support';
 
 /**
  * Get the href link to a verse.
@@ -317,8 +358,15 @@ export const resolveUrlBySearchNavigationType = (
  * @param {string} query the search query.
  * @returns {string}
  */
-export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
+export const getSearchQueryNavigationUrl = (query?: string): string => {
+  if (!query) return '/search';
+
+  const params = new URLSearchParams();
+  params.set(QueryParam.PAGE, '1');
+  params.set(QueryParam.QUERY, query);
+
+  return `/search?${params.toString()}`;
+};
 
 /**
  * Get the href link to the info page of a Surah.
@@ -392,7 +440,10 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
   return `/collections/${collectionId}`;
 };
 
-export const getReadingGoalNavigationUrl = () => '/reading-goal';
+export const getReadingGoalNavigationUrl = (example?: string) =>
+  example && example.trim() !== ''
+    ? `/reading-goal?example=${encodeURIComponent(example)}`
+    : '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
@@ -400,7 +451,7 @@ export const getBeyondRamadanNavigationUrl = () => '/beyond-ramadan';
 export const getWhatIsRamadanNavigationUrl = () => '/what-is-ramadan';
 export const getTakeNotesNavigationUrl = () => '/take-notes';
 export const getLoginNavigationUrl = (redirectTo?: string) =>
-  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
+  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${encodeURIComponent(redirectTo)}` : ''}`;
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
@@ -420,6 +471,25 @@ export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   const baseUrl = '/media';
   return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
+};
+
+/**
+ * Build a url with query parameters
+ *
+ * @param {string} baseUrl
+ * @param {Record<string, unknown>} params
+ * @returns {string}
+ */
+export const buildUrlWithParams = (baseUrl: string, params: Record<string, unknown>): string => {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+    searchParams.set(key, String(value));
+  });
+
+  const queryString = searchParams.toString();
+  return `${baseUrl}${queryString ? `?${queryString}` : ''}`;
 };
 
 /**

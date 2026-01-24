@@ -1,19 +1,11 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
+import EndOfSurahSection from '../EndOfSurahSection';
 import LearningPlanBanner from '../LearningPlanBanner';
 
-import Button, { ButtonType } from '@/dls/Button/Button';
-import useScrollToTop from '@/hooks/useScrollToTop';
-import ChevronLeftIcon from '@/icons/chevron-left.svg';
-import ChevronRightIcon from '@/icons/chevron-right.svg';
-import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import Language from '@/types/Language';
-import { isFirstSurah, isLastSurah } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
-import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 
 // Surah Al-Mulk
@@ -24,10 +16,7 @@ interface Props {
 }
 
 const ChapterControls: React.FC<Props> = ({ initialData }) => {
-  const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
-
-  const { t, lang } = useTranslation('quran-reader');
-  const scrollToTop = useScrollToTop();
+  const { lang } = useTranslation('quran-reader');
   const chapterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
   // example : "2:253" -> chapter 2 verse 253
   const chapterId = chapterIdAndLastVerse.split(':')[0];
@@ -35,40 +24,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
 
   return (
     <>
-      {!isFirstSurah(chapterNumber, isReadingByRevelationOrder) && (
-        <Button
-          type={ButtonType.Secondary}
-          prefix={<ChevronLeftIcon />}
-          href={getPreviousSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}
-          onClick={() => {
-            logButtonClick('chapter_control_prev_chapter');
-          }}
-        >
-          {t('prev-surah')}
-        </Button>
-      )}
-      <Button
-        type={ButtonType.Secondary}
-        onClick={() => {
-          logButtonClick('chapter_control_scroll_to_beginning');
-          scrollToTop();
-        }}
-      >
-        {t('surah-beginning')}
-      </Button>
-      {!isLastSurah(chapterNumber, isReadingByRevelationOrder) && (
-        <Button
-          type={ButtonType.Secondary}
-          suffix={<ChevronRightIcon />}
-          href={getNextSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}
-          onClick={() => {
-            logButtonClick('chapter_control_next_chapter');
-          }}
-        >
-          {t('next-surah')}
-        </Button>
-      )}
-
+      <EndOfSurahSection chapterNumber={chapterNumber} />
       {(lang === Language.EN || lang === Language.UR) &&
         chapterNumber === LEARNING_PLAN_CHAPTER && <LearningPlanBanner language={lang} />}
     </>

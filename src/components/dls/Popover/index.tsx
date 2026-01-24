@@ -4,6 +4,9 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 
 import styles from './Popover.module.scss';
+import PopoverContentBody from './PopoverContentBody';
+
+import { TooltipType } from '@/dls/Tooltip';
 
 export enum ContentSide {
   TOP = 'top',
@@ -36,6 +39,11 @@ interface Props {
   contentSideOffset?: number;
   isContainerSpan?: boolean;
   stopPropagation?: boolean;
+  tooltipType?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
+  iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -56,6 +64,11 @@ const Popover: React.FC<Props> = ({
   contentStyles,
   isContainerSpan = false,
   stopPropagation = false,
+  tooltipType,
+  icon,
+  onIconClick,
+  iconAriaLabel,
+  shouldContentBeClickable = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -65,20 +78,25 @@ const Popover: React.FC<Props> = ({
       avoidCollisions={avoidCollisions}
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
+        [styles.info]: tooltipType === TooltipType.INFO,
+        [styles.success]: tooltipType === TooltipType.SUCCESS,
         [contentStyles]: contentStyles,
       })}
       {...(stopPropagation && {
         onClick: (e) => e.stopPropagation(),
-        // Only stop propagation for non-navigation keys (example: Enter, Space)
         onKeyDown: (e) => {
-          // Allow Tab and Escape to propagate for accessibility
-          if (e.key !== 'Tab' && e.key !== 'Escape') {
-            e.stopPropagation();
-          }
+          if (e.key !== 'Tab' && e.key !== 'Escape') e.stopPropagation();
         },
       })}
     >
-      {children}
+      <PopoverContentBody
+        icon={icon}
+        onIconClick={onIconClick}
+        iconAriaLabel={iconAriaLabel}
+        shouldContentBeClickable={shouldContentBeClickable}
+      >
+        {children}
+      </PopoverContentBody>
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );
@@ -102,13 +120,16 @@ const Popover: React.FC<Props> = ({
     </RadixPopover.Root>
   );
 
+  const containerClass = classNames({
+    [styles.container]: defaultStyling,
+    [styles.containerInfo]: tooltipType === TooltipType.INFO,
+  });
+
   if (isContainerSpan) {
-    return (
-      <span className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</span>
-    );
+    return <span className={containerClass}>{containerChild}</span>;
   }
 
-  return <div className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</div>;
+  return <div className={containerClass}>{containerChild}</div>;
 };
 
 export default Popover;

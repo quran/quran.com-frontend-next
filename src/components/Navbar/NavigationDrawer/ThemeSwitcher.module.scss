@@ -1,0 +1,77 @@
+@use 'src/styles/theme';
+
+.triggerContainer {
+  inline-size: 100%;
+  justify-content: center;
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+}
+
+.popoverContent {
+  padding: var(--spacing-small-px);
+  min-inline-size: unset;
+  max-inline-size: calc(var(--spacing-large-px) * 8);
+  inline-size: 100%;
+  box-shadow: var(--shadow-flat);
+
+  @include theme.dark {
+    box-shadow: none;
+    border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  }
+}
+
+@mixin popoverItemHoverState {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+
+  svg {
+    color: var(--color-text-inverse);
+  }
+
+  svg path {
+    stroke: var(--color-text-inverse);
+  }
+}
+
+.popoverItem {
+  padding: var(--spacing-xsmall-px) var(--spacing-medium-px);
+  border-radius: var(--border-radius-pill);
+  text-align: center;
+  justify-content: center;
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  background-color: transparent;
+
+  &[data-state='checked'],
+  &.popoverItemSelected {
+    color: var(--color-success-medium);
+    background-color: transparent;
+    box-shadow: var(--shadow-flat);
+
+    @include theme.dark {
+      border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+    }
+
+    svg {
+      color: var(--color-success-medium);
+    }
+    svg path {
+      stroke: var(--color-success-medium);
+    }
+  }
+
+  &:focus {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  &:hover,
+  &[data-state='checked']:hover,
+  &.popoverItemSelected:hover,
+  &:focus:hover {
+    @include popoverItemHoverState;
+  }
+
+  svg path {
+    stroke: var(--color-text-default);
+  }
+}

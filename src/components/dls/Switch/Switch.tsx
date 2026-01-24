@@ -19,26 +19,49 @@ export enum SwitchSize {
   Normal = 'normal',
   Large = 'large',
 }
+
+export enum SwitchVariant {
+  Default = 'default',
+  Alternative = 'alternative',
+}
 type SwitchProps = {
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
   size?: SwitchSize;
+  variant?: SwitchVariant;
+  className?: string;
+  shouldHideSeparators?: boolean;
 };
 
-const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchProps) => {
+const Switch = ({
+  items,
+  onSelect,
+  selected,
+  size = SwitchSize.Normal,
+  variant = SwitchVariant.Default,
+  className,
+  shouldHideSeparators = false,
+}: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, {
-        [styles.xSmallContainer]: size === SwitchSize.XSmall,
-      })}
+      className={classNames(
+        styles.container,
+        {
+          [styles.xSmallContainer]: size === SwitchSize.XSmall,
+          [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
+        },
+        className,
+      )}
     >
       {items.map((item) => (
         <button
           disabled={item.disabled}
           type="button"
+          data-testid={`${item.value}-button`}
+          data-is-selected={selected === item.value}
           className={classNames(styles.item, selected === item.value && styles.itemSelected, {
             [styles.itemLarge]: size === SwitchSize.Large,
             [styles.itemNormal]: size === SwitchSize.Normal,
@@ -52,8 +75,9 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
         </button>
       ))}
 
-      {/* seprator  */}
+      {/* separator */}
       {items.length > 2 &&
+        !shouldHideSeparators &&
         range(1, items.length).map((i) => {
           return (
             <div

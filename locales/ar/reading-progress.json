@@ -1,6 +1,7 @@
 {
   "add": "أضف",
   "add-data-success": "تمت إضافة بيانات قراءتك بنجاح",
+  "back-to-reading-goal": "العودة إلى هدف القراءة",
   "delete-goal": {
     "action": "احذف الهدف",
     "confirmation": {
@@ -24,7 +25,7 @@
   "manually-add": "إضافة القراءات يدويا",
   "no-reading-history-for": "لا يوجد سجل قراءة لـ {{date}}",
   "reading-progress-header": "تقدّمك",
-  "reading-progress-streak": "الاستمرارية",
+  "reading-progress-streak": "أيام متتالية",
   "reading-time": "وقت القراءة",
   "seconds-read-tooltip": "هذا هو الوقت الذي قضيته في قراءة الآيات التي أدخلتها.نملأه تلقائيًا وفقًا لمتوسط سرعة القراءة على  Quran.com، ولكن يمكنك تعديله بوقت القراءة الفعلي الخاص بك.",
   "you-read": "لقد قرأت:"

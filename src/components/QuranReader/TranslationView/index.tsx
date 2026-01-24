@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -13,7 +13,6 @@ import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
 import TranslationViewVerse from './TranslationViewVerse';
 
-import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -37,7 +36,6 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
 });
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1000;
-const EMPTY_QUESTIONS = {} as Record<string, number>;
 
 const TranslationView = ({
   quranReaderStyles,
@@ -85,32 +83,48 @@ const TranslationView = ({
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
-  const itemContentRenderer = (verseIdx: number) => {
-    if (verseIdx === versesCount) {
+  // Simplified: just render the item without passing questions data down
+  // Each TranslationViewVerse will fetch its own questions data via context
+  const itemContentRenderer = useCallback(
+    (verseIdx: number) => {
+      if (verseIdx === versesCount) {
+        return (
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+            initialData={initialData}
+          />
+        );
+      }
+
       return (
-        <EndOfScrollingControls
+        <TranslationViewVerse
+          verseIdx={verseIdx}
+          totalVerses={versesCount}
           quranReaderDataType={quranReaderDataType}
-          lastVerse={verses[verses.length - 1]}
+          quranReaderStyles={quranReaderStyles}
+          setApiPageToVersesMap={setApiPageToVersesMap}
+          selectedTranslations={selectedTranslations}
+          wordByWordLocale={wordByWordLocale}
+          reciterId={reciterId}
           initialData={initialData}
+          resourceId={resourceId}
         />
       );
-    }
-
-    return (
-      <TranslationViewVerse
-        verseIdx={verseIdx}
-        totalVerses={versesCount}
-        quranReaderDataType={quranReaderDataType}
-        quranReaderStyles={quranReaderStyles}
-        setApiPageToVersesMap={setApiPageToVersesMap}
-        selectedTranslations={selectedTranslations}
-        wordByWordLocale={wordByWordLocale}
-        reciterId={reciterId}
-        initialData={initialData}
-        resourceId={resourceId}
-      />
-    );
-  };
+    },
+    [
+      versesCount,
+      quranReaderDataType,
+      verses,
+      initialData,
+      quranReaderStyles,
+      setApiPageToVersesMap,
+      selectedTranslations,
+      wordByWordLocale,
+      reciterId,
+      resourceId,
+    ],
+  );
 
   const shouldShowQueryParamMessage =
     translationsQueryParamDifferent ||
@@ -127,21 +141,19 @@ const TranslationView = ({
         />
       )}
 
-      <PageQuestionsContext.Provider value={EMPTY_QUESTIONS}>
-        <div
-          className={styles.wrapper}
-          onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-        >
-          <Virtuoso
-            ref={virtuosoRef}
-            useWindowScroll
-            totalCount={versesCount + 1}
-            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-            initialItemCount={1} // needed for SSR.
-            itemContent={itemContentRenderer}
-          />
-        </div>
-      </PageQuestionsContext.Provider>
+      <div
+        className={styles.wrapper}
+        onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+      >
+        <Virtuoso
+          ref={virtuosoRef}
+          useWindowScroll
+          totalCount={versesCount + 1}
+          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+          initialItemCount={1} // needed for SSR.
+          itemContent={itemContentRenderer}
+        />
+      </div>
     </>
   );
 };

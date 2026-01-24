@@ -40,7 +40,7 @@ const ExploreTopicsSection = () => {
       <div className={styles.header}>
         <h1>{t('home:explore-topics')}</h1>
       </div>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="explore-topics-container">
         {TOPICS.map((topic) => {
           return (
             <Button

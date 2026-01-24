@@ -3,10 +3,11 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
-import RepeatIcon from '@/icons/repeat.svg';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import RepeatIcon from '@/icons/repeat-new.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
@@ -37,7 +38,17 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<RepeatIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+            shouldFlipOnRTL={false}
+          />
+        }
+        onClick={onItemClicked}
+      >
         {t('audio.player.repeat-1-verse')}
       </PopoverMenu.Item>
     </>

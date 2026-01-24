@@ -1,4 +1,4 @@
-@use "src/styles/shades";
+@use 'src/styles/shades';
 
 @mixin mode {
   --color-primary-faded: #fff;
@@ -46,6 +46,7 @@
 
   --color-background-alternative-faded: var(--shade-0);
   --color-background-alternative-faint: var(--shade-1);
+  --color-background-alternative-faint-new: #f4f5f6;
   --color-background-alternative-medium: var(--shade-2);
   --color-background-alternative-deep: var(--shade-6);
 
@@ -65,6 +66,8 @@
   --color-highlight-dark: #22a5ad;
 
   --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-small-new: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-flat: 0px 0px 8px rgba(0, 0, 0, 0.12);
   --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
   --shadow-medium: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
   --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);
@@ -73,6 +76,10 @@
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
   --shadow-strong: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  --shadow-tooltip: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  --shadow-end-surah-card: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  --shadow-surah-search: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+  --shadow-language-selector: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
   font-palette: --Light;
 
   // scrollbar styles
@@ -82,8 +89,11 @@
   --scrollbar-thumb-active: var(--shade-7);
 
   --color-grey-icons: #868e96;
+  --color-grey-icons-new: #9b9b9b;
   --color-daily-progress: #ced4da;
   --color-separators: #f8f9fa;
+  --color-separators-new: #f8f9fa;
+  --color-separators-ayah-level: #ebeef0;
   --color-blue-buttons-and-icons: #2ca4ab;
   --color-faint-blue-icons: #c2edef;
   --color-black-buttons: #000000;

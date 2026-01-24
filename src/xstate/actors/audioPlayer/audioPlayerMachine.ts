@@ -659,7 +659,7 @@ export const audioPlayerMachine =
           },
           on: {
             CLOSE: {
-              actions: ['resetElapsedTime', 'resetAyahNumber', 'pauseAudio'],
+              actions: ['resetElapsedTime', 'resetAyahNumber', 'resetWordLocation', 'pauseAudio'],
               description: 'User closes the audio player',
               target: 'HIDDEN',
             },
@@ -901,6 +901,9 @@ export const audioPlayerMachine =
         }),
         resetAyahNumber: assign({
           ayahNumber: 1,
+        }),
+        resetWordLocation: assign({
+          wordLocation: 0,
         }),
         pauseAudio: (context) => {
           context.audioPlayer.pause();

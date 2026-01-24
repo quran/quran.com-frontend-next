@@ -3,6 +3,7 @@
   "begin": "开始",
   "calendar-cta": "日历",
   "chapters-and-verses": "章节和诗句",
+  "continue-learning-plan": "继续学习",
   "continue-read": "继续阅读",
   "explore-topics": "探索主题",
   "first-time-reading": "第一次阅读《古兰经》？ <link>从这里开始</link>",
@@ -13,6 +14,7 @@
   "my-quran": "我的古兰经",
   "navigate-quran": "浏览古兰经",
   "no-bookmarks": "您还没有任何书签",
+  "no-page-bookmarks": "您目前还没有任何页面书签。",
   "no-recently-read": "您还没有任何读书会",
   "noble-quran": "尊贵的古兰经",
   "popular": "受欢迎的",
@@ -55,10 +57,12 @@
     "description": "帮助向新学习者传播《古兰经》",
     "title": "分享古兰经！"
   },
+  "start-learning-plan": "开始学习",
   "start-read": "开始阅读",
   "stay-consistent": "追踪连胜记录，创建自定义目标，保持一致",
   "tab": {
     "bookmarks": "书签",
+    "page-bookmarks": "页",
     "popular": "受欢迎的"
   },
   "take-notes": "您是否错过了<modalLink> Notes？ </modalLink>",

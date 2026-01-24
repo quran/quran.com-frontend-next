@@ -1,0 +1,100 @@
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+import { useSWRConfig } from 'swr';
+
+import modalStyles from './Modal.module.scss';
+
+import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
+import {
+  getNoteFromResponse,
+  invalidateCache,
+  isNotePublishFailed,
+} from '@/components/Notes/modal/utility';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ArrowIcon from '@/icons/arrow.svg';
+import { addNote } from '@/utils/auth/api';
+
+interface AddNoteModalProps {
+  notesCount?: number;
+  onMyNotes: () => void;
+  isModalOpen: boolean;
+  onModalClose: () => void;
+  verseKey: string;
+  onBack?: () => void;
+}
+
+const AddNoteModal: React.FC<AddNoteModalProps> = ({
+  notesCount = 0,
+  onMyNotes,
+  isModalOpen,
+  onModalClose,
+  verseKey,
+  onBack,
+}) => {
+  const { t } = useTranslation('notes');
+  const toast = useToast();
+  const { mutate, cache } = useSWRConfig();
+
+  const handleSaveNote = async ({ note, isPublic }: { note: string; isPublic: boolean }) => {
+    try {
+      const data = await addNote({
+        body: note,
+        ranges: [`${verseKey}-${verseKey}`],
+        saveToQR: isPublic,
+      });
+
+      if (isNotePublishFailed(data)) {
+        toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
+      } else {
+        toast(t('notes:save-success'), { status: ToastStatus.Success });
+      }
+
+      invalidateCache({
+        mutate,
+        cache,
+        verseKeys: [verseKey],
+        note: getNoteFromResponse(data),
+        invalidateCount: true,
+      });
+    } catch (error) {
+      toast(t('common:error.general'), { status: ToastStatus.Error });
+      throw error;
+    }
+  };
+
+  return (
+    <NoteFormModal
+      header={
+        onBack ? (
+          <button
+            type="button"
+            className={classNames(modalStyles.headerButton, modalStyles.title)}
+            onClick={onBack}
+            data-testid="add-note-modal-title"
+          >
+            <IconContainer
+              icon={<ArrowIcon />}
+              shouldForceSetColors={false}
+              size={IconSize.Custom}
+              className={modalStyles.arrowIcon}
+            />
+            {t('take-a-note-or-reflection')}
+          </button>
+        ) : (
+          <h2 className={modalStyles.title} data-testid="add-note-modal-title">
+            {t('take-a-note-or-reflection')}
+          </h2>
+        )
+      }
+      isModalOpen={isModalOpen}
+      onModalClose={onModalClose}
+      onMyNotes={onMyNotes}
+      notesCount={notesCount}
+      onSaveNote={handleSaveNote}
+      dataTestId="add-note-modal-content"
+    />
+  );
+};
+
+export default AddNoteModal;

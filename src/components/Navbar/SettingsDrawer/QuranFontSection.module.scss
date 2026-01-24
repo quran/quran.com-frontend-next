@@ -1,6 +1,41 @@
-@use "src/styles/breakpoints";
+.fontStyleLabel {
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
+  opacity: unset;
+  padding-inline-start: var(--spacing-small-plus-px);
+  padding-inline-end: var(--spacing-small-plus-px);
+}
 
-.versePreviewContainer {
-  padding: var(--spacing-large);
-  background-color: var(--color-background-alternative-faded);
+.fontSizeSection {
+  padding-block-start: var(--spacing-small-px);
+  padding-block-end: var(--spacing-medium2-px);
+}
+
+.counter {
+  gap: calc(var(--spacing-large-px) + var(--spacing-small-plus-px));
+  direction: initial;
+
+  & > svg {
+    color: var(--color-text-default-new);
+  }
+
+  span {
+    color: var(--color-text-default-new);
+  }
+}
+
+.fontStyleSection {
+  padding-block-start: var(--spacing-small-px);
+}
+
+div.fontSwitch.fontSwitch {
+  background-color: var(--color-background-alternative-faint);
+}
+
+div.select.select {
+  background-color: var(--color-background-alternative-faint);
+}
+
+div.selectArrow.selectArrow {
+  background-color: var(--color-background-alternative-faint);
 }

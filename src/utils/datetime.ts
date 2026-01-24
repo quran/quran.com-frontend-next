@@ -217,6 +217,8 @@ export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 export const getCurrentDay = () => new Date().getDate();
 
+export const getCurrentYear = () => new Date().getFullYear();
+
 /**
  * Converts a date instance to a string in this format: YYYY-MM-DD
  *
@@ -241,6 +243,21 @@ export const dateToDateString = (
  */
 export const getFullDayName = (day: Date, locale: string): string => {
   return day.toLocaleDateString(locale, { weekday: 'long', timeZone: 'UTC' });
+};
+
+/**
+ * Gets the shortest day name in a given locale.
+ * Uses the 'narrow' format which is the shortest available format for the locale.
+ * Most locales return a single character, but some locales (e.g., Hindi) may return 2 characters.
+ * Example: `M` for `Monday` in `en`, `सो` for Monday in `hi`
+ *
+ * @param {Date} day
+ * @param {string} locale
+ * @returns {string} The narrow day name (typically 1-2 characters)
+ *
+ */
+export const getShortDayName = (day: Date, locale: string): string => {
+  return day.toLocaleDateString(locale, { weekday: 'narrow', timeZone: 'UTC' });
 };
 
 /**
@@ -342,4 +359,84 @@ export const getMonthsInYear = (year: number, locale: string): Month[] => {
   }
 
   return all;
+};
+
+/**
+ * Normalizes a date to midnight and compares it with today's date.
+ *
+ * @param {string | Date} date - The date to compare (can be a string or Date object)
+ * @returns {{ today: Date, normalizedDate: Date, isToday: boolean }} An object containing:
+ *   - today: Today's date normalized to midnight (00:00:00.000)
+ *   - normalizedDate: The provided date normalized to midnight (00:00:00.000)
+ *   - isToday: Boolean indicating if the provided date is today
+ *
+ * @example
+ * const { today, normalizedDate, isToday } = compareDateWithToday('2024-01-15');
+ * // today: Date object for current date at 00:00:00.000
+ * // normalizedDate: Date object for 2024-01-15 at 00:00:00.000
+ * // isToday: true if today is January 15, 2024, false otherwise
+ */
+export const compareDateWithToday = (
+  date: string | Date,
+): {
+  today: Date;
+  normalizedDate: Date;
+  isToday: boolean;
+} => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const normalizedDate = new Date(date);
+  normalizedDate.setHours(0, 0, 0, 0);
+  const isToday = normalizedDate.getTime() === today.getTime();
+
+  return { today, normalizedDate, isToday };
+};
+
+/**
+ * Convert a date to a safe ISO string.
+ *
+ * @param {string | Date} date
+ * @returns {string | undefined}
+ *
+ * @example
+ * const isoString = toSafeISOString('2024-01-15');
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('2024-01-15'));
+ * // isoString: '2024-01-15T00:00:00.000Z'
+ *
+ * const isoString = toSafeISOString(new Date('invalid date'));
+ * // isoString: undefined
+ */
+export const toSafeISOString = (date: string | Date): string | undefined => {
+  const timestamp = typeof date === 'string' ? Date.parse(date) : date.getTime();
+  if (Number.isNaN(timestamp)) return undefined;
+  return new Date(timestamp).toISOString();
+};
+
+/**
+ * Format a date to a month, day, year format.
+ *
+ * @param {Date | string | number} date
+ * @param {string} locale
+ * @returns {string} The date in the format of "Month Day, Year"
+ *
+ * @example
+ * const date = new Date('2024-01-15');
+ * const formattedDate = dateToMonthDayYearFormat(date, 'en');
+ * // formattedDate: "January 15, 2024"
+ *
+ * const formattedDate = dateToMonthDayYearFormat('2024-01-15', 'en');
+ * // formattedDate: "January 15, 2024"
+ */
+export const dateToMonthDayYearFormat = (date: Date | string | number, locale: string): string => {
+  const dateInstance = new Date(date);
+  if (Number.isNaN(dateInstance.getTime())) return '';
+
+  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
 };

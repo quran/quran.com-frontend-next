@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
@@ -38,6 +38,7 @@ const TafsirVerseAction = ({
   const router = useRouter();
 
   const contentModalRef = useRef<ContentModalHandles>();
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const onModalClose = () => {
     if (isTranslationView) {
@@ -48,12 +49,23 @@ const TafsirVerseAction = ({
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
     if (onActionTriggered) {
-      setTimeout(() => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+      closeTimeoutRef.current = setTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>

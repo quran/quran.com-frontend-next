@@ -1,0 +1,4 @@
+{
+  "meta-description": "Hãy đọc và nghe Surah. {{transliteratedName}}. Surah này được mặc khải vào năm... {{revelationPlace}}, thứ tự {{chapterOrder}} trong Kinh Qur'an. Tên của Surah có nghĩa là \"{{translatedName}}\" trong {{localeName}} và bao gồm {{versesCount}} câu.",
+  "ranges-meta-desc": "Hãy đọc và nghe Ayah {{rangeFrom}} đến Ayah {{rangeTo}}."
+}

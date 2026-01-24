@@ -1,18 +1,22 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .cellContainer {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   direction: ltr;
-  padding: var(--spacing-small);
+  padding-block: var(--spacing-medium2-px);
+  padding-inline: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
+
   @include breakpoints.tablet {
-    --gap-size: calc(1.5 * var(--spacing-mega));
-    flex-direction: row;
-    padding: 0;
+    padding-block: var(--spacing-large-px);
   }
+}
+
+.firstCellWithHeader {
+  padding-block-start: 0;
 }
 
 .highlightedContainer {
@@ -25,26 +29,31 @@
 }
 
 .actionContainer {
-  margin-block-start: var(--gap-size);
   display: flex;
   direction: ltr;
   flex-direction: row;
-  justify-content: space-between;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: start;
-    margin-inline-end: calc(2 * var(--spacing-mega));
-  }
   align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xxsmall-px);
+  block-size: var(--spacing-medium2-px);
 }
+
 .arabicVerseContainer {
   direction: rtl;
-  padding-block-start: var(--spacing-xxsmall);
-  margin-block-start: var(--gap-size);
-  margin-block-end: var(--gap-size);
+  margin-block-start: var(--spacing-large-px);
+  margin-block-end: var(--spacing-medium-plus-px);
+
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-xxlarge-px);
+  }
 }
+
 .verseTranslationsContainer {
-  margin-block-end: calc(1.3 * var(--gap-size));
+  margin-block-end: var(--spacing-large-px);
+
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-xxlarge-px);
+  }
 }
 
 .verseTranslationContainer {
@@ -55,22 +64,21 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: center;
-  }
+  gap: var(--spacing-xxsmall-px);
 }
+
 .actionContainerLeft {
   justify-content: flex-start;
 }
+
 .actionContainerRight {
   justify-content: flex-end;
 }
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  height: calc(2.2 * var(--spacing-medium));
-  width: calc(2.2 * var(--spacing-medium));
+  block-size: calc(2.2 * var(--spacing-medium));
+  inline-size: calc(2.2 * var(--spacing-medium));
 
   &:hover {
     color: var(--color-text-default);
@@ -80,25 +88,48 @@
 
   @media (hover: hover) {
     &:hover {
-      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
+
+      .icon span {
+        svg {
+          color: var(--color-success-medium) !important;
+        }
+      }
     }
   }
 }
 
-.fadedVerseAction {
-  opacity: var(--opacity-50);
+.overlayModal {
+  z-index: var(--z-index-header);
+}
+
+.menuOffset {
+  margin-inline-end: 10vw;
 }
 
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   svg {
-    width: calc(1.1 * var(--spacing-medium));
-    height: calc(1.1 * var(--spacing-medium));
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
+  }
+
+  @include breakpoints.smallerThanTablet {
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
+  }
+}
+
+.actionItem {
+  &:hover {
+    svg {
+      color: var(--color-success-medium);
+    }
   }
 }
 
@@ -108,17 +139,127 @@
   margin-left: calc(0.5 * var(--spacing-xxsmall));
 }
 
-.priorityAction {
-  order: 1;
-  @include breakpoints.tablet {
-    order: unset;
-  }
-}
-
 .actionContainerLeft .actionItem {
   display: inline-block;
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+
   @include breakpoints.tablet {
     margin-inline-end: 0;
   }
+}
+
+.bottomActionsContainer {
+  inline-size: 100%;
+}
+
+.tabsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-medium);
+  overflow-x: auto;
+  inline-size: 100%;
+  -webkit-overflow-scrolling: touch;
+
+  @include breakpoints.smallerThanTablet {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &.fullWidthTabs {
+      @media (min-width: 360px) {
+        overflow-x: visible;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    gap: var(--spacing-large);
+    overflow-x: visible;
+  }
+}
+
+.tabsContainerRTL {
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+.center {
+  justify-content: center;
+}
+
+.separatorContainer {
+  display: flex;
+  block-size: var(--spacing-medium);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(var(--spacing-xsmall) / 2);
+  cursor: pointer;
+  color: var(--color-grey-icons-new);
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+
+  @include breakpoints.smallerThanTablet {
+    // this min-width is to prevent the tab from overlapping with the next tab
+    // (when this happens, we can scroll to see the next tab to access it)
+    .fullWidthTabs & {
+      @media (min-width: 360px) {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-inline-size: 0;
+      }
+    }
+  }
+
+  &:hover {
+    color: var(--color-success-medium);
+  }
+}
+
+.tabItemRTL {
+  flex-direction: row-reverse;
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    inline-size: var(--spacing-medium2);
+    block-size: var(--spacing-medium2);
+    color: currentColor;
+
+    &:hover {
+      color: currentColor;
+    }
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-medium);
+      block-size: var(--spacing-medium);
+    }
+  }
+}
+
+.tabLabel {
+  font-size: var(--font-size-medium);
+  white-space: nowrap;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small);
+  }
+}
+
+.verseSeparator {
+  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
+  margin-inline: auto;
 }

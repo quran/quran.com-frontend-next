@@ -1,6 +1,7 @@
 {
   "additional-resources": "Ek kaynaklar",
   "additional-resources-subtitle": "Bu ek kaynaklar, okuduğunuz ayetlerle daha derin bir bağ kurmanıza yardımcı olacaktır.",
+  "ask-question": "Soru Sor",
   "complete": "Tamamla",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}}Tamamlanan haftalar",
   "divine-book-club": "İlahi okuma grubu",
@@ -74,7 +75,7 @@
     "12": "Zilhicce"
   },
   "join-qc": {
-    "line-1": "Kuran Takviminin <highlight> {{weekNumber}} </highlight> Haftasındayız.",
+    "line-1": "Islami Takviminin <highlight> {{weekNumber}} </highlight> Haftasındayız.",
     "line-2": "<normal> İlk kez olsanız bile bu haftaki okumamız için bize katılın! </normal>"
   },
   "join-quranic-calendar": "KuranReflect aracılığıyla güncellemeler ve kaynaklar almak için abone olun",

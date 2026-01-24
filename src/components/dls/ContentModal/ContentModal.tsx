@@ -1,4 +1,4 @@
-import { ForwardedRef, useCallback, useImperativeHandle, useRef } from 'react';
+import { useCallback, useImperativeHandle, useMemo, useRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
@@ -7,36 +7,25 @@ import { useRouter } from 'next/router';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
+import {
+  ContentModalProps,
+  ContentModalSize,
+  createPointerDownOutsideHandler,
+} from './ContentModal.types';
 
-import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import * as FakeContentModal from '@/dls/ContentModal/FakeContentModal';
 import CloseIcon from '@/icons/close.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isRTLLocale } from '@/utils/locale';
 
-export enum ContentModalSize {
-  SMALL = 'small',
-  MEDIUM = 'medium',
-}
+export { ContentModalSize } from './ContentModal.types';
 
-type ContentModalProps = {
-  isOpen?: boolean;
-  onClose?: () => void;
-  onEscapeKeyDown?: () => void;
-  children: React.ReactNode;
-  hasCloseButton?: boolean;
-  hasHeader?: boolean;
-  header?: React.ReactNode;
-  innerRef?: ForwardedRef<ContentModalHandles>;
-  onClick?: (e: React.MouseEvent) => void;
-  contentClassName?: string;
-  closeIconClassName?: string;
-  headerClassName?: string;
-  size?: ContentModalSize;
-  isFixedHeight?: boolean;
-  shouldBeFullScreen?: boolean;
-};
-
-const SCROLLBAR_WIDTH = 15;
-
+/**
+ * Content modal component with support for fake SEO-friendly mode.
+ * See ContentModal.types.ts for prop definitions.
+ *
+ * @returns {React.ReactNode}
+ */
 const ContentModal = ({
   isOpen,
   onClose,
@@ -45,7 +34,9 @@ const ContentModal = ({
   children,
   header,
   innerRef,
+  overlayClassName,
   contentClassName,
+  innerContentClassName,
   closeIconClassName,
   headerClassName,
   size = ContentModalSize.MEDIUM,
@@ -53,6 +44,10 @@ const ContentModal = ({
   hasHeader = true,
   onClick,
   shouldBeFullScreen = false,
+  zIndexVariant,
+  isBottomSheetOnMobile = true,
+  isFakeSEOFriendlyMode: isFake = false,
+  dataTestId,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -64,68 +59,61 @@ const ContentModal = ({
     },
   }));
 
-  /**
-   * We need to manually check what the user is targeting. If it lies at the
-   * area where the scroll bar is (assuming the scrollbar width is equivalent
-   * to SCROLLBAR_WIDTH), then we don't close the Modal, otherwise we do.
-   * We also need to check if the current locale is RTL or LTR because the side
-   * where the scrollbar is will be different and therefor the value of
-   * {e.detail.originalEvent.offsetX} will be different.
-   *
-   * inspired by {@see https://github.com/radix-ui/primitives/issues/1280#issuecomment-1198248523}
-   *
-   * @param {any} e
-   */
-  const onPointerDownOutside = (e: any) => {
-    const currentTarget = e.currentTarget as HTMLElement;
+  const onPointerDownOutside = useMemo(
+    () => createPointerDownOutsideHandler(locale, onClose, isRTLLocale),
+    [locale, onClose],
+  );
 
-    const shouldPreventOnClose = isRTLLocale(locale)
-      ? e.detail.originalEvent.offsetX < SCROLLBAR_WIDTH // left side of the screen clicked
-      : e.detail.originalEvent.offsetX > currentTarget.clientWidth - SCROLLBAR_WIDTH; // right side of the screen clicked
-
-    if (shouldPreventOnClose) {
-      e.preventDefault();
-      return;
-    }
-    if (onClose) {
-      onClose();
-    }
-  };
-
-  /**
-   * Prevents Safari from focusing the first focusable element in the modal.
-   * @param {Event} event
-   */
   const handleOpenAutoFocus = useCallback((event: Event) => {
     if (event.defaultPrevented) return;
     event.preventDefault();
     contentRef.current?.focus({ preventScroll: true });
   }, []);
 
+  const Root = isFake ? FakeContentModal.FakeContentRoot : Dialog.Root;
+  const Portal = isFake ? FakeContentModal.FakeContentPortal : Dialog.Portal;
+  const Overlay = isFake ? FakeContentModal.FakeContentOverlay : Dialog.Overlay;
+  const Content = isFake ? FakeContentModal.FakeContentContent : Dialog.Content;
+  const Close = isFake ? FakeContentModal.FakeContentClose : Dialog.Close;
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      if (!open && onClose) onClose();
+    },
+    [onClose],
+  );
+
   return (
-    <Dialog.Root open={isOpen}>
-      <Dialog.Portal>
-        <Dialog.Overlay
-          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
+    <Root open={isOpen} onClose={onClose} onOpenChange={handleOpenChange}>
+      <Portal>
+        <Overlay
           ref={overlayRef}
+          data-is-fake-seo-friendly-mode={isFake}
+          className={classNames(styles.overlay, overlayClassName, {
+            [styles.fullScreen]: shouldBeFullScreen,
+            [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+            [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+            [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
+          })}
         >
-          <Dialog.Content
+          <Content
             {...(onClick && { onClick })}
             ref={contentRef}
-            className={classNames(styles.contentWrapper, {
-              [contentClassName]: contentClassName,
+            className={classNames(styles.contentWrapper, contentClassName, {
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
+              [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
             onOpenAutoFocus={handleOpenAutoFocus}
+            data-testid={dataTestId ?? 'root-dialog'}
           >
             {hasHeader && (
               <div className={classNames(styles.header, headerClassName)}>
                 {hasCloseButton && (
-                  <Dialog.Close className={classNames(styles.closeIcon, closeIconClassName)}>
+                  <Close className={classNames(styles.closeIcon, closeIconClassName)}>
                     <Button
                       variant={ButtonVariant.Ghost}
                       shape={ButtonShape.Circle}
@@ -133,17 +121,22 @@ const ContentModal = ({
                     >
                       <CloseIcon />
                     </Button>
-                  </Dialog.Close>
+                  </Close>
                 )}
                 {header}
               </div>
             )}
-
-            <div className={styles.content}>{children}</div>
-          </Dialog.Content>
-        </Dialog.Overlay>
-      </Dialog.Portal>
-    </Dialog.Root>
+            <div
+              className={classNames(styles.content, innerContentClassName)}
+              data-testid="modal-content"
+            >
+              {children}
+            </div>
+          </Content>
+        </Overlay>
+      </Portal>
+    </Root>
   );
 };
+
 export default ContentModal;

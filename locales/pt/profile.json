@@ -1,10 +1,51 @@
 {
+  "allowed-formats": "Apenas {{formats}}",
+  "change-password": "Alterar a senha",
   "delete-account": "Deletar conta",
+  "delete-account-warning-title": "Aviso",
   "delete-confirmation": {
     "action-text": "Eu entendo a consequência, exclua minha conta",
     "confirmation-text": "deletar minha conta",
     "instruction-text": "Digite <strong> {{text}} </strong> para confirmar",
     "subtitle": "Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta, favoritos salvos, sessões de leitura e todos os seus dados.",
     "title": "Você tem certeza absoluta?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Sim",
+    "cancel-text": "Não",
+    "subtitle": "Você vai excluir a foto do perfil e redefini-la para o padrão? Tem certeza?",
+    "title": "Excluir foto de perfil"
+  },
+  "edit-details": "Editar detalhes",
+  "email-notification-settings": "Configurações de notificação por e-mail",
+  "errors": {
+    "remove-failed": "Não foi possível remover a foto do perfil. Tente novamente.",
+    "upload-failed": "Não foi possível carregar a foto de perfil. Tente novamente."
+  },
+  "max-file-size": "Máximo {{size}}",
+  "my-profile": "Meu perfil",
+  "notifications": {
+    "quran-reading-program": {
+      "description": "Você receberá um e-mail com links para a leitura semanal, sugestões de reflexão e outros recursos para te ajudar a manter o foco.",
+      "title": "O Alcorão em um Ano"
+    },
+    "streaks-that-will-break": {
+      "description": "Você receberá um e-mail para notificá-lo(a) quando uma sequência de vitórias estiver prestes a ser interrompida.",
+      "title": "Ondas"
+    }
+  },
+  "personalization": "Personalização",
+  "profile-picture": "Foto de perfil",
+  "remove-picture": "Remover imagem",
+  "remove-success": "Foto de perfil removida com sucesso",
+  "save-changes": "Salvar alterações",
+  "save-picture": "Salvar imagem",
+  "success": {
+    "details": "Seu perfil foi atualizado com sucesso.",
+    "notifications": "Suas configurações de notificações foram atualizadas com sucesso.",
+    "password": "Sua senha foi atualizada com sucesso."
+  },
+  "update-password": "Atualizar senha",
+  "upload-picture": "Carregar imagem",
+  "upload-success": "Foto de perfil enviada com sucesso."
 }

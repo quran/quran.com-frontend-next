@@ -1,0 +1,26 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/mixins/qna-font-scales';
+
+.container {
+  block-size: 100%;
+}
+
+.answersContainer {
+  padding-block-end: var(--spacing-medium2-px);
+  padding-block-start: var(--spacing-xxsmall-px);
+}
+
+.notAvailableMessage {
+  padding: var(--spacing-large);
+  text-align: center;
+  color: var(--color-text-faded);
+  font-size: inherit;
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+}

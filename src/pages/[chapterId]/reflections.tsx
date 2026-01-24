@@ -117,7 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const verseReflectionUrl = makeAyahReflectionsUrl({
       surahId: chapterNumber,
       ayahNumber: verseNumber,
-      locale,
+      locales: [locale],
       postTypeIds: [REFLECTION_POST_TYPE_ID],
     });
 

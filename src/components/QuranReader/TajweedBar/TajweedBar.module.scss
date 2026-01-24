@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 $pixel: 1px;
 
@@ -10,26 +10,25 @@ $pixel: 1px;
   justify-content: center;
   align-items: center;
   position: fixed;
-  width: 100%;
+  inline-size: 100%;
   color: var(--color-text-default);
   text-align: center;
   transition: var(--transition-regular);
-  margin-top: var(--spacing-micro);
   @include breakpoints.smallerThanTablet {
-    margin-top: var(--spacing-xsmall);
+    margin-block-start: 0px;
   }
   z-index: var(--z-index-min);
 }
 
 .visibleContainer {
   @include breakpoints.smallerThanTablet {
-    margin-top: var(--spacing-micro);
+    margin-block-start: 0px;
   }
 }
 
 .tajweedContainer {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   justify-content: center;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
@@ -43,30 +42,30 @@ $pixel: 1px;
   display: flex;
   align-self: center;
   align-items: center;
-  width: fit-content;
+  inline-size: fit-content;
+  block-size: var(--tajweed-trigger-height);
   font-size: var(--font-size-small);
-  padding: var(--spacing-micro) var(--spacing-xsmall) var(--spacing-micro) var(--spacing-xsmall);
-  border-bottom-left-radius: var(--spacing-xsmall);
-  border-bottom-right-radius: var(--spacing-xsmall);
+  padding-inline: var(--spacing-xsmall);
+  border-end-start-radius: var(--spacing-xsmall);
+  border-end-end-radius: var(--spacing-xsmall);
   justify-content: center;
-  align-items: center;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
   cursor: pointer;
   user-select: none;
-  margin-top: calc($pixel * -1);
+  margin-block-start: calc($pixel * -1);
 }
 
 .rulesContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  inline-size: 90%;
   flex-wrap: wrap;
   column-gap: var(--spacing-mega);
   @include breakpoints.smallerThanTablet {
-    width: 95%;
+    inline-size: 95%;
     column-gap: var(--spacing-medium);
   }
 }
@@ -74,12 +73,12 @@ $pixel: 1px;
 .ruleContainer {
   display: flex;
   align-items: center;
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
 }
 
 .circle {
-  height: var(--spacing-large);
-  width: var(--spacing-large);
+  block-size: var(--spacing-large);
+  inline-size: var(--spacing-large);
   border-radius: var(--border-radius-circle);
   display: inline-block;
   margin-inline-end: var(--spacing-xxsmall);

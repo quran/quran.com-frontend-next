@@ -3,6 +3,7 @@
   "begin": "Başla",
   "calendar-cta": "Takvim",
   "chapters-and-verses": "Bölümler ve Ayetler",
+  "continue-learning-plan": "Öğrenmeye devam edin",
   "continue-read": "Okumaya devam et",
   "explore-topics": "Konuları Keşfedin",
   "first-time-reading": "Kuran'a yeni misiniz? <link> Buradan başlayın </link>",
@@ -13,6 +14,7 @@
   "my-quran": "Kuran'ım",
   "navigate-quran": "Kuran'da gezinin",
   "no-bookmarks": "Henüz yer işaretiniz yok",
+  "no-page-bookmarks": "Henüz hiçbir sayfa yer iminiz yok.",
   "no-recently-read": "Henüz okuma oturumunuz yok",
   "noble-quran": "Kur'an-ı Kerim",
   "popular": "Popüler",
@@ -35,7 +37,7 @@
       },
       "title": "Özel Kur'an Okuma Hedefleri"
     },
-    "title": "Kuran Büyüme Yolculuğu"
+    "title": "Kuran gelişim Yolculuğu"
   },
   "qr-community": "Bugünün öne çıkan Ayetlerini ve Düşüncelerini okuyun",
   "quran-in-year": "Bir yılda Kur’an",
@@ -55,10 +57,12 @@
     "description": "Kuran'ı yeni öğrenenlere yaymaya yardımcı olun",
     "title": "Kuran'ı paylaş!"
   },
+  "start-learning-plan": "Öğrenmeye başlayın",
   "start-read": "Okumaya Başla",
   "stay-consistent": "Devam serilerini takip edin, özel hedefler oluşturun, istikrarlı kalın",
   "tab": {
     "bookmarks": "Yer imleri",
+    "page-bookmarks": "Sayfalar",
     "popular": "Popüler"
   },
   "take-notes": "<modalLink> Notlar'ı mı kaçırdınız? </modalLink>",

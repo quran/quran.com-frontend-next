@@ -273,4 +273,56 @@ export default {
       isDonationPopupVisible: true,
     },
   }),
+  36: (state) => ({
+    ...state,
+    bookmarks: {
+      ...state.bookmarks,
+      bookmarkedPages: state.bookmarks?.bookmarkedPages || {},
+    },
+  }),
+  37: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      // Map old wordByWordContentType to tooltip (most common case for old users)
+      wordByWordTooltipContentType: state.readingPreferences.wordByWordContentType || [],
+      // Start with empty inline content
+      wordByWordInlineContentType: [],
+    },
+  }),
+  38: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      lastUsedReadingMode: initialState.readingPreferences.lastUsedReadingMode,
+      selectedReadingTranslation: initialState.readingPreferences.selectedReadingTranslation,
+    },
+  }),
+  39: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      reflectionFontScale:
+        state.quranReaderStyles.reflectionFontScale ??
+        initialState.quranReaderStyles.reflectionFontScale,
+      lessonFontScale:
+        state.quranReaderStyles.lessonFontScale ?? initialState.quranReaderStyles.lessonFontScale,
+    },
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedReflectionLanguages:
+        state.readingPreferences.selectedReflectionLanguages ??
+        initialState.readingPreferences.selectedReflectionLanguages,
+      selectedLessonLanguages:
+        state.readingPreferences.selectedLessonLanguages ??
+        initialState.readingPreferences.selectedLessonLanguages,
+    },
+  }),
+  40: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
+    },
+  }),
 };

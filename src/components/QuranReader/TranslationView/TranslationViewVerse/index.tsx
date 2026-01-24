@@ -40,7 +40,7 @@ const TranslationViewVerse: React.FC<Props> = ({
 }) => {
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
-  const { verse, firstVerseInPage, bookmarksRangeUrl, notesRange } = useDedupedFetchVerse({
+  const { verse, bookmarksRangeUrl } = useDedupedFetchVerse({
     verseIdx,
     quranReaderDataType,
     quranReaderStyles,
@@ -67,13 +67,9 @@ const TranslationViewVerse: React.FC<Props> = ({
         isLastVerseInView={verseIdx + 1 === totalVerses}
         verse={verse}
         verseIdx={verseIdx}
-        mushafId={mushafId}
         quranReaderStyles={quranReaderStyles}
-        selectedTranslations={selectedTranslations}
         bookmarksRangeUrl={bookmarksRangeUrl}
-        initialData={initialData}
-        firstVerseInPage={firstVerseInPage}
-        notesRange={notesRange}
+        quranReaderDataType={quranReaderDataType}
       />
     </div>
   );

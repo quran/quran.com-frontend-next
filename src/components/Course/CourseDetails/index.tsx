@@ -7,6 +7,7 @@ import styles from './CourseDetails.module.scss';
 import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
+import CompletedStatus from '@/components/Course/CompletedStatus';
 import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
@@ -33,7 +34,7 @@ enum Tab {
 }
 
 const CourseDetails: React.FC<Props> = ({ course }) => {
-  const { title, image, id } = course;
+  const { title, image, id, isCompleted } = course;
   const { t } = useTranslation('learn');
   const [selectedTab, setSelectedTab] = useState(Tab.MAIN);
 
@@ -53,7 +54,13 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         value: Tab.MAIN,
       },
       {
-        name: <TabSwitcherItem icon={<SyllabusIcon />} value={t('tabs.syllabus')} />,
+        name: (
+          <TabSwitcherItem
+            icon={<SyllabusIcon />}
+            value={t('tabs.syllabus')}
+            data-testid="syllabus-button"
+          />
+        ),
         value: Tab.SYLLABUS,
       },
     ],
@@ -108,11 +115,12 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
               description={<EditorsDetails editors={course.editors} />}
             />
           )}
-          {course.isUserEnrolled && (
+          {course.isUserEnrolled && !isCompleted && (
             <div className={styles.startLearningButton}>
               <StartOrContinueLearning course={course} isHeaderButton={false} />
             </div>
           )}
+          {isCompleted && <CompletedStatus course={course} />}
         </>
       )}
     </ContentContainer>

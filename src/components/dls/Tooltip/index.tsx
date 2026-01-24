@@ -10,6 +10,7 @@ export enum TooltipType {
   ERROR = 'error',
   WARNING = 'warning',
   SECONDARY = 'secondary',
+  INFO = 'info',
 }
 
 export enum ContentSide {
@@ -38,6 +39,10 @@ interface Props {
   invertColors?: boolean;
   centerText?: boolean;
   type?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
+  iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 const Tooltip: React.FC<Props> = ({
@@ -53,6 +58,10 @@ const Tooltip: React.FC<Props> = ({
   tip = true,
   invertColors = true,
   centerText = true,
+  icon,
+  onIconClick,
+  iconAriaLabel,
+  shouldContentBeClickable = false,
 }) => (
   <RadixTooltip.Root
     delayDuration={delay}
@@ -74,9 +83,56 @@ const Tooltip: React.FC<Props> = ({
         [styles.warning]: type === TooltipType.WARNING,
         [styles.error]: type === TooltipType.ERROR,
         [styles.secondary]: type === TooltipType.SECONDARY,
+        [styles.info]: type === TooltipType.INFO,
       })}
     >
-      {text}
+      {shouldContentBeClickable ? (
+        <div
+          role="button"
+          tabIndex={0}
+          className={styles.clickableContent}
+          onClick={(e) => {
+            e.stopPropagation();
+            onIconClick?.();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.stopPropagation();
+              onIconClick?.();
+            }
+          }}
+          aria-label={iconAriaLabel}
+        >
+          {icon && <span className={styles.icon}>{icon}</span>}
+          {text}
+        </div>
+      ) : (
+        <>
+          {icon && (
+            <span
+              className={styles.icon}
+              onClick={(e) => {
+                e.stopPropagation();
+                onIconClick?.();
+              }}
+              role="button"
+              tabIndex={0}
+              aria-label={iconAriaLabel}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onIconClick?.();
+                }
+              }}
+            >
+              {icon}
+            </span>
+          )}
+          {text}
+        </>
+      )}
       {tip && <RadixTooltip.Arrow />}
     </RadixTooltip.Content>
   </RadixTooltip.Root>

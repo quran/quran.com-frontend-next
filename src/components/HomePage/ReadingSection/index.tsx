@@ -18,7 +18,7 @@ import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectUserState } from '@/redux/slices/session';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getProfileNavigationUrl } from '@/utils/navigation';
+import { MY_QURAN_URL } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
 interface Props {}
@@ -53,11 +53,7 @@ const ReadingSection: React.FC<Props> = () => {
         <div className={styles.myQuranContainer}>
           <BookmarkRemoveIcon />
         </div>
-        <Link
-          variant={LinkVariant.Blend}
-          href={getProfileNavigationUrl()}
-          onClick={onMyQuranClicked}
-        >
+        <Link variant={LinkVariant.Blend} href={MY_QURAN_URL} onClick={onMyQuranClicked}>
           <p className={styles.myQuranText}>{t('my-quran')}</p>
         </Link>
       </div>
@@ -125,8 +121,8 @@ const ReadingSection: React.FC<Props> = () => {
         <>
           {header}
           <div className={styles.cardsContainer}>
-            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{continueReadingCard}</div>
+            <div className={styles.cardContainer}>{goalsOrStreakCard}</div>
             <div className={styles.cardContainer}>{newCard}</div>
           </div>
         </>

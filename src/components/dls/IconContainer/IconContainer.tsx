@@ -10,12 +10,15 @@ export enum IconColor {
   default = 'default',
   primary = 'primary',
   secondary = 'secondary',
+  tertiary = 'tertiary',
+  accent = 'accent',
 }
 export enum IconSize {
   Xsmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
+  Custom = 'custom',
 }
 
 type IconContainerProps = {
@@ -41,10 +44,13 @@ const IconContainer = ({
         [styles.defaultColor]:
           (shouldForceSetColors && color === IconColor.default) || color === IconColor.primary,
         [styles.secondaryColor]: shouldForceSetColors && color === IconColor.secondary,
+        [styles.tertiaryColor]: shouldForceSetColors && color === IconColor.tertiary,
+        [styles.accentColor]: shouldForceSetColors && color === IconColor.accent,
         [styles.xsmallIcon]: size === IconSize.Xsmall,
         [styles.smallIcon]: size === IconSize.Small,
         [styles.mediumIcon]: size === IconSize.Medium,
         [styles.largeIcon]: size === IconSize.Large,
+        [styles.customIcon]: size === IconSize.Custom,
       })}
       data-auto-flip-icon={shouldFlipOnRTL}
       dir={dir}

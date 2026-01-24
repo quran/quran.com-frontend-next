@@ -1,18 +1,18 @@
-import { useRef, useState } from 'react';
+import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 
-import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
-
-import styles from './VerseActionAdvancedCopy.module.scss';
-
-import ContentModal from '@/dls/ContentModal/ContentModal';
-import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
-import Action from '@/dls/Modal/Action';
-import Footer from '@/dls/Modal/Footer';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import Spinner from '@/dls/Spinner/Spinner';
 import AdvancedCopyIcon from '@/icons/clipboard.svg';
+import {
+  selectStudyModeActiveTab,
+  selectStudyModeHighlightedWordLocation,
+  selectStudyModeIsOpen,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
+import { openAdvancedCopyModal } from '@/redux/slices/QuranReader/verseActionModal';
 import { logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
@@ -22,67 +22,73 @@ type VerseActionAdvancedCopyProps = {
   onActionTriggered?: () => void;
 };
 
-const CLOSE_POPOVER_AFTER_MS = 150;
-
+/**
+ * Action component for advanced copy functionality.
+ * Dispatches Redux action to open the modal in VerseActionModalContainer.
+ *
+ * @returns {JSX.Element} The advanced copy action menu item
+ */
 const VerseActionAdvancedCopy = ({
   verse,
   isTranslationView,
   onActionTriggered,
 }: VerseActionAdvancedCopyProps) => {
   const { t } = useTranslation('quran-reader');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const contentModalRef = useRef<ContentModalHandles>();
+  const dispatch = useDispatch();
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
+  const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
+  const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
-  const onModalClose = () => {
-    logEvent(
-      // eslint-disable-next-line i18next/no-literal-string
-      `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_close`,
-    );
-    setIsModalOpen(false);
-    if (onActionTriggered) {
-      setTimeout(() => {
-        // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
-        onActionTriggered();
-      }, CLOSE_POPOVER_AFTER_MS);
-    }
-  };
-
-  const onModalOpen = () => {
-    // eslint-disable-next-line i18next/no-literal-string
+  const onModalOpen = useCallback(() => {
     logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_open`);
-    setIsModalOpen(true);
-  };
+
+    dispatch(
+      openAdvancedCopyModal({
+        verseKey: verse.verseKey,
+        verse,
+        isTranslationView,
+        wasOpenedFromStudyMode: isStudyModeOpen,
+        studyModeRestoreState:
+          isStudyModeOpen && studyModeVerseKey
+            ? {
+                verseKey: studyModeVerseKey,
+                activeTab: studyModeActiveTab,
+                highlightedWordLocation: studyModeHighlightedWordLocation,
+              }
+            : undefined,
+      }),
+    );
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  }, [
+    verse,
+    isTranslationView,
+    isStudyModeOpen,
+    studyModeVerseKey,
+    studyModeActiveTab,
+    studyModeHighlightedWordLocation,
+    dispatch,
+    onActionTriggered,
+  ]);
 
   return (
-    <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={onModalOpen}>
-        {t('advanced-copy')}
-      </PopoverMenu.Item>
-      <ContentModal
-        innerRef={contentModalRef}
-        isOpen={isModalOpen}
-        header={<p className={styles.header}>{t('advanced-copy')}</p>}
-        hasCloseButton
-        onClose={onModalClose}
-        onEscapeKeyDown={onModalClose}
-        contentClassName={styles.contentWrapper}
-      >
-        <VerseAdvancedCopy verse={verse}>
-          {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
-            <>
-              {ayahSelectionComponent}
-              <div className={styles.footerContainer}>
-                <Footer>
-                  <Action isDisabled={loading} onClick={onCopy}>
-                    {loading ? <Spinner /> : actionText}
-                  </Action>
-                </Footer>
-              </div>
-            </>
-          )}
-        </VerseAdvancedCopy>
-      </ContentModal>
-    </>
+    <PopoverMenu.Item
+      icon={
+        <IconContainer
+          icon={<AdvancedCopyIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+          shouldFlipOnRTL={false}
+        />
+      }
+      onClick={onModalOpen}
+      shouldCloseMenuAfterClick
+    >
+      {t('advanced-copy')}
+    </PopoverMenu.Item>
   );
 };
 

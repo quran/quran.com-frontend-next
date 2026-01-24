@@ -33,10 +33,6 @@ interface UseDedupedFetchVerseResult {
   verse: Verse | null;
   firstVerseInPage: Verse | null;
   bookmarksRangeUrl: string | null;
-  notesRange: {
-    from: string;
-    to: string;
-  } | null;
 }
 
 /**
@@ -112,7 +108,10 @@ const useDedupedFetchVerse = ({
     translationParams,
     selectedTranslations,
   });
-  const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
+
+  // Only use initial data if it has actual verses (not empty array)
+  const hasInitialVerses = initialData?.verses && initialData.verses.length > 0;
+  const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings && hasInitialVerses;
 
   /**
    * CRITICAL: Only generate request key after hydration completes.
@@ -179,13 +178,6 @@ const useDedupedFetchVerse = ({
     verse,
     firstVerseInPage: effectiveVerses ? effectiveVerses[0] : null,
     bookmarksRangeUrl,
-    notesRange:
-      effectiveVerses && effectiveVerses.length > 0
-        ? {
-            from: effectiveVerses?.[0].verseKey,
-            to: effectiveVerses?.[effectiveVerses.length - 1].verseKey,
-          }
-        : null,
   };
 };
 

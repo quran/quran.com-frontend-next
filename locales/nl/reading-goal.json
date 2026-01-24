@@ -1,4 +1,5 @@
 {
+  "achieve-quran-goals": "Bereik je Koran-doelen",
   "continue-reading": "Lees verder",
   "continuous": {
     "description": "Je doel berekent je voortgang over een periode van dagen",
@@ -12,8 +13,10 @@
     "description": "Je doel wordt elke dag gereset",
     "title": "Dagelijks doel"
   },
+  "day-streak": "Dagreeks",
   "day-x": "Dag {{day}}",
   "days": "Dagen",
+  "days-remaining": "resterende dagen",
   "duration": "Duur (dagen)",
   "ending-chapter": "Einde soera",
   "ending-verse": "Ayah beëindigen",
@@ -95,6 +98,7 @@
     "other": "Nog {{days}} dagen"
   },
   "set-a-new-goal": "Stel een nieuw doel in",
+  "set-custom-goal": "Stel een aangepast doel in",
   "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
   "start-journey": "Begin je reis!",
   "start-reading": "Start met lezen",
@@ -110,6 +114,7 @@
     "stroked": "Je hebt vandaag niets gelezen"
   },
   "todays-goal": "Het doel van vandaag",
+  "track-your-streak": "Houd je reeksen bij, stel je eigen doelen in en blijf consistent.",
   "view-progress": "Voortgang bekijken",
   "week-progress": "De vorderingen van deze week",
   "x-days": {

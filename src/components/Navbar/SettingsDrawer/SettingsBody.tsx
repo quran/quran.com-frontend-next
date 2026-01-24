@@ -1,15 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
-import QuranFontSection from './QuranFontSection';
+import { useDispatch, useSelector } from 'react-redux';
+
+import DoneButton from './DoneButton';
 import ResetButton from './ResetButton';
-import ThemeSection from './ThemeSection';
-import TranslationSection from './TranslationSection';
-import WordByWordSection from './WordByWordSection';
+import styles from './SettingsBody.module.scss';
+import SettingTabs from './SettingTabs';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import { selectNavbar, setLastSettingsTab, SettingsTab, SettingsView } from '@/redux/slices/navbar';
+import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = () => {
+  const dispatch = useDispatch();
   const { isActive, nextStep, activeStepIndex } = useOnboarding();
+  const { lastSettingsView, lastSettingsTab } = useSelector(selectNavbar);
+  // Use ref to track previous tab for logging without causing handleTabChange to change
+  const lastSettingsTabRef = useRef(lastSettingsTab);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    lastSettingsTabRef.current = lastSettingsTab;
+  }, [lastSettingsTab]);
+
+  const getTabFromSettingsView = (view: SettingsView): SettingsTab => {
+    switch (view) {
+      case SettingsView.Translation:
+        return SettingsTab.Translation;
+      case SettingsView.Tafsir:
+        return SettingsTab.More;
+      case SettingsView.Reciter:
+      case SettingsView.Body:
+      default:
+        return SettingsTab.Arabic;
+    }
+  };
+
+  const handleTabChange = useCallback(
+    (tab: SettingsTab, shouldLog = true) => {
+      if (shouldLog) {
+        logValueChange('settings_tab', lastSettingsTabRef.current, tab);
+      }
+      dispatch(setLastSettingsTab(tab));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     let timeout: NodeJS.Timeout = null;
@@ -23,14 +58,23 @@ const SettingsBody = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeStepIndex, isActive]);
 
+  // Update active tab when returning from a sub-view (e.g., Translation or Tafsir detail view)
+  // Don't log since this is auto-navigation, not user-initiated
+  useEffect(() => {
+    if (lastSettingsView !== SettingsView.Body) {
+      const targetTab = getTabFromSettingsView(lastSettingsView);
+      handleTabChange(targetTab, false);
+    }
+  }, [lastSettingsView, handleTabChange]);
+
   return (
-    <>
-      <ThemeSection />
-      <QuranFontSection />
-      <WordByWordSection />
-      <TranslationSection />
-      <ResetButton />
-    </>
+    <div className={styles.container}>
+      <SettingTabs activeTab={lastSettingsTab} onTabChange={handleTabChange} />
+      <div className={styles.buttonsContainer}>
+        <ResetButton />
+        <DoneButton />
+      </div>
+    </div>
   );
 };
 
