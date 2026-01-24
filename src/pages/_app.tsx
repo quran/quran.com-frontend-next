@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
@@ -20,6 +20,7 @@ import { getDir } from '@/utils/locale';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
+import ChaptersData from 'types/ChaptersData';
 
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
@@ -32,6 +33,16 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   const { locale } = router;
   const resolvedLocale = locale ?? 'en';
   const languageDirection = getDir(resolvedLocale);
+  // Keep the last chapters data for routes that don't provide it (e.g. auth pages).
+  const [chaptersData, setChaptersData] = useState<ChaptersData>(
+    pageProps.chaptersData ?? ({} as ChaptersData),
+  );
+
+  useEffect(() => {
+    if (pageProps.chaptersData) {
+      setChaptersData(pageProps.chaptersData);
+    }
+  }, [pageProps.chaptersData]);
 
   useEffect(() => {
     document.documentElement.dir = languageDirection;
@@ -66,7 +77,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
       <DirectionProvider dir={languageDirection}>
         <TooltipProvider>
           <ToastContainerProvider>
-            <DataContext.Provider value={pageProps.chaptersData}>
+            <DataContext.Provider value={chaptersData}>
               <AudioPlayerMachineProvider>
                 <ReduxProvider locale={resolvedLocale}>
                   <ThemeProvider>
