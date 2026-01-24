@@ -3,32 +3,27 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useRamadanChallengeStatus from '@/hooks/useRamadanChallengeStatus';
 import styles from '@/pages/contentPage.module.scss';
-import { enrollInRamadanChallenge, getRamadanChallengeStatus } from '@/utils/auth/api';
-import { makeRamadanChallengeStatusUrl } from '@/utils/auth/apiPaths';
+import { enrollInRamadanChallenge } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
-type Props = {
+interface Props {
   section: string;
-};
+}
 
 const EnrollButton = ({ section }: Props) => {
+  const { isEnrolled, mutate } = useRamadanChallengeStatus();
+  const { t } = useTranslation('ramadan-activities');
   const router = useRouter();
   const toast = useToast();
   const [isEnrollLoading, setIsEnrollLoading] = useState(false);
-
-  const { data: statusData, mutate } = useSWR(
-    isLoggedIn() ? makeRamadanChallengeStatusUrl() : null,
-    getRamadanChallengeStatus,
-  );
-
-  const isEnrolled = statusData?.data?.isEnrolled;
 
   const onButtonClicked = () => {
     logButtonClick(`ramadan_challenge_${section}`);
@@ -50,21 +45,35 @@ const EnrollButton = ({ section }: Props) => {
     try {
       await enrollInRamadanChallenge();
       await mutate();
-      toast('Enrolled successfully! You may see welcome email in your inbox.', {
+      toast(t('enroll-success'), {
         status: ToastStatus.Success,
       });
     } catch (error) {
-      toast('Failed to enroll, please try again later.', { status: ToastStatus.Error });
+      toast(t('enroll-error'), { status: ToastStatus.Error });
     } finally {
       setIsEnrollLoading(false);
     }
   };
 
   const getButtonText = () => {
-    if (isEnrollLoading) return 'Loading...';
-    if (isEnrolled) return 'Enrolled';
-    return 'Join the Surah Al-Mulk Challenge';
+    if (isEnrollLoading) return t('loading');
+    if (isEnrolled) return t('enrolled');
+    return t('join-challenge');
   };
+
+  if (!isLoggedIn()) {
+    return (
+      <Button
+        href={getLoginNavigationUrl(router.asPath)}
+        variant={ButtonVariant.Shadow}
+        className={styles.button}
+        isLoading={isEnrollLoading}
+        isDisabled={isEnrolled}
+      >
+        {getButtonText()}
+      </Button>
+    );
+  }
 
   return (
     <Button
@@ -73,6 +82,8 @@ const EnrollButton = ({ section }: Props) => {
       className={styles.button}
       isLoading={isEnrollLoading}
       isDisabled={isEnrolled}
+      aria-label={isEnrolled ? t('enrolled') : t('join-challenge')}
+      aria-live="polite"
     >
       {getButtonText()}
     </Button>

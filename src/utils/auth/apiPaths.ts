@@ -299,10 +299,10 @@ export const makeEnrollUserInQuranProgramUrl = (): string =>
 export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
 
-export const makeRamadanChallengeStatusUrl = (): string => makeUrl('/ramadan-challenge/status');
+export const makeRamadanChallengeStatusUrl = (): string => makeUrl('ramadan-challenge/status');
 
-export const makeRamadanChallengeCountUrl = (): string => makeUrl('/ramadan-challenge/count');
+export const makeRamadanChallengeCountUrl = (): string => makeUrl('ramadan-challenge/count');
 
-export const makeRamadanChallengeEnrollUrl = (): string => makeUrl('/ramadan-challenge/enroll');
+export const makeRamadanChallengeEnrollUrl = (): string => makeUrl('ramadan-challenge/enroll');
 
-export const makeRamadanChallengeUnenrollUrl = (): string => makeUrl('/ramadan-challenge/unenroll');
+export const makeRamadanChallengeUnenrollUrl = (): string => makeUrl('ramadan-challenge/unenroll');

@@ -13,13 +13,10 @@ import PageContainer from '@/components/PageContainer';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
-import IconStarFilled from '@/icons/star_filled.svg';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan2026/ramadan2026.module.scss';
-import ImageAppStore from '@/public/images/app-store-button.svg';
 import newFeatureImage from '@/public/images/new-features.png';
-import ImagePlayStore from '@/public/images/play-store-button.svg';
 import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -43,10 +40,10 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
   return (
     <>
       <NextSeoWrapper
-        title="Prepare for a Transformative Ramadan 2026"
+        title="Prepare for a Transformative Ramadan 2026 1447AH"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        description="Ramadan is a unique opportunity to renew your relationship with the Quran. Explore tools, programs, and features designed to help you prepare your heart, set meaningful goals, and deepen your connection with Allah’s words."
+        description="Prepare your heart for Ramadan with Quran-centered challenges, learning plans, goal-setting, and more. Join us today!"
         image={getPreparingForRamadanOgImageUrl({
           locale: lang,
         })}
@@ -54,8 +51,10 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
       <PageContainer>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
           <div className={styles.subSection}>
-            <h1>Prepare for a Transformative Ramadan</h1>
-            <h2>2026/1447</h2>
+            <h1>
+              Prepare for a Transformative Ramadan{' '}
+              <span className={pageStyles.h1Subtext}>2026/1447AH</span>
+            </h1>
             <div>
               How you prepare for Ramadan and the intentions you carry into it, have a big impact on
               how much you benefit from this blessed month. Ramadan is unlike any other time: the
@@ -63,6 +62,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               begins before the month enters, so that when Ramadan departs, it leaves you renewed -
               carrying greater clarity, discipline, and closeness to Allah beyond its days.
             </div>
+            <br />
             <div>
               <Link href="https://quran.com" isNewTab>
                 Quran.com
@@ -70,53 +70,53 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               invites you to begin preparing for the month with us!
             </div>
             <div>Join the following activities:</div>
-            <ul>
+            <ul className={pageStyles.list}>
               <li>
                 <InlineLink
                   text="Surah Al-Mulk: Meaningful Memorization Challenge"
-                  href="https://docs.google.com/document/d/10-FnsoRLDP2Y3zc2VB4ZJ9HHprq4ByVPfx_zKSbddvw/edit?tab=t.0#heading=h.o2619y7mqskp"
+                  href="#join-surah-mulk-challenge"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="Goal Setting for Your Ramadan Journey"
-                  href="https://quran.com/ramadan#goal-setting"
+                  href="#goal-setting"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="Preparing Our Hearts for Ramadan"
-                  href="https://quran.com/ramadan#preparing-our-hearts"
+                  href="#preparing-our-hearts"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="Mindful Fasting: A Ramadan Learning Plan"
-                  href="https://quran.com/ramadan#mindful-fasting"
+                  href="#mindful-fasting"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="QuranReflect Ramadan Ready Challenge"
-                  href="https://quranreflect.org"
-                  isNewTab
+                  href="#quranreflect-ramadan-challenge"
+                  isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="Share the Month of the Quran! Visit 'What Is Ramadan?'"
-                  href="https://quran.com/ramadan#share-the-month-of-the-quran"
+                  href="#share-the-month-of-the-quran"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
                   text="Explore Additional Beneficial Features"
-                  href="https://quran.com/ramadan#explore-additional-beneficial-features"
+                  href="#explore-additional-beneficial-features"
                   isNewTab={false}
                 />
               </li>
@@ -174,8 +174,9 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               revised program is based on last year's highly-rated course, enriched with additional
               insights and reflections to help you approach Ramadan with a rejuvenated focus.
             </div>
+            <br />
             <div>What You'll Gain:</div>
-            <ul>
+            <ul className={pageStyles.list}>
               <li>Self-development tips.</li>
               <li>Quranic reflections to inspire mindfulness and intention-setting.</li>
               <li>Actionable tips to create a fulfilling Ramadan routine.</li>
@@ -238,7 +239,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
               Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
               Learning Plan designed to help you:
             </div>
-            <ul>
+            <ul className={pageStyles.list}>
               <li>Reflect on the deeper purpose of fasting.</li>
               <li>Gain Quranic insights into patience, gratitude, and self-control.</li>
               <li>Deepen your connection with Allah through intentional practices.</li>
@@ -316,7 +317,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="quranic-duas">
+          <div className={styles.subSection} id="quranreflect-ramadan-challenge">
             <h1>Ramadan Ready Challenge on QuranReflect</h1>
             <div>
               Preparing for Ramadan does not begin with the only gearing up for the first fast, it
@@ -337,7 +338,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
             <br />
             <h2>✏️ How to participate</h2>
-            <ul>
+            <ul className={pageStyles.list}>
               <li>
                 Post your reflection on{' '}
                 <Link href={EXTERNAL_ROUTES.QURAN_REFLECT} isNewTab>
@@ -375,31 +376,17 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             <div className={pageStyles.storeButtons}>
               <div>
                 <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_ANDROID} isNewTab>
-                  <ImagePlayStore className={pageStyles.storeButton} />
-                  <div className={pageStyles.starContainer}>
-                    <IconStarFilled />
-                    <IconStarFilled />
-                    <IconStarFilled />
-                    <IconStarFilled />
-                    <IconStarFilled className={pageStyles.googlePlay} />
-                  </div>
+                  <Image src="/images/qr_playstore.png" alt="Play Store" width={160} height={100} />
                 </Link>
               </div>
               <Link href={EXTERNAL_ROUTES.QURAN_REFLECT_IOS} isNewTab>
-                <ImageAppStore className={pageStyles.storeButton} />
-                <div className={pageStyles.starContainer}>
-                  <IconStarFilled />
-                  <IconStarFilled />
-                  <IconStarFilled />
-                  <IconStarFilled />
-                  <IconStarFilled className={pageStyles.appStore} />
-                </div>
+                <Image src="/images/qr_appstore.png" alt="App Store" width={160} height={100} />
               </Link>
             </div>
             <br />
           </div>
           <hr />
-          <div className={styles.subSection} id="preparing-our-hearts">
+          <div className={styles.subSection} id="share-the-month-of-the-quran">
             <h1>Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
             <div>
               For those unfamiliar with Ramadan, we've created a page to explore the question “What
@@ -415,7 +402,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="share-the-month-of-the-quran">
+          <div className={styles.subSection} id="explore-additional-beneficial-features">
             <h1>Explore Additional Beneficial Features!</h1>
             <div>
               Discover additional features on Quran.com to make your Ramadan journey more enriching.
@@ -434,7 +421,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="explore-additional-beneficial-features">
+          <div className={styles.subSection}>
             <h1>May You Build a Deep and Profound Connection with the Quran This Ramadan</h1>
             <div>
               May Allah make this Ramadan a time of profound growth, deep reflection, and meaningful

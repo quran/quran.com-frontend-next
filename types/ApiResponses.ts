@@ -153,7 +153,7 @@ export interface RamadanChallengeStatusResponse extends BaseResponse {
   totalDays: number;
   hasStarted: boolean;
   hasEnded: boolean;
-  enrolledAt: string;
+  enrolledAt: string | undefined;
 }
 
 export interface RamadanChallengeEnrollResponse extends BaseResponse {

@@ -26,10 +26,10 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
   return (
     <>
       <NextSeoWrapper
-        title="Ramadan Challenge: Take the Meaningful Memorization Challenge This Ramadan"
+        title="One Ayah a Day: Surah Al-Mulk Challenge This Ramadan (Free)"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        description="Take the Meaningful Memorization Challenge This Ramadan"
+        description="Join the Meaningful Memorization Challenge this Ramadan! One ayah a day with word-by-word meaning, tafsir, and reflection. Start today and deepen your connection with Surah Al-Mulk."
         image={getPreparingForRamadanOgImageUrl({
           locale: lang,
         })}
@@ -49,7 +49,9 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             <div className={styles.ctaContainer}>
               <EnrollButton section="join_surah_mulk_challenge" />
             </div>
-            <EnrollmentCount />
+            <div className={pageStyles.enrollmentContainer}>
+              <EnrollmentCount />
+            </div>
             <h2>
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
@@ -62,21 +64,21 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Each day of Ramadan, you'll receive a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
-            <ul>
+            <ul className={pageStyles.list}>
               <li>
-                ✨ <span className={pageStyles.bold}>Word-by-word</span> breakdown to understand the
+                <span className={pageStyles.bold}>Word-by-word</span> breakdown to understand the
                 meaning of the words
               </li>
               <li>
-                ✨ <span className={pageStyles.bold}>A concise tafsir insight</span> to help you
+                <span className={pageStyles.bold}>A concise tafsir insight</span> to help you
                 understand the ayah
               </li>
               <li>
-                ✨ <span className={pageStyles.bold}>A daily reflection</span> from the community
-                for the ayah
+                <span className={pageStyles.bold}>A daily reflection</span> from the community for
+                the ayah
               </li>
               <li>
-                ✨ <span className={pageStyles.bold}>Valuable</span>, optional content for a deeper
+                <span className={pageStyles.bold}>Valuable</span>, optional content for a deeper
                 dive
               </li>
             </ul>
@@ -90,11 +92,11 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <hr />
           <div className={styles.subSection} id="goal-setting">
             <h1>What You'll Gain By the End of Ramadan, insha'Allah:</h1>
-            <ul>
-              <li>✨ A memorized (or deeply familiar) Surah Al-Mulk</li>
-              <li>✨ Stronger connection between recitation and meaning</li>
-              <li>✨ A daily habit of engaging the Quran</li>
-              <li>✨ Verses that stay with you long after Ramadan ends</li>
+            <ul className={pageStyles.list}>
+              <li>A memorized (or deeply familiar) Surah Al-Mulk</li>
+              <li>Stronger connection between recitation and meaning</li>
+              <li>A daily habit of engaging the Quran</li>
+              <li>Verses that stay with you long after Ramadan ends</li>
             </ul>
           </div>
           <hr />
@@ -132,7 +134,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             <div className={styles.ctaContainer}>
               <EnrollButton section="join_surah_mulk_challenge" />
             </div>
-            <div>
+            <div className={pageStyles.learnMore}>
               To learn more about our Ramadan activities, visit{' '}
               <Link href={ROUTES.RAMADAN_2026_URL} isNewTab>
                 Quran.com/Ramadan2026

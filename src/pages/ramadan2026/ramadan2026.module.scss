@@ -8,8 +8,12 @@
   font-style: italic;
 }
 
+.h1Subtext {
+  font-size: var(--font-size-small-px);
+}
+
 .subtext {
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall-px);
 }
 
 .container {
@@ -52,4 +56,8 @@
   .appStore {
     clip-path: inset(0 20% 0 0);
   }
+}
+
+.list {
+  margin-block-start: var(--spacing-small-px);
 }
