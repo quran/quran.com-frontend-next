@@ -29,6 +29,7 @@ import {
 import { setReadingViewHoveredVerseKey } from '@/redux/slices/QuranReader/readingViewVerse';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import {
+  MushafLines,
   QuranFont,
   ReadingPreference,
   WordByWordType,
@@ -73,6 +74,11 @@ export type QuranWordProps = {
   tooltipType?: TooltipType;
   isWordInteractionDisabled?: boolean;
   shouldForceShowTooltip?: boolean;
+  quranTextFontScaleOverride?: number;
+  mushafLinesOverride?: MushafLines;
+  shouldShowWordByWordTranslation?: boolean;
+  shouldShowWordByWordTransliteration?: boolean;
+  isStandaloneMode?: boolean;
 };
 
 const QuranWord = ({
@@ -85,6 +91,12 @@ const QuranWord = ({
   tooltipType,
   isWordInteractionDisabled = false,
   shouldForceShowTooltip = false,
+  // Standalone mode (widget/embed) doesn't use redux, so we can override these styles via props
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
+  shouldShowWordByWordTranslation,
+  shouldShowWordByWordTransliteration,
+  isStandaloneMode = false,
 }: QuranWordProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation('quran-reader');
@@ -96,10 +108,11 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
 
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectInlineDisplayWordByWordPreferences,
-    shallowEqual,
-  );
+  const reduxWbwPrefs = useSelector(selectInlineDisplayWordByWordPreferences, shallowEqual);
+  const showWordByWordTranslation =
+    shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
+  const showWordByWordTransliteration =
+    shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
@@ -145,6 +158,8 @@ const QuranWord = ({
         isFontLoaded={isFontLoaded}
         isHighlighted={shouldBeHighLighted}
         charType={word.charTypeName}
+        quranTextFontScaleOverride={quranTextFontScaleOverride}
+        mushafLinesOverride={mushafLinesOverride}
       />
     );
   } else if (word.charTypeName !== CharType.Pause) {
@@ -162,6 +177,7 @@ const QuranWord = ({
   const showTooltip =
     word.charTypeName === CharType.Word &&
     isWordByWordAllowed &&
+    !isStandaloneMode &&
     (isTranslationMode ? !!showTooltipFor.length : true);
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
@@ -271,19 +287,19 @@ const QuranWord = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
   }, [word.charTypeName]);
 
+  const isInteractionDisabled = isStandaloneMode || isWordInteractionDisabled;
   // Allow clicking on words and ayah numbers in both reading and translation mode for study mode modal
-  const shouldHandleWordClicking = !isWordInteractionDisabled;
+  const shouldHandleWordClicking = !isInteractionDisabled;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress, role: 'button', tabIndex: 0 })}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      {...(!isInteractionDisabled && { onMouseEnter, onMouseLeave })}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
-        [styles.interactionDisabled]: isWordInteractionDisabled,
-        [styles.highlightOnHover]: !isWordInteractionDisabled && isRecitationEnabled,
+        [styles.interactionDisabled]: isInteractionDisabled,
+        [styles.highlightOnHover]: !isInteractionDisabled && isRecitationEnabled,
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -303,7 +319,7 @@ const QuranWord = ({
         wrapper={(children) => {
           // Show tooltip in both reading and translation modes
           const shouldShowWordTooltip =
-            showTooltip && (shouldForceShowTooltip || !isWordInteractionDisabled);
+            showTooltip && (shouldForceShowTooltip || !isInteractionDisabled);
 
           if (shouldShowWordTooltip) {
             const isTooltipOpen =

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import SaveToCollectionAction from '../SaveToCollectionAction';
 import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
+import VerseActionEmbedWidget from '../VerseActionEmbedWidget';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 
 import ShareVerseActionsMenu from './ShareVerseActionsMenu';
@@ -52,6 +53,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
       )}
       <TranslationFeedbackAction
+        verse={verse}
+        isTranslationView={isTranslationView}
+        onActionTriggered={onActionTriggered}
+      />
+      <VerseActionEmbedWidget
         verse={verse}
         isTranslationView={isTranslationView}
         onActionTriggered={onActionTriggered}

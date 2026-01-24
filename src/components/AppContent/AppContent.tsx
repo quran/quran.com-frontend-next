@@ -35,6 +35,11 @@ function AppContent({ Component, pageProps }: AppContentProps) {
   const isNavigationDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isBannerVisible = useSelector(selectIsBannerVisible);
+  const isEmbedPage = router.pathname === '/embed/v1';
+
+  if (isEmbedPage) {
+    return <Component {...pageProps} />;
+  }
 
   return (
     <div
