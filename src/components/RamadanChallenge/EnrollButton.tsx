@@ -8,6 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useRamadanChallengeStatus from '@/hooks/useRamadanChallengeStatus';
+import { logErrorToSentry } from '@/lib/sentry';
 import styles from '@/pages/contentPage.module.scss';
 import { enrollInRamadanChallenge } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -49,6 +50,10 @@ const EnrollButton = ({ section }: Props) => {
         status: ToastStatus.Success,
       });
     } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'ramadan_challenge_enroll',
+        metadata: { section },
+      });
       toast(t('enroll-error'), { status: ToastStatus.Error });
     } finally {
       setIsEnrollLoading(false);
