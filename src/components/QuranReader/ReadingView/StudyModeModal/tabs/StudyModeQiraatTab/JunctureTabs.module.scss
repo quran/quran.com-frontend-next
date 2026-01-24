@@ -1,78 +1,60 @@
-@use 'src/styles/breakpoints';
+@use '@/styles/breakpoints';
+@use '@/styles/constants';
 
 .container {
   margin-block-end: var(--spacing-medium);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: var(--color-background-alternative-faded);
-    border-radius: 2px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--color-secondary-faded);
-    border-radius: 2px;
-  }
 }
 
-.tabsWrapper {
+.tabs {
   display: flex;
-  gap: var(--spacing-small);
-  padding-block: var(--spacing-xxsmall);
-  padding-inline: var(--spacing-xxsmall);
-  min-width: min-content;
+  gap: var(--spacing-small2-px);
+  padding-block-end: var(--spacing-xxsmall-px);
+  margin-block-end: var(--spacing-medium-px);
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    block-size: var(--spacing-xxsmall-px);
+  }
+
+  & > :last-child {
+    margin-inline-end: var(--spacing-micro-px);
+  }
 }
 
 .tab {
-  padding: var(--spacing-xsmall) var(--spacing-small);
-  border-radius: var(--border-radius-pill);
-  background: var(--color-background-alternative-faded);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.1s ease;
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
-  flex-shrink: 0;
+  cursor: pointer;
+  block-size: calc(var(--spacing-small-plus-px) * 4);
+  padding-inline: var(--spacing-medium-px);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-default-new);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
 
   &:hover {
-    background: var(--color-background-alternative-medium);
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
   }
 
   &:focus-visible {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 2px;
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
   }
 
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-.tabSelected {
-  background: var(--color-primary-faded);
-  border-color: var(--color-primary-medium);
-
-  .tabText {
-    color: var(--color-primary-medium);
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
   }
 
-  &:hover {
-    background: var(--color-primary-faded);
+  &[aria-selected='true'] {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
   }
-}
-
-.tabText {
-  font-family: var(--quran-font-family);
-  font-size: var(--font-size-large);
-  color: var(--color-text-default);
-  direction: rtl;
-  line-height: 1.6;
 }

@@ -1,10 +1,10 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  padding: var(--spacing-medium);
+  padding-block: var(--spacing-medium);
 
   @include breakpoints.tablet {
-    padding: var(--spacing-small);
+    padding-block: var(--spacing-small);
   }
 }
 
@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-block-size: 200px;
   padding: var(--spacing-large);
 }
 
@@ -37,7 +37,7 @@
 
 .mainContent {
   flex: 1;
-  min-width: 0;
+  min-inline-size: 0;
 
   @include breakpoints.desktop {
     flex: 0.7;
@@ -46,16 +46,16 @@
 }
 
 .readersContainer {
-  width: 100%;
+  inline-size: 100%;
 
   @include breakpoints.desktop {
     flex: 0.3;
     order: 2;
-    max-width: 300px;
+    max-inline-size: 300px;
     position: sticky;
-    top: var(--spacing-medium);
+    inset-block-start: var(--spacing-medium);
     align-self: flex-start;
-    max-height: calc(100vh - 200px);
+    max-block-size: calc(100vh - 200px);
     overflow-y: auto;
   }
 }

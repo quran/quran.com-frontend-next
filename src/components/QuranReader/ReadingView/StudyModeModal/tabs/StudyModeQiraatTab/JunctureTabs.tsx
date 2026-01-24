@@ -1,10 +1,12 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './JunctureTabs.module.scss';
 
 import { QiraatJuncture } from '@/types/Qiraat';
+import { toLocalizedNumber } from '@/utils/locale';
 
 interface JunctureTabsProps {
   junctures: QiraatJuncture[];
@@ -15,30 +17,20 @@ interface JunctureTabsProps {
 /**
  * Tab-style selector for junctures when multiple exist for an ayah.
  * Uses textSimple (undiacritized) for better readability if available.
+ * @returns {JSX.Element} The JunctureTabs component
  */
 const JunctureTabs: React.FC<JunctureTabsProps> = ({
   junctures,
   selectedJunctureId,
   onJunctureSelect,
 }) => {
-  if (junctures.length <= 1) {
-    return null;
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent, junctureId: number) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onJunctureSelect(junctureId);
-    }
-  };
+  const { t, lang } = useTranslation('common');
 
   return (
-    <div className={styles.container} role="tablist" aria-label="Juncture selection">
-      <div className={styles.tabsWrapper}>
-        {junctures.map((juncture) => {
+    <div className={styles.container}>
+      <div className={styles.tabs} role="tablist" aria-label="Juncture selection">
+        {junctures.map((juncture, index) => {
           const isSelected = selectedJunctureId === juncture.id;
-          // Use textSimple (undiacritized) if available, fallback to text
-          const displayText = juncture.textSimple || juncture.text;
 
           return (
             <button
@@ -48,13 +40,12 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
               aria-selected={isSelected}
               aria-controls={`juncture-panel-${juncture.id}`}
               tabIndex={isSelected ? 0 : -1}
-              className={classNames(styles.tab, {
-                [styles.tabSelected]: isSelected,
-              })}
+              className={classNames(styles.tab)}
               onClick={() => onJunctureSelect(juncture.id)}
-              onKeyDown={(e) => handleKeyDown(e, juncture.id)}
             >
-              <span className={styles.tabText}>{displayText}</span>
+              <span className={styles.tabText}>
+                {t(`qiraat.juncture`)} {toLocalizedNumber(index + 1, lang)}
+              </span>
             </button>
           );
         })}
