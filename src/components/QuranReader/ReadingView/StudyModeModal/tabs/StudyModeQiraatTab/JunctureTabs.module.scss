@@ -2,7 +2,9 @@
 @use '@/styles/constants';
 
 .container {
-  margin-block-end: var(--spacing-medium);
+  padding-block-end: calc(var(--spacing-xsmall) * 3);
+  margin-block-end: var(--spacing-medium3-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
 }
 
 .tabs {
@@ -39,22 +41,31 @@
   font-size: var(--font-size-small);
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 
-  &:hover {
+  &:where(:hover, :focus-visible, [aria-selected='true']):not(:disabled) {
     background-color: var(--color-blue-buttons-and-icons);
     color: var(--color-text-white);
-  }
-
-  &:focus-visible {
-    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
-    outline-offset: var(--spacing-micro-px);
   }
 
   &:active:not(:disabled) {
     transform: scale(constants.$button-active-scale);
   }
+}
 
-  &[aria-selected='true'] {
-    background-color: var(--color-blue-buttons-and-icons);
-    color: var(--color-text-white);
-  }
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.label {
+  font-size: var(--font-size-large2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+}
+
+.value {
+  font-size: var(--font-size-xxxlarge-px);
+  font-family: UthmanicHafs;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
 }

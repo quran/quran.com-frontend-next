@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import useQiraatData from './hooks/useQiraatData';
+import useQiraatDataHook from './hooks/useQiraatData';
 import JunctureTabs from './JunctureTabs';
 import QiraahCardList from './QiraahCardList';
 import QiraatBanner from './QiraatBanner';
@@ -21,16 +21,18 @@ interface StudyModeQiraatTabProps {
 /**
  * Main container component for the Qiraat tab in Study Mode.
  * Orchestrates all Qiraat components and manages state.
+ * @returns {JSX.Element} Rendered Qiraat tab UI
  */
 const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, verseNumber }) => {
   const { t } = useTranslation('common');
   const verseKey = `${chapterId}:${verseNumber}`;
 
-  // Fetch Qiraat data
-  const { data, isLoading, error, hasData } = useQiraatData(verseKey);
+  const { data, isLoading, error, hasData } = useQiraatDataHook(verseKey);
 
-  // Local state
-  const [selectedJunctureId, setSelectedJunctureId] = useState<number | null>(null);
+  const [selectedJunctureId, setSelectedJunctureId] = useState<number | null>(
+    data?.junctures?.[0]?.id ?? null,
+  );
+
   const [isReadersPanelExpanded, setIsReadersPanelExpanded] = useState(false);
   const [bioModalReaderId, setBioModalReaderId] = useState<number | null>(null);
 
@@ -44,13 +46,13 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
   // Get selected juncture's readings
   const selectedJuncture = useMemo(() => {
     if (!data?.junctures || !selectedJunctureId) return null;
-    return data.junctures.find((j) => j.id === selectedJunctureId) || null;
+    return data.junctures.find((juncture) => juncture.id === selectedJunctureId) ?? null;
   }, [data?.junctures, selectedJunctureId]);
 
   // Get reader for bio modal
   const bioModalReader: QiraatReader | null = useMemo(() => {
     if (!data?.readers || !bioModalReaderId) return null;
-    return data.readers.find((r) => r.id === bioModalReaderId) || null;
+    return data.readers.find((reader) => reader.id === bioModalReaderId) ?? null;
   }, [data?.readers, bioModalReaderId]);
 
   // Handlers
@@ -75,22 +77,20 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
       // Find which reading this transmitter belongs to and scroll to it
       if (!selectedJuncture?.readings) return;
 
-      for (const reading of selectedJuncture.readings) {
-        if (
+      const readingToScrollTo = selectedJuncture.readings.find(
+        (reading) =>
           reading.matrix?.transmitters?.includes(transmitterId) ||
           reading.matrix?.readers?.some((readerId) =>
-            data?.transmitters?.some((t) => t.id === transmitterId && t.readerId === readerId),
-          )
-        ) {
-          const cardElement = document.getElementById(`qiraah-card-${reading.id}`);
-          if (cardElement) {
-            cardElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'center',
-            });
-          }
-          break;
-        }
+            data?.transmitters?.some(
+              (transmitter) =>
+                transmitter.id === transmitterId && transmitter.readerId === readerId,
+            ),
+          ),
+      );
+
+      if (readingToScrollTo) {
+        const cardElement = document.getElementById(`qiraah-card-${readingToScrollTo.id}`);
+        if (cardElement) cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     },
     [selectedJuncture?.readings, data?.transmitters],
@@ -125,19 +125,32 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
 
   return (
     <div className={styles.container}>
-      {/* Educational banner */}
       <QiraatBanner />
+
+      <JunctureTabs
+        junctures={data.junctures}
+        selectedJunctureId={selectedJunctureId}
+        onJunctureSelect={handleJunctureSelect}
+      />
 
       {/* Main content */}
       <div className={styles.content}>
+        {/* Readers panel (right side on desktop, top on mobile) */}
+        <div className={styles.readersContainer}>
+          <ReadersPanel
+            readers={data.readers}
+            transmitters={data.transmitters}
+            readings={selectedJuncture?.readings || []}
+            isExpanded={isReadersPanelExpanded}
+            onToggleExpand={handleToggleReadersPanel}
+            onTransmitterClick={handleTransmitterClick}
+            onReaderInfoClick={handleReaderInfoClick}
+          />
+        </div>
+
         {/* Left content area */}
         <div className={styles.mainContent}>
           {/* Juncture tabs */}
-          <JunctureTabs
-            junctures={data.junctures}
-            selectedJunctureId={selectedJunctureId}
-            onJunctureSelect={handleJunctureSelect}
-          />
 
           {/* Qiraah cards */}
           {selectedJuncture && (
@@ -155,19 +168,6 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
               <p className={styles.commentaryText}>{selectedJuncture.commentary}</p>
             </div>
           )}
-        </div>
-
-        {/* Readers panel (right side on desktop, top on mobile) */}
-        <div className={styles.readersContainer}>
-          <ReadersPanel
-            readers={data.readers}
-            transmitters={data.transmitters}
-            readings={selectedJuncture?.readings || []}
-            isExpanded={isReadersPanelExpanded}
-            onToggleExpand={handleToggleReadersPanel}
-            onTransmitterClick={handleTransmitterClick}
-            onReaderInfoClick={handleReaderInfoClick}
-          />
         </div>
       </div>
 

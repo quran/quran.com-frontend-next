@@ -23,6 +23,7 @@ interface ReadersPanelProps {
  * Responsive panel displaying all canonical readers with their transmitters.
  * Desktop: Always visible as a side panel.
  * Mobile: Collapsible, collapsed by default.
+ * @returns {JSX.Element} Rendered ReadersPanel component
  */
 const ReadersPanel: React.FC<ReadersPanelProps> = ({
   readers,
@@ -38,23 +39,27 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   // Sort readers by position (canonical order)
   const sortedReaders = [...readers].sort((a, b) => a.position - b.position);
 
+  const readingColors = readings
+    .map((reading) => reading.color)
+    .filter((color) => color !== null)
+    .map((color) => (
+      <div key={color} className={styles.readingColor} style={{ backgroundColor: color }} />
+    ));
+
   return (
-    <div
-      className={classNames(styles.panel, {
-        [styles.expanded]: isExpanded,
-      })}
-    >
+    <div className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
       {/* Mobile header with toggle */}
       <button
         type="button"
-        className={styles.mobileHeader}
+        className={classNames(styles.header, styles.mobile)}
         onClick={onToggleExpand}
         aria-expanded={isExpanded}
         aria-controls="readers-list"
       >
-        <span className={styles.headerTitle}>
-          {t('qiraat.readers')} ({readers.length})
-        </span>
+        <div className={styles.headerTitleContainer}>
+          <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
+          <span className={styles.readingColors}>{readingColors}</span>
+        </div>
         <ChevronDownIcon
           className={classNames(styles.chevron, {
             [styles.chevronRotated]: isExpanded,
@@ -63,8 +68,9 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       </button>
 
       {/* Desktop header */}
-      <div className={styles.desktopHeader}>
-        <h3 className={styles.headerTitle}>{t('qiraat.readers')}</h3>
+      <div className={classNames(styles.header, styles.desktop)}>
+        <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
+        <span className={styles.readingColors}>{readingColors}</span>
       </div>
 
       {/* Reader list - always visible on desktop, collapsible on mobile */}

@@ -28,10 +28,10 @@
 .content {
   display: flex;
   gap: var(--spacing-large);
-  flex-direction: column-reverse;
+  flex-direction: column;
 
   @include breakpoints.desktop {
-    flex-direction: row;
+    flex-direction: row-reverse;
   }
 }
 

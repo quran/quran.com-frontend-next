@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -26,6 +26,10 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
 }) => {
   const { t, lang } = useTranslation('common');
 
+  const selectedJuncture = useMemo(() => {
+    return junctures.find((juncture) => juncture.id === selectedJunctureId);
+  }, [junctures, selectedJunctureId]);
+
   return (
     <div className={styles.container}>
       <div className={styles.tabs} role="tablist" aria-label="Juncture selection">
@@ -49,6 +53,18 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
             </button>
           );
         })}
+      </div>
+
+      <div
+        className={styles.content}
+        id={`juncture-panel-${selectedJunctureId}`}
+        role="tabpanel"
+        aria-labelledby={`juncture-tab-${selectedJunctureId}`}
+      >
+        <div className={styles.label}>{t(`qiraat.juncture`)}:</div>
+        <div className={styles.value} dir="auto">
+          {selectedJuncture?.textSimple || selectedJuncture?.text}
+        </div>
       </div>
     </div>
   );

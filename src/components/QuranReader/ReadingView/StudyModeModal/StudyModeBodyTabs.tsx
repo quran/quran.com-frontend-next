@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
-import useQiraatData from './tabs/StudyModeQiraatTab/hooks/useQiraatData';
+import useQiraatDataHook from './tabs/StudyModeQiraatTab/hooks/useQiraatData';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
@@ -12,7 +12,7 @@ import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
-import TextIcon from '@/icons/text.svg';
+import QiraatIcon from '@/icons/qiraat-icon.svg';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
@@ -85,7 +85,7 @@ export const useStudyModeTabs = (
   // Check if questions exist and their type
   const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
-  const { hasData: hasQiraatData } = useQiraatData(verseKey);
+  const { hasData: hasQiraatData } = useQiraatDataHook(verseKey);
 
   useEffect(() => {
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
@@ -130,7 +130,7 @@ export const useStudyModeTabs = (
     {
       id: StudyModeTabId.QIRAAT,
       label: t('qiraat.title'),
-      icon: <TextIcon />,
+      icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
       condition: hasQiraatData,
     },
