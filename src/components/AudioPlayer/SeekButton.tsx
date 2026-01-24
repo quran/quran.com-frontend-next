@@ -44,7 +44,7 @@ const SeekButton = ({ type, isLoading, chaptersData }: SeekButtonProps) => {
     isLoading ||
     !chapterData ||
     (type === SeekButtonType.PrevAyah && ayahNumber <= 1) ||
-    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData?.versesCount);
+    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData.versesCount);
 
   return (
     <Button

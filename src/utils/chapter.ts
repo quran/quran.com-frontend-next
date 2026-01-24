@@ -57,7 +57,7 @@ export const getAllChaptersData = (
  * @param {string} id
  * @returns {Chapter} chapter
  */
-export const getChapterData = (chapters: ChaptersData, id: string): Chapter =>
+export const getChapterData = (chapters: ChaptersData, id: string): Chapter | undefined =>
   (chapters || {})[formatStringNumber(id)];
 
 /**
