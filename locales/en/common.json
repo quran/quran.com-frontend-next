@@ -521,8 +521,7 @@
     "no-junctures": "No variant readings available for this verse",
     "transliteration": "Transliteration",
     "translation": "Translation",
-    "explanation": "Explanation",
-    "combined-explanation": "Combined Explanation",
+    "explanation": "Explanation:",
     "reader-bio": "Reader Biography",
     "juncture": "Juncture"
   },

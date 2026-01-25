@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import useReadersPanelHeight from './hooks/useReadersPanelHeight';
 import ReaderItem from './ReaderItem';
 import styles from './ReadersPanel.module.scss';
 
@@ -35,6 +36,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   onReaderInfoClick,
 }) => {
   const { t } = useTranslation('common');
+  const { panelRef, headerRef, readersListRef, maxHeight } = useReadersPanelHeight();
 
   // Sort readers by position (canonical order)
   const sortedReaders = [...readers].sort((a, b) => a.position - b.position);
@@ -46,8 +48,14 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       <div key={color} className={styles.readingColor} style={{ backgroundColor: color }} />
     ));
 
+  const readersListStyle = useMemo(() => {
+    const style: React.CSSProperties = {};
+    if (maxHeight) style['--readers-list-max-height'] = maxHeight;
+    return style;
+  }, [maxHeight]);
+
   return (
-    <div className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
+    <div ref={panelRef} className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
       {/* Mobile header with toggle */}
       <button
         type="button"
@@ -55,6 +63,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
         onClick={onToggleExpand}
         aria-expanded={isExpanded}
         aria-controls="readers-list"
+        data-readers-header
       >
         <div className={styles.headerTitleContainer}>
           <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
@@ -68,7 +77,11 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       </button>
 
       {/* Desktop header */}
-      <div className={classNames(styles.header, styles.desktop)}>
+      <div
+        ref={headerRef}
+        className={classNames(styles.header, styles.desktop)}
+        data-readers-header
+      >
         <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
         <span className={styles.readingColors}>{readingColors}</span>
       </div>
@@ -76,9 +89,12 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       {/* Reader list - always visible on desktop, collapsible on mobile */}
       <div
         id="readers-list"
+        ref={readersListRef}
         className={classNames(styles.readersList, {
           [styles.readersListVisible]: isExpanded,
         })}
+        style={readersListStyle}
+        data-readers-list
       >
         {sortedReaders.map((reader) => (
           <ReaderItem

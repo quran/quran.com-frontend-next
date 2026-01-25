@@ -164,7 +164,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
           {/* Combined explanation if exists */}
           {selectedJuncture?.commentary && (
             <div className={styles.commentarySection}>
-              <h3 className={styles.commentaryTitle}>{t('qiraat.combined-explanation')}</h3>
+              <h3 className={styles.commentaryTitle}>{t('qiraat.explanation')}</h3>
               <p className={styles.commentaryText}>{selectedJuncture.commentary}</p>
             </div>
           )}

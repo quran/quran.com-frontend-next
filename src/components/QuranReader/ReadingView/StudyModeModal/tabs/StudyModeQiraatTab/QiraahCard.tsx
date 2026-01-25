@@ -16,6 +16,8 @@ interface QiraahCardProps {
 /**
  * Display a single reading variant with Arabic text, transliteration,
  * translation, explanation, and reader attribution.
+ *
+ * @returns {JSX.Element} Rendered QiraahCard component
  */
 const QiraahCard: React.FC<QiraahCardProps> = ({ reading, readers, transmitters, id }) => {
   const { t } = useTranslation('common');
@@ -80,6 +82,7 @@ const QiraahCard: React.FC<QiraahCardProps> = ({ reading, readers, transmitters,
     <div
       id={id}
       className={styles.card}
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       style={{ '--card-color': reading.color || '#FFFFFF' } as React.CSSProperties}
     >
       <div className={styles.colorBar} />

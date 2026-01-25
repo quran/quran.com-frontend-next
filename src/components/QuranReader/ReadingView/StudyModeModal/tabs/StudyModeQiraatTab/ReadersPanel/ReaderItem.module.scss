@@ -4,10 +4,6 @@
   padding: var(--spacing-xsmall);
   border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
   border-radius: var(--spacing-xsmall);
-
-  &:last-child {
-    border-block-end: none;
-  }
 }
 
 .header {
@@ -35,6 +31,8 @@
 
 .infoButton {
   all: unset;
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   background: transparent;
   cursor: pointer;
   transition: background-color var(--transition-moderate) ease,

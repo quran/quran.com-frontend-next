@@ -14,11 +14,10 @@ interface QiraahCardListProps {
 /**
  * Renders a vertical list of QiraahCard components.
  * Each card has an ID for scroll targeting from Rwayah tags.
+ * @returns {JSX.Element} Rendered QiraahCardList component
  */
 const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings, readers, transmitters }) => {
-  if (!readings || readings.length === 0) {
-    return null;
-  }
+  if (!readings || readings.length === 0) return null;
 
   return (
     <div className={styles.list}>

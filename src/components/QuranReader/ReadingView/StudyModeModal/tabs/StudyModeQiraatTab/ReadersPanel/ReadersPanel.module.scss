@@ -1,5 +1,15 @@
 @use 'src/styles/breakpoints';
 
+.panel {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+
+  @include breakpoints.desktop {
+    block-size: 100%;
+  }
+}
+
 .mobile {
   all: unset;
   cursor: pointer;
@@ -17,6 +27,7 @@
   gap: var(--spacing-small);
   inline-size: 100%;
   margin-block-end: var(--spacing-medium-px);
+  flex-shrink: 0;
 
   &.desktop {
     display: none;
@@ -59,8 +70,8 @@
 }
 
 .chevron {
-  inline-size: var(--spacing-small2-px);
-  block-size: var(--spacing-small2-px);
+  inline-size: var(--spacing-medium-plus2-px);
+  block-size: var(--spacing-medium-plus2-px);
   color: var(--color-text-faded-new);
   transition: transform var(--transition-moderate) ease;
 }
@@ -78,10 +89,18 @@
   margin-block-end: var(--spacing-micro-px);
   transition: max-block-size var(--transition-moderate) ease-in-out;
 
+  &::-webkit-scrollbar {
+    inline-size: var(--spacing-xxsmall-px);
+  }
+
   @include breakpoints.desktop {
-    max-block-size: none;
-    overflow: visible;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    min-block-size: 0;
     transition: none;
+    max-block-size: var(--readers-list-max-height);
+    padding-block-end: var(--spacing-xlarge-px);
   }
 }
 

@@ -1,11 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .container {
-  padding-block: var(--spacing-medium);
-
-  @include breakpoints.tablet {
-    padding-block: var(--spacing-small);
-  }
+  padding-block-start: var(--spacing-medium);
 }
 
 .loadingContainer,
@@ -41,6 +37,11 @@
 .mainContent {
   flex: 1;
   min-inline-size: 0;
+
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.desktop {
+    padding-block-end: var(--spacing-xlarge-px);
+  }
 }
 
 .readersContainer {
@@ -56,24 +57,20 @@
 }
 
 .commentarySection {
-  margin-block-start: var(--spacing-large);
-  padding: var(--spacing-medium);
-  background: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-default);
-  border-inline-start: 4px solid var(--color-primary-medium);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
 }
 
 .commentaryTitle {
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
-  margin: 0;
-  margin-block-end: var(--spacing-small);
+  color: var(--color-text-default-new);
+  line-height: 1.5;
 }
 
 .commentaryText {
   font-size: var(--font-size-normal);
-  color: var(--color-text-default);
-  line-height: 1.7;
-  margin: 0;
+  color: var(--color-text-default-new);
+  line-height: 1.6;
 }

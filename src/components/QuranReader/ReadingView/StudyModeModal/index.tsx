@@ -329,6 +329,7 @@ const StudyModeModal: React.FC<Props> = ({
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
+      StudyModeTabId.QIRAAT,
     ].includes(activeContentTab);
 
   const header = (
