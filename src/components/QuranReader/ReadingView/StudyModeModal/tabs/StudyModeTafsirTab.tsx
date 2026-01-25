@@ -10,7 +10,6 @@ import StudyModeTabLayout, {
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 
 const TafsirBody = dynamic(() => import('@/components/QuranReader/TafsirView/TafsirBody'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 

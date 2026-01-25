@@ -21,6 +21,7 @@ type Props = {
   isLoadingMore?: boolean;
   onLoadMore?: () => void;
   baseUrl?: string;
+  initialOpenQuestionId?: string;
 };
 
 const QuestionsList: React.FC<Props> = ({
@@ -29,8 +30,11 @@ const QuestionsList: React.FC<Props> = ({
   isLoadingMore = false,
   onLoadMore,
   baseUrl,
+  initialOpenQuestionId,
 }) => {
-  const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
+  const [openQuestionId, setOpenQuestionId] = useState<string | null>(
+    initialOpenQuestionId || null,
+  );
   const router = useRouter();
 
   const loadMoreTriggerRef = useInfiniteScroll({

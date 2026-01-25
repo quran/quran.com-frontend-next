@@ -505,6 +505,18 @@ export const fakeNavigate = (url: string, locale: string) => {
 };
 
 /**
+ * Update the URL bar without triggering a re-render or page visit.
+ * Uses replaceState to replace the current history entry instead of creating a new one.
+ * Use this when you want to update the URL without affecting browser back/forward navigation.
+ *
+ * @param {string} url
+ * @param {string} locale
+ */
+export const fakeNavigateReplace = (url: string, locale: string) => {
+  window.history.replaceState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
+};
+
+/**
  * Scroll to the top of the page.
  */
 export const scrollWindowToTop = (): void => {
