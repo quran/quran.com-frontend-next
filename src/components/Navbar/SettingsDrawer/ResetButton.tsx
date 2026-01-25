@@ -4,18 +4,28 @@ import { useContext } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SettingsBody.module.scss';
 
+import { getCountryLanguagePreference } from '@/api';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
 import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
-import { persistDefaultSettings } from '@/redux/slices/defaultSettings';
+import {
+  persistCurrentSettings,
+  selectDetectedCountry,
+  setDefaultsFromCountryPreference,
+  setIsUsingDefaultSettings,
+  setUserHasCustomised,
+} from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getCountryCodeForPreferences } from '@/utils/serverSideLanguageDetection';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 
 // reset button will dispatch a `reset` action
@@ -26,6 +36,7 @@ const ResetButton = () => {
   const router = useRouter();
   const { t, lang } = useTranslation('common');
   const toast = useToast();
+  const detectedCountry = useSelector(selectDetectedCountry);
   const audioService = useContext(AudioPlayerMachineContext);
 
   const cleanupUrlAndShowSuccess = () => {
@@ -43,30 +54,49 @@ const ResetButton = () => {
     toast(t('settings.reset-notif'), { status: ToastStatus.Success });
   };
 
-  const resetAndSetInitialState = () => {
+  const resetAndSetInitialState = async () => {
     dispatch(resetSettings(lang));
+    const preferenceCountry = getCountryCodeForPreferences(lang, detectedCountry);
+    let countryPreference: CountryLanguagePreferenceResponse | null = null;
+
+    // Get default settings based on current country/language preference
+    try {
+      countryPreference = await getCountryLanguagePreference(lang, preferenceCountry);
+      await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: lang })).then(
+        unwrapResult,
+      );
+    } catch (error) {
+      countryPreference = null;
+      logErrorToSentry('Failed to get country language preference', error);
+    }
+
+    const reciterId =
+      countryPreference?.defaultReciter?.id ?? DEFAULT_XSTATE_INITIAL_STATE.reciterId;
     audioService.send({
       type: 'SET_INITIAL_CONTEXT',
       ...DEFAULT_XSTATE_INITIAL_STATE,
+      reciterId,
     });
     audioService.send({
       type: 'CHANGE_RECITER',
-      reciterId: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
+      reciterId,
     });
+    dispatch(setIsUsingDefaultSettings(true));
+    dispatch(setUserHasCustomised(false));
   };
 
   const onResetSettingsClicked = async () => {
     logButtonClick('reset_settings');
     if (isLoggedIn()) {
       try {
-        await dispatch(persistDefaultSettings(lang)).then(unwrapResult);
-        resetAndSetInitialState();
+        await resetAndSetInitialState();
+        await dispatch(persistCurrentSettings()).then(unwrapResult);
         cleanupUrlAndShowSuccess();
       } catch {
         toast(t('error.general'), { status: ToastStatus.Error });
       }
     } else {
-      resetAndSetInitialState();
+      await resetAndSetInitialState();
       cleanupUrlAndShowSuccess();
     }
   };

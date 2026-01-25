@@ -1,6 +1,6 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
-import { QuranFont } from '@/types/QuranReader';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 
 const DEFAULT_TRANSLATION = 158; // Bayan Ul Quran
 const DEFAULT_TAFSIR = 'tafseer-ibn-e-kaseer-urdu'; // Bayan ul Quran
@@ -10,6 +10,7 @@ export default {
   quranReaderStyles: {
     ...DEFAULT_SETTINGS.quranReaderStyles,
     quranFont: QuranFont.IndoPak,
+    mushafLines: MushafLines.FifteenLines,
   },
   readingPreferences: {
     ...DEFAULT_SETTINGS.readingPreferences,
