@@ -327,7 +327,9 @@ export const getReadingGoalCount = async (
 ): Promise<{ data: { count: number } }> =>
   privateFetcher(makeReadingGoalCountUrl({ type: category }));
 
-export const getReadingGoalStatus = async (type: GoalCategory): Promise<RamadanChallengeResponse> =>
+export const getReadingGoalStatus = async (
+  type: GoalCategory,
+): Promise<{ data: RamadanChallengeResponse }> =>
   privateFetcher(makeReadingGoalStatusUrl({ type }));
 
 export const addReadingGoal = async (data: CreateGoalRequestUnion): Promise<{ data?: Goal }> => {

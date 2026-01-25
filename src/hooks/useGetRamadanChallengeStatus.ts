@@ -12,7 +12,7 @@ const useRamadanChallengeStatus = () => {
   );
 
   return {
-    isEnrolled: !!data.isEnrolled,
+    isEnrolled: !!data?.data?.isEnrolled,
     isLoading: isValidating,
     mutate,
   };
