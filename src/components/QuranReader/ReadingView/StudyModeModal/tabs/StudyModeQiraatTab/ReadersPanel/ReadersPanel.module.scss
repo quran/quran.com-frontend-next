@@ -20,13 +20,13 @@
 
   &.desktop {
     display: none;
-    @include breakpoints.tablet {
+    @include breakpoints.desktop {
       display: flex;
     }
   }
 
   &.mobile {
-    @include breakpoints.tablet {
+    @include breakpoints.desktop {
       display: none;
     }
   }
@@ -81,6 +81,7 @@
   @include breakpoints.desktop {
     max-block-size: none;
     overflow: visible;
+    transition: none;
   }
 }
 
