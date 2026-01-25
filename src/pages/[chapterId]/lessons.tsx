@@ -37,7 +37,7 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import { buildVersesResponse } from '@/utils/verseKeys';
 
 type AyahLessonProp = {
   chapter?: ChapterResponse;
@@ -152,24 +152,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       }),
     ]);
 
-    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-      chaptersData,
-      pagesLookupResponse.lookupRange.from,
-      pagesLookupResponse.lookupRange.to,
-    ).length;
-
-    const versesResponse: VersesResponse = {
-      metaData: { numberOfVerses },
-      pagesLookup: pagesLookupResponse,
-      verses: [],
-      pagination: {
-        perPage: 10,
-        currentPage: 1,
-        nextPage: null,
-        totalRecords: numberOfVerses,
-        totalPages: Math.ceil(numberOfVerses / 10),
-      },
-    };
+    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
     const fallback = {
       [verseLessonsUrl]: verseLessonsData,

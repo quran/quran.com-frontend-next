@@ -2,6 +2,7 @@ import range from 'lodash/range';
 
 import { getChapterData } from './chapter';
 
+import { PagesLookUpResponse, VersesResponse } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
 import { toLocalizedVerseKey } from '@/utils/locale';
 
@@ -160,4 +161,35 @@ export const readableVerseRangeKeys = (
       return `${titleForm}-${toLocalizedVerseKey(to.verseKey, lang)}`;
     })
     .filter((title): title is string => title !== null);
+};
+
+/**
+ * Build a minimal VersesResponse for QuranReader background rendering.
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {PagesLookUpResponse} pagesLookupResponse
+ * @returns {VersesResponse}
+ */
+export const buildVersesResponse = (
+  chaptersData: ChaptersData,
+  pagesLookupResponse: PagesLookUpResponse,
+): VersesResponse => {
+  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+    chaptersData,
+    pagesLookupResponse.lookupRange.from,
+    pagesLookupResponse.lookupRange.to,
+  ).length;
+
+  return {
+    metaData: { numberOfVerses },
+    pagesLookup: pagesLookupResponse,
+    verses: [],
+    pagination: {
+      perPage: 10,
+      currentPage: 1,
+      nextPage: null,
+      totalRecords: numberOfVerses,
+      totalPages: Math.ceil(numberOfVerses / 10),
+    },
+  };
 };
