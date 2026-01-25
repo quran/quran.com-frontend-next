@@ -11,16 +11,20 @@ import styles from './SettingsBody.module.scss';
 import { getCountryLanguagePreference } from '@/api';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import resetSettings from '@/redux/actions/reset-settings';
 import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
 import {
   persistCurrentSettings,
   selectDetectedCountry,
   setDefaultsFromCountryPreference,
+  setIsUsingDefaultSettings,
+  setUserHasCustomised,
 } from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 
 // reset button will dispatch a `reset` action
@@ -51,17 +55,19 @@ const ResetButton = () => {
 
   const resetAndSetInitialState = async () => {
     dispatch(resetSettings(lang));
-    let countryPreference = null;
+    let countryPreference: CountryLanguagePreferenceResponse | null = null;
 
     // Get default settings based on current country/language preference
     try {
-      countryPreference = await getCountryLanguagePreference(lang, detectedCountry || '');
+      countryPreference = await getCountryLanguagePreference(lang, detectedCountry || 'US');
       await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: lang })).then(
         unwrapResult,
       );
-    } catch {
+    } catch (error) {
       countryPreference = null;
+      logErrorToSentry('Failed to get country language preference', error);
     }
+
     const reciterId =
       countryPreference?.defaultReciter?.id ?? DEFAULT_XSTATE_INITIAL_STATE.reciterId;
     audioService.send({
@@ -73,6 +79,8 @@ const ResetButton = () => {
       type: 'CHANGE_RECITER',
       reciterId,
     });
+    dispatch(setIsUsingDefaultSettings(true));
+    dispatch(setUserHasCustomised(false));
   };
 
   const onResetSettingsClicked = async () => {

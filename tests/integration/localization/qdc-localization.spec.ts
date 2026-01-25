@@ -1731,6 +1731,50 @@ test.describe('Category 4: Reset Settings Functionality', () => {
       expect(translations.isUsingDefaultTranslations).toBe(true);
     });
   });
+
+  test('Test Case 4.3: Reset honors Urdu defaults (15-line Indopak mushaf)', async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ locale: 'ur' });
+    const page = await context.newPage();
+    const testHelper = new LocalizationTestHelper(page, context);
+
+    await test.step('Load Urdu defaults', async () => {
+      await testHelper.mockCountryAndApiForContext('US', 'ur');
+      await page.goto('/1', NAVIGATION_OPTIONS);
+      await testHelper.waitForReduxHydration();
+    });
+
+    await test.step('Customize mushaf lines so reset is meaningful', async () => {
+      await page.evaluate(() => {
+        window.__store?.dispatch({
+          type: 'quranReaderStyles/setMushafLines',
+          payload: { mushafLines: '16_lines', locale: 'ur' },
+        });
+      });
+      await page.waitForTimeout(500);
+    });
+
+    await test.step('Reset settings via drawer', async () => {
+      await openSettingsDrawer(page);
+      await page.locator('[data-testid="reset-settings-button"]').click();
+      await page.waitForTimeout(2000);
+      await page.keyboard.press('Escape');
+    });
+
+    await test.step('Verify defaults returned to Urdu defaults', async () => {
+      const quranReaderStyles = await testHelper.homepage.getPersistedValue('quranReaderStyles');
+      expect(quranReaderStyles.quranFont).toBe('text_indopak');
+      expect(quranReaderStyles.mushafLines).toBe('15_lines');
+
+      const translations = await testHelper.homepage.getPersistedValue('translations');
+      expect(translations.selectedTranslations).toEqual([131, 158]);
+
+      const defaultSettings = await testHelper.getReduxState();
+      expect(defaultSettings.isUsingDefaultSettings).toBe(true);
+      expect(defaultSettings.userHasCustomised).toBe(false);
+    });
+  });
 });
 
 // Test group: Category 5 - Reflections Language Integration
