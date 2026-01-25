@@ -34,6 +34,7 @@ interface StudyModeBodyProps {
   selectedVerseNumber: string;
   activeTab?: StudyModeTabId | null;
   onTabChange?: (tabId: StudyModeTabId | null) => void;
+  onGoToVerse?: (chapterId: string, verseNumber: string) => void;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -52,13 +53,19 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   selectedVerseNumber,
   activeTab,
   onTabChange,
+  onGoToVerse,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
 
-  const tabs = useStudyModeTabs(activeTab, verse.verseKey, onTabChange);
+  const tabs = useStudyModeTabs({
+    activeTab,
+    verseKey: verse.verseKey,
+    onTabChange,
+    hasRelatedVerses: verse.hasRelatedVerses,
+  });
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -124,6 +131,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 chapterId={selectedChapterId}
                 verseNumber={selectedVerseNumber}
                 switchTab={onTabChange}
+                onGoToVerse={onGoToVerse}
               />
             </div>
           );

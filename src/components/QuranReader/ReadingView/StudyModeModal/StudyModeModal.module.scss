@@ -36,6 +36,8 @@ div.mobileBottomSheetOverlay {
 }
 
 .innerContent {
+  min-block-size: 0;
+  flex: 1 1;
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -47,7 +49,7 @@ div.mobileBottomSheetOverlay {
   gap: var(--spacing-small-px);
   inline-size: 100%;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--color-separators);
+  border-block-end: 1px solid var(--color-separators);
 
   @include breakpoints.tablet {
     padding-block-end: var(--spacing-medium2-px);
@@ -123,7 +125,7 @@ button.nextButton {
 .modalHeader {
   padding-inline-end: 0;
   @include breakpoints.smallerThanTablet {
-    padding:0;
+    padding: 0;
     padding-block-end: var(--spacing-medium-px);
   }
 }

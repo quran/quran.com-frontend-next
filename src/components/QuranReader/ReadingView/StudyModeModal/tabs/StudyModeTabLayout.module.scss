@@ -1,6 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .container {
+  overflow: hidden;
   // Let parent handle scrolling - single scroll container
 }
 

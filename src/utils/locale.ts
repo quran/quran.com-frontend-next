@@ -483,3 +483,15 @@ export const toLocalizedMonthName = (monthNumber: number, locale: string): strin
 
   return objDate.toLocaleString(locale, { month: 'long' });
 };
+
+/**
+ * Checks if the given text contains Arabic characters.
+ * Uses Unicode range for Arabic script (U+0600 to U+06FF).
+ *
+ * @param {string} text - The text to check for Arabic characters.
+ * @returns {boolean} True if the text contains Arabic characters, false otherwise.
+ */
+export const isArabicText = (text: string): boolean => {
+  const arabicRegex = /[\u0600-\u06FF]/;
+  return arabicRegex.test(text);
+};
