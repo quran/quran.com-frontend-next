@@ -272,3 +272,11 @@ div.bottomSheetInnerContent {
   inline-size: calc(var(--spacing-mega-px) * 1.2);
   border-radius: var(--border-radius-default);
 }
+
+// SSR modal hidden state - when verse action modal is open
+.ssrHidden {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}

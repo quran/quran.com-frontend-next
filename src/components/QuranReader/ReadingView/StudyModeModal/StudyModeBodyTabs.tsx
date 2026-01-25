@@ -12,25 +12,22 @@ import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
+import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
@@ -49,6 +46,9 @@ export const TAB_COMPONENTS: Partial<
       chapterId: string;
       verseNumber: string;
       switchTab?: (tabId: StudyModeTabId | null) => void;
+      questionId?: string;
+      questionsInitialData?: AyahQuestionsResponse;
+      tafsirIdOrSlug?: string;
       onGoToVerse?: (chapterId: string, verseNumber: string) => void;
     }>
   >
