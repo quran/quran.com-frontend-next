@@ -2,6 +2,7 @@ import { Mushaf } from '../QuranReader';
 
 export enum GoalCategory {
   QURAN = 'QURAN',
+  RAMADAN_CHALLENGE = 'RAMADAN_CHALLENGE',
 }
 
 export enum GoalType {
@@ -27,6 +28,12 @@ export type CreateGoalRequest = {
   mushafId: Mushaf;
   category: GoalCategory;
 };
+
+export type RamadanChallengeGoalRequest = {
+  category: GoalCategory.RAMADAN_CHALLENGE;
+};
+
+export type CreateGoalRequestUnion = CreateGoalRequest | RamadanChallengeGoalRequest;
 
 export type EstimateGoalRequest = Omit<CreateGoalRequest, 'category'>;
 

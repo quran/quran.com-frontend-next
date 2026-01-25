@@ -1,0 +1,63 @@
+@use 'src/styles/breakpoints';
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.h1Subtext {
+  font-size: var(--font-size-small-px);
+}
+
+.subtext {
+  font-size: var(--font-size-xsmall-px);
+}
+
+.container {
+  text-align: start !important;
+}
+
+.storeButtons {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  .storeButton {
+    block-size: calc(2 * var(--spacing-large-px));
+    inline-size: auto;
+
+    @include breakpoints.smallerThanTablet {
+      block-size: var(--spacing-large-px);
+    }
+  }
+}
+
+.starContainer {
+  display: flex;
+  align-items: center;
+
+  svg {
+    inline-size: var(--spacing-medium3-px);
+    block-size: auto;
+    stroke: #fb923c;
+    color: #fdba74;
+
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-medium-px);
+    }
+  }
+
+  .googlePlay {
+    clip-path: inset(0 70% 0 0);
+  }
+
+  .appStore {
+    clip-path: inset(0 20% 0 0);
+  }
+}
+
+.list {
+  margin-block-start: var(--spacing-small-px);
+}

@@ -243,6 +243,12 @@ export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
 
+export const makeReadingGoalCountUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/count', params);
+
+export const makeReadingGoalStatusUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/status', params);
+
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);
 
