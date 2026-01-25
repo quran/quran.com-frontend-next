@@ -19,17 +19,36 @@ interface QiraahCardListProps {
 const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings, readers, transmitters }) => {
   if (!readings || readings.length === 0) return null;
 
+  const groupedReadings = readings as (QiraatReading | QiraatReading[])[];
+
   return (
     <div className={styles.list}>
-      {readings.map((reading) => (
-        <QiraahCard
-          key={reading.id}
-          id={`qiraah-card-${reading.id}`}
-          reading={reading}
-          readers={readers}
-          transmitters={transmitters}
-        />
-      ))}
+      {groupedReadings.map((readingGroup) =>
+        Array.isArray(readingGroup) ? (
+          <div
+            className={styles.readingGroup}
+            key={readingGroup.map((reading) => reading.id).join(',')}
+          >
+            {readingGroup.map((reading) => (
+              <QiraahCard
+                key={reading.id}
+                id={`qiraah-card-${reading.id}`}
+                reading={reading}
+                readers={readers}
+                transmitters={transmitters}
+              />
+            ))}
+          </div>
+        ) : (
+          <QiraahCard
+            key={readingGroup.id}
+            id={`qiraah-card-${readingGroup.id}`}
+            reading={readingGroup}
+            readers={readers}
+            transmitters={transmitters}
+          />
+        ),
+      )}
     </div>
   );
 };

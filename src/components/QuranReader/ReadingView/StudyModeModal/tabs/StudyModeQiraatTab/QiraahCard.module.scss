@@ -3,126 +3,44 @@
 .card {
   --card-color: #ffffff;
 
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
   position: relative;
-  background: var(--color-background-default);
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-default);
-  overflow: hidden;
-  margin-block-end: var(--spacing-medium);
-  transition: box-shadow 0.2s ease;
-
-  &:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-}
-
-.colorBar {
-  height: 4px;
-  width: 100%;
+  padding: var(--spacing-medium2);
   background: var(--card-color);
-}
-
-.content {
-  padding: var(--spacing-medium);
-
-  @include breakpoints.tablet {
-    padding: var(--spacing-small);
-  }
-}
-
-.arabicSection {
-  text-align: center;
-  margin-block-end: var(--spacing-medium);
-  padding-block: var(--spacing-small);
+  border-radius: var(--border-radius-small-px);
 }
 
 .arabicText {
-  font-family: var(--quran-font-family);
-  font-size: var(--font-size-xlarge);
-  line-height: 2;
-  direction: rtl;
-  color: var(--color-text-default);
-  display: block;
-
-  @include breakpoints.tablet {
-    font-size: var(--font-size-large);
-  }
-}
-
-.transliterationSection {
-  margin-block-end: var(--spacing-small);
+  font-size: var(--font-size-xxxlarge-px);
+  font-family: UthmanicHafs;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
 }
 
 .transliteration {
   font-size: var(--font-size-normal);
   font-style: italic;
-  color: var(--color-text-faded);
-  display: block;
-  text-align: center;
-}
-
-.translationSection {
-  margin-block-end: var(--spacing-small);
-  padding: var(--spacing-small);
-  background: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-default);
-}
-
-.translationLabel {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-faded);
-  display: block;
-  margin-block-end: var(--spacing-xxsmall);
+  color: var(--color-text-default-new);
+  line-height: 1.5;
 }
 
 .translation {
   font-size: var(--font-size-normal);
-  color: var(--color-text-default);
-  line-height: 1.6;
-  display: block;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
+  line-height: 1.5;
 }
 
-.explanationSection {
-  margin-block-end: var(--spacing-small);
-  padding: var(--spacing-small);
-  background: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-default);
-  border-inline-start: 3px solid var(--color-secondary-medium);
-}
-
-.explanationLabel {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-faded);
-  display: block;
-  margin-block-end: var(--spacing-xxsmall);
+.separator {
+  inline-size: 100%;
+  block-size: var(--spacing-hairline-px);
+  background: var(--color-separators-ayah-level);
 }
 
 .explanation {
-  font-size: var(--font-size-small);
-  color: var(--color-text-default);
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
   line-height: 1.6;
-  display: block;
-}
-
-.readersSection {
-  display: flex;
-  align-items: baseline;
-  gap: var(--spacing-xsmall);
-  padding-block-start: var(--spacing-small);
-  border-block-start: 1px solid var(--color-borders-hairline);
-  margin-block-start: var(--spacing-small);
-  flex-wrap: wrap;
-}
-
-.readersLabel {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-faded);
-}
-
-.readersList {
-  font-size: var(--font-size-small);
-  color: var(--color-text-default);
 }
