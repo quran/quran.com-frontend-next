@@ -1,17 +1,21 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 
 import useQiraatDataHook from './hooks/useQiraatData';
 import JunctureTabs from './JunctureTabs';
 import QiraahCardList from './QiraahCardList';
 import QiraatBanner from './QiraatBanner';
 import ReadersPanel from './ReadersPanel';
-import ReaderBioModal from './ReadersPanel/ReaderBioModal';
 import styles from './StudyModeQiraatTab.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import { QiraatReader } from '@/types/Qiraat';
+import {
+  selectStudyModeActiveTab,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
+import { openReaderBioModal } from '@/redux/slices/QuranReader/verseActionModal';
 
 interface StudyModeQiraatTabProps {
   chapterId: string;
@@ -25,6 +29,7 @@ interface StudyModeQiraatTabProps {
  */
 const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, verseNumber }) => {
   const { t } = useTranslation('common');
+  const dispatch = useDispatch();
   const verseKey = `${chapterId}:${verseNumber}`;
 
   const { data, isLoading, error, hasData } = useQiraatDataHook(verseKey);
@@ -34,7 +39,10 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
   );
 
   const [isReadersPanelExpanded, setIsReadersPanelExpanded] = useState(false);
-  const [bioModalReaderId, setBioModalReaderId] = useState<number | null>(null);
+
+  // Get Study Mode state for restoration
+  const activeTab = useSelector(selectStudyModeActiveTab);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
 
   // Set first juncture as selected when data loads
   useEffect(() => {
@@ -49,12 +57,6 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
     return data.junctures.find((juncture) => juncture.id === selectedJunctureId) ?? null;
   }, [data?.junctures, selectedJunctureId]);
 
-  // Get reader for bio modal
-  const bioModalReader: QiraatReader | null = useMemo(() => {
-    if (!data?.readers || !bioModalReaderId) return null;
-    return data.readers.find((reader) => reader.id === bioModalReaderId) ?? null;
-  }, [data?.readers, bioModalReaderId]);
-
   // Handlers
   const handleJunctureSelect = useCallback((junctureId: number) => {
     setSelectedJunctureId(junctureId);
@@ -64,13 +66,26 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
     setIsReadersPanelExpanded((prev) => !prev);
   }, []);
 
-  const handleReaderInfoClick = useCallback((readerId: number) => {
-    setBioModalReaderId(readerId);
-  }, []);
+  const handleReaderInfoClick = useCallback(
+    (readerId: number) => {
+      const selectedReader = data?.readers.find((reader) => reader.id === readerId);
+      if (!selectedReader) return;
 
-  const handleCloseBioModal = useCallback(() => {
-    setBioModalReaderId(null);
-  }, []);
+      dispatch(
+        openReaderBioModal({
+          reader: selectedReader,
+          verseKey,
+          wasOpenedFromStudyMode: true,
+          studyModeRestoreState: {
+            verseKey: studyModeVerseKey || verseKey,
+            activeTab,
+            highlightedWordLocation: null,
+          },
+        }),
+      );
+    },
+    [data?.readers, dispatch, verseKey, studyModeVerseKey, activeTab],
+  );
 
   const handleTransmitterClick = useCallback(
     (transmitterId: number) => {
@@ -133,7 +148,6 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
         onJunctureSelect={handleJunctureSelect}
       />
 
-      {/* Main content */}
       <div className={styles.content}>
         {/* Readers panel (right side on desktop, top on mobile) */}
         <div className={styles.readersContainer}>
@@ -148,20 +162,9 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
           />
         </div>
 
-        {/* Left content area */}
         <div className={styles.mainContent}>
-          {/* Juncture tabs */}
+          {selectedJuncture && <QiraahCardList readings={selectedJuncture.readings} />}
 
-          {/* Qiraah cards */}
-          {selectedJuncture && (
-            <QiraahCardList
-              readings={selectedJuncture.readings}
-              readers={data.readers}
-              transmitters={data.transmitters}
-            />
-          )}
-
-          {/* Combined explanation if exists */}
           {selectedJuncture?.commentary && (
             <div className={styles.commentarySection}>
               <h3 className={styles.commentaryTitle}>{t('qiraat.explanation')}</h3>
@@ -170,13 +173,6 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
           )}
         </div>
       </div>
-
-      {/* Reader bio modal */}
-      <ReaderBioModal
-        reader={bioModalReader}
-        isOpen={bioModalReaderId !== null}
-        onClose={handleCloseBioModal}
-      />
     </div>
   );
 };

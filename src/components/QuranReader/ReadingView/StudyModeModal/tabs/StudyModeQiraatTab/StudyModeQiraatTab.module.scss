@@ -23,7 +23,7 @@
 
 .content {
   display: flex;
-  gap: var(--spacing-large);
+  column-gap: var(--spacing-large);
   flex-direction: column;
 
   padding-block-start: var(--spacing-medium3-px);

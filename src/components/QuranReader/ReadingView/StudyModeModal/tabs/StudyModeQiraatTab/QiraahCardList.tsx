@@ -3,12 +3,10 @@ import React from 'react';
 import QiraahCard from './QiraahCard';
 import styles from './QiraahCardList.module.scss';
 
-import { QiraatReading, QiraatReader, QiraatTransmitter } from '@/types/Qiraat';
+import { QiraatReading } from '@/types/Qiraat';
 
 interface QiraahCardListProps {
   readings: QiraatReading[];
-  readers: QiraatReader[];
-  transmitters: QiraatTransmitter[];
 }
 
 /**
@@ -16,7 +14,7 @@ interface QiraahCardListProps {
  * Each card has an ID for scroll targeting from Rwayah tags.
  * @returns {JSX.Element} Rendered QiraahCardList component
  */
-const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings, readers, transmitters }) => {
+const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings }) => {
   if (!readings || readings.length === 0) return null;
 
   const groupedReadings = readings as (QiraatReading | QiraatReading[])[];
@@ -30,13 +28,7 @@ const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings, readers, tran
             key={readingGroup.map((reading) => reading.id).join(',')}
           >
             {readingGroup.map((reading) => (
-              <QiraahCard
-                key={reading.id}
-                id={`qiraah-card-${reading.id}`}
-                reading={reading}
-                readers={readers}
-                transmitters={transmitters}
-              />
+              <QiraahCard key={reading.id} id={`qiraah-card-${reading.id}`} reading={reading} />
             ))}
           </div>
         ) : (
@@ -44,8 +36,6 @@ const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings, readers, tran
             key={readingGroup.id}
             id={`qiraah-card-${readingGroup.id}`}
             reading={readingGroup}
-            readers={readers}
-            transmitters={transmitters}
           />
         ),
       )}

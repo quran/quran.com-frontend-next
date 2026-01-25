@@ -5,6 +5,7 @@ import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeMo
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
 import { Note } from '@/types/auth/Note';
+import { QiraatReader } from '@/types/Qiraat';
 import Verse from '@/types/Verse';
 
 /**
@@ -17,6 +18,7 @@ export enum VerseActionModalType {
   TRANSLATION_FEEDBACK = 'translationFeedback',
   SAVE_TO_COLLECTION = 'saveToCollection',
   ADVANCED_COPY = 'advancedCopy',
+  READER_BIO = 'readerBio',
 }
 
 /**
@@ -43,6 +45,7 @@ export type VerseActionModalState = {
   bookmarksRangeUrl: string;
   wasOpenedFromStudyMode: boolean;
   studyModeRestoreState: StudyModeRestoreState | null;
+  readerBioReader: QiraatReader | null;
 };
 
 export const initialState: VerseActionModalState = {
@@ -55,6 +58,7 @@ export const initialState: VerseActionModalState = {
   bookmarksRangeUrl: '',
   wasOpenedFromStudyMode: false,
   studyModeRestoreState: null,
+  readerBioReader: null,
 };
 
 /**
@@ -97,6 +101,16 @@ export type OpenAdvancedCopyModalPayload = {
   verseKey: string;
   verse: Verse;
   isTranslationView?: boolean;
+  wasOpenedFromStudyMode?: boolean;
+  studyModeRestoreState?: StudyModeRestoreState;
+};
+
+/**
+ * Payload for opening Reader Bio modal.
+ */
+export type OpenReaderBioModalPayload = {
+  reader: QiraatReader;
+  verseKey: string;
   wasOpenedFromStudyMode?: boolean;
   studyModeRestoreState?: StudyModeRestoreState;
 };
@@ -147,6 +161,15 @@ const verseActionModal = createSlice({
       wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
       studyModeRestoreState: payload.studyModeRestoreState ?? null,
     }),
+    openReaderBioModal: (unusedState, { payload }: PayloadAction<OpenReaderBioModalPayload>) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: VerseActionModalType.READER_BIO,
+      readerBioReader: payload.reader,
+      verseKey: payload.verseKey,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
     setModalType: (draft, { payload }: PayloadAction<VerseActionModalType>) => {
       draft.modalType = payload;
     },
@@ -172,12 +195,15 @@ export const selectVerseActionModalWasOpenedFromStudyMode = (state: RootState) =
   state.verseActionModal.wasOpenedFromStudyMode;
 export const selectVerseActionModalStudyModeRestoreState = (state: RootState) =>
   state.verseActionModal.studyModeRestoreState;
+export const selectVerseActionModalReaderBioReader = (state: RootState) =>
+  state.verseActionModal.readerBioReader;
 
 export const {
   openNotesModal,
   openFeedbackModal,
   openCollectionModal,
   openAdvancedCopyModal,
+  openReaderBioModal,
   setModalType,
   setEditingNote,
   closeVerseActionModal,

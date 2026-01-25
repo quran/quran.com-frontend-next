@@ -1,25 +1,16 @@
+@use '@/styles/breakpoints';
+
 .container {
-  padding: var(--spacing-medium);
-  max-width: 500px;
-}
-
-.header {
-  margin-block-end: var(--spacing-medium);
-  padding-block-end: var(--spacing-small);
-  border-block-end: 1px solid var(--color-borders-hairline);
-}
-
-.name {
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-default);
-  margin: 0;
-  margin-block-end: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-medium2);
+  }
 }
 
 .city {
   font-size: var(--font-size-normal);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
+  margin-block-end: var(--spacing-small);
 }
 
 .content {
@@ -43,7 +34,7 @@
 
 .noBio {
   font-size: var(--font-size-normal);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   font-style: italic;
   margin: 0;
 }

@@ -1,48 +1,94 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReaderBioModal.module.scss';
 
+import modalStyles from '@/components/Notes/modal/Modal.module.scss';
+import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import ArrowIcon from '@/icons/arrow.svg';
 import { QiraatReader } from '@/types/Qiraat';
-import Modal from '@/dls/Modal/Modal';
 
 interface ReaderBioModalProps {
   reader: QiraatReader | null;
   isOpen: boolean;
   onClose: () => void;
+  wasOpenedFromStudyMode?: boolean;
+  onBack?: () => void;
 }
 
 /**
  * Modal popup showing reader biography.
+ * @returns {React.ReactNode} The reader bio modal.
  */
-const ReaderBioModal: React.FC<ReaderBioModalProps> = ({ reader, isOpen, onClose }) => {
+const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
+  reader,
+  isOpen,
+  onClose,
+  wasOpenedFromStudyMode = false,
+  onBack,
+}) => {
   const { t } = useTranslation('common');
 
   if (!reader) {
     return null;
   }
 
-  return (
-    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
-      <Modal.Body>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <h2 className={styles.name}>{reader.translatedName || reader.name}</h2>
-            {reader.city && <span className={styles.city}>{reader.city}</span>}
-          </div>
+  const handleClose = () => {
+    if (wasOpenedFromStudyMode && onBack) {
+      onBack();
+    } else {
+      onClose();
+    }
+  };
 
-          <div className={styles.content}>
-            <h3 className={styles.bioTitle}>{t('qiraat.reader-bio')}</h3>
-            {reader.bio ? (
-              <p className={styles.bioText}>{reader.bio}</p>
-            ) : (
-              <p className={styles.noBio}>{t('unavailable')}</p>
-            )}
-          </div>
-        </div>
-      </Modal.Body>
-    </Modal>
+  const header = onBack ? (
+    <button
+      type="button"
+      className={classNames(modalStyles.headerButton, modalStyles.title)}
+      onClick={handleClose}
+      data-testid="reader-bio-modal-title"
+    >
+      <IconContainer
+        icon={<ArrowIcon />}
+        shouldForceSetColors={false}
+        size={IconSize.Custom}
+        className={modalStyles.arrowIcon}
+      />
+      {reader.translatedName || reader.name}
+    </button>
+  ) : (
+    <h2 className={modalStyles.title} data-testid="reader-bio-modal-title">
+      {reader.translatedName || reader.name}
+    </h2>
+  );
+
+  return (
+    <ContentModal
+      isOpen={isOpen}
+      onClose={handleClose}
+      size={ContentModalSize.SMALL}
+      hasCloseButton
+      header={header}
+      overlayClassName={modalStyles.overlay}
+      headerClassName={modalStyles.headerClassName}
+      closeIconClassName={modalStyles.closeIconContainer}
+      contentClassName={classNames(modalStyles.content)}
+      innerContentClassName={classNames(styles.container)}
+    >
+      {reader.city && <div className={styles.city}>{reader.city}</div>}
+
+      <div className={styles.content}>
+        <h3 className={styles.bioTitle}>{t('qiraat.reader-bio')}</h3>
+        {reader.bio ? (
+          <p className={styles.bioText}>{reader.bio}</p>
+        ) : (
+          <p className={styles.noBio}>{t('unavailable')}</p>
+        )}
+      </div>
+    </ContentModal>
   );
 };
 
