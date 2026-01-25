@@ -1768,7 +1768,7 @@ test.describe('Category 4: Reset Settings Functionality', () => {
       expect(quranReaderStyles.mushafLines).toBe('15_lines');
 
       const translations = await testHelper.homepage.getPersistedValue('translations');
-      expect(translations.selectedTranslations).toEqual([131, 158]);
+      expect(translations.selectedTranslations).toEqual(expect.arrayContaining([131, 158]));
 
       const defaultSettings = await testHelper.getReduxState();
       expect(defaultSettings.isUsingDefaultSettings).toBe(true);

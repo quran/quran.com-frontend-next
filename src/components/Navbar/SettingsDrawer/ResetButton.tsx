@@ -23,6 +23,7 @@ import {
 } from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getCountryCodeForPreferences } from '@/utils/serverSideLanguageDetection';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
@@ -55,11 +56,12 @@ const ResetButton = () => {
 
   const resetAndSetInitialState = async () => {
     dispatch(resetSettings(lang));
+    const preferenceCountry = getCountryCodeForPreferences(lang, detectedCountry);
     let countryPreference: CountryLanguagePreferenceResponse | null = null;
 
     // Get default settings based on current country/language preference
     try {
-      countryPreference = await getCountryLanguagePreference(lang, detectedCountry || 'US');
+      countryPreference = await getCountryLanguagePreference(lang, preferenceCountry);
       await dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: lang })).then(
         unwrapResult,
       );
