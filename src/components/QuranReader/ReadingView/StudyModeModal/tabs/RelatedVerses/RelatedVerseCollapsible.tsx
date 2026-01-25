@@ -51,7 +51,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
   // Parse verse key to get chapter and verse numbers
   const [chapterId, verseNumber] = relatedVerse.verseKey.split(':');
 
-  // Fetch verse data when accordion is opened
+  // Fetch verse data when collapsible is opened
   const queryKey = isOpen
     ? makeByVerseKeyUrl(relatedVerse.verseKey, {
         words: true,

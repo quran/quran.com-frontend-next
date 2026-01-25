@@ -5,7 +5,7 @@ import useSWRInfinite from 'swr/infinite';
 
 import { studyModeTabStyles as parentStyles, useStudyModeTabScroll } from '../StudyModeTabLayout';
 
-import RelatedVerseAccordion from './RelatedVerseCollapsible';
+import RelatedVerseCollapsible from './RelatedVerseCollapsible';
 import RelatedVersesSkeleton from './RelatedVersesSkeleton';
 
 import { fetcher } from '@/api';
@@ -87,7 +87,7 @@ const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
   return (
     <div ref={containerRef} className={parentStyles.container}>
       {relatedVerses.map((relatedVerse) => (
-        <RelatedVerseAccordion
+        <RelatedVerseCollapsible
           key={relatedVerse.id}
           relatedVerse={relatedVerse}
           onGoToVerse={onGoToVerse}
