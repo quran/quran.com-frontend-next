@@ -1,14 +1,13 @@
 @use 'src/styles/breakpoints';
 
 .card {
-  --card-color: #ffffff;
-
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
   position: relative;
   padding: var(--spacing-medium2);
-  background: var(--card-color);
+  background: var(--background);
+  color: var(--color);
   border-radius: var(--border-radius-small-px);
 }
 
@@ -16,31 +15,27 @@
   font-size: var(--font-size-xxxlarge-px);
   font-family: UthmanicHafs;
   font-weight: var(--font-weight-medium);
-  color: var(--color-text-default-new);
 }
 
 .transliteration {
   font-size: var(--font-size-normal);
   font-style: italic;
-  color: var(--color-text-default-new);
   line-height: 1.5;
 }
 
 .translation {
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text-default-new);
   line-height: 1.5;
 }
 
 .separator {
   inline-size: 100%;
   block-size: var(--spacing-hairline-px);
-  background: var(--color-separators-ayah-level);
+  background: var(--border);
 }
 
 .explanation {
   font-size: var(--font-size-normal);
-  color: var(--color-text-default-new);
   line-height: 1.6;
 }

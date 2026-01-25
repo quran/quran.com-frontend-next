@@ -1,6 +1,10 @@
 import React, { useMemo } from 'react';
 
+import classNames from 'classnames';
+
+import colorStyles from './color.module.scss';
 import styles from './QiraahCard.module.scss';
+import { getColorClass } from './utils/color';
 
 import { QiraatReading } from '@/types/Qiraat';
 
@@ -42,14 +46,10 @@ const QiraahCard: React.FC<QiraahCardProps> = ({ reading, id }) => {
 
   const arabicText = reading.textUthmani || reading.text;
   const transliterationText = reading.transliteration;
+  const colorClass = getColorClass(reading.color);
 
   return (
-    <div
-      id={id}
-      className={styles.card}
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      style={{ '--card-color': reading.color || '#FFFFFF' } as React.CSSProperties}
-    >
+    <div id={id} className={classNames(styles.card, colorStyles[colorClass])}>
       <div className={styles.arabicText} dir="auto">
         {arabicText}
       </div>

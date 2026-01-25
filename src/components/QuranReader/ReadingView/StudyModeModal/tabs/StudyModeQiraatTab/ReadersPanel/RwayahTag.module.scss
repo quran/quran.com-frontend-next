@@ -2,7 +2,6 @@
 
 .tag {
   all: unset;
-  --tag-color: #ffffff;
 
   display: inline-flex;
   flex: 1;
@@ -10,9 +9,9 @@
   justify-content: center;
   padding: var(--spacing-xxsmall-px);
   border-radius: var(--border-radius-xsmall-px);
-  background: var(--tag-color);
+  background: var(--background);
+  color: var(--color);
   font-size: var(--font-size-small);
-  color: var(--color-text-default-new);
   white-space: nowrap;
   transition: transform var(--transition-moderate) ease, box-shadow var(--transition-moderate) ease;
 

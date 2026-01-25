@@ -1,0 +1,30 @@
+.green {
+  --background: #dfeadd;
+  --color: #32452f;
+  --border: #c7ddc3;
+}
+
+.pink {
+  --background: #eddeed;
+  --color: #4f3250;
+  --border: #e4c7e4;
+}
+
+.transparent {
+  --background: var(--color-background-elevated-new);
+  --color: var(--color-text-default-new);
+  --border: var(--color-separators-ayah-level);
+  border: var(--spacing-hairline-px) solid var(--border);
+}
+
+.blue {
+  --background: #e2f0fa;
+  --color: #275575;
+  --border: #c6dcec;
+}
+
+.orange {
+  --background: #f5e2cd;
+  --color: #76593a;
+  --border: #e4c5a2;
+}

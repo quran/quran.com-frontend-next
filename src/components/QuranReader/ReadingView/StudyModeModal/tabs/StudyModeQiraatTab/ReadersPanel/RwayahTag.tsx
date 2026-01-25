@@ -2,6 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import colorStyles from '../color.module.scss';
+import { getColorClass } from '../utils/color';
+
 import styles from './RwayahTag.module.scss';
 
 import { QiraatTransmitter } from '@/types/Qiraat';
@@ -24,6 +27,8 @@ const RwayahTag: React.FC<RwayahTagProps> = ({
   onClick,
   isClickable = false,
 }) => {
+  const colorClass = getColorClass(color);
+
   const handleClick = () => {
     if (isClickable && onClick) {
       onClick();
@@ -40,8 +45,9 @@ const RwayahTag: React.FC<RwayahTagProps> = ({
   return (
     <button
       type="button"
-      className={classNames(styles.tag, { [styles.clickable]: isClickable })}
-      style={{ '--tag-color': color } as React.CSSProperties} // eslint-disable-line @typescript-eslint/naming-convention
+      className={classNames(styles.tag, colorStyles[colorClass], {
+        [styles.clickable]: isClickable,
+      })}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role={isClickable ? 'button' : undefined}

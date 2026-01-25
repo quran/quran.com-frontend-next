@@ -3,6 +3,9 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import colorStyles from '../color.module.scss';
+import { getColorClass } from '../utils/color';
+
 import useReadersPanelHeight from './hooks/useReadersPanelHeight';
 import ReaderItem from './ReaderItem';
 import styles from './ReadersPanel.module.scss';
@@ -45,7 +48,10 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
     .map((reading) => reading.color)
     .filter((color) => color !== null)
     .map((color) => (
-      <div key={color} className={styles.readingColor} style={{ backgroundColor: color }} />
+      <div
+        key={color}
+        className={classNames(styles.readingColor, colorStyles[getColorClass(color)])}
+      />
     ));
 
   const readersListStyle = useMemo(() => {
