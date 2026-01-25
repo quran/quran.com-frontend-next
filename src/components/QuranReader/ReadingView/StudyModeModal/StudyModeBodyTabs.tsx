@@ -39,6 +39,7 @@ export const TAB_COMPONENTS: Partial<
       switchTab?: (tabId: StudyModeTabId | null) => void;
       questionId?: string;
       questionsInitialData?: AyahQuestionsResponse;
+      tafsirIdOrSlug?: string;
     }>
   >
 > = {

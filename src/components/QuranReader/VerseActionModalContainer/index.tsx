@@ -13,6 +13,7 @@ import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
   closeStudyMode,
   openStudyMode,
+  openStudyModeSsr,
   selectStudyModeIsOpen,
 } from '@/redux/slices/QuranReader/studyMode';
 import {
@@ -74,6 +75,18 @@ const VerseActionModalContainer: React.FC = () => {
 
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
+    // In SSR mode, restore SSR Redux state but don't open a client-side modal
+    // The SSR modal is already visible via FakeContentModal
+    if (studyModeRestoreState?.isSsrMode) {
+      dispatch(
+        openStudyModeSsr({
+          verseKey: studyModeRestoreState.verseKey,
+          activeTab: studyModeRestoreState.activeTab,
+          highlightedWordLocation: studyModeRestoreState.highlightedWordLocation,
+        }),
+      );
+      return;
+    }
     if (studyModeRestoreState) {
       dispatch(
         openStudyMode({

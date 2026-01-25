@@ -10,6 +10,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openCollectionModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -36,6 +37,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -54,6 +56,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -69,6 +72,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
     isTranslationView,
     bookmarksRangeUrl,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,

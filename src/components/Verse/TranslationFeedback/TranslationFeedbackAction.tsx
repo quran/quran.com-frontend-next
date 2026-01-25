@@ -11,6 +11,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openFeedbackModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -34,6 +35,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   const dispatch = useDispatch();
   const { t } = useTranslation('quran-reader');
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -57,6 +59,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -74,6 +77,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
     verse,
     isTranslationView,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,

@@ -32,6 +32,7 @@ interface StudyModeSsrContentProps {
   onTabChange: (tabId: StudyModeTabId | null) => void;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
+  tafsirIdOrSlug?: string;
 }
 
 const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
@@ -55,6 +56,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
   onTabChange,
   questionId,
   questionsInitialData,
+  tafsirIdOrSlug,
 }) => {
   if (isLoading) {
     return (
@@ -93,6 +95,7 @@ const StudyModeSsrContent: React.FC<StudyModeSsrContentProps> = ({
           onTabChange={onTabChange}
           questionId={questionId}
           questionsInitialData={questionsInitialData}
+          tafsirIdOrSlug={tafsirIdOrSlug}
         />
       </div>
     );

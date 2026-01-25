@@ -37,6 +37,7 @@ interface StudyModeBodyProps {
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
+  tafsirIdOrSlug?: string;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -57,6 +58,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   onTabChange,
   questionId,
   questionsInitialData,
+  tafsirIdOrSlug,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
@@ -131,6 +133,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 switchTab={onTabChange}
                 questionId={questionId}
                 questionsInitialData={questionsInitialData}
+                tafsirIdOrSlug={tafsirIdOrSlug}
               />
             </div>
           );

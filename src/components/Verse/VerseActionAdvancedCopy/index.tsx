@@ -10,6 +10,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openAdvancedCopyModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -36,6 +37,7 @@ const VerseActionAdvancedCopy = ({
   const { t } = useTranslation('quran-reader');
   const dispatch = useDispatch();
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -55,6 +57,7 @@ const VerseActionAdvancedCopy = ({
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -67,6 +70,7 @@ const VerseActionAdvancedCopy = ({
     verse,
     isTranslationView,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,

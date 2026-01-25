@@ -14,11 +14,7 @@ import {
   useStudyModeVerseData,
   useStudyModeEventHandlers,
 } from '@/hooks/studyMode';
-import {
-  setActiveTab,
-  setHighlightedWordLocation,
-  setVerseKey,
-} from '@/redux/slices/QuranReader/studyMode';
+import { openStudyModeSsr } from '@/redux/slices/QuranReader/studyMode';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Verse from '@/types/Verse';
 
@@ -86,9 +82,13 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
 
   useEffect(() => {
     if (!initialChapterId || !initialVerseNumber) return;
-    dispatch(setVerseKey(`${initialChapterId}:${initialVerseNumber}`));
-    dispatch(setActiveTab(initialTab));
-    dispatch(setHighlightedWordLocation(null));
+    dispatch(
+      openStudyModeSsr({
+        verseKey: `${initialChapterId}:${initialVerseNumber}`,
+        activeTab: initialTab,
+        highlightedWordLocation: null,
+      }),
+    );
   }, [initialChapterId, initialVerseNumber, initialTab, dispatch]);
 
   const isContentTabActive =
@@ -133,6 +133,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       questionId={questionId}
       questionsInitialData={questionsInitialData}
       isContentTabActive={isContentTabActive}
+      tafsirIdOrSlug={tafsirIdOrSlug}
     />
   );
 };

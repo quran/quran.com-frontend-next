@@ -7,6 +7,7 @@ import styles from './StudyModeModal.module.scss';
 import StudyModeSsrContent from './StudyModeSsrContent';
 import StudyModeSsrHeader from './StudyModeSsrHeader';
 
+import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import { TestId } from '@/tests/test-ids';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
@@ -43,6 +44,7 @@ interface StudyModeSsrContainerViewProps {
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
   isContentTabActive: boolean | StudyModeTabId;
+  tafsirIdOrSlug?: string;
 }
 
 const StudyModeSsrContainerView: React.FC<StudyModeSsrContainerViewProps> = (props) => {
@@ -76,29 +78,32 @@ const StudyModeSsrContainerView: React.FC<StudyModeSsrContainerViewProps> = (pro
   );
 
   return (
-    <ContentModal
-      isFakeSEOFriendlyMode
-      onClose={onClose}
-      hasCloseButton={false}
-      header={header}
-      headerClassName={styles.modalHeader}
-      contentClassName={classNames(styles.contentModal, {
-        [styles.bottomSheetContent]: isContentTabActive,
-      })}
-      overlayClassName={classNames(styles.mobileBottomSheetOverlay, {
-        [styles.bottomSheetOverlay]: isContentTabActive,
-      })}
-      innerContentClassName={classNames(styles.innerContent, {
-        [styles.bottomSheetInnerContent]: isContentTabActive,
-      })}
-      dataTestId={TestId.STUDY_MODE_MODAL}
-    >
-      <StudyModeSsrContent
-        selectedChapterId={selectedChapterId}
-        selectedVerseNumber={selectedVerseNumber}
-        {...contentProps}
-      />
-    </ContentModal>
+    <>
+      <ContentModal
+        isFakeSEOFriendlyMode
+        onClose={onClose}
+        hasCloseButton={false}
+        header={header}
+        headerClassName={styles.modalHeader}
+        contentClassName={classNames(styles.contentModal, {
+          [styles.bottomSheetContent]: isContentTabActive,
+        })}
+        overlayClassName={classNames(styles.mobileBottomSheetOverlay, {
+          [styles.bottomSheetOverlay]: isContentTabActive,
+        })}
+        innerContentClassName={classNames(styles.innerContent, {
+          [styles.bottomSheetInnerContent]: isContentTabActive,
+        })}
+        dataTestId={TestId.STUDY_MODE_MODAL}
+      >
+        <StudyModeSsrContent
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
+          {...contentProps}
+        />
+      </ContentModal>
+      <VerseActionModalContainer />
+    </>
   );
 };
 

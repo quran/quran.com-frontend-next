@@ -8,6 +8,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openNotesModal, VerseActionModalType } from '@/redux/slices/QuranReader/verseActionModal';
@@ -52,6 +53,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
   const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -87,6 +89,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -104,6 +107,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
     verseKey,
     logNoteEvent,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,
