@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
@@ -48,7 +48,7 @@ interface StudyModeSsrModalContentProps {
   onTabChange: (tabId: StudyModeTabId | null) => void;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
-  isContentTabActive: boolean | StudyModeTabId;
+  isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
 }
 
@@ -75,10 +75,6 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
   // Hide when verse action is open and was opened from SSR study mode
   const shouldHide = isVerseActionOpen && wasOpenedFromStudyMode && isSsrMode;
 
-  const handleClose = useCallback(() => {
-    onClose();
-  }, [onClose]);
-
   const header = (
     <StudyModeSsrHeader
       t={t}
@@ -97,7 +93,7 @@ const StudyModeSsrModalContent: React.FC<StudyModeSsrModalContentProps> = ({
     <div className={classNames({ [styles.ssrHidden]: shouldHide })}>
       <ContentModal
         isFakeSEOFriendlyMode
-        onClose={handleClose}
+        onClose={onClose}
         hasCloseButton={false}
         header={header}
         headerClassName={styles.modalHeader}

@@ -1,9 +1,13 @@
+/* eslint-disable max-lines */
 import range from 'lodash/range';
 
 import { getChapterData } from './chapter';
 
 import { PagesLookUpResponse, VersesResponse } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { toLocalizedVerseKey } from '@/utils/locale';
 
 /**
@@ -192,4 +196,32 @@ export const buildVersesResponse = (
       totalPages: Math.ceil(numberOfVerses / 10),
     },
   };
+};
+
+/**
+ * Build a verse URL for study mode SSR pages with standard parameters.
+ *
+ * @param {string} verseKey - The verse key (e.g., "1:1")
+ * @param {QuranFont} quranFont - The Quran font style
+ * @param {MushafLines} mushafLines - Mushaf lines configuration
+ * @param {number[]} translations - Array of translation IDs
+ * @returns {string} The formatted API URL
+ */
+export const buildStudyModeVerseUrl = (
+  verseKey: string,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  translations: number[],
+): string => {
+  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
+
+  return makeByVerseKeyUrl(verseKey, {
+    words: true,
+    translationFields: 'resource_name,language_id',
+    translations: translations.join(','),
+    ...getDefaultWordFields(quranFont),
+    mushaf: mushafId,
+    wordTranslationLanguage: 'en',
+    wordTransliteration: 'true',
+  });
 };

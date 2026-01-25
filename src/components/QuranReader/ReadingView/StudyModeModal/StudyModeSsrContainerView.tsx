@@ -37,7 +37,7 @@ interface StudyModeSsrContainerViewProps {
   onTabChange: (tabId: StudyModeTabId | null) => void;
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
-  isContentTabActive: boolean | StudyModeTabId;
+  isContentTabActive: boolean;
   tafsirIdOrSlug?: string;
 }
 

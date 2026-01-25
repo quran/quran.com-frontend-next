@@ -26,8 +26,8 @@ import {
 import ChaptersData from '@/types/ChaptersData';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeByVerseKeyUrl, makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
+import { getMushafId } from '@/utils/api';
+import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -38,7 +38,7 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { buildVersesResponse } from '@/utils/verseKeys';
+import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -140,15 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const tafsirListUrl = makeTafsirsUrl(locale);
 
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = makeByVerseKeyUrl(verseKey, {
-      words: true,
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      ...getDefaultWordFields(quranFont),
-      mushaf: mushafId,
-      wordTranslationLanguage: 'en',
-      wordTransliteration: 'true',
-    });
+    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
 
     const [tafsirContentData, tafsirListData, verseData, pagesLookupResponse] = await Promise.all([
       fetcher(tafsirContentUrl),

@@ -23,8 +23,7 @@ import Language from '@/types/Language';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import { getMushafId } from '@/utils/api';
 import { getAyahQuestions } from '@/utils/auth/api';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -35,7 +34,7 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { buildVersesResponse } from '@/utils/verseKeys';
+import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
 
 type SelectedAyahQuestionsPageProps = {
   chapter?: ChapterResponse;
@@ -115,15 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   try {
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = makeByVerseKeyUrl(verseKey, {
-      words: true,
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      ...getDefaultWordFields(quranFont),
-      mushaf: mushafId,
-      wordTranslationLanguage: 'en',
-      wordTransliteration: 'true',
-    });
+    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
 
     const [verseQuestionsData, verseData, pagesLookupResponse] = await Promise.all([
       getAyahQuestions(verseKey, locale as Language),
