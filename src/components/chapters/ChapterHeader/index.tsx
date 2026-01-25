@@ -20,7 +20,6 @@ import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
   chapterId: string;
-  translationName?: string;
   isTranslationView: boolean;
   className?: string;
 }
@@ -34,7 +33,6 @@ interface ChapterHeaderProps {
  */
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
-  translationName,
   isTranslationView,
   className,
 }) => {
@@ -56,11 +54,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
-          {isReadingMode ? (
-            <ReadingModeActions />
-          ) : (
-            <TranslationSettingsButton translationName={translationName} />
-          )}
+          {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
         </div>
       </div>
 

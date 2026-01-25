@@ -4,7 +4,6 @@ import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
-import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Verse from '@/types/Verse';
 
@@ -67,11 +66,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
       // so we can add the last verse key to the queue
     >
       {shouldShowChapterHeader && (
-        <ChapterHeader
-          translationName={getTranslationNameString(verse.translations)}
-          chapterId={String(verse.chapterId)}
-          isTranslationView
-        />
+        <ChapterHeader chapterId={String(verse.chapterId)} isTranslationView />
       )}
 
       <TranslationViewCell

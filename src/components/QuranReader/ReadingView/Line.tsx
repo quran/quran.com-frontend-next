@@ -89,7 +89,6 @@ const Line = ({
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const translationName = words[0].verse?.translationsLabel || '';
 
   // Get data from first word for page tracking
   const firstWord = words[0];
@@ -110,11 +109,7 @@ const Line = ({
       })}
     >
       {shouldShowChapterHeader && chapterId !== pageHeaderChapterId && (
-        <ChapterHeader
-          translationName={translationName}
-          chapterId={firstWordData[0]}
-          isTranslationView={false}
-        />
+        <ChapterHeader chapterId={firstWordData[0]} isTranslationView={false} />
       )}
       <div
         className={classNames(styles.line, {

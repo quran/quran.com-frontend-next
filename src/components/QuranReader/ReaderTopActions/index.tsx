@@ -6,7 +6,6 @@ import styles from './ReaderTopActions.module.scss';
 
 import TranslationSettingsButton from '@/components/chapters/ChapterHeader/components/TranslationSettingsButton';
 import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
-import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import useDirection from '@/hooks/useDirection';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderDataType } from '@/types/QuranReader';
@@ -68,17 +67,10 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
     return null;
   }
 
-  // Get translation info for the button
-  const translationName = getTranslationNameString(firstVerse?.translations);
-
   return (
     <div className={styles.container}>
       <div dir={direction} className={styles.topControls}>
-        {isReadingMode ? (
-          <ReadingModeActions />
-        ) : (
-          <TranslationSettingsButton translationName={translationName} />
-        )}
+        {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
       </div>
     </div>
   );

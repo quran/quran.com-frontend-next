@@ -1,20 +1,19 @@
 @use 'src/styles/breakpoints';
 
-$translation-button-max-width-desktop: 200px;
-$translation-button-max-width-mobile: 150px;
+$translation-button-max-width: 200px;
 
 .container {
   display: flex;
   align-items: center;
-  gap: var(--spacing-small-px);
   margin-inline-start: var(--spacing-small-px);
 }
 
 .translationButton {
-  max-inline-size: $translation-button-max-width-desktop;
+  max-inline-size: $translation-button-max-width;
+  margin-inline-start: var(--spacing-small-px);
 
   @include breakpoints.smallerThanTablet {
-    max-inline-size: $translation-button-max-width-mobile;
+    max-inline-size: $translation-button-max-width;
   }
 }
 

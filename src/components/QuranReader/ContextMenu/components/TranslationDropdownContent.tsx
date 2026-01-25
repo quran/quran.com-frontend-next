@@ -85,7 +85,7 @@ const TranslationDropdownContent: React.FC<TranslationDropdownContentProps> = ({
               })}
               onClick={() => handleTranslationSelect(translation.id)}
             >
-              <span className={styles.translationName}>{translation.name}</span>
+              <span className={styles.translationName}>{translation.translatedName?.name}</span>
             </button>
           );
         })}
