@@ -8,6 +8,14 @@
   @include breakpoints.desktop {
     block-size: 100%;
   }
+
+  &.expanded {
+    padding-block-end: var(--spacing-medium2-px);
+
+    @include breakpoints.desktop {
+      padding-block-end: 0;
+    }
+  }
 }
 
 .mobile {
