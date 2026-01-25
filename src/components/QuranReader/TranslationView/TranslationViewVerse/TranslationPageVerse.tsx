@@ -6,7 +6,6 @@ import TranslationViewCell from '../TranslationViewCell';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 
 interface TranslationPageVerse {
@@ -15,7 +14,6 @@ interface TranslationPageVerse {
   verseIdx: number;
   quranReaderStyles: QuranReaderStyles;
   isLastVerseInView: boolean;
-  quranReaderDataType: QuranReaderDataType;
 }
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
@@ -24,7 +22,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verseIdx,
   quranReaderStyles,
   isLastVerseInView,
-  quranReaderDataType,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
@@ -53,14 +50,9 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
-  // Show chapter header when:
-  // 1. It's a single verse view (QuranReaderDataType.Verse) - always show the header
-  // 2. It's verse 1 of a chapter - for multi-chapter pages (like page 604)
-  // Note: We don't show chapter header just because it's the first verse in view (e.g., /page/10)
-  // In those cases, ReaderTopActions handles the top actions display
-  const isSingleVerseView = quranReaderDataType === QuranReaderDataType.Verse;
-  const isFirstVerseOfChapter = verse.verseNumber === 1;
-  const shouldShowChapterHeader = isSingleVerseView || isFirstVerseOfChapter;
+  // Only show chapter header for verse 1 of a chapter (for multi-chapter pages like page 604)
+  // Single verse pages are handled by ReaderTopActions which shows the translation button
+  const shouldShowChapterHeader = verse.verseNumber === 1;
 
   // First cell has header above it when:
   // 1. ChapterHeader shows above this verse, OR
@@ -77,7 +69,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
       {shouldShowChapterHeader && (
         <ChapterHeader
           translationName={getTranslationNameString(verse.translations)}
-          translationsCount={verse.translations?.length}
           chapterId={String(verse.chapterId)}
           isTranslationView
         />

@@ -56,7 +56,6 @@ const Page = ({
   const chapterId = firstVerse?.chapterId?.toString();
   const verseTranslations = firstVerse?.translations;
   const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length ?? 0;
 
   const isReadingTranslation = readingPreference === ReadingPreference.ReadingTranslation;
 
@@ -64,7 +63,6 @@ const Page = ({
   const chapterHeader = shouldShowChapterHeader && chapterId && (
     <ChapterHeader
       translationName={translationName}
-      translationsCount={translationsCount}
       chapterId={chapterId}
       isTranslationView={false}
     />

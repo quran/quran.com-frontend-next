@@ -51,14 +51,12 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
 
       const verseTranslations = verse.translations;
       const translationName = getTranslationNameString(verseTranslations);
-      const translationsCount = verseTranslations?.length ?? 0;
 
       return (
         <React.Fragment key={verse.verseKey}>
           {shouldShowChapterHeader && chapterId && (
             <ChapterHeader
               translationName={translationName}
-              translationsCount={translationsCount}
               chapterId={chapterId}
               isTranslationView={false}
             />

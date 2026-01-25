@@ -1,20 +1,15 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './ReaderTopActions.module.scss';
 
+import TranslationSettingsButton from '@/components/chapters/ChapterHeader/components/TranslationSettingsButton';
 import ReadingModeActions from '@/components/chapters/ChapterHeader/ReadingModeActions';
 import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
-import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { QuranReaderDataType } from '@/types/QuranReader';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
 
@@ -35,11 +30,8 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
   initialData,
   quranReaderDataType,
 }) => {
-  const dispatch = useDispatch();
-  const { t, lang } = useTranslation('quran-reader');
   const direction = useDirection();
   const readingPreference = useSelector(selectReadingPreference);
-  const selectedTranslations = useSelector(selectSelectedTranslations);
 
   const isReadingMode = isInReadingMode(readingPreference);
 
@@ -65,16 +57,12 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
       return false;
     }
 
+    // Always show for single verse view (QuranReaderDataType.Verse)
+    if (quranReaderDataType === QuranReaderDataType.Verse) return true;
+
     // For all other types, show only if not starting at verse 1
     return firstVerse.verseNumber !== 1;
   })();
-
-  const onChangeTranslationClicked = () => {
-    dispatch(setSettingsView(SettingsView.Translation));
-    logEvent('drawer_settings_open');
-    dispatch(setIsSettingsDrawerOpen(true));
-    logButtonClick('reader_top_actions_change_translation');
-  };
 
   if (!shouldShow) {
     return null;
@@ -82,7 +70,6 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
 
   // Get translation info for the button
   const translationName = getTranslationNameString(firstVerse?.translations);
-  const translationsCount = selectedTranslations?.length || 0;
 
   return (
     <div className={styles.container}>
@@ -90,25 +77,7 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
         {isReadingMode ? (
           <ReadingModeActions />
         ) : (
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Small}
-            shape={ButtonShape.Pill}
-            onClick={onChangeTranslationClicked}
-            ariaLabel={t('change-translation')}
-            tooltip={t('change-translation')}
-            className={styles.changeTranslationButton}
-            contentClassName={styles.translationName}
-            suffix={
-              translationsCount > 1 && (
-                <span className={styles.translationsCount}>
-                  {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                </span>
-              )
-            }
-          >
-            <span>{translationName}</span>
-          </Button>
+          <TranslationSettingsButton translationName={translationName} />
         )}
       </div>
     </div>
