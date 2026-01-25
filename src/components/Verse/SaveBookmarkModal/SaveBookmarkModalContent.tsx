@@ -7,7 +7,6 @@ import SaveBookmarkModalFooter from './SaveBookmarkModalFooter';
 import SaveBookmarkModalHeader from './SaveBookmarkModalHeader';
 
 import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
-import BookmarkType from '@/types/BookmarkType';
 
 interface SaveBookmarkModalContentProps {
   // Header props
@@ -22,13 +21,6 @@ interface SaveBookmarkModalContentProps {
   userIsLoggedIn: boolean;
   mushafId: number;
   lang: string;
-  resourceBookmark?: {
-    verseNumber: number;
-    type: BookmarkType;
-    key: number;
-    id: string;
-    isReading?: boolean | null;
-  } | null;
   readingBookmarkData?: Bookmark | null;
   mutateReadingBookmark?: (
     data?: Bookmark | null | Promise<Bookmark | null>,
@@ -66,7 +58,6 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
   userIsLoggedIn,
   mushafId,
   lang,
-  resourceBookmark,
   readingBookmarkData,
   mutateReadingBookmark,
   onReadingBookmarkChanged,
@@ -88,7 +79,6 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
         pageNumber={isPage ? pageNumber : undefined}
         isLoggedIn={userIsLoggedIn}
         mushafId={mushafId}
-        resourceBookmark={resourceBookmark}
         readingBookmarkData={readingBookmarkData}
         mutateReadingBookmark={mutateReadingBookmark}
         onBookmarkChanged={onReadingBookmarkChanged}

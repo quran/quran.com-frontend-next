@@ -1,33 +1,37 @@
-/* eslint-disable no-lonely-if */
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
 import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useSurahBookmarks from '@/hooks/auth/useSurahBookmarks';
 import Bookmark from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
-import { WordVerse } from '@/types/Word';
-import {
-  addCollectionBookmark,
-  deleteCollectionBookmarkByKey,
-  deleteBookmarkById,
-  getBookmark,
-} from '@/utils/auth/api';
+import Verse from '@/types/Verse';
+import { addCollectionBookmark, deleteCollectionBookmarkByKey } from '@/utils/auth/api';
 import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 import { logEvent } from '@/utils/eventLogger';
 
+/**
+ * Extract error status from unknown error type
+ * @param {unknown} err - The error object
+ * @returns {number | undefined} HTTP status code if available
+ */
+const getErrorStatus = (err: unknown): number | undefined => {
+  if (err && typeof err === 'object' && 'status' in err) {
+    return (err as { status?: number }).status;
+  }
+  return undefined;
+};
+
 interface UseCollectionToggleParams {
-  verse: WordVerse | undefined;
-  pageNumber: number | undefined;
+  verse: Verse | undefined;
   mushafId: number;
-  resourceBookmark: Bookmark | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
   verseKey: string;
-  isResourceBookmarked: boolean;
   mutateResourceBookmark: (data: Bookmark | undefined) => void;
-  mutateBookmarkCollectionIdsData: () => void;
+  mutateBookmarkCollectionIdsData: (optimisticData?: string[]) => void;
   onMutate?: () => void;
 }
 
@@ -38,23 +42,22 @@ interface CollectionToggleHelpers {
     isCurrentlyInCollection: boolean,
   ) => Promise<void>;
   handleToggleFavorites: (checked: boolean) => Promise<void>;
-  handlePageBookmarkToggle: () => Promise<void>;
 }
 
 /**
- * Unified hook to manage collection toggle logic for both favorites and regular collections
- * Handles adding/removing verses/pages from any collection (including favorites)
+ * Hook to manage collection toggle logic for verses only.
+ * Handles adding/removing verses from any collection (including favorites).
+ * Note: Collection bookmarks are only supported for verses, not pages.
+ * For reading bookmarks (pages and verses), use useGlobalReadingBookmark instead.
+ *
  * @param {UseCollectionToggleParams} params Collection toggle parameters
  * @returns {CollectionToggleHelpers} Object with handlers for collection operations
  */
 export const useCollectionToggle = ({
   verse,
-  pageNumber,
   mushafId,
-  resourceBookmark,
   bookmarkCollectionIdsData,
   verseKey,
-  isResourceBookmarked,
   mutateResourceBookmark,
   mutateBookmarkCollectionIdsData,
   onMutate,
@@ -62,73 +65,112 @@ export const useCollectionToggle = ({
   const commonT = useTranslation('common').t;
   const { t } = useTranslation('quran-reader');
   const toast = useToast();
+  const { getVerseBookmark, updateVerseBookmark } = useSurahBookmarks(
+    verse ? Number(verse.chapterId) : 0,
+    mushafId,
+  );
+
+  const buildOptimisticBookmark = useCallback(
+    (collectionIds: string[], previousBookmark: Bookmark | undefined): Bookmark | undefined => {
+      if (!verse) return previousBookmark;
+      if (collectionIds.length === 0) return undefined;
+      return {
+        id: previousBookmark?.id ?? `optimistic-${verseKey}`,
+        key: Number(verse.chapterId),
+        type: BookmarkType.Ayah,
+        verseNumber: verse.verseNumber,
+        isInDefaultCollection: collectionIds.includes(DEFAULT_COLLECTION_ID),
+        collectionsCount: collectionIds.length,
+      };
+    },
+    [verse, verseKey],
+  );
+
+  const getBaseCollectionIds = useCallback((): string[] => {
+    const currentIds = [...(bookmarkCollectionIdsData || [])];
+    const currentBookmark = getVerseBookmark(verseKey);
+    if (currentBookmark?.isInDefaultCollection && !currentIds.includes(DEFAULT_COLLECTION_ID)) {
+      currentIds.push(DEFAULT_COLLECTION_ID);
+    }
+    return currentIds;
+  }, [bookmarkCollectionIdsData, getVerseBookmark, verseKey]);
 
   /**
-   * Generic handler to add a bookmark to a collection
+   * Handler to add a verse bookmark to a collection
    */
   const addToCollection = useCallback(
-    async (collectionId: string, collectionName: string, isVerse: boolean) => {
+    async (collectionId: string, collectionName: string) => {
+      if (!verse) return;
+
+      const key = Number(verse.chapterId);
+      const previousBookmark = getVerseBookmark(verseKey);
+
+      // Optimistically update collection IDs (add the new collection ID)
+      const baseIds = getBaseCollectionIds();
+      const optimisticCollectionIds = baseIds.includes(collectionId)
+        ? baseIds
+        : [...baseIds, collectionId];
+      mutateBookmarkCollectionIdsData(optimisticCollectionIds);
+      updateVerseBookmark(
+        verseKey,
+        buildOptimisticBookmark(optimisticCollectionIds, previousBookmark),
+      );
+
       try {
-        if (isVerse && verse) {
-          await addCollectionBookmark({
-            key: Number(verse.chapterId),
-            mushafId,
-            type: BookmarkType.Ayah,
-            verseNumber: verse.verseNumber,
-            collectionId,
-          });
-          logEvent('ayah_added_to_collection', { verseKey, collectionId });
-        } else if (!isVerse && pageNumber) {
-          await addCollectionBookmark({
-            key: pageNumber,
-            mushafId,
-            type: BookmarkType.Page,
-            collectionId,
-          });
-          logEvent('page_added_to_collection', { pageNumber, collectionId });
-        }
+        const response = await addCollectionBookmark({
+          key,
+          mushafId,
+          type: BookmarkType.Ayah,
+          collectionId,
+          verseNumber: verse.verseNumber,
+          bookmarkId: previousBookmark?.id,
+        });
 
-        // Fetch updated bookmark to sync local state
-        if (isVerse && verse) {
-          const updatedBookmark = await getBookmark(
-            mushafId,
-            Number(verse.chapterId),
-            BookmarkType.Ayah,
-            verse.verseNumber,
-          );
-          mutateResourceBookmark(updatedBookmark);
-        } else if (!isVerse && pageNumber) {
-          const updatedBookmark = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
-          mutateResourceBookmark(updatedBookmark);
-        }
+        logEvent('ayah_added_to_collection', {
+          verseKey,
+          collectionId,
+        });
 
-        // Show success message
+        // Show success message immediately after adding
         if (collectionId === DEFAULT_COLLECTION_ID) {
-          const message = isVerse ? commonT('verse-bookmarked') : t('page-bookmarked');
-          toast(message, { status: ToastStatus.Success });
-          logEvent(isVerse ? 'verse_added_to_favorites' : 'page_added_to_favorites', {
-            ...(isVerse ? { verseKey } : { pageNumber }),
-          });
+          toast(commonT('verse-bookmarked'), { status: ToastStatus.Success });
+          logEvent('verse_added_to_favorites', { verseKey });
         } else {
           toast(t('saved-to', { collectionName }), { status: ToastStatus.Success });
         }
 
-        mutateBookmarkCollectionIdsData();
         onMutate?.();
+
+        // Use bookmark from API response to update local state, enriched with current collections
+        if (response.bookmark) {
+          const enriched = {
+            ...response.bookmark,
+            collectionsCount: optimisticCollectionIds.length,
+            isInDefaultCollection: optimisticCollectionIds.includes(DEFAULT_COLLECTION_ID),
+          } as Bookmark;
+          mutateResourceBookmark(enriched);
+          updateVerseBookmark(verseKey, enriched);
+        }
       } catch (err: unknown) {
-        const error = err as { status?: number };
+        // Revert optimistic update on error
+        mutateBookmarkCollectionIdsData(bookmarkCollectionIdsData);
+        updateVerseBookmark(verseKey, previousBookmark);
         const message =
-          error.status === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
+          getErrorStatus(err) === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
         toast(message, { status: ToastStatus.Error });
       }
     },
     [
       verse,
-      pageNumber,
       mushafId,
       verseKey,
+      bookmarkCollectionIdsData,
+      getVerseBookmark,
+      updateVerseBookmark,
+      buildOptimisticBookmark,
       mutateResourceBookmark,
       mutateBookmarkCollectionIdsData,
+      getBaseCollectionIds,
       onMutate,
       toast,
       commonT,
@@ -137,95 +179,80 @@ export const useCollectionToggle = ({
   );
 
   /**
-   * Generic handler to remove a bookmark from a collection
+   * Handler to remove a verse bookmark from a collection
+   * Backend handles orphan detection and cleanup automatically
    */
   const removeFromCollection = useCallback(
-    async (
-      collectionId: string,
-      collectionName: string,
-      isVerse: boolean,
-      shouldDeleteBookmark: boolean = false,
-    ) => {
-      if (!resourceBookmark) return;
+    async (collectionId: string, collectionName: string) => {
+      if (!verse) return;
+
+      const key = Number(verse.chapterId);
+      const previousBookmark = getVerseBookmark(verseKey);
+
+      // Optimistically update collection IDs (remove the collection ID)
+      const optimisticCollectionIds = getBaseCollectionIds().filter((id) => id !== collectionId);
+      mutateBookmarkCollectionIdsData(optimisticCollectionIds);
+      updateVerseBookmark(
+        verseKey,
+        buildOptimisticBookmark(optimisticCollectionIds, previousBookmark),
+      );
 
       try {
-        if (shouldDeleteBookmark) {
-          // Delete the entire bookmark if it's the last collection and not in favorites
-          await deleteBookmarkById(resourceBookmark.id);
-          mutateResourceBookmark(undefined);
-          logEvent('ayah_bookmark_deleted_from_last_collection', { verseKey, collectionId });
-        } else {
-          // Remove from collection
-          if (isVerse && verse) {
-            await deleteCollectionBookmarkByKey({
-              key: Number(verse.chapterId),
-              mushafId,
-              type: BookmarkType.Ayah,
-              verseNumber: verse.verseNumber,
-              collectionId,
-            });
-          } else if (!isVerse && pageNumber) {
-            await deleteCollectionBookmarkByKey({
-              key: pageNumber,
-              mushafId,
-              type: BookmarkType.Page,
-              collectionId,
-            });
-          }
+        // Backend handles orphan detection - returns null if bookmark was deleted
+        const response = await deleteCollectionBookmarkByKey({
+          key,
+          mushafId,
+          type: BookmarkType.Ayah,
+          collectionId,
+          verseNumber: verse.verseNumber,
+        });
 
-          // Update local state
-          if (collectionId === DEFAULT_COLLECTION_ID) {
-            // For favorites, update the flag
-            mutateResourceBookmark({
-              ...resourceBookmark,
-              isInDefaultCollection: false,
-            });
-          } else {
-            // For regular collections, fetch updated bookmark
-            if (isVerse && verse) {
-              const updatedBookmark = await getBookmark(
-                mushafId,
-                Number(verse.chapterId),
-                BookmarkType.Ayah,
-                verse.verseNumber,
-              );
-              mutateResourceBookmark(updatedBookmark);
-            } else if (!isVerse && pageNumber) {
-              const updatedBookmark = await getBookmark(mushafId, pageNumber, BookmarkType.Page);
-              mutateResourceBookmark(updatedBookmark);
-            }
-          }
+        // Update local state based on API response
+        if (response.deleted) {
+          // Bookmark was orphan and deleted by backend
+          updateVerseBookmark(verseKey, undefined);
+          logEvent('ayah_bookmark_deleted_from_last_collection', { verseKey, collectionId });
+        } else if (response.bookmark) {
+          // Bookmark still exists, update with new state, enriched with current collections
+          const enriched = {
+            ...response.bookmark,
+            collectionsCount: optimisticCollectionIds.length,
+            isInDefaultCollection: optimisticCollectionIds.includes(DEFAULT_COLLECTION_ID),
+          } as Bookmark;
+          mutateResourceBookmark(enriched);
+          updateVerseBookmark(verseKey, enriched);
         }
 
         // Show success message
         if (collectionId === DEFAULT_COLLECTION_ID) {
-          const message = isVerse ? commonT('verse-bookmark-removed') : t('page-bookmark-removed');
-          toast(message, { status: ToastStatus.Success });
-          logEvent(isVerse ? 'verse_removed_from_favorites' : 'page_removed_from_favorites', {
-            ...(isVerse ? { verseKey } : { pageNumber }),
-          });
+          toast(commonT('verse-bookmark-removed'), { status: ToastStatus.Success });
+          logEvent('verse_removed_from_favorites', { verseKey });
         } else {
           toast(t('removed-from', { collectionName }), { status: ToastStatus.Success });
           logEvent('ayah_removed_from_collection', { verseKey, collectionId });
         }
 
-        mutateBookmarkCollectionIdsData();
         onMutate?.();
       } catch (err: unknown) {
-        const error = err as { status?: number };
+        // Revert optimistic update on error
+        mutateBookmarkCollectionIdsData(bookmarkCollectionIdsData);
+        updateVerseBookmark(verseKey, previousBookmark);
         const message =
-          error.status === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
+          getErrorStatus(err) === 400 ? commonT('error.bookmark-sync') : commonT('error.general');
         toast(message, { status: ToastStatus.Error });
       }
     },
     [
-      resourceBookmark,
       verse,
-      pageNumber,
       mushafId,
       verseKey,
+      bookmarkCollectionIdsData,
+      getVerseBookmark,
+      updateVerseBookmark,
+      buildOptimisticBookmark,
       mutateResourceBookmark,
       mutateBookmarkCollectionIdsData,
+      getBaseCollectionIds,
       onMutate,
       toast,
       commonT,
@@ -234,7 +261,8 @@ export const useCollectionToggle = ({
   );
 
   /**
-   * Toggle a bookmark in/out of a collection (works for both favorites and regular collections)
+   * Toggle a verse bookmark in/out of a collection
+   * Backend handles orphan detection and cleanup automatically
    */
   const handleToggleCollection = useCallback(
     async (
@@ -242,118 +270,57 @@ export const useCollectionToggle = ({
       collectionName: string,
       isCurrentlyInCollection: boolean,
     ): Promise<void> => {
-      const isVerse = !!verse;
-      const isFavorite = collectionId === DEFAULT_COLLECTION_ID;
+      if (!verse) return;
 
       if (isCurrentlyInCollection) {
-        // Check if we should delete the bookmark entirely
-        const collectionCount = bookmarkCollectionIdsData?.length ?? 0;
-        const isLastCollection = collectionCount === 1;
-        const isInFavorite = resourceBookmark?.isInDefaultCollection;
-        const shouldDelete = isLastCollection && !isInFavorite && !isFavorite;
-
-        await removeFromCollection(collectionId, collectionName, isVerse, shouldDelete);
+        await removeFromCollection(collectionId, collectionName);
       } else {
-        await addToCollection(collectionId, collectionName, isVerse);
+        await addToCollection(collectionId, collectionName);
       }
     },
-    [verse, bookmarkCollectionIdsData, resourceBookmark, addToCollection, removeFromCollection],
+    [verse, addToCollection, removeFromCollection],
   );
 
   /**
-   * Special handler for favorites toggle with additional logic
-   * @param {boolean} checked - The new state (true = will be in favorites, false = will not be in favorites)
+   * Special handler for favorites toggle
+   * Backend handles orphan detection and cleanup automatically
+   * @param {boolean} shouldBeInFavorites - The desired state (true = add to favorites, false = remove from favorites)
    */
   const handleToggleFavorites = useCallback(
-    async (checked: boolean): Promise<void> => {
-      const isVerse = !!verse;
+    async (shouldBeInFavorites: boolean): Promise<void> => {
+      if (!verse) return;
+      const currentBookmark = getVerseBookmark(verseKey);
 
-      // If checked is true, we want to add to favorites
-      // If checked is false, we want to remove from favorites
-      const isCurrentlyInFavorites = !checked; // Current state is opposite of new state
-
-      if (!resourceBookmark) {
-        if (checked) {
-          // Create new bookmark in favorites
-          if (verse) {
-            await addToCollection(DEFAULT_COLLECTION_ID, '', true);
-          } else if (pageNumber) {
-            await addToCollection(DEFAULT_COLLECTION_ID, '', false);
-          }
+      // No bookmark exists - create one if adding to favorites
+      if (!currentBookmark) {
+        if (shouldBeInFavorites) {
+          await addToCollection(DEFAULT_COLLECTION_ID, '');
         }
-        // If checked is false and no bookmark exists, nothing to do
         return;
       }
 
-      if (checked) {
-        // Adding to favorites
-        await handleToggleCollection(
-          DEFAULT_COLLECTION_ID,
-          '',
-          isCurrentlyInFavorites, // false = not currently in favorites, so add it
-        );
-      } else {
-        // Removing from favorites
-        const isOnlyInFavorites =
-          resourceBookmark.isInDefaultCollection &&
-          (!bookmarkCollectionIdsData || bookmarkCollectionIdsData.length === 0);
-
-        if (isOnlyInFavorites) {
-          // Delete bookmark if it's only in favorites
-          await deleteBookmarkById(resourceBookmark.id);
-          mutateResourceBookmark(undefined);
-          toast(isVerse ? commonT('verse-bookmark-removed') : t('page-bookmark-removed'), {
-            status: ToastStatus.Success,
-          });
-          logEvent(isVerse ? 'verse_removed_from_favorites' : 'page_removed_from_favorites', {
-            ...(isVerse ? { verseKey } : { pageNumber }),
-          });
-          mutateBookmarkCollectionIdsData();
-          onMutate?.();
-        } else {
-          // Remove from favorites but keep bookmark (it's in other collections)
-          await handleToggleCollection(
-            DEFAULT_COLLECTION_ID,
-            '',
-            isCurrentlyInFavorites, // true = currently in favorites, so remove it
-          );
-        }
+      // Adding to favorites - call handleToggleCollection (isCurrentlyInCollection = false)
+      if (shouldBeInFavorites) {
+        await handleToggleCollection(DEFAULT_COLLECTION_ID, '', false);
+        return;
       }
+
+      // Removing from favorites - backend handles orphan cleanup
+      await removeFromCollection(DEFAULT_COLLECTION_ID, '');
     },
     [
-      resourceBookmark,
       verse,
-      pageNumber,
-      bookmarkCollectionIdsData,
       verseKey,
-      mutateResourceBookmark,
-      mutateBookmarkCollectionIdsData,
-      onMutate,
-      toast,
-      commonT,
-      t,
-      handleToggleCollection,
+      getVerseBookmark,
       addToCollection,
+      handleToggleCollection,
+      removeFromCollection,
     ],
   );
-
-  /**
-   * Handler for page bookmark toggle (simplified version for pages)
-   */
-  const handlePageBookmarkToggle = useCallback(async (): Promise<void> => {
-    if (isResourceBookmarked && resourceBookmark && pageNumber) {
-      // Remove from favorites
-      await removeFromCollection(DEFAULT_COLLECTION_ID, '', false);
-    } else if (!isResourceBookmarked && pageNumber) {
-      // Add to favorites
-      await addToCollection(DEFAULT_COLLECTION_ID, '', false);
-    }
-  }, [isResourceBookmarked, resourceBookmark, pageNumber, addToCollection, removeFromCollection]);
 
   return {
     handleToggleCollection,
     handleToggleFavorites,
-    handlePageBookmarkToggle,
   };
 };
 

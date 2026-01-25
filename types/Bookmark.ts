@@ -14,6 +14,7 @@ interface Bookmark {
    * Indicates whether this bookmark is a reading bookmark.
    */
   isReading?: boolean;
+  collectionsCount?: number;
 }
 
 export default Bookmark;

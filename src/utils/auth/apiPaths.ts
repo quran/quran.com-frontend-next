@@ -29,6 +29,8 @@ export const BOOKMARK_CACHE_PATHS = {
   COLLECTIONS: '/collections?',
   /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
   BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
+  /** Surah-level bookmarks (e.g., bookmarks/surah?...) */
+  SURAH_BOOKMARKS: 'bookmarks/surah?',
 } as const;
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
@@ -83,8 +85,17 @@ export const makeBookmarksUrl = (
   limit?: number,
   type?: BookmarkType,
   isReading?: boolean,
+  key?: number,
+  page?: number,
 ): string =>
-  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }), ...(isReading && { isReading }) });
+  makeUrl('bookmarks', {
+    mushafId,
+    limit,
+    ...(type && { type }),
+    ...(isReading && { isReading }),
+    ...(key && { key }),
+    ...(page && { page }),
+  });
 
 export type CollectionsQueryParams = {
   cursor?: string;

@@ -14,7 +14,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
-import Word from '@/types/Word';
+import Verse from '@/types/Verse';
 import { getMushafId } from '@/utils/api';
 import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { getErrorStatus } from '@/utils/auth/errors';
@@ -25,7 +25,7 @@ import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/na
 
 interface UseSaveBookmarkModalOptions {
   type: ReadingBookmarkType;
-  verse?: Word;
+  verse?: Verse;
   pageNumber?: number;
   onClose: () => void;
 }
@@ -46,16 +46,7 @@ interface UseSaveBookmarkModalReturn {
   isPage: boolean;
   verseKey: string;
   modalTitle: string;
-  resourceBookmark:
-    | {
-        verseNumber: number;
-        type: BookmarkType;
-        key: number;
-        id: string;
-        isReading?: boolean | null;
-      }
-    | null
-    | undefined;
+  resourceBookmark: Bookmark | null | undefined;
   readingBookmarkData?: Bookmark | null;
   mutateReadingBookmark?: (
     data?: Bookmark | null | Promise<Bookmark | null>,
@@ -117,8 +108,6 @@ const useSaveBookmarkModal = ({
 
   const { sortedCollections } = useCollectionsState({
     isVerse,
-    isPage,
-    isResourceBookmarked: !!bookmarkData.resourceBookmark,
     resourceBookmark: bookmarkData.resourceBookmark,
     collectionListData: bookmarkData.collectionListData,
     bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
@@ -127,17 +116,15 @@ const useSaveBookmarkModal = ({
   // Handler hooks
   const verseKey = verse ? `${verse.chapterId}:${verse.verseNumber}` : '';
 
+  // Collection toggle is only for verses (collection bookmarks not supported for pages)
+  // Note: onMutate is intentionally not passed - we use optimistic updates without refetching
   const { handleToggleCollection, handleToggleFavorites } = useCollectionToggle({
     verse,
-    pageNumber,
     mushafId,
-    resourceBookmark: bookmarkData.resourceBookmark,
     bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
     verseKey,
-    isResourceBookmarked: !!bookmarkData.resourceBookmark,
     mutateResourceBookmark: bookmarkData.mutateResourceBookmark,
     mutateBookmarkCollectionIdsData: bookmarkData.mutateBookmarkCollectionIdsData,
-    onMutate: bookmarkData.mutateAllData,
   });
 
   // Localization
@@ -203,29 +190,57 @@ const useSaveBookmarkModal = ({
     setNewCollectionName('');
   }, []);
 
+  // eslint-disable-next-line react-func/max-lines-per-function
   const handleCreateCollection = useCallback(async (): Promise<void> => {
     if (!newCollectionName.trim() || !verse) return;
     setIsSubmittingCollection(true);
+
+    const trimmedName = newCollectionName.trim();
+
+    // Optimistic update: Add temporary collection to the list immediately
+    const tempId = `temp-${Date.now()}`;
+    const tempCollection = {
+      id: tempId,
+      name: trimmedName,
+      url: trimmedName.toLowerCase().replace(/\s+/g, '-'),
+      updatedAt: new Date().toISOString(),
+    };
+
+    // Optimistically update collection list
+    const currentCollections = bookmarkData.collectionListData?.data || [];
+    bookmarkData.mutateCollectionListData(
+      { ...bookmarkData.collectionListData, data: [...currentCollections, tempCollection] },
+      { revalidate: false },
+    );
+
     try {
-      const newCollection = await addCollection(newCollectionName.trim());
+      const newCollection = await addCollection(trimmedName);
       await addCollectionBookmark({
         key: Number(verse.chapterId),
         mushafId,
         type: BookmarkType.Ayah,
         verseNumber: verse.verseNumber,
         collectionId: newCollection?.id,
+        bookmarkId: bookmarkData.resourceBookmark?.id,
       });
-      toast(t('saved-to', { collectionName: newCollectionName.trim() }), {
+      toast(t('saved-to', { collectionName: trimmedName }), {
         status: ToastStatus.Success,
       });
       logEvent('collection_created_and_ayah_added', {
         verseKey,
-        collectionName: newCollectionName.trim(),
+        collectionName: trimmedName,
       });
+
+      // Revalidate to replace temp collection with real one
       bookmarkData.mutateAllData();
       setIsCreatingCollection(false);
       setNewCollectionName('');
     } catch (error) {
+      // Rollback optimistic update on error
+      bookmarkData.mutateCollectionListData(
+        { ...bookmarkData.collectionListData, data: currentCollections },
+        { revalidate: false },
+      );
       toast(commonT('error.general'), { status: ToastStatus.Error });
     } finally {
       setIsSubmittingCollection(false);

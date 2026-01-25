@@ -42,12 +42,12 @@ describe('ReadingBookmarkSection', () => {
       <ReadingBookmarkSection
         type={ReadingBookmarkType.AYAH}
         verseKey="1:1"
-        currentReadingBookmark={null}
+        readingBookmarkData={null}
         onBookmarkChanged={async () => {}}
         lang="en"
         isLoggedIn={false}
         mushafId={2}
-        onUpdateUserPreference={async () => {}}
+        mutateReadingBookmark={async () => null}
       />,
     );
     expect(screen.getByText('set-as-reading-bookmark')).toBeDefined();
@@ -65,12 +65,12 @@ describe('ReadingBookmarkSection', () => {
       <ReadingBookmarkSection
         type={ReadingBookmarkType.AYAH}
         verseKey="1:1"
-        currentReadingBookmark="ayah:1:1"
+        readingBookmarkData={{ id: 'ayah:1:1' } as any}
         onBookmarkChanged={async () => {}}
         lang="en"
         isLoggedIn={false}
         mushafId={2}
-        onUpdateUserPreference={async () => {}}
+        mutateReadingBookmark={async () => null}
       />,
     );
     expect(screen.getByText('remove-my-reading-bookmark')).toBeDefined();

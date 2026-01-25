@@ -11,7 +11,7 @@ import { useVerseBookmark } from '@/hooks/useVerseBookmark';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { WordVerse } from 'types/Word';
+import Verse from 'types/Verse';
 
 const SaveBookmarkModal = dynamic(
   () => import('@/components/Verse/SaveBookmarkModal/SaveBookmarkModal'),
@@ -19,7 +19,7 @@ const SaveBookmarkModal = dynamic(
 );
 
 interface VerseBookmarkActionProps {
-  verse: WordVerse;
+  verse: Verse;
 }
 
 /**

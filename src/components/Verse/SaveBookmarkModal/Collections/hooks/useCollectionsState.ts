@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Bookmark from '@/types/Bookmark';
+import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 
 interface CollectionItem {
   id: string;
@@ -22,8 +23,6 @@ interface CollectionListData {
 
 interface UseCollectionsStateParams {
   isVerse: boolean;
-  isPage: boolean;
-  isResourceBookmarked: boolean;
   resourceBookmark: Bookmark | undefined;
   collectionListData: CollectionListData | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
@@ -34,8 +33,6 @@ interface UseCollectionsStateReturn {
   sortedCollections: CollectionItem[];
 }
 
-const FAVORITES_COLLECTION_ID = 'favorites-default';
-
 /**
  * Custom hook to manage collections state and derived values
  * Computes isInFavorites and sortedCollections
@@ -44,22 +41,20 @@ const FAVORITES_COLLECTION_ID = 'favorites-default';
  */
 export const useCollectionsState = ({
   isVerse,
-  isPage,
-  isResourceBookmarked,
   resourceBookmark,
   collectionListData,
   bookmarkCollectionIdsData,
 }: UseCollectionsStateParams): UseCollectionsStateReturn => {
   const commonT = useTranslation('common').t;
 
-  const isInFavorites = useMemo(() => {
-    if (isPage) return isResourceBookmarked;
-    return isResourceBookmarked && resourceBookmark?.isInDefaultCollection;
-  }, [isPage, isResourceBookmarked, resourceBookmark?.isInDefaultCollection]);
+  const isInFavorites = useMemo(
+    () => Boolean(resourceBookmark?.isInDefaultCollection),
+    [resourceBookmark?.isInDefaultCollection],
+  );
 
   const sortedCollections = useMemo((): CollectionItem[] => {
     const favoritesCollection: CollectionItem = {
-      id: FAVORITES_COLLECTION_ID,
+      id: DEFAULT_COLLECTION_ID,
       name: commonT('favorites'),
       checked: isInFavorites,
       isDefault: true,

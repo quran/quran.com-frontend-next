@@ -46,7 +46,6 @@ vi.mock('./Collections/hooks/useCollectionToggle', () => ({
   useCollectionToggle: () => ({
     handleToggleCollection: vi.fn(),
     handleToggleFavorites: vi.fn(),
-    handlePageBookmarkToggle: vi.fn(),
   }),
 }));
 vi.mock('@/dls/Toast/Toast', () => ({

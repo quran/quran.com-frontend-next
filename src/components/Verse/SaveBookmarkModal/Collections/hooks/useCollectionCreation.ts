@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import BookmarkType from '@/types/BookmarkType';
 import { Collection } from '@/types/Collection';
-import { WordVerse } from '@/types/Word';
+import Verse from '@/types/Verse';
 import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 
@@ -17,7 +17,7 @@ interface CollectionCreationHelpers {
 }
 
 interface UseCollectionCreationParams {
-  verse: WordVerse | undefined;
+  verse: Verse | undefined;
   mushafId: number;
   verseKey: string;
   newCollectionName: string;

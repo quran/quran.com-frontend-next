@@ -47,11 +47,11 @@ describe('SaveBookmarkModalContent', () => {
         isPage={false}
         verseKey="1:1"
         pageNumber={undefined}
-        currentReadingBookmark={null}
+        readingBookmarkData={null}
         userIsLoggedIn
         mushafId={1}
         lang="en"
-        onUpdateReadingBookmark={async () => {}}
+        mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[{ id: 1, name: 'c1', isDefault: false }] as any}
         isDataReady
@@ -80,11 +80,11 @@ describe('SaveBookmarkModalContent', () => {
         isPage
         verseKey=""
         pageNumber={42}
-        currentReadingBookmark="page:42"
+        readingBookmarkData={{ id: 'page:42' } as any}
         userIsLoggedIn={false}
         mushafId={1}
         lang="en"
-        onUpdateReadingBookmark={async () => {}}
+        mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[]}
         isDataReady
@@ -112,11 +112,11 @@ describe('SaveBookmarkModalContent', () => {
         isPage={false}
         verseKey="9:2"
         pageNumber={undefined}
-        currentReadingBookmark={null}
+        readingBookmarkData={null}
         userIsLoggedIn={false}
         mushafId={1}
         lang="en"
-        onUpdateReadingBookmark={async () => {}}
+        mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[]}
         isDataReady

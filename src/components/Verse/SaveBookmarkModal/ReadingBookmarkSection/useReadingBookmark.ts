@@ -13,7 +13,7 @@ import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
-import { addBookmark } from '@/utils/auth/api';
+import { addBookmark, deleteBookmarkById as deleteBookmark } from '@/utils/auth/api';
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
@@ -182,6 +182,15 @@ const useReadingBookmark = ({
 
     if (isVerse && verseKey && guestReadingBookmark.type === BookmarkType.Ayah) {
       const [chapterId, verseNum] = verseKey.split(':');
+      // Handle cross-mushaf mapping if needed
+      if (needsMapping) {
+        if (!effectiveAyahVerseKey) return false; // Still loading
+        return (
+          effectiveAyahVerseKey.surahNumber === Number(chapterId) &&
+          effectiveAyahVerseKey.verseNumber === Number(verseNum)
+        );
+      }
+      // Same mushaf - compare directly
       return (
         guestReadingBookmark.key === Number(chapterId) &&
         guestReadingBookmark.verseNumber === Number(verseNum)
@@ -189,6 +198,12 @@ const useReadingBookmark = ({
     }
 
     if (!isVerse && pageNumber && guestReadingBookmark.type === BookmarkType.Page) {
+      // Handle cross-mushaf mapping if needed
+      if (needsMapping) {
+        if (effectivePageNumber === null) return false; // Still loading
+        return effectivePageNumber === pageNumber;
+      }
+      // Same mushaf - compare directly
       return guestReadingBookmark.key === pageNumber;
     }
 
@@ -258,38 +273,34 @@ const useReadingBookmark = ({
 
   /**
    * Persist bookmark to backend (logged-in) or Redux (guest)
+   * Returns the created/updated bookmark for logged-in users
    */
   const persistBookmark = useCallback(
-    async (bookmark: GuestReadingBookmark | Bookmark) => {
+    async (bookmark: GuestReadingBookmark | Bookmark): Promise<Bookmark | null> => {
       if (isLoggedIn && mushafId) {
-        // For logged-in users, call backend API
-        if (bookmark.type === BookmarkType.Ayah) {
-          await addBookmark({
-            key: bookmark.key,
-            mushafId,
-            type: BookmarkType.Ayah,
-            verseNumber: bookmark.verseNumber!,
-            isReading: true,
-          });
-        } else if (bookmark.type === BookmarkType.Page) {
-          await addBookmark({
-            key: bookmark.key,
-            mushafId,
-            type: BookmarkType.Page,
-            isReading: true,
-          });
+        // For logged-in users, call backend API and return the response
+        if (![BookmarkType.Ayah, BookmarkType.Page].includes(bookmark.type)) {
+          return null;
         }
-      } else {
-        // For guests, dispatch to Redux
-        dispatch(
-          setGuestReadingBookmark({
-            key: bookmark.key,
-            type: bookmark.type,
-            verseNumber: bookmark.verseNumber,
-            mushafId: currentMushafId,
-          }),
-        );
+
+        return addBookmark({
+          key: bookmark.key,
+          mushafId,
+          type: bookmark.type,
+          isReading: true,
+          ...(bookmark.type === BookmarkType.Ayah && { verseNumber: bookmark.verseNumber! }),
+        });
       }
+      // For guests, dispatch to Redux
+      dispatch(
+        setGuestReadingBookmark({
+          key: bookmark.key,
+          type: bookmark.type,
+          verseNumber: bookmark.verseNumber,
+          mushafId: currentMushafId,
+        }),
+      );
+      return null;
     },
     [isLoggedIn, mushafId, currentMushafId, dispatch],
   );
@@ -300,22 +311,9 @@ const useReadingBookmark = ({
   const unsetBookmark = useCallback(
     async (bookmark: GuestReadingBookmark | Bookmark) => {
       if (isLoggedIn && mushafId) {
-        // For logged-in users, use isReading=null to unset
-        if (bookmark.type === BookmarkType.Ayah) {
-          await addBookmark({
-            key: bookmark.key,
-            mushafId,
-            type: BookmarkType.Ayah,
-            verseNumber: bookmark.verseNumber!,
-            isReading: null,
-          });
-        } else if (bookmark.type === BookmarkType.Page) {
-          await addBookmark({
-            key: bookmark.key,
-            mushafId,
-            type: BookmarkType.Page,
-            isReading: null,
-          });
+        // For logged-in users, use deleteBookmark (handled by backend to soft-delete if needed)
+        if ('id' in bookmark) {
+          await deleteBookmark(bookmark.id);
         }
       } else {
         // For guests, set to null
@@ -349,21 +347,13 @@ const useReadingBookmark = ({
               mushafId: currentMushafId,
             };
 
-      // Persist to backend
-      await persistBookmark(newBookmark);
+      // Persist to backend and get the response with the real ID
+      const savedBookmark = await persistBookmark(newBookmark);
 
-      // For logged-in users, optimistically update the cache since we know API succeeded
-      // Don't refetch immediately as backend has eventual consistency
-      if (isLoggedIn && mutateReadingBookmark) {
-        const optimisticBookmark: Bookmark = {
-          id: `optimistic-${Date.now()}`,
-          key: newBookmark.key,
-          type: newBookmark.type,
-          verseNumber: newBookmark.verseNumber,
-          isReading: true,
-        };
-        // Update cache without revalidating (backend is eventually consistent)
-        await mutateReadingBookmark(optimisticBookmark, { revalidate: false });
+      // For logged-in users, update the cache with the real bookmark ID
+      if (isLoggedIn && mutateReadingBookmark && savedBookmark) {
+        // Use the actual bookmark from the API response (has real ID)
+        await mutateReadingBookmark(savedBookmark, { revalidate: false });
       }
 
       // Save previous state for undo and set pending state
@@ -421,17 +411,10 @@ const useReadingBookmark = ({
           await mutateReadingBookmark(null, { revalidate: false });
         }
       } else {
-        await persistBookmark(previousBookmark);
-        // For logged-in users, optimistically update the cache
-        if (isLoggedIn && mutateReadingBookmark) {
-          const optimisticBookmark: Bookmark = {
-            id: `optimistic-undo-${Date.now()}`,
-            key: previousBookmark.key,
-            type: previousBookmark.type,
-            verseNumber: previousBookmark.verseNumber,
-            isReading: true,
-          };
-          await mutateReadingBookmark(optimisticBookmark, { revalidate: false });
+        const restoredBookmark = await persistBookmark(previousBookmark);
+        // For logged-in users, update the cache with the real bookmark ID
+        if (isLoggedIn && mutateReadingBookmark && restoredBookmark) {
+          await mutateReadingBookmark(restoredBookmark, { revalidate: false });
         }
       }
 

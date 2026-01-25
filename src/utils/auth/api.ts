@@ -330,12 +330,8 @@ export const getBookmark = async (
   key: number,
   type: BookmarkType,
   verseNumber?: number,
-  isReading?: boolean,
 ): Promise<Bookmark> => {
-  const url = makeBookmarkUrl(mushafId, key, type, verseNumber);
-  const queryParams = isReading !== undefined ? { isReading: String(isReading) } : {};
-  const fullUrl = queryParams.isReading ? `${url}?isReading=${queryParams.isReading}` : url;
-  return privateFetcher(fullUrl);
+  return privateFetcher(makeBookmarkUrl(mushafId, key, type, verseNumber));
 };
 
 export const getBookmarkCollections = async (
@@ -345,6 +341,41 @@ export const getBookmarkCollections = async (
   verseNumber?: number,
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
+
+/**
+ * Fetch all bookmarks for a surah.
+ * Returns a map keyed by verseKey (e.g., "1:1", "1:2", etc.)
+ * Backend handles mushaf mapping automatically.
+ *
+ * @param {number} mushafId - The mushaf ID
+ * @param {number} surahNumber - The surah number (1-114)
+ * @returns {Promise<BookmarksMap>} Map of verseKey -> Bookmark
+ */
+export const getSurahBookmarks = async (
+  mushafId: number,
+  surahNumber: number,
+): Promise<BookmarksMap> => {
+  const limit = 20;
+  const bookmarks: Bookmark[] = [];
+  let response: Bookmark[];
+  let page = 1;
+  do {
+    // eslint-disable-next-line no-await-in-loop
+    response = (await privateFetcher(
+      makeBookmarksUrl(mushafId, limit, BookmarkType.Ayah, undefined, surahNumber, page),
+    )) as Bookmark[];
+    bookmarks.push(...response);
+    page += 1;
+  } while (response.length === limit);
+  const bookmarksMap: BookmarksMap = {};
+  bookmarks.forEach((bookmark) => {
+    const verseKey = bookmark.verseNumber
+      ? `${bookmark.key}:${bookmark.verseNumber}`
+      : `${bookmark.key}`;
+    bookmarksMap[verseKey] = bookmark;
+  });
+  return bookmarksMap;
+};
 
 export const addReadingGoal = async ({
   mushafId,
@@ -442,31 +473,45 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
+interface CollectionBookmarkResponse {
+  message: string;
+  bookmark: Bookmark;
+}
+
 export const addCollectionBookmark = async ({
   collectionId,
   key,
   mushafId,
   type,
   verseNumber,
+  bookmarkId,
 }: {
   collectionId: string;
   key: number;
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
-}) => {
+  bookmarkId?: string;
+}): Promise<CollectionBookmarkResponse> => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
     mushaf: mushafId,
     type,
     verseNumber,
+    ...(bookmarkId && { bookmarkId }),
   });
 };
 
 export const deleteCollectionBookmarkById = async (collectionId: string, bookmarkId: string) => {
   return deleteRequest(makeDeleteCollectionBookmarkByIdUrl(collectionId, bookmarkId));
 };
+
+interface DeleteCollectionBookmarkResponse {
+  message: string;
+  bookmark: Bookmark | null;
+  deleted: boolean;
+}
 
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
@@ -480,7 +525,7 @@ export const deleteCollectionBookmarkByKey = async ({
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
-}) => {
+}): Promise<DeleteCollectionBookmarkResponse> => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
     collectionId,
     key,
