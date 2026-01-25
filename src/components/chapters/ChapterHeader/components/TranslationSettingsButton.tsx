@@ -34,43 +34,8 @@ const TranslationSettingsButton: React.FC = () => {
     logButtonClick('translation_settings_button_click');
   }, [dispatch]);
 
-  const renderButton = useCallback(
-    (data: TranslationsResponse) => {
-      // Find the first selected translation to display its name
-      const firstSelectedId = selectedTranslations?.[0];
-      const activeTranslation = data?.translations?.find((tr) => tr.id === firstSelectedId);
-      const displayName =
-        activeTranslation?.translatedName?.name || t('reading-preference.none-selected');
-
-      return (
-        <Button
-          variant={ButtonVariant.ModeToggle}
-          size={ButtonSize.XSmall}
-          shape={ButtonShape.Pill}
-          onClick={onChangeTranslationClicked}
-          ariaLabel={t('translation')}
-          className={styles.translationButton}
-          contentClassName={styles.translationButtonContent}
-          suffix={
-            <>
-              {translationsCount > 1 && (
-                <span>{`+${toLocalizedNumber(translationsCount - 1, lang)}`}</span>
-              )}
-              <ChevronDownIcon className={styles.dropdownIcon} />
-            </>
-          }
-        >
-          <span className={styles.translationText}>
-            {t('translation')}: {displayName}
-          </span>
-        </Button>
-      );
-    },
-    [selectedTranslations, translationsCount, lang, t, onChangeTranslationClicked],
-  );
-
-  const renderLoading = useCallback(
-    () => (
+  const renderButtonWithName = useCallback(
+    (displayName?: string) => (
       <Button
         variant={ButtonVariant.ModeToggle}
         size={ButtonSize.XSmall}
@@ -88,11 +53,28 @@ const TranslationSettingsButton: React.FC = () => {
           </>
         }
       >
-        <span className={styles.translationText}>{t('translation')}</span>
+        <span className={styles.translationText}>
+          {t('translation')}
+          {displayName && `: ${displayName}`}
+        </span>
       </Button>
     ),
     [translationsCount, lang, t, onChangeTranslationClicked],
   );
+
+  const renderButton = useCallback(
+    (data: TranslationsResponse) => {
+      const firstSelectedId = selectedTranslations?.[0];
+      const activeTranslation = data?.translations?.find((tr) => tr.id === firstSelectedId);
+      const displayName =
+        activeTranslation?.translatedName?.name || t('reading-preference.none-selected');
+
+      return renderButtonWithName(displayName);
+    },
+    [selectedTranslations, t, renderButtonWithName],
+  );
+
+  const renderLoading = useCallback(() => renderButtonWithName(), [renderButtonWithName]);
 
   return (
     <DataFetcher

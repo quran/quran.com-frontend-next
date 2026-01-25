@@ -1,5 +1,3 @@
-@use 'src/styles/breakpoints';
-
 $translation-button-max-width: 200px;
 
 .container {
@@ -11,10 +9,6 @@ $translation-button-max-width: 200px;
 .translationButton {
   max-inline-size: $translation-button-max-width;
   margin-inline-start: var(--spacing-small-px);
-
-  @include breakpoints.smallerThanTablet {
-    max-inline-size: $translation-button-max-width;
-  }
 }
 
 .translationButtonContent {
