@@ -1,32 +1,25 @@
-/* eslint-disable i18next/no-literal-string */
 import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
+import TranslationSettingsButton from './components/TranslationSettingsButton';
 import ReadingModeActions from './ReadingModeActions';
 
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
-import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 import isInReadingMode from '@/utils/readingPreference';
 import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
   chapterId: string;
-  translationName?: string;
-  translationsCount?: number;
   isTranslationView: boolean;
   className?: string;
 }
@@ -40,13 +33,10 @@ interface ChapterHeaderProps {
  */
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
-  translationName,
-  translationsCount,
   isTranslationView,
   className,
 }) => {
-  const dispatch = useDispatch();
-  const { t, lang } = useTranslation('quran-reader');
+  const { lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId);
   const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
@@ -56,13 +46,6 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   // Check if we're in Reading mode (Arabic or Translation)
   const isReadingMode = isInReadingMode(readingPreference);
 
-  const onChangeTranslationClicked = () => {
-    dispatch(setSettingsView(SettingsView.Translation));
-    logEvent('drawer_settings_open');
-    dispatch(setIsSettingsDrawerOpen(true));
-    logButtonClick('chapter_header_change_translation');
-  };
-
   return (
     <div className={classNames(styles.container, className)}>
       {/* Top controls section */}
@@ -71,33 +54,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
-          {isReadingMode ? (
-            <ReadingModeActions />
-          ) : (
-            <Button
-              variant={ButtonVariant.ModeToggle}
-              size={ButtonSize.XSmall}
-              shape={ButtonShape.Pill}
-              onClick={onChangeTranslationClicked}
-              ariaLabel={t('change-translation')}
-              className={styles.changeTranslationButton}
-              contentClassName={styles.translationName}
-              suffix={
-                <>
-                  {translationsCount > 1 && (
-                    <span className={styles.translationsCount}>
-                      {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                    </span>
-                  )}
-                  <ChevronDownIcon className={styles.dropdownIcon} />
-                </>
-              }
-            >
-              <span>
-                {t('common:translation')}: {translationName}
-              </span>
-            </Button>
-          )}
+          {isReadingMode ? <ReadingModeActions /> : <TranslationSettingsButton />}
         </div>
       </div>
 
