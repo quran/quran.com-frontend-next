@@ -147,19 +147,11 @@ export interface ChapterMetadataResponse extends BaseResponse {
   chapterMetadata?: ChapterMetadata;
 }
 
-export interface RamadanChallengeStatusResponse extends BaseResponse {
+export interface RamadanChallengeResponse extends BaseResponse {
   isEnrolled: boolean;
   currentDay: number;
   totalDays: number;
   hasStarted: boolean;
   hasEnded: boolean;
   enrolledAt: string | undefined;
-}
-
-export interface RamadanChallengeEnrollResponse extends BaseResponse {
-  success: boolean;
-}
-
-export interface RamadanChallengeUnenrollResponse extends BaseResponse {
-  success: boolean;
 }

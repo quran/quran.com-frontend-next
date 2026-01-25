@@ -14,6 +14,7 @@ import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher } from '@/api';
 import { addSentryBreadcrumb, logErrorToSentry } from '@/lib/sentry';
+import { RamadanChallengeResponse } from '@/types/ApiResponses';
 import {
   ActivityDay,
   ActivityDayType,
@@ -27,7 +28,7 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
-import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { CreateGoalRequestUnion, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { Response } from '@/types/auth/Response';
@@ -40,10 +41,6 @@ import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { Mushaf } from '@/types/QuranReader';
 import {
-  makeRamadanChallengeStatusUrl,
-  makeRamadanChallengeCountUrl,
-  makeRamadanChallengeEnrollUrl,
-  makeRamadanChallengeUnenrollUrl,
   CollectionsQueryParams,
   makeActivityDaysUrl,
   makeAddCollectionBookmarkUrl,
@@ -83,6 +80,7 @@ import {
   makeGetUserCoursesCountUrl,
   makeGetUserQuranProgramUrl,
   makeGoalUrl,
+  makeGoalCountUrl,
   makeLogoutUrl,
   makeNotesUrl,
   makePublishNoteUrl,
@@ -98,13 +96,9 @@ import {
   makeUserPreferencesUrl,
   makeUserProfileUrl,
   makeVerificationCodeUrl,
+  makeGoalStatusUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
-import {
-  RamadanChallengeStatusResponse,
-  RamadanChallengeEnrollResponse,
-  RamadanChallengeUnenrollResponse,
-} from 'types/ApiResponses';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import EnrollmentMethod from 'types/auth/EnrollmentMethod';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
@@ -326,12 +320,21 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
-export const addReadingGoal = async ({
-  mushafId,
-  category,
-  ...data
-}: CreateGoalRequest): Promise<{ data?: Goal }> =>
-  postRequest(makeGoalUrl({ mushafId, type: category }), data);
+export const getGoalCount = async (
+  category: GoalCategory,
+): Promise<{
+  data: { count: number };
+}> => privateFetcher(makeGoalCountUrl({ type: category }));
+
+export const getGoalStatus = async (type: GoalCategory): Promise<RamadanChallengeResponse> =>
+  privateFetcher(makeGoalStatusUrl({ type }));
+
+export const createGoal = async (data: CreateGoalRequestUnion): Promise<{ data?: Goal }> => {
+  if (data.category === GoalCategory.RAMADAN_CHALLENGE) {
+    return postRequest(makeGoalUrl({ type: data.category }), data);
+  }
+  return postRequest(makeGoalUrl({ mushafId: data.mushafId, type: data.category }), data);
+};
 
 export const updateReadingGoal = async ({
   mushafId,
@@ -340,7 +343,7 @@ export const updateReadingGoal = async ({
 }: UpdateGoalRequest): Promise<{ data?: Goal }> =>
   patchRequest(makeGoalUrl({ mushafId, type: category }), data);
 
-export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
+export const deleteGoal = async (params: { category: GoalCategory }): Promise<void> =>
   deleteRequest(makeGoalUrl({ type: params.category }));
 
 export const filterReadingDays = async (
@@ -702,17 +705,3 @@ export const privateFetcher = configureRefreshFetch({
   refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });
-
-export const getRamadanChallengeStatus = async (): Promise<{
-  data: RamadanChallengeStatusResponse;
-}> => privateFetcher(makeRamadanChallengeStatusUrl());
-
-export const getRamadanChallengeCount = async (): Promise<{
-  data: { count: number };
-}> => privateFetcher(makeRamadanChallengeCountUrl());
-
-export const enrollInRamadanChallenge = async (): Promise<RamadanChallengeEnrollResponse> =>
-  postRequest(makeRamadanChallengeEnrollUrl(), {});
-
-export const unenrollRamadanChallenge = async (): Promise<RamadanChallengeUnenrollResponse> =>
-  postRequest(makeRamadanChallengeUnenrollUrl(), {});

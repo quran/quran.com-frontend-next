@@ -1,17 +1,18 @@
 import useSWR from 'swr';
 
-import { getRamadanChallengeStatus } from '@/utils/auth/api';
-import { makeRamadanChallengeStatusUrl } from '@/utils/auth/apiPaths';
+import { getGoalStatus } from '@/utils/auth/api';
+import { makeGoalStatusUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { GoalCategory } from 'types/auth/Goal';
 
 const useRamadanChallengeStatus = () => {
   const { data, mutate, isValidating } = useSWR(
-    isLoggedIn() ? makeRamadanChallengeStatusUrl() : null,
-    getRamadanChallengeStatus,
+    isLoggedIn() ? makeGoalStatusUrl({ type: GoalCategory.RAMADAN_CHALLENGE }) : null,
+    () => getGoalStatus(GoalCategory.RAMADAN_CHALLENGE),
   );
 
   return {
-    isEnrolled: data?.data?.isEnrolled,
+    isEnrolled: !!data,
     isLoading: isValidating,
     mutate,
   };

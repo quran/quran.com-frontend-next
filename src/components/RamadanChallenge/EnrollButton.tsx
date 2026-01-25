@@ -10,10 +10,11 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useRamadanChallengeStatus from '@/hooks/useRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
 import styles from '@/pages/contentPage.module.scss';
-import { enrollInRamadanChallenge } from '@/utils/auth/api';
+import { createGoal } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
+import { GoalCategory } from 'types/auth/Goal';
 
 interface Props {
   section: string;
@@ -44,7 +45,7 @@ const EnrollButton = ({ section }: Props) => {
 
     setIsEnrollLoading(true);
     try {
-      await enrollInRamadanChallenge();
+      await createGoal({ category: GoalCategory.RAMADAN_CHALLENGE });
       await mutate();
       toast(t('enroll-success'), {
         status: ToastStatus.Success,

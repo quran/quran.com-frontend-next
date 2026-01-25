@@ -238,6 +238,8 @@ export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
 
+export const makeGoalStatusUrl = (params: { type: GoalCategory }) => makeUrl('goal/status', params);
+
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);
 
@@ -299,10 +301,4 @@ export const makeEnrollUserInQuranProgramUrl = (): string =>
 export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
   makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
 
-export const makeRamadanChallengeStatusUrl = (): string => makeUrl('ramadan-challenge/status');
-
-export const makeRamadanChallengeCountUrl = (): string => makeUrl('ramadan-challenge/count');
-
-export const makeRamadanChallengeEnrollUrl = (): string => makeUrl('ramadan-challenge/enroll');
-
-export const makeRamadanChallengeUnenrollUrl = (): string => makeUrl('ramadan-challenge/unenroll');
+export const makeGoalCountUrl = (params: { type: GoalCategory }) => makeUrl('goal/count', params);
