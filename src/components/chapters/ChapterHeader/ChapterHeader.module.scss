@@ -9,7 +9,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 @mixin customButton {
   border: 1px solid transparent;
   background-color: var(--color-background-elevated-new);
-  box-shadow: var(--shadow-small-new);
+  box-shadow: var(--shadow-chapter-header-actions);
 
   svg {
     color: var(--color-success-medium);
