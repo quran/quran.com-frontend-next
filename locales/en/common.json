@@ -45,8 +45,8 @@
     "play-surah": "Play Surah {{surahName}}",
     "select-lng": "Select Language",
     "sidebar-nav-close": "Close Navigation Sidebar",
-    "translation-info": "View translation information",
-    "tooltip-action": "Tooltip action"
+    "tooltip-action": "Tooltip action",
+    "translation-info": "View translation information"
   },
   "audio": {
     "auto-scroll": {
