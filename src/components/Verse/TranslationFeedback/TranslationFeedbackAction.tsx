@@ -24,12 +24,14 @@ interface TranslationFeedbackActionProps {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  isInsideStudyMode?: boolean;
 }
 
 const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  isInsideStudyMode = false,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -46,15 +48,18 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
       return;
     }
 
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
     // Dispatch Redux action to open translation feedback modal
     dispatch(
       openFeedbackModal({
         verseKey: verse.verseKey,
         verse,
         isTranslationView,
-        wasOpenedFromStudyMode: isStudyModeOpen,
+        wasOpenedFromStudyMode: openedFromStudyMode,
         studyModeRestoreState:
-          isStudyModeOpen && studyModeVerseKey
+          openedFromStudyMode && studyModeVerseKey
             ? {
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
@@ -76,6 +81,7 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
     router,
     verse,
     isTranslationView,
+    isInsideStudyMode,
     isStudyModeOpen,
     isSsrMode,
     studyModeVerseKey,

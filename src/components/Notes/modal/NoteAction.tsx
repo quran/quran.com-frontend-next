@@ -21,6 +21,7 @@ interface NoteActionControllerProps {
   verseKey: string;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
+  isInsideStudyMode?: boolean;
 
   /**
    * Indicates whether the current verse has notes.
@@ -47,6 +48,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
   hasNotes: hasNotesProp,
   onActionTriggered,
   isTranslationView,
+  isInsideStudyMode = false,
   children,
 }) => {
   const router = useRouter();
@@ -77,14 +79,17 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
       return;
     }
 
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
     // Dispatch Redux action to open notes modal
     dispatch(
       openNotesModal({
         modalType: VerseActionModalType.ADD_NOTE,
         verseKey,
-        wasOpenedFromStudyMode: isStudyModeOpen,
+        wasOpenedFromStudyMode: openedFromStudyMode,
         studyModeRestoreState:
-          isStudyModeOpen && studyModeVerseKey
+          openedFromStudyMode && studyModeVerseKey
             ? {
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
@@ -106,6 +111,7 @@ const NoteActionController: React.FC<NoteActionControllerProps> = ({
     router,
     verseKey,
     logNoteEvent,
+    isInsideStudyMode,
     isStudyModeOpen,
     isSsrMode,
     studyModeVerseKey,

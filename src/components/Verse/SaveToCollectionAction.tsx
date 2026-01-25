@@ -21,6 +21,7 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   bookmarksRangeUrl?: string;
+  isInsideStudyMode?: boolean;
 }
 
 /**
@@ -33,6 +34,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
   verse,
   isTranslationView,
   bookmarksRangeUrl,
+  isInsideStudyMode = false,
 }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -43,15 +45,18 @@ const SaveToCollectionAction: React.FC<Props> = ({
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
   const onMenuClicked = useCallback(() => {
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
     dispatch(
       openCollectionModal({
         verseKey: `${verse.chapterId}:${verse.verseNumber}`,
         verse,
         isTranslationView,
         bookmarksRangeUrl,
-        wasOpenedFromStudyMode: isStudyModeOpen,
+        wasOpenedFromStudyMode: openedFromStudyMode,
         studyModeRestoreState:
-          isStudyModeOpen && studyModeVerseKey
+          openedFromStudyMode && studyModeVerseKey
             ? {
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
@@ -71,6 +76,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
     verse,
     isTranslationView,
     bookmarksRangeUrl,
+    isInsideStudyMode,
     isStudyModeOpen,
     isSsrMode,
     studyModeVerseKey,

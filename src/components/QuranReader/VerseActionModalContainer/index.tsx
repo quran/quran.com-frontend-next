@@ -13,7 +13,6 @@ import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
   closeStudyMode,
   openStudyMode,
-  openStudyModeSsr,
   selectStudyModeIsOpen,
 } from '@/redux/slices/QuranReader/studyMode';
 import {
@@ -61,11 +60,15 @@ const VerseActionModalContainer: React.FC = () => {
   });
 
   useEffect(() => {
-    if (isOpen && wasOpenedFromStudyMode && isStudyModeOpen && !hasClosedStudyModeRef.current) {
+    if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {
       hasClosedStudyModeRef.current = true;
-      dispatch(closeStudyMode());
+      // For SSR mode, the modal hides itself via Redux state (no action needed)
+      // For regular mode, close the study mode modal
+      if (!studyModeRestoreState?.isSsrMode && isStudyModeOpen) {
+        dispatch(closeStudyMode());
+      }
     }
-  }, [isOpen, wasOpenedFromStudyMode, isStudyModeOpen, dispatch]);
+  }, [isOpen, wasOpenedFromStudyMode, isStudyModeOpen, studyModeRestoreState, dispatch]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -75,18 +78,13 @@ const VerseActionModalContainer: React.FC = () => {
 
   const handleBackToStudyMode = useCallback(() => {
     dispatch(closeVerseActionModal());
-    // In SSR mode, restore SSR Redux state but don't open a client-side modal
-    // The SSR modal is already visible via FakeContentModal
+
+    // For SSR mode, the modal auto-shows when verse action closes (via Redux state)
     if (studyModeRestoreState?.isSsrMode) {
-      dispatch(
-        openStudyModeSsr({
-          verseKey: studyModeRestoreState.verseKey,
-          activeTab: studyModeRestoreState.activeTab,
-          highlightedWordLocation: studyModeRestoreState.highlightedWordLocation,
-        }),
-      );
       return;
     }
+
+    // For regular mode, re-open study mode with saved state
     if (studyModeRestoreState) {
       dispatch(
         openStudyMode({
