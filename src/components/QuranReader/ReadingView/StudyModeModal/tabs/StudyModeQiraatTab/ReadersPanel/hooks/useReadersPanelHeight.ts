@@ -52,16 +52,16 @@ const useReadersPanelHeight = (): UseReadersPanelHeightReturn => {
     };
 
     calculateHeight();
-    const resizeObserver = new ResizeObserver(() => calculateHeight());
-    if (header) resizeObserver.observe(header);
-    if (panel) resizeObserver.observe(panel);
+
+    const modalContentElement = panel?.closest('[data-content-modal]') as HTMLElement | null;
+    const scrollTarget = modalContentElement || window;
+
     window.addEventListener('resize', calculateHeight);
-    window.addEventListener('scroll', calculateHeight);
+    scrollTarget.addEventListener('scroll', calculateHeight);
 
     return () => {
-      resizeObserver.disconnect();
       window.removeEventListener('resize', calculateHeight);
-      window.removeEventListener('scroll', calculateHeight);
+      scrollTarget.removeEventListener('scroll', calculateHeight);
     };
   }, []);
 
