@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import StudyModeVerseText from '../../StudyModeVerseText';
 
 import styles from './RelatedVerses.module.scss';
+import RelatedVerseSkeleton from './RelatedVerseSkeleton';
 
 import { fetcher } from '@/api';
 import TopActions from '@/components/QuranReader/TranslationView/TopActions';
@@ -102,43 +103,41 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
         headerLeftClassName={styles.collapsibleHeader}
       >
         {() => (
-          <div className={styles.collapsibleContent}>
-            {isValidating && !verse && (
-              <div className={styles.loadingContainer}>
-                <span>{t('loading')}</span>
-              </div>
-            )}
+          <>
+            {isValidating && <RelatedVerseSkeleton />}
 
-            {verse && (
-              <div className={styles.verseContainer}>
-                <TopActions verse={verse} bookmarksRangeUrl="" shouldUseModalZIndex />
-                <div className={styles.arabicText}>
-                  <StudyModeVerseText words={getVerseWords(verse)} />
+            {!isValidating && verse && (
+              <div className={styles.collapsibleContent}>
+                <div className={styles.verseContainer}>
+                  <TopActions verse={verse} bookmarksRangeUrl="" shouldUseModalZIndex />
+                  <div className={styles.arabicText}>
+                    <StudyModeVerseText words={getVerseWords(verse)} />
+                  </div>
+                  <div className={styles.translationsContainer}>
+                    {verse.translations?.map((translation: Translation) => (
+                      <TranslationText
+                        key={translation.id}
+                        translationFontScale={quranReaderStyles.translationFontScale}
+                        text={translation.text}
+                        languageId={translation.languageId}
+                        resourceName={
+                          verse.translations?.length > 1 ? translation.resourceName : null
+                        }
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.translationsContainer}>
-                  {verse.translations?.map((translation: Translation) => (
-                    <TranslationText
-                      key={translation.id}
-                      translationFontScale={quranReaderStyles.translationFontScale}
-                      text={translation.text}
-                      languageId={translation.languageId}
-                      resourceName={
-                        verse.translations?.length > 1 ? translation.resourceName : null
-                      }
-                    />
-                  ))}
-                </div>
+                <Button
+                  className={styles.goToVerseButton}
+                  size={ButtonSize.Small}
+                  variant={ButtonVariant.Compact}
+                  onClick={() => onGoToVerse?.(chapterId, verseNumber)}
+                >
+                  {t('go-to-verse')}
+                </Button>
               </div>
             )}
-            <Button
-              className={styles.goToVerseButton}
-              size={ButtonSize.Small}
-              variant={ButtonVariant.Compact}
-              onClick={() => onGoToVerse?.(chapterId, verseNumber)}
-            >
-              {t('go-to-verse')}
-            </Button>
-          </div>
+          </>
         )}
       </Collapsible>
     </div>
