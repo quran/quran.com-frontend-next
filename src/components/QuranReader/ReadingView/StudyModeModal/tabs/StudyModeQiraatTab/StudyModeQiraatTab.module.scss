@@ -14,14 +14,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-block-size: 200px;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
   padding: var(--spacing-large);
 }
 
 .errorText,
 .emptyText {
   font-size: var(--font-size-normal);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   text-align: center;
 }
 
@@ -30,33 +30,26 @@
   gap: var(--spacing-large);
   flex-direction: column;
 
+  padding-block-start: var(--spacing-medium3-px);
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
   @include breakpoints.desktop {
-    flex-direction: row-reverse;
+    flex-direction: row;
   }
 }
 
 .mainContent {
   flex: 1;
   min-inline-size: 0;
-
-  @include breakpoints.desktop {
-    flex: 0.7;
-    order: 1;
-  }
 }
 
 .readersContainer {
   inline-size: 100%;
 
   @include breakpoints.desktop {
-    flex: 0.3;
-    order: 2;
-    max-inline-size: 300px;
-    position: sticky;
+    flex: 1;
+    max-inline-size: calc(var(--spacing-mega-px) * 4);
     inset-block-start: var(--spacing-medium);
-    align-self: flex-start;
-    max-block-size: calc(100vh - 200px);
-    overflow-y: auto;
   }
 }
 

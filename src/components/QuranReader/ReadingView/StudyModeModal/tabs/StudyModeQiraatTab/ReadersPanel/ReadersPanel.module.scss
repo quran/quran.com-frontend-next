@@ -62,7 +62,7 @@
   inline-size: var(--spacing-small2-px);
   block-size: var(--spacing-small2-px);
   color: var(--color-text-faded-new);
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-moderate) ease;
 }
 
 .chevronRotated {
@@ -70,9 +70,13 @@
 }
 
 .readersList {
-  max-block-size: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  max-block-size: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--spacing-xxsmall-px);
+  margin-block-end: var(--spacing-micro-px);
+  transition: max-block-size var(--transition-moderate) ease-in-out;
 
   @include breakpoints.desktop {
     max-block-size: none;
@@ -81,5 +85,5 @@
 }
 
 .readersListVisible {
-  max-block-size: 1000px; // Arbitrary large value for animation
+  max-block-size: 1000px;
 }

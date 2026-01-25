@@ -1,6 +1,9 @@
+@use '@/styles/constants';
+
 .item {
-  padding: var(--spacing-small);
-  border-block-end: 1px solid var(--color-borders-hairline);
+  padding: var(--spacing-xsmall);
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--spacing-xsmall);
 
   &:last-child {
     border-block-end: none;
@@ -17,55 +20,65 @@
 .nameContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xsmall);
 }
 
 .name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
 }
 
 .infoButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xxsmall);
-  border: none;
+  all: unset;
   background: transparent;
   cursor: pointer;
-  border-radius: var(--border-radius-circle);
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease;
+  transition: background-color var(--transition-moderate) ease,
+    transform var(--transition-moderate) ease;
 
-  &:hover {
+  &:where(:hover, :focus-visible) {
     background: var(--color-background-alternative-faded);
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 2px;
-  }
-
-  &:active {
-    transform: scale(0.95);
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
   }
 }
 
 .infoIcon {
-  width: 1rem;
-  height: 1rem;
-  color: var(--color-text-faded);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
+  color: var(--color-grey-icons-new);
 }
 
 .city {
   font-size: var(--font-size-small);
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
+  font-weight: var(--font-weight-medium);
 }
 
 .tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-xsmall);
+  flex-wrap: nowrap;
+  gap: var(--spacing-xxsmall-px);
+  overflow-x: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    flex: 1;
+    min-inline-size: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

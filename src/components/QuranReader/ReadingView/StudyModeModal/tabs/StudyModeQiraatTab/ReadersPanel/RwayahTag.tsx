@@ -16,6 +16,7 @@ interface RwayahTagProps {
 /**
  * Color-coded pill tag for a transmitter (Rwayah) name.
  * Background color matches the parent reading's card color.
+ * @returns {JSX.Element} Rendered RwayahTag component
  */
 const RwayahTag: React.FC<RwayahTagProps> = ({
   transmitter,
@@ -37,18 +38,17 @@ const RwayahTag: React.FC<RwayahTagProps> = ({
   };
 
   return (
-    <span
-      className={classNames(styles.tag, {
-        [styles.clickable]: isClickable,
-      })}
-      style={{ '--tag-color': color } as React.CSSProperties}
+    <button
+      type="button"
+      className={classNames(styles.tag, { [styles.clickable]: isClickable })}
+      style={{ '--tag-color': color } as React.CSSProperties} // eslint-disable-line @typescript-eslint/naming-convention
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role={isClickable ? 'button' : undefined}
       tabIndex={isClickable ? 0 : undefined}
     >
-      {transmitter.name}
-    </span>
+      <span className={styles.tagName}>{transmitter.name}</span>
+    </button>
   );
 };
 

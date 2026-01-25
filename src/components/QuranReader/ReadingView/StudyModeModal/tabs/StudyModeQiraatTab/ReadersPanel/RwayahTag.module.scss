@@ -1,34 +1,37 @@
+@use '@/styles/constants';
+
 .tag {
+  all: unset;
   --tag-color: #ffffff;
 
   display: inline-flex;
+  flex: 1;
   align-items: center;
-  padding: var(--spacing-xxsmall) var(--spacing-small);
-  border-radius: var(--border-radius-pill);
+  justify-content: center;
+  padding: var(--spacing-xxsmall-px);
+  border-radius: var(--border-radius-xsmall-px);
   background: var(--tag-color);
   font-size: var(--font-size-small);
-  color: var(--color-text-default);
-  border: 1px solid var(--color-borders-hairline);
+  color: var(--color-text-default-new);
   white-space: nowrap;
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.2s ease;
+  transition: transform var(--transition-moderate) ease, box-shadow var(--transition-moderate) ease;
+
+  .tagName {
+    line-height: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .clickable {
   cursor: pointer;
 
-  &:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
+  &:where(:hover, :focus-visible) {
+    filter: brightness(var(--opacity-85));
   }
 
-  &:focus-visible {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 2px;
-  }
-
-  &:active {
-    transform: scale(0.98);
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
   }
 }
