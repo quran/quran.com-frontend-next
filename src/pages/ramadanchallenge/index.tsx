@@ -13,7 +13,7 @@ import PageContainer from '@/components/PageContainer';
 import EnrollButton from '@/components/RamadanChallenge/EnrollButton';
 import EnrollmentCount from '@/components/RamadanChallenge/EnrollmentCount';
 import Link from '@/dls/Link/Link';
-import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
+import { getRamadanChallengeOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadanchallenge/ramadanchallenge.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -30,7 +30,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description="Join the Meaningful Memorization Challenge this Ramadan! One ayah a day with word-by-word meaning, tafsir, and reflection. Start today and deepen your connection with Surah Al-Mulk."
-        image={getPreparingForRamadanOgImageUrl({
+        image={getRamadanChallengeOgImageUrl({
           locale: lang,
         })}
       />

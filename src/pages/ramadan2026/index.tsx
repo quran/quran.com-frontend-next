@@ -13,7 +13,7 @@ import PageContainer from '@/components/PageContainer';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
-import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
+import { getRamadan2026OgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan2026/ramadan2026.module.scss';
 import newFeatureImage from '@/public/images/new-features.png';
@@ -44,7 +44,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description="Prepare your heart for Ramadan with Quran-centered challenges, learning plans, goal-setting, and more. Join us today!"
-        image={getPreparingForRamadanOgImageUrl({
+        image={getRamadan2026OgImageUrl({
           locale: lang,
         })}
       />
