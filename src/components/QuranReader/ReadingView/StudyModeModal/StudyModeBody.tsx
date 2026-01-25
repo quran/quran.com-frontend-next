@@ -38,6 +38,7 @@ interface StudyModeBodyProps {
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
   tafsirIdOrSlug?: string;
+  onGoToVerse?: (chapterId: string, verseNumber: string) => void;
 }
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
@@ -59,13 +60,19 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   questionId,
   questionsInitialData,
   tafsirIdOrSlug,
+  onGoToVerse,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
   const { containerRef, bottomActionsRef, tabContentRef, hasScrolledDown, showScrollGradient } =
     useStudyModeScroll({ verseKey: verse.verseKey, activeTab });
 
-  const tabs = useStudyModeTabs(activeTab, verse.verseKey, onTabChange);
+  const tabs = useStudyModeTabs({
+    activeTab,
+    verseKey: verse.verseKey,
+    onTabChange,
+    hasRelatedVerses: verse.hasRelatedVerses,
+  });
 
   return (
     <div ref={containerRef} className={styles.container}>
@@ -134,6 +141,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 questionId={questionId}
                 questionsInitialData={questionsInitialData}
                 tafsirIdOrSlug={tafsirIdOrSlug}
+                onGoToVerse={onGoToVerse}
               />
             </div>
           );

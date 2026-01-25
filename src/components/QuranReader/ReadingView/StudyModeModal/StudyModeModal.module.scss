@@ -36,6 +36,8 @@ div.mobileBottomSheetOverlay {
 }
 
 .innerContent {
+  min-block-size: 0;
+  flex: 1 1;
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;

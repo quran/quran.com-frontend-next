@@ -219,6 +219,15 @@ export const getVerseLessonNavigationUrl = (verseKey: string): string => `/${ver
 export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${verseKey}/answers`;
 
 /**
+ * Get the href link to related verse of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/related-verse`;
+
+/**
  * Get the href link to a specific answer with its associated verse key.
  *
  * @param {string} questionId - The ID of the question
