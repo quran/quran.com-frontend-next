@@ -27,6 +27,7 @@ interface Props {
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;
+  shouldUseModalZIndex?: boolean;
 }
 
 const OverflowVerseActionsMenu: React.FC<Props> = ({
@@ -34,6 +35,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isTranslationView = true,
   onActionTriggered,
   bookmarksRangeUrl,
+  shouldUseModalZIndex = false,
 }) => {
   const { t } = useTranslation('common');
 
@@ -77,6 +79,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         }
         isModal
         isPortalled
+        shouldUseModalZIndex={shouldUseModalZIndex}
         onOpenChange={onOpenModalChange}
       >
         <OverflowVerseActionsMenuBody

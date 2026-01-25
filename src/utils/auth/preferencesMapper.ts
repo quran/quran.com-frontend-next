@@ -61,6 +61,8 @@ const getPreferenceGroupValue = (
       wordByWordContentType: prefs.wordByWordTooltipContentType,
       // wordByWordDisplay is now auto-computed, don't send
       selectedReadingTranslation: prefs.selectedReadingTranslation,
+      selectedReflectionLanguages: prefs.selectedReflectionLanguages,
+      selectedLessonLanguages: prefs.selectedLessonLanguages,
     };
   }
 

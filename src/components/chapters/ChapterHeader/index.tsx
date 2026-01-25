@@ -11,8 +11,9 @@ import ChapterTitle from './components/ChapterTitle';
 import ReadingModeActions from './ReadingModeActions';
 
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
+import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import Language from '@/types/Language';
@@ -74,23 +75,27 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
             <ReadingModeActions />
           ) : (
             <Button
-              type={ButtonType.Secondary}
-              size={ButtonSize.Small}
+              variant={ButtonVariant.ModeToggle}
+              size={ButtonSize.XSmall}
               shape={ButtonShape.Pill}
               onClick={onChangeTranslationClicked}
               ariaLabel={t('change-translation')}
-              tooltip={t('change-translation')}
               className={styles.changeTranslationButton}
               contentClassName={styles.translationName}
               suffix={
-                translationsCount > 1 && (
-                  <span className={styles.translationsCount}>
-                    {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
-                  </span>
-                )
+                <>
+                  {translationsCount > 1 && (
+                    <span className={styles.translationsCount}>
+                      {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
+                    </span>
+                  )}
+                  <ChevronDownIcon className={styles.dropdownIcon} />
+                </>
               }
             >
-              <span>{translationName}</span>
+              <span>
+                {t('common:translation')}: {translationName}
+              </span>
             </Button>
           )}
         </div>

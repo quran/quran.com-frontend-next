@@ -4,6 +4,7 @@ import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
 
 import styles from './Popover.module.scss';
+import PopoverContentBody from './PopoverContentBody';
 
 import { TooltipType } from '@/dls/Tooltip';
 
@@ -39,6 +40,10 @@ interface Props {
   isContainerSpan?: boolean;
   stopPropagation?: boolean;
   tooltipType?: TooltipType;
+  icon?: ReactNode;
+  onIconClick?: () => void;
+  iconAriaLabel?: string;
+  shouldContentBeClickable?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -60,6 +65,10 @@ const Popover: React.FC<Props> = ({
   isContainerSpan = false,
   stopPropagation = false,
   tooltipType,
+  icon,
+  onIconClick,
+  iconAriaLabel,
+  shouldContentBeClickable = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -70,20 +79,24 @@ const Popover: React.FC<Props> = ({
       className={classNames(styles.content, {
         [styles.tooltipContent]: useTooltipStyles,
         [styles.info]: tooltipType === TooltipType.INFO,
+        [styles.success]: tooltipType === TooltipType.SUCCESS,
         [contentStyles]: contentStyles,
       })}
       {...(stopPropagation && {
         onClick: (e) => e.stopPropagation(),
-        // Only stop propagation for non-navigation keys (example: Enter, Space)
         onKeyDown: (e) => {
-          // Allow Tab and Escape to propagate for accessibility
-          if (e.key !== 'Tab' && e.key !== 'Escape') {
-            e.stopPropagation();
-          }
+          if (e.key !== 'Tab' && e.key !== 'Escape') e.stopPropagation();
         },
       })}
     >
-      {children}
+      <PopoverContentBody
+        icon={icon}
+        onIconClick={onIconClick}
+        iconAriaLabel={iconAriaLabel}
+        shouldContentBeClickable={shouldContentBeClickable}
+      >
+        {children}
+      </PopoverContentBody>
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );

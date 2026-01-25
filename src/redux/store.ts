@@ -36,9 +36,11 @@ import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
+import studyMode from './slices/QuranReader/studyMode';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
+import verseActionModal from './slices/QuranReader/verseActionModal';
 import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
@@ -49,7 +51,7 @@ import getPersistedTheme from './utils/getPersistedTheme';
 
 const persistConfig = {
   key: 'root',
-  version: 38,
+  version: 40,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -107,6 +109,8 @@ export const rootReducer = combineReducers({
   mediaMaker,
   microphone,
   guestBookmark,
+  studyMode,
+  verseActionModal,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

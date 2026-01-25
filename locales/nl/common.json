@@ -45,6 +45,7 @@
     "play-surah": "Surah {{surahName}}afspelen",
     "select-lng": "Selecteer taal",
     "sidebar-nav-close": "Navigatie zijbalk sluiten",
+    "tooltip-action": "Tooltip-actie",
     "translation-info": "Bekijk vertaal informatie"
   },
   "audio": {

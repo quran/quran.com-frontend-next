@@ -45,6 +45,7 @@
     "play-surah": "{{surahName}} Ayeti Seslendir",
     "select-lng": "Dil Seçin",
     "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat",
+    "tooltip-action": "İpucu eylemi",
     "translation-info": "Çeviri bilgilerini görüntüle"
   },
   "audio": {

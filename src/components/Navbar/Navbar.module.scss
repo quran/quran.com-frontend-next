@@ -14,6 +14,11 @@
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);
   will-change: transform;
+
+  @include breakpoints.smallerThanTablet {
+    // Faster expand with ease-out for smooth landing
+    transition: transform var(--transition-fast) ease-out var(--mobile-stagger-delay-navbar);
+  }
 }
 
 .hiddenNav {
@@ -23,5 +28,7 @@
     // TODO: we should add the banner height here if it's shown
     // transform: translate3d(0, calc(-1 * (var(--navbar-container-height) + var(--banner-height))), 0);
     transform: translate3d(0, calc(-1 * (var(--navbar-container-height))), 0);
+    // Fast collapse with ease-in
+    transition: transform var(--transition-fast) ease-in 0ms;
   }
 }

@@ -10,7 +10,6 @@ import TranslationPageVerse from './TranslationPageVerse';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
-import { QuestionsData } from '@/utils/auth/api';
 import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
@@ -25,7 +24,6 @@ interface Props {
   initialData: VersesResponse;
   verseIdx: number;
   totalVerses: number;
-  questionsData?: Record<string, QuestionsData>;
 }
 
 const TranslationViewVerse: React.FC<Props> = ({
@@ -39,11 +37,10 @@ const TranslationViewVerse: React.FC<Props> = ({
   selectedTranslations,
   verseIdx,
   totalVerses,
-  questionsData,
 }) => {
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
-  const { verse, bookmarksRangeUrl, notesRange } = useDedupedFetchVerse({
+  const { verse, bookmarksRangeUrl } = useDedupedFetchVerse({
     verseIdx,
     quranReaderDataType,
     quranReaderStyles,
@@ -72,8 +69,6 @@ const TranslationViewVerse: React.FC<Props> = ({
         verseIdx={verseIdx}
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
-        notesRange={notesRange}
-        questionsData={questionsData}
         quranReaderDataType={quranReaderDataType}
       />
     </div>

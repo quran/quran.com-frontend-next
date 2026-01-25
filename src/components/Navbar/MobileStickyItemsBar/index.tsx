@@ -20,12 +20,17 @@ const MobileStickyItemsBar = () => {
   const isNavDrawerOpen = useSelector(selectIsNavigationDrawerOpen);
   const isSettingsDrawerOpen = useSelector(selectIsSettingsDrawerOpen);
   const isDrawerOpen = isNavDrawerOpen || isSettingsDrawerOpen;
-  const show = useShowOnScrollUp();
+  // Custom thresholds for mobile sticky bar:
+  // - topThreshold: 100px (don't show until scrolled past navbar area)
+  // - scrollDistance: 50px (default sensitivity for scroll-up detection)
+  // - hideThreshold: 200px (hide early for clean handoff to full navbar)
+  const { show, nearTop } = useShowOnScrollUp(100, 50, 200);
+  const isVisible = show && !nearTop;
   const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
 
   return (
     <div
-      className={classNames(styles.container, styles[show ? 'visible' : 'hidden'], {
+      className={classNames(styles.container, styles[isVisible ? 'visible' : 'hidden'], {
         [styles.dimmed]: isDrawerOpen,
       })}
       inert={isDrawerOpen || undefined}

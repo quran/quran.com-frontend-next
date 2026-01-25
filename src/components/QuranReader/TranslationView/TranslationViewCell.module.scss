@@ -1,15 +1,18 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$arabicVerseTopMargin: 2.75rem;
-
 .cellContainer {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   direction: ltr;
-  padding: var(--spacing-small);
+  padding-block: var(--spacing-medium2-px);
+  padding-inline: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
+
+  @include breakpoints.tablet {
+    padding-block: var(--spacing-large-px);
+  }
 }
 
 .firstCellWithHeader {
@@ -26,27 +29,31 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .actionContainer {
-  margin-block-start: var(--gap-size);
   display: flex;
   direction: ltr;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-
-  @include breakpoints.smallerThanTablet {
-    gap: var(--spacing-xxsmall-px);
-  }
+  gap: var(--spacing-xxsmall-px);
+  block-size: var(--spacing-medium2-px);
 }
 
 .arabicVerseContainer {
   direction: rtl;
-  padding-block-start: var(--spacing-xxsmall);
-  margin-block-start: $arabicVerseTopMargin;
-  margin-block-end: var(--gap-size);
+  margin-block-start: var(--spacing-large-px);
+  margin-block-end: var(--spacing-medium-plus-px);
+
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-xxlarge-px);
+  }
 }
 
 .verseTranslationsContainer {
-  margin-block-end: calc(var(--spacing-medium2) * 3);
+  margin-block-end: var(--spacing-large-px);
+
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-xxlarge-px);
+  }
 }
 
 .verseTranslationContainer {
@@ -99,7 +106,7 @@ $arabicVerseTopMargin: 2.75rem;
 }
 
 .menuOffset {
-  margin-inline-end: calc(var(--spacing-medium) * 1.125);
+  margin-inline-end: 10vw;
 }
 
 .icon {
@@ -150,7 +157,6 @@ $arabicVerseTopMargin: 2.75rem;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
   overflow-x: auto;
   inline-size: 100%;
   -webkit-overflow-scrolling: touch;

@@ -45,6 +45,7 @@
     "play-surah": "সূরা {{surahName}} প্লে করুন",
     "select-lng": "ভাষা নির্বাচন কর",
     "sidebar-nav-close": "নেভিগেশন সাইডবার বন্ধ করুন",
+    "tooltip-action": "টুলটিপ অ্যাকশন",
     "translation-info": "অনুবাদ তথ্য দেখুন"
   },
   "audio": {

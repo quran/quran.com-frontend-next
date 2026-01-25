@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 
-import Answer from '../Answer';
+import Answer from '../Answer/AnswerBody';
 import QuestionHeader from '../QuestionHeader';
 
 import styles from './QuestionsList.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import Collapsible from '@/dls/Collapsible/Collapsible';
-import LoadingSpinner from '@/dls/Spinner/Spinner';
+import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
+import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import { logEvent } from '@/utils/eventLogger';
@@ -21,6 +20,7 @@ type Props = {
   hasMore?: boolean;
   isLoadingMore?: boolean;
   onLoadMore?: () => void;
+  baseUrl?: string;
 };
 
 const QuestionsList: React.FC<Props> = ({
@@ -28,10 +28,16 @@ const QuestionsList: React.FC<Props> = ({
   hasMore = false,
   isLoadingMore = false,
   onLoadMore,
+  baseUrl,
 }) => {
-  const { lang } = useTranslation();
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
   const router = useRouter();
+
+  const loadMoreTriggerRef = useInfiniteScroll({
+    hasMore,
+    isLoading: isLoadingMore,
+    onLoadMore,
+  });
 
   const onQuestionCollapseOpenChange = (
     isOpen: boolean,
@@ -44,9 +50,10 @@ const QuestionsList: React.FC<Props> = ({
     setOpenQuestionId(isOpen ? questionId : null);
     if (isOpen) {
       const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
-      fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), lang);
+      fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), router.locale);
     } else {
-      fakeNavigate(router.asPath, router.locale);
+      const urlToNavigate = baseUrl || router.asPath;
+      fakeNavigate(urlToNavigate, router.locale);
     }
   };
 
@@ -54,6 +61,8 @@ const QuestionsList: React.FC<Props> = ({
     <div className={styles.container}>
       {questions?.map((question) => (
         <Collapsible
+          direction={CollapsibleDirection.Right}
+          headerClassName={styles.headerClassName}
           title={
             <QuestionHeader body={question.body} theme={question.theme} type={question.type} />
           }
@@ -72,18 +81,16 @@ const QuestionsList: React.FC<Props> = ({
           }}
         </Collapsible>
       ))}
-      {hasMore && (
-        <div className={styles.loadMoreContainer}>
-          <Button
-            variant={ButtonVariant.Compact}
-            shape={ButtonShape.Pill}
-            onClick={onLoadMore}
-            isDisabled={isLoadingMore}
-          >
-            {isLoadingMore ? <LoadingSpinner /> : 'Load More'}
-          </Button>
-        </div>
-      )}
+
+      {hasMore &&
+        onLoadMore &&
+        (isLoadingMore ? (
+          <div className={styles.loadingContainer}>
+            <LoadingSpinner size={SpinnerSize.Large} />
+          </div>
+        ) : (
+          <div ref={loadMoreTriggerRef} className={styles.infiniteScrollTrigger} />
+        ))}
     </div>
   );
 };

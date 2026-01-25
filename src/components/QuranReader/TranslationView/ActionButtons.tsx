@@ -18,10 +18,10 @@ import Verse from 'types/Verse';
 type ActionButtonsProps = {
   verse: Verse;
   bookmarksRangeUrl: string;
-  hasNotes?: boolean;
   isTranslationView?: boolean;
   openShareModal: () => void;
   hasTranslationsButton?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 /**
@@ -32,10 +32,10 @@ type ActionButtonsProps = {
 const ActionButtons: React.FC<ActionButtonsProps> = ({
   verse,
   bookmarksRangeUrl,
-  hasNotes,
   isTranslationView = true,
   openShareModal,
   hasTranslationsButton = false,
+  shouldUseModalZIndex = false,
 }) => {
   return (
     <>
@@ -83,7 +83,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           </ActionItem>
 
           <ActionItem>
-            <TranslationViewNoteAction verseKey={verse.verseKey} hasNotes={hasNotes} />
+            <TranslationViewNoteAction verseKey={verse.verseKey} />
           </ActionItem>
 
           <ActionItem>
@@ -91,6 +91,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               bookmarksRangeUrl={bookmarksRangeUrl}
               verse={verse}
               isTranslationView={isTranslationView}
+              shouldUseModalZIndex={shouldUseModalZIndex}
             />
           </ActionItem>
         </>

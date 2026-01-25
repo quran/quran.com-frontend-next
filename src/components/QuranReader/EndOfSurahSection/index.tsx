@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './EndOfSurahSection.module.scss';
@@ -10,12 +10,10 @@ import ReadMoreCard from './ReadMoreCard';
 import StreakGoalCard from './StreakGoalCard';
 
 import { getChapterMetadata } from '@/api';
-import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
-import BottomActionsModals, {
-  ModalType,
-} from '@/components/QuranReader/TranslationView/BottomActionsModals';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import useScrollToTop from '@/hooks/useScrollToTop';
-import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { makeChapterMetadataUrl } from '@/utils/apiPaths';
 
@@ -25,53 +23,23 @@ interface EndOfSurahSectionProps {
 
 const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const selectedTafsirs = useSelector(selectSelectedTafsirs);
+  const dispatch = useDispatch();
   const scrollToTop = useScrollToTop();
-  const questionsData = usePageQuestions();
-  const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
-  // For Tafsir, Reflections, Lessons - always use verse 1
+  // For Tafsir, Reflections, Lessons, Answers - always use verse 1
   const verseKey = `${chapterNumber}:1`;
 
-  // For Answers - find the first verse in the chapter that has questions
-  const questionsVerseKey = React.useMemo(() => {
-    if (!questionsData) return verseKey;
-
-    const verseWithQuestions = Object.keys(questionsData).find((key) => {
-      const [chapter] = key.split(':');
-      return Number(chapter) === chapterNumber && questionsData[key]?.total > 0;
-    });
-
-    return verseWithQuestions || verseKey;
-  }, [questionsData, chapterNumber, verseKey]);
-
-  // Check if the verse used for Answers has clarification questions
-  const hasClarificationQuestion = React.useMemo(() => {
-    if (!questionsData) return false;
-    return !!questionsData[questionsVerseKey]?.types?.[QuestionType.CLARIFICATION];
-  }, [questionsData, questionsVerseKey]);
-
-  // Check if any verse in the chapter has questions
-  const hasQuestions = React.useMemo(() => {
-    if (!questionsData) return false;
-
-    return Object.keys(questionsData).some((key) => {
-      const [chapter] = key.split(':');
-      return Number(chapter) === chapterNumber && questionsData[key]?.total > 0;
-    });
-  }, [questionsData, chapterNumber]);
+  const { data: questionData } = useBatchedCountRangeQuestions(verseKey);
+  const hasQuestions = questionData?.total > 0;
+  const hasClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
 
   const { data: metadataResponse } = useSWRImmutable(
     makeChapterMetadataUrl(String(chapterNumber), lang),
     () => getChapterMetadata(String(chapterNumber), lang),
   );
 
-  const handleModalOpen = (modalType: ModalType) => {
-    setOpenedModal(modalType);
-  };
-
-  const handleCloseModal = () => {
-    setOpenedModal(null);
+  const handleStudyModeOpen = (tabId: StudyModeTabId, targetVerseKey: string) => {
+    dispatch(openStudyMode({ verseKey: targetVerseKey, activeTab: tabId }));
   };
 
   const chapterMetadata = metadataResponse?.chapterMetadata;
@@ -93,26 +61,14 @@ const EndOfSurahSection: React.FC<EndOfSurahSectionProps> = ({ chapterNumber }) 
           cardClassName={styles.card}
           chapterNumber={chapterNumber}
           verseKey={verseKey}
-          questionsVerseKey={questionsVerseKey}
           suggestions={chapterMetadata?.suggestions}
           hasQuestions={hasQuestions}
           hasClarificationQuestion={hasClarificationQuestion}
-          onModalOpen={handleModalOpen}
+          onStudyModeOpen={handleStudyModeOpen}
         />
 
         <StreakGoalCard cardClassName={styles.card} />
       </div>
-
-      <BottomActionsModals
-        chapterId={String(chapterNumber)}
-        verseNumber="1"
-        verseKey={openedModal === ModalType.QUESTIONS ? questionsVerseKey : verseKey}
-        tafsirs={selectedTafsirs}
-        openedModal={openedModal}
-        hasQuestions={hasQuestions}
-        isTranslationView
-        onCloseModal={handleCloseModal}
-      />
     </div>
   );
 };

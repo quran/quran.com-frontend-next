@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const verseLessonsUrl = makeAyahReflectionsUrl({
       surahId: chapterNumber,
       ayahNumber: verseNumber,
-      locale,
+      locales: [locale],
       postTypeIds: [LESSON_POST_TYPE_ID],
     });
 

@@ -25,6 +25,7 @@ interface EditNoteModalProps {
   onMyNotes: () => void;
   isModalOpen: boolean;
   onModalClose: () => void;
+  onBack?: () => void;
 }
 
 const EditNoteModal: React.FC<EditNoteModalProps> = ({
@@ -32,6 +33,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
   onMyNotes,
   isModalOpen,
   onModalClose,
+  onBack,
 }) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('notes');
@@ -82,7 +84,7 @@ const EditNoteModal: React.FC<EditNoteModalProps> = ({
         <button
           type="button"
           className={classNames(modalStyles.headerButton, modalStyles.title)}
-          onClick={onMyNotes}
+          onClick={onBack || onMyNotes}
           data-testid="edit-modal-back-button"
         >
           <IconContainer

@@ -4,6 +4,12 @@ import { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR, { useSWRConfig } from 'swr';
 
+import {
+  UseBookmarkCollectionsProps,
+  UseBookmarkCollectionsReturn,
+  toSafeArray,
+} from './useBookmarkCollections.types';
+
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useSurahBookmarks from '@/hooks/auth/useSurahBookmarks';
@@ -51,7 +57,10 @@ const useBookmarkCollections = ({
   const { data: collectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
     isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
     () => getBookmarkCollections(mushafId, key, type, verseNumber),
-    mutatingFetcherConfig,
+    {
+      ...mutatingFetcherConfig,
+      revalidateOnFocus: false, // Prevent excessive refetches on window focus
+    },
   );
   const showErrorToast = (err: unknown) => {
     toast(t(isBookmarkSyncError(err) ? 'error.bookmark-sync' : 'error.general'), {
@@ -152,7 +161,8 @@ const useBookmarkCollections = ({
     }
   };
   return {
-    collectionIds: collectionIds || [],
+    collectionIds,
+    isReady,
     addToCollection,
     removeFromCollection,
     mutateBookmarkCollections: (newIds?: string[]) =>

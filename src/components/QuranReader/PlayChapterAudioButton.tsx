@@ -8,7 +8,7 @@ import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
@@ -68,9 +68,9 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     return (
       <div className={classNames(styles.container, styles.playChapterAudioButton)}>
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
+          size={ButtonSize.XSmall}
           prefix={isRTL ? undefined : <Spinner />}
           suffix={isRTL ? <Spinner /> : undefined}
           hasSidePadding={false}
@@ -87,23 +87,24 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     <div className={classNames(styles.container, styles.playChapterAudioButton)}>
       {isPlayingCurrentChapter ? (
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
+          size={ButtonSize.XSmall}
           prefix={isRTL ? undefined : <PauseIcon />}
           suffix={isRTL ? <PauseIcon /> : undefined}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
+          isSelected
           data-testid="pause-button"
         >
           {t('listen')}
         </Button>
       ) : (
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
+          size={ButtonSize.XSmall}
           prefix={isRTL ? undefined : <PlayIcon />}
           suffix={isRTL ? <PlayIcon /> : undefined}
           onClick={play}
