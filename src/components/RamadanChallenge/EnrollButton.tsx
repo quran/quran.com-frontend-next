@@ -47,7 +47,7 @@ const EnrollButton = ({ section }: Props) => {
     try {
       await addReadingGoal({ category: GoalCategory.RAMADAN_CHALLENGE });
       await mutate();
-      toast('Enrolled successfully! You may see a welcome email in your inbox.', {
+      toast(t('enroll-success'), {
         status: ToastStatus.Success,
       });
     } catch (error) {
@@ -55,16 +55,16 @@ const EnrollButton = ({ section }: Props) => {
         transactionName: 'ramadan_challenge_enroll',
         metadata: { section },
       });
-      toast('Failed to enroll, please try again later.', { status: ToastStatus.Error });
+      toast(t('enroll-error'), { status: ToastStatus.Error });
     } finally {
       setIsEnrollLoading(false);
     }
   };
 
   const getButtonText = () => {
-    if (isEnrollLoading) return 'Loading...';
-    if (isEnrolled) return 'Subscribed!';
-    return 'Join the Surah Al-Mulk Challenge';
+    if (isEnrollLoading) return t('loading');
+    if (isEnrolled) return t('enrolled');
+    return t('join-challenge');
   };
 
   if (!isLoggedIn()) {
