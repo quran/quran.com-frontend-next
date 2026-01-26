@@ -91,6 +91,7 @@
 
 .readersList {
   overflow: hidden;
+  max-block-size: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--spacing-xxsmall-px);
@@ -104,6 +105,7 @@
   @include breakpoints.desktop {
     overflow-y: auto;
     overflow-x: hidden;
+    max-block-size: none;
     padding-block-end: var(--spacing-xlarge-px);
     padding-inline-end: var(--spacing-micro-px);
   }

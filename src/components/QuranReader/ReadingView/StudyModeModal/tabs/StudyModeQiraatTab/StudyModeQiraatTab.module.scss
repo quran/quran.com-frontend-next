@@ -2,11 +2,7 @@
 
 .container {
   padding-block-start: var(--spacing-medium);
-  padding-block-end: var(--spacing-max);
-
-  @include breakpoints.desktop {
-    padding-block-end: 0;
-  }
+  padding-block-end: var(--spacing-mega);
 }
 
 .loadingContainer,
@@ -29,6 +25,7 @@
 .content {
   display: flex;
   column-gap: var(--spacing-large);
+  row-gap: var(--spacing-micro);
   flex-direction: column;
 
   padding-block-start: var(--spacing-medium3-px);
@@ -42,11 +39,13 @@
 .mainContent {
   flex: 1;
   min-inline-size: 0;
+}
 
-  padding-block-end: var(--spacing-medium);
-  @include breakpoints.desktop {
-    padding-block-end: var(--spacing-xlarge-px);
-  }
+.readingsHeader {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-medium-px);
 }
 
 .readersContainer {

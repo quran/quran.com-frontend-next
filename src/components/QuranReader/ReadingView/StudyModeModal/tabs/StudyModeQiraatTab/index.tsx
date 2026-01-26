@@ -190,6 +190,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
         </div>
 
         <div className={styles.mainContent}>
+          <div className={styles.readingsHeader}>{t('quran-reader:qiraat.readings')}:</div>
           {selectedJuncture && <QiraahCardList readings={selectedJuncture.readings} />}
 
           {selectedJuncture?.commentary && (
