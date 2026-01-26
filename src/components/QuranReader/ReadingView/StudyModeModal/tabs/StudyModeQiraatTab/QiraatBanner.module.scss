@@ -6,8 +6,12 @@
   color: var(--color-text-default-new);
   font-size: var(--font-size-normal);
   margin-block-end: var(--spacing-medium2);
-  gap: var(--spacing-xsmall);
   flex-wrap: wrap;
+  gap: var(--spacing-xxsmall);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-xsmall);
+  }
 }
 
 .icon {
