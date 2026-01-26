@@ -81,7 +81,7 @@ const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
       {reader.city && <div className={styles.city}>{reader.city}</div>}
 
       <div className={styles.content}>
-        <h3 className={styles.bioTitle}>{t('qiraat.reader-bio')}</h3>
+        <h3 className={styles.bioTitle}>{t('quran-reader:qiraat.reader-bio')}</h3>
         {reader.bio ? (
           <p className={styles.bioText}>{reader.bio}</p>
         ) : (

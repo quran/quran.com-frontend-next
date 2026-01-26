@@ -48,7 +48,7 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
               onClick={() => onJunctureSelect(juncture.id)}
             >
               <span className={styles.tabText}>
-                {t(`qiraat.juncture`)} {toLocalizedNumber(index + 1, lang)}
+                {t(`quran-reader:qiraat.juncture`)} {toLocalizedNumber(index + 1, lang)}
               </span>
             </button>
           );
@@ -61,7 +61,7 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
         role="tabpanel"
         aria-labelledby={`juncture-tab-${selectedJunctureId}`}
       >
-        <div className={styles.label}>{t(`qiraat.juncture`)}:</div>
+        <div className={styles.label}>{t(`quran-reader:qiraat.juncture`)}:</div>
         <div className={styles.value} dir="auto">
           {selectedJuncture?.textSimple || selectedJuncture?.text}
         </div>

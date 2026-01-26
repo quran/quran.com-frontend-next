@@ -155,7 +155,7 @@ export const useStudyModeTabs = ({
     },
     {
       id: StudyModeTabId.QIRAAT,
-      label: t('qiraat.title'),
+      label: t('quran-reader:qiraat.title'),
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
       condition: hasQiraat,

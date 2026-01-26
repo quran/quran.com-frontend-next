@@ -159,5 +159,17 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
+  "qiraat": {
+    "title": "Qiraat",
+    "what-are": "What are Qiraat?",
+    "learn-more": "Click here to learn more",
+    "readers": "Readers",
+    "no-junctures": "No variant readings available for this verse",
+    "transliteration": "Transliteration",
+    "translation": "Translation",
+    "explanation": "Explanation:",
+    "reader-bio": "Reader Biography",
+    "juncture": "Juncture"
+  }
 }

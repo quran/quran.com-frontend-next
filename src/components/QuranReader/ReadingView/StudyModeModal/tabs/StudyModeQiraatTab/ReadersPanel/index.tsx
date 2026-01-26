@@ -79,7 +79,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
         data-readers-header
       >
         <div className={styles.headerTitleContainer}>
-          <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
+          <span className={styles.headerTitle}>{t('quran-reader:qiraat.readers')}</span>
           <span className={styles.readingColors}>{readingColors}</span>
         </div>
         <ChevronDownIcon
@@ -95,7 +95,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
         className={classNames(styles.header, styles.desktop)}
         data-readers-header
       >
-        <span className={styles.headerTitle}>{t('qiraat.readers')}</span>
+        <span className={styles.headerTitle}>{t('quran-reader:qiraat.readers')}</span>
         <span className={styles.readingColors}>{readingColors}</span>
       </div>
 

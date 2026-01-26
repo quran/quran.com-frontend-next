@@ -142,7 +142,7 @@ const BottomActions = ({
     },
     {
       id: TabId.QIRAAT,
-      label: t('qiraat.title'),
+      label: t('quran-reader:qiraat.title'),
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
       condition: hasQiraatData,

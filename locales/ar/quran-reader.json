@@ -159,5 +159,18 @@
   "verse-preview-title": "معاينة:",
   "verses-range": "نطاق الآيات",
   "view-on-quran-reflect": "عرض على QuranReflect",
-  "wbw-helper-text": "حدد الخيارات لعرض الترجمة، والتهجئة الصوتية، و/أو التلاوة لكل كلمة."
+  "wbw-helper-text": "حدد الخيارات لعرض الترجمة، والتهجئة الصوتية، و/أو التلاوة لكل كلمة.",
+  "qiraat": {
+    "title": "القراءات",
+    "what-are": "ما هي القراءات؟",
+    "learn-more": "اعرف المزيد",
+    "readers": "القراء",
+    "no-junctures": "لا توجد قراءات مختلفة لهذه الآية",
+    "transliteration": "النطق الصوتي",
+    "translation": "الترجمة",
+    "explanation": "الشرح",
+    "combined-explanation": "الشرح المجمع",
+    "reader-bio": "السيرة الذاتية للقارئ",
+    "juncture": "موضع الاختلاف"
+  }
 }

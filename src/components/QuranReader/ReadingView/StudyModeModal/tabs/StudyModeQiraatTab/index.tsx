@@ -194,7 +194,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
 
           {selectedJuncture?.commentary && (
             <div className={styles.commentarySection}>
-              <h3 className={styles.commentaryTitle}>{t('qiraat.explanation')}</h3>
+              <h3 className={styles.commentaryTitle}>{t('quran-reader:qiraat.explanation')}</h3>
               <p className={styles.commentaryText}>{selectedJuncture.commentary}</p>
             </div>
           )}

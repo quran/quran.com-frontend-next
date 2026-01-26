@@ -26,7 +26,7 @@ const QiraatBanner: React.FC = () => {
     <div className={styles.banner}>
       <HelpCircleIcon className={styles.icon} />
 
-      <span className={styles.text}>{t('qiraat.what-are')}</span>
+      <span className={styles.text}>{t('quran-reader:qiraat.what-are')}</span>
 
       <Link
         href={LEARN_MORE_URL}
@@ -35,7 +35,7 @@ const QiraatBanner: React.FC = () => {
         onClick={handleLearnMoreClick}
         className={styles.learnMore}
       >
-        {t('qiraat.learn-more')}
+        {t('quran-reader:qiraat.learn-more')}
       </Link>
     </div>
   );
