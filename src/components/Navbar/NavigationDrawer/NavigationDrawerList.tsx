@@ -10,6 +10,7 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
 import IconCode from '@/icons/code.svg';
+import DiamondIcon from '@/icons/diamond.svg';
 import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
@@ -21,6 +22,7 @@ import {
   MY_QURAN_URL,
   RADIO_URL,
   RECITERS_URL,
+  ROUTES,
 } from '@/utils/navigation';
 
 interface NavigationDrawerListProps {
@@ -43,6 +45,13 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   const continueReadingUrl = useGetContinueReadingUrl();
 
   const ITEMS = [
+    {
+      title: t('ramadan2026'),
+      icon: <DiamondIcon />,
+      href: ROUTES.RAMADAN_2026,
+      eventName: 'navigation_drawer_ramadan2026',
+      isEvent: true,
+    },
     {
       title: t('read'),
       icon: <IconHome />,
@@ -98,6 +107,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
           icon={item.icon}
           href={item.href}
           onClick={() => handleItemClick(item.eventName)}
+          isEvent={item.isEvent}
         />
       ))}
       <MoreMenuCollapsible
