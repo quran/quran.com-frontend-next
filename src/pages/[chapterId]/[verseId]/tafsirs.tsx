@@ -42,14 +42,14 @@ import { makeVerseKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
 
 type AyahTafsirProp = {
-  chapter?: ChapterResponse;
-  verseNumber?: string;
-  chapterId?: string;
-  tafsirData?: TafsirContentResponse;
+  chapter: ChapterResponse;
+  verseNumber: string;
+  chapterId: string;
+  tafsirData: TafsirContentResponse;
   chaptersData: ChaptersData;
   fallback: Record<string, unknown>;
-  verse?: Verse;
-  versesResponse?: VersesResponse;
+  verse: Verse;
+  versesResponse: VersesResponse;
 };
 
 const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
@@ -100,7 +100,7 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
           verse={verse}
           tafsirIdOrSlug={tafsirData?.tafsir?.slug}
         />
-        {chapter?.chapter?.id && versesResponse && (
+        {chapter.chapter.id && versesResponse && (
           <QuranReader
             initialData={versesResponse}
             id={chapter.chapter.id}
