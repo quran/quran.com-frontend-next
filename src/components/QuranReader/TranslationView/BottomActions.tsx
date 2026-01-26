@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
-import useQiraatDataHook from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/StudyModeQiraatTab/hooks/useQiraatData';
+import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
@@ -59,8 +59,9 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
   const hasQuestions = questionsData?.total > 0;
   const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
-  // Check if Qiraat data exists for this verse to conditionally show the tab
-  const { hasData: hasQiraatData } = useQiraatDataHook(verseKey);
+  // Use backend qiraat count to check if qiraat exist for this verse
+  const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraatData = (qiraatCount ?? 0) > 0;
 
   /**
    * Handle tab click or keyboard event

@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
+import { getQiraatJuncturesCount } from '@/api';
 import Language from '@/types/Language';
-import { getQiraatJuncturesCount } from '@/utils/api';
 import { makeQiraatJuncturesCountUrl } from '@/utils/apiPaths';
 
 type Range = {
@@ -25,9 +25,11 @@ type CountRangeQiraatResponse = {
  */
 const useCountRangeQiraat = (qiraatRange: Range): CountRangeQiraatResponse => {
   const { lang } = useTranslation();
+  console.log('qiraatRange', qiraatRange);
   const { data, isValidating, error } = useSWRImmutable<Record<string, number>>(
     qiraatRange ? makeQiraatJuncturesCountUrl(qiraatRange, lang as Language) : null,
     async (): Promise<Record<string, number>> => {
+      console.log('getQiraatJuncturesCount', qiraatRange, lang as Language);
       return getQiraatJuncturesCount(qiraatRange, lang as Language);
     },
   );

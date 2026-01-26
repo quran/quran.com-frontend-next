@@ -451,10 +451,7 @@ export const getVersePageNumber = async (
 export const getQiraatMatrix = async (
   verseKey: string,
   language: Language,
-): Promise<QiraatApiResponse> => {
-  const response = await fetcher(makeQiraatMatrixUrl(verseKey, language));
-  return camelizeKeys(response) as QiraatApiResponse;
-};
+): Promise<QiraatApiResponse> => fetcher(makeQiraatMatrixUrl(verseKey, language));
 
 /**
  * Get the Qiraat junctures count for a specific verse range.
@@ -466,7 +463,4 @@ export const getQiraatMatrix = async (
 export const getQiraatJuncturesCount = async (
   range: { from: string; to: string },
   language: Language,
-): Promise<Record<string, number>> => {
-  const response = await fetcher(makeQiraatJuncturesCountUrl(range, language));
-  return camelizeKeys(response) as Record<string, number>;
-};
+): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range, language));

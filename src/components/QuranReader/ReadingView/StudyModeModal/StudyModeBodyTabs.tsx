@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
-import useQiraatDataHook from './tabs/StudyModeQiraatTab/hooks/useQiraatData';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
@@ -79,19 +79,23 @@ export const useStudyModeTabs = (
 ): TabConfig[] => {
   const { t } = useTranslation('common');
 
-  const { data: questionData, isLoading: isLoadingQuestions } =
-    useBatchedCountRangeQuestions(verseKey);
-
-  // Check if questions exist and their type
-  const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
+  const { data: questionData } = useBatchedCountRangeQuestions(verseKey);
+  const hasQuestions = questionData?.total > 0;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
-  const { hasData: hasQiraatData } = useQiraatDataHook(verseKey);
+
+  const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraat = (qiraatCount ?? 0) > 0;
 
   useEffect(() => {
+    // Auto-close Answers tab when there are no questions
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
       onTabChange?.(null);
     }
-  }, [activeTab, hasQuestions, onTabChange]);
+    // Auto-close Qiraat tab when there are no qiraat
+    if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
+      onTabChange?.(null);
+    }
+  }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -132,7 +136,7 @@ export const useStudyModeTabs = (
       label: t('qiraat.title'),
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
-      condition: hasQiraatData,
+      condition: hasQiraat,
     },
   ];
 };

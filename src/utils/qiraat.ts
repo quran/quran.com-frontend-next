@@ -32,7 +32,7 @@ export const makeQiraatJuncturesCountUrl = (
   range: { from: string; to: string },
   language: Language,
 ): string =>
-  makeUrl(`/qiraat/matrix/count-by-verse-range`, {
+  makeUrl(`/qiraat/matrix/count-within-range`, {
     from: range.from,
     to: range.to,
     language: getQiraatLanguage(language),
