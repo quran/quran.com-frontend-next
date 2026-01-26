@@ -124,10 +124,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
       // Helper function to scroll to a reading card by ID
       const scrollToReading = (readingId: number): void => {
         const cardElement = document.getElementById(`qiraat-card-${readingId}`);
-        cardElement?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
+        cardElement?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       };
 
       // 1. Try to find a reading where this transmitter appears directly in the matrix

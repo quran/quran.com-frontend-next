@@ -457,10 +457,9 @@ export const getQiraatMatrix = async (
  * Get the Qiraat junctures count for a specific verse range.
  *
  * @param {{ from: string; to: string }} range - The verse range object with from and to keys
- * @param {Language} language - The language of the Qiraat
  * @returns {Promise<Record<string, number>>}
  */
-export const getQiraatJuncturesCount = async (
-  range: { from: string; to: string },
-  language: Language,
-): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range, language));
+export const getQiraatJuncturesCount = async (range: {
+  from: string;
+  to: string;
+}): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range));

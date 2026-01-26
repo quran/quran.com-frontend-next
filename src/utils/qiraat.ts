@@ -25,15 +25,10 @@ export const makeQiraatMatrixUrl = (verseKey: string, language: Language): strin
  * Compose the URL for the Qiraat junctures count API
  *
  * @param {{ from: string; to: string }} range - The verse range object with from and to keys
- * @param {Language} language - Language code (e.g., "en", "ar")
  * @returns {string} API URL string
  */
-export const makeQiraatJuncturesCountUrl = (
-  range: { from: string; to: string },
-  language: Language,
-): string =>
-  makeUrl(`/qiraat/matrix/count-within-range`, {
+export const makeQiraatJuncturesCountUrl = (range: { from: string; to: string }): string =>
+  makeUrl(`/qiraat/matrix/count_within_range`, {
     from: range.from,
     to: range.to,
-    language: getQiraatLanguage(language),
   });
