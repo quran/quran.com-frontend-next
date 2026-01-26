@@ -26,6 +26,7 @@ import {
   selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
+  MushafLines,
   QuranFont,
   ReadingPreference,
   WordByWordType,
@@ -68,6 +69,12 @@ export type QuranWordProps = {
   isFontLoaded?: boolean;
   shouldShowSecondaryHighlight?: boolean;
   bookmarksRangeUrl?: string | null;
+
+  quranTextFontScaleOverride?: number; // Optional font scale override for standalone/widget usage
+  mushafLinesOverride?: MushafLines; // Optional mushaf lines override for standalone/widget usage
+  shouldShowWordByWordTranslation?: boolean; // Optional word-by-word translation display override
+  shouldShowWordByWordTransliteration?: boolean; // Optional word-by-word transliteration display override
+  isStandaloneMode?: boolean; // Standalone mode for widget usage
 };
 
 const QuranWord = ({
@@ -79,6 +86,12 @@ const QuranWord = ({
   shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
   bookmarksRangeUrl,
+  // Override props for widget/standalone usage
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
+  shouldShowWordByWordTranslation,
+  shouldShowWordByWordTransliteration,
+  isStandaloneMode = false,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
@@ -87,10 +100,13 @@ const QuranWord = ({
 
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectInlineDisplayWordByWordPreferences,
-    shallowEqual,
-  );
+  // Get word-by-word preferences from Redux
+  const reduxWbwPrefs = useSelector(selectInlineDisplayWordByWordPreferences, shallowEqual);
+  // Use override props if provided, otherwise fall back to Redux values.
+  const showWordByWordTranslation =
+    shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
+  const showWordByWordTransliteration =
+    shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
@@ -134,6 +150,9 @@ const QuranWord = ({
         isFontLoaded={isFontLoaded}
         isHighlighted={shouldBeHighLighted}
         charType={word.charTypeName}
+        // Pass override props for standalone/widget usage
+        quranTextFontScaleOverride={quranTextFontScaleOverride}
+        mushafLinesOverride={mushafLinesOverride}
       />
     );
   } else if (word.charTypeName !== CharType.Pause) {
@@ -232,7 +251,8 @@ const QuranWord = ({
     handleWordAction();
   }, [handleWordAction]);
 
-  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
+  // In standalone mode (widget), disable click handlers and interactive features
+  const shouldHandleWordClicking = !isStandaloneMode && word.charTypeName !== CharType.End;
   const isReadingModeDesktop = !isMobile && !isTranslationMode;
   const isReadingModeMobile = isMobile && !isTranslationMode;
   return (

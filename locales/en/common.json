@@ -137,6 +137,8 @@
   "copied-to-clipboard": "Copied to clipboard",
   "copy": "Copy",
   "copylink": "Copy link",
+  "copy-embed": "Copy Embed",
+  "embed-copied": "Embed Copied",
   "counter": {
     "decrease": "Decrease",
     "increase": "Increase"

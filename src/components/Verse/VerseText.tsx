@@ -21,9 +21,9 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
+import { MushafLines, QuranFont, FALLBACK_FONT } from '@/types/QuranReader';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
-import { FALLBACK_FONT } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {
@@ -32,6 +32,13 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
   bookmarksRangeUrl?: string | null;
+
+  quranFontOverride?: QuranFont; // Optional Quran font override for standalone/widget usage
+  quranTextFontScaleOverride?: number; // Optional font scale override for standalone/widget usage
+  mushafLinesOverride?: MushafLines; // Optional mushaf lines override for standalone/widget usage
+  shouldShowWordByWordTranslation?: boolean; // Optional word-by-word translation display override
+  shouldShowWordByWordTransliteration?: boolean; // Optional word-by-word transliteration display override
+  isStandaloneMode?: boolean; // Standalone mode for widget usage
 };
 
 const VerseText = ({
@@ -40,31 +47,57 @@ const VerseText = ({
   isHighlighted,
   shouldShowH1ForSEO = false,
   bookmarksRangeUrl,
+  // Override props for widget/standalone usage
+  quranFontOverride,
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
+  shouldShowWordByWordTranslation,
+  shouldShowWordByWordTransliteration,
+  isStandaloneMode = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
-  useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
-  const { quranFont, quranTextFontScale, mushafLines } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  );
+
+  useIntersectionObserver(isStandaloneMode ? null : textRef, QURAN_READER_OBSERVER_ID);
+
+  // Get styles from Redux as defaults
+  const reduxStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  // Use override props if provided, otherwise fall back to Redux values.
+  const quranFont = quranFontOverride ?? reduxStyles.quranFont;
+  const quranTextFontScale = quranTextFontScaleOverride ?? reduxStyles.quranTextFontScale;
+  const mushafLines = mushafLinesOverride ?? reduxStyles.mushafLines;
+
   const [firstWord] = words;
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
-  const isFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectInlineDisplayWordByWordPreferences,
-    shallowEqual,
-  );
+  const reduxFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
+  const isFontLoaded = isStandaloneMode ? true : reduxFontLoaded;
+
+  // Get word-by-word preferences from Redux
+  const reduxWbwPrefs = useSelector(selectInlineDisplayWordByWordPreferences, shallowEqual);
+  // Use override props if provided, otherwise fall back to Redux values.
+  const showWordByWordTranslation =
+    shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
+  const showWordByWordTransliteration =
+    shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
+
+  // In standalone mode, we don't need verse key selection (no reader highlighting)
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
   const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
+
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
   );
+
   // if it's translation mode and hideArabic query param is true, don't show the verse text
-  if (isReadingMode === false && router?.query?.[QueryParam.HIDE_ARABIC] === 'true') {
+  if (
+    !isStandaloneMode &&
+    isReadingMode === false &&
+    router?.query?.[QueryParam.HIDE_ARABIC] === 'true'
+  ) {
     return null;
   }
+
   const firstWordData = getFirstWordOfSurah(location);
   const isBigTextLayout =
     isReadingMode &&
@@ -76,6 +109,7 @@ const VerseText = ({
   const fontClassName = isFontLoaded
     ? getFontClassName(quranFont, quranTextFontScale, mushafLines)
     : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
+
   return (
     <>
       <SEOTextForVerse words={words} />
@@ -108,9 +142,15 @@ const VerseText = ({
               word={word}
               font={quranFont}
               isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+              isHighlighted={!isStandaloneMode && word.verseKey === selectedVerseKey}
+              shouldShowSecondaryHighlight={!isStandaloneMode && word.verseKey === hoveredVerseKey}
               bookmarksRangeUrl={bookmarksRangeUrl}
+              // Pass override props for standalone/widget usage
+              quranTextFontScaleOverride={quranTextFontScaleOverride}
+              mushafLinesOverride={mushafLinesOverride}
+              shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
+              shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
+              isStandaloneMode={isStandaloneMode}
             />
           ))}
         </div>
