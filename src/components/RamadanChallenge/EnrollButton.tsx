@@ -3,8 +3,10 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -20,7 +22,8 @@ interface Props {
 }
 
 const EnrollButton = ({ section }: Props) => {
-  const { isEnrolled, mutate } = useRamadanChallengeStatus();
+  const { isEnrolled, mutate, isLoading } = useRamadanChallengeStatus();
+  const { t } = useTranslation('ramadan-activities');
   const router = useRouter();
   const toast = useToast();
   const [isEnrollLoading, setIsEnrollLoading] = useState(false);
@@ -59,11 +62,16 @@ const EnrollButton = ({ section }: Props) => {
     }
   };
 
+  const isDisabled = isEnrolled || isEnrollLoading || isLoading;
+
   const getButtonText = () => {
-    if (isEnrollLoading) return 'Loading...';
     if (isEnrolled) return 'Subscribed!';
     return 'Join the Surah Al-Mulk Challenge';
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   if (!isLoggedIn()) {
     return (
@@ -72,7 +80,7 @@ const EnrollButton = ({ section }: Props) => {
         variant={ButtonVariant.Shadow}
         className={styles.button}
         isLoading={isEnrollLoading}
-        isDisabled={isEnrolled}
+        isDisabled={isDisabled}
       >
         {getButtonText()}
       </Button>
@@ -85,8 +93,8 @@ const EnrollButton = ({ section }: Props) => {
       variant={isEnrolled ? ButtonVariant.Ghost : ButtonVariant.Shadow}
       className={styles.button}
       isLoading={isEnrollLoading}
-      isDisabled={isEnrolled}
-      aria-label={isEnrolled ? 'Subscribed!' : 'Join the Surah Al-Mulk Challenge'}
+      isDisabled={isDisabled}
+      aria-label={isEnrolled ? t('enrolled') : t('join-challenge')}
       aria-live="polite"
     >
       {getButtonText()}
