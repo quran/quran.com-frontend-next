@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import { flushSync } from 'react-dom';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
 
@@ -107,14 +108,16 @@ export const useStudyModeTabs = ({
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
 
+  // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender;
   useEffect(() => {
     // Auto-close Answers tab when there are no questions
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
-      onTabChange?.(null);
+      flushSync(() => onTabChange?.(null));
     }
+
     // Auto-close Qiraat tab when there are no qiraat
     if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
-      onTabChange?.(null);
+      flushSync(() => onTabChange?.(null));
     }
   }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
 
