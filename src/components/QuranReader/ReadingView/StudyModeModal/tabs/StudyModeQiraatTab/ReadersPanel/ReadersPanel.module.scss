@@ -91,7 +91,6 @@
 
 .readersList {
   overflow: hidden;
-  max-block-size: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--spacing-xxsmall-px);
@@ -106,9 +105,6 @@
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
-    min-block-size: 0;
-    transition: none;
-    max-block-size: var(--readers-list-max-height);
     padding-block-end: var(--spacing-xlarge-px);
     padding-inline-end: var(--spacing-micro-px);
   }

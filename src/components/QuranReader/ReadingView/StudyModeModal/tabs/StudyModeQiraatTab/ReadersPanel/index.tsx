@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import colorStyles from '../color.module.scss';
 import { getColorClass } from '../utils/color';
 
-import useReadersPanelHeight from './hooks/useReadersPanelHeight';
 import ReaderItem from './ReaderItem';
 import styles from './ReadersPanel.module.scss';
 
@@ -39,7 +38,6 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   onReaderInfoClick,
 }) => {
   const { t } = useTranslation('common');
-  const { panelRef, headerRef, readersListRef, maxHeight } = useReadersPanelHeight();
 
   // Sort readers by position (canonical order)
   const sortedReaders = useMemo(
@@ -61,14 +59,8 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
     [readings],
   );
 
-  const readersListStyle = useMemo(() => {
-    const style: React.CSSProperties = {};
-    if (maxHeight) style['--readers-list-max-height'] = maxHeight;
-    return style;
-  }, [maxHeight]);
-
   return (
-    <div ref={panelRef} className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
+    <div className={classNames(styles.panel, { [styles.expanded]: isExpanded })}>
       {/* Mobile header with toggle */}
       <button
         type="button"
@@ -90,11 +82,7 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       </button>
 
       {/* Desktop header */}
-      <div
-        ref={headerRef}
-        className={classNames(styles.header, styles.desktop)}
-        data-readers-header
-      >
+      <div className={classNames(styles.header, styles.desktop)} data-readers-header>
         <span className={styles.headerTitle}>{t('quran-reader:qiraat.readers')}</span>
         <span className={styles.readingColors}>{readingColors}</span>
       </div>
@@ -102,12 +90,10 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
       {/* Reader list - always visible on desktop, collapsible on mobile */}
       <div
         id="readers-list"
-        ref={readersListRef}
+        data-readers-list
         className={classNames(styles.readersList, {
           [styles.readersListVisible]: isExpanded,
         })}
-        style={readersListStyle}
-        data-readers-list
       >
         {sortedReaders.map((reader) => (
           <ReaderItem
