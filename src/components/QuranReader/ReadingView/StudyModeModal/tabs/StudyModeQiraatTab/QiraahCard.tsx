@@ -21,6 +21,7 @@ interface QiraahCardProps extends QiraahReading {}
  * @returns {JSX.Element} Rendered QiraahCard component
  */
 const QiraahCard: React.FC<QiraahCardProps> = ({
+  id,
   explanation,
   translation,
   arabic,
@@ -28,7 +29,7 @@ const QiraahCard: React.FC<QiraahCardProps> = ({
   color,
 }) => {
   return (
-    <div className={classNames(styles.card, colorStyles[color])}>
+    <div id={`qiraat-card-${id}`} className={classNames(styles.card, colorStyles[color])}>
       <div className={styles.arabicText} dir="auto">
         {arabic}
       </div>

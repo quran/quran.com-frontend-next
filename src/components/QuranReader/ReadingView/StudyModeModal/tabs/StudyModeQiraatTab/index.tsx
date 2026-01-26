@@ -104,7 +104,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
       );
 
       if (readingToScrollTo) {
-        const cardElement = document.getElementById(`qiraah-card-${readingToScrollTo.id}`);
+        const cardElement = document.getElementById(`qiraat-card-${readingToScrollTo.id}`);
         if (cardElement) cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     },

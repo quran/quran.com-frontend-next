@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { camelizeKeys } from 'humps';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import { fetcher } from '@/api';
+import { getQiraatMatrix } from '@/api';
+import Language from '@/types/Language';
 import { QiraatApiResponse } from '@/types/Qiraat';
 import { makeQiraatMatrixUrl } from '@/utils/apiPaths';
 
@@ -25,21 +25,14 @@ interface UseQiraatDataResult {
 export const useQiraatData = (verseKey: string): UseQiraatDataResult => {
   const { locale } = useRouter();
 
-  const url = makeQiraatMatrixUrl(verseKey, locale || 'en');
-
   const { data, error, isValidating, mutate } = useSWR<QiraatApiResponse>(
-    url,
-    async (fetchUrl: string) => {
-      const response = await fetcher(fetchUrl);
-      return camelizeKeys(response) as QiraatApiResponse;
-    },
+    makeQiraatMatrixUrl(verseKey, (locale as Language) ?? Language.EN),
+    () => getQiraatMatrix(verseKey, (locale as Language) ?? Language.EN),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       dedupingInterval: 5000,
-      // Handle 404 (no junctures) as empty data, not hard error
       shouldRetryOnError: (err) => {
-        // Don't retry on 404 - treat as empty data
         if (err?.status === 404) return false;
         return true;
       },

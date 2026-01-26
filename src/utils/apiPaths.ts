@@ -316,4 +316,4 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
 };
 
 // Qiraat API utilities
-export { makeQiraatMatrixUrl } from './apiPaths/qiraat';
+export * from './qiraat';
