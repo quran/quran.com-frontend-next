@@ -156,13 +156,11 @@ const QuranWord = ({
 
     1. When the current character is of type Word.
     2. When it's allowed to have word by word (won't be allowed for search results as of now).
-    3. When in translation view: the tooltip settings are set to either translation or transliteration or both.
-       When in reading view: always show tooltip.
+    3. When the tooltip settings are set to either translation or transliteration or both.
+       This applies to both reading and translation modes.
   */
   const showTooltip =
-    word.charTypeName === CharType.Word &&
-    isWordByWordAllowed &&
-    (isTranslationMode ? !!showTooltipFor.length : true);
+    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
@@ -198,14 +196,21 @@ const QuranWord = ({
       return;
     }
 
-    // On mobile with recitation disabled, let the popover handle the interaction
+    // On mobile with recitation disabled and tooltip showing, let the popover handle the interaction
     // The popover will open on click, and user can click inside to open Study Mode
-    if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word) {
+    if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word && showTooltip) {
       return;
     }
 
     // On desktop: Open study mode modal when clicking a word (in both reading and translation mode)
     if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+      return;
+    }
+
+    if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
+      handleWordAction();
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
@@ -218,6 +223,7 @@ const QuranWord = ({
     word.verseKey,
     isRecitationEnabled,
     isMobile,
+    showTooltip,
     handleWordAction,
     dispatch,
   ]);
@@ -283,7 +289,8 @@ const QuranWord = ({
       }}
       className={classNames(styles.container, {
         [styles.interactionDisabled]: isWordInteractionDisabled,
-        [styles.highlightOnHover]: !isWordInteractionDisabled && isRecitationEnabled,
+        [styles.highlightOnHover]:
+          !isWordInteractionDisabled && (isRecitationEnabled || !showTooltip),
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
