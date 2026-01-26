@@ -25,6 +25,10 @@
   "max-file-size": "Maksimum {{size}}",
   "my-profile": "Profil Saya",
   "notifications": {
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk Tantangan Ramadhan 2026",
+      "title": "Tantangan Ramadan Harian"
+    },
     "quran-reading-program": {
       "description": "Email akan dikirimkan berisi tautan ke tugas bacaan mingguan, pertanyaan refleksi, dan sumber daya lainnya untuk membantu Anda tetap fokus.",
       "title": "Al-Quran dalam Setahun"

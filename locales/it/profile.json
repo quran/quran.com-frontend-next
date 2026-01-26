@@ -25,6 +25,10 @@
   "max-file-size": "Massimo {{size}}",
   "my-profile": "Il mio profilo",
   "notifications": {
+    "daily-ramadan-challenge": {
+      "description": "Sura Al-Mulk 2026 Sfida del Ramadan",
+      "title": "Sfida quotidiana del Ramadan"
+    },
     "quran-reading-program": {
       "description": "Riceverai un'e-mail con i link alle letture settimanali, spunti di riflessione e altre risorse per rimanere sulla buona strada.",
       "title": "Il Corano in un anno"
