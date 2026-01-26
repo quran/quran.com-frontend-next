@@ -42,17 +42,24 @@ const ReadersPanel: React.FC<ReadersPanelProps> = ({
   const { panelRef, headerRef, readersListRef, maxHeight } = useReadersPanelHeight();
 
   // Sort readers by position (canonical order)
-  const sortedReaders = [...readers].sort((a, b) => a.position - b.position);
+  const sortedReaders = useMemo(
+    () => [...readers].sort((a, b) => a.position - b.position),
+    [readers],
+  );
 
-  const readingColors = readings
-    .map((reading) => reading.color)
-    .filter((color) => color !== null)
-    .map((color) => (
-      <div
-        key={color}
-        className={classNames(styles.readingColor, colorStyles[getColorClass(color)])}
-      />
-    ));
+  const readingColors = useMemo(
+    () =>
+      readings
+        .map((reading) => reading.color)
+        .filter((color) => color !== null)
+        .map((color) => (
+          <div
+            key={color}
+            className={classNames(styles.readingColor, colorStyles[getColorClass(color)])}
+          />
+        )),
+    [readings],
+  );
 
   const readersListStyle = useMemo(() => {
     const style: React.CSSProperties = {};

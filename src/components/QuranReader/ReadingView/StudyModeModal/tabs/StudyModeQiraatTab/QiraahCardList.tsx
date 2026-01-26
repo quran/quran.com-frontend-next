@@ -80,7 +80,7 @@ const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings }) => {
           >
             <div className={styles.cards}>
               {readingGroup.readings.map((reading) => (
-                <QiraahCard key={reading.arabic} {...reading} />
+                <QiraahCard key={reading.id} {...reading} />
               ))}
             </div>
 
@@ -88,7 +88,7 @@ const QiraahCardList: React.FC<QiraahCardListProps> = ({ readings }) => {
               <div className={cardStyles.translation}>{readingGroup.translation}</div>
             )}
 
-            {readingGroup.explanation && readingGroup.explanation && (
+            {readingGroup.explanation && readingGroup.translation && (
               <div className={cardStyles.separator} />
             )}
 

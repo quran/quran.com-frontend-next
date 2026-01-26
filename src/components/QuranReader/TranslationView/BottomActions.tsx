@@ -23,6 +23,7 @@ import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseRelatedVerseNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
@@ -143,7 +144,7 @@ const BottomActions = ({
       id: TabId.QIRAAT,
       label: t('qiraat.title'),
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
-      onClick: createTabHandler(TabId.QIRAAT, () => `/${chapterId}/${verseNumber}`),
+      onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
       condition: hasQiraatData,
     },
     {

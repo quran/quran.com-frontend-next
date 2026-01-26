@@ -50,8 +50,7 @@ const RwayahTag: React.FC<RwayahTagProps> = ({
       })}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      role={isClickable ? 'button' : undefined}
-      tabIndex={isClickable ? 0 : undefined}
+      tabIndex={isClickable ? 0 : -1}
     >
       <span className={styles.tagName}>{transmitter.name}</span>
     </button>

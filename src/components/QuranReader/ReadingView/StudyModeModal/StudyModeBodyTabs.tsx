@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { flushSync } from 'react-dom';
 
 import { StudyModeTabId } from './StudyModeBottomActions';
 
@@ -35,7 +34,6 @@ export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswers
 });
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
@@ -108,16 +106,16 @@ export const useStudyModeTabs = ({
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
 
-  // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender;
-  useEffect(() => {
+  // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender.
+  useLayoutEffect(() => {
     // Auto-close Answers tab when there are no questions
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
-      flushSync(() => onTabChange?.(null));
+      onTabChange?.(null);
     }
 
     // Auto-close Qiraat tab when there are no qiraat
     if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
-      flushSync(() => onTabChange?.(null));
+      onTabChange?.(null);
     }
   }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
 

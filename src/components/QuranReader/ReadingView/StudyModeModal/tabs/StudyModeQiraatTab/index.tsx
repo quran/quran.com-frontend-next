@@ -173,7 +173,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
       <QiraatBanner />
 
       <JunctureTabs
-        junctures={data.junctures}
+        junctures={data?.junctures || []}
         selectedJunctureId={selectedJunctureId}
         onJunctureSelect={handleJunctureSelect}
       />

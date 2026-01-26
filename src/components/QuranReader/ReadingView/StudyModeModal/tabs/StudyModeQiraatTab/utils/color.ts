@@ -8,7 +8,6 @@ export const COLOR_MAP = {
 
 export function getColorClass(id: string) {
   const hexOrName = id?.toLowerCase() ?? '#ffffff';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const color = Object.entries(COLOR_MAP).find(([n, values]) => values.includes(hexOrName));
+  const color = Object.entries(COLOR_MAP).find(([, values]) => values.includes(hexOrName));
   return color?.[0] ?? 'transparent';
 }
