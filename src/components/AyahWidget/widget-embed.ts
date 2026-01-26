@@ -20,12 +20,12 @@ type BuildEmbedOptions = {
 const normalizeWidth = (width: string): string => width?.trim() || '100%';
 
 /**
- * Normalize height value, defaulting to DEFAULTS.iframeHeight.
+ * Normalize height value, returning empty string when unset.
  *
  * @param {string} height - Raw height value.
  * @returns {string} Normalized height.
  */
-const normalizeHeight = (height: string): string => height?.trim() || String(DEFAULTS.iframeHeight);
+const normalizeHeight = (height: string): string => height?.trim() || '';
 
 /**
  * Resolve the base URL for the embed iframe.
@@ -38,6 +38,19 @@ const resolveEmbedBaseUrl = (): string => {
   }
 
   return 'https://quran.com/embed/v1';
+};
+
+/**
+ * Resolve the embed resizer script URL (served from public/).
+ *
+ * @returns {string} The resizer script URL.
+ */
+const resolveEmbedScriptSrc = (): string => {
+  const embedUrl = new URL(resolveEmbedBaseUrl());
+  embedUrl.pathname = '/widget/embed-widget.js';
+  embedUrl.search = '';
+  embedUrl.hash = '';
+  return embedUrl.toString();
 };
 
 /**
@@ -150,14 +163,18 @@ export const buildEmbedIframeConfig = (
  */
 export const buildEmbedSnippet = (preferences: Preferences, translationIdsCsv: string): string => {
   const { src, widthValue, heightValue } = buildEmbedIframeConfig(preferences, translationIdsCsv);
+  const scriptSrc = resolveEmbedScriptSrc();
+  const heightAttribute = heightValue ? `\n  height="${heightValue}"` : '';
+  const maxHeightAttribute = heightValue ? `\n  data-quran-embed-max-height="${heightValue}"` : '';
 
   return `<iframe
   src="${src}"
-  width="${widthValue}"
-  height="${heightValue}"
+  width="${widthValue}"${heightAttribute}${maxHeightAttribute}
+  data-quran-embed="true"
   allow="clipboard-write"
   frameborder="0">
-</iframe>`;
+</iframe>
+<script defer src="${scriptSrc}"></script>`;
 };
 
 /**

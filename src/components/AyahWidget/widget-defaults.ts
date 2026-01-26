@@ -48,7 +48,7 @@ export const INITIAL_PREFERENCES: Preferences = {
   mergeVerses: false,
   customSize: {
     width: '100%',
-    height: DEFAULTS.iframeHeight,
+    height: '',
   },
 };
 

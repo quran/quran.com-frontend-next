@@ -36,10 +36,7 @@ const getCustomDimensionStyles = (
     ? { width: options.customWidth, maxWidth: options.customWidth }
     : { width: '100%' };
 
-  // Always use 100% height to fill iframe, but respect customHeight as maxHeight
-  const heightStyle = options.customHeight
-    ? { height: '100%', maxHeight: options.customHeight }
-    : { height: '100%' };
+  const heightStyle = options.customHeight ? { height: options.customHeight } : {};
 
   return { widthStyle, heightStyle };
 };
@@ -69,10 +66,8 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
     /* eslint-disable @typescript-eslint/naming-convention */
     '--color-text-faded': colors.secondaryText,
     '--color-text-link': colors.linkColor,
-    // Use flexbox layout to fill iframe height with fixed header/footer
     display: 'flex',
     flexDirection: 'column',
-    minHeight: 0,
     ...widthStyle,
     ...heightStyle,
   } as unknown as React.CSSProperties;
@@ -93,6 +88,15 @@ const getWidgetFontStyles = (): string => `
   .quran-widget h1,
   .quran-widget [data-merged-verses] {
     --line-height: calc(${WIDGET_ARABIC_FONT_SIZE} + 20px) !important;
+  }
+  .quran-widget [class*="VerseText_verseTextContainer"] {
+    --font-size: ${WIDGET_ARABIC_FONT_SIZE} !important;
+    --line-height: calc(${WIDGET_ARABIC_FONT_SIZE} + 20px) !important;
+    font-size: ${WIDGET_ARABIC_FONT_SIZE} !important;
+  }
+  .quran-widget [data-word-location] {
+    font-size: ${WIDGET_ARABIC_FONT_SIZE} !important;
+    line-height: var(--line-height) !important;
   }
   .quran-widget [class*="translation-font-size-"] {
     font-size: ${WIDGET_TRANSLATION_FONT_SIZE} !important;
@@ -119,6 +123,7 @@ const getWidgetFontStyles = (): string => `
     .quran-widget [data-merged-verses] {
       --line-height: calc(22px + 16px) !important;
     }
+   
     .quran-widget [class*="translation-font-size-"] {
       font-size: 14px !important;
     }
@@ -199,9 +204,6 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         style={{
           padding: contentPadding,
           marginBottom: hasTranslations ? 16 : 0,
-          flex: 1,
-          minHeight: 0,
-          overflowY: 'auto',
           overflowX: 'hidden',
           display: 'flex',
           flexDirection: 'column',
