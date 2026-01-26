@@ -152,3 +152,12 @@ export interface ChapterMetadata {
 export interface ChapterMetadataResponse extends BaseResponse {
   chapterMetadata?: ChapterMetadata;
 }
+
+export interface RamadanChallengeResponse extends BaseResponse {
+  isEnrolled: boolean;
+  currentDay: number;
+  totalDays: number;
+  hasStarted: boolean;
+  hasEnded: boolean;
+  enrolledAt?: string;
+}
