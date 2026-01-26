@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -10,7 +11,9 @@ import QiraatBanner from './QiraatBanner';
 import ReadersPanel from './ReadersPanel';
 import styles from './StudyModeQiraatTab.module.scss';
 
-import Spinner from '@/dls/Spinner/Spinner';
+import Error from '@/components/Error';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import {
   selectStudyModeActiveTab,
   selectStudyModeVerseKey,
@@ -20,6 +23,7 @@ import { openReaderBioModal } from '@/redux/slices/QuranReader/verseActionModal'
 interface StudyModeQiraatTabProps {
   chapterId: string;
   verseNumber: string;
+  switchTab?: (tabId: StudyModeTabId | null) => void;
 }
 
 /**
@@ -27,12 +31,16 @@ interface StudyModeQiraatTabProps {
  * Orchestrates all Qiraat components and manages state.
  * @returns {JSX.Element} Rendered Qiraat tab UI
  */
-const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, verseNumber }) => {
+const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
+  chapterId,
+  verseNumber,
+  switchTab,
+}) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const verseKey = `${chapterId}:${verseNumber}`;
 
-  const { data, isLoading, error, hasData } = useQiraatDataHook(verseKey);
+  const { data, isLoading, error, hasData, refetch } = useQiraatDataHook(verseKey);
 
   const [selectedJunctureId, setSelectedJunctureId] = useState<number | null>(
     data?.junctures?.[0]?.id ?? null,
@@ -50,6 +58,11 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
       setSelectedJunctureId(data.junctures[0].id);
     }
   }, [data?.junctures, selectedJunctureId]);
+
+  // Auto-close tab when there are no qiraat
+  useEffect(() => {
+    if (!isLoading && !hasData && switchTab) switchTab(null);
+  }, [isLoading, hasData, switchTab]);
 
   // Get selected juncture's readings
   const selectedJuncture = useMemo(() => {
@@ -111,29 +124,18 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({ chapterId, vers
     [selectedJuncture?.readings, data?.transmitters],
   );
 
-  // Loading state
   if (isLoading) {
     return (
-      <div className={styles.loadingContainer}>
-        <Spinner />
+      <div className={styles.container}>
+        <TafsirSkeleton />
       </div>
     );
   }
 
-  // Error state
   if (error) {
     return (
-      <div className={styles.errorContainer}>
-        <p className={styles.errorText}>{t('error.general')}</p>
-      </div>
-    );
-  }
-
-  // No data state
-  if (!hasData || !data) {
-    return (
-      <div className={styles.emptyContainer}>
-        <p className={styles.emptyText}>{t('qiraat.no-junctures')}</p>
+      <div className={classNames(styles.errorContainer, styles.container)}>
+        <Error error={error} onRetryClicked={refetch} />
       </div>
     );
   }

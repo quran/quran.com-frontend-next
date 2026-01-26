@@ -37,6 +37,7 @@ export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswers
 
 const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
   ssr: false,
+  loading: TafsirSkeleton,
 });
 
 export const TAB_COMPONENTS: Partial<

@@ -25,13 +25,9 @@ type CountRangeQiraatResponse = {
  */
 const useCountRangeQiraat = (qiraatRange: Range): CountRangeQiraatResponse => {
   const { lang } = useTranslation();
-  console.log('qiraatRange', qiraatRange);
   const { data, isValidating, error } = useSWRImmutable<Record<string, number>>(
     qiraatRange ? makeQiraatJuncturesCountUrl(qiraatRange, lang as Language) : null,
-    async (): Promise<Record<string, number>> => {
-      console.log('getQiraatJuncturesCount', qiraatRange, lang as Language);
-      return getQiraatJuncturesCount(qiraatRange, lang as Language);
-    },
+    () => getQiraatJuncturesCount(qiraatRange, lang as Language),
   );
 
   return {
