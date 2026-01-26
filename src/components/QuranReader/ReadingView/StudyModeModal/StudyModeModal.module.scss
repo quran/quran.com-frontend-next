@@ -14,7 +14,7 @@ div.contentModal {
   inline-size: 100%;
   max-inline-size: 100%;
   overflow-x: hidden;
-  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
     padding-inline: var(--spacing-large-px);
     padding-block-start: var(--spacing-xlarge-px);
@@ -22,7 +22,7 @@ div.contentModal {
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;
-    border-radius: var(--border-radius-rounded);
+    border-radius: var(--border-radius-large-px);
   }
 }
 
