@@ -1,17 +1,18 @@
-import React, { useMemo } from 'react';
-
 import classNames from 'classnames';
 
 import colorStyles from './color.module.scss';
 import styles from './QiraahCard.module.scss';
-import { getColorClass } from './utils/color';
 
-import { QiraatReading } from '@/types/Qiraat';
-
-interface QiraahCardProps {
-  reading: QiraatReading;
-  id?: string;
+export interface QiraahReading {
+  id: string;
+  arabic: string;
+  explanation?: string;
+  translation?: string;
+  transliteration?: string;
+  color: string;
 }
+
+interface QiraahCardProps extends QiraahReading {}
 
 /**
  * Display a single reading variant with Arabic text, transliteration,
@@ -19,45 +20,23 @@ interface QiraahCardProps {
  *
  * @returns {JSX.Element} Rendered QiraahCard component
  */
-const QiraahCard: React.FC<QiraahCardProps> = ({ reading, id }) => {
-  const explanationText = useMemo(() => {
-    if (reading.explanation?.text) {
-      return reading.explanation.text;
-    }
-
-    if (reading.explanations && reading.explanations.length > 0) {
-      return reading.explanations[0].text;
-    }
-
-    return null;
-  }, [reading.explanation, reading.explanations]);
-
-  const translationText = useMemo(() => {
-    if (reading.translation) {
-      return reading.translation;
-    }
-
-    if (reading.translations && reading.translations.length > 0) {
-      return reading.translations[0].text;
-    }
-
-    return null;
-  }, [reading.translation, reading.translations]);
-
-  const arabicText = reading.textUthmani || reading.text;
-  const transliterationText = reading.transliteration;
-  const colorClass = getColorClass(reading.color);
-
+const QiraahCard: React.FC<QiraahCardProps> = ({
+  explanation,
+  translation,
+  arabic,
+  transliteration,
+  color,
+}) => {
   return (
-    <div id={id} className={classNames(styles.card, colorStyles[colorClass])}>
+    <div className={classNames(styles.card, colorStyles[color])}>
       <div className={styles.arabicText} dir="auto">
-        {arabicText}
+        {arabic}
       </div>
 
-      {transliterationText && <div className={styles.transliteration}>{transliterationText}</div>}
-      {translationText && <div className={styles.translation}>{translationText}</div>}
-      {explanationText && <div className={styles.separator} />}
-      {explanationText && <div className={styles.explanation}>{explanationText}</div>}
+      {transliteration && <div className={styles.transliteration}>{transliteration}</div>}
+      {translation && <div className={styles.translation}>{translation}</div>}
+      {explanation && <div className={styles.separator} />}
+      {explanation && <div className={styles.explanation}>{explanation}</div>}
     </div>
   );
 };

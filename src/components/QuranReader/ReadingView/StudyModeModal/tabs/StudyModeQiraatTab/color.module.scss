@@ -14,7 +14,9 @@
   --background: var(--color-background-elevated-new);
   --color: var(--color-text-default-new);
   --border: var(--color-separators-ayah-level);
-  border: var(--spacing-hairline-px) solid var(--border);
+
+  /* Can't increase specificity any other way important is necessary */
+  border: var(--spacing-hairline-px) solid var(--border) !important;
 }
 
 .blue {

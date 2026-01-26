@@ -2,6 +2,11 @@
 
 .container {
   padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-max);
+
+  @include breakpoints.desktop {
+    padding-block-end: 0;
+  }
 }
 
 .loadingContainer,
