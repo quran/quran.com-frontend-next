@@ -12,6 +12,7 @@ export enum StudyModeTabId {
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
   QIRAAT = 'qiraat',
+  RELATED_VERSES = 'related_verses',
 }
 
 export interface StudyModeTabConfig {

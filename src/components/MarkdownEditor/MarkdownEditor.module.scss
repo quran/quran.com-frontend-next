@@ -97,3 +97,9 @@
 .content {
   flex: 1 1 auto;
 }
+
+.ssrFallback {
+  font-size: var(--font-size-large);
+  line-height: 160%;
+  white-space: pre-wrap;
+}

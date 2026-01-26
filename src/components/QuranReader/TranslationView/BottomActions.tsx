@@ -14,6 +14,7 @@ import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
+import RelatedVersesIcon from '@/icons/related-verses.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
@@ -23,6 +24,7 @@ import {
   getVerseAnswersNavigationUrl,
   getVerseLessonNavigationUrl,
   getVerseReflectionNavigationUrl,
+  getVerseRelatedVerseNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -39,6 +41,10 @@ interface BottomActionsProps {
    * Whether this is in translation view
    */
   isTranslationView?: boolean;
+  /**
+   * Whether this verse has related verses
+   */
+  hasRelatedVerses?: boolean;
 }
 
 /**
@@ -46,7 +52,11 @@ interface BottomActionsProps {
  * @param {BottomActionsProps} props - Component props
  * @returns {JSX.Element} The rendered component
  */
-const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
+const BottomActions = ({
+  verseKey,
+  isTranslationView = true,
+  hasRelatedVerses = false,
+}: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const tafsirs = useSelector(selectSelectedTafsirs);
@@ -78,6 +88,8 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.REFLECTIONS }));
       } else if (tabType === TabId.LESSONS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
+      } else if (tabType === TabId.RELATED_VERSES) {
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.RELATED_VERSES }));
       } else if (tabType === TabId.ANSWERS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
       } else if (tabType === TabId.QIRAAT) {
@@ -133,6 +145,15 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: createTabHandler(TabId.QIRAAT, () => `/${chapterId}/${verseNumber}`),
       condition: hasQiraatData,
+    },
+    {
+      id: TabId.RELATED_VERSES,
+      label: t('related-verses'),
+      icon: <RelatedVersesIcon />,
+      onClick: createTabHandler(TabId.RELATED_VERSES, () =>
+        getVerseRelatedVerseNavigationUrl(verseKey),
+      ),
+      condition: hasRelatedVerses,
     },
   ];
 

@@ -60,7 +60,9 @@
       "Bash(yarn stylelint:*)",
       "Bash(python3:*)",
       "Bash(yarn tsc:*)",
-      "Bash(npx stylelint:*)"
+      "Bash(npx stylelint:*)",
+      "Bash(npx eslint:*)",
+      "Bash(yarn lint:scss:*)"
     ]
   }
 }

@@ -5,7 +5,7 @@
     "chat": "Sohbet",
     "email": "E-posta",
     "in_app": "Uygulama İçi",
-    "push": "İtmek",
+    "push": "Basmak",
     "sms": "SMS"
   },
   "notif-settings-not-enabled": "Bildirim ayarları etkin değil",
@@ -16,8 +16,9 @@
   },
   "tags": {
     "calendar": "Bir yılda Kur’an",
+    "goal-reminder": "Hedef Hatırlatıcısı",
     "learning-plans": "Öğrenme Planları",
-    "qgj": "Kuran Büyüme Yolculuğu",
+    "qgj": "Kuran gelişim Yolculuğu",
     "streaks": "Çizgiler"
   }
 }

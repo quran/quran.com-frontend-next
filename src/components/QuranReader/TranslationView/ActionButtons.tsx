@@ -83,7 +83,10 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           </ActionItem>
 
           <ActionItem>
-            <TranslationViewNoteAction verseKey={verse.verseKey} />
+            <TranslationViewNoteAction
+              verseKey={verse.verseKey}
+              isInsideStudyMode={shouldUseModalZIndex}
+            />
           </ActionItem>
 
           <ActionItem>
@@ -92,6 +95,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               verse={verse}
               isTranslationView={isTranslationView}
               shouldUseModalZIndex={shouldUseModalZIndex}
+              isInsideStudyMode={shouldUseModalZIndex}
             />
           </ActionItem>
         </>
