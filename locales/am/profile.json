@@ -25,6 +25,10 @@
   "max-file-size": "ማክስ {{size}}",
   "my-profile": "የእኔ መገለጫ",
   "notifications": {
+    "daily-ramadan-challenge": {
+      "description": "ሱራ አል ሙልክ 2026 የረመዳን ፈተና",
+      "title": "ዕለታዊ የረመዳን ፈተና"
+    },
     "quran-reading-program": {
       "description": "ወደ ሳምንታዊ የንባብ ምደባ የሚወስዱ አገናኞችን፣ የማጣቀሻ ጥያቄዎችን እና ሌሎች ግብዓቶችን የያዘ ኢሜይል ይላካል።",
       "title": "ቁርዓን በአንድ አመት ውስጥ"
