@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 
 import type { Preferences } from '@/components/AyahWidget/builder/types';
@@ -28,6 +29,8 @@ const useAyahWidgetPreview = ({
 } => {
   const previewRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const RESIZE_MESSAGE = 'quran-embed:resize';
+  const REQUEST_MESSAGE = 'quran-embed:request-resize';
 
   const iframeConfig = useMemo(
     () => buildEmbedIframeConfig(preferences, translationIds),
@@ -45,7 +48,10 @@ const useAyahWidgetPreview = ({
     setIsLoading(true);
     iframe.src = iframeConfig.src;
     iframe.width = iframeConfig.widthValue;
-    iframe.height = iframeConfig.heightValue;
+    if (iframeConfig.heightValue) {
+      iframe.height = iframeConfig.heightValue;
+      iframe.style.maxHeight = iframeConfig.heightValue;
+    }
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'clipboard-write');
     iframe.setAttribute('loading', 'lazy');
@@ -57,15 +63,39 @@ const useAyahWidgetPreview = ({
 
     // Set loading state when iframe is loaded or fails to load.
     const handleLoaded = () => setIsLoading(false);
+    // Handle resize messages from the iframe.
+    const handleMessage = (event: MessageEvent) => {
+      if (event.source !== iframe.contentWindow) return;
+      if (!event.data || typeof event.data !== 'object') return;
+      const { type, height } = event.data as { type?: unknown; height?: unknown };
+      if (type !== RESIZE_MESSAGE) return;
+      const nextHeight = Number(height);
+      if (!Number.isFinite(nextHeight) || nextHeight <= 0) return;
+      const heightValue = `${Math.ceil(nextHeight)}px`;
+      iframe.style.height = heightValue;
+      iframe.setAttribute('height', heightValue);
+    };
+    const requestResize = () => {
+      if (!iframe.contentWindow) return;
+      iframe.contentWindow.postMessage({ type: REQUEST_MESSAGE }, '*');
+    };
+
     iframe.addEventListener('load', handleLoaded);
     iframe.addEventListener('error', handleLoaded);
+    iframe.addEventListener('load', requestResize);
+    window.addEventListener('message', handleMessage);
+    window.addEventListener('resize', requestResize);
 
     containerEl.appendChild(iframe);
+    requestResize();
 
     // Cleanup event listeners.
     return () => {
       iframe.removeEventListener('load', handleLoaded);
       iframe.removeEventListener('error', handleLoaded);
+      iframe.removeEventListener('load', requestResize);
+      window.removeEventListener('message', handleMessage);
+      window.removeEventListener('resize', requestResize);
     };
   }, [iframeConfig]);
 

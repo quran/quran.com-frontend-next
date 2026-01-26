@@ -19,6 +19,7 @@ import {
   parseVersesParam,
 } from '@/components/AyahWidget/queryParsing';
 import QuranWidget from '@/components/AyahWidget/QuranWidget';
+import useEmbedAutoResize from '@/hooks/widget/useEmbedAutoResize';
 import useWidgetInteractions from '@/hooks/widget/useWidgetInteractions';
 import ThemeType from '@/redux/types/ThemeType';
 import type { MushafType, WidgetOptions } from '@/types/Embed';
@@ -38,8 +39,10 @@ type EmbedProps = {
  */
 const EmbedPage = ({ verses, options, error }: EmbedProps): JSX.Element => {
   const { t } = useTranslation('common');
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
   useWidgetInteractions(options);
+  useEmbedAutoResize(containerRef);
 
   if (!verses?.length || !options) {
     return (
@@ -58,23 +61,15 @@ const EmbedPage = ({ verses, options, error }: EmbedProps): JSX.Element => {
           margin: 0;
           padding: 0;
           background: transparent;
-          overflow: hidden;
-          height: 100%;
-          width: 100%;
-        }
-        body > div:first-child,
-        body > div:first-child > div:first-child {
-          height: 100%;
           width: 100%;
         }
       `}</style>
 
       <div
+        ref={containerRef}
+        id="quran-embed-root"
         style={{
-          height: '100%',
           width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
         }}
       >
         <QuranWidget verses={verses} options={options} />

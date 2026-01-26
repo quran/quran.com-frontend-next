@@ -117,31 +117,55 @@ the iframe:
 <iframe allow="clipboard-write" ...></iframe>
 ```
 
+### Auto-resize script
+
+To keep the iframe height aligned with the embed content, include the resizer script next to the
+iframe. The script listens for resize events from the embed page and updates the iframe height to
+match its content. When the height field is empty, the iframe always fits its content. When a height
+is provided, it is treated as a max height: the iframe still shrinks to fit content, but will not
+grow beyond the configured limit.
+
+```html
+<iframe
+  src="https://quran.com/embed/v1?verses=33:56"
+  width="100%"
+  data-quran-embed="true"
+  data-quran-embed-max-height="350px"
+  height="350px"
+  allow="clipboard-write"
+  frameborder="0"
+>
+</iframe>
+<script defer src="https://quran.com/widget/embed-widget.js"></script>
+```
+
+If you are using a custom embed domain, load the script from the same origin as the iframe `src`.
+
 ### Environment variables
 
 - `NEXT_PUBLIC_EMBED_URL`: forces the iframe base URL (useful for local/testing)
 
 ### Query parameters
 
-| Parameter             | Description                                          | Default |
-| --------------------- | ---------------------------------------------------- | ------- |
-| `verses`              | Verse range (e.g., `33:56` or `33:56-60`)            | `33:56` |
-| `translations`        | Comma-separated translation IDs                      | -       |
-| `audio`               | Enable audio (`true`/`false`)                        | `true`  |
-| `reciter`             | Reciter ID                                           | `7`     |
-| `theme`               | Theme (`light`/`dark`/`sepia`)                       | `light` |
-| `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)               | `qpc`   |
-| `locale`              | Widget locale                                        | `en`    |
-| `wbw`                 | Enable word-by-word translation (`true`/`false`)     | `false` |
-| `wbwTransliteration`  | Enable word-by-word transliteration (`true`/`false`) | `false` |
-| `width`               | Iframe width (CSS length)                            | `100%`  |
-| `height`              | Iframe height (CSS length)                           | `500px` |
-| `showTranslationName` | Show translator names                                | `false` |
-| `showArabic`          | Show Arabic text                                     | `true`  |
-| `tafsir`              | Show tafsirs button                                  | `true`  |
-| `lessons`             | Show lessons button                                  | `true`  |
-| `reflections`         | Show reflections button                              | `true`  |
-| `answers`             | Show answers button                                  | `true`  |
+| Parameter             | Description                                          | Default       |
+| --------------------- | ---------------------------------------------------- | ------------- |
+| `verses`              | Verse range (e.g., `33:56` or `33:56-60`)            | `33:56`       |
+| `translations`        | Comma-separated translation IDs                      | -             |
+| `audio`               | Enable audio (`true`/`false`)                        | `true`        |
+| `reciter`             | Reciter ID                                           | `7`           |
+| `theme`               | Theme (`light`/`dark`/`sepia`)                       | `light`       |
+| `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)               | `qpc`         |
+| `locale`              | Widget locale                                        | `en`          |
+| `wbw`                 | Enable word-by-word translation (`true`/`false`)     | `false`       |
+| `wbwTransliteration`  | Enable word-by-word transliteration (`true`/`false`) | `false`       |
+| `width`               | Iframe width (CSS length)                            | `100%`        |
+| `height`              | Iframe max height (CSS length)                       | Auto (script) |
+| `showTranslationName` | Show translator names                                | `false`       |
+| `showArabic`          | Show Arabic text                                     | `true`        |
+| `tafsir`              | Show tafsirs button                                  | `true`        |
+| `lessons`             | Show lessons button                                  | `true`        |
+| `reflections`         | Show reflections button                              | `true`        |
+| `answers`             | Show answers button                                  | `true`        |
 
 ## Widget interactions
 
