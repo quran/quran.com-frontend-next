@@ -3,7 +3,6 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -22,7 +21,6 @@ interface Props {
 
 const EnrollButton = ({ section }: Props) => {
   const { isEnrolled, mutate } = useRamadanChallengeStatus();
-  const { t } = useTranslation('ramadan-activities');
   const router = useRouter();
   const toast = useToast();
   const [isEnrollLoading, setIsEnrollLoading] = useState(false);
@@ -47,7 +45,7 @@ const EnrollButton = ({ section }: Props) => {
     try {
       await addReadingGoal({ category: GoalCategory.RAMADAN_CHALLENGE });
       await mutate();
-      toast(t('enroll-success'), {
+      toast('Enrolled successfully! You may see a welcome email in your inbox.', {
         status: ToastStatus.Success,
       });
     } catch (error) {
@@ -55,16 +53,16 @@ const EnrollButton = ({ section }: Props) => {
         transactionName: 'ramadan_challenge_enroll',
         metadata: { section },
       });
-      toast(t('enroll-error'), { status: ToastStatus.Error });
+      toast('Failed to enroll, please try again later.', { status: ToastStatus.Error });
     } finally {
       setIsEnrollLoading(false);
     }
   };
 
   const getButtonText = () => {
-    if (isEnrollLoading) return t('loading');
-    if (isEnrolled) return t('enrolled');
-    return t('join-challenge');
+    if (isEnrollLoading) return 'Loading...';
+    if (isEnrolled) return 'Subscribed!';
+    return 'Join the Surah Al-Mulk Challenge';
   };
 
   if (!isLoggedIn()) {
@@ -88,7 +86,7 @@ const EnrollButton = ({ section }: Props) => {
       className={styles.button}
       isLoading={isEnrollLoading}
       isDisabled={isEnrolled}
-      aria-label={isEnrolled ? t('enrolled') : t('join-challenge')}
+      aria-label={isEnrolled ? 'Subscribed!' : 'Join the Surah Al-Mulk Challenge'}
       aria-live="polite"
     >
       {getButtonText()}
