@@ -142,6 +142,9 @@ test(
 );
 
 const drawerLinks = [
+  // Event link
+  { text: 'Ramadan 2026', href: '/ramadan-2026', target: '' },
+
   // Main Navigation Links
   { text: 'Read', href: '', target: '' },
   { text: 'Learn', href: '/learning-plans', target: '' },
