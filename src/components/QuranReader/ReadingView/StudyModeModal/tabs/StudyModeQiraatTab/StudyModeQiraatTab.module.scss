@@ -55,9 +55,6 @@
   @include breakpoints.desktop {
     flex: 1;
     max-inline-size: calc(var(--spacing-mega-px) * 4);
-    position: sticky;
-    inset-block-start: var(--spacing-medium);
-    align-self: flex-start;
   }
 }
 
