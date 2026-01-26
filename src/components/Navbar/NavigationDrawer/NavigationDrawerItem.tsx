@@ -46,7 +46,6 @@ const NavigationDrawerItem = ({
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>
           <IconContainer
-            shouldForceSetColors={!isEvent}
             icon={icon}
             size={IconSize.Xsmall}
             color={IconColor.accent}
