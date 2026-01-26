@@ -33,13 +33,37 @@ const ReaderItem: React.FC<ReaderItemProps> = ({
   // Get transmitters for this reader (should be 2 based on spec)
   const readerTransmitters = transmitters.filter((t) => t.readerId === reader.id);
 
+  /**
+   * Determines the color for a transmitter tag based on its association with a reading.
+   *
+   * Qiraat readings have colored matrix displays that show which transmitters and readers
+   * are part of that reading. When displaying a transmitter in the Readers panel, we need
+   * to find which reading it belongs to so we can color-code it appropriately.
+   *
+   * Two-step lookup process:
+   * 1. Direct match: Try to find a reading where this transmitter appears in the matrix
+   * 2. Inherited match: If not found directly, look for a reading where the transmitter's
+   *    parent reader appears (transmitters inherit their reader's color association)
+   * 3. Fallback: Return white if no association found
+   *
+   * @param {number} transmitterId - The ID of the transmitter to find a color for
+   * @returns {string} The hex color code for the transmitter's associated reading
+   */
   const getTransmitterColor = (transmitterId: number): string => {
-    const reading = readings.find(
-      (r) =>
-        r.matrix?.transmitters?.includes(transmitterId) || r.matrix?.readers?.includes(reader.id),
+    // 1. Find a reading where this transmitter appears directly in the matrix
+    const transmitterReading = readings.find(({ matrix }) =>
+      matrix?.transmitters?.includes(transmitterId),
     );
 
-    return reading?.color || DEFAULT_COLOR;
+    if (transmitterReading) return transmitterReading.color || DEFAULT_COLOR;
+
+    // 2. If not found directly, the transmitter inherits color from its parent reader
+    // Find a reading where this reader appears in the matrix
+    const readerReading = readings.find(({ matrix }) => matrix?.readers?.includes(reader.id));
+    if (readerReading) return readerReading.color || DEFAULT_COLOR;
+
+    // 3. Default fallback - no association found
+    return DEFAULT_COLOR;
   };
 
   return (
