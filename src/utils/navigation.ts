@@ -58,6 +58,29 @@ export const PROTECTED_ROUTES = [
   ROUTES.COMPLETE_SIGNUP,
 ];
 
+/**
+ * Routes where the Quran reader sidebar navigation is applicable.
+ * These are dynamic routes that display Quran content (chapters, verses, juz, etc.)
+ */
+export const QURAN_READER_ROUTES = new Set([
+  '/[chapterId]',
+  '/[chapterId]/[verseId]',
+  '/hizb/[hizbId]',
+  '/juz/[juzId]',
+  '/page/[pageId]',
+  '/rub/[rubId]',
+]);
+
+/**
+ * Check if a pathname is a Quran reader route where sidebar navigation is applicable.
+ *
+ * @param {string} pathname - The router pathname to check
+ * @returns {boolean} Whether the route is a Quran reader route
+ */
+export const isQuranReaderRoute = (pathname: string): boolean => {
+  return QURAN_READER_ROUTES.has(pathname);
+};
+
 export const EXTERNAL_ROUTES = {
   QURAN_REFLECT: 'https://quranreflect.com',
   SUNNAH: 'https://sunnah.com',
