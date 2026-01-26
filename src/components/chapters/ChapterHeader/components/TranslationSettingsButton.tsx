@@ -25,7 +25,6 @@ const TranslationSettingsButton: React.FC = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations);
-  const translationsCount = selectedTranslations?.length || 0;
 
   const onChangeTranslationClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Translation));
@@ -35,20 +34,17 @@ const TranslationSettingsButton: React.FC = () => {
   }, [dispatch]);
 
   const renderButtonWithName = useCallback(
-    (displayName?: string) => (
+    (displayName?: string, validCount = 0) => (
       <Button
         variant={ButtonVariant.ModeToggle}
         size={ButtonSize.XSmall}
         shape={ButtonShape.Pill}
         onClick={onChangeTranslationClicked}
-        ariaLabel={t('translation')}
         className={styles.translationButton}
         contentClassName={styles.translationButtonContent}
         suffix={
           <>
-            {translationsCount > 1 && (
-              <span>{`+${toLocalizedNumber(translationsCount - 1, lang)}`}</span>
-            )}
+            {validCount > 1 && <span>{`+${toLocalizedNumber(validCount - 1, lang)}`}</span>}
             <ChevronDownIcon className={styles.dropdownIcon} />
           </>
         }
@@ -59,17 +55,25 @@ const TranslationSettingsButton: React.FC = () => {
         </span>
       </Button>
     ),
-    [translationsCount, lang, t, onChangeTranslationClicked],
+    [lang, t, onChangeTranslationClicked],
   );
 
   const renderButton = useCallback(
     (data: TranslationsResponse) => {
-      const firstSelectedId = selectedTranslations?.[0];
-      const activeTranslation = data?.translations?.find((tr) => tr.id === firstSelectedId);
-      const displayName =
-        activeTranslation?.translatedName?.name || t('reading-preference.none-selected');
+      // Filter to only translations that exist in API response
+      const validTranslations =
+        data?.translations?.filter((tr) => selectedTranslations?.includes(tr.id)) || [];
+      const validCount = validTranslations.length;
 
-      return renderButtonWithName(displayName);
+      const firstSelectedId = selectedTranslations?.[0];
+      const activeTranslation = validTranslations.find((tr) => tr.id === firstSelectedId);
+      const displayName =
+        activeTranslation?.translatedName?.name ||
+        (validCount > 0
+          ? validTranslations[0]?.translatedName?.name
+          : t('reading-preference.none-selected'));
+
+      return renderButtonWithName(displayName, validCount);
     },
     [selectedTranslations, t, renderButtonWithName],
   );
