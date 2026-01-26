@@ -2,16 +2,6 @@ import Language from '@/types/Language';
 import { makeUrl } from '@/utils/api';
 
 /**
- * Get the Qiraat language code based on the input language
- *
- * @param {Language} language - The input language
- * @returns {Language} The Qiraat language code
- */
-export const getQiraatLanguage = (language: Language): Language => {
-  return language === Language.AR ? Language.AR : Language.EN;
-};
-
-/**
  * Compose the URL for the Qiraat matrix API
  *
  * @param {string} verseKey - The verse key (e.g., "10:35")
@@ -19,7 +9,7 @@ export const getQiraatLanguage = (language: Language): Language => {
  * @returns {string} API URL string
  */
 export const makeQiraatMatrixUrl = (verseKey: string, language: Language): string =>
-  makeUrl(`/qiraat/matrix/by_verse/${verseKey}`, { language: getQiraatLanguage(language) });
+  makeUrl(`/qiraat/matrix/by_verse/${verseKey}`, { language });
 
 /**
  * Compose the URL for the Qiraat junctures count API
