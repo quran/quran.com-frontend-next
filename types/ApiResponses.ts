@@ -159,5 +159,5 @@ export interface RamadanChallengeResponse extends BaseResponse {
   totalDays: number;
   hasStarted: boolean;
   hasEnded: boolean;
-  enrolledAt: string | undefined;
+  enrolledAt?: string;
 }

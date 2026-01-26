@@ -19,8 +19,8 @@ import pageStyles from '@/pages/ramadanchallenge/ramadanchallenge.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
 
+const PATH = ROUTES.RAMADAN_CHALLENGE;
 const RamadanChallengePage: NextPage = (): JSX.Element => {
-  const PATH = ROUTES.RAMADAN_CHALLENGE_URL;
   const { lang } = useTranslation('common');
 
   return (
@@ -136,7 +136,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             </div>
             <div className={pageStyles.learnMore}>
               To learn more about our Ramadan activities, visit{' '}
-              <Link href={ROUTES.RAMADAN_2026_URL} isNewTab>
+              <Link href={ROUTES.RAMADAN_2026} isNewTab>
                 Quran.com/Ramadan2026
               </Link>
             </div>

@@ -34,30 +34,6 @@
   }
 }
 
-.starContainer {
-  display: flex;
-  align-items: center;
-
-  svg {
-    inline-size: var(--spacing-medium3-px);
-    block-size: auto;
-    stroke: #fb923c;
-    color: #fdba74;
-
-    @include breakpoints.smallerThanTablet {
-      inline-size: var(--spacing-medium-px);
-    }
-  }
-
-  .googlePlay {
-    clip-path: inset(0 70% 0 0);
-  }
-
-  .appStore {
-    clip-path: inset(0 20% 0 0);
-  }
-}
-
 .list {
   margin-block-start: var(--spacing-small-px);
 }

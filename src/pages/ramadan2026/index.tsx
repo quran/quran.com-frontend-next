@@ -29,8 +29,8 @@ import {
   ROUTES,
 } from '@/utils/navigation';
 
+const PATH = ROUTES.RAMADAN_2026;
 const Ramadan2026Page: NextPage = (): JSX.Element => {
-  const PATH = ROUTES.RAMADAN_2026_URL;
   const { lang } = useTranslation();
 
   const onButtonClicked = (event: string) => {
@@ -132,7 +132,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
             </div>
             <div className={styles.ctaContainer}>
               <Button
-                href={ROUTES.RAMADAN_CHALLENGE_URL}
+                href={ROUTES.RAMADAN_CHALLENGE}
                 onClick={() => {
                   onButtonClicked('join_surah_mulk_challenge');
                 }}

@@ -28,7 +28,13 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
-import { CreateGoalRequestUnion, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import {
+  CreateGoalRequest,
+  CreateGoalRequestUnion,
+  Goal,
+  GoalCategory,
+  UpdateGoalRequest,
+} from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { Response } from '@/types/auth/Response';
@@ -322,10 +328,10 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
+// No auth required
 export const getReadingGoalCount = async (
   category: GoalCategory,
-): Promise<{ data: { count: number } }> =>
-  privateFetcher(makeReadingGoalCountUrl({ type: category }));
+): Promise<{ data: { count: number } }> => fetcher(makeReadingGoalCountUrl({ type: category }));
 
 export const getReadingGoalStatus = async (
   type: GoalCategory,
@@ -334,9 +340,10 @@ export const getReadingGoalStatus = async (
 
 export const addReadingGoal = async (data: CreateGoalRequestUnion): Promise<{ data?: Goal }> => {
   if (data.category === GoalCategory.RAMADAN_CHALLENGE) {
-    return postRequest(makeGoalUrl({ type: data.category }), data);
+    return postRequest(makeGoalUrl({ type: data.category }), {});
   }
-  return postRequest(makeGoalUrl({ mushafId: data.mushafId, type: data.category }), data);
+  const { category, mushafId, ...requestBody } = data as CreateGoalRequest;
+  return postRequest(makeGoalUrl({ mushafId, type: category }), requestBody);
 };
 
 export const updateReadingGoal = async ({

@@ -31,8 +31,8 @@ export const ROUTES = {
   COLLECTIONS_ALL: '/collections/all',
   NOTES: '/notes-and-reflections',
   NOTIFICATION_SETTINGS: '/notification-settings',
-  RAMADAN_2026_URL: '/ramadan2026',
-  RAMADAN_CHALLENGE_URL: '/ramadanchallenge',
+  RAMADAN_2026: '/ramadan2026',
+  RAMADAN_CHALLENGE: '/ramadanchallenge',
   // TODO: add all static routes here for incremental adoption
 };
 
