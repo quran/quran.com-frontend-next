@@ -4,24 +4,16 @@ import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerFooter from '../SearchDrawer/Footer';
 
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
+import useNavbarDrawerActions, { ActionSource } from '@/hooks/useNavbarDrawerActions';
+import useNavbarState from '@/hooks/useNavbarState';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
-import {
-  Navbar,
-  selectNavbar,
-  setIsNavigationDrawerOpen,
-  setIsSearchDrawerOpen,
-  setIsSettingsDrawerOpen,
-  setLockVisibilityState,
-} from '@/redux/slices/navbar';
-import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
   Navigation = 'navigation',
@@ -50,44 +42,48 @@ interface Props {
 }
 
 /**
- * Check whether a specific drawer is open or not based on the type.
+ * Helper to get the open state for a specific drawer type.
  *
- * @param {DrawerType} type
- * @param {Navbar} navbar
- * @returns {boolean}
+ * @returns {boolean} Whether the drawer is open
  */
-const getIsOpen = (type: DrawerType, navbar: Navbar): boolean => {
-  const { isNavigationDrawerOpen, isSettingsDrawerOpen, isSearchDrawerOpen } = navbar;
+const getIsOpen = (
+  type: DrawerType,
+  navbarState: {
+    isNavigationDrawerOpen: boolean;
+    isSettingsDrawerOpen: boolean;
+    isSearchDrawerOpen: boolean;
+  },
+): boolean => {
   if (type === DrawerType.Navigation) {
-    return isNavigationDrawerOpen;
+    return navbarState.isNavigationDrawerOpen;
   }
   if (type === DrawerType.Settings) {
-    return isSettingsDrawerOpen;
+    return navbarState.isSettingsDrawerOpen;
   }
-  return isSearchDrawerOpen;
+  return navbarState.isSearchDrawerOpen;
 };
 
-const getActionCreator = (type: DrawerType) => {
+/**
+ * Helper to get the close action for a specific drawer type.
+ *
+ * @returns {Function} The close action function for the drawer type
+ */
+const getCloseAction = (
+  type: DrawerType,
+  actions: {
+    closeNavigationDrawer: (source: ActionSource) => void;
+    closeSettingsDrawer: (source: ActionSource) => void;
+    closeSearchDrawer: (source: ActionSource) => void;
+  },
+): ((source: ActionSource) => void) => {
   if (type === DrawerType.Navigation) {
-    return setIsNavigationDrawerOpen.type;
+    return actions.closeNavigationDrawer;
   }
   if (type === DrawerType.Settings) {
-    return setIsSettingsDrawerOpen.type;
+    return actions.closeSettingsDrawer;
   }
-  return setIsSearchDrawerOpen.type;
+  return actions.closeSearchDrawer;
 };
-
-const logDrawerCloseEvent = (type: string, actionSource: string) => {
-  // eslint-disable-next-line i18next/no-literal-string
-  logEvent(`drawer_${type}_close_${actionSource}`);
-};
-
-enum ActionSource {
-  Click = 'click',
-  EscKey = 'esc_key',
-  OutsideClick = 'outside_click',
-  Navigation = 'navigation',
-}
 
 const Drawer: React.FC<Props> = ({
   id,
@@ -103,26 +99,27 @@ const Drawer: React.FC<Props> = ({
   removeBodySpacing = false,
   className,
 }) => {
-  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const navbarState = useNavbarState();
+  const drawerActions = useNavbarDrawerActions();
   const drawerRef = useRef(null);
-  const dispatch = useDispatch();
-  const navbar = useSelector(selectNavbar, shallowEqual);
-  const isOpen = getIsOpen(type, navbar);
-  // when the drawer is open and the onboarding is not active.
-  usePreventBodyScrolling(isOpen);
   const router = useRouter();
+
+  const isOpen = getIsOpen(type, navbarState);
+  const closeDrawerAction = getCloseAction(type, drawerActions);
+
+  // Prevent body scrolling when drawer is open
+  usePreventBodyScrolling(isOpen);
 
   const closeDrawer = useCallback(
     (actionSource: ActionSource = ActionSource.Click) => {
       if (!canCloseDrawer) {
         return;
       }
-
-      dispatch({ type: getActionCreator(type), payload: false });
-      logDrawerCloseEvent(type, actionSource);
+      closeDrawerAction(actionSource);
     },
-    [dispatch, type, canCloseDrawer],
+    [canCloseDrawer, closeDrawerAction],
   );
+
   // enableOnFormTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
     'Escape',
@@ -135,12 +132,8 @@ const Drawer: React.FC<Props> = ({
   useEffect(() => {
     // Lock navbar visibility state when drawer is open to prevent scroll-based changes
     // Unlock when drawer is closed to restore normal scroll behavior
-    if (isOpen) {
-      dispatch(setLockVisibilityState(true));
-    } else {
-      dispatch(setLockVisibilityState(false));
-    }
-  }, [dispatch, isOpen]);
+    drawerActions.lockNavbarVisibility(isOpen);
+  }, [drawerActions, isOpen]);
 
   useEffect(() => {
     // Hide navbar after successful navigation
@@ -173,11 +166,11 @@ const Drawer: React.FC<Props> = ({
     <div
       data-testid={isOpen ? id || `${type}-drawer-container` : undefined}
       className={classNames(styles.container, className, {
-        [styles.navbarInvisible]: !isNavbarVisible,
+        [styles.navbarInvisible]: !navbarState.isVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
-        [styles.noTransition]: type === DrawerType.Search && navbar.disableSearchDrawerTransition,
+        [styles.noTransition]: isSearchDrawer && navbarState.disableSearchDrawerTransition,
         [styles.settingsDrawer]: isSettingsDrawer,
       })}
       ref={drawerRef}
