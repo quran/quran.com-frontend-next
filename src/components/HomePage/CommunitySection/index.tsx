@@ -23,6 +23,10 @@ const CommunitySection = () => {
     logButtonClick('homepage_community_qr_card');
   };
 
+  const onRamadanCardClicked = () => {
+    logButtonClick('homepage_community_ramadan_card');
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -34,7 +38,7 @@ const CommunitySection = () => {
           link={ROUTES.RAMADAN_2026}
           isNewTab
           linkClassName={styles.link}
-          onClick={onQRCardClicked}
+          onClick={onRamadanCardClicked}
         >
           <div className={styles.cardContent}>
             <div className={styles.cardTitle}>
