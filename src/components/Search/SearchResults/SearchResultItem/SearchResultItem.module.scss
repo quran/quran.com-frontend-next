@@ -24,7 +24,10 @@
   direction: rtl;
   inline-size: 100%;
   display: block;
-  margin-inline: auto 0;
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-left: auto;
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-right: 0;
 }
 
 .resultText {
