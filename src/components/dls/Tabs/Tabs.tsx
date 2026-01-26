@@ -45,6 +45,7 @@ const Tabs = ({
           })}
           key={tab.value}
           role="tab"
+          aria-selected={selected === tab.value}
           tabIndex={0}
           id={tab.id}
           {...(onSelect && {

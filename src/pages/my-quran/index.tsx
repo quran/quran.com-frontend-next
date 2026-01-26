@@ -6,8 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './my-quran.module.scss';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
+import SavedTabContent from '@/components/MyQuran/SavedTabContent';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import { SwitchVariant } from '@/dls/Switch/Switch';
 import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
@@ -50,7 +52,7 @@ const MyQuranPage = (): JSX.Element => {
   };
 
   const tabComponents = {
-    [Tab.SAVED]: null,
+    [Tab.SAVED]: <SavedTabContent />,
     [Tab.RECENT]: null,
     [Tab.NOTES_AND_REFLECTIONS]: null,
   };
@@ -76,6 +78,7 @@ const MyQuranPage = (): JSX.Element => {
             selected={selectedTab}
             items={tabs}
             onSelect={onTabChange}
+            variant={SwitchVariant.Alternative}
           />
           <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
         </PageContainer>

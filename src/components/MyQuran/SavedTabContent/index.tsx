@@ -1,0 +1,135 @@
+import React, { useMemo, useState, useCallback } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+
+import styles from './SavedTabContent.module.scss';
+
+import CollectionsList from '@/components/MyQuran/CollectionsList';
+import MyReadingBookmark from '@/components/MyQuran/MyReadingBookmark';
+import RecentlySaved from '@/components/MyQuran/RecentlySaved';
+import SearchAndFilters from '@/components/MyQuran/SearchAndFilters';
+import NewCollectionForm from '@/components/Verse/SaveBookmarkModal/Collections/NewCollectionForm';
+import Modal from '@/dls/Modal/Modal';
+import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import useCollections, { CollectionSortOption, CollectionItem } from '@/hooks/useCollections';
+import useReadingBookmarkDisplay from '@/hooks/useReadingBookmarkDisplay';
+import useRecentlySaved from '@/hooks/useRecentlySaved';
+import BookmarkType from '@/types/BookmarkType';
+
+const SavedTabContent: React.FC = () => {
+  const { isLoggedIn } = useIsLoggedIn();
+  const commonT = useTranslation('common').t;
+  const { bookmark, isLoading: isBookmarkLoading } = useReadingBookmarkDisplay();
+  const { items: recentlySavedItems, isLoading: isRecentlySavedLoading } = useRecentlySaved();
+  const {
+    collections,
+    isLoading: isCollectionsLoading,
+    addCollection,
+  } = useCollections({
+    type: BookmarkType.Ayah,
+  });
+
+  const [sortBy, setSortBy] = useState<CollectionSortOption>(CollectionSortOption.RECENTLY_UPDATED);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isNewCollectionModalOpen, setIsNewCollectionModalOpen] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState('');
+  const [isSubmittingCollection, setIsSubmittingCollection] = useState(false);
+
+  const onNewCollectionClick = useCallback(() => {
+    setIsNewCollectionModalOpen(true);
+  }, []);
+
+  const onNewCollectionCreated = useCallback(async () => {
+    if (!newCollectionName.trim()) return;
+    setIsSubmittingCollection(true);
+    const newCollection = await addCollection(newCollectionName);
+    setIsSubmittingCollection(false);
+    if (newCollection) {
+      setIsNewCollectionModalOpen(false);
+      setNewCollectionName('');
+    }
+  }, [addCollection, newCollectionName]);
+
+  // Transform collections to CollectionItem format
+  const collectionItems: CollectionItem[] = useMemo(() => {
+    return collections.map((collection) => ({
+      id: collection.id,
+      name: collection.isDefault ? commonT('favorites') : collection.name,
+      itemCount: collection.bookmarksCount || collection.count,
+      updatedAt: collection.updatedAt,
+      isDefault: collection.isDefault,
+    }));
+  }, [collections, commonT]);
+
+  // Filter collections based on search query
+  const filteredCollections = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return collectionItems;
+    }
+
+    const query = searchQuery.toLowerCase();
+    return collectionItems.filter((collection) => collection.name.toLowerCase().includes(query));
+  }, [collectionItems, searchQuery]);
+
+  // Filter recently saved items based on search query
+  const filteredRecentlySaved = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return recentlySavedItems;
+    }
+
+    const query = searchQuery.toLowerCase();
+    return recentlySavedItems.filter(
+      (item) =>
+        item.verseKey.toLowerCase().includes(query) ||
+        item.surahNumber.toString().includes(query) ||
+        item.ayahNumber.toString().includes(query),
+    );
+  }, [recentlySavedItems, searchQuery]);
+
+  // Show recently saved only for logged-in users with items
+  const showRecentlySaved =
+    isLoggedIn && (isRecentlySavedLoading || filteredRecentlySaved.length > 0);
+
+  return (
+    <div className={styles.container}>
+      {isLoggedIn && (
+        <SearchAndFilters
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          showAddNewButton={false}
+          showFilterButton={false}
+          showSortButton={false}
+        />
+      )}
+
+      <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
+
+      {showRecentlySaved && (
+        <RecentlySaved items={filteredRecentlySaved} isLoading={isRecentlySavedLoading} />
+      )}
+
+      <CollectionsList
+        collections={filteredCollections}
+        isLoading={isCollectionsLoading}
+        isGuest={!isLoggedIn}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+        onNewCollectionClick={onNewCollectionClick}
+      />
+
+      <Modal isOpen={isNewCollectionModalOpen} onClose={() => setIsNewCollectionModalOpen(false)}>
+        <NewCollectionForm
+          newCollectionName={newCollectionName}
+          isSubmittingCollection={isSubmittingCollection}
+          onNameChange={setNewCollectionName}
+          onBack={() => setIsNewCollectionModalOpen(false)}
+          onCancel={() => setIsNewCollectionModalOpen(false)}
+          onCreate={onNewCollectionCreated}
+          onClose={() => setIsNewCollectionModalOpen(false)}
+        />
+      </Modal>
+    </div>
+  );
+};
+
+export default SavedTabContent;

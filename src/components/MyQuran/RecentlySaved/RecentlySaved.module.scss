@@ -1,0 +1,94 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  margin-block-end: var(--spacing-xlarge-px);
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-medium2-px);
+}
+
+.scrollContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-borders-hairline) transparent;
+
+  &::-webkit-scrollbar {
+    block-size: var(--spacing-xxsmall2-px);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-borders-hairline);
+    border-radius: var(--border-radius-pill);
+  }
+}
+
+.itemsList {
+  display: flex;
+  gap: var(--spacing-small-px);
+  padding-block-end: var(--spacing-small-px);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xsmall-px);
+  padding: var(--spacing-xxsmall2-px) var(--spacing-small2-px);
+  background: var(--color-separators-ayah-level);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover {
+    background: var(--color-background-alternative);
+    border-color: var(--color-borders-hairline-new);
+  }
+}
+
+.itemText {
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+}
+
+.itemArrow {
+  inline-size: var(--font-size-xsmall-px);
+  block-size: var(--font-size-xsmall-px);
+  color: var(--color-text-faded);
+}
+
+.skeleton {
+  inline-size: 150px;
+  block-size: 36px;
+  background: linear-gradient(
+    90deg,
+    var(--color-background-alternative) 25%,
+    var(--color-background-alternative-faded) 50%,
+    var(--color-background-alternative) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  border-radius: var(--border-radius-pill);
+  flex-shrink: 0;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

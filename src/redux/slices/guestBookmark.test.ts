@@ -6,6 +6,8 @@ import reducer, { setGuestReadingBookmark, clearGuestBookmarks } from './guestBo
 import BookmarkType from '@/types/BookmarkType';
 
 describe('guestBookmark slice', () => {
+  const mockCreatedAt = '2026-01-26T12:00:00.000Z';
+
   it('sets a valid ayah reading bookmark', () => {
     const state = reducer(
       undefined,
@@ -14,6 +16,7 @@ describe('guestBookmark slice', () => {
         type: BookmarkType.Ayah,
         verseNumber: 5,
         mushafId: 1,
+        createdAt: mockCreatedAt,
       }),
     ) as any;
     expect(state.readingBookmark).toEqual({
@@ -21,6 +24,7 @@ describe('guestBookmark slice', () => {
       type: BookmarkType.Ayah,
       verseNumber: 5,
       mushafId: 1,
+      createdAt: mockCreatedAt,
     });
   });
 
@@ -31,12 +35,14 @@ describe('guestBookmark slice', () => {
         key: 42,
         type: BookmarkType.Page,
         mushafId: 1,
+        createdAt: mockCreatedAt,
       }),
     ) as any;
     expect(state.readingBookmark).toEqual({
       key: 42,
       type: BookmarkType.Page,
       mushafId: 1,
+      createdAt: mockCreatedAt,
     });
   });
 
@@ -48,6 +54,7 @@ describe('guestBookmark slice', () => {
         type: BookmarkType.Ayah,
         verseNumber: 1,
         mushafId: 1,
+        createdAt: mockCreatedAt,
       }),
     ) as any;
     const cleared = reducer(initial, clearGuestBookmarks()) as any;
@@ -58,20 +65,41 @@ describe('guestBookmark slice', () => {
     expect(() =>
       reducer(
         undefined,
-        setGuestReadingBookmark({ key: 0, type: BookmarkType.Ayah, mushafId: 1 } as any),
+        setGuestReadingBookmark({
+          key: 0,
+          type: BookmarkType.Ayah,
+          mushafId: 1,
+          createdAt: mockCreatedAt,
+        } as any),
       ),
     ).toThrow();
   });
 
   it('throws on invalid format - invalid type', () => {
     expect(() =>
-      reducer(undefined, setGuestReadingBookmark({ key: 1, type: 'invalid' as any, mushafId: 1 })),
+      reducer(
+        undefined,
+        setGuestReadingBookmark({
+          key: 1,
+          type: 'invalid' as any,
+          mushafId: 1,
+          createdAt: mockCreatedAt,
+        }),
+      ),
     ).toThrow();
   });
 
   it('throws on ayah bookmark without verseNumber', () => {
     expect(() =>
-      reducer(undefined, setGuestReadingBookmark({ key: 1, type: BookmarkType.Ayah, mushafId: 1 })),
+      reducer(
+        undefined,
+        setGuestReadingBookmark({
+          key: 1,
+          type: BookmarkType.Ayah,
+          mushafId: 1,
+          createdAt: mockCreatedAt,
+        }),
+      ),
     ).toThrow();
   });
 });

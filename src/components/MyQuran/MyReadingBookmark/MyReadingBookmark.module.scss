@@ -1,0 +1,120 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  margin-block-end: var(--spacing-large-px);
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-medium2-px);
+}
+
+.bookmarkCard {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium-px);
+  inline-size: 100%;
+  padding: var(--spacing-medium2-px);
+  background: var(--color-background-alternative-faded);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: inherit;
+
+  &:hover {
+    background-color: var(--color-background-alternative);
+    border-color: var(--color-borders-hairline-new);
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  inline-size: 40px;
+  block-size: 40px;
+  background: var(--color-success-faded);
+  border-radius: 12px;
+  color: var(--color-success-medium);
+}
+
+.icon {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.text {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+}
+
+.date {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+}
+
+.chevron {
+  inline-size: 16px;
+  block-size: 16px;
+  color: var(--color-text-faded);
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-large-px);
+  background: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  justify-content: center;
+}
+
+.emptyText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded);
+  margin: 0;
+  text-align: center;
+}
+
+.skeleton {
+  inline-size: 100%;
+  block-size: 80px;
+  background: linear-gradient(
+    90deg,
+    var(--color-background-alternative) 25%,
+    var(--color-background-alternative-faded) 50%,
+    var(--color-background-alternative) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+  border-radius: var(--border-radius-pill);
+  border: 1px solid var(--color-borders-hairline);
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}

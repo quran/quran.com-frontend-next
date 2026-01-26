@@ -56,6 +56,7 @@ const ReadingSection: React.FC<Props> = () => {
       type: readingBookmarkData.type,
       verseNumber: readingBookmarkData.verseNumber,
       mushafId,
+      createdAt: (readingBookmarkData as any).createdAt || new Date().toISOString(),
     };
   }, [isGuest, guestReadingBookmark, readingBookmarkData, mushafId]);
 

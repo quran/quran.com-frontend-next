@@ -1,8 +1,8 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Bookmark from '@/types/Bookmark';
 import { DEFAULT_COLLECTION_ID } from '@/utils/auth/constants';
 
 interface CollectionItem {
@@ -18,12 +18,12 @@ interface CollectionListData {
     id: string;
     name: string;
     updatedAt?: string;
+    isDefault?: boolean;
   }>;
 }
 
 interface UseCollectionsStateParams {
   isVerse: boolean;
-  resourceBookmark: Bookmark | undefined;
   collectionListData: CollectionListData | undefined;
   bookmarkCollectionIdsData: string[] | undefined;
 }
@@ -41,38 +41,60 @@ interface UseCollectionsStateReturn {
  */
 export const useCollectionsState = ({
   isVerse,
-  resourceBookmark,
   collectionListData,
   bookmarkCollectionIdsData,
 }: UseCollectionsStateParams): UseCollectionsStateReturn => {
   const commonT = useTranslation('common').t;
 
   const isInFavorites = useMemo(
-    () => Boolean(resourceBookmark?.isInDefaultCollection),
-    [resourceBookmark?.isInDefaultCollection],
+    () => Boolean(bookmarkCollectionIdsData?.includes(DEFAULT_COLLECTION_ID)),
+    [bookmarkCollectionIdsData],
   );
 
   const sortedCollections = useMemo((): CollectionItem[] => {
-    const favoritesCollection: CollectionItem = {
-      id: DEFAULT_COLLECTION_ID,
-      name: commonT('favorites'),
-      checked: isInFavorites,
-      isDefault: true,
-    };
-
-    if (!isVerse || !collectionListData?.data) {
-      return [favoritesCollection];
+    if (!isVerse) {
+      return [];
     }
 
-    const collections = collectionListData.data.map((collection) => ({
-      id: collection.id,
-      name: collection.name,
-      checked: !!bookmarkCollectionIdsData?.includes(collection.id),
-      updatedAt: collection.updatedAt,
-      isDefault: false,
-    }));
+    const collections: CollectionItem[] = [];
 
-    return [favoritesCollection, ...collections];
+    // Check if default collection is in the API response
+    const apiDefaultCollection = collectionListData?.data?.find(
+      (collection) => collection.id === DEFAULT_COLLECTION_ID,
+    );
+
+    // Add default collection (from API or manual)
+    if (apiDefaultCollection) {
+      collections.push({
+        id: DEFAULT_COLLECTION_ID,
+        name: commonT('favorites'),
+        checked: isInFavorites,
+        updatedAt: apiDefaultCollection.updatedAt,
+        isDefault: true,
+      });
+    } else {
+      collections.push({
+        id: DEFAULT_COLLECTION_ID,
+        name: commonT('favorites'),
+        checked: isInFavorites,
+        isDefault: true,
+      });
+    }
+
+    // Add other collections from API response
+    collectionListData?.data?.forEach((collection) => {
+      if (collection.id !== DEFAULT_COLLECTION_ID) {
+        collections.push({
+          id: collection.id,
+          name: collection.name,
+          checked: !!bookmarkCollectionIdsData?.includes(collection.id),
+          updatedAt: collection.updatedAt,
+          isDefault: false,
+        });
+      }
+    });
+
+    return collections;
   }, [collectionListData, bookmarkCollectionIdsData, isInFavorites, commonT, isVerse]);
 
   return {

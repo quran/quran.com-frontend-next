@@ -108,7 +108,6 @@ const useSaveBookmarkModal = ({
 
   const { sortedCollections } = useCollectionsState({
     isVerse,
-    resourceBookmark: bookmarkData.resourceBookmark,
     collectionListData: bookmarkData.collectionListData,
     bookmarkCollectionIdsData: bookmarkData.bookmarkCollectionIdsData,
   });

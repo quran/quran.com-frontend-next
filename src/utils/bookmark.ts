@@ -15,6 +15,8 @@ export interface GuestReadingBookmark {
   verseNumber?: number;
   /** Mushaf ID for mapping between different mushafs */
   mushafId: number;
+  /** ISO timestamp when the bookmark was created */
+  createdAt: string;
 }
 
 /**

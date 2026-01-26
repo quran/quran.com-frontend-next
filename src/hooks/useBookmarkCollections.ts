@@ -36,13 +36,7 @@ const useBookmarkCollections = ({
   type,
   verseNumber,
   bookmarksRangeUrl,
-}: {
-  mushafId: number;
-  key: number;
-  type: BookmarkType;
-  verseNumber?: number;
-  bookmarksRangeUrl?: string;
-}) => {
+}: UseBookmarkCollectionsProps): UseBookmarkCollectionsReturn => {
   const { isLoggedIn } = useIsLoggedIn();
   const { mutate: globalMutate } = useSWRConfig();
   const toast = useToast();
@@ -54,14 +48,18 @@ const useBookmarkCollections = ({
     shouldUseSurahBookmarks ? key : 0,
     mushafId,
   );
-  const { data: collectionIds, mutate: mutateBookmarkCollections } = useSWR<string[]>(
-    isLoggedIn ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber) : null,
+  const { data: collectionIdsResponse, mutate: mutateBookmarkCollections } = useSWR<unknown>(
+    isLoggedIn && key && verseNumber // only fetch if all params are present
+      ? makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber)
+      : null,
     () => getBookmarkCollections(mushafId, key, type, verseNumber),
     {
       ...mutatingFetcherConfig,
       revalidateOnFocus: false, // Prevent excessive refetches on window focus
     },
   );
+  const collectionIds = toSafeArray(collectionIdsResponse);
+  const isReady = !!collectionIds.length;
   const showErrorToast = (err: unknown) => {
     toast(t(isBookmarkSyncError(err) ? 'error.bookmark-sync' : 'error.general'), {
       status: ToastStatus.Error,
@@ -113,7 +111,7 @@ const useBookmarkCollections = ({
     if (isPendingRef.current) return false;
     isPendingRef.current = true;
     const previousBookmark = verseKey ? getVerseBookmark(verseKey) : undefined;
-    const nextIds = [...(collectionIds || []), collectionId];
+    const nextIds = [...collectionIds, collectionId];
     applyOptimisticBookmark(nextIds, previousBookmark);
     try {
       await commitCollectionChange(nextIds, async () => {
@@ -139,7 +137,7 @@ const useBookmarkCollections = ({
     if (isPendingRef.current) return false;
     isPendingRef.current = true;
     const previousBookmark = verseKey ? getVerseBookmark(verseKey) : undefined;
-    const nextIds = (collectionIds || []).filter((id) => id !== collectionId);
+    const nextIds = collectionIds.filter((id) => id !== collectionId);
     applyOptimisticBookmark(nextIds, previousBookmark);
     try {
       await commitCollectionChange(nextIds, async () => {

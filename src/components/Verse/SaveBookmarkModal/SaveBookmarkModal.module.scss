@@ -196,7 +196,7 @@ $newCollectionSectionHeight: 64px;
   inline-size: 100%;
   block-size: $newCollectionSectionHeight;
 
-  border: $border-width-default solid #ebeef0;
+  border: $border-width-default solid var(--color-separators-ayah-level);
   border-radius: var(--border-radius-large-px);
 
   background-color: transparent;

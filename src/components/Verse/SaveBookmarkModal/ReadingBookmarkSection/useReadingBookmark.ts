@@ -1,3 +1,22 @@
+/**
+ * useReadingBookmark - Full-featured reading bookmark management hook for the Save Bookmark Modal.
+ *
+ * This hook provides complete CRUD (Create, Read, Update, Delete) operations for reading bookmarks
+ * with the following capabilities:
+ * - Set new reading bookmarks (verse or page based)
+ * - Undo bookmark changes (restore previous bookmark state)
+ * - Remove current bookmark
+ * - Cross-mushaf bookmark mapping (displays bookmarks correctly across different Quran layouts)
+ * - Optimistic UI updates with proper error handling
+ * - Support for both logged-in users (API persistence) and guests (Redux persistence)
+ *
+ * This hook is specifically designed for the SaveBookmarkModal component.
+ *       For simple display-only access to the reading bookmark, use `useReadingBookmarkDisplay`
+ *       from `@/hooks/useReadingBookmarkDisplay` instead.
+ *
+ * @see useReadingBookmarkDisplay - Lightweight read-only hook for displaying bookmarks
+ */
+
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
@@ -298,6 +317,7 @@ const useReadingBookmark = ({
           type: bookmark.type,
           verseNumber: bookmark.verseNumber,
           mushafId: currentMushafId,
+          createdAt: new Date().toISOString(),
         }),
       );
       return null;
@@ -340,11 +360,13 @@ const useReadingBookmark = ({
               type: BookmarkType.Ayah,
               verseNumber: Number(verseKey.split(':')[1]),
               mushafId: currentMushafId,
+              createdAt: new Date().toISOString(),
             }
           : {
               key: pageNumber!,
               type: BookmarkType.Page,
               mushafId: currentMushafId,
+              createdAt: new Date().toISOString(),
             };
 
       // Persist to backend and get the response with the real ID

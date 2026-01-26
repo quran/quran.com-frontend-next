@@ -18,6 +18,21 @@ import mutatingFetcherConfig from '@/utils/swr';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
 
+// Export types for My Quran page components
+export interface CollectionItem {
+  id: string;
+  name: string;
+  itemCount?: number;
+  updatedAt: string;
+  isDefault: boolean;
+}
+
+export enum CollectionSortOption {
+  RECENTLY_UPDATED = 'recentlyUpdated',
+  ALPHABETICAL_ASC = 'alphabeticalAsc',
+  ALPHABETICAL_DESC = 'alphabeticalDesc',
+}
+
 interface UseCollectionsProps {
   type?: BookmarkType;
 }
@@ -57,7 +72,7 @@ const useCollections = ({
     mutate: swrMutateCollections,
   } = useSWR<{ data: Collection[] }>(
     isLoggedIn ? makeCollectionsUrl({ type }) : null,
-    () => getCollectionsList({ type }),
+    () => getCollectionsList({}), // No type filter to fetch empty collections
     { ...mutatingFetcherConfig, revalidateIfStale: true },
   );
 
@@ -89,6 +104,7 @@ const useCollections = ({
         name,
         url: name.toLowerCase().replace(/\s+/g, '-'),
         updatedAt: new Date().toISOString(),
+        bookmarksCount: 0,
       };
 
       try {
