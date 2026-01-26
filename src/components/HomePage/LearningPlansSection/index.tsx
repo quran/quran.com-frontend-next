@@ -98,7 +98,7 @@ const LearningPlansSection = () => {
                     >
                       <div className={styles.thumbnailWrapper}>
                         <Image
-                          src={course.thumbnail}
+                          src={course.thumbnail || ''}
                           alt={course.title}
                           fill
                           className={styles.thumbnail}
