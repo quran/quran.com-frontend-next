@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import { getQiraatMatrix } from '@/api';
 import Language from '@/types/Language';
@@ -25,12 +25,10 @@ interface UseQiraatDataResult {
 export const useQiraatData = (verseKey: string): UseQiraatDataResult => {
   const { locale } = useRouter();
 
-  const { data, error, isValidating, mutate } = useSWR<QiraatApiResponse>(
+  const { data, error, isValidating, mutate } = useSWRImmutable<QiraatApiResponse>(
     makeQiraatMatrixUrl(verseKey, (locale as Language) ?? Language.EN),
     () => getQiraatMatrix(verseKey, (locale as Language) ?? Language.EN),
     {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
       dedupingInterval: 5000,
       shouldRetryOnError: (err) => {
         if (err?.status === 404) return false;

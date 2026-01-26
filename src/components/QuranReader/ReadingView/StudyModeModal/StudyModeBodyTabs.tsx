@@ -99,12 +99,13 @@ export const useStudyModeTabs = ({
 }): TabConfig[] => {
   const { t } = useTranslation('common');
 
-  const { data: questionData } = useBatchedCountRangeQuestions(verseKey);
-  const hasQuestions = questionData?.total > 0;
+  const { data: questionData, isLoading: isLoadingQuestions } =
+    useBatchedCountRangeQuestions(verseKey);
+  const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
 
-  const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
-  const hasQiraat = (qiraatCount ?? 0) > 0;
+  const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
 
   useEffect(() => {
     // Auto-close Answers tab when there are no questions

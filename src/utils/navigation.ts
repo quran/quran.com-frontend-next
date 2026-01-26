@@ -233,6 +233,14 @@ export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/related-verse`;
 
 /**
+ * Get the href link to Qiraat of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseQiraatNavigationUrl = (verseKey: string): string => `/${verseKey}/qiraat`;
+
+/**
  * Get the href link to a specific answer with its associated verse key.
  *
  * @param {string} questionId - The ID of the question
