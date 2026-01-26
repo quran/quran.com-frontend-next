@@ -1,7 +1,7 @@
 /* stylelint-disable csstools/use-logical */
-@use "src/styles/breakpoints";
-@use "src/components/dls/Modal/constants";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/components/dls/Modal/constants';
+@use 'src/styles/theme';
 
 @keyframes desktopContentIn {
   0% {
@@ -128,37 +128,31 @@
   z-index: var(--z-index-modal);
 }
 
-.content[data-state="open"] {
-  animation:
-    mobileContentIn constants.$animationDuration constants.$animationEasing,
+.content[data-state='open'] {
+  animation: mobileContentIn constants.$animationDuration constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation:
-        topSheetOnMobileIn constants.$animationDuration constants.$animationEasing,
+      animation: topSheetOnMobileIn constants.$animationDuration constants.$animationEasing,
         fadeIn constants.$animationDuration constants.$animationEasing;
     }
   }
   @include breakpoints.tablet {
-    animation:
-      desktopContentIn constants.$animationDuration constants.$animationEasing,
+    animation: desktopContentIn constants.$animationDuration constants.$animationEasing,
       fadeIn constants.$animationDuration constants.$animationEasing;
   }
 }
-.content[data-state="closed"] {
-  animation:
-    mobileContentOut constants.$animationDuration constants.$animationEasing,
+.content[data-state='closed'] {
+  animation: mobileContentOut constants.$animationDuration constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation:
-        topSheetOnMobileOut constants.$animationDuration constants.$animationEasing,
+      animation: topSheetOnMobileOut constants.$animationDuration constants.$animationEasing,
         fadeOut constants.$animationDuration constants.$animationEasing;
     }
   }
   @include breakpoints.tablet {
-    animation:
-      desktopContentOut constants.$animationDuration constants.$animationEasing,
+    animation: desktopContentOut constants.$animationDuration constants.$animationEasing,
       fadeOut constants.$animationDuration constants.$animationEasing;
   }
 }
