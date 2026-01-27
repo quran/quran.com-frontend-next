@@ -59,7 +59,8 @@ const useBookmarkCollections = ({
     },
   );
   const collectionIds = toSafeArray(collectionIdsResponse);
-  const isReady = !!collectionIds.length;
+  // Ready when data has been fetched (even if empty array)
+  const isReady = collectionIdsResponse !== undefined;
   const showErrorToast = (err: unknown) => {
     toast(t(isBookmarkSyncError(err) ? 'error.bookmark-sync' : 'error.general'), {
       status: ToastStatus.Error,
@@ -93,7 +94,10 @@ const useBookmarkCollections = ({
   };
   const rollbackOptimisticBookmark = (previousBookmark: Bookmark | undefined) =>
     verseKey && updateVerseBookmark(verseKey, previousBookmark);
-  const commitCollectionChange = async (nextIds: string[], mutation: () => Promise<any>) => {
+  const commitCollectionChange = async (
+    nextIds: string[],
+    mutation: () => Promise<{ bookmark?: Bookmark }>,
+  ) => {
     await mutateBookmarkCollections(
       async () => {
         const result = await mutation();

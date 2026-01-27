@@ -3,7 +3,7 @@
 @import '../shared.module.scss';
 
 $min-collection-card-height: 60px;
-$icon-size: 20px;
+$icon-size: var(--spacing-medium2-px);
 
 // Collections Section
 .collectionsSection {

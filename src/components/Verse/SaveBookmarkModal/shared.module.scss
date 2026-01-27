@@ -1,12 +1,12 @@
 @use 'src/styles/breakpoints';
 
 $max-block-size: 150px;
-$icon-size: 16px;
-$close-icon-h: 24px;
-$close-icon-w: 22px;
-$modal-padding: 40px;
+$icon-size: var(--spacing-medium-plus-px);
+$close-icon-h: var(--spacing-medium3-px);
+$close-icon-w: var(--spacing-medium2-px);
+$modal-padding: var(--spacing-xlarge-px);
 $modal-width: 500px;
-$border-width-default: 1px;
+$border-width-default: var(--spacing-hairline-px);
 
 .divider {
   inline-size: 100%;
