@@ -123,7 +123,6 @@
   "reflection-languages": "Reflection Languages",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
-  "qiraat-desc": "Explore the different Qiraat (variant readings) of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "remove-bookmark": "Remove bookmark",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",

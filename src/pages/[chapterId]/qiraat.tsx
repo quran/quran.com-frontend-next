@@ -55,28 +55,25 @@ const AyahQiraatPage: NextPage<AyahQiraatProp> = ({
   verse,
   versesResponse,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation();
 
   const navigationUrl = getVerseQiraatNavigationUrl(`${chapterId}:${verseNumber}`);
 
   return (
     <>
       <NextSeoWrapper
-        title={`${t('qiraat.title')} ${t('common:surah')} ${
-          chapter.chapter.transliteratedName
-        } - ${toLocalizedNumber(Number(verseNumber), lang)}`}
-        image={getChapterOgImageUrl({
-          chapterId,
-          verseNumber,
-          locale: lang,
+        title={t('qiraat:title', {
+          surahName: chapter.chapter.transliteratedName,
+          ayahNumber: toLocalizedNumber(Number(verseNumber), lang),
         })}
+        image={getChapterOgImageUrl({ chapterId, verseNumber, locale: lang })}
         imageWidth={1200}
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('qiraat.description', {
-          ayahNumber: verseNumber,
+        description={t('qiraat:description', {
           surahName: chapter.chapter.transliteratedName,
+          ayahNumber: toLocalizedNumber(Number(verseNumber), lang),
         })}
       />
       {/* @ts-ignore */}
