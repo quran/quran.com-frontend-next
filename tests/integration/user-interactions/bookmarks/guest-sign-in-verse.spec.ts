@@ -15,7 +15,8 @@ test('Guest sign-in prompt appears and redirect includes r param', async ({ page
   const newCollectionButton = page.getByRole('button', { name: 'New Collection' });
   await expect(newCollectionButton).toBeVisible();
   await newCollectionButton.click();
-  const signInButton = page.getByRole('button', { name: 'Sign in' });
+  // Use a more specific selector to target the actual sign-in button (not the reading bookmark section)
+  const signInButton = page.locator('button[type="button"]').filter({ hasText: /^Sign in$/ });
   await expect(signInButton).toBeVisible();
   await signInButton.click();
   await expect(page).toHaveURL(/\/login/);
