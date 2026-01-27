@@ -36,6 +36,10 @@
     "streaks-that-will-break": {
       "description": "An email will be sent to notify you of a streak that is about to break.",
       "title": "Streaks"
+    },
+    "abandoned-quran-goal": {
+      "description": "An email will be sent to remind you of your Quran goal if you have not made progress in a while.",
+      "title": "Goal Reminder"
     }
   },
   "personalization": "Personalization",
