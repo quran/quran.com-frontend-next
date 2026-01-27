@@ -5,6 +5,8 @@ import { describe, it, expect, vi } from 'vitest';
 
 import PageBookmarkAction from './PageBookmarkAction';
 
+import BookmarkType from '@/types/BookmarkType';
+
 vi.mock('next/dynamic', () => ({ default: () => () => <div data-testid="modal" /> }));
 vi.mock('next-translate/useTranslation', () => ({ default: () => ({ t: (k: string) => k }) }));
 vi.mock('swr', () => ({ default: () => ({ data: undefined, isValidating: false }) }));
@@ -20,6 +22,17 @@ vi.mock('@/utils/verse', () => ({
   }),
 }));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
+vi.mock('@/hooks/auth/useGlobalReadingBookmark', () => ({
+  default: () => ({ readingBookmark: null, isLoading: false }),
+}));
+vi.mock('@/hooks/useMappedBookmark', () => ({
+  default: ({ bookmark }: any) => ({
+    needsMapping: false,
+    effectivePageNumber: bookmark?.key || null,
+    effectiveAyahVerseKey: null,
+    isLoading: false,
+  }),
+}));
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
   selectQuranReaderStyles: (s: any) => s.quranReaderStyles,
 }));
@@ -40,7 +53,14 @@ describe('PageBookmarkAction', () => {
     (globalThis as any).mockPageState = {
       current: {
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'page:1:1:1' },
+        guestBookmark: {
+          readingBookmark: {
+            key: 1,
+            type: BookmarkType.Page,
+            mushafId: 1,
+            createdAt: new Date().toISOString(),
+          },
+        },
       },
     };
     render(<PageBookmarkAction pageNumber={1} />);
@@ -54,7 +74,14 @@ describe('PageBookmarkAction', () => {
     (globalThis as any).mockPageState = {
       current: {
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'page:2:1:1' },
+        guestBookmark: {
+          readingBookmark: {
+            key: 2,
+            type: BookmarkType.Page,
+            mushafId: 1,
+            createdAt: new Date().toISOString(),
+          },
+        },
       },
     };
     render(<PageBookmarkAction pageNumber={1} />);

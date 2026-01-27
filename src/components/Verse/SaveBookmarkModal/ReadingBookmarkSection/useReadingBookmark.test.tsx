@@ -62,6 +62,7 @@ vi.mock('@/utils/api', () => ({
 
 vi.mock('@/utils/auth/api', () => ({
   addBookmark: vi.fn(),
+  deleteBookmarkById: vi.fn(),
 }));
 
 vi.mock('@/utils/chapter', () => ({
@@ -79,6 +80,8 @@ vi.mock('@/utils/locale', () => ({
 describe('useReadingBookmark - Logged-in User', () => {
   const mockOnBookmarkChanged = vi.fn();
   const mockAddBookmark = authApi.addBookmark as Mock;
+  const mockDeleteBookmark = authApi.deleteBookmarkById as Mock;
+  const mockDeleteBookmarkById = authApi.deleteBookmarkById as Mock;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -88,6 +91,7 @@ describe('useReadingBookmark - Logged-in User', () => {
       verseNumber: 1,
       type: BookmarkType.Ayah,
     });
+    mockDeleteBookmarkById.mockResolvedValue(undefined);
   });
 
   describe('isCurrentBookmark detection', () => {
@@ -248,13 +252,7 @@ describe('useReadingBookmark - Logged-in User', () => {
         await result.current.handleRemoveCurrentBookmark();
       });
 
-      expect(mockAddBookmark).toHaveBeenCalledWith({
-        key: 1,
-        mushafId: 1,
-        type: BookmarkType.Ayah,
-        verseNumber: 1,
-        isReading: null,
-      });
+      expect(mockDeleteBookmark).toHaveBeenCalledWith('bm-1');
       // Note: onBookmarkChanged is NOT called for logged-in users (optimistic updates instead)
       expect(mockOnBookmarkChanged).not.toHaveBeenCalled();
     });
@@ -284,12 +282,7 @@ describe('useReadingBookmark - Logged-in User', () => {
         await result.current.handleRemoveCurrentBookmark();
       });
 
-      expect(mockAddBookmark).toHaveBeenCalledWith({
-        key: 42,
-        mushafId: 1,
-        type: BookmarkType.Page,
-        isReading: null,
-      });
+      expect(mockDeleteBookmark).toHaveBeenCalledWith('bm-1');
     });
 
     it('does nothing when no readingBookmarkData exists', async () => {
@@ -308,7 +301,7 @@ describe('useReadingBookmark - Logged-in User', () => {
         await result.current.handleRemoveCurrentBookmark();
       });
 
-      expect(mockAddBookmark).not.toHaveBeenCalled();
+      expect(mockDeleteBookmark).not.toHaveBeenCalled();
     });
   });
 

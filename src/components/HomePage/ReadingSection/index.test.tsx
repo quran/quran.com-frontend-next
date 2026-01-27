@@ -1,9 +1,12 @@
 import React from 'react';
 
+/* eslint-disable max-lines */
 import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import ReadingSection from './index';
+
+import BookmarkType from '@/types/BookmarkType';
 
 // mock swr before importing component under test
 vi.mock('swr', () => ({
@@ -15,7 +18,7 @@ vi.mock('swr', () => ({
     if (typeof key === 'string' && key.startsWith('verse-to-page-')) {
       return { data: (globalThis as any).mockSWRPage };
     }
-    if (typeof key === 'string' && key.startsWith('reading-bookmark-')) {
+    if (typeof key === 'string' && key.startsWith('reading-bookmark')) {
       return { data: (globalThis as any).mockReadingBookmark };
     }
     return { data: undefined };
@@ -23,7 +26,14 @@ vi.mock('swr', () => ({
 }));
 
 vi.mock('next-translate/useTranslation', () => ({ default: () => ({ t: (k: string) => k }) }));
+vi.mock('@/components/Wrapper/Wrapper', () => ({
+  default: ({ children }: any) => <div>{children}</div>,
+}));
 vi.mock('@/icons/bookmark_remove.svg', () => ({ default: () => <div /> }));
+vi.mock('@/dls/Link/Link', () => ({
+  default: ({ children, href }: any) => <a href={href}>{children}</a>,
+  LinkVariant: {},
+}));
 vi.mock('@/components/HomePage/ReadingSection/ChapterCard', () => ({
   default: ({ pageNumber, surahNumber, verseNumber }: any) => (
     <div
@@ -69,25 +79,64 @@ vi.mock('@/utils/verse', () => ({
 vi.mock('@/utils/auth/api', () => ({
   getReadingBookmark: vi.fn(async () => (globalThis as any).mockReadingBookmark),
 }));
+vi.mock('@/hooks/auth/useGlobalReadingBookmark', () => ({
+  default: () => ({ readingBookmark: (globalThis as any).mockReadingBookmark }),
+}));
+vi.mock('@/hooks/useMappedBookmark', () => ({
+  default: ({ bookmark }: any) => ({
+    needsMapping: false,
+    effectivePageNumber: bookmark?.type === 'page' ? bookmark?.key : null,
+    effectiveAyahVerseKey:
+      bookmark?.type === 'ayah'
+        ? { surahNumber: bookmark?.key, verseNumber: bookmark?.verseNumber }
+        : null,
+    isLoading: false,
+    bookmarkMushafId: bookmark?.mushafId || 1,
+  }),
+}));
 
 describe('ReadingSection', () => {
   beforeEach(() => cleanup());
 
   it('renders ChapterCard with resolved page from extended bookmark', async () => {
-    (globalThis as any).mockSWRPage = 3;
-    render(<ReadingSection />);
-    await waitFor(() =>
-      expect(screen.getByTestId('chapter-card').getAttribute('data-page-number')).toBe('3'),
-    );
-  });
-
-  it('renders ChapterCard linking to verse for ayah bookmark', async () => {
-    (globalThis as any).mockSWRPage = 8;
+    (globalThis as any).mockSWRFirstVerse = { surahNumber: 1, verseNumber: 1 };
     (globalThis as any).mockState = {
       current: {
         session: { isGuest: true, isFirstTimeGuest: false },
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'ayah:60:3' },
+        guestBookmark: {
+          readingBookmark: {
+            key: 2,
+            type: BookmarkType.Page,
+            mushafId: 1,
+            createdAt: new Date().toISOString(),
+          },
+        },
+      },
+    };
+    render(<ReadingSection />);
+    await waitFor(() => {
+      const el = screen.getByTestId('chapter-card');
+      expect(el.getAttribute('data-page-number')).toBe('2');
+      expect(el.getAttribute('data-surah')).toBe('1');
+      expect(el.getAttribute('data-verse')).toBe('1');
+    });
+  });
+
+  it('renders ChapterCard linking to verse for ayah bookmark', async () => {
+    (globalThis as any).mockState = {
+      current: {
+        session: { isGuest: true, isFirstTimeGuest: false },
+        quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
+        guestBookmark: {
+          readingBookmark: {
+            key: 60,
+            type: BookmarkType.Ayah,
+            verseNumber: 3,
+            mushafId: 1,
+            createdAt: new Date().toISOString(),
+          },
+        },
       },
     };
     render(<ReadingSection />);
@@ -100,17 +149,23 @@ describe('ReadingSection', () => {
   });
 
   it('uses logged-in user reading bookmark over guest bookmark', async () => {
-    (globalThis as any).mockSWRPage = 9;
     (globalThis as any).mockReadingBookmark = {
-      type: 'ayah',
       key: 60,
+      type: BookmarkType.Ayah,
       verseNumber: 3,
     };
     (globalThis as any).mockState = {
       current: {
         session: { isGuest: false, isFirstTimeGuest: false },
         quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 },
-        guestBookmark: { readingBookmark: 'page:2:1:1' },
+        guestBookmark: {
+          readingBookmark: {
+            key: 2,
+            type: BookmarkType.Page,
+            mushafId: 1,
+            createdAt: new Date().toISOString(),
+          },
+        },
       },
     };
     render(<ReadingSection />);

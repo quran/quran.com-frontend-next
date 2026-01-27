@@ -7,6 +7,10 @@ import ReadingBookmarkSection from './ReadingBookmarkSection';
 
 import { ReadingBookmarkType } from '@/types/Bookmark';
 
+vi.mock('@/dls/Toast/Toast', () => ({
+  useToast: () => vi.fn(),
+  ToastStatus: { Error: 'error', Success: 'success' },
+}));
 vi.mock('./useReadingBookmark', () => ({
   default: () => {
     const m = (globalThis as any).mockRbs || {

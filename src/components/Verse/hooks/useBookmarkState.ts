@@ -86,14 +86,6 @@ const useBookmarkState = (verse: Verse): UseBookmarkStateResult => {
     return count > 0;
   }, [bookmarkedVerses, bookmark, isGuest, verse.verseKey]);
 
-  // Check if verse is in favorites (default collection)
-  const isVerseInFavorites = useMemo(() => {
-    if (isGuest) {
-      return !!bookmarkedVerses[verse.verseKey];
-    }
-    return !!bookmark?.isInDefaultCollection;
-  }, [bookmarkedVerses, bookmark, isGuest, verse.verseKey]);
-
   const isVerseMultipleBookmarked = useMemo(() => {
     if (isGuest) {
       return false;
@@ -103,9 +95,9 @@ const useBookmarkState = (verse: Verse): UseBookmarkStateResult => {
   }, [bookmark, isGuest]);
 
   return {
-    isVerseBookmarked: isVerseBookmarked || isVerseInFavorites, // Is in any collection
+    isVerseBookmarked, // Is in any collection
     isVerseReadingBookmark, // Reading bookmark
-    isVerseMultipleBookmarked, // In collections other than favorites
+    isVerseMultipleBookmarked, // In collections
     isVerseBookmarkedLoading: isReadingBookmarkLoading || isSurahBookmarksLoading,
     mushafId,
   };

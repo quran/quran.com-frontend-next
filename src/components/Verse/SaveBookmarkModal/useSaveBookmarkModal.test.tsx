@@ -7,6 +7,10 @@ import useSaveBookmarkModal from './useSaveBookmarkModal';
 
 import { ReadingBookmarkType } from '@/types/Bookmark';
 
+vi.mock('@/dls/Toast/Toast', () => ({
+  useToast: () => vi.fn(),
+  ToastStatus: { Error: 'error', Success: 'success' },
+}));
 vi.mock('next-translate/useTranslation', () => ({
   default: () => ({ t: (k: string) => k, lang: 'en' }),
 }));
