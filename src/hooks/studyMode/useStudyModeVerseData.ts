@@ -47,7 +47,7 @@ const useStudyModeVerseData = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
-  const isUsingDefaultSettings = useIsUsingDefaultSettings();
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({ selectedTranslations });
 
   const safeChapterId = initialChapterId || '1';
   const safeVerseNumber = initialVerseNumber || '1';
