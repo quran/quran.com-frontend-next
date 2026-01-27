@@ -25,6 +25,10 @@
   "max-file-size": "Máximo {{size}}",
   "my-profile": "Mi perfil",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Se le enviará un correo electrónico para recordarle su objetivo del Corán si no ha progresado durante un tiempo.",
+      "title": "Recordatorio de objetivos"
+    },
     "daily-ramadan-challenge": {
       "description": "Desafío de Ramadán Surah Al-Mulk 2026",
       "title": "Desafío diario de Ramadán"

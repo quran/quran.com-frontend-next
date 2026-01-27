@@ -25,6 +25,10 @@
   "max-file-size": "{{size}} Maximum",
   "my-profile": "Mon Profil",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Un courriel vous sera envoyé pour vous rappeler votre objectif de lecture du Coran si vous n'avez pas progressé depuis un certain temps.",
+      "title": "Rappel d'objectif"
+    },
     "daily-ramadan-challenge": {
       "description": "Sourate Al-Mulk Défi Ramadan 2026",
       "title": "Défi quotidien du Ramadan"

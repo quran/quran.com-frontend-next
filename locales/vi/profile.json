@@ -25,6 +25,10 @@
   "max-file-size": "Tối đa {{size}}",
   "my-profile": "Hồ sơ của tôi",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Nếu bạn không có tiến bộ nào trong một thời gian, một email sẽ được gửi để nhắc nhở bạn về mục tiêu học Kinh Qur'an của mình.",
+      "title": "Lời nhắc mục tiêu"
+    },
     "daily-ramadan-challenge": {
       "description": "Thử thách Ramadan Surah Al-Mulk 2026",
       "title": "Thử thách Ramadan hàng ngày"
