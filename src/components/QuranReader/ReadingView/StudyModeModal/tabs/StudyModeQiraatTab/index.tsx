@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import useQiraatDataHook from './hooks/useQiraatData';
 import JunctureTabs from './JunctureTabs';
 import QiraahCardList from './QiraahCardList';
-import QiraatBanner from './QiraatBanner';
 import ReadersPanel from './ReadersPanel';
 import styles from './StudyModeQiraatTab.module.scss';
 
@@ -167,7 +166,10 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
 
   return (
     <div className={styles.container}>
-      <QiraatBanner />
+      {/* 
+        TODO: Uncomment this when we have a qiraat learning plan 
+        <QiraatBanner /> 
+      */}
 
       <JunctureTabs
         junctures={data?.junctures || []}

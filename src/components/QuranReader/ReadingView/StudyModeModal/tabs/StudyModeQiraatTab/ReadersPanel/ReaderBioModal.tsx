@@ -57,7 +57,7 @@ const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
         size={IconSize.Custom}
         className={modalStyles.arrowIcon}
       />
-      {reader.translatedName || reader.name}
+      {t('quran-reader:qiraat.reader-bio')}
     </button>
   ) : (
     <h2 className={modalStyles.title} data-testid="reader-bio-modal-title">
@@ -75,13 +75,13 @@ const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
       overlayClassName={modalStyles.overlay}
       headerClassName={modalStyles.headerClassName}
       closeIconClassName={modalStyles.closeIconContainer}
-      contentClassName={classNames(modalStyles.content)}
-      innerContentClassName={classNames(styles.container)}
+      contentClassName={modalStyles.content}
+      innerContentClassName={styles.container}
     >
       {reader.city && <div className={styles.city}>{reader.city}</div>}
 
       <div className={styles.content}>
-        <h3 className={styles.bioTitle}>{t('quran-reader:qiraat.reader-bio')}</h3>
+        <h3 className={styles.bioTitle}>{reader.translatedName || reader.name}</h3>
         {reader.bio ? (
           <p className={styles.bioText}>{reader.bio}</p>
         ) : (

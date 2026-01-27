@@ -7,6 +7,7 @@
 
   @include breakpoints.desktop {
     block-size: 100%;
+    max-inline-size: calc(var(--spacing-mega-px) * 4.1);
   }
 
   &.expanded {
