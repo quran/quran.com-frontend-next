@@ -1,12 +1,12 @@
 {
-  "allowed-formats": "ብቻ {{formats}}",
+  "allowed-formats": "{{formats}} ብቻ",
   "change-password": "የይለፍ ቃል ቀይር",
   "delete-account": "መለያ ሰርዝ",
   "delete-account-warning-title": "ማስጠንቀቂያ",
   "delete-confirmation": {
     "action-text": "ውጤቱን ተረድቻለሁ፣ መለያዬን ሰርዝ",
     "confirmation-text": "መለያዬን ሰርዝ",
-    "instruction-text": "እባክዎ ይተይቡ <strong>{{text}}</strong> ለማረጋገጥ",
+    "instruction-text": "ለማረጋገጥ እባክዎ <strong>{{text}}</strong>  ይተይቡ",
     "subtitle": "ይህ እርምጃ ሊቀለበስ አይችልም። ይህ መለያዎን፣ የተቀመጡ ዕልባቶችን፣ የንባብ ክፍለ ጊዜዎችን እና ሁሉንም ውሂብዎን በቋሚነት ይሰርዛል።",
     "title": "ሙሉ በሙሉ እርግጠኛ ነህ?"
   },
@@ -22,9 +22,17 @@
     "remove-failed": "የመገለጫ ፎቶውን ማስወገድ አልተሳካም። እባክዎ እንደገና ይሞክሩ።",
     "upload-failed": "የመገለጫ ፎቶ መስቀል አልተሳካም። እባክዎ እንደገና ይሞክሩ።"
   },
-  "max-file-size": "ማክስ {{size}}",
+  "max-file-size": "ቢበዛ {{size}}",
   "my-profile": "የእኔ መገለጫ",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "ለተወሰነ ጊዜ እድገት ካላሳዩ የቁርዓን ግብዎን የሚያስታውስ ኢሜይል ይላክልዎታል።",
+      "title": "የግብ አስታዋሽ"
+    },
+    "daily-ramadan-challenge": {
+      "description": "ሱራ አል ሙልክ 2026 የረመዳን ፈተና",
+      "title": "ዕለታዊ የረመዳን ፈተና"
+    },
     "quran-reading-program": {
       "description": "ወደ ሳምንታዊ የንባብ ምደባ የሚወስዱ አገናኞችን፣ የማጣቀሻ ጥያቄዎችን እና ሌሎች ግብዓቶችን የያዘ ኢሜይል ይላካል።",
       "title": "ቁርዓን በአንድ አመት ውስጥ"

@@ -1,8 +1,13 @@
+/* eslint-disable max-lines */
 import range from 'lodash/range';
 
 import { getChapterData } from './chapter';
 
+import { PagesLookUpResponse, VersesResponse } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { toLocalizedVerseKey } from '@/utils/locale';
 
 /**
@@ -160,4 +165,63 @@ export const readableVerseRangeKeys = (
       return `${titleForm}-${toLocalizedVerseKey(to.verseKey, lang)}`;
     })
     .filter((title): title is string => title !== null);
+};
+
+/**
+ * Build a minimal VersesResponse for QuranReader background rendering.
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {PagesLookUpResponse} pagesLookupResponse
+ * @returns {VersesResponse}
+ */
+export const buildVersesResponse = (
+  chaptersData: ChaptersData,
+  pagesLookupResponse: PagesLookUpResponse,
+): VersesResponse => {
+  const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+    chaptersData,
+    pagesLookupResponse.lookupRange.from,
+    pagesLookupResponse.lookupRange.to,
+  ).length;
+
+  return {
+    metaData: { numberOfVerses },
+    pagesLookup: pagesLookupResponse,
+    verses: [],
+    pagination: {
+      perPage: 10,
+      currentPage: 1,
+      nextPage: null,
+      totalRecords: numberOfVerses,
+      totalPages: Math.ceil(numberOfVerses / 10),
+    },
+  };
+};
+
+/**
+ * Build a verse URL for study mode SSR pages with standard parameters.
+ *
+ * @param {string} verseKey - The verse key (e.g., "1:1")
+ * @param {QuranFont} quranFont - The Quran font style
+ * @param {MushafLines} mushafLines - Mushaf lines configuration
+ * @param {number[]} translations - Array of translation IDs
+ * @returns {string} The formatted API URL
+ */
+export const buildStudyModeVerseUrl = (
+  verseKey: string,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  translations: number[],
+): string => {
+  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
+
+  return makeByVerseKeyUrl(verseKey, {
+    words: true,
+    translationFields: 'resource_name,language_id',
+    translations: translations.join(','),
+    ...getDefaultWordFields(quranFont),
+    mushaf: mushafId,
+    wordTranslationLanguage: 'en',
+    wordTransliteration: 'true',
+  });
 };

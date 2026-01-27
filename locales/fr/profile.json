@@ -1,6 +1,6 @@
 {
-  "allowed-formats": "Seulement {{formats}}",
-  "change-password": "Changer le mot de passe",
+  "allowed-formats": "{{formats}} Uniquement",
+  "change-password": "Modifier le mot de passe",
   "delete-account": "Supprimer le compte",
   "delete-account-warning-title": "Avertissement",
   "delete-confirmation": {
@@ -13,39 +13,47 @@
   "delete-profile-picture": {
     "action-text": "Oui",
     "cancel-text": "Non",
-    "subtitle": "Vous allez supprimer votre photo de profil et la réinitialiser à celle par défaut. Êtes-vous sûr ?",
+    "subtitle": "Vous êtes sur le point de supprimer votre photo de profil et la réinitialiser avec celle par défaut. Continuer ?",
     "title": "Supprimer la photo de profil"
   },
-  "edit-details": "Modifier les détails",
-  "email-notification-settings": "Paramètres de notification par e-mail",
+  "edit-details": "Modifier les Détails",
+  "email-notification-settings": "Paramètres de Notification par Email",
   "errors": {
     "remove-failed": "Impossible de supprimer la photo de profil. Veuillez réessayer.",
-    "upload-failed": "Impossible de télécharger la photo de profil. Veuillez réessayer."
+    "upload-failed": "Impossible de d'envoyer la photo de profil. Veuillez réessayer."
   },
-  "max-file-size": "Max {{size}}",
-  "my-profile": "Mon profil",
+  "max-file-size": "{{size}} Maximum",
+  "my-profile": "Mon Profil",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Un courriel vous sera envoyé pour vous rappeler votre objectif de lecture du Coran si vous n'avez pas progressé depuis un certain temps.",
+      "title": "Rappel d'objectif"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Sourate Al-Mulk Défi Ramadan 2026",
+      "title": "Défi quotidien du Ramadan"
+    },
     "quran-reading-program": {
       "description": "Un courriel vous sera envoyé avec des liens vers les lectures hebdomadaires, des suggestions de réflexion et d'autres ressources pour vous aider à progresser.",
-      "title": "Le Coran en un an"
+      "title": "Le Coran en un An"
     },
     "streaks-that-will-break": {
       "description": "Un courriel vous sera envoyé pour vous avertir qu'une série est sur le point de s'interrompre.",
-      "title": "Traces"
+      "title": "Séries"
     }
   },
   "personalization": "Personnalisation",
-  "profile-picture": "Photo de profil",
+  "profile-picture": "Photo de Profil",
   "remove-picture": "Supprimer l'image",
   "remove-success": "Photo de profil supprimée avec succès",
-  "save-changes": "Enregistrer les modifications",
+  "save-changes": "Enregistrer les Modifications",
   "save-picture": "Enregistrer l'image",
   "success": {
-    "details": "Votre profil a été mis à jour avec succès.",
-    "notifications": "Vos paramètres de notifications ont été mis à jour avec succès.",
+    "details": "Votre profil a été mis à jour avec succès",
+    "notifications": "Vos paramètres de notifications ont été mis à jour avec succès",
     "password": "Votre mot de passe a été mis à jour avec succès"
   },
   "update-password": "Mettre à jour le mot de passe",
-  "upload-picture": "Télécharger une image",
-  "upload-success": "Photo de profil téléchargée avec succès"
+  "upload-picture": "Envoyer une image",
+  "upload-success": "Photo de profil envoyée avec succès"
 }

@@ -51,6 +51,8 @@ const QuranReader = ({
   const isReadingTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
   const showTajweedPadding = isTajweedMushaf && !isReadingTranslationMode;
 
+  const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
+
   useSyncChapterPage(initialData);
 
   return (
@@ -63,6 +65,7 @@ const QuranReader = ({
           [styles.withVisibleSideBar]: isSideBarVisible,
           [styles.withSidebarNavigationOpenOrAuto]: isSidebarNavigationVisible,
           [styles.translationView]: !isReadingPreference,
+          [styles.singleVerseView]: isSingleVerse,
           [styles.mobileCollapsed]: isMobileCollapsed && !showTajweedPadding,
           [styles.mobileCollapsedTajweed]: isMobileCollapsed && showTajweedPadding,
           [styles.mobileTajweedExpanded]: isMobile && !isMobileCollapsed && showTajweedPadding,
@@ -72,6 +75,7 @@ const QuranReader = ({
         <div
           className={classNames(styles.infiniteScroll, {
             [styles.readingView]: isReadingPreference,
+            [styles.singleVerseReadingView]: isSingleVerse,
           })}
         >
           <VerseTrackerContextProvider>

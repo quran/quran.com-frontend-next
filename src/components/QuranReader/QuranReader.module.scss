@@ -20,6 +20,10 @@ $virtual-scrolling-height-bandage: calc(
   min-block-size: 100vh;
 }
 
+.singleVerseReadingView {
+  min-block-size: auto;
+}
+
 .loading {
   text-align: center;
   max-inline-size: 80%;
@@ -52,6 +56,10 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .translationView {
+  padding-block-end: var(--spacing-xxlarge-px);
+}
+
+.singleVerseView {
   padding-block-end: var(--spacing-xxlarge-px);
 
   @include breakpoints.smallerThanTablet {

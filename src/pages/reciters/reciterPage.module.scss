@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .headerContainer {
   display: flex;
@@ -19,11 +19,11 @@
 }
 
 .chaptersListContainer {
-  min-height: calc(25 * var(--spacing-mega));
+  min-block-size: calc(25 * var(--spacing-mega));
 }
 
 .recitersListContainer {
-  min-height: calc(22 * var(--spacing-mega));
+  min-block-size: calc(22 * var(--spacing-mega));
 }
 
 .reciterInfoContainer {

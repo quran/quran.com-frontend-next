@@ -14,7 +14,7 @@ div.contentModal {
   inline-size: 100%;
   max-inline-size: 100%;
   overflow-x: hidden;
-  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
     padding-inline: var(--spacing-large-px);
     padding-block-start: var(--spacing-xlarge-px);
@@ -22,7 +22,7 @@ div.contentModal {
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;
-    border-radius: var(--border-radius-rounded);
+    border-radius: var(--border-radius-large-px);
   }
 }
 
@@ -36,6 +36,8 @@ div.mobileBottomSheetOverlay {
 }
 
 .innerContent {
+  min-block-size: 0;
+  flex: 1 1;
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
@@ -47,7 +49,7 @@ div.mobileBottomSheetOverlay {
   gap: var(--spacing-small-px);
   inline-size: 100%;
   flex-shrink: 0;
-  border-bottom: 1px solid var(--color-separators);
+  border-block-end: 1px solid var(--color-separators);
 
   @include breakpoints.tablet {
     padding-block-end: var(--spacing-medium2-px);
@@ -123,7 +125,7 @@ button.nextButton {
 .modalHeader {
   padding-inline-end: 0;
   @include breakpoints.smallerThanTablet {
-    padding:0;
+    padding: 0;
     padding-block-end: var(--spacing-medium-px);
   }
 }
@@ -269,4 +271,12 @@ div.bottomSheetInnerContent {
   block-size: var(--spacing-medium2-px);
   inline-size: calc(var(--spacing-mega-px) * 1.2);
   border-radius: var(--border-radius-default);
+}
+
+// SSR modal hidden state - when verse action modal is open
+.ssrHidden {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
 }

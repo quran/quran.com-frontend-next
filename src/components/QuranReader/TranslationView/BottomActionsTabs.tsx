@@ -13,6 +13,7 @@ export enum TabId {
   REFLECTIONS = 'reflections',
   LESSONS = 'lessons',
   ANSWERS = 'answers',
+  RELATED_VERSES = 'related-verses',
 }
 
 export interface TabConfig {

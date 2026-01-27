@@ -1,4 +1,4 @@
-@use "src/components/dls/Modal/constants";
+@use 'src/components/dls/Modal/constants';
 
 .action {
   flex: 1;
@@ -14,8 +14,7 @@
   padding-inline-end: var(--spacing-large);
   color: var(--color-text-faded);
   overflow: hidden;
-  transition: background-color constants.$animationDuration
-    constants.$animationEasing;
+  transition: background-color constants.$animationDuration constants.$animationEasing;
   &:hover {
     opacity: var(--opacity-75);
     background-color: var(--color-background-alternative-medium);

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-underscore-dangle */
 // Novu's IUserPreferenceSettings uses _id convention which violates our naming rules
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -16,14 +17,17 @@ import Section from './Section';
 import sharedStyles from './SharedProfileStyles.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { TestId } from '@/tests/test-ids';
 
 const MARKETING_TAG_NAME = 'marketing';
+const DAILY_RAMADAN_CHALLENGE_TAG = 'DAILY-RAMADAN-CHALLENGE';
 const QDC_TAG = 'QDC';
 const QR_TAG = 'QR';
 
 const EmailNotificationSettingsForm: FC = () => {
   const { t } = useTranslation('profile');
+  const { isEnrolled: isEnrolledRamadanChallenge } = useRamadanChallengeStatus();
   const {
     mutate,
     isMutating: isFetchingUserPreferences,
@@ -150,7 +154,11 @@ const EmailNotificationSettingsForm: FC = () => {
           key={preference.template._id}
           preference={preference}
           onToggle={handleToggle}
-          disabled={isSaving}
+          disabled={
+            isSaving ||
+            (!isEnrolledRamadanChallenge &&
+              preference.template.tags.includes(DAILY_RAMADAN_CHALLENGE_TAG))
+          }
           t={t}
         />
       ))}

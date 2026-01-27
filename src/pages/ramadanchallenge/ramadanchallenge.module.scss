@@ -1,0 +1,34 @@
+@use 'src/styles/breakpoints';
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.subtext {
+  font-size: var(--font-size-small);
+}
+
+.container {
+  text-align: start !important;
+}
+
+.list li::marker {
+  content: '✨ ';
+}
+
+.enrollmentContainer {
+  text-align: center;
+  font-size: var(--font-size-medium-px);
+  font-weight: var(--font-weight-bold);
+  span {
+    color: var(--color-text-link-new);
+  }
+}
+
+.learnMore {
+  font-size: var(--font-size-medium-px);
+}

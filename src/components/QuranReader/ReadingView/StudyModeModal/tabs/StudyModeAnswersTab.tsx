@@ -14,6 +14,7 @@ import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useQuestionsPagination from '@/hooks/useQuestionsPagination';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
+import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import { getVerseAnswersNavigationUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 
@@ -21,12 +22,16 @@ interface StudyModeAnswersTabProps {
   chapterId: string;
   verseNumber: string;
   switchTab?: (tabId: StudyModeTabId | null) => void;
+  questionId?: string;
+  questionsInitialData?: AyahQuestionsResponse;
 }
 
 const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
   chapterId,
   verseNumber,
   switchTab,
+  questionId,
+  questionsInitialData,
 }) => {
   const { lang } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
@@ -41,6 +46,7 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
     useQuestionsPagination({
       verseKey,
       language: lang as Language,
+      initialData: questionsInitialData,
     });
 
   // Auto-close tab when there are no answered questions
@@ -73,6 +79,7 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
           isLoadingMore={isLoadingMore}
           onLoadMore={loadMore}
           baseUrl={baseUrl}
+          initialOpenQuestionId={questionId}
         />
       </div>
     );

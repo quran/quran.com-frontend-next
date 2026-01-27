@@ -1,5 +1,5 @@
 {
-  "allowed-formats": "Pekee {{formats}}",
+  "allowed-formats": "{{formats}} Pekee",
   "change-password": "Badilisha Nenosiri",
   "delete-account": "Futa Akaunti",
   "delete-account-warning-title": "Onyo",
@@ -19,19 +19,27 @@
   "edit-details": "Hariri Maelezo",
   "email-notification-settings": "Mipangilio ya Arifa za Barua Pepe",
   "errors": {
-    "remove-failed": "Imeshindwa kuondoa picha ya wasifu. Tafadhali jaribu tena.",
-    "upload-failed": "Imeshindwa kupakia picha ya wasifu. Tafadhali jaribu tena."
+    "remove-failed": "Imeshindikana kuondoa picha ya wasifu. Tafadhali jaribu tena.",
+    "upload-failed": "iMeshindikana kupakia picha ya wasifu. Tafadhali jaribu tena."
   },
-  "max-file-size": "Kiwango cha juu {{size}}",
+  "max-file-size": "Upeo wa {{size}}",
   "my-profile": "Wasifu Wangu",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Barua pepe itatumwa kukukumbusha lengo lako la Quran ikiwa hujapiga hatua kwa muda.",
+      "title": "Kikumbusho cha Lengo"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
+      "title": "Changamoto ya Ramadhani ya Kila Siku"
+    },
     "quran-reading-program": {
       "description": "Barua pepe itatumwa ikiwa na viungo vya mgawo wa kusoma wa kila wiki, vidokezo vya kutafakari, na nyenzo zaidi ili kukuweka sawa.",
-      "title": "Quran katika Mwaka"
+      "title": "Qur'ani katika Mwaka"
     },
     "streaks-that-will-break": {
       "description": "Barua pepe itatumwa ili kukujulisha kuhusu mfululizo ambao uko karibu kuvunjika.",
-      "title": "Mistari"
+      "title": "Mifululizo"
     }
   },
   "personalization": "Ubinafsishaji",
