@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { decamelizeKeys } from 'humps';
 
 // eslint-disable-next-line import/no-cycle
@@ -18,7 +19,7 @@ export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
   perPage: ITEMS_PER_PAGE,
-  fields: `${QuranFont.Uthmani},chapter_id,hizb_number,text_imlaei_simple`, // we need text_uthmani field when copying the verse. text_imlaei_simple is for SEO description meta tag. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
+  fields: `${QuranFont.Uthmani},chapter_id,hizb_number,text_imlaei_simple,has_related_verses`, // we need text_uthmani field when copying the verse. text_imlaei_simple is for SEO description meta tag. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu. has_related_verses is for showing the related verses tab in study mode.
 };
 
 /**
@@ -275,6 +276,27 @@ export const makeHizbVersesUrl = (
  */
 export const makeByVerseKeyUrl = (verseKey: string, params?: Record<string, unknown>): string =>
   makeUrl(`/verses/by_key/${verseKey}`, params);
+
+/**
+ * Compose the url for related verses by verse key API.
+ *
+ * @param {string} verseKey  the verse key (e.g. "1:1").
+ * @param {string} language  the user's language code.
+ * @param {number} page  optional page number for pagination.
+ * @param {number} perPage  optional number of items per page.
+ * @returns {string}
+ */
+export const makeRelatedVersesByKeyUrl = (
+  verseKey: string,
+  language: string,
+  page?: number,
+  perPage?: number,
+): string =>
+  makeUrl(`/related_verses/by_key/${verseKey}`, {
+    language,
+    ...(page && { page }),
+    ...(perPage && { perPage }),
+  });
 
 /**
  * Compose the url for page's verses API.

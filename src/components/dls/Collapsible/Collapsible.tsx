@@ -49,7 +49,7 @@ const Collapsible = ({
   headerClassName,
   headerLeftClassName,
 }: Props) => {
-  const [isOpen, setIsOpen] = useState(isDefaultOpen);
+  const [isOpen, setIsOpen] = useState(shouldOpen ?? isDefaultOpen);
 
   const handleOpenChange = useCallback(
     (newOpen: boolean) => {

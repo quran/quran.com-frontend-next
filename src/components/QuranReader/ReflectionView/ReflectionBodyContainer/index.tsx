@@ -37,11 +37,8 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import ContentType from 'types/QuranReflect/ContentType';
 
-const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
-  ssr: false,
-});
+const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'));
 const ReflectionBody = dynamic(() => import('./ReflectionBody'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 

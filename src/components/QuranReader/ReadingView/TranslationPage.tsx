@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { getLanguageDataById, toLocalizedNumber } from '@/utils/locale';
@@ -49,19 +48,10 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
       const chapterId = verse.chapterId?.toString();
       const shouldShowChapterHeader = verse.verseNumber === 1 && chapterId !== pageHeaderChapterId;
 
-      const verseTranslations = verse.translations;
-      const translationName = getTranslationNameString(verseTranslations);
-      const translationsCount = verseTranslations?.length ?? 0;
-
       return (
         <React.Fragment key={verse.verseKey}>
           {shouldShowChapterHeader && chapterId && (
-            <ChapterHeader
-              translationName={translationName}
-              translationsCount={translationsCount}
-              chapterId={chapterId}
-              isTranslationView={false}
-            />
+            <ChapterHeader chapterId={chapterId} isTranslationView={false} />
           )}
           <TranslatedAyah
             verse={verse}

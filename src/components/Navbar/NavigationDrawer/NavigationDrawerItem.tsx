@@ -38,12 +38,7 @@ const NavigationDrawerItem = ({
     <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>
-          <IconContainer
-            icon={icon}
-            size={IconSize.Xsmall}
-            color={IconColor.accent}
-            shouldFlipOnRTL={false}
-          />
+          <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.accent} />
           <span className={classNames(styles.titleContainer, titleClassName)}>{title}</span>
         </div>
         <div>

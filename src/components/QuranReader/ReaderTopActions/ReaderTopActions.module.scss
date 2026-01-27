@@ -1,24 +1,6 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/constants';
 
-$changeTranslationButtonInlineSize: 310px;
-$changeTranslationButtonInlineSizeMobile: 257px;
-
-@mixin customButton {
-  border: none;
-  background-color: var(--color-background-elevated-new);
-  box-shadow: var(--shadow-small-new);
-
-  svg {
-    color: var(--color-success-medium);
-  }
-
-  &:hover {
-    border: 1px solid var(--color-success-medium);
-    color: var(--color-text-faded-new);
-  }
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -41,29 +23,4 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   inline-size: 100%;
   box-sizing: border-box;
   max-inline-size: 100%;
-}
-
-.changeTranslationButton {
-  @include customButton;
-  inline-size: $changeTranslationButtonInlineSize;
-  margin-inline-start: var(--spacing-small-px);
-  white-space: nowrap;
-
-  @include breakpoints.smallerThanTablet {
-    inline-size: $changeTranslationButtonInlineSizeMobile;
-  }
-}
-
-.translationName {
-  max-inline-size: 85%;
-  font-size: var(--font-size-small);
-
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-.translationsCount {
-  margin-inline-start: var(--spacing-micro2-px);
 }

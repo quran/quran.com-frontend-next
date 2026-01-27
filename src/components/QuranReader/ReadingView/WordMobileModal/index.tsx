@@ -46,7 +46,11 @@ const WordMobileModal: React.FC<Props> = ({ isOpen, onClose, verse, bookmarksRan
           <Separator className={styles.separator} />
 
           <div className={styles.bottomActionsContainer}>
-            <BottomActions verseKey={verse.verseKey} isTranslationView={false} />
+            <BottomActions
+              verseKey={verse.verseKey}
+              isTranslationView={false}
+              hasRelatedVerses={verse.hasRelatedVerses}
+            />
           </div>
         </div>
       </Modal.Body>

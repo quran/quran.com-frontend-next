@@ -218,6 +218,18 @@ const StudyModeModal: React.FC<Props> = ({
     updateUrlForActiveTab(selectedChapterId, newVerseNumber, activeContentTab);
   }, [selectedVerseNumber, selectedChapterId, dispatch, activeContentTab, updateUrlForActiveTab]);
 
+  const handleGoToVerse = useCallback(
+    (newChapterId: string, newVerseNumber: string) => {
+      const newVerseKey = `${newChapterId}:${newVerseNumber}`;
+      logButtonClick('study_mode_goto_verse', { verseKey: newVerseKey });
+      setSelectedChapterId(newChapterId);
+      setSelectedVerseNumber(newVerseNumber);
+      dispatch(setVerseKey(newVerseKey));
+      updateUrlForActiveTab(newChapterId, newVerseNumber, activeContentTab);
+    },
+    [dispatch, activeContentTab, updateUrlForActiveTab],
+  );
+
   const canNavigatePrev = Number(selectedVerseNumber) > 1;
   const currentChapter = chaptersData[Number(selectedChapterId)];
   const canNavigateNext =
@@ -330,6 +342,7 @@ const StudyModeModal: React.FC<Props> = ({
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
+      StudyModeTabId.RELATED_VERSES,
     ].includes(activeContentTab);
 
   const header = (
@@ -412,6 +425,7 @@ const StudyModeModal: React.FC<Props> = ({
           selectedVerseNumber={selectedVerseNumber}
           activeTab={activeContentTab}
           onTabChange={handleTabChange}
+          onGoToVerse={handleGoToVerse}
         />
       );
     }

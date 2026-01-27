@@ -21,6 +21,7 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;
+  isInsideStudyMode?: boolean;
 }
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   isTranslationView,
   onActionTriggered,
   bookmarksRangeUrl,
+  isInsideStudyMode = false,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
@@ -39,6 +41,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
           isTranslationView={isTranslationView}
+          isInsideStudyMode={isInsideStudyMode}
         />
       )}
       <PinVerseAction
@@ -50,6 +53,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
         verse={verse}
         isTranslationView={isTranslationView}
+        isInsideStudyMode={isInsideStudyMode}
       />
       {!isStudyModeOpen && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
@@ -61,6 +65,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
         onActionTriggered={onActionTriggered}
+        isInsideStudyMode={isInsideStudyMode}
       />
     </div>
   ) : (

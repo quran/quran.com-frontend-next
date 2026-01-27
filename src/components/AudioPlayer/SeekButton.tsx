@@ -8,8 +8,8 @@ import BackwardIcon from '@/icons/backward.svg';
 import ForwardIcon from '@/icons/forward.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import DataContext from 'src/contexts/DataContext';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import ChaptersData from 'types/ChaptersData';
 
 export enum SeekButtonType {
   NextAyah = 'nextAyah',
@@ -19,10 +19,10 @@ export enum SeekButtonType {
 type SeekButtonProps = {
   type: SeekButtonType;
   isLoading: boolean;
+  chaptersData?: ChaptersData;
 };
-const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
+const SeekButton = ({ type, isLoading, chaptersData }: SeekButtonProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const chaptersData = useContext(DataContext);
 
   const surah = useSelector(audioService, (state) => state.context.surah);
   const ayahNumber = useSelector(audioService, (state) => state.context.ayahNumber);
@@ -42,8 +42,9 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
 
   const isDisabled =
     isLoading ||
+    !chapterData ||
     (type === SeekButtonType.PrevAyah && ayahNumber <= 1) ||
-    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData?.versesCount);
+    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData.versesCount);
 
   return (
     <Button

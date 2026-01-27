@@ -25,6 +25,10 @@
   "max-file-size": "Máximo {{size}}",
   "my-profile": "Meu perfil",
   "notifications": {
+    "daily-ramadan-challenge": {
+      "description": "Desafio do Ramadã Surah Al-Mulk 2026",
+      "title": "Desafio Diário do Ramadã"
+    },
     "quran-reading-program": {
       "description": "Você receberá um e-mail com links para a leitura semanal, sugestões de reflexão e outros recursos para te ajudar a manter o foco.",
       "title": "O Alcorão em um Ano"

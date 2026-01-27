@@ -86,6 +86,17 @@ export const FakeContentRoot = ({ children, onClose }: FakeContentRootProps) => 
       const target = event.target as Node;
       if (event.button !== 0) return;
       if (contentRef.current?.contains(target)) return;
+
+      // Check if click is on Radix UI portalled content (dropdown, popover, etc.)
+      // These render outside modal DOM via Portal but should not trigger close
+      const targetElement = target as HTMLElement;
+      if (targetElement.closest) {
+        // Radix UI popper wrapper (used by dropdowns, popovers, tooltips)
+        if (targetElement.closest('[data-radix-popper-content-wrapper]')) return;
+        // Radix UI menu content
+        if (targetElement.closest('[data-radix-menu-content]')) return;
+      }
+
       handleClose();
     },
     [handleClose],

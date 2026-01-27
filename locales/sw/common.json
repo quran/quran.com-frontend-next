@@ -267,6 +267,7 @@
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "get-started": "Anza",
+  "go-to-verse": "Nenda kwenye Mstari",
   "hear-it-pronounced": "Bonyeza neno lolote la Qur'ani, lisikie likitamkwa",
   "help": "Msaada",
   "hizb": "Hizb",
@@ -370,6 +371,7 @@
   "reflect": "Tafakari",
   "reflections": "Tafakari",
   "reflections-and-lessons": "Tafakari na Mafunzo",
+  "related-verses": "Mistari Inayohusiana",
   "remove": "Ondoa",
   "rename": "Badilisha jina",
   "retry": "Jaribu tena",

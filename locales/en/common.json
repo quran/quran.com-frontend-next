@@ -45,8 +45,8 @@
     "play-surah": "Play Surah {{surahName}}",
     "select-lng": "Select Language",
     "sidebar-nav-close": "Close Navigation Sidebar",
-    "translation-info": "View translation information",
-    "tooltip-action": "Tooltip action"
+    "tooltip-action": "Tooltip action",
+    "translation-info": "View translation information"
   },
   "audio": {
     "auto-scroll": {
@@ -267,6 +267,7 @@
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",
+  "go-to-verse": "Go To Verse",
   "hear-it-pronounced": "Click Quranic words, hear pronunciation",
   "help": "Help",
   "hizb": "Hizb",
@@ -370,6 +371,7 @@
   "reflect": "Reflect",
   "reflections": "Reflections",
   "reflections-and-lessons": "Reflections & Lessons",
+  "related-verses": "Related Verses",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",

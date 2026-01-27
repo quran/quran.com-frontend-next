@@ -25,6 +25,10 @@
   "max-file-size": "مکس {{size}}",
   "my-profile": "پروفایل من",
   "notifications": {
+    "daily-ramadan-challenge": {
+      "description": "سوره الملک 2026 چالش رمضان",
+      "title": "چالش روزانه ماه رمضان"
+    },
     "quran-reading-program": {
       "description": "ایمیلی حاوی لینک‌هایی به تکلیف مطالعه هفتگی، سوالات مربوط به مرور مطالب و منابع بیشتر برای پیگیری شما ارسال خواهد شد.",
       "title": "قرآن در یک سال"

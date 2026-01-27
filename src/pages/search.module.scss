@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $tablet-max-width: 50rem;
 
@@ -24,7 +24,7 @@ $tablet-max-width: 50rem;
 
 .searchInput {
   border: 0;
-  width: 90%;
+  inline-size: 90%;
   font-size: var(--font-size-normal);
   background: var(--color-background-default);
   &:focus {
@@ -38,7 +38,7 @@ $tablet-max-width: 50rem;
 .pageBody {
   padding-inline: calc(1 * var(--spacing-xsmall));
   @include breakpoints.tablet {
-    max-width: $tablet-max-width;
+    max-inline-size: $tablet-max-width;
     margin-inline: auto;
     padding-inline: calc(1.5 * var(--spacing-medium));
   }
