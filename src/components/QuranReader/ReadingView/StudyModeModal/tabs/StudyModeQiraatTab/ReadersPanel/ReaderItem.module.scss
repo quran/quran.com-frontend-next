@@ -39,7 +39,7 @@
     transform var(--transition-moderate) ease;
 
   &:where(:hover, :focus-visible) {
-    background: var(--color-background-alternative-faded);
+    opacity: var(--opacity-85);
   }
 
   &:active:not(:disabled) {
@@ -73,7 +73,7 @@
   }
 
   & > * {
-    flex: 1;
+    flex: 1 1 auto;
     min-inline-size: 0;
     text-overflow: ellipsis;
     overflow: hidden;
