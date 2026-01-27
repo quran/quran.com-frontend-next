@@ -55,7 +55,7 @@ const useBookmarkCollections = ({
     () => getBookmarkCollections(mushafId, key, type, verseNumber),
     {
       ...mutatingFetcherConfig,
-      revalidateOnFocus: false, // Prevent excessive refetches on window focus
+      revalidateOnFocus: false, // Prevent excessive re-fetches on window focus
     },
   );
   const collectionIds = toSafeArray(collectionIdsResponse);
