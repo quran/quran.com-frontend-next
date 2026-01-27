@@ -3,9 +3,10 @@
 $playChapterAudioButtonMinInlineSize: 95px;
 
 @mixin customButton {
-  border: none;
+  border: 1px solid transparent;
   background-color: var(--color-background-elevated-new);
-  box-shadow: var(--shadow-small-new);
+  box-shadow: var(--shadow-chapter-header-actions);
+  color: var(--color-text-faded-new);
 
   svg {
     color: var(--color-success-medium);
@@ -31,11 +32,17 @@ $playChapterAudioButtonMinInlineSize: 95px;
   button {
     @include customButton;
     min-inline-size: $playChapterAudioButtonMinInlineSize;
-    // Match ReadingModeActions button styling
-    block-size: auto;
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-medium);
-    padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
+    padding-inline: var(--spacing-small2-px);
     white-space: nowrap;
+
+    &[class*='selected'] {
+      color: var(--color-background-elevated);
+
+      svg {
+        color: var(--color-background-elevated);
+      }
+    }
   }
 }

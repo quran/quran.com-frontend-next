@@ -3,9 +3,11 @@ import React, { memo, useCallback, useContext, useMemo, useState } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
+import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import InlineWordByWord from '../InlineWordByWord';
+import { TooltipType } from '../Tooltip';
 
 import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
@@ -13,12 +15,10 @@ import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
-import WordMobileModal from '@/components/QuranReader/ReadingView/WordMobileModal';
-import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from '@/components/Wrapper/Wrapper';
 import MobilePopover from '@/dls/Popover/HoverablePopover';
-import { TooltipType } from '@/dls/Tooltip';
 import useIsMobile from '@/hooks/useIsMobile';
+import ArrowIcon from '@/public/icons/arrow.svg';
 import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectInlineDisplayWordByWordPreferences,
@@ -26,6 +26,8 @@ import {
   selectTooltipContentType,
   selectWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { setReadingViewHoveredVerseKey } from '@/redux/slices/QuranReader/readingViewVerse';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import {
   QuranFont,
   ReadingPreference,
@@ -68,8 +70,6 @@ export type QuranWordProps = {
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
-  shouldShowSecondaryHighlight?: boolean;
-  bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
   isWordInteractionDisabled?: boolean;
   shouldForceShowTooltip?: boolean;
@@ -81,20 +81,21 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
-  shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
-  bookmarksRangeUrl,
   tooltipType,
   isWordInteractionDisabled = false,
   shouldForceShowTooltip = false,
 }: QuranWordProps) => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation('quran-reader');
+  const isMobile = useIsMobile();
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const audioService = useContext(AudioPlayerMachineContext);
 
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
-  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
+
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
     shallowEqual,
@@ -102,7 +103,6 @@ const QuranWord = ({
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
-  const isMobile = useIsMobile();
   const isTranslationMode = readingPreference === ReadingPreference.Translation;
   const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
@@ -156,13 +156,11 @@ const QuranWord = ({
 
     1. When the current character is of type Word.
     2. When it's allowed to have word by word (won't be allowed for search results as of now).
-    3. When in translation view: the tooltip settings are set to either translation or transliteration or both.
-       When in reading view: always show tooltip.
+    3. When the tooltip settings are set to either translation or transliteration or both.
+       This applies to both reading and translation modes.
   */
   const showTooltip =
-    word.charTypeName === CharType.Word &&
-    isWordByWordAllowed &&
-    (isTranslationMode ? !!showTooltipFor.length : true);
+    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
@@ -189,6 +187,47 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
+  // Shared handler for both click and keyboard interactions
+  const handleInteraction = useCallback(() => {
+    // Open study mode modal when clicking ayah number (in both reading and translation mode)
+    if (word.charTypeName === CharType.End) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey }));
+      return;
+    }
+
+    // On mobile with recitation disabled and tooltip showing, let the popover handle the interaction
+    // The popover will open on click, and user can click inside to open Study Mode
+    if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word && showTooltip) {
+      return;
+    }
+
+    // On desktop: Open study mode modal when clicking a word (in both reading and translation mode)
+    if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+      return;
+    }
+
+    if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
+      handleWordAction();
+      dispatch(setReadingViewHoveredVerseKey(null));
+      dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
+      return;
+    }
+
+    handleWordAction();
+  }, [
+    word.charTypeName,
+    word.location,
+    word.verseKey,
+    isRecitationEnabled,
+    isMobile,
+    showTooltip,
+    handleWordAction,
+    dispatch,
+  ]);
+
   const onClick = useCallback(
     (e: React.MouseEvent) => {
       // Only handle clicks that are directly on word elements
@@ -209,52 +248,49 @@ const QuranWord = ({
         }
       }
 
-      handleWordAction();
+      handleInteraction();
     },
-    [handleWordAction],
+    [handleInteraction],
   );
 
   const onKeyPress = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        handleWordAction();
+        e.preventDefault(); // Prevent scrolling on Space key
+        handleInteraction();
       }
     },
-    [handleWordAction],
+    [handleInteraction],
   );
 
-  const onMobileModalTriggerClick = useCallback(() => {
-    setIsMobileModalOpen(true);
-    handleWordAction();
-  }, [handleWordAction]);
+  const onMouseEnter = useCallback(() => {
+    if (word.charTypeName === CharType.End) {
+      dispatch(setReadingViewHoveredVerseKey(word.verseKey));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
+  }, [word.charTypeName, word.verseKey]);
 
-  const onKeyPressMobileModalTrigger = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        setIsMobileModalOpen(true);
-      }
-      handleWordAction();
-    },
-    [handleWordAction],
-  );
+  const onMouseLeave = useCallback(() => {
+    if (word.charTypeName === CharType.End) {
+      dispatch(setReadingViewHoveredVerseKey(null));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- dispatch is stable from useDispatch
+  }, [word.charTypeName]);
 
-  const onReadingModeOpenChange = useCallback(() => {
-    handleWordAction();
-  }, [handleWordAction]);
-
-  const shouldHandleWordClicking = !isWordInteractionDisabled && word.charTypeName !== CharType.End;
-  const isReadingModeDesktop = !isMobile && !isTranslationMode;
-  const isReadingModeMobile = isMobile && !isTranslationMode;
+  // Allow clicking on words and ayah numbers in both reading and translation mode for study mode modal
+  const shouldHandleWordClicking = !isWordInteractionDisabled;
   return (
     <div
       {...(shouldHandleWordClicking && { onClick, onKeyPress, role: 'button', tabIndex: 0 })}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       {...{
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
         [styles.interactionDisabled]: isWordInteractionDisabled,
-        [styles.highlightOnHover]: !isWordInteractionDisabled && isRecitationEnabled,
+        [styles.highlightOnHover]:
+          !isWordInteractionDisabled && (isRecitationEnabled || !showTooltip),
         /**
          * If the font is Tajweed V4, color: xyz syntax does not work
          * since the COLOR glyph is a separate vector graphic made with
@@ -264,7 +300,6 @@ const QuranWord = ({
          * top of the normal/black glyph.
          */
         [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
-        [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: isTranslationMode,
         [styles.additionalStopSignGap]: isTranslationMode && hasIndoPakStopSign,
@@ -273,62 +308,41 @@ const QuranWord = ({
       <Wrapper
         shouldWrap
         wrapper={(children) => {
-          const shouldShowTranslationTooltip =
-            isTranslationMode &&
-            showTooltip &&
-            (shouldForceShowTooltip || !isWordInteractionDisabled);
+          // Show tooltip in both reading and translation modes
+          const shouldShowWordTooltip =
+            showTooltip && (shouldForceShowTooltip || !isWordInteractionDisabled);
 
-          if (shouldShowTranslationTooltip) {
+          if (shouldShowWordTooltip) {
             const isTooltipOpen =
               shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
+
+            // Handler for opening Study Mode from popover (used on mobile)
+            const handleOpenStudyMode = () => {
+              dispatch(setReadingViewHoveredVerseKey(null));
+              dispatch(
+                openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),
+              );
+            };
+
             return (
               <MobilePopover
+                icon={<ArrowIcon />}
                 isOpen={isTooltipOpen ? true : undefined}
                 defaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
-                tooltipType={tooltipType}
+                tooltipType={tooltipType || TooltipType.SUCCESS}
+                shouldContentBeClickable
+                onIconClick={handleOpenStudyMode}
+                iconAriaLabel={t('aria.open-study-mode')}
               >
                 {children}
               </MobilePopover>
             );
           }
 
-          if (isReadingModeMobile && !isWordInteractionDisabled) {
-            return (
-              <>
-                <div
-                  onClick={onMobileModalTriggerClick}
-                  onKeyDown={onKeyPressMobileModalTrigger}
-                  aria-label="Open word actions"
-                  role="button"
-                  tabIndex={0}
-                >
-                  {children}
-                </div>
-
-                <WordMobileModal
-                  isOpen={isMobileModalOpen}
-                  onClose={() => setIsMobileModalOpen(false)}
-                  word={word}
-                  bookmarksRangeUrl={bookmarksRangeUrl}
-                />
-              </>
-            );
-          }
-
-          if (isReadingModeDesktop && !isWordInteractionDisabled) {
-            return (
-              <ReadingViewWordPopover
-                word={word}
-                onOpenChange={onReadingModeOpenChange}
-                bookmarksRangeUrl={bookmarksRangeUrl}
-              >
-                {children}
-              </ReadingViewWordPopover>
-            );
-          }
-
+          // All word clicks now open StudyModeModal directly via handleInteraction
+          // No need for separate mobile/desktop wrappers
           return <>{children}</>;
         }}
       >

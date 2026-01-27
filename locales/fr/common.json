@@ -45,6 +45,7 @@
     "play-surah": "Écouter la Sourate {{surahName}}",
     "select-lng": "Choisir la langue",
     "sidebar-nav-close": "Fermer la barre latérale de navigation",
+    "tooltip-action": "Action de l'infobulle",
     "translation-info": "Afficher les informations de traduction"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "Devenir un donateur mensuel"
   },
   "get-started": "Commencer",
+  "go-to-verse": "Aller au verset",
   "hear-it-pronounced": "Cliquez sur les mots du Coran, écoutez la prononciation",
   "help": "Aider",
   "hizb": "Hizb",
@@ -369,6 +371,7 @@
   "reflect": "Méditer",
   "reflections": "Réflexions",
   "reflections-and-lessons": "Réflexions & Leçons",
+  "related-verses": "Versets apparentés",
   "remove": "Supprimer",
   "rename": "Renommer",
   "retry": "Réessayer",

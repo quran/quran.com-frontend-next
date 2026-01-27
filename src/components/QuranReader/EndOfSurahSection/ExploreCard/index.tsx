@@ -8,7 +8,7 @@ import { ACTION_BUTTONS, ActionButton } from './actions';
 import styles from './ExploreCard.module.scss';
 
 import Card from '@/components/HomePage/Card';
-import { ModalType } from '@/components/QuranReader/TranslationView/BottomActionsModals';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
@@ -23,11 +23,10 @@ interface ExploreCardProps {
   cardClassName?: string;
   chapterNumber: number;
   verseKey: string;
-  questionsVerseKey: string;
   suggestions?: ChapterContent[];
   hasQuestions: boolean;
   hasClarificationQuestion: boolean;
-  onModalOpen: (modalType: ModalType) => void;
+  onStudyModeOpen: (tabId: StudyModeTabId, verseKey: string) => void;
 }
 
 // Action helpers are defined in ./actions
@@ -36,11 +35,10 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
   cardClassName,
   chapterNumber,
   verseKey,
-  questionsVerseKey,
   suggestions,
   hasQuestions,
   hasClarificationQuestion,
-  onModalOpen,
+  onStudyModeOpen,
 }) => {
   const { t, lang } = useTranslation();
   const selectedTafsirs = useSelector(selectSelectedTafsirs);
@@ -57,24 +55,13 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 
   const handleButtonClick = useCallback(
     (button: ActionButton) => {
-      onModalOpen(button.modalType);
       const normalizedKey = button.key.replace(/\./g, '_');
       logButtonClick(`end_of_surah_${normalizedKey}`, { chapterNumber });
 
-      // Use questionsVerseKey for Answers button, verseKey for others
-      const navigationVerseKey =
-        button.modalType === ModalType.QUESTIONS ? questionsVerseKey : verseKey;
-
-      fakeNavigate(
-        button.getNavigationUrl({
-          chapterNumber,
-          verseKey: navigationVerseKey,
-          selectedTafsirs,
-        }),
-        lang,
-      );
+      onStudyModeOpen(button.studyModeTabId, verseKey);
+      fakeNavigate(button.getNavigationUrl({ chapterNumber, verseKey, selectedTafsirs }), lang);
     },
-    [onModalOpen, chapterNumber, verseKey, questionsVerseKey, selectedTafsirs, lang],
+    [onStudyModeOpen, chapterNumber, verseKey, selectedTafsirs, lang],
   );
 
   return (
@@ -96,7 +83,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
         <div className={styles.buttonsRow}>
           {ACTION_BUTTONS.map((button) => {
             // Skip Answers button if no questions available
-            if (button.modalType === ModalType.QUESTIONS && !hasQuestions) {
+            if (button.studyModeTabId === StudyModeTabId.ANSWERS && !hasQuestions) {
               return null;
             }
 
@@ -105,7 +92,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 
             // For Answers button, use a special icon when there is a clarification question
             const iconElement =
-              button.modalType === ModalType.QUESTIONS && hasClarificationQuestion ? (
+              button.studyModeTabId === StudyModeTabId.ANSWERS && hasClarificationQuestion ? (
                 <LightbulbOnIcon />
               ) : (
                 <Icon />

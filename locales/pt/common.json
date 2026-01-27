@@ -45,6 +45,7 @@
     "play-surah": "Jogue Sura {{surahName}}",
     "select-lng": "Selecione o idioma",
     "sidebar-nav-close": "Fechar a barra lateral de navegação",
+    "tooltip-action": "Ação de dica de ferramenta",
     "translation-info": "Ver informações de tradução"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "Seja um doador mensal"
   },
   "get-started": "Começar",
+  "go-to-verse": "Ir para o versículo",
   "hear-it-pronounced": "Clique em palavras do Quran, ouça a pronúncia",
   "help": "Ajuda",
   "hizb": "Hizb",
@@ -369,6 +371,7 @@
   "reflect": "Refletir",
   "reflections": "Reflexões",
   "reflections-and-lessons": "Reflexões e Lições",
+  "related-verses": "Versículos relacionados",
   "remove": "Retirar",
   "rename": "Renomear",
   "retry": "Tentar novamente",

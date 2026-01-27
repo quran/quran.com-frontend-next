@@ -45,6 +45,7 @@
     "play-surah": "تشغيل السورة {{surahName}}",
     "select-lng": "اختر اللغة",
     "sidebar-nav-close": "اغلق القائمة الجانبية",
+    "tooltip-action": "إجراء تلميح الأداة",
     "translation-info": "عرض معلومات الترجمة"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "كن متبرعا شهريا"
   },
   "get-started": "ابدأ الآن",
+  "go-to-verse": "انتقل إلى الآية",
   "hear-it-pronounced": "اضغط على كلمات القرآن الكريم واستمع إلى نطقها",
   "help": "مساعدة",
   "hizb": "حزب",
@@ -369,6 +371,7 @@
   "reflect": "تدبر",
   "reflections": "تدبرات",
   "reflections-and-lessons": "تدبرات وفوائد",
+  "related-verses": "الآيات ذات الصلة",
   "remove": "إزالة",
   "rename": "إعادة تسمية",
   "retry": "أعد المحاولة",

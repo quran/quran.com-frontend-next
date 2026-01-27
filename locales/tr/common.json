@@ -45,6 +45,7 @@
     "play-surah": "{{surahName}} Ayeti Seslendir",
     "select-lng": "Dil Seçin",
     "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat",
+    "tooltip-action": "İpucu eylemi",
     "translation-info": "Çeviri bilgilerini görüntüle"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "Aylık Bağışçımız Olun"
   },
   "get-started": "Başla",
+  "go-to-verse": "Ayette Git",
   "hear-it-pronounced": "Kuran kelimelerini tıklayın, telaffuzunu dinleyin",
   "help": "Yardım",
   "hizb": "Hizb",
@@ -369,6 +371,7 @@
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
   "reflections-and-lessons": "Düşünceler ve Dersler",
+  "related-verses": "İlgili Ayetler",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",

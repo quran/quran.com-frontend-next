@@ -143,6 +143,7 @@ test.describe('SSR (JS disabled)', () => {
     await expect(page.getByText(/hebaddy adminddy/).first()).toBeVisible();
   });
 
+  // Skipped because there's no more lessons on testing env
   test.skip('Lessons page renders without JS', async ({ page }) => {
     await page.goto('/1:2/lessons');
 

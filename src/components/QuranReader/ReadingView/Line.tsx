@@ -8,7 +8,6 @@ import { QURAN_READER_OBSERVER_ID } from '../observer';
 import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -32,6 +31,7 @@ export type LineProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
+  // eslint-disable-next-line react/no-unused-prop-types
   bookmarksRangeUrl: string | null;
   pageHeaderChapterId?: string;
 };
@@ -42,7 +42,6 @@ const Line = ({
   isBigTextLayout,
   pageIndex,
   lineIndex,
-  bookmarksRangeUrl,
   pageHeaderChapterId,
 }: LineProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
@@ -90,9 +89,6 @@ const Line = ({
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const verseTranslations = words[0].verse?.translations;
-  const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length || 0;
 
   // Get data from first word for page tracking
   const firstWord = words[0];
@@ -113,12 +109,7 @@ const Line = ({
       })}
     >
       {shouldShowChapterHeader && chapterId !== pageHeaderChapterId && (
-        <ChapterHeader
-          translationName={translationName}
-          translationsCount={translationsCount}
-          chapterId={firstWordData[0]}
-          isTranslationView={false}
-        />
+        <ChapterHeader chapterId={firstWordData[0]} isTranslationView={false} />
       )}
       <div
         className={classNames(styles.line, {
@@ -131,7 +122,6 @@ const Line = ({
           isReadingMode
           isHighlighted={isHighlighted}
           shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
-          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </div>
     </div>

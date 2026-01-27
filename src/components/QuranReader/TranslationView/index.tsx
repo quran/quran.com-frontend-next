@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
@@ -10,14 +11,11 @@ import QueryParamMessage from '../QueryParamMessage';
 
 import useGetVersesCount from './hooks/useGetVersesCount';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
-import PageQuestionsLoaders from './PageQuestionsLoader';
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 import TranslationViewVerse from './TranslationViewVerse';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
-import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
-import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -25,7 +23,6 @@ import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
-import { QuestionsData } from '@/utils/auth/api';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { VersesResponse } from 'types/ApiResponses';
@@ -39,37 +36,12 @@ type TranslationViewProps = {
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
-type PageVersesQuestionsData = Record<string, QuestionsData>;
-
 const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
   ssr: false,
   loading: () => <Spinner />,
 });
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1000;
-
-type TranslationViewWrapperProps = {
-  verses: Verse[];
-  quranReaderStyles: QuranReaderStyles;
-  pageVersesQuestionsData: PageVersesQuestionsData;
-  children: ReactNode;
-};
-
-const TranslationViewWrapper = ({
-  verses,
-  quranReaderStyles,
-  pageVersesQuestionsData,
-  children,
-}: TranslationViewWrapperProps) => (
-  <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
-    <div
-      className={styles.wrapper}
-      onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-    >
-      {children}
-    </div>
-  </PageQuestionsContext.Provider>
-);
 
 type StaticVerseListProps = {
   verses: Verse[];
@@ -93,24 +65,17 @@ const StaticVerseList = ({
             Number(verse.verseNumber),
             perPage,
           )
-        : undefined;
-      const translationsLabel = getTranslationsLabelString(verse.translations);
+        : null;
       return (
         <div key={verse.verseKey} className={styles.container}>
           {verse.verseNumber === 1 && (
-            <ChapterHeader
-              translationName={translationsLabel}
-              translationsCount={verse.translations?.length}
-              chapterId={String(verse.chapterId)}
-              isTranslationView
-            />
+            <ChapterHeader chapterId={String(verse.chapterId)} isTranslationView />
           )}
           <TranslationViewCell
             verseIndex={verseIdx}
             verse={verse}
             quranReaderStyles={quranReaderStyles}
             bookmarksRangeUrl={bookmarksRangeUrl}
-            hasNotes={false}
           />
         </div>
       );
@@ -168,50 +133,8 @@ const TranslationView = ({
     [quranReaderStyles.mushafLines, quranReaderStyles.quranFont],
   );
 
-  // Store questions data per page to avoid large API requests.
-  // Each page fetches its own questions data for a smaller verse range.
-  const [pageQuestionsMap, setPageQuestionsMap] = useState<
-    Record<number, Record<string, QuestionsData>>
-  >({});
-
-  // Reset questions data when the resource context changes (e.g., navigating between chapters)
-  // to avoid leaking stale data across chapters/pages and unbounded growth.
-  useEffect(() => {
-    setPageQuestionsMap({});
-  }, [resourceId]);
-
-  // Callback for PageQuestionsLoaders to report each page's questions data.
-  const handleQuestionsLoaded = useCallback(
-    (pageNumber: number, data: Record<string, QuestionsData>) => {
-      setPageQuestionsMap((prev) => {
-        const prevPageData = prev[pageNumber];
-        // Avoid unnecessary state updates if data content is the same.
-        // Deep compare since SWR may return new object references for identical data.
-        if (prevPageData && JSON.stringify(prevPageData) === JSON.stringify(data)) {
-          return prev;
-        }
-        return {
-          ...prev,
-          [pageNumber]: data,
-        };
-      });
-    },
-    [],
-  );
-
-  // Compute accumulated questions data from all loaded pages.
-  // This merges questions data from each page into a single object.
-  const accumulatedQuestionsData = useMemo(() => {
-    const result: Record<string, QuestionsData> = {};
-    Object.values(pageQuestionsMap).forEach((pageData) => {
-      Object.assign(result, pageData);
-    });
-    return result;
-  }, [pageQuestionsMap]);
-
-  // Wrap in useCallback with accumulatedQuestionsData as dependency.
-  // This ensures Virtuoso re-renders items when questions data changes,
-  // fixing the issue where Answers buttons wouldn't appear after async data loads.
+  // Simplified: just render the item without passing questions data down
+  // Each TranslationViewVerse will fetch its own questions data via context
   const itemContentRenderer = useCallback(
     (verseIdx: number) => {
       if (verseIdx === versesCount) {
@@ -236,7 +159,6 @@ const TranslationView = ({
           reciterId={reciterId}
           initialData={initialData}
           resourceId={resourceId}
-          questionsData={accumulatedQuestionsData}
         />
       );
     },
@@ -245,7 +167,6 @@ const TranslationView = ({
       quranReaderDataType,
       verses,
       initialData,
-      accumulatedQuestionsData,
       quranReaderStyles,
       setApiPageToVersesMap,
       selectedTranslations,
@@ -260,6 +181,11 @@ const TranslationView = ({
     reciterQueryParamDifferent ||
     wordByWordLocaleQueryParamDifferent;
 
+  const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
+  const wrapperClassName = classNames(styles.wrapper, {
+    [styles.singleVerseWrapper]: isSingleVerse,
+  });
+
   return (
     <>
       {shouldShowQueryParamMessage && (
@@ -271,30 +197,19 @@ const TranslationView = ({
       )}
 
       <noscript>
-        <TranslationViewWrapper
-          verses={verses}
-          quranReaderStyles={quranReaderStyles}
-          pageVersesQuestionsData={accumulatedQuestionsData}
-        >
+        <div className={wrapperClassName}>
           <StaticVerseList
             verses={verses}
             quranReaderStyles={quranReaderStyles}
             mushafId={mushafId}
             perPage={initialData.pagination.perPage}
           />
-        </TranslationViewWrapper>
+        </div>
       </noscript>
 
-      {/* Fetches questions for each loaded page without rendering any UI */}
-      <PageQuestionsLoaders
-        apiPageToVersesMap={apiPageToVersesMap}
-        onQuestionsLoaded={handleQuestionsLoaded}
-      />
-
-      <TranslationViewWrapper
-        verses={verses}
-        quranReaderStyles={quranReaderStyles}
-        pageVersesQuestionsData={accumulatedQuestionsData}
+      <div
+        className={wrapperClassName}
+        onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
       >
         <Virtuoso
           ref={virtuosoRef}
@@ -304,7 +219,7 @@ const TranslationView = ({
           initialItemCount={1} // needed for SSR.
           itemContent={itemContentRenderer}
         />
-      </TranslationViewWrapper>
+      </div>
     </>
   );
 };

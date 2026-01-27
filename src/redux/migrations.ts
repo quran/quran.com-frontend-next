@@ -298,4 +298,31 @@ export default {
       selectedReadingTranslation: initialState.readingPreferences.selectedReadingTranslation,
     },
   }),
+  39: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      reflectionFontScale:
+        state.quranReaderStyles.reflectionFontScale ??
+        initialState.quranReaderStyles.reflectionFontScale,
+      lessonFontScale:
+        state.quranReaderStyles.lessonFontScale ?? initialState.quranReaderStyles.lessonFontScale,
+    },
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedReflectionLanguages:
+        state.readingPreferences.selectedReflectionLanguages ??
+        initialState.readingPreferences.selectedReflectionLanguages,
+      selectedLessonLanguages:
+        state.readingPreferences.selectedLessonLanguages ??
+        initialState.readingPreferences.selectedLessonLanguages,
+    },
+  }),
+  40: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
+    },
+  }),
 };

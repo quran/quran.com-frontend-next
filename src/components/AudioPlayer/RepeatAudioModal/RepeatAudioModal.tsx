@@ -51,16 +51,16 @@ const RepeatAudioModal = ({
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
   const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
-  const {
-    actions: { onSettingsChangeWithoutDispatch },
-  } = usePersistPreferenceGroup();
-  const chapterName = useMemo(() => {
+  const chapterData = useMemo(() => {
     if (!chaptersData) {
       return null;
     }
-    const chapterData = getChapterData(chaptersData, chapterId);
-    return chapterData?.transliteratedName;
+    return getChapterData(chaptersData, chapterId);
   }, [chapterId, chaptersData]);
+  const {
+    actions: { onSettingsChangeWithoutDispatch },
+  } = usePersistPreferenceGroup();
+  const chapterName = chapterData?.transliteratedName;
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
     if (!chaptersData) {
@@ -101,6 +101,9 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const play = () => {
+    if (!chapterData) {
+      return;
+    }
     audioService.send({
       type: 'SET_REPEAT_SETTING',
       delayMultiplier: Number(verseRepetition.delayMultiplier),
@@ -114,6 +117,9 @@ const RepeatAudioModal = ({
   };
 
   const onPlayClick = () => {
+    if (!chapterData) {
+      return;
+    }
     logButtonClick('start_repeat_play');
     onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, play);
   };
@@ -223,7 +229,9 @@ const RepeatAudioModal = ({
         <Modal.Action onClick={isInRepeatMode ? onStopRepeating : onCancelClick}>
           {isInRepeatMode ? t('audio.player.stop-repeating') : t('cancel')}
         </Modal.Action>
-        <Modal.Action onClick={onPlayClick}>{t('audio.player.start-playing')}</Modal.Action>
+        <Modal.Action onClick={onPlayClick} isDisabled={!chapterData}>
+          {t('audio.player.start-playing')}
+        </Modal.Action>
       </Modal.Footer>
     </Modal>
   );

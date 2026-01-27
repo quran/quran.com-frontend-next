@@ -18,10 +18,10 @@ import Verse from 'types/Verse';
 type ActionButtonsProps = {
   verse: Verse;
   bookmarksRangeUrl?: string | null; // optional when bookmarks data isn't available
-  hasNotes?: boolean;
   isTranslationView?: boolean;
   openShareModal: () => void;
   hasTranslationsButton?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 /**
@@ -32,11 +32,13 @@ type ActionButtonsProps = {
 const ActionButtons: React.FC<ActionButtonsProps> = ({
   verse,
   bookmarksRangeUrl,
-  hasNotes,
   isTranslationView = true,
   openShareModal,
   hasTranslationsButton = false,
+  shouldUseModalZIndex = false,
 }) => {
+  const normalizedBookmarksRangeUrl = bookmarksRangeUrl ?? undefined;
+
   return (
     <>
       <Wrapper
@@ -54,7 +56,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             <BookmarkAction
               verse={verse}
               isTranslationView={isTranslationView}
-              bookmarksRangeUrl={bookmarksRangeUrl}
+              bookmarksRangeUrl={normalizedBookmarksRangeUrl}
             />
           </ActionItem>
           {hasTranslationsButton && (
@@ -83,14 +85,19 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
           </ActionItem>
 
           <ActionItem>
-            <TranslationViewNoteAction verseKey={verse.verseKey} hasNotes={hasNotes} />
+            <TranslationViewNoteAction
+              verseKey={verse.verseKey}
+              isInsideStudyMode={shouldUseModalZIndex}
+            />
           </ActionItem>
 
           <ActionItem>
             <OverflowVerseActionsMenu
-              bookmarksRangeUrl={bookmarksRangeUrl}
+              bookmarksRangeUrl={normalizedBookmarksRangeUrl}
               verse={verse}
               isTranslationView={isTranslationView}
+              shouldUseModalZIndex={shouldUseModalZIndex}
+              isInsideStudyMode={shouldUseModalZIndex}
             />
           </ActionItem>
         </>

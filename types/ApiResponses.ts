@@ -10,6 +10,7 @@ import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import MetaData from './MetaData';
 import Reciter from './Reciter';
+import RelatedVerse from './RelatedVerse';
 import { SearchNavigationResult } from './Search/SearchNavigationResult';
 import SearchService from './Search/SearchService';
 import SearchVerseItem from './Search/SearchVerseItem';
@@ -44,6 +45,11 @@ export interface ChaptersResponse extends BaseResponse {
 
 export interface VerseResponse extends BaseResponse {
   verse: Verse;
+}
+
+export interface RelatedVersesResponse extends BaseResponse {
+  pagination: Pagination;
+  relatedVerses: RelatedVerse[];
 }
 
 // The response from the chapter endpoint that returns information on a chapter
@@ -193,4 +199,13 @@ export interface CountryLanguagePreferenceResponse extends BaseResponse {
     name: string;
     isoCode: string;
   }[];
+}
+
+export interface RamadanChallengeResponse extends BaseResponse {
+  isEnrolled: boolean;
+  currentDay: number;
+  totalDays: number;
+  hasStarted: boolean;
+  hasEnded: boolean;
+  enrolledAt?: string;
 }

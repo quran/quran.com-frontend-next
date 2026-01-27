@@ -5,7 +5,7 @@ $tooltip-max-width: 200px;
   color: var(--color-background-alternative-deep);
   margin-inline: var(--spacing-xsmall);
   & > svg {
-    width: var(--spacing-large);
+    inline-size: var(--spacing-large);
   }
 }
 
@@ -15,5 +15,5 @@ $tooltip-max-width: 200px;
 
 .content {
   display: flex;
-  max-width: $tooltip-max-width;
+  max-inline-size: $tooltip-max-width;
 }

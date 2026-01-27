@@ -7,10 +7,8 @@ import styles from './WordActionsMenu.module.scss';
 
 import { logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 type Props = {
-  word?: Word;
   verse?: Verse;
   onActionTriggered?: () => void;
   openShareModal?: () => void;
@@ -18,22 +16,18 @@ type Props = {
 };
 
 /**
- * Actions menu for reading view - works with either Word or Verse.
- * Accepts either a Word (extracts verse from it) or a Verse directly.
+ * Actions menu for reading view.
+ * Accepts a Verse directly for actions like tafsir, reflections, bookmarks, etc.
  *
  * @returns {React.ReactElement | null} The actions menu component or null if no verse
  */
 const ReadingViewWordActionsMenu: React.FC<Props> = ({
-  word,
-  verse: verseProp,
+  verse,
   onActionTriggered,
   openShareModal,
   bookmarksRangeUrl,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
-
-  // Use verse prop directly if provided, otherwise extract from word
-  const verse = verseProp || word?.verse;
 
   const onMenuChange = (menu: VerseActionsMenuType) => {
     logEvent(`reading_view_verse_actions_menu_${menu}`);

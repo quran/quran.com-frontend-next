@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import { getLanguageDataById, toLocalizedNumber } from '@/utils/locale';
@@ -15,7 +14,6 @@ type TranslationPageProps = {
   verses: Verse[];
   pageNumber: number;
   lang: string;
-  bookmarksRangeUrl?: string | null;
   pageHeaderChapterId?: string;
 };
 
@@ -31,7 +29,6 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   verses,
   pageNumber,
   lang,
-  bookmarksRangeUrl,
   pageHeaderChapterId,
 }) => {
   // Get language data from the first translation for RTL direction and number formatting
@@ -51,19 +48,10 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
       const chapterId = verse.chapterId?.toString();
       const shouldShowChapterHeader = verse.verseNumber === 1 && chapterId !== pageHeaderChapterId;
 
-      const verseTranslations = verse.translations;
-      const translationName = getTranslationNameString(verseTranslations);
-      const translationsCount = verseTranslations?.length ?? 0;
-
       return (
         <React.Fragment key={verse.verseKey}>
           {shouldShowChapterHeader && chapterId && (
-            <ChapterHeader
-              translationName={translationName}
-              translationsCount={translationsCount}
-              chapterId={chapterId}
-              isTranslationView={false}
-            />
+            <ChapterHeader chapterId={chapterId} isTranslationView={false} />
           )}
           <TranslatedAyah
             verse={verse}
@@ -71,7 +59,6 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
             languageId={translation.languageId}
             lang={lang}
             isLastVerse={index === verses.length - 1}
-            bookmarksRangeUrl={bookmarksRangeUrl}
           />
         </React.Fragment>
       );

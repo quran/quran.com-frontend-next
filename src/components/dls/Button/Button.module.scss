@@ -104,6 +104,10 @@
   font-size: var(--font-size-normal);
   --button-size: calc(2 * var(--spacing-medium));
 }
+.xsmall {
+  font-size: var(--font-size-small);
+  --button-size: 27px;
+}
 
 // shape
 .square {
@@ -173,14 +177,17 @@
 // suffix, prefix and content contaniner
 .suffix {
   display: flex;
+  align-items: center;
   margin-inline-start: calc(0.5 * var(--spacing-medium));
 }
 .prefix {
   display: flex;
+  align-items: center;
   margin-inline-end: calc(0.5 * var(--spacing-medium));
 }
 .content {
   display: flex;
+  align-items: center;
   line-height: normal;
 }
 
@@ -282,5 +289,36 @@
     color: var(--color-text-white);
     background-color: var(--color-streaks-dark);
     opacity: 0.9;
+  }
+}
+
+.mode_toggle {
+  background-color: var(--color-background-elevated-new);
+  color: var(--color-text-faded-new);
+  border: none;
+  box-shadow: var(--shadow-chapter-header-actions);
+
+  // Disable the default button scale effect on click
+  &:active {
+    transform: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-text-default-new);
+      background-color: var(--color-background-elevated-new);
+    }
+  }
+
+  &.selected {
+    background-color: var(--color-text-default-new);
+    color: var(--color-background-elevated);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--color-text-default-new);
+        color: var(--color-background-elevated);
+      }
+    }
   }
 }

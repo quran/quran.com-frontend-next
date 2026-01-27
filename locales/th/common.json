@@ -45,6 +45,7 @@
     "play-surah": "เล่นซูเราะห์ {{surahName}}",
     "select-lng": "เลือกภาษา",
     "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง",
+    "tooltip-action": "การดำเนินการคำแนะนำเครื่องมือ",
     "translation-info": "ดูข้อมูลการแปล"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "ร่วมเป็นผู้บริจาครายเดือน"
   },
   "get-started": "เริ่มต้นใช้งาน",
+  "go-to-verse": "ไปที่บท",
   "hear-it-pronounced": "คลิกคำในอัลกุรอาน ฟังการออกเสียง",
   "help": "ช่วยเหลือ",
   "hizb": "ฮิซบ์",
@@ -369,6 +371,7 @@
   "reflect": "สะท้อน",
   "reflections": "ภาพสะท้อน",
   "reflections-and-lessons": "ข้อคิดและบทเรียน",
+  "related-verses": "ข้อพระคัมภ์ที่เกี่ยวข้อง",
   "remove": "ลบ",
   "rename": "เปลี่ยนชื่อ",
   "retry": "ลองอีกครั้ง",

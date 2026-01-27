@@ -1,4 +1,5 @@
 @use '../_tooltip-info.mixin' as *;
+@use 'src/styles/theme';
 .trigger {
   all: unset;
   display: inline-block;
@@ -14,8 +15,13 @@
   padding-inline-end: var(--spacing-xxsmall);
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
-  text-align: center;
   max-inline-size: calc(10 * var(--spacing-mega));
+  // Changed from text-align to flexbox to support icon alignment
+  // Flexbox allows the icon to be positioned at the end while keeping content centered
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro2-px);
   & > span {
     fill: var(--color-background-inverse);
   }
@@ -43,6 +49,10 @@
     fill: var(--color-success-medium);
   }
 }
+
+.success .icon {
+  color: var(--color-text-white);
+}
 .warning {
   background-color: var(--color-warning-medium);
   & > span {
@@ -57,4 +67,30 @@
 }
 .info {
   @include infoTooltipStyles;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  cursor: pointer;
+}
+
+.clickableContent {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro2-px);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 2px;
+    border-radius: var(--border-radius-default);
+  }
 }

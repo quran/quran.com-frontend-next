@@ -30,7 +30,11 @@ const learningPlansSorter = (a: Course, b: Course) => {
   return 0;
 };
 
-const LearningPlansSection = () => {
+type LearningPlansSectionProps = {
+  initialCoursesData?: CoursesResponse | null;
+};
+
+const LearningPlansSection: React.FC<LearningPlansSectionProps> = ({ initialCoursesData }) => {
   const { t } = useTranslation('home');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
   const resolvedLanguageIsoCodes =
@@ -51,6 +55,7 @@ const LearningPlansSection = () => {
       loading={Loading}
       fetcher={privateFetcher}
       queryKey={makeGetCoursesUrl({ myCourses: false, languages: resolvedLanguageIsoCodes })}
+      initialData={initialCoursesData ?? undefined}
       render={(data: CoursesResponse) => {
         const courses = data?.data;
         if (!courses || !Array.isArray(courses) || courses.length === 0) {

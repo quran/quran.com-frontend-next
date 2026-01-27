@@ -45,6 +45,7 @@
     "play-surah": "সূরা {{surahName}} প্লে করুন",
     "select-lng": "ভাষা নির্বাচন কর",
     "sidebar-nav-close": "নেভিগেশন সাইডবার বন্ধ করুন",
+    "tooltip-action": "টুলটিপ অ্যাকশন",
     "translation-info": "অনুবাদ তথ্য দেখুন"
   },
   "audio": {
@@ -266,6 +267,7 @@
     "title": "একজন মাসিক দাতা হন"
   },
   "get-started": "শুরু করুন",
+  "go-to-verse": "পদ্যে যান",
   "hear-it-pronounced": "কুরআনের শব্দে ক্লিক করুন, উচ্চারণ শুনুন",
   "help": "সাহায্য",
   "hizb": "হিযব",
@@ -369,6 +371,7 @@
   "reflect": "প্রতিফলিত করা",
   "reflections": "প্রতিফলন",
   "reflections-and-lessons": "প্রতিফলন এবং পাঠ",
+  "related-verses": "সম্পর্কিত আয়াত",
   "remove": "অপসারণ",
   "rename": "নাম পরিবর্তন করুন",
   "retry": "পুনরায় চেষ্টা করা",

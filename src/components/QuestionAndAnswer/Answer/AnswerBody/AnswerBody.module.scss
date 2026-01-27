@@ -1,79 +1,116 @@
 .answerBody {
-    background-color: var(--color-background-alternative-faded);
-    border-radius: var(--border-radius-rounded);
-    padding: var(--spacing-medium2-px);
-    font-size: var(--font-size-small);
+  background-color: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-small-px);
+  padding: var(--spacing-medium-px);
+  font-size: var(--answer-dynamic-font-size, var(--font-size-large));
+  margin-block: var(--spacing-large);
+  color: var(--color-text-default-new);
+
+  & > *:first-child {
+    padding-block-start: 0;
+    margin-block-start: 0;
+  }
+
+  & :global(.milkdown) *,
+  & :global(.ProseMirror) *,
+  :global(.content) *,
+  :global(.editor) * {
+    font-size: inherit;
+
+    & :where(ol, ul) {
+      list-style-position: inside;
+      padding-inline: 0;
+
+      & > li > * {
+        display: inline;
+      }
+    }
+  }
 }
 
 .header {
-    font-size: var(--font-size-small);
-    color: var(--color-text-faded);
-    padding-block: var(--spacing-small);
-    font-weight: var(--font-weight-bold);
+  font-size: inherit;
+  color: var(--color-text-faded-new);
+  padding-block: var(--spacing-small);
+  font-weight: var(--font-weight-bold);
+
+  &:first-of-type {
+    margin-block-start: 0;
+  }
 }
 
 .text {
-    padding-block-end: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
 }
 
 .shareButton {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  inline-size: 100%;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-small);
 }
 
 .shareButtonText {
-    color: var(--color-text-faded);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xxsmall);
+  color: var(--color-text-faded-new);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
 }
 
 .shareOptions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: var(--spacing-medium);
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-medium);
+  inline-size: 100%;
 }
 
 .shareOptionsButtons {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-medium);
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  flex-wrap: wrap;
+  justify-content: center;
+  inline-size: 100%;
 }
 
 .shareOptionButton {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xsmall);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 
-    span {
-        font-size: var(--font-size-small);
-        color: var(--color-text-default);
-    }
+  span {
+    font-size: var(--font-size-small);
+    color: var(--color-text-faded-new);
+  }
 }
 
 .socialIcon {
-    width: var(--spacing-xlarge-px);
-    height: var(--spacing-xlarge-px);
+  inline-size: var(--spacing-xlarge-px);
+  block-size: var(--spacing-xlarge-px);
+  color: var(--color-text-faded-new);
 }
 
 .utilityIconWrapper {
-    width: var(--spacing-xlarge-px);
-    height: var(--spacing-xlarge-px);
-    background-color: var(--color-background-alternative);
-    border-radius: var(--border-radius-circle);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  inline-size: var(--spacing-xlarge-px);
+  block-size: var(--spacing-xlarge-px);
+  background-color: var(--color-background-alternative);
+  border-radius: var(--border-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.referencesList {
+  list-style: disc;
+  list-style-position: inside;
+  padding-inline-start: 0;
+  color: var(--color-text-faded-new);
 }
