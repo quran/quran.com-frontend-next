@@ -15,6 +15,7 @@ import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeMo
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import {
   selectStudyModeActiveTab,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openReaderBioModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -50,6 +51,7 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
   // Get Study Mode state for restoration
   const activeTab = useSelector(selectStudyModeActiveTab);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
 
   // Set first juncture as selected when data loads
   useEffect(() => {
@@ -92,11 +94,12 @@ const StudyModeQiraatTab: React.FC<StudyModeQiraatTabProps> = ({
             verseKey: studyModeVerseKey || verseKey,
             activeTab,
             highlightedWordLocation: null,
+            isSsrMode,
           },
         }),
       );
     },
-    [data?.readers, dispatch, verseKey, studyModeVerseKey, activeTab],
+    [data?.readers, dispatch, verseKey, studyModeVerseKey, activeTab, isSsrMode],
   );
 
   /**
