@@ -17,6 +17,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { ROUTES } from '@/utils/navigation';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
+const RAMADAN_EVENT = {
+  title: 'Get Ready for Ramadan!',
+  description: 'Tools & content to stay connected all month',
+};
+
 const CommunitySection = () => {
   const { lang, t } = useTranslation('home');
 
@@ -34,7 +39,7 @@ const CommunitySection = () => {
         <h1>{t('common:community.title')}</h1>
       </div>
       <div className={styles.cardsContainer} data-testid={TestId.COMMUNITY_SECTION}>
-        {lang !== Language.AR && (
+        {lang === Language.EN && (
           <Card
             className={styles.card}
             link={ROUTES.RAMADAN_2026}
@@ -47,7 +52,7 @@ const CommunitySection = () => {
                 <div className={styles.cardHeader}>
                   <DiamondIcon className={styles.ramadanIcon} />
                   <p className={classNames(styles.cardDescription, styles.ramadanTitle)}>
-                    {t('ramadan.title')}
+                    {RAMADAN_EVENT.title}
                   </p>
                 </div>
                 <IconContainer
@@ -57,7 +62,7 @@ const CommunitySection = () => {
                   className={styles.arrowIcon}
                 />
               </div>
-              <p className={styles.cardDescription}>{t('ramadan.description')}</p>
+              <p className={styles.cardDescription}>{RAMADAN_EVENT.description}</p>
             </div>
           </Card>
         )}
