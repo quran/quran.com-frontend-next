@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   @include breakpoints.tablet {
@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  inline-size: 50%;
 }
 
 .uppercase {

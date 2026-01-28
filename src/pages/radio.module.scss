@@ -1,4 +1,4 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 
 .title {
   padding-block-start: var(--spacing-mega);
@@ -20,8 +20,8 @@ $ribbon-text-color: #fff;
   position: absolute;
   inset-block-start: 0;
   inset-inline: 0;
-  height: calc(20 * var(--spacing-medium));
-  width: 100%;
+  block-size: calc(20 * var(--spacing-medium));
+  inline-size: 100%;
   @include theme.light {
     background-color: var(--color-success-medium);
   }

@@ -27,10 +27,10 @@ $verseLinkMinWidth: calc(6 * var(--spacing-mega));
   overflow-x: auto;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
-    height: 0;
+    block-size: 0;
   }
   & > .verseLink {
-    min-width: $verseLinkMinWidth;
+    min-inline-size: $verseLinkMinWidth;
   }
 
   & > .verseLink:first-child {
@@ -50,6 +50,6 @@ $verseLinkMinWidth: calc(6 * var(--spacing-mega));
   margin-inline-start: var(--spacing-micro);
   margin-inline-end: var(--spacing-micro);
   > span {
-    width: max-content;
+    inline-size: max-content;
   }
 }
