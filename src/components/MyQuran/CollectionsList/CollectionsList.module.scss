@@ -30,7 +30,7 @@
   gap: var(--spacing-xsmall-px);
   padding: 0;
   font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
   background: transparent;
   border: none;
@@ -64,8 +64,8 @@
 }
 
 .sortIcon {
-  inline-size: 18px;
-  block-size: 18px;
+  inline-size: var(--spacing-medium-plus2-px);
+  block-size: var(--spacing-medium-plus2-px);
 }
 
 .sortSelect {
@@ -91,7 +91,7 @@
 
 .listContainer {
   background: var(--color-background-default);
-  border: 1px solid var(--color-borders-hairline);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large-px);
   overflow: hidden;
 
@@ -102,7 +102,7 @@
       scrollbar-color: var(--color-borders-hairline) transparent;
 
       &::-webkit-scrollbar {
-        inline-size: 6px;
+        inline-size: var(--spacing-xxsmall2-px);
       }
 
       &::-webkit-scrollbar-track {
@@ -134,7 +134,7 @@
   padding: var(--spacing-medium2-px);
   background: transparent;
   border: none;
-  border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   cursor: pointer;
   transition: background var(--transition-fast) ease-out;
   text-align: start;
@@ -159,8 +159,8 @@
   flex-shrink: 0;
 
   svg {
-    inline-size: 24px;
-    block-size: 24px;
+    inline-size: var(--spacing-medium3-px);
+    block-size: var(--spacing-medium3-px);
     color: var(--color-success-medium);
   }
 }
@@ -183,8 +183,8 @@
   transition: all var(--transition-regular) ease;
 
   svg {
-    inline-size: 14px;
-    block-size: 14px;
+    inline-size: var(--font-size-xsmall-px);
+    block-size: var(--font-size-xsmall-px);
     color: var(--color-success-medium);
   }
 }
@@ -217,8 +217,8 @@
   }
 
   svg {
-    inline-size: 16px;
-    block-size: 16px;
+    inline-size: var(--spacing-medium-plus-px);
+    block-size: var(--spacing-medium-plus-px);
   }
 }
 
@@ -228,7 +228,7 @@
   align-items: flex-start;
   padding: var(--spacing-medium2-px);
   background: var(--color-background-default);
-  border: 1px solid var(--color-separators-ayah-level);
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
   border-radius: var(--border-radius-large-px);
   gap: var(--spacing-medium-px);
   inline-size: 100%;
@@ -256,8 +256,8 @@
 }
 
 .checkIcon {
-  inline-size: 16px;
-  block-size: 16px;
+  inline-size: var(--spacing-medium-plus-px);
+  block-size: var(--spacing-medium-plus-px);
   color: var(--color-success-medium);
   flex-shrink: 0;
 
@@ -268,7 +268,7 @@
 
 .guestPromoSeparator {
   inline-size: 100%;
-  block-size: 1px;
+  block-size: var(--spacing-hairline-px);
   background: var(--color-separators-ayah-level);
   border: none;
   margin: 0;
@@ -301,8 +301,8 @@
 }
 
 .sortSkeleton {
-  inline-size: 100px;
-  block-size: 24px;
+  inline-size: var(--spacing-mega-px);
+  block-size: var(--spacing-medium3-px);
   background: linear-gradient(
     90deg,
     var(--color-background-alternative) 25%,
@@ -316,7 +316,7 @@
 
 .skeleton {
   inline-size: 100%;
-  block-size: 72px;
+  block-size: calc(var(--spacing-medium3-px) * 3);
   background: linear-gradient(
     90deg,
     var(--color-background-alternative) 25%,
@@ -325,7 +325,7 @@
   );
   background-size: 200% 100%;
   animation: loading 1.5s ease-in-out infinite;
-  border-block-end: 1px solid var(--color-borders-hairline);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 
   &:last-child {
     border-block-end: none;
