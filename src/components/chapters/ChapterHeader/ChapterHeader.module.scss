@@ -231,7 +231,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   color: var(--color-text-faded-new);
 
   @include breakpoints.smallerThanTablet {
-    font-size: var(--font-size-xsmall-dangerous);
+    font-size: var(--spacing-small-px);
   }
 }
 

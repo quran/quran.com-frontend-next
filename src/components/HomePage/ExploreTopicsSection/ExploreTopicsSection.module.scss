@@ -26,6 +26,7 @@
   white-space: nowrap;
 
   @include breakpoints.tablet {
+    padding-block: var(--spacing-medium2-px) !important;
     font-size: var(--font-size-large-px);
   }
 }
