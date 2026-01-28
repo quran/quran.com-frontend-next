@@ -67,8 +67,8 @@
     "/calendar": ["quranic-calendar"],
     "/media": ["media"],
     "/take-notes": ["take-notes"],
-    "/[chapterId]/answers": ["quran-reader", "question"],
-    "/[chapterId]/answers/[questionId]": ["quran-reader", "question"],
+    "/[chapterId]/answers": ["quran-reader", "question", "reading-goal", "notes"],
+    "/[chapterId]/answers/[questionId]": ["quran-reader", "question", "reading-goal", "notes"],
     "/apps-portal": ["app-portal"],
     "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
   }

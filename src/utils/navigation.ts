@@ -21,6 +21,7 @@ export const ROUTES = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   AUTH: '/auth',
+  MY_QURAN: '/my-quran',
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',

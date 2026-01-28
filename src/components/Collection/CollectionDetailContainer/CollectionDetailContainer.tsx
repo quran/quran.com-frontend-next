@@ -15,11 +15,7 @@ import ArrowLeft from '@/icons/west.svg';
 import Error from '@/pages/_error';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getCollectionNavigationUrl,
-  getProfileNavigationUrl,
-} from '@/utils/navigation';
+import { getCanonicalUrl, getCollectionNavigationUrl, ROUTES } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
@@ -128,11 +124,7 @@ const CollectionDetailContainer = ({
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
             <div className={styles.container}>
-              <Button
-                href={getProfileNavigationUrl()}
-                variant={ButtonVariant.Ghost}
-                hasSidePadding={false}
-              >
+              <Button href={ROUTES.MY_QURAN} variant={ButtonVariant.Ghost} hasSidePadding={false}>
                 <ArrowLeft />
               </Button>
               <CollectionDetail

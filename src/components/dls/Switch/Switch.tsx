@@ -25,34 +25,38 @@ export enum SwitchVariant {
   Alternative = 'alternative',
 }
 type SwitchProps = {
-  buttonClassName?: string;
-  containerClassName?: string;
   items: Item[];
   selected: string;
   onSelect: (value: string) => void;
   size?: SwitchSize;
   variant?: SwitchVariant;
+  className?: string;
   shouldHideSeparators?: boolean;
+  buttonClassName?: string;
 };
 
 const Switch = ({
-  buttonClassName,
-  containerClassName,
   items,
   onSelect,
   selected,
   size = SwitchSize.Normal,
   variant = SwitchVariant.Default,
+  className,
+  buttonClassName,
   shouldHideSeparators = false,
 }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
     <div
-      className={classNames(styles.container, containerClassName, {
-        [styles.xSmallContainer]: size === SwitchSize.XSmall,
-        [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
-      })}
+      className={classNames(
+        styles.container,
+        {
+          [styles.xSmallContainer]: size === SwitchSize.XSmall,
+          [styles.alternativeVariant]: variant === SwitchVariant.Alternative,
+        },
+        className,
+      )}
     >
       {items.map((item) => (
         <button

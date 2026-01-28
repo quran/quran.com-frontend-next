@@ -28,7 +28,6 @@ import {
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
-  MY_QURAN_URL,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [

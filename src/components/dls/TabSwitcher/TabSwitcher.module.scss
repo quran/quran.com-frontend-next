@@ -13,9 +13,9 @@
   }
 
   .tabsContainer {
-    display: none;
-    @include breakpoints.smallerThanTablet {
-      display: grid;
+    display: grid;
+    @include breakpoints.tablet {
+      display: none;
     }
     grid-auto-flow: column;
     grid-auto-columns: minmax(fit-content, 1fr);

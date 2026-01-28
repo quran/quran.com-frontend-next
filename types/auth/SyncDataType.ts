@@ -9,6 +9,7 @@ export interface SyncBookmarkPayload {
   verseNumber?: number;
   createdAt: string;
   mushaf: number;
+  isReading?: boolean;
 }
 
 export interface SyncReadingSessionPayload {

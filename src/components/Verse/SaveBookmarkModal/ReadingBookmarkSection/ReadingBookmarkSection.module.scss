@@ -1,0 +1,153 @@
+@import '../shared.module.scss';
+
+$box-height: 46px;
+
+.readingBookmarkSection {
+  display: flex;
+  user-select: none;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  block-size: $box-height;
+  padding: var(--spacing-medium-px);
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-large-px);
+  cursor: pointer;
+  transition: background-color var(--transition-normal) ease;
+  text-decoration: none;
+  &:hover:not(.selected) {
+    background-color: var(--color-background-alternative);
+  }
+
+  &.selected {
+    background-color: var(--color-background-alternative-faded);
+
+    .readingBookmarkIcon {
+      color: var(--color-success-medium);
+    }
+  }
+}
+
+.readingBookmarkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+}
+
+.removeReadingBookmarkSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-large-px);
+  cursor: pointer;
+  transition: background-color var(--transition-normal) ease;
+
+  &:hover {
+    background-color: var(--color-background-alternative);
+  }
+
+  .removeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-success-medium);
+    transition: color var(--transition-normal) ease;
+
+    svg {
+      inline-size: var(--spacing-large);
+      block-size: var(--spacing-large);
+    }
+  }
+
+  .removeContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxsmall);
+    flex: 1;
+  }
+
+  .removeTitle {
+    font-size: var(--font-size-small-px);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-default);
+  }
+
+  .removeInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxsmall);
+    font-size: var(--font-size-xsmall-px);
+    color: var(--color-text-faded-new);
+    flex-wrap: wrap;
+  }
+}
+
+.readingBookmarkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-text-faded);
+  transition: color var(--transition-normal) ease;
+
+  svg {
+    inline-size: var(--spacing-large);
+    block-size: var(--spacing-large);
+  }
+}
+
+.readingBookmarkContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+  flex: 1;
+}
+
+.readingBookmarkTitle {
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+}
+
+.readingBookmarkInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  font-size: var(--font-size-xsmall-px);
+  color: var(--color-text-faded-new);
+  flex-wrap: wrap;
+}
+
+.label {
+  color: var(--color-text-faded);
+  font-weight: var(--font-weight-normal);
+}
+
+.value {
+  color: var(--color-text-faded-new);
+  font-weight: bold;
+}
+
+.undoButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+  padding: 0;
+  color: var(--color-grey-icons-new);
+  font-size: var(--font-size-small);
+  transition: color var(--transition-normal) ease;
+
+  &:hover {
+    color: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}

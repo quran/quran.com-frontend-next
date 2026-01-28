@@ -199,7 +199,7 @@ const QuranFontSection = () => {
           items={types}
           selected={selectedType}
           onSelect={onFontChange}
-          containerClassName={styles.fontSwitch}
+          className={styles.fontSwitch}
           shouldHideSeparators
         />
       </Section.Row>

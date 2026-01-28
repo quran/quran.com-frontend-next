@@ -13,7 +13,7 @@ type VerseLike = {
   translations: { id: number; text: string }[];
 };
 
-const chaptersData = enChaptersData as ChaptersData;
+const chaptersData = enChaptersData as unknown as ChaptersData;
 
 describe('getCopyReflectionContent', () => {
   it('formats a group with multiple ayahs using plural "Verses" and range', () => {

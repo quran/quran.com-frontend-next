@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './my-quran.module.scss';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
+import SavedTabContent from '@/components/MyQuran/SavedTabContent';
 import MyQuranTab from '@/components/MyQuran/tabs';
 import NotesAndReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab';
 import RecentContent from '@/components/MyQuran/tabs/RecentContent/RecentContent';
@@ -20,7 +21,7 @@ import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
 const MY_QURAN_PATH = getMyQuranNavigationUrl();
 const tabComponents = {
-  [MyQuranTab.SAVED]: null,
+  [MyQuranTab.SAVED]: <SavedTabContent />,
   [MyQuranTab.RECENT]: <RecentContent />,
   [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
 };

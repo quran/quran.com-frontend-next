@@ -9,5 +9,36 @@
       "custom-collections": "Create custom collections",
       "attach-notes": "Attach notes to verses"
     }
+  },
+  "page": "Page",
+  "reading-bookmark": {
+    "title": "My Reading Bookmark",
+    "empty": "Start reading and save a Reading Bookmark!"
+  },
+  "recently-saved": {
+    "title": "Recently Saved"
+  },
+  "collections": {
+    "title": "Collections",
+    "favorites": "Favourites",
+    "load-more": "Load more",
+    "new-collection": "New Collection",
+    "items": "{{count}} item",
+    "items_plural": "{{count}} items",
+    "sort": {
+      "recently-updated": "Recently updated",
+      "a-z": "A - Z",
+      "z-a": "Z - A"
+    },
+    "guest-promo": {
+      "title": "Create custom collections",
+      "subtitle": "Compare and contrast verses",
+      "sign-in": "Sign in"
+    }
+  },
+  "search": {
+    "placeholder": "Search Saved...",
+    "filter": "Filter",
+    "sort": "Sort"
   }
 }
