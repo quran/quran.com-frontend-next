@@ -23,6 +23,7 @@ vi.mock('next/router', () => {
 });
 vi.mock('react-redux', () => ({
   useSelector: (sel: any) => sel({ quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 } }),
+  useDispatch: () => vi.fn(),
   shallowEqual: () => null,
 }));
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
