@@ -12,6 +12,7 @@ interface SaveBookmarkModalContentProps {
   // Header props
   modalTitle: string;
   onClose: () => void;
+  onBack?: () => void;
 
   // Reading bookmark props
   isVerse: boolean;
@@ -51,6 +52,7 @@ interface SaveBookmarkModalContentProps {
 const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
   modalTitle,
   onClose,
+  onBack,
   isVerse,
   isPage,
   verseKey,
@@ -71,7 +73,7 @@ const SaveBookmarkModalContent: React.FC<SaveBookmarkModalContentProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <SaveBookmarkModalHeader title={modalTitle} onClose={onClose} />
+      <SaveBookmarkModalHeader title={modalTitle} onClose={onClose} onBack={onBack} />
 
       <ReadingBookmarkSection
         type={isVerse ? ReadingBookmarkType.AYAH : ReadingBookmarkType.PAGE}

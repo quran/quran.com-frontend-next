@@ -18,6 +18,8 @@ interface SaveBookmarkModalProps {
   type: ReadingBookmarkType;
   verse?: Verse;
   pageNumber?: number;
+  onBack?: () => void;
+  wasOpenedFromStudyMode?: boolean;
 }
 
 /**
@@ -32,6 +34,8 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
   type,
   verse,
   pageNumber,
+  onBack,
+  wasOpenedFromStudyMode = false,
 }) => {
   const { lang } = useTranslation('quran-reader');
 
@@ -63,7 +67,7 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
     type,
     verse,
     pageNumber,
-    onClose,
+    onClose: wasOpenedFromStudyMode && onBack ? onBack : onClose,
   });
 
   return (
@@ -90,6 +94,7 @@ const SaveBookmarkModal: React.FC<SaveBookmarkModalProps> = ({
           <SaveBookmarkModalContent
             modalTitle={modalTitle}
             onClose={onClose}
+            onBack={onBack}
             isVerse={isVerse}
             isPage={isPage}
             verseKey={verseKey}
