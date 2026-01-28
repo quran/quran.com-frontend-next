@@ -4,6 +4,7 @@ import React from 'react';
 import styles from '../ChapterHeader.module.scss';
 
 import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
+import { TestId } from '@/tests/test-ids';
 
 interface ChapterEventProps {
   title: string;
@@ -14,7 +15,7 @@ interface ChapterEventProps {
 
 const ChapterEvent: React.FC<ChapterEventProps> = ({ title, description, ctaText, ctaLink }) => {
   return (
-    <div className={styles.chapterEventWrapper}>
+    <div className={styles.chapterEventWrapper} data-testid={TestId.QURAN_READER_CHAPTER_EVENT}>
       <div className={styles.chapterEvent}>
         <p className={styles.chapterEventTitle}>{title}</p>
         <p className={styles.chapterEventDescription}>{description}</p>
