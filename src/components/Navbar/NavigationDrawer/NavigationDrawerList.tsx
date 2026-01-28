@@ -15,6 +15,7 @@ import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
+import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
@@ -40,7 +41,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   accordionItemTitleClassName,
   projectsDescClassName,
 }) => {
-  const { t } = useTranslation('common');
+  const { lang, t } = useTranslation('common');
   const dispatch = useDispatch();
   const continueReadingUrl = useGetContinueReadingUrl();
 
@@ -51,6 +52,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
       href: ROUTES.RAMADAN_2026,
       eventName: 'navigation_drawer_ramadan2026',
       isEvent: true,
+      hideForArabic: true,
     },
     {
       title: t('read'),
@@ -100,16 +102,21 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
 
   return (
     <>
-      {ITEMS.map((item) => (
-        <NavigationDrawerItem
-          key={item.eventName}
-          title={item.title}
-          icon={item.icon}
-          href={item.href}
-          onClick={() => handleItemClick(item.eventName)}
-          isEvent={item.isEvent}
-        />
-      ))}
+      {ITEMS.map((item) => {
+        if (item.hideForArabic && lang === Language.AR) {
+          return null;
+        }
+        return (
+          <NavigationDrawerItem
+            key={item.eventName}
+            title={item.title}
+            icon={item.icon}
+            href={item.href}
+            onClick={() => handleItemClick(item.eventName)}
+            isEvent={item.isEvent}
+          />
+        );
+      })}
       <MoreMenuCollapsible
         onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}

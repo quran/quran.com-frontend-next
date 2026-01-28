@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { expect, test } from '@playwright/test';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import { openNavigationDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
 import { TestId } from '@/tests/test-ids';
@@ -10,6 +11,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/');
+  await ensureEnglishLanguage(page);
 });
 
 test(
