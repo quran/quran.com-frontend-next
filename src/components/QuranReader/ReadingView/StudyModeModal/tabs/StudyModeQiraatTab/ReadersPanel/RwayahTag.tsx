@@ -52,7 +52,7 @@ const RwayahTag: React.FC<RwayahTagProps> = ({
       onKeyDown={handleKeyDown}
       tabIndex={isClickable ? 0 : -1}
     >
-      <span className={styles.tagName}>{transmitter.translatedName || transmitter.name}</span>
+      <span className={styles.tagName}>{transmitter.translatedName ?? transmitter.name}</span>
     </button>
   );
 };

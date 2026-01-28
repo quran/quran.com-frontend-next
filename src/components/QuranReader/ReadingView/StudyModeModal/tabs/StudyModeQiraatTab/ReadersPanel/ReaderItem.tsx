@@ -70,7 +70,7 @@ const ReaderItem: React.FC<ReaderItemProps> = ({
     <div className={styles.item}>
       <div className={styles.header}>
         <div className={styles.nameContainer}>
-          <span className={styles.name}>{reader.translatedName || reader.name}</span>
+          <span className={styles.name}>{reader.translatedName ?? reader.abbreviation}</span>
           {reader.bio && (
             <button
               type="button"
