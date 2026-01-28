@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import useRamadanChallengeStatus from './useGetRamadanChallengeStatus';
 
+import Language from '@/types/Language';
 import { ROUTES } from '@/utils/navigation';
 
 interface ChapterEvent {
@@ -27,7 +28,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
   const { isEnrolled, isLoading } = useRamadanChallengeStatus();
 
   const eventData = useMemo(() => {
-    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang !== 'ar') {
+    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang !== Language.AR) {
       return {
         showEvent: true,
         title: t('chapter-event.title'),
