@@ -3,16 +3,19 @@ import React from 'react';
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
 import MyNotesModal from '@/components/Notes/modal/MyNotes';
+import { VerseActionModalType as ModalType } from '@/redux/slices/QuranReader/verseActionModal';
 import { Note } from '@/types/auth/Note';
 
 interface NotesModalsProps {
-  modalType: string;
+  modalType: ModalType;
   verseKey: string;
   notesCount: number;
   editingNote: Note | null;
   wasOpenedFromStudyMode: boolean;
+  previousModalType: ModalType | null;
   onClose: () => void;
   onBack?: () => void;
+  onBackToBookmark?: () => void;
   onOpenMyNotes: () => void;
   onOpenAddNote: () => void;
   onOpenEditNote: (note: Note) => void;
@@ -24,37 +27,49 @@ const NotesModals: React.FC<NotesModalsProps> = ({
   notesCount,
   editingNote,
   wasOpenedFromStudyMode,
+  previousModalType,
   onClose,
   onBack,
+  onBackToBookmark,
   onOpenMyNotes,
   onOpenAddNote,
   onOpenEditNote,
-}) => (
-  <>
-    <AddNoteModal
-      isModalOpen={modalType === 'addNote'}
-      onModalClose={onClose}
-      onMyNotes={onOpenMyNotes}
-      notesCount={notesCount}
-      verseKey={verseKey}
-      onBack={wasOpenedFromStudyMode ? onBack : undefined}
-    />
-    <MyNotesModal
-      isOpen={modalType === 'myNotes'}
-      onClose={onClose}
-      notesCount={notesCount}
-      onAddNote={onOpenAddNote}
-      onEditNote={onOpenEditNote}
-      verseKey={verseKey}
-    />
-    <EditNoteModal
-      note={editingNote}
-      isModalOpen={modalType === 'editNote'}
-      onModalClose={onClose}
-      onMyNotes={onOpenMyNotes}
-      onBack={onOpenMyNotes}
-    />
-  </>
-);
+}) => {
+  const getBackHandler = () => {
+    if (previousModalType === ModalType.SAVE_BOOKMARK) return onBackToBookmark;
+    if (wasOpenedFromStudyMode) return onBack;
+    return undefined;
+  };
+
+  const backHandler = getBackHandler();
+
+  return (
+    <>
+      <AddNoteModal
+        isModalOpen={modalType === ModalType.ADD_NOTE}
+        onModalClose={onClose}
+        onMyNotes={onOpenMyNotes}
+        notesCount={notesCount}
+        verseKey={verseKey}
+        onBack={backHandler}
+      />
+      <MyNotesModal
+        isOpen={modalType === ModalType.MY_NOTES}
+        onClose={onClose}
+        notesCount={notesCount}
+        onAddNote={onOpenAddNote}
+        onEditNote={onOpenEditNote}
+        verseKey={verseKey}
+      />
+      <EditNoteModal
+        note={editingNote}
+        isModalOpen={modalType === ModalType.EDIT_NOTE}
+        onModalClose={onClose}
+        onMyNotes={onOpenMyNotes}
+        onBack={onOpenMyNotes}
+      />
+    </>
+  );
+};
 
 export default NotesModals;

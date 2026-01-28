@@ -22,6 +22,7 @@ import {
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
+  selectVerseActionModalPreviousModalType,
   selectVerseActionModalStudyModeRestoreState,
   selectVerseActionModalType,
   selectVerseActionModalVerse,
@@ -47,6 +48,7 @@ const VerseActionModalContainer: React.FC = () => {
   const bookmarksRangeUrl = useSelector(selectVerseActionModalBookmarksRangeUrl);
   const wasOpenedFromStudyMode = useSelector(selectVerseActionModalWasOpenedFromStudyMode);
   const studyModeRestoreState = useSelector(selectVerseActionModalStudyModeRestoreState);
+  const previousModalType = useSelector(selectVerseActionModalPreviousModalType);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
   const chapterId = verse ? Number(verse.chapterId) : 0;
@@ -99,6 +101,11 @@ const VerseActionModalContainer: React.FC = () => {
     }
   }, [dispatch, studyModeRestoreState, verseKey]);
 
+  const handleBackToBookmark = useCallback(() => {
+    // Switch back to bookmark modal
+    dispatch(setModalType(VerseActionModalType.SAVE_BOOKMARK));
+  }, [dispatch]);
+
   const handleClose = useCallback(() => {
     if (wasOpenedFromStudyMode) {
       handleBackToStudyMode();
@@ -132,13 +139,15 @@ const VerseActionModalContainer: React.FC = () => {
   if (isNotesModal) {
     return (
       <NotesModals
-        modalType={modalType as string}
+        modalType={modalType}
         verseKey={verseKey}
         notesCount={count}
         editingNote={editingNote}
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        previousModalType={previousModalType}
         onClose={handleClose}
         onBack={handleBackToStudyMode}
+        onBackToBookmark={handleBackToBookmark}
         onOpenMyNotes={() => dispatch(setModalType(VerseActionModalType.MY_NOTES))}
         onOpenAddNote={() => dispatch(setModalType(VerseActionModalType.ADD_NOTE))}
         onOpenEditNote={(note: Note) => {
