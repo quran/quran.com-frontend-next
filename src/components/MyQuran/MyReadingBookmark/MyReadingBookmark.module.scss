@@ -17,16 +17,15 @@
   gap: var(--spacing-medium-px);
   inline-size: 100%;
   padding: var(--spacing-medium2-px);
-  background: var(--color-background-alternative-faded);
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: 20px;
+  background: var(--color-background-alternative-faint-new);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background var(--transition-fast) ease-out;
   text-align: inherit;
 
   &:hover {
     background-color: var(--color-background-alternative);
-    border-color: var(--color-borders-hairline-new);
   }
 }
 
@@ -35,16 +34,16 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  inline-size: 40px;
-  block-size: 40px;
+  inline-size: var(--spacing-xlarge-px);
+  block-size: var(--spacing-xlarge-px);
   background: var(--color-success-faded);
-  border-radius: 12px;
+  border-radius: var(--font-size-xxsmall-px);
   color: var(--color-success-medium);
 }
 
 .icon {
-  inline-size: 20px;
-  block-size: 20px;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
 }
 
 .content {
@@ -57,7 +56,7 @@
 .textContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-micro2-px);
 }
 
 .text {
@@ -72,8 +71,8 @@
 }
 
 .chevron {
-  inline-size: 16px;
-  block-size: 16px;
+  inline-size: var(--spacing-medium-plus-px);
+  block-size: var(--spacing-medium-plus-px);
   color: var(--color-text-faded);
 }
 
@@ -82,7 +81,7 @@
   align-items: center;
   padding: var(--spacing-large-px);
   background: var(--color-background-default);
-  border: 1px solid var(--color-borders-hairline);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
   justify-content: center;
 }
@@ -94,27 +93,50 @@
   text-align: center;
 }
 
+// Simple skeleton loading state
 .skeleton {
+  position: relative;
   inline-size: 100%;
-  block-size: 80px;
-  background: linear-gradient(
-    90deg,
-    var(--color-background-alternative) 25%,
-    var(--color-background-alternative-faded) 50%,
-    var(--color-background-alternative) 75%
-  );
-  background-size: 200% 100%;
-  animation: loading 1.5s ease-in-out infinite;
-  border-radius: var(--border-radius-pill);
-  border: 1px solid var(--color-borders-hairline);
-}
+  block-size: calc(var(--spacing-xlarge-px) * 2);
+  background: var(--color-background-alternative-faint-new);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
+  overflow: hidden;
 
-@keyframes loading {
-  0% {
-    background-position: 200% 0;
+  // Icon skeleton
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline-start: var(--spacing-medium2-px);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    inline-size: var(--spacing-xlarge-px);
+    block-size: var(--spacing-xlarge-px);
+    background: var(--color-background-alternative);
+    border-radius: var(--font-size-xxsmall-px);
   }
 
-  100% {
-    background-position: -200% 0;
+  // Content skeleton lines
+  .skeletonLine {
+    position: absolute;
+    inset-inline-start: calc(
+      var(--spacing-xlarge-px) + var(--spacing-medium-px) + var(--spacing-medium2-px)
+    );
+    background: var(--color-background-alternative);
+    border-radius: var(--border-radius-pill);
+
+    &:first-child {
+      inset-block-start: calc(var(--spacing-medium2-px) + var(--spacing-micro2-px));
+      inline-size: calc(var(--spacing-mega-px) * 2);
+      block-size: var(--spacing-small-px);
+    }
+
+    &:last-child {
+      inset-block-start: calc(
+        var(--spacing-medium2-px) + var(--spacing-small-px) + var(--spacing-micro2-px)
+      );
+      inline-size: var(--spacing-mega-px);
+      block-size: var(--spacing-xsmall-px);
+    }
   }
 }

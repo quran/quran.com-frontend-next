@@ -1,15 +1,17 @@
 @use 'src/styles/breakpoints';
 
-$block-size-collection-items: 600px;
-
 .header {
   display: flex;
   justify-content: space-between;
+  // Smooth entrance animation
+  animation: fadeIn var(--transition-moderate) ease-out;
 }
 
 .title {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xlarge);
+  // Stagger animation for title
+  animation: slideDown var(--transition-moderate) ease-out var(--transition-fast) backwards;
 }
 
 .sorter {
@@ -19,18 +21,28 @@ $block-size-collection-items: 600px;
 
 .sorterIcon {
   display: flex;
-  margin-inline-start: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall-px);
+  transition: transform var(--transition-moderate) ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .collectionItemsContainer {
-  margin-block-start: var(--spacing-medium);
-  block-size: $block-size-collection-items;
+  margin-block-start: var(--spacing-medium-px);
+  block-size: calc(var(--spacing-mega-px) * 10);
   overflow: hidden;
   position: relative;
+  // Smooth entrance animation
+  animation: fadeInSlide var(--transition-regular) ease-out backwards;
+  animation-delay: var(--transition-moderate);
 }
 
 .verseContainer {
-  margin-block: var(--spacing-large);
+  margin-block: var(--spacing-large-px);
+  // Smooth entrance animation with stagger
+  animation: fadeIn var(--transition-fast) ease-out backwards;
 }
 
 .emptyCollectionContainer {
@@ -38,20 +50,61 @@ $block-size-collection-items: 600px;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-block-start: calc(2 * var(--spacing-mega));
+  margin-block-start: calc(2 * var(--spacing-mega-px));
   font-size: var(--font-size-xlarge);
+  // Fade in animation for empty state
+  animation: fadeIn var(--transition-moderate) ease-out;
 }
 
 .backToCollectionButtonContainer {
-  margin-block-start: var(--spacing-large);
+  margin-block-start: var(--spacing-large-px);
+  // Fade in animation
+  animation: fadeIn var(--transition-moderate) ease-out;
 }
 
 .bookmarkLink {
   text-decoration: underline;
+  transition: color var(--transition-fast) ease-out;
+
+  &:hover {
+    color: var(--color-primary-medium);
+  }
 }
 
 .linkContainer {
   @include breakpoints.smallerThanTablet {
-    margin-inline-start: var(--spacing-small);
+    margin-inline-start: var(--spacing-small-px);
+  }
+}
+
+// Animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-small-px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

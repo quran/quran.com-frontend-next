@@ -2,6 +2,8 @@
 
 .container {
   margin-block-end: var(--spacing-xlarge-px);
+  // Fade in animation for container
+  animation: fadeIn var(--transition-regular) ease-out;
 }
 
 .title {
@@ -9,33 +11,37 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
   margin-block-end: var(--spacing-medium2-px);
+  // Stagger animation for title
+  animation: slideDown var(--transition-moderate) ease-out;
 }
 
 .scrollContainer {
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-borders-hairline) transparent;
+  // Completely hide scrollbar
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  // Smooth scroll behavior
+  scroll-behavior: smooth;
 
+  // Hide scrollbar for all browsers
   &::-webkit-scrollbar {
-    block-size: var(--spacing-xxsmall2-px);
+    display: none;
+    inline-size: 0;
+    block-size: 0;
   }
 
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--color-borders-hairline);
-    border-radius: var(--border-radius-pill);
-  }
+  // Add padding to prevent clipping on all sides
+  padding: var(--spacing-small-px);
+  // Negative margin to compensate for padding and maintain layout
+  margin: calc(var(--spacing-small-px) * -1);
 }
 
 .itemsList {
   display: flex;
   gap: var(--spacing-small-px);
-  padding-block-end: var(--spacing-small-px);
+  // No padding here since scrollContainer handles it
 }
 
 .item {
@@ -43,34 +49,54 @@
   align-items: center;
   gap: var(--spacing-xsmall-px);
   padding: var(--spacing-xxsmall2-px) var(--spacing-small2-px);
-  background: var(--color-separators-ayah-level);
-  border: 1px solid var(--color-borders-hairline);
+  background: var(--color-background-alternative);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-moderate) ease-out;
   white-space: nowrap;
   flex-shrink: 0;
+  // Fade and slide animation for each item
+  animation: fadeInSlide var(--transition-fast) ease-out backwards;
+
+  // Stagger animation for items
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: calc(#{$i} * var(--transition-fast));
+    }
+  }
 
   &:hover {
     background: var(--color-background-alternative);
     border-color: var(--color-borders-hairline-new);
+
+    .itemArrow {
+      transform: translateX(var(--spacing-xsmall-px));
+      color: var(--color-primary-medium);
+    }
   }
 }
 
 .itemText {
   font-size: var(--font-size-small);
   color: var(--color-text-default);
+  transition: color var(--transition-fast) ease-out;
+
+  .item:hover & {
+    color: var(--color-text-main);
+  }
 }
 
 .itemArrow {
   inline-size: var(--font-size-xsmall-px);
   block-size: var(--font-size-xsmall-px);
   color: var(--color-text-faded);
+  transition: all var(--transition-moderate) ease-out;
 }
 
 .skeleton {
-  inline-size: 150px;
-  block-size: 36px;
+  inline-size: var(--spacing-mega-px);
+  block-size: calc(var(--spacing-medium3-px) + var(--spacing-small-px));
   background: linear-gradient(
     90deg,
     var(--color-background-alternative) 25%,
@@ -78,11 +104,12 @@
     var(--color-background-alternative) 75%
   );
   background-size: 200% 100%;
-  animation: loading 1.5s ease-in-out infinite;
+  animation: loading var(--transition-slow) ease-in-out infinite;
   border-radius: var(--border-radius-pill);
   flex-shrink: 0;
 }
 
+// Animation keyframes
 @keyframes loading {
   0% {
     background-position: 200% 0;
@@ -90,5 +117,36 @@
 
   100% {
     background-position: -200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-small-px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

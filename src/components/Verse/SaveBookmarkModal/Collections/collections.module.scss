@@ -83,7 +83,7 @@ $icon-size: var(--spacing-medium2-px);
   transition: background-color var(--transition-normal) ease;
 
   &:hover:not(.selected) {
-    background-color: var(--color-background-alternative-faded);
+    background-color: var(--color-background-alternative-faint-new);
   }
 
   &.selected {
@@ -207,11 +207,12 @@ $icon-size: var(--spacing-medium2-px);
   color: var(--color-text-default);
 
   &:hover {
-    background-color: var(--color-background-alternative-faded);
+    background-color: var(--color-background-alternative-faint-new);
   }
 
   svg {
-    inline-size: var(--spacing-medium);
-    block-size: var(--spacing-medium);
+    inline-size: var(--spacing-small2-px);
+    block-size: var(--spacing-small2-px);
+    padding: var(--spacing-small2-px);
   }
 }

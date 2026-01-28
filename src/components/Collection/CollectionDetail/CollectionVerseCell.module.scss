@@ -4,9 +4,21 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-background-alternative-faint-new);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-medium-px);
   margin-block-end: var(--spacing-medium-px);
+  transition: all var(--transition-moderate) ease-out;
+  // Fade and slide entrance animation
+  animation: fadeInSlide var(--transition-fast) ease-out backwards;
+
+  &:hover {
+    background-color: var(--color-background-alternative);
+    border-color: var(--color-borders-hairline-new);
+    :not(:first-child) {
+      transform: translateY(calc(var(--spacing-micro-px) * -1));
+    }
+  }
 }
 
 .headerContainer {
@@ -15,24 +27,23 @@
   align-items: flex-start;
   cursor: pointer;
   user-select: none;
-
-  &:hover {
-    .verseReference {
-      text-decoration: underline;
-    }
-  }
 }
 
 .headerLeft {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxsmall);
+  gap: var(--spacing-xxsmall-px);
 }
 
 .verseReference {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
+  transition: color var(--transition-fast) ease-out;
+
+  .outerContainer:hover & {
+    color: var(--color-primary-medium);
+  }
 }
 
 .bookmarkDate {
@@ -49,14 +60,30 @@
 .menuButton {
   padding: var(--spacing-xsmall-px);
   min-inline-size: auto;
+  transition: all var(--transition-fast) ease-out;
+  border-radius: var(--border-radius-small-px);
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 .chevronButton {
   padding: var(--spacing-xsmall-px);
   min-inline-size: auto;
+  transition: all var(--transition-fast) ease-out;
+  border-radius: var(--border-radius-small-px);
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
 
   svg {
-    transition: transform 0.2s ease;
+    transition: transform var(--transition-moderate) ease-out;
   }
 }
 
@@ -80,6 +107,8 @@
 .contentContainer {
   flex: 1;
   position: relative;
+  // Smooth fade in for content
+  animation: fadeIn var(--transition-fast) ease-out;
 }
 
 .arabicVerseContainer {
@@ -105,4 +134,25 @@
 
 .contentSeparator {
   margin-block: var(--spacing-medium-px);
+}
+
+// Animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-small-px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

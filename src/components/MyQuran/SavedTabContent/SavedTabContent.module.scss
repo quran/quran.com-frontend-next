@@ -2,4 +2,23 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-large-px);
+  position: relative;
+}
+
+// Wrapper for views (no animations to prevent flickering)
+.viewWrapper {
+  position: relative;
+  inline-size: 100%;
+}
+
+// Smooth transition for search/filter section
+.searchSection {
+  transition: opacity var(--transition-moderate) ease-out;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+    block-size: 0;
+    overflow: hidden;
+  }
 }

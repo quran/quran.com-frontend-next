@@ -3,8 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-medium-px);
   margin-block-end: var(--spacing-large-px);
+  // Smooth entrance animation
+  animation: slideDown var(--transition-moderate) ease-out;
 
   @include breakpoints.tablet {
     flex-direction: row;
@@ -20,29 +22,32 @@
 
 .searchIcon {
   position: absolute;
-  inset-inline-start: 12px;
+  inset-inline-start: var(--spacing-small2-px);
   inset-block-start: 50%;
   transform: translateY(-50%);
-  inline-size: 20px;
-  block-size: 20px;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
   color: var(--color-text-faded);
   pointer-events: none;
+  transition: color var(--transition-fast) ease-out, transform var(--transition-moderate) ease-out;
 }
 
 .searchInput {
   inline-size: 100%;
   box-sizing: border-box;
-  padding: 12px 15px 12px 45px;
+  padding: var(--spacing-small2-px) var(--spacing-medium-px) var(--spacing-small2-px)
+    calc(var(--spacing-xlarge-px) + var(--spacing-small-px));
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-normal);
   color: var(--color-text-default);
   background-color: var(--color-background-alternative-faint-new);
-  border: 1px solid var(--color-borders-hairline);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
-  transition: all 0.2s ease;
+  transition: all var(--transition-moderate) ease-out;
 
   &::placeholder {
     color: var(--color-text-faded);
+    transition: opacity var(--transition-fast) ease-out;
   }
 
   &:hover {
@@ -52,49 +57,65 @@
   &:focus {
     outline: none;
     border-color: var(--color-primary-medium);
-    box-shadow: 0 0 0 1px var(--color-primary-faded);
+    box-shadow: 0 0 0 calc(var(--spacing-micro-px) * 3) var(--color-primary-faded);
+    transform: translateY(calc(var(--spacing-micro-px) * -1));
+
+    + .searchIcon {
+      color: var(--color-primary-medium);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &::placeholder {
+      opacity: 0.5;
+    }
   }
 
   [dir='rtl'] & {
     text-align: end;
-    padding: 10px 45px 10px 15px;
+    padding: var(--spacing-small-px) calc(var(--spacing-xlarge-px) + var(--spacing-small-px))
+      var(--spacing-small-px) var(--spacing-medium-px);
   }
 }
 
 .controls {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: var(--spacing-medium-px);
 }
 
 .controlButton {
   display: flex;
   align-items: center;
   gap: var(--spacing-xsmall-px);
-  padding: 8px 12px;
+  padding: var(--spacing-xsmall-px) var(--spacing-small2-px);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-default);
   background: var(--color-background-default);
-  border: 1px solid var(--color-borders-hairline);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-moderate) ease-out;
   white-space: nowrap;
   position: relative;
 
   &:hover {
     background: var(--color-background-alternative);
     border-color: var(--color-borders-hairline-new);
+    transform: translateY(calc(var(--spacing-micro-px) * -1));
+
+    .controlIcon {
+      color: var(--color-primary-medium);
+    }
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: translateY(0) scale(0.98);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-primary-faded);
+    box-shadow: 0 0 0 calc(var(--spacing-micro-px) * 3) var(--color-primary-faded);
   }
 }
 
@@ -111,13 +132,20 @@
   &:hover {
     background: var(--color-primary-dark);
     border-color: var(--color-primary-dark);
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+    box-shadow: 0 var(--spacing-xsmall-px) var(--spacing-small2-px) rgba(0, 0, 0, 0.15);
   }
 }
 
 .controlIcon {
-  inline-size: 18px;
-  block-size: 18px;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
   color: var(--color-text-faded);
+  transition: color var(--transition-fast) ease-out, transform var(--transition-moderate) ease-out;
+
+  .controlButton:hover & {
+    transform: scale(1.1);
+  }
 }
 
 .controlText {
@@ -128,10 +156,35 @@
 
 .activeDot {
   position: absolute;
-  inset-inline-end: 8px;
-  inset-block-start: 6px;
-  inline-size: 6px;
-  block-size: 6px;
+  inset-inline-end: var(--spacing-xsmall-px);
+  inset-block-start: var(--spacing-xsmall-px);
+  inline-size: var(--spacing-micro2-px);
+  block-size: var(--spacing-micro2-px);
   border-radius: 50%;
   background-color: var(--color-success-medium);
+  animation: pulse var(--transition-slow) ease-in-out infinite;
+}
+
+// Animation keyframes
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
 }

@@ -82,7 +82,10 @@ const MyReadingBookmark: React.FC<MyReadingBookmarkProps> = ({ bookmark, isLoadi
     return (
       <div className={styles.container}>
         <h3 className={styles.title}>{t('reading-bookmark.title')}</h3>
-        <div className={styles.skeleton} />
+        <div className={styles.skeleton}>
+          <div className={styles.skeletonLine} />
+          <div className={styles.skeletonLine} />
+        </div>
       </div>
     );
   }

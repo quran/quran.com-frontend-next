@@ -91,7 +91,6 @@
 }
 
 .listContainer {
-  background: var(--color-background-default);
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large-px);
   overflow: hidden;
@@ -139,12 +138,19 @@
   cursor: pointer;
   transition: background var(--transition-fast) ease-out;
   text-align: start;
+  // Add subtle entrance animation for each item
+  animation: fadeInSlide var(--transition-fast) ease-out backwards;
 
   &.lastItem {
     border-block-end: none;
   }
 
   &:hover {
+    background: var(--color-background-alternative);
+    border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  }
+
+  &:active {
     background: var(--color-background-alternative);
   }
 }
@@ -340,5 +346,17 @@
 
   100% {
     background-position: -200% 0;
+  }
+}
+
+// Smooth fade and slide animation for list items
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-small-px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
