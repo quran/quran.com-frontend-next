@@ -25,3 +25,11 @@
   font-weight: var(--font-weight-semibold);
   line-height: 0;
 }
+
+.containerEvent {
+  color: var(--color-warning-deep);
+}
+
+.containerEventIcon svg path {
+  fill: var(--color-warning-deep);
+}
