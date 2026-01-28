@@ -32,6 +32,37 @@ $outline-size: 2px;
   color: var(--color-text-faded-new);
 }
 
+.backButton {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+  color: var(--color-text-faded-new);
+  cursor: pointer;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  transition: color var(--transition-normal) ease;
+
+  &:focus-visible {
+    border-radius: var(--border-radius-default);
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+}
+
+.arrowIcon {
+  transform: rotate(180deg);
+  margin-block-start: calc(var(--spacing-xmicro) * -1);
+
+  svg {
+    block-size: var(--spacing-small);
+    inline-size: var(--spacing-small);
+    color: var(--color-text-faded-new);
+  }
+}
+
 .helpIcon {
   display: inline-flex;
   align-items: center;

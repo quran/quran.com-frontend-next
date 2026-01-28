@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AdvancedCopyModal from './AdvancedCopyModal';
+import BookmarkModal from './BookmarkModal';
 import CollectionModal from './CollectionModal';
 import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
@@ -169,6 +170,17 @@ const VerseActionModalContainer: React.FC = () => {
         onBack={handleBackToStudyMode}
         onCollectionToggled={onCollectionToggled}
         onNewCollectionCreated={onNewCollectionCreated}
+      />
+    );
+  }
+
+  if (modalType === VerseActionModalType.SAVE_BOOKMARK && verse) {
+    return (
+      <BookmarkModal
+        verse={verse}
+        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
+        onClose={handleClose}
+        onBack={handleBackToStudyMode}
       />
     );
   }
