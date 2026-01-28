@@ -57,8 +57,8 @@ export const getAllChaptersData = (
  * @param {string} id
  * @returns {Chapter} chapter
  */
-export const getChapterData = (chapters: ChaptersData, id: string): Chapter =>
-  chapters[formatStringNumber(id)];
+export const getChapterData = (chapters: ChaptersData, id: string): Chapter | undefined =>
+  (chapters || {})[formatStringNumber(id)];
 
 /**
  * Given a pageId, get chapter ids from a json file

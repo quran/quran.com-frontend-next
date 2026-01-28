@@ -11,27 +11,33 @@ import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import RelatedVerseIcon from '@/icons/related-verses.svg';
+import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
 export const StudyModeTafsirTab = dynamic(() => import('./tabs/StudyModeTafsirTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeReflectionsTab = dynamic(() => import('./tabs/StudyModeReflectionsTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessonsTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
+
+export const StudyModeRelatedVersesTab = dynamic(
+  () => import('./tabs/RelatedVerses/StudyModeRelatedVersesTab'),
+  {
+    ssr: false,
+    loading: TafsirSkeleton,
+  },
+);
 
 export const TAB_COMPONENTS: Partial<
   Record<
@@ -40,6 +46,10 @@ export const TAB_COMPONENTS: Partial<
       chapterId: string;
       verseNumber: string;
       switchTab?: (tabId: StudyModeTabId | null) => void;
+      questionId?: string;
+      questionsInitialData?: AyahQuestionsResponse;
+      tafsirIdOrSlug?: string;
+      onGoToVerse?: (chapterId: string, verseNumber: string) => void;
     }>
   >
 > = {
@@ -47,6 +57,7 @@ export const TAB_COMPONENTS: Partial<
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
+  [StudyModeTabId.RELATED_VERSES]: StudyModeRelatedVersesTab,
 };
 
 export type TabConfig = {
@@ -60,16 +71,24 @@ export type TabConfig = {
 /**
  * Hook to generate tab configuration for StudyModeBottomActions.
  *
- * @param {StudyModeTabId | null | undefined} activeTab - Currently active tab
- * @param {string} verseKey - Current verse key
- * @param {Function} onTabChange - Callback when tab is clicked
+ * @param {object} props
+ * @param {StudyModeTabId | null | undefined} props.activeTab - Currently active tab
+ * @param {string} props.verseKey - Current verse key
+ * @param {Function} [props.onTabChange] - Callback when tab is clicked
+ * @param {boolean} [props.hasRelatedVerses=false] - Whether the verse has related verses
  * @returns {TabConfig[]} Array of tab configurations
  */
-export const useStudyModeTabs = (
-  activeTab: StudyModeTabId | null | undefined,
-  verseKey: string,
-  onTabChange?: (tabId: StudyModeTabId | null) => void,
-): TabConfig[] => {
+export const useStudyModeTabs = ({
+  activeTab,
+  verseKey,
+  onTabChange,
+  hasRelatedVerses = false,
+}: {
+  activeTab: StudyModeTabId | null | undefined;
+  verseKey: string;
+  onTabChange?: (tabId: StudyModeTabId | null) => void;
+  hasRelatedVerses: boolean;
+}): TabConfig[] => {
   const { t } = useTranslation('common');
 
   const { data: questionData, isLoading: isLoadingQuestions } =
@@ -118,6 +137,13 @@ export const useStudyModeTabs = (
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: hasQuestions,
+    },
+    {
+      id: StudyModeTabId.RELATED_VERSES,
+      label: t('related-verses'),
+      icon: <RelatedVerseIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.RELATED_VERSES),
+      condition: hasRelatedVerses,
     },
   ];
 };

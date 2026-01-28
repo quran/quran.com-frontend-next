@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   &.modalContainer {
@@ -14,7 +14,6 @@
   }
 }
 
-
 .heading {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
@@ -25,7 +24,6 @@
   background-color: var(--color-success-faint);
   border-radius: var(--border-radius-rounded);
 }
-
 
 .lessonContainer {
   padding: var(--spacing-micro);

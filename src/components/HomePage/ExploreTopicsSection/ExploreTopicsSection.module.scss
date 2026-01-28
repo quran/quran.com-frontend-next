@@ -1,57 +1,57 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .header {
-    padding-block-end: var(--spacing-medium);
-    @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
-    }
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
 
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxlarge-px);
     }
+  }
 }
 
 .topic {
-    background-color: var(--color-topics-grey);
-    padding: var(--spacing-medium-px) !important;
-    min-width: max-content;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: var(--color-text-default-new);
-    white-space: nowrap;
+  background-color: var(--color-topics-grey);
+  padding: var(--spacing-medium-px) !important;
+  min-inline-size: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--color-text-default-new);
+  white-space: nowrap;
 
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .container {
-    display: flex;
-    width: 100%;
-    gap: var(--spacing-small);
-    flex-wrap: nowrap;
+  display: flex;
+  inline-size: 100%;
+  gap: var(--spacing-small);
+  flex-wrap: nowrap;
 
-    @include breakpoints.smallerThanTablet {
-        gap: var(--spacing-xxsmall);
-    }
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-xxsmall);
+  }
 
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .highlighted {
-    background-color: var(--color-topics-gold);
+  background-color: var(--color-topics-gold);
 }

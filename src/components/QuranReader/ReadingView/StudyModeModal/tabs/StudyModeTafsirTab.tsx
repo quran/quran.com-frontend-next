@@ -10,16 +10,20 @@ import StudyModeTabLayout, {
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 
 const TafsirBody = dynamic(() => import('@/components/QuranReader/TafsirView/TafsirBody'), {
-  ssr: false,
   loading: TafsirSkeleton,
 });
 
 interface StudyModeTafsirTabProps {
   chapterId: string;
   verseNumber: string;
+  tafsirIdOrSlug?: string;
 }
 
-const StudyModeTafsirTab: React.FC<StudyModeTafsirTabProps> = ({ chapterId, verseNumber }) => {
+const StudyModeTafsirTab: React.FC<StudyModeTafsirTabProps> = ({
+  chapterId,
+  verseNumber,
+  tafsirIdOrSlug,
+}) => {
   const { containerRef, scrollToTop } = useStudyModeTabScroll();
 
   return (
@@ -28,6 +32,7 @@ const StudyModeTafsirTab: React.FC<StudyModeTafsirTabProps> = ({ chapterId, vers
         shouldRender
         initialChapterId={chapterId}
         initialVerseNumber={verseNumber}
+        initialTafsirIdOrSlug={tafsirIdOrSlug}
         scrollToTop={scrollToTop}
         showArabicText={false}
         showNavigation={false}

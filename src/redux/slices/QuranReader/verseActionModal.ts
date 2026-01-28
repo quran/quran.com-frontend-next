@@ -26,6 +26,7 @@ export type StudyModeRestoreState = {
   verseKey: string;
   activeTab: StudyModeTabId | null;
   highlightedWordLocation: string | null;
+  isSsrMode?: boolean;
 };
 
 /**

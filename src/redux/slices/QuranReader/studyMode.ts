@@ -12,6 +12,7 @@ export type PreviousStudyModeState = {
 
 export type StudyModeState = {
   isOpen: boolean;
+  isSsrMode: boolean;
   verseKey: string | null;
   activeTab: StudyModeTabId | null;
   highlightedWordLocation: string | null;
@@ -20,6 +21,7 @@ export type StudyModeState = {
 
 export const initialState: StudyModeState = {
   isOpen: false,
+  isSsrMode: false,
   verseKey: null,
   activeTab: null,
   highlightedWordLocation: null,
@@ -45,6 +47,17 @@ const studyMode = createSlice({
     openStudyMode: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
       return {
         isOpen: true,
+        isSsrMode: false,
+        verseKey: payload.verseKey,
+        activeTab: payload.activeTab ?? null,
+        highlightedWordLocation: payload.highlightedWordLocation ?? null,
+        previousState: state.previousState,
+      };
+    },
+    openStudyModeSsr: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
+      return {
+        isOpen: true,
+        isSsrMode: true,
         verseKey: payload.verseKey,
         activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
@@ -85,6 +98,7 @@ const studyMode = createSlice({
       }
       return {
         isOpen: true,
+        isSsrMode: false,
         verseKey: state.previousState.verseKey,
         activeTab: state.previousState.activeTab,
         highlightedWordLocation: state.previousState.highlightedWordLocation,
@@ -102,6 +116,7 @@ const studyMode = createSlice({
 
 // Selectors
 export const selectStudyModeIsOpen = (state: RootState) => state.studyMode.isOpen;
+export const selectStudyModeIsSsrMode = (state: RootState) => state.studyMode.isSsrMode;
 export const selectStudyModeVerseKey = (state: RootState) => state.studyMode.verseKey;
 export const selectStudyModeActiveTab = (state: RootState) => state.studyMode.activeTab;
 export const selectStudyModeHighlightedWordLocation = (state: RootState) =>
@@ -110,6 +125,7 @@ export const selectStudyModePreviousState = (state: RootState) => state.studyMod
 
 export const {
   openStudyMode,
+  openStudyModeSsr,
   closeStudyMode,
   resetStudyModeState,
   setActiveTab,

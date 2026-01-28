@@ -1,5 +1,5 @@
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .container {
   @include utility.center-vertically;
@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   & > svg {
-    height: calc(1.4 * var(--spacing-medium));
+    block-size: calc(1.4 * var(--spacing-medium));
   }
   & > svg > path {
     stroke: var(--color-text-default);
@@ -34,9 +34,9 @@
 }
 
 .languageMenuContent {
-  max-height: calc(3 * var(--spacing-mega-px));
+  max-block-size: calc(3 * var(--spacing-mega-px));
   @include breakpoints.tablet {
-    max-height: calc(6 * var(--spacing-mega-px));
+    max-block-size: calc(6 * var(--spacing-mega-px));
   }
   overflow-y: auto;
 }

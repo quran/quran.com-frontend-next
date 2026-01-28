@@ -35,8 +35,8 @@
   align-items: center;
   padding-inline-end: var(--spacing-xsmall);
   > svg {
-    width: var(--spacing-small);
-    height: var(--spacing-small);
+    inline-size: var(--spacing-small);
+    block-size: var(--spacing-small);
   }
 }
 

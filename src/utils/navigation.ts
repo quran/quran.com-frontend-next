@@ -31,6 +31,8 @@ export const ROUTES = {
   MY_LEARNING_PLANS: '/my-learning-plans',
   COLLECTIONS_ALL: '/collections/all',
   NOTIFICATION_SETTINGS: '/notification-settings',
+  RAMADAN_2026: '/ramadan2026',
+  RAMADAN_CHALLENGE: '/ramadanchallenge',
   // TODO: add all static routes here for incremental adoption
 };
 
@@ -67,6 +69,9 @@ export const EXTERNAL_ROUTES = {
     'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
   FEEDBACK: 'https://feedback.quran.com',
   QURAN_FOUNDATION: 'https://quran.foundation',
+  QURAN_REFLECT_ANDROID:
+    'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
+  QURAN_REFLECT_IOS: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
 };
 
 export const QURAN_URL = 'https://quran.com';
@@ -225,6 +230,15 @@ export const getVerseLessonNavigationUrl = (verseKey: string): string => `/${ver
  * @returns {string}
  */
 export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${verseKey}/answers`;
+
+/**
+ * Get the href link to related verse of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/related-verse`;
 
 /**
  * Get the href link to a specific answer with its associated verse key.
@@ -508,6 +522,18 @@ export const buildUrlWithParams = (baseUrl: string, params: Record<string, unkno
  */
 export const fakeNavigate = (url: string, locale: string) => {
   window.history.pushState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
+};
+
+/**
+ * Update the URL bar without triggering a re-render or page visit.
+ * Uses replaceState to replace the current history entry instead of creating a new one.
+ * Use this when you want to update the URL without affecting browser back/forward navigation.
+ *
+ * @param {string} url
+ * @param {string} locale
+ */
+export const fakeNavigateReplace = (url: string, locale: string) => {
+  window.history.replaceState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
 };
 
 /**

@@ -1,6 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .bottomActionsContainer {
+  overflow-x: auto;
   inline-size: 100%;
   padding-block: var(--spacing-medium2-px);
   position: sticky;
