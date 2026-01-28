@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-block-start: var(--spacing-medium);
 }
 
 .buttonsContainer {
@@ -14,6 +13,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding-block: 2rem;
   > a {
     margin-block-start: var(--spacing-xxsmall);
     margin-inline-end: var(--spacing-xxsmall);
