@@ -328,12 +328,12 @@ div {
   align-items: center;
   gap: var(--spacing-medium2-px);
   background-color: var(--color-success-faded);
-  box-shadow: var(--shadow-chapter-header-actions);
   border-radius: var(--spacing-medium-px);
   padding-block: var(--spacing-small-px);
   padding-inline: var(--spacing-medium2-px);
   margin-block-end: var(--spacing-medium2-px);
   @include breakpoints.desktopL {
+    padding-block: var(--spacing-medium-px);
     grid-row: unset;
     margin-block-end: 0;
     max-inline-size: calc(2 * var(--spacing-mega-px) + 2 * var(--spacing-large-px));

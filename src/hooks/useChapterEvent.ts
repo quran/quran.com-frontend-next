@@ -2,6 +2,8 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import useRamadanChallengeStatus from './useGetRamadanChallengeStatus';
+
 import { ROUTES } from '@/utils/navigation';
 
 interface ChapterEvent {
@@ -21,10 +23,11 @@ const CHAPTER_ID_TO_SHOW = '67';
  * @returns {ChapterEvent}
  */
 const useChapterEvent = (chapterId: string): ChapterEvent => {
-  const { t } = useTranslation('quran-reader');
+  const { lang, t } = useTranslation('quran-reader');
+  const { isEnrolled, isLoading } = useRamadanChallengeStatus();
 
   const eventData = useMemo(() => {
-    if (chapterId === CHAPTER_ID_TO_SHOW) {
+    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang !== 'ar') {
       return {
         showEvent: true,
         title: t('chapter-event.title'),
@@ -41,7 +44,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
       ctaText: '',
       ctaLink: '',
     };
-  }, [chapterId, t]);
+  }, [chapterId, isEnrolled, isLoading, lang, t]);
 
   return eventData;
 };
