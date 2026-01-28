@@ -91,8 +91,8 @@ $outline-size: 2px;
   justify-content: center;
   gap: var(--spacing-xxsmall);
   border-radius: var(--border-radius-medium-px);
-  color: var(--color-text-link);
-  border-color: var(--color-text-link);
+  color: var(--color-text-link-new);
+  border-color: var(--color-text-link-new);
   justify-self: center;
   cursor: pointer;
   transition: background-color var(--transition-normal) ease;
@@ -102,6 +102,7 @@ $outline-size: 2px;
     block-size: $icon-size !important;
     inline-size: $icon-size !important;
     align-self: center;
+    color: currentColor;
   }
 }
 

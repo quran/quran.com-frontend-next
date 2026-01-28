@@ -100,7 +100,7 @@ $icon-size: var(--spacing-medium2-px);
   align-items: center;
   justify-content: center;
   transition: color var(--transition-normal) ease;
-  color: transparent;
+  color: var(--color-text-faded);
   svg {
     inline-size: $icon-size;
     block-size: $icon-size;
