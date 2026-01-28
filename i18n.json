@@ -71,6 +71,6 @@
     "/[chapterId]/answers": ["quran-reader", "question", "reading-goal", "notes"],
     "/[chapterId]/answers/[questionId]": ["quran-reader", "question", "reading-goal", "notes"],
     "/apps-portal": ["app-portal"],
-    "/my-quran": ["my-quran"]
+    "/my-quran": ["my-quran", "quran-reader"]
   }
 }
