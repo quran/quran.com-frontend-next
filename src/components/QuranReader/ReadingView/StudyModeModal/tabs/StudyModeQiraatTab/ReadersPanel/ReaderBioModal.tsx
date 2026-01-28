@@ -57,11 +57,12 @@ const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
         size={IconSize.Custom}
         className={modalStyles.arrowIcon}
       />
-      {t('quran-reader:qiraat.reader-bio')}
+
+      {reader.translatedName ?? reader.abbreviation}
     </button>
   ) : (
     <h2 className={modalStyles.title} data-testid="reader-bio-modal-title">
-      {reader.translatedName || reader.name}
+      {reader.translatedName ?? reader.abbreviation}
     </h2>
   );
 
@@ -81,7 +82,7 @@ const ReaderBioModal: React.FC<ReaderBioModalProps> = ({
       {reader.city && <div className={styles.city}>{reader.city}</div>}
 
       <div className={styles.content}>
-        <h3 className={styles.bioTitle}>{reader.translatedName || reader.name}</h3>
+        <h3 className={styles.bioTitle}>{t('quran-reader:qiraat.reader-bio')}</h3>
         {reader.bio ? (
           <p className={styles.bioText}>{reader.bio}</p>
         ) : (
