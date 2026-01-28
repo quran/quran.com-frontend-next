@@ -47,12 +47,12 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
 
   const ITEMS = [
     {
-      title: t('ramadan2026'),
+      title: 'Ramadan 2026',
       icon: <DiamondIcon />,
       href: ROUTES.RAMADAN_2026,
       eventName: 'navigation_drawer_ramadan2026',
       isEvent: true,
-      hideForArabic: true,
+      locale: Language.EN,
     },
     {
       title: t('read'),
@@ -103,7 +103,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   return (
     <>
       {ITEMS.map((item) => {
-        if (item.hideForArabic && lang === Language.AR) {
+        if (item.locale && lang !== item.locale) {
           return null;
         }
         return (
