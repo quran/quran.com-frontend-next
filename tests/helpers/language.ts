@@ -27,3 +27,14 @@ export const ensureEnglishLanguage = async (page: Page): Promise<void> => {
   await selectNavigationDrawerLanguage(page, 'en');
   await expect(html).toHaveAttribute('lang', 'en');
 };
+
+export const ensureArabicLanguage = async (page: Page): Promise<void> => {
+  const html = page.locator('html');
+  const currentLang = await html.getAttribute('lang');
+  if (currentLang === 'ar') {
+    return;
+  }
+
+  await selectNavigationDrawerLanguage(page, 'ar');
+  await expect(html).toHaveAttribute('lang', 'ar');
+};

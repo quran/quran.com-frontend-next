@@ -84,6 +84,7 @@ export enum TestId {
   PROGRESS_BAR = 'progress-bar',
   QUICK_LINKS = 'quick-links',
   QURAN_IN_A_YEAR_SECTION = 'quran-in-a-year-section',
+  QURAN_READER_CHAPTER_EVENT = 'quran-reader-chapter-event',
   READING_BUTTON = 'reading-button',
   READING_TAB = 'reading-tab',
   REPEAT_AUDIO_MODAL = 'repeat-audio-modal',
