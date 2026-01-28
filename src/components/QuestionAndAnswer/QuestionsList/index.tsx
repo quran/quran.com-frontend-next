@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
@@ -43,6 +43,14 @@ const QuestionsList: React.FC<Props> = ({
     onLoadMore,
   });
 
+  // Scroll to the initially opened question on mount
+  useEffect(() => {
+    if (initialOpenQuestionId) {
+      const element = document.getElementById(`question-${initialOpenQuestionId}`);
+      if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [initialOpenQuestionId]);
+
   const onQuestionCollapseOpenChange = (
     isOpen: boolean,
     questionId: string,
@@ -65,12 +73,13 @@ const QuestionsList: React.FC<Props> = ({
     <div className={styles.container}>
       {questions?.map((question) => (
         <Collapsible
+          key={question.id}
+          id={`question-${question.id}`}
           direction={CollapsibleDirection.Right}
           headerClassName={styles.headerClassName}
           title={
             <QuestionHeader body={question.body} theme={question.theme} type={question.type} />
           }
-          key={question.id}
           prefix={<ChevronDownIcon />}
           shouldRotatePrefixOnToggle
           isDefaultOpen={false}
