@@ -143,12 +143,12 @@ test(
 
 const drawerLinks = [
   // Event link
-  { text: 'Ramadan 2026', href: '/ramadan-2026', target: '' },
+  { text: 'Ramadan 2026', href: '/ramadan2026', target: '' },
 
   // Main Navigation Links
   { text: 'Read', href: '', target: '' },
   { text: 'Learn', href: '/learning-plans', target: '' },
-  { text: 'My Quran', href: '/profile', target: '' },
+  { text: 'My Quran', href: '/my-quran', target: '' },
   { text: 'Quran Radio', href: '/radio', target: '' },
   { text: 'Reciters', href: '/reciters', target: '' },
   { text: 'About Us', href: '/about-us', target: '' },
