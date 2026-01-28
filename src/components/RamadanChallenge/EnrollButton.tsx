@@ -114,7 +114,7 @@ const EnrollButton = ({ section, isEnrolled, mutate, isLoading, ctaText }: Props
     }
   }, [ramadanChallengePreference]);
 
-  if (isLoading) {
+  if (isLoading || !ramadanChallengePreference) {
     return <Spinner />;
   }
 

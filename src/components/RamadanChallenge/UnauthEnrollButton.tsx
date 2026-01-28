@@ -5,6 +5,7 @@ import { HeadlessServiceProvider } from '../Notifications/hooks/useHeadlessServi
 import EnrollButton from './EnrollButton';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -24,6 +25,10 @@ const UnauthEnrollButton = ({ section }: Props) => {
   const onButtonClicked = () => {
     logButtonClick(`guest_ramadan_challenge_${section}`);
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   if (isLoggedIn) {
     return (
