@@ -10,11 +10,10 @@ import styles from './ProfileAvatarButton.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useLogout from '@/hooks/auth/useLogout';
-import BookmarkIconFilled from '@/icons/bookmark_filled.svg';
+import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
-import NotesIcon from '@/icons/notes-with-pencil.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
@@ -25,11 +24,10 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   getLoginNavigationUrl,
   getMyCoursesNavigationUrl,
-  getNotesNavigationUrl,
+  getMyQuranNavigationUrl,
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
-  ROUTES,
 } from '@/utils/navigation';
 
 const MENU_ITEMS = [
@@ -41,9 +39,9 @@ const MENU_ITEMS = [
   },
   {
     eventName: 'profile_avatar_my_quran',
-    navigationUrl: ROUTES.MY_QURAN,
+    navigationUrl: getMyQuranNavigationUrl(),
     translationKey: 'my-quran',
-    icon: <BookmarkIconFilled className={styles.bookmarkIcon} />,
+    icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
   },
   {
     eventName: 'profile_avatar_notification_settings',
@@ -56,12 +54,6 @@ const MENU_ITEMS = [
     navigationUrl: getReadingGoalProgressNavigationUrl(),
     translationKey: 'reading-history',
     icon: <ClockIcon />,
-  },
-  {
-    eventName: 'profile_avatar_notes',
-    navigationUrl: getNotesNavigationUrl(),
-    translationKey: 'notes.title',
-    icon: <NotesIcon />,
   },
   {
     eventName: 'profile_avatar_my_courses',

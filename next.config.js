@@ -137,6 +137,11 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/notes-and-reflections',
+      destination: '/my-quran?tab=notes-and-reflections',
+      permanent: true,
+    },
+    {
       source: '/apps-portal',
       destination: '/apps',
       permanent: true,

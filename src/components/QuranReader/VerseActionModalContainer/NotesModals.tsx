@@ -52,6 +52,7 @@ const NotesModals: React.FC<NotesModalsProps> = ({
       isModalOpen={modalType === 'editNote'}
       onModalClose={onClose}
       onMyNotes={onOpenMyNotes}
+      onBack={onOpenMyNotes}
     />
   </>
 );

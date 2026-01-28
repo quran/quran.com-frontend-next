@@ -1,46 +1,52 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
 
 import HeaderNavigation from '@/components/HeaderNavigation';
 import SavedTabContent from '@/components/MyQuran/SavedTabContent';
+import MyQuranTab from '@/components/MyQuran/tabs';
+import NotesAndReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab';
+import RecentContent from '@/components/MyQuran/tabs/RecentContent/RecentContent';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import { SwitchVariant } from '@/dls/Switch/Switch';
 import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
+import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
-enum Tab {
-  SAVED = 'saved',
-  RECENT = 'recent',
-  NOTES_AND_REFLECTIONS = 'notes-and-reflections',
-}
+const MY_QURAN_PATH = getMyQuranNavigationUrl();
+const tabComponents = {
+  [MyQuranTab.SAVED]: <SavedTabContent />,
+  [MyQuranTab.RECENT]: <RecentContent />,
+  [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
+};
 
 const MyQuranPage = (): JSX.Element => {
   const { lang, t } = useTranslation('my-quran');
-  const PATH = ROUTES.MY_QURAN;
+  const router = useRouter();
+  const { tab } = router.query;
+  const [selectedTab, setSelectedTab] = useState(MyQuranTab.SAVED);
+
   const title = t('common:my-quran');
-  const [selectedTab, setSelectedTab] = useState(Tab.SAVED);
 
   const tabs = useMemo(
     () => [
       {
         name: t('saved'),
-        value: Tab.SAVED,
+        value: MyQuranTab.SAVED,
       },
       {
         name: t('recent'),
-        value: Tab.RECENT,
+        value: MyQuranTab.RECENT,
       },
       {
         name: t('notes-and-reflections'),
-        value: Tab.NOTES_AND_REFLECTIONS,
+        value: MyQuranTab.NOTES_AND_REFLECTIONS,
       },
     ],
     [t],
@@ -48,21 +54,22 @@ const MyQuranPage = (): JSX.Element => {
 
   const onTabChange = (value: string) => {
     logEvent('my_quran_tab_change', { value });
-    setSelectedTab(value as Tab);
+    setSelectedTab(value as MyQuranTab);
+    if (tab) router.replace(router.pathname, undefined, { shallow: true });
   };
 
-  const tabComponents = {
-    [Tab.SAVED]: <SavedTabContent />,
-    [Tab.RECENT]: null,
-    [Tab.NOTES_AND_REFLECTIONS]: null,
-  };
+  useEffect(() => {
+    if (tab && Object.values(MyQuranTab).includes(tab as MyQuranTab)) {
+      setSelectedTab(tab as MyQuranTab);
+    }
+  }, [tab]);
 
   return (
     <>
       <NextSeoWrapper
         title={title}
-        canonical={getCanonicalUrl(lang, PATH)}
-        languageAlternates={getLanguageAlternates(PATH)}
+        canonical={getCanonicalUrl(lang, MY_QURAN_PATH)}
+        languageAlternates={getLanguageAlternates(MY_QURAN_PATH)}
         nofollow
         noindex
       />
@@ -73,13 +80,7 @@ const MyQuranPage = (): JSX.Element => {
           wrapperClassName={styles.mainContent}
           className={styles.pageContainer}
         >
-          <TabSwitcher
-            hasSeparator={false}
-            selected={selectedTab}
-            items={tabs}
-            onSelect={onTabChange}
-            variant={SwitchVariant.Alternative}
-          />
+          <TabSwitcher selected={selectedTab} items={tabs} onSelect={onTabChange} />
           <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
         </PageContainer>
       </main>
@@ -89,12 +90,7 @@ const MyQuranPage = (): JSX.Element => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
+  return { props: { chaptersData: allChaptersData } };
 };
 
 export default MyQuranPage;

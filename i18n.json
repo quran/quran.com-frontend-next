@@ -60,7 +60,6 @@
     "/forgot-password": ["login"],
     "/reset-password": ["login"],
     "/about-the-quran": ["about-quran"],
-    "/notes-and-reflections": ["notes"],
     "/ramadan": ["ramadan-activities"],
     "/ramadanchallenge": ["ramadan-activities"],
     "/beyond-ramadan": ["ramadan-activities"],
@@ -71,6 +70,6 @@
     "/[chapterId]/answers": ["quran-reader", "question", "reading-goal", "notes"],
     "/[chapterId]/answers/[questionId]": ["quran-reader", "question", "reading-goal", "notes"],
     "/apps-portal": ["app-portal"],
-    "/my-quran": ["my-quran", "quran-reader"]
+    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
   }
 }

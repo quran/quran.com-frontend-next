@@ -1,0 +1,14 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+}
+
+.skeleton {
+  inline-size: 100%;
+  block-size: calc(2 * var(--spacing-xxlarge-px));
+
+  &::before {
+    border-radius: var(--border-radius-rounded);
+  }
+}

@@ -1,7 +1,15 @@
 {
   "saved": "Saved",
   "recent": "Recent",
-  "notes-and-reflections": "Notes and Reflections",
+  "notes-and-reflections": "Notes & Reflections",
+  "recent-empty": "Start reading to see your recently read",
+  "sign-in-prompt": {
+    "title": "Sign in or Sign up for free to gain access to the more features!",
+    "features": {
+      "custom-collections": "Create custom collections",
+      "attach-notes": "Attach notes to verses"
+    }
+  },
   "page": "Page",
   "reading-bookmark": {
     "title": "My Reading Bookmark",
