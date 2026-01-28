@@ -75,7 +75,7 @@ const EnrollButton = ({ section, isEnrolled, mutate, isLoading, ctaText }: Props
   };
 
   const handleEnroll = async () => {
-    logButtonClick(`ramadan_challenge_enroll${section}`);
+    logButtonClick(`ramadan_challenge_enroll_${section}`);
     setIsEnrollLoading(true);
     try {
       await addReadingGoal({ category: GoalCategory.RAMADAN_CHALLENGE });
