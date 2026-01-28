@@ -24,16 +24,16 @@ const CHAPTER_ID_TO_SHOW = '67';
  * @returns {ChapterEvent}
  */
 const useChapterEvent = (chapterId: string): ChapterEvent => {
-  const { lang, t } = useTranslation('quran-reader');
+  const { lang } = useTranslation('quran-reader');
   const { isEnrolled, isLoading } = useRamadanChallengeStatus();
 
   const eventData = useMemo(() => {
-    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang !== Language.AR) {
+    if (!isLoading && chapterId === CHAPTER_ID_TO_SHOW && !isEnrolled && lang === Language.EN) {
       return {
         showEvent: true,
-        title: t('chapter-event.title'),
-        description: t('chapter-event.description'),
-        ctaText: t('chapter-event.cta'),
+        title: 'Take the Surah Mulk Challenge this Ramadan! 🚀',
+        description: 'Dont miss this great opportunity (free)! Connect deeply with 1 verse a day.',
+        ctaText: 'Learn More',
         ctaLink: ROUTES.RAMADAN_CHALLENGE,
       };
     }
@@ -45,7 +45,7 @@ const useChapterEvent = (chapterId: string): ChapterEvent => {
       ctaText: '',
       ctaLink: '',
     };
-  }, [chapterId, isEnrolled, isLoading, lang, t]);
+  }, [chapterId, isEnrolled, isLoading, lang]);
 
   return eventData;
 };
