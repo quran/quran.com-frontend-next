@@ -18,7 +18,7 @@ const SUBSCRIBE_TEXT = 'Join the Surah Al-Mulk Challenge';
 
 const UnauthEnrollButton = ({ section }: Props) => {
   const router = useRouter();
-  const isLoggedIn = useIsLoggedIn();
+  const { isLoggedIn } = useIsLoggedIn();
   const { isEnrolled, mutate, isLoading } = useRamadanChallengeStatus();
 
   const onButtonClicked = () => {
