@@ -12,12 +12,13 @@ import QRColoredIcon from '@/icons/qr-colored.svg';
 import QRLogoIcon from '@/icons/qr-logo.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { TestId } from '@/tests/test-ids';
+import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import { ROUTES } from '@/utils/navigation';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
 const CommunitySection = () => {
-  const { t } = useTranslation('home');
+  const { lang, t } = useTranslation('home');
 
   const onQRCardClicked = () => {
     logButtonClick('homepage_community_qr_card');
@@ -33,31 +34,33 @@ const CommunitySection = () => {
         <h1>{t('common:community.title')}</h1>
       </div>
       <div className={styles.cardsContainer} data-testid={TestId.COMMUNITY_SECTION}>
-        <Card
-          className={styles.card}
-          link={ROUTES.RAMADAN_2026}
-          isNewTab
-          linkClassName={styles.link}
-          onClick={onRamadanCardClicked}
-        >
-          <div className={styles.cardContent}>
-            <div className={styles.cardTitle}>
-              <div className={styles.cardHeader}>
-                <DiamondIcon className={styles.ramadanIcon} />
-                <p className={classNames(styles.cardDescription, styles.ramadanTitle)}>
-                  {t('ramadan.title')}
-                </p>
+        {lang !== Language.AR && (
+          <Card
+            className={styles.card}
+            link={ROUTES.RAMADAN_2026}
+            isNewTab
+            linkClassName={styles.link}
+            onClick={onRamadanCardClicked}
+          >
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>
+                <div className={styles.cardHeader}>
+                  <DiamondIcon className={styles.ramadanIcon} />
+                  <p className={classNames(styles.cardDescription, styles.ramadanTitle)}>
+                    {t('ramadan.title')}
+                  </p>
+                </div>
+                <IconContainer
+                  size={IconSize.Xsmall}
+                  icon={<ArrowIcon />}
+                  shouldForceSetColors={false}
+                  className={styles.arrowIcon}
+                />
               </div>
-              <IconContainer
-                size={IconSize.Xsmall}
-                icon={<ArrowIcon />}
-                shouldForceSetColors={false}
-                className={styles.arrowIcon}
-              />
+              <p className={styles.cardDescription}>{t('ramadan.description')}</p>
             </div>
-            <p className={styles.cardDescription}>{t('ramadan.description')}</p>
-          </div>
-        </Card>
+          </Card>
+        )}
         <Card
           className={styles.card}
           link={getQRNavigationUrl()}
