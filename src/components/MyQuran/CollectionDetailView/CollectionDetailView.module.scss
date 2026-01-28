@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-medium);
+}
+
+.backButton {
+  padding: 0;
+  block-size: auto;
+  min-inline-size: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-main);
+}
+
+.title {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
+}
+
+.loadMoreContainer {
+  display: flex;
+  margin-block-start: var(--spacing-medium);
+  justify-content: center;
+  inline-size: 100%;
+
+  button {
+    inline-size: 100%;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-mega);
+}

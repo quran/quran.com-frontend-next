@@ -1,5 +1,7 @@
 @use 'src/styles/breakpoints';
 
+$block-size-collection-items: 600px;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -22,9 +24,9 @@
 
 .collectionItemsContainer {
   margin-block-start: var(--spacing-medium);
-  > * + * {
-    margin-block-start: var(--spacing-xsmall);
-  }
+  block-size: $block-size-collection-items;
+  overflow: hidden;
+  position: relative;
 }
 
 .verseContainer {

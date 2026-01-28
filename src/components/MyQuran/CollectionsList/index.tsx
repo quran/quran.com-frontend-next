@@ -25,6 +25,7 @@ export interface CollectionsListProps {
   sortBy: CollectionSortOption;
   onSortChange: (sortBy: CollectionSortOption) => void;
   onNewCollectionClick?: () => void;
+  onCollectionClick?: (collection: CollectionItem) => void;
 }
 
 const INITIAL_DISPLAY_COUNT = 10;
@@ -40,6 +41,7 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   sortBy,
   onSortChange,
   onNewCollectionClick,
+  onCollectionClick,
 }) => {
   const { t, lang } = useTranslation('my-quran');
   const router = useRouter();
@@ -47,13 +49,15 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
 
   const handleCollectionClick = useCallback(
     (collection: CollectionItem) => {
-      if (collection.isDefault) {
+      if (onCollectionClick) {
+        onCollectionClick(collection);
+      } else if (collection.isDefault) {
         router.push(ROUTES.COLLECTIONS_ALL);
       } else {
         router.push(`/collections/${collection.id}`);
       }
     },
-    [router],
+    [onCollectionClick, router],
   );
 
   const handleLoadMore = useCallback(() => {

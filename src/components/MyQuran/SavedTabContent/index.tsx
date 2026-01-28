@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SavedTabContent.module.scss';
 
+import CollectionDetailView from '@/components/MyQuran/CollectionDetailView';
 import CollectionsList from '@/components/MyQuran/CollectionsList';
 import MyReadingBookmark from '@/components/MyQuran/MyReadingBookmark';
 import RecentlySaved from '@/components/MyQuran/RecentlySaved';
@@ -34,6 +35,7 @@ const SavedTabContent: React.FC = () => {
   const [isNewCollectionModalOpen, setIsNewCollectionModalOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
   const [isSubmittingCollection, setIsSubmittingCollection] = useState(false);
+  const [selectedCollection, setSelectedCollection] = useState<CollectionItem | null>(null);
 
   const onNewCollectionClick = useCallback(() => {
     setIsNewCollectionModalOpen(true);
@@ -49,6 +51,14 @@ const SavedTabContent: React.FC = () => {
       setNewCollectionName('');
     }
   }, [addCollection, newCollectionName]);
+
+  const onCollectionClick = useCallback((collection: CollectionItem) => {
+    setSelectedCollection(collection);
+  }, []);
+
+  const onBackToCollections = useCallback(() => {
+    setSelectedCollection(null);
+  }, []);
 
   // Transform collections to CollectionItem format
   const collectionItems: CollectionItem[] = useMemo(() => {
@@ -92,7 +102,7 @@ const SavedTabContent: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {isLoggedIn && (
+      {isLoggedIn && !selectedCollection && (
         <SearchAndFilters
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -102,20 +112,34 @@ const SavedTabContent: React.FC = () => {
         />
       )}
 
-      <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
-
-      {showRecentlySaved && (
-        <RecentlySaved items={filteredRecentlySaved} isLoading={isRecentlySavedLoading} />
+      {!selectedCollection && (
+        <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
       )}
 
-      <CollectionsList
-        collections={filteredCollections}
-        isLoading={isCollectionsLoading}
-        isGuest={!isLoggedIn}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-        onNewCollectionClick={onNewCollectionClick}
-      />
+      {selectedCollection ? (
+        <CollectionDetailView
+          collectionId={selectedCollection.id}
+          collectionName={selectedCollection.name}
+          onBack={onBackToCollections}
+          searchQuery={searchQuery}
+        />
+      ) : (
+        <>
+          {showRecentlySaved && (
+            <RecentlySaved items={filteredRecentlySaved} isLoading={isRecentlySavedLoading} />
+          )}
+
+          <CollectionsList
+            collections={filteredCollections}
+            isLoading={isCollectionsLoading}
+            isGuest={!isLoggedIn}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+            onNewCollectionClick={onNewCollectionClick}
+            onCollectionClick={onCollectionClick}
+          />
+        </>
+      )}
 
       <Modal isOpen={isNewCollectionModalOpen} onClose={() => setIsNewCollectionModalOpen(false)}>
         <NewCollectionForm

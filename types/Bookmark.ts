@@ -15,6 +15,10 @@ interface Bookmark {
    */
   isReading?: boolean;
   collectionsCount?: number;
+  /**
+   * Timestamp when the bookmark was created
+   */
+  createdAt?: string;
 }
 
 export default Bookmark;
