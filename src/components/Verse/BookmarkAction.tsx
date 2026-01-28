@@ -42,6 +42,7 @@ interface Props {
 const BookmarkAction: React.FC<Props> = ({
   verse,
   isTranslationView,
+  onActionTriggered,
   isInsideStudyMode = false,
 }): JSX.Element => {
   const dispatch = useDispatch();
@@ -79,7 +80,7 @@ const BookmarkAction: React.FC<Props> = ({
 
       dispatch(
         openBookmarkModal({
-          verseKey: `${verse.chapterId}:${verse.verseNumber}`,
+          verseKey: verse.verseKey,
           verse,
           isTranslationView,
           wasOpenedFromStudyMode: openedFromStudyMode,
@@ -94,6 +95,10 @@ const BookmarkAction: React.FC<Props> = ({
               : undefined,
         }),
       );
+
+      if (onActionTriggered) {
+        onActionTriggered();
+      }
     },
     [
       verse,
@@ -105,6 +110,7 @@ const BookmarkAction: React.FC<Props> = ({
       studyModeActiveTab,
       studyModeHighlightedWordLocation,
       dispatch,
+      onActionTriggered,
     ],
   );
 
