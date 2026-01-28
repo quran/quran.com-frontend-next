@@ -170,7 +170,7 @@
 
     &.fullWidthTabs {
       @media (min-width: 360px) {
-        overflow-x: visible;
+        overflow-x: auto;
         justify-content: space-between;
       }
     }
@@ -215,7 +215,6 @@
       @media (min-width: 360px) {
         flex: 1 1 auto;
         justify-content: center;
-        min-inline-size: 0;
       }
     }
   }
