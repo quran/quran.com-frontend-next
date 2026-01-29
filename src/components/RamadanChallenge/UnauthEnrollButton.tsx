@@ -22,7 +22,7 @@ const ENROLL_TEXT = 'Join the Surah Al-Mulk Challenge';
 const UnauthEnrollButton = ({ section }: Props) => {
   const router = useRouter();
   const { isLoggedIn } = useIsLoggedIn();
-  const { isLoading } = useRamadanChallengeStatus();
+  const { isLoading, isEnrolled, mutate } = useRamadanChallengeStatus();
 
   const onButtonClicked = () => {
     logButtonClick(`guest_ramadan_challenge_${section}`);
@@ -36,6 +36,9 @@ const UnauthEnrollButton = ({ section }: Props) => {
     return (
       <HeadlessServiceProvider>
         <EnrollButtonNotification
+          isEnrolled={isEnrolled}
+          isLoading={isLoading}
+          mutate={mutate}
           section={section}
           subscribedText={SUBSCRIBED_TEXT}
           enrollText={ENROLL_TEXT}

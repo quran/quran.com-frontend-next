@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
 import { TestId } from '@/tests/test-ids';
 import { addReadingGoal } from '@/utils/auth/api';
@@ -16,11 +15,19 @@ interface Props {
   section: string;
   subscribedText: string;
   enrollText: string;
+  isEnrolled: boolean;
+  isLoading: boolean;
+  mutate: () => Promise<unknown>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const EnrollButton = ({ section, subscribedText, enrollText }: Props) => {
-  const { isEnrolled, isLoading, mutate } = useRamadanChallengeStatus();
+const EnrollButton = ({
+  section,
+  subscribedText,
+  enrollText,
+  isEnrolled,
+  isLoading,
+  mutate,
+}: Props) => {
   const [isEnrollLoading, setIsEnrollLoading] = useState(false);
   const toast = useToast();
 
