@@ -1,26 +1,71 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
+
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type UsePendingVerseSelectionProps = {
   lastReadVerseKey?: string;
   onAfterNavigationItemRouted?: () => void;
 };
 
-// A custom hook to manage pending verse selection and navigation.
+// Only used when Redux does NOT match the pending verse.
+// If the delta is small, keep the pending highlight to avoid jumpy UI.
+const VERSE_PROXIMITY_THRESHOLD = 3;
+
+// Keep a temporary selection while navigation is settling.
 const usePendingVerseSelection = ({
   lastReadVerseKey,
   onAfterNavigationItemRouted,
 }: UsePendingVerseSelectionProps) => {
   const router = useRouter();
 
-  // State to track the pending selected verse key and navigation status.
+  // Local pending selection + navigation flag.
   const [pendingSelectedVerseKey, setPendingSelectedVerseKey] = useState<string | null>(null);
   const [isNavigationPending, setIsNavigationPending] = useState(false);
+  const hasReachedNearbyRef = useRef(false);
+  const parseVerseKey = (verseKey?: string) => {
+    if (!verseKey) return null;
+    const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const parsedVerseNumber = Number(verseNumber);
+    if (!chapterId || Number.isNaN(parsedVerseNumber)) return null;
+    return { chapterId, verseNumber: parsedVerseNumber };
+  };
 
   useEffect(() => {
-    if (!pendingSelectedVerseKey || isNavigationPending) return;
+    hasReachedNearbyRef.current = false;
+  }, [pendingSelectedVerseKey]);
+
+  useEffect(() => {
+    if (!pendingSelectedVerseKey || isNavigationPending || !lastReadVerseKey) return;
     if (lastReadVerseKey === pendingSelectedVerseKey) {
+      setPendingSelectedVerseKey(null);
+      return;
+    }
+
+    const pendingParsed = parseVerseKey(pendingSelectedVerseKey);
+    const lastReadParsed = parseVerseKey(lastReadVerseKey);
+    if (!pendingParsed || !lastReadParsed) {
+      setPendingSelectedVerseKey(null);
+      return;
+    }
+
+    if (pendingParsed.chapterId !== lastReadParsed.chapterId) {
+      if (hasReachedNearbyRef.current) {
+        setPendingSelectedVerseKey(null);
+      }
+      return;
+    }
+
+    // Mismatch within the same chapter: use a proximity threshold to avoid flicker.
+    const verseDelta = Math.abs(lastReadParsed.verseNumber - pendingParsed.verseNumber);
+    if (verseDelta <= VERSE_PROXIMITY_THRESHOLD) {
+      hasReachedNearbyRef.current = true;
+      return;
+    }
+
+    if (hasReachedNearbyRef.current) {
+      // Once we've been nearby, a larger delta means the user moved on.
       setPendingSelectedVerseKey(null);
     }
   }, [isNavigationPending, lastReadVerseKey, pendingSelectedVerseKey]);
