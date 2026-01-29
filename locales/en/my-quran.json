@@ -1,44 +1,44 @@
 {
-  "saved": "Saved",
-  "recent": "Recent",
-  "notes-and-reflections": "Notes & Reflections",
-  "recent-empty": "Start reading to see your recently read",
-  "sign-in-prompt": {
-    "title": "Sign in or Sign up for free to gain access to the more features!",
-    "features": {
-      "custom-collections": "Create custom collections",
-      "attach-notes": "Attach notes to verses"
-    }
+  "collections": {
+    "favorites": "Favorites",
+    "guest-promo": {
+      "sign-in": "Sign in",
+      "subtitle": "Compare and contrast verses",
+      "title": "Create custom collections"
+    },
+    "items": "{{count}} item",
+    "items_plural": "{{count}} items",
+    "load-more": "Load more",
+    "new-collection": "New Collection",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Recently updated",
+      "z-a": "Z - A"
+    },
+    "title": "Collections"
   },
+  "notes-and-reflections": "Notes & Reflections",
   "page": "Page",
   "reading-bookmark": {
-    "title": "My Reading Bookmark",
-    "empty": "Start reading and save a Reading Bookmark!"
+    "empty": "Start reading and save a Reading Bookmark!",
+    "title": "My Reading Bookmark"
   },
+  "recent": "Recent",
+  "recent-empty": "Start reading to see your recently read",
   "recently-saved": {
     "title": "Recently Saved"
   },
-  "collections": {
-    "title": "Collections",
-    "favorites": "Favorites",
-    "load-more": "Load more",
-    "new-collection": "New Collection",
-    "items": "{{count}} item",
-    "items_plural": "{{count}} items",
-    "sort": {
-      "recently-updated": "Recently updated",
-      "a-z": "A - Z",
-      "z-a": "Z - A"
-    },
-    "guest-promo": {
-      "title": "Create custom collections",
-      "subtitle": "Compare and contrast verses",
-      "sign-in": "Sign in"
-    }
-  },
+  "saved": "Saved",
   "search": {
-    "placeholder": "Search Saved...",
     "filter": "Filter",
+    "placeholder": "Search Saved...",
     "sort": "Sort"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Attach notes to verses",
+      "custom-collections": "Create custom collections"
+    },
+    "title": "Sign in or Sign up for free to gain access to the more features!"
   }
 }

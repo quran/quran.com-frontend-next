@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Favorit",
+    "guest-promo": {
+      "sign-in": "Masuk",
+      "subtitle": "Bandingkan dan kontraskan ayat-ayat",
+      "title": "Buat koleksi khusus"
+    },
+    "items": "{{count}} barang",
+    "items_plural": "{{count}} barang-barang",
+    "load-more": "Muat lebih banyak",
+    "new-collection": "Koleksi Baru",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Baru saja diperbarui",
+      "z-a": "Z - A"
+    },
+    "title": "Koleksi"
+  },
+  "notes-and-reflections": "Catatan & Refleksi",
+  "page": "Halaman",
+  "reading-bookmark": {
+    "empty": "Mulailah membaca dan simpan Bookmark Bacaan!",
+    "title": "Penanda Bacaan Saya"
+  },
+  "recent": "Terkini",
+  "recent-empty": "Mulailah membaca untuk melihat bacaan Anda baru saja dibaca",
+  "recently-saved": {
+    "title": "Baru Disimpan"
+  },
+  "saved": "Tersimpan",
+  "search": {
+    "filter": "Menyaring",
+    "placeholder": "Pencarian Tersimpan...",
+    "sort": "Menyortir"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Lampirkan catatan pada ayat-ayat tersebut",
+      "custom-collections": "Buat koleksi khusus"
+    },
+    "title": "Masuk atau Daftar gratis untuk mendapatkan akses ke lebih banyak fitur!"
+  }
+}
