@@ -10,7 +10,6 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useEmailNotificationSettings from '@/hooks/auth/useEmailNotificationSettings';
-import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
 import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -19,12 +18,21 @@ interface Props {
   section: string;
   subscribedText: string;
   enrollText: string;
+  isEnrolled: boolean;
+  isLoading: boolean;
+  mutate: () => Promise<unknown>;
 }
 
 const DAILY_RAMADAN_CHALLENGE_TAG = 'DAILY-RAMADAN-CHALLENGE';
 
-const EnrollButtonNotification = ({ section, subscribedText, enrollText }: Props) => {
-  const { isLoading, isEnrolled } = useRamadanChallengeStatus();
+const EnrollButtonNotification = ({
+  section,
+  subscribedText,
+  enrollText,
+  isEnrolled,
+  isLoading,
+  mutate,
+}: Props) => {
   const { headlessService } = useHeadlessService();
   const {
     preferences,
@@ -82,7 +90,14 @@ const EnrollButtonNotification = ({ section, subscribedText, enrollText }: Props
 
   if (isEnabled || !isEnrolled) {
     return (
-      <EnrollButton section={section} subscribedText={subscribedText} enrollText={enrollText} />
+      <EnrollButton
+        isEnrolled={isEnrolled}
+        isLoading={isLoading}
+        mutate={mutate}
+        section={section}
+        subscribedText={subscribedText}
+        enrollText={enrollText}
+      />
     );
   }
 
