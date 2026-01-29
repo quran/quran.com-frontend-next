@@ -16,6 +16,10 @@ $ribbon-text-color: #fff;
   margin-block-start: calc(3 * var(--spacing-mega));
 }
 
+.flow {
+  padding-block-end: var(--spacing-max);
+}
+
 .ribbon {
   position: absolute;
   inset-block-start: 0;
