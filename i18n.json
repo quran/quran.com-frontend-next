@@ -46,7 +46,7 @@
     "/about-us": ["about"],
     "/developers": ["developers"],
     "/privacy": ["privacy"],
-    "/rub/[rubId]": ["quran-reader", "reading-goal", "notes"],
+    "/rub/[rubId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/support": ["support"],
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
