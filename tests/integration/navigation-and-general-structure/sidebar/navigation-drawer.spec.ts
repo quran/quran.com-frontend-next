@@ -1,6 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import { expect, test } from '@playwright/test';
 
+import { ensureEnglishLanguage } from '@/tests/helpers/language';
 import { openNavigationDrawer } from '@/tests/helpers/navigation';
 import Homepage from '@/tests/POM/home-page';
 import { TestId } from '@/tests/test-ids';
@@ -10,6 +11,7 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
   await homePage.goTo('/');
+  await ensureEnglishLanguage(page);
 });
 
 test(
@@ -142,10 +144,13 @@ test(
 );
 
 const drawerLinks = [
+  // Event link
+  { text: 'Ramadan 2026', href: '/ramadan2026', target: '' },
+
   // Main Navigation Links
   { text: 'Read', href: '', target: '' },
   { text: 'Learn', href: '/learning-plans', target: '' },
-  { text: 'My Quran', href: '/profile', target: '' },
+  { text: 'My Quran', href: '/my-quran', target: '' },
   { text: 'Quran Radio', href: '/radio', target: '' },
   { text: 'Reciters', href: '/reciters', target: '' },
   { text: 'About Us', href: '/about-us', target: '' },

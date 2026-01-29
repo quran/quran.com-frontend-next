@@ -4,13 +4,12 @@
   display: flex;
   align-self: center;
   justify-content: flex-start;
+  block-size: var(--spacing-medium2-px);
+
   & > svg {
     margin-block-start: 1px;
-    block-size: var(--spacing-medium);
     inline-size: auto;
-    @include breakpoints.tablet {
-      block-size: var(--spacing-large);
-    }
+
     & > path {
       fill: var(--color-text-default);
     }

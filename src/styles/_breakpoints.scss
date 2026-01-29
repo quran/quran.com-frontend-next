@@ -4,6 +4,7 @@ $breakpoints-mobileM: 375px;
 $breakpoints-mobileL: 425px;
 $breakpoints-tablet: 768px;
 $breakpoints-desktop: 1024px;
+$breakpoints-desktopL: 1280px;
 
 $breakpoint-buffer-max-width: 1px;
 
@@ -63,6 +64,18 @@ $breakpoint-buffer-max-width: 1px;
 
 @mixin smallerThanDesktop {
   @media only screen and (max-width: ($breakpoints-desktop - $breakpoint-buffer-max-width)) {
+    @content;
+  }
+}
+
+@mixin desktopL {
+  @media only screen and (min-width: $breakpoints-desktopL) {
+    @content;
+  }
+}
+
+@mixin smallerThanDesktopL {
+  @media only screen and (max-width: ($breakpoints-desktopL - $breakpoint-buffer-max-width)) {
     @content;
   }
 }

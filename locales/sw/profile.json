@@ -25,6 +25,10 @@
   "max-file-size": "Upeo wa {{size}}",
   "my-profile": "Wasifu Wangu",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Barua pepe itatumwa kukukumbusha lengo lako la Quran ikiwa hujapiga hatua kwa muda.",
+      "title": "Kikumbusho cha Lengo"
+    },
     "daily-ramadan-challenge": {
       "description": "Surah Al-Mulk 2026 Ramadan Challenge",
       "title": "Changamoto ya Ramadhani ya Kila Siku"

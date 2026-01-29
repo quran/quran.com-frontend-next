@@ -41,8 +41,8 @@ const NavbarBody: React.FC<Props> = ({ isBannerVisible }) => {
   const { openSearchDrawer, openNavigationDrawer } = useNavbarDrawerActions();
 
   const bannerProps = {
-    text: t('stay-on-track'),
-    ctaButtonText: t('create-my-goal'),
+    text: t('join-ramadan-challenge'),
+    ctaButtonText: t('learn-more'),
   };
 
   return (

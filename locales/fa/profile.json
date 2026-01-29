@@ -25,6 +25,10 @@
   "max-file-size": "مکس {{size}}",
   "my-profile": "پروفایل من",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "اگر مدتی است که پیشرفتی نداشته‌اید، ایمیلی برای یادآوری هدف قرآنی‌تان برای شما ارسال خواهد شد.",
+      "title": "یادآوری هدف"
+    },
     "daily-ramadan-challenge": {
       "description": "سوره الملک 2026 چالش رمضان",
       "title": "چالش روزانه ماه رمضان"

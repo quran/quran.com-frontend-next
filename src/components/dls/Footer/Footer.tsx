@@ -14,7 +14,7 @@ const Footer = () => {
   }
 
   return (
-    <footer>
+    <footer className={styles.footer}>
       <div className={styles.flowItem}>
         <div className={styles.container}>
           <TitleAndDescription />

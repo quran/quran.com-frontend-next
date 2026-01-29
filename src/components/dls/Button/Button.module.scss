@@ -123,6 +123,9 @@
 .pill {
   border-radius: var(--border-radius-pill);
 }
+.rounded {
+  border-radius: calc(var(--border-radius-default) * 3);
+}
 
 // variant
 .shadow {
@@ -279,7 +282,7 @@
   }
 }
 
-.rounded {
+.roundedVariant {
   color: var(--color-text-white);
   background-color: var(--color-streaks-dark);
   border: none;
