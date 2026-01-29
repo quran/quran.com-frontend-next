@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import useSaveBookmarkModal from './useSaveBookmarkModal';
 
@@ -21,11 +21,15 @@ vi.mock('next/router', () => {
     useRouter: () => ({ push, prefetch }),
   };
 });
+// Mock dispatch function
+const mockDispatch = vi.fn();
+
 vi.mock('react-redux', () => ({
   useSelector: (sel: any) => sel({ quranReaderStyles: { quranFont: 'hafs', mushafLines: 15 } }),
-  useDispatch: () => vi.fn(),
+  useDispatch: () => mockDispatch,
   shallowEqual: () => null,
 }));
+
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
   selectQuranReaderStyles: (s: any) => s.quranReaderStyles,
 }));
@@ -59,18 +63,22 @@ vi.mock('@/dls/Toast/Toast', () => ({
 }));
 vi.mock('@/utils/auth/login', () => ({ isLoggedIn: () => false }));
 
-const HookProbe: React.FC<{ type: ReadingBookmarkType; verse?: any; page?: number }> = ({
-  type,
-  verse,
-  page,
-}) => {
-  const { handleGuestSignIn } = useSaveBookmarkModal({
+const HookProbe: React.FC<{
+  type: ReadingBookmarkType;
+  verse?: any;
+  page?: number;
+  onTestHook?: (hooks: ReturnType<typeof useSaveBookmarkModal>) => void;
+}> = ({ type, verse, page, onTestHook }) => {
+  const hooks = useSaveBookmarkModal({
     type,
     verse,
     pageNumber: page,
     onClose: vi.fn(),
   });
-  return <button type="button" aria-label="run" onClick={handleGuestSignIn} data-testid="run" />;
+  if (onTestHook) onTestHook(hooks);
+  return (
+    <button type="button" aria-label="run" onClick={hooks.handleGuestSignIn} data-testid="run" />
+  );
 };
 
 describe('useSaveBookmarkModal guest sign-in', () => {
@@ -100,5 +108,62 @@ describe('useSaveBookmarkModal guest sign-in', () => {
     expect(arg).toMatch(/\/login\?r=/);
     expect(decodeURIComponent(arg.split('=')[1])).toMatch(/\/page\/5/);
     unmount();
+  });
+});
+
+describe('useSaveBookmarkModal take note', () => {
+  beforeEach(() => {
+    mockDispatch.mockClear();
+  });
+
+  it('dispatches openNotesModal action with correct payload for verse', () => {
+    let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
+    const verseKey = '2:255';
+
+    render(
+      <HookProbe
+        type={ReadingBookmarkType.AYAH}
+        verse={{ chapterId: 2, verseNumber: 255 }}
+        onTestHook={(hooks) => {
+          capturedHooks = hooks;
+        }}
+      />,
+    );
+
+    // Call handleTakeNote
+    capturedHooks?.handleTakeNote();
+
+    // Verify dispatch was called with openNotesModal action
+    expect(mockDispatch).toHaveBeenCalledTimes(1);
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+
+    expect(dispatchedAction.type).toBe('verseActionModal/openNotesModal');
+    expect(dispatchedAction.payload).toEqual({
+      modalType: 'addNote',
+      verseKey,
+      previousModalType: 'saveBookmark',
+    });
+  });
+
+  it('includes verseKey in payload when taking note', () => {
+    let capturedHooks: ReturnType<typeof useSaveBookmarkModal> | null = null;
+    const verse = { chapterId: 3, verseNumber: 15 };
+
+    render(
+      <HookProbe
+        type={ReadingBookmarkType.AYAH}
+        verse={verse}
+        onTestHook={(hooks) => {
+          capturedHooks = hooks;
+        }}
+      />,
+    );
+
+    capturedHooks?.handleTakeNote();
+
+    const dispatchedAction = mockDispatch.mock.calls[0][0];
+    expect(dispatchedAction.payload.verseKey).toBe('3:15');
+    expect(dispatchedAction.payload.modalType).toBe('addNote');
+    expect(dispatchedAction.payload.previousModalType).toBe('saveBookmark');
   });
 });

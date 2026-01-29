@@ -102,9 +102,9 @@ const VerseActionModalContainer: React.FC = () => {
   }, [dispatch, studyModeRestoreState, verseKey]);
 
   const handleBackToBookmark = useCallback(() => {
-    // Switch back to bookmark modal
+    if (!verse) return;
     dispatch(setModalType(VerseActionModalType.SAVE_BOOKMARK));
-  }, [dispatch]);
+  }, [dispatch, verse]);
 
   const handleClose = useCallback(() => {
     if (wasOpenedFromStudyMode) {
