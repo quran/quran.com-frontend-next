@@ -63,7 +63,6 @@
   }
 
   &:hover {
-    background: var(--color-background-alternative);
     border-color: var(--color-borders-hairline-new);
   }
 }
@@ -72,10 +71,6 @@
   font-size: var(--font-size-small);
   color: var(--color-text-default);
   transition: color var(--transition-fast) ease-out;
-
-  .item:hover & {
-    color: var(--color-text-main);
-  }
 }
 
 .itemArrow {

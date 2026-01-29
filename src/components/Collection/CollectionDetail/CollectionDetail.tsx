@@ -1,11 +1,14 @@
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
+import { getMyQuranNavigationUrl } from '../../../utils/navigation';
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 import CollectionVerseCell from './CollectionVerseCell';
 
+import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
@@ -21,6 +24,7 @@ type CollectionDetailProps = {
   onSortByChange: (sortBy: string) => void;
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
+  onBack?: () => void;
 };
 
 const CollectionDetail = ({
@@ -32,8 +36,10 @@ const CollectionDetail = ({
   onItemDeleted,
   isOwner,
   shouldShowTitle = true,
+  onBack,
 }: CollectionDetailProps) => {
   const { t } = useTranslation();
+  const router = useRouter();
 
   const sortOptions = [
     {
@@ -52,6 +58,11 @@ const CollectionDetail = ({
     logButtonClick('back_to_collections_button', {
       collectionId: id,
     });
+    if (onBack) {
+      onBack();
+    } else {
+      router.push(getMyQuranNavigationUrl(MyQuranTab.SAVED));
+    }
   };
 
   return (
@@ -74,7 +85,7 @@ const CollectionDetail = ({
             <div className={styles.emptyCollectionContainer}>
               <span>{t('collection:empty')}</span>
               <div className={styles.backToCollectionButtonContainer}>
-                <Button onClick={onBackToCollectionsClicked} href="/profile">
+                <Button onClick={onBackToCollectionsClicked}>
                   {t('collection:back-to-collection-list')}
                 </Button>
               </div>

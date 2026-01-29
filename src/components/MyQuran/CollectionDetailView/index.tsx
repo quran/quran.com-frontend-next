@@ -157,6 +157,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         onItemDeleted={onItemDeleted}
         isOwner={isOwner}
         shouldShowTitle={false}
+        onBack={onBack}
       />
 
       {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
