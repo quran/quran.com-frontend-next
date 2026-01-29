@@ -19,8 +19,11 @@ interface ReaderTopActionsProps {
 
 /**
  * A persistent top actions bar that shows Arabic/Translation mode switching buttons.
- * This component only renders when the first verse is NOT verse 1 of a chapter,
- * since ChapterHeader already shows these actions when viewing from verse 1.
+ * This component renders when:
+ * - Single verse view (QuranReaderDataType.Verse): Always shown
+ * - Page/Juz/Hizb/Rub/Ranges: Only if not starting at verse 1
+ * - Chapter view: Never shown (ChapterHeader handles this)
+ * - Tafsir view: Never shown
  *
  * @param {ReaderTopActionsProps} props - The component props
  * @returns {JSX.Element|null} The actions bar or null if not shown

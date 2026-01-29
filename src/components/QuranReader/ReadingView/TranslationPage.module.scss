@@ -24,9 +24,13 @@ $translation-content-max-width: 600px;
   text-align: start;
   font-family: 'Figtree', var(--font-primary);
   font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-large2);
   line-height: 180%;
   color: var(--color-text-default);
+
+  sup {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .pageFooter {
