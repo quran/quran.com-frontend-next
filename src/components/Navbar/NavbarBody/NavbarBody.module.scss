@@ -3,10 +3,12 @@
 
 .itemsContainer {
   @include utility.dimmedOverlay(absolute);
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   block-size: var(--navbar-height);
+  max-block-size: var(--navbar-height);
   background-color: var(--color-background-elevated);
 
   svg,
