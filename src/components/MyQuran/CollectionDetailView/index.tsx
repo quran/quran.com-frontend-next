@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';

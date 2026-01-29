@@ -20,7 +20,7 @@
   },
   "collections": {
     "title": "Collections",
-    "favorites": "Favourites",
+    "favorites": "Favorites",
     "load-more": "Load more",
     "new-collection": "New Collection",
     "items": "{{count}} item",

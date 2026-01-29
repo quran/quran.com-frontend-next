@@ -20,7 +20,7 @@ import BookmarkType from '@/types/BookmarkType';
 
 const SavedTabContent: React.FC = () => {
   const { isLoggedIn } = useIsLoggedIn();
-  const commonT = useTranslation('common').t;
+  const { t } = useTranslation('my-quran');
   const { bookmark, isLoading: isBookmarkLoading } = useReadingBookmarkDisplay();
   const { items: recentlySavedItems, isLoading: isRecentlySavedLoading } = useRecentlySaved();
   const {
@@ -65,12 +65,12 @@ const SavedTabContent: React.FC = () => {
   const collectionItems: CollectionItem[] = useMemo(() => {
     return collections.map((collection) => ({
       id: collection.id,
-      name: collection.isDefault ? commonT('favorites') : collection.name,
+      name: collection.isDefault ? t('collections.favorites') : collection.name,
       itemCount: collection.bookmarksCount || collection.count,
       updatedAt: collection.updatedAt,
       isDefault: collection.isDefault,
     }));
-  }, [collections, commonT]);
+  }, [collections, t]);
 
   // Filter collections based on search query
   const filteredCollections = useMemo(() => {
