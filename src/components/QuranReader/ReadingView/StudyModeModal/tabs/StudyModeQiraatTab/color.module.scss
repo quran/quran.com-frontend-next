@@ -1,5 +1,26 @@
-.transparent,
-[data-theme='light'] .transparent {
+/**
+ * Qiraat color classes for reading cards and tags.
+ *
+ * MACOS/IOS BUG FIX: CSS custom properties don't update properly when data-theme
+ * attribute changes on macOS/iOS (both Safari and Chrome). The issue is that CSS
+ * variables are cached and don't trigger style recalculation.
+ *
+ * Solution: Use :where() pseudo-class to create zero-specificity fallbacks that
+ * apply default values, while theme-specific selectors properly override them.
+ *
+ * This ensures:
+ * 1. Fallback values exist when data-theme isn't set yet
+ * 2. Theme-specific selectors always override due to higher specificity
+ * 3. No base class specificity conflicts on macOS/iOS
+ *
+ * References:
+ * - https://bugs.webkit.org/show_bug.cgi?id=225354
+ * - https://stackoverflow.com/questions/39603136/css-variables-not-updating-on-mobile-safari
+ * - https://blog.aboutme.be/2023/04/21/css-variables-can-be-slow-in-safari/
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/:where
+ */
+
+.transparent {
   --background: var(--color-background-elevated-new);
   --color: var(--color-text-default-new);
   --border: var(--color-separators-ayah-level);
@@ -8,7 +29,13 @@
   border: var(--spacing-hairline-px) solid var(--border) !important;
 }
 
-.green,
+/* Fallback with zero specificity using :where() */
+:where([data-theme]) .green {
+  --background: #dfeadd;
+  --color: #32452f;
+  --border: #c7ddc3;
+}
+
 [data-theme='light'] .green {
   --background: #dfeadd;
   --color: #32452f;
@@ -27,7 +54,13 @@
   --border: #c7ddc3;
 }
 
-.blue,
+/* Fallback with zero specificity using :where() */
+:where([data-theme]) .blue {
+  --background: #e2f0fa;
+  --color: #275575;
+  --border: #c6dcec;
+}
+
 [data-theme='light'] .blue {
   --background: #e2f0fa;
   --color: #275575;
@@ -46,7 +79,13 @@
   --border: #c6dcec;
 }
 
-.pink,
+/* Fallback with zero specificity using :where() */
+:where([data-theme]) .pink {
+  --background: #eddeed;
+  --color: #4f3250;
+  --border: #e4c7e4;
+}
+
 [data-theme='light'] .pink {
   --background: #eddeed;
   --color: #4f3250;
@@ -65,7 +104,13 @@
   --border: #e4c7e4;
 }
 
-.orange,
+/* Fallback with zero specificity using :where() */
+:where([data-theme]) .orange {
+  --background: #f5e2cd;
+  --color: #76593a;
+  --border: #e4c5a2;
+}
+
 [data-theme='light'] .orange {
   --background: #f5e2cd;
   --color: #76593a;

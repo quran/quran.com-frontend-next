@@ -30,36 +30,40 @@ const JunctureTabs: React.FC<JunctureTabsProps> = ({
     return junctures.find((juncture) => juncture.id === selectedJunctureId);
   }, [junctures, selectedJunctureId]);
 
+  const hasMultipleJunctures = junctures.length > 1;
+
   return (
     <div className={styles.container}>
-      <div className={styles.tabs} role="tablist" aria-label="Juncture selection">
-        {junctures.map((juncture, index) => {
-          const isSelected = selectedJunctureId === juncture.id;
+      {hasMultipleJunctures && (
+        <div className={styles.tabs} role="tablist" aria-label="Juncture selection">
+          {junctures.map((juncture, index) => {
+            const isSelected = selectedJunctureId === juncture.id;
 
-          return (
-            <button
-              key={juncture.id}
-              type="button"
-              role="tab"
-              aria-selected={isSelected}
-              aria-controls={`juncture-panel-${juncture.id}`}
-              tabIndex={isSelected ? 0 : -1}
-              className={classNames(styles.tab)}
-              onClick={() => onJunctureSelect(juncture.id)}
-            >
-              <span className={styles.tabText}>
-                {t(`quran-reader:qiraat.juncture`)} {toLocalizedNumber(index + 1, lang)}
-              </span>
-            </button>
-          );
-        })}
-      </div>
+            return (
+              <button
+                key={juncture.id}
+                type="button"
+                role="tab"
+                aria-selected={isSelected}
+                aria-controls={`juncture-panel-${juncture.id}`}
+                tabIndex={isSelected ? 0 : -1}
+                className={classNames(styles.tab)}
+                onClick={() => onJunctureSelect(juncture.id)}
+              >
+                <span className={styles.tabText}>
+                  {t(`quran-reader:qiraat.juncture`)} {toLocalizedNumber(index + 1, lang)}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       <div
         className={styles.content}
         id={`juncture-panel-${selectedJunctureId}`}
-        role="tabpanel"
-        aria-labelledby={`juncture-tab-${selectedJunctureId}`}
+        role={hasMultipleJunctures ? 'tabpanel' : undefined}
+        aria-labelledby={hasMultipleJunctures ? `juncture-tab-${selectedJunctureId}` : undefined}
       >
         <div className={styles.label}>{t(`quran-reader:qiraat.juncture`)}:</div>
         <div className={styles.value} dir="auto">
