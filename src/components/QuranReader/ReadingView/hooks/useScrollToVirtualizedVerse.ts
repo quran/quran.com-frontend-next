@@ -130,8 +130,8 @@ const useScrollToVirtualizedReadingView = (
       // if startingVerse is present in the url
       if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
         const startingVerseNumber = Number(startingVerse);
-        // if the startingVerse is a valid integer and is above 1
-        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
+        // if the startingVerse is a valid integer and is above 1 (skip verse 1 since it's already at the top)
+        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 1) {
           scrollToVerse(startingVerseNumber, true);
         }
       }
