@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type UsePendingVerseSelectionProps = {
@@ -12,6 +13,14 @@ type UsePendingVerseSelectionProps = {
 // Only used when Redux does NOT match the pending verse.
 // If the delta is small, keep the pending highlight to avoid jumpy UI.
 const VERSE_PROXIMITY_THRESHOLD = 3;
+
+const parseVerseKey = (verseKey?: string) => {
+  if (!verseKey) return null;
+  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const parsedVerseNumber = Number(verseNumber);
+  if (!chapterId || Number.isNaN(parsedVerseNumber)) return null;
+  return { chapterId, verseNumber: parsedVerseNumber };
+};
 
 // Keep a temporary selection while navigation is settling.
 const usePendingVerseSelection = ({
@@ -24,13 +33,6 @@ const usePendingVerseSelection = ({
   const [pendingSelectedVerseKey, setPendingSelectedVerseKey] = useState<string | null>(null);
   const [isNavigationPending, setIsNavigationPending] = useState(false);
   const hasReachedNearbyRef = useRef(false);
-  const parseVerseKey = (verseKey?: string) => {
-    if (!verseKey) return null;
-    const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-    const parsedVerseNumber = Number(verseNumber);
-    if (!chapterId || Number.isNaN(parsedVerseNumber)) return null;
-    return { chapterId, verseNumber: parsedVerseNumber };
-  };
 
   useEffect(() => {
     hasReachedNearbyRef.current = false;
@@ -51,9 +53,7 @@ const usePendingVerseSelection = ({
     }
 
     if (pendingParsed.chapterId !== lastReadParsed.chapterId) {
-      if (hasReachedNearbyRef.current) {
-        setPendingSelectedVerseKey(null);
-      }
+      setPendingSelectedVerseKey(null);
       return;
     }
 
@@ -81,7 +81,9 @@ const usePendingVerseSelection = ({
         if (onAfterNavigationItemRouted) {
           onAfterNavigationItemRouted();
         }
-      } catch {
+      } catch (error) {
+        logErrorToSentry('Failed to navigate to verse via router.push', { error });
+
         // As a fallback, we can use window.location
         window.location.href = href;
       } finally {

@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useContext } from 'react';
+import React, { useState, useMemo, useEffect, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -93,7 +93,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
   }, [searchQuery, filteredVerseKeys]);
 
   // Handle when user press `Enter` in input box
-  const handleVerseInputSubmit = (e) => {
+  const handleVerseInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
     if (firstFilteredVerseKey) {
