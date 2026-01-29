@@ -1,5 +1,6 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/constants';
+@use 'src/styles/utility';
 
 $chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
@@ -22,6 +23,8 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .containerWrapper {
+  @include utility.edgeHorizontalPadding;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: unset;
   grid-template-rows: auto auto;
