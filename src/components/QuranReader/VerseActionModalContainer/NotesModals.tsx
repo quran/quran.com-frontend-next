@@ -41,17 +41,20 @@ const NotesModals: React.FC<NotesModalsProps> = ({
     return undefined;
   };
 
-  const backHandler = getBackHandler();
+  const getOnMyNotesHandler = () => {
+    if (previousModalType === ModalType.SAVE_BOOKMARK) return onBackToBookmark;
+    return onOpenMyNotes;
+  };
 
   return (
     <>
       <AddNoteModal
         isModalOpen={modalType === ModalType.ADD_NOTE}
         onModalClose={onClose}
-        onMyNotes={onOpenMyNotes}
+        onMyNotes={getOnMyNotesHandler()}
         notesCount={notesCount}
         verseKey={verseKey}
-        onBack={backHandler}
+        onBack={getBackHandler()}
       />
       <MyNotesModal
         isOpen={modalType === ModalType.MY_NOTES}
