@@ -112,18 +112,10 @@
 
 .arabicVerseContainer {
   direction: rtl;
-  margin-block-end: var(--spacing-medium-px);
+  margin-block: var(--spacing-medium2-px);
 
   @include breakpoints.tablet {
-    margin-block-start: var(--spacing-xxlarge-px);
-  }
-}
-
-.verseTranslationsContainer {
-  margin-block-end: var(--spacing-large-px);
-
-  @include breakpoints.tablet {
-    margin-block-end: var(--spacing-xlarge-px);
+    margin-block: var(--spacing-medium3-px);
   }
 }
 
