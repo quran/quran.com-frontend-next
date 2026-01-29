@@ -2,6 +2,10 @@
 @use 'src/styles/utility';
 @use 'src/styles/constants';
 
+.footer {
+  background-color: var(--color-background-elevated-new);
+}
+
 .flowItem {
   @include utility.pageContainer();
   border-block-start: 1px solid var(--color-borders-hairline);

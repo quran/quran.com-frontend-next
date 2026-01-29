@@ -75,6 +75,20 @@
 
 .ctaDonateButton {
   inline-size: 100%;
+  color: var(--color-text-white);
+  background-color: var(--color-blue-buttons-and-icons);
+
+  &:hover {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+    filter: brightness(var(--opacity-85));
+  }
+
+  svg {
+    path {
+      fill: var(--color-text-white) !important;
+    }
+  }
 }
 
 .languageTrigger {
