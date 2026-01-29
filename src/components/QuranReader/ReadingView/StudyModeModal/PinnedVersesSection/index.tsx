@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,19 +10,18 @@ import usePinnedVerseHandlers from './usePinnedVerseHandlers';
 import SaveToCollectionModal, {
   CollectionOption,
 } from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
-import PinnedVersesMenu from '@/components/QuranReader/PinnedVersesBar/PinnedVersesMenu';
+import LoadFromCollectionModal from '@/components/QuranReader/PinnedVerses/LoadFromCollectionModal';
+import PinnedVersesContent from '@/components/QuranReader/PinnedVersesBar/PinnedVersesContent';
 import DataContext from '@/contexts/DataContext';
 import { useToast } from '@/dls/Toast/Toast';
 import useCollections from '@/hooks/useCollections';
 import { selectPinnedVerseKeys, selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
-import {
-  selectStudyModeShowPinnedSection,
-  selectStudyModeVerseKey,
-} from '@/redux/slices/QuranReader/studyMode';
+import { selectStudyModeVerseKey } from '@/redux/slices/QuranReader/studyMode';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
 import { isLoggedIn } from '@/utils/auth/login';
-import { toLocalizedVerseKey } from '@/utils/locale';
 import BookmarkType from 'types/BookmarkType';
 import ChaptersData from 'types/ChaptersData';
 
@@ -37,13 +36,16 @@ const PinnedVersesSection: React.FC = () => {
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, areArraysEqual) as string[];
   const currentStudyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
-  const showPinnedSection = useSelector(selectStudyModeShowPinnedSection);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
   const { collections, addCollection } = useCollections({
     type: BookmarkType.Ayah,
   });
 
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
 
   const {
     handleVerseTagClick,
@@ -63,17 +65,11 @@ const PinnedVersesSection: React.FC = () => {
     lang,
     chaptersData,
     selectedTranslations,
+    mushafId,
     addCollection,
     setIsSaveModalOpen,
+    setIsLoadModalOpen,
   });
-
-  const getVerseDisplayName = useCallback(
-    (verseKey: string): string => {
-      const localizedKey = toLocalizedVerseKey(verseKey, lang);
-      return localizedKey;
-    },
-    [lang],
-  );
 
   const modalCollections: CollectionOption[] = collections.map((collection) => ({
     id: collection.id,
@@ -81,64 +77,43 @@ const PinnedVersesSection: React.FC = () => {
     checked: false,
   }));
 
-  if (!showPinnedSection || pinnedVerses.length === 0) {
+  // Always show when there are pinned verses
+  if (pinnedVerses.length === 0) {
     return null;
   }
 
   return (
     <>
       <div className={styles.pinnedSection}>
-        <div className={styles.pinnedHeader}>
-          <p className={styles.pinnedLabel}>{t('pinned-verses')}:</p>
-          <div className={styles.headerActions}>
-            <PinnedVersesMenu
-              onClear={handleClear}
-              onSaveToCollection={handleSaveToCollection}
-              onLoadFromCollection={handleLoadFromCollection}
-              onCopy={handleCopy}
-            />
-          </div>
-        </div>
-        <div className={styles.tagsContainer}>
-          {pinnedVerses.map((verse) => (
-            <button
-              key={verse.verseKey}
-              type="button"
-              className={`${styles.tag} ${
-                currentStudyModeVerseKey === verse.verseKey ? styles.tagSelected : ''
-              }`}
-              onClick={() => handleVerseTagClick(verse.verseKey)}
-              aria-label={`View verse ${getVerseDisplayName(verse.verseKey)}`}
-            >
-              <span className={styles.verseDisplayName}>{getVerseDisplayName(verse.verseKey)}</span>
-              <span
-                className={styles.removeButton}
-                onClick={(e) => handleRemoveVerse(verse.verseKey, e)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleRemoveVerse(verse.verseKey, e as unknown as React.MouseEvent);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Remove verse ${verse.verseKey} from pinned`}
-              >
-                ×
-              </span>
-            </button>
-          ))}
-        </div>
+        <PinnedVersesContent
+          pinnedVerses={pinnedVerses}
+          selectedVerseKey={currentStudyModeVerseKey}
+          showCompareButton={false}
+          noPadding
+          onVerseTagClick={handleVerseTagClick}
+          onRemoveVerse={handleRemoveVerse}
+          onClear={handleClear}
+          onSaveToCollection={handleSaveToCollection}
+          onLoadFromCollection={handleLoadFromCollection}
+          onCopy={handleCopy}
+        />
       </div>
 
       {isLoggedIn() && (
-        <SaveToCollectionModal
-          isOpen={isSaveModalOpen}
-          collections={modalCollections}
-          onCollectionToggled={handleCollectionToggled}
-          onNewCollectionCreated={handleNewCollectionCreated}
-          onClose={() => setIsSaveModalOpen(false)}
-          verseKey={pinnedVerseKeys[0] || ''}
-        />
+        <>
+          <SaveToCollectionModal
+            isOpen={isSaveModalOpen}
+            collections={modalCollections}
+            onCollectionToggled={handleCollectionToggled}
+            onNewCollectionCreated={handleNewCollectionCreated}
+            onClose={() => setIsSaveModalOpen(false)}
+            verseKey={pinnedVerseKeys[0] || ''}
+          />
+          <LoadFromCollectionModal
+            isOpen={isLoadModalOpen}
+            onClose={() => setIsLoadModalOpen(false)}
+          />
+        </>
       )}
     </>
   );

@@ -55,6 +55,7 @@ const studyMode = createSlice({
         activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
+        showPinnedSection: payload.showPinnedSection ?? false,
       };
     },
     openStudyModeSsr: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {

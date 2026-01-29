@@ -1,70 +1,72 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-micro);
-  padding-block: var(--spacing-micro);
-  padding-inline-start: var(--spacing-small);
-  padding-inline-end: var(--spacing-micro);
-  background: var(--color-background-alternative-faded);
-  border: 1px solid var(--color-borders-hairline);
+  gap: var(--spacing-xxsmall2-px);
+  padding-block: var(--spacing-xxsmall-px);
+  padding-inline: var(--spacing-medium-px);
+  background: transparent;
+  border: 1px solid var(--color-blue-buttons-and-icons);
   border-radius: var(--border-radius-pill);
-  font-size: var(--font-size-small);
-  color: var(--color-text-default);
   white-space: nowrap;
-  transition: var(--transition-fast);
   user-select: none;
+  outline: none;
+  line-height: 1;
 }
 
 .clickable {
   cursor: pointer;
 
-  &:hover {
-    background: var(--color-background-alternative-medium);
-    border-color: var(--color-borders-faded);
-  }
-
   &:focus {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 1px;
+    outline: none;
   }
 }
 
 .selected {
-  background: var(--color-primary-faded);
-  border-color: var(--color-primary-medium);
-  color: var(--color-primary-medium);
+  background: var(--color-blue-buttons-and-icons);
+  border-color: var(--color-blue-buttons-and-icons);
 }
 
 .verseKey {
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-link-new);
+}
+
+.verseKeySelected {
+  color: var(--color-text-inverse);
 }
 
 .removeButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1rem;
-  height: 1rem;
   padding: 0;
   border: none;
   background: transparent;
-  border-radius: var(--border-radius-circle);
   cursor: pointer;
-  color: var(--color-text-faded);
-  transition: var(--transition-fast);
+  color: var(--color-text-link-new);
 
   &:hover {
-    background: var(--color-background-alternative-medium);
-    color: var(--color-text-default);
+    // No background change on hover
   }
 
   &:focus {
-    outline: 2px solid var(--color-primary-medium);
-    outline-offset: 1px;
+    outline: none;
   }
 }
 
+.removeButtonSelected {
+  color: var(--color-background-elevated);
+}
+
 .closeIcon {
-  width: 0.625rem;
-  height: 0.625rem;
+  inline-size: 11px;
+  block-size: 14px;
+  color: var(--color-text-link-new);
+  fill: var(--color-text-link-new);
+}
+
+.closeIconSelected {
+  color: var(--color-background-elevated);
+  fill: var(--color-background-elevated);
 }

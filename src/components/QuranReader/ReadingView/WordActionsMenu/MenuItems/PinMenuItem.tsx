@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
-import PinIcon from '@/icons/bookmark.svg';
+import PinFilledIcon from '@/icons/pin-filled.svg';
+import PinIcon from '@/icons/pin.svg';
 import {
   pinVerse,
   unpinVerse,
@@ -42,9 +43,9 @@ const PinMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     <PopoverMenu.Item
       icon={
         <IconContainer
-          icon={<PinIcon />}
+          icon={isPinned ? <PinFilledIcon /> : <PinIcon />}
           color={isPinned ? IconColor.primary : IconColor.tertiary}
-          size={IconSize.Custom}
+          size={IconSize.Xsmall}
           shouldFlipOnRTL={false}
         />
       }

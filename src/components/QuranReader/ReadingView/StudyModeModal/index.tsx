@@ -22,6 +22,13 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
+import PinFilledIcon from '@/icons/pin-filled.svg';
+import PinIcon from '@/icons/pin.svg';
+import {
+  pinVerse,
+  unpinVerse,
+  selectPinnedVerseKeys,
+} from '@/redux/slices/QuranReader/pinnedVerses';
 import {
   setActiveTab,
   setHighlightedWordLocation,
@@ -76,6 +83,7 @@ const StudyModeModal: React.FC<Props> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
+  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
 
   const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
   const initialChapterId = getChapterNumberFromKey(derivedVerseKey).toString();
@@ -335,6 +343,20 @@ const StudyModeModal: React.FC<Props> = ({
     onClose();
   }, [originalUrl, router.locale, onClose, selectedChapterId, selectedVerseNumber]);
 
+  const isPinned = useMemo(
+    () => pinnedVerseKeys.includes(verseKey),
+    [pinnedVerseKeys, verseKey],
+  );
+
+  const handlePinClick = useCallback(() => {
+    logButtonClick('study_mode_pin_verse', { verseKey, isPinned });
+    if (isPinned) {
+      dispatch(unpinVerse(verseKey));
+    } else {
+      dispatch(pinVerse(verseKey));
+    }
+  }, [dispatch, isPinned, verseKey]);
+
   const isContentTabActive =
     activeContentTab &&
     [
@@ -376,6 +398,21 @@ const StudyModeModal: React.FC<Props> = ({
         shouldFlipOnRTL={false}
       >
         <ArrowIcon />
+      </Button>
+      <Button
+        size={ButtonSize.Small}
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        onClick={handlePinClick}
+        className={styles.pinButton}
+        ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
+        tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
+      >
+        {isPinned ? (
+          <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
+        ) : (
+          <PinIcon className={styles.pinIcon} />
+        )}
       </Button>
       <Button
         variant={ButtonVariant.Ghost}

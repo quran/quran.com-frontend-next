@@ -39,16 +39,16 @@
 }
 
 .emptyIcon {
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: var(--spacing-medium);
+    inline-size: 3rem;
+    block-size: 3rem;
+    margin-block-end: var(--spacing-medium);
     opacity: 0.5;
 }
 
 .emptyTitle {
     font-size: var(--font-size-normal);
     font-weight: var(--font-weight-semibold);
-    margin-bottom: var(--spacing-xsmall);
+    margin-block-end: var(--spacing-xsmall);
 }
 
 .loadingContainer {
@@ -60,9 +60,9 @@
 
 .footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: end;
     gap: var(--spacing-small);
-    padding-top: var(--spacing-medium);
-    border-top: 1px solid var(--color-borders-hairline);
-    margin-top: var(--spacing-medium);
+    padding-block-start: var(--spacing-medium);
+    border-block-start: 1px solid var(--color-borders-hairline);
+    margin-block-start: var(--spacing-medium);
 }

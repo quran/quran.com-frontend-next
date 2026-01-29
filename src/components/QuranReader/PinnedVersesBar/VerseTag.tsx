@@ -47,15 +47,27 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >
-      <span className={styles.verseKey}>{verseKey}</span>
+      <span
+        className={classNames(styles.verseKey, {
+          [styles.verseKeySelected]: isSelected,
+        })}
+      >
+        {verseKey}
+      </span>
       <button
         type="button"
-        className={styles.removeButton}
+        className={classNames(styles.removeButton, {
+          [styles.removeButtonSelected]: isSelected,
+        })}
         onClick={handleRemoveClick}
         onKeyDown={handleRemoveKeyDown}
         aria-label={`Remove verse ${verseKey} from pinned`}
       >
-        <CloseIcon className={styles.closeIcon} />
+        <CloseIcon
+          className={classNames(styles.closeIcon, {
+            [styles.closeIconSelected]: isSelected,
+          })}
+        />
       </button>
     </div>
   );

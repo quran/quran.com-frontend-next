@@ -1,7 +1,5 @@
-/* eslint-disable max-lines */
 import React, { useCallback, useContext, useState } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,16 +8,12 @@ import LoadFromCollectionModal from '../PinnedVerses/LoadFromCollectionModal';
 import copyPinnedVerses from '../PinnedVerses/utils/copyPinnedVerses';
 
 import styles from './PinnedVersesBar.module.scss';
-import PinnedVersesMenu from './PinnedVersesMenu';
+import PinnedVersesContent from './PinnedVersesContent';
 import useSavePinnedToCollection from './useSavePinnedToCollection';
-import VerseTag from './VerseTag';
 
 import SaveToCollectionModal from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
 import DataContext from '@/contexts/DataContext';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import CompareIcon from '@/icons/compare.svg';
-import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import {
   clearPinnedVerses,
   selectPinnedVerses,
@@ -42,11 +36,11 @@ const PinnedVersesBar: React.FC = () => {
   const chaptersData = useContext(DataContext) as ChaptersData;
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
-  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
 
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
+  const [selectedVerseKey, setSelectedVerseKey] = useState<string | null>(null);
 
   const closeSaveModal = useCallback(() => setIsSaveModalOpen(false), []);
   const { collections, handleCollectionToggled, handleNewCollectionCreated } =
@@ -103,6 +97,7 @@ const PinnedVersesBar: React.FC = () => {
 
   const handleVerseTagClick = (verseKey: string) => {
     logButtonClick('pinned_bar_verse_tag_click');
+    setSelectedVerseKey(verseKey);
     router.push(getChapterWithStartingVerseUrl(verseKey));
   };
 
@@ -117,40 +112,19 @@ const PinnedVersesBar: React.FC = () => {
 
   return (
     <>
-      <div className={classNames(styles.container, { [styles.visibleContainer]: !isExpanded })}>
-        <div className={styles.barContent}>
-          <div className={styles.labelAndTags}>
-            <span className={styles.label}>{t('pinned-verses')}:</span>
-            <div className={styles.tagsContainer}>
-              {pinnedVerses.map((verse) => (
-                <VerseTag
-                  key={verse.verseKey}
-                  verseKey={verse.verseKey}
-                  onRemove={() => handleRemoveVerse(verse.verseKey)}
-                  onClick={() => handleVerseTagClick(verse.verseKey)}
-                />
-              ))}
-            </div>
-          </div>
-          <div className={styles.actions}>
-            <Button
-              size={ButtonSize.Small}
-              variant={ButtonVariant.Ghost}
-              shape={ButtonShape.Circle}
-              onClick={handleCompareClick}
-              tooltip={t('compare-verses')}
-              ariaLabel={t('compare-verses')}
-            >
-              <CompareIcon />
-            </Button>
-            <PinnedVersesMenu
-              onClear={handleClear}
-              onSaveToCollection={handleSaveToCollection}
-              onLoadFromCollection={handleLoadFromCollection}
-              onCopy={handleCopy}
-            />
-          </div>
-        </div>
+      <div className={styles.container}>
+        <PinnedVersesContent
+          pinnedVerses={pinnedVerses}
+          selectedVerseKey={selectedVerseKey}
+          showCompareButton
+          onVerseTagClick={handleVerseTagClick}
+          onRemoveVerse={handleRemoveVerse}
+          onCompareClick={handleCompareClick}
+          onClear={handleClear}
+          onSaveToCollection={handleSaveToCollection}
+          onLoadFromCollection={handleLoadFromCollection}
+          onCopy={handleCopy}
+        />
       </div>
       {isLoggedIn() && (
         <SaveToCollectionModal

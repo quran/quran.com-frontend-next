@@ -13,6 +13,8 @@ import {
   unpinVerse,
 } from '@/redux/slices/QuranReader/pinnedVerses';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
+import BookmarkType from '@/types/BookmarkType';
+import { addBulkCollectionBookmarks } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
@@ -28,8 +30,10 @@ interface UsePinnedVerseHandlersProps {
   lang: string;
   chaptersData: ChaptersData;
   selectedTranslations: number[];
+  mushafId: number;
   addCollection: (name: string) => Promise<Collection | null>;
   setIsSaveModalOpen: (isOpen: boolean) => void;
+  setIsLoadModalOpen: (isOpen: boolean) => void;
 }
 
 const usePinnedVerseHandlers = ({
@@ -41,8 +45,10 @@ const usePinnedVerseHandlers = ({
   lang,
   chaptersData,
   selectedTranslations,
+  mushafId,
   addCollection,
   setIsSaveModalOpen,
+  setIsLoadModalOpen,
 }: UsePinnedVerseHandlersProps) => {
   const handleVerseTagClick = useCallback(
     (verseKey: string) => {
@@ -58,8 +64,7 @@ const usePinnedVerseHandlers = ({
   );
 
   const handleRemoveVerse = useCallback(
-    (verseKey: string, e: React.MouseEvent) => {
-      e.stopPropagation();
+    (verseKey: string) => {
       logButtonClick('study_mode_remove_verse');
       dispatch(unpinVerse(verseKey));
 
@@ -99,8 +104,8 @@ const usePinnedVerseHandlers = ({
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
-    toast(t('common:unavailable'), { status: ToastStatus.Warning });
-  }, [router, t, toast]);
+    setIsLoadModalOpen(true);
+  }, [router, setIsLoadModalOpen]);
 
   const handleCopy = useCallback(async () => {
     logButtonClick('study_mode_copy_pinned');
@@ -118,23 +123,56 @@ const usePinnedVerseHandlers = ({
   }, [chaptersData, lang, pinnedVerses, selectedTranslations, t, toast]);
 
   const handleCollectionToggled = useCallback(
-    async (unusedCollection: CollectionOption, newValue: boolean) => {
+    async (collection: CollectionOption, newValue: boolean) => {
       if (newValue) {
-        toast(t('pinned-saved-successfully'), { status: ToastStatus.Success });
+        try {
+          const bookmarks = pinnedVerses.map((pv) => ({
+            key: pv.chapterNumber,
+            type: BookmarkType.Ayah,
+            verseNumber: pv.verseNumber,
+          }));
+
+          await addBulkCollectionBookmarks({
+            collectionId: collection.id,
+            bookmarks,
+            mushafId,
+          });
+
+          toast(t('pinned-saved-successfully'), { status: ToastStatus.Success });
+          setIsSaveModalOpen(false);
+        } catch {
+          toast(t('common:error.general'), { status: ToastStatus.Error });
+        }
       }
     },
-    [t, toast],
+    [pinnedVerses, mushafId, t, toast, setIsSaveModalOpen],
   );
 
   const handleNewCollectionCreated = useCallback(
     async (name: string) => {
       const newCollection = await addCollection(name);
       if (newCollection) {
-        toast(t('pinned-saved-successfully'), { status: ToastStatus.Success });
+        try {
+          const bookmarks = pinnedVerses.map((pv) => ({
+            key: pv.chapterNumber,
+            type: BookmarkType.Ayah,
+            verseNumber: pv.verseNumber,
+          }));
+
+          await addBulkCollectionBookmarks({
+            collectionId: newCollection.id,
+            bookmarks,
+            mushafId,
+          });
+
+          toast(t('pinned-saved-successfully'), { status: ToastStatus.Success });
+        } catch {
+          toast(t('common:error.general'), { status: ToastStatus.Error });
+        }
       }
       setIsSaveModalOpen(false);
     },
-    [addCollection, t, toast, setIsSaveModalOpen],
+    [addCollection, pinnedVerses, mushafId, t, toast, setIsSaveModalOpen],
   );
 
   return {

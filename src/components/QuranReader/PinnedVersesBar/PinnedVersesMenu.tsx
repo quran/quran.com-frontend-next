@@ -2,13 +2,16 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './PinnedVersesBar.module.scss';
+import menuStyles from './PinnedVersesMenu.module.scss';
+
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import TrashIcon from '@/icons/close.svg';
-import CollectionIcon from '@/icons/collection.svg';
 import CopyIcon from '@/icons/copy.svg';
-import DownloadIcon from '@/icons/download.svg';
-import MoreIcon from '@/icons/more.svg';
+import FolderIcon from '@/icons/folder.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import TrashIcon from '@/icons/trash.svg';
+import BookmarkIcon from '@/icons/unbookmarked.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface PinnedVersesMenuProps {
@@ -48,6 +51,7 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
 
   return (
     <PopoverMenu
+      contentClassName={menuStyles.menuContent}
       trigger={
         <Button
           size={ButtonSize.Small}
@@ -55,37 +59,46 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
           shape={ButtonShape.Circle}
           tooltip={t('common:more')}
           ariaLabel={t('common:more')}
+          className={styles.moreButton}
         >
-          <MoreIcon />
+          <OverflowMenuIcon />
         </Button>
       }
     >
       <PopoverMenu.Item
-        icon={<CollectionIcon />}
+        icon={<BookmarkIcon className={menuStyles.menuItemIcon} />}
         onClick={handleSaveToCollection}
         shouldCloseMenuAfterClick
+        className={menuStyles.menuItem}
       >
-        {t('save-pinned-to-collection')}
+        <span className={menuStyles.menuItemText}>{t('save-pinned-to-collection')}</span>
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
-        icon={<DownloadIcon />}
+        icon={<FolderIcon className={menuStyles.menuItemIcon} />}
         onClick={handleLoadFromCollection}
         shouldCloseMenuAfterClick
+        className={menuStyles.menuItem}
       >
-        {t('load-from-collection')}
+        <span className={menuStyles.menuItemText}>{t('load-from-collection')}</span>
       </PopoverMenu.Item>
 
-      <PopoverMenu.Divider />
-
-      <PopoverMenu.Item icon={<CopyIcon />} onClick={handleCopy} shouldCloseMenuAfterClick>
-        {t('copy-pinned')}
+      <PopoverMenu.Item
+        icon={<CopyIcon className={menuStyles.menuItemIcon} />}
+        onClick={handleCopy}
+        shouldCloseMenuAfterClick
+        className={menuStyles.menuItem}
+      >
+        <span className={menuStyles.menuItemText}>{t('copy-pinned')}</span>
       </PopoverMenu.Item>
 
-      <PopoverMenu.Divider />
-
-      <PopoverMenu.Item icon={<TrashIcon />} onClick={handleClear} shouldCloseMenuAfterClick>
-        {t('clear-pinned')}
+      <PopoverMenu.Item
+        icon={<TrashIcon className={menuStyles.menuItemIcon} />}
+        onClick={handleClear}
+        shouldCloseMenuAfterClick
+        className={menuStyles.menuItem}
+      >
+        <span className={menuStyles.menuItemText}>{t('clear-pinned')}</span>
       </PopoverMenu.Item>
     </PopoverMenu>
   );
