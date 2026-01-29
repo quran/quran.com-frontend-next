@@ -23,11 +23,13 @@
 }
 
 .contentContainer {
+  @include utility.edgeHorizontalPadding;
   flex: 1;
   position: relative;
 }
 
 .actionContainer {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   direction: ltr;
   flex-direction: row;
@@ -147,32 +149,23 @@
 }
 
 .tabsContainer {
+  @include utility.scrollbar-none;
+  @include utility.edgeHorizontalPadding;
+  overflow-x: auto;
+  box-sizing: border-box;
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
-  gap: var(--spacing-medium);
-  overflow-x: auto;
   inline-size: 100%;
-  -webkit-overflow-scrolling: touch;
+  gap: var(--spacing-medium);
 
-  @include breakpoints.smallerThanTablet {
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    &.fullWidthTabs {
-      @media (min-width: 360px) {
-        overflow-x: visible;
-        justify-content: space-between;
-      }
-    }
-  }
+  // @include breakpoints.smallerThanTablet {
+  //   justify-content: space-between;
+  // }
 
   @media (min-width: 768px) {
     gap: var(--spacing-large);
-    overflow-x: visible;
   }
 }
 
@@ -203,15 +196,9 @@
   flex-shrink: 0;
 
   @include breakpoints.smallerThanTablet {
-    // this min-width is to prevent the tab from overlapping with the next tab
-    // (when this happens, we can scroll to see the next tab to access it)
-    .fullWidthTabs & {
-      @media (min-width: 360px) {
-        flex: 1 1 auto;
-        justify-content: center;
-        min-inline-size: 0;
-      }
-    }
+    flex-shrink: 0;
+    justify-content: center;
+    min-inline-size: 0;
   }
 
   &:hover {
@@ -251,4 +238,8 @@
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-small);
   }
+}
+
+.ayahSeparatorContainer {
+  @include utility.edgeHorizontalPadding;
 }

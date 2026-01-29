@@ -120,7 +120,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         </div>
         <BottomActions verseKey={verse.verseKey} hasRelatedVerses={verse.hasRelatedVerses} />
       </div>
-      <Separator className={styles.verseSeparator} />
+      <div className={styles.ayahSeparatorContainer}>
+        <Separator />
+      </div>
     </>
   );
 };

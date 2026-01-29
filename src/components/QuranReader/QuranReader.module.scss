@@ -34,17 +34,18 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
+  overflow-x: hidden;
   @include breakpoints.smallerThanTablet {
     padding-block-start: $quran-reader-padding-mobile;
   }
   padding-block-start: $quran-reader-padding;
-  padding-inline: var(--spacing-medium2-px);
+  // padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
   @include breakpoints.tablet {
     transition: var(--transition-regular);
-    margin-inline-end: 0;
+    // margin-inline-end: 0;
   }
 
   @include breakpoints.smallerThanTablet {
@@ -69,13 +70,13 @@ $virtual-scrolling-height-bandage: calc(
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
-    margin-inline-end: constants.$notes-side-bar-desktop-width;
+    // margin-inline-end: constants.$notes-side-bar-desktop-width;
   }
 }
 
 .withSidebarNavigationOpenOrAuto {
   @include breakpoints.tablet {
-    margin-inline-start: calc(10 * var(--spacing-mega));
+    // margin-inline-start: calc(10 * var(--spacing-mega));
   }
 }
 
