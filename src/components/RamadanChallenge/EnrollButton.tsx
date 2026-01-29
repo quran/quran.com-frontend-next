@@ -7,6 +7,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
+import { TestId } from '@/tests/test-ids';
 import { addReadingGoal } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { GoalCategory } from 'types/auth/Goal';
@@ -46,7 +47,7 @@ const EnrollButton = ({ section, subscribedText, enrollText }: Props) => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner dataTestId={TestId.RAMADAN_CHALLENGE_ENROLL_BUTTON_SPINNER} />;
   }
 
   return (

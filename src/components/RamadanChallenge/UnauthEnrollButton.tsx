@@ -8,6 +8,7 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
@@ -28,7 +29,7 @@ const UnauthEnrollButton = ({ section }: Props) => {
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner dataTestId={TestId.RAMADAN_CHALLENGE_GUEST_USER_BUTTON_SPINNER} />;
   }
 
   if (isLoggedIn) {
