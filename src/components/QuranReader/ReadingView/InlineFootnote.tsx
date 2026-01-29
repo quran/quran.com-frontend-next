@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -38,14 +38,16 @@ const InlineFootnote: React.FC<InlineFootnoteProps> = ({
   const { t: tCommon } = useTranslation('common');
 
   // App locale language data (for container/header direction)
-  const appLanguageId = findLanguageIdByLocale(lang as Language);
-  const appLanguageData = getLanguageDataById(appLanguageId);
+  const appLanguageData = useMemo(() => {
+    const appLanguageId = findLanguageIdByLocale(lang as Language);
+    return getLanguageDataById(appLanguageId);
+  }, [lang]);
 
   // Localize the footnote number if it's numeric
-  const localizedFootnoteName =
-    footnoteName && isNumericString(footnoteName)
-      ? toLocalizedNumber(Number(footnoteName), lang)
-      : footnoteName;
+  const localizedFootnoteName = useMemo(() => {
+    if (!footnoteName || !isNumericString(footnoteName)) return footnoteName;
+    return toLocalizedNumber(Number(footnoteName), lang);
+  }, [footnoteName, lang]);
 
   const handleClose = () => {
     logButtonClick('reading_translation_footnote_close_button');

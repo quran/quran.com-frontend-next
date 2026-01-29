@@ -34,18 +34,23 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   const { t, lang } = useTranslation('quran-reader');
 
   // App locale language data (for container/header direction)
-  const appLanguageId = findLanguageIdByLocale(lang as Language);
-  const appLanguageData = getLanguageDataById(appLanguageId);
+  const appLanguageData = useMemo(() => {
+    const appLanguageId = findLanguageIdByLocale(lang as Language);
+    return getLanguageDataById(appLanguageId);
+  }, [lang]);
 
   // Footnote content language data (for text direction and font)
-  const footnoteLanguageId = footnote?.languageId || appLanguageId;
-  const footnoteLanguageData = getLanguageDataById(footnoteLanguageId);
+  const footnoteLanguageData = useMemo(() => {
+    const appLanguageId = findLanguageIdByLocale(lang as Language);
+    const footnoteLanguageId = footnote?.languageId || appLanguageId;
+    return getLanguageDataById(footnoteLanguageId);
+  }, [footnote?.languageId, lang]);
 
   // Localize the footnote number if it's numeric
-  const localizedFootnoteName =
-    footnoteName && isNumericString(footnoteName)
-      ? toLocalizedNumber(Number(footnoteName), lang)
-      : footnoteName;
+  const localizedFootnoteName = useMemo(() => {
+    if (!footnoteName || !isNumericString(footnoteName)) return footnoteName;
+    return toLocalizedNumber(Number(footnoteName), lang);
+  }, [footnoteName, lang]);
 
   const updatedText = useMemo(() => {
     if (!footnote?.text) return '';
