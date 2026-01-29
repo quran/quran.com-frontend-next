@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */ // Required for Redux Toolkit's Immer-based state mutations
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { logErrorToSentry } from '../../lib/sentry';
+
 import BookmarkType from '@/types/BookmarkType';
 import { GuestReadingBookmark } from '@/utils/bookmark';
 
@@ -54,9 +56,14 @@ const guestBookmarkSlice = createSlice({
      */
     setGuestReadingBookmark: (state, action: PayloadAction<GuestReadingBookmark | null>) => {
       if (!isValidGuestBookmark(action.payload)) {
-        throw new Error('Invalid guest reading bookmark format');
+        logErrorToSentry('Invalid guest reading bookmark format', {
+          transactionName: 'setGuestReadingBookmark',
+          metadata: { state, action },
+        });
+        state.readingBookmark = null;
+      } else {
+        state.readingBookmark = action.payload;
       }
-      state.readingBookmark = action.payload;
     },
 
     /**

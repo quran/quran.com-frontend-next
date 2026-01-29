@@ -61,45 +61,42 @@ describe('guestBookmark slice', () => {
     expect(cleared.readingBookmark).toBeNull();
   });
 
-  it('throws on invalid format - missing key', () => {
-    expect(() =>
-      reducer(
-        undefined,
-        setGuestReadingBookmark({
-          key: 0,
-          type: BookmarkType.Ayah,
-          mushafId: 1,
-          createdAt: mockCreatedAt,
-        } as any),
-      ),
-    ).toThrow();
+  it('sanitizes invalid format - missing key', () => {
+    const state = reducer(
+      undefined,
+      setGuestReadingBookmark({
+        key: 0,
+        type: BookmarkType.Ayah,
+        mushafId: 1,
+        createdAt: mockCreatedAt,
+      } as any),
+    ) as any;
+    expect(state.readingBookmark).toBeNull();
   });
 
-  it('throws on invalid format - invalid type', () => {
-    expect(() =>
-      reducer(
-        undefined,
-        setGuestReadingBookmark({
-          key: 1,
-          type: 'invalid' as any,
-          mushafId: 1,
-          createdAt: mockCreatedAt,
-        }),
-      ),
-    ).toThrow();
+  it('sanitizes invalid format - invalid type', () => {
+    const state = reducer(
+      undefined,
+      setGuestReadingBookmark({
+        key: 1,
+        type: 'invalid' as any,
+        mushafId: 1,
+        createdAt: mockCreatedAt,
+      }),
+    ) as any;
+    expect(state.readingBookmark).toBeNull();
   });
 
-  it('throws on ayah bookmark without verseNumber', () => {
-    expect(() =>
-      reducer(
-        undefined,
-        setGuestReadingBookmark({
-          key: 1,
-          type: BookmarkType.Ayah,
-          mushafId: 1,
-          createdAt: mockCreatedAt,
-        }),
-      ),
-    ).toThrow();
+  it('sanitizes ayah bookmark without verseNumber', () => {
+    const state = reducer(
+      undefined,
+      setGuestReadingBookmark({
+        key: 1,
+        type: BookmarkType.Ayah,
+        mushafId: 1,
+        createdAt: mockCreatedAt,
+      }),
+    ) as any;
+    expect(state.readingBookmark).toBeNull();
   });
 });
