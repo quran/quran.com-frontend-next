@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState, useMemo, useEffect, useContext } from 'react';
 
 import { useRouter } from 'next/router';
@@ -26,6 +27,10 @@ type Props = {
 
 const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapterId }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  // Temporary selection to avoid flicker while navigation loads.
+  const [pendingSelectedVerseKey, setPendingSelectedVerseKey] = useState<string | null>(null);
+  const [isNavigationPending, setIsNavigationPending] = useState(false);
+
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const dispatch = useDispatch();
@@ -60,6 +65,14 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
     }
   }, [urlChapterId, currentChapterId, selectedChapterId]);
 
+  useEffect(() => {
+    // Keep the clicked verse highlighted until the reader finishes syncing.
+    if (!pendingSelectedVerseKey || isNavigationPending) return;
+    if (lastReadVerseKey.verseKey === pendingSelectedVerseKey) {
+      setPendingSelectedVerseKey(null);
+    }
+  }, [isNavigationPending, lastReadVerseKey.verseKey, pendingSelectedVerseKey]);
+
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
     [chaptersData, currentChapterId],
@@ -85,20 +98,22 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
     }
   }, [searchQuery, filteredVerseKeys]);
 
-  const navigateAndHandleAfterNavigation = (href: string) => {
-    router
-      .push(href, undefined, {
+  const navigateAndHandleAfterNavigation = async (href: string) => {
+    setIsNavigationPending(true);
+    try {
+      await router.push(href, undefined, {
         shallow: false, // Change to false to force a full page reload
-      })
-      .then(() => {
-        if (onAfterNavigationItemRouted) {
-          onAfterNavigationItemRouted();
-        }
-      })
-      .catch(() => {
-        // As a fallback, we can use window.location
-        window.location.href = href;
       });
+      if (onAfterNavigationItemRouted) {
+        onAfterNavigationItemRouted();
+      }
+    } catch {
+      // As a fallback, we can use window.location
+      window.location.href = href;
+    } finally {
+      // Clear the pending state when navigation completes or errors.
+      setIsNavigationPending(false);
+    }
   };
 
   // Handle when user press `Enter` in input box
@@ -106,6 +121,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
     if (firstFilteredVerseKey) {
+      setPendingSelectedVerseKey(firstFilteredVerseKey);
       const href = getChapterWithStartingVerseUrl(firstFilteredVerseKey);
       navigateAndHandleAfterNavigation(href);
     }
@@ -129,6 +145,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
         chaptersData,
       }),
     );
+    setPendingSelectedVerseKey(verseKey);
     const href = getChapterWithStartingVerseUrl(verseKey);
     navigateAndHandleAfterNavigation(href);
     logButtonClick(`navigation_list_verse`, {
@@ -157,6 +174,9 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
               verseKey={verseKey}
               key={verseKey}
               onVerseClick={(e) => handleVerseClick(e, verseKey)}
+              isSelectedOverride={
+                (pendingSelectedVerseKey || lastReadVerseKey.verseKey) === verseKey
+              }
             />
           ))}
         </div>
