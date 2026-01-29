@@ -112,7 +112,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
           getReciterChapterNavigationUrl(selectedReciter.id.toString(), selectedChapter.slug),
         )}
       />
-      <div className={classNames(layoutStyle.flow)}>
+      <div className={classNames(layoutStyle.flow, styles.flow)}>
         <div className={classNames(layoutStyle.flowItem, styles.container)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
