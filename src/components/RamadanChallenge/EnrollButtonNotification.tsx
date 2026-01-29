@@ -12,6 +12,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useEmailNotificationSettings from '@/hooks/auth/useEmailNotificationSettings';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
 import { logErrorToSentry } from '@/lib/sentry';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
@@ -76,7 +77,7 @@ const EnrollButtonNotification = ({ section, subscribedText, enrollText }: Props
   }, [notification]);
 
   if (!notification || isLoading || isEmailNotificationSettingsLoading) {
-    return <Spinner />;
+    return <Spinner dataTestId={TestId.RAMADAN_CHALLENGE_ENROLL_BUTTON_NOTIFICATION_SPINNER} />;
   }
 
   if (isEnabled || !isEnrolled) {
