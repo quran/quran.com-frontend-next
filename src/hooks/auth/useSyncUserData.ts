@@ -8,6 +8,7 @@ import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectBookmarkedPages, selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { PinnedVerse, selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
@@ -25,6 +26,7 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType, {
   SyncBookmarkPayload,
   SyncLocalDataPayload,
+  SyncPinnedVersePayload,
   SyncReadingSessionPayload,
 } from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
@@ -71,10 +73,25 @@ const formatLocalReadingSession = (
   };
 };
 
+const formatLocalPinnedVerse = (
+  verse: PinnedVerse,
+  mushafId: number,
+): SyncPinnedVersePayload => ({
+  targetType: 'ayah',
+  targetId: verse.verseKey,
+  metadata: {
+    sourceMushafId: mushafId,
+    chapterNumber: verse.chapterNumber,
+    verseNumber: verse.verseNumber,
+  },
+  createdAt: new Date(verse.timestamp).toISOString(),
+});
+
 const buildSyncPayload = (
   verses: Record<string, number>,
   pages: Record<string, number>,
   sessions: RecentReadingSessions,
+  pinnedVerses: PinnedVerse[],
   mushafId: number,
 ): SyncLocalDataPayload => ({
   [SyncDataType.BOOKMARKS]: [
@@ -84,6 +101,7 @@ const buildSyncPayload = (
   [SyncDataType.READING_SESSIONS]: Object.entries(sessions).map(([k, v]) =>
     formatLocalReadingSession(k, v),
   ),
+  [SyncDataType.PINNED_VERSES]: pinnedVerses.map((v) => formatLocalPinnedVerse(v, mushafId)),
 });
 
 const isBookmarkCacheKey = (key: unknown): boolean =>
@@ -102,6 +120,7 @@ const useSyncUserData = () => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
+  const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
@@ -110,7 +129,7 @@ const useSyncUserData = () => {
       const bookmarksCount =
         Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
       // prettier-ignore
-      const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId);
+      const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, recentReadingSessions, pinnedVerses, mushafId);
       try {
         const { lastSyncAt } = await syncUserLocalData(payload);
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
@@ -132,7 +151,7 @@ const useSyncUserData = () => {
         }
       }
     },
-    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate],
+    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, pinnedVerses, mushafId, mutate],
   );
 
   useEffect(() => {

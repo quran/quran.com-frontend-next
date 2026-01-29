@@ -15,6 +15,7 @@ import PinnedVersesContent from '@/components/QuranReader/PinnedVersesBar/Pinned
 import DataContext from '@/contexts/DataContext';
 import { useToast } from '@/dls/Toast/Toast';
 import useCollections from '@/hooks/useCollections';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import { selectPinnedVerseKeys, selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectStudyModeVerseKey } from '@/redux/slices/QuranReader/studyMode';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -46,6 +47,7 @@ const PinnedVersesSection: React.FC = () => {
 
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
+  const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
 
   const {
     handleVerseTagClick,
@@ -69,6 +71,8 @@ const PinnedVersesSection: React.FC = () => {
     addCollection,
     setIsSaveModalOpen,
     setIsLoadModalOpen,
+    unpinVerseWithSync,
+    clearPinnedWithSync,
   });
 
   const modalCollections: CollectionOption[] = collections.map((collection) => ({

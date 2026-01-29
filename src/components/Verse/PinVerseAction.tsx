@@ -1,17 +1,14 @@
 import React, { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
-import {
-  pinVerse,
-  unpinVerse,
-  selectPinnedVerseKeys,
-} from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -27,10 +24,9 @@ const PinVerseAction: React.FC<PinVerseActionProps> = ({
   onActionTriggered,
 }) => {
   const { t } = useTranslation('quran-reader');
-  const dispatch = useDispatch();
   const { verseKey } = verse;
+  const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
-  // Use selectPinnedVerseKeys and derive isPinned from it
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys);
   const isPinned = useMemo(() => pinnedVerseKeys.includes(verseKey), [pinnedVerseKeys, verseKey]);
 
@@ -39,16 +35,16 @@ const PinVerseAction: React.FC<PinVerseActionProps> = ({
       logButtonClick(
         isTranslationView ? 'unpin_verse_translation_view' : 'unpin_verse_reading_view',
       );
-      dispatch(unpinVerse(verseKey));
+      unpinVerseWithSync(verseKey);
     } else {
       logButtonClick(isTranslationView ? 'pin_verse_translation_view' : 'pin_verse_reading_view');
-      dispatch(pinVerse(verseKey));
+      pinVerseWithSync(verseKey);
     }
 
     if (onActionTriggered) {
       onActionTriggered();
     }
-  }, [dispatch, isPinned, isTranslationView, onActionTriggered, verseKey]);
+  }, [isPinned, isTranslationView, onActionTriggered, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
   return (
     <PopoverMenu.Item

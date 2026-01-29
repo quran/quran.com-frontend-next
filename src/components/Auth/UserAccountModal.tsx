@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import Modal from '@/dls/Modal/Modal';
+import useSyncPinnedVerses from '@/hooks/auth/useSyncPinnedVerses';
 import useSyncUserData from '@/hooks/auth/useSyncUserData';
 import ConsentType from '@/types/auth/ConsentType';
 import Announcement from 'types/auth/Announcement';
@@ -22,6 +23,7 @@ type Props = {
 
 const UserAccountModal: React.FC<Props> = ({ announcement, consents }) => {
   useSyncUserData();
+  useSyncPinnedVerses();
 
   let modalBody;
   if (announcement) {

@@ -7,11 +7,7 @@ import { useDispatch } from 'react-redux';
 import { CollectionOption } from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
 import copyPinnedVerses from '@/components/QuranReader/PinnedVerses/utils/copyPinnedVerses';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import {
-  PinnedVerse,
-  clearPinnedVerses,
-  unpinVerse,
-} from '@/redux/slices/QuranReader/pinnedVerses';
+import { PinnedVerse } from '@/redux/slices/QuranReader/pinnedVerses';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import BookmarkType from '@/types/BookmarkType';
 import { addBulkCollectionBookmarks } from '@/utils/auth/api';
@@ -34,6 +30,8 @@ interface UsePinnedVerseHandlersProps {
   addCollection: (name: string) => Promise<Collection | null>;
   setIsSaveModalOpen: (isOpen: boolean) => void;
   setIsLoadModalOpen: (isOpen: boolean) => void;
+  unpinVerseWithSync: (verseKey: string) => Promise<void>;
+  clearPinnedWithSync: () => Promise<void>;
 }
 
 const usePinnedVerseHandlers = ({
@@ -49,6 +47,8 @@ const usePinnedVerseHandlers = ({
   addCollection,
   setIsSaveModalOpen,
   setIsLoadModalOpen,
+  unpinVerseWithSync,
+  clearPinnedWithSync,
 }: UsePinnedVerseHandlersProps) => {
   const handleVerseTagClick = useCallback(
     (verseKey: string) => {
@@ -66,7 +66,7 @@ const usePinnedVerseHandlers = ({
   const handleRemoveVerse = useCallback(
     (verseKey: string) => {
       logButtonClick('study_mode_remove_verse');
-      dispatch(unpinVerse(verseKey));
+      unpinVerseWithSync(verseKey);
 
       if (pinnedVerses.length > 1) {
         const remainingVerses = pinnedVerses.filter((v) => v.verseKey !== verseKey);
@@ -81,13 +81,13 @@ const usePinnedVerseHandlers = ({
         }
       }
     },
-    [dispatch, pinnedVerses],
+    [dispatch, pinnedVerses, unpinVerseWithSync],
   );
 
   const handleClear = useCallback(() => {
     logButtonClick('study_mode_clear_pinned');
-    dispatch(clearPinnedVerses());
-  }, [dispatch]);
+    clearPinnedWithSync();
+  }, [clearPinnedWithSync]);
 
   const handleSaveToCollection = useCallback(() => {
     logButtonClick('study_mode_save_to_collection');

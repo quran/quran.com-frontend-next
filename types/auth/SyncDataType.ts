@@ -1,6 +1,7 @@
 enum SyncDataType {
   BOOKMARKS = 'bookmarks',
   READING_SESSIONS = 'readingSessions',
+  PINNED_VERSES = 'pinnedVerses',
 }
 
 export interface SyncBookmarkPayload {
@@ -17,9 +18,17 @@ export interface SyncReadingSessionPayload {
   verseNumber: number;
 }
 
+export interface SyncPinnedVersePayload {
+  targetType: string;
+  targetId: string;
+  metadata?: Record<string, unknown>;
+  createdAt?: string;
+}
+
 export interface SyncLocalDataPayload {
   [SyncDataType.BOOKMARKS]: SyncBookmarkPayload[];
   [SyncDataType.READING_SESSIONS]: SyncReadingSessionPayload[];
+  [SyncDataType.PINNED_VERSES]?: SyncPinnedVersePayload[];
 }
 
 export default SyncDataType;

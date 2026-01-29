@@ -8,6 +8,7 @@ export interface PinnedVerse {
   chapterNumber: number;
   verseNumber: number;
   timestamp: number; // for ordering when added
+  serverId?: string; // backend PinnedItem.id (set after sync)
 }
 
 export interface PinnedVersesState {
@@ -71,10 +72,32 @@ export const pinnedVersesSlice = createSlice({
       };
     },
     clearPinnedVerses: () => initialState,
+    // Set server IDs after sync/fetch
+    setServerIds: (state, action: PayloadAction<Record<string, string>>) => {
+      const mapping = action.payload;
+      return {
+        ...state,
+        verses: state.verses.map((v) =>
+          mapping[v.verseKey] ? { ...v, serverId: mapping[v.verseKey] } : v,
+        ),
+      };
+    },
+    // Replace all pinned verses (used after fetching from server)
+    setPinnedVerses: (state, action: PayloadAction<PinnedVerse[]>) => ({
+      ...state,
+      verses: action.payload,
+    }),
   },
 });
 
-export const { pinVerse, pinVerses, unpinVerse, clearPinnedVerses } = pinnedVersesSlice.actions;
+export const {
+  pinVerse,
+  pinVerses,
+  unpinVerse,
+  clearPinnedVerses,
+  setServerIds,
+  setPinnedVerses,
+} = pinnedVersesSlice.actions;
 
 // Selectors
 export const selectPinnedVerses = (state: RootState) => state.pinnedVerses.verses;

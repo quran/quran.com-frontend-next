@@ -46,6 +46,7 @@ import MediaRenderError from '@/types/Media/MediaRenderError';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { Mushaf } from '@/types/QuranReader';
+import { PinnedItemDTO, SyncPinnedItemPayload } from 'types/PinnedItem';
 import {
   CollectionsQueryParams,
   makeActivityDaysUrl,
@@ -106,6 +107,12 @@ import {
   makeReadingGoalStatusUrl,
   GetCoursesQueryParams,
   makeTranslationFeedbackUrl,
+  makeAddPinnedItemUrl,
+  makePinnedItemsUrl,
+  makeSyncPinnedItemsUrl,
+  makeClearPinnedItemsUrl,
+  makeDeletePinnedItemUrl,
+  makeDeletePinnedItemByKeyUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -706,6 +713,31 @@ export const submitTranslationFeedback = async (params: {
 }): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
   return postRequest(makeTranslationFeedbackUrl(), params);
 };
+
+// Pinned Items
+export const getPinnedItems = async (
+  targetType?: string,
+): Promise<{ data: PinnedItemDTO[] }> => privateFetcher(makePinnedItemsUrl(targetType));
+
+export const addPinnedItem = async (params: {
+  targetType: string;
+  targetId: string;
+  metadata?: Record<string, unknown>;
+}): Promise<PinnedItemDTO> => postRequest(makeAddPinnedItemUrl(), params);
+
+export const deletePinnedItemById = async (pinnedItemId: string) =>
+  deleteRequest(makeDeletePinnedItemUrl(pinnedItemId));
+
+export const deletePinnedItemByKey = async (params: { targetType: string; targetId: string }) =>
+  deleteRequest(makeDeletePinnedItemByKeyUrl(), params);
+
+export const syncPinnedItems = async (
+  items: SyncPinnedItemPayload[],
+): Promise<{ synced: number; lastSyncAt: Date }> =>
+  postRequest(makeSyncPinnedItemsUrl(), { items });
+
+export const clearPinnedItems = async (targetType?: string) =>
+  deleteRequest(makeClearPinnedItemsUrl(), targetType ? { targetType } : undefined);
 
 const shouldRefreshToken = (error) => {
   return error?.message === 'must refresh token';

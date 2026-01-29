@@ -14,11 +14,10 @@ import useSavePinnedToCollection from './useSavePinnedToCollection';
 import SaveToCollectionModal from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import {
-  clearPinnedVerses,
   selectPinnedVerses,
   selectPinnedVerseKeys,
-  unpinVerse,
 } from '@/redux/slices/QuranReader/pinnedVerses';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -38,6 +37,7 @@ const PinnedVersesBar: React.FC = () => {
   const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
 
+  const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
   const [selectedVerseKey, setSelectedVerseKey] = useState<string | null>(null);
@@ -87,12 +87,12 @@ const PinnedVersesBar: React.FC = () => {
 
   const handleRemoveVerse = (verseKey: string) => {
     logButtonClick('pinned_bar_remove_verse');
-    dispatch(unpinVerse(verseKey));
+    unpinVerseWithSync(verseKey);
   };
 
   const handleClear = () => {
     logButtonClick('pinned_bar_clear_all');
-    dispatch(clearPinnedVerses());
+    clearPinnedWithSync();
   };
 
   const handleVerseTagClick = (verseKey: string) => {

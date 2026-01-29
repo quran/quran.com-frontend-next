@@ -320,3 +320,24 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
  * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
+
+// Pinned Items
+export const PINNED_ITEMS_CACHE_PATHS = {
+  LIST: 'pinned-items?',
+} as const;
+
+export const makePinnedItemsUrl = (targetType?: string): string =>
+  makeUrl('pinned-items', targetType ? { targetType } : undefined);
+
+export const makeAddPinnedItemUrl = (): string => makeUrl('pinned-items');
+
+export const makeSyncPinnedItemsUrl = (): string => makeUrl('pinned-items/sync');
+
+export const makeClearPinnedItemsUrl = (): string => makeUrl('pinned-items/clear');
+
+export const makeDeletePinnedItemUrl = (pinnedItemId: string): string =>
+  makeUrl(`pinned-items/${pinnedItemId}`);
+
+export const makeDeletePinnedItemByKeyUrl = (): string => makeUrl('pinned-items/by-key');
+
+export const makeBulkDeletePinnedItemsUrl = (): string => makeUrl('pinned-items/bulk');
