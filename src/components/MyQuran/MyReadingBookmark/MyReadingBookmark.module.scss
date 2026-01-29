@@ -60,13 +60,14 @@
 }
 
 .text {
-  font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small-px);
+  font-weight: var(--font-weight-normal);
   color: var(--color-text-default);
 }
 
 .date {
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-faded);
 }
 

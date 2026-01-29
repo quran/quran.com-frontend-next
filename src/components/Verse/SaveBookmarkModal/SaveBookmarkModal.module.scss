@@ -3,6 +3,7 @@
 $outline-size: 2px;
 
 .modal {
+  background-color: var(--color-background-elevated-new);
   > div {
     padding: $modal-padding !important;
   }
@@ -134,7 +135,6 @@ $outline-size: 2px;
 
   inline-size: 100%;
 
-  background: var(--color-background-default);
   border: $border-width-default solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large-px);
 }

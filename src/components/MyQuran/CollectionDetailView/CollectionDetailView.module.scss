@@ -15,6 +15,13 @@
   animation: slideDown var(--transition-moderate) ease-out;
 }
 
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  flex: 1;
+}
+
 .backButton {
   padding: 0;
   block-size: auto;
@@ -45,10 +52,26 @@
 }
 
 .title {
-  font-size: var(--font-size-xlarge);
+  font-size: var(--font-size-large-px);
   font-weight: var(--font-weight-semibold);
   // Fade in with slight delay for stagger effect
   animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
+  background: var(--color-success-faded);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-success-medium);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  // Fade in with delay
+  animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
 }
 
 .loadMoreContainer {

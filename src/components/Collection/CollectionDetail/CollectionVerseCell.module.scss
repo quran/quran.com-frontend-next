@@ -37,6 +37,7 @@
 
 .verseReference {
   font-size: var(--font-size-large);
+  text-decoration: underline;
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-default);
   transition: color var(--transition-fast) ease-out;

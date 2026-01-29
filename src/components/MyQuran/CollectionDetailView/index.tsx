@@ -15,6 +15,7 @@ import BookmarkType from '@/types/BookmarkType';
 import { deleteCollectionBookmarkById, privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
@@ -32,7 +33,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   onBack,
   searchQuery,
 }) => {
-  const { t } = useTranslation('collection');
+  const { t, lang } = useTranslation('my-quran');
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
@@ -121,13 +122,31 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
   const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
 
+  // Get total count from the first page data
+  const totalCount =
+    data?.[0]?.data?.collection.bookmarksCount ||
+    data?.[0]?.data?.collection.count ||
+    data?.[0]?.data?.bookmarks.length ||
+    0;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <Button onClick={onBack} variant={ButtonVariant.Ghost} className={styles.backButton}>
           <ChevronLeft />
         </Button>
-        <span className={styles.title}>{collectionName}</span>
+        <div className={styles.headerContent}>
+          <span className={styles.title}>{collectionName}</span>
+        </div>
+        <span className={styles.badge}>
+          {totalCount === 1
+            ? t('collections.items', {
+                count: toLocalizedNumber(totalCount, lang),
+              })
+            : t('collections.items_plural', {
+                count: toLocalizedNumber(totalCount, lang),
+              })}
+        </span>
       </div>
 
       <CollectionDetail
@@ -145,7 +164,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       {hasNextPage && (
         <div className={styles.loadMoreContainer}>
           <Button onClick={loadMore} variant={ButtonVariant.Outlined}>
-            {t('load-more')}
+            {t('collection:load-more')}
           </Button>
         </div>
       )}

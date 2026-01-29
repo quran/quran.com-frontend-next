@@ -8,7 +8,6 @@ import CollectionDetailView from '@/components/MyQuran/CollectionDetailView';
 import CollectionsList from '@/components/MyQuran/CollectionsList';
 import MyReadingBookmark from '@/components/MyQuran/MyReadingBookmark';
 import RecentlySaved from '@/components/MyQuran/RecentlySaved';
-import SearchAndFilters from '@/components/MyQuran/SearchAndFilters';
 import NewCollectionForm from '@/components/Verse/SaveBookmarkModal/Collections/NewCollectionForm';
 import Modal from '@/dls/Modal/Modal';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
@@ -31,6 +30,7 @@ const SavedTabContent: React.FC = () => {
   });
 
   const [sortBy, setSortBy] = useState<CollectionSortOption>(CollectionSortOption.RECENTLY_UPDATED);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchQuery, setSearchQuery] = useState('');
   const [isNewCollectionModalOpen, setIsNewCollectionModalOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
@@ -102,7 +102,7 @@ const SavedTabContent: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {isLoggedIn && !selectedCollection && (
+      {/* {isLoggedIn && !selectedCollection && (
         <SearchAndFilters
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -110,7 +110,7 @@ const SavedTabContent: React.FC = () => {
           showFilterButton={false}
           showSortButton={false}
         />
-      )}
+      )} */}
 
       {!selectedCollection && (
         <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
