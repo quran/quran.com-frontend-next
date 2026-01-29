@@ -1,10 +1,7 @@
 @use 'src/styles/breakpoints';
 
 .pinnedSection {
-  padding: var(--spacing-medium) var(--spacing-large);
-  background: var(--color-background-alternative-faded);
-  border-block-end: 1px solid var(--color-borders-hairline);
-
+  border-block-end: 1px solid var(--color-background-alternative-faint-new);
   @include breakpoints.smallerThanTablet {
     padding: var(--spacing-small) var(--spacing-medium);
   }
