@@ -9,7 +9,10 @@ import styles from './TranslatedAyah.module.scss';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
+import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
+import { isNumericString } from '@/utils/string';
 
 type InlineFootnoteProps = {
   footnoteName: string | null;
@@ -31,8 +34,18 @@ const InlineFootnote: React.FC<InlineFootnoteProps> = ({
   direction,
   onClose,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const { t: tCommon } = useTranslation('common');
+
+  // App locale language data (for container/header direction)
+  const appLanguageId = findLanguageIdByLocale(lang as Language);
+  const appLanguageData = getLanguageDataById(appLanguageId);
+
+  // Localize the footnote number if it's numeric
+  const localizedFootnoteName =
+    footnoteName && isNumericString(footnoteName)
+      ? toLocalizedNumber(Number(footnoteName), lang)
+      : footnoteName;
 
   const handleClose = () => {
     logButtonClick('reading_translation_footnote_close_button');
@@ -40,10 +53,10 @@ const InlineFootnote: React.FC<InlineFootnoteProps> = ({
   };
 
   return (
-    <div className={styles.footnoteContainer}>
+    <div className={classNames(styles.footnoteContainer, styles[appLanguageData.direction])}>
       <div className={styles.footnoteHeader}>
         <span className={styles.footnoteTitle}>
-          {t('footnote')} {footnoteName ? `- ${footnoteName}` : null}
+          {t('footnote')} {localizedFootnoteName ? `- ${localizedFootnoteName}` : null}
         </span>
         <Button
           size={ButtonSize.Small}

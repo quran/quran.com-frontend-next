@@ -12,8 +12,8 @@ import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/But
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import Language from '@/types/Language';
-import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
-import { formatVerseReferencesToLinks } from '@/utils/string';
+import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
+import { formatVerseReferencesToLinks, isNumericString } from '@/utils/string';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -33,8 +33,19 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
-  const languageId = footnote?.languageId || findLanguageIdByLocale(lang as Language);
-  const languageData = getLanguageDataById(languageId);
+  // App locale language data (for container/header direction)
+  const appLanguageId = findLanguageIdByLocale(lang as Language);
+  const appLanguageData = getLanguageDataById(appLanguageId);
+
+  // Footnote content language data (for text direction and font)
+  const footnoteLanguageId = footnote?.languageId || appLanguageId;
+  const footnoteLanguageData = getLanguageDataById(footnoteLanguageId);
+
+  // Localize the footnote number if it's numeric
+  const localizedFootnoteName =
+    footnoteName && isNumericString(footnoteName)
+      ? toLocalizedNumber(Number(footnoteName), lang)
+      : footnoteName;
 
   const updatedText = useMemo(() => {
     if (!footnote?.text) return '';
@@ -42,10 +53,13 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   }, [footnote?.text]);
 
   return (
-    <div className={styles.footnoteContainer} data-testid="footnote-content">
+    <div
+      className={classNames(styles.footnoteContainer, transStyles[appLanguageData.direction])}
+      data-testid="footnote-content"
+    >
       <div className={styles.header}>
         <p>
-          {t('footnote')} {footnoteName ? `- ${footnoteName}` : null}
+          {t('footnote')} {localizedFootnoteName ? `- ${localizedFootnoteName}` : null}
         </p>
         <Button
           size={ButtonSize.Small}
@@ -62,8 +76,8 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <div
           className={classNames(
             styles.text,
-            transStyles[languageData.direction],
-            transStyles[languageData.font],
+            transStyles[footnoteLanguageData.direction],
+            transStyles[footnoteLanguageData.font],
           )}
           dangerouslySetInnerHTML={{ __html: updatedText }}
           {...(onTextClicked && { onClick: onTextClicked })}
