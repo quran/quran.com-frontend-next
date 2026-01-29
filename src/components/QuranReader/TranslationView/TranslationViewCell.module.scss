@@ -7,7 +7,6 @@
   flex-direction: column;
   direction: ltr;
   padding-block: var(--spacing-medium2-px);
-  padding-inline: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
 
   @include breakpoints.tablet {
@@ -115,13 +114,13 @@
   justify-content: center;
 
   svg {
-    inline-size: var(--spacing-medium2);
-    block-size: var(--spacing-medium2);
-  }
-
-  @include breakpoints.smallerThanTablet {
     inline-size: var(--spacing-medium);
     block-size: var(--spacing-medium);
+
+    @include breakpoints.tablet {
+      inline-size: var(--spacing-medium2);
+      block-size: var(--spacing-medium2);
+    }
   }
 }
 
@@ -141,11 +140,6 @@
 
 .actionContainerLeft .actionItem {
   display: inline-block;
-  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
-
-  @include breakpoints.tablet {
-    margin-inline-end: 0;
-  }
 }
 
 .bottomActionsContainer {
@@ -256,9 +250,4 @@
   @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-small);
   }
-}
-
-.verseSeparator {
-  inline-size: calc(100% - 2 * var(--spacing-small)) !important;
-  margin-inline: auto;
 }

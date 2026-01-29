@@ -22,6 +22,7 @@ export enum ButtonShape {
   Square = 'square',
   Circle = 'circle',
   Pill = 'pill',
+  Rounded = 'rounded',
 }
 
 export enum ButtonType {
@@ -139,13 +140,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.square]: shape === ButtonShape.Square,
       [styles.circle]: shape === ButtonShape.Circle,
       [styles.pill]: shape === ButtonShape.Pill,
+      [styles.rounded]: shape === ButtonShape.Rounded,
 
       // variant
       [styles.shadow]: variant === ButtonVariant.Shadow,
       [styles.ghost]: variant === ButtonVariant.Ghost,
       [styles.compact]: variant === ButtonVariant.Compact,
       [styles.outlined]: variant === ButtonVariant.Outlined,
-      [styles.rounded]: variant === ButtonVariant.Rounded,
+      [styles.roundedVariant]: variant === ButtonVariant.Rounded,
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,

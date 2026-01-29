@@ -139,7 +139,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 variant={ButtonVariant.Shadow}
                 className={styles.button}
               >
-                Join the Surah Al-Mulk Challenge
+                Learn More
               </Button>
             </div>
           </div>
@@ -191,7 +191,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 className={styles.button}
                 isNewTab
               >
-                Start this learning plan now (Free)
+                Start this learning plan now! (Free)
               </Button>
             </div>
             <h2>Reviews from readers who completed this Learning Plan:</h2>
@@ -228,7 +228,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 isNewTab
                 className={styles.button}
               >
-                Start this learning plan now!
+                Start this learning plan now! (Free)
               </Button>
             </div>
           </div>
@@ -254,7 +254,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 isNewTab
                 className={styles.button}
               >
-                Start this learning plan now (free)
+                Start this learning plan now! (Free)
               </Button>
             </div>
             <div>
@@ -312,7 +312,7 @@ const Ramadan2026Page: NextPage = (): JSX.Element => {
                 isNewTab
                 className={styles.button}
               >
-                Start this learning plan now!
+                Start this learning plan now! (Free)
               </Button>
             </div>
           </div>
