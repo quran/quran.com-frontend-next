@@ -9,16 +9,7 @@
   padding: var(--spacing-medium-px);
   margin-block-end: var(--spacing-medium-px);
   transition: all var(--transition-moderate) ease-out;
-  // Fade and slide entrance animation
   animation: fadeInSlide var(--transition-fast) ease-out backwards;
-
-  &:hover {
-    background-color: var(--color-background-alternative);
-    border-color: var(--color-borders-hairline-new);
-    :not(:first-child) {
-      transform: translateY(calc(var(--spacing-micro-px) * -1));
-    }
-  }
 }
 
 .headerContainer {
@@ -105,6 +96,13 @@
   }
 }
 
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xlarge-px) var(--spacing-medium-px);
+}
+
 .contentContainer {
   flex: 1;
   position: relative;
@@ -114,18 +112,10 @@
 
 .arabicVerseContainer {
   direction: rtl;
-  margin-block-end: var(--spacing-medium-px);
+  margin-block: var(--spacing-medium2-px);
 
   @include breakpoints.tablet {
-    margin-block-start: var(--spacing-xxlarge-px);
-  }
-}
-
-.verseTranslationsContainer {
-  margin-block-end: var(--spacing-large-px);
-
-  @include breakpoints.tablet {
-    margin-block-end: var(--spacing-xlarge-px);
+    margin-block: var(--spacing-medium3-px);
   }
 }
 

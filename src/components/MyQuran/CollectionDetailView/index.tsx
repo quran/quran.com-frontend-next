@@ -7,6 +7,8 @@ import styles from './CollectionDetailView.module.scss';
 
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
+import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
@@ -140,12 +142,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         </div>
         <span className={styles.badge}>
           {totalCount === 1
-            ? t('collections.items', {
-                count: toLocalizedNumber(totalCount, lang),
-              })
-            : t('collections.items_plural', {
-                count: toLocalizedNumber(totalCount, lang),
-              })}
+            ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
+            : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
         </span>
       </div>
 
@@ -168,6 +166,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           </Button>
         </div>
       )}
+      <StudyModeContainer />
+      <VerseActionModalContainer />
     </div>
   );
 };
