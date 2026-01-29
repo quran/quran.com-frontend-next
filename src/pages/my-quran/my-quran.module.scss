@@ -11,6 +11,7 @@ $max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (
       overflow: hidden;
       max-inline-size: unset;
       padding: unset;
+      margin-block-end: 0;
       @include breakpoints.tablet {
         max-inline-size: $max-width;
         padding-block: var(--spacing-xlarge-px);
