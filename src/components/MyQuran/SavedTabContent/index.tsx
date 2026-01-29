@@ -2,6 +2,8 @@ import React, { useMemo, useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import SearchAndFilters from '../SearchAndFilters';
+
 import styles from './SavedTabContent.module.scss';
 
 import CollectionDetailView from '@/components/MyQuran/CollectionDetailView';
@@ -30,7 +32,6 @@ const SavedTabContent: React.FC = () => {
   });
 
   const [sortBy, setSortBy] = useState<CollectionSortOption>(CollectionSortOption.RECENTLY_UPDATED);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchQuery, setSearchQuery] = useState('');
   const [isNewCollectionModalOpen, setIsNewCollectionModalOpen] = useState(false);
   const [newCollectionName, setNewCollectionName] = useState('');
@@ -102,7 +103,8 @@ const SavedTabContent: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* {isLoggedIn && !selectedCollection && (
+      {/* Temporary disabled (searchQuery) should be removed */}
+      {isLoggedIn && !selectedCollection && searchQuery && (
         <SearchAndFilters
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
@@ -110,7 +112,7 @@ const SavedTabContent: React.FC = () => {
           showFilterButton={false}
           showSortButton={false}
         />
-      )} */}
+      )}
 
       {!selectedCollection && (
         <MyReadingBookmark bookmark={bookmark} isLoading={isBookmarkLoading} />
