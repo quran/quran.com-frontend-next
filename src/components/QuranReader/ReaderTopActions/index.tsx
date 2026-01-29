@@ -20,8 +20,7 @@ interface ReaderTopActionsProps {
 /**
  * A persistent top actions bar that shows Arabic/Translation mode switching buttons.
  * This component renders when:
- * - Single verse view (QuranReaderDataType.Verse): Always shown
- * - Page/Juz/Hizb/Rub/Ranges: Only if not starting at verse 1
+ * - NOT starting at verse 1 (ChapterHeader handles verse 1 for all view types)
  * - Chapter view: Never shown (ChapterHeader handles this)
  * - Tafsir view: Never shown
  *
@@ -41,10 +40,10 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
   const firstVerse = initialData?.verses?.[0];
 
   // Determine if we should show this component based on the data type:
-  // - Chapter: Never show - ChapterHeader always appears at verse 1
-  // - Verse/Ranges: Show only if not starting at verse 1
-  // - Page/Juz/Hizb/Rub: Show only if first verse is not verse 1
+  // - Chapter: Never show - ChapterHeader always appears
   // - Tafsir: Never show
+  // - Verse 1: Never show - ChapterHeader handles verse 1 for all view types
+  // - All other cases: Show
   const shouldShow = (() => {
     if (!firstVerse) return false;
 
@@ -59,11 +58,11 @@ const ReaderTopActions: React.FC<ReaderTopActionsProps> = ({
       return false;
     }
 
-    // Always show for single verse view (QuranReaderDataType.Verse)
-    if (quranReaderDataType === QuranReaderDataType.Verse) return true;
+    // Never show for verse 1 - ChapterHeader handles this for all view types
+    if (firstVerse.verseNumber === 1) return false;
 
-    // For all other types, show only if not starting at verse 1
-    return firstVerse.verseNumber !== 1;
+    // For all other cases (Verse, Page, Juz, Hizb, Rub, Ranges not at verse 1), show
+    return true;
   })();
 
   if (!shouldShow) {
