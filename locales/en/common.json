@@ -102,7 +102,6 @@
   "bookmarked": "Bookmarked",
   "both": "Both",
   "cancel": "Cancel",
-  "create": "Create",
   "change-theme": "Change Theme",
   "click-here": "Click here",
   "close": "Close",
@@ -143,6 +142,7 @@
     "decrease": "Decrease",
     "increase": "Increase"
   },
+  "create": "Create",
   "create-my-goal": "Create My Goal",
   "default-description": "The Quran translated into many languages in a simple and easy interface",
   "delete": "Delete",
@@ -152,6 +152,7 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -173,9 +174,9 @@
     "ranges-no-value": "Range start and end must have a value",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "The starting verse has to be before the ending verse.",
+    "reading-bookmark-remove": "Failed to remove reading bookmark",
     "reading-bookmark-set": "Failed to set reading bookmark",
-    "reading-bookmark-undo": "Failed to undo reading bookmark",
-    "reading-bookmark-remove": "Failed to remove reading bookmark"
+    "reading-bookmark-undo": "Failed to undo reading bookmark"
   },
   "errors": {
     "account-banned": "Sorry, Your account is banned. Contact Quran.Foundation",
@@ -216,9 +217,8 @@
     "verse-metadata-failed": "Failed to load verse metadata"
   },
   "exciting-updates": "Exciting Updates",
-  "feedback": "Feedback",
   "favorites": "Favorites",
-  "done": "Done",
+  "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 Lines",
     "16_lines": "16 Lines",
@@ -448,10 +448,10 @@
   "sign-in": "Sign in",
   "sitemap": "Sitemap",
   "sort": {
-    "sort": "Sort",
     "ascending": "Ascending",
     "by": "Sort by",
-    "descending": "Descending"
+    "descending": "Descending",
+    "sort": "Sort"
   },
   "stay-on-track": "🎯 Stay on track!",
   "style": "Style",

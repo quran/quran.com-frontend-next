@@ -142,6 +142,7 @@
     "decrease": "Verminderen",
     "increase": "Toename"
   },
+  "create": "Creëren",
   "create-my-goal": "Mijn doel creëren",
   "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
   "delete": "Verwijderen",
@@ -151,6 +152,7 @@
   "donate-now": "Doneer nu",
   "donate_monthly": "Doneer maandelijks",
   "donate_once": "Doneer eenmalig",
+  "done": "Klaar",
   "edit": "Bewerking",
   "email-verification": {
     "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Controleer je spam-inbox",
@@ -171,7 +173,10 @@
     "pref-persist-fail": "Het synchroniseren van je instellingen met de cloud is mislukt.",
     "ranges-no-value": "Het begin en einde van het bereik moeten een waarde hebben",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "Het beginvers moet vóór het eindvers staan."
+    "ranges-wrong-order": "Het beginvers moet vóór het eindvers staan.",
+    "reading-bookmark-remove": "Het verwijderen van de leesbladwijzer is mislukt.",
+    "reading-bookmark-set": "Het instellen van de leesbladwijzer is mislukt.",
+    "reading-bookmark-undo": "Het is niet gelukt om de leesbookmark ongedaan te maken."
   },
   "errors": {
     "account-banned": "Sorry, uw account is geblokkeerd. Neem contact op met Quran.Foundation",
@@ -208,9 +213,11 @@
     "verification-code-invalid": "Deze verificatiecode is ongeldig",
     "verification-code-length": "Verificatiecode moet {{length}} cijfers lang zijn",
     "verification-failed": "Verificatie mislukt. Probeer het opnieuw.",
-    "verification-resend-failed": "Het opnieuw verzenden van de verificatiecode is mislukt"
+    "verification-resend-failed": "Het opnieuw verzenden van de verificatiecode is mislukt",
+    "verse-metadata-failed": "Het laden van de versmetadata is mislukt."
   },
   "exciting-updates": "Spannende updates",
+  "favorites": "Favorieten",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 lijnen",
@@ -352,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Koran Radio",
   "read": "Lezen",
+  "read-more": "Lees meer",
   "reading-history": "Geschiedenis lezen",
   "reading-preference": {
     "arabic": "Arabisch",
@@ -398,6 +406,7 @@
     "title": "Zoeken"
   },
   "seconds": "Seconden",
+  "see-less": "Minder weergeven",
   "see-new": "Bekijk wat er nieuw is",
   "select-language": "Taal selecteren",
   "settings": {
@@ -441,7 +450,8 @@
   "sort": {
     "ascending": "Oplopend",
     "by": "Sorteer op",
-    "descending": "Aflopend"
+    "descending": "Aflopend",
+    "sort": "Soort"
   },
   "stay-on-track": "🎯 Blijf op koers!",
   "style": "Stijl",
