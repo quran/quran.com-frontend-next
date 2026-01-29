@@ -45,6 +45,7 @@ export type VerseActionModalState = {
   bookmarksRangeUrl: string;
   wasOpenedFromStudyMode: boolean;
   studyModeRestoreState: StudyModeRestoreState | null;
+  previousModalType: VerseActionModalType | null;
 };
 
 export const initialState: VerseActionModalState = {
@@ -57,6 +58,7 @@ export const initialState: VerseActionModalState = {
   bookmarksRangeUrl: '',
   wasOpenedFromStudyMode: false,
   studyModeRestoreState: null,
+  previousModalType: null,
 };
 
 /**
@@ -67,6 +69,7 @@ export type OpenNotesModalPayload = {
   verseKey: string;
   wasOpenedFromStudyMode?: boolean;
   studyModeRestoreState?: StudyModeRestoreState;
+  previousModalType?: VerseActionModalType | null;
 };
 
 /**
@@ -118,13 +121,15 @@ const verseActionModal = createSlice({
   name: SliceName.VERSE_ACTION_MODAL,
   initialState,
   reducers: {
-    openNotesModal: (unusedState, { payload }: PayloadAction<OpenNotesModalPayload>) => ({
-      ...initialState,
+    openNotesModal: (state, { payload }: PayloadAction<OpenNotesModalPayload>) => ({
+      ...state,
       isOpen: true,
       modalType: payload.modalType,
       verseKey: payload.verseKey,
-      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+      editingNote: null,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? state.wasOpenedFromStudyMode,
+      studyModeRestoreState: payload.studyModeRestoreState ?? state.studyModeRestoreState,
+      previousModalType: payload.previousModalType ?? state.modalType,
     }),
     openFeedbackModal: (unusedState, { payload }: PayloadAction<OpenFeedbackModalPayload>) => ({
       ...initialState,
@@ -195,6 +200,8 @@ export const selectVerseActionModalWasOpenedFromStudyMode = (state: RootState) =
   state.verseActionModal.wasOpenedFromStudyMode;
 export const selectVerseActionModalStudyModeRestoreState = (state: RootState) =>
   state.verseActionModal.studyModeRestoreState;
+export const selectVerseActionModalPreviousModalType = (state: RootState) =>
+  state.verseActionModal.previousModalType;
 
 export const {
   openNotesModal,

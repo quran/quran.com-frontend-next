@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import { CollectionItem } from './Collections/CollectionsListItem';
 import { useCollectionsState } from './Collections/hooks/useCollectionsState';
@@ -12,6 +12,7 @@ import { useSaveBookmarkData } from './useSaveBookmarkData';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { openNotesModal, VerseActionModalType } from '@/redux/slices/QuranReader/verseActionModal';
 import Bookmark, { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import Verse from '@/types/Verse';
@@ -84,6 +85,7 @@ const useSaveBookmarkModal = ({
   const commonT = useTranslation('common').t;
   const toast = useToast();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const isVerse = type === ReadingBookmarkType.AYAH;
   const isPage = type === ReadingBookmarkType.PAGE;
@@ -248,8 +250,15 @@ const useSaveBookmarkModal = ({
 
   const handleTakeNote = useCallback((): void => {
     logButtonClick('save_bookmark_modal_take_note');
-    onClose();
-  }, [onClose]);
+    // Open the note modal and track that we're coming from bookmark modal
+    dispatch(
+      openNotesModal({
+        modalType: VerseActionModalType.ADD_NOTE,
+        verseKey,
+        previousModalType: VerseActionModalType.SAVE_BOOKMARK,
+      }),
+    );
+  }, [dispatch, verseKey]);
 
   const handleGuestSignIn = useCallback((): void => {
     logButtonClick('save_bookmark_modal_guest_sign_in');
