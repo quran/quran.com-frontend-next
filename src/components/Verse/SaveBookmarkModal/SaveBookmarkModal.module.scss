@@ -1,3 +1,4 @@
+@use 'src/styles/breakpoints';
 @import './shared.module.scss';
 
 $outline-size: 2px;
@@ -6,6 +7,12 @@ $outline-size: 2px;
   background-color: var(--color-background-elevated-new);
   > div {
     padding: $modal-padding !important;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    > div {
+      padding: var(--spacing-medium-px) !important;
+    }
   }
 }
 
