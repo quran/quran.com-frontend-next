@@ -50,7 +50,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const verseKey = makeVerseKey(chapterId, verseNumber);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
-  const bookmarkName = `${chapterData.transliteratedName} ${localizedVerseKey}`;
+  const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;
 
   const formattedDate = React.useMemo(() => {
     if (!createdAt) return null;
