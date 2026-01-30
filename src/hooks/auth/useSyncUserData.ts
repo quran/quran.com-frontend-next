@@ -4,6 +4,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { READING_BOOKMARK_KEY } from '@/hooks/auth/useGlobalReadingBookmark';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { logErrorToSentry } from '@/lib/sentry';
 import { selectGuestReadingBookmark } from '@/redux/slices/guestBookmark';
@@ -115,7 +116,8 @@ const buildSyncPayload = (
 const isBookmarkCacheKey = (key: unknown): boolean =>
   typeof key === 'string' &&
   (Object.values(BOOKMARK_CACHE_PATHS).some((p) => key.includes(p)) ||
-    key.startsWith('pageBookmark:'));
+    key.startsWith('pageBookmark:') ||
+    key.startsWith('reading-bookmark-'));
 
 /** Syncs local user data (bookmarks, reading sessions) to DB on login with retry logic */
 const useSyncUserData = () => {
@@ -142,6 +144,8 @@ const useSyncUserData = () => {
         const { lastSyncAt } = await syncUserLocalData(payload);
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
         mutate(makeReadingSessionsUrl());
+        // Invalidate reading bookmark cache explicitly since it has a custom key pattern
+        mutate(READING_BOOKMARK_KEY(mushafId));
         mutate(isBookmarkCacheKey, undefined, { revalidate: true });
         setLastSyncAt(new Date(lastSyncAt));
         hasSyncedRef.current = true;
