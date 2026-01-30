@@ -76,13 +76,16 @@ const usePendingVerseSelection = ({
       setIsNavigationPending(true);
       try {
         await router.push(href, undefined, {
-          shallow: false, // Change to false to force a full page reload
+          shallow: false, // Use shallow: false to ensure full page reload and proper state synchronization
         });
         if (onAfterNavigationItemRouted) {
           onAfterNavigationItemRouted();
         }
       } catch (error) {
-        logErrorToSentry('Failed to navigate to verse via router.push', { error });
+        logErrorToSentry(error, {
+          transactionName: 'navigateAndHandleAfterNavigation',
+          metadata: { href },
+        });
 
         // As a fallback, we can use window.location
         window.location.href = href;
