@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import AdvancedCopyModal from './AdvancedCopyModal';
 import BookmarkModal from './BookmarkModal';
-import CollectionModal from './CollectionModal';
 import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
-import useCollectionHandlers from './useCollectionHandlers';
 
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
@@ -18,7 +16,6 @@ import {
 } from '@/redux/slices/QuranReader/studyMode';
 import {
   closeVerseActionModal,
-  selectVerseActionModalBookmarksRangeUrl,
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
@@ -45,22 +42,12 @@ const VerseActionModalContainer: React.FC = () => {
   const verse = useSelector(selectVerseActionModalVerse);
   const editingNote = useSelector(selectVerseActionModalEditingNote);
   const isTranslationView = useSelector(selectVerseActionModalIsTranslationView);
-  const bookmarksRangeUrl = useSelector(selectVerseActionModalBookmarksRangeUrl);
   const wasOpenedFromStudyMode = useSelector(selectVerseActionModalWasOpenedFromStudyMode);
   const studyModeRestoreState = useSelector(selectVerseActionModalStudyModeRestoreState);
   const previousModalType = useSelector(selectVerseActionModalPreviousModalType);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
-  const chapterId = verse ? Number(verse.chapterId) : 0;
-  const verseNumber = verse?.verseNumber ?? 0;
-
   const { data: notesCount } = useBatchedCountRangeNotes(isOpen && verseKey ? verseKey : null);
-
-  const { modalCollections, onCollectionToggled, onNewCollectionCreated } = useCollectionHandlers({
-    chapterId,
-    verseNumber,
-    bookmarksRangeUrl,
-  });
 
   useEffect(() => {
     if (isOpen && wasOpenedFromStudyMode && !hasClosedStudyModeRef.current) {
@@ -165,20 +152,6 @@ const VerseActionModalContainer: React.FC = () => {
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
         onClose={handleFeedbackClose}
         onBack={handleBackToStudyMode}
-      />
-    );
-  }
-
-  if (modalType === VerseActionModalType.SAVE_TO_COLLECTION) {
-    return (
-      <CollectionModal
-        verseKey={verseKey}
-        collections={modalCollections}
-        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
-        onClose={handleClose}
-        onBack={handleBackToStudyMode}
-        onCollectionToggled={onCollectionToggled}
-        onNewCollectionCreated={onNewCollectionCreated}
       />
     );
   }
