@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unused-prop-types */
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
@@ -13,7 +12,6 @@ import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
-import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailProps = {
   id: string;
@@ -21,20 +19,10 @@ type CollectionDetailProps = {
   isOwner: boolean;
   bookmarks: Bookmark[];
 
-  /* todo: remove these props and remove eslint no-unused-prop-types
-   * we have to delete old collection pages and old components where those are not in used anymore
-   */
-  sortBy: CollectionDetailSortOption;
-  onSortByChange: (sortBy: string) => void;
-
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
   onBack?: () => void;
-
-  // Bulk actions props
   isSelectMode?: boolean;
-  selectedBookmarks?: Set<string>;
-  expandedCardIds?: Set<string>;
   onToggleBookmarkSelection?: (bookmarkId: string) => void;
   onToggleCardExpansion?: (bookmarkId: string) => void;
   isCardExpanded?: (bookmarkId: string) => boolean;
