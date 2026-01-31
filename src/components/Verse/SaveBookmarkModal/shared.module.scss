@@ -1,0 +1,99 @@
+@use 'src/styles/breakpoints';
+
+$max-block-size: 150px;
+$icon-size: var(--spacing-medium-plus-px);
+$close-icon-h: var(--spacing-medium3-px);
+$close-icon-w: var(--spacing-medium2-px);
+$modal-padding: var(--spacing-xlarge-px);
+$modal-width: 500px;
+$border-width-default: var(--spacing-hairline-px);
+
+.divider {
+  inline-size: 100%;
+  border: none;
+  border-block-start: $border-width-default solid var(--color-borders-hairline);
+  margin: auto;
+}
+
+.doneButton {
+  flex: 1;
+  border-radius: var(--border-radius-medium-px);
+  font-size: var(--font-size-normal-px);
+  gap: var(--spacing-xxsmall);
+  transition: background-color var(--transition-normal) ease;
+}
+
+// Checkbox styles
+.checkbox {
+  inline-size: var(--spacing-large);
+  block-size: var(--spacing-large);
+  border: var(--border-width-default) solid var(--color-borders-hairline);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-normal) ease;
+
+  &.checked {
+    background-color: var(--color-secondary-medium);
+    border-color: var(--color-secondary-medium);
+
+    &::after {
+      content: '';
+      inline-size: var(--spacing-xsmall);
+      block-size: var(--spacing-xsmall);
+      background-color: var(--color-background-default);
+      border-radius: 50%;
+    }
+  }
+}
+
+// Checkmark icon styles
+.checkIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all var(--transition-normal) ease;
+  background-color: var(--color-success-medium);
+
+  &.checked {
+    color: var(--color-background-default);
+  }
+
+  svg {
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+    stroke-width: var(--stroke-width-medium);
+  }
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default);
+
+  &:hover {
+    background-color: var(--color-background-alternative-faint-new);
+  }
+
+  svg {
+    block-size: $close-icon-h;
+    inline-size: $close-icon-w;
+  }
+}
+
+.questionIcon {
+  color: var(--color-grey-icons-new);
+  margin-inline-start: var(--spacing-small-px);
+}

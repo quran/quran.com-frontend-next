@@ -19,8 +19,8 @@ import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
+  getMyQuranNavigationUrl,
   LEARNING_PLANS_URL,
-  MY_QURAN_URL,
   RADIO_URL,
   RECITERS_URL,
   ROUTES,
@@ -69,7 +69,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     {
       title: t('my-quran'),
       icon: <IconBookmarkFilled />,
-      href: MY_QURAN_URL,
+      href: getMyQuranNavigationUrl(),
       eventName: 'navigation_drawer_my_quran',
     },
     {
