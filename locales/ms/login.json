@@ -11,6 +11,7 @@
   "continue-email": "Teruskan dengan E-mel",
   "continue-facebook": "Teruskan dengan Facebook",
   "continue-google": "Teruskan dengan Google",
+  "current-password-placeholder": "Kata laluan semasa",
   "email-placeholder": "Alamat emel",
   "error": {
     "email-required": "E-mel tiada!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Masukkan alamat e-mel anda dan kami akan menghantar arahan untuk menetapkan semula kata laluan anda.",
   "forgot-password-success": "E-mel tetapan semula kata laluan dihantar! Sila semak peti masuk anda.",
   "forgot-password-title": "Lupa kata laluan?",
+  "hide-password": "Sembunyikan kata laluan",
   "last-name-placeholder": "Nama Akhir",
   "login-cta": "Log masuk atau Daftar sekarang:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Tetapkan Semula Kata Laluan",
   "reset-password-success": "Tetapan semula kata laluan berjaya!",
   "set-new-password": "Tetapkan kata laluan baharu",
+  "show-password": "Tunjukkan kata laluan",
   "sign-in": "Log masuk",
   "sign-in-or-sign-up": "Daftar Masuk atau Daftar di bawah untuk meneruskan ke",
   "sign-up": "daftar",

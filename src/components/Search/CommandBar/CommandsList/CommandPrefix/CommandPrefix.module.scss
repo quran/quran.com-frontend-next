@@ -14,3 +14,20 @@
   align-items: flex-start;
   inline-size: 100%;
 }
+
+.name {
+  flex-grow: 1;
+  em {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-highlight-dark);
+  }
+  sup {
+    display: none;
+  }
+}
+
+.rtlText {
+  font-family: UthmanicHafs;
+  text-align: end;
+  direction: rtl;
+}

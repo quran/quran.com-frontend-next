@@ -11,6 +11,7 @@
   "continue-email": "በኢሜይል ይቀጥሉ",
   "continue-facebook": "በፌስቡክ ይቀጥሉ",
   "continue-google": "በGoogle ይቀጥሉ",
+  "current-password-placeholder": "የአሁኑ ሚስጥራዊ ማለፊያ ቁልፍ",
   "email-placeholder": "የኢሜይል አድራሻ",
   "error": {
     "email-required": "ኢሜል ጠፍቷል!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "የኢሜል አድራሻዎን ያስገቡ እና የይለፍ ቃልዎን እንደገና ለማስጀመር መመሪያዎችን እንልክልዎታለን።",
   "forgot-password-success": "የይለፍ ቃል ዳግም ማስጀመሪያ ኢሜይል ተልኳል! እባክዎ የገቢ መልዕክት ሳጥንዎን ያረጋግጡ።",
   "forgot-password-title": "የይለፍ ቃል ረሱ?",
+  "hide-password": "የይለፍ ቃል ደብቅ",
   "last-name-placeholder": "የአያት ስም",
   "login-cta": "አሁኑኑ ይግቡ ወይም ይመዝገቡ፦",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "የይለፍ ቃል ዳግም አስጀምር",
   "reset-password-success": "የይለፍ ቃል በተሳካ ሁኔታ ዳግም ተጀምሯል!",
   "set-new-password": "አዲስ የይለፍ ቃል ያዘጋጁ",
+  "show-password": "የይለፍ ቃል አሳይ",
   "sign-in": "ይግቡ",
   "sign-in-or-sign-up": "ለመቀጠል ከታች ይመዝገቡ ወይም ይመዝገቡ",
   "sign-up": "ይመዝገቡ",

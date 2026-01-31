@@ -41,7 +41,7 @@ const GroupedVerseAndTranslation: React.FC<Props> = (props) => {
   }, [data?.verses, translations]);
 
   if (error) return <Error error={error} onRetryClicked={mutate} />;
-  if (!data) return <Spinner />;
+  if (!data) return <Spinner className={styles.spinnerContainer} />;
 
   return (
     <div className={styles.container}>

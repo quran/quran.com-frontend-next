@@ -1,118 +1,131 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .header {
-    padding-block-end: var(--spacing-medium);
-    @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
-    }
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
 
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxlarge-px);
     }
+  }
 }
 
 .cardsContainer {
-    display: flex;
-    flex-direction: row;
-    @include breakpoints.smallerThanTablet {
-        flex-direction: column;
-    }
-    gap: var(--spacing-medium);
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+  }
+  gap: var(--spacing-medium);
+  justify-content: space-between;
+  inline-size: 100%;
 }
 
-.ramadanTitle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--spacing-micro);
-    font-size: var(--font-size-large);
-    align-items: center;
-    color: var(--color-text-default-new);
+.cardTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: var(--spacing-micro);
+  font-size: var(--font-size-large);
+  align-items: center;
+  color: var(--color-text-default-new);
 }
 
 .titleWithIcon {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-micro);
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-semibold);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-micro);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
 }
 
 .cardDescription {
-    color: var(--color-text-faded-new);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-small);
-    }
-    @include breakpoints.tablet {
-        font-size: var(--font-size-normal-px);
-    }
+  color: var(--color-text-faded-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small);
+  }
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
 
-.qrIcons {
-    display: flex;
-    flex-direction: row;
-    gap: var(--spacing-micro);
-    align-items: center;
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-small-px);
+  align-items: center;
+}
+
+.ramadanTitle {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-warning-deep);
+}
+
+.ramadanIcon {
+  path {
+    fill: var(--color-warning-deep);
+  }
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
 }
 
 .coloredIcon {
-    @include breakpoints.smallerThanTablet {
-        width: var(--spacing-medium2-px) !important;
-        height: var(--spacing-medium2-px) !important;
-    }
+  @include breakpoints.smallerThanTablet {
+    inline-size: var(--spacing-medium2-px) !important;
+    block-size: var(--spacing-medium2-px) !important;
+  }
 }
 
 .logoIcon {
-    @include breakpoints.smallerThanTablet {
-        height: 14px !important;
-        width: 83px !important;
-    }
+  @include breakpoints.smallerThanTablet {
+    block-size: 14px !important;
+    inline-size: 83px !important;
+  }
 }
 .cardContent {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-small);
-    @include breakpoints.smallerThanTablet {
-        gap: var(--spacing-xxsmall-px);
-    }
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  @include breakpoints.smallerThanTablet {
+    gap: var(--spacing-xxsmall-px);
+  }
 
-    justify-content: space-between;
-    height: 100%;
+  justify-content: space-between;
+  block-size: 100%;
 }
 
 .card {
-    height: 100%;
+  block-size: 100%;
 }
 
 .link {
-    width: 50%;
-    @include breakpoints.smallerThanTablet {
-        width: 100%;
-    }
-    display: flex;
-    flex-direction: column;
+  inline-size: 50%;
+  @include breakpoints.smallerThanTablet {
+    inline-size: 100%;
+  }
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-normal);
-    }
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal);
+  }
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .arrowIcon {
-    svg {
-        @include breakpoints.smallerThanTablet {
-            width: 12px !important;
-            height: 12px !important;
-        }
+  svg {
+    @include breakpoints.smallerThanTablet {
+      inline-size: 12px !important;
+      block-size: 12px !important;
     }
+  }
 }

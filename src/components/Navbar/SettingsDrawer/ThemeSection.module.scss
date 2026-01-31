@@ -13,13 +13,13 @@
   display: flex;
   & > svg {
     transition: width var(--transition-fast) ease;
-    width: 0rem;
+    inline-size: 0rem;
   }
 }
 
 .iconActive {
   & > svg {
-    width: var(--spacing-medium);
+    inline-size: var(--spacing-medium);
     margin-inline-end: var(--spacing-small);
   }
 }

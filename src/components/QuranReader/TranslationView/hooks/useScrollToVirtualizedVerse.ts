@@ -66,7 +66,12 @@ const useScrollToVirtualizedTranslationView = (
   // it scrolls to the beginning of the verse cell and we set `shouldReadjustScroll` to true so that the other effect
   // adjusts the scroll to the correct position
   useEffect(() => {
-    if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
+    // Skip scrolling for verse 1 since it's already at the top position
+    if (
+      quranReaderDataType === QuranReaderDataType.Chapter &&
+      isValidStartingVerse &&
+      startingVerseNumber > 1
+    ) {
       scrollToBeginningOfVerseCell(startingVerseNumber);
       setShouldReadjustScroll(true);
     }
@@ -83,6 +88,8 @@ const useScrollToVirtualizedTranslationView = (
     if (
       quranReaderDataType === QuranReaderDataType.Chapter &&
       isValidStartingVerse &&
+      // Skip scrolling for verse 1 since it's already at the top position
+      startingVerseNumber > 1 &&
       // we only want to run this effect when the user navigates to a new verse
       // and not when the user is scrolling through the verses while apiPageToVersesMap is being populated
       shouldReadjustScroll

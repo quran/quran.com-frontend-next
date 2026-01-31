@@ -10,17 +10,20 @@ import OurProjectsCollapsible from './OurProjectsCollapsible';
 import useGetContinueReadingUrl from '@/hooks/useGetContinueReadingUrl';
 import IconBookmarkFilled from '@/icons/bookmark_filled.svg';
 import IconCode from '@/icons/code.svg';
+import DiamondIcon from '@/icons/diamond.svg';
 import IconHeadphonesFilled from '@/icons/headphones-filled.svg';
 import IconHome from '@/icons/home.svg';
 import IconSchool from '@/icons/school.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
+import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   DEVELOPERS_URL,
-  getProfileNavigationUrl,
   LEARNING_PLANS_URL,
+  MY_QURAN_URL,
   RADIO_URL,
   RECITERS_URL,
+  ROUTES,
 } from '@/utils/navigation';
 
 interface NavigationDrawerListProps {
@@ -38,11 +41,19 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
   accordionItemTitleClassName,
   projectsDescClassName,
 }) => {
-  const { t } = useTranslation('common');
+  const { lang, t } = useTranslation('common');
   const dispatch = useDispatch();
   const continueReadingUrl = useGetContinueReadingUrl();
 
   const ITEMS = [
+    {
+      title: 'Ramadan 2026',
+      icon: <DiamondIcon />,
+      href: ROUTES.RAMADAN_2026,
+      eventName: 'navigation_drawer_ramadan2026',
+      isEvent: true,
+      locale: Language.EN,
+    },
     {
       title: t('read'),
       icon: <IconHome />,
@@ -58,7 +69,7 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
     {
       title: t('my-quran'),
       icon: <IconBookmarkFilled />,
-      href: getProfileNavigationUrl(),
+      href: MY_QURAN_URL,
       eventName: 'navigation_drawer_my_quran',
     },
     {
@@ -91,15 +102,21 @@ const NavigationDrawerList: React.FC<NavigationDrawerListProps> = ({
 
   return (
     <>
-      {ITEMS.map((item) => (
-        <NavigationDrawerItem
-          key={item.eventName}
-          title={item.title}
-          icon={item.icon}
-          href={item.href}
-          onClick={() => handleItemClick(item.eventName)}
-        />
-      ))}
+      {ITEMS.map((item) => {
+        if (item.locale && lang !== item.locale) {
+          return null;
+        }
+        return (
+          <NavigationDrawerItem
+            key={item.eventName}
+            title={item.title}
+            icon={item.icon}
+            href={item.href}
+            onClick={() => handleItemClick(item.eventName)}
+            isEvent={item.isEvent}
+          />
+        );
+      })}
       <MoreMenuCollapsible
         onItemClick={handleItemClick}
         headerClassName={accordionHeaderClassName}

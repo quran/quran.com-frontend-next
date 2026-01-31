@@ -1,13 +1,14 @@
-@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 $translation-content-max-width: 600px;
 
 .container {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-large-px);
-  padding: var(--spacing-large-px) var(--spacing-medium-plus-px);
+  padding-block-end: var(--spacing-medium2-px);
   inline-size: 100%;
   box-sizing: border-box;
 
@@ -23,15 +24,15 @@ $translation-content-max-width: 600px;
 .translationContent {
   max-inline-size: $translation-content-max-width;
   inline-size: 100%;
-  text-align: justify;
+  text-align: start;
   font-family: 'Figtree', var(--font-primary);
   font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-large2);
   line-height: 180%;
   color: var(--color-text-default);
 
-  @include breakpoints.smallerThanTablet {
-    padding-inline: var(--spacing-small2-px);
+  sup {
+    font-size: var(--font-size-small-px);
   }
 }
 

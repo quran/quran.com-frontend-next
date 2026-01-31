@@ -1,8 +1,8 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $button-hover-color: rgba(
   $color: #000000,
-  $alpha: 0.3
+  $alpha: 0.3,
 );
 
 .ctaButton {

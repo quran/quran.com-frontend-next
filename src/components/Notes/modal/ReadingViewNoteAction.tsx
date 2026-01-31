@@ -11,13 +11,11 @@ import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 interface ReadingViewNoteActionProps {
   verseKey: string;
   onActionTriggered?: () => void;
-  hasNotes?: boolean;
 }
 
 const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
   verseKey,
   onActionTriggered,
-  hasNotes,
 }) => {
   const { t } = useTranslation('common');
 
@@ -26,7 +24,6 @@ const ReadingViewNoteAction: React.FC<ReadingViewNoteActionProps> = ({
       verseKey={verseKey}
       onActionTriggered={onActionTriggered}
       isTranslationView={false}
-      hasNotes={hasNotes}
     >
       {({ onClick, hasNote }) => (
         <PopoverMenu.Item

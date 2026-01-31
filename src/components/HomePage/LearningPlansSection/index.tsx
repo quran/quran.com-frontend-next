@@ -29,7 +29,7 @@ const learningPlansSorter = (a: Course, b: Course) => {
 };
 
 const LearningPlansSection = () => {
-  const { t } = useTranslation('home');
+  const { t, lang } = useTranslation('home');
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -45,9 +45,13 @@ const LearningPlansSection = () => {
     <DataFetcher
       loading={Loading}
       fetcher={privateFetcher}
-      queryKey={makeGetCoursesUrl({ myCourses: false })}
+      queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
       render={(data: CoursesResponse) => {
-        const sortedCourses = [...data.data].sort(learningPlansSorter);
+        const courses = data?.data;
+        if (!courses || !Array.isArray(courses) || courses.length === 0) {
+          return null;
+        }
+        const sortedCourses = [...courses].sort(learningPlansSorter);
         const firstNonEnrolledIndex = sortedCourses.findIndex(
           (course) => typeof course.isCompleted === 'undefined',
         );

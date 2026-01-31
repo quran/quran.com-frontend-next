@@ -56,7 +56,7 @@
       "deeper-insights": [
         "Có tên nào của Allah được nêu ra không, và Chúng liên hệ thế nào với câu kinh?",
         "Những từ hoặc yếu tố ngôn ngữ nào khiến bạn chú ý?",
-        "Bạn có thể liên hệ câu kinh này với bối cảnh, các câu kinh khác trong Kinh Qur'an, hadith, hoặc các sự kiện khác không?"
+        "Bạn có thể liên hệ câu này với bối cảnh, các câu khác trong Kinh Qur'an, hadith, hoặc các sự kiện khác không?"
       ],
       "description": "Sắp ra mắt: chia sẻ ghi chú đã chọn với bạn bè, gia đình hoặc nhóm học tập để cùng hiểu và lan tỏa kiến thức.",
       "paragraph1": "Trong khi các ghi chú trên Quran.com được lưu trữ riêng tư, bạn cũng có tùy chọn chia sẻ công khai những suy ngẫm đã chọn trên <0>QuranReflect.com</0>. Đây là một nền tảng cộng đồng phi lợi nhuận được thiết kế để khuyến khích sự tương tác sâu sắc với Kinh Qur'an - không phải thông qua tafsir học thuật (chỉ dành cho các học giả đủ điều kiện), mà thông qua những suy ngẫm cá nhân chân thành được xem xét và hướng dẫn bởi một nhóm kiểm duyệt có trình độ.",
@@ -74,8 +74,8 @@
     },
     "title": "Lợi ích khi dùng tính năng Ghi chú"
   },
-  "description": "Tìm hiểu 6 lý do để ghi chú trên Quran.com và vai trò của chúng trong hành trình học Kinh Qur'an của bạn.",
-  "heading": "6 Lý do quan trọng để ghi chép - Và cách chúng có thể thay đổi hành trình học Kinh Qur'an của bạn.",
+  "description": "Tìm hiểu 5 lý do để ghi chú trên Quran.com và vai trò của chúng trong hành trình học Kinh Qur'an của bạn.",
+  "heading": "5 Lý do quan trọng để ghi chép - Và cách chúng có thể thay đổi hành trình học Kinh Qur'an của bạn.",
   "how-to-use": {
     "saved-note-explanation": "Khi lưu ghi chú cho một câu kinh, biểu tượng ghi chú sẽ chuyển sang màu xanh lam để bạn dễ nhận ra những câu kinh đã từng ghi chú.",
     "step1": "<0>Chọn câu kinh:</0> Nhấp vào câu kinh bất kỳ và chọn Ghi chú.",
@@ -86,7 +86,7 @@
   },
   "images": {
     "adding-notes": {
-      "alt": "Thêm ghi chú vào một câu kinh"
+      "alt": "Thêm ghi chú vào một câu"
     },
     "blue-icon": {
       "alt": "Biểu tượng chuyển màu xanh lam biểu thị ghi chú đã lưu."

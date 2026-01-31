@@ -137,6 +137,11 @@ const nextConfig = {
   },
   redirects: async () => [
     {
+      source: '/ramadan',
+      destination: '/ramadan2026',
+      permanent: false,
+    },
+    {
       source: '/apps-portal',
       destination: '/apps',
       permanent: true,

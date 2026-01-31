@@ -156,7 +156,7 @@ const SurahList: React.FC<Props> = ({
 
   return (
     <div className={styles.surahListContainer}>
-      <form onSubmit={handleSurahInputSubmit}>
+      <form onSubmit={handleSurahInputSubmit} className={styles.searchForm}>
         <input
           className={styles.searchInput}
           value={searchQuery}

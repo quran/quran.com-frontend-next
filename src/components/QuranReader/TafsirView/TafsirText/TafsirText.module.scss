@@ -1,7 +1,7 @@
 .counter {
   margin-block-end: var(--spacing-xsmall);
   font-size: initial;
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
 }
@@ -19,5 +19,20 @@
   font-size: var(--font-size-xlarge);
 }
 .xl {
-  font-size: var(--font-size-jumbo);
+  font-size: var(--font-size-xlarge-px);
+}
+.xxl {
+  font-size: var(--font-size-xxlarge-px);
+}
+.xxxl {
+  font-size: var(--font-size-xxxlarge-px);
+}
+.jumbo {
+  font-size: var(--font-size-jumbo-px);
+}
+.jumbo2 {
+  font-size: var(--font-size-jumbo2-px);
+}
+.xjumbo {
+  font-size: var(--font-size-xjumbo-px);
 }

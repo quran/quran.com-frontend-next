@@ -1,115 +1,158 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .streakCard {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  inline-size: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-micro-px);
+  @include breakpoints.smallerThanTablet {
+    justify-content: center;
+    gap: var(--spacing-small-px);
+  }
+  @include breakpoints.tablet {
+    flex-wrap: wrap;
+    & > :nth-child(1) {
+      margin: auto;
+    }
+  }
 }
 
 .streak {
-    padding-inline-end: var(--spacing-small-px);
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-black);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-xjumbo-px);
-    }
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-black);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xjumbo-px);
+  }
 }
 
 .streakCardLeft {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-micro);
-    & > svg:first-child {
-        padding-inline-start: var(--spacing-small-px);
-        padding-inline-end: var(--spacing-small-px);
-
-        width: var(--spacing-medium2-px);
-        height: var(--spacing-medium2-px);
-        @include breakpoints.tablet {
-            width: var(--spacing-large-px);
-            height: var(--spacing-large-px);
-            padding-inline-start: var(--spacing-medium-px);
-            padding-inline-end: var(--spacing-medium2-px);
-            width: 60px;
-            height: 60px;
-        }
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  & > svg:first-child {
+    min-inline-size: var(--spacing-medium3-px);
+    min-block-size: var(--spacing-medium3-px);
+    @include breakpoints.tablet {
+      min-inline-size: var(--spacing-xxlarge-px);
+      min-block-size: var(--spacing-xxlarge-px);
     }
+  }
 }
 
 .customGoalButton {
+  background-color: var(--color-streaks-dark);
+  color: var(--color-text-white);
+  font-weight: var(--font-weight-bold);
+
+  padding-block: 0;
+  padding-inline-end: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    block-size: calc(var(--spacing-small-plus-px) * 4);
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+    padding-block: var(--spacing-small-px);
+    padding-inline: var(--spacing-medium-px);
+  }
+
+  border: none;
+
+  svg {
+    path {
+      fill: var(--color-text-white);
+    }
+  }
+
+  &:hover {
     background-color: var(--color-streaks-dark);
     color: var(--color-text-white);
-    font-weight: var(--font-weight-bold);
-    svg {
-        path {
-            fill: var(--color-text-white);
-        }
-    }
-    &:hover {
-        background-color: var(--color-streaks-dark);
-    }
-    @include breakpoints.tablet {
-        font-size: var(--font-size-normal-px);
-    }
+    filter: brightness(var(--opacity-85));
+  }
 }
 
 .circularProgressbar {
-    height: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
-    width: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
+  block-size: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
+  inline-size: calc(var(--spacing-xxlarge-px) + var(--spacing-small-px));
+  @include breakpoints.smallerThanTablet {
+    block-size: calc(var(--spacing-large-px) + var(--spacing-small-px));
+    inline-size: calc(var(--spacing-large-px) + var(--spacing-small-px));
+  }
 }
 
 .circularProgressbarContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-micro);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    overflow: hidden;
+  }
+}
+
+.statusContainer {
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-micro);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    min-inline-size: 0;
+    overflow: hidden;
+  }
+  @include breakpoints.tablet {
+    margin: auto;
+  }
 }
 
 .streakDay {
-    font-size: var(--font-size-normal);
-    color: var(--color-text-gray);
-    font-weight: var(--font-weight-semibold);
-    @include breakpoints.tablet {
-        font-size: var(--font-size-large-px);
-    }
+  font-size: var(--font-size-normal);
+  color: var(--color-text-gray);
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .circularProgressbarPath {
-    stroke: var(--color-streaks-dark);
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.5s ease 0s;
+  stroke: var(--color-streaks-dark);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
 }
 
 .circularProgressbarTrail {
-    stroke: var(--color-daily-progress);
-    /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
-    stroke-linecap: round;
+  stroke: var(--color-daily-progress);
+  /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+  stroke-linecap: round;
 }
 
 .circularProgressbarText {
-    fill: var(--color-text-black);
-    font-size: var(--font-size-normal-px);
-    dominant-baseline: middle;
-    text-anchor: middle;
-    font-weight: var(--font-weight-bold);
+  fill: var(--color-text-black);
+  font-size: var(--font-size-normal-px);
+  dominant-baseline: middle;
+  text-anchor: middle;
+  font-weight: var(--font-weight-bold);
 }
 
 .goalArrowIcon {
-    svg {
-        @include breakpoints.smallerThanTablet {
-            width: var(--spacing-small-px) !important;
-            height: var(--spacing-small-px) !important;
-        }
+  svg {
+    @include breakpoints.smallerThanTablet {
+      inline-size: var(--spacing-small-px) !important;
+      block-size: var(--spacing-small-px) !important;
     }
+  }
 }

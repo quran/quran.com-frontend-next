@@ -1,10 +1,59 @@
 {
+  "allowed-formats": "Alleen {{formats}}",
+  "change-password": "Wachtwoord wijzigen",
   "delete-account": "Account verwijderen",
+  "delete-account-warning-title": "Waarschuwing",
   "delete-confirmation": {
     "action-text": "Ik begrijp de consequentie, verwijder mijn account",
     "confirmation-text": "Verwijder mijn account",
     "instruction-text": "Typ a.u.b. <strong> {{text}} </strong> om te bevestigen",
     "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee worden uw account, opgeslagen bladwijzers, leessessies en al uw gegevens permanent verwijderd.",
     "title": "Weet je het absoluut zeker?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Ja",
+    "cancel-text": "Nee",
+    "subtitle": "Je verwijdert de profielfoto en zet deze terug naar de standaardafbeelding. Weet je het zeker?",
+    "title": "Profielfoto verwijderen"
+  },
+  "edit-details": "Details bewerken",
+  "email-notification-settings": "Instellingen voor e-mailmeldingen",
+  "errors": {
+    "remove-failed": "Het verwijderen van de profielfoto is mislukt. Probeer het opnieuw.",
+    "upload-failed": "Het uploaden van de profielfoto is mislukt. Probeer het opnieuw."
+  },
+  "max-file-size": "Max {{size}}",
+  "my-profile": "Mijn profiel",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Als je al een tijdje geen vooruitgang hebt geboekt, ontvang je een e-mail ter herinnering aan je Koran-doel.",
+      "title": "Doelherinnering"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk Ramadan-uitdaging 2026",
+      "title": "Dagelijkse Ramadan-uitdaging"
+    },
+    "quran-reading-program": {
+      "description": "Je ontvangt een e-mail met links naar de wekelijkse leesopdracht, reflectievragen en andere hulpmiddelen om je op het juiste spoor te houden.",
+      "title": "De Koran in een jaar"
+    },
+    "streaks-that-will-break": {
+      "description": "Je ontvangt een e-mail zodra je weet dat je reeks op het punt staat te worden onderbroken.",
+      "title": "Reeksen"
+    }
+  },
+  "personalization": "Personalisatie",
+  "profile-picture": "Profielfoto",
+  "remove-picture": "Afbeelding verwijderen",
+  "remove-success": "Profielfoto succesvol verwijderd",
+  "save-changes": "Wijzigingen opslaan",
+  "save-picture": "Afbeelding opslaan",
+  "success": {
+    "details": "Je profiel is succesvol bijgewerkt.",
+    "notifications": "Je notificatie-instellingen zijn succesvol bijgewerkt.",
+    "password": "Je wachtwoord is succesvol bijgewerkt."
+  },
+  "update-password": "Wachtwoord bijwerken",
+  "upload-picture": "Afbeelding uploaden",
+  "upload-success": "Profielfoto succesvol geüpload"
 }

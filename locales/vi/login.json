@@ -11,6 +11,7 @@
   "continue-email": "Tiếp tục với Email",
   "continue-facebook": "Tiếp tục với Facebook",
   "continue-google": "Tiếp tục với Google",
+  "current-password-placeholder": "Mật khẩu hiện tại",
   "email-placeholder": "Địa chỉ email",
   "error": {
     "email-required": "Thiếu email!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi hướng dẫn để bạn đặt lại mật khẩu.",
   "forgot-password-success": "Đã gửi email đặt lại mật khẩu! Kiểm tra hộp thư đến.",
   "forgot-password-title": "Quên mật khẩu?",
+  "hide-password": "Ẩn mật khẩu",
   "last-name-placeholder": "Họ",
   "login-cta": "Đăng nhập hoặc đăng ký ngay:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Đặt lại mật khẩu",
   "reset-password-success": "Đã đặt lại mật khẩu!",
   "set-new-password": "Đặt mật khẩu mới",
+  "show-password": "Hiển thị mật khẩu",
   "sign-in": "Đăng nhập",
   "sign-in-or-sign-up": "Đăng nhập hoặc Đăng ký bên dưới để tiếp tục",
   "sign-up": "Đăng ký",

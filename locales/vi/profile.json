@@ -1,10 +1,59 @@
 {
+  "allowed-formats": "Chỉ một {{formats}}",
+  "change-password": "Thay đổi mật khẩu",
   "delete-account": "Xóa tài khoản",
+  "delete-account-warning-title": "Cảnh báo",
   "delete-confirmation": {
     "action-text": "Tôi hiểu hậu quả, hãy xóa tài khoản của tôi.",
     "confirmation-text": "xóa tài khoản của tôi",
     "instruction-text": "Vui lòng nhập <strong>{{text}}</strong> để xác nhận",
     "subtitle": "Thao tác này không thể huỷ bỏ. Thao tác này sẽ xóa vĩnh viễn tài khoản, dấu trang đã lưu, lịch đọc và tất cả dữ liệu của bạn.",
     "title": "Bạn hoàn toàn chắc chắn chứ?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Đúng",
+    "cancel-text": "KHÔNG",
+    "subtitle": "Bạn sẽ xóa ảnh đại diện và đặt lại về ảnh mặc định, bạn chắc chắn chứ?",
+    "title": "Xóa ảnh đại diện"
+  },
+  "edit-details": "Chỉnh sửa chi tiết",
+  "email-notification-settings": "Cài đặt thông báo qua email",
+  "errors": {
+    "remove-failed": "Không thể xóa ảnh đại diện. Vui lòng thử lại.",
+    "upload-failed": "Tải ảnh đại diện lên không thành công. Vui lòng thử lại."
+  },
+  "max-file-size": "Tối đa {{size}}",
+  "my-profile": "Hồ sơ của tôi",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Nếu bạn không có tiến bộ nào trong một thời gian, một email sẽ được gửi để nhắc nhở bạn về mục tiêu học Kinh Qur'an của mình.",
+      "title": "Lời nhắc mục tiêu"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Thử thách Ramadan Surah Al-Mulk 2026",
+      "title": "Thử thách Ramadan hàng ngày"
+    },
+    "quran-reading-program": {
+      "description": "Bạn sẽ nhận được email kèm theo các đường dẫn đến bài đọc hàng tuần, gợi ý suy ngẫm và nhiều tài liệu khác để giúp bạn theo sát tiến độ học tập.",
+      "title": "Kinh Qur'an trong một năm"
+    },
+    "streaks-that-will-break": {
+      "description": "Bạn sẽ nhận được email thông báo khi chuỗi thành tích sắp bị gián đoạn.",
+      "title": "Vệt"
+    }
+  },
+  "personalization": "Cá nhân hóa",
+  "profile-picture": "Ảnh đại diện",
+  "remove-picture": "Xóa hình ảnh",
+  "remove-success": "Ảnh đại diện đã được xóa thành công.",
+  "save-changes": "Lưu thay đổi",
+  "save-picture": "Lưu ảnh",
+  "success": {
+    "details": "Hồ sơ của bạn đã được cập nhật thành công.",
+    "notifications": "Cài đặt thông báo của bạn đã được cập nhật thành công.",
+    "password": "Mật khẩu của bạn đã được cập nhật thành công."
+  },
+  "update-password": "Cập nhật mật khẩu",
+  "upload-picture": "Tải ảnh lên",
+  "upload-success": "Ảnh đại diện đã được tải lên thành công."
 }

@@ -1,0 +1,59 @@
+{
+  "allowed-formats": "{{formats}} ብቻ",
+  "change-password": "የይለፍ ቃል ቀይር",
+  "delete-account": "መለያ ሰርዝ",
+  "delete-account-warning-title": "ማስጠንቀቂያ",
+  "delete-confirmation": {
+    "action-text": "ውጤቱን ተረድቻለሁ፣ መለያዬን ሰርዝ",
+    "confirmation-text": "መለያዬን ሰርዝ",
+    "instruction-text": "ለማረጋገጥ እባክዎ <strong>{{text}}</strong>  ይተይቡ",
+    "subtitle": "ይህ እርምጃ ሊቀለበስ አይችልም። ይህ መለያዎን፣ የተቀመጡ ዕልባቶችን፣ የንባብ ክፍለ ጊዜዎችን እና ሁሉንም ውሂብዎን በቋሚነት ይሰርዛል።",
+    "title": "ሙሉ በሙሉ እርግጠኛ ነህ?"
+  },
+  "delete-profile-picture": {
+    "action-text": "አዎ",
+    "cancel-text": "አይ",
+    "subtitle": "የመገለጫ ፎቶውን ትሰርዘዋለህ እና ወደ ነባሪው ትመልሰዋለህ፣ እርግጠኛ ነህ?",
+    "title": "የመገለጫ ስዕል ሰርዝ"
+  },
+  "edit-details": "ዝርዝሮችን አርትዕ ያድርጉ",
+  "email-notification-settings": "የኢሜይል ማሳወቂያ ቅንብሮች",
+  "errors": {
+    "remove-failed": "የመገለጫ ፎቶውን ማስወገድ አልተሳካም። እባክዎ እንደገና ይሞክሩ።",
+    "upload-failed": "የመገለጫ ፎቶ መስቀል አልተሳካም። እባክዎ እንደገና ይሞክሩ።"
+  },
+  "max-file-size": "ቢበዛ {{size}}",
+  "my-profile": "የእኔ መገለጫ",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "ለተወሰነ ጊዜ እድገት ካላሳዩ የቁርዓን ግብዎን የሚያስታውስ ኢሜይል ይላክልዎታል።",
+      "title": "የግብ አስታዋሽ"
+    },
+    "daily-ramadan-challenge": {
+      "description": "ሱራ አል ሙልክ 2026 የረመዳን ፈተና",
+      "title": "ዕለታዊ የረመዳን ፈተና"
+    },
+    "quran-reading-program": {
+      "description": "ወደ ሳምንታዊ የንባብ ምደባ የሚወስዱ አገናኞችን፣ የማጣቀሻ ጥያቄዎችን እና ሌሎች ግብዓቶችን የያዘ ኢሜይል ይላካል።",
+      "title": "ቁርዓን በአንድ አመት ውስጥ"
+    },
+    "streaks-that-will-break": {
+      "description": "ሊቋረጥ ስለሆነው ተከታታይ ክስተት ለማሳወቅ ኢሜይል ይላክልዎታል።",
+      "title": "ትራኮች"
+    }
+  },
+  "personalization": "ግላዊነት ማላበስ",
+  "profile-picture": "የመገለጫ ሥዕል",
+  "remove-picture": "ፎቶን አስወግድ",
+  "remove-success": "የመገለጫ ስዕል በተሳካ ሁኔታ ተወግዷል",
+  "save-changes": "ለውጦችን አስቀምጥ",
+  "save-picture": "ፎቶ አስቀምጥ",
+  "success": {
+    "details": "መገለጫዎ በተሳካ ሁኔታ ተዘምኗል",
+    "notifications": "የማሳወቂያ ቅንብሮችዎ በተሳካ ሁኔታ ተዘምነዋል",
+    "password": "የይለፍ ቃልዎ በተሳካ ሁኔታ ተዘምኗል"
+  },
+  "update-password": "የይለፍ ቃል አዘምን",
+  "upload-picture": "ፎቶ ስቀል",
+  "upload-success": "የመገለጫ ፎቶ በተሳካ ሁኔታ ተሰቅሏል"
+}

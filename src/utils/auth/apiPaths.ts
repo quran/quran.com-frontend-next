@@ -56,6 +56,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -157,8 +159,13 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+export type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+};
 
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
+  makeUrl('courses', params as GetCoursesQueryParams);
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
 export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>
@@ -235,6 +242,12 @@ export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =
 
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
+
+export const makeReadingGoalCountUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/count', params);
+
+export const makeReadingGoalStatusUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/status', params);
 
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);

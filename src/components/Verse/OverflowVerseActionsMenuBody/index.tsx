@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import SaveToCollectionAction from '../SaveToCollectionAction';
 import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
@@ -9,6 +11,7 @@ import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
 import { isLoggedIn } from '@/utils/auth/login';
 import Verse from 'types/Verse';
 
@@ -17,6 +20,7 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;
+  isInsideStudyMode?: boolean;
 }
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({
@@ -24,8 +28,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   isTranslationView,
   onActionTriggered,
   bookmarksRangeUrl,
+  isInsideStudyMode = false,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
   return selectedMenu === VerseActionsMenuType.Main ? (
     <div>
@@ -34,19 +40,26 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
           isTranslationView={isTranslationView}
+          isInsideStudyMode={isInsideStudyMode}
         />
       )}
       <VerseActionAdvancedCopy
         onActionTriggered={onActionTriggered}
         verse={verse}
         isTranslationView={isTranslationView}
+        isInsideStudyMode={isInsideStudyMode}
       />
-      <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
-      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      {!isStudyModeOpen && (
+        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
+      )}
+      {!isStudyModeOpen && (
+        <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      )}
       <TranslationFeedbackAction
         verse={verse}
         isTranslationView={isTranslationView}
         onActionTriggered={onActionTriggered}
+        isInsideStudyMode={isInsideStudyMode}
       />
     </div>
   ) : (

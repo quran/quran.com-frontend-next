@@ -4,7 +4,6 @@
 $list-max-width: 80rem;
 
 .pageContainer {
-  padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
@@ -87,6 +86,7 @@ $list-max-width: 80rem;
 
 .bodyContainer {
   background: var(--color-background-elevated);
+  padding-block-end: var(--spacing-max);
   @include breakpoints.smallerThanTablet {
     border-start-start-radius: var(--border-radius-rounded);
     border-start-end-radius: var(--border-radius-rounded);

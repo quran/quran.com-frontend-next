@@ -33,10 +33,6 @@ interface UseDedupedFetchVerseResult {
   verse: Verse | null;
   firstVerseInPage: Verse | null;
   bookmarksRangeUrl: string | null;
-  notesRange: {
-    from: string;
-    to: string;
-  } | null;
 }
 
 /**
@@ -182,13 +178,6 @@ const useDedupedFetchVerse = ({
     verse,
     firstVerseInPage: effectiveVerses ? effectiveVerses[0] : null,
     bookmarksRangeUrl,
-    notesRange:
-      effectiveVerses && effectiveVerses.length > 0
-        ? {
-            from: effectiveVerses?.[0].verseKey,
-            to: effectiveVerses?.[effectiveVerses.length - 1].verseKey,
-          }
-        : null,
   };
 };
 

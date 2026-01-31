@@ -51,6 +51,10 @@ type TafsirBodyProps = {
   initialTafsirIdOrSlug?: number | string;
   scrollToTop: () => void;
   shouldRender?: boolean;
+  showArabicText?: boolean;
+  showNavigation?: boolean;
+  shouldShowFontControl?: boolean;
+  hasSeparateTafsirLayout?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -65,6 +69,10 @@ const TafsirBody = ({
   render,
   scrollToTop,
   shouldRender,
+  showArabicText = true,
+  showNavigation = true,
+  shouldShowFontControl = true,
+  hasSeparateTafsirLayout = false,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
@@ -83,6 +91,12 @@ const TafsirBody = ({
   const [selectedTafsirIdOrSlug, setSelectedTafsirIdOrSlug] = useState<number | string>(
     initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
   );
+
+  // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
+  useEffect(() => {
+    setSelectedChapterId(initialChapterId);
+    setSelectedVerseNumber(initialVerseNumber);
+  }, [initialChapterId, initialVerseNumber]);
 
   // if user opened tafsirBody via a url, we will have initialTafsirIdOrSlug
   // we need to set this `initialTafsirIdOrSlug` as a selectedTafsirIdOrSlug
@@ -227,25 +241,46 @@ const TafsirBody = ({
           {Object.values(verses).length > 1 && !!text && (
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
-          <div className={styles.verseTextContainer}>
-            <VerseTextPreview verses={Object.values(verses)} />
-          </div>
-          <div className={styles.separatorContainer}>
-            <Separator />
-          </div>
-          {!!text && (
-            <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
+          {showArabicText && (
+            <>
+              <div className={styles.verseTextContainer}>
+                <VerseTextPreview verses={Object.values(verses)} />
+              </div>
+              <div className={styles.separatorContainer}>
+                <Separator />
+              </div>
+            </>
           )}
-          <TafsirEndOfScrollingActions
-            hasNextVerseGroup={hasNextVerseGroup}
-            hasPrevVerseGroup={hasPrevVerseGroup}
-            onNextButtonClicked={loadNextVerseGroup}
-            onPreviousButtonClicked={loadPrevVerseGroup}
-          />
+          {!!text && (
+            <TafsirText
+              direction={langData.direction}
+              languageCode={langData.code}
+              text={text}
+              shouldShowFontControl={shouldShowFontControl}
+            />
+          )}
+          {showNavigation && (
+            <TafsirEndOfScrollingActions
+              hasNextVerseGroup={hasNextVerseGroup}
+              hasPrevVerseGroup={hasPrevVerseGroup}
+              onNextButtonClicked={loadNextVerseGroup}
+              onPreviousButtonClicked={loadPrevVerseGroup}
+            />
+          )}
         </div>
       );
     },
-    [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
+    [
+      chaptersData,
+      lang,
+      scrollToTop,
+      selectedChapterId,
+      selectedTafsirIdOrSlug,
+      showArabicText,
+      shouldShowFontControl,
+      showNavigation,
+      t,
+    ],
   );
 
   const onChapterIdChange = (newChapterId) => {
@@ -289,6 +324,7 @@ const TafsirBody = ({
       languageOptions={languageOptions}
       data={tafsirSelectionList}
       isLoading={isLoading}
+      hasSeparateLayout={hasSeparateTafsirLayout}
     />
   );
 

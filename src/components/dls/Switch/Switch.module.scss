@@ -7,7 +7,7 @@ $background-container-padding: calc(0.8 * var(--spacing-xxsmall));
 .container {
   position: relative;
   display: grid;
-  background-color: var(--color-background-alternative-faded);
+  background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-pill);
   padding-block-start: $container-padding;
   padding-block-end: $container-padding;

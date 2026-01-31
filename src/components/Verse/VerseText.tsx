@@ -28,7 +28,6 @@ type VerseTextProps = {
   isReadingMode?: boolean;
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
-  bookmarksRangeUrl?: string | null;
   tooltipType?: TooltipType;
   highlightedWordPosition?: number;
   isWordInteractionDisabled?: boolean;
@@ -40,7 +39,6 @@ const VerseText = ({
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
-  bookmarksRangeUrl,
   tooltipType,
   highlightedWordPosition,
   isWordInteractionDisabled = false,
@@ -102,15 +100,16 @@ const VerseText = ({
           {words?.map((word) => {
             const isHighlightedWord =
               highlightedWordPosition !== undefined && word.position === highlightedWordPosition;
+            const isHoveredWord = word.verseKey === hoveredVerseKey;
             return (
               <QuranWord
                 key={word.location}
                 word={word}
                 font={quranFont}
                 isFontLoaded={isFontLoaded}
-                isHighlighted={isHighlightedWord || word.verseKey === selectedVerseKey}
-                shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
-                bookmarksRangeUrl={bookmarksRangeUrl}
+                isHighlighted={
+                  isHighlightedWord || word.verseKey === selectedVerseKey || isHoveredWord
+                }
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
                 shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}

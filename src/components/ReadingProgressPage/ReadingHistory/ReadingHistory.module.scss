@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .monthsContainer {
   display: grid;
@@ -43,7 +43,7 @@
   pointer-events: none;
 
   p {
-    max-width: 75%;
+    max-inline-size: 75%;
     margin-inline: auto;
   }
 
@@ -55,7 +55,7 @@
 }
 
 .modalContentContainer {
-  width: 100%;
+  inline-size: 100%;
   margin-block-start: calc(var(--spacing-mega) * 2);
   @include breakpoints.smallerThanTablet {
     margin-block-end: calc(var(--spacing-mega) * 2);
@@ -113,7 +113,7 @@
       align-items: center;
       gap: var(--spacing-small);
 
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         svg {
           transform: rotate(180deg);
         }
@@ -137,7 +137,7 @@
   }
 
   p {
-    width: 100%;
+    inline-size: 100%;
     flex: 1;
     text-align: center;
     display: flex;
@@ -153,8 +153,8 @@
 
     svg {
       margin-block-end: var(--spacing-large);
-      width: calc(var(--spacing-mega) * 1.2);
-      height: calc(var(--spacing-mega) * 1.2);
+      inline-size: calc(var(--spacing-mega) * 1.2);
+      block-size: calc(var(--spacing-mega) * 1.2);
     }
   }
 }

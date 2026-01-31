@@ -1,6 +1,8 @@
 import AudioResponse from './AudioResponse';
+import RelatedVerse from './RelatedVerse';
 import Tafsir from './Tafsir';
 import Translation from './Translation';
+import VerseTiming from './VerseTiming';
 import type Word from './Word';
 
 interface Verse {
@@ -32,13 +34,9 @@ interface Verse {
   translations?: Translation[];
   tafsirs?: Tafsir[];
   audio?: AudioResponse;
-  timestamps?: {
-    verseKey: string;
-    timestampFrom: number;
-    timestampTo: number;
-    duration: number;
-    segments: [number[]];
-  };
+  timestamps?: VerseTiming;
+  hasRelatedVerses?: boolean;
+  relatedVerses?: RelatedVerse[];
 }
 
 export default Verse;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { defaultValueCtx, Editor, rootCtx, editorViewOptionsCtx } from '@milkdown/kit/core';
 import { commonmark } from '@milkdown/kit/preset/commonmark';
@@ -15,6 +15,8 @@ type Props = {
 };
 
 const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
   const { get } = useEditor((root) => {
     return Editor.make()
       .config((ctx) => {
@@ -34,6 +36,10 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
   }, []);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     if (defaultValue) {
       get()?.action(replaceAll(defaultValue));
     }
@@ -41,6 +47,7 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
 
   return (
     <div className={styles.content}>
+      {!isMounted && defaultValue && <div className={styles.ssrFallback}>{defaultValue}</div>}
       <Milkdown />
     </div>
   );
