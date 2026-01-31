@@ -16,19 +16,21 @@ import { addNote } from '@/utils/auth/api';
 
 interface AddNoteModalProps {
   notesCount?: number;
-  onMyNotes: () => void;
   isModalOpen: boolean;
+  verseKeys: string[];
+  showRanges?: boolean;
+  onMyNotes: () => void;
   onModalClose: () => void;
-  verseKey: string;
   onBack?: () => void;
 }
 
 const AddNoteModal: React.FC<AddNoteModalProps> = ({
   notesCount = 0,
-  onMyNotes,
   isModalOpen,
+  verseKeys,
+  showRanges = false,
   onModalClose,
-  verseKey,
+  onMyNotes,
   onBack,
 }) => {
   const { t } = useTranslation('notes');
@@ -39,7 +41,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
     try {
       const data = await addNote({
         body: note,
-        ranges: [`${verseKey}-${verseKey}`],
+        ranges: verseKeys,
         saveToQR: isPublic,
       });
 
@@ -55,7 +57,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
       invalidateCache({
         mutate,
         cache,
-        verseKeys: [verseKey],
+        verseKeys,
         note:
           isFailedToPublish || !isPublic
             ? noteFromResponse
@@ -83,6 +85,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
       onMyNotes={onMyNotes}
       notesCount={notesCount}
       onSaveNote={handleSaveNote}
+      ranges={showRanges ? verseKeys.map((verseKey) => `${verseKey}-${verseKey}`) : undefined}
       dataTestId="add-note-modal-content"
     />
   );

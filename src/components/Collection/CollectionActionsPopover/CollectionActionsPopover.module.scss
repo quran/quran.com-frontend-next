@@ -5,6 +5,9 @@
 
 .menuItem {
   cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
 }
 
 .menuItemText {

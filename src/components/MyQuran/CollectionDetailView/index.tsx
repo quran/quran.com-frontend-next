@@ -6,10 +6,12 @@ import useSWRInfinite from 'swr/infinite';
 
 import styles from './CollectionDetailView.module.scss';
 
-import CollectionActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionActionsPopover';
+import CollectionBulkActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionBulkActionsPopover';
+import CollectionHeaderActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover';
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
+import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import { ArrowDirection } from '@/dls/Sorter/Sorter';
@@ -24,6 +26,7 @@ import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
+import { makeVerseKey } from '@/utils/verse';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
@@ -45,10 +48,12 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
 
-  // Bulk actions state
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedBookmarks, setSelectedBookmarks] = useState<Set<string>>(new Set());
   const [expandedCardIds, setExpandedCardIds] = useState<Set<string>>(new Set());
+
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
+  const [noteModalVerseKeys, setNoteModalVerseKeys] = useState<string[]>([]);
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
@@ -169,22 +174,44 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   );
 
   const handleNoteClick = useCallback(() => {
-    // TODO: Implement note functionality
-    // This will open a modal/dialog to add notes to all bookmarks in the collection
+    // Get all verse keys from bookmarks in the collection
+    const verseKeys = filteredBookmarks.map((bookmark) =>
+      makeVerseKey(bookmark.key, bookmark.verseNumber),
+    );
+
+    setNoteModalVerseKeys(verseKeys);
+    setIsNoteModalOpen(true);
+
     logButtonClick('collection_detail_note_click', {
       collectionId: slugifiedCollectionIdToCollectionId(collectionId),
       selectedCount: selectedBookmarks.size,
-      isBulkAction: selectedBookmarks.size > 0,
+      isBulkAction: false,
     });
-  }, [collectionId, selectedBookmarks.size]);
+  }, [collectionId, filteredBookmarks, selectedBookmarks.size]);
 
   const handleBulkNoteClick = useCallback(() => {
-    // TODO: Implement bulk note functionality for selected bookmarks
+    // Get verse keys only from selected bookmarks
+    const selectedBookmarksList = filteredBookmarks.filter((bookmark) =>
+      selectedBookmarks.has(bookmark.id),
+    );
+
+    const verseKeys = selectedBookmarksList.map((bookmark) =>
+      makeVerseKey(bookmark.key, bookmark.verseNumber),
+    );
+
+    setNoteModalVerseKeys(verseKeys);
+    setIsNoteModalOpen(true);
+
     logButtonClick('collection_detail_bulk_note_click', {
       collectionId: slugifiedCollectionIdToCollectionId(collectionId),
       selectedCount: selectedBookmarks.size,
     });
-  }, [collectionId, selectedBookmarks.size]);
+  }, [collectionId, filteredBookmarks, selectedBookmarks]);
+
+  const handleNoteModalClose = useCallback(() => {
+    setIsNoteModalOpen(false);
+    setNoteModalVerseKeys([]);
+  }, []);
 
   if (error) {
     return <div>{t('common:error.general')}</div>;
@@ -275,14 +302,14 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
               ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
               : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
           </span>
-          <CollectionActionsPopover
+          <CollectionHeaderActionsPopover
             onNoteClick={handleNoteClick}
             dataTestPrefix="collection-header-actions"
           >
             <button type="button" className={styles.iconButton} aria-label={t('common:more')}>
               <MenuMoreHorizIcon />
             </button>
-          </CollectionActionsPopover>
+          </CollectionHeaderActionsPopover>
         </div>
       </div>
 
@@ -307,7 +334,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
               {t('bulk-actions.cancel')}
             </Button>
             {selectedBookmarks.size > 0 ? (
-              <CollectionActionsPopover
+              <CollectionBulkActionsPopover
                 onNoteClick={handleBulkNoteClick}
                 dataTestPrefix="collection-bulk-actions"
               >
@@ -320,7 +347,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
                     count: toLocalizedNumber(selectedBookmarks.size, lang),
                   })}
                 </Button>
-              </CollectionActionsPopover>
+              </CollectionBulkActionsPopover>
             ) : (
               <Button
                 variant={ButtonVariant.Ghost}
@@ -371,8 +398,17 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           </Button>
         </div>
       )}
+
       <StudyModeContainer />
       <VerseActionModalContainer />
+
+      <AddNoteModal
+        showRanges
+        isModalOpen={isNoteModalOpen}
+        onModalClose={handleNoteModalClose}
+        onMyNotes={handleNoteModalClose}
+        verseKeys={noteModalVerseKeys}
+      />
     </div>
   );
 };
