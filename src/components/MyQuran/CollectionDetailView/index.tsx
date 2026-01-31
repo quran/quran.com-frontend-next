@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWRInfinite from 'swr/infinite';
@@ -7,9 +7,11 @@ import useSWRInfinite from 'swr/infinite';
 import styles from './CollectionDetailView.module.scss';
 
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
-import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
+import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
+import { ArrowDirection } from '@/dls/Sorter/Sorter';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
@@ -40,6 +42,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
+
+  // Bulk actions state
+  const [isSelectMode, setIsSelectMode] = useState(false);
+  const [selectedBookmarks, setSelectedBookmarks] = useState<Set<string>>(new Set());
+  const [expandedCardIds, setExpandedCardIds] = useState<Set<string>>(new Set());
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
@@ -80,6 +87,84 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       return verseKey.includes(query);
     });
   }, [bookmarks, searchQuery]);
+
+  // Bulk actions handlers (defined after filteredBookmarks to avoid reference errors)
+  const toggleSelectMode = useCallback(() => {
+    setIsSelectMode((prev) => {
+      const newValue = !prev;
+      if (prev) {
+        // Clear selections when exiting select mode
+        setSelectedBookmarks(new Set());
+      }
+      return newValue;
+    });
+    logButtonClick('collection_detail_toggle_select_mode', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      isEntering: !isSelectMode,
+    });
+  }, [collectionId, isSelectMode]);
+
+  const handleToggleExpandCollapseAll = useCallback(() => {
+    const allIds = new Set(filteredBookmarks.map((b) => b.id));
+    const isAllExpanded =
+      filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
+
+    if (isAllExpanded) {
+      // Collapse all
+      setExpandedCardIds(new Set());
+      logButtonClick('collection_detail_collapse_all', {
+        collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      });
+    } else {
+      // Expand all
+      setExpandedCardIds(allIds);
+      logButtonClick('collection_detail_expand_all', {
+        collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      });
+    }
+  }, [filteredBookmarks, expandedCardIds, collectionId]);
+
+  const isAllExpanded = React.useMemo(() => {
+    return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
+  }, [filteredBookmarks, expandedCardIds]);
+
+  const handleToggleBookmarkSelection = useCallback((bookmarkId: string) => {
+    setSelectedBookmarks((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(bookmarkId)) {
+        newSet.delete(bookmarkId);
+      } else {
+        newSet.add(bookmarkId);
+      }
+      return newSet;
+    });
+  }, []);
+
+  const handleToggleCardExpansion = useCallback((bookmarkId: string) => {
+    setExpandedCardIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(bookmarkId)) {
+        newSet.delete(bookmarkId);
+      } else {
+        newSet.add(bookmarkId);
+      }
+      return newSet;
+    });
+  }, []);
+
+  const isCardExpanded = useCallback(
+    (bookmarkId: string) => {
+      return expandedCardIds.has(bookmarkId);
+    },
+    [expandedCardIds],
+  );
+
+  const isBookmarkSelected = useCallback(
+    (bookmarkId: string) => {
+      return selectedBookmarks.has(bookmarkId);
+    },
+    [selectedBookmarks],
+  );
 
   if (error) {
     return <div>{t('common:error.general')}</div>;
@@ -132,8 +217,31 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     data?.[0]?.data?.bookmarks.length ||
     0;
 
+  const sortOptions = [
+    {
+      id: CollectionDetailSortOption.RecentlyAdded,
+      label: t('collection:recently-added'),
+      direction: ArrowDirection.Down,
+    },
+    {
+      id: CollectionDetailSortOption.VerseKey,
+      label: t('collection:verse-key'),
+      direction: ArrowDirection.Up,
+    },
+  ];
+
   return (
     <div className={styles.container}>
+      <div className={styles.topActions}>
+        <CollectionSorter
+          selectedOptionId={sortBy}
+          onChange={onSortByChange}
+          options={sortOptions}
+          isSingleCollection
+          collectionId={slugifiedCollectionIdToCollectionId(collectionId)}
+        />
+      </div>
+
       <div className={styles.header}>
         <Button onClick={onBack} variant={ButtonVariant.Ghost} className={styles.backButton}>
           <ChevronLeft />
@@ -148,6 +256,51 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         </span>
       </div>
 
+      <div className={styles.bulkActionsContainer}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          size={ButtonSize.XSmall}
+          className={styles.bulkActionButton}
+          onClick={handleToggleExpandCollapseAll}
+        >
+          {isAllExpanded ? t('bulk-actions.collapse-all') : t('bulk-actions.expand-all')}
+        </Button>
+
+        {isSelectMode ? (
+          <div className={styles.selectModeActions}>
+            <Button
+              variant={ButtonVariant.Ghost}
+              size={ButtonSize.XSmall}
+              className={styles.bulkActionButton}
+              onClick={toggleSelectMode}
+            >
+              {t('bulk-actions.cancel')}
+            </Button>
+            <Button
+              variant={ButtonVariant.Ghost}
+              size={ButtonSize.XSmall}
+              className={styles.bulkActionButton}
+              onClick={toggleSelectMode}
+              isDisabled={selectedBookmarks.size === 0}
+            >
+              {t(
+                selectedBookmarks.size > 0 ? 'bulk-actions.actions-count' : 'bulk-actions.actions',
+                { count: toLocalizedNumber(selectedBookmarks.size, lang) },
+              )}
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant={ButtonVariant.Ghost}
+            className={styles.bulkActionButton}
+            size={ButtonSize.XSmall}
+            onClick={toggleSelectMode}
+          >
+            {t('bulk-actions.select')}
+          </Button>
+        )}
+      </div>
+
       <CollectionDetail
         id={slugifiedCollectionIdToCollectionId(collectionId)}
         title={collectionName}
@@ -158,6 +311,13 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         isOwner={isOwner}
         shouldShowTitle={false}
         onBack={onBack}
+        isSelectMode={isSelectMode}
+        selectedBookmarks={selectedBookmarks}
+        expandedCardIds={expandedCardIds}
+        onToggleBookmarkSelection={handleToggleBookmarkSelection}
+        onToggleCardExpansion={handleToggleCardExpansion}
+        isCardExpanded={isCardExpanded}
+        isBookmarkSelected={isBookmarkSelected}
       />
 
       {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}

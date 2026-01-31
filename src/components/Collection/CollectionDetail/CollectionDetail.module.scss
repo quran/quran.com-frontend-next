@@ -1,6 +1,8 @@
 @use 'src/styles/breakpoints';
 
 .header {
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
   display: flex;
   justify-content: space-between;
   // Smooth entrance animation

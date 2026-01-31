@@ -1,16 +1,15 @@
+/* eslint-disable react/no-unused-prop-types */
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
 import { getMyQuranNavigationUrl } from '../../../utils/navigation';
-import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 import CollectionVerseCell from './CollectionVerseCell';
 
 import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import { ArrowDirection } from '@/dls/Sorter/Sorter';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
@@ -21,39 +20,43 @@ type CollectionDetailProps = {
   title: string;
   isOwner: boolean;
   bookmarks: Bookmark[];
+
+  /* todo: remove these props and remove eslint no-unused-prop-types
+   * we have to delete old collection pages and old components where those are not in used anymore
+   */
   sortBy: CollectionDetailSortOption;
   onSortByChange: (sortBy: string) => void;
+
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
   onBack?: () => void;
+
+  // Bulk actions props
+  isSelectMode?: boolean;
+  selectedBookmarks?: Set<string>;
+  expandedCardIds?: Set<string>;
+  onToggleBookmarkSelection?: (bookmarkId: string) => void;
+  onToggleCardExpansion?: (bookmarkId: string) => void;
+  isCardExpanded?: (bookmarkId: string) => boolean;
+  isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
 const CollectionDetail = ({
   id,
   title,
   bookmarks,
-  sortBy,
-  onSortByChange,
   onItemDeleted,
   isOwner,
   shouldShowTitle = true,
   onBack,
+  isSelectMode = false,
+  onToggleBookmarkSelection,
+  onToggleCardExpansion,
+  isCardExpanded,
+  isBookmarkSelected,
 }: CollectionDetailProps) => {
   const { t } = useTranslation();
   const router = useRouter();
-
-  const sortOptions = [
-    {
-      id: CollectionDetailSortOption.RecentlyAdded,
-      label: t('collection:recently-added'),
-      direction: ArrowDirection.Down,
-    },
-    {
-      id: CollectionDetailSortOption.VerseKey,
-      label: t('collection:verse-key'),
-      direction: ArrowDirection.Up,
-    },
-  ];
 
   const isCollectionEmpty = bookmarks.length === 0;
 
@@ -73,15 +76,6 @@ const CollectionDetail = ({
       <div className={styles.container}>
         <div className={styles.header}>
           {shouldShowTitle && <div className={styles.title}>{title}</div>}
-          {isOwner && (
-            <CollectionSorter
-              selectedOptionId={sortBy}
-              onChange={onSortByChange}
-              options={sortOptions}
-              isSingleCollection
-              collectionId={id}
-            />
-          )}
         </div>
         <div className={styles.collectionItemsContainer}>
           {isCollectionEmpty ? (
@@ -107,6 +101,11 @@ const CollectionDetail = ({
                   isOwner={isOwner}
                   onDelete={onItemDeleted}
                   createdAt={bookmark.createdAt}
+                  isSelectMode={isSelectMode}
+                  isSelected={isBookmarkSelected?.(bookmark.id)}
+                  onToggleSelection={onToggleBookmarkSelection}
+                  isExpanded={isCardExpanded?.(bookmark.id)}
+                  onToggleExpansion={onToggleCardExpansion}
                 />
               )}
             />

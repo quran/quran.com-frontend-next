@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CollectionVerseCell.module.scss';
 import VerseDisplay from './VerseDisplay';
 
-import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import Checkbox from '@/components/dls/Forms/Checkbox/Checkbox';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import Separator from '@/dls/Separator/Separator';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
+import ArrowIcon from '@/icons/arrow.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { getChapterData } from '@/utils/chapter';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
@@ -29,6 +29,11 @@ type CollectionVerseCellProps = {
   isOwner: boolean;
   onDelete?: (bookmarkId: string) => void;
   createdAt?: string;
+  isSelectMode?: boolean;
+  isSelected?: boolean;
+  onToggleSelection?: (bookmarkId: string) => void;
+  isExpanded?: boolean;
+  onToggleExpansion?: (bookmarkId: string) => void;
 };
 
 const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
@@ -38,11 +43,14 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   collectionId,
   collectionName,
   isOwner,
-  onDelete,
   createdAt,
+  isSelectMode = false,
+  isSelected = false,
+  isExpanded = false,
+  onDelete,
+  onToggleSelection,
+  onToggleExpansion,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const confirm = useConfirm();
@@ -78,16 +86,11 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
       }),
     });
 
-    const eventData = {
-      verseKey,
-      collectionId,
-    };
+    const eventData = { verseKey, collectionId };
 
     if (isConfirmed) {
       logButtonClick('bookmark_delete_confirm', eventData);
-      if (onDelete) {
-        onDelete(bookmarkId);
-      }
+      if (onDelete) onDelete(bookmarkId);
     } else {
       logButtonClick('bookmark_delete_confirm_cancel', eventData);
     }
@@ -97,13 +100,11 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
     <div className={styles.outerContainer}>
       <div
         className={styles.headerContainer}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => onToggleExpansion?.(bookmarkId)}
         role="button"
         tabIndex={0}
-        onKeyPress={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            setIsOpen(!isOpen);
-          }
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
         }}
       >
         <div className={styles.headerLeft}>
@@ -111,31 +112,44 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
           {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
         </div>
         <div className={styles.headerRight}>
-          <PopoverMenu
-            trigger={
-              <Button
-                variant={ButtonVariant.Ghost}
-                className={styles.menuButton}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <OverflowMenuIcon />
-              </Button>
-            }
-          >
-            {isOwner && (
-              <PopoverMenu.Item onClick={handleDelete}>{t('common:delete')}</PopoverMenu.Item>
-            )}
-            <PopoverMenu.Item onClick={handleGoToAyah} shouldCloseMenuAfterClick>
-              {t('collection:go-to-ayah')}
-            </PopoverMenu.Item>
-          </PopoverMenu>
-          <div className={styles.chevronButton}>
-            <ChevronDownIcon className={isOpen ? styles.chevronUp : styles.chevronDown} />
+          {isSelectMode ? (
+            <Checkbox
+              id={`checkbox-${bookmarkId}`}
+              checked={isSelected}
+              onChange={() => onToggleSelection?.(bookmarkId)}
+              onClick={(e) => e.stopPropagation()}
+              checkboxClassName={styles.checkbox}
+              containerClassName={styles.checkboxContainer}
+            />
+          ) : (
+            <PopoverMenu
+              trigger={
+                <button
+                  type="button"
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label={t('common:more')}
+                  className={styles.iconButton}
+                >
+                  <OverflowMenuIcon className={styles.dot3} />
+                </button>
+              }
+            >
+              {isOwner && (
+                <PopoverMenu.Item onClick={handleDelete}>{t('common:delete')}</PopoverMenu.Item>
+              )}
+              <PopoverMenu.Item onClick={handleGoToAyah} shouldCloseMenuAfterClick>
+                {t('collection:go-to-ayah')}
+              </PopoverMenu.Item>
+            </PopoverMenu>
+          )}
+
+          <div className={styles.iconButton}>
+            <ArrowIcon className={isExpanded ? styles.arrowUp : styles.arrowDown} />
           </div>
         </div>
       </div>
 
-      {isOpen && (
+      {isExpanded && (
         <>
           <Separator className={styles.contentSeparator} />
           <div className={styles.cellContainer} data-verse-key={verseKey}>

@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 
 .outerContainer {
   display: flex;
@@ -46,45 +47,54 @@
 .headerRight {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xxsmall-px);
+  gap: var(--spacing-small-px);
 }
 
-.menuButton {
-  padding: var(--spacing-xsmall-px);
+.iconButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
+
+  &,
+  & svg {
+    color: var(--color-text-default-new);
+  }
+
+  cursor: pointer;
   min-inline-size: auto;
-  transition: all var(--transition-fast) ease-out;
   border-radius: var(--border-radius-small-px);
 
-  &:hover {
-    background: var(--color-background-alternative);
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: scale(constants.$button-active-scale);
   }
 }
 
-.chevronButton {
-  padding: var(--spacing-xsmall-px);
-  min-inline-size: auto;
-  transition: all var(--transition-fast) ease-out;
-  border-radius: var(--border-radius-small-px);
-
-  &:hover {
-    background: var(--color-background-alternative);
-  }
-
-  svg {
-    transition: transform var(--transition-moderate) ease-out;
-  }
+.dot3 {
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
 }
 
-.chevronUp {
-  transform: rotate(180deg);
+.arrowUp,
+.arrowDown {
+  inline-size: var(--spacing-small-px);
+  block-size: var(--spacing-medium-px);
 }
 
-.chevronDown {
-  transform: rotate(0deg);
+.arrowUp {
+  transform: rotate(-90deg);
+}
+
+.arrowDown {
+  transform: rotate(90deg);
 }
 
 .cellContainer {
@@ -143,5 +153,36 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.headerRight {
+  .checkboxContainer {
+    margin: 0;
+  }
+
+  .checkbox {
+    cursor: pointer;
+    box-sizing: border-box;
+
+    block-size: var(--spacing-medium2-px);
+    inline-size: var(--spacing-medium2-px);
+    border-radius: var(--border-radius-xsmall2-px);
+    background: var(--color-daily-progress);
+    border-color: var(--color-text-white);
+
+    &:hover {
+      border-color: var(--color-blue-buttons-and-icons);
+    }
+
+    &[data-state='checked'],
+    & [data-state='checked'] {
+      border-color: var(--color-blue-buttons-and-icons);
+      background: var(--color-blue-buttons-and-icons);
+
+      path {
+        stroke: var(--color-text-white);
+      }
+    }
   }
 }
