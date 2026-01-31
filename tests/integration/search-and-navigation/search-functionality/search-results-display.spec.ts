@@ -3,7 +3,9 @@ import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
-const HAR_QUERY = 'har';
+// note: the external API used for search suggestions can change and thus
+// gives different results over time.
+const SEARCH_QUERY = 'kawthar';
 
 test.describe('Search result regressions', () => {
   let homePage: Homepage;
@@ -15,15 +17,15 @@ test.describe('Search result regressions', () => {
 
   test('homepage search results show bilingual Quran entries for har', async ({ page }) => {
     const searchResponse = page.waitForResponse((response) => response.url().includes('/search'));
-    const dropdown = await homePage.searchFor(HAR_QUERY);
+    const dropdown = await homePage.searchFor(SEARCH_QUERY);
     await searchResponse;
 
     await expect(dropdown).toBeVisible();
     await expect(dropdown.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
-    await expect(dropdown.getByText('And invoke not besides Allâh')).toBeVisible();
-    await expect(dropdown.getByText('وَلَا تَدْعُ مِن دُونِ ٱللَّهِ')).toBeVisible();
-    await expect(dropdown.getByText('(Yunus 10:106)')).toBeVisible();
-    await expect(dropdown.getByText('(يونس ١٠:١٠٦)')).toBeVisible();
+    await expect(dropdown.getByText('We have granted you')).toBeVisible();
+    await expect(dropdown.getByText('إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ ')).toBeVisible();
+    await expect(dropdown.getByText('(Al-Kawthar 108:1)')).toBeVisible();
+    await expect(dropdown.getByText('(الكوثر ١٠٨:١)')).toBeVisible();
   });
 
   test('search drawer keeps bilingual layout for har', async ({ page }) => {
@@ -31,34 +33,30 @@ test.describe('Search result regressions', () => {
 
     const drawerInput = page.getByTestId('search-drawer-header').locator('input');
     const searchResponse = page.waitForResponse((response) => response.url().includes('/search'));
-    await drawerInput.fill(HAR_QUERY);
+    await drawerInput.fill(SEARCH_QUERY);
     await searchResponse;
 
     const drawerResults = page.getByTestId('search-drawer');
     await expect(drawerResults).toBeVisible();
     await expect(drawerResults.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
-    await expect(drawerResults.getByText('And invoke not besides Allâh')).toBeVisible();
-    await expect(drawerResults.getByText('وَلَا تَدْعُ مِن دُونِ ٱللَّهِ')).toBeVisible();
-    await expect(drawerResults.getByText('(Yunus 10:106)')).toBeVisible();
-    await expect(drawerResults.getByText('(يونس ١٠:١٠٦)')).toBeVisible();
+    await expect(drawerResults.getByText('We have granted you')).toBeVisible();
+    await expect(drawerResults.getByText('إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ ')).toBeVisible();
+    await expect(drawerResults.getByText('(Al-Kawthar 108:1)')).toBeVisible();
+    await expect(drawerResults.getByText('(الكوثر ١٠٨:١)')).toBeVisible();
   });
 
   test('dedicated search page renders bilingual results for har', async ({ page }) => {
     const searchResponse = page.waitForResponse((response) => response.url().includes('/search'));
-    await homePage.goTo('/search?query=har');
+    await homePage.goTo(`/search?query=${SEARCH_QUERY}`);
     await searchResponse;
 
     const searchResults = page.getByTestId('search-drawer-container');
     await expect(searchResults).toBeVisible();
     await expect(searchResults.getByText('108. Al-Kawthar (The Abundance)')).toBeVisible();
-    await expect(
-      searchResults.getByText('And Allah has made your homes a place to rest'),
-    ).toBeVisible();
-    await expect(
-      searchResults.getByText('وَٱللَّهُ جَعَلَ لَكُم مِّنۢ بُيُوتِكُمْ سَكَنًا'),
-    ).toBeVisible();
-    await expect(searchResults.getByText('(An-Nahl 16:80)')).toBeVisible();
-    await expect(searchResults.getByText('(النحل ١٦:٨٠)')).toBeVisible();
+    await expect(searchResults.getByText('We have granted you')).toBeVisible();
+    await expect(searchResults.getByText('إِنَّآ أَعْطَيْنَـٰكَ ٱلْكَوْثَرَ ')).toBeVisible();
+    await expect(searchResults.getByText('(Al-Kawthar 108:1)')).toBeVisible();
+    await expect(searchResults.getByText('(الكوثر ١٠٨:١)')).toBeVisible();
   });
 
   test('searching for a page displays correct result', async ({ page }) => {

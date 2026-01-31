@@ -22,6 +22,7 @@ import {
 import { Direction } from '@/utils/locale';
 import { getSearchNavigationResult } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import ChaptersData from 'types/ChaptersData';
 
 export type SearchResultTextClasses = {
   textWrapper: string;
@@ -37,6 +38,7 @@ export type SearchResultTextClasses = {
 type Props = {
   result: SearchNavigationResult;
   classes?: SearchResultTextClasses;
+  arabicChaptersData?: ChaptersData;
   /**
    * Whether to transform the result (normalize into a display-ready SearchNavigationResult).
    * Usually true, except when rendering the SEARCH_PAGE row.
@@ -63,10 +65,12 @@ const SearchResultText: React.FC<Props> = ({
   classes,
   shouldTransform = true,
   textTag = 'div',
+  arabicChaptersData: arabicChaptersDataProp,
 }) => {
   const { t, lang } = useTranslation('common');
   // Arabic chapter data needed for Arabic surah names in bilingual display
-  const arabicChaptersData = useGetChaptersData(Language.AR);
+  const arabicChaptersDataFromHook = useGetChaptersData(Language.AR);
+  const arabicChaptersData = arabicChaptersDataProp ?? arabicChaptersDataFromHook;
   // User's locale chapter data for transliterated names
   const chaptersData = useContext(DataContext);
   const textClasses = (classes || searchResultTextStyles) as SearchResultTextClasses;
