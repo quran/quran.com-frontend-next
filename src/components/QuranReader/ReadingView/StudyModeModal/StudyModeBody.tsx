@@ -76,35 +76,37 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} shouldUseModalZIndex />
-      <div className={styles.arabicVerseContainer}>
-        {showWordBox && selectedWord && (
-          <WordNavigationBox
-            word={selectedWord}
-            onPrevious={onNavigatePreviousWord}
-            onNext={onNavigateNextWord}
-            onClose={onWordBoxClose}
-            canNavigatePrev={canNavigateWordPrev}
-            canNavigateNext={canNavigateWordNext}
-          />
-        )}
-        <StudyModeVerseText
-          words={getVerseWords(verse)}
-          highlightedWordLocation={selectedWordLocation}
-          onWordClick={onWordClick}
-        />
-      </div>
-      <div className={styles.translationsContainer}>
-        {verse.translations?.map((translation: Translation) => (
-          <div key={translation.id} className={styles.translationContainer}>
-            <TranslationText
-              translationFontScale={quranReaderStyles.translationFontScale}
-              text={translation.text}
-              languageId={translation.languageId}
-              resourceName={verse.translations?.length > 1 ? translation.resourceName : null}
+      <div className={styles.ayahContainer}>
+        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} shouldUseModalZIndex />
+        <div className={styles.arabicVerseContainer}>
+          {showWordBox && selectedWord && (
+            <WordNavigationBox
+              word={selectedWord}
+              onPrevious={onNavigatePreviousWord}
+              onNext={onNavigateNextWord}
+              onClose={onWordBoxClose}
+              canNavigatePrev={canNavigateWordPrev}
+              canNavigateNext={canNavigateWordNext}
             />
-          </div>
-        ))}
+          )}
+          <StudyModeVerseText
+            words={getVerseWords(verse)}
+            highlightedWordLocation={selectedWordLocation}
+            onWordClick={onWordClick}
+          />
+        </div>
+        <div className={styles.translationsContainer}>
+          {verse.translations?.map((translation: Translation) => (
+            <div key={translation.id} className={styles.translationContainer}>
+              <TranslationText
+                translationFontScale={quranReaderStyles.translationFontScale}
+                text={translation.text}
+                languageId={translation.languageId}
+                resourceName={verse.translations?.length > 1 ? translation.resourceName : null}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div

@@ -41,38 +41,32 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
   };
 
   return (
-    <div
-      className={classNames(styles.bottomActionsContainer, {
-        [styles.noBorder]: !activeTab,
-      })}
-    >
-      <div className={styles.tabsContainer}>
-        {tabs
-          .filter((tab) => tab.condition !== false)
-          .map((tab, index, filteredTabs) => (
-            <React.Fragment key={tab.id}>
-              <div
-                className={classNames(styles.tabItem, {
-                  [styles.tabItemActive]: activeTab === tab.id,
-                })}
-                data-testid={`study-mode-tab-${tab.id}`}
-                onClick={() => handleTabClick(tab.onClick)}
-                onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
-                role="button"
-                tabIndex={0}
-                aria-label={tab.label}
-              >
-                <span className={styles.tabIcon}>{tab.icon}</span>
-                <span className={styles.tabLabel}>{tab.label}</span>
+    <div className={styles.tabsContainer}>
+      {tabs
+        .filter((tab) => tab.condition !== false)
+        .map((tab, index, filteredTabs) => (
+          <React.Fragment key={tab.id}>
+            <div
+              className={classNames(styles.tabItem, {
+                [styles.tabItemActive]: activeTab === tab.id,
+              })}
+              data-testid={`study-mode-tab-${tab.id}`}
+              onClick={() => handleTabClick(tab.onClick)}
+              onKeyDown={(e) => handleTabKeyDown(e, tab.onClick)}
+              role="button"
+              tabIndex={0}
+              aria-label={tab.label}
+            >
+              <span className={styles.tabIcon}>{tab.icon}</span>
+              <span className={styles.tabLabel}>{tab.label}</span>
+            </div>
+            {index < filteredTabs.length - 1 && (
+              <div className={styles.separatorContainer}>
+                <Separator isVertical weight={SeparatorWeight.SemiBold} />
               </div>
-              {index < filteredTabs.length - 1 && (
-                <div className={styles.separatorContainer}>
-                  <Separator isVertical weight={SeparatorWeight.SemiBold} />
-                </div>
-              )}
-            </React.Fragment>
-          ))}
-      </div>
+            )}
+          </React.Fragment>
+        ))}
     </div>
   );
 };

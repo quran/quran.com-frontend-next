@@ -1,20 +1,13 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
-.bottomActionsContainer {
+.tabsContainer {
+  @include utility.scrollbar-none;
+  @include utility.edgeHorizontalPadding;
+  box-sizing: border-box;
   overflow-x: auto;
   inline-size: 100%;
   padding-block: var(--spacing-medium2-px);
-  position: sticky;
-  inset-block-end: 0;
-  background: var(--color-background-default);
-  border-block-end: 1px solid var(--color-borders-hairline);
-
-  &.noBorder {
-    border-block-end: none;
-  }
-}
-
-.tabsContainer {
   display: flex;
   flex-direction: row;
   align-items: center;

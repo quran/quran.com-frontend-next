@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .container {
   padding: 0;
@@ -6,19 +7,16 @@
 
 // Use div selector for higher specificity to override ContentModal defaults
 div.contentModal {
-  padding: var(--spacing-medium-px);
+  padding: 0;
   display: flex;
   flex-direction: column;
   block-size: auto;
-  max-block-size: 95dvh;
+  block-size: 95dvh;
   inline-size: 100%;
   max-inline-size: 100%;
   overflow-x: hidden;
   border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
-    padding-inline: var(--spacing-large-px);
-    padding-block-start: var(--spacing-xlarge-px);
-    padding-block-end: var(--spacing-medium2-px);
     max-block-size: 85vh;
     inline-size: 80%;
     max-inline-size: 80%;
@@ -49,11 +47,6 @@ div.mobileBottomSheetOverlay {
   gap: var(--spacing-small-px);
   inline-size: 100%;
   flex-shrink: 0;
-  border-block-end: 1px solid var(--color-separators);
-
-  @include breakpoints.tablet {
-    padding-block-end: var(--spacing-medium2-px);
-  }
 }
 
 .selectionWrapper {
@@ -118,16 +111,14 @@ button.nextButton {
 }
 
 .closeButton {
+  transform: translateX(calc(var(--spacing-edge-horizontal-px) / 2));
   margin-inline-start: auto;
-  flex-shrink: 0;
 }
 
 .modalHeader {
-  padding-inline-end: 0;
-  @include breakpoints.smallerThanTablet {
-    padding: 0;
-    padding-block-end: var(--spacing-medium-px);
-  }
+  @include utility.edgePadding;
+  box-sizing: border-box;
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .loadingContainer {

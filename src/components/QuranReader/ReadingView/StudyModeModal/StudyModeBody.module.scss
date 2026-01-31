@@ -1,28 +1,23 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/theme';
+@use 'src/styles/utility';
+
 .container {
   display: flex;
   flex-direction: column;
-  padding-inline: var(--spacing-xxsmall-px);
-  padding-block-start: var(--spacing-xsmall-px);
+}
 
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-medium2-px);
-  }
+.ayahContainer {
+  @include utility.edgeVerticalPadding;
 }
 
 .arabicVerseContainer {
-  margin: var(--spacing-medium) 0;
-  padding-block: var(--spacing-small);
-  padding-inline: calc(-1 * var(--spacing-small-px));
-  @include breakpoints.tablet {
-    margin: var(--spacing-medium-plus-px) 0;
-    padding-block: var(--spacing-medium);
-    padding-inline: calc(-1 * var(--spacing-medium-px));
-  }
+  @include utility.edgeHorizontalPadding;
+  padding-block: var(--spacing-large-px) var(--spacing-medium-plus-px);
 }
 
 .translationsContainer {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
 }
@@ -40,6 +35,8 @@
 // Gradient fade overlay above bottom actions
 .bottomActionsWrapper {
   position: relative;
+  inline-size: 100%;
+  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
 }
 
 .bottomActionsWrapperSticky {

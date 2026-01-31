@@ -104,3 +104,7 @@ select option {
     --top-bar-height: var(--top-bar-height-collapsed);
   }
 }
+
+::-webkit-scrollbar {
+  display: none !important;
+}
