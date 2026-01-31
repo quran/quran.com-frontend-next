@@ -104,6 +104,86 @@ export const parseVerseRange = <AsNumbers extends boolean>(
 };
 
 /**
+ * Sort verse keys by chapter and verse number in ascending order.
+ *
+ * This function sorts an array of verse keys (e.g., ['1:2', '2:1', '1:1'])
+ * first by chapter number, then by verse number within each chapter.
+ * Returns a new array without modifying the original.
+ *
+ * @example
+ * sortVerseKeys(['2:1', '1:3', '1:1']) // returns ['1:1', '1:3', '2:1']
+ *
+ * @param {string[]} verseKeys - Array of verse keys in the format 'chapter:verse'
+ * @returns {string[]} A new sorted array
+ */
+export const sortVerseKeys = (verseKeys: string[]): string[] => {
+  return [...verseKeys].sort((a, b) => {
+    const [aChapter, aVerse] = a.split(':').map(Number);
+    const [bChapter, bVerse] = b.split(':').map(Number);
+    if (aChapter !== bChapter) return aChapter - bChapter;
+    return aVerse - bVerse;
+  });
+};
+
+/**
+ * Convert an array of individual verse keys to optimized verse ranges.
+ *
+ * This function groups sequential verse keys into ranges within the same chapter.
+ * Ranges never span across chapter boundaries - each range contains verses from only one chapter.
+ * A range is considered sequential when verses are in the same chapter and have consecutive verse numbers.
+ *
+ * The function first sorts the input, then builds ranges by tracking consecutive sequences within each chapter.
+ * Non-consecutive verses or verses from different chapters create separate ranges.
+ * Single verses become ranges with the same start and end (e.g., '1:1-1:1').
+ *
+ * @example
+ * verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:3']) // returns ['1:1-1:3']
+ *
+ * @example
+ * verseKeysToRanges(chaptersData, ['1:6', '1:7', '2:1', '2:2']) // returns ['1:6-1:7', '2:1-2:2']
+ *
+ * @example
+ * verseKeysToRanges(chaptersData, ['1:1', '1:3', '1:5']) // returns ['1:1-1:1', '1:3-1:3', '1:5-1:5']
+ *
+ * @param {ChaptersData} chaptersData - Chapters data (currently unused but kept for API consistency)
+ * @param {string[]} verseKeys - Array of verse keys in the format 'chapter:verse' (e.g., ['1:1', '1:2', '2:1'])
+ * @returns {string[]} Array of optimized verse ranges in the format 'fromVerseKey-toVerseKey'
+ */
+export const verseKeysToRanges = (chaptersData: ChaptersData, verseKeys: string[]): string[] => {
+  if (verseKeys.length === 0) return [];
+
+  const sortedKeys = sortVerseKeys(verseKeys);
+  const ranges: string[] = [];
+
+  let rangeStart = sortedKeys[0];
+  let rangeEnd = sortedKeys[0];
+
+  for (let i = 1; i < sortedKeys.length; i += 1) {
+    const currentKey = sortedKeys[i];
+    const [currentChapter, currentVerse] = currentKey.split(':').map(Number);
+    const [prevChapter, prevVerse] = rangeEnd.split(':').map(Number);
+
+    let isConsecutive = false;
+
+    if (currentChapter === prevChapter) {
+      isConsecutive = currentVerse === prevVerse + 1;
+    }
+
+    if (isConsecutive) {
+      rangeEnd = currentKey;
+    } else {
+      ranges.push(`${rangeStart}-${rangeEnd}`);
+      rangeStart = currentKey;
+      rangeEnd = currentKey;
+    }
+  }
+
+  ranges.push(`${rangeStart}-${rangeEnd}`);
+
+  return ranges;
+};
+
+/**
  * Convert verse ranges to verse keys.
  *
  * @param {ChaptersData} chaptersData

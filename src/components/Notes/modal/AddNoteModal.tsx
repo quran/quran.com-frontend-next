@@ -1,3 +1,5 @@
+import { useContext, useMemo } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
@@ -11,8 +13,10 @@ import {
   isNotePublishFailed,
   addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
+import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { addNote } from '@/utils/auth/api';
+import { verseKeysToRanges } from '@/utils/verseKeys';
 
 interface AddNoteModalProps {
   notesCount?: number;
@@ -36,6 +40,21 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   const { t } = useTranslation('notes');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
+  const chaptersData = useContext(DataContext);
+
+  /**
+   * Calculate optimized verse ranges from verse keys.
+   *
+   * Groups sequential verse keys into ranges within the same chapter.
+   * Ranges never span across chapter boundaries.
+   *
+   * @example
+   * Input:  ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:1', '2:2', '2:7']
+   * Output: ['1:1-1:7', '2:1-2:2', '2:7-2:7']
+   */
+  const ranges = useMemo(() => {
+    return verseKeysToRanges(chaptersData, verseKeys);
+  }, [chaptersData, verseKeys]);
 
   const handleSaveNote = async ({ note, isPublic }: { note: string; isPublic: boolean }) => {
     try {
@@ -85,7 +104,7 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
       onMyNotes={onMyNotes}
       notesCount={notesCount}
       onSaveNote={handleSaveNote}
-      ranges={showRanges ? verseKeys.map((verseKey) => `${verseKey}-${verseKey}`) : undefined}
+      ranges={showRanges ? ranges : undefined}
       dataTestId="add-note-modal-content"
     />
   );

@@ -90,8 +90,6 @@ const CollectionDetail = ({
           ) : (
             <Virtuoso
               data={bookmarks}
-              totalCount={bookmarks.length}
-              useWindowScroll
               overscan={10}
               increaseViewportBy={100}
               itemContent={(index, bookmark) => (
