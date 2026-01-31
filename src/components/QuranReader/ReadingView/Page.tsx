@@ -86,19 +86,21 @@ const Page = ({
       })}
     >
       {chapterHeader}
-      {Object.keys(lines).map((key, lineIndex) => (
-        <Line
-          pageIndex={pageIndex}
-          lineIndex={lineIndex}
-          lineKey={key}
-          words={lines[key]}
-          key={key}
-          isBigTextLayout={isBigTextLayout}
-          quranReaderStyles={quranReaderStyles}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-          pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
-        />
-      ))}
+      <div className={styles.linesContainer}>
+        {Object.keys(lines).map((key, lineIndex) => (
+          <Line
+            pageIndex={pageIndex}
+            lineIndex={lineIndex}
+            lineKey={key}
+            words={lines[key]}
+            key={key}
+            isBigTextLayout={isBigTextLayout}
+            quranReaderStyles={quranReaderStyles}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+            pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
+          />
+        ))}
+      </div>
       <PageFooter page={pageNumber} />
     </div>
   );

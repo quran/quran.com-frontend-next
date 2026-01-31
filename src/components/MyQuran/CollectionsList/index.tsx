@@ -81,7 +81,6 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   const hasMore = displayCount < sortedCollections.length;
 
   const sortOptions = useMemo(() => getCollectionsSortOptions(t), [t]);
-
   if (isGuest) {
     return <CollectionsGuestPromo />;
   }

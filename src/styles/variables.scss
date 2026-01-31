@@ -5,17 +5,31 @@
 
 :root {
   // TODO: migrate constants.scss to use css variables
-  --navbar-height: 3.6rem;
-  --context-menu-container-height: 3rem;
+  --adjuster: -1px;
+  --banner-height: 40px;
+  --navbar-height: 54px;
+  --navbar-logo-height: 20px;
+
+  --context-menu-page-info-mobile-height: 46px; // same as navbar
+  --context-menu-section-height: 56px;
+  --context-menu-section-mobile-height: 40px;
+  --context-menu-section-mobile-expanded-height: 56px;
+
+  --context-menu-mobile-reading-tabs-height: 53px;
   --mobile-reading-mode-tabs-height: 3.25rem;
   --mobile-context-menu-height: 5.75rem; // Total height of context menu on mobile
   --tajweed-trigger-height: 25px;
   --navbar-container-height: var(--navbar-height);
-  --top-bar-height: 3rem;
-  --top-bar-height-collapsed: 3rem;
-  --top-bar-height-mobile-full: 6.2rem;
-  --top-bar-height-mobile-collapsed: 5.75rem;
-  --banner-height: 3rem;
+  --top-bar-height: calc(var(--adjuster) + var(--context-menu-section-height));
+  --top-bar-height-collapsed: calc(var(--adjuster) + var(--context-menu-section-height));
+  --top-bar-height-mobile-full: calc(
+    var(--adjuster) + var(--context-menu-section-mobile-height) +
+      var(--context-menu-mobile-reading-tabs-height)
+  );
+  --top-bar-height-mobile-collapsed: calc(
+    var(--adjuster) + var(--context-menu-page-info-mobile-height) +
+      var(--context-menu-section-mobile-expanded-height)
+  );
   --day-circle-color: transparent;
 
   // Mobile animation stagger delays (expand only) - tighter timing for smoother feel
