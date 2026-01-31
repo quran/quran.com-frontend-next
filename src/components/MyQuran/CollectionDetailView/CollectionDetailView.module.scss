@@ -80,6 +80,39 @@
   animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
 }
 
+.badgeContainer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall-px);
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-small-px);
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease-out;
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  svg {
+    display: block;
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+  }
+}
+
 .loadMoreContainer {
   display: flex;
   margin-block-start: var(--spacing-medium-px);

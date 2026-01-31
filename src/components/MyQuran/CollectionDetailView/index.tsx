@@ -6,6 +6,7 @@ import useSWRInfinite from 'swr/infinite';
 
 import styles from './CollectionDetailView.module.scss';
 
+import CollectionActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionActionsPopover';
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
@@ -16,6 +17,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import ChevronLeft from '@/icons/chevron-left.svg';
+import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
 import BookmarkType from '@/types/BookmarkType';
 import { deleteCollectionBookmarkById, privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
@@ -166,6 +168,24 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     [selectedBookmarks],
   );
 
+  const handleNoteClick = useCallback(() => {
+    // TODO: Implement note functionality
+    // This will open a modal/dialog to add notes to all bookmarks in the collection
+    logButtonClick('collection_detail_note_click', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      selectedCount: selectedBookmarks.size,
+      isBulkAction: selectedBookmarks.size > 0,
+    });
+  }, [collectionId, selectedBookmarks.size]);
+
+  const handleBulkNoteClick = useCallback(() => {
+    // TODO: Implement bulk note functionality for selected bookmarks
+    logButtonClick('collection_detail_bulk_note_click', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      selectedCount: selectedBookmarks.size,
+    });
+  }, [collectionId, selectedBookmarks.size]);
+
   if (error) {
     return <div>{t('common:error.general')}</div>;
   }
@@ -249,11 +269,21 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         <div className={styles.headerContent}>
           <span className={styles.title}>{collectionName}</span>
         </div>
-        <span className={styles.badge}>
-          {totalCount === 1
-            ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
-            : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
-        </span>
+        <div className={styles.badgeContainer}>
+          <span className={styles.badge}>
+            {totalCount === 1
+              ? t('collections.items', { count: toLocalizedNumber(totalCount, lang) })
+              : t('collections.items_plural', { count: toLocalizedNumber(totalCount, lang) })}
+          </span>
+          <CollectionActionsPopover
+            onNoteClick={handleNoteClick}
+            dataTestPrefix="collection-header-actions"
+          >
+            <button type="button" className={styles.iconButton} aria-label={t('common:more')}>
+              <MenuMoreHorizIcon />
+            </button>
+          </CollectionActionsPopover>
+        </div>
       </div>
 
       <div className={styles.bulkActionsContainer}>
@@ -276,18 +306,31 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
             >
               {t('bulk-actions.cancel')}
             </Button>
-            <Button
-              variant={ButtonVariant.Ghost}
-              size={ButtonSize.XSmall}
-              className={styles.bulkActionButton}
-              onClick={toggleSelectMode}
-              isDisabled={selectedBookmarks.size === 0}
-            >
-              {t(
-                selectedBookmarks.size > 0 ? 'bulk-actions.actions-count' : 'bulk-actions.actions',
-                { count: toLocalizedNumber(selectedBookmarks.size, lang) },
-              )}
-            </Button>
+            {selectedBookmarks.size > 0 ? (
+              <CollectionActionsPopover
+                onNoteClick={handleBulkNoteClick}
+                dataTestPrefix="collection-bulk-actions"
+              >
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  size={ButtonSize.XSmall}
+                  className={styles.bulkActionButton}
+                >
+                  {t('bulk-actions.actions-count', {
+                    count: toLocalizedNumber(selectedBookmarks.size, lang),
+                  })}
+                </Button>
+              </CollectionActionsPopover>
+            ) : (
+              <Button
+                variant={ButtonVariant.Ghost}
+                size={ButtonSize.XSmall}
+                className={styles.bulkActionButton}
+                isDisabled
+              >
+                {t('bulk-actions.actions')}
+              </Button>
+            )}
           </div>
         ) : (
           <Button
