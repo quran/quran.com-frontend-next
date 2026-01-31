@@ -111,6 +111,7 @@ const CollectionList = () => {
           <CollectionSorter
             options={sortOptions}
             selectedOptionId={sortBy}
+            collectionId={null}
             onChange={onSortOptionChanged}
             isSingleCollection={false}
           />

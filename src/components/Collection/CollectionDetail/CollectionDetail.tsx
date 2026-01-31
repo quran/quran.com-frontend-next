@@ -10,6 +10,7 @@ import CollectionVerseCell from './CollectionVerseCell';
 
 import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
+import { ArrowDirection } from '@/dls/Sorter/Sorter';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
@@ -20,7 +21,7 @@ type CollectionDetailProps = {
   title: string;
   isOwner: boolean;
   bookmarks: Bookmark[];
-  sortBy: string;
+  sortBy: CollectionDetailSortOption;
   onSortByChange: (sortBy: string) => void;
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
@@ -45,10 +46,12 @@ const CollectionDetail = ({
     {
       id: CollectionDetailSortOption.RecentlyAdded,
       label: t('collection:recently-added'),
+      direction: ArrowDirection.Down,
     },
     {
       id: CollectionDetailSortOption.VerseKey,
       label: t('collection:verse-key'),
+      direction: ArrowDirection.Up,
     },
   ];
 

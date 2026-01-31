@@ -133,14 +133,27 @@
   }
 }
 
+.arrowUp {
+  > svg {
+    transform: rotate(-90deg);
+  }
+}
+
 .arrowDown {
   > svg {
     transform: rotate(90deg);
   }
 }
 
-.arrowUp {
+.arrowLeft {
   > svg {
-    transform: rotate(-90deg);
+    transform: rotate(180deg);
+  }
+}
+
+.arrowRight {
+  > svg {
+    // Default direction, no rotation needed
+    transform: rotate(0deg);
   }
 }
