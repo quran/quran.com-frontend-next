@@ -264,18 +264,15 @@ export const determineLayoutProps = (
   lang: string,
 ) => {
   // Determine translation column direction
-  // Special case: Arabic UI with non-Arabic content keeps translation LTR
+  // For RTL locales, keep translation LTR (matches Arabic locale behavior).
+  const isRtlLocale = isRTLLocale(lang);
   let translationDir = Direction.LTR;
-  if (lang === Language.AR && !isArabicResult && !isSurahResult && !isSearchPage) {
-    // Keep LTR for English translations on Arabic UI
+  if (isRtlLocale && !isArabicResult && !isSurahResult && !isSearchPage) {
     translationDir = Direction.LTR;
-  } else if (isRTLLocale(lang)) {
-    // RTL locales (Arabic, Persian, Hebrew, etc.) default to RTL
-    translationDir = Direction.RTL;
   }
 
   // Single-line direction: RTL if content is Arabic OR locale is RTL
-  const singleLineDirection = isArabic || isRTLLocale(lang) ? Direction.RTL : translationDir;
+  const singleLineDirection = isArabic || isRtlLocale ? Direction.RTL : translationDir;
 
   // Determine language attribute for screen readers and spell checkers
   let singleLineLanguage = lang as Language;
