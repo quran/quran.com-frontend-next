@@ -18,9 +18,10 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAboutTheQuranImageUrl } from '@/lib/og';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getDir, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import verse3829 from 'src/data/verses/verse3829';
+import Language from 'types/Language';
 
 const PATH = '/about-quran';
 const AboutQuranPage: NextPage = (): JSX.Element => {
@@ -44,10 +45,10 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
         imageHeight={630}
       />
       <PageContainer>
-        {lang === 'ar' ? (
+        {lang === Language.AR ? (
           <AboutTheQuranArabic />
         ) : (
-          <div className={styles.contentPage} dir="ltr">
+          <div className={styles.contentPage} dir={getDir(lang)}>
             <div className={styles.section}>
               <h1>What is the Quran?</h1>
               <div>
