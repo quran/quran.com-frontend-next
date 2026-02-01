@@ -12,12 +12,12 @@ const getCollectionsSortOptions = (t: TranslateFn): SorterOption<CollectionSortO
   {
     id: CollectionSortOption.ALPHABETICAL_ASC,
     label: t('collections.sort.a-z'),
-    direction: ArrowDirection.Up,
+    direction: ArrowDirection.Down,
   },
   {
     id: CollectionSortOption.ALPHABETICAL_DESC,
     label: t('collections.sort.z-a'),
-    direction: ArrowDirection.Down,
+    direction: ArrowDirection.Up,
   },
 ];
 

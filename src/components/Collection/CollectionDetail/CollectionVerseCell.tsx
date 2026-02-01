@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CollectionVerseCell.module.scss';
@@ -66,10 +67,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   }, [createdAt, lang]);
 
   const handleGoToAyah = () => {
-    logButtonClick('collection_detail_go_to_ayah_menu', {
-      verseKey,
-      collectionId,
-    });
+    logButtonClick('collection_detail_go_to_ayah_menu', { verseKey, collectionId });
     navigateToExternalUrl(getVerseNavigationUrlByVerseKey(verseKey));
   };
 
@@ -80,10 +78,7 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
       confirmText: t('common:delete'),
       cancelText: t('common:cancel'),
       title: t('collection:delete-bookmark.title'),
-      subtitle: t('collection:delete-bookmark.subtitle', {
-        bookmarkName,
-        collectionName,
-      }),
+      subtitle: t('collection:delete-bookmark.subtitle', { bookmarkName, collectionName }),
     });
 
     const eventData = { verseKey, collectionId };
@@ -108,7 +103,13 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
         }}
       >
         <div className={styles.headerLeft}>
-          <div className={styles.verseReference}>{bookmarkName}</div>
+          <Link
+            href={getVerseNavigationUrlByVerseKey(verseKey)}
+            className={styles.verseReference}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {bookmarkName}
+          </Link>
           {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
         </div>
         <div className={styles.headerRight}>
