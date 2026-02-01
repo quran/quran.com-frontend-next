@@ -135,6 +135,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqalah",
+  "qiraat": {
+    "explanation": "Penjelasan:",
+    "juncture": "Titik waktu",
+    "learn-more": "Klik di sini untuk mempelajari lebih lanjut",
+    "no-junctures": "Tidak ada variasi bacaan yang tersedia untuk ayat ini.",
+    "reader-bio": "Biografi Pembaca",
+    "readers": "Pembaca",
+    "readings": "Bacaan",
+    "title": "Qiraat",
+    "translation": "Terjemahan",
+    "transliteration": "Transliterasi",
+    "what-are": "Apa itu Qiraat?"
+  },
   "query-param-message": "Anda melihat pengaturan membaca yang telah dipilih sebelumnya. <0> Tutup </0> untuk melihat dalam pengaturan Anda saat ini atau <1> Simpan </1> untuk memperbarui pengaturan Anda",
   "ramadan-of-reflection": "Bergabunglah dengan QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Baca Selengkapnya di QuranReflect",

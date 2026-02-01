@@ -135,6 +135,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (echo)",
+  "qiraat": {
+    "explanation": "Explanation:",
+    "juncture": "Juncture",
+    "learn-more": "Click here to learn more",
+    "no-junctures": "No variant readings available for this verse",
+    "reader-bio": "Reader Biography",
+    "readers": "Readers",
+    "readings": "Readings",
+    "title": "Qiraat",
+    "translation": "Translation",
+    "transliteration": "Transliteration",
+    "what-are": "What are Qiraat?"
+  },
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Read More on QuranReflect",
@@ -187,18 +200,5 @@
   "verse-preview-title": "Preview:",
   "verses-range": "Range of verses",
   "view-on-quran-reflect": "View on QuranReflect",
-  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
-  "qiraat": {
-    "title": "Qiraat",
-    "what-are": "What are Qiraat?",
-    "learn-more": "Click here to learn more",
-    "readers": "Readers",
-    "readings": "Readings",
-    "no-junctures": "No variant readings available for this verse",
-    "transliteration": "Transliteration",
-    "translation": "Translation",
-    "explanation": "Explanation:",
-    "reader-bio": "Reader Biography",
-    "juncture": "Juncture"
-  }
+  "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word."
 }

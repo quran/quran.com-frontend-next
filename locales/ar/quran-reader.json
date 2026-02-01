@@ -135,6 +135,19 @@
     "tafsir": "تفسير"
   },
   "qalqala": "قلقلة",
+  "qiraat": {
+    "explanation": "توضيح:",
+    "juncture": "نقطة التقاء",
+    "learn-more": "انقر هنا لمعرفة المزيد",
+    "no-junctures": "لا توجد قراءات بديلة متاحة لهذه الآية",
+    "reader-bio": "سيرة القارئ",
+    "readers": "القراء",
+    "readings": "قراءات",
+    "title": "قراءات",
+    "translation": "ترجمة",
+    "transliteration": "الترجمة الصوتية",
+    "what-are": "ما هي القراءات؟"
+  },
   "query-param-message": "أنت تستخدم إعدادات قراءة محددة مسبقًا. <0> تجاهل </0> للعرض بإعداداتك الحالية أو <1> احفظ </1> لتحديث إعداداتك",
   "ramadan-of-reflection": "انضم إلى تدبرات رمضان في QuranReflect",
   "read-more-quran-reflect": "اقرأ المزيد على QuranReflect",
@@ -187,18 +200,5 @@
   "verse-preview-title": "معاينة:",
   "verses-range": "نطاق الآيات",
   "view-on-quran-reflect": "عرض على QuranReflect",
-  "wbw-helper-text": "حدد الخيارات لعرض الترجمة، والتهجئة الصوتية، و/أو التلاوة لكل كلمة.",
-  "qiraat": {
-    "title": "القراءات",
-    "what-are": "ما هي القراءات؟",
-    "learn-more": "اعرف المزيد",
-    "readers": "القراء",
-    "no-junctures": "لا توجد قراءات مختلفة لهذه الآية",
-    "transliteration": "النطق الصوتي",
-    "translation": "الترجمة",
-    "explanation": "الشرح",
-    "combined-explanation": "الشرح المجمع",
-    "reader-bio": "السيرة الذاتية للقارئ",
-    "juncture": "موضع الاختلاف"
-  }
+  "wbw-helper-text": "حدد الخيارات لعرض الترجمة، والتهجئة الصوتية، و/أو التلاوة لكل كلمة."
 }

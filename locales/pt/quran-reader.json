@@ -135,6 +135,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (eco)",
+  "qiraat": {
+    "explanation": "Explicação:",
+    "juncture": "Conjuntura",
+    "learn-more": "Clique aqui para saber mais",
+    "no-junctures": "Não há variantes disponíveis para este versículo.",
+    "reader-bio": "Biografia do Leitor",
+    "readers": "Leitores",
+    "readings": "Leituras",
+    "title": "Qiraat",
+    "translation": "Tradução",
+    "transliteration": "Transliteração",
+    "what-are": "O que são Qiraat?"
+  },
   "query-param-message": "Você está visualizando configurações de leitura pré-selecionadas. <0> Ignorar </0> para visualizar suas configurações atuais ou <1> Salvar </1> para atualizar sua configuração",
   "ramadan-of-reflection": "Junte-se ao QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Leia mais sobre o QuranReflect",

@@ -135,6 +135,19 @@
     "tafsir": "塔夫西尔"
   },
   "qalqala": "卡尔卡拉",
+  "qiraat": {
+    "explanation": "解释：",
+    "juncture": "契机",
+    "learn-more": "点击此处了解更多信息",
+    "no-junctures": "此节经文暂无其他读法。",
+    "reader-bio": "读者传记",
+    "readers": "读者",
+    "readings": "阅读材料",
+    "title": "基拉特",
+    "translation": "翻译",
+    "transliteration": "音译",
+    "what-are": "什么是Qiraat？"
+  },
   "query-param-message": "您正在查看预先选择的阅读设置。 <0>关闭</0>以查看当前设置或<1>保存</1>以更新您的设置",
   "ramadan-of-reflection": "加入 QuranReflect “反思的斋月”",
   "read-more-quran-reflect": "阅读更多关于古兰经的参悟",

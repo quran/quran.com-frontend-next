@@ -135,6 +135,19 @@
     "tafsir": "Tafseer"
   },
   "qalqala": "Khalqala (terugkaatsen)",
+  "qiraat": {
+    "explanation": "Uitleg:",
+    "juncture": "Kruispunt",
+    "learn-more": "Klik hier voor meer informatie.",
+    "no-junctures": "Er zijn geen varianten van dit vers beschikbaar.",
+    "reader-bio": "Biografie van de lezer",
+    "readers": "Lezers",
+    "readings": "Lezingen",
+    "title": "Qiraat",
+    "translation": "Vertaling",
+    "transliteration": "Transliteratie",
+    "what-are": "Wat is Qiraat?"
+  },
   "query-param-message": "U bekijkt vooraf geselecteerde leesinstellingen. <0> Sluiten </0> om uw huidige instellingen te bekijken of <1> Opslaan </1> om uw instellingen bij te werken",
   "ramadan-of-reflection": "Sluit je aan bij QuranReflect \"Ramadan met reflectie\"",
   "read-more-quran-reflect": "Lees meer over Koran Reflect",

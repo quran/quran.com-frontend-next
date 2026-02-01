@@ -135,6 +135,19 @@
     "tafsir": "ተፍሲር"
   },
   "qalqala": "ቀልቀላ (አስተጋባ)",
+  "qiraat": {
+    "explanation": "ማብራሪያ፡",
+    "juncture": "መጋጠሚያ",
+    "learn-more": "ተጨማሪ ለማወቅ እዚህ ጠቅ ያድርጉ",
+    "no-junctures": "ለዚህ ጥቅስ ምንም አይነት የተለያዩ ንባቦች የሉም",
+    "reader-bio": "የአንባቢ የህይወት ታሪክ",
+    "readers": "አንባቢዎች",
+    "readings": "ንባቦች",
+    "title": "ቂራት",
+    "translation": "ትርጉም",
+    "transliteration": "በቋንቋ ፊደል መጻፍ",
+    "what-are": "ኪራት ምንድን ናቸው?"
+  },
   "query-param-message": "አስቀድመው የተመረጡ የንባብ ቅንብሮችን እያዩ ነው። <0>በአሁኑ ቅንብሮችዎ ውስጥ ለማየት ያሰናብቱ</0> ወይም ቅንብርዎን ለማዘመን <1>ይቀዱ</1>",
   "ramadan-of-reflection": "\"የረመዳን ነጸብራቅ\" የሚለውን QuranReflectን ይቀላቀሉ",
   "read-more-quran-reflect": "ስለ ቁርዓን ሪፍሌክት የበለጠ ያንብቡ",
