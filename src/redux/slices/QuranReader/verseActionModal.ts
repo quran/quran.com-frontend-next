@@ -17,6 +17,7 @@ export enum VerseActionModalType {
   EDIT_NOTE = 'editNote',
   TRANSLATION_FEEDBACK = 'translationFeedback',
   SAVE_TO_COLLECTION = 'saveToCollection',
+  SAVE_BOOKMARK = 'saveBookmark',
   ADVANCED_COPY = 'advancedCopy',
   READER_BIO = 'readerBio',
 }
@@ -47,6 +48,7 @@ export type VerseActionModalState = {
   wasOpenedFromStudyMode: boolean;
   studyModeRestoreState: StudyModeRestoreState | null;
   readerBioReader: QiraatReader | null;
+  previousModalType: VerseActionModalType | null;
 };
 
 export const initialState: VerseActionModalState = {
@@ -60,6 +62,7 @@ export const initialState: VerseActionModalState = {
   wasOpenedFromStudyMode: false,
   studyModeRestoreState: null,
   readerBioReader: null,
+  previousModalType: null,
 };
 
 /**
@@ -70,6 +73,7 @@ export type OpenNotesModalPayload = {
   verseKey: string;
   wasOpenedFromStudyMode?: boolean;
   studyModeRestoreState?: StudyModeRestoreState;
+  previousModalType?: VerseActionModalType | null;
 };
 
 /**
@@ -91,6 +95,17 @@ export type OpenCollectionModalPayload = {
   verse: Verse;
   isTranslationView?: boolean;
   bookmarksRangeUrl?: string;
+  wasOpenedFromStudyMode?: boolean;
+  studyModeRestoreState?: StudyModeRestoreState;
+};
+
+/**
+ * Payload for opening Bookmark modal.
+ */
+export type OpenBookmarkModalPayload = {
+  verseKey: string;
+  verse: Verse;
+  isTranslationView?: boolean;
   wasOpenedFromStudyMode?: boolean;
   studyModeRestoreState?: StudyModeRestoreState;
 };
@@ -120,13 +135,15 @@ const verseActionModal = createSlice({
   name: SliceName.VERSE_ACTION_MODAL,
   initialState,
   reducers: {
-    openNotesModal: (unusedState, { payload }: PayloadAction<OpenNotesModalPayload>) => ({
-      ...initialState,
+    openNotesModal: (state, { payload }: PayloadAction<OpenNotesModalPayload>) => ({
+      ...state,
       isOpen: true,
       modalType: payload.modalType,
       verseKey: payload.verseKey,
-      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
-      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+      editingNote: null,
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? state.wasOpenedFromStudyMode,
+      studyModeRestoreState: payload.studyModeRestoreState ?? state.studyModeRestoreState,
+      previousModalType: payload.previousModalType ?? state.modalType,
     }),
     openFeedbackModal: (unusedState, { payload }: PayloadAction<OpenFeedbackModalPayload>) => ({
       ...initialState,
@@ -146,6 +163,16 @@ const verseActionModal = createSlice({
       verse: payload.verse,
       isTranslationView: payload.isTranslationView ?? false,
       bookmarksRangeUrl: payload.bookmarksRangeUrl ?? '',
+      wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
+      studyModeRestoreState: payload.studyModeRestoreState ?? null,
+    }),
+    openBookmarkModal: (unusedState, { payload }: PayloadAction<OpenBookmarkModalPayload>) => ({
+      ...initialState,
+      isOpen: true,
+      modalType: VerseActionModalType.SAVE_BOOKMARK,
+      verseKey: payload.verseKey,
+      verse: payload.verse,
+      isTranslationView: payload.isTranslationView ?? false,
       wasOpenedFromStudyMode: payload.wasOpenedFromStudyMode ?? false,
       studyModeRestoreState: payload.studyModeRestoreState ?? null,
     }),
@@ -198,11 +225,14 @@ export const selectVerseActionModalStudyModeRestoreState = (state: RootState) =>
   state.verseActionModal.studyModeRestoreState;
 export const selectVerseActionModalReaderBioReader = (state: RootState) =>
   state.verseActionModal.readerBioReader;
+export const selectVerseActionModalPreviousModalType = (state: RootState) =>
+  state.verseActionModal.previousModalType;
 
 export const {
   openNotesModal,
   openFeedbackModal,
   openCollectionModal,
+  openBookmarkModal,
   openAdvancedCopyModal,
   openReaderBioModal,
   setModalType,

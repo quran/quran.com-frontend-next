@@ -142,6 +142,7 @@
     "decrease": "Diminuer",
     "increase": "Augmenter"
   },
+  "create": "Créer",
   "create-my-goal": "Créer mon objectif",
   "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
   "delete": "Supprimer",
@@ -151,6 +152,7 @@
   "donate-now": "Faire un don maintenant",
   "donate_monthly": "Faire un don mensuel",
   "donate_once": "Faire un don",
+  "done": "Fait",
   "edit": "Modifier",
   "email-verification": {
     "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez vos spams",
@@ -171,7 +173,10 @@
     "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud.",
     "ranges-no-value": "Le début et la fin de la plage doivent avoir une valeur",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "L'Ayah de départ doit être avant l'Ayah de fin."
+    "ranges-wrong-order": "L'Ayah de départ doit être avant l'Ayah de fin.",
+    "reading-bookmark-remove": "Impossible de supprimer le signet de lecture",
+    "reading-bookmark-set": "Impossible de définir le signet de lecture",
+    "reading-bookmark-undo": "Impossible d'annuler le signet de lecture"
   },
   "errors": {
     "account-banned": "Désolé, votre compte est banni. Veuillez contacter Quran.Foundation",
@@ -208,9 +213,11 @@
     "verification-code-invalid": "Ce code de vérification n'est pas valide",
     "verification-code-length": "Le code de vérification doit contenir {{length}} chiffres",
     "verification-failed": "La vérification a échoué. Veuillez réessayer.",
-    "verification-resend-failed": "Le renvoi du code de vérification a échoué"
+    "verification-resend-failed": "Le renvoi du code de vérification a échoué",
+    "verse-metadata-failed": "Impossible de charger les métadonnées du verset"
   },
   "exciting-updates": "Mises à jour importantes",
+  "favorites": "Favoris",
   "feedback": "Avis",
   "fonts": {
     "15_lines": "15 lignes",
@@ -352,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Lire",
+  "read-more": "En savoir plus",
   "reading-history": "Historique de lecture",
   "reading-preference": {
     "arabic": "arabe",
@@ -398,6 +406,7 @@
     "title": "Rechercher"
   },
   "seconds": "Secondes",
+  "see-less": "Voir moins",
   "see-new": "Voir les nouveautés",
   "select-language": "Sélectionner la langue",
   "settings": {
@@ -441,7 +450,8 @@
   "sort": {
     "ascending": "Croissant",
     "by": "Trier par",
-    "descending": "Décroissant"
+    "descending": "Décroissant",
+    "sort": "Trier"
   },
   "stay-on-track": "🎯 Restez sur la bonne voie !",
   "style": "Style",

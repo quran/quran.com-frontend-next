@@ -142,6 +142,7 @@
     "decrease": "Diminuir",
     "increase": "Aumentar"
   },
+  "create": "Criar",
   "create-my-goal": "Criar meu objetivo",
   "default-description": "O Quran traduzido para vários idiomas em uma interface simples e fácil",
   "delete": "Excluir",
@@ -151,6 +152,7 @@
   "donate-now": "Doe agora",
   "donate_monthly": "Doe mensalmente",
   "donate_once": "Doe uma vez",
+  "done": "Feito",
   "edit": "Editar",
   "email-verification": {
     "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
@@ -171,7 +173,10 @@
     "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem.",
     "ranges-no-value": "O início e o fim do intervalo devem ter um valor",
     "ranges-too-many-verses": "*Máx {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "O verso inicial deve estar antes do verso final."
+    "ranges-wrong-order": "O verso inicial deve estar antes do verso final.",
+    "reading-bookmark-remove": "Falha ao remover o marcador de leitura",
+    "reading-bookmark-set": "Falha ao definir o marcador de leitura",
+    "reading-bookmark-undo": "Falha ao desfazer a leitura do marcador"
   },
   "errors": {
     "account-banned": "Desculpe, sua conta foi banida. Contate Quran.Foundation",
@@ -208,9 +213,11 @@
     "verification-code-invalid": "Este código de verificação é inválido",
     "verification-code-length": "O código de verificação deve ter {{length}} dígitos",
     "verification-failed": "A verificação falhou. Por favor, tente novamente.",
-    "verification-resend-failed": "Falha ao reenviar o código de verificação"
+    "verification-resend-failed": "Falha ao reenviar o código de verificação",
+    "verse-metadata-failed": "Falha ao carregar os metadados do verso"
   },
   "exciting-updates": "Atualizações emocionantes",
+  "favorites": "Favoritos",
   "feedback": "Comentários",
   "fonts": {
     "15_lines": "15 linhas",
@@ -352,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Rádio Quran",
   "read": "Ler",
+  "read-more": "Leia mais",
   "reading-history": "Lendo o histórico",
   "reading-preference": {
     "arabic": "árabe",
@@ -398,6 +406,7 @@
     "title": "Procurar"
   },
   "seconds": "Segundos",
+  "see-less": "Ver menos",
   "see-new": "Veja as novidades",
   "select-language": "Selecione o idioma",
   "settings": {
@@ -441,7 +450,8 @@
   "sort": {
     "ascending": "Ascendente",
     "by": "Ordenar por",
-    "descending": "descendente"
+    "descending": "descendente",
+    "sort": "Organizar"
   },
   "stay-on-track": "🎯 Mantenha o foco!",
   "style": "Estilo",

@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Favoritos",
+    "guest-promo": {
+      "sign-in": "Iniciar sesión",
+      "subtitle": "Comparar y contrastar versículos",
+      "title": "Crear colecciones personalizadas"
+    },
+    "items": "{{count}} artículo",
+    "items_plural": "{{count}} elementos",
+    "load-more": "Cargar más",
+    "new-collection": "Nueva colección",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Actualizado recientemente",
+      "z-a": "Z-A"
+    },
+    "title": "Colecciones"
+  },
+  "notes-and-reflections": "Notas y reflexiones",
+  "page": "Página",
+  "reading-bookmark": {
+    "empty": "¡Empieza a leer y guarda un marcador de lectura!",
+    "title": "Mi marcador de lectura"
+  },
+  "recent": "Reciente",
+  "recent-empty": "Empieza a leer para ver tus lecturas recientes",
+  "recently-saved": {
+    "title": "Guardado recientemente"
+  },
+  "saved": "Guardado",
+  "search": {
+    "filter": "Filtrar",
+    "placeholder": "Búsqueda guardada...",
+    "sort": "Clasificar"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Adjuntar notas a los versículos",
+      "custom-collections": "Crear colecciones personalizadas"
+    },
+    "title": "¡Inicia sesión o regístrate gratis para obtener acceso a más funciones!"
+  }
+}

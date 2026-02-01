@@ -142,6 +142,7 @@
     "decrease": "Azalt",
     "increase": "Arttır"
   },
+  "create": "Yaratmak",
   "create-my-goal": "Hedefimi Oluştur",
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
   "delete": "Sil",
@@ -151,6 +152,7 @@
   "donate-now": "Şimdi bağış yapın",
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
+  "done": "Tamamlamak",
   "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -171,7 +173,10 @@
     "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
     "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
-    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır."
+    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır.",
+    "reading-bookmark-remove": "Okuma yer imini kaldırma işlemi başarısız oldu.",
+    "reading-bookmark-set": "Okuma yer imi ayarlanamadı.",
+    "reading-bookmark-undo": "Okuma yer imini geri alma işlemi başarısız oldu."
   },
   "errors": {
     "account-banned": "Maalesef, hesabınız engellendi. Quran.Foundation ile irtibata geçin",
@@ -208,9 +213,11 @@
     "verification-code-invalid": "Bu doğrulama kodu geçersizdir",
     "verification-code-length": "Doğrulama kodu {{length}} basamaklı olmalıdır",
     "verification-failed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
-    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu"
+    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu",
+    "verse-metadata-failed": "Ayet meta verileri yüklenemedi."
   },
   "exciting-updates": "Heyecan Verici Güncellemeler",
+  "favorites": "Favoriler",
   "feedback": "Geri Bildirim",
   "fonts": {
     "15_lines": "15 satır",
@@ -352,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
   "read": "Okumak",
+  "read-more": "Devamını oku",
   "reading-history": "tarih okuma",
   "reading-preference": {
     "arabic": "Arapça",
@@ -398,6 +406,7 @@
     "title": "Ara"
   },
   "seconds": "Saniye",
+  "see-less": "Daha az göster",
   "see-new": "Yenilikleri görün",
   "select-language": "Dil Seçin",
   "settings": {
@@ -441,7 +450,8 @@
   "sort": {
     "ascending": "Artan",
     "by": "Sırala",
-    "descending": "Azalan"
+    "descending": "Azalan",
+    "sort": "Düzenlemek"
   },
   "stay-on-track": "🎯 Yolda kalın!",
   "style": "Stil",

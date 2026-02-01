@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useSWRConfig } from 'swr';
 
+import { SURAH_BOOKMARKS_KEY } from '@/hooks/auth/useSurahBookmarks';
 import { BOOKMARK_CACHE_PATHS } from '@/utils/auth/apiPaths';
 
 interface BookmarkCacheInvalidator {
@@ -19,8 +20,23 @@ interface BookmarkCacheInvalidator {
   invalidateBookmarksListCaches: () => void;
 
   /**
+   * Invalidate all surah-level bookmark caches.
+   * Use this when bookmark data changes and you need to refresh surah bookmarks.
+   */
+  invalidateSurahCaches: () => void;
+
+  /**
+   * Invalidate a specific surah's bookmark cache.
+   * Use this for targeted invalidation when you know which surah changed.
+   *
+   * @param {number} mushafId - The mushaf ID
+   * @param {number} surahNumber - The surah number (1-114)
+   */
+  invalidateSingleSurahCache: (mushafId: number, surahNumber: number) => void;
+
+  /**
    * Invalidate all bookmark-related caches.
-   * Combines reader caches and bookmarks list caches.
+   * Combines reader caches, bookmarks list caches, and surah caches.
    */
   invalidateAllBookmarkCaches: () => void;
 }
@@ -83,14 +99,33 @@ const useBookmarkCacheInvalidator = (): BookmarkCacheInvalidator => {
     );
   }, [globalMutate]);
 
+  const invalidateSurahCaches = useCallback(() => {
+    // Invalidate all surah bookmark caches (surah-bookmarks-*)
+    globalMutate(
+      (key: string) => typeof key === 'string' && key.startsWith('surah-bookmarks-'),
+      undefined,
+      { revalidate: true },
+    );
+  }, [globalMutate]);
+
+  const invalidateSingleSurahCache = useCallback(
+    (mushafId: number, surahNumber: number) => {
+      globalMutate(SURAH_BOOKMARKS_KEY(mushafId, surahNumber), undefined, { revalidate: true });
+    },
+    [globalMutate],
+  );
+
   const invalidateAllBookmarkCaches = useCallback(() => {
     invalidateReaderCaches();
     invalidateBookmarksListCaches();
-  }, [invalidateReaderCaches, invalidateBookmarksListCaches]);
+    invalidateSurahCaches();
+  }, [invalidateReaderCaches, invalidateBookmarksListCaches, invalidateSurahCaches]);
 
   return {
     invalidateReaderCaches,
     invalidateBookmarksListCaches,
+    invalidateSurahCaches,
+    invalidateSingleSurahCache,
     invalidateAllBookmarkCaches,
   };
 };

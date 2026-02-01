@@ -8,11 +8,15 @@ import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
 import { parseVerseRange } from './verseKeys';
 
+import { getPagesLookup, getPageVerses } from '@/api';
 import ChaptersData from '@/types/ChaptersData';
 import LookupRecord from '@/types/LookupRecord';
+import { Mushaf } from '@/types/QuranReader';
 import ScrollAlign from '@/types/ScrollAlign';
 import Verse from '@/types/Verse';
 import Word, { WordVerse } from '@/types/Word';
+
+export const DEFAULT_MUSHAF = Mushaf.QCFV2;
 
 const COLON_SPLITTER = ':';
 
@@ -525,4 +529,40 @@ export const getVersePositionWithinAMushafPage = (
     return ScrollAlign.Center;
   }
   return ScrollAlign.End;
+};
+
+export const getPageFirstVerseKey = async (
+  pageNumber: number,
+  mushafId: Mushaf = DEFAULT_MUSHAF,
+  lang: string = 'en',
+): Promise<{ surahNumber: number; verseNumber: number }> => {
+  const pageVersesData = await getPageVerses(String(pageNumber), lang, { mushaf: mushafId });
+  if (pageVersesData?.verses && pageVersesData.verses.length > 0) {
+    const firstVerse = pageVersesData.verses[0];
+    return {
+      surahNumber: Number(firstVerse.chapterId),
+      verseNumber: Number(firstVerse.verseNumber),
+    };
+  }
+  throw new Error('No verses found for the given page number.');
+};
+
+export const getVersePageNumber = async (
+  verse: { surahNumber: number; verseNumber: number },
+  mushafId: Mushaf,
+): Promise<number> => {
+  const pageLookup = await getPagesLookup({
+    chapterNumber: verse.surahNumber,
+    mushaf: mushafId,
+    from: `${verse.surahNumber}:${verse.verseNumber}`,
+    to: `${verse.surahNumber}:${verse.verseNumber}`,
+  });
+
+  const pageNumbers = Object.keys(pageLookup.pages);
+
+  if (pageNumbers.length === 0) {
+    throw new Error('No page found for the given verse.');
+  }
+
+  return Number(pageNumbers[pageNumbers.length - 1]);
 };

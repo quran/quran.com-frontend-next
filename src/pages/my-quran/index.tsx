@@ -1,142 +1,96 @@
-/* eslint-disable max-lines */
-import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useEffect, useMemo, useState } from 'react';
 
-import layoutStyle from '../index.module.scss';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './my-quran.module.scss';
 
+import HeaderNavigation from '@/components/HeaderNavigation';
+import SavedTabContent from '@/components/MyQuran/SavedTabContent';
+import MyQuranTab from '@/components/MyQuran/tabs';
+import NotesAndReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab';
+import RecentContent from '@/components/MyQuran/tabs/RecentContent/RecentContent';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
-import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
-import Button from '@/dls/Button/Button';
-import Skeleton from '@/dls/Skeleton/Skeleton';
-import useAuthData from '@/hooks/auth/useAuthData';
-import useLogout from '@/hooks/auth/useLogout';
-import Error from '@/pages/_error';
-import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
+import PageContainer from '@/components/PageContainer';
+import TabSwitcher from '@/dls/TabSwitcher/TabSwitcher';
 import { getAllChaptersData } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
-import ChaptersData from 'types/ChaptersData';
+import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
 
-interface Props {
-  chaptersData?: ChaptersData;
-}
+const MY_QURAN_PATH = getMyQuranNavigationUrl();
+const tabComponents = {
+  [MyQuranTab.SAVED]: <SavedTabContent />,
+  [MyQuranTab.RECENT]: <RecentContent />,
+  [MyQuranTab.NOTES_AND_REFLECTIONS]: <NotesAndReflectionsTab />,
+};
 
-const nameSample = 'Mohammad Ali';
-const emailSample = 'mohammadali@quran.com';
-const MyQuranPage: NextPage<Props> = () => {
-  const { t, lang } = useTranslation();
-  const { userData: user, isLoading, userDataError: error, isAuthenticated } = useAuthData();
-  const runLogout = useLogout();
+const MyQuranPage = (): JSX.Element => {
+  const { lang, t } = useTranslation('my-quran');
+  const router = useRouter();
+  const { tab } = router.query;
+  const [selectedTab, setSelectedTab] = useState(MyQuranTab.SAVED);
 
-  const onLogoutClicked = async () =>
-    runLogout({ eventName: 'profile_logout', redirectToLogin: true });
+  const title = t('common:my-quran');
 
-  if (error) {
-    return <Error statusCode={500} />;
-  }
-
-  const email = user?.email || emailSample;
-  const firstName = user?.firstName || '';
-  const lastName = user?.lastName || '';
-  const photoUrl = user?.photoUrl || DEFAULT_PHOTO_URL;
-
-  const profileSkeletonInfoSkeleton = (
-    <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
-      <Skeleton>
-        <h2 className={styles.name}>{nameSample}</h2>
-      </Skeleton>
-      <Skeleton>
-        <div className={styles.email}>{emailSample}</div>
-      </Skeleton>
-    </div>
+  const tabs = useMemo(
+    () => [
+      {
+        name: t('saved'),
+        value: MyQuranTab.SAVED,
+      },
+      {
+        name: t('recent'),
+        value: MyQuranTab.RECENT,
+      },
+      {
+        name: t('notes-and-reflections'),
+        value: MyQuranTab.NOTES_AND_REFLECTIONS,
+      },
+    ],
+    [t],
   );
 
-  const accountActions = (
-    <div
-      className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.actionsContainer)}
-    >
-      <div className={styles.action}>
-        <Button isDisabled={isLoading} onClick={onLogoutClicked}>
-          {t('common:logout')}
-        </Button>
-      </div>
-      <div className={styles.action}>
-        <DeleteAccountButton isDisabled={isLoading} />
-      </div>
-    </div>
-  );
+  const onTabChange = (value: string) => {
+    logEvent('my_quran_tab_change', { value });
+    setSelectedTab(value as MyQuranTab);
+    if (tab) router.replace(router.pathname, undefined, { shallow: true });
+  };
 
-  const profileInfo = (
-    <div className={classNames(layoutStyle.flowItem)}>
-      <div className={styles.profileContainer}>
-        <div className={styles.profilePicture}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className={styles.profilePicture} alt="avatar" src={photoUrl} />
-        </div>
-        {isLoading ? (
-          profileSkeletonInfoSkeleton
-        ) : (
-          <div className={styles.profileInfoContainer}>
-            <h2 className={styles.name}>{`${firstName} ${lastName}`.trim() || nameSample}</h2>
-            <div className={styles.email}>{email}</div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    if (tab && Object.values(MyQuranTab).includes(tab as MyQuranTab)) {
+      setSelectedTab(tab as MyQuranTab);
+    }
+  }, [tab]);
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:profile')}
-        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
-        languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
+        title={title}
+        canonical={getCanonicalUrl(lang, MY_QURAN_PATH)}
+        languageAlternates={getLanguageAlternates(MY_QURAN_PATH)}
         nofollow
         noindex
       />
-      <div className={layoutStyle.pageContainer}>
-        <div className={layoutStyle.flow}>
-          <div className={styles.container}>
-            {isAuthenticated && profileInfo}
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.recentReadingContainer,
-              )}
-            >
-              <RecentReadingSessions />
-            </div>
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.bookmarksAndCollectionsContainer,
-              )}
-            >
-              <BookmarksAndCollectionsSection isHomepage={false} />
-            </div>
-            {isAuthenticated && accountActions}
-          </div>
-        </div>
-      </div>
+      <main className={styles.main}>
+        <HeaderNavigation title={title} innerClassName={styles.headerNavigationInnerClassName} />
+        <PageContainer
+          isSheetsLike
+          wrapperClassName={styles.mainContent}
+          className={styles.pageContainer}
+        >
+          <TabSwitcher selected={selectedTab} items={tabs} onSelect={onTabChange} />
+          <div className={styles.tabContent}>{tabComponents[selectedTab]}</div>
+        </PageContainer>
+      </main>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
+  return { props: { chaptersData: allChaptersData } };
 };
 
 export default MyQuranPage;

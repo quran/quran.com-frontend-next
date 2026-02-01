@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  // Fade in animation for container entrance
+  animation: fadeIn var(--transition-regular) ease-out;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  margin-block-end: var(--spacing-medium-px);
+  // Smooth slide down animation for header
+  animation: slideDown var(--transition-moderate) ease-out;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  flex: 1;
+}
+
+.backButton {
+  padding: 0;
+  block-size: auto;
+  min-inline-size: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-main);
+  // Smooth hover transition
+  transition: all var(--transition-fast) ease-out;
+  border-radius: var(--border-radius-small-px);
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  svg {
+    transition: transform var(--transition-moderate) ease-out;
+  }
+
+  &:hover svg {
+    transform: translateX(calc(var(--spacing-xsmall-px) * -0.5));
+  }
+}
+
+.title {
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  // Fade in with slight delay for stagger effect
+  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
+  background: var(--color-success-faded);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-success-medium);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  // Fade in with delay
+  animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
+}
+
+.loadMoreContainer {
+  display: flex;
+  margin-block-start: var(--spacing-medium-px);
+  justify-content: center;
+  inline-size: 100%;
+  // Fade in animation for load more button
+  animation: fadeIn var(--transition-moderate) ease-out;
+
+  button {
+    inline-size: 100%;
+    transition: all var(--transition-fast) ease-out;
+
+    &:hover {
+      transform: translateY(calc(var(--spacing-micro-px) * -1));
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-mega-px);
+  // Fade in animation for loading state
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+// Stagger animation for list items
+.listItem {
+  animation: fadeInSlide var(--transition-regular) ease-out backwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-medium2-px) + var(--spacing-small-px)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

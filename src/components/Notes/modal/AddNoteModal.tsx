@@ -1,18 +1,17 @@
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import modalStyles from './Modal.module.scss';
-
+import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
+import Header from '@/components/Notes/modal/Header';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
+  CacheAction,
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
+  addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import ArrowIcon from '@/icons/arrow.svg';
 import { addNote } from '@/utils/auth/api';
 
 interface AddNoteModalProps {
@@ -44,7 +43,10 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         saveToQR: isPublic,
       });
 
-      if (isNotePublishFailed(data)) {
+      const isFailedToPublish = isNotePublishFailed(data);
+      const noteFromResponse = getNoteFromResponse(data);
+
+      if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
       } else {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
@@ -54,8 +56,14 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
         mutate,
         cache,
         verseKeys: [verseKey],
-        note: getNoteFromResponse(data),
+        note:
+          isFailedToPublish || !isPublic
+            ? noteFromResponse
+            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
+        invalidateReflections: isPublic,
+        flushNotesList: true,
+        action: CacheAction.CREATE,
       });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
@@ -66,26 +74,9 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   return (
     <NoteFormModal
       header={
-        onBack ? (
-          <button
-            type="button"
-            className={classNames(modalStyles.headerButton, modalStyles.title)}
-            onClick={onBack}
-            data-testid="add-note-modal-title"
-          >
-            <IconContainer
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              size={IconSize.Custom}
-              className={modalStyles.arrowIcon}
-            />
-            {t('take-a-note-or-reflection')}
-          </button>
-        ) : (
-          <h2 className={modalStyles.title} data-testid="add-note-modal-title">
-            {t('take-a-note-or-reflection')}
-          </h2>
-        )
+        <Header onClick={onBack} data-testid="add-note-modal-title">
+          {t('take-a-note-or-reflection')}
+        </Header>
       }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
