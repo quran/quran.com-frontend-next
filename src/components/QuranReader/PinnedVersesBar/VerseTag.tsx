@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './VerseTag.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
+import { toLocalizedVerseKey } from '@/utils/locale';
 
 interface VerseTagProps {
   verseKey: string;
@@ -15,7 +16,8 @@ interface VerseTagProps {
 }
 
 const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSelected = false }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
+  const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
 
   const handleRemoveClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -41,7 +43,7 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
         [styles.verseKeySelected]: isSelected,
       })}
     >
-      {verseKey}
+      {localizedVerseKey}
     </span>
   );
 
@@ -53,7 +55,7 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
       })}
       onClick={handleRemoveClick}
       onKeyDown={handleRemoveKeyDown}
-      aria-label={t('remove-pinned-verse', { verseKey })}
+      aria-label={t('remove-pinned-verse', { verseKey: localizedVerseKey })}
     >
       <CloseIcon
         className={classNames(styles.closeIcon, {
