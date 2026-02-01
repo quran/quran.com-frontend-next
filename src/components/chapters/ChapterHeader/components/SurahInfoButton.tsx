@@ -9,7 +9,6 @@ import styles from '../ChapterHeader.module.scss';
 import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
 import surahInfoStyles from '@/components/chapters/Info/SurahInfoModal.module.scss';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
-import InfoIcon from '@/icons/info.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
@@ -63,7 +62,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
         type="button"
         data-testid="surah-info-button"
       >
-        <InfoIcon width="18" height="18" />
+        {t('info')}
       </button>
       {chapterId && (
         <ContentModal
