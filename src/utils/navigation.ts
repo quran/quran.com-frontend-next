@@ -30,7 +30,6 @@ export const ROUTES = {
   SITEMAP: '/sitemap.xml',
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
-  COLLECTIONS_ALL: '/collections/all',
   NOTIFICATION_SETTINGS: '/notification-settings',
   RAMADAN_2026: '/ramadan2026',
   RAMADAN_CHALLENGE: '/ramadanchallenge',
@@ -53,7 +52,6 @@ export const AUTH_ROUTES = [
 export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
-  ROUTES.COLLECTIONS_ALL,
   ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
@@ -457,10 +455,6 @@ export const getProductUpdatesUrl = (id = ''): string =>
 
 export const getProfileNavigationUrl = () => {
   return '/profile';
-};
-
-export const getCollectionNavigationUrl = (collectionId: string) => {
-  return `/collections/${collectionId}`;
 };
 
 export const getReadingGoalNavigationUrl = (example?: string) =>

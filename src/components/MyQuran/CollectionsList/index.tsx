@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
@@ -15,7 +14,6 @@ import { CollectionItem, CollectionSortOption } from '@/hooks/useCollections';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import PlusIcon from '@/icons/plus.svg';
 import { toLocalizedNumber } from '@/utils/locale';
-import { ROUTES } from '@/utils/navigation';
 
 export interface CollectionsListProps {
   collections: CollectionItem[];
@@ -43,20 +41,13 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
   onCollectionClick,
 }) => {
   const { t, lang } = useTranslation('my-quran');
-  const router = useRouter();
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
   const handleCollectionClick = useCallback(
     (collection: CollectionItem) => {
-      if (onCollectionClick) {
-        onCollectionClick(collection);
-      } else if (collection.isDefault) {
-        router.push(ROUTES.COLLECTIONS_ALL);
-      } else {
-        router.push(`/collections/${collection.id}`);
-      }
+      if (onCollectionClick) onCollectionClick(collection);
     },
-    [onCollectionClick, router],
+    [onCollectionClick],
   );
 
   const handleLoadMore = useCallback(() => {
