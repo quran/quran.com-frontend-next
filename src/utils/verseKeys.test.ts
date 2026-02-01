@@ -383,146 +383,83 @@ it('formats verse ranges to readable format - handles multiple ranges', async ()
   ]);
 });
 
-it('converts verse keys to ranges - groups sequential verses in same chapter', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(
-    verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7']),
-  ).toEqual(['1:1-1:7']);
-  expect(verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:3'])).toEqual(['1:1-1:3']);
-  expect(verseKeysToRanges(chaptersData, ['2:1', '2:2', '2:3', '2:4'])).toEqual(['2:1-2:4']);
+it('converts verse keys to ranges - groups sequential verses in same chapter', () => {
+  expect(verseKeysToRanges(['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7'])).toEqual(['1:1-1:7']);
+  expect(verseKeysToRanges(['1:1', '1:2', '1:3'])).toEqual(['1:1-1:3']);
+  expect(verseKeysToRanges(['2:1', '2:2', '2:3', '2:4'])).toEqual(['2:1-2:4']);
 });
 
-it('converts verse keys to ranges - handles sequential verses across chapters', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:6', '1:7', '2:1', '2:2'])).toEqual([
-    '1:6-1:7',
-    '2:1-2:2',
-  ]);
+it('converts verse keys to ranges - handles sequential verses across chapters', () => {
+  expect(verseKeysToRanges(['1:6', '1:7', '2:1', '2:2'])).toEqual(['1:6-1:7', '2:1-2:2']);
   expect(
-    verseKeysToRanges(chaptersData, [
-      '1:1',
-      '1:2',
-      '1:3',
-      '1:4',
-      '1:5',
-      '1:6',
-      '1:7',
-      '2:1',
-      '2:2',
-      '2:7',
-    ]),
+    verseKeysToRanges(['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:1', '2:2', '2:7']),
   ).toEqual(['1:1-1:7', '2:1-2:2', '2:7-2:7']);
-  expect(verseKeysToRanges(chaptersData, ['1:5', '1:6', '1:7', '2:1', '2:2', '2:3'])).toEqual([
+  expect(verseKeysToRanges(['1:5', '1:6', '1:7', '2:1', '2:2', '2:3'])).toEqual([
     '1:5-1:7',
     '2:1-2:3',
   ]);
 });
 
-it('converts verse keys to ranges - handles non-sequential across chapters', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:5', '2:1', '2:2', '2:3'])).toEqual([
-    '1:5-1:5',
-    '2:1-2:3',
-  ]);
-  expect(verseKeysToRanges(chaptersData, ['1:7', '2:2', '2:3'])).toEqual(['1:7-1:7', '2:2-2:3']);
+it('converts verse keys to ranges - handles non-sequential across chapters', () => {
+  expect(verseKeysToRanges(['1:5', '2:1', '2:2', '2:3'])).toEqual(['1:5-1:5', '2:1-2:3']);
+  expect(verseKeysToRanges(['1:7', '2:2', '2:3'])).toEqual(['1:7-1:7', '2:2-2:3']);
 });
 
-it('converts verse keys to ranges - handles single verses', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:1'])).toEqual(['1:1-1:1']);
-  expect(verseKeysToRanges(chaptersData, ['1:5', '2:10'])).toEqual(['1:5-1:5', '2:10-2:10']);
+it('converts verse keys to ranges - handles single verses', () => {
+  expect(verseKeysToRanges(['1:1'])).toEqual(['1:1-1:1']);
+  expect(verseKeysToRanges(['1:5', '2:10'])).toEqual(['1:5-1:5', '2:10-2:10']);
 });
 
-it('converts verse keys to ranges - handles non-sequential verses', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:1', '1:3', '1:5'])).toEqual([
-    '1:1-1:1',
-    '1:3-1:3',
-    '1:5-1:5',
-  ]);
-  expect(verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:5', '1:6'])).toEqual([
-    '1:1-1:2',
-    '1:5-1:6',
-  ]);
+it('converts verse keys to ranges - handles non-sequential verses', () => {
+  expect(verseKeysToRanges(['1:1', '1:3', '1:5'])).toEqual(['1:1-1:1', '1:3-1:3', '1:5-1:5']);
+  expect(verseKeysToRanges(['1:1', '1:2', '1:5', '1:6'])).toEqual(['1:1-1:2', '1:5-1:6']);
 });
 
-it('converts verse keys to ranges - handles empty arrays', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, [])).toEqual([]);
+it('converts verse keys to ranges - handles empty arrays', () => {
+  expect(verseKeysToRanges([])).toEqual([]);
 });
 
-it('converts verse keys to ranges - sorts unsorted input', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:7', '1:1', '1:3', '1:2'])).toEqual([
-    '1:1-1:3',
-    '1:7-1:7',
-  ]);
-  expect(verseKeysToRanges(chaptersData, ['2:2', '1:1', '2:1'])).toEqual(['1:1-1:1', '2:1-2:2']);
+it('converts verse keys to ranges - sorts unsorted input', () => {
+  expect(verseKeysToRanges(['1:7', '1:1', '1:3', '1:2'])).toEqual(['1:1-1:3', '1:7-1:7']);
+  expect(verseKeysToRanges(['2:2', '1:1', '2:1'])).toEqual(['1:1-1:1', '2:1-2:2']);
 });
 
-it('converts verse keys to ranges - handles complex multi-chapter sequences', async () => {
-  const chaptersData = await getAllChaptersData();
+it('converts verse keys to ranges - handles complex multi-chapter sequences', () => {
   expect(
-    verseKeysToRanges(chaptersData, [
-      '112:3',
-      '112:4',
-      '113:1',
-      '113:2',
-      '113:3',
-      '114:1',
-      '114:2',
-    ]),
+    verseKeysToRanges(['112:3', '112:4', '113:1', '113:2', '113:3', '114:1', '114:2']),
   ).toEqual(['112:3-112:4', '113:1-113:3', '114:1-114:2']);
 });
 
-it('converts verse keys to ranges - handles multiple small gaps', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:4', '1:5', '1:7'])).toEqual([
+it('converts verse keys to ranges - handles multiple small gaps', () => {
+  expect(verseKeysToRanges(['1:1', '1:2', '1:4', '1:5', '1:7'])).toEqual([
     '1:1-1:2',
     '1:4-1:5',
     '1:7-1:7',
   ]);
 });
 
-it('converts verse keys to ranges - handles all verses of a chapter', async () => {
-  const chaptersData = await getAllChaptersData();
+it('converts verse keys to ranges - handles all verses of a chapter', () => {
   // Chapter 112 has exactly 4 verses
-  expect(verseKeysToRanges(chaptersData, ['112:1', '112:2', '112:3', '112:4'])).toEqual([
-    '112:1-112:4',
-  ]);
+  expect(verseKeysToRanges(['112:1', '112:2', '112:3', '112:4'])).toEqual(['112:1-112:4']);
   // Chapter 113 has exactly 5 verses
-  expect(verseKeysToRanges(chaptersData, ['113:1', '113:2', '113:3', '113:4', '113:5'])).toEqual([
-    '113:1-113:5',
-  ]);
+  expect(verseKeysToRanges(['113:1', '113:2', '113:3', '113:4', '113:5'])).toEqual(['113:1-113:5']);
 });
 
-it('converts verse keys to ranges - handles cross-chapter with missing verses', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:5', '1:6', '2:1', '2:2'])).toEqual([
-    '1:5-1:6',
-    '2:1-2:2',
-  ]);
+it('converts verse keys to ranges - handles cross-chapter with missing verses', () => {
+  expect(verseKeysToRanges(['1:5', '1:6', '2:1', '2:2'])).toEqual(['1:5-1:6', '2:1-2:2']);
 });
 
-it('converts verse keys to ranges - handles only last verse of chapter and first of next', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['1:7', '2:1'])).toEqual(['1:7-1:7', '2:1-2:1']);
-  expect(verseKeysToRanges(chaptersData, ['112:4', '113:1'])).toEqual([
-    '112:4-112:4',
-    '113:1-113:1',
-  ]);
+it('converts verse keys to ranges - handles only last verse of chapter and first of next', () => {
+  expect(verseKeysToRanges(['1:7', '2:1'])).toEqual(['1:7-1:7', '2:1-2:1']);
+  expect(verseKeysToRanges(['112:4', '113:1'])).toEqual(['112:4-112:4', '113:1-113:1']);
 });
 
-it('converts verse keys to ranges - preserves order and creates ranges correctly', async () => {
-  const chaptersData = await getAllChaptersData();
+it('converts verse keys to ranges - preserves order and creates ranges correctly', () => {
   const input = ['2:255', '2:256', '2:285', '2:286', '3:1', '3:2'];
-  const result = verseKeysToRanges(chaptersData, input);
+  const result = verseKeysToRanges(input);
   expect(result).toEqual(['2:255-2:256', '2:285-2:286', '3:1-3:2']);
 });
 
-it('converts verse keys to ranges - handles large chapter numbers', async () => {
-  const chaptersData = await getAllChaptersData();
-  expect(verseKeysToRanges(chaptersData, ['114:1', '114:2', '114:3', '114:4'])).toEqual([
-    '114:1-114:4',
-  ]);
+it('converts verse keys to ranges - handles large chapter numbers', () => {
+  expect(verseKeysToRanges(['114:1', '114:2', '114:3', '114:4'])).toEqual(['114:1-114:4']);
 });

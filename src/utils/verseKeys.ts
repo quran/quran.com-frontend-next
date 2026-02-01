@@ -137,19 +137,18 @@ export const sortVerseKeys = (verseKeys: string[]): string[] => {
  * Single verses become ranges with the same start and end (e.g., '1:1-1:1').
  *
  * @example
- * verseKeysToRanges(chaptersData, ['1:1', '1:2', '1:3']) // returns ['1:1-1:3']
+ * verseKeysToRanges(['1:1', '1:2', '1:3']) // returns ['1:1-1:3']
  *
  * @example
- * verseKeysToRanges(chaptersData, ['1:6', '1:7', '2:1', '2:2']) // returns ['1:6-1:7', '2:1-2:2']
+ * verseKeysToRanges(['1:6', '1:7', '2:1', '2:2']) // returns ['1:6-1:7', '2:1-2:2']
  *
  * @example
- * verseKeysToRanges(chaptersData, ['1:1', '1:3', '1:5']) // returns ['1:1-1:1', '1:3-1:3', '1:5-1:5']
+ * verseKeysToRanges(['1:1', '1:3', '1:5']) // returns ['1:1-1:1', '1:3-1:3', '1:5-1:5']
  *
- * @param {ChaptersData} chaptersData - Chapters data (currently unused but kept for API consistency)
  * @param {string[]} verseKeys - Array of verse keys in the format 'chapter:verse' (e.g., ['1:1', '1:2', '2:1'])
  * @returns {string[]} Array of optimized verse ranges in the format 'fromVerseKey-toVerseKey'
  */
-export const verseKeysToRanges = (chaptersData: ChaptersData, verseKeys: string[]): string[] => {
+export const verseKeysToRanges = (verseKeys: string[]): string[] => {
   if (verseKeys.length === 0) return [];
 
   const sortedKeys = sortVerseKeys(verseKeys);
@@ -163,11 +162,7 @@ export const verseKeysToRanges = (chaptersData: ChaptersData, verseKeys: string[
     const [currentChapter, currentVerse] = currentKey.split(':').map(Number);
     const [prevChapter, prevVerse] = rangeEnd.split(':').map(Number);
 
-    let isConsecutive = false;
-
-    if (currentChapter === prevChapter) {
-      isConsecutive = currentVerse === prevVerse + 1;
-    }
+    const isConsecutive = currentChapter === prevChapter && currentVerse === prevVerse + 1;
 
     if (isConsecutive) {
       rangeEnd = currentKey;

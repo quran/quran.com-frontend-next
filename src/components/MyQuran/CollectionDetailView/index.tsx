@@ -95,6 +95,10 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     });
   }, [bookmarks, searchQuery]);
 
+  const isAllExpanded = React.useMemo(() => {
+    return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
+  }, [filteredBookmarks, expandedCardIds]);
+
   // Bulk actions handlers (defined after filteredBookmarks to avoid reference errors)
   const toggleSelectMode = useCallback(() => {
     setIsSelectMode((prev) => {
@@ -113,8 +117,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
   const handleToggleExpandCollapseAll = useCallback(() => {
     const allIds = new Set(filteredBookmarks.map((b) => b.id));
-    const isAllExpanded =
-      filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
 
     if (isAllExpanded) {
       // Collapse all
@@ -129,11 +131,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         collectionId: slugifiedCollectionIdToCollectionId(collectionId),
       });
     }
-  }, [filteredBookmarks, expandedCardIds, collectionId]);
-
-  const isAllExpanded = React.useMemo(() => {
-    return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
-  }, [filteredBookmarks, expandedCardIds]);
+  }, [filteredBookmarks, isAllExpanded, collectionId]);
 
   const handleToggleBookmarkSelection = useCallback((bookmarkId: string) => {
     setSelectedBookmarks((prev) => {

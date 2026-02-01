@@ -23,14 +23,10 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
 }) => {
   const { t } = useTranslation('quran-reader');
 
-  const handleNoteClick = () => {
-    onNoteClick();
-  };
-
   return (
     <PopoverMenu align={align} trigger={children}>
       <PopoverMenu.Item
-        onClick={handleNoteClick}
+        onClick={onNoteClick}
         shouldCloseMenuAfterClick
         dataTestId={`${dataTestPrefix}-note`}
         className={styles.menuItem}
