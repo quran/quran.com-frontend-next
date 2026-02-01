@@ -129,7 +129,7 @@ import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
-import { PinnedItemDTO, SyncPinnedItemPayload } from 'types/PinnedItem';
+import { PinnedItemDTO, PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
@@ -863,11 +863,11 @@ export const submitTranslationFeedback = async (params: {
 };
 
 // Pinned Items
-export const getPinnedItems = async (targetType?: string): Promise<{ data: PinnedItemDTO[] }> =>
+export const getPinnedItems = async (targetType?: PinnedItemTargetType): Promise<{ data: PinnedItemDTO[] }> =>
   privateFetcher(makePinnedItemsUrl(targetType));
 
 export const addPinnedItem = async (params: {
-  targetType: string;
+  targetType: PinnedItemTargetType;
   targetId: string;
   metadata?: Record<string, unknown>;
 }): Promise<PinnedItemDTO> => postRequest(makeAddPinnedItemUrl(), params);
@@ -880,7 +880,7 @@ export const syncPinnedItems = async (
 ): Promise<{ synced: number; lastSyncAt: Date }> =>
   postRequest(makeSyncPinnedItemsUrl(), { items });
 
-export const clearPinnedItems = async (targetType?: string) =>
+export const clearPinnedItems = async (targetType?: PinnedItemTargetType) =>
   deleteRequest(makeClearPinnedItemsUrl(), targetType ? { targetType } : undefined);
 
 const shouldRefreshToken = (error) => {

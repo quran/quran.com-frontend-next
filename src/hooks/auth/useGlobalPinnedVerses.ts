@@ -11,7 +11,7 @@ import {
 import { getPinnedItems } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
-import { PinnedItemDTO } from 'types/PinnedItem';
+import { PinnedItemDTO, PinnedItemTargetType } from 'types/PinnedItem';
 
 export const PINNED_VERSES_KEY = 'pinned-verses';
 
@@ -36,7 +36,7 @@ const useGlobalPinnedVerses = () => {
 
   const { data } = useSWR<{ data: PinnedItemDTO[] }>(
     isLoggedIn() ? PINNED_VERSES_KEY : null,
-    () => getPinnedItems('ayah'),
+    () => getPinnedItems(PinnedItemTargetType.Ayah),
     {
       revalidateOnFocus: false,
       dedupingInterval: 60000,

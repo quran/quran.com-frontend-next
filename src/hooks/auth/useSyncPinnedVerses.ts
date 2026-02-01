@@ -16,8 +16,7 @@ import { getMushafId } from '@/utils/api';
 import { getPinnedItems, syncPinnedItems } from '@/utils/auth/api';
 import { getLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
-import { SyncPinnedItemPayload } from 'types/PinnedItem';
-import { PinnedItemDTO } from 'types/PinnedItem';
+import { PinnedItemTargetType, SyncPinnedItemPayload, PinnedItemDTO } from 'types/PinnedItem';
 
 const MAX_SYNC_ATTEMPTS = 3;
 const INITIAL_RETRY_DELAY_MS = 1000;
@@ -40,7 +39,7 @@ const serverItemToLocal = (item: PinnedItemDTO): PinnedVerse => ({
  * Convert a local PinnedVerse to a sync payload with metadata.
  */
 const localToSyncPayload = (verse: PinnedVerse, mushafId: number): SyncPinnedItemPayload => ({
-  targetType: 'ayah',
+  targetType: PinnedItemTargetType.Ayah,
   targetId: verse.verseKey,
   metadata: {
     sourceMushafId: mushafId,
@@ -124,7 +123,7 @@ const useSyncPinnedVerses = () => {
       const currentMushafId = mushafIdRef.current;
 
       try {
-        const { data: serverItems } = await getPinnedItems('ayah');
+        const { data: serverItems } = await getPinnedItems(PinnedItemTargetType.Ayah);
 
         const serverMap = new Map<string, PinnedItemDTO>();
         serverItems.forEach((item) => serverMap.set(item.targetId, item));

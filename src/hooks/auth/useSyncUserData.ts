@@ -31,7 +31,7 @@ import SyncDataType, {
   SyncLocalDataPayload,
   SyncReadingSessionPayload,
 } from 'types/auth/SyncDataType';
-import { SyncPinnedItemPayload } from 'types/PinnedItem';
+import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
@@ -77,7 +77,7 @@ const formatLocalReadingSession = (
 };
 
 const formatLocalPinnedVerse = (verse: PinnedVerse, mushafId: number): SyncPinnedItemPayload => ({
-  targetType: 'ayah',
+  targetType: PinnedItemTargetType.Ayah,
   targetId: verse.verseKey,
   metadata: {
     sourceMushafId: mushafId,

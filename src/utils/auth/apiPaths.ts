@@ -12,6 +12,7 @@ import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
+import { PinnedItemTargetType } from 'types/PinnedItem';
 import BookmarkType from 'types/BookmarkType';
 
 /**
@@ -344,7 +345,7 @@ export const PINNED_ITEMS_CACHE_PATHS = {
   LIST: 'pinned-items?',
 } as const;
 
-export const makePinnedItemsUrl = (targetType?: string): string =>
+export const makePinnedItemsUrl = (targetType?: PinnedItemTargetType): string =>
   makeUrl('pinned-items', targetType ? { targetType } : undefined);
 
 export const makeAddPinnedItemUrl = (): string => makeUrl('pinned-items');

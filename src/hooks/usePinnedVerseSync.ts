@@ -27,6 +27,7 @@ import {
 } from '@/utils/auth/api';
 import { isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import { PinnedItemTargetType } from 'types/PinnedItem';
 
 const usePinnedVerseSync = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const usePinnedVerseSync = () => {
       if (isLoggedIn) {
         try {
           const response = await addPinnedItem({
-            targetType: 'ayah',
+            targetType: PinnedItemTargetType.Ayah,
             targetId: verseKey,
             metadata: {
               sourceMushafId: mushafId,
@@ -104,7 +105,7 @@ const usePinnedVerseSync = () => {
 
     if (isLoggedIn) {
       try {
-        await clearPinnedItems('ayah');
+        await clearPinnedItems(PinnedItemTargetType.Ayah);
         invalidateCache();
       } catch (error) {
         dispatch(setPinnedVerses(savedVerses));

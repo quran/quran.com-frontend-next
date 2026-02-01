@@ -1,6 +1,6 @@
 import { PINNED_ITEMS_CACHE_PATHS } from '@/utils/auth/apiPaths';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
-import { SyncPinnedItemPayload } from 'types/PinnedItem';
+import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 /**
  * Check if a SWR cache key matches a pinned items endpoint.
@@ -20,7 +20,7 @@ export const buildPinnedSyncPayload = (
   verseKey: string,
   mushafId: number,
 ): SyncPinnedItemPayload => ({
-  targetType: 'ayah',
+  targetType: PinnedItemTargetType.Ayah,
   targetId: verseKey,
   metadata: {
     sourceMushafId: mushafId,
