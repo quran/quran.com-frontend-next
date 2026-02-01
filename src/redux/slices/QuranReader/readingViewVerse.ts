@@ -33,6 +33,12 @@ const readingViewVerse = createSlice({
         selectedVerseKey: payload,
       };
     },
+    clearAllHighlights: () => {
+      return {
+        hoveredVerseKey: null,
+        selectedVerseKey: null,
+      };
+    },
   },
 });
 
@@ -42,6 +48,6 @@ export const selectReadingViewHoveredVerseKey = (state: RootState) =>
 export const selectReadingViewSelectedVerseKey = (state: RootState) =>
   state.readingViewVerse.selectedVerseKey;
 
-export const { setReadingViewHoveredVerseKey, setReadingViewSelectedVerseKey } =
+export const { setReadingViewHoveredVerseKey, setReadingViewSelectedVerseKey, clearAllHighlights } =
   readingViewVerse.actions;
 export default readingViewVerse.reducer;

@@ -45,6 +45,7 @@
     "play-surah": "Mainkan Surah {{surahName}}",
     "select-lng": "Pilih Bahasa",
     "sidebar-nav-close": "Tutup Bar Sisi Navigasi",
+    "tooltip-action": "Tindakan petua alat",
     "translation-info": "Lihat maklumat terjemahan"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Mengurang",
     "increase": "Meningkat"
   },
+  "create": "Cipta",
   "create-my-goal": "Cipta Matlamat Saya",
   "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
   "delete": "Padam",
@@ -150,6 +152,7 @@
   "donate-now": "Derma sekarang",
   "donate_monthly": "Derma bulanan",
   "donate_once": "Derma sekali",
+  "done": "Selesai",
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
     "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayah",
-    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir."
+    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir.",
+    "reading-bookmark-remove": "Gagal mengalih keluar penanda buku bacaan",
+    "reading-bookmark-set": "Gagal menetapkan penanda buku bacaan",
+    "reading-bookmark-undo": "Gagal membuat asal penanda buku bacaan"
   },
   "errors": {
     "account-banned": "Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
@@ -207,9 +213,11 @@
     "verification-code-invalid": "Kod pengesahan ini tidak sah",
     "verification-code-length": "Kod pengesahan mestilah {{length}} digit",
     "verification-failed": "Pengesahan gagal. Sila cuba lagi.",
-    "verification-resend-failed": "Gagal menghantar semula kod pengesahan"
+    "verification-resend-failed": "Gagal menghantar semula kod pengesahan",
+    "verse-metadata-failed": "Gagal memuatkan metadata ayat"
   },
   "exciting-updates": "Kemas Kini Menarik",
+  "favorites": "Kegemaran",
   "feedback": "Maklum balas",
   "fonts": {
     "15_lines": "15 Baris",
@@ -266,6 +274,7 @@
     "title": "Jadilah Penderma Bulanan"
   },
   "get-started": "Mulakan",
+  "go-to-verse": "Pergi ke Ayat",
   "hear-it-pronounced": "Klik perkataan Quran, dengar lafaz",
   "help": "Bantuan",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Hilangkan"
   },
+  "join-ramadan-challenge": "🚀 Sertai Cabaran Ramadan kami!",
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
   "read": "Baca",
+  "read-more": "Baca Lagi",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
     "arabic": "Bahasa Arab",
@@ -369,6 +380,7 @@
   "reflect": "Renungkan",
   "reflections": "Renungan",
   "reflections-and-lessons": "Refleksi & Pengajaran",
+  "related-verses": "Ayat-ayat Berkaitan",
   "remove": "Keluarkan",
   "rename": "Namakan semula",
   "retry": "Cuba lagi (Retry)",
@@ -394,6 +406,7 @@
     "title": "Cari"
   },
   "seconds": "Saat",
+  "see-less": "Lihat kurang",
   "see-new": "Lihat terbaru",
   "select-language": "Pilih Bahasa",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "Menaik",
     "by": "Disusun mengikut",
-    "descending": "Menurun"
+    "descending": "Menurun",
+    "sort": "Isih"
   },
   "stay-on-track": "🎯 Kekal di landasan yang betul!",
   "style": "Gaya",

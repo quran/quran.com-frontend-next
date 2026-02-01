@@ -21,7 +21,7 @@
       },
       "quran-growth-journey": {
         "action": "Inayofuata",
-        "description": "Dumisha streak yako ya kusoma Qur'ani na ujiendeleze kupitia malengo yako huku ukijenga tabia mpya",
+        "description": "Dumisha mfululizo wako wa kusoma Qur'ani na ujiendeleze kupitia malengo yako huku ukijenga tabia mpya",
         "title": "Anza Safari yako ya kukua pamoja na Qur'ani!"
       },
       "welcome": {
@@ -45,6 +45,7 @@
     "play-surah": "Cheza Sura {{surahName}}",
     "select-lng": "Chagua Lugha",
     "sidebar-nav-close": "Funga Upau wa pembeni wa Uchunguzi",
+    "tooltip-action": "Kitendo cha vidokezo",
     "translation-info": "Tazama maelezo ya tarjuma"
   },
   "audio": {
@@ -127,7 +128,7 @@
   },
   "consents": {
     "communication": {
-      "body": "🚀 Boresha maendeleo yako kupitia arifa <boldSpan> zilizobinafsishwa </boldSpan> kuhusu maendeleo ya lengo lako, kudumisha streaks, na kuboresha matumizi yako ya vipengele vyetu vya sasa. <br></br> <br></br> Je, tunaweza kukufahamisha kupitia barua pepe na vituo vingine? Wewe ndiye unayedhibiti - jisikie huru kurekebisha mapendeleo haya wakati wowote katika mipangilio ya akaunti yako. <br></br> <br></br> Chagua tu 'Ruhusu' kupata <boldSpan> vikumbusho vinavyotia moyo </boldSpan> au 'Si Sasa' ili kukataa.",
+      "body": "🚀 Boresha maendeleo yako kupitia arifa <boldSpan> zilizobinafsishwa </boldSpan> kuhusu maendeleo ya lengo lako, kudumisha mifululizo, na kuboresha matumizi yako ya vipengele vyetu vya sasa. <br></br> <br></br> Je, tunaweza kukufahamisha kupitia barua pepe na vituo vingine? Wewe ndiye unayedhibiti - jisikie huru kurekebisha mapendeleo haya wakati wowote katika mipangilio ya akaunti yako. <br></br> <br></br> Chagua tu 'Ruhusu' kupata <boldSpan> vikumbusho vinavyotia moyo </boldSpan> au 'Si Sasa' ili kukataa.",
       "header": "Tungependa kukusaidia ubaki <boldSpan> uwe na msimamo na uthabiti </boldSpan> katika kukuza safari yako na Qur'ani! 📖🌟"
     }
   },
@@ -141,6 +142,7 @@
     "decrease": "Punguza",
     "increase": "Ongeza"
   },
+  "create": "Unda",
   "create-my-goal": "Unda Lengo Langu",
   "default-description": "Qur'ani iliyotarjumiwa katika lugha nyingi katika kiolesura rahisi na ya kawaida",
   "delete": "Futa",
@@ -150,6 +152,7 @@
   "donate-now": "Changia sasa",
   "donate_monthly": "Changia kila mwezi",
   "donate_once": "Changia mara moja",
+  "done": "Imekamilika",
   "edit": "Hariri",
   "email-verification": {
     "check-spam": "Hukupokea barua pepe ya uthibitishaji? Angalia kisanduku pokezi chako cha barua taka",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Imeshindikana kusawazisha mipangilio yako kwenye cloud.",
     "ranges-no-value": "Msururu wa mwanzo na wa mwisho lazima iwe na tarakimu",
     "ranges-too-many-verses": "*Upeo wa Aya {{maxNumberOfVerses}}",
-    "ranges-wrong-order": "Mstari wa kuanzia lazima uwe kabla ya mstari wa kumalizia."
+    "ranges-wrong-order": "Mstari wa kuanzia lazima uwe kabla ya mstari wa kumalizia.",
+    "reading-bookmark-remove": "Imeshindwa kuondoa alamisho ya kusoma",
+    "reading-bookmark-set": "Imeshindwa kuweka alamisho ya kusoma",
+    "reading-bookmark-undo": "Imeshindwa kutendua alamisho ya kusoma"
   },
   "errors": {
     "account-banned": "Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
@@ -184,32 +190,34 @@
     "expiredToken": "*Tokeni hii imekwisha muda wake",
     "file-exceeds-limit": "Ukubwa wa faili unazidi kikomo. Tafadhali chagua faili ndogo zaidi.",
     "forgot-password-failed": "Imeshindwa kutuma barua pepe ya kuweka upya nenosiri. Tafadhali jaribu tena.",
-    "image-remove-failed": "Imeshindwa kuondoa picha. Tafadhali jaribu tena.",
-    "image-upload-failed": "Imeshindwa kupakia picha. Tafadhali jaribu tena.",
+    "image-remove-failed": "imeshindikana kuondoa picha. Tafadhali jaribu tena.",
+    "image-upload-failed": "Imeshindikana kupakia picha. Tafadhali jaribu tena.",
     "immutable": "*Tarakimu hii haiwezi kubadilishwa",
     "invalid": "*Hii {{fieldName}} si sahihi",
-    "invalid-file-format": "Muundo wa faili si sahihi. Pekee {{formats}} faili zinaruhusiwa.",
+    "invalid-file-format": "Muundo wa faili si sahihi. {{formats}} Pekee zinaruhusiwa.",
     "invalidEmailOrPassword": "*Barua pepe au nenosiri batili",
     "max": "* {{fieldName}} lazima iwe chini ya au sawa na tarakimu {{max}}",
     "min": "* {{fieldName}} lazima iwe zaidi ya au sawa na tarakimu {{min}}",
     "name": "* {{fieldName}} inapaswa kuwa herufi na nambari pekee",
     "notFound": "*Haijapatikana",
-    "profile-pic-size-limit": "Ukubwa wa picha ya wasifu unapaswa kuwa {{size}}Upeo wa MB",
-    "remove-avatar-failed": "Imeshindwa kuondoa ishara. Tafadhali jaribu tena.",
+    "profile-pic-size-limit": "Ukubwa wa picha ya wasifu unapaswa kuwa na Upeo wa {{size}} MB",
+    "remove-avatar-failed": "Imeshindikana kuondoa picha. Tafadhali jaribu tena.",
     "required": "* {{fieldName}} haipo!",
     "reset-password-failed": "Imeshindwa kuweka upya nenosiri. Tafadhali jaribu tena.",
     "signin-failed": "Kuingia kumeshindwa. Tafadhali jaribu tena.",
     "signup-failed": "Kujisajili kumeshindwa. Tafadhali jaribu tena.",
     "taken": "* {{fieldName}} tayari ipo!",
-    "upload-avatar-failed": "Imeshindwa kupakia ishara. Tafadhali jaribu tena.",
+    "upload-avatar-failed": "Imeshindikana kupakia picha. Tafadhali jaribu tena.",
     "usedToken": "*Tokeni hii tayari imetumika",
     "username": "* {{fieldName}} kubali alama ya chini na herufi pekee",
     "verification-code-invalid": "Nambari hii ya uthibitishaji si sahihi",
     "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
     "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
-    "verification-resend-failed": "Imeshindikana kutuma tena nambari ya kuthibitisha"
+    "verification-resend-failed": "Imeshindikana kutuma tena nambari ya kuthibitisha",
+    "verse-metadata-failed": "Imeshindwa kupakia metadata ya mstari"
   },
   "exciting-updates": "Sasisho za Kusisimua",
+  "favorites": "Vipendwa",
   "feedback": "Maoni",
   "fonts": {
     "15_lines": "Mistari 15",
@@ -266,6 +274,7 @@
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "get-started": "Anza",
+  "go-to-verse": "Nenda kwenye Aya",
   "hear-it-pronounced": "Bonyeza neno lolote la Qur'ani, lisikie likitamkwa",
   "help": "Msaada",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Futa"
   },
+  "join-ramadan-challenge": "🚀 Jiunge na Changamoto yetu ya Ramadhani!",
   "juz": "Juzuu",
   "language": "Lugha",
   "languages": "Lugha",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
   "read": "Soma",
+  "read-more": "Soma Zaidi",
   "reading-history": "Historia ya kusoma",
   "reading-preference": {
     "arabic": "Kiarabu",
@@ -369,6 +380,7 @@
   "reflect": "Tafakari",
   "reflections": "Tafakari",
   "reflections-and-lessons": "Tafakari na Mafunzo",
+  "related-verses": "Aya Zinazohusiana",
   "remove": "Ondoa",
   "rename": "Badilisha jina",
   "retry": "Jaribu tena",
@@ -394,6 +406,7 @@
     "title": "Tafuta"
   },
   "seconds": "Sekunde",
+  "see-less": "Tazama kidogo",
   "see-new": "Tazama Nini Kipya",
   "select-language": "Chagua Lugha",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "Kupanda",
     "by": "Panga kwa",
-    "descending": "Kushuka"
+    "descending": "Kushuka",
+    "sort": "Panga"
   },
   "stay-on-track": "🎯 Endelea kufuatilia!",
   "style": "Mtindo",

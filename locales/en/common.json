@@ -45,6 +45,7 @@
     "play-surah": "Play Surah {{surahName}}",
     "select-lng": "Select Language",
     "sidebar-nav-close": "Close Navigation Sidebar",
+    "tooltip-action": "Tooltip action",
     "translation-info": "View translation information"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Decrease",
     "increase": "Increase"
   },
+  "create": "Create",
   "create-my-goal": "Create My Goal",
   "default-description": "The Quran translated into many languages in a simple and easy interface",
   "delete": "Delete",
@@ -150,6 +152,7 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Failed to sync your settings to the cloud.",
     "ranges-no-value": "Range start and end must have a value",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "The starting verse has to be before the ending verse."
+    "ranges-wrong-order": "The starting verse has to be before the ending verse.",
+    "reading-bookmark-remove": "Failed to remove reading bookmark",
+    "reading-bookmark-set": "Failed to set reading bookmark",
+    "reading-bookmark-undo": "Failed to undo reading bookmark"
   },
   "errors": {
     "account-banned": "Sorry, Your account is banned. Contact Quran.Foundation",
@@ -207,9 +213,11 @@
     "verification-code-invalid": "This verification code is invalid",
     "verification-code-length": "Verification code must be {{length}} digits",
     "verification-failed": "Verification failed. Please try again.",
-    "verification-resend-failed": "Failed to resend verification code"
+    "verification-resend-failed": "Failed to resend verification code",
+    "verse-metadata-failed": "Failed to load verse metadata"
   },
   "exciting-updates": "Exciting Updates",
+  "favorites": "Favorites",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 Lines",
@@ -266,6 +274,7 @@
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",
+  "go-to-verse": "Go To Verse",
   "hear-it-pronounced": "Click Quranic words, hear pronunciation",
   "help": "Help",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Clear"
   },
+  "join-ramadan-challenge": "🚀 Join our Ramadan Challenge!",
   "juz": "Juz",
   "language": "Language",
   "languages": "Languages",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Read",
+  "read-more": "Read More",
   "reading-history": "Reading history",
   "reading-preference": {
     "arabic": "Arabic",
@@ -369,6 +380,7 @@
   "reflect": "Reflect",
   "reflections": "Reflections",
   "reflections-and-lessons": "Reflections & Lessons",
+  "related-verses": "Related Verses",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",
@@ -394,6 +406,7 @@
     "title": "Search"
   },
   "seconds": "Seconds",
+  "see-less": "See less",
   "see-new": "See What's New",
   "select-language": "Select Language",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "Ascending",
     "by": "Sort by",
-    "descending": "Descending"
+    "descending": "Descending",
+    "sort": "Sort"
   },
   "stay-on-track": "🎯 Stay on track!",
   "style": "Style",

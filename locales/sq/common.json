@@ -45,6 +45,7 @@
     "play-surah": "Luaj suren {{surahName}}",
     "select-lng": "Zgjidh gjuhen",
     "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit",
+    "tooltip-action": "Veprimi i këshillës së mjetit",
     "translation-info": "Shiko informacionin e përkthimit"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Ulje",
     "increase": "Rrit"
   },
+  "create": "Krijo",
   "create-my-goal": "Krijo Qëllimin Tim",
   "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
   "delete": "Fshije",
@@ -150,6 +152,7 @@
   "donate-now": "Dhuroni tani",
   "donate_monthly": "Dhuroni çdo muaj",
   "donate_once": "Dhuroni një herë",
+  "done": "U krye",
   "edit": "Redakto",
   "email-verification": {
     "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi.",
     "ranges-no-value": "Fillimi dhe mbarimi i diapazonit duhet të kenë një vlerë",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ajete",
-    "ranges-wrong-order": "Vargu fillestar duhet të jetë para vargut përfundimtar."
+    "ranges-wrong-order": "Vargu fillestar duhet të jetë para vargut përfundimtar.",
+    "reading-bookmark-remove": "Dështoi në heqjen e faqeshënuesit për lexim",
+    "reading-bookmark-set": "Dështoi të vendoset faqeshënuesi për lexim",
+    "reading-bookmark-undo": "Dështoi në zhbërjen e faqeshënuesit të leximit."
   },
   "errors": {
     "account-banned": "Na vjen keq, llogaria juaj është e ndaluar. Kontakto Kuran.Fondacioni",
@@ -207,9 +213,11 @@
     "verification-code-invalid": "Ky kod verifikimi është i pavlefshëm",
     "verification-code-length": "Kodi i verifikimit duhet të jetë {{length}} shifra",
     "verification-failed": "Verifikimi dështoi. Ju lutemi provoni përsëri.",
-    "verification-resend-failed": "Dështoi ridërgimi i kodit të verifikimit"
+    "verification-resend-failed": "Dështoi ridërgimi i kodit të verifikimit",
+    "verse-metadata-failed": "Dështoi në ngarkimin e meta të dhënave të vargut."
   },
   "exciting-updates": "Përditësime emocionuese",
+  "favorites": "Të preferuarat",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 rreshta",
@@ -266,6 +274,7 @@
     "title": "Bëhuni një donator mujor"
   },
   "get-started": "Filloni",
+  "go-to-verse": "Shko te Vargu",
   "hear-it-pronounced": "Klikoni fjalët kuranore, dëgjoni shqiptimin",
   "help": "Ndihmë",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Qartë"
   },
+  "join-ramadan-challenge": "🚀 Bashkohuni me Sfidën tonë të Ramazanit!",
   "juz": "Xhuz",
   "language": "Gjuhë",
   "languages": "Gjuhët",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
   "read": "Lexo",
+  "read-more": "Lexo më shumë",
   "reading-history": "Leximi i historisë",
   "reading-preference": {
     "arabic": "Arabisht",
@@ -369,6 +380,7 @@
   "reflect": "Pasqyrim",
   "reflections": "Reflektime",
   "reflections-and-lessons": "Reflektime & Mësime",
+  "related-verses": "Vargje të Ngjashme",
   "remove": "Hiq",
   "rename": "Riemërto",
   "retry": "Provo sërish",
@@ -394,6 +406,7 @@
     "title": "Kërko"
   },
   "seconds": "Sekonda",
+  "see-less": "Shiko më pak",
   "see-new": "Shihni çfarë ka të re",
   "select-language": "Zgjidh Gjuhën",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "Në ngjitje",
     "by": "Ndaj sipas",
-    "descending": "Duke zbritur"
+    "descending": "Duke zbritur",
+    "sort": "Rendit"
   },
   "stay-on-track": "🎯 Qëndroni në rrugën e duhur!",
   "style": "Stili",

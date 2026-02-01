@@ -25,6 +25,14 @@
   "max-file-size": "Maks {{size}}",
   "my-profile": "Profil Saya",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "E-mel akan dihantar untuk mengingatkan anda tentang matlamat al-Quran anda jika anda belum membuat kemajuan sejak sekian lama.",
+      "title": "Peringatan Matlamat"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
+      "title": "Cabaran Ramadan Harian"
+    },
     "quran-reading-program": {
       "description": "E-mel akan dihantar dengan pautan ke tugasan bacaan mingguan, gesaan refleksi dan lebih banyak sumber untuk memastikan anda berada di landasan yang betul.",
       "title": "Al-Quran dalam Setahun"

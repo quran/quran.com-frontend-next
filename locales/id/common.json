@@ -45,6 +45,7 @@
     "play-surah": "Putar Surah {{SurahName}}",
     "select-lng": "Pilih Bahasa",
     "sidebar-nav-close": "Tutup Sidebar Navigasi",
+    "tooltip-action": "Aksi tooltip",
     "translation-info": "Lihat informasi terjemahan"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Mengurangi",
     "increase": "Meningkatkan"
   },
+  "create": "Membuat",
   "create-my-goal": "Buat Tujuan Saya",
   "default-description": "Al-Qur'an diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
   "delete": "Hapus",
@@ -150,6 +152,7 @@
   "donate-now": "Donasi sekarang",
   "donate_monthly": "Donasi setiap bulan",
   "donate_once": "Donasi satu kali",
+  "done": "Selesai",
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud.",
     "ranges-no-value": "Rentang awal dan akhir harus memiliki nilai",
     "ranges-too-many-verses": "*Jumlah ayat maksimum {{maxNumberOfVerses}}",
-    "ranges-wrong-order": "Ayat pembuka harus sebelum ayat penutup."
+    "ranges-wrong-order": "Ayat pembuka harus sebelum ayat penutup.",
+    "reading-bookmark-remove": "Gagal menghapus bookmark bacaan",
+    "reading-bookmark-set": "Gagal mengatur penanda bacaan",
+    "reading-bookmark-undo": "Gagal membatalkan bookmark bacaan"
   },
   "errors": {
     "account-banned": "Maaf, akun Anda diblokir. Hubungi Quran Foundation",
@@ -207,9 +213,11 @@
     "verification-code-invalid": "Kode verifikasi tidak valid",
     "verification-code-length": "Kode verifikasi harus {{length}} digit",
     "verification-failed": "Verifikasi gagal. Silakan coba lagi.",
-    "verification-resend-failed": "Gagal mengirim ulang kode verifikasi"
+    "verification-resend-failed": "Gagal mengirim ulang kode verifikasi",
+    "verse-metadata-failed": "Gagal memuat metadata ayat."
   },
   "exciting-updates": "Pengkinian menarik",
+  "favorites": "Favorit",
   "feedback": "Beri Masukan",
   "fonts": {
     "15_lines": "15 Baris",
@@ -266,6 +274,7 @@
     "title": "Menjadi Donatur Bulanan"
   },
   "get-started": "Memulai",
+  "go-to-verse": "Buka Ayat",
   "hear-it-pronounced": "Klik kata-kata Qurani, dengarkan pengucapannya",
   "help": "Bantuan",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Bersihkan"
   },
+  "join-ramadan-challenge": "🚀 Ikuti Tantangan Ramadan kami!",
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Radio Qur'an",
   "read": "Membaca",
+  "read-more": "Baca selengkapnya",
   "reading-history": "Riwayat membaca",
   "reading-preference": {
     "arabic": "Arab",
@@ -369,6 +380,7 @@
   "reflect": "Refleksi",
   "reflections": "Refleksi",
   "reflections-and-lessons": "Refleksi dan Pelajaran",
+  "related-verses": "Ayat-ayat terkait",
   "remove": "Hapus",
   "rename": "Ganti nama",
   "retry": "Coba Lagi",
@@ -394,6 +406,7 @@
     "title": "Mencari"
   },
   "seconds": "Detik",
+  "see-less": "Lihat lebih sedikit",
   "see-new": "Lihat Apa yang Baru",
   "select-language": "Pilih Bahasa",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "menaik",
     "by": "Sortir dengan",
-    "descending": "Menurun"
+    "descending": "Menurun",
+    "sort": "Menyortir"
   },
   "stay-on-track": "🎯 Tetap di jalur yang benar!",
   "style": "Gaya",

@@ -35,6 +35,7 @@ type PopoverMenuProps = {
   sideOffset?: number;
   contentClassName?: string;
   shouldClose?: boolean;
+  shouldUseModalZIndex?: boolean;
 };
 
 const PopoverMenu = ({
@@ -44,6 +45,7 @@ const PopoverMenu = ({
   isPortalled = true,
   isModal = true,
   shouldClose = true,
+  shouldUseModalZIndex = false,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
   align = PopoverMenuAlign.CENTER,
@@ -54,7 +56,9 @@ const PopoverMenu = ({
   const direction = useDirection();
   const content = (
     <PrimitiveDropdownMenu.Content
-      className={classNames(styles.content, contentClassName)}
+      className={classNames(styles.content, contentClassName, {
+        [styles.modalZIndex]: shouldUseModalZIndex,
+      })}
       side={side}
       align={align}
       sideOffset={sideOffset}
@@ -141,6 +145,7 @@ PopoverMenu.Item = ({
       disabled={isDisabled}
       id={id}
       data-testid={dataTestId}
+      data-selected={isSelected}
     >
       {icon && (
         <span

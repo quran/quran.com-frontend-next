@@ -1,10 +1,10 @@
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
 
 .tabContainer {
   margin-block: var(--spacing-large);
-  min-height: 80vh;
-  height: 100%;
+  min-block-size: 80vh;
+  block-size: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,7 +25,7 @@
   flex: 1;
 
   @include breakpoints.smallerThanDesktop {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
@@ -33,7 +33,7 @@
   flex: 1;
 
   @include breakpoints.smallerThanDesktop {
-    width: 100%;
+    inline-size: 100%;
     text-align: center;
     margin-block-start: calc(2 * var(--spacing-mega));
   }
@@ -67,7 +67,7 @@ $circle-border: 4px;
   position: relative;
   $spacing: calc($circle-size + $circle-spacing + $circle-border);
   padding-inline-start: $spacing;
-  width: calc(100% - $spacing);
+  inline-size: calc(100% - $spacing);
 }
 
 .dayPreview {
@@ -90,43 +90,41 @@ $circle-border: 4px;
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset-inline-start: 0;
     transform: translateX(calc(-100% - $circle-spacing));
 
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateX(calc(100% + $circle-spacing));
     }
 
-    width: $circle-size;
-    height: $circle-size;
+    inline-size: $circle-size;
+    block-size: $circle-size;
     border: $circle-border solid var(--color-success-medium);
     border-radius: var(--border-radius-circle);
     background-color: var(--color-background-default);
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     inset-inline-start: 0;
     // we need to translate the line directly under the circle and in the middle of it
     transform: translate(
-      calc(
-        -100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2
-      ),
+      calc(-100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2),
       calc(50% + ($circle-size + $circle-border) / 2)
     );
 
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translate(
         calc(100% + $circle-spacing + ($circle-size + $circle-border) / 2),
         calc(50% + ($circle-size + $circle-border) / 2)
       );
     }
 
-    width: 3px;
-    height: 100%;
+    inline-size: 3px;
+    block-size: 100%;
     background-color: var(--color-success-medium);
   }
 
@@ -157,16 +155,16 @@ $circle-border: 4px;
 
 .inputContainer {
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   flex-direction: column;
   justify-content: center;
 }
 
 .input {
-  width: 100%;
+  inline-size: 100%;
 
   > select {
-    width: 100%;
+    inline-size: 100%;
   }
 }
 

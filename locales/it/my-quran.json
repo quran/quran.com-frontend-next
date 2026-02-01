@@ -1,0 +1,52 @@
+{
+  "bulk-actions": {
+    "actions": "Azioni",
+    "actions-count": "Azioni ({{count}})",
+    "cancel": "Cancellare",
+    "collapse-all": "Comprimi tutto",
+    "expand-all": "Espandi tutto",
+    "select": "Selezionare"
+  },
+  "collections": {
+    "favorites": "Preferiti",
+    "guest-promo": {
+      "sign-in": "Registrazione",
+      "subtitle": "Confronta e metti in contrasto i versetti",
+      "title": "Crea raccolte personalizzate"
+    },
+    "items": "{{count}} articolo",
+    "items_plural": "{{count}} elementi",
+    "load-more": "Carica altro",
+    "new-collection": "Nuova collezione",
+    "sort": {
+      "a-z": "Dalla A alla Z",
+      "recently-updated": "Aggiornato di recente",
+      "z-a": "Z - A"
+    },
+    "title": "Collezioni"
+  },
+  "notes-and-reflections": "Note e riflessioni",
+  "page": "Pagina",
+  "reading-bookmark": {
+    "empty": "Inizia a leggere e salva un segnalibro di lettura!",
+    "title": "Il mio segnalibro di lettura"
+  },
+  "recent": "Recente",
+  "recent-empty": "Inizia a leggere per vedere i tuoi libri letti di recente",
+  "recently-saved": {
+    "title": "Salvato di recente"
+  },
+  "saved": "Salvato",
+  "search": {
+    "filter": "Filtro",
+    "placeholder": "Ricerca salvata...",
+    "sort": "Ordinare"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Allega note ai versi",
+      "custom-collections": "Crea raccolte personalizzate"
+    },
+    "title": "Accedi o registrati gratuitamente per avere accesso a più funzionalità!"
+  }
+}

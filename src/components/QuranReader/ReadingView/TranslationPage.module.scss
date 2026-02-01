@@ -1,6 +1,9 @@
+@use 'src/styles/utility';
+
 $translation-content-max-width: 600px;
 
 .container {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,12 +24,16 @@ $translation-content-max-width: 600px;
 .translationContent {
   max-inline-size: $translation-content-max-width;
   inline-size: 100%;
-  text-align: justify;
+  text-align: start;
   font-family: 'Figtree', var(--font-primary);
   font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-large2);
   line-height: 180%;
   color: var(--color-text-default);
+
+  sup {
+    font-size: var(--font-size-small-px);
+  }
 }
 
 .pageFooter {

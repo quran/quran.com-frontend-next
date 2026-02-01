@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +7,7 @@ import styles from './ReadingModeActions.module.scss';
 import TranslationModeButton from './TranslationModeButton';
 
 import DataFetcher from '@/components/DataFetcher';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useReadingPreferenceSwitcher, {
   SwitcherContext,
 } from '@/hooks/useReadingPreferenceSwitcher';
@@ -56,31 +56,29 @@ const ReadingModeActions: React.FC = () => {
 
   const translationButtonLoading = useCallback(
     () => (
-      <button
-        type="button"
-        className={classNames(styles.modeButton, {
-          [styles.modeButtonSelected]: isTranslationSelected,
-          [styles.modeButtonUnselected]: !isTranslationSelected,
-        })}
+      <Button
+        size={ButtonSize.XSmall}
+        shape={ButtonShape.Pill}
+        variant={ButtonVariant.ModeToggle}
+        isSelected={isTranslationSelected}
       >
         {t('translation')}
-      </button>
+      </Button>
     ),
     [isTranslationSelected, t],
   );
 
   return (
     <div className={styles.container}>
-      <button
-        type="button"
-        className={classNames(styles.modeButton, {
-          [styles.modeButtonSelected]: isArabicSelected,
-          [styles.modeButtonUnselected]: !isArabicSelected,
-        })}
+      <Button
+        size={ButtonSize.XSmall}
+        shape={ButtonShape.Pill}
+        variant={ButtonVariant.ModeToggle}
+        isSelected={isArabicSelected}
         onClick={handleArabicClick}
       >
         {t('reading-preference.arabic')}
-      </button>
+      </Button>
 
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}

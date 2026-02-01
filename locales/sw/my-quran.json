@@ -1,0 +1,52 @@
+{
+  "bulk-actions": {
+    "actions": "Vitendo",
+    "actions-count": "Vitendo ({{count}})",
+    "cancel": "Ghairi",
+    "collapse-all": "Kunja Zote",
+    "expand-all": "Panua Zote",
+    "select": "Chagua"
+  },
+  "collections": {
+    "favorites": "Vipendwa",
+    "guest-promo": {
+      "sign-in": "Ingia",
+      "subtitle": "Linganisha na utofautishe mistari",
+      "title": "Unda mikusanyiko maalum"
+    },
+    "items": "{{count}} kipengee",
+    "items_plural": "{{count}} vitu",
+    "load-more": "Pakia zaidi",
+    "new-collection": "Mkusanyiko Mpya",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Imesasishwa hivi karibuni",
+      "z-a": "Z - A"
+    },
+    "title": "Mikusanyiko"
+  },
+  "notes-and-reflections": "Maelezo na Tafakari",
+  "page": "Ukurasa",
+  "reading-bookmark": {
+    "empty": "Anza kusoma na uhifadhi Alamisho ya Kusoma!",
+    "title": "Alamisho Langu la Kusoma"
+  },
+  "recent": "Hivi karibuni",
+  "recent-empty": "Anza kusoma ili uone ulichosoma hivi karibuni",
+  "recently-saved": {
+    "title": "Imehifadhiwa Hivi Karibuni"
+  },
+  "saved": "Imehifadhiwa",
+  "search": {
+    "filter": "Chuja",
+    "placeholder": "Utafutaji Umehifadhiwa...",
+    "sort": "Panga"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Ambatisha maelezo kwenye mistari",
+      "custom-collections": "Unda mikusanyiko maalum"
+    },
+    "title": "Ingia au Jisajili bure ili upate huduma zaidi!"
+  }
+}

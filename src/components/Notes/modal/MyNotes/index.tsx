@@ -3,10 +3,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import modalStyles from '../Modal.module.scss';
 
+import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
+import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
 import MyNotes from '@/components/Notes/modal/MyNotes/MyNotes';
 import myNotesStyles from '@/components/Notes/modal/MyNotes/MyNotes.module.scss';
-import useDeleteNote from '@/components/Notes/modal/MyNotes/useDeleteNote';
-import usePostNoteToQR from '@/components/Notes/modal/MyNotes/usePostNoteToQr';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import ContentModal from '@/dls/ContentModal/ContentModal';
@@ -23,6 +23,7 @@ interface MyNotesModalProps {
   onEditNote: (note: Note) => void;
   notesCount?: number;
   verseKey: string;
+  onBack?: () => void;
 }
 
 const MyNotesModal: React.FC<MyNotesModalProps> = ({
@@ -32,6 +33,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
   onEditNote,
   notesCount = 0,
   verseKey,
+  onBack,
 }) => {
   const { t, lang } = useTranslation('notes');
 
@@ -41,10 +43,10 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
     handlePostToQrClick,
     handleNotePostToQRClose,
     handleNotePostToQR,
-  } = usePostNoteToQR();
+  } = usePostNoteToQR({ flushNotesList: true });
 
   const { showDeleteConfirmation, noteToDelete, isDeletingNote, handleDeleteNoteClick } =
-    useDeleteNote();
+    useDeleteNote({ flushNotesList: true });
 
   return (
     <>
@@ -63,7 +65,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
           <button
             type="button"
             className={classNames(modalStyles.headerButton, modalStyles.title)}
-            onClick={onAddNote}
+            onClick={onBack || onAddNote}
             data-testid="my-notes-modal-title"
             data-note-count={notesCount}
           >
@@ -92,6 +94,7 @@ const MyNotesModal: React.FC<MyNotesModalProps> = ({
       <PostQRConfirmationModal
         isModalOpen={showConfirmationModal}
         isLoading={isPosting}
+        onBack={handleNotePostToQRClose}
         onModalClose={handleNotePostToQRClose}
         onConfirm={handleNotePostToQR}
       />

@@ -1,0 +1,282 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  padding: 0;
+}
+
+// Use div selector for higher specificity to override ContentModal defaults
+div.contentModal {
+  padding: var(--spacing-medium-px);
+  display: flex;
+  flex-direction: column;
+  block-size: auto;
+  max-block-size: 95dvh;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow-x: hidden;
+  border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
+  @include breakpoints.tablet {
+    padding-inline: var(--spacing-large-px);
+    padding-block-start: var(--spacing-xlarge-px);
+    padding-block-end: var(--spacing-medium2-px);
+    max-block-size: 85vh;
+    inline-size: 80%;
+    max-inline-size: 80%;
+    border-radius: var(--border-radius-large-px);
+  }
+}
+
+// Mobile bottom sheet overlay
+div.mobileBottomSheetOverlay {
+  @include breakpoints.smallerThanTablet {
+    align-items: flex-end;
+    padding-block-start: 0;
+    padding-block-end: 0;
+  }
+}
+
+.innerContent {
+  min-block-size: 0;
+  flex: 1 1;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  inline-size: 100%;
+  flex-shrink: 0;
+  border-block-end: 1px solid var(--color-separators);
+
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-medium2-px);
+  }
+}
+
+.selectionWrapper {
+  display: flex;
+}
+
+// Use button selector for higher specificity
+button.navButton {
+  flex-shrink: 0;
+  border-radius: var(--border-radius-xsmall-px);
+  padding: var(--spacing-xsmall-px);
+  max-block-size: var(--spacing-large-px);
+  background: var(--color-background-alternative-faint);
+  background-color: var(--color-background-alternative-faint);
+
+  svg {
+    inline-size: var(--spacing-small-px);
+    block-size: var(--spacing-small2-px);
+    color: var(--color-text-default);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: var(--color-background-alternative-faint);
+    background-color: var(--color-background-alternative-faint);
+  }
+
+  &:disabled,
+  &[aria-disabled='true'],
+  &:global(.disabled) {
+    opacity: 1;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: var(--color-background-alternative-faint);
+    background-color: var(--color-background-alternative-faint);
+
+    svg {
+      color: var(--color-daily-progress);
+    }
+  }
+}
+
+// In LTR: prev arrow points left (flipped), next arrow points right (default)
+// In RTL: prev arrow points right (default), next arrow points left (flipped)
+button.prevButton {
+  svg {
+    transform: scaleX(-1);
+
+    [dir='rtl'] & {
+      transform: scaleX(1);
+    }
+  }
+}
+
+button.nextButton {
+  svg {
+    [dir='rtl'] & {
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.closeButton {
+  margin-inline-start: auto;
+  flex-shrink: 0;
+}
+
+.modalHeader {
+  padding-inline-end: 0;
+  @include breakpoints.smallerThanTablet {
+    padding: 0;
+    padding-block-end: var(--spacing-medium-px);
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-mega);
+  color: var(--color-error-medium);
+}
+
+// Bottom sheet overlay - positions content at bottom
+div.bottomSheetOverlay {
+  @include breakpoints.tablet {
+    overflow-y: hidden;
+    align-items: flex-end;
+    justify-items: center;
+    padding-block-start: 0;
+    padding-block-end: 0;
+  }
+}
+
+// Bottom sheet content - full height from bottom (double div for higher specificity)
+div div.bottomSheetContent {
+  @include breakpoints.tablet {
+    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+    block-size: 95vh;
+    max-block-size: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-block-end: 0;
+    padding-block-end: 0;
+  }
+}
+
+// Inner content scrollable for bottom sheet mode
+div.bottomSheetInnerContent {
+  @include breakpoints.tablet {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-block-size: 0;
+  }
+}
+
+// Skeleton styles
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding: var(--spacing-xsmall-px);
+}
+
+// Top actions row: split between left and right groups
+.skeletonTopActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--spacing-xsmall-px);
+}
+
+.skeletonLeftActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.skeletonRightActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.skeletonVerseKey {
+  block-size: var(--spacing-medium-px);
+  inline-size: calc(var(--spacing-mega-px) * 0.8);
+  border-radius: var(--border-radius-default);
+}
+
+.skeletonActionIcon {
+  block-size: var(--spacing-large-px);
+  inline-size: var(--spacing-large-px);
+  border-radius: var(--border-radius-circle);
+}
+
+// Arabic text area - right aligned
+.skeletonArabicArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-block: var(--spacing-medium-px);
+  padding-inline: var(--spacing-small-px);
+}
+
+.skeletonArabicLine {
+  block-size: var(--spacing-xlarge-px);
+  inline-size: 70%;
+  border-radius: var(--border-radius-default);
+}
+
+// Translation text area
+.skeletonTranslationArea {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall-px);
+  padding-inline: var(--spacing-small-px);
+  padding-block-end: var(--spacing-medium-px);
+}
+
+.skeletonTranslationLine {
+  block-size: var(--spacing-medium-px);
+  inline-size: 100%;
+  border-radius: var(--border-radius-default);
+}
+
+.skeletonTranslationLineShort {
+  block-size: var(--spacing-medium-px);
+  inline-size: 75%;
+  border-radius: var(--border-radius-default);
+}
+
+// Bottom tabs
+.skeletonBottomTabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-large-px);
+  padding-block: var(--spacing-small-px);
+  border-block-start: 1px solid var(--color-borders-hairline);
+}
+
+.skeletonTab {
+  block-size: var(--spacing-medium2-px);
+  inline-size: calc(var(--spacing-mega-px) * 1.2);
+  border-radius: var(--border-radius-default);
+}
+
+// SSR modal hidden state - when verse action modal is open
+.ssrHidden {
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}

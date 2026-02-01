@@ -8,8 +8,7 @@ import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
-import useDirection from '@/hooks/useDirection';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -30,8 +29,6 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
-  const direction = useDirection();
-  const isRTL = direction === 'rtl';
 
   const audioService = useContext(AudioPlayerMachineContext);
   const isLoadingCurrentChapter = useSelector(audioService, (state) =>
@@ -68,11 +65,10 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     return (
       <div className={classNames(styles.container, styles.playChapterAudioButton)}>
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
-          prefix={isRTL ? undefined : <Spinner />}
-          suffix={isRTL ? <Spinner /> : undefined}
+          size={ButtonSize.XSmall}
+          prefix={<Spinner />}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
           isDisabled
@@ -87,25 +83,24 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     <div className={classNames(styles.container, styles.playChapterAudioButton)}>
       {isPlayingCurrentChapter ? (
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
-          prefix={isRTL ? undefined : <PauseIcon />}
-          suffix={isRTL ? <PauseIcon /> : undefined}
+          size={ButtonSize.XSmall}
+          prefix={<PauseIcon />}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
+          isSelected
           data-testid="pause-button"
         >
           {t('listen')}
         </Button>
       ) : (
         <Button
-          type={ButtonType.Secondary}
+          variant={ButtonVariant.ModeToggle}
           shape={ButtonShape.Pill}
-          size={ButtonSize.Small}
-          prefix={isRTL ? undefined : <PlayIcon />}
-          suffix={isRTL ? <PlayIcon /> : undefined}
+          size={ButtonSize.XSmall}
+          prefix={<PlayIcon />}
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}

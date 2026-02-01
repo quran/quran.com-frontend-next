@@ -1,22 +1,30 @@
-import styles from './CollectionSorter.module.scss';
-
-import ChevronDownIcon from '@/icons/chevron-down.svg';
+import Sorter, { SorterOption } from '@/components/dls/Sorter/Sorter';
+import {
+  CollectionDetailSortOption,
+  CollectionListSortOption,
+} from '@/types/CollectionSortOptions';
 import { logEvent } from '@/utils/eventLogger';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
-const CollectionSorter = ({
+type SortType = CollectionDetailSortOption | CollectionListSortOption;
+
+type CollectionSorterProps = {
+  options: SorterOption<SortType>[];
+  selectedOptionId: SortType;
+  onChange: (optionId: SortType) => void;
+  isSingleCollection: boolean;
+  collectionId: string | null;
+};
+
+const CollectionSorter: React.FC<CollectionSorterProps> = ({
   options,
   selectedOptionId,
   onChange,
   isSingleCollection,
   collectionId = null,
 }) => {
-  const selectedOption = options.find((option) => option.id === selectedOptionId);
-
   const onOpenChange = (isOpen: boolean) => {
-    const eventData = {
-      collectionId,
-    };
+    const eventData = { collectionId };
+
     if (isSingleCollection) {
       if (isOpen) {
         logEvent('collection_sorter_opened', eventData);
@@ -31,29 +39,13 @@ const CollectionSorter = ({
   };
 
   return (
-    <div className={styles.sorter}>
-      <PopoverMenu
-        trigger={
-          <span className={styles.sortTrigger}>
-            {selectedOption.label}
-            <span className={styles.itemIcon}>
-              <ChevronDownIcon />
-            </span>
-          </span>
-        }
-        onOpenChange={onOpenChange}
-      >
-        {options.map((option) => (
-          <PopoverMenu.Item
-            shouldCloseMenuAfterClick
-            key={option.id}
-            onClick={() => onChange(option.id)}
-          >
-            {option.label}
-          </PopoverMenu.Item>
-        ))}
-      </PopoverMenu>
-    </div>
+    <Sorter
+      options={options}
+      selectedOptionId={selectedOptionId}
+      onChange={onChange}
+      onOpenChange={onOpenChange}
+      dataTestPrefix="collection-sorter"
+    />
   );
 };
 

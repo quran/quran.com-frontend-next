@@ -16,10 +16,6 @@
   margin-inline-end: var(--spacing-small);
 }
 
-.secondaryHighlight {
-  background-color: var(--color-background-alternative-faded);
-}
-
 .wbwContainer {
   text-align: center;
   padding-block-start: var(--spacing-micro);
@@ -38,18 +34,26 @@
   color: var(--color-success-medium);
 }
 
+.tooltipContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-micro);
+}
+
 .tooltipText {
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
   padding-inline-start: var(--spacing-micro);
   padding-inline-end: var(--spacing-micro);
   white-space: normal;
+  margin: 0;
 }
 
-.popoverTrigger {
-  // important is needed to over-ride the values of the popover
-  margin-block-start: 0 !important;
-  margin-block-end: 0 !important;
-  margin-inline-start: 0 !important;
-  margin-inline-end: 0 !important;
+// Use higher specificity to override popover container margins
+div.popoverTrigger {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }

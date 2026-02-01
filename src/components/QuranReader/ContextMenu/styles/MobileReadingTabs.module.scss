@@ -5,6 +5,8 @@ $border-width: var(--spacing-hairline-px);
 $selected-border-width: 2px;
 
 .container {
+  block-size: var(--context-menu-mobile-reading-tabs-height);
+  max-block-size: var(--context-menu-mobile-reading-tabs-height);
   inline-size: 100%;
   display: none; // Hidden by default
 

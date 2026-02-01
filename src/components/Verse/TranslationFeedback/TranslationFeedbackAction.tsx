@@ -1,120 +1,107 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './TranslationFeedbackAction.module.scss';
-import TranslationFeedbackModal from './TranslationFeedbackModal';
-import feedbackModalStyles from './TranslationFeedbackModal.module.scss';
-
-import ContentModal from '@/dls/ContentModal/ContentModal';
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import FeedbackIcon from '@/icons/translation-feedback.svg';
+import {
+  selectStudyModeActiveTab,
+  selectStudyModeHighlightedWordLocation,
+  selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
+import { openFeedbackModal } from '@/redux/slices/QuranReader/verseActionModal';
+import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 interface TranslationFeedbackActionProps {
-  verse: { verseKey: string };
+  verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  isInsideStudyMode?: boolean;
 }
-
-const CLOSE_POPOVER_AFTER_MS = 150;
 
 const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  isInsideStudyMode = false,
 }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { t } = useTranslation('quran-reader');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
+  const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
+  const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
-  const getEventName = useCallback(
-    (action: string) =>
-      `${
-        isTranslationView ? 'translation_view' : 'reading_view'
-      }_translation_feedback_modal_${action}`,
-    [isTranslationView],
-  );
-
-  const onModalClose = useCallback(() => {
-    logEvent(getEventName('close'));
-
-    setIsModalOpen(false);
-
-    if (onActionTriggered) {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-      }
-
-      closeTimeoutRef.current = setTimeout(() => {
-        onActionTriggered();
-      }, CLOSE_POPOVER_AFTER_MS);
-    }
-  }, [getEventName, onActionTriggered]);
-
-  const onModalOpen = useCallback(() => {
-    logEvent(getEventName('open'));
-    setIsModalOpen(true);
-  }, [getEventName]);
-
-  /**
-   * Handles click events for guest users, redirecting to login if not authenticated,
-   * otherwise opens the translation feedback modal.
-   */
-  const handleGuestUserClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     if (!isLoggedIn()) {
       router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
       return;
     }
 
-    onModalOpen();
-  }, [router, verse.verseKey, onModalOpen]);
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
 
-  useEffect(() => {
-    return () => {
-      if (closeTimeoutRef.current) {
-        clearTimeout(closeTimeoutRef.current);
-      }
-    };
-  }, []);
+    // Dispatch Redux action to open translation feedback modal
+    dispatch(
+      openFeedbackModal({
+        verseKey: verse.verseKey,
+        verse,
+        isTranslationView,
+        wasOpenedFromStudyMode: openedFromStudyMode,
+        studyModeRestoreState:
+          openedFromStudyMode && studyModeVerseKey
+            ? {
+                verseKey: studyModeVerseKey,
+                activeTab: studyModeActiveTab,
+                highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
+              }
+            : undefined,
+      }),
+    );
+
+    logEvent(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_translation_feedback_modal_open`,
+    );
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  }, [
+    router,
+    verse,
+    isTranslationView,
+    isInsideStudyMode,
+    isStudyModeOpen,
+    isSsrMode,
+    studyModeVerseKey,
+    studyModeActiveTab,
+    studyModeHighlightedWordLocation,
+    dispatch,
+    onActionTriggered,
+  ]);
 
   return (
-    <>
-      <PopoverMenu.Item
-        icon={
-          <IconContainer
-            icon={<FeedbackIcon />}
-            color={IconColor.tertiary}
-            size={IconSize.Custom}
-          />
-        }
-        onClick={handleGuestUserClick}
-        dataTestId="verse-actions-menu-translation-feedback"
-      >
-        {t('translation-feedback.title')}
-      </PopoverMenu.Item>
-
-      <ContentModal
-        isOpen={isModalOpen}
-        header={<p className={styles.title}>{t('translation-feedback.title')}</p>}
-        hasCloseButton
-        onClose={onModalClose}
-        onEscapeKeyDown={onModalClose}
-        overlayClassName={styles.overlay}
-        headerClassName={styles.headerClassName}
-        closeIconClassName={styles.closeIconContainer}
-        contentClassName={classNames(styles.content, styles.formModalContent)}
-        innerContentClassName={classNames(feedbackModalStyles.container, styles.formModalContent)}
-      >
-        <TranslationFeedbackModal verse={verse} onClose={onModalClose} />
-      </ContentModal>
-    </>
+    <PopoverMenu.Item
+      icon={
+        <IconContainer icon={<FeedbackIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+      }
+      onClick={handleClick}
+      shouldCloseMenuAfterClick
+      dataTestId="verse-actions-menu-translation-feedback"
+    >
+      {t('translation-feedback.title')}
+    </PopoverMenu.Item>
   );
 };
 

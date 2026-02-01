@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { MilkdownProvider } from '@milkdown/react';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AnswerBody.module.scss';
@@ -17,9 +18,10 @@ import { getBasePath } from '@/utils/url';
 
 type Props = {
   question: Question;
+  className?: string;
 };
 
-const AnswerBody: React.FC<Props> = ({ question }) => {
+const AnswerBody: React.FC<Props> = ({ question, className }) => {
   const [shouldShowShareOptions, setShouldShowShareOptions] = useState(false);
   const { t } = useTranslation('quran-reader');
 
@@ -33,29 +35,29 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
   const title = t('q-and-a.explore_answers');
 
   return (
-    <>
-      <div className={styles.answerBody}>
-        <p className={styles.header}>{t('q-and-a.answer')}</p>
-        <MilkdownProvider>
-          <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
-        </MilkdownProvider>
-        {question?.summary && (
-          <>
-            <p className={styles.header}>{t('q-and-a.summary')}</p>
-            <MilkdownProvider>
-              <MarkdownEditor isEditable={false} defaultValue={question?.summary} />
-            </MilkdownProvider>
-          </>
-        )}
-        {question?.references && (
-          <>
-            <p className={styles.header}>{t('q-and-a.references')}</p>
-            {question?.references.map((reference) => (
+    <div className={classNames(styles.answerBody, className)}>
+      <p className={styles.header}>{t('q-and-a.answer')}</p>
+      <MilkdownProvider>
+        <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
+      </MilkdownProvider>
+      {question?.summary && (
+        <>
+          <p className={styles.header}>{t('q-and-a.summary')}</p>
+          <MilkdownProvider>
+            <MarkdownEditor isEditable={false} defaultValue={question?.summary} />
+          </MilkdownProvider>
+        </>
+      )}
+      {(question?.references?.length ?? 0) > 0 && (
+        <>
+          <p className={styles.header}>{t('q-and-a.references')}</p>
+          <ul className={styles.referencesList}>
+            {question.references.map((reference) => (
               <li key={reference}>{reference}</li>
             ))}
-          </>
-        )}
-      </div>
+          </ul>
+        </>
+      )}
       <div className={styles.shareButton}>
         <Button
           variant={ButtonVariant.Compact}
@@ -68,9 +70,14 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
         </Button>
       </div>
       {shouldShowShareOptions && (
-        <ShareButtons url={shareURL} title={title} analyticsContext="q_and_a_answer" />
+        <ShareButtons
+          url={shareURL}
+          title={title}
+          analyticsContext="q_and_a_answer"
+          hideVideoGeneration
+        />
       )}
-    </>
+    </div>
   );
 };
 

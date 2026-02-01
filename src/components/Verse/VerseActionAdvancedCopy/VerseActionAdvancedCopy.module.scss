@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $desktop-max-width: calc(16 * var(--spacing-mega));
 .header {
@@ -17,6 +17,6 @@ $desktop-max-width: calc(16 * var(--spacing-mega));
     padding-block-end: var(--spacing-medium);
     padding-inline-start: var(--spacing-mega);
     padding-inline-end: var(--spacing-mega);
-    max-width: $desktop-max-width;
+    max-inline-size: $desktop-max-width;
   }
 }

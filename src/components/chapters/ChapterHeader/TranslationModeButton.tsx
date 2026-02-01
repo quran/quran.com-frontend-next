@@ -8,6 +8,7 @@ import styles from './ReadingModeActions.module.scss';
 
 import PopoverMenu, { PopoverMenuAlign } from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationDropdownContent from '@/components/QuranReader/ContextMenu/components/TranslationDropdownContent';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useCloseOnScroll from '@/hooks/useCloseOnScroll';
 import useIsMobile from '@/hooks/useIsMobile';
 import ChevronDownIcon from '@/public/icons/chevron-down.svg';
@@ -64,62 +65,67 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
   // No translations selected
   if (!hasTranslations) {
     return (
-      <button
-        type="button"
-        className={classNames(styles.modeButton, {
-          [styles.modeButtonSelected]: isTranslationSelected,
-          [styles.modeButtonUnselected]: !isTranslationSelected,
-        })}
+      <Button
+        size={ButtonSize.XSmall}
+        shape={ButtonShape.Pill}
+        variant={ButtonVariant.ModeToggle}
+        isSelected={isTranslationSelected}
         onClick={switchToTranslationMode}
+        className={styles.translationButton}
+        contentClassName={styles.translationButtonContent}
       >
-        {t('translation')}: {t('reading-preference.none-selected')}
-      </button>
+        <span className={styles.translationText}>
+          {t('translation')}: {t('reading-preference.none-selected')}
+        </span>
+      </Button>
     );
   }
 
   // Arabic mode: plain button (no PopoverMenu)
   if (!isTranslationSelected) {
     return (
-      <button
-        type="button"
-        className={classNames(
-          styles.modeButton,
-          styles.translationButton,
-          styles.modeButtonUnselected,
-        )}
+      <Button
+        size={ButtonSize.XSmall}
+        shape={ButtonShape.Pill}
+        variant={ButtonVariant.ModeToggle}
+        isSelected={false}
         onClick={switchToTranslationMode}
+        className={styles.translationButton}
+        contentClassName={styles.translationButtonContent}
       >
         <span className={styles.translationText}>{t('translation')}</span>
-      </button>
+      </Button>
     );
   }
 
   // Translation mode: PopoverMenu with dropdown
   // Only show "Translation: Name" if we found the translation, otherwise just "Translation"
-  const displayText = activeTranslation?.name
-    ? `${t('translation')}: ${activeTranslation.name}`
+  const displayText = activeTranslation?.translatedName?.name
+    ? `${t('translation')}: ${activeTranslation.translatedName.name}`
     : t('translation');
 
   return (
     <PopoverMenu
       trigger={
-        <button
-          type="button"
+        <Button
+          size={ButtonSize.XSmall}
+          shape={ButtonShape.Pill}
+          variant={ButtonVariant.ModeToggle}
+          isSelected
           aria-expanded={isDropdownOpen}
           aria-haspopup="listbox"
-          className={classNames(
-            styles.modeButton,
-            styles.translationButton,
-            styles.modeButtonSelected,
-          )}
+          className={styles.translationButton}
+          contentClassName={styles.translationButtonContent}
+          suffix={
+            <ChevronDownIcon
+              className={classNames(styles.dropdownIcon, {
+                [styles.dropdownIconOpen]: isDropdownOpen,
+              })}
+            />
+          }
         >
           <span className={styles.translationText}>{displayText}</span>
-          <ChevronDownIcon
-            className={classNames(styles.dropdownIcon, {
-              [styles.dropdownIconOpen]: isDropdownOpen,
-            })}
-          />
-        </button>
+        </Button>
       }
       isOpen={isDropdownOpen}
       isModal={false}

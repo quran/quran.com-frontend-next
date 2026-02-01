@@ -25,6 +25,14 @@
   "max-file-size": "Max {{size}}",
   "my-profile": "My Profile",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "An email will be sent to remind you of your Quran goal if you have not made progress in a while.",
+      "title": "Goal Reminder"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
+      "title": "Daily Ramadan Challenge"
+    },
     "quran-reading-program": {
       "description": "An email will be sent with links to the weekly reading assignment, reflection prompts, and more resources to keep you on track.",
       "title": "Quran in a Year"

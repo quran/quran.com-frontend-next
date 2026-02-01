@@ -17,6 +17,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 
 const MARKETING_TAG = 'marketing';
+const DAILY_RAMADAN_CHALLENGE_TAG = 'DAILY-RAMADAN-CHALLENGE';
 const QDC_TAG = 'QDC';
 const QR_TAG = 'QR';
 
@@ -52,7 +53,8 @@ const CategoriesSettingsTab = () => {
             preference.template.critical === false &&
             !!preference.template.tags.length &&
             !preference.template.tags.includes(MARKETING_TAG) &&
-            preference.template.tags.includes(QDC_TAG),
+            preference.template.tags.includes(QDC_TAG) &&
+            !preference.template.tags.includes(DAILY_RAMADAN_CHALLENGE_TAG),
         ),
         // Group by category tags, excluding QDC/QR marker tags
         (preference) => {

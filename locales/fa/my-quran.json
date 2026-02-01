@@ -1,0 +1,52 @@
+{
+  "bulk-actions": {
+    "actions": "اقدامات",
+    "actions-count": "اقدامات ({{count}})",
+    "cancel": "لغو",
+    "collapse-all": "همه را جمع کن",
+    "expand-all": "همه را باز کنید",
+    "select": "انتخاب کنید"
+  },
+  "collections": {
+    "favorites": "موارد دلخواه",
+    "guest-promo": {
+      "sign-in": "ورود",
+      "subtitle": "آیات را با هم مقایسه و تطبیق دهید",
+      "title": "ایجاد مجموعه‌های سفارشی"
+    },
+    "items": "{{count}} مورد",
+    "items_plural": "{{count}} اقلام",
+    "load-more": "بارگذاری بیشتر",
+    "new-collection": "مجموعه جدید",
+    "sort": {
+      "a-z": "الف - ی",
+      "recently-updated": "اخیراً به‌روزرسانی شده است",
+      "z-a": "ز - الف"
+    },
+    "title": "مجموعه‌ها"
+  },
+  "notes-and-reflections": "یادداشت‌ها و تأملات",
+  "page": "صفحه",
+  "reading-bookmark": {
+    "empty": "شروع به خواندن کنید و یک نشانک مطالعه ذخیره کنید!",
+    "title": "نشانک مطالعه من"
+  },
+  "recent": "اخیر",
+  "recent-empty": "برای دیدن آخرین مطالب خوانده شده، شروع به خواندن کنید",
+  "recently-saved": {
+    "title": "اخیراً ذخیره شده"
+  },
+  "saved": "ذخیره شده",
+  "search": {
+    "filter": "فیلتر",
+    "placeholder": "جستجوی ذخیره شده...",
+    "sort": "مرتب سازی"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "یادداشت‌ها را به آیات وصل کنید",
+      "custom-collections": "ایجاد مجموعه‌های سفارشی"
+    },
+    "title": "برای دسترسی به امکانات بیشتر، وارد شوید یا به صورت رایگان ثبت نام کنید!"
+  }
+}

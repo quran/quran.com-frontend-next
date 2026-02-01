@@ -12,6 +12,7 @@ import Tooltip, { ContentSide } from '@/dls/Tooltip';
 import useDirection from '@/hooks/useDirection';
 
 export enum ButtonSize {
+  XSmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
@@ -21,6 +22,7 @@ export enum ButtonShape {
   Square = 'square',
   Circle = 'circle',
   Pill = 'pill',
+  Rounded = 'rounded',
 }
 
 export enum ButtonType {
@@ -41,6 +43,7 @@ export enum ButtonVariant {
   Rounded = 'rounded',
   SimplifiedAccent = 'simplified_accent',
   Accent = 'accent',
+  ModeToggle = 'mode_toggle',
 }
 
 /**
@@ -60,6 +63,7 @@ export type ButtonProps = {
   isLoading?: boolean;
   href?: string;
   isDisabled?: boolean;
+  isSelected?: boolean;
   onClick?: MouseEventHandler;
   tooltip?: string | React.ReactNode;
   tooltipContentSide?: ContentSide;
@@ -92,6 +96,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       isDisabled: disabled = false,
       isLoading,
+      isSelected = false,
       type = ButtonType.Primary,
       size = ButtonSize.Medium,
       shape,
@@ -129,22 +134,25 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       [styles.large]: size === ButtonSize.Large,
       [styles.normal]: size === ButtonSize.Medium,
       [styles.small]: size === ButtonSize.Small,
+      [styles.xsmall]: size === ButtonSize.XSmall,
 
       // shape
       [styles.square]: shape === ButtonShape.Square,
       [styles.circle]: shape === ButtonShape.Circle,
       [styles.pill]: shape === ButtonShape.Pill,
+      [styles.rounded]: shape === ButtonShape.Rounded,
 
       // variant
       [styles.shadow]: variant === ButtonVariant.Shadow,
       [styles.ghost]: variant === ButtonVariant.Ghost,
       [styles.compact]: variant === ButtonVariant.Compact,
       [styles.outlined]: variant === ButtonVariant.Outlined,
-      [styles.rounded]: variant === ButtonVariant.Rounded,
+      [styles.roundedVariant]: variant === ButtonVariant.Rounded,
       [styles.simplified]: variant === ButtonVariant.Simplified,
       [styles.simplified_accent]: variant === ButtonVariant.SimplifiedAccent,
       [styles.accent]: variant === ButtonVariant.Accent,
-      [styles.rounded]: variant === ButtonVariant.Rounded,
+      [styles.mode_toggle]: variant === ButtonVariant.ModeToggle,
+      [styles.selected]: isSelected,
       [styles.disabled]: disabled || isLoading,
       [styles.noSidePadding]: !hasSidePadding,
     });

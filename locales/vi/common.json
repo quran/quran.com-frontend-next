@@ -45,6 +45,7 @@
     "play-surah": "Phát Surah {{surahName}}",
     "select-lng": "Chọn ngôn ngữ",
     "sidebar-nav-close": "Đóng thanh điều hướng",
+    "tooltip-action": "Hành động chú thích",
     "translation-info": "Xem thông tin dịch thuật"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Giảm",
     "increase": "Tăng"
   },
+  "create": "Tạo nên",
   "create-my-goal": "Đặt mục tiêu của tôi",
   "default-description": "Kinh Qur'an được dịch sang nhiều ngôn ngữ với giao diện đơn giản và dễ sử dụng.",
   "delete": "Xóa",
@@ -150,6 +152,7 @@
   "donate-now": "Quyên góp ngay",
   "donate_monthly": "Quyên góp định kỳ hàng tháng",
   "donate_once": "Quyên góp một lần",
+  "done": "Xong",
   "edit": "Sửa",
   "email-verification": {
     "check-spam": "Bạn không nhận được email xác nhận? Vui lòng kiểm tra hộp thư spam.",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Không thể đồng bộ cài đặt của bạn lên đám mây.",
     "ranges-no-value": "Điểm bắt đầu và điểm kết thúc của phạm vi phải có giá trị.",
     "ranges-too-many-verses": "*Tối đa {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "Câu bắt đầu phải trước câu kết thúc."
+    "ranges-wrong-order": "Câu bắt đầu phải trước câu kết thúc.",
+    "reading-bookmark-remove": "Không thể xóa dấu trang đang đọc",
+    "reading-bookmark-set": "Không thể đặt dấu trang đọc",
+    "reading-bookmark-undo": "Không thể hoàn tác dấu trang đang đọc"
   },
   "errors": {
     "account-banned": "Rất tiếc, tài khoản của bạn đã bị khóa. Vui lòng liên hệ với Quran.Foundation.",
@@ -207,9 +213,11 @@
     "verification-code-invalid": "Mã xác minh này không hợp lệ",
     "verification-code-length": "Mã xác minh phải là {{length}} chữ số",
     "verification-failed": "Xác thực thất bại. Vui lòng thử lại.",
-    "verification-resend-failed": "Không thể gửi lại mã xác minh"
+    "verification-resend-failed": "Không thể gửi lại mã xác minh",
+    "verse-metadata-failed": "Không thể tải siêu dữ liệu câu thơ"
   },
   "exciting-updates": "Cập nhật thú vị",
+  "favorites": "Mục yêu thích",
   "feedback": "Phản hồi",
   "fonts": {
     "15_lines": "15 dòng",
@@ -266,6 +274,7 @@
     "title": "Trở thành nhà tài trợ hàng tháng"
   },
   "get-started": "Bắt đầu",
+  "go-to-verse": "Đi đến câu thơ",
   "hear-it-pronounced": "Nhấp vào từ Qur'an để nghe phát âm",
   "help": "Trợ giúp",
   "hizb": "Hizb",
@@ -275,6 +284,7 @@
   "input": {
     "clear": "Xoá"
   },
+  "join-ramadan-challenge": "🚀 Tham gia thử thách Ramadan của chúng tôi!",
   "juz": "Juz",
   "language": "Ngôn ngữ",
   "languages": "Ngôn ngữ",
@@ -349,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Đài Qur'an",
   "read": "Đọc",
+  "read-more": "Đọc thêm",
   "reading-history": "Lịch sử đọc",
   "reading-preference": {
     "arabic": "tiếng Ả Rập",
@@ -369,6 +380,7 @@
   "reflect": "Suy ngẫm",
   "reflections": "Suy ngẫm",
   "reflections-and-lessons": "Suy ngẫm & Bài học",
+  "related-verses": "Các câu thơ liên quan",
   "remove": "Di dời",
   "rename": "Đổi tên",
   "retry": "Thử lại",
@@ -394,6 +406,7 @@
     "title": "Tìm kiếm"
   },
   "seconds": "Giây",
+  "see-less": "Xem ít hơn",
   "see-new": "Xem có gì mới",
   "select-language": "Chọn ngôn ngữ",
   "settings": {
@@ -437,7 +450,8 @@
   "sort": {
     "ascending": "Đi lên",
     "by": "Sắp xếp theo",
-    "descending": "Đi xuống"
+    "descending": "Đi xuống",
+    "sort": "Loại"
   },
   "stay-on-track": "🎯 Giữ vững mục tiêu!",
   "style": "Phong cách",

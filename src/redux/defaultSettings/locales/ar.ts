@@ -1,5 +1,6 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
+import Language from '@/types/Language';
 import { ReadingPreference } from '@/types/QuranReader';
 
 const DEFAULT_TAFSIR = 'ar-tafseer-al-qurtubi';
@@ -11,5 +12,7 @@ export default {
   readingPreferences: {
     ...DEFAULT_SETTINGS.readingPreferences,
     readingPreference: ReadingPreference.Reading,
+    selectedReflectionLanguages: [Language.AR],
+    selectedLessonLanguages: [Language.AR],
   },
 } as DefaultSettings;

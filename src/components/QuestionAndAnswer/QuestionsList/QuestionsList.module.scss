@@ -1,11 +1,53 @@
 .container {
-    > div {
-        margin-block-end: var(--spacing-small);
+  > div {
+    margin-block-end: var(--spacing-large);
+    padding-block-end: var(--spacing-large);
+    border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+
+    &:last-child {
+      border-block-end: none;
     }
+  }
 }
 
-.loadMoreContainer {
-    display: flex;
-    justify-content: center;
-    padding: var(--spacing-medium);
+div.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-medium);
+
+  & > .loadMoreButton {
+    &,
+    &:hover,
+    &:active,
+    &:focus-visible {
+      border: 0 solid transparent;
+      background-color: transparent;
+    }
+  }
+}
+
+div.headerClassName {
+  align-items: flex-start;
+  gap: var(--spacing-xsmall);
+
+  // multiplier for the icon size and margin top
+  $icon-size-multiplier: 0.75;
+  $icon-margin-top-multiplier: 0.45;
+
+  & > :nth-child(2) {
+    margin-inline-end: 0;
+    margin-block-start: calc(
+      var(--answer-dynamic-font-size, 1rem) * #{$icon-margin-top-multiplier}
+    );
+
+    --icon-size: calc(var(--answer-dynamic-font-size, 1rem) * #{$icon-size-multiplier});
+    inline-size: var(--icon-size);
+    block-size: var(--icon-size);
+    flex-shrink: 0;
+
+    svg {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
 }

@@ -29,6 +29,8 @@ export const BOOKMARK_CACHE_PATHS = {
   COLLECTIONS: '/collections?',
   /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
   BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
+  /** Surah-level bookmarks (e.g., bookmarks/surah?...) */
+  SURAH_BOOKMARKS: 'bookmarks/surah?',
 } as const;
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
@@ -78,8 +80,22 @@ export const makeSignInUrl = (): string => makeUrl('users/login');
 
 export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
-export const makeBookmarksUrl = (mushafId: number, limit?: number, type?: BookmarkType): string =>
-  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }) });
+export const makeBookmarksUrl = (
+  mushafId: number,
+  limit?: number,
+  type?: BookmarkType,
+  isReading?: boolean,
+  key?: number,
+  page?: number,
+): string =>
+  makeUrl('bookmarks', {
+    mushafId,
+    limit,
+    ...(type && { type }),
+    ...(isReading && { isReading }),
+    ...(key && { key }),
+    ...(page && { page }),
+  });
 
 export type CollectionsQueryParams = {
   cursor?: string;
@@ -243,6 +259,12 @@ export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
 
+export const makeReadingGoalCountUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/count', params);
+
+export const makeReadingGoalStatusUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/status', params);
+
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);
 
@@ -311,3 +333,5 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
  * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
+
+export const makeMapUrl = (): string => makeUrl('mushaf/map');
