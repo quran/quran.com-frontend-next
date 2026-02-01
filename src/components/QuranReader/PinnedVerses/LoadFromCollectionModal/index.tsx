@@ -1,64 +1,82 @@
 import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import styles from './LoadFromCollectionModal.module.scss';
-
-import Button, { ButtonVariant } from '@/dls/Button/Button';
-import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
-import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
-import Spinner from '@/dls/Spinner/Spinner';
+import CollectionsList from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsList';
+import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
+import styles from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal.module.scss';
+import SaveBookmarkModalFooter from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalFooter';
+import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalHeader';
+import { ModalSize } from '@/dls/Modal/Content';
+import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import CollectionIcon from '@/icons/collection.svg';
+import {
+  broadcastPinnedVerses,
+  PinnedVersesBroadcastType,
+} from '@/hooks/usePinnedVersesBroadcast';
 import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
-import { privateFetcher } from '@/utils/auth/api';
-import { makeCollectionsUrl, makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { makeVerseKey } from '@/utils/verse';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { privateFetcher, syncPinnedItems } from '@/utils/auth/api';
+import {
+  makeCollectionsUrl,
+  makeGetBookmarkByCollectionId,
+  PINNED_ITEMS_CACHE_PATHS,
+} from '@/utils/auth/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
+import { makeVerseKey, getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
+
+const isPinnedItemsCacheKey = (key: unknown): boolean =>
+  typeof key === 'string' &&
+  Object.values(PINNED_ITEMS_CACHE_PATHS).some((p) => key.includes(p));
 
 interface LoadFromCollectionModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-/**
- * LoadFromCollectionModal - Allows users to load verses from a collection to pinned verses
- * Shows a list of collections with checkboxes for single selection
- * @returns {JSX.Element} The load from collection modal component
- */
 const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpen, onClose }) => {
   const { t } = useTranslation('quran-reader');
   const dispatch = useDispatch();
   const toast = useToast();
+  const { mutate: globalMutate } = useSWRConfig();
+  const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
   const [selectedCollectionId, setSelectedCollectionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch collections list
   const { data: collectionsData, isValidating: isLoadingCollections } = useSWRImmutable<{
     data: Collection[];
   }>(isOpen ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null, privateFetcher);
 
-  const collections = collectionsData?.data || [];
+  const rawCollections = collectionsData?.data || [];
 
-  // Sort collections: favourites first, then by recently updated
-  const sortedCollections = [...collections].sort((a, b) => {
-    // Favourites first (if there's a favourite field)
-    // Then sort by updatedAt descending
-    const aTime = new Date(a.updatedAt || 0).getTime();
-    const bTime = new Date(b.updatedAt || 0).getTime();
-    return bTime - aTime;
-  });
+  const collectionItems: CollectionItem[] = [...rawCollections]
+    .sort((a, b) => {
+      const aTime = new Date(a.updatedAt || 0).getTime();
+      const bTime = new Date(b.updatedAt || 0).getTime();
+      return bTime - aTime;
+    })
+    .map((c) => ({
+      id: c.id,
+      name: c.name,
+      checked: selectedCollectionId === c.id,
+      updatedAt: c.updatedAt,
+    }));
 
-  const handleCollectionSelect = useCallback((collectionId: string) => {
-    setSelectedCollectionId((prev) => (prev === collectionId ? null : collectionId));
-    logEvent('load_from_collection_select', { collectionId });
-  }, []);
+  const handleCollectionToggle = useCallback(
+    async (collection: CollectionItem) => {
+      setSelectedCollectionId((prev) => (prev === collection.id ? null : collection.id));
+    },
+    [],
+  );
 
   const handleLoad = useCallback(async () => {
     if (!selectedCollectionId) return;
@@ -67,7 +85,6 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     setIsLoading(true);
 
     try {
-      // Fetch collection details with bookmarks - use high limit to get all items
       const collectionData = await privateFetcher<GetBookmarkCollectionsIdResponse>(
         makeGetBookmarkByCollectionId(selectedCollectionId, {
           type: BookmarkType.Ayah,
@@ -83,13 +100,31 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
         return;
       }
 
-      // Convert bookmarks to verse keys
       const verseKeys = bookmarks.map((bookmark) =>
         makeVerseKey(bookmark.key, bookmark.verseNumber),
       );
 
-      // Dispatch action to pin all verses
+      // 1. Update Redux
       dispatch(pinVerses(verseKeys));
+
+      // 2. Sync to backend as pinned items
+      const syncPayload = verseKeys.map((vk) => ({
+        targetType: 'ayah',
+        targetId: vk,
+        metadata: {
+          sourceMushafId: mushafId,
+          key: getChapterNumberFromKey(vk),
+          verseNumber: getVerseNumberFromKey(vk),
+        },
+        createdAt: new Date().toISOString(),
+      }));
+      await syncPinnedItems(syncPayload);
+
+      // 3. Invalidate pinned items cache so useGlobalPinnedVerses refetches
+      globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
+
+      // 4. Broadcast to other tabs
+      broadcastPinnedVerses(PinnedVersesBroadcastType.SET, { verseKeys });
 
       toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
       onClose();
@@ -98,83 +133,40 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
     } finally {
       setIsLoading(false);
     }
-  }, [dispatch, onClose, selectedCollectionId, t, toast]);
+  }, [dispatch, onClose, selectedCollectionId, t, toast, mushafId, globalMutate]);
 
-  const handleCancel = useCallback(() => {
-    logButtonClick('load_from_collection_cancel');
+  const handleClose = useCallback(() => {
     setSelectedCollectionId(null);
     onClose();
   }, [onClose]);
 
-  const renderContent = (): React.ReactNode => {
-    if (isLoadingCollections) {
-      return (
-        <div className={styles.loadingContainer}>
-          <Spinner />
-        </div>
-      );
-    }
-
-    if (collections.length === 0) {
-      return (
-        <div className={styles.emptyState}>
-          <CollectionIcon className={styles.emptyIcon} />
-          <p className={styles.emptyTitle}>{t('collection:no-collections')}</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className={styles.collectionList}>
-        {sortedCollections.map((collection) => (
-          <div
-            className={styles.collectionItem}
-            key={collection.id}
-            onClick={() => handleCollectionSelect(collection.id)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleCollectionSelect(collection.id);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            <Checkbox
-              id={collection.id}
-              checked={selectedCollectionId === collection.id}
-              label={collection.name}
-              onChange={() => handleCollectionSelect(collection.id)}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <ContentModal
+    <Modal
       isOpen={isOpen}
-      header={<p className={styles.header}>{t('load-from-collection')}</p>}
-      hasCloseButton
-      onClose={handleCancel}
-      onEscapeKeyDown={handleCancel}
-      size={ContentModalSize.SMALL}
+      onClickOutside={handleClose}
+      onEscapeKeyDown={handleClose}
+      isBottomSheetOnMobile
+      size={ModalSize.MEDIUM}
+      contentClassName={styles.modal}
     >
-      {renderContent()}
-
-      <div className={styles.footer}>
-        <Button variant={ButtonVariant.Ghost} onClick={handleCancel}>
-          {t('common:cancel')}
-        </Button>
-        <Button
-          onClick={handleLoad}
-          isDisabled={!selectedCollectionId || isLoading}
-          isLoading={isLoading}
-        >
-          {t('common:load')}
-        </Button>
-      </div>
-    </ContentModal>
+      <Modal.Body>
+        <div className={styles.container}>
+          <SaveBookmarkModalHeader title={t('load-from-collection')} onClose={handleClose} />
+          <CollectionsList
+            collections={collectionItems}
+            isDataReady={!isLoadingCollections}
+            isTogglingFavorites={false}
+            onCollectionToggle={handleCollectionToggle}
+            onNewCollectionClick={() => {}}
+          />
+          <SaveBookmarkModalFooter
+            showNoteButton={false}
+            onTakeNote={() => {}}
+            onDone={selectedCollectionId && !isLoading ? handleLoad : handleClose}
+          />
+        </div>
+      </Modal.Body>
+    </Modal>
   );
 };
 

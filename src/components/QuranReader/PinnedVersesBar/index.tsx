@@ -5,13 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import LoadFromCollectionModal from '../PinnedVerses/LoadFromCollectionModal';
+import SavePinnedToCollectionModal from '../PinnedVerses/SavePinnedToCollectionModal';
 import copyPinnedVerses from '../PinnedVerses/utils/copyPinnedVerses';
 
 import styles from './PinnedVersesBar.module.scss';
 import PinnedVersesContent from './PinnedVersesContent';
-import useSavePinnedToCollection from './useSavePinnedToCollection';
 
-import SaveToCollectionModal from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
@@ -41,10 +40,6 @@ const PinnedVersesBar: React.FC = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
   const [selectedVerseKey, setSelectedVerseKey] = useState<string | null>(null);
-
-  const closeSaveModal = useCallback(() => setIsSaveModalOpen(false), []);
-  const { collections, handleCollectionToggled, handleNewCollectionCreated } =
-    useSavePinnedToCollection(closeSaveModal);
 
   // All useCallback hooks must be before early return to satisfy Rules of Hooks
   const handleCompareClick = useCallback(() => {
@@ -127,13 +122,9 @@ const PinnedVersesBar: React.FC = () => {
         />
       </div>
       {isLoggedIn() && (
-        <SaveToCollectionModal
+        <SavePinnedToCollectionModal
           isOpen={isSaveModalOpen}
-          collections={collections}
-          onCollectionToggled={handleCollectionToggled}
-          onNewCollectionCreated={handleNewCollectionCreated}
-          onClose={closeSaveModal}
-          verseKey={pinnedVerseKeys[0] || ''}
+          onClose={() => setIsSaveModalOpen(false)}
         />
       )}
       {isLoggedIn() && (

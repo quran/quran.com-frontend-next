@@ -7,23 +7,17 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from './PinnedVersesSection.module.scss';
 import usePinnedVerseHandlers from './usePinnedVerseHandlers';
 
-import SaveToCollectionModal, {
-  CollectionOption,
-} from '@/components/Collection/SaveToCollectionModal/SaveToCollectionModal';
 import LoadFromCollectionModal from '@/components/QuranReader/PinnedVerses/LoadFromCollectionModal';
+import SavePinnedToCollectionModal from '@/components/QuranReader/PinnedVerses/SavePinnedToCollectionModal';
 import PinnedVersesContent from '@/components/QuranReader/PinnedVersesBar/PinnedVersesContent';
 import DataContext from '@/contexts/DataContext';
 import { useToast } from '@/dls/Toast/Toast';
-import useCollections from '@/hooks/useCollections';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
-import { selectPinnedVerseKeys, selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectStudyModeVerseKey } from '@/redux/slices/QuranReader/studyMode';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
 import { isLoggedIn } from '@/utils/auth/login';
-import BookmarkType from 'types/BookmarkType';
 import ChaptersData from 'types/ChaptersData';
 
 const PinnedVersesSection: React.FC = () => {
@@ -34,16 +28,8 @@ const PinnedVersesSection: React.FC = () => {
   const chaptersData = useContext(DataContext) as ChaptersData;
 
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
-  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, areArraysEqual) as string[];
   const currentStudyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-
-  const { collections, addCollection } = useCollections({
-    type: BookmarkType.Ayah,
-  });
 
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
@@ -56,8 +42,6 @@ const PinnedVersesSection: React.FC = () => {
     handleSaveToCollection,
     handleLoadFromCollection,
     handleCopy,
-    handleCollectionToggled,
-    handleNewCollectionCreated,
   } = usePinnedVerseHandlers({
     dispatch,
     pinnedVerses,
@@ -67,21 +51,12 @@ const PinnedVersesSection: React.FC = () => {
     lang,
     chaptersData,
     selectedTranslations,
-    mushafId,
-    addCollection,
     setIsSaveModalOpen,
     setIsLoadModalOpen,
     unpinVerseWithSync,
     clearPinnedWithSync,
   });
 
-  const modalCollections: CollectionOption[] = collections.map((collection) => ({
-    id: collection.id,
-    name: collection.name,
-    checked: false,
-  }));
-
-  // Always show when there are pinned verses
   if (pinnedVerses.length === 0) {
     return null;
   }
@@ -105,13 +80,9 @@ const PinnedVersesSection: React.FC = () => {
 
       {isLoggedIn() && (
         <>
-          <SaveToCollectionModal
+          <SavePinnedToCollectionModal
             isOpen={isSaveModalOpen}
-            collections={modalCollections}
-            onCollectionToggled={handleCollectionToggled}
-            onNewCollectionCreated={handleNewCollectionCreated}
             onClose={() => setIsSaveModalOpen(false)}
-            verseKey={pinnedVerseKeys[0] || ''}
           />
           <LoadFromCollectionModal
             isOpen={isLoadModalOpen}
