@@ -59,7 +59,7 @@ $border-width-default: var(--spacing-hairline-px);
   border-radius: 50%;
   flex-shrink: 0;
   transition: all var(--transition-normal) ease;
-  background-color: var(--color-success-medium);
+  background-color: var(--color-bookmark-icon);
 
   &.checked {
     color: var(--color-background-default);
