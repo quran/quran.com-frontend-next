@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "การกระทำ",
+    "actions-count": "การกระทำ ({{count}})",
+    "cancel": "ยกเลิก",
+    "collapse-all": "ยุบทั้งหมด",
+    "expand-all": "ขยายทั้งหมด",
+    "select": "เลือก"
+  },
   "collections": {
     "favorites": "รายการโปรด",
     "guest-promo": {

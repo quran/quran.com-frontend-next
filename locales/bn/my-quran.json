@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "কর্ম",
+    "actions-count": "কর্ম ({{count}})",
+    "cancel": "বাতিল করুন",
+    "collapse-all": "সবগুলো সঙ্কুচিত করুন",
+    "expand-all": "সবগুলো প্রসারিত করুন",
+    "select": "নির্বাচন করুন"
+  },
   "collections": {
     "favorites": "প্রিয়",
     "guest-promo": {
