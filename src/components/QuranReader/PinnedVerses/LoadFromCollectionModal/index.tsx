@@ -124,7 +124,9 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
       globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
 
       // 4. Broadcast to other tabs
-      broadcastPinnedVerses(PinnedVersesBroadcastType.SET, { verseKeys });
+      verseKeys.forEach((vk) => {
+        broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
+      });
 
       toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
       onClose();

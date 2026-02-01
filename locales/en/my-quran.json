@@ -49,6 +49,8 @@
     "cancel": "Cancel",
 
     "actions-count": "Actions ({{count}})",
-    "actions": "Actions"
+    "actions": "Actions",
+    "pin-verses": "Pin verses",
+    "pin": "Pin"
   }
 }

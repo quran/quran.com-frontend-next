@@ -1,16 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './CollectionVerseCell.module.scss';
 import VerseDisplay from './VerseDisplay';
 
 import Checkbox from '@/components/dls/Forms/Checkbox/Checkbox';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Separator from '@/dls/Separator/Separator';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import ArrowIcon from '@/icons/arrow.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import PinFilledIcon from '@/icons/pin-filled.svg';
+import PinIcon from '@/icons/pin.svg';
+import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import { getChapterData } from '@/utils/chapter';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -55,8 +61,11 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
   const confirm = useConfirm();
+  const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
+  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
+  const isPinned = useMemo(() => pinnedVerseKeys.includes(verseKey), [pinnedVerseKeys, verseKey]);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
   const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;
@@ -65,6 +74,16 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
     if (!createdAt) return null;
     return dateToMonthDayYearFormat(createdAt, lang);
   }, [createdAt, lang]);
+
+  const handlePinToggle = useCallback(() => {
+    if (isPinned) {
+      logButtonClick('collection_detail_unpin_verse', { verseKey });
+      unpinVerseWithSync(verseKey);
+    } else {
+      logButtonClick('collection_detail_pin_verse', { verseKey });
+      pinVerseWithSync(verseKey);
+    }
+  }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
 
   const handleGoToAyah = () => {
     logButtonClick('collection_detail_go_to_ayah_menu', { verseKey, collectionId });
@@ -138,6 +157,20 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
               {isOwner && (
                 <PopoverMenu.Item onClick={handleDelete}>{t('common:delete')}</PopoverMenu.Item>
               )}
+              <PopoverMenu.Item
+                onClick={handlePinToggle}
+                shouldCloseMenuAfterClick
+                icon={
+                  <IconContainer
+                    icon={isPinned ? <PinFilledIcon /> : <PinIcon />}
+                    color={isPinned ? IconColor.primary : IconColor.tertiary}
+                    size={IconSize.Xsmall}
+                    shouldFlipOnRTL={false}
+                  />
+                }
+              >
+                {isPinned ? t('quran-reader:unpin-verse') : t('my-quran:bulk-actions.pin')}
+              </PopoverMenu.Item>
               <PopoverMenu.Item onClick={handleGoToAyah} shouldCloseMenuAfterClick>
                 {t('collection:go-to-ayah')}
               </PopoverMenu.Item>
