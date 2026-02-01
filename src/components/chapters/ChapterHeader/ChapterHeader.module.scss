@@ -192,13 +192,19 @@ $bismillahSvgInlineSizeMobile: 148px;
   padding-inline: var(--spacing-xxsmall-px);
   cursor: pointer;
   white-space: nowrap;
+  transition: filter var(--transition-fast) ease-out, transform var(--transition-fast) ease-out;
 
   &:hover {
-    opacity: 0.8;
+    filter: brightness(var(--opacity-85));
   }
 
   &:active {
-    opacity: 0.7;
+    transform: scale(constants.$button-active-scale);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-hairline-px);
   }
 }
 
