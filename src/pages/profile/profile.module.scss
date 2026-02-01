@@ -1,8 +1,10 @@
 @use 'src/styles/breakpoints';
 
-div.pageContainer {
-  margin-block-end: 0;
-  padding-block-end: calc(var(--spacing-mega) * 2) !important;
+.wrapperSheets {
+  .pageContainer {
+    margin-block-end: 0;
+    padding-block-end: calc(var(--spacing-mega) * 2);
+  }
 }
 
 .wrapper {

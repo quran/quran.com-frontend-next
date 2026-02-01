@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Mwanzo wa Hizb",
   "include-translator": "Jumuisha jina la mtafsiri?",
+  "info": "taarifa",
   "juz-beginning": "Mwanzo wa Juzuu",
   "languages": "Lugha",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (mwangwi)",
+  "qiraat": {
+    "explanation": "Maelezo:",
+    "juncture": "Makutano",
+    "learn-more": "Bofya hapa ili kujifunza zaidi",
+    "no-junctures": "Hakuna usomaji tofauti unaopatikana kwa mstari huu",
+    "reader-bio": "Wasifu wa Msomaji",
+    "readers": "Wasomaji",
+    "readings": "Masomo",
+    "title": "Qiraat",
+    "translation": "Tafsiri",
+    "transliteration": "Unukuzi wa mfumo wa kuandika",
+    "what-are": "Qiraat ni nini?"
+  },
   "query-param-message": "Unatazama mipangilio ya kusoma iliyochaguliwa mapema. <0>Ondoa</0> ili kutazama katika mipangilio yako ya sasa au <1>Hifadhi</1> ili kusasisha mipangilio yako",
   "ramadan-of-reflection": "Jiunge na Quranreflect \"Ramadhani ya Tafakari\"",
   "read-more-quran-reflect": "Soma zaidi kwenye QuranReflect",

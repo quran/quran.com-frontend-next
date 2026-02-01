@@ -1,0 +1,43 @@
+// =============================================================================
+// NAVBAR DIMENSIONS - Single Source of Truth
+// =============================================================================
+// All values in pixels for fixed UI chrome consistency.
+// Import: @use 'src/styles/navbar';
+// Usage: navbar.$navbar-height
+// =============================================================================
+
+// Core navbar
+$navbar-height: 54px;
+$navbar-logo-height: 20px;
+$banner-height: 40px;
+
+// Context menu (desktop)
+$context-menu-section-height: 56px;
+
+// Context menu (mobile)
+$context-menu-section-mobile-height: 40px;
+$context-menu-section-mobile-expanded-height: 40px; // 56px - 16px (removed 8px top + 8px bottom padding)
+
+// Page info (mobile scrolled view)
+$context-menu-page-info-content-height: 20px;
+$context-menu-page-info-padding-top: 15px;
+$context-menu-page-info-padding-bottom: 5px;
+$context-menu-page-info-mobile-height: 40px; // content + padding-top + padding-bottom
+
+// Mobile reading tabs
+$mobile-reading-tabs-content-height: 17px;
+$mobile-reading-tabs-padding-top: 10px;
+$mobile-reading-tabs-padding-bottom: 18px;
+$mobile-reading-tabs-border: 2px;
+$mobile-reading-tabs-height: 47px; // content + padding-top + padding-bottom + border
+$context-menu-mobile-reading-tabs-height: $mobile-reading-tabs-height;
+
+// Composite mobile heights
+$mobile-context-menu-height: 87px; // section (40px) + reading tabs (47px)
+$mobile-reading-mode-tabs-height: $mobile-reading-tabs-height;
+
+// Tajweed
+$tajweed-trigger-height: 25px;
+
+// Alignment adjuster
+$adjuster: -1px;

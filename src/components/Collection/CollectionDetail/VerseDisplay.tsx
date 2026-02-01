@@ -13,6 +13,7 @@ import TranslationText from '@/components/QuranReader/TranslationView/Translatio
 import VerseText from '@/components/Verse/VerseText';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useQcfFont from '@/hooks/useQcfFont';
+import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -38,18 +39,21 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
 
-  const queryKey = makeByVerseKeyUrl(verseKey, {
-    words: true,
-    translationFields: 'resource_name,language_id',
-    translations: selectedTranslations.join(','),
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    wordTranslationLanguage: 'en',
-    wordTransliteration: 'true',
-  });
+  const queryKey = isPersistGateHydrationComplete
+    ? makeByVerseKeyUrl(verseKey, {
+        words: true,
+        translationFields: 'resource_name,language_id',
+        translations: selectedTranslations.join(','),
+        ...getDefaultWordFields(quranReaderStyles.quranFont),
+        ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+        wordTranslationLanguage: 'en',
+        wordTransliteration: 'true',
+      })
+    : null;
 
   const {
     data: verseData,
@@ -100,7 +104,7 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
         <div className={styles.arabicVerseContainer}>
           <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={false} />
         </div>
-        <div className={styles.verseTranslationsContainer}>
+        <div>
           {verse.translations?.map((translation: Translation) => (
             <div key={translation.id} className={styles.verseTranslationContainer}>
               <TranslationText

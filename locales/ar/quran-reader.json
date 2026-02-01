@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "بداية الحزب",
   "include-translator": "إظهار اسم المترجم؟",
+  "info": "معلومات",
   "juz-beginning": "بداية الجزء",
   "languages": "اللغات",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "تفسير"
   },
   "qalqala": "قلقلة",
+  "qiraat": {
+    "explanation": "توضيح:",
+    "juncture": "نقطة التقاء",
+    "learn-more": "انقر هنا لمعرفة المزيد",
+    "no-junctures": "لا توجد قراءات بديلة متاحة لهذه الآية",
+    "reader-bio": "سيرة القارئ",
+    "readers": "القراء",
+    "readings": "قراءات",
+    "title": "قراءات",
+    "translation": "ترجمة",
+    "transliteration": "الترجمة الصوتية",
+    "what-are": "ما هي القراءات؟"
+  },
   "query-param-message": "أنت تستخدم إعدادات قراءة محددة مسبقًا. <0> تجاهل </0> للعرض بإعداداتك الحالية أو <1> احفظ </1> لتحديث إعداداتك",
   "ramadan-of-reflection": "انضم إلى تدبرات رمضان في QuranReflect",
   "read-more-quran-reflect": "اقرأ المزيد على QuranReflect",
