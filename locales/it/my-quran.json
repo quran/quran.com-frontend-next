@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Azioni",
+    "actions-count": "Azioni ({{count}})",
+    "cancel": "Cancellare",
+    "collapse-all": "Comprimi tutto",
+    "expand-all": "Espandi tutto",
+    "select": "Selezionare"
+  },
   "collections": {
     "favorites": "Preferiti",
     "guest-promo": {

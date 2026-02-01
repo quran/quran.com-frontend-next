@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "اقدامات",
+    "actions-count": "اقدامات ({{count}})",
+    "cancel": "لغو",
+    "collapse-all": "همه را جمع کن",
+    "expand-all": "همه را باز کنید",
+    "select": "انتخاب کنید"
+  },
   "collections": {
     "favorites": "موارد دلخواه",
     "guest-promo": {

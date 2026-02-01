@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Действия",
+    "actions-count": "Действия ({{count}})",
+    "cancel": "Отмена",
+    "collapse-all": "Свернуть все",
+    "expand-all": "Развернуть все",
+    "select": "Выбирать"
+  },
   "collections": {
     "favorites": "Избранное",
     "guest-promo": {

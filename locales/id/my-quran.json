@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Tindakan",
+    "actions-count": "Tindakan ({{count}})",
+    "cancel": "Membatalkan",
+    "collapse-all": "Ciutkan Semua",
+    "expand-all": "Perluas Semua",
+    "select": "Memilih"
+  },
   "collections": {
     "favorites": "Favorit",
     "guest-promo": {

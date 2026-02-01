@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Veprime",
+    "actions-count": "Veprime ({{count}})",
+    "cancel": "Anulo",
+    "collapse-all": "Mbyll të gjitha",
+    "expand-all": "Zgjero të gjitha",
+    "select": "Zgjidh"
+  },
   "collections": {
     "favorites": "Të preferuarat",
     "guest-promo": {

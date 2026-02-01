@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Hành động",
+    "actions-count": "Hành động ({{count}})",
+    "cancel": "Hủy bỏ",
+    "collapse-all": "Thu gọn tất cả",
+    "expand-all": "Mở rộng tất cả",
+    "select": "Lựa chọn"
+  },
   "collections": {
     "favorites": "Mục yêu thích",
     "guest-promo": {
