@@ -22,15 +22,6 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
     onRemove();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      if (onClick) {
-        onClick();
-      }
-    }
-  };
-
   const handleRemoveKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -39,40 +30,53 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
     }
   };
 
-  return (
-    <div
-      className={classNames(styles.tag, {
-        [styles.selected]: isSelected,
-        [styles.clickable]: !!onClick,
+  const tagClassName = classNames(styles.tag, {
+    [styles.selected]: isSelected,
+    [styles.clickable]: !!onClick,
+  });
+
+  const verseKeySpan = (
+    <span
+      className={classNames(styles.verseKey, {
+        [styles.verseKeySelected]: isSelected,
       })}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
     >
-      <span
-        className={classNames(styles.verseKey, {
-          [styles.verseKeySelected]: isSelected,
+      {verseKey}
+    </span>
+  );
+
+  const removeButton = (
+    <button
+      type="button"
+      className={classNames(styles.removeButton, {
+        [styles.removeButtonSelected]: isSelected,
+      })}
+      onClick={handleRemoveClick}
+      onKeyDown={handleRemoveKeyDown}
+      aria-label={t('remove-pinned-verse', { verseKey })}
+    >
+      <CloseIcon
+        className={classNames(styles.closeIcon, {
+          [styles.closeIconSelected]: isSelected,
         })}
-      >
-        {verseKey}
-      </span>
-      <button
-        type="button"
-        className={classNames(styles.removeButton, {
-          [styles.removeButtonSelected]: isSelected,
-        })}
-        onClick={handleRemoveClick}
-        onKeyDown={handleRemoveKeyDown}
-        aria-label={t('remove-pinned-verse', { verseKey })}
-      >
-        <CloseIcon
-          className={classNames(styles.closeIcon, {
-            [styles.closeIconSelected]: isSelected,
-          })}
-        />
+      />
+    </button>
+  );
+
+  if (onClick) {
+    return (
+      <button type="button" className={tagClassName} onClick={onClick}>
+        {verseKeySpan}
+        {removeButton}
       </button>
-    </div>
+    );
+  }
+
+  return (
+    <span className={tagClassName}>
+      {verseKeySpan}
+      {removeButton}
+    </span>
   );
 };
 

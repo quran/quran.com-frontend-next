@@ -44,7 +44,14 @@ const PinVerseAction: React.FC<PinVerseActionProps> = ({
     if (onActionTriggered) {
       onActionTriggered();
     }
-  }, [isPinned, isTranslationView, onActionTriggered, verseKey, pinVerseWithSync, unpinVerseWithSync]);
+  }, [
+    isPinned,
+    isTranslationView,
+    onActionTriggered,
+    verseKey,
+    pinVerseWithSync,
+    unpinVerseWithSync,
+  ]);
 
   return (
     <PopoverMenu.Item

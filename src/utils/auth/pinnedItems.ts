@@ -4,10 +4,11 @@ import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 /**
  * Check if a SWR cache key matches a pinned items endpoint.
+ *
+ * @returns {boolean} Whether the key matches a pinned items endpoint.
  */
 export const isPinnedItemsCacheKey = (key: unknown): boolean =>
-  typeof key === 'string' &&
-  Object.values(PINNED_ITEMS_CACHE_PATHS).some((p) => key.includes(p));
+  typeof key === 'string' && Object.values(PINNED_ITEMS_CACHE_PATHS).some((p) => key.includes(p));
 
 /**
  * Build sync payload for a single verse key.

@@ -4,13 +4,9 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
-import {
-  broadcastPinnedVerses,
-  PinnedVersesBroadcastType,
-} from '@/hooks/usePinnedVersesBroadcast';
+import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePinnedVersesBroadcast';
 import { logErrorToSentry } from '@/lib/sentry';
 import {
-  PinnedVerse,
   pinVerse,
   unpinVerse,
   clearPinnedVerses,
@@ -20,11 +16,7 @@ import {
 } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import {
-  addPinnedItem,
-  deletePinnedItemById,
-  clearPinnedItems,
-} from '@/utils/auth/api';
+import { addPinnedItem, deletePinnedItemById, clearPinnedItems } from '@/utils/auth/api';
 import { isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import { PinnedItemTargetType } from 'types/PinnedItem';

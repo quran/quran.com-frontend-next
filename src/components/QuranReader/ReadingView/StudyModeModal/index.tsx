@@ -19,12 +19,12 @@ import Error from '@/components/Error';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
+import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
-import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import {
   setActiveTab,

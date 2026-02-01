@@ -87,14 +87,8 @@ export const pinnedVersesSlice = createSlice({
   },
 });
 
-export const {
-  pinVerse,
-  pinVerses,
-  unpinVerse,
-  clearPinnedVerses,
-  setServerIds,
-  setPinnedVerses,
-} = pinnedVersesSlice.actions;
+export const { pinVerse, pinVerses, unpinVerse, clearPinnedVerses, setServerIds, setPinnedVerses } =
+  pinnedVersesSlice.actions;
 
 export const selectPinnedVerses = (state: RootState) => state.pinnedVerses.verses;
 
@@ -107,8 +101,9 @@ export const selectPinnedVerseKeys = createSelector(selectPinnedVerses, (verses)
   verses.map((v) => v.verseKey),
 );
 
-export const selectPinnedVerseKeysSet = createSelector(selectPinnedVerseKeys, (keys) =>
-  new Set(keys),
+export const selectPinnedVerseKeysSet = createSelector(
+  selectPinnedVerseKeys,
+  (keys) => new Set(keys),
 );
 
 export default pinnedVersesSlice.reducer;

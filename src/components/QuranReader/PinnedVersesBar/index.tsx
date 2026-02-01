@@ -14,10 +14,7 @@ import PinnedVersesContent from './PinnedVersesContent';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
-import {
-  selectPinnedVerses,
-  selectPinnedVerseKeys,
-} from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerses, selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';

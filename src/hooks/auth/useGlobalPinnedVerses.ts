@@ -17,8 +17,7 @@ export const PINNED_VERSES_KEY = 'pinned-verses';
 
 const serverItemToLocal = (item: PinnedItemDTO): PinnedVerse => ({
   verseKey: item.targetId,
-  chapterNumber:
-    (item.metadata?.chapterNumber as number) || getChapterNumberFromKey(item.targetId),
+  chapterNumber: (item.metadata?.chapterNumber as number) || getChapterNumberFromKey(item.targetId),
   verseNumber: (item.metadata?.verseNumber as number) || getVerseNumberFromKey(item.targetId),
   timestamp: new Date(item.createdAt).getTime(),
   serverId: item.id,

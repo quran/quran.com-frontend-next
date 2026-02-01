@@ -21,10 +21,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
-import {
-  broadcastPinnedVerses,
-  PinnedVersesBroadcastType,
-} from '@/hooks/usePinnedVersesBroadcast';
+import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePinnedVersesBroadcast';
 import ChevronLeft from '@/icons/chevron-left.svg';
 import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
 import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';

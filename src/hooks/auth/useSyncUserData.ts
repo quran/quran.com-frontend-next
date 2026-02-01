@@ -31,9 +31,9 @@ import SyncDataType, {
   SyncLocalDataPayload,
   SyncReadingSessionPayload,
 } from 'types/auth/SyncDataType';
-import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
+import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 const MAX_SYNC_ATTEMPTS = 3; // 1 initial + 2 retries
 const INITIAL_RETRY_DELAY_MS = 1000;

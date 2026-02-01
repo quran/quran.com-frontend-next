@@ -5,6 +5,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import loadCollectionVerses from './loadCollectionVerses';
+
 import CollectionsList from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsList';
 import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
 import styles from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal.module.scss';
@@ -12,19 +14,11 @@ import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBo
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import {
-  broadcastPinnedVerses,
-  PinnedVersesBroadcastType,
-} from '@/hooks/usePinnedVersesBroadcast';
-import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import { privateFetcher, syncPinnedItems } from '@/utils/auth/api';
-import { makeCollectionsUrl, makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
-import { buildPinnedSyncPayload, isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeCollectionsUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { makeVerseKey } from '@/utils/verse';
-import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
 
@@ -72,36 +66,17 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
       setIsLoading(true);
 
       try {
-        const collectionData = await privateFetcher<GetBookmarkCollectionsIdResponse>(
-          makeGetBookmarkByCollectionId(collection.id, {
-            type: BookmarkType.Ayah,
-            limit: 1000,
-          }),
+        const verseKeys = await loadCollectionVerses(
+          collection.id,
+          mushafId,
+          dispatch,
+          globalMutate,
         );
-
-        const bookmarks = collectionData?.data?.bookmarks || [];
-
-        if (bookmarks.length === 0) {
+        if (verseKeys.length === 0) {
           toast(t('collection:empty'), { status: ToastStatus.Warning });
           setIsLoading(false);
           return;
         }
-
-        const verseKeys = bookmarks.map((bookmark) =>
-          makeVerseKey(bookmark.key, bookmark.verseNumber),
-        );
-
-        dispatch(pinVerses(verseKeys));
-
-        const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
-        await syncPinnedItems(syncPayload);
-
-        globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
-
-        verseKeys.forEach((vk) => {
-          broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
-        });
-
         toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
         onClose();
       } catch {

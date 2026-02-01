@@ -863,8 +863,9 @@ export const submitTranslationFeedback = async (params: {
 };
 
 // Pinned Items
-export const getPinnedItems = async (targetType?: PinnedItemTargetType): Promise<{ data: PinnedItemDTO[] }> =>
-  privateFetcher(makePinnedItemsUrl(targetType));
+export const getPinnedItems = async (
+  targetType?: PinnedItemTargetType,
+): Promise<{ data: PinnedItemDTO[] }> => privateFetcher(makePinnedItemsUrl(targetType));
 
 export const addPinnedItem = async (params: {
   targetType: PinnedItemTargetType;

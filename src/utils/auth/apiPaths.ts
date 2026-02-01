@@ -12,8 +12,8 @@ import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
-import { PinnedItemTargetType } from 'types/PinnedItem';
 import BookmarkType from 'types/BookmarkType';
+import { PinnedItemTargetType } from 'types/PinnedItem';
 
 /**
  * Cache key path patterns for bookmark-related API endpoints.
