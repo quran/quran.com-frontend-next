@@ -1,17 +1,21 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import useFetchVersePageNumber from './useFetchVersePageNumber';
 
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
 import { getVersePositionWithinAMushafPage } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
+
+const PINNED_VERSES_BAR_OFFSET = -90;
 
 /**
  * This hook listens to startingVerse query param and navigate to the
@@ -48,6 +52,9 @@ const useScrollToVirtualizedReadingView = (
   const { startingVerse, chapterId } = router.query;
   const shouldScroll = useRef(true);
 
+  const pinnedVerses = useSelector(selectPinnedVerses);
+  const hasPinnedVerses = pinnedVerses.length > 0;
+
   const fetchVersePageNumber = useFetchVersePageNumber(
     quranReaderStyles.quranFont,
     quranReaderStyles.mushafLines,
@@ -75,6 +82,8 @@ const useScrollToVirtualizedReadingView = (
       if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
+      const pinnedOffset = hasPinnedVerses ? PINNED_VERSES_BAR_OFFSET : 0;
+
       const initialDataFirstPage = initialData.verses[0]?.pageNumber;
       const firstPageOfCurrentChapter =
         isUsingDefaultFont && initialDataFirstPage
@@ -90,6 +99,7 @@ const useScrollToVirtualizedReadingView = (
             `${chapterId}:${verseNumber}`,
             pagesVersesRange[startFromVerseData.pageNumber],
           ),
+          offset: pinnedOffset,
         });
         if (respectScrollGuard) shouldScroll.current = false;
         return;
@@ -107,6 +117,7 @@ const useScrollToVirtualizedReadingView = (
               `${chapterId}:${verseNumber}`,
               pagesVersesRange[page],
             ),
+            offset: pinnedOffset,
           });
 
           if (respectScrollGuard) shouldScroll.current = false;
@@ -121,6 +132,7 @@ const useScrollToVirtualizedReadingView = (
       verses,
       chapterId,
       fetchVersePageNumber,
+      hasPinnedVerses,
     ],
   );
 

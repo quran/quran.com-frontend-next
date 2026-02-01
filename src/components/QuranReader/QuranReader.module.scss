@@ -38,7 +38,7 @@ $virtual-scrolling-height-bandage: calc(
   @include breakpoints.smallerThanTablet {
     padding-block-start: $quran-reader-padding-mobile;
   }
-  padding-block-start: $quran-reader-padding;
+  padding-block-start: calc(#{$quran-reader-padding} + var(--pinned-verses-bar-height));
   // padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
