@@ -81,7 +81,7 @@ const formatLocalPinnedVerse = (verse: PinnedVerse, mushafId: number): SyncPinne
   targetId: verse.verseKey,
   metadata: {
     sourceMushafId: mushafId,
-    chapterNumber: verse.chapterNumber,
+    key: verse.chapterNumber,
     verseNumber: verse.verseNumber,
   },
   createdAt: new Date(verse.timestamp).toISOString(),

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -24,15 +24,28 @@ interface BroadcastMessage {
   payload?: { verseKey?: string; verses?: PinnedVerse[] };
 }
 
-const usePinnedVersesBroadcast = () => {
+/**
+ * Plain function to broadcast pinned verse changes to other tabs.
+ * Does NOT use React hooks — safe to call from any callback.
+ */
+export const broadcastPinnedVerses = (type: PinnedVersesBroadcastType, payload?: unknown) => {
+  if (typeof BroadcastChannel === 'undefined') return;
+  const channel = new BroadcastChannel(CHANNEL_NAME);
+  channel.postMessage({ type, payload });
+  channel.close();
+};
+
+/**
+ * Listener hook — mount ONCE at the top level (e.g. UserAccountModal).
+ * Listens for pinned verse changes from other tabs and dispatches to Redux.
+ */
+const usePinnedVersesBroadcastListener = () => {
   const dispatch = useDispatch();
-  const channelRef = useRef<BroadcastChannel | null>(null);
 
   useEffect(() => {
     if (typeof BroadcastChannel === 'undefined') return undefined;
 
     const channel = new BroadcastChannel(CHANNEL_NAME);
-    channelRef.current = channel;
 
     channel.onmessage = (event: MessageEvent<BroadcastMessage>) => {
       const { type, payload } = event.data;
@@ -56,12 +69,6 @@ const usePinnedVersesBroadcast = () => {
 
     return () => channel.close();
   }, [dispatch]);
-
-  const broadcast = useCallback((type: PinnedVersesBroadcastType, payload?: unknown) => {
-    channelRef.current?.postMessage({ type, payload });
-  }, []);
-
-  return { broadcast };
 };
 
-export default usePinnedVersesBroadcast;
+export default usePinnedVersesBroadcastListener;

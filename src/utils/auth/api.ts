@@ -113,7 +113,7 @@ import {
   makeSyncPinnedItemsUrl,
   makeClearPinnedItemsUrl,
   makeDeletePinnedItemUrl,
-  makeDeletePinnedItemByKeyUrl,
+
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -875,9 +875,6 @@ export const addPinnedItem = async (params: {
 
 export const deletePinnedItemById = async (pinnedItemId: string) =>
   deleteRequest(makeDeletePinnedItemUrl(pinnedItemId));
-
-export const deletePinnedItemByKey = async (params: { targetType: string; targetId: string }) =>
-  deleteRequest(makeDeletePinnedItemByKeyUrl(), params);
 
 export const syncPinnedItems = async (
   items: SyncPinnedItemPayload[],

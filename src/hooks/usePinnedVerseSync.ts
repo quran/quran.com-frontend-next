@@ -4,6 +4,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
+import {
+  broadcastPinnedVerses,
+  PinnedVersesBroadcastType,
+} from '@/hooks/usePinnedVersesBroadcast';
 import { logErrorToSentry } from '@/lib/sentry';
 import {
   PinnedVerse,
@@ -14,13 +18,15 @@ import {
   setServerIds,
   selectPinnedVerses,
 } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
 import {
   addPinnedItem,
   deletePinnedItemById,
-  deletePinnedItemByKey,
   clearPinnedItems,
 } from '@/utils/auth/api';
 import { PINNED_ITEMS_CACHE_PATHS } from '@/utils/auth/apiPaths';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
 const isPinnedItemsCacheKey = (key: unknown): boolean =>
   typeof key === 'string' &&
@@ -31,28 +37,39 @@ const usePinnedVerseSync = () => {
   const { isLoggedIn } = useIsLoggedIn();
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
   const { mutate: globalMutate } = useSWRConfig();
-
+  const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
   const invalidateCache = useCallback(() => {
     globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
   }, [globalMutate]);
 
   const pinVerseWithSync = useCallback(
-    async (verseKey: string, metadata?: Record<string, unknown>) => {
+    async (verseKey: string) => {
       // Optimistic update
       dispatch(pinVerse(verseKey));
+      // Broadcast to other tabs
+      broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey });
 
       if (isLoggedIn) {
         try {
+          const chapterNumber = getChapterNumberFromKey(verseKey);
+          const verseNumber = getVerseNumberFromKey(verseKey);
+
           const response = await addPinnedItem({
             targetType: 'ayah',
             targetId: verseKey,
-            metadata,
+            metadata: {
+              sourceMushafId: mushafId,
+              key: chapterNumber,
+              verseNumber,
+            },
           });
           dispatch(setServerIds({ [verseKey]: response.id }));
           invalidateCache();
         } catch (error) {
           // Rollback
           dispatch(unpinVerse(verseKey));
+          broadcastPinnedVerses(PinnedVersesBroadcastType.UNPIN, { verseKey });
           logErrorToSentry(error, {
             transactionName: 'usePinnedVerseSync.pin',
             metadata: { verseKey },
@@ -60,7 +77,7 @@ const usePinnedVerseSync = () => {
         }
       }
     },
-    [dispatch, isLoggedIn, invalidateCache],
+    [dispatch, isLoggedIn, mushafId, invalidateCache],
   );
 
   const unpinVerseWithSync = useCallback(
@@ -70,18 +87,17 @@ const usePinnedVerseSync = () => {
 
       // Optimistic update
       dispatch(unpinVerse(verseKey));
+      // Broadcast to other tabs
+      broadcastPinnedVerses(PinnedVersesBroadcastType.UNPIN, { verseKey });
 
-      if (isLoggedIn) {
+      if (isLoggedIn && serverId) {
         try {
-          if (serverId) {
-            await deletePinnedItemById(serverId);
-          } else {
-            await deletePinnedItemByKey({ targetType: 'ayah', targetId: verseKey });
-          }
+          await deletePinnedItemById(serverId);
           invalidateCache();
         } catch (error) {
           // Rollback
           dispatch(pinVerse(verseKey));
+          broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey });
           logErrorToSentry(error, {
             transactionName: 'usePinnedVerseSync.unpin',
             metadata: { verseKey, serverId },
@@ -97,6 +113,8 @@ const usePinnedVerseSync = () => {
 
     // Optimistic update
     dispatch(clearPinnedVerses());
+    // Broadcast to other tabs
+    broadcastPinnedVerses(PinnedVersesBroadcastType.CLEAR);
 
     if (isLoggedIn) {
       try {
@@ -105,6 +123,7 @@ const usePinnedVerseSync = () => {
       } catch (error) {
         // Rollback
         dispatch(setPinnedVerses(savedVerses));
+        broadcastPinnedVerses(PinnedVersesBroadcastType.SET, { verses: savedVerses });
         logErrorToSentry(error, {
           transactionName: 'usePinnedVerseSync.clear',
         });

@@ -356,6 +356,4 @@ export const makeClearPinnedItemsUrl = (): string => makeUrl('pinned-items/clear
 export const makeDeletePinnedItemUrl = (pinnedItemId: string): string =>
   makeUrl(`pinned-items/${pinnedItemId}`);
 
-export const makeDeletePinnedItemByKeyUrl = (): string => makeUrl('pinned-items/by-key');
-
 export const makeBulkDeletePinnedItemsUrl = (): string => makeUrl('pinned-items/bulk');

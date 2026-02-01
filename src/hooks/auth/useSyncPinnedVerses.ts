@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -14,12 +14,15 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { getPinnedItems, syncPinnedItems } from '@/utils/auth/api';
+import { getLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
 import { SyncPinnedItemPayload } from 'types/auth/SyncDataType';
 import { PinnedItemDTO } from 'types/PinnedItem';
 
 const MAX_SYNC_ATTEMPTS = 3;
 const INITIAL_RETRY_DELAY_MS = 1000;
+const POLL_INTERVAL_MS = 500;
+const MAX_POLL_ATTEMPTS = 20; // 10 seconds max wait
 
 /**
  * Convert a server PinnedItemDTO to a local PinnedVerse.
@@ -34,25 +37,53 @@ const serverItemToLocal = (item: PinnedItemDTO): PinnedVerse => ({
 });
 
 /**
- * Convert a local PinnedVerse to a sync payload.
+ * Convert a local PinnedVerse to a sync payload with metadata.
  */
-const localToSyncPayload = (
-  verse: PinnedVerse,
-  mushafId: number,
-): SyncPinnedItemPayload => ({
+const localToSyncPayload = (verse: PinnedVerse, mushafId: number): SyncPinnedItemPayload => ({
   targetType: 'ayah',
   targetId: verse.verseKey,
   metadata: {
     sourceMushafId: mushafId,
-    chapterNumber: verse.chapterNumber,
+    key: verse.chapterNumber,
     verseNumber: verse.verseNumber,
   },
   createdAt: new Date(verse.timestamp).toISOString(),
 });
 
 /**
- * Syncs pinned verses with the backend on login.
- * Bidirectional merge: server-only items are added locally, local-only items are pushed to server.
+ * Wait for useSyncUserData to complete (indicated by lastSyncAt cookie being set).
+ * Returns true if lastSyncAt was found, false if timed out.
+ */
+const waitForMainSync = (): Promise<boolean> =>
+  new Promise((resolve) => {
+    let attempts = 0;
+    const check = () => {
+      if (getLastSyncAt()) {
+        resolve(true);
+        return;
+      }
+      attempts += 1;
+      if (attempts >= MAX_POLL_ATTEMPTS) {
+        resolve(false);
+        return;
+      }
+      setTimeout(check, POLL_INTERVAL_MS);
+    };
+    check();
+  });
+
+/**
+ * Syncs pinned verses with the backend on first login only.
+ *
+ * Flow:
+ * 1. Waits for useSyncUserData to complete (sets lastSyncAt cookie)
+ * 2. Fetches server pinned items
+ * 3. Pushes local-only items to server (with metadata)
+ * 4. Merges server + local, sorts oldest→newest
+ * 5. Overrides Redux with merged list
+ *
+ * On subsequent page refreshes, useGlobalPinnedVerses handles fetching
+ * from backend (source of truth) and hydrating Redux.
  */
 const useSyncPinnedVerses = () => {
   const dispatch = useDispatch();
@@ -65,8 +96,38 @@ const useSyncPinnedVerses = () => {
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  const performSync = useCallback(
-    async (attempt = 0): Promise<void> => {
+  // Use refs so the sync function reads current state without being a dependency
+  const localPinnedVersesRef = useRef(localPinnedVerses);
+  localPinnedVersesRef.current = localPinnedVerses;
+  const mushafIdRef = useRef(mushafId);
+  mushafIdRef.current = mushafId;
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      hasSyncedRef.current = false;
+      return () => {};
+    }
+    if (!isPersistGateHydrationComplete) {
+      return () => {};
+    }
+    if (hasSyncedRef.current || isSyncingRef.current) {
+      return () => {};
+    }
+    // If lastSyncAt already exists, this is a page refresh — skip sync.
+    // useGlobalPinnedVerses will handle fetching from backend.
+    if (getLastSyncAt()) {
+      return () => {};
+    }
+
+    // This is a first login — wait for useSyncUserData to set lastSyncAt, then merge
+    const performSync = async (attempt = 0): Promise<void> => {
+      // Wait for main sync to complete first
+      const mainSyncDone = await waitForMainSync();
+      if (!mainSyncDone) return;
+
+      const currentLocalPinned = localPinnedVersesRef.current;
+      const currentMushafId = mushafIdRef.current;
+
       try {
         // 1. Fetch server pinned items
         const { data: serverItems } = await getPinnedItems('ayah');
@@ -75,13 +136,13 @@ const useSyncPinnedVerses = () => {
         serverItems.forEach((item) => serverMap.set(item.targetId, item));
 
         const localMap = new Map<string, PinnedVerse>();
-        localPinnedVerses.forEach((v) => localMap.set(v.verseKey, v));
+        currentLocalPinned.forEach((v) => localMap.set(v.verseKey, v));
 
-        // 2. Find local-only items to push to server
+        // 2. Find local-only items to push to server (with metadata)
         const localOnlyItems: SyncPinnedItemPayload[] = [];
-        localPinnedVerses.forEach((v) => {
+        currentLocalPinned.forEach((v) => {
           if (!serverMap.has(v.verseKey)) {
-            localOnlyItems.push(localToSyncPayload(v, mushafId));
+            localOnlyItems.push(localToSyncPayload(v, currentMushafId));
           }
         });
 
@@ -94,28 +155,29 @@ const useSyncPinnedVerses = () => {
         const merged: PinnedVerse[] = [];
         const seenKeys = new Set<string>();
 
-        // Add all server items (source of truth for serverId)
         serverItems.forEach((item) => {
           seenKeys.add(item.targetId);
           const localVerse = localMap.get(item.targetId);
           merged.push({
             ...serverItemToLocal(item),
-            // Preserve local timestamp if exists (for ordering)
             timestamp: localVerse?.timestamp || new Date(item.createdAt).getTime(),
           });
         });
 
-        // Add local-only items (they've been synced above, but we don't have serverIds yet)
-        localPinnedVerses.forEach((v) => {
+        // Add local-only items (synced above but no serverIds yet)
+        currentLocalPinned.forEach((v) => {
           if (!seenKeys.has(v.verseKey)) {
             merged.push(v);
           }
         });
 
-        // 5. Update Redux with merged list
+        // 5. Sort oldest → newest
+        merged.sort((a, b) => a.timestamp - b.timestamp);
+
+        // 6. Update Redux with merged list
         dispatch(setPinnedVerses(merged));
 
-        // 6. Build serverId mapping
+        // 7. Build serverId mapping
         const idMapping: Record<string, string> = {};
         serverItems.forEach((item) => {
           idMapping[item.targetId] = item.id;
@@ -128,37 +190,25 @@ const useSyncPinnedVerses = () => {
       } catch (error) {
         logErrorToSentry(error, {
           transactionName: 'useSyncPinnedVerses',
-          metadata: { pinnedCount: localPinnedVerses.length, mushafId, attempt },
+          metadata: { pinnedCount: currentLocalPinned.length, mushafId: currentMushafId, attempt },
         });
-        // Retry with exponential backoff
         if (attempt < MAX_SYNC_ATTEMPTS - 1) {
           const delay = INITIAL_RETRY_DELAY_MS * 2 ** attempt;
           if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
           retryTimeoutRef.current = setTimeout(() => performSync(attempt + 1), delay);
         }
       }
-    },
-    [localPinnedVerses, mushafId, dispatch],
-  );
+    };
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      hasSyncedRef.current = false;
-      return () => {};
-    }
-    if (!isPersistGateHydrationComplete) {
-      return () => {};
-    }
-    if (!hasSyncedRef.current && !isSyncingRef.current) {
-      isSyncingRef.current = true;
-      performSync().finally(() => {
-        isSyncingRef.current = false;
-      });
-    }
+    isSyncingRef.current = true;
+    performSync().finally(() => {
+      isSyncingRef.current = false;
+    });
+
     return () => {
       if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
     };
-  }, [isLoggedIn, isPersistGateHydrationComplete, performSync]);
+  }, [isLoggedIn, isPersistGateHydrationComplete, dispatch]);
 };
 
 export default useSyncPinnedVerses;
