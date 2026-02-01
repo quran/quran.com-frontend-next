@@ -14,8 +14,8 @@ interface CopyPinnedVersesParams {
 }
 
 /**
- * Copy a single verse using the advanced copy API
- * Returns the formatted text for one verse
+ * Copy a single verse using the advanced copy API.
+ * Returns the formatted text for one verse.
  *
  * @param {string} verseKey - The verse key (e.g., "1:2")
  * @param {string} lang - The language code
@@ -59,13 +59,6 @@ const getVerseTextToCopy = async (
 
 /**
  * Copy all pinned verses to clipboard using the advanced copy API.
- * Formats output per QF-4106 spec:
- * - Surah name (translated for non-Arabic locales, Arabic for Arabic locale)
- * - Chapter:Verse format
- * - Arabic text in Uthmani style
- * - All selected translations with translator attribution
- * - URL in format https://quran.com/1/2
- * - Verses separated by blank line (no --- separator)
  *
  * @param {CopyPinnedVersesParams} params - The copy parameters
  * @returns {Promise<void>}
@@ -80,17 +73,12 @@ const copyPinnedVerses = async ({
     return;
   }
 
-  // Get formatted text for each verse using the advanced copy API
   const verseTextsPromises = pinnedVerses.map((pv) =>
     getVerseTextToCopy(pv.verseKey, lang, chaptersData, selectedTranslations),
   );
 
   const verseTexts = await Promise.all(verseTextsPromises);
-
-  // Join verses with double newline (no --- separator per spec)
   const fullText = verseTexts.join('\n\n');
-
-  // Copy to clipboard
   const textBlobPromise = Promise.resolve(textToBlob(fullText));
   await copyText(textBlobPromise);
 };

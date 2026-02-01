@@ -49,13 +49,9 @@ const useGlobalPinnedVerses = () => {
 
     const serverItems = data.data;
     const pinnedVerses = serverItems.map(serverItemToLocal);
-
-    // Sort by timestamp (oldest → newest)
     pinnedVerses.sort((a, b) => a.timestamp - b.timestamp);
-
     dispatch(setPinnedVerses(pinnedVerses));
 
-    // Build serverId mapping
     const idMapping: Record<string, string> = {};
     serverItems.forEach((item) => {
       idMapping[item.targetId] = item.id;

@@ -21,20 +21,13 @@ import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { privateFetcher, syncPinnedItems } from '@/utils/auth/api';
-import {
-  makeCollectionsUrl,
-  makeGetBookmarkByCollectionId,
-  PINNED_ITEMS_CACHE_PATHS,
-} from '@/utils/auth/apiPaths';
+import { makeCollectionsUrl, makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
+import { buildPinnedSyncPayload, isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
 import { logButtonClick } from '@/utils/eventLogger';
-import { makeVerseKey, getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import { makeVerseKey } from '@/utils/verse';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
-
-const isPinnedItemsCacheKey = (key: unknown): boolean =>
-  typeof key === 'string' &&
-  Object.values(PINNED_ITEMS_CACHE_PATHS).some((p) => key.includes(p));
 
 interface LoadFromCollectionModalProps {
   isOpen: boolean;
@@ -104,26 +97,13 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
         makeVerseKey(bookmark.key, bookmark.verseNumber),
       );
 
-      // 1. Update Redux
       dispatch(pinVerses(verseKeys));
 
-      // 2. Sync to backend as pinned items
-      const syncPayload = verseKeys.map((vk) => ({
-        targetType: 'ayah',
-        targetId: vk,
-        metadata: {
-          sourceMushafId: mushafId,
-          key: getChapterNumberFromKey(vk),
-          verseNumber: getVerseNumberFromKey(vk),
-        },
-        createdAt: new Date().toISOString(),
-      }));
+      const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
       await syncPinnedItems(syncPayload);
 
-      // 3. Invalidate pinned items cache so useGlobalPinnedVerses refetches
       globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
 
-      // 4. Broadcast to other tabs
       verseKeys.forEach((vk) => {
         broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
       });

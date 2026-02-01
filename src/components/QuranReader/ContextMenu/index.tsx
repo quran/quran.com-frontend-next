@@ -33,6 +33,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isSideBarVisible,
     mushaf,
     verseKey,
+    isTranslationMode,
 
     // Data
     chapterData,
@@ -141,14 +142,9 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Reading progress bar - at top of extended stack */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
-
-      {/* Pinned verses bar */}
       <PinnedVersesBar />
-
-      {/* Tajweed colors bar - shows at the bottom of the stack */}
-      {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
     </div>
   );
 };

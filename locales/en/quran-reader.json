@@ -203,5 +203,6 @@
   "verses-pinned": "{{count}} verses pinned",
   "pin-all-verses": "Pin All",
   "pin-verses-to-compare": "Pin verses to compare them",
-  "reflections": "Reflections"
+  "reflections": "Reflections",
+  "remove-pinned-verse": "Remove verse {{verseKey}} from pinned"
 }

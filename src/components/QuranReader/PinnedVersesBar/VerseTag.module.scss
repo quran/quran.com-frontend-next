@@ -46,10 +46,6 @@
   cursor: pointer;
   color: var(--color-text-link-new);
 
-  &:hover {
-    // No background change on hover
-  }
-
   &:focus {
     outline: none;
   }

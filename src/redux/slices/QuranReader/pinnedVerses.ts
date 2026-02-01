@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
@@ -26,7 +26,6 @@ export const pinnedVersesSlice = createSlice({
     pinVerse: (state, action: PayloadAction<string>) => {
       const verseKey = action.payload;
 
-      // Check if already pinned
       if (state.verses.some((v) => v.verseKey === verseKey)) {
         return state;
       }
@@ -72,7 +71,6 @@ export const pinnedVersesSlice = createSlice({
       };
     },
     clearPinnedVerses: () => initialState,
-    // Set server IDs after sync/fetch
     setServerIds: (state, action: PayloadAction<Record<string, string>>) => {
       const mapping = action.payload;
       return {
@@ -82,7 +80,6 @@ export const pinnedVersesSlice = createSlice({
         ),
       };
     },
-    // Replace all pinned verses (used after fetching from server)
     setPinnedVerses: (state, action: PayloadAction<PinnedVerse[]>) => ({
       ...state,
       verses: action.payload,
@@ -99,7 +96,6 @@ export const {
   setPinnedVerses,
 } = pinnedVersesSlice.actions;
 
-// Selectors
 export const selectPinnedVerses = (state: RootState) => state.pinnedVerses.verses;
 
 export const selectPinnedVersesCount = (state: RootState) => state.pinnedVerses.verses.length;
@@ -107,7 +103,12 @@ export const selectPinnedVersesCount = (state: RootState) => state.pinnedVerses.
 export const selectIsVersePinned = (state: RootState, verseKey: string) =>
   state.pinnedVerses.verses.some((v) => v.verseKey === verseKey);
 
-export const selectPinnedVerseKeys = (state: RootState) =>
-  state.pinnedVerses.verses.map((v) => v.verseKey);
+export const selectPinnedVerseKeys = createSelector(selectPinnedVerses, (verses) =>
+  verses.map((v) => v.verseKey),
+);
+
+export const selectPinnedVerseKeysSet = createSelector(selectPinnedVerseKeys, (keys) =>
+  new Set(keys),
+);
 
 export default pinnedVersesSlice.reducer;

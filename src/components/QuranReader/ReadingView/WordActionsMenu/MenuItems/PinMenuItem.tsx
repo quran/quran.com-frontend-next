@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
-import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import { logButtonClick } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
@@ -22,8 +22,8 @@ const PinMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { verseKey } = verse;
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
-  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys);
-  const isPinned = useMemo(() => pinnedVerseKeys.includes(verseKey), [pinnedVerseKeys, verseKey]);
+  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
+  const isPinned = pinnedVerseKeysSet.has(verseKey);
 
   const handleClick = () => {
     if (isPinned) {

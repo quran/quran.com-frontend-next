@@ -119,7 +119,6 @@ $virtual-scrolling-height-bandage: calc(
   }
 }
 
-// When pinned verses bar is visible: sets the CSS variable to the design-spec height
 .withPinnedVerses {
   --pinned-verses-bar-height: 83px;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './VerseTag.module.scss';
 
@@ -14,6 +15,8 @@ interface VerseTagProps {
 }
 
 const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSelected = false }) => {
+  const { t } = useTranslation('quran-reader');
+
   const handleRemoveClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onRemove();
@@ -61,7 +64,7 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
         })}
         onClick={handleRemoveClick}
         onKeyDown={handleRemoveKeyDown}
-        aria-label={`Remove verse ${verseKey} from pinned`}
+        aria-label={t('remove-pinned-verse', { verseKey })}
       >
         <CloseIcon
           className={classNames(styles.closeIcon, {

@@ -113,7 +113,6 @@ import {
   makeSyncPinnedItemsUrl,
   makeClearPinnedItemsUrl,
   makeDeletePinnedItemUrl,
-
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';

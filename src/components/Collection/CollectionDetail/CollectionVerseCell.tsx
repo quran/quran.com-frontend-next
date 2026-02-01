@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,7 +16,7 @@ import ArrowIcon from '@/icons/arrow.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
-import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import { getChapterData } from '@/utils/chapter';
 import { dateToMonthDayYearFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -62,10 +62,10 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
   const chaptersData = useContext(DataContext);
   const confirm = useConfirm();
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
-  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys);
+  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
-  const isPinned = useMemo(() => pinnedVerseKeys.includes(verseKey), [pinnedVerseKeys, verseKey]);
+  const isPinned = pinnedVerseKeysSet.has(verseKey);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
   const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
   const bookmarkName = `${chapterData?.transliteratedName} ${localizedVerseKey}`;

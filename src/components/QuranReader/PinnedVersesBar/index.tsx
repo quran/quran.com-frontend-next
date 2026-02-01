@@ -41,7 +41,6 @@ const PinnedVersesBar: React.FC = () => {
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
   const [selectedVerseKey, setSelectedVerseKey] = useState<string | null>(null);
 
-  // All useCallback hooks must be before early return to satisfy Rules of Hooks
   const handleCompareClick = useCallback(() => {
     logButtonClick('pinned_bar_compare');
     if (pinnedVerseKeys.length > 0) {
@@ -78,32 +77,38 @@ const PinnedVersesBar: React.FC = () => {
     }
   }, [chaptersData, lang, pinnedVerses, selectedTranslations, t, toast]);
 
-  if (pinnedVerses.length === 0) return null;
+  const handleRemoveVerse = useCallback(
+    (verseKey: string) => {
+      logButtonClick('pinned_bar_remove_verse');
+      unpinVerseWithSync(verseKey);
+    },
+    [unpinVerseWithSync],
+  );
 
-  const handleRemoveVerse = (verseKey: string) => {
-    logButtonClick('pinned_bar_remove_verse');
-    unpinVerseWithSync(verseKey);
-  };
-
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     logButtonClick('pinned_bar_clear_all');
     clearPinnedWithSync();
-  };
+  }, [clearPinnedWithSync]);
 
-  const handleVerseTagClick = (verseKey: string) => {
-    logButtonClick('pinned_bar_verse_tag_click');
-    setSelectedVerseKey(verseKey);
-    router.push(getChapterWithStartingVerseUrl(verseKey));
-  };
+  const handleVerseTagClick = useCallback(
+    (verseKey: string) => {
+      logButtonClick('pinned_bar_verse_tag_click');
+      setSelectedVerseKey(verseKey);
+      router.push(getChapterWithStartingVerseUrl(verseKey));
+    },
+    [router],
+  );
 
-  const handleSaveToCollection = () => {
+  const handleSaveToCollection = useCallback(() => {
     logButtonClick('pinned_menu_save_to_collection');
     if (!isLoggedIn()) {
       router.push(getLoginNavigationUrl(router.asPath));
       return;
     }
     setIsSaveModalOpen(true);
-  };
+  }, [router]);
+
+  if (pinnedVerses.length === 0) return null;
 
   return (
     <>

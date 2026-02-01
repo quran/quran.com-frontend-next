@@ -1,3 +1,5 @@
+import { SyncPinnedItemPayload } from 'types/PinnedItem';
+
 enum SyncDataType {
   BOOKMARKS = 'bookmarks',
   READING_SESSIONS = 'readingSessions',
@@ -19,17 +21,10 @@ export interface SyncReadingSessionPayload {
   verseNumber: number;
 }
 
-export interface SyncPinnedVersePayload {
-  targetType: string;
-  targetId: string;
-  metadata?: Record<string, unknown>;
-  createdAt?: string;
-}
-
 export interface SyncLocalDataPayload {
   [SyncDataType.BOOKMARKS]: SyncBookmarkPayload[];
   [SyncDataType.READING_SESSIONS]: SyncReadingSessionPayload[];
-  [SyncDataType.PINNED_VERSES]?: SyncPinnedVersePayload[];
+  [SyncDataType.PINNED_VERSES]?: SyncPinnedItemPayload[];
 }
 
 export default SyncDataType;

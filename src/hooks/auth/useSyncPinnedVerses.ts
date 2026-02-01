@@ -16,13 +16,13 @@ import { getMushafId } from '@/utils/api';
 import { getPinnedItems, syncPinnedItems } from '@/utils/auth/api';
 import { getLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
-import { SyncPinnedItemPayload } from 'types/auth/SyncDataType';
+import { SyncPinnedItemPayload } from 'types/PinnedItem';
 import { PinnedItemDTO } from 'types/PinnedItem';
 
 const MAX_SYNC_ATTEMPTS = 3;
 const INITIAL_RETRY_DELAY_MS = 1000;
 const POLL_INTERVAL_MS = 500;
-const MAX_POLL_ATTEMPTS = 20; // 10 seconds max wait
+const MAX_POLL_ATTEMPTS = 20;
 
 /**
  * Convert a server PinnedItemDTO to a local PinnedVerse.
@@ -52,7 +52,7 @@ const localToSyncPayload = (verse: PinnedVerse, mushafId: number): SyncPinnedIte
 
 /**
  * Wait for useSyncUserData to complete (indicated by lastSyncAt cookie being set).
- * Returns true if lastSyncAt was found, false if timed out.
+ * @returns {Promise<boolean>} true if lastSyncAt was found, false if timed out.
  */
 const waitForMainSync = (): Promise<boolean> =>
   new Promise((resolve) => {
@@ -79,7 +79,7 @@ const waitForMainSync = (): Promise<boolean> =>
  * 1. Waits for useSyncUserData to complete (sets lastSyncAt cookie)
  * 2. Fetches server pinned items
  * 3. Pushes local-only items to server (with metadata)
- * 4. Merges server + local, sorts oldest→newest
+ * 4. Merges server + local, sorts oldest to newest
  * 5. Overrides Redux with merged list
  *
  * On subsequent page refreshes, useGlobalPinnedVerses handles fetching
@@ -96,7 +96,6 @@ const useSyncPinnedVerses = () => {
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
-  // Use refs so the sync function reads current state without being a dependency
   const localPinnedVersesRef = useRef(localPinnedVerses);
   localPinnedVersesRef.current = localPinnedVerses;
   const mushafIdRef = useRef(mushafId);
@@ -113,15 +112,11 @@ const useSyncPinnedVerses = () => {
     if (hasSyncedRef.current || isSyncingRef.current) {
       return () => {};
     }
-    // If lastSyncAt already exists, this is a page refresh — skip sync.
-    // useGlobalPinnedVerses will handle fetching from backend.
     if (getLastSyncAt()) {
       return () => {};
     }
 
-    // This is a first login — wait for useSyncUserData to set lastSyncAt, then merge
     const performSync = async (attempt = 0): Promise<void> => {
-      // Wait for main sync to complete first
       const mainSyncDone = await waitForMainSync();
       if (!mainSyncDone) return;
 
@@ -129,7 +124,6 @@ const useSyncPinnedVerses = () => {
       const currentMushafId = mushafIdRef.current;
 
       try {
-        // 1. Fetch server pinned items
         const { data: serverItems } = await getPinnedItems('ayah');
 
         const serverMap = new Map<string, PinnedItemDTO>();
@@ -138,7 +132,6 @@ const useSyncPinnedVerses = () => {
         const localMap = new Map<string, PinnedVerse>();
         currentLocalPinned.forEach((v) => localMap.set(v.verseKey, v));
 
-        // 2. Find local-only items to push to server (with metadata)
         const localOnlyItems: SyncPinnedItemPayload[] = [];
         currentLocalPinned.forEach((v) => {
           if (!serverMap.has(v.verseKey)) {
@@ -146,12 +139,10 @@ const useSyncPinnedVerses = () => {
           }
         });
 
-        // 3. Push local-only items to server
         if (localOnlyItems.length > 0) {
           await syncPinnedItems(localOnlyItems);
         }
 
-        // 4. Merge: build final list (server is source of truth for serverId)
         const merged: PinnedVerse[] = [];
         const seenKeys = new Set<string>();
 
@@ -164,20 +155,15 @@ const useSyncPinnedVerses = () => {
           });
         });
 
-        // Add local-only items (synced above but no serverIds yet)
         currentLocalPinned.forEach((v) => {
           if (!seenKeys.has(v.verseKey)) {
             merged.push(v);
           }
         });
 
-        // 5. Sort oldest → newest
         merged.sort((a, b) => a.timestamp - b.timestamp);
-
-        // 6. Update Redux with merged list
         dispatch(setPinnedVerses(merged));
 
-        // 7. Build serverId mapping
         const idMapping: Record<string, string> = {};
         serverItems.forEach((item) => {
           idMapping[item.targetId] = item.id;

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
-import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -27,8 +27,8 @@ const PinVerseAction: React.FC<PinVerseActionProps> = ({
   const { verseKey } = verse;
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
-  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys);
-  const isPinned = useMemo(() => pinnedVerseKeys.includes(verseKey), [pinnedVerseKeys, verseKey]);
+  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
+  const isPinned = pinnedVerseKeysSet.has(verseKey);
 
   const handleClick = useCallback(() => {
     if (isPinned) {

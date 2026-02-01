@@ -3,8 +3,7 @@ import React, { useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWR from 'swr';
-import { useSWRConfig } from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 
 import styles from './CollectionDetailView.module.scss';
 
@@ -33,17 +32,14 @@ import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
 import { deleteCollectionBookmarkById, privateFetcher, syncPinnedItems } from '@/utils/auth/api';
-import { makeGetBookmarkByCollectionId, PINNED_ITEMS_CACHE_PATHS } from '@/utils/auth/apiPaths';
+import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
+import { buildPinnedSyncPayload, isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
-import { makeVerseKey, getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import { makeVerseKey } from '@/utils/verse';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
-
-const isPinnedItemsCacheKey = (key: unknown): boolean =>
-  typeof key === 'string' &&
-  Object.values(PINNED_ITEMS_CACHE_PATHS).some((p) => key.includes(p));
 
 interface CollectionDetailViewProps {
   collectionId: string;
@@ -214,18 +210,14 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       });
 
       if (isLoggedIn) {
-        const syncPayload = verseKeys.map((vk) => ({
-          targetType: 'ayah',
-          targetId: vk,
-          metadata: {
-            sourceMushafId: mushafId,
-            key: getChapterNumberFromKey(vk),
-            verseNumber: getVerseNumberFromKey(vk),
-          },
-          createdAt: new Date().toISOString(),
-        }));
-        await syncPinnedItems(syncPayload);
-        globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
+        try {
+          const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
+          await syncPinnedItems(syncPayload);
+          globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
+        } catch {
+          toast(t('common:error.general'), { status: ToastStatus.Error });
+          return;
+        }
       }
 
       toast(t('quran-reader:verses-pinned', { count: verseKeys.length }), {

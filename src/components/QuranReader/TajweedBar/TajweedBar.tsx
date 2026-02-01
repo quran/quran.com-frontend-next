@@ -53,7 +53,6 @@ const TajweedColors = () => {
         [styles.visibleContainer]: !isExpanded,
       })}
     >
-      {/* Collapsible legend container - uses height animation instead of translateY */}
       <div
         className={styles.rulesWrapper}
         style={{

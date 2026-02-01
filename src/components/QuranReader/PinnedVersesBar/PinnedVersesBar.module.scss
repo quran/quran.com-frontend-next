@@ -1,8 +1,5 @@
 @use 'src/styles/breakpoints';
 
-// PinnedVersesBar is now rendered inside ContextMenu, so no fixed positioning needed
-// It naturally flows in the document order after TajweedColors
-
 .container {
   display: flex;
   flex-direction: column;

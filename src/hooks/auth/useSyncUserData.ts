@@ -29,9 +29,9 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType, {
   SyncBookmarkPayload,
   SyncLocalDataPayload,
-  SyncPinnedVersePayload,
   SyncReadingSessionPayload,
 } from 'types/auth/SyncDataType';
+import { SyncPinnedItemPayload } from 'types/PinnedItem';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
@@ -76,7 +76,7 @@ const formatLocalReadingSession = (
   };
 };
 
-const formatLocalPinnedVerse = (verse: PinnedVerse, mushafId: number): SyncPinnedVersePayload => ({
+const formatLocalPinnedVerse = (verse: PinnedVerse, mushafId: number): SyncPinnedItemPayload => ({
   targetType: 'ayah',
   targetId: verse.verseKey,
   metadata: {

@@ -25,7 +25,7 @@ import CloseIcon from '@/icons/close.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
-import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import {
   setActiveTab,
   setHighlightedWordLocation,
@@ -80,7 +80,7 @@ const StudyModeModal: React.FC<Props> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
-  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
+  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
   const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
@@ -341,10 +341,7 @@ const StudyModeModal: React.FC<Props> = ({
     onClose();
   }, [originalUrl, router.locale, onClose, selectedChapterId, selectedVerseNumber]);
 
-  const isPinned = useMemo(
-    () => pinnedVerseKeys.includes(verseKey),
-    [pinnedVerseKeys, verseKey],
-  );
+  const isPinned = useMemo(() => pinnedVerseKeysSet.has(verseKey), [pinnedVerseKeysSet, verseKey]);
 
   const handlePinClick = useCallback(() => {
     logButtonClick('study_mode_pin_verse', { verseKey, isPinned });
