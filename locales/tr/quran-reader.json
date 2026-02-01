@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Hizb'in Başlangıcı",
   "include-translator": "Çevirmen adı dahil edilsin mi?",
+  "info": "bilgi",
   "juz-beginning": "Cüz'ün Başlangıcı",
   "languages": "Diller",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tefsir"
   },
   "qalqala": "Kalkala",
+  "qiraat": {
+    "explanation": "Açıklama:",
+    "juncture": "Kavşak",
+    "learn-more": "Daha fazla bilgi edinmek için buraya tıklayın.",
+    "no-junctures": "Bu ayet için başka bir okunuş çeşidi bulunmamaktadır.",
+    "reader-bio": "Okuyucu Biyografisi",
+    "readers": "Okuyucular",
+    "readings": "Okumalar",
+    "title": "Kıraat",
+    "translation": "Çeviri",
+    "transliteration": "Transliterasyon",
+    "what-are": "Kıraat nedir?"
+  },
   "query-param-message": "Önceden seçilmiş okuma ayarlarını görüntülüyorsunuz. Geçerli ayarlarınızda görüntülemek için <0> Reddet </0> veya ayarlarınızı güncellemek için <1> Kaydet </1>",
   "ramadan-of-reflection": "KuranReflect'e Katılın \"Yansıma Ramazanı\"",
   "read-more-quran-reflect": "Kuran Yansıtması hakkında devamını oku",

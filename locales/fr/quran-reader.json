@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Début du Hizb",
   "include-translator": "Inclure le nom du traducteur ?",
+  "info": "info",
   "juz-beginning": "Début du Juz",
   "languages": "Langues",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (résonance)",
+  "qiraat": {
+    "explanation": "Explication:",
+    "juncture": "Conjoncture",
+    "learn-more": "Cliquez ici pour en savoir plus",
+    "no-junctures": "Aucune variante de lecture n'est disponible pour ce verset.",
+    "reader-bio": "Biographie du lecteur",
+    "readers": "Lecteurs",
+    "readings": "Lectures",
+    "title": "Qiraat",
+    "translation": "Traduction",
+    "transliteration": "Translitération",
+    "what-are": "Que sont les Qiraat ?"
+  },
   "query-param-message": "Vous consultez les paramètres de lecture présélectionnés. <0>Ignorer</0> pour afficher vos paramètres actuels ou <1>Enregistrer</1> pour mettre à jour vos paramètres",
   "ramadan-of-reflection": "Rejoignez le \"Ramadan de la Réflexion\" de QuranReflect",
   "read-more-quran-reflect": "En savoir plus sur Quran Reflect",

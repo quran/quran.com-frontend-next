@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Fillimi i Hizbit",
   "include-translator": "Të përfshihet emri i përkthyesit?",
+  "info": "informacion",
   "juz-beginning": "Fillimi i Xhuzit",
   "languages": "Gjuhët",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tefsir"
   },
   "qalqala": "Qalqala",
+  "qiraat": {
+    "explanation": "Shpjegim:",
+    "juncture": "Kryqëzim",
+    "learn-more": "Klikoni këtu për të mësuar më shumë",
+    "no-junctures": "Nuk ka variante leximi në dispozicion për këtë varg",
+    "reader-bio": "Biografia e Lexuesit",
+    "readers": "Lexuesit",
+    "readings": "Lexime",
+    "title": "Kiraat",
+    "translation": "Përkthim",
+    "transliteration": "Transliterim",
+    "what-are": "Çfarë janë Kiraetet?"
+  },
   "query-param-message": "Po shikoni cilësimet e parazgjedhura të leximit. <0> Hiqe </0> për të parë në cilësimet aktuale ose <1> Ruaj </1> për të përditësuar cilësimet",
   "ramadan-of-reflection": "Bashkohu me Kuran Reflect \"Ramazani i Reflektimit\"",
   "read-more-quran-reflect": "Lexoni më shumë mbi Reflektimin e Kuranit",

@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Permulaan Hizb",
   "include-translator": "Sertakan nama penterjemah?",
+  "info": "maklumat",
   "juz-beginning": "Permulaan Juz",
   "languages": "Bahasa-bahasa",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala",
+  "qiraat": {
+    "explanation": "Penjelasan:",
+    "juncture": "Persimpangan",
+    "learn-more": "Klik di sini untuk mengetahui lebih lanjut",
+    "no-junctures": "Tiada bacaan varian yang tersedia untuk ayat ini",
+    "reader-bio": "Biografi Pembaca",
+    "readers": "Pembaca",
+    "readings": "Bacaan",
+    "title": "Qiraat",
+    "translation": "Terjemahan",
+    "transliteration": "Transliterasi",
+    "what-are": "Apakah Qiraat itu?"
+  },
   "query-param-message": "Anda sedang melihat tetapan bacaan yang diprapilih. <0> Ketepikan </0> untuk melihat dalam tetapan semasa anda atau <1> Simpan </1> untuk mengemas kini tetapan anda",
   "ramadan-of-reflection": "Sertai  \"Ramadan Refleksi\" di QuranReflect.",
   "read-more-quran-reflect": "Baca selanjutnya di Quran Reflect",

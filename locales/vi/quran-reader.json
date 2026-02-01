@@ -81,6 +81,7 @@
   },
   "hizb-beginning": "Mở đầu Hizb",
   "include-translator": "Có cần ghi tên người dịch không?",
+  "info": "thông tin",
   "juz-beginning": "Mở đầu Juz",
   "languages": "Ngôn ngữ",
   "learning-plan-banner": {
@@ -135,6 +136,19 @@
     "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (tiếng vọng)",
+  "qiraat": {
+    "explanation": "Giải thích:",
+    "juncture": "Giao điểm",
+    "learn-more": "Nhấp vào đây để tìm hiểu thêm",
+    "no-junctures": "Không có bản đọc khác nào cho câu thơ này.",
+    "reader-bio": "Tiểu sử độc giả",
+    "readers": "Độc giả",
+    "readings": "Bài đọc",
+    "title": "Qiraat",
+    "translation": "Bản dịch",
+    "transliteration": "Phiên âm",
+    "what-are": "Qiraat là gì?"
+  },
   "query-param-message": "Bạn đang xem các cài đặt đọc được chọn trước. <0>Bỏ qua</0> để xem cài đặt hiện tại hoặc <1>Lưu</1> để cập nhật cài đặt của bạn.",
   "ramadan-of-reflection": "Tham gia \"Suy ngẫm Ramadan\" cùng QuranReflect!",
   "read-more-quran-reflect": "Đọc thêm trên QuranReflect",
