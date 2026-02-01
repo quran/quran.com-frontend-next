@@ -65,7 +65,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
     sortBy,
     type: BookmarkType.Ayah,
-    limit: Number.MAX_SAFE_INTEGER,
+    limit: 10000, // readable upper limit to get all bookmarks
   });
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
