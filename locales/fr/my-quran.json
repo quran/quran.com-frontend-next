@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Favoris",
+    "guest-promo": {
+      "sign-in": "Se connecter",
+      "subtitle": "Comparer et opposer les versets",
+      "title": "Créer des collections personnalisées"
+    },
+    "items": "{{count}} article",
+    "items_plural": "{{count}} articles",
+    "load-more": "Charger plus",
+    "new-collection": "Nouvelle collection",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Mise à jour récente",
+      "z-a": "Z - A"
+    },
+    "title": "Collections"
+  },
+  "notes-and-reflections": "Notes et réflexions",
+  "page": "Page",
+  "reading-bookmark": {
+    "empty": "Commencez à lire et enregistrez un marque-page de lecture !",
+    "title": "Mon marque-page de lecture"
+  },
+  "recent": "Récent",
+  "recent-empty": "Commencez à lire pour voir vos lectures récentes",
+  "recently-saved": {
+    "title": "Enregistré récemment"
+  },
+  "saved": "Enregistré",
+  "search": {
+    "filter": "Filtre",
+    "placeholder": "Recherche enregistrée...",
+    "sort": "Trier"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Ajouter des notes aux versets",
+      "custom-collections": "Créer des collections personnalisées"
+    },
+    "title": "Connectez-vous ou inscrivez-vous gratuitement pour accéder à plus de fonctionnalités !"
+  }
+}

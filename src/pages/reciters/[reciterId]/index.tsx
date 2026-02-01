@@ -82,7 +82,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
           reciterName: selectedReciter?.translatedName?.name,
         })}
       />
-      <div className={classNames(layoutStyle.pageContainer)}>
+      <div className={classNames(layoutStyle.pageContainer, pageStyle.pageContainer)}>
         <div className={pageStyle.reciterInfoContainer}>
           <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
             <ReciterInfo selectedReciter={selectedReciter} />

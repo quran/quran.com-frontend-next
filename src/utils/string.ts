@@ -206,3 +206,21 @@ export const formatVerseReferencesToLinks = (text: string): string => {
  */
 export const getWordCount = (text: string): number =>
   text.trim().split(/\s+/).filter(Boolean).length;
+
+/**
+ * Check if a string contains only numeric digits (0-9).
+ * Returns false for empty strings, strings with decimals, negatives, or whitespace.
+ *
+ * @param {string} value - The string to check
+ * @returns {boolean} True if the string contains only digits
+ *
+ * @example
+ * isNumericString('123')    // true
+ * isNumericString('0')      // true
+ * isNumericString('')       // false
+ * isNumericString('12.3')   // false
+ * isNumericString('-5')     // false
+ * isNumericString('12 ')    // false
+ * isNumericString('abc')    // false
+ */
+export const isNumericString = (value: string): boolean => /^\d+$/.test(value);

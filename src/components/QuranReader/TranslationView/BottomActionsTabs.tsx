@@ -48,7 +48,6 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
   };
 
   const filteredTabs = tabs.filter((tab) => tab.condition !== false); // Only show tabs that meet their condition
-  const shouldApplyFullWidth = filteredTabs.length >= 4;
 
   return (
     <div className={styles.bottomActionsContainer}>
@@ -56,7 +55,6 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
         className={classNames(styles.tabsContainer, {
           [styles.center]: !isTranslationView,
           [styles.tabsContainerRTL]: isRTL && isTranslationView,
-          [styles.fullWidthTabs]: shouldApplyFullWidth,
         })}
       >
         {filteredTabs.map((tab, index) => (

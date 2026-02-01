@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Favoriler",
+    "guest-promo": {
+      "sign-in": "Giriş yap",
+      "subtitle": "Ayetler arasındaki benzerlikleri ve farklılıkları karşılaştırın.",
+      "title": "Özel koleksiyonlar oluşturun"
+    },
+    "items": "{{count}} öğe",
+    "items_plural": "{{count}} öğeler",
+    "load-more": "Daha fazla yükle",
+    "new-collection": "Yeni Koleksiyon",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Son güncellemeler",
+      "z-a": "Z - A"
+    },
+    "title": "Koleksiyonlar"
+  },
+  "notes-and-reflections": "Notlar ve Düşünceler",
+  "page": "Sayfa",
+  "reading-bookmark": {
+    "empty": "Okumaya başlayın ve bir Okuma Yer İşareti kaydedin!",
+    "title": "Okuma Ayracım"
+  },
+  "recent": "Son",
+  "recent-empty": "Son okuduklarınızı görmek için okumaya başlayın.",
+  "recently-saved": {
+    "title": "Son Kaydedilenler"
+  },
+  "saved": "Kaydedildi",
+  "search": {
+    "filter": "Filtrele",
+    "placeholder": "Arama kaydedildi...",
+    "sort": "Düzenlemek"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Ayetlere notlar ekleyin.",
+      "custom-collections": "Özel koleksiyonlar oluşturun"
+    },
+    "title": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kayıt olun!"
+  }
+}

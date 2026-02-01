@@ -1,60 +1,29 @@
-@use 'src/styles/utility';
+@use 'src/styles/breakpoints';
+$max-width: calc(7 * var(--spacing-mega-px) - 3 * var(--spacing-small-px)); // (700 - padding) = 670
 
-.container {
-  margin-block-start: var(--spacing-medium);
-  min-block-size: 80vh;
-}
-
-.profileContainer {
-  display: flex;
-  align-items: center;
-  margin-block-end: calc(2 * var(--spacing-medium));
-}
-
-.profilePicture {
-  --profile-picture-size: calc(5 * var(--spacing-medium));
-  inline-size: var(--profile-picture-size);
-  block-size: var(--profile-picture-size);
-  background-color: var(--shade-4);
-  border-radius: var(--border-radius-circle);
-}
-
-.profileInfoContainer {
-  margin-inline-start: var(--spacing-small);
-}
-
-.skeletonContainer {
-  & * + * {
-    margin-block-start: var(--spacing-xxsmall);
+.main {
+  div .headerNavigationInnerClassName {
+    max-inline-size: $max-width;
   }
-}
 
-.name {
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-xlarge);
-}
-.email {
-  color: var(--color-text-faded);
-}
+  .mainContent {
+    .pageContainer {
+      overflow: hidden;
+      max-inline-size: unset;
+      padding: unset;
+      margin-block-end: 0;
+      @include breakpoints.tablet {
+        max-inline-size: $max-width;
+        padding-block: var(--spacing-xlarge-px);
+      }
 
-.actionsContainer {
-  margin-block-start: var(--spacing-mega);
-}
-
-.action {
-  display: flex;
-  justify-content: center;
-  margin-block-end: var(--spacing-xsmall);
-}
-
-.recentReadingContainer {
-  margin-block-end: var(--spacing-medium);
-}
-
-.bookmarksAndCollectionsContainer {
-  margin-block-start: var(--spacing-large);
-}
-
-.collectionListContainer {
-  margin-block-start: var(--spacing-mega);
+      .tabContent {
+        padding-block: var(--spacing-xlarge-px);
+        @include breakpoints.smallerThanTablet {
+          padding-inline: var(--spacing-medium2-px);
+          padding-block: var(--spacing-large-px);
+        }
+      }
+    }
+  }
 }

@@ -1,0 +1,150 @@
+import { useCallback, useState } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+import { Virtuoso } from 'react-virtuoso';
+
+import styles from '../NotesAndReflectionsTab.module.scss';
+
+import Error from '@/components/Error';
+import CardsSkeleton from '@/components/MyQuran/Skeleton';
+import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
+import useDeleteNote from '@/components/Notes/modal/hooks/useDeleteNote';
+import usePostNoteToQR from '@/components/Notes/modal/hooks/usePostNoteToQr';
+import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
+import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
+import { NoteWithRecentReflection } from '@/components/Notes/modal/type';
+import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
+import { Note } from '@/types/auth/Note';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
+import { logButtonClick } from '@/utils/eventLogger';
+
+// It will be used to calculate approximate min height to prevent block size jumping during virtuoso initial calculations
+const PROXIMATE_NOTE_HEIGHT = 100;
+
+interface NotesTabContentProps {
+  notes: NoteWithRecentReflection[];
+  isLoading: boolean;
+  isValidating: boolean;
+  error: unknown;
+  loadMore: (index: number) => void;
+  mutateCache: () => void;
+}
+
+enum ModalState {
+  Add = 'add',
+  Edit = 'edit',
+}
+
+const NotesTabContent: React.FC<NotesTabContentProps> = ({
+  notes,
+  isLoading,
+  isValidating,
+  error,
+  loadMore,
+  mutateCache,
+}) => {
+  const { t } = useTranslation('notes');
+
+  const [modalState, setModalState] = useState<ModalState | null>(null);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+
+  const {
+    showConfirmationModal,
+    isPosting,
+    handlePostToQrClick,
+    handleNotePostToQRClose,
+    handleNotePostToQR,
+  } = usePostNoteToQR({ onSuccess: mutateCache });
+
+  const { noteToDelete, isDeletingNote, handleDeleteNoteClick } = useDeleteNote({
+    onSuccess: mutateCache,
+  });
+
+  const handleEditNote = useCallback((note: Note) => {
+    setSelectedNote(note);
+    setModalState(ModalState.Edit);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setModalState(null);
+  }, []);
+
+  const handleRetry = useCallback(() => {
+    logButtonClick('notes_tab_retry');
+    mutateCache();
+  }, [mutateCache]);
+
+  const renderNote = useCallback(
+    (index: number, note: NoteWithRecentReflection) => {
+      return (
+        <div className={styles.noteItem}>
+          <NoteCard
+            key={note.id}
+            note={note}
+            onEdit={handleEditNote}
+            onPostToQr={handlePostToQrClick}
+            onDelete={handleDeleteNoteClick}
+            isDeletingNote={isDeletingNote ? note.id === noteToDelete?.id : false}
+            showReadMore
+          />
+        </div>
+      );
+    },
+    [handleEditNote, handlePostToQrClick, handleDeleteNoteClick, noteToDelete, isDeletingNote],
+  );
+
+  const isValidatingOrLoading = isValidating || isLoading;
+  const isError = !!error && !isValidatingOrLoading;
+  const isEmpty = !isError && !isValidatingOrLoading && notes.length === 0;
+
+  if (isEmpty) {
+    return (
+      <div className={styles.statusContainer} data-status="empty">
+        {t('empty-notes')}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div style={{ minBlockSize: notes.length * PROXIMATE_NOTE_HEIGHT }}>
+        <Virtuoso
+          data={notes}
+          className={styles.virtuosoList}
+          overscan={10}
+          increaseViewportBy={100}
+          endReached={loadMore}
+          itemContent={renderNote}
+          useWindowScroll
+        />
+      </div>
+
+      {isValidatingOrLoading && <CardsSkeleton count={5} />}
+
+      {isError && (
+        <div className={styles.statusContainer}>
+          <Error error={error as Error} onRetryClicked={handleRetry} />
+        </div>
+      )}
+
+      <EditNoteModal
+        isModalOpen={modalState === ModalState.Edit}
+        onModalClose={handleCloseModal}
+        onMyNotes={handleCloseModal}
+        note={selectedNote}
+        onSuccess={mutateCache}
+      />
+
+      <PostQRConfirmationModal
+        isModalOpen={showConfirmationModal}
+        isLoading={isPosting}
+        onModalClose={handleNotePostToQRClose}
+        onConfirm={handleNotePostToQR}
+      />
+
+      <ConfirmationModal zIndexVariant={ZIndexVariant.ULTRA} />
+    </>
+  );
+};
+
+export default NotesTabContent;

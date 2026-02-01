@@ -10,6 +10,22 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { makeVerseKey, getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import ReadingSession from 'types/ReadingSession';
 
+/**
+ * Safely converts a date value (string or number) to a Date object.
+ * Returns undefined if the conversion fails or the date is invalid.
+ *
+ * @param {string | number} dateValue - The date value to parse
+ * @returns {Date | undefined} The parsed Date object or undefined if invalid
+ */
+const parseDate = (dateValue: string | number): Date | undefined => {
+  try {
+    const date = new Date(dateValue);
+    return Number.isNaN(date.getTime()) ? undefined : date;
+  } catch {
+    return undefined;
+  }
+};
+
 type RecentlyReadVerseData = {
   surah: string;
   ayah: string;
@@ -26,9 +42,11 @@ type RecentlyReadVerseData = {
  */
 function useGetRecentlyReadVerseKeys<T extends boolean = true>(
   shouldReturnVerseKeysArray: T = true as T,
+  shouldAlsoReturnTimestamps: boolean = false,
 ): {
   recentlyReadVerseKeys: T extends true ? string[] : RecentlyReadVerseData[];
   isLoading: boolean;
+  timestamps?: (Date | undefined)[];
 } {
   // Get sessions from Redux store (for non-logged in users)
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
@@ -69,11 +87,26 @@ function useGetRecentlyReadVerseKeys<T extends boolean = true>(
     });
   }, [data, recentReadingSessions, shouldReturnVerseKeysArray, isUserLoggedIn]);
 
+  // Memoize computation of timestamps
+  const timestamps = useMemo<(Date | undefined)[] | undefined>(() => {
+    if (!shouldAlsoReturnTimestamps) return undefined;
+
+    // Handle logged-in users (data from server)
+    if (isUserLoggedIn) {
+      if (!data) return [];
+      return data.map((item) => parseDate(item.updatedAt));
+    }
+
+    // Handle non-logged in users (data from Redux)
+    return Object.values(recentReadingSessions).map((timestamp: number) => parseDate(timestamp));
+  }, [data, recentReadingSessions, shouldAlsoReturnTimestamps, isUserLoggedIn]);
+
   return {
     recentlyReadVerseKeys: recentlyReadVerseKeys as T extends true
       ? string[]
       : RecentlyReadVerseData[],
     isLoading: isValidating && !data,
+    ...(shouldAlsoReturnTimestamps && { timestamps }),
   };
 }
 

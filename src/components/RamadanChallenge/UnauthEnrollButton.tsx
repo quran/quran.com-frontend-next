@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 
 import { HeadlessServiceProvider } from '../Notifications/hooks/useHeadlessService';
 
-import EnrollButton from './EnrollButton';
+import EnrollButtonNotification from './EnrollButtonNotification';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useRamadanChallengeStatus from '@/hooks/useGetRamadanChallengeStatus';
+import { TestId } from '@/tests/test-ids';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
@@ -15,32 +16,32 @@ interface Props {
   section: string;
 }
 
-const SUBSCRIBE_TEXT = 'Join the Surah Al-Mulk Challenge';
+const SUBSCRIBED_TEXT = 'Subscribed!';
+const ENROLL_TEXT = 'Join the Surah Al-Mulk Challenge';
 
 const UnauthEnrollButton = ({ section }: Props) => {
   const router = useRouter();
   const { isLoggedIn } = useIsLoggedIn();
-  const { isEnrolled, mutate, isLoading } = useRamadanChallengeStatus();
+  const { isLoading, isEnrolled, mutate } = useRamadanChallengeStatus();
 
   const onButtonClicked = () => {
     logButtonClick(`guest_ramadan_challenge_${section}`);
   };
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner dataTestId={TestId.RAMADAN_CHALLENGE_GUEST_USER_BUTTON_SPINNER} />;
   }
 
   if (isLoggedIn) {
     return (
       <HeadlessServiceProvider>
-        <EnrollButton
-          section={section}
+        <EnrollButtonNotification
           isEnrolled={isEnrolled}
-          mutate={async () => {
-            await mutate();
-          }}
           isLoading={isLoading}
-          ctaText={SUBSCRIBE_TEXT}
+          mutate={mutate}
+          section={section}
+          subscribedText={SUBSCRIBED_TEXT}
+          enrollText={ENROLL_TEXT}
         />
       </HeadlessServiceProvider>
     );
@@ -53,7 +54,7 @@ const UnauthEnrollButton = ({ section }: Props) => {
       variant={ButtonVariant.Shadow}
       isLoading={isLoading}
     >
-      {SUBSCRIBE_TEXT}
+      {ENROLL_TEXT}
     </Button>
   );
 };
