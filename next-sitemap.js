@@ -267,7 +267,6 @@ module.exports = {
 
         // 13. /verseKey for verses that have Qiraat (recitation variations)
         const versesWithQiraat = await getVersesWithQiraat();
-        console.log('versesWithQiraat', versesWithQiraat);
         versesWithQiraat.forEach((verseKey) => {
           const location = `${verseKey}/qiraat`;
           result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
