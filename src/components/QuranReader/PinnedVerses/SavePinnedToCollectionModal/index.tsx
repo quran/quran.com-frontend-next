@@ -20,7 +20,7 @@ const SavePinnedToCollectionModal: React.FC<SavePinnedToCollectionModalProps> = 
   isOpen,
   onClose,
 }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t } = useTranslation('common');
 
   const {
     collectionItems,
@@ -58,7 +58,7 @@ const SavePinnedToCollectionModal: React.FC<SavePinnedToCollectionModalProps> = 
           />
         ) : (
           <div className={styles.container}>
-            <SaveBookmarkModalHeader title={t('save-to')} onClose={onClose} />
+            <SaveBookmarkModalHeader title={t('save-to-collection')} onClose={onClose} />
             <CollectionsList
               collections={collectionItems}
               isDataReady={!isLoading}

@@ -8,7 +8,6 @@ import useSWRImmutable from 'swr/immutable';
 import CollectionsList from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsList';
 import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
 import styles from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModal.module.scss';
-import SaveBookmarkModalFooter from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalFooter';
 import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBookmarkModalHeader';
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
@@ -66,56 +65,53 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
 
   const handleCollectionToggle = useCallback(
     async (collection: CollectionItem) => {
-      setSelectedCollectionId((prev) => (prev === collection.id ? null : collection.id));
-    },
-    [],
-  );
+      if (isLoading) return;
 
-  const handleLoad = useCallback(async () => {
-    if (!selectedCollectionId) return;
+      logButtonClick('load_from_collection_confirm');
+      setSelectedCollectionId(collection.id);
+      setIsLoading(true);
 
-    logButtonClick('load_from_collection_confirm');
-    setIsLoading(true);
+      try {
+        const collectionData = await privateFetcher<GetBookmarkCollectionsIdResponse>(
+          makeGetBookmarkByCollectionId(collection.id, {
+            type: BookmarkType.Ayah,
+            limit: 1000,
+          }),
+        );
 
-    try {
-      const collectionData = await privateFetcher<GetBookmarkCollectionsIdResponse>(
-        makeGetBookmarkByCollectionId(selectedCollectionId, {
-          type: BookmarkType.Ayah,
-          limit: 1000,
-        }),
-      );
+        const bookmarks = collectionData?.data?.bookmarks || [];
 
-      const bookmarks = collectionData?.data?.bookmarks || [];
+        if (bookmarks.length === 0) {
+          toast(t('collection:empty'), { status: ToastStatus.Warning });
+          setIsLoading(false);
+          return;
+        }
 
-      if (bookmarks.length === 0) {
-        toast(t('collection:empty'), { status: ToastStatus.Warning });
+        const verseKeys = bookmarks.map((bookmark) =>
+          makeVerseKey(bookmark.key, bookmark.verseNumber),
+        );
+
+        dispatch(pinVerses(verseKeys));
+
+        const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
+        await syncPinnedItems(syncPayload);
+
+        globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
+
+        verseKeys.forEach((vk) => {
+          broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
+        });
+
+        toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
+        onClose();
+      } catch {
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+      } finally {
         setIsLoading(false);
-        return;
       }
-
-      const verseKeys = bookmarks.map((bookmark) =>
-        makeVerseKey(bookmark.key, bookmark.verseNumber),
-      );
-
-      dispatch(pinVerses(verseKeys));
-
-      const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
-      await syncPinnedItems(syncPayload);
-
-      globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
-
-      verseKeys.forEach((vk) => {
-        broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
-      });
-
-      toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
-      onClose();
-    } catch {
-      toast(t('common:error.general'), { status: ToastStatus.Error });
-    } finally {
-      setIsLoading(false);
-    }
-  }, [dispatch, onClose, selectedCollectionId, t, toast, mushafId, globalMutate]);
+    },
+    [dispatch, isLoading, onClose, t, toast, mushafId, globalMutate],
+  );
 
   const handleClose = useCallback(() => {
     setSelectedCollectionId(null);
@@ -140,11 +136,6 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
             isTogglingFavorites={false}
             onCollectionToggle={handleCollectionToggle}
             onNewCollectionClick={() => {}}
-          />
-          <SaveBookmarkModalFooter
-            showNoteButton={false}
-            onTakeNote={() => {}}
-            onDone={selectedCollectionId && !isLoading ? handleLoad : handleClose}
           />
         </div>
       </Modal.Body>
