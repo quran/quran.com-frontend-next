@@ -8,10 +8,18 @@
   color: var(--color-text-default-new);
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-rounded);
-  padding: var(--spacing-medium-px);
   margin-block-end: var(--spacing-medium-px);
   transition: all var(--transition-moderate) ease-out;
   animation: fadeInSlide var(--transition-fast) ease-out backwards;
+
+  // CSS variable for consistent padding across header and content areas
+  --cell-padding: var(--spacing-medium-px);
+
+  .contentSeparator {
+    margin-block-end: var(--spacing-medium-px);
+    margin-inline: var(--cell-padding);
+    inline-size: unset;
+  }
 }
 
 .headerContainer {
@@ -20,6 +28,7 @@
   align-items: flex-start;
   cursor: pointer;
   user-select: none;
+  padding: var(--cell-padding);
 }
 
 .headerLeft {
@@ -104,6 +113,7 @@
   justify-content: space-between;
   flex-direction: column;
   direction: ltr;
+  padding: 0 var(--cell-padding) var(--cell-padding) var(--cell-padding);
 
   .bottomActionsContainer,
   .topActionsContainer {
@@ -115,7 +125,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-xlarge-px) var(--spacing-medium-px);
+  padding: var(--spacing-xlarge-px) var(--cell-padding);
 }
 
 .contentContainer {
@@ -136,10 +146,6 @@
 
 .verseTranslationContainer {
   margin-block-end: var(--spacing-medium2-px);
-}
-
-.contentSeparator {
-  margin-block: var(--spacing-medium-px);
 }
 
 // Animation keyframes

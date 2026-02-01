@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWRInfinite from 'swr/infinite';
+import useSWR from 'swr';
 
 import styles from './CollectionDetailView.module.scss';
 
@@ -11,6 +11,7 @@ import CollectionHeaderActionsPopover from '@/components/Collection/CollectionAc
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
+import Error from '@/components/Error';
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
@@ -60,36 +61,27 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     setSortBy(newSortByVal);
   };
 
-  const getKey = (pageIndex, previousPageData) => {
-    if (previousPageData && !previousPageData.data) return null;
-    if (pageIndex === 0) {
-      return makeGetBookmarkByCollectionId(collectionId, {
-        sortBy,
-        type: BookmarkType.Ayah,
-      });
-    }
-    const cursor = previousPageData.pagination?.endCursor;
-    return makeGetBookmarkByCollectionId(collectionId, {
-      sortBy,
-      cursor,
-      type: BookmarkType.Ayah,
-    });
-  };
+  // Fetch all bookmarks at once
+  const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
+    sortBy,
+    type: BookmarkType.Ayah,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
 
-  const { data, size, setSize, mutate, isValidating, error } =
-    useSWRInfinite<GetBookmarkCollectionsIdResponse>(getKey, privateFetcher);
+  const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
+    fetchUrl,
+    privateFetcher,
+  );
 
   const bookmarks = React.useMemo(() => {
     if (!data) return [];
-    return data.map((response) => response.data.bookmarks).flat();
+    return data.data.bookmarks;
   }, [data]);
 
   const filteredBookmarks = React.useMemo(() => {
     if (!searchQuery) return bookmarks;
     const query = searchQuery.toLowerCase();
     return bookmarks.filter((bookmark) => {
-      // You can expand this to search by chapter name if needed
-      // For now, search by verse key
       const verseKey = `${bookmark.key}:${bookmark.verseNumber}`;
       return verseKey.includes(query);
     });
@@ -99,15 +91,10 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     return filteredBookmarks.length > 0 && expandedCardIds.size === filteredBookmarks.length;
   }, [filteredBookmarks, expandedCardIds]);
 
-  // Bulk actions handlers (defined after filteredBookmarks to avoid reference errors)
   const toggleSelectMode = useCallback(() => {
     setIsSelectMode((prev) => {
-      const newValue = !prev;
-      if (prev) {
-        // Clear selections when exiting select mode
-        setSelectedBookmarks(new Set());
-      }
-      return newValue;
+      if (prev) setSelectedBookmarks(new Set());
+      return !prev;
     });
     logButtonClick('collection_detail_toggle_select_mode', {
       collectionId: slugifiedCollectionIdToCollectionId(collectionId),
@@ -117,19 +104,14 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
   const handleToggleExpandCollapseAll = useCallback(() => {
     const allIds = new Set(filteredBookmarks.map((b) => b.id));
+    const params = { collectionId: slugifiedCollectionIdToCollectionId(collectionId) };
 
     if (isAllExpanded) {
-      // Collapse all
       setExpandedCardIds(new Set());
-      logButtonClick('collection_detail_collapse_all', {
-        collectionId: slugifiedCollectionIdToCollectionId(collectionId),
-      });
+      logButtonClick('collection_detail_collapse_all', params);
     } else {
-      // Expand all
       setExpandedCardIds(allIds);
-      logButtonClick('collection_detail_expand_all', {
-        collectionId: slugifiedCollectionIdToCollectionId(collectionId),
-      });
+      logButtonClick('collection_detail_expand_all', params);
     }
   }, [filteredBookmarks, isAllExpanded, collectionId]);
 
@@ -158,21 +140,16 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, []);
 
   const isCardExpanded = useCallback(
-    (bookmarkId: string) => {
-      return expandedCardIds.has(bookmarkId);
-    },
+    (bookmarkId: string) => expandedCardIds.has(bookmarkId),
     [expandedCardIds],
   );
 
   const isBookmarkSelected = useCallback(
-    (bookmarkId: string) => {
-      return selectedBookmarks.has(bookmarkId);
-    },
+    (bookmarkId: string) => selectedBookmarks.has(bookmarkId),
     [selectedBookmarks],
   );
 
   const handleNoteClick = useCallback(() => {
-    // Get all verse keys from bookmarks in the collection
     const verseKeys = filteredBookmarks.map((bookmark) =>
       makeVerseKey(bookmark.key, bookmark.verseNumber),
     );
@@ -188,7 +165,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, [collectionId, filteredBookmarks, selectedBookmarks.size]);
 
   const handleBulkNoteClick = useCallback(() => {
-    // Get verse keys only from selected bookmarks
     const selectedBookmarksList = filteredBookmarks.filter((bookmark) =>
       selectedBookmarks.has(bookmark.id),
     );
@@ -212,13 +188,17 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   }, []);
 
   if (error) {
-    return <div>{t('common:error.general')}</div>;
+    return (
+      <div className={styles.statusContainer}>
+        <Error onRetryClicked={() => mutate()} error={error} />
+      </div>
+    );
   }
 
   if (!data) {
     return (
-      <div className={styles.loadingContainer}>
-        <Spinner shouldDelayVisibility size={SpinnerSize.Large} />
+      <div className={styles.statusContainer}>
+        <Spinner size={SpinnerSize.Large} />
       </div>
     );
   }
@@ -240,27 +220,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       });
   };
 
-  const lastPageData = data[data.length - 1];
-  const { hasNextPage } = lastPageData.pagination;
-
-  const isOwner = data[0]?.data?.isOwner;
-
-  const loadMore = () => {
-    setSize(size + 1);
-    logButtonClick('collection_detail_page_load_more', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
-      page: size + 1,
-    });
-  };
-
-  const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
-
-  // Get total count from the first page data
-  const totalCount =
-    data?.[0]?.data?.collection.bookmarksCount ||
-    data?.[0]?.data?.collection.count ||
-    data?.[0]?.data?.bookmarks.length ||
-    0;
+  const isOwner = data?.data?.isOwner;
+  const totalCount = data?.data?.bookmarks.length ?? 0;
 
   const sortOptions = [
     {
@@ -383,15 +344,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         isCardExpanded={isCardExpanded}
         isBookmarkSelected={isBookmarkSelected}
       />
-
-      {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
-      {hasNextPage && (
-        <div className={styles.loadMoreContainer}>
-          <Button onClick={loadMore} variant={ButtonVariant.Outlined}>
-            {t('collection:load-more')}
-          </Button>
-        </div>
-      )}
 
       <StudyModeContainer />
       <VerseActionModalContainer />

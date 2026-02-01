@@ -35,7 +35,6 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
           className={styles.iconWrapper}
           size={IconSize.Custom}
           shouldForceSetColors={false}
-          shouldFlipOnRTL={false}
           icon={<NotesWithPencilIcon />}
         />
         <span className={styles.menuItemText}>{t('take-a-note')}</span>
