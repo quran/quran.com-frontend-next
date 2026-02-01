@@ -90,7 +90,11 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
 
   return (
     <>
-      <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
+      <TopActions
+        verse={verse}
+        bookmarksRangeUrl={bookmarksRangeUrl}
+        className={styles.topActionsContainer}
+      />
 
       <div className={styles.contentContainer}>
         <div className={styles.arabicVerseContainer}>
@@ -110,7 +114,11 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
         </div>
       </div>
 
-      <BottomActions verseKey={verse.verseKey} hasRelatedVerses={verse.hasRelatedVerses} />
+      <BottomActions
+        className={styles.bottomActionsContainer}
+        verseKey={verse.verseKey}
+        hasRelatedVerses={verse.hasRelatedVerses}
+      />
     </>
   );
 };

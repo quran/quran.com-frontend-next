@@ -43,6 +43,10 @@ interface BottomActionsProps {
    * Whether this verse has related verses
    */
   hasRelatedVerses?: boolean;
+  /**
+   * The class name to apply to the bottom actions container
+   */
+  className?: string;
 }
 
 /**
@@ -54,6 +58,7 @@ const BottomActions = ({
   verseKey,
   isTranslationView = true,
   hasRelatedVerses = false,
+  className,
 }: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
@@ -143,9 +148,7 @@ const BottomActions = ({
   ];
 
   return (
-    <>
-      <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
-    </>
+    <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} className={className} />
   );
 };
 

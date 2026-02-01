@@ -74,8 +74,10 @@
 }
 
 .itemArrow {
-  inline-size: var(--font-size-xsmall-px);
-  block-size: var(--font-size-xsmall-px);
+  > svg {
+    inline-size: var(--font-size-xsmall-px);
+    block-size: var(--font-size-xsmall-px);
+  }
   color: var(--color-text-faded);
   transition: all var(--transition-moderate) ease-out;
 }

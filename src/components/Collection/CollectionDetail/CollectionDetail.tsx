@@ -3,7 +3,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
 import { getMyQuranNavigationUrl } from '../../../utils/navigation';
-import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 import CollectionVerseCell from './CollectionVerseCell';
@@ -13,44 +12,39 @@ import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
-import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailProps = {
   id: string;
   title: string;
   isOwner: boolean;
   bookmarks: Bookmark[];
-  sortBy: string;
-  onSortByChange: (sortBy: string) => void;
+
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
   onBack?: () => void;
+  isSelectMode?: boolean;
+  onToggleBookmarkSelection?: (bookmarkId: string) => void;
+  onToggleCardExpansion?: (bookmarkId: string) => void;
+  isCardExpanded?: (bookmarkId: string) => boolean;
+  isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
 const CollectionDetail = ({
   id,
   title,
   bookmarks,
-  sortBy,
-  onSortByChange,
   onItemDeleted,
   isOwner,
   shouldShowTitle = true,
   onBack,
+  isSelectMode = false,
+  onToggleBookmarkSelection,
+  onToggleCardExpansion,
+  isCardExpanded,
+  isBookmarkSelected,
 }: CollectionDetailProps) => {
   const { t } = useTranslation();
   const router = useRouter();
-
-  const sortOptions = [
-    {
-      id: CollectionDetailSortOption.RecentlyAdded,
-      label: t('collection:recently-added'),
-    },
-    {
-      id: CollectionDetailSortOption.VerseKey,
-      label: t('collection:verse-key'),
-    },
-  ];
 
   const isCollectionEmpty = bookmarks.length === 0;
 
@@ -70,15 +64,6 @@ const CollectionDetail = ({
       <div className={styles.container}>
         <div className={styles.header}>
           {shouldShowTitle && <div className={styles.title}>{title}</div>}
-          {isOwner && (
-            <CollectionSorter
-              selectedOptionId={sortBy}
-              onChange={onSortByChange}
-              options={sortOptions}
-              isSingleCollection
-              collectionId={id}
-            />
-          )}
         </div>
         <div className={styles.collectionItemsContainer}>
           {isCollectionEmpty ? (
@@ -93,6 +78,8 @@ const CollectionDetail = ({
           ) : (
             <Virtuoso
               data={bookmarks}
+              overscan={10}
+              increaseViewportBy={100}
               itemContent={(index, bookmark) => (
                 <CollectionVerseCell
                   key={bookmark.id}
@@ -104,6 +91,11 @@ const CollectionDetail = ({
                   isOwner={isOwner}
                   onDelete={onItemDeleted}
                   createdAt={bookmark.createdAt}
+                  isSelectMode={isSelectMode}
+                  isSelected={isBookmarkSelected?.(bookmark.id)}
+                  onToggleSelection={onToggleBookmarkSelection}
+                  isExpanded={isCardExpanded?.(bookmark.id)}
+                  onToggleExpansion={onToggleCardExpansion}
                 />
               )}
             />

@@ -40,5 +40,15 @@
       "custom-collections": "Create custom collections"
     },
     "title": "Sign in or Sign up for free to gain access to the more features!"
+  },
+
+  "bulk-actions": {
+    "expand-all": "Expand All",
+    "collapse-all": "Collapse All",
+    "select": "Select",
+    "cancel": "Cancel",
+
+    "actions-count": "Actions ({{count}})",
+    "actions": "Actions"
   }
 }

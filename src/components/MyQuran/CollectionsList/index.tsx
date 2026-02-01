@@ -10,9 +10,8 @@ import styles from './CollectionsList.module.scss';
 import CollectionsListSkeleton from './CollectionsListSkeleton';
 import getCollectionsSortOptions from './CollectionsSortOptions';
 
-import Select from '@/components/dls/Forms/Select';
+import Sorter from '@/dls/Sorter/Sorter';
 import { CollectionItem, CollectionSortOption } from '@/hooks/useCollections';
-import SortIcon from '@/icons/arrows-vertical.svg';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import PlusIcon from '@/icons/plus.svg';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -104,21 +103,12 @@ const CollectionsList: React.FC<CollectionsListProps> = ({
               <PlusIcon /> {t('collections.new-collection')}
             </button>
           )}
-          <div className={styles.sortContainer}>
-            <SortIcon className={styles.sortIcon} />
-            <Select
-              id="collections-sort"
-              name="sort"
-              options={sortOptions}
-              value={sortBy}
-              onChange={(value) => onSortChange(value as CollectionSortOption)}
-              withBackground={false}
-              defaultStyle={false}
-              arrowClassName={styles.selectArrow}
-              className={styles.sortSelect}
-              placeholder={t('search.sort')}
-            />
-          </div>
+          <Sorter
+            options={sortOptions}
+            selectedOptionId={sortBy}
+            onChange={(value) => onSortChange(value as CollectionSortOption)}
+            dataTestPrefix="collections-sort"
+          />
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './CollectionsList.module.scss';
 
+import IconContainer, { IconSize } from '@/components/dls/IconContainer/IconContainer';
 import { CollectionItem } from '@/hooks/useCollections';
 import BookmarkFilled from '@/icons/bookmark_new.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
@@ -31,7 +32,13 @@ const CollectionListItem: React.FC<CollectionListItemProps> = ({
     {collection.itemCount !== undefined && (
       <div className={styles.collectionBadge}>
         <span className={styles.collectionCount}>{itemsLabel}</span>
-        <ChevronRightIcon />
+        <IconContainer
+          icon={<ChevronRightIcon />}
+          size={IconSize.Custom}
+          shouldFlipOnRTL
+          shouldForceSetColors={false}
+          className={styles.collectionBadgeIcon}
+        />
       </div>
     )}
   </button>

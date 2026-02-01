@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RecentlySaved.module.scss';
 
+import IconContainer, { IconSize } from '@/components/dls/IconContainer/IconContainer';
 import DataContext from '@/contexts/DataContext';
 import { RecentlySavedItem } from '@/hooks/useRecentlySaved';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
@@ -86,7 +87,12 @@ const RecentlySaved: React.FC<RecentlySavedProps> = ({ items, isLoading }) => {
               onClick={() => handleItemClick(item)}
             >
               <span className={styles.itemText}>{item.displayText}</span>
-              <ChevronRightIcon className={styles.itemArrow} />
+              <IconContainer
+                icon={<ChevronRightIcon />}
+                size={IconSize.Custom}
+                shouldFlipOnRTL
+                className={styles.itemArrow}
+              />
             </button>
           ))}
         </div>
