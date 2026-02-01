@@ -203,7 +203,7 @@
   "view-on-quran-reflect": "View on QuranReflect",
   "wbw-helper-text": "Select options to show translation, transliteration, and/or recitation for each word.",
   "pin-verse": "Pin & compare",
-  "unpin-verse": "Pinned",
+  "unpin-verse": "Unpin",
   "pinned-verses": "Pinned verses",
   "compare-verses": "Compare",
   "clear-pinned": "Clear All",
@@ -218,5 +218,6 @@
   "pin-all-verses": "Pin All",
   "pin-verses-to-compare": "Pin verses to compare them",
   "reflections": "Reflections",
-  "remove-pinned-verse": "Remove verse {{verseKey}} from pinned"
+  "remove-pinned-verse": "Remove verse {{verseKey}} from pinned",
+  "go-to-verse": "Go to verse {{verseKey}}"
 }
