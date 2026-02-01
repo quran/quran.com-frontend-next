@@ -482,7 +482,7 @@ const StudyModeModal: React.FC<Props> = ({
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
     >
-      <PinnedVersesSection />
+      <PinnedVersesSection onGoToVerse={handleGoToVerse} />
       {renderContent()}
     </ContentModal>
   );

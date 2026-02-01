@@ -56,10 +56,22 @@
 .tagsContainer {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--spacing-small-px);
   inline-size: 100%;
   padding-block: var(--spacing-micro-px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    block-size: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-separators);
+    border-radius: 2px;
+  }
 }
 
 .actions {

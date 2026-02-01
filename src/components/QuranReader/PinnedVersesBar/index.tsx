@@ -39,7 +39,6 @@ const PinnedVersesBar: React.FC = () => {
   const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
-  const [selectedVerseKey, setSelectedVerseKey] = useState<string | null>(null);
 
   const handleCompareClick = useCallback(() => {
     logButtonClick('pinned_bar_compare');
@@ -93,7 +92,6 @@ const PinnedVersesBar: React.FC = () => {
   const handleVerseTagClick = useCallback(
     (verseKey: string) => {
       logButtonClick('pinned_bar_verse_tag_click');
-      setSelectedVerseKey(verseKey);
       router.push(getChapterWithStartingVerseUrl(verseKey));
     },
     [router],
@@ -115,7 +113,7 @@ const PinnedVersesBar: React.FC = () => {
       <div className={styles.container}>
         <PinnedVersesContent
           pinnedVerses={pinnedVerses}
-          selectedVerseKey={selectedVerseKey}
+          selectedVerseKey={null}
           showCompareButton
           onVerseTagClick={handleVerseTagClick}
           onRemoveVerse={handleRemoveVerse}

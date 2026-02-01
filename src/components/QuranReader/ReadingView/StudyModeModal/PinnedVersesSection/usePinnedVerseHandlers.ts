@@ -2,19 +2,16 @@ import { useCallback } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import copyPinnedVerses from '@/components/QuranReader/PinnedVerses/utils/copyPinnedVerses';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { PinnedVerse } from '@/redux/slices/QuranReader/pinnedVerses';
-import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 import ChaptersData from 'types/ChaptersData';
 
 interface UsePinnedVerseHandlersProps {
-  dispatch: ReturnType<typeof useDispatch>;
   pinnedVerses: PinnedVerse[];
   router: ReturnType<typeof useRouter>;
   t: ReturnType<typeof useTranslation>['t'];
@@ -26,10 +23,10 @@ interface UsePinnedVerseHandlersProps {
   setIsLoadModalOpen: (isOpen: boolean) => void;
   unpinVerseWithSync: (verseKey: string) => Promise<void>;
   clearPinnedWithSync: () => Promise<void>;
+  onGoToVerse: (chapterId: string, verseNumber: string) => void;
 }
 
 const usePinnedVerseHandlers = ({
-  dispatch,
   pinnedVerses,
   router,
   t,
@@ -41,18 +38,15 @@ const usePinnedVerseHandlers = ({
   setIsLoadModalOpen,
   unpinVerseWithSync,
   clearPinnedWithSync,
+  onGoToVerse,
 }: UsePinnedVerseHandlersProps) => {
   const handleVerseTagClick = useCallback(
     (verseKey: string) => {
       logButtonClick('study_mode_verse_tag_click');
-      dispatch(
-        openStudyMode({
-          verseKey,
-          showPinnedSection: true,
-        }),
-      );
+      const [chapterId, verseNumber] = verseKey.split(':');
+      onGoToVerse(chapterId, verseNumber);
     },
-    [dispatch],
+    [onGoToVerse],
   );
 
   const handleRemoveVerse = useCallback(
@@ -64,16 +58,12 @@ const usePinnedVerseHandlers = ({
         const remainingVerses = pinnedVerses.filter((v) => v.verseKey !== verseKey);
         const nextVerse = remainingVerses[0];
         if (nextVerse) {
-          dispatch(
-            openStudyMode({
-              verseKey: nextVerse.verseKey,
-              showPinnedSection: true,
-            }),
-          );
+          const [chapterId, verseNumber] = nextVerse.verseKey.split(':');
+          onGoToVerse(chapterId, verseNumber);
         }
       }
     },
-    [dispatch, pinnedVerses, unpinVerseWithSync],
+    [pinnedVerses, unpinVerseWithSync, onGoToVerse],
   );
 
   const handleClear = useCallback(() => {

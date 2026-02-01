@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './PinnedVersesSection.module.scss';
 import usePinnedVerseHandlers from './usePinnedVerseHandlers';
@@ -20,10 +20,13 @@ import { areArraysEqual } from '@/utils/array';
 import { isLoggedIn } from '@/utils/auth/login';
 import ChaptersData from 'types/ChaptersData';
 
-const PinnedVersesSection: React.FC = () => {
+interface PinnedVersesSectionProps {
+  onGoToVerse: (chapterId: string, verseNumber: string) => void;
+}
+
+const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }) => {
   const { t, lang } = useTranslation('quran-reader');
   const router = useRouter();
-  const dispatch = useDispatch();
   const toast = useToast();
   const chaptersData = useContext(DataContext) as ChaptersData;
 
@@ -43,7 +46,6 @@ const PinnedVersesSection: React.FC = () => {
     handleLoadFromCollection,
     handleCopy,
   } = usePinnedVerseHandlers({
-    dispatch,
     pinnedVerses,
     router,
     t,
@@ -55,6 +57,7 @@ const PinnedVersesSection: React.FC = () => {
     setIsLoadModalOpen,
     unpinVerseWithSync,
     clearPinnedWithSync,
+    onGoToVerse,
   });
 
   if (pinnedVerses.length === 0) {
