@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import EditNoteModal from '@/components/Notes/modal/EditNoteModal';
@@ -46,6 +46,8 @@ const NotesModals: React.FC<NotesModalsProps> = ({
     return onOpenMyNotes;
   };
 
+  const verseKeys = useMemo(() => [verseKey], [verseKey]);
+
   return (
     <>
       <AddNoteModal
@@ -53,7 +55,7 @@ const NotesModals: React.FC<NotesModalsProps> = ({
         onModalClose={onClose}
         onMyNotes={getOnMyNotesHandler()}
         notesCount={notesCount}
-        verseKey={verseKey}
+        verseKeys={verseKeys}
         onBack={getBackHandler()}
       />
       <MyNotesModal

@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "እርምጃዎች",
+    "actions-count": "እርምጃዎች ({{count}})",
+    "cancel": "ሰርዝ",
+    "collapse-all": "ሁሉንም ሰብስብ",
+    "expand-all": "ሁሉንም ዘርጋ",
+    "select": "ምረጥ"
+  },
   "collections": {
     "favorites": "ተወዳጆች",
     "guest-promo": {

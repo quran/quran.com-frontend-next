@@ -10,6 +10,7 @@ import BasicSwitcher from '@/components/MyQuran/tabs/NotesAndReflectionsTab/Basi
 import NotesSorter from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesSorter/NotesSorter';
 import NotesTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab/NotesTab';
 import ReflectionsTab from '@/components/MyQuran/tabs/NotesAndReflectionsTab/ReflectionsTab';
+import { ArrowDirection } from '@/dls/Sorter/Sorter';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { logEvent } from '@/utils/eventLogger';
@@ -50,8 +51,8 @@ const NotesAndReflectionsTab = () => {
 
   const sortOptions = useMemo(
     () => [
-      { id: NotesSortOption.Newest, label: t('common:newest') },
-      { id: NotesSortOption.Oldest, label: t('common:oldest') },
+      { id: NotesSortOption.Newest, label: t('common:newest'), direction: ArrowDirection.Down },
+      { id: NotesSortOption.Oldest, label: t('common:oldest'), direction: ArrowDirection.Up },
     ],
     [t],
   );

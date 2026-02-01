@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './MyReadingBookmark.module.scss';
 
+import IconContainer, { IconSize } from '@/components/dls/IconContainer/IconContainer';
 import DataContext from '@/contexts/DataContext';
 import BookmarkIcon from '@/icons/bookmark-star.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
@@ -113,7 +114,13 @@ const MyReadingBookmark: React.FC<MyReadingBookmarkProps> = ({ bookmark, isLoadi
             <span className={styles.text}>{displayText}</span>
             {dateText && <span className={styles.date}>{dateText}</span>}
           </div>
-          <ChevronRightIcon className={styles.chevron} />
+          <IconContainer
+            icon={<ChevronRightIcon />}
+            size={IconSize.Small}
+            shouldFlipOnRTL
+            shouldForceSetColors={false}
+            className={styles.chevron}
+          />
         </div>
       </button>
     </div>

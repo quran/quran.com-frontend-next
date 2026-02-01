@@ -30,8 +30,8 @@
   gap: var(--spacing-xsmall-px);
   padding: 0;
   font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -147,7 +147,6 @@
 
   &:hover {
     background: var(--color-background-alternative);
-    border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   }
 
   &:active {
@@ -188,8 +187,10 @@
   border-radius: var(--border-radius-pill);
   color: var(--color-success-medium);
   transition: all var(--transition-regular) ease;
+}
 
-  svg {
+.collectionBadgeIcon {
+  > svg {
     inline-size: var(--font-size-xsmall-px);
     block-size: var(--font-size-xsmall-px);
     color: var(--color-success-medium);

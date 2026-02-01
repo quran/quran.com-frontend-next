@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Eylemler",
+    "actions-count": "Eylemler ({{count}})",
+    "cancel": "İptal etmek",
+    "collapse-all": "Tümünü Daralt",
+    "expand-all": "Tümünü Genişlet",
+    "select": "Seçme"
+  },
   "collections": {
     "favorites": "Favoriler",
     "guest-promo": {

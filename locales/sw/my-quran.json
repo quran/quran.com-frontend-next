@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "Vitendo",
+    "actions-count": "Vitendo ({{count}})",
+    "cancel": "Ghairi",
+    "collapse-all": "Kunja Zote",
+    "expand-all": "Panua Zote",
+    "select": "Chagua"
+  },
   "collections": {
     "favorites": "Vipendwa",
     "guest-promo": {

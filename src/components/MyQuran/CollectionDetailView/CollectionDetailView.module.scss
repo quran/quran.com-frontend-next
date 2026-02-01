@@ -5,12 +5,19 @@
   animation: fadeIn var(--transition-regular) ease-out;
 }
 
+.topActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xsmall-px);
+  margin-block-end: var(--spacing-medium2-px);
+}
+
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xxsmall-px);
   margin-block-end: var(--spacing-medium-px);
-  // Smooth slide down animation for header
   animation: slideDown var(--transition-moderate) ease-out;
 }
 
@@ -28,10 +35,61 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-main);
-  // Smooth hover transition
-  transition: all var(--transition-fast) ease-out;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
   border-radius: var(--border-radius-small-px);
+
+  & > span {
+    gap: var(--spacing-xxsmall-px);
+  }
+
+  &,
+  & * {
+    line-height: 1;
+  }
+
+  transition: all var(--transition-fast) ease-out;
+  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-micro2-px) var(--spacing-small2-px);
+  background: var(--color-success-faded);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-success-medium);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  // Fade in with delay
+  animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
+}
+
+.badgeContainer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall-px);
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-small-px);
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease-out;
 
   &:hover {
     background: var(--color-background-alternative);
@@ -42,35 +100,10 @@
   }
 
   svg {
-    transition: transform var(--transition-moderate) ease-out;
+    display: block;
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
   }
-
-  &:hover svg {
-    transform: translateX(calc(var(--spacing-xsmall-px) * -0.5));
-  }
-}
-
-.title {
-  font-size: var(--font-size-large-px);
-  font-weight: var(--font-weight-semibold);
-  // Fade in with slight delay for stagger effect
-  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xxsmall-px);
-  padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
-  background: var(--color-success-faded);
-  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-pill);
-  color: var(--color-success-medium);
-  font-size: var(--font-size-xsmall-px);
-  font-weight: var(--font-weight-semibold);
-  // Fade in with delay
-  animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
 }
 
 .loadMoreContainer {
@@ -95,7 +128,7 @@
   }
 }
 
-.loadingContainer {
+.statusContainer {
   display: flex;
   justify-content: center;
   padding-block: var(--spacing-mega-px);
@@ -137,4 +170,41 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.bulkActionsContainer {
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-medium-px);
+  animation: fadeIn var(--transition-regular) ease-out;
+}
+
+.bulkActionButton {
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+
+  &,
+  &:is(:hover, :active, :focus-visible) {
+    background: transparent;
+    color: var(--color-text-faded-new);
+  }
+
+  &:disabled {
+    border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+    color: var(--color-daily-progress);
+  }
+
+  &:is(:hover, :active, :focus-visible):not(:disabled) {
+    border: var(--spacing-hairline-px) solid var(--color-grey-icons-new);
+  }
+}
+
+.selectModeActions {
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
 }

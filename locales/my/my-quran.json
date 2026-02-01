@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "လုပ်ဆောင်ချက်များ",
+    "actions-count": "လုပ်ဆောင်ချက်များ ({{count}})",
+    "cancel": "ပယ်ဖျက်ရန်",
+    "collapse-all": "အားလုံး ခေါက်သိမ်းရန်",
+    "expand-all": "အားလုံးချဲ့ထွင်ပါ",
+    "select": "ရွေးချယ်ပါ"
+  },
   "collections": {
     "favorites": "အကြိုက်ဆုံးများ",
     "guest-promo": {

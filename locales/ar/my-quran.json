@@ -1,4 +1,12 @@
 {
+  "bulk-actions": {
+    "actions": "الإجراءات",
+    "actions-count": "الإجراءات ({{count}})",
+    "cancel": "يلغي",
+    "collapse-all": "طي الكل",
+    "expand-all": "عرض الكل",
+    "select": "يختار"
+  },
   "collections": {
     "favorites": "المفضلة",
     "guest-promo": {
