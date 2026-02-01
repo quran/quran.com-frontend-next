@@ -251,10 +251,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
       <div className={styles.header}>
         <Button onClick={onBack} variant={ButtonVariant.Ghost} className={styles.backButton}>
           <ChevronLeft />
+          <span>{collectionName}</span>
         </Button>
-        <div className={styles.headerContent}>
-          <span className={styles.title}>{collectionName}</span>
-        </div>
         <div className={styles.badgeContainer}>
           <span className={styles.badge}>
             {totalCount === 1

@@ -15,9 +15,9 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xxsmall-px);
   margin-block-end: var(--spacing-medium-px);
-  // Smooth slide down animation for header
   animation: slideDown var(--transition-moderate) ease-out;
 }
 
@@ -35,33 +35,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-main);
-  // Smooth hover transition
-  transition: all var(--transition-fast) ease-out;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
   border-radius: var(--border-radius-small-px);
+
+  & > span {
+    gap: var(--spacing-xxsmall-px);
+  }
+
+  &,
+  & * {
+    line-height: 1;
+  }
+
+  transition: all var(--transition-fast) ease-out;
+  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
 
   &:hover {
     background: var(--color-background-alternative);
   }
-
-  &:active {
-    transform: scale(0.92);
-  }
-
-  svg {
-    transition: transform var(--transition-moderate) ease-out;
-  }
-
-  &:hover svg {
-    transform: translateX(calc(var(--spacing-xsmall-px) * -0.5));
-  }
-}
-
-.title {
-  font-size: var(--font-size-large-px);
-  font-weight: var(--font-weight-semibold);
-  // Fade in with slight delay for stagger effect
-  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
 }
 
 .badge {
