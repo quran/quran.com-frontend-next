@@ -8,6 +8,7 @@ export enum SpinnerSize {
   Large = 'Large',
 }
 type SpinnerProps = {
+  dataTestId?: string;
   size?: SpinnerSize;
   isCentered?: boolean;
   className?: string;
@@ -15,12 +16,14 @@ type SpinnerProps = {
 };
 
 const Spinner = ({
+  dataTestId,
   size = SpinnerSize.Medium,
   isCentered = true,
   className,
   shouldDelayVisibility,
 }: SpinnerProps) => (
   <div
+    data-testid={dataTestId}
     className={classNames(styles.spinner, className, {
       [styles.large]: size === SpinnerSize.Large,
       [styles.normal]: size === SpinnerSize.Medium,

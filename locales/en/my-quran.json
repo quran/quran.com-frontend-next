@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Favorites",
+    "guest-promo": {
+      "sign-in": "Sign in",
+      "subtitle": "Compare and contrast verses",
+      "title": "Create custom collections"
+    },
+    "items": "{{count}} item",
+    "items_plural": "{{count}} items",
+    "load-more": "Load more",
+    "new-collection": "New Collection",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Recently updated",
+      "z-a": "Z - A"
+    },
+    "title": "Collections"
+  },
+  "notes-and-reflections": "Notes & Reflections",
+  "page": "Page",
+  "reading-bookmark": {
+    "empty": "Start reading and save a Reading Bookmark!",
+    "title": "My Reading Bookmark"
+  },
+  "recent": "Recent",
+  "recent-empty": "Start reading to see your recently read",
+  "recently-saved": {
+    "title": "Recently Saved"
+  },
+  "saved": "Saved",
+  "search": {
+    "filter": "Filter",
+    "placeholder": "Search Saved...",
+    "sort": "Sort"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Attach notes to verses",
+      "custom-collections": "Create custom collections"
+    },
+    "title": "Sign in or Sign up for free to gain access to the more features!"
+  }
+}

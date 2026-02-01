@@ -1,18 +1,17 @@
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import modalStyles from './Modal.module.scss';
 import styles from './PostQrConfirmationModal.module.scss';
 
+import Header from '@/components/Notes/modal/Header';
 import PostReflectionIntro from '@/components/Notes/modal/ReflectionIntro/PostReflection';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
-import ArrowIcon from '@/icons/arrow.svg';
 
 interface PostQRConfirmationModalProps {
   isModalOpen: boolean;
   isLoading: boolean;
+  onBack?: () => void;
   onModalClose: () => void;
   onEdit?: () => void;
   onConfirm: () => void;
@@ -21,6 +20,7 @@ interface PostQRConfirmationModalProps {
 const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
   isModalOpen,
   isLoading,
+  onBack,
   onModalClose,
   onEdit,
   onConfirm,
@@ -31,22 +31,13 @@ const PostQRConfirmationModal: React.FC<PostQRConfirmationModalProps> = ({
     <ContentModal
       isOpen={isModalOpen}
       header={
-        <button
-          type="button"
-          className={classNames(modalStyles.headerButton, modalStyles.title)}
-          onClick={onModalClose}
+        <Header
+          onClick={onBack}
           data-testid="qr-confirmation-modal-title"
           aria-label={t('common:back')}
         >
-          <IconContainer
-            icon={<ArrowIcon />}
-            shouldForceSetColors={false}
-            size={IconSize.Custom}
-            className={modalStyles.arrowIcon}
-          />
-
           {t('take-a-note-or-reflection')}
-        </button>
+        </Header>
       }
       hasCloseButton
       onClose={onModalClose}

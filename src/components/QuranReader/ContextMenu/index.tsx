@@ -31,7 +31,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isSidebarNavigationVisible,
     showNavbar,
     isSideBarVisible,
-    isExpanded,
     mushaf,
     verseKey,
 
@@ -66,7 +65,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
-        [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
     >
@@ -86,7 +84,11 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
         </div>
       )}
 
-      <div className={styles.sectionsContainer}>
+      <div
+        className={classNames(styles.sectionsContainer, {
+          [styles.sectionsContainerMobileExpanded]: isMobileScrolledView,
+        })}
+      >
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
           <div className={classNames(styles.row, { [styles.mobileNavRow]: showNavbar })}>

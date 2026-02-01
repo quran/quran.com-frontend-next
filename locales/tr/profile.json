@@ -25,6 +25,10 @@
   "max-file-size": "Maksimum {{size}}",
   "my-profile": "Profilim",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Eğer bir süredir Kur'an hedefinizde ilerleme kaydetmediyseniz, size hatırlatma amaçlı bir e-posta gönderilecektir.",
+      "title": "Hedef Hatırlatıcısı"
+    },
     "daily-ramadan-challenge": {
       "description": "Mülk Suresi 2026 Ramazan Mücadelesi",
       "title": "Günlük Ramazan Meydan Okuması"

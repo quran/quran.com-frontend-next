@@ -142,6 +142,7 @@
     "decrease": "Diminuire",
     "increase": "Aumento"
   },
+  "create": "Creare",
   "create-my-goal": "Crea il mio obiettivo",
   "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
   "delete": "Eliminare",
@@ -151,6 +152,7 @@
   "donate-now": "Dona ora",
   "donate_monthly": "Dona mensilmente",
   "donate_once": "Dona una volta",
+  "done": "Fatto",
   "edit": "Modificare",
   "email-verification": {
     "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
@@ -171,7 +173,10 @@
     "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud.",
     "ranges-no-value": "L'inizio e la fine dell'intervallo devono avere un valore",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
-    "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
+    "ranges-wrong-order": "Il verso iniziale deve precedere quello finale.",
+    "reading-bookmark-remove": "Impossibile rimuovere il segnalibro di lettura",
+    "reading-bookmark-set": "Impossibile impostare il segnalibro di lettura",
+    "reading-bookmark-undo": "Impossibile annullare la lettura del segnalibro"
   },
   "errors": {
     "account-banned": "Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
@@ -208,9 +213,11 @@
     "verification-code-invalid": "Questo codice di verifica non è valido",
     "verification-code-length": "Il codice di verifica deve essere di {{length}} cifre",
     "verification-failed": "Verifica non riuscita. Riprova.",
-    "verification-resend-failed": "Impossibile inviare nuovamente il codice di verifica"
+    "verification-resend-failed": "Impossibile inviare nuovamente il codice di verifica",
+    "verse-metadata-failed": "Impossibile caricare i metadati del versetto"
   },
   "exciting-updates": "Aggiornamenti entusiasmanti",
+  "favorites": "Preferiti",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 linee",
@@ -277,6 +284,7 @@
   "input": {
     "clear": "Chiaro"
   },
+  "join-ramadan-challenge": "🚀 Partecipa alla nostra sfida del Ramadan!",
   "juz": "Juz",
   "language": "Lingua",
   "languages": "Le lingue",
@@ -351,6 +359,7 @@
   "quran-com": "Corano.com",
   "quran-radio": "Radio del Corano",
   "read": "Leggere",
+  "read-more": "Per saperne di più",
   "reading-history": "Leggere la storia",
   "reading-preference": {
     "arabic": "arabo",
@@ -397,6 +406,7 @@
     "title": "Ricerca"
   },
   "seconds": "Secondi",
+  "see-less": "Vedi meno",
   "see-new": "Guarda le novità",
   "select-language": "Seleziona la lingua",
   "settings": {
@@ -440,7 +450,8 @@
   "sort": {
     "ascending": "Ascendente",
     "by": "Ordina per",
-    "descending": "Discendente"
+    "descending": "Discendente",
+    "sort": "Ordinare"
   },
   "stay-on-track": "🎯 Rimani sulla buona strada!",
   "style": "Stile",

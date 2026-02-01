@@ -1,0 +1,44 @@
+{
+  "collections": {
+    "favorites": "Të preferuarat",
+    "guest-promo": {
+      "sign-in": "Hyr",
+      "subtitle": "Krahaso dhe dallo vargje",
+      "title": "Krijo koleksione të personalizuara"
+    },
+    "items": "{{count}} artikull",
+    "items_plural": "{{count}} artikuj",
+    "load-more": "Ngarko më shumë",
+    "new-collection": "Koleksion i Ri",
+    "sort": {
+      "a-z": "A - Zh",
+      "recently-updated": "Përditësuar së fundmi",
+      "z-a": "Z - A"
+    },
+    "title": "Koleksione"
+  },
+  "notes-and-reflections": "Shënime dhe Reflektime",
+  "page": "Faqe",
+  "reading-bookmark": {
+    "empty": "Filloni të lexoni dhe ruani një faqeshënues leximi!",
+    "title": "Faqeshënuesi im i leximit"
+  },
+  "recent": "Kohët e fundit",
+  "recent-empty": "Filloni të lexoni për të parë se çfarë keni lexuar së fundmi.",
+  "recently-saved": {
+    "title": "Ruajtur së fundmi"
+  },
+  "saved": "Ruajtur",
+  "search": {
+    "filter": "Filtër",
+    "placeholder": "Kërkimi u ruajt...",
+    "sort": "Rendit"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Bashkangjit shënime në vargje",
+      "custom-collections": "Krijo koleksione të personalizuara"
+    },
+    "title": "Hyni ose regjistrohuni falas për të pasur akses në më shumë veçori!"
+  }
+}

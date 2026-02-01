@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import clickCreateMyGoalButton from '@/tests/helpers/banner';
+import clickBannerCTA from '@/tests/helpers/banner';
 import { mockStreakWithGoal, mockStreakWithoutGoal } from '@/tests/helpers/streak-api-mocks';
 import Homepage from '@/tests/POM/home-page';
 
@@ -18,21 +18,23 @@ test.describe('Banner Test - Logged In User', () => {
     await homePage.goTo();
   });
 
-  test('should redirect to /reading-goal when user is logged in without goal', async ({ page }) => {
+  test('should redirect to /ramadanchallenge when user is logged in without goal', async ({
+    page,
+  }) => {
     mockStreakWithoutGoal(page);
 
-    await clickCreateMyGoalButton(page);
-    await page.waitForURL(/^.*?(\/[a-z]{2})?\/reading-goal$/);
-    expect(new URL(page.url()).pathname).toMatch(/^(\/[a-z]{2})?\/reading-goal$/);
+    await clickBannerCTA(page);
+    await page.waitForURL(/^.*?(\/[a-z]{2})?\/ramadanchallenge$/);
+    expect(new URL(page.url()).pathname).toMatch(/^(\/[a-z]{2})?\/ramadanchallenge$/);
   });
 
-  test('should redirect to /reading-goal/progress when user is logged in with goal', async ({
+  test('should redirect to /ramadanchallenge when user is logged in with goal', async ({
     page,
   }) => {
     mockStreakWithGoal(page);
 
-    await clickCreateMyGoalButton(page);
-    await page.waitForURL(/^.*?(\/[a-z]{2})?\/reading-goal\/progress$/);
-    expect(new URL(page.url()).pathname).toMatch(/^(\/[a-z]{2})?\/reading-goal\/progress$/);
+    await clickBannerCTA(page);
+    await page.waitForURL(/^.*?(\/[a-z]{2})?\/ramadanchallenge$/);
+    expect(new URL(page.url()).pathname).toMatch(/^(\/[a-z]{2})?\/ramadanchallenge$/);
   });
 });

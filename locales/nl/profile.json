@@ -25,6 +25,10 @@
   "max-file-size": "Max {{size}}",
   "my-profile": "Mijn profiel",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Als je al een tijdje geen vooruitgang hebt geboekt, ontvang je een e-mail ter herinnering aan je Koran-doel.",
+      "title": "Doelherinnering"
+    },
     "daily-ramadan-challenge": {
       "description": "Surah Al-Mulk Ramadan-uitdaging 2026",
       "title": "Dagelijkse Ramadan-uitdaging"

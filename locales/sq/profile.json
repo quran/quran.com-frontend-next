@@ -25,6 +25,10 @@
   "max-file-size": "Maks {{size}}",
   "my-profile": "Profili im",
   "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Një email do t'ju dërgohet për t'ju kujtuar qëllimin tuaj në Kur'an nëse nuk keni bërë përparim për një kohë.",
+      "title": "Kujtesë për Golin"
+    },
     "daily-ramadan-challenge": {
       "description": "Surja El-Mulk 2026 Sfida e Ramazanit",
       "title": "Sfida e përditshme e Ramazanit"

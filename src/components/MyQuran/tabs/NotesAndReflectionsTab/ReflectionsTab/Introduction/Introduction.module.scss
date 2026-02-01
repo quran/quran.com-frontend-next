@@ -1,0 +1,29 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-medium-px);
+  background-color: var(--color-success-faded);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-xsmall-px);
+
+  margin-block-end: var(--spacing-xlarge-px);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-large-px);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxsmall);
+    margin-block-start: var(--spacing-xsmall);
+    line-height: inherit;
+
+    list-style: initial;
+    padding-inline-start: var(--spacing-medium2);
+  }
+}
+
+.title {
+  font-weight: var(--font-weight-bold);
+}

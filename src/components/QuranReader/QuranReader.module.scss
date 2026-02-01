@@ -34,17 +34,18 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
+  overflow-x: hidden;
   @include breakpoints.smallerThanTablet {
     padding-block-start: $quran-reader-padding-mobile;
   }
-  padding-block-start: calc(#{$quran-reader-padding} + var(--pinned-verses-bar-height));
-  padding-inline: var(--spacing-medium2-px);
+  padding-block-start: $quran-reader-padding;
+  // padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
   @include breakpoints.tablet {
     transition: var(--transition-regular);
-    margin-inline-end: 0;
+    // margin-inline-end: 0;
   }
 
   @include breakpoints.smallerThanTablet {
@@ -69,13 +70,13 @@ $virtual-scrolling-height-bandage: calc(
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
-    margin-inline-end: constants.$notes-side-bar-desktop-width;
+    // margin-inline-end: constants.$notes-side-bar-desktop-width;
   }
 }
 
 .withSidebarNavigationOpenOrAuto {
   @include breakpoints.tablet {
-    margin-inline-start: calc(10 * var(--spacing-mega));
+    // margin-inline-start: calc(10 * var(--spacing-mega));
   }
 }
 
@@ -100,7 +101,10 @@ $virtual-scrolling-height-bandage: calc(
 
 // Mobile expanded state with Tajweed mushaf: context menu + tajweed trigger
 .mobileTajweedExpanded {
-  padding-block-start: calc(var(--mobile-context-menu-height) + var(--tajweed-trigger-height) + var(--pinned-verses-bar-height));
+  padding-block-start: calc(
+    var(--mobile-context-menu-height) + var(--tajweed-trigger-height) +
+      var(--pinned-verses-bar-height)
+  );
   // Faster expand with ease-out, consistent with base container mobile styles
   transition: padding-block-start var(--transition-fast) ease-out
     var(--mobile-stagger-delay-content);
@@ -109,7 +113,9 @@ $virtual-scrolling-height-bandage: calc(
 // Desktop state with Tajweed mushaf: add extra padding for tajweed trigger
 .desktopTajweed {
   @include breakpoints.tablet {
-    padding-block-start: calc(var(--navbar-height) + var(--tajweed-trigger-height) + var(--pinned-verses-bar-height));
+    padding-block-start: calc(
+      var(--navbar-height) + var(--tajweed-trigger-height) + var(--pinned-verses-bar-height)
+    );
   }
 }
 

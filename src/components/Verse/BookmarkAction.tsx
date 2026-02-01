@@ -1,21 +1,26 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import BookmarkIcon from './BookmarkIcon';
+import useBookmarkState from './hooks/useBookmarkState';
+
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
-import useVerseBookmark, { BookmarkableVerse } from '@/hooks/useVerseBookmark';
-import BookmarkedIcon from '@/icons/bookmark.svg';
-import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import {
+  selectStudyModeActiveTab,
+  selectStudyModeHighlightedWordLocation,
+  selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
+  selectStudyModeVerseKey,
+} from '@/redux/slices/QuranReader/studyMode';
+import { openBookmarkModal } from '@/redux/slices/QuranReader/verseActionModal';
 import Verse from '@/types/Verse';
-import { getMushafId } from '@/utils/api';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
@@ -23,71 +28,110 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;
+  isInsideStudyMode?: boolean;
 }
 
+/**
+ * BookmarkAction component that displays a bookmark button/menu item for a verse.
+ * Opens SaveBookmarkModal for logged-in users or GuestUserPrompt for guests.
+ * Dispatches Redux action to open the modal in VerseActionModalContainer.
+ *
+ * @param {Props} props - Component props
+ * @returns {JSX.Element} The BookmarkAction component
+ */
 const BookmarkAction: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
-  bookmarksRangeUrl,
-}) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+  isInsideStudyMode = false,
+}): JSX.Element => {
+  const dispatch = useDispatch();
+  const {
+    isVerseBookmarked,
+    isVerseBookmarkedLoading,
+    isVerseReadingBookmark,
+    isVerseMultipleBookmarked,
+  } = useBookmarkState(verse);
   const { t } = useTranslation('common');
   const isMobile = useIsMobile();
 
-  // Use custom hook for all bookmark logic
-  const { isVerseBookmarked, handleToggleBookmark } = useVerseBookmark({
-    verse: verse as BookmarkableVerse,
-    mushafId,
-    bookmarksRangeUrl,
-  });
+  // Redux selectors for study mode state
+  const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
+  const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
+  const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
+  const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
 
-  // Helper: Get event name for analytics
-  const getEventName = useCallback(() => {
-    const view = isTranslationView ? 'translation_view' : 'reading_view';
-    const action = isVerseBookmarked ? 'un_bookmark' : 'bookmark';
-    return `${view}_verse_actions_menu_${action}`;
-  }, [isTranslationView, isVerseBookmarked]);
-
-  const onToggleBookmarkClicked = useCallback(
+  const onBookmarkClicked = useCallback(
     (e?: React.MouseEvent) => {
-      // Prevent default to avoid page scroll
       if (e) {
         e.preventDefault();
         e.stopPropagation();
       }
 
-      // eslint-disable-next-line i18next/no-literal-string
-      logButtonClick(getEventName());
+      logButtonClick(
+        `${
+          isTranslationView ? 'translation_view' : 'reading_view'
+        }_verse_actions_menu_bookmark_open`,
+      );
 
-      handleToggleBookmark();
-      onActionTriggered?.();
+      // Determine if opened from study mode
+      const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
+      dispatch(
+        openBookmarkModal({
+          verseKey: verse.verseKey,
+          verse,
+          isTranslationView,
+          wasOpenedFromStudyMode: openedFromStudyMode,
+          studyModeRestoreState:
+            openedFromStudyMode && studyModeVerseKey
+              ? {
+                  verseKey: studyModeVerseKey,
+                  activeTab: studyModeActiveTab,
+                  highlightedWordLocation: studyModeHighlightedWordLocation,
+                  isSsrMode,
+                }
+              : undefined,
+        }),
+      );
+
+      if (onActionTriggered) {
+        onActionTriggered();
+      }
     },
-    [getEventName, handleToggleBookmark, onActionTriggered],
+    [
+      verse,
+      isTranslationView,
+      isInsideStudyMode,
+      isStudyModeOpen,
+      isSsrMode,
+      studyModeVerseKey,
+      studyModeActiveTab,
+      studyModeHighlightedWordLocation,
+      dispatch,
+      onActionTriggered,
+    ],
   );
 
-  const bookmarkIcon = useMemo(() => {
-    if (isVerseBookmarked) {
-      return <BookmarkedIcon color="var(--color-text-default)" />;
-    }
-    return (
-      <IconContainer
-        icon={<UnBookmarkedIcon />}
-        color={IconColor.tertiary}
-        size={IconSize.Custom}
-        shouldFlipOnRTL={false}
-      />
-    );
-  }, [isVerseBookmarked]);
+  const bookmarkIcon = (
+    <BookmarkIcon
+      isLoading={isVerseBookmarkedLoading}
+      isBookmarked={isVerseBookmarked}
+      isVerseMultipleBookmarked={isVerseMultipleBookmarked}
+      isReadingBookmark={isVerseReadingBookmark}
+    />
+  );
+
+  const isBookmarked = isVerseBookmarked || isVerseMultipleBookmarked || isVerseReadingBookmark;
+  const bookmarkLabel = isBookmarked ? t('bookmarked') : t('bookmark');
 
   // For use in the TopActions component (standalone button)
   if (isTranslationView || (!isTranslationView && isMobile)) {
-    const tooltipText = isVerseBookmarked ? t('bookmarked') : t('bookmark');
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip={isMobile ? undefined : tooltipText}
+        tooltip={bookmarkLabel}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         className={classNames(
@@ -95,11 +139,9 @@ const BookmarkAction: React.FC<Props> = ({
           styles.verseAction,
           'bookmark-verse-action-button',
         )}
-        onClick={(e) => {
-          onToggleBookmarkClicked(e);
-        }}
-        shouldFlipOnRTL={false}
-        ariaLabel={tooltipText}
+        onClick={onBookmarkClicked}
+        isDisabled={isVerseBookmarkedLoading}
+        ariaLabel={bookmarkLabel}
       >
         <span className={styles.icon}>{bookmarkIcon}</span>
       </Button>
@@ -108,8 +150,12 @@ const BookmarkAction: React.FC<Props> = ({
 
   // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
-    <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
-      {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
+    <PopoverMenu.Item
+      onClick={onBookmarkClicked}
+      icon={bookmarkIcon}
+      isDisabled={isVerseBookmarkedLoading}
+    >
+      {bookmarkLabel}
     </PopoverMenu.Item>
   );
 };

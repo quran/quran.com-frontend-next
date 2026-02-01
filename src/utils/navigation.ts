@@ -6,6 +6,7 @@ import { searchIdToNavigationKey } from './search';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
+import MyQuranTab from '@/components/MyQuran/tabs';
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
 import ContentType from '@/types/QuranReflect/ContentType';
@@ -20,6 +21,7 @@ export const ROUTES = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   AUTH: '/auth',
+  MY_QURAN: '/my-quran',
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',
@@ -29,7 +31,6 @@ export const ROUTES = {
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
   COLLECTIONS_ALL: '/collections/all',
-  NOTES: '/notes-and-reflections',
   NOTIFICATION_SETTINGS: '/notification-settings',
   RAMADAN_2026: '/ramadan2026',
   RAMADAN_CHALLENGE: '/ramadanchallenge',
@@ -53,7 +54,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
   ROUTES.COLLECTIONS_ALL,
-  ROUTES.NOTES,
   ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
@@ -84,6 +84,15 @@ export const ABOUT_US_URL = '/about-us';
 export const DEVELOPERS_URL = '/developers';
 export const PRODUCT_UPDATES_URL = '/product-updates';
 export const SUPPORT_URL = '/support';
+
+/**
+ * Get the href link to the my quran page.
+ *
+ * @param {MyQuranTab} tab - The tab to navigate to specific tab.
+ * @returns {string} - The href link to the my quran page with the specified tab.
+ */
+export const getMyQuranNavigationUrl = (tab?: MyQuranTab): string =>
+  `/my-quran${tab ? `?${QueryParam.TAB}=${tab}` : ''}`;
 
 /**
  * Get the href link to a verse.
@@ -470,8 +479,6 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
 export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
-
-export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
 

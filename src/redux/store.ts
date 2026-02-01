@@ -21,6 +21,7 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import fundraisingBanner from './slices/fundraisingBanner';
+import guestBookmark from './slices/guestBookmark';
 import mediaMaker from './slices/mediaMaker';
 import microphone from './slices/microphone';
 import navbar from './slices/navbar';
@@ -76,6 +77,8 @@ const persistConfig = {
     SliceName.ONBOARDING,
     SliceName.MEDIA_MAKER,
     SliceName.PINNED_VERSES,
+    SliceName.GUEST_ENROLLMENT,
+    SliceName.GUEST_BOOKMARK,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -107,6 +110,7 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
+  guestBookmark,
   studyMode,
   verseActionModal,
   pinnedVerses,

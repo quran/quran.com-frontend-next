@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import PinVerseAction from '../PinVerseAction';
-import SaveToCollectionAction from '../SaveToCollectionAction';
 import TranslationFeedbackAction from '../TranslationFeedback/TranslationFeedbackAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
@@ -13,14 +12,13 @@ import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
 import { selectStudyModeIsOpen } from '@/redux/slices/QuranReader/studyMode';
-import { isLoggedIn } from '@/utils/auth/login';
 import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string;
   isInsideStudyMode?: boolean;
 }
 
@@ -28,7 +26,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
-  bookmarksRangeUrl,
+  bookmarksRangeUrl, // eslint-disable-line @typescript-eslint/no-unused-vars
   isInsideStudyMode = false,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
@@ -36,14 +34,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
   return selectedMenu === VerseActionsMenuType.Main ? (
     <div>
-      {isLoggedIn() && (
-        <SaveToCollectionAction
-          verse={verse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-          isTranslationView={isTranslationView}
-          isInsideStudyMode={isInsideStudyMode}
-        />
-      )}
       <PinVerseAction
         verse={verse}
         isTranslationView={isTranslationView}
