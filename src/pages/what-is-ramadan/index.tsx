@@ -13,7 +13,7 @@ import InlineLink from '@/components/RamadanActivity/InlineLink';
 import { getWhatIsRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, isRTLLocale } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
 
 const PATH = getWhatIsRamadanNavigationUrl();
@@ -32,10 +32,10 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
         })}
       />
       <PageContainer>
-        {lang === 'ar' ? (
+        {isRTLLocale(lang) ? (
           <WhatIsRamadanArabic />
         ) : (
-          <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
+          <div className={classNames(pageStyles.container, styles.contentPage)}>
             <h1>Ramadan: A Journey of Reflection, Renewal, and Revelation.</h1>
             <div className={styles.subSection}>
               <h2>What is Ramadan?</h2>

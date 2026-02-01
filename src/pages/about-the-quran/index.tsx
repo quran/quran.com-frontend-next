@@ -18,7 +18,7 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAboutTheQuranImageUrl } from '@/lib/og';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, isRTLLocale } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import verse3829 from 'src/data/verses/verse3829';
 
@@ -44,10 +44,10 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
         imageHeight={630}
       />
       <PageContainer>
-        {lang === 'ar' ? (
+        {isRTLLocale(lang) ? (
           <AboutTheQuranArabic />
         ) : (
-          <div className={styles.contentPage} dir="ltr">
+          <div className={styles.contentPage}>
             <div className={styles.section}>
               <h1>What is the Quran?</h1>
               <div>
