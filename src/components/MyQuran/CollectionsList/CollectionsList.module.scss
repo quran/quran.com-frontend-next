@@ -167,7 +167,7 @@
   svg {
     inline-size: var(--spacing-medium3-px);
     block-size: var(--spacing-medium3-px);
-    color: var(--color-success-medium);
+    color: var(--color-bookmark-icon);
   }
 }
 
@@ -185,6 +185,8 @@
   padding: var(--spacing-xxsmall-px) var(--spacing-small2-px);
   background: var(--color-success-faded);
   border-radius: var(--border-radius-pill);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xsmall-px);
   color: var(--color-success-medium);
   transition: all var(--transition-regular) ease;
 }
