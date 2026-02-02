@@ -84,7 +84,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const onSortByChange = useCallback((newSortByVal: CollectionDetailSortOption) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
     setSortBy(newSortByVal);
-    // Since sortBy is only used for logging the old value its not needed
+    // Since sortBy is only used for logging the old value it's not needed
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

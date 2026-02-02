@@ -37,6 +37,9 @@ type CollectionDetailProps = {
   isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
+// Enable scroll only when the collection has more than 5 items: this roughly matches the
+// number of cards that fit in the available viewport height in our layouts, so smaller
+// collections render without a scrollable container while larger ones become scrollable.
 const SCROLL_THRESHOLD = 5;
 
 const CollectionDetail = ({
