@@ -7,6 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './PinnedVersesSection.module.scss';
 import usePinnedVerseHandlers from './usePinnedVerseHandlers';
 
+import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import LoadFromCollectionModal from '@/components/QuranReader/PinnedVerses/LoadFromCollectionModal';
 import SavePinnedToCollectionModal from '@/components/QuranReader/PinnedVerses/SavePinnedToCollectionModal';
 import PinnedVersesContent from '@/components/QuranReader/PinnedVersesBar/PinnedVersesContent';
@@ -36,6 +37,7 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
 
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
 
   const {
@@ -44,6 +46,7 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
     handleClear,
     handleSaveToCollection,
     handleLoadFromCollection,
+    handleAddNote,
     handleCopy,
   } = usePinnedVerseHandlers({
     pinnedVerses,
@@ -55,6 +58,7 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
     selectedTranslations,
     setIsSaveModalOpen,
     setIsLoadModalOpen,
+    setIsNoteModalOpen,
     unpinVerseWithSync,
     clearPinnedWithSync,
     onGoToVerse,
@@ -63,6 +67,12 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
   if (pinnedVerses.length === 0) {
     return null;
   }
+
+  const pinnedVerseKeys = pinnedVerses.map((v) => v.verseKey);
+
+  const handleNoteModalClose = () => {
+    setIsNoteModalOpen(false);
+  };
 
   return (
     <>
@@ -78,6 +88,7 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
           onSaveToCollection={handleSaveToCollection}
           onLoadFromCollection={handleLoadFromCollection}
           onCopy={handleCopy}
+          onAddNote={handleAddNote}
         />
       </div>
 
@@ -90,6 +101,13 @@ const PinnedVersesSection: React.FC<PinnedVersesSectionProps> = ({ onGoToVerse }
           <LoadFromCollectionModal
             isOpen={isLoadModalOpen}
             onClose={() => setIsLoadModalOpen(false)}
+          />
+          <AddNoteModal
+            showRanges
+            isModalOpen={isNoteModalOpen}
+            onModalClose={handleNoteModalClose}
+            onMyNotes={handleNoteModalClose}
+            verseKeys={pinnedVerseKeys}
           />
         </>
       )}

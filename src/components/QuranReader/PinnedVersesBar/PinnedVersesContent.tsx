@@ -23,6 +23,7 @@ interface PinnedVersesContentProps {
   onSaveToCollection: () => void;
   onLoadFromCollection: () => void;
   onCopy: () => void;
+  onAddNote?: () => void;
 }
 
 const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
@@ -37,6 +38,7 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
   onSaveToCollection,
   onLoadFromCollection,
   onCopy,
+  onAddNote,
 }) => {
   const { t } = useTranslation('quran-reader');
 
@@ -68,6 +70,7 @@ const PinnedVersesContent: React.FC<PinnedVersesContentProps> = ({
               onSaveToCollection={onSaveToCollection}
               onLoadFromCollection={onLoadFromCollection}
               onCopy={onCopy}
+              onAddNote={onAddNote}
             />
           </div>
         </div>
