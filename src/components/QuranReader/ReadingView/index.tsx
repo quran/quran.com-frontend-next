@@ -86,6 +86,14 @@ const ReadingView = ({
   const hasTranslations = selectedTranslations && selectedTranslations.length > 0;
   const showEmptyState = isTranslationMode && !hasTranslations;
 
+  // Determine if ReaderTopActions would show mode actions (to avoid duplicate rendering)
+  // ReaderTopActions shows for: non-Chapter, non-Tafsir types that don't start at verse 1
+  const firstVerse = initialData?.verses?.[0];
+  const readerTopActionsWouldShow =
+    firstVerse &&
+    quranReaderDataType !== QuranReaderDataType.Chapter &&
+    firstVerse.verseNumber !== 1;
+
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -201,12 +209,15 @@ const ReadingView = ({
     reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
 
   // When in empty state, show mode actions and empty message
+  // Only show ReadingModeActions here if ReaderTopActions wouldn't show them (to avoid duplicate)
   if (showEmptyState) {
     return (
       <div className={styles.emptyStateContainer}>
-        <div className={styles.emptyStateActions}>
-          <ReadingModeActions />
-        </div>
+        {!readerTopActionsWouldShow && (
+          <div className={styles.emptyStateActions}>
+            <ReadingModeActions />
+          </div>
+        )}
         <EmptyTranslationMessage />
       </div>
     );
