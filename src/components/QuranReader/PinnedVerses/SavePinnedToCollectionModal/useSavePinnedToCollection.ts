@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { CollectionItem } from '@/components/Verse/SaveBookmarkModal/Collections/CollectionsListItem';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useCollections from '@/hooks/useCollections';
+import { logErrorToSentry } from '@/lib/sentry';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
@@ -48,8 +49,14 @@ const useSavePinnedToCollection = (onClose: () => void) => {
         await addBulkCollectionBookmarks({ collectionId, bookmarks, mushafId });
         toast(t('pinned-saved-successfully'), { status: ToastStatus.Success });
         onClose();
-      } catch {
-        toast(commonT('error.general'), { status: ToastStatus.Error });
+      } catch (error) {
+        logErrorToSentry(error, { transactionName: 'savePinnedToCollection' });
+        toast(commonT('error.general'), {
+          status: ToastStatus.Error,
+          actions: [
+            { text: commonT('retry'), onClick: () => savePinnedToCollection(collectionId) },
+          ],
+        });
       } finally {
         setIsSaving(false);
       }
@@ -87,8 +94,12 @@ const useSavePinnedToCollection = (onClose: () => void) => {
         await savePinnedToCollection(newCollection.id);
       }
       resetNewCollection();
-    } catch {
-      toast(commonT('error.general'), { status: ToastStatus.Error });
+    } catch (error) {
+      logErrorToSentry(error, { transactionName: 'savePinnedCreateCollection' });
+      toast(commonT('error.general'), {
+        status: ToastStatus.Error,
+        actions: [{ text: commonT('retry'), onClick: () => handleCreateCollection() }],
+      });
     } finally {
       setIsSubmittingCollection(false);
     }

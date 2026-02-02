@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePinnedVersesBroadcast';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -22,7 +24,9 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import { PinnedItemTargetType } from 'types/PinnedItem';
 
 const usePinnedVerseSync = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const toast = useToast();
   const { isLoggedIn } = useIsLoggedIn();
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
   const { mutate: globalMutate } = useSWRConfig();
@@ -54,6 +58,10 @@ const usePinnedVerseSync = () => {
         } catch (error) {
           dispatch(unpinVerse(verseKey));
           broadcastPinnedVerses(PinnedVersesBroadcastType.UNPIN, { verseKey });
+          toast(t('error.general'), {
+            status: ToastStatus.Error,
+            actions: [{ text: t('retry'), onClick: () => pinVerseWithSync(verseKey) }],
+          });
           logErrorToSentry(error, {
             transactionName: 'usePinnedVerseSync.pin',
             metadata: { verseKey },
@@ -61,7 +69,7 @@ const usePinnedVerseSync = () => {
         }
       }
     },
-    [dispatch, isLoggedIn, mushafId, invalidateCache],
+    [dispatch, isLoggedIn, mushafId, invalidateCache, t, toast],
   );
 
   const unpinVerseWithSync = useCallback(
@@ -79,6 +87,10 @@ const usePinnedVerseSync = () => {
         } catch (error) {
           dispatch(pinVerse(verseKey));
           broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey });
+          toast(t('error.general'), {
+            status: ToastStatus.Error,
+            actions: [{ text: t('retry'), onClick: () => unpinVerseWithSync(verseKey) }],
+          });
           logErrorToSentry(error, {
             transactionName: 'usePinnedVerseSync.unpin',
             metadata: { verseKey, serverId },
@@ -86,7 +98,7 @@ const usePinnedVerseSync = () => {
         }
       }
     },
-    [dispatch, isLoggedIn, pinnedVerses, invalidateCache],
+    [dispatch, isLoggedIn, pinnedVerses, invalidateCache, t, toast],
   );
 
   const clearPinnedWithSync = useCallback(async () => {
@@ -102,12 +114,16 @@ const usePinnedVerseSync = () => {
       } catch (error) {
         dispatch(setPinnedVerses(savedVerses));
         broadcastPinnedVerses(PinnedVersesBroadcastType.SET, { verses: savedVerses });
+        toast(t('error.general'), {
+          status: ToastStatus.Error,
+          actions: [{ text: t('retry'), onClick: () => clearPinnedWithSync() }],
+        });
         logErrorToSentry(error, {
           transactionName: 'usePinnedVerseSync.clear',
         });
       }
     }
-  }, [dispatch, isLoggedIn, pinnedVerses, invalidateCache]);
+  }, [dispatch, isLoggedIn, pinnedVerses, invalidateCache, t, toast]);
 
   return { pinVerseWithSync, unpinVerseWithSync, clearPinnedWithSync };
 };

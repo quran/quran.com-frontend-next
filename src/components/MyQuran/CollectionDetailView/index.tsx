@@ -24,6 +24,7 @@ import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePinnedVersesBroadcast';
 import ChevronLeft from '@/icons/chevron-left.svg';
 import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
@@ -77,7 +78,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
     sortBy,
     type: BookmarkType.Ayah,
-    limit: Number.MAX_SAFE_INTEGER,
+    limit: 10000,
   });
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
@@ -211,8 +212,12 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
           await syncPinnedItems(syncPayload);
           globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
-        } catch {
-          toast(t('common:error.general'), { status: ToastStatus.Error });
+        } catch (syncError) {
+          logErrorToSentry(syncError, { transactionName: 'collectionDetail.pinVerses' });
+          toast(t('common:error.general'), {
+            status: ToastStatus.Error,
+            actions: [{ text: t('common:retry'), onClick: () => pinVersesAndSync(verseKeys) }],
+          });
           return;
         }
       }

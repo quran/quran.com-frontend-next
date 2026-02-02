@@ -14,6 +14,7 @@ import SaveBookmarkModalHeader from '@/components/Verse/SaveBookmarkModal/SaveBo
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { privateFetcher } from '@/utils/auth/api';
@@ -79,8 +80,12 @@ const LoadFromCollectionModal: React.FC<LoadFromCollectionModalProps> = ({ isOpe
         }
         toast(t('verses-loaded-successfully'), { status: ToastStatus.Success });
         onClose();
-      } catch {
-        toast(t('common:error.general'), { status: ToastStatus.Error });
+      } catch (error) {
+        logErrorToSentry(error, { transactionName: 'loadFromCollection' });
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+          actions: [{ text: t('common:retry'), onClick: () => handleCollectionToggle(collection) }],
+        });
       } finally {
         setIsLoading(false);
       }

@@ -8,6 +8,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
+import pinIconStyles from '@/styles/pinIcon.module.scss';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 interface CollectionVerseCellMenuProps {
@@ -53,7 +54,9 @@ const CollectionVerseCellMenu: React.FC<CollectionVerseCellMenuProps> = ({
         icon={
           <IconContainer
             icon={isPinned ? <PinFilledIcon /> : <PinIcon />}
-            color={isPinned ? IconColor.primary : IconColor.tertiary}
+            color={isPinned ? undefined : IconColor.tertiary}
+            shouldForceSetColors={!isPinned}
+            className={isPinned ? pinIconStyles.pinned : undefined}
             size={IconSize.Xsmall}
             shouldFlipOnRTL={false}
           />

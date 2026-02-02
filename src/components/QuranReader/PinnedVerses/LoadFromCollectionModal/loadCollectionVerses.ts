@@ -27,7 +27,7 @@ const loadCollectionVerses = async (
   const collectionData = await privateFetcher<GetBookmarkCollectionsIdResponse>(
     makeGetBookmarkByCollectionId(collectionId, {
       type: BookmarkType.Ayah,
-      limit: 1000,
+      limit: 10000,
     }),
   );
 

@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState, useContext, useRef } from 'react';
 
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 
 import DataContext from '@/contexts/DataContext';
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
@@ -19,6 +20,7 @@ import ScrollAlign from 'types/ScrollAlign';
 const SCROLL_DELAY_MS = 1000;
 const CONTEXT_MENU_OFFSET = -70;
 const PINNED_VERSES_BAR_OFFSET = -90;
+const NAVBAR_OFFSET = -54;
 
 /**
  * This hook listens to startingVerse query param and navigate to
@@ -41,6 +43,7 @@ const useScrollToVirtualizedTranslationView = (
 
   const pinnedVerses = useSelector(selectPinnedVerses);
   const hasPinnedVerses = pinnedVerses.length > 0;
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
 
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
@@ -51,16 +54,18 @@ const useScrollToVirtualizedTranslationView = (
     (verseNumber: number) => {
       if (!virtuosoRef.current) return;
       const verseIndex = verseNumber - 1;
-      const offset = hasPinnedVerses
-        ? CONTEXT_MENU_OFFSET + PINNED_VERSES_BAR_OFFSET
-        : CONTEXT_MENU_OFFSET;
+      let offset = CONTEXT_MENU_OFFSET;
+      if (hasPinnedVerses) {
+        offset += PINNED_VERSES_BAR_OFFSET;
+        if (isNavbarVisible) offset += NAVBAR_OFFSET;
+      }
       virtuosoRef.current.scrollToIndex({
         index: verseIndex,
         align: ScrollAlign.Start,
         offset,
       });
     },
-    [virtuosoRef, hasPinnedVerses],
+    [virtuosoRef, hasPinnedVerses, isNavbarVisible],
   );
 
   useEffect(() => {

@@ -67,7 +67,12 @@ const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSele
 
   if (onClick) {
     return (
-      <button type="button" className={tagClassName} onClick={onClick}>
+      <button
+        type="button"
+        className={tagClassName}
+        onClick={onClick}
+        aria-label={t('go-to-verse', { verseKey: localizedVerseKey })}
+      >
         {verseKeySpan}
         {removeButton}
       </button>

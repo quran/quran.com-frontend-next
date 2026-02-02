@@ -5,6 +5,7 @@ import { PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 /**
  * Check if a SWR cache key matches a pinned items endpoint.
  *
+ * @param {unknown} key - The SWR cache key to check.
  * @returns {boolean} Whether the key matches a pinned items endpoint.
  */
 export const isPinnedItemsCacheKey = (key: unknown): boolean =>

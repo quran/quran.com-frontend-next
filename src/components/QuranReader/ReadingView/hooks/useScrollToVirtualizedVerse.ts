@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import useFetchVersePageNumber from './useFetchVersePageNumber';
 
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
@@ -16,6 +17,7 @@ import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
 
 const PINNED_VERSES_BAR_OFFSET = -90;
+const NAVBAR_OFFSET = -54;
 
 /**
  * This hook listens to startingVerse query param and navigate to the
@@ -54,6 +56,7 @@ const useScrollToVirtualizedReadingView = (
 
   const pinnedVerses = useSelector(selectPinnedVerses);
   const hasPinnedVerses = pinnedVerses.length > 0;
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
 
   const fetchVersePageNumber = useFetchVersePageNumber(
     quranReaderStyles.quranFont,
@@ -82,7 +85,11 @@ const useScrollToVirtualizedReadingView = (
       if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
-      const pinnedOffset = hasPinnedVerses ? PINNED_VERSES_BAR_OFFSET : 0;
+      let pinnedOffset = 0;
+      if (hasPinnedVerses) {
+        pinnedOffset += PINNED_VERSES_BAR_OFFSET;
+        if (isNavbarVisible) pinnedOffset += NAVBAR_OFFSET;
+      }
 
       const initialDataFirstPage = initialData.verses[0]?.pageNumber;
       const firstPageOfCurrentChapter =
@@ -133,6 +140,7 @@ const useScrollToVirtualizedReadingView = (
       chapterId,
       fetchVersePageNumber,
       hasPinnedVerses,
+      isNavbarVisible,
     ],
   );
 

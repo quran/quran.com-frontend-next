@@ -3,7 +3,7 @@
 .pinnedSection {
   border-block-end: 1px solid var(--color-background-alternative-faint-new);
   @include breakpoints.smallerThanTablet {
-    padding: var(--spacing-small) var(--spacing-medium);
+    padding-block: var(--spacing-medium-px);
   }
 }
 

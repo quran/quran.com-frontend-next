@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { READING_MODE_TOP_OFFSET } from '../../observer';
 import { getPageIndexByPageNumber } from '../../utils/page';
 
+import { selectNavbar } from '@/redux/slices/navbar';
 import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import LookupRecord from 'types/LookupRecord';
 
 const PINNED_VERSES_BAR_OFFSET = 90;
+const NAVBAR_OFFSET = 54;
 
 enum ScrollDirection {
   Next = 'next',
@@ -48,6 +50,7 @@ const usePageNavigation = ({
 
   const pinnedVerses = useSelector(selectPinnedVerses);
   const hasPinnedVerses = pinnedVerses.length > 0;
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
 
   const scrollToPage = useCallback(
     (direction: ScrollDirection) => {
@@ -57,9 +60,11 @@ const usePageNavigation = ({
 
       if (isValidIndex && virtuosoRef.current) {
         currentPageIndexRef.current = newIndex;
-        const offset = hasPinnedVerses
-          ? -(READING_MODE_TOP_OFFSET + PINNED_VERSES_BAR_OFFSET)
-          : -READING_MODE_TOP_OFFSET;
+        let offset = -READING_MODE_TOP_OFFSET;
+        if (hasPinnedVerses) {
+          offset -= PINNED_VERSES_BAR_OFFSET;
+          if (isNavbarVisible) offset -= NAVBAR_OFFSET;
+        }
         virtuosoRef.current.scrollToIndex({
           index: newIndex,
           align: 'start',
@@ -67,7 +72,7 @@ const usePageNavigation = ({
         });
       }
     },
-    [pagesCount, virtuosoRef, hasPinnedVerses],
+    [pagesCount, virtuosoRef, hasPinnedVerses, isNavbarVisible],
   );
 
   const scrollToPreviousPage = useCallback(

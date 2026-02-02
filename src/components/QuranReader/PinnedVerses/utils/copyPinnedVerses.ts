@@ -37,24 +37,19 @@ const getVerseTextToCopy = async (
     };
   });
 
-  return new Promise((resolve) => {
-    copyVerse({
-      showRangeOfVerses: false,
-      rangeEndVerse: null,
-      rangeStartVerse: null,
-      shouldCopyFootnotes: false,
-      shouldIncludeTranslatorName: true,
-      shouldCopyFont: QuranFont.Uthmani,
-      translations,
-      verseKey,
-      lang: lang as Language,
-      chaptersData,
-    }).then((blob) => {
-      blob.text().then((text) => {
-        resolve(text);
-      });
-    });
+  const blob = await copyVerse({
+    showRangeOfVerses: false,
+    rangeEndVerse: null,
+    rangeStartVerse: null,
+    shouldCopyFootnotes: false,
+    shouldIncludeTranslatorName: true,
+    shouldCopyFont: QuranFont.Uthmani,
+    translations,
+    verseKey,
+    lang: lang as Language,
+    chaptersData,
   });
+  return blob.text();
 };
 
 /**
