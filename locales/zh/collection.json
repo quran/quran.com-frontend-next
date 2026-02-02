@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "您将丢失此收藏集中保存的所有诗句。",
     "subtitle": "确定要删除{{collectionName}}收藏吗？",
+    "subtitle-tagged": "您确定要删除吗？ <collectionName>{{collectionName}}</collectionName> ？",
     "title": "删除收藏"
   },
   "edit-collection": "编辑收藏",

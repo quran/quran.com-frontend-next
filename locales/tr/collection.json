@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Bu koleksiyonda kayıtlı tüm ayetleri kaybedeceksiniz.",
     "subtitle": "{{collectionName}} koleksiyonunu silmek istediğinizden emin misiniz?",
+    "subtitle-tagged": "Silmek istediğinizden emin misiniz? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Koleksiyonu sil"
   },
   "edit-collection": "Koleksiyonu Düzenle",

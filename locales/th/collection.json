@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "คุณจะสูญเสียบทกวีทั้งหมดที่บันทึกไว้ในชุดนี้",
     "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{collectionName}}",
+    "subtitle-tagged": "คุณแน่ใจหรือไม่ว่าต้องการลบ <collectionName>{{collectionName}}</collectionName> ?",
     "title": "ลบคอลเลกชัน"
   },
   "edit-collection": "แก้ไขคอลเลกชัน",

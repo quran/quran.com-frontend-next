@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "تمام آیات ذخیره شده در این مجموعه را از دست خواهید داد.",
     "subtitle": "آیا مطمئن هستید که می خواهید {{collectionName}} حذف کنید؟",
+    "subtitle-tagged": "مطمئنی که می‌خوای حذف کنی؟ <collectionName>{{collectionName}}</collectionName> ?",
     "title": "حذف مجموعه"
   },
   "edit-collection": "ویرایش مجموعه",

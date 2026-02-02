@@ -14,7 +14,8 @@
   "delete-collection-success": "ስብስቡ በተሳካ ሁኔታ ተሰርዟል",
   "delete-collection": {
     "description": "በዚህ ስብስብ ውስጥ የተቀመጡትን ጥቅሶች በሙሉ ታጣለህ።",
-    "subtitle": "{{collectionName}} ስብስብ ለመሰረዝ በእርግጠኝነት ይፈልጋሉ?",
+    "subtitle": " ስብስብ ለመሰረዝ በእርግጠኝነት ይፈልጋሉ?",
+    "subtitle-tagged": "እርግጠኛ ነህ መሰረዝ ትፈልጋለህ? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "ስብስብ ሰርዝ"
   },
   "edit-collection": "ስብስብን አርትዕ ያድርጉ",

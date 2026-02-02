@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "آپ اس مجموعہ میں محفوظ کردہ تمام آیات کو کھو دیں گے۔",
     "subtitle": "کیا آپ واقعی {{collectionName}} کلیکشن ڈلیٹ کرنا چاہتے ہیں؟",
+    "subtitle-tagged": "کیا آپ واقعی حذف کرنا چاہتے ہیں۔ <collectionName>{{collectionName}}</collectionName> ?",
     "title": "کلیکشن کو ڈلیٹ کریں۔"
   },
   "edit-collection": "مجموعہ میں ترمیم کریں۔",

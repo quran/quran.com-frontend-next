@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Utapoteza mistari yote iliyohifadhiwa ndani ya mkusanyiko huu.",
     "subtitle": "Je, una uhakika unataka kufuta mkusanyiko {{collectionName}}?",
+    "subtitle-tagged": "Una uhakika unataka kufuta <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Futa mkusanyiko"
   },
   "edit-collection": "Hariri Mkusanyiko",

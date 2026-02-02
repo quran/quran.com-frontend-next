@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Вы потеряете все стихи, сохраненные в этой коллекции.",
     "subtitle": "Вы уверены, что хотите удалить {{collectionName}} ?",
+    "subtitle-tagged": "Вы уверены, что хотите удалить? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Удалить коллекцию"
   },
   "edit-collection": "Редактировать коллекцию",

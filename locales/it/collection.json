@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Perderai tutti i versetti salvati in questa raccolta.",
     "subtitle": "Sei sicuro di voler eliminare {{collectionName}} ?",
+    "subtitle-tagged": "Sei sicuro di voler eliminare <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Elimina raccolta"
   },
   "edit-collection": "Modifica raccolta",

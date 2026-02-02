@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Anda akan kehilangan semua ayat yang disimpan dalam koleksi ini.",
     "subtitle": "Adakah anda pasti mahu memadamkan {{collectionName}} ?",
+    "subtitle-tagged": "Adakah anda pasti mahu memadam <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Padamkan koleksi"
   },
   "edit-collection": "Sunting Koleksi",

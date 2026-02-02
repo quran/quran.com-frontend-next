@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Bạn sẽ mất tất cả các câu thơ đã lưu trong bộ sưu tập này.",
     "subtitle": "Bạn có chắc chắn muốn xóa không? Bộ sưu tập {{collectionName}}?",
+    "subtitle-tagged": "Bạn có chắc chắn muốn xóa không? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Xóa bộ sưu tập"
   },
   "edit-collection": "Chỉnh sửa bộ sưu tập",

@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Je verliest alle verzen die in deze verzameling zijn opgeslagen.",
     "subtitle": "Weet u zeker dat u {{collectionName}} wilt verwijderen?",
+    "subtitle-tagged": "Weet je zeker dat je dit wilt verwijderen? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Verzameling verwijderen"
   },
   "edit-collection": "Collectie bewerken",

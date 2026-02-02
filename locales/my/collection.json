@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "ဤစုစည်းမှုတွင် သိမ်းဆည်းထားသော ကျမ်းပိုဒ်အားလုံးကို သင်ဆုံးရှုံးသွားလိမ့်မည်။",
     "subtitle": "ဖျက်ချင်တာ သေချာလား {{collectionName}} စုဆောင်းမှု?",
+    "subtitle-tagged": "ဖျက်ချင်တာ သေချာလား <collectionName>{{collectionName}}</collectionName> ?",
     "title": "စုစည်းမှုကို ဖျက်ပါ"
   },
   "edit-collection": "စုစည်းမှုကို တည်းဖြတ်ပါ",

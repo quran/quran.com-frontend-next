@@ -15,6 +15,7 @@
   "delete-collection": {
     "description": "Vous perdrez tous les versets enregistrés dans cette collection.",
     "subtitle": "Voulez-vous vraiment supprimer la collection {{collectionName}} ?",
+    "subtitle-tagged": "Êtes-vous sûr de vouloir supprimer <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Supprimer la collection"
   },
   "edit-collection": "Modifier la collection",
