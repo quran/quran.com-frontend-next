@@ -4,15 +4,21 @@
   "back-to-collection-list": "Koleksiyon listesine geri dön",
   "collapse-all": "Tüm ayetleri daralt",
   "collection-list-empty": "Koleksiyon listesi boş. Henüz bir koleksiyon oluşturmadınız",
+  "collection-name": "Koleksiyon adı",
   "collections": "Koleksiyonlar",
   "delete-bookmark": {
     "subtitle": "{{bookmarkName}} ' {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
     "title": "Yer işaretini sil"
   },
+  "delete-collection-action": "Koleksiyonu Sil",
+  "delete-collection-success": "Koleksiyon başarıyla silindi.",
   "delete-collection": {
+    "description": "Bu koleksiyonda kayıtlı tüm ayetleri kaybedeceksiniz.",
     "subtitle": "{{collectionName}} koleksiyonunu silmek istediğinizden emin misiniz?",
     "title": "Koleksiyonu sil"
   },
+  "edit-collection": "Koleksiyonu Düzenle",
+  "edit-collection-success": "Koleksiyon başarıyla güncellendi.",
   "empty": "Koleksiyon boş",
   "expand-all": "Tüm ayetleri genişlet",
   "go-to-ayah": "Ayete git",

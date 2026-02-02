@@ -4,15 +4,21 @@
   "back-to-collection-list": "Torna all'elenco di raccolta",
   "collapse-all": "Comprimi tutti i versi",
   "collection-list-empty": "L'elenco delle raccolte è vuoto. Non hai ancora creato nessuna raccolta",
+  "collection-name": "Nome della raccolta",
   "collections": "Collezioni",
   "delete-bookmark": {
     "subtitle": "Sei sicuro di voler eliminare {{bookmarkName}} dalla {{collectionName}} ?",
     "title": "Elimina segnalibro"
   },
+  "delete-collection-action": "Elimina raccolta",
+  "delete-collection-success": "Raccolta eliminata con successo",
   "delete-collection": {
+    "description": "Perderai tutti i versetti salvati in questa raccolta.",
     "subtitle": "Sei sicuro di voler eliminare {{collectionName}} ?",
     "title": "Elimina raccolta"
   },
+  "edit-collection": "Modifica raccolta",
+  "edit-collection-success": "Raccolta aggiornata con successo",
   "empty": "La raccolta è vuota",
   "expand-all": "Espandi tutti i versi",
   "go-to-ayah": "Vai a si",

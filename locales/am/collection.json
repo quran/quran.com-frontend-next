@@ -4,15 +4,21 @@
   "back-to-collection-list": "ወደ ስብስብ ዝርዝር ተመለስ",
   "collapse-all": "ሁሉንም አንቀጾች(አያቶች) ሰብስብ (ደብቅ)",
   "collection-list-empty": "የስብስብ ዝርዝሩ ባዶ ነው። እስካሁን ምንም ስብስብ አልፈጠሩም",
+  "collection-name": "የስብስብ ስም",
   "collections": "ስብስቦች",
   "delete-bookmark": {
     "subtitle": "እርግጠኛ ነዎት {{bookmarkName}} ከ {{collectionName}} ስብስብ መሰረዝ ይፈልጋሉ?",
     "title": "ዕልባት(ቡክማርክ) ሰርዝ"
   },
+  "delete-collection-action": "ስብስብ ሰርዝ",
+  "delete-collection-success": "ስብስቡ በተሳካ ሁኔታ ተሰርዟል",
   "delete-collection": {
+    "description": "በዚህ ስብስብ ውስጥ የተቀመጡትን ጥቅሶች በሙሉ ታጣለህ።",
     "subtitle": "{{collectionName}} ስብስብ ለመሰረዝ በእርግጠኝነት ይፈልጋሉ?",
     "title": "ስብስብ ሰርዝ"
   },
+  "edit-collection": "ስብስብን አርትዕ ያድርጉ",
+  "edit-collection-success": "ስብስብ በተሳካ ሁኔታ ተዘምኗል",
   "empty": "ስብስቡ ባዶ ነው",
   "expand-all": "ሁሉንም ጥቅሶች ዘርጋ",
   "go-to-ayah": "ወደ አያህ ሂድ",

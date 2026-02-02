@@ -4,15 +4,21 @@
   "back-to-collection-list": "Terug naar collectielijst",
   "collapse-all": "Vouw alle verzen samen",
   "collection-list-empty": "Verzamellijst is leeg. Je hebt nog geen collectie gemaakt",
+  "collection-name": "Collectienaam",
   "collections": "Collecties",
   "delete-bookmark": {
     "subtitle": "Weet u zeker dat u {{bookmarkName}} uit {{collectionName}} wilt verwijderen?",
     "title": "Bladwijzer verwijderen"
   },
+  "delete-collection-action": "Verwijder verzameling",
+  "delete-collection-success": "Collectie succesvol verwijderd",
   "delete-collection": {
+    "description": "Je verliest alle verzen die in deze verzameling zijn opgeslagen.",
     "subtitle": "Weet u zeker dat u {{collectionName}} wilt verwijderen?",
     "title": "Verzameling verwijderen"
   },
+  "edit-collection": "Collectie bewerken",
+  "edit-collection-success": "Collectie succesvol bijgewerkt",
   "empty": "Collectie is leeg",
   "expand-all": "vouw alle verzen uit",
   "go-to-ayah": "Ga naar ayah",

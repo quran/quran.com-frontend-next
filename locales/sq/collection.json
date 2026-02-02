@@ -4,15 +4,21 @@
   "back-to-collection-list": "Kthehu te lista e koleksioneve",
   "collapse-all": "Palos të gjitha vargjet",
   "collection-list-empty": "Lista e koleksioneve është bosh. Nuk keni krijuar ende asnjë koleksion",
+  "collection-name": "Emri i koleksionit",
   "collections": "Koleksionet",
   "delete-bookmark": {
     "subtitle": "Jeni i sigurt që dëshironi të fshini {{bookmarkName}} nga {{collectionName}} ?",
     "title": "Fshi faqerojtësin"
   },
+  "delete-collection-action": "Fshij koleksionin",
+  "delete-collection-success": "Koleksioni u fshi me sukses.",
   "delete-collection": {
+    "description": "Do të humbasësh të gjitha vargjet e ruajtura brenda këtij koleksioni.",
     "subtitle": "Jeni i sigurt që dëshironi të fshini {{collectionName}} ?",
     "title": "Fshi koleksionin"
   },
+  "edit-collection": "Modifiko Koleksionin",
+  "edit-collection-success": "Koleksioni u përditësua me sukses.",
   "empty": "Koleksioni është bosh",
   "expand-all": "Zgjero të gjitha vargjet",
   "go-to-ayah": "Shko te ajah",

@@ -4,15 +4,21 @@
   "back-to-collection-list": "Kembali ke daftar koleksi",
   "collapse-all": "Ciutkan semua ayat",
   "collection-list-empty": "Daftar koleksi kosong. Anda belum membuat koleksi apa pun",
+  "collection-name": "Nama koleksi",
   "collections": "Koleksi",
   "delete-bookmark": {
     "subtitle": "Yakin ingin menghapus {{PenandaName}} dari {{collectionName}} ?",
     "title": "Hapus Penanda"
   },
+  "delete-collection-action": "Hapus Koleksi",
+  "delete-collection-success": "Koleksi berhasil dihapus.",
   "delete-collection": {
+    "description": "Anda akan kehilangan semua ayat yang tersimpan di dalam koleksi ini.",
     "subtitle": "Yakin ingin menghapus {{collectionName}} ?",
     "title": "Hapus koleksi"
   },
+  "edit-collection": "Edit Koleksi",
+  "edit-collection-success": "Koleksi berhasil diperbarui.",
   "empty": "Koleksi kosong",
   "expand-all": "Perluas semua ayat",
   "go-to-ayah": "Pergi ke ayat",

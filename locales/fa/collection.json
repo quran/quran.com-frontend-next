@@ -4,15 +4,21 @@
   "back-to-collection-list": "بازگشت به لیست مجموعه",
   "collapse-all": "همه آیات را جمع کنید",
   "collection-list-empty": "لیست مجموعه خالی است. شما هنوز هیچ مجموعه ای ایجاد نکرده اید",
+  "collection-name": "نام مجموعه",
   "collections": "مجموعه ها",
   "delete-bookmark": {
     "subtitle": "آیا مطمئنید که می‌خواهید {{bookmarkName}} از {{collectionName}} حذف کنید؟",
     "title": "حذف نشانک"
   },
+  "delete-collection-action": "حذف مجموعه",
+  "delete-collection-success": "مجموعه با موفقیت حذف شد",
   "delete-collection": {
+    "description": "تمام آیات ذخیره شده در این مجموعه را از دست خواهید داد.",
     "subtitle": "آیا مطمئن هستید که می خواهید {{collectionName}} حذف کنید؟",
     "title": "حذف مجموعه"
   },
+  "edit-collection": "ویرایش مجموعه",
+  "edit-collection-success": "مجموعه با موفقیت به‌روزرسانی شد",
   "empty": "مجموعه خالی است",
   "expand-all": "همه آیات را بسط دهید",
   "go-to-ayah": "برو به آیه",

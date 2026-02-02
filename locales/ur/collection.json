@@ -4,15 +4,21 @@
   "back-to-collection-list": "مجموعات کی فہرست میں واپس جائیں۔",
   "collapse-all": "تمام آیات کو سمیٹیں۔",
   "collection-list-empty": "مجموعات کی فہرست خالی ہے۔ آپ نے ابھی تک کوئی کلیکشن نہیں بنائ۔",
+  "collection-name": "مجموعہ کا نام",
   "collections": "مجموعات",
   "delete-bookmark": {
     "subtitle": "کیا آپ واقعی {{bookmarkName}} کو {{collectionName}} کلیکشن سے ڈلیٹ کرنا چاہتے ہیں؟",
     "title": "بک مارک کو ڈلیٹ کریں۔"
   },
+  "delete-collection-action": "مجموعہ حذف کریں۔",
+  "delete-collection-success": "مجموعہ کامیابی کے ساتھ حذف ہو گیا۔",
   "delete-collection": {
+    "description": "آپ اس مجموعہ میں محفوظ کردہ تمام آیات کو کھو دیں گے۔",
     "subtitle": "کیا آپ واقعی {{collectionName}} کلیکشن ڈلیٹ کرنا چاہتے ہیں؟",
     "title": "کلیکشن کو ڈلیٹ کریں۔"
   },
+  "edit-collection": "مجموعہ میں ترمیم کریں۔",
+  "edit-collection-success": "مجموعہ کامیابی کے ساتھ اپ ڈیٹ ہو گیا۔",
   "empty": "مجموعات کی فہرست خالی ہے۔",
   "expand-all": "تمام آیات کو پھیلائیں۔",
   "go-to-ayah": "آیت پر جائیں۔",

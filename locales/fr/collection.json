@@ -4,15 +4,21 @@
   "back-to-collection-list": "Retour à la liste des collections",
   "collapse-all": "Replier toutes les Ayahs",
   "collection-list-empty": "La liste des collections est vide. Vous n'avez pas encore créé de collection",
+  "collection-name": "Nom de la collection",
   "collections": "Collections",
   "delete-bookmark": {
     "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de la collection {{collectionName}} ?",
     "title": "Supprimer le favori"
   },
+  "delete-collection-action": "Supprimer la collection",
+  "delete-collection-success": "Collection supprimée avec succès",
   "delete-collection": {
+    "description": "Vous perdrez tous les versets enregistrés dans cette collection.",
     "subtitle": "Voulez-vous vraiment supprimer la collection {{collectionName}} ?",
     "title": "Supprimer la collection"
   },
+  "edit-collection": "Modifier la collection",
+  "edit-collection-success": "Collection mise à jour avec succès",
   "empty": "La collection est vide",
   "expand-all": "Déplier toutes les Ayahs",
   "go-to-ayah": "Aller à l'Ayah",

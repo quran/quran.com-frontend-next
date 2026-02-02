@@ -4,15 +4,21 @@
   "back-to-collection-list": "Trở lại danh sách bộ sưu tập",
   "collapse-all": "Thu gọn tất cả các câu",
   "collection-list-empty": "Danh sách bộ sưu tập trống. Bạn chưa tạo bất kỳ bộ sưu tập nào.",
+  "collection-name": "Tên bộ sưu tập",
   "collections": "Bộ sưu tập",
   "delete-bookmark": {
     "subtitle": "Bạn có chắc chắn muốn xóa không? {{bookmarkName}} từ bộ sưu tập {{collectionName}}?",
     "title": "Xóa đánh dấu trang"
   },
+  "delete-collection-action": "Xóa bộ sưu tập",
+  "delete-collection-success": "Bộ sưu tập đã được xóa thành công.",
   "delete-collection": {
+    "description": "Bạn sẽ mất tất cả các câu thơ đã lưu trong bộ sưu tập này.",
     "subtitle": "Bạn có chắc chắn muốn xóa không? Bộ sưu tập {{collectionName}}?",
     "title": "Xóa bộ sưu tập"
   },
+  "edit-collection": "Chỉnh sửa bộ sưu tập",
+  "edit-collection-success": "Bộ sưu tập đã được cập nhật thành công.",
   "empty": "Bộ sưu tập trống",
   "expand-all": "Mở rộng tất cả các câu",
   "go-to-ayah": "Đi đến Ayah",

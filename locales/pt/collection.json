@@ -4,15 +4,21 @@
   "back-to-collection-list": "Voltar à lista de coleções",
   "collapse-all": "Recolher todos os versos",
   "collection-list-empty": "A lista de coleções está vazia. Você ainda não criou nenhuma coleção",
+  "collection-name": "Nome da coleção",
   "collections": "Coleções",
   "delete-bookmark": {
     "subtitle": "Tem certeza de que deseja excluir {{bookmarkName}} da {{collectionName}} ?",
     "title": "Excluir favorito"
   },
+  "delete-collection-action": "Excluir coleção",
+  "delete-collection-success": "Coleção excluída com sucesso",
   "delete-collection": {
+    "description": "Você perderá todos os versículos salvos nesta coleção.",
     "subtitle": "Tem certeza de que deseja excluir a {{collectionName}} ?",
     "title": "Excluir coleção"
   },
+  "edit-collection": "Editar coleção",
+  "edit-collection-success": "Coleção atualizada com sucesso",
   "empty": "A coleção está vazia",
   "expand-all": "Expandir todos os versos",
   "go-to-ayah": "Vá para ayah",
