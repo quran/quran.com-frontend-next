@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unused-prop-types */
+
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
@@ -9,6 +11,7 @@ import CollectionVerseCell from './CollectionVerseCell';
 
 import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
+import { CollectionDetailSortOption } from '@/types/CollectionSortOptions';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
@@ -22,6 +25,11 @@ type CollectionDetailProps = {
   onItemDeleted?: (bookmarkId: string) => void;
   shouldShowTitle?: boolean;
   onBack?: () => void;
+
+  // TODO: Remove these props when the collection detail page is updated to use the new collection detail view
+  onSortByChange?: (newVal: CollectionDetailSortOption) => void;
+  sortBy?: CollectionDetailSortOption;
+
   isSelectMode?: boolean;
   onToggleBookmarkSelection?: (bookmarkId: string) => void;
   onToggleCardExpansion?: (bookmarkId: string) => void;

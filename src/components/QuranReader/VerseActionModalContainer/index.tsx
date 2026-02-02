@@ -7,6 +7,7 @@ import AdvancedCopyModal from './AdvancedCopyModal';
 import BookmarkModal from './BookmarkModal';
 import FeedbackModal from './FeedbackModal';
 import NotesModals from './NotesModals';
+import ReaderBioModal from './ReaderBioModal';
 
 import useBatchedCountRangeNotes from '@/hooks/auth/useBatchedCountRangeNotes';
 import {
@@ -19,6 +20,7 @@ import {
   selectVerseActionModalEditingNote,
   selectVerseActionModalIsOpen,
   selectVerseActionModalIsTranslationView,
+  selectVerseActionModalReaderBioReader,
   selectVerseActionModalPreviousModalType,
   selectVerseActionModalStudyModeRestoreState,
   selectVerseActionModalType,
@@ -44,6 +46,7 @@ const VerseActionModalContainer: React.FC = () => {
   const isTranslationView = useSelector(selectVerseActionModalIsTranslationView);
   const wasOpenedFromStudyMode = useSelector(selectVerseActionModalWasOpenedFromStudyMode);
   const studyModeRestoreState = useSelector(selectVerseActionModalStudyModeRestoreState);
+  const readerBioReader = useSelector(selectVerseActionModalReaderBioReader);
   const previousModalType = useSelector(selectVerseActionModalPreviousModalType);
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
 
@@ -174,6 +177,18 @@ const VerseActionModalContainer: React.FC = () => {
         wasOpenedFromStudyMode={wasOpenedFromStudyMode}
         onClose={handleAdvancedCopyClose}
         onBack={handleBackToStudyMode}
+      />
+    );
+  }
+
+  if (modalType === VerseActionModalType.READER_BIO && readerBioReader) {
+    return (
+      <ReaderBioModal
+        reader={readerBioReader}
+        isOpen={isOpen}
+        onClose={handleClose}
+        onBack={handleBackToStudyMode}
+        wasOpenedFromStudyMode={wasOpenedFromStudyMode}
       />
     );
   }

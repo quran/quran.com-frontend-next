@@ -1,0 +1,41 @@
+@use 'src/styles/breakpoints';
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+  position: relative;
+  padding: var(--spacing-medium2);
+  background: var(--background);
+  color: var(--color);
+  border-radius: var(--border-radius-small-px);
+}
+
+.arabicText {
+  font-size: var(--font-size-xxxlarge-px);
+  font-family: UthmanicHafs;
+  font-weight: var(--font-weight-medium);
+}
+
+.transliteration {
+  font-size: var(--font-size-normal);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.translation {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+}
+
+.separator {
+  inline-size: 100%;
+  block-size: var(--spacing-hairline-px);
+  background: var(--border);
+}
+
+.explanation {
+  font-size: var(--font-size-normal);
+  line-height: 1.6;
+}

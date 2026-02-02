@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,11 +6,13 @@ import useTranslation from 'next-translate/useTranslation';
 import { StudyModeTabId } from './StudyModeBottomActions';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
@@ -28,6 +30,10 @@ export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessons
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
+  loading: TafsirSkeleton,
+});
+
+const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
   loading: TafsirSkeleton,
 });
 
@@ -57,6 +63,7 @@ export const TAB_COMPONENTS: Partial<
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
+  [StudyModeTabId.QIRAAT]: StudyModeQiraatTab,
   [StudyModeTabId.RELATED_VERSES]: StudyModeRelatedVersesTab,
 };
 
@@ -93,16 +100,24 @@ export const useStudyModeTabs = ({
 
   const { data: questionData, isLoading: isLoadingQuestions } =
     useBatchedCountRangeQuestions(verseKey);
-
-  // Check if questions exist and their type
   const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
 
-  useEffect(() => {
+  const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
+
+  // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender.
+  useLayoutEffect(() => {
+    // Auto-close Answers tab when there are no questions
     if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
       onTabChange?.(null);
     }
-  }, [activeTab, hasQuestions, onTabChange]);
+
+    // Auto-close Qiraat tab when there are no qiraat
+    if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
+      onTabChange?.(null);
+    }
+  }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -137,6 +152,13 @@ export const useStudyModeTabs = ({
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: () => handleTabClick(StudyModeTabId.ANSWERS),
       condition: hasQuestions,
+    },
+    {
+      id: StudyModeTabId.QIRAAT,
+      label: t('quran-reader:qiraat.title'),
+      icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
+      condition: hasQiraat,
     },
     {
       id: StudyModeTabId.RELATED_VERSES,

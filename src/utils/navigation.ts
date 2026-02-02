@@ -30,7 +30,7 @@ export const ROUTES = {
   SITEMAP: '/sitemap.xml',
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
-  NOTIFICATION_SETTINGS: '/notification-settings',
+  COLLECTIONS_ALL: '/collections/all',
   RAMADAN_2026: '/ramadan2026',
   RAMADAN_CHALLENGE: '/ramadanchallenge',
   // TODO: add all static routes here for incremental adoption
@@ -52,7 +52,7 @@ export const AUTH_ROUTES = [
 export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
-  ROUTES.NOTIFICATION_SETTINGS,
+  ROUTES.COLLECTIONS_ALL,
   ROUTES.COMPLETE_SIGNUP,
 ];
 
@@ -238,6 +238,14 @@ export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${ve
  */
 export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/related-verse`;
+
+/**
+ * Get the href link to Qiraat of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseQiraatNavigationUrl = (verseKey: string): string => `/${verseKey}/qiraat`;
 
 /**
  * Get the href link to a specific answer with its associated verse key.
@@ -457,6 +465,10 @@ export const getProfileNavigationUrl = () => {
   return '/profile';
 };
 
+export const getCollectionNavigationUrl = (collectionId: string) => {
+  return `/collections/${collectionId}`;
+};
+
 export const getReadingGoalNavigationUrl = (example?: string) =>
   example && example.trim() !== ''
     ? `/reading-goal?example=${encodeURIComponent(example)}`
@@ -474,6 +486,8 @@ export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress
 
 export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
 
+export const getNotesNavigationUrl = () => '/notes-and-reflections';
+
 export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
 
 export const getResetPasswordNavigationUrl = () => `/reset-password`;
@@ -481,7 +495,6 @@ export const getResetPasswordNavigationUrl = () => `/reset-password`;
 export const getVerifyEmailNavigationUrl = (email?: string) =>
   `/verify-email${email ? `?${QueryParam.EMAIL}=${email}` : ''}`;
 
-export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   const baseUrl = '/media';

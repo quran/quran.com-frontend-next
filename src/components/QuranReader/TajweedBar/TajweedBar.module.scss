@@ -19,18 +19,8 @@ $pixel: 1px;
   z-index: var(--z-index-min);
 }
 
-.visibleContainer {
-  @include breakpoints.smallerThanTablet {
-    margin-block-start: 0px;
-  }
-  inline-size: 100%;
-  color: var(--color-text-default);
-  text-align: center;
-  background: var(--color-background-elevated);
-}
-
-.rulesWrapper {
-  inline-size: 100%;
+.hiddenContainer {
+  transform: translateY(calc(-100% + var(--tajweed-trigger-height)));
 }
 
 .tajweedContainer {

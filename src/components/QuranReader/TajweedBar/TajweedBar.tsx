@@ -1,23 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TajweedBar.module.scss';
 
 import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import {
-  selectContextMenu,
   selectIsTajweedBarExpanded,
   setIsTajweedBarExpanded,
 } from '@/redux/slices/QuranReader/contextMenu';
 import { logEvent } from '@/utils/eventLogger';
 
 // Ensures bar starts off-screen before measurement to prevent flash on mount
-const DEFAULT_COLLAPSED_HEIGHT = 100;
-
 const TAJWEED_RULES = [
   'edgham',
   'mad-2',
@@ -34,9 +31,7 @@ const TajweedColors = () => {
   const ref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
-  const [height, setHeight] = useState(DEFAULT_COLLAPSED_HEIGHT);
   const showTajweedBar = useSelector(selectIsTajweedBarExpanded);
-  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
 
   const { themeVariant } = useThemeDetector();
 
@@ -49,16 +44,10 @@ const TajweedColors = () => {
     }
   };
 
-  useEffect(() => {
-    if (ref.current && ref.current.clientHeight > 0) {
-      setHeight(ref.current.clientHeight);
-    }
-  }, []);
-
   return (
     <div
       className={classNames(styles.container, {
-        [styles.visibleContainer]: !isExpanded,
+        [styles.hiddenContainer]: !showTajweedBar,
       })}
     >
       <div

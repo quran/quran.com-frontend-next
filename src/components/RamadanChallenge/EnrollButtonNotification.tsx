@@ -5,6 +5,7 @@ import { ChannelTypeEnum } from '@novu/headless';
 import { useHeadlessService } from '../Notifications/hooks/useHeadlessService';
 
 import EnrollButton from './EnrollButton';
+import styles from './EnrollButton.module.scss';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -108,6 +109,7 @@ const EnrollButtonNotification = ({
       isLoading={isEnrollLoading}
       isDisabled={isEnabled || isEnrollLoading}
       aria-live="polite"
+      className={styles.button}
     >
       {isEnabled ? subscribedText : enrollText}
     </Button>
