@@ -81,10 +81,13 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const onSortByChange = (newSortByVal: CollectionDetailSortOption) => {
-    logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
-    setSortBy(newSortByVal);
-  };
+  const onSortByChange = useCallback(
+    (newSortByVal: CollectionDetailSortOption) => {
+      logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
+      setSortBy(newSortByVal);
+    },
+    [sortBy],
+  );
 
   // Fetch all bookmarks at once
   const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
