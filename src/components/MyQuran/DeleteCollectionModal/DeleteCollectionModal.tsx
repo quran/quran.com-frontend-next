@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './DeleteCollectionModal.module.scss';
@@ -54,8 +55,12 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
           {/* Content - Two paragraphs */}
           <div className={styles.content}>
             <p className={styles.subtitle}>
-              {t('delete-collection.subtitle')}{' '}
-              <span className={styles.collectionName}>{collectionName}</span>?
+              <Trans
+                i18nKey="delete-collection.subtitle-tagged"
+                ns="collection"
+                components={{ collectionName: <span className={styles.collectionName} /> }}
+                values={{ collectionName }}
+              />
             </p>
             <p className={styles.description}>{t('delete-collection.description')}</p>
           </div>

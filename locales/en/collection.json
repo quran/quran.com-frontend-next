@@ -14,7 +14,8 @@
   "delete-collection-success": "Collection deleted successfully",
   "delete-collection": {
     "description": "You will lose all of the verses saved inside this collection.",
-    "subtitle": "Are you sure you want to delete",
+    "subtitle": "Are you sure you want to delete {{collectionName}} ?",
+    "subtitle-tagged": "Are you sure you want to delete <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Delete Collection"
   },
   "edit-collection": "Edit Collection",
