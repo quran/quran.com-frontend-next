@@ -31,8 +31,6 @@ export const ROUTES = {
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
   COLLECTIONS_ALL: '/collections/all',
-  NOTES: '/notes-and-reflections',
-  NOTIFICATION_SETTINGS: '/notification-settings',
   RAMADAN_2026: '/ramadan2026',
   RAMADAN_CHALLENGE: '/ramadanchallenge',
   // TODO: add all static routes here for incremental adoption
@@ -55,8 +53,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
   ROUTES.COLLECTIONS_ALL,
-  ROUTES.NOTES,
-  ROUTES.NOTIFICATION_SETTINGS,
   ROUTES.COMPLETE_SIGNUP,
 ];
 
@@ -491,7 +487,6 @@ export const getResetPasswordNavigationUrl = () => `/reset-password`;
 export const getVerifyEmailNavigationUrl = (email?: string) =>
   `/verify-email${email ? `?${QueryParam.EMAIL}=${email}` : ''}`;
 
-export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
   const baseUrl = '/media';

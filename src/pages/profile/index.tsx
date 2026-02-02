@@ -39,7 +39,11 @@ const ProfilePage: FC = () => {
         noindex
       />
       <HeaderNavigation title={t('my-profile')} />
-      <PageContainer isSheetsLike className={styles.pageContainer}>
+      <PageContainer
+        isSheetsLike
+        wrapperClassName={styles.wrapperSheets}
+        className={styles.pageContainer}
+      >
         <div className={styles.topDivider}>
           <Separator />
         </div>

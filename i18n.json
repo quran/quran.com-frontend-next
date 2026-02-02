@@ -69,7 +69,6 @@
     "/ramadan": ["ramadan-activities"],
     "/ramadanchallenge": ["ramadan-activities"],
     "/beyond-ramadan": ["ramadan-activities"],
-    "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
     "/media": ["media"],
     "/take-notes": ["take-notes"],

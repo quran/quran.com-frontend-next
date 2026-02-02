@@ -14,7 +14,6 @@ import BookmarkFilledIcon from '@/icons/bookmark_filled.svg';
 import ClockIcon from '@/icons/clock.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
-import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import { setIsNavigationDrawerOpen } from '@/redux/slices/navbar';
 import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
@@ -25,7 +24,6 @@ import {
   getLoginNavigationUrl,
   getMyCoursesNavigationUrl,
   getMyQuranNavigationUrl,
-  getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
@@ -42,12 +40,6 @@ const MENU_ITEMS = [
     navigationUrl: getMyQuranNavigationUrl(),
     translationKey: 'my-quran',
     icon: <BookmarkFilledIcon className={styles.bookmarkIcon} />,
-  },
-  {
-    eventName: 'profile_avatar_notification_settings',
-    navigationUrl: getNotificationSettingsNavigationUrl(),
-    translationKey: 'notification-settings',
-    icon: <NotificationBellIcon />,
   },
   {
     eventName: 'profile_avatar_reading_history',
