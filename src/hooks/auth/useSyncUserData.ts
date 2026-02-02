@@ -147,7 +147,11 @@ const useSyncUserData = () => {
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const pinnedVerses = useSelector(selectPinnedVerses, shallowEqual);
+  const pinnedVersesRef = useRef(pinnedVerses);
+  pinnedVersesRef.current = pinnedVerses;
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
+  const guestReadingBookmarkRef = useRef(guestReadingBookmark);
+  guestReadingBookmarkRef.current = guestReadingBookmark;
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
@@ -156,7 +160,7 @@ const useSyncUserData = () => {
       const bookmarksCount =
         Object.keys(bookmarkedVerses).length + Object.keys(bookmarkedPages).length;
       // prettier-ignore
-      const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, recentReadingSessions, pinnedVerses, mushafId, guestReadingBookmark);
+      const payload = buildSyncPayload(bookmarkedVerses, bookmarkedPages, recentReadingSessions, pinnedVersesRef.current, mushafId, guestReadingBookmarkRef.current);
       try {
         const { lastSyncAt } = await syncUserLocalData(payload);
         mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
@@ -180,15 +184,7 @@ const useSyncUserData = () => {
         }
       }
     },
-    [
-      bookmarkedVerses,
-      bookmarkedPages,
-      recentReadingSessions,
-      pinnedVerses,
-      mushafId,
-      guestReadingBookmark,
-      mutate,
-    ],
+    [bookmarkedVerses, bookmarkedPages, recentReadingSessions, mushafId, mutate],
   );
 
   useEffect(() => {
