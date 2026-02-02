@@ -16,6 +16,7 @@ import useGetMushaf from '@/hooks/useGetMushaf';
 import useIsMobile from '@/hooks/useIsMobile';
 import { selectIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -43,6 +44,8 @@ const QuranReader = ({
   const isMobile = useIsMobile();
   const isExpanded = useSelector(selectIsExpanded);
   const mushaf = useGetMushaf();
+  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
+  const hasPinnedVerses = pinnedVerseKeys.length > 0;
 
   // Mobile collapsed state: when scrolled past threshold on mobile
   const isMobileCollapsed = isMobile && !isExpanded;
@@ -70,6 +73,7 @@ const QuranReader = ({
           [styles.mobileCollapsedTajweed]: isMobileCollapsed && showTajweedPadding,
           [styles.mobileTajweedExpanded]: isMobile && !isMobileCollapsed && showTajweedPadding,
           [styles.desktopTajweed]: !isMobile && showTajweedPadding,
+          [styles.withPinnedVerses]: hasPinnedVerses,
         })}
       >
         <div

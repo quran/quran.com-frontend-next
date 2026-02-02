@@ -17,6 +17,7 @@ export type StudyModeState = {
   activeTab: StudyModeTabId | null;
   highlightedWordLocation: string | null;
   previousState: PreviousStudyModeState | null;
+  showPinnedSection: boolean;
 };
 
 export const initialState: StudyModeState = {
@@ -26,12 +27,14 @@ export const initialState: StudyModeState = {
   activeTab: null,
   highlightedWordLocation: null,
   previousState: null,
+  showPinnedSection: false,
 };
 
 export type OpenStudyModePayload = {
   verseKey: string;
   activeTab?: StudyModeTabId | null;
   highlightedWordLocation?: string | null;
+  showPinnedSection?: boolean;
 };
 
 /**
@@ -52,6 +55,7 @@ const studyMode = createSlice({
         activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
+        showPinnedSection: payload.showPinnedSection ?? false,
       };
     },
     openStudyModeSsr: (state, { payload }: PayloadAction<OpenStudyModePayload>) => {
@@ -62,6 +66,7 @@ const studyMode = createSlice({
         activeTab: payload.activeTab ?? null,
         highlightedWordLocation: payload.highlightedWordLocation ?? null,
         previousState: state.previousState,
+        showPinnedSection: payload.showPinnedSection ?? false,
       };
     },
     closeStudyMode: () => {
@@ -103,6 +108,7 @@ const studyMode = createSlice({
         activeTab: state.previousState.activeTab,
         highlightedWordLocation: state.previousState.highlightedWordLocation,
         previousState: null,
+        showPinnedSection: state.showPinnedSection,
       };
     },
     clearPreviousState: (state) => {
@@ -122,6 +128,8 @@ export const selectStudyModeActiveTab = (state: RootState) => state.studyMode.ac
 export const selectStudyModeHighlightedWordLocation = (state: RootState) =>
   state.studyMode.highlightedWordLocation;
 export const selectStudyModePreviousState = (state: RootState) => state.studyMode.previousState;
+export const selectStudyModeShowPinnedSection = (state: RootState) =>
+  state.studyMode.showPinnedSection;
 
 export const {
   openStudyMode,

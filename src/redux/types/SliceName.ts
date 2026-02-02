@@ -33,6 +33,7 @@ enum SliceName {
   GUEST_BOOKMARK = 'guestBookmark',
   STUDY_MODE = 'studyMode',
   VERSE_ACTION_MODAL = 'verseActionModal',
+  PINNED_VERSES = 'pinnedVerses',
 }
 
 export default SliceName;

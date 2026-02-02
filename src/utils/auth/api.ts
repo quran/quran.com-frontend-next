@@ -50,6 +50,7 @@ import { Mushaf } from '@/types/QuranReader';
 import {
   CollectionsQueryParams,
   makeActivityDaysUrl,
+  makeAddBulkCollectionBookmarksUrl,
   makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
@@ -107,6 +108,12 @@ import {
   GetCoursesQueryParams,
   makeMapUrl,
   makeTranslationFeedbackUrl,
+  makeAddPinnedItemUrl,
+  makePinnedItemsUrl,
+  makeSyncPinnedItemsUrl,
+  makeBulkDeletePinnedItemsUrl,
+  makeClearPinnedItemsUrl,
+  makeDeletePinnedItemUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -123,6 +130,7 @@ import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
+import { PinnedItemDTO, PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
@@ -523,6 +531,26 @@ export const addCollectionBookmark = async ({
   });
 };
 
+export const addBulkCollectionBookmarks = async ({
+  collectionId,
+  bookmarks,
+  mushafId,
+}: {
+  collectionId: string;
+  bookmarks: Array<{
+    key: number;
+    type: BookmarkType;
+    verseNumber?: number;
+  }>;
+  mushafId: number;
+}): Promise<{ added: number; skipped: number }> => {
+  return postRequest(makeAddBulkCollectionBookmarksUrl(collectionId), {
+    collectionId,
+    bookmarks,
+    mushaf: mushafId,
+  });
+};
+
 export const deleteCollectionBookmarkById = async (collectionId: string, bookmarkId: string) => {
   return deleteRequest(makeDeleteCollectionBookmarkByIdUrl(collectionId, bookmarkId));
 };
@@ -834,6 +862,34 @@ export const submitTranslationFeedback = async (params: {
 }): Promise<{ success: boolean; message: string; feedbackId?: string }> => {
   return postRequest(makeTranslationFeedbackUrl(), params);
 };
+
+// Pinned Items
+export const getPinnedItems = async (
+  targetType?: PinnedItemTargetType,
+): Promise<{ success: boolean; data: { data: PinnedItemDTO[] } }> =>
+  privateFetcher(makePinnedItemsUrl(targetType));
+
+export const addPinnedItem = async (params: {
+  targetType: PinnedItemTargetType;
+  targetId: string;
+  metadata?: Record<string, unknown>;
+}): Promise<PinnedItemDTO> => postRequest(makeAddPinnedItemUrl(), params);
+
+export const deletePinnedItemById = async (pinnedItemId: string) =>
+  deleteRequest(makeDeletePinnedItemUrl(pinnedItemId));
+
+export const syncPinnedItems = async (
+  items: SyncPinnedItemPayload[],
+): Promise<{ synced: number; lastSyncAt: Date }> =>
+  postRequest(makeSyncPinnedItemsUrl(), { items });
+
+export const bulkDeletePinnedItems = async (
+  targetType: PinnedItemTargetType,
+  targetIds: string[],
+) => deleteRequest(makeBulkDeletePinnedItemsUrl(), { targetType, targetIds });
+
+export const clearPinnedItems = async (targetType?: PinnedItemTargetType) =>
+  deleteRequest(makeClearPinnedItemsUrl(), targetType ? { targetType } : undefined);
 
 const shouldRefreshToken = (error) => {
   return error?.message === 'must refresh token';
