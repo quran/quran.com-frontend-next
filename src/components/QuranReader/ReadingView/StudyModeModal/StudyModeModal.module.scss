@@ -118,37 +118,6 @@ button.nextButton {
   }
 }
 
-button.pinButton {
-  flex-shrink: 0;
-  border-radius: var(--border-radius-xsmall-px);
-  padding: var(--spacing-xsmall-px);
-  max-block-size: var(--spacing-large-px);
-  background: var(--color-background-alternative-faint);
-
-  svg {
-    inline-size: var(--spacing-small2-px);
-    block-size: var(--spacing-small2-px);
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-    background: var(--color-background-alternative-faint);
-  }
-}
-
-.pinIcon {
-  inline-size: var(--spacing-small2-px);
-  block-size: var(--spacing-small2-px);
-  color: var(--color-text-faded-new);
-  fill: none;
-}
-
-.pinIconFilled {
-  color: var(--color-blue-buttons-and-icons);
-  fill: var(--color-blue-buttons-and-icons);
-}
-
 .closeButton {
   margin-inline-start: auto;
   flex-shrink: 0;

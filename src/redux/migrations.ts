@@ -324,15 +324,5 @@ export default {
       ...state.quranReaderStyles,
       qnaFontScale: initialState.quranReaderStyles.qnaFontScale,
     },
-    pinnedVerses: {
-      verses: [],
-    },
-  }),
-  41: (state) => ({
-    ...state,
-    pinnedVerses: {
-      ...state.pinnedVerses,
-      verses: (state.pinnedVerses?.verses || []).map((v) => ({ ...v, serverId: undefined })),
-    },
   }),
 };

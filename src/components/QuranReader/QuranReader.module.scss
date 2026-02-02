@@ -38,7 +38,7 @@ $virtual-scrolling-height-bandage: calc(
   @include breakpoints.smallerThanTablet {
     padding-block-start: $quran-reader-padding-mobile;
   }
-  padding-block-start: calc(#{$quran-reader-padding} + var(--pinned-verses-bar-height));
+  padding-block-start: $quran-reader-padding;
   // padding-inline: var(--spacing-medium2-px);
   background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
@@ -49,7 +49,7 @@ $virtual-scrolling-height-bandage: calc(
   }
 
   @include breakpoints.smallerThanTablet {
-    padding-block-start: calc(var(--mobile-context-menu-height) + var(--pinned-verses-bar-height));
+    padding-block-start: var(--mobile-context-menu-height);
     // Faster expand with ease-out
     transition: padding-block-start var(--transition-fast) ease-out
       var(--mobile-stagger-delay-content);
@@ -87,24 +87,21 @@ $virtual-scrolling-height-bandage: calc(
 
 // Mobile collapsed state: when context menu is collapsed (scrolled past threshold)
 .mobileCollapsed {
-  padding-block-start: var(--pinned-verses-bar-height);
+  padding-block-start: 0;
   // Fast collapse with ease-in
   transition: padding-block-start var(--transition-fast) ease-in 0ms;
 }
 
 // Mobile collapsed state with Tajweed mushaf: needs extra padding for tajweed trigger
 .mobileCollapsedTajweed {
-  padding-block-start: calc(var(--tajweed-trigger-height) + var(--pinned-verses-bar-height));
+  padding-block-start: var(--tajweed-trigger-height);
   // Fast collapse with ease-in
   transition: padding-block-start var(--transition-fast) ease-in 0ms;
 }
 
 // Mobile expanded state with Tajweed mushaf: context menu + tajweed trigger
 .mobileTajweedExpanded {
-  padding-block-start: calc(
-    var(--mobile-context-menu-height) + var(--tajweed-trigger-height) +
-      var(--pinned-verses-bar-height)
-  );
+  padding-block-start: calc(var(--mobile-context-menu-height) + var(--tajweed-trigger-height));
   // Faster expand with ease-out, consistent with base container mobile styles
   transition: padding-block-start var(--transition-fast) ease-out
     var(--mobile-stagger-delay-content);
@@ -113,16 +110,6 @@ $virtual-scrolling-height-bandage: calc(
 // Desktop state with Tajweed mushaf: add extra padding for tajweed trigger
 .desktopTajweed {
   @include breakpoints.tablet {
-    padding-block-start: calc(
-      var(--navbar-height) + var(--tajweed-trigger-height) + var(--pinned-verses-bar-height)
-    );
-  }
-}
-
-.withPinnedVerses {
-  --pinned-verses-bar-height: 83px;
-
-  @include breakpoints.smallerThanTablet {
-    --pinned-verses-bar-height: 78px;
+    padding-block-start: calc(var(--navbar-height) + var(--tajweed-trigger-height));
   }
 }

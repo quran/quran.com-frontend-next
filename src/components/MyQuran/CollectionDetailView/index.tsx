@@ -2,8 +2,7 @@
 import React, { useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 
 import styles from './CollectionDetailView.module.scss';
 
@@ -19,19 +18,12 @@ import VerseActionModalContainer from '@/components/QuranReader/VerseActionModal
 import { ArrowDirection } from '@/dls/Sorter/Sorter';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import useIsLoggedIn from '@/hooks/auth/useIsLoggedIn';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
-import { broadcastPinnedVerses, PinnedVersesBroadcastType } from '@/hooks/usePinnedVersesBroadcast';
 import ChevronLeft from '@/icons/chevron-left.svg';
 import MenuMoreHorizIcon from '@/icons/menu_more_horiz.svg';
-import { logErrorToSentry } from '@/lib/sentry';
-import { pinVerses } from '@/redux/slices/QuranReader/pinnedVerses';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from '@/types/BookmarkType';
-import { getMushafId } from '@/utils/api';
-import { deleteCollectionBookmarkById, privateFetcher, syncPinnedItems } from '@/utils/auth/api';
+import { deleteCollectionBookmarkById, privateFetcher } from '@/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from '@/utils/auth/apiPaths';
-import { buildPinnedSyncPayload, isPinnedItemsCacheKey } from '@/utils/auth/pinnedItems';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
@@ -53,14 +45,9 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   searchQuery,
 }) => {
   const { t, lang } = useTranslation('my-quran');
-  const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
-  const { isLoggedIn } = useIsLoggedIn();
-  const { mutate: globalMutate } = useSWRConfig();
-  const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
 
   const [isSelectMode, setIsSelectMode] = useState(false);
   const [selectedBookmarks, setSelectedBookmarks] = useState<Set<string>>(new Set());
@@ -78,7 +65,7 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {
     sortBy,
     type: BookmarkType.Ayah,
-    limit: 10000,
+    limit: 10000, // readable upper limit to get all bookmarks
   });
 
   const { data, mutate, error } = useSWR<GetBookmarkCollectionsIdResponse>(
@@ -200,54 +187,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     setNoteModalVerseKeys([]);
   }, []);
 
-  const pinVersesAndSync = useCallback(
-    async (verseKeys: string[]) => {
-      dispatch(pinVerses(verseKeys));
-      verseKeys.forEach((vk) => {
-        broadcastPinnedVerses(PinnedVersesBroadcastType.PIN, { verseKey: vk });
-      });
-
-      if (isLoggedIn) {
-        try {
-          const syncPayload = verseKeys.map((vk) => buildPinnedSyncPayload(vk, mushafId));
-          await syncPinnedItems(syncPayload);
-          globalMutate(isPinnedItemsCacheKey, undefined, { revalidate: true });
-        } catch (syncError) {
-          logErrorToSentry(syncError, { transactionName: 'collectionDetail.pinVerses' });
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-            actions: [{ text: t('common:retry'), onClick: () => pinVersesAndSync(verseKeys) }],
-          });
-          return;
-        }
-      }
-
-      toast(t('quran-reader:verses-pinned', { count: verseKeys.length }), {
-        status: ToastStatus.Success,
-      });
-    },
-    [dispatch, isLoggedIn, mushafId, globalMutate, toast, t],
-  );
-
-  const handlePinAllVerses = useCallback(() => {
-    const verseKeys = filteredBookmarks.map((b) => makeVerseKey(b.key, b.verseNumber));
-    logButtonClick('collection_detail_pin_all_verses', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
-      count: verseKeys.length,
-    });
-    pinVersesAndSync(verseKeys);
-  }, [filteredBookmarks, collectionId, pinVersesAndSync]);
-
-  const handlePinSelectedVerses = useCallback(() => {
-    const selected = filteredBookmarks.filter((b) => selectedBookmarks.has(b.id));
-    const verseKeys = selected.map((b) => makeVerseKey(b.key, b.verseNumber));
-    logButtonClick('collection_detail_pin_selected_verses', {
-      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
-      count: verseKeys.length,
-    });
-    pinVersesAndSync(verseKeys);
-  }, [filteredBookmarks, selectedBookmarks, collectionId, pinVersesAndSync]);
-
   if (error) {
     return (
       <div className={styles.statusContainer}>
@@ -322,7 +261,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           </span>
           <CollectionHeaderActionsPopover
             onNoteClick={handleNoteClick}
-            onPinVersesClick={handlePinAllVerses}
             dataTestPrefix="collection-header-actions"
           >
             <button type="button" className={styles.iconButton} aria-label={t('common:more')}>
@@ -355,7 +293,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
             {selectedBookmarks.size > 0 ? (
               <CollectionBulkActionsPopover
                 onNoteClick={handleBulkNoteClick}
-                onPinVersesClick={handlePinSelectedVerses}
                 dataTestPrefix="collection-bulk-actions"
               >
                 <Button

@@ -13,7 +13,6 @@ import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
-import { PinnedItemTargetType } from 'types/PinnedItem';
 
 /**
  * Cache key path patterns for bookmark-related API endpoints.
@@ -205,9 +204,6 @@ export const makeDeleteCollectionUrl = (collectionId: string) =>
 export const makeAddCollectionBookmarkUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
-export const makeAddBulkCollectionBookmarksUrl = (collectionId: string) =>
-  makeUrl(`collections/${collectionId}/bookmarks/bulk`);
-
 export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookmarkId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks/${bookmarkId}`);
 
@@ -339,22 +335,3 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
 
 export const makeMapUrl = (): string => makeUrl('mushaf/map');
-
-// Pinned Items
-export const PINNED_ITEMS_CACHE_PATHS = {
-  LIST: 'pinned-items?',
-} as const;
-
-export const makePinnedItemsUrl = (targetType?: PinnedItemTargetType): string =>
-  makeUrl('pinned-items', targetType ? { targetType } : undefined);
-
-export const makeAddPinnedItemUrl = (): string => makeUrl('pinned-items');
-
-export const makeSyncPinnedItemsUrl = (): string => makeUrl('pinned-items/sync');
-
-export const makeClearPinnedItemsUrl = (): string => makeUrl('pinned-items/clear');
-
-export const makeDeletePinnedItemUrl = (pinnedItemId: string): string =>
-  makeUrl(`pinned-items/${pinnedItemId}`);
-
-export const makeBulkDeletePinnedItemsUrl = (): string => makeUrl('pinned-items/bulk');

@@ -1,10 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import Modal from '@/dls/Modal/Modal';
-import useGlobalPinnedVerses from '@/hooks/auth/useGlobalPinnedVerses';
-import useSyncPinnedVerses from '@/hooks/auth/useSyncPinnedVerses';
 import useSyncUserData from '@/hooks/auth/useSyncUserData';
-import usePinnedVersesBroadcastListener from '@/hooks/usePinnedVersesBroadcast';
 import ConsentType from '@/types/auth/ConsentType';
 import Announcement from 'types/auth/Announcement';
 
@@ -25,9 +22,6 @@ type Props = {
 
 const UserAccountModal: React.FC<Props> = ({ announcement, consents }) => {
   useSyncUserData();
-  useSyncPinnedVerses();
-  useGlobalPinnedVerses();
-  usePinnedVersesBroadcastListener();
 
   let modalBody;
   if (announcement) {

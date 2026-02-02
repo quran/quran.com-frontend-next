@@ -34,9 +34,6 @@
   // Tajweed
   --tajweed-trigger-height: #{navbar.$tajweed-trigger-height};
 
-  // Pinned verses
-  --pinned-verses-bar-height: 0px;
-
   // Derived values (calculated from base variables)
   --navbar-container-height: var(--navbar-height);
   --top-bar-height: calc(var(--adjuster) + var(--context-menu-section-height));

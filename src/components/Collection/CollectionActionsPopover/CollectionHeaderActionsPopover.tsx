@@ -7,12 +7,10 @@ import styles from './CollectionActionsPopover.module.scss';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
-import PinIcon from '@/icons/pin.svg';
 
 type CollectionHeaderActionsPopoverProps = {
   children: React.ReactNode;
   onNoteClick: () => void;
-  onPinVersesClick: () => void;
   align?: PopoverMenuAlign;
   dataTestPrefix?: string;
 };
@@ -20,28 +18,13 @@ type CollectionHeaderActionsPopoverProps = {
 const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverProps> = ({
   children,
   onNoteClick,
-  onPinVersesClick,
   align = PopoverMenuAlign.END,
   dataTestPrefix = 'collection-header-actions',
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('quran-reader');
 
   return (
     <PopoverMenu align={align} trigger={children}>
-      <PopoverMenu.Item
-        onClick={onPinVersesClick}
-        shouldCloseMenuAfterClick
-        dataTestId={`${dataTestPrefix}-pin`}
-        className={styles.menuItem}
-      >
-        <IconContainer
-          className={styles.iconWrapper}
-          size={IconSize.Custom}
-          shouldForceSetColors={false}
-          icon={<PinIcon />}
-        />
-        <span className={styles.menuItemText}>{t('my-quran:bulk-actions.pin-verses')}</span>
-      </PopoverMenu.Item>
       <PopoverMenu.Item
         onClick={onNoteClick}
         shouldCloseMenuAfterClick
@@ -54,7 +37,7 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
           shouldForceSetColors={false}
           icon={<NotesWithPencilIcon />}
         />
-        <span className={styles.menuItemText}>{t('quran-reader:take-a-note')}</span>
+        <span className={styles.menuItemText}>{t('take-a-note')}</span>
       </PopoverMenu.Item>
     </PopoverMenu>
   );

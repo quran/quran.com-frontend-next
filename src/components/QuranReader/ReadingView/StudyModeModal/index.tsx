@@ -7,7 +7,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
-import PinnedVersesSection from './PinnedVersesSection';
 import SearchableVerseSelector from './SearchableVerseSelector';
 import StudyModeBody from './StudyModeBody';
 import { StudyModeTabId } from './StudyModeBottomActions';
@@ -19,13 +18,9 @@ import Error from '@/components/Error';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
-import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
 import useQcfFont from '@/hooks/useQcfFont';
 import ArrowIcon from '@/icons/arrow.svg';
 import CloseIcon from '@/icons/close.svg';
-import PinFilledIcon from '@/icons/pin-filled.svg';
-import PinIcon from '@/icons/pin.svg';
-import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
 import {
   setActiveTab,
   setHighlightedWordLocation,
@@ -82,8 +77,6 @@ const StudyModeModal: React.FC<Props> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
-  const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
-  const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
   const derivedVerseKey = word?.verseKey ?? verseKeyProp ?? '1:1';
   const initialChapterId = getChapterNumberFromKey(derivedVerseKey).toString();
@@ -347,17 +340,6 @@ const StudyModeModal: React.FC<Props> = ({
     onClose();
   }, [originalUrl, router.locale, onClose, selectedChapterId, selectedVerseNumber]);
 
-  const isPinned = useMemo(() => pinnedVerseKeysSet.has(verseKey), [pinnedVerseKeysSet, verseKey]);
-
-  const handlePinClick = useCallback(() => {
-    logButtonClick('study_mode_pin_verse', { verseKey, isPinned });
-    if (isPinned) {
-      unpinVerseWithSync(verseKey);
-    } else {
-      pinVerseWithSync(verseKey);
-    }
-  }, [isPinned, verseKey, pinVerseWithSync, unpinVerseWithSync]);
-
   const isContentTabActive =
     activeContentTab &&
     [
@@ -400,21 +382,6 @@ const StudyModeModal: React.FC<Props> = ({
         shouldFlipOnRTL={false}
       >
         <ArrowIcon />
-      </Button>
-      <Button
-        size={ButtonSize.Small}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        onClick={handlePinClick}
-        className={styles.pinButton}
-        ariaLabel={isPinned ? t('unpin-verse') : t('pin-verse')}
-        tooltip={isPinned ? t('unpin-verse') : t('pin-verse')}
-      >
-        {isPinned ? (
-          <PinFilledIcon className={classNames(styles.pinIcon, styles.pinIconFilled)} />
-        ) : (
-          <PinIcon className={styles.pinIcon} />
-        )}
       </Button>
       <Button
         variant={ButtonVariant.Ghost}
@@ -489,7 +456,6 @@ const StudyModeModal: React.FC<Props> = ({
         [styles.bottomSheetInnerContent]: isContentTabActive,
       })}
     >
-      <PinnedVersesSection onGoToVerse={handleGoToVerse} />
       {renderContent()}
     </ContentModal>
   );
