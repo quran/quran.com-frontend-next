@@ -227,14 +227,15 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     async (formData: { name: string }) => {
       const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
 
-      // Optimistic: close modal and show success immediately
+      // Optimistic: close modal immediately
       setIsEditModalOpen(false);
-      toast(t('collection:edit-collection-success'), { status: ToastStatus.Success });
-      logButtonClick('collection_edit_success', { collectionId: numericCollectionId });
 
       // Parent's update handler has optimistic updates built-in
       const success = await onCollectionUpdateRequest?.(numericCollectionId, formData.name);
-      if (!success) {
+      if (success === true) {
+        toast(t('collection:edit-collection-success'), { status: ToastStatus.Success });
+        logButtonClick('collection_edit_success', { collectionId: numericCollectionId });
+      } else if (success === false) {
         toast(t('common:error.general'), { status: ToastStatus.Error });
         logButtonClick('collection_edit_failed', { collectionId: numericCollectionId });
       }
