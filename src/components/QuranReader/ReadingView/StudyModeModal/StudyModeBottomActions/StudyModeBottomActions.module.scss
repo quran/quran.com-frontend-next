@@ -16,15 +16,14 @@
   position: sticky;
   inset-block-end: 0;
   background: var(--color-background-elevated-new);
-  border-block-end: 1px solid var(--color-borders-hairline);
 
   @include breakpoints.tablet {
     gap: var(--spacing-large);
   }
+}
 
-  &.noBorder {
-    border-block-end: none;
-  }
+.bottomSeparator {
+  @include utility.edgeHorizontalPadding;
 }
 
 .separatorContainer {
