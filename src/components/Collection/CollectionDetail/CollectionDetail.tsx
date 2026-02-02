@@ -37,6 +37,8 @@ type CollectionDetailProps = {
   isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
+const SCROLL_THRESHOLD = 5;
+
 const CollectionDetail = ({
   id,
   title,
@@ -55,6 +57,7 @@ const CollectionDetail = ({
   const router = useRouter();
 
   const isCollectionEmpty = bookmarks.length === 0;
+  const hasScroll = bookmarks.length > SCROLL_THRESHOLD;
 
   const onBackToCollectionsClicked = () => {
     logButtonClick('back_to_collections_button', {
@@ -67,47 +70,50 @@ const CollectionDetail = ({
     }
   };
 
+  const itemsContent = isCollectionEmpty ? (
+    <div className={styles.emptyCollectionContainer}>
+      <span>{t('collection:empty')}</span>
+      <div className={styles.backToCollectionButtonContainer}>
+        <Button onClick={onBackToCollectionsClicked}>
+          {t('collection:back-to-collection-list')}
+        </Button>
+      </div>
+    </div>
+  ) : (
+    <Virtuoso
+      data={bookmarks}
+      overscan={10}
+      increaseViewportBy={100}
+      style={{ height: hasScroll ? '100%' : 'auto' }}
+      itemContent={(index, bookmark) => (
+        <CollectionVerseCell
+          key={bookmark.id}
+          bookmarkId={bookmark.id}
+          chapterId={bookmark.key}
+          verseNumber={bookmark.verseNumber}
+          collectionId={id}
+          collectionName={title}
+          isOwner={isOwner}
+          onDelete={onItemDeleted}
+          createdAt={bookmark.createdAt}
+          isSelectMode={isSelectMode}
+          isSelected={isBookmarkSelected?.(bookmark.id)}
+          onToggleSelection={onToggleBookmarkSelection}
+          isExpanded={isCardExpanded?.(bookmark.id)}
+          onToggleExpansion={onToggleCardExpansion}
+        />
+      )}
+    />
+  );
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.header}>
           {shouldShowTitle && <div className={styles.title}>{title}</div>}
         </div>
-        <div className={styles.collectionItemsContainer}>
-          {isCollectionEmpty ? (
-            <div className={styles.emptyCollectionContainer}>
-              <span>{t('collection:empty')}</span>
-              <div className={styles.backToCollectionButtonContainer}>
-                <Button onClick={onBackToCollectionsClicked}>
-                  {t('collection:back-to-collection-list')}
-                </Button>
-              </div>
-            </div>
-          ) : (
-            <Virtuoso
-              data={bookmarks}
-              overscan={10}
-              increaseViewportBy={100}
-              itemContent={(index, bookmark) => (
-                <CollectionVerseCell
-                  key={bookmark.id}
-                  bookmarkId={bookmark.id}
-                  chapterId={bookmark.key}
-                  verseNumber={bookmark.verseNumber}
-                  collectionId={id}
-                  collectionName={title}
-                  isOwner={isOwner}
-                  onDelete={onItemDeleted}
-                  createdAt={bookmark.createdAt}
-                  isSelectMode={isSelectMode}
-                  isSelected={isBookmarkSelected?.(bookmark.id)}
-                  onToggleSelection={onToggleBookmarkSelection}
-                  isExpanded={isCardExpanded?.(bookmark.id)}
-                  onToggleExpansion={onToggleCardExpansion}
-                />
-              )}
-            />
-          )}
+        <div className={`${styles.collectionItemsContainer} ${hasScroll ? styles.hasScroll : ''}`}>
+          {itemsContent}
         </div>
       </div>
       <ConfirmationModal />

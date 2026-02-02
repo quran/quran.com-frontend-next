@@ -81,13 +81,12 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const onSortByChange = useCallback(
-    (newSortByVal: CollectionDetailSortOption) => {
-      logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
-      setSortBy(newSortByVal);
-    },
-    [sortBy],
-  );
+  const onSortByChange = useCallback((newSortByVal: CollectionDetailSortOption) => {
+    logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
+    setSortBy(newSortByVal);
+    // Since sortBy is only used for logging the old value its not needed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Fetch all bookmarks at once
   const fetchUrl = makeGetBookmarkByCollectionId(collectionId, {

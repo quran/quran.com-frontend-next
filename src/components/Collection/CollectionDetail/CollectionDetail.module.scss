@@ -33,12 +33,14 @@
 
 .collectionItemsContainer {
   margin-block-start: var(--spacing-medium-px);
-  block-size: calc(var(--spacing-mega-px) * 8);
-  overflow: hidden;
   position: relative;
   // Smooth entrance animation
   animation: fadeInSlide var(--transition-regular) ease-out backwards;
   animation-delay: var(--transition-moderate);
+}
+
+.hasScroll {
+  block-size: calc(var(--spacing-mega-px) * 8);
 }
 
 .verseContainer {
