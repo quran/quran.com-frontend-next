@@ -20,10 +20,8 @@ $pixel: 1px;
   z-index: var(--z-index-min);
 }
 
-.visibleContainer {
-  @include breakpoints.smallerThanTablet {
-    margin-block-start: 0px;
-  }
+.hiddenContainer {
+  transform: translateY(calc(-100% + var(--tajweed-trigger-height)));
 }
 
 .tajweedContainer {
