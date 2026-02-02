@@ -135,14 +135,6 @@ const PinnedVersesBar: React.FC = () => {
         />
       </div>
 
-      <AddNoteModal
-        showRanges
-        isModalOpen={isNoteModalOpen}
-        onModalClose={() => setIsNoteModalOpen(false)}
-        onMyNotes={() => setIsNoteModalOpen(false)}
-        verseKeys={pinnedVerseKeys}
-      />
-
       {isLoggedIn() && (
         <>
           <SavePinnedToCollectionModal
@@ -152,6 +144,13 @@ const PinnedVersesBar: React.FC = () => {
           <LoadFromCollectionModal
             isOpen={isLoadModalOpen}
             onClose={() => setIsLoadModalOpen(false)}
+          />
+          <AddNoteModal
+            showRanges
+            isModalOpen={isNoteModalOpen}
+            onModalClose={() => setIsNoteModalOpen(false)}
+            onMyNotes={() => setIsNoteModalOpen(false)}
+            verseKeys={pinnedVerseKeys}
           />
         </>
       )}
