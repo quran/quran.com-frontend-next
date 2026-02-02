@@ -19,7 +19,7 @@ const EditCollectionModal = ({
   defaultValue,
   onClose,
   onSubmit,
-}: EditCollectionModalProps) => {
+}: EditCollectionModalProps): JSX.Element => {
   const { t } = useTranslation('collection');
   const { t: commonT } = useTranslation('common');
   const [name, setName] = useState(defaultValue);
