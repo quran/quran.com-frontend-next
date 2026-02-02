@@ -52,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-block-start: calc(2 * var(--spacing-mega-px));
+  margin-block-start: calc(0.5 * var(--spacing-mega-px));
   font-size: var(--font-size-xlarge);
   // Fade in animation for empty state
   animation: fadeIn var(--transition-moderate) ease-out;
