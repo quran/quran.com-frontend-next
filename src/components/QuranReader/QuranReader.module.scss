@@ -70,13 +70,13 @@ $virtual-scrolling-height-bandage: calc(
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
-    // margin-inline-end: constants.$notes-side-bar-desktop-width;
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
   }
 }
 
 .withSidebarNavigationOpenOrAuto {
   @include breakpoints.tablet {
-    // margin-inline-start: calc(10 * var(--spacing-mega));
+    margin-inline-start: calc(10 * var(--spacing-mega));
   }
 }
 
