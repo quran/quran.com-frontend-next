@@ -60,7 +60,7 @@ const usePinnedVersesBroadcastListener = () => {
           dispatch(clearPinnedVerses());
           break;
         case PinnedVersesBroadcastType.SET:
-          if (payload?.verses) dispatch(setPinnedVerses(payload.verses));
+          if (Array.isArray(payload?.verses)) dispatch(setPinnedVerses(payload.verses));
           break;
         default:
           break;

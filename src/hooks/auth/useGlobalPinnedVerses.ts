@@ -44,7 +44,7 @@ const useGlobalPinnedVerses = () => {
   );
 
   useEffect(() => {
-    if (!data?.data) return;
+    if (!data?.data || !Array.isArray(data.data)) return;
 
     const serverItems = data.data;
     const pinnedVerses = serverItems.map(serverItemToLocal);

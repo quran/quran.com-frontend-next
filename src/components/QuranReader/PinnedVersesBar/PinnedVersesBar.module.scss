@@ -5,7 +5,7 @@
   flex-direction: column;
   inline-size: 100%;
   background: var(--color-background-elevated);
-  border: 2px solid var(--color-separators);
+  border: 2px solid var(--color-separators-new);
 }
 
 .barContent {
@@ -48,7 +48,7 @@
 }
 
 .label {
-  color: var(--color-text-faded);
+  color: var(--color-text-faded-new);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -69,7 +69,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--color-separators);
+    background: var(--color-separators-new);
     border-radius: 2px;
   }
 }
