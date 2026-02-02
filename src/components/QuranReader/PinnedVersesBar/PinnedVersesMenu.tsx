@@ -10,15 +10,16 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CopyIcon from '@/icons/copy.svg';
 import FolderIcon from '@/icons/folder.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import NotesIcon from '@/icons/notes-with-pencil.svg';
 import TrashIcon from '@/icons/trash.svg';
 import BookmarkIcon from '@/icons/unbookmarked.svg';
-import { logButtonClick } from '@/utils/eventLogger';
 
 interface PinnedVersesMenuProps {
   onClear: () => void;
   onSaveToCollection?: () => void;
   onLoadFromCollection?: () => void;
   onCopy?: () => void;
+  onAddNote?: () => void;
 }
 
 const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
@@ -26,28 +27,9 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
   onSaveToCollection,
   onLoadFromCollection,
   onCopy,
+  onAddNote,
 }) => {
   const { t } = useTranslation('quran-reader');
-
-  const handleSaveToCollection = () => {
-    logButtonClick('pinned_menu_save_to_collection');
-    onSaveToCollection?.();
-  };
-
-  const handleLoadFromCollection = () => {
-    logButtonClick('pinned_menu_load_from_collection');
-    onLoadFromCollection?.();
-  };
-
-  const handleCopy = () => {
-    logButtonClick('pinned_menu_copy');
-    onCopy?.();
-  };
-
-  const handleClear = () => {
-    logButtonClick('pinned_menu_clear_all');
-    onClear();
-  };
 
   return (
     <PopoverMenu
@@ -67,7 +49,7 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
     >
       <PopoverMenu.Item
         icon={<BookmarkIcon className={menuStyles.menuItemIcon} />}
-        onClick={handleSaveToCollection}
+        onClick={onSaveToCollection}
         shouldCloseMenuAfterClick
         className={menuStyles.menuItem}
       >
@@ -76,7 +58,7 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
 
       <PopoverMenu.Item
         icon={<FolderIcon className={menuStyles.menuItemIcon} />}
-        onClick={handleLoadFromCollection}
+        onClick={onLoadFromCollection}
         shouldCloseMenuAfterClick
         className={menuStyles.menuItem}
       >
@@ -84,8 +66,17 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
+        icon={<NotesIcon className={menuStyles.menuItemIcon} />}
+        onClick={onAddNote}
+        shouldCloseMenuAfterClick
+        className={menuStyles.menuItem}
+      >
+        <span className={menuStyles.menuItemText}>{t('take-a-note')}</span>
+      </PopoverMenu.Item>
+
+      <PopoverMenu.Item
         icon={<CopyIcon className={menuStyles.menuItemIcon} />}
-        onClick={handleCopy}
+        onClick={onCopy}
         shouldCloseMenuAfterClick
         className={menuStyles.menuItem}
       >
@@ -94,7 +85,7 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
 
       <PopoverMenu.Item
         icon={<TrashIcon className={menuStyles.menuItemIcon} />}
-        onClick={handleClear}
+        onClick={onClear}
         shouldCloseMenuAfterClick
         className={menuStyles.menuItem}
       >
