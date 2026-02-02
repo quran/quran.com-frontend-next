@@ -160,10 +160,6 @@
   inline-size: 100%;
   gap: var(--spacing-medium);
 
-  // @include breakpoints.smallerThanTablet {
-  //   justify-content: space-between;
-  // }
-
   @media (min-width: 768px) {
     gap: var(--spacing-large);
   }

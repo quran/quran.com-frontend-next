@@ -13,6 +13,7 @@ export enum TabId {
   REFLECTIONS = 'reflections',
   LESSONS = 'lessons',
   ANSWERS = 'answers',
+  QIRAAT = 'qiraat',
   RELATED_VERSES = 'related-verses',
 }
 

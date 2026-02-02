@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVersesIcon from '@/icons/related-verses.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
@@ -21,6 +23,7 @@ import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
   getVerseRelatedVerseNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
@@ -72,6 +75,10 @@ const BottomActions = ({
   const hasQuestions = questionsData?.total > 0;
   const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
+  // Use backend qiraat count to check if qiraat exist for this verse
+  const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraatData = (qiraatCount ?? 0) > 0;
+
   /**
    * Handle tab click or keyboard event
    * @param {TabId} tabType - Type of tab for logging
@@ -91,6 +98,8 @@ const BottomActions = ({
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.RELATED_VERSES }));
       } else if (tabType === TabId.ANSWERS) {
         dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
+      } else if (tabType === TabId.QIRAAT) {
+        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.QIRAAT }));
       }
 
       logButtonClick(
@@ -135,6 +144,13 @@ const BottomActions = ({
       icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
       onClick: createTabHandler(TabId.ANSWERS, () => getVerseAnswersNavigationUrl(verseKey)),
       condition: hasQuestions,
+    },
+    {
+      id: TabId.QIRAAT,
+      label: t('quran-reader:qiraat.title'),
+      icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
+      condition: hasQiraatData,
     },
     {
       id: TabId.RELATED_VERSES,

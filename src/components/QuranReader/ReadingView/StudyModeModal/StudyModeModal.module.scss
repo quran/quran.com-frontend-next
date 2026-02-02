@@ -14,6 +14,7 @@ div.contentModal {
   inline-size: 100%;
   max-inline-size: 100%;
   overflow-x: hidden;
+  background: var(--color-background-elevated-new);
   border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
     padding-inline: var(--spacing-large-px);
@@ -49,9 +50,9 @@ div.mobileBottomSheetOverlay {
   gap: var(--spacing-small-px);
   inline-size: 100%;
   flex-shrink: 0;
-  border-block-end: 1px solid var(--color-separators);
 
   @include breakpoints.tablet {
+    border-block-end: 1px solid var(--color-separators);
     padding-block-end: var(--spacing-medium2-px);
   }
 }
@@ -124,6 +125,7 @@ button.nextButton {
 
 .modalHeader {
   padding-inline-end: 0;
+  background-color: var(--color-background-elevated-new);
   @include breakpoints.smallerThanTablet {
     padding: 0;
     padding-block-end: var(--spacing-medium-px);

@@ -29,6 +29,7 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import Verse from '@/types/Verse';
 import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -42,6 +43,7 @@ import {
   getVerseReflectionNavigationUrl,
   getVerseLessonNavigationUrl,
   getVerseAnswersNavigationUrl,
+  getVerseQiraatNavigationUrl,
 } from '@/utils/navigation';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 
@@ -133,6 +135,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseReflectionNavigationUrl(newVerseKey), router.locale || 'en');
       } else if (tab === StudyModeTabId.LESSONS) {
         fakeNavigate(getVerseLessonNavigationUrl(newVerseKey), router.locale || 'en');
+      } else if (tab === StudyModeTabId.QIRAAT) {
+        fakeNavigate(getVerseQiraatNavigationUrl(newVerseKey), router.locale || Language.EN);
       }
     },
     [tafsirs, router.locale],
@@ -309,6 +313,8 @@ const StudyModeModal: React.FC<Props> = ({
         fakeNavigate(getVerseLessonNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === StudyModeTabId.ANSWERS) {
         fakeNavigate(getVerseAnswersNavigationUrl(currentVerseKey), router.locale);
+      } else if (tabId === StudyModeTabId.QIRAAT) {
+        fakeNavigate(getVerseQiraatNavigationUrl(currentVerseKey), router.locale);
       } else if (tabId === null) {
         fakeNavigate(originalUrl, router.locale);
       }
@@ -341,6 +347,7 @@ const StudyModeModal: React.FC<Props> = ({
       StudyModeTabId.REFLECTIONS,
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
+      StudyModeTabId.QIRAAT,
       StudyModeTabId.RELATED_VERSES,
     ].includes(activeContentTab);
 
