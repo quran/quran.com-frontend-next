@@ -63,12 +63,17 @@
     "/ramadan": ["ramadan-activities"],
     "/ramadanchallenge": ["ramadan-activities"],
     "/beyond-ramadan": ["ramadan-activities"],
-    "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
     "/media": ["media"],
     "/take-notes": ["take-notes"],
     "/[chapterId]/answers": ["quran-reader", "question", "reading-goal", "notes", "surah-info"],
-    "/[chapterId]/answers/[questionId]": ["quran-reader", "question", "reading-goal", "notes", "surah-info"],
+    "/[chapterId]/answers/[questionId]": [
+      "quran-reader",
+      "question",
+      "reading-goal",
+      "notes",
+      "surah-info"
+    ],
     "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
   }
 }
