@@ -40,8 +40,14 @@
     "/juz/[juzId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/hizb/[hizbId]": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/surah/[chapterId]/info": ["quran-reader", "reading-goal", "notes", "chapter", "surah-info"],
-    "/collections/all": ["collection"],
-    "/collections/[collectionId]": ["collection"],
+    "/collections/all": ["collection", "quran-reader", "question", "reading-goal", "notes"],
+    "/collections/[collectionId]": [
+      "collection",
+      "quran-reader",
+      "question",
+      "reading-goal",
+      "notes"
+    ],
     "/search": ["search"],
     "/about-us": ["about"],
     "/developers": ["developers"],

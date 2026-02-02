@@ -30,6 +30,7 @@ export const ROUTES = {
   SITEMAP: '/sitemap.xml',
   READING_GOAL_PROGRESS: '/reading-goal/progress',
   MY_LEARNING_PLANS: '/my-learning-plans',
+  COLLECTIONS_ALL: '/collections/all',
   RAMADAN_2026: '/ramadan2026',
   RAMADAN_CHALLENGE: '/ramadanchallenge',
   // TODO: add all static routes here for incremental adoption
@@ -51,6 +52,7 @@ export const AUTH_ROUTES = [
 export const PROTECTED_ROUTES = [
   ROUTES.READING_GOAL_PROGRESS,
   ROUTES.MY_LEARNING_PLANS,
+  ROUTES.COLLECTIONS_ALL,
   ROUTES.COMPLETE_SIGNUP,
 ];
 
@@ -455,6 +457,10 @@ export const getProfileNavigationUrl = () => {
   return '/profile';
 };
 
+export const getCollectionNavigationUrl = (collectionId: string) => {
+  return `/collections/${collectionId}`;
+};
+
 export const getReadingGoalNavigationUrl = (example?: string) =>
   example && example.trim() !== ''
     ? `/reading-goal?example=${encodeURIComponent(example)}`
@@ -471,6 +477,8 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
 export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
+
+export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
 

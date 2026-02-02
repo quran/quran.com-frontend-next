@@ -1,0 +1,22 @@
+.bookmarksHeader {
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.verseLinksContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.viewAllBookmarksContainer {
+  white-space: nowrap;
+  text-decoration: underline;
+}
+
+.container {
+  padding-block-start: 0;
+  padding-block-end: var(--spacing-micro);
+  overflow-x: auto;
+}
