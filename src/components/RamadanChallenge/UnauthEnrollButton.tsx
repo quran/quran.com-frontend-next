@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { HeadlessServiceProvider } from '../Notifications/hooks/useHeadlessService';
 
+import styles from './EnrollButton.module.scss';
 import EnrollButtonNotification from './EnrollButtonNotification';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -53,6 +54,7 @@ const UnauthEnrollButton = ({ section }: Props) => {
       href={getLoginNavigationUrl(router.asPath)}
       variant={ButtonVariant.Shadow}
       isLoading={isLoading}
+      className={styles.button}
     >
       {ENROLL_TEXT}
     </Button>
