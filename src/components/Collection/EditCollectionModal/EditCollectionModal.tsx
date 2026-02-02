@@ -25,7 +25,9 @@ const EditCollectionModal = ({
   const [name, setName] = useState(defaultValue);
 
   useEffect(() => {
-    setName(defaultValue);
+    if (isOpen) {
+      setName(defaultValue);
+    }
   }, [defaultValue, isOpen]);
 
   const handleSubmit = useCallback(() => {
