@@ -70,9 +70,11 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
             </React.Fragment>
           ))}
       </div>
-      <div className={styles.bottomSeparator}>
-        <Separator />
-      </div>
+      {activeTab && (
+        <div className={styles.bottomSeparator}>
+          <Separator />
+        </div>
+      )}
     </>
   );
 };
