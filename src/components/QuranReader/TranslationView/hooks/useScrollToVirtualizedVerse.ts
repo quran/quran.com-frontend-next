@@ -45,6 +45,11 @@ const useScrollToVirtualizedTranslationView = (
   const hasPinnedVerses = pinnedVerses.length > 0;
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
 
+  const hasPinnedVersesRef = useRef(hasPinnedVerses);
+  hasPinnedVersesRef.current = hasPinnedVerses;
+  const isNavbarVisibleRef = useRef(isNavbarVisible);
+  isNavbarVisibleRef.current = isNavbarVisible;
+
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
   const isValidStartingVerse =
@@ -55,9 +60,9 @@ const useScrollToVirtualizedTranslationView = (
       if (!virtuosoRef.current) return;
       const verseIndex = verseNumber - 1;
       let offset = CONTEXT_MENU_OFFSET;
-      if (hasPinnedVerses) {
+      if (hasPinnedVersesRef.current) {
         offset += PINNED_VERSES_BAR_OFFSET;
-        if (isNavbarVisible) offset += NAVBAR_OFFSET;
+        if (isNavbarVisibleRef.current) offset += NAVBAR_OFFSET;
       }
       virtuosoRef.current.scrollToIndex({
         index: verseIndex,
@@ -65,7 +70,7 @@ const useScrollToVirtualizedTranslationView = (
         offset,
       });
     },
-    [virtuosoRef, hasPinnedVerses, isNavbarVisible],
+    [virtuosoRef],
   );
 
   useEffect(() => {

@@ -58,6 +58,11 @@ const useScrollToVirtualizedReadingView = (
   const hasPinnedVerses = pinnedVerses.length > 0;
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
 
+  const hasPinnedVersesRef = useRef(hasPinnedVerses);
+  hasPinnedVersesRef.current = hasPinnedVerses;
+  const isNavbarVisibleRef = useRef(isNavbarVisible);
+  isNavbarVisibleRef.current = isNavbarVisible;
+
   const fetchVersePageNumber = useFetchVersePageNumber(
     quranReaderStyles.quranFont,
     quranReaderStyles.mushafLines,
@@ -86,9 +91,9 @@ const useScrollToVirtualizedReadingView = (
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
       let pinnedOffset = 0;
-      if (hasPinnedVerses) {
+      if (hasPinnedVersesRef.current) {
         pinnedOffset += PINNED_VERSES_BAR_OFFSET;
-        if (isNavbarVisible) pinnedOffset += NAVBAR_OFFSET;
+        if (isNavbarVisibleRef.current) pinnedOffset += NAVBAR_OFFSET;
       }
 
       const initialDataFirstPage = initialData.verses[0]?.pageNumber;
@@ -139,8 +144,6 @@ const useScrollToVirtualizedReadingView = (
       verses,
       chapterId,
       fetchVersePageNumber,
-      hasPinnedVerses,
-      isNavbarVisible,
     ],
   );
 
