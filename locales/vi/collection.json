@@ -1,8 +1,8 @@
 {
-  "all-saved-verses": "Tất cả các câu kinh đã được lưu",
+  "all-saved-verses": "Tất cả các câu đã được lưu",
   "alphabetical": "A-Z",
   "back-to-collection-list": "Trở lại danh sách bộ sưu tập",
-  "collapse-all": "Thu gọn mọi câu kinh",
+  "collapse-all": "Thu gọn tất cả các câu",
   "collection-list-empty": "Danh sách bộ sưu tập trống. Bạn chưa tạo bất kỳ bộ sưu tập nào.",
   "collections": "Bộ sưu tập",
   "delete-bookmark": {
@@ -14,9 +14,10 @@
     "title": "Xóa bộ sưu tập"
   },
   "empty": "Bộ sưu tập trống",
-  "expand-all": "Mở rộng mọi câu kinh",
-  "go-to-ayah": "Đi đến câu kinh",
+  "expand-all": "Mở rộng tất cả các câu",
+  "go-to-ayah": "Đi đến Ayah",
   "load-more": "Tải thêm",
+  "no-collections": "Bạn chưa có bộ sưu tập nào cả.",
   "recently-added": "Mới thêm",
   "recently-updated": "Mới cập nhật",
   "verse-key": "Số chương và câu"
