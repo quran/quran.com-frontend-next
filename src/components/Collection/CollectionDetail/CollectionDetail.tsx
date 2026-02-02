@@ -1,9 +1,7 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-unused-prop-types */
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { Virtuoso } from 'react-virtuoso';
 
 import { getMyQuranNavigationUrl } from '../../../utils/navigation';
 
@@ -38,11 +36,6 @@ type CollectionDetailProps = {
   isBookmarkSelected?: (bookmarkId: string) => boolean;
 };
 
-// Enable scroll only when the collection has more than 5 items: this roughly matches the
-// number of cards that fit in the available viewport height in our layouts, so smaller
-// collections render without a scrollable container while larger ones become scrollable.
-const SCROLL_THRESHOLD = 5;
-
 const CollectionDetail = ({
   id,
   title,
@@ -61,7 +54,6 @@ const CollectionDetail = ({
   const router = useRouter();
 
   const isCollectionEmpty = bookmarks.length === 0;
-  const hasScroll = bookmarks.length > SCROLL_THRESHOLD;
 
   const onBackToCollectionsClicked = () => {
     logButtonClick('back_to_collections_button', {
@@ -83,30 +75,6 @@ const CollectionDetail = ({
         </Button>
       </div>
     </div>
-  ) : hasScroll ? (
-    <Virtuoso
-      data={bookmarks}
-      overscan={10}
-      increaseViewportBy={100}
-      itemContent={(index, bookmark) => (
-        <CollectionVerseCell
-          key={bookmark.id}
-          bookmarkId={bookmark.id}
-          chapterId={bookmark.key}
-          verseNumber={bookmark.verseNumber}
-          collectionId={id}
-          collectionName={title}
-          isOwner={isOwner}
-          onDelete={onItemDeleted}
-          createdAt={bookmark.createdAt}
-          isSelectMode={isSelectMode}
-          isSelected={isBookmarkSelected?.(bookmark.id)}
-          onToggleSelection={onToggleBookmarkSelection}
-          isExpanded={isCardExpanded?.(bookmark.id)}
-          onToggleExpansion={onToggleCardExpansion}
-        />
-      )}
-    />
   ) : (
     bookmarks.map((bookmark) => (
       <CollectionVerseCell
@@ -134,9 +102,7 @@ const CollectionDetail = ({
         <div className={styles.header}>
           {shouldShowTitle && <div className={styles.title}>{title}</div>}
         </div>
-        <div className={`${styles.collectionItemsContainer} ${hasScroll ? styles.hasScroll : ''}`}>
-          {itemsContent}
-        </div>
+        <div className={styles.collectionItemsContainer}>{itemsContent}</div>
       </div>
       <ConfirmationModal />
     </>
