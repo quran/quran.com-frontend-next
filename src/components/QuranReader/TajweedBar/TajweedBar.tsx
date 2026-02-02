@@ -51,27 +51,18 @@ const TajweedColors = () => {
       })}
     >
       <div
-        className={styles.rulesWrapper}
-        style={{
-          height: showTajweedBar ? height : 0,
-          overflow: 'hidden',
-          transition: 'height 0.2s ease-in-out',
-        }}
+        ref={ref}
+        className={classNames(styles.tajweedContainer, {
+          [styles.shadow]: showTajweedBar,
+        })}
       >
-        <div
-          ref={ref}
-          className={classNames(styles.tajweedContainer, {
-            [styles.shadow]: showTajweedBar,
-          })}
-        >
-          <div className={styles.rulesContainer}>
-            {TAJWEED_RULES.map((rule) => (
-              <div className={styles.ruleContainer} key={rule}>
-                <div className={classNames(styles.circle, styles[`${themeVariant}-${rule}`])} />
-                <p>{t(rule)}</p>
-              </div>
-            ))}
-          </div>
+        <div className={styles.rulesContainer}>
+          {TAJWEED_RULES.map((rule) => (
+            <div className={styles.ruleContainer} key={rule}>
+              <div className={classNames(styles.circle, styles[`${themeVariant}-${rule}`])} />
+              <p>{t(rule)}</p>
+            </div>
+          ))}
         </div>
       </div>
 
