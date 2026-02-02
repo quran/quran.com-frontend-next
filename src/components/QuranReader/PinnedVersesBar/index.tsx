@@ -87,9 +87,20 @@ const PinnedVersesBar: React.FC = () => {
   }, [clearPinnedWithSync]);
 
   const handleVerseTagClick = useCallback(
-    (verseKey: string) => {
+    async (verseKey: string) => {
       logButtonClick('pinned_bar_verse_tag_click');
-      router.push(getChapterWithStartingVerseUrl(verseKey));
+      const targetUrl = getChapterWithStartingVerseUrl(verseKey);
+      // If already on the same URL, clear startingVerse first so the scroll hooks detect a change
+      if (router.asPath === targetUrl) {
+        const restQuery = Object.fromEntries(
+          Object.entries(router.query).filter(([key]) => key !== 'startingVerse'),
+        );
+        await router.replace({ pathname: router.pathname, query: restQuery }, undefined, {
+          shallow: true,
+          scroll: false,
+        });
+      }
+      router.push(targetUrl);
     },
     [router],
   );
