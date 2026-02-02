@@ -13,18 +13,20 @@ import ArrowIcon from '@/icons/arrow.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
 type Props = {
   surahNumber: number;
   verseNumber?: number;
+  pageNumber?: number;
   isContinueReading?: boolean;
 };
 
 const ChapterCard: React.FC<Props> = ({
   surahNumber,
   verseNumber = 1,
+  pageNumber = 0,
   isContinueReading = false,
 }) => {
   const { t, lang } = useTranslation('home');
@@ -40,7 +42,9 @@ const ChapterCard: React.FC<Props> = ({
     logButtonClick('homepage_chapter_card_begin');
   };
 
-  const link = getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
+  const link = pageNumber
+    ? getPageNavigationUrl(pageNumber)
+    : getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
 
   return (
     <Card className={styles.chapterCard} link={link} testId="chapter-card">

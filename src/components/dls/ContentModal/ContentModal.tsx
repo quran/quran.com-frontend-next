@@ -128,6 +128,7 @@ const ContentModal = ({
             )}
             <div
               className={classNames(styles.content, innerContentClassName)}
+              data-content-modal
               data-testid="modal-content"
             >
               {children}

@@ -1,3 +1,7 @@
+/* eslint-disable max-lines */
+
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,6 +12,8 @@ import layoutStyles from '../../../pages/index.module.scss';
 import styles from './CollectionDetailContainer.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
+import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
@@ -51,6 +57,9 @@ const CollectionDetailContainer = ({
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
+
+  // State for managing which bookmark card is expanded
+  const [expandedBookmarkId, setExpandedBookmarkId] = useState<Set<string>>(new Set());
 
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
@@ -113,6 +122,26 @@ const CollectionDetailContainer = ({
     }
   };
 
+  // Handler to toggle card expansion
+  const onToggleCardExpansion = (bookmarkId: string) => {
+    setExpandedBookmarkId((prev) => {
+      const newSet = new Set(prev);
+
+      if (newSet.has(bookmarkId)) {
+        newSet.delete(bookmarkId);
+      } else {
+        newSet.add(bookmarkId);
+      }
+
+      return newSet;
+    });
+  };
+
+  // Check if a specific card is expanded
+  const isCardExpanded = (bookmarkId: string) => {
+    return expandedBookmarkId.has(bookmarkId);
+  };
+
   const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
 
   return (
@@ -143,7 +172,10 @@ const CollectionDetailContainer = ({
                 onSortByChange={onSortByChange}
                 onItemDeleted={onItemDeleted}
                 isOwner={isOwner}
+                onToggleCardExpansion={onToggleCardExpansion}
+                isCardExpanded={isCardExpanded}
               />
+
               {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (
                 <div className={styles.loadMoreContainer}>
@@ -154,6 +186,9 @@ const CollectionDetailContainer = ({
           </div>
         </div>
       </div>
+
+      <StudyModeContainer />
+      <VerseActionModalContainer />
     </>
   );
 };

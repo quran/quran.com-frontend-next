@@ -11,6 +11,7 @@ export enum StudyModeTabId {
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
+  QIRAAT = 'qiraat',
   RELATED_VERSES = 'related_verses',
 }
 

@@ -64,6 +64,10 @@
 .ramadanTitle {
   font-weight: var(--font-weight-semibold);
   color: var(--color-warning-deep);
+  font-size: var(--font-size-small-px);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .ramadanIcon {

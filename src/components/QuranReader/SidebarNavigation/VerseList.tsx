@@ -1,10 +1,10 @@
-import { useState, useMemo, useEffect, useContext } from 'react';
+import React, { useState, useMemo, useEffect, useContext } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
+import usePendingVerseSelection from './usePendingVerseSelection';
 import VerseListItem from './VerseListItem';
 
 import useChapterIdsByUrlPath from '@/hooks/useChapterId';
@@ -26,11 +26,18 @@ type Props = {
 
 const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapterId }) => {
   const [searchQuery, setSearchQuery] = useState('');
+
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const dispatch = useDispatch();
-  const router = useRouter();
   const chaptersData = useContext(DataContext);
+
+  // Manage pending verse selection and navigation
+  const { pendingSelectedVerseKey, setPendingSelectedVerseKey, navigateAndHandleAfterNavigation } =
+    usePendingVerseSelection({
+      lastReadVerseKey: lastReadVerseKey.verseKey,
+      onAfterNavigationItemRouted,
+    });
 
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
@@ -85,27 +92,12 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
     }
   }, [searchQuery, filteredVerseKeys]);
 
-  const navigateAndHandleAfterNavigation = (href: string) => {
-    router
-      .push(href, undefined, {
-        shallow: false, // Change to false to force a full page reload
-      })
-      .then(() => {
-        if (onAfterNavigationItemRouted) {
-          onAfterNavigationItemRouted();
-        }
-      })
-      .catch(() => {
-        // As a fallback, we can use window.location
-        window.location.href = href;
-      });
-  };
-
   // Handle when user press `Enter` in input box
-  const handleVerseInputSubmit = (e) => {
+  const handleVerseInputSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
     if (firstFilteredVerseKey) {
+      setPendingSelectedVerseKey(firstFilteredVerseKey);
       const href = getChapterWithStartingVerseUrl(firstFilteredVerseKey);
       navigateAndHandleAfterNavigation(href);
     }
@@ -129,6 +121,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
         chaptersData,
       }),
     );
+    setPendingSelectedVerseKey(verseKey);
     const href = getChapterWithStartingVerseUrl(verseKey);
     navigateAndHandleAfterNavigation(href);
     logButtonClick(`navigation_list_verse`, {
@@ -157,6 +150,9 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapt
               verseKey={verseKey}
               key={verseKey}
               onVerseClick={(e) => handleVerseClick(e, verseKey)}
+              isSelectedOverride={
+                pendingSelectedVerseKey ? pendingSelectedVerseKey === verseKey : undefined
+              }
             />
           ))}
         </div>

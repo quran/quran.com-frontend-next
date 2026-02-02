@@ -1,0 +1,28 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium2);
+}
+
+.readingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium);
+
+  --border: var(--color-separators-ayah-level);
+  background: var(--color-background-alternative-faded);
+  color: var(--color-text-default-new);
+  border: var(--spacing-hairline-px) solid var(--border);
+  padding: var(--spacing-xsmall);
+  border-radius: var(--border-radius-small-px);
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xsmall);
+  }
+}
+
+[data-theme='sepia'] .readingGroup {
+  background: transparent;
+}

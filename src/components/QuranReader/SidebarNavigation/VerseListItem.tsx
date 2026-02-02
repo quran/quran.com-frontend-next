@@ -16,11 +16,20 @@ import { getVerseNumberFromKey } from '@/utils/verse';
 interface VerseListItemProps {
   verseKey: string;
   onVerseClick?: (e: React.MouseEvent) => void;
+  isSelectedOverride?: boolean; // Optional override for selection state
 }
 
-const VerseListItem: React.FC<VerseListItemProps> = ({ verseKey, onVerseClick }) => {
+const VerseListItem: React.FC<VerseListItemProps> = ({
+  verseKey,
+  onVerseClick,
+  isSelectedOverride,
+}) => {
   const { lang } = useTranslation();
-  const isVerseKeySelected = useSelector(selectIsVerseKeySelected(verseKey));
+  const isSelectedFromRedux = useSelector(selectIsVerseKeySelected(verseKey));
+
+  // Allow a temporary selection while navigation settles. true = selected, false = not selected, undefined = use redux state
+  const isVerseKeySelected =
+    typeof isSelectedOverride === 'boolean' ? isSelectedOverride : isSelectedFromRedux;
 
   const verseNumber = getVerseNumberFromKey(verseKey);
   const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);

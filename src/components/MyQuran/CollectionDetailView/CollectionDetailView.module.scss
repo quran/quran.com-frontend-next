@@ -1,0 +1,210 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  // Fade in animation for container entrance
+  animation: fadeIn var(--transition-regular) ease-out;
+}
+
+.topActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-xsmall-px);
+  margin-block-end: var(--spacing-medium2-px);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xxsmall-px);
+  margin-block-end: var(--spacing-medium-px);
+  animation: slideDown var(--transition-moderate) ease-out;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  flex: 1;
+}
+
+.backButton {
+  padding: 0;
+  block-size: auto;
+  min-inline-size: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-small-px);
+
+  & > span {
+    gap: var(--spacing-xxsmall-px);
+  }
+
+  &,
+  & * {
+    line-height: 1;
+  }
+
+  transition: all var(--transition-fast) ease-out;
+  animation: fadeIn var(--transition-regular) ease-out var(--transition-fast) backwards;
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxsmall-px);
+  padding: var(--spacing-micro2-px) var(--spacing-small2-px);
+  background: var(--color-success-faded);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-text-link-new);
+  font-size: var(--font-size-xsmall-px);
+  font-weight: var(--font-weight-semibold);
+  // Fade in with delay
+  animation: fadeIn var(--transition-regular) ease-out calc(var(--transition-fast) * 2) backwards;
+}
+
+.badgeContainer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall-px);
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-small-px);
+  color: var(--color-text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease-out;
+
+  &:hover {
+    background: var(--color-background-alternative);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  svg {
+    display: block;
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+  }
+}
+
+.loadMoreContainer {
+  display: flex;
+  margin-block-start: var(--spacing-medium-px);
+  justify-content: center;
+  inline-size: 100%;
+  // Fade in animation for load more button
+  animation: fadeIn var(--transition-moderate) ease-out;
+
+  button {
+    inline-size: 100%;
+    transition: all var(--transition-fast) ease-out;
+
+    &:hover {
+      transform: translateY(calc(var(--spacing-micro-px) * -1));
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.statusContainer {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-mega-px);
+  // Fade in animation for loading state
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+// Stagger animation for list items
+.listItem {
+  animation: fadeInSlide var(--transition-regular) ease-out backwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-small-px) * -1));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing-medium2-px) + var(--spacing-small-px)));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bulkActionsContainer {
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-medium-px);
+  animation: fadeIn var(--transition-regular) ease-out;
+}
+
+.bulkActionButton {
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+
+  &,
+  &:is(:hover, :active, :focus-visible) {
+    background: transparent;
+    color: var(--color-text-faded-new);
+  }
+
+  &:disabled {
+    border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+    color: var(--color-daily-progress);
+  }
+
+  &:is(:hover, :active, :focus-visible):not(:disabled) {
+    border: var(--spacing-hairline-px) solid var(--color-grey-icons-new);
+  }
+}
+
+.selectModeActions {
+  display: flex;
+  gap: var(--spacing-small-px);
+  align-items: center;
+}

@@ -4,17 +4,26 @@
 .tabsContainer {
   @include utility.scrollbar-none;
   @include utility.edgeHorizontalPadding;
-  box-sizing: border-box;
-  overflow-x: auto;
-  inline-size: 100%;
-  padding-block: var(--spacing-medium2-px);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium);
+  box-sizing: border-box;
+  overflow-x: auto;
+  inline-size: 100%;
+  padding-block: var(--spacing-medium2-px);
+
+  position: sticky;
+  inset-block-end: 0;
+  background: var(--color-background-elevated-new);
+  border-block-end: 1px solid var(--color-borders-hairline);
 
   @include breakpoints.tablet {
     gap: var(--spacing-large);
+  }
+
+  &.noBorder {
+    border-block-end: none;
   }
 }
 

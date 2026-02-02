@@ -13,6 +13,7 @@ export enum TabId {
   REFLECTIONS = 'reflections',
   LESSONS = 'lessons',
   ANSWERS = 'answers',
+  QIRAAT = 'qiraat',
   RELATED_VERSES = 'related-verses',
 }
 
@@ -27,9 +28,14 @@ export interface TabConfig {
 interface BottomActionsTabsProps {
   tabs: TabConfig[];
   isTranslationView: boolean;
+  className?: string;
 }
 
-const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslationView }) => {
+const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({
+  tabs,
+  isTranslationView,
+  className,
+}) => {
   const { lang } = useTranslation();
   const isRTL = isRTLLocale(lang);
 
@@ -52,7 +58,7 @@ const BottomActionsTabs: React.FC<BottomActionsTabsProps> = ({ tabs, isTranslati
   return (
     <div className={styles.bottomActionsContainer}>
       <div
-        className={classNames(styles.tabsContainer, {
+        className={classNames(styles.tabsContainer, className, {
           [styles.center]: !isTranslationView,
           [styles.tabsContainerRTL]: isRTL && isTranslationView,
         })}

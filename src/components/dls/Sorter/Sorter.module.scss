@@ -1,0 +1,159 @@
+@use '@/styles/breakpoints';
+@use '@/styles/constants';
+
+.popoverMenuContent {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-medium-px);
+  gap: var(--spacing-medium-px);
+  min-inline-size: fit-content;
+  border-radius: var(--border-radius-xsmall-px);
+
+  & [data-selected='true'] {
+    background-color: transparent;
+    color: var(--color-text-link-new);
+  }
+
+  & .menuItem[data-highlighted='true'],
+  & .menuItem:focus,
+  & .menuItem:focus-visible {
+    background-color: transparent;
+    color: var(--color-text-link-new);
+  }
+}
+
+.sortTrigger {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: var(--spacing-xsmall);
+  border-radius: var(--border-radius-default);
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  transition: opacity var(--transition-fast);
+
+  &:dir(rtl) {
+    flex-direction: row-reverse;
+  }
+
+  &:hover {
+    opacity: var(--opacity-85);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-micro-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-micro-px);
+  }
+
+  &[data-has-selected='true'] .iconWrapper::before {
+    content: '';
+  }
+}
+
+.iconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --icon-size: var(--spacing-medium2);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+
+  > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    color: var(--color-text-default-new);
+  }
+
+  &:dir(rtl)::before {
+    inset-inline-start: 0;
+    inset-inline-end: 100%;
+    // Magic number to align the dot to the inline end and block start of the icon
+    transform: translateX(100%) translateY(20%);
+  }
+
+  &::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 100%;
+    // Magic number to align the dot to the inline end and block start of the icon
+    transform: translateX(-30%) translateY(-25%);
+    inline-size: var(--spacing-xxsmall-px);
+    aspect-ratio: 1;
+    border-radius: var(--border-radius-circle);
+    background-color: var(--color-blue-buttons-and-icons);
+  }
+}
+
+.sortText {
+  white-space: nowrap;
+
+  // Hide text on mobile
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.menuItem {
+  color: var(--color-text-default-new);
+  padding: 0;
+  &:hover {
+    background-color: transparent;
+    color: var(--color-text-link-new);
+  }
+}
+
+.menuItemText {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  inline-size: 100%;
+}
+
+.optionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  --icon-size: var(--spacing-small);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
+
+  > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    transition: transform var(--transition-fast);
+
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+.arrowUp {
+  > svg {
+    transform: rotate(-90deg);
+  }
+}
+
+.arrowDown {
+  > svg {
+    transform: rotate(90deg);
+  }
+}
+
+.arrowLeft {
+  > svg {
+    transform: rotate(180deg);
+  }
+}
+
+.arrowRight {
+  > svg {
+    // Default direction, no rotation needed
+    transform: rotate(0deg);
+  }
+}

@@ -96,17 +96,53 @@ The tablet breakpoint (768px) is the primary divider for navbar behavior:
 
 ## 3. CSS Variables
 
-### Variable Definitions
+### Source of Truth
+
+**File:** `src/styles/_navbar.scss`
+
+All navbar dimensions are defined as SCSS variables in a single source of truth file. These are then
+exported as CSS custom properties via `variables.scss`.
+
+```scss
+// Core navbar
+$navbar-height: 54px;
+$navbar-logo-height: 20px;
+$banner-height: 40px;
+
+// Context menu (desktop)
+$context-menu-section-height: 56px;
+
+// Context menu (mobile)
+$context-menu-section-mobile-height: 40px;
+$context-menu-section-mobile-expanded-height: 56px;
+$context-menu-page-info-mobile-height: 46px;
+$context-menu-mobile-reading-tabs-height: 53px;
+
+// Composite mobile heights
+$mobile-context-menu-height: 92px;
+$mobile-reading-mode-tabs-height: 52px;
+
+// Tajweed
+$tajweed-trigger-height: 25px;
+
+// Alignment adjuster
+$adjuster: -1px;
+```
+
+### CSS Custom Properties
 
 **File:** `src/styles/variables.scss`
 
+The SCSS variables are exported as CSS custom properties for use in component stylesheets:
+
 ```scss
+@use 'src/styles/navbar';
+
 :root {
-  --navbar-height: 3.6rem;
-  --context-menu-container-height: 3rem;
-  --mobile-reading-mode-tabs-height: 3.25rem;
+  --navbar-height: #{navbar.$navbar-height};
+  --banner-height: #{navbar.$banner-height};
   --navbar-container-height: var(--navbar-height);
-  --banner-height: 3rem;
+  // ... etc
 }
 ```
 

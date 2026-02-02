@@ -2,6 +2,8 @@
 /* eslint-disable i18next/no-literal-string */
 import { useState } from 'react';
 
+import styles from './EnrollButton.module.scss';
+
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -64,6 +66,7 @@ const EnrollButton = ({
       isLoading={isEnrollLoading}
       isDisabled={isDisabled}
       aria-live="polite"
+      className={styles.button}
     >
       {isDisabled ? subscribedText : enrollText}
     </Button>

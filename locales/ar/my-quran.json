@@ -1,0 +1,52 @@
+{
+  "bulk-actions": {
+    "actions": "الإجراءات",
+    "actions-count": "الإجراءات ({{count}})",
+    "cancel": "يلغي",
+    "collapse-all": "طي الكل",
+    "expand-all": "عرض الكل",
+    "select": "يختار"
+  },
+  "collections": {
+    "favorites": "المفضلة",
+    "guest-promo": {
+      "sign-in": "تسجيل الدخول",
+      "subtitle": "قارن بين الآيات واذكر أوجه التشابه والاختلاف بينها",
+      "title": "أنشئ مجموعات مخصصة"
+    },
+    "items": "{{count}} غرض",
+    "items_plural": "{{count}} أغراض",
+    "load-more": "تحميل المزيد",
+    "new-collection": "مجموعة جديدة",
+    "sort": {
+      "a-z": "من الألف إلى الياء",
+      "recently-updated": "تم التحديث مؤخراً",
+      "z-a": "Z - A"
+    },
+    "title": "المجموعات"
+  },
+  "notes-and-reflections": "ملاحظات وتأملات",
+  "page": "صفحة",
+  "reading-bookmark": {
+    "empty": "ابدأ القراءة واحفظ علامة مرجعية للقراءة!",
+    "title": "فاصل كتابي للقراءة"
+  },
+  "recent": "مؤخرًا",
+  "recent-empty": "ابدأ القراءة للاطلاع على ما قرأته مؤخراً",
+  "recently-saved": {
+    "title": "المحفوظة مؤخراً"
+  },
+  "saved": "أنقذ",
+  "search": {
+    "filter": "فلتر",
+    "placeholder": "تم حفظ البحث...",
+    "sort": "نوع"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "أرفق ملاحظات بالآيات",
+      "custom-collections": "أنشئ مجموعات مخصصة"
+    },
+    "title": "سجّل الدخول أو اشترك مجاناً للوصول إلى المزيد من الميزات!"
+  }
+}
