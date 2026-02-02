@@ -5,7 +5,7 @@
   padding-block: var(--spacing-xxsmall-px);
   padding-inline: var(--spacing-medium-px);
   background: transparent;
-  border: 1px solid var(--color-blue-buttons-and-icons);
+  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
   border-radius: var(--border-radius-pill);
   white-space: nowrap;
   user-select: none;

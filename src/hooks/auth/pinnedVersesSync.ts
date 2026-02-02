@@ -137,7 +137,8 @@ export const mergeAndSyncPinnedVerses = async (
   mushafId: number,
   dispatch: Dispatch,
 ): Promise<void> => {
-  const { data: serverItems } = await getPinnedItems(PinnedItemTargetType.Ayah);
+  const response = await getPinnedItems(PinnedItemTargetType.Ayah);
+  const serverItems = response?.data?.data || [];
 
   const serverMap = new Map<string, PinnedItemDTO>();
   serverItems.forEach((item) => serverMap.set(item.targetId, item));

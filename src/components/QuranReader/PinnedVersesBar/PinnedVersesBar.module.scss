@@ -5,7 +5,7 @@
   flex-direction: column;
   inline-size: 100%;
   background: var(--color-background-elevated);
-  border: 2px solid var(--color-separators-new);
+  border: var(--spacing-micro-px) solid var(--color-separators-new);
 }
 
 .barContent {
@@ -65,12 +65,12 @@
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
-    block-size: 4px;
+    block-size: var(--spacing-micro-px);
   }
 
   &::-webkit-scrollbar-thumb {
     background: var(--color-separators-new);
-    border-radius: 2px;
+    border-radius: var(--spacing-micro-px);
   }
 }
 

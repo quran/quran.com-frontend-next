@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './VerseTag.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
-import { toLocalizedVerseKey } from '@/utils/locale';
+import { isRTLLocale, toLocalizedVerseKey, toLocalizedVerseKeyRTL } from '@/utils/locale';
 
 interface VerseTagProps {
   verseKey: string;
@@ -17,7 +17,9 @@ interface VerseTagProps {
 
 const VerseTag: React.FC<VerseTagProps> = ({ verseKey, onRemove, onClick, isSelected = false }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const localizedVerseKey = toLocalizedVerseKey(verseKey, lang);
+  const localizedVerseKey = isRTLLocale(lang)
+    ? toLocalizedVerseKeyRTL(verseKey, lang)
+    : toLocalizedVerseKey(verseKey, lang);
 
   const handleRemoveClick = (e: React.MouseEvent) => {
     e.stopPropagation();

@@ -111,6 +111,7 @@ import {
   makeAddPinnedItemUrl,
   makePinnedItemsUrl,
   makeSyncPinnedItemsUrl,
+  makeBulkDeletePinnedItemsUrl,
   makeClearPinnedItemsUrl,
   makeDeletePinnedItemUrl,
 } from '@/utils/auth/apiPaths';
@@ -865,7 +866,8 @@ export const submitTranslationFeedback = async (params: {
 // Pinned Items
 export const getPinnedItems = async (
   targetType?: PinnedItemTargetType,
-): Promise<{ data: PinnedItemDTO[] }> => privateFetcher(makePinnedItemsUrl(targetType));
+): Promise<{ success: boolean; data: { data: PinnedItemDTO[] } }> =>
+  privateFetcher(makePinnedItemsUrl(targetType));
 
 export const addPinnedItem = async (params: {
   targetType: PinnedItemTargetType;
@@ -880,6 +882,11 @@ export const syncPinnedItems = async (
   items: SyncPinnedItemPayload[],
 ): Promise<{ synced: number; lastSyncAt: Date }> =>
   postRequest(makeSyncPinnedItemsUrl(), { items });
+
+export const bulkDeletePinnedItems = async (
+  targetType: PinnedItemTargetType,
+  targetIds: string[],
+) => deleteRequest(makeBulkDeletePinnedItemsUrl(), { targetType, targetIds });
 
 export const clearPinnedItems = async (targetType?: PinnedItemTargetType) =>
   deleteRequest(makeClearPinnedItemsUrl(), targetType ? { targetType } : undefined);

@@ -33,7 +33,7 @@ const serverItemToLocal = (item: PinnedItemDTO): PinnedVerse => ({
 const useGlobalPinnedVerses = () => {
   const dispatch = useDispatch();
 
-  const { data } = useSWR<{ data: PinnedItemDTO[] }>(
+  const { data } = useSWR<{ success: boolean; data: { data: PinnedItemDTO[] } }>(
     isLoggedIn() ? PINNED_VERSES_KEY : null,
     () => getPinnedItems(PinnedItemTargetType.Ayah),
     {
@@ -44,9 +44,10 @@ const useGlobalPinnedVerses = () => {
   );
 
   useEffect(() => {
-    if (!data?.data || !Array.isArray(data.data)) return;
+    const items = data?.data?.data;
+    if (!items || !Array.isArray(items)) return;
 
-    const serverItems = data.data;
+    const serverItems = items;
     const pinnedVerses = serverItems.map(serverItemToLocal);
     pinnedVerses.sort((a, b) => a.timestamp - b.timestamp);
     dispatch(setPinnedVerses(pinnedVerses));
