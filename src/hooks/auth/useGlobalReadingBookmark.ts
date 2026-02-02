@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 
+import { useAuthContext } from '@/contexts/AuthContext';
 import Bookmark from '@/types/Bookmark';
 import { getReadingBookmark } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -8,9 +9,11 @@ import { isLoggedIn } from '@/utils/auth/login';
  * Generate the SWR cache key for reading bookmark.
  * Use this for consistent cache key across all consumers.
  * @param {number} mushafId - The current mushaf ID
+ * @param {string} userId - The user ID (optional, for cache isolation between users)
  * @returns {string} The cache key
  */
-export const READING_BOOKMARK_KEY = (mushafId: number) => `reading-bookmark-${mushafId}`;
+export const READING_BOOKMARK_KEY = (mushafId: number, userId?: string) =>
+  userId ? `reading-bookmark-${userId}-${mushafId}` : `reading-bookmark-${mushafId}`;
 
 interface UseGlobalReadingBookmarkReturn {
   /** The current reading bookmark, or null if none set */
@@ -50,8 +53,16 @@ interface UseGlobalReadingBookmarkReturn {
  * await mutate(newBookmark, { revalidate: true });
  */
 const useGlobalReadingBookmark = (mushafId: number): UseGlobalReadingBookmarkReturn => {
+  const { state: authState } = useAuthContext();
+  const userId = authState?.user?.id;
+
+  // Generate cache key with user ID to isolate data between users.
+  // If userId is undefined (e.g., during auth state transitions),
+  // use null as the cache key to prevent data leakage between users.
+  const cacheKey = isLoggedIn() ? READING_BOOKMARK_KEY(mushafId, userId) : null;
+
   const { data, mutate, isValidating, error } = useSWR<Bookmark | null>(
-    isLoggedIn() ? READING_BOOKMARK_KEY(mushafId) : null,
+    cacheKey,
     () => getReadingBookmark(mushafId),
     {
       revalidateOnFocus: false, // Don't refetch on window focus

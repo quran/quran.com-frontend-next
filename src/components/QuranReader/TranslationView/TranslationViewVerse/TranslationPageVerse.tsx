@@ -9,7 +9,6 @@ import Verse from '@/types/Verse';
 
 interface TranslationPageVerse {
   verse: Verse;
-  bookmarksRangeUrl: string | null;
   verseIdx: number;
   quranReaderStyles: QuranReaderStyles;
   isLastVerseInView: boolean;
@@ -17,7 +16,6 @@ interface TranslationPageVerse {
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verse,
-  bookmarksRangeUrl,
   verseIdx,
   quranReaderStyles,
   isLastVerseInView,
@@ -73,7 +71,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         verse={verse}
         key={verse.id}
         quranReaderStyles={quranReaderStyles}
-        bookmarksRangeUrl={bookmarksRangeUrl}
         isFirstCellWithHeader={isFirstCellWithHeader}
       />
     </div>

@@ -22,7 +22,7 @@ export const isNotePublishFailed = (data: unknown): boolean => {
  * This helper normalizes different backend response shapes:
  *
  * - **Successful save & publish** → the response *is* the `Note`
- * - **Saved but failed to publish** → the `Note` is nested under `data.note`
+ * - **Saved but failed to publish** → the `Note` is available on the root `note` property
  * - **Invalid or unexpected response** → returns `undefined`
  *
  * @param {unknown} data - Raw API response

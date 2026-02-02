@@ -1,7 +1,5 @@
-$size: 15px;
-
 .bookmarkIcon {
-  inline-size: $size !important;
-  block-size: $size !important;
+  inline-size: var(--spacing-medium-px);
+  block-size: var(--spacing-medium-px);
   color: var(--color-bookmark-icon);
 }

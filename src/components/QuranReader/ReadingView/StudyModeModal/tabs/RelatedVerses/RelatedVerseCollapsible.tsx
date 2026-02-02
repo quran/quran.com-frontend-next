@@ -109,7 +109,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
             {!isValidating && verse && (
               <div className={styles.collapsibleContent}>
                 <div className={styles.verseContainer}>
-                  <TopActions verse={verse} bookmarksRangeUrl="" shouldUseModalZIndex />
+                  <TopActions verse={verse} shouldUseModalZIndex />
                   <div className={styles.arabicText}>
                     <StudyModeVerseText words={getVerseWords(verse)} />
                   </div>

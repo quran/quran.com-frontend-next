@@ -93,7 +93,6 @@ const ReadingBookmarkSection: React.FC<ReadingBookmarkSectionProps> = ({
         <RemoveBookmarkSection
           resourceDisplayName={resourceDisplayName}
           isLoading={isLoading}
-          error={error}
           onRemove={handleRemoveCurrentBookmark}
         />
       ) : (

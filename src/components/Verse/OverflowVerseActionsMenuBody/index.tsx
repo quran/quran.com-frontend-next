@@ -18,7 +18,6 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl?: string;
   isInsideStudyMode?: boolean;
 }
 
@@ -26,7 +25,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
-  bookmarksRangeUrl, // eslint-disable-line @typescript-eslint/no-unused-vars
   isInsideStudyMode = false,
 }) => {
   const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
