@@ -14,7 +14,7 @@
   "delete-collection-success": "সংগ্রহটি সফলভাবে মুছে ফেলা হয়েছে",
   "delete-collection": {
     "description": "এই সংগ্রহে সংরক্ষিত সমস্ত পদ আপনি হারাবেন।",
-    "subtitle": "আপনি কি  সংগ্রহ মুছতে চান?",
+    "subtitle": "আপনি কি {{collectionName}} সংগ্রহ মুছতে চান?",
     "subtitle-tagged": "তুমি কি নিশ্চিত যে তুমি মুছে ফেলতে চাও? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "সংগ্রহ মুছুন"
   },

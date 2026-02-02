@@ -14,7 +14,7 @@
   "delete-collection-success": "تم حذف المجموعة بنجاح",
   "delete-collection": {
     "description": "ستفقد جميع الآيات المحفوظة داخل هذه المجموعة.",
-    "subtitle": "هل تريد حذف مجموعة  ",
+    "subtitle": "هل تريد حذف مجموعة {{collectionName}} ؟",
     "subtitle-tagged": "هل أنت متأكد من رغبتك في الحذف <collectionName>{{collectionName}}</collectionName> ؟",
     "title": "حذف المجموعة"
   },

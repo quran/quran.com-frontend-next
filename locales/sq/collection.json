@@ -14,7 +14,7 @@
   "delete-collection-success": "Koleksioni u fshi me sukses.",
   "delete-collection": {
     "description": "Do të humbasësh të gjitha vargjet e ruajtura brenda këtij koleksioni.",
-    "subtitle": "Jeni i sigurt që dëshironi të fshini",
+    "subtitle": "Jeni i sigurt që dëshironi të fshini {{collectionName}} ?",
     "subtitle-tagged": "A jeni i sigurt që doni të fshini <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Fshi koleksionin"
   },
