@@ -7,12 +7,12 @@ import styles from './EditCollectionModal.module.scss';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 
-type EditCollectionModalProps = {
+interface EditCollectionModalProps {
   isOpen: boolean;
   defaultValue: string;
   onClose: () => void;
   onSubmit: (data: { name: string }) => void;
-};
+}
 
 const EditCollectionModal = ({
   isOpen,
