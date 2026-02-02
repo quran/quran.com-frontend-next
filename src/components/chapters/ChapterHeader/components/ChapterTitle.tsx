@@ -42,9 +42,11 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
         {showTranslatedName && (
           <div className={styles.titleTextContainer}>
             <div className={styles.titleRow}>
+              <div className={styles.titleName}>
+                <p className={styles.transliteratedName}>{transliteratedName}</p>
+                <p className={styles.chapterNumber}>.{chapterId}</p>
+              </div>
               <SurahInfoButton chapterId={chapterId} />
-              <p className={styles.transliteratedName}>{transliteratedName}</p>
-              <p className={styles.chapterNumber}>.{chapterId}</p>
             </div>
             <p className={styles.translatedName}>{translatedName}</p>
           </div>

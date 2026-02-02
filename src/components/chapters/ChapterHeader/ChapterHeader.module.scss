@@ -2,7 +2,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/utility';
 
-$chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
 $bismillahSvgInlineSizeMobile: 148px;
@@ -31,7 +30,6 @@ $bismillahSvgInlineSizeMobile: 148px;
   align-content: start;
   margin-inline: auto;
   inline-size: 100%;
-  max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: constants.$reading-view-container-top-margin;
   margin-block-end: var(--spacing-medium2-px);
 
@@ -128,6 +126,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  row-gap: var(--spacing-xxsmall-px);
 
   @include breakpoints.smallerThanTablet {
     p {
@@ -137,9 +136,15 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .titleRow {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--spacing-small-px) / 2);
+  &,
+  .titleName {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-small-px) / 2);
+  }
+
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 
 .chapterTitle {
@@ -173,6 +178,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
+  line-height: 1;
   text-align: end;
 }
 
@@ -317,10 +323,9 @@ div {
 }
 
 .chapterIconContainer {
-  // a hack to center the surah name, because the font width is not correct
-  // leave a lot of empty space on the left
+  // a hack to make it visually aligned with the surah name
   /* stylelint-disable-next-line csstools/use-logical */
-  margin-right: 0.5rem;
+  margin-left: calc(var(--spacing-medium-plus-px) * -1);
 }
 
 .chapterEventWrapper {
