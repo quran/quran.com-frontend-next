@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-unused-prop-types */
 
 import { useRouter } from 'next/router';
@@ -82,12 +83,11 @@ const CollectionDetail = ({
         </Button>
       </div>
     </div>
-  ) : (
+  ) : hasScroll ? (
     <Virtuoso
       data={bookmarks}
       overscan={10}
       increaseViewportBy={100}
-      style={{ height: hasScroll ? '100%' : 'auto' }}
       itemContent={(index, bookmark) => (
         <CollectionVerseCell
           key={bookmark.id}
@@ -107,6 +107,25 @@ const CollectionDetail = ({
         />
       )}
     />
+  ) : (
+    bookmarks.map((bookmark) => (
+      <CollectionVerseCell
+        key={bookmark.id}
+        bookmarkId={bookmark.id}
+        chapterId={bookmark.key}
+        verseNumber={bookmark.verseNumber}
+        collectionId={id}
+        collectionName={title}
+        isOwner={isOwner}
+        onDelete={onItemDeleted}
+        createdAt={bookmark.createdAt}
+        isSelectMode={isSelectMode}
+        isSelected={isBookmarkSelected?.(bookmark.id)}
+        onToggleSelection={onToggleBookmarkSelection}
+        isExpanded={isCardExpanded?.(bookmark.id)}
+        onToggleExpansion={onToggleCardExpansion}
+      />
+    ))
   );
 
   return (
