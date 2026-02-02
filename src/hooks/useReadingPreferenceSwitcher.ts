@@ -13,6 +13,9 @@ import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
+// Threshold in pixels to consider the user "at the top" of the page
+const SCROLL_TOP_THRESHOLD = 100;
+
 export enum SwitcherContext {
   SurahHeader = 'surah_header',
   ContextMenu = 'context_menu',
@@ -67,11 +70,14 @@ const useReadingPreferenceSwitcher = ({
       // Prepare URL params
       const newQueryParams = { ...router.query };
 
-      if (context === SwitcherContext.SurahHeader) {
-        // In SurahHeader, user is at the top of the page, so remove startingVerse
+      // Check if user is at the top of the page
+      const isAtTop = typeof window !== 'undefined' && window.scrollY <= SCROLL_TOP_THRESHOLD;
+
+      if (context === SwitcherContext.SurahHeader || isAtTop) {
+        // User is at the top of the page, so remove startingVerse to prevent scrolling
         delete newQueryParams.startingVerse;
       } else {
-        // For ContextMenu and MobileTabs, always set startingVerse to ensure
+        // For ContextMenu and MobileTabs when not at top, set startingVerse to ensure
         // the virtualized scroll hooks navigate to the correct verse/page.
         // Default to verse 1 if no verse has been tracked yet.
         newQueryParams.startingVerse = lastReadVerse || '1';
