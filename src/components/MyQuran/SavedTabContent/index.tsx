@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useMemo, useState, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -27,6 +28,8 @@ const SavedTabContent: React.FC = () => {
     collections,
     isLoading: isCollectionsLoading,
     addCollection,
+    updateCollection,
+    deleteCollection: deleteCollectionFromHook,
   } = useCollections({
     type: BookmarkType.Ayah,
   });
@@ -38,9 +41,9 @@ const SavedTabContent: React.FC = () => {
   const [isSubmittingCollection, setIsSubmittingCollection] = useState(false);
   const [selectedCollection, setSelectedCollection] = useState<CollectionItem | null>(null);
 
-  const onNewCollectionClick = useCallback(() => {
-    setIsNewCollectionModalOpen(true);
-  }, []);
+  const onNewCollectionClick = useCallback(() => setIsNewCollectionModalOpen(true), []);
+  const onCollectionClick = useCallback((c: CollectionItem) => setSelectedCollection(c), []);
+  const onBackToCollections = useCallback(() => setSelectedCollection(null), []);
 
   const onNewCollectionCreated = useCallback(async () => {
     if (!newCollectionName.trim()) return;
@@ -53,41 +56,48 @@ const SavedTabContent: React.FC = () => {
     }
   }, [addCollection, newCollectionName]);
 
-  const onCollectionClick = useCallback((collection: CollectionItem) => {
-    setSelectedCollection(collection);
-  }, []);
+  const onCollectionUpdateRequest = useCallback(
+    async (collectionId: string, newName: string) => {
+      const success = await updateCollection(collectionId, newName);
+      if (success) {
+        setSelectedCollection((prev) =>
+          prev?.id === collectionId ? { ...prev, name: newName } : prev,
+        );
+      }
+      return success;
+    },
+    [updateCollection],
+  );
 
-  const onBackToCollections = useCallback(() => {
-    setSelectedCollection(null);
-  }, []);
+  const onCollectionDeleteRequest = useCallback(
+    async (collectionId: string) => {
+      const success = await deleteCollectionFromHook(collectionId);
+      if (success) setSelectedCollection(null);
+      return success;
+    },
+    [deleteCollectionFromHook],
+  );
 
-  // Transform collections to CollectionItem format
-  const collectionItems: CollectionItem[] = useMemo(() => {
-    return collections.map((collection) => ({
-      id: collection.id,
-      name: collection.isDefault ? t('collections.favorites') : collection.name,
-      itemCount: collection.bookmarksCount || collection.count,
-      updatedAt: collection.updatedAt,
-      isDefault: collection.isDefault,
-    }));
-  }, [collections, t]);
+  const collectionItems: CollectionItem[] = useMemo(
+    () =>
+      collections.map((collection) => ({
+        id: collection.id,
+        name: collection.isDefault ? t('collections.favorites') : collection.name,
+        itemCount: collection.bookmarksCount || collection.count,
+        updatedAt: collection.updatedAt,
+        isDefault: collection.isDefault,
+      })),
+    [collections, t],
+  );
 
-  // Filter collections based on search query
   const filteredCollections = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return collectionItems;
-    }
-
+    if (!searchQuery.trim()) return collectionItems;
     const query = searchQuery.toLowerCase();
     return collectionItems.filter((collection) => collection.name.toLowerCase().includes(query));
   }, [collectionItems, searchQuery]);
 
-  // Filter recently saved items based on search query
   const filteredRecentlySaved = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return recentlySavedItems;
-    }
-
+    if (!searchQuery.trim()) return recentlySavedItems;
     const query = searchQuery.toLowerCase();
     return recentlySavedItems.filter(
       (item) =>
@@ -124,6 +134,9 @@ const SavedTabContent: React.FC = () => {
           collectionName={selectedCollection.name}
           onBack={onBackToCollections}
           searchQuery={searchQuery}
+          isDefault={selectedCollection.isDefault}
+          onCollectionUpdateRequest={onCollectionUpdateRequest}
+          onCollectionDeleteRequest={onCollectionDeleteRequest}
         />
       ) : (
         <>

@@ -1,0 +1,56 @@
+.header {
+  text-align: center;
+  margin-block-end: var(--spacing-medium);
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded-new);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  margin-block-end: var(--spacing-large);
+}
+
+.inputLabel {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+}
+
+.collectionInput {
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: var(--border-width-small-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
+  font-size: var(--font-size-normal);
+  background-color: var(--color-background-default);
+  color: var(--color-text-default);
+  outline: none;
+  transition: border-color var(--transition-normal) ease;
+
+  &::placeholder {
+    color: var(--color-text-faded);
+  }
+
+  &:focus {
+    border-color: var(--color-primary-medium);
+  }
+}
+
+.footer {
+  display: flex;
+  gap: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  border-block-start: var(--border-width-default) solid var(--color-borders-hairline);
+}
+
+.cancelButton {
+  flex: 1;
+  border-radius: var(--border-radius-medium-px);
+}
+
+.saveButton {
+  flex: 1;
+  border-radius: var(--border-radius-medium-px);
+}

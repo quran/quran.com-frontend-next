@@ -11,8 +11,10 @@ import CollectionBulkActionsPopover from '@/components/Collection/CollectionActi
 import CollectionHeaderActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover';
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
+import EditCollectionModal from '@/components/Collection/EditCollectionModal/EditCollectionModal';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
 import Error from '@/components/Error';
+import DeleteCollectionModal from '@/components/MyQuran/DeleteCollectionModal';
 import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
@@ -44,6 +46,9 @@ interface CollectionDetailViewProps {
   collectionName: string;
   onBack: () => void;
   searchQuery?: string;
+  isDefault?: boolean;
+  onCollectionUpdateRequest?: (collectionId: string, newName: string) => Promise<boolean>;
+  onCollectionDeleteRequest?: (collectionId: string) => Promise<boolean>;
 }
 
 const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
@@ -51,6 +56,9 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   collectionName,
   onBack,
   searchQuery,
+  isDefault,
+  onCollectionUpdateRequest,
+  onCollectionDeleteRequest,
 }) => {
   const { t, lang } = useTranslation('my-quran');
   const dispatch = useDispatch();
@@ -69,7 +77,11 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   const [noteModalVerseKeys, setNoteModalVerseKeys] = useState<string[]>([]);
 
-  const onSortByChange = (newSortByVal) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const onSortByChange = (newSortByVal: CollectionDetailSortOption) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
     setSortBy(newSortByVal);
   };
@@ -200,6 +212,68 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
     setNoteModalVerseKeys([]);
   }, []);
 
+  const handleEditClick = useCallback(() => {
+    setIsEditModalOpen(true);
+    logButtonClick('collection_detail_edit_click', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+    });
+  }, [collectionId]);
+
+  const handleEditModalClose = useCallback(() => {
+    setIsEditModalOpen(false);
+  }, []);
+
+  const handleEditSubmit = useCallback(
+    async (formData: { name: string }) => {
+      const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
+
+      // Optimistic: close modal and show success immediately
+      setIsEditModalOpen(false);
+      toast(t('collection:edit-collection-success'), { status: ToastStatus.Success });
+      logButtonClick('collection_edit_success', { collectionId: numericCollectionId });
+
+      // Parent's update handler has optimistic updates built-in
+      const success = await onCollectionUpdateRequest?.(numericCollectionId, formData.name);
+      if (!success) {
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+        logButtonClick('collection_edit_failed', { collectionId: numericCollectionId });
+      }
+    },
+    [collectionId, toast, t, onCollectionUpdateRequest],
+  );
+
+  const handleDeleteClick = useCallback(() => {
+    logButtonClick('collection_detail_delete_click', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+    });
+    setIsDeleteModalOpen(true);
+  }, [collectionId]);
+
+  const handleDeleteModalClose = useCallback(() => {
+    setIsDeleteModalOpen(false);
+    logButtonClick('collection_delete_cancel', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+    });
+  }, [collectionId]);
+
+  const handleDeleteConfirm = useCallback(async () => {
+    const numericCollectionId = slugifiedCollectionIdToCollectionId(collectionId);
+    logButtonClick('collection_delete_confirm', { collectionId: numericCollectionId });
+    setIsDeleting(true);
+
+    if (onCollectionDeleteRequest) {
+      const success = await onCollectionDeleteRequest(numericCollectionId);
+      setIsDeleting(false);
+      if (success) {
+        setIsDeleteModalOpen(false);
+        toast(t('collection:delete-collection-success'), { status: ToastStatus.Success });
+        invalidateAllBookmarkCaches();
+      } else {
+        toast(t('common:error.general'), { status: ToastStatus.Error });
+      }
+    }
+  }, [collectionId, onCollectionDeleteRequest, toast, t, invalidateAllBookmarkCaches]);
+
   const pinVersesAndSync = useCallback(
     async (verseKeys: string[]) => {
       dispatch(pinVerses(verseKeys));
@@ -323,6 +397,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
           <CollectionHeaderActionsPopover
             onNoteClick={handleNoteClick}
             onPinVersesClick={handlePinAllVerses}
+            onEditClick={isDefault ? undefined : handleEditClick}
+            onDeleteClick={isDefault ? undefined : handleDeleteClick}
             dataTestPrefix="collection-header-actions"
           >
             <button type="button" className={styles.iconButton} aria-label={t('common:more')}>
@@ -415,6 +491,21 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         onModalClose={handleNoteModalClose}
         onMyNotes={handleNoteModalClose}
         verseKeys={noteModalVerseKeys}
+      />
+
+      <EditCollectionModal
+        isOpen={isEditModalOpen}
+        defaultValue={collectionName}
+        onSubmit={handleEditSubmit}
+        onClose={handleEditModalClose}
+      />
+
+      <DeleteCollectionModal
+        isOpen={isDeleteModalOpen}
+        collectionName={collectionName}
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteModalClose}
+        isLoading={isDeleting}
       />
     </div>
   );

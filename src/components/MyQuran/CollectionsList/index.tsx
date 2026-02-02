@@ -27,7 +27,8 @@ export interface CollectionsListProps {
 
 const INITIAL_DISPLAY_COUNT = 10;
 const PAGE_SIZE = 10;
-const ITEM_HEIGHT = 60;
+// Each collection item is approximately 70px tall including padding and border
+const ITEM_HEIGHT = 70;
 const MAX_VISIBLE_ITEMS = 5;
 const LIST_HEIGHT = ITEM_HEIGHT * MAX_VISIBLE_ITEMS;
 

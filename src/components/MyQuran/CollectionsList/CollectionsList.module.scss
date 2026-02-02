@@ -94,31 +94,6 @@
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-large-px);
   overflow: hidden;
-
-  // Custom scrollbar styling for virtual list
-  :global {
-    [data-virtuoso-scroller] {
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-borders-hairline) transparent;
-
-      &::-webkit-scrollbar {
-        inline-size: var(--spacing-xxsmall2-px);
-      }
-
-      &::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: var(--color-borders-hairline);
-        border-radius: var(--border-radius-pill);
-
-        &:hover {
-          background-color: var(--color-text-faded);
-        }
-      }
-    }
-  }
 }
 
 .list {

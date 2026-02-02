@@ -29,18 +29,16 @@ const CollectionListItem: React.FC<CollectionListItemProps> = ({
       <BookmarkFilled />
     </div>
     <span className={styles.collectionName}>{collection.name}</span>
-    {collection.itemCount !== undefined && (
-      <div className={styles.collectionBadge}>
-        <span className={styles.collectionCount}>{itemsLabel}</span>
-        <IconContainer
-          icon={<ChevronRightIcon />}
-          size={IconSize.Custom}
-          shouldFlipOnRTL
-          shouldForceSetColors={false}
-          className={styles.collectionBadgeIcon}
-        />
-      </div>
-    )}
+    <div className={styles.collectionBadge}>
+      <span className={styles.collectionCount}>{itemsLabel}</span>
+      <IconContainer
+        icon={<ChevronRightIcon />}
+        size={IconSize.Custom}
+        shouldFlipOnRTL
+        shouldForceSetColors={false}
+        className={styles.collectionBadgeIcon}
+      />
+    </div>
   </button>
 );
 

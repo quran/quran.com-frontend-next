@@ -6,13 +6,17 @@ import styles from './CollectionActionsPopover.module.scss';
 
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
+import EditIcon from '@/icons/edit.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import PinIcon from '@/icons/pin.svg';
+import TrashIcon from '@/icons/trash.svg';
 
 type CollectionHeaderActionsPopoverProps = {
   children: React.ReactNode;
   onNoteClick: () => void;
   onPinVersesClick: () => void;
+  onEditClick?: () => void;
+  onDeleteClick?: () => void;
   align?: PopoverMenuAlign;
   dataTestPrefix?: string;
 };
@@ -21,6 +25,8 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
   children,
   onNoteClick,
   onPinVersesClick,
+  onEditClick,
+  onDeleteClick,
   align = PopoverMenuAlign.END,
   dataTestPrefix = 'collection-header-actions',
 }) => {
@@ -28,6 +34,38 @@ const CollectionHeaderActionsPopover: React.FC<CollectionHeaderActionsPopoverPro
 
   return (
     <PopoverMenu align={align} trigger={children}>
+      {onEditClick && (
+        <PopoverMenu.Item
+          onClick={onEditClick}
+          shouldCloseMenuAfterClick
+          dataTestId={`${dataTestPrefix}-edit`}
+          className={styles.menuItem}
+        >
+          <IconContainer
+            className={styles.iconWrapper}
+            size={IconSize.Custom}
+            shouldForceSetColors={false}
+            icon={<EditIcon />}
+          />
+          <span className={styles.menuItemText}>{t('collection:edit-collection')}</span>
+        </PopoverMenu.Item>
+      )}
+      {onDeleteClick && (
+        <PopoverMenu.Item
+          onClick={onDeleteClick}
+          shouldCloseMenuAfterClick
+          dataTestId={`${dataTestPrefix}-delete`}
+          className={styles.menuItem}
+        >
+          <IconContainer
+            className={styles.iconWrapper}
+            size={IconSize.Custom}
+            shouldForceSetColors={false}
+            icon={<TrashIcon />}
+          />
+          <span className={styles.menuItemText}>{t('collection:delete-collection-action')}</span>
+        </PopoverMenu.Item>
+      )}
       <PopoverMenu.Item
         onClick={onPinVersesClick}
         shouldCloseMenuAfterClick
