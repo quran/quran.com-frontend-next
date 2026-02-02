@@ -110,9 +110,10 @@ const PinnedVersesBar: React.FC = () => {
     logButtonClick('pinned_menu_add_note');
     if (!isLoggedIn()) {
       router.push(getLoginNavigationUrl(router.asPath));
-    } else {
-      setIsNoteModalOpen(true);
+      return;
     }
+
+    setIsNoteModalOpen(true);
   }, [router]);
 
   if (pinnedVerses.length === 0) return null;
