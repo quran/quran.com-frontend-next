@@ -6,7 +6,7 @@ import styles from './CollectionActionsPopover.module.scss';
 
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
-import EditIcon from '@/icons/edit.svg';
+import EditIcon from '@/icons/bx-edit-alt.svg';
 import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 import PinIcon from '@/icons/pin.svg';
 import TrashIcon from '@/icons/trash.svg';
