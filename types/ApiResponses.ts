@@ -105,6 +105,7 @@ export interface TafsirsResponse extends BaseResponse {
 
 export interface ChapterInfoResponse extends BaseResponse {
   chapterInfo?: ChapterInfo;
+  resources?: ChapterInfoResource[];
 }
 
 export interface FootnoteResponse extends BaseResponse {
