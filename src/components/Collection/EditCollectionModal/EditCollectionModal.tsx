@@ -8,6 +8,7 @@ import styles from './EditCollectionModal.module.scss';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
+import CloseIcon from '@/icons/close.svg';
 
 interface EditCollectionModalProps {
   isOpen: boolean;
@@ -50,9 +51,24 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   );
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose} isBottomSheetOnMobile={false}>
+    <Modal
+      isOpen={isOpen}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
+      isBottomSheetOnMobile={false}
+    >
       <Modal.Body>
-        <div className={styles.header}>{t('edit-collection')}</div>
+        <div className={styles.header}>
+          <div className={styles.title}>{t('edit-collection')}</div>
+          <button
+            type="button"
+            className={styles.closeButton}
+            onClick={onClose}
+            aria-label={commonT('close')}
+          >
+            <CloseIcon />
+          </button>
+        </div>
 
         <div className={styles.formContainer}>
           <label htmlFor="edit-collection-name" className={styles.inputLabel}>

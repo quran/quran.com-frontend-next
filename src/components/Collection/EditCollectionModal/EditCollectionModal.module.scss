@@ -1,9 +1,32 @@
 .header {
-  text-align: start;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-block-end: var(--spacing-medium);
+}
+
+.title {
+  text-align: start;
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded-new);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default);
+
+  svg {
+    block-size: var(--spacing-medium3-px);
+    inline-size: var(--spacing-medium2-px);
+  }
 }
 
 .formContainer {
