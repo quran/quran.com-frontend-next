@@ -98,7 +98,7 @@ const CollectionDetail = ({
           overscan={10}
           increaseViewportBy={100}
           useWindowScroll
-          itemContent={(unusedIndex, bookmark) => renderBookmarkCell(bookmark)}
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
         />
       );
     }
@@ -111,7 +111,7 @@ const CollectionDetail = ({
           data={bookmarks}
           overscan={10}
           increaseViewportBy={100}
-          itemContent={(unusedIndex, bookmark) => renderBookmarkCell(bookmark)}
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
         />
       );
     }
