@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -87,24 +85,12 @@ const CollectionDetailContainer = ({
   const onItemDeleted = (bookmarkId: string) => {
     if (shouldDeleteBookmark) {
       deleteBookmarkById(bookmarkId)
-        .then(() => {
-          onUpdated();
-        })
-        .catch(() => {
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        });
+        .then(() => onUpdated())
+        .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
     } else {
       deleteCollectionBookmarkById(collectionId, bookmarkId)
-        .then(() => {
-          onUpdated();
-        })
-        .catch(() => {
-          toast(t('common:error.general'), {
-            status: ToastStatus.Error,
-          });
-        });
+        .then(() => onUpdated())
+        .catch(() => toast(t('common:error.general'), { status: ToastStatus.Error }));
     }
   };
 
@@ -112,21 +98,14 @@ const CollectionDetailContainer = ({
   const onToggleCardExpansion = (bookmarkId: string) => {
     setExpandedBookmarkId((prev) => {
       const newSet = new Set(prev);
-
-      if (newSet.has(bookmarkId)) {
-        newSet.delete(bookmarkId);
-      } else {
-        newSet.add(bookmarkId);
-      }
-
+      if (newSet.has(bookmarkId)) newSet.delete(bookmarkId);
+      else newSet.add(bookmarkId);
       return newSet;
     });
   };
 
   // Check if a specific card is expanded
-  const isCardExpanded = (bookmarkId: string) => {
-    return expandedBookmarkId.has(bookmarkId);
-  };
+  const isCardExpanded = (bookmarkId: string) => expandedBookmarkId.has(bookmarkId);
 
   if (error && !isValidating) {
     return <Error hasFullWidth={false} />;
