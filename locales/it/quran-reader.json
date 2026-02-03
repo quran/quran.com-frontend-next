@@ -88,6 +88,20 @@
   "info": "informazioni",
   "juz-beginning": "Inizio di Juz",
   "languages": "Lingue",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 storie che cambiano la vita: lezioni dal banner del piano di apprendimento della Sura Al-Kahf",
+    "banner-image-description": "Visualizza il piano di apprendimento per la Sura Al-Kahf",
+    "button-accessibility-label": "Scopri di più sul piano di apprendimento della Sura Al-Kahf",
+    "main-headline": "Scopri 4 storie che cambiano la vita dalla Sura Al-Kahf",
+    "subtitle-description": "(Un piano di apprendimento gratuito)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Il soccorritore: potenti lezioni nel banner del piano di apprendimento della Sura Al-Mulk",
+    "banner-image-description": "Visualizza il piano di apprendimento di The Rescuer per la Sura Al-Mulk",
+    "button-accessibility-label": "Scopri di più sul piano di apprendimento The Rescuer",
+    "main-headline": "Scopri oggi stesso le potenti lezioni della Sura Al-Mulk",
+    "subtitle-description": "(Un piano di apprendimento gratuito)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Il soccorritore: potenti lezioni nel banner del piano di apprendimento della Sura Al-Mulk",
     "banner-image-description": "Visualizza il piano di apprendimento di The Rescuer per la Sura Al-Mulk",

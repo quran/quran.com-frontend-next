@@ -88,6 +88,20 @@
   "info": "informasi",
   "juz-beginning": "Awal Juz",
   "languages": "Bahasa",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Kisah yang Mengubah Hidup: Pelajaran dari Surah Al-Kahf (spanduk rencana pembelajaran)",
+    "banner-image-description": "Lihat rencana pembelajaran untuk Surah Al-Kahf",
+    "button-accessibility-label": "Pelajari lebih lanjut tentang rencana pembelajaran Surah Al-Kahf.",
+    "main-headline": "Temukan 4 kisah yang mengubah hidup dari Surah Al-Kahf",
+    "subtitle-description": "(Rencana Pembelajaran Gratis)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Sang Penyelamat: Pelajaran Berharga dalam Surah Al-Mulk (Sang Penyelamat) (Banner rencana pembelajaran)",
+    "banner-image-description": "Lihat rencana pembelajaran Sang Penyelamat untuk Surah Al-Mulk",
+    "button-accessibility-label": "Pelajari lebih lanjut tentang rencana pembelajaran The Rescuer.",
+    "main-headline": "Temukan pelajaran berharga dalam Surah Al-Mulk hari ini.",
+    "subtitle-description": "(Rencana Pembelajaran Gratis)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Resquer (Sang Penyelamat): Pelajaran Berharga dalam Rencana Pembelajaran Surah Al-Mulk",
     "banner-image-description": "Lihat rencana pembelajaran Sang Penyelamat untuk Surah Al-Mulk",

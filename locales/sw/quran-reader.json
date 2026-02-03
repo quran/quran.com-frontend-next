@@ -88,6 +88,20 @@
   "info": "taarifa",
   "juz-beginning": "Mwanzo wa Juzuu",
   "languages": "Lugha",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "Hadithi 4 Zinazobadilisha Maisha: Masomo Kutoka kwa Bango la Mpango wa Kujifunza la Surah Al-Kahf",
+    "banner-image-description": "Tazama mpango wa kujifunza wa Surah Al-Kahf",
+    "button-accessibility-label": "Jifunze zaidi kuhusu mpango wa kujifunza wa Surah Al-Kahf",
+    "main-headline": "Gundua hadithi 4 zinazobadilisha maisha kutoka Surah Al-Kahf",
+    "subtitle-description": "(Mpango wa Kujifunza bila malipo)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Mwokozi: Masomo Yenye Nguvu katika Bango la Mpango wa Kujifunza la Surah Al-Mulk",
+    "banner-image-description": "Tazama mpango wa kujifunza wa The Rescuer kwa Surah Al-Mulk",
+    "button-accessibility-label": "Pata maelezo zaidi kuhusu mpango wa kujifunza wa The Rescuer",
+    "main-headline": "Gundua masomo yenye nguvu katika Surah Al-Mulk leo",
+    "subtitle-description": "(Mpango wa Kujifunza bila malipo)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Mwokozi: Bango la masomo Yenye athari kubwa katika mpango wa mafunzo wa Surah Al-Mulk",
     "banner-image-description": "Tazama mpango wa kujifunza Surah Al-Mulk uitwayo 'The Rescuer'",

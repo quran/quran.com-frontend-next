@@ -88,6 +88,20 @@
   "info": "معلومات",
   "juz-beginning": "پارے کا آغاز",
   "languages": "زبانیں",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 زندگی بدل دینے والی کہانیاں: سورۃ الکہف سیکھنے کے پلان بینر سے اسباق",
+    "banner-image-description": "سورہ کہف کا سیکھنے کا منصوبہ دیکھیں",
+    "button-accessibility-label": "سورہ کہف سیکھنے کے منصوبے کے بارے میں مزید جانیں۔",
+    "main-headline": "سورہ کہف سے زندگی بدل دینے والی 4 کہانیاں دریافت کریں۔",
+    "subtitle-description": "(ایک مفت سیکھنے کا منصوبہ)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "نجات دہندہ: سورہ الملک سیکھنے کی منصوبہ بندی کے بینر میں طاقتور اسباق",
+    "banner-image-description": "سورۃ الملک کے لیے ریسکیور لرننگ پلان دیکھیں",
+    "button-accessibility-label": "ریسکیور لرننگ پلان کے بارے میں مزید جانیں۔",
+    "main-headline": "آج سورۃ الملک میں طاقتور اسباق دریافت کریں۔",
+    "subtitle-description": "(ایک مفت سیکھنے کا منصوبہ)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "سورہ الملک: نجات کا پیغام اور زندگی بدل دینے والے اسباق",
     "banner-image-description": "سورۃ الملک کے لیے لرننگ پلان دیکھیں",
