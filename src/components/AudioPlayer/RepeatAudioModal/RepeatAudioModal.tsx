@@ -73,9 +73,7 @@ const RepeatAudioModal = ({
     }
     return getChapterData(chaptersData, chapterId);
   }, [chapterId, chaptersData]);
-  const {
-    actions: { onSettingsChangeWithoutDispatch },
-  } = usePersistPreferenceGroup();
+
   const chapterName = chapterData?.transliteratedName;
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
