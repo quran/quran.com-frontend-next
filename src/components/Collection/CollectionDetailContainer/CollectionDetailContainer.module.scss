@@ -1,9 +1,10 @@
+@use 'src/styles/breakpoints';
+
 $max-line-size: 700px;
 
 .wrapper {
   background: var(--color-background-elevated-new);
-  padding-inline: var(--spacing-medium2-px);
-  padding-block-start: var(--spacing-large-px);
+  padding-inline: var(--spacing-small);
   padding-block-end: var(--spacing-xxxlarge-px);
 }
 
@@ -14,27 +15,44 @@ $max-line-size: 700px;
 }
 
 .stickyHeader {
-  position: sticky;
-  top: 0;
   z-index: 10;
+  position: relative;
   background: var(--color-background-elevated-new);
-  padding-block-start: var(--spacing-small-px);
-  padding-block-end: var(--spacing-small-px);
+  padding-block: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium2-px);
+  transition: var(--transition-fast) ease-out;
+
+  @include breakpoints.tablet {
+    position: sticky;
+    inset-block-start: 0;
+    transition: var(--transition-regular);
+    &[data-navbar-visible='true'] {
+      inset-block-start: var(--navbar-container-height);
+    }
+  }
 
   &::after {
     content: '';
     position: absolute;
     inset-inline: 0;
-    bottom: 0;
+    inset-block-end: 0;
     block-size: 1px;
     background: var(--color-separators-ayah-level);
   }
 }
 
-.backButton {
-  inline-size: max-content;
-  justify-content: flex-start;
-  margin-block-end: var(--spacing-medium2-px);
+.wrapper {
+  .backButton {
+    font-size: var(--font-size-large2);
+    inline-size: max-content;
+    justify-content: flex-start;
+    block-size: auto;
+    margin: 0;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xlarge);
+    }
+  }
 }
 
 .statusContainer {

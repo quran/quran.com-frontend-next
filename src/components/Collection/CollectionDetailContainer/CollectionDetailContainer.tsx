@@ -5,6 +5,7 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
 
 import styles from './CollectionDetailContainer.module.scss';
@@ -13,12 +14,15 @@ import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import Error from '@/components/Error';
 import backButtonStyles from '@/components/MyQuran/CollectionDetailView/CollectionDetailView.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
+import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import ChevronLeft from '@/icons/chevron-left.svg';
+import { selectNavbar } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -51,6 +55,10 @@ const CollectionDetailContainer = ({
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
   const { invalidateAllBookmarkCaches } = useBookmarkCacheInvalidator();
+
+  const { isActive } = useOnboarding();
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const isNavbarShown = useDebounceNavbarVisibility(isNavbarVisible, isActive);
 
   // State for managing which bookmark card is expanded
   const [expandedBookmarkId, setExpandedBookmarkId] = useState<Set<string>>(new Set());
@@ -140,7 +148,7 @@ const CollectionDetailContainer = ({
 
       <div className={styles.wrapper}>
         <div className={styles.container}>
-          <div className={styles.stickyHeader}>
+          <div className={styles.stickyHeader} data-navbar-visible={isNavbarShown}>
             <Button
               href={getProfileNavigationUrl()}
               variant={ButtonVariant.Ghost}

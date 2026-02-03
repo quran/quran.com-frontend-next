@@ -391,6 +391,8 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         )}
       </div>
 
+      <div className={styles.separator} />
+
       <CollectionDetail
         id={slugifiedCollectionIdToCollectionId(collectionId)}
         title={collectionName}

@@ -28,8 +28,6 @@
 }
 
 .collectionItemsContainer {
-  margin-block-start: var(--spacing-medium-px);
-
   &:not(.bodyScroll) {
     block-size: calc(var(--spacing-mega-px) * 5);
     overflow: hidden;

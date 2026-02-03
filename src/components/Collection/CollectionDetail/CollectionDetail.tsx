@@ -64,7 +64,6 @@ const CollectionDetail = ({
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.separator} />
         <div
           className={classNames(styles.collectionItemsContainer, {
             [styles.bodyScroll]: shouldUseBodyScroll,

@@ -203,6 +203,12 @@
   }
 }
 
+.separator {
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  margin-block-end: var(--spacing-medium-px);
+  animation: fadeIn var(--transition-moderate) ease-out;
+}
+
 .selectModeActions {
   display: flex;
   gap: var(--spacing-small-px);
