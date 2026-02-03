@@ -3,6 +3,8 @@ import { useCallback, useRef, RefObject } from 'react';
 import useIsMobile from '@/hooks/useIsMobile';
 
 const DEFAULT_CONTEXT_MENU_HEIGHT = 70;
+const DEFAULT_CONTEXT_MENU_HEIGHT_BEFORE_COLLAPSED = 156;
+const MAX_SCROLL_POSITION_TO_NAVBAR_COLLAPSED = 13;
 
 /**
  * A hook that scrolls to a specific element in the DOM with an offset for the context menu.
@@ -21,7 +23,10 @@ const useScrollWithContextMenuOffset = <T extends HTMLElement>(): [() => void, R
         elementRef.current.getBoundingClientRect().top + currentScrollPosition;
 
       // Context menu height and responsive padding
-      const contextMenuHeight = DEFAULT_CONTEXT_MENU_HEIGHT;
+      const contextMenuHeight =
+        isMobile && currentScrollPosition < MAX_SCROLL_POSITION_TO_NAVBAR_COLLAPSED
+          ? DEFAULT_CONTEXT_MENU_HEIGHT_BEFORE_COLLAPSED
+          : DEFAULT_CONTEXT_MENU_HEIGHT;
       const mobilePaddingOffset = 22; // Padding offset for mobile devices
       const desktopPaddingOffset = -23; // Padding offset for desktop devices
       const paddingOffset = isMobile ? mobilePaddingOffset : desktopPaddingOffset;
