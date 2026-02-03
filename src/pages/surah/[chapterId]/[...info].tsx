@@ -1,6 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
@@ -13,7 +10,6 @@ import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { ChapterResponse, VersesResponse, ChapterInfoResponse } from '@/types/ApiResponses';
-import ChapterInfoResource from '@/types/ChapterInfo';
 import ChaptersData from '@/types/ChaptersData';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
@@ -54,7 +50,8 @@ const ChapterInfo: NextPage<ChapterInfoProps> = ({
   const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
 
   return (
-    <>
+    // @ts-ignore
+    <SWRConfig value={{ fallback }}>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
           1,
@@ -71,22 +68,18 @@ const ChapterInfo: NextPage<ChapterInfoProps> = ({
         description={chapterInfoResponse.chapterInfo.shortText}
       />
 
-      <SWRConfig value={{ fallback }}>
-        <SurahInfoPage
-          chapterInfo={chapterInfoResponse.chapterInfo}
-          chapter={chapterResponse.chapter}
-          resources={chapterInfoResponse.resources}
-          initialResourceId={initialResourceId}
-          chapterId={chapterResponse.chapter.id}
-        />
-      </SWRConfig>
+      <SurahInfoPage
+        chapter={chapterResponse.chapter}
+        initialResourceId={initialResourceId}
+        chapterId={chapterResponse.chapter.id}
+      />
 
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
         quranReaderDataType={quranReaderDataType}
       />
-    </>
+    </SWRConfig>
   );
 };
 
@@ -124,12 +117,12 @@ const getChapterInfoData = async (chapterId: string, locale: string) => {
   return { versesResponse: minimalVersesResponse, chaptersData };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { params, locale } = context;
+// eslint-disable-next-line react-func/max-lines-per-function
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let chapterId = String(params.chapterId);
-  // Extract the info array - it can be undefined (for /surah/1/info) or ['resourceId'] (for /surah/1/info/58)
-  const infoArray = params.info as string[] | undefined;
-  const resourceId = infoArray?.[0]; // First element is the resource ID if present
+
+  const infoArray = params.info as string[];
+  const resourceId = infoArray.length > 1 ? infoArray[1] : undefined;
 
   if (!isValidChapterId(chapterId)) {
     const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
@@ -141,25 +134,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const { versesResponse, chaptersData } = await getChapterInfoData(chapterId, locale);
     const chapterData = getChapterData(chaptersData, chapterId);
 
-    // Fetch chapter info with resource filter if provided, and include resources list
-    const chapterInfoResponse = await getChapterInfo(chapterId, locale, {
-      resourceId,
-      includeResources: true,
-    });
+    const apiParams = { ...(resourceId && { resourceId }), includeResources: true };
 
-    /**
-     * If the request succeeds, `chapterInfo` should exist.
-     * Its absence means the surah has no chapter info yet.
-     */
+    const chapterInfoResponse = await getChapterInfo(chapterId, locale, apiParams);
     if (!chapterInfoResponse?.chapterInfo) return { notFound: true };
 
-    // Create fallback for SWR to avoid client-side refetch
-    const apiParams = resourceId
-      ? { resource_id: resourceId, language: locale }
-      : { language: locale };
     const fallback = {
-      [makeChapterInfoUrl(chapterId, locale, { resourceId, includeResources: true })]:
-        chapterInfoResponse,
+      [makeChapterInfoUrl(chapterId, locale, apiParams)]: chapterInfoResponse,
     };
 
     return {
