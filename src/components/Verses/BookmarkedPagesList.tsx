@@ -88,7 +88,7 @@ const BookmarkedPagesList = () => {
     logButtonClick('view_all_page_bookmarks');
   };
 
-  if (isValidating && !data) {
+  if (isValidating) {
     return (
       <div className={styles.container}>
         <div className={styles.bookmarksContainer}>

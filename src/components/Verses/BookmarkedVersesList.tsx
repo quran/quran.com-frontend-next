@@ -111,7 +111,7 @@ const BookmarkedVersesList = () => {
     logButtonClick('view_all_bookmarks');
   };
 
-  if (isValidating && !data) {
+  if (isValidating) {
     return (
       <div className={styles.container}>
         <div className={styles.bookmarksContainer}>
