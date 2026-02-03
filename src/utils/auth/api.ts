@@ -374,16 +374,29 @@ export const getSurahBookmarks = async (
 ): Promise<BookmarksMap> => {
   const limit = 20;
   const bookmarks: Bookmark[] = [];
-  let response: Bookmark[];
+  const seenIds = new Set<string>();
   let page = 1;
-  do {
+  let response: Bookmark[] = [];
+  let pagesFetched = 0;
+  const maxPages = 200;
+
+  while (pagesFetched < maxPages) {
     // eslint-disable-next-line no-await-in-loop
     response = (await privateFetcher(
       makeBookmarksUrl(mushafId, limit, BookmarkType.Ayah, undefined, surahNumber, page),
     )) as Bookmark[];
-    bookmarks.push(...response);
+
+    const newItems = response.filter((bookmark) => !seenIds.has(bookmark.id));
+    newItems.forEach((bookmark) => {
+      seenIds.add(bookmark.id);
+      bookmarks.push(bookmark);
+    });
+
+    if (response.length < limit || newItems.length === 0) break;
+
     page += 1;
-  } while (response.length === limit);
+    pagesFetched += 1;
+  }
   const bookmarksMap: BookmarksMap = {};
   bookmarks.forEach((bookmark) => {
     const verseKey = bookmark.verseNumber
