@@ -1,0 +1,27 @@
+@use 'src/styles/breakpoints';
+
+.menuContent {
+  padding-block: var(--spacing-small-px);
+  border-radius: var(--spacing-xxsmall-px);
+  min-inline-size: auto;
+  z-index: var(--z-index-modal);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menuItemText {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default);
+}
+
+.menuItemIcon {
+  inline-size: var(--spacing-small2-px);
+  block-size: var(--spacing-small2-px);
+  color: var(--color-grey-icons-new);
+}

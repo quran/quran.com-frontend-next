@@ -1,0 +1,31 @@
+@use 'src/styles/breakpoints';
+
+.banner {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-default-new);
+  font-size: var(--font-size-normal);
+  margin-block-end: var(--spacing-medium2);
+  flex-wrap: wrap;
+  gap: var(--spacing-xxsmall);
+
+  @include breakpoints.tablet {
+    gap: var(--spacing-xsmall);
+  }
+}
+
+.icon {
+  block-size: var(--spacing-medium2);
+  inline-size: var(--spacing-medium2);
+  color: var(--color-text-faded-new);
+  flex-shrink: 0;
+}
+
+.text {
+  font-weight: var(--font-weight-bold);
+}
+
+.learnMore {
+  color: var(--color-text-link-new);
+  white-space: nowrap;
+}

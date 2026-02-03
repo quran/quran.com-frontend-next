@@ -45,6 +45,7 @@
     "play-surah": "Écouter la Sourate {{surahName}}",
     "select-lng": "Choisir la langue",
     "sidebar-nav-close": "Fermer la barre latérale de navigation",
+    "tooltip-action": "Action de l'infobulle",
     "translation-info": "Afficher les informations de traduction"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Diminuer",
     "increase": "Augmenter"
   },
+  "create": "Créer",
   "create-my-goal": "Créer mon objectif",
   "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
   "delete": "Supprimer",
@@ -150,6 +152,7 @@
   "donate-now": "Faire un don maintenant",
   "donate_monthly": "Faire un don mensuel",
   "donate_once": "Faire un don",
+  "done": "Fait",
   "edit": "Modifier",
   "email-verification": {
     "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez vos spams",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud.",
     "ranges-no-value": "Le début et la fin de la plage doivent avoir une valeur",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "L'Ayah de départ doit être avant l'Ayah de fin."
+    "ranges-wrong-order": "L'Ayah de départ doit être avant l'Ayah de fin.",
+    "reading-bookmark-remove": "Impossible de supprimer le signet de lecture",
+    "reading-bookmark-set": "Impossible de définir le signet de lecture",
+    "reading-bookmark-undo": "Impossible d'annuler le signet de lecture"
   },
   "errors": {
     "account-banned": "Désolé, votre compte est banni. Veuillez contacter Quran.Foundation",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "Échec de l'inscription. Veuillez réessayer.",
     "confirm": "*Les mots de passe saisis sont différents",
     "email": "*Format d'e-mail invalide !",
+    "equal": "*{{fieldName}} ne correspond pas",
     "exactLength": "*La valeur doit contenir exactement le nombre de caractères requis",
     "expiredToken": "*Ce jeton est expiré",
+    "file-exceeds-limit": "La taille du fichier dépasse la limite autorisée. Veuillez choisir un fichier plus petit.",
     "forgot-password-failed": "L'envoi d'e-mail de réinitialisation du mot de passe a échoué. Veuillez réessayer.",
+    "image-remove-failed": "Impossible de supprimer l'image. Veuillez réessayer.",
+    "image-upload-failed": "Impossible d'envoyer l'image. Veuillez réessayer.",
     "immutable": "*Cette valeur ne peut pas être modifiée",
     "invalid": "*{{fieldName}} invalide",
+    "invalid-file-format": "Format de fichier invalide. Seuls les fichiers {{formats}} sont autorisés.",
     "invalidEmailOrPassword": "*E-mail ou mot de passe invalide",
     "max": "* {{fieldName}} doit être inférieur ou égal à {{max}} chiffres",
     "min": "* {{fieldName}} doit être supérieur ou égal à {{min}} chiffres",
     "name": "* {{fieldName}} doit être composé uniquement de lettres et de chiffres",
     "notFound": "*Non trouvé",
+    "profile-pic-size-limit": "La taille de la photo de profil devrait être de {{size}}Mo maximum",
+    "remove-avatar-failed": "Impossible de supprimer l'avatar. Veuillez réessayer.",
     "required": "* {{fieldName}} manquant !",
     "reset-password-failed": "La réinitialisation du mot de passe a échoué. Veuillez réessayer.",
     "signin-failed": "La connexion a échoué. Veuillez réessayer.",
     "signup-failed": "L'inscription a échoué. Veuillez réessayer.",
     "taken": "* {{fieldName}} existe déjà !",
+    "upload-avatar-failed": "Impossible d'envoyer l'avatar. Veuillez réessayer.",
     "usedToken": "*Ce jeton a déjà été utilisé",
     "username": "* {{fieldName}} accepte uniquement les traits de soulignement et les lettres",
     "verification-code-invalid": "Ce code de vérification n'est pas valide",
     "verification-code-length": "Le code de vérification doit contenir {{length}} chiffres",
     "verification-failed": "La vérification a échoué. Veuillez réessayer.",
-    "verification-resend-failed": "Le renvoi du code de vérification a échoué"
+    "verification-resend-failed": "Le renvoi du code de vérification a échoué",
+    "verse-metadata-failed": "Impossible de charger les métadonnées du verset"
   },
   "exciting-updates": "Mises à jour importantes",
+  "favorites": "Favoris",
   "feedback": "Avis",
   "fonts": {
     "15_lines": "15 lignes",
@@ -231,10 +247,13 @@
   "form": {
     "body": "Corps",
     "code": "Code de vérification",
+    "confirm-new-password": "Confirmer le nouveau mot de passe",
     "confirm-password": "Confirmer le mot de passe",
+    "current-password": "Mot de passe actuel",
     "email": "E-mail",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
+    "new-password": "Nouveau mot de passe",
     "password": "Mot de passe",
     "title": "Titre",
     "username": "Nom d'utilisateur",
@@ -255,6 +274,7 @@
     "title": "Devenir un donateur mensuel"
   },
   "get-started": "Commencer",
+  "go-to-verse": "Aller à l'Ayah",
   "hear-it-pronounced": "Cliquez sur les mots du Coran, écoutez la prononciation",
   "help": "Aider",
   "hizb": "Hizb",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "Effacer"
   },
+  "join-ramadan-challenge": "🚀 Participez à notre défi du Ramadan !",
   "juz": "Juz",
   "language": "Langue",
   "languages": "Langues",
@@ -338,10 +359,11 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Lire",
+  "read-more": "En savoir plus",
   "reading-history": "Historique de lecture",
   "reading-preference": {
     "arabic": "arabe",
-    "my-translations": "Mes traductions",
+    "my-translations": "Mes Traductions",
     "none-selected": "Aucun sélectionné",
     "reading": "Lecture",
     "reading-translation": "Traduction",
@@ -358,6 +380,7 @@
   "reflect": "Méditer",
   "reflections": "Réflexions",
   "reflections-and-lessons": "Réflexions & Leçons",
+  "related-verses": "Ayaat apparentées",
   "remove": "Supprimer",
   "rename": "Renommer",
   "retry": "Réessayer",
@@ -383,6 +406,7 @@
     "title": "Rechercher"
   },
   "seconds": "Secondes",
+  "see-less": "Voir moins",
   "see-new": "Voir les nouveautés",
   "select-language": "Sélectionner la langue",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "Croissant",
     "by": "Trier par",
-    "descending": "Décroissant"
+    "descending": "Décroissant",
+    "sort": "Trier"
   },
   "stay-on-track": "🎯 Restez sur la bonne voie !",
   "style": "Style",

@@ -1,0 +1,54 @@
+{
+  "bulk-actions": {
+    "actions": "Ações",
+    "actions-count": "Ações ({{count}})",
+    "cancel": "Cancelar",
+    "collapse-all": "Recolher tudo",
+    "expand-all": "Expandir tudo",
+    "pin": "Alfinete",
+    "pin-verses": "Versos de alfinete",
+    "select": "Selecione"
+  },
+  "collections": {
+    "favorites": "Favoritos",
+    "guest-promo": {
+      "sign-in": "Entrar",
+      "subtitle": "Comparar e contrastar versículos",
+      "title": "Criar coleções personalizadas"
+    },
+    "items": "{{count}} item",
+    "items_plural": "{{count}} Unid",
+    "load-more": "Carregar mais",
+    "new-collection": "Nova Coleção",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Atualizado recentemente",
+      "z-a": "Z - A"
+    },
+    "title": "Coleções"
+  },
+  "notes-and-reflections": "Anotações e reflexões",
+  "page": "Página",
+  "reading-bookmark": {
+    "empty": "Comece a ler e salve um marcador de leitura!",
+    "title": "Meu marcador de leitura"
+  },
+  "recent": "Recente",
+  "recent-empty": "Comece a ler para ver o que você leu recentemente.",
+  "recently-saved": {
+    "title": "Salvo recentemente"
+  },
+  "saved": "Salvo",
+  "search": {
+    "filter": "Filtro",
+    "placeholder": "Pesquisa salva...",
+    "sort": "Organizar"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Anexe notas aos versos",
+      "custom-collections": "Criar coleções personalizadas"
+    },
+    "title": "Faça login ou cadastre-se gratuitamente para ter acesso a mais recursos!"
+  }
+}

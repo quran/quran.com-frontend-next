@@ -45,6 +45,7 @@
     "play-surah": "Reproducir Sura {{surahName}}",
     "select-lng": "Seleccione idioma",
     "sidebar-nav-close": "Cerrar barra lateral de navegación",
+    "tooltip-action": "Acción de información sobre herramientas",
     "translation-info": "Ver información de traducción"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Disminuir",
     "increase": "Aumentar"
   },
+  "create": "Crear",
   "create-my-goal": "Crea mi meta",
   "default-description": "El Corán traducido a muchos idiomas en una interfaz sencilla y fácil de usar",
   "delete": "Borrar",
@@ -150,6 +152,7 @@
   "donate-now": "Dona ahora",
   "donate_monthly": "Donar mensualmente",
   "donate_once": "Dona una vez",
+  "done": "Hecho",
   "edit": "Editar",
   "email-verification": {
     "check-spam": "¿No has recibido el correo electrónico de verificación? Revisa tu bandeja de entrada de correo no deseado",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "No se pudo sincronizar tu configuración a la nube.",
     "ranges-no-value": "La secuencia de inicio y final deben tener un valor",
     "ranges-too-many-verses": "\\n*Máximo {{maxNumberOfVerses}} aleyas",
-    "ranges-wrong-order": "El verso de inicio debe estar antes del verso final"
+    "ranges-wrong-order": "El verso de inicio debe estar antes del verso final",
+    "reading-bookmark-remove": "No se pudo eliminar el marcador de lectura",
+    "reading-bookmark-set": "No se pudo establecer el marcador de lectura",
+    "reading-bookmark-undo": "No se pudo deshacer la lectura del marcador"
   },
   "errors": {
     "account-banned": "Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "No se pudo completar el registro. Inténtalo de nuevo.",
     "confirm": "*Confirmar contraseña no coincide con la contraseña",
     "email": "*¡Formato de correo electrónico no válido!",
+    "equal": "*{{fieldName}} no coincide",
     "exactLength": "*El valor debe ser la longitud exacta",
     "expiredToken": "*Este token ha expirado",
+    "file-exceeds-limit": "El tamaño del archivo supera el límite. Elija un archivo más pequeño.",
     "forgot-password-failed": "No se pudo enviar el correo electrónico de restablecimiento de contraseña. Inténtelo nuevamente.",
+    "image-remove-failed": "No se pudo eliminar la imagen. Inténtalo de nuevo.",
+    "image-upload-failed": "No se pudo cargar la imagen. Inténtalo de nuevo.",
     "immutable": "*Este valor no se puede cambiar",
     "invalid": "*Este {{fieldName}} no es válido",
+    "invalid-file-format": "Formato de archivo no válido. Solo {{formats}} Se permiten archivos .",
     "invalidEmailOrPassword": "*Correo electrónico o contraseña no válidos",
     "max": "* {{fieldName}} debe ser menor o igual a {{max}} dígitos",
     "min": "* {{fieldName}} debe ser mayor o igual a {{min}} dígitos",
     "name": "* {{fieldName}} debe contener solo letras y números",
     "notFound": "*Extraviado",
+    "profile-pic-size-limit": "El tamaño de la foto de perfil debe ser {{size}}MB máximo",
+    "remove-avatar-failed": "No se pudo eliminar el avatar. Inténtalo de nuevo.",
     "required": "* ¡Falta {{fieldName}}!",
     "reset-password-failed": "No se pudo restablecer la contraseña. Inténtalo nuevamente.",
     "signin-failed": "Error al iniciar sesión. Inténtalo de nuevo.",
     "signup-failed": "Error al registrarse. Inténtalo de nuevo.",
     "taken": "* ¡ {{fieldName}} ya existe!",
+    "upload-avatar-failed": "No se pudo cargar el avatar. Inténtalo de nuevo.",
     "usedToken": "*Este token ya se utilizó",
     "username": "* {{fieldName}} acepta solo guiones bajos y letras",
     "verification-code-invalid": "Este código de verificación no es válido",
     "verification-code-length": "El código de verificación debe tener {{length}} dígitos",
     "verification-failed": "Error en la verificación. Inténtalo de nuevo.",
-    "verification-resend-failed": "No se pudo reenviar el código de verificación"
+    "verification-resend-failed": "No se pudo reenviar el código de verificación",
+    "verse-metadata-failed": "No se pudieron cargar los metadatos del verso"
   },
   "exciting-updates": "Actualizaciones emocionantes",
+  "favorites": "Favoritos",
   "feedback": "Retroalimentación",
   "fonts": {
     "15_lines": "15 líneas",
@@ -231,10 +247,13 @@
   "form": {
     "body": "Cuerpo",
     "code": "Código de verificación",
+    "confirm-new-password": "Confirmar nueva contraseña",
     "confirm-password": "confirmar Contraseña",
+    "current-password": "Contraseña actual",
     "email": "Correo electrónico",
     "firstName": "Nombre",
     "lastName": "Apellido",
+    "new-password": "Nueva contraseña",
     "password": "Contraseña",
     "title": "Título",
     "username": "Nombre de usuario",
@@ -255,6 +274,7 @@
     "title": "Conviértete en donante mensual"
   },
   "get-started": "Empezar",
+  "go-to-verse": "Ir al verso",
   "hear-it-pronounced": "Haz clic en las palabras coránicas y escucha la pronunciación",
   "help": "Ayuda",
   "hizb": "Hizb",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "Borrar"
   },
+  "join-ramadan-challenge": "¡Únete a nuestro desafío de Ramadán!",
   "juz": "Juz",
   "language": "Idioma",
   "languages": "Idiomas",
@@ -338,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
   "read": "Leer",
+  "read-more": "Leer más",
   "reading-history": "Historial de lectura",
   "reading-preference": {
     "arabic": "árabe",
@@ -358,6 +380,7 @@
   "reflect": "Reflexionar",
   "reflections": "Reflexiones.",
   "reflections-and-lessons": "Reflexiones y lecciones",
+  "related-verses": "Versos relacionados",
   "remove": "Eliminar",
   "rename": "Renombrar",
   "retry": "Reintentar",
@@ -383,6 +406,7 @@
     "title": "Buscar"
   },
   "seconds": "Segundos",
+  "see-less": "Ver menos",
   "see-new": "Mira que hay de nuevo.",
   "select-language": "Seleccionar idioma",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "Ascendente",
     "by": "Ordenar por",
-    "descending": "Descendiente"
+    "descending": "Descendiente",
+    "sort": "Clasificar"
   },
   "stay-on-track": "¡Manténgase en el buen camino!",
   "style": "Estilo",

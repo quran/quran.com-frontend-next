@@ -1,5 +1,5 @@
 .arabicContainer {
-  text-align: right;
+  text-align: start;
 
   ol {
     list-style: decimal;
@@ -11,5 +11,5 @@
 }
 
 .fullWidthVerse {
-  width: 100%;
+  inline-size: 100%;
 }

@@ -12,13 +12,13 @@ import NotesWithPencilIcon from '@/icons/notes-with-pencil.svg';
 interface TranslationViewNoteActionProps {
   verseKey: string;
   onActionTriggered?: () => void;
-  hasNotes?: boolean;
+  isInsideStudyMode?: boolean;
 }
 
 const TranslationViewNoteAction: React.FC<TranslationViewNoteActionProps> = ({
   verseKey,
   onActionTriggered,
-  hasNotes,
+  isInsideStudyMode = false,
 }) => {
   const { t } = useTranslation('notes');
 
@@ -27,7 +27,7 @@ const TranslationViewNoteAction: React.FC<TranslationViewNoteActionProps> = ({
       verseKey={verseKey}
       onActionTriggered={onActionTriggered}
       isTranslationView
-      hasNotes={hasNotes}
+      isInsideStudyMode={isInsideStudyMode}
     >
       {({ onClick, hasNote }) => (
         <Button

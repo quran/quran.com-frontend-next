@@ -1,4 +1,5 @@
 import Language from '@/types/Language';
+import { getLocaleName } from '@/utils/locale';
 
 const ARABIC_LANGUAGE_ID = 1;
 const URDU_LANGUAGE_ID = 5;
@@ -26,7 +27,7 @@ const LOCALE_TO_QURAN_REFLECT_LANGUAGE_ID = {
   [Language.SW]: 59,
 };
 
-const LOCALE_TO_TRANSLATION_ID = {
+export const LOCALE_TO_TRANSLATION_ID = {
   [Language.AR]: null, // Arabic text doesn't need translation
   [Language.EN]: 131, // The Clear Quran (Khattab)
   [Language.ES]: 83, // Garcia
@@ -35,6 +36,19 @@ const LOCALE_TO_TRANSLATION_ID = {
   [Language.ID]: 33, // Indonesian Islamic Affairs Ministry
   [Language.FR]: 31, // Muhammad Hamiduallah
 };
+
+/**
+ * Get language items for reflection/lesson language selector.
+ * Derives items from LOCALE_TO_TRANSLATION_ID keys using getLocaleName for labels.
+ *
+ * @returns {Array<{ id: string; value: string; label: string }>}
+ */
+export const getReflectionLanguageItems = () =>
+  Object.keys(LOCALE_TO_TRANSLATION_ID).map((locale) => ({
+    id: locale,
+    value: locale,
+    label: getLocaleName(locale),
+  }));
 
 export const localeToQuranReflectLanguageID = (locale: string): number => {
   return (

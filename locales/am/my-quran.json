@@ -1,0 +1,54 @@
+{
+  "bulk-actions": {
+    "actions": "እርምጃዎች",
+    "actions-count": "እርምጃዎች ({{count}})",
+    "cancel": "ሰርዝ",
+    "collapse-all": "ሁሉንም ሰብስብ",
+    "expand-all": "ሁሉንም ዘርጋ",
+    "pin": "ፒን",
+    "pin-verses": "ጥቅሶችን ይሰኩ",
+    "select": "ምረጥ"
+  },
+  "collections": {
+    "favorites": "ተወዳጆች",
+    "guest-promo": {
+      "sign-in": "ይግቡ",
+      "subtitle": "ጥቅሶችን አወዳድር እና አነፃፅር",
+      "title": "ብጁ ስብስቦችን ይፍጠሩ"
+    },
+    "items": "{{count}} እቃ",
+    "items_plural": "{{count}} እቃዎች",
+    "load-more": "ተጨማሪ ጫን",
+    "new-collection": "አዲስ ስብስብ",
+    "sort": {
+      "a-z": "ሀ - ፐ",
+      "recently-updated": "በቅርብ ጊዜ የተዘመነው",
+      "z-a": "ዜድ - ኤ"
+    },
+    "title": "ስብስቦች"
+  },
+  "notes-and-reflections": "ማስታወሻዎች እና ነጸብራቆች",
+  "page": "ገጽ",
+  "reading-bookmark": {
+    "empty": "ማንበብ ይጀምሩ እና የንባብ ዕልባት ያስቀምጡ!",
+    "title": "የንባብ ዕልባትዬ"
+  },
+  "recent": "የቅርብ ጊዜ",
+  "recent-empty": "በቅርብ ጊዜ ያነበቡትን ለማየት ማንበብ ይጀምሩ",
+  "recently-saved": {
+    "title": "በቅርብ ጊዜ የተቀመጠ"
+  },
+  "saved": "ተቀምጧል",
+  "search": {
+    "filter": "ማጣሪያ",
+    "placeholder": "ፍለጋ ተቀምጧል...",
+    "sort": "ደርድር"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "ማስታወሻዎችን ከጥቅሶቹ ጋር አያይዝ",
+      "custom-collections": "ብጁ ስብስቦችን ይፍጠሩ"
+    },
+    "title": "ተጨማሪ ባህሪያትን ለማግኘት በነፃ ይግቡ ወይም ይመዝገቡ!"
+  }
+}

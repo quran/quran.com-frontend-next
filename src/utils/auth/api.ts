@@ -9,11 +9,13 @@ import { prepareGenerateMediaFileRequestData } from '../media/utils';
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import { MappedPage, MappedVerse, MapMushafParams } from './types/MushafMapping';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher } from '@/api';
 import { addSentryBreadcrumb, logErrorToSentry } from '@/lib/sentry';
+import { RamadanChallengeResponse } from '@/types/ApiResponses';
 import {
   ActivityDay,
   ActivityDayType,
@@ -27,7 +29,13 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
-import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import {
+  CreateGoalRequest,
+  CreateGoalRequestUnion,
+  Goal,
+  GoalCategory,
+  UpdateGoalRequest,
+} from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { Response } from '@/types/auth/Response';
@@ -42,16 +50,16 @@ import { Mushaf } from '@/types/QuranReader';
 import {
   CollectionsQueryParams,
   makeActivityDaysUrl,
+  makeAddBulkCollectionBookmarksUrl,
   makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
   makeBookmarksRangeUrl,
-  makeBookmarksUrl,
   makeBookmarkUrl,
+  makeBookmarksUrl,
   makeCollectionsUrl,
   makeCompleteAnnouncementUrl,
   makeCompleteSignupUrl,
-  makePublishNoteUrl,
   makeCountNotesWithinRangeUrl,
   makeCountQuestionsWithinRangeUrl,
   makeCourseFeedbackUrl,
@@ -61,6 +69,7 @@ import {
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteCollectionUrl,
   makeDeleteOrUpdateNoteUrl,
+  makeEnrollUserInQuranProgramUrl,
   makeEnrollUserUrl,
   makeEstimateRangesReadingTimeUrl,
   makeFilterActivityDaysUrl,
@@ -69,18 +78,20 @@ import {
   makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
-  makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
   makeGetNoteByIdUrl,
   makeGetNotesByVerseUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
+  makeGetQuranicWeekUrl,
   makeGetUserCoursesCountUrl,
   makeGetUserQuranProgramUrl,
   makeGoalUrl,
+  makeReadingGoalCountUrl,
   makeLogoutUrl,
   makeNotesUrl,
+  makePublishNoteUrl,
   makeReadingSessionsUrl,
   makeRefreshTokenUrl,
   makeShortenUrlUrl,
@@ -93,8 +104,16 @@ import {
   makeUserPreferencesUrl,
   makeUserProfileUrl,
   makeVerificationCodeUrl,
-  makeGetQuranicWeekUrl,
+  makeReadingGoalStatusUrl,
+  GetCoursesQueryParams,
+  makeMapUrl,
   makeTranslationFeedbackUrl,
+  makeAddPinnedItemUrl,
+  makePinnedItemsUrl,
+  makeSyncPinnedItemsUrl,
+  makeBulkDeletePinnedItemsUrl,
+  makeClearPinnedItemsUrl,
+  makeDeletePinnedItemUrl,
 } from '@/utils/auth/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -111,6 +130,7 @@ import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
+import { PinnedItemDTO, PinnedItemTargetType, SyncPinnedItemPayload } from 'types/PinnedItem';
 
 type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
@@ -280,6 +300,7 @@ type AddBookmarkParams = {
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
+  isReading?: boolean | null;
 };
 
 export const addBookmark = async ({
@@ -287,13 +308,31 @@ export const addBookmark = async ({
   mushafId,
   type,
   verseNumber,
-}: AddBookmarkParams): Promise<Bookmark> =>
-  postRequest(makeBookmarksUrl(mushafId), {
+  isReading,
+}: AddBookmarkParams): Promise<Bookmark> => {
+  // Ensure all required fields are present
+  if (!key || !mushafId || !type) {
+    throw new Error('Missing required fields: key, mushafId, and type are required');
+  }
+
+  const payload: Record<string, any> = {
     key,
     mushaf: mushafId,
     type,
-    verseNumber,
-  });
+  };
+
+  // Include verseNumber if provided (required for ayah bookmarks)
+  if (verseNumber !== undefined) {
+    payload.verseNumber = verseNumber;
+  }
+
+  // Include isReading if provided
+  if (isReading !== undefined) {
+    payload.isReading = isReading;
+  }
+
+  return postRequest(makeBookmarksUrl(mushafId), payload);
+};
 
 export const getPageBookmarks = async (
   mushafId: number,
@@ -308,7 +347,9 @@ export const getBookmark = async (
   key: number,
   type: BookmarkType,
   verseNumber?: number,
-): Promise<Bookmark> => privateFetcher(makeBookmarkUrl(mushafId, key, type, verseNumber));
+): Promise<Bookmark> => {
+  return privateFetcher(makeBookmarkUrl(mushafId, key, type, verseNumber));
+};
 
 export const getBookmarkCollections = async (
   mushafId: number,
@@ -318,12 +359,58 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
-export const addReadingGoal = async ({
-  mushafId,
-  category,
-  ...data
-}: CreateGoalRequest): Promise<{ data?: Goal }> =>
-  postRequest(makeGoalUrl({ mushafId, type: category }), data);
+/**
+ * Fetch all bookmarks for a surah.
+ * Returns a map keyed by verseKey (e.g., "1:1", "1:2", etc.)
+ * Backend handles mushaf mapping automatically.
+ *
+ * @param {number} mushafId - The mushaf ID
+ * @param {number} surahNumber - The surah number (1-114)
+ * @returns {Promise<BookmarksMap>} Map of verseKey -> Bookmark
+ */
+export const getSurahBookmarks = async (
+  mushafId: number,
+  surahNumber: number,
+): Promise<BookmarksMap> => {
+  const limit = 20;
+  const bookmarks: Bookmark[] = [];
+  let response: Bookmark[];
+  let page = 1;
+  do {
+    // eslint-disable-next-line no-await-in-loop
+    response = (await privateFetcher(
+      makeBookmarksUrl(mushafId, limit, BookmarkType.Ayah, undefined, surahNumber, page),
+    )) as Bookmark[];
+    bookmarks.push(...response);
+    page += 1;
+  } while (response.length === limit);
+  const bookmarksMap: BookmarksMap = {};
+  bookmarks.forEach((bookmark) => {
+    const verseKey = bookmark.verseNumber
+      ? `${bookmark.key}:${bookmark.verseNumber}`
+      : `${bookmark.key}`;
+    bookmarksMap[verseKey] = bookmark;
+  });
+  return bookmarksMap;
+};
+
+// No auth required
+export const getReadingGoalCount = async (
+  category: GoalCategory,
+): Promise<{ data: { count: number } }> => fetcher(makeReadingGoalCountUrl({ type: category }));
+
+export const getReadingGoalStatus = async (
+  type: GoalCategory,
+): Promise<{ data: RamadanChallengeResponse }> =>
+  privateFetcher(makeReadingGoalStatusUrl({ type }));
+
+export const addReadingGoal = async (data: CreateGoalRequestUnion): Promise<{ data?: Goal }> => {
+  if (data.category === GoalCategory.RAMADAN_CHALLENGE) {
+    return postRequest(makeGoalUrl({ type: data.category }), {});
+  }
+  const { category, mushafId, ...requestBody } = data as CreateGoalRequest;
+  return postRequest(makeGoalUrl({ mushafId, type: category }), requestBody);
+};
 
 export const updateReadingGoal = async ({
   mushafId,
@@ -414,31 +501,65 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
+interface CollectionBookmarkResponse {
+  message: string;
+  bookmark: Bookmark;
+}
+
 export const addCollectionBookmark = async ({
   collectionId,
   key,
   mushafId,
   type,
   verseNumber,
+  bookmarkId,
 }: {
   collectionId: string;
   key: number;
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
-}) => {
+  bookmarkId?: string;
+}): Promise<CollectionBookmarkResponse> => {
   return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
     collectionId,
     key,
     mushaf: mushafId,
     type,
     verseNumber,
+    ...(bookmarkId && { bookmarkId }),
+  });
+};
+
+export const addBulkCollectionBookmarks = async ({
+  collectionId,
+  bookmarks,
+  mushafId,
+}: {
+  collectionId: string;
+  bookmarks: Array<{
+    key: number;
+    type: BookmarkType;
+    verseNumber?: number;
+  }>;
+  mushafId: number;
+}): Promise<{ added: number; skipped: number }> => {
+  return postRequest(makeAddBulkCollectionBookmarksUrl(collectionId), {
+    collectionId,
+    bookmarks,
+    mushaf: mushafId,
   });
 };
 
 export const deleteCollectionBookmarkById = async (collectionId: string, bookmarkId: string) => {
   return deleteRequest(makeDeleteCollectionBookmarkByIdUrl(collectionId, bookmarkId));
 };
+
+interface DeleteCollectionBookmarkResponse {
+  message: string;
+  bookmark: Bookmark | null;
+  deleted: boolean;
+}
 
 export const deleteCollectionBookmarkByKey = async ({
   collectionId,
@@ -452,7 +573,7 @@ export const deleteCollectionBookmarkByKey = async ({
   mushafId: number;
   type: BookmarkType;
   verseNumber?: number;
-}) => {
+}): Promise<DeleteCollectionBookmarkResponse> => {
   return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
     collectionId,
     key,
@@ -464,6 +585,83 @@ export const deleteCollectionBookmarkByKey = async ({
 
 export const deleteBookmarkById = async (bookmarkId: string) => {
   return deleteRequest(makeDeleteBookmarkUrl(bookmarkId));
+};
+
+/**
+ * Get the user's reading bookmark by querying bookmarks with isReading=true
+ * Note: This requires a mushafId and type, so we query for both Ayah and Page types
+ * and return the first one found (there should only be one reading bookmark)
+ * @param {number} mushafId - The mushafId to get the reading bookmark for
+ * @returns {Promise<Bookmark | null>} The reading bookmark
+ */
+export const getReadingBookmark = async (mushafId: number): Promise<Bookmark | null> => {
+  try {
+    // Try to get reading bookmark
+    const bookmarks = await privateFetcher<Bookmark | Bookmark[]>(
+      `${makeBookmarksUrl(mushafId, 1, undefined, true)}`,
+    );
+    if (bookmarks && !Array.isArray(bookmarks) && bookmarks.key && bookmarks.type) {
+      return bookmarks;
+    }
+    if (bookmarks && Array.isArray(bookmarks) && bookmarks.length > 0) {
+      const bookmark = bookmarks[0];
+      if (bookmark && bookmark.key && bookmark.type) {
+        return bookmark;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+/**
+ * Set a bookmark as reading bookmark by using addBookmark with isReading=true
+ * @param {number} key - The key of the bookmark to set as reading bookmark
+ * @param {number} mushafId - The mushafId of the bookmark to set as reading bookmark
+ * @param {BookmarkType} type - The type of the bookmark to set as reading bookmark
+ * @param {number} verseNumber - The verse number of the bookmark to set as reading bookmark
+ * @returns {Promise<Bookmark>} The reading bookmark
+ */
+export const setReadingBookmark = async (
+  key: number,
+  mushafId: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): Promise<Bookmark> => {
+  return addBookmark({
+    key,
+    mushafId,
+    type,
+    verseNumber,
+    isReading: true,
+  });
+};
+
+/**
+ * Unset the reading bookmark by using addBookmark with isReading=false
+ * The backend will find and unset the bookmark with isReading=true
+ * @param {number} key - The key of the bookmark (chapterId for ayah, pageNumber for page)
+ * @param {number} mushafId - The mushafId
+ * @param {BookmarkType} type - The type of the bookmark
+ * @param {number} verseNumber - The verse number (for ayah type)
+ * @returns {Promise<void>}
+ * @deprecated Use addBookmark directly with isReading=false instead
+ */
+export const unsetReadingBookmark = async (
+  key: number,
+  mushafId: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): Promise<void> => {
+  await addBookmark({
+    key,
+    mushafId,
+    type,
+    verseNumber,
+    isReading: false,
+  });
 };
 
 export const getBookmarksByCollectionId = async (
@@ -501,7 +699,8 @@ export const postCourseFeedback = async ({
     body,
   });
 
-export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+export const getCourses = async (params?: GetCoursesQueryParams): Promise<Course[]> =>
+  privateFetcher(makeGetCoursesUrl(params));
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
@@ -664,6 +863,34 @@ export const submitTranslationFeedback = async (params: {
   return postRequest(makeTranslationFeedbackUrl(), params);
 };
 
+// Pinned Items
+export const getPinnedItems = async (
+  targetType?: PinnedItemTargetType,
+): Promise<{ success: boolean; data: { data: PinnedItemDTO[] } }> =>
+  privateFetcher(makePinnedItemsUrl(targetType));
+
+export const addPinnedItem = async (params: {
+  targetType: PinnedItemTargetType;
+  targetId: string;
+  metadata?: Record<string, unknown>;
+}): Promise<PinnedItemDTO> => postRequest(makeAddPinnedItemUrl(), params);
+
+export const deletePinnedItemById = async (pinnedItemId: string) =>
+  deleteRequest(makeDeletePinnedItemUrl(pinnedItemId));
+
+export const syncPinnedItems = async (
+  items: SyncPinnedItemPayload[],
+): Promise<{ synced: number; lastSyncAt: Date }> =>
+  postRequest(makeSyncPinnedItemsUrl(), { items });
+
+export const bulkDeletePinnedItems = async (
+  targetType: PinnedItemTargetType,
+  targetIds: string[],
+) => deleteRequest(makeBulkDeletePinnedItemsUrl(), { targetType, targetIds });
+
+export const clearPinnedItems = async (targetType?: PinnedItemTargetType) =>
+  deleteRequest(makeClearPinnedItemsUrl(), targetType ? { targetType } : undefined);
+
 const shouldRefreshToken = (error) => {
   return error?.message === 'must refresh token';
 };
@@ -703,3 +930,9 @@ export const privateFetcher = configureRefreshFetch({
   refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });
+
+export const mapMushaf = <T = MappedPage | MappedVerse>(
+  params: MapMushafParams,
+): Promise<{ success: boolean; data: T }> => {
+  return postRequest<{ success: boolean; data: T }>(makeMapUrl(), params);
+};

@@ -45,6 +45,7 @@
     "play-surah": "播放古兰经{{surahName}}",
     "select-lng": "选择语言",
     "sidebar-nav-close": "关闭导航侧边栏",
+    "tooltip-action": "工具提示操作",
     "translation-info": "查看翻译信息"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "减少",
     "increase": "增加"
   },
+  "create": "创造",
   "create-my-goal": "创建我的目标",
   "default-description": "古兰经翻译成多种语言，界面简单易用",
   "delete": "删除",
@@ -150,6 +152,7 @@
   "donate-now": "立即捐款",
   "donate_monthly": "每月捐款",
   "donate_once": "捐赠一次",
+  "done": "完毕",
   "edit": "编辑",
   "email-verification": {
     "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "无法将您的设置同步到云端。",
     "ranges-no-value": "范围开始和结束必须具有值",
     "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
-    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
+    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。",
+    "reading-bookmark-remove": "删除阅读书​​签失败",
+    "reading-bookmark-set": "设置阅读书签失败",
+    "reading-bookmark-undo": "撤销阅读书签失败"
   },
   "errors": {
     "account-banned": "抱歉，您的帐户已被禁止。联系 Quran.Foundation",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "无法完成注册。请重试。",
     "confirm": "*确认密码与密码不匹配",
     "email": "*电子邮件格式无效！",
+    "equal": "*{{fieldName}} 不匹配",
     "exactLength": "*值的长度必须准确",
     "expiredToken": "*此令牌已过期",
+    "file-exceeds-limit": "文件大小超过限制，请选择较小的文件。",
     "forgot-password-failed": "无法发送密码重置电子邮件。请重试。",
+    "image-remove-failed": "图片移除失败，请重试。",
+    "image-upload-failed": "图片上传失败，请重试。",
     "immutable": "*此值无法更改",
     "invalid": "*此{{fieldName}}无效",
+    "invalid-file-format": "文件格式无效。 {{formats}} 允许上传文件。",
     "invalidEmailOrPassword": "*邮箱或密码无效",
     "max": "* {{fieldName}}必须小于或等于{{max}}位数字",
     "min": "* {{fieldName}}必须大于或等于{{min}}位数字",
     "name": "* {{fieldName}}只能为字母和数字",
     "notFound": "*未找到",
+    "profile-pic-size-limit": "头像尺寸应为 {{size}}MB 最大值",
+    "remove-avatar-failed": "移除头像失败，请重试。",
     "required": "* {{fieldName}}缺失！",
     "reset-password-failed": "重置密码失败。请重试。",
     "signin-failed": "登录失败。请重试。",
     "signup-failed": "注册失败。请重试。",
     "taken": "* {{fieldName}}已经存在！",
+    "upload-avatar-failed": "上传头像失败，请重试。",
     "usedToken": "*此令牌已被使用",
     "username": "* {{fieldName}}仅接受下划线和字母",
     "verification-code-invalid": "此验证码无效",
     "verification-code-length": "验证码必须为{{length}}位数字",
     "verification-failed": "验证失败。请重试。",
-    "verification-resend-failed": "重新发送验证码失败"
+    "verification-resend-failed": "重新发送验证码失败",
+    "verse-metadata-failed": "加载诗句元数据失败"
   },
   "exciting-updates": "令人兴奋的更新",
+  "favorites": "收藏夹",
   "feedback": "反馈问题",
   "fonts": {
     "15_lines": "15行",
@@ -231,10 +247,13 @@
   "form": {
     "body": "身体",
     "code": "验证码",
+    "confirm-new-password": "确认新密码",
     "confirm-password": "确认密码",
+    "current-password": "当前密码",
     "email": "电子邮件",
     "firstName": "名",
     "lastName": "姓",
+    "new-password": "新密码",
     "password": "密码",
     "title": "标题",
     "username": "用户名",
@@ -255,6 +274,7 @@
     "title": "成为每月捐助者"
   },
   "get-started": "立即开始",
+  "go-to-verse": "前往诗节",
   "hear-it-pronounced": "点击《古兰经》单词，听发音",
   "help": "帮助",
   "hizb": "希兹布",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "清除"
   },
+  "join-ramadan-challenge": "🚀 加入我们的斋月挑战！",
   "juz": "卷",
   "language": "语",
   "languages": "语言",
@@ -338,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "在线听古兰经",
   "read": "读",
+  "read-more": "阅读更多",
   "reading-history": "阅读历史",
   "reading-preference": {
     "arabic": "阿拉伯",
@@ -358,6 +380,7 @@
   "reflect": "参悟",
   "reflections": "反思",
   "reflections-and-lessons": "反思与教训",
+  "related-verses": "相关经文",
   "remove": "消除",
   "rename": "改名",
   "retry": "重试",
@@ -383,6 +406,7 @@
     "title": "搜索"
   },
   "seconds": "秒数",
+  "see-less": "查看更少",
   "see-new": "查看最新动态",
   "select-language": "选择语言",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "正序",
     "by": "排序方式",
-    "descending": "倒序"
+    "descending": "倒序",
+    "sort": "种类"
   },
   "stay-on-track": "🎯 保持专注！",
   "style": "风格",

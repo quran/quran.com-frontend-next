@@ -23,8 +23,12 @@ type Props = {
 
 const InlineWordByWord: React.FC<Props> = ({ text, className }) => {
   const wordByWordFontScale = useSelector(selectWordByWordFontScale, shallowEqual);
+
   return (
-    <p className={classNames(styles.word, className, FONT_SIZE_CLASS_MAP[wordByWordFontScale])}>
+    <p
+      className={classNames(styles.word, className, FONT_SIZE_CLASS_MAP[wordByWordFontScale])}
+      dir="auto"
+    >
       {text}
     </p>
   );

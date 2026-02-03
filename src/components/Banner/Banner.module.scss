@@ -2,6 +2,7 @@
   margin-block-start: 0;
   box-sizing: border-box;
   block-size: var(--banner-height);
+  max-block-size: var(--banner-height);
   background-color: var(--color-background-elevated-new);
   display: flex;
   justify-content: space-between;

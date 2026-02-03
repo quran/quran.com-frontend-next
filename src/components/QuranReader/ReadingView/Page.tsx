@@ -3,17 +3,14 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { PageQuestionsContext } from './context/PageQuestionsContext';
 import groupLinesByVerses from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 import TranslationPage from './TranslationPage';
-import getTranslationNameString from './utils/translation';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import {
   selectInlineDisplayWordByWordPreferences,
   selectReadingPreference,
@@ -41,14 +38,6 @@ const Page = ({
   lang,
 }: PageProps) => {
   const readingPreference = useSelector(selectReadingPreference);
-  const { data: pageVersesQuestionsData } = useCountRangeQuestions(
-    verses?.length > 0
-      ? {
-          from: verses?.[0].verseKey,
-          to: verses?.[verses.length - 1].verseKey,
-        }
-      : null,
-  );
 
   const lines = useMemo(() => (verses?.length > 0 ? groupLinesByVerses(verses) : {}), [verses]);
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
@@ -64,21 +53,12 @@ const Page = ({
   const firstVerse = verses?.[0];
   const shouldShowChapterHeader = firstVerse?.verseNumber === 1;
   const chapterId = firstVerse?.chapterId?.toString();
-  const verseTranslations = firstVerse?.translations;
-  const translationName = getTranslationNameString(verseTranslations);
-  const translationsCount = verseTranslations?.length ?? 0;
 
   const isReadingTranslation = readingPreference === ReadingPreference.ReadingTranslation;
 
   // Render the chapter header at page level to prevent re-mounting when switching modes
   const chapterHeader = shouldShowChapterHeader && chapterId && (
-    <ChapterHeader
-      translationName={translationName}
-      translationsCount={translationsCount}
-      chapterId={chapterId}
-      isTranslationView={false}
-      className={styles.chapterHeaderNoTopMargin}
-    />
+    <ChapterHeader chapterId={chapterId} isTranslationView={false} />
   );
 
   // Render translation-only page for "Reading - Translation" mode
@@ -90,7 +70,6 @@ const Page = ({
           verses={verses}
           pageNumber={pageNumber}
           lang={lang}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
         />
       </div>
@@ -98,16 +77,16 @@ const Page = ({
   }
 
   return (
-    <PageQuestionsContext.Provider value={pageVersesQuestionsData}>
-      <div
-        id={`page-${pageNumber}`}
-        className={classNames(styles.container, {
-          [styles.mobileCenterText]: isBigTextLayout,
-          [styles[getLineWidthClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
-            !isFontLoaded,
-        })}
-      >
-        {chapterHeader}
+    <div
+      id={`page-${pageNumber}`}
+      className={classNames(styles.container, {
+        [styles.mobileCenterText]: isBigTextLayout,
+        [styles[getLineWidthClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
+          !isFontLoaded,
+      })}
+    >
+      {chapterHeader}
+      <div className={styles.linesContainer}>
         {Object.keys(lines).map((key, lineIndex) => (
           <Line
             pageIndex={pageIndex}
@@ -121,9 +100,9 @@ const Page = ({
             pageHeaderChapterId={shouldShowChapterHeader ? chapterId : undefined}
           />
         ))}
-        <PageFooter page={pageNumber} />
       </div>
-    </PageQuestionsContext.Provider>
+      <PageFooter page={pageNumber} />
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 enum SliceName {
   THEME = 'theme',
   READING_PREFERENCES = 'readingPreferences',
+  READING_BOOKMARK = 'readingBookmark',
   QURAN_READER_STYLES = 'quranReaderStyles',
   TRANSLATIONS = 'translations',
   TAFSIRS = 'tafsirs',
@@ -28,6 +29,11 @@ enum SliceName {
   ONBOARDING = 'onboarding',
   MEDIA_MAKER = 'mediaMaker',
   MICROPHONE = 'microphone',
+  GUEST_ENROLLMENT = 'guestEnrollment',
+  GUEST_BOOKMARK = 'guestBookmark',
+  STUDY_MODE = 'studyMode',
+  VERSE_ACTION_MODAL = 'verseActionModal',
+  PINNED_VERSES = 'pinnedVerses',
 }
 
 export default SliceName;

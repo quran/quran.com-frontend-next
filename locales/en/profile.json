@@ -1,10 +1,59 @@
 {
+  "allowed-formats": "Only {{formats}}",
+  "change-password": "Change Password",
   "delete-account": "Delete Account",
+  "delete-account-warning-title": "Warning",
   "delete-confirmation": {
     "action-text": "I understand the consequence, delete my account",
     "confirmation-text": "delete my account",
     "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
-    "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
+    "subtitle": "Deleting your Quran.com account is permanent and cannot be undone. Your account data, preferences, and history will be permanently removed from your profile and will no longer be available. If you use the same login for QuranReflect, that account will also be deleted. [Please note: This does not affect your donor account and is not tied to your donations. Donations must be managed directly through the donor platform.]",
     "title": "Are you absolutely sure?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Yes",
+    "cancel-text": "No",
+    "subtitle": "You will delete the profile pic and reset it to the default, Are you sure?",
+    "title": "Delete Profile Picture"
+  },
+  "edit-details": "Edit Details",
+  "email-notification-settings": "Email Notification Settings",
+  "errors": {
+    "remove-failed": "Failed to remove profile picture. Please try again.",
+    "upload-failed": "Failed to upload profile picture. Please try again."
+  },
+  "max-file-size": "Max {{size}}",
+  "my-profile": "My Profile",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "An email will be sent to remind you of your Quran goal if you have not made progress in a while.",
+      "title": "Goal Reminder"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
+      "title": "Daily Ramadan Challenge"
+    },
+    "quran-reading-program": {
+      "description": "An email will be sent with links to the weekly reading assignment, reflection prompts, and more resources to keep you on track.",
+      "title": "Quran in a Year"
+    },
+    "streaks-that-will-break": {
+      "description": "An email will be sent to notify you of a streak that is about to break.",
+      "title": "Streaks"
+    }
+  },
+  "personalization": "Personalization",
+  "profile-picture": "Profile Picture",
+  "remove-picture": "Remove Picture",
+  "remove-success": "Profile picture removed successfully",
+  "save-changes": "Save Changes",
+  "save-picture": "Save Picture",
+  "success": {
+    "details": "Your profile is updated successfully",
+    "notifications": "Your notifications settings have been updated successfully",
+    "password": "Your password has been updated successfully"
+  },
+  "update-password": "Update Password",
+  "upload-picture": "Upload Picture",
+  "upload-success": "Profile picture uploaded successfully"
 }

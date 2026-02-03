@@ -45,6 +45,7 @@
     "play-surah": "{{surahName}} Ayeti Seslendir",
     "select-lng": "Dil Seçin",
     "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat",
+    "tooltip-action": "İpucu eylemi",
     "translation-info": "Çeviri bilgilerini görüntüle"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Azalt",
     "increase": "Arttır"
   },
+  "create": "Yaratmak",
   "create-my-goal": "Hedefimi Oluştur",
   "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
   "delete": "Sil",
@@ -150,6 +152,7 @@
   "donate-now": "Şimdi bağış yapın",
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
+  "done": "Tamamlamak",
   "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
     "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
-    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır."
+    "ranges-wrong-order": "Başlangıç ayeti bitiş ayetinden önce olmalıdır.",
+    "reading-bookmark-remove": "Okuma yer imini kaldırma işlemi başarısız oldu.",
+    "reading-bookmark-set": "Okuma yer imi ayarlanamadı.",
+    "reading-bookmark-undo": "Okuma yer imini geri alma işlemi başarısız oldu."
   },
   "errors": {
     "account-banned": "Maalesef, hesabınız engellendi. Quran.Foundation ile irtibata geçin",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "Kayıt işlemi tamamlanamadı. Lütfen tekrar deneyin.",
     "confirm": "*Şifreyi onayla şifre uyuşmuyor",
     "email": "*Geçersiz E-posta Biçimi!",
+    "equal": "*{{fieldName}} eşleşmiyor",
     "exactLength": "*Değer tam uzunlukta olmalıdır",
     "expiredToken": "*Bu simgenin süresi doldu",
+    "file-exceeds-limit": "Dosya boyutu limiti aşıyor. Lütfen daha küçük bir dosya seçin.",
     "forgot-password-failed": "Şifre sıfırlama e-postası gönderilemedi. Lütfen tekrar deneyin.",
+    "image-remove-failed": "Görüntü kaldırılamadı. Lütfen tekrar deneyin.",
+    "image-upload-failed": "Resim yüklenemedi. Lütfen tekrar deneyin.",
     "immutable": "*Bu değer değiştirilemez",
     "invalid": "*Bu {{fieldName}} geçersizdir",
+    "invalid-file-format": "Geçersiz dosya formatı. Sadece {{formats}} Dosyalara izin verilir.",
     "invalidEmailOrPassword": "*Geçersiz e-posta veya şifre",
     "max": "* {{fieldName}} {{max}} basamaktan az veya eşit olmalıdır",
     "min": "* {{fieldName}} {{min}} basamaktan fazla veya eşit olmalıdır",
     "name": "* {{fieldName}} yalnızca harf ve sayılardan oluşmalıdır",
     "notFound": "*Bulunamadı",
+    "profile-pic-size-limit": "Profil resmi boyutu şu şekilde olmalıdır: {{size}}MB maksimum",
+    "remove-avatar-failed": "Avatar kaldırılamadı. Lütfen tekrar deneyin.",
     "required": "* {{fieldName}} eksik!",
     "reset-password-failed": "Şifre sıfırlama başarısız. Lütfen tekrar deneyin.",
     "signin-failed": "Giriş başarısız. Lütfen tekrar deneyin.",
     "signup-failed": "Kayıt başarısız. Lütfen tekrar deneyin.",
     "taken": "* {{fieldName}} zaten var!",
+    "upload-avatar-failed": "Avatar yükleme başarısız oldu. Lütfen tekrar deneyin.",
     "usedToken": "*Bu simge zaten kullanıldı",
     "username": "* {{fieldName}} yalnızca alt çizgi ve harfleri kabul edilmektedir",
     "verification-code-invalid": "Bu doğrulama kodu geçersizdir",
     "verification-code-length": "Doğrulama kodu {{length}} basamaklı olmalıdır",
     "verification-failed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
-    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu"
+    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu",
+    "verse-metadata-failed": "Ayet meta verileri yüklenemedi."
   },
   "exciting-updates": "Heyecan Verici Güncellemeler",
+  "favorites": "Favoriler",
   "feedback": "Geri Bildirim",
   "fonts": {
     "15_lines": "15 satır",
@@ -231,10 +247,13 @@
   "form": {
     "body": "Vücut",
     "code": "Doğrulama kodu",
+    "confirm-new-password": "Yeni Şifreyi Onayla",
     "confirm-password": "Şifreyi Onayla",
+    "current-password": "Mevcut Şifre",
     "email": "E-posta",
     "firstName": "İlk adı",
     "lastName": "Soy isim",
+    "new-password": "Yeni Şifre",
     "password": "Şifre",
     "title": "Başlık",
     "username": "Kullanıcı adı",
@@ -255,6 +274,7 @@
     "title": "Aylık Bağışçımız Olun"
   },
   "get-started": "Başla",
+  "go-to-verse": "Ayette Git",
   "hear-it-pronounced": "Kuran kelimelerini tıklayın, telaffuzunu dinleyin",
   "help": "Yardım",
   "hizb": "Hizb",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "Açık"
   },
+  "join-ramadan-challenge": "🚀 Ramazan Meydan Okumamıza Katılın!",
   "juz": "Cüz",
   "language": "Dil",
   "languages": "Diller",
@@ -338,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
   "read": "Okumak",
+  "read-more": "Devamını oku",
   "reading-history": "tarih okuma",
   "reading-preference": {
     "arabic": "Arapça",
@@ -358,6 +380,7 @@
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
   "reflections-and-lessons": "Düşünceler ve Dersler",
+  "related-verses": "İlgili Ayetler",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",
@@ -383,6 +406,7 @@
     "title": "Ara"
   },
   "seconds": "Saniye",
+  "see-less": "Daha az göster",
   "see-new": "Yenilikleri görün",
   "select-language": "Dil Seçin",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "Artan",
     "by": "Sırala",
-    "descending": "Azalan"
+    "descending": "Azalan",
+    "sort": "Düzenlemek"
   },
   "stay-on-track": "🎯 Yolda kalın!",
   "style": "Stil",

@@ -5,6 +5,25 @@ interface Bookmark {
   key: number;
   type: BookmarkType;
   verseNumber?: number;
+  /**
+   * Indicates whether this bookmark belongs to the default collection.
+   * Undefined when collection membership hasn't been determined yet.
+   */
+  isInDefaultCollection?: boolean;
+  /**
+   * Indicates whether this bookmark is a reading bookmark.
+   */
+  isReading?: boolean;
+  collectionsCount?: number;
+  /**
+   * Timestamp when the bookmark was created
+   */
+  createdAt?: string;
 }
 
 export default Bookmark;
+
+export enum ReadingBookmarkType {
+  AYAH = 'ayah',
+  PAGE = 'page',
+}

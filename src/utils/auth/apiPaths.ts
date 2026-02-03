@@ -13,6 +13,7 @@ import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getProxiedServiceUrl, QuranFoundationService } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
+import { PinnedItemTargetType } from 'types/PinnedItem';
 
 /**
  * Cache key path patterns for bookmark-related API endpoints.
@@ -29,6 +30,8 @@ export const BOOKMARK_CACHE_PATHS = {
   COLLECTIONS: '/collections?',
   /** Collections a bookmark belongs to (e.g., bookmarks/collections?...) */
   BOOKMARK_COLLECTIONS: 'bookmarks/collections?',
+  /** Surah-level bookmarks (e.g., bookmarks/surah?...) */
+  SURAH_BOOKMARKS: 'bookmarks/surah?',
 } as const;
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
@@ -56,6 +59,8 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 
 export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
 
+export const makeUpdatePasswordUrl = (): string => makeUrl('users/updatePassword');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -76,8 +81,22 @@ export const makeSignInUrl = (): string => makeUrl('users/login');
 
 export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
-export const makeBookmarksUrl = (mushafId: number, limit?: number, type?: BookmarkType): string =>
-  makeUrl('bookmarks', { mushafId, limit, ...(type && { type }) });
+export const makeBookmarksUrl = (
+  mushafId: number,
+  limit?: number,
+  type?: BookmarkType,
+  isReading?: boolean,
+  key?: number,
+  page?: number,
+): string =>
+  makeUrl('bookmarks', {
+    mushafId,
+    limit,
+    ...(type && { type }),
+    ...(isReading && { isReading }),
+    ...(key && { key }),
+    ...(page && { page }),
+  });
 
 export type CollectionsQueryParams = {
   cursor?: string;
@@ -157,8 +176,14 @@ export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
 export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
 
-export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+export type GetCoursesQueryParams = {
+  myCourses?: boolean;
+  languages?: string[];
+  cursor?: string;
+};
 
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
+  makeUrl('courses', params as GetCoursesQueryParams);
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
 export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>
@@ -180,6 +205,9 @@ export const makeDeleteCollectionUrl = (collectionId: string) =>
 
 export const makeAddCollectionBookmarkUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
+
+export const makeAddBulkCollectionBookmarksUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks/bulk`);
 
 export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookmarkId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks/${bookmarkId}`);
@@ -235,6 +263,12 @@ export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =
 
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
+
+export const makeReadingGoalCountUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/count', params);
+
+export const makeReadingGoalStatusUrl = (params: { type: GoalCategory }) =>
+  makeUrl('goal/status', params);
 
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);
@@ -304,3 +338,24 @@ export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string
  * @returns {string} The complete URL for the translation feedback API
  */
 export const makeTranslationFeedbackUrl = (): string => makeUrl('translation-feedback');
+
+export const makeMapUrl = (): string => makeUrl('mushaf/map');
+
+// Pinned Items
+export const PINNED_ITEMS_CACHE_PATHS = {
+  LIST: 'pinned-items?',
+} as const;
+
+export const makePinnedItemsUrl = (targetType?: PinnedItemTargetType): string =>
+  makeUrl('pinned-items', targetType ? { targetType } : undefined);
+
+export const makeAddPinnedItemUrl = (): string => makeUrl('pinned-items');
+
+export const makeSyncPinnedItemsUrl = (): string => makeUrl('pinned-items/sync');
+
+export const makeClearPinnedItemsUrl = (): string => makeUrl('pinned-items/clear');
+
+export const makeDeletePinnedItemUrl = (pinnedItemId: string): string =>
+  makeUrl(`pinned-items/${pinnedItemId}`);
+
+export const makeBulkDeletePinnedItemsUrl = (): string => makeUrl('pinned-items/bulk');

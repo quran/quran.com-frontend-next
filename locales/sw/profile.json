@@ -1,10 +1,59 @@
 {
+  "allowed-formats": "{{formats}} Pekee",
+  "change-password": "Badilisha Nenosiri",
   "delete-account": "Futa Akaunti",
+  "delete-account-warning-title": "Onyo",
   "delete-confirmation": {
     "action-text": "Ninaelewa matokeo, futa akaunti yangu",
     "confirmation-text": "futa akaunti yangu",
     "instruction-text": "Tafadhali andika <strong> {{text}} </strong> ili kuthibitisha",
     "subtitle": "Kitendo hiki hakiwezi kutenduliwa. Hii itafuta kabisa akaunti yako, alamisho zilizohifadhiwa, vipindi vya kusoma na data yako yote.",
     "title": "Una uhakika kabisa?"
-  }
+  },
+  "delete-profile-picture": {
+    "action-text": "Ndiyo",
+    "cancel-text": "Hapana",
+    "subtitle": "Utafuta picha ya wasifu na kuiweka upya kwa chaguo-msingi, Una uhakika?",
+    "title": "Futa Picha ya Wasifu"
+  },
+  "edit-details": "Hariri Maelezo",
+  "email-notification-settings": "Mipangilio ya Arifa za Barua Pepe",
+  "errors": {
+    "remove-failed": "Imeshindikana kuondoa picha ya wasifu. Tafadhali jaribu tena.",
+    "upload-failed": "iMeshindikana kupakia picha ya wasifu. Tafadhali jaribu tena."
+  },
+  "max-file-size": "Upeo wa {{size}}",
+  "my-profile": "Wasifu Wangu",
+  "notifications": {
+    "abandoned-quran-goal": {
+      "description": "Barua pepe itatumwa kukukumbusha lengo lako la Quran ikiwa hujapiga hatua kwa muda.",
+      "title": "Kikumbusho cha Lengo"
+    },
+    "daily-ramadan-challenge": {
+      "description": "Surah Al-Mulk 2026 Ramadan Challenge",
+      "title": "Changamoto ya Ramadhani ya Kila Siku"
+    },
+    "quran-reading-program": {
+      "description": "Barua pepe itatumwa ikiwa na viungo vya mgawo wa kusoma wa kila wiki, vidokezo vya kutafakari, na nyenzo zaidi ili kukuweka sawa.",
+      "title": "Qur'ani katika Mwaka"
+    },
+    "streaks-that-will-break": {
+      "description": "Barua pepe itatumwa ili kukujulisha kuhusu mfululizo ambao uko karibu kuvunjika.",
+      "title": "Mifululizo"
+    }
+  },
+  "personalization": "Ubinafsishaji",
+  "profile-picture": "Picha ya Wasifu",
+  "remove-picture": "Ondoa Picha",
+  "remove-success": "Picha ya wasifu imeondolewa kwa mafanikio",
+  "save-changes": "Hifadhi Mabadiliko",
+  "save-picture": "Hifadhi Picha",
+  "success": {
+    "details": "Wasifu wako umesasishwa kwa mafanikio",
+    "notifications": "Mipangilio yako ya arifa imesasishwa kwa mafanikio",
+    "password": "Nenosiri lako limesasishwa kwa mafanikio"
+  },
+  "update-password": "Sasisha Nenosiri",
+  "upload-picture": "Pakia Picha",
+  "upload-success": "Picha ya wasifu imepakiwa kwa mafanikio"
 }

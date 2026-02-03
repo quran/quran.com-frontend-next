@@ -1,47 +1,32 @@
-import { useState } from 'react';
-
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './VerseQuestion.module.scss';
 
 import QuestionAndAnswerPill from '@/components/QuestionAndAnswer/Pill';
-import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 
 type VerseQuestionsProps = {
   verseKey: string;
-  isTranslationView: boolean;
   hasQuestions?: boolean;
 };
 
-const VerseQuestions: React.FC<VerseQuestionsProps> = ({
-  verseKey,
-  isTranslationView,
-  hasQuestions,
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const VerseQuestions: React.FC<VerseQuestionsProps> = ({ verseKey, hasQuestions }) => {
   const { t, lang } = useTranslation('common');
-  const router = useRouter();
+  const dispatch = useDispatch();
 
   const onItemClicked = () => {
-    logButtonClick('verse_questions', {
-      isTranslationView,
-    });
+    logButtonClick('study_mode_open_answers_pill_verse_by_verse', { verseKey });
+    dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
     fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
-    setIsModalOpen(true);
-  };
-
-  const onClose = () => {
-    setIsModalOpen(false);
-    fakeNavigate(router.asPath, router.locale);
   };
 
   return (
     <>
-      <QuestionsModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       {hasQuestions && (
         <div
           className={styles.questionsContainer}

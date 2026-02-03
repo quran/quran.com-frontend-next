@@ -1,9 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-$sections-container-height: 2rem;
-$pixel: 1px;
-
 .container {
   background: var(--color-background-elevated);
   color: var(--color-text-default);
@@ -12,10 +9,14 @@ $pixel: 1px;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   inline-size: 100%;
-  inset-block-start: calc($pixel * -1);
-  min-block-size: var(--context-menu-container-height);
+  inset-block-start: 0;
   will-change: transform;
   box-sizing: border-box;
+
+  @include breakpoints.smallerThanTablet {
+    // Fast collapse with ease-in
+    transition: transform var(--transition-fast) ease-in 0ms;
+  }
 }
 
 .hide {
@@ -27,6 +28,11 @@ $pixel: 1px;
 .visibleContainer {
   transform: translate3d(0, var(--navbar-container-height), 0);
   // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
+
+  @include breakpoints.smallerThanTablet {
+    // Faster expand with ease-out for smooth landing
+    transition: transform var(--transition-fast) ease-out var(--mobile-stagger-delay-context-menu);
+  }
 }
 
 .withVisibleBanner {
@@ -35,10 +41,6 @@ $pixel: 1px;
     // transform: translate3d(0, calc(var(--navbar-container-height) + var(--banner-height)), 0);
     transform: translate3d(0, calc(var(--navbar-container-height)), 0);
   }
-}
-
-.expandedContainer {
-  min-block-size: var(--context-menu-container-height);
 }
 
 .withVisibleSideBar {
@@ -58,17 +60,28 @@ $pixel: 1px;
 }
 
 .sectionsContainer {
-  min-block-size: $sections-container-height;
-  padding-block: calc(var(--spacing-medium) / 2);
+  box-sizing: border-box;
+  block-size: var(--context-menu-section-mobile-height);
+  max-block-size: var(--context-menu-section-mobile-height);
+  padding-block: 0;
   display: flex;
   align-items: center;
   padding-inline: calc(1.3 * var(--spacing-large));
   z-index: var(--z-index-default);
   position: relative;
   background: var(--color-background-elevated);
+  margin-block-start: -1px;
   @include breakpoints.tablet {
+    block-size: var(--context-menu-section-height);
+    max-block-size: var(--context-menu-section-height);
+    padding-block: calc(var(--spacing-medium) / 2);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
+}
+
+.sectionsContainerMobileExpanded {
+  block-size: var(--context-menu-section-mobile-expanded-height);
+  max-block-size: var(--context-menu-section-mobile-expanded-height);
 }
 
 .section {
@@ -149,6 +162,10 @@ $pixel: 1px;
 }
 
 .pageInfoContainer {
+  block-size: var(--context-menu-page-info-content-height);
+  box-sizing: content-box;
+  padding-block-start: var(--context-menu-page-info-padding-top);
+  padding-block-end: var(--context-menu-page-info-padding-bottom);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -182,7 +199,7 @@ $pixel: 1px;
   }
 }
 .bookmarkedIcon {
-  color: var(--color-text-default);
+  color: var(--color-bookmark-icon);
 }
 
 .primaryInfo {

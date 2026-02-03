@@ -75,3 +75,6 @@ keys
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Specs
+docs/specs

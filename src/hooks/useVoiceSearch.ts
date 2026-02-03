@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import { setIsExpanded } from '@/redux/slices/CommandBar/state';
 import {
   selectMicrophoneActive,
@@ -17,6 +18,8 @@ import {
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
 import { cleanTranscript } from '@/utils/string';
+
+let sharedSpeechRecognitionInstance: SpeechRecognitionInterface | null = null;
 
 export interface UseVoiceSearchOptions {
   searchQuery: string;
@@ -53,6 +56,21 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
     }
   }, [options.searchQuery, dispatch, options.isInSearchDrawer]);
 
+  // Effect to stop speech recognition when microphone is deactivated
+  useEffect(() => {
+    if (!isMicActive) {
+      if (sharedSpeechRecognitionInstance) {
+        try {
+          sharedSpeechRecognitionInstance.stop();
+        } catch (error) {
+          logErrorToSentry('Error stopping speech recognition', error);
+        }
+        sharedSpeechRecognitionInstance = null;
+        speechRecRef.current = null;
+      }
+    }
+  }, [isMicActive]);
+
   /**
    * Handle speech recognition result
    */
@@ -64,12 +82,13 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
       // Set the cleaned transcript as the search query
       options.setSearchQuery(cleanedTranscript);
 
-      // Only expand the command bar if we're not in the search drawer
-      if (!options.isInSearchDrawer) {
+      // Only expand the command bar if we're not in the search drawer AND microphone is still active
+      // This prevents reopening the dropdown after user clicks on a search result
+      if (!options.isInSearchDrawer && isMicActive) {
         dispatch({ type: setIsExpanded.type, payload: true });
       }
     },
-    [options, dispatch],
+    [options, dispatch, isMicActive],
   );
 
   /**
@@ -82,12 +101,13 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
       speechRecRef.current.stop();
       logButtonClick('voice_search_stop');
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error stopping speech recognition', error);
+      logErrorToSentry('Error stopping speech recognition', error);
     }
 
     // Update Redux state
     dispatch(stopMicrophone());
+    sharedSpeechRecognitionInstance = null;
+    speechRecRef.current = null;
   }, [dispatch]);
 
   /**
@@ -142,10 +162,16 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
    * Initialize speech recognition
    */
   const initializeSpeechRecognition = useCallback(() => {
-    if (speechRecRef.current) return true;
-
     try {
+      if (sharedSpeechRecognitionInstance) {
+        try {
+          sharedSpeechRecognitionInstance.stop();
+        } catch (error) {
+          logErrorToSentry('Error stopping speech recognition', error);
+        }
+      }
       speechRecRef.current = createSpeechRecognition(createSpeechRecognitionConfig());
+      sharedSpeechRecognitionInstance = speechRecRef.current;
       return true;
     } catch (error) {
       if (options.onError && error instanceof Error) {

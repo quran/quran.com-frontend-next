@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import BottomActionsModals, { ModalType } from './BottomActionsModals';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
-import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
+import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import QiraatIcon from '@/icons/qiraat-icon.svg';
+import RelatedVersesIcon from '@/icons/related-verses.svg';
+import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -19,7 +23,9 @@ import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
   getVerseLessonNavigationUrl,
+  getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
+  getVerseRelatedVerseNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -37,9 +43,13 @@ interface BottomActionsProps {
    */
   isTranslationView?: boolean;
   /**
-   * Whether this verse has questions (passed from parent to ensure memo re-renders)
+   * Whether this verse has related verses
    */
-  hasQuestions?: boolean;
+  hasRelatedVerses?: boolean;
+  /**
+   * The class name to apply to the bottom actions container
+   */
+  className?: string;
 }
 
 /**
@@ -50,36 +60,39 @@ interface BottomActionsProps {
 const BottomActions = ({
   verseKey,
   isTranslationView = true,
-  hasQuestions: hasQuestionsProp,
+  hasRelatedVerses = false,
+  className,
 }: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
+  const dispatch = useDispatch();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const questionsData = usePageQuestions();
-  // Use prop if provided (from memoized parent), otherwise compute from context
-  // Only show Answers tab when we confirm questions exist (not while loading)
-  const hasQuestions = hasQuestionsProp ?? questionsData?.[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-  // Modal state using enum
-  const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
 
-  /**
-   * Handle tab click or keyboard event
-   * @param {TabId} tabType - Type of tab for logging
-   * @param {() => string} navigationFn - Function that returns navigation URL
-   * @returns {(e: React.MouseEvent | React.KeyboardEvent) => void} Event handler function
-   */
+  // Fetch questions data directly - SWR handles deduplication automatically
+  const { data: questionsData } = useBatchedCountRangeQuestions(verseKey);
+
+  // Only show Answers tab when we confirm questions exist
+  const hasQuestions = questionsData?.total > 0;
+  const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
+
+  // Use backend qiraat count to check if qiraat exist for this verse
+  const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
+  const hasQiraatData = (qiraatCount ?? 0) > 0;
+
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
     return () => {
-      // Open the corresponding modal
-      if (tabType === TabId.TAFSIR) {
-        setOpenedModal(ModalType.TAFSIR);
-      } else if (tabType === TabId.REFLECTIONS) {
-        setOpenedModal(ModalType.REFLECTION);
-      } else if (tabType === TabId.LESSONS) {
-        setOpenedModal(ModalType.LESSONS);
-      } else if (tabType === TabId.ANSWERS) {
-        setOpenedModal(ModalType.QUESTIONS);
+      const tabIdMap: Record<TabId, StudyModeTabId> = {
+        [TabId.TAFSIR]: StudyModeTabId.TAFSIR,
+        [TabId.REFLECTIONS]: StudyModeTabId.REFLECTIONS,
+        [TabId.LESSONS]: StudyModeTabId.LESSONS,
+        [TabId.RELATED_VERSES]: StudyModeTabId.RELATED_VERSES,
+        [TabId.ANSWERS]: StudyModeTabId.ANSWERS,
+        [TabId.QIRAAT]: StudyModeTabId.QIRAAT,
+      };
+
+      const studyModeTab = tabIdMap[tabType];
+      if (studyModeTab) {
+        dispatch(openStudyMode({ verseKey, activeTab: studyModeTab }));
       }
 
       logButtonClick(
@@ -88,7 +101,6 @@ const BottomActions = ({
         }_verse_bottom_actions_${tabType}`,
       );
 
-      // Update URL without triggering navigation
       fakeNavigate(navigationFn(), lang);
     };
   };
@@ -125,23 +137,26 @@ const BottomActions = ({
       onClick: createTabHandler(TabId.ANSWERS, () => getVerseAnswersNavigationUrl(verseKey)),
       condition: hasQuestions,
     },
+    {
+      id: TabId.QIRAAT,
+      label: t('quran-reader:qiraat.title'),
+      icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
+      condition: hasQiraatData,
+    },
+    {
+      id: TabId.RELATED_VERSES,
+      label: t('related-verses'),
+      icon: <RelatedVersesIcon />,
+      onClick: createTabHandler(TabId.RELATED_VERSES, () =>
+        getVerseRelatedVerseNavigationUrl(verseKey),
+      ),
+      condition: hasRelatedVerses,
+    },
   ];
 
   return (
-    <>
-      <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
-
-      <BottomActionsModals
-        chapterId={chapterId}
-        verseNumber={verseNumber}
-        verseKey={verseKey}
-        tafsirs={tafsirs}
-        openedModal={openedModal}
-        hasQuestions={hasQuestions}
-        isTranslationView={isTranslationView}
-        onCloseModal={() => setOpenedModal(null)}
-      />
-    </>
+    <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} className={className} />
   );
 };
 

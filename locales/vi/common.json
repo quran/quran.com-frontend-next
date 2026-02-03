@@ -45,6 +45,7 @@
     "play-surah": "Phát Surah {{surahName}}",
     "select-lng": "Chọn ngôn ngữ",
     "sidebar-nav-close": "Đóng thanh điều hướng",
+    "tooltip-action": "Hành động chú thích",
     "translation-info": "Xem thông tin dịch thuật"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Giảm",
     "increase": "Tăng"
   },
+  "create": "Tạo nên",
   "create-my-goal": "Đặt mục tiêu của tôi",
   "default-description": "Kinh Qur'an được dịch sang nhiều ngôn ngữ với giao diện đơn giản và dễ sử dụng.",
   "delete": "Xóa",
@@ -150,6 +152,7 @@
   "donate-now": "Quyên góp ngay",
   "donate_monthly": "Quyên góp định kỳ hàng tháng",
   "donate_once": "Quyên góp một lần",
+  "done": "Xong",
   "edit": "Sửa",
   "email-verification": {
     "check-spam": "Bạn không nhận được email xác nhận? Vui lòng kiểm tra hộp thư spam.",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Không thể đồng bộ cài đặt của bạn lên đám mây.",
     "ranges-no-value": "Điểm bắt đầu và điểm kết thúc của phạm vi phải có giá trị.",
     "ranges-too-many-verses": "*Tối đa {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "Câu bắt đầu phải trước câu kết thúc."
+    "ranges-wrong-order": "Câu bắt đầu phải trước câu kết thúc.",
+    "reading-bookmark-remove": "Không thể xóa dấu trang đang đọc",
+    "reading-bookmark-set": "Không thể đặt dấu trang đọc",
+    "reading-bookmark-undo": "Không thể hoàn tác dấu trang đang đọc"
   },
   "errors": {
     "account-banned": "Rất tiếc, tài khoản của bạn đã bị khóa. Vui lòng liên hệ với Quran.Foundation.",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "Đăng ký thất bại. Vui lòng thử lại.",
     "confirm": "*Xác nhận mật khẩu không khớp với mật khẩu",
     "email": "*Định dạng email không hợp lệ!",
+    "equal": "*{{fieldName}} không khớp",
     "exactLength": "*Giá trị phải có độ dài chính xác",
     "expiredToken": "*Mã thông báo này đã hết hạn",
+    "file-exceeds-limit": "Kích thước tệp vượt quá giới hạn. Vui lòng chọn tệp có kích thước nhỏ hơn.",
     "forgot-password-failed": "Không thể gửi email đặt lại mật khẩu. Vui lòng thử lại.",
+    "image-remove-failed": "Không thể xóa ảnh. Vui lòng thử lại.",
+    "image-upload-failed": "Tải ảnh lên không thành công. Vui lòng thử lại.",
     "immutable": "*Giá trị này không thể thay đổi",
     "invalid": "*{{fieldName}} không hợp lệ",
+    "invalid-file-format": "Định dạng tệp không hợp lệ. Chỉ {{formats}} Các tập tin được phép.",
     "invalidEmailOrPassword": "*Email hoặc mật khẩu không hợp lệ",
     "max": "*{{fieldName}} phải nhỏ hơn hoặc bằng {{max}} chữ số",
     "min": "*{{fieldName}} phải lớn hơn hoặc bằng {{min}} chữ số",
     "name": "*{{fieldName}} chỉ nên là chữ cái và số",
     "notFound": "*Không tìm thấy",
+    "profile-pic-size-limit": "Kích thước ảnh đại diện nên là {{size}}MB tối đa",
+    "remove-avatar-failed": "Không thể xóa ảnh đại diện. Vui lòng thử lại.",
     "required": "*{{fieldName}} bị thiếu!",
     "reset-password-failed": "Không thể đặt lại mật khẩu. Vui lòng thử lại.",
     "signin-failed": "Đăng nhập thất bại. Vui lòng thử lại.",
     "signup-failed": "Đăng ký thất bại. Vui lòng thử lại.",
     "taken": "*{{fieldName}} đã tồn tại!",
+    "upload-avatar-failed": "Tải ảnh đại diện lên không thành công. Vui lòng thử lại.",
     "usedToken": "*Mã thông báo này đã được sử dụng",
     "username": "*{{fieldName}} chỉ chấp nhận dấu gạch dưới và chữ cái",
     "verification-code-invalid": "Mã xác minh này không hợp lệ",
     "verification-code-length": "Mã xác minh phải là {{length}} chữ số",
     "verification-failed": "Xác thực thất bại. Vui lòng thử lại.",
-    "verification-resend-failed": "Không thể gửi lại mã xác minh"
+    "verification-resend-failed": "Không thể gửi lại mã xác minh",
+    "verse-metadata-failed": "Không thể tải siêu dữ liệu câu thơ"
   },
   "exciting-updates": "Cập nhật thú vị",
+  "favorites": "Mục yêu thích",
   "feedback": "Phản hồi",
   "fonts": {
     "15_lines": "15 dòng",
@@ -231,10 +247,13 @@
   "form": {
     "body": "Thân bài",
     "code": "Mã xác minh",
+    "confirm-new-password": "Xác nhận mật khẩu mới",
     "confirm-password": "Xác nhận mật khẩu",
+    "current-password": "Mật khẩu hiện tại",
     "email": "E-mail",
     "firstName": "Tên",
     "lastName": "Họ",
+    "new-password": "Mật khẩu mới",
     "password": "Mật khẩu",
     "title": "Tiêu đề",
     "username": "Tên người dùng",
@@ -255,6 +274,7 @@
     "title": "Trở thành nhà tài trợ hàng tháng"
   },
   "get-started": "Bắt đầu",
+  "go-to-verse": "Đi đến câu thơ",
   "hear-it-pronounced": "Nhấp vào từ Qur'an để nghe phát âm",
   "help": "Trợ giúp",
   "hizb": "Hizb",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "Xoá"
   },
+  "join-ramadan-challenge": "🚀 Tham gia thử thách Ramadan của chúng tôi!",
   "juz": "Juz",
   "language": "Ngôn ngữ",
   "languages": "Ngôn ngữ",
@@ -338,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Đài Qur'an",
   "read": "Đọc",
+  "read-more": "Đọc thêm",
   "reading-history": "Lịch sử đọc",
   "reading-preference": {
     "arabic": "tiếng Ả Rập",
@@ -358,6 +380,7 @@
   "reflect": "Suy ngẫm",
   "reflections": "Suy ngẫm",
   "reflections-and-lessons": "Suy ngẫm & Bài học",
+  "related-verses": "Các câu thơ liên quan",
   "remove": "Di dời",
   "rename": "Đổi tên",
   "retry": "Thử lại",
@@ -383,6 +406,7 @@
     "title": "Tìm kiếm"
   },
   "seconds": "Giây",
+  "see-less": "Xem ít hơn",
   "see-new": "Xem có gì mới",
   "select-language": "Chọn ngôn ngữ",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "Đi lên",
     "by": "Sắp xếp theo",
-    "descending": "Đi xuống"
+    "descending": "Đi xuống",
+    "sort": "Loại"
   },
   "stay-on-track": "🎯 Giữ vững mục tiêu!",
   "style": "Phong cách",

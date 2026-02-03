@@ -17,7 +17,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import {
   getLoginNavigationUrl,
-  getNotificationSettingsNavigationUrl,
+  getProfileNavigationUrl,
   getQuranicCalendarNavigationUrl,
 } from '@/utils/navigation';
 
@@ -44,7 +44,7 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
     logButtonClick('quranic_calendar_enroll_in_program');
     if (isLoggedIn) {
       if (isSubscribed) {
-        router.replace(getNotificationSettingsNavigationUrl());
+        router.replace(getProfileNavigationUrl());
       } else if (!isSubscriptionLoading && !isSubscribed && !isEnrolling) {
         setIsEnrolling(true);
         try {

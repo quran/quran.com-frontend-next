@@ -1,18 +1,58 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/theme';
+@use 'src/styles/navbar';
 
 // dynamic global variables
 
 :root {
-  // TODO: migrate constants.scss to use css variables
-  --navbar-height: 3.6rem;
-  --context-menu-container-height: 3rem;
-  --mobile-reading-mode-tabs-height: 3.25rem;
+  // Navbar dimensions - sourced from _navbar.scss
+  --adjuster: #{navbar.$adjuster};
+  --navbar-height: #{navbar.$navbar-height};
+  --navbar-logo-height: #{navbar.$navbar-logo-height};
+  --banner-height: #{navbar.$banner-height};
+
+  // Context menu dimensions
+  --context-menu-section-height: #{navbar.$context-menu-section-height};
+  --context-menu-section-mobile-height: #{navbar.$context-menu-section-mobile-height};
+  --context-menu-section-mobile-expanded-height: #{navbar.$context-menu-section-mobile-expanded-height};
+  --context-menu-page-info-mobile-height: #{navbar.$context-menu-page-info-mobile-height};
+  --context-menu-page-info-content-height: #{navbar.$context-menu-page-info-content-height};
+  --context-menu-page-info-padding-top: #{navbar.$context-menu-page-info-padding-top};
+  --context-menu-page-info-padding-bottom: #{navbar.$context-menu-page-info-padding-bottom};
+  --context-menu-mobile-reading-tabs-height: #{navbar.$context-menu-mobile-reading-tabs-height};
+
+  // Mobile reading tabs
+  --mobile-reading-tabs-content-height: #{navbar.$mobile-reading-tabs-content-height};
+  --mobile-reading-tabs-padding-top: #{navbar.$mobile-reading-tabs-padding-top};
+  --mobile-reading-tabs-padding-bottom: #{navbar.$mobile-reading-tabs-padding-bottom};
+  --mobile-reading-tabs-border: #{navbar.$mobile-reading-tabs-border};
+
+  // Mobile composite heights
+  --mobile-context-menu-height: #{navbar.$mobile-context-menu-height}; // 87px (section 40px + tabs 47px)
+  --mobile-reading-mode-tabs-height: #{navbar.$mobile-reading-mode-tabs-height}; // 47px
+
+  // Tajweed
+  --tajweed-trigger-height: #{navbar.$tajweed-trigger-height};
+
+  // Pinned verses
+  --pinned-verses-bar-height: 0px;
+
+  // Derived values (calculated from base variables)
   --navbar-container-height: var(--navbar-height);
-  --top-bar-height: 3rem;
-  --top-bar-height-collapsed: 3rem;
-  --top-bar-height-mobile-full: 6.2rem;
-  --top-bar-height-mobile-collapsed: 5.75rem;
-  --banner-height: 3rem;
+  --top-bar-height: calc(var(--adjuster) + var(--context-menu-section-height));
+  --top-bar-height-collapsed: calc(var(--adjuster) + var(--context-menu-section-height));
+  --top-bar-height-mobile-full: calc(
+    var(--adjuster) + var(--context-menu-section-mobile-height) +
+      var(--context-menu-mobile-reading-tabs-height)
+  );
+  --top-bar-height-mobile-collapsed: calc(
+    var(--adjuster) + var(--context-menu-page-info-mobile-height) +
+      var(--context-menu-section-mobile-expanded-height)
+  );
   --day-circle-color: transparent;
+
+  // Mobile animation stagger delays (expand only) - tighter timing for smoother feel
+  --mobile-stagger-delay-navbar: 0ms;
+  --mobile-stagger-delay-context-menu: 20ms;
+  --mobile-stagger-delay-content: 40ms;
 }

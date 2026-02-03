@@ -57,7 +57,7 @@ const GoalStatus: React.FC<Props> = ({
       </Link>
     );
   } else if (percent >= 100) {
-    subSection = t('daily-progress-completed');
+    subSection = <p className={styles.remaining}>{t('daily-progress-completed')}</p>;
   } else if (typeof goal.progress.daysLeft === 'number') {
     subSection = (
       <Trans
@@ -119,7 +119,7 @@ const GoalStatus: React.FC<Props> = ({
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.header}>{header}</div>
       <div className={styles.subSection}>{subSection}</div>
     </div>

@@ -12,11 +12,15 @@ import QuranReaderView from './QuranReaderView';
 import ReaderTopActions from './ReaderTopActions';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
+import useGetMushaf from '@/hooks/useGetMushaf';
+import useIsMobile from '@/hooks/useIsMobile';
+import { selectIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectPinnedVerseKeys } from '@/redux/slices/QuranReader/pinnedVerses';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
+import { Mushaf, QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import isInReadingMode from '@/utils/readingPreference';
 import { VersesResponse } from 'types/ApiResponses';
 
@@ -37,6 +41,20 @@ const QuranReader = ({
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = isInReadingMode(readingPreference);
+  const isMobile = useIsMobile();
+  const isExpanded = useSelector(selectIsExpanded);
+  const mushaf = useGetMushaf();
+  const pinnedVerseKeys = useSelector(selectPinnedVerseKeys, shallowEqual);
+  const hasPinnedVerses = pinnedVerseKeys.length > 0;
+
+  // Mobile collapsed state: when scrolled past threshold on mobile
+  const isMobileCollapsed = isMobile && !isExpanded;
+  const isTajweedMushaf = mushaf === Mushaf.QCFTajweedV4;
+  // Tajweed bar is hidden only in ReadingTranslation mode
+  const isReadingTranslationMode = readingPreference === ReadingPreference.ReadingTranslation;
+  const showTajweedPadding = isTajweedMushaf && !isReadingTranslationMode;
+
+  const isSingleVerse = quranReaderDataType === QuranReaderDataType.Verse;
 
   useSyncChapterPage(initialData);
 
@@ -50,11 +68,18 @@ const QuranReader = ({
           [styles.withVisibleSideBar]: isSideBarVisible,
           [styles.withSidebarNavigationOpenOrAuto]: isSidebarNavigationVisible,
           [styles.translationView]: !isReadingPreference,
+          [styles.singleVerseView]: isSingleVerse,
+          [styles.mobileCollapsed]: isMobileCollapsed && !showTajweedPadding,
+          [styles.mobileCollapsedTajweed]: isMobileCollapsed && showTajweedPadding,
+          [styles.mobileTajweedExpanded]: isMobile && !isMobileCollapsed && showTajweedPadding,
+          [styles.desktopTajweed]: !isMobile && showTajweedPadding,
+          [styles.withPinnedVerses]: hasPinnedVerses,
         })}
       >
         <div
           className={classNames(styles.infiniteScroll, {
             [styles.readingView]: isReadingPreference,
+            [styles.singleVerseReadingView]: isSingleVerse,
           })}
         >
           <VerseTrackerContextProvider>

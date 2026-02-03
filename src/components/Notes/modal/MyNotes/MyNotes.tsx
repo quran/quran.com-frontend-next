@@ -1,27 +1,19 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
-import DeleteNoteButton from './DeleteNoteButton';
 import styles from './MyNotes.module.scss';
 
-import QRButton from '@/components/Notes/modal/MyNotes/QrButton';
-import DataContext from '@/contexts/DataContext';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import { DEFAULT_DEDUPING_INTERVAL } from '@/components/Notes/modal/constant';
+import useNotesWithRecentReflection from '@/components/Notes/modal/hooks/useNotesWithRecentReflection';
+import NoteCard from '@/components/Notes/modal/MyNotes/Card/NoteCard';
+import Button, { ButtonSize } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import EditIcon from '@/icons/edit.svg';
 import PlusIcon from '@/icons/plus.svg';
-import { AttachedEntityType, Note } from '@/types/auth/Note';
+import { Note } from '@/types/auth/Note';
 import { getNotesByVerse } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
-import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
-import { toLocalizedNumber } from '@/utils/locale';
-import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
-import { readableVerseRangeKeys } from '@/utils/verseKeys';
-
-type NoteWithPostUrl = Note & { postUrl?: string };
 
 interface MyNotesProps {
   onAddNote: () => void;
@@ -42,48 +34,21 @@ const MyNotes: React.FC<MyNotesProps> = ({
   onPostToQrClick,
   onDeleteNoteClick,
 }) => {
-  const { t, lang } = useTranslation('notes');
-  const chaptersData = useContext(DataContext);
+  const { t } = useTranslation('notes');
 
   const { data, error } = useSWR(
     makeGetNotesByVerseUrl(verseKey),
     () => getNotesByVerse(verseKey),
     {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      revalidateIfStale: false,
+      revalidateOnReconnect: true,
+      revalidateOnFocus: true,
+      dedupingInterval: DEFAULT_DEDUPING_INTERVAL,
     },
-  );
-
-  const formatNoteTitle = useCallback(
-    (note: Note) => {
-      if (!note.ranges || note.ranges.length === 0) return '';
-      const readableRangeKeys = readableVerseRangeKeys(note.ranges, chaptersData, lang);
-      if (readableRangeKeys.length === 0) return '';
-      if (readableRangeKeys.length === 1) return readableRangeKeys[0];
-      return `${readableRangeKeys[0]} + ${toLocalizedNumber(readableRangeKeys.length - 1, lang)}`;
-    },
-    [chaptersData, lang],
   );
 
   const isLoading = !data && !error;
 
-  const notes = useMemo((): NoteWithPostUrl[] => {
-    const notesArray = Array.isArray(data) ? data : [];
-
-    return notesArray.map((note) => {
-      const attachedEntities = note.attachedEntities || [];
-
-      /** Find the last reflection entity. */
-      const attachedEntity = attachedEntities
-        .slice()
-        .reverse()
-        .find((entity) => entity.type === AttachedEntityType.REFLECTION);
-
-      const postUrl = attachedEntity ? getQuranReflectPostUrl(attachedEntity.id) : undefined;
-      return { ...note, postUrl };
-    });
-  }, [data]);
+  const notes = useNotesWithRecentReflection(data);
 
   const showEmptyState = !isLoading && !error && notes.length === 0;
   const showStatus = isLoading || error || showEmptyState;
@@ -106,46 +71,14 @@ const MyNotes: React.FC<MyNotesProps> = ({
       ) : (
         <div className={styles.notesList}>
           {notes.map((note) => (
-            <div key={note.id} className={styles.noteCard} data-testid={`note-card-${note.id}`}>
-              <div className={styles.noteHeader}>
-                <div className={styles.noteInfo}>
-                  <h3 className={styles.noteTitle}>{formatNoteTitle(note)}</h3>
-                  <time className={styles.noteDate} dateTime={toSafeISOString(note.createdAt)}>
-                    {dateToMonthDayYearFormat(note.createdAt, lang)}
-                  </time>
-                </div>
-                <div className={styles.noteActions}>
-                  <QRButton note={note} postUrl={note.postUrl} onPostToQrClick={onPostToQrClick} />
-
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    size={ButtonSize.Small}
-                    shape={ButtonShape.Square}
-                    onClick={() => onEditNote(note)}
-                    tooltip={t('common:edit')}
-                    ariaLabel={t('common:edit')}
-                    data-testid="edit-note-button"
-                  >
-                    <IconContainer
-                      icon={<EditIcon />}
-                      shouldForceSetColors={false}
-                      size={IconSize.Xsmall}
-                      className={styles.actionIcon}
-                    />
-                  </Button>
-
-                  <DeleteNoteButton
-                    note={note}
-                    onDeleteNoteClick={onDeleteNoteClick}
-                    isDeletingNote={note.id === deletingNoteId}
-                  />
-                </div>
-              </div>
-
-              <p className={styles.noteText} data-testid="note-text">
-                {note.body}
-              </p>
-            </div>
+            <NoteCard
+              key={note.id}
+              note={note}
+              onEdit={onEditNote}
+              onPostToQr={onPostToQrClick}
+              onDelete={onDeleteNoteClick}
+              isDeletingNote={note.id === deletingNoteId}
+            />
           ))}
         </div>
       )}

@@ -1,0 +1,36 @@
+@use '@/styles/constants';
+
+.tag {
+  all: unset;
+
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxsmall-px);
+  border-radius: var(--border-radius-xsmall-px);
+  background: var(--background);
+  color: var(--color);
+  font-size: var(--font-size-small);
+  white-space: nowrap;
+  transition: transform var(--transition-moderate) ease, box-shadow var(--transition-moderate) ease;
+
+  .tagName {
+    line-height: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:where(:hover, :focus-visible) {
+    filter: brightness(var(--opacity-85));
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(constants.$button-active-scale);
+  }
+}

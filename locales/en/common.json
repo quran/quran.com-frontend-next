@@ -45,6 +45,7 @@
     "play-surah": "Play Surah {{surahName}}",
     "select-lng": "Select Language",
     "sidebar-nav-close": "Close Navigation Sidebar",
+    "tooltip-action": "Tooltip action",
     "translation-info": "View translation information"
   },
   "audio": {
@@ -141,6 +142,7 @@
     "decrease": "Decrease",
     "increase": "Increase"
   },
+  "create": "Create",
   "create-my-goal": "Create My Goal",
   "default-description": "The Quran translated into many languages in a simple and easy interface",
   "delete": "Delete",
@@ -150,6 +152,7 @@
   "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "done": "Done",
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -170,7 +173,10 @@
     "pref-persist-fail": "Failed to sync your settings to the cloud.",
     "ranges-no-value": "Range start and end must have a value",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
-    "ranges-wrong-order": "The starting verse has to be before the ending verse."
+    "ranges-wrong-order": "The starting verse has to be before the ending verse.",
+    "reading-bookmark-remove": "Failed to remove reading bookmark",
+    "reading-bookmark-set": "Failed to set reading bookmark",
+    "reading-bookmark-undo": "Failed to undo reading bookmark"
   },
   "errors": {
     "account-banned": "Sorry, Your account is banned. Contact Quran.Foundation",
@@ -179,29 +185,39 @@
     "complete-signup-failed": "Failed to complete signup. Please try again.",
     "confirm": "*Confirm password doesn't match the password",
     "email": "*Invalid Email Format!",
+    "equal": "*{{fieldName}} doesn't match",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
+    "file-exceeds-limit": "File size exceeds the limit. Please choose a smaller file.",
     "forgot-password-failed": "Failed to send password reset email. Please try again.",
+    "image-remove-failed": "Failed to remove image. Please try again.",
+    "image-upload-failed": "Failed to upload image. Please try again.",
     "immutable": "*This value cannot be changed",
     "invalid": "*This {{fieldName}} is invalid",
+    "invalid-file-format": "Invalid file format. Only {{formats}} files are allowed.",
     "invalidEmailOrPassword": "*Invalid email or password",
     "max": "*{{fieldName}} must be less than or equal to {{max}} digits",
     "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
     "name": "*{{fieldName}} should be letters and numbers only",
     "notFound": "*Not found",
+    "profile-pic-size-limit": "Profile pic size should be {{size}}MB maximum",
+    "remove-avatar-failed": "Failed to remove avatar. Please try again.",
     "required": "*{{fieldName}} is missing!",
     "reset-password-failed": "Failed to reset password. Please try again.",
     "signin-failed": "Signin failed. Please try again.",
     "signup-failed": "Signup failed. Please try again.",
     "taken": "*{{fieldName}} already exists!",
+    "upload-avatar-failed": "Failed to upload avatar. Please try again.",
     "usedToken": "*This token already used",
     "username": "*{{fieldName}} accept underscore and letters only",
     "verification-code-invalid": "This verification code is invalid",
     "verification-code-length": "Verification code must be {{length}} digits",
     "verification-failed": "Verification failed. Please try again.",
-    "verification-resend-failed": "Failed to resend verification code"
+    "verification-resend-failed": "Failed to resend verification code",
+    "verse-metadata-failed": "Failed to load verse metadata"
   },
   "exciting-updates": "Exciting Updates",
+  "favorites": "Favorites",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 Lines",
@@ -231,10 +247,13 @@
   "form": {
     "body": "Body",
     "code": "Verification Code",
+    "confirm-new-password": "Confirm New Password",
     "confirm-password": "Confirm Password",
+    "current-password": "Current Password",
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
+    "new-password": "New Password",
     "password": "Password",
     "title": "Title",
     "username": "Username",
@@ -255,6 +274,7 @@
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",
+  "go-to-verse": "Go To Verse",
   "hear-it-pronounced": "Click Quranic words, hear pronunciation",
   "help": "Help",
   "hizb": "Hizb",
@@ -264,6 +284,7 @@
   "input": {
     "clear": "Clear"
   },
+  "join-ramadan-challenge": "🚀 Join our Ramadan Challenge!",
   "juz": "Juz",
   "language": "Language",
   "languages": "Languages",
@@ -338,6 +359,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "read": "Read",
+  "read-more": "Read More",
   "reading-history": "Reading history",
   "reading-preference": {
     "arabic": "Arabic",
@@ -358,6 +380,7 @@
   "reflect": "Reflect",
   "reflections": "Reflections",
   "reflections-and-lessons": "Reflections & Lessons",
+  "related-verses": "Related Verses",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",
@@ -383,6 +406,7 @@
     "title": "Search"
   },
   "seconds": "Seconds",
+  "see-less": "See less",
   "see-new": "See What's New",
   "select-language": "Select Language",
   "settings": {
@@ -426,7 +450,8 @@
   "sort": {
     "ascending": "Ascending",
     "by": "Sort by",
-    "descending": "Descending"
+    "descending": "Descending",
+    "sort": "Sort"
   },
   "stay-on-track": "🎯 Stay on track!",
   "style": "Style",

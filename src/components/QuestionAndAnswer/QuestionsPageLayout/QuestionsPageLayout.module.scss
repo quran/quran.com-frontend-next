@@ -1,0 +1,25 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/mixins/qna-font-scales';
+
+.container {
+  min-block-size: calc(10 * var(--spacing-mega));
+  margin: auto;
+  padding-block: var(--spacing-medium);
+
+  @include breakpoints.desktop {
+    inline-size: 75%;
+  }
+
+  @include breakpoints.smallerThanDesktop {
+    inline-size: 90%;
+  }
+}
+
+.verseSection {
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-small);
+}
+
+.separatorContainer {
+  margin-block: var(--spacing-large);
+}

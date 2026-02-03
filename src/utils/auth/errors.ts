@@ -49,6 +49,7 @@ export enum AuthEndpoint {
   ResetPassword = 'resetPassword',
   CompleteSignup = 'completeSignup',
   UpdateUserProfile = 'updateUserProfile',
+  UpdatePassword = 'updatePassword',
 }
 
 // Map of API endpoint to their error field keys
@@ -81,6 +82,13 @@ const API_ERROR_FIELD_MAP: Record<AuthEndpoint, ErrorFieldMap> = {
     firstName: 'firstName',
     lastName: 'lastName',
     username: 'username',
+    avatar: 'avatar',
+    removeAvatar: 'removeAvatar',
+  },
+  [AuthEndpoint.UpdatePassword]: {
+    currentPassword: 'currentPassword',
+    newPassword: 'newPassword',
+    confirmPassword: 'confirmPassword',
   },
 };
 
@@ -215,7 +223,7 @@ const getErrorMessage = (error: unknown): string | undefined => {
  * @param {unknown} error - Unknown error object
  * @returns {number | undefined} HTTP status if available
  */
-const getErrorStatus = (error: unknown): number | undefined => {
+export const getErrorStatus = (error: unknown): number | undefined => {
   if (error && typeof error === 'object') {
     if ('status' in error && typeof error.status === 'number') {
       return error.status;

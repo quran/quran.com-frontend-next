@@ -14,7 +14,6 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 const ShareQuranModal = dynamic(
   () => import('@/components/QuranReader/ReadingView/ShareQuranModal'),
@@ -22,7 +21,6 @@ const ShareQuranModal = dynamic(
 );
 
 type Props = {
-  word?: Word;
   verse?: Verse;
   children: React.ReactNode;
   onOpenChange?: (isOpen: boolean) => void;
@@ -32,13 +30,11 @@ type Props = {
 
 /**
  * Popover for word/verse actions in reading view.
- * Accepts either a Word (extracts verse from it) or a Verse directly.
  *
  * @returns {React.ReactElement} The popover component wrapping children
  */
 const ReadingViewWordPopover: React.FC<Props> = ({
-  word,
-  verse: verseProp,
+  verse,
   children,
   onOpenChange,
   isOpen: isOpenProp,
@@ -52,9 +48,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({
   // Use controlled state if provided, otherwise use internal state
   const isMenuOpened = isOpenProp !== undefined ? isOpenProp : isMenuOpenedInternal;
 
-  // Use verse prop directly if provided, otherwise extract from word
-  const verse = verseProp || word?.verse;
-  const verseKey = verse?.verseKey || word?.verseKey;
+  const verseKey = verse?.verseKey;
 
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {

@@ -1,0 +1,40 @@
+@use '@/styles/breakpoints';
+
+.container {
+  padding-block-start: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-medium2);
+  }
+}
+
+.city {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded-new);
+  margin-block-end: var(--spacing-small);
+}
+
+.content {
+  margin-block-start: var(--spacing-small);
+}
+
+.bioTitle {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.bioText {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.noBio {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded-new);
+  font-style: italic;
+  margin: 0;
+}

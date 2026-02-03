@@ -126,8 +126,7 @@
   padding-inline: var(--spacing-medium-px);
   background-color: var(--color-streaks-light);
   @include breakpoints.smallerThanTablet {
-    padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px)
-      var(--spacing-medium-px);
+    padding: var(--spacing-small-px);
   }
 }
 

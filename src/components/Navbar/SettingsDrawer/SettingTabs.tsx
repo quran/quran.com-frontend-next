@@ -22,7 +22,7 @@ const SettingTabs = ({ activeTab = SettingsTab.Arabic, onTabChange }: SettingTab
   const tabs = [
     { id: SettingsTab.Arabic, label: t('quran-reader:arabic') },
     { id: SettingsTab.Translation, label: t('translation') },
-    { id: SettingsTab.More, label: t('more') },
+    { id: SettingsTab.More, label: t('common:wbw') },
   ];
 
   return (

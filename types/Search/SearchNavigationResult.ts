@@ -19,4 +19,5 @@ export interface SearchNavigationResult {
   key: number | string;
   isArabic?: boolean;
   isTransliteration?: boolean;
+  arabic?: string;
 }

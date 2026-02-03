@@ -4,19 +4,28 @@
   "back-to-collection-list": "Back to collection list",
   "collapse-all": "Collapse all verses",
   "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
+  "collection-name": "Collection name",
   "collections": "Collections",
   "delete-bookmark": {
     "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
     "title": "Delete bookmark"
   },
+  "delete-collection-action": "Delete Collection",
+  "delete-collection-success": "Collection deleted successfully",
   "delete-collection": {
+    "description": "You will lose all of the verses saved inside this collection.",
     "subtitle": "Are you sure you want to delete {{collectionName}} collection?",
-    "title": "Delete collection"
+    "subtitle-tagged": "Are you sure you want to delete <collectionName>{{collectionName}}</collectionName> ?",
+    "title": "Delete Collection"
   },
+  "edit-collection": "Edit Collection",
+  "edit-collection-name-required": "Enter a collection name to save.",
+  "edit-collection-success": "Collection updated successfully",
   "empty": "Collection is empty",
   "expand-all": "Expand all verses",
   "go-to-ayah": "Go to ayah",
   "load-more": "Load More",
+  "no-collections": "You don't have any collections yet",
   "recently-added": "Recently added",
   "recently-updated": "Recently updated",
   "verse-key": "Chapter and Verse Number"

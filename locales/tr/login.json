@@ -11,6 +11,7 @@
   "continue-email": "E-posta ile devam et",
   "continue-facebook": "Facebook ile devam",
   "continue-google": "Google ile devam",
+  "current-password-placeholder": "Mevcut Şifre",
   "email-placeholder": "E-posta Adresi",
   "error": {
     "email-required": "E-posta eksik!",
@@ -58,6 +59,7 @@
   "forgot-password-description": "E-posta adresinizi girin, size şifrenizi sıfırlamanız için talimatları göndereceğiz.",
   "forgot-password-success": "Şifre sıfırlama e-postası gönderildi! Lütfen gelen kutunuzu kontrol edin.",
   "forgot-password-title": "Şifrenizi mi unuttunuz?",
+  "hide-password": "Şifreyi gizle",
   "last-name-placeholder": "Soy isim",
   "login-cta": "Giriş yapın veya şimdi kaydolun:",
   "login-error": {
@@ -89,6 +91,7 @@
   "reset-password": "Şifreyi sıfırla",
   "reset-password-success": "Şifre başarıyla yenilendi!",
   "set-new-password": "Yeni bir şifre belirleyin",
+  "show-password": "Şifreyi göster",
   "sign-in": "Giriş yapın",
   "sign-in-or-sign-up": "Devam etmek için aşağıdan Giriş Yap veya Kayıt Ol'u seçin.",
   "sign-up": "kayıt olun",
