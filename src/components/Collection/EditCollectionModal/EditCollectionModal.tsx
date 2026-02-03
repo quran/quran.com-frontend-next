@@ -51,12 +51,7 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   );
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClickOutside={onClose}
-      onEscapeKeyDown={onClose}
-      isBottomSheetOnMobile={false}
-    >
+    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
       <Modal.Body>
         <div className={styles.header}>
           <div className={styles.title}>{t('edit-collection')}</div>
