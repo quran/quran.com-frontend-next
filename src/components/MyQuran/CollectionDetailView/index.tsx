@@ -11,7 +11,7 @@ import CollectionBulkActionsPopover from '@/components/Collection/CollectionActi
 import CollectionHeaderActionsPopover from '@/components/Collection/CollectionActionsPopover/CollectionHeaderActionsPopover';
 import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
 import CollectionSorter from '@/components/Collection/CollectionSorter/CollectionSorter';
-import EditCollectionModal from '@/components/Collection/EditCollectionModal/EditCollectionModal';
+import EditCollectionModal from '@/components/Collection/EditCollectionModal';
 import Button, { ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
 import Error from '@/components/Error';
 import DeleteCollectionModal from '@/components/MyQuran/DeleteCollectionModal';
