@@ -44,10 +44,15 @@ $max-inline-size: 670px;
 .wrapper {
   .backButton {
     font-size: var(--font-size-large2);
-    inline-size: max-content;
+    max-inline-size: 100%;
+    inline-size: auto;
     justify-content: flex-start;
     block-size: auto;
     margin: 0;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: start;
 
     @include breakpoints.tablet {
       font-size: var(--font-size-xlarge);
