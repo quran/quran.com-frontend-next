@@ -141,7 +141,13 @@ function main() {
       const sourcePath = path.join(sourceDirPath, format.sourceDir);
       const destPath = path.join(PROJECT_ROOT, mapping.destination, format.destDir);
 
-      // Clear existing files
+      // Check if source exists before clearing destination
+      if (!fs.existsSync(sourcePath)) {
+        console.log(`  ${format.destDir}: source not found - skipping (existing files preserved)`);
+        return;
+      }
+
+      // Clear existing files only after confirming source exists
       const removed = clearDirectory(destPath);
       totalRemoved += removed;
 
@@ -149,11 +155,7 @@ function main() {
       const result = copyFontFiles(sourcePath, destPath);
       totalCopied += result.copied;
 
-      if (result.notFound) {
-        console.log(`  ${format.destDir}: source not found`);
-      } else {
-        console.log(`  ${format.destDir}: removed ${removed}, copied ${result.copied}`);
-      }
+      console.log(`  ${format.destDir}: removed ${removed}, copied ${result.copied}`);
     });
   });
 
