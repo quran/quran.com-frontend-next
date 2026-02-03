@@ -121,7 +121,7 @@ const useSurahBookmarks = (surahNumber: number, mushafId: number): UseSurahBookm
     isVerseInFavorites,
     updateVerseBookmark,
     mutate,
-    isLoading: isValidating,
+    isLoading: isValidating && data === undefined,
     error,
   };
 };

@@ -107,6 +107,24 @@ export const useCollectionToggle = ({
 
       // Optimistically update collection IDs (add the new collection ID)
       const baseIds = getBaseCollectionIds();
+      const serverIds = bookmarkCollectionIdsData || [];
+      if (baseIds.includes(collectionId)) {
+        if (serverIds.includes(collectionId)) {
+          return;
+        }
+        // Bookmark state says it's already in; sync local IDs/UI without re-adding.
+        mutateBookmarkCollectionIdsData(baseIds);
+        updateVerseBookmark(verseKey, buildOptimisticBookmark(baseIds, previousBookmark));
+        logEvent('ayah_added_to_collection', { verseKey, collectionId });
+        if (collectionId === DEFAULT_COLLECTION_ID) {
+          toast(commonT('verse-bookmarked'), { status: ToastStatus.Success });
+          logEvent('verse_added_to_favorites', { verseKey });
+        } else {
+          toast(t('saved-to', { collectionName }), { status: ToastStatus.Success });
+        }
+        onMutate?.();
+        return;
+      }
       const optimisticCollectionIds = baseIds.includes(collectionId)
         ? baseIds
         : [...baseIds, collectionId];
@@ -190,7 +208,11 @@ export const useCollectionToggle = ({
       const previousBookmark = getVerseBookmark(verseKey);
 
       // Optimistically update collection IDs (remove the collection ID)
-      const optimisticCollectionIds = getBaseCollectionIds().filter((id) => id !== collectionId);
+      const baseIds = getBaseCollectionIds();
+      if (!baseIds.includes(collectionId)) {
+        return;
+      }
+      const optimisticCollectionIds = baseIds.filter((id) => id !== collectionId);
       mutateBookmarkCollectionIdsData(optimisticCollectionIds);
       updateVerseBookmark(
         verseKey,
