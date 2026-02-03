@@ -19,6 +19,7 @@
     "title": "Fshi koleksionin"
   },
   "edit-collection": "Modifiko Koleksionin",
+  "edit-collection-name-required": "Fut një emër koleksioni për ta ruajtur.",
   "edit-collection-success": "Koleksioni u përditësua me sukses.",
   "empty": "Koleksioni është bosh",
   "expand-all": "Zgjero të gjitha vargjet",

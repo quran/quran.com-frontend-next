@@ -19,6 +19,7 @@
     "title": "حذف المجموعة"
   },
   "edit-collection": "مجموعة التحرير",
+  "edit-collection-name-required": "أدخل اسم المجموعة لحفظها.",
   "edit-collection-success": "تم تحديث المجموعة بنجاح",
   "empty": "المجموعة فارغة",
   "expand-all": "عرض جميع الآيات",

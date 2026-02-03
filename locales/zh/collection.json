@@ -19,6 +19,7 @@
     "title": "删除收藏"
   },
   "edit-collection": "编辑收藏",
+  "edit-collection-name-required": "输入要保存的收藏集名称。",
   "edit-collection-success": "馆藏已成功更新",
   "empty": "集合为空",
   "expand-all": "展开所有经文",

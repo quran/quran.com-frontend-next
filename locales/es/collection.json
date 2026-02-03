@@ -19,6 +19,7 @@
     "title": "Eliminar colección"
   },
   "edit-collection": "Editar colección",
+  "edit-collection-name-required": "Introduzca un nombre de colección para guardar.",
   "edit-collection-success": "Colección actualizada exitosamente",
   "empty": "La colección está vacía",
   "expand-all": "Expandir todos los versículos",

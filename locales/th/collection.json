@@ -19,6 +19,7 @@
     "title": "ลบคอลเลกชัน"
   },
   "edit-collection": "แก้ไขคอลเลกชัน",
+  "edit-collection-name-required": "ป้อนชื่อคอลเลกชันเพื่อบันทึก",
   "edit-collection-success": "การอัปเดตคอลเลกชันสำเร็จแล้ว",
   "empty": "คอลเลกชันว่างเปล่า",
   "expand-all": "ขยายอายะห์ทั้งหมด",

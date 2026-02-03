@@ -19,6 +19,7 @@
     "title": "Koleksiyonu sil"
   },
   "edit-collection": "Koleksiyonu Düzenle",
+  "edit-collection-name-required": "Kaydedilecek koleksiyon için bir ad girin.",
   "edit-collection-success": "Koleksiyon başarıyla güncellendi.",
   "empty": "Koleksiyon boş",
   "expand-all": "Tüm ayetleri genişlet",

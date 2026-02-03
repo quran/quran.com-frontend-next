@@ -19,6 +19,7 @@
     "title": "সংগ্রহ মুছুন"
   },
   "edit-collection": "সংগ্রহ সম্পাদনা করুন",
+  "edit-collection-name-required": "সংরক্ষণ করার জন্য একটি সংগ্রহের নাম লিখুন।",
   "edit-collection-success": "সংগ্রহ সফলভাবে আপডেট করা হয়েছে",
   "empty": "সংগ্রহ খালি",
   "expand-all": "সব আয়াত প্রসারিত",

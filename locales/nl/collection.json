@@ -19,6 +19,7 @@
     "title": "Verzameling verwijderen"
   },
   "edit-collection": "Collectie bewerken",
+  "edit-collection-name-required": "Voer een collectienaam in om op te slaan.",
   "edit-collection-success": "Collectie succesvol bijgewerkt",
   "empty": "Collectie is leeg",
   "expand-all": "vouw alle verzen uit",

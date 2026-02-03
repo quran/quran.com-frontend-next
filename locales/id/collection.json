@@ -19,6 +19,7 @@
     "title": "Hapus koleksi"
   },
   "edit-collection": "Edit Koleksi",
+  "edit-collection-name-required": "Masukkan nama koleksi yang ingin disimpan.",
   "edit-collection-success": "Koleksi berhasil diperbarui.",
   "empty": "Koleksi kosong",
   "expand-all": "Perluas semua ayat",

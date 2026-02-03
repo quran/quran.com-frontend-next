@@ -19,6 +19,7 @@
     "title": "Xóa bộ sưu tập"
   },
   "edit-collection": "Chỉnh sửa bộ sưu tập",
+  "edit-collection-name-required": "Nhập tên bộ sưu tập để lưu.",
   "edit-collection-success": "Bộ sưu tập đã được cập nhật thành công.",
   "empty": "Bộ sưu tập trống",
   "expand-all": "Mở rộng tất cả các câu",

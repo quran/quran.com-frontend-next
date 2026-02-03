@@ -19,6 +19,7 @@
     "title": "Excluir coleção"
   },
   "edit-collection": "Editar coleção",
+  "edit-collection-name-required": "Digite o nome da coleção para salvar.",
   "edit-collection-success": "Coleção atualizada com sucesso",
   "empty": "A coleção está vazia",
   "expand-all": "Expandir todos os versos",

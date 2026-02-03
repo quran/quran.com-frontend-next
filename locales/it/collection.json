@@ -19,6 +19,7 @@
     "title": "Elimina raccolta"
   },
   "edit-collection": "Modifica raccolta",
+  "edit-collection-name-required": "Inserisci un nome per la raccolta da salvare.",
   "edit-collection-success": "Raccolta aggiornata con successo",
   "empty": "La raccolta è vuota",
   "expand-all": "Espandi tutti i versi",

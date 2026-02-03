@@ -19,6 +19,7 @@
     "title": "Supprimer la collection"
   },
   "edit-collection": "Modifier la collection",
+  "edit-collection-name-required": "Saisissez un nom de collection pour enregistrer.",
   "edit-collection-success": "Collection mise à jour avec succès",
   "empty": "La collection est vide",
   "expand-all": "Déplier toutes les Ayahs",

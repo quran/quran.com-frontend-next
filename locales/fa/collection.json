@@ -19,6 +19,7 @@
     "title": "حذف مجموعه"
   },
   "edit-collection": "ویرایش مجموعه",
+  "edit-collection-name-required": "نام مجموعه را برای ذخیره وارد کنید.",
   "edit-collection-success": "مجموعه با موفقیت به‌روزرسانی شد",
   "empty": "مجموعه خالی است",
   "expand-all": "همه آیات را بسط دهید",
