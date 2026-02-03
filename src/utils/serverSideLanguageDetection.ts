@@ -2,8 +2,6 @@
 /* eslint-disable max-lines */
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { setServerLocaleCookie } from './cookies';
-
 import { getCountryLanguagePreference } from '@/api';
 import { logInfo, logError, logDebug, logTransaction } from '@/lib/newrelic';
 import { logErrorToSentry } from '@/lib/sentry';
@@ -32,7 +30,7 @@ import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
  * ### 2. Key Decision Points
  *
  * **Redirect Decision Criteria:**
- * - User has NOT manually selected a language (no NEXT_LOCALE cookie)
+ * - User has NOT manually selected a language (no QDC_MANUAL_LOCALE=1 cookie)
  * - Detected language differs from current page locale
  * - Detected language is supported in our i18n configuration
  * - API validates the language/country combination
@@ -122,6 +120,30 @@ const DEFAULT_VALUES = {
   COUNTRY: 'US' as DefaultCountry,
   ACCEPT_LANGUAGE: 'en-US,en;q=0.9',
 } as const;
+
+const getCookieValue = (cookieHeader: string | undefined, name: string): string | null => {
+  if (!cookieHeader) return null;
+  const match = cookieHeader.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
+  if (!match) return null;
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return match[1];
+  }
+};
+
+const normalizeLocaleFromCookie = (raw: string | null): string | null => {
+  if (!raw || typeof raw !== 'string') return null;
+  const locale = raw.trim().toLowerCase();
+  return locales.includes(locale) ? locale : null;
+};
+
+const hasLocalePrefixInPath = (rawUrl: string | undefined): boolean => {
+  if (!rawUrl) return false;
+  const pathname = rawUrl.split('?')[0] || '';
+  const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
+  return locales.includes(firstSegment.toLowerCase());
+};
 
 /**
  * Helper function to detect user's device language and country from request headers
@@ -249,9 +271,10 @@ export const getCountryCodeForPreferences = (
 /**
  * Helper function to check if user has manually selected a language
  *
- * Checks for the presence of NEXT_LOCALE cookie which Next.js sets when a user
- * manually changes their language preference. This prevents automatic redirects
- * from overriding user's explicit choice.
+ * Checks for the presence of QDC_MANUAL_LOCALE=1 cookie which we set when a user
+ * explicitly chooses a language (via the language selector or an authenticated
+ * preference sync). This prevents automatic redirects from overriding user's
+ * explicit choice.
  *
  * **Why this matters:** Without this check, users would be stuck in redirect loops
  * if their browser language differs from their preferred site language.
@@ -262,7 +285,7 @@ export const getCountryCodeForPreferences = (
 export const hasManualLanguageSelection = (cookieHeader?: string): boolean => {
   if (!cookieHeader) return false;
 
-  const hasSelection = cookieHeader.includes('NEXT_LOCALE');
+  const hasSelection = /(?:^|;\s*)QDC_MANUAL_LOCALE=1(?:;|$)/.test(cookieHeader);
   logDebug('Checking manual language selection', { hasSelection });
   return hasSelection;
 };
@@ -332,7 +355,7 @@ export const shouldRedirectToLocale = (
  *
  * **Flow Steps:**
  * 1. Extract and parse Accept-Language header
- * 2. Check for manual language selection (NEXT_LOCALE cookie)
+ * 2. Check for manual language selection (QDC_MANUAL_LOCALE=1 cookie)
  * 3. Determine if redirect is needed based on detection rules
  * 4. Determine final locale (detected if redirecting, current if not)
  * 5. Fetch country preference for final locale via single API call
@@ -368,6 +391,39 @@ export const performLanguageDetection = async (
     logInfo('Starting language detection', { pagePath, currentLocale: locale });
 
     try {
+      const cookieHeader = req.headers[HEADERS.COOKIE] as string | undefined;
+      const currentLocale = locale || DEFAULT_VALUES.LANGUAGE;
+
+      // Manual locale redirect semantics (QF-318):
+      // If the user explicitly chose a locale and navigates to a URL without a locale prefix,
+      // redirect to the manual locale to keep navigation consistent (e.g. "/1" -> "/es/1").
+      const hasManualSelection = hasManualLanguageSelection(cookieHeader);
+      if (hasManualSelection && !hasLocalePrefixInPath(req.url)) {
+        const nextLocaleCookie = normalizeLocaleFromCookie(
+          getCookieValue(cookieHeader, 'NEXT_LOCALE'),
+        );
+        if (nextLocaleCookie && nextLocaleCookie !== currentLocale) {
+          const rawUrl = req.url || '/';
+          const [path, query] = rawUrl.split('?');
+          const pathSuffix = path === '/' ? '' : path;
+          const destination = `/${nextLocaleCookie}${pathSuffix}${query ? `?${query}` : ''}`;
+
+          logInfo('Manual locale redirect', {
+            from: rawUrl,
+            to: destination,
+            currentLocale,
+            nextLocaleCookie,
+          });
+
+          return {
+            detectedLanguage: nextLocaleCookie,
+            detectedCountry: DEFAULT_VALUES.COUNTRY,
+            shouldRedirect: true,
+            redirectDestination: destination,
+          };
+        }
+      }
+
       // STEP 1: Extract user's preferred language and country from headers
       const acceptLanguage =
         (req.headers[HEADERS.ACCEPT_LANGUAGE] as string) || DEFAULT_VALUES.ACCEPT_LANGUAGE;
@@ -380,10 +436,8 @@ export const performLanguageDetection = async (
         detectedLanguage: deviceLanguage,
         detectedCountry,
       });
-      const currentLocale = locale || DEFAULT_VALUES.LANGUAGE;
 
       // STEP 2: Check if user has manually overridden language selection
-      const hasManualSelection = hasManualLanguageSelection(req.headers[HEADERS.COOKIE] as string);
       logInfo('Manual language selection check', { hasManualSelection });
 
       // STEP 3: Fetch country preference, extract API-suggested locale, and determine effective locale
@@ -441,9 +495,6 @@ export const performLanguageDetection = async (
           detectedCountry: countryForPreferences,
         });
       }
-
-      // Persist effective locale for subsequent client navigation.
-      setServerLocaleCookie(effectiveLocale, context.res);
 
       // STEP 5: Handle redirect if needed and API call succeeded
       if (canRedirect) {

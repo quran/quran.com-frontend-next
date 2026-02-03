@@ -17,9 +17,9 @@ const loginUser = async (page: Page) => {
   );
 
   await page.goto('/login', { waitUntil: 'networkidle' });
-  await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
-  await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
-  await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
+  await page.getByTestId('signin-email-input').fill(process.env.TEST_USER_EMAIL || '');
+  await page.getByTestId('signin-password-input').fill(process.env.TEST_USER_PASSWORD || '');
+  await page.getByTestId('signin-continue-button').click();
   await page.waitForURL(/\/([a-z]{2})?$/);
 };
 

@@ -3,17 +3,16 @@ on:
   push:
     branches: [master, main, develop, testing]
     paths:
-      - 'src/**'
-      - 'tests/**'
-      - 'playwright.config.ts'
-      - '.github/workflows/playwright.yml'
+      - "src/**"
+      - "tests/**"
+      - "playwright.config.ts"
+      - ".github/workflows/playwright.yml"
   pull_request:
     branches: [master, main, develop]
 jobs:
   test_integration:
     name: Playwright Tests
     runs-on: ubuntu-latest
-    if: false # Temporarily disable this workflow
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,10 +21,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: "yarn"
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
+      - name: Run unit tests (Vitest)
+        run: yarn test
 
       - name: Build application
         run: yarn build

@@ -1,41 +1,171 @@
 {
   "cookies": [
     {
-      "name": "at_development",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMCIsImFzIjoiRU1MIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTc2NTgwNzE1MywiZXhwIjoxNzY1ODA4OTUzfQ.4B82hvWFmPle8z12rJlg9r-HUWv6phW8j2Uiqbzkvds",
-      "domain": "localhost",
+      "name": "CLID",
+      "value": "4477c585dfac44c1a540168030a18159.20260204.20270204",
+      "domain": "www.clarity.ms",
       "path": "/",
-      "expires": 1765808983.458122,
+      "expires": 1801702793.296865,
       "httpOnly": true,
-      "secure": false,
-      "sameSite": "Lax"
+      "secure": true,
+      "sameSite": "None"
     },
     {
-      "name": "rt_development",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMCIsImFzIjoiRU1MIiwiaXNBZG1pbiI6ZmFsc2UsImp0aSI6IjY2NjMwNjJiLTU2MzYtNDk1NC04ODVjLTY0Y2NkZTQ1MmUyMiIsImlhdCI6MTc2NTgwNzE1MywiZXhwIjoxNzY4Mzk5MTUzfQ.JuzZJc3xt1HN-C0HiYF6K3mOS7PXfXFJfZan91bFh2w",
+      "name": "_clck",
+      "value": "1twngw2%5E2%5Eg3a%5E0%5E2226",
       "domain": "localhost",
       "path": "/",
-      "expires": 1768399153.458943,
-      "httpOnly": true,
-      "secure": false,
-      "sameSite": "Lax"
-    },
-    {
-      "name": "id_development",
-      "value": "10",
-      "domain": "localhost",
-      "path": "/",
-      "expires": 1768399153.45897,
+      "expires": 1801702793,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
-      "name": "notif_sub_id_development",
-      "value": "b89d36c38d9c85b6eeed9154db590daa58cd14c7e00e85fa5fd50f3a938fccbc",
+      "name": "QDC_PREFS_VER",
+      "value": "1",
       "domain": "localhost",
       "path": "/",
-      "expires": 1768399153.459005,
+      "expires": 1801702792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "MUID",
+      "value": "10FD619AF13D6E6805BA776CF02F6FE0",
+      "domain": ".bing.com",
+      "path": "/",
+      "expires": 1803862793.831386,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MR",
+      "value": "0",
+      "domain": ".c.bing.com",
+      "path": "/",
+      "expires": 1770771593.831442,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SRM_B",
+      "value": "10FD619AF13D6E6805BA776CF02F6FE0",
+      "domain": ".c.bing.com",
+      "path": "/",
+      "expires": 1803862793.831468,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SM",
+      "value": "C",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MUID",
+      "value": "10FD619AF13D6E6805BA776CF02F6FE0",
+      "domain": ".clarity.ms",
+      "path": "/",
+      "expires": 1803862793.927419,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MR",
+      "value": "0",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": 1770771593.927494,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ANONCHK",
+      "value": "0",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": 1770167393.927517,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_clsk",
+      "value": "1gsahyf%5E1770166794280%5E1%5E0%5Ewww.clarity.ms%2Feus-g%2Fcollect",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1770253194,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.1474282823.1770166795",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1804726794.518272,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_66KJ71JPPN",
+      "value": "GS2.1.s1770166794$o1$g0$t1770166794$j60$l0$h0",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1804726794.524931,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "at_test",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYmQxNjFmNy05MzAxLTRmNzgtYmFhZS0xMTAwZmJhMDBlMDciLCJhcyI6IkVNTCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NTIzNDkzMTMsImV4cCI6MTc1MjM1MTExM30.MlDmz4CMqyDdkMDWbjCUhg2RLAfAdAQThgLGTXqf0qM",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1772758794.56979,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "rt_test",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlYmQxNjFmNy05MzAxLTRmNzgtYmFhZS0xMTAwZmJhMDBlMDciLCJhcyI6IkVNTCIsImlzQWRtaW4iOmZhbHNlLCJqdGkiOiJhODVkNGVkZi01ZGRiLTQ4N2ItYWI2MS1hY2Y1ODg5YjMwZjQiLCJpYXQiOjE3NTIzNDkzMTMsImV4cCI6MTc1NDk0MTMxM30.rCbOXjW7tjX_jZeb3GNhn5cQnm5vTVzswXqh4uUpoPw",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1772758794.569886,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "id_test",
+      "value": "ebd161f7-9301-4f78-baae-1100fba00e07",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1772758794.56993,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "notif_sub_id_test",
+      "value": "5910f6d161eb60f8828d54175c1cbb3863fcb7f422350c897fe599bb91878ad5",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1772758794.569959,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -45,7 +175,37 @@
       "value": "en",
       "domain": "localhost",
       "path": "/",
-      "expires": 1800367154.322347,
+      "expires": 1804726794.720797,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "QDC_MANUAL_LOCALE",
+      "value": "1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1804726794.720881,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "QDC_PREFS",
+      "value": "eyJhdWRpbyI6eyJlbmFibGVBdXRvU2Nyb2xsaW5nIjp0cnVlLCJwbGF5YmFja1JhdGUiOjEsInJlY2l0ZXIiOnsiaWQiOjcsIm5hbWUiOiJNaXNoYXJpIFJhc2hpZCBhbC1gQWZhc3kifSwic2hvd1Rvb2x0aXBXaGVuUGxheWluZ0F1ZGlvIjp0cnVlfSwibGFuZ3VhZ2UiOnsibGFuZ3VhZ2UiOiJlbiJ9LCJxdXJhblJlYWRlclN0eWxlcyI6eyJsZXNzb25Gb250U2NhbGUiOjMsIm11c2hhZkxpbmVzIjoiY29kZV92MSIsInFuYUZvbnRTY2FsZSI6MywicXVyYW5Gb250IjoiY29kZV92MSIsInF1cmFuVGV4dEZvbnRTY2FsZSI6MywicXVyYW5UZXh0Rm9udFNpemUiOjMsInJlZmxlY3Rpb25Gb250U2NhbGUiOjMsInRhZnNpckZvbnRTY2FsZSI6MywidHJhbnNsYXRpb25Gb250U2NhbGUiOjMsInRyYW5zbGF0aW9uRm9udFNpemUiOjMsIndvcmRCeVdvcmRGb250U2NhbGUiOjN9LCJyZWFkaW5nIjp7InJlYWRpbmdQcmVmZXJlbmNlIjoidHJhbnNsYXRpb24iLCJzZWxlY3RlZExlc3Nvbkxhbmd1YWdlcyI6WyJlbiJdLCJzZWxlY3RlZFJlYWRpbmdUcmFuc2xhdGlvbiI6IjEzMSIsInNlbGVjdGVkUmVmbGVjdGlvbkxhbmd1YWdlcyI6WyJlbiJdLCJzZWxlY3RlZFdvcmRCeVdvcmRMb2NhbGUiOiJlbiIsIndvcmRCeVdvcmRDb250ZW50VHlwZSI6W10sIndvcmRCeVdvcmRJbmxpbmVDb250ZW50VHlwZSI6W10sIndvcmRCeVdvcmRUb29sdGlwQ29udGVudFR5cGUiOltdLCJ3b3JkQ2xpY2tGdW5jdGlvbmFsaXR5IjoicGxheS1hdWRpbyJ9LCJ0YWZzaXJzIjp7InNlbGVjdGVkVGFmc2lycyI6WyJlbi10YWZpc3ItaWJuLWthdGhpciJdfSwidGhlbWUiOnsidHlwZSI6ImF1dG8ifSwidHJhbnNsYXRpb25zIjp7InNlbGVjdGVkVHJhbnNsYXRpb25zIjpbMTMxXX0sInVzZXJIYXNDdXN0b21pc2VkIjp7InVzZXJIYXNDdXN0b21pc2VkIjpmYWxzZX19",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1801702792,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "QDC_PREFS_KEY",
+      "value": "hzp6o2d3tb",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1801702792,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
@@ -61,11 +221,11 @@
         },
         {
           "name": "persist:root",
-          "value": "{\"quranReaderStyles\":\"{\\\"tafsirFontScale\\\":3,\\\"quranTextFontScale\\\":3,\\\"translationFontScale\\\":3,\\\"wordByWordFontScale\\\":3,\\\"quranFont\\\":\\\"tajweed_v4\\\",\\\"mushafLines\\\":\\\"16_lines\\\",\\\"isUsingDefaultFont\\\":false}\",\"readingPreferences\":\"{\\\"readingPreference\\\":\\\"translation\\\",\\\"selectedWordByWordLocale\\\":\\\"en\\\",\\\"isUsingDefaultWordByWordLocale\\\":false,\\\"wordByWordContentType\\\":[\\\"translation\\\"],\\\"wordByWordDisplay\\\":[\\\"tooltip\\\"],\\\"wordClickFunctionality\\\":\\\"play-audio\\\"}\",\"translations\":\"{\\\"selectedTranslations\\\":[131],\\\"isUsingDefaultTranslations\\\":true}\",\"theme\":\"{\\\"type\\\":\\\"sepia\\\"}\",\"tafsirs\":\"{\\\"selectedTafsirs\\\":[\\\"en-tafisr-ibn-kathir\\\"],\\\"isUsingDefaultTafsirs\\\":true}\",\"bookmarks\":\"{\\\"bookmarkedVerses\\\":{},\\\"bookmarkedPages\\\":{}}\",\"search\":\"{\\\"searchHistory\\\":[]}\",\"readingTracker\":\"{\\\"lastReadVerse\\\":{\\\"verseKey\\\":null,\\\"chapterId\\\":null,\\\"page\\\":null,\\\"hizb\\\":null},\\\"recentReadingSessions\\\":{}}\",\"welcomeMessage\":\"{\\\"isVisible\\\":true}\",\"defaultSettings\":\"{\\\"isUsingDefaultSettings\\\":true,\\\"detectedCountry\\\":\\\"US\\\",\\\"detectedLanguage\\\":\\\"en\\\",\\\"userHasCustomised\\\":false,\\\"ayahReflectionsLanguages\\\":[\\\"ENGLISH\\\"],\\\"ayahReflectionsLanguageIsoCodes\\\":[\\\"en\\\"],\\\"learningPlanLanguageIsoCodes\\\":[\\\"en\\\"]}\",\"sidebarNavigation\":\"{\\\"isVisible\\\":false,\\\"selectedNavigationItem\\\":\\\"surah\\\"}\",\"banner\":\"{\\\"isBannerVisible\\\":true}\",\"fundraisingBanner\":\"{\\\"isHomepageBannerVisible\\\":true}\",\"session\":\"{\\\"count\\\":3,\\\"isDonationPopupVisible\\\":true}\",\"revelationOrder\":\"{\\\"isReadingByRevelationOrder\\\":false}\",\"onboarding\":\"{\\\"isChecklistVisible\\\":true,\\\"checklistDismissals\\\":0,\\\"lastChecklistDismissal\\\":null,\\\"activeStep\\\":{\\\"group\\\":\\\"HOMEPAGE\\\",\\\"index\\\":0},\\\"completedGroups\\\":{}}\",\"mediaMaker\":\"{\\\"opacity\\\":0.4,\\\"borderColor\\\":\\\"#000000\\\",\\\"borderSize\\\":0,\\\"backgroundColor\\\":\\\"#000000\\\",\\\"reciter\\\":7,\\\"quranTextFontScale\\\":4,\\\"translationFontScale\\\":3,\\\"quranTextFontStyle\\\":\\\"qpc_uthmani_hafs\\\",\\\"translations\\\":[131],\\\"fontColor\\\":\\\"#ffffff\\\",\\\"verseAlignment\\\":\\\"centre\\\",\\\"translationAlignment\\\":\\\"centre\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"videoId\\\":4,\\\"surah\\\":1,\\\"verseFrom\\\":\\\"1\\\",\\\"verseTo\\\":\\\"1\\\",\\\"previewMode\\\":\\\"disabled\\\"}\",\"guestEnrollment\":\"{\\\"enrolledCourses\\\":[]}\",\"_persist\":\"{\\\"version\\\":36,\\\"rehydrated\\\":true}\"}"
+          "value": "{\"quranReaderStyles\":\"{\\\"tafsirFontScale\\\":3,\\\"reflectionFontScale\\\":3,\\\"lessonFontScale\\\":3,\\\"quranTextFontScale\\\":3,\\\"translationFontScale\\\":3,\\\"wordByWordFontScale\\\":3,\\\"qnaFontScale\\\":3,\\\"quranFont\\\":\\\"code_v1\\\",\\\"mushafLines\\\":\\\"code_v1\\\",\\\"isUsingDefaultFont\\\":false,\\\"quranTextFontSize\\\":3,\\\"translationFontSize\\\":3}\",\"readingPreferences\":\"{\\\"readingPreference\\\":\\\"translation\\\",\\\"selectedWordByWordLocale\\\":\\\"en\\\",\\\"isUsingDefaultWordByWordLocale\\\":true,\\\"wordByWordContentType\\\":[],\\\"wordByWordTooltipContentType\\\":[],\\\"wordByWordInlineContentType\\\":[],\\\"wordByWordDisplay\\\":[],\\\"wordClickFunctionality\\\":\\\"play-audio\\\",\\\"selectedReadingTranslation\\\":\\\"131\\\",\\\"lastUsedReadingMode\\\":\\\"reading\\\",\\\"selectedReflectionLanguages\\\":[\\\"en\\\"],\\\"selectedLessonLanguages\\\":[\\\"en\\\"]}\",\"translations\":\"{\\\"selectedTranslations\\\":[131],\\\"isUsingDefaultTranslations\\\":true}\",\"theme\":\"{\\\"type\\\":\\\"auto\\\"}\",\"tafsirs\":\"{\\\"selectedTafsirs\\\":[\\\"en-tafisr-ibn-kathir\\\"],\\\"isUsingDefaultTafsirs\\\":true}\",\"bookmarks\":\"{\\\"bookmarkedVerses\\\":{},\\\"bookmarkedPages\\\":{}}\",\"search\":\"{\\\"searchHistory\\\":[]}\",\"readingTracker\":\"{\\\"lastReadVerse\\\":{\\\"verseKey\\\":null,\\\"chapterId\\\":null,\\\"page\\\":null,\\\"hizb\\\":null},\\\"recentReadingSessions\\\":{}}\",\"welcomeMessage\":\"{\\\"isVisible\\\":true}\",\"defaultSettings\":\"{\\\"isUsingDefaultSettings\\\":true,\\\"detectedCountry\\\":\\\"US\\\",\\\"detectedLanguage\\\":\\\"en\\\",\\\"userHasCustomised\\\":false,\\\"ayahReflectionsLanguages\\\":[2],\\\"learningPlanLanguageIsoCodes\\\":[\\\"en\\\"]}\",\"sidebarNavigation\":\"{\\\"isVisible\\\":false,\\\"selectedNavigationItem\\\":\\\"surah\\\"}\",\"banner\":\"{\\\"isBannerVisible\\\":true}\",\"fundraisingBanner\":\"{\\\"isHomepageBannerVisible\\\":true}\",\"session\":\"{\\\"count\\\":2,\\\"isDonationPopupVisible\\\":true}\",\"revelationOrder\":\"{\\\"isReadingByRevelationOrder\\\":false}\",\"onboarding\":\"{\\\"isChecklistVisible\\\":true,\\\"checklistDismissals\\\":0,\\\"lastChecklistDismissal\\\":null,\\\"activeStep\\\":{\\\"group\\\":\\\"HOMEPAGE\\\",\\\"index\\\":0},\\\"completedGroups\\\":{}}\",\"mediaMaker\":\"{\\\"opacity\\\":0.4,\\\"borderColor\\\":\\\"#000000\\\",\\\"borderSize\\\":0,\\\"backgroundColor\\\":\\\"#000000\\\",\\\"reciter\\\":7,\\\"quranTextFontScale\\\":4,\\\"translationFontScale\\\":3,\\\"quranTextFontStyle\\\":\\\"qpc_uthmani_hafs\\\",\\\"translations\\\":[131],\\\"fontColor\\\":\\\"#ffffff\\\",\\\"verseAlignment\\\":\\\"centre\\\",\\\"translationAlignment\\\":\\\"centre\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"videoId\\\":4,\\\"surah\\\":1,\\\"verseFrom\\\":\\\"1\\\",\\\"verseTo\\\":\\\"1\\\",\\\"previewMode\\\":\\\"disabled\\\"}\",\"_persist\":\"{\\\"version\\\":40,\\\"rehydrated\\\":true}\"}"
         },
         {
           "name": "persist:audioPlayerState",
-          "value": "{\"enableAutoScrolling\":\"true\",\"showTooltipWhenPlayingAudio\":\"false\",\"_persist\":\"{\\\"version\\\":3,\\\"rehydrated\\\":true}\",\"quranReaderStyles\":\"{\\\"tafsirFontScale\\\":3,\\\"quranTextFontScale\\\":3,\\\"translationFontScale\\\":3,\\\"wordByWordFontScale\\\":3,\\\"quranFont\\\":\\\"tajweed_v4\\\",\\\"mushafLines\\\":\\\"16_lines\\\",\\\"isUsingDefaultFont\\\":false}\",\"readingPreferences\":\"{\\\"readingPreference\\\":\\\"translation\\\",\\\"selectedWordByWordLocale\\\":\\\"en\\\",\\\"isUsingDefaultWordByWordLocale\\\":false,\\\"wordByWordContentType\\\":[\\\"translation\\\"],\\\"wordByWordDisplay\\\":[\\\"tooltip\\\"],\\\"wordClickFunctionality\\\":\\\"play-audio\\\"}\",\"translations\":\"{\\\"selectedTranslations\\\":[131],\\\"isUsingDefaultTranslations\\\":true}\",\"theme\":\"{\\\"type\\\":\\\"sepia\\\"}\",\"tafsirs\":\"{\\\"selectedTafsirs\\\":[\\\"en-tafisr-ibn-kathir\\\"],\\\"isUsingDefaultTafsirs\\\":true}\",\"bookmarks\":\"{\\\"bookmarkedVerses\\\":{},\\\"bookmarkedPages\\\":{}}\",\"search\":\"{\\\"searchHistory\\\":[]}\",\"readingTracker\":\"{\\\"lastReadVerse\\\":{\\\"verseKey\\\":null,\\\"chapterId\\\":null,\\\"page\\\":null,\\\"hizb\\\":null},\\\"recentReadingSessions\\\":{}}\",\"welcomeMessage\":\"{\\\"isVisible\\\":true}\",\"defaultSettings\":\"{\\\"isUsingDefaultSettings\\\":true,\\\"detectedCountry\\\":\\\"US\\\",\\\"detectedLanguage\\\":\\\"en\\\",\\\"userHasCustomised\\\":false,\\\"ayahReflectionsLanguages\\\":[\\\"ENGLISH\\\"],\\\"ayahReflectionsLanguageIsoCodes\\\":[\\\"en\\\"],\\\"learningPlanLanguageIsoCodes\\\":[\\\"en\\\"]}\",\"sidebarNavigation\":\"{\\\"isVisible\\\":false,\\\"selectedNavigationItem\\\":\\\"surah\\\"}\",\"banner\":\"{\\\"isBannerVisible\\\":true}\",\"fundraisingBanner\":\"{\\\"isHomepageBannerVisible\\\":true}\",\"session\":\"{\\\"count\\\":2,\\\"isDonationPopupVisible\\\":true}\",\"revelationOrder\":\"{\\\"isReadingByRevelationOrder\\\":false}\",\"onboarding\":\"{\\\"isChecklistVisible\\\":true,\\\"checklistDismissals\\\":0,\\\"lastChecklistDismissal\\\":null,\\\"activeStep\\\":{\\\"group\\\":\\\"HOMEPAGE\\\",\\\"index\\\":0},\\\"completedGroups\\\":{}}\",\"mediaMaker\":\"{\\\"opacity\\\":0.4,\\\"borderColor\\\":\\\"#000000\\\",\\\"borderSize\\\":0,\\\"backgroundColor\\\":\\\"#000000\\\",\\\"reciter\\\":7,\\\"quranTextFontScale\\\":4,\\\"translationFontScale\\\":3,\\\"quranTextFontStyle\\\":\\\"qpc_uthmani_hafs\\\",\\\"translations\\\":[131],\\\"fontColor\\\":\\\"#ffffff\\\",\\\"verseAlignment\\\":\\\"centre\\\",\\\"translationAlignment\\\":\\\"centre\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"videoId\\\":4,\\\"surah\\\":1,\\\"verseFrom\\\":\\\"1\\\",\\\"verseTo\\\":\\\"1\\\",\\\"previewMode\\\":\\\"disabled\\\"}\",\"guestEnrollment\":\"{\\\"enrolledCourses\\\":[]}\",\"recentNavigations\":\"[]\"}"
+          "value": "{\"enableAutoScrolling\":\"true\",\"showTooltipWhenPlayingAudio\":\"true\",\"_persist\":\"{\\\"version\\\":3,\\\"rehydrated\\\":true}\",\"reciter\":\"{\\\"id\\\":7,\\\"name\\\":\\\"Mishari Rashid al-`Afasy\\\"}\",\"playbackRate\":\"1\"}"
         }
       ]
     }

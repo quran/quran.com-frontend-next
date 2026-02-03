@@ -95,27 +95,68 @@ export const openSettingsDrawer = async (
   const { isMobile = false } = options;
 
   await page.waitForTimeout(1000);
-  const buttons = page.getByTestId(TestId.SETTINGS_BUTTON);
+  let buttons = page.getByTestId(TestId.SETTINGS_BUTTON);
 
   if (isMobile) {
     await page.mouse.wheel(0, 500);
     await page.mouse.wheel(0, -300);
   }
 
-  await expect(buttons).not.toHaveCount(0, { timeout: 10000 });
+  if ((await buttons.count()) === 0) {
+    const currentUrl = page.url();
+    let localePrefix: string | null = null;
+    try {
+      const { pathname } = new URL(currentUrl);
+      const match = pathname.match(/^\/([a-z]{2})(?:\/|$)/);
+      localePrefix = match?.[1] || null;
+    } catch {
+      localePrefix = null;
+    }
+
+    const candidateUrls = [
+      ...(localePrefix ? [`/${localePrefix}/1`] : []),
+      '/en/1',
+      '/1',
+    ];
+
+    for (const url of candidateUrls) {
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      // The QuranReader context menu (which contains the settings button) renders only
+      // after client-side state (lastReadVerseKey) is populated. The `header` test id
+      // lives on the context menu wrapper and is a reliable "hydration complete" marker.
+      try {
+        await page
+          .getByTestId(TestId.HEADER)
+          .first()
+          .waitFor({ state: 'visible', timeout: 30000 });
+      } catch {
+        // ignore - we still try to locate the button directly
+      }
+      buttons = page.getByTestId(TestId.SETTINGS_BUTTON);
+      try {
+        await expect(buttons).not.toHaveCount(0, { timeout: 30000 });
+        break;
+      } catch {
+        // try next candidate
+      }
+    }
+  }
+
+  await expect(buttons).not.toHaveCount(0, { timeout: 30000 });
   const count = await buttons.count();
   for (let index = 0; index < count; index += 1) {
     const button = buttons.nth(index);
     try {
       await expect(button).toBeVisible({ timeout: 2000 });
       await button.click();
+      await expect(page.getByTestId(TestId.SETTINGS_DRAWER_BODY)).toBeVisible({ timeout: 15000 });
       return;
     } catch {
       // Continue trying other buttons in case this one disappears
     }
   }
 
-  throw new Error('Unable to find a visible settings button.');
+  throw new Error(`Unable to find a visible settings button. url=${page.url()}`);
 };
 
 export const closeSettingsDrawer = async (page: Page): Promise<void> => {
@@ -163,15 +204,18 @@ const openTranslationSettings = async (
     await openSettingsDrawer(page, options);
   }
 
-  const translationSearch = settingsBody.locator(`#${TRANSLATIONS_SEARCH_INPUT_ID}`);
-  if (await translationSearch.isVisible()) {
+  const translationSelect = settingsBody.getByTestId(TestId.TRANSLATION_SELECT);
+  if (await translationSelect.isVisible().catch(() => false)) {
     return settingsBody;
   }
 
+  // If we're already in the Translation view, the search input appears immediately (before data loads).
   const selectionCard = getTranslationsSelectionCard(settingsBody);
-  await expect(selectionCard.first()).toBeVisible();
+  await expect(selectionCard.first()).toBeVisible({ timeout: 30000 });
   await selectionCard.first().click();
-  await expect(translationSearch).toBeVisible();
+  await expect(settingsBody.locator(`#${TRANSLATIONS_SEARCH_INPUT_ID}`)).toBeVisible({
+    timeout: 30000,
+  });
 
   return settingsBody;
 };
@@ -204,8 +248,11 @@ export const clearSelectedTranslations = async (
   page: Page,
   options: SettingsDrawerOptions = {},
 ): Promise<string> => {
-  // Ensure we are on the "Translation" tab
-  await page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB).click();
+  await openSettingsDrawer(page, options);
+  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
+  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
+    await translationTab.first().click();
+  }
 
   const settingsBody = await openTranslationSettings(page, options);
   const translationCheckboxes = settingsBody.getByRole('checkbox');
@@ -235,8 +282,11 @@ export const selectTranslationPreference = async (
   translationId: string,
   options: SettingsDrawerOptions = {},
 ): Promise<void> => {
-  // Ensure we are on the "Translation" tab
-  await page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB).click();
+  await openSettingsDrawer(page, options);
+  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
+  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
+    await translationTab.first().click();
+  }
 
   const settingsBody = await openTranslationSettings(page, options);
   const translationCheckbox = settingsBody.locator(`[id="${translationId}"]`);
@@ -248,6 +298,38 @@ export const selectTranslationPreference = async (
   }
 
   await closeSettingsDrawer(page);
+};
+
+export const selectAnyTranslationPreference = async (
+  page: Page,
+  options: SettingsDrawerOptions = {},
+): Promise<string> => {
+  await openSettingsDrawer(page, options);
+  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
+  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
+    await translationTab.first().click();
+  }
+
+  const settingsBody = await openTranslationSettings(page, options);
+  const uncheckedTranslations = settingsBody.getByRole('checkbox', { checked: false });
+  const translationCheckboxes = settingsBody.getByRole('checkbox');
+
+  await expect(translationCheckboxes.first()).toBeVisible();
+  const targetCheckbox =
+    (await uncheckedTranslations.count()) > 0
+      ? uncheckedTranslations.first()
+      : translationCheckboxes.first();
+
+  const targetId = await targetCheckbox.getAttribute('id');
+  await targetCheckbox.click();
+
+  await closeSettingsDrawer(page);
+
+  if (!targetId) {
+    throw new Error('Unable to determine a translation id from settings.');
+  }
+
+  return targetId;
 };
 
 export const selectQuranFont = async (page: Page, font: SettingsQuranFont): Promise<void> => {

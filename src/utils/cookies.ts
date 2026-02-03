@@ -7,7 +7,10 @@ export const setLocaleCookie = (newLocale: string) => {
   const date = new Date();
   date.setTime(LOCALE_COOKIE_PERSISTENCE_PERIOD_MS);
   // eslint-disable-next-line i18next/no-literal-string
-  document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
+  document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/;SameSite=Lax`;
+  // Mark this locale as an explicit/manual choice so server-side language detection
+  // doesn't override it based on device language.
+  document.cookie = `QDC_MANUAL_LOCALE=1;expires=${date.toUTCString()};path=/;SameSite=Lax`;
 };
 
 export const setServerLocaleCookie = (newLocale: string, res: GetServerSidePropsContext['res']) => {

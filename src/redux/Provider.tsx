@@ -1,6 +1,9 @@
-import React, { useContext, useMemo, useEffect } from 'react';
+/* eslint-disable max-lines */
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable react-func/max-lines-per-function */
+import React, { useContext, useMemo, useEffect, useRef, useCallback } from 'react';
 
-import { Provider } from 'react-redux';
+import { Provider, useStore } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -8,10 +11,16 @@ import { RootState } from './RootState';
 import getStore from './store';
 
 import { isLoggedIn } from '@/utils/auth/login';
+import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
 import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import isClient from '@/utils/isClient';
+import {
+  buildQdcPreferencesDocumentCookies,
+  getQdcPreferencesFromCookieHeader,
+} from '@/utils/qdcPreferencesCookies';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -22,16 +31,98 @@ import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
  * @param {any} props
  * @returns {Provider}
  */
+
+const PREFERENCES_COOKIE_DEBOUNCE_MS = 400;
+const PREFERENCES_COOKIE_MAX_AGE_MS = 31536000000; // 1 year
+
+const PreferencesCookieSync = ({
+  audioService,
+}: {
+  audioService: React.ContextType<typeof AudioPlayerMachineContext>;
+}) => {
+  const store = useStore<RootState>();
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastWrittenPrefsKeyRef = useRef<string | null>(null);
+  const expiresRef = useRef<Date>(new Date(Date.now() + PREFERENCES_COOKIE_MAX_AGE_MS));
+
+  const writePreferencesCookies = useCallback(() => {
+    if (!isClient) return;
+
+    const reduxState = store.getState();
+    const preferenceGroups = stateToPreferenceGroups(reduxState);
+
+    // Override audio preferences with the real values coming from XState.
+    const audioContext = audioService?.getSnapshot?.().context;
+    if (audioContext) {
+      preferenceGroups[PreferenceGroup.AUDIO] = {
+        ...(preferenceGroups[PreferenceGroup.AUDIO] || {}),
+        reciter: audioContext.reciterId,
+        playbackRate: audioContext.playbackRate,
+      };
+    }
+
+    const built = buildQdcPreferencesDocumentCookies(preferenceGroups, {
+      expires: expiresRef.current,
+      secure: window.location.protocol === 'https:',
+    });
+    if (!built) return;
+
+    if (built.prefsKey === lastWrittenPrefsKeyRef.current) return;
+
+    built.cookies.forEach((cookie) => {
+      document.cookie = cookie;
+    });
+
+    lastWrittenPrefsKeyRef.current = built.prefsKey;
+  }, [audioService, store]);
+
+  const scheduleWrite = useCallback(() => {
+    if (!isClient) return;
+    if (debounceTimeoutRef.current) clearTimeout(debounceTimeoutRef.current);
+    debounceTimeoutRef.current = setTimeout(
+      writePreferencesCookies,
+      PREFERENCES_COOKIE_DEBOUNCE_MS,
+    );
+  }, [writePreferencesCookies]);
+
+  useEffect(() => {
+    if (!isClient) return undefined;
+
+    // Initialize with the current cookie value to avoid rewriting on mount.
+    const { preferencesKey } = getQdcPreferencesFromCookieHeader(document.cookie);
+    lastWrittenPrefsKeyRef.current = preferencesKey;
+
+    // Keep cookie snapshot synced with Redux + audio context.
+    const unsubscribeStore = store.subscribe(scheduleWrite);
+    const unsubscribeAudio = audioService?.subscribe?.(scheduleWrite);
+
+    // Also do an initial sync shortly after mount.
+    scheduleWrite();
+
+    return () => {
+      if (debounceTimeoutRef.current) clearTimeout(debounceTimeoutRef.current);
+      unsubscribeStore();
+      // XState subscriptions return { unsubscribe() }.
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      unsubscribeAudio?.unsubscribe?.();
+    };
+  }, [audioService, scheduleWrite, store]);
+
+  return null;
+};
+
 const ReduxProvider = ({
   children,
   locale,
   countryLanguagePreference,
   reduxState,
+  ssrPreferencesApplied,
 }: {
   children: React.ReactNode;
   locale: string;
   countryLanguagePreference?: CountryLanguagePreferenceResponse;
   reduxState?: RootState;
+  ssrPreferencesApplied?: boolean;
 }) => {
   const store = useMemo(
     () => getStore(locale, countryLanguagePreference, reduxState),
@@ -81,6 +172,23 @@ const ReduxProvider = ({
    */
   const onBeforeLift = async () => {
     if (isClient && isLoggedIn()) {
+      if (ssrPreferencesApplied) {
+        // SSR already applied the preferences snapshot into Redux. Avoid an extra
+        // waterfall by skipping the remote preferences fetch and just syncing
+        // XState audio context from the cookie snapshot.
+        const { preferences } = getQdcPreferencesFromCookieHeader(document.cookie);
+        const audioPreferences = preferences?.[PreferenceGroup.AUDIO];
+        if (audioPreferences) {
+          const audioContext = audioService.getSnapshot().context;
+          setAudioPlayerContext(
+            audioPreferences.playbackRate ?? audioContext.playbackRate,
+            audioPreferences.reciter ?? audioContext.reciterId,
+            audioContext.volume,
+          );
+        }
+        return;
+      }
+
       try {
         const { hasRemotePreferences } = await syncPreferencesFromServer({
           locale,
@@ -102,7 +210,12 @@ const ReduxProvider = ({
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} onBeforeLift={onBeforeLift}>
-        {() => <>{children}</>}
+        {() => (
+          <>
+            <PreferencesCookieSync audioService={audioService} />
+            {children}
+          </>
+        )}
       </PersistGate>
     </Provider>
   );

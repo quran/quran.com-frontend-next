@@ -7,8 +7,16 @@ if (!process.env.CI) {
 
 const baseURL =
   process.env.PLAYWRIGHT_TEST_BASE_URL || `http://localhost:${process.env.PORT || '3000'}`;
+const hostHeader = process.env.PLAYWRIGHT_TEST_HOST_HEADER;
+const ignoreHTTPSErrors = Boolean(process.env.PLAYWRIGHT_TEST_IGNORE_HTTPS_ERRORS || hostHeader);
+const headlessMode = process.env.PLAYWRIGHT_HEADLESS_MODE;
+const launchArgs = headlessMode === 'new' ? ['--headless=new'] : [];
+const ignoreDefaultArgs =
+  headlessMode === 'new' ? ['--headless=old', '--headless'] : undefined;
 
 const isLocalhost = baseURL.includes('localhost') || baseURL.includes('127.0.0.1');
+const skipWebServer = process.env.PW_SKIP_WEBSERVER === '1' || process.env.PW_SKIP_WEBSERVER === 'true';
+const hasAuthCreds = Boolean(process.env.TEST_USER_EMAIL && process.env.TEST_USER_PASSWORD);
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -40,35 +48,48 @@ const config: PlaywrightTestConfig = {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL:
       process.env.PLAYWRIGHT_TEST_BASE_URL || `http://localhost:${process.env.PORT || '3000'}`,
+    ignoreHTTPSErrors,
+    extraHTTPHeaders: hostHeader ? { host: hostHeader } : undefined,
+    launchOptions:
+      launchArgs.length > 0 || ignoreDefaultArgs
+        ? {
+            args: launchArgs,
+            ignoreDefaultArgs,
+          }
+        : undefined,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'setup',
-      testMatch: /.*\.setup\.ts/,
-      testDir: './tests',
-    },
-    /* Tests that require user authentication */
-    {
-      name: 'Authentificated Chromium',
-      testDir: './tests/integration/loggedin',
-      use: {
-        ...devices['Desktop Chrome'],
-        storageState: './playwright/.auth/user.json',
-      },
-      dependencies: ['setup'],
-    },
-    {
-      name: 'Authentificated Mobile Chrome',
-      testDir: './tests/integration/loggedin',
-      use: {
-        ...devices['Pixel 5'],
-        storageState: './playwright/.auth/user.json',
-      },
-      dependencies: ['setup'],
-    },
+    ...(hasAuthCreds
+      ? [
+          {
+            name: 'setup',
+            testMatch: /.*\.setup\.ts/,
+            testDir: './tests',
+          },
+          /* Tests that require user authentication */
+          {
+            name: 'Authentificated Chromium',
+            testDir: './tests/integration/loggedin',
+            use: {
+              ...devices['Desktop Chrome'],
+              storageState: './playwright/.auth/user.json',
+            },
+            dependencies: ['setup'],
+          },
+          {
+            name: 'Authentificated Mobile Chrome',
+            testDir: './tests/integration/loggedin',
+            use: {
+              ...devices['Pixel 5'],
+              storageState: './playwright/.auth/user.json',
+            },
+            dependencies: ['setup'],
+          },
+        ]
+      : []),
     {
       name: 'chromium',
       use: {
@@ -85,7 +106,7 @@ const config: PlaywrightTestConfig = {
     },
   ],
 
-  webServer: isLocalhost
+  webServer: isLocalhost && !skipWebServer
     ? {
         command: process.env.CI ? 'yarn start' : 'yarn dev',
         port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,

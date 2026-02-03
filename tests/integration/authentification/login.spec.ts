@@ -38,8 +38,8 @@ test(
   async ({ page }) => {
     // Email form should be visible immediately
     // Fill in the form fields with wrong credentials
-    await page.getByPlaceholder('Email address').fill('wrong@example.com');
-    await page.getByPlaceholder('Password').fill('wrongpassword');
+    await page.getByTestId('signin-email-input').fill('wrong@example.com');
+    await page.getByTestId('signin-password-input').fill('wrongpassword');
     // Submit the form - use form locator to target the submit button, not the tab button
     await page.locator('form').getByRole('button', { name: 'Sign in' }).click();
     // We should see an error message
@@ -69,6 +69,6 @@ const fillInLoginForm = async (page: Page) => {
     'No credentials provided',
   );
 
-  await page.getByPlaceholder('Email address').fill(process.env.TEST_USER_EMAIL || '');
-  await page.getByPlaceholder('Password').fill(process.env.TEST_USER_PASSWORD || '');
+  await page.getByTestId('signin-email-input').fill(process.env.TEST_USER_EMAIL || '');
+  await page.getByTestId('signin-password-input').fill(process.env.TEST_USER_PASSWORD || '');
 };

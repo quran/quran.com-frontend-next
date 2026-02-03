@@ -1,0 +1,57 @@
+name: QF-318 Prod Smoke
+on:
+  workflow_dispatch:
+
+jobs:
+  edge_smoke:
+    name: Edge Smoke (ssr.quran.com)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run edge smoke suite
+        run: ./scripts/qf-318/run-edge-smoke.sh
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: https://ssr.quran.com
+          TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
+
+  prod_product:
+    name: Product Smoke (mutating, ssr.quran.com)
+    runs-on: ubuntu-latest
+    if: ${{ secrets.TEST_USER_EMAIL != '' && secrets.TEST_USER_PASSWORD != '' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run prod product smoke suite
+        run: ./scripts/qf-318/run-prod-product-smoke.sh
+        env:
+          PLAYWRIGHT_TEST_BASE_URL: https://ssr.quran.com
+          TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
+          TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}

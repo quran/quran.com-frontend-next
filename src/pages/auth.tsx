@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect } from 'react';
 
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
@@ -8,12 +9,15 @@ import { fetcher } from '@/api';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import AuthError from '@/types/AuthError';
 import QueryParam from '@/types/QueryParam';
-import { makeRedirectTokenUrl } from '@/utils/auth/apiPaths';
+import { makeRedirectTokenUrl, makeUserPreferencesUrl } from '@/utils/auth/apiPaths';
 import { SSO_ENABLED } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl, getSsoPlatformPath } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
+import { buildQdcPreferencesCookies } from '@/utils/qdcPreferencesCookies';
 import { resolveSafeRedirect } from '@/utils/url';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 
 interface AuthProps {
   error?: string;
@@ -58,6 +62,9 @@ const handleTokenRedirection = async (
   destination: string,
 ): Promise<GetServerSidePropsResult<AuthProps>> => {
   try {
+    // Never cache /auth responses (they depend on tokens/cookies and redirects).
+    context.res.setHeader('Cache-Control', 'private, no-store');
+
     const response = await fetchToken(token, context);
 
     if (!response.ok) {
@@ -66,6 +73,64 @@ const handleTokenRedirection = async (
     const { [QueryParam.SILENT]: silent, [QueryParam.REDIRECTBACK]: redirectBack } = context.query;
 
     setProxyCookies(response, context);
+
+    // Fetch preferences once on login to seed SSR preferences cookie snapshot.
+    // This ensures the very next SSR page load reflects the user's settings.
+    try {
+      const proxySetCookie = response.headers.get('set-cookie');
+      if (proxySetCookie) {
+        const cookiesArray = proxySetCookie.split(/,(?=\s*\w+=)/).map((c) => c.trim());
+        const cookieHeader = cookiesArray
+          .map((c) => c.split(';')[0])
+          .filter(Boolean)
+          .join('; ');
+
+        const userPreferences = await fetcher<UserPreferencesResponse>(makeUserPreferencesUrl(), {
+          method: 'GET',
+          headers: {
+            cookie: cookieHeader,
+          },
+          credentials: 'include',
+        });
+
+        if (userPreferences && Object.keys(userPreferences).length > 0) {
+          const isSecure =
+            context.req.headers['x-forwarded-proto'] === 'https' ||
+            (typeof context.req.headers['cf-visitor'] === 'string' &&
+              context.req.headers['cf-visitor'].includes('https'));
+
+          const expires = new Date(Date.now() + 31536000000); // 1 year
+          const built = buildQdcPreferencesCookies(userPreferences, { expires, secure: isSecure });
+          if (built) {
+            const existing = context.res.getHeader('Set-Cookie');
+            const nextCookies: string[] = [];
+
+            if (existing) {
+              if (Array.isArray(existing)) nextCookies.push(...existing.map((c) => c.toString()));
+              else nextCookies.push(existing.toString());
+            }
+
+            nextCookies.push(built.prefsCookie, built.prefsKeyCookie, built.prefsVerCookie);
+
+            const remoteLocale = userPreferences?.[PreferenceGroup.LANGUAGE]?.language;
+            if (remoteLocale && typeof remoteLocale === 'string' && remoteLocale.trim() !== '') {
+              const baseAttributes = [
+                `Path=/`,
+                `Expires=${expires.toUTCString()}`,
+                `SameSite=Lax`,
+                ...(isSecure ? ['Secure'] : []),
+              ].join('; ');
+              nextCookies.push(`NEXT_LOCALE=${remoteLocale}; ${baseAttributes}`);
+              nextCookies.push(`QDC_MANUAL_LOCALE=1; ${baseAttributes}`);
+            }
+
+            context.res.setHeader('Set-Cookie', nextCookies);
+          }
+        }
+      }
+    } catch {
+      // Best-effort: login should continue even if preference bootstrap fails.
+    }
 
     if (silent === '1' && redirectBack) {
       // Sanitize redirectBack - external URLs are allowed for SSO platform redirects

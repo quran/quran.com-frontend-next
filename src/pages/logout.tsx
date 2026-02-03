@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { fetcher } from '@/api';
@@ -7,6 +8,7 @@ import { SSO_ENABLED } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl, getSsoPlatformPath } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
+import { clearQdcPreferencesCookies } from '@/utils/qdcPreferencesCookies';
 import { getBasePath, resolveSafeRedirect } from '@/utils/url';
 
 /**
@@ -58,6 +60,9 @@ const performLogout = async (
   context: GetServerSidePropsContext,
   destination: string,
 ): Promise<GetServerSidePropsResult<any>> => {
+  // Never cache /logout (it mutates auth state and clears cookies).
+  context.res.setHeader('Cache-Control', 'private, no-store');
+
   const { cookie } = context.req.headers;
 
   const response: Response = await fetcher(
@@ -75,6 +80,33 @@ const performLogout = async (
   );
 
   setProxyCookies(response, context);
+
+  // Clear SSR preference snapshot + manual locale marker.
+  const isSecure =
+    context.req.headers['x-forwarded-proto'] === 'https' ||
+    (typeof context.req.headers['cf-visitor'] === 'string' &&
+      context.req.headers['cf-visitor'].includes('https'));
+
+  const clearedPrefsCookies = clearQdcPreferencesCookies({ secure: isSecure });
+  const manualLocaleExpiry = new Date(0).toUTCString();
+  const manualLocaleCookie = [
+    `QDC_MANUAL_LOCALE=`,
+    `Path=/`,
+    `Expires=${manualLocaleExpiry}`,
+    `SameSite=Lax`,
+    ...(isSecure ? ['Secure'] : []),
+  ].join('; ');
+
+  const existing = context.res.getHeader('Set-Cookie');
+  const nextCookies: string[] = [];
+
+  if (existing) {
+    if (Array.isArray(existing)) nextCookies.push(...existing.map((c) => c.toString()));
+    else nextCookies.push(existing.toString());
+  }
+
+  nextCookies.push(...clearedPrefsCookies, manualLocaleCookie);
+  context.res.setHeader('Set-Cookie', nextCookies);
 
   return {
     props: {},

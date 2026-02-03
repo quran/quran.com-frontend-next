@@ -14,6 +14,7 @@ import { DefaultSettings } from '@/redux/slices/defaultSettings';
 import { selectNavigationDrawerLanguage } from '@/tests/helpers/language';
 import { openNavigationDrawer } from '@/tests/helpers/navigation';
 import { openSettingsDrawer } from '@/tests/helpers/settings';
+import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
 
 // Add TypeScript declaration for window.__store
 declare global {
@@ -302,6 +303,13 @@ class LocalizationTestHelper {
   }
 
   /**
+   * Set pending signup preferences to be persisted on verification
+   */
+  static setPendingSignupPreferences(preferences: any) {
+    setTestData('pendingSignupPreferences', preferences);
+  }
+
+  /**
    * Get Redux state from localStorage
    * @returns {Promise<DefaultSettings>} The persisted defaultSettings state
    */
@@ -310,6 +318,13 @@ class LocalizationTestHelper {
       'defaultSettings',
     )) as DefaultSettings;
     return persistedState;
+  }
+
+  /**
+   * Get full Redux state (window.__store) when available
+   */
+  async getFullReduxState(): Promise<any> {
+    return this.page.evaluate(() => window.__store?.getState?.());
   }
 
   /**
@@ -1143,7 +1158,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
    * and verified that the guest settings are preserved upon signup.
    * Skipping this test for now.
    */
-  test.skip('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ browser }) => {
+  test('Test Case 2.1.1: Guest Settings Preservation on Signup', async ({ browser }) => {
     let context: BrowserContext;
     let page: Page;
     let testHelper: LocalizationTestHelper;
@@ -1170,6 +1185,14 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
 
       const guestTranslations = await testHelper.homepage.getPersistedValue('translations');
       expect(guestTranslations.selectedTranslations).toContain(20);
+    });
+
+    await test.step('Capture guest preferences snapshot for signup', async () => {
+      const fullState = await testHelper.getFullReduxState();
+      if (!fullState) {
+        throw new Error('Unable to read Redux state for signup snapshot.');
+      }
+      LocalizationTestHelper.setPendingSignupPreferences(stateToPreferenceGroups(fullState));
     });
 
     await test.step('Simulate user signup flow', async () => {
@@ -1217,7 +1240,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
    * and verified that the modified guest settings are preserved upon signup.
    * Skipping this test for now.
    */
-  test.skip('Test Case 2.1.2: Modified Guest Settings on Signup', async ({ page }) => {
+  test('Test Case 2.1.2: Modified Guest Settings on Signup', async ({ page }) => {
     await test.step('Set initial guest settings', async () => {
       // Start as guest with initial settings
       await helper.setBrowserLanguage(['en-US', 'en']);
@@ -1247,6 +1270,14 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
       expect(defaultSettings.userHasCustomised).toBe(true);
 
       await page.keyboard.press('Escape'); // Close settings drawer
+    });
+
+    await test.step('Capture customized preferences snapshot for signup', async () => {
+      const fullState = await helper.getFullReduxState();
+      if (!fullState) {
+        throw new Error('Unable to read Redux state for signup snapshot.');
+      }
+      LocalizationTestHelper.setPendingSignupPreferences(stateToPreferenceGroups(fullState));
     });
 
     await test.step('Proceed with signup', async () => {
@@ -1286,7 +1317,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
    * as the user with saved settings may not exist in all environments.
    * This has been manually tested and verified.
    */
-  test.skip('Test Case 2.2.1: User with Saved Settings Login', async ({ page }) => {
+  test('Test Case 2.2.1: User with Saved Settings Login', async ({ page }) => {
     await test.step('Mock user with existing saved settings', async () => {
       // Mock login API response (without settings - that's handled by preferences API)
       LocalizationTestHelper.setCustomLoginResponse({
@@ -1361,7 +1392,7 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
    * as the user may not exist in all environments.
    * This has been manually tested and verified.
    */
-  test.skip('Test Case 2.2.2: User with No Saved Settings Login', async ({ page }) => {
+  test('Test Case 2.2.2: User with No Saved Settings Login', async ({ page }) => {
     await test.step('Mock user with no saved settings', async () => {
       // Mock login API response (without settings - that's handled by preferences API)
       LocalizationTestHelper.setCustomLoginResponse({
@@ -1386,7 +1417,8 @@ test.describe('Category 2: User Authentication & Settings Persistence', () => {
         },
       });
 
-      // No custom preferences set - will use defaults from handlers.js
+      // Explicitly return empty preferences to force fresh detection
+      LocalizationTestHelper.setCustomPreferences({});
     });
 
     await test.step('Mock fresh detection and login user', async () => {
@@ -1786,28 +1818,21 @@ test.describe('Category 5: Reflections Language Integration', () => {
     await helper.clearAllBrowserData();
   });
 
-  /**
-   * Skipping this test because the reflections language filter UI component
-   * ([data-testid="reflections-language-filter"]) is not yet implemented in the codebase.
-   *
-   * This test was written based on anticipated functionality, but the actual implementation
-   * does not include a user-facing language selector/filter in the reflections drawer.
-   */
-  test.skip('Test Case 5.1: Reflections List Language Matching', async ({ browser }) => {
+  test('Test Case 5.1: Reflections List Language Matching', async ({ browser }) => {
     const context = await browser.newContext({ locale: 'en-US' });
     const page = await context.newPage();
     const testHelper = new LocalizationTestHelper(page, context);
 
     await test.step('Setup user with reflection languages and mock API', async () => {
-      await testHelper.mockCountryAndApiForContext('US', 'en');
+      await testHelper.mockCountryAndApiForContext('IN', 'en');
 
       // Mock reflections API response
       LocalizationTestHelper.setCustomReflections({
         reflections: [
-          { id: 1, text: 'English reflection', language: 'en' },
-          { id: 2, text: 'تأمل عربي', language: 'ar' },
-          { id: 3, text: 'اردو تأمل', language: 'ur' },
-          { id: 4, text: 'French reflection', language: 'fr' }, // Should not appear
+          { id: 1, text: 'English reflection', languageId: 2 },
+          { id: 2, text: 'اردو تأمل', languageId: 5 },
+          { id: 3, text: 'تأمل عربي', languageId: 1 }, // Should be filtered out
+          { id: 4, text: 'French reflection', languageId: 7 }, // Should be filtered out
         ],
       });
     });
@@ -1820,111 +1845,12 @@ test.describe('Category 5: Reflections Language Integration', () => {
       await page.waitForLoadState('networkidle');
     });
 
-    await test.step('Open reflections and verify language filter', async () => {
-      await page.locator('[data-testid="verse-actions"]').first().click();
-      await page.locator('[data-testid="reflections-button"]').click();
-
-      await expect(page.locator('[data-testid="reflections-modal"]')).toBeVisible();
-
-      const languageFilter = page.locator('[data-testid="reflections-language-filter"]');
-      await expect(languageFilter).toBeVisible();
-
-      await languageFilter.click();
-      await expect(page.locator('[data-testid="language-option-en"]')).toBeVisible();
-      await expect(page.locator('[data-testid="language-option-ar"]')).toBeVisible();
-      await expect(page.locator('[data-testid="language-option-ur"]')).toBeVisible();
-      await expect(page.locator('[data-testid="language-option-fr"]')).not.toBeVisible();
-    });
-
-    await test.step('Test filtering by each preset language', async () => {
-      const languageFilter = page.locator('[data-testid="reflections-language-filter"]');
-
-      await page.locator('[data-testid="language-option-en"]').click();
+    await test.step('Verify reflections filtered by allowed languages', async () => {
       await expect(page.locator('text=English reflection')).toBeVisible();
-      await expect(page.locator('text=تأمل عربي')).not.toBeVisible();
-
-      await languageFilter.click();
-      await page.locator('[data-testid="language-option-ar"]').click();
-      await expect(page.locator('text=تأمل عربي')).toBeVisible();
-      await expect(page.locator('text=English reflection')).not.toBeVisible();
-
-      await languageFilter.click();
-      await page.locator('[data-testid="language-option-ur"]').click();
       await expect(page.locator('text=اردو تأمل')).toBeVisible();
-      await expect(page.locator('text=English reflection')).not.toBeVisible();
-    });
 
-    await test.step('Verify "All" languages filter', async () => {
-      const languageFilter = page.locator('[data-testid="reflections-language-filter"]');
-      await languageFilter.click();
-      await page.locator('[data-testid="language-option-all"]').click();
-      await expect(page.locator('text=English reflection')).toBeVisible();
-      await expect(page.locator('text=تأمل عربي')).toBeVisible();
-      await expect(page.locator('text=اردو تأمل')).toBeVisible();
-      await expect(page.locator('text=French reflection')).not.toBeVisible();
-    });
-  });
-
-  /**
-   * Skipping this test because it uses testid that does not exist in the current codebase.
-   */
-  test.skip('Test Case 5.1.2: Reflections Language Updates with Settings Change', async ({
-    browser,
-  }) => {
-    const context = await browser.newContext({ locale: 'en-US' });
-    const page = await context.newPage();
-    const testHelper = new LocalizationTestHelper(page, context);
-
-    await test.step('Start with English settings', async () => {
-      await testHelper.mockCountryAndApiForContext('US', 'en');
-
-      await page.goto('/', NAVIGATION_OPTIONS);
-      await testHelper.waitForReduxHydration();
-    });
-
-    await test.step('Manually update reflection languages in settings', async () => {
-      await testHelper.homepage.openSettingsDrawer();
-      await expect(page.locator('#theme-section')).toBeVisible();
-
-      await page.evaluate(() => {
-        window.__store?.dispatch({
-          type: 'defaultSettings/updateAyahReflectionsLanguages',
-          payload: [
-            { isoCode: 'en', name: 'English' },
-            { isoCode: 'ar', name: 'العربية' },
-          ],
-        });
-      });
-
-      await page.waitForTimeout(1000);
-      await page.keyboard.press('Escape'); // Close settings
-    });
-
-    await test.step('Navigate to verse page and mock reflections API', async () => {
-      await page.goto('/1:1/reflections');
-      await page.waitForLoadState('networkidle');
-
-      // Mock reflections API response
-      LocalizationTestHelper.setCustomReflections({
-        reflections: [
-          { id: 1, text: 'English reflection', language: 'en' },
-          { id: 2, text: 'تأمل عربي', language: 'ar' },
-          { id: 3, text: 'French reflection', language: 'fr' },
-        ],
-      });
-    });
-
-    await test.step('Open reflections and verify updated language options', async () => {
-      await page.locator('[data-testid="verse-actions"]').first().click();
-      await page.locator('[data-testid="reflections-button"]').click();
-      await expect(page.locator('[data-testid="reflections-modal"]')).toBeVisible();
-
-      const languageFilter = page.locator('[data-testid="reflections-language-filter"]');
-      await languageFilter.click();
-
-      await expect(page.locator('[data-testid="language-option-en"]')).toBeVisible();
-      await expect(page.locator('[data-testid="language-option-ar"]')).toBeVisible();
-      await expect(page.locator('[data-testid="language-option-fr"]')).not.toBeVisible();
+      await expect(page.locator('text=تأمل عربي')).toHaveCount(0);
+      await expect(page.locator('text=French reflection')).toHaveCount(0);
     });
   });
 });

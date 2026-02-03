@@ -73,6 +73,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                   locale={resolvedLocale}
                   countryLanguagePreference={pageProps.countryLanguagePreference}
                   reduxState={pageProps[REDUX_STATE_PROP_NAME]}
+                  ssrPreferencesApplied={pageProps.ssrPreferencesApplied}
                 >
                   <ThemeProvider>
                     <OnboardingProvider>
