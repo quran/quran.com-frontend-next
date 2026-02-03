@@ -2,12 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { ContentSide } from '../../dls/Tooltip';
-
 import styles from './EditCollectionModal.module.scss';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
+import { ContentSide } from '@/dls/Tooltip';
 import CloseIcon from '@/icons/close.svg';
 
 interface EditCollectionModalProps {
