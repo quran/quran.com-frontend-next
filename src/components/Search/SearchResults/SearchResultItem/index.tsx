@@ -1,20 +1,16 @@
-/* eslint-disable react/no-danger */
-import React, { useContext } from 'react';
+import React from 'react';
 
-import classNames from 'classnames';
 import { NextRouter, useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import SearchResultItemIcon from '../SearchResultItemIcon';
 
 import styles from './SearchResultItem.module.scss';
+import SearchResultText from './SearchResultText';
 
-import DataContext from '@/contexts/DataContext';
 import Link from '@/dls/Link/Link';
 import { setIsExpanded } from '@/redux/slices/CommandBar/state';
 import { stopMicrophone } from '@/redux/slices/microphone';
-import Language from '@/types/Language';
 import QueryParam from '@/types/QueryParam';
 import {
   SearchNavigationResult,
@@ -23,9 +19,8 @@ import {
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
-import { Direction } from '@/utils/locale';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { getResultType, getSearchNavigationResult } from '@/utils/search';
+import { getResultType } from '@/utils/search';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 interface Props {
@@ -81,19 +76,10 @@ const forceScrollToVerse = (router: NextRouter, verseNumber: string): void => {
 };
 
 const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
-  const { t, lang } = useTranslation();
-  const chaptersData = useContext(DataContext);
   const router = useRouter();
   const dispatch = useDispatch();
   const type = getResultType(result);
-
-  const {
-    name,
-    key: resultKey,
-    isArabic,
-  } = getSearchNavigationResult(chaptersData, result, t, lang);
-
-  const url = resolveUrlBySearchNavigationType(type, resultKey, true);
+  const url = resolveUrlBySearchNavigationType(type, result.key, true);
 
   const onResultItemClicked = (e: React.MouseEvent) => {
     logButtonClick(`search_result_item`, {
@@ -117,7 +103,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
         type === SearchNavigationType.TRANSLITERATION ||
         type === SearchNavigationType.TRANSLATION
       ) {
-        const [, verseNumber] = getVerseAndChapterNumbersFromKey(resultKey as string);
+        const [, verseNumber] = getVerseAndChapterNumbersFromKey(String(result.key));
         forceScrollToVerse(router, verseNumber);
       }
     }
@@ -129,18 +115,10 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
         <div className={styles.iconContainer}>
           <SearchResultItemIcon type={type} />
         </div>
-        <div
-          className={classNames(styles.resultText, {
-            [styles.arabic]: isArabic,
-          })}
-          dir={isArabic ? Direction.RTL : undefined}
-          lang={isArabic ? Language.AR : undefined}
-          dangerouslySetInnerHTML={{
-            __html: `${name}`,
-          }}
-        />
+        <SearchResultText result={result} />
       </Link>
     </div>
   );
 };
+
 export default SearchResultItem;

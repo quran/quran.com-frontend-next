@@ -1,0 +1,60 @@
+.arabic {
+  font-family: UthmanicHafs;
+  direction: rtl;
+  inline-size: 100%;
+  display: block;
+  margin-inline: auto 0;
+}
+
+.resultText {
+  flex-grow: 1;
+  em {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-highlight-dark);
+  }
+  sup {
+    display: none;
+  }
+}
+
+.textWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+  position: relative;
+}
+
+.languageText {
+  font-size: var(--font-size-base);
+}
+
+.translationText {
+  color: var(--color-text-secondary);
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall);
+  direction: ltr;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.translationColumn {
+  text-align: justify;
+  text-align-last: start;
+  box-sizing: border-box;
+  padding-inline-end: 0;
+  inline-size: 100%;
+}
+
+.arabicColumn {
+  text-align: justify;
+  block-size: 100%;
+  box-sizing: border-box;
+  padding-inline-end: 0;
+  inline-size: 100%;
+}
