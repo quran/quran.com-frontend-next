@@ -108,7 +108,8 @@ export const useCollectionToggle = ({
       // Optimistically update collection IDs (add the new collection ID)
       const baseIds = getBaseCollectionIds();
       const serverIds = bookmarkCollectionIdsData || [];
-      if (baseIds.includes(collectionId) && serverIds.includes(collectionId)) {
+      // Skip only if the collection is already confirmed on the server
+      if (serverIds.includes(collectionId)) {
         return;
       }
       const optimisticCollectionIds = baseIds.includes(collectionId)
