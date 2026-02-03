@@ -235,10 +235,10 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
 
       // Parent's update handler has optimistic updates built-in
       const success = await onCollectionUpdateRequest?.(numericCollectionId, formData.name);
-      if (success === true) {
+      if (success) {
         toast(t('collection:edit-collection-success'), { status: ToastStatus.Success });
         logButtonClick('collection_edit_success', { collectionId: numericCollectionId });
-      } else if (success === false) {
+      } else {
         toast(t('common:error.general'), { status: ToastStatus.Error });
         logButtonClick('collection_edit_failed', { collectionId: numericCollectionId });
       }
