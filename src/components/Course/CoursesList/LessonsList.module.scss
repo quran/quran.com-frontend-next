@@ -55,3 +55,9 @@
     cursor: unset;
   }
 }
+
+.loadingMore {
+  display: flex;
+  justify-content: center;
+  margin-block: var(--spacing-medium);
+}

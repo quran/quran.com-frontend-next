@@ -1,0 +1,4 @@
+{
+  "description": "استكشاف القراءات المختلفة للآية {{ayahNumber}} من سورة {{surahName}}",
+  "title": "قراءات {{surahName}} - {{ayahNumber}}"
+}

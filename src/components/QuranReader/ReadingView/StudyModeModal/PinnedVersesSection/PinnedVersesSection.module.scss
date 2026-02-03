@@ -1,0 +1,92 @@
+@use 'src/styles/breakpoints';
+
+.pinnedSection {
+  border-block-end: var(--spacing-hairline-px) solid var(--color-background-alternative-faint-new);
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-medium-px);
+  }
+}
+
+.pinnedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.pinnedLabel {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-default);
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xsmall);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-micro);
+  padding-block: var(--spacing-micro);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-micro);
+  background: var(--color-background-default);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-small);
+  color: var(--color-text-default);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  user-select: none;
+
+  &:hover {
+    background: var(--color-background-alternative-medium);
+    border-color: var(--color-borders-faded);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary-medium);
+    outline-offset: 1px;
+  }
+}
+
+.tagSelected {
+  background: var(--color-primary-faded);
+  border-color: var(--color-primary-medium);
+  color: var(--color-primary-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+.verseDisplayName {
+  font-weight: var(--font-weight-medium);
+}
+
+.removeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1rem;
+  block-size: 1rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-circle);
+  cursor: pointer;
+  color: var(--color-text-faded);
+  transition: var(--transition-fast);
+
+  &:hover {
+    background: var(--color-background-alternative-medium);
+    color: var(--color-text-default);
+  }
+}

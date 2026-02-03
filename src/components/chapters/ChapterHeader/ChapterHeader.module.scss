@@ -2,7 +2,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/utility';
 
-$chapterHeaderContainerMaxInlineSize: 450px;
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
 $bismillahSvgInlineSizeMobile: 148px;
@@ -31,7 +30,6 @@ $bismillahSvgInlineSizeMobile: 148px;
   align-content: start;
   margin-inline: auto;
   inline-size: 100%;
-  max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: constants.$reading-view-container-top-margin;
   margin-block-end: var(--spacing-medium2-px);
 
@@ -128,6 +126,7 @@ $bismillahSvgInlineSizeMobile: 148px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  row-gap: var(--spacing-xxsmall-px);
 
   @include breakpoints.smallerThanTablet {
     p {
@@ -137,9 +136,15 @@ $bismillahSvgInlineSizeMobile: 148px;
 }
 
 .titleRow {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--spacing-small-px) / 2);
+  &,
+  .titleName {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-small-px) / 2);
+  }
+
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 
 .chapterTitle {
@@ -154,7 +159,7 @@ $bismillahSvgInlineSizeMobile: 148px;
 
 .chapterTitleWithTranslationName {
   justify-content: center;
-  column-gap: var(--spacing-medium2);
+  column-gap: var(--spacing-small-px);
 }
 
 .chapterNumber {
@@ -173,39 +178,45 @@ $bismillahSvgInlineSizeMobile: 148px;
   font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-faded-new);
+  line-height: 1;
   text-align: end;
 }
 
 .infoIconButton {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   vertical-align: middle;
   border: none;
-  background-color: transparent;
-  padding: 0;
-
-  svg {
-    color: var(--color-success-medium);
-  }
+  background-color: var(--color-blue-buttons-and-icons);
+  color: var(--color-text-white);
+  border-radius: var(--border-radius-pill);
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-xsmall);
+  line-height: 1;
+  padding-block: var(--spacing-micro-px);
+  padding-inline: var(--spacing-xxsmall-px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter var(--transition-fast) ease-out, transform var(--transition-fast) ease-out;
 
   &:hover {
-    cursor: pointer;
-    svg {
-      color: var(--color-success-deep);
-    }
+    filter: brightness(var(--opacity-85));
   }
 
-  @include breakpoints.smallerThanTablet {
-    svg {
-      inline-size: var(--spacing-small2-px);
-      block-size: var(--spacing-small2-px);
-    }
+  &:active {
+    transform: scale(constants.$button-active-scale);
+  }
+
+  &:focus-visible {
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+    outline-offset: var(--spacing-hairline-px);
   }
 }
 
 .infoIconButtonWithSurahName {
-  align-self: start;
-  margin-block-start: var(--spacing-small2-px);
+  align-self: center;
+  margin-inline-end: var(--spacing-xxsmall-px);
 }
 
 .arabicSurahNameContainer {
@@ -312,10 +323,9 @@ div {
 }
 
 .chapterIconContainer {
-  // a hack to center the surah name, because the font width is not correct
-  // leave a lot of empty space on the left
+  // a hack to make it visually aligned with the surah name
   /* stylelint-disable-next-line csstools/use-logical */
-  margin-right: 0.5rem;
+  margin-left: calc(var(--spacing-medium-plus-px) * -1);
 }
 
 .chapterEventWrapper {
@@ -363,4 +373,5 @@ div {
 
 .chapterEventCta {
   white-space: nowrap;
+  font-size: var(--font-size-xsmall-px);
 }

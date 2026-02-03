@@ -1,0 +1,54 @@
+{
+  "bulk-actions": {
+    "actions": "Acties",
+    "actions-count": "Acties ({{count}})",
+    "cancel": "Annuleren",
+    "collapse-all": "Alles inklappen",
+    "expand-all": "Alles uitvouwen",
+    "pin": "Pin",
+    "pin-verses": "Speldverzen",
+    "select": "Select"
+  },
+  "collections": {
+    "favorites": "Favorieten",
+    "guest-promo": {
+      "sign-in": "Inloggen",
+      "subtitle": "Vergelijk en contrasteer verzen",
+      "title": "Maak aangepaste collecties aan"
+    },
+    "items": "{{count}} item",
+    "items_plural": "{{count}} items",
+    "load-more": "Meer laden",
+    "new-collection": "Nieuwe collectie",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Recent bijgewerkt",
+      "z-a": "Z - A"
+    },
+    "title": "Collecties"
+  },
+  "notes-and-reflections": "Notities en reflecties",
+  "page": "Pagina",
+  "reading-bookmark": {
+    "empty": "Begin met lezen en sla een leesbladwijzer op!",
+    "title": "Mijn leesbladwijzer"
+  },
+  "recent": "Recent",
+  "recent-empty": "Begin met lezen om te zien wat je recent hebt gelezen.",
+  "recently-saved": {
+    "title": "Recent opgeslagen"
+  },
+  "saved": "Opgeslagen",
+  "search": {
+    "filter": "Filter",
+    "placeholder": "Zoekresultaten opgeslagen...",
+    "sort": "Soort"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Voeg aantekeningen toe aan de verzen.",
+      "custom-collections": "Maak aangepaste collecties aan"
+    },
+    "title": "Meld u aan of registreer u gratis om toegang te krijgen tot meer functies!"
+  }
+}

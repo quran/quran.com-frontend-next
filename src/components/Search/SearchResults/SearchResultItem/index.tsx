@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { NextRouter, useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import SearchResultItemIcon from '../SearchResultItemIcon';
 
@@ -8,6 +9,8 @@ import styles from './SearchResultItem.module.scss';
 import SearchResultText from './SearchResultText';
 
 import Link from '@/dls/Link/Link';
+import { setIsExpanded } from '@/redux/slices/CommandBar/state';
+import { stopMicrophone } from '@/redux/slices/microphone';
 import QueryParam from '@/types/QueryParam';
 import {
   SearchNavigationResult,
@@ -74,6 +77,7 @@ const forceScrollToVerse = (router: NextRouter, verseNumber: string): void => {
 
 const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const type = getResultType(result);
   const url = resolveUrlBySearchNavigationType(type, result.key, true);
 
@@ -82,6 +86,12 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
       service,
       source,
     });
+
+    // Stop the microphone if it's active
+    dispatch(stopMicrophone());
+
+    // Close the dropdown/search results
+    dispatch({ type: setIsExpanded.type, payload: false });
 
     // Check if we're navigating to the same URL as current page
     if (isSameUrl(router.asPath, url)) {

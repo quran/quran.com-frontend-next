@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
+import classNames from 'classnames';
+
 import ShareQuranModal from '../ReadingView/ShareQuranModal';
 
 import ActionButtons from './ActionButtons';
@@ -10,9 +12,10 @@ import Verse from 'types/Verse';
 
 type TopActionsProps = {
   verse: Verse;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string;
   isTranslationView?: boolean;
   shouldUseModalZIndex?: boolean;
+  className?: string;
 };
 
 /**
@@ -25,6 +28,7 @@ const TopActions: React.FC<TopActionsProps> = ({
   bookmarksRangeUrl,
   isTranslationView = true,
   shouldUseModalZIndex = false,
+  className,
 }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -42,7 +46,7 @@ const TopActions: React.FC<TopActionsProps> = ({
 
   return (
     <>
-      <div className={styles.actionContainer}>
+      <div className={classNames(styles.actionContainer, className)}>
         <ActionButtons
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
