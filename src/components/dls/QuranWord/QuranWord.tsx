@@ -187,23 +187,29 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
-  // Shared handler for both click and keyboard interactions
+  const getReadingModeSuffix = useCallback(() => {
+    if (readingPreference === ReadingPreference.Translation) {
+      return 'verse_by_verse';
+    }
+    return 'arabic_reading';
+  }, [readingPreference]);
+
   const handleInteraction = useCallback(() => {
-    // Open study mode modal when clicking ayah number (in both reading and translation mode)
+    const modeSuffix = getReadingModeSuffix();
+
     if (word.charTypeName === CharType.End) {
+      logButtonClick(`study_mode_open_ayah_number_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey }));
       return;
     }
 
-    // On mobile with recitation disabled and tooltip showing, let the popover handle the interaction
-    // The popover will open on click, and user can click inside to open Study Mode
     if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word && showTooltip) {
       return;
     }
 
-    // On desktop: Open study mode modal when clicking a word (in both reading and translation mode)
     if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
+      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
@@ -211,6 +217,7 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
+      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
@@ -226,6 +233,7 @@ const QuranWord = ({
     showTooltip,
     handleWordAction,
     dispatch,
+    getReadingModeSuffix,
   ]);
 
   const onClick = useCallback(
@@ -316,8 +324,11 @@ const QuranWord = ({
             const isTooltipOpen =
               shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
 
-            // Handler for opening Study Mode from popover (used on mobile)
             const handleOpenStudyMode = () => {
+              const modeSuffix = getReadingModeSuffix();
+              logButtonClick(`study_mode_open_wbw_popover_${modeSuffix}`, {
+                verseKey: word.verseKey,
+              });
               dispatch(setReadingViewHoveredVerseKey(null));
               dispatch(
                 openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),

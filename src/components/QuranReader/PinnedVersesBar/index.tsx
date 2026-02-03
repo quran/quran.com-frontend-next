@@ -42,6 +42,7 @@ const PinnedVersesBar: React.FC = () => {
   const handleCompareClick = useCallback(() => {
     logButtonClick('pinned_bar_compare');
     if (pinnedVerseKeys.length > 0) {
+      logButtonClick('study_mode_open_pinned_compare', { verseKey: pinnedVerseKeys[0] });
       dispatch(openStudyMode({ verseKey: pinnedVerseKeys[0], showPinnedSection: true }));
     }
   }, [dispatch, pinnedVerseKeys]);
