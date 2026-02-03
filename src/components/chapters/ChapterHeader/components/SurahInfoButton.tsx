@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -6,9 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../ChapterHeader.module.scss';
 
-import SurahInfoModal from '@/components/chapters/Info/SurahInfoModal';
+import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
 import surahInfoStyles from '@/components/chapters/Info/SurahInfoModal.module.scss';
 import ContentModal, { ContentModalSize } from '@/components/dls/ContentModal/ContentModal';
+import DataContext from '@/contexts/DataContext';
+import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
@@ -24,6 +26,8 @@ interface SurahInfoButtonProps {
  */
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
+  const chaptersData = useContext(DataContext);
+  const chapter = getChapterData(chaptersData, String(chapterId));
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -80,7 +84,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
           innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
           size={ContentModalSize.MEDIUM}
         >
-          <SurahInfoModal chapterId={chapterId} />
+          <SurahInfoContent chapterId={chapterId} chapter={chapter} />
         </ContentModal>
       )}
     </>
