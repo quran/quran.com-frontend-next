@@ -57,10 +57,10 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
   const handleResourceChange = useCallback(
     (resourceId: string) => {
       setSelectedResourceId(resourceId);
-      const newUrl = getSurahInfoNavigationUrl(chapter.id.toString(), resourceId);
+      const newUrl = getSurahInfoNavigationUrl(chapterId, resourceId);
       fakeNavigate(newUrl, router.locale || Language.EN);
     },
-    [chapter.id, router.locale],
+    [chapterId, router.locale],
   );
 
   if (!chapterInfo && isValidating && !error) {
@@ -120,7 +120,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
           </div>
         </div>
 
-        {resources.length > 0 && selectedResourceId && (
+        {resources.length > 0 && (
           <div className={styles.resourceTabs}>
             {resources.map((resource) => (
               <button
