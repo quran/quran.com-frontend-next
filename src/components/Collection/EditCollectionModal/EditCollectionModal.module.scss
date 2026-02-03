@@ -1,5 +1,5 @@
 .header {
-  text-align: center;
+  text-align: start;
   margin-block-end: var(--spacing-medium);
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-bold);
@@ -53,10 +53,26 @@
 
 .cancelButton {
   flex: 1;
-  border-radius: var(--border-radius-medium-px);
+  display: flex;
+
+  button {
+    inline-size: 100%;
+  }
 }
 
 .saveButton {
   flex: 1;
-  border-radius: var(--border-radius-medium-px);
+  display: flex;
+
+  span,
+  button {
+    text-align: center;
+    justify-content: center;
+    inline-size: 100%;
+    display: flex;
+    button {
+      inline-size: 100%;
+      display: flex;
+    }
+  }
 }

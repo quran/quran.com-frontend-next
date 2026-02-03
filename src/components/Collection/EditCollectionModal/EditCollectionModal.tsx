@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { ContentSide } from '../../dls/Tooltip';
+
 import styles from './EditCollectionModal.module.scss';
 
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
@@ -65,33 +67,26 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
             placeholder={t('collection-name')}
             aria-describedby={isSaveDisabled ? 'edit-collection-name-help' : undefined}
           />
-
-          {isSaveDisabled && (
-            <p id="edit-collection-name-help" className={styles.helperText}>
-              {t('edit-collection-name-required')}
-            </p>
-          )}
         </div>
 
         <div className={styles.footer}>
-          <Button
-            type={ButtonType.Secondary}
-            size={ButtonSize.Medium}
-            onClick={onClose}
-            className={styles.cancelButton}
-          >
-            {commonT('cancel')}
-          </Button>
-          <Button
-            type={ButtonType.Primary}
-            size={ButtonSize.Medium}
-            onClick={handleSubmit}
-            isDisabled={isSaveDisabled}
-            tooltip={isSaveDisabled ? t('edit-collection-name-required') : undefined}
-            className={styles.saveButton}
-          >
-            {commonT('edit')}
-          </Button>
+          <div className={styles.cancelButton}>
+            <Button type={ButtonType.Secondary} size={ButtonSize.Medium} onClick={onClose}>
+              {commonT('cancel')}
+            </Button>
+          </div>
+          <div className={styles.saveButton}>
+            <Button
+              type={ButtonType.Primary}
+              size={ButtonSize.Medium}
+              onClick={handleSubmit}
+              isDisabled={isSaveDisabled}
+              tooltip={isSaveDisabled ? t('edit-collection-name-required') : undefined}
+              tooltipContentSide={ContentSide.TOP}
+            >
+              {commonT('edit')}
+            </Button>
+          </div>
         </div>
       </Modal.Body>
     </Modal>
