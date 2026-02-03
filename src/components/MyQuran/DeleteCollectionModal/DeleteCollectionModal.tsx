@@ -44,6 +44,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
               className={styles.closeButton}
               disabled={isLoading}
               onClick={onCancel}
+              aria-disabled={isLoading}
               aria-label={commonT('close')}
             >
               <CloseIcon />
@@ -75,6 +76,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
               variant={ButtonVariant.Outlined}
               size={ButtonSize.Medium}
               isDisabled={isLoading}
+              aria-disabled={isLoading}
               onClick={onCancel}
               className={styles.cancelButton}
             >
@@ -87,6 +89,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
               className={styles.deleteButton}
               isLoading={isLoading}
               isDisabled={isLoading}
+              aria-disabled={isLoading}
             >
               {commonT('delete')}
             </Button>
