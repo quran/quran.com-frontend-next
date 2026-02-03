@@ -6,7 +6,7 @@ import styles from './PinnedVersesBar.module.scss';
 import menuStyles from './PinnedVersesMenu.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuAlign } from '@/dls/PopoverMenu/PopoverMenu';
 import CopyIcon from '@/icons/copy.svg';
 import FolderIcon from '@/icons/folder.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
@@ -34,6 +34,7 @@ const PinnedVersesMenu: React.FC<PinnedVersesMenuProps> = ({
   return (
     <PopoverMenu
       contentClassName={menuStyles.menuContent}
+      align={PopoverMenuAlign.END}
       trigger={
         <Button
           size={ButtonSize.Small}

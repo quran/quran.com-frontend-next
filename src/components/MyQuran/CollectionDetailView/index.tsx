@@ -471,13 +471,14 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         )}
       </div>
 
+      <div className={styles.separator} />
+
       <CollectionDetail
         id={slugifiedCollectionIdToCollectionId(collectionId)}
         title={collectionName}
         bookmarks={filteredBookmarks}
         onItemDeleted={onItemDeleted}
         isOwner={isOwner}
-        shouldShowTitle={false}
         onBack={onBack}
         isSelectMode={isSelectMode}
         onToggleBookmarkSelection={handleToggleBookmarkSelection}

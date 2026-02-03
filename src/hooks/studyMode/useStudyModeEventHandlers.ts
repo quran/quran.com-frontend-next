@@ -57,6 +57,9 @@ const useStudyModeEventHandlers = ({
   const onTabChange = useCallback(
     (tabId: StudyModeTabId | null) => {
       logValueChange('study_mode_tab', activeContentTab, tabId, { verseKey });
+      if (tabId) {
+        logButtonClick(`study_mode_${tabId}_tab`, { verseKey });
+      }
       handleTabChange(tabId, selectedChapterId, selectedVerseNumber);
     },
     [activeContentTab, handleTabChange, selectedChapterId, selectedVerseNumber, verseKey],
