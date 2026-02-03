@@ -84,14 +84,6 @@ const CollectionDetailContainer = ({
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
 
-  const handleBackNavigation = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-    } else {
-      router.push('/');
-    }
-  };
-
   const onItemDeleted = (bookmarkId: string) => {
     if (shouldDeleteBookmark) {
       deleteBookmarkById(bookmarkId)
@@ -162,12 +154,12 @@ const CollectionDetailContainer = ({
         <div className={styles.container}>
           <div className={styles.stickyHeader} data-navbar-visible={isNavbarShown}>
             <Button
-              onClick={handleBackNavigation}
+              onClick={() => router.push('/')}
               variant={ButtonVariant.Ghost}
               className={classNames(backButtonStyles.backButton, styles.backButton)}
             >
               <ChevronLeft />
-              <span>{title}</span>
+              <span>{collectionTitle}</span>
             </Button>
           </div>
 

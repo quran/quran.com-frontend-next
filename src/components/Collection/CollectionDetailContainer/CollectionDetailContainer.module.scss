@@ -1,6 +1,6 @@
 @use 'src/styles/breakpoints';
 
-$max-line-size: 700px;
+$max-inline-size: 670px;
 
 .wrapper {
   background: var(--color-background-elevated-new);
@@ -10,7 +10,7 @@ $max-line-size: 700px;
 }
 
 .container {
-  max-inline-size: $max-line-size;
+  max-inline-size: $max-inline-size;
   margin-inline: auto;
 }
 
