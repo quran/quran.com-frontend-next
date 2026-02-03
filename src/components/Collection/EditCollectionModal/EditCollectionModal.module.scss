@@ -38,6 +38,12 @@
   }
 }
 
+.helperText {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded-new);
+}
+
 .footer {
   display: flex;
   gap: var(--spacing-small);

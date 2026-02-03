@@ -19,6 +19,7 @@
     "title": "Delete Collection"
   },
   "edit-collection": "Edit Collection",
+  "edit-collection-name-required": "Enter a collection name to save.",
   "edit-collection-success": "Collection updated successfully",
   "empty": "Collection is empty",
   "expand-all": "Expand all verses",

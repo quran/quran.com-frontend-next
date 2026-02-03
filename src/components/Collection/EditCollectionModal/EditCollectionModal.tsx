@@ -24,6 +24,8 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   const { t: commonT } = useTranslation('common');
   const [name, setName] = useState(defaultValue);
 
+  const isSaveDisabled = !name.trim();
+
   useEffect(() => {
     if (isOpen) {
       setName(defaultValue);
@@ -61,7 +63,14 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
             onChange={(event) => setName(event.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t('collection-name')}
+            aria-describedby={isSaveDisabled ? 'edit-collection-name-help' : undefined}
           />
+
+          {isSaveDisabled && (
+            <p id="edit-collection-name-help" className={styles.helperText}>
+              {t('edit-collection-name-required')}
+            </p>
+          )}
         </div>
 
         <div className={styles.footer}>
@@ -77,7 +86,8 @@ const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
             type={ButtonType.Primary}
             size={ButtonSize.Medium}
             onClick={handleSubmit}
-            isDisabled={!name.trim()}
+            isDisabled={isSaveDisabled}
+            tooltip={isSaveDisabled ? t('edit-collection-name-required') : undefined}
             className={styles.saveButton}
           >
             {commonT('edit')}
