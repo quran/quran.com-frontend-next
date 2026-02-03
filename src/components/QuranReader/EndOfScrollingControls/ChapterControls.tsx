@@ -15,17 +15,18 @@ interface Props {
 
 const ChapterControls: React.FC<Props> = ({ initialData }) => {
   const { lang } = useTranslation('quran-reader');
+  const language = lang as Language;
   const chapterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
   // example : "2:253" -> chapter 2 verse 253
   const chapterId = chapterIdAndLastVerse.split(':')[0];
   const chapterNumber = Number(chapterId);
 
-  const bannerConfig = getLearningPlanBannerConfig(lang as Language, chapterNumber);
+  const bannerConfig = getLearningPlanBannerConfig(language, chapterNumber);
 
   return (
     <>
       <EndOfSurahSection chapterNumber={chapterNumber} />
-      {bannerConfig && <LearningPlanBanner language={lang as Language} chapterId={chapterNumber} />}
+      {bannerConfig && <LearningPlanBanner language={language} chapterId={chapterNumber} />}
     </>
   );
 };

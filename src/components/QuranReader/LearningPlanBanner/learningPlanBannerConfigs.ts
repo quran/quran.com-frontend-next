@@ -52,7 +52,9 @@ export const LEARNING_PLAN_BANNERS: Partial<
 
 /**
  * Get the banner config for a given language and chapter.
- * @returns {LearningPlanBannerConfig | undefined} The banner config for the given language and chapter, or undefined if no banner exists.
+ * @param {Language} language - The language to look up the banner config for.
+ * @param {number} chapterId - The chapter ID to look up the banner config for.
+ * @returns {LearningPlanBannerConfig | undefined} The banner config, or undefined if no banner exists.
  */
 export const getLearningPlanBannerConfig = (
   language: Language,
