@@ -14,12 +14,12 @@ interface EditCollectionModalProps {
   onSubmit: (data: { name: string }) => void;
 }
 
-const EditCollectionModal = ({
+const EditCollectionModal: React.FC<EditCollectionModalProps> = ({
   isOpen,
   defaultValue,
   onClose,
   onSubmit,
-}: EditCollectionModalProps): JSX.Element => {
+}) => {
   const { t } = useTranslation('collection');
   const { t: commonT } = useTranslation('common');
   const [name, setName] = useState(defaultValue);
