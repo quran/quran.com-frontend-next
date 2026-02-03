@@ -210,7 +210,7 @@ const RepeatAudioModal = ({
       'repeatSettings',
       settingsToSave,
       setRepeatSettings(settingsToSave),
-      persistedSettings ? setRepeatSettings(persistedSettings) : undefined, // undo action
+      setRepeatSettings(persistedSettings ?? undefined), // undo action
       PreferenceGroup.AUDIO,
       play,
     );

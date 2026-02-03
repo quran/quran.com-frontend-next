@@ -1,6 +1,6 @@
 /**
  * Sentinel value used to represent Infinity in persisted settings.
- * redux-persist cannot serialize Infinity, so we use -1 instead.
+ * JSON serialization cannot represent Infinity, so we use -1 instead.
  * This must be converted to/from Infinity when reading/writing.
  */
 export const REPEAT_INFINITY = -1;

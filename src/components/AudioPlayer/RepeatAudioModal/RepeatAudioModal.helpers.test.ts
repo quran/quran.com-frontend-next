@@ -33,6 +33,8 @@ describe('RepeatAudioModal.helpers', () => {
     });
 
     it('should convert non-finite values to REPEAT_INFINITY (-1)', () => {
+      // NOTE: we normalize all non-finite values (including NaN) to REPEAT_INFINITY
+      // to avoid persisting invalid numbers and keep the storage format consistent.
       expect(toPersistedValue(NaN)).toBe(REPEAT_INFINITY);
     });
 
