@@ -1,18 +1,10 @@
 @use 'src/styles/breakpoints';
 
 .menuContent {
-  padding-inline: var(--spacing-medium-px);
-  padding-block-start: var(--spacing-medium-px);
-  padding-block-end: 0;
+  padding-block: var(--spacing-small-px);
   border-radius: var(--spacing-xxsmall-px);
-  box-shadow: var(--shadow-surah-search);
   min-inline-size: auto;
-  margin-inline-end: calc(1.2 * var(--spacing-mega));
   z-index: var(--z-index-modal);
-
-  @include breakpoints.smallerThanTablet {
-    margin-inline-end: var(--spacing-medium-px);
-  }
 }
 
 .menuItem {
@@ -21,13 +13,6 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  padding: 0;
-  padding-block-end: var(--spacing-medium-px);
-
-  &:hover,
-  &:focus {
-    background: transparent;
-  }
 }
 
 .menuItemText {
