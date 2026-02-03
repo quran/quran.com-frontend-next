@@ -14,6 +14,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
 
+// Largest collection size that will be rendered without virtualization.
+// Virtualization is enabled when the bookmark count is strictly greater than
+// MAX_NON_VIRTUALIZED_BOOKMARKS (i.e., > 12). Smaller lists are rendered
+// normally as they do not significantly benefit from virtualization and keep
+// the DOM simpler for better UX at low counts.
 const MAX_NON_VIRTUALIZED_BOOKMARKS = 12;
 const VIRTUALIZED_LIST_HEIGHT_CSS = 'calc(var(--spacing-mega-px) * 6)';
 
