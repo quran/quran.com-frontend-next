@@ -15,7 +15,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getSurahInfoNavigationUrl, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
-  chapterId?: string;
+  chapterId: string;
   className?: string;
 }
 
@@ -26,8 +26,10 @@ interface SurahInfoButtonProps {
  */
 const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
   const { t } = useTranslation('quran-reader');
+
   const chaptersData = useContext(DataContext);
   const chapter = getChapterData(chaptersData, String(chapterId));
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,7 +44,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
      * This ensures the browser URL stays accurate - users on /1:1 keep /1:1 in the address bar,
      * rather than faking it to just /1 which would be incorrect.
      */
-    if (!router.pathname.includes('/surah/[chapterId]/info')) {
+    if (!router.pathname.includes('/surah/[chapterId]/[...info]')) {
       fakeNavigate(router.asPath, router.locale);
     } else {
       fakeNavigate(getSurahNavigationUrl(chapterId), router.locale);
