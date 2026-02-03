@@ -217,6 +217,10 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             });
         } else {
           dispatch(action);
+
+          if (successCallback) {
+            successCallback();
+          }
         }
       },
     }),
