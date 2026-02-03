@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -20,6 +20,7 @@ import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import {
   isArabicText,
   isRTLLocale,
@@ -49,8 +50,22 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
 
-  // Parse verse key to get chapter and verse numbers
   const [chapterId, verseNumber] = relatedVerse.verseKey.split(':');
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      if (open) {
+        logButtonClick('study_mode_related_verse_expand', { verseKey: relatedVerse.verseKey });
+      }
+      setIsOpen(open);
+    },
+    [relatedVerse.verseKey],
+  );
+
+  const handleGoToVerse = useCallback(() => {
+    logButtonClick('study_mode_related_verse_goto', { verseKey: relatedVerse.verseKey });
+    onGoToVerse?.(chapterId, verseNumber);
+  }, [chapterId, verseNumber, onGoToVerse, relatedVerse.verseKey]);
 
   // Fetch verse data when collapsible is opened
   const queryKey = isOpen
@@ -99,7 +114,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
         title={title}
         suffix={<ChevronDownIcon />}
         shouldRotateSuffixOnToggle
-        onOpenChange={setIsOpen}
+        onOpenChange={handleOpenChange}
         headerLeftClassName={styles.collapsibleHeader}
       >
         {() => (
@@ -131,7 +146,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
                   className={styles.goToVerseButton}
                   size={ButtonSize.Small}
                   variant={ButtonVariant.Compact}
-                  onClick={() => onGoToVerse?.(chapterId, verseNumber)}
+                  onClick={handleGoToVerse}
                 >
                   {t('go-to-verse')}
                 </Button>

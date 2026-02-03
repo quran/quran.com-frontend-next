@@ -5,6 +5,7 @@ import styles from '../ChapterHeader.module.scss';
 
 import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
 import { TestId } from '@/tests/test-ids';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface ChapterEventProps {
   title: string;
@@ -14,6 +15,10 @@ interface ChapterEventProps {
 }
 
 const ChapterEvent: React.FC<ChapterEventProps> = ({ title, description, ctaText, ctaLink }) => {
+  const handleCtaClick = () => {
+    logButtonClick('chapter_event_cta', { ctaLink });
+  };
+
   return (
     <div className={styles.chapterEventWrapper} data-testid={TestId.QURAN_READER_CHAPTER_EVENT}>
       <div className={styles.chapterEvent}>
@@ -24,6 +29,7 @@ const ChapterEvent: React.FC<ChapterEventProps> = ({ title, description, ctaText
           size={ButtonSize.Small}
           shape={ButtonShape.Rounded}
           href={ctaLink}
+          onClick={handleCtaClick}
         >
           {ctaText}
         </Button>
