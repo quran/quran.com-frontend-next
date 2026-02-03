@@ -88,6 +88,20 @@
   "info": "معلومات",
   "juz-beginning": "بداية الجزء",
   "languages": "اللغات",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "أربع قصص غيرت حياة الناس: دروس من سورة الكهف - لافتة خطة التعلم",
+    "banner-image-description": "اطلع على خطة التعلم لسورة الكهف",
+    "button-accessibility-label": "تعرف على المزيد حول خطة تعلم سورة الكهف",
+    "main-headline": "اكتشف أربع قصص مؤثرة من سورة الكهف تُغير حياة الناس",
+    "subtitle-description": "(خطة تعليمية مجانية)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "المنقذ: دروس قيّمة في سورة الملك - لافتة خطة التعلم",
+    "banner-image-description": "اطلع على خطة التعلم الخاصة بسورة الملك \"المنقذ\".",
+    "button-accessibility-label": "تعرّف على المزيد حول خطة التعلّم الخاصة بـ \"المنقذ\".",
+    "main-headline": "اكتشف دروساً قيّمة في سورة الملك اليوم",
+    "subtitle-description": "(خطة تعليمية مجانية)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "المنجية : دروس مؤثرة في سورة الملك - لافتة الخطة التعليمية",
     "banner-image-description": "شاهد خطة التعلم \"المنجية\" لسورة الملك",

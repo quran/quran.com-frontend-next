@@ -88,6 +88,20 @@
   "info": "thông tin",
   "juz-beginning": "Mở đầu Juz",
   "languages": "Ngôn ngữ",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Câu chuyện thay đổi cuộc đời: Những bài học từ Surah Al-Kahf - biểu ngữ kế hoạch học tập",
+    "banner-image-description": "Xem kế hoạch học tập cho Surah Al-Kahf",
+    "button-accessibility-label": "Tìm hiểu thêm về kế hoạch học tập Surah Al-Kahf.",
+    "main-headline": "Khám phá 4 câu chuyện thay đổi cuộc đời từ Surah Al-Kahf.",
+    "subtitle-description": "(Một kế hoạch học tập miễn phí)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Người Cứu Thế: Những Bài Học Mạnh Mẽ trong Surah Al-Mulk (kế hoạch học tập)",
+    "banner-image-description": "Xem kế hoạch học tập về Surah Al-Mulk trong cuốn \"Người Cứu Rỗi\"",
+    "button-accessibility-label": "Tìm hiểu thêm về kế hoạch học tập The Rescuer.",
+    "main-headline": "Khám phá những bài học sâu sắc trong Surah Al-Mulk ngày hôm nay.",
+    "subtitle-description": "(Một kế hoạch học tập miễn phí)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Đấng Cứu Rỗi: Những Bài Học Sâu Sắc từ Surah Al-Mulk (kế hoạch học tập)",
     "banner-image-description": "Xem kế hoạch học tập về Surah Al-Mulk trong bài học \"Đấng Cứu Rỗi\"",

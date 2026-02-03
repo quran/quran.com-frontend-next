@@ -88,6 +88,20 @@
   "info": "info",
   "juz-beginning": "Beginning of Juz",
   "languages": "Languages",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Life-Changing Stories: Lessons From Surah Al-Kahf learning plan banner",
+    "banner-image-description": "View the learning plan for Surah Al-Kahf",
+    "button-accessibility-label": "Learn more about the Surah Al-Kahf learning plan",
+    "main-headline": "Discover 4 life-changing stories from Surah Al-Kahf",
+    "subtitle-description": "(A free Learning Plan)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
+    "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
+    "button-accessibility-label": "Learn more about The Rescuer learning plan",
+    "main-headline": "Discover powerful lessons in Surah Al-Mulk today",
+    "subtitle-description": "(A free Learning Plan)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
     "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",

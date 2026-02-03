@@ -88,6 +88,20 @@
   "info": "informacion",
   "juz-beginning": "Fillimi i Xhuzit",
   "languages": "Gjuhët",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Histori që të Ndryshojnë Jetën: Mësime nga Surja Al-Kahf, plan mësimor",
+    "banner-image-description": "Shikoni planin e të nxënit për Suren El-Kehf",
+    "button-accessibility-label": "Mësoni më shumë rreth planit të të nxënit të Suresë El-Kahf",
+    "main-headline": "Zbuloni 4 histori që ndryshojnë jetën nga Sureja Al-Kahf",
+    "subtitle-description": "(Një Plan Mësimi falas)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Shpëtimtari: Mësime të Fuqishme në Suren El-Mulk, plan mësimor",
+    "banner-image-description": "Shikoni planin e të mësuarit të Shpëtimtarit për Suren El-Mulk",
+    "button-accessibility-label": "Mësoni më shumë rreth planit të të nxënit të Shpëtimtarit",
+    "main-headline": "Zbuloni mësime të fuqishme në Suren El-Mulk sot",
+    "subtitle-description": "(Një Plan Mësimi falas)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Shpëtimtari: Mësime të Fuqishme në Suren El-Mulk, plan mësimor",
     "banner-image-description": "Shikoni planin e të mësuarit të Shpëtimtarit për Suren El-Mulk",

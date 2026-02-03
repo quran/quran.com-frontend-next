@@ -88,6 +88,20 @@
   "info": "bilgi",
   "juz-beginning": "Cüz'ün Başlangıcı",
   "languages": "Diller",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "Hayat Değiştiren 4 Hikaye: Kehf Suresinden Dersler öğrenme planı afişi",
+    "banner-image-description": "Kehf Suresi için öğrenme planını inceleyin.",
+    "button-accessibility-label": "Kehf Suresi öğrenme planı hakkında daha fazla bilgi edinin.",
+    "main-headline": "Kehf Suresi'nden hayat değiştiren 4 hikayeyi keşfedin.",
+    "subtitle-description": "(Ücretsiz bir Öğrenme Planı)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Kurtarıcı: Mülk Suresi'ndeki Güçlü Dersler öğrenme planı afişi",
+    "banner-image-description": "Kurtarıcı'nın Al-Mulk Suresi için öğrenme planını inceleyin.",
+    "button-accessibility-label": "Kurtarıcı öğrenme planı hakkında daha fazla bilgi edinin.",
+    "main-headline": "Bugün Mülk Suresi'ndeki güçlü dersleri keşfedin.",
+    "subtitle-description": "(Ücretsiz bir Öğrenme Planı)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Mülk Suresi'ndeki Güçlü Dersleri öğrenme plan afişi",
     "banner-image-description": "Sure Al-Mülk için The Rescuer öğrenme planını görüntüleyin",
