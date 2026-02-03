@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -23,7 +24,7 @@ import Error from '@/pages/_error';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getCollectionNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getCollectionNavigationUrl, ROUTES } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import {
@@ -98,14 +99,26 @@ const CollectionDetailContainer = ({
   const onToggleCardExpansion = (bookmarkId: string) => {
     setExpandedBookmarkId((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(bookmarkId)) newSet.delete(bookmarkId);
-      else newSet.add(bookmarkId);
+      if (newSet.has(bookmarkId)) {
+        newSet.delete(bookmarkId);
+      } else {
+        newSet.add(bookmarkId);
+      }
       return newSet;
     });
   };
 
   // Check if a specific card is expanded
   const isCardExpanded = (bookmarkId: string) => expandedBookmarkId.has(bookmarkId);
+
+  const handleBackClick = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+      return;
+    }
+
+    router.push(ROUTES.COLLECTIONS_ALL);
+  };
 
   if (error && !isValidating) {
     return <Error hasFullWidth={false} />;
@@ -133,7 +146,7 @@ const CollectionDetailContainer = ({
         <div className={styles.container}>
           <div className={styles.stickyHeader} data-navbar-visible={isNavbarShown}>
             <Button
-              onClick={() => router.push('/')}
+              onClick={handleBackClick}
               variant={ButtonVariant.Ghost}
               className={classNames(backButtonStyles.backButton, styles.backButton)}
             >
