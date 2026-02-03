@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './LessonsList.module.scss';
+import useCoursesList from './useCoursesList';
 
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Pill from '@/dls/Pill';
-import { Course } from '@/types/auth/Course';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import { CoursesResponse } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCoursesNavigationUrl,
@@ -18,14 +20,21 @@ import {
 } from '@/utils/navigation';
 
 type Props = {
-  courses: Course[];
+  initialResponse: CoursesResponse;
   isMyCourses: boolean;
+  languages?: string[];
 };
 
 const MIN_COURSES_COUNT = 6;
 
-const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
+const CoursesList: React.FC<Props> = ({ initialResponse, isMyCourses, languages }) => {
   const { t } = useTranslation('learn');
+  const { courses, hasNextPage, isLoadingMore, sentinelRef } = useCoursesList({
+    initialResponse,
+    isMyCourses,
+    languages,
+  });
+
   const onMyCourses = () => {
     logButtonClick('user_no_courses_link');
   };
@@ -34,8 +43,19 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     logButtonClick('all_courses_link');
   };
 
+  const comingSoonPlaceholders = useMemo(() => {
+    if (isMyCourses || courses.length >= MIN_COURSES_COUNT) {
+      return [];
+    }
+    const missingCoursesCount = MIN_COURSES_COUNT - courses.length;
+    const placeholderIndexes = Array.from({ length: missingCoursesCount }, (index, i) => i);
+    return placeholderIndexes;
+  }, [courses.length, isMyCourses]);
+
+  const shouldShowEmptyMyCourses = isMyCourses && courses.length === 0 && !hasNextPage;
+
   // if the user has no courses, show a message
-  if (isMyCourses && courses.length === 0) {
+  if (shouldShowEmptyMyCourses) {
     return (
       <span>
         <Trans
@@ -55,16 +75,9 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     );
   }
 
-  let comingSoonCourses = [];
-  // if we should put a coming soon placeholder
-  if (!isMyCourses && courses.length < MIN_COURSES_COUNT) {
-    // just fill the array with 0s
-    comingSoonCourses = new Array(MIN_COURSES_COUNT - courses.length).fill(0);
-  }
-
   return (
     <div>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="courses-list">
         {courses.map((course) => {
           const { slug, id, continueFromLesson, title, isCompleted, thumbnail } = course;
           const navigateTo = continueFromLesson
@@ -88,12 +101,10 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             </Link>
           );
         })}
-        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
-        {comingSoonCourses.map((_, i) => {
+        {comingSoonPlaceholders.map((placeholderIndex) => {
           return (
             <Card
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
+              key={`coming-soon-${placeholderIndex}`}
               imgSrc="https://images.quran.com/coming-soon.png"
               size={CardSize.Large}
               className={classNames(styles.cardContainer, styles.comingSoonContainer)}
@@ -102,6 +113,11 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
           );
         })}
       </div>
+      {hasNextPage && (
+        <div ref={sentinelRef} className={styles.loadingMore}>
+          {isLoadingMore && <Spinner size={SpinnerSize.Small} />}
+        </div>
+      )}
       {isMyCourses && (
         <div className={styles.allCourses}>
           <Link
