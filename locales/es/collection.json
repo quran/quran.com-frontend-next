@@ -4,15 +4,23 @@
   "back-to-collection-list": "Volver al listado de colecciones",
   "collapse-all": "Contraer todos los versos",
   "collection-list-empty": "La lista de colecciones está vacía. Aún no has creado ninguna colección.",
+  "collection-name": "Nombre de la colección",
   "collections": "Colecciones",
   "delete-bookmark": {
     "subtitle": "¿Estás seguro de que deseas eliminar {{bookmarkName}} de la colección {{collectionName}}?",
     "title": "Eliminar marcador"
   },
+  "delete-collection-action": "Eliminar colección",
+  "delete-collection-success": "Colección eliminada exitosamente",
   "delete-collection": {
+    "description": "Perderás todos los versículos guardados dentro de esta colección.",
     "subtitle": "¿Estás seguro de que deseas eliminar la colección {{collectionName}}?",
+    "subtitle-tagged": "¿Estás seguro que deseas eliminar? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Eliminar colección"
   },
+  "edit-collection": "Editar colección",
+  "edit-collection-name-required": "Introduzca un nombre de colección para guardar.",
+  "edit-collection-success": "Colección actualizada exitosamente",
   "empty": "La colección está vacía",
   "expand-all": "Expandir todos los versículos",
   "go-to-ayah": "Ir a la aleya",

@@ -4,15 +4,23 @@
   "back-to-collection-list": "Rudi kwenye orodha ya mkusanyiko",
   "collapse-all": "Kunja aya zote",
   "collection-list-empty": "Orodha ya mkusanyiko ni tupu. Bado hujaunda mkusanyiko wowote",
+  "collection-name": "Jina la mkusanyiko",
   "collections": "Mikusanyiko",
   "delete-bookmark": {
     "subtitle": "Je, una uhakika unataka kufuta {{bookmarkName}} kutoka kwenye mkusanyiko wa {{collectionName}}?",
     "title": "Futa alamisho"
   },
+  "delete-collection-action": "Futa Mkusanyiko",
+  "delete-collection-success": "Mkusanyiko umefutwa kwa mafanikio",
   "delete-collection": {
+    "description": "Utapoteza mistari yote iliyohifadhiwa ndani ya mkusanyiko huu.",
     "subtitle": "Je, una uhakika unataka kufuta mkusanyiko {{collectionName}}?",
+    "subtitle-tagged": "Una uhakika unataka kufuta <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Futa mkusanyiko"
   },
+  "edit-collection": "Hariri Mkusanyiko",
+  "edit-collection-name-required": "Ingiza jina la mkusanyiko ili uhifadhi.",
+  "edit-collection-success": "Mkusanyiko umesasishwa kwa mafanikio",
   "empty": "Mkusanyiko ni tupu",
   "expand-all": "Panua aya zote",
   "go-to-ayah": "Nenda kwa aya",

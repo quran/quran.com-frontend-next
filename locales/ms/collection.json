@@ -4,15 +4,23 @@
   "back-to-collection-list": "Kembali ke senarai koleksi",
   "collapse-all": "Runtuhkan semua ayat",
   "collection-list-empty": "Senarai koleksi kosong. Anda belum membuat sebarang koleksi lagi",
+  "collection-name": "Nama koleksi",
   "collections": "Koleksi",
   "delete-bookmark": {
     "subtitle": "Adakah anda pasti mahu memadamkan {{bookmarkName}} daripada {{collectionName}} ?",
     "title": "Padamkan penanda halaman"
   },
+  "delete-collection-action": "Padam Koleksi",
+  "delete-collection-success": "Koleksi berjaya dipadamkan",
   "delete-collection": {
+    "description": "Anda akan kehilangan semua ayat yang disimpan dalam koleksi ini.",
     "subtitle": "Adakah anda pasti mahu memadamkan {{collectionName}} ?",
+    "subtitle-tagged": "Adakah anda pasti mahu memadam <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Padamkan koleksi"
   },
+  "edit-collection": "Sunting Koleksi",
+  "edit-collection-name-required": "Masukkan nama koleksi untuk disimpan.",
+  "edit-collection-success": "Koleksi berjaya dikemas kini",
   "empty": "Koleksi kosong",
   "expand-all": "Kembangkan semua ayat",
   "go-to-ayah": "Pergi ke ayah",

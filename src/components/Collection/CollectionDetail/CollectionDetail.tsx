@@ -14,6 +14,14 @@ import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
 
+// Largest collection size that will be rendered without virtualization.
+// Virtualization is enabled when the bookmark count is strictly greater than
+// MAX_NON_VIRTUALIZED_BOOKMARKS (i.e., > 12). Smaller lists are rendered
+// normally as they do not significantly benefit from virtualization and keep
+// the DOM simpler for better UX at low counts.
+const MAX_NON_VIRTUALIZED_BOOKMARKS = 12;
+const VIRTUALIZED_LIST_HEIGHT_CSS = 'calc(var(--spacing-mega-px) * 6)';
+
 type CollectionDetailProps = {
   id: string;
   title: string;
@@ -61,6 +69,56 @@ const CollectionDetail = ({
     }
   };
 
+  const shouldVirtualize = bookmarks.length > MAX_NON_VIRTUALIZED_BOOKMARKS;
+
+  const renderBookmarkCell = (bookmark: Bookmark) => (
+    <CollectionVerseCell
+      key={bookmark.id}
+      bookmarkId={bookmark.id}
+      chapterId={bookmark.key}
+      verseNumber={bookmark.verseNumber}
+      collectionId={id}
+      collectionName={title}
+      isOwner={isOwner}
+      onDelete={onItemDeleted}
+      createdAt={bookmark.createdAt}
+      isSelectMode={isSelectMode}
+      isSelected={isBookmarkSelected?.(bookmark.id)}
+      onToggleSelection={onToggleBookmarkSelection}
+      isExpanded={isCardExpanded?.(bookmark.id)}
+      onToggleExpansion={onToggleCardExpansion}
+    />
+  );
+
+  const listContent = (() => {
+    if (shouldUseBodyScroll) {
+      return (
+        <Virtuoso
+          data={bookmarks}
+          overscan={10}
+          increaseViewportBy={100}
+          useWindowScroll
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
+        />
+      );
+    }
+
+    if (shouldVirtualize) {
+      return (
+        <Virtuoso
+          className={styles.virtualizedList}
+          style={{ height: VIRTUALIZED_LIST_HEIGHT_CSS }}
+          data={bookmarks}
+          overscan={10}
+          increaseViewportBy={100}
+          itemContent={(index, bookmark) => renderBookmarkCell(bookmark)}
+        />
+      );
+    }
+
+    return bookmarks.map(renderBookmarkCell);
+  })();
+
   return (
     <>
       <div className={styles.container}>
@@ -79,30 +137,7 @@ const CollectionDetail = ({
               </div>
             </div>
           ) : (
-            <Virtuoso
-              data={bookmarks}
-              overscan={10}
-              increaseViewportBy={100}
-              useWindowScroll={shouldUseBodyScroll}
-              itemContent={(index, bookmark) => (
-                <CollectionVerseCell
-                  key={bookmark.id}
-                  bookmarkId={bookmark.id}
-                  chapterId={bookmark.key}
-                  verseNumber={bookmark.verseNumber}
-                  collectionId={id}
-                  collectionName={title}
-                  isOwner={isOwner}
-                  onDelete={onItemDeleted}
-                  createdAt={bookmark.createdAt}
-                  isSelectMode={isSelectMode}
-                  isSelected={isBookmarkSelected?.(bookmark.id)}
-                  onToggleSelection={onToggleBookmarkSelection}
-                  isExpanded={isCardExpanded?.(bookmark.id)}
-                  onToggleExpansion={onToggleCardExpansion}
-                />
-              )}
-            />
+            listContent
           )}
         </div>
       </div>
