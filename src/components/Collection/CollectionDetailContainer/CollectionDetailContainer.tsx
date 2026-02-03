@@ -11,7 +11,6 @@ import useSWRInfinite from 'swr/infinite';
 import styles from './CollectionDetailContainer.module.scss';
 
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
-import Error from '@/components/Error';
 import backButtonStyles from '@/components/MyQuran/CollectionDetailView/CollectionDetailView.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -22,14 +21,11 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
 import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import ChevronLeft from '@/icons/chevron-left.svg';
+import Error from '@/pages/_error';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import {
-  getCanonicalUrl,
-  getCollectionNavigationUrl,
-  getProfileNavigationUrl,
-} from '@/utils/navigation';
+import { getCanonicalUrl, getCollectionNavigationUrl } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import {
@@ -88,6 +84,14 @@ const CollectionDetailContainer = ({
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
 
+  const handleBackNavigation = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
+
   const onItemDeleted = (bookmarkId: string) => {
     if (shouldDeleteBookmark) {
       deleteBookmarkById(bookmarkId)
@@ -132,9 +136,17 @@ const CollectionDetailContainer = ({
     return expandedBookmarkId.has(bookmarkId);
   };
 
-  const isLoading = !data && !error;
-  const isValidatingOrLoading = isValidating || isLoading;
-  const isError = !!error && !isValidatingOrLoading;
+  if (error && !isValidating) {
+    return <Error hasFullWidth={false} />;
+  }
+
+  if (isValidating && !data) {
+    return (
+      <div className={styles.statusContainer} data-status="loading">
+        <Spinner size={SpinnerSize.Large} />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -150,7 +162,7 @@ const CollectionDetailContainer = ({
         <div className={styles.container}>
           <div className={styles.stickyHeader} data-navbar-visible={isNavbarShown}>
             <Button
-              href={getProfileNavigationUrl()}
+              onClick={handleBackNavigation}
               variant={ButtonVariant.Ghost}
               className={classNames(backButtonStyles.backButton, styles.backButton)}
             >
@@ -170,19 +182,13 @@ const CollectionDetailContainer = ({
             shouldUseBodyScroll
           />
 
-          {isValidatingOrLoading && (
-            <div className={styles.statusContainer} data-status="loading">
+          {isValidating && (
+            <div className={styles.statusContainer} data-status="validating">
               <Spinner size={SpinnerSize.Large} />
             </div>
           )}
 
-          {isError && (
-            <div className={styles.statusContainer} data-status="error">
-              <Error error={error as Error} onRetryClicked={() => mutate()} />
-            </div>
-          )}
-
-          {!isValidatingOrLoading && !isError && hasNextPage && (
+          {hasNextPage && !isValidating && (
             <div className={styles.statusContainer} data-status="load-more">
               <Button onClick={loadMore}>{t('collection:load-more')}</Button>
             </div>

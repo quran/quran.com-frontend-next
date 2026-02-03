@@ -4,12 +4,12 @@ $max-line-size: 700px;
 
 .wrapper {
   background: var(--color-background-elevated-new);
+  min-block-size: 100vh;
   padding-inline: var(--spacing-small);
   padding-block-end: var(--spacing-xxxlarge-px);
 }
 
 .container {
-  min-block-size: 100vh;
   max-inline-size: $max-line-size;
   margin-inline: auto;
 }
@@ -60,6 +60,7 @@ $max-line-size: 700px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--color-background-elevated-new);
   min-block-size: calc(3 * var(--spacing-max));
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-semibold);
@@ -69,5 +70,9 @@ $max-line-size: 700px;
 
   &[data-status='load-more'] {
     min-block-size: calc(2 * var(--spacing-max));
+  }
+
+  &:where([data-status='error'], [data-status='loading']) {
+    min-block-size: 60vh;
   }
 }
