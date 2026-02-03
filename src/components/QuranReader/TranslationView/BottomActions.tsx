@@ -91,9 +91,7 @@ const BottomActions = ({
       };
 
       const studyModeTab = tabIdMap[tabType];
-      const viewType = isTranslationView ? 'verse_by_verse' : 'reading';
       if (studyModeTab) {
-        logButtonClick(`study_mode_open_${viewType}_${studyModeTab}_tab`, { verseKey });
         dispatch(openStudyMode({ verseKey, activeTab: studyModeTab }));
       }
 
