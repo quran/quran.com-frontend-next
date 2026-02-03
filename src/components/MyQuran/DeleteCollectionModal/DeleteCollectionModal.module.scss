@@ -30,6 +30,7 @@ $border-width-default: var(--spacing-hairline-px);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 }
 
 .title {
@@ -53,13 +54,9 @@ $border-width-default: var(--spacing-hairline-px);
   background: none;
   border: none;
   cursor: pointer;
-  padding: var(--spacing-xxsmall);
+  padding: 0;
   border-radius: var(--border-radius-rounded);
   color: var(--color-text-default);
-
-  &:hover {
-    background-color: var(--color-background-alternative-faint-new);
-  }
 
   svg {
     block-size: $close-icon-h;
