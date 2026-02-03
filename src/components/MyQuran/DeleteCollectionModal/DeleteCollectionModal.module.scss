@@ -33,7 +33,7 @@ $border-width-default: var(--spacing-hairline-px);
 }
 
 .title {
-  font-size: var(--font-size-normal-px);
+  font-size: var(--font-size-large-px);
   font-style: normal;
   font-weight: var(--font-weight-bold);
   line-height: var(--font-size-large-px);
@@ -79,7 +79,7 @@ $border-width-default: var(--spacing-hairline-px);
   margin-block-end: var(--spacing-medium2-px);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-medium-px);
 
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-normal-px);
@@ -104,7 +104,6 @@ $border-width-default: var(--spacing-hairline-px);
 .footer {
   display: flex;
   gap: var(--spacing-medium2-px);
-  padding-block-start: var(--spacing-small);
 }
 
 .cancelButton {
