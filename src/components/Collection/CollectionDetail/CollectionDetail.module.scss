@@ -1,11 +1,7 @@
 @use 'src/styles/breakpoints';
 
-.header {
+.separator {
   border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-
-  display: flex;
-  justify-content: space-between;
-  // Smooth entrance animation
   animation: fadeIn var(--transition-moderate) ease-out;
 }
 
@@ -32,9 +28,11 @@
 }
 
 .collectionItemsContainer {
-  margin-block-start: var(--spacing-medium-px);
-  block-size: calc(var(--spacing-mega-px) * 5);
-  overflow: hidden;
+  &:not(.bodyScroll) {
+    block-size: calc(var(--spacing-mega-px) * 5);
+    overflow: hidden;
+  }
+
   position: relative;
   // Smooth entrance animation
   animation: fadeInSlide var(--transition-regular) ease-out backwards;

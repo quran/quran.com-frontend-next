@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unused-prop-types */
-
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
@@ -11,7 +10,6 @@ import CollectionVerseCell from './CollectionVerseCell';
 
 import MyQuranTab from '@/components/MyQuran/tabs';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
-import { CollectionDetailSortOption } from '@/types/CollectionSortOptions';
 import { logButtonClick } from '@/utils/eventLogger';
 import Button from 'src/components/dls/Button/Button';
 import Bookmark from 'types/Bookmark';
@@ -23,14 +21,10 @@ type CollectionDetailProps = {
   bookmarks: Bookmark[];
 
   onItemDeleted?: (bookmarkId: string) => void;
-  shouldShowTitle?: boolean;
   onBack?: () => void;
 
-  // TODO: Remove these props when the collection detail page is updated to use the new collection detail view
-  onSortByChange?: (newVal: CollectionDetailSortOption) => void;
-  sortBy?: CollectionDetailSortOption;
-
   isSelectMode?: boolean;
+  shouldUseBodyScroll?: boolean;
   onToggleBookmarkSelection?: (bookmarkId: string) => void;
   onToggleCardExpansion?: (bookmarkId: string) => void;
   isCardExpanded?: (bookmarkId: string) => boolean;
@@ -43,9 +37,9 @@ const CollectionDetail = ({
   bookmarks,
   onItemDeleted,
   isOwner,
-  shouldShowTitle = true,
   onBack,
   isSelectMode = false,
+  shouldUseBodyScroll = false,
   onToggleBookmarkSelection,
   onToggleCardExpansion,
   isCardExpanded,
@@ -70,10 +64,11 @@ const CollectionDetail = ({
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.header}>
-          {shouldShowTitle && <div className={styles.title}>{title}</div>}
-        </div>
-        <div className={styles.collectionItemsContainer}>
+        <div
+          className={classNames(styles.collectionItemsContainer, {
+            [styles.bodyScroll]: shouldUseBodyScroll,
+          })}
+        >
           {isCollectionEmpty ? (
             <div className={styles.emptyCollectionContainer}>
               <span>{t('collection:empty')}</span>
@@ -88,6 +83,7 @@ const CollectionDetail = ({
               data={bookmarks}
               overscan={10}
               increaseViewportBy={100}
+              useWindowScroll={shouldUseBodyScroll}
               itemContent={(index, bookmark) => (
                 <CollectionVerseCell
                   key={bookmark.id}
