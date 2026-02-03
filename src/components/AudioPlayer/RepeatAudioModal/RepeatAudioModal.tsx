@@ -161,10 +161,6 @@ const RepeatAudioModal = ({
     persistedSettings?.to,
   ]);
 
-  // --------------------------------------------------------------------------
-  // PLAY HANDLER
-  // Normalize range, persist to Redux/backend, then start playback
-  // --------------------------------------------------------------------------
   const play = () => {
     // Normalize: ensure from <= to
     const normalized = normalizeVerseRange(verseRepetition.from, verseRepetition.to);
