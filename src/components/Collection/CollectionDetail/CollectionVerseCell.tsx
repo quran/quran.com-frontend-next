@@ -91,58 +91,60 @@ const CollectionVerseCell: React.FC<CollectionVerseCellProps> = ({
 
   return (
     <div className={styles.outerContainer}>
-      <div
-        className={styles.headerContainer}
-        onClick={() => onToggleExpansion?.(bookmarkId)}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
-        }}
-      >
-        <div className={styles.headerLeft}>
-          <Link
-            href={getVerseNavigationUrlByVerseKey(verseKey)}
-            className={styles.verseReference}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {bookmarkName}
-          </Link>
-          {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
-        </div>
-        <div className={styles.headerRight}>
-          {isSelectMode ? (
-            <Checkbox
-              id={`checkbox-${bookmarkId}`}
-              checked={isSelected}
-              onChange={() => onToggleSelection?.(bookmarkId)}
+      <div className={styles.container}>
+        <div
+          className={styles.headerContainer}
+          onClick={() => onToggleExpansion?.(bookmarkId)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') onToggleExpansion?.(bookmarkId);
+          }}
+        >
+          <div className={styles.headerLeft}>
+            <Link
+              href={getVerseNavigationUrlByVerseKey(verseKey)}
+              className={styles.verseReference}
               onClick={(e) => e.stopPropagation()}
-              checkboxClassName={styles.checkbox}
-              containerClassName={styles.checkboxContainer}
-            />
-          ) : (
-            <CollectionVerseCellMenu
-              isPinned={isPinned}
-              isOwner={isOwner}
-              onPinToggle={handlePinToggle}
-              onDelete={handleDelete}
-              onGoToAyah={handleGoToAyah}
-            />
-          )}
-          <div className={styles.iconButton}>
-            <ArrowIcon className={isExpanded ? styles.arrowUp : styles.arrowDown} />
+            >
+              {bookmarkName}
+            </Link>
+            {formattedDate && <div className={styles.bookmarkDate}>{formattedDate}</div>}
+          </div>
+          <div className={styles.headerRight}>
+            {isSelectMode ? (
+              <Checkbox
+                id={`checkbox-${bookmarkId}`}
+                checked={isSelected}
+                onChange={() => onToggleSelection?.(bookmarkId)}
+                onClick={(e) => e.stopPropagation()}
+                checkboxClassName={styles.checkbox}
+                containerClassName={styles.checkboxContainer}
+              />
+            ) : (
+              <CollectionVerseCellMenu
+                isPinned={isPinned}
+                isOwner={isOwner}
+                onPinToggle={handlePinToggle}
+                onDelete={handleDelete}
+                onGoToAyah={handleGoToAyah}
+              />
+            )}
+            <div className={styles.iconButton}>
+              <ArrowIcon className={isExpanded ? styles.arrowUp : styles.arrowDown} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {isExpanded && (
-        <>
-          <Separator className={styles.contentSeparator} />
-          <div className={styles.cellContainer} data-verse-key={verseKey}>
-            <VerseDisplay chapterId={chapterId} verseNumber={verseNumber} />
-          </div>
-        </>
-      )}
+        {isExpanded && (
+          <>
+            <Separator className={styles.contentSeparator} />
+            <div className={styles.cellContainer} data-verse-key={verseKey}>
+              <VerseDisplay chapterId={chapterId} verseNumber={verseNumber} />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

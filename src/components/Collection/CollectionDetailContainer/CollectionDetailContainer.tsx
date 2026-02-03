@@ -7,18 +7,18 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import useSWRInfinite from 'swr/infinite';
 
-import layoutStyles from '../../../pages/index.module.scss';
-
 import styles from './CollectionDetailContainer.module.scss';
 
+import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import Error from '@/components/Error';
+import backButtonStyles from '@/components/MyQuran/CollectionDetailView/CollectionDetailView.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import StudyModeContainer from '@/components/QuranReader/StudyModeContainer';
 import VerseActionModalContainer from '@/components/QuranReader/VerseActionModalContainer';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useBookmarkCacheInvalidator from '@/hooks/useBookmarkCacheInvalidator';
-import ArrowLeft from '@/icons/west.svg';
-import Error from '@/pages/_error';
+import ChevronLeft from '@/icons/chevron-left.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -28,28 +28,22 @@ import {
 } from '@/utils/navigation';
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   deleteBookmarkById,
   deleteCollectionBookmarkById,
   privateFetcher,
 } from 'src/utils/auth/api';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
-import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailContainerProps = {
   title?: string;
   getSWRKey: (pageIndex, previousData) => string;
-  onSortByChange: (newVal) => void;
-  sortBy: CollectionDetailSortOption;
-  shouldDeleteBookmark?: boolean; // should delete the bookmark instead of just deleting the connection between the bookmark and collection
+  shouldDeleteBookmark?: boolean;
 };
 
 const CollectionDetailContainer = ({
   title,
   getSWRKey,
-  onSortByChange,
-  sortBy,
   shouldDeleteBookmark,
 }: CollectionDetailContainerProps) => {
   const { t, lang } = useTranslation();
@@ -64,29 +58,17 @@ const CollectionDetailContainer = ({
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
 
-  if (error) {
-    return <Error statusCode={403} />;
-  }
-
-  if (!data) {
-    return (
-      <div className={classNames(styles.container, styles.loadingContainer)}>
-        <Spinner shouldDelayVisibility size={SpinnerSize.Large} />
-      </div>
-    );
-  }
-
   const onUpdated = () => {
     mutate();
     invalidateAllBookmarkCaches();
   };
 
-  const lastPageData = data[data.length - 1];
-  const { hasNextPage } = lastPageData.pagination;
+  const lastPageData = data?.at(-1);
+  const hasNextPage = !!lastPageData?.pagination?.hasNextPage;
 
-  const bookmarks = data.map((response) => response.data.bookmarks).flat();
-  const collectionTitle = title || data[0].data.collection.name;
-  const isOwner = data[0]?.data?.isOwner;
+  const bookmarks = data?.map((response) => response.data.bookmarks).flat() || [];
+  const collectionTitle = title || data?.[0]?.data?.collection?.name;
+  const isOwner = data?.[0]?.data?.isOwner;
 
   const loadMore = () => {
     setSize(size + 1);
@@ -142,7 +124,9 @@ const CollectionDetailContainer = ({
     return expandedBookmarkId.has(bookmarkId);
   };
 
-  const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
+  const isLoading = !data && !error;
+  const isValidatingOrLoading = isValidating || isLoading;
+  const isError = !!error && !isValidatingOrLoading;
 
   return (
     <>
@@ -153,37 +137,48 @@ const CollectionDetailContainer = ({
         nofollow
         noindex
       />
-      <div className={layoutStyles.pageContainer}>
-        <div className={layoutStyles.flow}>
-          <div className={layoutStyles.flowItem}>
-            <div className={styles.container}>
-              <Button
-                href={getProfileNavigationUrl()}
-                variant={ButtonVariant.Ghost}
-                hasSidePadding={false}
-              >
-                <ArrowLeft />
-              </Button>
-              <CollectionDetail
-                id={slugifiedCollectionIdToCollectionId(collectionId)}
-                title={collectionTitle}
-                bookmarks={bookmarks}
-                sortBy={sortBy}
-                onSortByChange={onSortByChange}
-                onItemDeleted={onItemDeleted}
-                isOwner={isOwner}
-                onToggleCardExpansion={onToggleCardExpansion}
-                isCardExpanded={isCardExpanded}
-              />
 
-              {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
-              {hasNextPage && (
-                <div className={styles.loadMoreContainer}>
-                  <Button onClick={loadMore}>{t('collection:load-more')}</Button>
-                </div>
-              )}
-            </div>
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <div className={styles.stickyHeader}>
+            <Button
+              href={getProfileNavigationUrl()}
+              variant={ButtonVariant.Ghost}
+              className={classNames(backButtonStyles.backButton, styles.backButton)}
+            >
+              <ChevronLeft />
+              <span>{title}</span>
+            </Button>
           </div>
+
+          <CollectionDetail
+            id={slugifiedCollectionIdToCollectionId(collectionId)}
+            title={collectionTitle}
+            bookmarks={bookmarks}
+            onItemDeleted={onItemDeleted}
+            isOwner={isOwner}
+            onToggleCardExpansion={onToggleCardExpansion}
+            isCardExpanded={isCardExpanded}
+            shouldUseBodyScroll
+          />
+
+          {isValidatingOrLoading && (
+            <div className={styles.statusContainer} data-status="loading">
+              <Spinner size={SpinnerSize.Large} />
+            </div>
+          )}
+
+          {isError && (
+            <div className={styles.statusContainer} data-status="error">
+              <Error error={error as Error} onRetryClicked={() => mutate()} />
+            </div>
+          )}
+
+          {!isValidatingOrLoading && !isError && hasNextPage && (
+            <div className={styles.statusContainer} data-status="load-more">
+              <Button onClick={loadMore}>{t('collection:load-more')}</Button>
+            </div>
+          )}
         </div>
       </div>
 

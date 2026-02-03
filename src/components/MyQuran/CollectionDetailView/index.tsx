@@ -397,7 +397,6 @@ const CollectionDetailView: React.FC<CollectionDetailViewProps> = ({
         bookmarks={filteredBookmarks}
         onItemDeleted={onItemDeleted}
         isOwner={isOwner}
-        shouldShowTitle={false}
         onBack={onBack}
         isSelectMode={isSelectMode}
         onToggleBookmarkSelection={handleToggleBookmarkSelection}
