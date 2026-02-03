@@ -84,6 +84,7 @@ const DeleteCollectionModal: React.FC<DeleteCollectionModalProps> = ({
               onClick={onConfirm}
               className={styles.deleteButton}
               isLoading={isLoading}
+              isDisabled={isLoading}
             >
               {commonT('delete')}
             </Button>
