@@ -11,14 +11,24 @@ import SurahInfoContent from '@/components/chapters/Info/SurahInfoContent';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import Chapter from '@/types/Chapter';
 import ChapterInfo from '@/types/ChapterInfo';
+import type { ChapterInfoResource } from '@/types/ChapterInfo';
 import { fakeNavigate, getSurahNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoPageProps {
   chapterInfo: ChapterInfo;
   chapter: Chapter;
+  resources?: ChapterInfoResource[];
+  initialResourceId?: string | null;
+  chapterId: string | number;
 }
 
-const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) => {
+const SurahInfoPage: React.FC<SurahInfoPageProps> = ({
+  chapterInfo,
+  chapter,
+  resources = [],
+  initialResourceId,
+  chapterId,
+}) => {
   const { t } = useTranslation('quran-reader');
   const router = useRouter();
 
@@ -42,9 +52,11 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapterInfo, chapter }) =
       innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
     >
       <SurahInfoContent
-        chapterId={String(chapter.id)}
+        chapterId={String(chapterId)}
         chapterInfo={chapterInfo}
         chapter={chapter}
+        resources={resources}
+        initialResourceId={initialResourceId}
       />
     </ContentModal>
   );

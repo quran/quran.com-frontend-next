@@ -1,5 +1,9 @@
+/* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { SWRConfig } from 'swr';
 
 import { getPagesLookup, getChapterInfo, getChapterIdBySlug } from '@/api';
 import SurahInfoPage from '@/components/chapters/Info/SurahInfoPage';
@@ -9,10 +13,12 @@ import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { ChapterResponse, VersesResponse, ChapterInfoResponse } from '@/types/ApiResponses';
+import ChapterInfoResource from '@/types/ChapterInfo';
 import ChaptersData from '@/types/ChaptersData';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
+import { makeChapterInfoUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
@@ -29,6 +35,8 @@ type ChapterInfoProps = {
   versesResponse: VersesResponse;
   chapterInfoResponse: ChapterInfoResponse;
   quranReaderDataType: QuranReaderDataType;
+  initialResourceId?: string;
+  fallback?: Record<string, unknown>;
 };
 
 const ChapterInfo: NextPage<ChapterInfoProps> = ({
@@ -36,6 +44,8 @@ const ChapterInfo: NextPage<ChapterInfoProps> = ({
   versesResponse,
   chapterInfoResponse,
   quranReaderDataType,
+  initialResourceId,
+  fallback,
 }) => {
   const { t, lang } = useTranslation('common');
 
@@ -61,10 +71,15 @@ const ChapterInfo: NextPage<ChapterInfoProps> = ({
         description={chapterInfoResponse.chapterInfo.shortText}
       />
 
-      <SurahInfoPage
-        chapterInfo={chapterInfoResponse.chapterInfo}
-        chapter={chapterResponse.chapter}
-      />
+      <SWRConfig value={{ fallback }}>
+        <SurahInfoPage
+          chapterInfo={chapterInfoResponse.chapterInfo}
+          chapter={chapterResponse.chapter}
+          resources={chapterInfoResponse.resources}
+          initialResourceId={initialResourceId}
+          chapterId={chapterResponse.chapter.id}
+        />
+      </SWRConfig>
 
       <QuranReader
         initialData={versesResponse}
@@ -112,6 +127,9 @@ const getChapterInfoData = async (chapterId: string, locale: string) => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params, locale } = context;
   let chapterId = String(params.chapterId);
+  // Extract the info array - it can be undefined (for /surah/1/info) or ['resourceId'] (for /surah/1/info/58)
+  const infoArray = params.info as string[] | undefined;
+  const resourceId = infoArray?.[0]; // First element is the resource ID if present
 
   if (!isValidChapterId(chapterId)) {
     const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
@@ -122,13 +140,27 @@ export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { versesResponse, chaptersData } = await getChapterInfoData(chapterId, locale);
     const chapterData = getChapterData(chaptersData, chapterId);
-    const chapterInfoResponse = await getChapterInfo(chapterId, locale);
+
+    // Fetch chapter info with resource filter if provided, and include resources list
+    const chapterInfoResponse = await getChapterInfo(chapterId, locale, {
+      resourceId,
+      includeResources: true,
+    });
 
     /**
      * If the request succeeds, `chapterInfo` should exist.
      * Its absence means the surah has no chapter info yet.
      */
     if (!chapterInfoResponse?.chapterInfo) return { notFound: true };
+
+    // Create fallback for SWR to avoid client-side refetch
+    const apiParams = resourceId
+      ? { resource_id: resourceId, language: locale }
+      : { language: locale };
+    const fallback = {
+      [makeChapterInfoUrl(chapterId, locale, { resourceId, includeResources: true })]:
+        chapterInfoResponse,
+    };
 
     return {
       props: {
@@ -137,6 +169,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
         versesResponse,
         chapterInfoResponse,
         quranReaderDataType: QuranReaderDataType.Chapter,
+        initialResourceId: resourceId || null,
+        fallback,
       },
 
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
@@ -144,7 +178,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-SurahInfoPage',
-      metadata: { chapterId, locale },
+      metadata: { chapterId, locale, resourceId },
     });
 
     return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
