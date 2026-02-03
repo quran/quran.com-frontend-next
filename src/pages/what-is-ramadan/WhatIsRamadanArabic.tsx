@@ -136,6 +136,7 @@ const WhatIsRamadanArabic = (): JSX.Element => {
           ليكن رمضان هذا بوابتك لاكتشاف الأثر العميق للقرآن الكريم. من يدري؟ قد تكون هذه اللحظة من
           الفضول بداية رحلة تغيّر حياتك.
         </div>
+        <div>هل ترغب في معرفة المزيد عن القرآن الكريم؟</div>
       </div>
       <div className={styles.ctaContainer}>
         <Button
