@@ -61,7 +61,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="how-the-challenge-works">
             <h1>How the Challenge Works</h1>
             <div>
-              Each day of Ramadan, you'll receive a short, focused lesson built around{' '}
+              Each day of Ramadan, you'll receive an email with a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
             <ul className={pageStyles.list}>
