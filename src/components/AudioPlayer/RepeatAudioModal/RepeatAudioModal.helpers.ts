@@ -5,12 +5,12 @@ import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
  * Convert a persisted value (where -1 = Infinity) to the runtime value.
  * Used when reading from Redux/backend.
  *
- * @param {number | undefined} value - The persisted value (may be -1 for Infinity).
- * @param {number} fallback - The fallback value if value is undefined.
+ * @param {number | undefined | null} value - The persisted value (may be -1 for Infinity, null from backend when Infinity was stored).
+ * @param {number} fallback - The fallback value if value is null or undefined.
  * @returns {number} The runtime numeric value (with Infinity restored if needed).
  */
-export const fromPersistedValue = (value: number | undefined, fallback: number): number => {
-  if (value === undefined) return fallback;
+export const fromPersistedValue = (value: number | undefined | null, fallback: number): number => {
+  if (value === null || value === undefined) return fallback;
   if (value === REPEAT_INFINITY) return Infinity;
   return value;
 };
