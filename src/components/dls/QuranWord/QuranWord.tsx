@@ -206,7 +206,7 @@ const QuranWord = ({
   const handleInteraction = useCallback(() => {
     const modeSuffix = getReadingModeSuffix();
 
-    if (word.charTypeName === CharType.Word) {
+    if (word.charTypeName === CharType.Word && !isRecitationEnabled) {
       seekToWordIfPlaying();
     }
 
