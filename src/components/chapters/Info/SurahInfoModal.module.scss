@@ -176,30 +176,50 @@ div {
 
 .resourceTabs {
   display: flex;
-  gap: var(--spacing-small);
+  gap: var(--spacing-small2-px);
+  padding-block-end: var(--spacing-xxsmall-px);
   margin-block-start: var(--spacing-medium);
-  flex-wrap: wrap;
+  margin-block-end: var(--spacing-medium-px);
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    block-size: var(--spacing-xxsmall-px);
+  }
+
+  & > :last-child {
+    margin-inline-end: var(--spacing-micro-px);
+  }
 }
 
 .resourceTab {
-  background: transparent;
-  border: 1px solid var(--color-borders-default);
-  border-radius: var(--border-radius-small);
-  padding: var(--spacing-xsmall) var(--spacing-medium);
-  font-size: var(--font-size-small);
-  color: var(--color-text-default);
-  cursor: pointer;
-  transition: all 0.2s ease;
+  all: unset;
 
-  &:hover {
-    background: var(--color-background-surface-hover);
-    border-color: var(--color-borders-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  block-size: calc(var(--spacing-small-plus-px) * 4);
+  padding-inline: var(--spacing-medium-px);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-default-new);
+  line-height: 1;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+  &:where(:hover, :focus-visible, [aria-selected='true']):not(:disabled) {
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
   }
 
   &.resourceTabActive {
-    background: var(--color-background-surface-selected);
-    border-color: var(--color-primary-brand);
-    color: var(--color-primary-brand);
-    font-weight: var(--font-weight-medium);
+    background-color: var(--color-blue-buttons-and-icons);
+    color: var(--color-text-white);
   }
 }

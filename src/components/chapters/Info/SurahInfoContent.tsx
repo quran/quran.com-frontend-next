@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -35,6 +35,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
   const router = useRouter();
   const shouldHideTransliteration = shouldUseMinimalLayout(lang);
   const [selectedResourceId, setSelectedResourceId] = useState<string | null>(initialResourceId);
+  const [storedResources, setStoredResources] = useState<ChapterInfoResponse['resources']>(null);
 
   const apiParams = useMemo(
     () => ({
@@ -55,6 +56,14 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
 
   const chapterInfo = chapterInfoData?.chapterInfo;
   const resources = chapterInfoData?.resources;
+
+  useEffect(() => {
+    setStoredResources(null);
+  }, [chapterId, lang]);
+
+  useEffect(() => {
+    if (resources && resources.length > 0) setStoredResources(resources);
+  }, [resources]);
 
   const handleResourceChange = useCallback(
     (resourceId: string) => {
@@ -103,22 +112,28 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
           </div>
         </div>
 
-        {resources && resources.length > 0 && (
-          <div className={styles.resourceTabs}>
-            {resources.map((resource) => (
-              <button
-                key={resource.id}
-                type="button"
-                onClick={() => handleResourceChange(String(resource.id))}
-                className={classNames(styles.resourceTab, {
-                  [styles.resourceTabActive]:
-                    String(resource.id) === selectedResourceId ||
-                    chapterInfo?.resourceId?.toString() === resource.id.toString(),
-                })}
-              >
-                {resource.translatedName?.name ?? resource.name}
-              </button>
-            ))}
+        {storedResources && storedResources.length > 0 && (
+          <div className={styles.resourceTabs} role="tablist" aria-label="Resource selection">
+            {storedResources.map((resource) => {
+              const isSelected =
+                String(resource.id) === selectedResourceId ||
+                chapterInfo?.resourceId?.toString() === resource.id.toString();
+
+              return (
+                <button
+                  key={resource.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  onClick={() => handleResourceChange(String(resource.id))}
+                  className={classNames(styles.resourceTab, {
+                    [styles.resourceTabActive]: isSelected,
+                  })}
+                >
+                  {resource.translatedName?.name ?? resource.name}
+                </button>
+              );
+            })}
           </div>
         )}
 
