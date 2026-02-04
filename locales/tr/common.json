@@ -100,6 +100,13 @@
   "beyond-ramadan": "Ramazan'dan sonra da gelişin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
+  "bookmarks-migration": {
+    "body-1": "Yer işaretleriniz artık şu şekilde görünecek: <strong>Kaydedilen Ayetler</strong> içinde <strong>Koleksiyonlar</strong>Mevcut yer işaretlerinizi korumak için lütfen oturum açın veya bir hesap oluşturun.",
+    "body-2": "Ayrıca, kaldığınız yerden devam etmenize yardımcı olmak için yeni bir Okuma Yer İşareti de ekledik.",
+    "checkbox": "Bu mesajı bir daha gösterme (Uyarı: Mevcut tüm yer işaretlerinizi kaybedeceksiniz)",
+    "sign-in": "Giriş Yap / Kayıt Ol",
+    "title": "Uyarı: Yer işaretleri değişiyor."
+  },
   "both": "Her ikisi de",
   "cancel": "İptal",
   "change-theme": "Temayı Değiştir",
