@@ -99,8 +99,6 @@ $modal-padding: var(--spacing-xlarge-px);
     font-size: var(--font-size-small-px);
     inline-size: 100%;
     block-size: 100%;
-    inline-size: 100%;
-    block-size: 100%;
   }
 }
 
@@ -111,7 +109,6 @@ $modal-padding: var(--spacing-xlarge-px);
 }
 
 .primaryButton {
-  background-color: var(--color-success-medium);
   border-color: var(--color-success-medium);
   inline-size: 100%;
   font-size: var(--font-size-normal-px);

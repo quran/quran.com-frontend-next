@@ -37,8 +37,6 @@ const GuestBookmarksMigrationModal = () => {
     [bookmarkedVerses],
   );
 
-  const isOnAuthPage = isAuthPage(router);
-
   useEffect(() => {
     if (!isPersistGateHydrationComplete) return;
 
@@ -51,6 +49,8 @@ const GuestBookmarksMigrationModal = () => {
       setIsOpen(false);
       return;
     }
+
+    const isOnAuthPage = isAuthPage(router);
 
     if (isOnAuthPage) {
       setIsOpen(false);
@@ -66,21 +66,15 @@ const GuestBookmarksMigrationModal = () => {
     }
 
     const nextShowAtValue = localStorage.getItem(NEXT_SHOW_STORAGE_KEY);
-    const nextShowAt = nextShowAtValue ? Number(nextShowAtValue) : 0;
+    const nextShowAt = nextShowAtValue ? parseInt(nextShowAtValue, 10) : 0;
 
-    if (nextShowAt && Date.now() < nextShowAt) {
+    if (!Number.isNaN(nextShowAt) && Date.now() < nextShowAt) {
       setIsOpen(false);
       return;
     }
 
     setIsOpen(true);
-  }, [isPersistGateHydrationComplete, isLoggedIn, hasGuestBookmarks, isOnAuthPage, router.asPath]);
-
-  useEffect(() => {
-    if (isOpen) {
-      setDoNotShowAgain(false);
-    }
-  }, [isOpen]);
+  }, [isPersistGateHydrationComplete, isLoggedIn, hasGuestBookmarks, router]);
 
   const persistOptOut = useCallback(() => {
     if (typeof window === 'undefined') return;
