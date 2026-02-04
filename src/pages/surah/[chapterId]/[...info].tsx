@@ -122,6 +122,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let chapterId = String(params.chapterId);
 
   const infoArray = params.info as string[];
+  if (infoArray[0] !== 'info') return { notFound: true };
+
   const resourceId = infoArray.length > 1 ? infoArray[1] : undefined;
 
   if (!isValidChapterId(chapterId)) {
