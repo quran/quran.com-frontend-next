@@ -315,11 +315,11 @@ div {
     align-items: center;
     box-sizing: border-box;
     padding-block: 0;
+    border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
 
     @include breakpoints.tablet {
       min-block-size: var(--spacing-xxlarge-px);
       align-items: flex-start;
-      border-block-end: var(--spacing-hairline-px) solid var(--color-separators-new);
 
       .closeIconContainer {
         inset-block-start: var(--spacing-small2-px);
