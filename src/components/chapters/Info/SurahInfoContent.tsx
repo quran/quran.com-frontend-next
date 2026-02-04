@@ -1,24 +1,18 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import useSWRImmutable from 'swr/immutable';
 
 import styles from './SurahInfoModal.module.scss';
+import useSurahInfo from './useSurahInfo';
 
-import { getChapterInfo } from '@/api';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import Error from '@/components/Error';
-import { ChapterInfoResponse } from '@/types/ApiResponses';
 import Chapter from '@/types/Chapter';
-import Language from '@/types/Language';
-import { makeChapterInfoUrl } from '@/utils/apiPaths';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
-import { fakeNavigate, getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoContentProps {
   chapterId: string;
@@ -32,50 +26,18 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
   initialResourceId,
 }) => {
   const { t, lang } = useTranslation();
-  const router = useRouter();
   const shouldHideTransliteration = shouldUseMinimalLayout(lang);
-  const [selectedResourceId, setSelectedResourceId] = useState<string | null>(initialResourceId);
-  const [storedResources, setStoredResources] = useState<ChapterInfoResponse['resources']>(null);
-
-  const apiParams = useMemo(
-    () => ({
-      includeResources: true,
-      ...(selectedResourceId && { resourceId: selectedResourceId }),
-    }),
-    [selectedResourceId],
-  );
 
   const {
-    data: chapterInfoData,
+    chapterInfo,
+    storedResources,
+    selectedResourceId,
     error,
-    isValidating,
+    isLoadingOrValidating,
+    isError,
     mutate,
-  } = useSWRImmutable<ChapterInfoResponse>(makeChapterInfoUrl(chapterId, lang, apiParams), () =>
-    getChapterInfo(chapterId, lang, apiParams),
-  );
-
-  const chapterInfo = chapterInfoData?.chapterInfo;
-  const resources = chapterInfoData?.resources;
-
-  useEffect(() => {
-    setStoredResources(null);
-  }, [chapterId, lang]);
-
-  useEffect(() => {
-    if (resources && resources.length > 0) setStoredResources(resources);
-  }, [resources]);
-
-  const handleResourceChange = useCallback(
-    (resourceId: string) => {
-      setSelectedResourceId(resourceId);
-      const newUrl = getSurahInfoNavigationUrl(chapterId, resourceId);
-      fakeNavigate(newUrl, router.locale || Language.EN);
-    },
-    [chapterId, router.locale],
-  );
-
-  const isLoadingOrValidating = isValidating || (!chapterInfo && !error);
-  const isError = !isLoadingOrValidating && error;
+    handleResourceChange,
+  } = useSurahInfo({ chapterId, initialResourceId });
 
   return (
     <>
@@ -145,7 +107,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
 
         {isError && (
           <div className={styles.statusContainer} data-status="error">
-            <Error onRetryClicked={() => mutate()} error={error} />
+            <Error onRetryClicked={() => mutate()} error={error as Error} />
           </div>
         )}
 
