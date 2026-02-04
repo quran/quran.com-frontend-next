@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/constants';
 
 $calligraphy-offset: -0.875rem;
 $container-min-height: 200px;
@@ -202,24 +203,19 @@ div {
   block-size: calc(var(--spacing-small-plus-px) * 4);
   padding-inline: var(--spacing-medium-px);
   border-radius: var(--border-radius-pill);
-  background-color: var(--color-background-alternative-medium);
+  background-color: var(--color-background-alternative-faint);
   color: var(--color-text-default-new);
   line-height: 1;
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-small);
   transition: background-color var(--transition-fast), transform var(--transition-fast);
 
-  &:where(:hover, :focus-visible, [aria-selected='true']):not(:disabled) {
-    background-color: var(--color-blue-buttons-and-icons);
+  &:where(:hover, :focus-visible, [aria-selected='true'], &.resourceTabActive):not(:disabled) {
+    background-color: var(--color-success-medium);
     color: var(--color-text-white);
   }
 
   &:active:not(:disabled) {
-    transform: scale(0.97);
-  }
-
-  &.resourceTabActive {
-    background-color: var(--color-blue-buttons-and-icons);
-    color: var(--color-text-white);
+    transform: scale(constants.$button-active-scale);
   }
 }
