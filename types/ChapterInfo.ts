@@ -5,6 +5,7 @@ interface ChapterInfo {
   shortText: string;
   source: string;
   languageName?: string;
+  resourceId?: number;
 }
 
 export interface ChapterInfoResource {

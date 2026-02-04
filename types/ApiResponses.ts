@@ -3,7 +3,7 @@ import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
 import AvailableWordByWordTranslation from './AvailableWordByWordTranslation';
 import Chapter from './Chapter';
-import ChapterInfo from './ChapterInfo';
+import ChapterInfo, { ChapterInfoResource } from './ChapterInfo';
 import Footnote from './Footnote';
 import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';

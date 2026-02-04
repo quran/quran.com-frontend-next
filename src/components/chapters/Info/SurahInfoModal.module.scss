@@ -108,17 +108,12 @@ $line-height-relaxed: 1.6;
   }
 }
 
-.loadingContainer,
-.errorContainer {
+.statusContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
-}
-
-.errorContainer {
-  color: var(--color-text-error);
 }
 
 div {
