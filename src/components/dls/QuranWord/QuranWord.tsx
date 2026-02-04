@@ -369,14 +369,18 @@ const QuranWord = ({
           return <>{children}</>;
         }}
       >
-        {wordText}
+        <span className={styles.wbwContent}>
+          {wordText}
+          {isWordByWordAllowed && (
+            <>
+              {showWordByWordTransliteration && (
+                <InlineWordByWord text={word.transliteration?.text} />
+              )}
+              {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
+            </>
+          )}
+        </span>
       </Wrapper>
-      {isWordByWordAllowed && (
-        <>
-          {showWordByWordTransliteration && <InlineWordByWord text={word.transliteration?.text} />}
-          {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
-        </>
-      )}
     </div>
   );
 };

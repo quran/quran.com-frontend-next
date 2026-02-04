@@ -18,6 +18,11 @@
 
 .wbwContainer {
   text-align: center;
+}
+
+.wbwContent {
+  display: inline-block;
+  vertical-align: top;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
   padding-inline-start: var(--spacing-micro);
