@@ -2,6 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './SurahInfoModal.module.scss';
 import useSurahInfo from './useSurahInfo';
@@ -11,6 +12,8 @@ import ChapterIconContainer, {
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import Error from '@/components/Error';
+import FontSizeControl from '@/components/QuranReader/ReadingView/StudyModeModal/FontSizeControl';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Chapter from '@/types/Chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 
@@ -27,6 +30,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
 }) => {
   const { t, lang } = useTranslation();
   const shouldHideTransliteration = shouldUseMinimalLayout(lang);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   const {
     chapterInfo,
@@ -71,6 +75,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
       </div>
 
       <div className={styles.options}>
+        <FontSizeControl fontType="surahInfo" />
         {storedResources && storedResources.length > 1 && (
           <div className={styles.resourceTabs} role="tablist" aria-label="Resource selection">
             {storedResources.map((resource) => {
@@ -111,7 +116,10 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
 
       {chapterInfo && (
         <div
-          className={styles.descriptionContainer}
+          className={classNames(
+            styles.descriptionContainer,
+            styles[`surahInfo-font-size-${quranReaderStyles.surahInfoFontScale}`],
+          )}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: chapterInfo.source
