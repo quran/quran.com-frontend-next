@@ -9,15 +9,14 @@ $line-height-relaxed: 1.6;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xsmall);
-  padding-block-start: var(--spacing-large-px);
-  padding-block-end: var(--spacing-mega);
-  margin-block-end: var(--spacing-mega);
-  border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  padding-block: var(--spacing-large-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-new);
+}
 
-  @include breakpoints.smallerThanTablet {
-    margin-block-end: calc(2 * var(--spacing-small));
-    padding-block-start: calc(2 * var(--spacing-small));
-  }
+.options {
+  display: flex;
+  gap: var(--spacing-medium2-px);
+  margin-block: var(--spacing-medium2-px);
 }
 
 .calligraphyContainer {
@@ -154,15 +153,6 @@ div {
   }
 }
 
-.bottomSheetOnDesktopHeaderSeparator {
-  display: none;
-  @include breakpoints.tablet {
-    display: block;
-    padding-block-start: var(--spacing-medium3-px);
-    border-block-end: var(--spacing-hairline-px) solid var(--color-borders-hairline);
-  }
-}
-
 .bottomSheetOnDesktopInnerContent {
   @include breakpoints.tablet {
     /**
@@ -178,9 +168,6 @@ div {
 .resourceTabs {
   display: flex;
   gap: var(--spacing-small2-px);
-  padding-block-end: var(--spacing-xxsmall-px);
-  margin-block-start: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium-px);
   overflow-x: auto;
 
   &::-webkit-scrollbar {

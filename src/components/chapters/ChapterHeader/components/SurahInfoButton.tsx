@@ -84,6 +84,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
           )}
           overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
           innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
+          closeIconClassName={styles.closeIconContainer}
           size={ContentModalSize.MEDIUM}
         >
           <SurahInfoContent chapterId={chapterId} chapter={chapter} />

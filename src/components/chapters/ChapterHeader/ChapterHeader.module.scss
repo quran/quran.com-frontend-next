@@ -297,22 +297,35 @@ $bismillahSvgInlineSizeMobile: 148px;
   font-size: var(--font-size-large2);
 }
 
-.surahInfoContent {
-  @include breakpoints.smallerThanTablet {
-    overflow-y: auto;
-  }
-}
-
 // Need div to get higher specificity
 div {
-  &.surahInfoHeader {
-    @include breakpoints.smallerThanTablet {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  &.surahInfoContent {
+    background-color: var(--color-background-elevated-new);
 
-      block-size: calc(2 * var(--spacing-large-px));
-      padding-block: 0;
+    @include breakpoints.smallerThanTablet {
+      overflow-y: auto;
+    }
+  }
+
+  &.surahInfoHeader {
+    background-color: var(--color-background-elevated-new);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+
+    block-size: calc(2 * var(--spacing-large-px));
+    padding-block: 0;
+
+    @include breakpoints.tablet {
+      min-block-size: var(--spacing-xxlarge-px);
+      align-items: flex-start;
+      border-block-end: var(--spacing-hairline-px) solid var(--color-separators-new);
+
+      .closeIconContainer {
+        inset-block-start: var(--spacing-small2-px);
+      }
     }
   }
 }
