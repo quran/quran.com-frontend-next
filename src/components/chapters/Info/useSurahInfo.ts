@@ -16,14 +16,15 @@ interface UseSurahInfoParams {
 }
 
 interface UseSurahInfoResult {
-  chapterInfo: ChapterInfoResponse['chapterInfo'];
-  resources: ChapterInfoResponse['resources'];
+  chapterInfo?: ChapterInfoResponse['chapterInfo'];
+  resources?: ChapterInfoResponse['resources'];
   storedResources: ChapterInfoResponse['resources'];
   selectedResourceId: string | null;
   error: unknown;
   isLoadingOrValidating: boolean;
   isError: boolean;
   isValidating: boolean;
+  isEmpty: boolean;
   mutate: () => void;
   handleResourceChange: (resourceId: string) => void;
 }
@@ -88,8 +89,9 @@ const useSurahInfo = ({ chapterId, initialResourceId }: UseSurahInfoParams): Use
     [chapterId, router.locale],
   );
 
-  const isLoadingOrValidating = isValidating || (!chapterInfo && !error);
+  const isLoadingOrValidating = isValidating || (!chapterInfoData && !error);
   const isError = !isLoadingOrValidating && error;
+  const isEmpty = !isLoadingOrValidating && !isError && !chapterInfo;
 
   return {
     chapterInfo,
@@ -99,6 +101,7 @@ const useSurahInfo = ({ chapterId, initialResourceId }: UseSurahInfoParams): Use
     error,
     isLoadingOrValidating,
     isError,
+    isEmpty,
     isValidating,
     mutate,
     handleResourceChange,

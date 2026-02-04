@@ -115,6 +115,11 @@ $line-height-relaxed: 1.6;
   align-items: center;
   min-block-size: $container-min-height;
   padding-block: var(--spacing-large);
+
+  &[data-status='empty'] {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 div {
