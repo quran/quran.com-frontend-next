@@ -25,12 +25,12 @@ const InlineWordByWord: React.FC<Props> = ({ text, className }) => {
   const wordByWordFontScale = useSelector(selectWordByWordFontScale, shallowEqual);
 
   return (
-    <span
+    <p
       className={classNames(styles.word, className, FONT_SIZE_CLASS_MAP[wordByWordFontScale])}
       dir="auto"
     >
       {text}
-    </span>
+    </p>
   );
 };
 
