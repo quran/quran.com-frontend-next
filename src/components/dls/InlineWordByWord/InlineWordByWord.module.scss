@@ -1,6 +1,8 @@
 @use 'src/styles/breakpoints';
 
 .word {
+  // display as block so it appears on its own line below the word
+  display: block;
   /**
         This is needed for when the translation/transliteration content
         is too big to be fit into one line on mobile

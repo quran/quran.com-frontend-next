@@ -369,7 +369,7 @@ const QuranWord = ({
           return <>{children}</>;
         }}
       >
-        <>
+        <span className={styles.wbwContent}>
           {wordText}
           {isWordByWordAllowed && (
             <>
@@ -379,7 +379,7 @@ const QuranWord = ({
               {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
             </>
           )}
-        </>
+        </span>
       </Wrapper>
     </div>
   );
