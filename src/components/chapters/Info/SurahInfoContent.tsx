@@ -12,6 +12,7 @@ import ChapterIconContainer, {
   ChapterIconsSize,
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
+import Error from '@/components/Error';
 import { ChapterInfoResponse } from '@/types/ApiResponses';
 import Chapter from '@/types/Chapter';
 import Language from '@/types/Language';
@@ -47,6 +48,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
     data: chapterInfoData,
     error,
     isValidating,
+    mutate,
   } = useSWRImmutable<ChapterInfoResponse>(makeChapterInfoUrl(chapterId, lang, apiParams), () =>
     getChapterInfo(chapterId, lang, apiParams),
   );
@@ -63,27 +65,8 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
     [chapterId, router.locale],
   );
 
-  if (!chapterInfo && isValidating && !error) {
-    return (
-      <div className={styles.surahInfoModalContent}>
-        <div className={styles.loadingContainer}>
-          <Spinner />
-        </div>
-      </div>
-    );
-  }
-
-  if (error && !chapterInfo) {
-    return (
-      <div className={styles.surahInfoModalContent}>
-        <div className={styles.errorContainer}>
-          <p>{t('common:error.general')}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!chapterInfo) return null;
+  const isLoadingOrValidating = isValidating || (!chapterInfo && !error);
+  const isError = !isLoadingOrValidating && error;
 
   return (
     <>
@@ -120,28 +103,38 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
           </div>
         </div>
 
-        {resources.length > 0 && (
+        {resources && resources.length > 0 && (
           <div className={styles.resourceTabs}>
             {resources.map((resource) => (
               <button
                 key={resource.id}
                 type="button"
-                className={classNames(styles.resourceTab, {
-                  [styles.resourceTabActive]: String(resource.id) === selectedResourceId,
-                })}
                 onClick={() => handleResourceChange(String(resource.id))}
+                className={classNames(styles.resourceTab, {
+                  [styles.resourceTabActive]:
+                    String(resource.id) === selectedResourceId ||
+                    chapterInfo?.resourceId?.toString() === resource.id.toString(),
+                })}
               >
-                {resource.translatedName?.name || resource.name}
+                {resource.translatedName?.name ?? resource.name}
               </button>
             ))}
           </div>
         )}
 
-        {error ? (
-          <div className={styles.errorContainer}>
-            <p>{t('common:error.general')}</p>
+        {isLoadingOrValidating && (
+          <div className={styles.statusContainer} data-status="loading">
+            <Spinner />
           </div>
-        ) : (
+        )}
+
+        {isError && (
+          <div className={styles.statusContainer} data-status="error">
+            <Error onRetryClicked={() => mutate()} error={error} />
+          </div>
+        )}
+
+        {chapterInfo && (
           <div
             className={styles.descriptionContainer}
             // eslint-disable-next-line react/no-danger
