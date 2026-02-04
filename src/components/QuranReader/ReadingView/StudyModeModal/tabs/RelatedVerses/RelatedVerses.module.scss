@@ -1,14 +1,15 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .collapsibleItem {
-  border-block-end: 1px solid var(--color-borders-hairline);
+}
 
-  &:last-child {
-    border-block-end: none;
-  }
+.separatorContainer {
+  @include utility.edgeHorizontalPadding;
 }
 
 .collapsibleHeader {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,12 +51,18 @@
 }
 
 .arabicText {
+  @include utility.edgeHorizontalPadding;
   margin-block: var(--spacing-small-px);
 }
 
 .translationsContainer {
+  @include utility.edgeHorizontalPadding;
   display: flex;
   flex-direction: column;
+}
+
+.ctaContainer {
+  @include utility.edgeHorizontalPadding;
 }
 
 .goToVerseButton {
@@ -64,6 +71,7 @@
 }
 
 .skeletonContainer {
+  @include utility.edgeHorizontalPadding;
   margin-block: var(--spacing-medium2-px);
   display: flex;
   flex-direction: column;

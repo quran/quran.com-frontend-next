@@ -15,6 +15,7 @@ import TranslationText from '@/components/QuranReader/TranslationView/Translatio
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Collapsible from '@/dls/Collapsible/Collapsible';
 import Pill from '@/dls/Pill';
+import Separator from '@/dls/Separator/Separator';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -142,19 +143,24 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
                     ))}
                   </div>
                 </div>
-                <Button
-                  className={styles.goToVerseButton}
-                  size={ButtonSize.Small}
-                  variant={ButtonVariant.Compact}
-                  onClick={handleGoToVerse}
-                >
-                  {t('go-to-verse')}
-                </Button>
+                <div className={styles.ctaContainer}>
+                  <Button
+                    className={styles.goToVerseButton}
+                    size={ButtonSize.Small}
+                    variant={ButtonVariant.Compact}
+                    onClick={handleGoToVerse}
+                  >
+                    {t('go-to-verse')}
+                  </Button>
+                </div>
               </div>
             )}
           </>
         )}
       </Collapsible>
+      <div className={styles.separatorContainer}>
+        <Separator />
+      </div>
     </div>
   );
 };

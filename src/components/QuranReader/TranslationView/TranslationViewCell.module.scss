@@ -149,7 +149,7 @@
 }
 
 .tabsContainer {
-  @include utility.scrollbar-none;
+  @include utility.scrollbarNone;
   @include utility.edgeHorizontalPadding;
   overflow-x: auto;
   box-sizing: border-box;
