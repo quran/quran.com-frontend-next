@@ -16,6 +16,10 @@ describe('RepeatAudioModal.helpers', () => {
       expect(fromPersistedValue(undefined, 5)).toBe(5);
     });
 
+    it('should return fallback when value is null (from backend when Infinity was stored)', () => {
+      expect(fromPersistedValue(null, 5)).toBe(5);
+    });
+
     it('should convert REPEAT_INFINITY (-1) to Infinity', () => {
       expect(fromPersistedValue(REPEAT_INFINITY, 2)).toBe(Infinity);
     });
