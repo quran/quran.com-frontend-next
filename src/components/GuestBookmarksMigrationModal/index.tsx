@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useRouter } from 'next/router';
@@ -21,6 +22,33 @@ import { isAuthPage } from '@/utils/routes';
 const OPT_OUT_STORAGE_KEY = 'guest-bookmarks-migration:opt-out';
 const NEXT_SHOW_STORAGE_KEY = 'guest-bookmarks-migration:next-show';
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+const safeGetLocalStorageItem = (key: string): string | null => {
+  if (typeof window === 'undefined') return null;
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+};
+
+const safeSetLocalStorageItem = (key: string, value: string) => {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(key, value);
+  } catch (error) {
+    /* ignore storage errors */
+  }
+};
+
+const safeRemoveLocalStorageItem = (key: string) => {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    /* ignore storage errors */
+  }
+};
 
 const GuestBookmarksMigrationModal = () => {
   const { t } = useTranslation('common');
@@ -59,13 +87,13 @@ const GuestBookmarksMigrationModal = () => {
 
     if (typeof window === 'undefined') return;
 
-    const isOptedOut = localStorage.getItem(OPT_OUT_STORAGE_KEY) === '1';
+    const isOptedOut = safeGetLocalStorageItem(OPT_OUT_STORAGE_KEY) === '1';
     if (isOptedOut) {
       setIsOpen(false);
       return;
     }
 
-    const nextShowAtValue = localStorage.getItem(NEXT_SHOW_STORAGE_KEY);
+    const nextShowAtValue = safeGetLocalStorageItem(NEXT_SHOW_STORAGE_KEY);
     const nextShowAt = nextShowAtValue ? parseInt(nextShowAtValue, 10) : 0;
 
     if (!Number.isNaN(nextShowAt) && Date.now() < nextShowAt) {
@@ -77,16 +105,15 @@ const GuestBookmarksMigrationModal = () => {
   }, [isPersistGateHydrationComplete, isLoggedIn, hasGuestBookmarks, router]);
 
   const persistOptOut = useCallback(() => {
-    if (typeof window === 'undefined') return;
-    localStorage.setItem(OPT_OUT_STORAGE_KEY, '1');
-    localStorage.removeItem(NEXT_SHOW_STORAGE_KEY);
+    safeSetLocalStorageItem(OPT_OUT_STORAGE_KEY, '1');
+    safeRemoveLocalStorageItem(NEXT_SHOW_STORAGE_KEY);
   }, []);
 
   const handleCancel = useCallback(() => {
     if (doNotShowAgain) {
       persistOptOut();
-    } else if (typeof window !== 'undefined') {
-      localStorage.setItem(NEXT_SHOW_STORAGE_KEY, String(Date.now() + ONE_DAY_MS));
+    } else {
+      safeSetLocalStorageItem(NEXT_SHOW_STORAGE_KEY, String(Date.now() + ONE_DAY_MS));
     }
 
     setIsOpen(false);
