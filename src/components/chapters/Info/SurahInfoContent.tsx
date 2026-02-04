@@ -78,7 +78,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
       <div className={styles.options}>
         <FontSizeControl fontType="surahInfo" />
         {storedResources && storedResources.length > 1 && (
-          <div className={styles.resourceTabs} role="tablist" aria-label="Resource selection">
+          <div className={styles.resourceTabs} role="tablist">
             {storedResources.map((resource) => {
               const isSelected =
                 String(resource.id) === selectedResourceId ||
