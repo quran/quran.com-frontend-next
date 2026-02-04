@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useLayoutEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
@@ -59,7 +59,7 @@ const useSurahInfo = ({ chapterId, initialResourceId }: UseSurahInfoParams): Use
     setStoredResources(null);
   }, [chapterId, router.locale]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (resources && resources.length > 0) setStoredResources(resources);
   }, [resources]);
 

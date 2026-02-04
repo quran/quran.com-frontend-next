@@ -40,6 +40,7 @@ const SurahInfoPage: React.FC<SurahInfoPageProps> = ({ chapter, initialResourceI
       size={ContentModalSize.MEDIUM}
       overlayClassName={surahInfoStyles.bottomSheetOnDesktopOverlay}
       innerContentClassName={surahInfoStyles.bottomSheetOnDesktopInnerContent}
+      closeIconClassName={styles.closeIconContainer}
     >
       <SurahInfoContent
         chapterId={String(chapterId)}

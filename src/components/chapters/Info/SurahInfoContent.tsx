@@ -40,41 +40,38 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
   } = useSurahInfo({ chapterId, initialResourceId });
 
   return (
-    <>
-      <div className={styles.bottomSheetOnDesktopHeaderSeparator} />
-      <div className={styles.surahInfoModalContent} data-testid="surah-info-content">
-        <div className={styles.headerContainer}>
-          <div className={styles.calligraphyContainer}>
-            <ChapterIconContainer
-              chapterId={chapterId}
-              size={ChapterIconsSize.XMega}
-              hasSurahPrefix={false}
-            />
-          </div>
-
-          {!shouldHideTransliteration && (
-            <h2 className={styles.surahName} data-testid="surah-name">
-              {t('common:surah')} {chapter.transliteratedName}
-            </h2>
-          )}
-
-          <div className={styles.detailsContainer}>
-            <div className={styles.detailItem}>
-              <p className={styles.detailHeader}>{t('common:ayahs')}:</p>
-              <p data-testid="surah-number-of-ayahs">
-                {toLocalizedNumber(chapter.versesCount, lang)}
-              </p>
-            </div>
-            <div className={styles.detailItem}>
-              <p className={styles.detailHeader}>{t('surah-info:revelation-place')}:</p>
-              <p data-testid="surah-revelation-place">
-                {t(`surah-info:${chapter.revelationPlace}`)}
-              </p>
-            </div>
-          </div>
+    <div className={styles.surahInfoModalContent} data-testid="surah-info-content">
+      <div className={styles.headerContainer}>
+        <div className={styles.calligraphyContainer}>
+          <ChapterIconContainer
+            chapterId={chapterId}
+            size={ChapterIconsSize.XMega}
+            hasSurahPrefix={false}
+          />
         </div>
 
-        {storedResources && storedResources.length > 0 && (
+        {!shouldHideTransliteration && (
+          <h2 className={styles.surahName} data-testid="surah-name">
+            {t('common:surah')} {chapter.transliteratedName}
+          </h2>
+        )}
+
+        <div className={styles.detailsContainer}>
+          <div className={styles.detailItem}>
+            <p className={styles.detailHeader}>{t('common:ayahs')}:</p>
+            <p data-testid="surah-number-of-ayahs">
+              {toLocalizedNumber(chapter.versesCount, lang)}
+            </p>
+          </div>
+          <div className={styles.detailItem}>
+            <p className={styles.detailHeader}>{t('surah-info:revelation-place')}:</p>
+            <p data-testid="surah-revelation-place">{t(`surah-info:${chapter.revelationPlace}`)}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.options}>
+        {storedResources && storedResources.length > 1 && (
           <div className={styles.resourceTabs} role="tablist" aria-label="Resource selection">
             {storedResources.map((resource) => {
               const isSelected =
@@ -98,28 +95,32 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
             })}
           </div>
         )}
-
-        {isLoadingOrValidating && (
-          <div className={styles.statusContainer} data-status="loading">
-            <Spinner />
-          </div>
-        )}
-
-        {isError && (
-          <div className={styles.statusContainer} data-status="error">
-            <Error onRetryClicked={() => mutate()} error={error as Error} />
-          </div>
-        )}
-
-        {chapterInfo && (
-          <div
-            className={styles.descriptionContainer}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{ __html: chapterInfo.text }}
-          />
-        )}
       </div>
-    </>
+
+      {isLoadingOrValidating && (
+        <div className={styles.statusContainer} data-status="loading">
+          <Spinner />
+        </div>
+      )}
+
+      {isError && (
+        <div className={styles.statusContainer} data-status="error">
+          <Error onRetryClicked={() => mutate()} error={error as Error} />
+        </div>
+      )}
+
+      {chapterInfo && (
+        <div
+          className={styles.descriptionContainer}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: chapterInfo.source
+              ? `<p>${chapterInfo.source}</p> ${chapterInfo.text}`
+              : chapterInfo.text,
+          }}
+        />
+      )}
+    </div>
   );
 };
 
