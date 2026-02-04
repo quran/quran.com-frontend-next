@@ -314,8 +314,6 @@ div {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-
-    block-size: calc(2 * var(--spacing-large-px));
     padding-block: 0;
 
     @include breakpoints.tablet {
@@ -326,6 +324,10 @@ div {
       .closeIconContainer {
         inset-block-start: var(--spacing-small2-px);
       }
+    }
+
+    @include breakpoints.smallerThanTablet {
+      min-block-size: calc(var(--spacing-medium-plus2-px) * 3);
     }
   }
 }

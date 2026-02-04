@@ -335,4 +335,11 @@ export default {
       verses: (state.pinnedVerses?.verses || []).map((v) => ({ ...v, serverId: undefined })),
     },
   }),
+  42: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
+    },
+  }),
 };
