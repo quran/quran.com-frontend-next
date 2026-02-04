@@ -17,8 +17,8 @@ div.contentModal {
   background: var(--color-background-elevated-new);
   border-radius: var(--border-radius-large-px) var(--border-radius-large-px) 0 0;
   @include breakpoints.tablet {
-    --spacing-edge-vertical-px: 20px;
-    --spacing-edge-horizontal-px: 30px;
+    --spacing-edge-vertical-px: var(--spacing-medium2-px);
+    --spacing-edge-horizontal-px: var(--spacing-large-px);
     block-size: auto;
     max-block-size: 85vh;
     inline-size: 80%;
