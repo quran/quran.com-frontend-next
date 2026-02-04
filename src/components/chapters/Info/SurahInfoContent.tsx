@@ -39,6 +39,7 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
     error,
     isLoadingOrValidating,
     isError,
+    isEmpty,
     mutate,
     handleResourceChange,
   } = useSurahInfo({ chapterId, initialResourceId });
@@ -111,6 +112,12 @@ const SurahInfoContent: React.FC<SurahInfoContentProps> = ({
       {isError && (
         <div className={styles.statusContainer} data-status="error">
           <Error onRetryClicked={() => mutate()} error={error as Error} />
+        </div>
+      )}
+
+      {isEmpty && (
+        <div className={styles.statusContainer} data-status="empty">
+          <p>{t('surah-info:not-found')}</p>
         </div>
       )}
 
