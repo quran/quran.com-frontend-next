@@ -70,7 +70,7 @@ const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className 
       >
         {t('info')}
       </button>
-      {chapterId && (
+      {chapterId && chapter && (
         <ContentModal
           isOpen={isOpen}
           onClose={handleClose}

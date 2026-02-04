@@ -90,7 +90,7 @@ const useSurahInfo = ({ chapterId, initialResourceId }: UseSurahInfoParams): Use
   );
 
   const isLoadingOrValidating = isValidating || (!chapterInfoData && !error);
-  const isError = !isLoadingOrValidating && error;
+  const isError = !isLoadingOrValidating && !!error;
   const isEmpty = !isLoadingOrValidating && !isError && !chapterInfo;
 
   return {
