@@ -100,6 +100,13 @@
   "beyond-ramadan": "Cresci oltre il Ramadan!",
   "bookmark": "Segnalibro",
   "bookmarked": "Segnalibro",
+  "bookmarks-migration": {
+    "body-1": "I tuoi segnalibri ora diventeranno <strong>Versetti salvati</strong> In <strong>Collezioni</strong>Per conservare i tuoi segnalibri attuali, accedi o crea un account.",
+    "body-2": "Abbiamo anche aggiunto un nuovo segnalibro di lettura per aiutarti a riprendere da dove eri rimasto.",
+    "checkbox": "Non visualizzare più questo messaggio (attenzione: perderai tutti i tuoi segnalibri attuali)",
+    "sign-in": "Accedi / Registrati",
+    "title": "Avviso: i segnalibri stanno cambiando"
+  },
   "both": "Entrambi",
   "cancel": "Annulla",
   "change-theme": "Cambia tema",

@@ -100,6 +100,13 @@
   "beyond-ramadan": "Groei voorbij de Ramadan!",
   "bookmark": "Bladwijzer",
   "bookmarked": "Bladwijzer",
+  "bookmarks-migration": {
+    "body-1": "Je bladwijzers worden nu <strong>Opgeslagen verzen</strong> in <strong>Collecties</strong>Om je huidige bladwijzers te behouden, moet je inloggen of een account aanmaken.",
+    "body-2": "We hebben ook een nieuwe leesbladwijzer toegevoegd, zodat je precies verder kunt lezen waar je gebleven was.",
+    "checkbox": "Toon dit bericht niet meer (Waarschuwing: u verliest al uw huidige bladwijzers)",
+    "sign-in": "Inloggen / Registreren",
+    "title": "Let op: bladwijzers worden gewijzigd."
+  },
   "both": "Beide",
   "cancel": "Annuleren",
   "change-theme": "Thema wijzigen",

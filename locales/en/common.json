@@ -100,6 +100,13 @@
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Bookmark",
   "bookmarked": "Bookmarked",
+  "bookmarks-migration": {
+    "body-1": "Your bookmarks will now become <strong>Saved Verses</strong> in <strong>Collections</strong>. To keep your current bookmarks, please sign in or create an account.",
+    "body-2": "We've also added a new Reading Bookmark to help you continue right where you left off.",
+    "checkbox": "Do not show this message again (Warning you will lose all of your current bookmarks)",
+    "sign-in": "Sign In / Sign Up",
+    "title": "Notice: Bookmarks Are Changing"
+  },
   "both": "Both",
   "cancel": "Cancel",
   "change-theme": "Change Theme",
@@ -526,12 +533,5 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes",
-  "bookmarks-migration": {
-    "title": "Notice: Bookmarks Are Changing",
-    "body-1": "Your bookmarks will now become <strong>Saved Verses</strong> in <strong>Collections</strong>. To keep your current bookmarks, please sign in or create an account.",
-    "body-2": "We've also added a new Reading Bookmark to help you continue right where you left off.",
-    "checkbox": "Do not show this message again (Warning you will lose all of your current bookmarks)",
-    "sign-in": "Sign In / Sign Up"
-  }
+  "yes": "Yes"
 }
