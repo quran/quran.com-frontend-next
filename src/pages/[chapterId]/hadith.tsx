@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
@@ -93,14 +91,13 @@ const AyahHadithPage: NextPage<AyahHadithPageProps> = ({
   );
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId } = params;
   const verseKey = String(chapterId);
   const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+  if (!isValidVerseKey(chaptersData, verseKey)) return { notFound: true };
 
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
@@ -113,17 +110,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const [hadithsData, verseData, pagesLookupResponse] = await Promise.all([
       getAyahHadiths(verseKey, locale as Language),
       fetcher(verseUrl) as Promise<VerseResponse>,
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
+      getPagesLookup({ chapterNumber: Number(chapterNumber), mushaf: mushafId }),
     ]);
 
     const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
-
-    const fallback = {
-      [verseUrl]: verseData,
-    };
 
     return {
       props: {
@@ -132,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
         verseNumber,
         hadithsInitialData: hadithsData,
-        fallback,
+        fallback: { [verseUrl]: verseData },
         verse: verseData.verse,
         versesResponse,
       },
@@ -141,11 +131,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   } catch (error) {
     logErrorToSentry(error, {
       transactionName: 'getStaticProps-AyahHadithPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
-        verseKey,
-      },
+      metadata: { chapterIdOrSlug: String(params.chapterId), locale, verseKey },
     });
     return {
       notFound: true,

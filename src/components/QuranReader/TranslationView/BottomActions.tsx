@@ -19,7 +19,6 @@ import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVersesIcon from '@/icons/related-verses.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
-import Language from '@/types/Language';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -84,7 +83,7 @@ const BottomActions = ({
   const hasQiraatData = (qiraatCount ?? 0) > 0;
 
   // Use backend hadith count to check if hadiths exist for this verse
-  const { data: hadithCount } = useBatchedCountRangeHadiths(verseKey, lang as Language);
+  const { data: hadithCount } = useBatchedCountRangeHadiths(verseKey);
   const hasHadiths = (hadithCount ?? 0) > 0;
 
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {

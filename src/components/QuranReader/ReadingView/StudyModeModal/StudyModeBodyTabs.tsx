@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -18,7 +17,6 @@ import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
 import { AyahHadithsResponse } from '@/types/Hadith';
-import Language from '@/types/Language';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
@@ -48,10 +46,7 @@ const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
 
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/RelatedVerses/StudyModeRelatedVersesTab'),
-  {
-    ssr: false,
-    loading: TafsirSkeleton,
-  },
+  { loading: TafsirSkeleton },
 );
 
 export const TAB_COMPONENTS: Partial<
@@ -107,38 +102,23 @@ export const useStudyModeTabs = ({
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   hasRelatedVerses: boolean;
 }): TabConfig[] => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
 
-  const { data: questionData, isLoading: isLoadingQuestions } =
-    useBatchedCountRangeQuestions(verseKey);
-  const hasQuestions = questionData?.total > 0 || isLoadingQuestions;
+  const { data: questionData, isLoading: isQnaLoading } = useBatchedCountRangeQuestions(verseKey);
+  const hasQuestions = questionData?.total > 0 || isQnaLoading;
   const isClarificationQuestion = !!questionData?.types?.[QuestionType.CLARIFICATION];
 
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
 
-  const { data: hadithCount, isLoading: isLoadingHadiths } = useBatchedCountRangeHadiths(
-    verseKey,
-    lang as Language,
-  );
+  const { data: hadithCount, isLoading: isLoadingHadiths } = useBatchedCountRangeHadiths(verseKey);
   const hasHadiths = (hadithCount ?? 0) > 0 || isLoadingHadiths;
 
   // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender.
   useLayoutEffect(() => {
-    // Auto-close Answers tab when there are no questions
-    if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) {
-      onTabChange?.(null);
-    }
-
-    // Auto-close Qiraat tab when there are no qiraat
-    if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
-      onTabChange?.(null);
-    }
-
-    // Auto-close Hadith tab when there are no hadiths
-    if (activeTab === StudyModeTabId.HADITH && !hasHadiths) {
-      onTabChange?.(null);
-    }
+    if (activeTab === StudyModeTabId.ANSWERS && !hasQuestions) onTabChange?.(null);
+    if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) onTabChange?.(null);
+    if (activeTab === StudyModeTabId.HADITH && !hasHadiths) onTabChange?.(null);
   }, [activeTab, hasQuestions, hasQiraat, hasHadiths, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
