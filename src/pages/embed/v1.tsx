@@ -147,6 +147,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
     const customHeight = parseString(query.height) || undefined;
     const mergeVerses = parseBool(query.mergeVerses as string | string[] | undefined, false);
     const clientId = parseString(query.clientId) || undefined;
+    const lpMode = parseBool(query.lp as string | string[] | undefined, false);
 
     const data = await getAyahWidgetData({
       ayah,
@@ -170,6 +171,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       customHeight,
       clientId,
       referer: String(referer),
+      lp: lpMode,
     });
 
     const serializable = JSON.parse(JSON.stringify({ verses: data.verses, options: data.options }));

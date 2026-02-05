@@ -2,6 +2,7 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
+import ExternalLinkIcon from '@/icons/bx-link-external.svg';
 import CopyIcon from '@/icons/copy.svg';
 import PlayIcon from '@/icons/play-outline.svg';
 import ShareIcon from '@/icons/share.svg';
@@ -70,6 +71,10 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const locale = options.locale || 'en';
   const isRtl = isRTLLocale(locale);
 
+  // Determine if we are in learning plan mode
+  // If so, we show a simplified header
+  const isLearningPlan = Boolean(options.lp);
+
   // Display the selected verse or verse range in the header with localized numbers.
   const verseLabel = formatVerseLabel(verse.verseNumber, options.rangeEnd, locale);
   const verseCaption = `${verse.chapterId}:${verse.verseNumber}`;
@@ -98,6 +103,9 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   // Construct the URL to the verse on Quran.com
   const verseUrl = `https://quran.com${localePrefix}/${verseCaptionUrl}`;
 
+  const showExternalLink = isLearningPlan;
+  const hasLeftActions = (options.enableAudio && audioUrl) || showExternalLink;
+
   // Action buttons component (reused in both positions)
   const ActionButtons = (
     <div
@@ -109,31 +117,46 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
       }}
     >
       {options.enableAudio && audioUrl && (
-        <>
-          <button
-            data-audio-button
-            type="button"
-            style={ICON_BUTTON_STYLE(colors)}
-            aria-label="Play audio"
-          >
-            <span data-play-icon>
-              <PlayIcon style={{ width: 16, height: 16 }} />
-            </span>
-            <span data-pause-icon style={{ display: 'none' }}>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="4" y="3" width="3" height="10" />
-                <rect x="9" y="3" width="3" height="10" />
-              </svg>
-            </span>
-          </button>
-          <div
-            style={{
-              width: 1,
-              height: 'var(--widget-header-action-divider-height, 32px)',
-              backgroundColor: colors.borderColor,
-            }}
-          />
-        </>
+        <button
+          data-audio-button
+          type="button"
+          style={ICON_BUTTON_STYLE(colors)}
+          aria-label="Play audio"
+        >
+          <span data-play-icon>
+            <PlayIcon style={{ width: 16, height: 16 }} />
+          </span>
+          <span data-pause-icon style={{ display: 'none' }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="4" y="3" width="3" height="10" />
+              <rect x="9" y="3" width="3" height="10" />
+            </svg>
+          </span>
+        </button>
+      )}
+      {showExternalLink && (
+        <a
+          href={verseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            ...ICON_BUTTON_STYLE(colors),
+            textDecoration: 'none',
+          }}
+          aria-label="Open verse on Quran.com"
+        >
+          <ExternalLinkIcon style={{ width: 16, height: 16 }} />
+        </a>
+      )}
+      {/* separator */}
+      {hasLeftActions && (
+        <div
+          style={{
+            width: 1,
+            height: 'var(--widget-header-action-divider-height, 32px)',
+            backgroundColor: colors.borderColor,
+          }}
+        />
       )}
       <button
         type="button"
@@ -176,19 +199,21 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           justifyContent: isRtl ? 'flex-end' : 'flex-start',
         }}
       >
-        <a
-          href={verseUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            fontSize: 'var(--widget-header-link-size, 13px)',
-            color: colors.secondaryText,
-            textUnderlineOffset: 2,
-            fontWeight: 500,
-          }}
-        >
-          {siteLinkLabel}
-        </a>
+        {!isLearningPlan && (
+          <a
+            href={verseUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontSize: 'var(--widget-header-link-size, 13px)',
+              color: colors.secondaryText,
+              textUnderlineOffset: 2,
+              fontWeight: 500,
+            }}
+          >
+            {siteLinkLabel}
+          </a>
+        )}
       </div>
     </div>
   );

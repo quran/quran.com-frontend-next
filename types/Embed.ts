@@ -43,6 +43,9 @@ export type WidgetOptions = {
   // Should the widget have a play button
   enableAudio: boolean;
 
+  // Minimal learning-plan mode
+  lp?: boolean;
+
   // Should the widget display inline word-by-word translations
   enableWbw: boolean;
 

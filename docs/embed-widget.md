@@ -156,6 +156,7 @@ If you are using a custom embed domain, load the script from the same origin as 
 | `theme`               | Theme (`light`/`dark`/`sepia`)                       | `light`       |
 | `mushaf`              | Mushaf type (`qpc`, `kfgqpc_v1`, etc.)               | `qpc`         |
 | `locale`              | Widget locale                                        | `en`          |
+| `lp`                  | Minimal learning-plan mode (`true`/`false`)          | `false`       |
 | `wbw`                 | Enable word-by-word translation (`true`/`false`)     | `false`       |
 | `wbwTransliteration`  | Enable word-by-word transliteration (`true`/`false`) | `false`       |
 | `width`               | Iframe width (CSS length)                            | `100%`        |

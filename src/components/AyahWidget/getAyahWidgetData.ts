@@ -95,6 +95,7 @@ const sanitizeVerse = (verse: Verse): Verse => ({
  * @param {object} params - Widget parameters.
  * @param {boolean} params.enableAudio - Enable audio playback.
  * @param {boolean} params.enableWbw - Enable word-by-word translation.
+ * @param {boolean} params.lp - Enable minimal learning plan mode (simplified header).
  * @param {number | undefined} params.rangeEnd - Optional range end verse number.
  * @param {ThemeTypeVariant} params.theme - Theme variant.
  * @param {MushafType} params.mushaf - Mushaf style.
@@ -137,6 +138,7 @@ const buildWidgetOptions = (
     customHeight?: string;
     showArabic: boolean;
     mergeVerses?: boolean;
+    lp?: boolean; // minimal learning plan mode
   },
   meta?: {
     hasAnyTranslations: boolean;
@@ -173,6 +175,7 @@ const buildWidgetOptions = (
   audioStart: meta?.audioStart,
   audioEnd: meta?.audioEnd,
   mergeVerses: params.mergeVerses,
+  lp: params.lp,
 });
 
 /**
@@ -306,6 +309,7 @@ export type AyahWidgetDataInput = {
   customHeight?: string;
   clientId?: string; // for tracking usage
   referer?: string; // url of the page hosting the widget iframe
+  lp?: boolean; // minimal learning plan mode
 };
 
 export type AyahWidgetData = {
@@ -794,6 +798,7 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
       customWidth,
       customHeight,
       mergeVerses,
+      lp: input.lp,
     },
     {
       hasAnyTranslations,
