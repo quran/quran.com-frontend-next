@@ -17,7 +17,7 @@
   font-size: var(--font-size-jumbo);
   padding-inline-end: var(--spacing-small);
   :global(html[lang='ar']) & {
-    font-family: 'Kitab' !important;
+    font-family: 'Kitab';
   }
   :global(html[lang='ar']) & * {
     font-family: inherit !important;

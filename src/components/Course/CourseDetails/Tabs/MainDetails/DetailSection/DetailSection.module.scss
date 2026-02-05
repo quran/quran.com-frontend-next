@@ -10,7 +10,7 @@
 
 .description {
   :global(html[lang='ar']) & {
-    font-family: 'Kitab' !important;
+    font-family: 'Kitab';
   }
   :global(html[lang='ar']) & * {
     font-family: inherit !important;

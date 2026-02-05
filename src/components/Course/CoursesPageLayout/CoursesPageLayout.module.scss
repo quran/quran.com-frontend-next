@@ -16,7 +16,7 @@
   padding-block-start: var(--spacing-small);
   padding-inline: var(--spacing-small);
   :global(html[lang='ar']) & {
-    font-family: 'Kitab' !important;
+    font-family: 'Kitab';
   }
   :global(html[lang='ar']) & * {
     font-family: inherit !important;
