@@ -1,5 +1,7 @@
 import { useContext, useMemo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import useCountRangeHadiths from './useCountRangeHadiths';
 
 import DataContext from '@/contexts/DataContext';
@@ -26,13 +28,10 @@ const BATCH_SIZE = 20;
  * - Request 1:25 → fetches 1:21 to 1:40
  *
  * @param {string} verseKey - The verse key in format "chapterId:verseNumber"
- * @param {Language} language - The language of the hadiths
  * @returns {BatchedCountRangeHadithsResponse} Object containing the hadith count, loading state, and error
  */
-const useBatchedCountRangeHadiths = (
-  verseKey: string,
-  language: Language,
-): BatchedCountRangeHadithsResponse => {
+const useBatchedCountRangeHadiths = (verseKey: string): BatchedCountRangeHadithsResponse => {
+  const { lang } = useTranslation();
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey || '').map(Number);
 
   const chaptersData = useContext(DataContext);
@@ -55,7 +54,7 @@ const useBatchedCountRangeHadiths = (
     };
   }, [verseKey, chapterId, verseNumber, chapterData]);
 
-  const { data, isLoading, error } = useCountRangeHadiths(batchRange, language);
+  const { data, isLoading, error } = useCountRangeHadiths(batchRange, lang as Language);
 
   return {
     data: data?.[verseKey] ?? 0,
