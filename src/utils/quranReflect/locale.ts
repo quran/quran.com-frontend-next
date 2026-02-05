@@ -1,7 +1,7 @@
 import Language from '@/types/Language';
 import { getLocaleName } from '@/utils/locale';
 
-export const ARABIC_LANGUAGE_ID = 1;
+const ARABIC_LANGUAGE_ID = 1;
 const URDU_LANGUAGE_ID = 5;
 
 const RTL_LANGUAGE_IDS = [ARABIC_LANGUAGE_ID, URDU_LANGUAGE_ID];
