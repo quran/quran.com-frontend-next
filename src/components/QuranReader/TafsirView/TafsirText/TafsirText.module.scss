@@ -6,6 +6,13 @@
   }
 }
 
+.text[lang='ar'] {
+  font-family: 'Kitab' !important;
+}
+.text[lang='ar'] * {
+  font-family: inherit !important;
+}
+
 .xs {
   font-size: var(--font-size-xsmall);
 }

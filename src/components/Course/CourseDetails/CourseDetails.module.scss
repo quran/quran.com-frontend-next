@@ -16,6 +16,12 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
   padding-inline-end: var(--spacing-small);
+  :global(html[lang='ar']) & {
+    font-family: 'Kitab' !important;
+  }
+  :global(html[lang='ar']) & * {
+    font-family: inherit !important;
+  }
 }
 
 .author {

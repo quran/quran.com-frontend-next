@@ -69,6 +69,13 @@
   direction: rtl;
 }
 
+.body[lang='ar'] {
+  font-family: 'Kitab' !important;
+}
+.body[lang='ar'] * {
+  font-family: inherit !important;
+}
+
 .ltr {
   direction: ltr;
 }

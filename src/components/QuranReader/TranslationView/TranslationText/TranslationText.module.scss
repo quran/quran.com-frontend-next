@@ -37,6 +37,13 @@ $translation-line-height: 1.5;
   text-align: right;
 }
 
+.rtl[lang='ar'] {
+  font-family: 'Kitab' !important;
+}
+.rtl[lang='ar'] * {
+  font-family: inherit !important;
+}
+
 .urdu {
   font-family: 'MehrNastaliq', 'Mehr Nastaliq Web', 'Helvetica Neue', Helvetica, Arial, serif !important; // important is needed to over-ride the language specific font-family
 }

@@ -37,6 +37,13 @@
   @include footnote.footnote-styling;
 }
 
+.translationText[lang='ar'] {
+  font-family: 'Kitab' !important;
+}
+.translationText[lang='ar'] * {
+  font-family: inherit !important;
+}
+
 // RTL/LTR direction support
 .ltr {
   direction: ltr;

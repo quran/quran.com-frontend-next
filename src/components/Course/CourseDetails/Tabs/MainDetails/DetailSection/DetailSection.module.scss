@@ -7,3 +7,12 @@
 .container {
   padding-block: var(--spacing-xsmall);
 }
+
+.description {
+  :global(html[lang='ar']) & {
+    font-family: 'Kitab' !important;
+  }
+  :global(html[lang='ar']) & * {
+    font-family: inherit !important;
+  }
+}

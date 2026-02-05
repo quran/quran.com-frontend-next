@@ -167,6 +167,7 @@ const ReflectionItem: React.FC<Props> = ({
         <p className="debugger" />
         <span
           className={classNames(styles.body, FONT_SIZE_CLASS_MAP[fontScale])}
+          lang={reflection.languageId === 1 ? 'ar' : undefined}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),

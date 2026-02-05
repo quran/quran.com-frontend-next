@@ -15,4 +15,10 @@
   text-align: center;
   padding-block-start: var(--spacing-small);
   padding-inline: var(--spacing-small);
+  :global(html[lang='ar']) & {
+    font-family: 'Kitab' !important;
+  }
+  :global(html[lang='ar']) & * {
+    font-family: inherit !important;
+  }
 }
