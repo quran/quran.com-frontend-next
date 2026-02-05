@@ -15,6 +15,7 @@ const LOCALE_PRELOADED_FONTS = {
     { ...SURAH_NAMES_FONT },
   ],
   ar: [
+    { type: 'font/woff2', location: '/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2' },
     { type: 'font/woff2', location: '/fonts/lang/arabic/kitab-base.woff2' },
     { ...SURAH_NAMES_FONT },
   ],
