@@ -1,4 +1,5 @@
 @use 'src/components/QuranReader/TranslationView/TranslationText/footnote';
+@use 'src/styles/utility';
 
 .ayah {
   transition: color 0.15s ease-in-out;
@@ -35,13 +36,7 @@
 
 .translationText {
   @include footnote.footnote-styling;
-}
-
-.translationText[lang='ar'] {
-  font-family: 'Kitab';
-}
-.translationText[lang='ar'] * {
-  font-family: inherit;
+  @include utility.kitabFontLang;
 }
 
 // RTL/LTR direction support

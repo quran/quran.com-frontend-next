@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 // surah layout (grid layout)
 .surahLayout {
@@ -93,10 +94,5 @@
   border: 1px var(--color-borders-hairline) solid;
   border-radius: var(--border-radius-default);
   background-color: var(--color-success-faded);
-  :global(html[lang='ar']) & {
-    font-family: 'Kitab';
-  }
-  :global(html[lang='ar']) & * {
-    font-family: inherit;
-  }
+  @include utility.kitabFontHtmlLang;
 }

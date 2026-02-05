@@ -35,13 +35,7 @@ $translation-line-height: 1.5;
   direction: rtl;
   /* stylelint-disable-next-line csstools/use-logical */
   text-align: right;
-}
-
-.rtl[lang='ar'] {
-  font-family: 'Kitab';
-}
-.rtl[lang='ar'] * {
-  font-family: inherit;
+  @include utility.kitabFontLang;
 }
 
 .urdu {

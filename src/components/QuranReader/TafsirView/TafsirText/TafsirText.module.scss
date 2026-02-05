@@ -1,3 +1,5 @@
+@use 'src/styles/utility';
+
 .counter {
   margin-block-end: var(--spacing-xsmall);
   font-size: initial;
@@ -6,11 +8,8 @@
   }
 }
 
-.text[lang='ar'] {
-  font-family: 'Kitab';
-}
-.text[lang='ar'] * {
-  font-family: inherit;
+.text {
+  @include utility.kitabFontLang;
 }
 
 .xs {

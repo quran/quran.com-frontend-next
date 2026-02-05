@@ -1,3 +1,5 @@
+@use 'src/styles/utility';
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -31,12 +33,7 @@
     display: block;
   }
 
-  &[lang='ar'] {
-    font-family: 'Kitab';
-  }
-  &[lang='ar'] * {
-    font-family: inherit;
-  }
+  @include utility.kitabFontLang;
 }
 
 .moreOrLessText {
