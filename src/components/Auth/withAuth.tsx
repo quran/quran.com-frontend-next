@@ -16,14 +16,17 @@ import useHasMounted from '@/hooks/useHasMounted';
  * @example
  * const ProtectedComponent = withAuth(MyComponent);
  */
-const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>): React.FC<P> => {
+const withAuth = <P extends object>(
+  WrappedComponent: React.ComponentType<P>,
+  loader?: React.ReactNode,
+): React.FC<P> => {
   const WithAuth = (props: P) => {
     const { isAuthenticated, isLoading } = useAuthData();
     const hasMounted = useHasMounted();
 
     // Avoid redirect while auth state is initializing/loading
     if (!hasMounted || isLoading) {
-      return <Spinner size={SpinnerSize.Small} />;
+      return loader || <Spinner size={SpinnerSize.Small} />;
     }
 
     if (isAuthenticated) {
