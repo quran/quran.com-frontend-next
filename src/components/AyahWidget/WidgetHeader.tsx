@@ -83,10 +83,9 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const verseCaptionUrl = options.rangeEnd
     ? `${verse.chapterId}:${verse.verseNumber}-${options.rangeEnd}`
     : verseCaption;
-  const siteLinkLabel = `quran.com/${verseCaption}`;
+  const siteLinkLabel = 'Read on Quran.com';
 
   // Labels with defaults
-  const quranLabel = options.labels?.quran || 'Quran';
   const surahLabel = options.labels?.surah || 'Surah';
   const verseWordLabel = options.labels?.verse || 'Verse';
   const localizedVerseCaption = formatVerseCaption(
@@ -96,7 +95,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
     locale,
   );
   const headerTitle = options.surahName
-    ? `${quranLabel} ${localizedVerseCaption} (${surahLabel} ${options.surahName})`
+    ? `${surahLabel} ${options.surahName} [${localizedVerseCaption}]`
     : `${verseWordLabel} ${verseLabel}`;
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
 
