@@ -14,6 +14,7 @@ import TopActions from '@/components/QuranReader/TranslationView/TopActions';
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getVerseWords } from '@/utils/verse';
+import { AyahHadithsResponse } from 'types/Hadith';
 import AyahQuestionsResponse from 'types/QuestionsAndAnswers/AyahQuestionsResponse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -38,6 +39,7 @@ interface StudyModeBodyProps {
   questionId?: string;
   questionsInitialData?: AyahQuestionsResponse;
   tafsirIdOrSlug?: string;
+  hadithsInitialData?: AyahHadithsResponse;
   onGoToVerse?: (chapterId: string, verseNumber: string) => void;
 }
 
@@ -60,6 +62,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   questionId,
   questionsInitialData,
   tafsirIdOrSlug,
+  hadithsInitialData,
   onGoToVerse,
 }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -141,6 +144,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
                 questionId={questionId}
                 questionsInitialData={questionsInitialData}
                 tafsirIdOrSlug={tafsirIdOrSlug}
+                hadithsInitialData={hadithsInitialData}
                 onGoToVerse={onGoToVerse}
               />
             </div>
