@@ -1,4 +1,5 @@
 @use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .header {
   padding-block-end: var(--spacing-medium);
@@ -51,6 +52,18 @@
   }
   @include breakpoints.tablet {
     font-size: var(--font-size-normal-px);
+  }
+}
+
+.ramadanDescription {
+  @include theme.light {
+    color: var(--color-text-default-new);
+  }
+  @include theme.sepia {
+    color: var(--color-text-default-new);
+  }
+  @include theme.dark {
+    color: var(--color-text-inverse);
   }
 }
 
@@ -107,6 +120,18 @@
   block-size: 100%;
 }
 
+.ramadanCard {
+  @include theme.light {
+    background-color: var(--color-topics-gold);
+  }
+  @include theme.sepia {
+    background-color: var(--color-topics-gold);
+  }
+  @include theme.dark {
+    background-color: #fae7a9;
+  }
+}
+
 .link {
   inline-size: 50%;
   @include breakpoints.smallerThanTablet {
@@ -130,6 +155,22 @@
     @include breakpoints.smallerThanTablet {
       inline-size: 12px !important;
       block-size: 12px !important;
+    }
+  }
+}
+
+.ramadanArrowIcon {
+  svg {
+    path {
+      @include theme.light {
+        fill: var(--color-text-default-new);
+      }
+      @include theme.sepia {
+        fill: var(--color-text-default-new);
+      }
+      @include theme.dark {
+        fill: var(--color-text-inverse);
+      }
     }
   }
 }

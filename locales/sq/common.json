@@ -100,6 +100,13 @@
   "beyond-ramadan": "Rrituni përtej Ramazanit!",
   "bookmark": "Shënoni faqeshënues",
   "bookmarked": "Shënuar si faqeshënues",
+  "bookmarks-migration": {
+    "body-1": "Faqeshënuesit tuaj tani do të bëhen <strong>Vargjet e Ruajtura</strong> në <strong>Koleksione</strong>Për të ruajtur faqeshënuesit tuaj aktualë, ju lutemi identifikohuni ose krijoni një llogari.",
+    "body-2": "Gjithashtu kemi shtuar një faqeshënues të ri për lexim për t'ju ndihmuar të vazhdoni pikërisht aty ku e keni lënë.",
+    "checkbox": "Mos e shfaq më këtë mesazh (Kujdes, do të humbasësh të gjitha faqeshënuesit e tu aktualë)",
+    "sign-in": "Hyr / Regjistrohu",
+    "title": "Njoftim: Faqeshënuesit po ndryshojnë"
+  },
   "both": "të dyja",
   "cancel": "Anullo",
   "change-theme": "Ndrysho temën",
@@ -459,6 +466,8 @@
   "subscribe": "Abonohu",
   "subscribed": "Abonuar",
   "surah": "Surja",
+  "tab-see-less": "Shiko më pak...",
+  "tab-see-more": "Shiko më shumë...",
   "tafsir": {
     "font-size": "Madhësia e shkronjave Tafsir",
     "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
