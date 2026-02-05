@@ -342,4 +342,27 @@ export default {
       surahInfoFontScale: initialState.quranReaderStyles.surahInfoFontScale,
     },
   }),
+  43: (state) => {
+    const { quranFont, quranTextFontScale } = state.quranReaderStyles;
+    let newScale = quranTextFontScale;
+
+    if (
+      [QuranFont.QPCHafs, QuranFont.MadaniV1, QuranFont.MadaniV2, QuranFont.TajweedV4].includes(
+        quranFont,
+      ) &&
+      quranTextFontScale === 4
+    ) {
+      newScale = 6;
+    } else if (quranFont === QuranFont.IndoPak && quranTextFontScale === 5) {
+      newScale = 6;
+    }
+
+    return {
+      ...state,
+      quranReaderStyles: {
+        ...state.quranReaderStyles,
+        quranTextFontScale: newScale,
+      },
+    };
+  },
 };
