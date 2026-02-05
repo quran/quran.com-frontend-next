@@ -466,6 +466,8 @@
   "subscribe": "Langgan",
   "subscribed": "Dilanggan",
   "surah": "Surah",
+  "tab-see-less": "Lihat kurang...",
+  "tab-see-more": "Lihat lagi...",
   "tafsir": {
     "font-size": "Saiz fon Tafsir",
     "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat dari {{from}} hingga {{to}}",

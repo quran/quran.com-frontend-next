@@ -466,6 +466,8 @@
   "subscribe": "S'abonner",
   "subscribed": "Abonné(e)",
   "surah": "Sourate",
+  "tab-see-less": "Voir moins...",
+  "tab-see-more": "Voir plus...",
   "tafsir": {
     "font-size": "Taille de la police du Tafsir",
     "group-message": "Vous lisez un tafsir pour le groupe d'Ayahs {{from}} à {{to}}",

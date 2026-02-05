@@ -466,6 +466,8 @@
   "subscribe": "سبسکرائب",
   "subscribed": "سبسکرائبڈ",
   "surah": "سورہ",
+  "tab-see-less": "کم دیکھیں...",
+  "tab-see-more": "مزید دیکھیں...",
   "tafsir": {
     "font-size": "تفسیر فونٹ سائز",
     "group-message": "آپ {{from}} سے {{to}} آیات کے گروپ کی تفسیر پڑھ رہے ہیں",

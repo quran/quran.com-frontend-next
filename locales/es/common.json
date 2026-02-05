@@ -466,6 +466,8 @@
   "subscribe": "Suscribirse.",
   "subscribed": "Suscrito.",
   "surah": "Sura",
+  "tab-see-less": "Ver menos...",
+  "tab-see-more": "Ver más...",
   "tafsir": {
     "font-size": "Tamaño de fueste del tafsir",
     "group-message": "Estás leyendo un tafsir para el grupo de versículos {{from}} hasta {{to}}",

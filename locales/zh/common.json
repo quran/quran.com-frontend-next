@@ -466,6 +466,8 @@
   "subscribe": "订阅",
   "subscribed": "已订阅",
   "surah": "章",
+  "tab-see-less": "收起...",
+  "tab-see-more": "查看更多…",
   "tafsir": {
     "font-size": "Tafsir 字体大小",
     "group-message": "{{from}}至{{to}}节的经注",

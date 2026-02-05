@@ -466,6 +466,8 @@
   "subscribe": "اشترك",
   "subscribed": "مشترك",
   "surah": "سورة",
+  "tab-see-less": "عرض أقل...",
+  "tab-see-more": "شاهد المزيد...",
   "tafsir": {
     "font-size": "حجم خط التفسير",
     "group-message": "أنت تقرأ تفسيرًا لمجموعة الآيات {{from}}إلى {{to}}",

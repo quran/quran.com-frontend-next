@@ -466,6 +466,8 @@
   "subscribe": "Đăng ký",
   "subscribed": "Đã đăng ký",
   "surah": "Surah",
+  "tab-see-less": "Xem ít hơn...",
+  "tab-see-more": "Xem thêm...",
   "tafsir": {
     "font-size": "Kích thước phông chữ Tafsir",
     "group-message": "Bạn đang đọc phần chú giải Kinh Qur'an cho nhóm các câu này. {{from}} đến {{to}}",

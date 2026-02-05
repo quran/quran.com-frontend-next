@@ -466,6 +466,8 @@
   "subscribe": "ሰብስክራይብ ያድርጉ",
   "subscribed": "ተመዝግቧል",
   "surah": "ሱራህ",
+  "tab-see-less": "ያነሰ ይመልከቱ...",
+  "tab-see-more": "ተጨማሪ ይመልከቱ...",
   "tafsir": {
     "font-size": "የተፍሲር ቅርጸ-ቁምፊ መጠን",
     "group-message": "የጥቅሶቹን ስብስብ {{from}} እስከ {{to}} ተፍሲር እያነበብክ ነው",

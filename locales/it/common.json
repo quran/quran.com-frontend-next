@@ -466,6 +466,8 @@
   "subscribe": "sottoscrivi",
   "subscribed": "Sottoscritto",
   "surah": "sura",
+  "tab-see-less": "Vedi meno...",
+  "tab-see-more": "Scopri di più...",
   "tafsir": {
     "font-size": "Dimensione del carattere Tafsir",
     "group-message": "Stai leggendo un tafsir per il gruppo di versi {{from}} a {{to}}",

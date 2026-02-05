@@ -466,6 +466,8 @@
   "subscribe": "Подписаться",
   "subscribed": "Подписан",
   "surah": "Сура",
+  "tab-see-less": "Скрыть...",
+  "tab-see-more": "Подробнее...",
   "tafsir": {
     "font-size": "Размер шрифта тафсира",
     "group-message": "Вы читаете тафсир для группы стихов {{from}} до {{to}}",

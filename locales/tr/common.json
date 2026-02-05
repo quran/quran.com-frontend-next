@@ -466,6 +466,8 @@
   "subscribe": "Abone ol",
   "subscribed": "Abone olundu",
   "surah": "Sure",
+  "tab-see-less": "Daha az göster...",
+  "tab-see-more": "Daha fazlasını görün...",
   "tafsir": {
     "font-size": "tefsir yazı tipi boyutu",
     "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",

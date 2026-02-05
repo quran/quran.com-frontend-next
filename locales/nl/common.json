@@ -466,6 +466,8 @@
   "subscribe": "Abonneren",
   "subscribed": "Geabonneerd",
   "surah": "Surah",
+  "tab-see-less": "Minder weergeven...",
+  "tab-see-more": "Bekijk meer...",
   "tafsir": {
     "font-size": "Tafseer-lettergrootte",
     "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",

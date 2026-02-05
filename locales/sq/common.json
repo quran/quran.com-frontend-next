@@ -466,6 +466,8 @@
   "subscribe": "Abonohu",
   "subscribed": "Abonuar",
   "surah": "Surja",
+  "tab-see-less": "Shiko më pak...",
+  "tab-see-more": "Shiko më shumë...",
   "tafsir": {
     "font-size": "Madhësia e shkronjave Tafsir",
     "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
