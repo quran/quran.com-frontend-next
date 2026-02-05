@@ -32,7 +32,7 @@ const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ initialCoursesDat
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout initialCoursesData={initialCoursesData} />
+      <CoursesPageLayout initialCoursesData={initialCoursesData} lang={lang} />
     </>
   );
 };

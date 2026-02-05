@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -30,13 +30,10 @@ import { getAyahQuestions, getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
 import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
-import {
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type QuestionPageProps = {
   chaptersData: ChaptersData;
@@ -105,75 +102,74 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId, questionId } = params;
-  const chaptersData = await getAllChaptersData(locale);
-  const questionIdString = String(questionId);
-  const verseKeyString = String(chapterId);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/answers/[questionId]',
+  async ({ params, locale }) => {
+    const { chapterId, questionId } = params;
+    const chaptersData = await getAllChaptersData(locale);
+    const questionIdString = String(questionId);
+    const verseKeyString = String(chapterId);
 
-  if (!isValidVerseKey(chaptersData, verseKeyString)) {
-    return { notFound: true };
-  }
+    if (!isValidVerseKey(chaptersData, verseKeyString)) {
+      return { notFound: true };
+    }
 
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKeyString);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
-  const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKeyString);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
 
-  try {
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = buildStudyModeVerseUrl(verseKeyString, quranFont, mushafLines, translations);
+    try {
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const verseUrl = buildStudyModeVerseUrl(verseKeyString, quranFont, mushafLines, translations);
 
-    const [questionData, questionsInitialData, verseData, pagesLookupResponse] = await Promise.all([
-      getQuestionById(questionIdString),
-      getAyahQuestions(verseKeyString, locale as Language),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
-    ]);
+      const [questionData, questionsInitialData, verseData, pagesLookupResponse] =
+        await Promise.all([
+          getQuestionById(questionIdString),
+          getAyahQuestions(verseKeyString, locale as Language),
+          fetcher(verseUrl) as Promise<VerseResponse>,
+          getPagesLookup({
+            chapterNumber: Number(chapterNumber),
+            mushaf: mushafId,
+          }),
+        ]);
 
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+      const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
-    const fallback = {
-      [verseUrl]: verseData,
-    };
+      const fallback = {
+        [verseUrl]: verseData,
+      };
 
-    return {
-      props: {
-        questionId: questionIdString,
-        chaptersData,
-        questionData,
-        verseKey: verseKeyString,
-        chapterId: chapterNumber,
-        verseNumber,
-        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
-        fallback,
-        verse: verseData.verse,
-        versesResponse,
-        questionsInitialData,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-QuestionPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        questionId: String(params.questionId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      return {
+        props: {
+          questionId: questionIdString,
+          chaptersData,
+          questionData,
+          verseKey: verseKeyString,
+          chapterId: chapterNumber,
+          verseNumber,
+          chapter: {
+            chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber },
+          },
+          fallback,
+          verse: verseData.verse,
+          versesResponse,
+          questionsInitialData,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-QuestionPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          questionId: String(params.questionId),
+          locale,
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default QuestionPage;

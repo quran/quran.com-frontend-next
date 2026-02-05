@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -32,13 +32,10 @@ import {
   makeAyahReflectionsUrl,
   REFLECTION_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
-import {
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type AyahReflectionProp = {
   chapter?: ChapterResponse;
@@ -102,88 +99,86 @@ const ReflectionsPage: NextPage<AyahReflectionProp> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId } = params;
-  const verseKey = String(chapterId);
-  const chaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/reflections',
+  async ({ params, locale }) => {
+    const { chapterId } = params;
+    const verseKey = String(chapterId);
+    const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+    if (!isValidVerseKey(chaptersData, verseKey)) {
+      return { notFound: true };
+    }
 
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
-  const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
 
-  try {
-    const verseReflectionUrl = makeAyahReflectionsUrl({
-      surahId: chapterNumber,
-      ayahNumber: verseNumber,
-      locales: [locale],
-      postTypeIds: [REFLECTION_POST_TYPE_ID],
-    });
-
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
-
-    const versesUrl = makeVersesUrl(chapterNumber, locale, {
-      ...getDefaultWordFields(quranFont),
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      mushaf: mushafId,
-      from: `${chapterNumber}:${verseNumber}`,
-      to: `${chapterNumber}:${verseNumber}`,
-    });
-
-    const [verseReflectionsData, verseData, versesData, pagesLookupResponse] = await Promise.all([
-      getAyahReflections(verseReflectionUrl),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      fetcher(versesUrl),
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
-    ]);
-
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
-
-    const fallback = {
-      [verseReflectionUrl]: verseReflectionsData,
-      [versesUrl]: versesData,
-      [verseUrl]: verseData,
-    };
-
-    return {
-      props: {
-        chaptersData,
-        chapterId: chapterNumber,
-        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
-        verseNumber,
-        fallback,
-        verse: verseData.verse,
-        versesResponse,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ReflectionsPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
+    try {
+      const verseReflectionUrl = makeAyahReflectionsUrl({
+        surahId: chapterNumber,
+        ayahNumber: verseNumber,
+        locales: [locale],
         postTypeIds: [REFLECTION_POST_TYPE_ID],
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
+      });
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
+
+      const versesUrl = makeVersesUrl(chapterNumber, locale, {
+        ...getDefaultWordFields(quranFont),
+        translationFields: 'resource_name,language_id',
+        translations: translations.join(','),
+        mushaf: mushafId,
+        from: `${chapterNumber}:${verseNumber}`,
+        to: `${chapterNumber}:${verseNumber}`,
+      });
+
+      const [verseReflectionsData, verseData, versesData, pagesLookupResponse] = await Promise.all([
+        getAyahReflections(verseReflectionUrl),
+        fetcher(verseUrl) as Promise<VerseResponse>,
+        fetcher(versesUrl),
+        getPagesLookup({
+          chapterNumber: Number(chapterNumber),
+          mushaf: mushafId,
+        }),
+      ]);
+
+      const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+
+      const fallback = {
+        [verseReflectionUrl]: verseReflectionsData,
+        [versesUrl]: versesData,
+        [verseUrl]: verseData,
+      };
+
+      return {
+        props: {
+          chaptersData,
+          chapterId: chapterNumber,
+          chapter: {
+            chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber },
+          },
+          verseNumber,
+          fallback,
+          verse: verseData.verse,
+          versesResponse,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-ReflectionsPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          locale,
+          postTypeIds: [REFLECTION_POST_TYPE_ID],
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default ReflectionsPage;

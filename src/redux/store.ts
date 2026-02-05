@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistReducer,

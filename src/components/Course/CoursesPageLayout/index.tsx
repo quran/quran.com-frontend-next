@@ -22,9 +22,10 @@ const Loading = () => <Spinner />;
 type Props = {
   isMyCourses?: boolean;
   initialCoursesData?: CoursesResponse;
+  lang: string;
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCoursesData }) => {
+const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCoursesData, lang }) => {
   const { t } = useTranslation('learn');
   const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
 

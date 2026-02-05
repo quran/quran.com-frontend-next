@@ -20,7 +20,7 @@ const MyLearningPlanPage: NextPage = () => {
         nofollow
         noindex
       />
-      <CoursesPageLayout isMyCourses />
+      <CoursesPageLayout isMyCourses lang={lang} />
     </>
   );
 };
