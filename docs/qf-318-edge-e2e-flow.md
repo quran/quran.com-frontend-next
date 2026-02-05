@@ -1,6 +1,7 @@
 # QF-318 — SSR Personalization + Edge Caching (Cloudflare Snippet): E2E Flow
 
-This doc explains **what happens from the moment a URL is requested** until the page finishes loading, in both:
+This doc explains **what happens from the moment a URL is requested** until the page finishes
+loading, in both:
 
 - **Plain English** (non-technical)
 - **Technical** terms (for implementation/debugging)
@@ -11,23 +12,28 @@ The edge logic lives in `cloudflare/snippets/qdc-ssr-edge-cache.js`.
 
 ## Approach summary (30 seconds)
 
-We make **SSR personalization first-class** by reading a compact preferences cookie (`QDC_PREFS`) on the server, then we let **Cloudflare Snippets cache HTML and key JSON** at the edge using a **cache key that includes locale + preference-set hash**. This makes both **guest** and **logged‑in** users fast **without leaking private data**, while still honoring QF‑318’s country/device-language rules.
+We make **SSR personalization first-class** by reading a compact preferences cookie (`QDC_PREFS`) on
+the server, then we let **Cloudflare Snippets cache HTML and key JSON** at the edge using a **cache
+key that includes locale + preference-set hash**. This makes both **guest** and **logged‑in** users
+fast **without leaking private data**, while still honoring QF‑318’s country/device-language rules.
 
 ---
 
 ## Plain English (non-technical)
 
-1) Your browser asks for a page (like `ssr.quran.com/vi/5`).
-2) Cloudflare looks at a few “labels” that come with the request:
+1. Your browser asks for a page (like `ssr.quran.com/vi/5`).
+2. Cloudflare looks at a few “labels” that come with the request:
    - **language** (from the URL and your browser settings)
    - **country** (from your IP)
    - **your settings** (from cookies, like font/translation choices)
-3) Cloudflare uses those labels to decide:
+3. Cloudflare uses those labels to decide:
    - “Can I serve a saved copy?” (**cache HIT**) → fast
    - “Do I need to ask the server?” (**cache MISS**) → slower once, then saved
    - “This is sensitive (login/auth)” → never saved (**BYPASS**)
-4) When Cloudflare does need to ask the server, the server still renders the page with your settings **immediately** (SSR) using cookies.
-5) Next time you (or anyone with the same settings) asks for the same page, Cloudflare can serve the saved version from the edge.
+4. When Cloudflare does need to ask the server, the server still renders the page with your settings
+   **immediately** (SSR) using cookies.
+5. Next time you (or anyone with the same settings) asks for the same page, Cloudflare can serve the
+   saved version from the edge.
 
 ---
 
@@ -99,6 +105,7 @@ For each request, the snippet computes:
 - `cfCountry`: from `request.cf.country`
 - `localeForPreferences`:
   - if manual selection → use `urlLocale`/`NEXT_LOCALE`
+    - default locale (`en`) does **not** get forced into the path (no `/en/...` redirect)
   - else → `deviceLanguage`
 - `countryForPreferences` (QF‑318 rule):
   - if `localeForPreferences` is `en` or unsupported → real `cfCountry`
@@ -120,18 +127,20 @@ The snippet uses Cloudflare’s built-in caching for HTML:
 
 - `cf.cacheEverything: true`
 - `cf.cacheKey: <our computed key>`
-- `cf.cacheTtlByStatus: { 200-299: 3600s, 400+: 0 }`
+- `cf.cacheTtlByStatus: { 200-299: 3600s, 301-308: 0, 400+: 0 }` (we **do not** cache origin
+  redirects here)
 
 This is what makes document responses return `cf-cache-status: HIT` and fast `cfEdge;dur=...`.
 
 #### B) `/_next/data/*` JSON
 
-These requests are cached via `caches.default` (safe JSON cache path) using the same bucketing rules.
+These requests are cached via `caches.default` (safe JSON cache path) using the same bucketing
+rules.
 
 #### C) Public content API (strict allowlist)
 
-Some public endpoints are cached with `caches.default`.
-We strip `Set-Cookie` before caching because upstream can return irrelevant cookies that would force BYPASS.
+Some public endpoints are cached with `caches.default`. We strip `Set-Cookie` before caching because
+upstream can return irrelevant cookies that would force BYPASS.
 
 ### 4) Origin SSR uses cookies to render correct first paint
 
@@ -156,23 +165,23 @@ Even when HTML is a HIT, the browser still downloads:
 
 ### Example 1 — Guest, first visit
 
-1) Browser requests `/`.
-2) Snippet determines device language + country → chooses a “guest bucket”.
-3) Redirect happens to the locale route.
-4) First HTML is a MISS (once), then becomes HIT for the same bucket.
+1. Browser requests `/`.
+2. Snippet determines device language + country → chooses a “guest bucket”.
+3. Redirect happens to the locale route.
+4. First HTML is a MISS (once), then becomes HIT for the same bucket.
 
 ### Example 2 — Returning guest with preferences cookie
 
-1) Browser requests `/vi/5`.
-2) Cookie contains `QDC_PREFS_KEY=abcd123`.
-3) Cache key becomes `URL + locale + prefsKey`.
-4) HTML can be a HIT (shared by anyone with the same preference set).
+1. Browser requests `/vi/5`.
+2. Cookie contains `QDC_PREFS_KEY=abcd123`.
+3. Cache key becomes `URL + locale + prefsKey`.
+4. HTML can be a HIT (shared by anyone with the same preference set).
 
 ### Example 3 — Logged-in user, private page
 
-1) Browser requests `/vi/profile`.
-2) Snippet marks it as private and adds `userKey` (derived from `id` cookie).
-3) Cache key becomes `URL + locale + prefsKey + userKey` (per-user isolation).
+1. Browser requests `/vi/profile`.
+2. Snippet marks it as private and adds `userKey` (derived from `id` cookie).
+3. Cache key becomes `URL + locale + prefsKey + userKey` (per-user isolation).
 
 ---
 

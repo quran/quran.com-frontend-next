@@ -1,3 +1,5 @@
+/* eslint-disable no-continue */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 import { expect, type Locator, type Page } from '@playwright/test';
 
@@ -88,6 +90,30 @@ const isInlineDisplayConfigured = async (page: Page): Promise<boolean> => {
   return isTranslationChecked || isTransliterationChecked;
 };
 
+const primeContextMenu = async (page: Page): Promise<void> => {
+  const header = page.getByTestId(TestId.HEADER).first();
+  if (await header.isVisible().catch(() => false)) {
+    return;
+  }
+
+  // The QuranReader ContextMenu isn't rendered until the lastReadVerseKey (verseKey) is set,
+  // which normally happens after a small scroll.
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    try {
+      await page.mouse.wheel(0, 700);
+      await page.evaluate((y) => window.scrollBy(0, y), 700).catch(() => undefined);
+    } catch {
+      // ignore - page might be navigating
+    }
+
+    if (await header.isVisible().catch(() => false)) {
+      return;
+    }
+
+    await page.waitForTimeout(250);
+  }
+};
+
 export const openSettingsDrawer = async (
   page: Page,
   options: SettingsDrawerOptions = {},
@@ -102,6 +128,15 @@ export const openSettingsDrawer = async (
     await page.mouse.wheel(0, -300);
   }
 
+  // Give the reader a chance to hydrate and render the ContextMenu before we navigate away.
+  await primeContextMenu(page);
+  buttons = page.getByTestId(TestId.SETTINGS_BUTTON);
+  try {
+    await expect(buttons).not.toHaveCount(0, { timeout: 15000 });
+  } catch {
+    // fall through to candidate URL navigation
+  }
+
   if ((await buttons.count()) === 0) {
     const currentUrl = page.url();
     let localePrefix: string | null = null;
@@ -113,28 +148,29 @@ export const openSettingsDrawer = async (
       localePrefix = null;
     }
 
-    const candidateUrls = [
-      ...(localePrefix ? [`/${localePrefix}/1`] : []),
-      '/en/1',
-      '/1',
-    ];
+    const cacheBust = `__settings_drawer=${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const candidateUrls = Array.from(
+      new Set([
+        ...(localePrefix ? [`/${localePrefix}/1?${cacheBust}`] : []),
+        `/en/1?${cacheBust}`,
+        `/1?${cacheBust}`,
+      ]),
+    );
 
     for (const url of candidateUrls) {
-      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await primeContextMenu(page);
       // The QuranReader context menu (which contains the settings button) renders only
       // after client-side state (lastReadVerseKey) is populated. The `header` test id
       // lives on the context menu wrapper and is a reliable "hydration complete" marker.
       try {
-        await page
-          .getByTestId(TestId.HEADER)
-          .first()
-          .waitFor({ state: 'visible', timeout: 30000 });
+        await page.getByTestId(TestId.HEADER).first().waitFor({ state: 'visible', timeout: 10000 });
       } catch {
         // ignore - we still try to locate the button directly
       }
       buttons = page.getByTestId(TestId.SETTINGS_BUTTON);
       try {
-        await expect(buttons).not.toHaveCount(0, { timeout: 30000 });
+        await expect(buttons).not.toHaveCount(0, { timeout: 15000 });
         break;
       } catch {
         // try next candidate
@@ -191,10 +227,6 @@ export const withSettingsDrawer = async (
   }
 };
 
-const getTranslationsSelectionCard = (settingsBody: Locator): Locator => {
-  return settingsBody.getByTestId(TestId.TRANSLATION_CARD);
-};
-
 const openTranslationSettings = async (
   page: Page,
   options: SettingsDrawerOptions = {},
@@ -209,15 +241,75 @@ const openTranslationSettings = async (
     return settingsBody;
   }
 
-  // If we're already in the Translation view, the search input appears immediately (before data loads).
-  const selectionCard = getTranslationsSelectionCard(settingsBody);
-  await expect(selectionCard.first()).toBeVisible({ timeout: 30000 });
-  await selectionCard.first().click();
-  await expect(settingsBody.locator(`#${TRANSLATIONS_SEARCH_INPUT_ID}`)).toBeVisible({
-    timeout: 30000,
-  });
+  // Ensure SettingsBody is mounted and we are in the "Translation" tab (2nd tab).
+  const translationTab = settingsBody.getByTestId(TestId.TRANSLATION_SETTINGS_TAB).first();
+  try {
+    await expect(translationTab).toBeVisible({ timeout: 15000 });
+  } catch {
+    // If the drawer was opened in a sub-view (or the dynamic body hasn't mounted yet),
+    // closing and reopening reliably resets it back to Body view.
+    await closeSettingsDrawer(page);
+    await openSettingsDrawer(page, options);
+  }
+
+  await expect(translationTab).toBeVisible({ timeout: 30000 });
+  await translationTab.click();
+  await expect(translationTab).toHaveAttribute('data-state', 'active', { timeout: 30000 });
+
+  // The Translation selection card lives inside the translation section. SelectionCard uses a generic
+  // test id so we scope the lookup to avoid clicking the Reciter card on the Arabic tab.
+  const selectionCard = settingsBody
+    .locator('#translation-section')
+    .getByTestId(TestId.TRANSLATION_CARD)
+    .first();
+  await expect(selectionCard).toBeVisible({ timeout: 30000 });
+  await selectionCard.click();
+  await expect(translationTab).toHaveCount(0, { timeout: 30000 });
 
   return settingsBody;
+};
+
+const waitForTranslationSelectToLoad = async (settingsBody: Locator): Promise<Locator> => {
+  const page = settingsBody.page();
+  const start = Date.now();
+  const timeoutMs = 60_000;
+
+  const retryButton = settingsBody.getByRole('button', { name: /^retry$/i });
+
+  while (Date.now() - start < timeoutMs) {
+    const translationSelect = settingsBody.getByTestId(TestId.TRANSLATION_SELECT);
+    const firstCheckbox = translationSelect.getByRole('checkbox').first();
+
+    if (await firstCheckbox.isVisible().catch(() => false)) {
+      return translationSelect;
+    }
+
+    if (await retryButton.isVisible().catch(() => false)) {
+      await retryButton.click({ force: true });
+      await page.waitForTimeout(500);
+      continue;
+    }
+
+    await page.waitForTimeout(750);
+  }
+
+  const [url, hasRetry, searchValue, bodyText] = await Promise.all([
+    Promise.resolve(page.url()),
+    retryButton.isVisible().catch(() => false),
+    settingsBody
+      .locator(`#${TRANSLATIONS_SEARCH_INPUT_ID}`)
+      .inputValue()
+      .catch(() => null),
+    settingsBody.innerText().catch(() => null),
+  ]);
+
+  const snippet = bodyText ? bodyText.replace(/\s+/g, ' ').slice(0, 220) : null;
+  const screenshotPath = `test-results/translation-select-failure-${Date.now()}.png`;
+  await page.screenshot({ path: screenshotPath, fullPage: true }).catch(() => undefined);
+
+  throw new Error(
+    `[settings] Translation list failed to load in time. url=${url} retryVisible=${hasRetry} searchValue=${searchValue} screenshot=${screenshotPath} bodySnippet=${snippet}`,
+  );
 };
 
 export const selectTheme = async (page: Page, theme: ThemeType): Promise<void> => {
@@ -249,17 +341,12 @@ export const clearSelectedTranslations = async (
   options: SettingsDrawerOptions = {},
 ): Promise<string> => {
   await openSettingsDrawer(page, options);
-  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
-  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
-    await translationTab.first().click();
-  }
-
   const settingsBody = await openTranslationSettings(page, options);
-  const translationCheckboxes = settingsBody.getByRole('checkbox');
-  await expect(translationCheckboxes.first()).toBeVisible();
+  const translationSelect = await waitForTranslationSelectToLoad(settingsBody);
+  const translationCheckboxes = translationSelect.getByRole('checkbox');
 
   const firstTranslationId = await translationCheckboxes.first().getAttribute('id');
-  const checkedTranslations = settingsBody.getByRole('checkbox', { checked: true });
+  const checkedTranslations = translationSelect.getByRole('checkbox', { checked: true });
   let checkedCount = await checkedTranslations.count();
 
   while (checkedCount > 0) {
@@ -283,13 +370,11 @@ export const selectTranslationPreference = async (
   options: SettingsDrawerOptions = {},
 ): Promise<void> => {
   await openSettingsDrawer(page, options);
-  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
-  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
-    await translationTab.first().click();
-  }
-
   const settingsBody = await openTranslationSettings(page, options);
-  const translationCheckbox = settingsBody.locator(`[id="${translationId}"]`);
+  await waitForTranslationSelectToLoad(settingsBody);
+  const translationCheckbox = settingsBody
+    .getByTestId(TestId.TRANSLATION_SELECT)
+    .locator(`[id="${translationId}"]`);
   await expect(translationCheckbox).toBeVisible();
 
   const isChecked = (await translationCheckbox.getAttribute('aria-checked')) === 'true';
@@ -305,16 +390,10 @@ export const selectAnyTranslationPreference = async (
   options: SettingsDrawerOptions = {},
 ): Promise<string> => {
   await openSettingsDrawer(page, options);
-  const translationTab = page.getByTestId(TestId.TRANSLATION_SETTINGS_TAB);
-  if ((await translationTab.count()) > 0 && (await translationTab.first().isVisible())) {
-    await translationTab.first().click();
-  }
-
   const settingsBody = await openTranslationSettings(page, options);
-  const uncheckedTranslations = settingsBody.getByRole('checkbox', { checked: false });
-  const translationCheckboxes = settingsBody.getByRole('checkbox');
-
-  await expect(translationCheckboxes.first()).toBeVisible();
+  const translationSelect = await waitForTranslationSelectToLoad(settingsBody);
+  const uncheckedTranslations = translationSelect.getByRole('checkbox', { checked: false });
+  const translationCheckboxes = translationSelect.getByRole('checkbox');
   const targetCheckbox =
     (await uncheckedTranslations.count()) > 0
       ? uncheckedTranslations.first()

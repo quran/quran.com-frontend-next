@@ -19,7 +19,7 @@ const CONFIG = {
   HOSTNAME: 'ssr.quran.com',
 
   // Bump this when cache-key semantics change (emergency bust).
-  CACHE_VERSION: '2',
+  CACHE_VERSION: '3',
   HTML_TTL_SECONDS: 60 * 60, // 1 hour
   REDIRECT_TTL_SECONDS: 60 * 60 * 24, // 24 hours
   NEXT_DATA_TTL_SECONDS: 60 * 60, // 1 hour
@@ -160,8 +160,11 @@ export default {
     // This avoids repeated cold redirects for the same bucket.
     let redirectCacheKeyUrl = null;
     let redirectCacheReq = null;
-    if (!urlLocale) {
-      const manualLocale = hasManualSelection ? nextLocaleCookie || localeKey : null;
+    const manualLocale = hasManualSelection ? nextLocaleCookie || localeKey : null;
+    const isManualDefaultLocale = Boolean(
+      hasManualSelection && manualLocale && manualLocale === CONFIG.DEFAULT_LOCALE,
+    );
+    if (!urlLocale && !isManualDefaultLocale) {
       redirectCacheKeyUrl = buildRedirectCacheKeyUrl({
         url,
         localeForPreferences,
@@ -182,6 +185,7 @@ export default {
       !urlLocale &&
       hasManualSelection &&
       nextLocaleCookie &&
+      nextLocaleCookie !== CONFIG.DEFAULT_LOCALE &&
       redirectCacheKeyUrl &&
       redirectCacheReq
     ) {
@@ -219,7 +223,9 @@ export default {
         cacheKey: htmlCacheKeyUrl.toString(),
         cacheTtlByStatus: {
           '200-299': CONFIG.HTML_TTL_SECONDS,
-          '301-308': CONFIG.REDIRECT_TTL_SECONDS,
+          // Avoid caching origin redirects here. We cache only "safe" locale redirects via caches.default
+          // (see isCacheableLocaleRedirect) to prevent redirect poisoning and loops.
+          '301-308': 0,
           '400-499': 0,
           '500-599': 0,
         },

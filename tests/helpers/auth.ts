@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable no-continue */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable import/prefer-default-export */
 import { expect, type Page } from '@playwright/test';
 
 import { TestId } from '@/tests/test-ids';
@@ -6,7 +10,8 @@ import { USER_ID_COOKIE_NAME } from '@/utils/auth/constants';
 const hasAuthCookie = async (page: Page) => {
   const cookies = await page.context().cookies();
   return cookies.some(
-    (cookie) => cookie.name === USER_ID_COOKIE_NAME || cookie.name.startsWith('id_'),
+    (cookie) =>
+      cookie.name === 'id' || cookie.name === USER_ID_COOKIE_NAME || cookie.name.startsWith('id_'),
   );
 };
 
@@ -82,7 +87,9 @@ export const loginWithEmail = async (
   const apiLogin = await tryApiLogin(page, email, password);
   // eslint-disable-next-line no-console
   console.log(
-    `[auth] login API status=${apiLogin.status} token=${Boolean(apiLogin.token)} setCookie=${apiLogin.setCookieHeaders.length}`,
+    `[auth] login API status=${apiLogin.status} token=${Boolean(apiLogin.token)} setCookie=${
+      apiLogin.setCookieHeaders.length
+    }`,
   );
   if (apiLogin.ok) {
     if (apiLogin.setCookieHeaders.length > 0) {
@@ -124,12 +131,12 @@ export const loginWithEmail = async (
     await continueButton.click();
   }
 
-  const emailInput = page.getByTestId('signin-email-input').or(
-    page.getByPlaceholder(/email address/i),
-  );
-  const passwordInput = page.getByTestId('signin-password-input').or(
-    page.getByPlaceholder(/password/i),
-  );
+  const emailInput = page
+    .getByTestId('signin-email-input')
+    .or(page.getByPlaceholder(/email address/i));
+  const passwordInput = page
+    .getByTestId('signin-password-input')
+    .or(page.getByPlaceholder(/password/i));
 
   await expect(emailInput).toBeVisible({ timeout: 60000 });
   await emailInput.fill(email);
@@ -161,5 +168,21 @@ export const loginWithEmail = async (
     });
   } catch {
     // ignore
+  }
+
+  // The login flow can still be completing client-side navigation even after the auth cookie is set.
+  // Ensure we're on a stable non-auth route before returning, otherwise follow-up `page.goto()` calls
+  // can be aborted by an in-flight redirect.
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      await page.goto('/', { waitUntil: 'domcontentloaded' });
+      break;
+    } catch (e) {
+      if (attempt === 0 && String(e).includes('net::ERR_ABORTED')) {
+        await page.waitForTimeout(1000);
+        continue;
+      }
+      throw e;
+    }
   }
 };
