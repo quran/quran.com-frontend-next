@@ -9,6 +9,7 @@ import {
   truncateHtml,
   formatVerseReferencesToLinks,
   getWordCount,
+  isNumericString,
 } from './string';
 
 describe('Test truncateString', () => {
@@ -522,5 +523,41 @@ describe('getWordCount', () => {
 
   it('ignores extra whitespace', () => {
     expect(getWordCount('  multiple   spaces\nnew\tlines ')).toBe(4);
+  });
+});
+
+describe('isNumericString', () => {
+  it('returns true for single digit', () => {
+    expect(isNumericString('0')).toBe(true);
+    expect(isNumericString('5')).toBe(true);
+    expect(isNumericString('9')).toBe(true);
+  });
+
+  it('returns true for multiple digits', () => {
+    expect(isNumericString('123')).toBe(true);
+    expect(isNumericString('456789')).toBe(true);
+    expect(isNumericString('00123')).toBe(true);
+  });
+
+  it('returns false for empty string', () => {
+    expect(isNumericString('')).toBe(false);
+  });
+
+  it('returns false for strings with letters', () => {
+    expect(isNumericString('abc')).toBe(false);
+    expect(isNumericString('12a3')).toBe(false);
+    expect(isNumericString('sg')).toBe(false);
+    expect(isNumericString('pl')).toBe(false);
+  });
+
+  it('returns false for decimal and negative numbers', () => {
+    expect(isNumericString('12.3')).toBe(false);
+    expect(isNumericString('-5')).toBe(false);
+  });
+
+  it('returns false for strings with whitespace or special chars', () => {
+    expect(isNumericString(' 123')).toBe(false);
+    expect(isNumericString('1,234')).toBe(false);
+    expect(isNumericString('1:1')).toBe(false);
   });
 });

@@ -1,16 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TajweedBar.module.scss';
 
 import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
-import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
+import {
+  selectIsTajweedBarExpanded,
+  setIsTajweedBarExpanded,
+} from '@/redux/slices/QuranReader/contextMenu';
 import { logEvent } from '@/utils/eventLogger';
 
+// Ensures bar starts off-screen before measurement to prevent flash on mount
 const TAJWEED_RULES = [
   'edgham',
   'mad-2',
@@ -24,16 +28,15 @@ const TAJWEED_RULES = [
 
 const TajweedColors = () => {
   const { t } = useTranslation('quran-reader');
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
-  const [showTajweedBar, setShowTajweedBar] = useState(false);
-  const [height, setHeight] = useState(0);
-  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
+  const showTajweedBar = useSelector(selectIsTajweedBarExpanded);
 
   const { themeVariant } = useThemeDetector();
 
   const toggle = () => {
-    setShowTajweedBar((prevShowTajweedBar) => !prevShowTajweedBar);
+    dispatch(setIsTajweedBarExpanded(!showTajweedBar));
     if (showTajweedBar) {
       logEvent('tajweed_bar_closed');
     } else {
@@ -41,20 +44,11 @@ const TajweedColors = () => {
     }
   };
 
-  useEffect(() => {
-    if (ref.current) {
-      setHeight(ref.current.clientHeight);
-    }
-  }, [ref.current?.clientHeight]);
-
   return (
     <div
       className={classNames(styles.container, {
-        [styles.visibleContainer]: !isExpanded,
+        [styles.hiddenContainer]: !showTajweedBar,
       })}
-      style={{
-        transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
-      }}
     >
       <div
         ref={ref}

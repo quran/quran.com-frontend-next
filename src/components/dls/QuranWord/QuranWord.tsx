@@ -166,44 +166,63 @@ const QuranWord = ({
     [isWordByWordAllowed, showTooltipFor, word],
   );
 
-  const handleWordAction = useCallback(() => {
-    if (isRecitationEnabled) {
-      logButtonClick('quran_word_pronounce');
-      const currentState = audioService.getSnapshot();
-      const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
-      const currentSurah = getChapterNumberFromKey(word.verseKey);
-      const isSameSurah = currentState.context.surah === Number(currentSurah);
-      const shouldSeekTo = isPlaying && isSameSurah;
-      if (shouldSeekTo) {
-        const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
-        if (!wordSegment) return;
+  const getReadingModeSuffix = useCallback(() => {
+    if (readingPreference === ReadingPreference.Translation) {
+      return 'verse_by_verse';
+    }
+    return 'arabic_reading';
+  }, [readingPreference]);
+
+  const seekToWordIfPlaying = useCallback(() => {
+    const currentState = audioService.getSnapshot();
+    const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+    const currentSurah = getChapterNumberFromKey(word.verseKey);
+    const isSameSurah = currentState.context.surah === Number(currentSurah);
+
+    if (isPlaying && isSameSurah) {
+      const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
+      if (wordSegment) {
         const [startTime] = wordSegment;
         audioService.send({ type: 'SEEK_TO', timestamp: milliSecondsToSeconds(startTime) });
-      } else {
+        logButtonClick('quran_word_pronounce');
+        return true;
+      }
+    }
+    return false;
+  }, [audioService, word]);
+
+  const handleWordAction = useCallback(() => {
+    if (isRecitationEnabled) {
+      const didSeek = seekToWordIfPlaying();
+      if (!didSeek) {
+        logButtonClick('quran_word_pronounce');
         playWordAudio(word);
       }
     } else {
       logButtonClick('quran_word');
     }
-  }, [audioService, isRecitationEnabled, word]);
+  }, [isRecitationEnabled, seekToWordIfPlaying, word]);
 
-  // Shared handler for both click and keyboard interactions
   const handleInteraction = useCallback(() => {
-    // Open study mode modal when clicking ayah number (in both reading and translation mode)
+    const modeSuffix = getReadingModeSuffix();
+
+    if (word.charTypeName === CharType.Word && !isRecitationEnabled) {
+      seekToWordIfPlaying();
+    }
+
     if (word.charTypeName === CharType.End) {
+      logButtonClick(`study_mode_open_ayah_number_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey }));
       return;
     }
 
-    // On mobile with recitation disabled and tooltip showing, let the popover handle the interaction
-    // The popover will open on click, and user can click inside to open Study Mode
     if (isMobile && !isRecitationEnabled && word.charTypeName === CharType.Word && showTooltip) {
       return;
     }
 
-    // On desktop: Open study mode modal when clicking a word (in both reading and translation mode)
     if (!isRecitationEnabled && word.charTypeName === CharType.Word) {
+      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
@@ -211,6 +230,7 @@ const QuranWord = ({
 
     if (isRecitationEnabled && word.charTypeName === CharType.Word && !showTooltip) {
       handleWordAction();
+      logButtonClick(`study_mode_open_word_${modeSuffix}`, { verseKey: word.verseKey });
       dispatch(setReadingViewHoveredVerseKey(null));
       dispatch(openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }));
       return;
@@ -218,14 +238,14 @@ const QuranWord = ({
 
     handleWordAction();
   }, [
-    word.charTypeName,
-    word.location,
-    word.verseKey,
+    word,
     isRecitationEnabled,
     isMobile,
     showTooltip,
     handleWordAction,
     dispatch,
+    getReadingModeSuffix,
+    seekToWordIfPlaying,
   ]);
 
   const onClick = useCallback(
@@ -316,8 +336,11 @@ const QuranWord = ({
             const isTooltipOpen =
               shouldForceShowTooltip || (isAudioPlayingWord && showTooltipWhenPlayingAudio);
 
-            // Handler for opening Study Mode from popover (used on mobile)
             const handleOpenStudyMode = () => {
+              const modeSuffix = getReadingModeSuffix();
+              logButtonClick(`study_mode_open_wbw_popover_${modeSuffix}`, {
+                verseKey: word.verseKey,
+              });
               dispatch(setReadingViewHoveredVerseKey(null));
               dispatch(
                 openStudyMode({ verseKey: word.verseKey, highlightedWordLocation: word.location }),

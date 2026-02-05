@@ -10,8 +10,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import EnrollButton from '@/components/RamadanChallenge/EnrollButton';
 import EnrollmentCount from '@/components/RamadanChallenge/EnrollmentCount';
+import UnauthEnrollButton from '@/components/RamadanChallenge/UnauthEnrollButton';
 import Link from '@/dls/Link/Link';
 import { getRamadanChallengeOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
@@ -47,7 +47,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             </div>
             <h2>✅ Sign up today and invite others to join (FREE):</h2>
             <div className={styles.ctaContainer}>
-              <EnrollButton section="join_surah_mulk_challenge" />
+              <UnauthEnrollButton section="join_surah_mulk_challenge" />
             </div>
             <div className={pageStyles.enrollmentContainer}>
               <EnrollmentCount />
@@ -61,7 +61,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="how-the-challenge-works">
             <h1>How the Challenge Works</h1>
             <div>
-              Each day of Ramadan, you'll receive a short, focused lesson built around{' '}
+              Each day of Ramadan, you'll receive an email with a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
             <ul className={pageStyles.list}>
@@ -109,7 +109,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             </div>
             <h2>Sign up today and share with your friends, family, and community:</h2>
             <div className={styles.ctaContainer}>
-              <EnrollButton section="join_surah_mulk_challenge" />
+              <UnauthEnrollButton section="join_surah_mulk_challenge" />
             </div>
           </div>
           <hr />
@@ -132,7 +132,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
               Sign up today and begin your journey with this powerful Surah.
             </div>
             <div className={styles.ctaContainer}>
-              <EnrollButton section="join_surah_mulk_challenge" />
+              <UnauthEnrollButton section="join_surah_mulk_challenge" />
             </div>
             <div className={pageStyles.learnMore}>
               To learn more about our Ramadan activities, visit{' '}

@@ -57,6 +57,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               verse={verse}
               isTranslationView={isTranslationView}
               bookmarksRangeUrl={normalizedBookmarksRangeUrl}
+              isInsideStudyMode={shouldUseModalZIndex}
             />
           </ActionItem>
           {hasTranslationsButton && (

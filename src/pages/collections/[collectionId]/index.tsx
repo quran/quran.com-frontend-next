@@ -1,11 +1,8 @@
-import { useState } from 'react';
-
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
 import BookmarkType from '@/types/BookmarkType';
-import { logValueChange } from '@/utils/eventLogger';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -13,12 +10,6 @@ import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = () => {
   const router = useRouter();
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
-
-  const onSortByChange = (newSortByVal) => {
-    logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
-    setSortBy(newSortByVal);
-  };
 
   const collectionId = router.query.collectionId as string;
   /**
@@ -38,21 +29,19 @@ const CollectionDetailPage = () => {
     if (previousPageData && !previousPageData.data) return null;
     if (pageIndex === 0) {
       return makeGetBookmarkByCollectionId(collectionId, {
-        sortBy,
+        sortBy: CollectionDetailSortOption.VerseKey,
         type: BookmarkType.Ayah,
       });
     }
     const cursor = previousPageData.pagination?.endCursor;
     return makeGetBookmarkByCollectionId(collectionId, {
-      sortBy,
+      sortBy: CollectionDetailSortOption.VerseKey,
       cursor,
       type: BookmarkType.Ayah,
     });
   };
 
-  return (
-    <CollectionDetailContainer sortBy={sortBy} getSWRKey={getKey} onSortByChange={onSortByChange} />
-  );
+  return <CollectionDetailContainer getSWRKey={getKey} />;
 };
 
 export const getServerSideProps: GetServerSideProps = withSsrRedux(

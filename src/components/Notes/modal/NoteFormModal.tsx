@@ -6,10 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 import modalStyles from './Modal.module.scss';
 import styles from './NoteFormModal.module.scss';
 
+import { LoadingState, useNotesStates } from '@/components/Notes/modal/hooks/useNotesStates';
 import NotesOnVerseButton from '@/components/Notes/modal/NotesOnVerseButton';
 import PostQRConfirmationModal from '@/components/Notes/modal/PostQrConfirmationModal';
 import ReflectionIntro from '@/components/Notes/modal/ReflectionIntro';
-import { LoadingState, useNotesStates } from '@/components/Notes/modal/useNotesStates';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
@@ -156,6 +156,7 @@ const NoteFormModal: React.FC<NoteFormModalProps> = ({
       <PostQRConfirmationModal
         isModalOpen={showConfirmationModal && isModalOpen}
         isLoading={loading === LoadingState.Public}
+        onBack={handleConfirmationBack}
         onModalClose={handleConfirmationBack}
         onEdit={handleConfirmationBack}
         onConfirm={handleConfirmationConfirm}

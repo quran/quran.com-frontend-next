@@ -58,7 +58,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCourse
             })}
             initialData={initialCoursesData}
             render={(data: CoursesResponse) => (
-              <CoursesList courses={data.data} isMyCourses={isMyCourses} />
+              <CoursesList initialResponse={data} isMyCourses={isMyCourses} languages={[lang]} />
             )}
           />
         </div>

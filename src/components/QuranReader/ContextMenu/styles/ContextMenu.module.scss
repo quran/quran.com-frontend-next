@@ -1,8 +1,6 @@
 @use 'src/styles/constants';
 @use 'src/styles/breakpoints';
 
-$sections-container-height: 2rem;
-
 .container {
   background: var(--color-background-elevated);
   color: var(--color-text-default);
@@ -12,7 +10,6 @@ $sections-container-height: 2rem;
   transition: transform var(--transition-regular);
   inline-size: 100%;
   inset-block-start: 0;
-  min-block-size: var(--context-menu-container-height);
   will-change: transform;
   box-sizing: border-box;
 
@@ -46,10 +43,6 @@ $sections-container-height: 2rem;
   }
 }
 
-.expandedContainer {
-  min-block-size: var(--context-menu-container-height);
-}
-
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;
@@ -67,8 +60,10 @@ $sections-container-height: 2rem;
 }
 
 .sectionsContainer {
-  min-block-size: $sections-container-height;
-  padding-block: calc(var(--spacing-medium) / 2);
+  box-sizing: border-box;
+  block-size: var(--context-menu-section-mobile-height);
+  max-block-size: var(--context-menu-section-mobile-height);
+  padding-block: 0;
   display: flex;
   align-items: center;
   padding-inline: calc(1.3 * var(--spacing-large));
@@ -77,14 +72,16 @@ $sections-container-height: 2rem;
   background: var(--color-background-elevated);
   margin-block-start: -1px;
   @include breakpoints.tablet {
+    block-size: var(--context-menu-section-height);
+    max-block-size: var(--context-menu-section-height);
+    padding-block: calc(var(--spacing-medium) / 2);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
+}
 
-  .visibleContainer & {
-    @include breakpoints.smallerThanTablet {
-      padding-block: 0;
-    }
-  }
+.sectionsContainerMobileExpanded {
+  block-size: var(--context-menu-section-mobile-expanded-height);
+  max-block-size: var(--context-menu-section-mobile-expanded-height);
 }
 
 .section {
@@ -165,6 +162,10 @@ $sections-container-height: 2rem;
 }
 
 .pageInfoContainer {
+  block-size: var(--context-menu-page-info-content-height);
+  box-sizing: content-box;
+  padding-block-start: var(--context-menu-page-info-padding-top);
+  padding-block-end: var(--context-menu-page-info-padding-bottom);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -198,7 +199,7 @@ $sections-container-height: 2rem;
   }
 }
 .bookmarkedIcon {
-  color: var(--color-text-default);
+  color: var(--color-bookmark-icon);
 }
 
 .primaryInfo {

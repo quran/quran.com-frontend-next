@@ -47,6 +47,14 @@ export type Course = {
   allowGuestAccess?: boolean; // Flag to allow guest users to access course lessons
 };
 
+export type CoursesPagination = {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor?: string;
+  endCursor?: string;
+};
+
 export interface CoursesResponse extends BaseResponse {
   data: Course[];
+  pagination?: CoursesPagination;
 }

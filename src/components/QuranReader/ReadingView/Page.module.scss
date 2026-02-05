@@ -12,6 +12,10 @@
   max-inline-size: 100%;
 }
 
+.linesContainer {
+  @include utility.edgeHorizontalPadding;
+}
+
 .mobileCenterText {
   text-align: center;
   direction: rtl;

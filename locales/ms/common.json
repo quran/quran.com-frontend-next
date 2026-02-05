@@ -100,6 +100,13 @@
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Penanda buku",
   "bookmarked": "Ditanda buku",
+  "bookmarks-migration": {
+    "body-1": "Penanda buku anda kini akan menjadi <strong>Ayat-ayat yang Disimpan</strong> dalam <strong>Koleksi</strong>Untuk menyimpan penanda buku semasa anda, sila log masuk atau buat akaun.",
+    "body-2": "Kami juga telah menambah Penanda Buku Bacaan baharu untuk membantu anda meneruskan dari tempat anda berhenti.",
+    "checkbox": "Jangan tunjukkan mesej ini lagi (Amaran anda akan kehilangan semua penanda buku semasa anda)",
+    "sign-in": "Daftar Masuk / Daftar",
+    "title": "Notis: Penanda Halaman Sedang Berubah"
+  },
   "both": "Kedua-duanya",
   "cancel": "Batal",
   "change-theme": "Tukar Tema",
@@ -142,6 +149,7 @@
     "decrease": "Mengurang",
     "increase": "Meningkat"
   },
+  "create": "Cipta",
   "create-my-goal": "Cipta Matlamat Saya",
   "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
   "delete": "Padam",
@@ -151,6 +159,7 @@
   "donate-now": "Derma sekarang",
   "donate_monthly": "Derma bulanan",
   "donate_once": "Derma sekali",
+  "done": "Selesai",
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
@@ -171,7 +180,10 @@
     "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
     "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayah",
-    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir."
+    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir.",
+    "reading-bookmark-remove": "Gagal mengalih keluar penanda buku bacaan",
+    "reading-bookmark-set": "Gagal menetapkan penanda buku bacaan",
+    "reading-bookmark-undo": "Gagal membuat asal penanda buku bacaan"
   },
   "errors": {
     "account-banned": "Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
@@ -208,9 +220,11 @@
     "verification-code-invalid": "Kod pengesahan ini tidak sah",
     "verification-code-length": "Kod pengesahan mestilah {{length}} digit",
     "verification-failed": "Pengesahan gagal. Sila cuba lagi.",
-    "verification-resend-failed": "Gagal menghantar semula kod pengesahan"
+    "verification-resend-failed": "Gagal menghantar semula kod pengesahan",
+    "verse-metadata-failed": "Gagal memuatkan metadata ayat"
   },
   "exciting-updates": "Kemas Kini Menarik",
+  "favorites": "Kegemaran",
   "feedback": "Maklum balas",
   "fonts": {
     "15_lines": "15 Baris",
@@ -277,6 +291,7 @@
   "input": {
     "clear": "Hilangkan"
   },
+  "join-ramadan-challenge": "🚀 Sertai Cabaran Ramadan kami!",
   "juz": "Juz",
   "language": "Bahasa",
   "languages": "Bahasa",
@@ -351,6 +366,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
   "read": "Baca",
+  "read-more": "Baca Lagi",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
     "arabic": "Bahasa Arab",
@@ -397,6 +413,7 @@
     "title": "Cari"
   },
   "seconds": "Saat",
+  "see-less": "Lihat kurang",
   "see-new": "Lihat terbaru",
   "select-language": "Pilih Bahasa",
   "settings": {
@@ -440,7 +457,8 @@
   "sort": {
     "ascending": "Menaik",
     "by": "Disusun mengikut",
-    "descending": "Menurun"
+    "descending": "Menurun",
+    "sort": "Isih"
   },
   "stay-on-track": "🎯 Kekal di landasan yang betul!",
   "style": "Gaya",

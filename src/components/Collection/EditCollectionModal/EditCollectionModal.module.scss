@@ -1,0 +1,99 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-medium);
+}
+
+.title {
+  text-align: start;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded-new);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: var(--border-radius-rounded);
+  color: var(--color-text-default);
+
+  svg {
+    block-size: var(--spacing-medium3-px);
+    inline-size: var(--spacing-medium2-px);
+  }
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  margin-block-end: var(--spacing-large);
+}
+
+.inputLabel {
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-default);
+}
+
+.collectionInput {
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: var(--border-width-small-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-large-px);
+  font-size: var(--font-size-normal);
+  background-color: var(--color-background-default);
+  color: var(--color-text-default);
+  outline: none;
+  transition: border-color var(--transition-normal) ease;
+
+  &::placeholder {
+    color: var(--color-text-faded);
+  }
+
+  &:focus {
+    border-color: var(--color-primary-medium);
+  }
+}
+
+.helperText {
+  margin: 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded-new);
+}
+
+.footer {
+  display: flex;
+  gap: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  border-block-start: var(--border-width-default) solid var(--color-borders-hairline);
+}
+
+.cancelButton {
+  flex: 1;
+  display: flex;
+
+  button {
+    border-radius: var(--border-radius-medium-px);
+    inline-size: 100%;
+  }
+}
+
+.saveButton {
+  flex: 1;
+  display: flex;
+
+  span,
+  button {
+    border-radius: var(--border-radius-medium-px);
+    text-align: center;
+    justify-content: center;
+    inline-size: 100%;
+    display: flex;
+  }
+}

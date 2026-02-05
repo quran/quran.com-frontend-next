@@ -36,7 +36,7 @@ const RecitersListPage = ({ reciters }) => {
         canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
         languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
       />
-      <div className={layoutStyle.flow}>
+      <div className={classNames(layoutStyle.flow, pageStyle.flow)}>
         <QuranReciterListHero searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
         <div className={classNames(layoutStyle.flowItem, pageStyle.recitersListContainer)}>
           <RecitersList reciters={filteredReciters} />

@@ -1,0 +1,54 @@
+{
+  "bulk-actions": {
+    "actions": "Tindakan",
+    "actions-count": "Tindakan ({{count}})",
+    "cancel": "Batal",
+    "collapse-all": "Lipat Semua",
+    "expand-all": "Kembangkan Semua",
+    "pin": "Pin",
+    "pin-verses": "Pin ayat",
+    "select": "Pilih"
+  },
+  "collections": {
+    "favorites": "Kegemaran",
+    "guest-promo": {
+      "sign-in": "Daftar masuk",
+      "subtitle": "Membandingkan dan membezakan ayat-ayat",
+      "title": "Cipta koleksi tersuai"
+    },
+    "items": "{{count}} barang",
+    "items_plural": "{{count}} barang-barang",
+    "load-more": "Muatkan lebih banyak",
+    "new-collection": "Koleksi Baharu",
+    "sort": {
+      "a-z": "A - Z",
+      "recently-updated": "Dikemas kini baru-baru ini",
+      "z-a": "Z - A"
+    },
+    "title": "Koleksi"
+  },
+  "notes-and-reflections": "Nota & Refleksi",
+  "page": "Halaman",
+  "reading-bookmark": {
+    "empty": "Mula membaca dan simpan Penanda Buku Bacaan!",
+    "title": "Penanda Buku Bacaan Saya"
+  },
+  "recent": "Terkini",
+  "recent-empty": "Mula membaca untuk melihat bacaan anda baru-baru ini",
+  "recently-saved": {
+    "title": "Disimpan Baru-baru Ini"
+  },
+  "saved": "Disimpan",
+  "search": {
+    "filter": "Penapis",
+    "placeholder": "Carian Disimpan...",
+    "sort": "Isih"
+  },
+  "sign-in-prompt": {
+    "features": {
+      "attach-notes": "Lampirkan nota pada ayat-ayat",
+      "custom-collections": "Cipta koleksi tersuai"
+    },
+    "title": "Daftar masuk atau Daftar secara percuma untuk mendapatkan akses kepada lebih banyak ciri!"
+  }
+}

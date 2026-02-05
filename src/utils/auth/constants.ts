@@ -48,3 +48,5 @@ export const SSO_PLATFORM_CONFIGS: readonly SsoPlatformConfig[] = [
   },
   // Add more platforms here as needed
 ];
+
+export const DEFAULT_COLLECTION_ID = '__default__';

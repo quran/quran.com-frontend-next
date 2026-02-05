@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useState, useContext, useRef } from 'react';
 
 import { useRouter } from 'next/router';
+import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 
 import DataContext from '@/contexts/DataContext';
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
@@ -14,21 +17,16 @@ import { isValidVerseId } from '@/utils/validator';
 import { makeVerseKey } from '@/utils/verse';
 import ScrollAlign from 'types/ScrollAlign';
 
-// Constants for scroll behavior
 const SCROLL_DELAY_MS = 1000;
 const CONTEXT_MENU_OFFSET = -70;
+const PINNED_VERSES_BAR_OFFSET = -90;
+const NAVBAR_OFFSET = -54;
 
 /**
  * This hook listens to startingVerse query param and navigate to
  * the location where the verse is in the virtualized list.
  *
  * [NOTE]: This is meant to be used for TranslationView only.
- *
- * @param {QuranReaderDataType} quranReaderDataType
- * @param {React.MutableRefObject<VirtuosoHandle>} virtuosoRef
- * @param {Record<number, Verse[]>} apiPageToVersesMap
- * @param {string} chapterId
- * @param {number} versesPerPage
  */
 const useScrollToVirtualizedTranslationView = (
   quranReaderDataType: QuranReaderDataType,
@@ -43,6 +41,15 @@ const useScrollToVirtualizedTranslationView = (
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
   const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
 
+  const pinnedVerses = useSelector(selectPinnedVerses);
+  const hasPinnedVerses = pinnedVerses.length > 0;
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+
+  const hasPinnedVersesRef = useRef(hasPinnedVerses);
+  hasPinnedVersesRef.current = hasPinnedVerses;
+  const isNavbarVisibleRef = useRef(isNavbarVisible);
+  isNavbarVisibleRef.current = isNavbarVisible;
+
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
   const isValidStartingVerse =
@@ -52,21 +59,26 @@ const useScrollToVirtualizedTranslationView = (
     (verseNumber: number) => {
       if (!virtuosoRef.current) return;
       const verseIndex = verseNumber - 1;
+      let offset = CONTEXT_MENU_OFFSET;
+      if (hasPinnedVersesRef.current) {
+        offset += PINNED_VERSES_BAR_OFFSET;
+        if (isNavbarVisibleRef.current) offset += NAVBAR_OFFSET;
+      }
       virtuosoRef.current.scrollToIndex({
         index: verseIndex,
         align: ScrollAlign.Start,
-        // this offset is to push the scroll a little bit down so that the context menu doesn't cover the verse
-        offset: CONTEXT_MENU_OFFSET,
+        offset,
       });
     },
     [virtuosoRef],
   );
 
-  // this effect runs when there is initially a `startingVerse` in the url or when the user navigates to a new verse
-  // it scrolls to the beginning of the verse cell and we set `shouldReadjustScroll` to true so that the other effect
-  // adjusts the scroll to the correct position
   useEffect(() => {
-    if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
+    if (
+      quranReaderDataType === QuranReaderDataType.Chapter &&
+      isValidStartingVerse &&
+      startingVerseNumber > 1
+    ) {
       scrollToBeginningOfVerseCell(startingVerseNumber);
       setShouldReadjustScroll(true);
     }
@@ -77,14 +89,11 @@ const useScrollToVirtualizedTranslationView = (
     scrollToBeginningOfVerseCell,
   ]);
 
-  // this effect handles the case when the user navigates to a verse that is not yet loaded
-  // we need to wait for the verse to be loaded and then scroll to it
   useEffect(() => {
     if (
       quranReaderDataType === QuranReaderDataType.Chapter &&
       isValidStartingVerse &&
-      // we only want to run this effect when the user navigates to a new verse
-      // and not when the user is scrolling through the verses while apiPageToVersesMap is being populated
+      startingVerseNumber > 1 &&
       shouldReadjustScroll
     ) {
       shouldTrackObservedVerses.current = false;
@@ -95,10 +104,6 @@ const useScrollToVirtualizedTranslationView = (
         pageNumber > 1 && isFirstVerseInPage ? !!apiPageToVersesMap[pageNumber - 1] : true;
       const isDoneLoading = !!apiPageToVersesMap[pageNumber] && isBeforeDoneLoading;
 
-      // if the verse finished loading, or the one right before, we `setTimeout` and scroll to the beginning of the verse cell (this is a hacky solution so that the verse renders before we scroll to it)
-      // and set `shouldReadjustScroll` to false so that this effect doesn't run again
-      //
-      // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
       if (isDoneLoading) {
         if (timeoutId.current !== null) {
           clearTimeout(timeoutId.current);
@@ -107,8 +112,6 @@ const useScrollToVirtualizedTranslationView = (
         timeoutId.current = setTimeout(() => {
           scrollToBeginningOfVerseCell(startingVerseNumber);
           shouldTrackObservedVerses.current = true;
-
-          // we need to add the verse we scrolled to to the queue
           verseKeysQueue.current.add(makeVerseKey(chapterId, startingVerseNumber));
         }, SCROLL_DELAY_MS);
 
@@ -131,10 +134,8 @@ const useScrollToVirtualizedTranslationView = (
     chapterId,
   ]);
 
-  // Subscribe to NEXT_AYAH and PREV_AYAH events to scroll when user clicks buttons
   useAudioNavigationScroll(quranReaderDataType, chapterId, scrollToBeginningOfVerseCell);
 
-  // this effect clears the timeout when the component unmounts
   useEffect(() => {
     return () => {
       if (timeoutId.current !== null) {

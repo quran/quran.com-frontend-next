@@ -26,7 +26,7 @@
   inline-size: 100%;
 }
 
-.ramadanTitle {
+.cardTitle {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -54,11 +54,28 @@
   }
 }
 
-.qrIcons {
+.cardHeader {
   display: flex;
   flex-direction: row;
-  gap: var(--spacing-micro);
+  gap: var(--spacing-small-px);
   align-items: center;
+}
+
+.ramadanTitle {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-warning-deep);
+  font-size: var(--font-size-small-px);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-large-px);
+  }
+}
+
+.ramadanIcon {
+  path {
+    fill: var(--color-warning-deep);
+  }
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
 }
 
 .coloredIcon {

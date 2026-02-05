@@ -1,0 +1,17 @@
+.menuItem {
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  line-height: 1;
+
+  .iconWrapper {
+    color: var(--color-grey-icons-new);
+    margin-inline-end: var(--spacing-small-px);
+  }
+}
+
+.menuItemText {
+  display: inline-flex;
+  align-items: center;
+}

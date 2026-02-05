@@ -100,6 +100,13 @@
   "beyond-ramadan": "超越斋月！",
   "bookmark": "书签",
   "bookmarked": "书签",
+  "bookmarks-migration": {
+    "body-1": "您的书签现在将成为 <strong>已保存的经文</strong> 在 <strong>收藏</strong>要保留您当前的收藏夹，请登录或创建帐户。",
+    "body-2": "我们还新增了阅读书签功能，方便您从上次中断的地方继续阅读。",
+    "checkbox": "不再显示此消息（警告：您将丢失所有现有书签）",
+    "sign-in": "登录/注册",
+    "title": "注意：书签功能正在更改"
+  },
   "both": "全选",
   "cancel": "取消",
   "change-theme": "更改主题",
@@ -142,6 +149,7 @@
     "decrease": "减少",
     "increase": "增加"
   },
+  "create": "创造",
   "create-my-goal": "创建我的目标",
   "default-description": "古兰经翻译成多种语言，界面简单易用",
   "delete": "删除",
@@ -151,6 +159,7 @@
   "donate-now": "立即捐款",
   "donate_monthly": "每月捐款",
   "donate_once": "捐赠一次",
+  "done": "完毕",
   "edit": "编辑",
   "email-verification": {
     "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
@@ -171,7 +180,10 @@
     "pref-persist-fail": "无法将您的设置同步到云端。",
     "ranges-no-value": "范围开始和结束必须具有值",
     "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
-    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
+    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。",
+    "reading-bookmark-remove": "删除阅读书​​签失败",
+    "reading-bookmark-set": "设置阅读书签失败",
+    "reading-bookmark-undo": "撤销阅读书签失败"
   },
   "errors": {
     "account-banned": "抱歉，您的帐户已被禁止。联系 Quran.Foundation",
@@ -208,9 +220,11 @@
     "verification-code-invalid": "此验证码无效",
     "verification-code-length": "验证码必须为{{length}}位数字",
     "verification-failed": "验证失败。请重试。",
-    "verification-resend-failed": "重新发送验证码失败"
+    "verification-resend-failed": "重新发送验证码失败",
+    "verse-metadata-failed": "加载诗句元数据失败"
   },
   "exciting-updates": "令人兴奋的更新",
+  "favorites": "收藏夹",
   "feedback": "反馈问题",
   "fonts": {
     "15_lines": "15行",
@@ -277,6 +291,7 @@
   "input": {
     "clear": "清除"
   },
+  "join-ramadan-challenge": "🚀 加入我们的斋月挑战！",
   "juz": "卷",
   "language": "语",
   "languages": "语言",
@@ -351,6 +366,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "在线听古兰经",
   "read": "读",
+  "read-more": "阅读更多",
   "reading-history": "阅读历史",
   "reading-preference": {
     "arabic": "阿拉伯",
@@ -397,6 +413,7 @@
     "title": "搜索"
   },
   "seconds": "秒数",
+  "see-less": "查看更少",
   "see-new": "查看最新动态",
   "select-language": "选择语言",
   "settings": {
@@ -440,7 +457,8 @@
   "sort": {
     "ascending": "正序",
     "by": "排序方式",
-    "descending": "倒序"
+    "descending": "倒序",
+    "sort": "种类"
   },
   "stay-on-track": "🎯 保持专注！",
   "style": "风格",

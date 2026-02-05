@@ -4,19 +4,28 @@
   "back-to-collection-list": "กลับไปที่รายการคอลเลกชัน",
   "collapse-all": "ย่ออายะห์ทั้งหมด",
   "collection-list-empty": "รายการคอลเลกชันว่างเปล่า คุณยังไม่ได้สร้างคอลเล็กชันใดๆ เลย",
+  "collection-name": "ชื่อคอลเลกชัน",
   "collections": "คอลเลกชัน",
   "delete-bookmark": {
     "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{bookmarkName}} จาก {{collectionName}}",
     "title": "ลบบุ๊คมาร์ก"
   },
+  "delete-collection-action": "ลบคอลเลกชัน",
+  "delete-collection-success": "ลบคอลเลกชันสำเร็จแล้ว",
   "delete-collection": {
+    "description": "คุณจะสูญเสียบทกวีทั้งหมดที่บันทึกไว้ในชุดนี้",
     "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{collectionName}}",
+    "subtitle-tagged": "คุณแน่ใจหรือไม่ว่าต้องการลบ <collectionName>{{collectionName}}</collectionName> ?",
     "title": "ลบคอลเลกชัน"
   },
+  "edit-collection": "แก้ไขคอลเลกชัน",
+  "edit-collection-name-required": "ป้อนชื่อคอลเลกชันเพื่อบันทึก",
+  "edit-collection-success": "การอัปเดตคอลเลกชันสำเร็จแล้ว",
   "empty": "คอลเลกชันว่างเปล่า",
   "expand-all": "ขยายอายะห์ทั้งหมด",
   "go-to-ayah": "ไปที่อายะห์",
   "load-more": "โหลดเพิ่มเติม",
+  "no-collections": "คุณยังไม่มีคอลเลกชันใดๆ เลย",
   "recently-added": "เพิ่มล่าสุด",
   "recently-updated": "อัพเดทล่าสุด",
   "verse-key": "เลขที่ซุเราะห์และอายะห์"

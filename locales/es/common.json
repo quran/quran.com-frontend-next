@@ -100,6 +100,13 @@
   "beyond-ramadan": "¡Crece más allá del Ramadán!",
   "bookmark": "Marcar",
   "bookmarked": "Marcado como favorito",
+  "bookmarks-migration": {
+    "body-1": "Tus marcadores ahora se convertirán en <strong>Versos guardados</strong> en <strong>Colecciones</strong>Para mantener sus marcadores actuales, inicie sesión o cree una cuenta.",
+    "body-2": "También hemos agregado un nuevo marcador de lectura para ayudarte a continuar justo donde lo dejaste.",
+    "checkbox": "No volver a mostrar este mensaje (Advertencia: perderá todos sus marcadores actuales)",
+    "sign-in": "Iniciar sesión / Registrarse",
+    "title": "Aviso: Los marcadores están cambiando"
+  },
   "both": "Ambas",
   "cancel": "Cancelar",
   "change-theme": "Cambiar tema",
@@ -142,6 +149,7 @@
     "decrease": "Disminuir",
     "increase": "Aumentar"
   },
+  "create": "Crear",
   "create-my-goal": "Crea mi meta",
   "default-description": "El Corán traducido a muchos idiomas en una interfaz sencilla y fácil de usar",
   "delete": "Borrar",
@@ -151,6 +159,7 @@
   "donate-now": "Dona ahora",
   "donate_monthly": "Donar mensualmente",
   "donate_once": "Dona una vez",
+  "done": "Hecho",
   "edit": "Editar",
   "email-verification": {
     "check-spam": "¿No has recibido el correo electrónico de verificación? Revisa tu bandeja de entrada de correo no deseado",
@@ -171,7 +180,10 @@
     "pref-persist-fail": "No se pudo sincronizar tu configuración a la nube.",
     "ranges-no-value": "La secuencia de inicio y final deben tener un valor",
     "ranges-too-many-verses": "\\n*Máximo {{maxNumberOfVerses}} aleyas",
-    "ranges-wrong-order": "El verso de inicio debe estar antes del verso final"
+    "ranges-wrong-order": "El verso de inicio debe estar antes del verso final",
+    "reading-bookmark-remove": "No se pudo eliminar el marcador de lectura",
+    "reading-bookmark-set": "No se pudo establecer el marcador de lectura",
+    "reading-bookmark-undo": "No se pudo deshacer la lectura del marcador"
   },
   "errors": {
     "account-banned": "Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
@@ -208,9 +220,11 @@
     "verification-code-invalid": "Este código de verificación no es válido",
     "verification-code-length": "El código de verificación debe tener {{length}} dígitos",
     "verification-failed": "Error en la verificación. Inténtalo de nuevo.",
-    "verification-resend-failed": "No se pudo reenviar el código de verificación"
+    "verification-resend-failed": "No se pudo reenviar el código de verificación",
+    "verse-metadata-failed": "No se pudieron cargar los metadatos del verso"
   },
   "exciting-updates": "Actualizaciones emocionantes",
+  "favorites": "Favoritos",
   "feedback": "Retroalimentación",
   "fonts": {
     "15_lines": "15 líneas",
@@ -277,6 +291,7 @@
   "input": {
     "clear": "Borrar"
   },
+  "join-ramadan-challenge": "¡Únete a nuestro desafío de Ramadán!",
   "juz": "Juz",
   "language": "Idioma",
   "languages": "Idiomas",
@@ -351,6 +366,7 @@
   "quran-com": "Quran.com",
   "quran-radio": "Radio Coránica",
   "read": "Leer",
+  "read-more": "Leer más",
   "reading-history": "Historial de lectura",
   "reading-preference": {
     "arabic": "árabe",
@@ -397,6 +413,7 @@
     "title": "Buscar"
   },
   "seconds": "Segundos",
+  "see-less": "Ver menos",
   "see-new": "Mira que hay de nuevo.",
   "select-language": "Seleccionar idioma",
   "settings": {
@@ -440,7 +457,8 @@
   "sort": {
     "ascending": "Ascendente",
     "by": "Ordenar por",
-    "descending": "Descendiente"
+    "descending": "Descendiente",
+    "sort": "Clasificar"
   },
   "stay-on-track": "¡Manténgase en el buen camino!",
   "style": "Estilo",

@@ -1,17 +1,19 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/theme';
+@use 'src/styles/utility';
 
 // Layout constants
 $container-max-width: 1230px;
 $cards-grid-min-height: 321px;
 
 .container {
+  @include utility.edgeHorizontalPadding;
   max-inline-size: $container-max-width;
   margin: 0 auto;
-  padding: var(--spacing-large) var(--spacing-medium);
+  padding-block: var(--spacing-large);
 
   @include breakpoints.smallerThanTablet {
-    padding: var(--spacing-medium) var(--spacing-small);
+    padding-block: var(--spacing-medium);
   }
 }
 

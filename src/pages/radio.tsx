@@ -34,7 +34,7 @@ const RadioPage = ({ reciters }: RadioPageProps) => {
       />
       <div className={pageStyle.pageContainer}>
         <div className={radioStyle.ribbon} />
-        <div className={pageStyle.flow}>
+        <div className={classNames(pageStyle.flow, radioStyle.flow)}>
           <div
             className={classNames(pageStyle.flowItem, radioStyle.title, radioStyle.titleOnRibbon)}
           >

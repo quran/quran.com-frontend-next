@@ -50,7 +50,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
   // Only show chapter header for verse 1 of a chapter (for multi-chapter pages like page 604)
-  // Single verse pages are handled by ReaderTopActions which shows the translation button
   const shouldShowChapterHeader = verse.verseNumber === 1;
 
   // First cell has header above it when:

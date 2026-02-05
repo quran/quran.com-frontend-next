@@ -22,6 +22,7 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import fundraisingBanner from './slices/fundraisingBanner';
+import guestBookmark from './slices/guestBookmark';
 import mediaMaker from './slices/mediaMaker';
 import microphone from './slices/microphone';
 import navbar from './slices/navbar';
@@ -32,6 +33,7 @@ import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
 import notes from './slices/QuranReader/notes';
+import pinnedVerses from './slices/QuranReader/pinnedVerses';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
@@ -53,7 +55,7 @@ import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 
 const persistConfig = {
   key: 'root',
-  version: 40,
+  version: 41,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -77,6 +79,9 @@ const persistConfig = {
     SliceName.REVELATION_ORDER,
     SliceName.ONBOARDING,
     SliceName.MEDIA_MAKER,
+    SliceName.PINNED_VERSES,
+    SliceName.GUEST_ENROLLMENT,
+    SliceName.GUEST_BOOKMARK,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -108,8 +113,10 @@ export const rootReducer = combineReducers({
   onboarding,
   mediaMaker,
   microphone,
+  guestBookmark,
   studyMode,
   verseActionModal,
+  pinnedVerses,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

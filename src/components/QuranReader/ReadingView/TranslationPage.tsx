@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import classNames from 'classnames';
+
+import { QURAN_READER_OBSERVER_ID } from '../observer';
 
 import TranslatedAyah from './TranslatedAyah';
 import styles from './TranslationPage.module.scss';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import { getLanguageDataById, toLocalizedNumber } from '@/utils/locale';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -31,8 +34,15 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   lang,
   pageHeaderChapterId,
 }) => {
+  // Register with intersection observer for page tracking
+  const observerRef = useRef<HTMLDivElement>(null);
+  useIntersectionObserver(observerRef, QURAN_READER_OBSERVER_ID);
+
+  // Get first verse data for page tracking attributes
+  const firstVerse = verses?.[0];
+
   // Get language data from the first translation for RTL direction and number formatting
-  const firstTranslation: Translation | undefined = verses?.[0]?.translations?.[0];
+  const firstTranslation: Translation | undefined = firstVerse?.translations?.[0];
   const langData = firstTranslation?.languageId
     ? getLanguageDataById(firstTranslation.languageId)
     : null;
@@ -66,7 +76,14 @@ const TranslationPage: React.FC<TranslationPageProps> = ({
   };
 
   return (
-    <div className={classNames(styles.container, langData && styles[langData.direction])}>
+    <div
+      ref={observerRef}
+      className={classNames(styles.container, langData && styles[langData.direction])}
+      data-verse-key={firstVerse?.verseKey}
+      data-page={firstVerse?.pageNumber}
+      data-chapter-id={firstVerse?.chapterId}
+      data-hizb={firstVerse?.hizbNumber}
+    >
       <div className={styles.translationContent}>{getTranslationContent()}</div>
       <div className={styles.pageFooter}>
         <span className={styles.pageNumber}>

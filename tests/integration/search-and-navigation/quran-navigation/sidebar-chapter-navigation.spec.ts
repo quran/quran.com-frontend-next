@@ -137,7 +137,7 @@ test.describe('Navigation Sidebar Route Regressions', () => {
 
       await Promise.all([
         page.waitForURL(/\/$/),
-        page.getByTitle('Quran.com').first().click({ force: true }),
+        page.getByTitle('Quran.com').nth(1).click({ force: true }),
       ]);
 
       await expect(page).toHaveURL(/\/$/);
@@ -290,6 +290,70 @@ test.describe('Navigation Functionality', () => {
       // 3. Click on verse 3 and ensure we are navigated to /1?startingVerse=3
       await Promise.all([page.waitForURL('/1?startingVerse=3'), verseList.getByText('3').click()]);
       await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
+    },
+  );
+
+  test(
+    'Verse 1 is not selected between verse clicks',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await openQuranNavigation(page);
+      await page.getByTestId(TestId.VERSE_BUTTON).click();
+
+      const sidebar = page.getByTestId(TestId.SIDEBAR_NAVIGATION);
+      const verseList = page.getByTestId(TestId.VERSE_LIST);
+
+      await Promise.all([
+        page.waitForURL(/\/2\?startingVerse=1$/),
+        sidebar.getByText('Al-Baqarah', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/2\?startingVerse=1$/);
+
+      const verseOne = verseList.getByText('1', { exact: true });
+      const verseTen = verseList.getByText('10', { exact: true });
+      const verseTwelve = verseList.getByText('12', { exact: true });
+
+      await verseOne.waitFor({ state: 'visible' });
+      await verseTen.waitFor({ state: 'visible' });
+      await verseTwelve.waitFor({ state: 'visible' });
+
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=10$/), verseTen.click()]);
+      await expect(verseTen).toHaveClass(/selectedItem/);
+      await expect(verseOne).not.toHaveClass(/selectedItem/);
+
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=12$/), verseTwelve.click()]);
+      await expect(verseTwelve).toHaveClass(/selectedItem/);
+    },
+  );
+
+  test(
+    'Selecting verse 274 keeps it selected after 3 seconds',
+    { tag: ['@slow', '@navigation', '@verse'] },
+    async ({ page, isMobile }) => {
+      test.skip(isMobile, 'Drawer navigation closes automatically on mobile devices');
+
+      await openQuranNavigation(page);
+      await page.getByTestId(TestId.VERSE_BUTTON).click();
+
+      const sidebar = page.getByTestId(TestId.SIDEBAR_NAVIGATION);
+      const verseList = page.getByTestId(TestId.VERSE_LIST);
+
+      await Promise.all([
+        page.waitForURL(/\/2\?startingVerse=1$/),
+        sidebar.getByText('Al-Baqarah', { exact: true }).click(),
+      ]);
+      await expect(page).toHaveURL(/\/2\?startingVerse=1$/);
+
+      const verseTwoSeventyFour = verseList.getByText('274', { exact: true });
+      await verseTwoSeventyFour.waitFor({ state: 'visible' });
+
+      await Promise.all([page.waitForURL(/\/2\?startingVerse=274$/), verseTwoSeventyFour.click()]);
+      await expect(verseTwoSeventyFour).toHaveClass(/selectedItem/);
+
+      await page.waitForTimeout(3000);
+      await expect(verseTwoSeventyFour).toHaveClass(/selectedItem/);
     },
   );
 

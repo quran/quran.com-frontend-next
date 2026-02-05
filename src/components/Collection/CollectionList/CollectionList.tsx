@@ -113,6 +113,7 @@ const CollectionList = () => {
             selectedOptionId={sortBy}
             onChange={onSortOptionChanged}
             isSingleCollection={false}
+            collectionId={null}
           />
         </div>
         <div className={styles.collectionListContainer}>

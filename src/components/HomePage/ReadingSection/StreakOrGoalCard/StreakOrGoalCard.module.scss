@@ -45,16 +45,32 @@
   background-color: var(--color-streaks-dark);
   color: var(--color-text-white);
   font-weight: var(--font-weight-bold);
+
+  padding-block: 0;
+  padding-inline-end: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    block-size: calc(var(--spacing-small-plus-px) * 4);
+  }
+
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+    padding-block: var(--spacing-small-px);
+    padding-inline: var(--spacing-medium-px);
+  }
+
+  border: none;
+
   svg {
     path {
       fill: var(--color-text-white);
     }
   }
+
   &:hover {
     background-color: var(--color-streaks-dark);
-  }
-  @include breakpoints.tablet {
-    font-size: var(--font-size-normal-px);
+    color: var(--color-text-white);
+    filter: brightness(var(--opacity-85));
   }
 }
 

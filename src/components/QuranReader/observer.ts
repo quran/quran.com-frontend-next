@@ -13,15 +13,17 @@ const OBSERVER_THRESHOLD = 0.1;
 export const QURAN_READER_OBSERVER_ID = 'quranReaderObserver';
 export const REFLECTIONS_OBSERVER_ID = 'reflectionsObserver';
 /**
- * the top -115.6px was calculated based on:
- *
- * 1. the height of emptySpacePlaceholder of navbar (3.6rem).
- * 2. the top padding of the QuranReader container (2rem).
- * 3. the top and bottom margin of the ReadingPreferenceSwitcher container (1.625rem).
- *
- * and the total is 7.225rem around 115.6 pixels.
+ * The top offset for page navigation scrolling in reading mode.
+ * This provides enough clearance for the navbar without excessive spacing.
  */
-const READING_MODE_ROOT_MARGIN = '-115.6px 0px -70% 0px';
+export const READING_MODE_TOP_OFFSET = 60;
+/**
+ * The top offset for the intersection observer in reading mode.
+ * Based on navbar height (3.6rem) + container padding (2rem) +
+ * ReadingPreferenceSwitcher margin (1.625rem) = 7.225rem ≈ 116px.
+ */
+const READING_MODE_OBSERVER_OFFSET = 116;
+const READING_MODE_ROOT_MARGIN = `-${READING_MODE_OBSERVER_OFFSET}px 0px -70% 0px`;
 
 /**
  * Get the observer options based on the reading preference.
