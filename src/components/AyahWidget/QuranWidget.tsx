@@ -85,6 +85,9 @@ const getWidgetFontStyles = (): string => `
   .quran-widget [data-merged-verses] span {
     font-size: ${WIDGET_ARABIC_FONT_SIZE} !important;
   }
+  .quran-widget [class*="VerseText_verseText"] {
+    gap: 6px;
+  }
   .quran-widget [data-verse-key],
   .quran-widget h1,
   .quran-widget [data-merged-verses] {
