@@ -162,7 +162,9 @@ export const buildEmbedIframeConfig = (
  * @returns {string} Complete HTML iframe snippet.
  */
 export const buildEmbedSnippet = (preferences: Preferences, translationIdsCsv: string): string => {
-  const { src, widthValue, heightValue } = buildEmbedIframeConfig(preferences, translationIdsCsv);
+  const { src, widthValue, heightValue } = buildEmbedIframeConfig(preferences, translationIdsCsv, {
+    omitDefaults: true,
+  });
   const scriptSrc = resolveEmbedScriptSrc();
   const heightAttribute = heightValue ? `\n  height="${heightValue}"` : '';
   const maxHeightAttribute = heightValue ? `\n  data-quran-embed-max-height="${heightValue}"` : '';
