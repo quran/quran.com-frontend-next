@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
+import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
+import HadithIcon from '@/icons/bx-book.svg';
 import ChatIcon from '@/icons/chat.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -17,11 +19,13 @@ import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVersesIcon from '@/icons/related-verses.svg';
 import { openStudyMode } from '@/redux/slices/QuranReader/studyMode';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import Language from '@/types/Language';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseAnswersNavigationUrl,
+  getVerseHadithsNavigationUrl,
   getVerseLessonNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
@@ -79,27 +83,25 @@ const BottomActions = ({
   const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraatData = (qiraatCount ?? 0) > 0;
 
-  /**
-   * Handle tab click or keyboard event
-   * @param {TabId} tabType - Type of tab for logging
-   * @param {() => string} navigationFn - Function that returns navigation URL
-   * @returns {(e: React.MouseEvent | React.KeyboardEvent) => void} Event handler function
-   */
+  // Use backend hadith count to check if hadiths exist for this verse
+  const { data: hadithCount } = useBatchedCountRangeHadiths(verseKey, lang as Language);
+  const hasHadiths = (hadithCount ?? 0) > 0;
+
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
     return () => {
-      // Open Study Mode for tafsir, reflections, and lessons
-      if (tabType === TabId.TAFSIR) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.TAFSIR }));
-      } else if (tabType === TabId.REFLECTIONS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.REFLECTIONS }));
-      } else if (tabType === TabId.LESSONS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
-      } else if (tabType === TabId.RELATED_VERSES) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.RELATED_VERSES }));
-      } else if (tabType === TabId.ANSWERS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
-      } else if (tabType === TabId.QIRAAT) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.QIRAAT }));
+      const tabIdMap: Record<TabId, StudyModeTabId> = {
+        [TabId.TAFSIR]: StudyModeTabId.TAFSIR,
+        [TabId.REFLECTIONS]: StudyModeTabId.REFLECTIONS,
+        [TabId.LESSONS]: StudyModeTabId.LESSONS,
+        [TabId.RELATED_VERSES]: StudyModeTabId.RELATED_VERSES,
+        [TabId.ANSWERS]: StudyModeTabId.ANSWERS,
+        [TabId.QIRAAT]: StudyModeTabId.QIRAAT,
+        [TabId.HADITH]: StudyModeTabId.HADITH,
+      };
+
+      const studyModeTab = tabIdMap[tabType];
+      if (studyModeTab) {
+        dispatch(openStudyMode({ verseKey, activeTab: studyModeTab }));
       }
 
       logButtonClick(
@@ -151,6 +153,13 @@ const BottomActions = ({
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: createTabHandler(TabId.QIRAAT, () => getVerseQiraatNavigationUrl(verseKey)),
       condition: hasQiraatData,
+    },
+    {
+      id: TabId.HADITH,
+      label: t('quran-reader:hadith.title'),
+      icon: <HadithIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: createTabHandler(TabId.HADITH, () => getVerseHadithsNavigationUrl(verseKey)),
+      condition: hasHadiths,
     },
     {
       id: TabId.RELATED_VERSES,

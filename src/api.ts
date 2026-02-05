@@ -2,6 +2,7 @@
 import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
+import { AyahHadithsResponse, HadithCountResponse } from '@/types/Hadith';
 import Language from '@/types/Language';
 import { QiraatApiResponse } from '@/types/Qiraat';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
@@ -36,6 +37,7 @@ import {
   makeQiraatMatrixUrl,
   makeQiraatJuncturesCountUrl,
 } from '@/utils/apiPaths';
+import { makeHadithsByAyahUrl, makeHadithCountWithinRangeUrl } from '@/utils/hadith';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -467,3 +469,32 @@ export const getQiraatJuncturesCount = async (range: {
   from: string;
   to: string;
 }): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range));
+
+/**
+ * Get hadiths for a specific ayah (paginated).
+ *
+ * @param {string} ayahKey - The ayah key (e.g., "96:1")
+ * @param {Language} language - The language of the hadiths
+ * @param {number} page - Page number for pagination
+ * @param {number} limit - Number of hadiths per page
+ * @returns {Promise<AyahHadithsResponse>}
+ */
+export const getAyahHadiths = async (
+  ayahKey: string,
+  language: Language,
+  page = 1,
+  limit = 4,
+): Promise<AyahHadithsResponse> => fetcher(makeHadithsByAyahUrl(ayahKey, language, page, limit));
+
+/**
+ * Get hadith count within a verse range.
+ *
+ * @param {{ from: string; to: string }} range - The verse range object with from and to keys
+ * @param {Language} language - The language of the hadiths
+ * @returns {Promise<HadithCountResponse>}
+ */
+export const getHadithCountWithinRange = async (
+  range: { from: string; to: string },
+  language: Language,
+): Promise<HadithCountResponse> =>
+  fetcher(makeHadithCountWithinRangeUrl(range.from, range.to, language));

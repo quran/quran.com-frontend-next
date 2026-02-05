@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -6,14 +7,18 @@ import useTranslation from 'next-translate/useTranslation';
 import { StudyModeTabId } from './StudyModeBottomActions';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useBatchedCountRangeHadiths from '@/hooks/auth/useBatchedCountRangeHadiths';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
+import HadithIcon from '@/icons/bx-book.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
+import { AyahHadithsResponse } from '@/types/Hadith';
+import Language from '@/types/Language';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 
@@ -37,6 +42,10 @@ const StudyModeQiraatTab = dynamic(() => import('./tabs/StudyModeQiraatTab'), {
   loading: TafsirSkeleton,
 });
 
+const StudyModeHadithTab = dynamic(() => import('./tabs/Hadith'), {
+  loading: TafsirSkeleton,
+});
+
 export const StudyModeRelatedVersesTab = dynamic(
   () => import('./tabs/RelatedVerses/StudyModeRelatedVersesTab'),
   {
@@ -55,6 +64,7 @@ export const TAB_COMPONENTS: Partial<
       questionId?: string;
       questionsInitialData?: AyahQuestionsResponse;
       tafsirIdOrSlug?: string;
+      hadithsInitialData?: AyahHadithsResponse;
       onGoToVerse?: (chapterId: string, verseNumber: string) => void;
     }>
   >
@@ -65,6 +75,7 @@ export const TAB_COMPONENTS: Partial<
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
   [StudyModeTabId.QIRAAT]: StudyModeQiraatTab,
   [StudyModeTabId.RELATED_VERSES]: StudyModeRelatedVersesTab,
+  [StudyModeTabId.HADITH]: StudyModeHadithTab,
 };
 
 export type TabConfig = {
@@ -96,7 +107,7 @@ export const useStudyModeTabs = ({
   onTabChange?: (tabId: StudyModeTabId | null) => void;
   hasRelatedVerses: boolean;
 }): TabConfig[] => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const { data: questionData, isLoading: isLoadingQuestions } =
     useBatchedCountRangeQuestions(verseKey);
@@ -105,6 +116,12 @@ export const useStudyModeTabs = ({
 
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
+
+  const { data: hadithCount, isLoading: isLoadingHadiths } = useBatchedCountRangeHadiths(
+    verseKey,
+    lang as Language,
+  );
+  const hasHadiths = (hadithCount ?? 0) > 0 || isLoadingHadiths;
 
   // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender.
   useLayoutEffect(() => {
@@ -117,7 +134,12 @@ export const useStudyModeTabs = ({
     if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
       onTabChange?.(null);
     }
-  }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
+
+    // Auto-close Hadith tab when there are no hadiths
+    if (activeTab === StudyModeTabId.HADITH && !hasHadiths) {
+      onTabChange?.(null);
+    }
+  }, [activeTab, hasQuestions, hasQiraat, hasHadiths, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -159,6 +181,13 @@ export const useStudyModeTabs = ({
       icon: <QiraatIcon color="var(--color-blue-buttons-and-icons)" />,
       onClick: () => handleTabClick(StudyModeTabId.QIRAAT),
       condition: hasQiraat,
+    },
+    {
+      id: StudyModeTabId.HADITH,
+      label: t('quran-reader:hadith.title'),
+      icon: <HadithIcon color="var(--color-blue-buttons-and-icons)" />,
+      onClick: () => handleTabClick(StudyModeTabId.HADITH),
+      condition: hasHadiths,
     },
     {
       id: StudyModeTabId.RELATED_VERSES,

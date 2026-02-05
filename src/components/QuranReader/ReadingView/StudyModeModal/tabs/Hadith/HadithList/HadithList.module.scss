@@ -1,0 +1,45 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  block-size: 100%;
+}
+
+.hadithCard {
+  background-color: var(--color-surface-secondary);
+  border-radius: var(--border-radius-medium);
+  padding: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hadithHeader {
+  margin-block-end: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  border-block-end: 1px solid var(--color-border-primary);
+}
+
+.hadithSource {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.hadithBody {
+  line-height: 1.6;
+  color: var(--color-text-primary);
+
+  p {
+    margin: 0;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-medium);
+}
+
+.infiniteScrollTrigger {
+  block-size: 1px;
+}

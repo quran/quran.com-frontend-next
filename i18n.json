@@ -95,6 +95,7 @@
       "notes",
       "surah-info"
     ],
+    "/[chapterId]/hadith": ["quran-reader", "reading-goal", "notes", "surah-info"],
     "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
   }
 }
