@@ -100,7 +100,7 @@ All Quran text fonts use viewport-relative units: `vh` for tablet and `vw` for m
 | 5     | 4.5vh       | 8.6vw       |
 | 6     | 5.3vh       | 10vw        |
 | 7     | 6.14vh      | 12vw        |
-| 8     | 7vh         | 15vw        |
+| 8     | 7vh         | 13vw        |
 | 9     | 7.77vh      | 14vw        |
 | 10    | 11.05vh     | 16vw        |
 
@@ -113,7 +113,7 @@ All Quran text fonts use viewport-relative units: `vh` for tablet and `vw` for m
 | 3     | 3.2vh       | 5.3vw       |
 | 4     | 3.5vh       | 6.3vw       |
 | 5     | 3.7vh       | 7.4vw       |
-| 6     | 7.3vh       | 8.4vw       |
+| 6     | 4.4vh       | 8.4vw       |
 | 7     | 5.16vh      | 10vw        |
 | 8     | 5.9vh       | 11vw        |
 | 9     | 6.62vh      | 12vw        |
@@ -128,7 +128,7 @@ All Quran text fonts use viewport-relative units: `vh` for tablet and `vw` for m
 | 3     | 3.2vh       | 5.3vw       |
 | 4     | 3.5vh       | 6.3vw       |
 | 5     | 3.7vh       | 7.4vw       |
-| 6     | 3.95vh      | 8.4vw       |
+| 6     | 4.45vh      | 8.4vw       |
 | 7     | 5.16vh      | 10vw        |
 | 8     | 5.9vh       | 11vw        |
 | 9     | 6.62vh      | 12vw        |
