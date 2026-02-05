@@ -20,7 +20,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import truncate, { getVisibleTextLength } from '@/utils/html-truncate';
 import { toLocalizedNumber } from '@/utils/locale';
 import { parseReflectionBody } from '@/utils/quranReflect/bodyParser';
-import { isRTLReflection } from '@/utils/quranReflect/locale';
+import { ARABIC_LANGUAGE_ID, isRTLReflection } from '@/utils/quranReflect/locale';
 import { getReflectionGroupLink } from '@/utils/quranReflect/navigation';
 import {
   MAX_REFLECTION_LENGTH,
@@ -167,7 +167,7 @@ const ReflectionItem: React.FC<Props> = ({
         <p className="debugger" />
         <span
           className={classNames(styles.body, FONT_SIZE_CLASS_MAP[fontScale])}
-          lang={reflection.languageId === 1 ? 'ar' : undefined}
+          lang={reflection.languageId === ARABIC_LANGUAGE_ID ? 'ar' : undefined}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),

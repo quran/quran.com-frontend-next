@@ -30,6 +30,13 @@
     direction: rtl;
     display: block;
   }
+
+  &[lang='ar'] {
+    font-family: 'Kitab';
+  }
+  &[lang='ar'] * {
+    font-family: inherit;
+  }
 }
 
 .moreOrLessText {
@@ -67,13 +74,6 @@
 
 .rtl {
   direction: rtl;
-}
-
-.body[lang='ar'] {
-  font-family: 'Kitab';
-}
-.body[lang='ar'] * {
-  font-family: inherit;
 }
 
 .ltr {
