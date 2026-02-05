@@ -36,9 +36,10 @@ $tablet-max-width: 50rem;
 }
 
 .pageBody {
+  max-inline-size: 750px; // intended
+  box-sizing: border-box;
   padding-inline: calc(1 * var(--spacing-xsmall));
   @include breakpoints.tablet {
-    max-inline-size: $tablet-max-width;
     margin-inline: auto;
     padding-inline: calc(1.5 * var(--spacing-medium));
   }

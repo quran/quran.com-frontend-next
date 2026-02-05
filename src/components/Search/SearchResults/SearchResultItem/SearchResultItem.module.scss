@@ -1,6 +1,10 @@
 .iconContainer {
   padding-block-start: var(--spacing-micro);
   padding-inline-end: var(--spacing-small);
+  svg {
+    inline-size: var(--spacing-medium-plus2-px);
+    block-size: var(--spacing-medium-plus2-px);
+  }
 }
 
 .container {
