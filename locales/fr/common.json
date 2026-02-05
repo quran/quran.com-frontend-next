@@ -100,6 +100,13 @@
   "beyond-ramadan": "Progressez Au-Delà du Ramadan !",
   "bookmark": "Favori",
   "bookmarked": "Favori ajouté",
+  "bookmarks-migration": {
+    "body-1": "Vos favoris vont maintenant devenir <strong>Versets sauvés</strong> dans <strong>Collections</strong>Pour conserver vos favoris actuels, veuillez vous connecter ou créer un compte.",
+    "body-2": "Nous avons également ajouté un nouveau signet de lecture pour vous permettre de reprendre votre lecture là où vous l'aviez laissée.",
+    "checkbox": "Ne plus afficher ce message (Attention : vous perdrez tous vos favoris actuels)",
+    "sign-in": "Se connecter / S'inscrire",
+    "title": "Avis : Les signets sont en cours de modification"
+  },
   "both": "Tous",
   "cancel": "Annuler",
   "change-theme": "Changer de thème",
@@ -459,6 +466,8 @@
   "subscribe": "S'abonner",
   "subscribed": "Abonné(e)",
   "surah": "Sourate",
+  "tab-see-less": "Voir moins...",
+  "tab-see-more": "Voir plus...",
   "tafsir": {
     "font-size": "Taille de la police du Tafsir",
     "group-message": "Vous lisez un tafsir pour le groupe d'Ayahs {{from}} à {{to}}",
