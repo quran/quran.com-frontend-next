@@ -124,7 +124,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           aria-label="Play audio"
         >
           <span data-play-icon>
-            <PlayIcon style={{ width: 16, height: 16 }} />
+            <PlayIcon style={{ width: 16, height: 16, display: 'block' }} />
           </span>
           <span data-pause-icon style={{ display: 'none' }}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
