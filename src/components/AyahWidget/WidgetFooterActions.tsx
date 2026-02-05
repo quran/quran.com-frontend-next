@@ -13,6 +13,7 @@ type Props = {
   verse: Verse;
   options: WidgetOptions;
   colors: WidgetColors;
+  children?: React.ReactNode;
 };
 
 type FooterAction = {
@@ -41,7 +42,7 @@ const ICON_STYLE: React.CSSProperties = {
   display: 'inline-flex',
 };
 
-const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => {
+const WidgetFooterActions = ({ verse, options, colors, children }: Props): JSX.Element => {
   const chapterNumber = verse.chapterId ?? options.ayah.split(':')[0];
   const startVerse = verse.verseNumber ?? Number(options.ayah.split(':')[1] || 0);
 
@@ -79,7 +80,7 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
       },
   ].filter((action): action is FooterAction => Boolean(action));
 
-  if (!actions.length) {
+  if (!actions.length && !children) {
     return <></>;
   }
 
@@ -91,29 +92,46 @@ const WidgetFooterActions = ({ verse, options, colors }: Props): JSX.Element => 
         backgroundColor: colors.secondaryBg,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 10,
-          direction: isRtl ? 'rtl' : 'ltr',
-          justifyContent: 'flex-start',
-        }}
-      >
-        {actions.map((action) => (
-          <a
-            key={action.label}
-            href={action.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={BUTTON_BASE_STYLE(colors)}
-            dir={isRtl ? 'rtl' : 'ltr'}
-          >
-            {action.icon}
-            <span>{action.label}</span>
-          </a>
-        ))}
-      </div>
+      {Boolean(actions.length) && (
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 10,
+            direction: isRtl ? 'rtl' : 'ltr',
+            justifyContent: 'flex-start',
+          }}
+        >
+          {actions.map((action) => (
+            <a
+              key={action.label}
+              href={action.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={BUTTON_BASE_STYLE(colors)}
+              dir={isRtl ? 'rtl' : 'ltr'}
+            >
+              {action.icon}
+              <span>{action.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
+      {/* separator if there are actions and children */}
+      {children && (
+        <>
+          {Boolean(actions.length) && (
+            <div
+              style={{
+                height: 1,
+                margin: '12px 0',
+                backgroundColor: colors.borderColor,
+              }}
+            />
+          )}
+          <div>{children}</div>
+        </>
+      )}
     </div>
   );
 };

@@ -22,6 +22,7 @@ import type Verse from 'types/Verse';
 type Props = {
   verses: Verse[];
   options: WidgetOptions;
+  children?: React.ReactNode;
 };
 
 /**
@@ -162,7 +163,7 @@ const getWidgetFontStyles = (): string => `
  * @param {Props} props - Component props.
  * @returns {JSX.Element} QuranWidget JSX Element
  */
-const QuranWidget = ({ verses, options }: Props): JSX.Element => {
+const QuranWidget = ({ verses, options, children }: Props): JSX.Element => {
   // Convert widget mushaf option to QuranFont for VerseText component
   const quranFont = getQuranFontForMushaf(options.mushaf);
 
@@ -216,7 +217,9 @@ const QuranWidget = ({ verses, options }: Props): JSX.Element => {
         </div>
       </div>
 
-      <WidgetFooterActions verse={firstVerse} options={options} colors={colors} />
+      <WidgetFooterActions verse={firstVerse} options={options} colors={colors}>
+        {children}
+      </WidgetFooterActions>
 
       {options.enableAudio && audioUrl && (
         <audio
