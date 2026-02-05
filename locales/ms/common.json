@@ -100,6 +100,13 @@
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Penanda buku",
   "bookmarked": "Ditanda buku",
+  "bookmarks-migration": {
+    "body-1": "Penanda buku anda kini akan menjadi <strong>Ayat-ayat yang Disimpan</strong> dalam <strong>Koleksi</strong>Untuk menyimpan penanda buku semasa anda, sila log masuk atau buat akaun.",
+    "body-2": "Kami juga telah menambah Penanda Buku Bacaan baharu untuk membantu anda meneruskan dari tempat anda berhenti.",
+    "checkbox": "Jangan tunjukkan mesej ini lagi (Amaran anda akan kehilangan semua penanda buku semasa anda)",
+    "sign-in": "Daftar Masuk / Daftar",
+    "title": "Notis: Penanda Halaman Sedang Berubah"
+  },
   "both": "Kedua-duanya",
   "cancel": "Batal",
   "change-theme": "Tukar Tema",
@@ -459,6 +466,8 @@
   "subscribe": "Langgan",
   "subscribed": "Dilanggan",
   "surah": "Surah",
+  "tab-see-less": "Lihat kurang...",
+  "tab-see-more": "Lihat lagi...",
   "tafsir": {
     "font-size": "Saiz fon Tafsir",
     "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat dari {{from}} hingga {{to}}",

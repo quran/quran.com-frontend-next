@@ -100,6 +100,13 @@
   "beyond-ramadan": "超越斋月！",
   "bookmark": "书签",
   "bookmarked": "书签",
+  "bookmarks-migration": {
+    "body-1": "您的书签现在将成为 <strong>已保存的经文</strong> 在 <strong>收藏</strong>要保留您当前的收藏夹，请登录或创建帐户。",
+    "body-2": "我们还新增了阅读书签功能，方便您从上次中断的地方继续阅读。",
+    "checkbox": "不再显示此消息（警告：您将丢失所有现有书签）",
+    "sign-in": "登录/注册",
+    "title": "注意：书签功能正在更改"
+  },
   "both": "全选",
   "cancel": "取消",
   "change-theme": "更改主题",
@@ -459,6 +466,8 @@
   "subscribe": "订阅",
   "subscribed": "已订阅",
   "surah": "章",
+  "tab-see-less": "收起...",
+  "tab-see-more": "查看更多…",
   "tafsir": {
     "font-size": "Tafsir 字体大小",
     "group-message": "{{from}}至{{to}}节的经注",

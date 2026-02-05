@@ -100,6 +100,13 @@
   "beyond-ramadan": "Jiendeleze Baada ya Ramadhani!",
   "bookmark": "Alamisha",
   "bookmarked": "Zilizoalamishwa",
+  "bookmarks-migration": {
+    "body-1": "Alamisho zako sasa zitakuwa <strong>Mistari Iliyohifadhiwa</strong> katika <strong>Mikusanyiko</strong>Ili kuhifadhi alamisho zako za sasa, tafadhali ingia au fungua akaunti.",
+    "body-2": "Pia tumeongeza Alamisho mpya ya Kusoma ili kukusaidia kuendelea pale ulipoishia.",
+    "checkbox": "Usionyeshe ujumbe huu tena (Inakuonya utapoteza alamisho zako zote za sasa)",
+    "sign-in": "Ingia / Jisajili",
+    "title": "Taarifa: Alamisho Zinabadilika"
+  },
   "both": "Zote mbili",
   "cancel": "Batilisha",
   "change-theme": "Badilisha Mandhari",
@@ -459,6 +466,8 @@
   "subscribe": "Jisajili",
   "subscribed": "Umejisajili",
   "surah": "Sura",
+  "tab-see-less": "Tazama kidogo...",
+  "tab-see-more": "Tazama zaidi...",
   "tafsir": {
     "font-size": "Ukubwa wa fonti ya Tafsir",
     "group-message": "Unasoma tafsir kwa kundi la aya {{from}} hadi {{to}}",

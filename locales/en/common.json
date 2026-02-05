@@ -100,6 +100,13 @@
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Bookmark",
   "bookmarked": "Bookmarked",
+  "bookmarks-migration": {
+    "body-1": "Your bookmarks will now become <strong>Saved Verses</strong> in <strong>Collections</strong>. To keep your current bookmarks, please sign in or create an account.",
+    "body-2": "We've also added a new Reading Bookmark to help you continue right where you left off.",
+    "checkbox": "Do not show this message again (Warning you will lose all of your current bookmarks)",
+    "sign-in": "Sign In / Sign Up",
+    "title": "Notice: Bookmarks Are Changing"
+  },
   "both": "Both",
   "cancel": "Cancel",
   "change-theme": "Change Theme",
@@ -406,8 +413,6 @@
     "title": "Search"
   },
   "seconds": "Seconds",
-  "tab-see-more": "See more...",
-  "tab-see-less": "See less...",
   "see-less": "See less",
   "see-new": "See What's New",
   "select-language": "Select Language",
@@ -461,6 +466,8 @@
   "subscribe": "Subscribe",
   "subscribed": "Subscribed",
   "surah": "Surah",
+  "tab-see-less": "See less...",
+  "tab-see-more": "See more...",
   "tafsir": {
     "font-size": "Tafsir font size",
     "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",

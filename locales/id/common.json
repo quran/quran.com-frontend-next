@@ -100,6 +100,13 @@
   "beyond-ramadan": "Terus bertumbuh Selepas Ramadan!",
   "bookmark": "Penanda",
   "bookmarked": "Ditandai",
+  "bookmarks-migration": {
+    "body-1": "Bookmark Anda sekarang akan menjadi <strong>Ayat-ayat Tersimpan</strong> di dalam <strong>Koleksi</strong>Untuk menyimpan bookmark Anda saat ini, silakan masuk atau buat akun.",
+    "body-2": "Kami juga menambahkan Bookmark Bacaan baru untuk membantu Anda melanjutkan tepat di tempat Anda berhenti.",
+    "checkbox": "Jangan tampilkan pesan ini lagi (Peringatan: Anda akan kehilangan semua bookmark Anda saat ini)",
+    "sign-in": "Masuk / Daftar",
+    "title": "Pemberitahuan: Bookmark Sedang Berubah"
+  },
   "both": "Keduanya",
   "cancel": "Batal",
   "change-theme": "Ubah Tema",
@@ -459,6 +466,8 @@
   "subscribe": "Mendaftar",
   "subscribed": "Terdaftar",
   "surah": "Surah",
+  "tab-see-less": "Lihat lebih sedikit...",
+  "tab-see-more": "Lihat selengkapnya...",
   "tafsir": {
     "font-size": "Ukuran font tafsir",
     "group-message": "Anda sedang membaca tafsir untuk kelompok ayat dari {{from}} hingga {{to}}",
