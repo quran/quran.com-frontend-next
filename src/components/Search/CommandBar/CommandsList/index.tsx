@@ -39,6 +39,7 @@ export interface Command extends SearchNavigationResult {
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
   searchQuery?: string;
+  resultItemClassName?: string;
 }
 
 export const RESULTS_GROUP = 'results';
@@ -46,6 +47,7 @@ export const RESULTS_GROUP = 'results';
 const CommandsList: React.FC<Props> = ({
   commandGroups: { groups, numberOfCommands },
   searchQuery,
+  resultItemClassName,
 }) => {
   const { t } = useTranslation('common');
   const arabicChaptersData = useGetChaptersData(Language.AR);
@@ -204,7 +206,9 @@ const CommandsList: React.FC<Props> = ({
                       role="option"
                       aria-selected={isSelected}
                       key={index}
-                      className={classNames(styles.command, { [styles.selected]: isSelected })}
+                      className={classNames(styles.command, resultItemClassName, {
+                        [styles.selected]: isSelected,
+                      })}
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
