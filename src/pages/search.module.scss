@@ -1,6 +1,6 @@
 @use 'src/styles/breakpoints';
 
-$tablet-max-width: 50rem;
+$tablet-max-width: 750px;
 
 .pageContainer {
   margin-block-start: var(--spacing-medium);
@@ -36,7 +36,7 @@ $tablet-max-width: 50rem;
 }
 
 .pageBody {
-  max-inline-size: 750px; // intended
+  max-inline-size: $tablet-max-width;
   box-sizing: border-box;
   padding-inline: calc(1 * var(--spacing-xsmall));
   @include breakpoints.tablet {
