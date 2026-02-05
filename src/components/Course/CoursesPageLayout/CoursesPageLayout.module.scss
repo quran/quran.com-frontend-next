@@ -19,6 +19,6 @@
     font-family: 'Kitab';
   }
   :global(html[lang='ar']) & * {
-    font-family: inherit !important;
+    font-family: inherit;
   }
 }
