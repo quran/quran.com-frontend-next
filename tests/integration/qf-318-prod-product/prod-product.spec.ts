@@ -133,6 +133,42 @@ const ensureLastReadVerseSeeded = async (page: Page) => {
   );
 };
 
+const seedDetectedCountryInPersistedState = async (page: Page, country: string) => {
+  const countryCode = (country || 'US').toUpperCase();
+  await page.evaluate((detectedCountry) => {
+    try {
+      const storageKey = 'persist:root';
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return;
+
+      let root: any = {};
+      try {
+        root = JSON.parse(raw) || {};
+      } catch {
+        return;
+      }
+
+      if (!root?._persist) return;
+
+      const sliceRaw = root.defaultSettings;
+      if (!sliceRaw) return;
+
+      let slice: any = {};
+      try {
+        slice = JSON.parse(sliceRaw) || {};
+      } catch {
+        return;
+      }
+
+      slice.detectedCountry = detectedCountry;
+      root.defaultSettings = JSON.stringify(slice);
+      localStorage.setItem(storageKey, JSON.stringify(root));
+    } catch {
+      // ignore
+    }
+  }, countryCode);
+};
+
 const buildCacheBustQuery = () =>
   `__prod_product=${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
@@ -458,6 +494,78 @@ test.describe('QF-318 (prod) — product regression smoke', () => {
 
       const after = await getSelectedTranslations(page);
       expect(after).toContain(targetId);
+    },
+  );
+
+  test(
+    'Guest: switching to English uses detected country defaults (Vietnam)',
+    { tag: ['@prod-product'] },
+    async ({ page }) => {
+      const debug = attachDebugCapture(page);
+      await clearAuthAndQdcCookies(page);
+
+      // Start in a non-English locale so switching to English triggers default settings fetching.
+      await ensureLastReadVerseSeeded(page);
+      await setManualLocaleCookies(page, 'ar');
+      await page.goto(`/ar/1?${buildCacheBustQuery()}`, {
+        waitUntil: 'domcontentloaded',
+        timeout: 60000,
+      });
+      await page.locator('[data-verse-key]').first().waitFor({ state: 'attached', timeout: 60000 });
+      await waitForReduxHydration(page);
+      await waitForContextMenu(page, debug);
+
+      const settings = await getDefaultSettings(page);
+      expect(settings?.userHasCustomised).toBe(false);
+      expect(settings?.isUsingDefaultSettings).toBe(true);
+
+      // We can't reliably spoof Cloudflare geo on prod, so simulate a VN visitor by seeding the
+      // detected country into persisted state and reloading.
+      await seedDetectedCountryInPersistedState(page, 'VN');
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      await page.locator('[data-verse-key]').first().waitFor({ state: 'attached', timeout: 60000 });
+      await waitForReduxHydration(page);
+      await waitForContextMenu(page, debug);
+
+      await expect.poll(async () => (await getDefaultSettings(page))?.detectedCountry).toBe('VN');
+
+      const prefReqPromise = page.waitForRequest((req) => {
+        const url = req.url();
+        return (
+          url.includes('/api/proxy/content/api/qdc/resources/country_language_preference') &&
+          url.includes('user_device_language=en') &&
+          url.includes('country=VN')
+        );
+      });
+
+      await selectNavigationDrawerLanguage(page, 'en');
+      await prefReqPromise;
+
+      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+      await waitForReduxHydration(page);
+
+      // Verify selected translations match EN+VN defaults.
+      const apiDefaults = await fetchCountryLanguagePreference(page.request, {
+        language: 'en',
+        country: 'VN',
+      });
+      const expectedIds = (apiDefaults?.defaultTranslations || []).map((t: any) => t.id);
+
+      const translations = await getSelectedTranslations(page);
+      expectedIds.forEach((id: number) => {
+        expect(translations).toContain(id);
+      });
+
+      // Ensure guest manual locale cookies are set (even for default locale).
+      await expect
+        .poll(async () => {
+          const cookies = await page.context().cookies();
+          return {
+            nextLocale: cookies.find((c) => c.name === 'NEXT_LOCALE')?.value,
+            manual: cookies.find((c) => c.name === 'QDC_MANUAL_LOCALE')?.value,
+          };
+        })
+        .toEqual({ nextLocale: 'en', manual: '1' });
     },
   );
 });

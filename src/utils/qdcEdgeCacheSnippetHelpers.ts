@@ -102,10 +102,11 @@ export const parseCookies = (cookieHeader: string): Record<string, string> => {
   return out;
 };
 
+const USER_ID_COOKIE_NAMES = ['id', 'id_test', 'id_staging', 'id_staging2', 'id_prelive'];
+
 export const getUserIdCookieValue = (cookies: Record<string, string>): string | null => {
-  if (cookies.id) return cookies.id;
-  for (const key in cookies) {
-    if (key === 'id' || key.startsWith('id_')) return cookies[key];
+  for (const name of USER_ID_COOKIE_NAMES) {
+    if (cookies[name]) return cookies[name];
   }
   return null;
 };

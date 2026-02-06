@@ -61,7 +61,6 @@ const CONFIG = {
     '/my-learning-plans',
     '/my-quran',
     '/take-notes',
-    '/complete-signup',
   ],
 
   BYPASS_PATH_PREFIXES: [
@@ -76,6 +75,8 @@ const CONFIG = {
   TOKEN_QUERY_KEYS: ['token', 'code', 'redirectBack', 'redirect_to', 'visitedPlatform'],
 
   CONTENT_API_ALLOWLIST_PREFIXES: [
+    // WARNING: Only add truly public endpoints here.
+    // User-specific APIs require separate handling with user context in the cache key.
     '/api/proxy/content/api/qdc/verses/by_chapter/',
     '/api/proxy/content/api/qdc/resources/translations',
     '/api/proxy/content/api/qdc/resources/country_language_preference',
@@ -124,7 +125,7 @@ export default {
     }
 
     // Only cache HTML document requests from here.
-    if (!isHtmlDocumentRequest(request)) return fetch(request);
+    if (!isHtmlDocumentRequest(request, url.pathname)) return fetch(request);
 
     const { urlLocale, restPath } = splitLocaleFromPath(url.pathname, CONFIG.SUPPORTED_LOCALES);
 
@@ -288,11 +289,11 @@ async function handleNextDataRequest({ request, url, cookies, deviceLanguage, cf
 
   if (prefsKey) {
     cacheKeyUrl.searchParams.set('__qdc_p', prefsKey);
-    if (isPrivate && userKey) cacheKeyUrl.searchParams.set('__qdc_u', userKey);
   } else {
     cacheKeyUrl.searchParams.set('__qdc_d', localeForPreferences);
     cacheKeyUrl.searchParams.set('__qdc_c', countryForPreferences);
   }
+  if (isPrivate && userKey) cacheKeyUrl.searchParams.set('__qdc_u', userKey);
 
   const cacheKeyReq = new Request(cacheKeyUrl.toString(), { method: 'GET' });
   const cache = caches.default;
@@ -360,7 +361,7 @@ function shouldBypassHtmlPath(pathname) {
   if (!pathname) return true;
 
   for (const prefix of CONFIG.BYPASS_PATH_PREFIXES) {
-    if (pathname === prefix || pathname.startsWith(prefix)) return true;
+    if (pathname === prefix || pathname.startsWith(`${prefix}/`)) return true;
   }
 
   // Next internals: HTML caching doesn't apply.
@@ -396,12 +397,33 @@ function isBypassPath(pathname) {
   return false;
 }
 
-function isHtmlDocumentRequest(request) {
+function isHtmlDocumentRequest(request, pathname) {
+  // 1) Browsers send Sec-Fetch-Dest: document
   const dest = request.headers.get('Sec-Fetch-Dest') || '';
   if (dest === 'document') return true;
 
+  // 2) Most crawlers/clients send Accept: text/html
   const accept = request.headers.get('Accept') || '';
-  return accept.includes('text/html');
+  if (accept.includes('text/html')) return true;
+
+  // 3) Fallback: if no headers hint at HTML, but the path looks like a page
+  //    (not an asset, API, or internal route), treat it as HTML-eligible.
+  //    This prevents crawlers/monitors without proper headers from bypassing cache.
+  if (!pathname) return false;
+
+  // Explicitly not HTML: assets, APIs, Next.js internals
+  if (pathname.startsWith('/_next/')) return false;
+  if (pathname.startsWith('/api/')) return false;
+  if (
+    /\.(?:js|css|map|png|jpg|jpeg|gif|svg|webp|avif|ico|txt|xml|json|woff2?|ttf|eot)$/i.test(
+      pathname,
+    )
+  ) {
+    return false;
+  }
+
+  // If it looks like a page path (/, /vi, /vi/5, /surah/1, etc.), assume HTML
+  return true;
 }
 
 function parseCookies(cookieHeader) {
@@ -463,10 +485,9 @@ function normalizeCacheToken(value) {
 }
 
 function getUserIdCookieValue(cookies) {
-  if (cookies.id) return cookies.id;
-  // Support env-suffixed cookie names (e.g. id_staging).
-  for (const key in cookies) {
-    if (key === 'id' || key.startsWith('id_')) return cookies[key];
+  const allowedNames = ['id', 'id_test', 'id_staging', 'id_staging2', 'id_prelive'];
+  for (const name of allowedNames) {
+    if (cookies[name]) return cookies[name];
   }
   return null;
 }
@@ -515,19 +536,6 @@ function normalizeUrlForCache(originalUrl) {
   return url.toString();
 }
 
-function isCacheableHtmlOriginResponse(res) {
-  if (!res) return false;
-  if (res.status < 200 || res.status >= 300) return false;
-
-  const contentType = res.headers.get('Content-Type') || '';
-  if (!contentType.includes('text/html')) return false;
-
-  const setCookie = res.headers.get('Set-Cookie');
-  if (setCookie) return false;
-
-  return true;
-}
-
 function isCacheableJsonOriginResponse(res) {
   if (!res) return false;
   if (res.status !== 200) return false;
@@ -569,13 +577,6 @@ function getSetCookieNames(setCookieHeader) {
     .filter(Boolean)
     .map((part) => part.split('=')[0]?.trim())
     .filter(Boolean);
-}
-
-function isOnlyCloudflareCookies(setCookieHeader) {
-  const names = getSetCookieNames(setCookieHeader);
-  if (names.length === 0) return true;
-  const allowed = new Set(['__cf_bm', 'cf_clearance', '__cfruid']);
-  return names.every((name) => allowed.has(name));
 }
 
 function isSafeSetCookieForCaching(setCookieHeader) {
@@ -724,11 +725,11 @@ function buildHtmlCacheKeyUrl({
   cacheKeyUrl.searchParams.set('__qdc_l', localeKey);
   if (prefsKey) {
     cacheKeyUrl.searchParams.set('__qdc_p', prefsKey);
-    if (isPrivate && userKey) cacheKeyUrl.searchParams.set('__qdc_u', userKey);
   } else {
     cacheKeyUrl.searchParams.set('__qdc_d', localeForPreferences);
     cacheKeyUrl.searchParams.set('__qdc_c', countryForPreferences);
   }
+  if (isPrivate && userKey) cacheKeyUrl.searchParams.set('__qdc_u', userKey);
   return cacheKeyUrl;
 }
 

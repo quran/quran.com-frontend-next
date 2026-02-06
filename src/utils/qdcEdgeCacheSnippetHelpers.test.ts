@@ -89,9 +89,11 @@ describe('qdcEdgeCacheSnippetHelpers', () => {
     expect(stableHashToKey('abc')).not.toBe(stableHashToKey('abcd'));
   });
 
-  it('parseCookies + getUserIdCookieValue extracts id and id_* cookie values', () => {
+  it('parseCookies + getUserIdCookieValue extracts allowlisted id cookie values', () => {
     expect(getUserIdCookieValue(parseCookies('id=111; foo=bar'))).toBe('111');
     expect(getUserIdCookieValue(parseCookies('id_staging=222; foo=bar'))).toBe('222');
+    expect(getUserIdCookieValue(parseCookies('id_staging2=333; foo=bar'))).toBe('333');
+    expect(getUserIdCookieValue(parseCookies('id_tracker=444; foo=bar'))).toBeNull();
     expect(getUserIdCookieValue(parseCookies('foo=bar'))).toBeNull();
   });
 
