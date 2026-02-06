@@ -1,4 +1,4 @@
-@use "src/styles/theme";
+@use 'src/styles/theme';
 
 .container {
   position: relative;
@@ -35,7 +35,7 @@
   margin-block-end: var(--spacing-medium);
 
   & > svg {
-    height: var(--spacing-small);
+    block-size: var(--spacing-small);
     path {
       fill: var(--color-text-faded);
     }

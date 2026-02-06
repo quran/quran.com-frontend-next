@@ -1,50 +1,71 @@
-import classNames from 'classnames';
+import { useMemo } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import modalStyles from './Modal.module.scss';
-
+import { LOADING_POST_ID } from '@/components/Notes/modal/constant';
+import Header from '@/components/Notes/modal/Header';
 import NoteFormModal from '@/components/Notes/modal/NoteFormModal';
 import {
+  CacheAction,
   getNoteFromResponse,
   invalidateCache,
   isNotePublishFailed,
+  addReflectionEntityToNote,
 } from '@/components/Notes/modal/utility';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import ArrowIcon from '@/icons/arrow.svg';
 import { addNote } from '@/utils/auth/api';
+import { verseKeysToRanges } from '@/utils/verseKeys';
 
 interface AddNoteModalProps {
   notesCount?: number;
-  onMyNotes: () => void;
   isModalOpen: boolean;
+  verseKeys: string[];
+  showRanges?: boolean;
+  onMyNotes: () => void;
   onModalClose: () => void;
-  verseKey: string;
   onBack?: () => void;
 }
 
 const AddNoteModal: React.FC<AddNoteModalProps> = ({
   notesCount = 0,
-  onMyNotes,
   isModalOpen,
+  verseKeys,
+  showRanges = false,
   onModalClose,
-  verseKey,
+  onMyNotes,
   onBack,
 }) => {
   const { t } = useTranslation('notes');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
 
+  /**
+   * Calculate optimized verse ranges from verse keys.
+   *
+   * Groups sequential verse keys into ranges within the same chapter.
+   * Ranges never span across chapter boundaries.
+   *
+   * @example
+   * Input:  ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7', '2:1', '2:2', '2:7']
+   * Output: ['1:1-1:7', '2:1-2:2', '2:7-2:7']
+   */
+  const ranges = useMemo(() => {
+    return verseKeysToRanges(verseKeys);
+  }, [verseKeys]);
+
   const handleSaveNote = async ({ note, isPublic }: { note: string; isPublic: boolean }) => {
     try {
       const data = await addNote({
         body: note,
-        ranges: [`${verseKey}-${verseKey}`],
+        ranges,
         saveToQR: isPublic,
       });
 
-      if (isNotePublishFailed(data)) {
+      const isFailedToPublish = isNotePublishFailed(data);
+      const noteFromResponse = getNoteFromResponse(data);
+
+      if (isFailedToPublish) {
         toast(t('notes:save-publish-failed'), { status: ToastStatus.Error });
       } else {
         toast(t('notes:save-success'), { status: ToastStatus.Success });
@@ -53,9 +74,15 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
       invalidateCache({
         mutate,
         cache,
-        verseKeys: [verseKey],
-        note: getNoteFromResponse(data),
+        verseKeys,
+        note:
+          isFailedToPublish || !isPublic
+            ? noteFromResponse
+            : addReflectionEntityToNote(noteFromResponse, LOADING_POST_ID),
         invalidateCount: true,
+        invalidateReflections: isPublic,
+        flushNotesList: true,
+        action: CacheAction.CREATE,
       });
     } catch (error) {
       toast(t('common:error.general'), { status: ToastStatus.Error });
@@ -66,32 +93,16 @@ const AddNoteModal: React.FC<AddNoteModalProps> = ({
   return (
     <NoteFormModal
       header={
-        onBack ? (
-          <button
-            type="button"
-            className={classNames(modalStyles.headerButton, modalStyles.title)}
-            onClick={onBack}
-            data-testid="add-note-modal-title"
-          >
-            <IconContainer
-              icon={<ArrowIcon />}
-              shouldForceSetColors={false}
-              size={IconSize.Custom}
-              className={modalStyles.arrowIcon}
-            />
-            {t('take-a-note-or-reflection')}
-          </button>
-        ) : (
-          <h2 className={modalStyles.title} data-testid="add-note-modal-title">
-            {t('take-a-note-or-reflection')}
-          </h2>
-        )
+        <Header onClick={onBack} data-testid="add-note-modal-title">
+          {t('take-a-note-or-reflection')}
+        </Header>
       }
       isModalOpen={isModalOpen}
       onModalClose={onModalClose}
       onMyNotes={onMyNotes}
       notesCount={notesCount}
       onSaveNote={handleSaveNote}
+      ranges={showRanges ? ranges : undefined}
       dataTestId="add-note-modal-content"
     />
   );

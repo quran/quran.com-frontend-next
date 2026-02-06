@@ -1,9 +1,16 @@
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect, useContext } from 'react';
 
-import { useSelector } from '@xstate/react';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector as useReduxSelector } from 'react-redux';
 
+import {
+  fromPersistedValue,
+  isVerseInChapter,
+  normalizeVerseRange,
+  toPersistedValue,
+} from './RepeatAudioModal.helpers';
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
@@ -13,6 +20,8 @@ import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { selectRepeatSettings, setRepeatSettings } from '@/redux/slices/AudioPlayer/state';
+import { RepeatSettings } from '@/redux/types/AudioState';
 import { TestId } from '@/tests/test-ids';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
@@ -43,24 +52,29 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
 
+  // State from XState (audio player machine)
   const audioService = useContext(AudioPlayerMachineContext);
-  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
-  const repeatState = repeatActor?.getSnapshot();
-  const repeatSettings = repeatState?.context;
+  const repeatActor = useXstateSelector(audioService, (state) => state.context.repeatActor);
+  const repeatActorContext = repeatActor?.getSnapshot()?.context;
+  const isInRepeatMode = useXstateSelector(audioService, (state) => !!state.context.repeatActor);
 
+  // State from Redux (persisted settings)
+  const persistedSettings = useReduxSelector(selectRepeatSettings);
+
+  // Hooks
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
   const {
-    actions: { onSettingsChangeWithoutDispatch },
+    actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
-  const chapterName = useMemo(() => {
+  const chapterData = useMemo(() => {
     if (!chaptersData) {
       return null;
     }
-    const chapterData = getChapterData(chaptersData, chapterId);
-    return chapterData?.transliteratedName;
+    return getChapterData(chaptersData, chapterId);
   }, [chapterId, chaptersData]);
+
+  const chapterName = chapterData?.transliteratedName;
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
     if (!chaptersData) {
@@ -83,39 +97,119 @@ const RepeatAudioModal = ({
     chapterId,
   );
 
-  const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
-    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
-    from: selectedVerseKey ?? firstVerseKeyInThisChapter,
-    to: selectedVerseKey ?? lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
-  });
+  const chapterNumber = Number(chapterId);
 
-  // reset verseRepetition's `to` and `from`, when chapter changed
+  // Initial state
+  // Priority: repeatActor (currently playing) > persistedSettings > defaults
+  const getInitialVerseRepetition = () => {
+    // For numeric settings: actor > persisted > defaults
+    const repeatRange = fromPersistedValue(
+      repeatActorContext?.repeatSettings?.totalRangeCycle ?? persistedSettings?.repeatRange,
+      2,
+    );
+    const repeatEachVerse = fromPersistedValue(
+      repeatActorContext?.repeatSettings?.totalVerseCycle ?? persistedSettings?.repeatEachVerse,
+      2,
+    );
+    const delayMultiplier = fromPersistedValue(
+      repeatActorContext?.delayMultiplier ?? persistedSettings?.delayMultiplier,
+      1,
+    );
+
+    // For verse keys: only use persisted if they're in the current chapter
+    const persistedFrom = isVerseInChapter(persistedSettings?.from, chapterNumber)
+      ? persistedSettings?.from
+      : undefined;
+    const persistedTo = isVerseInChapter(persistedSettings?.to, chapterNumber)
+      ? persistedSettings?.to
+      : undefined;
+
+    return {
+      repeatRange,
+      repeatEachVerse,
+      delayMultiplier,
+      from: selectedVerseKey ?? persistedFrom ?? firstVerseKeyInThisChapter,
+      to: selectedVerseKey ?? persistedTo ?? lastVerseKeyInThisChapter,
+    };
+  };
+
+  const [verseRepetition, setVerseRepetition] = useState(getInitialVerseRepetition);
+
+  // Reset from/to when chapter changes, but respect persisted values if they exist for this chapter
   useEffect(() => {
-    setVerseRepetition((prevVerseRepetition) => ({
-      ...prevVerseRepetition,
-      from: selectedVerseKey || firstVerseKeyInThisChapter,
-      to: selectedVerseKey || lastVerseKeyInThisChapter,
+    // Check if we have persisted values for this chapter
+    const persistedFrom = isVerseInChapter(persistedSettings?.from, chapterNumber)
+      ? persistedSettings?.from
+      : undefined;
+    const persistedTo = isVerseInChapter(persistedSettings?.to, chapterNumber)
+      ? persistedSettings?.to
+      : undefined;
+
+    setVerseRepetition((prev) => ({
+      ...prev,
+      // Priority: selectedVerseKey (explicit selection) > persisted > chapter defaults
+      from: selectedVerseKey ?? persistedFrom ?? firstVerseKeyInThisChapter,
+      to: selectedVerseKey ?? persistedTo ?? lastVerseKeyInThisChapter,
     }));
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
+  }, [
+    chapterId,
+    chapterNumber,
+    firstVerseKeyInThisChapter,
+    lastVerseKeyInThisChapter,
+    selectedVerseKey,
+    persistedSettings?.from,
+    persistedSettings?.to,
+  ]);
 
   const play = () => {
+    // Normalize: ensure from <= to
+    const normalized = normalizeVerseRange(verseRepetition.from, verseRepetition.to);
+
+    if (!chapterData) {
+      return;
+    }
     audioService.send({
       type: 'SET_REPEAT_SETTING',
       delayMultiplier: Number(verseRepetition.delayMultiplier),
       repeatEachVerse: Number(verseRepetition.repeatEachVerse),
-      from: Number(getVerseNumberFromKey(verseRepetition.from)),
-      to: Number(getVerseNumberFromKey(verseRepetition.to)),
+      from: Number(getVerseNumberFromKey(normalized.from)),
+      to: Number(getVerseNumberFromKey(normalized.to)),
       repeatRange: Number(verseRepetition.repeatRange),
-      surah: Number(getChapterNumberFromKey(verseRepetition.from)),
+      surah: Number(getChapterNumberFromKey(normalized.from)),
     });
     onClose();
   };
 
   const onPlayClick = () => {
+    if (!chapterData) {
+      return;
+    }
     logButtonClick('start_repeat_play');
-    onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, play);
+
+    // Normalize the range before saving
+    const normalized = normalizeVerseRange(verseRepetition.from, verseRepetition.to);
+
+    // Prepare settings for persistence (convert Infinity to -1)
+    const settingsToSave: RepeatSettings = {
+      from: normalized.from,
+      to: normalized.to,
+      repeatRange: toPersistedValue(verseRepetition.repeatRange),
+      repeatEachVerse: toPersistedValue(verseRepetition.repeatEachVerse),
+      delayMultiplier: verseRepetition.delayMultiplier,
+    };
+
+    // onSettingsChange:
+    // 1. Dispatches setRepeatSettings to Redux (local persistence via redux-persist)
+    // 2. Calls backend API for logged-in users
+    // 3. Calls play() as success callback
+    onSettingsChange(
+      'repeatSettings',
+      settingsToSave,
+      setRepeatSettings(settingsToSave),
+      setRepeatSettings(persistedSettings ?? undefined), // undo action
+      PreferenceGroup.AUDIO,
+      play,
+    );
   };
 
   const onCancelClick = () => {
@@ -223,7 +317,9 @@ const RepeatAudioModal = ({
         <Modal.Action onClick={isInRepeatMode ? onStopRepeating : onCancelClick}>
           {isInRepeatMode ? t('audio.player.stop-repeating') : t('cancel')}
         </Modal.Action>
-        <Modal.Action onClick={onPlayClick}>{t('audio.player.start-playing')}</Modal.Action>
+        <Modal.Action onClick={onPlayClick} isDisabled={!chapterData}>
+          {t('audio.player.start-playing')}
+        </Modal.Action>
       </Modal.Footer>
     </Modal>
   );

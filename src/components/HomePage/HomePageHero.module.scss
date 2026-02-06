@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .outerContainer {
   position: relative;
@@ -9,10 +9,11 @@
   position: absolute;
   z-index: -1;
   inset: 0;
+  overflow: hidden;
   background-color: var(--color-search-background);
 
   svg {
-    width: 100%;
+    inline-size: 100%;
     transform: translateY(-40%);
   }
 }
@@ -20,7 +21,7 @@
 .innerContainer {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  block-size: 100%;
   align-items: center;
   padding-inline: var(--spacing-small);
   padding-block: var(--spacing-medium2-px);
@@ -33,7 +34,7 @@
 }
 
 .logoContainer {
-  padding-bottom: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium2-px);
   @include breakpoints.smallerThanTablet {
     display: none;
     padding: 0;

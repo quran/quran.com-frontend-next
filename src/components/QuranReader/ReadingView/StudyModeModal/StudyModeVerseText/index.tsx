@@ -20,6 +20,7 @@ import { WordClickFunctionality } from '@/types/QuranReader';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey } from '@/utils/verse';
+import { getWordTextFieldNameByFont } from '@/utils/word';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word, { CharType } from 'types/Word';
@@ -49,7 +50,8 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
   const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   const isQcfFont = isQCFFont(quranFont);
-  const { pageNumber } = words[0];
+  const firstWord = words?.[0];
+  const pageNumber = firstWord?.pageNumber;
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
 
   const handleWordClick = useCallback(
@@ -83,6 +85,10 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
     [onWordClick, isRecitationEnabled, audioService],
   );
 
+  if (!words || words.length === 0) {
+    return null;
+  }
+
   return (
     <>
       <SeoTextForVerse words={words} />
@@ -99,10 +105,14 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
             const isHighlighted =
               highlightedWordLocation && word.location === highlightedWordLocation;
 
+            const textFieldName = getWordTextFieldNameByFont(quranFont);
+            const wordText =
+              word[textFieldName] || word.textUthmani || word.text || word.qpcUthmaniHafs || '';
+
             const wordContent = isQcfFont ? (
               <GlyphWord
                 font={quranFont}
-                qpcUthmaniHafs={word.qpcUthmaniHafs}
+                qpcUthmaniHafs={word.qpcUthmaniHafs || word.textUthmani || ''}
                 pageNumber={word.pageNumber}
                 textCodeV1={word.codeV1}
                 textCodeV2={word.codeV2}
@@ -110,7 +120,7 @@ const StudyModeVerseText: React.FC<StudyModeVerseTextProps> = ({
                 isHighlighted={isHighlighted}
               />
             ) : (
-              <TextWord font={quranFont} text={word.text} charType={word.charTypeName} />
+              <TextWord font={quranFont} text={wordText} charType={word.charTypeName} />
             );
 
             return (

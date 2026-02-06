@@ -6,7 +6,7 @@
 .container {
   line-height: var(--spacing-micro);
   & button {
-    width: var(--spacing-mega) !important;
+    inline-size: var(--spacing-mega) !important;
   }
 }
 
@@ -28,7 +28,7 @@
 
 .copyButtonText {
   font-size: var(--font-size-xsmall);
-  margin-top: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-xxsmall);
   text-align: center;
   white-space: nowrap;
 }

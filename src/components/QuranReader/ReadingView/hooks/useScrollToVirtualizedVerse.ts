@@ -1,17 +1,23 @@
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
+import { shallowEqual, useSelector } from 'react-redux';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import useFetchVersePageNumber from './useFetchVersePageNumber';
 
 import useAudioNavigationScroll from '@/hooks/useAudioNavigationScroll';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectPinnedVerses } from '@/redux/slices/QuranReader/pinnedVerses';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont, QuranReaderDataType } from '@/types/QuranReader';
 import { getVersePositionWithinAMushafPage } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
+
+const PINNED_VERSES_BAR_OFFSET = -90;
+const NAVBAR_OFFSET = -54;
 
 /**
  * This hook listens to startingVerse query param and navigate to the
@@ -48,6 +54,15 @@ const useScrollToVirtualizedReadingView = (
   const { startingVerse, chapterId } = router.query;
   const shouldScroll = useRef(true);
 
+  const pinnedVerses = useSelector(selectPinnedVerses);
+  const hasPinnedVerses = pinnedVerses.length > 0;
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+
+  const hasPinnedVersesRef = useRef(hasPinnedVerses);
+  hasPinnedVersesRef.current = hasPinnedVerses;
+  const isNavbarVisibleRef = useRef(isNavbarVisible);
+  isNavbarVisibleRef.current = isNavbarVisible;
+
   const fetchVersePageNumber = useFetchVersePageNumber(
     quranReaderStyles.quranFont,
     quranReaderStyles.mushafLines,
@@ -75,6 +90,12 @@ const useScrollToVirtualizedReadingView = (
       if (respectScrollGuard && shouldScroll.current === false) return;
       if (!virtuosoRef.current || !Object.keys(pagesVersesRange).length) return;
 
+      let pinnedOffset = 0;
+      if (hasPinnedVersesRef.current) {
+        pinnedOffset += PINNED_VERSES_BAR_OFFSET;
+        if (isNavbarVisibleRef.current) pinnedOffset += NAVBAR_OFFSET;
+      }
+
       const initialDataFirstPage = initialData.verses[0]?.pageNumber;
       const firstPageOfCurrentChapter =
         isUsingDefaultFont && initialDataFirstPage
@@ -90,6 +111,7 @@ const useScrollToVirtualizedReadingView = (
             `${chapterId}:${verseNumber}`,
             pagesVersesRange[startFromVerseData.pageNumber],
           ),
+          offset: pinnedOffset,
         });
         if (respectScrollGuard) shouldScroll.current = false;
         return;
@@ -107,6 +129,7 @@ const useScrollToVirtualizedReadingView = (
               `${chapterId}:${verseNumber}`,
               pagesVersesRange[page],
             ),
+            offset: pinnedOffset,
           });
 
           if (respectScrollGuard) shouldScroll.current = false;
@@ -130,8 +153,8 @@ const useScrollToVirtualizedReadingView = (
       // if startingVerse is present in the url
       if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
         const startingVerseNumber = Number(startingVerse);
-        // if the startingVerse is a valid integer and is above 1
-        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
+        // if the startingVerse is a valid integer and is above 1 (skip verse 1 since it's already at the top)
+        if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 1) {
           scrollToVerse(startingVerseNumber, true);
         }
       }

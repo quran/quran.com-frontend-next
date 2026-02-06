@@ -18,6 +18,7 @@ interface Props {
   keepIndicatorOnUnchecked?: boolean;
   id: string;
   onChange: (checked: boolean) => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   checked?: boolean | typeof INDETERMINATE;
   disabled?: boolean;
   required?: boolean;
@@ -40,6 +41,7 @@ const Checkbox: React.FC<Props> = ({
   label,
   name,
   onChange,
+  onClick,
 }) => {
   return (
     <div
@@ -52,6 +54,7 @@ const Checkbox: React.FC<Props> = ({
         required={required}
         onCheckedChange={onChange}
         id={id}
+        onClick={onClick}
         className={classNames(styles.checkbox, checkboxClassName)}
         defaultChecked={defaultChecked}
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.

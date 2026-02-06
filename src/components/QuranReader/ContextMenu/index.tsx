@@ -2,6 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import PinnedVersesBar from '../PinnedVersesBar';
 import ReadingModeToggle from '../ReadingPreferenceSwitcher/ReadingModeToggle';
 import TajweedColors from '../TajweedBar/TajweedBar';
 
@@ -30,7 +31,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     isSidebarNavigationVisible,
     showNavbar,
     isSideBarVisible,
-    isExpanded,
     mushaf,
     verseKey,
     isTranslationMode,
@@ -66,7 +66,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
-        [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
     >
@@ -86,7 +85,11 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
         </div>
       )}
 
-      <div className={styles.sectionsContainer}>
+      <div
+        className={classNames(styles.sectionsContainer, {
+          [styles.sectionsContainerMobileExpanded]: isMobileScrolledView,
+        })}
+      >
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
           <div className={classNames(styles.row, { [styles.mobileNavRow]: showNavbar })}>
@@ -139,11 +142,9 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
 
-      {/* Tajweed colors bar will only show when tajweed mushaf enabled and not in translation mode */}
-      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
-
-      {/* Reading progress bar */}
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
+      <PinnedVersesBar />
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
     </div>
   );
 };

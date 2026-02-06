@@ -1,0 +1,204 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/constants';
+
+.outerContainer {
+  padding-block-end: var(--spacing-medium-px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-alternative-faint-new);
+  color: var(--color-text-default-new);
+  border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  transition: all var(--transition-moderate) ease-out;
+  animation: fadeInSlide var(--transition-fast) ease-out backwards;
+
+  // CSS variable for consistent padding across header and content areas
+  --cell-padding: var(--spacing-medium-px);
+
+  .contentSeparator {
+    margin-block-end: var(--spacing-medium-px);
+    margin-inline: var(--cell-padding);
+    inline-size: unset;
+  }
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  user-select: none;
+  padding: var(--cell-padding);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxsmall-px);
+}
+
+.verseReference {
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-default-new);
+  text-decoration: underline;
+  text-underline-offset: var(--spacing-micro-px);
+  transition: color var(--transition-fast) ease-out;
+
+  .outerContainer:hover & {
+    color: var(--color-primary-medium);
+  }
+}
+
+.bookmarkDate {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+}
+
+.iconButton {
+  all: unset;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
+
+  &,
+  & svg {
+    color: var(--color-text-default-new);
+  }
+
+  cursor: pointer;
+  min-inline-size: auto;
+  border-radius: var(--border-radius-small-px);
+
+  &:focus-visible {
+    outline-offset: var(--spacing-hairline-px);
+    outline: var(--spacing-hairline-px) solid var(--color-primary-medium);
+  }
+
+  &:active {
+    transform: scale(constants.$button-active-scale);
+  }
+}
+
+.dot3 {
+  block-size: var(--spacing-medium2-px);
+  inline-size: var(--spacing-medium2-px);
+}
+
+.arrowUp,
+.arrowDown {
+  inline-size: var(--spacing-small-px);
+  block-size: var(--spacing-medium-px);
+}
+
+.arrowUp {
+  transform: rotate(-90deg);
+}
+
+.arrowDown {
+  transform: rotate(90deg);
+}
+
+.cellContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  direction: ltr;
+  padding: 0 var(--cell-padding) var(--cell-padding) var(--cell-padding);
+
+  .bottomActionsContainer,
+  .topActionsContainer {
+    padding-inline: 0;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xlarge-px) var(--cell-padding);
+}
+
+.contentContainer {
+  flex: 1;
+  position: relative;
+  // Smooth fade in for content
+  animation: fadeIn var(--transition-fast) ease-out;
+}
+
+.arabicVerseContainer {
+  direction: rtl;
+  margin-block: var(--spacing-medium2-px);
+
+  @include breakpoints.tablet {
+    margin-block: var(--spacing-medium3-px);
+  }
+}
+
+.verseTranslationContainer {
+  margin-block-end: var(--spacing-medium2-px);
+}
+
+// Animation keyframes
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-small-px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.headerRight {
+  .checkboxContainer {
+    margin: 0;
+  }
+
+  .checkbox {
+    cursor: pointer;
+    box-sizing: border-box;
+
+    block-size: var(--spacing-medium2-px);
+    inline-size: var(--spacing-medium2-px);
+    border-radius: var(--border-radius-xsmall2-px);
+    background: var(--color-daily-progress);
+    border-color: var(--color-text-white);
+
+    &:hover {
+      border-color: var(--color-blue-buttons-and-icons);
+    }
+
+    &[data-state='checked'],
+    & [data-state='checked'] {
+      border-color: var(--color-blue-buttons-and-icons);
+      background: var(--color-blue-buttons-and-icons);
+
+      path {
+        stroke: var(--color-text-white);
+      }
+    }
+  }
+}

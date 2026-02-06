@@ -11,6 +11,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openFeedbackModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -23,17 +24,20 @@ interface TranslationFeedbackActionProps {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  isInsideStudyMode?: boolean;
 }
 
 const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  isInsideStudyMode = false,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { t } = useTranslation('quran-reader');
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -44,19 +48,23 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
       return;
     }
 
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
     // Dispatch Redux action to open translation feedback modal
     dispatch(
       openFeedbackModal({
         verseKey: verse.verseKey,
         verse,
         isTranslationView,
-        wasOpenedFromStudyMode: isStudyModeOpen,
+        wasOpenedFromStudyMode: openedFromStudyMode,
         studyModeRestoreState:
-          isStudyModeOpen && studyModeVerseKey
+          openedFromStudyMode && studyModeVerseKey
             ? {
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -73,7 +81,9 @@ const TranslationFeedbackAction: React.FC<TranslationFeedbackActionProps> = ({
     router,
     verse,
     isTranslationView,
+    isInsideStudyMode,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,

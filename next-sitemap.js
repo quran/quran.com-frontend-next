@@ -80,6 +80,24 @@ const getAvailableReciters = async () => {
   return data;
 };
 
+const getVersesWithQiraat = async () => {
+  const qiraatURL = `${API_CONTENT_URL}${QDC_PREFIX}/qiraat/matrix/count_within_range?from=1:1&to=114:6`;
+  const { signature, timestamp } = generateSignature(qiraatURL);
+
+  const res = await fetch(qiraatURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
+
+  const data = await res.json();
+  return Object.entries(data)
+    .filter(([, count]) => count > 0)
+    .map(([key]) => key);
+};
+
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
  * next-sitemap library appends the alternate ref to the beginning
@@ -245,6 +263,13 @@ module.exports = {
             loc: location,
             alternateRefs: getAlternateRefs('', false, '', location),
           });
+        });
+
+        // 13. /verseKey for verses that have Qiraat (recitation variations)
+        const versesWithQiraat = await getVersesWithQiraat();
+        versesWithQiraat.forEach((verseKey) => {
+          const location = `${verseKey}/qiraat`;
+          result.push({ loc: location, alternateRefs: getAlternateRefs('', false, '', location) });
         });
 
         return result;

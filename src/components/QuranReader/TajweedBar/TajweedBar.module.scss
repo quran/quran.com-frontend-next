@@ -5,7 +5,6 @@ $pixel: 1px;
 
 .container {
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -20,17 +19,14 @@ $pixel: 1px;
   z-index: var(--z-index-min);
 }
 
-.visibleContainer {
-  @include breakpoints.smallerThanTablet {
-    margin-block-start: 0px;
-  }
+.hiddenContainer {
+  transform: translateY(calc(-100% + var(--tajweed-trigger-height)));
 }
 
 .tajweedContainer {
   display: flex;
   inline-size: 100%;
   justify-content: center;
-  background: var(--color-background-default);
   background: var(--color-background-elevated);
 }
 
@@ -51,7 +47,7 @@ $pixel: 1px;
   justify-content: center;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
-  box-shadow: var(--shadow-small);
+  box-shadow: var(--shadow-tajweed-trigger);
   cursor: pointer;
   user-select: none;
   margin-block-start: calc($pixel * -1);

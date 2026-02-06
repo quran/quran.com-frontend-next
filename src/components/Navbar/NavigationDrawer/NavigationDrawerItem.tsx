@@ -17,6 +17,7 @@ type NavigationDrawerItemProps = {
   isStale?: boolean;
   titleClassName?: string;
   onClick?: () => void;
+  isEvent?: boolean;
 };
 
 const NavigationDrawerItem = ({
@@ -28,6 +29,7 @@ const NavigationDrawerItem = ({
   titleClassName,
   isStale = false,
   onClick,
+  isEvent = false,
 }: NavigationDrawerItemProps) => (
   <LinkContainer
     shouldKeepStyleWithoutHrefOnHover={shouldKeepStyleWithoutHrefOnHover}
@@ -35,14 +37,21 @@ const NavigationDrawerItem = ({
     isExternalLink={isExternalLink}
     onClick={onClick}
   >
-    <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
+    <div
+      className={classNames(styles.container, {
+        [styles.containerStale]: isStale,
+        [styles.containerEvent]: isEvent,
+      })}
+    >
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>
           <IconContainer
             icon={icon}
             size={IconSize.Xsmall}
             color={IconColor.accent}
-            shouldFlipOnRTL={false}
+            className={classNames({
+              [styles.containerEventIcon]: isEvent,
+            })}
           />
           <span className={classNames(styles.titleContainer, titleClassName)}>{title}</span>
         </div>

@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  max-width: 100%;
+  max-inline-size: 100%;
   margin-block-start: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
   margin-inline-start: 0;
@@ -41,7 +41,7 @@
 .itemRemove {
   cursor: pointer;
   svg {
-    width: var(--spacing-xsmall);
-    height: var(--spacing-xsmall);
+    inline-size: var(--spacing-xsmall);
+    block-size: var(--spacing-xsmall);
   }
 }

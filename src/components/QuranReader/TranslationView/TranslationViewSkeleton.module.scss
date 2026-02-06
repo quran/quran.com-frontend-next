@@ -1,23 +1,23 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
+@use 'src/styles/theme';
 
 .cellContainer {
   border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .verseContainer {
-  height: calc(1.7 * var(--font-size));
+  block-size: calc(1.7 * var(--font-size));
 }
 
 .translationText {
   display: inline-flex;
-  width: auto;
+  inline-size: auto;
 }
 
 .translationAuthor {
   display: inline-flex;
-  width: auto;
+  inline-size: auto;
   margin-block-start: var(--spacing-micro);
   font-size: var(--font-size-xsmall);
 }
@@ -30,4 +30,4 @@
   }
 }
 
-@include utility.generate-font-scales("translation");
+@include utility.generate-font-scales('translation');

@@ -69,7 +69,6 @@ const TranslationViewVerse: React.FC<Props> = ({
         verseIdx={verseIdx}
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
-        quranReaderDataType={quranReaderDataType}
       />
     </div>
   );

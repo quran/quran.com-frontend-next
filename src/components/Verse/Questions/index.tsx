@@ -12,22 +12,15 @@ import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 
 type VerseQuestionsProps = {
   verseKey: string;
-  isTranslationView: boolean;
   hasQuestions?: boolean;
 };
 
-const VerseQuestions: React.FC<VerseQuestionsProps> = ({
-  verseKey,
-  isTranslationView,
-  hasQuestions,
-}) => {
+const VerseQuestions: React.FC<VerseQuestionsProps> = ({ verseKey, hasQuestions }) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
 
   const onItemClicked = () => {
-    logButtonClick('verse_questions', {
-      isTranslationView,
-    });
+    logButtonClick('study_mode_open_answers_pill_verse_by_verse', { verseKey });
     dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
     fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
   };

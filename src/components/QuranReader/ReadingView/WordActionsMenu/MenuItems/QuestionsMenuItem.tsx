@@ -29,7 +29,7 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const isClarificationQuestion = !!questionsData?.types?.[QuestionType.CLARIFICATION];
 
   const onMenuItemClicked = () => {
-    logButtonClick('reading_view_verse_actions_menu_questions');
+    logButtonClick('study_mode_open_reading_verse_actions_answers', { verseKey });
     dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
     fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
     onActionTriggered?.();

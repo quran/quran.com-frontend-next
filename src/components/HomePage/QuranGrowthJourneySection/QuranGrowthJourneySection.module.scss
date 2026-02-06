@@ -1,16 +1,16 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .header {
-    padding-block-end: var(--spacing-medium);
-    @include breakpoints.tablet {
-        padding-block-end: var(--spacing-large-px);
-    }
+  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
 
-    h1 {
-        font-size: var(--font-size-xlarge-px);
-        font-weight: var(--font-weight-bold);
-        @include breakpoints.tablet {
-            font-size: var(--font-size-xxlarge-px);
-        }
+  h1 {
+    font-size: var(--font-size-xlarge-px);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xxlarge-px);
     }
+  }
 }

@@ -14,6 +14,7 @@ import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import EditDetailsForm from '@/components/Profile/EditDetailsForm';
 import EmailNotificationSettingsForm from '@/components/Profile/EmailNotificationSettingsForm';
 import PersonalizationForm from '@/components/Profile/PersonalizationForm';
+import ProfilePageSkeleton from '@/components/Profile/ProfilePageSkeleton';
 import Separator from '@/dls/Separator/Separator';
 import useAuthData from '@/hooks/auth/useAuthData';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -39,7 +40,11 @@ const ProfilePage: FC = () => {
         noindex
       />
       <HeaderNavigation title={t('my-profile')} />
-      <PageContainer isSheetsLike>
+      <PageContainer
+        isSheetsLike
+        wrapperClassName={styles.wrapperSheets}
+        className={styles.pageContainer}
+      >
         <div className={styles.topDivider}>
           <Separator />
         </div>
@@ -75,4 +80,4 @@ const ProfilePage: FC = () => {
   );
 };
 
-export default withAuth(ProfilePage);
+export default withAuth(ProfilePage, <ProfilePageSkeleton />);

@@ -10,6 +10,7 @@ import {
   selectStudyModeActiveTab,
   selectStudyModeHighlightedWordLocation,
   selectStudyModeIsOpen,
+  selectStudyModeIsSsrMode,
   selectStudyModeVerseKey,
 } from '@/redux/slices/QuranReader/studyMode';
 import { openAdvancedCopyModal } from '@/redux/slices/QuranReader/verseActionModal';
@@ -20,6 +21,7 @@ type VerseActionAdvancedCopyProps = {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
+  isInsideStudyMode?: boolean;
 };
 
 /**
@@ -32,10 +34,12 @@ const VerseActionAdvancedCopy = ({
   verse,
   isTranslationView,
   onActionTriggered,
+  isInsideStudyMode = false,
 }: VerseActionAdvancedCopyProps) => {
   const { t } = useTranslation('quran-reader');
   const dispatch = useDispatch();
   const isStudyModeOpen = useSelector(selectStudyModeIsOpen);
+  const isSsrMode = useSelector(selectStudyModeIsSsrMode);
   const studyModeVerseKey = useSelector(selectStudyModeVerseKey);
   const studyModeActiveTab = useSelector(selectStudyModeActiveTab);
   const studyModeHighlightedWordLocation = useSelector(selectStudyModeHighlightedWordLocation);
@@ -43,18 +47,23 @@ const VerseActionAdvancedCopy = ({
   const onModalOpen = useCallback(() => {
     logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_open`);
 
+    // Use isInsideStudyMode prop to determine if opened from study mode
+    // This is more accurate than isStudyModeOpen for SSR pages where study mode is always "open"
+    const openedFromStudyMode = isInsideStudyMode || (isStudyModeOpen && !isSsrMode);
+
     dispatch(
       openAdvancedCopyModal({
         verseKey: verse.verseKey,
         verse,
         isTranslationView,
-        wasOpenedFromStudyMode: isStudyModeOpen,
+        wasOpenedFromStudyMode: openedFromStudyMode,
         studyModeRestoreState:
-          isStudyModeOpen && studyModeVerseKey
+          openedFromStudyMode && studyModeVerseKey
             ? {
                 verseKey: studyModeVerseKey,
                 activeTab: studyModeActiveTab,
                 highlightedWordLocation: studyModeHighlightedWordLocation,
+                isSsrMode,
               }
             : undefined,
       }),
@@ -66,7 +75,9 @@ const VerseActionAdvancedCopy = ({
   }, [
     verse,
     isTranslationView,
+    isInsideStudyMode,
     isStudyModeOpen,
+    isSsrMode,
     studyModeVerseKey,
     studyModeActiveTab,
     studyModeHighlightedWordLocation,

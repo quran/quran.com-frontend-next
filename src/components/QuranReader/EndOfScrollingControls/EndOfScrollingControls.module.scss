@@ -1,19 +1,19 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-block-start: var(--spacing-medium);
 }
 
 .buttonsContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  padding-block: var(--spacing-mega);
   > a {
     margin-block-start: var(--spacing-xxsmall);
     margin-inline-end: var(--spacing-xxsmall);
@@ -31,9 +31,9 @@
 .progressWidgetContainer {
   margin-block-start: var(--spacing-xsmall);
   margin-inline: auto;
-  max-width: 100%;
+  max-inline-size: 100%;
   @include breakpoints.tablet {
-    max-width: 80%;
+    max-inline-size: 80%;
   }
 }
 

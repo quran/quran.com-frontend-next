@@ -33,6 +33,7 @@ enum QueryParam {
   VISITEDPLATFORM = 'visitedPlatform',
   SILENT = 'silent',
   REDIRECTBACK = 'redirectBack',
+  TAB = 'tab',
 }
 
 export default QueryParam;

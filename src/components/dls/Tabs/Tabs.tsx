@@ -1,4 +1,4 @@
-import { JSX } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import styles from './Tabs.module.scss';
 import { TestId } from '@/tests/test-ids';
 
 export type Tab = {
-  title: string | JSX.Element;
+  title: React.ReactNode;
   value: string;
   id?: string;
 };
@@ -45,6 +45,7 @@ const Tabs = ({
           })}
           key={tab.value}
           role="tab"
+          aria-selected={selected === tab.value}
           tabIndex={0}
           id={tab.id}
           {...(onSelect && {

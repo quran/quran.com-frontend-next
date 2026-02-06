@@ -168,12 +168,6 @@ const useDedupedFetchVerse = ({
 
   const verse = effectiveVerses ? effectiveVerses[idxInPage] : null;
 
-  // This part handles an edge case where the user has no selected translations but the `initialData` sent from server-side rendering has a default translation.
-  // So, we need to remove the translations from the verse if the user has no selected translations.
-  if (verse && selectedTranslations.length === 0) {
-    verse.translations = [];
-  }
-
   return {
     verse,
     firstVerseInPage: effectiveVerses ? effectiveVerses[0] : null,
