@@ -1,20 +1,18 @@
-import React, { useEffect } from 'react';
-
-import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './HadithList.module.scss';
 
+import replaceBreaksWithSpans from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/Hadith/utility';
 import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { HadithReference } from '@/types/Hadith';
-import { fakeNavigate, getVerseHadithsNavigationUrl } from '@/utils/navigation';
+import Language from '@/types/Language';
 
 type HadithListProps = {
   hadiths: HadithReference[];
   hasMore?: boolean;
   isLoadingMore?: boolean;
   onLoadMore?: () => void;
-  verseKey: string;
 };
 
 const HadithList: React.FC<HadithListProps> = ({
@@ -22,10 +20,8 @@ const HadithList: React.FC<HadithListProps> = ({
   hasMore = false,
   isLoadingMore = false,
   onLoadMore,
-  verseKey,
 }) => {
-  const router = useRouter();
-  const baseUrl = getVerseHadithsNavigationUrl(verseKey);
+  const { lang } = useTranslation('common');
 
   const loadMoreTriggerRef = useInfiniteScroll({
     hasMore,
@@ -33,36 +29,51 @@ const HadithList: React.FC<HadithListProps> = ({
     onLoadMore,
   });
 
-  // Update URL when hadiths are loaded
-  useEffect(() => {
-    if (hadiths.length > 0) {
-      fakeNavigate(baseUrl, router.locale);
-    }
-  }, [hadiths.length, baseUrl, router.locale]);
-
   return (
     <div className={styles.container}>
-      {hadiths.map((hadith) => (
-        <div key={`${hadith.collection}-${hadith.hadithNumber}`} className={styles.hadithCard}>
-          <div className={styles.hadithHeader}>
+      {hadiths.map((hadith, index) => (
+        <>
+          <div key={`${hadith.collection}-${hadith.hadithNumber}`} className={styles.hadithCard}>
             <h3 className={styles.hadithSource}>
-              {hadith.name} {hadith.hadithNumber}
+              {hadith.name}{' '}
+              <span className={styles.number} dir="auto">
+                {hadith.hadithNumber}
+              </span>
             </h3>
+
+            <div className={styles.hadithContentContainer}>
+              {Language.AR !== lang && hadith.enBody && (
+                <div
+                  className={styles.hadithBody}
+                  // eslint-disable-next-line react/no-danger
+                  dangerouslySetInnerHTML={{
+                    __html: replaceBreaksWithSpans(hadith.enBody.toString()),
+                  }}
+                />
+              )}
+            </div>
+
+            {hadith.arBody && (
+              <div
+                data-lang="ar"
+                dir="rtl"
+                className={styles.hadithBody}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: replaceBreaksWithSpans(hadith.arBody.toString()),
+                }}
+              />
+            )}
           </div>
-          <div
-            className={styles.hadithBody}
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: router.locale === 'ar' ? hadith.arBody || '' : hadith.enBody || '',
-            }}
-          />
-        </div>
+
+          {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}
+        </>
       ))}
 
       {hasMore &&
         onLoadMore &&
         (isLoadingMore ? (
-          <div className={styles.loadingContainer}>
+          <div className={styles.statusContainer} data-status="loading">
             <LoadingSpinner size={SpinnerSize.Large} />
           </div>
         ) : (
