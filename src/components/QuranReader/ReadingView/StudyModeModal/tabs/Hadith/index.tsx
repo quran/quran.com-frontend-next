@@ -36,7 +36,7 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
   const { containerRef } = useStudyModeTabScroll();
 
   const ayahKey = makeVerseKey(Number(chapterId), Number(verseNumber));
-  const scaleClass = styles[`hadith-font-size-${quranReaderStyles.qnaFontScale}`];
+  const scaleClass = styles[`hadith-font-size-${quranReaderStyles.hadithFontScale}`];
 
   // Use global site language for hadiths
   const { hadiths, hasMore, isLoadingMore, loadMore, isLoading, error, mutate } =
@@ -83,7 +83,7 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <StudyModeTabLayout fontType="qna" selectionControl={null} body={renderBody()} />
+      <StudyModeTabLayout fontType="hadith" selectionControl={null} body={renderBody()} />
     </div>
   );
 };

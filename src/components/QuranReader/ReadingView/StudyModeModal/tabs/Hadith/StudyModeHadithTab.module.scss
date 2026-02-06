@@ -1,6 +1,47 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/mixins/qna-font-scales';
 
+// Font scale generation for Hadith components
+$hadith-scales: (
+  tablet: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.3rem,
+    5: 1.7rem,
+    6: 2.1rem,
+    7: 2.5rem,
+    8: 2.9rem,
+    9: 3.3rem,
+    10: 3.7rem,
+  ),
+  mobile: (
+    1: 0.8rem,
+    2: 0.9rem,
+    3: 1rem,
+    4: 1.2rem,
+    5: 1.5rem,
+    6: 1.8rem,
+    7: 2.1rem,
+    8: 2.4rem,
+    9: 2.7rem,
+    10: 3rem,
+  ),
+);
+
+@for $i from 1 through 10 {
+  .hadith-font-size-#{$i} {
+    --hadith-dynamic-font-size: #{map-get(map-get($hadith-scales, mobile), $i)};
+    font-size: var(--hadith-dynamic-font-size);
+    line-height: normal;
+
+    @include breakpoints.tablet {
+      --hadith-dynamic-font-size: #{map-get(map-get($hadith-scales, tablet), $i)};
+      font-size: var(--hadith-dynamic-font-size);
+    }
+  }
+}
+
 .container {
   block-size: 100%;
 }

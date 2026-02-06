@@ -71,6 +71,8 @@ export const quranReaderStylesSlice = createSlice({
     }),
     increaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale + 1 }),
     decreaseQnaFontScale: (state) => ({ ...state, qnaFontScale: state.qnaFontScale - 1 }),
+    increaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale + 1 }),
+    decreaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale - 1 }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
@@ -139,6 +141,8 @@ export const {
   decreaseWordByWordFontScale,
   increaseQnaFontScale,
   decreaseQnaFontScale,
+  increaseHadithFontScale,
+  decreaseHadithFontScale,
   setMushafLines,
 } = quranReaderStylesSlice.actions;
 

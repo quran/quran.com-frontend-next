@@ -60,6 +60,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   translationFontScale: 3,
   wordByWordFontScale: 3,
   qnaFontScale: 3,
+  hadithFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,
