@@ -484,9 +484,11 @@ const resolveAnswersMeta = async (
 const loadWidgetLabels = async (locale: string): Promise<WidgetLabels> => {
   const tCommon = await getT(locale, 'common');
   const tQuranReader = await getT(locale, 'quran-reader');
+  const tEmbed = await getT(locale, 'embed');
 
   return {
     quran: tQuranReader('q-and-a.quran'),
+    readOnQuran: tEmbed('widget.readOnQuran'),
     surah: tCommon('surah'),
     verse: tCommon('verse'),
     tafsirs: tQuranReader('tafsirs'),
