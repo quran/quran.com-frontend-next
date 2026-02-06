@@ -1,6 +1,9 @@
+import React from 'react';
+
 import HadithContent from './HadithContent';
 import styles from './HadithList.module.scss';
 
+import Error from '@/components/Error';
 import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { HadithReference } from '@/types/Hadith';
@@ -13,14 +16,22 @@ type HadithListProps = {
   hadiths: HadithReference[];
   hasMore?: boolean;
   isLoadingMore?: boolean;
+  isValidating?: boolean;
+  hasErrorInPages?: boolean;
   onLoadMore?: () => void;
+  error?: unknown;
+  onRetry?: () => void;
 };
 
 const HadithList: React.FC<HadithListProps> = ({
   hadiths,
   hasMore = false,
   isLoadingMore = false,
+  isValidating = false,
   onLoadMore,
+  hasErrorInPages = false,
+  error,
+  onRetry,
 }) => {
   const loadMoreTriggerRef = useInfiniteScroll({
     hasMore,
@@ -28,11 +39,15 @@ const HadithList: React.FC<HadithListProps> = ({
     onLoadMore,
   });
 
+  const isLoadingUi = onLoadMore && (isLoadingMore || isValidating);
+  const isErrorUi = (error || hasErrorInPages) && onRetry && !isLoadingUi;
+  const isTriggerUi = hasMore && onLoadMore && !isLoadingUi && !isErrorUi;
+
   return (
     <div className={styles.container}>
       {hadiths.map((hadith, index) => (
-        <>
-          <div key={`${hadith.collection}-${hadith.hadithNumber}`} className={styles.hadithCard}>
+        <React.Fragment key={`${hadith.collection}-${hadith.hadithNumber}`}>
+          <div className={styles.hadithCard}>
             <a
               className={styles.hadithSource}
               target="_blank"
@@ -49,18 +64,22 @@ const HadithList: React.FC<HadithListProps> = ({
           </div>
 
           {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}
-        </>
+        </React.Fragment>
       ))}
 
-      {hasMore &&
-        onLoadMore &&
-        (isLoadingMore ? (
-          <div className={styles.statusContainer} data-status="loading">
-            <LoadingSpinner size={SpinnerSize.Large} />
-          </div>
-        ) : (
-          <div ref={loadMoreTriggerRef} className={styles.infiniteScrollTrigger} />
-        ))}
+      {isErrorUi && (
+        <div className={styles.statusContainer} data-status="error">
+          <Error error={(error ?? {}) as Error} onRetryClicked={onRetry} />
+        </div>
+      )}
+
+      {isLoadingUi && (
+        <div className={styles.statusContainer} data-status="loading">
+          <LoadingSpinner size={SpinnerSize.Large} />
+        </div>
+      )}
+
+      {isTriggerUi && <div ref={loadMoreTriggerRef} className={styles.infiniteScrollTrigger} />}
     </div>
   );
 };

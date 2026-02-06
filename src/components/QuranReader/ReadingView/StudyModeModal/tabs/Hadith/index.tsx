@@ -8,7 +8,6 @@ import StudyModeTabLayout, { useStudyModeTabScroll } from '../StudyModeTabLayout
 
 import styles from './StudyModeHadithTab.module.scss';
 
-import Error from '@/components/Error';
 import { StudyModeTabId } from '@/components/QuranReader/ReadingView/StudyModeModal/StudyModeBottomActions';
 import HadithList from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/Hadith/HadithList';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
@@ -39,19 +38,29 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
   const scaleClass = styles[`hadith-font-size-${quranReaderStyles.hadithFontScale}`];
 
   // Use global site language for hadiths
-  const { hadiths, hasMore, isLoadingMore, loadMore, isLoading, error, mutate } =
-    useHadithsPagination({
-      ayahKey,
-      language: lang as Language,
-      initialData: hadithsInitialData,
-    });
+  const {
+    hadiths,
+    hasMore,
+    isLoadingMore,
+    isValidating,
+    loadMore,
+    isLoading,
+    hasErrorInPages,
+    error,
+    mutate,
+  } = useHadithsPagination({
+    ayahKey,
+    language: lang as Language,
+    initialData: hadithsInitialData,
+  });
 
   // Auto-close tab when there are no hadiths
   useEffect(() => {
-    if (!isLoading && (!hadiths || hadiths.length === 0) && switchTab) {
+    const hasHadiths = hadiths?.length ?? 0;
+    if (!isLoading && hasHadiths === 0 && !(hasErrorInPages || error) && switchTab) {
       switchTab(null);
     }
-  }, [isLoading, hadiths, switchTab]);
+  }, [isLoading, hadiths, hasErrorInPages, error, switchTab]);
 
   const handleRetry = () => {
     mutate?.();
@@ -60,21 +69,17 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
   const renderBody = () => {
     if (isLoading) return <TafsirSkeleton />;
 
-    if (error) {
-      return (
-        <div className={styles.errorContainer}>
-          <Error error={error} onRetryClicked={handleRetry} />
-        </div>
-      );
-    }
-
     return (
       <div className={classNames(styles.hadithsContainer, scaleClass)}>
         <HadithList
           hadiths={hadiths}
           hasMore={hasMore}
           isLoadingMore={isLoadingMore}
+          isValidating={isValidating}
           onLoadMore={loadMore}
+          hasErrorInPages={hasErrorInPages}
+          error={error}
+          onRetry={handleRetry}
         />
       </div>
     );

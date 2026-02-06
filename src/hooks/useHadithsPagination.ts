@@ -53,7 +53,12 @@ const useHadithsPagination = ({ ayahKey, initialData, language }: UseHadithsPagi
     revalidateOnReconnect: false,
   });
 
-  const allHadiths = useMemo(
+  const hasErrorInPages = useMemo(
+    () => (pagesData ? pagesData.some((page) => !Array.isArray(page?.hadiths)) : false),
+    [pagesData],
+  );
+
+  const hadiths = useMemo(
     () => (pagesData ? pagesData.flatMap((page) => page?.hadiths || []) : []),
     [pagesData],
   );
@@ -66,17 +71,17 @@ const useHadithsPagination = ({ ayahKey, initialData, language }: UseHadithsPagi
   const isLoadingMore =
     isValidating || (size > 0 && pagesData && typeof pagesData[size - 1] === 'undefined');
 
-  // Initial loading state: no data yet and first page is being fetched
   const isLoading = !pagesData && !error;
-
   const loadMore = () => setSize(size + 1);
 
   return {
-    hadiths: allHadiths,
+    hadiths,
     hasMore,
     isLoadingMore,
+    isValidating,
     loadMore,
     isLoading,
+    hasErrorInPages,
     error,
     mutate,
   };
