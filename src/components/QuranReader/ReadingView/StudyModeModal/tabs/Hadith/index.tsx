@@ -75,7 +75,6 @@ const StudyModeHadithTab: React.FC<StudyModeHadithTabProps> = ({
           hasMore={hasMore}
           isLoadingMore={isLoadingMore}
           onLoadMore={loadMore}
-          verseKey={ayahKey}
         />
       </div>
     );

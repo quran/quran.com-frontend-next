@@ -1,43 +1,89 @@
 @use 'src/styles/breakpoints';
 
+$gap-between-blocks: 1rem;
+$hadith-font-line-height: 1.6;
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+}
+
 .container {
+  @extend .flex;
   block-size: 100%;
+  font-size: inherit;
+}
+
+.divider {
+  block-size: var(--spacing-hairline-px);
+  background-color: var(--color-separators-ayah-level);
 }
 
 .hadithCard {
-  background-color: var(--color-surface-secondary);
-  border-radius: var(--border-radius-medium);
-  padding: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.hadithHeader {
-  margin-block-end: var(--spacing-small);
-  padding-block-end: var(--spacing-small);
-  border-block-end: 1px solid var(--color-border-primary);
-}
-
-.hadithSource {
-  font-size: 1.1em;
-  font-weight: 600;
-  color: var(--color-primary);
-  margin: 0;
-}
-
-.hadithBody {
-  line-height: 1.6;
-  color: var(--color-text-primary);
-
-  p {
-    margin: 0;
+  @extend .flex;
+  &,
+  & * {
+    line-height: $hadith-font-line-height;
   }
 }
 
-.loadingContainer {
+.hadithSource {
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-normal);
+
+  .number:dir(ltr) {
+    unicode-bidi: plaintext;
+  }
+}
+
+.hadithContentContainer {
+  @extend .flex;
+}
+
+.hadithBody {
+  @extend .flex;
+  color: var(--color-text-default-new);
+
+  p {
+    margin: 0;
+    padding: 0;
+
+    :global(.multiline) {
+      display: block;
+      block-size: $gap-between-blocks;
+    }
+
+    :global(.single) {
+      display: block;
+      block-size: $gap-between-blocks * 0.5;
+    }
+  }
+
+  &:not([data-lang='ar']) * {
+    font-weight: var(--font-weight-light);
+  }
+}
+
+.statusContainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: var(--spacing-medium);
+  min-block-size: calc(3 * var(--spacing-max));
+  color: var(--color-text-faded-new);
+
+  &:where([data-status='empty'], [data-status='error']) {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-faded-new);
+    text-align: center;
+    text-wrap: balance;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-large2);
+    }
+  }
 }
 
 .infiniteScrollTrigger {
