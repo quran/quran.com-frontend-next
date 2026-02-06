@@ -365,4 +365,11 @@ export default {
       },
     };
   },
+  44: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      hadithFontScale: initialState.quranReaderStyles.hadithFontScale,
+    },
+  }),
 };
