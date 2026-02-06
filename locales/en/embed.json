@@ -1,82 +1,82 @@
 {
-  "meta": {
-    "title": "Ayah Widget Builder | Quran.com",
-    "description": "Configure and preview Quran.com embed widgets, then copy the ready-to-use script snippet."
+  "actions": {
+    "copied": "Copied!",
+    "copy": "Copy",
+    "copyEmbedSnippet": "Copy Embed Snippet"
+  },
+  "checkboxes": {
+    "answers": "Show Answers button (if available)",
+    "audio": "Enable audio playback",
+    "customSize": "Use custom width/height",
+    "lessons": "Show Lessons button",
+    "mergeVerses": "Merge verses (inline display)",
+    "reflections": "Show Reflections button",
+    "showArabic": "Show Arabic verse",
+    "tafsirs": "Show Tafsirs button",
+    "translator": "Show translator name",
+    "verseRange": "Enable verse range",
+    "wordByWord": "Enable word-by-word translation",
+    "wordByWordTransliteration": "Enable word-by-word transliteration"
+  },
+  "errors": {
+    "clipboardFallback": "Clipboard write failed, using fallback",
+    "clipboardUnavailable": "Clipboard API unavailable",
+    "loadChapters": "Unable to load chapters",
+    "loadReciters": "Unable to load reciters",
+    "loadTranslations": "Unable to load translations"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Client Id",
+    "height": "Height",
+    "language": "Language",
+    "mushaf": "Mushaf",
+    "reciter": "Reciter",
+    "surah": "Surah",
+    "theme": "Theme",
+    "translations": "Translations",
+    "width": "Width"
   },
   "header": {
-    "title": "Ayah Embed Builder",
-    "subtitle": "<bold>A higher-quality, customizable way to include Quran verses in your content.</bold><br />Create an embed you can easily customize, with <bold>accurate Arabic rendering, built-in recitation</bold> and more, so readers can listen as they engage with the verse."
+    "subtitle": "<bold>A higher-quality, customizable way to include Quran verses in your content.</bold><br />Create an embed you can easily customize, with <bold>accurate Arabic rendering, built-in recitation</bold> and more, so readers can listen as they engage with the verse.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Configure and preview Quran.com embed widgets, then copy the ready-to-use script snippet.",
+    "title": "Ayah Widget Builder | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "King Fahad Complex v1",
+    "kfgqpc_v2": "King Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Search translations..."
+  },
+  "reciters": {
+    "select": "Select reciter"
   },
   "sections": {
     "configuration": "Configuration",
     "preview": "Live preview",
     "snippet": "Embed snippet"
   },
-  "fields": {
-    "clientId": "Client Id",
-    "surah": "Surah",
-    "ayah": "Ayah",
-    "language": "Language",
-    "theme": "Theme",
-    "mushaf": "Mushaf",
-    "translations": "Translations",
-    "reciter": "Reciter",
-    "width": "Width",
-    "height": "Height"
-  },
-  "placeholders": {
-    "searchTranslations": "Search translations..."
-  },
   "states": {
     "loadingChapters": "Loading chapters...",
-    "loadingVerses": "Loading verses...",
-    "loadingReciters": "Loading reciters...",
     "loadingPreview": "Loading preview...",
+    "loadingReciters": "Loading reciters...",
+    "loadingVerses": "Loading verses...",
     "noTranslations": "No translations found"
   },
-  "translations": {
-    "otherLanguage": "Other",
-    "chipRemoveLabel": "Remove translation"
-  },
-  "reciters": {
-    "select": "Select reciter"
-  },
   "theme": {
-    "light": "Light",
     "dark": "Dark",
+    "light": "Light",
     "sepia": "Sepia"
   },
-  "mushaf": {
-    "qpc": "QPC Uthmani Hafs",
-    "kfgqpc_v1": "King Fahad Complex v1",
-    "kfgqpc_v2": "King Fahad Complex v2",
-    "indopak": "Indopak",
-    "tajweed": "Tajweed"
-  },
-  "checkboxes": {
-    "audio": "Enable audio playback",
-    "wordByWord": "Enable word-by-word translation",
-    "wordByWordTransliteration": "Enable word-by-word transliteration",
-    "verseRange": "Enable verse range",
-    "mergeVerses": "Merge verses (inline display)",
-    "showArabic": "Show Arabic verse",
-    "translator": "Show translator name",
-    "tafsirs": "Show Tafsirs button",
-    "lessons": "Show Lessons button",
-    "reflections": "Show Reflections button",
-    "answers": "Show Answers button (if available)",
-    "customSize": "Use custom width/height"
-  },
-  "actions": {
-    "copy": "Copy",
-    "copyEmbedSnippet": "Copy Embed Snippet",
-    "copied": "Copied!"
-  },
-  "errors": {
-    "loadChapters": "Unable to load chapters",
-    "loadTranslations": "Unable to load translations",
-    "loadReciters": "Unable to load reciters",
-    "clipboardFallback": "Clipboard write failed, using fallback",
-    "clipboardUnavailable": "Clipboard API unavailable"
+  "translations": {
+    "chipRemoveLabel": "Remove translation",
+    "otherLanguage": "Other"
   }
 }

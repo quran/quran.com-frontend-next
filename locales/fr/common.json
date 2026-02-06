@@ -144,6 +144,7 @@
   "copied": "Copié",
   "copied-to-clipboard": "Copié dans le presse-papier",
   "copy": "Copier",
+  "copy-embed": "Copier Intégrer",
   "copylink": "Copier le lien",
   "counter": {
     "decrease": "Diminuer",
@@ -169,6 +170,8 @@
     "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}}s...",
     "verify-code": "Vérifier le code"
   },
+  "embed-copied": "Intégrer copié",
+  "embed-widget": "widget intégré",
   "end-year-donate": "Terminez 2024 avec une Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Vous ne pouvez uniquement sélectionner {{limit}} Ayahs à la fois. Veuillez sélectionner une plage plus petite.",

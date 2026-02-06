@@ -101,9 +101,9 @@
   "bookmark": "Alamisha",
   "bookmarked": "Zilizoalamishwa",
   "bookmarks-migration": {
-    "body-1": "Alamisho zako sasa zitakuwa <strong>Mistari Iliyohifadhiwa</strong> katika <strong>Mikusanyiko</strong>Ili kuhifadhi alamisho zako za sasa, tafadhali ingia au fungua akaunti.",
+    "body-1": "Alamisho zako sasa zitakuwa <strong>Aya zilizohifadhiwa</strong> katika <strong>Mikusanyiko</strong>. Ili kuhifadhi alamisho zako za sasa, tafadhali ingia au jisajili nasi.",
     "body-2": "Pia tumeongeza Alamisho mpya ya Kusoma ili kukusaidia kuendelea pale ulipoishia.",
-    "checkbox": "Usionyeshe ujumbe huu tena (Inakuonya utapoteza alamisho zako zote za sasa)",
+    "checkbox": "Usionyeshe ujumbe huu tena (Onyo: utapoteza alamisho zako zote za sasa)",
     "sign-in": "Ingia / Jisajili",
     "title": "Taarifa: Alamisho Zinabadilika"
   },
@@ -144,6 +144,7 @@
   "copied": "Imenakiliwa",
   "copied-to-clipboard": "Imenakiliwa kwenye ubao wa kunakili",
   "copy": "Nakili",
+  "copy-embed": "Nakili Kipachiko",
   "copylink": "Nakili kiungo",
   "counter": {
     "decrease": "Punguza",
@@ -169,6 +170,8 @@
     "resend-email-in": "Tuma tena barua pepe ya uthibitishaji baada ya sekunde {{remainingTime}}...",
     "verify-code": "Thibitisha Msimbo"
   },
+  "embed-copied": "Imenakiliwa Imepachikwa",
+  "embed-widget": "Pachika wijeti",
   "end-year-donate": "Kamilisha 2024 kwa Sadaka ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Unaweza tu kuchagua hadi aya {{limit}} kwa wakati mmoja. Tafadhali chagua msururu mdogo.",
@@ -181,9 +184,9 @@
     "ranges-no-value": "Msururu wa mwanzo na wa mwisho lazima iwe na tarakimu",
     "ranges-too-many-verses": "*Upeo wa Aya {{maxNumberOfVerses}}",
     "ranges-wrong-order": "Mstari wa kuanzia lazima uwe kabla ya mstari wa kumalizia.",
-    "reading-bookmark-remove": "Imeshindwa kuondoa alamisho ya kusoma",
-    "reading-bookmark-set": "Imeshindwa kuweka alamisho ya kusoma",
-    "reading-bookmark-undo": "Imeshindwa kutendua alamisho ya kusoma"
+    "reading-bookmark-remove": "Imeshindikana kuondoa alamisho ya kusoma",
+    "reading-bookmark-set": "Imeshindikana kuweka alamisho ya kusoma",
+    "reading-bookmark-undo": "Imeshindikana kutendua alamisho ya kusoma"
   },
   "errors": {
     "account-banned": "Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
@@ -221,7 +224,7 @@
     "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
     "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
     "verification-resend-failed": "Imeshindikana kutuma tena nambari ya kuthibitisha",
-    "verse-metadata-failed": "Imeshindwa kupakia metadata ya mstari"
+    "verse-metadata-failed": "Imeshindikana kupakia metadata ya aya"
   },
   "exciting-updates": "Sasisho za Kusisimua",
   "favorites": "Vipendwa",

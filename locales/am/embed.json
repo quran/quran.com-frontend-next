@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "ተገልብጧል!",
+    "copy": "ቅጂ",
+    "copyEmbedSnippet": "ቅንጣቢ ክተትን ቅዳ"
+  },
+  "checkboxes": {
+    "answers": "የመልስ አዝራርን አሳይ (ካለ)",
+    "audio": "የድምጽ መልሶ ማጫወትን አንቃ",
+    "customSize": "ብጁ ስፋት/ቁመት ይጠቀሙ",
+    "lessons": "የትምህርቶችን አሳይ አዝራር",
+    "mergeVerses": "ጥቅሶችን አዋህድ (የውስጥ ማሳያ)",
+    "reflections": "የነጸብራቅ አዝራርን አሳይ",
+    "showArabic": "የአረብኛ ጥቅስ አሳይ",
+    "tafsirs": "የታፍሲር አዝራርን አሳይ",
+    "translator": "የተርጓሚ ስም አሳይ",
+    "verseRange": "የጥቅስ ክልልን አንቃ",
+    "wordByWord": "የቃል በቃል ትርጉምን አንቃ",
+    "wordByWordTransliteration": "የቃል በቃል በቋንቋ ፊደል መጻፍን ያንቁ"
+  },
+  "errors": {
+    "clipboardFallback": "የቅንጥብ ሰሌዳ መጻፍ አልተሳካም፣ fallback በመጠቀም",
+    "clipboardUnavailable": "የቅንጥብ ሰሌዳ ኤፒአይ አይገኝም",
+    "loadChapters": "ምዕራፎችን መጫን አልተቻለም",
+    "loadReciters": "አንባቢዎችን መጫን አልተቻለም",
+    "loadTranslations": "ትርጉሞችን መጫን አልተቻለም"
+  },
+  "fields": {
+    "ayah": "አያህ",
+    "clientId": "የደንበኛ መታወቂያ",
+    "height": "ቁመት",
+    "language": "ቋንቋ",
+    "mushaf": "ሙሻፍ",
+    "reciter": "ዘጋቢ",
+    "surah": "ሱራህ",
+    "theme": "ገጽታ",
+    "translations": "ትርጉሞች",
+    "width": "ስፋት"
+  },
+  "header": {
+    "subtitle": "<bold>የቁርዓን ጥቅሶችን በይዘትዎ ውስጥ ለማካተት ከፍተኛ ጥራት ያለው እና ሊበጅ የሚችል መንገድ።</bold><br />በቀላሉ ማበጀት የሚችሉትን ኢንክተት ይፍጠሩ፣ ከ <bold>ትክክለኛ የአረብኛ አተረጓጎም፣ አብሮ የተሰራ ንባብ</bold> እና ሌሎችንም ጨምሮ፣ አንባቢዎች ከጥቅሱ ጋር ሲገናኙ ማዳመጥ ይችላሉ።",
+    "title": "የአያህ ኢምቤድ ገንቢ"
+  },
+  "meta": {
+    "description": "የQuran.com መግብሮችን ያዋቅሩ እና አስቀድመው ይመልከቱ፣ ከዚያም ለአጠቃቀም ዝግጁ የሆነውን የስክሪፕት ቅንጭብ ይቅዱ።",
+    "title": "Ayah Widget ገንቢ | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "ኢንዶፓክ",
+    "kfgqpc_v1": "ኪንግ ፋሃድ ኮምፕሌክስ v1",
+    "kfgqpc_v2": "ኪንግ ፋሃድ ኮምፕሌክስ v2",
+    "qpc": "QPC ኡስማኒ ሃፍስ",
+    "tajweed": "ታጅዊድ"
+  },
+  "placeholders": {
+    "searchTranslations": "ትርጉሞችን ፈልግ..."
+  },
+  "reciters": {
+    "select": "አንባቢ ምረጥ"
+  },
+  "sections": {
+    "configuration": "ውቅር",
+    "preview": "የቀጥታ ቅድመ እይታ",
+    "snippet": "ቅንጥብ ይክተቱ"
+  },
+  "states": {
+    "loadingChapters": "ምዕራፎችን በመጫን ላይ...",
+    "loadingPreview": "ቅድመ እይታ በመጫን ላይ...",
+    "loadingReciters": "አንባቢዎችን በመጫን ላይ...",
+    "loadingVerses": "ጥቅሶችን በመጫን ላይ...",
+    "noTranslations": "ምንም ትርጉሞች አልተገኙም"
+  },
+  "theme": {
+    "dark": "ጨለማ",
+    "light": "ብርሃን",
+    "sepia": "ሴፒያ"
+  },
+  "translations": {
+    "chipRemoveLabel": "ትርጉምን አስወግድ",
+    "otherLanguage": "ሌላ"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Copiado!",
+    "copy": "Copiar",
+    "copyEmbedSnippet": "Copiar fragmento incrustado"
+  },
+  "checkboxes": {
+    "answers": "Botón Mostrar respuestas (si está disponible)",
+    "audio": "Habilitar reproducción de audio",
+    "customSize": "Utilice ancho/alto personalizado",
+    "lessons": "Botón Mostrar lecciones",
+    "mergeVerses": "Fusionar versos (visualización en línea)",
+    "reflections": "Botón Mostrar Reflexiones",
+    "showArabic": "Mostrar verso árabe",
+    "tafsirs": "Mostrar el botón Tafsirs",
+    "translator": "Mostrar el nombre del traductor",
+    "verseRange": "Habilitar rango de versos",
+    "wordByWord": "Habilitar la traducción palabra por palabra",
+    "wordByWordTransliteration": "Habilitar la transliteración palabra por palabra"
+  },
+  "errors": {
+    "clipboardFallback": "Error al escribir en el portapapeles, se utiliza una opción de respaldo",
+    "clipboardUnavailable": "API del portapapeles no disponible",
+    "loadChapters": "No se pueden cargar capítulos",
+    "loadReciters": "No se pueden cargar recitadores",
+    "loadTranslations": "No se pueden cargar las traducciones"
+  },
+  "fields": {
+    "ayah": "Aleya",
+    "clientId": "Id. de cliente",
+    "height": "Altura",
+    "language": "Idioma",
+    "mushaf": "Mushaf",
+    "reciter": "Recitador",
+    "surah": "Sura",
+    "theme": "Tema",
+    "translations": "Traducciones",
+    "width": "Ancho"
+  },
+  "header": {
+    "subtitle": "<bold>Una forma personalizable y de mayor calidad de incluir versículos del Corán en su contenido.</bold><br />Crea una incrustación que puedas personalizar fácilmente, con <bold>Representación árabe precisa, recitación incorporada</bold> y más, para que los lectores puedan escuchar mientras interactúan con el versículo.",
+    "title": "Constructor de incrustaciones Ayah"
+  },
+  "meta": {
+    "description": "Configure y obtenga una vista previa de los widgets incrustados de Quran.com, luego copie el fragmento de script listo para usar.",
+    "title": "Generador de widgets Ayah | Corán.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Complejo Rey Fahad v1",
+    "kfgqpc_v2": "Complejo Rey Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Buscar traducciones..."
+  },
+  "reciters": {
+    "select": "Seleccionar recitador"
+  },
+  "sections": {
+    "configuration": "Configuración",
+    "preview": "Vista previa en vivo",
+    "snippet": "Incrustar fragmento"
+  },
+  "states": {
+    "loadingChapters": "Cargando capítulos...",
+    "loadingPreview": "Cargando vista previa...",
+    "loadingReciters": "Cargando recitadores...",
+    "loadingVerses": "Cargando versos...",
+    "noTranslations": "No se encontraron traducciones"
+  },
+  "theme": {
+    "dark": "Oscuro",
+    "light": "Luz",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Eliminar traducción",
+    "otherLanguage": "Otro"
+  }
+}
