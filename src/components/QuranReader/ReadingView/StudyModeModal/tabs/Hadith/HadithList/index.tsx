@@ -1,12 +1,9 @@
-import useTranslation from 'next-translate/useTranslation';
-
+import HadithContent from './HadithContent';
 import styles from './HadithList.module.scss';
 
-import replaceBreaksWithSpans from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/Hadith/utility';
 import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { HadithReference } from '@/types/Hadith';
-import Language from '@/types/Language';
 
 const getSunnahUrl = (collection: string, hadithNumber: string) => {
   return `https://www.sunnah.com/${collection}:${hadithNumber}`;
@@ -25,8 +22,6 @@ const HadithList: React.FC<HadithListProps> = ({
   isLoadingMore = false,
   onLoadMore,
 }) => {
-  const { lang } = useTranslation('common');
-
   const loadMoreTriggerRef = useInfiniteScroll({
     hasMore,
     isLoading: isLoadingMore,
@@ -47,29 +42,7 @@ const HadithList: React.FC<HadithListProps> = ({
               {hadith.name} <span className={styles.number}>{hadith.hadithNumber}</span>
             </a>
 
-            <div className={styles.hadithContentContainer}>
-              {Language.AR !== lang && hadith.enBody && (
-                <div
-                  className={styles.hadithBody}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{
-                    __html: replaceBreaksWithSpans(hadith.enBody.toString()),
-                  }}
-                />
-              )}
-
-              {hadith.arBody && (
-                <div
-                  data-lang="ar"
-                  dir="rtl"
-                  className={styles.hadithBody}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{
-                    __html: replaceBreaksWithSpans(hadith.arBody.toString()),
-                  }}
-                />
-              )}
-            </div>
+            <HadithContent enBody={hadith.enBody} arBody={hadith.arBody} />
           </div>
 
           {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}

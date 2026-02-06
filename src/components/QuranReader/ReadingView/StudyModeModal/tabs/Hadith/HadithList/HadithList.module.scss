@@ -1,6 +1,5 @@
 @use 'src/styles/breakpoints';
 
-$gap-between-blocks: 1rem;
 $hadith-font-line-height: 1.6;
 
 .flex {
@@ -33,42 +32,11 @@ $hadith-font-line-height: 1.6;
   font-weight: var(--font-weight-normal);
   unicode-bidi: plaintext;
   text-decoration: none;
-
-  [dir='rtl'] & {
-    text-align: end;
-  }
+  max-inline-size: max-content;
 
   &:hover {
     text-decoration: underline;
     text-underline-offset: var(--spacing-micro2-px);
-  }
-}
-
-.hadithContentContainer {
-  @extend .flex;
-}
-
-.hadithBody {
-  @extend .flex;
-  color: var(--color-text-default-new);
-
-  p {
-    margin: 0;
-    padding: 0;
-
-    :global(.multiline) {
-      display: block;
-      block-size: $gap-between-blocks;
-    }
-
-    :global(.single) {
-      display: block;
-      block-size: $gap-between-blocks * 0.5;
-    }
-  }
-
-  &:not([data-lang='ar']) * {
-    font-weight: var(--font-weight-light);
   }
 }
 
