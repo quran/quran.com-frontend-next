@@ -38,6 +38,10 @@ $hadith-font-line-height: 1.6;
     text-decoration: underline;
     text-underline-offset: var(--spacing-micro2-px);
   }
+
+  .number {
+    unicode-bidi: plaintext;
+  }
 }
 
 .statusContainer {

@@ -35,10 +35,8 @@ const useHadithsPagination = ({ ayahKey, initialData, language }: UseHadithsPagi
     };
   };
 
-  const fetcher = ({ ayahKey: key, page, limit, lang: langCode }) => {
-    console.log('fetcher', key, langCode, page, limit);
-    return getAyahHadiths(key, langCode, page, limit);
-  };
+  const fetcher = ({ ayahKey: key, page, limit, language: langCode }) =>
+    getAyahHadiths(key, langCode, page, limit);
 
   const {
     data: pagesData,

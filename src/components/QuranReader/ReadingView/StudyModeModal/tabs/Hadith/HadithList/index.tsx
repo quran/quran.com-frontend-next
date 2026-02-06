@@ -35,9 +35,12 @@ const HadithList: React.FC<HadithListProps> = ({
           <div key={`${hadith.collection}-${hadith.hadithNumber}`} className={styles.hadithCard}>
             <a
               className={styles.hadithSource}
-              href={getSunnahUrl(hadith.collection, hadith.hadithNumber)}
               target="_blank"
               rel="noopener noreferrer"
+              href={getSunnahUrl(
+                hadith.collection,
+                hadith.hadithNumber.toString().replaceAll(' ', ''),
+              )}
             >
               {hadith.name} <span className={styles.number}>{hadith.hadithNumber}</span>
             </a>

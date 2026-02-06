@@ -19,6 +19,10 @@ $hadith-font-line-height: 1.6;
   & * {
     line-height: $hadith-font-line-height;
   }
+
+  &[data-faded='true'] {
+    mask-image: linear-gradient(to bottom, black 0%, black 60%, transparent 100%);
+  }
 }
 
 .hadithBody {
