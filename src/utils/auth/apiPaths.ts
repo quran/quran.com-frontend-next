@@ -182,8 +182,12 @@ export type GetCoursesQueryParams = {
   cursor?: string;
 };
 
-export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>
-  makeUrl('courses', params as GetCoursesQueryParams);
+export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) => {
+  const { languages, ...restParams } = params || {};
+  const queryParams = languages ? { ...restParams, languages: languages.join(',') } : restParams;
+  return makeUrl('courses', queryParams);
+};
+
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
 export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>

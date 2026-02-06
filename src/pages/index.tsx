@@ -3,12 +3,13 @@
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
+import { fetcher, getChapterVerses } from '@/api';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
@@ -18,23 +19,155 @@ import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections
 import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { logError } from '@/lib/newrelic';
+import { RootState } from '@/redux/RootState';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
+import Language from '@/types/Language';
+import { QuranFont } from '@/types/QuranReader';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
-import { ChaptersResponse } from 'types/ApiResponses';
+import { LanguageDetectionResult } from '@/utils/serverSideLanguageDetection';
+import withSsrRedux from '@/utils/withSsrRedux';
+import { GetSsrPropsWithReduxContext } from '@/utils/withSsrRedux.types';
+import { QuranInYearVerseRequest } from 'types/ApiRequests';
+import { ChaptersResponse, VersesResponse } from 'types/ApiResponses';
+import { CoursesResponse } from 'types/auth/Course';
 import ChaptersData from 'types/ChaptersData';
+
+// Helper function to build chapters response from chapters data
+function buildChaptersResponse(chaptersData: ChaptersData): ChaptersResponse {
+  return {
+    chapters: Object.keys(chaptersData).map((chapterId) => {
+      const chapterData = chaptersData[chapterId];
+      return { ...chapterData, id: Number(chapterId) };
+    }),
+  };
+}
+
+// Helper function to fetch Quran in a Year verse data
+async function fetchQuranInYearVerses(
+  params?: QuranInYearVerseRequest,
+): Promise<VersesResponse | undefined> {
+  if (!params) return undefined;
+
+  // Destructure parameters
+  const { locale, chapter, verse, translationIds, mushafLines } = params;
+  const translationsParam = translationIds.join(',');
+
+  // Build API parameters
+  const quranInYearParams = {
+    ...getDefaultWordFields(QuranFont.QPCHafs),
+    translationFields: 'resource_name,language_id',
+    ...(translationsParam ? { translations: translationsParam } : {}),
+    ...getMushafId(QuranFont.QPCHafs, mushafLines),
+    from: `${chapter}:${verse}`,
+    to: `${chapter}:${verse}`,
+  };
+
+  try {
+    // Fetch and return the ayah data
+    return await getChapterVerses(chapter, locale, quranInYearParams);
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    logError('Failed to fetch Quran in a Year verse', err, {
+      locale,
+      from: `${chapter}:${verse}`,
+    });
+    return undefined;
+  }
+}
+
+const resolveCurrentLocale = (
+  locale: string | undefined,
+  languageResult: LanguageDetectionResult,
+): string => languageResult.detectedLanguage || locale || Language.EN;
+
+const buildQuranInYearRequest = (
+  todayAyah: { chapter: number; verse: number } | null,
+  currentLocale: string,
+  translationIds: number[],
+  mushafLines: QuranInYearVerseRequest['mushafLines'],
+): QuranInYearVerseRequest | undefined =>
+  todayAyah
+    ? {
+        locale: currentLocale,
+        translationIds,
+        mushafLines,
+        chapter: todayAyah.chapter,
+        verse: todayAyah.verse,
+      }
+    : undefined;
+
+const fetchLearningPlansInitialData = async (
+  currentLocale: string,
+  languageIsoCodes: string[],
+): Promise<CoursesResponse | null> => {
+  const coursesUrl = makeGetCoursesUrl({
+    myCourses: false,
+    languages: languageIsoCodes,
+  });
+
+  try {
+    return await fetcher<CoursesResponse>(coursesUrl);
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    logError('Failed to fetch learning plans for homepage', err, {
+      locale: currentLocale,
+      languages: languageIsoCodes,
+    });
+    return null;
+  }
+};
+
+// Function to fetch home page props for SSR
+const fetchHomePageProps = async (
+  context: GetSsrPropsWithReduxContext,
+  languageResult: LanguageDetectionResult,
+): Promise<IndexProps> => {
+  const { store } = context;
+  const allChaptersData = await getAllChaptersData(context.locale);
+  const state = store.getState() as RootState;
+  const currentLocale = resolveCurrentLocale(context.locale, languageResult);
+  const todayAyah = getCurrentDayAyah();
+  const translationIds = state.translations.selectedTranslations.slice(0, 1);
+  const { mushafLines } = state.quranReaderStyles;
+  const learningPlanLanguageIsoCodes = selectLearningPlanLanguageIsoCodes(state);
+
+  const [quranInYearVerses, learningPlansInitialData] = await Promise.all([
+    // Fetch Quran in a Year verses
+    fetchQuranInYearVerses(
+      buildQuranInYearRequest(todayAyah, currentLocale, translationIds, mushafLines),
+    ),
+    // Fetch Learning Plans initial data
+    fetchLearningPlansInitialData(currentLocale, learningPlanLanguageIsoCodes),
+  ]);
+
+  return {
+    chaptersData: allChaptersData,
+    chaptersResponse: buildChaptersResponse(allChaptersData),
+    quranInYearVerses: quranInYearVerses || null,
+    learningPlansInitialData,
+  };
+};
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
+  quranInYearVerses?: VersesResponse; // SSR-fetched verse data
+  learningPlansInitialData?: CoursesResponse | null;
 };
 
 const Index: NextPage<IndexProps> = ({
   chaptersResponse: { chapters },
   chaptersData,
+  quranInYearVerses,
+  learningPlansInitialData,
 }): JSX.Element => {
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
@@ -62,6 +195,7 @@ const Index: NextPage<IndexProps> = ({
                 isUserLoggedIn={isUserLoggedIn}
                 todayAyah={todayAyah}
                 chaptersData={chaptersData}
+                quranInYearVerses={quranInYearVerses}
               />
             ) : (
               <>
@@ -75,13 +209,16 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses}
+                        />
                       </div>
                     )}
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection initialCoursesData={learningPlansInitialData} />
                     </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
@@ -104,7 +241,7 @@ const Index: NextPage<IndexProps> = ({
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
-                      <LearningPlansSection />
+                      <LearningPlansSection initialCoursesData={learningPlansInitialData} />
                     </div>
                     {todayAyah && (
                       <div
@@ -114,7 +251,10 @@ const Index: NextPage<IndexProps> = ({
                           styles.homepageCard,
                         )}
                       >
-                        <QuranInYearSection chaptersData={chaptersData} />
+                        <QuranInYearSection
+                          chaptersData={chaptersData}
+                          initialVersesData={quranInYearVerses}
+                        />
                       </div>
                     )}
                     <div
@@ -137,20 +277,11 @@ const Index: NextPage<IndexProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-      chaptersResponse: {
-        chapters: Object.keys(allChaptersData).map((chapterId) => {
-          const chapterData = allChaptersData[chapterId];
-          return { ...chapterData, id: Number(chapterId) };
-        }),
-      },
-    },
-  };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/',
+  async (context, languageResult) => ({
+    props: await fetchHomePageProps(context as GetSsrPropsWithReduxContext, languageResult),
+  }),
+);
 
 export default Index;

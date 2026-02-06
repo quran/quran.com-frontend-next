@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -19,6 +19,7 @@ import {
 } from '@/redux/defaultSettings/util';
 import { ChapterResponse, VersesResponse, VerseResponse } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
+import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -31,13 +32,10 @@ import {
   makeAyahReflectionsUrl,
   LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type AyahLessonProp = {
   chapter?: ChapterResponse;
@@ -101,87 +99,86 @@ const AyahLessonPage: NextPage<AyahLessonProp> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId } = params;
-  const verseKey = String(chapterId);
-  const chaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/lessons',
+  async ({ params, locale }) => {
+    const { chapterId } = params;
+    const verseKey = String(chapterId);
+    const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+    if (!isValidVerseKey(chaptersData, verseKey)) {
+      return { notFound: true };
+    }
 
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
-  const translations = getTranslationsInitialState(locale).selectedTranslations;
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
 
-  try {
-    const verseLessonsUrl = makeAyahReflectionsUrl({
-      surahId: chapterNumber,
-      ayahNumber: verseNumber,
-      locales: [locale],
-      postTypeIds: [LESSON_POST_TYPE_ID],
-    });
+    try {
+      const verseLessonsUrl = makeAyahReflectionsUrl({
+        surahId: chapterNumber,
+        ayahNumber: verseNumber,
+        locales: [locale],
+        postTypeIds: [LESSON_POST_TYPE_ID],
+      });
 
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
 
-    const versesUrl = makeVersesUrl(chapterNumber, locale, {
-      ...getDefaultWordFields(quranFont),
-      translationFields: 'resource_name,language_id',
-      translations: translations.join(','),
-      mushaf: mushafId,
-      from: `${chapterNumber}:${verseNumber}`,
-      to: `${chapterNumber}:${verseNumber}`,
-    });
-
-    const [verseLessonsData, verseData, versesData, pagesLookupResponse] = await Promise.all([
-      getAyahReflections(verseLessonsUrl),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      fetcher(versesUrl),
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
+      const versesUrl = makeVersesUrl(chapterNumber, locale, {
+        ...getDefaultWordFields(quranFont),
+        translationFields: 'resource_name,language_id',
+        translations: translations.join(','),
         mushaf: mushafId,
-      }),
-    ]);
+        from: `${chapterNumber}:${verseNumber}`,
+        to: `${chapterNumber}:${verseNumber}`,
+      });
 
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+      const [verseLessonsData, verseData, versesData, pagesLookupResponse] = await Promise.all([
+        getAyahReflections(verseLessonsUrl),
+        fetcher(verseUrl) as Promise<VerseResponse>,
+        fetcher(versesUrl),
+        getPagesLookup({
+          chapterNumber: Number(chapterNumber),
+          mushaf: mushafId,
+        }),
+      ]);
 
-    const fallback = {
-      [verseLessonsUrl]: verseLessonsData,
-      [versesUrl]: versesData,
-      [verseUrl]: verseData,
-    };
+      const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
-    return {
-      props: {
-        chaptersData,
-        chapterId: chapterNumber,
-        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
-        verseNumber,
-        fallback,
-        verse: verseData.verse,
-        versesResponse,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-LessonsPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
+      const fallback = {
+        [verseLessonsUrl]: verseLessonsData,
+        [versesUrl]: versesData,
+        [verseUrl]: verseData,
+      };
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      return {
+        props: {
+          chaptersData,
+          chapterId: chapterNumber,
+          chapter: {
+            chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber },
+          },
+          verseNumber,
+          fallback,
+          verse: verseData.verse,
+          versesResponse,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-LessonsPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          locale,
+          postTypeIds: [LESSON_POST_TYPE_ID],
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default AyahLessonPage;

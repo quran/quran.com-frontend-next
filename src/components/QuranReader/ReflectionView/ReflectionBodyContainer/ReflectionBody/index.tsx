@@ -1,6 +1,7 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './ReflectionBody.module.scss';
 
@@ -11,8 +12,10 @@ import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/Taf
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
+import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getReflectionNavigationUrl } from '@/utils/navigation';
+import { getReflectionLanguages } from '@/utils/quranReflect/locale';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
@@ -42,6 +45,7 @@ const ReflectionBody: React.FC<Props> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
+  const reduxReflectionLanguages = useSelector(selectAyahReflectionsLanguages);
   const hasNextVerse = !isLastVerseOfSurah(
     chaptersData,
     selectedChapterId,
@@ -81,6 +85,18 @@ const ReflectionBody: React.FC<Props> = ({
     selectedContentType,
   ]);
 
+  const filteredReflections = useMemo(() => {
+    const allowedLanguages = getReflectionLanguages(lang, reduxReflectionLanguages);
+    const reflections = data?.data || [];
+    return reflections.filter((reflection) => {
+      if (!reflection?.languageId) {
+        return true;
+      }
+      return allowedLanguages.includes(reflection.languageId as (typeof allowedLanguages)[number]);
+    });
+  }, [data?.data, lang, reduxReflectionLanguages]);
+
+  const hasReflections = filteredReflections.length > 0;
   const onReadMoreClicked = () => {
     logButtonClick('read_more_reflections');
   };
@@ -99,12 +115,12 @@ const ReflectionBody: React.FC<Props> = ({
           </div>
         </>
       )}
-      {data?.data?.length === 0 ? (
+      {!hasReflections ? (
         <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
         <ReflectionDisclaimerMessage contentType={selectedContentType} />
       )}
-      {data?.data?.map((reflection) => (
+      {filteredReflections.map((reflection) => (
         <ReflectionItem
           key={reflection.id}
           reflection={reflection}

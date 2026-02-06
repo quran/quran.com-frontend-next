@@ -1,6 +1,8 @@
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import AuthInput from './AuthInput';
 import styles from './login.module.scss';
@@ -13,11 +15,14 @@ import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes'
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
+import { logErrorToSentry } from '@/lib/sentry';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { signIn } from '@/utils/auth/authRequests';
+import { syncPreferencesFromServer } from '@/utils/auth/syncPreferencesFromServer';
 import { logFormSubmission } from '@/utils/eventLogger';
 import { getForgotPasswordNavigationUrl } from '@/utils/navigation';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface FormData {
   email: string;
@@ -30,13 +35,19 @@ interface Props {
 
 const SignInForm: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
   const { redirectWithToken } = useAuthRedirect();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
     {
       ...getEmailField(t),
-      customRender: (props) => <AuthInput {...props} id="email" htmlType="email" />,
+      dataTestId: 'signin-email-input',
+      customRender: (props) => (
+        <AuthInput {...props} id="email" htmlType="email" dataTestId={props.dataTestId} />
+      ),
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
@@ -44,6 +55,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
       field: 'password',
       type: FormFieldType.Password,
       placeholder: t('password-placeholder'),
+      dataTestId: 'signin-password-input',
       rules: [
         {
           type: RuleType.Required,
@@ -68,7 +80,22 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         return getFormErrors(t, ErrorType.API, errors);
       }
 
-      redirectWithToken(redirect || '/', response?.token);
+      // Sync user preferences from server
+      let targetLocale = router.locale || 'en';
+      try {
+        const { appliedLocale } = await syncPreferencesFromServer({
+          locale: targetLocale,
+          dispatch,
+          audioService,
+        });
+        if (appliedLocale) {
+          targetLocale = appliedLocale;
+        }
+      } catch (error) {
+        logErrorToSentry('Failed to sync user preferences after sign in', error);
+      }
+
+      redirectWithToken(redirect || '/', response?.token, targetLocale);
       return undefined;
     } catch (error) {
       setIsSubmitting(false);
@@ -93,6 +120,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         shape={ButtonShape.Pill}
         type={ButtonType.Success}
         className={styles.submitButton}
+        data-testid="signin-continue-button"
       >
         {t('sign-in')}
       </Button>

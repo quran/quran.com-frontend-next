@@ -2,6 +2,7 @@
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './CoursesPageLayout.module.scss';
 
@@ -10,6 +11,7 @@ import CoursesList from '@/components/Course/CoursesList';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 import { TestId } from '@/tests/test-ids';
 import { CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
@@ -19,10 +21,14 @@ const Loading = () => <Spinner />;
 
 type Props = {
   isMyCourses?: boolean;
+  initialCoursesData?: CoursesResponse;
+  lang: string;
 };
 
-const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
-  const { t, lang } = useTranslation('learn');
+const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false, initialCoursesData, lang }) => {
+  const { t } = useTranslation('learn');
+  const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+
   return (
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>
@@ -47,7 +53,11 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
           <DataFetcher
             loading={Loading}
             fetcher={privateFetcher}
-            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses, languages: [lang] })}
+            queryKey={makeGetCoursesUrl({
+              myCourses: isMyCourses,
+              languages: languageIsoCodes,
+            })}
+            initialData={initialCoursesData}
             render={(data: CoursesResponse) => (
               <CoursesList initialResponse={data} isMyCourses={isMyCourses} languages={[lang]} />
             )}

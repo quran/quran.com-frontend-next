@@ -1,10 +1,11 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
 import BookmarkType from '@/types/BookmarkType';
 import { isLoggedIn } from '@/utils/auth/login';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
@@ -51,9 +52,17 @@ const CollectionDetailPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-  return { props: { chaptersData: allChaptersData } };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/collections/all',
+  async ({ locale }) => {
+    const allChaptersData = await getAllChaptersData(locale);
+
+    return {
+      props: {
+        chaptersData: allChaptersData,
+      },
+    };
+  },
+);
 
 export default withAuth(CollectionDetailPage);

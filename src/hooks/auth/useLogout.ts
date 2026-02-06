@@ -21,6 +21,29 @@ type LogoutOptions = {
 type LogoutFunction = (options?: LogoutOptions) => Promise<void>;
 
 /**
+ * Ensures a path has the locale prefix for non-default locales.
+ * @param {string} path - The path to process
+ * @param {string} locale - The current locale
+ * @param {string} defaultLocale - The default locale
+ * @returns {string} The path with locale prefix if needed
+ */
+const getLocaleAwarePath = (path: string, locale?: string, defaultLocale?: string): string => {
+  // Default locale doesn't need prefix
+  if (!locale || locale === defaultLocale) {
+    return path;
+  }
+
+  // Path already has locale prefix
+  if (path.startsWith(`/${locale}/`) || path === `/${locale}`) {
+    return path;
+  }
+
+  // Add locale prefix
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  return `/${locale}${normalizedPath}`;
+};
+
+/**
  * Consolidated logout flow used across the app to keep things DRY.
  * - Logs optional analytics event
  * - Calls backend logout API
@@ -39,7 +62,9 @@ const useLogout = (): LogoutFunction => {
     async (options?: LogoutOptions) => {
       const { eventName, redirectToLogin = false } = options || {};
 
-      if (eventName) logButtonClick(eventName);
+      if (eventName) {
+        logButtonClick(eventName);
+      }
 
       try {
         authContextLogout();
@@ -47,14 +72,23 @@ const useLogout = (): LogoutFunction => {
         dispatch(clearBookmarks());
         dispatch(clearReadingTracker());
 
-        if (!redirectToLogin) {
-          if (PROTECTED_ROUTES.includes(router.pathname)) {
-            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${ROUTES.HOME}`);
-          } else {
-            const redirect = router.asPath;
-            await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
-          }
-        }
+        if (redirectToLogin) return;
+
+        const redirectPath = PROTECTED_ROUTES.includes(router.pathname)
+          ? ROUTES.HOME
+          : router.asPath;
+
+        // Add locale prefix for non-default locales
+        const localeAwarePath = getLocaleAwarePath(
+          redirectPath,
+          router.locale,
+          router.defaultLocale,
+        );
+
+        await router.replace({
+          pathname: ROUTES.LOGOUT,
+          query: { [QueryParam.REDIRECT_TO]: localeAwarePath },
+        });
       } catch (error) {
         // TODO: Notify user of remote logout failure (e.g., toast/snackbar)
         logErrorToSentry(error, {

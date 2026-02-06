@@ -11,6 +11,7 @@ import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
+import Language from '@/types/Language';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -37,10 +38,12 @@ const getVersesParams = (
 ): Record<string, unknown> => {
   const defaultParams = {
     ...DEFAULT_VERSES_PARAMS,
-    translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
+    translations: getTranslationsInitialState(currentLocale as Language).selectedTranslations.join(
+      ', ',
+    ),
     reciter: DEFAULT_RECITER.id,
-    wordTranslationLanguage:
-      getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
+    wordTranslationLanguage: getReadingPreferencesInitialState(currentLocale as Language)
+      .selectedWordByWordLocale,
   };
 
   if (!includeTranslationFields) {
@@ -336,6 +339,22 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
   }
   return makeDonateUrl();
 };
+
+/**
+ * Compose the url for the country language preference API.
+ *
+ * @param {string} userDeviceLanguage the user's device language code
+ * @param {string} country the two-letter country code
+ * @returns {string}
+ */
+export const makeCountryLanguagePreferenceUrl = (
+  userDeviceLanguage: string,
+  country: string,
+): string =>
+  makeUrl('/resources/country_language_preference', {
+    userDeviceLanguage,
+    country: country.toUpperCase(),
+  });
 
 // Qiraat API utilities
 export * from './qiraat';

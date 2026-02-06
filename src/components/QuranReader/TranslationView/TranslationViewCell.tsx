@@ -35,7 +35,7 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  bookmarksRangeUrl: string;
+  bookmarksRangeUrl?: string | null; // optional to allow SSR fallback without auth
   isFirstCellWithHeader?: boolean;
 };
 

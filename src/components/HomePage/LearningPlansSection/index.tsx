@@ -2,6 +2,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './LearningPlansSection.module.scss';
 import Loading from './Loading';
@@ -9,6 +10,7 @@ import Loading from './Loading';
 import DataFetcher from '@/components/DataFetcher';
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { selectLearningPlanLanguageIsoCodes } from '@/redux/slices/defaultSettings';
 import { TestId } from '@/tests/test-ids';
 import { Course, CoursesResponse } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
@@ -28,8 +30,15 @@ const learningPlansSorter = (a: Course, b: Course) => {
   return 0;
 };
 
-const LearningPlansSection = () => {
-  const { t, lang } = useTranslation('home');
+type LearningPlansSectionProps = {
+  initialCoursesData?: CoursesResponse | null;
+};
+
+const LearningPlansSection: React.FC<LearningPlansSectionProps> = ({ initialCoursesData }) => {
+  const { t } = useTranslation('home');
+  const languageIsoCodes = useSelector(selectLearningPlanLanguageIsoCodes);
+  const resolvedLanguageIsoCodes =
+    languageIsoCodes && languageIsoCodes.length > 0 ? languageIsoCodes : ['en'];
 
   const onSeeMoreClicked = () => {
     logButtonClick('homepage_learning_plans_see_more');
@@ -45,7 +54,8 @@ const LearningPlansSection = () => {
     <DataFetcher
       loading={Loading}
       fetcher={privateFetcher}
-      queryKey={makeGetCoursesUrl({ myCourses: false, languages: [lang] })}
+      queryKey={makeGetCoursesUrl({ myCourses: false, languages: resolvedLanguageIsoCodes })}
+      initialData={initialCoursesData ?? undefined}
       render={(data: CoursesResponse) => {
         const courses = data?.data;
         if (!courses || !Array.isArray(courses) || courses.length === 0) {
@@ -93,7 +103,7 @@ const LearningPlansSection = () => {
                     >
                       <div className={styles.thumbnailWrapper}>
                         <Image
-                          src={course.thumbnail}
+                          src={course.thumbnail || ''}
                           alt={course.title}
                           fill
                           className={styles.thumbnail}

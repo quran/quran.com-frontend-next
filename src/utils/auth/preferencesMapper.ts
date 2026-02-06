@@ -131,6 +131,9 @@ export const stateToPreferenceGroups = (state: any): Record<PreferenceGroup, any
     language: fallbackLanguage,
   };
 
+  preferenceGroups[PreferenceGroup.USER_CUSTOMIZATION] = {
+    userHasCustomised: state?.defaultSettings?.userHasCustomised ?? false,
+  };
   if (state?.guestBookmark?.readingBookmark) {
     preferenceGroups[PreferenceGroup.READING_BOOKMARK] = {
       [ReadingBookmarkPreferenceGroupKey.BOOKMARK]: state?.guestBookmark?.readingBookmark,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistReducer,
@@ -14,6 +15,7 @@ import storage from 'redux-persist/lib/storage';
 import { getStoreInitialState } from './defaultSettings/util';
 import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
+import { RootState } from './RootState';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
 import banner from './slices/banner';
@@ -49,6 +51,8 @@ import theme from './slices/theme';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
 import getPersistedTheme from './utils/getPersistedTheme';
+
+import { CountryLanguagePreferenceResponse } from 'types/ApiResponses';
 
 const persistConfig = {
   key: 'root',
@@ -118,8 +122,16 @@ export const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const getStore = (locale: string) => {
-  const baseInitialState = getStoreInitialState(locale);
+const getStore = (
+  locale: string,
+  countryPreference?: CountryLanguagePreferenceResponse,
+  preloadedState?: RootState,
+  detectedLanguage?: string,
+  detectedCountry?: string,
+) => {
+  const baseInitialState =
+    preloadedState ||
+    getStoreInitialState(locale, countryPreference, detectedLanguage, detectedCountry);
 
   // Preserve persisted theme synchronously to prevent flash during language switching.
   // Redux-persist's REHYDRATE is async, so we read localStorage before store creation.
@@ -150,5 +162,7 @@ const getStore = (locale: string) => {
     preloadedState: initialState,
   });
 };
+
+export type AppStore = ReturnType<typeof getStore>;
 
 export default getStore;

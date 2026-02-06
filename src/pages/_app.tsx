@@ -17,6 +17,7 @@ import { API_HOST } from '@/utils/api';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
+import { REDUX_STATE_PROP_NAME } from '@/utils/withSsrRedux';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
@@ -68,7 +69,11 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           <ToastContainerProvider>
             <DataContext.Provider value={pageProps.chaptersData}>
               <AudioPlayerMachineProvider>
-                <ReduxProvider locale={resolvedLocale}>
+                <ReduxProvider
+                  locale={resolvedLocale}
+                  countryLanguagePreference={pageProps.countryLanguagePreference}
+                  reduxState={pageProps[REDUX_STATE_PROP_NAME]}
+                >
                   <ThemeProvider>
                     <OnboardingProvider>
                       <AppContent Component={Component} pageProps={pageProps} />

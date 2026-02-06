@@ -2,25 +2,24 @@ import { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
-import { getReciterData } from '@/api';
+import { getAvailableReciters } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ChaptersList from '@/components/Reciter/ChaptersList';
 import ReciterInfo from '@/components/Reciter/ReciterInfo';
 import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
-import { logErrorToSentry } from '@/lib/sentry';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getReciterNavigationUrl } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
+import withSsrRedux from '@/utils/withSsrRedux';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -108,37 +107,32 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  try {
-    const reciterId = params.reciterId as string;
-
-    const reciterData = await getReciterData(reciterId, locale);
-    const chaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData,
-        selectedReciter: reciterData.reciter,
-      },
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ReciterPage',
-      metadata: {
-        reciterId: String(params.reciterId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/reciters/[reciterId]',
+  async (context) => {
+    const { params, locale } = context;
+    const reciterId = String(params.reciterId);
+    try {
+      const { reciters } = await getAvailableReciters(locale, [
+        'profile_picture',
+        'cover_image',
+        'bio',
+      ]);
+      const selectedReciter = reciters.find((reciter) => reciter.id === Number(reciterId));
+      if (!selectedReciter) {
+        return { notFound: true };
+      }
+      const chaptersData = await getAllChaptersData(locale);
+      return {
+        props: {
+          selectedReciter,
+          chaptersData,
+        },
+      };
+    } catch (error) {
+      return { notFound: true };
+    }
+  },
+);
 
 export default ReciterPage;

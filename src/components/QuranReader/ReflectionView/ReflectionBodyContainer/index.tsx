@@ -6,7 +6,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getReflectionTabs, handleReflectionViewed } from './helpers';
+import ReflectionBodyStatic from './ReflectionBody';
 import styles from './ReflectionBodyContainer.module.scss';
+import ReflectionSurahAndAyahSelectionStatic from './ReflectionSurahAndAyahSelection';
 
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
@@ -52,6 +54,7 @@ type ReflectionBodyProps = {
     body: JSX.Element;
   }) => JSX.Element;
   initialContentType?: ContentType;
+  initialAyahReflections?: AyahReflectionsResponse;
   isModal?: boolean;
   showEndActions?: boolean;
   showTabs?: boolean;
@@ -63,6 +66,7 @@ const ReflectionBodyContainer = ({
   initialVerseNumber,
   scrollToTop,
   initialContentType = ContentType.REFLECTIONS,
+  initialAyahReflections,
   isModal = false,
   showEndActions = true,
   showTabs = true,
@@ -83,6 +87,12 @@ const ReflectionBodyContainer = ({
   }, [initialContentType]);
 
   const { lang, t } = useTranslation();
+  const shouldUseInitialAyahReflections =
+    !!initialAyahReflections &&
+    selectedChapterId === initialChapterId &&
+    selectedVerseNumber === initialVerseNumber &&
+    selectedContentType === initialContentType;
+
   const dispatch = useDispatch();
   const storedReflectionLanguages = useSelector(selectReflectionLanguages);
   const storedLessonLanguages = useSelector(selectLessonLanguages);
@@ -210,6 +220,7 @@ const ReflectionBodyContainer = ({
         ],
       })}
       render={renderBody}
+      initialData={shouldUseInitialAyahReflections ? initialAyahReflections : undefined}
     />
   );
 
@@ -224,6 +235,19 @@ const ReflectionBodyContainer = ({
           containerClassName={styles.tabsContainer}
           activeClassName={styles.tabActive}
         />
+      )}
+      {shouldUseInitialAyahReflections && (
+        <noscript>
+          <ReflectionBodyStatic
+            data={initialAyahReflections}
+            selectedChapterId={initialChapterId}
+            selectedVerseNumber={initialVerseNumber}
+            setSelectedVerseNumber={setSelectedVerseNumber}
+            scrollToTop={scrollToTop}
+            selectedContentType={initialContentType}
+            isModal={isModal}
+          />
+        </noscript>
       )}
       {isModal && showTabs ? (
         <div className={styles.reflectionDataContainer}>{dataFetcher}</div>
@@ -246,13 +270,26 @@ const ReflectionBodyContainer = ({
 
   return render({
     surahAndAyahSelection: (
-      <ReflectionSurahAndAyahSelection
-        selectedChapterId={selectedChapterId}
-        selectedVerseNumber={selectedVerseNumber}
-        setSelectedChapterId={setSelectedChapterId}
-        setSelectedVerseNumber={setSelectedVerseNumber}
-        selectedContentType={selectedContentType}
-      />
+      <>
+        {shouldUseInitialAyahReflections && (
+          <noscript>
+            <ReflectionSurahAndAyahSelectionStatic
+              selectedChapterId={initialChapterId}
+              selectedVerseNumber={initialVerseNumber}
+              setSelectedChapterId={setSelectedChapterId}
+              setSelectedVerseNumber={setSelectedVerseNumber}
+              selectedContentType={initialContentType}
+            />
+          </noscript>
+        )}
+        <ReflectionSurahAndAyahSelection
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
+          setSelectedChapterId={setSelectedChapterId}
+          setSelectedVerseNumber={setSelectedVerseNumber}
+          selectedContentType={selectedContentType}
+        />
+      </>
     ),
     languageSelection,
     body,

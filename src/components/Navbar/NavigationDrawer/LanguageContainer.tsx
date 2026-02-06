@@ -8,6 +8,7 @@ import styles from './LanguageContainer.module.scss';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import useLanguageChange from '@/hooks/useLanguageChange';
 import IconArrowLeft from '@/icons/arrow-left.svg';
+import { setLocaleCookie } from '@/utils/cookies';
 import { getLocaleName } from '@/utils/locale';
 import i18nConfig from 'i18n.json';
 
@@ -23,6 +24,8 @@ const LanguageContainer: React.FC<LanguageContainerProps> = ({ show, onBack, ...
   const { isChangingLanguage, changingLocale, onLanguageChange } = useLanguageChange();
 
   const handleLanguageChange = async (newLocale: string) => {
+    // Ensure the locale cookie exists before triggering navigation.
+    setLocaleCookie(newLocale);
     await onLanguageChange(newLocale, onBack);
   };
 

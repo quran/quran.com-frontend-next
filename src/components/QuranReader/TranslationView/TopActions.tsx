@@ -12,7 +12,7 @@ import Verse from 'types/Verse';
 
 type TopActionsProps = {
   verse: Verse;
-  bookmarksRangeUrl?: string;
+  bookmarksRangeUrl?: string | null; // allow missing bookmarks range during SSR fallback
   isTranslationView?: boolean;
   shouldUseModalZIndex?: boolean;
   className?: string;

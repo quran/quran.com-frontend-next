@@ -1,6 +1,7 @@
+/* eslint-disable max-lines */
 import { useEffect, useMemo, useState } from 'react';
 
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -18,6 +19,7 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyQuranNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const MY_QURAN_PATH = getMyQuranNavigationUrl();
 const tabComponents = {
@@ -88,9 +90,20 @@ const MyQuranPage = (): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-  return { props: { chaptersData: allChaptersData } };
-};
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/profile',
+  async ({ locale }, languageResult) => {
+    const allChaptersData = await getAllChaptersData(locale);
+
+    return {
+      props: {
+        chaptersData: allChaptersData,
+        ...(languageResult.countryLanguagePreference && {
+          countryLanguagePreference: languageResult.countryLanguagePreference,
+        }),
+      },
+    };
+  },
+);
 
 export default MyQuranPage;

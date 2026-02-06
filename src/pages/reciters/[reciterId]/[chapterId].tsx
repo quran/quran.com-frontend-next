@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,7 +13,7 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getChapterAudioData, getChapterIdBySlug, getReciterData } from '@/api';
+import { getAvailableReciters, getChapterAudioData } from '@/api';
 import { download } from '@/components/AudioPlayer/Buttons/DownloadAudioButton';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Button, { ButtonType } from '@/dls/Button/Button';
@@ -24,7 +24,6 @@ import DownloadIcon from '@/icons/download.svg';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
-import { logErrorToSentry } from '@/lib/sentry';
 import { makeCDNUrl } from '@/utils/cdn';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -33,9 +32,9 @@ import {
   getReciterChapterNavigationUrl,
   getSurahNavigationUrl,
 } from '@/utils/navigation';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import { getCurrentPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
@@ -74,7 +73,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
   const onCopyLinkClicked = () => {
     logButtonClick('share-recitation-copy-link');
     const path = getCurrentPath();
-    if (origin) {
+    if (path) {
       clipboardCopy(path).then(() => {
         toast(t('common:shared'), { status: ToastStatus.Success });
       });
@@ -182,53 +181,35 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
 
 export default RecitationPage;
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  try {
-    const reciterId = params.reciterId as string;
-    let chapterId = params.chapterId as string;
-    const isValidId = isValidChapterId(chapterId);
-    // if it's not a valid number or a number that exceed 114 or below 1
-    if (!isValidId) {
-      const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
-      // if it's not a valid number nor a valid slug
-      if (!sluggedChapterId) {
-        return { notFound: true };
-      }
-      chapterId = sluggedChapterId;
-    }
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/reciters/[reciterId]/[chapterId]',
+  async (context) => {
+    const { params, locale } = context;
+    const reciterId = String(params.reciterId);
+    const chapterId = String(params.chapterId);
 
-    const reciterData = await getReciterData(reciterId, locale);
-    const chaptersData = await getAllChaptersData(locale);
-    const chapterData = await getChapterData(chaptersData, chapterId);
-
-    if (!reciterData || !chapterData) {
+    if (!isValidChapterId(chapterId)) {
       return { notFound: true };
     }
 
-    return {
-      props: {
-        chaptersData,
-        selectedReciter: reciterData.reciter,
-        selectedChapter: { ...chapterData, id: chapterId },
-      },
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-ReciterChapterPage',
-      metadata: {
-        reciterId: String(params.reciterId),
-        chapterId: String(params.chapterId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
+    try {
+      const { reciters } = await getAvailableReciters(locale, []);
+      const selectedReciter = reciters.find((reciter) => reciter.id === Number(reciterId));
+      if (!selectedReciter) {
+        return { notFound: true };
+      }
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
+      const chaptersData = await getAllChaptersData(locale);
+      const selectedChapter = getChapterData(chaptersData, chapterId);
+
+      return {
+        props: {
+          selectedReciter,
+          selectedChapter,
+        },
+      };
+    } catch (error) {
+      return { notFound: true };
+    }
+  },
+);

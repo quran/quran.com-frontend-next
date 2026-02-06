@@ -44,3 +44,21 @@ test.skip('loads more courses when scrolling near the end of the list', async ({
 
   await expect.poll(async () => courseCards.count()).toBeGreaterThan(initialCourseCount);
 });
+
+test(
+  'Learning Plans section renders on the homepage without JavaScript',
+  { tag: ['@learning-plans', '@ssr', '@homepage'] },
+  async ({ browser }) => {
+    const ssrContext = await browser.newContext({ javaScriptEnabled: false }); // Disable JS to validate SSR rendering
+    const ssrPage = await ssrContext.newPage();
+
+    await ssrPage.goto('/', { waitUntil: 'networkidle' });
+
+    const learningPlansSection = ssrPage.getByTestId('learning-plans-section');
+    await expect(learningPlansSection).toBeVisible();
+    const items = learningPlansSection.getByRole('link');
+    expect(await items.count()).toBeGreaterThan(0);
+
+    await ssrContext.close(); // Clean up the no-JS context
+  },
+);

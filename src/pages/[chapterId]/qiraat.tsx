@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -28,13 +28,10 @@ import { makeQiraatMatrixUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getVerseQiraatNavigationUrl } from '@/utils/navigation';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type AyahQiraatProp = {
   chapter?: ChapterResponse;
@@ -96,72 +93,70 @@ const AyahQiraatPage: NextPage<AyahQiraatProp> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId } = params;
-  const verseKey = String(chapterId);
-  const chaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/qiraat',
+  async ({ params, locale }) => {
+    const { chapterId } = params;
+    const verseKey = String(chapterId);
+    const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+    if (!isValidVerseKey(chaptersData, verseKey)) {
+      return { notFound: true };
+    }
 
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
-  const translations = getTranslationsInitialState(locale).selectedTranslations;
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
 
-  try {
-    const qiraatMatrixUrl = makeQiraatMatrixUrl(verseKey, locale as Language);
+    try {
+      const qiraatMatrixUrl = makeQiraatMatrixUrl(verseKey, locale as Language);
 
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
 
-    const [qiraatData, verseData, pagesLookupResponse] = await Promise.all([
-      getQiraatMatrix(verseKey, locale as Language),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
-    ]);
+      const [qiraatData, verseData, pagesLookupResponse] = await Promise.all([
+        getQiraatMatrix(verseKey, locale as Language),
+        fetcher(verseUrl) as Promise<VerseResponse>,
+        getPagesLookup({
+          chapterNumber: Number(chapterNumber),
+          mushaf: mushafId,
+        }),
+      ]);
 
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+      const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
-    const fallback = {
-      [qiraatMatrixUrl]: qiraatData,
-      [verseUrl]: verseData,
-    };
+      const fallback = {
+        [qiraatMatrixUrl]: qiraatData,
+        [verseUrl]: verseData,
+      };
 
-    return {
-      props: {
-        chaptersData,
-        chapterId: chapterNumber,
-        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
-        verseNumber,
-        fallback,
-        verse: verseData.verse,
-        versesResponse,
-        qiraatData,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-QiraatPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      return {
+        props: {
+          chaptersData,
+          chapterId: chapterNumber,
+          chapter: {
+            chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber },
+          },
+          verseNumber,
+          fallback,
+          verse: verseData.verse,
+          versesResponse,
+          qiraatData,
+        },
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-QiraatPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          locale,
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default AyahQiraatPage;

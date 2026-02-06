@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 const { setupServer } = require('msw/node');
 
 const { handlers } = require('./handlers.js');

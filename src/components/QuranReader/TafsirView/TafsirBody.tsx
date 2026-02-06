@@ -49,6 +49,7 @@ type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
   initialTafsirIdOrSlug?: number | string;
+  initialTafsirData?: TafsirContentResponse;
   scrollToTop: () => void;
   shouldRender?: boolean;
   showArabicText?: boolean;
@@ -66,6 +67,7 @@ const TafsirBody = ({
   initialChapterId,
   initialVerseNumber,
   initialTafsirIdOrSlug,
+  initialTafsirData,
   render,
   scrollToTop,
   shouldRender,
@@ -88,9 +90,15 @@ const TafsirBody = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
+  const initialVerseKey = makeVerseKey(Number(initialChapterId), Number(initialVerseNumber));
+  const initialTafsirIdOrSlugResolved = initialTafsirIdOrSlug || userPreferredTafsirIds?.[0];
   const [selectedTafsirIdOrSlug, setSelectedTafsirIdOrSlug] = useState<number | string>(
-    initialTafsirIdOrSlug || userPreferredTafsirIds?.[0],
+    initialTafsirIdOrSlugResolved,
   );
+  const shouldUseInitialTafsirData =
+    !!initialTafsirData &&
+    selectedVerseKey === initialVerseKey &&
+    String(selectedTafsirIdOrSlug) === String(initialTafsirIdOrSlugResolved);
 
   // Sync local state when initial props change (e.g., when navigating verses in Study Mode)
   useEffect(() => {
@@ -346,6 +354,7 @@ const TafsirBody = ({
           mushafLines: quranReaderStyles.mushafLines,
         })}
         render={renderTafsir}
+        initialData={shouldUseInitialTafsirData ? initialTafsirData : undefined}
       />
     </div>
   );

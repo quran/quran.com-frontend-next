@@ -3,7 +3,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { selectQuranFont, withSettingsDrawer } from '@/tests/helpers/settings';
 import Homepage from '@/tests/POM/home-page';
 import QuranPage from '@/tests/POM/mushaf-mode';
-import { TestId } from '@/tests/test-ids';
+import { TestId, type SettingsQuranFont } from '@/tests/test-ids';
 import { QuranFont } from '@/types/QuranReader';
 
 let homePage: Homepage;
@@ -19,7 +19,7 @@ test.beforeEach(async ({ page, context }) => {
 const runMushafPageTest = async (
   page: Page,
   isMobile: boolean,
-  font?: QuranFont,
+  font?: SettingsQuranFont,
 ): Promise<void> => {
   // Go to Surah 1
   await homePage.goTo('/1');

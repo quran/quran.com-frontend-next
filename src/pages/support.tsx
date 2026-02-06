@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -11,6 +11,7 @@ import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = '/support';
 const SupportPage: NextPage = (): JSX.Element => {
@@ -123,5 +124,7 @@ const SupportPage: NextPage = (): JSX.Element => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/support');
 
 export default SupportPage;

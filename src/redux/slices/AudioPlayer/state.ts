@@ -7,6 +7,7 @@ import { getAudioPlayerStateInitialState } from '@/redux/defaultSettings/util';
 import { RootState } from '@/redux/RootState';
 import AudioState, { RepeatSettings } from '@/redux/types/AudioState';
 import SliceName from '@/redux/types/SliceName';
+import Language from '@/types/Language';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -45,7 +46,7 @@ export const audioPlayerStateSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => ({
       ...state,
-      ...getAudioPlayerStateInitialState(action.payload.locale),
+      ...getAudioPlayerStateInitialState(action.payload.locale as Language),
     }));
     builder.addCase(syncUserPreferences, (state, action) => {
       const {

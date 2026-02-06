@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React, { useEffect } from 'react';
 
-import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
@@ -24,6 +24,7 @@ import {
   VerseResponse,
 } from '@/types/ApiResponses';
 import ChaptersData from '@/types/ChaptersData';
+import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getMushafId } from '@/utils/api';
@@ -32,13 +33,10 @@ import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { buildVersesResponse, buildStudyModeVerseUrl } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -118,79 +116,79 @@ const AyahTafsirPage: NextPage<AyahTafsirProp> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId, tafsirId: tafsirIdOrSlug } = params;
-  const verseKey = String(chapterId);
-  const chaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/[chapterId]/tafsirs/[tafsirId]',
+  async ({ params, locale }) => {
+    const { chapterId, tafsirId: tafsirIdOrSlug } = params;
+    const verseKey = String(chapterId);
+    const chaptersData = await getAllChaptersData(locale);
 
-  if (!isValidVerseKey(chaptersData, verseKey)) {
-    return { notFound: true };
-  }
+    if (!isValidVerseKey(chaptersData, verseKey)) {
+      return { notFound: true };
+    }
 
-  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
-  const translations = getTranslationsInitialState(locale).selectedTranslations;
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale as Language);
+    const translations = getTranslationsInitialState(locale as Language).selectedTranslations;
 
-  try {
-    const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-      lang: locale,
-      quranFont,
-      mushafLines,
-    });
-    const tafsirListUrl = makeTafsirsUrl(locale);
+    try {
+      const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+        lang: locale,
+        quranFont,
+        mushafLines,
+      });
+      const tafsirListUrl = makeTafsirsUrl(locale);
 
-    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
-    const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
+      const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+      const verseUrl = buildStudyModeVerseUrl(verseKey, quranFont, mushafLines, translations);
 
-    const [tafsirContentData, tafsirListData, verseData, pagesLookupResponse] = await Promise.all([
-      fetcher(tafsirContentUrl),
-      fetcher(tafsirListUrl),
-      fetcher(verseUrl) as Promise<VerseResponse>,
-      getPagesLookup({
-        chapterNumber: Number(chapterNumber),
-        mushaf: mushafId,
-      }),
-    ]);
+      const [tafsirContentData, tafsirListData, verseData, pagesLookupResponse] = await Promise.all(
+        [
+          fetcher(tafsirContentUrl),
+          fetcher(tafsirListUrl),
+          fetcher(verseUrl) as Promise<VerseResponse>,
+          getPagesLookup({
+            chapterNumber: Number(chapterNumber),
+            mushaf: mushafId,
+          }),
+        ],
+      );
 
-    const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
+      const versesResponse = buildVersesResponse(chaptersData, pagesLookupResponse);
 
-    return {
-      props: {
-        chaptersData,
-        chapterId: chapterNumber,
-        chapter: { chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber } },
-        fallback: {
-          [tafsirListUrl]: tafsirListData,
-          [tafsirContentUrl]: tafsirContentData,
-          [verseUrl]: verseData,
+      return {
+        props: {
+          chaptersData,
+          chapterId: chapterNumber,
+          chapter: {
+            chapter: { ...getChapterData(chaptersData, chapterNumber), id: chapterNumber },
+          },
+          fallback: {
+            [tafsirListUrl]: tafsirListData,
+            [tafsirContentUrl]: tafsirContentData,
+            [verseUrl]: verseData,
+          },
+          tafsirData: tafsirContentData,
+          verseNumber,
+          tafsirIdOrSlug,
+          verse: verseData.verse,
+          versesResponse,
         },
-        tafsirData: tafsirContentData,
-        verseNumber,
-        tafsirIdOrSlug,
-        verse: verseData.verse,
-        versesResponse,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-TafsirPage',
-      metadata: {
-        chapterIdOrSlug: String(params.chapterId),
-        tafsirIdOrSlug: String(params.tafsirId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking',
-});
+      };
+    } catch (error) {
+      logErrorToSentry(error, {
+        transactionName: 'getServerSideProps-TafsirPage',
+        metadata: {
+          chapterIdOrSlug: String(params.chapterId),
+          tafsirIdOrSlug: String(params.tafsirId),
+          locale,
+        },
+      });
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default AyahTafsirPage;

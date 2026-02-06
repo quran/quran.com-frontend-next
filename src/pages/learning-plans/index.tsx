@@ -1,14 +1,22 @@
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getLearningPlansImageUrl } from '@/lib/og';
+import { CoursesResponse } from '@/types/auth/Course';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
-const LearningPlansPage: NextPage = () => {
+type LearningPlansPageProps = {
+  initialCoursesData?: CoursesResponse;
+};
+
+const LearningPlansPage: NextPage<LearningPlansPageProps> = ({ initialCoursesData }) => {
   const { t, lang } = useTranslation('learn');
 
   return (
@@ -24,19 +32,33 @@ const LearningPlansPage: NextPage = () => {
         imageWidth={1200}
         imageHeight={630}
       />
-      <CoursesPageLayout />
+      <CoursesPageLayout initialCoursesData={initialCoursesData} lang={lang} />
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/learning-plans',
+  async (context, languageResult) => {
+    const { locale } = context;
+    const allChaptersData = await getAllChaptersData(locale);
+    const learningPlanLanguages = languageResult.countryLanguagePreference?.learningPlanLanguages
+      ?.map((lang) => lang.isoCode)
+      .filter((code): code is string => Boolean(code))
+      .map((code) => code.toLowerCase()) || ['en'];
+    const coursesUrl = makeGetCoursesUrl({
+      myCourses: false,
+      languages: learningPlanLanguages,
+    });
+    const initialCoursesData = await privateFetcher(coursesUrl);
 
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
-};
+    return {
+      props: {
+        chaptersData: allChaptersData,
+        initialCoursesData,
+      },
+    };
+  },
+);
 
 export default LearningPlansPage;

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable @typescript-eslint/naming-convention */
 export const mockCountryLanguagePreferences = {

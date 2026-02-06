@@ -11,6 +11,7 @@ import {
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import { areArraysEqual, mergeTwoArraysUniquely } from '@/utils/array';
 import { selectIsUsingDefaultReciter } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
@@ -35,8 +36,8 @@ const useIsUsingDefaultSettings = ({
 
   const defaultState = useMemo(() => {
     return {
-      quranReaderStyles: getQuranReaderStylesInitialState(lang),
-      translations: getTranslationsInitialState(lang),
+      quranReaderStyles: getQuranReaderStylesInitialState(lang as Language),
+      translations: getTranslationsInitialState(lang as Language),
     };
   }, [lang]);
 
