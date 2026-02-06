@@ -31,9 +31,16 @@ $hadith-font-line-height: 1.6;
 .hadithSource {
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-normal);
+  unicode-bidi: plaintext;
+  text-decoration: none;
 
-  .number:dir(ltr) {
-    unicode-bidi: plaintext;
+  [dir='rtl'] & {
+    text-align: end;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro2-px);
   }
 }
 
@@ -87,5 +94,5 @@ $hadith-font-line-height: 1.6;
 }
 
 .infiniteScrollTrigger {
-  block-size: 1px;
+  block-size: var(--spacing-hairline-px);
 }
