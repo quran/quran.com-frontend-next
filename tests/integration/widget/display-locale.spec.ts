@@ -10,9 +10,7 @@ test.describe('Widget - localization', () => {
       locale: 'fr',
     });
 
-    await expect(
-      frame.getByText('Coran 2:255 (Sourate Al-Baqarah)', { exact: false }),
-    ).toBeVisible();
+    await expect(frame.getByText('Sourate Al-Baqarah [2:255]', { exact: false })).toBeVisible();
   });
 
   test('Header localizes chapter and verse numbers in Arabic', async ({ page }) => {

@@ -21,7 +21,8 @@ test.describe('Widget defaults from user settings', () => {
       await page.getByTestId('text_indopak-button').click();
 
       // 3. Select Muhammad Hamidullah translation
-      await page.getByLabel('Change Translation').click();
+      await page.getByTestId('translation').click();
+      await page.getByTestId('translation-card').click();
       const settingsBody = page.getByTestId('settings-drawer-body');
       await settingsBody.getByText('Dr. Mustafa Khattab').click(); // uncheck default
       await settingsBody.getByText('Muhammad Hamidullah').click();
@@ -87,7 +88,8 @@ test.describe('Widget defaults from user settings', () => {
       // 2. Select IndoPak font and Muhammad Hamidullah translation
       await homePage.openSettingsDrawer();
       await page.getByTestId('text_indopak-button').click();
-      await page.getByLabel('Change Translation').click();
+      await page.getByTestId('translation').click();
+      await page.getByTestId('translation-card').click();
       const settingsBody = page.getByTestId('settings-drawer-body');
       await settingsBody.getByText('Dr. Mustafa Khattab').click(); // uncheck default
       await settingsBody.getByText('Muhammad Hamidullah').click();

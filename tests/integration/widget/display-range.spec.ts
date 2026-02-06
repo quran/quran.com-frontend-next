@@ -23,6 +23,6 @@ test.describe('Widget - range and headers', () => {
       locale: 'en',
     });
 
-    await expect(frame.getByText('Quran 2:255 (Surah Al-Baqarah)', { exact: false })).toBeVisible();
+    await expect(frame.getByText('Surah Al-Baqarah [2:255]', { exact: false })).toBeVisible();
   });
 });
