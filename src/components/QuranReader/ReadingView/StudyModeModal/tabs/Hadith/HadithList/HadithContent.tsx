@@ -1,14 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './HadithContent.module.scss';
 
 import replaceBreaksWithSpans from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/Hadith/utility';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Language from '@/types/Language';
 
-const MAX_HEIGHT_THRESHOLD = 150;
-const COLLAPSED_HEIGHT = 100;
+const COLLAPSED_LINE_COUNT = 3;
+const OVERFLOW_LINE_COUNT = 4;
 
 type HadithContentProps = {
   enBody?: string;
@@ -17,19 +19,33 @@ type HadithContentProps = {
 
 const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
   const { lang, t } = useTranslation('common');
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState<number>(0);
+  const [lineHeight, setLineHeight] = useState<number>(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [shouldShowToggle, setShouldShowToggle] = useState(false);
 
-  // Function to check content height
-  const checkContentHeight = () => {
+  // Calculate the actual rendered line height from computed styles
+  const calculateLineHeight = useCallback((): number => {
+    if (!contentRef.current) return 0;
+    const computedStyle = window.getComputedStyle(contentRef.current);
+    return parseFloat(computedStyle.lineHeight.replace('px', ''));
+  }, []);
+
+  // Function to check content height and calculate line-based thresholds
+  const checkContentHeight = useCallback(() => {
     if (contentRef.current) {
       const height = contentRef.current.scrollHeight;
       setContentHeight(height);
-      setShouldShowToggle(height > MAX_HEIGHT_THRESHOLD);
+
+      const currentLineHeight = calculateLineHeight();
+      setLineHeight(currentLineHeight);
+
+      // Show toggle if content exceeds OVERFLOW_LINE_COUNT lines
+      setShouldShowToggle(height > currentLineHeight * OVERFLOW_LINE_COUNT);
     }
-  };
+  }, [calculateLineHeight]);
 
   useEffect(() => {
     // Observe content size changes (font size changes, viewport resize, etc.)
@@ -37,10 +53,10 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
     const resizeObserver = new ResizeObserver(checkContentHeight);
     if (contentRef.current) resizeObserver.observe(contentRef.current);
     return () => resizeObserver.disconnect();
-  }, [enBody, arBody]);
+  }, [enBody, arBody, checkContentHeight, quranReaderStyles.hadithFontScale]);
 
   const handleToggle = () => setIsExpanded((prev) => !prev);
-  const isOverflowing = contentHeight > MAX_HEIGHT_THRESHOLD;
+  const isOverflowing = contentHeight > lineHeight * OVERFLOW_LINE_COUNT;
   const shouldApplyFade = !isExpanded && isOverflowing;
 
   return (
@@ -48,14 +64,10 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
       <div
         ref={contentRef}
         className={styles.content}
+        data-faded={shouldApplyFade}
+        data-collapsed={shouldApplyFade}
         style={{
-          maxHeight: shouldApplyFade ? `${COLLAPSED_HEIGHT}px` : 'none',
-          maskImage: shouldApplyFade
-            ? 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)'
-            : 'none',
-          WebkitMaskImage: shouldApplyFade
-            ? 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)'
-            : 'none',
+          maxHeight: shouldApplyFade ? `${lineHeight * COLLAPSED_LINE_COUNT}px` : undefined,
         }}
       >
         {Language.AR !== lang && enBody && (
