@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Đã sao chép!",
+    "copy": "Sao chép",
+    "copyEmbedSnippet": "Sao chép đoạn mã nhúng"
+  },
+  "checkboxes": {
+    "answers": "Nút \"Hiển thị đáp án\" (nếu có)",
+    "audio": "Bật phát lại âm thanh",
+    "customSize": "Sử dụng chiều rộng/chiều cao tùy chỉnh",
+    "lessons": "Nút Hiển thị Bài học",
+    "mergeVerses": "Ghép các câu thơ (hiển thị nội tuyến)",
+    "reflections": "Nút Hiển thị Phản chiếu",
+    "showArabic": "Hiển thị câu thơ tiếng Ả Rập",
+    "tafsirs": "Nút Hiển thị Tafsir",
+    "translator": "Hiển thị tên người dịch",
+    "verseRange": "Kích hoạt phạm vi câu thơ",
+    "wordByWord": "Cho phép dịch từng từ một",
+    "wordByWordTransliteration": "Cho phép phiên âm từng từ"
+  },
+  "errors": {
+    "clipboardFallback": "Ghi dữ liệu vào clipboard thất bại, đang sử dụng phương án dự phòng.",
+    "clipboardUnavailable": "API bảng nhớ tạm không khả dụng",
+    "loadChapters": "Không thể tải chương",
+    "loadReciters": "Không thể tải người đọc thuộc lòng",
+    "loadTranslations": "Không thể tải bản dịch"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Mã khách hàng",
+    "height": "Chiều cao",
+    "language": "Ngôn ngữ",
+    "mushaf": "Mushaf",
+    "reciter": "Người đọc thuộc lòng",
+    "surah": "Surah",
+    "theme": "Chủ đề",
+    "translations": "Bản dịch",
+    "width": "Chiều rộng"
+  },
+  "header": {
+    "subtitle": "<bold>Một cách thức chất lượng cao hơn, có thể tùy chỉnh để đưa các câu kinh Qur'an vào nội dung của bạn.</bold><br />Tạo một đoạn mã nhúng mà bạn có thể dễ dàng tùy chỉnh, với <bold>Hiển thị tiếng Ả Rập chính xác, tích hợp chức năng đọc thuộc lòng.</bold> và hơn thế nữa, để người đọc có thể vừa nghe vừa tương tác với câu thơ.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Cấu hình và xem trước các tiện ích nhúng của Quran.com, sau đó sao chép đoạn mã đã được chuẩn bị sẵn.",
+    "title": "Trình tạo tiện ích Ayah | Kinh Qur'an.com"
+  },
+  "mushaf": {
+    "indopak": "Ấn Độ-Pak",
+    "kfgqpc_v1": "Khu phức hợp King Fahad v1",
+    "kfgqpc_v2": "Khu phức hợp King Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Tìm kiếm bản dịch..."
+  },
+  "reciters": {
+    "select": "Chọn người đọc thuộc lòng"
+  },
+  "sections": {
+    "configuration": "Cấu hình",
+    "preview": "Xem trước trực tiếp",
+    "snippet": "Nhúng đoạn mã"
+  },
+  "states": {
+    "loadingChapters": "Đang tải các chương...",
+    "loadingPreview": "Đang tải bản xem trước...",
+    "loadingReciters": "Đang tải danh sách người đọc...",
+    "loadingVerses": "Đang tải các câu thơ...",
+    "noTranslations": "Không tìm thấy bản dịch nào."
+  },
+  "theme": {
+    "dark": "Tối tăm",
+    "light": "Ánh sáng",
+    "sepia": "Màu nâu đỏ"
+  },
+  "translations": {
+    "chipRemoveLabel": "Xóa bản dịch",
+    "otherLanguage": "Khác"
+  }
+}

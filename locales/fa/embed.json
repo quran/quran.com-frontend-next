@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "کپی شده!",
+    "copy": "کپی",
+    "copyEmbedSnippet": "کپی کردن قطعه کد جاسازی"
+  },
+  "checkboxes": {
+    "answers": "دکمه نمایش پاسخ‌ها (در صورت وجود)",
+    "audio": "پخش صدا را فعال کنید",
+    "customSize": "استفاده از عرض/ارتفاع سفارشی",
+    "lessons": "دکمه نمایش درس‌ها",
+    "mergeVerses": "ادغام آیات (نمایش درون خطی)",
+    "reflections": "دکمه نمایش بازتاب‌ها",
+    "showArabic": "نمایش آیه عربی",
+    "tafsirs": "دکمه نمایش تفاسیر",
+    "translator": "نمایش نام مترجم",
+    "verseRange": "فعال کردن محدوده آیه",
+    "wordByWord": "فعال کردن ترجمه کلمه به کلمه",
+    "wordByWordTransliteration": "فعال کردن ترجمه کلمه به کلمه"
+  },
+  "errors": {
+    "clipboardFallback": "نوشتن در کلیپ‌بورد، با استفاده از fallback ناموفق بود",
+    "clipboardUnavailable": "API کلیپ‌بورد در دسترس نیست",
+    "loadChapters": "امکان بارگذاری فصل‌ها وجود ندارد",
+    "loadReciters": "بارگیری تلاوت‌کنندگان امکان‌پذیر نیست",
+    "loadTranslations": "بارگیری ترجمه‌ها امکان‌پذیر نیست"
+  },
+  "fields": {
+    "ayah": "آیه",
+    "clientId": "شناسه مشتری",
+    "height": "ارتفاع",
+    "language": "زبان",
+    "mushaf": "مصحف",
+    "reciter": "قاری",
+    "surah": "سوره",
+    "theme": "تم",
+    "translations": "ترجمه‌ها",
+    "width": "عرض"
+  },
+  "header": {
+    "subtitle": "<bold>روشی با کیفیت بالاتر و قابل تنظیم برای گنجاندن آیات قرآن در محتوای شما.</bold><br />یک جاسازی ایجاد کنید که بتوانید به راحتی آن را سفارشی کنید، با <bold>ارائه دقیق عربی، تلاوت داخلی</bold> و موارد دیگر، تا خوانندگان بتوانند همزمان با شنیدن آیه، با آن ارتباط برقرار کنند.",
+    "title": "سازنده جاسازی آیه"
+  },
+  "meta": {
+    "description": "ویجت‌های جاسازی Quran.com را پیکربندی و پیش‌نمایش کنید، سپس قطعه اسکریپت آماده استفاده را کپی کنید.",
+    "title": "ابزارک ساز Ayah | قرآن دات کام"
+  },
+  "mushaf": {
+    "indopak": "ایندوپک",
+    "kfgqpc_v1": "مجتمع ملک فهد نسخه ۱",
+    "kfgqpc_v2": "مجتمع ملک فهد نسخه ۲",
+    "qpc": "شرکت QPC عثمانی حفص",
+    "tajweed": "تجوید"
+  },
+  "placeholders": {
+    "searchTranslations": "جستجوی ترجمه‌ها..."
+  },
+  "reciters": {
+    "select": "قاری را انتخاب کنید"
+  },
+  "sections": {
+    "configuration": "پیکربندی",
+    "preview": "پیش‌نمایش زنده",
+    "snippet": "قطعه کد جاسازی"
+  },
+  "states": {
+    "loadingChapters": "در حال بارگذاری فصل‌ها...",
+    "loadingPreview": "در حال بارگذاری پیش‌نمایش...",
+    "loadingReciters": "در حال بارگذاری تلاوت‌کنندگان...",
+    "loadingVerses": "در حال بارگذاری آیات...",
+    "noTranslations": "هیچ ترجمه‌ای یافت نشد"
+  },
+  "theme": {
+    "dark": "تیره",
+    "light": "نور",
+    "sepia": "سپیا"
+  },
+  "translations": {
+    "chipRemoveLabel": "حذف ترجمه",
+    "otherLanguage": "دیگر"
+  }
+}

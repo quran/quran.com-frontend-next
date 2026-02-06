@@ -144,6 +144,7 @@
   "copied": "E kopjuar",
   "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
   "copy": "Kopjo",
+  "copy-embed": "Kopjo Vendos",
   "copylink": "Kopjo lidhjen",
   "counter": {
     "decrease": "Ulje",
@@ -169,6 +170,8 @@
     "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
     "verify-code": "Verifiko kodin"
   },
+  "embed-copied": "Embed Copyed",
+  "embed-widget": "Minuta e integrimit",
   "end-year-donate": "Përfundoni 2024 me Sadaka ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Mund të zgjidhni vetëm deri në {{limit}} vargje në të njëjtën kohë. Ju lutemi zgjidhni një gamë më të vogël.",

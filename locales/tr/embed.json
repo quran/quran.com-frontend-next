@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Kopyalandı!",
+    "copy": "Kopyala",
+    "copyEmbedSnippet": "Kopyala Gömme Kod Parçası"
+  },
+  "checkboxes": {
+    "answers": "Yanıtları Göster düğmesi (varsa)",
+    "audio": "Ses oynatımını etkinleştirin",
+    "customSize": "Özel genişlik/yükseklik kullanın.",
+    "lessons": "Dersleri Göster düğmesi",
+    "mergeVerses": "Ayetler birleştir (satır içi görüntüleme)",
+    "reflections": "Yansımaları Göster düğmesi",
+    "showArabic": "Arapça ayeti göster",
+    "tafsirs": "Tefsirleri göster butonunu göster",
+    "translator": "Çevirmen adını göster",
+    "verseRange": "Ayet aralığını etkinleştir",
+    "wordByWord": "Kelime kelime çeviriyi etkinleştirin",
+    "wordByWordTransliteration": "Kelime kelime transliterasyonu etkinleştirin"
+  },
+  "errors": {
+    "clipboardFallback": "Panoya yazma işlemi başarısız oldu, yedek yöntem kullanılıyor.",
+    "clipboardUnavailable": "Pano API'si kullanılamıyor.",
+    "loadChapters": "Bölümler yüklenemedi.",
+    "loadReciters": "Okuyucular yüklenemedi.",
+    "loadTranslations": "Çeviriler yüklenemedi."
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Müşteri Kimliği",
+    "height": "Yükseklik",
+    "language": "Dil",
+    "mushaf": "Mushaf",
+    "reciter": "Anlatıcı",
+    "surah": "Sure",
+    "theme": "Tema",
+    "translations": "Çeviriler",
+    "width": "Genişlik"
+  },
+  "header": {
+    "subtitle": "<bold>Kur'an ayetlerini içeriklerinize dahil etmenin daha yüksek kaliteli ve özelleştirilebilir bir yolu.</bold><br />Kolayca özelleştirebileceğiniz bir yerleştirme içeriği oluşturun, <bold>Doğru Arapça çeviri, dahili sesli okuma</bold> ve daha fazlası, böylece okuyucular ayetlerle etkileşim kurarken aynı zamanda dinleyebilirler.",
+    "title": "Ayah Gömme Oluşturucu"
+  },
+  "meta": {
+    "description": "Quran.com yerleştirme widget'larını yapılandırın ve önizleyin, ardından kullanıma hazır komut dosyası parçasını kopyalayın.",
+    "title": "Ayah Widget Oluşturucu | Kuran.com"
+  },
+  "mushaf": {
+    "indopak": "Hint-Pakistan",
+    "kfgqpc_v1": "Kral Fahad Kompleksi v1",
+    "kfgqpc_v2": "Kral Fahad Kompleksi v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tecvid"
+  },
+  "placeholders": {
+    "searchTranslations": "Çevirileri ara..."
+  },
+  "reciters": {
+    "select": "Okuyucu seçin"
+  },
+  "sections": {
+    "configuration": "Yapılandırma",
+    "preview": "Canlı önizleme",
+    "snippet": "Kod parçasını ekle"
+  },
+  "states": {
+    "loadingChapters": "Bölümler yükleniyor...",
+    "loadingPreview": "Önizleme yükleniyor...",
+    "loadingReciters": "Okuyucular yükleniyor...",
+    "loadingVerses": "Ayetler yükleniyor...",
+    "noTranslations": "Çeviri bulunamadı."
+  },
+  "theme": {
+    "dark": "Karanlık",
+    "light": "Işık",
+    "sepia": "Sepya"
+  },
+  "translations": {
+    "chipRemoveLabel": "Çeviriyi kaldır",
+    "otherLanguage": "Diğer"
+  }
+}

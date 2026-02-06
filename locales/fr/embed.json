@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Copié !",
+    "copy": "Copie",
+    "copyEmbedSnippet": "Copier l'extrait intégré"
+  },
+  "checkboxes": {
+    "answers": "Bouton « Afficher les réponses » (si disponible)",
+    "audio": "Activer la lecture audio",
+    "customSize": "Utilisez une largeur/hauteur personnalisée",
+    "lessons": "Bouton Afficher les leçons",
+    "mergeVerses": "Fusionner les versets (affichage en ligne)",
+    "reflections": "Bouton Afficher les reflets",
+    "showArabic": "Afficher le verset arabe",
+    "tafsirs": "Bouton Afficher les Tafsirs",
+    "translator": "Afficher le nom du traducteur",
+    "verseRange": "Activer la plage de versets",
+    "wordByWord": "Activer la traduction mot à mot",
+    "wordByWordTransliteration": "Activer la translittération mot à mot"
+  },
+  "errors": {
+    "clipboardFallback": "Échec de l'écriture dans le presse-papiers, utilisation de la méthode de repli",
+    "clipboardUnavailable": "API du presse-papiers indisponible",
+    "loadChapters": "Impossible de charger les chapitres",
+    "loadReciters": "Impossible de charger les récitants",
+    "loadTranslations": "Impossible de charger les traductions"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "ID client",
+    "height": "Hauteur",
+    "language": "Langue",
+    "mushaf": "Mushaf",
+    "reciter": "Récitant",
+    "surah": "Sourate",
+    "theme": "Thème",
+    "translations": "Traductions",
+    "width": "Largeur"
+  },
+  "header": {
+    "subtitle": "<bold>Une méthode de meilleure qualité et personnalisable pour intégrer des versets du Coran à votre contenu.</bold><br />Créez un contenu intégré que vous pouvez facilement personnaliser, avec <bold>Traduction arabe précise, récitation intégrée</bold> et plus encore, afin que les lecteurs puissent écouter tout en s'immergeant dans le verset.",
+    "title": "Générateur d'intégration Ayah"
+  },
+  "meta": {
+    "description": "Configurez et prévisualisez les widgets intégrés de Quran.com, puis copiez l'extrait de script prêt à l'emploi.",
+    "title": "Générateur de widgets Ayah | Coran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Complexe du roi Fahad v1",
+    "kfgqpc_v2": "Complexe du roi Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Rechercher des traductions..."
+  },
+  "reciters": {
+    "select": "Sélectionner le récitant"
+  },
+  "sections": {
+    "configuration": "Configuration",
+    "preview": "Aperçu en direct",
+    "snippet": "Intégrer un extrait"
+  },
+  "states": {
+    "loadingChapters": "Chargement des chapitres...",
+    "loadingPreview": "Chargement de l'aperçu...",
+    "loadingReciters": "Chargement des récitants...",
+    "loadingVerses": "Chargement des versets...",
+    "noTranslations": "Aucune traduction trouvée"
+  },
+  "theme": {
+    "dark": "Sombre",
+    "light": "Lumière",
+    "sepia": "Sépia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Supprimer la traduction",
+    "otherLanguage": "Autre"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Copiato!",
+    "copy": "Copia",
+    "copyEmbedSnippet": "Copia frammento incorporato"
+  },
+  "checkboxes": {
+    "answers": "Pulsante Mostra risposte (se disponibile)",
+    "audio": "Abilita la riproduzione audio",
+    "customSize": "Usa larghezza/altezza personalizzata",
+    "lessons": "Pulsante Mostra lezioni",
+    "mergeVerses": "Unisci versi (visualizzazione in linea)",
+    "reflections": "Pulsante Mostra riflessi",
+    "showArabic": "Mostra versi arabi",
+    "tafsirs": "Mostra il pulsante Tafsirs",
+    "translator": "Mostra il nome del traduttore",
+    "verseRange": "Abilita intervallo di versi",
+    "wordByWord": "Abilita la traduzione parola per parola",
+    "wordByWordTransliteration": "Abilita la traslitterazione parola per parola"
+  },
+  "errors": {
+    "clipboardFallback": "Scrittura negli appunti non riuscita, utilizzo del fallback",
+    "clipboardUnavailable": "API degli appunti non disponibile",
+    "loadChapters": "Impossibile caricare i capitoli",
+    "loadReciters": "Impossibile caricare i recitatori",
+    "loadTranslations": "Impossibile caricare le traduzioni"
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "ID cliente",
+    "height": "Altezza",
+    "language": "Lingua",
+    "mushaf": "Mushaf",
+    "reciter": "Reciter",
+    "surah": "Sura",
+    "theme": "Tema",
+    "translations": "Traduzioni",
+    "width": "Larghezza"
+  },
+  "header": {
+    "subtitle": "<bold>Un modo personalizzabile e di qualità superiore per includere versetti del Corano nei tuoi contenuti.</bold><br />Crea un incorporamento che puoi personalizzare facilmente, con <bold>resa araba accurata, recitazione integrata</bold> e altro ancora, in modo che i lettori possano ascoltare mentre interagiscono con il versetto.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Configura e visualizza in anteprima i widget incorporati di Quran.com, quindi copia il frammento di script pronto all'uso.",
+    "title": "Generatore di widget Ayah | Corano.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Complesso di Re Fahad v1",
+    "kfgqpc_v2": "Complesso di Re Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Cerca traduzioni..."
+  },
+  "reciters": {
+    "select": "Seleziona il recitatore"
+  },
+  "sections": {
+    "configuration": "Configurazione",
+    "preview": "Anteprima dal vivo",
+    "snippet": "Incorpora frammento"
+  },
+  "states": {
+    "loadingChapters": "Caricamento capitoli in corso...",
+    "loadingPreview": "Caricamento anteprima...",
+    "loadingReciters": "Caricamento dei recitatori...",
+    "loadingVerses": "Caricamento dei versetti...",
+    "noTranslations": "Nessuna traduzione trovata"
+  },
+  "theme": {
+    "dark": "Buio",
+    "light": "Leggero",
+    "sepia": "Seppia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Rimuovi traduzione",
+    "otherLanguage": "Altro"
+  }
+}

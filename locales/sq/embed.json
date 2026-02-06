@@ -1,0 +1,82 @@
+{
+  "actions": {
+    "copied": "Kopjuar!",
+    "copy": "Kopjo",
+    "copyEmbedSnippet": "Kopjo fragmentin e integruar"
+  },
+  "checkboxes": {
+    "answers": "Shfaq butonin \"Përgjigje\" (nëse është i disponueshëm)",
+    "audio": "Aktivizo riprodhimin e audios",
+    "customSize": "Përdor gjerësi/lartësi të personalizuar",
+    "lessons": "Butoni Shfaq Mësimet",
+    "mergeVerses": "Bashkoni vargje (shfaqje brenda rreshtit)",
+    "reflections": "Butoni \"Shfaq reflektimet\"",
+    "showArabic": "Trego vargun arabisht",
+    "tafsirs": "Shfaq butonin Tafsirs",
+    "translator": "Shfaq emrin e përkthyesit",
+    "verseRange": "Aktivizo diapazonin e vargjeve",
+    "wordByWord": "Aktivizo përkthimin fjalë për fjalë",
+    "wordByWordTransliteration": "Aktivizo transliterimin fjalë për fjalë"
+  },
+  "errors": {
+    "clipboardFallback": "Shkrimi në kujtesën e përkohshme dështoi, duke përdorur rezervën.",
+    "clipboardUnavailable": "API-ja e Clipboard-it nuk është e disponueshme",
+    "loadChapters": "Kapitujt nuk mund të ngarkohen",
+    "loadReciters": "Nuk mund të ngarkohen recituesit",
+    "loadTranslations": "Nuk mund të ngarkohen përkthimet"
+  },
+  "fields": {
+    "ayah": "Aja",
+    "clientId": "ID e klientit",
+    "height": "Lartësia",
+    "language": "Gjuha",
+    "mushaf": "Mushaf",
+    "reciter": "Recitues",
+    "surah": "Sura",
+    "theme": "Tema",
+    "translations": "Përkthime",
+    "width": "Gjerësia"
+  },
+  "header": {
+    "subtitle": "<bold>Një mënyrë me cilësi më të lartë dhe e personalizueshme për të përfshirë vargje nga Kurani në përmbajtjen tuaj.</bold><br />Krijo një element integrimi që mund ta personalizosh lehtësisht, me <bold>interpretim i saktë i arabishtes, recitim i integruar</bold> dhe më shumë, në mënyrë që lexuesit të mund të dëgjojnë ndërsa merren me vargun.",
+    "title": "Ndërtuesi i Embed-it të Ayah"
+  },
+  "meta": {
+    "description": "Konfiguroni dhe shikoni paraprakisht veglat e integruara të Quran.com, pastaj kopjoni fragmentin e skriptit gati për përdorim.",
+    "title": "Ajah Widget Builder | Kurani.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Kompleksi i Mbretit Fahad v1",
+    "kfgqpc_v2": "Kompleksi i Mbretit Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Taxhvid"
+  },
+  "placeholders": {
+    "searchTranslations": "Kërko përkthime..."
+  },
+  "reciters": {
+    "select": "Zgjidh recituesin"
+  },
+  "sections": {
+    "configuration": "Konfigurimi",
+    "preview": "Pamje paraprake e drejtpërdrejtë",
+    "snippet": "Vendos fragmentin"
+  },
+  "states": {
+    "loadingChapters": "Duke ngarkuar kapitujt...",
+    "loadingPreview": "Duke ngarkuar pamjen paraprake...",
+    "loadingReciters": "Duke ngarkuar recituesit...",
+    "loadingVerses": "Duke ngarkuar vargjet...",
+    "noTranslations": "Nuk u gjetën përkthime"
+  },
+  "theme": {
+    "dark": "E errët",
+    "light": "Dritë",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Hiq përkthimin",
+    "otherLanguage": "Të tjera"
+  }
+}
