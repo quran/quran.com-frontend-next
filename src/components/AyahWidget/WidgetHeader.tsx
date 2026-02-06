@@ -83,7 +83,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
   const verseCaptionUrl = options.rangeEnd
     ? `${verse.chapterId}:${verse.verseNumber}-${options.rangeEnd}`
     : verseCaption;
-  const siteLinkLabel = 'Read on Quran.com';
+  const siteLinkLabel = options.labels?.readOnQuran || 'Read on Quran.com';
 
   // Labels with defaults
   const surahLabel = options.labels?.surah || 'Surah';

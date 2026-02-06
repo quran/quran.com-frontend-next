@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Remove translation",
     "otherLanguage": "Other"
+  },
+  "widget": {
+    "readOnQuran": "Read on Quran.com"
   }
 }
