@@ -57,12 +57,15 @@ const TranslationModeButton: React.FC<TranslationModeButtonProps> = ({
     switchReadingPreference(ReadingPreference.ReadingTranslation);
   }, [readingPreference, switchReadingPreference]);
 
-  const closeDropdown = useCallback(() => setIsDropdownOpen(false), []);
-
   const handleDropdownOpenChange = useCallback((isOpen: boolean) => {
     logEvent(isOpen ? 'translation_dropdown_opened' : 'translation_dropdown_closed');
     setIsDropdownOpen(isOpen);
   }, []);
+
+  const closeDropdown = useCallback(
+    () => handleDropdownOpenChange(false),
+    [handleDropdownOpenChange],
+  );
 
   useCloseOnScroll(isDropdownOpen, closeDropdown);
 

@@ -200,7 +200,11 @@ const WordByWordSection = () => {
     let nextWordByWordDisplay = wordByWordDisplay;
     if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.INLINE)) {
       nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.INLINE];
-    } else if (!isChecked && !nextWordByWordInlineContentType.length) {
+    } else if (
+      !isChecked &&
+      !nextWordByWordInlineContentType.length &&
+      wordByWordDisplay.includes(WordByWordDisplay.INLINE)
+    ) {
       nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
     }
     onWordByWordSettingsChange(
