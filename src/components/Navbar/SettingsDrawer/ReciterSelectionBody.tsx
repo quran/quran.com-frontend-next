@@ -15,7 +15,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import IconSearch from '@/icons/search.svg';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
-import { logEmptySearchResults, logItemSelectionChange } from '@/utils/eventLogger';
+import { logEvent, logEmptySearchResults, logItemSelectionChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -56,6 +56,7 @@ const SettingsReciter = () => {
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
+    logEvent(`reciter_selected_${reciter.id}`);
     logItemSelectionChange('selected_reciter', reciter.id);
     router.query[QueryParam.RECITER] = String(reciter.id);
     router.push(router, undefined, { shallow: true });
