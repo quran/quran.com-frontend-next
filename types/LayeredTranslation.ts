@@ -35,17 +35,11 @@ export interface LayeredTranslationOption {
   expandedHtml: string;
 }
 
-export interface LayeredTranslationDependency {
-  verseKey: string;
-  groupKey: string;
-}
-
 export interface LayeredTranslationGroup {
   groupKey: string;
   position: number;
   defaultOptionKey: string;
   explanationHtml: string | null;
-  dependency: LayeredTranslationDependency | null;
   options: LayeredTranslationOption[];
 }
 
