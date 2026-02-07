@@ -27,6 +27,7 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
       <div className={styles.content}>
         {Language.AR !== lang && enBody && (
           <div
+            lang="en"
             className={styles.hadithBody}
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
@@ -38,6 +39,7 @@ const HadithContent: React.FC<HadithContentProps> = ({ enBody, arBody }) => {
         {arBody && (isArabicLanguage || showArabic) && (
           <div
             data-lang="ar"
+            lang="ar"
             dir="rtl"
             className={styles.hadithBody}
             // eslint-disable-next-line react/no-danger

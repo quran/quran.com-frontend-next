@@ -53,49 +53,47 @@ it('replaceBreaksWithSpans handles case-insensitive matches', () => {
 });
 
 it('parseHadithNumbers works with single number', () => {
-  expect(parseHadithNumbers('1', Language.EN)).toEqual([
-    { number: '1', localized: '1', link: '1' },
-  ]);
+  expect(parseHadithNumbers('1', Language.EN)).toEqual([{ number: 1, localized: '1', link: '1' }]);
   expect(parseHadithNumbers('123', Language.EN)).toEqual([
-    { number: '123', localized: '123', link: '123' },
+    { number: 123, localized: '123', link: '123' },
   ]);
 });
 
 it('parseHadithNumbers works with multiple numbers separated by comma', () => {
   expect(parseHadithNumbers('1,2,3', Language.EN)).toEqual([
-    { number: '1', localized: '1', link: '1' },
-    { number: '2', localized: '2', link: '2' },
-    { number: '3', localized: '3', link: '3' },
+    { number: 1, localized: '1', link: '1' },
+    { number: 2, localized: '2', link: '2' },
+    { number: 3, localized: '3', link: '3' },
   ]);
   expect(parseHadithNumbers('1, 2, 3', Language.EN)).toEqual([
-    { number: '1', localized: '1', link: '1' },
-    { number: '2', localized: '2', link: '2' },
-    { number: '3', localized: '3', link: '3' },
+    { number: 1, localized: '1', link: '1' },
+    { number: 2, localized: '2', link: '2' },
+    { number: 3, localized: '3', link: '3' },
   ]);
 });
 
 it('parseHadithNumbers works with letters', () => {
   expect(parseHadithNumbers('1a', Language.EN)).toEqual([
-    { number: '1', letter: 'a', localized: '1a', link: '1a' },
+    { number: 1, letter: 'a', localized: '1a', link: '1a' },
   ]);
   expect(parseHadithNumbers('1b,2c', Language.EN)).toEqual([
-    { number: '1', letter: 'b', localized: '1b', link: '1b' },
-    { number: '2', letter: 'c', localized: '2c', link: '2c' },
+    { number: 1, letter: 'b', localized: '1b', link: '1b' },
+    { number: 2, letter: 'c', localized: '2c', link: '2c' },
   ]);
 });
 
 it('parseHadithNumbers works with letters and optional spaces', () => {
   expect(parseHadithNumbers('1 a', Language.EN)).toEqual([
-    { number: '1', letter: 'a', localized: '1a', link: '1a' },
+    { number: 1, letter: 'a', localized: '1a', link: '1a' },
   ]);
   expect(parseHadithNumbers('1 b, 2 c', Language.EN)).toEqual([
-    { number: '1', letter: 'b', localized: '1b', link: '1b' },
-    { number: '2', letter: 'c', localized: '2c', link: '2c' },
+    { number: 1, letter: 'b', localized: '1b', link: '1b' },
+    { number: 2, letter: 'c', localized: '2c', link: '2c' },
   ]);
   expect(parseHadithNumbers('1 a,2b,3 c', Language.EN)).toEqual([
-    { number: '1', letter: 'a', localized: '1a', link: '1a' },
-    { number: '2', letter: 'b', localized: '2b', link: '2b' },
-    { number: '3', letter: 'c', localized: '3c', link: '3c' },
+    { number: 1, letter: 'a', localized: '1a', link: '1a' },
+    { number: 2, letter: 'b', localized: '2b', link: '2b' },
+    { number: 3, letter: 'c', localized: '3c', link: '3c' },
   ]);
 });
 
