@@ -63,10 +63,11 @@ const HadithList: React.FC<HadithListProps> = ({
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href={getSunnahUrl(hadith.collection, firstHadithNumber.link)}
+                  href={getSunnahUrl(hadith.collection, firstHadithNumber?.link ?? '')}
                   className={styles.link}
                 >
-                  {hadith.name} <span className={styles.number}>{firstHadithNumber.localized}</span>
+                  {hadith.name}{' '}
+                  <span className={styles.number}>{firstHadithNumber?.localized ?? ''}</span>
                 </a>
 
                 {restHadithNumbers.map((hadithNumber) => (

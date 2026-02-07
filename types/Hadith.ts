@@ -1,39 +1,39 @@
 /**
  * Grade information for a hadith
  */
-export type HadithGrade = {
+export interface HadithGrade {
   grade: string;
   gradeBy: string | null;
-};
+}
 
 /**
  * A single hadith text in a specific language
  */
-export type HadithText = {
+export interface HadithText {
   lang: string;
   chapterNumber: string;
   chapterTitle: string;
   urn: number;
   body: string;
   grades: HadithGrade[];
-};
+}
 
 /**
  * Backend response for a single hadith collection (after fetcher camelCase conversion)
  */
-export type HadithCollectionResponse = {
+export interface HadithCollectionResponse {
   collection: string;
   bookNumber: string;
   chapterId: string;
   hadithNumber: string;
   hadith: HadithText[];
   name: string;
-};
+}
 
 /**
  * A single Hadith reference frontend
  */
-export type HadithReference = {
+export interface HadithReference {
   collection: string;
   bookNumber: string;
   chapterId: string;
@@ -43,34 +43,34 @@ export type HadithReference = {
   // Additional fields for the nested hadith data
   ar?: HadithText;
   en?: HadithText;
-};
+}
 
 /**
  * Response type for paginated hadiths for an ayah backend
  */
-export type AyahHadithsBackendResponse = {
+export interface AyahHadithsBackendResponse {
   hadiths: HadithCollectionResponse[];
   page: number;
   limit: number;
   hasMore: boolean;
   language: string;
   direction: string;
-};
+}
 
 /**
  * Response type for paginated hadiths for an ayah frontend
  */
-export type AyahHadithsResponse = {
+export interface AyahHadithsResponse {
   hadiths: HadithReference[];
   page: number;
   limit: number;
   hasMore: boolean;
   language: string;
   direction: string;
-};
+}
 
 /**
  * Response type for hadith count within a range
  * Maps verse keys to their hadith count
  */
-export type HadithCountResponse = Record<string, number>;
+export interface HadithCountResponse extends Record<string, number> {}

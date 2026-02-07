@@ -20,12 +20,9 @@ const useHadithsPagination = ({ ayahKey, initialData, language }: UseHadithsPagi
 
   const getKey = (pageIndex: number, previousPageData: AyahHadithsResponse) => {
     if (!ayahKey) return null;
-    if (previousPageData && !previousPageData.hadiths.length) {
-      return null;
-    }
-    if (previousPageData && !previousPageData.hasMore) {
-      return null;
-    }
+    if (previousPageData && !Array.isArray(previousPageData.hadiths)) return null;
+    if (previousPageData && !previousPageData.hadiths.length) return null;
+    if (previousPageData && !previousPageData.hasMore) return null;
 
     return {
       ayahKey,
@@ -59,7 +56,7 @@ const useHadithsPagination = ({ ayahKey, initialData, language }: UseHadithsPagi
   );
 
   const hadiths = useMemo(
-    () => (pagesData ? pagesData.flatMap((page) => page?.hadiths || []) : []),
+    () => pagesData?.flatMap((page) => (Array.isArray(page?.hadiths) ? page.hadiths : [])) ?? [],
     [pagesData],
   );
 

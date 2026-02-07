@@ -23,7 +23,7 @@ export const replaceBreaksWithSpans = (html: string): string => {
 };
 
 export interface ParsedHadithNumber {
-  number: string;
+  number: string | number;
   letter?: string;
   localized: string;
   link: string;
@@ -38,7 +38,7 @@ export interface ParsedHadithNumber {
  * @returns {string} - Formatted hadith number
  */
 const formatSingleHadithNumber = (
-  number: string,
+  number: string | number,
   letter: string | undefined,
   language: Language,
 ): string => {
@@ -73,12 +73,15 @@ export const parseHadithNumbers = (
       // Match pattern: number followed by optional letter (with or without space)
       // Examples: "1", "1a", "1 a", "123b", "123 b"
       const match = part.match(/^(\d+)(?:\s*([a-zA-Z]))?$/);
-      if (match) return { number: match[1], letter: match[2]?.toLowerCase() };
+      if (match) return { number: Number(match[1]), letter: match[2]?.toLowerCase() };
       return { number: part, letter: undefined };
     })
     .map((value) => {
-      const localizedNumber = formatSingleHadithNumber(value.number, value.letter, language);
-      const link = value.letter ? `${value.number}${value.letter}` : value.number;
+      const localizedNumber =
+        typeof value.number === 'number'
+          ? formatSingleHadithNumber(value.number, value.letter, language)
+          : value.number;
+      const link = value.letter ? `${value.number}${value.letter}` : String(value.number);
       return { ...value, link, localized: localizedNumber };
     });
 };
