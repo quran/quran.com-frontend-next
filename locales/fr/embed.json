@@ -42,8 +42,8 @@
     "title": "Générateur d'intégration Ayah"
   },
   "meta": {
-    "description": "Configurez et prévisualisez les widgets intégrés de Quran.com, puis copiez l'extrait de script prêt à l'emploi.",
-    "title": "Générateur de widgets Ayah | Coran.com"
+    "description": "Configurez et prévisualisez les widgets d'intégration pour le partage du Coran, puis copiez l'extrait de script prêt à l'emploi.",
+    "title": "Outil d'intégration de versets coraniques | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Supprimer la traduction",
     "otherLanguage": "Autre"
+  },
+  "widget": {
+    "readOnQuran": "Lisez la suite sur Quran.com"
   }
 }

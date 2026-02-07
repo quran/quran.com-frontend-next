@@ -42,8 +42,8 @@
     "title": "Mjenzi wa Kiambatisho cha Ayah"
   },
   "meta": {
-    "description": "Sanidi na uhakiki vijenzi vya kupachika Quran.com, kisha nakili kipande cha hati kilicho tayari kutumika.",
-    "title": "Ayah Widget Builder | Quran.com"
+    "description": "Sanidi na hakiki wijeti za kupachika kwa ajili ya kushiriki Quran, kisha nakili kipande cha hati kilicho tayari kutumika.",
+    "title": "Mjenzi wa Kiambatisho cha Ayah | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Ondoa tafsiri",
     "otherLanguage": "Nyingine"
+  },
+  "widget": {
+    "readOnQuran": "Soma kwenye Quran.com"
   }
 }

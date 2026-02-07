@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "Configura e visualizza in anteprima i widget incorporati di Quran.com, quindi copia il frammento di script pronto all'uso.",
-    "title": "Generatore di widget Ayah | Corano.com"
+    "description": "Configura e visualizza in anteprima i widget incorporati per la condivisione del Corano, quindi copia il frammento di script pronto all'uso.",
+    "title": "Generatore di incorporamenti di Ayah | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Rimuovi traduzione",
     "otherLanguage": "Altro"
+  },
+  "widget": {
+    "readOnQuran": "Leggi su Quran.com"
   }
 }

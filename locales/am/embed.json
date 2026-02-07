@@ -42,8 +42,8 @@
     "title": "የአያህ ኢምቤድ ገንቢ"
   },
   "meta": {
-    "description": "የQuran.com መግብሮችን ያዋቅሩ እና አስቀድመው ይመልከቱ፣ ከዚያም ለአጠቃቀም ዝግጁ የሆነውን የስክሪፕት ቅንጭብ ይቅዱ።",
-    "title": "Ayah Widget ገንቢ | Quran.com"
+    "description": "ቁርዓንን ለማጋራት መግብሮችን ያዋቅሩ እና አስቀድመው ይመልከቱ፣ ከዚያም ለአጠቃቀም ዝግጁ የሆነውን የስክሪፕት ቅንጭብ ይቅዱ።",
+    "title": "አያህ ኢምቤድ ገንቢ | Quran.com"
   },
   "mushaf": {
     "indopak": "ኢንዶፓክ",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "ትርጉምን አስወግድ",
     "otherLanguage": "ሌላ"
+  },
+  "widget": {
+    "readOnQuran": "በQuran.com ላይ ያንብቡ"
   }
 }

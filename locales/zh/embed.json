@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "配置并预览 Quran.com 嵌入式小部件，然后复制可直接使用的脚本片段。",
-    "title": "Ayah 小部件生成器 |古兰经网"
+    "description": "配置和预览用于分享《古兰经》的嵌入式小部件，然后复制可直接使用的脚本片段。",
+    "title": "经文嵌入生成器 | Quran.com"
   },
   "mushaf": {
     "indopak": "印度巴基斯坦",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "移除翻译",
     "otherLanguage": "其他"
+  },
+  "widget": {
+    "readOnQuran": "请访问 Quran.com 阅读全文。"
   }
 }

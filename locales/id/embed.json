@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "Konfigurasikan dan pratinjau widget sematan Quran.com, lalu salin cuplikan skrip yang siap digunakan.",
-    "title": "Pembuat Widget Ayah | Quran.com"
+    "description": "Konfigurasikan dan pratinjau widget sematan untuk berbagi Al-Quran, lalu salin cuplikan skrip yang siap digunakan.",
+    "title": "Pembuat Sisipan Ayat | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Hapus terjemahan",
     "otherLanguage": "Lainnya"
+  },
+  "widget": {
+    "readOnQuran": "Baca di Quran.com"
   }
 }
