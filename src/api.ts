@@ -3,6 +3,7 @@ import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
 import Language from '@/types/Language';
+import { LayeredTranslationApiResponse } from '@/types/LayeredTranslation';
 import { QiraatApiResponse } from '@/types/Qiraat';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
@@ -35,6 +36,8 @@ import {
   makeVersesFilterUrl,
   makeQiraatMatrixUrl,
   makeQiraatJuncturesCountUrl,
+  makeLayeredTranslationByVerseUrl,
+  makeLayeredTranslationCountWithinRangeUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -463,3 +466,33 @@ export const getQiraatJuncturesCount = async (range: {
   from: string;
   to: string;
 }): Promise<Record<string, number>> => fetcher(makeQiraatJuncturesCountUrl(range));
+
+/**
+ * Get layered translation data for a specific verse.
+ *
+ * @param {string} verseKey - The verse key (e.g., "67:1")
+ * @param {Language} language - Preferred language
+ * @param {number} [resourceId] - Optional specific layered translation resource ID
+ * @returns {Promise<LayeredTranslationApiResponse>}
+ */
+export const getLayeredTranslationByVerse = async (
+  verseKey: string,
+  language: Language,
+  resourceId?: number,
+): Promise<LayeredTranslationApiResponse> =>
+  fetcher(makeLayeredTranslationByVerseUrl(verseKey, language, resourceId));
+
+/**
+ * Get layered translation count for a verse range.
+ *
+ * @param {{ from: string; to: string }} range - Verse range
+ * @param {Language} language - Preferred language
+ * @param {number} [resourceId] - Optional specific layered translation resource ID
+ * @returns {Promise<Record<string, number>>}
+ */
+export const getLayeredTranslationCountWithinRange = async (
+  range: { from: string; to: string },
+  language: Language,
+  resourceId?: number,
+): Promise<Record<string, number>> =>
+  fetcher(makeLayeredTranslationCountWithinRangeUrl(range, language, resourceId));

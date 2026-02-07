@@ -339,3 +339,4 @@ export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) =
 
 // Qiraat API utilities
 export * from './qiraat';
+export * from './layeredTranslations';

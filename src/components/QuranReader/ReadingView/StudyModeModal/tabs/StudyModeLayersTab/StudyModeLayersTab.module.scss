@@ -1,0 +1,186 @@
+@use 'src/styles/breakpoints';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium-px);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-mega);
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: calc(var(--spacing-mega-px) * 2);
+  padding: var(--spacing-large);
+}
+
+.controls {
+  display: flex;
+  gap: var(--spacing-xsmall-px);
+  flex-wrap: wrap;
+}
+
+.layerButton {
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--spacing-small-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  font-size: var(--font-size-normal);
+  background: var(--color-background-default);
+  color: var(--color-text-default-new);
+  cursor: pointer;
+}
+
+.translationText {
+  font-size: var(--font-size-large);
+  line-height: 1.9;
+  color: var(--color-text-default-new);
+}
+
+.groupToken {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  border: 0;
+  border-block-end: var(--spacing-hairline-px) dotted var(--color-text-faded-new);
+  background: none;
+  padding: 0;
+  margin-inline-start: var(--spacing-xxsmall-px);
+  margin-inline-end: var(--spacing-xxsmall-px);
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--color-text-default-new);
+  cursor: pointer;
+}
+
+.groupTokenText {
+  display: inline;
+}
+
+.groupTokenChevron {
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  flex-shrink: 0;
+}
+
+.groupTokenActive {
+  border-block-end-color: var(--color-success-medium);
+}
+
+.groupPanel {
+  border: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  border-radius: var(--spacing-medium-px);
+  background: var(--color-background-default);
+  overflow: hidden;
+  inline-size: min(100%, 58rem);
+  box-shadow: 0 var(--spacing-xxsmall-px) var(--spacing-large-px) rgba(0, 0, 0, 0.08);
+  margin-block-start: var(--spacing-xxsmall-px);
+}
+
+.groupPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--spacing-medium-px) var(--spacing-medium-px) var(--spacing-small-px);
+  border-block-end: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-faded-new);
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall-px);
+  padding: var(--spacing-small-px) var(--spacing-medium-px);
+}
+
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  text-align: start;
+  border: 0;
+  border-radius: var(--spacing-small-px);
+  background: var(--color-background-default);
+  color: var(--color-text-default-new);
+  padding: var(--spacing-xxsmall-px) var(--spacing-xxsmall-px);
+  cursor: pointer;
+  font-size: var(--font-size-xlarge);
+  line-height: 1.45;
+}
+
+.optionButtonActive {
+  background: var(--color-background-default);
+}
+
+.optionIndex {
+  min-inline-size: calc(var(--spacing-medium-px) + var(--spacing-small-px));
+  block-size: calc(var(--spacing-medium-px) + var(--spacing-small-px));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-normal);
+  background: var(--color-secondary-medium);
+  color: var(--color-text-faded-new);
+  flex-shrink: 0;
+}
+
+.optionText {
+  color: inherit;
+}
+
+.optionButtonActive .optionText {
+  color: var(--color-success-medium);
+}
+
+.explanationWrapper {
+  border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
+  padding: var(--spacing-small-px) var(--spacing-medium-px) var(--spacing-medium-px);
+}
+
+.explanationToggle {
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-xxsmall-px);
+  inline-size: 100%;
+  text-align: end;
+}
+
+.explanationChevron {
+  inline-size: var(--spacing-small-px);
+  block-size: var(--spacing-small-px);
+  transition: transform 120ms ease-in-out;
+}
+
+.explanationChevronOpen {
+  transform: rotate(180deg);
+}
+
+.explanationText {
+  margin-block-start: var(--spacing-small-px);
+  font-size: var(--font-size-xlarge);
+  line-height: 1.8;
+  color: var(--color-text-default-new);
+}
+
+.translationText :global(sup[foot_note]),
+.groupPanel :global(sup[foot_note]) {
+  font-size: 0.55em;
+  line-height: 1;
+}
+
+@include breakpoints.smallerThanTablet {
+  .translationText {
+    font-size: var(--font-size-xlarge);
+  }
+}

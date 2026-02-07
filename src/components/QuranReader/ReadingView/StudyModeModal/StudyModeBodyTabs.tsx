@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useLayoutEffect } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -6,12 +7,14 @@ import useTranslation from 'next-translate/useTranslation';
 import { StudyModeTabId } from './StudyModeBottomActions';
 
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useBatchedCountRangeLayeredTranslations from '@/hooks/auth/useBatchedCountRangeLayeredTranslations';
 import useBatchedCountRangeQiraat from '@/hooks/auth/useBatchedCountRangeQiraat';
 import useBatchedCountRangeQuestions from '@/hooks/auth/useBatchedCountRangeQuestions';
 import BookIcon from '@/icons/book-open.svg';
 import GraduationCapIcon from '@/icons/graduation-cap.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import LayersIcon from '@/icons/plus-cubed.svg';
 import QiraatIcon from '@/icons/qiraat-icon.svg';
 import RelatedVerseIcon from '@/icons/related-verses.svg';
 import AyahQuestionsResponse from '@/types/QuestionsAndAnswers/AyahQuestionsResponse';
@@ -30,6 +33,10 @@ export const StudyModeLessonsTab = dynamic(() => import('./tabs/StudyModeLessons
 });
 
 export const StudyModeAnswersTab = dynamic(() => import('./tabs/StudyModeAnswersTab'), {
+  loading: TafsirSkeleton,
+});
+
+const StudyModeLayersTab = dynamic(() => import('./tabs/StudyModeLayersTab'), {
   loading: TafsirSkeleton,
 });
 
@@ -60,6 +67,7 @@ export const TAB_COMPONENTS: Partial<
   >
 > = {
   [StudyModeTabId.TAFSIR]: StudyModeTafsirTab,
+  [StudyModeTabId.LAYERS]: StudyModeLayersTab,
   [StudyModeTabId.REFLECTIONS]: StudyModeReflectionsTab,
   [StudyModeTabId.LESSONS]: StudyModeLessonsTab,
   [StudyModeTabId.ANSWERS]: StudyModeAnswersTab,
@@ -105,6 +113,9 @@ export const useStudyModeTabs = ({
 
   const { data: qiraatCount, isLoading: isLoadingQiraat } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraat = (qiraatCount ?? 0) > 0 || isLoadingQiraat;
+  const { data: layersCount, isLoading: isLoadingLayers } =
+    useBatchedCountRangeLayeredTranslations(verseKey);
+  const hasLayers = (layersCount ?? 0) > 0 || isLoadingLayers;
 
   // Used flushSync to wrap the onTabChange(null) calls, ensuring React performs the state update synchronously and triggers an immediate rerender.
   useLayoutEffect(() => {
@@ -117,7 +128,12 @@ export const useStudyModeTabs = ({
     if (activeTab === StudyModeTabId.QIRAAT && !hasQiraat) {
       onTabChange?.(null);
     }
-  }, [activeTab, hasQuestions, hasQiraat, onTabChange]);
+
+    // Auto-close Layers tab when there are no layered translations
+    if (activeTab === StudyModeTabId.LAYERS && !hasLayers) {
+      onTabChange?.(null);
+    }
+  }, [activeTab, hasQuestions, hasQiraat, hasLayers, onTabChange]);
 
   const handleTabClick = (tabId: StudyModeTabId) => {
     const newTab = activeTab === tabId ? null : tabId;
@@ -131,6 +147,13 @@ export const useStudyModeTabs = ({
       icon: <BookIcon />,
       onClick: () => handleTabClick(StudyModeTabId.TAFSIR),
       condition: true,
+    },
+    {
+      id: StudyModeTabId.LAYERS,
+      label: t('quran-reader:layers.title'),
+      icon: <LayersIcon />,
+      onClick: () => handleTabClick(StudyModeTabId.LAYERS),
+      condition: hasLayers,
     },
     {
       id: StudyModeTabId.LESSONS,

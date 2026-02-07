@@ -10,6 +10,7 @@ import useIsMobile from '@/hooks/useIsMobile';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
+  LAYERS = 'layers',
   LESSONS = 'lessons',
   REFLECTIONS = 'reflections',
   ANSWERS = 'answers',
