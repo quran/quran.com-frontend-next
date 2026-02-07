@@ -137,6 +137,7 @@
   "copied": "ተቀድቷል",
   "copied-to-clipboard": "ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
   "copy": "ቅዳ",
+  "copy-embed": "ክተትን ቅዳ",
   "copylink": "አገናኝ(ማስፈንጠሪያ) ይቅዱ",
   "counter": {
     "decrease": "ቀንስ",
@@ -162,6 +163,8 @@
     "resend-email-in": "የማረጋገጫ ኢሜይልን እንደገና ላክ በ {{remainingTime}} ሰከንድ...",
     "verify-code": "ኮድ አረጋግጥ"
   },
+  "embed-copied": "ክተት ተቀድቷል",
+  "embed-widget": "መግብርን ክተት",
   "end-year-donate": "2024ን በሶደቃ ❤️ ጨርስ",
   "error": {
     "MediaVersesRangeLimitExceeded": "እስከ ምዕራፎች ድረስ ብቻ መምረጥ ይችላሉ {{limit}} በአንድ ጊዜ ጥቅሶች። እባክዎ አነስ ያለ ክልል ይምረጡ።",

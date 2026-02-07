@@ -137,6 +137,7 @@
   "copied": "disalin",
   "copied-to-clipboard": "Disalin ke papan klip",
   "copy": "Salinan",
+  "copy-embed": "Salin Sematkan",
   "copylink": "Salin tautan",
   "counter": {
     "decrease": "Mengurangi",
@@ -162,6 +163,8 @@
     "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
     "verify-code": "Kode verifikasi"
   },
+  "embed-copied": "Disematkan Disalin",
+  "embed-widget": "Sematkan widget",
   "end-year-donate": "Akhiri tahun 2024 dengan Sedekah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Anda hanya dapat memilih hingga {{limit}} ayat dalam satu waktu. Harap pilih rentang yang lebih kecil.",

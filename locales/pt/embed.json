@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Copiado!",
+    "copy": "Cópia",
+    "copyEmbedSnippet": "Copiar trecho incorporado"
+  },
+  "checkboxes": {
+    "answers": "Botão Mostrar Respostas (se disponível)",
+    "audio": "Ativar reprodução de áudio",
+    "customSize": "Usar largura/altura personalizadas",
+    "lessons": "Botão Mostrar Lições",
+    "mergeVerses": "Mesclar versos (exibição em linha)",
+    "reflections": "Botão Mostrar Reflexões",
+    "showArabic": "Mostrar versículo em árabe",
+    "tafsirs": "Botão Mostrar Tafsirs",
+    "translator": "Mostrar nome do tradutor",
+    "verseRange": "Ativar intervalo de versos",
+    "wordByWord": "Ativar tradução palavra por palavra",
+    "wordByWordTransliteration": "Ativar transliteração palavra por palavra"
+  },
+  "errors": {
+    "clipboardFallback": "Falha ao escrever na área de transferência, usando alternativa.",
+    "clipboardUnavailable": "API da área de transferência indisponível",
+    "loadChapters": "Não foi possível carregar os capítulos.",
+    "loadReciters": "Não foi possível carregar os recitadores.",
+    "loadTranslations": "Não foi possível carregar as traduções."
+  },
+  "fields": {
+    "ayah": "Aia",
+    "clientId": "ID do cliente",
+    "height": "Altura",
+    "language": "Linguagem",
+    "mushaf": "Mushaf",
+    "reciter": "Recitador",
+    "surah": "Sura",
+    "theme": "Tema",
+    "translations": "Traduções",
+    "width": "Largura"
+  },
+  "header": {
+    "subtitle": "<bold>Uma forma personalizável e de alta qualidade para incluir versículos do Alcorão em seu conteúdo.</bold><br />Crie um conteúdo incorporado que você possa personalizar facilmente, com <bold>Tradução precisa do árabe, recitação integrada.</bold> e muito mais, para que os leitores possam ouvir enquanto interagem com o versículo.",
+    "title": "Construtor de Incorporação Ayah"
+  },
+  "meta": {
+    "description": "Configure e visualize widgets incorporados para compartilhar o Alcorão e, em seguida, copie o trecho de script pronto para uso.",
+    "title": "Construtor de Incorporação de Versículos | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Complexo Rei Fahad v1",
+    "kfgqpc_v2": "Complexo Rei Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Pesquisar traduções..."
+  },
+  "reciters": {
+    "select": "Selecione o recitador"
+  },
+  "sections": {
+    "configuration": "Configuração",
+    "preview": "Pré-visualização ao vivo",
+    "snippet": "Incorporar trecho"
+  },
+  "states": {
+    "loadingChapters": "Carregando capítulos...",
+    "loadingPreview": "Carregando pré-visualização...",
+    "loadingReciters": "Carregando recitadores...",
+    "loadingVerses": "Carregando versos...",
+    "noTranslations": "Nenhuma tradução encontrada"
+  },
+  "theme": {
+    "dark": "Escuro",
+    "light": "Luz",
+    "sepia": "Sépia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Remover tradução",
+    "otherLanguage": "Outro"
+  },
+  "widget": {
+    "readOnQuran": "Leia em Quran.com"
+  }
+}

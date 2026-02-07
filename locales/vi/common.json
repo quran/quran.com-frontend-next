@@ -137,6 +137,7 @@
   "copied": "Đã sao chép",
   "copied-to-clipboard": "Đã sao chép vào clipboard",
   "copy": "Sao chép",
+  "copy-embed": "Sao chép mã nhúng",
   "copylink": "Sao chép link",
   "counter": {
     "decrease": "Giảm",
@@ -162,6 +163,8 @@
     "resend-email-in": "Gửi lại email xác nhận trong {{remainingTime}} giây...",
     "verify-code": "Xác minh mã"
   },
+  "embed-copied": "Đã sao chép mã nhúng",
+  "embed-widget": "Nhúng tiện ích",
   "end-year-donate": "Kết thúc năm 2024 với Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bạn chỉ có thể chọn tối đa {{limit}} từng câu một. Vui lòng chọn phạm vi nhỏ hơn.",

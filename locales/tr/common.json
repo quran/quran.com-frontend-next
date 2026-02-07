@@ -137,6 +137,7 @@
   "copied": "kopyalandı",
   "copied-to-clipboard": "Panoya kopyalandı",
   "copy": "Kopyala",
+  "copy-embed": "Kopyala Göm",
   "copylink": "Linki Kopyala",
   "counter": {
     "decrease": "Azalt",
@@ -162,6 +163,8 @@
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
     "verify-code": "Doğrulama kodu"
   },
+  "embed-copied": "Kopyalanan Gömme",
+  "embed-widget": "Widget'ı yerleştir",
   "end-year-donate": "2024'ü sadaka ile bitirin ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",

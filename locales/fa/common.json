@@ -137,6 +137,7 @@
   "copied": "کپی شده است",
   "copied-to-clipboard": "در کلیپ بورد کپی شد",
   "copy": "کپی",
+  "copy-embed": "کپی کردن جاسازی",
   "copylink": "لینک را کپی کنید",
   "counter": {
     "decrease": "نزول کردن",
@@ -162,6 +163,8 @@
     "resend-email-in": "ارسال مجدد ایمیل تأیید در {{remainingTime}} ثانیه...",
     "verify-code": "کد را تأیید کنید"
   },
+  "embed-copied": "جاسازی کپی شده",
+  "embed-widget": "ابزارک را جاسازی کنید",
   "end-year-donate": "پایان سال 2024 با صدقه ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "هر بار فقط می‌توانید حداکثر {{limit}} آیه را انتخاب کنید. لطفا محدوده کوچکتری را انتخاب کنید.",

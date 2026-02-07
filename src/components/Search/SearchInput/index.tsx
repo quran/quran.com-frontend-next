@@ -51,6 +51,7 @@ const SearchInput: React.FC<Props> = ({
   const isExpanded = useSelector(selectIsExpanded);
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
+  const hasSearchQuery = Boolean(searchQuery?.length);
 
   // Handle microphone permission errors
   const handleMicError = useHandleMicError(toast, t);
@@ -119,7 +120,7 @@ const SearchInput: React.FC<Props> = ({
     <div
       ref={containerRef}
       className={classNames(styles.headerOuterContainer, {
-        [styles.expanded]: isExpanded,
+        [styles.expanded]: isExpanded && hasSearchQuery,
       })}
     >
       <div className={styles.inputContainer}>
@@ -153,7 +154,7 @@ const SearchInput: React.FC<Props> = ({
           />
         </form>
       </div>
-      {isExpanded && (
+      {isExpanded && hasSearchQuery && (
         <div className={styles.dropdownContainer} data-testid="search-results">
           <ExpandedSearchInputSection searchQuery={searchQuery} />
         </div>

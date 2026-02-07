@@ -137,6 +137,7 @@
   "copied": "Copiado",
   "copied-to-clipboard": "Copiado para a área de transferência",
   "copy": "cópia de",
+  "copy-embed": "Copiar e incorporar",
   "copylink": "Copiar link",
   "counter": {
     "decrease": "Diminuir",
@@ -162,6 +163,8 @@
     "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
     "verify-code": "Código de verificação"
   },
+  "embed-copied": "Incorporar cópia",
+  "embed-widget": "Widget incorporado",
   "end-year-donate": "Termine 2024 com Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Você pode selecionar até {{limit}} versos por vez. Selecione um intervalo menor.",

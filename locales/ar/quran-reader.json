@@ -40,6 +40,7 @@
   "download-copy": "إذا كنت ترغب في تنزيل ملف نصي",
   "edgham": "الحرف الساكن",
   "ekhfa": "غنة / إخفاء",
+  "embed-widget": "أداة التضمين",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "تتبع سلسلة الإنجازات، أنشئ أهدافًا مخصصة، حافظ على الاستمرارية",
     "achieve-quran-goals-responsive": "حقق أهدافك القرآنية",
@@ -88,6 +89,20 @@
   "info": "معلومات",
   "juz-beginning": "بداية الجزء",
   "languages": "اللغات",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 قصص تُغير الحياة: دروس من خطة التعلم سورة الكهف",
+    "banner-image-description": "اطلع على خطة التعلم لسورة الكهف",
+    "button-accessibility-label": "تعلم المزيد عن خطة التعلم لسورة الكهف",
+    "main-headline": "اكتشف 4 قصص تُغير الحياة من سورة الكهف",
+    "subtitle-description": "(خطة تعليمية مجانية)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "المنُجية: دروس قيّمة في سورة الملك - لافتة خطة التعلم",
+    "banner-image-description": "اطلع على خطة التعلم لسورة الملك \"المنُجية\".",
+    "button-accessibility-label": "تعلم المزيد عن خطة التعلم \"المنُجية\"",
+    "main-headline": "اكتشف دروساً قيّمة في سورة الملك اليوم",
+    "subtitle-description": "(خطة تعليمية مجانية)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "المنجية : دروس مؤثرة في سورة الملك - لافتة الخطة التعليمية",
     "banner-image-description": "شاهد خطة التعلم \"المنجية\" لسورة الملك",
@@ -169,11 +184,11 @@
   "reflection-disclaimer": "التدبرات هي آراء شخصية (يتم مراجعتها لضمان الجودة) ولا ينبغي اعتبارها تفسيرات مُعتمدة.",
   "reflection-languages": "لغات التدبر",
   "reflection-not-available": "لا توجد تدبرات مراجعة لهذه الآية",
-  "reflections": "تأملات",
+  "reflections": "تدبرات",
   "reflections-desc": "اقرأ وشارك تدبرات قرآنية حول الآية {{ayahNumber}} من سورة {{surahName}}",
   "remove-bookmark": "إزالة ما تم حفظه",
   "remove-my-reading-bookmark": "قم بإزالة إشارة القراءة الخاصة بي",
-  "remove-pinned-verse": "حذف الآية {{verseKey}} من المنشورات المثبتة",
+  "remove-pinned-verse": "إزالة الآية {{verseKey}} من المنشورات المثبتة",
   "removed-from": "تمت إزالته من {{collectionName}}",
   "revelation-order-notice": "ملاحظة: أنت تتصفح القرآن بترتيب نزول الوحي <link> اضغط هنا </link> للعودة إلى الترتيب الافتراضي.",
   "rub-beginning": "بداية ربع الحزب",
@@ -215,7 +230,7 @@
   "unpin-verse": "إلغاء التثبيت",
   "verse-pinned": "الآية مثبتة",
   "verse-preview-title": "معاينة:",
-  "verses-loaded-successfully": "الآيات المحملة إلى المثبتة",
+  "verses-loaded-successfully": "تم تحميل الآيات إلى المثبتة",
   "verses-pinned": "{{count}} الآيات المثبتة",
   "verses-range": "نطاق الآيات",
   "view-on-quran-reflect": "عرض على QuranReflect",

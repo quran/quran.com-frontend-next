@@ -26,7 +26,7 @@ import {
 } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
-import { logValueChange } from '@/utils/eventLogger';
+import { logEvent, logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
@@ -140,6 +140,7 @@ const QuranFontSection = () => {
   };
 
   const onFontChange = (value: QuranFont) => {
+    logEvent(`font_family_changed_to_${value}`);
     logValueChange('font_family', selectedType, value);
     const fontValue = getDefaultFont(value);
     onFontSettingsChange(
@@ -151,6 +152,7 @@ const QuranFontSection = () => {
   };
 
   const onFontStyleChange = (value: QuranFont) => {
+    logEvent(`font_style_changed_to_${value}`);
     logValueChange('font_style', quranFont, value);
     onFontSettingsChange(
       'quranFont',
@@ -161,6 +163,7 @@ const QuranFontSection = () => {
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
+    logEvent(`mushaf_lines_changed_to_${value}`);
     logValueChange('mushaf_lines', mushafLines, value);
     onFontSettingsChange(
       'mushafLines',
@@ -172,6 +175,7 @@ const QuranFontSection = () => {
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;
+    logEvent('quran_font_size_decreased');
     logValueChange('font_scale', quranTextFontScale, value);
     onFontSettingsChange(
       'quranTextFontScale',
@@ -183,6 +187,7 @@ const QuranFontSection = () => {
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
+    logEvent('quran_font_size_increased');
     logValueChange('font_scale', quranTextFontScale, value);
     onFontSettingsChange(
       'quranTextFontScale',
