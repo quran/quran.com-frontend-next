@@ -277,6 +277,7 @@ sequenceDiagram
 | Aspect                    | Details                                                                                                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Allowlisted endpoints** | `/api/proxy/content/api/qdc/verses/by_chapter/*`<br/>`/api/proxy/content/api/qdc/resources/translations`<br/>`/api/proxy/content/api/qdc/resources/country_language_preference` |
+| **Path matching rule**    | Exact endpoint match by default; only prefixes ending in `/` are treated as wildcard subpaths. This prevents accidental cache inclusion for similarly named routes.            |
 | **Caching mechanism**     | `caches.default` with URL-based cache key                                                                                                                                       |
 | **TTL**                   | Respects origin's `max-age` if present, otherwise 24 hours (capped at 30 days)                                                                                                  |
 | **Safety**                | `Set-Cookie` stripped (origin sometimes sends irrelevant cookies)                                                                                                               |

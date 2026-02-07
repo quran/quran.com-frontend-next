@@ -672,7 +672,12 @@ function parseNextDataPath(pathname, supportedLocales) {
 
 function isCacheableContentApiRequest(pathname) {
   for (const prefix of CONFIG.CONTENT_API_ALLOWLIST_PREFIXES) {
-    if (pathname === prefix || pathname.startsWith(prefix)) return true;
+    if (pathname === prefix) return true;
+    if (prefix.endsWith('/')) {
+      if (pathname.startsWith(prefix)) return true;
+      continue;
+    }
+    if (pathname.startsWith(`${prefix}/`)) return true;
   }
   return false;
 }

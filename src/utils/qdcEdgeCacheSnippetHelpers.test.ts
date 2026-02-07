@@ -101,6 +101,8 @@ describe('qdcEdgeCacheSnippetHelpers', () => {
     expect(shouldBypassPath('/api/foo', BYPASS_PREFIXES)).toBe(true);
     expect(shouldBypassPath('/_next/static/chunk.js', BYPASS_PREFIXES)).toBe(true);
     expect(shouldBypassPath('/login', BYPASS_PREFIXES)).toBe(true);
+    expect(shouldBypassPath('/login/callback', BYPASS_PREFIXES)).toBe(true);
+    expect(shouldBypassPath('/login-help', BYPASS_PREFIXES)).toBe(false);
     expect(shouldBypassPath('/en/1', BYPASS_PREFIXES)).toBe(false);
 
     const params = new URLSearchParams('token=abc&x=1');

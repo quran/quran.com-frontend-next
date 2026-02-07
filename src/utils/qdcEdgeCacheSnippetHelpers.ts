@@ -116,8 +116,13 @@ export const isPrivatePath = (pathname: string, privatePrefixes: string[]): bool
 
 export const shouldBypassPath = (pathname: string, bypassPrefixes: string[]): boolean => {
   if (!pathname) return true;
-  if (bypassPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(prefix))) {
-    return true;
+  for (const prefix of bypassPrefixes) {
+    if (pathname === prefix) return true;
+    if (prefix.endsWith('/')) {
+      if (pathname.startsWith(prefix)) return true;
+      continue;
+    }
+    if (pathname.startsWith(`${prefix}/`)) return true;
   }
   if (/\.(?:js|css|map|png|jpg|jpeg|gif|svg|webp|avif|ico|txt|xml|json|woff2?)$/i.test(pathname)) {
     return true;
