@@ -41,7 +41,7 @@ import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
 import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
 import { removeItemFromArray } from '@/utils/array';
-import { logValueChange } from '@/utils/eventLogger';
+import { logEvent, logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -93,6 +93,7 @@ const WordByWordSection = () => {
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = wordByWordFontScale + 1;
+    logEvent('wbw_font_size_increased');
     logValueChange('word_by_word_font_scale', wordByWordFontScale, newValue);
     onWordByWordSettingsChange(
       'wordByWordFontScale',
@@ -105,6 +106,7 @@ const WordByWordSection = () => {
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = wordByWordFontScale - 1;
+    logEvent('wbw_font_size_decreased');
     logValueChange('word_by_word_font_scale', wordByWordFontScale, newValue);
     onWordByWordSettingsChange(
       'wordByWordFontScale',
@@ -116,6 +118,7 @@ const WordByWordSection = () => {
   };
 
   const onWordByWordLocaleChange = (value: string) => {
+    logEvent(`wbw_language_changed_to_${value}`);
     logValueChange('wbw_locale', wordByWordLocale, value);
     onWordByWordSettingsChange(
       'selectedWordByWordLocale',
@@ -136,6 +139,7 @@ const WordByWordSection = () => {
       newValue === WordClickFunctionality.PlayAudio
         ? WordClickFunctionality.NoAudio
         : WordClickFunctionality.PlayAudio;
+    logEvent(isChecked ? 'wbw_recitation_enabled' : 'wbw_recitation_disabled');
     logValueChange('audio_settings_word_click_functionality', oldValue, newValue);
     onWordByWordSettingsChange(
       'wordClickFunctionality',
@@ -149,6 +153,7 @@ const WordByWordSection = () => {
     const nextWordByWordInlineContentType = isChecked
       ? [...wordByWordInlineContentType, WordByWordType.Translation]
       : removeItemFromArray(WordByWordType.Translation, wordByWordInlineContentType);
+    logEvent(isChecked ? 'wbw_inline_translation_enabled' : 'wbw_inline_translation_disabled');
     logValueChange(
       'wbw_inline_content_type_translation',
       wordByWordInlineContentType,
@@ -185,33 +190,29 @@ const WordByWordSection = () => {
     const nextWordByWordInlineContentType = isChecked
       ? [...wordByWordInlineContentType, WordByWordType.Transliteration]
       : removeItemFromArray(WordByWordType.Transliteration, wordByWordInlineContentType);
+    logEvent(`wbw_inline_transliteration_${isChecked ? 'enabled' : 'disabled'}`);
     logValueChange(
       'wbw_inline_content_type_transliteration',
       wordByWordInlineContentType,
       nextWordByWordInlineContentType,
     );
-
-    // Auto-enable Inline display when any content is checked
+    // Auto-enable/disable Inline display based on content
     let nextWordByWordDisplay = wordByWordDisplay;
     if (isChecked && !wordByWordDisplay.includes(WordByWordDisplay.INLINE)) {
       nextWordByWordDisplay = [...wordByWordDisplay, WordByWordDisplay.INLINE];
-    }
-    // Auto-disable Inline display when all content is unchecked
-    if (
+    } else if (
       !isChecked &&
-      nextWordByWordInlineContentType.length === 0 &&
+      !nextWordByWordInlineContentType.length &&
       wordByWordDisplay.includes(WordByWordDisplay.INLINE)
     ) {
       nextWordByWordDisplay = removeItemFromArray(WordByWordDisplay.INLINE, wordByWordDisplay);
     }
-
     onWordByWordSettingsChange(
       'wordByWordInlineContentType',
       nextWordByWordInlineContentType,
       setWordByWordInlineContentType(nextWordByWordInlineContentType),
       setWordByWordInlineContentType(wordByWordInlineContentType),
     );
-
     if (nextWordByWordDisplay !== wordByWordDisplay) {
       dispatch(setWordByWordDisplay(nextWordByWordDisplay));
     }
@@ -235,6 +236,8 @@ const WordByWordSection = () => {
       ? [...wordByWordTooltipContentType, type]
       : removeItemFromArray(type, wordByWordTooltipContentType);
 
+    const tooltipType = isTranslationCheckbox ? 'translation' : 'transliteration';
+    logEvent(`wbw_tooltip_${tooltipType}_${isChecked ? 'enabled' : 'disabled'}`);
     logValueChange(
       'wbw_content_type',
       wordByWordTooltipContentType,

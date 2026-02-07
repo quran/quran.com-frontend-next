@@ -144,6 +144,7 @@
   "copied": "কপি করা হয়েছে",
   "copied-to-clipboard": "ক্লিপবোর্ডে কপি করা হয়েছে",
   "copy": "কপি",
+  "copy-embed": "এম্বেড কপি করুন",
   "copylink": "লিংক কপি করুন",
   "counter": {
     "decrease": "হ্রাস",
@@ -169,6 +170,8 @@
     "resend-email-in": "{{remainingTime}} সেকেন্ডের মধ্যে যাচাইকরণ ইমেল আবার পাঠান...",
     "verify-code": "কোড যাচাই করুন"
   },
+  "embed-copied": "এম্বেড করুন কপি করা হয়েছে",
+  "embed-widget": "উইজেট এম্বেড করুন",
   "end-year-donate": "সাদাকাহ দিয়ে 2024 শেষ করুন ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "আপনি একবারে শুধুমাত্র {{limit}} টি আয়াত নির্বাচন করতে পারেন৷ অনুগ্রহ করে একটি ছোট পরিসর নির্বাচন করুন।",

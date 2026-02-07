@@ -1,10 +1,21 @@
+@import 'src/styles/breakpoints';
+
 .shareOptionsButtons {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   gap: calc(var(--spacing-max) / 2);
   justify-content: center;
   inline-size: 100%;
+
+  @include smallerThanTablet {
+    flex-wrap: wrap;
+
+    > * {
+      flex: 0 0 calc(33.33% - var(--spacing-max) / 2);
+      max-inline-size: calc(33.33% - var(--spacing-max) / 2);
+    }
+  }
 }
 
 .shareOptionButton {

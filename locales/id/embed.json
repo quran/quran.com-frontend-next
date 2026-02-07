@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Disalin!",
+    "copy": "Menyalin",
+    "copyEmbedSnippet": "Salin Cuplikan Sematkan"
+  },
+  "checkboxes": {
+    "answers": "Tombol Tampilkan Jawaban (jika tersedia)",
+    "audio": "Aktifkan pemutaran audio",
+    "customSize": "Gunakan lebar/tinggi khusus",
+    "lessons": "Tombol Tampilkan Pelajaran",
+    "mergeVerses": "Gabungkan ayat (tampilan sebaris)",
+    "reflections": "Tombol Tampilkan Refleksi",
+    "showArabic": "Tampilkan ayat Arab",
+    "tafsirs": "Tombol Tampilkan Tafsir",
+    "translator": "Tampilkan nama penerjemah",
+    "verseRange": "Aktifkan rentang ayat",
+    "wordByWord": "Aktifkan terjemahan kata demi kata",
+    "wordByWordTransliteration": "Aktifkan transliterasi kata demi kata"
+  },
+  "errors": {
+    "clipboardFallback": "Penulisan ke clipboard gagal, menggunakan metode cadangan.",
+    "clipboardUnavailable": "API clipboard tidak tersedia",
+    "loadChapters": "Bab tidak dapat dimuat",
+    "loadReciters": "Tidak dapat memuat pembaca puisi",
+    "loadTranslations": "Terjemahan tidak dapat dimuat."
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "ID Klien",
+    "height": "Tinggi",
+    "language": "Bahasa",
+    "mushaf": "Mushaf",
+    "reciter": "Tukang deklamasi",
+    "surah": "Surah",
+    "theme": "Tema",
+    "translations": "Terjemahan",
+    "width": "Lebar"
+  },
+  "header": {
+    "subtitle": "<bold>Cara yang lebih berkualitas dan dapat disesuaikan untuk menyertakan ayat-ayat Al-Quran dalam konten Anda.</bold><br />Buat konten tersemat yang dapat Anda sesuaikan dengan mudah, dengan <bold>Terjemahan bahasa Arab yang akurat, dengan sistem pembacaan terintegrasi.</bold> dan banyak lagi, sehingga pembaca dapat mendengarkan sambil berinteraksi dengan ayat tersebut.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Konfigurasikan dan pratinjau widget sematan untuk berbagi Al-Quran, lalu salin cuplikan skrip yang siap digunakan.",
+    "title": "Pembuat Sisipan Ayat | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Kompleks Raja Fahad v1",
+    "kfgqpc_v2": "Kompleks Raja Fahad v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajwid"
+  },
+  "placeholders": {
+    "searchTranslations": "Cari terjemahan..."
+  },
+  "reciters": {
+    "select": "Pilih pembaca"
+  },
+  "sections": {
+    "configuration": "Konfigurasi",
+    "preview": "Pratinjau langsung",
+    "snippet": "Sematkan cuplikan"
+  },
+  "states": {
+    "loadingChapters": "Memuat bab...",
+    "loadingPreview": "Memuat pratinjau...",
+    "loadingReciters": "Sedang memuat para pembaca puisi...",
+    "loadingVerses": "Memuat ayat-ayat...",
+    "noTranslations": "Tidak ada terjemahan yang ditemukan."
+  },
+  "theme": {
+    "dark": "Gelap",
+    "light": "Lampu",
+    "sepia": "Warna coklat tua"
+  },
+  "translations": {
+    "chipRemoveLabel": "Hapus terjemahan",
+    "otherLanguage": "Lainnya"
+  },
+  "widget": {
+    "readOnQuran": "Baca di Quran.com"
+  }
+}

@@ -144,6 +144,7 @@
   "copied": "gekopieerd",
   "copied-to-clipboard": "Gekopieerd naar het klembord",
   "copy": "Kopiëren",
+  "copy-embed": "Insluiten kopiëren",
   "copylink": "Link kopiëren",
   "counter": {
     "decrease": "Verminderen",
@@ -169,6 +170,8 @@
     "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
     "verify-code": "Code verifiëren"
   },
+  "embed-copied": "Insluiten Gekopieerd",
+  "embed-widget": "Insluitwidget",
   "end-year-donate": "Sluit 2024 af met Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "U kunt maximaal {{limit}} verzen tegelijk selecteren. Selecteer een kleiner bereik.",
