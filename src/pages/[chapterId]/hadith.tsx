@@ -62,7 +62,7 @@ const AyahHadithPage: NextPage<AyahHadithPageProps> = ({
     <>
       <NextSeoWrapper
         title={t('title', {
-          surahName: chapter.chapter.transliteratedName,
+          surahName: chapter?.chapter?.transliteratedName,
           ayahNumber: localizedVerseNumber,
         })}
         image={getChapterOgImageUrl({ chapterId, verseNumber, locale: lang })}
@@ -72,7 +72,7 @@ const AyahHadithPage: NextPage<AyahHadithPageProps> = ({
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('description', {
           ayahNumber: localizedVerseNumber,
-          surahName: chapter.chapter.transliteratedName,
+          surahName: chapter?.chapter?.transliteratedName,
         })}
       />
 
