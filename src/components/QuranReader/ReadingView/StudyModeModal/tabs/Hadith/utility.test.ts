@@ -1,11 +1,6 @@
 import { it, expect } from 'vitest';
 
-import {
-  replaceBreaksWithSpans,
-  formatHadithNumbers,
-  getFirstHadithNumber,
-  parseHadithNumbers,
-} from './utility';
+import { replaceBreaksWithSpans, formatHadithNumbers, parseHadithNumbers } from './utility';
 
 import Language from '@/types/Language';
 
@@ -58,64 +53,57 @@ it('replaceBreaksWithSpans handles case-insensitive matches', () => {
 });
 
 it('parseHadithNumbers works with single number', () => {
-  expect(parseHadithNumbers('1')).toEqual([{ number: '1' }]);
-  expect(parseHadithNumbers('123')).toEqual([{ number: '123' }]);
+  expect(parseHadithNumbers('1', Language.EN)).toEqual([
+    { number: '1', localized: '1', link: '1' },
+  ]);
+  expect(parseHadithNumbers('123', Language.EN)).toEqual([
+    { number: '123', localized: '123', link: '123' },
+  ]);
 });
 
 it('parseHadithNumbers works with multiple numbers separated by comma', () => {
-  expect(parseHadithNumbers('1,2,3')).toEqual([{ number: '1' }, { number: '2' }, { number: '3' }]);
-  expect(parseHadithNumbers('1, 2, 3')).toEqual([
-    { number: '1' },
-    { number: '2' },
-    { number: '3' },
+  expect(parseHadithNumbers('1,2,3', Language.EN)).toEqual([
+    { number: '1', localized: '1', link: '1' },
+    { number: '2', localized: '2', link: '2' },
+    { number: '3', localized: '3', link: '3' },
+  ]);
+  expect(parseHadithNumbers('1, 2, 3', Language.EN)).toEqual([
+    { number: '1', localized: '1', link: '1' },
+    { number: '2', localized: '2', link: '2' },
+    { number: '3', localized: '3', link: '3' },
   ]);
 });
 
 it('parseHadithNumbers works with letters', () => {
-  expect(parseHadithNumbers('1a')).toEqual([{ number: '1', letter: 'a' }]);
-  expect(parseHadithNumbers('1b,2c')).toEqual([
-    { number: '1', letter: 'b' },
-    { number: '2', letter: 'c' },
+  expect(parseHadithNumbers('1a', Language.EN)).toEqual([
+    { number: '1', letter: 'a', localized: '1a', link: '1a' },
+  ]);
+  expect(parseHadithNumbers('1b,2c', Language.EN)).toEqual([
+    { number: '1', letter: 'b', localized: '1b', link: '1b' },
+    { number: '2', letter: 'c', localized: '2c', link: '2c' },
   ]);
 });
 
 it('parseHadithNumbers works with letters and optional spaces', () => {
-  expect(parseHadithNumbers('1 a')).toEqual([{ number: '1', letter: 'a' }]);
-  expect(parseHadithNumbers('1 b, 2 c')).toEqual([
-    { number: '1', letter: 'b' },
-    { number: '2', letter: 'c' },
+  expect(parseHadithNumbers('1 a', Language.EN)).toEqual([
+    { number: '1', letter: 'a', localized: '1a', link: '1a' },
   ]);
-  expect(parseHadithNumbers('1 a,2b,3 c')).toEqual([
-    { number: '1', letter: 'a' },
-    { number: '2', letter: 'b' },
-    { number: '3', letter: 'c' },
+  expect(parseHadithNumbers('1 b, 2 c', Language.EN)).toEqual([
+    { number: '1', letter: 'b', localized: '1b', link: '1b' },
+    { number: '2', letter: 'c', localized: '2c', link: '2c' },
+  ]);
+  expect(parseHadithNumbers('1 a,2b,3 c', Language.EN)).toEqual([
+    { number: '1', letter: 'a', localized: '1a', link: '1a' },
+    { number: '2', letter: 'b', localized: '2b', link: '2b' },
+    { number: '3', letter: 'c', localized: '3c', link: '3c' },
   ]);
 });
 
 it('parseHadithNumbers handles empty and invalid input', () => {
-  expect(parseHadithNumbers('')).toEqual([]);
-  expect(parseHadithNumbers('  ')).toEqual([]);
-  expect(parseHadithNumbers(null as unknown as string)).toEqual([]);
-  expect(parseHadithNumbers(undefined as unknown as string)).toEqual([]);
-});
-
-it('getFirstHadithNumber returns first number for single hadith', () => {
-  expect(getFirstHadithNumber('1')).toBe('1');
-  expect(getFirstHadithNumber('123')).toBe('123');
-});
-
-it('getFirstHadithNumber returns first number for multiple hadiths', () => {
-  expect(getFirstHadithNumber('1,2,3')).toBe('1');
-  expect(getFirstHadithNumber('1a,2b,3c')).toBe('1a');
-});
-
-it('getFirstHadithNumber returns first number with letter', () => {
-  expect(getFirstHadithNumber('1a')).toBe('1a');
-  expect(getFirstHadithNumber('1 a, 2b')).toBe('1a');
-});
-
-it('getFirstHadithNumber handles empty input', () => {
-  expect(getFirstHadithNumber('')).toBe('');
+  expect(parseHadithNumbers('', Language.EN)).toEqual([]);
+  expect(parseHadithNumbers('  ', Language.EN)).toEqual([]);
+  expect(parseHadithNumbers(null as unknown as string, Language.EN)).toEqual([]);
+  expect(parseHadithNumbers(undefined as unknown as string, Language.EN)).toEqual([]);
 });
 
 it('formatHadithNumbers formats single number in English', () => {

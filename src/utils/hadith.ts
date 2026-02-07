@@ -15,7 +15,7 @@ import { makeUrl } from '@/utils/api';
  * @param {Language} language - The language to get hadiths in
  * @returns {Language} - The language to use (either 'ar' or 'en')
  */
-const getHadithLanguage = (language: Language): Language => {
+export const getHadithLanguage = (language: Language): Language => {
   return language === Language.AR ? language : Language.EN;
 };
 
