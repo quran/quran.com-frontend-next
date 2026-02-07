@@ -1,4 +1,5 @@
 import Language from '@/types/Language';
+import { getHadithLanguage } from '@/utils/hadith';
 import { toLocalizedNumber } from '@/utils/locale';
 
 /**
@@ -24,47 +25,9 @@ export const replaceBreaksWithSpans = (html: string): string => {
 export interface ParsedHadithNumber {
   number: string;
   letter?: string;
+  localized: string;
+  link: string;
 }
-
-/**
- * Parse hadith numbers from a string
- * Supports formats like: "1", "1,2,3", "1a,2b", "1 a, 2 b", "1 a,2b"
- *
- * @param {string} hadithNumbersString - The hadith numbers string
- * @returns {ParsedHadithNumber[]} - Array of parsed hadith numbers
- */
-export const parseHadithNumbers = (hadithNumbersString: string): ParsedHadithNumber[] => {
-  if (!hadithNumbersString || typeof hadithNumbersString !== 'string') return [];
-
-  // Split by comma and trim each part
-  const parts = hadithNumbersString
-    .split(',')
-    .map((part) => part.trim())
-    .filter(Boolean);
-
-  return parts.map((part) => {
-    // Match pattern: number followed by optional letter (with or without space)
-    // Examples: "1", "1a", "1 a", "123b", "123 b"
-    const match = part.match(/^(\d+)(?:\s*([a-zA-Z]))?$/);
-    if (match) return { number: match[1], letter: match[2]?.toLowerCase() };
-    return { number: part, letter: undefined };
-  });
-};
-
-/**
- * Get the first hadith number from a hadith numbers string
- * Used for linking purposes when there are multiple hadith numbers
- *
- * @param {string} hadithNumbersString - The hadith numbers string
- * @returns {string} - The first hadith number (with letter if present)
- */
-export const getFirstHadithNumber = (hadithNumbersString: string): string => {
-  const parsedNumbers = parseHadithNumbers(hadithNumbersString);
-  if (parsedNumbers.length === 0) return '';
-
-  const first = parsedNumbers[0];
-  return first.letter ? `${first.number}${first.letter}` : first.number;
-};
 
 /**
  * Format a single hadith number with localization
@@ -79,11 +42,45 @@ const formatSingleHadithNumber = (
   letter: string | undefined,
   language: Language,
 ): string => {
-  const localizedNumber = toLocalizedNumber(Number(number), language, false, {
+  const localizedNumber = toLocalizedNumber(Number(number), getHadithLanguage(language), false, {
     useGrouping: false,
   });
 
   return letter ? `${localizedNumber}${letter}` : localizedNumber;
+};
+
+/**
+ * Parse hadith numbers from a string
+ * Supports formats like: "1", "1,2,3", "1a,2b", "1 a, 2 b", "1 a,2b"
+ *
+ * @param {string} hadithNumbersString - The hadith numbers string
+ * @returns {ParsedHadithNumber[]} - Array of parsed hadith numbers
+ */
+export const parseHadithNumbers = (
+  hadithNumbersString: string,
+  language: Language,
+): ParsedHadithNumber[] => {
+  if (!hadithNumbersString || typeof hadithNumbersString !== 'string') return [];
+
+  // Split by comma and trim each part
+  const parts = hadithNumbersString
+    .split(',')
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  return parts
+    .map((part) => {
+      // Match pattern: number followed by optional letter (with or without space)
+      // Examples: "1", "1a", "1 a", "123b", "123 b"
+      const match = part.match(/^(\d+)(?:\s*([a-zA-Z]))?$/);
+      if (match) return { number: match[1], letter: match[2]?.toLowerCase() };
+      return { number: part, letter: undefined };
+    })
+    .map((value) => {
+      const localizedNumber = formatSingleHadithNumber(value.number, value.letter, language);
+      const link = value.letter ? `${value.number}${value.letter}` : value.number;
+      return { ...value, link, localized: localizedNumber };
+    });
 };
 
 /**
@@ -95,9 +92,6 @@ const formatSingleHadithNumber = (
  * @returns {string} - Formatted hadith numbers string (e.g., "١, ٢a, ٣ b" for Arabic)
  */
 export const formatHadithNumbers = (hadithNumbersString: string, language: Language): string => {
-  const parsedNumbers = parseHadithNumbers(hadithNumbersString);
-
-  return parsedNumbers
-    .map((parsed) => formatSingleHadithNumber(parsed.number, parsed.letter, language))
-    .join(', ');
+  const parsedNumbers = parseHadithNumbers(hadithNumbersString, language);
+  return parsedNumbers.map((parsed) => parsed.localized).join(', ');
 };

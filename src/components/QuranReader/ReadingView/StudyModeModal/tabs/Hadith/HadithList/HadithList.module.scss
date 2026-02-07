@@ -28,19 +28,24 @@ $hadith-font-line-height: 1.6;
 }
 
 .hadithSource {
+  display: flex;
+  gap: var(--spacing-xsmall-px);
   color: var(--color-text-default-new);
   font-weight: var(--font-weight-normal);
   unicode-bidi: plaintext;
-  text-decoration: none;
   max-inline-size: max-content;
-
-  &:hover {
-    text-decoration: underline;
-    text-underline-offset: var(--spacing-micro2-px);
-  }
 
   .number {
     unicode-bidi: plaintext;
+  }
+
+  .link {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: calc(var(--spacing-micro-px) * 2);
+    }
   }
 }
 

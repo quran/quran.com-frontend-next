@@ -1,8 +1,9 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import { formatHadithNumbers, getFirstHadithNumber } from '../utility';
+import { parseHadithNumbers } from '../utility';
 
 import HadithContent from './HadithContent';
 import styles from './HadithList.module.scss';
@@ -51,27 +52,43 @@ const HadithList: React.FC<HadithListProps> = ({
 
   return (
     <div className={styles.container}>
-      {hadiths.map((hadith, index) => (
-        <React.Fragment key={`${hadith.collection}-${hadith.hadithNumber}`}>
-          <div className={styles.hadithCard}>
-            <a
-              className={styles.hadithSource}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={getSunnahUrl(hadith.collection, getFirstHadithNumber(hadith.hadithNumber))}
-            >
-              {hadith.name}{' '}
-              <span className={styles.number}>
-                {formatHadithNumbers(hadith.hadithNumber, lang as Language)}
-              </span>
-            </a>
+      {hadiths.map((hadith, index) => {
+        const hadithNumbers = parseHadithNumbers(hadith.hadithNumber, lang as Language);
+        const [firstHadithNumber, ...restHadithNumbers] = hadithNumbers;
 
-            <HadithContent enBody={hadith.en?.body} arBody={hadith.ar?.body} />
-          </div>
+        return (
+          <React.Fragment key={`${hadith.collection}-${hadith.hadithNumber}`}>
+            <div className={styles.hadithCard}>
+              <div className={styles.hadithSource}>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={getSunnahUrl(hadith.collection, firstHadithNumber.link)}
+                  className={styles.link}
+                >
+                  {hadith.name} <span className={styles.number}>{firstHadithNumber.localized}</span>
+                </a>
 
-          {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}
-        </React.Fragment>
-      ))}
+                {restHadithNumbers.map((hadithNumber) => (
+                  <a
+                    key={hadithNumber.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={getSunnahUrl(hadith.collection, hadithNumber.link)}
+                    className={classNames(styles.link, styles.number)}
+                  >
+                    {hadithNumber.localized}
+                  </a>
+                ))}
+              </div>
+
+              <HadithContent enBody={hadith.en?.body} arBody={hadith.ar?.body} />
+            </div>
+
+            {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}
+          </React.Fragment>
+        );
+      })}
 
       {isErrorUi && (
         <div className={styles.statusContainer} data-status="error">
