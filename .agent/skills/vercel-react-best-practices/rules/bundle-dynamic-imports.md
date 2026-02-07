@@ -1,0 +1,1 @@
+../../../../.agents/quran/skills/vercel-react-best-practices/rules/bundle-dynamic-imports.md

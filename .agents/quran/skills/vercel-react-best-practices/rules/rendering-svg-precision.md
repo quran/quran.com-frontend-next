@@ -1,0 +1,1 @@
+../../../../skills/vercel-react-best-practices/rules/rendering-svg-precision.md
