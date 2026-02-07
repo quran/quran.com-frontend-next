@@ -53,22 +53,27 @@ const AyahHadithPage: NextPage<AyahHadithPageProps> = ({
   versesResponse,
   hadithsInitialData,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('hadith');
 
   const navigationUrl = getVerseHadithsNavigationUrl(`${chapterId}:${verseNumber}`);
+  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
 
   return (
     <>
       <NextSeoWrapper
-        title={`${t('quran-reader:hadith.title')} - ${
-          chapter.chapter.transliteratedName
-        } - ${toLocalizedNumber(Number(verseNumber), lang)}`}
+        title={t('title', {
+          surahName: chapter.chapter.transliteratedName,
+          ayahNumber: localizedVerseNumber,
+        })}
         image={getChapterOgImageUrl({ chapterId, verseNumber, locale: lang })}
         imageWidth={1200}
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('quran-reader:hadith.title')}
+        description={t('description', {
+          ayahNumber: localizedVerseNumber,
+          surahName: chapter.chapter.transliteratedName,
+        })}
       />
 
       {/* @ts-ignore */}
