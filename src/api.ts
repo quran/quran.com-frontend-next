@@ -2,7 +2,11 @@
 import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
-import { AyahHadithsResponse, HadithCountResponse } from '@/types/Hadith';
+import {
+  AyahHadithsBackendResponse,
+  AyahHadithsResponse,
+  HadithCountResponse,
+} from '@/types/Hadith';
 import Language from '@/types/Language';
 import { QiraatApiResponse } from '@/types/Qiraat';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
@@ -37,7 +41,11 @@ import {
   makeQiraatMatrixUrl,
   makeQiraatJuncturesCountUrl,
 } from '@/utils/apiPaths';
-import { makeHadithsByAyahUrl, makeHadithCountWithinRangeUrl } from '@/utils/hadith';
+import {
+  makeHadithsByAyahUrl,
+  makeHadithCountWithinRangeUrl,
+  transformHadithResponse,
+} from '@/utils/hadith';
 import { getAdditionalHeaders } from '@/utils/headers';
 import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -480,7 +488,13 @@ export const getAyahHadiths = async (
   language: Language,
   page = 1,
   limit = 4,
-): Promise<AyahHadithsResponse> => fetcher(makeHadithsByAyahUrl(ayahKey, language, page, limit));
+): Promise<AyahHadithsResponse> => {
+  const backendResponse = await fetcher<AyahHadithsBackendResponse>(
+    makeHadithsByAyahUrl(ayahKey, language, page, limit),
+  );
+
+  return transformHadithResponse(backendResponse, language);
+};
 
 /**
  * Get hadith count within a verse range.
