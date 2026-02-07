@@ -407,8 +407,9 @@
   },
   "seconds": "Seconds",
   "see-less": "See less",
-  "see-more": "See more",
   "see-new": "See What's New",
+  "show-arabic": "Show Arabic",
+  "hide-arabic": "Hide Arabic",
   "select-language": "Select Language",
   "settings": {
     "no-tafsir-selected": "No tafsir selected",

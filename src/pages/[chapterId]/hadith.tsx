@@ -70,6 +70,7 @@ const AyahHadithPage: NextPage<AyahHadithPageProps> = ({
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('quran-reader:hadith.title')}
       />
+
       {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
         <StudyModeSsrContainer
