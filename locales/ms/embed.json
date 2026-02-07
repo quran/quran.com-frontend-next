@@ -42,8 +42,8 @@
     "title": "Pembina Benaman Ayah"
   },
   "meta": {
-    "description": "Konfigurasikan dan pratonton widget benam Quran.com, kemudian salin petikan skrip sedia untuk digunakan.",
-    "title": "Ayah Widget Builder | Quran.com"
+    "description": "Konfigurasikan dan pratonton widget benam untuk perkongsian Al-Quran, kemudian salin petikan skrip sedia untuk digunakan.",
+    "title": "Pembina Benaman Ayah | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Alih keluar terjemahan",
     "otherLanguage": "Lain-lain"
+  },
+  "widget": {
+    "readOnQuran": "Baca di Quran.com"
   }
 }

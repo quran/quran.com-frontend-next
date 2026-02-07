@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "Quran.com embed widget များကို configure လုပ်ပြီး preview လုပ်ပါ၊ ထို့နောက် အသုံးပြုရန် အသင့်ဖြစ်နေသော script snippet ကို ကူးယူပါ။",
-    "title": "Ayah Widget Builder | ကုရ်အာန်.com"
+    "description": "ကုရ်အာန်ကို မျှဝေရန်အတွက် embed widget များကို ပြင်ဆင်ပြီး preview လုပ်ပါ၊ ထို့နောက် အသုံးပြုရန် အသင့်ဖြစ်နေသော script snippet ကို ကူးယူပါ။",
+    "title": "အာယာထည့်သွင်းမှုတည်ဆောက်သူ | Quran.com"
   },
   "mushaf": {
     "indopak": "အင်ဒိုပက်",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "ဘာသာပြန်ဆိုချက်ကို ဖယ်ရှားပါ",
     "otherLanguage": "အခြား"
+  },
+  "widget": {
+    "readOnQuran": "Quran.com မှာ ဖတ်ပါ"
   }
 }

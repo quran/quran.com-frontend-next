@@ -42,8 +42,8 @@
     "title": "Constructor de incrustaciones Ayah"
   },
   "meta": {
-    "description": "Configure y obtenga una vista previa de los widgets incrustados de Quran.com, luego copie el fragmento de script listo para usar.",
-    "title": "Generador de widgets Ayah | Corán.com"
+    "description": "Configure y obtenga una vista previa de los widgets incrustados para compartir el Corán, luego copie el fragmento de script listo para usar.",
+    "title": "Creador de incrustaciones de aleyas | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Eliminar traducción",
     "otherLanguage": "Otro"
+  },
+  "widget": {
+    "readOnQuran": "Leer en Quran.com"
   }
 }

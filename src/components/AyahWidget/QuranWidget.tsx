@@ -80,9 +80,7 @@ const buildContainerStyle = (colors: WidgetColors, options: WidgetOptions): Reac
  */
 // eslint-disable-next-line react-func/max-lines-per-function
 const getWidgetFontStyles = (): string => `
-  .quran-widget [data-verse-key] span,
-  .quran-widget h1 span,
-  .quran-widget [data-merged-verses] span {
+  .quran-widget [class*="VerseText_verseTextContainer"] span {
     font-size: ${WIDGET_ARABIC_FONT_SIZE} !important;
   }
   .quran-widget [data-verse-key],
@@ -124,7 +122,6 @@ const getWidgetFontStyles = (): string => `
     .quran-widget [data-merged-verses] {
       --line-height: calc(22px + 16px) !important;
     }
-   
     .quran-widget [class*="translation-font-size-"] {
       font-size: 14px !important;
     }

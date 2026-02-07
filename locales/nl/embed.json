@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "Configureer en bekijk een voorbeeld van de Quran.com-integratiewidgets en kopieer vervolgens het kant-en-klare scriptfragment.",
-    "title": "Ayah Widgetbouwer | Koran.com"
+    "description": "Configureer en bekijk een voorbeeld van de widgets voor het delen van de Koran, en kopieer vervolgens het kant-en-klare scriptfragment.",
+    "title": "Ayah Embed Builder | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Verwijder vertaling",
     "otherLanguage": "Ander"
+  },
+  "widget": {
+    "readOnQuran": "Lees verder op Quran.com"
   }
 }

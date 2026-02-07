@@ -42,8 +42,8 @@
     "title": "Ndërtuesi i Embed-it të Ayah"
   },
   "meta": {
-    "description": "Konfiguroni dhe shikoni paraprakisht veglat e integruara të Quran.com, pastaj kopjoni fragmentin e skriptit gati për përdorim.",
-    "title": "Ajah Widget Builder | Kurani.com"
+    "description": "Konfiguroni dhe shikoni paraprakisht veglat e integruara për ndarjen e Kuranit, pastaj kopjoni fragmentin e skriptit gati për përdorim.",
+    "title": "Ndërtues i Vendosjes së Ajetit | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Hiq përkthimin",
     "otherLanguage": "Të tjera"
+  },
+  "widget": {
+    "readOnQuran": "Lexo në Quran.com"
   }
 }

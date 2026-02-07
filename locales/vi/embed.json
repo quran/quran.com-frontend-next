@@ -42,8 +42,8 @@
     "title": "Ayah Embed Builder"
   },
   "meta": {
-    "description": "Cấu hình và xem trước các tiện ích nhúng của Quran.com, sau đó sao chép đoạn mã đã được chuẩn bị sẵn.",
-    "title": "Trình tạo tiện ích Ayah | Kinh Qur'an.com"
+    "description": "Cấu hình và xem trước các tiện ích nhúng để chia sẻ Kinh Qur'an, sau đó sao chép đoạn mã kịch bản đã được chuẩn bị sẵn.",
+    "title": "Công cụ tạo mã nhúng Ayah | Quran.com"
   },
   "mushaf": {
     "indopak": "Ấn Độ-Pak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Xóa bản dịch",
     "otherLanguage": "Khác"
+  },
+  "widget": {
+    "readOnQuran": "Đọc thêm trên Quran.com"
   }
 }

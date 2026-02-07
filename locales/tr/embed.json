@@ -42,8 +42,8 @@
     "title": "Ayah Gömme Oluşturucu"
   },
   "meta": {
-    "description": "Quran.com yerleştirme widget'larını yapılandırın ve önizleyin, ardından kullanıma hazır komut dosyası parçasını kopyalayın.",
-    "title": "Ayah Widget Oluşturucu | Kuran.com"
+    "description": "Kur'an paylaşımı için yerleştirme widget'larını yapılandırın ve önizleyin, ardından kullanıma hazır komut dosyası parçasını kopyalayın.",
+    "title": "Ayet Gömme Oluşturucu | Quran.com"
   },
   "mushaf": {
     "indopak": "Hint-Pakistan",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Çeviriyi kaldır",
     "otherLanguage": "Diğer"
+  },
+  "widget": {
+    "readOnQuran": "Quran.com'da okuyun."
   }
 }

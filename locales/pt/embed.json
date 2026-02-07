@@ -42,8 +42,8 @@
     "title": "Construtor de Incorporação Ayah"
   },
   "meta": {
-    "description": "Configure e visualize os widgets incorporados do Quran.com e, em seguida, copie o trecho de script pronto para uso.",
-    "title": "Construtor de widgets Ayah | Alcorão.com"
+    "description": "Configure e visualize widgets incorporados para compartilhar o Alcorão e, em seguida, copie o trecho de script pronto para uso.",
+    "title": "Construtor de Incorporação de Versículos | Quran.com"
   },
   "mushaf": {
     "indopak": "Indopak",
@@ -78,5 +78,8 @@
   "translations": {
     "chipRemoveLabel": "Remover tradução",
     "otherLanguage": "Outro"
+  },
+  "widget": {
+    "readOnQuran": "Leia em Quran.com"
   }
 }
