@@ -1,3 +1,9 @@
+import {
+  AyahHadithsBackendResponse,
+  AyahHadithsResponse,
+  HadithCollectionResponse,
+  HadithReference,
+} from '@/types/Hadith';
 import Language from '@/types/Language';
 import { makeUrl } from '@/utils/api';
 
@@ -11,6 +17,48 @@ import { makeUrl } from '@/utils/api';
  */
 const getHadithLanguage = (language: Language): Language => {
   return language === Language.AR ? language : Language.EN;
+};
+
+/**
+ * Transform a single hadith collection response to the frontend structure
+ *
+ * @param {HadithCollectionResponse} hadith - Backend hadith response
+ * @param {Language} language - The target language
+ * @returns {HadithReference} - Transformed hadith reference
+ */
+const transformHadith = (hadith: HadithCollectionResponse, language: Language): HadithReference => {
+  const arHadith = hadith.hadith.find((h) => h.lang === 'ar');
+  const enHadith = hadith.hadith.find((h) => h.lang === 'en');
+
+  if (language === Language.AR) {
+    return { ...hadith, grades: arHadith?.grades || [], ar: arHadith };
+  }
+
+  return { ...hadith, grades: enHadith?.grades || [], ar: arHadith, en: enHadith };
+};
+
+/**
+ * Transform backend hadith response to frontend structure
+ *
+ * @param {AyahHadithsBackendResponse} backendResponse - Raw backend response
+ * @param {Language} language - The target language
+ * @returns {AyahHadithsResponse} - Transformed response for frontend
+ */
+export const transformHadithResponse = (
+  backendResponse: AyahHadithsBackendResponse,
+  language: Language,
+): AyahHadithsResponse => {
+  const lang = getHadithLanguage(language);
+
+  // Incase if this response is error response
+  if (!Array.isArray(backendResponse.hadiths)) {
+    return backendResponse as unknown as AyahHadithsResponse;
+  }
+
+  return {
+    ...backendResponse,
+    hadiths: backendResponse.hadiths.map((hadith) => transformHadith(hadith, lang)),
+  };
 };
 
 /**

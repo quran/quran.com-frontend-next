@@ -60,7 +60,7 @@ const HadithList: React.FC<HadithListProps> = ({
               {hadith.name} <span className={styles.number}>{hadith.hadithNumber}</span>
             </a>
 
-            <HadithContent enBody={hadith.enBody} arBody={hadith.arBody} />
+            <HadithContent enBody={hadith.en?.body} arBody={hadith.ar?.body} />
           </div>
 
           {index < hadiths.length - (isLoadingMore ? 0 : 1) && <div className={styles.divider} />}
