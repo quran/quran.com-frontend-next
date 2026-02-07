@@ -1,5 +1,9 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
+import { formatHadithNumbers, getFirstHadithNumber } from '../utility';
+
 import HadithContent from './HadithContent';
 import styles from './HadithList.module.scss';
 
@@ -7,6 +11,7 @@ import Error from '@/components/Error';
 import LoadingSpinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { HadithReference } from '@/types/Hadith';
+import Language from '@/types/Language';
 
 const getSunnahUrl = (collection: string, hadithNumber: string) => {
   return `https://www.sunnah.com/${collection}:${hadithNumber}`;
@@ -33,6 +38,7 @@ const HadithList: React.FC<HadithListProps> = ({
   error,
   onRetry,
 }) => {
+  const { lang } = useTranslation();
   const loadMoreTriggerRef = useInfiniteScroll({
     hasMore,
     isLoading: isLoadingMore,
@@ -52,12 +58,12 @@ const HadithList: React.FC<HadithListProps> = ({
               className={styles.hadithSource}
               target="_blank"
               rel="noopener noreferrer"
-              href={getSunnahUrl(
-                hadith.collection,
-                hadith.hadithNumber.toString().replaceAll(' ', ''),
-              )}
+              href={getSunnahUrl(hadith.collection, getFirstHadithNumber(hadith.hadithNumber))}
             >
-              {hadith.name} <span className={styles.number}>{hadith.hadithNumber}</span>
+              {hadith.name}{' '}
+              <span className={styles.number}>
+                {formatHadithNumbers(hadith.hadithNumber, lang as Language)}
+              </span>
             </a>
 
             <HadithContent enBody={hadith.en?.body} arBody={hadith.ar?.body} />

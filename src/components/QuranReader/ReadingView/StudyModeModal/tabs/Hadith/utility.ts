@@ -1,3 +1,6 @@
+import Language from '@/types/Language';
+import { toLocalizedNumber } from '@/utils/locale';
+
 /**
  * Replaces <br> tags with <span> elements based on their consecutiveness.
  * Multiple consecutive <br> tags are replaced with a single <span class="multiline">.
@@ -5,7 +8,7 @@
  * @param {string} html - The HTML string to process
  * @returns {string} The processed HTML string with <br> tags replaced by spans
  */
-export default function replaceBreaksWithSpans(html: string): string {
+export const replaceBreaksWithSpans = (html: string): string => {
   // Match 2 or more consecutive <br> tags (with optional self-closing and spacing)
   // and replace with multiline span
   const multilinePattern = /(<br\s*\/?>\s*){2,}/gi;
@@ -16,4 +19,85 @@ export default function replaceBreaksWithSpans(html: string): string {
   const finalResult = result.replace(singlePattern, '<span class="single"></span>');
 
   return finalResult;
+};
+
+export interface ParsedHadithNumber {
+  number: string;
+  letter?: string;
 }
+
+/**
+ * Parse hadith numbers from a string
+ * Supports formats like: "1", "1,2,3", "1a,2b", "1 a, 2 b", "1 a,2b"
+ *
+ * @param {string} hadithNumbersString - The hadith numbers string
+ * @returns {ParsedHadithNumber[]} - Array of parsed hadith numbers
+ */
+export const parseHadithNumbers = (hadithNumbersString: string): ParsedHadithNumber[] => {
+  if (!hadithNumbersString || typeof hadithNumbersString !== 'string') return [];
+
+  // Split by comma and trim each part
+  const parts = hadithNumbersString
+    .split(',')
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  return parts.map((part) => {
+    // Match pattern: number followed by optional letter (with or without space)
+    // Examples: "1", "1a", "1 a", "123b", "123 b"
+    const match = part.match(/^(\d+)(?:\s*([a-zA-Z]))?$/);
+    if (match) return { number: match[1], letter: match[2]?.toLowerCase() };
+    return { number: part, letter: undefined };
+  });
+};
+
+/**
+ * Get the first hadith number from a hadith numbers string
+ * Used for linking purposes when there are multiple hadith numbers
+ *
+ * @param {string} hadithNumbersString - The hadith numbers string
+ * @returns {string} - The first hadith number (with letter if present)
+ */
+export const getFirstHadithNumber = (hadithNumbersString: string): string => {
+  const parsedNumbers = parseHadithNumbers(hadithNumbersString);
+  if (parsedNumbers.length === 0) return '';
+
+  const first = parsedNumbers[0];
+  return first.letter ? `${first.number}${first.letter}` : first.number;
+};
+
+/**
+ * Format a single hadith number with localization
+ *
+ * @param {string} number - The hadith number
+ * @param {string} letter - Optional letter suffix
+ * @param {Language} language - The target language
+ * @returns {string} - Formatted hadith number
+ */
+const formatSingleHadithNumber = (
+  number: string,
+  letter: string | undefined,
+  language: Language,
+): string => {
+  const localizedNumber = toLocalizedNumber(Number(number), language, false, {
+    useGrouping: false,
+  });
+
+  return letter ? `${localizedNumber}${letter}` : localizedNumber;
+};
+
+/**
+ * Format all hadith numbers from a string with localization
+ * Returns a comma-separated list of formatted hadith numbers
+ *
+ * @param {string} hadithNumbersString - The hadith numbers string (e.g., "1,2a,3 b")
+ * @param {Language} language - The target language
+ * @returns {string} - Formatted hadith numbers string (e.g., "١, ٢a, ٣ b" for Arabic)
+ */
+export const formatHadithNumbers = (hadithNumbersString: string, language: Language): string => {
+  const parsedNumbers = parseHadithNumbers(hadithNumbersString);
+
+  return parsedNumbers
+    .map((parsed) => formatSingleHadithNumber(parsed.number, parsed.letter, language))
+    .join(', ');
+};

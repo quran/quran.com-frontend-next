@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { replaceBreaksWithSpans } from '../utility';
+
 import styles from './HadithContent.module.scss';
 
-import replaceBreaksWithSpans from '@/components/QuranReader/ReadingView/StudyModeModal/tabs/Hadith/utility';
 import Language from '@/types/Language';
 
 type HadithContentProps = {
