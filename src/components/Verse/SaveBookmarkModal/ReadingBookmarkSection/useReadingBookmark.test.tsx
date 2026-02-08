@@ -12,11 +12,12 @@ import { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
 import * as authApi from '@/utils/auth/api';
+import { GuestReadingBookmark } from '@/utils/bookmark';
 
-type MockReduxState = {
+interface MockReduxState {
   quranReaderStyles: { quranFont: string; mushafLines: number };
-  guestBookmark: { readingBookmark: unknown };
-};
+  guestBookmark: { readingBookmark: GuestReadingBookmark | null };
+}
 
 let mockReduxState: MockReduxState = {
   quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
@@ -46,9 +47,10 @@ vi.mock('@/redux/slices/QuranReader/styles', () => ({
   selectQuranReaderStyles: (state: MockReduxState) => state.quranReaderStyles,
 }));
 
+// Mirror production selector semantics (uses `?? null`, not `|| null`) to avoid changing behavior for falsy-but-valid values.
 vi.mock('@/redux/slices/guestBookmark', () => ({
   selectGuestReadingBookmark: (state: MockReduxState) =>
-    state.guestBookmark?.readingBookmark || null,
+    state.guestBookmark?.readingBookmark ?? null,
   setGuestReadingBookmark: vi.fn((payload) => ({ type: 'SET_GUEST_READING_BOOKMARK', payload })),
 }));
 
