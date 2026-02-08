@@ -84,6 +84,9 @@
     "sign-in-message": "Daftar masuk atau Daftar secara percuma untuk mendapatkan akses kepada lebih banyak ciri!",
     "title": "Simpan Kemajuan Anda"
   },
+  "hadith": {
+    "title": "Hadis"
+  },
   "hizb-beginning": "Permulaan Hizb",
   "include-translator": "Sertakan nama penterjemah?",
   "info": "maklumat",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Tiada refleksi yang disemak untuk ayat ini",
   "reflections": "Refleksi",
   "reflections-desc": "Baca dan kongsi renungan Al-Quran Ayah {{ayahNumber}} Surah {{surahName}}",
+  "related-verses": "Ayat-ayat berkaitan",
+  "related-verses-desc": "Baca dan kongsikan ayat-ayat berkaitan Al-Quran {{ayahNumber}} Surah {{surahName}}",
   "remove-bookmark": "Alih keluar penanda halaman",
   "remove-my-reading-bookmark": "Alih Keluar Penanda Buku Bacaan Saya",
   "remove-pinned-verse": "Alih keluar ayat {{verseKey}} daripada disematkan",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} dipilih",
   "set-as-reading-bookmark": "Tetapkan sebagai Penanda Buku Bacaan Saya",
   "share-your-reflection": "Kongsikan renungan anda tentang ayat ini",
+  "show-tajweed-rules": "Tunjukkan hukum Tajwid semasa membaca:",
   "study-mode": "Mod belajar",
   "surah-beginning": "Permulaan Surah",
   "surah-info": "Info Surah",

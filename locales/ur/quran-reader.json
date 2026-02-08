@@ -84,6 +84,9 @@
     "sign-in-message": "مزید خصوصیات تک رسائی حاصل کرنے کے لیے سائن ان یا مفت میں سائن اپ کریں!",
     "title": "اپنی پیش رفت محفوظ کریں"
   },
+  "hadith": {
+    "title": "حدیث"
+  },
   "hizb-beginning": "حزب کا آغاز",
   "include-translator": "مترجم کا نام شامل کریں؟",
   "info": "معلومات",
@@ -186,6 +189,8 @@
   "reflection-not-available": "اس آیت کے لئے کوئی جائزہ شدہ تدبرات نہیں ہیں۔",
   "reflections": "تدبرات",
   "reflections-desc": "سورہ {{surahName}} سورہ {{ayahNumber}} کے قرآنی تدبرات پڑھیں اور شیئر کریں",
+  "related-verses": "متعلقہ آیات",
+  "related-verses-desc": "آیات سے متعلق قرآنی آیات پڑھیں اور شئیر کریں۔ {{ayahNumber}} سورہ کا {{surahName}}",
   "remove-bookmark": "بک مارک کو ہٹا دیں۔",
   "remove-my-reading-bookmark": "میرا ریڈنگ بک مارک ہٹا دیں",
   "remove-pinned-verse": "پِن کی گئی فہرست سے آیت {{verseKey}} کو ہٹا دیں",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} منتخب شدہ",
   "set-as-reading-bookmark": "میرے ریڈنگ بک مارک کے طور پر سیٹ کریں",
   "share-your-reflection": "اس آیت پر اپنا تدبر شیئر کریں۔",
+  "show-tajweed-rules": "پڑھتے وقت تجوید کے اصول دکھائیں:",
   "study-mode": "مطالعہ کا موڈ",
   "surah-beginning": "سورہ کا آغاز",
   "surah-info": "سورہ کی معلومات",

@@ -84,6 +84,9 @@
     "sign-in-message": "เข้าสู่ระบบหรือสมัครสมาชิกฟรีเพื่อเข้าถึงฟีเจอร์เพิ่มเติม!",
     "title": "บันทึกความคืบหน้าของคุณ"
   },
+  "hadith": {
+    "title": "หะดีษ"
+  },
   "hizb-beginning": "จุดเริ่มต้นของฮิซบ์",
   "include-translator": "แสดงชื่อผู้แปล?",
   "info": "ข้อมูล",
@@ -186,6 +189,8 @@
   "reflection-not-available": "ยังไม่มีการทบทวนบทเรียนสำหรับอายะห์นี้",
   "reflections": "การสะท้อน",
   "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอาน อายะห์ที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
+  "related-verses": "ข้อพระคัมภ์ที่เกี่ยวข้อง",
+  "related-verses-desc": "อ่านและแบ่งปันโองการต่างๆ จากอัลกุรอานที่เกี่ยวข้องกับอายะห์ {{ayahNumber}} ของซูเราะห์ {{surahName}}",
   "remove-bookmark": "ลบบุ๊คมาร์ก",
   "remove-my-reading-bookmark": "ลบที่คั่นหนังสือของฉันออก",
   "remove-pinned-verse": "ลบข้อความ {{verseKey}} จากที่ปักหมุดไว้",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} เลือก",
   "set-as-reading-bookmark": "ตั้งเป็นที่คั่นหนังสือของฉัน",
   "share-your-reflection": "แชร์การสะท้อนบทเรียนของคุณเกี่ยวกับอายะฮ์นี้",
+  "show-tajweed-rules": "แสดงกฎตัจวีดขณะอ่าน:",
   "study-mode": "โหมดการเรียนรู้",
   "surah-beginning": "ส่วนต้นของซูเราะห์",
   "surah-info": "ข้อมูลเกี่ยวกับซูเราะห์",

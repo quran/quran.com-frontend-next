@@ -84,6 +84,9 @@
     "sign-in-message": "Войдите или зарегистрируйтесь бесплатно, чтобы получить доступ к расширенным функциям!",
     "title": "Сохраните свой прогресс"
   },
+  "hadith": {
+    "title": "Хадис"
+  },
   "hizb-beginning": "Начало Хизба",
   "include-translator": "Включить имя переводчика?",
   "info": "информация",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Для этого аята нет проверенных размышлений",
   "reflections": "Размышления",
   "reflections-desc": "Читайте и делитесь размышлениями Корана об {{ayahNumber}} суры {{surahName}}",
+  "related-verses": "Связанные стихи",
+  "related-verses-desc": "Читайте и делитесь аятами из Корана, относящимися к данной теме. {{ayahNumber}} из суры {{surahName}}",
   "remove-bookmark": "Удалить закладку",
   "remove-my-reading-bookmark": "Удалить мою закладку для чтения",
   "remove-pinned-verse": "Удалить стих {{verseKey}} из приколотого",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} выбранный",
   "set-as-reading-bookmark": "Установила в качестве закладки для чтения",
   "share-your-reflection": "Поделитесь своим мнением об этом аяте",
+  "show-tajweed-rules": "При чтении отображайте правила таджвида:",
   "study-mode": "Режим обучения",
   "surah-beginning": "Начало суры",
   "surah-info": "Информация о суре",

@@ -84,6 +84,9 @@
     "sign-in-message": "Meld u aan of registreer u gratis om toegang te krijgen tot meer functies!",
     "title": "Sla je voortgang op"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Begin van Hizb",
   "include-translator": "Naam van de vertaler toevoegen?",
   "info": "informatie",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Er zijn geen beoordeelde reflecties voor deze ayah",
   "reflections": "Reflecties",
   "reflections-desc": "Lees en deel Koran reflecties van Ayah {{ayahNumber}} van Surah {{surahName}}",
+  "related-verses": "Verwante verzen",
+  "related-verses-desc": "Lees en deel koranverzen van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "remove-bookmark": "Bladwijzer verwijderen",
   "remove-my-reading-bookmark": "Mijn leesbladwijzer verwijderen",
   "remove-pinned-verse": "Verwijder vers {{verseKey}} van vastgepind",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} gekozen",
   "set-as-reading-bookmark": "Instellen als mijn leesbladwijzer",
   "share-your-reflection": "Deel je reflectie op deze ayah",
+  "show-tajweed-rules": "Toon de Tajweed-regels tijdens het lezen:",
   "study-mode": "Studiemodus",
   "surah-beginning": "Begin van Surah",
   "surah-info": "Surah Info",

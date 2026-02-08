@@ -84,6 +84,9 @@
     "sign-in-message": "Đăng nhập hoặc đăng ký miễn phí để truy cập nhiều tính năng hơn!",
     "title": "Lưu lại tiến trình của bạn"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Mở đầu Hizb",
   "include-translator": "Có cần ghi tên người dịch không?",
   "info": "thông tin",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Hiện chưa có bài bình luận nào cho ayah này",
   "reflections": "Suy ngẫm",
   "reflections-desc": "Hãy đọc và chia sẻ những suy ngẫm về Ayah {{ayahNumber}} của Surah {{surahName}}",
+  "related-verses": "Các câu thơ liên quan",
+  "related-verses-desc": "Hãy đọc và chia sẻ những câu kinh liên quan đến Kinh Qur'an. {{ayahNumber}} của Surah {{surahName}}",
   "remove-bookmark": "Xóa đánh dấu trang",
   "remove-my-reading-bookmark": "Xóa dấu trang đọc của tôi",
   "remove-pinned-verse": "Xóa câu thơ {{verseKey}} từ ghim",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} đã chọn",
   "set-as-reading-bookmark": "Đã đặt làm dấu trang đọc sách của tôi",
   "share-your-reflection": "Chia sẻ suy ngẫm của bạn về ayah này",
+  "show-tajweed-rules": "Hiển thị các quy tắc Tajweed khi đọc:",
   "study-mode": "Chế độ học tập",
   "surah-beginning": "Mở đầu Surah",
   "surah-info": "Thông tin Surah",

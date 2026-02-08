@@ -236,8 +236,8 @@ export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${ve
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
-  `/${verseKey}/related-verse`;
+export const getVerseRelatedVersesNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/related-verses`;
 
 /**
  * Get the href link to Qiraat of Ayah.

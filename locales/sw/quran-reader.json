@@ -84,6 +84,9 @@
     "sign-in-message": "Ingia au Jisajili bure ili upate huduma zaidi!",
     "title": "Hifadhi Maendeleo Yako"
   },
+  "hadith": {
+    "title": "Hadithi"
+  },
   "hizb-beginning": "Mwanzo wa Hizb",
   "include-translator": "Jumuisha jina la mtafsiri?",
   "info": "taarifa",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Hakuna tafakari zilizokaguliwa kwa aya hii",
   "reflections": "Tafakari",
   "reflections-desc": "Soma na ushiriki tafakari za Qur'ani za Aya {{ayahNumber}} ya Sura {{surahName}}",
+  "related-verses": "Mistari inayohusiana",
+  "related-verses-desc": "Soma na ushiriki aya zinazohusiana na Quran za Ayah {{ayahNumber}} ya Sura {{surahName}}",
   "remove-bookmark": "Ondoa alamisho",
   "remove-my-reading-bookmark": "Ondoa Alamisho langu la Kusoma",
   "remove-pinned-verse": "Ondoa aya {{verseKey}} kutoka kwa zilizobandikwa",
@@ -205,6 +210,7 @@
   "selected-count": "Zlizochaguliwa ni {{count}}",
   "set-as-reading-bookmark": "Weka kama Alamisho langu la Kusoma",
   "share-your-reflection": "Shiriki tafakari yako kuhusu aya hii",
+  "show-tajweed-rules": "Onyesha sheria za Tajweed unaposoma:",
   "study-mode": "Hali ya kujifunza",
   "surah-beginning": "Mwanzo wa Surah",
   "surah-info": "Taarifa ya Sura",

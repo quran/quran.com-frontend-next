@@ -84,6 +84,9 @@
     "sign-in-message": "ተጨማሪ ባህሪያትን ለማግኘት በነፃ ይግቡ ወይም ይመዝገቡ!",
     "title": "እድገትዎን ያስቀምጡ"
   },
+  "hadith": {
+    "title": "ሐዲት"
+  },
   "hizb-beginning": "የሂዝብ መጀመሪያ",
   "include-translator": "የተርጓሚ ስም ይካተት?",
   "info": "መረጃ",
@@ -186,6 +189,8 @@
   "reflection-not-available": "ለዚህ አያህ የተገመገሙ አስተያየቶች የሉም",
   "reflections": "ነጸብራቆች",
   "reflections-desc": "የሱራህ {{surahName}} የአያህን {{ayahNumber}} የቁርዓን አንቀጾች አንብብና አጋራ",
+  "related-verses": "ተዛማጅ ጥቅሶች",
+  "related-verses-desc": "ከቁርዓን ጋር የተያያዙ የአያህ አንቀጾችን ያንብቡ እና ያጋሩ {{ayahNumber}} የሱራህ {{surahName}}",
   "remove-bookmark": "ዕልባት አስወግድ",
   "remove-my-reading-bookmark": "የንባብ ዕልቤን አስወግድ",
   "remove-pinned-verse": "ጥቅስ አስወግድ {{verseKey}} ከተሰካ",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} ተመርጧል",
   "set-as-reading-bookmark": "እንደ የንባብ ዕልባትዬ አዘጋጅ",
   "share-your-reflection": "በዚህ አንቀፅ ላይ ያላችሁን አስተያየት(ያስተነተኑትን) አካፍሉን",
+  "show-tajweed-rules": "የሚከተለውን በማንበብ የታጂዊድ ህጎችን አሳይ፦",
   "study-mode": "የጥናት ሁነታ",
   "surah-beginning": "የሱራ(ምዕራፍ) መጀመሪያ",
   "surah-info": "የሱራህ መረጃ",
