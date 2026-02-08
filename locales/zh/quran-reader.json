@@ -84,6 +84,9 @@
     "sign-in-message": "登录或免费注册即可解锁更多功能！",
     "title": "保存进度"
   },
+  "hadith": {
+    "title": "圣训"
+  },
   "hizb-beginning": "Hizb的开始",
   "include-translator": "包括译者姓名？",
   "info": "信息",
@@ -205,6 +208,7 @@
   "selected-count": "{{count}} 选定",
   "set-as-reading-bookmark": "设为我的阅读书签",
   "share-your-reflection": "分享您对此的看法",
+  "show-tajweed-rules": "阅读时显示 Tajweed 规则：",
   "study-mode": "学习模式",
   "surah-beginning": "回到本章开头",
   "surah-info": "古兰经信息",

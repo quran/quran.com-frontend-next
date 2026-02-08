@@ -84,6 +84,9 @@
     "sign-in-message": "مزید خصوصیات تک رسائی حاصل کرنے کے لیے سائن ان یا مفت میں سائن اپ کریں!",
     "title": "اپنی پیش رفت محفوظ کریں"
   },
+  "hadith": {
+    "title": "حدیث"
+  },
   "hizb-beginning": "حزب کا آغاز",
   "include-translator": "مترجم کا نام شامل کریں؟",
   "info": "معلومات",
@@ -205,6 +208,7 @@
   "selected-count": "{{count}} منتخب شدہ",
   "set-as-reading-bookmark": "میرے ریڈنگ بک مارک کے طور پر سیٹ کریں",
   "share-your-reflection": "اس آیت پر اپنا تدبر شیئر کریں۔",
+  "show-tajweed-rules": "پڑھتے وقت تجوید کے اصول دکھائیں:",
   "study-mode": "مطالعہ کا موڈ",
   "surah-beginning": "سورہ کا آغاز",
   "surah-info": "سورہ کی معلومات",

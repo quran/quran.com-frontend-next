@@ -84,6 +84,9 @@
     "sign-in-message": "برای دسترسی به امکانات بیشتر، وارد شوید یا به صورت رایگان ثبت نام کنید!",
     "title": "پیشرفت خود را ذخیره کنید"
   },
+  "hadith": {
+    "title": "حدیث"
+  },
   "hizb-beginning": "آغاز حزب",
   "include-translator": "نام مترجم درج شود؟",
   "info": "اطلاعات",
@@ -205,6 +208,7 @@
   "selected-count": "{{count}} انتخاب شده",
   "set-as-reading-bookmark": "به عنوان نشانک مطالعه من تنظیم شود",
   "share-your-reflection": "نظر خود را در مورد این آیه به اشتراک بگذارید",
+  "show-tajweed-rules": "نمایش قواعد تجوید هنگام خواندن:",
   "study-mode": "حالت مطالعه",
   "surah-beginning": "آغاز سوره",
   "surah-info": "اطلاعات سوره",

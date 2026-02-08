@@ -287,6 +287,7 @@
   "go-to-verse": "Ir al verso",
   "hear-it-pronounced": "Haz clic en las palabras coránicas y escucha la pronunciación",
   "help": "Ayuda",
+  "hide-arabic": "Ocultar árabe",
   "hizb": "Hizb",
   "home": "Inicio",
   "hours": "Horas",
@@ -446,6 +447,7 @@
   "share-quran-description-line-3": "(Bujari 3461)",
   "share-quran-title": "¡Comparte el Corán!",
   "shared": "¡El enlace ha sido copiado al portapapeles!",
+  "show-arabic": "Mostrar árabe",
   "show-more": "Mostrar más",
   "sidebar": {
     "search-hizb": "Buscar Hizb",

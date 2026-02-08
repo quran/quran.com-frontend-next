@@ -84,6 +84,9 @@
     "sign-in-message": "Accedi o registrati gratuitamente per avere accesso a più funzionalità!",
     "title": "Salva i tuoi progressi"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Inizio dell'Hizb",
   "include-translator": "Includere il nome del traduttore?",
   "info": "informazioni",
@@ -205,6 +208,7 @@
   "selected-count": "{{count}} selezionato",
   "set-as-reading-bookmark": "Imposta come segnalibro di lettura",
   "share-your-reflection": "Condividi la tua riflessione su questo ayah",
+  "show-tajweed-rules": "Mostra le regole di Tajweed durante la lettura:",
   "study-mode": "Modalità di studio",
   "surah-beginning": "Inizio di Sura",
   "surah-info": "Informazioni sura",
