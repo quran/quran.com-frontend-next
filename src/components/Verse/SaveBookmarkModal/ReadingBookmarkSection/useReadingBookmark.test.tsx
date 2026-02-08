@@ -13,7 +13,12 @@ import BookmarkType from '@/types/BookmarkType';
 import { getMushafId } from '@/utils/api';
 import * as authApi from '@/utils/auth/api';
 
-let mockReduxState = {
+type MockReduxState = {
+  quranReaderStyles: { quranFont: string; mushafLines: number };
+  guestBookmark: { readingBookmark: unknown };
+};
+
+let mockReduxState: MockReduxState = {
   quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
   guestBookmark: { readingBookmark: null },
 };
@@ -25,12 +30,9 @@ vi.mock('next-translate/useTranslation', () => ({
 
 vi.mock('react-redux', () => ({
   useDispatch: () => vi.fn(),
-  useSelector: vi.fn((selector: any) => {
-    if (typeof selector === 'function') {
-      return selector(mockReduxState);
-    }
-    return selector;
-  }),
+  useSelector: vi.fn(<TSelected,>(selector: (state: MockReduxState) => TSelected) =>
+    selector(mockReduxState),
+  ),
 }));
 
 vi.mock('@/contexts/DataContext', () => ({
@@ -41,11 +43,12 @@ vi.mock('@/contexts/DataContext', () => ({
 }));
 
 vi.mock('@/redux/slices/QuranReader/styles', () => ({
-  selectQuranReaderStyles: (state: any) => state.quranReaderStyles,
+  selectQuranReaderStyles: (state: MockReduxState) => state.quranReaderStyles,
 }));
 
 vi.mock('@/redux/slices/guestBookmark', () => ({
-  selectGuestReadingBookmark: (state: any) => state.guestBookmark?.readingBookmark || null,
+  selectGuestReadingBookmark: (state: MockReduxState) =>
+    state.guestBookmark?.readingBookmark || null,
   setGuestReadingBookmark: vi.fn((payload) => ({ type: 'SET_GUEST_READING_BOOKMARK', payload })),
 }));
 
