@@ -71,6 +71,8 @@ export const EXTERNAL_ROUTES = {
   QURAN_REFLECT_ANDROID:
     'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
   QURAN_REFLECT_IOS: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+  RAMADAN_CHALLENGE_WHATSAPP: 'https://whatsapp.com/channel/0029VbC4nzO7IUYRLY4r2g2f',
+  RAMADAN_CHALLENGE_TELEGRAM: 'https://t.me/+qzJBDj6_2R8xOTA5',
 };
 
 export const QURAN_URL = 'https://quran.com';
