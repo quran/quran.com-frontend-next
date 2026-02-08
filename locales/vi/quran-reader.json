@@ -197,6 +197,9 @@
   "removed-from": "Đã xóa khỏi {{collectionName}}",
   "revelation-order-notice": "Lưu ý: bạn đang đọc Qur'an theo thứ tự mặc khải. <link>Nhấp vào đây</link> để quay lại thứ tự mặc định.",
   "rub-beginning": "Mở đầu Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Bạn muốn lưu nhiều hơn một dấu trang? Hãy sử dụng bộ sưu tập:"
+  },
   "save-page": "Lưu trang {{pageNumber}}",
   "save-pinned-to-collection": "Lưu vào bộ sưu tập",
   "save-to": "Lưu vào...",

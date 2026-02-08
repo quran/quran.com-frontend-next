@@ -197,6 +197,9 @@
   "removed-from": "Verwijderd uit {{collectionName}}",
   "revelation-order-notice": "Let op: je navigeert door de koran op volgorde van openbaring. <link> Klik hier </link> om terug te gaan naar de standaardvolgorde.",
   "rub-beginning": "Begin van Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Meer dan één bladwijzer opslaan? Gebruik collecties:"
+  },
   "save-page": "Pagina opslaan {{pageNumber}}",
   "save-pinned-to-collection": "Opslaan in collectie",
   "save-to": "Opslaan in...",

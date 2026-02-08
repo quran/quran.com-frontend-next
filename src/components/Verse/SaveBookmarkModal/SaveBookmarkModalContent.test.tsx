@@ -5,6 +5,10 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { ReadingBookmarkType } from '@/types/Bookmark';
 
+vi.mock('next-translate/useTranslation', () => ({
+  default: () => ({ t: (k: string) => k, lang: 'en' }),
+}));
+
 vi.mock('./ReadingBookmarkSection', () => ({
   default: (props: any) => (
     <div
@@ -50,7 +54,6 @@ describe('SaveBookmarkModalContent', () => {
         readingBookmarkData={null}
         userIsLoggedIn
         mushafId={1}
-        lang="en"
         mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[{ id: 1, name: 'c1', isDefault: false }] as any}
@@ -65,6 +68,7 @@ describe('SaveBookmarkModalContent', () => {
     const rbs = screen.getByTestId('reading-bookmark-section');
     expect(rbs.getAttribute('data-type')).toBe(ReadingBookmarkType.AYAH);
     expect(rbs.getAttribute('data-verse-key')).toBe('1:1');
+    expect(screen.getByText('save-bookmark-modal.collections-hint')).toBeDefined();
     expect(screen.getByTestId('collections-list')).toBeDefined();
     expect(screen.queryByTestId('guest-sign-in-section')).toBeNull();
   });
@@ -83,7 +87,6 @@ describe('SaveBookmarkModalContent', () => {
         readingBookmarkData={{ id: 'page:42' } as any}
         userIsLoggedIn={false}
         mushafId={1}
-        lang="en"
         mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[]}
@@ -98,6 +101,7 @@ describe('SaveBookmarkModalContent', () => {
     const rbs = screen.getByTestId('reading-bookmark-section');
     expect(rbs.getAttribute('data-type')).toBe(ReadingBookmarkType.PAGE);
     expect(rbs.getAttribute('data-page-number')).toBe('42');
+    expect(screen.queryByText('save-bookmark-modal.collections-hint')).toBeNull();
     expect(screen.queryByTestId('collections-list')).toBeNull();
     expect(screen.queryByTestId('guest-sign-in-section')).toBeNull();
   });
@@ -115,7 +119,6 @@ describe('SaveBookmarkModalContent', () => {
         readingBookmarkData={null}
         userIsLoggedIn={false}
         mushafId={1}
-        lang="en"
         mutateReadingBookmark={async () => null}
         onReadingBookmarkChanged={async () => {}}
         sortedCollections={[]}
@@ -127,6 +130,7 @@ describe('SaveBookmarkModalContent', () => {
         onTakeNote={() => {}}
       />,
     );
+    expect(screen.getByText('save-bookmark-modal.collections-hint')).toBeDefined();
     expect(screen.getByTestId('guest-sign-in-section')).toBeDefined();
   });
 });

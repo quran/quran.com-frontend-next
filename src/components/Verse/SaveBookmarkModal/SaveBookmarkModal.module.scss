@@ -127,6 +127,14 @@ $guestSignInButtonHeight: 33px;
   inline-size: 100%;
 }
 
+.collectionsHint {
+  margin: var(--spacing-small-px);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+}
+
 .guestSectionTitle {
   font-size: var(--font-size-normal-px);
   font-weight: var(--font-weight-medium);

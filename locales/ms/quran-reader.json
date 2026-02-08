@@ -197,6 +197,9 @@
   "removed-from": "Dipadam daripada {{collectionName}}",
   "revelation-order-notice": "Nota: anda sedang menavigasi Al-Quran mengikut urutan wahyu. <link> Klik di sini </link> untuk kembali kepada pesanan lalai.",
   "rub-beginning": "Permulaan Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Menyimpan Lebih daripada satu penanda buku? Gunakan koleksi:"
+  },
   "save-page": "Simpan Halaman {{pageNumber}}",
   "save-pinned-to-collection": "Simpan ke Koleksi",
   "save-to": "Simpan ke...",

@@ -197,6 +197,9 @@
   "removed-from": "Rimosso da {{collectionName}}",
   "revelation-order-notice": "Nota: stai navigando nel Corano secondo l'ordine della rivelazione. <link> Fai clic qui </link> per ripristinare l'ordine predefinito.",
   "rub-beginning": "Inizio del Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Vuoi salvare più di un segnalibro? Usa le raccolte:"
+  },
   "save-page": "Salva pagina {{pageNumber}}",
   "save-pinned-to-collection": "Salva nella raccolta",
   "save-to": "Salvare...",

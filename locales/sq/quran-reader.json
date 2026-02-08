@@ -197,6 +197,9 @@
   "removed-from": "U hoq nga {{collectionName}}",
   "revelation-order-notice": "Shënim: ju jeni duke lundruar në Kuran sipas rendit të shpalljes. <link> Klikoni këtu </link> për t'u kthyer në renditjen e paracaktuar.",
   "rub-beginning": "Fillimi i Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Po ruani më shumë se një faqeshënues? Përdorni koleksionet:"
+  },
   "save-page": "Ruaj faqen {{pageNumber}}",
   "save-pinned-to-collection": "Ruaj në Koleksion",
   "save-to": "Ruaje në...",
