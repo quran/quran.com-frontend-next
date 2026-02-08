@@ -51,13 +51,13 @@
 
 .tajweedHiddenCheckbox {
   position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  margin: -1px;
+  inline-size: var(--spacing-hairline-px);
+  block-size: var(--spacing-hairline-px);
+  margin: calc(-1 * var(--spacing-hairline-px));
   padding: 0;
   border: 0;
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+  clip-path: inset(var(--opacity-50));
   white-space: nowrap;
   overflow: hidden;
 }
