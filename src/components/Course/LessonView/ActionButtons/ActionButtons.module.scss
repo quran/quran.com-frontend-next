@@ -1,3 +1,5 @@
+@use 'src/styles/breakpoints';
+
 .buttonsContainer {
   margin-block-start: var(--spacing-small);
   display: flex;
@@ -11,10 +13,17 @@
   }
 }
 
-.addReflectionButton {
+.secondaryButtonsContainer {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-small-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column-reverse;
+  }
 }
 
 .helpIconContainer {
