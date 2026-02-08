@@ -84,6 +84,9 @@
     "sign-in-message": "¡Inicia sesión o regístrate gratis para obtener acceso a más funciones!",
     "title": "Guarda tu progreso"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Comienzo de Hizb",
   "include-translator": "¿Incluir el nombre del traductor?",
   "info": "información",
@@ -186,6 +189,8 @@
   "reflection-not-available": "No hay reflexiones revisadas para esta aleya",
   "reflections": "Reflexiones",
   "reflections-desc": "Lee y comparte reflexiones coránicas de la aleya {{ayahNumber}} de la sura {{surahName}}",
+  "related-verses": "Versos relacionados",
+  "related-verses-desc": "Lea y comparta versículos de Ayah relacionados con el Corán {{ayahNumber}} de la Sura {{surahName}}",
   "remove-bookmark": "Quitar favorito",
   "remove-my-reading-bookmark": "Eliminar mi marcador de lectura",
   "remove-pinned-verse": "Quitar verso {{verseKey}} desde fijado",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} seleccionado",
   "set-as-reading-bookmark": "Establecer como mi marcador de lectura",
   "share-your-reflection": "Comparte tu reflexión sobre esta aleya",
+  "show-tajweed-rules": "Mostrar las reglas de Tajweed mientras se lee:",
   "study-mode": "Modo de estudio",
   "surah-beginning": "Comienzo de la sura",
   "surah-info": "Información de la sura",

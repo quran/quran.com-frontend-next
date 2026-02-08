@@ -84,6 +84,9 @@
     "sign-in-message": "سجّل الدخول أو اشترك مجاناً للوصول إلى المزيد من الميزات!",
     "title": "احفظ تقدمك"
   },
+  "hadith": {
+    "title": "الحديث"
+  },
   "hizb-beginning": "بداية الحزب",
   "include-translator": "إظهار اسم المترجم؟",
   "info": "معلومات",
@@ -186,6 +189,8 @@
   "reflection-not-available": "لا توجد تدبرات مراجعة لهذه الآية",
   "reflections": "تدبرات",
   "reflections-desc": "اقرأ وشارك تدبرات قرآنية حول الآية {{ayahNumber}} من سورة {{surahName}}",
+  "related-verses": "آيات ذات صلة",
+  "related-verses-desc": "اقرأ وشارك آيات من القرآن الكريم ذات صلة {{ayahNumber}} من سورة {{surahName}}",
   "remove-bookmark": "إزالة ما تم حفظه",
   "remove-my-reading-bookmark": "قم بإزالة إشارة القراءة الخاصة بي",
   "remove-pinned-verse": "إزالة الآية {{verseKey}} من المنشورات المثبتة",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} تم الاختيار",
   "set-as-reading-bookmark": "تم تعيينه كعلامة مرجعية للقراءة",
   "share-your-reflection": "شارك تدبرك لهذه الآية",
+  "show-tajweed-rules": "عرض قواعد التجويد أثناء القراءة:",
   "study-mode": "وضع الدراسة",
   "surah-beginning": "بداية السورة",
   "surah-info": "معلومات عن السورة",

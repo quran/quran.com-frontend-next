@@ -84,6 +84,9 @@
     "sign-in-message": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kayıt olun!",
     "title": "İlerlemenizi Kaydedin"
   },
+  "hadith": {
+    "title": "Hadis"
+  },
   "hizb-beginning": "Hizb'in Başlangıcı",
   "include-translator": "Çevirmen adı dahil edilsin mi?",
   "info": "bilgi",
@@ -186,6 +189,8 @@
   "reflection-not-available": "Bu ayet için gözden geçirilmiş bir yansıma yok",
   "reflections": "Yansımalar",
   "reflections-desc": "{{ayahNumber}} {{surahName}} yansımalarını okuyun ve paylaşın",
+  "related-verses": "İlgili ayetler",
+  "related-verses-desc": "Kur'an ayetleriyle ilgili ayetleri okuyun ve paylaşın. {{ayahNumber}} Surenin {{surahName}}",
   "remove-bookmark": "Yer işaretini kaldır",
   "remove-my-reading-bookmark": "Okuma yer imimi kaldır",
   "remove-pinned-verse": "Ayeti kaldır {{verseKey}} sabitlenmişten",
@@ -205,6 +210,7 @@
   "selected-count": "{{count}} seçildi",
   "set-as-reading-bookmark": "Okuma listem için yer imi olarak ayarla.",
   "share-your-reflection": "Bu ayetle ilgili düşüncenizi paylaşın",
+  "show-tajweed-rules": "Okurken tecvid kurallarını gösterin:",
   "study-mode": "Çalışma modu",
   "surah-beginning": "Surenin Başlangıcı",
   "surah-info": "Sure Bilgileri",
