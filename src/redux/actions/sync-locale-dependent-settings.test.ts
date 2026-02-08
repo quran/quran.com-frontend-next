@@ -1,13 +1,22 @@
 /* eslint-disable react-func/max-lines-per-function */
+import { AnyAction } from '@reduxjs/toolkit';
+import type { Dispatch } from 'redux';
 import { describe, it, expect, vi } from 'vitest';
 
 import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
+import type { RootState } from '@/redux/RootState';
 import {
   setLessonLanguages,
   setReflectionLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { setSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+
+type DeepPartial<T> = T extends Array<infer U>
+  ? Array<DeepPartial<U>>
+  : T extends object
+  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : T;
 
 vi.mock('@/redux/defaultSettings/util', () => ({
   getTranslationsInitialState: (locale: string) => ({
@@ -22,14 +31,14 @@ vi.mock('@/redux/defaultSettings/util', () => ({
   }),
 }));
 
-const runThunk = (state: any, prevLocale: string, nextLocale: string) => {
-  const actions: any[] = [];
-  const dispatch = (action: any) => {
+const runThunk = (state: DeepPartial<RootState>, prevLocale: string, nextLocale: string) => {
+  const actions: AnyAction[] = [];
+  const dispatch: Dispatch<AnyAction> = (action: AnyAction) => {
     actions.push(action);
     return action;
   };
-  const getState = () => state;
-  syncLocaleDependentSettings({ prevLocale, nextLocale })(dispatch as any, getState as any);
+  const getState = () => state as RootState;
+  syncLocaleDependentSettings({ prevLocale, nextLocale })(dispatch, getState);
   return actions;
 };
 
@@ -77,7 +86,7 @@ describe('syncLocaleDependentSettings', () => {
     expect(actions).toEqual([]);
   });
 
-  it('adds the new locale to multi-language selections when missing', () => {
+  it('does not mutate multi-language selections when switching locale', () => {
     const state = {
       translations: { isUsingDefaultTranslations: false },
       tafsirs: { isUsingDefaultTafsirs: false },
@@ -89,10 +98,7 @@ describe('syncLocaleDependentSettings', () => {
 
     const actions = runThunk(state, 'ar', 'en');
 
-    expect(actions).toEqual([
-      setReflectionLanguages(['ar', 'fr', 'en']),
-      setLessonLanguages(['ar', 'fr', 'en']),
-    ]);
+    expect(actions).toEqual([]);
   });
 
   it('does not dispatch changes when multi-language selections already include the new locale', () => {

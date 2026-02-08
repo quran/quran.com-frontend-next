@@ -61,9 +61,11 @@ const LanguageSelector = ({
   const onChange = async (newLocale: string) => {
     if (newLocale === lang) return;
 
-    // Keep locale-dependent content tabs (tafsir, lessons, reflections, etc.) following defaults
-    // unless the user has customized those preferences.
-    dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+    // Guest-only: keep locale-dependent content tabs (tafsir, lessons, reflections, etc.)
+    // following defaults unless the user has customized those preferences.
+    if (!isLoggedIn()) {
+      dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+    }
 
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (isUsingDefaultSettings) {

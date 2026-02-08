@@ -60,9 +60,11 @@ const useLanguageChange = (): UseLanguageChangeReturn => {
     setChangingLocale(newLocale);
 
     try {
-      // Keep locale-dependent content tabs (tafsir, lessons, reflections, etc.) following defaults
-      // unless the user has customized those preferences.
-      dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+      // Guest-only: keep locale-dependent content tabs (tafsir, lessons, reflections, etc.)
+      // following defaults unless the user has customized those preferences.
+      if (!isLoggedIn()) {
+        dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+      }
 
       // Apply default settings of the new locale if user hasn't customized settings
       if (isUsingDefaultSettings) {

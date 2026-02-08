@@ -53,8 +53,8 @@ const syncLocaleDependentSettings =
     }
 
     // Reflections/Lessons language selector semantics:
-    // - Single language matching the current locale => treat as "follow locale" and replace.
-    // - Multiple languages => preserve, but add the new locale if missing.
+    // - Single language matching the previous locale => treat as "follow locale" and replace.
+    // - Multiple languages => treat as customized and preserve (do not auto-append the new locale).
     const { selectedReflectionLanguages, selectedLessonLanguages } = state.readingPreferences;
     const defaultReadingPrefs = getReadingPreferencesInitialState(nextLocale);
 
@@ -64,22 +64,12 @@ const syncLocaleDependentSettings =
         selectedReflectionLanguages[0] === prevLocale
       ) {
         dispatch(setReflectionLanguages(defaultReadingPrefs.selectedReflectionLanguages));
-      } else if (
-        selectedReflectionLanguages.length > 1 &&
-        !selectedReflectionLanguages.includes(nextLocale)
-      ) {
-        dispatch(setReflectionLanguages([...selectedReflectionLanguages, nextLocale]));
       }
     }
 
     if (Array.isArray(selectedLessonLanguages)) {
       if (selectedLessonLanguages.length === 1 && selectedLessonLanguages[0] === prevLocale) {
         dispatch(setLessonLanguages(defaultReadingPrefs.selectedLessonLanguages));
-      } else if (
-        selectedLessonLanguages.length > 1 &&
-        !selectedLessonLanguages.includes(nextLocale)
-      ) {
-        dispatch(setLessonLanguages([...selectedLessonLanguages, nextLocale]));
       }
     }
   };

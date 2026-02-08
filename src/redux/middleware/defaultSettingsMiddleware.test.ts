@@ -1,23 +1,28 @@
+import type { AnyAction, Dispatch, MiddlewareAPI } from 'redux';
 import { describe, it, expect, vi } from 'vitest';
 
 import { RESET_SETTINGS_EVENT } from '@/redux/actions/reset-settings';
 import DefaultSettingsMiddleware from '@/redux/middleware/defaultSettingsMiddleware';
+import { RootState } from '@/redux/RootState';
 import { setIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
 import SliceName from '@/redux/types/SliceName';
 
-const runMiddleware = (action: any) => {
-  const dispatched: any[] = [];
-  const storeAPI = {
-    dispatch: (a: any) => {
-      dispatched.push(a);
-      return a;
-    },
-    getState: () => ({}),
-  } as any;
+const runMiddleware = (action: AnyAction) => {
+  const dispatched: AnyAction[] = [];
 
-  const next = vi.fn((a: any) => a);
+  const dispatch: Dispatch<AnyAction> = (a) => {
+    dispatched.push(a);
+    return a;
+  };
 
-  DefaultSettingsMiddleware(storeAPI)(next as any)(action);
+  const storeAPI: MiddlewareAPI<Dispatch<AnyAction>, RootState> = {
+    dispatch,
+    getState: () => ({} as RootState),
+  };
+
+  const next = vi.fn<(a: AnyAction) => AnyAction>((a) => a);
+
+  DefaultSettingsMiddleware(storeAPI)(next)(action);
 
   return { dispatched, next };
 };

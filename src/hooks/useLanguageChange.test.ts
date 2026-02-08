@@ -1,0 +1,126 @@
+/* eslint-disable react-func/max-lines-per-function */
+import { act } from 'react';
+
+import { renderHook } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { Dispatch } from 'redux';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import useLanguageChange from './useLanguageChange';
+
+import resetSettings from '@/redux/actions/reset-settings';
+import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
+import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import { setLocaleCookie } from '@/utils/cookies';
+import { logValueChange } from '@/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+
+// React expects this flag in non-Jest runners to enable `act()` semantics.
+(globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
+
+// Mocks
+vi.mock('react-redux', () => ({
+  useDispatch: vi.fn(),
+  useSelector: vi.fn(),
+}));
+
+vi.mock('next-translate/useTranslation', () => ({
+  default: () => ({ t: (k: string) => k, lang: 'ar' }),
+}));
+
+vi.mock('next-translate/setLanguage', () => ({
+  default: vi.fn().mockResolvedValue(undefined),
+}));
+
+vi.mock('@/redux/actions/sync-locale-dependent-settings', () => ({
+  default: vi.fn(() => ({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' })),
+}));
+
+vi.mock('@/redux/actions/reset-settings', () => ({
+  default: vi.fn((locale: string) => ({ type: 'RESET_SETTINGS', payload: locale })),
+}));
+
+vi.mock('@/utils/auth/api', () => ({
+  addOrUpdateUserPreference: vi.fn().mockResolvedValue(undefined),
+}));
+
+vi.mock('@/utils/auth/login', () => ({
+  isLoggedIn: vi.fn(),
+}));
+
+vi.mock('@/utils/cookies', () => ({
+  setLocaleCookie: vi.fn(),
+}));
+
+vi.mock('@/utils/eventLogger', () => ({
+  logValueChange: vi.fn(),
+}));
+
+vi.mock('@/dls/Toast/Toast', () => ({
+  ToastStatus: { Warning: 'Warning' },
+  useToast: () => vi.fn(),
+}));
+
+describe('useLanguageChange', () => {
+  const dispatch = vi.fn() as unknown as Dispatch;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(useDispatch).mockReturnValue(dispatch);
+  });
+
+  it('dispatches syncLocaleDependentSettings only for guests', async () => {
+    vi.mocked(isLoggedIn).mockReturnValue(false);
+    vi.mocked(useSelector).mockReturnValue(false); // isUsingDefaultSettings=false
+
+    const { result } = renderHook(() => useLanguageChange());
+
+    await act(async () => {
+      await result.current.onLanguageChange('en');
+    });
+
+    expect(syncLocaleDependentSettings).toHaveBeenCalledWith({
+      prevLocale: 'ar',
+      nextLocale: 'en',
+    });
+    expect(dispatch).toHaveBeenCalledWith({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' });
+    expect(dispatch).not.toHaveBeenCalledWith({ type: 'RESET_SETTINGS', payload: 'en' });
+    expect(addOrUpdateUserPreference).not.toHaveBeenCalled();
+    expect(setLocaleCookie).toHaveBeenCalledWith('en');
+    expect(logValueChange).toHaveBeenCalledWith('locale', 'ar', 'en');
+  });
+
+  it('does not dispatch syncLocaleDependentSettings for logged-in users', async () => {
+    vi.mocked(isLoggedIn).mockReturnValue(true);
+    vi.mocked(useSelector).mockReturnValue(false); // isUsingDefaultSettings=false
+
+    const { result } = renderHook(() => useLanguageChange());
+
+    await act(async () => {
+      await result.current.onLanguageChange('en');
+    });
+
+    expect(syncLocaleDependentSettings).not.toHaveBeenCalled();
+    expect(dispatch).not.toHaveBeenCalledWith({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' });
+    expect(addOrUpdateUserPreference).toHaveBeenCalledWith(
+      PreferenceGroup.LANGUAGE,
+      'en',
+      PreferenceGroup.LANGUAGE,
+    );
+  });
+
+  it('still applies resetSettings when using default settings (independent of login)', async () => {
+    vi.mocked(isLoggedIn).mockReturnValue(true);
+    vi.mocked(useSelector).mockReturnValue(true); // isUsingDefaultSettings=true
+
+    const { result } = renderHook(() => useLanguageChange());
+
+    await act(async () => {
+      await result.current.onLanguageChange('en');
+    });
+
+    expect(resetSettings).toHaveBeenCalledWith('en');
+    expect(dispatch).toHaveBeenCalledWith({ type: 'RESET_SETTINGS', payload: 'en' });
+  });
+});
