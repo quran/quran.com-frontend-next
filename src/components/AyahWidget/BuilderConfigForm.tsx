@@ -17,6 +17,7 @@ import {
 
 import styles from '@/styles/embed.module.scss';
 import type Chapter from '@/types/Chapter';
+import { logValueChange } from '@/utils/eventLogger';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Reciter from 'types/Reciter';
 
@@ -150,13 +151,23 @@ const BuilderConfigForm = ({
    */
   const updateFieldValue = useCallback(
     (field: WidgetFieldConfig, value: string | number | boolean | null): void => {
+      const previousValue = resolveFieldValue(field);
+      if (!Object.is(previousValue, value)) {
+        const normalizedPreviousValue = previousValue === null ? '' : previousValue;
+        const normalizedNextValue = value === null ? '' : value;
+        logValueChange(`embed_builder_${field.id}`, normalizedPreviousValue, normalizedNextValue, {
+          surah: preferences.selectedSurah,
+          ayah: preferences.selectedAyah,
+        });
+      }
+
       formContext.setUserPreferences((prev: Preferences) => {
         if (field.setValue) return field.setValue(value, prev, formContext);
         if (!field.preferenceKey) return prev;
         return { ...prev, [field.preferenceKey]: value } as Preferences;
       });
     },
-    [formContext],
+    [formContext, preferences.selectedAyah, preferences.selectedSurah, resolveFieldValue],
   );
 
   /**

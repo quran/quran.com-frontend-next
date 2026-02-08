@@ -138,6 +138,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
           href={verseUrl}
           target="_blank"
           rel="noopener noreferrer"
+          data-open-verse-link="header-icon"
           style={{
             ...ICON_BUTTON_STYLE(colors),
             textDecoration: 'none',
@@ -203,6 +204,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
             href={verseUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-open-verse-link="header-link"
             style={{
               fontSize: 'var(--widget-header-link-size, 13px)',
               color: colors.secondaryText,
