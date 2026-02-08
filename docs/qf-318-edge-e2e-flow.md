@@ -236,6 +236,8 @@ Reports are written to `test-results/qf-318-real-world/`.
   - `tests/integration/qf-318-edge/edge-ssr-prefs-applied.spec.ts`
 - No user identity leakage on public pages:
   - `tests/integration/qf-318-edge/edge-public-no-user-leak.spec.ts`
+- Full technical branch matrix (cache-key semantics + bypass/redirect rules):
+  - `tests/integration/qf-318-edge/edge-technical-matrix.spec.ts`
 
 ### Production product smoke (mutating + cleanup)
 

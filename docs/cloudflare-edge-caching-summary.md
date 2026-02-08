@@ -811,6 +811,7 @@ HEADLESS=1 RUNS=1 URLS='https://ssr.quran.com/ https://ssr.quran.com/vi' node sc
 | Private isolation                | `tests/integration/qf-318-edge/edge-private-cache-key.spec.ts`                 |
 | SSR prefs applied                | `tests/integration/qf-318-edge/edge-ssr-prefs-applied.spec.ts`                 |
 | No user identity leak            | `tests/integration/qf-318-edge/edge-public-no-user-leak.spec.ts`               |
+| Edge technical branch matrix     | `tests/integration/qf-318-edge/edge-technical-matrix.spec.ts`                  |
 
 ---
 
