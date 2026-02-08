@@ -189,6 +189,8 @@
   "reflection-not-available": "اس آیت کے لئے کوئی جائزہ شدہ تدبرات نہیں ہیں۔",
   "reflections": "تدبرات",
   "reflections-desc": "سورہ {{surahName}} سورہ {{ayahNumber}} کے قرآنی تدبرات پڑھیں اور شیئر کریں",
+  "related-verses": "متعلقہ آیات",
+  "related-verses-desc": "آیات سے متعلق قرآنی آیات پڑھیں اور شئیر کریں۔ {{ayahNumber}} سورہ کا {{surahName}}",
   "remove-bookmark": "بک مارک کو ہٹا دیں۔",
   "remove-my-reading-bookmark": "میرا ریڈنگ بک مارک ہٹا دیں",
   "remove-pinned-verse": "پِن کی گئی فہرست سے آیت {{verseKey}} کو ہٹا دیں",

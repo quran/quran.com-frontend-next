@@ -17,6 +17,7 @@ type Props = {
 };
 
 type FooterAction = {
+  key: 'tafsirs' | 'lessons' | 'reflections' | 'answers';
   label: string;
   href: string;
   icon: JSX.Element;
@@ -54,22 +55,26 @@ const WidgetFooterActions = ({ verse, options, colors, children }: Props): JSX.E
 
   const actions = [
     options.showTafsirs && {
+      key: 'tafsirs',
       label: options.labels?.tafsirs || 'Tafsirs',
       href: `${baseUrl}/tafsirs/169`,
       icon: <BookIcon style={ICON_STYLE} />,
     },
     options.showLessons && {
+      key: 'lessons',
       label: options.labels?.lessons || 'Lessons',
       href: `${baseUrl}/lessons`,
       icon: <GraduationCapIcon style={ICON_STYLE} />,
     },
     options.showReflections && {
+      key: 'reflections',
       label: options.labels?.reflections || 'Reflections',
       href: `${baseUrl}/reflections`,
       icon: <ChatIcon style={ICON_STYLE} />,
     },
     options.showAnswers &&
       options.hasAnswers && {
+        key: 'answers',
         label: options.labels?.answers || 'Answers',
         href: `${baseUrl}/answers`,
         icon: options.isClarificationQuestion ? (
@@ -104,10 +109,11 @@ const WidgetFooterActions = ({ verse, options, colors, children }: Props): JSX.E
         >
           {actions.map((action) => (
             <a
-              key={action.label}
+              key={action.key}
               href={action.href}
               target="_blank"
               rel="noopener noreferrer"
+              data-widget-footer-action={action.key}
               style={BUTTON_BASE_STYLE(colors)}
               dir={isRtl ? 'rtl' : 'ltr'}
             >

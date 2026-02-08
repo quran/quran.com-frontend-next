@@ -189,6 +189,8 @@
   "reflection-not-available": "هیچ بازتاب بررسی شده ای برای این آیه وجود ندارد",
   "reflections": "بازتاب‌ها",
   "reflections-desc": "آیات {{ayahNumber}} سوره {{surahName}} را بخوانید و به اشتراک بگذارید.",
+  "related-verses": "آیات مرتبط",
+  "related-verses-desc": "آیات مربوط به قرآن را بخوانید و به اشتراک بگذارید {{ayahNumber}} سوره {{surahName}}",
   "remove-bookmark": "حذف نشانک",
   "remove-my-reading-bookmark": "نشانک مطالعه من را حذف کنید",
   "remove-pinned-verse": "آیه را حذف کنید {{verseKey}} از پین شده",

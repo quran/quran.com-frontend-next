@@ -189,6 +189,8 @@
   "reflection-not-available": "Tidak ada refleksi yang ditinjau untuk ayat ini",
   "reflections": "Refleksi",
   "reflections-desc": "Baca dan bagikan renungan dari Ayat {{ayahNumber}} Surah {{SurahName}}",
+  "related-verses": "Ayat-ayat terkait",
+  "related-verses-desc": "Bacalah dan bagikan ayat-ayat Al-Quran yang berkaitan dengan Ayat. {{ayahNumber}} dari Surah {{surahName}}",
   "remove-bookmark": "Hapus Penanda",
   "remove-my-reading-bookmark": "Hapus Bookmark Bacaan Saya",
   "remove-pinned-verse": "Hapus ayat {{verseKey}} dari yang disematkan",

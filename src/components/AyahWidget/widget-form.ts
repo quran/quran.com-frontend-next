@@ -14,7 +14,7 @@ import type {
 } from './widget-types';
 
 import type Chapter from '@/types/Chapter';
-import { getLocaleName } from '@/utils/locale';
+import { toLocalizedNumber, getLocaleName } from '@/utils/locale';
 import type AvailableTranslation from 'types/AvailableTranslation';
 import type Reciter from 'types/Reciter';
 
@@ -61,6 +61,7 @@ export type WidgetFormBlock =
  */
 export type WidgetFormContext = {
   t: (key: string, params?: Record<string, unknown>) => string;
+  uiLocale: string;
   preferences: Preferences;
   setUserPreferences: SetState<Preferences>;
   surahs: Chapter[];
@@ -139,12 +140,14 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
     labelKey: 'fields.surah',
     controlId: 'surah-select',
     preferenceKey: 'selectedSurah',
-    options: ({ surahs }) =>
+    options: ({ surahs, uiLocale }) =>
       surahs.length
         ? {
             items: surahs.map((surah: Chapter) => ({
               value: Number(surah.id),
-              label: `${Number(surah.id)}. ${surah.transliteratedName}`,
+              label: `${toLocalizedNumber(Number(surah.id), uiLocale)}. ${
+                surah.transliteratedName
+              }`,
             })),
           }
         : {
@@ -165,9 +168,14 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
     labelKey: 'fields.ayah',
     controlId: 'ayah-select',
     preferenceKey: 'selectedAyah',
-    options: ({ verseOptions }) =>
+    options: ({ verseOptions, uiLocale }) =>
       verseOptions.length
-        ? { items: verseOptions.map((ayah: number) => ({ value: ayah, label: String(ayah) })) }
+        ? {
+            items: verseOptions.map((ayah: number) => ({
+              value: ayah,
+              label: toLocalizedNumber(ayah, uiLocale),
+            })),
+          }
         : {
             items: [{ value: '', labelKey: 'states.loadingVerses', disabled: true }],
             valueOverride: '',
@@ -201,8 +209,11 @@ export const WIDGET_FIELDS: Record<string, WidgetFieldConfig> = {
     labelKey: 'fields.ayah',
     controlId: 'range-end-select',
     preferenceKey: 'rangeEnd',
-    options: ({ rangeMeta }) => ({
-      items: rangeMeta.rangeOptions.map((ayah: number) => ({ value: ayah, label: String(ayah) })),
+    options: ({ rangeMeta, uiLocale }) => ({
+      items: rangeMeta.rangeOptions.map((ayah: number) => ({
+        value: ayah,
+        label: toLocalizedNumber(ayah, uiLocale),
+      })),
     }),
     parseValue: (raw) => Number(raw),
     isVisible: (preferences, { rangeMeta }) =>

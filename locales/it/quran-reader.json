@@ -189,6 +189,8 @@
   "reflection-not-available": "Non ci sono riflessioni riviste per questo ayah",
   "reflections": "Riflessioni",
   "reflections-desc": "Leggi e condividi le riflessioni coraniche di Ayah {{ayahNumber}} di Sura {{surahName}}",
+  "related-verses": "Versetti correlati",
+  "related-verses-desc": "Leggi e condividi i versetti del Corano correlati all'Ayah {{ayahNumber}} della Sura {{surahName}}",
   "remove-bookmark": "Rimuovi segnalibro",
   "remove-my-reading-bookmark": "Rimuovi il mio segnalibro di lettura",
   "remove-pinned-verse": "Rimuovi il verso {{verseKey}} da appuntato",

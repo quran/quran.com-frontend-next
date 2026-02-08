@@ -189,6 +189,8 @@
   "reflection-not-available": "No hay reflexiones revisadas para esta aleya",
   "reflections": "Reflexiones",
   "reflections-desc": "Lee y comparte reflexiones coránicas de la aleya {{ayahNumber}} de la sura {{surahName}}",
+  "related-verses": "Versos relacionados",
+  "related-verses-desc": "Lea y comparta versículos de Ayah relacionados con el Corán {{ayahNumber}} de la Sura {{surahName}}",
   "remove-bookmark": "Quitar favorito",
   "remove-my-reading-bookmark": "Eliminar mi marcador de lectura",
   "remove-pinned-verse": "Quitar verso {{verseKey}} desde fijado",

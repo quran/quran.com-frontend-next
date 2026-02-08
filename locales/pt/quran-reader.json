@@ -189,6 +189,8 @@
   "reflection-not-available": "Não há reflexões revisadas para este ayah",
   "reflections": "Reflexões",
   "reflections-desc": "Leia e compartilhe reflexões corânicas de Ayah {{ayahNumber}} da Surata {{surahName}}",
+  "related-verses": "Versículos relacionados",
+  "related-verses-desc": "Leia e compartilhe versículos do Alcorão relacionados ao versículo Ayah. {{ayahNumber}} da Surata {{surahName}}",
   "remove-bookmark": "Remover favorito",
   "remove-my-reading-bookmark": "Remover meu marcador de leitura",
   "remove-pinned-verse": "Remover verso {{verseKey}} de fixado",

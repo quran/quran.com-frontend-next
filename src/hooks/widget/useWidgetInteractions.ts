@@ -1,8 +1,10 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import type { WidgetOptions } from '@/types/Embed';
+import { logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const WIDGET_ROOT_SELECTOR = '.quran-widget';
@@ -112,8 +114,8 @@ const buildCopyText = (root: HTMLElement, options: WidgetOptions): string => {
           }
         });
       }
-    } catch {
-      // Fallback: if JSON parsing fails, return just header and URL
+    } catch (error) {
+      logErrorToSentry(error as Error);
     }
   }
 
@@ -128,8 +130,30 @@ const buildCopyText = (root: HTMLElement, options: WidgetOptions): string => {
  * @param {WidgetOptions} options - The widget options.
  */
 const useWidgetInteractions = (options?: WidgetOptions): void => {
+  const hasLoggedViewRef = useRef<boolean>(false);
+
   useEffect(() => {
     if (!options) return undefined;
+
+    if (!hasLoggedViewRef.current) {
+      logEvent('embed_widget_view', {
+        ayah: options.ayah,
+        rangeEnd: options.rangeEnd,
+        locale: options.locale,
+        theme: options.theme,
+        mushaf: options.mushaf,
+        enableAudio: options.enableAudio,
+        enableWbw: options.enableWbw,
+        enableWbwTransliteration: options.enableWbwTransliteration,
+        showArabic: options.showArabic,
+        showTafsirs: options.showTafsirs,
+        showReflections: options.showReflections,
+        showLessons: options.showLessons,
+        showAnswers: options.showAnswers,
+        mergeVerses: options.mergeVerses,
+      });
+      hasLoggedViewRef.current = true;
+    }
 
     const widgetRoot = document.querySelector(WIDGET_ROOT_SELECTOR) as HTMLElement | null;
     if (!widgetRoot) return undefined;
@@ -140,6 +164,49 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
     const audioElement = widgetRoot.querySelector(
       '[data-audio-element]',
     ) as HTMLAudioElement | null;
+    const openVerseLinks = widgetRoot.querySelectorAll<HTMLAnchorElement>('[data-open-verse-link]');
+    const footerActionLinks = widgetRoot.querySelectorAll<HTMLAnchorElement>(
+      '[data-widget-footer-action]',
+    );
+
+    const buildCommonEventParams = () => ({
+      ayah: options.ayah,
+      rangeEnd: options.rangeEnd,
+      locale: options.locale,
+      theme: options.theme,
+      mushaf: options.mushaf,
+      enableAudio: options.enableAudio,
+      enableWbw: options.enableWbw,
+      enableWbwTransliteration: options.enableWbwTransliteration,
+      showArabic: options.showArabic,
+      showTafsirs: options.showTafsirs,
+      showReflections: options.showReflections,
+      showLessons: options.showLessons,
+      showAnswers: options.showAnswers,
+      mergeVerses: options.mergeVerses,
+    });
+
+    const logWidgetEvent = (eventName: string, eventParams: Record<string, unknown> = {}) => {
+      logEvent(eventName, {
+        ...buildCommonEventParams(),
+        ...eventParams,
+      });
+    };
+
+    const getFooterActionEventName = (footerAction: string): string | null => {
+      switch (footerAction) {
+        case 'tafsirs':
+          return 'embed_tafsirs_clicked';
+        case 'lessons':
+          return 'embed_lessons_clicked';
+        case 'reflections':
+          return 'embed_reflections_clicked';
+        case 'answers':
+          return 'embed_answers_clicked';
+        default:
+          return null;
+      }
+    };
 
     const writeClipboard = async (text: string) => {
       if (!navigator.clipboard?.writeText) return;
@@ -149,21 +216,87 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
     const handleCopy = async () => {
       try {
         await writeClipboard(buildCopyText(widgetRoot, options));
-      } catch {
-        // ignore
+        logWidgetEvent('embed_copy_text_clicked');
+      } catch (error) {
+        logErrorToSentry(error as Error);
       }
     };
 
     const handleShare = async () => {
       try {
         await writeClipboard(buildVerseUrl(options));
-      } catch {
-        // ignore
+        logWidgetEvent('embed_copy_link_clicked');
+      } catch (error) {
+        logErrorToSentry(error as Error);
+      }
+    };
+
+    const handleOpenVerse = (event: Event) => {
+      const target = event.currentTarget as HTMLAnchorElement | null;
+      logWidgetEvent('embed_open_verse_clicked', {
+        location: target?.dataset.openVerseLink || 'unknown',
+        href: target?.href,
+      });
+    };
+
+    const handleFooterAction = (event: Event) => {
+      const target = event.currentTarget as HTMLAnchorElement | null;
+      const footerAction = target?.dataset.widgetFooterAction;
+      if (!footerAction) return;
+      const footerActionEventName = getFooterActionEventName(footerAction);
+      if (!footerActionEventName) return;
+
+      logWidgetEvent(footerActionEventName, {
+        footerAction,
+        href: target.href,
+      });
+    };
+
+    const handleContentClick = (event: Event) => {
+      const { target } = event;
+      if (!(target instanceof Element)) return;
+
+      const alreadyTrackedTarget = target.closest(
+        '[data-copy-verse], [data-share-verse], [data-audio-button], [data-open-verse-link], [data-widget-footer-action]',
+      );
+      if (alreadyTrackedTarget) return;
+
+      const wordLocation = target
+        .closest('[data-word-location]')
+        ?.getAttribute('data-word-location');
+      if (wordLocation) {
+        logWidgetEvent('embed_word_clicked', { wordLocation });
+        return;
+      }
+
+      const verseBlock = target.closest('[data-verse-block]');
+      const isTranslationTarget = Boolean(target.closest('[class*="translation-font-size-"]'));
+
+      if (verseBlock) {
+        const verseKey = verseBlock.getAttribute('data-verse-key') || undefined;
+        const verseNumber = Number(verseBlock.getAttribute('data-verse-number') || 0) || undefined;
+        logWidgetEvent(
+          isTranslationTarget ? 'embed_translation_clicked' : 'embed_verse_block_clicked',
+          {
+            verseKey,
+            verseNumber,
+          },
+        );
+        return;
+      }
+
+      if (target.closest('[data-merged-verses]')) {
+        logWidgetEvent(
+          isTranslationTarget ? 'embed_merged_translation_clicked' : 'embed_merged_content_clicked',
+        );
       }
     };
 
     copyButton?.addEventListener('click', handleCopy);
     shareButton?.addEventListener('click', handleShare);
+    openVerseLinks.forEach((link) => link.addEventListener('click', handleOpenVerse));
+    footerActionLinks.forEach((link) => link.addEventListener('click', handleFooterAction));
+    widgetRoot.addEventListener('click', handleContentClick);
 
     let cleanupAudio: (() => void) | null = null;
 
@@ -188,11 +321,13 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
           if (audioStart) resetToStart();
           try {
             await audioElement.play();
-          } catch {
-            // ignore autoplay restrictions
+            logWidgetEvent('embed_audio_played');
+          } catch (error) {
+            logErrorToSentry(error as Error);
           }
         } else {
           audioElement.pause();
+          logWidgetEvent('embed_audio_paused');
         }
       };
 
@@ -206,12 +341,16 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
 
       const handlePlay = () => setPlayingUi(true);
       const handlePause = () => setPlayingUi(false);
+      const handleEnded = () => {
+        setPlayingUi(false);
+        logWidgetEvent('embed_audio_ended');
+      };
 
       audioButton.addEventListener('click', handleToggle);
       audioElement.addEventListener('timeupdate', handleTimeUpdate);
       audioElement.addEventListener('play', handlePlay);
       audioElement.addEventListener('pause', handlePause);
-      audioElement.addEventListener('ended', handlePause);
+      audioElement.addEventListener('ended', handleEnded);
 
       setPlayingUi(!audioElement.paused);
 
@@ -220,13 +359,16 @@ const useWidgetInteractions = (options?: WidgetOptions): void => {
         audioElement.removeEventListener('timeupdate', handleTimeUpdate);
         audioElement.removeEventListener('play', handlePlay);
         audioElement.removeEventListener('pause', handlePause);
-        audioElement.removeEventListener('ended', handlePause);
+        audioElement.removeEventListener('ended', handleEnded);
       };
     }
 
     return () => {
       copyButton?.removeEventListener('click', handleCopy);
       shareButton?.removeEventListener('click', handleShare);
+      openVerseLinks.forEach((link) => link.removeEventListener('click', handleOpenVerse));
+      footerActionLinks.forEach((link) => link.removeEventListener('click', handleFooterAction));
+      widgetRoot.removeEventListener('click', handleContentClick);
       cleanupAudio?.();
     };
   }, [options]);

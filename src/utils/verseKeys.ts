@@ -8,7 +8,12 @@ import ChaptersData from '@/types/ChaptersData';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
-import { toLocalizedVerseKey } from '@/utils/locale';
+import {
+  isRTLLocale,
+  toLocalizedNumber,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 
 /**
  * Generate the verse keys between two verse keys.
@@ -230,14 +235,20 @@ export const readableVerseRangeKeys = (
       const chapterData = getChapterData(chaptersData, from.chapter.toString());
       if (!chapterData) return null;
 
-      const chapterName = chapterData.transliteratedName;
-      const titleForm = `${chapterName} ${toLocalizedVerseKey(from.verseKey, lang)}`;
+      const localizedVerseKey = (verseKey: string) =>
+        isRTLLocale(lang)
+          ? toLocalizedVerseKeyRTL(verseKey, lang)
+          : toLocalizedVerseKey(verseKey, lang);
 
-      if (from.chapter === to.chapter && from.verse === to.verse) {
-        return titleForm;
+      const chapterName = chapterData.transliteratedName;
+      const titleForm = `${chapterName} ${localizedVerseKey(from.verseKey)}`;
+
+      if (from.chapter === to.chapter) {
+        if (from.verse === to.verse) return titleForm;
+        return `${titleForm}-${toLocalizedNumber(to.verse, lang)}`;
       }
 
-      return `${titleForm}-${toLocalizedVerseKey(to.verseKey, lang)}`;
+      return `${titleForm}-${localizedVerseKey(to.verseKey)}`;
     })
     .filter((title): title is string => title !== null);
 };

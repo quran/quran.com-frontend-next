@@ -175,6 +175,18 @@ Client-side interactions are handled by `src/hooks/widget/useWidgetInteractions.
 - **Copy**: Copies formatted text (Arabic + translation + URL) to clipboard
 - **Share**: Copies the quran.com URL to clipboard
 - **Audio**: Toggle play/pause with time clamping for verse segments
+- **Analytics**: Emits explicit interaction events: `embed_copy_text_clicked`,
+  `embed_copy_link_clicked`, `embed_open_verse_clicked`, `embed_tafsirs_clicked`,
+  `embed_lessons_clicked`, `embed_reflections_clicked`, `embed_answers_clicked`,
+  `embed_audio_played`, `embed_audio_paused`, `embed_audio_ended`, `embed_word_clicked`,
+  `embed_translation_clicked`, `embed_verse_block_clicked`, `embed_merged_translation_clicked`,
+  `embed_merged_content_clicked`
+
+## Analytics queries
+
+For ClickHouse query templates and coverage mapping, see:
+
+- `docs/embed-widget-analytics-clickhouse.md`
 
 ## Fonts and mushaf system
 

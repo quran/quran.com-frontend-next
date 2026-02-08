@@ -189,6 +189,8 @@
   "reflection-not-available": "Bu ayet için gözden geçirilmiş bir yansıma yok",
   "reflections": "Yansımalar",
   "reflections-desc": "{{ayahNumber}} {{surahName}} yansımalarını okuyun ve paylaşın",
+  "related-verses": "İlgili ayetler",
+  "related-verses-desc": "Kur'an ayetleriyle ilgili ayetleri okuyun ve paylaşın. {{ayahNumber}} Surenin {{surahName}}",
   "remove-bookmark": "Yer işaretini kaldır",
   "remove-my-reading-bookmark": "Okuma yer imimi kaldır",
   "remove-pinned-verse": "Ayeti kaldır {{verseKey}} sabitlenmişten",

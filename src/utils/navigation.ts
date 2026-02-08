@@ -71,6 +71,8 @@ export const EXTERNAL_ROUTES = {
   QURAN_REFLECT_ANDROID:
     'https://play.google.com/store/apps/details?id=com.quranreflect.quranreflect&hl=en',
   QURAN_REFLECT_IOS: 'https://apps.apple.com/us/app/quranreflect/id1444969758',
+  RAMADAN_CHALLENGE_WHATSAPP: 'https://whatsapp.com/channel/0029VbC4nzO7IUYRLY4r2g2f',
+  RAMADAN_CHALLENGE_TELEGRAM: 'https://t.me/+qzJBDj6_2R8xOTA5',
 };
 
 export const QURAN_URL = 'https://quran.com';
@@ -236,8 +238,8 @@ export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${ve
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseRelatedVerseNavigationUrl = (verseKey: string): string =>
-  `/${verseKey}/related-verse`;
+export const getVerseRelatedVersesNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/related-verses`;
 
 /**
  * Get the href link to Qiraat of Ayah.
@@ -409,10 +411,11 @@ export const getSearchQueryNavigationUrl = (query?: string): string => {
  * Get the href link to the info page of a Surah.
  *
  * @param {string} chapterIdOrSlug
+ * @param {string} resourceId
  * @returns {string} chapterUrl
  */
-export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
-  `/surah/${chapterIdOrSlug}/info`;
+export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string, resourceId?: string): string =>
+  `/surah/${chapterIdOrSlug}/info${resourceId ? `/${resourceId}` : ''}`;
 
 /**
  * Get href link to the reciter page

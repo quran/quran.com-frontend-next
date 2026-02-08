@@ -189,6 +189,8 @@
   "reflection-not-available": "لا توجد تدبرات مراجعة لهذه الآية",
   "reflections": "تدبرات",
   "reflections-desc": "اقرأ وشارك تدبرات قرآنية حول الآية {{ayahNumber}} من سورة {{surahName}}",
+  "related-verses": "آيات ذات صلة",
+  "related-verses-desc": "اقرأ وشارك آيات من القرآن الكريم ذات صلة {{ayahNumber}} من سورة {{surahName}}",
   "remove-bookmark": "إزالة ما تم حفظه",
   "remove-my-reading-bookmark": "قم بإزالة إشارة القراءة الخاصة بي",
   "remove-pinned-verse": "إزالة الآية {{verseKey}} من المنشورات المثبتة",

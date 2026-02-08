@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useEffect, useMemo, useRef, useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWRInfinite from 'swr/infinite';
+import useSWRImmutable from 'swr/immutable';
 
 import { studyModeTabStyles as parentStyles, useStudyModeTabScroll } from '../StudyModeTabLayout';
 
@@ -28,36 +28,51 @@ const StudyModeRelatedVersesTab: React.FC<StudyModeRelatedVersesTabProps> = ({
   const sentinelRef = useRef<HTMLDivElement>(null);
   const verseKey = `${chapterId}:${verseNumber}`;
 
-  const getKey = (pageIndex: number, previousPageData: RelatedVersesResponse | null) => {
-    if (previousPageData && !previousPageData.pagination?.nextPage) return null;
-    const page = pageIndex + 1;
-    return makeRelatedVersesByKeyUrl(verseKey, lang, page);
-  };
+  // Track additional pages loaded
+  const [additionalPages, setAdditionalPages] = useState<RelatedVersesResponse[]>([]);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const { data, size, setSize, isValidating, error } = useSWRInfinite<RelatedVersesResponse>(
-    getKey,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      revalidateFirstPage: false,
-    },
-  );
+  // Use useSWRImmutable for the first page to benefit from SSR fallback
+  const firstPageUrl = makeRelatedVersesByKeyUrl(verseKey, lang, 1);
+  const {
+    data: firstPageData,
+    error,
+    isValidating,
+  } = useSWRImmutable<RelatedVersesResponse>(firstPageUrl, fetcher);
+
+  // Combine first page with additional pages
+  const allPageData = useMemo(() => {
+    if (!firstPageData) return [];
+    return [firstPageData, ...additionalPages];
+  }, [firstPageData, additionalPages]);
 
   const relatedVerses = useMemo(() => {
-    if (!data) return [];
-    return data.flatMap((page) => page.relatedVerses || []);
-  }, [data]);
+    return allPageData.flatMap((page) => page.relatedVerses || []);
+  }, [allPageData]);
 
-  const lastPageData = data?.[data.length - 1];
+  const lastPageData = allPageData[allPageData.length - 1];
   const hasNextPage = !!lastPageData?.pagination?.nextPage;
-  const isLoadingInitial = !data && isValidating;
-  const isLoadingMore = size > 0 && data && typeof data[size - 1] === 'undefined' && isValidating;
+  const isLoadingInitial = !firstPageData && isValidating;
 
-  const loadMore = useCallback(() => {
-    if (!hasNextPage || isValidating) return;
-    setSize(size + 1);
-  }, [hasNextPage, isValidating, setSize, size]);
+  const loadMore = useCallback(async () => {
+    if (!hasNextPage || isLoadingMore) return;
+
+    const nextPage = allPageData.length + 1;
+    const nextPageUrl = makeRelatedVersesByKeyUrl(verseKey, lang, nextPage);
+
+    setIsLoadingMore(true);
+    try {
+      const data = await fetcher(nextPageUrl);
+      setAdditionalPages((prev) => [...prev, data as RelatedVersesResponse]);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [hasNextPage, isLoadingMore, allPageData.length, verseKey, lang]);
+
+  // Reset additional pages when verse changes
+  useEffect(() => {
+    setAdditionalPages([]);
+  }, [verseKey]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;

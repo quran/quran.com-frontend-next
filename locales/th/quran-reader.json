@@ -189,6 +189,8 @@
   "reflection-not-available": "ยังไม่มีการทบทวนบทเรียนสำหรับอายะห์นี้",
   "reflections": "การสะท้อน",
   "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอาน อายะห์ที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
+  "related-verses": "ข้อพระคัมภ์ที่เกี่ยวข้อง",
+  "related-verses-desc": "อ่านและแบ่งปันโองการต่างๆ จากอัลกุรอานที่เกี่ยวข้องกับอายะห์ {{ayahNumber}} ของซูเราะห์ {{surahName}}",
   "remove-bookmark": "ลบบุ๊คมาร์ก",
   "remove-my-reading-bookmark": "ลบที่คั่นหนังสือของฉันออก",
   "remove-pinned-verse": "ลบข้อความ {{verseKey}} จากที่ปักหมุดไว้",

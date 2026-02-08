@@ -189,6 +189,8 @@
   "reflection-not-available": "ለዚህ አያህ የተገመገሙ አስተያየቶች የሉም",
   "reflections": "ነጸብራቆች",
   "reflections-desc": "የሱራህ {{surahName}} የአያህን {{ayahNumber}} የቁርዓን አንቀጾች አንብብና አጋራ",
+  "related-verses": "ተዛማጅ ጥቅሶች",
+  "related-verses-desc": "ከቁርዓን ጋር የተያያዙ የአያህ አንቀጾችን ያንብቡ እና ያጋሩ {{ayahNumber}} የሱራህ {{surahName}}",
   "remove-bookmark": "ዕልባት አስወግድ",
   "remove-my-reading-bookmark": "የንባብ ዕልቤን አስወግድ",
   "remove-pinned-verse": "ጥቅስ አስወግድ {{verseKey}} ከተሰካ",

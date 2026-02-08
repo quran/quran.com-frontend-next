@@ -189,6 +189,8 @@
   "reflection-not-available": "Er zijn geen beoordeelde reflecties voor deze ayah",
   "reflections": "Reflecties",
   "reflections-desc": "Lees en deel Koran reflecties van Ayah {{ayahNumber}} van Surah {{surahName}}",
+  "related-verses": "Verwante verzen",
+  "related-verses-desc": "Lees en deel koranverzen van Ayah {{ayahNumber}} van Soera {{surahName}}",
   "remove-bookmark": "Bladwijzer verwijderen",
   "remove-my-reading-bookmark": "Mijn leesbladwijzer verwijderen",
   "remove-pinned-verse": "Verwijder vers {{verseKey}} van vastgepind",

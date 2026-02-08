@@ -189,6 +189,8 @@
   "reflection-not-available": "Для этого аята нет проверенных размышлений",
   "reflections": "Размышления",
   "reflections-desc": "Читайте и делитесь размышлениями Корана об {{ayahNumber}} суры {{surahName}}",
+  "related-verses": "Связанные стихи",
+  "related-verses-desc": "Читайте и делитесь аятами из Корана, относящимися к данной теме. {{ayahNumber}} из суры {{surahName}}",
   "remove-bookmark": "Удалить закладку",
   "remove-my-reading-bookmark": "Удалить мою закладку для чтения",
   "remove-pinned-verse": "Удалить стих {{verseKey}} из приколотого",

@@ -271,12 +271,16 @@ export const getTafsirs = async (language: string): Promise<TafsirsResponse> =>
  *
  * @param {string} chapterId
  * @param {string} language
+ * @param {object} options optional parameters.
+ * @param {string | number} options.resourceId filter by resource id or slug.
+ * @param {boolean} options.includeResources include resources array in response.
  * @returns {Promise<ChapterInfoResponse>}
  */
 export const getChapterInfo = async (
   chapterId: string,
   language: string,
-): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language));
+  options?: { resourceId?: string | number; includeResources?: boolean },
+): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language, options));
 
 /**
  * Get chapter metadata including suggestions and next/previous summaries.
