@@ -49,8 +49,10 @@ const DefaultSettingsMiddleware: Middleware<
   (next: Dispatch<AnyAction>) =>
   (action: AnyAction) => {
     const { type } = action;
+    const shouldSkipDefaultSettings =
+      action?.meta?.skipDefaultSettings === true || action?.meta?.skipDefaultSettings === 'true';
     // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
-    if (OBSERVED_ACTIONS.includes(type)) {
+    if (OBSERVED_ACTIONS.includes(type) && !shouldSkipDefaultSettings) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
     } else if (type === RESET_SETTINGS_EVENT) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });

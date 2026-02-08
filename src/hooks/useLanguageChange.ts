@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import resetSettings from '@/redux/actions/reset-settings';
+import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -59,6 +60,10 @@ const useLanguageChange = (): UseLanguageChangeReturn => {
     setChangingLocale(newLocale);
 
     try {
+      // Keep locale-dependent content tabs (tafsir, lessons, reflections, etc.) following defaults
+      // unless the user has customized those preferences.
+      dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+
       // Apply default settings of the new locale if user hasn't customized settings
       if (isUsingDefaultSettings) {
         dispatch(resetSettings(newLocale));

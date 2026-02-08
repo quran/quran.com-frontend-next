@@ -14,6 +14,7 @@ import styles from './LanguageSelector.module.scss';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import GlobeIcon from '@/icons/globe.svg';
 import resetSettings from '@/redux/actions/reset-settings';
+import syncLocaleDependentSettings from '@/redux/actions/sync-locale-dependent-settings';
 import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -58,6 +59,12 @@ const LanguageSelector = ({
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
+    if (newLocale === lang) return;
+
+    // Keep locale-dependent content tabs (tafsir, lessons, reflections, etc.) following defaults
+    // unless the user has customized those preferences.
+    dispatch(syncLocaleDependentSettings({ prevLocale: lang, nextLocale: newLocale }));
+
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
