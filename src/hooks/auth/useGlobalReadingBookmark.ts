@@ -59,7 +59,7 @@ const useGlobalReadingBookmark = (mushafId: number): UseGlobalReadingBookmarkRet
   // Generate cache key with user ID to isolate data between users.
   // If userId is undefined (e.g., during auth state transitions),
   // use null as the cache key to prevent data leakage between users.
-  const cacheKey = isLoggedIn() ? READING_BOOKMARK_KEY(mushafId, userId) : null;
+  const cacheKey = isLoggedIn() && userId ? READING_BOOKMARK_KEY(mushafId, userId) : null;
 
   const { data, mutate, isValidating, error } = useSWR<Bookmark | null>(
     cacheKey,
