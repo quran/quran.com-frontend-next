@@ -45,6 +45,7 @@ const QRButton: React.FC<QRButtonProps> = ({ note, postUrl, onPostToQrClick }) =
       <IconContainer
         size={IconSize.Xsmall}
         shouldForceSetColors={false}
+        shouldFlipOnRTL={false}
         icon={
           isLoading ? (
             <Spinner shouldDelayVisibility={false} size={SpinnerSize.Small} />
