@@ -7,9 +7,16 @@ import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
 import useReadingBookmark from './useReadingBookmark';
 
+import useMappedBookmark from '@/hooks/useMappedBookmark';
 import { ReadingBookmarkType } from '@/types/Bookmark';
 import BookmarkType from '@/types/BookmarkType';
+import { getMushafId } from '@/utils/api';
 import * as authApi from '@/utils/auth/api';
+
+let mockReduxState = {
+  quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
+  guestBookmark: { readingBookmark: null },
+};
 
 // Mock dependencies
 vi.mock('next-translate/useTranslation', () => ({
@@ -19,15 +26,10 @@ vi.mock('next-translate/useTranslation', () => ({
 vi.mock('react-redux', () => ({
   useDispatch: () => vi.fn(),
   useSelector: vi.fn((selector: any) => {
-    // Return mock data based on selector
     if (typeof selector === 'function') {
-      const mockState = {
-        quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
-        guestBookmark: { readingBookmark: null },
-      };
-      return selector(mockState);
+      return selector(mockReduxState);
     }
-    return null;
+    return selector;
   }),
 }));
 
@@ -48,16 +50,16 @@ vi.mock('@/redux/slices/guestBookmark', () => ({
 }));
 
 vi.mock('@/hooks/useMappedBookmark', () => ({
-  default: () => ({
+  default: vi.fn((options?: { bookmark?: { type?: string; key?: number } }) => ({
     needsMapping: false,
-    effectivePageNumber: null,
+    effectivePageNumber: options?.bookmark?.type === 'page' ? options.bookmark.key ?? null : null,
     effectiveAyahVerseKey: null,
     isLoading: false,
-  }),
+  })),
 }));
 
 vi.mock('@/utils/api', () => ({
-  getMushafId: () => ({ mushaf: 1 }),
+  getMushafId: vi.fn(() => ({ mushaf: 1 })),
 }));
 
 vi.mock('@/utils/auth/api', () => ({
@@ -82,9 +84,15 @@ describe('useReadingBookmark - Logged-in User', () => {
   const mockAddBookmark = authApi.addBookmark as Mock;
   const mockDeleteBookmark = authApi.deleteBookmarkById as Mock;
   const mockDeleteBookmarkById = authApi.deleteBookmarkById as Mock;
+  const mockGetMushafId = getMushafId as Mock;
 
   beforeEach(() => {
     vi.clearAllMocks();
+    mockReduxState = {
+      quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
+      guestBookmark: { readingBookmark: null },
+    };
+    mockGetMushafId.mockReturnValue({ mushaf: 1 });
     mockAddBookmark.mockResolvedValue({
       id: 'bookmark-123',
       key: 1,
@@ -449,5 +457,51 @@ describe('useReadingBookmark - Logged-in User', () => {
 
       expect(result.current.showRemoveSection).toBe(false);
     });
+  });
+});
+
+describe('useReadingBookmark - Guest User', () => {
+  const mockUseMappedBookmark = useMappedBookmark as Mock;
+  const mockGetMushafId = getMushafId as Mock;
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockReduxState = {
+      quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
+      guestBookmark: { readingBookmark: null },
+    };
+    mockGetMushafId.mockReturnValue({ mushaf: 1 });
+  });
+
+  it('keeps optimistic override when page key matches but mushafId differs', async () => {
+    mockGetMushafId.mockReturnValue({ mushaf: 2 });
+    mockReduxState = {
+      quranReaderStyles: { quranFont: 'code_v1', mushafLines: 15 },
+      guestBookmark: {
+        readingBookmark: {
+          key: 5,
+          type: BookmarkType.Page,
+          mushafId: 1,
+          createdAt: '2024-01-01T00:00:00.000Z',
+        },
+      },
+    };
+
+    const { result } = renderHook(() =>
+      useReadingBookmark({
+        type: ReadingBookmarkType.PAGE,
+        pageNumber: 5,
+        lang: 'en',
+      }),
+    );
+
+    await act(async () => {
+      await result.current.handleSetReadingBookmark();
+    });
+    await act(async () => {});
+
+    const lastCall = mockUseMappedBookmark.mock.calls[mockUseMappedBookmark.mock.calls.length - 1];
+    const lastBookmark = lastCall?.[0]?.bookmark;
+    expect(lastBookmark?.mushafId).toBe(2);
   });
 });
