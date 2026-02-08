@@ -84,6 +84,9 @@
     "sign-in-message": "Đăng nhập hoặc đăng ký miễn phí để truy cập nhiều tính năng hơn!",
     "title": "Lưu lại tiến trình của bạn"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Mở đầu Hizb",
   "include-translator": "Có cần ghi tên người dịch không?",
   "info": "thông tin",
@@ -191,6 +194,7 @@
   "selected-count": "{{count}} đã chọn",
   "set-as-reading-bookmark": "Đã đặt làm dấu trang đọc sách của tôi",
   "share-your-reflection": "Chia sẻ suy ngẫm của bạn về ayah này",
+  "show-tajweed-rules": "Hiển thị các quy tắc Tajweed khi đọc:",
   "study-mode": "Chế độ học tập",
   "surah-beginning": "Mở đầu Surah",
   "surah-info": "Thông tin Surah",

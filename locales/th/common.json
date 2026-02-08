@@ -280,6 +280,7 @@
   "go-to-verse": "ไปที่บท",
   "hear-it-pronounced": "คลิกคำในอัลกุรอาน ฟังการออกเสียง",
   "help": "ช่วยเหลือ",
+  "hide-arabic": "ซ่อนภาษาอาหรับ",
   "hizb": "ฮิซบ์",
   "home": "หน้าหลัก",
   "hours": "ชั่วโมง",
@@ -439,6 +440,7 @@
   "share-quran-description-line-3": "(บุคอรี 3461)",
   "share-quran-title": "แบ่งปันอัลกุรอาน!",
   "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+  "show-arabic": "แสดงภาษาอาหรับ",
   "show-more": "แสดงมากขึ้น",
   "sidebar": {
     "search-hizb": "ค้นหาอัลฮิซบ์",

@@ -280,6 +280,7 @@
   "go-to-verse": "به آیه بروید",
   "hear-it-pronounced": "کلمات قرآنی را کلیک کنید، تلفظ را بشنوید",
   "help": "کمک",
+  "hide-arabic": "مخفی کردن عربی",
   "hizb": "حزب",
   "home": "صفحه اصلی",
   "hours": "ساعت ها",
@@ -439,6 +440,7 @@
   "share-quran-description-line-3": "(بخاری ۳۴۶۱)",
   "share-quran-title": "قرآن را به اشتراک بگذارید",
   "shared": "پیوند در کلیپ بورد کپی شده است!",
+  "show-arabic": "نمایش عربی",
   "show-more": "بیشتر نشان بده، اطلاعات بیشتر",
   "sidebar": {
     "search-hizb": "جستجو در حزب",

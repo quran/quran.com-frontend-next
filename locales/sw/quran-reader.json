@@ -84,6 +84,9 @@
     "sign-in-message": "Ingia au Jisajili bure ili upate huduma zaidi!",
     "title": "Hifadhi Maendeleo Yako"
   },
+  "hadith": {
+    "title": "Hadithi"
+  },
   "hizb-beginning": "Mwanzo wa Hizb",
   "include-translator": "Jumuisha jina la mtafsiri?",
   "info": "taarifa",
@@ -205,6 +208,7 @@
   "selected-count": "Zlizochaguliwa ni {{count}}",
   "set-as-reading-bookmark": "Weka kama Alamisho langu la Kusoma",
   "share-your-reflection": "Shiriki tafakari yako kuhusu aya hii",
+  "show-tajweed-rules": "Onyesha sheria za Tajweed unaposoma:",
   "study-mode": "Hali ya kujifunza",
   "surah-beginning": "Mwanzo wa Surah",
   "surah-info": "Taarifa ya Sura",

@@ -84,6 +84,9 @@
     "sign-in-message": "Sign in or Sign up for free to gain access to the more features!",
     "title": "Save Your Progress"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",
   "info": "info",
@@ -161,9 +164,6 @@
     "transliteration": "Transliteration",
     "what-are": "What are Qiraat?"
   },
-  "hadith": {
-    "title": "Hadith"
-  },
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
   "ramadan-of-reflection": "Join QuranReflect \"Ramadan of Reflection\"",
   "read-more-quran-reflect": "Read More on QuranReflect",
@@ -194,6 +194,7 @@
   "selected-count": "{{count}} selected",
   "set-as-reading-bookmark": "Set as my Reading Bookmark",
   "share-your-reflection": "Share your reflection on this ayah",
+  "show-tajweed-rules": "Show Tajweed rules while reading:",
   "study-mode": "Study mode",
   "surah-beginning": "Beginning of Surah",
   "surah-info": "Surah Info",

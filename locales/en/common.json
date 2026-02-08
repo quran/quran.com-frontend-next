@@ -280,6 +280,7 @@
   "go-to-verse": "Go To Verse",
   "hear-it-pronounced": "Click Quranic words, hear pronunciation",
   "help": "Help",
+  "hide-arabic": "Hide Arabic",
   "hizb": "Hizb",
   "home": "Home",
   "hours": "Hours",
@@ -411,8 +412,6 @@
   "seconds": "Seconds",
   "see-less": "See less",
   "see-new": "See What's New",
-  "show-arabic": "Show Arabic",
-  "hide-arabic": "Hide Arabic",
   "select-language": "Select Language",
   "settings": {
     "no-tafsir-selected": "No tafsir selected",
@@ -441,6 +440,7 @@
   "share-quran-description-line-3": "(Bukhari 3461)",
   "share-quran-title": "Share the Quran!",
   "shared": "Link has been copied to the clipboard!",
+  "show-arabic": "Show Arabic",
   "show-more": "Show more",
   "sidebar": {
     "search-hizb": "Search Hizb",

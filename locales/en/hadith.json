@@ -1,4 +1,4 @@
 {
-  "title": "Hadiths {{surahName}} - {{ayahNumber}}",
-  "description": "Discover authentic Hadiths and narrations related to Ayah {{ayahNumber}} of Surah {{surahName}}. Access scholarly traditions connected to this Quranic verse."
+  "description": "Discover authentic Hadiths and narrations related to Ayah {{ayahNumber}} of Surah {{surahName}}. Access scholarly traditions connected to this Quranic verse.",
+  "title": "Hadiths {{surahName}} - {{ayahNumber}}"
 }

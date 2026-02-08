@@ -84,6 +84,9 @@
     "sign-in-message": "Meld u aan of registreer u gratis om toegang te krijgen tot meer functies!",
     "title": "Sla je voortgang op"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Begin van Hizb",
   "include-translator": "Naam van de vertaler toevoegen?",
   "info": "informatie",
@@ -191,6 +194,7 @@
   "selected-count": "{{count}} gekozen",
   "set-as-reading-bookmark": "Instellen als mijn leesbladwijzer",
   "share-your-reflection": "Deel je reflectie op deze ayah",
+  "show-tajweed-rules": "Toon de Tajweed-regels tijdens het lezen:",
   "study-mode": "Studiemodus",
   "surah-beginning": "Begin van Surah",
   "surah-info": "Surah Info",

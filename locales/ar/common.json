@@ -287,6 +287,7 @@
   "go-to-verse": "انتقل إلى الآية",
   "hear-it-pronounced": "اضغط على كلمات القرآن الكريم واستمع إلى نطقها",
   "help": "مساعدة",
+  "hide-arabic": "إخفاء اللغة العربية",
   "hizb": "حزب",
   "home": "الصفحة الرئيسة",
   "hours": "ساعات",
@@ -446,6 +447,7 @@
   "share-quran-description-line-3": "(البخاري ٣٤٦١)",
   "share-quran-title": "انشر القرآن!",
   "shared": "تم نسخ الرابط إلى الحافظة!",
+  "show-arabic": "عرض اللغة العربية",
   "show-more": "عرض المزيد",
   "sidebar": {
     "search-hizb": "ابحث عن حزب",

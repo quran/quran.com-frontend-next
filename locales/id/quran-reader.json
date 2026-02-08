@@ -84,6 +84,9 @@
     "sign-in-message": "Masuk atau Daftar gratis untuk mendapatkan akses ke lebih banyak fitur!",
     "title": "Simpan Kemajuan Anda"
   },
+  "hadith": {
+    "title": "Hadits"
+  },
   "hizb-beginning": "Awal Hizb",
   "include-translator": "Sertakan nama penterjemah?",
   "info": "informasi",
@@ -191,6 +194,7 @@
   "selected-count": "{{count}} terpilih",
   "set-as-reading-bookmark": "Tetapkan sebagai Bookmark Bacaan saya",
   "share-your-reflection": "Bagikan refleksi Anda tentang ayat ini",
+  "show-tajweed-rules": "Tunjukkan aturan Tajwid saat membaca:",
   "study-mode": "Mode belajar",
   "surah-beginning": "Awal dari Surah",
   "surah-info": "Tentang Surah ini",

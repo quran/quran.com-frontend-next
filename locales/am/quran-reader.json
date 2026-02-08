@@ -84,6 +84,9 @@
     "sign-in-message": "ተጨማሪ ባህሪያትን ለማግኘት በነፃ ይግቡ ወይም ይመዝገቡ!",
     "title": "እድገትዎን ያስቀምጡ"
   },
+  "hadith": {
+    "title": "ሐዲት"
+  },
   "hizb-beginning": "የሂዝብ መጀመሪያ",
   "include-translator": "የተርጓሚ ስም ይካተት?",
   "info": "መረጃ",
@@ -191,6 +194,7 @@
   "selected-count": "{{count}} ተመርጧል",
   "set-as-reading-bookmark": "እንደ የንባብ ዕልባትዬ አዘጋጅ",
   "share-your-reflection": "በዚህ አንቀፅ ላይ ያላችሁን አስተያየት(ያስተነተኑትን) አካፍሉን",
+  "show-tajweed-rules": "የሚከተለውን በማንበብ የታጂዊድ ህጎችን አሳይ፦",
   "study-mode": "የጥናት ሁነታ",
   "surah-beginning": "የሱራ(ምዕራፍ) መጀመሪያ",
   "surah-info": "የሱራህ መረጃ",
