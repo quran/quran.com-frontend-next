@@ -26,7 +26,6 @@ interface Props {
   verse: Verse;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl?: string;
   shouldUseModalZIndex?: boolean;
   isInsideStudyMode?: boolean;
 }
@@ -35,7 +34,6 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   verse,
   isTranslationView = true,
   onActionTriggered,
-  bookmarksRangeUrl,
   shouldUseModalZIndex = false,
   isInsideStudyMode = false,
 }) => {
@@ -88,7 +86,6 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           verse={verse}
           isTranslationView={isTranslationView}
           onActionTriggered={onActionTriggered}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           isInsideStudyMode={isInsideStudyMode}
         />
       </PopoverMenu>

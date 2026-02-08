@@ -40,8 +40,6 @@ import Verse from '@/types/Verse';
 import Word, { CharType } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
-import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -182,11 +180,6 @@ const StudyModeModal: React.FC<Props> = ({
       chapterId: rawVerse.chapterId ?? Number(selectedChapterId),
     };
   }, [rawVerse, selectedChapterId]);
-
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl = isLoggedIn()
-    ? makeBookmarksRangeUrl(mushafId, Number(selectedChapterId), Number(selectedVerseNumber), 1)
-    : '';
 
   const versesForFont = useMemo(() => (currentVerse ? [currentVerse] : []), [currentVerse]);
   useQcfFont(quranReaderStyles.quranFont, versesForFont);
@@ -452,7 +445,6 @@ const StudyModeModal: React.FC<Props> = ({
       return (
         <StudyModeBody
           verse={currentVerse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
           selectedWord={selectedWord}
           selectedWordLocation={selectedWordLocation}
           showWordBox={showWordBox}

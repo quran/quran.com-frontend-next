@@ -27,7 +27,6 @@ interface Props {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  bookmarksRangeUrl?: string;
   isInsideStudyMode?: boolean;
 }
 

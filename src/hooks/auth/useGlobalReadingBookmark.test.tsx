@@ -4,6 +4,9 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 import useGlobalReadingBookmark, { READING_BOOKMARK_KEY } from './useGlobalReadingBookmark';
 
+import { useAuthContext } from '@/contexts/AuthContext';
+import Bookmark from '@/types/Bookmark';
+import BookmarkType from '@/types/BookmarkType';
 import * as authApi from '@/utils/auth/api';
 import * as loginUtils from '@/utils/auth/login';
 
@@ -16,17 +19,32 @@ vi.mock('@/utils/auth/login', () => ({
   isLoggedIn: vi.fn(),
 }));
 
+vi.mock('@/contexts/AuthContext', () => ({
+  useAuthContext: vi.fn(),
+}));
+
 describe('useGlobalReadingBookmark', () => {
-  const mockGetReadingBookmark = authApi.getReadingBookmark as any;
-  const mockIsLoggedIn = loginUtils.isLoggedIn as any;
+  const mockGetReadingBookmark = vi.mocked(authApi.getReadingBookmark);
+  const mockIsLoggedIn = vi.mocked(loginUtils.isLoggedIn);
+  const mockUseAuthContext = vi.mocked(useAuthContext);
 
   beforeEach(() => {
     vi.clearAllMocks();
+    mockUseAuthContext.mockReturnValue({
+      state: {
+        user: { id: 'test-user-123' },
+        accessToken: 'test-token',
+        refreshToken: 'test-refresh-token',
+        expiryDate: new Date(Date.now() + 3600000).toISOString(),
+      },
+    } as unknown as ReturnType<typeof useAuthContext>);
   });
 
   it('generates consistent cache keys', () => {
     expect(READING_BOOKMARK_KEY(1)).toBe('reading-bookmark-1');
     expect(READING_BOOKMARK_KEY(2)).toBe('reading-bookmark-2');
+    expect(READING_BOOKMARK_KEY(1, 'user-123')).toBe('reading-bookmark-user-123-1');
+    expect(READING_BOOKMARK_KEY(2, 'user-456')).toBe('reading-bookmark-user-456-2');
   });
 
   it('returns null bookmark when not logged in', () => {
@@ -44,9 +62,9 @@ describe('useGlobalReadingBookmark', () => {
       id: 'bm-1',
       key: 1,
       verseNumber: 1,
-      type: 'ayah',
+      type: BookmarkType.Ayah,
       isReading: true,
-    });
+    } as Bookmark);
 
     const { result } = renderHook(() => useGlobalReadingBookmark(1));
 

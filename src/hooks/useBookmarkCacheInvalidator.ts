@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useSWRConfig } from 'swr';
 
-import { SURAH_BOOKMARKS_KEY } from '@/hooks/auth/useSurahBookmarks';
+import { SURAH_BOOKMARKS_KEY, SURAH_BOOKMARKS_PREFIX } from '@/hooks/auth/useSurahBookmarks';
 import { BOOKMARK_CACHE_PATHS } from '@/utils/auth/apiPaths';
 
 interface BookmarkCacheInvalidator {
@@ -102,7 +102,7 @@ const useBookmarkCacheInvalidator = (): BookmarkCacheInvalidator => {
   const invalidateSurahCaches = useCallback(() => {
     // Invalidate all surah bookmark caches (surah-bookmarks-*)
     globalMutate(
-      (key: string) => typeof key === 'string' && key.startsWith('surah-bookmarks-'),
+      (key: string) => typeof key === 'string' && key.startsWith(SURAH_BOOKMARKS_PREFIX),
       undefined,
       { revalidate: true },
     );

@@ -13,8 +13,6 @@ import QuestionIcon from '@/icons/question-mark-rounded.svg';
 interface RemoveBookmarkSectionProps {
   /** Whether the remove operation is in progress */
   isLoading: boolean;
-  /** Error message to display, if any */
-  error: string | null;
   /** Handler to remove the current bookmark */
   onRemove: () => Promise<void>;
 }

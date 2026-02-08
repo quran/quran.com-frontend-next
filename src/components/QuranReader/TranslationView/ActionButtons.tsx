@@ -17,7 +17,6 @@ import Verse from 'types/Verse';
 
 type ActionButtonsProps = {
   verse: Verse;
-  bookmarksRangeUrl: string;
   isTranslationView?: boolean;
   openShareModal: () => void;
   hasTranslationsButton?: boolean;
@@ -31,7 +30,6 @@ type ActionButtonsProps = {
  */
 const ActionButtons: React.FC<ActionButtonsProps> = ({
   verse,
-  bookmarksRangeUrl,
   isTranslationView = true,
   openShareModal,
   hasTranslationsButton = false,
@@ -54,7 +52,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
             <BookmarkAction
               verse={verse}
               isTranslationView={isTranslationView}
-              bookmarksRangeUrl={bookmarksRangeUrl}
               isInsideStudyMode={shouldUseModalZIndex}
             />
           </ActionItem>
@@ -92,7 +89,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
 
           <ActionItem>
             <OverflowVerseActionsMenu
-              bookmarksRangeUrl={bookmarksRangeUrl}
               verse={verse}
               isTranslationView={isTranslationView}
               shouldUseModalZIndex={shouldUseModalZIndex}

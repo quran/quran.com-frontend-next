@@ -21,7 +21,6 @@ import Word from 'types/Word';
 
 interface StudyModeBodyProps {
   verse: Verse;
-  bookmarksRangeUrl?: string;
   selectedWord?: Word;
   selectedWordLocation?: string;
   showWordBox: boolean;
@@ -43,7 +42,6 @@ interface StudyModeBodyProps {
 
 const StudyModeBody: React.FC<StudyModeBodyProps> = ({
   verse,
-  bookmarksRangeUrl = '',
   selectedWord,
   selectedWordLocation,
   showWordBox,
@@ -76,7 +74,7 @@ const StudyModeBody: React.FC<StudyModeBodyProps> = ({
 
   return (
     <div ref={containerRef} className={styles.container}>
-      <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} shouldUseModalZIndex />
+      <TopActions verse={verse} shouldUseModalZIndex />
       <div className={styles.arabicVerseContainer}>
         {showWordBox && selectedWord && (
           <WordNavigationBox

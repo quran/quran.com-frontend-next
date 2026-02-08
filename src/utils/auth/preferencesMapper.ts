@@ -91,7 +91,7 @@ const getPreferenceGroupValue = (
   }
 
   if (sliceName === SliceName.GUEST_BOOKMARK) {
-    // Guest bookmark is stored as a single string value in guestBookmark.readingBookmark
+    // Guest reading bookmark is stored as a structured GuestReadingBookmark object
     // Return it wrapped in bookmark property to match preference group structure
     return {
       bookmark: currentSliceValue?.readingBookmark || null,
