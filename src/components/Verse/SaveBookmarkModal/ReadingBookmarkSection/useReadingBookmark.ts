@@ -35,6 +35,7 @@ import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById as deleteBookmark } from '@/utils/auth/api';
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getChapterData } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 
 /** Debounce delay to prevent flicker when state updates */
@@ -382,6 +383,8 @@ const useReadingBookmark = ({
       setPreviousBookmark(effectiveCurrentBookmarkData);
       setPendingBookmark(newBookmark);
 
+      logEvent('reading_bookmark_added');
+
       setTimeout(() => {
         setPendingBookmark(null);
       }, STATE_TRANSITION_DELAY_MS);
@@ -443,6 +446,8 @@ const useReadingBookmark = ({
       setPendingBookmark(null);
       setPreviousBookmark(undefined);
 
+      logEvent('reading_bookmark_undo_clicked');
+
       // Only call onBookmarkChanged for guests
       if (!isLoggedIn && onBookmarkChanged) {
         await onBookmarkChanged();
@@ -497,6 +502,8 @@ const useReadingBookmark = ({
       if (isLoggedIn && mutateReadingBookmark) {
         await mutateReadingBookmark(null, { revalidate: false });
       }
+
+      logEvent('reading_bookmark_removed');
 
       // Trigger refetch for guests only
       if (!isLoggedIn && onBookmarkChanged) {

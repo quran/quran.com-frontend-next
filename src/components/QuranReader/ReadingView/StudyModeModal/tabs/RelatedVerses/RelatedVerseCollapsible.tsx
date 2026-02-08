@@ -17,6 +17,7 @@ import Collapsible from '@/dls/Collapsible/Collapsible';
 import Pill from '@/dls/Pill';
 import Separator from '@/dls/Separator/Separator';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -50,6 +51,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const [chapterId, verseNumber] = relatedVerse.verseKey.split(':');
 
@@ -76,7 +78,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;

@@ -27,6 +27,7 @@ import CloseIcon from '@/icons/close.svg';
 import PinFilledIcon from '@/icons/pin-filled.svg';
 import PinIcon from '@/icons/pin.svg';
 import { selectPinnedVerseKeysSet } from '@/redux/slices/QuranReader/pinnedVerses';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import {
   setActiveTab,
   setHighlightedWordLocation,
@@ -83,6 +84,7 @@ const StudyModeModal: React.FC<Props> = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
   const tafsirs = useSelector(selectSelectedTafsirs, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
   const pinnedVerseKeysSet = useSelector(selectPinnedVerseKeysSet);
   const { pinVerseWithSync, unpinVerseWithSync } = usePinnedVerseSync();
 
@@ -158,7 +160,7 @@ const StudyModeModal: React.FC<Props> = ({
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;

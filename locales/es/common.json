@@ -100,6 +100,13 @@
   "beyond-ramadan": "¡Crece más allá del Ramadán!",
   "bookmark": "Marcar",
   "bookmarked": "Marcado como favorito",
+  "bookmarks-migration": {
+    "body-1": "Tus marcadores ahora se convertirán en <strong>Versos guardados</strong> en <strong>Colecciones</strong>Para mantener sus marcadores actuales, inicie sesión o cree una cuenta.",
+    "body-2": "También hemos agregado un nuevo marcador de lectura para ayudarte a continuar justo donde lo dejaste.",
+    "checkbox": "No volver a mostrar este mensaje (Advertencia: perderá todos sus marcadores actuales)",
+    "sign-in": "Iniciar sesión / Registrarse",
+    "title": "Aviso: Los marcadores están cambiando"
+  },
   "both": "Ambas",
   "cancel": "Cancelar",
   "change-theme": "Cambiar tema",
@@ -137,6 +144,7 @@
   "copied": "Copiado",
   "copied-to-clipboard": "Copiado al portapapeles",
   "copy": "Copiar",
+  "copy-embed": "Copiar Incrustar",
   "copylink": "Copiar enlace",
   "counter": {
     "decrease": "Disminuir",
@@ -162,6 +170,8 @@
     "resend-email-in": "Reenviar correo electrónico de verificación en {{remainingTime}} segundos...",
     "verify-code": "Código de verificación"
   },
+  "embed-copied": "Incrustar Copiado",
+  "embed-widget": "Incrustar widget",
   "end-year-donate": "Termina el 2024 con Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Solo puedes seleccionar hasta {{limit}} aleyas a la vez. Selecciona una secuencia más pequeña.",
@@ -459,6 +469,8 @@
   "subscribe": "Suscribirse.",
   "subscribed": "Suscrito.",
   "surah": "Sura",
+  "tab-see-less": "Ver menos...",
+  "tab-see-more": "Ver más...",
   "tafsir": {
     "font-size": "Tamaño de fueste del tafsir",
     "group-message": "Estás leyendo un tafsir para el grupo de versículos {{from}} hasta {{to}}",

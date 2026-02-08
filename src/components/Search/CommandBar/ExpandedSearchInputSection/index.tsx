@@ -141,6 +141,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
             ),
             numberOfCommands, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
           }}
+          resultItemClassName={styles.resultItem}
         />
       );
     },

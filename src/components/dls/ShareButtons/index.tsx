@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import React, { useEffect, useState } from 'react';
 
@@ -5,6 +6,7 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -15,9 +17,16 @@ import {
 
 import styles from './ShareButtons.module.scss';
 
+import { getMushafFromQuranFont } from '@/components/AyahWidget/widget-defaults';
+import { buildSimpleEmbedSnippet } from '@/components/AyahWidget/widget-embed';
+import useThemeDetector from '@/hooks/useThemeDetector';
+import CodeCircleIcon from '@/icons/code-embed-circle.svg';
 import CopyLinkIcon from '@/icons/copy-link-new.svg';
 import FacebookIcon from '@/icons/fb.svg';
 import VideoIcon from '@/public/icons/video-link-new.svg';
+import { selectAyahWidgetOverrides } from '@/redux/slices/ayahWidget';
+import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -46,6 +55,12 @@ const ShareButtons: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
+  const [isEmbedCopied, setIsEmbedCopied] = useState(false);
+
+  const widgetOverrides = useSelector(selectAyahWidgetOverrides);
+  const { themeVariant } = useThemeDetector();
+  const qdcTranslations = useSelector(selectSelectedTranslations);
+  const qdcQuranFont = useSelector(selectQuranFont);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -56,6 +71,16 @@ const ShareButtons: React.FC<Props> = ({
       clearTimeout(timeoutId);
     };
   }, [isCopied]);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if (isEmbedCopied === true) {
+      timeoutId = setTimeout(() => setIsEmbedCopied(false), COPY_TIMEOUT_MS);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isEmbedCopied]);
 
   const onCopyLinkClicked = () => {
     logButtonClick(`${analyticsContext}_copy_link`);
@@ -74,6 +99,26 @@ const ShareButtons: React.FC<Props> = ({
 
   const onWhatsappShareButtonClicked = () => {
     logButtonClick(`${analyticsContext}_whatsapp_share`);
+  };
+
+  const onCopyEmbedClicked = () => {
+    if (!verse?.chapterId || !verse?.verseNumber) return;
+    logButtonClick(`${analyticsContext}_copy_embed`);
+
+    const embedPrefs = {
+      theme: themeVariant,
+      mushaf: getMushafFromQuranFont(qdcQuranFont),
+      translationIds: qdcTranslations,
+      ...widgetOverrides,
+    };
+    const embedCode = buildSimpleEmbedSnippet(
+      Number(verse.chapterId),
+      verse.verseNumber,
+      embedPrefs,
+    );
+    clipboardCopy(embedCode).then(() => {
+      setIsEmbedCopied(true);
+    });
   };
 
   const router = useRouter();
@@ -126,6 +171,15 @@ const ShareButtons: React.FC<Props> = ({
         </div>
         <span>{isCopied ? `${t('copied')}!` : t('copylink')}</span>
       </button>
+
+      {verse?.chapterId && verse?.verseNumber && (
+        <button type="button" className={styles.shareOptionButton} onClick={onCopyEmbedClicked}>
+          <div className={styles.socialIcon}>
+            <CodeCircleIcon />
+          </div>
+          <span>{isEmbedCopied ? `${t('embed-copied')}!` : t('copy-embed')}</span>
+        </button>
+      )}
 
       {!hideVideoGeneration && (
         <button

@@ -89,6 +89,8 @@
       "notes",
       "surah-info"
     ],
-    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"]
+    "/my-quran": ["my-quran", "notes", "collection", "quran-reader"],
+    "/embed": ["embed"],
+    "/embed/v1": ["embed"]
   }
 }

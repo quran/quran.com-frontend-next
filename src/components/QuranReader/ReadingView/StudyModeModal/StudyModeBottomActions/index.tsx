@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './StudyModeBottomActions.module.scss';
 
 import Separator, { SeparatorWeight } from '@/components/dls/Separator/Separator';
+import useIsMobile from '@/hooks/useIsMobile';
 
 export enum StudyModeTabId {
   TAFSIR = 'tafsir',
@@ -13,6 +15,11 @@ export enum StudyModeTabId {
   ANSWERS = 'answers',
   QIRAAT = 'qiraat',
   RELATED_VERSES = 'related_verses',
+}
+
+enum ExpandableTabId {
+  EXPAND = 'expand-tabs',
+  COLLAPSE = 'collapse-tabs',
 }
 
 export interface StudyModeTabConfig {
@@ -28,7 +35,13 @@ interface StudyModeBottomActionsProps {
   activeTab?: StudyModeTabId | null;
 }
 
+const MAX_SHOWN_TABS = 4;
+
 const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, activeTab }) => {
+  const { t } = useTranslation('common');
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isMobile = useIsMobile();
+
   const handleTabClick = (onClick: () => void) => {
     onClick();
   };
@@ -41,11 +54,43 @@ const StudyModeBottomActions: React.FC<StudyModeBottomActionsProps> = ({ tabs, a
     }
   };
 
+  const filteredTabs = useMemo(() => tabs.filter((tab) => tab.condition !== false), [tabs]);
+
+  const tabsToRender = useMemo(() => {
+    if (filteredTabs.length <= MAX_SHOWN_TABS || isMobile) {
+      return filteredTabs;
+    }
+
+    if (isExpanded) {
+      return [
+        ...filteredTabs,
+        {
+          id: ExpandableTabId.COLLAPSE,
+          label: t('tab-see-less'),
+          icon: null,
+          onClick: () => setIsExpanded(false),
+          condition: true,
+        },
+      ];
+    }
+
+    return [
+      ...filteredTabs.slice(0, MAX_SHOWN_TABS),
+      {
+        id: ExpandableTabId.EXPAND,
+        label: t('tab-see-more'),
+        icon: null,
+        onClick: () => setIsExpanded(true),
+        condition: true,
+      },
+    ];
+  }, [filteredTabs, isExpanded, isMobile, t]);
+
   return (
     <>
       <div className={styles.bottomActionsContainer}>
         <div className={styles.tabsContainer}>
-          {tabs
+          {tabsToRender
             .filter((tab) => tab.condition !== false)
             .map((tab, index, filteredTabs) => (
               <React.Fragment key={tab.id}>

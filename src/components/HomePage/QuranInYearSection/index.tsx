@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, type ClipboardEvent } from 'react';
 
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './QuranInYearSection.module.scss';
@@ -34,6 +35,46 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
   // Get the Ayah for today's date
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
 
+  /**
+   * Handle copy events on the verse container.
+   * @param {ClipboardEvent<HTMLDivElement>} event The copy event.
+   */
+  const onCopy = (event: ClipboardEvent<HTMLDivElement>) => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
+
+    const container = event.currentTarget;
+
+    // get the arabic and translation elements
+    const arabic = container.querySelector(`.${styles.customArabicVerse} [translate="no"]`);
+    const translation = container.querySelector(`.${styles.customTranslation}`);
+
+    if (!arabic && !translation) return;
+
+    // check if the selection intersects with the arabic or translation elements
+    const intersects = (node: Element | null) =>
+      !!node &&
+      Array.from({ length: selection.rangeCount }).some((unused, i) =>
+        selection.getRangeAt(i).intersectsNode(node),
+      );
+
+    // function to get cleaned innerText of a node
+    const toText = (node: Element | null) =>
+      (node as HTMLElement | null)?.innerText?.replace(/\s+/g, ' ').trim() || '';
+
+    // get the text content of the arabic and translation elements depending on selection
+    const parts = [
+      intersects(arabic) && toText(arabic),
+      intersects(translation) && toText(translation),
+    ].filter(Boolean) as string[];
+
+    if (!parts.length) return;
+    event.preventDefault();
+
+    // copy the combined text to clipboard
+    clipboardCopy(parts.join('\n'));
+  };
+
   // Don't render anything if we're before April 1st, 2025
   if (!todayAyah) {
     return null;
@@ -52,7 +93,11 @@ const QuranInYearSection: React.FC<Props> = ({ chaptersData }) => {
           </Link>
         </div>
       </div>
-      <div className={styles.container} data-testid={TestId.QURAN_IN_A_YEAR_SECTION}>
+      <div
+        className={styles.container}
+        data-testid={TestId.QURAN_IN_A_YEAR_SECTION}
+        onCopy={onCopy}
+      >
         <VerseAndTranslation
           chaptersData={chaptersData}
           chapter={todayAyah.chapter}
