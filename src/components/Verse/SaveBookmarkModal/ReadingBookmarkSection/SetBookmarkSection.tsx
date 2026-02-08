@@ -7,8 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReadingBookmarkSection.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
+import BookmarkBlankIcon from '@/icons/bookmark-empty.svg';
 import BookmarkStarIcon from '@/icons/bookmark-star.svg';
-import BookmarkBlankIcon from '@/icons/bookmark_blank.svg';
 import CheckIcon from '@/icons/check.svg';
 import QuestionIcon from '@/icons/question-mark-rounded.svg';
 

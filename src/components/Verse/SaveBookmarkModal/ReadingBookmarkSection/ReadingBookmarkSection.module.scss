@@ -94,19 +94,19 @@ $box-height: 46px;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-text-faded);
+  color: var(--color-grey-icons-new);
   transition: color var(--transition-normal) ease;
 
   svg {
-    inline-size: var(--spacing-large);
-    block-size: var(--spacing-large);
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
   }
 }
 
 .readingBookmarkContent {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxsmall);
+  gap: var(--spacing-small-px);
   flex: 1;
 }
 
