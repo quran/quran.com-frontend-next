@@ -197,6 +197,9 @@
   "removed-from": "{{collectionName}} سے حزف كر دیا گیا ہے۔",
   "revelation-order-notice": "نوٹ: آپ قرآن کو نزول کی ترتیب سے دیکھ رہے ہیں۔ اصل ترتیب پر واپس جانے کے لیے <link> یہاں کلک کریں </link> ۔",
   "rub-beginning": "ربع الحزب کا آغاز",
+  "save-bookmark-modal": {
+    "collections-hint": "ایک سے زیادہ بک مارک محفوظ کر رہے ہیں؟ مجموعے استعمال کریں:"
+  },
   "save-page": "صفحہ محفوظ کریں {{pageNumber}}",
   "save-pinned-to-collection": "کلیکشن میں محفوظ کریں",
   "save-to": "سيو کریں...",

@@ -197,6 +197,9 @@
   "removed-from": "ลบออกจาก {{collectionName}}",
   "revelation-order-notice": "หมายเหตุ: คุณกำลังท่องอัลกุรอานตามลำดับการเปิดเผย <link> คลิกที่นี่ </link> เพื่อเปลี่ยนกลับเป็นลำดับเริ่มต้น",
   "rub-beginning": "จุดเริ่มต้นของรุบอุลฮิซบ์",
+  "save-bookmark-modal": {
+    "collections-hint": "ต้องการบันทึกบุ๊กมาร์กมากกว่าหนึ่งรายการใช่ไหม? ใช้คอลเลกชัน:"
+  },
   "save-page": "บันทึกหน้าเว็บ {{pageNumber}}",
   "save-pinned-to-collection": "บันทึกไปยังคอลเลกชัน",
   "save-to": "บันทึกเป็น...",

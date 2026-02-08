@@ -197,6 +197,9 @@
   "removed-from": "Removido de {{collectionName}}",
   "revelation-order-notice": "Nota: você está navegando no Quran pela ordem da revelação. <link> Clique aqui </link> para voltar à ordem padrão.",
   "rub-beginning": "Começo de Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Salvar mais de um marcador? Use coleções:"
+  },
   "save-page": "Salvar página {{pageNumber}}",
   "save-pinned-to-collection": "Salvar na coleção",
   "save-to": "Salvar para...",

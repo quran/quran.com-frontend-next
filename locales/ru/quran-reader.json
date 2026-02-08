@@ -197,6 +197,9 @@
   "removed-from": "Удалено из {{collectionName}}",
   "revelation-order-notice": "Примечание: вы изучаете Коран в порядке откровения. <link> Нажмите здесь </link> , чтобы вернуться к порядку по умолчанию.",
   "rub-beginning": "Начало Руб-эль-Хизб",
+  "save-bookmark-modal": {
+    "collections-hint": "Хотите сохранить несколько закладок? Используйте коллекции:"
+  },
   "save-page": "Сохранить страницу {{pageNumber}}",
   "save-pinned-to-collection": "Сохранить в коллекцию",
   "save-to": "Сохранить...",
