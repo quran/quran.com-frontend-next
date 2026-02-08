@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type Dispatch,
   type SetStateAction,
@@ -36,6 +37,7 @@ import useAyahWidgetPreview from '@/hooks/widget/useAyahWidgetPreview';
 import useAyahWidgetReciters from '@/hooks/widget/useAyahWidgetReciters';
 import useAyahWidgetSurahs from '@/hooks/widget/useAyahWidgetSurahs';
 import useAyahWidgetTranslations from '@/hooks/widget/useAyahWidgetTranslations';
+import { logErrorToSentry } from '@/lib/sentry';
 import { selectAyahWidgetOverrides, updateAyahWidgetOverrides } from '@/redux/slices/ayahWidget';
 import { selectReadingPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranFont } from '@/redux/slices/QuranReader/styles';
@@ -44,6 +46,7 @@ import ThemeType from '@/redux/types/ThemeType';
 import styles from '@/styles/embed.module.scss';
 import { WordByWordDisplay, WordByWordType } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
+import { logEvent } from '@/utils/eventLogger';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import type AvailableTranslation from 'types/AvailableTranslation';
 
@@ -154,6 +157,8 @@ const AyahWidgetBuilderPage = () => {
   const [preferences, setPreferences] = useState<Preferences>(() => {
     return applyWidgetOverrides(basePreferences, widgetOverrides);
   });
+  const previousPreferencesRef = useRef<Preferences>(preferences);
+  const hasPendingUserPreferenceUpdateRef = useRef<boolean>(false);
 
   /**
    * Keep local preferences in sync when:
@@ -180,22 +185,32 @@ const AyahWidgetBuilderPage = () => {
    * @param {SetStateAction<Preferences>} updater - React setState updater.
    * @returns {void}
    */
-  const setUserPreferences = useCallback(
-    (updater: SetStateAction<Preferences>): void => {
-      setPreferences((prev: Preferences) => {
-        const next: Preferences = typeof updater === 'function' ? updater(prev) : updater;
-        if (next === prev) return prev;
+  const setUserPreferences = useCallback((updater: SetStateAction<Preferences>): void => {
+    setPreferences((prev: Preferences) => {
+      const next: Preferences = typeof updater === 'function' ? updater(prev) : updater;
+      hasPendingUserPreferenceUpdateRef.current =
+        hasPendingUserPreferenceUpdateRef.current || !Object.is(next, prev);
+      return next;
+    });
+  }, []);
 
-        const overridesPatch = buildOverridesFromDiff(prev, next);
-        if (Object.keys(overridesPatch).length) {
-          dispatch(updateAyahWidgetOverrides(overridesPatch));
-        }
+  /**
+   * Persist user-driven changes to Redux after commit.
+   * Keeping side effects out of the state updater avoids render-phase update warnings.
+   */
+  useEffect(() => {
+    const prev = previousPreferencesRef.current;
 
-        return next;
-      });
-    },
-    [dispatch],
-  );
+    if (hasPendingUserPreferenceUpdateRef.current) {
+      const overridesPatch = buildOverridesFromDiff(prev, preferences);
+      if (Object.keys(overridesPatch).length) {
+        dispatch(updateAyahWidgetOverrides(overridesPatch));
+      }
+      hasPendingUserPreferenceUpdateRef.current = false;
+    }
+
+    previousPreferencesRef.current = preferences;
+  }, [dispatch, preferences]);
 
   const surahs = useAyahWidgetSurahs(lang);
   const translations = useAyahWidgetTranslations(preferences.locale);
@@ -311,7 +326,7 @@ const AyahWidgetBuilderPage = () => {
 
       setLastParsedVersesParam(versesParam);
     } catch (error) {
-      // Ignore invalid query params and keep current preferences.
+      logErrorToSentry(error as Error);
     }
   }, [dispatch, lastParsedVersesParam, router.isReady, router.query.verses, setUserPreferences]);
 
@@ -378,14 +393,36 @@ const AyahWidgetBuilderPage = () => {
       }
 
       await navigator.clipboard.writeText(embedSnippet);
+      logEvent('embed_generated', {
+        source: 'embed_builder',
+        clientId: preferences.clientId,
+        verses:
+          preferences.rangeEnabled && preferences.rangeEnd > preferences.selectedAyah
+            ? `${preferences.selectedSurah}:${preferences.selectedAyah}-${preferences.rangeEnd}`
+            : `${preferences.selectedSurah}:${preferences.selectedAyah}`,
+        translations: translationIdsCsv,
+        reciter: preferences.reciter,
+        locale: preferences.locale,
+        theme: preferences.theme,
+        mushaf: preferences.mushaf,
+        enableAudio: preferences.enableAudio,
+        enableWbw: preferences.enableWbwTranslation,
+        enableWbwTransliteration: preferences.enableWbwTransliteration,
+        showArabic: preferences.showArabic,
+        showTranslationName: preferences.showTranslatorName,
+        showTafsirs: preferences.showTafsirs,
+        showReflections: preferences.showReflections,
+        showLessons: preferences.showLessons,
+        showAnswers: preferences.showAnswers,
+        mergeVerses: preferences.mergeVerses,
+      });
 
       setCopySuccess(true);
       window.setTimeout(() => setCopySuccess(false), DEFAULTS.copySuccessDurationMs);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(t('errors.clipboardFallback'), error);
+      logErrorToSentry(error as Error);
     }
-  }, [embedSnippet, t]);
+  }, [embedSnippet, preferences, t, translationIdsCsv]);
 
   /**
    * Toggle a translation selection on/off.

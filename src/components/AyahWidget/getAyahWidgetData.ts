@@ -221,6 +221,20 @@ type WidgetTracking = {
   clientId?: string;
   referer?: string;
   isWidget?: boolean;
+  embedViewId?: string;
+  theme?: ThemeTypeVariant;
+  enableAudio?: boolean;
+  enableWbw?: boolean;
+  enableWbwTransliteration?: boolean;
+  showArabic?: boolean;
+  showTafsirs?: boolean;
+  showReflections?: boolean;
+  showLessons?: boolean;
+  showAnswers?: boolean;
+  mergeVerses?: boolean;
+  locale?: string;
+  rangeStart?: number;
+  rangeEnd?: number;
 };
 
 /**
@@ -278,6 +292,25 @@ const buildVerseParams = (
   // Add tracking params for widget analytics
   if (tracking?.clientId) params.clientId = tracking.clientId;
   if (tracking?.referer) params.referer = tracking.referer;
+  if (typeof tracking?.isWidget === 'boolean') params.isWidget = tracking.isWidget;
+  if (tracking?.embedViewId) params.embedViewId = tracking.embedViewId;
+  if (tracking?.theme) params.theme = tracking.theme;
+  if (typeof tracking?.enableAudio === 'boolean') params.enableAudio = tracking.enableAudio;
+  if (typeof tracking?.enableWbw === 'boolean') params.enableWbw = tracking.enableWbw;
+  if (typeof tracking?.enableWbwTransliteration === 'boolean') {
+    params.enableWbwTransliteration = tracking.enableWbwTransliteration;
+  }
+  if (typeof tracking?.showArabic === 'boolean') params.showArabic = tracking.showArabic;
+  if (typeof tracking?.showTafsirs === 'boolean') params.showTafsirs = tracking.showTafsirs;
+  if (typeof tracking?.showReflections === 'boolean') {
+    params.showReflections = tracking.showReflections;
+  }
+  if (typeof tracking?.showLessons === 'boolean') params.showLessons = tracking.showLessons;
+  if (typeof tracking?.showAnswers === 'boolean') params.showAnswers = tracking.showAnswers;
+  if (typeof tracking?.mergeVerses === 'boolean') params.mergeVerses = tracking.mergeVerses;
+  if (tracking?.locale) params.locale = tracking.locale;
+  if (typeof tracking?.rangeStart === 'number') params.rangeStart = tracking.rangeStart;
+  if (typeof tracking?.rangeEnd === 'number') params.rangeEnd = tracking.rangeEnd;
 
   // Strip undefined keys (clean query string)
   Object.keys(params).forEach((key: string) => {
@@ -309,6 +342,7 @@ export type AyahWidgetDataInput = {
   customHeight?: string;
   clientId?: string; // for tracking usage
   referer?: string; // url of the page hosting the widget iframe
+  embedViewId?: string; // stable id for one iframe render
   lp?: boolean; // minimal learning plan mode
 };
 
@@ -748,12 +782,31 @@ export const getAyahWidgetData = async (input: AyahWidgetDataInput): Promise<Aya
 
   // Verse keys & verses fetch.
   const verseKeys: string[] = buildVerseKeys(chapterNumber, verseNumber, normalizedRangeEnd);
+  const tracking: WidgetTracking = {
+    clientId: input.clientId,
+    referer: input.referer,
+    isWidget: true,
+    embedViewId: input.embedViewId,
+    theme,
+    enableAudio,
+    enableWbw,
+    enableWbwTransliteration,
+    showArabic,
+    showTafsirs,
+    showReflections,
+    showLessons,
+    showAnswers,
+    mergeVerses,
+    locale,
+    rangeStart: verseNumber,
+    rangeEnd: normalizedRangeEnd,
+  };
   const rawVerses: Verse[] = await fetchVersesByKeys(verseKeys, {
     translationIds,
     reciter,
     mushaf,
     wordByWordLocale,
-    tracking: { clientId: input.clientId, referer: input.referer, isWidget: true },
+    tracking,
   });
 
   if (!rawVerses.length) {
