@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react-func/max-lines-per-function */
 import { act } from 'react';
 
@@ -34,7 +36,9 @@ vi.mock('next-translate/setLanguage', () => ({
 }));
 
 vi.mock('@/redux/actions/sync-locale-dependent-settings', () => ({
-  default: vi.fn(() => ({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' })),
+  // This action is a thunk in production. Keep the mock returning a function so
+  // the hook test matches real dispatch behavior.
+  default: vi.fn(() => (_dispatch: Dispatch) => undefined),
 }));
 
 vi.mock('@/redux/actions/reset-settings', () => ({
@@ -84,7 +88,7 @@ describe('useLanguageChange', () => {
       prevLocale: 'ar',
       nextLocale: 'en',
     });
-    expect(dispatch).toHaveBeenCalledWith({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' });
+    expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
     expect(dispatch).not.toHaveBeenCalledWith({ type: 'RESET_SETTINGS', payload: 'en' });
     expect(addOrUpdateUserPreference).not.toHaveBeenCalled();
     expect(setLocaleCookie).toHaveBeenCalledWith('en');
@@ -102,7 +106,6 @@ describe('useLanguageChange', () => {
     });
 
     expect(syncLocaleDependentSettings).not.toHaveBeenCalled();
-    expect(dispatch).not.toHaveBeenCalledWith({ type: 'SYNC_LOCALE_DEPENDENT_SETTINGS' });
     expect(addOrUpdateUserPreference).toHaveBeenCalledWith(
       PreferenceGroup.LANGUAGE,
       'en',

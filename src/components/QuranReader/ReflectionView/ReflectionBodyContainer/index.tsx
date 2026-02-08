@@ -15,12 +15,14 @@ import CompactSelector from '@/dls/CompactSelector';
 import Tabs from '@/dls/Tabs/Tabs';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import { getReadingPreferencesInitialState } from '@/redux/defaultSettings/util';
 import {
   selectReflectionLanguages,
   setReflectionLanguages,
   selectLessonLanguages,
   setLessonLanguages,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -94,28 +96,26 @@ const ReflectionBodyContainer = ({
       ? storedReflectionLanguages
       : storedLessonLanguages;
 
-  // Handle locale changes - auto-update language selection based on user's customization
+  // Guest-only: keep reflection/lesson content languages aligned with the site locale
+  // unless the user customized those selections.
   useEffect(() => {
     const prevLang = prevLangRef.current;
     if (prevLang === lang) return;
     prevLangRef.current = lang;
 
-    // Update reflection languages
-    if (storedReflectionLanguages.length === 1) {
-      // Single language = follow locale (replace)
-      dispatch(setReflectionLanguages([lang]));
-    } else if (!storedReflectionLanguages.includes(lang)) {
-      // Multiple languages = add new locale if not present
-      dispatch(setReflectionLanguages([...storedReflectionLanguages, lang]));
-    }
+    // Logged-in users have persisted preferences; don't mutate them implicitly on locale change.
+    if (isLoggedIn()) return;
 
-    // Update lesson languages
-    if (storedLessonLanguages.length === 1) {
-      // Single language = follow locale (replace)
-      dispatch(setLessonLanguages([lang]));
-    } else if (!storedLessonLanguages.includes(lang)) {
-      // Multiple languages = add new locale if not present
-      dispatch(setLessonLanguages([...storedLessonLanguages, lang]));
+    // Semantics (matches `syncLocaleDependentSettings`):
+    // - Single language matching the previous locale => treat as "follow locale" and replace with defaults.
+    // - Otherwise (single non-matching or multiple languages) => treat as customized and preserve.
+    const defaultReadingPrefs = getReadingPreferencesInitialState(lang);
+
+    if (storedReflectionLanguages.length === 1 && storedReflectionLanguages[0] === prevLang) {
+      dispatch(setReflectionLanguages(defaultReadingPrefs.selectedReflectionLanguages));
+    }
+    if (storedLessonLanguages.length === 1 && storedLessonLanguages[0] === prevLang) {
+      dispatch(setLessonLanguages(defaultReadingPrefs.selectedLessonLanguages));
     }
   }, [lang, dispatch, storedReflectionLanguages, storedLessonLanguages]);
 
