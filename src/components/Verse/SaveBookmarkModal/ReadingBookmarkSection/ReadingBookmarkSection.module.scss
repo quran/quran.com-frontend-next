@@ -9,6 +9,8 @@ $box-height: 46px;
   gap: var(--spacing-small-px);
   block-size: $box-height;
   padding: var(--spacing-medium-px);
+  padding-inline-end: var(--spacing-medium2-px);
+  padding-inline-start: var(--spacing-medium2-px);
   background-color: var(--color-background-alternative-faint-new);
   border-radius: var(--border-radius-large-px);
   cursor: pointer;
@@ -36,8 +38,11 @@ $box-height: 46px;
 .removeReadingBookmarkSection {
   display: flex;
   align-items: center;
-  gap: var(--spacing-small);
-  padding: var(--spacing-medium);
+  gap: var(--spacing-small-px);
+  block-size: $box-height;
+  padding: var(--spacing-medium-px);
+  padding-inline-start: var(--spacing-medium2-px);
+  padding-inline-end: var(--spacing-medium2-px);
   background-color: var(--color-background-alternative-faint-new);
   border-radius: var(--border-radius-large-px);
   cursor: pointer;
@@ -52,7 +57,7 @@ $box-height: 46px;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--color-success-medium);
+    color: var(--color-bookmark-icon);
     transition: color var(--transition-normal) ease;
 
     svg {
@@ -118,6 +123,14 @@ $box-height: 46px;
   font-size: var(--font-size-xsmall-px);
   color: var(--color-text-faded-new);
   flex-wrap: wrap;
+}
+
+.readingBookmarkRadio {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  color: transparent;
+  box-sizing: border-box;
+  border: var(--spacing-micro-px) solid var(--color-grey-icons-new);
 }
 
 .label {

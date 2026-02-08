@@ -223,6 +223,110 @@ describe('useReadingBookmark - Logged-in User', () => {
     });
   });
 
+  describe('optimistic override behavior', () => {
+    it('clears override once base bookmark data matches, then follows base changes', async () => {
+      const initialProps = {
+        type: ReadingBookmarkType.AYAH,
+        verseKey: '2:255',
+        lang: 'en',
+        isLoggedIn: true,
+        mushafId: 1,
+        readingBookmarkData: null,
+      };
+
+      const { result, rerender } = renderHook((props) => useReadingBookmark(props), {
+        initialProps,
+      });
+
+      await act(async () => {
+        await result.current.handleSetReadingBookmark();
+      });
+
+      expect(result.current.displayReadingBookmark).toBe('Al-Baqarah 2:255');
+
+      // Base data is stale/different -> optimistic override should still win
+      rerender({
+        ...initialProps,
+        readingBookmarkData: {
+          id: 'bm-old',
+          key: 1,
+          verseNumber: 1,
+          type: BookmarkType.Ayah,
+        },
+      });
+      expect(result.current.displayReadingBookmark).toBe('Al-Baqarah 2:255');
+
+      // Base data catches up -> override should clear
+      rerender({
+        ...initialProps,
+        readingBookmarkData: {
+          id: 'bm-new',
+          key: 2,
+          verseNumber: 255,
+          type: BookmarkType.Ayah,
+        },
+      });
+      await act(async () => {});
+
+      // After override clears, base changes should be reflected
+      rerender({
+        ...initialProps,
+        readingBookmarkData: {
+          id: 'bm-old',
+          key: 1,
+          verseNumber: 1,
+          type: BookmarkType.Ayah,
+        },
+      });
+      expect(result.current.displayReadingBookmark).toBe('Al-Fatihah 1:1');
+    });
+  });
+
+  describe('showNewBookmark/previousBookmarkValue transitions', () => {
+    it('sets previousBookmark on set and clears it on undo', async () => {
+      vi.useFakeTimers();
+      try {
+        const { result } = renderHook(() =>
+          useReadingBookmark({
+            type: ReadingBookmarkType.AYAH,
+            verseKey: '2:255',
+            lang: 'en',
+            isLoggedIn: true,
+            mushafId: 1,
+            readingBookmarkData: {
+              id: 'bm-1',
+              key: 1,
+              verseNumber: 1,
+              type: BookmarkType.Ayah,
+            },
+          }),
+        );
+
+        expect(result.current.showNewBookmark).toBe(false);
+        expect(result.current.previousBookmarkValue).toBeUndefined();
+
+        await act(async () => {
+          await result.current.handleSetReadingBookmark();
+        });
+
+        expect(result.current.showNewBookmark).toBe(true);
+        expect(result.current.previousBookmarkValue).toBe('Al-Fatihah 1:1');
+
+        await act(async () => {
+          await result.current.handleUndoReadingBookmark();
+        });
+        await act(async () => {
+          vi.runAllTimers();
+        });
+
+        expect(result.current.showNewBookmark).toBe(false);
+        expect(result.current.previousBookmarkValue).toBeUndefined();
+      } finally {
+        vi.useRealTimers();
+      }
+    });
+  });
+
   describe('handleRemoveCurrentBookmark', () => {
     it('calls addBookmark with isReading: null to unset verse bookmark', async () => {
       const readingBookmarkData = {
