@@ -94,9 +94,9 @@ const useReadingBookmark = ({
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [pendingBookmark, setPendingBookmark] = useState<GuestReadingBookmark | Bookmark | null>(
-    null,
-  );
+  const [optimisticBookmarkOverride, setOptimisticBookmarkOverride] = useState<
+    GuestReadingBookmark | Bookmark | null | undefined
+  >(undefined);
   const [previousBookmark, setPreviousBookmark] = useState<
     GuestReadingBookmark | Bookmark | null | undefined
   >(undefined);
@@ -110,13 +110,39 @@ const useReadingBookmark = ({
   const isVerse = type === ReadingBookmarkType.AYAH;
 
   // Get effective current bookmark based on user type
+  const baseBookmarkData = isLoggedIn ? readingBookmarkData : guestReadingBookmark;
   const effectiveCurrentBookmarkData: GuestReadingBookmark | Bookmark | null | undefined =
     useMemo(() => {
-      if (isLoggedIn) {
-        return readingBookmarkData;
+      if (optimisticBookmarkOverride !== undefined) {
+        return optimisticBookmarkOverride;
       }
-      return guestReadingBookmark;
-    }, [isLoggedIn, readingBookmarkData, guestReadingBookmark]);
+      return baseBookmarkData;
+    }, [optimisticBookmarkOverride, baseBookmarkData]);
+
+  const areBookmarksEquivalent = useCallback(
+    (
+      first: GuestReadingBookmark | Bookmark | null | undefined,
+      second: GuestReadingBookmark | Bookmark | null | undefined,
+    ): boolean => {
+      if (!first && !second) return true;
+      if (!first || !second) return false;
+      return (
+        first.type === second.type &&
+        first.key === second.key &&
+        (first.verseNumber ?? null) === (second.verseNumber ?? null)
+      );
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (optimisticBookmarkOverride === undefined) {
+      return;
+    }
+    if (areBookmarksEquivalent(optimisticBookmarkOverride, baseBookmarkData)) {
+      setOptimisticBookmarkOverride(undefined);
+    }
+  }, [optimisticBookmarkOverride, baseBookmarkData, areBookmarksEquivalent]);
 
   // Build display name for current resource
   const resourceDisplayName = useMemo(() => {
@@ -240,7 +266,7 @@ const useReadingBookmark = ({
     effectivePageNumber,
   ]);
 
-  const showNewBookmark = pendingBookmark != null;
+  const showNewBookmark = previousBookmark !== undefined;
 
   // For backward compatibility with SetBookmarkSection (returns strings)
   const displayReadingBookmark = useMemo(() => {
@@ -370,6 +396,9 @@ const useReadingBookmark = ({
               createdAt: new Date().toISOString(),
             };
 
+      setPreviousBookmark(effectiveCurrentBookmarkData);
+      setOptimisticBookmarkOverride(newBookmark);
+
       // Persist to backend and get the response with the real ID
       const savedBookmark = await persistBookmark(newBookmark);
 
@@ -377,22 +406,17 @@ const useReadingBookmark = ({
       if (isLoggedIn && mutateReadingBookmark && savedBookmark) {
         // Use the actual bookmark from the API response (has real ID)
         await mutateReadingBookmark(savedBookmark, { revalidate: false });
+        setOptimisticBookmarkOverride(savedBookmark);
       }
 
-      // Save previous state for undo and set pending state
-      setPreviousBookmark(effectiveCurrentBookmarkData);
-      setPendingBookmark(newBookmark);
-
       logEvent('reading_bookmark_added');
-
-      setTimeout(() => {
-        setPendingBookmark(null);
-      }, STATE_TRANSITION_DELAY_MS);
 
       // Note: We intentionally DON'T call onBookmarkChanged() here for logged-in users
       // because immediate refetch returns stale data due to eventual consistency.
       // The cache will naturally revalidate on next page load or when user navigates away.
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
+      setPreviousBookmark(undefined);
       setError(
         t('error.reading-bookmark-set', {
           defaultValue: 'Failed to set reading bookmark',
@@ -423,6 +447,7 @@ const useReadingBookmark = ({
     setIsLoading(true);
     setError(null);
     setIsUndoInProgress(true);
+    setOptimisticBookmarkOverride(previousBookmark);
 
     try {
       // If previous was null, unset the bookmark; otherwise restore it
@@ -443,7 +468,6 @@ const useReadingBookmark = ({
         }
       }
 
-      setPendingBookmark(null);
       setPreviousBookmark(undefined);
 
       logEvent('reading_bookmark_undo_clicked');
@@ -453,6 +477,7 @@ const useReadingBookmark = ({
         await onBookmarkChanged();
       }
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
       setError(
         t('error.reading-bookmark-undo', {
           defaultValue: 'Failed to undo reading bookmark',
@@ -493,6 +518,7 @@ const useReadingBookmark = ({
     setIsLoading(true);
     setError(null);
     setIsRemovalInProgress(true);
+    setOptimisticBookmarkOverride(null);
 
     try {
       await unsetBookmark(bookmarkToRemove);
@@ -510,6 +536,7 @@ const useReadingBookmark = ({
         await onBookmarkChanged();
       }
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
       setError(
         t('error.reading-bookmark-remove', {
           defaultValue: 'Failed to remove reading bookmark',
