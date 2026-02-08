@@ -82,7 +82,7 @@ const toLocalizedVerseKeyRTLMock = vi.fn((key: string, _lang: string) =>
 const isRTLLocaleMock = vi.fn((lang: string) => lang === 'ar');
 
 vi.mock('@/utils/locale', () => ({
-  toLocalizedNumber: (n: number) => toLocalizedNumberMock(n),
+  toLocalizedNumber: (n: number, lang?: string) => toLocalizedNumberMock(n, lang),
   toLocalizedVerseKey: (key: string, lang: string) => toLocalizedVerseKeyMock(key, lang),
   toLocalizedVerseKeyRTL: (key: string, lang: string) => toLocalizedVerseKeyRTLMock(key, lang),
   isRTLLocale: (lang: string) => isRTLLocaleMock(lang),
