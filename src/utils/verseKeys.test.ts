@@ -344,8 +344,8 @@ it('converts verse ranges to verse keys - handles multi-chapter ranges', async (
 
 it('formats verse ranges to readable format - basic functionality', async () => {
   const chaptersData = await getAllChaptersData();
-  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersData, 'en')).toEqual(['Al-Fatihah 1:1-1:3']);
-  expect(readableVerseRangeKeys(['78:1-78:2'], chaptersData, 'en')).toEqual(['An-Naba 78:1-78:2']);
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersData, 'en')).toEqual(['Al-Fatihah 1:1-3']);
+  expect(readableVerseRangeKeys(['78:1-78:2'], chaptersData, 'en')).toEqual(['An-Naba 78:1-2']);
 });
 
 it('formats verse ranges to readable format - single verses', async () => {
@@ -357,15 +357,15 @@ it('formats verse ranges to readable format - single verses', async () => {
 it('formats verse ranges to readable format - handles localization', async () => {
   const chaptersDataAr = await getAllChaptersData('ar');
   const chaptersDataEn = await getAllChaptersData('en');
-  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataAr, 'ar')).toEqual(['الفاتحة ١:١-١:٣']);
-  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataEn, 'en')).toEqual(['Al-Fatihah 1:1-1:3']);
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataAr, 'ar')).toEqual(['الفاتحة ١:١-٣']);
+  expect(readableVerseRangeKeys(['1:1-1:3'], chaptersDataEn, 'en')).toEqual(['Al-Fatihah 1:1-3']);
 });
 
 it('formats verse ranges to readable format - filters invalid ranges', async () => {
   const chaptersData = await getAllChaptersData();
   expect(readableVerseRangeKeys(['invalid-range'], chaptersData, 'en')).toEqual([]);
   expect(readableVerseRangeKeys(['1:1-1:3', 'not-a-range'], chaptersData, 'en')).toEqual([
-    'Al-Fatihah 1:1-1:3',
+    'Al-Fatihah 1:1-3',
   ]);
   expect(readableVerseRangeKeys(['1:1'], chaptersData, 'en')).toEqual([]);
 });
@@ -379,7 +379,7 @@ it('formats verse ranges to readable format - handles multiple ranges', async ()
   const chaptersData = await getAllChaptersData();
   expect(readableVerseRangeKeys(['1:1-1:1', '2:1-2:2'], chaptersData, 'en')).toEqual([
     'Al-Fatihah 1:1',
-    'Al-Baqarah 2:1-2:2',
+    'Al-Baqarah 2:1-2',
   ]);
 });
 
