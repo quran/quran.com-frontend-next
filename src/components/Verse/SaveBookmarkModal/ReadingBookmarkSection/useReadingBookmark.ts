@@ -36,7 +36,12 @@ import { addBookmark, deleteBookmarkById as deleteBookmark } from '@/utils/auth/
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getChapterData } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
-import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import {
+  isRTLLocale,
+  toLocalizedNumber,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 
 /** Debounce delay to prevent flicker when state updates */
 const STATE_TRANSITION_DELAY_MS = 300;
@@ -90,6 +95,12 @@ const useReadingBookmark = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const currentMushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines)
     .mushaf as Mushaf;
+  const isRtlLocale = isRTLLocale(lang);
+  const localizeVerseKey = useCallback(
+    (key: string): string =>
+      isRtlLocale ? toLocalizedVerseKeyRTL(key, lang) : toLocalizedVerseKey(key, lang),
+    [isRtlLocale, lang],
+  );
 
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
 
@@ -149,13 +160,14 @@ const useReadingBookmark = ({
     if (isVerse && verseKey) {
       const [chapterId] = verseKey.split(':');
       const chapter = getChapterData(chaptersData, chapterId);
-      return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(verseKey, lang)}`;
+      const localizedVerseKey = localizeVerseKey(verseKey);
+      return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (!isVerse && pageNumber) {
       return `${t('page')} ${toLocalizedNumber(pageNumber, lang)}`;
     }
     return '';
-  }, [isVerse, verseKey, pageNumber, chaptersData, lang, t]);
+  }, [isVerse, verseKey, pageNumber, chaptersData, localizeVerseKey, lang, t]);
 
   // Format bookmark for display
   const formatBookmarkForDisplay = useCallback(
@@ -164,17 +176,16 @@ const useReadingBookmark = ({
       if (bookmark.type === BookmarkType.Ayah) {
         const chapter = getChapterData(chaptersData, String(bookmark.key));
         const verseNum = bookmark.verseNumber || 1;
-        return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(
-          `${bookmark.key}:${verseNum}`,
-          lang,
-        )}`;
+        const bookmarkVerseKey = `${bookmark.key}:${verseNum}`;
+        const localizedVerseKey = localizeVerseKey(bookmarkVerseKey);
+        return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
       }
       if (bookmark.type === BookmarkType.Page) {
         return `${t('page')} ${toLocalizedNumber(bookmark.key, lang)}`;
       }
       return null;
     },
-    [chaptersData, lang, t],
+    [chaptersData, localizeVerseKey, lang, t],
   );
 
   // Use the reusable mapping hook for cross-mushaf bookmark handling
@@ -280,10 +291,9 @@ const useReadingBookmark = ({
       const verseNumber =
         effectiveAyahVerseKey?.verseNumber ?? effectiveCurrentBookmarkData.verseNumber ?? 1;
       const chapter = getChapterData(chaptersData, String(surahNumber));
-      return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(
-        `${surahNumber}:${verseNumber}`,
-        lang,
-      )}`;
+      const mappedVerseKey = `${surahNumber}:${verseNumber}`;
+      const localizedVerseKey = localizeVerseKey(mappedVerseKey);
+      return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (effectiveCurrentBookmarkData.type === BookmarkType.Page) {
       if (effectivePageNumber === null) {
@@ -298,6 +308,7 @@ const useReadingBookmark = ({
     effectiveAyahVerseKey,
     needsMapping,
     chaptersData,
+    localizeVerseKey,
     lang,
     t,
   ]);
