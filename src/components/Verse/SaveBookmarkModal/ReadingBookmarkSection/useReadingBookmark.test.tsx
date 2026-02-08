@@ -75,6 +75,8 @@ vi.mock('@/utils/chapter', () => ({
 vi.mock('@/utils/locale', () => ({
   toLocalizedNumber: (n: number) => String(n),
   toLocalizedVerseKey: (key: string) => key,
+  toLocalizedVerseKeyRTL: (key: string) => key,
+  isRTLLocale: (lang: string) => lang === 'ar',
 }));
 
 describe('useReadingBookmark - Logged-in User', () => {
