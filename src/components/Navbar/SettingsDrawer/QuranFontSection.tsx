@@ -265,6 +265,7 @@ const QuranFontSection = () => {
             <input
               type="checkbox"
               id="show-tajweed-rules"
+              aria-label={t('quran-reader:show-tajweed-rules')}
               checked={showTajweedRules}
               onChange={(e) => onShowTajweedRulesChange(e.target.checked)}
               className={styles.tajweedHiddenCheckbox}

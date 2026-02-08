@@ -51,10 +51,20 @@
 
 .tajweedHiddenCheckbox {
   position: absolute;
-  opacity: 0;
-  inline-size: 0;
-  block-size: 0;
-  pointer-events: none;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tajweedHiddenCheckbox:focus-visible + .tajweedCheckbox {
+  outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+  outline-offset: var(--spacing-micro-px);
 }
 
 .tajweedCheckbox {
