@@ -94,9 +94,21 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
     Number(options.rangeEnd),
     locale,
   );
-  const headerTitle = options.surahName
-    ? `${surahLabel} ${options.surahName} [${localizedVerseCaption}]`
-    : `${verseWordLabel} ${verseLabel}`;
+  // If surah name is provided, show "Surah [Name] [Verse Caption]", otherwise show "Verse [Verse Caption]"
+  const headerTitle = options.surahName ? (
+    <>
+      <span>{`${surahLabel} `}</span>
+      <bdi>{options.surahName}</bdi>
+      <span>{' ['}</span>
+      <bdi>{localizedVerseCaption}</bdi>
+      <span>]</span>
+    </>
+  ) : (
+    <>
+      <span>{`${verseWordLabel} `}</span>
+      <bdi>{verseLabel}</bdi>
+    </>
+  );
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
 
   // Construct the URL to the verse on Quran.com
