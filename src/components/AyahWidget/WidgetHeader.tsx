@@ -223,6 +223,7 @@ const WidgetHeader = ({ verse, options, colors }: Props): JSX.Element => {
     <div
       style={{
         display: 'flex',
+        direction: 'ltr',
         flexDirection: isRtl ? 'row-reverse' : 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
