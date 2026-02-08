@@ -14,6 +14,7 @@ import VerseText from '@/components/Verse/VerseText';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useQcfFont from '@/hooks/useQcfFont';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -35,6 +36,7 @@ interface VerseResponse {
 const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
 
   const verseKey = makeVerseKey(chapterId, verseNumber);
@@ -46,7 +48,7 @@ const VerseDisplay: React.FC<VerseDisplayProps> = ({ chapterId, verseNumber }) =
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;

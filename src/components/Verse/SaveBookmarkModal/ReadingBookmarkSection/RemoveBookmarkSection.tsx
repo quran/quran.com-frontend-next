@@ -11,8 +11,6 @@ import CheckIcon from '@/icons/check.svg';
 import QuestionIcon from '@/icons/question-mark-rounded.svg';
 
 interface RemoveBookmarkSectionProps {
-  /** Display name for the current bookmark location */
-  resourceDisplayName: string;
   /** Whether the remove operation is in progress */
   isLoading: boolean;
   /** Handler to remove the current bookmark */
@@ -25,11 +23,7 @@ interface RemoveBookmarkSectionProps {
  * Displays the current bookmark state and allows removing the bookmark.
  * @returns {JSX.Element} The RemoveBookmarkSection component
  */
-const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
-  resourceDisplayName,
-  isLoading,
-  onRemove,
-}) => {
+const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({ isLoading, onRemove }) => {
   const { t } = useTranslation('quran-reader');
 
   const handleClick = useCallback(async () => {
@@ -64,10 +58,6 @@ const RemoveBookmarkSection: React.FC<RemoveBookmarkSectionProps> = ({
           <span className={styles.questionIcon} title={t('remove-my-reading-bookmark')}>
             <QuestionIcon />
           </span>
-        </div>
-        <div className={styles.removeInfo}>
-          <span className={styles.label}>{t('current')}:</span>
-          <span className={styles.value}>{resourceDisplayName}</span>
         </div>
       </div>
 

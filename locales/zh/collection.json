@@ -4,15 +4,23 @@
   "back-to-collection-list": "返回收藏列表",
   "collapse-all": "折叠所有经文",
   "collection-list-empty": "收藏列表为空。您还没有创建任何收藏",
+  "collection-name": "收藏名称",
   "collections": "收藏品",
   "delete-bookmark": {
     "subtitle": "确定要从{{collectionName}}收藏中删除{{bookmarkName}}吗？",
     "title": "删除书签"
   },
+  "delete-collection-action": "删除收藏集",
+  "delete-collection-success": "收藏已成功删除",
   "delete-collection": {
+    "description": "您将丢失此收藏集中保存的所有诗句。",
     "subtitle": "确定要删除{{collectionName}}收藏吗？",
+    "subtitle-tagged": "您确定要删除吗？ <collectionName>{{collectionName}}</collectionName> ？",
     "title": "删除收藏"
   },
+  "edit-collection": "编辑收藏",
+  "edit-collection-name-required": "输入要保存的收藏集名称。",
+  "edit-collection-success": "馆藏已成功更新",
   "empty": "集合为空",
   "expand-all": "展开所有经文",
   "go-to-ayah": "去啊啊",

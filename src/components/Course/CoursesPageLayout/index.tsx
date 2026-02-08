@@ -49,7 +49,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
             fetcher={privateFetcher}
             queryKey={makeGetCoursesUrl({ myCourses: isMyCourses, languages: [lang] })}
             render={(data: CoursesResponse) => (
-              <CoursesList courses={data.data} isMyCourses={isMyCourses} />
+              <CoursesList initialResponse={data} isMyCourses={isMyCourses} languages={[lang]} />
             )}
           />
         </div>

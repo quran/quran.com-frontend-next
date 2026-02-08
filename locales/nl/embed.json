@@ -1,0 +1,85 @@
+{
+  "actions": {
+    "copied": "Gekopieerd!",
+    "copy": "Kopiëren",
+    "copyEmbedSnippet": "Kopieer insluitfragment"
+  },
+  "checkboxes": {
+    "answers": "Knop 'Antwoorden weergeven' (indien beschikbaar)",
+    "audio": "Audio afspelen inschakelen",
+    "customSize": "Gebruik aangepaste breedte/hoogte",
+    "lessons": "Knop 'Lessen weergeven'",
+    "mergeVerses": "Verzen samenvoegen (inline weergave)",
+    "reflections": "Toon reflecties-knop",
+    "showArabic": "Toon Arabisch vers",
+    "tafsirs": "Toon Tafsirs-knop",
+    "translator": "Toon de naam van de vertaler",
+    "verseRange": "Versbereik inschakelen",
+    "wordByWord": "Woord-voor-woord vertaling inschakelen",
+    "wordByWordTransliteration": "Schakel woord-voor-woord transliteratie in."
+  },
+  "errors": {
+    "clipboardFallback": "Schrijven naar klembord mislukt, terugvaloptie wordt gebruikt",
+    "clipboardUnavailable": "Klembord-API niet beschikbaar",
+    "loadChapters": "Hoofdstukken kunnen niet worden geladen.",
+    "loadReciters": "Kan de voorlezers niet laden.",
+    "loadTranslations": "Vertalingen kunnen niet worden geladen."
+  },
+  "fields": {
+    "ayah": "Ayah",
+    "clientId": "Klant-ID",
+    "height": "Hoogte",
+    "language": "Taal",
+    "mushaf": "Mushaf",
+    "reciter": "Voordrager",
+    "surah": "Soera",
+    "theme": "Thema",
+    "translations": "Vertalingen",
+    "width": "Breedte"
+  },
+  "header": {
+    "subtitle": "<bold>Een hoogwaardigere, aanpasbare manier om koranverzen in je content op te nemen.</bold><br />Maak een embed die je eenvoudig kunt aanpassen, met <bold>Nauwkeurige Arabische weergave, ingebouwde voordracht</bold> en meer, zodat lezers kunnen luisteren terwijl ze zich met het vers bezighouden.",
+    "title": "Ayah Embed Builder"
+  },
+  "meta": {
+    "description": "Configureer en bekijk een voorbeeld van de widgets voor het delen van de Koran, en kopieer vervolgens het kant-en-klare scriptfragment.",
+    "title": "Ayah Embed Builder | Quran.com"
+  },
+  "mushaf": {
+    "indopak": "Indopak",
+    "kfgqpc_v1": "Koning Fahad Complex v1",
+    "kfgqpc_v2": "Koning Fahad Complex v2",
+    "qpc": "QPC Uthmani Hafs",
+    "tajweed": "Tajweed"
+  },
+  "placeholders": {
+    "searchTranslations": "Zoek vertalingen..."
+  },
+  "reciters": {
+    "select": "Selecteer voordrager"
+  },
+  "sections": {
+    "configuration": "Configuratie",
+    "preview": "Live preview",
+    "snippet": "Insluiten van codefragment"
+  },
+  "states": {
+    "loadingChapters": "Hoofdstukken worden geladen...",
+    "loadingPreview": "Voorbeeldweergave laden...",
+    "loadingReciters": "Recitators worden geladen...",
+    "loadingVerses": "Verzen worden geladen...",
+    "noTranslations": "Geen vertalingen gevonden"
+  },
+  "theme": {
+    "dark": "Donker",
+    "light": "Licht",
+    "sepia": "Sepia"
+  },
+  "translations": {
+    "chipRemoveLabel": "Verwijder vertaling",
+    "otherLanguage": "Ander"
+  },
+  "widget": {
+    "readOnQuran": "Lees verder op Quran.com"
+  }
+}

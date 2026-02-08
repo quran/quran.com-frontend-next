@@ -33,6 +33,7 @@ enum SliceName {
   GUEST_BOOKMARK = 'guestBookmark',
   STUDY_MODE = 'studyMode',
   VERSE_ACTION_MODAL = 'verseActionModal',
+  AYAH_WIDGET = 'ayahWidget',
   PINNED_VERSES = 'pinnedVerses',
 }
 

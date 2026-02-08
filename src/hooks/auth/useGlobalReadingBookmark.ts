@@ -74,7 +74,7 @@ const useGlobalReadingBookmark = (mushafId: number): UseGlobalReadingBookmarkRet
   return {
     readingBookmark: data ?? null,
     mutate,
-    isLoading: isValidating,
+    isLoading: isValidating && data === undefined,
     error,
   };
 };

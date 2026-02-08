@@ -87,8 +87,7 @@ $icon-size: var(--spacing-medium2-px);
   }
 
   &.selected {
-    background-color: var(--color-background-default);
-
+    background-color: transparent;
     .collectionIcon {
       color: var(--color-bookmark-icon) !important;
     }

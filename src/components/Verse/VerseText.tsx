@@ -20,7 +20,7 @@ import {
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { FALLBACK_FONT } from 'types/QuranReader';
+import { FALLBACK_FONT, MushafLines, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {
@@ -32,6 +32,12 @@ type VerseTextProps = {
   highlightedWordPosition?: number;
   isWordInteractionDisabled?: boolean;
   shouldDisableForceTooltip?: boolean;
+  quranFontOverride?: QuranFont;
+  quranTextFontScaleOverride?: number;
+  mushafLinesOverride?: MushafLines;
+  shouldShowWordByWordTranslation?: boolean;
+  shouldShowWordByWordTransliteration?: boolean;
+  isStandaloneMode?: boolean;
 };
 
 const VerseText = ({
@@ -43,20 +49,29 @@ const VerseText = ({
   highlightedWordPosition,
   isWordInteractionDisabled = false,
   shouldDisableForceTooltip = false,
+  // Standalone mode (widget/embed) doesn't use redux, so we can override these styles via props
+  quranFontOverride,
+  quranTextFontScaleOverride,
+  mushafLinesOverride,
+  shouldShowWordByWordTranslation,
+  shouldShowWordByWordTransliteration,
+  isStandaloneMode = false,
 }: VerseTextProps) => {
   const router = useRouter();
   const textRef = useRef(null);
-  const { quranFont, quranTextFontScale, mushafLines } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  );
+  const reduxStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const quranFont = quranFontOverride ?? reduxStyles.quranFont;
+  const quranTextFontScale = quranTextFontScaleOverride ?? reduxStyles.quranTextFontScale;
+  const mushafLines = mushafLinesOverride ?? reduxStyles.mushafLines;
   const [firstWord] = words;
   const { lineNumber, pageNumber } = firstWord;
-  const isFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectInlineDisplayWordByWordPreferences,
-    shallowEqual,
-  );
+  const reduxFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
+  const isFontLoaded = isStandaloneMode ? true : reduxFontLoaded;
+  const reduxWbwPrefs = useSelector(selectInlineDisplayWordByWordPreferences, shallowEqual);
+  const showWordByWordTranslation =
+    shouldShowWordByWordTranslation ?? reduxWbwPrefs.showWordByWordTranslation;
+  const showWordByWordTransliteration =
+    shouldShowWordByWordTransliteration ?? reduxWbwPrefs.showWordByWordTransliteration;
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
   const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
   const centerAlignPage = useMemo(
@@ -64,7 +79,11 @@ const VerseText = ({
     [pageNumber, lineNumber, quranFont],
   );
   // if it's translation mode and hideArabic query param is true, don't show the verse text
-  if (isReadingMode === false && router?.query?.[QueryParam.HIDE_ARABIC] === 'true') {
+  if (
+    !isStandaloneMode &&
+    isReadingMode === false &&
+    router?.query?.[QueryParam.HIDE_ARABIC] === 'true'
+  ) {
     return null;
   }
   const isBigTextLayout =
@@ -113,6 +132,11 @@ const VerseText = ({
                 tooltipType={tooltipType}
                 isWordInteractionDisabled={isWordInteractionDisabled}
                 shouldForceShowTooltip={isHighlightedWord && !shouldDisableForceTooltip}
+                quranTextFontScaleOverride={quranTextFontScaleOverride}
+                mushafLinesOverride={mushafLinesOverride}
+                shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
+                shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
+                isStandaloneMode={isStandaloneMode}
               />
             );
           })}

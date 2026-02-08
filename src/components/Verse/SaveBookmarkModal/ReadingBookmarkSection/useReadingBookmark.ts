@@ -35,7 +35,13 @@ import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById as deleteBookmark } from '@/utils/auth/api';
 import { GuestReadingBookmark } from '@/utils/bookmark';
 import { getChapterData } from '@/utils/chapter';
-import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { logEvent } from '@/utils/eventLogger';
+import {
+  isRTLLocale,
+  toLocalizedNumber,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 
 /** Debounce delay to prevent flicker when state updates */
 const STATE_TRANSITION_DELAY_MS = 300;
@@ -89,13 +95,19 @@ const useReadingBookmark = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const currentMushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines)
     .mushaf as Mushaf;
+  const isRtlLocale = isRTLLocale(lang);
+  const localizeVerseKey = useCallback(
+    (key: string): string =>
+      isRtlLocale ? toLocalizedVerseKeyRTL(key, lang) : toLocalizedVerseKey(key, lang),
+    [isRtlLocale, lang],
+  );
 
   const guestReadingBookmark = useSelector(selectGuestReadingBookmark);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [pendingBookmark, setPendingBookmark] = useState<GuestReadingBookmark | Bookmark | null>(
-    null,
-  );
+  const [optimisticBookmarkOverride, setOptimisticBookmarkOverride] = useState<
+    GuestReadingBookmark | Bookmark | null | undefined
+  >(undefined);
   const [previousBookmark, setPreviousBookmark] = useState<
     GuestReadingBookmark | Bookmark | null | undefined
   >(undefined);
@@ -109,26 +121,53 @@ const useReadingBookmark = ({
   const isVerse = type === ReadingBookmarkType.AYAH;
 
   // Get effective current bookmark based on user type
+  const baseBookmarkData = isLoggedIn ? readingBookmarkData : guestReadingBookmark;
   const effectiveCurrentBookmarkData: GuestReadingBookmark | Bookmark | null | undefined =
     useMemo(() => {
-      if (isLoggedIn) {
-        return readingBookmarkData;
+      if (optimisticBookmarkOverride !== undefined) {
+        return optimisticBookmarkOverride;
       }
-      return guestReadingBookmark;
-    }, [isLoggedIn, readingBookmarkData, guestReadingBookmark]);
+      return baseBookmarkData;
+    }, [optimisticBookmarkOverride, baseBookmarkData]);
+
+  const areBookmarksEquivalent = useCallback(
+    (
+      first: GuestReadingBookmark | Bookmark | null | undefined,
+      second: GuestReadingBookmark | Bookmark | null | undefined,
+    ): boolean => {
+      if (!first && !second) return true;
+      if (!first || !second) return false;
+      return (
+        first.type === second.type &&
+        first.key === second.key &&
+        (first.verseNumber ?? null) === (second.verseNumber ?? null)
+      );
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (optimisticBookmarkOverride === undefined) {
+      return;
+    }
+    if (areBookmarksEquivalent(optimisticBookmarkOverride, baseBookmarkData)) {
+      setOptimisticBookmarkOverride(undefined);
+    }
+  }, [optimisticBookmarkOverride, baseBookmarkData, areBookmarksEquivalent]);
 
   // Build display name for current resource
   const resourceDisplayName = useMemo(() => {
     if (isVerse && verseKey) {
       const [chapterId] = verseKey.split(':');
       const chapter = getChapterData(chaptersData, chapterId);
-      return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(verseKey, lang)}`;
+      const localizedVerseKey = localizeVerseKey(verseKey);
+      return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (!isVerse && pageNumber) {
       return `${t('page')} ${toLocalizedNumber(pageNumber, lang)}`;
     }
     return '';
-  }, [isVerse, verseKey, pageNumber, chaptersData, lang, t]);
+  }, [isVerse, verseKey, pageNumber, chaptersData, localizeVerseKey, lang, t]);
 
   // Format bookmark for display
   const formatBookmarkForDisplay = useCallback(
@@ -137,17 +176,16 @@ const useReadingBookmark = ({
       if (bookmark.type === BookmarkType.Ayah) {
         const chapter = getChapterData(chaptersData, String(bookmark.key));
         const verseNum = bookmark.verseNumber || 1;
-        return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(
-          `${bookmark.key}:${verseNum}`,
-          lang,
-        )}`;
+        const bookmarkVerseKey = `${bookmark.key}:${verseNum}`;
+        const localizedVerseKey = localizeVerseKey(bookmarkVerseKey);
+        return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
       }
       if (bookmark.type === BookmarkType.Page) {
         return `${t('page')} ${toLocalizedNumber(bookmark.key, lang)}`;
       }
       return null;
     },
-    [chaptersData, lang, t],
+    [chaptersData, localizeVerseKey, lang, t],
   );
 
   // Use the reusable mapping hook for cross-mushaf bookmark handling
@@ -239,7 +277,7 @@ const useReadingBookmark = ({
     effectivePageNumber,
   ]);
 
-  const showNewBookmark = pendingBookmark != null;
+  const showNewBookmark = previousBookmark !== undefined;
 
   // For backward compatibility with SetBookmarkSection (returns strings)
   const displayReadingBookmark = useMemo(() => {
@@ -253,10 +291,9 @@ const useReadingBookmark = ({
       const verseNumber =
         effectiveAyahVerseKey?.verseNumber ?? effectiveCurrentBookmarkData.verseNumber ?? 1;
       const chapter = getChapterData(chaptersData, String(surahNumber));
-      return `${chapter?.transliteratedName || ''} ${toLocalizedVerseKey(
-        `${surahNumber}:${verseNumber}`,
-        lang,
-      )}`;
+      const mappedVerseKey = `${surahNumber}:${verseNumber}`;
+      const localizedVerseKey = localizeVerseKey(mappedVerseKey);
+      return `${chapter?.transliteratedName || ''} ${localizedVerseKey}`;
     }
     if (effectiveCurrentBookmarkData.type === BookmarkType.Page) {
       if (effectivePageNumber === null) {
@@ -271,6 +308,7 @@ const useReadingBookmark = ({
     effectiveAyahVerseKey,
     needsMapping,
     chaptersData,
+    localizeVerseKey,
     lang,
     t,
   ]);
@@ -369,6 +407,9 @@ const useReadingBookmark = ({
               createdAt: new Date().toISOString(),
             };
 
+      setPreviousBookmark(effectiveCurrentBookmarkData);
+      setOptimisticBookmarkOverride(newBookmark);
+
       // Persist to backend and get the response with the real ID
       const savedBookmark = await persistBookmark(newBookmark);
 
@@ -376,20 +417,17 @@ const useReadingBookmark = ({
       if (isLoggedIn && mutateReadingBookmark && savedBookmark) {
         // Use the actual bookmark from the API response (has real ID)
         await mutateReadingBookmark(savedBookmark, { revalidate: false });
+        setOptimisticBookmarkOverride(savedBookmark);
       }
 
-      // Save previous state for undo and set pending state
-      setPreviousBookmark(effectiveCurrentBookmarkData);
-      setPendingBookmark(newBookmark);
-
-      setTimeout(() => {
-        setPendingBookmark(null);
-      }, STATE_TRANSITION_DELAY_MS);
+      logEvent('reading_bookmark_added');
 
       // Note: We intentionally DON'T call onBookmarkChanged() here for logged-in users
       // because immediate refetch returns stale data due to eventual consistency.
       // The cache will naturally revalidate on next page load or when user navigates away.
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
+      setPreviousBookmark(undefined);
       setError(
         t('error.reading-bookmark-set', {
           defaultValue: 'Failed to set reading bookmark',
@@ -420,6 +458,7 @@ const useReadingBookmark = ({
     setIsLoading(true);
     setError(null);
     setIsUndoInProgress(true);
+    setOptimisticBookmarkOverride(previousBookmark);
 
     try {
       // If previous was null, unset the bookmark; otherwise restore it
@@ -440,14 +479,16 @@ const useReadingBookmark = ({
         }
       }
 
-      setPendingBookmark(null);
       setPreviousBookmark(undefined);
+
+      logEvent('reading_bookmark_undo_clicked');
 
       // Only call onBookmarkChanged for guests
       if (!isLoggedIn && onBookmarkChanged) {
         await onBookmarkChanged();
       }
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
       setError(
         t('error.reading-bookmark-undo', {
           defaultValue: 'Failed to undo reading bookmark',
@@ -488,6 +529,7 @@ const useReadingBookmark = ({
     setIsLoading(true);
     setError(null);
     setIsRemovalInProgress(true);
+    setOptimisticBookmarkOverride(null);
 
     try {
       await unsetBookmark(bookmarkToRemove);
@@ -498,11 +540,14 @@ const useReadingBookmark = ({
         await mutateReadingBookmark(null, { revalidate: false });
       }
 
+      logEvent('reading_bookmark_removed');
+
       // Trigger refetch for guests only
       if (!isLoggedIn && onBookmarkChanged) {
         await onBookmarkChanged();
       }
     } catch (err) {
+      setOptimisticBookmarkOverride(undefined);
       setError(
         t('error.reading-bookmark-remove', {
           defaultValue: 'Failed to remove reading bookmark',

@@ -21,7 +21,12 @@ import { addCollection, addCollectionBookmark } from '@/utils/auth/api';
 import { getErrorStatus } from '@/utils/auth/errors';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import {
+  isRTLLocale,
+  toLocalizedNumber,
+  toLocalizedVerseKey,
+  toLocalizedVerseKeyRTL,
+} from '@/utils/locale';
 import { getChapterWithStartingVerseUrl, getPageNavigationUrl } from '@/utils/navigation';
 
 interface UseSaveBookmarkModalOptions {
@@ -129,7 +134,12 @@ const useSaveBookmarkModal = ({
   });
 
   // Localization
-  const localizedVerseKey = verse ? toLocalizedVerseKey(verseKey, lang) : '';
+  let localizedVerseKey = '';
+  if (verse) {
+    localizedVerseKey = isRTLLocale(lang)
+      ? toLocalizedVerseKeyRTL(verseKey, lang)
+      : toLocalizedVerseKey(verseKey, lang);
+  }
   const localizedPageNumber = pageNumber ? toLocalizedNumber(pageNumber, lang) : '';
 
   const modalTitle = isVerse

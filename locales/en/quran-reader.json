@@ -40,6 +40,7 @@
   "download-copy": "if you want to download text file.",
   "edgham": "Silent letter",
   "ekhfa": "Ghunna/ikhfa’",
+  "embed-widget": "Embed Widget",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Track Streaks, Create Custom Goals, Stay Consistent",
     "achieve-quran-goals-responsive": "Achieve Your Quran Goals",
@@ -83,11 +84,28 @@
     "sign-in-message": "Sign in or Sign up for free to gain access to the more features!",
     "title": "Save Your Progress"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",
   "info": "info",
   "juz-beginning": "Beginning of Juz",
   "languages": "Languages",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Life-Changing Stories: Lessons From Surah Al-Kahf learning plan banner",
+    "banner-image-description": "View the learning plan for Surah Al-Kahf",
+    "button-accessibility-label": "Learn more about the Surah Al-Kahf learning plan",
+    "main-headline": "Discover 4 life-changing stories from Surah Al-Kahf",
+    "subtitle-description": "(A free Learning Plan)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
+    "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
+    "button-accessibility-label": "Learn more about The Rescuer learning plan",
+    "main-headline": "Discover powerful lessons in Surah Al-Mulk today",
+    "subtitle-description": "(A free Learning Plan)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Al-Mulk learning plan banner",
     "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
@@ -171,12 +189,17 @@
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections": "Reflections",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
+  "related-verses": "Related verses",
+  "related-verses-desc": "Read and share Quranic related verses of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "remove-bookmark": "Remove bookmark",
   "remove-my-reading-bookmark": "Remove my Reading Bookmark",
   "remove-pinned-verse": "Remove verse {{verseKey}} from pinned",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",
   "rub-beginning": "Beginning of Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Saving More than one bookmark? Use collections:"
+  },
   "save-page": "Save Page {{pageNumber}}",
   "save-pinned-to-collection": "Save to Collection",
   "save-to": "Save to...",
@@ -190,6 +213,7 @@
   "selected-count": "{{count}} selected",
   "set-as-reading-bookmark": "Set as my Reading Bookmark",
   "share-your-reflection": "Share your reflection on this ayah",
+  "show-tajweed-rules": "Show Tajweed rules while reading:",
   "study-mode": "Study mode",
   "surah-beginning": "Beginning of Surah",
   "surah-info": "Surah Info",

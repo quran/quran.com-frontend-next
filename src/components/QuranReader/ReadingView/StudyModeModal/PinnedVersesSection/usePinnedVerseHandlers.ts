@@ -21,6 +21,7 @@ interface UsePinnedVerseHandlersProps {
   selectedTranslations: number[];
   setIsSaveModalOpen: (isOpen: boolean) => void;
   setIsLoadModalOpen: (isOpen: boolean) => void;
+  setIsNoteModalOpen: (isOpen: boolean) => void;
   unpinVerseWithSync: (verseKey: string) => Promise<void>;
   clearPinnedWithSync: () => Promise<void>;
   onGoToVerse: (chapterId: string, verseNumber: string) => void;
@@ -36,6 +37,7 @@ const usePinnedVerseHandlers = ({
   selectedTranslations,
   setIsSaveModalOpen,
   setIsLoadModalOpen,
+  setIsNoteModalOpen,
   unpinVerseWithSync,
   clearPinnedWithSync,
   onGoToVerse,
@@ -89,6 +91,15 @@ const usePinnedVerseHandlers = ({
     setIsLoadModalOpen(true);
   }, [router, setIsLoadModalOpen]);
 
+  const handleAddNote = useCallback(() => {
+    logButtonClick('study_mode_add_note');
+    if (!isLoggedIn()) {
+      router.push(getLoginNavigationUrl(router.asPath));
+      return;
+    }
+    setIsNoteModalOpen(true);
+  }, [router, setIsNoteModalOpen]);
+
   const handleCopy = useCallback(async () => {
     logButtonClick('study_mode_copy_pinned');
     try {
@@ -110,6 +121,7 @@ const usePinnedVerseHandlers = ({
     handleClear,
     handleSaveToCollection,
     handleLoadFromCollection,
+    handleAddNote,
     handleCopy,
   };
 };

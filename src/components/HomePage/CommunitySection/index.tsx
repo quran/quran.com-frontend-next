@@ -41,7 +41,7 @@ const CommunitySection = () => {
       <div className={styles.cardsContainer} data-testid={TestId.COMMUNITY_SECTION}>
         {lang === Language.EN && (
           <Card
-            className={styles.card}
+            className={classNames(styles.card, styles.ramadanCard)}
             link={ROUTES.RAMADAN_2026}
             isNewTab
             linkClassName={styles.link}
@@ -59,10 +59,12 @@ const CommunitySection = () => {
                   size={IconSize.Xsmall}
                   icon={<ArrowIcon />}
                   shouldForceSetColors={false}
-                  className={styles.arrowIcon}
+                  className={classNames(styles.arrowIcon, styles.ramadanArrowIcon)}
                 />
               </div>
-              <p className={styles.cardDescription}>{RAMADAN_EVENT.description}</p>
+              <p className={classNames(styles.cardDescription, styles.ramadanDescription)}>
+                {RAMADAN_EVENT.description}
+              </p>
             </div>
           </Card>
         )}

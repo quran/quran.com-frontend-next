@@ -99,6 +99,7 @@ const StudyModeSsrContainer: React.FC<StudyModeSsrContainerProps> = ({
       StudyModeTabId.LESSONS,
       StudyModeTabId.ANSWERS,
       StudyModeTabId.QIRAAT,
+      StudyModeTabId.RELATED_VERSES,
     ].includes(activeContentTab);
 
   if (!chaptersData || !initialChapterId || !initialVerseNumber) return null;

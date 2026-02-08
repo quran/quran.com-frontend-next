@@ -1,11 +1,7 @@
 @use 'src/styles/breakpoints';
 
-.header {
+.separator {
   border-block-start: var(--spacing-hairline-px) solid var(--color-separators-ayah-level);
-
-  display: flex;
-  justify-content: space-between;
-  // Smooth entrance animation
   animation: fadeIn var(--transition-moderate) ease-out;
 }
 
@@ -33,12 +29,22 @@
 
 .collectionItemsContainer {
   margin-block-start: var(--spacing-medium-px);
-  block-size: calc(var(--spacing-mega-px) * 5);
-  overflow: hidden;
   position: relative;
+
   // Smooth entrance animation
   animation: fadeInSlide var(--transition-regular) ease-out backwards;
   animation-delay: var(--transition-moderate);
+}
+
+.virtualizedList {
+  // Capped height for long collections; the internal Virtuoso scroller handles overflow.
+  block-size: calc(var(--spacing-mega-px) * 6);
+  max-block-size: calc(var(--spacing-mega-px) * 6);
+  inline-size: 100%;
+}
+
+.bodyScroll {
+  overflow: visible;
 }
 
 .verseContainer {
@@ -52,7 +58,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  margin-block-start: calc(2 * var(--spacing-mega-px));
+  margin-block-start: calc(0.5 * var(--spacing-mega-px));
   font-size: var(--font-size-xlarge);
   // Fade in animation for empty state
   animation: fadeIn var(--transition-moderate) ease-out;

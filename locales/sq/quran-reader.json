@@ -40,6 +40,7 @@
   "download-copy": "nëse dëshironi të shkarkoni një skedar teksti.",
   "edgham": "Idghaam",
   "ekhfa": "Ikhfa dhe Ghunna",
+  "embed-widget": "Widget i Integruar",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Ndiqni Seritë, Krijoni Objektiva të Personalizuara, Qëndroni të Qëndrueshëm",
     "achieve-quran-goals-responsive": "Arritni Qëllimet Tuaja Kur'anore",
@@ -83,11 +84,28 @@
     "sign-in-message": "Hyni ose regjistrohuni falas për të pasur akses në më shumë veçori!",
     "title": "Ruaj progresin tënd"
   },
+  "hadith": {
+    "title": "Hadith"
+  },
   "hizb-beginning": "Fillimi i Hizbit",
   "include-translator": "Të përfshihet emri i përkthyesit?",
   "info": "informacion",
   "juz-beginning": "Fillimi i Xhuzit",
   "languages": "Gjuhët",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "4 Histori që të Ndryshojnë Jetën: Mësime nga Surja Al-Kahf, plan mësimor",
+    "banner-image-description": "Shikoni planin e të nxënit për Suren El-Kehf",
+    "button-accessibility-label": "Mësoni më shumë rreth planit të të nxënit të Suresë El-Kahf",
+    "main-headline": "Zbuloni 4 histori që ndryshojnë jetën nga Sureja Al-Kahf",
+    "subtitle-description": "(Një Plan Mësimi falas)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Shpëtimtari: Mësime të Fuqishme në Suren El-Mulk, plan mësimor",
+    "banner-image-description": "Shikoni planin e të mësuarit të Shpëtimtarit për Suren El-Mulk",
+    "button-accessibility-label": "Mësoni më shumë rreth planit të të nxënit të Shpëtimtarit",
+    "main-headline": "Zbuloni mësime të fuqishme në Suren El-Mulk sot",
+    "subtitle-description": "(Një Plan Mësimi falas)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "Shpëtimtari: Mësime të Fuqishme në Suren El-Mulk, plan mësimor",
     "banner-image-description": "Shikoni planin e të mësuarit të Shpëtimtarit për Suren El-Mulk",
@@ -171,12 +189,17 @@
   "reflection-not-available": "Nuk ka reflektime të shqyrtuara për këtë ajet",
   "reflections": "Reflektime",
   "reflections-desc": "Lexoni dhe shpërndani reflektimet kuranore të {{ayahNumber}} të sures {{surahName}}",
+  "related-verses": "Vargje të ngjashme",
+  "related-verses-desc": "Lexoni dhe ndani ajetet e lidhura me Kuranin {{ayahNumber}} e Sures {{surahName}}",
   "remove-bookmark": "Hiq faqeruajtësin",
   "remove-my-reading-bookmark": "Hiq faqeshënuesin tim të leximit",
   "remove-pinned-verse": "Hiq vargun {{verseKey}} nga i fiksuar",
   "removed-from": "U hoq nga {{collectionName}}",
   "revelation-order-notice": "Shënim: ju jeni duke lundruar në Kuran sipas rendit të shpalljes. <link> Klikoni këtu </link> për t'u kthyer në renditjen e paracaktuar.",
   "rub-beginning": "Fillimi i Rub el Hizb",
+  "save-bookmark-modal": {
+    "collections-hint": "Po ruani më shumë se një faqeshënues? Përdorni koleksionet:"
+  },
   "save-page": "Ruaj faqen {{pageNumber}}",
   "save-pinned-to-collection": "Ruaj në Koleksion",
   "save-to": "Ruaje në...",
@@ -190,6 +213,7 @@
   "selected-count": "{{count}} zgjedhur",
   "set-as-reading-bookmark": "Vendos si faqeshënuesin tim të leximit",
   "share-your-reflection": "Ndani reflektimin tuaj mbi këtë ajet",
+  "show-tajweed-rules": "Trego rregullat e Texhvidit gjatë leximit:",
   "study-mode": "Modaliteti i studimit",
   "surah-beginning": "Fillimi i sures",
   "surah-info": "Info për Suren",

@@ -1,22 +1,83 @@
-.container {
+@use 'src/styles/breakpoints';
+
+$max-inline-size: 670px;
+
+.wrapper {
+  background: var(--color-background-elevated-new);
   min-block-size: 100vh;
+  padding-inline: var(--spacing-small);
+  padding-block-end: var(--spacing-xxxlarge-px);
 }
 
-.loadMoreContainer {
+.container {
+  max-inline-size: $max-inline-size;
+  margin-inline: auto;
+}
+
+.stickyHeader {
+  z-index: 10;
+  position: relative;
+  background: var(--color-background-elevated-new);
+  padding-block: var(--spacing-medium2-px);
+  margin-block-end: var(--spacing-medium2-px);
+  transition: var(--transition-fast) ease-out;
+
+  @include breakpoints.tablet {
+    position: sticky;
+    inset-block-start: 0;
+    transition: var(--transition-regular);
+    &[data-navbar-visible='true'] {
+      inset-block-start: var(--navbar-container-height);
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    block-size: 1px;
+    background: var(--color-separators-ayah-level);
+  }
+}
+
+.wrapper {
+  .backButton {
+    font-size: var(--font-size-large2);
+    max-inline-size: 100%;
+    inline-size: auto;
+    justify-content: flex-start;
+    block-size: auto;
+    margin: 0;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    text-align: start;
+
+    @include breakpoints.tablet {
+      font-size: var(--font-size-xlarge);
+    }
+  }
+}
+
+.statusContainer {
   display: flex;
-  margin-block-start: var(--spacing-medium);
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-}
-
-.loadingContainer {
-  display: flex;
-  justify-content: center;
-  margin-block-start: var(--spacing-mega);
-}
-
-.emptyContainer {
+  background: var(--color-background-elevated-new);
+  min-block-size: calc(3 * var(--spacing-max));
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded-new);
   text-align: center;
-  display: flex;
-  justify-content: center;
-  margin-block-start: var(--spacing-mega);
+  text-wrap: balance;
+
+  &[data-status='load-more'] {
+    min-block-size: calc(2 * var(--spacing-max));
+  }
+
+  &:where([data-status='error'], [data-status='loading']) {
+    min-block-size: 60vh;
+  }
 }

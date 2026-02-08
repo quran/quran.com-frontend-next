@@ -4,15 +4,23 @@
   "back-to-collection-list": "Назад к списку коллекций",
   "collapse-all": "Свернуть все стихи",
   "collection-list-empty": "Список коллекций пуст. Вы еще не создали ни одной коллекции",
+  "collection-name": "Название коллекции",
   "collections": "Коллекции",
   "delete-bookmark": {
     "subtitle": "Вы уверены, что хотите удалить {{bookmarkName}} из {{collectionName}} ?",
     "title": "Удалить закладку"
   },
+  "delete-collection-action": "Удалить коллекцию",
+  "delete-collection-success": "Коллекция успешно удалена.",
   "delete-collection": {
+    "description": "Вы потеряете все стихи, сохраненные в этой коллекции.",
     "subtitle": "Вы уверены, что хотите удалить {{collectionName}} ?",
+    "subtitle-tagged": "Вы уверены, что хотите удалить? <collectionName>{{collectionName}}</collectionName> ?",
     "title": "Удалить коллекцию"
   },
+  "edit-collection": "Редактировать коллекцию",
+  "edit-collection-name-required": "Введите название коллекции для сохранения.",
+  "edit-collection-success": "Коллекция успешно обновлена.",
   "empty": "Коллекция пуста",
   "expand-all": "Развернуть все стихи",
   "go-to-ayah": "Иди к айе",

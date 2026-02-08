@@ -179,6 +179,7 @@ export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`)
 export type GetCoursesQueryParams = {
   myCourses?: boolean;
   languages?: string[];
+  cursor?: string;
 };
 
 export const makeGetCoursesUrl = (params?: GetCoursesQueryParams) =>

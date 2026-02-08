@@ -3,6 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
+import MyLearningPlansSkeleton from '@/components/MyLearningPlans/MyLearningPlansSkeleton';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -34,4 +35,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(MyLearningPlanPage);
+export default withAuth(MyLearningPlanPage, <MyLearningPlansSkeleton />);

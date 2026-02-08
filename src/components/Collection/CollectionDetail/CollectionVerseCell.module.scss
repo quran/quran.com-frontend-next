@@ -2,13 +2,16 @@
 @use 'src/styles/constants';
 
 .outerContainer {
+  padding-block-end: var(--spacing-medium-px);
+}
+
+.container {
   display: flex;
   flex-direction: column;
   background-color: var(--color-background-alternative-faint-new);
   color: var(--color-text-default-new);
   border: var(--spacing-hairline-px) solid var(--color-borders-hairline);
   border-radius: var(--border-radius-rounded);
-  margin-block-end: var(--spacing-medium-px);
   transition: all var(--transition-moderate) ease-out;
   animation: fadeInSlide var(--transition-fast) ease-out backwards;
 

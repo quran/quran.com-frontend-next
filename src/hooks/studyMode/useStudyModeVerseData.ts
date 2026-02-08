@@ -7,6 +7,7 @@ import { fetcher } from '@/api';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import useQcfFont from '@/hooks/useQcfFont';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Verse from '@/types/Verse';
@@ -46,6 +47,7 @@ const useStudyModeVerseData = ({
 }: UseStudyModeVerseDataProps): UseStudyModeVerseDataReturn => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
   const isPersistGateHydrationComplete = useSelector(selectIsPersistGateHydrationComplete);
   const isUsingDefaultSettings = useIsUsingDefaultSettings({ selectedTranslations });
 
@@ -64,7 +66,7 @@ const useStudyModeVerseData = ({
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;

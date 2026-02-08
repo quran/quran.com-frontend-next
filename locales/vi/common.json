@@ -100,6 +100,13 @@
   "beyond-ramadan": "Vươn xa hơn sau Ramadan!",
   "bookmark": "Đánh dấu trang",
   "bookmarked": "Đã đánh dấu",
+  "bookmarks-migration": {
+    "body-1": "Dấu trang của bạn giờ sẽ trở thành <strong>Những câu thơ được lưu giữ</strong> TRONG <strong>Bộ sưu tập</strong>Để giữ lại các dấu trang hiện tại, vui lòng đăng nhập hoặc tạo tài khoản.",
+    "body-2": "Chúng tôi cũng đã thêm tính năng Đánh dấu trang đọc mới để giúp bạn tiếp tục đọc ngay từ chỗ bạn đã dừng lại.",
+    "checkbox": "Không hiển thị lại thông báo này nữa (Cảnh báo: Bạn sẽ mất tất cả dấu trang hiện tại)",
+    "sign-in": "Đăng nhập / Đăng ký",
+    "title": "Thông báo: Chức năng đánh dấu trang đang thay đổi."
+  },
   "both": "Cả hai",
   "cancel": "Hủy bỏ",
   "change-theme": "Thay đổi chủ đề",
@@ -137,6 +144,7 @@
   "copied": "Đã sao chép",
   "copied-to-clipboard": "Đã sao chép vào clipboard",
   "copy": "Sao chép",
+  "copy-embed": "Sao chép mã nhúng",
   "copylink": "Sao chép link",
   "counter": {
     "decrease": "Giảm",
@@ -162,6 +170,8 @@
     "resend-email-in": "Gửi lại email xác nhận trong {{remainingTime}} giây...",
     "verify-code": "Xác minh mã"
   },
+  "embed-copied": "Đã sao chép mã nhúng",
+  "embed-widget": "Nhúng tiện ích",
   "end-year-donate": "Kết thúc năm 2024 với Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bạn chỉ có thể chọn tối đa {{limit}} từng câu một. Vui lòng chọn phạm vi nhỏ hơn.",
@@ -459,6 +469,8 @@
   "subscribe": "Đăng ký",
   "subscribed": "Đã đăng ký",
   "surah": "Surah",
+  "tab-see-less": "Xem ít hơn...",
+  "tab-see-more": "Xem thêm...",
   "tafsir": {
     "font-size": "Kích thước phông chữ Tafsir",
     "group-message": "Bạn đang đọc phần chú giải Kinh Qur'an cho nhóm các câu này. {{from}} đến {{to}}",

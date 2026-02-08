@@ -11,6 +11,7 @@ import copyPinnedVerses from '../PinnedVerses/utils/copyPinnedVerses';
 import styles from './PinnedVersesBar.module.scss';
 import PinnedVersesContent from './PinnedVersesContent';
 
+import AddNoteModal from '@/components/Notes/modal/AddNoteModal';
 import DataContext from '@/contexts/DataContext';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import usePinnedVerseSync from '@/hooks/usePinnedVerseSync';
@@ -36,16 +37,13 @@ const PinnedVersesBar: React.FC = () => {
   const { unpinVerseWithSync, clearPinnedWithSync } = usePinnedVerseSync();
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
 
   const handleCompareClick = useCallback(() => {
     logButtonClick('pinned_bar_compare');
     if (pinnedVerseKeys.length > 0) {
-      dispatch(
-        openStudyMode({
-          verseKey: pinnedVerseKeys[0],
-          showPinnedSection: true,
-        }),
-      );
+      logButtonClick('study_mode_open_pinned_compare', { verseKey: pinnedVerseKeys[0] });
+      dispatch(openStudyMode({ verseKey: pinnedVerseKeys[0], showPinnedSection: true }));
     }
   }, [dispatch, pinnedVerseKeys]);
 
@@ -61,12 +59,7 @@ const PinnedVersesBar: React.FC = () => {
   const handleCopy = useCallback(async () => {
     logButtonClick('pinned_menu_copy');
     try {
-      await copyPinnedVerses({
-        pinnedVerses,
-        lang,
-        chaptersData,
-        selectedTranslations,
-      });
+      await copyPinnedVerses({ pinnedVerses, lang, chaptersData, selectedTranslations });
       toast(t('common:copied'), { status: ToastStatus.Success });
     } catch {
       toast(t('common:error.general'), { status: ToastStatus.Error });
@@ -114,6 +107,16 @@ const PinnedVersesBar: React.FC = () => {
     setIsSaveModalOpen(true);
   }, [router]);
 
+  const handleAddNote = useCallback(() => {
+    logButtonClick('pinned_menu_add_note');
+    if (!isLoggedIn()) {
+      router.push(getLoginNavigationUrl(router.asPath));
+      return;
+    }
+
+    setIsNoteModalOpen(true);
+  }, [router]);
+
   if (pinnedVerses.length === 0) return null;
 
   return (
@@ -130,19 +133,28 @@ const PinnedVersesBar: React.FC = () => {
           onSaveToCollection={handleSaveToCollection}
           onLoadFromCollection={handleLoadFromCollection}
           onCopy={handleCopy}
+          onAddNote={handleAddNote}
         />
       </div>
+
       {isLoggedIn() && (
-        <SavePinnedToCollectionModal
-          isOpen={isSaveModalOpen}
-          onClose={() => setIsSaveModalOpen(false)}
-        />
-      )}
-      {isLoggedIn() && (
-        <LoadFromCollectionModal
-          isOpen={isLoadModalOpen}
-          onClose={() => setIsLoadModalOpen(false)}
-        />
+        <>
+          <SavePinnedToCollectionModal
+            isOpen={isSaveModalOpen}
+            onClose={() => setIsSaveModalOpen(false)}
+          />
+          <LoadFromCollectionModal
+            isOpen={isLoadModalOpen}
+            onClose={() => setIsLoadModalOpen(false)}
+          />
+          <AddNoteModal
+            showRanges
+            isModalOpen={isNoteModalOpen}
+            onModalClose={() => setIsNoteModalOpen(false)}
+            onMyNotes={() => setIsNoteModalOpen(false)}
+            verseKeys={pinnedVerseKeys}
+          />
+        </>
       )}
     </>
   );

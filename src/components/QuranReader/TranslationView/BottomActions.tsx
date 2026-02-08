@@ -25,7 +25,7 @@ import {
   getVerseLessonNavigationUrl,
   getVerseQiraatNavigationUrl,
   getVerseReflectionNavigationUrl,
-  getVerseRelatedVerseNavigationUrl,
+  getVerseRelatedVersesNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -79,27 +79,20 @@ const BottomActions = ({
   const { data: qiraatCount } = useBatchedCountRangeQiraat(verseKey);
   const hasQiraatData = (qiraatCount ?? 0) > 0;
 
-  /**
-   * Handle tab click or keyboard event
-   * @param {TabId} tabType - Type of tab for logging
-   * @param {() => string} navigationFn - Function that returns navigation URL
-   * @returns {(e: React.MouseEvent | React.KeyboardEvent) => void} Event handler function
-   */
   const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
     return () => {
-      // Open Study Mode for tafsir, reflections, and lessons
-      if (tabType === TabId.TAFSIR) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.TAFSIR }));
-      } else if (tabType === TabId.REFLECTIONS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.REFLECTIONS }));
-      } else if (tabType === TabId.LESSONS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.LESSONS }));
-      } else if (tabType === TabId.RELATED_VERSES) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.RELATED_VERSES }));
-      } else if (tabType === TabId.ANSWERS) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.ANSWERS }));
-      } else if (tabType === TabId.QIRAAT) {
-        dispatch(openStudyMode({ verseKey, activeTab: StudyModeTabId.QIRAAT }));
+      const tabIdMap: Record<TabId, StudyModeTabId> = {
+        [TabId.TAFSIR]: StudyModeTabId.TAFSIR,
+        [TabId.REFLECTIONS]: StudyModeTabId.REFLECTIONS,
+        [TabId.LESSONS]: StudyModeTabId.LESSONS,
+        [TabId.RELATED_VERSES]: StudyModeTabId.RELATED_VERSES,
+        [TabId.ANSWERS]: StudyModeTabId.ANSWERS,
+        [TabId.QIRAAT]: StudyModeTabId.QIRAAT,
+      };
+
+      const studyModeTab = tabIdMap[tabType];
+      if (studyModeTab) {
+        dispatch(openStudyMode({ verseKey, activeTab: studyModeTab }));
       }
 
       logButtonClick(
@@ -108,7 +101,6 @@ const BottomActions = ({
         }_verse_bottom_actions_${tabType}`,
       );
 
-      // Update URL without triggering navigation
       fakeNavigate(navigationFn(), lang);
     };
   };
@@ -157,7 +149,7 @@ const BottomActions = ({
       label: t('related-verses'),
       icon: <RelatedVersesIcon />,
       onClick: createTabHandler(TabId.RELATED_VERSES, () =>
-        getVerseRelatedVerseNavigationUrl(verseKey),
+        getVerseRelatedVersesNavigationUrl(verseKey),
       ),
       condition: hasRelatedVerses,
     },

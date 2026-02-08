@@ -107,6 +107,11 @@ export const useCollectionToggle = ({
 
       // Optimistically update collection IDs (add the new collection ID)
       const baseIds = getBaseCollectionIds();
+      const serverIds = bookmarkCollectionIdsData || [];
+      // Skip only if the collection is already confirmed on the server
+      if (serverIds.includes(collectionId)) {
+        return;
+      }
       const optimisticCollectionIds = baseIds.includes(collectionId)
         ? baseIds
         : [...baseIds, collectionId];
@@ -190,7 +195,11 @@ export const useCollectionToggle = ({
       const previousBookmark = getVerseBookmark(verseKey);
 
       // Optimistically update collection IDs (remove the collection ID)
-      const optimisticCollectionIds = getBaseCollectionIds().filter((id) => id !== collectionId);
+      const baseIds = getBaseCollectionIds();
+      if (!baseIds.includes(collectionId)) {
+        return;
+      }
+      const optimisticCollectionIds = baseIds.filter((id) => id !== collectionId);
       mutateBookmarkCollectionIdsData(optimisticCollectionIds);
       updateVerseBookmark(
         verseKey,

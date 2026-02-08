@@ -12,14 +12,47 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import EnrollmentCount from '@/components/RamadanChallenge/EnrollmentCount';
 import UnauthEnrollButton from '@/components/RamadanChallenge/UnauthEnrollButton';
+import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link from '@/dls/Link/Link';
+import TelegramIcon from '@/icons/telegram.svg';
+import WhatsappIcon from '@/icons/whatsapp.svg';
 import { getRamadanChallengeOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadanchallenge/ramadanchallenge.module.scss';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, ROUTES } from '@/utils/navigation';
+import { EXTERNAL_ROUTES, getCanonicalUrl, ROUTES } from '@/utils/navigation';
+
+interface SocialButton {
+  name: SocialButtonName;
+  icon: React.ComponentType;
+  url: string;
+  eventKey: string;
+}
+
+enum SocialButtonName {
+  Whatsapp = 'Whatsapp',
+  Telegram = 'Telegram',
+}
+
+const SOCIAL_BUTTONS: SocialButton[] = [
+  {
+    name: SocialButtonName.Whatsapp,
+    icon: WhatsappIcon,
+    url: EXTERNAL_ROUTES.RAMADAN_CHALLENGE_WHATSAPP,
+    eventKey: 'ramadan_challenge_join_whatsapp',
+  },
+  {
+    name: SocialButtonName.Telegram,
+    icon: TelegramIcon,
+    url: EXTERNAL_ROUTES.RAMADAN_CHALLENGE_TELEGRAM,
+    eventKey: 'ramadan_challenge_join_telegram',
+  },
+];
 
 const PATH = ROUTES.RAMADAN_CHALLENGE;
+
 const RamadanChallengePage: NextPage = (): JSX.Element => {
   const { lang } = useTranslation('common');
 
@@ -52,6 +85,29 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
             <div className={pageStyles.enrollmentContainer}>
               <EnrollmentCount />
             </div>
+            <div className={pageStyles.socialButtonsGroup}>
+              {SOCIAL_BUTTONS.map(({ name, icon: Icon, url, eventKey }) => (
+                <Button
+                  type={ButtonType.Success}
+                  shape={ButtonShape.Pill}
+                  key={name}
+                  href={url}
+                  isNewTab
+                  onClick={() => logButtonClick(eventKey)}
+                  className={pageStyles.socialButton}
+                >
+                  <IconContainer
+                    className={pageStyles.iconContainer}
+                    size={IconSize.Small}
+                    shouldFlipOnRTL={false}
+                    shouldForceSetColors={false}
+                    icon={<Icon />}
+                  />
+                  <span className={pageStyles.joinSocialText}>Join our {name}</span>
+                  <span className={pageStyles.joinSocialMobileText}>{name}</span>
+                </Button>
+              ))}
+            </div>
             <h2>
               Don't miss this great opportunity to transform your relationship with this powerful
               Surah.
@@ -61,7 +117,7 @@ const RamadanChallengePage: NextPage = (): JSX.Element => {
           <div className={styles.subSection} id="how-the-challenge-works">
             <h1>How the Challenge Works</h1>
             <div>
-              Each day of Ramadan, you'll receive a short, focused lesson built around{' '}
+              Each day of Ramadan, you'll receive an email with a short, focused lesson built around{' '}
               <span className={pageStyles.bold}>one ayah</span> from Surah Al-Mulk.
             </div>
             <ul className={pageStyles.list}>

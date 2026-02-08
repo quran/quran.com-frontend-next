@@ -4,15 +4,23 @@
   "back-to-collection-list": "العودة إلى قائمة المجموعات",
   "collapse-all": "إخفاء جميع الآيات",
   "collection-list-empty": "قائمة المجموعات فارغة. لم تنشئ أي مجموعة بعد.",
+  "collection-name": "اسم المجموعة",
   "collections": "المجموعات",
   "delete-bookmark": {
     "subtitle": "هل أنت متأكد أنك تريد حذف {{bookmarkName}} من مجموعة {{collectionName}} ؟",
     "title": "حذف ما تم حفظه"
   },
+  "delete-collection-action": "حذف المجموعة",
+  "delete-collection-success": "تم حذف المجموعة بنجاح",
   "delete-collection": {
+    "description": "ستفقد جميع الآيات المحفوظة داخل هذه المجموعة.",
     "subtitle": "هل تريد حذف مجموعة {{collectionName}} ؟",
+    "subtitle-tagged": "هل أنت متأكد من رغبتك في الحذف <collectionName>{{collectionName}}</collectionName> ؟",
     "title": "حذف المجموعة"
   },
+  "edit-collection": "مجموعة التحرير",
+  "edit-collection-name-required": "أدخل اسم المجموعة لحفظها.",
+  "edit-collection-success": "تم تحديث المجموعة بنجاح",
   "empty": "المجموعة فارغة",
   "expand-all": "عرض جميع الآيات",
   "go-to-ayah": "اذهب إلى الآية",

@@ -50,8 +50,14 @@ const useQuestionsPagination = ({
     revalidateOnReconnect: false,
   });
 
-  const allQuestions = useMemo(
-    () => (pagesData ? pagesData.flatMap((page) => page?.questions || []) : []),
+  const hasErrorInPages = useMemo(
+    () => (pagesData ? pagesData.some((page) => !Array.isArray(page?.questions)) : false),
+    [pagesData],
+  );
+
+  const questions = useMemo(
+    () =>
+      pagesData?.flatMap((page) => (Array.isArray(page?.questions) ? page.questions : [])) ?? [],
     [pagesData],
   );
 
@@ -63,17 +69,17 @@ const useQuestionsPagination = ({
   const isLoadingMore =
     isValidating || (size > 0 && pagesData && typeof pagesData[size - 1] === 'undefined');
 
-  // Initial loading state: no data yet and first page is being fetched
   const isLoading = !pagesData && !error;
-
   const loadMore = () => setSize(size + 1);
 
   return {
-    questions: allQuestions,
+    questions,
     hasMore,
     isLoadingMore,
+    isValidating,
     loadMore,
     isLoading,
+    hasErrorInPages,
     error,
     mutate,
   };

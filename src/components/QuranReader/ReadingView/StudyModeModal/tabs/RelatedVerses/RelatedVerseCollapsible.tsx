@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -16,10 +16,12 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Collapsible from '@/dls/Collapsible/Collapsible';
 import Pill from '@/dls/Pill';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import {
   isArabicText,
   isRTLLocale,
@@ -48,9 +50,24 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
 
-  // Parse verse key to get chapter and verse numbers
   const [chapterId, verseNumber] = relatedVerse.verseKey.split(':');
+
+  const handleOpenChange = useCallback(
+    (open: boolean) => {
+      if (open) {
+        logButtonClick('study_mode_related_verse_expand', { verseKey: relatedVerse.verseKey });
+      }
+      setIsOpen(open);
+    },
+    [relatedVerse.verseKey],
+  );
+
+  const handleGoToVerse = useCallback(() => {
+    logButtonClick('study_mode_related_verse_goto', { verseKey: relatedVerse.verseKey });
+    onGoToVerse?.(chapterId, verseNumber);
+  }, [chapterId, verseNumber, onGoToVerse, relatedVerse.verseKey]);
 
   // Fetch verse data when collapsible is opened
   const queryKey = isOpen
@@ -60,7 +77,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
         translations: selectedTranslations.join(','),
         ...getDefaultWordFields(quranReaderStyles.quranFont),
         ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-        wordTranslationLanguage: 'en',
+        wordTranslationLanguage: wordByWordLocale,
         wordTransliteration: 'true',
       })
     : null;
@@ -99,7 +116,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
         title={title}
         suffix={<ChevronDownIcon />}
         shouldRotateSuffixOnToggle
-        onOpenChange={setIsOpen}
+        onOpenChange={handleOpenChange}
         headerLeftClassName={styles.collapsibleHeader}
       >
         {() => (
@@ -131,7 +148,7 @@ const RelatedVerseCollapsible: React.FC<RelatedVerseCollapsibleProps> = ({
                   className={styles.goToVerseButton}
                   size={ButtonSize.Small}
                   variant={ButtonVariant.Compact}
-                  onClick={() => onGoToVerse?.(chapterId, verseNumber)}
+                  onClick={handleGoToVerse}
                 >
                   {t('go-to-verse')}
                 </Button>

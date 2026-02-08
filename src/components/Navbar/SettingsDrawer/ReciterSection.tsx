@@ -13,7 +13,7 @@ import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
-import { logValueChange } from '@/utils/eventLogger';
+import { logEvent, logValueChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
@@ -38,6 +38,7 @@ const ReciterSection = () => {
 
   const onSelectionCardClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Reciter));
+    logEvent('reciter_drawer_opened');
     logValueChange('settings_view', SettingsView.Reciter, SettingsView.Body);
   }, [dispatch]);
 

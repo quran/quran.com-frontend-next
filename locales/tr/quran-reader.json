@@ -40,6 +40,7 @@
   "download-copy": "Metin dosyasını indirmek istiyorsanız.",
   "edgham": "İdğam",
   "ekhfa": "İhfa ve Ghunna",
+  "embed-widget": "Widget'ı Göm",
   "end-of-surah": {
     "achieve-quran-goals-desktop": "Serilerinizi takip edin, özel hedefler oluşturun, istikrarlı kalın.",
     "achieve-quran-goals-responsive": "Kur'an Hedeflerinize Ulaşın",
@@ -83,11 +84,28 @@
     "sign-in-message": "Daha fazla özelliğe erişmek için giriş yapın veya ücretsiz kayıt olun!",
     "title": "İlerlemenizi Kaydedin"
   },
+  "hadith": {
+    "title": "Hadis"
+  },
   "hizb-beginning": "Hizb'in Başlangıcı",
   "include-translator": "Çevirmen adı dahil edilsin mi?",
   "info": "bilgi",
   "juz-beginning": "Cüz'ün Başlangıcı",
   "languages": "Diller",
+  "learning-plan-banner-al-kahf": {
+    "banner-image-alt-text": "Hayat Değiştiren 4 Hikaye: Kehf Suresinden Dersler öğrenme planı afişi",
+    "banner-image-description": "Kehf Suresi için öğrenme planını inceleyin.",
+    "button-accessibility-label": "Kehf Suresi öğrenme planı hakkında daha fazla bilgi edinin.",
+    "main-headline": "Kehf Suresi'nden hayat değiştiren 4 hikayeyi keşfedin.",
+    "subtitle-description": "(Ücretsiz bir Öğrenme Planı)"
+  },
+  "learning-plan-banner-al-mulk": {
+    "banner-image-alt-text": "Kurtarıcı: Mülk Suresi'ndeki Güçlü Dersler öğrenme planı afişi",
+    "banner-image-description": "Kurtarıcı'nın Al-Mulk Suresi için öğrenme planını inceleyin.",
+    "button-accessibility-label": "Kurtarıcı öğrenme planı hakkında daha fazla bilgi edinin.",
+    "main-headline": "Bugün Mülk Suresi'ndeki güçlü dersleri keşfedin.",
+    "subtitle-description": "(Ücretsiz bir Öğrenme Planı)"
+  },
   "learning-plan-banner": {
     "banner-image-alt-text": "The Rescuer: Mülk Suresi'ndeki Güçlü Dersleri öğrenme plan afişi",
     "banner-image-description": "Sure Al-Mülk için The Rescuer öğrenme planını görüntüleyin",
@@ -171,12 +189,17 @@
   "reflection-not-available": "Bu ayet için gözden geçirilmiş bir yansıma yok",
   "reflections": "Yansımalar",
   "reflections-desc": "{{ayahNumber}} {{surahName}} yansımalarını okuyun ve paylaşın",
+  "related-verses": "İlgili ayetler",
+  "related-verses-desc": "Kur'an ayetleriyle ilgili ayetleri okuyun ve paylaşın. {{ayahNumber}} Surenin {{surahName}}",
   "remove-bookmark": "Yer işaretini kaldır",
   "remove-my-reading-bookmark": "Okuma yer imimi kaldır",
   "remove-pinned-verse": "Ayeti kaldır {{verseKey}} sabitlenmişten",
   "removed-from": "{{collectionName}} kaldırıldı",
   "revelation-order-notice": "Not: Kuran'da nüzul sırasına göre geziniyorsunuz. Varsayılan sıralamaya geri dönmek için <link> burayı tıklayın </link> .",
   "rub-beginning": "Rub el Hizb'in Başlangıcı",
+  "save-bookmark-modal": {
+    "collections-hint": "Birden fazla yer imi mi kaydediyorsunuz? Koleksiyonları kullanın:"
+  },
   "save-page": "Sayfayı Kaydet {{pageNumber}}",
   "save-pinned-to-collection": "Koleksiyona Kaydet",
   "save-to": "Şuraya kaydet...",
@@ -190,6 +213,7 @@
   "selected-count": "{{count}} seçildi",
   "set-as-reading-bookmark": "Okuma listem için yer imi olarak ayarla.",
   "share-your-reflection": "Bu ayetle ilgili düşüncenizi paylaşın",
+  "show-tajweed-rules": "Okurken tecvid kurallarını gösterin:",
   "study-mode": "Çalışma modu",
   "surah-beginning": "Surenin Başlangıcı",
   "surah-info": "Sure Bilgileri",
