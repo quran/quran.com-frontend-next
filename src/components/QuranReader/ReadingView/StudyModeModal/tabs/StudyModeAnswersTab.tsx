@@ -59,8 +59,8 @@ const StudyModeAnswersTab: React.FC<StudyModeAnswersTabProps> = ({
 
   // Auto-close tab when there are no answered questions
   useEffect(() => {
-    const hasQuestions = questions?.length ?? 0;
-    if (!isLoading && hasQuestions === 0 && !(hasErrorInPages || error) && switchTab) {
+    const questionsCount = questions?.length ?? 0;
+    if (!isLoading && questionsCount === 0 && !(hasErrorInPages || error) && switchTab) {
       switchTab(null);
     }
   }, [isLoading, questions, hasErrorInPages, error, switchTab]);
