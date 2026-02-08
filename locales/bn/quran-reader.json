@@ -175,6 +175,8 @@
   "reflection-not-available": "এই আয়াতের জন্য কোনো পর্যালোচনা করা প্রতিফলন নেই",
   "reflections": "প্রতিফলন",
   "reflections-desc": "সূরা {{surahName}} {{ayahNumber}} এর কুরআনের প্রতিফলন পড়ুন এবং শেয়ার করুন",
+  "related-verses": "সম্পর্কিত আয়াত",
+  "related-verses-desc": "কুরআন সম্পর্কিত আয়াত পড়ুন এবং শেয়ার করুন {{ayahNumber}} সূরার {{surahName}}",
   "remove-bookmark": "বুকমার্ক সরান",
   "remove-my-reading-bookmark": "আমার পঠন বুকমার্কটি সরান",
   "remove-pinned-verse": "পদ্যটি সরান {{verseKey}} পিন করা থেকে",

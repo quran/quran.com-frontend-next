@@ -189,6 +189,8 @@
   "reflection-not-available": "Hakuna tafakari zilizokaguliwa kwa aya hii",
   "reflections": "Tafakari",
   "reflections-desc": "Soma na ushiriki tafakari za Qur'ani za Aya {{ayahNumber}} ya Sura {{surahName}}",
+  "related-verses": "Mistari inayohusiana",
+  "related-verses-desc": "Soma na ushiriki aya zinazohusiana na Quran za Ayah {{ayahNumber}} ya Sura {{surahName}}",
   "remove-bookmark": "Ondoa alamisho",
   "remove-my-reading-bookmark": "Ondoa Alamisho langu la Kusoma",
   "remove-pinned-verse": "Ondoa aya {{verseKey}} kutoka kwa zilizobandikwa",

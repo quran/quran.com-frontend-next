@@ -8,7 +8,7 @@
 
 .fontSizeSection {
   padding-block-start: var(--spacing-small-px);
-  padding-block-end: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-medium3-px);
 }
 
 .counter {
@@ -26,6 +26,70 @@
 
 .fontStyleSection {
   padding-block-start: var(--spacing-small-px);
+}
+
+.tajweedRulesSection {
+  padding-block-start: var(--spacing-small-px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tajweedCheckboxContainer {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0;
+  padding-inline-start: var(--spacing-small-plus-px);
+  margin-inline-end: var(--spacing-xsmall-px);
+
+  label {
+    padding-inline-start: 0;
+    color: var(--color-text-default-new);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .tajweedCheckbox {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: none;
+    block-size: var(--spacing-medium3-px);
+    inline-size: var(--spacing-medium3-px);
+    border-radius: var(--border-radius-xsmall2-px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &[data-state='checked'] {
+      outline-offset: var(--spacing-hairline-px);
+      outline: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+
+      .tajweedIndicator {
+        background-color: var(--color-blue-buttons-and-icons);
+      }
+    }
+
+    .tajweedIndicator {
+      background-color: transparent;
+      border-radius: var(--border-radius-xsmall2-px);
+      block-size: var(--spacing-medium3-px);
+      inline-size: var(--spacing-medium3-px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      svg {
+        block-size: var(--spacing-medium2-px);
+        inline-size: var(--spacing-medium2-px);
+      }
+    }
+  }
 }
 
 div.fontSwitch.fontSwitch {

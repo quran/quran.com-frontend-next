@@ -175,6 +175,8 @@
   "reflection-not-available": "ဤအာယာအတွက် ပြန်လည်သုံးသပ်ထားသော ဆင်ခြင်သုံးသပ်ချက်များ မရှိပါ။",
   "reflections": "ဆင်ခြင်သုံးသပ်ချက်များ",
   "reflections-desc": "အာယာသ်၏ ကုရ်အာန်ကျမ်းတော်မြတ်ကို ဖတ်ရှုပြီး မျှဝေပါ {{ayahNumber}} စူရာဟ်၏ {{surahName}}",
+  "related-verses": "ဆက်စပ်သော ကျမ်းပိုဒ်များ",
+  "related-verses-desc": "ကုရ်အာန်နှင့်ဆက်စပ်သော အာယာဟ်ကျမ်းပိုဒ်များကို ဖတ်ရှုမျှဝေပါ {{ayahNumber}} စူရာဟ်၏ {{surahName}}",
   "remove-bookmark": "စာညှပ်ကို ဖယ်ရှားပါ",
   "remove-my-reading-bookmark": "ကျွန်ုပ်၏ စာဖတ်ခြင်း Bookmark ကို ဖယ်ရှားပါ",
   "remove-pinned-verse": "ကဗျာကို ဖယ်ရှားပါ {{verseKey}} ပင်ထိုးထားသည်မှ",

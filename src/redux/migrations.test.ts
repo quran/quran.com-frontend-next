@@ -224,4 +224,11 @@ describe('Redux migrations', () => {
       expect(migratedState.otherSlice).toEqual({ someData: 'preserved' });
     });
   });
+
+  it('migration 42: should default showTajweedRules to true and preserve false', () => {
+    const m1 = migrations[42]({ quranReaderStyles: { quranFont: 'v2' } });
+    expect(m1.quranReaderStyles.showTajweedRules).toBe(true);
+    const m2 = migrations[42]({ quranReaderStyles: { showTajweedRules: false } });
+    expect(m2.quranReaderStyles.showTajweedRules).toBe(false);
+  });
 });

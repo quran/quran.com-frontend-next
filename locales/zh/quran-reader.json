@@ -175,6 +175,8 @@
   "reflection-not-available": "没有评论过这个啊啊啊",
   "reflections": "反思",
   "reflections-desc": "阅读并分享《古兰经》对《古兰经》{{surahName}} 的 Ayah {{ayahNumber}}的{{surahName}}",
+  "related-verses": "相关经文",
+  "related-verses-desc": "阅读并分享与《古兰经》相关的经文 {{ayahNumber}} 古兰经 {{surahName}}",
   "remove-bookmark": "删除书签",
   "remove-my-reading-bookmark": "删除我的阅读书签",
   "remove-pinned-verse": "删除诗句 {{verseKey}} 已置顶",

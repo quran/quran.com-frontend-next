@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
 import PinnedVersesBar from '../PinnedVersesBar';
 import ReadingModeToggle from '../ReadingPreferenceSwitcher/ReadingModeToggle';
@@ -16,6 +17,7 @@ import styles from './styles/ContextMenu.module.scss';
 
 import useIsMobile from '@/hooks/useIsMobile';
 import { SwitcherContext } from '@/hooks/useReadingPreferenceSwitcher';
+import { selectShowTajweedRules } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
 import { Mushaf } from '@/types/QuranReader';
 import { getChapterNumberFromKey } from '@/utils/verse';
@@ -50,6 +52,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
   } = useContextMenuState();
 
   const isMobileView = useIsMobile();
+  const showTajweedRules = useSelector(selectShowTajweedRules);
 
   // Early return if no verse key (SSR or first render)
   if (!verseKey || !chapterData) {
@@ -144,7 +147,9 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
 
       {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
       <PinnedVersesBar />
-      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && <TajweedColors />}
+      {mushaf === Mushaf.QCFTajweedV4 && !isTranslationMode && showTajweedRules && (
+        <TajweedColors />
+      )}
     </div>
   );
 };

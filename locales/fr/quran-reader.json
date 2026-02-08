@@ -175,6 +175,8 @@
   "reflection-not-available": "Il n'y a pas de réflexions révisées pour cette Ayah",
   "reflections": "Réflexions",
   "reflections-desc": "Lire et partager les réflexions Coraniques de l'Ayah {{ayahNumber}} de la Sourate {{surahName}}",
+  "related-verses": "Versets apparentés",
+  "related-verses-desc": "Lisez et partagez les versets coraniques relatifs à Ayah {{ayahNumber}} de la sourate {{surahName}}",
   "remove-bookmark": "Supprimer le favori",
   "remove-my-reading-bookmark": "Supprimer mon signet de lecture",
   "remove-pinned-verse": "Supprimer le verset {{verseKey}} à partir de l'épingle",

@@ -175,6 +175,8 @@
   "reflection-not-available": "Nuk ka reflektime të shqyrtuara për këtë ajet",
   "reflections": "Reflektime",
   "reflections-desc": "Lexoni dhe shpërndani reflektimet kuranore të {{ayahNumber}} të sures {{surahName}}",
+  "related-verses": "Vargje të ngjashme",
+  "related-verses-desc": "Lexoni dhe ndani ajetet e lidhura me Kuranin {{ayahNumber}} e Sures {{surahName}}",
   "remove-bookmark": "Hiq faqeruajtësin",
   "remove-my-reading-bookmark": "Hiq faqeshënuesin tim të leximit",
   "remove-pinned-verse": "Hiq vargun {{verseKey}} nga i fiksuar",

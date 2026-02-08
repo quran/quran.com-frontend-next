@@ -90,6 +90,14 @@ export const quranReaderStylesSlice = createSlice({
     }),
     increaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale + 1 }),
     decreaseHadithFontScale: (state) => ({ ...state, hadithFontScale: state.hadithFontScale - 1 }),
+    increaseSurahInfoFontScale: (state) => ({
+      ...state,
+      surahInfoFontScale: state.surahInfoFontScale + 1,
+    }),
+    decreaseSurahInfoFontScale: (state) => ({
+      ...state,
+      surahInfoFontScale: state.surahInfoFontScale - 1,
+    }),
     setMushafLines: (
       state,
       action: PayloadAction<{ mushafLines: MushafLines; locale: string }>,
@@ -115,6 +123,10 @@ export const quranReaderStylesSlice = createSlice({
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
       return { ...state, quranFont, isUsingDefaultFont };
     },
+    setShowTajweedRules: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      showTajweedRules: action.payload,
+    }),
   },
   // reset the state to the initial state when `reset` action is dispatched
   extraReducers: (builder) => {
@@ -163,14 +175,14 @@ export const {
   increaseHadithFontScale,
   decreaseHadithFontScale,
   setMushafLines,
+  setShowTajweedRules,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
 export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
 export const selectQuranMushafLines = (state: RootState) => state.quranReaderStyles.mushafLines;
-export const selectWordByWordFontScale = (state: RootState) =>
-  state.quranReaderStyles.wordByWordFontScale;
-export const selectIsUsingDefaultFont = (state: RootState) =>
-  !!state.quranReaderStyles.isUsingDefaultFont;
+export const selectWordByWordFontScale = (s: RootState) => s.quranReaderStyles.wordByWordFontScale;
+export const selectIsUsingDefaultFont = (s: RootState) => !!s.quranReaderStyles.isUsingDefaultFont;
+export const selectShowTajweedRules = (s: RootState) => s.quranReaderStyles.showTajweedRules;
 
 export default quranReaderStylesSlice.reducer;

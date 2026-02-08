@@ -2,6 +2,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
+import { randomUUID } from 'crypto';
+
 import type { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
@@ -85,6 +87,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
 
   // Get referer header (the page hosting the iframe)
   const referer = req.headers.referer || req.headers.origin || '';
+  const embedViewId = randomUUID();
 
   try {
     const versesParam = parseString(query.verses);
@@ -171,6 +174,7 @@ export const getServerSideProps: GetServerSideProps<EmbedProps> = async (
       customHeight,
       clientId,
       referer: String(referer),
+      embedViewId,
       lp: lpMode,
     });
 

@@ -175,6 +175,8 @@
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections": "Reflections",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
+  "related-verses": "Related verses",
+  "related-verses-desc": "Read and share Quranic related verses of Ayah {{ayahNumber}} of Surah {{surahName}}",
   "remove-bookmark": "Remove bookmark",
   "remove-my-reading-bookmark": "Remove my Reading Bookmark",
   "remove-pinned-verse": "Remove verse {{verseKey}} from pinned",
