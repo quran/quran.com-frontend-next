@@ -238,6 +238,14 @@ Reports are written to `test-results/qf-318-real-world/`.
   - `tests/integration/qf-318-edge/edge-public-no-user-leak.spec.ts`
 - Full technical branch matrix (cache-key semantics + bypass/redirect rules):
   - `tests/integration/qf-318-edge/edge-technical-matrix.spec.ts`
+- Default locale redirect loop guard:
+  - `tests/integration/qf-318-edge/edge-default-locale-loop-guard.spec.ts`
+- Public cache-key invariance (auth cookie should not affect public keys):
+  - `tests/integration/qf-318-edge/edge-public-cache-key-invariance.spec.ts`
+- Method and allowlist bypass matrix:
+  - `tests/integration/qf-318-edge/edge-method-and-allowlist-bypass.spec.ts`
+- Country/language preference API contract checks:
+  - `tests/integration/qf-318-edge/edge-country-language-preference-contract.spec.ts`
 
 ### Production product smoke (mutating + cleanup)
 

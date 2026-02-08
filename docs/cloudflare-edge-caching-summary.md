@@ -812,6 +812,10 @@ HEADLESS=1 RUNS=1 URLS='https://ssr.quran.com/ https://ssr.quran.com/vi' node sc
 | SSR prefs applied                | `tests/integration/qf-318-edge/edge-ssr-prefs-applied.spec.ts`                 |
 | No user identity leak            | `tests/integration/qf-318-edge/edge-public-no-user-leak.spec.ts`               |
 | Edge technical branch matrix     | `tests/integration/qf-318-edge/edge-technical-matrix.spec.ts`                  |
+| Default locale loop guard        | `tests/integration/qf-318-edge/edge-default-locale-loop-guard.spec.ts`         |
+| Public key auth invariance       | `tests/integration/qf-318-edge/edge-public-cache-key-invariance.spec.ts`       |
+| Method + allowlist bypass matrix | `tests/integration/qf-318-edge/edge-method-and-allowlist-bypass.spec.ts`       |
+| Preference API contract          | `tests/integration/qf-318-edge/edge-country-language-preference-contract.spec.ts` |
 
 ---
 
