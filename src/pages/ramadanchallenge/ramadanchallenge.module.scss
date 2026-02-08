@@ -32,3 +32,40 @@
 .learnMore {
   font-size: var(--font-size-medium-px);
 }
+
+.socialButtonsGroup {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-medium-px);
+  margin-block-end: var(--spacing-medium2-px);
+}
+
+.socialButton {
+  background: var(--color-success-faded);
+  color: var(--color-text-link-new);
+  border: none;
+  padding: var(--spacing-medium-px) var(--spacing-medium2-px);
+
+  @include breakpoints.smallerThanTablet {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.joinSocialText {
+  display: inline;
+  @include breakpoints.smallerThanDesktop {
+    display: none;
+  }
+}
+
+.joinSocialMobileText {
+  display: none;
+  @include breakpoints.smallerThanDesktop {
+    display: inline;
+  }
+}
+
+.iconContainer {
+  margin-inline-end: var(--spacing-small-px);
+}
