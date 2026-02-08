@@ -96,6 +96,10 @@ export const quranReaderStylesSlice = createSlice({
         state.mushafLines === defaultQuranStylesForLocale.mushafLines;
       return { ...state, quranFont, isUsingDefaultFont };
     },
+    setShowTajweedRules: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      showTajweedRules: action.payload,
+    }),
   },
   // reset the state to the initial state when `reset` action is dispatched
   extraReducers: (builder) => {
@@ -140,14 +144,14 @@ export const {
   increaseQnaFontScale,
   decreaseQnaFontScale,
   setMushafLines,
+  setShowTajweedRules,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
 export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
 export const selectQuranMushafLines = (state: RootState) => state.quranReaderStyles.mushafLines;
-export const selectWordByWordFontScale = (state: RootState) =>
-  state.quranReaderStyles.wordByWordFontScale;
-export const selectIsUsingDefaultFont = (state: RootState) =>
-  !!state.quranReaderStyles.isUsingDefaultFont;
+export const selectWordByWordFontScale = (s: RootState) => s.quranReaderStyles.wordByWordFontScale;
+export const selectIsUsingDefaultFont = (s: RootState) => !!s.quranReaderStyles.isUsingDefaultFont;
+export const selectShowTajweedRules = (s: RootState) => s.quranReaderStyles.showTajweedRules;
 
 export default quranReaderStylesSlice.reducer;

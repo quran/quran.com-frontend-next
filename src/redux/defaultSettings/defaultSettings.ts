@@ -63,6 +63,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,
+  showTajweedRules: true,
 };
 
 const DEFAULT_WBW_LOCALE = 'en';

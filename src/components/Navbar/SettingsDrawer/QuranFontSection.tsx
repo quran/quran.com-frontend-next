@@ -2,6 +2,7 @@
 import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -13,6 +14,7 @@ import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import CheckIcon from '@/icons/check.svg';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
@@ -22,6 +24,7 @@ import {
   selectQuranReaderStyles,
   setQuranFont,
   setMushafLines,
+  setShowTajweedRules,
   MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import { TestId } from '@/tests/test-ids';
@@ -36,7 +39,7 @@ const QuranFontSection = () => {
   const {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
-  const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
+  const { quranFont, quranTextFontScale, mushafLines, showTajweedRules } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
   // eslint-disable-next-line react-func/max-lines-per-function
   const fonts = useMemo(() => {
@@ -197,6 +200,18 @@ const QuranFontSection = () => {
     );
   };
 
+  const onShowTajweedRulesChange = (checked: boolean) => {
+    logEvent(`show_tajweed_rules_changed_to_${checked}`);
+    logValueChange('show_tajweed_rules', showTajweedRules, checked);
+    onSettingsChange(
+      'showTajweedRules',
+      checked,
+      setShowTajweedRules(checked),
+      setShowTajweedRules(!checked),
+      PreferenceGroup.QURAN_READER_STYLES,
+    );
+  };
+
   return (
     <Section id="quran-font-section" hideSeparator>
       <Section.Row>
@@ -239,6 +254,29 @@ const QuranFontSection = () => {
             className={styles.select}
             arrowClassName={styles.selectArrow}
           />
+        </Section.Row>
+      )}
+      {selectedType === QuranFont.Tajweed && (
+        <Section.Row className={styles.tajweedRulesSection}>
+          <Section.Label className={styles.tajweedRulesLabel}>
+            {t('quran-reader:show-tajweed-rules')}
+          </Section.Label>
+          <label htmlFor="show-tajweed-rules" className={styles.tajweedCheckboxWrapper}>
+            <input
+              type="checkbox"
+              id="show-tajweed-rules"
+              checked={showTajweedRules}
+              onChange={(e) => onShowTajweedRulesChange(e.target.checked)}
+              className={styles.tajweedHiddenCheckbox}
+            />
+            <span
+              className={classNames(styles.tajweedCheckbox, {
+                [styles.tajweedCheckboxChecked]: showTajweedRules,
+              })}
+            >
+              {showTajweedRules && <CheckIcon className={styles.tajweedCheckIcon} />}
+            </span>
+          </label>
         </Section.Row>
       )}
       <Section.Row id="font-size-section" className={styles.fontSizeSection}>

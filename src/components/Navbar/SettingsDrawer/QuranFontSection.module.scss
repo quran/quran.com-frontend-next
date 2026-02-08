@@ -28,6 +28,55 @@
   padding-block-start: var(--spacing-small-px);
 }
 
+.tajweedRulesSection {
+  padding-block-start: var(--spacing-small-px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tajweedRulesLabel {
+  color: var(--color-text-default-new);
+  font-weight: var(--font-weight-medium);
+  opacity: unset;
+  padding-inline-start: var(--spacing-small-plus-px);
+}
+
+.tajweedCheckboxWrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding-inline-end: var(--spacing-small-plus-px);
+}
+
+.tajweedHiddenCheckbox {
+  position: absolute;
+  opacity: 0;
+  inline-size: 0;
+  block-size: 0;
+  pointer-events: none;
+}
+
+.tajweedCheckbox {
+  inline-size: var(--spacing-medium2-px);
+  block-size: var(--spacing-medium2-px);
+  border-radius: var(--border-radius-xsmall2-px);
+  border: var(--spacing-hairline-px) solid var(--color-blue-buttons-and-icons);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-hairline-px);
+}
+
+.tajweedCheckboxChecked {
+  background-color: var(--color-blue-buttons-and-icons);
+  box-shadow: inset 0 0 0 var(--spacing-hairline-px) var(--color-background-elevated-new);
+}
+
+.tajweedCheckIcon {
+  color: var(--color-text-white);
+}
+
 div.fontSwitch.fontSwitch {
   background-color: var(--color-background-alternative-faint);
 }

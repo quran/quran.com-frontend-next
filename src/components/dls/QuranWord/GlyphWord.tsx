@@ -67,6 +67,7 @@ const GlyphWord = ({
   // Use prop overrides if provided, otherwise fall back to Redux values.
   const quranTextFontScale = quranTextFontScaleOverride ?? reduxStyles.quranTextFontScale;
   const mushafLines = mushafLinesOverride ?? reduxStyles.mushafLines;
+  const { showTajweedRules } = reduxStyles;
 
   // The extra space before the glyph should only be added where the issue occurs,
   // which is in firefox with the Madani V1 Mushaf and the font scale is less than 6
@@ -88,6 +89,7 @@ const GlyphWord = ({
       className={classNames(styles.styledWord, {
         [styles.tajweedTextHighlighted]:
           font === QuranFont.TajweedV4 && charType !== CharType.End && isHighlighted,
+        [styles.hideTajweedRules]: font === QuranFont.TajweedV4 && !showTajweedRules,
         [styles.wordSpacing]: addExtraSpace,
         [styles.fallbackText]: !isFontLoaded,
         [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
