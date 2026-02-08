@@ -25,7 +25,7 @@ import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl, makeRelatedVersesByKeyUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
-import { getCanonicalUrl, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getVerseRelatedVersesNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -54,7 +54,7 @@ const RelatedVersesPage: NextPage<AyahReflectionProp> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
-  const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
+  const navigationUrl = getVerseRelatedVersesNavigationUrl(`${chapterId}:${verseNumber}`);
   return (
     <>
       <NextSeoWrapper
