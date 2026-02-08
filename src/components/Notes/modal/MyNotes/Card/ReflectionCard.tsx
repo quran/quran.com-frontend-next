@@ -7,8 +7,8 @@ import styles from './Card.module.scss';
 import InlineShowMore from '@/components/InlineShowMore';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant, ButtonShape } from '@/dls/Button/Button';
-import ChatIcon from '@/icons/chat.svg';
-import LoveIcon from '@/icons/love.svg';
+import CommentIcon from '@/icons/comment.svg';
+import LikeIcon from '@/icons/like.svg';
 import QRColoredIcon from '@/icons/qr-colored.svg';
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
 import { toSafeISOString, dateToMonthDayYearFormat } from '@/utils/datetime';
@@ -101,7 +101,7 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(reflection.id)}
           isNewTab
-          prefix={<LoveIcon />}
+          prefix={<LikeIcon />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
           shouldFlipOnRTL={false}
@@ -111,7 +111,7 @@ const ReflectionCard: React.FC<ReflectionCardProps> = ({ reflection, showReadMor
         <Button
           className={styles.stat}
           variant={ButtonVariant.Compact}
-          prefix={<ChatIcon />}
+          prefix={<CommentIcon />}
           href={getQuranReflectPostUrl(reflection.id, true)}
           isNewTab
           size={ButtonSize.Small}
