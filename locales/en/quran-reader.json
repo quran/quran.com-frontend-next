@@ -85,7 +85,8 @@
     "title": "Save Your Progress"
   },
   "hadith": {
-    "title": "Hadith"
+    "title": "Hadith",
+    "notice": "This list is not exhaustive. <0>Al-Bukhari</0> and <1>Muslim</1> are included, with more to come soon, inshAllah."
   },
   "hizb-beginning": "Beginning of Hizb",
   "include-translator": "Include translator name?",

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import { parseHadithNumbers } from '../utility';
@@ -52,6 +53,31 @@ const HadithList: React.FC<HadithListProps> = ({
 
   return (
     <div className={styles.container}>
+      <div className={styles.notice}>
+        <Trans
+          i18nKey="quran-reader:hadith.notice"
+          components={{
+            0: (
+              <a
+                key={0}
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://sunnah.com/bukhari/about"
+                aria-label="Sahih al-Bukhari"
+              />
+            ),
+            1: (
+              <a
+                key={1}
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://sunnah.com/muslim/about"
+                aria-label="Sahih Muslim"
+              />
+            ),
+          }}
+        />
+      </div>
       {hadiths.map((hadith, index) => {
         const hadithNumbers = parseHadithNumbers(hadith.hadithNumber, lang as Language);
         const [firstHadithNumber, ...restHadithNumbers] = hadithNumbers;

@@ -14,6 +14,21 @@ $hadith-font-line-height: 1.6;
   font-size: inherit;
 }
 
+.notice {
+  color: var(--color-text-default-new);
+  font-size: inherit;
+
+  a {
+    color: var(--color-text-link-new);
+    text-decoration: underline;
+    text-underline-offset: var(--spacing-micro2-px);
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
 .divider {
   block-size: var(--spacing-hairline-px);
   background-color: var(--color-separators-ayah-level);
